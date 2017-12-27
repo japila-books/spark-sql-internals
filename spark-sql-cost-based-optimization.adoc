@@ -1,0 +1,10 @@
+== Cost-Based Optimization
+
+*Cost-Based Optimization* is...FIXME
+
+Cost-Based Optimization uses `ANALYZE TABLE` command query that...FIXME
+
+```
+ANALYZE TABLE tableIdentifier partitionSpec?
+COMPUTE STATISTICS (identifier | FOR COLUMNS identifierSeq)?
+```

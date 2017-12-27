@@ -56,7 +56,7 @@ scala> println(c.expr.numberedTreeString)
 | `#analyze`
 a|
 
-* `AnalyzePartitionCommand` logical command for `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
+* link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand] logical command for `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
 +
 ```
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
@@ -68,7 +68,7 @@ scala> println(cmd)
 AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
 ```
 
-* `AnalyzeTableCommand` logical command for `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clauses
+* link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand] logical command for `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clauses
 +
 ```
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
@@ -80,7 +80,7 @@ scala> println(cmd)
 AnalyzeTableCommand `t1`, false
 ```
 
-* `AnalyzeColumnCommand` logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
+* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
 +
 ```
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")

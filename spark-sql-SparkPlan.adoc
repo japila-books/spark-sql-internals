@@ -367,5 +367,5 @@ res38: Array[Long] = Array(4, 12, 7)
 `executeTake` is used when:
 
 * `CollectLimitExec` is requested to <<executeCollect, executeCollect>>
-* `AnalyzeColumnCommand` is executed
+* `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed]
 ====

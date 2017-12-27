@@ -71,10 +71,13 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 | AlterViewAsCommand
 |
 
-| AnalyzeColumnCommand
+| [[AnalyzeColumnCommand]] link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
 |
 
-| AnalyzeTableCommand
+| [[AnalyzePartitionCommand]] link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
+|
+
+| [[AnalyzeTableCommand]] link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
 |
 
 | [[CacheTableCommand]] CacheTableCommand

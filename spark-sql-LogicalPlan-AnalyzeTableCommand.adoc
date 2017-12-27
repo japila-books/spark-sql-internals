@@ -1,0 +1,3 @@
+== [[AnalyzeTableCommand]] AnalyzeTableCommand Logical Command
+
+`AnalyzeTableCommand` is...FIXME
