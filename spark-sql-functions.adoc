@@ -700,7 +700,7 @@ Project [token#127, id#126, prob#140]
 expr(expr: String): Column
 ----
 
-`expr` function parses the input `expr` SQL string to a `Column` it represents.
+`expr` function parses the input `expr` SQL statement to a `Column` it represents.
 
 [source, scala]
 ----

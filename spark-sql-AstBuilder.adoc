@@ -1,12 +1,12 @@
 == [[AstBuilder]] AstBuilder -- ANTLR-based SQL Parser
 
-`AstBuilder` converts a SQL string into Spark SQL's corresponding entity (i.e. link:spark-sql-DataType.adoc[DataType], link:spark-sql-Expression.adoc[Expression], link:spark-sql-LogicalPlan.adoc[LogicalPlan] or `TableIdentifier`) using <<visit-callbacks, visit callback methods>>.
+`AstBuilder` converts a SQL statement into Spark SQL's corresponding entity (i.e. link:spark-sql-DataType.adoc[DataType], link:spark-sql-Expression.adoc[Expression], link:spark-sql-LogicalPlan.adoc[LogicalPlan] or `TableIdentifier`) using <<visit-callbacks, visit callback methods>>.
 
 `AstBuilder` is the link:spark-sql-AbstractSqlParser.adoc#astBuilder[AST builder] of `AbstractSqlParser` (i.e. the base SQL parsing infrastructure in Spark SQL).
 
 [TIP]
 ====
-Spark SQL supports SQL queries as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4]. Using the file can tell you (almost) exactly what Spark SQL supports at any given time.
+Spark SQL supports SQL statements as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4]. Using the file can tell you (almost) exactly what Spark SQL supports at any given time.
 
 "Almost" being that although the grammar accepts a SQL statement it can be reported as not allowed by `AstBuilder`, e.g.
 

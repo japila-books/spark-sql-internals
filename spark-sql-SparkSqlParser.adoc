@@ -1,5 +1,6 @@
 == [[SparkSqlParser]] SparkSqlParser -- Default SQL Parser
 
+[[astBuilder]]
 `SparkSqlParser` is the default link:spark-sql-AbstractSqlParser.adoc[parser of the SQL statements supported in Spark SQL] with the `astBuilder` as link:spark-sql-SparkSqlAstBuilder.adoc[SparkSqlAstBuilder] and support for <<VariableSubstitution, variable substitution>>.
 
 NOTE: Spark SQL supports SQL statements as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4] ANTLR grammar.

@@ -1,5 +1,31 @@
 == [[SparkSqlAstBuilder]] SparkSqlAstBuilder
 
+`SparkSqlAstBuilder` is a link:spark-sql-AstBuilder.adoc[AstBuilder] that converts valid Spark SQL statements into Catalyst expressions, logical plans or table identifiers.
+
+NOTE: Spark SQL uses http://www.antlr.org/[ANTLR parser generator] for parsing structured text.
+
+`SparkSqlAstBuilder` is created exclusively when `SparkSqlParser` is link:spark-sql-SparkSqlParser.adoc#astBuilder[created] (which is _mostly_ when `SparkSession` is requested for the lazily-created link:spark-sql-SparkSession.adoc#sessionState[SessionState]).
+
+.Creating SparkSqlAstBuilder
+image::images/spark-sql-SparkSqlAstBuilder.png[align="center"]
+
+[source, scala]
+----
+scala> :type spark.sessionState.sqlParser
+org.apache.spark.sql.catalyst.parser.ParserInterface
+
+import org.apache.spark.sql.execution.SparkSqlParser
+val sqlParser = spark.sessionState.sqlParser.asInstanceOf[SparkSqlParser]
+
+scala> :type sqlParser.astBuilder
+org.apache.spark.sql.execution.SparkSqlAstBuilder
+----
+
+[[conf]]
+`SparkSqlAstBuilder` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
+
+NOTE: `SparkSqlAstBuilder` can also be temporarily created for link:spark-sql-functions.adoc#expr[expr] standard function.
+
 [[visit-callbacks]]
 .SparkSqlAstBuilder's Visit Callback Methods (in alphabetical order)
 [cols="1,1,3",options="header",width="100%"]
