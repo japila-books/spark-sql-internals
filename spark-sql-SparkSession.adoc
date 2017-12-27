@@ -370,7 +370,7 @@ Internally, it is simply an alias for link:spark-sql-SessionState.adoc#udfRegist
 table(tableName: String): DataFrame
 ----
 
-`table` creates a link:spark-sql-DataFrame.adoc[DataFrame] from records in the `tableName` table (if exists).
+`table` creates a link:spark-sql-DataFrame.adoc[DataFrame] (wrapper) for the input `tableName` table (if available).
 
 [source, scala]
 ----

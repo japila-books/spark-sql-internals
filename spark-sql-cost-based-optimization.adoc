@@ -4,7 +4,13 @@
 
 Cost-Based Optimization uses `ANALYZE TABLE` command query that...FIXME
 
+[[NOSCAN]]
 ```
 ANALYZE TABLE tableIdentifier partitionSpec?
-COMPUTE STATISTICS (identifier | FOR COLUMNS identifierSeq)?
+COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 ```
+
+The statistics computed are:
+
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#total-size-stat[Total Size] of a table
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#row-count-stat[Row Count] in a table

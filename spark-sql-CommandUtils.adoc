@@ -1,0 +1,28 @@
+== [[CommandUtils]] CommandUtils
+
+`CommandUtils` is...FIXME
+
+=== [[compareAndGetNewStats]] `compareAndGetNewStats` Method
+
+[source, scala]
+----
+compareAndGetNewStats(
+  oldStats: Option[CatalogStatistics],
+  newTotalSize: BigInt,
+  newRowCount: Option[BigInt]): Option[CatalogStatistics]
+----
+
+`compareAndGetNewStats`...FIXME
+
+NOTE: `compareAndGetNewStats` is used when...FIXME
+
+=== [[calculateTotalSize]] `calculateTotalSize` Method
+
+[source, scala]
+----
+calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigInt
+----
+
+`calculateTotalSize`...FIXME
+
+NOTE: `calculateTotalSize` is used when...FIXME

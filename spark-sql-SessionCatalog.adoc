@@ -40,6 +40,28 @@ Used when...FIXME
 Used when `SessionCatalog` <<refreshTable, refreshes a table>>
 |===
 
+=== [[getTableMetadata]] `getTableMetadata` Method
+
+[source, scala]
+----
+getTableMetadata(name: TableIdentifier): CatalogTable
+----
+
+`getTableMetadata`...FIXME
+
+NOTE: `getTableMetadata` is used when...FIXME
+
+=== [[alterTableStats]] `alterTableStats` Method
+
+[source, scala]
+----
+alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
+----
+
+`alterTableStats`...FIXME
+
+NOTE: `alterTableStats` is used when...FIXME
+
 === [[functionExists]] `functionExists` Method
 
 CAUTION: FIXME

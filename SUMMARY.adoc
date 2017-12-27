@@ -125,7 +125,7 @@
 ... link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc[AlterViewAsCommand Logical Command]
 ... link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand Logical Command]
 ... link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand Logical Command]
-... link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand Logical Command]
+... link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand Logical Command -- Computing Statistics (Total Size and Row Count) for Table]
 ... link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand Logical Command]
 ... link:spark-sql-LogicalPlan-RunnableCommand-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand Logical Command]
 ... link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand Logical Command]
@@ -258,6 +258,7 @@
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils]
 
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Physical Operators with Optional Java Code Generation]
