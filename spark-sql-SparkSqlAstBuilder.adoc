@@ -1,10 +1,10 @@
 == [[SparkSqlAstBuilder]] SparkSqlAstBuilder
 
-`SparkSqlAstBuilder` is a link:spark-sql-AstBuilder.adoc[AstBuilder] that converts valid Spark SQL statements into Catalyst expressions, logical plans or table identifiers.
+`SparkSqlAstBuilder` is an link:spark-sql-AstBuilder.adoc[AstBuilder] that converts valid Spark SQL statements into Catalyst expressions, logical plans or table identifiers (using <<visit-callbacks, visit callback methods>>).
 
 NOTE: Spark SQL uses http://www.antlr.org/[ANTLR parser generator] for parsing structured text.
 
-`SparkSqlAstBuilder` is created exclusively when `SparkSqlParser` is link:spark-sql-SparkSqlParser.adoc#astBuilder[created] (which is _mostly_ when `SparkSession` is requested for the lazily-created link:spark-sql-SparkSession.adoc#sessionState[SessionState]).
+`SparkSqlAstBuilder` is created exclusively when `SparkSqlParser` is link:spark-sql-SparkSqlParser.adoc#astBuilder[created] (which is when `SparkSession` is requested for the lazily-created link:spark-sql-SparkSession.adoc#sessionState[SessionState]).
 
 .Creating SparkSqlAstBuilder
 image::images/spark-sql-SparkSqlAstBuilder.png[align="center"]
@@ -24,7 +24,25 @@ org.apache.spark.sql.execution.SparkSqlAstBuilder
 [[conf]]
 `SparkSqlAstBuilder` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
 
-NOTE: `SparkSqlAstBuilder` can also be temporarily created for link:spark-sql-functions.adoc#expr[expr] standard function.
+[NOTE]
+====
+`SparkSqlAstBuilder` can also be temporarily created for link:spark-sql-functions.adoc#expr[expr] standard function (to create column expressions).
+
+[source, scala]
+----
+val c = expr("from_json(value, schema)")
+scala> :type c
+org.apache.spark.sql.Column
+
+scala> :type c.expr
+org.apache.spark.sql.catalyst.expressions.Expression
+
+scala> println(c.expr.numberedTreeString)
+00 'from_json('value, 'schema)
+01 :- 'value
+02 +- 'schema
+----
+====
 
 [[visit-callbacks]]
 .SparkSqlAstBuilder's Visit Callback Methods (in alphabetical order)
@@ -33,6 +51,53 @@ NOTE: `SparkSqlAstBuilder` can also be temporarily created for link:spark-sql-fu
 | Callback Method
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
+
+| [[visitAnalyze]] `visitAnalyze`
+| `#analyze`
+a|
+
+* `AnalyzePartitionCommand` logical command for `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
++
+```
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlText = "ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS"
+val plan = spark.sql(sqlText).queryExecution.logical
+import org.apache.spark.sql.execution.command.AnalyzePartitionCommand
+val cmd = plan.asInstanceOf[AnalyzePartitionCommand]
+scala> println(cmd)
+AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
+```
+
+* `AnalyzeTableCommand` logical command for `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clauses
++
+```
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS NOSCAN"
+val plan = spark.sql(sqlText).queryExecution.logical
+import org.apache.spark.sql.execution.command.AnalyzeTableCommand
+val cmd = plan.asInstanceOf[AnalyzeTableCommand]
+scala> println(cmd)
+AnalyzeTableCommand `t1`, false
+```
+
+* `AnalyzeColumnCommand` logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
++
+```
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS id, p1"
+val plan = spark.sql(sqlText).queryExecution.logical
+import org.apache.spark.sql.execution.command.AnalyzeColumnCommand
+val cmd = plan.asInstanceOf[AnalyzeColumnCommand]
+scala> println(cmd)
+AnalyzeColumnCommand `t1`, [id, p1]
+```
+
+[NOTE]
+====
+`visitAnalyze` supports `NOSCAN` identifier only (and reports a `ParseException` if not used).
+
+`NOSCAN` is used for `AnalyzePartitionCommand` and `AnalyzeTableCommand` logical commands only.
+====
 
 | [[visitCacheTable]] `visitCacheTable`
 | `#cacheTable`
