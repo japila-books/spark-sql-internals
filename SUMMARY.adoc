@@ -254,8 +254,7 @@
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 
-. link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
-.. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
+. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Physical Operators with Optional Java Code Generation]
 .. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan]
 .. link:spark-sql-InternalRow.adoc[InternalRow -- Abstract Binary Row Format]
@@ -264,6 +263,8 @@
 .. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
 ... link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
+
+. link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
 
 . link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
 
