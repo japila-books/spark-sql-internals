@@ -126,7 +126,7 @@
 .. link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand -- Generic Logical Command with Side Effects]
 ... link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc[AlterViewAsCommand Logical Command]
 ... link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand Logical Command]
-... link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand Logical Command]
+... link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand Logical Command -- Computing Partition-Level Statistics (Total Size and Row Count)]
 ... link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand Logical Command -- Computing Table-Level Statistics (Total Size and Row Count)]
 ... link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand Logical Command]
 ... link:spark-sql-LogicalPlan-RunnableCommand-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand Logical Command]

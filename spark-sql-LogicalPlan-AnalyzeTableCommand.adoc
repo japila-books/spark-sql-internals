@@ -2,7 +2,7 @@
 
 `AnalyzeTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
 
-`AnalyzeTableCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeTableCommand[ANALYZE TABLE] (with no `PARTITION` specification and `FOR COLUMNS` clause).
+`AnalyzeTableCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeTableCommand[ANALYZE TABLE] with no `PARTITION` specification and `FOR COLUMNS` clause.
 
 [source, scala]
 ----

@@ -2,19 +2,19 @@
 
 `CommandUtils` is...FIXME
 
-=== [[compareAndGetNewStats]] `compareAndGetNewStats` Method
+=== [[calculateLocationSize]] `calculateLocationSize` Method
 
 [source, scala]
 ----
-compareAndGetNewStats(
-  oldStats: Option[CatalogStatistics],
-  newTotalSize: BigInt,
-  newRowCount: Option[BigInt]): Option[CatalogStatistics]
+calculateLocationSize(
+  sessionState: SessionState,
+  identifier: TableIdentifier,
+  locationUri: Option[URI]): Long
 ----
 
-`compareAndGetNewStats`...FIXME
+`calculateLocationSize`...FIXME
 
-NOTE: `compareAndGetNewStats` is used when...FIXME
+NOTE: `calculateLocationSize` is used when...FIXME
 
 === [[calculateTotalSize]] `calculateTotalSize` Method
 
@@ -26,3 +26,17 @@ calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigI
 `calculateTotalSize`...FIXME
 
 NOTE: `calculateTotalSize` is used when...FIXME
+
+=== [[compareAndGetNewStats]] Creating New CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method
+
+[source, scala]
+----
+compareAndGetNewStats(
+  oldStats: Option[CatalogStatistics],
+  newTotalSize: BigInt,
+  newRowCount: Option[BigInt]): Option[CatalogStatistics]
+----
+
+`compareAndGetNewStats` creates a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
+
+NOTE: `compareAndGetNewStats` is used when link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc#run[AnalyzePartitionCommand] and link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand] are executed.

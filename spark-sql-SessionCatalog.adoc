@@ -40,6 +40,17 @@ Used when...FIXME
 Used when `SessionCatalog` <<refreshTable, refreshes a table>>
 |===
 
+=== [[alterPartitions]] `alterPartitions` Method
+
+[source, scala]
+----
+alterPartitions(tableName: TableIdentifier, parts: Seq[CatalogTablePartition]): Unit
+----
+
+`alterPartitions`...FIXME
+
+NOTE: `alterPartitions` is used when...FIXME
+
 === [[getTableMetadata]] `getTableMetadata` Method
 
 [source, scala]
@@ -50,6 +61,19 @@ getTableMetadata(name: TableIdentifier): CatalogTable
 `getTableMetadata`...FIXME
 
 NOTE: `getTableMetadata` is used when...FIXME
+
+=== [[listPartitions]] `listPartitions` Method
+
+[source, scala]
+----
+listPartitions(
+  tableName: TableIdentifier,
+  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
+----
+
+`listPartitions`...FIXME
+
+NOTE: `listPartitions` is used when...FIXME
 
 === [[alterTableStats]] `alterTableStats` Method
 

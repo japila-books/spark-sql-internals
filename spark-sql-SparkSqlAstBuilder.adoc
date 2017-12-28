@@ -62,8 +62,8 @@ a|
 [source, scala]
 ----
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
-val sqlText = "ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS"
-val plan = spark.sql(sqlText).queryExecution.logical
+val analyzeTable = "ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS"
+val plan = spark.sql(analyzeTable).queryExecution.logical
 import org.apache.spark.sql.execution.command.AnalyzePartitionCommand
 val cmd = plan.asInstanceOf[AnalyzePartitionCommand]
 scala> println(cmd)
