@@ -79,6 +79,7 @@ A *rule* in Catalyst is a named transformation that can be applied to a plan tre
 
 `Rule` abstract class defines `ruleName` attribute and a single method `apply`:
 
+[[apply]]
 [source, scala]
 ----
 apply(plan: TreeType): TreeType

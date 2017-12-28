@@ -1,10 +1,10 @@
-== [[SparkOptimizer]] SparkOptimizer -- Logical Query Optimizer
+== [[SparkOptimizer]] SparkOptimizer -- Rule-Based Logical Query Optimizer
 
-`SparkOptimizer` is the one and only custom <<Optimizer, logical query plan optimizer>> in Spark SQL that comes with the <<batches, additional logical plan optimizations>>.
+`SparkOptimizer` is the link:spark-sql-Optimizer.adoc[rule-based logical optimizer] in Spark SQL that comes with the <<batches, additional logical plan optimizations>>.
 
 NOTE: You can extend the available logical plan optimizations and register yours using <<experimentalMethods, ExperimentalMethods>>.
 
-`SparkOptimizer` is available as link:spark-sql-SessionState.adoc#optimizer[optimizer] attribute of `SessionState`.
+`SparkOptimizer` is available as link:spark-sql-SessionState.adoc#optimizer[optimizer] property of `SessionState`.
 
 [source, scala]
 ----

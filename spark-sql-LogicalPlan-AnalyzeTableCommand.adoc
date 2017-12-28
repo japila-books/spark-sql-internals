@@ -1,4 +1,4 @@
-== [[AnalyzeTableCommand]] AnalyzeTableCommand Logical Command -- Computing Statistics (Total Size and Row Count) for Table
+== [[AnalyzeTableCommand]] AnalyzeTableCommand Logical Command -- Computing Table-Level Statistics (Total Size and Row Count)
 
 `AnalyzeTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
 

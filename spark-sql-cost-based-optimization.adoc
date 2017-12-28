@@ -2,12 +2,14 @@
 
 *Cost-Based Optimization* (aka *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, cost statistics>> to determine the most efficient way of executing a query.
 
+Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the cost statistics.
+
 === [[statistics]] Cost Statistics
 
-The cost statistics used are:
+The cost statistics of a table are as follows:
 
-1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#total-size-stat[Total Size] of a table
-1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#row-count-stat[Row Count] of a table
+1. [[total-size-stat]] link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#total-size-stat[Total size]
+1. [[row-count-stat]] link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#row-count-stat[Row count]
 
 === [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Property
 
@@ -64,3 +66,9 @@ In such a case, `SparkSqlAstBuilder` reports a WARN message to the logs and simp
 WARN Partition specification is ignored when collecting column statistics: [partitionSpec]
 ```
 ====
+
+=== [[optimizations]] Cost-Based Optimizations
+
+The link:spark-sql-Optimizer.adoc[rule-based Spark Optimizer] comes with rules that are executed when cost-based optimization is <<spark.sql.cbo.enabled, enabled>>.
+
+1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering

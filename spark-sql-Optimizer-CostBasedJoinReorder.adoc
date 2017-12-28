@@ -1,3 +1,87 @@
-== [[CostBasedJoinReorder]] CostBasedJoinReorder
+== [[CostBasedJoinReorder]] CostBasedJoinReorder Logical Optimization Rule -- Join Reordering in Cost-Based Optimization
 
-CAUTION: FIXME
+`CostBasedJoinReorder` is a link:spark-sql-catalyst-RuleExecutor.adoc#Rule[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[rule-based Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+
+`CostBasedJoinReorder` <<apply, executes>> (i.e. optimizes a logical plan) only when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] properties are both enabled.
+
+`CostBasedJoinReorder` uses link:spark-sql-cost-based-optimization.adoc#row-count-stat[row count] statistic that is computed using `ANALYZE TABLE` SQL command with `COMPUTE STATISTICS` clause and no `NOSCAN` option.
+
+[source, scala]
+----
+// val df = Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2")
+// df.write.partitionBy("p1", "p2").saveAsTable("t1")
+val analyzeTable = "ANALYZE TABLE t1 COMPUTE STATISTICS"
+spark.sql(analyzeTable)
+----
+
+[CAUTION]
+====
+FIXME Examples of queries
+
+1. Inner join with join condition
+1. Cross join with join condition
+1. Project with attributes only and Inner join with join condition
+1. Project with attributes only and Cross join with join condition
+====
+
+[[logging]]
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.optimizer.JoinReorderDP` logger to see the join reordering duration.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.catalyst.optimizer.JoinReorderDP=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
+=== [[apply]] Transforming Inner-like Joins and Projects with Joins Logical Operators -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-RuleExecutor.adoc#apply[Rule Contract] to execute a rule.
+
+`apply` traverses the input link:spark-sql-LogicalPlan.adoc[LogicalPlan] down to <<reorder, reorder>> the following logical operators:
+
+1. link:spark-sql-LogicalPlan-Join.adoc[Join] with `InnerLike` type with a join condition, i.e. `CROSS` or `INNER` joins
+
+1. link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
+
+=== [[reorder]] `reorder` Internal Method
+
+[source, scala]
+----
+reorder(plan: LogicalPlan, output: Seq[Attribute]): LogicalPlan
+----
+
+`reorder`...FIXME
+
+NOTE: `reorder` is used exclusively when `CostBasedJoinReorder` is <<apply, executed>>.
+
+=== [[extractInnerJoins]] `extractInnerJoins` Internal Method
+
+[source, scala]
+----
+extractInnerJoins(plan: LogicalPlan): (Seq[LogicalPlan], Set[Expression])
+----
+
+`extractInnerJoins`...FIXME
+
+NOTE: `extractInnerJoins` is used recursively and when `CostBasedJoinReorder` is <<reorder, reordering>>...FIXME
+
+=== [[replaceWithOrderedJoin]] `replaceWithOrderedJoin` Internal Method
+
+[source, scala]
+----
+replaceWithOrderedJoin(plan: LogicalPlan): LogicalPlan
+----
+
+`replaceWithOrderedJoin`...FIXME
+
+NOTE: `replaceWithOrderedJoin` is used recursively and when `CostBasedJoinReorder` is <<reorder, reordering>>...FIXME
