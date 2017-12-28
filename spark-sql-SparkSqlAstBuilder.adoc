@@ -52,7 +52,7 @@ scala> println(c.expr.numberedTreeString)
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
-| [[visitAnalyze]] `visitAnalyze`
+| [[visitAnalyze]][[ANALYZE-TABLE]] `visitAnalyze`
 | `#analyze`
 a|
 

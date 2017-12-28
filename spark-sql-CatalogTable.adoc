@@ -1,0 +1,3 @@
+== [[CatalogTable]] CatalogTable -- Table Metadata
+
+`CatalogTable` is...FIXME

@@ -1,0 +1,13 @@
+== [[LeafNode]] LeafNode Logical Operator
+
+`LeafNode` is the <<contract, contract>> for link:spark-sql-LogicalPlan.adoc[logical operators] with no link:spark-sql-catalyst-TreeNode.adoc#children[child] operators and optional support for <<computeStats, computing statistics>> for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+
+[[contract]][[computeStats]]
+[source, scala]
+----
+computeStats(): Statistics
+----
+
+`computeStats` is used when...FIXME
+
+NOTE: `computeStats` reports an `UnsupportedOperationException` by default.

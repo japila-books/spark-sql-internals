@@ -128,14 +128,3 @@ Project [token#127, id#126, prob#140], Statistics(sizeInBytes=1792.0 B, isBroadc
          +- *Filter isnotnull(_1#136)
             +- LocalTableScan [_1#136, _2#137]
 ----
-
-=== [[computeStats]] computeStats Method
-
-[source, scala]
-----
-computeStats(conf: CatalystConf): Statistics
-----
-
-`computeStats` marks the parent as broadcast (i.e. `isBroadcastable` flag is enabled).
-
-NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan.adoc#computeStats[LogicalPlan Contract].

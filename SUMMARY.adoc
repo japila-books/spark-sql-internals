@@ -113,8 +113,10 @@
 .. link:spark-sql-LogicalPlan-Generate.adoc[Generate Unary Logical Operator for Lateral Views]
 .. link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets Unary Logical Operator]
 .. link:spark-sql-LogicalPlan-Hint.adoc[Hint Logical Operator]
+.. link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation Leaf Logical Operator]
 .. link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation Leaf Logical Operator For Cached Query Plans]
 .. link:spark-sql-LogicalPlan-Join.adoc[Join Logical Operator]
+.. link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode Logical Operator]
 .. link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation Logical Operator]
 .. link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation Logical Operator -- Adapter for BaseRelation]
 .. link:spark-sql-LogicalPlan-Pivot.adoc[Pivot Unary Logical Operator]
@@ -248,7 +250,10 @@
 
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Base for Builders of SessionState]
+
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Metastore of Session-Specific Relational Entities]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata]
+
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 . link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]

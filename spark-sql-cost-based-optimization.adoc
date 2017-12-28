@@ -1,8 +1,41 @@
-== Cost-Based Optimization
+== Cost-Based Optimization (CBO)
 
-*Cost-Based Optimization* is...FIXME
+*Cost-Based Optimization* (aka *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, cost statistics>> to determine the most efficient way of executing a query.
 
-Cost-Based Optimization uses `ANALYZE TABLE` command query that...FIXME
+=== [[statistics]] Cost Statistics
+
+The cost statistics used are:
+
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#total-size-stat[Total Size] of a table
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#row-count-stat[Row Count] of a table
+
+=== [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Property
+
+Cost-Based Optimization is enabled by link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] property (which is disabled by default).
+
+TIP: Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] to access the current value of `spark.sql.cbo.enabled` property.
+
+[source, scala]
+----
+// CBO is disabled by default
+val sqlConf = spark.sessionState.conf
+scala> println(sqlConf.cboEnabled)
+false
+
+// Create a new SparkSession with CBO enabled
+// You could spark-submit -c spark.sql.cbo.enabled=true
+val sparkCboEnabled = spark.newSession
+import org.apache.spark.sql.internal.SQLConf.CBO_ENABLED
+sparkCboEnabled.conf.set(CBO_ENABLED.key, true)
+val isCboEnabled = sparkCboEnabled.conf.get(CBO_ENABLED.key)
+println(s"Is CBO enabled? $isCboEnabled")
+----
+
+NOTE: CBO is disabled explicitly in Spark Structured Streaming.
+
+=== [[ANALYZE-TABLE]] ANALYZE TABLE SQL Command
+
+Cost-Based Optimization uses the statistics computed and stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[ANALYZE TABLE] SQL command.
 
 [[NOSCAN]]
 ```
@@ -10,7 +43,24 @@ ANALYZE TABLE tableIdentifier partitionSpec?
 COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 ```
 
-The statistics computed are:
+Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>>, e.g. total size or row count of a table.
 
-1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#total-size-stat[Total Size] of a table
-1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#row-count-stat[Row Count] in a table
+1. `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
+1. `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clause
+1. `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
+
+[NOTE]
+====
+`ANALYZE TABLE` with `PARTITION` specification and `FOR COLUMNS` clause is incorrect.
+
+```
+// !!! INCORRECT !!!
+ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS FOR COLUMNS id, p1
+```
+
+In such a case, `SparkSqlAstBuilder` reports a WARN message to the logs and simply ignores the partition specification.
+
+```
+WARN Partition specification is ignored when collecting column statistics: [partitionSpec]
+```
+====

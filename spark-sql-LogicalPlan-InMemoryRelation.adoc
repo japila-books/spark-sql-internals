@@ -1,6 +1,6 @@
 == [[InMemoryRelation]] InMemoryRelation Leaf Logical Operator For Cached Query Plans
 
-`InMemoryRelation` is a link:spark-sql-LogicalPlan.adoc#LeafNode[leaf logical operator] that represents a cached <<child, physical query plan>>.
+`InMemoryRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a cached <<child, physical query plan>>.
 
 `InMemoryRelation` is <<apply, created>> when `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset].
 

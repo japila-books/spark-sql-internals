@@ -90,13 +90,13 @@ First, `tableName` is parsed to an internal table identifier. `saveAsTable` then
 
 `saveAsTable` uses the link:spark-sql-SessionCatalog.adoc[SessionCatalog] for the current session.
 
-.``saveAsTable``'s Behaviour per Save Mode
+.saveAsTable's Behaviour per Save Mode
 [cols="1,1,2",options="header"]
 |===
 | Does table exist? |Save Mode | Behaviour
-| yes       | `Ignore` | Do nothing
-| yes       | `ErrorIfExists` | Throws a `AnalysisException` exception with `Table [tableIdent] already exists.` error message.
-| _anything_       | _anything_ | It creates a `CatalogTable` and link:spark-sql-SessionState.adoc#executePlan[executes the `CreateTable` plan].
+| yes       | `Ignore` | Does nothing
+| yes       | `ErrorIfExists` | Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
+| _anything_       | _anything_ | Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the `CreateTable` operator
 |===
 
 [source, scala]

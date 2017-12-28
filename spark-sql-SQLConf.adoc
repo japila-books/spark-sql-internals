@@ -21,7 +21,7 @@ res0: org.apache.spark.sql.RuntimeConfig = org.apache.spark.sql.RuntimeConfig@6b
 
 `SQLConf` offers methods to <<get, get>>, <<set, set>>, <<unset, unset>> or <<clear, clear>> their values, but has also the <<accessor-methods, accessor methods>> to read the current value of a parameter or hint.
 
-You can access a session-specific `SQLConf` using link:spark-sql-SparkSession.adoc#sessionState[SessionState]:
+You can access a session-specific `SQLConf` using link:spark-sql-SparkSession.adoc#sessionState[SessionState].
 
 [source, scala]
 ----
@@ -65,6 +65,15 @@ res4: Int = 200
 | [[broadcastTimeout]] `broadcastTimeout`
 | <<spark.sql.broadcastTimeout, spark.sql.broadcastTimeout>>
 | Used exclusively in link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] (for broadcasting a table to executors).
+
+| [[cboEnabled]] `cboEnabled`
+| <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>>
+a|
+
+Used in:
+
+* link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection` for `reorderStarJoins`)
+* link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
 
 | [[columnBatchSize]] `columnBatchSize`
 | <<spark.sql.inMemoryColumnarStorage.batchSize, spark.sql.inMemoryColumnarStorage.batchSize>>
@@ -181,11 +190,7 @@ Used through <<broadcastTimeout, SQLConf.broadcastTimeout>>.
 | `false`
 a| Enables cost-based optimization (CBO) for estimation of plan statistics when enabled (i.e. `true`).
 
-Used (through `SQLConf.cboEnabled` method) in:
-
-* link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection` for `reorderStarJoins`)
-* link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
-* For link:spark-sql-LogicalPlan.adoc#computeStats[statistics estimates] in `Project`, `Filter`, link:spark-sql-LogicalPlan-Join.adoc[Join], and link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical plans
+Use <<cboEnabled, cboEnabled>> method to access the current value.
 
 | [[spark.sql.cbo.joinReorder.enabled]] `spark.sql.cbo.joinReorder.enabled`
 | `false`

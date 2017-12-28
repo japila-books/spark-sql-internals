@@ -56,12 +56,6 @@ scala> println(plan.numberedTreeString)
 * link:spark-sql-Optimizer.adoc#FoldablePropagation[FoldablePropagation]
 * link:spark-sql-Optimizer.adoc#RewriteDistinctAggregates[RewriteDistinctAggregates]
 
-=== [[computeStats]] `computeStats` Method
-
-CAUTION: FIXME
-
-NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan.adoc#computeStats[LogicalPlan Contract] to calculating statistics estimates (for cost-based optimizer).
-
 === [[creating-instance]] Creating Expand Instance
 
 `Expand` takes the following when created:

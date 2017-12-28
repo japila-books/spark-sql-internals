@@ -57,8 +57,8 @@ maxRows: Option[Long] = None
 | LogicalPlan
 | Description
 
-| [[LeafNode]] `LeafNode`
-| Logical operator with no child operators
+| [[LeafNode]] link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
+| Logical operator with no link:spark-sql-catalyst-TreeNode.adoc#children[child] operators
 
 | [[UnaryNode]] `UnaryNode`
 | Logical plan with a single child (logical plan).
@@ -133,7 +133,7 @@ CAUTION: FIXME
 
 === [[Command]] `Command` -- Logical Commands
 
-`Command` is the base for <<LeafNode, leaf logical plans>> that represent non-query commands to be executed by the system. It defines `output` to return an empty collection of link:spark-sql-Expression-Attribute.adoc[Attributes].
+`Command` is the base for <<LeafNode, leaf logical operators>> that represent non-query commands to be executed by the system. It defines `output` to return an empty collection of link:spark-sql-Expression-Attribute.adoc[Attributes].
 
 Known commands are:
 
@@ -171,22 +171,3 @@ res2: Boolean = true
 ----
 
 NOTE: Streaming Datasets are part of Structured Streaming.
-
-=== [[computeStats]] Computing Statistics Estimates (of All Child Logical Operators) for Cost-Based Optimizer -- `computeStats` method
-
-[source, scala]
-----
-computeStats(conf: CatalystConf): Statistics
-----
-
-`computeStats` creates a `Statistics` with `sizeInBytes` as a product of <<stats, statistics>> of all link:spark-sql-catalyst-TreeNode.adoc#children[child] logical plans.
-
-For a no-children logical plan, `computeStats` reports a `UnsupportedOperationException`:
-
-```
-LeafNode [nodeName] must implement statistics.
-```
-
-NOTE: `computeStats` is a `protected` method that logical operators are expected to override to provide their own custom plan statistics calculation.
-
-NOTE: `computeStats` is used exclusively when `LogicalPlan` <<stats, is requested for logical plan statistics estimates>>.

@@ -1,0 +1,14 @@
+== [[HiveTableRelation]] HiveTableRelation Leaf Logical Operator
+
+`HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that...FIXME
+
+=== [[computeStats]] `computeStats` Method
+
+[source, scala]
+----
+computeStats(): Statistics
+----
+
+NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+
+`computeStats`...FIXME
