@@ -119,6 +119,36 @@ a|
 * `CreateTable` logical operator for `CREATE TABLE &hellip; AS &hellip;`
 
 * `CreateTempViewUsing` logical operators for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
+
+| [[visitDescribeTable]][[DESCRIBE]] `visitDescribeTable`
+| `#describeTable`
+a|
+
+* [[DescribeColumnCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc#DescribeColumnCommand[DescribeColumnCommand] logical command for `DESCRIBE TABLE` with a column only (i.e. no `PARTITION` specification).
++
+[source, scala]
+----
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlCmd = "DESC EXTENDED t1 p1"
+val plan = spark.sql(sqlCmd).queryExecution.logical
+import org.apache.spark.sql.execution.command.DescribeColumnCommand
+val cmd = plan.asInstanceOf[DescribeColumnCommand]
+scala> println(cmd)
+DescribeColumnCommand `t1`, [p1], true
+----
+
+* [[DescribeTableCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc#DescribeTableCommand[DescribeTableCommand] logical command for all other variants of `DESCRIBE TABLE` (i.e. no column)
++
+[source, scala]
+----
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlCmd = "DESC t1"
+val plan = spark.sql(sqlCmd).queryExecution.logical
+import org.apache.spark.sql.execution.command.DescribeTableCommand
+val cmd = plan.asInstanceOf[DescribeTableCommand]
+scala> println(cmd)
+DescribeTableCommand `t1`, false
+----
 |===
 
 [[with-methods]]

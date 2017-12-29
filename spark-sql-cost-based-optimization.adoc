@@ -37,7 +37,7 @@ NOTE: CBO is disabled explicitly in Spark Structured Streaming.
 
 === [[ANALYZE-TABLE]] ANALYZE TABLE SQL Command
 
-Cost-Based Optimization uses the statistics computed and stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[ANALYZE TABLE] SQL command.
+Cost-Based Optimization uses the statistics stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[ANALYZE TABLE] SQL command.
 
 [[NOSCAN]]
 ```
@@ -45,7 +45,7 @@ ANALYZE TABLE tableIdentifier partitionSpec?
 COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 ```
 
-Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>>, e.g. total size or row count of a table.
+Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>>, e.g. total size or row count of a table or table partitions.
 
 1. `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
 1. `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clause
@@ -66,6 +66,95 @@ In such a case, `SparkSqlAstBuilder` reports a WARN message to the logs and simp
 WARN Partition specification is ignored when collecting column statistics: [partitionSpec]
 ```
 ====
+
+=== [[DESCRIBE-EXTENDED]] DESCRIBE EXTENDED SQL Command
+
+You can view the statistics stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#DESCRIBE[DESCRIBE EXTENDED] SQL command.
+
+```
+(DESC | DESCRIBE) TABLE? (EXTENDED | FORMATTED)?
+tableIdentifier partitionSpec? describeColName?
+```
+
+Table-level statistics are in *Statistics* row while partition-level statistics are in *Partition Statistics* row.
+
+TIP: Use `DESC EXTENDED tableName` for table-level statistics and `DESC EXTENDED tableName PARTITION (p1, p2, ...)` for partition-level statistics only.
+
+[source, scala]
+----
+// table-level statistics are in Statistics row
+scala> sql("DESC EXTENDED t1").show(numRows = 30, truncate = false)
++----------------------------+--------------------------------------------------------------+-------+
+|col_name                    |data_type                                                     |comment|
++----------------------------+--------------------------------------------------------------+-------+
+|id                          |int                                                           |null   |
+|p1                          |int                                                           |null   |
+|p2                          |string                                                        |null   |
+|# Partition Information     |                                                              |       |
+|# col_name                  |data_type                                                     |comment|
+|p1                          |int                                                           |null   |
+|p2                          |string                                                        |null   |
+|                            |                                                              |       |
+|# Detailed Table Information|                                                              |       |
+|Database                    |default                                                       |       |
+|Table                       |t1                                                            |       |
+|Owner                       |jacek                                                         |       |
+|Created Time                |Wed Dec 27 14:10:44 CET 2017                                  |       |
+|Last Access                 |Thu Jan 01 01:00:00 CET 1970                                  |       |
+|Created By                  |Spark 2.3.0-SNAPSHOT                                          |       |
+|Type                        |MANAGED                                                       |       |
+|Provider                    |parquet                                                       |       |
+|Table Properties            |[transient_lastDdlTime=1514453141]                            |       |
+|Statistics                  |714 bytes, 2 rows                                             |       |
+|Location                    |file:/Users/jacek/dev/oss/spark/spark-warehouse/t1            |       |
+|Serde Library               |org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe   |       |
+|InputFormat                 |org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat |       |
+|OutputFormat                |org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat|       |
+|Storage Properties          |[serialization.format=1]                                      |       |
+|Partition Provider          |Catalog                                                       |       |
++----------------------------+--------------------------------------------------------------+-------+
+
+scala> spark.table("t1").show
++---+---+----+
+| id| p1|  p2|
++---+---+----+
+|  0|  0|zero|
+|  1|  1| one|
++---+---+----+
+
+// partition-level statistics are in Partition Statistics row
+scala> sql("DESC EXTENDED t1 PARTITION (p1=0,p2='zero')").show(numRows = 30, truncate = false)
++--------------------------------+---------------------------------------------------------------------------------+-------+
+|col_name                        |data_type                                                                        |comment|
++--------------------------------+---------------------------------------------------------------------------------+-------+
+|id                              |int                                                                              |null   |
+|p1                              |int                                                                              |null   |
+|p2                              |string                                                                           |null   |
+|# Partition Information         |                                                                                 |       |
+|# col_name                      |data_type                                                                        |comment|
+|p1                              |int                                                                              |null   |
+|p2                              |string                                                                           |null   |
+|                                |                                                                                 |       |
+|# Detailed Partition Information|                                                                                 |       |
+|Database                        |default                                                                          |       |
+|Table                           |t1                                                                               |       |
+|Partition Values                |[p1=0, p2=zero]                                                                  |       |
+|Location                        |file:/Users/jacek/dev/oss/spark/spark-warehouse/t1/p1=0/p2=zero                  |       |
+|Serde Library                   |org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe                      |       |
+|InputFormat                     |org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat                    |       |
+|OutputFormat                    |org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat                   |       |
+|Storage Properties              |[path=file:/Users/jacek/dev/oss/spark/spark-warehouse/t1, serialization.format=1]|       |
+|Partition Parameters            |{numFiles=1, transient_lastDdlTime=1514469540, totalSize=357}                    |       |
+|Partition Statistics            |357 bytes, 1 rows                                                                |       |
+|                                |                                                                                 |       |
+|# Storage Information           |                                                                                 |       |
+|Location                        |file:/Users/jacek/dev/oss/spark/spark-warehouse/t1                               |       |
+|Serde Library                   |org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe                      |       |
+|InputFormat                     |org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat                    |       |
+|OutputFormat                    |org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat                   |       |
+|Storage Properties              |[serialization.format=1]                                                         |       |
++--------------------------------+---------------------------------------------------------------------------------+-------+
+----
 
 === [[optimizations]] Cost-Based Optimizations
 
