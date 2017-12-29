@@ -2,7 +2,7 @@
 
 `AnalyzePartitionCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
 
-`AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzePartitionCommand[ANALYZE TABLE] with partition specification only (i.e. no `FOR COLUMNS` clause).
+`AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzePartitionCommand[ANALYZE TABLE] with `PARTITION` specification only (i.e. no `FOR COLUMNS` clause).
 
 [source, scala]
 ----

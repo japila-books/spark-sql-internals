@@ -2,19 +2,19 @@
 
 `CommandUtils` is...FIXME
 
-=== [[calculateLocationSize]] `calculateLocationSize` Method
+[[logging]]
+[TIP]
+====
+Enable `INFO` logging level for `org.apache.spark.sql.execution.command.CommandUtils` logger to see what happens inside.
 
-[source, scala]
-----
-calculateLocationSize(
-  sessionState: SessionState,
-  identifier: TableIdentifier,
-  locationUri: Option[URI]): Long
-----
+Add the following line to `conf/log4j.properties`:
 
-`calculateLocationSize`...FIXME
+```
+log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=INFO
+```
 
-NOTE: `calculateLocationSize` is used when...FIXME
+Refer to link:spark-logging.adoc[Logging].
+====
 
 === [[calculateTotalSize]] `calculateTotalSize` Method
 
@@ -26,6 +26,43 @@ calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigI
 `calculateTotalSize`...FIXME
 
 NOTE: `calculateTotalSize` is used when...FIXME
+
+=== [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
+
+[source, scala]
+----
+calculateLocationSize(
+  sessionState: SessionState,
+  identifier: TableIdentifier,
+  locationUri: Option[URI]): Long
+----
+
+`calculateLocationSize` reads `hive.exec.stagingdir` configuration property for the staging directory (with `.hive-staging` being the default).
+
+You should see the following INFO message in the logs:
+
+```
+INFO CommandUtils: Starting to calculate the total file size under path [locationUri].
+```
+
+`calculateLocationSize` calculates the sum of the length of all the files under the input `locationUri`.
+
+NOTE: `calculateLocationSize` uses Hadoop's link:++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html#getFileStatus-org.apache.hadoop.fs.Path-++[FileSystem.getFileStatus] and link:++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileStatus.html#getLen--++[FileStatus.getLen] to access a file and the length of the file (in bytes), respectively.
+
+In the end, you should see the following INFO message in the logs:
+
+```
+INFO CommandUtils: It took [durationInMs] ms to calculate the total file size under path [locationUri].
+```
+
+[NOTE]
+====
+`calculateLocationSize` is used when:
+
+1. link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc#run[AnalyzePartitionCommand] and link:spark-sql-LogicalPlan-RunnableCommand.adoc#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] logical commands are executed
+
+1. `CommandUtils` is requested <<calculateTotalSize, calculateTotalSize>>
+====
 
 === [[compareAndGetNewStats]] Creating New CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method
 

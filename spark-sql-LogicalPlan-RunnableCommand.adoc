@@ -38,7 +38,7 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 | AlterDatabasePropertiesCommand
 |
 
-| AlterTableAddPartitionCommand
+| [[AlterTableAddPartitionCommand]] `AlterTableAddPartitionCommand`
 |
 
 | AlterTableChangeColumnCommand
