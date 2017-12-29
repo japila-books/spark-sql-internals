@@ -1,6 +1,6 @@
-== [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
+== [[Analyzer]] Analyzer -- Logical Plan Analyzer
 
-`Analyzer` is a *logical query plan analyzer* in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan* (with proper relational entities) using <<batches, logical evaluation rules>>.
+`Analyzer` is a *logical plan analyzer* (of structured queries) in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan* (with proper relational entities) using <<batches, logical evaluation rules>>.
 
 ```
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan

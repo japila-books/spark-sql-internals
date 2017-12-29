@@ -139,27 +139,30 @@
 .. link:spark-sql-LogicalPlan-Window.adoc[Window Unary Logical Operator]
 .. link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition Unary Logical Operator]
 
-. link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
+. link:spark-sql-Analyzer.adoc[Analyzer -- Logical Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 .. link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF Logical Evaluation Rule]
 .. link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame Logical Evaluation Rule]
 .. link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution Logical Evaluation Rule]
 
-. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Rule-Based Logical Query Optimizer]
-.. link:spark-sql-Optimizer.adoc[Optimizer -- Base for Logical Query Plan Optimizers]
+. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Rule-Based Optimizer]
 .. link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 .. link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
 .. link:spark-sql-Optimizer-ConstantFolding.adoc[ConstantFolding]
-.. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder Logical Optimization Rule -- Join Reordering in Cost-Based Optimization]
+.. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
 .. link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
 .. link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
 .. link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase / ComputeCurrentTime]
 .. link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
-.. link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation -- Nullability (NULL Value) Propagation]
+.. link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 .. link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
-.. link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Plan Optimization]
+.. link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
 .. link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
 .. link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
+.. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Optimizer]
+
+. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils]
 
 . link:spark-sql-SparkPlan.adoc[SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query]
 .. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec Unary Operator for Broadcasting Joins]
@@ -261,9 +264,6 @@
 . link:spark-sql-SQLExecution.adoc[SQLExecution Helper Object]
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
-
-. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils]
 
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Physical Operators with Optional Java Code Generation]

@@ -1,6 +1,6 @@
-== [[SparkOptimizer]] SparkOptimizer -- Rule-Based Logical Query Optimizer
+== [[SparkOptimizer]] SparkOptimizer -- Rule-Based Optimizer
 
-`SparkOptimizer` is the link:spark-sql-Optimizer.adoc[rule-based logical optimizer] in Spark SQL that comes with the <<batches, additional logical plan optimizations>>.
+`SparkOptimizer` is the concrete link:spark-sql-Optimizer.adoc[rule-based optimizer] (for logical query plans) in Spark SQL that uses <<batches, additional logical plan optimizations>>.
 
 NOTE: You can extend the available logical plan optimizations and register yours using <<experimentalMethods, ExperimentalMethods>>.
 
