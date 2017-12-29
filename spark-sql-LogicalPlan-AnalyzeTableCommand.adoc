@@ -15,7 +15,7 @@ scala> println(cmd)
 AnalyzeTableCommand `t1`, false
 ----
 
-=== [[run]] Running AnalyzeTableCommand -- `run` Method
+=== [[run]] Computing Table-Level Statistics and Altering Metastore -- `run` Method
 
 [source, scala]
 ----
