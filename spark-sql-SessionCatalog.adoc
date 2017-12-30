@@ -2,12 +2,18 @@
 
 `SessionCatalog` is a catalog (aka _registry_ or _metastore_) of session-specific relational entities.
 
-You can access a session-specific `SessionCatalog` through link:spark-sql-SessionState.adoc#catalog[SessionState].
+You can access a session-scoped `SessionCatalog` through link:spark-sql-SessionState.adoc#catalog[SessionState].
 
 [source, scala]
 ----
-val spark: SparkSession = ...
-spark.sessionState.catalog
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState.catalog
+org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ----
 
 `SessionCatalog` is <<creating-instance, created>> when `SessionState` link:spark-sql-SessionState.adoc#catalog[sets `catalog`] (lazily).

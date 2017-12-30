@@ -2,6 +2,13 @@
 
 Like Apache Spark in general, *Spark SQL* in particular is all about distributed in-memory computations on massive scale.
 
+Quoting the http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf[Spark SQL: Relational Data Processing in Spark] paper on Spark SQL:
+
+> Spark SQL is a new module in Apache Spark that integrates relational processing with Spark's functional programming API.
+
+> Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
+queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
+
 The primary difference between Spark SQL's and the "bare" Spark Core's RDD computation models is the framework for loading, querying and persisting structured and semi-structured data using *structured queries* that can be expressed using _good ol'_ *SQL*, *HiveQL* and the custom high-level SQL-like, declarative, type-safe link:spark-sql-Dataset.adoc[Dataset] API called *Structured Query DSL*.
 
 NOTE: Semi- and structured datasets are collections of records that can be described using link:spark-sql-schema.adoc[schema] implicitly or explicitly, respectively.

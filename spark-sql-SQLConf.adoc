@@ -62,6 +62,16 @@ res4: Int = 200
 | <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>>
 | Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy
 
+| [[autoSizeUpdateEnabled]] `autoSizeUpdateEnabled`
+| <<spark.sql.statistics.size.autoUpdate.enabled, spark.sql.statistics.size.autoUpdate.enabled>>
+a|
+
+Used when:
+
+1. `CommandUtils` is requested to link:spark-sql-CommandUtils.adoc#updateTableStats[updateTableStats]
+
+1. `AlterTableAddPartitionCommand` is executed
+
 | [[broadcastTimeout]] `broadcastTimeout`
 | <<spark.sql.broadcastTimeout, spark.sql.broadcastTimeout>>
 | Used exclusively in link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] (for broadcasting a table to executors).
@@ -287,6 +297,14 @@ Use <<dataFrameRetainGroupColumns, dataFrameRetainGroupColumns>> method to acces
 Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks[mapred.reduce.tasks] property that Spark considers deprecated.
 
 Use <<numShufflePartitions, numShufflePartitions>> method to access the current value.
+
+| [[spark.sql.statistics.size.autoUpdate.enabled]] `spark.sql.statistics.size.autoUpdate.enabled`
+| `false`
+a| Enables automatic update for table size once table's data has been changed.
+
+IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
+
+Use <<autoSizeUpdateEnabled, autoSizeUpdateEnabled>> method to access the current value.
 
 | [[spark.sql.streaming.fileSink.log.deletion]] `spark.sql.streaming.fileSink.log.deletion`
 | `true`

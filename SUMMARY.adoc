@@ -162,7 +162,7 @@
 .. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Optimizer]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 
 . link:spark-sql-SparkPlan.adoc[SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query]
 .. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec Unary Operator for Broadcasting Joins]

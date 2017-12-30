@@ -1,3 +1,29 @@
 == [[CatalogTable]] CatalogTable -- Table Metadata
 
 `CatalogTable` is...FIXME
+
+`CatalogTable` is <<creating-instance, created>> when...FIXME
+
+=== [[creating-instance]] Creating CatalogTable Instance
+
+`CatalogTable` takes the following when created:
+
+* [[identifier]] `TableIdentifier`
+* [[tableType]] `CatalogTableType`
+* [[storage]] `CatalogStorageFormat`
+* [[schema]] link:spark-sql-StructType.adoc[Schema]
+* [[provider]] Optional provider name
+* [[partitionColumnNames]] Partition column names
+* [[bucketSpec]] Optional `BucketSpec`
+* [[owner]] Owner
+* [[createTime]] Create time
+* [[lastAccessTime]] Last access time
+* [[createVersion]] Create version
+* [[properties]] Properties
+* [[stats]] Optional `CatalogStatistics`
+* [[viewText]] Optional view text
+* [[comment]] Optional comment
+* [[unsupportedFeatures]] Unsupported features
+* [[tracksPartitionsInCatalog]] `tracksPartitionsInCatalog` flag
+* [[schemaPreservesCase]] `schemaPreservesCase` flag
+* [[ignoredProperties]] Ignored properties
