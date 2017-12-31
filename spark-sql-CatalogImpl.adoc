@@ -1,11 +1,26 @@
 == [[CatalogImpl]] CatalogImpl
 
-`CatalogImpl` is the one and only link:spark-sql-Catalog.adoc[Catalog] that...FIXME
+`CatalogImpl` is the link:spark-sql-Catalog.adoc[Catalog] in Spark SQL that...FIXME
 
 .CatalogImpl uses SessionCatalog (through SparkSession)
 image::images/spark-sql-CatalogImpl.png[align="center"]
 
 NOTE: `CatalogImpl` is in `org.apache.spark.sql.internal` package.
+
+=== [[createTable]] `createTable` Method
+
+[source, scala]
+----
+createTable(
+  tableName: String,
+  source: String,
+  schema: StructType,
+  options: Map[String, String]): DataFrame
+----
+
+NOTE: `createTable` is a part of link:spark-sql-Catalog.adoc#createTable[Catalog Contract] to...FIXME.
+
+`createTable`...FIXME
 
 === [[functionExists]] `functionExists` Method
 

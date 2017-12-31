@@ -1,32 +1,22 @@
-== [[Catalog]] Catalog
+== [[Catalog]] Catalog -- Metastore Management Interface
 
-`Catalog` is the <<contract, interface to work with a metastore>>, i.e. a data catalog of  database(s), local and external tables, functions, table columns, and temporary views in Spark SQL.
+`Catalog` is the <<contract, interface>> for working with a *metastore* (aka _metadata catalog_) of database(s), (local and external) tables, functions, table columns, and temporary views in Spark SQL.
 
-You can access the current catalog using link:spark-sql-SparkSession.adoc#catalog[SparkSession.catalog] attribute.
+You can access the current catalog using link:spark-sql-SparkSession.adoc#catalog[SparkSession.catalog] property.
 
 [source, scala]
 ----
-import org.apache.spark.sql.SparkSession
-val spark: SparkSession = ...
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
 
-scala> spark.catalog
-   lazy val catalog: org.apache.spark.sql.catalog.Catalog
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
-scala> spark.catalog
-res0: org.apache.spark.sql.catalog.Catalog = org.apache.spark.sql.internal.CatalogImpl@1b42eb0f
-
-scala> spark.catalog.listTables.show
-+------------------+--------+-----------+---------+-----------+
-|              name|database|description|tableType|isTemporary|
-+------------------+--------+-----------+---------+-----------+
-|my_permanent_table| default|       null|  MANAGED|      false|
-|              strs|    null|       null|TEMPORARY|       true|
-+------------------+--------+-----------+---------+-----------+
-
-scala> spark.catalog.clearCache
+scala> :type spark.catalog
+org.apache.spark.sql.catalog.Catalog
 ----
 
-NOTE: The one and only `Catalog` in Spark SQL is link:spark-sql-CatalogImpl.adoc[CatalogImpl].
+NOTE: link:spark-sql-CatalogImpl.adoc[CatalogImpl] is the `Catalog` in Spark SQL.
 
 === [[contract]] Catalog Contract
 
@@ -57,6 +47,11 @@ abstract class Catalog {
       source: String,
       schema: StructType,
       options: Map[String, String]): DataFrame
+  def createTable(
+      tableName: String,
+      source: String,
+      schema: StructType,
+      options: Map[String, String]): DataFrame
   def dropTempView(viewName: String): Unit
   def isCached(tableName: String): Boolean
   def uncacheTable(tableName: String): Unit
@@ -78,6 +73,9 @@ abstract class Catalog {
 | Caches the specified table in memory
 
 Used for SQL's link:spark-sql-caching.adoc#cache-table[CACHE TABLE] and `AlterTableRenameCommand` command.
+
+| [[createTable]] `createTable`
+|
 
 | [[functionExists]] `functionExists`
 |

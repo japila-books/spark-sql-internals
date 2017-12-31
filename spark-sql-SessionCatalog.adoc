@@ -46,6 +46,17 @@ Used when...FIXME
 Used when `SessionCatalog` <<refreshTable, refreshes a table>>
 |===
 
+=== [[getTempViewOrPermanentTableMetadata]] `getTempViewOrPermanentTableMetadata` Method
+
+[source, scala]
+----
+getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
+----
+
+`getTempViewOrPermanentTableMetadata`...FIXME
+
+NOTE: `getTempViewOrPermanentTableMetadata` is used when...FIXME
+
 === [[alterPartitions]] `alterPartitions` Method
 
 [source, scala]

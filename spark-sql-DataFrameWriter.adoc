@@ -1,4 +1,4 @@
-== DataFrameWriter
+== [[DataFrameWriter]] DataFrameWriter
 
 `DataFrameWriter` is an interface to write the result of executing link:spark-sql-Dataset.adoc[structured query] to an external storage system in a batch fashion.
 
@@ -49,7 +49,7 @@ CAUTION: FIXME
 
 NOTE: `runCommand` is used when `DataFrameWriter` does <<save, save>>, <<insertInto, insertInto>> and <<createTable, createTable>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
-=== [[createTable]] `createTable` Internal Method
+=== [[createTable]] Creating Table -- `createTable` Internal Method
 
 [source, scala]
 ----

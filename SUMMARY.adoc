@@ -247,7 +247,7 @@
 . link:spark-sql-SQLConf.adoc[SQLConf]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
 
-. link:spark-sql-Catalog.adoc[Catalog]
+. link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
 . link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- System Catalog of Permanent Entities]
 

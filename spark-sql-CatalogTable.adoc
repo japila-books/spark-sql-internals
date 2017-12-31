@@ -1,8 +1,24 @@
 == [[CatalogTable]] CatalogTable -- Table Metadata
 
-`CatalogTable` is...FIXME
+`CatalogTable` is the metadata of a table in a link:spark-sql-Catalog.adoc[catalog] (aka _metastore_).
 
-`CatalogTable` is <<creating-instance, created>> when...FIXME
+`CatalogTable` is <<creating-instance, created>> when:
+
+1. `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[getTempViewOrPermanentTableMetadata]
+
+1. `HiveClientImpl` is requested for `getTableOption`
+
+1. `InsertIntoHiveDirCommand` is executed
+
+1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable]
+
+1. `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
+
+1. `CreateTableLikeCommand` is executed
+
+1. `CreateViewCommand` does link:spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable[prepareTable]
+
+1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
 
 === [[creating-instance]] Creating CatalogTable Instance
 

@@ -112,6 +112,10 @@ a|
 
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] logical command for `CACHE LAZY? TABLE [table] (AS? [query])?`
 
+| [[visitCreateHiveTable]] `visitCreateHiveTable`
+|
+|
+
 | [[visitCreateTable]] `visitCreateTable`
 | `#createTable`
 a|
