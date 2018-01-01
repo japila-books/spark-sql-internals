@@ -4,12 +4,21 @@
 
 There are currently two implementations of `ExternalCatalog`.
 
-.ExternalCatalog Implementations
-[width="100%",options="header"]
+[[implementations]]
+.ExternalCatalogs
+[cols="1,2,2",options="header",width="100%"]
 |===
-| Catalog Alias | Catalog Class | Description
-| `in-memory` | `org.apache.spark.sql.catalyst.catalog.InMemoryCatalog` | An in-memory (ephemeral) system catalog
-| `hive` | `org.apache.spark.sql.hive.HiveExternalCatalog` |
+| Catalog Alias
+| Catalog Class
+| Description
+
+| `in-memory`
+| `org.apache.spark.sql.catalyst.catalog.InMemoryCatalog`
+| An in-memory (ephemeral) system catalog
+
+| `hive`
+| `org.apache.spark.sql.hive.HiveExternalCatalog`
+|
 |===
 
 link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property sets the current `ExternalCatalog` implementation (with `in-memory` being the default).
@@ -32,3 +41,12 @@ link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogIm
 | Load | | X | X | X
 | Set | | | | X
 |===
+
+=== [[doAlterTableStats]] `doAlterTableStats` Method
+
+[source, scala]
+----
+doAlterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
+----
+
+NOTE: `doAlterTableStats` is used when...FIXME

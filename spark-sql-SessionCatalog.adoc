@@ -9,9 +9,6 @@ You can access a session-scoped `SessionCatalog` through link:spark-sql-SessionS
 scala> spark.version
 res0: String = 2.3.0-SNAPSHOT
 
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ----

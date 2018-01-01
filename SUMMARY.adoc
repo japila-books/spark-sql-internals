@@ -255,7 +255,7 @@
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Base for Builders of SessionState]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Metastore of Session-Specific Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
@@ -276,6 +276,9 @@
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
+
+. link:spark-sql-HiveClient.adoc[HiveClient]
+.. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl]
 
 . link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
 

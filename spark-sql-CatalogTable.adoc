@@ -1,6 +1,29 @@
-== [[CatalogTable]] CatalogTable -- Table Metadata
+== [[CatalogTable]] CatalogTable -- Table Metadata in Internal SessionCatalog
 
-`CatalogTable` is the metadata of a table in a link:spark-sql-Catalog.adoc[catalog] (aka _metastore_).
+`CatalogTable` is the metadata of a table in the internal link:spark-sql-SessionCatalog.adoc[SessionCatalog].
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark.sessionState.catalog
+org.apache.spark.sql.catalyst.catalog.SessionCatalog
+
+// Using high-level user-friendly catalog interface
+scala> spark.catalog.listTables.filter($"name" === "t1").show
++----+--------+-----------+---------+-----------+
+|name|database|description|tableType|isTemporary|
++----+--------+-----------+---------+-----------+
+|  t1| default|       null|  MANAGED|      false|
++----+--------+-----------+---------+-----------+
+
+// Using low-level internal SessionCatalog interface to access CatalogTables
+val t1Tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
+val t1Metadata = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(t1Tid)
+scala> :type t1Metadata
+org.apache.spark.sql.catalyst.catalog.CatalogTable
+----
 
 `CatalogTable` is <<creating-instance, created>> when:
 
@@ -19,6 +42,48 @@
 1. `CreateViewCommand` does link:spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable[prepareTable]
 
 1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
+
+=== [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
+
+You manage a table metadata using the link:spark-sql-Catalog.adoc[catalog] interface (aka _metastore_). Among the management tasks is to get the <<stats, statistics>> of a table (that are used for link:spark-sql-cost-based-optimization.adoc[cost-based query optimization]).
+
+[source, scala]
+----
+scala> t1Metadata.stats.foreach(println)
+CatalogStatistics(714,Some(2),Map(p1 -> ColumnStat(2,Some(0),Some(1),0,4,4,None), id -> ColumnStat(2,Some(0),Some(1),0,4,4,None)))
+
+scala> t1Metadata.stats.map(_.simpleString).foreach(println)
+714 bytes, 2 rows
+----
+
+NOTE: The <<stats, CatalogStatistics>> are optional when `CatalogTable` is <<creating-instance, created>>.
+
+CAUTION: FIXME When are stats specified? What if there are not?
+
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming link:spark-sql-FileFormat.adoc[file data source table], `DataSource` link:spark-sql-DataSource.adoc#resolveRelation[creates] a `HadoopFsRelation` with the table size specified by link:spark-sql-SQLConf.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+
+Internally, Spark alters table statistics using link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog.doAlterTableStats].
+
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if link:spark-sql-SQLConf.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs] property is turned on) or assume link:spark-sql-SQLConf.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] (that effectively disables table broadcasting).
+
+When `HiveClientImpl` is requested to link:spark-sql-HiveClientImpl.adoc#getTableOption[look up a table in a metastore], it link:spark-sql-HiveClientImpl.adoc#readHiveStats[reads statistics directly from Hive's metastore].
+
+You can use link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand], link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand], link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand] commands to record statistics in a catalog.
+
+The table statistics can be link:spark-sql-CommandUtils.adoc#updateTableStats[automatically updated] (after executing commands like `AlterTableAddPartitionCommand`) when link:spark-sql-SQLConf.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on.
+
+You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
+
+=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+
+[source, scala]
+----
+toLinkedHashMap: mutable.LinkedHashMap[String, String]
+----
+
+`toLinkedHashMap`...FIXME
+
+NOTE: `toLinkedHashMap` is used when...FIXME
 
 === [[creating-instance]] Creating CatalogTable Instance
 

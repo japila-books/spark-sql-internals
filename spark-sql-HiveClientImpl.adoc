@@ -1,0 +1,25 @@
+== [[HiveClientImpl]] HiveClientImpl
+
+`HiveClientImpl` is the link:spark-sql-HiveClient.adoc[HiveClient] for...FIXME
+
+=== [[readHiveStats]] `readHiveStats` Internal Method
+
+[source, scala]
+----
+readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
+----
+
+`readHiveStats`...FIXME
+
+NOTE: `readHiveStats` is used when...FIXME
+
+=== [[getTableOption]] Looking Up Table in Metastore -- `getTableOption` Method
+
+[source, scala]
+----
+def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+----
+
+NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
+
+`getTableOption`...FIXME

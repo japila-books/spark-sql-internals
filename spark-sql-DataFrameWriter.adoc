@@ -93,7 +93,7 @@ First, `tableName` is parsed to an internal table identifier. `saveAsTable` then
 .saveAsTable's Behaviour per Save Mode
 [cols="1,1,2",options="header"]
 |===
-| Does table exist? |Save Mode | Behaviour
+| Does table exist? | Save Mode | Behaviour
 | yes       | `Ignore` | Does nothing
 | yes       | `ErrorIfExists` | Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
 | _anything_       | _anything_ | Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the `CreateTable` operator
@@ -101,10 +101,19 @@ First, `tableName` is parsed to an internal table identifier. `saveAsTable` then
 
 [source, scala]
 ----
-val ints = 0 to 9 toDF
-val options = Map("path" -> "/tmp/ints")
-ints.write.options(options).saveAsTable("ints")
-sql("show tables").show
+val ids = spark.range(5)
+ids.write.
+  option("path", "/tmp/five_ids").
+  saveAsTable("five_ids")
+
+// Check out if saveAsTable was successful
+val q = spark.catalog.listTables().filter($"name" === "five_ids")
+scala> q.show
++--------+--------+-----------+---------+-----------+
+|    name|database|description|tableType|isTemporary|
++--------+--------+-----------+---------+-----------+
+|five_ids| default|       null| EXTERNAL|      false|
++--------+--------+-----------+---------+-----------+
 ----
 
 === [[save]] Saving DataFrame -- `save` Method

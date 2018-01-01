@@ -1,0 +1,27 @@
+== [[HiveClient]] HiveClient
+
+`HiveClient` is the <<contract, contract>> for...FIXME
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.hive.client
+
+trait HiveClient {
+  // only required methods that have no implementation
+  // FIXME List of the methods
+  def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+}
+----
+
+NOTE: `HiveClient` is a `private[hive]` contract.
+
+.(Subset of) HiveClient Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[getTableOption]] `getTableOption`
+| Used when...FIXME
+|===
