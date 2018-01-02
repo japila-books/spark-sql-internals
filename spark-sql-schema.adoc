@@ -12,13 +12,18 @@ import org.apache.spark.sql.types.StructType
 val schemaUntyped = new StructType()
   .add("a", "int")
   .add("b", "string")
+
+// alternatively using Schema DSL
+val schemaUntyped_2 = new StructType()
+  .add($"a".int)
+  .add($"b".string)
 ----
 
 You can use the canonical string representation of SQL types to describe the types in a schema (that is inherently untyped at compile type) or use type-safe types from the `org.apache.spark.sql.types` package.
 
 [source, scala]
 ----
-// it is equivalent to the above expression
+// it is equivalent to the above expressions
 import org.apache.spark.sql.types.{IntegerType, StringType}
 val schemaTyped = new StructType()
   .add("a", IntegerType)

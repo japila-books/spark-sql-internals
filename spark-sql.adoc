@@ -13,13 +13,13 @@ The primary difference between Spark SQL's and the "bare" Spark Core's RDD compu
 
 NOTE: Semi- and structured datasets are collections of records that can be described using link:spark-sql-schema.adoc[schema] implicitly or explicitly, respectively.
 
-Spark SQL supports structured queries in *batch* and *streaming* modes (with the latter as a separate module of Spark SQL called link:spark-structured-streaming.adoc[Structured Streaming]).
+Spark SQL supports structured queries in *batch* and *streaming* modes (with the latter as a separate module of Spark SQL called link:spark-structured-streaming.adoc[Spark Structured Streaming]).
 
 NOTE: Under the covers, structured queries are automatically compiled into corresponding RDD operations.
 
 Regardless of the query language you choose queries all end up as a link:spark-sql-catalyst.adoc[tree of Catalyst expressions] with link:spark-sql-Optimizer.adoc[further optimizations] along the way to your large distributed data sets.
 
-As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions).
+As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions). In other words, you use Spark SQL's `Dataset` API to describe a distributed computation that eventually be converted to a link:spark-sql-QueryExecution.adoc#toRdd[DAG of RDDs].
 
 [source, scala]
 ----

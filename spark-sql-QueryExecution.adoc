@@ -53,6 +53,8 @@ NOTE: `executedPlan` is the phase when link:spark-sql-CollapseCodegenStages.adoc
 | [[toRdd]] `toRdd`
 a| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>).
 
+The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
+
 [NOTE]
 ====
 `toRdd` is a "boundary" between two Spark modules: Spark SQL and Spark Core.
@@ -64,7 +66,7 @@ After you have executed `toRdd` (directly or not), you basically "leave" Spark S
 
 NOTE: You can use link:spark-sql-SparkSession.adoc#internalCreateDataFrame[SparkSession.internalCreateDataFrame] to apply a link:spark-sql-StructType.adoc[schema] to an `RDD[InternalRow]`.
 
-NOTE: Use link:spark-sql-dataset-operators.adoc#rdd[Dataset.rdd] to access the `RDD[InternalRow]` with internal binary rows deserialized to a Scala type. 
+NOTE: Use link:spark-sql-dataset-operators.adoc#rdd[Dataset.rdd] to access the `RDD[InternalRow]` with internal binary rows deserialized to a Scala type.
 |===
 
 You can access the lazy attributes as follows:
