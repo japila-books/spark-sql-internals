@@ -33,7 +33,7 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific link:sp
 
 NOTE: `run` uses `SparkSession` to link:spark-sql-SparkSession.adoc#table[find the table] in a metastore.
 
-In the end, `run` link:spark-sql-SessionCatalog.adoc#alterTableStats[alters table statistics] if link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[different from the table statistics recorded in metastore].
+In the end, `run` link:spark-sql-SessionCatalog.adoc#alterTableStats[alters table statistics] if link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[different from the existing table statistics in metastore].
 
 `run` throws a `AnalysisException` when executed on a view.
 

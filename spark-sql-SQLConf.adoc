@@ -68,7 +68,7 @@ a|
 
 Used when:
 
-1. `CommandUtils` is requested to link:spark-sql-CommandUtils.adoc#updateTableStats[updateTableStats]
+1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]
 
 1. `AlterTableAddPartitionCommand` is executed
 

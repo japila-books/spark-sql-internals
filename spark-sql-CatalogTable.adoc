@@ -101,7 +101,7 @@ NOTE: `toLinkedHashMap` is used when...FIXME
 * [[lastAccessTime]] Last access time
 * [[createVersion]] Create version
 * [[properties]] Properties
-* [[stats]] Optional `CatalogStatistics`
+* [[stats]] Optional link:spark-sql-CatalogStatistics.adoc[CatalogStatistics]
 * [[viewText]] Optional view text
 * [[comment]] Optional comment
 * [[unsupportedFeatures]] Unsupported features

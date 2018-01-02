@@ -6,8 +6,8 @@
 
 1. <<calculateTotalSize, Calculating Total Size of Table or Its Partitions>>
 1. <<calculateLocationSize, Calculating Total File Size Under Path>>
-1. <<compareAndGetNewStats, Creating New CatalogStatistics with Current Statistics>>
-1. <<updateTableStats, Updating Table Statistics (Only If Recorded in Metastore Earlier)>>
+1. <<compareAndGetNewStats, Creating CatalogStatistics with Current Statistics>>
+1. <<updateTableStats, Updating Existing Table Statistics>>
 
 [[logging]]
 [TIP]
@@ -23,7 +23,7 @@ log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[updateTableStats]] Updating Table Statistics (Only If Recorded in Metastore Earlier) -- `updateTableStats` Method
+=== [[updateTableStats]] Updating Existing Table Statistics -- `updateTableStats` Method
 
 [source, scala]
 ----
@@ -62,7 +62,7 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the link:spar
 
 1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand] and link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand] commands are executed
 
-1. `CommandUtils` is requested for <<updateTableStats, updating table statistics (only if recorded in metastore earlier)>>
+1. `CommandUtils` is requested for <<updateTableStats, updating existing table statistics>>
 ====
 
 === [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
@@ -102,7 +102,7 @@ INFO CommandUtils: It took [durationInMs] ms to calculate the total file size un
 1. `CommandUtils` is requested for <<calculateTotalSize, total size of a table or its partitions>>
 ====
 
-=== [[compareAndGetNewStats]] Creating New CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method
+=== [[compareAndGetNewStats]] Creating CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method
 
 [source, scala]
 ----
@@ -112,6 +112,6 @@ compareAndGetNewStats(
   newRowCount: Option[BigInt]): Option[CatalogStatistics]
 ----
 
-`compareAndGetNewStats` creates a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
+`compareAndGetNewStats` link:spark-sql-CatalogStatistics.adoc#creating-instance[creates] a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
 
 NOTE: `compareAndGetNewStats` is used when link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc#run[AnalyzePartitionCommand] and link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand] are executed.

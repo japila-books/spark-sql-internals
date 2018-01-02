@@ -1,0 +1,70 @@
+== [[CatalogStatistics]] CatalogStatistics -- Table Statistics in Catalog
+
+[[creating-instance]][[table-statistics]]
+`CatalogStatistics` holds the <<table-statistics, table statistics>> in a catalog:
+
+* [[sizeInBytes]] *Total size* (in bytes)
+* [[rowCount]] *Row count* (optional)
+* [[colStats]] *Column statistics* (as a sequence of column name and `ColumnStat`)
+
+`CatalogStatistics` is <<creating-instance, created>> when:
+
+1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed
+
+1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
+
+1. `HiveExternalCatalog` is requested for `statsFromProperties`
+
+1. `DetermineTableStats` and `PruneFileSourcePartitions` logical rules are executed
+
+1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive]
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark.sessionState.catalog
+org.apache.spark.sql.catalyst.catalog.SessionCatalog
+
+// Using low-level internal SessionCatalog interface to access CatalogTables
+val tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
+val tableMeta = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(tid)
+
+val stats = tableMeta.stats
+scala> :type stats
+Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
+----
+
+[[simpleString]]
+`CatalogStatistics` has a text representation.
+
+[source, scala]
+----
+scala> :type stats
+Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
+
+scala> stats.map(_.simpleString).foreach(println)
+714 bytes, 2 rows
+----
+
+=== [[toPlanStats]] Converting CatalogStatistics to Statistics -- `toPlanStats` Method
+
+[source, scala]
+----
+toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
+----
+
+`toPlanStats`...FIXME
+
+[NOTE]
+====
+`toPlanStats` does the reverse of `HiveExternalCatalog.statsToProperties`.
+
+[source, scala]
+----
+FIXME Example
+----
+====
+
+NOTE: `toPlanStats` is used when...FIXME

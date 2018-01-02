@@ -38,7 +38,7 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific link:sp
 `run` <<calculateRowCountsPerPartition, computes row count statistics per partition>> unless <<noscan, noscan>> flag was enabled.
 
 [[total-size-stat]]
-`run` link:spark-sql-CommandUtils.adoc#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[creates new CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
+`run` link:spark-sql-CommandUtils.adoc#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
 
 In the end, `run` link:spark-sql-SessionCatalog.adoc#alterPartitions[alters table partition metadata] for partitions with the statistics changed.
 

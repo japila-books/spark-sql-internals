@@ -2,7 +2,7 @@
 
 `HiveClientImpl` is the link:spark-sql-HiveClient.adoc[HiveClient] for...FIXME
 
-=== [[readHiveStats]] `readHiveStats` Internal Method
+=== [[readHiveStats]] Reading Statistics from Properties (from Hive's Metastore) -- `readHiveStats` Internal Method
 
 [source, scala]
 ----
