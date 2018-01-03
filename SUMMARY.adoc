@@ -116,7 +116,7 @@
 .. link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation Leaf Logical Operator]
 .. link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation Leaf Logical Operator For Cached Query Plans]
 .. link:spark-sql-LogicalPlan-Join.adoc[Join Logical Operator]
-.. link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode Logical Operator]
+.. link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode -- Base Logical Operator with No Child Operators and Optional Statistics]
 .. link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation Logical Operator]
 .. link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation Logical Operator -- Adapter for BaseRelation]
 .. link:spark-sql-LogicalPlan-Pivot.adoc[Pivot Unary Logical Operator]
