@@ -97,10 +97,6 @@ Used in:
 | <<spark.sql.retainGroupColumns, spark.sql.retainGroupColumns>>
 | Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
 
-| [[defaultSizeInBytes]] `defaultSizeInBytes`
-| <<spark.sql.defaultSizeInBytes, spark.sql.defaultSizeInBytes>>
-| Used...FIXME
-
 | [[fallBackToHdfsForStatsEnabled]] `fallBackToHdfsForStatsEnabled`
 | <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>>
 | Used exclusively when `DetermineTableStats` logical resolution rule is executed.
@@ -238,11 +234,26 @@ Use <<wholeStageEnabled, wholeStageEnabled>> method to access the current value.
 
 | [[spark.sql.defaultSizeInBytes]] `spark.sql.defaultSizeInBytes`
 | Java's `Long.MaxValue`
-| *(internal)* Table size used in query planning.
+a| *(internal)* Estimated size of a table or relation used in query planning
 
-It is by default set to Java's `Long.MaxValue` which is larger than <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>> to be more conservative. That is to say by default the optimizer will not choose to broadcast a table unless it knows for sure its size is small enough.
+Set to Java's `Long.MaxValue` which is larger than <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>> to be more conservative. That is to say by default the optimizer will not choose to broadcast a table unless it knows for sure that the table size is small enough.
 
-Use <<useObjectHashAggregation, useObjectHashAggregation>> method to access the current value.
+[[defaultSizeInBytes]]
+Use `defaultSizeInBytes` method to access the current value.
+
+Used (as <<defaultSizeInBytes, defaultSizeInBytes>>) when:
+
+1. `DetermineTableStats` logical resolution rule could not compute the table size or <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>> is turned off
+
+1. `ExternalRDD`, `LogicalRDD` and `DataSourceV2Relation` are requested for statistics (i.e. `computeStats`)
+
+1.  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
+
+1. `DataSource` link:spark-sql-DataSource.adoc#resolveRelation[creates a HadoopFsRelation for FileFormat data source] (and builds a CatalogFileIndex when no table statistics are available)
+
+1. `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
+
+Used by the planner to decide when it is safe to broadcast a relation. By default, the system will assume that tables are too large to broadcast.
 
 | [[spark.sql.execution.useObjectHashAggregateExec]] `spark.sql.execution.useObjectHashAggregateExec`
 | `true`
