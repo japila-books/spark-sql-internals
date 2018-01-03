@@ -1,8 +1,10 @@
-== [[SessionCatalog]] SessionCatalog -- Metastore of Session-Specific Relational Entities
+== [[SessionCatalog]] SessionCatalog -- Session-Scoped Catalog of Relational Entities
 
-`SessionCatalog` is a catalog (aka _registry_ or _metastore_) of session-specific relational entities.
+`SessionCatalog` is the catalog of session-scoped relational temporary and permanent relational entities, i.e. databases, tables, temporary views, partitions, and functions.
 
-You can access a session-scoped `SessionCatalog` through link:spark-sql-SessionState.adoc#catalog[SessionState].
+`SessionCatalog` uses <<externalCatalog, ExternalCatalog>> for the metastore of permanent relational entities only, i.e. databases, tables, partitions, and functions.
+
+You can access the `SessionCatalog` (in a `SparkSession`) through link:spark-sql-SessionState.adoc#catalog[SessionState].
 
 [source, scala]
 ----
@@ -13,10 +15,12 @@ scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ----
 
-`SessionCatalog` is <<creating-instance, created>> when `SessionState` link:spark-sql-SessionState.adoc#catalog[sets `catalog`] (lazily).
+NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (e.g. in-memory, hive1, hive2) to be used in a single Spark SQL application.
+
+`SessionCatalog` is <<creating-instance, created>> when `SessionState` sets link:spark-sql-SessionState.adoc#catalog[catalog].
 
 [[internal-registries]]
-.SessionCatalog's Internal Registries and Counters (in alphabetical order)
+.SessionCatalog's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
@@ -89,16 +93,49 @@ listPartitions(
 
 NOTE: `listPartitions` is used when...FIXME
 
-=== [[alterTableStats]] `alterTableStats` Method
+=== [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
 
 [source, scala]
 ----
 alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
 ----
 
-`alterTableStats`...FIXME
+`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to link:spark-sql-ExternalCatalog.adoc#alterTableStats[alterTableStats] and then <<refreshTable, invalidates the table relation cache>>.
 
-NOTE: `alterTableStats` is used when...FIXME
+`alterTableStats` reports a `NoSuchDatabaseException` if the <<databaseExists, database does not exist>>.
+
+`alterTableStats` reports a `NoSuchTableException` if the <<tableExists, table does not exist>>.
+
+[NOTE]
+====
+`alterTableStats` is used by the logical commands (when they are executed):
+
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand], link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
+
+1. (*indirectly* through `CommandUtils` when requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]) `InsertIntoHiveTable`, `InsertIntoHadoopFsRelationCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
+====
+
+=== [[tableExists]] `tableExists` Method
+
+[source, scala]
+----
+tableExists(name: TableIdentifier): Boolean
+----
+
+`tableExists`...FIXME
+
+NOTE: `tableExists` is used when...FIXME
+
+=== [[databaseExists]] `databaseExists` Method
+
+[source, scala]
+----
+databaseExists(db: String): Boolean
+----
+
+`databaseExists`...FIXME
+
+NOTE: `databaseExists` is used when...FIXME
 
 === [[functionExists]] `functionExists` Method
 
@@ -117,9 +154,16 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[refreshTable]] `refreshTable` Method
+=== [[refreshTable]] Invalidating Table Relation Cache (aka Refreshing Table) -- `refreshTable` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+refreshTable(name: TableIdentifier): Unit
+----
+
+`refreshTable`...FIXME
+
+NOTE: `refreshTable` is used when...FIXME
 
 === [[createTempFunction]] `createTempFunction` Method
 

@@ -161,3 +161,25 @@ scala> sql("DESC EXTENDED t1 PARTITION (p1=0,p2='zero')").show(numRows = 30, tru
 The link:spark-sql-Optimizer.adoc[rule-based Spark Optimizer] comes with rules that are executed when cost-based optimization is <<spark.sql.cbo.enabled, enabled>>.
 
 1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering
+
+=== [[commands]] Logical Commands for Altering Table Statistics
+
+The following are the logical commands that link:spark-sql-SessionCatalog.adoc#alterTableStats[alter table statistics in an external metastore]:
+
+1.  link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
+
+1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
+
+1. `AlterTableAddPartitionCommand`
+
+1. `AlterTableDropPartitionCommand`
+
+1. `AlterTableSetLocationCommand`
+
+1. `TruncateTableCommand`
+
+1. `InsertIntoHiveTable`
+
+1. `InsertIntoHadoopFsRelationCommand`
+
+1. `LoadDataCommand`

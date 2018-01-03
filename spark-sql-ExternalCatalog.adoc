@@ -1,8 +1,33 @@
-== ExternalCatalog -- System Catalog of Permanent Entities
+== [[ExternalCatalog]] ExternalCatalog -- Metastore of Permanent Entities
 
-`ExternalCatalog` is the <<contract, contract for system catalog>> of permanent entities, i.e. databases, tables, partitions, and functions.
+`ExternalCatalog` is the <<contract, contract>> for a system catalog (aka _registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
 
-There are currently two implementations of `ExternalCatalog`.
+[[features]]
+.ExternalCatalog Features per Entity
+[cols="2,1,1,1,1",options="header",width="100%"]
+|===
+| Feature
+| Function
+| Partitions
+| Tables
+| Databases
+
+| Create | X | X | X | X
+| Drop | X | X | X | X
+| Rename | X | X | X |
+| Get | X | X | X |
+| Check Existence | X | | X | X
+| List | X | X | X |
+| Alter | | X | X | X
+| Load | | X | X | X
+| Set | | | | X
+|===
+
+`ExternalCatalog` is a `ListenerBus` of `ExternalCatalogEventListener` listeners that handle `ExternalCatalogEvent` events.
+
+TIP: Use `addListener` and `removeListener` to register and de-register `ExternalCatalogEventListener` listeners, accordingly.
+
+TIP: Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more on Spark Core's `ListenerBus`.
 
 [[implementations]]
 .ExternalCatalogs
@@ -23,23 +48,38 @@ There are currently two implementations of `ExternalCatalog`.
 
 link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property sets the current `ExternalCatalog` implementation (with `in-memory` being the default).
 
+=== [[alterTableStats]] `alterTableStats` Method
+
+[source, scala]
+----
+alterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
+----
+
+`alterTableStats`...FIXME
+
+NOTE: `alterTableStats` is used when...FIXME
+
 === [[contract]] ExternalCatalog Contract
 
-`ExternalCatalog` contract assumes that implementations offer the following features:
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.catalog
 
-.ExternalCatalog Features per Entity
-[width="100%",options="header"]
+abstract class ExternalCatalog {
+  // only required methods that have no implementation
+  def databaseExists(db: String): Boolean
+  // FIXME The other methods
+}
+----
+
+.(Subset of) ExternalCatalog Contract
+[cols="1,2",options="header",width="100%"]
 |===
-| Feature | Function | Partitions | Tables | Databases
-| Create | X | X | X | X
-| Drop | X | X | X | X
-| Rename | X | X | X |
-| Get | X | X | X |
-| Check Existence | X | | X | X
-| List | X | X | X |
-| Alter | | X | X | X
-| Load | | X | X | X
-| Set | | | | X
+| Method
+| Description
+
+| [[databaseExists]] `databaseExists`
+| Used when...FIXME
 |===
 
 === [[doAlterTableStats]] `doAlterTableStats` Method

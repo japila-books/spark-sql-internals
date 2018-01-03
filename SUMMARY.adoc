@@ -250,13 +250,13 @@
 
 . link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
-. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- System Catalog of Permanent Entities]
 
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Base for Builders of SessionState]
 
-. link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Metastore of Session-Specific Relational Entities]
+. link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
+. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Metastore of Permanent Entities]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
