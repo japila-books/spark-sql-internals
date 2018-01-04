@@ -11,9 +11,11 @@ The (cost) statistics are as follows:
 1. [[total-size-stat]] *Total size* (in bytes) of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
 1. [[row-count-stat]] *Row count* of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
 
-=== [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Property
+=== [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Configuration Property
 
-Cost-Based Optimization is enabled by link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] property (which is disabled by default).
+Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`.
+
+NOTE: link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned off, i.e. `false`, by default.
 
 TIP: Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] to access the current value of `spark.sql.cbo.enabled` property.
 
@@ -66,6 +68,10 @@ In such a case, `SparkSqlAstBuilder` reports a WARN message to the logs and simp
 WARN Partition specification is ignored when collecting column statistics: [partitionSpec]
 ```
 ====
+
+=== [[EXPLAIN-COST]] EXPLAIN COST SQL Command
+
+CAUTION: FIXME See link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]
 
 === [[DESCRIBE-EXTENDED]] DESCRIBE EXTENDED SQL Command
 

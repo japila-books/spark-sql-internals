@@ -179,7 +179,7 @@ NOTE: Adaptive query execution is not supported for streaming Datasets and is di
 Use <<adaptiveExecutionEnabled, adaptiveExecutionEnabled>> method to access the current value.
 
 | [[spark.sql.autoBroadcastJoinThreshold]] `spark.sql.autoBroadcastJoinThreshold`
-| `10L * 1024 * 1024`
+| `10L * 1024 * 1024` (10M)
 | Maximum size (in bytes) for a table that will be broadcast to all worker nodes when performing a join.
 
 If the size of the statistics of the logical plan of a table is at most the setting, the DataFrame is broadcast for join.

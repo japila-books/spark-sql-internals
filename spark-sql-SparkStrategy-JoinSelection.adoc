@@ -70,7 +70,7 @@ muchSmaller(a: LogicalPlan, b: LogicalPlan): Boolean
 
 Internally, `muchSmaller` link:spark-sql-LogicalPlan.adoc#stats[calculates the estimated statistics for the input logical plans] and compares their physical size in bytes (`sizeInBytes`).
 
-NOTE: `muchSmaller` is used exclusively when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
+NOTE: `muchSmaller` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
 
 === [[canBuildLocalHashMap]] `canBuildLocalHashMap` Internal Condition
 
@@ -111,6 +111,28 @@ Otherwise, `canBuildRight` is `false`.
 
 NOTE: `canBuildRight` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `BroadcastHashJoinExec`, `ShuffledHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators.
 
+=== [[canBroadcastBySizes]] `canBroadcastBySizes` Internal Method
+
+[source, scala]
+----
+canBroadcastBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): Boolean
+----
+
+`canBroadcastBySizes`...FIXME
+
+NOTE: `canBroadcastBySizes` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators.
+
+=== [[broadcastSideBySizes]] `broadcastSideBySizes` Internal Method
+
+[source, scala]
+----
+broadcastSideBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): BuildSide
+----
+
+`broadcastSideBySizes`...FIXME
+
+NOTE: `broadcastSideBySizes` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators.
+
 === [[canBroadcast]] Can Logical Plan Be Broadcast? -- `canBroadcast` Internal Condition
 
 [source, scala]
@@ -118,4 +140,10 @@ NOTE: `canBuildRight` is used when `JoinSelection` checks <<join-selection-requi
 canBroadcast(plan: LogicalPlan): Boolean
 ----
 
-`canBroadcast` condition holds for link:spark-sql-LogicalPlan.adoc[logical operators] with statistics that can be broadcast and of non-negative size up to link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold].
+`canBroadcast` is enabled, i.e. `true`, when the size of the output of the input logical plan (aka _sizeInBytes_) is less than link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] configuration property.
+
+NOTE: link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
+
+NOTE: `canBroadcast` uses the total size statistic from link:spark-sql-LogicalPlanStats.adoc#stats[Statistics] of a logical operator.
+
+NOTE: `canBroadcast` is used when `JoinSelection` does <<canBroadcastBySizes, canBroadcastBySizes>> and <<broadcastSideBySizes, broadcastSideBySizes>>.

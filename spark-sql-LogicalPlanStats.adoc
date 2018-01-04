@@ -1,0 +1,152 @@
+== [[LogicalPlanStats]] LogicalPlanStats
+
+`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for (logical) query planning (e.g. link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection])
+
+NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of its definition. It is a very nice feature of Scala that restricts the set of classes that the trait could be used with.
+
+TIP: Use `EXPLAIN COST` SQL command to explain a query with the <<stats, statistics>>.
+
+You can access the statistics of a logical plan directly using <<stats, stats>> method (or indirectly requesting `QueryExecution` for link:spark-sql-QueryExecution.adoc#stringWithStats[text representation with statistics])
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+val names = Seq((1, "one"), (2, "two")).toDF("id", "name")
+
+// CBO is turned off by default
+scala> println(spark.sessionState.conf.cboEnabled)
+false
+
+// CBO is disabled and so only sizeInBytes stat is available
+// FIXME Why is analyzed required (not just logical)?
+val namesStatsCboOff = names.queryExecution.analyzed.stats
+scala> println(namesStatsCboOff)
+Statistics(sizeInBytes=48.0 B, hints=none)
+
+// Turn CBO on
+import org.apache.spark.sql.internal.SQLConf
+spark.sessionState.conf.setConf(SQLConf.CBO_ENABLED, true)
+
+// Make sure that CBO is really enabled
+scala> println(spark.sessionState.conf.cboEnabled)
+true
+
+// Invalidate the stats cache
+names.queryExecution.analyzed.invalidateStatsCache
+
+// Check out the statistics
+val namesStatsCboOn = names.queryExecution.analyzed.stats
+scala> println(namesStatsCboOn)
+Statistics(sizeInBytes=48.0 B, hints=none)
+
+// Despite CBO enabled, we can only get sizeInBytes stat
+// That's because names is a LocalRelation under the covers
+scala> println(names.queryExecution.optimizedPlan.numberedTreeString)
+00 LocalRelation [id#5, name#6]
+
+// LocalRelation triggers BasicStatsPlanVisitor to execute default case
+// which is exactly as if we had CBO turned off
+
+// Let's register names as a managed table
+// That will change the rules of how stats are computed
+import org.apache.spark.sql.SaveMode
+names.write.mode(SaveMode.Overwrite).saveAsTable("names")
+
+scala> spark.catalog.tableExists("names")
+res5: Boolean = true
+
+scala> spark.catalog.listTables.filter($"name" === "names").show
++-----+--------+-----------+---------+-----------+
+| name|database|description|tableType|isTemporary|
++-----+--------+-----------+---------+-----------+
+|names| default|       null|  MANAGED|      false|
++-----+--------+-----------+---------+-----------+
+
+val namesTable = spark.table("names")
+
+// names is a managed table now
+// And Relation (not LocalRelation)
+scala> println(namesTable.queryExecution.optimizedPlan.numberedTreeString)
+00 Relation[id#32,name#33] parquet
+
+// Check out the statistics
+val namesStatsCboOn = namesTable.queryExecution.analyzed.stats
+scala> println(namesStatsCboOn)
+Statistics(sizeInBytes=1064.0 B, hints=none)
+
+// Nothing has really changed, hasn't it?
+// Well, sizeInBytes is bigger, but that's the only stat available
+// row count stat requires ANALYZE TABLE with no NOSCAN option
+sql("ANALYZE TABLE names COMPUTE STATISTICS")
+
+// Invalidate the stats cache
+namesTable.queryExecution.analyzed.invalidateStatsCache
+
+// No change?! How so?
+val namesStatsCboOn = namesTable.queryExecution.analyzed.stats
+scala> println(namesStatsCboOn)
+Statistics(sizeInBytes=1064.0 B, hints=none)
+
+// Use optimized logical plan instead
+val namesTableStats = spark.table("names").queryExecution.optimizedPlan.stats
+scala> println(namesTableStats)
+Statistics(sizeInBytes=64.0 B, rowCount=2, hints=none)
+----
+
+NOTE: The <<stats, statistics>> of a Dataset are unaffected by link:spark-sql-CacheManager.adoc#cacheQuery[caching] it.
+
+[[statsCache]]
+`LogicalPlanStats` uses `statsCache` as a cache so the `Statistics` of a logical operator is <<stats, computed>> once only until it is <<invalidateStatsCache, invalidated>>.
+
+=== [[stats]] `stats` Method
+
+[source, scala]
+----
+stats: Statistics
+----
+
+`stats` gets the `Statistics` from <<statsCache, statsCache>> if available.
+
+If `statsCache` does not have the `Statistics`, `stats` branches off per whether link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled] or not.
+
+NOTE: Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`. It is disabled by default.
+
+With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization enabled] `statsCache` requests `BasicStatsPlanVisitor` to compute the `Statistics`.
+
+With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization disabled] `statsCache` requests `SizeInBytesOnlyStatsPlanVisitor` to compute the `Statistics`.
+
+`statsCache` caches the `Statistics` for later use.
+
+[NOTE]
+====
+`stats` is used when:
+
+1. `JoinSelection` execution planning strategy matches a logical plan:
+  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[that is small enough for broadcast join] (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
+  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[whose a single partition should be small enough to build a hash table] (using `ShuffledHashJoinExec` physical operator)
+  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[that is much smaller (3X) than the other plan] (for `ShuffledHashJoinExec` physical operator)
+  i. ...
+
+1. `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
+
+1. `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset] or link:spark-sql-CacheManager.adoc#recacheByCondition[recacheByCondition]
+
+1. `HiveMetastoreCatalog` is requested to `convertToLogicalRelation`
+
+1. `StarSchemaDetection`
+
+1. `CostBasedJoinReorder` is link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#apply[executed] (and does link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#reorder[reordering])
+====
+
+=== [[invalidateStatsCache]] `invalidateStatsCache` Method
+
+[source, scala]
+----
+invalidateStatsCache(): Unit
+----
+
+`invalidateStatsCache`...FIXME
+
+NOTE: `invalidateStatsCache` is used when...FIXME

@@ -19,6 +19,10 @@ A new <<CachedData, CachedData>> is added when <<cacheQuery, a Dataset is cached
 
 `cachedData` is <<clearCache, cleared>> when...FIXME
 
+=== [[recacheByCondition]] `recacheByCondition` Method
+
+CAUTION: FIXME
+
 === [[invalidateCachedPath]] `invalidateCachedPath` Method
 
 CAUTION: FIXME

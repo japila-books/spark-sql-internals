@@ -123,6 +123,17 @@ NOTE: `QueryExecution` belongs to `org.apache.spark.sql.execution` package.
 
 NOTE: `QueryExecution` is a transient feature of a link:spark-sql-Dataset.adoc[Dataset], i.e. it is not preserved across serializations.
 
+=== [[stringWithStats]] Text Representation With Statistics -- `stringWithStats` Method
+
+[source, scala]
+----
+stringWithStats: String
+----
+
+`stringWithStats`...FIXME
+
+NOTE: `stringWithStats` is used exclusively when `ExplainCommand` command is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed] (with `cost` flag enabled).
+
 === [[simpleString]] `simpleString` Method
 
 CAUTION: FIXME

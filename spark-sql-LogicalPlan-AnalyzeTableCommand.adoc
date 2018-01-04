@@ -24,12 +24,12 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
-`run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view.
+`run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 
-NOTE: `run` uses the input `SparkSession` to access the session-specific link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn is used to access the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access the session-specific link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn gives access to the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
 [[total-size-stat]][[row-count-stat]]
-`run` computes the link:spark-sql-CommandUtils.adoc#calculateTotalSize[total size] and, with <<noscan, NOSCAN>> flag enabled, the link:spark-sql-dataset-operators.adoc#count[row count] statistics of the table.
+`run` computes the link:spark-sql-CommandUtils.adoc#calculateTotalSize[total size] and, without <<noscan, NOSCAN>> flag, the link:spark-sql-dataset-operators.adoc#count[row count] statistics of the table.
 
 NOTE: `run` uses `SparkSession` to link:spark-sql-SparkSession.adoc#table[find the table] in a metastore.
 

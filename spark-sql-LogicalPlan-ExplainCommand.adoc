@@ -1,6 +1,6 @@
 == [[ExplainCommand]] ExplainCommand Logical Command
 
-`ExplainCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] with side effect that allows users to see how a structured query is structured and will eventually be executed, i.e. shows logical and physical plans with or without details about codegen and cost.
+`ExplainCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] with side effect that allows users to see how a structured query is structured and will eventually be executed, i.e. shows logical and physical plans with or without details about codegen and cost statistics.
 
 When <<run, executed>>, `ExplainCommand` computes a `QueryExecution` that is then used to output a single-column `DataFrame` with the following:
 
@@ -84,7 +84,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 `run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to execute commands.
+NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to execute a logical command.
 
 Internally, `run` creates a `IncrementalExecution` for a streaming dataset directly or requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the `LogicalPlan`].
 
@@ -92,4 +92,4 @@ NOTE: *Streaming Dataset* is a part of Spark Structured Streaming.
 
 `run` then requests link:spark-sql-QueryExecution.adoc[QueryExecution] to build the output text representation, i.e. <<codegenString, codegened>>, link:spark-sql-QueryExecution.adoc#toString[extended] (with logical and physical plans), link:spark-sql-QueryExecution.adoc#toStringWithStats[with stats], or link:spark-sql-QueryExecution.adoc#simpleString[simple].
 
-In the end, `run` link:spark-sql-Row.adoc#apply[creates a `Row`] with the text representation.
+In the end, `run` link:spark-sql-Row.adoc#apply[creates] a `Row` with the text representation.
