@@ -164,10 +164,15 @@
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
 .. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Catalog]
-.. link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+
+. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics of Logical Operator]
 .. link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan]
-.. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics of Logical Operator]
-.. link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
+.. link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+.. link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor -- Computing Statistics for Cost-Based Optimization]
+... link:spark-sql-AggregateEstimation.adoc[AggregateEstimation]
+... link:spark-sql-FilterEstimation.adoc[FilterEstimation]
+... link:spark-sql-JoinEstimation.adoc[JoinEstimation]
+... link:spark-sql-ProjectEstimation.adoc[ProjectEstimation]
 
 . link:spark-sql-SparkPlan.adoc[SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query]
 .. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec Unary Operator for Broadcasting Joins]
