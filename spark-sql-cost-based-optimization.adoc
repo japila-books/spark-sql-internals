@@ -4,6 +4,8 @@
 
 Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the statistics.
 
+NOTE: Cost-based optimization is enabled when <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property is turned on, i.e. `true`, and is disabled by default.
+
 === [[statistics]] Statistics
 
 The (cost) statistics are as follows:

@@ -1,3 +1,87 @@
-== [[LogicalPlanVisitor]] LogicalPlanVisitor
+== [[LogicalPlanVisitor]] LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan
 
-`LogicalPlanVisitor` is...FIXME
+`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan the logical operators of a query plan and compute the statistics.
+
+CAUTION: FIXME What statistics?
+
+TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Visitor_pattern[Wikipedia].
+
+[[visit]]
+`LogicalPlanVisitor` defines `visit` method that dispatches computing the statistics of a logical plan to the <<handlers, corresponding handler method>>.
+
+[source, scala]
+----
+visit(p: LogicalPlan): T
+----
+
+NOTE: `T` stands for the type of an object to be computed (while visiting the query plan tree) and is currently always `Statistics`.
+
+[[contract]]
+[[handlers]]
+.LogicalPlanVisitor's Logical Operator and Handlers
+[cols="1,2",options="header",width="100%"]
+|===
+| Logical Operator
+| Handler
+
+| [[Aggregate]] link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
+| `visitAggregate`
+
+| [[Distinct]] `Distinct`
+| `visitDistinct`
+
+| [[Except]] `Except`
+| `visitExcept`
+
+| [[Expand]] link:spark-sql-LogicalPlan-Expand.adoc[Expand]
+| `visitExpand`
+
+| [[Filter]] `Filter`
+| `visitFilter`
+
+| [[Generate]] link:spark-sql-LogicalPlan-Generate.adoc[Generate]
+| `visitGenerate`
+
+| [[GlobalLimit]] `GlobalLimit`
+| `visitGlobalLimit`
+
+| [[Intersect]] `Intersect`
+| `visitIntersect`
+
+| [[Join]] link:spark-sql-LogicalPlan-Join.adoc[Join]
+| `visitJoin`
+
+| [[LocalLimit]] `LocalLimit`
+| `visitLocalLimit`
+
+| [[Pivot]] link:spark-sql-LogicalPlan-Pivot.adoc[Pivot]
+| `visitPivot`
+
+| [[Project]] link:spark-sql-LogicalPlan-Project.adoc[Project]
+| `visitProject`
+
+| [[Repartition]] link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition]
+| `visitRepartition`
+
+| [[RepartitionByExpression]] link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression]
+| `visitRepartitionByExpr`
+
+| [[ResolvedHint]] `ResolvedHint`
+| `visitHint`
+
+| [[Sample]] `Sample`
+| `visitSample`
+
+| [[ScriptTransformation]] `ScriptTransformation`
+| `visitScriptTransform`
+
+| [[Union]] `Union`
+| `visitUnion`
+
+| [[Window]] link:spark-sql-LogicalPlan-Window.adoc[Window]
+| `visitWindow`
+
+| [[LogicalPlan]] Other link:spark-sql-LogicalPlan.adoc[logical operators]
+| `default`
+
+|===
