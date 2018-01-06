@@ -1,10 +1,10 @@
-== [[ExternalCatalog]] ExternalCatalog -- Metastore of Permanent Entities
+== [[ExternalCatalog]] ExternalCatalog -- Base Metastore of Permanent Relational Entities
 
-`ExternalCatalog` is the <<contract, contract>> for a system catalog (aka _registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
+`ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
 
 [[features]]
-.ExternalCatalog Features per Entity
-[cols="2,1,1,1,1",options="header",width="100%"]
+.ExternalCatalog Features per Relational Entity
+[cols="2,^1,^1,^1,^1",options="header",width="100%"]
 |===
 | Feature
 | Function
@@ -15,38 +15,94 @@
 | Create | X | X | X | X
 | Drop | X | X | X | X
 | Rename | X | X | X |
-| Get | X | X | X |
+
+| Get
+| X
+| [[getPartition]][[getPartitionOption]] X
+| [[getTable]] X
+|
+
 | Check Existence | X | | X | X
-| List | X | X | X |
-| Alter | | X | X | X
+
+| Alter
+|
+| [[alterPartitions]] X
+| X
+| X
+
+| List
+| [[listFunctions]] X
+| [[listPartitions]][[listPartitionNames]][[listPartitionsByFilter]] X
+| [[listTables]] X
+| [[listDatabases]] X
+
 | Load | | X | X | X
 | Set | | | | X
 |===
+
+You can access the `ExternalCatalog` using link:spark-sql-SparkSession.adoc#sharedState[SharedState] of the `SparkSession`.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sharedState.externalCatalog
+org.apache.spark.sql.catalyst.catalog.ExternalCatalog
+----
+
+[[implementations]]
+.ExternalCatalogs
+[cols="1,2,2",options="header",width="100%"]
+|===
+| ExternalCatalog
+| Alias
+| Description
+
+| link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+| [[in-memory]] `in-memory`
+| An in-memory (ephemeral) system catalog
+
+| link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+| [[hive]] `hive`
+|
+|===
+
+`ExternalCatalog` is selected using link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property and can never be changed (after the very first `SparkSession` has been created).
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+import org.apache.spark.sql.internal.StaticSQLConf
+scala> spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION)
+res1: String = hive
+----
+
+[IMPORTANT]
+====
+You cannot change `ExternalCatalog` after `SparkSession` has been created using link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
+
+[source, scala]
+----
+import org.apache.spark.sql.internal.StaticSQLConf
+scala> spark.conf.set(StaticSQLConf.CATALOG_IMPLEMENTATION.key, "hive")
+org.apache.spark.sql.AnalysisException: Cannot modify the value of a static config: spark.sql.catalogImplementation;
+  at org.apache.spark.sql.RuntimeConfig.requireNonStaticConf(RuntimeConfig.scala:144)
+  at org.apache.spark.sql.RuntimeConfig.set(RuntimeConfig.scala:41)
+  ... 49 elided
+----
+====
 
 `ExternalCatalog` is a `ListenerBus` of `ExternalCatalogEventListener` listeners that handle `ExternalCatalogEvent` events.
 
 TIP: Use `addListener` and `removeListener` to register and de-register `ExternalCatalogEventListener` listeners, accordingly.
 
 TIP: Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more on Spark Core's `ListenerBus`.
-
-[[implementations]]
-.ExternalCatalogs
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Catalog Alias
-| Catalog Class
-| Description
-
-| `in-memory`
-| `org.apache.spark.sql.catalyst.catalog.InMemoryCatalog`
-| An in-memory (ephemeral) system catalog
-
-| `hive`
-| `org.apache.spark.sql.hive.HiveExternalCatalog`
-|
-|===
-
-link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property sets the current `ExternalCatalog` implementation (with `in-memory` being the default).
 
 === [[alterTableStats]] `alterTableStats` Method
 

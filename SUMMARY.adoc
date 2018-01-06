@@ -255,9 +255,6 @@
 
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 
-. link:spark-sql-SQLConf.adoc[SQLConf]
-.. link:spark-sql-CatalystConf.adoc[CatalystConf]
-
 . link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
 
@@ -267,8 +264,10 @@
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
 
-. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Metastore of Permanent Entities]
+. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
+.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
@@ -315,6 +314,8 @@
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
 
-. link:spark-sql-settings.adoc[Settings]
+. link:spark-sql-SQLConf.adoc[SQLConf]
+.. link:spark-sql-CatalystConf.adoc[CatalystConf]
+.. link:spark-sql-settings.adoc[Settings]
 
 . link:spark-logging.adoc[Logging]

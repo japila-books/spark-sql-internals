@@ -1,0 +1,158 @@
+== [[HiveExternalCatalog]] HiveExternalCatalog
+
+`HiveExternalCatalog` is...FIXME
+
+`HiveExternalCatalog` is <<creating-instance, created>> when...FIXME
+
+=== [[statsFromProperties]] Re-Creating Spark Statistics from Hive Metastore -- `statsFromProperties` Internal Method
+
+[source, scala]
+----
+statsFromProperties(
+  properties: Map[String, String],
+  table: String,
+  schema: StructType): Option[CatalogStatistics]
+----
+
+`statsFromProperties` collects the `properties` with the keys with *spark.sql.statistics.* prefix.
+
+`statsFromProperties` re-creates `ColumnStat` for every column in `schema`.
+
+CAUTION: FIXME Review how `ColumnStat` are re-created
+
+`statsFromProperties` creates a link:spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] with the following properties:
+
+* link:spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize*
+* link:spark-sql-CatalogStatistics.adoc#rowCount[rowCount] as *spark.sql.statistics.numRows*
+* link:spark-sql-CatalogStatistics.adoc#colStats[colStats] as...FIXME (see above)
+
+Otherwise, `statsFromProperties` returns `None` if there are no keys with *spark.sql.statistics.* prefix.
+
+NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
+
+=== [[restoreTableMetadata]] `restoreTableMetadata` Internal Method
+
+[source, scala]
+----
+restoreTableMetadata(inputTable: CatalogTable): CatalogTable
+----
+
+`restoreTableMetadata`...FIXME
+
+[NOTE]
+====
+`restoreTableMetadata` is used when `HiveExternalCatalog` is requested for:
+
+1. <<doAlterTableStats, doAlterTableStats>>
+1. <<alterPartitions, alterPartitions>>
+1. <<getTable, getTable>>
+1. <<listPartitionsByFilter, listPartitionsByFilter>>
+====
+
+=== [[listPartitionsByFilter]] `listPartitionsByFilter` Method
+
+[source, scala]
+----
+listPartitionsByFilter(
+  db: String,
+  table: String,
+  predicates: Seq[Expression],
+  defaultTimeZoneId: String): Seq[CatalogTablePartition]
+----
+
+NOTE: `listPartitionsByFilter` is a part of link:spark-sql-ExternalCatalog.adoc#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
+
+`listPartitionsByFilter`...FIXME
+
+=== [[alterPartitions]] `alterPartitions` Method
+
+[source, scala]
+----
+alterPartitions(
+  db: String,
+  table: String,
+  newParts: Seq[CatalogTablePartition]): Unit
+----
+
+NOTE: `alterPartitions` is a part of link:spark-sql-ExternalCatalog.adoc#alterPartitions[ExternalCatalog Contract] to...FIXME.
+
+`alterPartitions`...FIXME
+
+=== [[getTable]] `getTable` Method
+
+[source, scala]
+----
+getTable(db: String, table: String): CatalogTable
+----
+
+NOTE: `getTable` is a part of link:spark-sql-ExternalCatalog.adoc#getTable[ExternalCatalog Contract] to...FIXME.
+
+`getTable`...FIXME
+
+=== [[doAlterTableStats]] `doAlterTableStats` Method
+
+[source, scala]
+----
+doAlterTableStats(
+  db: String,
+  table: String,
+  stats: Option[CatalogStatistics]): Unit
+----
+
+NOTE: `doAlterTableStats` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to...FIXME.
+
+`doAlterTableStats`...FIXME
+
+=== [[restorePartitionMetadata]] `restorePartitionMetadata` Internal Method
+
+[source, scala]
+----
+restorePartitionMetadata(
+  partition: CatalogTablePartition,
+  table: CatalogTable): CatalogTablePartition
+----
+
+`restorePartitionMetadata`...FIXME
+
+[NOTE]
+====
+`restorePartitionMetadata` is used when `HiveExternalCatalog` is requested for:
+
+1. <<getPartition, getPartition>>
+1. <<getPartitionOption, getPartitionOption>>
+====
+
+=== [[getPartition]] `getPartition` Method
+
+[source, scala]
+----
+getPartition(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): CatalogTablePartition
+----
+
+NOTE: `getPartition` is a part of link:spark-sql-ExternalCatalog.adoc#getPartition[ExternalCatalog Contract] to...FIXME.
+
+`getPartition`...FIXME
+
+=== [[getPartitionOption]] `getPartitionOption` Method
+
+[source, scala]
+----
+getPartitionOption(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): Option[CatalogTablePartition]
+----
+
+NOTE: `getPartitionOption` is a part of link:spark-sql-ExternalCatalog.adoc#getPartitionOption[ExternalCatalog Contract] to...FIXME.
+
+`getPartitionOption`...FIXME
+
+=== [[creating-instance]] Creating HiveExternalCatalog Instance
+
+`HiveExternalCatalog` takes the following when created:
+
+* [[conf]] Spark configuration (i.e. `SparkConf`)
+* [[hadoopConf]] Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]

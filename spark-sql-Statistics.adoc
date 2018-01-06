@@ -16,13 +16,13 @@ NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonym
 
 1. link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[Leaf logical operators] (specifically) and link:spark-sql-LogicalPlanStats.adoc#stats[logical operators] (in general) are requested for cost statistics
 
-1. `CatalogStatistics` is requested for link:spark-sql-CatalogStatistics.adoc#toPlanStats[plan statistics]
+1. link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for cost statistics (through link:spark-sql-CatalogStatistics.adoc#toPlanStats[CatalogStatistics])
 
 [NOTE]
 ====
 link:spark-sql-CatalogStatistics.adoc[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, broadcast hint>> in link:spark-sql-ExternalCatalog.adoc[metastore]).
 
-`CatalogStatistics` can be link:spark-sql-CatalogStatistics.adoc#toPlanStats[converted] to `Statistics`.
+`CatalogStatistics` are statistics stored in an external catalog (usually a Hive metastore) and are often referred as *Hive statistics* while `Statistics` represents the *Spark statistics*.
 ====
 
 [[simpleString]][[toString]]

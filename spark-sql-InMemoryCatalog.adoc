@@ -1,0 +1,3 @@
+== [[InMemoryCatalog]] InMemoryCatalog
+
+`InMemoryCatalog` is...FIXME

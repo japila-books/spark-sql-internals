@@ -24,14 +24,14 @@ val spark: SparkSession = SparkSession.builder
 
 | [[spark.sql.catalogImplementation]] `spark.sql.catalogImplementation`
 | `in-memory`
-a| (internal) Selects the active catalog implementation from:
+a| (internal) Selects the active catalog implementation from the available link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalogs]:
 
-* `in-memory`
-* `hive`
+* link:spark-sql-ExternalCatalog.adoc#in-memory[in-memory]
+* link:spark-sql-ExternalCatalog.adoc#hive[hive]
 
-TIP: Read link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- System Catalog of Permanent Entities].
+TIP: Read link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities].
 
-TIP: You can enable Hive support in a `SparkSession` using link:spark-sql-SparkSession.adoc#enableHiveSupport[`enableHiveSupport` builder method].
+TIP: You can enable Hive support (e.g. a persistent Hive metastore) in a `SparkSession` using link:spark-sql-SparkSession.adoc#enableHiveSupport[enableHiveSupport] builder method.
 
 | [[spark.sql.sources.default]] `spark.sql.sources.default`
 | `parquet`

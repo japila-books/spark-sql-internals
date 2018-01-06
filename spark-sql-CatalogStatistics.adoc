@@ -1,7 +1,7 @@
 == [[CatalogStatistics]] CatalogStatistics -- Table Statistics in Metastore (External Catalog)
 
 [[creating-instance]][[table-statistics]]
-`CatalogStatistics` holds the estimates of <<table-statistics, table statistics>>:
+`CatalogStatistics` are the estimates of <<table-statistics, table statistics>> that are stored in an link:spark-sql-ExternalCatalog.adoc[external catalog] (aka _metastore_):
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
 * [[rowCount]] Optional estimated *number of rows* (aka _row count_)
@@ -11,8 +11,10 @@
 ====
 `CatalogStatistics` is a "subset" of the statistics in link:spark-sql-Statistics.adoc[Statistics] (as there are no concepts of link:spark-sql-Statistics.adoc#attributeStats[attributes] and link:spark-sql-Statistics.adoc#hints[broadcast hint] in metastore).
 
-`CatalogStatistics` can be converted to link:spark-sql-Statistics.adoc[Statistics] using <<toPlanStats, toPlanStats>> method.
+`CatalogStatistics` are often stored in a Hive metastore and are referred as *Hive statistics* while `Statistics` are the *Spark statistics*.
 ====
+
+`CatalogStatistics` can be converted to link:spark-sql-Statistics.adoc[Spark statistics] using <<toPlanStats, toPlanStats>> method.
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
@@ -20,7 +22,7 @@
 
 1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
 
-1. `HiveExternalCatalog` is requested for `statsFromProperties`
+1. `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[statistics] (from a Hive Metastore)
 
 1. `DetermineTableStats` and `PruneFileSourcePartitions` logical rules are executed
 
@@ -74,7 +76,7 @@ CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 
 [NOTE]
 ====
-`toPlanStats` does the reverse of `HiveExternalCatalog.statsToProperties`.
+`toPlanStats` does the reverse of link:spark-sql-HiveExternalCatalog.adoc#statsToProperties[HiveExternalCatalog.statsToProperties].
 
 [source, scala]
 ----
@@ -82,4 +84,4 @@ FIXME Example
 ----
 ====
 
-NOTE: `toPlanStats` is used when...FIXME
+NOTE: `toPlanStats` is used when link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics.
