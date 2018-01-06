@@ -5,7 +5,7 @@
 [[statsCache]]
 With `LogicalPlanStats` every logical operator has <<stats, statistics>> that are computed only once when requested and are cached until <<invalidateStatsCache, invalidated>> and requested again.
 
-Depending on link:spark-sql-cost-based-optimization.adoc[cost-based optimization] being enabled or not,  <<stats, stats>> computes the `Statistics` with FIXME or FIXME, respectively.
+Depending on link:spark-sql-cost-based-optimization.adoc[cost-based optimization] being enabled or not, <<stats, stats>> computes the link:spark-sql-Statistics.adoc[statistics] with FIXME or FIXME, respectively.
 
 NOTE: Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
@@ -143,7 +143,7 @@ NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of it
 stats: Statistics
 ----
 
-`stats` gets the `Statistics` from <<statsCache, statsCache>> if already computed. Otherwise, `stats` branches off per whether link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled] or not.
+`stats` gets the link:spark-sql-Statistics.adoc[statistics] from <<statsCache, statsCache>> if already computed. Otherwise, `stats` branches off per whether link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled] or not.
 
 [NOTE]
 ====
@@ -163,12 +163,12 @@ false
 ====
 
 [[stats-cbo-disabled]]
-With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization disabled] `stats` requests `SizeInBytesOnlyStatsPlanVisitor` to compute the `Statistics`.
+With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization disabled] `stats` requests `SizeInBytesOnlyStatsPlanVisitor` to compute the statistics.
 
 [[stats-cbo-enabled]]
-With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization enabled] `stats` requests `BasicStatsPlanVisitor` to compute the `Statistics`.
+With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization enabled] `stats` requests `BasicStatsPlanVisitor` to compute the statistics.
 
-`statsCache` caches the `Statistics` for later use.
+In the end, `statsCache` caches the statistics for later use.
 
 [NOTE]
 ====

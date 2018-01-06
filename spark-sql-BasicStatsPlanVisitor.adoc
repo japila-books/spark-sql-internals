@@ -1,6 +1,6 @@
 == [[BasicStatsPlanVisitor]] BasicStatsPlanVisitor -- Computing Statistics for Cost-Based Optimization
 
-`BasicStatsPlanVisitor` is a link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor] that computes the statistics of a logical query plan for link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`BasicStatsPlanVisitor` is a link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor] that computes the link:spark-sql-Statistics.adoc[statistics] of a logical query plan for link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
 `BasicStatsPlanVisitor` is used exclusively when a link:spark-sql-LogicalPlanStats.adoc#stats[logical operator is requested for the statistics] with link:spark-sql-LogicalPlanStats.adoc#stats-cbo-enabled[cost-based optimization enabled].
 

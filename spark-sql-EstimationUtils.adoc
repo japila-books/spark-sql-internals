@@ -1,0 +1,17 @@
+== [[EstimationUtils]] EstimationUtils
+
+`EstimationUtils` is...FIXME
+
+=== [[getOutputSize]] `getOutputSize` Method
+
+[source, scala]
+----
+getOutputSize(
+  attributes: Seq[Attribute],
+  outputRowCount: BigInt,
+  attrStats: AttributeMap[ColumnStat] = AttributeMap(Nil)): BigInt
+----
+
+`getOutputSize`...FIXME
+
+NOTE: `getOutputSize` is used when...FIXME

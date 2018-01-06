@@ -241,7 +241,7 @@ toStringWithStats: String
 
 `toStringWithStats` is a mere alias for <<completeString, completeString>> with `appendStats` flag enabled.
 
-NOTE: `toStringWithStats` is a custom <<toString, toString>> with cost statistics.
+NOTE: `toStringWithStats` is a custom <<toString, toString>> with link:spark-sql-Statistics.adoc[cost statistics].
 
 [source, scala]
 ----

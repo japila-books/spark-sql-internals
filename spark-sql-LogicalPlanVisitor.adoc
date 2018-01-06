@@ -1,6 +1,6 @@
 == [[LogicalPlanVisitor]] LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan
 
-`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan the logical operators of a query plan and compute the statistics.
+`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute the statistics.
 
 CAUTION: FIXME What statistics?
 
@@ -14,7 +14,21 @@ TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Vi
 visit(p: LogicalPlan): T
 ----
 
-NOTE: `T` stands for the type of an object to be computed (while visiting the query plan tree) and is currently always `Statistics`.
+NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always link:spark-sql-Statistics.adoc[Statistics] only.
+
+[[implementations]]
+.LogicalPlanVisitors
+[cols="1,2",options="header",width="100%"]
+|===
+| LogicalPlanVisitor
+| Description
+
+| link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
+|
+
+| link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+|
+|===
 
 [[contract]]
 [[handlers]]
