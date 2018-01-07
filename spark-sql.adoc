@@ -165,7 +165,7 @@ Spark SQL defines the following types of functions:
 * link:spark-sql-basic-aggregation.adoc[basic aggregate functions] that operate on a group of rows and calculate a single return value per group.
 * link:spark-sql-functions-windows.adoc[window aggregate functions] that operate on a group of rows and calculate a single return value for each row in a group.
 
-There are two supported *catalog* implementations -- `in-memory` (default) and `hive` -- that you can set using link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property.
+There are two supported *catalog* implementations -- `in-memory` (default) and `hive` -- that you can set using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property.
 
 From user@spark:
 

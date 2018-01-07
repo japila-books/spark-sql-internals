@@ -5,7 +5,7 @@
 . link:spark-sql.adoc[Spark SQL -- Batch Queries Over Structured Data on Massive Scale]
 
 . link:spark-sql-SparkSession.adoc[SparkSession -- The Entry Point to Spark SQL]
-.. link:spark-sql-sparksession-builder.adoc[Builder -- Building SparkSession using Fluent API]
+.. link:spark-sql-SparkSession-Builder.adoc[Builder -- Building SparkSession using Fluent API]
 .. link:spark-sql-SparkSession-SharedState.adoc[SharedState -- Shared State Across SparkSessions]
 
 . link:spark-sql-Dataset.adoc[Dataset -- Strongly-Typed Structured Query with Encoder]
@@ -314,7 +314,8 @@
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
 
-. link:spark-sql-SQLConf.adoc[SQLConf]
+. link:spark-sql-SQLConf.adoc[SQLConf -- Internal Configuration Store]
+.. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
 .. link:spark-sql-settings.adoc[Settings]
 

@@ -2,7 +2,7 @@
 
 The following list are the settings used to configure Spark SQL applications.
 
-You can set them in a link:spark-sql-SparkSession.adoc[SparkSession] upon instantiation using link:spark-sql-sparksession-builder.adoc#config[config] method.
+You can set them in a link:spark-sql-SparkSession.adoc[SparkSession] while creating a new instance using link:spark-sql-SparkSession-Builder.adoc#config[config] method.
 
 [source, scala]
 ----
@@ -13,7 +13,7 @@ val spark: SparkSession = SparkSession.builder
   .config("spark.sql.warehouse.dir", "c:/Temp") // <1>
   .getOrCreate
 ----
-<1> Sets <<spark_sql_warehouse_dir, spark.sql.warehouse.dir>> for the Spark SQL session
+<1> Sets link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] for the Spark SQL session
 
 .Spark SQL Properties
 [cols="1,1,2",options="header",width="100%"]
@@ -21,17 +21,6 @@ val spark: SparkSession = SparkSession.builder
 | Name
 | Default
 | Description
-
-| [[spark.sql.catalogImplementation]] `spark.sql.catalogImplementation`
-| `in-memory`
-a| (internal) Selects the active catalog implementation from the available link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalogs]:
-
-* link:spark-sql-ExternalCatalog.adoc#in-memory[in-memory]
-* link:spark-sql-ExternalCatalog.adoc#hive[hive]
-
-TIP: Read link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities].
-
-TIP: You can enable Hive support (e.g. a persistent Hive metastore) in a `SparkSession` using link:spark-sql-SparkSession.adoc#enableHiveSupport[enableHiveSupport] builder method.
 
 | [[spark.sql.sources.default]] `spark.sql.sources.default`
 | `parquet`
@@ -54,12 +43,6 @@ Used when:
 
 When a query execution finishes, the execution is removed from the internal `activeExecutions` registry and stored in `failedExecutions` or `completedExecutions` given the end execution status. It is when `SQLListener` makes sure that the number of `SQLExecutionUIData` entires does not exceed `spark.sql.ui.retainedExecutions` Spark property and removes the excess of entries.
 |===
-
-=== [[spark_sql_warehouse_dir]] spark.sql.warehouse.dir
-
-`spark.sql.warehouse.dir` (default: `${system:user.dir}/spark-warehouse`) is the default location of Hive warehouse directory (using Derby) with managed databases and tables.
-
-See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 
 === [[spark.sql.parquet.filterPushdown]] spark.sql.parquet.filterPushdown
 

@@ -45,7 +45,7 @@ NOTE: `hive-site.xml` is an optional Hive configuration file when working with H
 
 `SharedState` is created lazily, i.e. when first accessed after `SparkSession` <<creating-instance, is created>>. It can happen when a <<newSession, new session is created>> or when the shared services are accessed.
 
-When created, `SharedState` sets `hive.metastore.warehouse.dir` to link:spark-sql-settings.adoc#spark_sql_warehouse_dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is not set or `spark.sql.warehouse.dir` is set. Otherwise, when `hive.metastore.warehouse.dir` is set and `spark.sql.warehouse.dir` is not, `spark.sql.warehouse.dir` gets set to `hive.metastore.warehouse.dir`.
+When created, `SharedState` sets `hive.metastore.warehouse.dir` to link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is not set or `spark.sql.warehouse.dir` is set. Otherwise, when `hive.metastore.warehouse.dir` is set and `spark.sql.warehouse.dir` is not, `spark.sql.warehouse.dir` gets set to `hive.metastore.warehouse.dir`.
 
 You should see the following INFO message in the logs:
 
@@ -71,3 +71,17 @@ log4j.logger.org.apache.spark.sql.internal.SharedState=INFO
 
 Refer to link:spark-logging.adoc[Logging].
 ====
+
+=== [[externalCatalogClassName]] `externalCatalogClassName` Internal Method
+
+[source, scala]
+----
+externalCatalogClassName(conf: SparkConf): String
+----
+
+`externalCatalogClassName` gives the name of the class of the link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalog] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
+
+* link:spark-sql-HiveExternalCatalog.adoc[org.apache.spark.sql.hive.HiveExternalCatalog] for `hive`
+* link:spark-sql-InMemoryCatalog.adoc[org.apache.spark.sql.catalyst.catalog.InMemoryCatalog] for `in-memory`
+
+NOTE: `externalCatalogClassName` is used exclusively when `SharedState` is requested for the <<externalCatalog, ExternalCatalog>>.

@@ -1,0 +1,61 @@
+== [[StaticSQLConf]] StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration
+
+`StaticSQLConf` holds cross-session, immutable and static SQL configuration properties.
+
+NOTE: Configuration properties in `StaticSQLConf` can only be queried and never changed after the first `SparkSession` has been created.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+import org.apache.spark.sql.internal.StaticSQLConf
+scala> val metastoreName = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
+metastoreName: String = hive
+
+scala> spark.conf.set(StaticSQLConf.CATALOG_IMPLEMENTATION.key, "hive")
+org.apache.spark.sql.AnalysisException: Cannot modify the value of a static config: spark.sql.catalogImplementation;
+  at org.apache.spark.sql.RuntimeConfig.requireNonStaticConf(RuntimeConfig.scala:144)
+  at org.apache.spark.sql.RuntimeConfig.set(RuntimeConfig.scala:41)
+  ... 50 elided
+----
+
+[[properties]]
+.StaticSQLConf's Configuration Properties
+[cols="1,1,1,2",options="header",width="100%"]
+|===
+| Name
+| Default Value
+| Scala Value
+| Description
+
+| [[spark.sql.catalogImplementation]] `spark.sql.catalogImplementation`
+| `in-memory`
+| `CATALOG_IMPLEMENTATION`
+a| Selects the active catalog implementation from the available link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalogs]:
+
+* link:spark-sql-ExternalCatalog.adoc#in-memory[in-memory]
+* link:spark-sql-ExternalCatalog.adoc#hive[hive]
+
+NOTE: Use link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] to enable Hive support (that sets `spark.sql.catalogImplementation` configuration property to `hive` when the Hive classes are available).
+
+TIP: Read link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities].
+
+Used when:
+
+1. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
+
+1. `SharedState` is requested for the link:spark-sql-SparkSession-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
+
+1. `SetCommand` command is executed (with *hive* keys)
+
+1. `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
+
+| [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir`
+| `spark-warehouse`
+| `WAREHOUSE_PATH`
+a| The directory of a Hive warehouse (using Derby) with managed databases and tables.
+
+TIP: Read the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document to learn more.
+
+|===

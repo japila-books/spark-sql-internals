@@ -71,7 +71,7 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 |
 |===
 
-`ExternalCatalog` is selected using link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property and can never be changed (after the very first `SparkSession` has been created).
+`ExternalCatalog` is selected using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property and can never be changed (after the first `SparkSession` has been created).
 
 [source, scala]
 ----
@@ -85,7 +85,7 @@ res1: String = hive
 
 [IMPORTANT]
 ====
-You cannot change `ExternalCatalog` after `SparkSession` has been created using link:spark-sql-settings.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
+You cannot change `ExternalCatalog` after `SparkSession` has been created using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
 
 [source, scala]
 ----
