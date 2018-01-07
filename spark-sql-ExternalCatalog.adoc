@@ -40,7 +40,7 @@
 | Set | | | | X
 |===
 
-You can access the `ExternalCatalog` using link:spark-sql-SparkSession.adoc#sharedState[SharedState] of the `SparkSession`.
+`ExternalCatalog` is available as link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[externalCatalog] of link:spark-sql-SparkSession.adoc#sharedState[SharedState] (in `SparkSession`).
 
 [source, scala]
 ----

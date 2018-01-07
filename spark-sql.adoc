@@ -9,17 +9,23 @@ Quoting the http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf[S
 > Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
 queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
 
-The primary difference between Spark SQL's and the "bare" Spark Core's RDD computation models is the framework for loading, querying and persisting structured and semi-structured data using *structured queries* that can be expressed using _good ol'_ *SQL*, *HiveQL* and the custom high-level SQL-like, declarative, type-safe link:spark-sql-Dataset.adoc[Dataset] API called *Structured Query DSL*.
+The primary difference between Spark SQL's and the "bare" Spark Core's RDD computation models is the framework for loading, querying and persisting structured and semi-structured datasets using *structured queries* that can be expressed using _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative type-safe link:spark-sql-Dataset.adoc[Dataset] API called *Structured Query DSL*.
 
-NOTE: Semi- and structured datasets are collections of records that can be described using link:spark-sql-schema.adoc[schema] implicitly or explicitly, respectively.
+NOTE: Semi- and structured datasets are collections of records that can be described using link:spark-sql-schema.adoc[schema].
 
-Spark SQL supports structured queries in *batch* and *streaming* modes (with the latter as a separate module of Spark SQL called link:spark-structured-streaming.adoc[Spark Structured Streaming]).
+Spark SQL supports structured queries in *batch* and *streaming* modes (with the latter as a separate module of Spark SQL called *Spark Structured Streaming*).
+
+NOTE: You can find out more on Spark Structured Streaming in https://bit.ly/spark-structured-streaming[Spark Structured Streaming (Apache Spark 2.2+)] gitbook.
+
+Regardless of the query language, i.e. SQL or Dataset API, structured queries all end up as a link:spark-sql-catalyst.adoc[tree of Catalyst expressions] that Spark optimizes using link:spark-sql-SparkOptimizer.adoc[rule-based] or link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations.
+
+As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for built-in link:spark-sql-SparkOptimizer.adoc#batches[logical] and link:spark-sql-SparkPlanner.adoc#strategies[physical] query optimization strategies).
+
+NOTE: You can find out more on Apache Spark (aka _Spark Core_) in https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2] gitbook.
+
+In other words, Spark SQL's `Dataset` API describes a distributed computation that will eventually be converted to a link:spark-sql-QueryExecution.adoc#toRdd[DAG of RDDs] for execution.
 
 NOTE: Under the covers, structured queries are automatically compiled into corresponding RDD operations.
-
-Regardless of the query language you choose queries all end up as a link:spark-sql-catalyst.adoc[tree of Catalyst expressions] with link:spark-sql-Optimizer.adoc[further optimizations] along the way to your large distributed data sets.
-
-As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions). In other words, you use Spark SQL's `Dataset` API to describe a distributed computation that eventually be converted to a link:spark-sql-QueryExecution.adoc#toRdd[DAG of RDDs].
 
 [source, scala]
 ----
