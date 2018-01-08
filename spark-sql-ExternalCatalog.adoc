@@ -12,7 +12,12 @@
 | Tables
 | Databases
 
-| Create | X | X | X | X
+| Create
+| X
+| X
+| X
+| [[createDatabase]] X
+
 | Drop | X | X | X | X
 | Rename | X | X | X |
 
@@ -98,6 +103,7 @@ org.apache.spark.sql.AnalysisException: Cannot modify the value of a static conf
 ----
 ====
 
+[[addListener]]
 `ExternalCatalog` is a `ListenerBus` of `ExternalCatalogEventListener` listeners that handle `ExternalCatalogEvent` events.
 
 TIP: Use `addListener` and `removeListener` to register and de-register `ExternalCatalogEventListener` listeners, accordingly.

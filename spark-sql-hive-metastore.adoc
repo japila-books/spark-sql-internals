@@ -1,0 +1,4 @@
+== Using External Hive Metastore
+
+1. link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
+1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession]

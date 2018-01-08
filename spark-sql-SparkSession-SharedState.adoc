@@ -1,9 +1,20 @@
 == [[SharedState]] SharedState -- Shared State Across SparkSessions
 
-`SharedState` is an internal class that holds the <<attributes, shared state>> across active link:spark-sql-SparkSession.adoc[SparkSessions].
+`SharedState` holds the <<attributes, shared state>> across multiple link:spark-sql-SparkSession.adoc[SparkSessions].
+
+`SharedState` is available as link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of a `SparkSession`.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark.sharedState
+org.apache.spark.sql.internal.SharedState
+----
 
 [[attributes]]
-.SessionState's Attributes (Shared State)
+.SharedState's Lazy Properties
 [cols="1,1,2",options="header",width="100%"]
 |===
 | Name
@@ -16,7 +27,22 @@
 
 | [[externalCatalog]] `externalCatalog`
 | link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
-|
+a| Metastore of permanent relational entities, i.e. databases, tables, partitions, and functions.
+
+---
+
+Created reflectively per <<externalCatalogClassName, spark.sql.catalogImplementation>> internal configuration property (with the current Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] as `SparkContext.hadoopConfiguration`):
+
+* link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog] for `hive`
+* link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] for `in-memory` (default)
+
+---
+
+While initialized:
+
+1. link:spark-sql-ExternalCatalog.adoc#createDatabase[Creates] the *default* database (with `default database` description and <<warehousePath, warehousePath>> location) if link:spark-sql-ExternalCatalog.adoc#databaseExists[it doesn't exist].
+
+1. link:spark-sql-ExternalCatalog.adoc#addListener[Registers] a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
 
 | [[globalTempViewManager]] `globalTempViewManager`
 | `GlobalTempViewManager`
