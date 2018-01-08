@@ -260,6 +260,8 @@
 
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Base for Builders of SessionState]
+.. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
+.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]

@@ -73,8 +73,8 @@ a|
 
 Internally, `sessionState` link:spark-sql-SessionState.adoc#clone[clones] the optional <<parentSessionState, parent `SessionState`>> (if given when <<creating-instance, creating SparkSession>>) or <<instantiateSessionState, creates a new `SessionState`>> using link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] as defined by link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property:
 
-* *in-memory* (default) for `org.apache.spark.sql.internal.SessionStateBuilder`
-* *hive* for `org.apache.spark.sql.hive.HiveSessionStateBuilder`
+* *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
+* *hive* for link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
 | [[sharedState]] `sharedState`
 | link:spark-sql-SparkSession-SharedState.adoc[SharedState]
@@ -524,13 +524,13 @@ instantiateSessionState(className: String, sparkSession: SparkSession): SessionS
 
 `instantiateSessionState` finds the `className` that is then used to link:spark-sql-BaseSessionStateBuilder.adoc#creating-instance[create] and immediatelly link:spark-sql-BaseSessionStateBuilder.adoc#build[build] a `BaseSessionStateBuilder`.
 
-`instantiateSessionState` reports a `IllegalArgumentException` while constructing a `SessionState`:
+`instantiateSessionState` may report an `IllegalArgumentException` while instantiating the class of a `SessionState`:
 
 ```
 Error while instantiating '[className]'
 ```
 
-NOTE: `instantiateSessionState` is used exclusively when `SparkSession` is requested for <<sessionState, SessionState>> (and one is not available yet).
+NOTE: `instantiateSessionState` is used exclusively when `SparkSession` is requested for <<sessionState, SessionState>> per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property (and one is not available yet).
 
 === [[sessionStateClassName]] `sessionStateClassName` Internal Method
 
@@ -541,7 +541,7 @@ sessionStateClassName(conf: SparkConf): String
 
 `sessionStateClassName` gives the name of the class of the link:spark-sql-SessionState.adoc[SessionState] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
 
-* `org.apache.spark.sql.hive.HiveSessionStateBuilder` for `hive`
-* `org.apache.spark.sql.internal.SessionStateBuilder` for `in-memory`
+* link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder] for `hive`
+* link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder] for `in-memory`
 
 NOTE: `sessionStateClassName` is used exclusively when `SparkSession` is requested for the <<sessionState, SessionState>> (and one is not available yet).

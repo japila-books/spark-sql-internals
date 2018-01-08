@@ -1,6 +1,6 @@
 == [[LogicalRelation]] LogicalRelation Logical Operator -- Adapter for BaseRelation
 
-`LogicalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that is an adapter for link:spark-sql-BaseRelation.adoc[BaseRelation] in a link:spark-sql-LogicalPlan.adoc[logical query plan].
+`LogicalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that is an adapter for link:spark-sql-BaseRelation.adoc[BaseRelation] to be part of a link:spark-sql-LogicalPlan.adoc[logical query plan].
 
 [source, scala]
 ----
@@ -16,7 +16,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 `LogicalRelation` is <<creating-instance, created>> when:
 
 * `DataFrameReader` link:spark-sql-DataFrameReader.adoc#load[loads data from a data source that supports multiple paths] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
-* `DataFrameReader` link:spark-sql-DataFrameReader.adoc#jdbc[loads data from an external table using JDBC] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
+* `DataFrameReader` is requested to load data from an external table using link:spark-sql-DataFrameReader.adoc#jdbc[JDBC] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
 * `FindDataSourceTable` converts a logical plan
@@ -27,7 +27,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 [[apply]]
 [NOTE]
 ====
-`LogicalRelation` is created using `apply` factory methods that accept <<relation, BaseRelation>> with optional <<catalogTable, CatalogTable>>.
+`LogicalRelation` can be created using `apply` factory methods that accept <<relation, BaseRelation>> with optional <<catalogTable, CatalogTable>>.
 
 [source, scala]
 ----

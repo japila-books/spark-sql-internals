@@ -1,69 +1,93 @@
 == [[BaseSessionStateBuilder]] BaseSessionStateBuilder -- Base for Builders of SessionState
 
-NOTE: `BaseSessionStateBuilder` is an experimental and unstable API. _You've been warned!_.
+`BaseSessionStateBuilder` is the <<contract, contract>> of *builder objects* that coordinate construction of a new link:spark-sql-SessionState.adoc[SessionState].
 
-`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` link:spark-sql-SparkSession.adoc#instantiateSessionState[is requested for a `SessionState`] (and also when <<newBuilder, newBuilder>> is called).
+[[implementations]]
+.BaseSessionStateBuilders
+[cols="1,2",options="header",width="100%"]
+|===
+| BaseSessionStateBuilder
+| Description
+
+| [[SessionStateBuilder]] link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
+|
+
+| [[HiveSessionStateBuilder]] link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
+|
+|===
+
+[[contract]][[newBuilder]]
+`BaseSessionStateBuilder` requires that <<implementations, implementations>> define `newBuilder` method that `SparkSession` uses (indirectly) when requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property.
 
 [source, scala]
 ----
-val spark: SparkSession = ...
-scala> spark.sessionState
-res0: org.apache.spark.sql.internal.SessionState = org.apache.spark.sql.internal.SessionState@5feb8e9a
+newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
 ----
 
-NOTE: `SessionStateBuilder` and `HiveSessionStateBuilder` are concrete `BaseSessionStateBuilder`.
+NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property allow for Hive and non-Hive Spark deployments.
+
+`BaseSessionStateBuilder` holds <<properties, properties>> that (together with <<newBuilder, newBuilder>>) are used to create a link:spark-sql-SessionState.adoc[SessionState].
 
 [[properties]]
-.BaseSessionStateBuilder's Properties (in alphabetical order)
+.BaseSessionStateBuilder's Properties
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| analyzer
-|
+| [[analyzer]] analyzer
+| link:spark-sql-Analyzer.adoc[Analyzer]
 
-| catalog
-|
+| [[catalog]] `catalog`
+| link:spark-sql-SessionCatalog.adoc[SessionCatalog]
 
-| conf
-|
+| [[conf]] `conf`
+| link:spark-sql-SQLConf.adoc[SQLConf]
 
-| createClone
-|
+| [[experimentalMethods]] `experimentalMethods`
+| link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
-| createQueryExecution
-|
+| [[extensions]] `extensions`
+| `SparkSessionExtensions`
 
-| experimentalMethods
-|
-
-| [[functionRegistry]] functionRegistry
+| [[functionRegistry]] `functionRegistry`
 | link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 
-CAUTION: FIXME Where is this used?
+| [[listenerManager]] `listenerManager`
+| `ExecutionListenerManager`
 
-| listenerManager
-|
+| [[optimizer]] `optimizer`
+| link:spark-sql-Optimizer.adoc[Optimizer]
 
-| optimizer
-|
+| [[planner]] `planner`
+| link:spark-sql-SparkPlanner.adoc[SparkPlanner]
 
-| planner
-|
+| [[resourceLoader]] `resourceLoader`
+| `SessionResourceLoader`
 
-| resourceLoader
-|
+| [[sqlParser]] `sqlParser`
+| link:spark-sql-ParserInterface.adoc[ParserInterface]
 
-| sqlParser
-|
+| [[streamingQueryManager]] `streamingQueryManager`
+| Spark Structured Streaming's `StreamingQueryManager`
 
-| streamingQueryManager
-|
-
-| udfRegistration
-|
+| [[udfRegistration]] `udfRegistration`
+| link:spark-sql-UDFRegistration.adoc[UDFRegistration]
 |===
+
+`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#instantiateSessionState[SessionState].
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState
+org.apache.spark.sql.internal.SessionState
+----
 
 [NOTE]
 ====
@@ -75,31 +99,18 @@ type NewBuilder = (SparkSession, Option[SessionState]) => BaseSessionStateBuilde
 ----
 ====
 
-=== [[contract]] BaseSessionStateBuilder Contract
+NOTE: `BaseSessionStateBuilder` is an experimental and unstable API.
+
+=== [[createClone]] Creating Function to Build SessionState -- `createClone` Method
 
 [source, scala]
 ----
-abstract class BaseSessionStateBuilder {
-  def newBuilder: NewBuilder
-}
+createClone: (SparkSession, SessionState) => SessionState
 ----
 
-.BaseSessionStateBuilder Contract (in alphabetical order)
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+`createClone` gives a function of link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-SessionState.adoc[SessionState] that executes <<newBuilder, newBuilder>> followed by <<build, build>>.
 
-| [[newBuilder]] `newBuilder`
-| Function to create a `BaseSessionStateBuilder`
-|===
-
-=== [[creating-instance]] Creating BaseSessionStateBuilder Instance
-
-`BaseSessionStateBuilder` takes the following when created:
-
-* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
-* [[parentState]] Optional link:spark-sql-SessionState.adoc[SessionState]
+NOTE: `createClone` is used exclusively when `BaseSessionStateBuilder` is requested for a <<build, SessionState>>
 
 === [[build]] Building SessionState -- `build` Method
 
@@ -108,4 +119,36 @@ abstract class BaseSessionStateBuilder {
 build(): SessionState
 ----
 
-`build` creates a link:spark-sql-SessionState.adoc[SessionState] (based on the link:spark-sql-SparkSession.adoc#sharedState[SharedState] of the input <<session, SparkSession>> and <<properties, properties>>).
+`build` creates a link:spark-sql-SessionState.adoc#creating-instance[SessionState] with the following:
+
+* link:spark-sql-SparkSession.adoc#sharedState[SharedState] of <<session, SparkSession>>
+* <<conf, SQLConf>>
+* <<experimentalMethods, ExperimentalMethods>>
+* <<functionRegistry, FunctionRegistry>>
+* <<udfRegistration, UDFRegistration>>
+* <<catalog, SessionCatalog>>
+* <<sqlParser, ParserInterface>>
+* <<analyzer, Analyzer>>
+* <<optimizer, Optimizer>>
+* <<planner, SparkPlanner>>
+* <<streamingQueryManager, StreamingQueryManager>>
+* <<listenerManager, ExecutionListenerManager>>
+* <<resourceLoader, SessionResourceLoader>>
+* <<createQueryExecution, createQueryExecution>>
+* <<createClone, createClone>>
+
+[NOTE]
+====
+`build` is used when:
+
+1. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] (and link:spark-sql-SparkSession.adoc#instantiateSessionState[builds it using a class name] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property
+
+1. `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
+====
+
+=== [[creating-instance]] Creating BaseSessionStateBuilder Instance
+
+`BaseSessionStateBuilder` takes the following when created:
+
+* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[parentState]] Optional link:spark-sql-SessionState.adoc[SessionState]

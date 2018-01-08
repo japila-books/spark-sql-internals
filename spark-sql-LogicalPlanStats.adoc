@@ -184,7 +184,7 @@ In the end, `statsCache` caches the statistics for later use.
 
 1. `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset] or link:spark-sql-CacheManager.adoc#recacheByCondition[recacheByCondition]
 
-1. `HiveMetastoreCatalog` is requested to `convertToLogicalRelation`
+1. `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 
 1. `StarSchemaDetection`
 
