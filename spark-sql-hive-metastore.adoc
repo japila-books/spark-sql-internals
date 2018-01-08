@@ -2,3 +2,90 @@
 
 1. link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
 1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession]
+
+When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by `spark.sql.warehouse.dir`, which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
+
+[NOTE]
+====
+`hive.metastore.warehouse.dir` property in `hive-site.xml` is deprecated since Spark 2.0.0. Use `spark.sql.warehouse.dir` to specify the default location of database in a Hive warehouse.
+
+You may need to grant write privilege to the user who starts the Spark application.
+====
+
+=== [[hive.metastore.warehouse.dir]] hive.metastore.warehouse.dir Configuration Property
+
+`hive.metastore.warehouse.dir` is...FIXME
+
+`SharedState` link:spark-sql-SparkSession-SharedState.adoc#hive.metastore.warehouse.dir[uses] `hive.metastore.warehouse.dir` to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if undefined.
+
+=== [[spark.hadoop]] spark.hadoop Configuration Properties
+
+CAUTION: FIXME Describe the purpose of `spark.hadoop.*` properties
+
+You can specify any of the Hadoop configuration properties, e.g. <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> with *spark.hadoop* prefix.
+
+```
+$ spark-shell --conf spark.hadoop.hive.metastore.warehouse.dir=/tmp/hive-warehouse
+...
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> spark.sharedState
+18/01/08 10:46:19 INFO SharedState: spark.sql.warehouse.dir is not set, but hive.metastore.warehouse.dir is set. Setting spark.sql.warehouse.dir to the value of hive.metastore.warehouse.dir ('/tmp/hive-warehouse').
+18/01/08 10:46:19 INFO SharedState: Warehouse path is '/tmp/hive-warehouse'.
+res1: org.apache.spark.sql.internal.SharedState = org.apache.spark.sql.internal.SharedState@5a69b3cf
+```
+
+=== [[hive-site.xml]] hive-site.xml Configuration Resource
+
+`hive-site.xml` is loaded when link:spark-sql-SparkSession-SharedState.adoc#warehousePath[SharedState] is created (which is...FIXME).
+
+Configuration of Hive is done by placing your `hive-site.xml`, `core-site.xml` (for security configuration),
+and `hdfs-site.xml` (for HDFS configuration) file in `conf/` (that is automatically added to the CLASSPATH of a Spark application).
+
+TIP: Use `--driver-class-path` or `spark.driver.extraClassPath` to point to the directory with configuration resources, e.g. `hive-site.xml`.
+
+[source, xml]
+----
+<configuration>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/tmp/hive-warehouse</value>
+    <description>Hive Metastore location</description>
+  </property>
+</configuration>
+----
+
+TIP: Read *Resources* section in Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] javadoc to learn more about configuration resources.
+
+[TIP]
+====
+Use `SparkContext.hadoopConfiguration` to know which configuration resources have already been registered.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> sc.hadoopConfiguration
+res1: org.apache.hadoop.conf.Configuration = Configuration: core-default.xml, core-site.xml, mapred-default.xml, mapred-site.xml, yarn-default.xml, yarn-site.xml
+
+// Initialize warehousePath
+scala> spark.sharedState.warehousePath
+res2: String = file:/Users/jacek/dev/oss/spark/spark-warehouse/
+
+// Note file:/Users/jacek/dev/oss/spark/spark-warehouse/ is added to configuration resources
+scala> sc.hadoopConfiguration
+res3: org.apache.hadoop.conf.Configuration = Configuration: core-default.xml, core-site.xml, mapred-default.xml, mapred-site.xml, yarn-default.xml, yarn-site.xml, file:/Users/jacek/dev/oss/spark/conf/hive-site.xml
+----
+
+Enable `org.apache.spark.sql.internal.SharedState` logger to `INFO` logging level to know where `hive-site.xml` comes from.
+
+```
+scala> spark.sharedState.warehousePath
+18/01/08 09:49:33 INFO SharedState: loading hive config file: file:/Users/jacek/dev/oss/spark/conf/hive-site.xml
+18/01/08 09:49:33 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/Users/jacek/dev/oss/spark/spark-warehouse/').
+18/01/08 09:49:33 INFO SharedState: Warehouse path is 'file:/Users/jacek/dev/oss/spark/spark-warehouse/'.
+res2: String = file:/Users/jacek/dev/oss/spark/spark-warehouse/
+```
+====

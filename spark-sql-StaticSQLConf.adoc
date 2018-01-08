@@ -54,7 +54,7 @@ Used when:
 | [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir`
 | `spark-warehouse`
 | `WAREHOUSE_PATH`
-a| The directory of a Hive warehouse (using Derby) with managed databases and tables.
+a| The directory of a Hive warehouse (using Derby) with managed databases and tables (aka _Spark warehouse_)
 
 TIP: Read the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document to learn more.
 

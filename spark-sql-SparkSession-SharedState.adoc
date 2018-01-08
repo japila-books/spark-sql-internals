@@ -1,6 +1,45 @@
-== [[SharedState]] SharedState -- Shared State Across SparkSessions
+== [[SharedState]] SharedState -- State Shared Across SparkSessions
 
-`SharedState` holds the <<attributes, shared state>> across multiple link:spark-sql-SparkSession.adoc[SparkSessions].
+`SharedState` holds the <<attributes, shared state>> across multiple link:spark-sql-SparkSession.adoc#newSession[SparkSessions].
+
+[[attributes]]
+.SharedState's Properties
+[cols="1,1,2",options="header",width="100%"]
+|===
+| Name
+| Type
+| Description
+
+| [[cacheManager]] `cacheManager`
+| link:spark-sql-CacheManager.adoc[CacheManager]
+|
+
+| [[externalCatalog]] <<externalCatalog-indepth, externalCatalog>>
+| link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
+a| Metastore of permanent relational entities, i.e. databases, tables, partitions, and functions.
+
+NOTE: `externalCatalog` is initialized lazily on the first access.
+
+| [[globalTempViewManager]] `globalTempViewManager`
+| `GlobalTempViewManager`
+|
+
+| [[jarClassLoader]] `jarClassLoader`
+| `NonClosableMutableURLClassLoader`
+|
+
+| [[sparkContext]] `sparkContext`
+| `SparkContext`
+| Spark Core's `SparkContext`
+
+| [[statusStore]] `statusStore`
+| link:spark-sql-SQLAppStatusStore.adoc[SQLAppStatusStore]
+|
+
+| [[warehousePath]] <<warehousePath-indepth, warehousePath>>
+| `String`
+| Warehouse path
+|===
 
 `SharedState` is available as link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of a `SparkSession`.
 
@@ -13,77 +52,19 @@ scala> :type spark.sharedState
 org.apache.spark.sql.internal.SharedState
 ----
 
-[[attributes]]
-.SharedState's Lazy Properties
-[cols="1,1,2",options="header",width="100%"]
-|===
-| Name
-| Type
-| Description
+`SharedState` is shared across `SparkSessions`.
 
-| [[cacheManager]] `cacheManager`
-| link:spark-sql-CacheManager.adoc[CacheManager]
-|
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
 
-| [[externalCatalog]] `externalCatalog`
-| link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
-a| Metastore of permanent relational entities, i.e. databases, tables, partitions, and functions.
+scala> spark.newSession.sharedState == spark.sharedState
+res1: Boolean = true
+----
 
----
-
-Created reflectively per <<externalCatalogClassName, spark.sql.catalogImplementation>> internal configuration property (with the current Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] as `SparkContext.hadoopConfiguration`):
-
-* link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog] for `hive`
-* link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] for `in-memory` (default)
-
----
-
-While initialized:
-
-1. link:spark-sql-ExternalCatalog.adoc#createDatabase[Creates] the *default* database (with `default database` description and <<warehousePath, warehousePath>> location) if link:spark-sql-ExternalCatalog.adoc#databaseExists[it doesn't exist].
-
-1. link:spark-sql-ExternalCatalog.adoc#addListener[Registers] a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
-
-| [[globalTempViewManager]] `globalTempViewManager`
-| `GlobalTempViewManager`
-|
-
-| [[jarClassLoader]] `jarClassLoader`
-| `NonClosableMutableURLClassLoader`
-|
-
-| [[listener]] `listener`
-| link:spark-sql-SQLListener.adoc[SQLListener]
-|
-
-| [[sparkContext]] `sparkContext`
-| link:spark-SparkContext.adoc[SparkContext]
-|
-
-| [[warehousePath]] `warehousePath`
-|
-|
-|===
-
-`SharedState` takes a link:spark-SparkContext.adoc[SparkContext] when created. It also adds `hive-site.xml` to link:spark-SparkContext.adoc#hadoopConfiguration[Hadoop's `Configuration` in the current SparkContext] if found on CLASSPATH.
-
-NOTE: `hive-site.xml` is an optional Hive configuration file when working with Hive in Spark.
-
-`SharedState` is created lazily, i.e. when first accessed after `SparkSession` <<creating-instance, is created>>. It can happen when a <<newSession, new session is created>> or when the shared services are accessed.
-
-When created, `SharedState` sets `hive.metastore.warehouse.dir` to link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is not set or `spark.sql.warehouse.dir` is set. Otherwise, when `hive.metastore.warehouse.dir` is set and `spark.sql.warehouse.dir` is not, `spark.sql.warehouse.dir` gets set to `hive.metastore.warehouse.dir`.
-
-You should see the following INFO message in the logs:
-
-```
-INFO spark.sql.warehouse.dir is not set, but hive.metastore.warehouse.dir is set. Setting spark.sql.warehouse.dir to the value of hive.metastore.warehouse.dir ('[hiveWarehouseDir]').
-```
-
-You should see the following INFO message in the logs:
-
-```
-INFO SharedState: Warehouse path is '[warehousePath]'.
-```
+[[creating-instance]]
+`SharedState` is created exclusively when accessed using link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of `SparkSession`.
 
 [TIP]
 ====
@@ -97,6 +78,69 @@ log4j.logger.org.apache.spark.sql.internal.SharedState=INFO
 
 Refer to link:spark-logging.adoc[Logging].
 ====
+
+=== [[warehousePath-indepth]] warehousePath Property
+
+[source, scala]
+----
+warehousePath: String
+----
+
+`warehousePath` is the warehouse path with the value of:
+
+1. link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] if defined and link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is not
+
+1. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is undefined
+
+You should see the following INFO message in the logs when `SharedState` is <<creating-instance, created>>:
+
+```
+INFO Warehouse path is '[warehousePath]'.
+```
+
+`warehousePath` is used exclusively when `SharedState` initializes <<externalCatalog, ExternalCatalog>> (and creates the default database in the metastore).
+
+While initialized, `warehousePath` does the following:
+
+1. Loads `hive-site.xml` if available on CLASSPATH, i.e. adds it as a configuration resource to Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (of `SparkContext`).
+
+1. Removes `hive.metastore.warehouse.dir` from `SparkConf` (of `SparkContext`) and leaves it off if defined using any of the Hadoop configuration resources.
+
+1. [[hive.metastore.warehouse.dir]] Sets link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] or link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] in the Hadoop configuration (of `SparkContext`)
+
+i. If `hive.metastore.warehouse.dir` has been defined in any of the Hadoop configuration resources but link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] has not, `spark.sql.warehouse.dir` becomes the value of `hive.metastore.warehouse.dir`.
++
+You should see the following INFO message in the logs:
++
+```
+spark.sql.warehouse.dir is not set, but hive.metastore.warehouse.dir is set. Setting spark.sql.warehouse.dir to the value of hive.metastore.warehouse.dir ('[hiveWarehouseDir]').
+```
+
+i. Otherwise, the Hadoop configuration's `hive.metastore.warehouse.dir` is set to `spark.sql.warehouse.dir`
++
+You should see the following INFO message in the logs:
++
+```
+Setting hive.metastore.warehouse.dir ('[hiveWarehouseDir]') to the value of spark.sql.warehouse.dir ('[sparkWarehouseDir]').
+```
+
+=== [[externalCatalog-indepth]] externalCatalog Property
+
+[source, scala]
+----
+externalCatalog: ExternalCatalog
+----
+
+`externalCatalog` is created reflectively per <<externalCatalogClassName, spark.sql.catalogImplementation>> internal configuration property (with the current Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] as `SparkContext.hadoopConfiguration`):
+
+* link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog] for `hive`
+* link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] for `in-memory` (default)
+
+While initialized:
+
+1. link:spark-sql-ExternalCatalog.adoc#createDatabase[Creates] the *default* database (with `default database` description and <<warehousePath, warehousePath>> location) if link:spark-sql-ExternalCatalog.adoc#databaseExists[it doesn't exist].
+
+1. link:spark-sql-ExternalCatalog.adoc#addListener[Registers] a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
 
 === [[externalCatalogClassName]] `externalCatalogClassName` Internal Method
 
