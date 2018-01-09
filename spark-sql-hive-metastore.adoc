@@ -1,12 +1,34 @@
-== Using External Hive Metastore
+== External Hive Metastore
+
+*Hive Metastore* stores the metadata of Hive tables and partitions.
+
+Metadata is persisted using http://www.datanucleus.org/[DataNucleus AccessPlatform] (and so you have to set up Hive metastore connection using *javax.jdo.option* properties).
+
+TIP: Read https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] to learn how to manage Hive Metastore.
+
+The benefits of using an external Hive metastore:
+
+1. Allow multiple Spark applications (sessions) to access it concurrently
+
+1. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
+
+NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPARK-18112 Spark2.x does not support read data from Hive 2.x metastore]) Spark SQL supports reading data from Hive 2.1.1 metastore.
+
+=== Hive Metastore Deployment Modes
+
+=== Configuring External Hive Metastore in Spark SQL
 
 In order to use an external Hive metastore you should do the following:
 
 1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
 
-1. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir Hive Configuration Property>> in <<hive-site.xml, hive-site.xml Configuration Resource>>
+1. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
+
+1. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
 1. Check out link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
+
+1. Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
 When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir], which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
 
@@ -43,12 +65,14 @@ res1: org.apache.spark.sql.internal.SharedState = org.apache.spark.sql.internal.
 
 === [[hive-site.xml]] hive-site.xml Configuration Resource
 
+`hive-site.xml` configures Hive clients (e.g. Spark SQL) with the Hive Metastore configuration.
+
 `hive-site.xml` is loaded when link:spark-sql-SparkSession-SharedState.adoc#warehousePath[SharedState] is created (which is...FIXME).
 
 Configuration of Hive is done by placing your `hive-site.xml`, `core-site.xml` (for security configuration),
 and `hdfs-site.xml` (for HDFS configuration) file in `conf/` (that is automatically added to the CLASSPATH of a Spark application).
 
-TIP: Use `--driver-class-path` or `spark.driver.extraClassPath` to point to the directory with configuration resources, e.g. `hive-site.xml`.
+TIP: You can use `--driver-class-path` or `spark.driver.extraClassPath` to point to the directory with configuration resources, e.g. `hive-site.xml`.
 
 [source, xml]
 ----
@@ -94,3 +118,155 @@ scala> spark.sharedState.warehousePath
 res2: String = file:/Users/jacek/dev/oss/spark/spark-warehouse/
 ```
 ====
+
+=== Starting Hive
+
+The following steps are for Hive and Hadoop 2.7.5.
+
+```
+$ ./bin/hdfs version
+Hadoop 2.7.5
+Subversion https://shv@git-wip-us.apache.org/repos/asf/hadoop.git -r 18065c2b6806ed4aa6a3187d77cbe21bb3dba075
+Compiled by kshvachk on 2017-12-16T01:06Z
+Compiled with protoc 2.5.0
+From source with checksum 9f118f95f47043332d51891e37f736e9
+This command was run using /Users/jacek/dev/apps/hadoop-2.7.5/share/hadoop/common/hadoop-common-2.7.5.jar
+```
+
+TIP: Read the section http://hadoop.apache.org/docs/r2.7.5/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation[Pseudo-Distributed Operation] about how to run Hadoop HDFS _"on a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process."_
+
+[TIP]
+====
+Use `hadoop.tmp.dir` configuration property as the base for temporary directories.
+
+[source, xml]
+----
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/tmp/my-hadoop-tmp-dir/hdfs/tmp</value>
+  <description>The base for temporary directories.</description>
+</property>
+----
+
+Use `./bin/hdfs getconf -confKey hadoop.tmp.dir` to check out the value
+
+```
+$ ./bin/hdfs getconf -confKey hadoop.tmp.dir
+/tmp/my-hadoop-tmp-dir/hdfs/tmp
+```
+====
+
+1. Edit `etc/hadoop/core-site.xml` to add the following:
++
+[source, xml]
+----
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+----
+
+1. `./bin/hdfs namenode -format` right after you've installed Hadoop and before starting any HDFS services (NameNode in particular)
++
+```
+$ ./bin/hdfs namenode -format
+18/01/09 15:48:28 INFO namenode.NameNode: STARTUP_MSG:
+/************************************************************
+STARTUP_MSG: Starting NameNode
+STARTUP_MSG:   host = japila.local/192.168.1.2
+STARTUP_MSG:   args = [-format]
+STARTUP_MSG:   version = 2.7.5
+...
+18/01/09 15:48:28 INFO namenode.NameNode: createNameNode [-format]
+...
+Formatting using clusterid: CID-bfdc81da-6941-4a93-8371-2c254d503a97
+...
+18/01/09 15:48:29 INFO common.Storage: Storage directory /tmp/hadoop-jacek/dfs/name has been successfully formatted.
+18/01/09 15:48:29 INFO namenode.FSImageFormatProtobuf: Saving image file /tmp/hadoop-jacek/dfs/name/current/fsimage.ckpt_0000000000000000000 using no compression
+18/01/09 15:48:29 INFO namenode.FSImageFormatProtobuf: Image file /tmp/hadoop-jacek/dfs/name/current/fsimage.ckpt_0000000000000000000 of size 322 bytes saved in 0 seconds.
+18/01/09 15:48:29 INFO namenode.NNStorageRetentionManager: Going to retain 1 images with txid >= 0
+18/01/09 15:48:29 INFO util.ExitUtil: Exiting with status 0
+```
++
+[NOTE]
+====
+Use `./bin/hdfs namenode` to start a NameNode that will tell you that the local filesystem is not ready.
+
+```
+$ ./bin/hdfs namenode
+18/01/09 15:43:11 INFO namenode.NameNode: STARTUP_MSG:
+/************************************************************
+STARTUP_MSG: Starting NameNode
+STARTUP_MSG:   host = japila.local/192.168.1.2
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 2.7.5
+...
+18/01/09 15:43:11 INFO namenode.NameNode: fs.defaultFS is hdfs://localhost:9000
+18/01/09 15:43:11 INFO namenode.NameNode: Clients are to use localhost:9000 to access this namenode/service.
+...
+18/01/09 15:43:12 INFO hdfs.DFSUtil: Starting Web-server for hdfs at: http://0.0.0.0:50070
+...
+18/01/09 15:43:13 WARN common.Storage: Storage directory /private/tmp/hadoop-jacek/dfs/name does not exist
+18/01/09 15:43:13 WARN namenode.FSNamesystem: Encountered exception loading fsimage
+org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+...
+18/01/09 15:43:13 ERROR namenode.NameNode: Failed to start namenode.
+org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+```
+====
+
+1. Start Hadoop HDFS using `./sbin/start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
++
+```
+$ ./sbin/start-dfs.sh
+Starting namenodes on [localhost]
+localhost: starting namenode, logging to /Users/jacek/dev/apps/hadoop-2.7.5/logs/hadoop-jacek-namenode-japila.local.out
+localhost: starting datanode, logging to /Users/jacek/dev/apps/hadoop-2.7.5/logs/hadoop-jacek-datanode-japila.local.out
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /Users/jacek/dev/apps/hadoop-2.7.5/logs/hadoop-jacek-secondarynamenode-japila.local.out
+```
+
+1. Use `jps -lm` to list Hadoop's JVM processes.
++
+```
+$ jps -lm
+26576 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
+26468 org.apache.hadoop.hdfs.server.datanode.DataNode
+26381 org.apache.hadoop.hdfs.server.namenode.NameNode
+```
+
+1. Create `hive-site.xml` in `$SPARK_HOME/conf` with the following:
++
+[source, xml]
+----
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>hdfs://localhost:9000/jacek/hive_warehouse</value>
+    <description>Warehouse Location</description>
+  </property>
+</configuration>
+----

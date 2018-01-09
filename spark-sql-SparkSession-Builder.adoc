@@ -44,7 +44,7 @@ CAUTION: FIXME
 enableHiveSupport(): Builder
 ----
 
-`enableHiveSupport` enables Hive support (e.g. a persistent Hive metastore, support for Hive serdes and Hive user-defined functions).
+`enableHiveSupport` enables Hive support, i.e. running structured queries on Hive tables (and a persistent Hive metastore, support for Hive serdes and Hive user-defined functions).
 
 [NOTE]
 ====
