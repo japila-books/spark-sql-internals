@@ -1,4 +1,4 @@
-== [[BaseSessionStateBuilder]] BaseSessionStateBuilder -- Base for Builders of SessionState
+== [[BaseSessionStateBuilder]] BaseSessionStateBuilder -- Generic Builder of SessionState
 
 `BaseSessionStateBuilder` is the <<contract, contract>> of *builder objects* that coordinate construction of a new link:spark-sql-SessionState.adoc[SessionState].
 
@@ -16,8 +16,22 @@
 |
 |===
 
+`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#instantiateSessionState[SessionState].
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState
+org.apache.spark.sql.internal.SessionState
+----
+
 [[contract]][[newBuilder]]
-`BaseSessionStateBuilder` requires that <<implementations, implementations>> define `newBuilder` method that `SparkSession` uses (indirectly) when requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property.
+`BaseSessionStateBuilder` requires that <<implementations, implementations>> define `newBuilder` method that `SparkSession` uses (indirectly) when requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] (per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property).
 
 [source, scala]
 ----
@@ -40,6 +54,8 @@ NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.
 
 | [[catalog]] `catalog`
 | link:spark-sql-SessionCatalog.adoc[SessionCatalog]
+
+Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
 
 | [[conf]] `conf`
 | link:spark-sql-SQLConf.adoc[SQLConf]
@@ -74,20 +90,6 @@ NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.
 | [[udfRegistration]] `udfRegistration`
 | link:spark-sql-UDFRegistration.adoc[UDFRegistration]
 |===
-
-`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#instantiateSessionState[SessionState].
-
-[source, scala]
-----
-scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
-
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sessionState
-org.apache.spark.sql.internal.SessionState
-----
 
 [NOTE]
 ====

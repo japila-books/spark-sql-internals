@@ -139,7 +139,7 @@
 .. link:spark-sql-LogicalPlan-Window.adoc[Window Unary Logical Operator]
 .. link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition Unary Logical Operator]
 
-. link:spark-sql-Analyzer.adoc[Analyzer -- Logical Plan Analyzer]
+. link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 .. link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF Logical Evaluation Rule]
 .. link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame Logical Evaluation Rule]
@@ -209,7 +209,7 @@
 
 . link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning -- Specification of Physical Operator's Output Partitions]
 
-. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner with no Hive Support]
+. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
 .. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
 .. link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation Execution Planning Strategy for Aggregate Physical Operators]
@@ -259,9 +259,9 @@
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
 
 . link:spark-sql-SessionState.adoc[SessionState]
-.. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Base for Builders of SessionState]
+.. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
 .. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
-.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
+.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder -- Builder of Hive-Specific SessionState]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
@@ -270,6 +270,8 @@
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
 .. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
 .. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+.. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog]
+.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]

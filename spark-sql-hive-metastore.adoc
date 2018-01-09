@@ -1,18 +1,23 @@
 == Using External Hive Metastore
 
-1. link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
-1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession]
+In order to use an external Hive metastore you should do the following:
 
-When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by `spark.sql.warehouse.dir`, which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
+1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
+
+1. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir Hive Configuration Property>> in <<hive-site.xml, hive-site.xml Configuration Resource>>
+
+1. Check out link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
+
+When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir], which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
 
 [NOTE]
 ====
-`hive.metastore.warehouse.dir` property in `hive-site.xml` is deprecated since Spark 2.0.0. Use `spark.sql.warehouse.dir` to specify the default location of database in a Hive warehouse.
+`hive.metastore.warehouse.dir` property in `hive-site.xml` is deprecated since Spark 2.0.0. Use `spark.sql.warehouse.dir` to specify the default location of databases in a Hive warehouse.
 
 You may need to grant write privilege to the user who starts the Spark application.
 ====
 
-=== [[hive.metastore.warehouse.dir]] hive.metastore.warehouse.dir Configuration Property
+=== [[hive.metastore.warehouse.dir]] hive.metastore.warehouse.dir Hive Configuration Property
 
 `hive.metastore.warehouse.dir` is...FIXME
 

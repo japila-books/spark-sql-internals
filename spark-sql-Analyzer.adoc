@@ -1,6 +1,6 @@
-== [[Analyzer]] Analyzer -- Logical Plan Analyzer
+== [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
 
-`Analyzer` is a *logical plan analyzer* (of structured queries) in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan* (with proper relational entities) using <<batches, logical evaluation rules>>.
+`Analyzer` is a *logical query plan analyzer* in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan* (with proper relational entities resolved) using <<batches, logical evaluation rules>>.
 
 ```
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
@@ -10,11 +10,14 @@ You can access a session-specific `Analyzer` through link:spark-sql-SessionState
 
 [source, scala]
 ----
-val spark: SparkSession = ...
-spark.sessionState.analyzer
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+scala> :type spark.sessionState.analyzer
+org.apache.spark.sql.catalyst.analysis.Analyzer
 ----
 
-You can access the analyzed logical plan of a `Dataset` using link:spark-sql-dataset-operators.adoc#explain[explain] (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` operators.
+You can access the analyzed logical plan of a `Dataset` using link:spark-sql-dataset-operators.adoc#explain[explain] (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 [source, scala]
 ----
@@ -46,8 +49,8 @@ Alternatively, you can also access the analyzed logical plan through ``QueryExec
 
 [source, scala]
 ----
-// Here with numberedTreeString to...please your eyes :)
-scala> println(inventory.queryExecution.analyzed.numberedTreeString)
+val analyzedPlan = inventory.queryExecution.analyzed
+scala> println(analyzedPlan.numberedTreeString)
 00 Project [id#78L, (id#78L + cast(5 as bigint)) AS new_column#82L]
 01 +- Range (0, 5, step=1, splits=Some(8))
 ----

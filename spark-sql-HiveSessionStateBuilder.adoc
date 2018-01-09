@@ -1,8 +1,147 @@
-== [[HiveSessionStateBuilder]] HiveSessionStateBuilder
+== [[HiveSessionStateBuilder]] HiveSessionStateBuilder -- Builder of Hive-Specific SessionState
 
-`HiveSessionStateBuilder` is a link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] that...FIXME
+`HiveSessionStateBuilder` is a link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] that has Hive-specific <<analyzer, Analyzer>>, <<planner, SparkPlanner>>, <<catalog, HiveSessionCatalog>>, <<externalCatalog, HiveExternalCatalog>> and <<resourceLoader, HiveSessionResourceLoader>>.
+
+.HiveSessionStateBuilder's Hive-Specific Properties
+image::images/spark-sql-HiveSessionStateBuilder.png[align="center"]
 
 `HiveSessionStateBuilder` is <<creating-instance, created>> (using <<newBuilder, newBuilder>>) exclusively when...FIXME
+
+.HiveSessionStateBuilder and SessionState (in SparkSession)
+image::images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="center"]
+
+[[properties]]
+.HiveSessionStateBuilder's Properties
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[analyzer]] <<analyzer-indepth, analyzer>>
+a| link:spark-sql-Analyzer.adoc[Logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
+
+| [[catalog]] `catalog`
+a| link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
+
+* <<externalCatalog, HiveExternalCatalog>>
+* link:spark-sql-SparkSession-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
+* New link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
+* link:spark-sql-BaseSessionStateBuilder.adoc#functionRegistry[FunctionRegistry]
+* link:spark-sql-BaseSessionStateBuilder.adoc#conf[SQLConf]
+* New Hadoop link:spark-sql-SessionState.adoc#newHadoopConf[Configuration]
+* link:spark-sql-BaseSessionStateBuilder.adoc#sqlParser[ParserInterface]
+* <<resourceLoader, HiveSessionResourceLoader>>
+
+NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalog`
+
+Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a `RelationConversions` (in <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
+
+| [[externalCatalog]] `externalCatalog`
+| link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+
+| [[planner]] <<planner-indepth, planner>>
+| link:spark-sql-SparkPlanner.adoc[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
+
+| [[resourceLoader]] `resourceLoader`
+| `HiveSessionResourceLoader`
+|===
+
+=== [[planner-indepth]] SparkPlanner with Hive-Specific Strategies -- `planner` Property
+
+[source, scala]
+----
+planner: SparkPlanner
+----
+
+NOTE: `planner` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#planner[BaseSessionStateBuilder Contract] to create a query planner.
+
+`planner` is a link:spark-sql-SparkPlanner.adoc[SparkPlanner] with...FIXME
+
+`planner` uses the <<planner-strategies, Hive-specific strategies>>.
+
+[[planner-strategies]]
+.Hive-Specific SparkPlanner's Hive-Specific Strategies
+[cols="1,2",options="header",width="100%"]
+|===
+| Strategy
+| Description
+
+| [[HiveTableScans]] `HiveTableScans`
+|
+
+| [[Scripts]] `Scripts`
+|
+|===
+
+=== [[analyzer-indepth]] Logical Query Plan Analyzer with Hive-Specific Rules -- `analyzer` Property
+
+[source, scala]
+----
+analyzer: Analyzer
+----
+
+NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
+
+`analyzer` is a link:spark-sql-Analyzer.adoc[Analyzer] with <<catalog, Hive-specific SessionCatalog>> (and link:spark-sql-BaseSessionStateBuilder.adoc#conf[SQLConf]).
+
+`analyzer` uses the Hive-specific <<extendedResolutionRules, extended resolution>>, <<postHocResolutionRules, postHoc resolution>> and <<extendedCheckRules, extended check>> rules.
+
+[[extendedResolutionRules]]
+.Hive-Specific Analyzer's Extended Resolution Rules
+[cols="1,2",options="header",width="100%"]
+|===
+| Logical Rule
+| Description
+
+| [[ResolveHiveSerdeTable]] `ResolveHiveSerdeTable`
+|
+
+| [[FindDataSourceTable]] `FindDataSourceTable`
+|
+
+| [[ResolveSQLOnFile]] `ResolveSQLOnFile`
+|
+|===
+
+[[postHocResolutionRules]]
+.Hive-Specific Analyzer's PostHoc Resolution Rules
+[cols="1,2",options="header",width="100%"]
+|===
+| Logical Rule
+| Description
+
+| [[DetermineTableStats]] `DetermineTableStats`
+|
+
+| [[RelationConversions]] `RelationConversions`
+|
+
+| [[PreprocessTableCreation]] `PreprocessTableCreation`
+|
+
+| [[PreprocessTableInsertion]] `PreprocessTableInsertion`
+|
+
+| [[DataSourceAnalysis]] `DataSourceAnalysis`
+|
+
+| [[HiveAnalysis]] `HiveAnalysis`
+|
+|===
+
+[[extendedCheckRules]]
+.Hive-Specific Analyzer's Extended Check Rules
+[cols="1,2",options="header",width="100%"]
+|===
+| Logical Rule
+| Description
+
+| [[PreWriteCheck]] `PreWriteCheck`
+|
+
+| [[PreReadCheck]] `PreReadCheck`
+|
+|===
 
 === [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- newBuilder Factory Method
 

@@ -1,0 +1,13 @@
+== [[HiveMetastoreCatalog]] HiveMetastoreCatalog
+
+`HiveMetastoreCatalog` is a Hive-aware SessionCatalog.
+
+`HiveMetastoreCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for link:spark-sql-HiveSessionStateBuilder.adoc#catalog[SessionCatalog].
+
+=== [[creating-instance]] Creating HiveMetastoreCatalog Instance
+
+`HiveMetastoreCatalog` takes the following when created:
+
+* HiveMetastoreCatalog
+
+`HiveMetastoreCatalog` initializes the <<internal-registries, internal registries and counters>>.

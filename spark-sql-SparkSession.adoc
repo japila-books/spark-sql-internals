@@ -522,7 +522,7 @@ NOTE: link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] is an log
 instantiateSessionState(className: String, sparkSession: SparkSession): SessionState
 ----
 
-`instantiateSessionState` finds the `className` that is then used to link:spark-sql-BaseSessionStateBuilder.adoc#creating-instance[create] and immediatelly link:spark-sql-BaseSessionStateBuilder.adoc#build[build] a `BaseSessionStateBuilder`.
+`instantiateSessionState` finds the `className` that is then used to link:spark-sql-BaseSessionStateBuilder.adoc#creating-instance[create] and link:spark-sql-BaseSessionStateBuilder.adoc#build[build] a `BaseSessionStateBuilder`.
 
 `instantiateSessionState` may report an `IllegalArgumentException` while instantiating the class of a `SessionState`:
 
