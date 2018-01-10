@@ -52,6 +52,11 @@
 .. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
 .. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder -- Builder of Hive-Specific SessionState]
 
+. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
+.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
+.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog -- Hive-Specific Metastore of Permanent Relational Entities]
+
 .. link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
 ... link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode]
 ... link:spark-sql-RelationProvider.adoc[RelationProvider -- Data Sources With Schema Inference]
@@ -267,11 +272,6 @@
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
 .. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
-
-. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
-.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
-.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
-.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]

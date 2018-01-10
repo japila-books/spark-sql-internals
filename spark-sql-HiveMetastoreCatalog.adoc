@@ -1,6 +1,6 @@
 == [[HiveMetastoreCatalog]] HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
 
-`HiveMetastoreCatalog` is a legacy link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that `HiveSessionCatalog` still uses exclusively for <<convertToLogicalRelation, converting Hive metastore relations to data source relations>> (when `RelationConversions` logical rule is executed).
+`HiveMetastoreCatalog` is a legacy link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that `HiveSessionCatalog` link:spark-sql-HiveSessionCatalog.adoc#metastoreCatalog[still uses] exclusively for <<convertToLogicalRelation, converting Hive metastore relations to data source relations>> (when `RelationConversions` logical rule is executed).
 
 `HiveMetastoreCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for link:spark-sql-HiveSessionStateBuilder.adoc#catalog[SessionCatalog] (and creates a link:spark-sql-HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog]).
 

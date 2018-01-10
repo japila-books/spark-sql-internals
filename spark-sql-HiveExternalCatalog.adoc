@@ -1,14 +1,43 @@
-== [[HiveExternalCatalog]] HiveExternalCatalog
+== [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Specific Metastore of Permanent Relational Entities
 
-`HiveExternalCatalog` is...FIXME
+`HiveExternalCatalog` is a shared link:spark-sql-ExternalCatalog.adoc[metastore of permanent relational entities] that is used when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
 
-`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the link:spark-sql-SparkSession-SharedState.adoc#externalCatalogClassName[ExternalCatalog] and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property is `hive`.
+.HiveExternalCatalog and SharedState
+image::images/spark-sql-HiveExternalCatalog.png[align="center"]
+
+`HiveExternalCatalog` is available as link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[externalCatalog] property of `SharedState` when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (that in the end sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+import org.apache.spark.sql.internal.StaticSQLConf
+val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
+scala> println(catalogType)
+hive
+
+// You could also use the property key by name
+scala> spark.conf.get("spark.sql.catalogImplementation")
+res1: String = hive
+
+val metastore = spark.sharedState.externalCatalog
+
+scala> :type metastore
+org.apache.spark.sql.catalyst.catalog.ExternalCatalog
+
+// Since Hive is enabled HiveExternalCatalog is the metastore
+scala> println(metastore)
+org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
+----
+
+`HiveExternalCatalog` is <<creating-instance, created>> exclusively when `SharedState` is requested for the link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[ExternalCatalog] for the first time (and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 [NOTE]
 ====
 link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property is `in-memory` by default.
 
-Use link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] to enable Hive support (that sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` when the Hive classes are available).
+Use link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] to enable Hive support (that sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` when the Hive classes are available).
 
 [source, scala]
 ----
@@ -18,24 +47,6 @@ val spark: SparkSession = SparkSession.builder
   .getOrCreate
 ----
 ====
-
-[source, scala]
-----
-scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
-
-import org.apache.spark.sql.internal.StaticSQLConf
-scala> val metastoreName = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
-metastoreName: String = hive
-
-val metastore = spark.sharedState.externalCatalog
-
-scala> :type metastore
-org.apache.spark.sql.catalyst.catalog.ExternalCatalog
-
-scala> println(metastore)
-org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
-----
 
 === [[statsFromProperties]] Re-Creating Spark Statistics from Hive Metastore -- `statsFromProperties` Internal Method
 
