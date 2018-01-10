@@ -45,7 +45,7 @@
 | Set | | | | X
 |===
 
-`ExternalCatalog` is available as link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[externalCatalog] of link:spark-sql-SparkSession.adoc#sharedState[SharedState] (in `SparkSession`).
+`ExternalCatalog` is available as link:spark-sql-SharedState.adoc#externalCatalog[externalCatalog] of link:spark-sql-SparkSession.adoc#sharedState[SharedState] (in `SparkSession`).
 
 [source, scala]
 ----

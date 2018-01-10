@@ -5,7 +5,7 @@
 .HiveExternalCatalog and SharedState
 image::images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is available as link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[externalCatalog] property of `SharedState` when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (that in the end sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
+`HiveExternalCatalog` is available as link:spark-sql-SharedState.adoc#externalCatalog[externalCatalog] property of `SharedState` when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (that in the end sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
 
 [source, scala]
 ----
@@ -31,7 +31,7 @@ scala> println(metastore)
 org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
 ----
 
-`HiveExternalCatalog` is <<creating-instance, created>> exclusively when `SharedState` is requested for the link:spark-sql-SparkSession-SharedState.adoc#externalCatalog[ExternalCatalog] for the first time (and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
+`HiveExternalCatalog` is <<creating-instance, created>> exclusively when `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] for the first time (and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 [NOTE]
 ====

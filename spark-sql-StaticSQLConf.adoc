@@ -45,7 +45,7 @@ Used when:
 
 1. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
 
-1. `SharedState` is requested for the link:spark-sql-SparkSession-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
+1. `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
 
 1. `SetCommand` command is executed (with *hive* keys)
 

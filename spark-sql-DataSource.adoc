@@ -282,7 +282,7 @@ Internally, `resolveRelation` creates an instance of <<providingClass, providing
 * `DataSource` <<writeAndRead, writes and reads>> the result of a link:spark-sql-DataFrame.adoc[structured query] (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 * `DataFrameReader` link:spark-sql-DataFrameReader.adoc#load[loads data from a data source that supports multiple paths]
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
-* `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-RunnableCommand-CreateDataSourceTableCommand.adoc#run[executed]
+* `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[executed]
 * `CreateTempViewUsing` runnable command is executed
 * `FindDataSourceTable` does `readDataSourceTable`
 * `ResolveSQLOnFile` converts a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])

@@ -24,7 +24,7 @@ a| link:spark-sql-Analyzer.adoc[Logical query plan analyzer] with the <<analyzer
 a| link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
 
 * <<externalCatalog, HiveExternalCatalog>>
-* link:spark-sql-SparkSession-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
+* link:spark-sql-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
 * New link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * link:spark-sql-BaseSessionStateBuilder.adoc#functionRegistry[FunctionRegistry]
 * link:spark-sql-BaseSessionStateBuilder.adoc#conf[SQLConf]

@@ -26,7 +26,7 @@ In order to use an external Hive metastore you should do the following:
 
 1. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
-1. Check out link:spark-sql-SparkSession-SharedState.adoc#warehousePath[warehousePath]
+1. Check out link:spark-sql-SharedState.adoc#warehousePath[warehousePath]
 
 1. Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
@@ -43,7 +43,7 @@ You may need to grant write privilege to the user who starts the Spark applicati
 
 `hive.metastore.warehouse.dir` is...FIXME
 
-`SharedState` link:spark-sql-SparkSession-SharedState.adoc#hive.metastore.warehouse.dir[uses] `hive.metastore.warehouse.dir` to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if undefined.
+`SharedState` link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[uses] `hive.metastore.warehouse.dir` to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if undefined.
 
 === [[spark.hadoop]] spark.hadoop Configuration Properties
 
@@ -67,7 +67,7 @@ res1: org.apache.spark.sql.internal.SharedState = org.apache.spark.sql.internal.
 
 `hive-site.xml` configures Hive clients (e.g. Spark SQL) with the Hive Metastore configuration.
 
-`hive-site.xml` is loaded when link:spark-sql-SparkSession-SharedState.adoc#warehousePath[SharedState] is created (which is...FIXME).
+`hive-site.xml` is loaded when link:spark-sql-SharedState.adoc#warehousePath[SharedState] is created (which is...FIXME).
 
 Configuration of Hive is done by placing your `hive-site.xml`, `core-site.xml` (for security configuration),
 and `hdfs-site.xml` (for HDFS configuration) file in `conf/` (that is automatically added to the CLASSPATH of a Spark application).

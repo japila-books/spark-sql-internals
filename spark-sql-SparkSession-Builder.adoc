@@ -50,7 +50,7 @@ enableHiveSupport(): Builder
 ====
 You do *not* need any existing Hive installation to use Spark's Hive support. `SparkSession` context will automatically create `metastore_db` in the current directory of a Spark application and a directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir].
 
-Refer to link:spark-sql-SparkSession-SharedState.adoc[SharedState].
+Refer to link:spark-sql-SharedState.adoc[SharedState].
 ====
 
 Internally, `enableHiveSupport` makes sure that the Hive classes are on CLASSPATH, i.e. Spark SQL's `org.apache.hadoop.hive.conf.HiveConf`, and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`.
