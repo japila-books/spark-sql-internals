@@ -143,7 +143,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | CTESubstitution
 | Resolves `With` operators (and substitutes named common table expressions -- CTEs)
 
-| [[WindowsSubstitution]] link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
+| [[WindowsSubstitution]] link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 | Substitutes link:spark-sql-Expression-WindowExpression.adoc#UnresolvedWindowExpression[UnresolvedWindowExpression] with link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] logical operators.
 
 | EliminateUnions
@@ -231,7 +231,7 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 |
 | [[ResolveWindowOrder]] ResolveWindowOrder
 |
-| [[ResolveWindowFrame]] link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
+| [[ResolveWindowFrame]] link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
 | Resolves link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] expressions
 
 | ResolveNaturalAndUsingJoin
@@ -278,7 +278,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 
 ^.^| UDF
 ^.^| `Once`
-| [[HandleNullInputsForUDF]] link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+| [[HandleNullInputsForUDF]] link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 |
 
 ^.^| FixNullability

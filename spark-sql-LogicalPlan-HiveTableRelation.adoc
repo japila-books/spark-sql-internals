@@ -2,7 +2,7 @@
 
 `HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that...FIXME
 
-`HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-Analyzer-FindDataSourceTable.adoc#readHiveTable[read a table from Hive].
+`HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-FindDataSourceTable.adoc#readHiveTable[read a table from Hive].
 
 === [[creating-instance]] Creating HiveTableRelation Instance
 

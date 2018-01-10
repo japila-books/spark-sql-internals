@@ -96,7 +96,7 @@ NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyz
 | [[ResolveHiveSerdeTable]] `ResolveHiveSerdeTable`
 |
 
-| [[FindDataSourceTable]] link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
+| [[FindDataSourceTable]] link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 |
 
 | [[ResolveSQLOnFile]] `ResolveSQLOnFile`
