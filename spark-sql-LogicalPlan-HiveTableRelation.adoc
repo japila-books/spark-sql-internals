@@ -2,6 +2,16 @@
 
 `HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that...FIXME
 
+`HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-Analyzer-FindDataSourceTable.adoc#readHiveTable[read a table from Hive].
+
+=== [[creating-instance]] Creating HiveTableRelation Instance
+
+`HiveTableRelation` takes the following when created:
+
+* [[tableMeta]] link:spark-sql-CatalogTable.adoc[Table metadata]
+* [[dataCols]] Columns (as a collection of `AttributeReferences`)
+* [[partitionCols]] Partitions (as a collection of `AttributeReferences`)
+
 === [[computeStats]] `computeStats` Method
 
 [source, scala]
@@ -11,4 +21,10 @@ computeStats(): Statistics
 
 NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
-`computeStats`...FIXME
+`computeStats` takes the link:spark-sql-CatalogTable.adoc#stats[table statistics] from the <<tableMeta, table metadata>> if defined and link:spark-sql-CatalogStatistics.adoc#toPlanStats[converts them to Spark statistics].
+
+If the table statistics are unavailable, `computeStats` reports an `IllegalStateException`.
+
+```
+table stats must be specified.
+```

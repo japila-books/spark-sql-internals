@@ -1,0 +1,14 @@
+== [[Rule]] Catalyst Rule
+
+`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. executed on) a link:spark-sql-catalyst-TreeNode.adoc[TreeNode] (usually link:spark-sql-Expression.adoc[expression trees] or link:spark-sql-LogicalPlan.adoc[logical] or link:spark-sql-SparkPlan.adoc[physical] plans).
+
+[[apply]]
+[source, scala]
+----
+apply(plan: TreeType): TreeType
+----
+
+NOTE: `TreeType` is the type of a tree that a `Rule` operates on, e.g. link:spark-sql-LogicalPlan.adoc[LogicalPlan], link:spark-sql-SparkPlan.adoc[SparkPlan] or link:spark-sql-Expression.adoc[Expression].
+
+[[ruleName]]
+`Rule` has the rule name (that is simply a class name).

@@ -1,6 +1,6 @@
-== [[CatalogTable]] CatalogTable -- Table Metadata in Internal SessionCatalog
+== [[CatalogTable]] CatalogTable -- Table Metadata in SessionCatalog
 
-`CatalogTable` is the metadata of a table in the internal link:spark-sql-SessionCatalog.adoc[SessionCatalog].
+`CatalogTable` is the metadata of a table in a link:spark-sql-SessionCatalog.adoc[SessionCatalog].
 
 [source, scala]
 ----
@@ -101,7 +101,7 @@ NOTE: `toLinkedHashMap` is used when...FIXME
 * [[lastAccessTime]] Last access time
 * [[createVersion]] Create version
 * [[properties]] Properties
-* [[stats]] Optional link:spark-sql-CatalogStatistics.adoc[CatalogStatistics]
+* [[stats]] Optional link:spark-sql-CatalogStatistics.adoc[table statistics]
 * [[viewText]] Optional view text
 * [[comment]] Optional comment
 * [[unsupportedFeatures]] Unsupported features

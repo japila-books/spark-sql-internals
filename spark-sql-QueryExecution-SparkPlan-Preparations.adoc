@@ -13,7 +13,7 @@ The page is _merely_ a compilation of what you may have found on link:spark-sql-
 
 Among the phases is the link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase that is one of the last phases in a query execution which is the result of link:spark-sql-QueryExecution.adoc#prepareForExecution[executing physical preparation rules] on a physical plan of a structured query.
 
-*Physical preparation rules* are link:spark-sql-catalyst-RuleExecutor.adoc#Rule[rules] that transform a link:spark-sql-SparkPlan.adoc[physical plan] and produce a physical plan (i.e. `Rule[SparkPlan]`).
+*Physical preparation rules* are link:spark-sql-catalyst-Rule.adoc[rules] that transform a link:spark-sql-SparkPlan.adoc[physical plan] and produce a physical plan (i.e. `Rule[SparkPlan]`).
 
 link:spark-sql-QueryExecution.adoc[QueryExecution] defines  link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of rules that are applied to a link:spark-sql-SparkPlan.adoc[physical plan] sequentially and include the following:
 

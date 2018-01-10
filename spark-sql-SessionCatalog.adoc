@@ -1,6 +1,6 @@
 == [[SessionCatalog]] SessionCatalog -- Session-Scoped Catalog of Relational Entities
 
-`SessionCatalog` is the catalog of session-scoped relational temporary and permanent relational entities, i.e. databases, tables, temporary views, partitions, and functions.
+`SessionCatalog` is the catalog of (the metadata of) session-scoped relational temporary and permanent relational entities, i.e. databases, tables, temporary views, partitions, and functions.
 
 `SessionCatalog` uses <<externalCatalog, ExternalCatalog>> for the metastore of permanent relational entities only, i.e. databases, tables, partitions, and functions.
 

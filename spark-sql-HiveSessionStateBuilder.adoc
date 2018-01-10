@@ -87,7 +87,7 @@ NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyz
 `analyzer` uses the Hive-specific <<extendedResolutionRules, extended resolution>>, <<postHocResolutionRules, postHoc resolution>> and <<extendedCheckRules, extended check>> rules.
 
 [[extendedResolutionRules]]
-.Hive-Specific Analyzer's Extended Resolution Rules
+.Hive-Specific Analyzer's Extended Resolution Rules (in the order of execution)
 [cols="1,2",options="header",width="100%"]
 |===
 | Logical Rule
@@ -96,7 +96,7 @@ NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyz
 | [[ResolveHiveSerdeTable]] `ResolveHiveSerdeTable`
 |
 
-| [[FindDataSourceTable]] `FindDataSourceTable`
+| [[FindDataSourceTable]] link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 |
 
 | [[ResolveSQLOnFile]] `ResolveSQLOnFile`

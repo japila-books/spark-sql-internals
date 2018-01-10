@@ -57,14 +57,14 @@ scala> stats.map(_.simpleString).foreach(println)
 714 bytes, 2 rows
 ----
 
-=== [[toPlanStats]] Converting CatalogStatistics to Statistics -- `toPlanStats` Method
+=== [[toPlanStats]] Converting Metastore Statistics to Spark Statistics -- `toPlanStats` Method
 
 [source, scala]
 ----
 toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
 ----
 
-`toPlanStats` converts a <<CatalogStatistics, CatalogStatistics>> to link:spark-sql-Statistics.adoc[Statistics].
+`toPlanStats` converts the table statistics (from an external metastore) to link:spark-sql-Statistics.adoc[Spark statistics].
 
 With link:spark-sql-cost-based-optimization.adoc[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a link:spark-sql-Statistics.adoc[Statistics] with the link:spark-sql-EstimationUtils.adoc#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
 

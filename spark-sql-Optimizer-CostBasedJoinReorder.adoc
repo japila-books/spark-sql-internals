@@ -1,6 +1,6 @@
 == [[CostBasedJoinReorder]] CostBasedJoinReorder Logical Optimization Rule -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a link:spark-sql-catalyst-RuleExecutor.adoc#Rule[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[rule-based Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[rule-based Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
 `CostBasedJoinReorder` <<apply, executes>> (i.e. optimizes a logical plan) only when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] properties are both enabled.
 
@@ -45,7 +45,7 @@ Refer to link:spark-logging.adoc[Logging].
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-RuleExecutor.adoc#apply[Rule Contract] to execute a rule.
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule.
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[LogicalPlan] down to <<reorder, reorder>> the following logical operators:
 

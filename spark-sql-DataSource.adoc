@@ -284,7 +284,7 @@ Internally, `resolveRelation` creates an instance of <<providingClass, providing
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[executed]
 * `CreateTempViewUsing` runnable command is executed
-* `FindDataSourceTable` does `readDataSourceTable`
+* `FindDataSourceTable` does link:spark-sql-Analyzer-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
 * `ResolveSQLOnFile` converts a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 * `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 * Structured Streaming's `FileStreamSource` creates batches of records

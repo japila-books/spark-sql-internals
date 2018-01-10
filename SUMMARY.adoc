@@ -72,7 +72,7 @@
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
 .. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
 
@@ -256,6 +256,7 @@
 
 === Logical Evaluation Rules
 
+. link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 . link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
@@ -316,6 +317,7 @@
 . link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan -- Structured Query Plan]
 . link:spark-sql-catalyst-QueryPlanner.adoc[QueryPlanner -- Converting Logical Plan to Physical Trees]
 . link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor -- Tree Transformation Rule Executor]
+. link:spark-sql-catalyst-Rule.adoc[Catalyst Rule]
 . link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy]
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 

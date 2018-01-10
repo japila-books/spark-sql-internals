@@ -15,7 +15,7 @@ a| Collection of `Strategy` objects that are used when:
 * `SessionState` link:spark-sql-SessionState.adoc#planner[is requested for `SparkPlanner`]
 
 | [[extraOptimizations]] extraOptimizations
-a| Collection of link:spark-sql-catalyst-RuleExecutor.adoc#Rule[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects) that are used when:
+a| Collection of link:spark-sql-catalyst-Rule.adoc[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects) that are used when:
 
 * `SparkOptimizer` link:spark-sql-SparkOptimizer.adoc[is requested for the batches] (with "User Provided Optimizers" batch for the extra optimizations)
 |===
