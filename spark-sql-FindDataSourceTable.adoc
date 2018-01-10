@@ -1,6 +1,6 @@
 == [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule
 
-`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
+`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
 
 `FindDataSourceTable` is a part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 

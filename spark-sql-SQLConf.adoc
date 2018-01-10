@@ -261,6 +261,14 @@ Used by the planner to decide when it is safe to broadcast a relation. By defaul
 
 Use <<useObjectHashAggregation, useObjectHashAggregation>> method to access the current value.
 
+| [[spark.sql.hive.convertMetastoreOrc]] `spark.sql.hive.convertMetastoreOrc`
+| `true`
+| (internal) When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
+
+| [[spark.sql.hive.convertMetastoreParquet]] `spark.sql.hive.convertMetastoreParquet`
+| `true`
+| When enabled (i.e. `true`), the built-in Parquet reader and writer are used to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
+
 | [[spark.sql.inMemoryColumnarStorage.batchSize]] `spark.sql.inMemoryColumnarStorage.batchSize`
 | `10000`
 | *(internal)* Controls...FIXME

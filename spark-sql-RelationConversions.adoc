@@ -1,0 +1,68 @@
+== [[RelationConversions]] RelationConversions Logical Evaluation Rule for Converting Hive Tables
+
+`RelationConversions` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses (as part of link:spark-sql-HiveSessionStateBuilder.adoc#postHocResolutionRules[post-hoc resolution rules]) to convert a Hive table...FIXME
+
+NOTE: A Hive table is when the `provider` is `hive` in link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[table metadata].
+
+CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
+
+`RelationConversions` is <<creating-instance, created>> exclusively when the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] is created.
+
+=== [[convert]] `convert` Internal Method
+
+[source, scala]
+----
+convert(relation: HiveTableRelation): LogicalRelation
+----
+
+`convert`...FIXME
+
+[NOTE]
+====
+`convert` is used when `RelationConversions` does the following transformations:
+
+1. Transforms a `InsertIntoTable` with `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
+
+1. Transforms `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
+====
+
+=== [[apply]] Applying RelationConversions Rule to Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a logical plan).
+
+`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a `InsertIntoTable` with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
+
+For a `InsertIntoTable` with `HiveTableRelation` operator `apply` <<convert, converts>> the `HiveTableRelation` to a `LogicalRelation` with...FIXME
+
+For a `HiveTableRelation` logical operator alone `apply`...FIXME
+
+=== [[creating-instance]] Creating RelationConversions Instance
+
+`RelationConversions` takes the following when created:
+
+* [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
+* [[sessionCatalog]] link:spark-sql-HiveSessionCatalog.adoc[Hive-specific session catalog]
+
+=== [[isConvertible]] Does Table Use Parquet or ORC SerDe? -- `isConvertible` Internal Method
+
+[source, scala]
+----
+isConvertible(relation: HiveTableRelation): Boolean
+----
+
+`isConvertible` is positive when the input link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[HiveTableRelation] is a parquet or ORC table (and corresponding SQL properties are enabled).
+
+Internally, `isConvertible` takes the Hive SerDe of the table (from link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[table metadata]) if available or assumes no SerDe.
+
+`isConvertible` is turned on when either condition holds:
+
+1. The Hive SerDe is `parquet` (aka _parquet table_) and link:spark-sql-SQLConf.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is by default)
+
+1. The Hive SerDe is `orc` (aka _orc table_) and link:spark-sql-SQLConf.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] internal configuration property is enabled (which is by default)
+
+NOTE: `isConvertible` is used when `RelationConversions` is <<apply, executed>>.

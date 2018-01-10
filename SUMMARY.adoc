@@ -258,6 +258,7 @@
 
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+. link:spark-sql-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
