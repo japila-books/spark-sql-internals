@@ -84,7 +84,7 @@ scala> spark.version
 res0: String = 2.3.0-SNAPSHOT
 
 import org.apache.spark.sql.internal.StaticSQLConf
-scala> spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION)
+scala> spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
 res1: String = hive
 ----
 

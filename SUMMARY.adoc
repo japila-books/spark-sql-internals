@@ -47,6 +47,11 @@
 .. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Reading Datasets from External Data Sources]
 .. link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]
 
+. link:spark-sql-SessionState.adoc[SessionState]
+.. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
+.. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
+.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder -- Builder of Hive-Specific SessionState]
+
 .. link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
 ... link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode]
 ... link:spark-sql-RelationProvider.adoc[RelationProvider -- Data Sources With Schema Inference]
@@ -258,20 +263,15 @@
 . link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
 .. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
 
-. link:spark-sql-SessionState.adoc[SessionState]
-.. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
-.. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
-.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder -- Builder of Hive-Specific SessionState]
-
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in Internal SessionCatalog]
+.. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
+.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
 
 . link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
 .. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
 .. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
-.. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog]
-.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]

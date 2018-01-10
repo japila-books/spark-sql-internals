@@ -1,13 +1,26 @@
-== [[HiveMetastoreCatalog]] HiveMetastoreCatalog
+== [[HiveMetastoreCatalog]] HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
 
-`HiveMetastoreCatalog` is a Hive-aware SessionCatalog.
+`HiveMetastoreCatalog` is a legacy link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that `HiveSessionCatalog` still uses exclusively for <<convertToLogicalRelation, converting Hive metastore relations to data source relations>> (when `RelationConversions` logical rule is executed).
 
-`HiveMetastoreCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for link:spark-sql-HiveSessionStateBuilder.adoc#catalog[SessionCatalog].
+`HiveMetastoreCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for link:spark-sql-HiveSessionStateBuilder.adoc#catalog[SessionCatalog] (and creates a link:spark-sql-HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog]).
 
-=== [[creating-instance]] Creating HiveMetastoreCatalog Instance
+.HiveMetastoreCatalog, HiveSessionCatalog and HiveSessionStateBuilder
+image::images/spark-sql-HiveMetastoreCatalog.png[align="center"]
 
-`HiveMetastoreCatalog` takes the following when created:
+[[creating-instance]][[sparkSession]]
+`HiveMetastoreCatalog` takes a link:spark-sql-SparkSession.adoc[SparkSession] when created.
 
-* HiveMetastoreCatalog
+=== [[convertToLogicalRelation]] `convertToLogicalRelation` Method
 
-`HiveMetastoreCatalog` initializes the <<internal-registries, internal registries and counters>>.
+[source, scala]
+----
+convertToLogicalRelation(
+  relation: HiveTableRelation,
+  options: Map[String, String],
+  fileFormatClass: Class[_ <: FileFormat],
+  fileType: String): LogicalRelation
+----
+
+`convertToLogicalRelation`...FIXME
+
+NOTE: `convertToLogicalRelation` is used when...FIXME

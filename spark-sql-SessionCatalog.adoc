@@ -15,7 +15,7 @@ scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ----
 
-NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (e.g. in-memory, hive1, hive2) to be used in a single Spark SQL application.
+NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (i.e. `in-memory` or `hive`) to be used.
 
 `SessionCatalog` is <<creating-instance, created>> when `SessionState` sets link:spark-sql-SessionState.adoc#catalog[catalog].
 
