@@ -96,6 +96,18 @@ a|
 
 TIP: See the <<function-examples, function examples>> below.
 
+| [[visitMultiInsertQuery]] `visitMultiInsertQuery`
+| `multiInsertQueryBody`
+a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+
+```
+FROM relation (',' relation)* lateralView*
+INSERT OVERWRITE TABLE ...
+
+FROM relation (',' relation)* lateralView*
+INSERT INTO TABLE? ...
+```
+
 | [[visitNamedExpression]] `visitNamedExpression`
 | `namedExpression`
 a|
@@ -133,6 +145,16 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 | link:spark-sql-Expression.adoc[Expression]
 
 Takes the named expression and relays to <<visitNamedExpression, visitNamedExpression>>
+
+| [[visitSingleInsertQuery]] `visitSingleInsertQuery`
+| `#singleInsertQuery` labeled alternative
+a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+
+```
+INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
+
+INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
+```
 
 | [[visitSingleStatement]] `visitSingleStatement`
 | `singleStatement`
@@ -186,6 +208,13 @@ TIP: Note `+` (plus) between `/\*` and `*/`
 ```
 /*+ BROADCAST (table) */
 ```
+
+| [[withInsertInto]] `withInsertInto`
+a|
+
+* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
+
+* `InsertIntoDir` for...FIXME
 
 | [[withJoinRelations]] `withJoinRelations`
 a| link:spark-sql-LogicalPlan-Join.adoc[Join] for a <<visitFromClause, FROM clause>> and <<visitRelation, relation>> alone.

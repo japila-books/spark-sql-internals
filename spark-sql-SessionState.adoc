@@ -170,7 +170,7 @@ createAnalyzer(
 
 .2+^.^| extendedResolutionRules
 | FindDataSourceTable
-| Replaces `InsertIntoTable` (with `CatalogRelation`) and `CatalogRelation` logical plans with link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation].
+| Replaces link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (with `CatalogRelation`) and `CatalogRelation` logical plans with link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation].
 
 | ResolveSQLOnFile
 |

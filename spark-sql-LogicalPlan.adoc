@@ -23,7 +23,7 @@ res1: Boolean = true
 ----
 
 [[resolved]]
-A logical plan can also be *resolved* to a specific schema.
+A logical operator can also be *resolved* to a specific schema, i.e. all link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the logical operator and its children are resolved.
 
 [source, scala]
 ----

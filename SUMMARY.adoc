@@ -172,6 +172,7 @@
 . link:spark-sql-LogicalPlan-Hint.adoc[Hint]
 . link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
 . link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
+. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Join.adoc[Join]
 . link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
 . link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]

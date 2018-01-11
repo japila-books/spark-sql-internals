@@ -1,6 +1,6 @@
 == [[CatalogTable]] CatalogTable -- Table Metadata in SessionCatalog
 
-`CatalogTable` is the metadata of a table in a link:spark-sql-SessionCatalog.adoc[SessionCatalog].
+`CatalogTable` is the metadata of a table in a link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities].
 
 [source, scala]
 ----
@@ -29,11 +29,11 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 1. `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[getTempViewOrPermanentTableMetadata]
 
-1. `HiveClientImpl` is requested for `getTableOption`
+1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
+
+1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
 
 1. `InsertIntoHiveDirCommand` is executed
-
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable]
 
 1. `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
 

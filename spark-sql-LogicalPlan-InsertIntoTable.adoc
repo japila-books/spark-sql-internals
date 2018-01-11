@@ -1,0 +1,73 @@
+== [[InsertIntoTable]] InsertIntoTable Unary Logical Operator
+
+`InsertIntoTable` is a unary link:spark-sql-LogicalPlan.adoc[logical operator] that is used for the following:
+
+1. <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> and <<INSERT_INTO_TABLE, INSERT INTO TABLE>> SQL commands
+
+1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0-SNAPSHOT
+
+// make sure that the tables are available in a catalog
+spark.range(200).write.saveAsTable("t1")
+spark.range(1).write.saveAsTable("t2")
+val q = sql("INSERT INTO TABLE t2 SELECT * from t1 LIMIT 100")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, false, false
+01 +- 'GlobalLimit 100
+02    +- 'LocalLimit 100
+03       +- 'Project [*]
+04          +- 'UnresolvedRelation `t1`
+
+// Dataset API's version of "INSERT OVERWRITE TABLE" in SQL
+spark.range(10).write.mode("overwrite").insertInto("t2")
+----
+
+`InsertIntoTable` is <<creating-instance, created>> when:
+
+1. [[INSERT_OVERWRITE_TABLE]][[INSERT_INTO_TABLE]] `INSERT OVERWRITE TABLE` or `INSERT INTO TABLE` SQL queries (as a link:spark-sql-AstBuilder.adoc#visitSingleInsertQuery[single insert] or a link:spark-sql-AstBuilder.adoc#visitMultiInsertQuery[multi-insert] query)
+
+1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
+
+1. `RelationConversions` logical evaluation rule is link:spark-sql-RelationConversions.adoc#apply[executed] (and transforms `InsertIntoTable` operators)
+
+1. `CreateHiveTableAsSelectCommand` command is executed
+
+[[output]]
+`InsertIntoTable` has an empty output schema.
+
+[[resolved]]
+`InsertIntoTable` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis that is supposed to be <<logical-conversions, converted to some other resolvable logical operators>>).
+
+[[logical-conversions]]
+`InsertIntoTable` is converted to...FIXME
+
+CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertIntoTable(r: HiveTableRelation...)` to `InsertIntoHiveTable` and `RelationConversions` that converts `InsertIntoTable(r: HiveTableRelation,...)` to `InsertIntoTable` (with `LogicalRelation`)?
+
+[NOTE]
+====
+link:spark-sql-catalyst-dsl.adoc#DslLogicalPlan[Catalyst DSL] defines `insertInto` command to create a `InsertIntoTable`, e.g. for query testing.
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table("a").insertInto(tableName = "t1", overwrite = true)
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t1`, true, false
+01 +- 'UnresolvedRelation `a`
+----
+====
+
+=== [[creating-instance]] Creating InsertIntoTable Instance
+
+`InsertIntoTable` takes the following when created:
+
+* [[table]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing a table
+* [[partition]] Partitions (as a collection of partition keys and optional partition values for dynamic partition insert)
+* [[query]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing the data to be written
+* [[overwrite]] `overwrite` flag that says whether to overwrite an existing table or partitions
+* [[ifPartitionNotExists]] `ifPartitionNotExists` flag

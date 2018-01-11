@@ -21,7 +21,7 @@ convert(relation: HiveTableRelation): LogicalRelation
 ====
 `convert` is used when `RelationConversions` does the following transformations:
 
-1. Transforms a `InsertIntoTable` with `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
+1. Transforms a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
 
 1. Transforms `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
 ====
@@ -35,7 +35,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a logical plan).
 
-`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a `InsertIntoTable` with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
+`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
 
 For a `InsertIntoTable` with `HiveTableRelation` operator `apply` <<convert, converts>> the `HiveTableRelation` to a `LogicalRelation` with...FIXME
 

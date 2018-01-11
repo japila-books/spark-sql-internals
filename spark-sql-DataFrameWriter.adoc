@@ -1,20 +1,160 @@
 == [[DataFrameWriter]] DataFrameWriter
 
-`DataFrameWriter` is an interface to write the result of executing link:spark-sql-Dataset.adoc[structured query] to an external storage system in a batch fashion.
+`DataFrameWriter` is the <<methods, public API>> to write the result of executing a structured query (i.e. the content of a link:spark-sql-Dataset.adoc[Dataset]) to an external storage system in a batch fashion.
 
-NOTE: Structured Streaming's `DataStreamWriter` is responsible for writing in a streaming fashion.
+[[methods]]
+.DataFrameWriter's Public Methods
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<bucketBy, bucketBy>>
+a|
+
+[source, scala]
+----
+bucketBy(numBuckets: Int, colName: String, colNames: String*): DataFrameWriter[T]
+----
+
+| <<csv, csv>>
+a|
+
+[source, scala]
+----
+csv(path: String): Unit
+----
+
+| <<format, format>>
+a|
+
+[source, scala]
+----
+format(source: String): DataFrameWriter[T]
+----
+
+| <<insertInto, insertInto>>
+a| Inserts a DataFrame into a table
+
+[source, scala]
+----
+insertInto(tableName: String): Unit
+----
+
+| <<jdbc, jdbc>>
+a|
+
+[source, scala]
+----
+jdbc(url: String, table: String, connectionProperties: Properties): Unit
+----
+
+| <<json, json>>
+a|
+
+[source, scala]
+----
+json(path: String): Unit
+----
+
+| <<mode, mode>>
+a|
+
+[source, scala]
+----
+mode(saveMode: SaveMode): DataFrameWriter[T]
+mode(saveMode: String): DataFrameWriter[T]
+----
+
+| <<option, option>>
+a|
+
+[source, scala]
+----
+option(key: String, value: String): DataFrameWriter[T]
+option(key: String, value: Boolean): DataFrameWriter[T]
+option(key: String, value: Long): DataFrameWriter[T]
+option(key: String, value: Double): DataFrameWriter[T]
+----
+
+| <<options, options>>
+a|
+
+[source, scala]
+----
+options(options: scala.collection.Map[String, String]): DataFrameWriter[T]
+----
+
+| <<orc, orc>>
+a|
+
+[source, scala]
+----
+orc(path: String): Unit
+----
+
+| <<parquet, parquet>>
+a|
+
+[source, scala]
+----
+parquet(path: String): Unit
+----
+
+| <<partitionBy, partitionBy>>
+a|
+
+[source, scala]
+----
+partitionBy(colNames: String*): DataFrameWriter[T]
+----
+
+| <<save, save>>
+a|
+
+[source, scala]
+----
+save(): Unit
+save(path: String): Unit
+----
+
+| <<saveAsTable, saveAsTable>>
+a|
+
+[source, scala]
+----
+saveAsTable(tableName: String): Unit
+----
+
+| <<sortBy, sortBy>>
+a|
+
+[source, scala]
+----
+sortBy(colName: String, colNames: String*): DataFrameWriter[T]
+----
+
+| <<text, text>>
+a|
+
+[source, scala]
+----
+text(path: String): Unit
+----
+|===
 
 `DataFrameWriter` is available using link:spark-sql-DataFrame.adoc#write[write] method of a `Dataset`.
 
 [source, scala]
 ----
 import org.apache.spark.sql.DataFrameWriter
-
 val nums: Dataset[Long] = ...
-val writer: DataFrameWriter[Row] = nums.write
+val writer: DataFrameWriter[Long] = nums.write
 ----
 
-`DataFrameWriter` has a direct support for many <<writing-dataframes-to-files, file formats>>, <<jdbc, JDBC databases>> and <<format, an extension point to plug in new formats>>. It assumes <<parquet, parquet>> as the default data source that you can change using link:spark-sql-settings.adoc[spark.sql.sources.default] setting or <<format, format>> method.
+`DataFrameWriter` has a direct support for many <<writing-dataframes-to-files, file formats>>, <<jdbc, JDBC databases>> and an extension point to plug in <<format, new formats>>.
+
+`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using link:spark-sql-settings.adoc[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
 
 [source, scala]
 ----
@@ -25,9 +165,12 @@ writer.save(path = "nums")
 
 // Save dataset in JSON format
 writer.format("json").save(path = "nums-json")
+
+// Alternatively, use format-specific method
+write.json(path = "nums-json")
 ----
 
-In the end, you trigger the actual saving of the content of a `Dataset` using <<save, save>> method.
+In the end, you trigger the actual saving of the content of a `Dataset` (i.e. the result of executing a structured query) using <<save, save>> method.
 
 [source, scala]
 ----
@@ -35,6 +178,8 @@ writer.save
 ----
 
 NOTE: `DataFrameWriter` is really a type constructor in Scala and keeps a reference to a source `DataFrame` during its lifecycle (starting right from the moment it was created).
+
+NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing the content of streaming Datasets in a streaming fashion.
 
 === [[runCommand]] Running Command -- `runCommand` Internal Method
 
@@ -47,7 +192,7 @@ runCommand
 
 CAUTION: FIXME
 
-NOTE: `runCommand` is used when `DataFrameWriter` does <<save, save>>, <<insertInto, insertInto>> and <<createTable, createTable>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
+NOTE: `runCommand` is used when `DataFrameWriter` is requested for <<save, save>>, <<insertInto, insertInto>> and <<createTable, createTable>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
 === [[createTable]] Creating Table -- `createTable` Internal Method
 
@@ -219,6 +364,58 @@ CAUTION: FIXME
 
 NOTE: Parquet is the default data source format.
 
-=== [[insertInto]] `insertInto` Method
+=== [[insertInto]] Inserting DataFrame into Table -- `insertInto` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+insertInto(tableName: String): Unit // <1>
+insertInto(tableIdent: TableIdentifier): Unit
+----
+<1> Parses `tableName` and calls the other `insertInto` with a `TableIdentifier`
+
+`insertInto` inserts the content of the `DataFrame` to the specified `tableName` table.
+
+NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order of the columns in (the output of) the Dataset matters.
+
+Internally, `insertInto` <<runCommand, executes>> a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] logical operator (that submits a Spark job).
+
+.DataFrameWrite.insertInto Executes SQL Command (as a Spark job)
+image::images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png[align="center"]
+
+`insertInto` reports a `AnalysisException` for bucketed DataFrames, i.e. <<numBuckets, buckets>> or <<sortColumnNames, sortColumnNames>> are defined.
+
+```
+'insertInto' does not support bucketing right now
+```
+
+[source, scala]
+----
+val writeSpec = spark.range(4).
+  write.
+  bucketBy(numBuckets = 3, colName = "id")
+scala> writeSpec.insertInto("t1")
+org.apache.spark.sql.AnalysisException: 'insertInto' does not support bucketing right now;
+  at org.apache.spark.sql.DataFrameWriter.assertNotBucketed(DataFrameWriter.scala:334)
+  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:302)
+  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:298)
+  ... 49 elided
+----
+
+`insertInto` reports a `AnalysisException` for partitioned DataFrames, i.e. <<partitioningColumns, partitioningColumns>> is defined.
+
+[options="wrap"]
+----
+insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
+----
+
+[source, scala, options="wrap"]
+----
+val writeSpec = spark.range(4).
+  write.
+  partitionBy("id")
+scala> writeSpec.insertInto("t1")
+org.apache.spark.sql.AnalysisException: insertInto() can't be used together with partitionBy(). Partition columns have already be defined for the table. It is not necessary to use partitionBy().;
+  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:305)
+  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:298)
+  ... 49 elided
+----

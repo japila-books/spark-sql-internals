@@ -158,7 +158,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | Replaces `UnresolvedTableValuedFunction` with table-valued function.
 
 | [[ResolveRelations]] ResolveRelations
-| Resolves `InsertIntoTable` and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] operators
+| Resolves link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] operators
 
 | ResolveReferences
 |

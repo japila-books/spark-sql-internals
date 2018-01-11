@@ -11,7 +11,7 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ----
 
-Structured query actions are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's link:spark-sparkcontext-local-properties.adoc#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action.
+Structured query actions are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's link:spark-sparkcontext-local-properties.adoc#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's link:spark-sql-webui.adoc[SQL tab]).
 
 [TIP]
 ====
@@ -62,20 +62,33 @@ NOTE: Jobs without <<spark.sql.execution.id, spark.sql.execution.id>> key are no
 
 TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the link:spark-sql-QueryExecution.adoc[QueryExecution] for an execution id.
 
-=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) with Single Execution Id -- `withNewExecutionId` Method
+=== [[withExecutionId]] `withExecutionId` Method
 
 [source, scala]
 ----
 withExecutionId[T](
   sc: SparkContext,
-  executionId: String)(body: => T): T  // <1>
+  executionId: String)(body: => T): T
+----
 
+`withExecutionId`...FIXME
+
+[source, scala]
+----
+scala> SQLExecution.withExecutionId(sc = spark.sparkContext, executionId = "Custom Name") { println("Hello World") }
+Hello World
+----
+
+NOTE: `withExecutionId` is used when...FIXME
+
+=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) with Single Execution Id -- `withNewExecutionId` Method
+
+[source, scala]
+----
 withNewExecutionId[T](
   sparkSession: SparkSession,
-  queryExecution: QueryExecution)(body: => T): T  // <2>
+  queryExecution: QueryExecution)(body: => T): T
 ----
-<1> With explicit `executionId` execution identifier
-<2> ``QueryExecution``-variant with an auto-generated execution identifier
 
 `withNewExecutionId` executes `body` query action with a new <<spark.sql.execution.id, execution id>> (given as the input `executionId` or auto-generated) so that all Spark jobs that have been scheduled by the query action could be marked as parts of the same `Dataset` action execution.
 
