@@ -70,7 +70,7 @@ Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
 | link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 
 | [[listenerManager]] `listenerManager`
-| `ExecutionListenerManager`
+| link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
 
 | [[optimizer]] `optimizer`
 | link:spark-sql-Optimizer.adoc[Optimizer]

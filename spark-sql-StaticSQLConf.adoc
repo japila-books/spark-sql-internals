@@ -51,6 +51,13 @@ Used when:
 
 1. `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
+| [[spark.sql.queryExecutionListeners]] `spark.sql.queryExecutionListeners`
+| (empty)
+| `QUERY_EXECUTION_LISTENERS`
+a| List of class names that implement link:spark-sql-QueryExecutionListener.adoc[QueryExecutionListener] that will be automatically added to newly created sessions.
+
+The classes should have either a no-arg constructor, or a constructor that expects a `SparkConf` argument.
+
 | [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir`
 | `spark-warehouse`
 | `WAREHOUSE_PATH`

@@ -56,6 +56,24 @@
 
 == SparkSession Registries
 
+. link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
+.. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
+
+. link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager -- Management Interface of QueryExecutionListeners]
+. link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
+
+. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
+.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
+.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog -- Hive-Specific Metastore of Permanent Relational Entities]
+
+. link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+
+. link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
+.. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
+.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
+
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
 .. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
@@ -63,27 +81,12 @@
 
 . link:spark-sql-SharedState.adoc[SharedState -- State Shared Across SparkSessions]
 
-. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore of Permanent Relational Entities]
-.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
-.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
-.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog -- Hive-Specific Metastore of Permanent Relational Entities]
-
-. link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
-.. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
-
-. link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
-.. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
-.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
-
-. link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
-. link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
-. link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
-
 . link:spark-sql-SQLConf.adoc[SQLConf -- Internal Configuration Store]
 .. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
 .. link:spark-sql-settings.adoc[Settings]
+
+. link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 
 == Extending Spark SQL
 
@@ -298,6 +301,8 @@
 
 . link:spark-sql-webui.adoc[SQL Tab -- Monitoring Structured Queries in web UI]
 .. link:spark-sql-SQLListener.adoc[SQLListener Spark Listener]
+
+. link:spark-sql-QueryExecutionListener.adoc[QueryExecutionListener]
 
 . link:spark-sql-SQLAppStatusListener.adoc[SQLAppStatusListener Spark Listener]
 . link:spark-sql-SQLAppStatusPlugin.adoc[SQLAppStatusPlugin]

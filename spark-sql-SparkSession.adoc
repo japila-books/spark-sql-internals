@@ -60,12 +60,20 @@ See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManu
 ====
 
 [[attributes]]
-.SparkSession's (Lazily-Initialized) Attributes (in alphabetical order)
+.SparkSession's Properties
 [cols="1,1,2",options="header",width="100%"]
 |===
 | Name
 | Type
 | Description
+
+| [[functionRegistry]] `functionRegistry`
+|
+|
+
+| [[listenerManager]] `listenerManager`
+| link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
+| link:spark-sql-SessionState.adoc#listenerManager[ExecutionListenerManager] of the <<sessionState, SessionState>>
 
 | [[sessionState]] `sessionState`
 | link:spark-sql-SessionState.adoc[SessionState]
@@ -79,6 +87,11 @@ Internally, `sessionState` link:spark-sql-SessionState.adoc#clone[clones] the op
 | [[sharedState]] `sharedState`
 | link:spark-sql-SharedState.adoc[SharedState]
 |
+
+| [[streamingQueryManager]] `streamingQueryManager`
+|
+|
+
 |===
 
 NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism to plug `BaseRelation` object hierarchy in into link:spark-sql-LogicalPlan.adoc[LogicalPlan] object hierarchy that `SparkSession` uses to bridge them.
@@ -439,22 +452,6 @@ streams: StreamingQueryManager
 val spark: SparkSession = ...
 spark.streams.active.foreach(println)
 ----
-
-=== [[streamingQueryManager]] `streamingQueryManager` Attribute
-
-`streamingQueryManager` is...
-
-=== [[listenerManager]] `listenerManager` Attribute
-
-`listenerManager` is...
-
-=== [[ExecutionListenerManager]] `ExecutionListenerManager`
-
-`ExecutionListenerManager` is...
-
-=== [[functionRegistry]] `functionRegistry` Attribute
-
-`functionRegistry` is...
 
 === [[experimentalMethods]] `experimentalMethods` Attribute
 
