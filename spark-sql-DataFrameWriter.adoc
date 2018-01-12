@@ -375,7 +375,7 @@ insertInto(tableIdent: TableIdentifier): Unit
 
 `insertInto` inserts the content of the `DataFrame` to the specified `tableName` table.
 
-NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order of the columns in (the output of) the Dataset matters.
+NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order (not the names!) of the columns in (the output of) the Dataset matters.
 
 Internally, `insertInto` <<runCommand, executes>> a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] logical operator (that submits a Spark job).
 

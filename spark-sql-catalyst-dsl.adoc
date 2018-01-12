@@ -1,10 +1,28 @@
 == [[dsl]] Catalyst DSL -- Implicit Conversions for Catalyst Data Structures
 
-*package object dsl* is a <<implicit-conversions, collection of implicit conversions>> that create a DSL for constructing Catalyst data structures, i.e. link:spark-sql-Expression.adoc[expressions] and link:spark-sql-LogicalPlan.adoc[logical plans].
+*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> that allow for constructing link:spark-sql-catalyst.adoc[Catalyst data structures] (i.e. link:spark-sql-Expression.adoc[expressions] and link:spark-sql-LogicalPlan.adoc[logical plans]) more easily.
+
+The goal of Catalyst DSL is to make working with Spark SQL's building blocks easier (e.g. for testing or Spark SQL internals exploration).
+
+Catalyst DSL is part of `package object dsl` with the following Scala `objects` (and their Scala implicit conversions):
+
+* [[expressions]] `expressions` for link:spark-sql-Expression.adoc[Catalyst expressions]
+** Creating link:spark-sql-Expression-Literal.adoc[Literals] from Scala (e.g. `Boolean`, `Int`, `String`, `Array[Byte]`) or Java (e.g. `java.sql.Date`, `java.sql.Timestamp`) types
+** Creating `UnresolvedAttributes` from Scala's `Symbol` or `$`-prefixed strings (using `$` string interpolator)
+** Creating `AttributeReferences` from Scala's `Symbol`
+** Creating `Expressions` or `UnresolvedAttributes` right from `Strings`
+** FIXME
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.expressions._
+scala> :type $"hello"
+org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute
+----
 
 [NOTE]
 ====
-Most implicit conversions from `package object dsl` interfere with the implicits conversions from `SQLImplicits` that are imported automatically in `spark-shell` as `spark.implicits._`.
+Some implicit conversions from the Catalyst DSL interfere with the implicits conversions from `SQLImplicits` that are imported automatically in `spark-shell` (through `spark.implicits._`).
 
 ```
 scala> 'hello.decimal
@@ -21,6 +39,8 @@ Note that implicit conversions are not applicable because they are ambiguous:
        'hello.decimal
               ^
 ```
+
+Use `sbt console` with Spark libraries defined (in `build.sbt`) instead.
 ====
 
 [[example]]
@@ -110,7 +130,7 @@ a|
 | [[plans]] `plans`
 a|
 
-* `table` to create a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation logical plan]
+* `table` for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator
 
 * [[DslLogicalPlan]] Logical operators (e.g. `select`, `where`, `filter`, `serialize`, `join`, `groupBy`, `window`, `generate`)
 |===

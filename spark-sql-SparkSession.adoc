@@ -365,18 +365,20 @@ scala> sql("SELECT *, myUpper(value) UPPER FROM strs").show
 
 Internally, it is simply an alias for link:spark-sql-SessionState.adoc#udfRegistration[SessionState.udfRegistration].
 
-=== [[table]] Creating DataFrame for Table -- `table` method
+=== [[table]] Creating DataFrame from Table -- `table` method
 
 [source, scala]
 ----
-table(tableName: String): DataFrame
+table(tableName: String): DataFrame // <1>
+table(tableIdent: TableIdentifier): DataFrame // private[sql]
 ----
+<1> Parses `tableName` to a `TableIdentifier` and calls the other `table`
 
-`table` creates a link:spark-sql-DataFrame.adoc[DataFrame] (wrapper) for the input `tableName` table (if available).
+`table` creates a link:spark-sql-DataFrame.adoc[DataFrame] (wrapper) from the input `tableName` table (but only if link:spark-sql-SessionCatalog.adoc#lookupRelation[available in the session catalog]).
 
 [source, scala]
 ----
-val df = spark.table("mytable")
+val t1 = spark.table("t1")
 ----
 
 === [[catalog]] Accessing Metastore -- `catalog` Attribute

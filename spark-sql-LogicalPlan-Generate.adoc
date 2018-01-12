@@ -21,7 +21,7 @@ NOTE: `Generate` logical operator is resolved to link:spark-sql-SparkPlan-Genera
 
 [TIP]
 ====
-Use `generate` method from Spark SQL's *Catalyst DSL* (in `org.apache.spark.sql.catalyst.dsl` package object) to create a `Generate` logical operator for testing or Spark SQL exploration.
+Use `generate` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

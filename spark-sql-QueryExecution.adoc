@@ -151,7 +151,7 @@ CAUTION: FIXME
 `QueryExecution` takes the following when created:
 
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
-* [[logical]] link:spark-sql-LogicalPlan.adoc[LogicalPlan]
+* [[logical]] link:spark-sql-LogicalPlan.adoc[Logical plan]
 
 === [[preparations]] Physical Plan Preparation Rules -- `preparations` Method
 

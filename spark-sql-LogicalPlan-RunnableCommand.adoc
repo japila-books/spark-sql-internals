@@ -128,7 +128,7 @@ Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSo
 | CreateFunctionCommand
 |
 
-| CreateHiveTableAsSelectCommand
+| [[CreateHiveTableAsSelectCommand]] `CreateHiveTableAsSelectCommand`
 |
 
 | CreateTableCommand

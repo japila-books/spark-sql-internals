@@ -1,12 +1,14 @@
 == [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
 
-`Analyzer` is a *logical query plan analyzer* in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan* (with proper relational entities resolved) using <<batches, logical evaluation rules>>.
+`Analyzer` is the *logical query plan analyzer* in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
 
 ```
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 ```
 
-You can access a session-specific `Analyzer` through link:spark-sql-SessionState.adoc#analyzer[SessionState].
+`Analyzer` uses <<catalog, SessionCatalog>> and <<batches, logical evaluation rules>> to resolve relational entities, e.g. databases, tables, columns.
+
+`Analyzer` is available as link:spark-sql-SessionState.adoc#analyzer[analyzer] property of a session-specific `SessionState`.
 
 [source, scala]
 ----
@@ -45,7 +47,7 @@ Project [id#78L, (id#78L + 5) AS new_column#82L]
 +- *Range (0, 5, step=1, splits=8)
 ----
 
-Alternatively, you can also access the analyzed logical plan through ``QueryExecution``'s link:spark-sql-QueryExecution.adoc#analyzed[analyzed] attribute (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can also access the analyzed logical plan using link:spark-sql-QueryExecution.adoc#analyzed[analyzed] property of `QueryExecution` (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 [source, scala]
 ----
@@ -59,7 +61,7 @@ scala> println(analyzedPlan.numberedTreeString)
 
 NOTE: link:spark-sql-SessionState.adoc[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
 
-`Analyzer` is <<creating-instance, created>> while its owning link:spark-sql-SessionState.adoc#apply[SessionState] is.
+`Analyzer` is <<creating-instance, created>> while the owning link:spark-sql-SessionState.adoc#apply[SessionState] is.
 
 [[internal-registries]]
 .Analyzer's Internal Registries and Counters (in alphabetical order)

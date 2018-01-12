@@ -58,6 +58,17 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 
 NOTE: `getTempViewOrPermanentTableMetadata` is used when...FIXME
 
+=== [[lookupRelation]] `lookupRelation` Method
+
+[source, scala]
+----
+lookupRelation(name: TableIdentifier): LogicalPlan
+----
+
+`lookupRelation`...FIXME
+
+NOTE: `lookupRelation` is used when...FIXME
+
 === [[alterPartitions]] `alterPartitions` Method
 
 [source, scala]

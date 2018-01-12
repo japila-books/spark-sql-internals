@@ -85,9 +85,9 @@ The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `Project` 
 [[validConstraints]]
 `validConstraints`...FIXME
 
-[NOTE]
+[TIP]
 ====
-You can use Spark SQL's *Catalyst DSL* (in `org.apache.spark.sql.catalyst.dsl` package object) for constructing Catalyst data structures using Scala implicit conversions if you are into Spark testing.
+Use `select` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `Project` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

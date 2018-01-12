@@ -98,7 +98,7 @@ TIP: See the <<function-examples, function examples>> below.
 
 | [[visitMultiInsertQuery]] `visitMultiInsertQuery`
 | `multiInsertQueryBody`
-a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
 
 ```
 FROM relation (',' relation)* lateralView*

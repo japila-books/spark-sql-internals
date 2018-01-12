@@ -13,9 +13,9 @@ NOTE: An analyzed logical plan is correct and ready for execution.
 checkAnalysis(plan: LogicalPlan): Unit
 ----
 
-`checkAnalysis` recursively checks the correctness of the analysis of the input link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks it as analyzed].
+`checkAnalysis` recursively checks the correctness of the analysis of the input link:spark-sql-LogicalPlan.adoc[logical plan] and link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks it as analyzed].
 
-NOTE: `checkAnalysis` fails analysis when finds link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] in the input `LogicalPlan`...FIXME What else?
+NOTE: `checkAnalysis` fails analysis when finds <<UnresolvedRelation, UnresolvedRelation>> in the input `LogicalPlan`...FIXME What else?
 
 Internally, `checkAnalysis` processes nodes in the input `plan` (starting from the leafs, i.e. nodes down the operator tree).
 
@@ -28,7 +28,7 @@ Internally, `checkAnalysis` processes nodes in the input `plan` (starting from t
 | LogicalPlan/Operator
 | Behaviour
 
-| link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
+| [[UnresolvedRelation]] link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 a| Fails analysis with the error message:
 
 ```

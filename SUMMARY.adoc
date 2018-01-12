@@ -132,6 +132,8 @@
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
 .. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
 
+. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+
 === Catalyst Expressions
 
 . link:spark-sql-Expression.adoc[Expression -- Executable Node in Catalyst Tree]
@@ -326,7 +328,6 @@
 . link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor -- Tree Transformation Rule Executor]
 . link:spark-sql-catalyst-Rule.adoc[Catalyst Rule]
 . link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy]
-. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
 . link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator and Adaptive Query Execution]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]

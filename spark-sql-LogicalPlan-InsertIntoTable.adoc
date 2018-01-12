@@ -27,9 +27,9 @@ scala> println(plan.numberedTreeString)
 spark.range(10).write.mode("overwrite").insertInto("t2")
 ----
 
-`InsertIntoTable` is <<creating-instance, created>> when:
+`InsertIntoTable` (with link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator) is <<creating-instance, created>> when:
 
-1. [[INSERT_OVERWRITE_TABLE]][[INSERT_INTO_TABLE]] `INSERT OVERWRITE TABLE` or `INSERT INTO TABLE` SQL queries (as a link:spark-sql-AstBuilder.adoc#visitSingleInsertQuery[single insert] or a link:spark-sql-AstBuilder.adoc#visitMultiInsertQuery[multi-insert] query)
+1. [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL queries are executed (as a link:spark-sql-AstBuilder.adoc#visitSingleInsertQuery[single insert] or a link:spark-sql-AstBuilder.adoc#visitMultiInsertQuery[multi-insert] query)
 
 1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
 
@@ -48,9 +48,9 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 
 CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertIntoTable(r: HiveTableRelation...)` to `InsertIntoHiveTable` and `RelationConversions` that converts `InsertIntoTable(r: HiveTableRelation,...)` to `InsertIntoTable` (with `LogicalRelation`)?
 
-[NOTE]
+[TIP]
 ====
-link:spark-sql-catalyst-dsl.adoc#DslLogicalPlan[Catalyst DSL] defines `insertInto` command to create a `InsertIntoTable`, e.g. for query testing.
+Use `insertInto` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----
