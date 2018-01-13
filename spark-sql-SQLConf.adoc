@@ -125,6 +125,16 @@ Used in:
 | <<spark.sql.join.preferSortMergeJoin, spark.sql.join.preferSortMergeJoin>>
 | Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
 
+| [[runSQLonFile]] `runSQLonFile`
+| <<spark.sql.runSQLOnFiles, spark.sql.runSQLOnFiles>>
+a|
+
+Used when:
+
+* `ResolveRelations` does link:spark-sql-ResolveRelations.adoc#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
+
+* `ResolveSQLOnFile` does link:spark-sql-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
+
 | [[starSchemaDetection]] `starSchemaDetection`
 | <<spark.sql.cbo.starSchemaDetection, spark.sql.cbo.starSchemaDetection>>
 | Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
@@ -305,9 +315,15 @@ Use <<dataFramePivotMaxValues, dataFramePivotMaxValues>> method to access the cu
 
 | [[spark.sql.retainGroupColumns]] `spark.sql.retainGroupColumns`
 | `true`
-| Flag to controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).
+| Flag that controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).
 
 Use <<dataFrameRetainGroupColumns, dataFrameRetainGroupColumns>> method to access the current value.
+
+| [[spark.sql.runSQLOnFiles]] `spark.sql.runSQLOnFiles`
+| `true`
+| (internal) Flag that controls whether Spark SQL could use `datasource`.`path` as a table in a SQL query.
+
+Use <<runSQLonFile, runSQLonFile>> method to access the current value.
 
 | [[spark.sql.selfJoinAutoResolveAmbiguity]] `spark.sql.selfJoinAutoResolveAmbiguity`
 | `true`

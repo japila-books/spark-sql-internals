@@ -1,0 +1,80 @@
+== [[ResolveRelations]] ResolveRelations Logical Evaluation Rule for Resolving UnresolvedRelations With Tables in Catalog
+
+`ResolveRelations` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan).
+
+[source, scala]
+----
+// Using Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table(db = "db1", ref = "t1")
+scala> println(plan.numberedTreeString)
+00 'UnresolvedRelation `db1`.`t1`
+
+// Register the database db1 and table t1
+// so the following resolution works
+sql("create database db1")
+spark.range(1).write.saveAsTable("db1.t1")
+
+// ResolveRelations is a Scala object of the Analyzer class
+// We need an instance of the Analyzer class to access it
+import spark.sessionState.analyzer.ResolveRelations
+scala> println(resolvedPlan.numberedTreeString)
+00 'SubqueryAlias t1
+01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+----
+
+`ResolveRelations` is a part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+
+=== [[lookupTableFromCatalog]] `lookupTableFromCatalog` Internal Method
+
+[source, scala]
+----
+lookupTableFromCatalog(
+  u: UnresolvedRelation,
+  defaultDatabase: Option[String] = None): LogicalPlan
+----
+
+`lookupTableFromCatalog`...FIXME
+
+NOTE: `lookupTableFromCatalog` is used when...FIXME
+
+=== [[apply]] `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a logical plan).
+
+`apply`...FIXME
+
+=== [[resolveRelation]] Resolving Relation -- `resolveRelation` Method
+
+[source, scala]
+----
+resolveRelation(plan: LogicalPlan): LogicalPlan
+----
+
+`resolveRelation`...FIXME
+
+NOTE: `resolveRelation` is used when...FIXME
+
+=== [[isRunningDirectlyOnFiles]] `isRunningDirectlyOnFiles` Internal Method
+
+[source, scala]
+----
+isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
+----
+
+`isRunningDirectlyOnFiles` is enabled (i.e. `true`) where the following all hold:
+
+1. The database of the input `table` is defined
+
+1. link:spark-sql-SQLConf.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
+
+1. The `table` is not a link:spark-sql-SessionCatalog.adoc#isTemporaryTable[temporary table]
+
+1. The link:spark-sql-SessionCatalog.adoc#databaseExists[database] or the link:spark-sql-SessionCatalog.adoc#tableExists[table] do not exist (in the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog])
+
+NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf logical operator for a table reference).

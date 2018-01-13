@@ -69,6 +69,17 @@ lookupRelation(name: TableIdentifier): LogicalPlan
 
 NOTE: `lookupRelation` is used when...FIXME
 
+=== [[isTemporaryTable]] `isTemporaryTable` Method
+
+[source, scala]
+----
+isTemporaryTable(name: TableIdentifier): Boolean
+----
+
+`isTemporaryTable`...FIXME
+
+NOTE: `isTemporaryTable` is used when...FIXME
+
 === [[alterPartitions]] `alterPartitions` Method
 
 [source, scala]

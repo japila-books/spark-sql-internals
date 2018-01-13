@@ -1,0 +1,16 @@
+== [[ResolveSQLOnFile]] ResolveSQLOnFile Logical Evaluation Rule for...FIXME
+
+`ResolveSQLOnFile` is...FIXME
+
+=== [[maybeSQLFile]] `maybeSQLFile` Internal Method
+
+[source, scala]
+----
+maybeSQLFile(u: UnresolvedRelation): Boolean
+----
+
+`maybeSQLFile` is enabled (i.e. `true`) where the following all hold:
+
+1. FIXME
+
+NOTE: `maybeSQLFile` is used exclusively when...FIXME
