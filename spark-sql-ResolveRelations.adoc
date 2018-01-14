@@ -25,19 +25,6 @@ scala> println(resolvedPlan.numberedTreeString)
 
 `ResolveRelations` is a part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
-=== [[lookupTableFromCatalog]] `lookupTableFromCatalog` Internal Method
-
-[source, scala]
-----
-lookupTableFromCatalog(
-  u: UnresolvedRelation,
-  defaultDatabase: Option[String] = None): LogicalPlan
-----
-
-`lookupTableFromCatalog`...FIXME
-
-NOTE: `lookupTableFromCatalog` is used when...FIXME
-
 === [[apply]] `apply` Method
 
 [source, scala]
@@ -78,3 +65,22 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 1. The link:spark-sql-SessionCatalog.adoc#databaseExists[database] or the link:spark-sql-SessionCatalog.adoc#tableExists[table] do not exist (in the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog])
 
 NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf logical operator for a table reference).
+
+=== [[lookupTableFromCatalog]] Finding Table in Session-Scoped Catalog of Relational Entities -- `lookupTableFromCatalog` Internal Method
+
+[source, scala]
+----
+lookupTableFromCatalog(
+  u: UnresolvedRelation,
+  defaultDatabase: Option[String] = None): LogicalPlan
+----
+
+`lookupTableFromCatalog` simply requests `SessionCatalog` to link:spark-sql-SessionCatalog.adoc#lookupRelation[find the table in relational catalogs].
+
+NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current link:spark-sql-Analyzer.adoc#catalog[SessionCatalog].
+
+NOTE: The table is described using link:spark-sql-LogicalPlan-UnresolvedRelation.adoc#tableIdentifier[TableIdentifier] of the input `UnresolvedRelation`.
+
+`lookupTableFromCatalog` fails the analysis phase (by reporting a `AnalysisException`) when the table or the table's database cannot be found.
+
+NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations]).
