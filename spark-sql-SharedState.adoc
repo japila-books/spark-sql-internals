@@ -21,7 +21,7 @@ a| Metastore of permanent relational entities, i.e. databases, tables, partition
 NOTE: `externalCatalog` is initialized lazily on the first access.
 
 | [[globalTempViewManager]] `globalTempViewManager`
-| `GlobalTempViewManager`
+| link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
 |
 
 | [[jarClassLoader]] `jarClassLoader`

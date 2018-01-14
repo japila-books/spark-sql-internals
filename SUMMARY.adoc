@@ -69,6 +69,8 @@
 
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 
+. link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
+
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]

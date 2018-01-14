@@ -4,7 +4,7 @@
 
 1. <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> and <<INSERT_INTO_TABLE, INSERT INTO TABLE>> SQL commands
 
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
+1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert the rows of a DataFrame into a table]
 
 [source, scala]
 ----
@@ -12,8 +12,8 @@ scala> spark.version
 res0: String = 2.3.0-SNAPSHOT
 
 // make sure that the tables are available in a catalog
-spark.range(200).write.saveAsTable("t1")
-spark.range(1).write.saveAsTable("t2")
+sql("CREATE TABLE IF NOT EXISTS t1(id long)")
+sql("CREATE TABLE IF NOT EXISTS t2(id long)")
 val q = sql("INSERT INTO TABLE t2 SELECT * from t1 LIMIT 100")
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)

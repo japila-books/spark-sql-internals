@@ -377,7 +377,7 @@ insertInto(tableIdent: TableIdentifier): Unit
 
 NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order (not the names!) of the columns in (the output of) the Dataset matters.
 
-Internally, `insertInto` <<runCommand, executes>> a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] logical operator (that submits a Spark job).
+Internally, `insertInto` creates an link:spark-sql-LogicalPlan-InsertIntoTable.adoc#creating-instance[InsertIntoTable] logical operator (with link:spark-sql-LogicalPlan-UnresolvedRelation.adoc#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
 
 .DataFrameWrite.insertInto Executes SQL Command (as a Spark job)
 image::images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png[align="center"]

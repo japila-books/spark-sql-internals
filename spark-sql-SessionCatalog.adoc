@@ -26,11 +26,6 @@ NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a
 | Name
 | Description
 
-| [[tempTables]] `tempTables`
-| FIXME
-
-Used when...FIXME
-
 | [[currentDb]] `currentDb`
 | FIXME
 
@@ -45,6 +40,14 @@ Used when...FIXME
 | A cache of fully-qualified table names to link:spark-sql-LogicalPlan.adoc[table relation plans] (i.e. `LogicalPlan`).
 
 Used when `SessionCatalog` <<refreshTable, refreshes a table>>
+
+| [[tempTables]] `tempTables`
+| FIXME
+
+Used when...FIXME
+
+| [[tempViews]] `tempViews`
+| Registry of temporary views (i.e. non-global temporary tables)
 |===
 
 === [[getTempViewOrPermanentTableMetadata]] `getTempViewOrPermanentTableMetadata` Method
@@ -57,17 +60,6 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 `getTempViewOrPermanentTableMetadata`...FIXME
 
 NOTE: `getTempViewOrPermanentTableMetadata` is used when...FIXME
-
-=== [[lookupRelation]] `lookupRelation` Method
-
-[source, scala]
-----
-lookupRelation(name: TableIdentifier): LogicalPlan
-----
-
-`lookupRelation`...FIXME
-
-NOTE: `lookupRelation` is used when...FIXME
 
 === [[isTemporaryTable]] `isTemporaryTable` Method
 
@@ -256,3 +248,44 @@ If the `name` function has the database defined or does not exist in `FunctionRe
 For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and link:spark-sql-FunctionRegistry.adoc#lookupFunction[looks up the function] again.
 
 NOTE: `lookupFunction` is used exclusively when `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves functions].
+
+=== [[lookupRelation]] Finding Relation in Catalogs (and Creating SubqueryAlias per Table Type) -- `lookupRelation` Method
+
+[source, scala]
+----
+lookupRelation(name: TableIdentifier): LogicalPlan
+----
+
+`lookupRelation` finds the `name` table in the catalogs (i.e. <<globalTempViewManager, GlobalTempViewManager>>, <<externalCatalog, ExternalCatalog>> or <<tempViews, registry of temporary views>>) and gives a `SubqueryAlias` per table type.
+
+[source, scala]
+----
+FIXME: Show different paths of `lookupRelation`
+----
+
+Internally, `lookupRelation` looks up the `name` table using:
+
+1. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager`
+
+i. Gives `SubqueryAlias` or reports a `NoSuchTableException`
+
+1. <<externalCatalog, ExternalCatalog>> when the database name of the table is specified explicitly or the <<tempViews, registry of temporary views>> does not contain the table
+
+i. Gives `SubqueryAlias` with `View` when the table is a view (aka _temporary table_)
+
+i. Gives `SubqueryAlias` with `UnresolvedCatalogRelation` otherwise
+
+1. The <<tempViews, registry of temporary views>>
+
+i. Gives `SubqueryAlias` with the logical plan per the table as registered in the <<tempViews, registry of temporary views>>
+
+NOTE: `lookupRelation` considers *default* to be the name of the database if the `name` table does not specify the database explicitly.
+
+[NOTE]
+====
+`lookupRelation` is used when:
+
+1. `DescribeTableCommand` is executed
+
+1. `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
+====

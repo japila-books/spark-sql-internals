@@ -1,0 +1,8 @@
+== [[GlobalTempViewManager]] GlobalTempViewManager
+
+`GlobalTempViewManager` is...FIXME
+
+`GlobalTempViewManager` is <<creating-instance, created>> when...FIXME
+
+[[database]][[creating-instance]]
+`GlobalTempViewManager` takes the name of the database when created.
