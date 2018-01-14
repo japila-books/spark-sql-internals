@@ -41,10 +41,16 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 `InsertIntoTable` has an empty output schema.
 
 [[resolved]]
-`InsertIntoTable` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis that is supposed to be <<logical-conversions, converted to some other resolvable logical operators>>).
+`InsertIntoTable` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis that is supposed to be <<logical-conversions, converted to logical commands>> eventually).
 
 [[logical-conversions]]
-`InsertIntoTable` is converted to...FIXME
+`InsertIntoTable` is transformed to:
+
+1. `InsertIntoHiveTable` logical command (when `HiveAnalysis` resolution rule transforms `InsertIntoTable` with link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation])
+
+1. `InsertIntoDataSourceCommand` logical command (when `DataSourceAnalysis` resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `InsertableRelation`)
+
+1. `InsertIntoHadoopFsRelationCommand` logical command (when `DataSourceAnalysis` resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `HadoopFsRelation`)
 
 CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertIntoTable(r: HiveTableRelation...)` to `InsertIntoHiveTable` and `RelationConversions` that converts `InsertIntoTable(r: HiveTableRelation,...)` to `InsertIntoTable` (with `LogicalRelation`)?
 

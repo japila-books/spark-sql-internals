@@ -1,23 +1,65 @@
 == [[ResolveRelations]] ResolveRelations Logical Evaluation Rule for Resolving UnresolvedRelations With Tables in Catalog
 
-`ResolveRelations` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan).
+`ResolveRelations` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan), i.e.
+
+1. Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
+
+1. Other uses of `UnresolvedRelation`
 
 [source, scala]
 ----
-// Using Catalyst DSL
+// Example: InsertIntoTable with UnresolvedRelation
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table("t1").insertInto(tableName = "t2", overwrite = true)
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'UnresolvedRelation `t1`
+
+// Register the tables so the following resolution works
+sql("CREATE TABLE IF NOT EXISTS t1(id long)")
+sql("CREATE TABLE IF NOT EXISTS t2(id long)")
+
+// ResolveRelations is a Scala object of the Analyzer class
+// We need an instance of the Analyzer class to access it
+import spark.sessionState.analyzer.ResolveRelations
+val resolvedPlan = ResolveRelations(plan)
+scala> println(resolvedPlan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'SubqueryAlias t1
+02    +- 'UnresolvedCatalogRelation `default`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+
+// Example: Other uses of UnresolvedRelation
+// Use a temporary view
+val v1 = spark.range(1).createOrReplaceTempView("v1")
+scala> spark.catalog.listTables.filter($"name" === "v1").show
++----+--------+-----------+---------+-----------+
+|name|database|description|tableType|isTemporary|
++----+--------+-----------+---------+-----------+
+|  v1|    null|       null|TEMPORARY|       true|
++----+--------+-----------+---------+-----------+
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val plan = table("v1").select(star())
+scala> println(plan.numberedTreeString)
+00 'Project [*]
+01 +- 'UnresolvedRelation `v1`
+
+val resolvedPlan = ResolveRelations(plan)
+scala> println(resolvedPlan.numberedTreeString)
+00 'Project [*]
+01 +- SubqueryAlias v1
+02    +- Range (0, 1, step=1, splits=Some(8))
+
+// Example
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table(db = "db1", ref = "t1")
 scala> println(plan.numberedTreeString)
 00 'UnresolvedRelation `db1`.`t1`
 
-// Register the database db1 and table t1
-// so the following resolution works
-sql("create database db1")
-spark.range(1).write.saveAsTable("db1.t1")
+// Register the database so the following resolution works
+sql("CREATE DATABASE IF NOT EXISTS db1")
 
-// ResolveRelations is a Scala object of the Analyzer class
-// We need an instance of the Analyzer class to access it
-import spark.sessionState.analyzer.ResolveRelations
+val resolvedPlan = ResolveRelations(plan)
 scala> println(resolvedPlan.numberedTreeString)
 00 'SubqueryAlias t1
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe

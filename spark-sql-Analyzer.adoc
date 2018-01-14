@@ -6,7 +6,7 @@
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 ```
 
-`Analyzer` uses <<catalog, SessionCatalog>> and <<batches, logical evaluation rules>> to resolve relational entities, e.g. databases, tables, columns.
+`Analyzer` uses <<catalog, SessionCatalog>> and <<batches, logical evaluation rules>> to resolve relational entities, e.g. databases, tables, columns (e.g. link:spark-sql-ResolveRelations.adoc[ResolveRelations] evaluation rule to resolve link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators)
 
 `Analyzer` is available as link:spark-sql-SessionState.adoc#analyzer[analyzer] property of a session-specific `SessionState`.
 
