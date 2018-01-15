@@ -163,6 +163,8 @@ scala> println(execPlan.numberedTreeString)
 apply(plan: SparkPlan): SparkPlan
 ----
 
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a physical plan).
+
 `apply` starts <<insertWholeStageCodegen, inserting WholeStageCodegenExec (with InputAdapter)>> in the input `plan` physical plan only when link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property is turned on.
 
 Otherwise, `apply` does nothing at all (i.e. passes the input physical plan through unchanged).

@@ -56,18 +56,7 @@ image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align=
 * [[mode]] `BroadcastMode`
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
-=== [[doPrepare]] Preparing Asynchronous Broadcast (with Rows) -- `doPrepare` Method
-
-[source, scala]
-----
-doPrepare(): Unit
-----
-
-NOTE: `doPrepare` is a part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
-
-`doPrepare` "materializes" the internal lazily-once-initialized <<relationFuture, asynchronous broadcast>>.
-
-=== [[doExecuteBroadcast]] Broadcasting Rows -- `doExecuteBroadcast` Method
+=== [[doExecuteBroadcast]] Waiting Until Relation Has Been Broadcast -- `doExecuteBroadcast` Method
 
 [source, scala]
 ----
@@ -76,7 +65,7 @@ def doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 `doExecuteBroadcast` waits until the <<relationFuture, rows are broadcast>>.
 
-NOTE: `doExecuteBroadcast` waits link:spark-sql-SQLConf.adoc#broadcastTimeout[spark.sql.broadcastTimeout] (i.e. 5 minutes).
+NOTE: `doExecuteBroadcast` waits link:spark-sql-SQLConf.adoc#broadcastTimeout[spark.sql.broadcastTimeout] (defaults to 5 minutes).
 
 NOTE: `doExecuteBroadcast` is a part of link:spark-sql-SparkPlan.adoc#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
 
@@ -108,4 +97,18 @@ In case of `OutOfMemoryError`, `relationFuture` reports another `OutOfMemoryErro
 Not enough memory to build and broadcast the table to all worker nodes. As a workaround, you can either disable broadcast by setting spark.sql.autoBroadcastJoinThreshold to -1 or increase the spark driver memory by setting spark.driver.memory to a higher value
 ----
 
-NOTE: `relationFuture` is executed on a separate thread from a custom https://www.scala-lang.org/api/2.11.8/index.html#scala.concurrent.ExecutionContext[scala.concurrent.ExecutionContext] (built from a cached https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html[java.util.concurrent.ThreadPoolExecutor] with the prefix *broadcast-exchange* and 128 threads).
+[[executionContext]]
+NOTE: `relationFuture` is executed on a separate thread from a custom https://www.scala-lang.org/api/2.11.8/index.html#scala.concurrent.ExecutionContext[scala.concurrent.ExecutionContext] (built from a cached https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html[java.util.concurrent.ThreadPoolExecutor] with the prefix *broadcast-exchange* and up to 128 threads).
+
+NOTE: `relationFuture` is used when `BroadcastExchangeExec` is requested to <<doPrepare, prepare for execution>> (that triggers asynchronous execution of the child operator and broadcasting the result) and <<doExecuteBroadcast, execute broadcast>> (that waits until the broadcasting has finished).
+
+=== [[doPrepare]] Broadcasting Relation (Rows) Asynchronously -- `doPrepare` Method
+
+[source, scala]
+----
+doPrepare(): Unit
+----
+
+NOTE: `doPrepare` is a part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+
+`doPrepare` simply "materializes" the internal lazily-once-initialized <<relationFuture, asynchronous broadcast>>.

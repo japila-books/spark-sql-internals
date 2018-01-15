@@ -230,9 +230,9 @@ By default reports a `UnsupportedOperationException`.
 Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return the result of a structured query as a broadcast variable.
 
 | [[doPrepare]] `doPrepare`
-| Prepares a physical operator for execution.
+| Prepares a physical operator for execution
 
-Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast asynchronously).
+Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
 
 | [[outputPartitioning]] `outputPartitioning`
 | Specifies how data is partitioned across different nodes in the cluster

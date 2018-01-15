@@ -1,4 +1,4 @@
-== Physical Plan Preparations Rules
+== Physical Preparations Rules
 
 [NOTE]
 ====
@@ -18,7 +18,7 @@ Among the phases is the link:spark-sql-QueryExecution.adoc#executedPlan[executed
 link:spark-sql-QueryExecution.adoc[QueryExecution] defines  link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of rules that are applied to a link:spark-sql-SparkPlan.adoc[physical plan] sequentially and include the following:
 
 1. `ExtractPythonUDFs`
-1. `PlanSubqueries`
+1. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 1. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
 1. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 1. `ReuseExchange`

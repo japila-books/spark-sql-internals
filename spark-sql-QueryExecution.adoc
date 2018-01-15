@@ -163,7 +163,7 @@ TIP: A `SparkPlan` preparation rule transforms a link:spark-sql-SparkPlan.adoc[p
 The current list of `SparkPlan` transformations in `preparations` is as follows:
 
 1. `ExtractPythonUDFs`
-1. `PlanSubqueries`
+1. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 1. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
 1. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 1. `ReuseExchange`

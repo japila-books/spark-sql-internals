@@ -156,6 +156,7 @@
 . link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs Unary Expression]
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple Generator Expression]
 . link:spark-sql-Expression-Literal.adoc[Literal Leaf Expression]
+. link:spark-sql-Expression-PlanExpression.adoc[PlanExpression Contract for Expressions with Query Plans]
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF -- Catalyst Expression to Manage Lifecycle of User-Defined Function]
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF -- Catalyst Expression Adapter for UserDefinedAggregateFunction]
 . link:spark-sql-Expression-Stack.adoc[Stack Generator Expression]
@@ -300,11 +301,12 @@
 . link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
 . link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
 
-=== Physical Plan Preparations Rules
+=== Physical Preparations Rules
 
-. link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[Physical Plan Preparations Rules]
+. link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[Physical Preparations Rules]
 . link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 . link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
+. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 
 == Monitoring
 

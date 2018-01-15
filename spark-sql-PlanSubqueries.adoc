@@ -1,0 +1,14 @@
+== [[PlanSubqueries]] PlanSubqueries Physical Preparation Rule
+
+`PlanSubqueries` is a link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[physical preparation rule] that...FIXME
+
+=== [[apply]] `apply` Method
+
+[source, scala]
+----
+apply(plan: SparkPlan): SparkPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a physical plan).
+
+`apply`...FIXME
