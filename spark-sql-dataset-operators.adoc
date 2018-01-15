@@ -135,24 +135,48 @@ Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Datas
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 
-=== [[as]] Converting to `Dataset` -- `as` Method
+=== [[as]] Enforcing Types -- `as` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+as[U: Encoder]: Dataset[U]
+----
 
-=== [[write]] Accessing `DataFrameWriter` -- `write` Method
+`as[T]` allows for converting from a weakly-typed `Dataset` of link:spark-sql-Row.adoc[Rows] to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
+
+[source, scala]
+----
+// Create DataFrame of pairs
+val df = Seq("hello", "world!").zipWithIndex.map(_.swap).toDF("id", "token")
+
+scala> df.printSchema
+root
+ |-- id: integer (nullable = false)
+ |-- token: string (nullable = true)
+
+scala> val ds = df.as[(Int, String)]
+ds: org.apache.spark.sql.Dataset[(Int, String)] = [id: int, token: string]
+
+// It's more helpful to have a case class for the conversion
+final case class MyRecord(id: Int, token: String)
+
+scala> val myRecords = df.as[MyRecord]
+myRecords: org.apache.spark.sql.Dataset[MyRecord] = [id: int, token: string]
+----
+
+=== [[write]] Accessing DataFrameWriter (to Describe Writing Dataset) -- `write` Method
 
 [source, scala]
 ----
 write: DataFrameWriter[T]
 ----
 
-`write` method returns link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for records of type `T`.
+`write` gives link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for records of type `T`.
 
 [source, scala]
 ----
 import org.apache.spark.sql.{DataFrameWriter, Dataset}
 val ints: Dataset[Int] = (0 to 5).toDS
-
 val writer: DataFrameWriter[Int] = ints.write
 ----
 

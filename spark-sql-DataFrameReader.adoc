@@ -124,14 +124,14 @@ Supported data formats:
 
 NOTE: Spark SQL allows for link:spark-sql-datasource-custom-formats.adoc[developing custom data source formats].
 
-=== [[schema]] Defining Schema -- `schema` method
+=== [[schema]] Specifying Schema -- `schema` method
 
 [source, scala]
 ----
 schema(schema: StructType): DataFrameReader
 ----
 
-You can specify a `schema` of the input data source.
+`schema` allows for specyfing the `schema` of a data source (that the `DataFrameReader` is about to read a dataset from).
 
 [source, scala]
 ----
@@ -140,7 +140,6 @@ val schema = new StructType()
   .add($"id".long.copy(nullable = false))
   .add($"city".string)
   .add($"country".string)
-
 scala> schema.printTreeString
 root
  |-- id: long (nullable = false)
@@ -333,34 +332,30 @@ scala> lines.show
 only showing top 20 rows
 ----
 
-=== [[table]][[creating-dataframes-from-tables]] Loading Datasets from Tables (into DataFrames) -- `table` Method
+=== [[table]][[creating-dataframes-from-tables]] Loading Table to DataFrame -- `table` Method
 
 [source, scala]
 ----
 table(tableName: String): DataFrame
 ----
 
-`table` loads `tableName` table into an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+`table` loads the content of the `tableName` table into an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+
 
 [source, scala]
 ----
-scala> spark.sql("SHOW TABLES").show(false)
-+---------+-----------+
-|tableName|isTemporary|
-+---------+-----------+
-|dafa     |false      |
-+---------+-----------+
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
 
-scala> spark.read.table("dafa").show(false)
-+---+-------+
-|id |text   |
-+---+-------+
-|1  |swiecie|
-|0  |hello  |
-+---+-------+
+scala> spark.catalog.tableExists("t1")
+res1: Boolean = true
+
+// t1 exists in the catalog
+// let's load it
+val t1 = spark.read.table("t1")
 ----
 
-CAUTION: FIXME The method uses `spark.sessionState.sqlParser.parseTableIdentifier(tableName)` and `spark.sessionState.catalog.lookupRelation`. Would be nice to learn a bit more on their internals, huh?
+NOTE: `table` simply passes the call to link:spark-sql-SparkSession.adoc#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
 
 === [[jdbc]] Loading Data From External Table using JDBC -- `jdbc` Method
 

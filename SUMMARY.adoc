@@ -6,6 +6,8 @@
 
 == Developing Spark SQL Applications
 
+. link:spark-sql-fundamentals-spark-application-development.adoc[Fundamentals of Spark SQL Application Development]
+
 . link:spark-sql-SparkSession.adoc[SparkSession -- The Entry Point to Spark SQL]
 .. link:spark-sql-SparkSession-Builder.adoc[Builder -- Building SparkSession using Fluent API]
 
@@ -17,7 +19,7 @@
 ... link:spark-sql-Row.adoc[Row]
 ... link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
 
-. link:spark-sql-datasource-api.adoc[DataSource API -- Loading and Saving Datasets]
+. link:spark-sql-datasource-api.adoc[DataSource API -- Managing Datasets in External Data Sources]
 .. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Reading Datasets from External Data Sources]
 .. link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]
 

@@ -1,10 +1,12 @@
 == [[DataFrame]] DataFrame -- Dataset of Rows
 
-Spark SQL introduces a tabular data abstraction called `DataFrame`. It is designed to ease processing large amount of structured tabular data on Spark infrastructure.
+Spark SQL introduces a tabular functional data abstraction called *DataFrame*. It is designed to ease developing Spark applications for processing large amount of structured tabular data on Spark infrastructure.
 
-A *DataFrame* is a data abstraction or a domain-specific language (DSL) for working with *structured* and *semi-structured data*, i.e. datasets with a schema. A DataFrame is thus a collection of link:spark-sql-Row.adoc[rows] with a link:spark-sql-schema.adoc[schema] that is a result of a structured query it describes.
+DataFrame is a data abstraction or a domain-specific language (DSL) for working with *structured* and *semi-structured data*, i.e. datasets that you can specify a schema for.
 
-It uses the immutable, in-memory, resilient, distributed and parallel capabilities of link:spark-rdd.adoc[RDD], and applies a structure called schema to the data.
+DataFrame is a collection of link:spark-sql-Row.adoc[rows] with a link:spark-sql-schema.adoc[schema] that is the result of executing a structured query (once it will have been executed).
+
+DataFrame uses the immutable, in-memory, resilient, distributed and parallel capabilities of link:spark-rdd.adoc[RDD], and applies a structure called schema to the data.
 
 [NOTE]
 ====
@@ -80,36 +82,6 @@ You can enforce types on link:spark-sql-Row.adoc[generic rows] and hence bring t
 A `DataFrame` is a collection of "generic" link:spark-sql-Row.adoc[Row] instances (as `RDD[Row]`) and a link:spark-sql-schema.adoc[schema].
 
 NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and link:spark-sql-StructType.adoc[StructType].
-
-=== [[as]] Enforcing Types (as method)
-
-`DataFrame` is a type alias for `Dataset[Row]`. You can enforce types of the fields using `as` method.
-
-`as` gives you a conversion from `Dataset[Row]` to `Dataset[T]`.
-
-[source, scala]
-----
-// Create DataFrame of pairs
-val df = Seq("hello", "world!").zipWithIndex.map(_.swap).toDF("id", "token")
-
-scala> df.printSchema
-root
- |-- id: integer (nullable = false)
- |-- token: string (nullable = true)
-
-scala> val ds = df.as[(Int, String)]
-ds: org.apache.spark.sql.Dataset[(Int, String)] = [id: int, token: string]
-
-// It's more helpful to have a case class for the conversion
-final case class MyRecord(id: Int, token: String)
-
-scala> val myRecords = df.as[MyRecord]
-myRecords: org.apache.spark.sql.Dataset[MyRecord] = [id: int, token: string]
-----
-
-=== [[write]] Writing DataFrames to External Storage (write method)
-
-CAUTION: FIXME
 
 === SQLContext, spark, and Spark shell
 
