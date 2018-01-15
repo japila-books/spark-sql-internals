@@ -153,6 +153,19 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 | Flag that controls that <<prepare, prepare>> is executed only once.
 |===
 
+=== [[decodeUnsafeRows]] Decoding Byte Arrays Back to UnsafeRows -- `decodeUnsafeRows` Method
+
+CAUTION: FIXME
+
+=== [[getByteArrayRdd]] Compressing Partitions of UnsafeRows (to Byte Arrays) After Executing Physical Operator -- `getByteArrayRdd` Internal Method
+
+[source, scala]
+----
+getByteArrayRdd(n: Int = -1): RDD[Array[Byte]]
+----
+
+CAUTION: FIXME
+
 === [[resetMetrics]] `resetMetrics` Method
 
 [source, scala]
@@ -168,32 +181,13 @@ NOTE: `resetMetrics` is used when...FIXME
 
 CAUTION: FIXME
 
-=== [[decodeUnsafeRows]] `decodeUnsafeRows` Method
-
-CAUTION: FIXME
-
 === [[prepareSubqueries]] `prepareSubqueries` Method
-
-CAUTION: FIXME
-
-=== [[getByteArrayRdd]] `getByteArrayRdd` Internal Method
-
-[source, scala]
-----
-getByteArrayRdd(n: Int = -1): RDD[Array[Byte]]
-----
 
 CAUTION: FIXME
 
 === [[waitForSubqueries]] Waiting for Subqueries to Finish -- `waitForSubqueries` Method
 
 CAUTION: FIXME
-
-=== [[executeCollect]] `executeCollect` Method
-
-CAUTION: FIXME
-
-NOTE: `executeCollect` does not convert data to JVM types.
 
 === [[executeToIterator]] `executeToIterator` Method
 
@@ -380,3 +374,46 @@ res38: Array[Long] = Array(4, 12, 7)
 * `CollectLimitExec` is requested to <<executeCollect, executeCollect>>
 * `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed]
 ====
+
+=== [[executeCollect]] Executing Physical Operator and Collecting Results -- `executeCollect` Method
+
+[source, scala]
+----
+executeCollect(): Array[InternalRow]
+----
+
+`executeCollect` <<getByteArrayRdd, executes the physical operator and compresses partitions of UnsafeRows as byte arrays>> (that yields a `RDD[(Long, Array[Byte])]` and so no real Spark jobs may have been submitted).
+
+`executeCollect` runs a Spark job to `collect` the elements of the RDD and for every pair in the result (of a count and bytes per partition) <<decodeUnsafeRows, decodes the byte arrays back to UnsafeRows>> and stores the decoded arrays together as the final `Array[InternalRow]`.
+
+NOTE: `executeCollect` runs a Spark job using Spark Core's `RDD.collect` operator.
+
+NOTE: `executeCollect` returns `Array[InternalRow]`, i.e. keeps the internal representation of rows unchanged and does not convert rows to JVM types.
+
+[NOTE]
+====
+`executeCollect` is used when:
+
+1. `Dataset` is requested for the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] (being a single link:spark-sql-LogicalPlan-Command.adoc[Command] or their `Union`)
+
+1. link:spark-sql-dataset-operators.adoc#explain[explain] and link:spark-sql-dataset-operators.adoc#count[count] operators are executed
+
+1. `Dataset` is requested to `collectFromPlan`
+
+1. `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
+
+1. `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
+
+1. `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
+====
+
+=== [[executeCollectPublic]] `executeCollectPublic` Method
+
+[source, scala]
+----
+executeCollectPublic(): Array[Row]
+----
+
+`executeCollectPublic`...FIXME
+
+NOTE: `executeCollectPublic` is used when...FIXME

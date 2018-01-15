@@ -38,6 +38,10 @@ scala> q.explain
 | [[numOutputRows]] `numOutputRows`
 | number of output rows
 |
+
+| [[avgHashProbe]] `avgHashProbe`
+| avg hash probe
+|
 |===
 
 .BroadcastHashJoinExec in web UI (Details for Query)
