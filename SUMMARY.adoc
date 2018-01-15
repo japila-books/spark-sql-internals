@@ -174,6 +174,7 @@
 . link:spark-sql-LogicalPlan.adoc[LogicalPlan -- Logical Query Plan / Logical Operator]
 . link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
 . link:spark-sql-LogicalPlan-BroadcastHint.adoc[BroadcastHint]
+. link:spark-sql-LogicalPlan-Command.adoc[Command]
 . link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
 . link:spark-sql-LogicalPlan-Expand.adoc[Expand]
 . link:spark-sql-LogicalPlan-Generate.adoc[Generate]

@@ -368,17 +368,6 @@ NOTE: `ofRows` is a `private[sql]` operator that can only be accessed from code 
 
 Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:spark-sql-SparkSession.adoc[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
 
-=== [[withAction]] `withAction` Internal Method
-
-[source, scala]
-----
-withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
-----
-
-`withAction`...FIXME
-
-NOTE: `withAction` is used when...FIXME
-
 === [[withNewExecutionId]] Tracking Multi-Job Structured Query Execution (PySpark) -- `withNewExecutionId` Internal Method
 
 [source, scala]
@@ -395,6 +384,30 @@ NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs bel
 `withNewExecutionId` is used exclusively when `Dataset` is executing Python-based actions (i.e. `collectToPython`, `collectAsArrowToPython` and `toPythonIterator`) that are not of much interest in this gitbook.
 
 Feel free to contact me at jacek@japila.pl if you think I should re-consider my decision.
+====
+
+=== [[withAction]] Tracking Multi-Job Action Execution Under New Execution Id -- `withAction` Internal Method
+
+[source, scala]
+----
+withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
+----
+
+`withAction` requests `QueryExecution` for link:spark-sql-QueryExecution.adoc#executedPlan[executable physical plan] and link:spark-sql-SparkPlan.adoc[resets the metrics] of every physical operator (in the physical plan).
+
+`withAction` requests `SQLExecution` for link:spark-sql-SQLExecution.adoc#withNewExecutionId[executing] the input `action` with the executable physical plan (tracked under a new execution id).
+
+In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished link:spark-sql-ExecutionListenerManager.adoc#onSuccess[successfully] or link:spark-sql-ExecutionListenerManager.adoc#onFailure[with an exception].
+
+NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-SparkSession.adoc#listenerManager[ExecutionListenerManager].
+
+[NOTE]
+====
+`withAction` is used when `Dataset` is requested for the following:
+
+1. <<logicalPlan, Computing the logical plan>> (and executing a link:spark-sql-LogicalPlan-Command.adoc[logical command] or their `Union`)
+
+1. link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
 ====
 
 === [[i-want-more]] Further reading or watching

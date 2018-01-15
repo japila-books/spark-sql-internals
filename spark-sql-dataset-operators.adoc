@@ -38,6 +38,9 @@ Internally, `foreach` executes `foreach` action on the Dataset's link:spark-sql-
 
 Internally, `foreachPartition` executes `foreachPartition` action on the Dataset's link:spark-sql-Dataset.adoc#rdd[RDD].
 
+| <<head, head>>
+|
+
 | <<mapPartition, mapPartition>> |
 | <<randomSplit, randomSplit>> | Randomly split a `Dataset` into two ``Dataset``s
 | <<rdd, rdd>> |
@@ -65,6 +68,18 @@ Used exclusively in Structured Streaming.
 | <<write, write>> |
 | <<writeStream, writeStream>> |
 |===
+
+=== [[head]] `head` Operator
+
+CAUTION: FIXME
+
+=== [[collect]] `collect` Operator
+
+CAUTION: FIXME
+
+=== [[collectAsList]] `collectAsList` Operator
+
+CAUTION: FIXME
 
 === [[count]] `count` Operator
 

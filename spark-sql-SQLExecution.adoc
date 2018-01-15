@@ -2,7 +2,7 @@
 
 [[EXECUTION_ID_KEY]]
 [[spark.sql.execution.id]]
-`SQLExecution` defines *spark.sql.execution.id* Spark property that is used to track multiple Spark jobs that should all together constitute a single structured query execution.
+`SQLExecution` defines *spark.sql.execution.id* Spark property that is used to track multiple Spark jobs that should all together constitute a single structured query execution (that could be easily reported as a single execution unit).
 
 [source, scala]
 ----
@@ -81,7 +81,7 @@ Hello World
 
 NOTE: `withExecutionId` is used when...FIXME
 
-=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) with Single Execution Id -- `withNewExecutionId` Method
+=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Tracked Under New Execution Id -- `withNewExecutionId` Method
 
 [source, scala]
 ----

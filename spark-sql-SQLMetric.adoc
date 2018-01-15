@@ -52,6 +52,17 @@ Seq("Jacek").toDF("name").count
 | Used when...
 |===
 
+=== [[reset]] `reset` Method
+
+[source, scala]
+----
+reset(): Unit
+----
+
+`reset`...FIXME
+
+NOTE: `reset` is used when...FIXME
+
 === [[postDriverMetricUpdates]] Posting Driver-Side Metric Updates -- `SQLMetrics.postDriverMetricUpdates` Method
 
 [source, scala]

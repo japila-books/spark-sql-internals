@@ -153,6 +153,17 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 | Flag that controls that <<prepare, prepare>> is executed only once.
 |===
 
+=== [[resetMetrics]] `resetMetrics` Method
+
+[source, scala]
+----
+resetMetrics(): Unit
+----
+
+`resetMetrics` takes <<metrics, metrics>> and request them to link:spark-sql-SQLMetric.adoc[reset].
+
+NOTE: `resetMetrics` is used when...FIXME
+
 === [[outputOrdering]] `outputOrdering` Method
 
 CAUTION: FIXME
