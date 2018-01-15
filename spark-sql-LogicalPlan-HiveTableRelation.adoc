@@ -4,6 +4,9 @@
 
 `HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-FindDataSourceTable.adoc#readHiveTable[read a table from Hive].
 
+[[isPartitioned]]
+`HiveTableRelation` is *partitioned* when it has at least one <<partitionCols, partition>>.
+
 === [[creating-instance]] Creating HiveTableRelation Instance
 
 `HiveTableRelation` takes the following when created:

@@ -1,0 +1,20 @@
+== [[HiveUtils]] HiveUtils
+
+`HiveUtils` is...FIXME
+
+[[properties]]
+.HiveUtils's Configuration Properties
+[cols="1,1,1,2",options="header",width="100%"]
+|===
+| Name
+| Default Value
+| Scala Value
+| Description
+
+| [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] `spark.sql.hive.convertMetastoreParquet.mergeSchema`
+| `false`
+| `CONVERT_METASTORE_PARQUET_WITH_SCHEMA_MERGING`
+a| Enables trying to merge possibly different but compatible Parquet schemas in different Parquet data files.
+
+This configuration is only effective when `spark.sql.hive.convertMetastoreParquet` is `true`.
+|===

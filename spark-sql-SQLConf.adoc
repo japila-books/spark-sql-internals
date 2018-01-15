@@ -307,6 +307,15 @@ Use <<limitScaleUpFactor, limitScaleUpFactor>> method to access the current valu
 | `100`
 | Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
 
+| [[spark.sql.orc.impl]] `spark.sql.orc.impl`
+| `native`
+a| (internal) When `native`, use the native version of ORC support instead of the ORC library in Hive 1.2.1.
+
+Acceptable values:
+
+* `hive`
+* `native`
+
 | [[spark.sql.pivotMaxValues]] `spark.sql.pivotMaxValues`
 | `10000`
 | Maximum number of (distinct) values that will be collected without error (when doing a link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] without specifying the values for the pivot column)
