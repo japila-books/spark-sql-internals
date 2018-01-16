@@ -1,8 +1,55 @@
-== [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule
+== [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule for Resolving UnresolvedCatalogRelations
 
-`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
+`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) and <<apply, resolving UnresolvedCatalogRelations>> for the following cases:
+
+1. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation`
+
+1. "Standalone" `UnresolvedCatalogRelations`
+
+NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that link:spark-sql-ResolveRelations.adoc[ResolveRelations] logical evaluation rule adds to a logical plan while resolving link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations] leaf logical operators.
 
 `FindDataSourceTable` is a part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+// Example: InsertIntoTable with UnresolvedCatalogRelation
+// Drop tables to make the example reproducible
+Seq("t1", "t2").foreach { t =>
+  spark.sharedState.externalCatalog.dropTable("default", t, ignoreIfNotExists = true, purge = true)
+}
+
+// Create tables
+spark.range(10).write.saveAsTable("t1")
+spark.range(0).write.saveAsTable("t2")
+
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table("t1").insertInto(tableName = "t2", overwrite = true)
+
+// Transform the logical plan with ResolveRelations logical rule first
+// so UnresolvedRelations become UnresolvedCatalogRelations
+import spark.sessionState.analyzer.ResolveRelations
+val planWithUnresolvedCatalogRelations = ResolveRelations(plan)
+scala> println(planWithUnresolvedCatalogRelations.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'SubqueryAlias t1
+02    +- 'UnresolvedCatalogRelation `default`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+
+// Let's resolve UnresolvedCatalogRelations then
+import org.apache.spark.sql.execution.datasources.FindDataSourceTable
+val r = new FindDataSourceTable(spark)
+val tablesResolvedPlan = r(planWithUnresolvedCatalogRelations)
+// FIXME Why is t2 not resolved?!
+scala> println(tablesResolvedPlan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- SubqueryAlias t1
+02    +- Relation[id#10L] parquet
+----
 
 === [[apply]] Applying FindDataSourceTable Rule to Logical Plan -- `apply` Method
 

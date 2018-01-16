@@ -1,6 +1,6 @@
 == [[ResolveRelations]] ResolveRelations Logical Evaluation Rule for Resolving UnresolvedRelations With Tables in Catalog
 
-`ResolveRelations` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan), i.e.
+`ResolveRelations` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan), i.e.
 
 1. Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
 
