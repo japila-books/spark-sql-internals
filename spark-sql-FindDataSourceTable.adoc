@@ -2,7 +2,7 @@
 
 `FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) and <<apply, resolving UnresolvedCatalogRelations>> for the following cases:
 
-1. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation`
+1. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for datasource and hive tables)
 
 1. "Standalone" `UnresolvedCatalogRelations`
 
@@ -20,16 +20,20 @@ org.apache.spark.sql.SparkSession
 
 // Example: InsertIntoTable with UnresolvedCatalogRelation
 // Drop tables to make the example reproducible
+val db = spark.catalog.currentDatabase
 Seq("t1", "t2").foreach { t =>
-  spark.sharedState.externalCatalog.dropTable("default", t, ignoreIfNotExists = true, purge = true)
+  spark.sharedState.externalCatalog.dropTable(db, t, ignoreIfNotExists = true, purge = true)
 }
 
 // Create tables
-spark.range(10).write.saveAsTable("t1")
-spark.range(0).write.saveAsTable("t2")
+sql("CREATE TABLE t1 (id LONG) USING parquet")
+sql("CREATE TABLE t2 (id LONG) USING orc")
 
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table("t1").insertInto(tableName = "t2", overwrite = true)
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'UnresolvedRelation `t1`
 
 // Transform the logical plan with ResolveRelations logical rule first
 // so UnresolvedRelations become UnresolvedCatalogRelations

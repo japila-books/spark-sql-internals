@@ -260,7 +260,64 @@ lookupRelation(name: TableIdentifier): LogicalPlan
 
 [source, scala]
 ----
-FIXME: Show different paths of `lookupRelation`
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+scala> :type spark.sessionState.catalog
+org.apache.spark.sql.catalyst.catalog.SessionCatalog
+
+import spark.sessionState.{catalog => c}
+import org.apache.spark.sql.catalyst.TableIdentifier
+
+// Global temp view
+val db = spark.sharedState.globalTempViewManager.database
+// Make the example reproducible (and so "replace")
+spark.range(1).createOrReplaceGlobalTempView("gv1")
+val gv1 = TableIdentifier(table = "gv1", database = Some(db))
+val plan = c.lookupRelation(gv1)
+scala> println(plan.numberedTreeString)
+00 SubqueryAlias gv1
+01 +- Range (0, 1, step=1, splits=Some(8))
+
+// Regular table
+val db = spark.catalog.currentDatabase
+spark.sharedState.externalCatalog.dropTable(db, table = "t1", ignoreIfNotExists = true, purge = true)
+sql("CREATE TABLE t1 (id LONG) USING parquet")
+val t1 = TableIdentifier(table = "t1", database = Some(db))
+val plan = c.lookupRelation(t1)
+scala> println(plan.numberedTreeString)
+00 'SubqueryAlias t1
+01 +- 'UnresolvedCatalogRelation `default`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
+
+// Regular view (not temporary view)
+// Make the example reproducible
+spark.sharedState.externalCatalog.dropTable(db, table = "v1", ignoreIfNotExists = true, purge = true)
+import org.apache.spark.sql.catalyst.catalog.{CatalogStorageFormat, CatalogTable, CatalogTableType}
+val v1 = TableIdentifier(table = "v1", database = Some(db))
+import org.apache.spark.sql.types.StructType
+val schema = new StructType().add($"id".long)
+val storage = CatalogStorageFormat(locationUri = None, inputFormat = None, outputFormat = None, serde = None, compressed = false, properties = Map())
+val tableDef = CatalogTable(
+  identifier = v1,
+  tableType = CatalogTableType.VIEW,
+  storage,
+  schema,
+  viewText = Some("SELECT 1") /** Required or RuntimeException reported */)
+spark.sharedState.externalCatalog.createTable(tableDef, ignoreIfExists = false)
+val plan = c.lookupRelation(v1)
+scala> println(plan.numberedTreeString)
+00 'SubqueryAlias v1
+01 +- View (`default`.`v1`, [id#77L])
+02    +- 'Project [unresolvedalias(1, None)]
+03       +- OneRowRelation
+
+// Temporary view
+spark.range(1).createOrReplaceTempView("v2")
+val v2 = TableIdentifier(table = "v2", database = None)
+val plan = c.lookupRelation(v2)
+scala> println(plan.numberedTreeString)
+00 SubqueryAlias v2
+01 +- Range (0, 1, step=1, splits=Some(8))
 ----
 
 Internally, `lookupRelation` looks up the `name` table using:

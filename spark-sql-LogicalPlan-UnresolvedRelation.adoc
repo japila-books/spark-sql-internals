@@ -1,7 +1,7 @@
 == [[UnresolvedRelation]] UnresolvedRelation Leaf Logical Operator for Table Reference
 
 [[tableIdentifier]][[creating-instance]]
-`UnresolvedRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] to represent a *table reference* in a logical query plan that has yet to be analyzed and resolved (i.e. looked up in a catalog).
+`UnresolvedRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] to represent a *table reference* in a logical query plan that has yet to be resolved (i.e. looked up in a catalog).
 
 [NOTE]
 ====
@@ -34,3 +34,5 @@ scala> println(plan.numberedTreeString)
 00 'UnresolvedRelation `myDB`.`t1`
 ----
 ====
+
+NOTE: `UnresolvedRelation` is resolved to...FIXME
