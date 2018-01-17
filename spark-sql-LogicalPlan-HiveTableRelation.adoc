@@ -1,19 +1,84 @@
-== [[HiveTableRelation]] HiveTableRelation Leaf Logical Operator
+== [[HiveTableRelation]] HiveTableRelation Leaf Logical Operator -- Representing Hive Tables in Logical Plan
 
-`HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that...FIXME
+`HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a table in Apache Hive.
 
-`HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-FindDataSourceTable.adoc#readHiveTable[read a table from Hive].
+`HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-FindDataSourceTable.adoc#apply[resolve UnresolvedCatalogRelations in a logical plan] (for link:spark-sql-FindDataSourceTable.adoc#readHiveTable[Hive tables]).
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+val tableName = "h1"
+
+// Make the example reproducible
+val db = spark.catalog.currentDatabase
+import spark.sharedState.{externalCatalog => extCatalog}
+extCatalog.dropTable(
+  db, table = tableName, ignoreIfNotExists = true, purge = true)
+
+// sql("CREATE TABLE h1 (id LONG) USING hive")
+import org.apache.spark.sql.types.StructType
+spark.catalog.createTable(
+  tableName,
+  source = "hive",
+  schema = new StructType().add($"id".long),
+  options = Map.empty[String, String])
+
+val h1meta = extCatalog.getTable(db, tableName)
+scala> println(h1meta.provider.get)
+hive
+
+// Looks like we've got the testing space ready for the experiment
+val h1 = spark.table(tableName)
+
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table(tableName).insertInto("t2", overwrite = true)
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'UnresolvedRelation `h1`
+
+// ResolveRelations logical rule first to resolve UnresolvedRelations
+import spark.sessionState.analyzer.ResolveRelations
+val rrPlan = ResolveRelations(plan)
+scala> println(rrPlan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- 'SubqueryAlias h1
+02    +- 'UnresolvedCatalogRelation `default`.`h1`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
+
+// FindDataSourceTable logical rule next to resolve UnresolvedCatalogRelations
+import org.apache.spark.sql.execution.datasources.FindDataSourceTable
+val findTablesRule = new FindDataSourceTable(spark)
+val planWithTables = findTablesRule(rrPlan)
+
+// At long last...
+// Note HiveTableRelation in the logical plan
+scala> println(planWithTables.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
+01 +- SubqueryAlias h1
+02    +- HiveTableRelation `default`.`h1`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [id#13L]
+----
 
 [[isPartitioned]]
 `HiveTableRelation` is *partitioned* when it has at least one <<partitionCols, partition>>.
 
-=== [[creating-instance]] Creating HiveTableRelation Instance
+The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a catalog) has to meet the requirements:
 
-`HiveTableRelation` takes the following when created:
+1. The link:spark-sql-CatalogTable.adoc#identifier[database] is defined
+1. The link:spark-sql-CatalogTable.adoc#partitionSchema[partition schema] is of the same type as <<partitionCols, partitionCols>>
+1. The link:spark-sql-CatalogTable.adoc#dataSchema[data schema] is of the same type as <<dataCols, dataCols>>
 
-* [[tableMeta]] link:spark-sql-CatalogTable.adoc[Table metadata]
-* [[dataCols]] Columns (as a collection of `AttributeReferences`)
-* [[partitionCols]] Partitions (as a collection of `AttributeReferences`)
+[[output]]
+`HiveTableRelation` has the output attributes made up of <<dataCols, data>> followed by <<partitionCols, partition>> columns.
+
+[NOTE]
+====
+`HiveTableRelation` is removed from a logical plan when `HiveAnalysis` rule is executed (and transforms a `InsertIntoTable` with `HiveTableRelation` to an `InsertIntoHiveTable`).
+
+`HiveTableRelation` is when `RelationConversions` rule is executed (and converts `HiveTableRelations` to `LogicalRelations`).
+
+`HiveTableRelation` is resolved to link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec] physical operator when `HiveTableScans` strategy is executed.
+====
 
 === [[computeStats]] `computeStats` Method
 
@@ -24,10 +89,18 @@ computeStats(): Statistics
 
 NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
-`computeStats` takes the link:spark-sql-CatalogTable.adoc#stats[table statistics] from the <<tableMeta, table metadata>> if defined and link:spark-sql-CatalogStatistics.adoc#toPlanStats[converts them to Spark statistics].
+`computeStats` takes the link:spark-sql-CatalogTable.adoc#stats[table statistics] from the <<tableMeta, table metadata>> if defined and link:spark-sql-CatalogStatistics.adoc#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
 
-If the table statistics are unavailable, `computeStats` reports an `IllegalStateException`.
+If the table statistics are not available, `computeStats` reports an `IllegalStateException`.
 
 ```
 table stats must be specified.
 ```
+
+=== [[creating-instance]] Creating HiveTableRelation Instance
+
+`HiveTableRelation` takes the following when created:
+
+* [[tableMeta]] link:spark-sql-CatalogTable.adoc[Table metadata]
+* [[dataCols]] Columns (as a collection of `AttributeReferences`)
+* [[partitionCols]] Partitions (as a collection of `AttributeReferences`)

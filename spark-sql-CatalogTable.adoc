@@ -74,6 +74,28 @@ The table statistics can be link:spark-sql-CommandUtils.adoc#updateTableStats[au
 
 You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
 
+=== [[dataSchema]] `dataSchema` Method
+
+[source, scala]
+----
+dataSchema: StructType
+----
+
+`dataSchema`...FIXME
+
+NOTE: `dataSchema` is used when...FIXME
+
+=== [[partitionSchema]] `partitionSchema` Method
+
+[source, scala]
+----
+partitionSchema: StructType
+----
+
+`partitionSchema`...FIXME
+
+NOTE: `partitionSchema` is used when...FIXME
+
 === [[toLinkedHashMap]] `toLinkedHashMap` Method
 
 [source, scala]

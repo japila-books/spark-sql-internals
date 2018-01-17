@@ -1,6 +1,6 @@
 == [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule for Resolving UnresolvedCatalogRelations
 
-`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) and <<apply, resolving UnresolvedCatalogRelations>> for the following cases:
+`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] that link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use for  <<apply, resolving UnresolvedCatalogRelations in a logical plan>> for the following cases:
 
 1. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for datasource and hive tables)
 
@@ -55,7 +55,7 @@ scala> println(tablesResolvedPlan.numberedTreeString)
 02    +- Relation[id#10L] parquet
 ----
 
-=== [[apply]] Applying FindDataSourceTable Rule to Logical Plan -- `apply` Method
+=== [[apply]] Applying FindDataSourceTable Rule to Logical Plan (and Resolving UnresolvedCatalogRelations in Logical Plan) -- `apply` Method
 
 [source, scala]
 ----
@@ -65,17 +65,6 @@ apply(plan: LogicalPlan): LogicalPlan
 NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a logical plan).
 
 `apply`...FIXME
-
-=== [[readHiveTable]] `readHiveTable` Internal Method
-
-[source, scala]
-----
-readHiveTable(table: CatalogTable): LogicalPlan
-----
-
-`readHiveTable`...FIXME
-
-NOTE: `readHiveTable` is used when...FIXME
 
 === [[readDataSourceTable]] `readDataSourceTable` Internal Method
 
@@ -87,3 +76,14 @@ readDataSourceTable(table: CatalogTable): LogicalPlan
 `readDataSourceTable`...FIXME
 
 NOTE: `readDataSourceTable` is used when...FIXME
+
+=== [[readHiveTable]] `readHiveTable` Internal Method
+
+[source, scala]
+----
+readHiveTable(table: CatalogTable): LogicalPlan
+----
+
+`readHiveTable` simply link:spark-sql-LogicalPlan-HiveTableRelation.adoc#creating-instance[creates] a `HiveTableRelation` for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+
+NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolving UnresolvedCatalogRelations in a logical plan>>.
