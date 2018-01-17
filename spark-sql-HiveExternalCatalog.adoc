@@ -60,7 +60,7 @@ statsFromProperties(
 
 `statsFromProperties` collects the `properties` with the keys with *spark.sql.statistics.* prefix.
 
-`statsFromProperties` re-creates `ColumnStat` for every column in `schema`.
+`statsFromProperties` re-creates the link:spark-sql-ColumnStat.adoc[column statistics] for every column in `schema`.
 
 CAUTION: FIXME Review how `ColumnStat` are re-created
 

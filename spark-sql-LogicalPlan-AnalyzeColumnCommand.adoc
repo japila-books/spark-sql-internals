@@ -1,6 +1,43 @@
 == [[AnalyzeColumnCommand]] AnalyzeColumnCommand Logical Command
 
-`AnalyzeColumnCommand` is...FIXME
+`AnalyzeColumnCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that...FIXME
+
+`AnalyzeColumnCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
+
+[source, scala]
+----
+// Make the example reproducible
+val tableName = "t1"
+import org.apache.spark.sql.catalyst.TableIdentifier
+val tableId = TableIdentifier(tableName)
+val metastore = spark.sessionState.catalog
+
+metastore.dropTable(tableId, ignoreIfNotExists = true, purge = true)
+
+val df = Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2")
+df.write.saveAsTable("t1")
+
+// AnalyzeColumnCommand represents ANALYZE TABLE...FOR COLUMNS SQL command
+val allCols = df.columns.mkString(",")
+val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $allCols"
+val plan = spark.sql(analyzeTableSQL).queryExecution.logical
+import org.apache.spark.sql.execution.command.AnalyzeColumnCommand
+val cmd = plan.asInstanceOf[AnalyzeColumnCommand]
+scala> println(cmd)
+AnalyzeColumnCommand `t1`, [id, p1, p2]
+
+spark.sql(analyzeTableSQL)
+val stats = metastore.getTableMetadata(tableId).stats.get
+scala> println(stats.simpleString)
+1383 bytes, 2 rows
+
+scala> stats.colStats.map { case (c, ss) => s"$c: $ss" }.foreach(println)
+p2: ColumnStat(2,None,None,0,4,4,None)
+p1: ColumnStat(2,Some(0),Some(1),0,4,4,None)
+id: ColumnStat(2,Some(0),Some(1),0,4,4,None)
+----
+
+NOTE: `AnalyzeColumnCommand` is not supported on views.
 
 === [[run]] `run` Method
 
@@ -9,6 +46,32 @@
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to...FIXME.
+NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
-`run`...FIXME
+`run` calculates the following statistics:
+
+1. sizeInBytes
+1. stats for each column
+
+CAUTION: FIXME
+
+=== [[computeColumnStats]] `computeColumnStats` Internal Method
+
+[source, scala]
+----
+computeColumnStats(
+  sparkSession: SparkSession,
+  tableIdent: TableIdentifier,
+  columnNames: Seq[String]): (Long, Map[String, ColumnStat])
+----
+
+`computeColumnStats`...FIXME
+
+NOTE: `computeColumnStats` is used exclusively when `AnalyzeColumnCommand` is <<run, executed>>.
+
+=== [[creating-instance]] Creating AnalyzeColumnCommand Instance
+
+`AnalyzeColumnCommand` takes the following when created:
+
+* [[tableIdent]] `TableIdentifier`
+* [[columnNames]] Column names

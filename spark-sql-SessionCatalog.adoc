@@ -279,9 +279,11 @@ scala> println(plan.numberedTreeString)
 00 SubqueryAlias gv1
 01 +- Range (0, 1, step=1, splits=Some(8))
 
+val metastore = spark.sharedState.externalCatalog
+
 // Regular table
 val db = spark.catalog.currentDatabase
-spark.sharedState.externalCatalog.dropTable(db, table = "t1", ignoreIfNotExists = true, purge = true)
+metastore.dropTable(db, table = "t1", ignoreIfNotExists = true, purge = true)
 sql("CREATE TABLE t1 (id LONG) USING parquet")
 val t1 = TableIdentifier(table = "t1", database = Some(db))
 val plan = c.lookupRelation(t1)
@@ -291,7 +293,7 @@ scala> println(plan.numberedTreeString)
 
 // Regular view (not temporary view)
 // Make the example reproducible
-spark.sharedState.externalCatalog.dropTable(db, table = "v1", ignoreIfNotExists = true, purge = true)
+metastore.dropTable(db, table = "v1", ignoreIfNotExists = true, purge = true)
 import org.apache.spark.sql.catalyst.catalog.{CatalogStorageFormat, CatalogTable, CatalogTableType}
 val v1 = TableIdentifier(table = "v1", database = Some(db))
 import org.apache.spark.sql.types.StructType
@@ -303,7 +305,7 @@ val tableDef = CatalogTable(
   storage,
   schema,
   viewText = Some("SELECT 1") /** Required or RuntimeException reported */)
-spark.sharedState.externalCatalog.createTable(tableDef, ignoreIfExists = false)
+metastore.createTable(tableDef, ignoreIfExists = false)
 val plan = c.lookupRelation(v1)
 scala> println(plan.numberedTreeString)
 00 'SubqueryAlias v1

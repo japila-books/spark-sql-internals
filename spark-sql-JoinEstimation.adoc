@@ -1,3 +1,35 @@
 == [[JoinEstimation]] JoinEstimation
 
 `JoinEstimation` is...FIXME
+
+=== [[computeByHistogram]] `computeByHistogram` Internal Method
+
+[source, scala]
+----
+computeByHistogram(
+  leftKey: AttributeReference,
+  rightKey: AttributeReference,
+  leftHistogram: Histogram,
+  rightHistogram: Histogram,
+  newMin: Option[Any],
+  newMax: Option[Any]): (BigInt, ColumnStat)
+----
+
+`computeByHistogram`...FIXME
+
+NOTE: `computeByHistogram` is used when...FIXME
+
+=== [[computeByNdv]] `computeByNdv` Internal Method
+
+[source, scala]
+----
+computeByNdv(
+  leftKey: AttributeReference,
+  rightKey: AttributeReference,
+  newMin: Option[Any],
+  newMax: Option[Any]): (BigInt, ColumnStat)
+----
+
+`computeByNdv`...FIXME
+
+NOTE: `computeByNdv` is used when...FIXME

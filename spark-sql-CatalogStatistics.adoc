@@ -5,7 +5,7 @@
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
 * [[rowCount]] Optional estimated *number of rows* (aka _row count_)
-* [[colStats]] *Column statistics* (as a sequence of a column name and a `ColumnStat`)
+* [[colStats]] *Column statistics* (i.e. column names and their link:spark-sql-ColumnStat.adoc[statistics])
 
 [NOTE]
 ====

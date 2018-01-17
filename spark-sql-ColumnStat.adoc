@@ -1,0 +1,64 @@
+== [[ColumnStat]] ColumnStat -- Column Statistics
+
+[[creating-instance]]
+`ColumnStat` represents the statistics of a column.
+
+* [[distinctCount]] `distinctCount` metric
+* [[min]] Minimum value (optional)
+* [[max]] Maximum value (optional)
+* [[nullCount]] `nullCount` metric
+* [[avgLen]] Average length
+* [[maxLen]] Maximum length
+* [[histogram]] Optional `Histogram` (empty by default)
+
+`ColumnStat` is <<creating-instance, created>> when...FIXME
+
+NOTE: `ColumnStat` does not support <<min, minimum>> and <<max, maximum>> metrics for binary (i.e. `Array[Byte]`) and string types.
+
+=== [[toMap]] `toMap` Method
+
+[source, scala]
+----
+toMap(colName: String, dataType: DataType): Map[String, String]
+----
+
+`toMap`...FIXME
+
+NOTE: `toMap` is used when...FIXME
+
+=== [[fromMap]] `fromMap` Method
+
+[source, scala]
+----
+fromMap(table: String, field: StructField, map: Map[String, String]): Option[ColumnStat]
+----
+
+`fromMap`...FIXME
+
+NOTE: `fromMap` is used when...FIXME
+
+=== [[toExternalString]] `toExternalString` Internal Method
+
+[source, scala]
+----
+toExternalString(v: Any, colName: String, dataType: DataType): String
+----
+
+`toExternalString`...FIXME
+
+NOTE: `toExternalString` is used when...FIXME
+
+=== [[rowToColumnStat]] `rowToColumnStat` Method
+
+[source, scala]
+----
+rowToColumnStat(
+  row: InternalRow,
+  attr: Attribute,
+  rowCount: Long,
+  percentiles: Option[ArrayData]): ColumnStat
+----
+
+`rowToColumnStat`...FIXME
+
+NOTE: `rowToColumnStat` is used when...FIXME

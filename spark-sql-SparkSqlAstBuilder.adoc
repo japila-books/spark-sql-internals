@@ -85,7 +85,7 @@ AnalyzeTableCommand `t1`, false
 ----
 
 [[AnalyzeColumnCommand]]
-* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
+* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause (and no `PARTITION` specification)
 +
 [source, scala]
 ----
