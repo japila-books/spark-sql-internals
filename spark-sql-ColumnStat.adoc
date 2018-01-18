@@ -13,6 +13,54 @@
 
 `ColumnStat` is <<creating-instance, created>> when...FIXME
 
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+val tableName = "t1"
+
+// Make the example reproducible
+import org.apache.spark.sql.catalyst.TableIdentifier
+val tid = TableIdentifier(tableName)
+val sessionCatalog = spark.sessionState.catalog
+sessionCatalog.dropTable(tid, ignoreIfNotExists = true, purge = true)
+
+// CREATE TABLE t1
+Seq((0, 0, "zero"), (1, 1, "one")).
+  toDF("id", "p1", "p2").
+  write.
+  saveAsTable("t1")
+
+// As we drop and create immediately we may face problems with unavailable partition files
+// Invalidate cache
+spark.sql(s"REFRESH TABLE $tableName")
+
+// Use ANALYZE TABLE...FOR COLUMNS to compute column statistics
+// that saves them in a metastore (aka an external catalog)
+val df = spark.table(tableName)
+val allCols = df.columns.mkString(",")
+val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $allCols"
+spark.sql(analyzeTableSQL)
+
+// Fetch the table metadata (with column statistics) from a metastore
+val metastore = spark.sharedState.externalCatalog
+val db = spark.catalog.currentDatabase
+val tableMeta = metastore.getTable(db, table = tableName)
+
+// The column statistics are part of the table statistics
+val colStats = tableMeta.stats.get.colStats
+
+scala> :type colStats
+Map[String,org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
+
+scala> colStats.map { case (name, cs) => s"$name: $cs" }.foreach(println)
+// the output may vary
+id: ColumnStat(2,Some(0),Some(1),0,4,4,None)
+p1: ColumnStat(2,Some(0),Some(1),0,4,4,None)
+p2: ColumnStat(2,None,None,0,4,4,None)
+----
+
 NOTE: `ColumnStat` does not support <<min, minimum>> and <<max, maximum>> metrics for binary (i.e. `Array[Byte]`) and string types.
 
 === [[toMap]] `toMap` Method
@@ -26,7 +74,7 @@ toMap(colName: String, dataType: DataType): Map[String, String]
 
 NOTE: `toMap` is used when...FIXME
 
-=== [[fromMap]] `fromMap` Method
+=== [[fromMap]] Creating ColumnStat from Column Statistics Properties (aka ColumnStat Deserialization) -- `fromMap` Method
 
 [source, scala]
 ----
@@ -35,7 +83,7 @@ fromMap(table: String, field: StructField, map: Map[String, String]): Option[Col
 
 `fromMap`...FIXME
 
-NOTE: `fromMap` is used when...FIXME
+NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[building Spark statistics from Hive metastore].
 
 === [[toExternalString]] `toExternalString` Internal Method
 

@@ -48,7 +48,7 @@ val spark: SparkSession = SparkSession.builder
 ----
 ====
 
-=== [[statsFromProperties]] Re-Creating Spark Statistics from Hive Metastore -- `statsFromProperties` Internal Method
+=== [[statsFromProperties]] Restoring Spark Statistics from Hive Metastore -- `statsFromProperties` Internal Method
 
 [source, scala]
 ----
@@ -58,19 +58,19 @@ statsFromProperties(
   schema: StructType): Option[CatalogStatistics]
 ----
 
-`statsFromProperties` collects the `properties` with the keys with *spark.sql.statistics.* prefix.
+`statsFromProperties` collects the statistics properties (i.e. the keys with *spark.sql.statistics* prefix in the input `properties` collection).
 
-`statsFromProperties` re-creates the link:spark-sql-ColumnStat.adoc[column statistics] for every column in `schema`.
+`statsFromProperties` returns `None` if there are no keys with the `spark.sql.statistics` prefix are found in `properties`.
 
-CAUTION: FIXME Review how `ColumnStat` are re-created
+If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` link:spark-sql-ColumnStat.adoc#creating-instance[creates] a `ColumnStat` that is the column statistics for every column in `schema`.
 
-`statsFromProperties` creates a link:spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] with the following properties:
+For every column name in `schema` `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and link:spark-sql-ColumnStat.adoc#fromMap[converts] them to a `ColumnStat` (for the column name).
+
+In the end, `statsFromProperties` creates a link:spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] with the following properties:
 
 * link:spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize*
 * link:spark-sql-CatalogStatistics.adoc#rowCount[rowCount] as *spark.sql.statistics.numRows*
-* link:spark-sql-CatalogStatistics.adoc#colStats[colStats] as...FIXME (see above)
-
-Otherwise, `statsFromProperties` returns `None` if there are no keys with *spark.sql.statistics.* prefix.
+* link:spark-sql-CatalogStatistics.adoc#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
 
 NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
 

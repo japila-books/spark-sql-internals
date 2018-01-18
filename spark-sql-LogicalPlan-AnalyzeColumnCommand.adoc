@@ -10,9 +10,9 @@
 val tableName = "t1"
 import org.apache.spark.sql.catalyst.TableIdentifier
 val tableId = TableIdentifier(tableName)
-val metastore = spark.sessionState.catalog
+val sessionCatalog = spark.sessionState.catalog
 
-metastore.dropTable(tableId, ignoreIfNotExists = true, purge = true)
+sessionCatalog.dropTable(tableId, ignoreIfNotExists = true, purge = true)
 
 val df = Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2")
 df.write.saveAsTable("t1")
@@ -27,7 +27,7 @@ scala> println(cmd)
 AnalyzeColumnCommand `t1`, [id, p1, p2]
 
 spark.sql(analyzeTableSQL)
-val stats = metastore.getTableMetadata(tableId).stats.get
+val stats = sessionCatalog.getTableMetadata(tableId).stats.get
 scala> println(stats.simpleString)
 1383 bytes, 2 rows
 
