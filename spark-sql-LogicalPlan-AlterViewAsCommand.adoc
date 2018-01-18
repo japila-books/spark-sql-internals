@@ -12,8 +12,22 @@ When <<run, executed>>, `AlterViewAsCommand` attempts to link:spark-sql-SessionC
 
 === [[run]] `run` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+run(session: SparkSession): Seq[Row]
+----
 
-=== [[alterPermanentView]] `alterPermanentView` Method
+NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
-CAUTION: FIXME
+`run`...FIXME
+
+=== [[alterPermanentView]] `alterPermanentView` Internal Method
+
+[source, scala]
+----
+alterPermanentView(session: SparkSession, analyzedPlan: LogicalPlan): Unit
+----
+
+`alterPermanentView`...FIXME
+
+NOTE: `alterPermanentView` is used when...FIXME

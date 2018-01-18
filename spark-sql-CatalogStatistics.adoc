@@ -22,7 +22,7 @@
 
 1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
 
-1. `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[statistics] (from a Hive Metastore)
+1. `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
 
 1. `DetermineTableStats` and `PruneFileSourcePartitions` logical rules are executed
 

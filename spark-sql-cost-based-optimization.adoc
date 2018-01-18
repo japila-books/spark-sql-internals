@@ -77,7 +77,7 @@ CAUTION: FIXME See link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]
 
 === [[DESCRIBE-EXTENDED]] DESCRIBE EXTENDED SQL Command
 
-You can view the statistics stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#DESCRIBE[DESCRIBE EXTENDED] SQL command.
+You can view the statistics of a table, a partition or a column (stored in a metastore) using link:spark-sql-SparkSqlAstBuilder.adoc#DESCRIBE[DESCRIBE EXTENDED] SQL command.
 
 ```
 (DESC | DESCRIBE) TABLE? (EXTENDED | FORMATTED)?
@@ -90,6 +90,9 @@ TIP: Use `DESC EXTENDED tableName` for table-level statistics and `DESC EXTENDED
 
 [source, scala]
 ----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
 // table-level statistics are in Statistics row
 scala> sql("DESC EXTENDED t1").show(numRows = 30, truncate = false)
 +----------------------------+--------------------------------------------------------------+-------+
@@ -131,7 +134,7 @@ scala> spark.table("t1").show
 +---+---+----+
 
 // partition-level statistics are in Partition Statistics row
-scala> sql("DESC EXTENDED t1 PARTITION (p1=0,p2='zero')").show(numRows = 30, truncate = false)
+scala> sql("DESC EXTENDED t1 PARTITION (p1=0, p2='zero')").show(numRows = 30, truncate = false)
 +--------------------------------+---------------------------------------------------------------------------------+-------+
 |col_name                        |data_type                                                                        |comment|
 +--------------------------------+---------------------------------------------------------------------------------+-------+
@@ -162,6 +165,56 @@ scala> sql("DESC EXTENDED t1 PARTITION (p1=0,p2='zero')").show(numRows = 30, tru
 |OutputFormat                    |org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat                   |       |
 |Storage Properties              |[serialization.format=1]                                                         |       |
 +--------------------------------+---------------------------------------------------------------------------------+-------+
+
+scala> sql("DESC EXTENDED t1 id").show
++--------------+----------+
+|info_name     |info_value|
++--------------+----------+
+|col_name      |id        |
+|data_type     |int       |
+|comment       |NULL      |
+|min           |0         |
+|max           |1         |
+|num_nulls     |0         |
+|distinct_count|2         |
+|avg_col_len   |4         |
+|max_col_len   |4         |
+|histogram     |NULL      |
++--------------+----------+
+
+
+scala> sql("DESC EXTENDED t1 p1").show
++--------------+----------+
+|info_name     |info_value|
++--------------+----------+
+|col_name      |p1        |
+|data_type     |int       |
+|comment       |NULL      |
+|min           |0         |
+|max           |1         |
+|num_nulls     |0         |
+|distinct_count|2         |
+|avg_col_len   |4         |
+|max_col_len   |4         |
+|histogram     |NULL      |
++--------------+----------+
+
+
+scala> sql("DESC EXTENDED t1 p2").show
++--------------+----------+
+|info_name     |info_value|
++--------------+----------+
+|col_name      |p2        |
+|data_type     |string    |
+|comment       |NULL      |
+|min           |NULL      |
+|max           |NULL      |
+|num_nulls     |0         |
+|distinct_count|2         |
+|avg_col_len   |4         |
+|max_col_len   |4         |
+|histogram     |NULL      |
++--------------+----------+
 ----
 
 === [[optimizations]] Cost-Based Optimizations

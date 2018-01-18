@@ -107,6 +107,22 @@ listPartitions(
 
 NOTE: `listPartitions` is used when...FIXME
 
+=== [[alterTable]] `alterTable` Method
+
+[source, scala]
+----
+alterTable(tableDefinition: CatalogTable): Unit
+----
+
+`alterTable`...FIXME
+
+[NOTE]
+====
+`alterTable` is used when the following logical commands are executed:
+
+* `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, `AlterTableRecoverPartitionsCommand`, `AlterTableSetLocationCommand`, link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run[AlterViewAsCommand] (for link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#alterPermanentView[permanent views])
+====
+
 === [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
 
 [source, scala]
@@ -114,7 +130,7 @@ NOTE: `listPartitions` is used when...FIXME
 alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
 ----
 
-`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to link:spark-sql-ExternalCatalog.adoc#alterTableStats[alterTableStats] and then <<refreshTable, invalidates the table relation cache>>.
+`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to link:spark-sql-ExternalCatalog.adoc#alterTableStats[alter the statistics of the table] (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
 
 `alterTableStats` reports a `NoSuchDatabaseException` if the <<databaseExists, database does not exist>>.
 
@@ -122,7 +138,7 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 
 [NOTE]
 ====
-`alterTableStats` is used by the logical commands (when they are executed):
+`alterTableStats` is used when the following logical commands are executed:
 
 1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand], link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
 
@@ -209,10 +225,6 @@ CAUTION: FIXME
 CAUTION: FIXME
 
 === [[createTable]] `createTable` Method
-
-CAUTION: FIXME
-
-=== [[alterTable]] `alterTable` Method
 
 CAUTION: FIXME
 

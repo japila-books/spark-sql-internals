@@ -48,7 +48,7 @@ val spark: SparkSession = SparkSession.builder
 ----
 ====
 
-=== [[statsFromProperties]] Restoring Spark Statistics from Hive Metastore -- `statsFromProperties` Internal Method
+=== [[statsFromProperties]] Restoring Spark Statistics from Properties (from Hive Metastore) -- `statsFromProperties` Internal Method
 
 [source, scala]
 ----
@@ -73,6 +73,25 @@ In the end, `statsFromProperties` creates a link:spark-sql-CatalogStatistics.ado
 * link:spark-sql-CatalogStatistics.adoc#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
 
 NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
+
+=== [[statsToProperties]] `statsToProperties` Internal Method
+
+[source, scala]
+----
+statsToProperties(
+  stats: CatalogStatistics,
+  schema: StructType): Map[String, String]
+----
+
+`statsToProperties`...FIXME
+
+[NOTE]
+====
+`statsToProperties` is used when `HiveExternalCatalog` is requested for:
+
+1. <<doAlterTableStats, doAlterTableStats>>
+1. <<alterPartitions, alterPartitions>>
+====
 
 === [[restoreTableMetadata]] `restoreTableMetadata` Internal Method
 
@@ -143,9 +162,20 @@ doAlterTableStats(
   stats: Option[CatalogStatistics]): Unit
 ----
 
-NOTE: `doAlterTableStats` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to...FIXME.
+NOTE: `doAlterTableStats` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
 
 `doAlterTableStats`...FIXME
+
+=== [[doAlterTable]] `doAlterTable` Method
+
+[source, scala]
+----
+doAlterTable(tableDefinition: CatalogTable): Unit
+----
+
+NOTE: `doAlterTable` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTable[ExternalCatalog Contract] to alter a table.
+
+`doAlterTable`...FIXME
 
 === [[restorePartitionMetadata]] `restorePartitionMetadata` Internal Method
 

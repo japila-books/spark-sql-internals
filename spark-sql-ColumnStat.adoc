@@ -9,7 +9,40 @@
 * [[nullCount]] `nullCount` metric
 * [[avgLen]] Average length
 * [[maxLen]] Maximum length
-* [[histogram]] Optional `Histogram` (empty by default)
+* [[histogram]] Optional histogram of values (as `Histogram` which is empty by default)
+
+[TIP]
+====
+Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE&hellip;FOR COLUMNS] SQL command to compute column statistics.
+
+```
+val cols = "id, p1, p2"
+val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
+spark.sql(analyzeTableSQL)
+```
+
+---
+
+Use link:spark-sql-cost-based-optimization.adoc#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command to list the column statistics.
+
+```
+scala> sql("DESC EXTENDED t1 id").show
++--------------+----------+
+|info_name     |info_value|
++--------------+----------+
+|col_name      |id        |
+|data_type     |int       |
+|comment       |NULL      |
+|min           |0         |
+|max           |1         |
+|num_nulls     |0         |
+|distinct_count|2         |
+|avg_col_len   |4         |
+|max_col_len   |4         |
+|histogram     |NULL      |
++--------------+----------+
+```
+====
 
 `ColumnStat` is <<creating-instance, created>> when...FIXME
 
@@ -83,7 +116,7 @@ fromMap(table: String, field: StructField, map: Map[String, String]): Option[Col
 
 `fromMap`...FIXME
 
-NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[building Spark statistics from Hive metastore].
+NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore).
 
 === [[toExternalString]] `toExternalString` Internal Method
 

@@ -110,7 +110,7 @@ TIP: Use `addListener` and `removeListener` to register and de-register `Externa
 
 TIP: Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more on Spark Core's `ListenerBus`.
 
-=== [[alterTableStats]] `alterTableStats` Method
+=== [[alterTableStats]] Altering Statistics of Table -- `alterTableStats` Method
 
 [source, scala]
 ----
@@ -119,7 +119,18 @@ alterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Un
 
 `alterTableStats`...FIXME
 
-NOTE: `alterTableStats` is used when...FIXME
+NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTableStats[altering the statistics of a table in a metastore].
+
+=== [[alterTable]] Altering Table -- `alterTable` Method
+
+[source, scala]
+----
+alterTable(tableDefinition: CatalogTable): Unit
+----
+
+`alterTable`...FIXME
+
+NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTable[altering the statistics of a table in a metastore].
 
 === [[contract]] ExternalCatalog Contract
 
@@ -144,11 +155,20 @@ abstract class ExternalCatalog {
 | Used when...FIXME
 |===
 
-=== [[doAlterTableStats]] `doAlterTableStats` Method
+=== [[doAlterTableStats]] Altering Table Statistics -- `doAlterTableStats` Method
 
 [source, scala]
 ----
 doAlterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
 ----
 
-NOTE: `doAlterTableStats` is used when...FIXME
+NOTE: `doAlterTableStats` is used exclusively when `ExternalCatalog` is requested to <<alterTableStats, alter the statistics of a table>>.
+
+=== [[doAlterTable]] Altering Table -- `doAlterTable` Method
+
+[source, scala]
+----
+doAlterTable(tableDefinition: CatalogTable): Unit
+----
+
+NOTE: `doAlterTable` is used exclusively when `ExternalCatalog` is requested to <<alterTable, alter a table>>.
