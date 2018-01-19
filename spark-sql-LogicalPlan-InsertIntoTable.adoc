@@ -75,5 +75,5 @@ scala> println(plan.numberedTreeString)
 * [[table]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing a table
 * [[partition]] Partitions (as a collection of partition keys and optional partition values for dynamic partition insert)
 * [[query]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing the data to be written
-* [[overwrite]] `overwrite` flag that says whether to overwrite an existing table or partitions
+* [[overwrite]] `overwrite` flag that indicates whether to overwrite an existing table or partitions
 * [[ifPartitionNotExists]] `ifPartitionNotExists` flag

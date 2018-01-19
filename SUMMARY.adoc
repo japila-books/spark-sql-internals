@@ -202,6 +202,7 @@
 .. link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand]
 .. link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
 .. link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand]
+.. link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
 .. link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
 
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]

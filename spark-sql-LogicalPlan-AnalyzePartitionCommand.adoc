@@ -81,4 +81,4 @@ NOTE: `getPartitionSpec` is used exclusively when `AnalyzePartitionCommand` is <
 
 * [[tableIdent]] `TableIdentifier`
 * [[partitionSpec]] Partition specification
-* [[noscan]] `noscan` flag (enabled by default) that says whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not
+* [[noscan]] `noscan` flag (enabled by default) that indicates whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not

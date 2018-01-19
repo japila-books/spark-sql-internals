@@ -1,10 +1,8 @@
 == [[AlterViewAsCommand]] AlterViewAsCommand Logical Command
 
-`AlterViewAsCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] to alter a view.
+`AlterViewAsCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for `ALTER VIEW` SQL statement to alter a view.
 
 `AlterViewAsCommand` works with a table identifier (as `TableIdentifier`), the original SQL text, and a link:spark-sql-LogicalPlan.adoc[LogicalPlan] for the SQL query.
-
-`AlterViewAsCommand` corresponds to `ALTER VIEW` SQL statement.
 
 NOTE: `AlterViewAsCommand` is described by `alterViewQuery` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser].
 

@@ -128,7 +128,7 @@ a|
 | `#describeTable`
 a|
 
-* [[DescribeColumnCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc#DescribeColumnCommand[DescribeColumnCommand] logical command for `DESCRIBE TABLE` with a column only (i.e. no `PARTITION` specification).
+* [[DescribeColumnCommand]] link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand] logical command for `DESCRIBE TABLE` with a single column only (i.e. no `PARTITION` specification).
 +
 [source, scala]
 ----

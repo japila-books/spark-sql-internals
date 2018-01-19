@@ -1,17 +1,22 @@
 == Cost-Based Optimization (CBO) of Logical Query Plan
 
-*Cost-Based Optimization* (aka *Cost-Based Query Optimization* or *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, statistics>> to determine the most efficient way of executing a query given logical query plan.
+*Cost-Based Optimization* (aka *Cost-Based Query Optimization* or *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, statistics>> to determine the most efficient way of executing a structured query (given the logical query plan).
 
 Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the statistics.
 
 NOTE: Cost-based optimization is enabled when <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property is turned on, i.e. `true`, and is disabled by default.
 
+You can use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, statistics>> and <<DESCRIBE-EXTENDED, DESCRIBE TABLE>> to view them.
+
 === [[statistics]] Statistics
 
-The (cost) statistics are as follows:
+The (cost) statistics can be computed for tables, partitions and columns and are as follows:
 
 1. [[total-size-stat]] *Total size* (in bytes) of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
+
 1. [[row-count-stat]] *Row count* of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
+
+1. [[column-stats]] link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[Column statistics], i.e. *min*, *max*, *num_nulls*, *distinct_count*, *avg_col_len*, *max_col_len*, *histogram*
 
 === [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Configuration Property
 
@@ -49,7 +54,7 @@ ANALYZE TABLE tableIdentifier partitionSpec?
 COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 ```
 
-Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>>, e.g. total size or row count of a table or table partitions.
+Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>> for a table, partitions or columns.
 
 1. `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
 1. `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clause
@@ -71,13 +76,9 @@ WARN Partition specification is ignored when collecting column statistics: [part
 ```
 ====
 
-=== [[EXPLAIN-COST]] EXPLAIN COST SQL Command
-
-CAUTION: FIXME See link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]
-
 === [[DESCRIBE-EXTENDED]] DESCRIBE EXTENDED SQL Command
 
-You can view the statistics of a table, a partition or a column (stored in a metastore) using link:spark-sql-SparkSqlAstBuilder.adoc#DESCRIBE[DESCRIBE EXTENDED] SQL command.
+You can view the statistics of a table, partitions or a column (stored in a metastore) using link:spark-sql-SparkSqlAstBuilder.adoc#DESCRIBE[DESCRIBE EXTENDED] SQL command.
 
 ```
 (DESC | DESCRIBE) TABLE? (EXTENDED | FORMATTED)?
@@ -165,7 +166,12 @@ scala> sql("DESC EXTENDED t1 PARTITION (p1=0, p2='zero')").show(numRows = 30, tr
 |OutputFormat                    |org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat                   |       |
 |Storage Properties              |[serialization.format=1]                                                         |       |
 +--------------------------------+---------------------------------------------------------------------------------+-------+
+----
 
+You can view the statistics of a single column using `DESC EXTENDED tableName columnName` that are in a Dataset with two columns, i.e. `info_name` and `info_value`.
+
+[source, scala]
+----
 scala> sql("DESC EXTENDED t1 id").show
 +--------------+----------+
 |info_name     |info_value|
@@ -244,3 +250,7 @@ The following are the logical commands that link:spark-sql-SessionCatalog.adoc#a
 1. `InsertIntoHadoopFsRelationCommand`
 
 1. `LoadDataCommand`
+
+=== [[EXPLAIN-COST]] EXPLAIN COST SQL Command
+
+CAUTION: FIXME See link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]

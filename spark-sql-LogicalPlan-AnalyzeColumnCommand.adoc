@@ -19,7 +19,7 @@ df.write.saveAsTable("t1")
 
 // AnalyzeColumnCommand represents ANALYZE TABLE...FOR COLUMNS SQL command
 val allCols = df.columns.mkString(",")
-val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $allCols"
+val analyzeTableSQL = s"ANALYZE TABLE $tableName COMPUTE STATISTICS FOR COLUMNS $allCols"
 val plan = spark.sql(analyzeTableSQL).queryExecution.logical
 import org.apache.spark.sql.execution.command.AnalyzeColumnCommand
 val cmd = plan.asInstanceOf[AnalyzeColumnCommand]

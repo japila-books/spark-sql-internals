@@ -67,4 +67,4 @@ spark.sql(sqlText).show
 `AnalyzeTableCommand` takes the following when created:
 
 * [[tableIdent]] `TableIdentifier`
-* [[noscan]] `noscan` flag (enabled by default) that says whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not
+* [[noscan]] `noscan` flag (enabled by default) that indicates whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not
