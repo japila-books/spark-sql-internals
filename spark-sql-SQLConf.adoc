@@ -101,6 +101,14 @@ Used in:
 | <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>>
 | Used exclusively when `DetermineTableStats` logical resolution rule is executed.
 
+| [[histogramEnabled]] `histogramEnabled`
+| <<spark.sql.statistics.histogram.enabled, spark.sql.statistics.histogram.enabled>>
+| Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].
+
+| [[histogramNumBins]] `histogramNumBins`
+| <<spark.sql.statistics.histogram.numBins, spark.sql.statistics.histogram.numBins>>
+| Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with <<spark.sql.statistics.histogram.enabled, spark.sql.statistics.histogram.enabled>> turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
+
 | [[numShufflePartitions]] `numShufflePartitions`
 | <<spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>>
 a|
@@ -353,6 +361,22 @@ a| Enables automatic calculation of table size statistic by falling back to HDFS
 This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
 
 Use <<fallBackToHdfsForStatsEnabled, fallBackToHdfsForStatsEnabled>> method to access the current value.
+
+| [[spark.sql.statistics.histogram.enabled]] `spark.sql.statistics.histogram.enabled`
+| `false`
+a| Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[computing column statistics]
+
+NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
+
+Use <<histogramEnabled, histogramEnabled>> method to access the current value.
+
+| [[spark.sql.statistics.histogram.numBins]] `spark.sql.statistics.histogram.numBins`
+| `254`
+a| (internal) The number of bins when generating histograms.
+
+NOTE: The number of bins must be greater than 1.
+
+Use <<histogramNumBins, histogramNumBins>> method to access the current value.
 
 | [[spark.sql.statistics.size.autoUpdate.enabled]] `spark.sql.statistics.size.autoUpdate.enabled`
 | `false`

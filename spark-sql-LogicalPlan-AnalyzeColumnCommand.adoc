@@ -37,6 +37,74 @@ scala> stats.colStats.map { case (c, ss) => s"$c: $ss" }.foreach(println)
 id: ColumnStat(2,Some(0),Some(1),0,4,4,None)
 p1: ColumnStat(2,Some(0.0),Some(1.4),0,8,8,None)
 p2: ColumnStat(2,None,None,0,4,4,None)
+
+// Use DESC EXTENDED for friendlier output
+scala> sql(s"DESC EXTENDED $tableName id").show
++--------------+----------+
+|     info_name|info_value|
++--------------+----------+
+|      col_name|        id|
+|     data_type|       int|
+|       comment|      NULL|
+|           min|         0|
+|           max|         1|
+|     num_nulls|         0|
+|distinct_count|         2|
+|   avg_col_len|         4|
+|   max_col_len|         4|
+|     histogram|      NULL|
++--------------+----------+
+----
+
+`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following link:spark-sql-DataType.adoc[data types]:
+
+1. `IntegralType`
+1. `DecimalType`
+1. `DoubleType`
+1. `FloatType`
+1. `DateType`
+1. `TimestampType`
+
+NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
+
+[source, scala]
+----
+// ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// Use the above example to set up the environment
+// Make sure that ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS was run with histogram enabled
+
+// There are 254 bins by default
+// Use spark.sql.statistics.histogram.numBins to control the bins
+val descExtSQL = s"DESC EXTENDED $tableName p1"
+scala> spark.sql(descExtSQL).show(truncate = false)
++--------------+-----------------------------------------------------+
+|info_name     |info_value                                           |
++--------------+-----------------------------------------------------+
+|col_name      |p1                                                   |
+|data_type     |double                                               |
+|comment       |NULL                                                 |
+|min           |0.0                                                  |
+|max           |1.4                                                  |
+|num_nulls     |0                                                    |
+|distinct_count|2                                                    |
+|avg_col_len   |8                                                    |
+|max_col_len   |8                                                    |
+|histogram     |height: 0.007874015748031496, num_of_bins: 254       |
+|bin_0         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_1         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_2         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_3         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_4         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_5         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_6         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_7         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_8         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_9         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
++--------------+-----------------------------------------------------+
+only showing top 20 rows
 ----
 
 NOTE: `AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlAstBuilder.adoc#visitAnalyze[SparkSqlAstBuilder].
@@ -72,6 +140,20 @@ computeColumnStats(
 `computeColumnStats`...FIXME
 
 NOTE: `computeColumnStats` is used exclusively when `AnalyzeColumnCommand` is <<run, executed>>.
+
+=== [[computePercentiles]] `computePercentiles` Internal Method
+
+[source, scala]
+----
+computePercentiles(
+  attributesToAnalyze: Seq[Attribute],
+  sparkSession: SparkSession,
+  relation: LogicalPlan): AttributeMap[ArrayData]
+----
+
+`computePercentiles`...FIXME
+
+NOTE: `computePercentiles` is used exclusively when `AnalyzeColumnCommand` is <<run, executed>> (and <<computeColumnStats, computes column statistics>>).
 
 === [[creating-instance]] Creating AnalyzeColumnCommand Instance
 

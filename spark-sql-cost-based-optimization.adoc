@@ -56,9 +56,18 @@ COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 
 Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>> for a table, partitions or columns.
 
-1. `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
-1. `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clause
-1. `ANALYZE TABLE` with `FOR COLUMNS` clause and no `PARTITION` specification
+1. `ANALYZE TABLE` with neither `PARTITION` specification nor `FOR COLUMNS` clause
+
+1. `ANALYZE TABLE` with `PARTITION` specification but no `FOR COLUMNS` clause
+
+1. `ANALYZE TABLE` with `FOR COLUMNS` clause but no `PARTITION` specification
+
+[TIP]
+====
+Use link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
+
+`spark.sql.statistics.histogram.enabled` is turned off by default.
+====
 
 [NOTE]
 ====

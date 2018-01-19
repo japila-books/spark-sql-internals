@@ -143,3 +143,14 @@ rowToColumnStat(
 `rowToColumnStat`...FIXME
 
 NOTE: `rowToColumnStat` is used when...FIXME
+
+=== [[supportsHistogram]] `supportsHistogram` Method
+
+[source, scala]
+----
+supportsHistogram(dataType: DataType): Boolean
+----
+
+`supportsHistogram`...FIXME
+
+NOTE: `supportsHistogram` is used when...FIXME
