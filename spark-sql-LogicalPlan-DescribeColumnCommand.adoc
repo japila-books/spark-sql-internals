@@ -65,9 +65,15 @@ scala> spark.sql(descExtSQL).show
 +--------------+----------+
 ----
 
+[[output]]
+`DescribeColumnCommand` defines the link:spark-sql-LogicalPlan-Command.adoc#output[output schema] with the following columns:
+
+1. `info_name` with "name of the column info" comment
+1. `info_value` with "value of the column info" comment
+
 NOTE: `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc#visitDescribeTable[SparkSqlParser].
 
-=== [[run]] `run` Method
+=== [[run]] Describing Column with Optional Statistics -- `run` Method
 
 [source, scala]
 ----
@@ -76,7 +82,46 @@ run(session: SparkSession): Seq[Row]
 
 NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
-`run`...FIXME
+`run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
+
+`run` requests the `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
+
+NOTE: `run` uses the input `SparkSession` to access link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn is used to access the link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+
+`run` takes the link:spark-sql-CatalogStatistics.adoc#colStats[column statistics] from the  link:spark-sql-CatalogTable.adoc#stats[table statistics] if available.
+
+NOTE: link:spark-sql-CatalogStatistics.adoc#colStats[Column statistics] are available (in the link:spark-sql-CatalogTable.adoc#stats[table statistics]) only after link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[ANALYZE TABLE FOR COLUMNS] SQL command was run.
+
+`run` adds `comment` metadata if available for the <<colNameParts, column>>.
+
+`run` gives the following rows (in that order):
+
+1. `col_name`
+1. `data_type`
+1. `comment`
+
+If `DescribeColumnCommand` command was executed with <<isExtended, EXTENDED or FORMATTED option>>, `run` gives the following additional rows (in that order):
+
+1. `min`
+1. `max`
+1. `num_nulls`
+1. `distinct_count`
+1. `avg_col_len`
+1. `max_col_len`
+1. <<histogramDescription, histogram>>
+
+`run` gives `NULL` for the value of the comment and statistics if not available.
+
+=== [[histogramDescription]] `histogramDescription` Internal Method
+
+[source, scala]
+----
+histogramDescription(histogram: Histogram): Seq[Row]
+----
+
+`histogramDescription`...FIXME
+
+NOTE: `histogramDescription` is used exclusively when `DescribeColumnCommand` is <<run, executed>> with `EXTENDED` or `FORMATTED` option turned on.
 
 === [[creating-instance]] Creating DescribeColumnCommand Instance
 

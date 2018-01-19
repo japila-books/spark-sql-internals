@@ -1,8 +1,10 @@
-== [[AnalyzeColumnCommand]] AnalyzeColumnCommand Logical Command
+== [[AnalyzeColumnCommand]] AnalyzeColumnCommand Logical Command for ANALYZE TABLE&hellip;COMPUTE STATISTICS FOR COLUMNS SQL Command
 
-`AnalyzeColumnCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that...FIXME
+`AnalyzeColumnCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
 
-`AnalyzeColumnCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
+```
+ANALYZE TABLE tableName COMPUTE STATISTICS FOR COLUMNS columnNames
+```
 
 [source, scala]
 ----
@@ -10,11 +12,11 @@
 val tableName = "t1"
 import org.apache.spark.sql.catalyst.TableIdentifier
 val tableId = TableIdentifier(tableName)
-val sessionCatalog = spark.sessionState.catalog
 
+val sessionCatalog = spark.sessionState.catalog
 sessionCatalog.dropTable(tableId, ignoreIfNotExists = true, purge = true)
 
-val df = Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2")
+val df = Seq((0, 0.0, "zero"), (1, 1.4, "one")).toDF("id", "p1", "p2")
 df.write.saveAsTable("t1")
 
 // AnalyzeColumnCommand represents ANALYZE TABLE...FOR COLUMNS SQL command
@@ -29,13 +31,15 @@ AnalyzeColumnCommand `t1`, [id, p1, p2]
 spark.sql(analyzeTableSQL)
 val stats = sessionCatalog.getTableMetadata(tableId).stats.get
 scala> println(stats.simpleString)
-1383 bytes, 2 rows
+1421 bytes, 2 rows
 
 scala> stats.colStats.map { case (c, ss) => s"$c: $ss" }.foreach(println)
-p2: ColumnStat(2,None,None,0,4,4,None)
-p1: ColumnStat(2,Some(0),Some(1),0,4,4,None)
 id: ColumnStat(2,Some(0),Some(1),0,4,4,None)
+p1: ColumnStat(2,Some(0.0),Some(1.4),0,8,8,None)
+p2: ColumnStat(2,None,None,0,4,4,None)
 ----
+
+NOTE: `AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlAstBuilder.adoc#visitAnalyze[SparkSqlAstBuilder].
 
 NOTE: `AnalyzeColumnCommand` is not supported on views.
 
