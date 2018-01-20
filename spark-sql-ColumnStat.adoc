@@ -1,19 +1,38 @@
 == [[ColumnStat]] ColumnStat -- Column Statistics
 
 [[creating-instance]]
-`ColumnStat` represents the statistics of a column.
+`ColumnStat` holds the <<statistics, statistics>> of a column (as part of the link:spark-sql-CatalogStatistics.adoc[table statistics] in a metastore).
 
-* [[distinctCount]] `distinctCount` metric
-* [[min]] Minimum value (optional)
-* [[max]] Maximum value (optional)
-* [[nullCount]] `nullCount` metric
-* [[avgLen]] Average length
-* [[maxLen]] Maximum length
-* [[histogram]] Optional histogram of values (as `Histogram` which is empty by default)
+[[statistics]]
+.Column Statistics
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-[TIP]
-====
-Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE&hellip;FOR COLUMNS] SQL command to compute column statistics.
+| [[distinctCount]] `distinctCount`
+| Number of distinct values
+
+| [[min]] `min`
+| Minimum value
+
+| [[max]] `max`
+| Maximum value
+
+| [[nullCount]] `nullCount`
+| Number of `null` values
+
+| [[avgLen]] `avgLen`
+| Average length of the values
+
+| [[maxLen]] `maxLen`
+| Maximum length of the values
+
+| [[histogram]] `histogram`
+| Histogram of values (as `Histogram` which is empty by default)
+|===
+
+`ColumnStat` is computed for a table column using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
 
 ```
 val cols = "id, p1, p2"
@@ -21,9 +40,11 @@ val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
 spark.sql(analyzeTableSQL)
 ```
 
----
+With link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
 
-Use link:spark-sql-cost-based-optimization.adoc#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command to list the column statistics.
+NOTE: `spark.sql.statistics.histogram.enabled` is turned off by default.
+
+You can inspect the column statistics using link:spark-sql-cost-based-optimization.adoc#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command.
 
 ```
 scala> sql("DESC EXTENDED t1 id").show
@@ -39,12 +60,63 @@ scala> sql("DESC EXTENDED t1 id").show
 |distinct_count|2         |
 |avg_col_len   |4         |
 |max_col_len   |4         |
-|histogram     |NULL      |
+|histogram     |NULL      | <-- no histogram (spark.sql.statistics.histogram.enabled off)
 +--------------+----------+
 ```
-====
 
-`ColumnStat` is <<creating-instance, created>> when...FIXME
+`ColumnStat` is part of the link:spark-sql-CatalogStatistics.adoc#colStats[statistics of a table].
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// Make sure that you ran ANALYZE TABLE (as described above)
+val db = spark.catalog.currentDatabase
+val tableName = "t1"
+val metadata = spark.sharedState.externalCatalog.getTable(db, tableName)
+val stats = metadata.stats.get
+
+scala> :type stats
+org.apache.spark.sql.catalyst.catalog.CatalogStatistics
+
+val colStats = stats.colStats
+scala> :type colStats
+Map[String,org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
+----
+
+`ColumnStat` is <<toMap, converted (serialized) to properties>> while persisting the table (statistics) to a metastore.
+
+[source, scala]
+----
+scala> :type colStats
+Map[String,org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
+
+val colName = "p1"
+
+val p1stats = colStats(colName)
+scala> :type p1stats
+org.apache.spark.sql.catalyst.plans.logical.ColumnStat
+
+import org.apache.spark.sql.types.DoubleType
+val props = p1stats.toMap(colName, dataType = DoubleType)
+scala> println(props)
+Map(distinctCount -> 2, min -> 0.0, version -> 1, max -> 1.4, maxLen -> 8, avgLen -> 8, nullCount -> 0)
+----
+
+`ColumnStat` is <<creating-instance, created>> when:
+
+1. <<fromMap, fromMap>>
+
+1. <<rowToColumnStat, rowToColumnStat>>
+
+1. link:spark-sql-EstimationUtils.adoc#nullColumnStat[EstimationUtils.nullColumnStat]
+
+1. link:spark-sql-JoinEstimation.adoc#computeByNdv[JoinEstimation.computeByNdv]
+
+1. link:spark-sql-JoinEstimation.adoc#computeByHistogram[JoinEstimation.computeByHistogram]
+
+CAUTION: FIXME When are the methods called? What for?
 
 [source, scala]
 ----
@@ -96,16 +168,16 @@ p2: ColumnStat(2,None,None,0,4,4,None)
 
 NOTE: `ColumnStat` does not support <<min, minimum>> and <<max, maximum>> metrics for binary (i.e. `Array[Byte]`) and string types.
 
-=== [[toMap]] `toMap` Method
+=== [[toExternalString]] Converting Value to External/Java Representation (per Catalyst Data Type) -- `toExternalString` Internal Method
 
 [source, scala]
 ----
-toMap(colName: String, dataType: DataType): Map[String, String]
+toExternalString(v: Any, colName: String, dataType: DataType): String
 ----
 
-`toMap`...FIXME
+`toExternalString`...FIXME
 
-NOTE: `toMap` is used when...FIXME
+NOTE: `toExternalString` is used exclusively when `ColumnStat` is requested for <<toMap, statistic properties>>.
 
 === [[fromMap]] Creating ColumnStat from Column Statistics Properties (aka ColumnStat Deserialization) -- `fromMap` Method
 
@@ -117,17 +189,6 @@ fromMap(table: String, field: StructField, map: Map[String, String]): Option[Col
 `fromMap`...FIXME
 
 NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore).
-
-=== [[toExternalString]] `toExternalString` Internal Method
-
-[source, scala]
-----
-toExternalString(v: Any, colName: String, dataType: DataType): String
-----
-
-`toExternalString`...FIXME
-
-NOTE: `toExternalString` is used when...FIXME
 
 === [[rowToColumnStat]] `rowToColumnStat` Method
 
@@ -154,3 +215,50 @@ supportsHistogram(dataType: DataType): Boolean
 `supportsHistogram`...FIXME
 
 NOTE: `supportsHistogram` is used when...FIXME
+
+=== [[toMap]] Converting ColumnStat to Properties (ColumnStat Serialization) -- `toMap` Method
+
+[source, scala]
+----
+toMap(colName: String, dataType: DataType): Map[String, String]
+----
+
+`toMap` converts <<statistics, ColumnStat>> to the <<toMap-properties, properties>>.
+
+[[properties]]
+.ColumnStat.toMap's Properties
+[cols="1,2",options="header",width="100%"]
+|===
+| Key
+| Value
+
+| `version`
+| `1`
+
+| `distinctCount`
+| <<distinctCount, distinctCount>>
+
+| `nullCount`
+| <<nullCount, nullCount>>
+
+| `avgLen`
+| <<avgLen, avgLen>>
+
+| `maxLen`
+| <<maxLen, maxLen>>
+
+| `min`
+| <<toExternalString, External/Java representation>> of <<min, min>>
+
+| `max`
+| <<toExternalString, External/Java representation>> of <<max, max>>
+
+| `histogram`
+| Serialized version of <<histogram, Histogram>> (using `HistogramSerializer.serialize`)
+|===
+
+NOTE: `toMap` adds `min`, `max`, `histogram` entries only if they are available.
+
+NOTE: Interestingly, `colName` and `dataType` input parameters bring no value to `toMap` itself, but merely allow for a more user-friendly error reporting when <<toExternalString, converting>> `min` and `max` column statistics.
+
+NOTE: `toMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsToProperties[converting table statistics to properties] (before persisting them as part of table metadata in a Hive metastore).

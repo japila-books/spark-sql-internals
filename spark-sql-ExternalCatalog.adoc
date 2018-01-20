@@ -110,7 +110,7 @@ TIP: Use `addListener` and `removeListener` to register and de-register `Externa
 
 TIP: Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more on Spark Core's `ListenerBus`.
 
-=== [[alterTableStats]] Altering Statistics of Table -- `alterTableStats` Method
+=== [[alterTableStats]] Altering Table Statistics -- `alterTableStats` Method
 
 [source, scala]
 ----
@@ -119,7 +119,7 @@ alterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Un
 
 `alterTableStats`...FIXME
 
-NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTableStats[altering the statistics of a table in a metastore].
+NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTableStats[altering the statistics of a table in a metastore] (that can happen when any logical command is executed that could change the table statistics).
 
 === [[alterTable]] Altering Table -- `alterTable` Method
 

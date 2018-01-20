@@ -36,11 +36,21 @@ res0: String = 2.3.0-SNAPSHOT
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
-// Using low-level internal SessionCatalog interface to access CatalogTables
-val tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
-val tableMeta = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(tid)
+// Using higher-level interface to access CatalogStatistics
+// Make sure that you ran ANALYZE TABLE (as described above)
+val db = spark.catalog.currentDatabase
+val tableName = "t1"
+val metadata = spark.sharedState.externalCatalog.getTable(db, tableName)
+val stats = metadata.stats
 
-val stats = tableMeta.stats
+scala> :type stats
+Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
+
+// Using low-level internal SessionCatalog interface to access CatalogTables
+val tid = spark.sessionState.sqlParser.parseTableIdentifier(tableName)
+val metadata = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(tid)
+val stats = metadata.stats
+
 scala> :type stats
 Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
 ----

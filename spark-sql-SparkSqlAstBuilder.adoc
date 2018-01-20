@@ -56,8 +56,22 @@ scala> println(c.expr.numberedTreeString)
 | `#analyze`
 a|
 
+[[AnalyzeColumnCommand]]
+* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause (but no `PARTITION` specification)
++
+[source, scala]
+----
+// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
+val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS id, p1"
+val plan = spark.sql(sqlText).queryExecution.logical
+import org.apache.spark.sql.execution.command.AnalyzeColumnCommand
+val cmd = plan.asInstanceOf[AnalyzeColumnCommand]
+scala> println(cmd)
+AnalyzeColumnCommand `t1`, [id, p1]
+----
+
 [[AnalyzePartitionCommand]]
-* link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand] logical command for `ANALYZE TABLE` with `PARTITION` specification and no `FOR COLUMNS` clause
+* link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand] logical command for `ANALYZE TABLE` with `PARTITION` specification (but no `FOR COLUMNS` clause)
 +
 [source, scala]
 ----
@@ -71,7 +85,7 @@ AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
 ----
 
 [[AnalyzeTableCommand]]
-* link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand] logical command for `ANALYZE TABLE` with no `PARTITION` specification and `FOR COLUMNS` clause
+* link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand] logical command for `ANALYZE TABLE` with neither `PARTITION` specification nor `FOR COLUMNS` clause
 +
 [source, scala]
 ----
@@ -82,20 +96,6 @@ import org.apache.spark.sql.execution.command.AnalyzeTableCommand
 val cmd = plan.asInstanceOf[AnalyzeTableCommand]
 scala> println(cmd)
 AnalyzeTableCommand `t1`, false
-----
-
-[[AnalyzeColumnCommand]]
-* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause (and no `PARTITION` specification)
-+
-[source, scala]
-----
-// Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
-val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS id, p1"
-val plan = spark.sql(sqlText).queryExecution.logical
-import org.apache.spark.sql.execution.command.AnalyzeColumnCommand
-val cmd = plan.asInstanceOf[AnalyzeColumnCommand]
-scala> println(cmd)
-AnalyzeColumnCommand `t1`, [id, p1]
 ----
 
 [[ANALYZE-TABLE-NOSCAN]]

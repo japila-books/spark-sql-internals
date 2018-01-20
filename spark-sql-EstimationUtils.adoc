@@ -15,3 +15,14 @@ getOutputSize(
 `getOutputSize`...FIXME
 
 NOTE: `getOutputSize` is used when...FIXME
+
+=== [[nullColumnStat]] `nullColumnStat` Method
+
+[source, scala]
+----
+nullColumnStat(dataType: DataType, rowCount: BigInt): ColumnStat
+----
+
+`nullColumnStat`...FIXME
+
+NOTE: `nullColumnStat` is used when...FIXME

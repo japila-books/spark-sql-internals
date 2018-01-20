@@ -129,10 +129,10 @@
 .. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Optimizer]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
 .. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
 .. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 
 . link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]

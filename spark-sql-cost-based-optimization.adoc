@@ -2,11 +2,11 @@
 
 *Cost-Based Optimization* (aka *Cost-Based Query Optimization* or *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, statistics>> to determine the most efficient way of executing a structured query (given the logical query plan).
 
+Cost-based optimization is disabled by default. Spark SQL uses <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property to control the feature.
+
 Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the statistics.
 
-NOTE: Cost-based optimization is enabled when <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property is turned on, i.e. `true`, and is disabled by default.
-
-You can use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, statistics>> and <<DESCRIBE-EXTENDED, DESCRIBE TABLE>> to view them.
+You first use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, statistics>> that you can later inspect using <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command.
 
 === [[statistics]] Statistics
 
@@ -44,9 +44,9 @@ println(s"Is CBO enabled? $isCboEnabled")
 
 NOTE: CBO is disabled explicitly in Spark Structured Streaming.
 
-=== [[ANALYZE-TABLE]] ANALYZE TABLE SQL Command
+=== [[ANALYZE-TABLE]] ANALYZE TABLE COMPUTE STATISTICS SQL Command
 
-Cost-Based Optimization uses the statistics stored in a metastore using link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[ANALYZE TABLE] SQL command.
+Cost-Based Optimization uses the statistics stored in a metastore (aka _external catalog_) using link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[ANALYZE TABLE] SQL command.
 
 [[NOSCAN]]
 ```
@@ -54,14 +54,15 @@ ANALYZE TABLE tableIdentifier partitionSpec?
 COMPUTE STATISTICS (NOSCAN | FOR COLUMNS identifierSeq)?
 ```
 
-Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>> for a table, partitions or columns.
+Depending on the variant, `ANALYZE TABLE` computes different <<statistics, statistics>>, i.e. of a table, partitions or columns.
 
 1. `ANALYZE TABLE` with neither `PARTITION` specification nor `FOR COLUMNS` clause
 
-1. `ANALYZE TABLE` with `PARTITION` specification but no `FOR COLUMNS` clause
+1. `ANALYZE TABLE` with `PARTITION` specification (but no `FOR COLUMNS` clause)
 
-1. `ANALYZE TABLE` with `FOR COLUMNS` clause but no `PARTITION` specification
+1. `ANALYZE TABLE` with `FOR COLUMNS` clause (but no `PARTITION` specification)
 
+[[spark.sql.statistics.histogram.enabled]]
 [TIP]
 ====
 Use link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
@@ -84,6 +85,14 @@ In such a case, `SparkSqlAstBuilder` reports a WARN message to the logs and simp
 WARN Partition specification is ignored when collecting column statistics: [partitionSpec]
 ```
 ====
+
+When executed, the above `ANALYZE TABLE` variants are link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translated] to the following logical commands (in a logical query plan), respectively:
+
+1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
+
+1. link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
+
+1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
 
 === [[DESCRIBE-EXTENDED]] DESCRIBE EXTENDED SQL Command
 
@@ -234,13 +243,13 @@ scala> sql("DESC EXTENDED t1 p2").show
 
 === [[optimizations]] Cost-Based Optimizations
 
-The link:spark-sql-Optimizer.adoc[rule-based Spark Optimizer] comes with rules that are executed when cost-based optimization is <<spark.sql.cbo.enabled, enabled>>.
+The link:spark-sql-Optimizer.adoc[Spark Optimizer] uses heuristics (rules) that are applied to a logical query plan. Among them there are the following cost-based optimization rules:
 
 1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering
 
 === [[commands]] Logical Commands for Altering Table Statistics
 
-The following are the logical commands that link:spark-sql-SessionCatalog.adoc#alterTableStats[alter table statistics in an external metastore]:
+The following are the logical commands that link:spark-sql-SessionCatalog.adoc#alterTableStats[alter table statistics in a metastore] (aka _external catalog_):
 
 1.  link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
 
