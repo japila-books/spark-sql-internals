@@ -85,7 +85,7 @@ scala> :type colStats
 Map[String,org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is <<toMap, converted (serialized) to properties>> while persisting the table (statistics) to a metastore.
+`ColumnStat` is <<toMap, converted to properties>> (serialized) while persisting the table (statistics) to a metastore.
 
 [source, scala]
 ----
@@ -104,9 +104,29 @@ scala> println(props)
 Map(distinctCount -> 2, min -> 0.0, version -> 1, max -> 1.4, maxLen -> 8, avgLen -> 8, nullCount -> 0)
 ----
 
+`ColumnStat` is <<fromMap, re-created from properties>> (deserialized) when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+
+[source, scala]
+----
+scala> :type props
+Map[String,String]
+
+scala> println(props)
+Map(distinctCount -> 2, min -> 0.0, version -> 1, max -> 1.4, maxLen -> 8, avgLen -> 8, nullCount -> 0)
+
+import org.apache.spark.sql.types.StructField
+val p1 = $"p1".double
+
+import org.apache.spark.sql.catalyst.plans.logical.ColumnStat
+val colStatsOpt = ColumnStat.fromMap(table = "t1", field = p1, map = props)
+
+scala> :type colStatsOpt
+Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
+----
+
 `ColumnStat` is <<creating-instance, created>> when:
 
-1. <<fromMap, fromMap>>
+1. <<fromMap, Creating ColumnStat from Properties (ColumnStat Deserialization)>>
 
 1. <<rowToColumnStat, rowToColumnStat>>
 
@@ -178,17 +198,6 @@ toExternalString(v: Any, colName: String, dataType: DataType): String
 `toExternalString`...FIXME
 
 NOTE: `toExternalString` is used exclusively when `ColumnStat` is requested for <<toMap, statistic properties>>.
-
-=== [[fromMap]] Creating ColumnStat from Column Statistics Properties (aka ColumnStat Deserialization) -- `fromMap` Method
-
-[source, scala]
-----
-fromMap(table: String, field: StructField, map: Map[String, String]): Option[ColumnStat]
-----
-
-`fromMap`...FIXME
-
-NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore).
 
 === [[rowToColumnStat]] `rowToColumnStat` Method
 
@@ -262,3 +271,22 @@ NOTE: `toMap` adds `min`, `max`, `histogram` entries only if they are available.
 NOTE: Interestingly, `colName` and `dataType` input parameters bring no value to `toMap` itself, but merely allow for a more user-friendly error reporting when <<toExternalString, converting>> `min` and `max` column statistics.
 
 NOTE: `toMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsToProperties[converting table statistics to properties] (before persisting them as part of table metadata in a Hive metastore).
+
+=== [[fromMap]] Re-Creating Column Statistics from Properties (ColumnStat Deserialization) -- `fromMap` Method
+
+[source, scala]
+----
+fromMap(table: String, field: StructField, map: Map[String, String]): Option[ColumnStat]
+----
+
+`fromMap` creates a `ColumnStat` by fetching <<properties, properties>> of every <<statistics, column statistic>> from the input `map`.
+
+`fromMap` returns `None` when recovering column statistics fails for whatever reason.
+
+```
+WARN Failed to parse column statistics for column [fieldName] in table [table]
+```
+
+NOTE: Interestingly, `table` input parameter brings no value to `fromMap` itself, but merely allows for a more user-friendly error reporting when parsing column statistics fails.
+
+NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
