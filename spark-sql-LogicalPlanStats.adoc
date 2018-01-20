@@ -1,6 +1,6 @@
-== [[LogicalPlanStats]] LogicalPlanStats -- Statistics of Logical Operator
+== [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
 
-`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for query planning (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
+`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
 
 [[statsCache]]
 With `LogicalPlanStats` every logical operator has <<stats, statistics>> that are computed only once when requested and are cached until <<invalidateStatsCache, invalidated>> and requested again.

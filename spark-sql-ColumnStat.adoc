@@ -32,7 +32,7 @@
 | Histogram of values (as `Histogram` which is empty by default)
 |===
 
-`ColumnStat` is computed for a table column using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) for one or more columns using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
 
 ```
 val cols = "id, p1, p2"
@@ -126,10 +126,6 @@ Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 
 `ColumnStat` is <<creating-instance, created>> when:
 
-1. <<fromMap, Creating ColumnStat from Properties (ColumnStat Deserialization)>>
-
-1. <<rowToColumnStat, rowToColumnStat>>
-
 1. link:spark-sql-EstimationUtils.adoc#nullColumnStat[EstimationUtils.nullColumnStat]
 
 1. link:spark-sql-JoinEstimation.adoc#computeByNdv[JoinEstimation.computeByNdv]
@@ -198,21 +194,6 @@ toExternalString(v: Any, colName: String, dataType: DataType): String
 `toExternalString`...FIXME
 
 NOTE: `toExternalString` is used exclusively when `ColumnStat` is requested for <<toMap, statistic properties>>.
-
-=== [[rowToColumnStat]] `rowToColumnStat` Method
-
-[source, scala]
-----
-rowToColumnStat(
-  row: InternalRow,
-  attr: Attribute,
-  rowCount: Long,
-  percentiles: Option[ArrayData]): ColumnStat
-----
-
-`rowToColumnStat`...FIXME
-
-NOTE: `rowToColumnStat` is used when...FIXME
 
 === [[supportsHistogram]] `supportsHistogram` Method
 
@@ -290,3 +271,28 @@ WARN Failed to parse column statistics for column [fieldName] in table [table]
 NOTE: Interestingly, `table` input parameter brings no value to `fromMap` itself, but merely allows for a more user-friendly error reporting when parsing column statistics fails.
 
 NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+
+=== [[rowToColumnStat]] Creating Column Statistics from InternalRow (Result of Computing Column Statistics) -- `rowToColumnStat` Method
+
+[source, scala]
+----
+rowToColumnStat(
+  row: InternalRow,
+  attr: Attribute,
+  rowCount: Long,
+  percentiles: Option[ArrayData]): ColumnStat
+----
+
+`rowToColumnStat` <<creating-instance, creates>> a `ColumnStat` from the input `row` and the following positions:
+
+[start=0]
+1. <<distinctCount, distinctCount>>
+1. <<min, min>>
+1. <<max, max>>
+1. <<nullCount, nullCount>>
+1. <<avgLen, avgLen>>
+1. <<maxLen, maxLen>>
+
+If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
+
+NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] (to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[compute the statistics for specified columns]).

@@ -2,6 +2,28 @@
 
 `JoinEstimation` is...FIXME
 
+=== [[estimate]] Estimating Statistics and Query Hints of Join Logical Operator -- `estimate` Method
+
+[source, scala]
+----
+estimate: Option[Statistics]
+----
+
+`estimate`...FIXME
+
+NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics for Join logical operator].
+
+=== [[estimateInnerOuterJoin]] `estimateInnerOuterJoin` Internal Method
+
+[source, scala]
+----
+estimateInnerOuterJoin(): Option[Statistics]
+----
+
+`estimateInnerOuterJoin`...FIXME
+
+NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
+
 === [[computeByHistogram]] `computeByHistogram` Internal Method
 
 [source, scala]

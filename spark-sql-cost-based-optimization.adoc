@@ -6,11 +6,17 @@ Cost-based optimization is disabled by default. Spark SQL uses <<spark.sql.cbo.e
 
 Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the statistics.
 
-You first use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, statistics>> that you can later inspect using <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command.
+You first use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, table statistics>> that you can later inspect using <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command.
 
-=== [[statistics]] Statistics
+Logical operators have <<LogicalPlanStats, statistics support>> that is used for query planning.
 
-The (cost) statistics can be computed for tables, partitions and columns and are as follows:
+=== [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
+
+link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats] adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
+
+=== [[statistics]] Table Statistics
+
+The table statistics can be computed for tables, partitions and columns and are as follows:
 
 1. [[total-size-stat]] *Total size* (in bytes) of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
 

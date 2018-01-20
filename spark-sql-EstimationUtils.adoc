@@ -25,4 +25,4 @@ nullColumnStat(dataType: DataType, rowCount: BigInt): ColumnStat
 
 `nullColumnStat`...FIXME
 
-NOTE: `nullColumnStat` is used when...FIXME
+NOTE: `nullColumnStat` is used exclusively when `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin] for `LeftOuter` and `RightOuter` joins.

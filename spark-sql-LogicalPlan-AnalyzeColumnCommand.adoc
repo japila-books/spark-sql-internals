@@ -127,7 +127,7 @@ NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[Run
 
 CAUTION: FIXME
 
-=== [[computeColumnStats]] `computeColumnStats` Internal Method
+=== [[computeColumnStats]] Computing Statistics for Specified Columns -- `computeColumnStats` Internal Method
 
 [source, scala]
 ----

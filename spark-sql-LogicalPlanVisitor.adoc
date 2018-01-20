@@ -1,13 +1,11 @@
-== [[LogicalPlanVisitor]] LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan
+== [[LogicalPlanVisitor]] LogicalPlanVisitor -- Contract for Computing Statistic Estimates and Query Hints of Logical Plan
 
-`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute the statistics.
-
-CAUTION: FIXME What statistics?
+`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute link:spark-sql-Statistics.adoc[estimates of plan statistics and query hints].
 
 TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Visitor_pattern[Wikipedia].
 
 [[visit]]
-`LogicalPlanVisitor` defines `visit` method that dispatches computing the statistics of a logical plan to the <<handlers, corresponding handler method>>.
+`LogicalPlanVisitor` defines `visit` method that dispatches computing the statistics of a logical plan to the <<handlers, corresponding handler methods>>.
 
 [source, scala]
 ----
@@ -16,6 +14,10 @@ visit(p: LogicalPlan): T
 
 NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always link:spark-sql-Statistics.adoc[Statistics] only.
 
+The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` link:spark-sql-LogicalPlanStats.adoc#stats[uses] <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
+
+NOTE: link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
+
 [[implementations]]
 .LogicalPlanVisitors
 [cols="1,2",options="header",width="100%"]
@@ -23,10 +25,10 @@ NOTE: `T` stands for the type of a result to be computed (while visiting the que
 | LogicalPlanVisitor
 | Description
 
-| link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
+| [[BasicStatsPlanVisitor]] link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
 |
 
-| link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| [[SizeInBytesOnlyStatsPlanVisitor]] link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
 |
 |===
 
