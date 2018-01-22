@@ -34,13 +34,14 @@
 
 `ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) for one or more columns using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
 
-```
+[source, scala]
+----
 val cols = "id, p1, p2"
 val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
 spark.sql(analyzeTableSQL)
-```
+----
 
-With link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
+`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
 
 NOTE: `spark.sql.statistics.histogram.enabled` is turned off by default.
 
@@ -124,13 +125,13 @@ scala> :type colStatsOpt
 Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is <<creating-instance, created>> when:
-
-1. link:spark-sql-EstimationUtils.adoc#nullColumnStat[EstimationUtils.nullColumnStat]
+`ColumnStat` is also <<creating-instance, created>> when:
 
 1. link:spark-sql-JoinEstimation.adoc#computeByNdv[JoinEstimation.computeByNdv]
 
 1. link:spark-sql-JoinEstimation.adoc#computeByHistogram[JoinEstimation.computeByHistogram]
+
+1. link:spark-sql-EstimationUtils.adoc#nullColumnStat[EstimationUtils.nullColumnStat] (i.e. when `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin] for `LeftOuter` and `RightOuter` joins)
 
 CAUTION: FIXME When are the methods called? What for?
 

@@ -1,6 +1,151 @@
 == [[JoinEstimation]] JoinEstimation
 
-`JoinEstimation` is...FIXME
+`JoinEstimation` is a utility that <<estimate, computes statistics estimates and query hints of a Join logical operator>>.
+
+`JoinEstimation` is <<creating-instance, created>> exclusively for `BasicStatsPlanVisitor` to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics of a Join logical operator].
+
+NOTE: `BasicStatsPlanVisitor` is used only when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// JoinEstimation requires row count stats for join statistics estimates
+// With cost-based optimization off, size in bytes is available only
+// That would give no join estimates whatsoever (except size in bytes)
+// Make sure that you `--conf spark.sql.cbo.enabled=true`
+scala> println(spark.sessionState.conf.cboEnabled)
+true
+
+// Build a query with join operator
+// From the available data sources tables seem the best...so far
+val r1 = spark.range(5)
+scala> println(r1.queryExecution.analyzed.stats.simpleString)
+sizeInBytes=40.0 B, hints=none
+
+// Make the demo reproducible
+val db = spark.catalog.currentDatabase
+spark.sharedState.externalCatalog.dropTable(db, table = "t1", ignoreIfNotExists = true, purge = true)
+spark.sharedState.externalCatalog.dropTable(db, table = "t2", ignoreIfNotExists = true, purge = true)
+
+// FIXME What relations give row count stats?
+
+// Register tables
+spark.range(5).write.saveAsTable("t1")
+spark.range(10).write.saveAsTable("t2")
+
+// Refresh internal registries
+sql("REFRESH TABLE t1")
+sql("REFRESH TABLE t2")
+
+// Calculate row count stats
+val tables = Seq("t1", "t2")
+tables.foreach { t => sql(s"ANALYZE TABLE $t COMPUTE STATISTICS") }
+
+val t1 = spark.table("t1")
+val t2 = spark.table("t2")
+
+// analyzed plan is just before withCachedData and optimizedPlan plans
+// where CostBasedJoinReorder kicks in and optimizes a query using statistics
+
+val t1plan = t1.queryExecution.analyzed
+scala> println(t1plan.numberedTreeString)
+00 SubqueryAlias t1
+01 +- Relation[id#45L] parquet
+
+// Show the stats of every node in the analyzed query plan
+
+val p0 = t1plan.p(0)
+scala> println(s"Statistics of ${p0.simpleString}: ${p0.stats.simpleString}")
+Statistics of SubqueryAlias t1: sizeInBytes=80.0 B, hints=none
+
+val p1 = t1plan.p(1)
+scala> println(s"Statistics of ${p1.simpleString}: ${p1.stats.simpleString}")
+Statistics of Relation[id#45L] parquet: sizeInBytes=80.0 B, rowCount=5, hints=none
+
+val t2plan = t2.queryExecution.analyzed
+
+// let's get rid of the SubqueryAlias operator
+
+import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
+val t1NoAliasesPlan = EliminateSubqueryAliases(t1plan)
+val t2NoAliasesPlan = EliminateSubqueryAliases(t2plan)
+
+// Using Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.plans._
+import org.apache.spark.sql.catalyst.plans._
+val plan = t1NoAliasesPlan.join(
+  otherPlan = t2NoAliasesPlan,
+  joinType = Inner,
+  condition = Some($"id".expr))
+scala> println(plan.numberedTreeString)
+00 'Join Inner, 'id
+01 :- Relation[id#45L] parquet
+02 +- Relation[id#57L] parquet
+
+// Take Join operator from the logical plan
+// JoinEstimation works with Joins only
+import org.apache.spark.sql.catalyst.plans.logical.Join
+val join = plan.collect { case j: Join => j }.head
+
+// Make sure that row count stats are defined per join side
+scala> join.left.stats.rowCount.isDefined
+res1: Boolean = true
+
+scala> join.right.stats.rowCount.isDefined
+res2: Boolean = true
+
+// Make the example reproducible
+// Computing stats is once-only process and the estimates are cached
+join.invalidateStatsCache
+
+import org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation
+val stats = JoinEstimation(join).estimate
+scala> :type stats
+Option[org.apache.spark.sql.catalyst.plans.logical.Statistics]
+
+scala> println(stats.map(_.simpleString))
+Some(sizeInBytes=1200.0 B, rowCount=50, hints=none)
+----
+
+=== [[estimateInnerOuterJoin]] `estimateInnerOuterJoin` Internal Method
+
+[source, scala]
+----
+estimateInnerOuterJoin(): Option[Statistics]
+----
+
+`estimateInnerOuterJoin`...FIXME
+
+NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of a Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
+
+=== [[computeByNdv]] `computeByNdv` Internal Method
+
+[source, scala]
+----
+computeByNdv(
+  leftKey: AttributeReference,
+  rightKey: AttributeReference,
+  newMin: Option[Any],
+  newMax: Option[Any]): (BigInt, ColumnStat)
+----
+
+`computeByNdv`...FIXME
+
+NOTE: `computeByNdv` is used exclusively when `JoinEstimation` is requested for <<computeCardinalityAndStats, computeCardinalityAndStats>>
+
+=== [[computeCardinalityAndStats]] `computeCardinalityAndStats` Internal Method
+
+[source, scala]
+----
+computeCardinalityAndStats(
+  keyPairs: Seq[(AttributeReference, AttributeReference)]): (BigInt, AttributeMap[ColumnStat])
+----
+
+`computeCardinalityAndStats`...FIXME
+
+NOTE: `computeCardinalityAndStats` is used exclusively when `JoinEstimation` is requested for <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
 
 === [[estimate]] Estimating Statistics and Query Hints of Join Logical Operator -- `estimate` Method
 
@@ -12,17 +157,6 @@ estimate: Option[Statistics]
 `estimate`...FIXME
 
 NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics for Join logical operator].
-
-=== [[estimateInnerOuterJoin]] `estimateInnerOuterJoin` Internal Method
-
-[source, scala]
-----
-estimateInnerOuterJoin(): Option[Statistics]
-----
-
-`estimateInnerOuterJoin`...FIXME
-
-NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
 === [[computeByHistogram]] `computeByHistogram` Internal Method
 
@@ -40,18 +174,3 @@ computeByHistogram(
 `computeByHistogram`...FIXME
 
 NOTE: `computeByHistogram` is used when...FIXME
-
-=== [[computeByNdv]] `computeByNdv` Internal Method
-
-[source, scala]
-----
-computeByNdv(
-  leftKey: AttributeReference,
-  rightKey: AttributeReference,
-  newMin: Option[Any],
-  newMax: Option[Any]): (BigInt, ColumnStat)
-----
-
-`computeByNdv`...FIXME
-
-NOTE: `computeByNdv` is used when...FIXME

@@ -1,10 +1,20 @@
 == [[CostBasedJoinReorder]] CostBasedJoinReorder Logical Optimization Rule -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[rule-based Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
 `CostBasedJoinReorder` <<apply, executes>> (i.e. optimizes a logical plan) only when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] properties are both enabled.
 
-`CostBasedJoinReorder` uses link:spark-sql-cost-based-optimization.adoc#row-count-stat[row count] statistic that is computed using `ANALYZE TABLE` SQL command with `COMPUTE STATISTICS` clause and no `NOSCAN` option.
+[source, scala]
+----
+// Use shortcuts to read the values of the properties
+scala> spark.sessionState.conf.cboEnabled
+res0: Boolean = true
+
+scala> spark.sessionState.conf.joinReorderEnabled
+res1: Boolean = true
+----
+
+`CostBasedJoinReorder` uses link:spark-sql-cost-based-optimization.adoc#row-count-stat[row count] statistic that is computed using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command with no `NOSCAN` option.
 
 [source, scala]
 ----

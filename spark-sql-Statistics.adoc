@@ -1,22 +1,24 @@
 == [[Statistics]] Statistics -- Estimates of Plan Statistics and Query Hints
 
 [[creating-instance]]
-`Statistics` holds the estimates of statistics and statistics-related hints of a logical plan:
+`Statistics` holds the estimates of statistics and hints of a logical plan:
 
 * [[sizeInBytes]] Total (output) size (in bytes)
-* [[rowCount]] Optional estimated number of rows (aka _row count_)
+* [[rowCount]] Estimated number of rows (aka _row count_)
 * [[attributeStats]] Column attribute statistics
 * [[hints]] Query hints (i.e. `HintInfo`)
 
 CAUTION: FIXME What do the attributes represent exactly? Where do they come from?
 
+NOTE: <<rowCount, row count>> estimate is used in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
+
 NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
 
 `Statistics` is <<creating-instance, created>> when:
 
-1. link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[Leaf logical operators] (specifically) and link:spark-sql-LogicalPlanStats.adoc#stats[logical operators] (in general) are requested for cost statistics
+1. link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[Leaf logical operators] (specifically) and link:spark-sql-LogicalPlanStats.adoc#stats[logical operators] (in general) are requested for statistics estimates
 
-1. link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for cost statistics (through link:spark-sql-CatalogStatistics.adoc#toPlanStats[CatalogStatistics])
+1. link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics estimates (through link:spark-sql-CatalogStatistics.adoc#toPlanStats[CatalogStatistics])
 
 [NOTE]
 ====
