@@ -1,8 +1,8 @@
 == [[CostBasedJoinReorder]] CostBasedJoinReorder Logical Optimization Rule -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[logical optimization rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
-`CostBasedJoinReorder` <<apply, executes>> (i.e. optimizes a logical plan) only when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] properties are both enabled.
+`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with at least 2 joins when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
 [source, scala]
 ----
@@ -18,18 +18,94 @@ res1: Boolean = true
 
 [source, scala]
 ----
-// val df = Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2")
-// df.write.partitionBy("p1", "p2").saveAsTable("t1")
-val analyzeTable = "ANALYZE TABLE t1 COMPUTE STATISTICS"
-spark.sql(analyzeTable)
+// Create tables and compute their row count statistics
+// There have to be at least 2 joins
+// Make the example reproducible
+val tableNames = Seq("t1", "t2", "t3")
+import org.apache.spark.sql.catalyst.TableIdentifier
+val tableIds = tableNames.map(TableIdentifier.apply)
+val sessionCatalog = spark.sessionState.catalog
+tableIds.foreach { tableId =>
+  sessionCatalog.dropTable(tableId, ignoreIfNotExists = true, purge = true)
+}
+
+// 10MB is the value of spark.sql.autoBroadcastJoinThreshold
+val belowBroadcastJoinThreshold = spark.sessionState.conf.autoBroadcastJoinThreshold - 1
+spark.range(belowBroadcastJoinThreshold).write.saveAsTable("t1")
+// t2 is twice as big as t1
+spark.range(2 * belowBroadcastJoinThreshold).write.saveAsTable("t2")
+// t3 is very small
+spark.range(5).write.saveAsTable("t3")
+
+// Compute row count statistics
+tableNames.foreach { t =>
+  sql(s"ANALYZE TABLE $t COMPUTE STATISTICS")
+}
+
+// Load the tables
+val t1 = spark.table("t1")
+val t2 = spark.table("t2")
+val t3 = spark.table("t3")
+
+// Example: Inner join with join condition
+val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+val plan = q.queryExecution.analyzed
+scala> println(plan.numberedTreeString)
+00 Project [id#51L]
+01 +- Join Inner, (id#51L = id#57L)
+02    :- Project [id#51L]
+03    :  +- Join Inner, (id#51L = id#54L)
+04    :     :- SubqueryAlias t1
+05    :     :  +- Relation[id#51L] parquet
+06    :     +- SubqueryAlias t2
+07    :        +- Relation[id#54L] parquet
+08    +- SubqueryAlias t3
+09       +- Relation[id#57L] parquet
+
+// Eliminate SubqueryAlias logical operators as they no longer needed
+// And "confuse" CostBasedJoinReorder
+// FIXME Is this really needed? Why should CostBasedJoinReorder care about how deep Joins are?
+import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
+val noAliasesPlan = EliminateSubqueryAliases(plan)
+scala> println(noAliasesPlan.numberedTreeString)
+00 Project [id#51L]
+01 +- Join Inner, (id#51L = id#57L)
+02    :- Project [id#51L]
+03    :  +- Join Inner, (id#51L = id#54L)
+04    :     :- Relation[id#51L] parquet
+05    :     +- Relation[id#54L] parquet
+06    +- Relation[id#57L] parquet
+
+import org.apache.spark.sql.catalyst.optimizer.CostBasedJoinReorder
+val joinsReordered = CostBasedJoinReorder(noAliasesPlan)
+scala> println(joinsReordered.numberedTreeString)
+00 Project [id#51L]
+01 +- Join Inner, (id#51L = id#54L)
+02    :- Project [id#51L]
+03    :  +- Join Inner, (id#51L = id#57L)
+04    :     :- Relation[id#51L] parquet
+05    :     +- Relation[id#57L] parquet
+06    +- Relation[id#54L] parquet
+
+// Execute the plans
+// Compare the plans as diagrams in web UI
+// We'd have to use too many internals so let's turn CBO on and off
+// Moreover, please remember that the query "phases" are cached
+// That's why we copy and paste the entire query for execution
+spark.conf.set("spark.sql.cbo.enabled", false)
+val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+q.collect.foreach(_ => ())
+
+spark.conf.set("spark.sql.cbo.enabled", true)
+val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+q.collect.foreach(_ => ())
 ----
 
 [CAUTION]
 ====
-FIXME Examples of queries
-
-1. Inner join with join condition
+FIXME Examples of other join queries
 1. Cross join with join condition
+
 1. Project with attributes only and Inner join with join condition
 1. Project with attributes only and Cross join with join condition
 ====
