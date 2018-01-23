@@ -4,15 +4,15 @@
 
 Cost-based optimization is disabled by default. Spark SQL uses <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property to control the feature.
 
-Cost-Based Optimization uses <<optimizations, custom logical optimization rules>> that transform the logical plan of a structured query based on the statistics.
+Cost-Based Optimization uses <<optimizations, logical optimization rules>> (e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]) that optimize the logical plan of a structured query based on the statistics.
 
-You first use <<ANALYZE-TABLE, ANALYZE TABLE>> SQL command to compute <<statistics, table statistics>> that you can later inspect using <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command.
+You first use <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS>> SQL command to compute <<statistics, table statistics>>. Use <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command to inspect the statistics.
 
 Logical operators have <<LogicalPlanStats, statistics support>> that is used for query planning.
 
 === [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
 
-link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats] adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
+link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats] adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
 
 === [[statistics]] Table Statistics
 
@@ -249,9 +249,11 @@ scala> sql("DESC EXTENDED t1 p2").show
 
 === [[optimizations]] Cost-Based Optimizations
 
-The link:spark-sql-Optimizer.adoc[Spark Optimizer] uses heuristics (rules) that are applied to a logical query plan. Among them there are the following cost-based optimization rules:
+The link:spark-sql-Optimizer.adoc[Spark Optimizer] uses heuristics (rules) that are applied to a logical query plan for cost-based optimization.
 
-1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering
+Among the optimization rules are the following:
+
+1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering with 2 or more consecutive inner or cross joins (possibly separated by `Project` operators) when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
 === [[commands]] Logical Commands for Altering Table Statistics
 

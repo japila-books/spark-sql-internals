@@ -1,57 +1,67 @@
-== [[ReorderJoin]] ReorderJoin Logical Plan Optimization
+== [[ReorderJoin]] ReorderJoin Logical Optimization Rule
 
-`ReorderJoin` is a logical optimization rule in link:spark-sql-Optimizer.adoc#ReorderJoin[Optimizer] that <<apply, transforms `Filter` (with CROSS and INNER joins) and `Join` logical plans>> with 3 or more joins and non-empty join conditions.
+`ReorderJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
 
-`ReorderJoin` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
-
-[TIP]
-====
-Import `ReorderJoin` and apply the rule directly on your structured queries to learn how the rule works.
-====
+`ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner or cross joins with one or more conditions across them (possibly separated by `Filter` operators).
 
 [source, scala]
 ----
-import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
-val rj = ReorderJoin(spark.sessionState.conf)
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
 
 // Build analyzed logical plan with at least 3 joins and zero or more filters
-val t1 = spark.range(4)
-val t2 = spark.range(4)
-val t3 = spark.range(4)
+val belowBroadcastJoinThreshold = spark.sessionState.conf.autoBroadcastJoinThreshold - 1
+val belowBroadcast = spark.range(belowBroadcastJoinThreshold)
+val large = spark.range(2 * belowBroadcastJoinThreshold)
+val tiny = Seq(1,2,3,4,5).toDF("id")
 
-val query = t1.join(t2)
-  .where(t1("id") === t2("id"))
-  .join(t3)
-  .where(t3("id") === t1("id"))
-  .filter(t1("id") % 2 === 0)
-
-scala> val plan = query.queryExecution.analyzed
-plan: org.apache.spark.sql.catalyst.plans.logical.LogicalPlan =
-Filter ((id#6L % cast(2 as bigint)) = cast(0 as bigint))
-+- Filter (id#12L = id#6L)
-   +- Join Inner
-      :- Filter (id#6L = id#9L)
-      :  +- Join Inner
-      :     :- Range (0, 4, step=1, splits=Some(8))
-      :     +- Range (0, 4, step=1, splits=Some(8))
-      +- Range (0, 4, step=1, splits=Some(8))
+val q = belowBroadcast.
+  join(large, "id").
+  join(tiny, "id")
+val plan = q.queryExecution.analyzed
+scala> println(plan.numberedTreeString)
+00 Project [id#0L]
+01 +- Join Inner, (id#0L = cast(id#9 as bigint))
+02    :- Project [id#0L]
+03    :  +- Join Inner, (id#0L = id#3L)
+04    :     :- Range (0, 10485759, step=1, splits=Some(8))
+05    :     +- Range (0, 20971518, step=1, splits=Some(8))
+06    +- Project [value#7 AS id#9]
+07       +- LocalRelation [value#7]
 
 // Apply ReorderJoin rule
-scala> val optimized = rj.apply(plan)
-optimized: org.apache.spark.sql.catalyst.plans.logical.LogicalPlan =
-Filter ((id#6L % cast(2 as bigint)) = cast(0 as bigint))
-+- Join Inner, (id#12L = id#6L)
-   :- Join Inner, (id#6L = id#9L)
-   :  :- Range (0, 4, step=1, splits=Some(8))
-   :  +- Range (0, 4, step=1, splits=Some(8))
-   +- Range (0, 4, step=1, splits=Some(8))
-
-scala> plan.stats(spark.sessionState.conf)
-res5: org.apache.spark.sql.catalyst.plans.logical.Statistics = Statistics(sizeInBytes=32.0 KB, isBroadcastable=false)
-
-// CBO disabled
-scala> optimized.stats(spark.sessionState.conf)
-res6: org.apache.spark.sql.catalyst.plans.logical.Statistics = Statistics(sizeInBytes=32.0 KB, isBroadcastable=false)
+// ReorderJoin alone is (usually?) not enough
+// Let's go pro and create a custom RuleExecutor (i.e. a Optimizer)
+import org.apache.spark.sql.catalyst.rules.RuleExecutor
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
+object Optimize extends RuleExecutor[LogicalPlan] {
+  import org.apache.spark.sql.catalyst.optimizer._
+  // FIXME Are all the following rules required really?
+  val batches =
+    Batch("EliminateSubqueryAliases", Once, EliminateSubqueryAliases) ::
+    Batch("Operator Optimization", FixedPoint(100),
+      CombineFilters,
+      PushDownPredicate,
+      BooleanSimplification,
+      RemoveRedundantProject,
+      ReorderJoin,  // <-- The rule is HERE
+      PushPredicateThroughJoin,
+      ColumnPruning,
+      CollapseProject,
+      ConvertToLocalRelation) :: Nil
+}
+// FIXME Could ReorderJoin be applied after the other rules were?
+// FIXME I'm NOT sure the ReorderJoin got a chance to do anything
+val optimizedPlan = Optimize.execute(plan)
+scala> println(optimizedPlan.numberedTreeString)
+00 Project [id#0L]
+01 +- Join Inner, (id#0L = cast(id#9 as bigint))
+02    :- Project [id#0L]
+03    :  +- Join Inner, (id#0L = id#3L)
+04    :     :- Range (0, 10485759, step=1, splits=Some(8))
+05    :     +- Range (0, 20971518, step=1, splits=Some(8))
+06    +- LocalRelation [id#9]
 
 // ReorderJoin works differently when the following holds:
 // * starSchemaDetection is enabled
@@ -63,9 +73,43 @@ spark.sessionState.conf.starSchemaDetection
 spark.sessionState.conf.cboEnabled
 ----
 
+`ReorderJoin` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
+
+=== [[flattenJoin]] `flattenJoin` Method
+
+[source, scala]
+----
+flattenJoin(
+  plan: LogicalPlan, parentJoinType: InnerLike = Inner)
+: (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
+----
+
+`flattenJoin` branches off per the input link:spark-sql-LogicalPlan.adoc[logical plan]:
+
+1. For inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively on the left-side of the join.
+
+1. For link:spark-sql-LogicalPlan-Filter.adoc[Filter] with a inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join.
+
+In either case, `flattenJoin` splits conjunctive predicates, i.e. removes `And` expressions.
+
+In the end, `flattenJoin` gives...FIXME
+
+NOTE: `flattenJoin` is used recursively when `ReorderJoin` is <<ExtractFiltersAndInnerJoins-unapply, destructures>> a logical plan (when <<apply, executed>>).
+
 === [[apply]] Transforming Logical Plan -- `apply` Method
 
-`apply` transforms `Filter` (with CROSS and INNER join types) and link:spark-sql-LogicalPlan-Join.adoc[Join] logical plans.
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule.
+
+`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and finds the following logical operators for <<flattenJoin, flattenJoin>>:
+
+1. link:spark-sql-LogicalPlan-Filter.adoc[Filter] with a inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator
+
+1. link:spark-sql-LogicalPlan-Join.adoc[Join] (of any type)
 
 NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <<ExtractFiltersAndInnerJoins-unapply, unapply>> method) to "destructure" a logical plan to its logical operators.
 

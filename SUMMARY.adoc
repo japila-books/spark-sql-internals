@@ -180,6 +180,7 @@
 . link:spark-sql-LogicalPlan-Command.adoc[Command]
 . link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
 . link:spark-sql-LogicalPlan-Expand.adoc[Expand]
+. link:spark-sql-LogicalPlan-Filter.adoc[Filter]
 . link:spark-sql-LogicalPlan-Generate.adoc[Generate]
 . link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets]
 . link:spark-sql-LogicalPlan-Hint.adoc[Hint]

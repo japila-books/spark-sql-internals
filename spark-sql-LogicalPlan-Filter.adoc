@@ -1,0 +1,3 @@
+== [[Filter]] Filter Unary Logical Operator
+
+`Filter` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that...FIXME

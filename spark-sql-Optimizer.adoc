@@ -188,7 +188,7 @@ spark.sessionState.optimizer
 | CheckCartesianProducts
 |
 
-^.^| Join Reorder
+^.^| [[Join-Reorder]] Join Reorder
 ^.^| `Once`
 | [[CostBasedJoinReorder]] link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
 |

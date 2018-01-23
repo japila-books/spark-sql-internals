@@ -80,6 +80,7 @@ scala> println(noAliasesPlan.numberedTreeString)
 // Let's go pro and create a custom RuleExecutor (i.e. a Optimizer)
 import org.apache.spark.sql.catalyst.rules.RuleExecutor
 import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
 import org.apache.spark.sql.catalyst.optimizer.CostBasedJoinReorder
 object Optimize extends RuleExecutor[LogicalPlan] {
   val batches =
@@ -122,6 +123,8 @@ FIXME Examples of other join queries
 1. Project with attributes only and Cross join with join condition
 ====
 
+`CostBasedJoinReorder` is a part of link:spark-sql-Optimizer.adoc#Join-Reorder[Join Reorder] once-executed batch of rules.
+
 [[logging]]
 [TIP]
 ====
@@ -160,7 +163,7 @@ reorder(plan: LogicalPlan, output: Seq[Attribute]): LogicalPlan
 
 `reorder`...FIXME
 
-NOTE: `reorder` is used exclusively when `CostBasedJoinReorder` is <<apply, executed>>.
+NOTE: `reorder` is used exclusively when `CostBasedJoinReorder` is <<apply, applied>> to a logical plan.
 
 === [[replaceWithOrderedJoin]] `replaceWithOrderedJoin` Internal Method
 
