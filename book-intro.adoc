@@ -1,17 +1,17 @@
 == Mastering Spark SQL
 
-Welcome to *Mastering Spark SQL* gitbook!
+Welcome to *Mastering Spark SQL* gitbook! I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I do.
 
-I'm https://pl.linkedin.com/in/jaceklaskowski[Jacek Laskowski], an independent consultant, developer and trainer specializing in *Apache Spark*, Apache Kafka and Kafka Streams (with Scala and sbt on Apache Mesos, Hadoop YARN and DC/OS). I offer courses, workshops, mentoring and software development services.
+I'm https://pl.linkedin.com/in/jaceklaskowski[Jacek Laskowski], an independent consultant, software developer and technical instructor specializing in *Apache Spark*, Apache Kafka and Kafka Streams (with Scala, sbt, Kubernetes, Apache Mesos, Hadoop YARN and DC/OS). I offer consultancy, courses, workshops, mentoring and software development services.
 
 I lead http://www.meetup.com/WarsawScala/[Warsaw Scala Enthusiasts] and http://www.meetup.com/Warsaw-Spark[Warsaw Spark] meetups in Warsaw, Poland.
 
-Contact me at jacek@japila.pl or https://twitter.com/jaceklaskowski[@jaceklaskowski] to discuss Apache Spark and Apache Kafka opportunities, e.g. courses, workshops, mentoring or application development services.
+Contact me at jacek@japila.pl or https://twitter.com/jaceklaskowski[@jaceklaskowski] to discuss opportunities with Apache Spark, Apache Kafka and Kafka Streams.
 
 If you like the Mastering Spark SQL gitbook you should seriously consider participating in my own, very hands-on https://github.com/jaceklaskowski/spark-workshop/blob/gh-pages/slides/README.md#toc[workshops].
 
-TIP: I'm also writing https://jaceklaskowski.gitbooks.io/mastering-apache-spark/[Mastering Apache Spark 2], https://jaceklaskowski.gitbooks.io/apache-kafka/[Apache Kafka Notebook] and https://jaceklaskowski.gitbooks.io/spark-structured-streaming/[Spark Structured Streaming Notebook] gitbooks.
+TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2], https://bit.ly/mastering-kafka-streams[Mastering Kafka Streams], https://bit.ly/mastering-apache-kafka[Apache Kafka Notebook] and https://bit.ly/spark-structured-streaming[Spark Structured Streaming Notebook] gitbooks.
 
-This collections of notes (what some may rashly call a "book") serves as the ultimate place of mine to collect all the nuts and bolts of leveraging *Spark SQL* in your projects. The notes help me designing and developing better products with Spark SQL. They are also a viable proof of my understanding of Spark SQL (which I believe will help me reaching the highest level of mastery in Spark SQL).
+This collections of notes is the ultimate place of mine to collect all the nuts and bolts of leveraging *Spark SQL* in your projects. The notes help me designing and developing better products with Spark SQL. They are also a viable proof of my understanding of Spark SQL (which I believe will help me reaching the highest level of mastery in Spark SQL).
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
