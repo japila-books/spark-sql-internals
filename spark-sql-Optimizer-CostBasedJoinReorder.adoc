@@ -2,7 +2,7 @@
 
 `CostBasedJoinReorder` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#CostBasedJoinReorder[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
-`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with at least 2 joins when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
+`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
 [source, scala]
 ----
@@ -18,10 +18,13 @@ res1: Boolean = true
 
 [source, scala]
 ----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
 // Create tables and compute their row count statistics
 // There have to be at least 2 joins
 // Make the example reproducible
-val tableNames = Seq("t1", "t2", "t3")
+val tableNames = Seq("t1", "t2", "tiny")
 import org.apache.spark.sql.catalyst.TableIdentifier
 val tableIds = tableNames.map(TableIdentifier.apply)
 val sessionCatalog = spark.sessionState.catalog
@@ -29,13 +32,11 @@ tableIds.foreach { tableId =>
   sessionCatalog.dropTable(tableId, ignoreIfNotExists = true, purge = true)
 }
 
-// 10MB is the value of spark.sql.autoBroadcastJoinThreshold
 val belowBroadcastJoinThreshold = spark.sessionState.conf.autoBroadcastJoinThreshold - 1
 spark.range(belowBroadcastJoinThreshold).write.saveAsTable("t1")
 // t2 is twice as big as t1
 spark.range(2 * belowBroadcastJoinThreshold).write.saveAsTable("t2")
-// t3 is very small
-spark.range(5).write.saveAsTable("t3")
+spark.range(5).write.saveAsTable("tiny")
 
 // Compute row count statistics
 tableNames.foreach { t =>
@@ -45,10 +46,10 @@ tableNames.foreach { t =>
 // Load the tables
 val t1 = spark.table("t1")
 val t2 = spark.table("t2")
-val t3 = spark.table("t3")
+val tiny = spark.table("tiny")
 
 // Example: Inner join with join condition
-val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+val q = t1.join(t2, Seq("id")).join(tiny, Seq("id"))
 val plan = q.queryExecution.analyzed
 scala> println(plan.numberedTreeString)
 00 Project [id#51L]
@@ -59,12 +60,12 @@ scala> println(plan.numberedTreeString)
 05    :     :  +- Relation[id#51L] parquet
 06    :     +- SubqueryAlias t2
 07    :        +- Relation[id#54L] parquet
-08    +- SubqueryAlias t3
+08    +- SubqueryAlias tiny
 09       +- Relation[id#57L] parquet
 
 // Eliminate SubqueryAlias logical operators as they no longer needed
 // And "confuse" CostBasedJoinReorder
-// FIXME Is this really needed? Why should CostBasedJoinReorder care about how deep Joins are?
+// CostBasedJoinReorder cares about how deep Joins are and reorders consecutive joins only
 import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
 val noAliasesPlan = EliminateSubqueryAliases(plan)
 scala> println(noAliasesPlan.numberedTreeString)
@@ -76,8 +77,17 @@ scala> println(noAliasesPlan.numberedTreeString)
 05    :     +- Relation[id#54L] parquet
 06    +- Relation[id#57L] parquet
 
+// Let's go pro and create a custom RuleExecutor (i.e. a Optimizer)
+import org.apache.spark.sql.catalyst.rules.RuleExecutor
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.optimizer.CostBasedJoinReorder
-val joinsReordered = CostBasedJoinReorder(noAliasesPlan)
+object Optimize extends RuleExecutor[LogicalPlan] {
+  val batches =
+    Batch("EliminateSubqueryAliases", Once, EliminateSubqueryAliases) ::
+    Batch("Join Reorder", Once, CostBasedJoinReorder) :: Nil
+}
+
+val joinsReordered = Optimize.execute(plan)
 scala> println(joinsReordered.numberedTreeString)
 00 Project [id#51L]
 01 +- Join Inner, (id#51L = id#54L)
@@ -88,16 +98,18 @@ scala> println(joinsReordered.numberedTreeString)
 06    +- Relation[id#54L] parquet
 
 // Execute the plans
-// Compare the plans as diagrams in web UI
+// Compare the plans as diagrams in web UI @ http://localhost:4040/SQL
 // We'd have to use too many internals so let's turn CBO on and off
 // Moreover, please remember that the query "phases" are cached
 // That's why we copy and paste the entire query for execution
-spark.conf.set("spark.sql.cbo.enabled", false)
-val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+import org.apache.spark.sql.internal.SQLConf
+val cc = SQLConf.get
+cc.setConf(SQLConf.CBO_ENABLED, false)
+val q = t1.join(t2, Seq("id")).join(tiny, Seq("id"))
 q.collect.foreach(_ => ())
 
-spark.conf.set("spark.sql.cbo.enabled", true)
-val q = t1.join(t2, Seq("id")).join(t3, Seq("id"))
+cc.setConf(SQLConf.CBO_ENABLED, true)
+val q = t1.join(t2, Seq("id")).join(tiny, Seq("id"))
 q.collect.foreach(_ => ())
 ----
 
@@ -133,13 +145,13 @@ apply(plan: LogicalPlan): LogicalPlan
 
 NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule.
 
-`apply` traverses the input link:spark-sql-LogicalPlan.adoc[LogicalPlan] down to <<reorder, reorder>> the following logical operators:
+`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
 
-1. link:spark-sql-LogicalPlan-Join.adoc[Join] with `InnerLike` type with a join condition, i.e. `CROSS` or `INNER` joins
+1. link:spark-sql-LogicalPlan-Join.adoc[Join] for `CROSS` or `INNER` joins with a join condition
 
 1. link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
 
-=== [[reorder]] `reorder` Internal Method
+=== [[reorder]] Reordering Logical Plan with Join Operators -- `reorder` Internal Method
 
 [source, scala]
 ----
@@ -149,17 +161,6 @@ reorder(plan: LogicalPlan, output: Seq[Attribute]): LogicalPlan
 `reorder`...FIXME
 
 NOTE: `reorder` is used exclusively when `CostBasedJoinReorder` is <<apply, executed>>.
-
-=== [[extractInnerJoins]] `extractInnerJoins` Internal Method
-
-[source, scala]
-----
-extractInnerJoins(plan: LogicalPlan): (Seq[LogicalPlan], Set[Expression])
-----
-
-`extractInnerJoins`...FIXME
-
-NOTE: `extractInnerJoins` is used recursively and when `CostBasedJoinReorder` is <<reorder, reordering>>...FIXME
 
 === [[replaceWithOrderedJoin]] `replaceWithOrderedJoin` Internal Method
 
@@ -171,3 +172,18 @@ replaceWithOrderedJoin(plan: LogicalPlan): LogicalPlan
 `replaceWithOrderedJoin`...FIXME
 
 NOTE: `replaceWithOrderedJoin` is used recursively and when `CostBasedJoinReorder` is <<reorder, reordering>>...FIXME
+
+=== [[extractInnerJoins]] Extracting Consecutive Join Operators -- `extractInnerJoins` Internal Method
+
+[source, scala]
+----
+extractInnerJoins(plan: LogicalPlan): (Seq[LogicalPlan], Set[Expression])
+----
+
+`extractInnerJoins` finds consecutive link:spark-sql-LogicalPlan-Join.adoc[Join] logical operators (inner or cross) with join conditions or link:spark-sql-LogicalPlan-Project.adoc[Project] logical operators with `Join` logical operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only.
+
+For `Project` operators `extractInnerJoins` calls itself recursively with the `Join` operator inside.
+
+In the end, `extractInnerJoins` gives the collection of logical plans under the consecutive `Join` logical operators (possibly separated by `Project` operators only) and their join conditions (for which `And` expressions have been split).
+
+NOTE: `extractInnerJoins` is used recursively when `CostBasedJoinReorder` is <<reorder, reordering>> a logical plan.
