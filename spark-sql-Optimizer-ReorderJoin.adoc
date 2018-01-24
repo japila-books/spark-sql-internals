@@ -1,8 +1,10 @@
-== [[ReorderJoin]] ReorderJoin Logical Optimization Rule
+== [[ReorderJoin]] ReorderJoin Logical Optimization Rule -- Reordering Inner or Cross Joins
 
-`ReorderJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
+`ReorderJoin` is an optimization that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
 
-`ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner or cross joins with one or more conditions across them (possibly separated by `Filter` operators).
+Technically, `ReorderJoin` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+`ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner or cross joins with one or more join conditions (possibly separated by `Filter` operators).
 
 [source, scala]
 ----
@@ -16,18 +18,18 @@ val large = spark.range(2 * belowBroadcastJoinThreshold)
 val tiny = Seq(1,2,3,4,5).toDF("id")
 
 val q = belowBroadcast.
-  join(large, "id").
-  join(tiny, "id")
+  crossJoin(large). // <-- CROSS JOIN of two fairly big datasets
+  join(tiny).
+  where(belowBroadcast("id") === tiny("id"))
 val plan = q.queryExecution.analyzed
 scala> println(plan.numberedTreeString)
-00 Project [id#0L]
-01 +- Join Inner, (id#0L = cast(id#9 as bigint))
-02    :- Project [id#0L]
-03    :  +- Join Inner, (id#0L = id#3L)
-04    :     :- Range (0, 10485759, step=1, splits=Some(8))
-05    :     +- Range (0, 20971518, step=1, splits=Some(8))
-06    +- Project [value#7 AS id#9]
-07       +- LocalRelation [value#7]
+00 Filter (id#0L = cast(id#9 as bigint))
+01 +- Join Inner
+02    :- Join Cross
+03    :  :- Range (0, 10485759, step=1, splits=Some(8))
+04    :  +- Range (0, 20971518, step=1, splits=Some(8))
+05    +- Project [value#7 AS id#9]
+06       +- LocalRelation [value#7]
 
 // Apply ReorderJoin rule
 // ReorderJoin alone is (usually?) not enough
@@ -37,31 +39,31 @@ import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.analysis.EliminateSubqueryAliases
 object Optimize extends RuleExecutor[LogicalPlan] {
   import org.apache.spark.sql.catalyst.optimizer._
-  // FIXME Are all the following rules required really?
   val batches =
     Batch("EliminateSubqueryAliases", Once, EliminateSubqueryAliases) ::
     Batch("Operator Optimization", FixedPoint(100),
-      CombineFilters,
+      ConvertToLocalRelation,
       PushDownPredicate,
-      BooleanSimplification,
-      RemoveRedundantProject,
-      ReorderJoin,  // <-- The rule is HERE
-      PushPredicateThroughJoin,
-      ColumnPruning,
-      CollapseProject,
-      ConvertToLocalRelation) :: Nil
+      PushPredicateThroughJoin) :: Nil
 }
-// FIXME Could ReorderJoin be applied after the other rules were?
-// FIXME I'm NOT sure the ReorderJoin got a chance to do anything
-val optimizedPlan = Optimize.execute(plan)
+val preOptimizedPlan = Optimize.execute(plan)
+// Note Join Cross as a child of Join Inner
+scala> println(preOptimizedPlan.numberedTreeString)
+00 Join Inner, (id#0L = cast(id#9 as bigint))
+01 :- Join Cross
+02 :  :- Range (0, 10485759, step=1, splits=Some(8))
+03 :  +- Range (0, 20971518, step=1, splits=Some(8))
+04 +- LocalRelation [id#9]
+
+// Time...for...ReorderJoin!
+import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
+val optimizedPlan = ReorderJoin(preOptimizedPlan)
 scala> println(optimizedPlan.numberedTreeString)
-00 Project [id#0L]
-01 +- Join Inner, (id#0L = cast(id#9 as bigint))
-02    :- Project [id#0L]
-03    :  +- Join Inner, (id#0L = id#3L)
-04    :     :- Range (0, 10485759, step=1, splits=Some(8))
-05    :     +- Range (0, 20971518, step=1, splits=Some(8))
-06    +- LocalRelation [id#9]
+00 Join Cross
+01 :- Join Inner, (id#0L = cast(id#9 as bigint))
+02 :  :- Range (0, 10485759, step=1, splits=Some(8))
+03 :  +- LocalRelation [id#9]
+04 +- Range (0, 20971518, step=1, splits=Some(8))
 
 // ReorderJoin works differently when the following holds:
 // * starSchemaDetection is enabled
@@ -74,27 +76,6 @@ spark.sessionState.conf.cboEnabled
 ----
 
 `ReorderJoin` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
-
-=== [[flattenJoin]] `flattenJoin` Method
-
-[source, scala]
-----
-flattenJoin(
-  plan: LogicalPlan, parentJoinType: InnerLike = Inner)
-: (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
-----
-
-`flattenJoin` branches off per the input link:spark-sql-LogicalPlan.adoc[logical plan]:
-
-1. For inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively on the left-side of the join.
-
-1. For link:spark-sql-LogicalPlan-Filter.adoc[Filter] with a inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join.
-
-In either case, `flattenJoin` splits conjunctive predicates, i.e. removes `And` expressions.
-
-In the end, `flattenJoin` gives...FIXME
-
-NOTE: `flattenJoin` is used recursively when `ReorderJoin` is <<ExtractFiltersAndInnerJoins-unapply, destructures>> a logical plan (when <<apply, executed>>).
 
 === [[apply]] Transforming Logical Plan -- `apply` Method
 
@@ -117,21 +98,44 @@ NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <
 
 CAUTION: FIXME
 
-=== [[ExtractFiltersAndInnerJoins-unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
+=== [[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
 
 [source, scala]
 ----
 unapply(plan: LogicalPlan): Option[(Seq[(LogicalPlan, InnerLike)], Seq[Expression])]
 ----
 
-`unapply` takes `Filter` (with CROSS and INNER joins) and any `Join` logical operators out of the input logical `plan` and <<ExtractFiltersAndInnerJoins-flattenJoin, flattens the joins>>.
+`unapply` extracts link:spark-sql-LogicalPlan-Filter.adoc[Filter] (with an inner or cross join) or link:spark-sql-LogicalPlan-Join.adoc[Join] logical operators (per the input link:spark-sql-LogicalPlan.adoc[logical plan]) to...FIXME
 
-=== [[ExtractFiltersAndInnerJoins-flattenJoin]] Flattening Join -- `flattenJoin` Method (of ExtractFiltersAndInnerJoins)
+NOTE: `unapply` is a feature of the Scala programming language to define https://docs.scala-lang.org/tour/extractor-objects.html[extractor objects] that take an object and try to give the arguments back. This is most often used in pattern matching and partial functions.
+
+1. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator with a cross or inner link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Filter`.
+
+1. For a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Join`.
+
+=== [[ExtractFiltersAndInnerJoins-flattenJoin]][[flattenJoin]] Flattening Consecutive Joins -- `flattenJoin` Method (of ExtractFiltersAndInnerJoins)
 
 [source, scala]
 ----
-flattenJoin(plan: LogicalPlan, parentJoinType: InnerLike = Inner)
-  : (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
+flattenJoin(
+  plan: LogicalPlan, parentJoinType: InnerLike = Inner)
+: (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
 ----
 
-`flattenJoin` takes CROSS and INNER join types...FIXME
+`flattenJoin` branches off per the input link:spark-sql-LogicalPlan.adoc[logical plan]:
+
+1. For an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively on the left-side of the join with the type of the join and gives:
+
+i. The logical plans from recursive `flattenJoin` with the right-side of the join with the right join's type
+i. The join conditions from `flattenJoin` with the conditions of the join
+
+1. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] with an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join (that simply removes the `Filter` "layer" and assumes an inner join) and gives:
+
+i. The logical plans from recursive `flattenJoin`
+i. The join conditions from `flattenJoin` with ``Filter``'s link:spark-sql-LogicalPlan-Filter.adoc#condition[conditions]
+
+1. For all other logical operators, `flattenJoin` gives the input `plan`, the current join type (an inner or cross join) and the empty join condition.
+
+In either case, `flattenJoin` splits _conjunctive predicates_, i.e. removes `And` expressions and gives their child expressions.
+
+NOTE: `flattenJoin` is used recursively when `ReorderJoin` is <<ExtractFiltersAndInnerJoins-unapply, destructures>> a logical plan (when <<apply, executed>>).

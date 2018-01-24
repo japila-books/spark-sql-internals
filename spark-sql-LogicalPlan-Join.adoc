@@ -11,3 +11,5 @@ class Join(
   condition: Option[Expression])
 extends BinaryNode
 ----
+
+NOTE: CROSS JOIN is just an INNER JOIN with no join condition.

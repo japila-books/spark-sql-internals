@@ -1,3 +1,9 @@
 == [[Filter]] Filter Unary Logical Operator
 
-`Filter` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that...FIXME
+[[creating-instance]]
+`Filter` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that holds the following:
+
+* [[condition]] Condition link:spark-sql-Expression.adoc[expression]
+* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+
+`Filter` is <<creating-instance, created>> when...FIXME
