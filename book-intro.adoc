@@ -15,3 +15,5 @@ TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spa
 This collections of notes is the ultimate place of mine to collect all the nuts and bolts of leveraging *Spark SQL* in your projects. The notes help me designing and developing better products with Spark SQL. They are also a viable proof of my understanding of Spark SQL (which I believe will help me reaching the highest level of mastery in Spark SQL).
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
+
+Without further ado let's learn about what link:spark-sql.adoc[Spark SQL has to offer these days].
