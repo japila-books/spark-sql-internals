@@ -158,7 +158,7 @@ estimate: Option[Statistics]
 
 NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics for Join logical operator].
 
-=== [[computeByHistogram]] `computeByHistogram` Internal Method
+=== [[computeByHistogram]] Computing Join Cardinality Using Equi-Height Histograms -- `computeByHistogram` Internal Method
 
 [source, scala]
 ----
@@ -173,4 +173,4 @@ computeByHistogram(
 
 `computeByHistogram`...FIXME
 
-NOTE: `computeByHistogram` is used when...FIXME
+NOTE: `computeByHistogram` is used exclusively when `JoinEstimation` is requested for <<computeCardinalityAndStats, computeCardinalityAndStats>> (and the histograms of both column attributes used in a join are available).

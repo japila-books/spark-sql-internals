@@ -1,7 +1,7 @@
 == [[ColumnStat]] ColumnStat -- Column Statistics
 
 [[creating-instance]]
-`ColumnStat` holds the <<statistics, statistics>> of a column (as part of the link:spark-sql-CatalogStatistics.adoc[table statistics] in a metastore).
+`ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the link:spark-sql-CatalogStatistics.adoc[table statistics] in a metastore).
 
 [[statistics]]
 .Column Statistics
@@ -32,7 +32,7 @@
 | Histogram of values (as `Histogram` which is empty by default)
 |===
 
-`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) for one or more columns using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
 
 [source, scala]
 ----
@@ -125,15 +125,7 @@ scala> :type colStatsOpt
 Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is also <<creating-instance, created>> when:
-
-1. link:spark-sql-JoinEstimation.adoc#computeByNdv[JoinEstimation.computeByNdv]
-
-1. link:spark-sql-JoinEstimation.adoc#computeByHistogram[JoinEstimation.computeByHistogram]
-
-1. link:spark-sql-EstimationUtils.adoc#nullColumnStat[EstimationUtils.nullColumnStat] (i.e. when `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin] for `LeftOuter` and `RightOuter` joins)
-
-CAUTION: FIXME When are the methods called? What for?
+`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin] for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
 [source, scala]
 ----
