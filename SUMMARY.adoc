@@ -118,6 +118,8 @@
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
 .. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
 
+. link:spark-sql-hint-framework.adoc[Hint Framework]
+
 == Query Planning and Execution
 
 . link:spark-sql-QueryExecution.adoc[QueryExecution -- Query Execution of Dataset]

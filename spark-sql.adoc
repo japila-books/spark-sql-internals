@@ -96,7 +96,9 @@ scala> sql("desc EXTENDED v1").show(false)
 +----------+---------+-------+
 ----
 
-Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using link:spark-sql-Optimizer.adoc[Logical Query Plan Optimizer], link:spark-sql-whole-stage-codegen.adoc[Java code generation] (aka _whole-stage codegen_ that could often be better than your own custom hand-written code!) and link:spark-sql-tungsten.adoc[Tungsten execution engine] with its own link:spark-sql-InternalRow.adoc[Internal Binary Row Format].
+Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using link:spark-sql-Optimizer.adoc[rule-based query optimizer] (aka *Catalyst Optimizer*), link:spark-sql-whole-stage-codegen.adoc[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and link:spark-sql-tungsten.adoc[Tungsten execution engine] with its own link:spark-sql-InternalRow.adoc[internal binary row format].
+
+As of Spark SQL 2.2, structured queries can be further optimized using link:spark-sql-hint-framework.adoc[Hint Framework].
 
 Spark SQL introduces a tabular data abstraction called link:spark-sql-Dataset.adoc[Dataset] (that was previously link:spark-sql-DataFrame.adoc[DataFrame]). ``Dataset`` data abstraction is designed to make processing large amount of structured tabular data on Spark infrastructure simpler and faster.
 
