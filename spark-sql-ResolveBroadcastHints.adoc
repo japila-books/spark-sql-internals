@@ -1,0 +1,22 @@
+== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Rule
+
+`ResolveBroadcastHints` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses for...FIXME
+
+Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+`ResolveBroadcastHints` is part of link:spark-sql-Analyzer.adoc#Hints[Hints] fixed-point batch of rules (that in fact is executed before any other rule).
+
+[[conf]]
+[[creating-instance]]
+`ResolveBroadcastHints` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
+
+=== [[apply]] Applying ResolveBroadcastHints to Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule (on a logical plan).
+
+`apply`...FIXME

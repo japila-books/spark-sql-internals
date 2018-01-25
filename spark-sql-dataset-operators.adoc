@@ -41,6 +41,9 @@ Internally, `foreachPartition` executes `foreachPartition` action on the Dataset
 | <<head, head>>
 |
 
+| <<hint, hint>>
+| Specifying a hint (and optional parameters)
+
 | <<mapPartition, mapPartition>> |
 | <<randomSplit, randomSplit>> | Randomly split a `Dataset` into two ``Dataset``s
 | <<rdd, rdd>> |
@@ -68,6 +71,32 @@ Used exclusively in Structured Streaming.
 | <<write, write>> |
 | <<writeStream, writeStream>> |
 |===
+
+=== [[hint]] Specifying Hint -- `hint` Operator
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+`hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to the current link:spark-sql-Dataset.adoc#logicalPlan[logical plan].
+
+[source, scala]
+----
+val ds = spark.range(3)
+val plan = ds.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 Range (0, 3, step=1, splits=Some(8))
+
+// Attach a hint
+val dsHinted = ds.hint("myHint", 100, true)
+val plan = dsHinted.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- Range (0, 3, step=1, splits=Some(8))
+----
+
+CAUTION: FIXME Compare `broadcast` function with `hint`
 
 === [[head]] `head` Operator
 

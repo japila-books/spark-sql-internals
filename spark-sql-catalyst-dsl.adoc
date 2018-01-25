@@ -132,5 +132,7 @@ a|
 
 * `table` for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator
 
+* [[hint]] `hint` for a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator
+
 * [[DslLogicalPlan]] Logical operators (e.g. `select`, `where`, `filter`, `serialize`, `join`, `groupBy`, `window`, `generate`)
 |===

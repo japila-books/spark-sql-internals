@@ -82,7 +82,7 @@ NOTE: link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] c
 | [[RepartitionByExpression]] link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression]
 | `visitRepartitionByExpr`
 
-| [[ResolvedHint]] `ResolvedHint`
+| [[ResolvedHint]] link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
 | `visitHint`
 
 | [[Sample]] `Sample`

@@ -2,7 +2,7 @@
 
 `WindowsSubstitution` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc[logical query plan analyzer] uses to resolve (_aka_ substitute) link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] unary logical operators with link:spark-sql-Expression-WindowExpression.adoc#UnresolvedWindowExpression[UnresolvedWindowExpression] to their corresponding link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with resolved link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition].
 
-`WindowsSubstitution` is a part of link:spark-sql-Analyzer.adoc#Substitution[Substitution] fixed-point batch of rules.
+`WindowsSubstitution` is part of link:spark-sql-Analyzer.adoc#Substitution[Substitution] fixed-point batch of rules.
 
 NOTE: It _appears_ that `WindowsSubstitution` is exclusively used for pure SQL queries because link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] unary logical operator is created exclusively when `AstBuilder` link:spark-sql-LogicalPlan-WithWindowDefinition.adoc#creating-instance[parses window definitions].
 

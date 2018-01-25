@@ -1,0 +1,3 @@
+== [[ResolvedHint]] ResolvedHint Unary Logical Operator
+
+`ResolvedHint` is...FIXME

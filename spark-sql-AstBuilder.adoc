@@ -199,11 +199,11 @@ a|
 | link:spark-sql-Expression-Generator.adoc[Generate] with link:spark-sql-Expression-Generator.adoc#UnresolvedGenerator[UnresolvedGenerator] and link:spark-sql-LogicalPlan-Generate.adoc#join[join] flag turned on for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
 | [[withHints]] `withHints`
-a| link:spark-sql-LogicalPlan-Hint.adoc[Hint] for `/*+ hint */` in `SELECT`.
+a| link:spark-sql-LogicalPlan-Hint.adoc[Hint] for `/*+ hint */` in `SELECT` queries.
 
 TIP: Note `+` (plus) between `/\*` and `*/`
 
-`hint` is of the format `name` or `name (params)` with `name` as `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN`.
+`hint` is of the format `name` or `name (param1, param2, ...)`.
 
 ```
 /*+ BROADCAST (table) */
@@ -248,17 +248,17 @@ For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQu
 
 For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` adds (in that order):
 
-1. <<withGenerate, Generate>> unary logical operators if used
+1. <<withGenerate, Generate>> unary logical operators (if used in the parsed SQL text)
 
-1. `Filter` unary logical plan if used
+1. `Filter` unary logical plan (if used in the parsed SQL text)
 
-1. <<withAggregation, GroupingSets or Aggregate>> unary logical operators if used
+1. <<withAggregation, GroupingSets or Aggregate>> unary logical operators (if used in the parsed SQL text)
 
 1. `Project` and/or `Filter` unary logical operators
 
-1. <<withWindows, WithWindowDefinition>> unary logical operator if used
+1. <<withWindows, WithWindowDefinition>> unary logical operator (if used in the parsed SQL text)
 
-1. <<withHints, UnresolvedHint>> unary logical operator if used
+1. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
 
 | [[withWindows]] `withWindows`
 a| link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).

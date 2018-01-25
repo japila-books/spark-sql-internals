@@ -129,7 +129,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 
 .2+^.^| [[Hints]] Hints
 .2+^.^| <<fixedPoint, FixedPoint>>
-| [[ResolveBroadcastHints]] ResolveBroadcastHints
+| [[ResolveBroadcastHints]] link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 | Adds a link:spark-sql-LogicalPlan-BroadcastHint.adoc[BroadcastHint] unary operator to a logical plan for `BROADCAST`, `BROADCASTJOIN` and `MAPJOIN` broadcast hints for link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] and link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias] logical plans.
 
 | RemoveAllHints

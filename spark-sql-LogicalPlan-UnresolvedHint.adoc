@@ -1,0 +1,46 @@
+== [[UnresolvedHint]] UnresolvedHint Unary Logical Operator -- Attaching Hint to Logical Plan
+
+`UnresolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents a general <<name, hint>> for the <<child, child>> logical plan.
+
+`UnresolvedHint` is <<creating-instance, created>> when:
+
+1. link:spark-sql-dataset-operators.adoc#hint[Dataset.hint] operator is used
+1. `AstBuilder` link:spark-sql-AstBuilder.adoc#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
+
+CAUTION: FIXME Examples for Dataset and SQL
+
+[[creating-instance]]
+When created `UnresolvedHint` takes:
+
+* [[name]] Name of a hint
+* [[parameters]] Parameters of a hint
+* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+
+[[resolved]]
+`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during link:spark-sql-ResolveBroadcastHints.adoc[query analysis].
+
+CAUTION: FIXME Example of UnresolvedHint --> ResolvedHint by ResolveBroadcastHints
+
+[[output]]
+`UnresolvedHint` uses the <<child, child>> operator's output schema for yours.
+
+[TIP]
+====
+Use `hint` operator from link:spark-sql-catalyst-dsl.adoc#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
+
+[source, scala]
+----
+// Create a logical plan to add hint to
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+val r1 = LocalRelation('a.int, 'b.timestamp, 'c.boolean)
+scala> println(r1.numberedTreeString)
+00 LocalRelation <empty>, [a#0, b#1, c#2]
+
+// Attach hint to the plan
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = r1.hint(name = "myHint", 100, true)
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- LocalRelation <empty>, [a#0, b#1, c#2]
+----
+====

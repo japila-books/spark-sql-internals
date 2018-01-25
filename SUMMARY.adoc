@@ -194,6 +194,7 @@
 . link:spark-sql-LogicalPlan-Pivot.adoc[Pivot]
 . link:spark-sql-LogicalPlan-Project.adoc[Project]
 . link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition and RepartitionByExpression]
+. link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
 
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand -- Generic Logical Command with Side Effects]
 .. link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc[AlterViewAsCommand]
@@ -208,6 +209,7 @@
 
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
 . link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction]
+. link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint]
 . link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 . link:spark-sql-LogicalPlan-Window.adoc[Window]
 . link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition]
@@ -275,12 +277,13 @@
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 . link:spark-sql-RelationConversions.adoc[RelationConversions]
+. link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 . link:spark-sql-ResolveRelations.adoc[ResolveRelations]
 . link:spark-sql-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
-=== Logical Plan Optimizations
+=== Logical Optimizations
 
 . link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 . link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]

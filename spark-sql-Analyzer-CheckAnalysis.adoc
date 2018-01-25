@@ -99,7 +99,7 @@ Project [COUNT(1) OVER (PARTITION BY value UnspecifiedFrame)#97L]
 | [[deterministic]] link:spark-sql-Expression.adoc#deterministic[Nondeterministic expressions]
 | FIXME
 
-| [[UnresolvedHint]] `UnresolvedHint`
+| [[UnresolvedHint]] link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint]
 | FIXME
 
 | FIXME
