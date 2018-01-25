@@ -1,6 +1,6 @@
 == [[UnresolvedHint]] UnresolvedHint Unary Logical Operator -- Attaching Hint to Logical Plan
 
-`UnresolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents a general <<name, hint>> for the <<child, child>> logical plan.
+`UnresolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents a hint (by <<name, name>> and <<parameters, parameters>>) for the <<child, child>> logical plan.
 
 `UnresolvedHint` is <<creating-instance, created>> when:
 
@@ -36,9 +36,49 @@ When created `UnresolvedHint` takes:
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
 [[resolved]]
-`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during link:spark-sql-ResolveBroadcastHints.adoc[query analysis].
+`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during link:spark-sql-ResolveBroadcastHints.adoc[query analysis] (or simply removed from a logical plan).
 
-CAUTION: FIXME Example of UnresolvedHint --> ResolvedHint by ResolveBroadcastHints
+[NOTE]
+====
+There are two logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with `UnresolvedHint` logical operators:
+
+1. link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators (with names `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` and an empty parameter list) to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint].
+
+1. `RemoveAllHints` simply removes all `UnresolvedHint` operators
+
+The order of executing the above rules matters.
+====
+
+[source, scala]
+----
+// Let's hint the query twice
+// The order of hints matters as every hint operator executes Spark analyzer
+// That will resolve all but the last hint
+val q = spark.range(100).
+  hint("broadcast").
+  hint("myHint", 100, true)
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- ResolvedHint (broadcast)
+02    +- Range (0, 100, step=1, splits=Some(8))
+
+// Let's resolve unresolved hints
+import org.apache.spark.sql.catalyst.rules.RuleExecutor
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.analysis.ResolveHints
+import org.apache.spark.sql.internal.SQLConf
+object HintResolver extends RuleExecutor[LogicalPlan] {
+  lazy val batches =
+    Batch("Hints", FixedPoint(maxIterations = 100),
+      new ResolveHints.ResolveBroadcastHints(SQLConf.get),
+      ResolveHints.RemoveAllHints) :: Nil
+}
+val resolvedPlan = HintResolver.execute(plan)
+scala> println(resolvedPlan.numberedTreeString)
+00 ResolvedHint (broadcast)
+01 +- Range (0, 100, step=1, splits=Some(8))
+----
 
 [[output]]
 `UnresolvedHint` uses the <<child, child>> operator's output schema for yours.

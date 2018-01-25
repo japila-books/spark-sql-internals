@@ -41,7 +41,7 @@ object Optimize extends RuleExecutor[LogicalPlan] {
   import org.apache.spark.sql.catalyst.optimizer._
   val batches =
     Batch("EliminateSubqueryAliases", Once, EliminateSubqueryAliases) ::
-    Batch("Operator Optimization", FixedPoint(100),
+    Batch("Operator Optimization", FixedPoint(maxIterations = 100),
       ConvertToLocalRelation,
       PushDownPredicate,
       PushPredicateThroughJoin) :: Nil
