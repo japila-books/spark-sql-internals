@@ -71,9 +71,6 @@
 
 | `LogicalRDD`
 | link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
-
-| link:spark-sql-LogicalPlan-BroadcastHint.adoc[BroadcastHint]
-| link:spark-sql-SparkStrategy.adoc#PlanLater[PlanLater]
 |===
 
 TIP: Confirm the operator mapping in the link:++https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L321++[source code of `BasicOperators`].

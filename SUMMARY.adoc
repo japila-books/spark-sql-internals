@@ -94,29 +94,29 @@
 
 == Extending Spark SQL
 
-.. link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
-... link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode]
-... link:spark-sql-RelationProvider.adoc[RelationProvider -- Data Sources With Schema Inference]
-... link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider -- Data Sources With Mandatory User-Defined Schema]
+. link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
+.. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode]
+.. link:spark-sql-RelationProvider.adoc[RelationProvider -- Data Sources With Schema Inference]
+.. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider -- Data Sources With Mandatory User-Defined Schema]
 
-.. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister -- Interface for Registering Data Source Format]
+. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister -- Interface for Registering Data Source Format]
 
-.. link:spark-sql-FileFormat.adoc[FileFormat]
-... link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-... link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-... link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
-... link:spark-sql-JsonDataSource.adoc[JsonDataSource]
-... link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
-... link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
-.. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
+. link:spark-sql-FileFormat.adoc[FileFormat]
+.. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
+.. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
+.. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
+.. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
+.. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
+.. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
+. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
 
 . link:spark-sql-CacheManager.adoc[CacheManager -- In-Memory Cache for Tables and Views]
-
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
 
 . link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
 .. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
+
+. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
 
 . link:spark-sql-hint-framework.adoc[Hint Framework]
 
@@ -178,7 +178,6 @@
 
 . link:spark-sql-LogicalPlan.adoc[LogicalPlan -- Logical Query Plan / Logical Operator]
 . link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
-. link:spark-sql-LogicalPlan-BroadcastHint.adoc[BroadcastHint]
 . link:spark-sql-LogicalPlan-Command.adoc[Command]
 . link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
 . link:spark-sql-LogicalPlan-Expand.adoc[Expand]

@@ -2,9 +2,10 @@
 
 `UnresolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents a hint (by <<name, name>> and <<parameters, parameters>>) for the <<child, child>> logical plan.
 
-`UnresolvedHint` is <<creating-instance, created>> when:
+`UnresolvedHint` is <<creating-instance, created>> and added to a link:spark-sql-LogicalPlan.adoc[logical plan] when:
 
 1. link:spark-sql-dataset-operators.adoc#hint[Dataset.hint] operator is used
+
 1. `AstBuilder` link:spark-sql-AstBuilder.adoc#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
 
 [source, scala]
