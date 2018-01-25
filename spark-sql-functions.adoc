@@ -642,7 +642,7 @@ scala> df.withColumn("struct", struct($"name", $"val")).show
 broadcast[T](df: Dataset[T]): Dataset[T]
 ----
 
-`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] small enough to be used in broadcast `join`.
+`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast `join`.
 
 TIP: Read up on link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)].
 
@@ -692,6 +692,8 @@ Project [token#127, id#126, prob#140]
          +- *Filter isnotnull(_1#136)
             +- LocalTableScan [_1#136, _2#137]
 ----
+
+NOTE: `broadcast` standard function is a special case of link:spark-sql-dataset-operators.adoc[Dataset.hint] operator that allows for attaching any hint to a logical plan.
 
 === [[expr]] `expr` Function
 

@@ -79,7 +79,7 @@ Used exclusively in Structured Streaming.
 hint(name: String, parameters: Any*): Dataset[T]
 ----
 
-`hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to the current link:spark-sql-Dataset.adoc#logicalPlan[logical plan].
+Internally, `hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to a `Dataset` (i.e. the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] of a `Dataset`).
 
 [source, scala]
 ----
@@ -96,7 +96,51 @@ scala> println(plan.numberedTreeString)
 01 +- Range (0, 3, step=1, splits=Some(8))
 ----
 
-CAUTION: FIXME Compare `broadcast` function with `hint`
+[NOTE]
+====
+While `hint` operator allows for attaching any hint to a logical plan link:spark-sql-functions.adoc#broadcast[broadcast] standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
+
+`broadcast` standard function is used for link:spark-sql-joins-broadcast.adoc[broadcast joins (aka map-side joins)], i.e. to hint the Spark planner to broadcast a dataset regardless of the size.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+val small = spark.range(1)
+val large = spark.range(100)
+
+// Let's use broadcast standard function first
+val q = large.join(broadcast(small), "id")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'Join UsingJoin(Inner,List(id))
+01 :- Range (0, 100, step=1, splits=Some(8))
+02 +- ResolvedHint (broadcast)
+03    +- Range (0, 1, step=1, splits=Some(8))
+
+// Please note that broadcast standard function uses ResolvedHint not UnresolvedHint
+
+// Let's "replicate" standard function using hint operator
+// Any of the names would work (case-insensitive)
+// "BROADCAST", "BROADCASTJOIN", "MAPJOIN"
+val smallHinted = small.hint("broadcast")
+val plan = smallHinted.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint broadcast
+01 +- Range (0, 1, step=1, splits=Some(8))
+
+// join is "clever"
+// i.e. resolves UnresolvedHint into ResolvedHint immediately
+val q = large.join(smallHinted, "id")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'Join UsingJoin(Inner,List(id))
+01 :- Range (0, 100, step=1, splits=Some(8))
+02 +- ResolvedHint (broadcast)
+03    +- Range (0, 1, step=1, splits=Some(8))
+----
+====
 
 === [[head]] `head` Operator
 

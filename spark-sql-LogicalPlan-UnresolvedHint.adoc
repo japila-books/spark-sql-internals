@@ -7,7 +7,26 @@
 1. link:spark-sql-dataset-operators.adoc#hint[Dataset.hint] operator is used
 1. `AstBuilder` link:spark-sql-AstBuilder.adoc#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
 
-CAUTION: FIXME Examples for Dataset and SQL
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// Dataset API
+val q = spark.range(1).hint("myHint", 100, true)
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- Range (0, 1, step=1, splits=Some(8))
+
+// SQL
+val q = sql("SELECT /*+ myHint (100, true) */ 1")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- 'Project [unresolvedalias(1, None)]
+02    +- OneRowRelation
+----
 
 [[creating-instance]]
 When created `UnresolvedHint` takes:

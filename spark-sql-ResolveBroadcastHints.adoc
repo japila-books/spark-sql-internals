@@ -10,6 +10,16 @@ Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc
 [[creating-instance]]
 `ResolveBroadcastHints` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
 
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.analysis.ResolveHints.ResolveBroadcastHints
+val resolver = new ResolveBroadcastHints(spark.sessionState.conf)
+val analyzedPlan = resolver(plan)
+println(analyzedPlan.numberedTreeString)
+
+FIXME Finish me
+----
+
 === [[apply]] Applying ResolveBroadcastHints to Logical Plan -- `apply` Method
 
 [source, scala]
