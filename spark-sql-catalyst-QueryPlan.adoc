@@ -71,7 +71,7 @@ scala> dataset.queryExecution.analyzed.schema
 res6: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
 ----
 
-=== [[output]] Output Schema -- `output` Property
+=== [[output]] Output Schema Attributes -- `output` Property
 
 [source, scala]
 ----

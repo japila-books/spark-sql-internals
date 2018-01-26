@@ -6,6 +6,9 @@
 
 NOTE: `BasicStatsPlanVisitor` is used only when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
 
+[[join]]
+`JoinEstimation` takes a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when created.
+
 [source, scala]
 ----
 scala> spark.version
@@ -174,3 +177,28 @@ computeByHistogram(
 `computeByHistogram`...FIXME
 
 NOTE: `computeByHistogram` is used exclusively when `JoinEstimation` is requested for <<computeCardinalityAndStats, computeCardinalityAndStats>> (and the histograms of both column attributes used in a join are available).
+
+=== [[estimateLeftSemiAntiJoin]] Estimating Statistics for Left Semi and Left Anti Joins -- `estimateLeftSemiAntiJoin` Internal Method
+
+[source, scala]
+----
+estimateLeftSemiAntiJoin(): Option[Statistics]
+----
+
+`estimateLeftSemiAntiJoin` computes statistics of the <<join, join>> using the statistics of the left side with <<rowCountsExist, estimated row count available>>. If row count statistics of the left side of the join are not available, `estimateLeftSemiAntiJoin` simply returns `None` (to say "no statistics available").
+
+NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL Command on the left logical plan to compute link:spark-sql-cost-based-optimization.adoc#rowCount[row count] statistics.
+
+NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command on the left logical plan to generate link:spark-sql-Statistics.adoc#attributeStats[column (equi-height) histograms] for more accurate estimations.
+
+Internally, `estimateLeftSemiAntiJoin` makes sure that the <<rowCountsExist, estimated row count statistic are available>> for the logical plan of the link:spark-sql-LogicalPlan-Join.adoc#left[left side] of the <<join, join>> operator.
+
+With row count statistics for the left side of the join available, `estimateLeftSemiAntiJoin` link:spark-sql-Statistics.adoc#creating-instance[creates] a `Statistics` with the following statistics:
+
+1. link:spark-sql-Statistics.adoc#sizeInBytes[Total size (in bytes)] is link:spark-sql-EstimationUtils.adoc#getOutputSize[getOutputSize] for the link:spark-sql-LogicalPlan-Join.adoc#output[output schema attributes] of the join, the row count statistic (aka _output rows_) and link:spark-sql-Statistics.adoc#attributeStats[column histograms].
+
+1. link:spark-sql-Statistics.adoc#rowCount[Row count] as the row count of the left side
+
+1. link:spark-sql-Statistics.adoc#attributeStats[Column histograms] as the column histograms of the left side
+
+NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics>> for `LeftSemi` and `LeftAnti` joins.

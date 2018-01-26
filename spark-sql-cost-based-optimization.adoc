@@ -20,7 +20,7 @@ The table statistics can be computed for tables, partitions and columns and are 
 
 1. [[total-size-stat]] *Total size* (in bytes) of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
 
-1. [[row-count-stat]] *Row count* of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
+1. [[row-count-stat]][[rowCount]] *Row count* of a link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[table] or link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[table partitions]
 
 1. [[column-stats]] link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[Column statistics], i.e. *min*, *max*, *num_nulls*, *distinct_count*, *avg_col_len*, *max_col_len*, *histogram*
 
