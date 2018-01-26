@@ -130,9 +130,30 @@ a|
 | [[plans]] `plans`
 a|
 
-* `table` for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator
-
 * [[hint]] `hint` for a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator
++
+[source, scala]
+----
+hint(name: String, parameters: Any*): LogicalPlan
+----
 
-* [[DslLogicalPlan]] Logical operators (e.g. `select`, `where`, `filter`, `serialize`, `join`, `groupBy`, `window`, `generate`)
+* [[join]] `join` for a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator
++
+[source, scala]
+----
+join(
+  otherPlan: LogicalPlan,
+  joinType: JoinType = Inner,
+  condition: Option[Expression] = None): LogicalPlan
+----
+
+* [[table]] `table` for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator
++
+[source, scala]
+----
+table(ref: String): LogicalPlan
+table(db: String, ref: String): LogicalPlan
+----
+
+* [[DslLogicalPlan]] Logical operators (e.g. `select`, `where`, `filter`, `serialize`, `groupBy`, `window`, `generate`)
 |===
