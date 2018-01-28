@@ -4,7 +4,7 @@ From PostgreSQL's https://www.postgresql.org/docs/current/static/tutorial-join.h
 
 > Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a *join query*.
 
-You can join datasets using <<join-operators, join operators>>: `crossJoin`, `join`, and `joinWith`.
+You can join two datasets using the <<join-operators, join operators>> and an optional <<join-condition, join condition>>.
 
 [[join-operators]]
 .Join Operators (in alphabetical order)
@@ -24,11 +24,9 @@ You can join datasets using <<join-operators, join operators>>: `crossJoin`, `jo
 
 | <<joinWith, joinWith>>
 | link:spark-sql-Dataset.adoc[Dataset]
-| Used for type-preserving join with two output columns for records for which join condition holds
+| Used for type-preserving join with two output columns for records for which a join condition holds
 |===
 
-[NOTE]
-====
 You can also use link:spark-sql-SparkSession.adoc#sql[SQL mode] to join datasets using _good ol'_ SQL.
 
 [source, scala]
@@ -36,9 +34,9 @@ You can also use link:spark-sql-SparkSession.adoc#sql[SQL mode] to join datasets
 val spark: SparkSession = ...
 spark.sql("select * from t1, t2 where t1.id = t2.id")
 ----
-====
 
-You can specify a *join condition* (aka _join expression_) as part of join operators or using link:spark-sql-dataset-operators.adoc#where[where] operator.
+[[join-condition]]
+You can specify a *join condition* (aka _join expression_) as part of join operators or using link:spark-sql-dataset-operators.adoc#where[where] or link:spark-sql-dataset-operators.adoc#filter[filter] operators.
 
 [source, scala]
 ----

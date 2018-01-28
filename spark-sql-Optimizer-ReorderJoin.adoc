@@ -94,9 +94,20 @@ NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract
 
 NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <<ExtractFiltersAndInnerJoins-unapply, unapply>> method) to "destructure" a logical plan to its logical operators.
 
-=== [[createOrderedJoin]] `createOrderedJoin` Recursive Method
+=== [[createOrderedJoin]] `createOrderedJoin` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+createOrderedJoin(input: Seq[(LogicalPlan, InnerLike)], conditions: Seq[Expression]): LogicalPlan
+----
+
+`createOrderedJoin` takes a collection of pairs of a link:spark-sql-LogicalPlan.adoc[logical plan] and the link:spark-sql-joins.adoc#join-types[join type]...FIXME
+
+NOTE: `createOrderedJoin` makes sure that the `input` has two or more pairs.
+
+For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_)...FIXME
+
+NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, applied>> to a logical plan.
 
 === [[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
 
