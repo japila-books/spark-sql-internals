@@ -105,7 +105,60 @@ createOrderedJoin(input: Seq[(LogicalPlan, InnerLike)], conditions: Seq[Expressi
 
 NOTE: `createOrderedJoin` makes sure that the `input` has two or more pairs.
 
-For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_)...FIXME
+==== [[createOrderedJoin-two-joins]] "Two Logical Plans" Case
+
+For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_) the input condition expressions to the ones that link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[can be evaluated within a join] and not.
+
+`createOrderedJoin` determines the join type of the result join. It chooses link:spark-sql-joins.adoc#inner[inner] if the left and right join types are both inner and link:spark-sql-joins.adoc#cross[cross] otherwise.
+
+`createOrderedJoin` creates a link:spark-sql-LogicalPlan-Join.adoc#creating-instance[Join] logical operator with the input join conditions combined together using `And` expression and the join type (inner or cross).
+
+If there are condition expressions that link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[could not be evaluated within a join], `createOrderedJoin` creates a link:spark-sql-LogicalPlan-Filter.adoc#creating-instance[Filter] logical operator with the join conditions combined together using `And` expression and the result join operator as the link:spark-sql-LogicalPlan-Filter.adoc#child[child] operator.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+import org.apache.spark.sql.catalyst.expressions.Expression
+import org.apache.spark.sql.catalyst.expressions.Literal
+val a: Expression = Literal("a")
+val b: Expression = Literal("b")
+// Use Catalyst DSL to compose expressions
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val cond1 = a === b
+
+// RowNumber is Unevaluable so it cannot be evaluated within a join
+import org.apache.spark.sql.catalyst.expressions.RowNumber
+val rn = RowNumber()
+import org.apache.spark.sql.catalyst.expressions.Unevaluable
+assert(rn.isInstanceOf[Unevaluable])
+val cond2 = rn === Literal(2)
+
+val cond3 = Literal.TrueLiteral
+
+// Use Catalyst DSL to create logical plans
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+val t2 = table("t2")
+
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.plans.{Cross, Inner, InnerLike}
+val input: Seq[(LogicalPlan, InnerLike)] = (t1, Inner) :: (t2, Cross) :: Nil
+val conditions: Seq[Expression] = cond1 :: cond2 :: cond3 :: Nil
+
+import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
+val plan = ReorderJoin.createOrderedJoin(input, conditions)
+scala> println(plan.numberedTreeString)
+00 'Filter (row_number() = 2)
+01 +- 'Join Cross, ((a = b) && true)
+02    :- 'UnresolvedRelation `t1`
+03    +- 'UnresolvedRelation `t2`
+----
+
+==== [[createOrderedJoin-three-or-more-joins]] "Three Or More Logical Plans" Case
+
+For three or more logical plans in the `input`, `createOrderedJoin`...FIXME
 
 NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, applied>> to a logical plan.
 

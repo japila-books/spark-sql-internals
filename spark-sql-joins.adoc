@@ -59,12 +59,12 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 | Name (joinType)
 | JoinType
 
-| [[cross]] `CROSS`
-| `cross`
+| `CROSS`
+| [[cross]] `cross`
 | `Cross`
 
 | `INNER`
-| `inner`
+| [[inner]] `inner`
 | `Inner`
 
 | [[FullOuter]] `FULL OUTER`

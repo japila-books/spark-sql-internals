@@ -1,0 +1,31 @@
+== [[PredicateHelper]] PredicateHelper Helper Object
+
+`PredicateHelper` is...FIXME
+
+=== [[canEvaluateWithinJoin]] `canEvaluateWithinJoin` Method
+
+[source, scala]
+----
+canEvaluateWithinJoin(expr: Expression): Boolean
+----
+
+`canEvaluateWithinJoin` indicates whether a link:spark-sql-Expression.adoc[Catalyst expression] _can be evaluated within a join_, i.e. when one of the conditions holds:
+
+1. Expression is link:spark-sql-Expression.adoc#deterministic[deterministic]
+
+1. Expression is not `Unevaluable`, `ListQuery` or `Exists`
+
+1. Expression is a `SubqueryExpression` with no child expressions
+
+1. Expression is a `AttributeReference`
+
+1. Any expression with child expressions that meet one of the above conditions
+
+[NOTE]
+====
+`canEvaluateWithinJoin` is used when:
+
+1. `PushPredicateThroughJoin` logical optimization rule is link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc#apply[executed]
+
+1. `ReorderJoin` logical optimization rule does link:spark-sql-Optimizer-ReorderJoin.adoc#createOrderedJoin[createOrderedJoin]
+====

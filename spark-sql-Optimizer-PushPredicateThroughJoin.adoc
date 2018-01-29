@@ -1,0 +1,14 @@
+== [[PushPredicateThroughJoin]] PushPredicateThroughJoin Logical Optimization Rule
+
+`PushPredicateThroughJoin` is...FIXME
+
+=== [[apply]] Transforming Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule.
+
+`apply`...FIXME

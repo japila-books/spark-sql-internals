@@ -297,6 +297,7 @@
 . link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 . link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
+. link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 . link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
 . link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
 
@@ -383,6 +384,7 @@
 .. link:spark-sql-ParserInterface.adoc[ParserInterface -- SQL Parser Contract]
 
 . link:spark-sql-SQLExecution.adoc[SQLExecution Helper Object]
+. link:spark-sql-PredicateHelper.adoc[PredicateHelper Helper Object]
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 

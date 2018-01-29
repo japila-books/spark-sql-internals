@@ -87,7 +87,7 @@ spark.sessionState.optimizer
 | EliminateOuterJoin
 |
 
-| PushPredicateThroughJoin
+| [[PushPredicateThroughJoin]] link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 |
 
 | [[PushDownPredicate]] link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]

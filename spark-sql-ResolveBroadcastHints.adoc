@@ -34,7 +34,7 @@ scala> println(analyzedPlan.numberedTreeString)
 03 +- 'UnresolvedRelation `t2`
 ----
 
-=== [[apply]] Applying ResolveBroadcastHints to Logical Plan (Resolving UnresolvedHint with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` Hint Names) -- `apply` Method
+=== [[apply]] Applying ResolveBroadcastHints to Logical Plan (Resolving UnresolvedHint with BROADCAST, BROADCASTJOIN or MAPJOIN Hint Names) -- `apply` Method
 
 [source, scala]
 ----
