@@ -94,16 +94,18 @@ NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract
 
 NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <<ExtractFiltersAndInnerJoins-unapply, unapply>> method) to "destructure" a logical plan to its logical operators.
 
-=== [[createOrderedJoin]] `createOrderedJoin` Method
+=== [[createOrderedJoin]] Creating Join Logical Operator (Possibly as Child of Filter Operator) -- `createOrderedJoin` Method
 
 [source, scala]
 ----
 createOrderedJoin(input: Seq[(LogicalPlan, InnerLike)], conditions: Seq[Expression]): LogicalPlan
 ----
 
-`createOrderedJoin` takes a collection of pairs of a link:spark-sql-LogicalPlan.adoc[logical plan] and the link:spark-sql-joins.adoc#join-types[join type]...FIXME
+`createOrderedJoin` takes a collection of pairs of a link:spark-sql-LogicalPlan.adoc[logical plan] and the link:spark-sql-joins.adoc#join-types[join type] with join condition link:spark-sql-Expression.adoc[expressions] and...FIXME
 
-NOTE: `createOrderedJoin` makes sure that the `input` has two or more pairs.
+NOTE: `createOrderedJoin` makes sure that the `input` has at least two pairs in the `input`.
+
+NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, applied>> to a logical plan.
 
 ==== [[createOrderedJoin-two-joins]] "Two Logical Plans" Case
 
@@ -142,6 +144,7 @@ import org.apache.spark.sql.catalyst.dsl.plans._
 val t1 = table("t1")
 val t2 = table("t2")
 
+// Use input with exactly 2 pairs
 import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.plans.{Cross, Inner, InnerLike}
 val input: Seq[(LogicalPlan, InnerLike)] = (t1, Inner) :: (t2, Cross) :: Nil
@@ -160,7 +163,67 @@ scala> println(plan.numberedTreeString)
 
 For three or more logical plans in the `input`, `createOrderedJoin`...FIXME
 
-NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, applied>> to a logical plan.
+.createOrderedJoin with Three Joins
+image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+import org.apache.spark.sql.catalyst.expressions.Expression
+import org.apache.spark.sql.catalyst.expressions.AttributeReference
+import org.apache.spark.sql.types.LongType
+val t1_id: Expression = AttributeReference(name = "id", LongType)(qualifier = Some("t1"))
+val t2_id: Expression = AttributeReference(name = "id", LongType)(qualifier = Some("t2"))
+val t4_id: Expression = AttributeReference(name = "id", LongType)(qualifier = Some("t4"))
+// Use Catalyst DSL to compose expressions
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val cond1 = t1_id === t2_id
+
+// RowNumber is Unevaluable so it cannot be evaluated within a join
+import org.apache.spark.sql.catalyst.expressions.RowNumber
+val rn = RowNumber()
+import org.apache.spark.sql.catalyst.expressions.Unevaluable
+assert(rn.isInstanceOf[Unevaluable])
+import org.apache.spark.sql.catalyst.expressions.Literal
+val cond2 = rn === Literal(2)
+
+// That would hardly appear in the condition list
+// Just for the demo
+val cond3 = Literal.TrueLiteral
+
+val cond4 = t4_id === t1_id
+
+// Use Catalyst DSL to create logical plans
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+val t2 = table("t2")
+val t3 = table("t3")
+val t4 = table("t4")
+
+// Use input with 3 or more pairs
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.plans.{Cross, Inner, InnerLike}
+val input: Seq[(LogicalPlan, InnerLike)] = Seq(
+  (t1, Inner),
+  (t2, Inner),
+  (t3, Cross),
+  (t4, Inner))
+val conditions: Seq[Expression] = cond1 :: cond2 :: cond3 :: cond4 :: Nil
+
+import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
+val plan = ReorderJoin.createOrderedJoin(input, conditions)
+scala> println(plan.numberedTreeString)
+00 'Filter (row_number() = 2)
+01 +- 'Join Inner, ((id#11L = id#12L) && (id#13L = id#11L))
+02    :- 'Join Cross
+03    :  :- 'Join Inner, true
+04    :  :  :- 'UnresolvedRelation `t1`
+05    :  :  +- 'UnresolvedRelation `t2`
+06    :  +- 'UnresolvedRelation `t3`
+07    +- 'UnresolvedRelation `t4`
+----
 
 === [[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
 
