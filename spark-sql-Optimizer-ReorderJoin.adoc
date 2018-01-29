@@ -161,7 +161,31 @@ scala> println(plan.numberedTreeString)
 
 ==== [[createOrderedJoin-three-or-more-joins]] "Three Or More Logical Plans" Case
 
-For three or more logical plans in the `input`, `createOrderedJoin`...FIXME
+For three or more logical plans in the `input`, `createOrderedJoin` takes the first link:spark-sql-LogicalPlan.adoc[logical operator] from the `input` and tries to find the first join that has at least one join condition, i.e. a join with the following:
+
+1. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both sides are required to resolve join references)
+
+1. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first operator's or the current operator's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[[output attributes] (i.e. neither the first operator nor the current operator themselves are enough to resolve join references)
+
+`createOrderedJoin` takes the join that has at least one join condition if available or the next join from the `input` collection.
+
+`createOrderedJoin` partitions (aka _splits_) the input condition expressions to expressions that meet the following requirements (aka _join conditions_) or not (aka _others_):
+
+1. link:spark-sql-Expression.adoc#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
+
+1. link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[Can be evaluated within a join]
+
+`createOrderedJoin` creates a link:spark-sql-LogicalPlan-Join.adoc#creating-instance[Join] logical operator with:
+
+1. Left logical operator as the first operator from the `input`
+
+1. Right logical operator as the right as chosen above
+
+1. Join type as the right's join type as chosen above
+
+1. Join conditions combined together using `And` expression
+
+`createOrderedJoin` calls itself recursively with the new `Join` and `Inner` pair with the remaining logical plans (all but the right) with the _others_ conditions (all but the _join conditions_ used for the new join).
 
 .createOrderedJoin with Three Joins
 image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]

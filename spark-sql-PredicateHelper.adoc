@@ -2,6 +2,17 @@
 
 `PredicateHelper` is...FIXME
 
+=== [[canEvaluate]] `canEvaluate` Method
+
+[source, scala]
+----
+canEvaluate(expr: Expression, plan: LogicalPlan): Boolean
+----
+
+`canEvaluate`...FIXME
+
+NOTE: `canEvaluate` is used when...FIXME
+
 === [[canEvaluateWithinJoin]] `canEvaluateWithinJoin` Method
 
 [source, scala]
