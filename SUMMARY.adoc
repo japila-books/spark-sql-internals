@@ -136,9 +136,14 @@
 .. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
 .. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 
+. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
+
 . link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
 .. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
+
+. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
+. link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
@@ -346,9 +351,6 @@
 . link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor -- Tree Transformation Rule Executor]
 . link:spark-sql-catalyst-Rule.adoc[Catalyst Rule]
 . link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy]
-
-. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator and Adaptive Query Execution]
-. link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 == Kafka Integration
 

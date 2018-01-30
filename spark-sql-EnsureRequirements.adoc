@@ -7,7 +7,7 @@
 
 1. For other non-``ShuffleExchange`` physical operators, <<ensureDistributionAndOrdering, ensures partition distribution and ordering>> (possibly adding new physical operators, e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] and link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] for distribution or `SortExec` for sorting)
 
-`EnsureRequirements` is a part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a link:spark-sql-QueryExecution.adoc[query execution].
+`EnsureRequirements` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution.
 
 [[conf]]
 `EnsureRequirements` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
@@ -51,7 +51,7 @@ If the input `operator` has multiple children and specifies child output distrib
 
 If the children's output partitionings are not all compatible, then...FIXME
 
-`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[adaptive query execution] is enabled which is not by default).
+`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] is enabled which is not by default).
 
 NOTE: At this point in `ensureDistributionAndOrdering` the required child distributions are already handled.
 
@@ -61,7 +61,7 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 
 NOTE: `ensureDistributionAndOrdering` is used exclusively when `EnsureRequirements` is <<apply, executed>> (i.e. applied to a physical plan).
 
-=== [[withExchangeCoordinator]] Adding ExchangeCoordinator (When Adaptive Query Execution Enabled) -- `withExchangeCoordinator` Internal Method
+=== [[withExchangeCoordinator]] Adding ExchangeCoordinator (Adaptive Query Execution) -- `withExchangeCoordinator` Internal Method
 
 [source, scala]
 ----
@@ -81,7 +81,7 @@ Internally, `withExchangeCoordinator` checks if the input `children` operators s
 
 * There are at least two `children` operators and the input `requiredChildDistributions` are all `ClusteredDistribution`
 
-With link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[adaptive query execution enabled] (i.e. when link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] flag is `true`) and the <<supportsCoordinator, operator supports ExchangeCoordinator>>, `withExchangeCoordinator` creates a `ExchangeCoordinator` and:
+With link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] (i.e. when link:spark-sql-adaptive-query-execution.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property is `true`) and the <<supportsCoordinator, operator supports ExchangeCoordinator>>, `withExchangeCoordinator` creates a `ExchangeCoordinator` and:
 
 * For every `ShuffleExchange`, link:spark-sql-SparkPlan-ShuffleExchange.adoc#coordinator[registers the `ExchangeCoordinator`]
 

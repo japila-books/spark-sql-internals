@@ -1,6 +1,6 @@
 == [[SparkPlan]] SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query
 
-`SparkPlan` is the <<contract, contract>> in Spark SQL for link:spark-sql-catalyst-QueryPlan.adoc[physical operators] to build a physical query plan (i.e. a tree of physical operators).
+`SparkPlan` is the <<contract, contract>> in Spark SQL for link:spark-sql-catalyst-QueryPlan.adoc[physical operators] to build a *physical query plan* (aka *query execution plan*).
 
 `SparkPlan` is a recursive data structure in Spark SQL's link:spark-sql-catalyst.adoc[Catalyst tree manipulation framework] and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
 

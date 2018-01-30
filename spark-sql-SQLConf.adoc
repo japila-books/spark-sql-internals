@@ -70,7 +70,7 @@ org.apache.spark.sql.RuntimeConfig
 
 | [[adaptiveExecutionEnabled]] `adaptiveExecutionEnabled`
 | <<spark.sql.adaptive.enabled, spark.sql.adaptive.enabled>>
-| Used exclusively for `EnsureRequirements` link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[to add ExchangeCoordinator] (when adaptive query execution is enabled)
+| Used exclusively when `EnsureRequirements` link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[adds an ExchangeCoordinator] (for link:spark-sql-adaptive-query-execution.adoc[adaptive query execution])
 
 | [[autoBroadcastJoinThreshold]] `autoBroadcastJoinThreshold`
 | <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>>
@@ -204,9 +204,7 @@ Used in:
 
 | [[spark.sql.adaptive.enabled]] `spark.sql.adaptive.enabled`
 | `false`
-a| Enables adaptive query execution
-
-NOTE: Adaptive query execution is not supported for streaming Datasets and is disabled at execution.
+a| Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
 
 Use <<adaptiveExecutionEnabled, adaptiveExecutionEnabled>> method to access the current value.
 

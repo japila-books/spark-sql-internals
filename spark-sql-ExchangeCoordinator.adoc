@@ -1,4 +1,4 @@
-== [[ExchangeCoordinator]] `ExchangeCoordinator` and Adaptive Query Execution
+== [[ExchangeCoordinator]] ExchangeCoordinator
 
 CAUTION: FIXME
 

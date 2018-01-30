@@ -1,0 +1,17 @@
+== Adaptive Query Execution
+
+*Adaptive Query Execution* (aka *Adaptive Query Optimisation* or *Adaptive Optimisation*) is an optimisation of a link:spark-sql-SparkPlan.adoc[query execution plan] that...FIXME
+
+Adaptive Query Execution is disabled by default. Set <<spark.sql.adaptive.enabled, spark.sql.adaptive.enabled>> configuration property to `true` to enable it.
+
+NOTE: Adaptive query execution is not supported for streaming Datasets and is disabled at their execution.
+
+=== [[spark.sql.adaptive.enabled]] spark.sql.adaptive.enabled Configuration Property
+
+link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property turns adaptive query execution on.
+
+TIP: Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[adaptiveExecutionEnabled] method to access the current value.
+
+=== [[EnsureRequirements]] EnsureRequirements
+
+link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] is...FIXME
