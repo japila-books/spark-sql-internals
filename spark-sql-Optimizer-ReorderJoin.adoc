@@ -1,10 +1,10 @@
-== [[ReorderJoin]] ReorderJoin Logical Optimization Rule -- Reordering Inner or Cross Joins
+== [[ReorderJoin]] ReorderJoin Logical Optimization Rule -- Reordering Inner and Cross Joins
 
 `ReorderJoin` is an optimization that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
 
 Technically, `ReorderJoin` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner or cross joins with one or more join conditions (possibly separated by `Filter` operators).
+`ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner and cross joins with one or more join conditions (possibly separated by `Filter` operators).
 
 [source, scala]
 ----
@@ -185,7 +185,11 @@ For three or more logical plans in the `input`, `createOrderedJoin` takes the fi
 
 1. Join conditions combined together using `And` expression
 
-`createOrderedJoin` calls itself recursively with the new `Join` and `Inner` pair with the remaining logical plans (all but the right) with the _others_ conditions (all but the _join conditions_ used for the new join).
+`createOrderedJoin` calls itself recursively with the following:
+
+1. `input` logical joins as a new pair of the new `Join` and `Inner` join type with the remaining logical plans (all but the right)
+
+1. `conditions` expressions as the _others_ conditions (all but the _join conditions_ used for the new join)
 
 .createOrderedJoin with Three Joins
 image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
@@ -264,20 +268,70 @@ NOTE: `unapply` is a feature of the Scala programming language to define https:/
 
 1. For a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Join`.
 
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+val d1 = Seq((0, "a"), (1, "b")).toDF("id", "c")
+val d2 = Seq((0, "c"), (2, "b")).toDF("id", "c")
+val q = d1.join(d2, "id").where($"id" > 0)
+val plan = q.queryExecution.analyzed
+
+scala> println(plan.numberedTreeString)
+00 Filter (id#34 > 0)
+01 +- Project [id#34, c#35, c#44]
+02    +- Join Inner, (id#34 = id#43)
+03       :- Project [_1#31 AS id#34, _2#32 AS c#35]
+04       :  +- LocalRelation [_1#31, _2#32]
+05       +- Project [_1#40 AS id#43, _2#41 AS c#44]
+06          +- LocalRelation [_1#40, _2#41]
+
+// Let's use Catalyst DSL instead so the plan is cleaner (e.g. no Project in-between)
+// We could have used logical rules to clean up the plan
+// Leaving the cleaning up as a home exercise for you :)
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+val t2 = table("t2")
+import org.apache.spark.sql.catalyst.expressions.Expression
+import org.apache.spark.sql.catalyst.expressions.Literal
+val id: Expression = Literal("id")
+import org.apache.spark.sql.catalyst.dsl.expressions._
+import org.apache.spark.sql.catalyst.plans.Cross
+val plan = t1.join(t1, joinType = Cross).join(t2).where(id > 0)
+scala> println(plan.numberedTreeString)
+00 'Filter (id > 0)
+01 +- 'Join Inner
+02    :- 'Join Cross
+03    :  :- 'UnresolvedRelation `t1`
+04    :  +- 'UnresolvedRelation `t1`
+05    +- 'UnresolvedRelation `t2`
+
+import org.apache.spark.sql.catalyst.planning.ExtractFiltersAndInnerJoins
+// Option[(Seq[(LogicalPlan, InnerLike)], Seq[Expression])]
+val Some((plans, conditions)) = ExtractFiltersAndInnerJoins.unapply(plan)
+
+assert(plans.size > 2)
+assert(conditions.nonEmpty)
+
+CAUTION: FIXME
+----
+
+NOTE: `unapply` is used exclusively when `ReorderJoin` is <<apply, executed>>, i.e. applied to a logical plan.
+
 === [[ExtractFiltersAndInnerJoins-flattenJoin]][[flattenJoin]] Flattening Consecutive Joins -- `flattenJoin` Method (of ExtractFiltersAndInnerJoins)
 
 [source, scala]
 ----
-flattenJoin(
-  plan: LogicalPlan, parentJoinType: InnerLike = Inner)
-: (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
+flattenJoin(plan: LogicalPlan, parentJoinType: InnerLike = Inner):
+  (Seq[(LogicalPlan, InnerLike)], Seq[Expression])
 ----
 
-`flattenJoin` branches off per the input link:spark-sql-LogicalPlan.adoc[logical plan]:
+`flattenJoin` branches off per the input logical `plan`:
 
-1. For an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively on the left-side of the join with the type of the join and gives:
+1. For an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively with the left-side of the join and the type of the join, and gives:
 
-i. The logical plans from recursive `flattenJoin` with the right-side of the join with the right join's type
+i. The logical plans from recursive `flattenJoin` with the right-side of the join and the right join's type
 i. The join conditions from `flattenJoin` with the conditions of the join
 
 1. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] with an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join (that simply removes the `Filter` "layer" and assumes an inner join) and gives:
@@ -288,5 +342,130 @@ i. The join conditions from `flattenJoin` with ``Filter``'s link:spark-sql-Logic
 1. For all other logical operators, `flattenJoin` gives the input `plan`, the current join type (an inner or cross join) and the empty join condition.
 
 In either case, `flattenJoin` splits _conjunctive predicates_, i.e. removes `And` expressions and gives their child expressions.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// Use Catalyst DSL to create a logical plan
+// Example 1: One cross join
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val id = "id".expr
+import org.apache.spark.sql.catalyst.plans.Cross
+val plan = t1.join(t1, joinType = Cross)
+scala> println(plan.numberedTreeString)
+00 'Join Cross
+01 :- 'UnresolvedRelation `t1`
+02 +- 'UnresolvedRelation `t1`
+
+import org.apache.spark.sql.catalyst.planning.ExtractFiltersAndInnerJoins
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 2)
+assert(conditions.size == 0)
+
+// Example 2: One inner join with a filter
+val t2 = table("t2")
+val plan = t1.join(t2).where("t1".expr === "t2".expr)
+scala> println(plan.numberedTreeString)
+00 'Filter (t1 = t2)
+01 +- 'Join Inner
+02    :- 'UnresolvedRelation `t1`
+03    +- 'UnresolvedRelation `t2`
+
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 2)
+assert(conditions.size == 1)
+
+// Example 3: One inner and one cross join with a compound filter
+val plan = t1.
+  join(t1, joinType = Cross).
+  join(t2).
+  where("t2.id".expr === "t1.id".expr && "t1.id".expr > 10)
+scala> println(plan.numberedTreeString)
+00 'Filter ((t2.id = t1.id) && (t1.id > 10))
+01 +- 'Join Inner
+02    :- 'Join Cross
+03    :  :- 'UnresolvedRelation `t1`
+04    :  +- 'UnresolvedRelation `t1`
+05    +- 'UnresolvedRelation `t2`
+
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 3)
+assert(conditions.size == 2)
+
+// Example 4
+val t3 = table("t3")
+val plan = t1.
+  join(t1, joinType = Cross).
+  join(t2).
+  where("t2.id".expr === "t1.id".expr && "t1.id".expr > 10).
+  join(t3.select(star())).  // <-- just for more fun
+  where("t3.id".expr === "t1.id".expr)
+scala> println(plan.numberedTreeString)
+00 'Filter (t3.id = t1.id)
+01 +- 'Join Inner
+02    :- 'Filter ((t2.id = t1.id) && (t1.id > 10))
+03    :  +- 'Join Inner
+04    :     :- 'Join Cross
+05    :     :  :- 'UnresolvedRelation `t1`
+06    :     :  +- 'UnresolvedRelation `t1`
+07    :     +- 'UnresolvedRelation `t2`
+08    +- 'Project [*]
+09       +- 'UnresolvedRelation `t3`
+
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 4)
+assert(conditions.size == 3)
+
+// Example 5: Join under project is no longer consecutive
+val plan = t1.
+  join(t1, joinType = Cross).
+  select(star()). // <-- separates the cross join from the other joins
+  join(t2).
+  where("t2.id".expr === "t1.id".expr && "t1.id".expr > 10).
+  join(t3.select(star())).
+  where("t3.id".expr === "t1.id".expr)
+scala> println(plan.numberedTreeString)
+00 'Filter (t3.id = t1.id)
+01 +- 'Join Inner
+02    :- 'Filter ((t2.id = t1.id) && (t1.id > 10))
+03    :  +- 'Join Inner
+04    :     :- 'Project [*]
+05    :     :  +- 'Join Cross
+06    :     :     :- 'UnresolvedRelation `t1`
+07    :     :     +- 'UnresolvedRelation `t1`
+08    :     +- 'UnresolvedRelation `t2`
+09    +- 'Project [*]
+10       +- 'UnresolvedRelation `t3`
+
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 3) // <-- one join less due to Project
+assert(conditions.size == 3)
+
+// Example 6: Join on right-hand side is not considered
+val plan = t1.
+  join(
+    t1.join(t2).where("t2.id".expr === "t1.id".expr && "t1.id".expr > 10), // <-- join on RHS
+    joinType = Cross).
+  join(t2).
+  where("t2.id".expr === "t1.id".expr && "t1.id".expr > 10)
+scala> println(plan.numberedTreeString)
+00 'Filter ((t2.id = t1.id) && (t1.id > 10))
+01 +- 'Join Inner
+02    :- 'Join Cross
+03    :  :- 'UnresolvedRelation `t1`
+04    :  +- 'Filter ((t2.id = t1.id) && (t1.id > 10))
+05    :     +- 'Join Inner
+06    :        :- 'UnresolvedRelation `t1`
+07    :        +- 'UnresolvedRelation `t2`
+08    +- 'UnresolvedRelation `t2`
+
+val (plans, conditions) = ExtractFiltersAndInnerJoins.flattenJoin(plan)
+assert(plans.size == 3) // <-- one join less due to being on right side
+assert(conditions.size == 2)
+----
 
 NOTE: `flattenJoin` is used recursively when `ReorderJoin` is <<ExtractFiltersAndInnerJoins-unapply, destructures>> a logical plan (when <<apply, executed>>).
