@@ -151,6 +151,6 @@ scala> Encoders.tuple(Encoders.scalaLong, Encoders.STRING, Encoders.scalaBoolean
 res9: org.apache.spark.sql.Encoder[(Long, String, Boolean)] = class[_1[0]: bigint, _2[0]: string, _3[0]: boolean]
 ----
 
-=== [[i-want-more]] Further reading or watching
+=== [[i-want-more]] Further Reading and Watching
 
 * (video) https://youtu.be/_1byVWTEK1s[Modern Spark DataFrame and Dataset (Intermediate Tutorial)] by https://twitter.com/adbreind[Adam Breindel] from Databricks.

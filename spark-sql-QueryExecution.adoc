@@ -154,11 +154,11 @@ CAUTION: FIXME
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 * [[logical]] link:spark-sql-LogicalPlan.adoc[Logical plan]
 
-=== [[preparations]] Physical Plan Preparation Rules -- `preparations` Method
+=== [[preparations]] Physical Preparation Rules -- `preparations` Method
 
 `preparations` is a sequence of link:spark-sql-SparkPlan.adoc[physical plan] preparation rules (i.e. `Rule[SparkPlan]`).
 
-TIP: A `SparkPlan` preparation rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] to another (possibly more efficient).
+TIP: A `SparkPlan` preparation rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] to a more efficient variant.
 
 `preparations` is one of the final phases of query execution that Spark developers could use for further query optimizations.
 
@@ -168,8 +168,8 @@ The current list of `SparkPlan` transformations in `preparations` is as follows:
 1. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 1. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
 1. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
-1. `ReuseExchange`
-1. `ReuseSubquery`
+1. link:spark-sql-ReuseExchange.adoc[ReuseExchange]
+1. link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
 
 NOTE: The physical preparation rules are applied sequentially in order to the physical plan before execution, i.e. they generate a `SparkPlan` when <<executedPlan, executedPlan>> lazy value is first accessed (and is cached afterwards).
 

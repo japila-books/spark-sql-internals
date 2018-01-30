@@ -410,6 +410,6 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-
 1. link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
 ====
 
-=== [[i-want-more]] Further reading or watching
+=== [[i-want-more]] Further Reading and Watching
 
 * (video) https://youtu.be/i7l3JQRx7Qw[Structuring Spark: DataFrames, Datasets, and Streaming]

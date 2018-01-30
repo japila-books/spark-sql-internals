@@ -321,6 +321,8 @@
 . link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 . link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
 . link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
+. link:spark-sql-ReuseExchange.adoc[ReuseExchange]
+. link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
 
 == Monitoring
 

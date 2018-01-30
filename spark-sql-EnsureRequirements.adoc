@@ -12,6 +12,18 @@
 [[conf]]
 `EnsureRequirements` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
 
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+val q = ??? // FIXME
+val sparkPlan = q.queryExecution.sparkPlan
+
+import org.apache.spark.sql.execution.exchange.EnsureRequirements
+val plan = EnsureRequirements(spark.sessionState.conf).apply(sparkPlan)
+----
+
 === [[createPartitioning]] `createPartitioning` Internal Method
 
 CAUTION: FIXME

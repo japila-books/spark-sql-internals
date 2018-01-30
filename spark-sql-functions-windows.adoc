@@ -609,7 +609,7 @@ Window [rank(salary#7L) windowspecdefinition(depname#5, salary#7L DESC, ROWS BET
       +- LocalTableScan [depName#5, empNo#6L, salary#7L]
 ```
 
-=== [[i-want-more]] Further reading or watching
+=== [[i-want-more]] Further Reading and Watching
 
 * https://databricks.com/blog/2015/07/15/introducing-window-functions-in-spark-sql.html[Introducing Window Functions in Spark SQL]
 * http://www.postgresql.org/docs/current/static/tutorial-window.html[3.5. Window Functions] in the official documentation of PostgreSQL

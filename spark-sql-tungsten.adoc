@@ -47,7 +47,7 @@ NOTE: The code generation was tracked under https://issues.apache.org/jira/brows
 
 TIP: Read link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Code Generation].
 
-=== [[i-want-more]] Further reading or watching
+=== [[i-want-more]] Further Reading and Watching
 
 1. https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html[Project Tungsten: Bringing Spark Closer to Bare Metal]
 

@@ -87,7 +87,7 @@ Refer to link:spark-logging.adoc[Logging].
 
 NOTE: `SparkOptimizer` is created when `SessionState` link:spark-sql-SessionState.adoc#creating-instance[is created] (that initializes link:spark-sql-SessionState.adoc#optimizer[optimizer] property).
 
-=== [[i-want-more]] Further reading or watching
+=== [[i-want-more]] Further Reading and Watching
 
 1. https://databricks.com/blog/2015/04/13/deep-dive-into-spark-sqls-catalyst-optimizer.html[Deep Dive into Spark SQL’s Catalyst Optimizer]
 
