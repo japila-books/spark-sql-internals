@@ -49,7 +49,7 @@ a| The (expression) constraints of <<child, child logical plan>> and non-aggrega
 NOTE: Part of link:spark-sql-catalyst-QueryPlan.adoc#validConstraints[QueryPlan contract].
 |===
 
-=== [[optimizer]] Rule-Based Logical Optimization Phase
+=== [[optimizer]] Rule-Based Logical Query Optimization Phase
 
 link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] operator when under `Filter` operator and with all expressions deterministic.
 

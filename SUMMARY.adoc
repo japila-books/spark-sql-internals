@@ -289,7 +289,7 @@
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
-=== Logical Optimizations
+=== Logical Query Optimizations
 
 . link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 . link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]

@@ -21,7 +21,7 @@ Regardless of the query language, i.e. SQL or Dataset API, structured queries in
 
 1. link:spark-sql-QueryExecution.adoc#analyzed[Logical Analysis]
 1. link:spark-sql-QueryExecution.adoc#withCachedData[Caching Replacement]
-1. link:spark-sql-QueryExecution.adoc#optimizedPlan[Logical Optimization] (using link:spark-sql-SparkOptimizer.adoc[rule-based] and link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations)
+1. link:spark-sql-QueryExecution.adoc#optimizedPlan[Logical Query Optimization] (using link:spark-sql-SparkOptimizer.adoc[rule-based] and link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations)
 1. link:spark-sql-QueryExecution.adoc#sparkPlan[Physical Planning]
 1. link:spark-sql-QueryExecution.adoc#executedPlan[Physical Optimization] (e.g. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] or link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution])
 1. link:spark-sql-QueryExecution.adoc#toRdd[Constructing the RDD of Internal Binary Rows] (that represents the structured query in terms of Spark Core's RDD API)

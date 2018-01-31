@@ -1,4 +1,4 @@
-== [[ColumnPruning]] ColumnPruning Logical Plan Optimization
+== [[ColumnPruning]] ColumnPruning Logical Query Optimization
 
 `ColumnPruning` is a link:spark-sql-Optimizer.adoc#ColumnPruning[logical optimization] (i.e. `Rule[LogicalPlan]`) in link:spark-sql-Optimizer.adoc[Optimizer] that...FIXME
 

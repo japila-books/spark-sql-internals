@@ -50,7 +50,7 @@ scala> println(plan.numberedTreeString)
 ...FIXME
 ----
 
-=== [[optimizer]] Rule-Based Logical Optimization Phase
+=== [[optimizer]] Rule-Based Logical Query Optimization Phase
 
 * link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 * link:spark-sql-Optimizer.adoc#FoldablePropagation[FoldablePropagation]
