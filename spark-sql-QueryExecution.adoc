@@ -1,8 +1,11 @@
-== [[QueryExecution]] QueryExecution -- Query Execution of Dataset
+== [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline of Dataset
 
 `QueryExecution` is the <<execution-pipeline, structured query execution pipeline>> of a link:spark-sql-Dataset.adoc[Dataset].
 
-NOTE: When you execute an operator on a `Dataset` it triggers <<toRdd, query execution>> that gives the good ol' `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is Spark's execution plan followed by executing a RDD action and hence the result of the structured query.
+.Query Execution &mdash; From SQL through Dataset to RDD
+image::images/QueryExecution-execution-pipeline.png[align="center"]
+
+NOTE: When you execute an operator on a `Dataset` it triggers <<toRdd, query execution>> that gives the good ol' `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]` that is Spark's execution plan followed by executing a RDD action and hence the result of the structured query.
 
 You can access the `QueryExecution` of a `Dataset` using link:spark-sql-Dataset.adoc#queryExecution[queryExecution] attribute.
 
@@ -25,11 +28,6 @@ val queryExec = ds.queryExecution
 
 | [[analyzed]] `analyzed`
 a| Analyzed <<logical, logical plan>> that has passed link:spark-sql-Analyzer.adoc#execute[Analyzer]'s check rules.
-
-[source, scala]
-----
-val schema = queryExecution.analyzed.output
-----
 
 TIP: Use Dataset's link:spark-sql-dataset-operators.adoc#explain[explain(extended = true)] or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 

@@ -163,13 +163,80 @@ scala> println(plan.numberedTreeString)
 
 ==== [[createOrderedJoin-three-or-more-joins]] "Three Or More Logical Plans" Case
 
-For three or more logical plans in the `input`, `createOrderedJoin` takes the first link:spark-sql-LogicalPlan.adoc[logical operator] from the `input` and tries to find the first join that has at least one join condition, i.e. a join with the following:
+For three or more link:spark-sql-LogicalPlan.adoc[logical plans] in the `input`, `createOrderedJoin` takes the first plan and tries to find another that has at least one _matching_ join condition, i.e. a logical plan with the following:
 
-1. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both sides are required to resolve join references)
+1. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
 
-1. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first operator's or the current operator's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[[output attributes] (i.e. neither the first operator nor the current operator themselves are enough to resolve join references)
+1. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
-`createOrderedJoin` takes the join that has at least one join condition if available or the next join from the `input` collection.
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+// HACK: Disable one SparkSession.implicits
+// https://stackoverflow.com/q/15592324/1305344
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+import org.apache.spark.sql.catalyst.dsl.expressions._
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan1 = LocalRelation('id.long, 'v1.long).as("t1")
+val plan2 = LocalRelation('id.long, 'v2.long).as("t2")
+val plan3 = LocalRelation('id.long, 'v3.long).as("t3")
+val plan4 = LocalRelation('id.long, 'v4.long).as("t4")
+
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+import org.apache.spark.sql.catalyst.plans.{Cross, Inner, InnerLike}
+val input: Seq[(LogicalPlan, InnerLike)] = Seq(
+  (plan1, Inner),
+  (plan2, Inner),
+  (plan3, Cross),
+  (plan4, Inner))
+
+// (left ++ right).outputSet > expr.references
+// ! expr.references > left.outputSet
+// ! expr.references > right.outputSet
+val t1_id = plan1.outputSet.head
+val t2_id = plan2.outputSet.head
+val t1_v1 = plan1.outputSet.tail.head
+val t4_v4 = plan4.outputSet.tail.head
+val c1 = t1_id === t2_id
+val c2 = t1_v1 === t4_v4
+
+// A condition has no references or the references are not a subset of left or right plans
+// A couple of assertions that createOrderedJoin does internally
+assert(c1.references.nonEmpty)
+assert(!c1.references.subsetOf(plan1.outputSet))
+assert(!c1.references.subsetOf(plan2.outputSet))
+val refs = plan1.outputSet ++ plan2.outputSet
+assert(c1.references.subsetOf(refs))
+
+import org.apache.spark.sql.catalyst.expressions.Expression
+val conditions: Seq[Expression] = Seq(c1, c2)
+
+assert(input.size > 2)
+assert(conditions.nonEmpty)
+
+import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
+val plan = ReorderJoin.createOrderedJoin(input, conditions)
+scala> println(plan.numberedTreeString)
+00 Join Cross
+01 :- Join Inner, (v1#1L = v4#7L)
+02 :  :- Join Inner, (id#0L = id#2L)
+03 :  :  :- SubqueryAlias t1
+04 :  :  :  +- LocalRelation <empty>, [id#0L, v1#1L]
+05 :  :  +- SubqueryAlias t2
+06 :  :     +- LocalRelation <empty>, [id#2L, v2#3L]
+07 :  +- SubqueryAlias t4
+08 :     +- LocalRelation <empty>, [id#6L, v4#7L]
+09 +- SubqueryAlias t3
+10    +- LocalRelation <empty>, [id#4L, v3#5L]
+----
+
+`createOrderedJoin` takes the plan that has at least one matching join condition if found or the next plan from the `input` plans.
 
 `createOrderedJoin` partitions (aka _splits_) the input condition expressions to expressions that meet the following requirements (aka _join conditions_) or not (aka _others_):
 
