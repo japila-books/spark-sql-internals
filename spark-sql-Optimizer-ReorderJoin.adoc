@@ -169,6 +169,12 @@ For three or more link:spark-sql-LogicalPlan.adoc[logical plans] in the `input`,
 
 1. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
+.createOrderedJoin with Three Joins (Before)
+image::images/ReorderJoin-createOrderedJoin-four-plans-before.png[align="center"]
+
+.createOrderedJoin with Three Joins (After)
+image::images/ReorderJoin-createOrderedJoin-four-plans-after.png[align="center"]
+
 [source, scala]
 ----
 scala> spark.version
@@ -183,35 +189,50 @@ implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
 import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
 import org.apache.spark.sql.catalyst.dsl.expressions._
 import org.apache.spark.sql.catalyst.dsl.plans._
-val plan1 = LocalRelation('id.long, 'v1.long).as("t1")
-val plan2 = LocalRelation('id.long, 'v2.long).as("t2")
-val plan3 = LocalRelation('id.long, 'v3.long).as("t3")
-val plan4 = LocalRelation('id.long, 'v4.long).as("t4")
+// Note analyze at the end to analyze the queries
+val p1 = LocalRelation('id.long, 'a.long, 'b.string).as("t1").where("id".attr =!= 0).select('id).analyze
+val p2 = LocalRelation('id.long, 'b.long).as("t2").analyze
+val p3 = LocalRelation('id.long, 'a.string).where("id".attr > 0).select('id, 'id * 2 as "a").as("t3").analyze
+
+// The following input and conditions are equivalent to the following query
+val _p1 = Seq((0,1,"one")).toDF("id", "a", "b").as("t1").where(col("id") =!= 0).select("id")
+val _p2 = Seq((0,1)).toDF("id", "b").as("t2")
+val _p3 = Seq((0,"one")).toDF("id", "a").where(col("id") > 0).select(col("id"), col("id") * 2 as "a").as("t3")
+val _plan = _p1.
+  as("p1").
+  crossJoin(_p1).
+  join(_p2).
+  join(_p3).
+  where((col("p1.id") === col("t3.id")) && (col("t2.b") === col("t3.a"))).
+  queryExecution.
+  analyzed
+import org.apache.spark.sql.catalyst.planning.ExtractFiltersAndInnerJoins
+val Some((plans, conds)) = ExtractFiltersAndInnerJoins.unapply(_plan)
 
 import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.plans.{Cross, Inner, InnerLike}
 val input: Seq[(LogicalPlan, InnerLike)] = Seq(
-  (plan1, Inner),
-  (plan2, Inner),
-  (plan3, Cross),
-  (plan4, Inner))
+  (p1, Cross),
+  (p1, Cross),
+  (p2, Inner),
+  (p3, Inner))
 
 // (left ++ right).outputSet > expr.references
 // ! expr.references > left.outputSet
 // ! expr.references > right.outputSet
-val t1_id = plan1.outputSet.head
-val t2_id = plan2.outputSet.head
-val t1_v1 = plan1.outputSet.tail.head
-val t4_v4 = plan4.outputSet.tail.head
-val c1 = t1_id === t2_id
-val c2 = t1_v1 === t4_v4
+val p1_id = p1.outputSet.head
+val p3_id = p3.outputSet.head
+val p2_b = p2.outputSet.tail.head
+val p3_a = p3.outputSet.tail.head
+val c1 = p1_id === p3_id
+val c2 = p2_b === p3_a
 
 // A condition has no references or the references are not a subset of left or right plans
 // A couple of assertions that createOrderedJoin does internally
 assert(c1.references.nonEmpty)
-assert(!c1.references.subsetOf(plan1.outputSet))
-assert(!c1.references.subsetOf(plan2.outputSet))
-val refs = plan1.outputSet ++ plan2.outputSet
+assert(!c1.references.subsetOf(p1.outputSet))
+assert(!c1.references.subsetOf(p3.outputSet))
+val refs = p1.analyze.outputSet ++ p3.outputSet
 assert(c1.references.subsetOf(refs))
 
 import org.apache.spark.sql.catalyst.expressions.Expression
@@ -223,17 +244,19 @@ assert(conditions.nonEmpty)
 import org.apache.spark.sql.catalyst.optimizer.ReorderJoin
 val plan = ReorderJoin.createOrderedJoin(input, conditions)
 scala> println(plan.numberedTreeString)
-00 Join Cross
-01 :- Join Inner, (v1#1L = v4#7L)
-02 :  :- Join Inner, (id#0L = id#2L)
-03 :  :  :- SubqueryAlias t1
-04 :  :  :  +- LocalRelation <empty>, [id#0L, v1#1L]
-05 :  :  +- SubqueryAlias t2
-06 :  :     +- LocalRelation <empty>, [id#2L, v2#3L]
-07 :  +- SubqueryAlias t4
-08 :     +- LocalRelation <empty>, [id#6L, v4#7L]
-09 +- SubqueryAlias t3
-10    +- LocalRelation <empty>, [id#4L, v3#5L]
+00 'Join Cross
+01 :- Join Inner, (b#553L = a#556L)
+02 :  :- Join Inner, (id#549L = id#554L)
+03 :  :  :- Project [id#549L]
+04 :  :  :  +- Filter NOT (id#549L = cast(0 as bigint))
+05 :  :  :     +- LocalRelation <empty>, [id#549L, a#550L, b#551]
+06 :  :  +- Project [id#554L, (id#554L * cast(2 as bigint)) AS a#556L]
+07 :  :     +- Filter (id#554L > cast(0 as bigint))
+08 :  :        +- LocalRelation <empty>, [id#554L, a#555]
+09 :  +- LocalRelation <empty>, [id#552L, b#553L]
+10 +- Project [id#549L]
+11    +- Filter NOT (id#549L = cast(0 as bigint))
+12       +- LocalRelation <empty>, [id#549L, a#550L, b#551]
 ----
 
 `createOrderedJoin` takes the plan that has at least one matching join condition if found or the next plan from the `input` plans.
