@@ -165,6 +165,7 @@
 . link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs Unary Expression]
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple Generator Expression]
 . link:spark-sql-Expression-Literal.adoc[Literal Leaf Expression]
+. link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic]
 . link:spark-sql-Expression-PlanExpression.adoc[PlanExpression Contract for Expressions with Query Plans]
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF -- Catalyst Expression to Manage Lifecycle of User-Defined Function]
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF -- Catalyst Expression Adapter for UserDefinedAggregateFunction]

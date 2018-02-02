@@ -1,0 +1,83 @@
+== [[Nondeterministic]] Nondeterministic Expression Contract
+
+[[deterministic]]
+[[foldable]]
+`Nondeterministic` is a <<contract, contract>> of link:spark-sql-Expression.adoc[Catalyst expressions] that are non-deterministic and non-<<foldable, foldable>>, i.e. `deterministic` and `foldable` flags are disabled (i.e. `false`). They require explicit initialization before evaluation.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.expressions
+
+trait Nondeterministic extends Expression {
+  // only required methods that have no implementation
+  protected def initializeInternal(partitionIndex: Int): Unit
+  protected def evalInternal(input: InternalRow): Any
+}
+----
+
+.Nondeterministic Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[initializeInternal]] `initializeInternal`
+| Used when...FIXME
+
+| [[evalInternal]] `evalInternal`
+| Used when...FIXME
+|===
+
+[[initialize]]
+`Nondeterministic` expressions can be initialized...FIXME
+
+[[eval]]
+`Nondeterministic` expressions can be evaluated...FIXME
+
+`Nondeterministic` expressions have the additional `initialized` flag that is enabled (i.e. `true`) after the other additional `initInternal` method has been called.
+
+[source, scala]
+----
+var initialized: Boolean = false
+----
+
+NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic` logical plan rule.
+
+[[implementations]]
+.Nondeterministic Expressions
+[cols="1,2",options="header",width="100%"]
+|===
+| Expression
+| Description
+
+| [[CurrentBatchTimestamp]] `CurrentBatchTimestamp`
+|
+
+| [[InputFileBlockLength]] `InputFileBlockLength`
+|
+
+| [[InputFileBlockStart]] `InputFileBlockStart`
+|
+
+| [[InputFileName]] `InputFileName`
+|
+
+| [[MonotonicallyIncreasingID]] `MonotonicallyIncreasingID`
+|
+
+| [[NondeterministicExpression]] `NondeterministicExpression`
+|
+
+| [[Rand]] `Rand`
+|
+
+| [[Randn]] `Randn`
+|
+
+| [[RDG]] `RDG`
+|
+
+| [[SparkPartitionID]] `SparkPartitionID`
+|
+|===

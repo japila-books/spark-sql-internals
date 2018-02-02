@@ -71,7 +71,7 @@ scala> println(qn.queryExecution.logical.numberedTreeString)
 // Examples with Project that was added during optimization
 ----
 
-NOTE: link:spark-sql-Expression.adoc#deterministic[Nondeterministic expressions] are allowed in `Project` logical operator and enforced by link:spark-sql-Analyzer-CheckAnalysis.adoc#deterministic[CheckAnalysis].
+NOTE: link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by link:spark-sql-Analyzer-CheckAnalysis.adoc#deterministic[CheckAnalysis].
 
 [[output]]
 The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `Project` is...FIXME
