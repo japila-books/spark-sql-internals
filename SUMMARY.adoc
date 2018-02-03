@@ -273,9 +273,11 @@
 .. link:spark-sql-InternalRow.adoc[InternalRow -- Abstract Binary Row Format]
 ... link:spark-sql-UnsafeRow.adoc[UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format]
 .. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
-.. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
-... link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
+
+. link:spark-sql-Projection.adoc[Projection -- Contract for Functions to Produce InternalRow for InternalRow]
+.. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
+.. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 

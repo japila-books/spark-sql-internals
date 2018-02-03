@@ -179,7 +179,7 @@ abstract class Expression extends TreeNode[Expression] {
 Used as part of <<genCode, genCode>>.
 
 | [[eval]] `eval`
-a| *No-code-generated evaluation* that evaluates the Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row] (without <<genCode, generating a corresponding Java code>>.)
+a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row] (without <<genCode, generating a corresponding Java code>>.)
 
 NOTE: By default accepts `EmptyRow`, i.e. `null`.
 
@@ -187,7 +187,7 @@ NOTE: By default accepts `EmptyRow`, i.e. `null`.
 |
 
 | [[genCode]] `genCode`
-| *Code-generated evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
+| *Code-generated (non-interpreted) expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
 
 Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka _subexpression elimination_).
 
