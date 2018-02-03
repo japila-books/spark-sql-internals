@@ -52,6 +52,8 @@ abstract class Catalog {
       source: String,
       schema: StructType,
       options: Map[String, String]): DataFrame
+  def getTable(tableName: String): Table
+  def getTable(dbName: String, tableName: String): Table
   def dropTempView(viewName: String): Unit
   def isCached(tableName: String): Boolean
   def uncacheTable(tableName: String): Unit
@@ -79,4 +81,10 @@ Used for SQL's link:spark-sql-caching.adoc#cache-table[CACHE TABLE] and `AlterTa
 
 | [[functionExists]] `functionExists`
 |
+
+| [[getTable]] `getTable`
+|
+
+| [[listTables]] `listTables`
+| Gives a list of tables in the specified database
 |===

@@ -53,6 +53,15 @@ Used...FIXME
 
 NOTE: `Encoders` object contains the default `ExpressionEncoders` for Scala and Java primitive types, e.g. `boolean`, `long`, `String`, `java.sql.Date`, `java.sql.Timestamp`, `Array[Byte]`.
 
+=== [[apply]] Creating ExpressionEncoders -- `apply` Method
+
+[source, scala]
+----
+apply[T : TypeTag](): ExpressionEncoder[T]
+----
+
+CAUTION: FIXME
+
 === [[resolveAndBind]] `resolveAndBind` Method
 
 CAUTION: FIXME
@@ -177,7 +186,7 @@ deserializerFor(
 | User Defined Types (UDTs)
 |
 
-| `Product` (including `Tuple`) or `DefinedByConstructorParams`
+| [[DefinedByConstructorParams]] `Product` (including `Tuple`) or `DefinedByConstructorParams`
 |
 |===
 

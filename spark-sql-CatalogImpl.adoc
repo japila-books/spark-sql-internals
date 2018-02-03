@@ -22,11 +22,41 @@ NOTE: `createTable` is a part of link:spark-sql-Catalog.adoc#createTable[Catalog
 
 `createTable`...FIXME
 
-=== [[functionExists]] `functionExists` Method
+=== [[listColumns]] `listColumns` Internal Method
 
-CAUTION: FIXME
+[source, scala]
+----
+listColumns(tableName: String): Dataset[Column]
+----
+
+NOTE: `listColumns` is a part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
+
+`listColumns`...FIXME
 
 === [[refreshTable]] `refreshTable` Method
+
+[source, scala]
+----
+refreshTable(tableName: String): Unit
+----
+
+NOTE: `refreshTable` is a part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
+
+`refreshTable`...FIXME
+
+=== [[getTable]] `getTable` Method
+
+[source, scala]
+----
+getTable(tableName: String): Table
+getTable(dbName: String, tableName: String): Table
+----
+
+NOTE: `getTable` is part of link:spark-sql-Catalog.adoc#getTable[Catalog Contract] to...FIXME.
+
+`getTable`...FIXME
+
+=== [[functionExists]] `functionExists` Method
 
 CAUTION: FIXME
 
@@ -108,3 +138,45 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
 
 NOTE: `createExternalTable` is a part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
+
+=== [[listTables]] Listing Tables in Database -- `listTables` Method
+
+[source, scala]
+----
+listTables(): Dataset[Table]
+listTables(dbName: String): Dataset[Table]
+----
+
+NOTE: `listTables` is part of link:spark-sql-Catalog.adoc#listTables[Catalog Contract] to get a list of tables in the specified database.
+
+Internally, `listTables` requests <<sessionCatalog, SessionCatalog>> to link:spark-sql-SessionCatalog.adoc#listTables[list all tables] in the specified `dbName` database and <<makeTable, converts them to Tables>>.
+
+In the end, `listTables` <<makeDataset, creates a Dataset>>.
+
+=== [[makeTable]] Converting TableIdentifier to Table -- `makeTable` Internal Method
+
+[source, scala]
+----
+makeTable(tableIdent: TableIdentifier): Table
+----
+
+`makeTable` creates a `Table` using the input `TableIdentifier` and the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata] (from the current link:spark-sql-SessionCatalog.adoc[SessionCatalog]) if available.
+
+NOTE: `makeTable` uses <<sparkSession, SparkSession>> to access link:spark-sql-SessionState.adoc#sessionState[SessionState] that is then used to access link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+
+NOTE: `makeTable` is used when `CatalogImpl` is requested to <<listTables, listTables>> or <<getTable, getTable>>.
+
+=== [[makeDataset]] Creating Dataset from DefinedByConstructorParams Data -- `makeDataset` Method
+
+[source, scala]
+----
+makeDataset[T <: DefinedByConstructorParams](
+  data: Seq[T],
+  sparkSession: SparkSession): Dataset[T]
+----
+
+`makeDataset` creates an link:spark-sql-ExpressionEncoder.adoc#apply[ExpressionEncoder] (from link:spark-sql-ExpressionEncoder.adoc#DefinedByConstructorParams[DefinedByConstructorParams]) and link:spark-sql-ExpressionEncoder.adoc#toRow[encodes] elements of the input `data` to internal binary rows.
+
+`makeDataset` then creates a link:spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the plan] and link:spark-sql-Dataset.adoc#creating-instance[creates] the result `Dataset`.
+
+NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, list databases>>, <<listTables, tables>>, <<listFunctions, functions>> and <<listColumns, columns>>

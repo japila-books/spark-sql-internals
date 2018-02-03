@@ -59,7 +59,26 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 
 `getTempViewOrPermanentTableMetadata`...FIXME
 
-NOTE: `getTempViewOrPermanentTableMetadata` is used when...FIXME
+[NOTE]
+====
+`getTempViewOrPermanentTableMetadata` is used when:
+
+1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#makeTable[makeTable], link:spark-sql-CatalogImpl.adoc#listColumns[listColumns] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
+
+1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
+====
+
+=== [[listTables]] `listTables` Method
+
+[source, scala]
+----
+listTables(db: String): Seq[TableIdentifier]
+listTables(db: String, pattern: String): Seq[TableIdentifier]
+----
+
+`listTables`...FIXME
+
+NOTE: `listTables` is used when...FIXME
 
 === [[isTemporaryTable]] `isTemporaryTable` Method
 
