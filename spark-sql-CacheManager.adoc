@@ -43,7 +43,7 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[cacheQuery]] Caching Dataset (by Registering Logical Plan as InMemoryRelation) -- `cacheQuery` Method
+=== [[cacheQuery]] Caching Dataset (Registering Analyzed Logical Plan as InMemoryRelation) -- `cacheQuery` Method
 
 [source, scala]
 ----

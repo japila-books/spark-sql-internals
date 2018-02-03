@@ -50,7 +50,7 @@ Used when...FIXME
 | Registry of temporary views (i.e. non-global temporary tables)
 |===
 
-=== [[getTempViewOrPermanentTableMetadata]] `getTempViewOrPermanentTableMetadata` Method
+=== [[getTempViewOrPermanentTableMetadata]] Finding Table Metadata -- `getTempViewOrPermanentTableMetadata` Method
 
 [source, scala]
 ----
@@ -63,7 +63,7 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 ====
 `getTempViewOrPermanentTableMetadata` is used when:
 
-1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#makeTable[makeTable], link:spark-sql-CatalogImpl.adoc#listColumns[listColumns] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
+1. `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
 
 1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
 ====

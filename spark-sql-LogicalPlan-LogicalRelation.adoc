@@ -36,6 +36,19 @@ apply(relation: BaseRelation, table: CatalogTable): LogicalRelation
 ----
 ====
 
+=== [[refresh]] `refresh` Method
+
+[source, scala]
+----
+refresh(): Unit
+----
+
+NOTE: `refresh` is part of link:spark-sql-LogicalPlan.adoc#refresh[LogicalPlan Contract] to refresh itself.
+
+`refresh` requests the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#location[FileIndex] of a `HadoopFsRelation` <<relation, relation>> to refresh.
+
+NOTE: `refresh` does the work for link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] relations only.
+
 === [[creating-instance]] Creating LogicalRelation Instance
 
 `LogicalRelation` takes the following when created:

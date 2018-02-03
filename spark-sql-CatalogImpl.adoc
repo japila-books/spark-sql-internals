@@ -22,28 +22,6 @@ NOTE: `createTable` is a part of link:spark-sql-Catalog.adoc#createTable[Catalog
 
 `createTable`...FIXME
 
-=== [[listColumns]] `listColumns` Internal Method
-
-[source, scala]
-----
-listColumns(tableName: String): Dataset[Column]
-----
-
-NOTE: `listColumns` is a part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
-
-`listColumns`...FIXME
-
-=== [[refreshTable]] `refreshTable` Method
-
-[source, scala]
-----
-refreshTable(tableName: String): Unit
-----
-
-NOTE: `refreshTable` is a part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
-
-`refreshTable`...FIXME
-
 === [[getTable]] `getTable` Method
 
 [source, scala]
@@ -139,7 +117,7 @@ image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
 
 NOTE: `createExternalTable` is a part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
 
-=== [[listTables]] Listing Tables in Database -- `listTables` Method
+=== [[listTables]] Listing Tables in Database (as Dataset) -- `listTables` Method
 
 [source, scala]
 ----
@@ -151,7 +129,24 @@ NOTE: `listTables` is part of link:spark-sql-Catalog.adoc#listTables[Catalog Con
 
 Internally, `listTables` requests <<sessionCatalog, SessionCatalog>> to link:spark-sql-SessionCatalog.adoc#listTables[list all tables] in the specified `dbName` database and <<makeTable, converts them to Tables>>.
 
-In the end, `listTables` <<makeDataset, creates a Dataset>>.
+In the end, `listTables` <<makeDataset, creates a Dataset>> with the tables.
+
+=== [[listColumns]] Listing Columns of Table (as Dataset) -- `listColumns` Internal Method
+
+[source, scala]
+----
+listColumns(tableName: String): Dataset[Column]
+listColumns(dbName: String, tableName: String): Dataset[Column]
+listColumns(tableIdentifier: TableIdentifier): Dataset[Column]
+----
+
+NOTE: `listColumns` is a part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
+
+`listColumns` requests <<sessionCatalog, SessionCatalog>> for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
+
+`listColumns` takes the link:spark-sql-CatalogTable.adoc#schema[schema] from the table metadata and creates a `Column` for every field (with the optional comment as the description).
+
+In the end, `listColumns` <<makeDataset, creates a Dataset>> with the columns.
 
 === [[makeTable]] Converting TableIdentifier to Table -- `makeTable` Internal Method
 
@@ -180,3 +175,28 @@ makeDataset[T <: DefinedByConstructorParams](
 `makeDataset` then creates a link:spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the plan] and link:spark-sql-Dataset.adoc#creating-instance[creates] the result `Dataset`.
 
 NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, list databases>>, <<listTables, tables>>, <<listFunctions, functions>> and <<listColumns, columns>>
+
+=== [[refreshTable]] Refreshing Analyzed Logical Plan of Table Query and Re-Caching It -- `refreshTable` Method
+
+[source, scala]
+----
+refreshTable(tableName: String): Unit
+----
+
+NOTE: `refreshTable` is a part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
+
+`refreshTable` requests `SessionState` for the link:spark-sql-SessionState.adoc#sqlParser[SQL parser] to link:spark-sql-ParserInterface.adoc#parseTableIdentifier[parse a TableIdentifier given the table name].
+
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:spark-sql-SparkSession.adoc#sessionState[SessionState].
+
+`refreshTable` requests <<sessionCatalog, SessionCatalog>> for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
+
+`refreshTable` then link:spark-sql-SparkSession.adoc#table[creates a DataFrame for the table name].
+
+For a temporary or persistent `VIEW` table, `refreshTable` requests the link:spark-sql-QueryExecution.adoc#analyzed[analyzed] logical plan of the DataFrame (for the table) to link:spark-sql-LogicalPlan.adoc#refresh[refresh] itself.
+
+For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatalog>> for link:spark-sql-SessionCatalog.adoc#refreshTable[refreshing the table metadata] (i.e. invalidating the table).
+
+If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to link:spark-sql-CacheManager.adoc#uncacheQuery[uncache] and link:spark-sql-CacheManager.adoc#cacheQuery[cache] the table `DataFrame` again.
+
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:spark-sql-SparkSession.adoc#sharedState[SharedState] that is used to access link:spark-sql-SharedState.adoc#cacheManager[CacheManager].

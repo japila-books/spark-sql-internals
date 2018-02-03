@@ -365,7 +365,7 @@ scala> sql("SELECT *, myUpper(value) UPPER FROM strs").show
 
 Internally, it is simply an alias for link:spark-sql-SessionState.adoc#udfRegistration[SessionState.udfRegistration].
 
-=== [[table]] Loading Table to DataFrame -- `table` method
+=== [[table]] Creating DataFrame for Table (Loading Table to DataFrame) -- `table` method
 
 [source, scala]
 ----

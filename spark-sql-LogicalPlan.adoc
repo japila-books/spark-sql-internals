@@ -162,3 +162,23 @@ res2: Boolean = true
 ----
 
 NOTE: Streaming Datasets are part of Structured Streaming.
+
+=== [[refresh]] Refreshing Child Logical Plans -- `refresh` Method
+
+[source, scala]
+----
+refresh(): Unit
+----
+
+`refresh` calls itself recursively for every link:spark-sql-catalyst-TreeNode.adoc#children[child] logical operator.
+
+NOTE: `refresh` is overriden by link:spark-sql-LogicalPlan-LogicalRelation.adoc#refresh[LogicalRelation] only (that refreshes the location of `HadoopFsRelation` relations only).
+
+[NOTE]
+====
+`refresh` is used when:
+
+1. `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#refreshTable[refresh a table]
+
+1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshTable[refresh a table]
+====
