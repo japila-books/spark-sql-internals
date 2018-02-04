@@ -18,7 +18,7 @@ image::images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="center"]
 | Description
 
 | [[analyzer]] <<analyzer-indepth, analyzer>>
-a| link:spark-sql-Analyzer.adoc[Logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
+a| Hive-specific link:spark-sql-Analyzer.adoc[Logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
 
 | [[catalog]] `catalog`
 a| link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
@@ -110,7 +110,7 @@ NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyz
 | Logical Rule
 | Description
 
-| [[DetermineTableStats]] `DetermineTableStats`
+| [[DetermineTableStats]] link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
 |
 
 | [[RelationConversions]] link:spark-sql-RelationConversions.adoc[RelationConversions]
