@@ -396,7 +396,7 @@ val t1 = spark.table("t1")
 catalog: Catalog
 ----
 
-`catalog` attribute is a (lazy) interface to the current metastore, i.e. link:spark-sql-Catalog.adoc[data catalog] (of relational entities like databases, tables, functions, table columns, and temporary views).
+`catalog` attribute is a (lazy) interface to the current metastore, i.e. link:spark-sql-Catalog.adoc[data catalog] (of relational entities like databases, tables, functions, table columns, and views).
 
 TIP: All methods in `Catalog` return `Datasets`.
 

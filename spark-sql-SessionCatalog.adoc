@@ -1,10 +1,12 @@
 == [[SessionCatalog]] SessionCatalog -- Session-Scoped Catalog of Relational Entities
 
-`SessionCatalog` is the catalog of (the metadata of) session-scoped relational temporary and permanent relational entities, i.e. databases, tables, temporary views, partitions, and functions.
+`SessionCatalog` is the catalog of (the metadata of) session-scoped relational temporary and permanent relational entities, i.e. databases, tables, views, partitions, and functions.
 
-`SessionCatalog` uses <<externalCatalog, ExternalCatalog>> for the metastore of permanent relational entities only, i.e. databases, tables, partitions, and functions.
+For the metadata of permanent entities (i.e. <<getTableMetadata, tables>>) `SessionCatalog` requests <<externalCatalog, ExternalCatalog>>.
 
-You can access the `SessionCatalog` (in a `SparkSession`) through link:spark-sql-SessionState.adoc#catalog[SessionState].
+NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (i.e. `in-memory` or `hive`) to be used.
+
+`SessionCatalog` is available through link:spark-sql-SessionState.adoc#catalog[SessionState] (of a link:spark-sql-SparkSession.adoc#sessionState[SparkSession]).
 
 [source, scala]
 ----
@@ -14,8 +16,6 @@ res0: String = 2.3.0-SNAPSHOT
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ----
-
-NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (i.e. `in-memory` or `hive`) to be used.
 
 `SessionCatalog` is <<creating-instance, created>> when `SessionState` sets link:spark-sql-SessionState.adoc#catalog[catalog].
 
@@ -50,16 +50,27 @@ Used when...FIXME
 | Registry of temporary views (i.e. non-global temporary tables)
 |===
 
-=== [[getTableMetadata]] Retrieving Table Metadata from External Catalog -- `getTableMetadata` Method
+=== [[requireTableExists]] `requireTableExists` Internal Method
 
 [source, scala]
 ----
-getTableMetadata(name: TableIdentifier): CatalogTable
+requireTableExists(name: TableIdentifier): Unit
 ----
 
-`getTableMetadata`...FIXME
+`requireTableExists`...FIXME
 
-NOTE: `getTableMetadata` is used when...FIXME
+NOTE: `requireTableExists` is used when...FIXME
+
+=== [[databaseExists]] `databaseExists` Method
+
+[source, scala]
+----
+databaseExists(db: String): Boolean
+----
+
+`databaseExists`...FIXME
+
+NOTE: `databaseExists` is used when...FIXME
 
 === [[listTables]] `listTables` Method
 
@@ -156,17 +167,6 @@ tableExists(name: TableIdentifier): Boolean
 `tableExists`...FIXME
 
 NOTE: `tableExists` is used when...FIXME
-
-=== [[databaseExists]] `databaseExists` Method
-
-[source, scala]
-----
-databaseExists(db: String): Boolean
-----
-
-`databaseExists`...FIXME
-
-NOTE: `databaseExists` is used when...FIXME
 
 === [[functionExists]] `functionExists` Method
 
@@ -362,6 +362,17 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 1. `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
 ====
 
+=== [[getTableMetadata]] Retrieving Table Metadata from External Catalog (Metastore) -- `getTableMetadata` Method
+
+[source, scala]
+----
+getTableMetadata(name: TableIdentifier): CatalogTable
+----
+
+`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the link:spark-sql-ExternalCatalog.adoc#getTable[table metadata].
+
+Before requesting the external metastore, `getTableMetadata` makes sure that the <<requireDbExists, database>> and <<requireTableExists, table>> (of the input `TableIdentifier`) both exist. If either does not exist, `getTableMetadata` reports a `NoSuchDatabaseException` or `NoSuchTableException`, respectively.
+
 === [[getTempViewOrPermanentTableMetadata]] Retrieving Table Metadata -- `getTempViewOrPermanentTableMetadata` Method
 
 [source, scala]
@@ -385,3 +396,12 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 
 1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
 ====
+
+=== [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method
+
+[source, scala]
+----
+requireDbExists(db: String): Unit
+----
+
+`requireDbExists` reports a `NoSuchDatabaseException` if the <<databaseExists, specified database does not exist>>. Otherwise, `requireDbExists` does nothing.
