@@ -1,9 +1,9 @@
-== [[ExternalCatalog]] ExternalCatalog -- Base Metastore of Permanent Relational Entities
+== [[ExternalCatalog]] ExternalCatalog -- Contract for External Catalog (Metastore) of Permanent Relational Entities
 
-`ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
+`ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _metadata registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
 
 [[features]]
-.ExternalCatalog Features per Relational Entity
+.ExternalCatalog's Features per Relational Entity
 [cols="2,^1,^1,^1,^1",options="header",width="100%"]
 |===
 | Feature
@@ -59,6 +59,8 @@ scala> :type spark.sharedState.externalCatalog
 org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 ----
 
+`ExternalCatalog` is available as ephemeral <<in-memory, in-memory>> or persistent <<hive, hive-aware>>.
+
 [[implementations]]
 .ExternalCatalogs
 [cols="1,2,2",options="header",width="100%"]
@@ -67,26 +69,46 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 | Alias
 | Description
 
-| link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
-| [[in-memory]] `in-memory`
-| An in-memory (ephemeral) system catalog
-
 | link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
 | [[hive]] `hive`
-|
+| A persistent system catalog using a Hive metastore.
+
+| link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+| [[in-memory]] `in-memory`
+| An in-memory (ephemeral) system catalog that does not require setting up external systems (like a Hive metastore).
+
+It is intended for testing or exploration purposes only and therefore should not be used in production.
 |===
 
-`ExternalCatalog` is selected using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property and can never be changed (after the first `SparkSession` has been created).
+The <<implementations, concrete>> `ExternalCatalog` is chosen using link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
 
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.4.0-SNAPSHOT
 
 import org.apache.spark.sql.internal.StaticSQLConf
-scala> spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
+val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
+scala> println(catalogType)
+hive
+
+scala> spark.sessionState.conf.getConf(StaticSQLConf.CATALOG_IMPLEMENTATION)
 res1: String = hive
 ----
+
+[TIP]
+====
+Set `spark.sql.catalogImplementation` to `in-memory` when starting `spark-shell` to use link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] external catalog.
+
+[source, scala]
+----
+// spark-shell --conf spark.sql.catalogImplementation=in-memory
+
+import org.apache.spark.sql.internal.StaticSQLConf
+scala> spark.sessionState.conf.getConf(StaticSQLConf.CATALOG_IMPLEMENTATION)
+res0: String = in-memory
+----
+====
 
 [IMPORTANT]
 ====
@@ -106,9 +128,12 @@ org.apache.spark.sql.AnalysisException: Cannot modify the value of a static conf
 [[addListener]]
 `ExternalCatalog` is a `ListenerBus` of `ExternalCatalogEventListener` listeners that handle `ExternalCatalogEvent` events.
 
-TIP: Use `addListener` and `removeListener` to register and de-register `ExternalCatalogEventListener` listeners, accordingly.
+[TIP]
+====
+Use `addListener` and `removeListener` to register and de-register `ExternalCatalogEventListener` listeners, accordingly.
 
-TIP: Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more on Spark Core's `ListenerBus`.
+Read https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-SparkListenerBus.html#ListenerBus[ListenerBus Event Bus Contract] in Mastering Apache Spark 2 gitbook to learn more about Spark Core's `ListenerBus` interface.
+====
 
 === [[alterTableStats]] Altering Table Statistics -- `alterTableStats` Method
 

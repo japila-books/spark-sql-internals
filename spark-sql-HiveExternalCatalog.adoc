@@ -1,28 +1,29 @@
-== [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Specific Metastore of Permanent Relational Entities
+== [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities
 
-`HiveExternalCatalog` is a shared link:spark-sql-ExternalCatalog.adoc[metastore of permanent relational entities] that is used when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
+`HiveExternalCatalog` is a link:spark-sql-ExternalCatalog.adoc[metastore of permanent relational entities] that is used when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to *hive* when the Hive classes are available).
 
 .HiveExternalCatalog and SharedState
 image::images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is available as link:spark-sql-SharedState.adoc#externalCatalog[externalCatalog] property of `SharedState` when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (that in the end sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
-
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.4.0-SNAPSHOT
 
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
 scala> println(catalogType)
 hive
 
-// You could also use the property key by name
+// Alternatively...
+scala> spark.sessionState.conf.getConf(StaticSQLConf.CATALOG_IMPLEMENTATION)
+res1: String = hive
+
+// Or you could use the property key by name
 scala> spark.conf.get("spark.sql.catalogImplementation")
 res1: String = hive
 
 val metastore = spark.sharedState.externalCatalog
-
 scala> :type metastore
 org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 
