@@ -50,23 +50,16 @@ Used when...FIXME
 | Registry of temporary views (i.e. non-global temporary tables)
 |===
 
-=== [[getTempViewOrPermanentTableMetadata]] Getting Table Metadata -- `getTempViewOrPermanentTableMetadata` Method
+=== [[getTableMetadata]] Retrieving Table Metadata from External Catalog -- `getTableMetadata` Method
 
 [source, scala]
 ----
-getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
+getTableMetadata(name: TableIdentifier): CatalogTable
 ----
 
-`getTempViewOrPermanentTableMetadata`...FIXME
+`getTableMetadata`...FIXME
 
-[NOTE]
-====
-`getTempViewOrPermanentTableMetadata` is used when:
-
-1. `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
-
-1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
-====
+NOTE: `getTableMetadata` is used when...FIXME
 
 === [[listTables]] `listTables` Method
 
@@ -101,17 +94,6 @@ alterPartitions(tableName: TableIdentifier, parts: Seq[CatalogTablePartition]): 
 `alterPartitions`...FIXME
 
 NOTE: `alterPartitions` is used when...FIXME
-
-=== [[getTableMetadata]] `getTableMetadata` Method
-
-[source, scala]
-----
-getTableMetadata(name: TableIdentifier): CatalogTable
-----
-
-`getTableMetadata`...FIXME
-
-NOTE: `getTableMetadata` is used when...FIXME
 
 === [[listPartitions]] `listPartitions` Method
 
@@ -378,4 +360,28 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 1. `DescribeTableCommand` is executed
 
 1. `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
+====
+
+=== [[getTempViewOrPermanentTableMetadata]] Retrieving Table Metadata -- `getTempViewOrPermanentTableMetadata` Method
+
+[source, scala]
+----
+getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
+----
+
+Internally, `getTempViewOrPermanentTableMetadata` branches off per database.
+
+When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable] (with `VIEW` link:spark-sql-CatalogTable.adoc#tableType[table type] and an undefined link:spark-sql-CatalogTable.adoc#storage[storage]) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
+
+With the database name of the link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the link:spark-sql-GlobalTempViewManager.adoc#get[global view definition] and creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable] (with the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager` in link:spark-sql-CatalogTable.adoc#identifier[table identifier], `VIEW` link:spark-sql-CatalogTable.adoc#tableType[table type] and an undefined link:spark-sql-CatalogTable.adoc#storage[storage]) or reports a `NoSuchTableException`.
+
+With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply <<getTableMetadata, retrieves the table metadata from an external catalog>>.
+
+[NOTE]
+====
+`getTempViewOrPermanentTableMetadata` is used when:
+
+1. `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
+
+1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
 ====

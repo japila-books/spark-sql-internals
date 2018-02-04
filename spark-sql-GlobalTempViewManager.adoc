@@ -6,3 +6,14 @@
 
 [[database]][[creating-instance]]
 `GlobalTempViewManager` takes the name of the database when created.
+
+=== [[get]] Retrieving Global View Definition Per Name -- `get` Method
+
+[source, scala]
+----
+get(name: String): Option[LogicalPlan]
+----
+
+`get`...FIXME
+
+NOTE: `get` is used when...FIXME
