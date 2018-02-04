@@ -2,7 +2,7 @@
 
 . link:book-intro.adoc[Introduction]
 
-. link:spark-sql.adoc[Spark SQL -- Relational Queries Over Structured Data on Massive Scale]
+. link:spark-sql.adoc[Spark SQL -- Processing Structured Data with Relational Queries on Massive Scale]
 
 == Developing Spark SQL Applications
 
@@ -15,7 +15,7 @@
 .. link:spark-sql-Encoder.adoc[Encoders -- Internal Row Converters]
 .. link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder -- Expression-Based Encoder]
 .. link:spark-sql-ExpressionEncoder-LocalDateTime.adoc[LocalDateTimeEncoder -- Custom ExpressionEncoder for java.time.LocalDateTime]
-.. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows]
+.. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows with RowEncoder]
 ... link:spark-sql-Row.adoc[Row]
 ... link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
 

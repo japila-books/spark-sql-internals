@@ -27,7 +27,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 `CatalogTable` is <<creating-instance, created>> when:
 
-1. `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[getTempViewOrPermanentTableMetadata]
+1. `SessionCatalog` is requested for a link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata]
 
 1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
 

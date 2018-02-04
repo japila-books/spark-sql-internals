@@ -1,4 +1,4 @@
-== Spark SQL -- Relational Queries Over Structured Data on Massive Scale
+== Spark SQL -- Processing Structured Data with Relational Queries on Massive Scale
 
 Like Apache Spark in general, *Spark SQL* in particular is all about distributed in-memory computations on massive scale.
 
