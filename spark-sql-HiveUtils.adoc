@@ -18,3 +18,31 @@ a| Enables trying to merge possibly different but compatible Parquet schemas in 
 
 This configuration is only effective when `spark.sql.hive.convertMetastoreParquet` is `true`.
 |===
+
+=== [[newClientForMetadata]] Creating HiveClient -- `newClientForMetadata` Method
+
+[source, scala]
+----
+newClientForMetadata(
+  conf: SparkConf,
+  hadoopConf: Configuration): HiveClient  // <1>
+newClientForMetadata(
+  conf: SparkConf,
+  hadoopConf: Configuration,
+  configurations: Map[String, String]): HiveClient
+----
+<1> Executes the other `newClientForMetadata` with time configurations formatted
+
+Internally, `newClientForMetadata` creates a link:spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
+
+CAUTION: FIXME Describe the vals
+
+`newClientForMetadata` creates a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl] using a `IsolatedClientLoader` with the Hive metastore jars from one of the jars repositories:
+
+1. `builtin`...FIXME
+
+1. `maven`...FIXME
+
+1. Classpath in the standard format for both Hive and Hadoop...FIXME
+
+NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#client[HiveClient].

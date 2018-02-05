@@ -2,6 +2,8 @@
 
 `HiveClientImpl` is the link:spark-sql-HiveClient.adoc[HiveClient] for...FIXME
 
+`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to create a `HiveClient`.
+
 === [[readHiveStats]] Reading Statistics from Properties (from Hive's Metastore) -- `readHiveStats` Internal Method
 
 [source, scala]
@@ -23,3 +25,17 @@ def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
 NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
 
 `getTableOption`...FIXME
+
+=== [[creating-instance]] Creating HiveClientImpl Instance
+
+`HiveClientImpl` takes the following when created:
+
+* [[version]] `HiveVersion`
+* [[warehouseDir]] Optional path to the directory of the warehouse (aka `warehouseDir`)
+* [[sparkConf]] `SparkConf`
+* [[hadoopConf]] Hadoop configuration
+* [[extraConfig]] Extra configuration
+* [[initClassLoader]] Initial `ClassLoader`
+* [[clientLoader]] `IsolatedClientLoader`
+
+`HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.

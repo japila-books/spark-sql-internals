@@ -1,4 +1,4 @@
-== [[HiveClient]] HiveClient
+== [[HiveClient]] HiveClient -- Contract for Retrieving Metadata from Hive Metastore
 
 `HiveClient` is the <<contract, contract>> for...FIXME
 
