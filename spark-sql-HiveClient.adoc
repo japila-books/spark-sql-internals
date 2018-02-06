@@ -2,6 +2,8 @@
 
 `HiveClient` is the <<contract, contract>> for...FIXME
 
+NOTE: link:spark-sql-HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
+
 [[contract]]
 [source, scala]
 ----

@@ -1,6 +1,6 @@
 == External Hive Metastore
 
-*Hive Metastore* stores the metadata of Hive tables and partitions.
+*Hive Metastore* stores the metadata of persistent relational entities, e.g. databases, tables, columns, partitions.
 
 Metadata is persisted using http://www.datanucleus.org/[DataNucleus AccessPlatform] (and so you have to set up Hive metastore connection using *javax.jdo.option* properties).
 
