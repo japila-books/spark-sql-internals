@@ -16,17 +16,6 @@ CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.wareh
 
 CAUTION: FIXME How is this Hadoop configuration created?
 
-=== [[readHiveStats]] Creating Table Statistics from Hive's Partition Parameters -- `readHiveStats` Internal Method
-
-[source, scala]
-----
-readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
-----
-
-`readHiveStats`...FIXME
-
-NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for a <<getTableOption, table metadata>> and <<fromHivePartition, table partition metadata>>.
-
 === [[getPartitions]] `getPartitions` Method
 
 [source, scala]
@@ -90,6 +79,35 @@ NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOptio
 * [[clientLoader]] `IsolatedClientLoader`
 
 `HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[readHiveStats]] Creating Table Statistics from Hive's Table or Partition Parameters -- `readHiveStats` Internal Method
+
+[source, scala]
+----
+readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
+----
+
+`readHiveStats` creates a link:spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
+
+.Table Statistics and Hive Parameters
+[cols="1,2",options="header",width="100%"]
+|===
+| Hive Parameter
+| Table Statistics
+
+| `totalSize`
+| link:spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes]
+
+| `rawDataSize`
+| link:spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes]
+
+| `numRows`
+| link:spark-sql-CatalogStatistics.adoc#rowCount[rowCount]
+|===
+
+NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for link:spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes] table statistic.
+
+NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadata of a <<getTableOption, table>> or <<fromHivePartition, table partition>>.
 
 === [[fromHivePartition]] Retrieving Table Partition Metadata (Converting Table Partition Metadata from Hive Format to Spark SQL Format) -- `fromHivePartition` Method
 

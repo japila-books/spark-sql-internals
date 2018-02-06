@@ -1,10 +1,10 @@
 == [[CatalogStatistics]] CatalogStatistics -- Table Statistics From External Catalog (Metastore)
 
 [[creating-instance]][[table-statistics]]
-`CatalogStatistics` are the estimates of <<table-statistics, table statistics>> that are stored in an link:spark-sql-ExternalCatalog.adoc[external catalog] (aka _metastore_):
+`CatalogStatistics` are *table statistics* that are stored in an link:spark-sql-ExternalCatalog.adoc[external catalog] (aka _metastore_):
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
-* [[rowCount]] Optional estimated *number of rows* (aka _row count_)
+* [[rowCount]] Estimated *number of rows* (aka _row count_)
 * [[colStats]] *Column statistics* (i.e. column names and their link:spark-sql-ColumnStat.adoc[statistics])
 
 [NOTE]
@@ -26,7 +26,7 @@
 
 1. link:spark-sql-DetermineTableStats.adoc#apply[DetermineTableStats] and `PruneFileSourcePartitions` logical rules are executed (i.e. applied to a logical plan)
 
-1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive]
+1. `HiveClientImpl` is requested for a table or partition link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
 
 [source, scala]
 ----
