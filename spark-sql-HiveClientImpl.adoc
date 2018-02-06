@@ -16,7 +16,7 @@ CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.wareh
 
 CAUTION: FIXME How is this Hadoop configuration created?
 
-=== [[readHiveStats]] Reading Statistics from Properties (from Hive's Metastore) -- `readHiveStats` Internal Method
+=== [[readHiveStats]] Creating Table Statistics from Hive's Partition Parameters -- `readHiveStats` Internal Method
 
 [source, scala]
 ----
@@ -25,9 +25,48 @@ readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
 
 `readHiveStats`...FIXME
 
-NOTE: `readHiveStats` is used when...FIXME
+NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for a <<getTableOption, table metadata>> and <<fromHivePartition, table partition metadata>>.
 
-=== [[getTableOption]] Looking Up Table in Metastore -- `getTableOption` Method
+=== [[getPartitions]] `getPartitions` Method
+
+[source, scala]
+----
+getPartitions(
+  table: CatalogTable,
+  spec: Option[TablePartitionSpec]): Seq[CatalogTablePartition]
+----
+
+NOTE: `getPartitions` is part of link:spark-sql-HiveClient.adoc#getPartitions[HiveClient Contract] to...FIXME.
+
+`getPartitions`...FIXME
+
+=== [[getPartitionsByFilter]] `getPartitionsByFilter` Method
+
+[source, scala]
+----
+getPartitionsByFilter(
+  table: CatalogTable,
+  predicates: Seq[Expression]): Seq[CatalogTablePartition]
+----
+
+NOTE: `getPartitionsByFilter` is part of link:spark-sql-HiveClient.adoc#getPartitionsByFilter[HiveClient Contract] to...FIXME.
+
+`getPartitionsByFilter`...FIXME
+
+=== [[getPartitionOption]] `getPartitionOption` Method
+
+[source, scala]
+----
+getPartitionOption(
+  table: CatalogTable,
+  spec: TablePartitionSpec): Option[CatalogTablePartition]
+----
+
+NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitionOption[HiveClient Contract] to...FIXME.
+
+`getPartitionOption`...FIXME
+
+=== [[getTableOption]] Getting Table Metadata -- `getTableOption` Method
 
 [source, scala]
 ----
@@ -51,3 +90,22 @@ NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOptio
 * [[clientLoader]] `IsolatedClientLoader`
 
 `HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[fromHivePartition]] Retrieving Table Partition Metadata (Converting Table Partition Metadata from Hive Format to Spark SQL Format) -- `fromHivePartition` Method
+
+[source, scala]
+----
+fromHivePartition(hp: HivePartition): CatalogTablePartition
+----
+
+`fromHivePartition` simply creates a link:spark-sql-CatalogTablePartition.adoc#creating-instance[CatalogTablePartition] with the following:
+
+1. link:spark-sql-CatalogTablePartition.adoc#spec[spec] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
+
+1. link:spark-sql-CatalogTablePartition.adoc#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
+
+1. link:spark-sql-CatalogTablePartition.adoc#parameters[parameters] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
+
+1. link:spark-sql-CatalogTablePartition.adoc#stats[stats] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
+
+NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.

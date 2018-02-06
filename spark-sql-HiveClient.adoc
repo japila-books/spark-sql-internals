@@ -13,6 +13,15 @@ trait HiveClient {
   // only required methods that have no implementation
   // FIXME List of the methods
   def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+  def getPartitions(
+      catalogTable: CatalogTable,
+      partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
+  def getPartitionsByFilter(
+      catalogTable: CatalogTable,
+      predicates: Seq[Expression]): Seq[CatalogTablePartition]
+  def getPartitionOption(
+      table: CatalogTable,
+      spec: TablePartitionSpec): Option[CatalogTablePartition]
 }
 ----
 
@@ -25,5 +34,14 @@ NOTE: `HiveClient` is a `private[hive]` contract.
 | Description
 
 | [[getTableOption]] `getTableOption`
+| Used when...FIXME
+
+| [[getPartitions]] `getPartitions`
+| Used when...FIXME
+
+| [[getPartitionsByFilter]] `getPartitionsByFilter`
+| Used when...FIXME
+
+| [[getPartitionOption]] `getPartitionOption`
 | Used when...FIXME
 |===

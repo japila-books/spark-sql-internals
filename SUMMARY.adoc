@@ -74,6 +74,7 @@
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
+.. link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Table Partition Metadata in SessionCatalog]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
 .. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
 

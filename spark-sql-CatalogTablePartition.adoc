@@ -1,0 +1,18 @@
+== [[CatalogTablePartition]] CatalogTablePartition -- Table Partition Metadata in Session-Scoped Catalog
+
+`CatalogTablePartition` is the metadata of a table partition in a link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] (i.e. `SessionCatalog`).
+
+`CatalogTablePartition` is <<creating-instance, created>> when...FIXME
+
+`CatalogTablePartition` can hold the <<stats, table statistics>> that...FIXME
+
+=== [[creating-instance]] Creating CatalogTablePartition Instance
+
+`CatalogTablePartition` takes the following when created:
+
+* [[spec]] Partition specification
+* [[storage]] `CatalogStorageFormat`
+* [[parameters]] Parameters (default: an empty collection)
+* [[stats]] link:spark-sql-CatalogStatistics.adoc[Table statistics] (default: `None`)
+
+`CatalogTablePartition` initializes the <<internal-registries, internal registries and counters>>.
