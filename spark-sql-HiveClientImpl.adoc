@@ -16,6 +16,60 @@ CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.wareh
 
 CAUTION: FIXME How is this Hadoop configuration created?
 
+[[logging]]
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.hive.client.HiveClientImpl` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
+=== [[renamePartitions]] `renamePartitions` Method
+
+[source, scala]
+----
+renamePartitions(
+  db: String,
+  table: String,
+  specs: Seq[TablePartitionSpec],
+  newSpecs: Seq[TablePartitionSpec]): Unit
+----
+
+NOTE: `renamePartitions` is part of link:spark-sql-HiveClient.adoc#renamePartitions[HiveClient Contract] to...FIXME.
+
+`renamePartitions`...FIXME
+
+=== [[alterPartitions]] `alterPartitions` Method
+
+[source, scala]
+----
+alterPartitions(
+  db: String,
+  table: String,
+  newParts: Seq[CatalogTablePartition]): Unit
+----
+
+NOTE: `alterPartitions` is part of link:spark-sql-HiveClient.adoc#alterPartitions[HiveClient Contract] to...FIXME.
+
+`alterPartitions`...FIXME
+
+=== [[client]] `client` Internal Method
+
+[source, scala]
+----
+client: Hive
+----
+
+`client`...FIXME
+
+NOTE: `client` is used...FIXME
+
 === [[getPartitions]] `getPartitions` Method
 
 [source, scala]
@@ -55,17 +109,6 @@ NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitio
 
 `getPartitionOption`...FIXME
 
-=== [[getTableOption]] Getting Table Metadata -- `getTableOption` Method
-
-[source, scala]
-----
-def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
-----
-
-NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
-
-`getTableOption`...FIXME
-
 === [[creating-instance]] Creating HiveClientImpl Instance
 
 `HiveClientImpl` takes the following when created:
@@ -79,6 +122,23 @@ NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOptio
 * [[clientLoader]] `IsolatedClientLoader`
 
 `HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[getTableOption]] Retrieving Table Metadata If Available -- `getTableOption` Method
+
+[source, scala]
+----
+def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+----
+
+NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
+
+When executed, `getTableOption` prints out the following DEBUG message to the logs:
+
+```
+Looking up [dbName].[tableName]
+```
+
+`getTableOption` requests <<client, Hive client>> to retrieve the metadata of the table and creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable].
 
 === [[readHiveStats]] Creating Table Statistics from Hive's Table or Partition Parameters -- `readHiveStats` Internal Method
 

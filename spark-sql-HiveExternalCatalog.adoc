@@ -64,6 +64,17 @@ val spark: SparkSession = SparkSession.builder
 Created by requesting `HiveUtils` for a link:spark-sql-HiveUtils.adoc#newClientForMetadata[new HiveClient] (with the current <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>)
 |===
 
+=== [[getRawTable]] `getRawTable` Method
+
+[source, scala]
+----
+getRawTable(db: String, table: String): CatalogTable
+----
+
+`getRawTable`...FIXME
+
+NOTE: `getRawTable` is used when...FIXME
+
 === [[doAlterTableStats]] `doAlterTableStats` Method
 
 [source, scala]

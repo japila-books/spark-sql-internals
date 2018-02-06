@@ -4,6 +4,8 @@
 
 NOTE: link:spark-sql-HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
 
+`HiveClient` offers _safe_ variants of many methods that do not report exceptions when a relational entity is not found in a Hive metastore, e.g. <<getTableOption, getTableOption>> for <<getTable, getTable>>.
+
 [[contract]]
 [source, scala]
 ----
@@ -12,6 +14,10 @@ package org.apache.spark.sql.hive.client
 trait HiveClient {
   // only required methods that have no implementation
   // FIXME List of the methods
+  def alterPartitions(
+      db: String,
+      table: String,
+      newParts: Seq[CatalogTablePartition]): Unit
   def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
   def getPartitions(
       catalogTable: CatalogTable,
@@ -22,6 +28,11 @@ trait HiveClient {
   def getPartitionOption(
       table: CatalogTable,
       spec: TablePartitionSpec): Option[CatalogTablePartition]
+  def renamePartitions(
+      db: String,
+      table: String,
+      specs: Seq[TablePartitionSpec],
+      newSpecs: Seq[TablePartitionSpec]): Unit
 }
 ----
 
@@ -33,7 +44,7 @@ NOTE: `HiveClient` is a `private[hive]` contract.
 | Method
 | Description
 
-| [[getTableOption]] `getTableOption`
+| [[alterPartitions]] `alterPartitions`
 | Used when...FIXME
 
 | [[getPartitions]] `getPartitions`
@@ -44,4 +55,34 @@ NOTE: `HiveClient` is a `private[hive]` contract.
 
 | [[getPartitionOption]] `getPartitionOption`
 | Used when...FIXME
+
+| [[getTableOption]] `getTableOption`
+a| Retrieving table metadata if available
+
+Used exclusively when `HiveClient` is requested for a <<getTable, table metadata>>
+
+NOTE: `getTableOption` is a safe version of <<getTable, getTable>> as it does not throw a `NoSuchTableException`, but simply returns `None`.
+
+| [[renamePartitions]] `renamePartitions`
+| Used when...FIXME
 |===
+
+=== [[getTable]] Retrieving Table Metadata If Available or Reporting NoSuchTableException -- `getTable` Method
+
+[source, scala]
+----
+getTable(dbName: String, tableName: String): CatalogTable
+----
+
+`getTable` <<getTableOption, retrieves the metadata of a table in a Hive metastore>> if available or reports a `NoSuchTableException`.
+
+[NOTE]
+====
+`getTable` is used when:
+
+1. `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#getRawTable[table metadata]
+
+1. `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
+
+1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:spark-sql-HiveClientImpl.adoc#alterPartitions[alterPartitions]
+====
