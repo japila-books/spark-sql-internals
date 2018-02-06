@@ -2,7 +2,7 @@
 
 . link:book-intro.adoc[Introduction]
 
-. link:spark-sql.adoc[Spark SQL -- Processing Structured Data with Relational Queries on Massive Scale]
+. link:spark-sql.adoc[Spark SQL -- Structured Data Processing with Relational Queries on Massive Scale]
 
 == Developing Spark SQL Applications
 

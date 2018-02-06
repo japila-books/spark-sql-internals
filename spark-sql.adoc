@@ -1,4 +1,4 @@
-== Spark SQL -- Processing Structured Data with Relational Queries on Massive Scale
+== Spark SQL -- Structured Data Processing with Relational Queries on Massive Scale
 
 Like Apache Spark in general, *Spark SQL* in particular is all about distributed in-memory computations on massive scale.
 
@@ -9,11 +9,19 @@ Quoting the http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf[S
 > Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
 queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
 
-The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for loading, querying and persisting structured (and semi-structured) data using *structured queries* that can be expressed using _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative type-safe *Structured Query DSL*.
+The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for ingesting, querying and persisting (semi)structured data using *structured queries* that can be expressed using _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative type-safe *Structured Query DSL*.
 
 NOTE: Semi- and structured data are collections of records that can be described using link:spark-sql-schema.adoc[schema] with column names, their types and whether a column can be null or not (aka _nullability_).
 
 Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a link:spark-sql-Dataset.adoc[Dataset] (with a mandatory link:spark-sql-Encoder.adoc[Encoder]).
+
+From https://databricks.com/blog/2014/07/01/shark-spark-sql-hive-on-spark-and-the-future-of-sql-on-spark.html[Shark, Spark SQL, Hive on Spark, and the future of SQL on Apache Spark]:
+
+> For *SQL users*, Spark SQL provides state-of-the-art SQL performance and maintains compatibility with Shark/Hive. In particular, like Shark, Spark SQL supports all existing Hive data formats, user-defined functions (UDF), and the Hive metastore.
+
+> For *Spark users*, Spark SQL becomes the narrow-waist for manipulating (semi-) structured data as well as ingesting data from sources that provide schema, such as JSON, Parquet, Hive, or EDWs. It truly unifies SQL and sophisticated analysis, allowing users to mix and match SQL and more imperative programming APIs for advanced analytics.
+
+> For *open source hackers*, Spark SQL proposes a novel, elegant way of building query planners. It is incredibly easy to add new optimizations under this framework.
 
 A `Dataset` is a programming interface to the link:spark-sql-QueryExecution.adoc[structured query execution pipeline] with link:spark-sql-dataset-operators.adoc[transformations and actions] (as in the good old days of RDD API in Spark Core).
 
