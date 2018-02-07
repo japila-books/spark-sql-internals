@@ -1,10 +1,16 @@
-== External Hive Metastore
+== Hive Metastore
 
-*Hive Metastore* stores the metadata of persistent relational entities, e.g. databases, tables, columns, partitions.
+Spark SQL uses a Hive metastore to manage the metadata of persistent relational entities (e.g. databases, tables, columns, partitions) in a relational database (for fast access).
 
-Metadata is persisted using http://www.datanucleus.org/[DataNucleus AccessPlatform] (and so you have to set up Hive metastore connection using *javax.jdo.option* properties).
+By default, Spark SQL uses the embedded deployment mode of a Hive metastore with a https://db.apache.org/derby/[Apache Derby] database. This is not recommended for production use due to limitation of only one active link:spark-sql-SparkSession.adoc[SparkSession] at a time.
 
-TIP: Read https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] to learn how to manage Hive Metastore.
+TIP: Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document describes the deployment modes of a Hive metastore in more details.
+
+When `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog].
+
+Metadata is persisted in a metastore database over JDBC and http://www.datanucleus.org/[DataNucleus AccessPlatform] (that requires you to set up a Hive metastore connection using <<javax.jdo.option, javax.jdo.option.*>> properties, e.g. `javax.jdo.option.ConnectionURL`).
+
+TIP: Read https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] to learn how to manage a Hive Metastore.
 
 The benefits of using an external Hive metastore:
 
@@ -13,6 +19,81 @@ The benefits of using an external Hive metastore:
 1. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
 
 NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPARK-18112 Spark2.x does not support read data from Hive 2.x metastore]) Spark SQL supports reading data from Hive 2.1.1 metastore.
+
+CAUTION: FIXME Describe <<hive-site.xml, hive-site.xml>> vs `config` method vs `--conf` with <<spark.hadoop, spark.hadoop>> prefix.
+
+=== [[javax.jdo.option]] `javax.jdo.option.*` Hive Configuration Properties
+
+*javax.jdo.option* configuration properties set up the connection to a Hive metastore database.
+
+You can set them up in <<hive-site.xml, hive-site.xml>> or using options with <<spark.hadoop, spark.hadoop>> prefix.
+
+* `javax.jdo.option.ConnectionURL` - the JDBC connection URL to use to connect to a Hive metastore database, e.g.
++
+```
+// the default setting in Spark SQL
+jdbc:derby:;databaseName=metastore_db;create=true
+
+// Example: memory only and so volatile and not for production use
+jdbc:derby:memory:;databaseName=${metastoreLocation.getAbsolutePath};create=true
+
+jdbc:mysql://192.168.175.160:3306/metastore?useSSL=false
+```
+
+* `javax.jdo.option.ConnectionDriverName` - the JDBC driver, e.g.
++
+```
+org.apache.derby.jdbc.EmbeddedDriver
+```
+
+* `javax.jdo.option.ConnectionUserName` - the user name to connect to a Hive metastore database
+
+* `javax.jdo.option.ConnectionPassword` - the password of the user name to connect to a Hive metastore database
+
+You can access the current connection properties for a Hive metastore in a Spark SQL application using the Spark internal classes.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.4.0-SNAPSHOT
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> spark.sharedState.externalCatalog
+res1: org.apache.spark.sql.catalyst.catalog.ExternalCatalog = org.apache.spark.sql.hive.HiveExternalCatalog@79dd79eb
+
+// Use `:paste -raw` to paste the following code
+// This is to pass the private[spark] "gate"
+// BEGIN
+package org.apache.spark
+import org.apache.spark.sql.SparkSession
+object jacek {
+  def open(spark: SparkSession) = {
+    import org.apache.spark.sql.hive.HiveExternalCatalog
+    spark.sharedState.externalCatalog.asInstanceOf[HiveExternalCatalog].client
+  }
+}
+// END
+import org.apache.spark.jacek
+val hiveClient = jacek.open(spark)
+scala> hiveClient.getConf("javax.jdo.option.ConnectionURL", "")
+res2: String = jdbc:derby:;databaseName=metastore_db;create=true
+----
+
+You may also want to use the following Hive options that seem to cause exceptions with an empty metastore database as of Hive 2.1.
+
+* `datanucleus.schema.autoCreateAll` set to `true`
+
+* `hive.metastore.schema.verification` set to `false`
+
+=== [[hive.metastore.uris]] `hive.metastore.uris` Hive Configuration Property
+
+`hive.metastore.uris` is a Hive configuration property for the Thrift URI of a remote Hive metastore (that is in a separate JVM process or even on a remote node).
+
+```
+config("hive.metastore.uris", "thrift://192.168.175.160:9083")
+```
 
 === Hive Metastore Deployment Modes
 
@@ -43,7 +124,7 @@ You may need to grant write privilege to the user who starts the Spark applicati
 
 `hive.metastore.warehouse.dir` is...FIXME
 
-`SharedState` link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[uses] `hive.metastore.warehouse.dir` to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if undefined.
+`SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
 
 === [[spark.hadoop]] spark.hadoop Configuration Properties
 

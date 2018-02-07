@@ -132,8 +132,8 @@ CAUTION: FIXME Review the uses of `convertMetastoreParquet`, `convertMetastorePa
 
 === [[settings]] Settings
 
-* `spark.sql.hive.metastore.version` (default: `1.2.1`) - the version of the Hive metastore. Supported versions from `0.12.0` up to and including `1.2.1`.
+* `spark.sql.hive.metastore.version` (default: `1.2.1`) - Version of the Hive metastore. Supported versions from `0.12.0` up to and including `2.1.1`.
 
-* `spark.sql.hive.version` (default: `1.2.1`) - the version of Hive used by Spark SQL.
+* `spark.sql.hive.version` (default: `1.2.1`) - the version of Hive used by Spark SQL internally.
 
-CAUTION: FIXME Review `HiveContext` object.
+* `spark.sql.hive.metastore.jars` (default: `builtin`) - FIXME
