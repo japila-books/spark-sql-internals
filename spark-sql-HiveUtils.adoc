@@ -1,25 +1,22 @@
 == [[HiveUtils]] HiveUtils
 
-`HiveUtils` is...FIXME
+`HiveUtils` is used to create a <<newClientForMetadata, HiveClientImpl>> that link:spark-sql-HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
 
-[[properties]]
-.HiveUtils's Configuration Properties
-[cols="1,1,1,2",options="header",width="100%"]
-|===
-| Name
-| Default Value
-| Scala Value
-| Description
+[[logging]]
+[TIP]
+====
+Enable `INFO` logging level for `org.apache.spark.sql.hive.HiveUtils` logger to see what happens inside.
 
-| [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] `spark.sql.hive.convertMetastoreParquet.mergeSchema`
-| `false`
-| `CONVERT_METASTORE_PARQUET_WITH_SCHEMA_MERGING`
-a| Enables trying to merge possibly different but compatible Parquet schemas in different Parquet data files.
+Add the following line to `conf/log4j.properties`:
 
-This configuration is only effective when `spark.sql.hive.convertMetastoreParquet` is `true`.
-|===
+```
+log4j.logger.org.apache.spark.sql.hive.HiveUtils=INFO
+```
 
-=== [[newClientForMetadata]] Creating HiveClient -- `newClientForMetadata` Method
+Refer to link:spark-logging.adoc[Logging].
+====
+
+=== [[newClientForMetadata]] Creating HiveClientImpl -- `newClientForMetadata` Method
 
 [source, scala]
 ----
@@ -35,14 +32,24 @@ newClientForMetadata(
 
 Internally, `newClientForMetadata` creates a new link:spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
 
-CAUTION: FIXME Describe the vals
+`newClientForMetadata` then creates a `IsolatedClientLoader` per the input parameters and the following configuration properties:
 
-`newClientForMetadata` creates a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl] using a `IsolatedClientLoader` with the Hive metastore jars from one of the jars repositories:
+1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
 
-1. `builtin`...FIXME
+1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
 
-1. `maven`...FIXME
+1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
 
-1. Classpath in the standard format for both Hive and Hadoop...FIXME
+1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
+
+You should see one of the following INFO messages in the logs:
+
+```
+Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using Spark classes.
+Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using maven.
+Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
+```
+
+In the end, `newClientForMetadata` requests the `IsolatedClientLoader` to create a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl].
 
 NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#client[HiveClient].

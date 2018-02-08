@@ -90,7 +90,6 @@
 . link:spark-sql-SQLConf.adoc[SQLConf -- Internal Configuration Store]
 .. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
-.. link:spark-sql-HiveUtils.adoc[HiveUtils]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 
@@ -375,6 +374,8 @@
 
 . link:spark-sql-HiveClient.adoc[HiveClient]
 .. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl -- The One and Only HiveClient]
+
+. link:spark-sql-HiveUtils.adoc[HiveUtils]
 
 == Spark Thrift Server
 

@@ -58,7 +58,7 @@ convert(relation: HiveTableRelation): LogicalRelation
 
 `convert` takes SerDe of (the storage of) the input link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation] and converts `HiveTableRelation` to link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation], i.e.
 
-1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:spark-sql-HiveUtils.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
+1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
 
 For non-`parquet` serde, `convert` assumes ORC format.
 
