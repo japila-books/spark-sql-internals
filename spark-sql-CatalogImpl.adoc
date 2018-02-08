@@ -104,7 +104,7 @@ scala> sql("select count(*) as count from readme").show(false)
 +-----+
 ----
 
-The `source` input parameter is the name of the data source provider for the table, e.g. parquet, json, text. If not specified, `createExternalTable` uses link:spark-sql-settings.adoc#spark.sql.sources.default[spark.sql.sources.default] setting to know the data source format.
+The `source` input parameter is the name of the data source provider for the table, e.g. parquet, json, text. If not specified, `createExternalTable` uses link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] setting to know the data source format.
 
 NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisException`.
 

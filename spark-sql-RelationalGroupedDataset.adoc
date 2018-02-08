@@ -45,7 +45,7 @@ NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used
 
 [NOTE]
 ====
-link:spark-sql-SQLConf.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] Spark property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
+link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] Spark property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
 
 `spark.sql.retainGroupColumns` is turned on by default.
 
@@ -226,7 +226,7 @@ image::images/spark-sql-pivot-webui.png[align="center"]
 .pivot in web UI -- Three Extra Scanning Jobs Due to Unspecified Distinct Values
 image::images/spark-sql-pivot-webui-scanning-jobs.png[align="center"]
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues] (default: `10000`) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
+NOTE: link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues] (default: `10000`) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
 
 Internally, `pivot` creates a `RelationalGroupedDataset` with `PivotType` group type and `pivotColumn` resolved using the DataFrame's columns with `values` as `Literal` expressions.
 

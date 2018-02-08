@@ -78,7 +78,7 @@ toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
 
 With link:spark-sql-cost-based-optimization.adoc[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a link:spark-sql-Statistics.adoc[Statistics] with the link:spark-sql-EstimationUtils.adoc#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
 
-NOTE: Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+NOTE: Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
 Otherwise, when link:spark-sql-cost-based-optimization.adoc[cost-based optimization] is disabled, `toPlanStats` creates a link:spark-sql-Statistics.adoc[Statistics] with just the mandatory <<sizeInBytes, sizeInBytes>>.
 

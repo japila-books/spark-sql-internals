@@ -26,9 +26,9 @@ The table statistics can be computed for tables, partitions and columns and are 
 
 === [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Configuration Property
 
-Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`.
+Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`.
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned off, i.e. `false`, by default.
+NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned off, i.e. `false`, by default.
 
 TIP: Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] to access the current value of `spark.sql.cbo.enabled` property.
 
@@ -71,9 +71,9 @@ Depending on the variant, `ANALYZE TABLE` computes different <<statistics, stati
 [[spark.sql.statistics.histogram.enabled]]
 [TIP]
 ====
-Use link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
+Use link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
 
-`spark.sql.statistics.histogram.enabled` is turned off by default.
+`spark.sql.statistics.histogram.enabled` is off by default.
 ====
 
 [NOTE]
@@ -253,7 +253,7 @@ The link:spark-sql-Optimizer.adoc[Spark Optimizer] uses heuristics (rules) that 
 
 Among the optimization rules are the following:
 
-1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering with 2 or more consecutive inner or cross joins (possibly separated by `Project` operators) when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-SQLConf.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
+1. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization rule for join reordering with 2 or more consecutive inner or cross joins (possibly separated by `Project` operators) when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
 === [[commands]] Logical Commands for Altering Table Statistics
 

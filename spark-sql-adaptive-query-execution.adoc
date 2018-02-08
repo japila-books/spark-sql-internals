@@ -12,7 +12,7 @@ NOTE: Adaptive query execution is not supported for streaming Datasets and is di
 
 === [[spark.sql.adaptive.enabled]] spark.sql.adaptive.enabled Configuration Property
 
-link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property turns adaptive query execution on.
+link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property turns adaptive query execution on.
 
 TIP: Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[adaptiveExecutionEnabled] method to access the current value.
 

@@ -2,9 +2,9 @@
 
 `WholeStageCodegenExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that, together with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter], lays the foundation for link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] for a *codegened pipeline* of a physical query plan.
 
-`WholeStageCodegenExec` is created when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical optimization rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] and link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark SQL property is enabled.
+`WholeStageCodegenExec` is created when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical optimization rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] and link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark SQL property is enabled.
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
+NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
 `WholeStageCodegenExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] and marks a node in a query plan that, once <<doExecute, executed>>, triggers code generation.
 
@@ -113,7 +113,7 @@ NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan
 
 `doExecute` <<doCodeGen, generates the Java code>> that is link:spark-sql-CodeGenerator.adoc#compile[compiled] right afterwards.
 
-If compilation fails and link:spark-sql-settings.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] is enabled, you should see the following WARN message in the logs and `doExecute` returns the link:spark-sql-SparkPlan.adoc#execute[result of executing the child physical operator].
+If compilation fails and link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] is enabled, you should see the following WARN message in the logs and `doExecute` returns the link:spark-sql-SparkPlan.adoc#execute[result of executing the child physical operator].
 
 ```
 WARN WholeStageCodegenExec: Whole-stage codegen disabled for this plan:

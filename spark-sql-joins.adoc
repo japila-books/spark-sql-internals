@@ -195,7 +195,7 @@ df("key") === df("key")
 
 That is usually considered a trivially true condition and refused as acceptable.
 
-With link:spark-sql-SQLConf.adoc#spark.sql.selfJoinAutoResolveAmbiguity[spark.sql.selfJoinAutoResolveAmbiguity] option enabled (which it is by default), `join` will automatically resolve ambiguous join conditions into ones that might make sense.
+With link:spark-sql-properties.adoc#spark.sql.selfJoinAutoResolveAmbiguity[spark.sql.selfJoinAutoResolveAmbiguity] option enabled (which it is by default), `join` will automatically resolve ambiguous join conditions into ones that might make sense.
 
 See https://issues.apache.org/jira/browse/SPARK-6231[[SPARK-6231\] Join on two tables (generated from same one) is broken].
 ====

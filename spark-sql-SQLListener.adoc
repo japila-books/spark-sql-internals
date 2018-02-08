@@ -69,7 +69,7 @@ extends SparkListenerEvent
 
 If there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-settings.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-properties.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
 
 ==== [[SparkListenerDriverAccumUpdates]] `SparkListenerDriverAccumUpdates` Event
 
@@ -96,7 +96,7 @@ If it is the last job of the query execution (tracked as <<SQLExecutionUIData, S
 
 If the query execution has already been marked as completed (using `completionTime`) and there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-settings.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-properties.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
 
 === [[getExecution]] Getting SQL Execution Data -- `getExecution` Method
 

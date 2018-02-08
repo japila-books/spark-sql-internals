@@ -11,6 +11,6 @@ computeStats(): Statistics
 
 `computeStats` reports an `UnsupportedOperationException`.
 
-NOTE: Logical operators, e.g. `ExternalRDD`, `LogicalRDD` and `DataSourceV2Relation`, or relations, e.g. `HadoopFsRelation` or `BaseRelation`, use link:spark-sql-SQLConf.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property for the default estimated size if the statistics could not be computed.
+NOTE: Logical operators, e.g. `ExternalRDD`, `LogicalRDD` and `DataSourceV2Relation`, or relations, e.g. `HadoopFsRelation` or `BaseRelation`, use link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property for the default estimated size if the statistics could not be computed.
 
 NOTE: `computeStats` is used exclusively when `SizeInBytesOnlyStatsPlanVisitor` uses the link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc#default[default case] to compute the size statistic (in bytes) for a link:spark-sql-LogicalPlan.adoc[logical operator].

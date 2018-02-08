@@ -102,7 +102,7 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 
 1. The database of the input `table` is defined
 
-1. link:spark-sql-SQLConf.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
+1. link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
 
 1. The `table` is not a link:spark-sql-SessionCatalog.adoc#isTemporaryTable[temporary table]
 

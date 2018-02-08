@@ -43,9 +43,9 @@ Internally, `isConvertible` takes the Hive SerDe of the table (from link:spark-s
 
 `isConvertible` is turned on when either condition holds:
 
-1. The Hive SerDe is `parquet` (aka _parquet table_) and link:spark-sql-SQLConf.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is by default)
+1. The Hive SerDe is `parquet` (aka _parquet table_) and link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is by default)
 
-1. The Hive SerDe is `orc` (aka _orc table_) and link:spark-sql-SQLConf.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] internal configuration property is enabled (which is by default)
+1. The Hive SerDe is `orc` (aka _orc table_) and link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] internal configuration property is enabled (which is by default)
 
 NOTE: `isConvertible` is used when `RelationConversions` is <<apply, executed>>.
 
@@ -62,7 +62,7 @@ convert(relation: HiveTableRelation): LogicalRelation
 
 For non-`parquet` serde, `convert` assumes ORC format.
 
-1. When link:spark-sql-SQLConf.adoc#spark.sql.orc.impl[spark.sql.orc.impl] configuration property is `native` (default) `convert` requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat` as `fileFormatClass`).
+1. When link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] configuration property is `native` (default) `convert` requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat` as `fileFormatClass`).
 
 1. Otherwise, `convert` requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.hive.orc.OrcFileFormat` as `fileFormatClass`).
 

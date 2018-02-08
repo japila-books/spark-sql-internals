@@ -16,7 +16,7 @@ NOTE: `T` stands for the type of a result to be computed (while visiting the que
 
 The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` link:spark-sql-LogicalPlanStats.adoc#stats[uses] <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
+NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
 
 [[implementations]]
 .LogicalPlanVisitors

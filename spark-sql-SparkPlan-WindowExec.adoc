@@ -270,7 +270,7 @@ Refer to link:spark-logging.adoc[Logging].
 NOTE: `nextGroup` is the result of converting `nextRow` using <<grouping, grouping>> conversion function.
 
 [[buffer]]
-`doExecute` creates a link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray] buffer using link:spark-sql-SQLConf.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold] property (default: `4096`) as the threshold for the number of rows buffered.
+`doExecute` creates a link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray] buffer using link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold] property (default: `4096`) as the threshold for the number of rows buffered.
 
 [[windowFunctionResult]]
 `doExecute` creates a `SpecificInternalRow` for the window function result (as `windowFunctionResult`).

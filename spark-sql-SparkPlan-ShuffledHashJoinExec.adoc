@@ -4,9 +4,9 @@
 
 `ShuffledHashJoinExec` is <<creating-instance, created>> for joins with joining keys and one of the following holds:
 
-* link:spark-sql-SQLConf.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for right join side and finally right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than left side
+* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for right join side and finally right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than left side
 
-* link:spark-sql-SQLConf.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for left join side and finally left join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than right
+* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for left join side and finally left join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than right
 
 * Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
 

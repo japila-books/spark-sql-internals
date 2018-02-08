@@ -56,6 +56,8 @@
 .. link:spark-sql-StructField.adoc[StructField]
 .. link:spark-sql-DataType.adoc[Data Types]
 
+. link:spark-sql-properties.adoc[Configuration Properties]
+
 == SparkSession Registries
 
 . link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
@@ -89,7 +91,6 @@
 .. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
 .. link:spark-sql-HiveUtils.adoc[HiveUtils]
-.. link:spark-sql-settings.adoc[Settings]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 

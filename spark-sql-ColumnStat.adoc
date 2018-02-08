@@ -41,9 +41,9 @@ val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
 spark.sql(analyzeTableSQL)
 ----
 
-`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
+`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
 
-NOTE: `spark.sql.statistics.histogram.enabled` is turned off by default.
+NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 
 You can inspect the column statistics using link:spark-sql-cost-based-optimization.adoc#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command.
 

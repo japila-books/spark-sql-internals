@@ -7,7 +7,7 @@ With `LogicalPlanStats` every logical operator has <<stats, statistics>> that ar
 
 Depending on link:spark-sql-cost-based-optimization.adoc[cost-based optimization] being enabled or not, <<stats, stats>> computes the link:spark-sql-Statistics.adoc[statistics] with FIXME or FIXME, respectively.
 
-NOTE: Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+NOTE: Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
 Use `EXPLAIN COST` SQL command to explain a query with the <<stats, statistics>>.
 
@@ -147,7 +147,7 @@ stats: Statistics
 
 [NOTE]
 ====
-Cost-based optimization is enabled when link:spark-sql-SQLConf.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
 ---
 

@@ -186,7 +186,7 @@ NOTE: The prefix for variable names for `HashAggregateExec` operators in link:sp
 ====
 `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) link:spark-sql-TungstenAggregationIterator.adoc#switchToSortBasedAggregation[switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory].
 
-See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and link:spark-sql-settings.adoc#spark.sql.TungstenAggregate.testFallbackStartsAt[spark.sql.TungstenAggregate.testFallbackStartsAt] Spark property.
+See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and link:spark-sql-properties.adoc#spark.sql.TungstenAggregate.testFallbackStartsAt[spark.sql.TungstenAggregate.testFallbackStartsAt] Spark property.
 
 Search logs for the following INFO message to know whether the switch has happened.
 

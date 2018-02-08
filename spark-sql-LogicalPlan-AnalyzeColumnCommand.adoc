@@ -56,7 +56,7 @@ scala> sql(s"DESC EXTENDED $tableName id").show
 +--------------+----------+
 ----
 
-`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when link:spark-sql-SQLConf.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following link:spark-sql-DataType.adoc[data types]:
+`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following link:spark-sql-DataType.adoc[data types]:
 
 1. `IntegralType`
 1. `DecimalType`

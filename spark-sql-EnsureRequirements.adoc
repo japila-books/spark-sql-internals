@@ -55,7 +55,7 @@ NOTE: The number of requirements for partitions and their sort ordering has to m
 
 1. For `BroadcastDistribution`, the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for broadcasting joins
 
-1. Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-SQLConf.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
+1. Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
 
 NOTE: link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] can appear in the physical plan when the children's output partitioning cannot satisfy the physical operator's required child distribution.
 
@@ -82,9 +82,9 @@ withExchangeCoordinator(
   requiredChildDistributions: Seq[Distribution]): Seq[SparkPlan]
 ----
 
-`withExchangeCoordinator` adds link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator] to link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] operators if adaptive query execution is enabled (per link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property) and partitioning scheme of the `ShuffleExchanges` support `ExchangeCoordinator`.
+`withExchangeCoordinator` adds link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator] to link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] operators if adaptive query execution is enabled (per link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property) and partitioning scheme of the `ShuffleExchanges` support `ExchangeCoordinator`.
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property is disabled by default.
+NOTE: link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property is disabled by default.
 
 [[supportsCoordinator]]
 Internally, `withExchangeCoordinator` checks if the input `children` operators support `ExchangeCoordinator` which is that either holds:
@@ -97,7 +97,7 @@ With link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] (i.e
 
 * For every `ShuffleExchange`, link:spark-sql-SparkPlan-ShuffleExchange.adoc#coordinator[registers the `ExchangeCoordinator`]
 
-* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the link:spark-sql-SQLConf.adoc#numShufflePartitions[default number of partitions to use when shuffling data for joins or aggregations] (as `spark.sql.shuffle.partitions` which is `200` by default) and adds `ShuffleExchange` to the final result (for the current physical operator)
+* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the link:spark-sql-SQLConf.adoc#numShufflePartitions[default number of partitions to use when shuffling data for joins or aggregations] (as link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchange` to the final result (for the current physical operator)
 
 Otherwise (when adaptive query execution is disabled or `children` do not support `ExchangeCoordinator`), `withExchangeCoordinator` returns the input `children` unchanged.
 

@@ -5,7 +5,7 @@
 NOTE: A "data source" and "relation" and "table" are often used as synonyms.
 
 [[sizeInBytes]]
-`BaseRelation` can optionally provide information about its estimated size in bytes (as `sizeInBytes`) that defaults to link:spark-sql-SQLConf.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
+`BaseRelation` can optionally provide information about its estimated size in bytes (as `sizeInBytes`) that defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
 
 [[needConversion]]
 `BaseRelation` whether it needs a conversion.

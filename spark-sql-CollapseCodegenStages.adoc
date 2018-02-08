@@ -2,7 +2,7 @@
 
 `CollapseCodegenStages` is a link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[physical preparation rule] that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, collapsing chained physical operators together and generate Java code for execution>>.
 
-With link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property enabled (which is on by default), `CollapseCodegenStages` <<insertWholeStageCodegen, finds physical operators with CodegenSupport>> for which <<supportCodegen, whole-stage codegen requirements hold>> and collapses them together as `WholeStageCodegenExec` physical operator (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
+With link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property enabled (which is on by default), `CollapseCodegenStages` <<insertWholeStageCodegen, finds physical operators with CodegenSupport>> for which <<supportCodegen, whole-stage codegen requirements hold>> and collapses them together as `WholeStageCodegenExec` physical operator (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
 
 [NOTE]
 ====
@@ -25,7 +25,7 @@ scala> q.explain
 
 [NOTE]
 ====
-You can disable `CollapseCodegenStages` (and so whole-stage Java code generation) by turning link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property off.
+You can disable `CollapseCodegenStages` (and so whole-stage Java code generation) by turning link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property off.
 
 `spark.sql.codegen.wholeStage` property is enabled by default.
 
@@ -165,7 +165,7 @@ apply(plan: SparkPlan): SparkPlan
 
 NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-SparkPlan.adoc[physical plan].
 
-`apply` starts <<insertWholeStageCodegen, inserting WholeStageCodegenExec (with InputAdapter)>> in the input `plan` physical plan only when link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property is turned on.
+`apply` starts <<insertWholeStageCodegen, inserting WholeStageCodegenExec (with InputAdapter)>> in the input `plan` physical plan only when link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property is turned on.
 
 Otherwise, `apply` does nothing at all (i.e. passes the input physical plan through unchanged).
 
@@ -226,13 +226,13 @@ NOTE: link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag is 
 
 1. All link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the input physical `plan` are link:spark-sql-Expression.adoc#LeafExpression[leaf] or are not link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback].
 
-1. The number of fields in the schema of the input physical `plan` is less than link:spark-sql-SQLConf.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
+1. The number of fields in the schema of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
 +
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
+NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
 
-1. The number of fields in the schema of every link:spark-sql-catalyst-TreeNode.adoc#children[child physical operator] of the input physical `plan` is less than link:spark-sql-SQLConf.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
+1. The number of fields in the schema of every link:spark-sql-catalyst-TreeNode.adoc#children[child physical operator] of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
 +
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
+NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
 
 Otherwise, `supportCodegen` is negative/disabled.
 

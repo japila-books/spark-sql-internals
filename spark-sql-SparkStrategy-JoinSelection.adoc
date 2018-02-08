@@ -22,9 +22,9 @@ a|
 
 There are joining keys and one of the following holds:
 
-* link:spark-sql-SQLConf.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, <<canBuildRight, canBuildRight>>, <<canBuildLocalHashMap, canBuildLocalHashMap>> for right join side and finally right join side is <<muchSmaller, much smaller>> than left side
+* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, <<canBuildRight, canBuildRight>>, <<canBuildLocalHashMap, canBuildLocalHashMap>> for right join side and finally right join side is <<muchSmaller, much smaller>> than left side
 
-* link:spark-sql-SQLConf.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, <<canBuildLeft, canBuildLeft>>, <<canBuildLocalHashMap, canBuildLocalHashMap>> for left join side and finally left join side is <<muchSmaller, much smaller>> than right
+* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, <<canBuildLeft, canBuildLeft>>, <<canBuildLocalHashMap, canBuildLocalHashMap>> for left join side and finally left join side is <<muchSmaller, much smaller>> than right
 
 * Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
 
@@ -79,7 +79,7 @@ NOTE: `muchSmaller` is used when `JoinSelection` checks <<join-selection-require
 canBuildLocalHashMap(plan: LogicalPlan): Boolean
 ----
 
-`canBuildLocalHashMap` condition holds for the logical `plan` whose single partition is small enough to build a hash table (i.e. link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] multiplied by link:spark-sql-SQLConf.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]).
+`canBuildLocalHashMap` condition holds for the logical `plan` whose single partition is small enough to build a hash table (i.e. link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] multiplied by link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]).
 
 Internally, `canBuildLocalHashMap` link:spark-sql-LogicalPlan.adoc#stats[calculates the estimated statistics for the input logical plans] and takes the size in bytes (`sizeInBytes`).
 
@@ -140,9 +140,9 @@ NOTE: `broadcastSideBySizes` is used when `JoinSelection` checks <<join-selectio
 canBroadcast(plan: LogicalPlan): Boolean
 ----
 
-`canBroadcast` is enabled, i.e. `true`, when the size of the output of the input logical plan (aka _sizeInBytes_) is less than link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] configuration property.
+`canBroadcast` is enabled, i.e. `true`, when the size of the output of the input logical plan (aka _sizeInBytes_) is less than link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] configuration property.
 
-NOTE: link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
+NOTE: link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
 
 NOTE: `canBroadcast` uses the total size statistic from link:spark-sql-LogicalPlanStats.adoc#stats[Statistics] of a logical operator.
 

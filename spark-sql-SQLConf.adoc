@@ -61,23 +61,23 @@ org.apache.spark.sql.RuntimeConfig
 ====
 
 [[accessor-methods]]
-.SQLConf's Accessor Methods (in alphabetical order)
+.SQLConf's Accessor Methods
 [cols="1,1,1",options="header",width="100%"]
 |===
 | Name
-| Parameter / Hint
+| Parameter
 | Description
 
 | [[adaptiveExecutionEnabled]] `adaptiveExecutionEnabled`
-| <<spark.sql.adaptive.enabled, spark.sql.adaptive.enabled>>
+| link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled]
 | Used exclusively when `EnsureRequirements` link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[adds an ExchangeCoordinator] (for link:spark-sql-adaptive-query-execution.adoc[adaptive query execution])
 
 | [[autoBroadcastJoinThreshold]] `autoBroadcastJoinThreshold`
-| <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>>
+| link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold]
 | Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy
 
 | [[autoSizeUpdateEnabled]] `autoSizeUpdateEnabled`
-| <<spark.sql.statistics.size.autoUpdate.enabled, spark.sql.statistics.size.autoUpdate.enabled>>
+| link:spark-sql-properties.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled]
 a|
 
 Used when:
@@ -87,11 +87,11 @@ Used when:
 1. `AlterTableAddPartitionCommand` is executed
 
 | [[broadcastTimeout]] `broadcastTimeout`
-| <<spark.sql.broadcastTimeout, spark.sql.broadcastTimeout>>
+| link:spark-sql-properties.adoc#spark.sql.broadcastTimeout[spark.sql.broadcastTimeout]
 | Used exclusively in link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] (for broadcasting a table to executors).
 
 | [[cboEnabled]] `cboEnabled`
-| <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>>
+| link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled]
 a|
 
 Used in:
@@ -100,178 +100,22 @@ Used in:
 * link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
 
 | [[columnBatchSize]] `columnBatchSize`
-| <<spark.sql.inMemoryColumnarStorage.batchSize, spark.sql.inMemoryColumnarStorage.batchSize>>
+| link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize]
 | Used...FIXME
 
 | [[dataFramePivotMaxValues]] `dataFramePivotMaxValues`
-| <<spark.sql.pivotMaxValues, spark.sql.pivotMaxValues>>
+| link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues]
 | Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] operator.
 
 | [[dataFrameRetainGroupColumns]] `dataFrameRetainGroupColumns`
-| <<spark.sql.retainGroupColumns, spark.sql.retainGroupColumns>>
+| link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns]
 | Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
 
-| [[fallBackToHdfsForStatsEnabled]] `fallBackToHdfsForStatsEnabled`
-| <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>>
-| Used exclusively when `DetermineTableStats` logical resolution rule is executed.
-
-| [[histogramEnabled]] `histogramEnabled`
-| <<spark.sql.statistics.histogram.enabled, spark.sql.statistics.histogram.enabled>>
-| Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].
-
-| [[histogramNumBins]] `histogramNumBins`
-| <<spark.sql.statistics.histogram.numBins, spark.sql.statistics.histogram.numBins>>
-| Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with <<spark.sql.statistics.histogram.enabled, spark.sql.statistics.histogram.enabled>> turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
-
-| [[numShufflePartitions]] `numShufflePartitions`
-| <<spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>>
-a|
-
-Used in:
-
-* Dataset's link:spark-sql-dataset-operators.adoc#repartition[repartition] operator (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
-* link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[SparkSqlAstBuilder] (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
-* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[JoinSelection] execution planning strategy
-* link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
-* link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
-
-| [[joinReorderEnabled]] `joinReorderEnabled`
-| <<spark.sql.cbo.joinReorder.enabled, spark.sql.cbo.joinReorder.enabled>>
-| Used exclusively in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
-
-| [[limitScaleUpFactor]] `limitScaleUpFactor`
-| <<spark.sql.limit.scaleUpFactor, spark.sql.limit.scaleUpFactor>>
-| Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
-
-| [[preferSortMergeJoin]] `preferSortMergeJoin`
-| <<spark.sql.join.preferSortMergeJoin, spark.sql.join.preferSortMergeJoin>>
-| Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
-
-| [[runSQLonFile]] `runSQLonFile`
-| <<spark.sql.runSQLOnFiles, spark.sql.runSQLOnFiles>>
+| [[defaultSizeInBytes]] `defaultSizeInBytes`
+| link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes]
 a|
 
 Used when:
-
-* `ResolveRelations` does link:spark-sql-ResolveRelations.adoc#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
-
-* `ResolveSQLOnFile` does link:spark-sql-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
-
-| [[starSchemaDetection]] `starSchemaDetection`
-| <<spark.sql.cbo.starSchemaDetection, spark.sql.cbo.starSchemaDetection>>
-| Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
-
-| [[useCompression]] `useCompression`
-| <<spark.sql.inMemoryColumnarStorage.compressed, spark.sql.inMemoryColumnarStorage.compressed>>
-| Used...FIXME
-
-| [[wholeStageEnabled]] `wholeStageEnabled`
-| <<spark.sql.codegen.wholeStage, spark.sql.codegen.wholeStage>>
-a| Used in:
-
-* link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
-* link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
-
-| [[wholeStageFallback]] `wholeStageFallback`
-| <<spark.sql.codegen.fallback, spark.sql.codegen.fallback>>
-| Used exclusively when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
-
-| [[wholeStageMaxNumFields]] `wholeStageMaxNumFields`
-| <<spark.sql.codegen.maxFields, spark.sql.codegen.maxFields>>
-a|
-
-Used in:
-
-* link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
-* link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
-
-| [[windowExecBufferSpillThreshold]] `windowExecBufferSpillThreshold`
-| <<spark.sql.windowExec.buffer.spill.threshold, spark.sql.windowExec.buffer.spill.threshold>>
-| Used exclusively when `WindowExec` unary physical operator is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed].
-
-| [[useObjectHashAggregation]] `useObjectHashAggregation`
-| <<spark.sql.execution.useObjectHashAggregateExec, spark.sql.execution.useObjectHashAggregateExec>>
-| Used exclusively in `Aggregation` execution planning strategy when link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[selecting a physical plan].
-|===
-
-[[parameters]]
-.Parameters and Hints (in alphabetical order)
-[cols=",1,2",options="header",width="100%"]
-|===
-| Name
-| Default Value
-| Description
-
-| [[spark.sql.adaptive.enabled]] `spark.sql.adaptive.enabled`
-| `false`
-a| Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
-
-Use <<adaptiveExecutionEnabled, adaptiveExecutionEnabled>> method to access the current value.
-
-| [[spark.sql.autoBroadcastJoinThreshold]] `spark.sql.autoBroadcastJoinThreshold`
-| `10L * 1024 * 1024` (10M)
-| Maximum size (in bytes) for a table that will be broadcast to all worker nodes when performing a join.
-
-If the size of the statistics of the logical plan of a table is at most the setting, the DataFrame is broadcast for join.
-
-Negative values or `0` disable broadcasting.
-
-Use <<autoBroadcastJoinThreshold, autoBroadcastJoinThreshold>> method to access the current value.
-
-| [[spark.sql.broadcastTimeout]] `spark.sql.broadcastTimeout`
-| `5 * 60`
-| Timeout in seconds for the broadcast wait time in broadcast joins.
-
-When negative, it is assumed infinite (i.e. `Duration.Inf`)
-
-Used through <<broadcastTimeout, SQLConf.broadcastTimeout>>.
-
-| [[spark.sql.cbo.enabled]] `spark.sql.cbo.enabled`
-| `false`
-a| Enables cost-based optimization (CBO) for estimation of plan statistics when enabled (i.e. `true`).
-
-Use <<cboEnabled, cboEnabled>> method to access the current value.
-
-| [[spark.sql.cbo.joinReorder.enabled]] `spark.sql.cbo.joinReorder.enabled`
-| `false`
-a| Enables join reorder for cost-based optimization (CBO).
-
-Use <<joinReorderEnabled, joinReorderEnabled>> method to access the current value.
-
-| [[spark.sql.cbo.starSchemaDetection]] `spark.sql.cbo.starSchemaDetection`
-| `false`
-a| Enables *join reordering* based on star schema detection for cost-based optimization (CBO) in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization.
-
-Use <<starSchemaDetection, starSchemaDetection>> method to access the current value.
-
-| [[spark.sql.codegen.fallback]] `spark.sql.codegen.fallback`
-| `true`
-| *(internal)* Whether the whole stage codegen could be temporary disabled for the part of a query that has failed to compile generated code (`true`) or not (`false`).
-
-Use <<wholeStageFallback, wholeStageFallback>> method to access the current value.
-
-| [[spark.sql.codegen.maxFields]] `spark.sql.codegen.maxFields`
-| `100`
-| *(internal)* Maximum number of output fields (including nested fields) that whole-stage codegen supports. Going above the number deactivates whole-stage codegen.
-
-Use <<wholeStageMaxNumFields, wholeStageMaxNumFields>> method to access the current value.
-
-| [[spark.sql.codegen.wholeStage]] `spark.sql.codegen.wholeStage`
-| `true`
-| *(internal)* Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
-
-Use <<wholeStageEnabled, wholeStageEnabled>> method to access the current value.
-
-| [[spark.sql.defaultSizeInBytes]] `spark.sql.defaultSizeInBytes`
-| Java's `Long.MaxValue`
-a| *(internal)* Estimated size of a table or relation used in query planning
-
-Set to Java's `Long.MaxValue` which is larger than <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>> to be more conservative. That is to say by default the optimizer will not choose to broadcast a table unless it knows for sure that the table size is small enough.
-
-[[defaultSizeInBytes]]
-Use `defaultSizeInBytes` method to access the current value.
-
-Used (as <<defaultSizeInBytes, defaultSizeInBytes>>) when:
 
 1. `DetermineTableStats` logical resolution rule could not compute the table size or <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>> is turned off
 
@@ -283,145 +127,88 @@ Used (as <<defaultSizeInBytes, defaultSizeInBytes>>) when:
 
 1. `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
 
-Used by the planner to decide when it is safe to broadcast a relation. By default, the system will assume that tables are too large to broadcast.
+| [[fallBackToHdfsForStatsEnabled]] `fallBackToHdfsForStatsEnabled`
+| link:spark-sql-properties.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs]
+| Used exclusively when `DetermineTableStats` logical resolution rule is executed.
 
-| [[spark.sql.execution.useObjectHashAggregateExec]] `spark.sql.execution.useObjectHashAggregateExec`
-| `true`
-| Flag to enable link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] in link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[Aggregation] execution planning strategy.
+| [[histogramEnabled]] `histogramEnabled`
+| link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled]
+| Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].
 
-Use <<useObjectHashAggregation, useObjectHashAggregation>> method to access the current value.
+| [[histogramNumBins]] `histogramNumBins`
+| link:spark-sql-properties.adoc#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
+| Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
 
-| [[spark.sql.hive.convertMetastoreOrc]] `spark.sql.hive.convertMetastoreOrc`
-| `true`
-| (internal) When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
+| [[numShufflePartitions]] `numShufflePartitions`
+| link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
+a|
 
-| [[spark.sql.hive.convertMetastoreParquet]] `spark.sql.hive.convertMetastoreParquet`
-| `true`
-| When enabled (i.e. `true`), the built-in Parquet reader and writer are used to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
+Used in:
 
-| [[spark.sql.inMemoryColumnarStorage.batchSize]] `spark.sql.inMemoryColumnarStorage.batchSize`
-| `10000`
-| *(internal)* Controls...FIXME
+* Dataset's link:spark-sql-dataset-operators.adoc#repartition[repartition] operator (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
+* link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[SparkSqlAstBuilder] (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
+* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[JoinSelection] execution planning strategy
+* link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
+* link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
 
-Use <<columnBatchSize, columnBatchSize>> method to access the current value.
+| [[joinReorderEnabled]] `joinReorderEnabled`
+| link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled]
+| Used exclusively in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
 
-| [[spark.sql.inMemoryColumnarStorage.compressed]] `spark.sql.inMemoryColumnarStorage.compressed`
-| `true`
-| *(internal)* Controls...FIXME
+| [[limitScaleUpFactor]] `limitScaleUpFactor`
+| link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor]
+| Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
 
-Use <<useCompression, useCompression>> method to access the current value.
+| [[preferSortMergeJoin]] `preferSortMergeJoin`
+| link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
+| Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
 
-| [[spark.sql.join.preferSortMergeJoin]] `spark.sql.join.preferSortMergeJoin`
-| `true`
-| *(internal)* Controls link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
+| [[runSQLonFile]] `runSQLonFile`
+| link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]
+a|
 
-Use <<preferSortMergeJoin, preferSortMergeJoin>> method to access the current value.
+Used when:
 
-| [[spark.sql.limit.scaleUpFactor]] `spark.sql.limit.scaleUpFactor`
-| `4`
-| *(internal)* Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
+* `ResolveRelations` does link:spark-sql-ResolveRelations.adoc#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
 
-Use <<limitScaleUpFactor, limitScaleUpFactor>> method to access the current value.
+* `ResolveSQLOnFile` does link:spark-sql-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
 
-| [[spark.sql.optimizer.maxIterations]] `spark.sql.optimizer.maxIterations`
-| `100`
-| Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
+| [[starSchemaDetection]] `starSchemaDetection`
+| link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
+| Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
 
-| [[spark.sql.orc.impl]] `spark.sql.orc.impl`
-| `native`
-a| (internal) When `native`, use the native version of ORC support instead of the ORC library in Hive 1.2.1.
+| [[useCompression]] `useCompression`
+| link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
+| Used...FIXME
 
-Acceptable values:
+| [[wholeStageEnabled]] `wholeStageEnabled`
+| link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage]
+a| Used in:
 
-* `hive`
-* `native`
+* link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
+* link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
 
-| [[spark.sql.pivotMaxValues]] `spark.sql.pivotMaxValues`
-| `10000`
-| Maximum number of (distinct) values that will be collected without error (when doing a link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] without specifying the values for the pivot column)
+| [[wholeStageFallback]] `wholeStageFallback`
+| link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback]
+| Used exclusively when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
 
-Use <<dataFramePivotMaxValues, dataFramePivotMaxValues>> method to access the current value.
+| [[wholeStageMaxNumFields]] `wholeStageMaxNumFields`
+| link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields]
+a|
 
-| [[spark.sql.retainGroupColumns]] `spark.sql.retainGroupColumns`
-| `true`
-| Flag that controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).
+Used in:
 
-Use <<dataFrameRetainGroupColumns, dataFrameRetainGroupColumns>> method to access the current value.
+* link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
+* link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
 
-| [[spark.sql.runSQLOnFiles]] `spark.sql.runSQLOnFiles`
-| `true`
-| (internal) Flag that controls whether Spark SQL could use `datasource`.`path` as a table in a SQL query.
+| [[windowExecBufferSpillThreshold]] `windowExecBufferSpillThreshold`
+| link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold]
+| Used exclusively when `WindowExec` unary physical operator is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed].
 
-Use <<runSQLonFile, runSQLonFile>> method to access the current value.
-
-| [[spark.sql.selfJoinAutoResolveAmbiguity]] `spark.sql.selfJoinAutoResolveAmbiguity`
-| `true`
-| Control whether to resolve ambiguity in join conditions for link:spark-sql-joins.adoc#join[self-joins] automatically.
-
-| [[spark.sql.shuffle.partitions]] `spark.sql.shuffle.partitions`
-| `200`
-| Default number of partitions to use when shuffling data for joins or aggregations.
-
-Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks[mapred.reduce.tasks] property that Spark considers deprecated.
-
-Use <<numShufflePartitions, numShufflePartitions>> method to access the current value.
-
-| [[spark.sql.statistics.fallBackToHdfs]] `spark.sql.statistics.fallBackToHdfs`
-| `false`
-a| Enables automatic calculation of table size statistic by falling back to HDFS if the table statistics are not available from table metadata.
-
-This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
-
-Use <<fallBackToHdfsForStatsEnabled, fallBackToHdfsForStatsEnabled>> method to access the current value.
-
-| [[spark.sql.statistics.histogram.enabled]] `spark.sql.statistics.histogram.enabled`
-| `false`
-a| Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[computing column statistics]
-
-NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
-
-Use <<histogramEnabled, histogramEnabled>> method to access the current value.
-
-| [[spark.sql.statistics.histogram.numBins]] `spark.sql.statistics.histogram.numBins`
-| `254`
-a| (internal) The number of bins when generating histograms.
-
-NOTE: The number of bins must be greater than 1.
-
-Use <<histogramNumBins, histogramNumBins>> method to access the current value.
-
-| [[spark.sql.statistics.size.autoUpdate.enabled]] `spark.sql.statistics.size.autoUpdate.enabled`
-| `false`
-a| Enables automatic update of the table size statistic of a table after the table has changed.
-
-IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
-
-Use <<autoSizeUpdateEnabled, autoSizeUpdateEnabled>> method to access the current value.
-
-| [[spark.sql.streaming.fileSink.log.deletion]] `spark.sql.streaming.fileSink.log.deletion`
-| `true`
-| Controls whether to delete the expired log files in link:spark-sql-streaming-sink.adoc#FileStreamSink[file stream sink].
-
-| [[spark.sql.streaming.fileSink.log.cleanupDelay]] `spark.sql.streaming.fileSink.log.cleanupDelay`
-| FIXME
-| FIXME
-
-| [[spark.sql.streaming.schemaInference]] `spark.sql.streaming.schemaInference`
-| FIXME
-| FIXME
-
-| [[spark.sql.streaming.fileSink.log.compactInterval]] `spark.sql.streaming.fileSink.log.compactInterval`
-| FIXME
-| FIXME
-
-| [[spark.sql.windowExec.buffer.spill.threshold]] `spark.sql.windowExec.buffer.spill.threshold`
-| `4096`
-| *(internal)* Threshold for number of rows buffered in link:spark-sql-SparkPlan-WindowExec.adoc[window operator]
-
-Use <<windowExecBufferSpillThreshold, windowExecBufferSpillThreshold>> method to access the current value.
+| [[useObjectHashAggregation]] `useObjectHashAggregation`
+| link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec]
+| Used exclusively in `Aggregation` execution planning strategy when link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[selecting a physical plan].
 |===
-
-NOTE: `SQLConf` is a `private[sql]` serializable class in `org.apache.spark.sql.internal` package.
 
 === [[get]] Getting Parameters and Hints
 

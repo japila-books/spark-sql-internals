@@ -154,7 +154,7 @@ val writer: DataFrameWriter[Long] = nums.write
 
 `DataFrameWriter` has a direct support for many <<writing-dataframes-to-files, file formats>>, <<jdbc, JDBC databases>> and an extension point to plug in <<format, new formats>>.
 
-`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using link:spark-sql-settings.adoc[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
+`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using link:spark-sql-properties.adoc[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
 
 [source, scala]
 ----

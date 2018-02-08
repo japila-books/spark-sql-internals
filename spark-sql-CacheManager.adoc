@@ -57,8 +57,8 @@ Internally, `cacheQuery` registers link:spark-sql-Dataset.adoc#logicalPlan[logic
 
 While registering, `cacheQuery` creates a link:spark-sql-LogicalPlan-InMemoryRelation.adoc#apply[InMemoryRelation] with the following properties:
 
-* link:spark-sql-SQLConf.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed] (enabled by default)
-* link:spark-sql-SQLConf.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize] (default: `10000`)
+* link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed] (enabled by default)
+* link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize] (default: `10000`)
 * Input `storageLevel` link:spark-rdd-StorageLevel.adoc[storage level]
 * link:spark-sql-QueryExecution.adoc#executedPlan[Physical plan] ready for execution (after `planToCache` logical plan was link:spark-sql-SessionState.adoc#executePlan[executed])
 * Input `tableName`

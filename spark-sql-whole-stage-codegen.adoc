@@ -6,7 +6,7 @@ Whole-Stage Java Code Generation improves the execution performance of a query b
 
 [NOTE]
 ====
-Whole-Stage Code Generation is controlled by link:spark-sql-SQLConf.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property.
+Whole-Stage Code Generation is controlled by link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property.
 
 Whole-Stage Code Generation is enabled by default.
 

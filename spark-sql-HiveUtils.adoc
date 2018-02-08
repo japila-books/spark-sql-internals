@@ -33,7 +33,7 @@ newClientForMetadata(
 ----
 <1> Executes the other `newClientForMetadata` with time configurations formatted
 
-Internally, `newClientForMetadata` creates a link:spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
+Internally, `newClientForMetadata` creates a new link:spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
 
 CAUTION: FIXME Describe the vals
 

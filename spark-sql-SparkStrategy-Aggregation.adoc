@@ -86,7 +86,7 @@ a| `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#supportsA
 | link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
 a|
 
-1. link:spark-sql-SQLConf.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
+1. link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
 
 1. `ObjectHashAggregateExec` link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#supportsAggregate[supports] the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
 

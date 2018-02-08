@@ -305,7 +305,7 @@ image::images/spark-sql-SparkPlan-executeTake.png[align="center"]
 
 Internally, `executeTake` <<getByteArrayRdd, gets an RDD of byte array of `n` unsafe rows>> and scans the RDD partitions one by one until `n` is reached or all partitions were processed.
 
-`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by link:spark-sql-SQLConf.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor] property (but minimum twice as many).
+`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor] property (but minimum twice as many).
 
 NOTE: `executeTake` uses `SparkContext.runJob` to run a Spark job.
 

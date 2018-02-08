@@ -1,6 +1,6 @@
 == Broadcast Joins (aka Map-Side Joins)
 
-Spark SQL uses *broadcast join* (aka *broadcast hash join*) instead of hash join to optimize join queries when the size of one side data is below link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold].
+Spark SQL uses *broadcast join* (aka *broadcast hash join*) instead of hash join to optimize join queries when the size of one side data is below link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold].
 
 Broadcast join can be very efficient for joins between a large table (fact) with relatively small tables (dimensions) that could then be used to perform a *star-schema join*. It can avoid sending all data of the large table over the network.
 
@@ -12,7 +12,7 @@ NOTE: According to the article http://dmtolpeko.com/2015/02/20/map-side-join-in-
 
 NOTE: Currently statistics are only supported for Hive Metastore tables where the command `ANALYZE TABLE [tableName] COMPUTE STATISTICS noscan` has been run.
 
-link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy uses link:spark-sql-SQLConf.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] property (default: `10M`) to control the size of a dataset before broadcasting it to all worker nodes when performing a join.
+link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy uses link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] property (default: `10M`) to control the size of a dataset before broadcasting it to all worker nodes when performing a join.
 
 [source, scala]
 ----
