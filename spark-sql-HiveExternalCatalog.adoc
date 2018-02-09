@@ -7,6 +7,8 @@ image::images/spark-sql-HiveExternalCatalog.png[align="center"]
 
 `HiveExternalCatalog` is <<creating-instance, created>> exclusively when `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] for the first time (and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
+NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog` is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix.
+
 `HiveExternalCatalog` uses the internal <<client, HiveClient>> to retrieve metadata from a Hive metastore.
 
 [source, scala]

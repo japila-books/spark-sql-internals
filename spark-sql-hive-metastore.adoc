@@ -148,7 +148,9 @@ config("hive.metastore.uris", "thrift://192.168.175.160:9083")
 ```
 
 | [[hive.metastore.warehouse.dir]] `hive.metastore.warehouse.dir`
-| `SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+a| `SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+
+CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.warehouse.dir`? `SharedState.warehousePath`? Review https://github.com/apache/spark/pull/16996/files
 
 | [[hive.metastore.schema.verification]] `hive.metastore.schema.verification`
 | Set to `false` (as seems to cause exceptions with an empty metastore database as of Hive 2.1)

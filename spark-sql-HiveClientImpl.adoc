@@ -2,17 +2,13 @@
 
 `HiveClientImpl` is the only available link:spark-sql-HiveClient.adoc[HiveClient] in Spark SQL that does/uses...FIXME
 
-`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to create a `HiveClient`.
-
-When created `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (aka <<warehouseDir, warehouseDir>>) which is the value of *hive.metastore.warehouse.dir* Hive-specific configuration property (in a Hadoop configuration).
+`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
 NOTE: The location of the default database for the Hive metastore warehouse is `/user/hive/warehouse` by default.
 
 NOTE: You may be interested in https://issues.apache.org/jira/browse/SPARK-19664[SPARK-19664 put 'hive.metastore.warehouse.dir' in hadoopConf place] if you use Spark before 2.1 (which you should not really as it is not supported anymore).
 
-CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.warehouse.dir`? `SharedState.warehousePath`? Review https://github.com/apache/spark/pull/16996/files
-
-CAUTION: FIXME How is this Hadoop configuration created?
+NOTE: The Hadoop configuration is what link:spark-sql-HiveExternalCatalog.adoc#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
 
 [[logging]]
 [TIP]
