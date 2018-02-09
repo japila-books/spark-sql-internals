@@ -2,34 +2,37 @@
 
 Spark SQL uses a Hive metastore to manage the metadata of persistent relational entities (e.g. databases, tables, columns, partitions) in a relational database (for fast access).
 
-By default, Spark SQL uses the embedded deployment mode of a Hive metastore with a https://db.apache.org/derby/[Apache Derby] database. This is not recommended for production use due to limitation of only one active link:spark-sql-SparkSession.adoc[SparkSession] at a time.
+A Hive metastore warehouse (aka <<spark.sql.warehouse.dir, spark-warehouse>>) is the directory where Spark SQL persists tables whereas a Hive metastore (aka <<javax.jdo.option.ConnectionURL, metastore_db>>) is a relational database to manage the metadata of the persistent relational entities, e.g. databases, tables, columns, partitions.
 
-TIP: Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document describes the deployment modes of a Hive metastore in more details.
+By default, Spark SQL uses the embedded deployment mode of a Hive metastore with a https://db.apache.org/derby/[Apache Derby] database.
 
-When `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog].
+[IMPORTANT]
+====
+The default embedded deployment mode is not recommended for production use due to limitation of only one active link:spark-sql-SparkSession.adoc[SparkSession] at a time.
 
-Metadata is persisted in a metastore database over JDBC and http://www.datanucleus.org/[DataNucleus AccessPlatform] (that requires you to set up a Hive metastore connection using <<javax.jdo.option, javax.jdo.option.*>> properties, e.g. `javax.jdo.option.ConnectionURL`).
+Read Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document that explains the available deployment modes of a Hive metastore.
+====
 
-TIP: Read https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] to learn how to manage a Hive Metastore.
+When `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]. `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
 
-The benefits of using an external Hive metastore:
+[NOTE]
+====
+The metadata of relational entities is persisted in a metastore database over JDBC and http://www.datanucleus.org/[DataNucleus AccessPlatform] that uses <<javax.jdo.option, javax.jdo.option>> properties.
 
-1. Allow multiple Spark applications (sessions) to access it concurrently
+Read https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] to learn how to manage a Hive Metastore.
+====
 
-1. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
+[[javax.jdo.option]]
+[[hive-metastore-database-connection-properties]]
+.Hive Metastore Database Connection Properties
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPARK-18112 Spark2.x does not support read data from Hive 2.x metastore]) Spark SQL supports reading data from Hive 2.1.1 metastore.
+| [[javax.jdo.option.ConnectionURL]] `javax.jdo.option.ConnectionURL`
+a| The JDBC connection URL of a Hive metastore database to use
 
-CAUTION: FIXME Describe <<hive-site.xml, hive-site.xml>> vs `config` method vs `--conf` with <<spark.hadoop, spark.hadoop>> prefix.
-
-=== [[javax.jdo.option]] `javax.jdo.option.*` Hive Configuration Properties
-
-*javax.jdo.option* configuration properties set up the connection to a Hive metastore database.
-
-You can set them up in <<hive-site.xml, hive-site.xml>> or using options with <<spark.hadoop, spark.hadoop>> prefix.
-
-* `javax.jdo.option.ConnectionURL` - the JDBC connection URL to use to connect to a Hive metastore database, e.g.
-+
 ```
 // the default setting in Spark SQL
 jdbc:derby:;databaseName=metastore_db;create=true
@@ -40,15 +43,21 @@ jdbc:derby:memory:;databaseName=${metastoreLocation.getAbsolutePath};create=true
 jdbc:mysql://192.168.175.160:3306/metastore?useSSL=false
 ```
 
-* `javax.jdo.option.ConnectionDriverName` - the JDBC driver, e.g.
-+
+| [[javax.jdo.option.ConnectionDriverName]] `javax.jdo.option.ConnectionDriverName`
+a| The JDBC driver of a Hive metastore database to use
+
 ```
 org.apache.derby.jdbc.EmbeddedDriver
 ```
 
-* `javax.jdo.option.ConnectionUserName` - the user name to connect to a Hive metastore database
+| [[javax.jdo.option.ConnectionUserName]] `javax.jdo.option.ConnectionUserName`
+| The user name to use to connect to a Hive metastore database
 
-* `javax.jdo.option.ConnectionPassword` - the password of the user name to connect to a Hive metastore database
+| [[javax.jdo.option.ConnectionPassword]] `javax.jdo.option.ConnectionPassword`
+| The password to use to connect to a Hive metastore database
+|===
+
+You can configure <<javax.jdo.option, javax.jdo.option>> properties in <<hive-site.xml, hive-site.xml>> or using options with <<spark.hadoop, spark.hadoop>> prefix.
 
 You can access the current connection properties for a Hive metastore in a Spark SQL application using the Spark internal classes.
 
@@ -81,19 +90,21 @@ scala> hiveClient.getConf("javax.jdo.option.ConnectionURL", "")
 res2: String = jdbc:derby:;databaseName=metastore_db;create=true
 ----
 
-You may also want to use the following Hive options that seem to cause exceptions with an empty metastore database as of Hive 2.1.
+The benefits of using an external Hive metastore:
 
-* `datanucleus.schema.autoCreateAll` set to `true`
+1. Allow multiple Spark applications (sessions) to access it concurrently
 
-* `hive.metastore.schema.verification` set to `false`
+1. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
 
-=== [[hive.metastore.uris]] `hive.metastore.uris` Hive Configuration Property
+NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPARK-18112 Spark2.x does not support read data from Hive 2.x metastore]) Spark SQL supports reading data from Hive 2.1.1 metastore.
 
-`hive.metastore.uris` is a Hive configuration property for the Thrift URI of a remote Hive metastore (that is in a separate JVM process or even on a remote node).
+CAUTION: FIXME Describe <<hive-site.xml, hive-site.xml>> vs `config` method vs `--conf` with <<spark.hadoop, spark.hadoop>> prefix.
 
-```
-config("hive.metastore.uris", "thrift://192.168.175.160:9083")
-```
+Spark SQL uses the Hive-specific configuration properties that further fine-tune the Hive integration, e.g. link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] or link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars].
+
+=== [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir` Configuration Property
+
+link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that...FIXME
 
 === Hive Metastore Deployment Modes
 
@@ -111,20 +122,41 @@ In order to use an external Hive metastore you should do the following:
 
 1. Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
-When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir], which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
+When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>>, which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
 
 [NOTE]
 ====
-`hive.metastore.warehouse.dir` property in `hive-site.xml` is deprecated since Spark 2.0.0. Use `spark.sql.warehouse.dir` to specify the default location of databases in a Hive warehouse.
+`hive.metastore.warehouse.dir` property in `hive-site.xml` is deprecated since Spark 2.0.0. Use <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> to specify the default location of the databases in a Hive warehouse.
 
 You may need to grant write privilege to the user who starts the Spark application.
 ====
 
-=== [[hive.metastore.warehouse.dir]] hive.metastore.warehouse.dir Hive Configuration Property
+=== Hadoop Configuration Properties for Hive
 
-`hive.metastore.warehouse.dir` is...FIXME
+[[hadoop-configuration-properties]]
+.Hadoop Configuration Properties for Hive
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-`SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+| [[hive.metastore.uris]] `hive.metastore.uris`
+a| The Thrift URI of a remote Hive metastore, i.e. one that is in a separate JVM process or on a remote node
+
+```
+config("hive.metastore.uris", "thrift://192.168.175.160:9083")
+```
+
+| [[hive.metastore.warehouse.dir]] `hive.metastore.warehouse.dir`
+| `SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+
+| [[hive.metastore.schema.verification]] `hive.metastore.schema.verification`
+| Set to `false` (as seems to cause exceptions with an empty metastore database as of Hive 2.1)
+|===
+
+You may also want to use the following Hive configuration properties that (seem to) cause exceptions with an empty metastore database as of Hive 2.1.
+
+* `datanucleus.schema.autoCreateAll` set to `true`
 
 === [[spark.hadoop]] spark.hadoop Configuration Properties
 
