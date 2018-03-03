@@ -9,7 +9,7 @@
 [source, scala]
 ----
 // start Spark application like spark-shell with the following package
-// --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0-SNAPSHOT
+// --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0
 scala> val fromKafkaTopic1 = spark.
   read.
   format("kafka").

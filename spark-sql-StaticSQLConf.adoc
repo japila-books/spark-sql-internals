@@ -7,7 +7,7 @@ NOTE: Configuration properties in `StaticSQLConf` can only be queried and never 
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 import org.apache.spark.sql.internal.StaticSQLConf
 scala> val metastoreName = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)

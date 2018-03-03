@@ -13,7 +13,7 @@ Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> :type spark.sessionState.analyzer
 org.apache.spark.sql.catalyst.analysis.Analyzer

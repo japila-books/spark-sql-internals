@@ -22,7 +22,7 @@ image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 // explode expression (that uses Generate operator) does not support codegen
 val ids = Seq(Seq(0,1,2,3)).toDF("ids").select(explode($"ids") as "id")

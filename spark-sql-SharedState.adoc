@@ -46,7 +46,7 @@ NOTE: `externalCatalog` is initialized lazily on the first access.
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> :type spark.sharedState
 org.apache.spark.sql.internal.SharedState
@@ -57,7 +57,7 @@ org.apache.spark.sql.internal.SharedState
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> spark.newSession.sharedState == spark.sharedState
 res1: Boolean = true

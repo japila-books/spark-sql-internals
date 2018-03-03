@@ -1,6 +1,6 @@
-== Mastering Spark SQL
+== Mastering Spark SQL (Apache Spark 2.3.0)
 
-Welcome to *Mastering Spark SQL* gitbook! I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I do.
+Welcome to *Mastering Spark SQL* gitbook! I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I have.
 
 I'm https://pl.linkedin.com/in/jaceklaskowski[Jacek Laskowski], an independent consultant, software developer and technical instructor specializing in *Apache Spark*, Apache Kafka and Kafka Streams (with Scala, sbt, Kubernetes, Apache Mesos, Hadoop YARN and DC/OS). I offer consultancy, courses, workshops, mentoring and software development services.
 
@@ -16,4 +16,4 @@ This collections of notes is the ultimate place of mine to collect all the nuts 
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
 
-Without further ado let's learn about what link:spark-sql.adoc[Spark SQL has to offer these days].
+Now, let me introduce you to link:spark-sql.adoc[Spark SQL].

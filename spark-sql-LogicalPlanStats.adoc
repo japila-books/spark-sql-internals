@@ -14,7 +14,7 @@ Use `EXPLAIN COST` SQL command to explain a query with the <<stats, statistics>>
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> sql("EXPLAIN COST SHOW TABLES").as[String].collect.foreach(println)
 == Optimized Logical Plan ==
@@ -30,7 +30,7 @@ You can also access the statistics of a logical plan directly using <<stats, sta
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 val q = sql("SHOW TABLES")
 scala> println(q.queryExecution.analyzed.stats)
@@ -48,7 +48,7 @@ Execute ShowTablesCommand
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 val names = Seq((1, "one"), (2, "two")).toDF("id", "name")
 

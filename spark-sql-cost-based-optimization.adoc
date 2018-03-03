@@ -137,7 +137,7 @@ scala> sql("DESC EXTENDED t1").show(numRows = 30, truncate = false)
 |Owner                       |jacek                                                         |       |
 |Created Time                |Wed Dec 27 14:10:44 CET 2017                                  |       |
 |Last Access                 |Thu Jan 01 01:00:00 CET 1970                                  |       |
-|Created By                  |Spark 2.3.0-SNAPSHOT                                          |       |
+|Created By                  |Spark 2.3.0                                                   |       |
 |Type                        |MANAGED                                                       |       |
 |Provider                    |parquet                                                       |       |
 |Table Properties            |[transient_lastDdlTime=1514453141]                            |       |

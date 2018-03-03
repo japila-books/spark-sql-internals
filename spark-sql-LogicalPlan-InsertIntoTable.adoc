@@ -9,7 +9,7 @@
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 // make sure that the tables are available in a catalog
 sql("CREATE TABLE IF NOT EXISTS t1(id long)")

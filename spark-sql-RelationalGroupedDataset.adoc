@@ -52,7 +52,7 @@ link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGrou
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> spark.conf.get("spark.sql.retainGroupColumns")
 res1: String = true

@@ -170,7 +170,7 @@ You can specify any of the Hadoop configuration properties, e.g. <<hive.metastor
 $ spark-shell --conf spark.hadoop.hive.metastore.warehouse.dir=/tmp/hive-warehouse
 ...
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> spark.sharedState
 18/01/08 10:46:19 INFO SharedState: spark.sql.warehouse.dir is not set, but hive.metastore.warehouse.dir is set. Setting spark.sql.warehouse.dir to the value of hive.metastore.warehouse.dir ('/tmp/hive-warehouse').
@@ -209,7 +209,7 @@ Use `SparkContext.hadoopConfiguration` to know which configuration resources hav
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> sc.hadoopConfiguration
 res1: org.apache.hadoop.conf.Configuration = Configuration: core-default.xml, core-site.xml, mapred-default.xml, mapred-site.xml, yarn-default.xml, yarn-site.xml

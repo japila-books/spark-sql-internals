@@ -10,7 +10,7 @@ image::images/spark-sql-HiveSessionCatalog.png[align="center"]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)

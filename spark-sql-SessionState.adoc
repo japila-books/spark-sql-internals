@@ -7,7 +7,7 @@ You can access `SessionState` of a `SparkSession` through link:spark-sql-SparkSe
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.3.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> :type spark
 org.apache.spark.sql.SparkSession
