@@ -144,7 +144,7 @@ sessionCatalog.dropTable(tid, ignoreIfNotExists = true, purge = true)
 Seq((0, 0, "zero"), (1, 1, "one")).
   toDF("id", "p1", "p2").
   write.
-  saveAsTable("t1")
+  saveAsTable(tableName)
 
 // As we drop and create immediately we may face problems with unavailable partition files
 // Invalidate cache

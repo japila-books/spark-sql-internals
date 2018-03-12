@@ -2,13 +2,127 @@
 
 *Cost-Based Optimization* (aka *Cost-Based Query Optimization* or *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, statistics>> to determine the most efficient way of executing a structured query (given the logical query plan).
 
-Cost-based optimization is disabled by default. Spark SQL uses <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property to control the feature.
+Cost-based optimization is disabled by default. Spark SQL uses <<spark.sql.cbo.enabled, spark.sql.cbo.enabled>> configuration property to control whether the CBO should be enabled and used for query optimization or not.
 
-Cost-Based Optimization uses <<optimizations, logical optimization rules>> (e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]) that optimize the logical plan of a structured query based on the statistics.
+Cost-Based Optimization uses <<optimizations, logical optimization rules>> (e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]) to optimize the logical plan of a structured query based on statistics.
 
 You first use <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS>> SQL command to compute <<statistics, table statistics>>. Use <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command to inspect the statistics.
 
 Logical operators have <<LogicalPlanStats, statistics support>> that is used for query planning.
+
+One of the main features of Spark 2.3.0 is support for <<column-histograms, equi-height column histograms>>.
+
+=== [[column-histograms]] Equi-Height Histograms for Columns
+
+From https://issues.apache.org/jira/browse/SPARK-17074[SPARK-17074 generate equi-height histogram for column]:
+
+[quote]
+----
+Equi-height histogram is effective in handling skewed data distribution.
+
+For equi-height histogram, the heights of all bins(intervals) are the same. The default number of bins we use is 254.
+
+Now we use a two-step method to generate an equi-height histogram:
+1. use percentile_approx to get percentiles (end points of the equi-height bin intervals);
+2. use a new aggregate function to get distinct counts in each of these bins.
+
+Note that this method takes two table scans. In the future we may provide other algorithms which need only one table scan.
+----
+
+From https://github.com/apache/spark/pull/19479[++[SPARK-17074] [SQL] Generate equi-height histogram in column statistics #19479++]:
+
+[quote]
+----
+Equi-height histogram is effective in cardinality estimation, and more accurate than basic column stats (min, max, ndv, etc) especially in skew distribution.
+
+For equi-height histogram, all buckets (intervals) have the same height (frequency).
+
+we use a two-step method to generate an equi-height histogram:
+
+1. use ApproximatePercentile to get percentiles p(0), p(1/n), p(2/n) ... p((n-1)/n), p(1);
+
+2. construct range values of buckets, e.g. [p(0), p(1/n)], [p(1/n), p(2/n)] ... [p((n-1)/n), p(1)], and use ApproxCountDistinctForIntervals to count ndv in each bucket. Each bucket is of the form: (lowerBound, higherBound, ndv).
+----
+
+Spark SQL uses link:spark-sql-ColumnStat.adoc[column statistics] that may optionally hold the link:spark-sql-ColumnStat.adoc#histogram[histogram of values] (which is empty by default). With link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS>> SQL command generates column (equi-height) histograms.
+
+NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
+
+[source, scala]
+----
+// Computing column statistics with histogram
+// ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
+scala> spark.version
+res0: String = 2.3.0
+
+scala> spark.sessionState.conf.histogramEnabled
+res1: Boolean = true
+
+val tableName = "t1"
+
+// Make the example reproducible
+import org.apache.spark.sql.catalyst.TableIdentifier
+val tid = TableIdentifier(tableName)
+val sessionCatalog = spark.sessionState.catalog
+sessionCatalog.dropTable(tid, ignoreIfNotExists = true, purge = true)
+
+// CREATE TABLE t1
+Seq((0, 0, "zero"), (1, 1, "one")).
+  toDF("id", "p1", "p2").
+  write.
+  saveAsTable(tableName)
+
+// As we drop and create immediately we may face problems with unavailable partition files
+// Invalidate cache
+spark.sql(s"REFRESH TABLE $tableName")
+
+// Use ANALYZE TABLE...FOR COLUMNS to compute column statistics
+// that saves them in a metastore (aka an external catalog)
+val df = spark.table(tableName)
+val allCols = df.columns.mkString(",")
+val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $allCols"
+spark.sql(analyzeTableSQL)
+
+// Column statistics with histogram should be in the external catalog (metastore)
+----
+
+You can inspect the column statistics using <<DESCRIBE-EXTENDED, DESCRIBE EXTENDED>> SQL command.
+
+[source, scala]
+----
+// Inspecting column statistics with column histogram
+// See the above example for how to compute the stats
+val colName = "id"
+val descExtSQL = s"DESC EXTENDED $tableName $colName"
+
+// 254 bins by default --> num_of_bins in histogram row below
+scala> sql(descExtSQL).show(truncate = false)
++--------------+-----------------------------------------------------+
+|info_name     |info_value                                           |
++--------------+-----------------------------------------------------+
+|col_name      |id                                                   |
+|data_type     |int                                                  |
+|comment       |NULL                                                 |
+|min           |0                                                    |
+|max           |1                                                    |
+|num_nulls     |0                                                    |
+|distinct_count|2                                                    |
+|avg_col_len   |4                                                    |
+|max_col_len   |4                                                    |
+|histogram     |height: 0.007874015748031496, num_of_bins: 254       |
+|bin_0         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_1         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_2         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_3         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_4         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_5         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_6         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_7         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_8         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_9         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
++--------------+-----------------------------------------------------+
+only showing top 20 rows
+----
 
 === [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
 
