@@ -20,7 +20,7 @@ You can also set a property using SQL `SET` command.
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> spark.conf.getOption("spark.sql.hive.version")
 res1: Option[String] = None

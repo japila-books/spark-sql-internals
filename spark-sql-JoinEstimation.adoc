@@ -12,7 +12,7 @@ NOTE: `BasicStatsPlanVisitor` is used only when link:spark-sql-cost-based-optimi
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // JoinEstimation requires row count stats for join statistics estimates
 // With cost-based optimization off, size in bytes is available only

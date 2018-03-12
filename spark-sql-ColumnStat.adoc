@@ -70,7 +70,7 @@ scala> sql("DESC EXTENDED t1 id").show
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Make sure that you ran ANALYZE TABLE (as described above)
 val db = spark.catalog.currentDatabase
@@ -130,7 +130,7 @@ Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 val tableName = "t1"
 

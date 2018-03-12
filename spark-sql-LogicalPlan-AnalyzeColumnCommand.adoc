@@ -71,7 +71,7 @@ NOTE: Histograms can provide better estimation accuracy. Currently, Spark only s
 ----
 // ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Use the above example to set up the environment
 // Make sure that ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS was run with histogram enabled

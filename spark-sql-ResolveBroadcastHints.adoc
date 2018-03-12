@@ -13,7 +13,7 @@ Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Use Catalyst DSL to create a logical plan
 import org.apache.spark.sql.catalyst.dsl.plans._

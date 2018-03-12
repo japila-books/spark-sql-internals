@@ -31,7 +31,7 @@ NOTE: A deterministic expression is like a https://en.wikipedia.org/wiki/Pure_fu
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 val e = $"a".expr
 scala> :type e

@@ -345,7 +345,7 @@ table(tableName: String): DataFrame
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> spark.catalog.tableExists("t1")
 res1: Boolean = true

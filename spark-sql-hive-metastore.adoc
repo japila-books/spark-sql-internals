@@ -64,7 +64,7 @@ You can access the current connection properties for a Hive metastore in a Spark
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> :type spark
 org.apache.spark.sql.SparkSession

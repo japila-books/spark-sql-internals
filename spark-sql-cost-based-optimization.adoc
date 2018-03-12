@@ -116,7 +116,7 @@ TIP: Use `DESC EXTENDED tableName` for table-level statistics and `DESC EXTENDED
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // table-level statistics are in Statistics row
 scala> sql("DESC EXTENDED t1").show(numRows = 30, truncate = false)

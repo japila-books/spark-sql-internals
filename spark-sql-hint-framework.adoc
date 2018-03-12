@@ -11,7 +11,7 @@ You can specify query hints using link:spark-sql-dataset-operators.adoc#hint[Dat
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Dataset API
 val q = spark.range(1).hint(name = "myHint", 100, true)
@@ -52,7 +52,7 @@ While `hint` operator allows for attaching any hint to a logical plan link:spark
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 val small = spark.range(1)
 val large = spark.range(100)

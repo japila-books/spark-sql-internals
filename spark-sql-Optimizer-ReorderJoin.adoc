@@ -11,7 +11,7 @@ Technically, `ReorderJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Build analyzed logical plan with at least 3 joins and zero or more filters
 val belowBroadcastJoinThreshold = spark.sessionState.conf.autoBroadcastJoinThreshold - 1
@@ -122,7 +122,7 @@ If there are condition expressions that link:spark-sql-PredicateHelper.adoc#canE
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.Literal
@@ -178,7 +178,7 @@ image::images/ReorderJoin-createOrderedJoin-four-plans-after.png[align="center"]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // HACK: Disable one SparkSession.implicits
 // https://stackoverflow.com/q/15592324/1305344
@@ -289,7 +289,7 @@ image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.AttributeReference
@@ -363,7 +363,7 @@ NOTE: `unapply` is a feature of the Scala programming language to define https:/
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 val d1 = Seq((0, "a"), (1, "b")).toDF("id", "c")
 val d2 = Seq((0, "c"), (2, "b")).toDF("id", "c")
@@ -438,7 +438,7 @@ In either case, `flattenJoin` splits _conjunctive predicates_, i.e. removes `And
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 // Use Catalyst DSL to create a logical plan
 // Example 1: One cross join

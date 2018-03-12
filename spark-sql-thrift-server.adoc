@@ -88,7 +88,7 @@ beeline> !connect jdbc:hive2://localhost:10000
 Connecting to jdbc:hive2://localhost:10000
 Enter username for jdbc:hive2://localhost:10000: jacek
 Enter password for jdbc:hive2://localhost:10000: [press ENTER]
-Connected to: Spark SQL (version 2.1.0-SNAPSHOT)
+Connected to: Spark SQL (version 2.3.0)
 Driver: Hive JDBC (version 1.2.1.spark2)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
 0: jdbc:hive2://localhost:10000>

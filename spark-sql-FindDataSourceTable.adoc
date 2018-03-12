@@ -13,7 +13,7 @@ NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that li
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 scala> :type spark
 org.apache.spark.sql.SparkSession

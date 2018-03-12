@@ -15,7 +15,7 @@
 [source, scala]
 ----
 scala> spark.version
-res0: String = 2.4.0-SNAPSHOT
+res0: String = 2.3.0
 
 val q = ??? // FIXME
 val sparkPlan = q.queryExecution.sparkPlan

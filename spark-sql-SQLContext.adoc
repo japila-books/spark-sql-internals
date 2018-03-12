@@ -388,7 +388,7 @@ scala> spark.tables.show
 
 ```
 scala> println(s"This is Spark ${sc.version}")
-This is Spark 2.0.0-SNAPSHOT
+This is Spark 2.3.0
 
 scala> :imports
  1) import spark.implicits._  (52 terms, 31 are implicit)
