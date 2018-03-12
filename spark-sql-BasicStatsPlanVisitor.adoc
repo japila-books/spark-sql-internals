@@ -18,17 +18,17 @@ NOTE: Cost-based optimization is enabled when link:spark-sql-properties.adoc#spa
 
 | [[Aggregate]] link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
 | [[visitAggregate]] link:spark-sql-LogicalPlanVisitor.adoc#visitAggregate[visitAggregate]
-| Requests `AggregateEstimation` for link:spark-sql-AggregateEstimation.adoc#estimate[statistics estimates] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| Requests `AggregateEstimation` for link:spark-sql-AggregateEstimation.adoc#estimate[statistics estimates and query hints] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
 
 | [[Filter]] `Filter`
 | [[visitFilter]] link:spark-sql-LogicalPlanVisitor.adoc#visitFilter[visitFilter]
-| Requests `FilterEstimation` for link:spark-sql-FilterEstimation.adoc#estimate[statistics estimates] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| Requests `FilterEstimation` for link:spark-sql-FilterEstimation.adoc#estimate[statistics estimates and query hints] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
 
 | [[Join]] link:spark-sql-LogicalPlan-Join.adoc[Join]
 | [[visitJoin]] link:spark-sql-LogicalPlanVisitor.adoc#visitJoin[visitJoin]
-| Requests `JoinEstimation` for link:spark-sql-JoinEstimation.adoc#estimate[statistics estimates] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| Requests `JoinEstimation` for link:spark-sql-JoinEstimation.adoc#estimate[statistics estimates and query hints] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
 
 | [[Project]] link:spark-sql-LogicalPlan-Project.adoc[Project]
 | [[visitProject]] link:spark-sql-LogicalPlanVisitor.adoc#visitProject[visitProject]
-| Requests `ProjectEstimation` for link:spark-sql-ProjectEstimation.adoc#estimate[statistics estimates] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| Requests `ProjectEstimation` for link:spark-sql-ProjectEstimation.adoc#estimate[statistics estimates and query hints] or falls back to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
 |===

@@ -8,7 +8,7 @@
 * [[attributeStats]] Column attribute statistics (aka _column (equi-height) histograms_)
 * [[hints]] Query hints (i.e. `HintInfo`)
 
-NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL Command to compute <<sizeInBytes, total size>> and <<rowCount, row count>> statistics of a table.
+NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command to compute <<sizeInBytes, total size>> and <<rowCount, row count>> statistics of a table.
 
 NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
 

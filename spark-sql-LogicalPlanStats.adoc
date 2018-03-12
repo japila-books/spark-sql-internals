@@ -136,7 +136,7 @@ NOTE: The <<stats, statistics>> of a Dataset are unaffected by link:spark-sql-Ca
 
 NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of its definition. It is a very useful feature of Scala that restricts the set of classes that the trait could be used with (as well as makes the target subtype known at compile time).
 
-=== [[stats]] Computing (and Caching) Statistics -- `stats` Method
+=== [[stats]] Computing (and Caching) Statistics and Query Hints -- `stats` Method
 
 [source, scala]
 ----

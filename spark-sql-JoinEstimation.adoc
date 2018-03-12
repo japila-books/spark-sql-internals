@@ -44,7 +44,7 @@ sql("REFRESH TABLE t2")
 
 // Calculate row count stats
 val tables = Seq("t1", "t2")
-tables.foreach { t => sql(s"ANALYZE TABLE $t COMPUTE STATISTICS") }
+tables.map(t => s"ANALYZE TABLE $t COMPUTE STATISTICS").foreach(sql)
 
 val t1 = spark.table("t1")
 val t2 = spark.table("t2")
@@ -159,7 +159,7 @@ estimate: Option[Statistics]
 
 `estimate`...FIXME
 
-NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics for Join logical operator].
+NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics and query hints of a Join logical operator].
 
 === [[computeByHistogram]] Computing Join Cardinality Using Equi-Height Histograms -- `computeByHistogram` Internal Method
 
