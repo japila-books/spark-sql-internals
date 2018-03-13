@@ -48,16 +48,7 @@ There are no joining keys and link:spark-sql-joins.adoc#join-types[join type] is
 | Default when no other have matched
 |===
 
-NOTE: `JoinSelection` uses <<ExtractEquiJoinKeys, ExtractEquiJoinKeys>> to destructure a `Join` logical plan.
-
-=== [[ExtractEquiJoinKeys]] ExtractEquiJoinKeys
-
-`ExtractEquiJoinKeys` is a pattern used to destructure a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator into a tuple for <<join-selection-requirements, join physical operator selection>>.
-
-[source, scala]
-----
-(JoinType, Seq[Expression], Seq[Expression], Option[Expression], LogicalPlan, LogicalPlan)
-----
+NOTE: `JoinSelection` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] pattern to destructure a `Join` logical plan.
 
 === [[muchSmaller]] Is Left-Side Plan At Least 3 Times Smaller Than Right-Side Plan? -- `muchSmaller` Internal Condition
 

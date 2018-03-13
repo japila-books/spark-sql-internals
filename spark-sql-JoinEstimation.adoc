@@ -119,7 +119,9 @@ Some(sizeInBytes=1200.0 B, rowCount=50, hints=none)
 estimateInnerOuterJoin(): Option[Statistics]
 ----
 
-`estimateInnerOuterJoin`...FIXME
+`estimateInnerOuterJoin` destructures <<join, Join logical operator>> into a join type with the left and right keys.
+
+`estimateInnerOuterJoin` simply returns `None` (i.e. _nothing_) when either side of the <<join, Join logical operator>> have no link:spark-sql-EstimationUtils.adoc#rowCountsExist[row count statistic].
 
 NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of a Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 

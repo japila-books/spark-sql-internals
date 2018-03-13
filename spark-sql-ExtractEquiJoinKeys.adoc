@@ -1,0 +1,54 @@
+== [[ExtractEquiJoinKeys]] ExtractEquiJoinKeys -- Pattern to Destructure Join Logical Operator
+
+`ExtractEquiJoinKeys` is a pattern to <<unapply, destructure a Join logical operator>> into a collection of the join type, the left and right keys, the join condition, and the left and right child.
+
+[source, scala]
+----
+(JoinType, Seq[Expression], Seq[Expression], Option[Expression], LogicalPlan, LogicalPlan)
+----
+
+NOTE: `ExtractEquiJoinKeys` is a Scala object with `unapply` method.
+
+[source, scala]
+----
+val q = spark.range(4).join(spark.range(2), "id")
+import org.apache.spark.sql.catalyst.plans.logical.Join
+val join = q.queryExecution.optimizedPlan.p(1).asInstanceOf[Join]
+
+// make sure the join condition is defined
+scala> join.condition
+res0: Option[org.apache.spark.sql.catalyst.expressions.Expression] = Some((id#21L = id#23L))
+
+// Enable DEBUG logging level
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger("org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys").setLevel(Level.DEBUG)
+
+import org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys
+scala> ExtractEquiJoinKeys.unapply(join)
+2018-03-13 16:21:16 DEBUG ExtractEquiJoinKeys:58 - Considering join on: Some((id#21L = id#23L))
+2018-03-13 16:21:16 DEBUG ExtractEquiJoinKeys:58 - leftKeys:List(id#21L) | rightKeys:List(id#23L)
+res2: Option[org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys.ReturnType] =
+Some((Inner,List(id#21L),List(id#23L),None,Range (0, 4, step=1, splits=Some(8))
+,Range (0, 2, step=1, splits=Some(8))
+))
+----
+
+=== [[unapply]] `unapply` Method
+
+[source, scala]
+----
+type ReturnType =
+  (JoinType, Seq[Expression], Seq[Expression], Option[Expression], LogicalPlan, LogicalPlan)
+
+unapply(plan: LogicalPlan): Option[ReturnType]
+----
+
+`unapply` prints out the following DEBUG message to the logs:
+
+```
+Considering join on: [condition]
+```
+
+`unapply`...FIXME
+
+NOTE: `unapply` is used when...FIXME

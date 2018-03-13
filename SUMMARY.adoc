@@ -399,6 +399,8 @@
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 
+. link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Pattern to Destructure Join Logical Operator]
+
 . link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
 
 . link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
