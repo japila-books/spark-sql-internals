@@ -50,6 +50,17 @@ There are no joining keys and link:spark-sql-joins.adoc#join-types[join type] is
 
 NOTE: `JoinSelection` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] pattern to destructure a `Join` logical plan.
 
+=== [[apply]] `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): Seq[SparkPlan]
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME
+
 === [[muchSmaller]] Is Left-Side Plan At Least 3 Times Smaller Than Right-Side Plan? -- `muchSmaller` Internal Condition
 
 [source, scala]
