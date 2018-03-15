@@ -18,7 +18,9 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 `run` is executed when:
 
 * `ExecutedCommandExec` link:spark-sql-SparkPlan-ExecutedCommandExec.adoc#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
-* `InsertIntoHadoopFsRelationCommand` runs
+
+* `InsertIntoHadoopFsRelationCommand` is link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[executed]
+
 * `QueryExecution` link:spark-sql-QueryExecution.adoc#hiveResultString[transforms the result of executing `DescribeTableCommand` to a Hive-compatible output format]
 ====
 
@@ -170,10 +172,10 @@ Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSo
 | InsertIntoDataSourceCommand
 |
 
-| InsertIntoHadoopFsRelationCommand
+| [[InsertIntoHadoopFsRelationCommand]] link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 |
 
-| InsertIntoHiveTable
+| [[InsertIntoHiveTable]] link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 |
 
 | ListFilesCommand

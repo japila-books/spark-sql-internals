@@ -214,6 +214,8 @@
 .. link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand]
 .. link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
 .. link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
+.. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
+.. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
 . link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction]

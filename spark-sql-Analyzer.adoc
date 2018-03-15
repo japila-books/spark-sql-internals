@@ -86,6 +86,7 @@ Set when `Analyzer` <<creating-instance, is created>> (and can be defined explic
 
 `Analyzer` is used by `QueryExecution` to link:spark-sql-QueryExecution.adoc#analyzed[resolve the managed `LogicalPlan`] (and, as a sort of follow-up, link:spark-sql-QueryExecution.adoc#assertAnalyzed[assert that a structured query has already been properly analyzed], i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).
 
+[[logging]]
 [TIP]
 ====
 Enable `TRACE` or `DEBUG` logging levels for the respective session-specific loggers to see what happens inside `Analyzer`.

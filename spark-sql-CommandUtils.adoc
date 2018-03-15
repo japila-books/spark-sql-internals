@@ -42,7 +42,7 @@ NOTE: `updateTableStats` uses `SparkSession` to access the current link:spark-sq
 ====
 `updateTableStats` is used when:
 
-1. `InsertIntoHiveTable`, `InsertIntoHadoopFsRelationCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed
+1. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable], link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed
 ====
 
 === [[calculateTotalSize]] Calculating Total Size of Table or Its Partitions -- `calculateTotalSize` Method

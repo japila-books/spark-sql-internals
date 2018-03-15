@@ -2,6 +2,20 @@
 
 `FileFormatWriter` is...FIXME
 
+[[logging]]
+[TIP]
+====
+Enable `ERROR`, `INFO`, `DEBUG` logging level for `org.apache.spark.sql.execution.datasources.FileFormatWriter` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.execution.datasources.FileFormatWriter=INFO
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
 === [[write]] Writing Query Result -- `write` Method
 
 [source, scala]
@@ -21,4 +35,11 @@ write(
 
 `write`...FIXME
 
-NOTE: `write` is used when...FIXME
+[NOTE]
+====
+`write` is used when:
+
+1. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand] and link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable] commands are executed
+
+1. Spark Structured Streaming's `FileStreamSink` is requested to add a streaming batch.
+====
