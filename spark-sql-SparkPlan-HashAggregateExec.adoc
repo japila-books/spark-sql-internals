@@ -195,6 +195,33 @@ INFO TungstenAggregationIterator: falling back to sort based aggregation.
 ```
 ====
 
+=== [[finishAggregate]] `finishAggregate` Method
+
+[source, scala]
+----
+finishAggregate(
+  hashMap: UnsafeFixedWidthAggregationMap,
+  sorter: UnsafeKVExternalSorter,
+  peakMemory: SQLMetric,
+  spillSize: SQLMetric,
+  avgHashProbe: SQLMetric): KVIterator[UnsafeRow, UnsafeRow]
+----
+
+`finishAggregate`...FIXME
+
+NOTE: `finishAggregate` is used exclusively when `HashAggregateExec` is requested to <<doProduceWithKeys, generate the Java code for doProduceWithKeys>>.
+
+=== [[doProduceWithKeys]] `doProduceWithKeys` Internal Method
+
+[source, scala]
+----
+doProduceWithKeys(ctx: CodegenContext): String
+----
+
+`doProduceWithKeys`...FIXME
+
+NOTE: `doProduceWithKeys` is used when...FIXME
+
 === [[doProduceWithoutKeys]] `doProduceWithoutKeys` Internal Method
 
 [source, scala]
@@ -235,7 +262,7 @@ NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` li
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows].
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of internal binary rows.
 
 `doExecute` executes the input <<child, child SparkPlan>> (to produce link:spark-sql-InternalRow.adoc[InternalRow] objects) and applies calculation over partitions (using `RDD.mapPartitions`).
 

@@ -296,6 +296,12 @@ IMPORTANT: If the total number of files of the table is very large this can be e
 
 Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnabled] method to access the current value.
 
+| [[spark.sql.subexpressionElimination.enabled]] `spark.sql.subexpressionElimination.enabled`
+| `true`
+a| *(internal)* Enables link:spark-sql-subexpression-elimination.adoc[subexpression elimination]
+
+Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
+
 | [[spark.sql.TungstenAggregate.testFallbackStartsAt]] `spark.sql.TungstenAggregate.testFallbackStartsAt`
 | (empty)
 | A comma-separated pair of numbers, e.g. `5,10`, that `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#testFallbackStartsAt[uses] to inform `TungstenAggregationIterator` to switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.

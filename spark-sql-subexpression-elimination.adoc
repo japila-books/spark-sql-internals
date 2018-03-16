@@ -1,0 +1,23 @@
+== Subexpression Elimination
+
+*Subexpression Elimination* is an optimisation of a link:spark-sql-LogicalPlan.adoc[logical query plan] that eliminates expressions that...FIXME
+
+Subexpression Elimination is enabled by default. Set the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property to `false` to disable it.
+
+=== [[spark.sql.subexpressionElimination.enabled]] spark.sql.subexpressionElimination.enabled Configuration Property
+
+link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled] configuration property controls whether the subexpression elimination optimization is enabled or not.
+
+TIP: Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0
+
+scala> import spark.sessionState.conf
+import spark.sessionState.conf
+
+scala> conf.subexpressionEliminationEnabled
+res1: Boolean = true
+----

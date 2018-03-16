@@ -177,6 +177,10 @@ Used when:
 | link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
 | Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
 
+| [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
+| link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
+| Used exclusively when `SparkPlan` is requested for link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
+
 | [[useCompression]] `useCompression`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
 | Used...FIXME

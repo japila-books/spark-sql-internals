@@ -1,0 +1,26 @@
+== [[ProjectExec]] ProjectExec
+
+`ProjectExec` is...FIXME
+
+=== [[doExecute]] Executing ProjectExec -- `doExecute` Method
+
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of internal binary rows.
+
+`doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce a RDD of InternalRow objects] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
+
+==== [[doExecute-mapPartitionsWithIndexInternal]] Inside `RDD.mapPartitionsWithIndexInternal`
+
+Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` link:spark-sql-UnsafeProjection.adoc#create[creates] a `UnsafeProjection` with the following:
+
+1. <<projectList, Named expressions>>
+
+1. link:spark-sql-catalyst-QueryPlan.adoc#output[Output] of the <<child, child>> physical operator as the input schema
+
+1. link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
+
+`doExecute` requests the `UnsafeProjection` to link:spark-sql-Projection.adoc#initialize[initialize] and maps over the internal rows (of a partition) using the projection.

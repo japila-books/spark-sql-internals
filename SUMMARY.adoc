@@ -139,6 +139,8 @@
 
 . link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
 
+. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination]
+
 . link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
 .. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
@@ -252,6 +254,7 @@
 . link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec]
 . link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
 . link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
+. link:spark-sql-SparkPlan-ProjectExec.adoc[ProjectExec]
 . link:spark-sql-SparkPlan-RangeExec.adoc[RangeExec]
 . link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
 . link:spark-sql-SparkPlan-ReusedExchangeExec.adoc[ReusedExchangeExec]

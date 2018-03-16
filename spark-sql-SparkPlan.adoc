@@ -151,6 +151,21 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 
 | [[prepared]] `prepared`
 | Flag that controls that <<prepare, prepare>> is executed only once.
+
+| [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
+a| Flag that controls...FIXME
+
+Used when the following physical operators are requested to generate an RDD of internal rows (aka _execute_):
+
+* link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
+
+* link:spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute[HashAggregateExec] (and for link:spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate[finishAggregate])
+
+* link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#doExecute[ObjectHashAggregateExec]
+
+* link:spark-sql-SparkPlan-SortAggregateExec.adoc#doExecute[SortAggregateExec]
+
+* link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[WindowExec] (and creates a link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
 |===
 
 === [[decodeUnsafeRows]] Decoding Byte Arrays Back to UnsafeRows -- `decodeUnsafeRows` Method
