@@ -2,6 +2,7 @@
 
 `BasicOperators` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that in general does simple <<conversions, conversions>> from link:spark-sql-LogicalPlan.adoc[logical operators] to their link:spark-sql-SparkPlan.adoc[physical counterparts].
 
+[[apply]]
 [[conversions]]
 .BasicOperators' Logical to Physical Operator Conversions
 [options="header",width="100%",cols="1,1"]
@@ -34,7 +35,10 @@
 
 | `SortPartitions` | `SortExec`
 | `Sort` | `SortExec`
-| `Project` | `ProjectExec`
+
+| [[Project]] `Project`
+| [[ProjectExec]] `ProjectExec`
+
 | `Filter` | `FilterExec`
 | `TypedFilter` | `FilterExec`
 

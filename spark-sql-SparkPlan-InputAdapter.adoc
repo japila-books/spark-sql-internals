@@ -1,6 +1,6 @@
 == [[InputAdapter]] InputAdapter Unary Physical Operator
 
-`InputAdapter` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] that is an adapter for the <<child, child>> physical operator that does not meet the requirements for link:spark-sql-CodegenSupport.adoc[whole-stage Java code generation] (possibly due to link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned off) but is in-between operators that participate in whole-stage Java code generation for a structured query.
+`InputAdapter` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements for link:spark-sql-CodegenSupport.adoc[whole-stage Java code generation] (possibly due to link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned off) but is in-between operators that participate in whole-stage Java code generation for a structured query.
 
 .InputAdapter's doProduce
 image::images/spark-sql-InputAdapter-doProduce.png[align="center"]

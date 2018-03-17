@@ -66,7 +66,7 @@ NOTE: `planner` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#planner
 | Strategy
 | Description
 
-| [[HiveTableScans]] `HiveTableScans`
+| [[HiveTableScans]] link:spark-sql-SparkStrategy-HiveTableScans.adoc[HiveTableScans]
 |
 
 | [[Scripts]] `Scripts`

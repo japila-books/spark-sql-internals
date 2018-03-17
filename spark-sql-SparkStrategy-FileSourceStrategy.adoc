@@ -1,6 +1,6 @@
 == [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy
 
-`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that <<PhysicalOperation, destructures>> and then optimizes a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
+`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that...FIXME
 
 [TIP]
 ====
@@ -15,38 +15,16 @@ log4j.logger.org.apache.spark.sql.execution.datasources.FileSourceStrategy=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-CAUTION: FIXME
-
-=== [[PhysicalOperation]] PhysicalOperation
-
-`PhysicalOperation` is a pattern used to destructure a link:spark-sql-LogicalPlan.adoc[LogicalPlan] object into a tuple.
+=== [[apply]] Planning LogicalRelation with HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
 
 [source, scala]
 ----
-(Seq[NamedExpression], Seq[Expression], LogicalPlan)
+apply(plan: LogicalPlan): LogicalPlan
 ----
 
-The following idiom is often used in `Strategy` implementations (e.g. `HiveTableScans`, link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans], link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy], <<FileSourceStrategy, FileSourceStrategy>>):
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
-[source, scala]
-----
-def apply(plan: LogicalPlan): Seq[SparkPlan] = plan match {
-  case PhysicalOperation(projections, predicates, plan) =>
-    // do something
-  case _ => Nil
-}
-----
-
-Whenever used to pattern match to a `LogicalPlan`, ``PhysicalOperation``'s `unapply` is called.
-
-[source, scala]
-----
-unapply(plan: LogicalPlan): Option[ReturnType]
-----
-
-`unapply` uses <<collectProjectsAndFilters, collectProjectsAndFilters>> method that recursively destructures the input `LogicalPlan`.
-
-NOTE: `unapply` is _almost_ <<collectProjectsAndFilters, collectProjectsAndFilters>> method itself (with some manipulations of the return value).
+`apply`...FIXME
 
 === [[collectProjectsAndFilters]] `collectProjectsAndFilters` Method
 

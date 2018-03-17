@@ -1,0 +1,14 @@
+== [[HiveTableScans]] HiveTableScans Execution Planning Strategy
+
+`HiveTableScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner]) that <<apply, resolves HiveTableRelation>>.
+
+=== [[apply]] Applying HiveTableScans Rule to Logical Query Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): Seq[SparkPlan]
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME

@@ -216,7 +216,7 @@ Refer to link:spark-logging.adoc[Logging].
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows].
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
 `doExecute` link:spark-sql-SparkPlan.adoc#execute[executes] the single <<child, child>> physical operator and link:spark-rdd-transformations.adoc#mapPartitions[maps over partitions] using a custom `Iterator[InternalRow]`.
 

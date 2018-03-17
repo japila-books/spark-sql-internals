@@ -314,7 +314,7 @@ NOTE: `codeGenAccessor` is used...FIXME
 * [[join]] `join` flag
 * [[outer]] `outer` flag
 * [[generatorOutput]] Generator's output schema
-* [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
+* [[child]] Child link:spark-sql-SparkPlan.adoc[physical operator]
 
 === [[doExecute]] Executing GenerateExec -- `doExecute` Method
 
@@ -323,6 +323,6 @@ NOTE: `codeGenAccessor` is used...FIXME
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows].
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
 `doExecute`...FIXME

@@ -322,6 +322,7 @@
 . link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators]
 . link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy]
 . link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
+. link:spark-sql-SparkStrategy-HiveTableScans.adoc[HiveTableScans]
 . link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
 . link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
 
@@ -330,6 +331,7 @@
 . link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[Physical Preparations Rules]
 . link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 . link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
+. link:spark-sql-ExtractPythonUDFs.adoc[ExtractPythonUDFs]
 . link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 . link:spark-sql-ReuseExchange.adoc[ReuseExchange]
 . link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
@@ -404,7 +406,8 @@
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 
-. link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Destructuring Join Logical Operator]
+. link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators]
+. link:spark-sql-PhysicalOperation.adoc[PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans]
 
 . link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
 

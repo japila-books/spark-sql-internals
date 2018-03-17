@@ -262,7 +262,7 @@ NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` li
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of internal binary rows.
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
 `doExecute` executes the input <<child, child SparkPlan>> (to produce link:spark-sql-InternalRow.adoc[InternalRow] objects) and applies calculation over partitions (using `RDD.mapPartitions`).
 

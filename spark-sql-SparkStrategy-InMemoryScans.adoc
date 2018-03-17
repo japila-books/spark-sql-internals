@@ -1,5 +1,6 @@
 == [[InMemoryScans]] InMemoryScans Execution Planning Strategy
 
+[[apply]]
 `InMemoryScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that translates link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator for cached query plans to a link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruned physical plan] with link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec] physical operator.
 
 [source, scala]

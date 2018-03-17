@@ -1,6 +1,29 @@
-== [[ProjectExec]] ProjectExec
+== [[ProjectExec]] ProjectExec Unary Physical Operator
 
-`ProjectExec` is...FIXME
+`ProjectExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
+
+`ProjectExec` is <<creating-instance, created>> when:
+
+1. link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
+
+1. `BasicOperators` execution planning strategy is requested to link:spark-sql-SparkStrategy-BasicOperators.adoc#Project[resolve a Project logical operator]
+
+1. `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw[creates a RowDataSourceScanExec]
+
+1. `FileSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[plan a LogicalRelation with a HadoopFsRelation]
+
+1. `ExtractPythonUDFs` physical optimization is requested to link:spark-sql-ExtractPythonUDFs.adoc#apply[optimize a physical query plan] (and link:spark-sql-ExtractPythonUDFs.adoc#extract[extracts Python UDFs])
+
+[NOTE]
+====
+The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or link:spark-sql-HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner] are requested to link:spark-sql-catalyst-QueryPlanner.adoc#plan[plan a logical query plan into one or more physical query plans]:
+
+1. `HiveTableScans`
+1. `FileSourceStrategy`
+1. `DataSourceStrategy`
+1. `InMemoryScans`
+1. `BasicOperators`
+====
 
 === [[doExecute]] Executing ProjectExec -- `doExecute` Method
 
@@ -9,13 +32,21 @@
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to produce the result of a structured query as an `RDD` of internal binary rows.
+NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
-`doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce a RDD of InternalRow objects] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
+`doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce a RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
 
-==== [[doExecute-mapPartitionsWithIndexInternal]] Inside `RDD.mapPartitionsWithIndexInternal`
+.RDD.mapPartitionsWithIndexInternal
+[source, scala]
+----
+mapPartitionsWithIndexInternal[U](
+  f: (Int, Iterator[T]) => Iterator[U],
+  preservesPartitioning: Boolean = false)
+----
 
-Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` link:spark-sql-UnsafeProjection.adoc#create[creates] a `UnsafeProjection` with the following:
+==== [[doExecute-mapPartitionsWithIndexInternal]] Inside `doExecute` (`RDD.mapPartitionsWithIndexInternal`)
+
+Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` creates an link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection] with the following:
 
 1. <<projectList, Named expressions>>
 
@@ -24,3 +55,10 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 1. link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
 
 `doExecute` requests the `UnsafeProjection` to link:spark-sql-Projection.adoc#initialize[initialize] and maps over the internal rows (of a partition) using the projection.
+
+=== [[creating-instance]] Creating ProjectExec Instance
+
+`ProjectExec` takes the following when created:
+
+* [[projectList]] link:spark-sql-Expression.adoc#NamedExpression[NamedExpressions] for the projection
+* [[child]] Child link:spark-sql-SparkPlan.adoc[physical operator]

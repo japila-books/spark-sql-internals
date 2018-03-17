@@ -155,7 +155,7 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 | [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
 a| Flag that controls...FIXME
 
-Used when the following physical operators are requested to generate an RDD of internal rows (aka _execute_):
+Used when the following physical operators are requested to describe a distributed computation as an RDD of internal rows (aka _execute_):
 
 * link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
 
@@ -218,7 +218,7 @@ CAUTION: FIXME
 doExecute(): RDD[InternalRow]
 ----
 
-`doExecute` produces the result of a structured query as an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`
+`doExecute` allows a physical operator to describe a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`, and thus _execute_.
 
 [[hooks]]
 .SparkPlan's Extension Hooks (in alphabetical order)

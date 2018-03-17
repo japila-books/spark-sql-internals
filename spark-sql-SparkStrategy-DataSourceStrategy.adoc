@@ -40,7 +40,7 @@ val plan: LogicalPlan = ???
 val sparkPlan = strategy(plan).head
 ----
 
-NOTE: `DataSourceStrategy` uses link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#PhysicalOperation[PhysicalOperation] Scala class to destructure a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `DataSourceStrategy` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan.
 
 === [[pruneFilterProject]] `pruneFilterProject` Internal Method
 

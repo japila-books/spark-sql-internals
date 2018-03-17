@@ -108,6 +108,15 @@ NOTE: `prunePlans` is a part of link:spark-sql-catalyst-QueryPlanner.adoc#pruneP
 
 === [[pruneFilterProject]] `pruneFilterProject` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+pruneFilterProject(
+  projectList: Seq[NamedExpression],
+  filterPredicates: Seq[Expression],
+  prunePushedDownFilters: Seq[Expression] => Seq[Expression],
+  scanBuilder: Seq[Attribute] => SparkPlan): SparkPlan
+----
 
-NOTE: `pruneFilterProject` is a helper method used exclusively in link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] and `HiveTableScans` execution planning strategies.
+`METHOD`...FIXME
+
+NOTE: `pruneFilterProject` is a helper method used when link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed.
