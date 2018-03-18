@@ -211,6 +211,39 @@ finishAggregate(
 
 NOTE: `finishAggregate` is used exclusively when `HashAggregateExec` is requested to <<doProduceWithKeys, generate the Java code for doProduceWithKeys>>.
 
+=== [[doConsumeWithKeys]] Generating Java Source Code for Whole-Stage Consume Path with Grouping Keys -- `doConsumeWithKeys` Internal Method
+
+[source, scala]
+----
+doConsumeWithKeys(ctx: CodegenContext, input: Seq[ExprCode]): String
+----
+
+`doConsumeWithKeys`...FIXME
+
+NOTE: `doConsumeWithKeys` is used exclusively when `HashAggregateExec` is requested to <<doConsume, generate the Java code for whole-stage consume path>> (with <<groupingExpressions, named expressions for the grouping keys>>).
+
+=== [[doConsumeWithoutKeys]] Generating Java Source Code for Whole-Stage Consume Path without Grouping Keys -- `doConsumeWithoutKeys` Internal Method
+
+[source, scala]
+----
+doConsumeWithoutKeys(ctx: CodegenContext, input: Seq[ExprCode]): String
+----
+
+`doConsumeWithoutKeys`...FIXME
+
+NOTE: `doConsumeWithoutKeys` is used exclusively when `HashAggregateExec` is requested to <<doConsume, generate the Java code for whole-stage consume path>> (with no <<groupingExpressions, named expressions for the grouping keys>>).
+
+=== [[doConsume]] Generating Java Source Code for Whole-Stage Consume Path Code Generation -- `doConsume` Method
+
+[source, scala]
+----
+doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
+----
+
+NOTE: `doConsume` is a part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
+
+`doConsume` executes <<doConsumeWithoutKeys, doConsumeWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doConsumeWithKeys, doConsumeWithKeys>> otherwise.
+
 === [[doProduceWithKeys]] `doProduceWithKeys` Internal Method
 
 [source, scala]
@@ -283,14 +316,14 @@ doProduce(ctx: CodegenContext): String
 
 NOTE: `doProduce` is a part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate a Java source code for...FIXME
 
-`doProduce` executes <<doProduceWithoutKeys, doProduceWithoutKeys>> when no <<groupingExpressions, groupingExpressions>> were specified for the `HashAggregateExec` or <<doProduceWithKeys, doProduceWithKeys>> otherwise.
+`doProduce` executes <<doProduceWithoutKeys, doProduceWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doProduceWithKeys, doProduceWithKeys>> otherwise.
 
 === [[creating-instance]] Creating HashAggregateExec Instance
 
 `HashAggregateExec` takes the following when created:
 
 * [[requiredChildDistributionExpressions]] Required child distribution link:spark-sql-Expression.adoc[expressions]
-* [[groupingExpressions]] Grouping link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[groupingExpressions]] link:spark-sql-Expression.adoc#NamedExpression[Named expressions] for grouping keys
 * [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset

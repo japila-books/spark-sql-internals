@@ -20,11 +20,7 @@ log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafePro
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[createCode]] Creating ExprCode for Catalyst Expressions -- `createCode` Method
-
-CAUTION: FIXME
-
-=== [[generate]] `generate` Method
+=== [[generate]] Generating UnsafeProjection -- `generate` Method
 
 [source, scala]
 ----
@@ -33,9 +29,9 @@ generate(
   subexpressionEliminationEnabled: Boolean): UnsafeProjection
 ----
 
-`generate` <<create, creates>> a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] with `expressions` <<canonicalize, canonicalized>>.
+`generate` <<create, creates a UnsafeProjection>> with `expressions` <<canonicalize, canonicalized>>.
 
-NOTE: `generate` is used when `UnsafeProjection` factory object link:spark-sql-UnsafeProjection.adoc#create[creates a `UnsafeProjection`].
+NOTE: `generate` is used when `UnsafeProjection` factory object is requested for a link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection].
 
 === [[canonicalize]] `canonicalize` Method
 
@@ -57,7 +53,7 @@ create(
   subexpressionEliminationEnabled: Boolean): UnsafeProjection
 create(references: Seq[Expression]): UnsafeProjection // <1>
 ----
-<1> Calls the former `create` with `subexpressionEliminationEnabled` disabled
+<1> Calls the former `create` with `subexpressionEliminationEnabled` flag off
 
 `create` first creates a link:spark-sql-CodeGenerator.adoc#newCodeGenContext[CodegenContext] and an <<createCode, ExprCode>> for the input `expressions` that is converted to a Java source code (as `CodeAndComment`).
 
@@ -101,3 +97,19 @@ See link:spark-sql-CodeGenerator.adoc#logging[CodeGenerator].
 `create` passes references into the `GeneratedClass` that eventually becomes the final link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
 
 NOTE: (Single-argument) `create` is a part of link:spark-sql-CodeGenerator.adoc#create[CodeGenerator Contract].
+
+=== [[createCode]] Creating ExprCode for Catalyst Expressions -- `createCode` Method
+
+[source, scala]
+----
+createCode(
+  ctx: CodegenContext,
+  expressions: Seq[Expression],
+  useSubexprElimination: Boolean = false): ExprCode
+----
+
+`createCode` requests the input `CodegenContext` to link:spark-sql-CodegenContext.adoc#generateExpressions[generateExpressions].
+
+`createCode`...FIXME
+
+NOTE: `createCode` is used when...FIXME

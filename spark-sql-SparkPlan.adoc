@@ -7,7 +7,7 @@
 .Physical Plan of Structured Query (i.e. Tree of SparkPlans)
 image::images/spark-sql-SparkPlan-webui-physical-plan.png[align="center"]
 
-NOTE: A structured query can be expressed using Spark SQL's high-level strongly-typed link:spark-sql-Dataset.adoc[Dataset] API or good ol' SQL.
+NOTE: A structured query can be expressed using Spark SQL's high-level link:spark-sql-Dataset.adoc[Dataset] API for Scala, Java, Python, R or good ol' SQL.
 
 A `SparkPlan` physical operator is a link:spark-sql-catalyst-TreeNode.adoc[Catalyst tree node] that may have zero or more link:spark-sql-catalyst-TreeNode.adoc#children[child physical operators].
 
@@ -22,7 +22,11 @@ image::images/spark-sql-SparkPlan-execute.png[align="center"]
 
 The result of <<execute, executing>> a `SparkPlan` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`.
 
+NOTE: Executing a structured query is simply a translation of the higher-level Dataset-based description to an RDD-based runtime representation that Spark will in the end execute (once an Dataset action is used).
+
 CAUTION: FIXME Picture between Spark SQL's Dataset => Spark Core's RDD
+
+CAUTION: FIXME Picture with multiple stages of logical => physical translation, i.e. a logical query plan to its physical execution plan and a Dataset-based logical description to a RDD-based physical description.
 
 [NOTE]
 ====
@@ -66,14 +70,14 @@ CAUTION: FIXME `SparkPlan` is `Serializable`. Why?
 | Description
 
 | [[execute]] `execute`
-a| Executes a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end creates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
+a| "Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end creates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
 
 [source, scala]
 ----
 final def execute(): RDD[InternalRow]
 ----
 
-Used _mostly_ when `QueryExecution` is requested for a <<toRdd, RDD>> that represents the final execution plan.
+Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD infrastructure).
 
 Internally, `execute` calls the physical operator's <<doExecute, doExecute>> after <<executeQuery, preparing the query for execution>>.
 
@@ -153,9 +157,9 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 | Flag that controls that <<prepare, prepare>> is executed only once.
 
 | [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
-a| Flag that controls...FIXME
+a| Flag that controls whether the link:spark-sql-subexpression-elimination.adoc[subexpression elimination optimization] is enabled or not.
 
-Used when the following physical operators are requested to describe a distributed computation as an RDD of internal rows (aka _execute_):
+Used when the following physical operators are requested to execute (i.e. describe a distributed computation as an RDD of internal rows):
 
 * link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
 

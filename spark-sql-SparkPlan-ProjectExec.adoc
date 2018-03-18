@@ -2,6 +2,8 @@
 
 `ProjectExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
 
+`ProjectExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
+
 `ProjectExec` is <<creating-instance, created>> when:
 
 1. link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
@@ -34,7 +36,7 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
-`doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce a RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
+`doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce an RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
 
 .RDD.mapPartitionsWithIndexInternal
 [source, scala]

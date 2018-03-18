@@ -139,7 +139,8 @@
 
 . link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
 
-. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination]
+. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
+.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
 
 . link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
@@ -275,6 +276,7 @@
 
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Physical Operators with Optional Java Code Generation]
+.. link:spark-sql-CodegenContext.adoc[CodegenContext]
 .. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan]
 .. link:spark-sql-InternalRow.adoc[InternalRow -- Abstract Binary Row Format]
 ... link:spark-sql-UnsafeRow.adoc[UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format]
@@ -284,6 +286,7 @@
 . link:spark-sql-Projection.adoc[Projection -- Contract for Functions to Produce InternalRow for InternalRow]
 .. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
 .. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
+.. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 

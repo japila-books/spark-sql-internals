@@ -1,0 +1,64 @@
+== [[CodegenContext]] CodegenContext
+
+`CodegenContext` is...FIXME
+
+[[internal-registries]]
+.CodegenContext's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[equivalentExpressions]] `equivalentExpressions`
+| link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+
+Used when...FIXME
+|===
+
+=== [[generateExpressions]] `generateExpressions` Method
+
+[source, scala]
+----
+generateExpressions(
+  expressions: Seq[Expression],
+  doSubexpressionElimination: Boolean = false): Seq[ExprCode]
+----
+
+(only with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
+
+In the end, `generateExpressions` requests every expressions to link:spark-sql-Expression.adoc#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
+
+[NOTE]
+====
+`generateExpressions` is used when:
+
+1. `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
+
+1. `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#createCode[create an ExprCode for Catalyst expressions]
+
+1. `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
+====
+
+=== [[subexpressionElimination]] `subexpressionElimination` Internal Method
+
+[source, scala]
+----
+subexpressionElimination(expressions: Seq[Expression]): Unit
+----
+
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to link:spark-sql-EquivalentExpressions.adoc#addExprTree[addExprTree] for every expression (in the input `expressions`).
+
+`subexpressionElimination`...FIXME
+
+NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
+
+=== [[subexpressionEliminationForWholeStageCodegen]] `subexpressionEliminationForWholeStageCodegen` Method
+
+[source, scala]
+----
+subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubExprCodes
+----
+
+`subexpressionEliminationForWholeStageCodegen`...FIXME
+
+NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[with grouping keys] or link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithoutKeys[not]).

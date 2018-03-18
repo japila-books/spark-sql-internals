@@ -1,0 +1,25 @@
+== [[EquivalentExpressions]] EquivalentExpressions
+
+`EquivalentExpressions` is...FIXME
+
+=== [[addExprTree]] `addExprTree` Method
+
+[source, scala]
+----
+addExprTree(expr: Expression): Unit
+----
+
+`addExprTree`...FIXME
+
+NOTE: `addExprTree` is used when `CodegenContext` is requested to link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] or link:spark-sql-CodegenContext.adoc#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
+
+=== [[getAllEquivalentExprs]] `getAllEquivalentExprs` Method
+
+[source, scala]
+----
+getAllEquivalentExprs: Seq[Seq[Expression]]
+----
+
+`getAllEquivalentExprs`...FIXME
+
+NOTE: `getAllEquivalentExprs` is used when `CodegenContext` is requested to link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] or link:spark-sql-CodegenContext.adoc#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].

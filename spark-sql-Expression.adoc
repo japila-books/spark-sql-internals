@@ -189,7 +189,7 @@ NOTE: By default accepts `EmptyRow`, i.e. `null`.
 | [[genCode]] `genCode`
 | *Code-generated (non-interpreted) expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
 
-Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka _subexpression elimination_).
+Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka link:spark-sql-subexpression-elimination.adoc[subexpression elimination]).
 
 | [[nullable]] `nullable`
 |

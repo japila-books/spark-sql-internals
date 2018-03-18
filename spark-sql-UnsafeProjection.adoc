@@ -37,6 +37,4 @@ create(
 
 In the end, `create` requests `GenerateUnsafeProjection` to link:spark-sql-GenerateUnsafeProjection.adoc#generate[generate a UnsafeProjection].
 
----
-
-A variant of `create` can take `subexpressionEliminationEnabled` flag.
+NOTE: A variant of `create` takes `subexpressionEliminationEnabled` flag (that usually is link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`).
