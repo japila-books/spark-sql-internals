@@ -13,7 +13,7 @@ addExprTree(expr: Expression): Unit
 
 NOTE: `addExprTree` is used when `CodegenContext` is requested to link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] or link:spark-sql-CodegenContext.adoc#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
 
-=== [[getAllEquivalentExprs]] `getAllEquivalentExprs` Method
+=== [[getAllEquivalentExprs]] Getting Equivalent Sets Of Expressions -- `getAllEquivalentExprs` Method
 
 [source, scala]
 ----

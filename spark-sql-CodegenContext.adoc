@@ -13,6 +13,14 @@
 | link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
 
 Used when...FIXME
+
+| [[subExprEliminationExprs]] `subExprEliminationExprs`
+| `SubExprEliminationStates` by link:spark-sql-Expression.adoc[Expression]
+
+Used when...FIXME
+
+| [[subexprFunctions]] `subexprFunctions`
+| Names of the functions that...FIXME
 |===
 
 === [[generateExpressions]] `generateExpressions` Method
@@ -39,19 +47,6 @@ In the end, `generateExpressions` requests every expressions to link:spark-sql-E
 1. `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
 ====
 
-=== [[subexpressionElimination]] `subexpressionElimination` Internal Method
-
-[source, scala]
-----
-subexpressionElimination(expressions: Seq[Expression]): Unit
-----
-
-`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to link:spark-sql-EquivalentExpressions.adoc#addExprTree[addExprTree] for every expression (in the input `expressions`).
-
-`subexpressionElimination`...FIXME
-
-NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
-
 === [[subexpressionEliminationForWholeStageCodegen]] `subexpressionEliminationForWholeStageCodegen` Method
 
 [source, scala]
@@ -62,3 +57,38 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 `subexpressionEliminationForWholeStageCodegen`...FIXME
 
 NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[with grouping keys] or link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithoutKeys[not]).
+
+=== [[addNewFunction]] `addNewFunction` Method
+
+[source, scala]
+----
+addNewFunction(
+  funcName: String,
+  funcCode: String,
+  inlineToOuterClass: Boolean = false): String
+----
+
+`addNewFunction`...FIXME
+
+NOTE: `addNewFunction` is used when...FIXME
+
+=== [[subexpressionElimination]] `subexpressionElimination` Internal Method
+
+[source, scala]
+----
+subexpressionElimination(expressions: Seq[Expression]): Unit
+----
+
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to link:spark-sql-EquivalentExpressions.adoc#addExprTree[addExprTree] for every expression (in the input `expressions`).
+
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> for the link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[equivalent sets of expressions] with at least two equivalent expressions (aka _common expressions_).
+
+For every equivalent expression set, `subexpressionElimination` does the following:
+
+1. Takes the first expression and requests it to link:spark-sql-Expression.adoc#genCode[generate a Java source code] for the expression tree
+
+1. <<addNewFunction, addNewFunction>> and adds it to <<subexprFunctions, subexprFunctions>>
+
+1. Creates a `SubExprEliminationState` and adds it with every common expression in the equivalent expression set to <<subExprEliminationExprs, subExprEliminationExprs>>
+
+NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
