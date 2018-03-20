@@ -96,7 +96,7 @@ Generated code:
 |===
 <1> `BroadcastDistribution` uses `HashedRelationBroadcastMode` broadcast mode per `buildKeys`
 
-=== [[codegenInner]] `codegenInner` Internal Method
+=== [[codegenInner]] Generating Java Source Code for Inner Join -- `codegenInner` Internal Method
 
 [source, scala]
 ----
@@ -107,7 +107,7 @@ codegenInner(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 NOTE: `codegenInner` is used when...FIXME
 
-=== [[codegenOuter]] `codegenOuter` Internal Method
+=== [[codegenOuter]] Generating Java Source Code for Outer Join -- `codegenOuter` Internal Method
 
 [source, scala]
 ----
@@ -118,7 +118,7 @@ codegenOuter(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 NOTE: `codegenOuter` is used when...FIXME
 
-=== [[codegenSemi]] `codegenSemi` Internal Method
+=== [[codegenSemi]] Generating Java Source Code for Left Semi Join -- `codegenSemi` Internal Method
 
 [source, scala]
 ----
@@ -129,7 +129,7 @@ codegenSemi(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 NOTE: `codegenSemi` is used when...FIXME
 
-=== [[codegenAnti]] `codegenAnti` Internal Method
+=== [[codegenAnti]] Generating Java Source Code for Anti Join -- `codegenAnti` Internal Method
 
 [source, scala]
 ----
@@ -150,6 +150,19 @@ codegenExistence(ctx: CodegenContext, input: Seq[ExprCode]): String
 `codegenExistence`...FIXME
 
 NOTE: `codegenExistence` is used when...FIXME
+
+=== [[genStreamSideJoinKey]] `genStreamSideJoinKey` Internal Method
+
+[source, scala]
+----
+genStreamSideJoinKey(
+  ctx: CodegenContext,
+  input: Seq[ExprCode]): (ExprCode, String)
+----
+
+`genStreamSideJoinKey`...FIXME
+
+NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested to generate the Java source code for <<codegenInner, inner>>, <<codegenOuter, outer>>, <<codegenSemi, left semi>>, <<codegenAnti, anti>> and <<codegenExistence, existence>> joins.
 
 === [[creating-instance]] Creating BroadcastHashJoinExec Instance
 

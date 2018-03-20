@@ -45,9 +45,9 @@ CAUTION: FIXME
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-`apply` <<PhysicalAggregation-unapply, finds Aggregate logical operators>> and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator.
+`apply` requests `PhysicalAggregation` extractor for link:spark-sql-PhysicalAggregation.adoc#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator found.
 
-Internally, `apply` <<PhysicalAggregation-unapply, destructures a Aggregate logical operator>> (into a four-element tuple) and splits link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] per whether they are distinct or not (using their link:spark-sql-Expression-AggregateExpression.adoc#isDistinct[isDistinct] flag).
+Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] per whether they are distinct or not (using their link:spark-sql-Expression-AggregateExpression.adoc#isDistinct[isDistinct] flag).
 
 `apply` then creates a physical operator using the following helper methods:
 
@@ -127,26 +127,3 @@ In the end, `planAggregateWithoutDistinct` <<AggUtils-createAggregate, creates a
 NOTE: `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the link:spark-sql-Expression-Attribute.adoc[attributes] of `groupingExpressions`.
 
 NOTE: `planAggregateWithoutDistinct` is used exclusively when `Aggregation` execution planning strategy <<apply, is executed>> (with no `AggregateExpressions` being link:spark-sql-Expression-AggregateExpression.adoc#isDistinct[distinct]).
-
-=== [[PhysicalAggregation]][[PhysicalAggregation-unapply]] Destructuring Aggregate Logical Operator -- `PhysicalAggregation.unapply` Method
-
-[source, scala]
-----
-unapply(a: Any): Option[ReturnType]
-----
-
-`unapply` destructures the input `a` link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator into a four-element <<ReturnType, ReturnType>>.
-
-[[ReturnType]]
-[NOTE]
-====
-`ReturnType` is a type alias (aka _type synonym_) for a four-element tuple with grouping, aggregate and result link:spark-sql-Expression.adoc[Catalyst expressions], and child link:spark-sql-LogicalPlan.adoc[logical operator].
-
-[source, scala]
-----
-type ReturnType =
-  (Seq[NamedExpression], Seq[AggregateExpression], Seq[NamedExpression], LogicalPlan)
-----
-====
-
-NOTE: `PhysicalAggregation` is a Scala http://docs.scala-lang.org/tutorials/tour/extractor-objects.html[extractor object] with a single <<PhysicalAggregation-unapply, unapply>> method.

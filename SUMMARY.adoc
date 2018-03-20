@@ -163,6 +163,7 @@
 . link:spark-sql-Expression-BoundReference.adoc[BoundReference Leaf Expression -- Reference to Value in InternalRow]
 . link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection Expression]
 . link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator Generator Expression Contract]
+. link:spark-sql-Expression-CreateNamedStructUnsafe.adoc[CreateNamedStructUnsafe]
 . link:spark-sql-Expression-ExplodeBase.adoc[ExplodeBase Base Generator Expression]
 . link:spark-sql-Expression-Generator.adoc[Generator Expression to Generate Zero Or More Rows (aka Lateral Views)]
 . link:spark-sql-Expression-Inline.adoc[Inline Generator Expression]
@@ -414,6 +415,7 @@
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
 
 . link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators]
+. link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregation -- Scala Extractor for Destructuring Aggregate Logical Operators]
 . link:spark-sql-PhysicalOperation.adoc[PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans]
 
 . link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]

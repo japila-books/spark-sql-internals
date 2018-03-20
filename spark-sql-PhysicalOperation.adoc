@@ -1,6 +1,6 @@
 == [[PhysicalOperation]] PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans
 
-`PhysicalOperation` is a Scala extractor to a <<unapply, destructure a logical query plan>> into a tuple with the following elements:
+`PhysicalOperation` is a Scala extractor to <<unapply, destructure a logical query plan>> into a tuple with the following elements:
 
 1. link:spark-sql-Expression.adoc#NamedExpression[Named expressions]
 

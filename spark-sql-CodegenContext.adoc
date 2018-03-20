@@ -51,9 +51,9 @@ assert(commonExprs.length > 0, "No common expressions found")
 | Description
 
 | [[equivalentExpressions]] `equivalentExpressions`
-| link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+a| link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
 
-Used when...FIXME
+Expressions are link:spark-sql-EquivalentExpressions.adoc#addExprTree[added] and then link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
 | [[subExprEliminationExprs]] `subExprEliminationExprs`
 | `SubExprEliminationStates` by link:spark-sql-Expression.adoc[Expression]

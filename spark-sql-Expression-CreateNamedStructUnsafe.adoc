@@ -1,0 +1,14 @@
+== [[CreateNamedStructUnsafe]] CreateNamedStructUnsafe
+
+`CreateNamedStructUnsafe` is...FIXME
+
+=== [[doGenCode]] Generating Java Source Code -- `doGenCode` Method
+
+[source, scala]
+----
+doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
+----
+
+NOTE: `doGenCode` is a part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
+
+`doGenCode`...FIXME

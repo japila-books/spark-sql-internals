@@ -1,6 +1,6 @@
 == [[GenerateUnsafeProjection]] GenerateUnsafeProjection
 
-`GenerateUnsafeProjection` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] for converting link:spark-sql-Expression.adoc[Catalyst expressions] to link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
+`GenerateUnsafeProjection` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] for converting link:spark-sql-Expression.adoc[Catalyst expressions] to link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 
 [source, scala]
 ----
@@ -44,7 +44,7 @@ canonicalize(in: Seq[Expression]): Seq[Expression]
 
 Internally, `canonicalize` uses `ExpressionCanonicalizer` rule executor (that in turn uses just one `CleanExpressions` expression rule).
 
-=== [[create]] `create` Method
+=== [[create]] Creating UnsafeProjection -- `create` Method
 
 [source, scala]
 ----
@@ -112,4 +112,44 @@ createCode(
 
 `createCode`...FIXME
 
-NOTE: `createCode` is used when...FIXME
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+
+// Use Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val expressions = "hello".expr.as("world") :: "hello".expr.as("world") :: Nil
+
+import org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection
+val eval = GenerateUnsafeProjection.createCode(ctx, expressions, useSubexprElimination = true)
+
+scala> println(eval.code)
+
+        mutableStateArray1[0].reset();
+
+        mutableStateArray2[0].write(0, ((UTF8String) references[0] /* literal */));
+
+
+            mutableStateArray2[0].write(1, ((UTF8String) references[1] /* literal */));
+        mutableStateArray[0].setTotalSize(mutableStateArray1[0].totalSize());
+
+
+scala> println(eval.value)
+mutableStateArray[0]
+----
+
+[NOTE]
+====
+`createCode` is used when:
+
+* `CreateNamedStructUnsafe` is requested to link:spark-sql-Expression-CreateNamedStructUnsafe.adoc#doGenCode[generate a Java source code]
+
+* `GenerateUnsafeProjection` is requested to <<create, create a UnsafeProjection>>
+
+* `CodegenSupport` is requested to link:spark-sql-CodegenSupport.adoc#prepareRowVar[prepareRowVar] (to link:spark-sql-CodegenSupport.adoc#consume[generate a Java source code to consume generated columns or row from a physical operator])
+
+* `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithKeys[doProduceWithKeys] and link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[doConsumeWithKeys]
+
+* `BroadcastHashJoinExec` is requested to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
+====

@@ -205,6 +205,12 @@ Used in:
 * link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
 * link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
 
+| [[wholeStageSplitConsumeFuncByOperator]] `wholeStageSplitConsumeFuncByOperator`
+| link:spark-sql-properties.adoc#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator]
+|
+
+Used exclusively when `CodegenSupport` is requested to link:spark-sql-CodegenSupport.adoc#consume[consume]
+
 | [[windowExecBufferSpillThreshold]] `windowExecBufferSpillThreshold`
 | link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold]
 | Used exclusively when `WindowExec` unary physical operator is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed].

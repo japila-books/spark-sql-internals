@@ -90,6 +90,10 @@ a| Enables *join reordering* based on star schema detection for cost-based optim
 
 Use link:spark-sql-SQLConf.adoc#starSchemaDetection[SQLConf.starSchemaDetection] method to access the current value.
 
+| [[spark.sql.codegen.comments]] `spark.sql.codegen.comments`
+| `false`
+| Controls whether `CodegenContext` should link:spark-sql-CodegenSupport.adoc#registerComment[register comments] (`true`) or not (`false`).
+
 | [[spark.sql.codegen.fallback]] `spark.sql.codegen.fallback`
 | `true`
 | *(internal)* Whether the whole stage codegen could be temporary disabled for the part of a query that has failed to compile generated code (`true`) or not (`false`).
@@ -101,6 +105,12 @@ Use link:spark-sql-SQLConf.adoc#wholeStageFallback[SQLConf.wholeStageFallback] m
 | *(internal)* Maximum number of output fields (including nested fields) that whole-stage codegen supports. Going above the number deactivates whole-stage codegen.
 
 Use link:spark-sql-SQLConf.adoc#wholeStageMaxNumFields[SQLConf.wholeStageMaxNumFields] method to access the current value.
+
+| [[spark.sql.codegen.splitConsumeFuncByOperator]] `spark.sql.codegen.splitConsumeFuncByOperator`
+| `true`
+| *(internal)* Controls whether whole stage codegen puts the logic of consuming rows of each physical operator into individual methods, instead of a single big method. This can be used to avoid oversized function that can miss the opportunity of JIT optimization.
+
+Use link:spark-sql-SQLConf.adoc#wholeStageSplitConsumeFuncByOperator[SQLConf.wholeStageSplitConsumeFuncByOperator] method to access the current value.
 
 | [[spark.sql.codegen.wholeStage]] `spark.sql.codegen.wholeStage`
 | `true`

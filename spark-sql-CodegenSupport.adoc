@@ -81,7 +81,7 @@ consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): Str
 
 `consume`...FIXME
 
-TIP: Enable `spark.sql.codegen.comments` Spark SQL property to have `CONSUME` markers in the generated Java source code.
+TIP: Enable link:spark-sql-properties.adoc#spark.sql.codegen.comments[spark.sql.codegen.comments] Spark SQL property to have `CONSUME` markers in the generated Java source code.
 
 [source, scala]
 ----
@@ -218,3 +218,39 @@ Found 2 WholeStageCodegen subtrees.
 ----
 
 NOTE: `produce` is used mainly when `WholeStageCodegenExec` is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate the Java source code for a physical plan] (i.e. a physical operator and its children).
+
+=== [[prepareRowVar]] `prepareRowVar` Internal Method
+
+[source, scala]
+----
+prepareRowVar(ctx: CodegenContext, row: String, colVars: Seq[ExprCode]): ExprCode
+----
+
+`prepareRowVar`...FIXME
+
+NOTE: `prepareRowVar` is used exclusively when `CodegenSupport` is requested to <<consume, consume>> (and <<constructDoConsumeFunction, constructDoConsumeFunction>> with link:spark-sql-properties.adoc#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator] enabled).
+
+=== [[constructDoConsumeFunction]] `constructDoConsumeFunction` Internal Method
+
+[source, scala]
+----
+constructDoConsumeFunction(
+  ctx: CodegenContext,
+  inputVars: Seq[ExprCode],
+  row: String): String
+----
+
+`constructDoConsumeFunction`...FIXME
+
+NOTE: `constructDoConsumeFunction` is used exclusively when `CodegenSupport` is requested to <<consume, consume>>.
+
+=== [[registerComment]] `registerComment` Method
+
+[source, scala]
+----
+registerComment(text: => String): String
+----
+
+`registerComment`...FIXME
+
+NOTE: `registerComment` is used when...FIXME
