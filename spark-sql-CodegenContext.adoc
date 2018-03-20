@@ -21,6 +21,28 @@ val ctx = new CodegenContext
 
 `CodegenContext` stores expressions that don't support codegen.
 
+.Example of CodegenContext.subexpressionElimination (through CodegenContext.generateExpressions)
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+
+// Use Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val expressions = "hello".expr.as("world") :: "hello".expr.as("world") :: Nil
+
+// FIXME Use a real-life query to extract the expressions
+
+// Note the doSubexpressionElimination flag is on
+// Triggers the subexpressionElimination private method
+ctx.generateExpressions(expressions, doSubexpressionElimination = true)
+
+// subexpressionElimination private method uses ctx.equivalentExpressions
+val commonExprs = ctx.equivalentExpressions.getAllEquivalentExprs
+
+assert(commonExprs.length > 0, "No common expressions found")
+----
+
 [[internal-registries]]
 .CodegenContext's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
