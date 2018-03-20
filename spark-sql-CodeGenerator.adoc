@@ -68,10 +68,6 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[newCodeGenContext]] Creating CodegenContext -- `newCodeGenContext` Method
-
-CAUTION: FIXME
-
 === [[create]] `create` Method
 
 [source, scala]
@@ -87,4 +83,30 @@ CAUTION: FIXME
 
 * `CodeGenerator` <<generate, generates an expression evaluator>>
 * `GenerateOrdering` creates a code gen ordering for `SortOrder` expressions
+====
+
+=== [[newCodeGenContext]] Creating CodegenContext -- `newCodeGenContext` Method
+
+[source, scala]
+----
+newCodeGenContext(): CodegenContext
+----
+
+`newCodeGenContext` simply creates a new link:spark-sql-CodegenContext.adoc#creating-instance[CodegenContext].
+
+[NOTE]
+====
+`newCodeGenContext` is used when:
+
+1. `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
+
+1. `GenerateOrdering` is requested to link:spark-sql-GenerateOrdering.adoc#create[create a BaseOrdering]
+
+1. `GeneratePredicate` is requested to link:spark-sql-GeneratePredicate.adoc#create[create a Predicate]
+
+1. `GenerateSafeProjection` is requested to link:spark-sql-GenerateSafeProjection.adoc#create[create a Projection]
+
+1. `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#create[create a UnsafeProjection]
+
+1. `GenerateColumnAccessor` is requested to link:spark-sql-GenerateColumnAccessor.adoc#create[create a ColumnarIterator]
 ====

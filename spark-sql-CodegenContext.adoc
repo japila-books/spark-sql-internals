@@ -2,6 +2,25 @@
 
 `CodegenContext` is...FIXME
 
+[[creating-instance]]
+`CodegenContext` takes no input parameters.
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+----
+
+`CodegenContext` is <<creating-instance, created>> when:
+
+1. `CodeGenerator` is requested for link:spark-sql-CodeGenerator.adoc#newCodeGenContext[one]
+
+1. `WholeStageCodegenExec` is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate a Java source code for a child subtree]
+
+1. `GenerateUnsafeRowJoiner` is requested for a `UnsafeRowJoiner`
+
+`CodegenContext` stores expressions that don't support codegen.
+
 [[internal-registries]]
 .CodegenContext's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
