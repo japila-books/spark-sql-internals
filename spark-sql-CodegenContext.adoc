@@ -33,6 +33,10 @@ val expressions = "hello".expr.as("world") :: "hello".expr.as("world") :: Nil
 
 // FIXME Use a real-life query to extract the expressions
 
+// CodegenContext.subexpressionElimination (where the elimination all happens) is a private method
+// It is used exclusively in CodegenContext.generateExpressions which is public
+// and does the elimination when it is enabled
+
 // Note the doSubexpressionElimination flag is on
 // Triggers the subexpressionElimination private method
 ctx.generateExpressions(expressions, doSubexpressionElimination = true)
@@ -50,21 +54,47 @@ assert(commonExprs.length > 0, "No common expressions found")
 | Name
 | Description
 
-| [[equivalentExpressions]] `equivalentExpressions`
-a| link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+| `equivalentExpressions`
+a| [[equivalentExpressions]] link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
 
 Expressions are link:spark-sql-EquivalentExpressions.adoc#addExprTree[added] and then link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
-| [[subExprEliminationExprs]] `subExprEliminationExprs`
-| `SubExprEliminationStates` by link:spark-sql-Expression.adoc[Expression]
+| `placeHolderToComments`
+| [[placeHolderToComments]][[getPlaceHolderToComments]]
+
+Placeholders and their comments
 
 Used when...FIXME
 
-| [[subexprFunctions]] `subexprFunctions`
-| Names of the functions that...FIXME
+| `references`
+a| [[references]] References that are used to generate classes in the following code generators:
+
+* link:spark-sql-GenerateMutableProjection.adoc#create[GenerateMutableProjection]
+
+* link:spark-sql-GenerateOrdering.adoc#create[GenerateOrdering]
+
+* link:spark-sql-GeneratePredicate.adoc#create[GeneratePredicate]
+
+* link:spark-sql-GenerateSafeProjection.adoc#create[GenerateSafeProjection]
+
+* link:spark-sql-GenerateUnsafeProjection.adoc#create[GenerateUnsafeProjection]
+
+* link:spark-sql-WholeStageCodegenExec.adoc#doExecute[WholeStageCodegenExec]
+
+* Elements are added when:
+** `CodegenContext` is requested to <<addReferenceObj, addReferenceObj>>
+** `CodegenFallback` is requested to link:spark-sql-Expression-CodegenFallback.adoc#doGenCode[doGenCode]
+
+| `subExprEliminationExprs`
+| [[subExprEliminationExprs]] `SubExprEliminationStates` by link:spark-sql-Expression.adoc[Expression]
+
+Used when...FIXME
+
+| `subexprFunctions`
+| [[subexprFunctions]] Names of the functions that...FIXME
 |===
 
-=== [[generateExpressions]] `generateExpressions` Method
+=== [[generateExpressions]] Generating Java Source Code For Code-Generated Evaluation of Multiple Expressions (With Optional Subexpression Elimination) -- `generateExpressions` Method
 
 [source, scala]
 ----
@@ -87,6 +117,17 @@ In the end, `generateExpressions` requests every expressions to link:spark-sql-E
 
 1. `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
 ====
+
+=== [[addReferenceObj]] `addReferenceObj` Method
+
+[source, scala]
+----
+addReferenceObj(objName: String, obj: Any, className: String = null): String
+----
+
+`addReferenceObj`...FIXME
+
+NOTE: `addReferenceObj` is used when...FIXME
 
 === [[subexpressionEliminationForWholeStageCodegen]] `subexpressionEliminationForWholeStageCodegen` Method
 

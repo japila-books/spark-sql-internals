@@ -60,7 +60,7 @@ a|
 
 * link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
 
-| [[CodegenFallback]] `CodegenFallback`
+| [[CodegenFallback]] link:spark-sql-Expression-CodegenFallback.adoc[CodegenFallback]
 | trait
 | Does not support code generation and falls back to interpreted mode
 a|

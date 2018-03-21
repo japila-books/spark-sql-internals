@@ -1,0 +1,21 @@
+== [[OrcFileFormat]] OrcFileFormat
+
+`OrcFileFormat` is...FIXME
+
+=== [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
+
+[source, scala]
+----
+buildReaderWithPartitionValues(
+  sparkSession: SparkSession,
+  dataSchema: StructType,
+  partitionSchema: StructType,
+  requiredSchema: StructType,
+  filters: Seq[Filter],
+  options: Map[String, String],
+  hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
+----
+
+NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
+
+`buildReaderWithPartitionValues`...FIXME

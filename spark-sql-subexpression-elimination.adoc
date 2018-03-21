@@ -1,10 +1,10 @@
-== Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)
+== Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
 
 *Subexpression Elimination* (aka *Common Expression Reuse*) is an optimisation of a link:spark-sql-LogicalPlan.adoc[logical query plan] that link:spark-sql-CodegenContext.adoc#subexpressionElimination[eliminates expressions in code-generated (non-interpreted) expression evaluation].
 
-Subexpression Elimination is enabled by default. Set the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property to `false` to disable it.
+Subexpression Elimination is enabled by default. Use the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property control whether the feature is enabled (`true`) or not (`false`).
 
-Subexpression Elimination is used (by means of link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. describe a distributed computation as an RDD of internal rows):
+Subexpression Elimination is used (by means of link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
 
 * link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
 
@@ -16,21 +16,7 @@ Subexpression Elimination is used (by means of link:spark-sql-SparkPlan.adoc#sub
 
 * link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[WindowExec] (and creates a link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
 
-[source, scala]
-----
-// FIXME Demo
-// CodegenContext.subexpressionElimination (where the elimination all happens) is a private method
-// It is used exclusively in CodegenContext.generateExpressions which is public
-// and does the elimination when it is enabled
-import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
-val ctx = new CodegenContext
-
-// FIXME Use Catalyst DSL for expressions
-
-import org.apache.spark.sql.catalyst.expressions.Expression
-val exprs: Seq[Expression] = ???
-val exprEvals = ctx.generateExpressions(exprs, doSubexpressionElimination = true)
-----
+Internally, subexpression elimination happens when `CodegenContext` is requested for link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] (when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> with <<spark.sql.subexpressionElimination.enabled, subexpression elimination>> enabled).
 
 === [[spark.sql.subexpressionElimination.enabled]] spark.sql.subexpressionElimination.enabled Configuration Property
 
