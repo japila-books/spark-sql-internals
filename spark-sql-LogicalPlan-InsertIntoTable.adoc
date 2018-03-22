@@ -48,7 +48,7 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 
 1. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical command (when `HiveAnalysis` resolution rule transforms `InsertIntoTable` with link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation])
 
-1. `InsertIntoDataSourceCommand` logical command (when `DataSourceAnalysis` resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `InsertableRelation`)
+1. link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand] logical command (when `DataSourceAnalysis` resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `InsertableRelation`)
 
 1. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand] logical command (when `DataSourceAnalysis` resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `HadoopFsRelation`)
 

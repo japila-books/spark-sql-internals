@@ -1,0 +1,14 @@
+== [[MultiInstanceRelation]] MultiInstanceRelation
+
+`MultiInstanceRelation` is a <<contact, contact>> of...FIXME
+
+[[newInstance]]
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.analysis
+
+trait MultiInstanceRelation {
+  def newInstance(): LogicalPlan
+}
+----

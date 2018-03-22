@@ -200,6 +200,7 @@ Internally, `load` link:spark-sql-DataSource.adoc#creating-instance[creates a `D
 ----
 json(path: String): DataFrame
 json(paths: String*): DataFrame
+json(jsonDataset: Dataset[String]): DataFrame
 json(jsonRDD: RDD[String]): DataFrame
 ----
 
@@ -211,6 +212,7 @@ New in **2.0.0**: `prefersDecimal`
 ----
 csv(path: String): DataFrame
 csv(paths: String*): DataFrame
+csv(csvDataset: Dataset[String]): DataFrame
 ----
 
 ==== [[parquet]] `parquet` method

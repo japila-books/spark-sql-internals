@@ -73,7 +73,7 @@
 | `ExternalRDD`
 | link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 
-| `LogicalRDD`
+| [[LogicalRDD]] link:spark-sql-LogicalRDD.adoc[LogicalRDD]
 | link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
 |===
 

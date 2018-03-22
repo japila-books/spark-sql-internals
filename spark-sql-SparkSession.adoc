@@ -100,20 +100,6 @@ NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism t
 
 CAUTION: FIXME
 
-=== [[internalCreateDataFrame]] `internalCreateDataFrame` Internal Method
-
-[source, scala]
-----
-internalCreateDataFrame(
-  catalystRows: RDD[InternalRow],
-  schema: StructType,
-  isStreaming: Boolean = false): DataFrame
-----
-
-`internalCreateDataFrame`...FIXME
-
-NOTE: `internalCreateDataFrame` is used when...FIXME
-
 === [[builder]] Creating SparkSession Using Builder Pattern -- `builder` Method
 
 [source, scala]
@@ -209,7 +195,7 @@ scala> one.show
 +-----+
 ----
 
-`createDataset` creates a link:spark-sql-LogicalPlan-LocalRelation.adoc[`LocalRelation` logical query plan] (for the input `data` collection) or `LogicalRDD` (for the input `RDD[T]`).
+`createDataset` creates a link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] (for the input `data` collection) or link:spark-sql-LogicalRDD.adoc[LogicalRDD] (for the input `RDD[T]`) logical operators.
 
 [TIP]
 ====
@@ -552,3 +538,26 @@ sessionStateClassName(conf: SparkConf): String
 * link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder] for `in-memory`
 
 NOTE: `sessionStateClassName` is used exclusively when `SparkSession` is requested for the <<sessionState, SessionState>> (and one is not available yet).
+
+=== [[internalCreateDataFrame]] Creating DataFrame From RDD Of Internal Binary Rows -- `internalCreateDataFrame` Internal Method
+
+[source, scala]
+----
+internalCreateDataFrame(
+  catalystRows: RDD[InternalRow],
+  schema: StructType,
+  isStreaming: Boolean = false): DataFrame
+----
+
+`internalCreateDataFrame` creates a link:spark-sql-Dataset.adoc#ofRows[DataFrame] with a link:spark-sql-LogicalRDD.adoc#creating-instance[LogicalRDD].
+
+[NOTE]
+====
+`internalCreateDataFrame` is used when:
+
+1. `DataFrameReader` is requested to create a DataFrame from Dataset of link:spark-sql-DataFrameReader.adoc#json[JSONs] or link:spark-sql-DataFrameReader.adoc#json[CSVs]
+
+1. `SparkSession` is requested to <<createDataFrame, create a DataFrame from RDD of rows>>
+
+1. `InsertIntoDataSourceCommand` is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed]
+====

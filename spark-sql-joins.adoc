@@ -1,4 +1,4 @@
-== Join Operators
+== Dataset Join Operators
 
 From PostgreSQL's https://www.postgresql.org/docs/current/static/tutorial-join.html[2.6. Joins Between Tables]:
 

@@ -1,0 +1,100 @@
+== Dataset Checkpointing
+
+*Checkpointing* is a feature of Spark Core that allows a driver to be restarted on failure with previously computed state of a distributed computation (i.e. `RDD`) and, what could be important for highly iterative computations, cut a RDD lineage (Spark Core) as well as a query plan (Spark SQL).
+
+CAUTION: FIXME Describe reliable vs local checkpointings.
+
+Checkpointing can be eager or lazy per `eager` flag of <<checkpoint, checkpoint>> operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
+
+[[checkpoint-directory]]
+Using Dataset checkpointing requires that you specify the *checkpoint directory*. The directory stores the checkpoint files for RDDs to be checkpointed. Use <<sparkcontext-setCheckpointDir, SparkContext.setCheckpointDir>> to set the path to a checkpoint directory. It is assumed that the checkpoint directory is a non-local path on a some reliable storage, e.g. Hadoop HDFS.
+
+[[logging]]
+[TIP]
+====
+Enable `INFO` logging level for `org.apache.spark.rdd.ReliableRDDCheckpointData` logger to see what happens while an RDD is checkpointed.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.rdd.ReliableRDDCheckpointData=INFO
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
+[source, scala]
+----
+val nums = spark.range(5)
+
+scala> println(nums.queryExecution.toRdd.toDebugString)
+(8) MapPartitionsRDD[2] at toRdd at <console>:26 []
+ |  MapPartitionsRDD[1] at toRdd at <console>:26 []
+ |  ParallelCollectionRDD[0] at toRdd at <console>:26 []
+
+// Remember to set the checkpoint directory
+scala> nums.checkpoint
+org.apache.spark.SparkException: Checkpoint directory has not been set in the SparkContext
+ at org.apache.spark.rdd.RDD.checkpoint(RDD.scala:1548)
+ at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:594)
+ at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:539)
+ ... 49 elided
+
+spark.sparkContext.setCheckpointDir("/tmp/checkpoints")
+
+scala> println(spark.sparkContext.getCheckpointDir.get)
+file:/tmp/checkpoints/e3cd9c63-58c4-45df-abee-f6927281606a
+
+val numsCheckpointed = nums.checkpoint
+scala> println(numsCheckpointed.queryExecution.toRdd.toDebugString)
+(8) MapPartitionsRDD[9] at toRdd at <console>:26 []
+ |  MapPartitionsRDD[7] at checkpoint at <console>:25 []
+ |  ReliableCheckpointRDD[8] at checkpoint at <console>:25 []
+
+// Set org.apache.spark.rdd.ReliableRDDCheckpointData logger to INFO
+// to see what happens while an RDD is checkpointed
+// Let's use log4j API
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger("org.apache.spark.rdd.ReliableRDDCheckpointData").setLevel(Level.INFO)
+
+scala> nums.checkpoint
+18/03/22 12:36:30 INFO ReliableRDDCheckpointData: Done checkpointing RDD 18 to file:/tmp/checkpoints/e3cd9c63-58c4-45df-abee-f6927281606a/rdd-18, new parent is RDD 19
+res19: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+----
+
+=== [[checkpoint]] Checkpointing Dataset -- `checkpoint` Operator
+
+[source, scala]
+----
+checkpoint(): Dataset[T]  // <1>
+checkpoint(eager: Boolean): Dataset[T]  // <2>
+// private
+checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
+----
+<1> `eager` and `reliableCheckpoint` flags enabled
+<2> `reliableCheckpoint` flag enabled
+
+NOTE: `checkpoint` is an experimental operator and the API is evolving towards becoming stable.
+
+`checkpoint`...FIXME
+
+Internally, `checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+
+Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
+
+With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
+
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
+
+In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+
+=== [[sparkcontext-setCheckpointDir]] Specyfing Checkpoint Directory -- `SparkContext.setCheckpointDir` Method
+
+[source, scala]
+----
+SparkContext.setCheckpointDir(directory: String)
+----
+
+`setCheckpointDir` sets the <<checkpoint-directory, checkpoint directory>>.
+
+Internally, `setCheckpointDir`...FIXME

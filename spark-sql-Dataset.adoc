@@ -362,7 +362,7 @@ NOTE: `withNewRDDExecutionId` is used when `Dataset` executes link:spark-sql-dat
 ofRows(sparkSession: SparkSession, logicalPlan: LogicalPlan): DataFrame
 ----
 
-NOTE: `ofRows` is a `private[sql]` operator that can only be accessed from code in `org.apache.spark.sql` package. It is not a part of ``Dataset``'s public API.
+NOTE: `ofRows` is a `private[sql]` operator that can only be accessed from code in `org.apache.spark.sql` package. It is not part of `Dataset` public API.
 
 `ofRows` returns link:spark-sql-DataFrame.adoc[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses link:spark-sql-RowEncoder.adoc[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 

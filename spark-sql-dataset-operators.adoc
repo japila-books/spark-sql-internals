@@ -1,6 +1,6 @@
 == Dataset Operators
 
-You can group the set of all operators to use with `Datasets` per their target, i.e. the part of a `Dataset` they are applied to.
+You can group the set of all operators to work with `Datasets` per target, i.e. the part of a `Dataset` they are applied to.
 
 . link:spark-sql-Column.adoc[Column Operators]
 . link:spark-sql-functions.adoc[Standard Functions] (from `functions` object)
@@ -8,8 +8,9 @@ You can group the set of all operators to use with `Datasets` per their target, 
 . link:spark-sql-basic-aggregation.adoc[Basic Aggregation -- Typed and Untyped Grouping Operators]
 . link:spark-sql-functions-windows.adoc[Window Aggregate Functions]
 . link:spark-sql-UserDefinedAggregateFunction.adoc[User-Defined Aggregate Functions (UDAFs)]
-. link:spark-sql-joins.adoc[Joins]
-. link:spark-sql-caching.adoc[Caching]
+. link:spark-sql-joins.adoc[Dataset Join Operators]
+. link:spark-sql-caching.adoc[Dataset Caching and Persistence]
+. link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
 
 Beside the above operators, there are the following ones working with a `Dataset` as a whole.
 

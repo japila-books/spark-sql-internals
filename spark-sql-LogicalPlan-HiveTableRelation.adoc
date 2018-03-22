@@ -80,7 +80,7 @@ The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a ca
 `HiveTableRelation` is resolved to link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec] physical operator when link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] strategy is executed.
 ====
 
-=== [[computeStats]] `computeStats` Method
+=== [[computeStats]] Computing Statistics -- `computeStats` Method
 
 [source, scala]
 ----

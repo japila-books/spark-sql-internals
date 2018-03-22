@@ -32,7 +32,7 @@
 .. link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset -- Untyped Row-based Grouping]
 .. link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset -- Typed Grouping]
 
-. link:spark-sql-joins.adoc[Joins]
+. link:spark-sql-joins.adoc[Dataset Join Operators]
 .. link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)]
 
 . link:spark-sql-multi-dimensional-aggregation.adoc[Multi-Dimensional Aggregation]
@@ -55,6 +55,8 @@
 .. link:spark-sql-StructType.adoc[StructType]
 .. link:spark-sql-StructField.adoc[StructField]
 .. link:spark-sql-DataType.adoc[Data Types]
+
+. link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
 
 . link:spark-sql-properties.adoc[Configuration Properties]
 
@@ -118,6 +120,8 @@
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
 .. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
 
+. link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
+
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
 
 . link:spark-sql-hint-framework.adoc[Hint Framework]
@@ -149,6 +153,7 @@
 
 . link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
+. link:spark-sql-LogicalRDD.adoc[LogicalRDD -- Logical Scan Over RDD]
 
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
@@ -220,6 +225,7 @@
 .. link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand]
 .. link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
 .. link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
+.. link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
 .. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 .. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
