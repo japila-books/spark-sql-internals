@@ -1,13 +1,38 @@
 == Dataset Checkpointing
 
-*Checkpointing* is a feature of Spark Core that allows a driver to be restarted on failure with previously computed state of a distributed computation (i.e. `RDD`) and, what could be important for highly iterative computations, cut a RDD lineage (Spark Core) as well as a query plan (Spark SQL).
+*Dataset Checkpointing* is a feature of Spark SQL to truncate a logical query plan that is specifically designed for highly iterative data algorithms (e.g. Spark MLlib that uses Spark SQL's `Dataset` API for data manipulation).
 
-CAUTION: FIXME Describe reliable vs local checkpointings.
+[NOTE]
+====
+Checkpointing is actually a feature of Spark Core (that Spark SQL uses for distributed computations) that allows a driver to be restarted on failure with previously computed state of a distributed computation described as an `RDD`.
+
+Checkpointing truncates the lineage of a RDD to be checkpointed.
+
+Dataset checkpointing in Spark SQL uses checkpointing to truncate the lineage of the underlying RDD of a `Dataset` to be checkpointed.
+====
 
 Checkpointing can be eager or lazy per `eager` flag of <<checkpoint, checkpoint>> operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
 
 [[checkpoint-directory]]
-Using Dataset checkpointing requires that you specify the *checkpoint directory*. The directory stores the checkpoint files for RDDs to be checkpointed. Use <<sparkcontext-setCheckpointDir, SparkContext.setCheckpointDir>> to set the path to a checkpoint directory. It is assumed that the checkpoint directory is a non-local path on a some reliable storage, e.g. Hadoop HDFS.
+Using Dataset checkpointing requires that you specify the *checkpoint directory*. The directory stores the checkpoint files for RDDs to be checkpointed. Use <<sparkcontext-setCheckpointDir, SparkContext.setCheckpointDir>> to set the path to a checkpoint directory.
+
+Checkpointing can be <<localCheckpoint, local>> or <<checkpoint, reliable>> which defines how reliable the <<checkpoint-directory, checkpoint directory>> is. *Local checkpointing* uses executor storage to write checkpoint files to and due to the executor lifecycle is considered unreliable. *Reliable checkpointing* uses a reliable data storage like Hadoop HDFS.
+
+.Dataset Checkpointing Types
+[cols="1,^1,^2",options="header",width="100%"]
+|===
+|
+| Eager
+| Lazy
+
+^| *Reliable*
+| <<checkpoint, checkpoint>>
+| <<checkpoint, checkpoint(eager = false)>>
+
+^| *Local*
+| <<localCheckpoint, localCheckpoint>>
+| <<localCheckpoint, localCheckpoint(eager = false)>>
+|===
 
 [[logging]]
 [TIP]
@@ -25,31 +50,32 @@ Refer to link:spark-logging.adoc[Logging].
 
 [source, scala]
 ----
-val nums = spark.range(5)
+import org.apache.spark.sql.functions.rand
+val nums = spark.range(5).withColumn("random", rand()).filter($"random" > 0.5)
 
 scala> println(nums.queryExecution.toRdd.toDebugString)
-(8) MapPartitionsRDD[2] at toRdd at <console>:26 []
- |  MapPartitionsRDD[1] at toRdd at <console>:26 []
- |  ParallelCollectionRDD[0] at toRdd at <console>:26 []
+(8) MapPartitionsRDD[2] at toRdd at <console>:27 []
+ |  MapPartitionsRDD[1] at toRdd at <console>:27 []
+ |  ParallelCollectionRDD[0] at toRdd at <console>:27 []
 
 // Remember to set the checkpoint directory
 scala> nums.checkpoint
 org.apache.spark.SparkException: Checkpoint directory has not been set in the SparkContext
- at org.apache.spark.rdd.RDD.checkpoint(RDD.scala:1548)
- at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:594)
- at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:539)
- ... 49 elided
+  at org.apache.spark.rdd.RDD.checkpoint(RDD.scala:1548)
+  at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:594)
+  at org.apache.spark.sql.Dataset.checkpoint(Dataset.scala:539)
+  ... 49 elided
 
 spark.sparkContext.setCheckpointDir("/tmp/checkpoints")
 
 scala> println(spark.sparkContext.getCheckpointDir.get)
-file:/tmp/checkpoints/e3cd9c63-58c4-45df-abee-f6927281606a
+file:/tmp/checkpoints/310a6163-a75f-438d-a19c-65076c5fa80f
 
 val numsCheckpointed = nums.checkpoint
 scala> println(numsCheckpointed.queryExecution.toRdd.toDebugString)
-(8) MapPartitionsRDD[9] at toRdd at <console>:26 []
- |  MapPartitionsRDD[7] at checkpoint at <console>:25 []
- |  ReliableCheckpointRDD[8] at checkpoint at <console>:25 []
+(8) MapPartitionsRDD[6] at toRdd at <console>:27 []
+ |  MapPartitionsRDD[4] at checkpoint at <console>:26 []
+ |  ReliableCheckpointRDD[5] at checkpoint at <console>:26 []
 
 // Set org.apache.spark.rdd.ReliableRDDCheckpointData logger to INFO
 // to see what happens while an RDD is checkpointed
@@ -58,8 +84,8 @@ import org.apache.log4j.{Level, Logger}
 Logger.getLogger("org.apache.spark.rdd.ReliableRDDCheckpointData").setLevel(Level.INFO)
 
 scala> nums.checkpoint
-18/03/22 12:36:30 INFO ReliableRDDCheckpointData: Done checkpointing RDD 18 to file:/tmp/checkpoints/e3cd9c63-58c4-45df-abee-f6927281606a/rdd-18, new parent is RDD 19
-res19: org.apache.spark.sql.Dataset[Long] = [id: bigint]
+18/03/22 19:37:13 INFO ReliableRDDCheckpointData: Done checkpointing RDD 7 to file:/tmp/checkpoints/310a6163-a75f-438d-a19c-65076c5fa80f/rdd-7, new parent is RDD 8
+res6: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [id: bigint, random: double]
 ----
 
 === [[checkpoint]] Checkpointing Dataset -- `checkpoint` Operator
@@ -98,3 +124,14 @@ SparkContext.setCheckpointDir(directory: String)
 `setCheckpointDir` sets the <<checkpoint-directory, checkpoint directory>>.
 
 Internally, `setCheckpointDir`...FIXME
+
+=== [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Method
+
+[source, scala]
+----
+localCheckpoint(): Dataset[T] // <1>
+localCheckpoint(eager: Boolean): Dataset[T]
+----
+<1> `eager` flag enabled with `reliableCheckpoint` flag disabled
+
+`localCheckpoint` simply executes <<checkpoint, checkpoint>> with the input `eager` flag and `reliableCheckpoint` flag disabled.
