@@ -1,0 +1,14 @@
+== [[ResolveReferences]] ResolveReferences Logical Evaluation Rule
+
+`ResolveReferences` is...FIXME
+
+=== [[apply]] `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME

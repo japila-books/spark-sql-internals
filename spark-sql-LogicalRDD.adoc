@@ -12,19 +12,6 @@
 
 NOTE: `LogicalRDD` is resolved to link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#LogicalRDD[executed].
 
-=== [[creating-instance]] Creating LogicalRDD Instance
-
-`LogicalRDD` takes the following when created:
-
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[rdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows]
-* [[outputPartitioning]] link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning]
-* [[outputOrdering]] Output ordering (`SortOrder`)
-* [[isStreaming]] `isStreaming` flag
-* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
-
-`LogicalRDD` initializes the <<internal-registries, internal registries and counters>>.
-
 === [[newInstance]] `newInstance` Method
 
 [source, scala]
@@ -46,3 +33,14 @@ computeStats(): Statistics
 NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
 `computeStats`...FIXME
+
+=== [[creating-instance]] Creating LogicalRDD Instance
+
+`LogicalRDD` takes the following when created:
+
+* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[rdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows]
+* [[outputPartitioning]] link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning]
+* [[outputOrdering]] Output ordering (`SortOrder`)
+* [[isStreaming]] `isStreaming` flag
+* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]

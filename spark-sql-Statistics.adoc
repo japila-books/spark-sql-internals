@@ -1,18 +1,12 @@
 == [[Statistics]] Statistics -- Estimates of Plan Statistics and Query Hints
 
 [[creating-instance]]
-`Statistics` holds the estimates of statistics and hints of a logical plan:
+`Statistics` holds the statistics estimates and hints of a logical operator:
 
 * [[sizeInBytes]] Total (output) size (in bytes)
 * [[rowCount]] Estimated number of rows (aka _row count_)
 * [[attributeStats]] Column attribute statistics (aka _column (equi-height) histograms_)
 * [[hints]] Query hints (i.e. `HintInfo`)
-
-NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command to compute <<sizeInBytes, total size>> and <<rowCount, row count>> statistics of a table.
-
-NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
-
-NOTE: Use `Dataset.hint` or `SELECT` SQL statement with hints to link:spark-sql-hint-framework.adoc#specifying-query-hints[specify query hints].
 
 NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
 
@@ -33,6 +27,12 @@ org.apache.spark.sql.catalyst.plans.logical.Statistics
 scala> println(stats.simpleString)
 sizeInBytes=213.0 B, hints=none
 ----
+
+NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command to compute <<sizeInBytes, total size>> and <<rowCount, row count>> statistics of a table.
+
+NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
+
+NOTE: Use `Dataset.hint` or `SELECT` SQL statement with hints to link:spark-sql-hint-framework.adoc#specifying-query-hints[specify query hints].
 
 `Statistics` is <<creating-instance, created>> when:
 

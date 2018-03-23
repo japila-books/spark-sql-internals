@@ -70,8 +70,8 @@
 | `RepartitionByExpression`
 | link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange]
 
-| `ExternalRDD`
-| link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
+| [[ExternalRDD]] link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
+| [[ExternalRDDScanExec]] link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 
 | [[LogicalRDD]] link:spark-sql-LogicalRDD.adoc[LogicalRDD]
 | link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]

@@ -119,7 +119,7 @@ Used when:
 
 1. `DetermineTableStats` logical resolution rule could not compute the table size or <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>> is turned off
 
-1. `ExternalRDD`, link:spark-sql-LogicalRDD.adoc#computeStats[LogicalRDD] and `DataSourceV2Relation` are requested for statistics (i.e. `computeStats`)
+1. link:spark-sql-LogicalPlan-ExternalRDD.adoc#computeStats[ExternalRDD], link:spark-sql-LogicalRDD.adoc#computeStats[LogicalRDD] and `DataSourceV2Relation` are requested for statistics (i.e. `computeStats`)
 
 1.  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
 

@@ -172,7 +172,7 @@ root
 
 `emptyDataset` creates a  link:spark-sql-LogicalPlan-LocalRelation.adoc[`LocalRelation` logical query plan].
 
-=== [[createDataset]] Creating Dataset from Local Collections and RDDs -- `createDataset` methods
+=== [[createDataset]] Creating Dataset from Local Collections or RDDs -- `createDataset` methods
 
 [source, scala]
 ----
@@ -255,14 +255,20 @@ emptyDataFrame: DataFrame
 
 It calls <<createDataFrame, createDataFrame>> with an empty `RDD[Row]` and an empty schema link:spark-sql-StructType.adoc[StructType(Nil)].
 
-=== [[createDataFrame]] Creating DataFrames from RDDs with Explicit Schema -- `createDataFrame` method
+=== [[createDataFrame]] Creating DataFrames from Local Collections or RDDs -- `createDataFrame` Method
 
 [source, scala]
 ----
+createDataFrame[A <: Product : TypeTag](rdd: RDD[A]): DataFrame
+createDataFrame[A <: Product : TypeTag](data: Seq[A]): DataFrame
 createDataFrame(rowRDD: RDD[Row], schema: StructType): DataFrame
+// private[sql]
+createDataFrame(rowRDD: RDD[Row], schema: StructType, needsConversion: Boolean): DataFrame
 ----
 
 `createDataFrame` creates a `DataFrame` using `RDD[Row]` and the input `schema`. It is assumed that the rows in `rowRDD` all match the `schema`.
+
+CAUTION: FIXME
 
 === [[sql]] Executing SQL Queries (aka SQL Mode) -- `sql` Method
 
