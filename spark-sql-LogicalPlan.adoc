@@ -1,6 +1,8 @@
-== [[LogicalPlan]] LogicalPlan -- Logical Query Plan / Logical Operator
+== [[LogicalPlan]] LogicalPlan -- Logical Operator with Children and Expressions / Logical Query Plan
 
-`LogicalPlan` is a base Catalyst link:spark-sql-catalyst-QueryPlan.adoc[query plan] for *logical operators* to build a *logical query plan* that, when <<analyzed, analyzed>> and <<resolved, resolved>>, can be resolved to a link:spark-sql-SparkPlan.adoc[physical query plan].
+`LogicalPlan` is a base Catalyst link:spark-sql-catalyst-QueryPlan.adoc[query plan] for *logical operators* to build a tree of logical operator nodes known as *logical query plan*.
+
+`LogicalPlan` can be <<analyzed, analyzed>> and <<resolved, resolved>>.
 
 [TIP]
 ====
@@ -13,6 +15,8 @@ val plan = q.queryExecution.logical
 ----
 ====
 
+NOTE: A logical query plan is a tree of link:spark-sql-catalyst-TreeNode.adoc[nodes] of logical operators with their own trees of expressions. In other words, there are _at least_ two trees at every level (operator).
+
 [[analyzed]]
 `LogicalPlan` can be *analyzed* which is to say that the plan (including children) has gone through analysis and verification.
 
@@ -22,8 +26,11 @@ scala> plan.analyzed
 res1: Boolean = true
 ----
 
+[[childrenResolved]]
+A logical operator is considered *partially resolved* when its link:spark-sql-catalyst-TreeNode.adoc#children[child operators] are resolved (aka _children resolved_).
+
 [[resolved]]
-A logical operator can also be *resolved* to a specific schema, i.e. all link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the logical operator and its children are resolved.
+A logical operator is (fully) *resolved* to a specific schema when all link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] and the <<childrenResolved, children are resolved>>.
 
 [source, scala]
 ----
@@ -50,6 +57,8 @@ maxRows: Option[Long] = None
 
 `LogicalPlan` can be <<isStreaming, streaming>> if it contains one or more link:spark-sql-streaming-source.adoc[structured streaming sources].
 
+NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc[physical query plan].
+
 [[specialized-logical-plans]]
 .Logical Operators / Specialized Logical Plans
 [cols="1,2",options="header",width="100%"]
@@ -66,10 +75,10 @@ maxRows: Option[Long] = None
 | [[BinaryNode]] `BinaryNode`
 | Logical operator with two child operators
 
-| link:spark-sql-LogicalPlan-Command.adoc[Command]
+| [[Command]] link:spark-sql-LogicalPlan-Command.adoc[Command]
 |
 
-| link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
+| [[RunnableCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
 |
 |===
 
@@ -120,10 +129,6 @@ stats(conf: CatalystConf): Statistics
 CAUTION: FIXME
 
 === [[verboseStringWithSuffix]] `verboseStringWithSuffix` method
-
-CAUTION: FIXME
-
-=== [[resolveQuoted]] `resolveQuoted` method
 
 CAUTION: FIXME
 
@@ -182,3 +187,30 @@ NOTE: `refresh` is overriden by link:spark-sql-LogicalPlan-LogicalRelation.adoc#
 
 1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshTable[refresh a table]
 ====
+
+=== [[resolveQuoted]] `resolveQuoted` Method
+
+[source, scala]
+----
+resolveQuoted(
+  name: String,
+  resolver: Resolver): Option[NamedExpression]
+----
+
+`resolveQuoted`...FIXME
+
+NOTE: `resolveQuoted` is used when...FIXME
+
+=== [[resolve]] Resolving Attribute By Name Parts -- `resolve` Internal Method
+
+[source, scala]
+----
+resolve(
+  nameParts: Seq[String],
+  input: Seq[Attribute],
+  resolver: Resolver): Option[NamedExpression]
+----
+
+`resolve`...FIXME
+
+NOTE: `resolve` is used when...FIXME

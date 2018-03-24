@@ -290,3 +290,33 @@ Error while decoding: [initial exception]
 
 * Structured Streaming's `ForeachSink`
 ====
+
+=== [[tuple]] Creating ExpressionEncoder For One or More ExpressionEncoders -- `tuple` Method
+
+[source, scala]
+----
+tuple(encoders: Seq[ExpressionEncoder[_]]): ExpressionEncoder[_]
+tuple[T](e: ExpressionEncoder[T]): ExpressionEncoder[Tuple1[T]]
+tuple[T1, T2](
+  e1: ExpressionEncoder[T1],
+  e2: ExpressionEncoder[T2]): ExpressionEncoder[(T1, T2)]
+tuple[T1, T2, T3](
+  e1: ExpressionEncoder[T1],
+  e2: ExpressionEncoder[T2],
+  e3: ExpressionEncoder[T3]): ExpressionEncoder[(T1, T2, T3)]
+tuple[T1, T2, T3, T4](
+  e1: ExpressionEncoder[T1],
+  e2: ExpressionEncoder[T2],
+  e3: ExpressionEncoder[T3],
+  e4: ExpressionEncoder[T4]): ExpressionEncoder[(T1, T2, T3, T4)]
+tuple[T1, T2, T3, T4, T5](
+  e1: ExpressionEncoder[T1],
+  e2: ExpressionEncoder[T2],
+  e3: ExpressionEncoder[T3],
+  e4: ExpressionEncoder[T4],
+  e5: ExpressionEncoder[T5]): ExpressionEncoder[(T1, T2, T3, T4, T5)]
+----
+
+`tuple`...FIXME
+
+NOTE: `tuple` is used when...FIXME

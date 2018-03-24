@@ -169,8 +169,11 @@ a| Resolves:
 * link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 * link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 
-| ResolveReferences
-|
+| [[ResolveReferences]] link:spark-sql-ResolveReferences.adoc[ResolveReferences]
+a| Resolves:
+
+* FIXME
+
 | ResolveCreateNamedStruct
 |
 | ResolveDeserializer
@@ -330,3 +333,19 @@ resolver: Resolver
 `resolver` requests <<conf, CatalystConf>> for link:spark-sql-CatalystConf.adoc#resolver[Resolver].
 
 NOTE: `Resolver` is a mere function of two `String` parameters that returns `true` if both refer to the same entity (i.e. for case insensitive equality).
+
+=== [[resolveExpression]] `resolveExpression` Method
+
+[source, scala]
+----
+resolveExpression(
+  expr: Expression,
+  plan: LogicalPlan,
+  throws: Boolean = false): Expression
+----
+
+`resolveExpression`...FIXME
+
+NOTE: `resolveExpression` is a `protected[sql]` method.
+
+NOTE: `resolveExpression` is used when...FIXME

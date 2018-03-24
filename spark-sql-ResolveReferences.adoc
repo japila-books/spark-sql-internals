@@ -1,8 +1,25 @@
-== [[ResolveReferences]] ResolveReferences Logical Evaluation Rule
+== [[ResolveReferences]] ResolveReferences Logical Resolution Rule
 
-`ResolveReferences` is...FIXME
+`ResolveReferences` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[Spark Analyzer] uses to <<apply, resolve FIXME>> (in a logical query plan), i.e.
 
-=== [[apply]] `apply` Method
+1. Resolves...FIXME
+
+Technically, `ResolveReferences` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+`ResolveReferences` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0
+
+// Use Catalyst DSL to create a logical plan
+
+// Example: InsertIntoTable with UnresolvedRelation
+CAUTION: FIXME See ResolveRelations
+----
+
+=== [[apply]] Resolving Reference Expressions In Logical Query Plan (Applying ResolveReferences to Logical Plan) -- `apply` Method
 
 [source, scala]
 ----
@@ -11,4 +28,49 @@ apply(plan: LogicalPlan): LogicalPlan
 
 NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`apply`...FIXME
+`apply` resolves the following logical operators first:
+
+1. link:spark-sql-LogicalPlan-Project.adoc[Project] logical operator with a `Star` expression to...FIXME
+
+1. link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator with a `Star` expression to...FIXME
+
+1. `ScriptTransformation` logical operator with a `Star` expression to...FIXME
+
+1. link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator with a `Star` expression to...FIXME
+
+1. link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator with `duplicateResolved`...FIXME
+
+1. link:spark-sql-LogicalPlan-Intersect.adoc[Intersect] logical operator with `duplicateResolved`...FIXME
+
+1. link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator with `duplicateResolved`...FIXME
+
+1. link:spark-sql-LogicalPlan-Sort.adoc[Sort] logical operator unresolved with child operators resolved...FIXME
+
+1. link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator resolved...FIXME
+
+1. link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator unresolved...FIXME
+
+In the end, `apply` <<resolve, resolves>> the expressions of the input logical operator.
+
+`apply` skips logical operators that:
+
+1. Use `UnresolvedDeserializer` expressions
+
+1. Have child operators link:spark-sql-LogicalPlan.adoc#childrenResolved[unresolved]
+
+=== [[resolve]] Resolving Expressions of Logical Plan -- `resolve` Internal Method
+
+[source, scala]
+----
+resolve(e: Expression, q: LogicalPlan): Expression
+----
+
+`resolve` resolves the input expression per type:
+
+1. `UnresolvedAttribute` expressions
+
+1. `UnresolvedExtractValue` expressions
+
+1. All other expressions
+
+NOTE: `resolve` is used exclusively when `ResolveReferences` is requested to <<apply, resolve reference expressions in a logical query plan>>.

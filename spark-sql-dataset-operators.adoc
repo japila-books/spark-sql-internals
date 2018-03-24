@@ -25,6 +25,10 @@ Beside the above operators, there are the following ones working with a `Dataset
 | <<createGlobalTempView, createGlobalTempView>> |
 | <<createOrReplaceTempView, createOrReplaceTempView>> |
 | <<createTempView, createTempView>> |
+
+| <<drop, drop>>
+|
+
 | <<explain, explain>> | Explain logical and physical plans of a `Dataset`
 | <<filter, filter>> |
 | <<flatMap, flatMap>> |
@@ -72,6 +76,17 @@ Used exclusively in Structured Streaming.
 | <<write, write>> |
 | <<writeStream, writeStream>> |
 |===
+
+=== [[drop]] Dropping One or More Columns -- `drop` Operator
+
+[source, scala]
+----
+drop(colName: String): DataFrame
+drop(colNames: String*): DataFrame
+drop(col: Column): DataFrame
+----
+
+CAUTION: FIXME
 
 === [[hint]] Specifying Hint -- `hint` Operator
 

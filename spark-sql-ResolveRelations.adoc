@@ -1,12 +1,14 @@
-== [[ResolveRelations]] ResolveRelations Logical Evaluation Rule -- Resolving UnresolvedRelations With Tables in Catalog
+== [[ResolveRelations]] ResolveRelations Logical Resolution Rule -- Resolving UnresolvedRelations With Tables in Catalog
 
-`ResolveRelations` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[Spark Analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a query plan), i.e.
+`ResolveRelations` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[Spark Analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
 1. Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
 
 1. Other uses of `UnresolvedRelation`
 
 Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+`ResolveRelations` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
 [source, scala]
 ----
@@ -66,8 +68,6 @@ scala> println(resolvedPlan.numberedTreeString)
 00 'SubqueryAlias t1
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
 ----
-
-`ResolveRelations` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
 === [[apply]] `apply` Method
 

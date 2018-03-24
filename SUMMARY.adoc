@@ -184,6 +184,7 @@
 . link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke Non-SQL Expression]
 . link:spark-sql-Expression-TimeWindow.adoc[TimeWindow Unevaluable Unary Expression]
 . link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp TimeZoneAware Binary Expression]
+. link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute]
 . link:spark-sql-Expression-WindowExpression.adoc[WindowExpression Unevaluable Expression]
 .. link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition Unevaluable Expression]
 . link:spark-sql-Expression-WindowFunction.adoc[WindowFunction]
@@ -193,11 +194,12 @@
 
 === Logical Operators
 
-. link:spark-sql-LogicalPlan.adoc[LogicalPlan -- Logical Query Plan / Logical Operator]
+. link:spark-sql-LogicalPlan.adoc[LogicalPlan -- Logical Operator with Children and Expressions / Logical Query Plan]
 . link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
 . link:spark-sql-LogicalPlan-Command.adoc[Command]
 . link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation]
 . link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
+. link:spark-sql-LogicalPlan-Except.adoc[Except]
 . link:spark-sql-LogicalPlan-Expand.adoc[Expand]
 . link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
 . link:spark-sql-LogicalPlan-Filter.adoc[Filter]
@@ -207,6 +209,7 @@
 . link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
 . link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
 . link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+. link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]
 . link:spark-sql-LogicalPlan-Join.adoc[Join]
 . link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
 . link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
@@ -232,6 +235,7 @@
 .. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 .. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
+. link:spark-sql-LogicalPlan-Sort.adoc[Sort]
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
 . link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction]
 . link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint]

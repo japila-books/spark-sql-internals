@@ -58,6 +58,10 @@ Technically, `AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBase
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
+| [[visitDereference]] `visitDereference`
+|
+|
+
 | [[visitExplain]] `visitExplain`
 | `explain`
 a| link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
