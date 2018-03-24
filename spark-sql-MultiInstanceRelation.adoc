@@ -40,7 +40,7 @@ When `ResolveReferences` logical evaluation is link:spark-sql-ResolveReferences.
 | [[LocalRelation]] link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
 |
 
-| [[LogicalRDD]] link:spark-sql-LogicalRDD.adoc[LogicalRDD]
+| [[LogicalRDD]] link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
 |
 
 | [[LogicalRelation]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation]

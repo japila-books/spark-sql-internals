@@ -213,7 +213,7 @@
 . link:spark-sql-LogicalPlan-Join.adoc[Join]
 . link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
 . link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
-. link:spark-sql-LogicalRDD.adoc[LogicalRDD]
+. link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
 . link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation]
 . link:spark-sql-LogicalPlan-Pivot.adoc[Pivot]
 . link:spark-sql-LogicalPlan-Project.adoc[Project]

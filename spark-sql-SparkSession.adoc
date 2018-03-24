@@ -195,7 +195,7 @@ scala> one.show
 +-----+
 ----
 
-`createDataset` creates a link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] (for the input `data` collection) or link:spark-sql-LogicalRDD.adoc[LogicalRDD] (for the input `RDD[T]`) logical operators.
+`createDataset` creates a link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] (for the input `data` collection) or link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD] (for the input `RDD[T]`) logical operators.
 
 [TIP]
 ====
@@ -555,7 +555,7 @@ internalCreateDataFrame(
   isStreaming: Boolean = false): DataFrame
 ----
 
-`internalCreateDataFrame` creates a link:spark-sql-Dataset.adoc#ofRows[DataFrame] with a link:spark-sql-LogicalRDD.adoc#creating-instance[LogicalRDD].
+`internalCreateDataFrame` creates a link:spark-sql-Dataset.adoc#ofRows[DataFrame] with a link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[LogicalRDD].
 
 [NOTE]
 ====

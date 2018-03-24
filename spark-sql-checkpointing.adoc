@@ -189,7 +189,7 @@ With `eager` flag on, `checkpoint` counts the number of records in the RDD (by e
 
 `checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
 
-In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
 === [[sparkcontext-setCheckpointDir]] Specyfing Checkpoint Directory -- `SparkContext.setCheckpointDir` Method
 

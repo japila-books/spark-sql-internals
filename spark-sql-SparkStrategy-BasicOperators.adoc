@@ -73,7 +73,7 @@
 | [[ExternalRDD]] link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
 | [[ExternalRDDScanExec]] link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 
-| [[LogicalRDD]] link:spark-sql-LogicalRDD.adoc[LogicalRDD]
+| [[LogicalRDD]] link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
 | link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
 |===
 
