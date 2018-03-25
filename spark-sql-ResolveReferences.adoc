@@ -19,6 +19,23 @@ res0: String = 2.3.0
 CAUTION: FIXME See ResolveRelations
 ----
 
+=== [[resolve]] Resolving Expressions of Logical Plan -- `resolve` Internal Method
+
+[source, scala]
+----
+resolve(e: Expression, q: LogicalPlan): Expression
+----
+
+`resolve` resolves the input expression per type:
+
+1. `UnresolvedAttribute` expressions
+
+1. `UnresolvedExtractValue` expressions
+
+1. All other expressions
+
+NOTE: `resolve` is used exclusively when `ResolveReferences` is requested to <<apply, resolve reference expressions in a logical query plan>>.
+
 === [[apply]] Resolving Reference Expressions In Logical Query Plan (Applying ResolveReferences to Logical Plan) -- `apply` Method
 
 [source, scala]
@@ -58,19 +75,32 @@ In the end, `apply` <<resolve, resolves>> the expressions of the input logical o
 
 1. Have child operators link:spark-sql-LogicalPlan.adoc#childrenResolved[unresolved]
 
-=== [[resolve]] Resolving Expressions of Logical Plan -- `resolve` Internal Method
+=== [[expandStarExpression]] `expandStarExpression` Method
 
 [source, scala]
 ----
-resolve(e: Expression, q: LogicalPlan): Expression
+expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 ----
 
-`resolve` resolves the input expression per type:
+`expandStarExpression`...FIXME
 
-1. `UnresolvedAttribute` expressions
+NOTE: `expandStarExpression` is used exclusively when `ResolveReferences` is requested to <<buildExpandedProjectList, expand Star expressions>> (in `Project` and `Aggregate` operators).
 
-1. `UnresolvedExtractValue` expressions
+=== [[buildExpandedProjectList]] Expanding Star Expressions -- `buildExpandedProjectList` Internal Method
 
-1. All other expressions
+[source, scala]
+----
+buildExpandedProjectList(
+  exprs: Seq[NamedExpression],
+  child: LogicalPlan): Seq[NamedExpression]
+----
 
-NOTE: `resolve` is used exclusively when `ResolveReferences` is requested to <<apply, resolve reference expressions in a logical query plan>>.
+`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression.adoc#NamedExpression[named expressions] recursively down the expression tree per expression:
+
+1. For a `Star` expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand itself] given the input `child` logical plan
+
+1. For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand itself] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
+
+1. For `exprs` with `Star` expressions down the expression tree, `buildExpandedProjectList` <<expandStarExpression, expandStarExpression>> passing the input `exprs` and `child`
+
+NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested to <<apply, resolve reference expressions>> (in `Project` and `Aggregate` operators with Star expressions).

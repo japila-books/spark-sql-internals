@@ -1,0 +1,45 @@
+== [[Star]] Star Expression Contract
+
+`Star` is a <<contract, contract>> of link:spark-sql-Expression.adoc#LeafExpression[leaf expressions] that...FIXME
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.analysis
+
+abstract class Star extends LeafExpression with NamedExpression {
+  // only required methods that have no implementation
+  def expand(input: LogicalPlan, resolver: Resolver): Seq[NamedExpression]
+}
+----
+
+.Star Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| `expand`
+a| [[expand]] Used when:
+
+1. `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#apply[expand Star expressions in ScriptTransformations in a logical plan]
+
+1. `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#buildExpandedProjectList[expand star expressions in Project and Aggregate operators]
+|===
+
+[[implementations]]
+.Stars
+[cols="1,2",options="header",width="100%"]
+|===
+| Star
+| Description
+
+| [[ResolvedStar]] link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
+|
+
+| [[UnresolvedRegex]] link:spark-sql-Expression-UnresolvedRegex.adoc[UnresolvedRegex]
+|
+
+| [[UnresolvedStar]] link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+|
+|===
