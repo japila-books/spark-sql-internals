@@ -38,7 +38,7 @@ NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operato
 Used when...FIXME
 
 | [[allImperativeAggregateFunctions]] `allImperativeAggregateFunctions`
-| link:spark-sql-Expression-AggregateFunction-ImperativeAggregate.adoc[ImperativeAggregate] functions
+| link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] functions
 
 Used when...FIXME
 

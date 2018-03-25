@@ -20,7 +20,7 @@
 | link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
 |
 
-| link:spark-sql-Expression-AggregateFunction-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
+| link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
 |
 |===
 
