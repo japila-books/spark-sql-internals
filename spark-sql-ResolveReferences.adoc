@@ -1,6 +1,6 @@
 == [[ResolveReferences]] ResolveReferences Logical Resolution Rule
 
-`ResolveReferences` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[Spark Analyzer] uses to <<apply, resolve FIXME>> (in a logical query plan), i.e.
+`ResolveReferences` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[Spark Analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
 
 1. Resolves...FIXME
 
@@ -13,10 +13,49 @@ Technically, `ResolveReferences` is just a link:spark-sql-catalyst-Rule.adoc[Cat
 scala> spark.version
 res0: String = 2.3.0
 
-// Use Catalyst DSL to create a logical plan
+scala> :type spark.sessionState.analyzer
+org.apache.spark.sql.catalyst.analysis.Analyzer
 
-// Example: InsertIntoTable with UnresolvedRelation
-CAUTION: FIXME See ResolveRelations
+scala> :type spark.sessionState.analyzer.ResolveReferences
+spark.sessionState.analyzer.ResolveReferences.type
+
+// FIXME: Use Catalyst DSL to create a logical plan
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val logicalPlan = t1
+  .select("a".attr, "*".attr)
+  .groupBy(groupingExprs = "b".attr)(aggregateExprs = "*".attr)
+scala> println(logicalPlan.numberedTreeString)
+00 'Aggregate ['b], ['*]
+01 +- 'Project ['a, '*]
+02    +- 'UnresolvedRelation `t1`
+// END FIXME
+
+// Make the example repeatable
+val table = "t1"
+import org.apache.spark.sql.catalyst.TableIdentifier
+spark.sessionState.catalog.dropTable(TableIdentifier(table), ignoreIfNotExists = true, purge = true)
+
+Seq((0, "zero"), (1, "one")).toDF("id", "name").createOrReplaceTempView(table)
+val query = spark.table("t1").select("id", "*").groupBy("id", "name").agg(col("*"))
+val logicalPlan = query.queryExecution.logical
+scala> println(logicalPlan.numberedTreeString)
+00 'Aggregate [id#28, name#29], [id#28, name#29, *]
+01 +- Project [id#28, id#28, name#29]
+02    +- SubqueryAlias t1
+03       +- Project [_1#25 AS id#28, _2#26 AS name#29]
+04          +- LocalRelation [_1#25, _2#26]
+
+import spark.sessionState.analyzer.ResolveReferences
+val planWithRefsResolved = ResolveReferences(logicalPlan)
+scala> println(planWithRefsResolved.numberedTreeString)
+00 Aggregate [id#28, name#29], [id#28, name#29, id#28, id#28, name#29]
+01 +- Project [id#28, id#28, name#29]
+02    +- SubqueryAlias t1
+03       +- Project [_1#25 AS id#28, _2#26 AS name#29]
+04          +- LocalRelation [_1#25, _2#26]
 ----
 
 === [[resolve]] Resolving Expressions of Logical Plan -- `resolve` Internal Method
@@ -75,17 +114,6 @@ In the end, `apply` <<resolve, resolves>> the expressions of the input logical o
 
 1. Have child operators link:spark-sql-LogicalPlan.adoc#childrenResolved[unresolved]
 
-=== [[expandStarExpression]] `expandStarExpression` Method
-
-[source, scala]
-----
-expandStarExpression(expr: Expression, child: LogicalPlan): Expression
-----
-
-`expandStarExpression`...FIXME
-
-NOTE: `expandStarExpression` is used exclusively when `ResolveReferences` is requested to <<buildExpandedProjectList, expand Star expressions>> (in `Project` and `Aggregate` operators).
-
 === [[buildExpandedProjectList]] Expanding Star Expressions -- `buildExpandedProjectList` Internal Method
 
 [source, scala]
@@ -104,3 +132,28 @@ buildExpandedProjectList(
 1. For `exprs` with `Star` expressions down the expression tree, `buildExpandedProjectList` <<expandStarExpression, expandStarExpression>> passing the input `exprs` and `child`
 
 NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested to <<apply, resolve reference expressions>> (in `Project` and `Aggregate` operators with Star expressions).
+
+=== [[expandStarExpression]] `expandStarExpression` Method
+
+[source, scala]
+----
+expandStarExpression(expr: Expression, child: LogicalPlan): Expression
+----
+
+`expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:spark-sql-Expression.adoc[expression]:
+
+1. For link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+
+1. For link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
+
+1. For link:spark-sql-Expression-CreateArray.adoc[CreateArray] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+
+1. For link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+
+For any other uses of link:spark-sql-Expression-Star.adoc[Star] expressions, `expandStarExpression` fails analysis with a `AnalysisException`:
+
+```
+Invalid usage of '*' in expression '[exprName]'
+```
+
+NOTE: `expandStarExpression` is used exclusively when `ResolveReferences` is requested to <<buildExpandedProjectList, expand Star expressions>> (in `Project` and `Aggregate` operators).

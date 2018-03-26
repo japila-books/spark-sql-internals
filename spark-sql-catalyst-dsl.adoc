@@ -1,6 +1,6 @@
 == [[dsl]] Catalyst DSL -- Implicit Conversions for Catalyst Data Structures
 
-*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> that allow for constructing link:spark-sql-catalyst.adoc[Catalyst data structures] (i.e. link:spark-sql-Expression.adoc[expressions] and link:spark-sql-LogicalPlan.adoc[logical plans]) more easily.
+*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> that allow for constructing link:spark-sql-catalyst.adoc[Catalyst data structures], i.e. link:spark-sql-Expression.adoc[expressions] and link:spark-sql-LogicalPlan.adoc[logical plans], more easily.
 
 The goal of Catalyst DSL is to make working with Spark SQL's building blocks easier (e.g. for testing or Spark SQL internals exploration).
 
@@ -103,7 +103,7 @@ scala> p.analyze
 ----
 
 [[implicit-conversions]]
-.Catalyst DSL's Implicit Conversions (in alphabetical order)
+.Catalyst DSL's Implicit Conversions
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
