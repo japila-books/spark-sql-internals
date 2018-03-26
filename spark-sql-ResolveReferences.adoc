@@ -142,7 +142,7 @@ expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 
 `expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:spark-sql-Expression.adoc[expression]:
 
-1. For link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
 
 1. For link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
 

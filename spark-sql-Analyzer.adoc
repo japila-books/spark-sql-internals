@@ -142,7 +142,7 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 ^.^| Simple Sanity Check
 ^.^| `Once`
 | [[LookupFunctions]] LookupFunctions
-| Checks whether a function identifier (referenced by an link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
+| Checks whether a function identifier (referenced by an link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
 
 .4+^.^| [[Substitution]] Substitution
 .4+^.^| <<fixedPoint, FixedPoint>>
@@ -223,7 +223,7 @@ a| Resolves functions using link:spark-sql-SessionCatalog.adoc#lookupFunction[Se
 
 * link:spark-sql-Expression-Generator.adoc#UnresolvedGenerator[UnresolvedGenerator] to a link:spark-sql-Expression-Generator.adoc[Generator]
 
-* link:spark-sql-LogicalPlan-UnresolvedFunction.adoc[UnresolvedFunction] to a link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] (with link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
+* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] to a link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] (with link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
 
 If `Generator` is not found, `ResolveFunctions` reports the error:
 

@@ -127,15 +127,40 @@ a|
 
 | `Unevaluable`
 | trait
-| [[Unevaluable]] Cannot be evaluated, i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and report an `UnsupportedOperationException`.
+a| [[Unevaluable]] Cannot be evaluated, i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and report an `UnsupportedOperationException`.
 
-`Unevaluable` expressions are supposed to be replaced by some other expressions during link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization].
+`Unevaluable` expressions have to be replaced by some other expressions during link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] or they fail analysis.
+
+```
+/**
+Example: Analysis failure due to an Unevaluable expression
+UnresolvedFunction is an Unevaluable expression
+Using Catalyst DSL to create a UnresolvedFunction
+*/
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val f = 'f.function()
+
+import org.apache.spark.sql.catalyst.dsl.plans._
+val logicalPlan = table("t1").select(f)
+scala> println(logicalPlan.numberedTreeString)
+00 'Project [unresolvedalias('f(), None)]
+01 +- 'UnresolvedRelation `t1`
+
+scala> spark.sessionState.analyzer.execute(logicalPlan)
+org.apache.spark.sql.AnalysisException: Undefined function: 'f'. This function is neither a registered temporary function nor a permanent function registered in the database 'default'.;
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15$$anonfun$applyOrElse$49.apply(Analyzer.scala:1198)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15$$anonfun$applyOrElse$49.apply(Analyzer.scala:1198)
+  at org.apache.spark.sql.catalyst.analysis.package$.withPosition(package.scala:48)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15.applyOrElse(Analyzer.scala:1197)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15.applyOrElse(Analyzer.scala:1195)
+```
 
 a|
 
 * link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]
 * `CurrentDatabase`
 * link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
+* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]
 * link:spark-sql-Expression-WindowExpression.adoc[WindowExpression]
 * link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
 |===

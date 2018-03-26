@@ -64,7 +64,7 @@ res2: Boolean = true
 ----
 ====
 
-=== [[agg]] Computing Aggregates Using Aggregate Column Expressions -- `agg` Operator
+=== [[agg]] Computing Aggregates Using Aggregate Column Expressions or Function Names -- `agg` Operator
 
 [source, scala]
 ----
@@ -242,3 +242,14 @@ Pivot [city#8], year#9: int, [2015, 2016, 2017], [count(1) AS count#24L]
    +- LocalRelation [_1#3, _2#4, _3#5]
 ```
 ====
+
+=== [[strToExpr]] `strToExpr` Internal Method
+
+[source, scala]
+----
+strToExpr(expr: String): (Expression => Expression)
+----
+
+`strToExpr`...FIXME
+
+NOTE: `strToExpr` is used exclusively when `RelationalGroupedDataset` is requested to <<agg, agg with aggregation functions specified by name>>

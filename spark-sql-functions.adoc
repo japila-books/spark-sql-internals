@@ -1,6 +1,6 @@
 == [[functions]] Standard Functions -- functions Object
 
-`org.apache.spark.sql.functions` object defines many built-in functions to work with link:spark-sql-Column.adoc[Columns] in link:spark-sql-Dataset.adoc[Datasets].
+`org.apache.spark.sql.functions` object defines built-in standard functions to work with values in link:spark-sql-Column.adoc[Columns].
 
 You can access the functions using the following `import` statement:
 
@@ -89,9 +89,12 @@ If the array/map is `null` or empty then `null` is produced.
 | <<upper, upper>>
 |
 
-1+^.^| *UDF functions*
+1.2+^.^| *UDF functions*
 | <<udf, udf>>
 | Creating UDFs
+
+| <<callUDF, callUDF>>
+| Executing an UDF by name with variable-length list of columns
 
 .6+^.^|*Window functions*
 |<<rank, rank, dense_rank, percent_rank>>
@@ -500,6 +503,15 @@ nameCol: org.apache.spark.sql.Column = name
 scala> val cityCol = column("city")
 cityCol: org.apache.spark.sql.Column = city
 ----
+
+=== [[callUDF]] Executing UDF by Name and Variable-Length Column List -- `callUDF` Function
+
+[source, scala]
+----
+callUDF(udfName: String, cols: Column*): Column
+----
+
+`callUDF` executes an UDF by `udfName` and variable-length list of columns.
 
 === [[udf]] Defining UDFs -- `udf` Function
 

@@ -122,7 +122,30 @@ a|
 
 * Adds aggregate and non-aggregate functions to link:spark-sql-Expression.adoc[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
 
-* Creates `UnresolvedFunction` (`function` operator) and link:spark-sql-Expression-BoundReference.adoc[BoundReference] (`at` operator) expressions
+* [[function]][[distinctFunction]] Creates link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] (`function` and `distinctFunction` operators) and link:spark-sql-Expression-BoundReference.adoc[BoundReference] (`at` operator) expressions
++
+[source, scala]
+----
+function(exprs: Expression*): UnresolvedFunction
+distinctFunction(exprs: Expression*): UnresolvedFunction
+----
++
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.expressions._
+
+// Works with Scala Symbols only
+val f = 'f.function()
+scala> :type f
+org.apache.spark.sql.catalyst.analysis.UnresolvedFunction
+
+scala> f.isDistinct
+res0: Boolean = false
+
+val g = 'g.distinctFunction()
+scala> g.isDistinct
+res1: Boolean = true
+----
 
 | [[ImplicitOperators]] `ImplicitOperators`
 | Operators for link:spark-sql-Expression.adoc[expressions]
