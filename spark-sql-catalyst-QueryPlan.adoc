@@ -41,6 +41,39 @@ abstract class QueryPlan[T] extends TreeNode[T] {
 | link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
 |===
 
+=== [[transformExpressions]] Transforming Expressions -- `transformExpressions` Method
+
+[source, scala]
+----
+transformExpressions(rule: PartialFunction[Expression, Expression]): this.type
+----
+
+`transformExpressions` simply executes <<transformExpressionsDown, transformExpressionsDown>> with the input rule.
+
+NOTE: `transformExpressions` is used when...FIXME
+
+=== [[transformExpressionsDown]] Transforming Expressions -- `transformExpressionsDown` Method
+
+[source, scala]
+----
+transformExpressionsDown(rule: PartialFunction[Expression, Expression]): this.type
+----
+
+`transformExpressionsDown` <<mapExpressions, applies the rule>> to each expression in the query operator.
+
+NOTE: `transformExpressionsDown` is used when...FIXME
+
+=== [[mapExpressions]] Applying Transformation Function to Each Expression in Query Operator -- `mapExpressions` Method
+
+[source, scala]
+----
+mapExpressions(f: Expression => Expression): this.type
+----
+
+`mapExpressions`...FIXME
+
+NOTE: `mapExpressions` is used when...FIXME
+
 === [[outputSet]] `outputSet` Property
 
 CAUTION: FIXME

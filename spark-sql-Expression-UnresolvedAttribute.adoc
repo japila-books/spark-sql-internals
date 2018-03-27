@@ -1,7 +1,7 @@
 == [[UnresolvedAttribute]] UnresolvedAttribute
 
-[[resolved]]
-`UnresolvedAttribute` is an link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expression that link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. give a value for an internal row) and link:spark-sql-Expression.adoc#resolved[resolved].
+[[name]]
+`UnresolvedAttribute` is a named link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expression (i.e. it has a name) that represents a reference to an entity in a logical query plan.
 
 `UnresolvedAttribute` is <<creating-instance, created>> when:
 
@@ -10,6 +10,30 @@
 1. `LogicalPlan` is requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve an attribute by name parts]
 
 1. `DescribeColumnCommand` is link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[executed]
+
+[[resolved]]
+`UnresolvedAttribute` can never be link:spark-sql-Expression.adoc#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
+
+[[analysis-phase]]
+[NOTE]
+====
+`UnresolvedAttribute` is resolved when `Analyzer` is link:spark-sql-Analyzer.adoc#execute[executed] by the following link:spark-sql-Analyzer.adoc#Resolution[logical resolution rules]:
+
+1. link:spark-sql-ResolveReferences.adoc#resolve[ResolveReferences]
+
+1. `ResolveMissingReferences`
+
+1. `ResolveDeserializer`
+
+1. `ResolveSubquery`
+====
+
+[[Unevaluable]][[eval]][[doGenCode]]
+Given `UnresolvedAttribute` can never be resolved it should not come as a surprise that it link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedAttribute` simply reports a `UnsupportedOperationException`.
+
+```
+Cannot evaluate expression: [this]
+```
 
 [[creating-instance]]
 [[nameParts]]
@@ -89,19 +113,9 @@ org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute
 ----
 ====
 
-`UnresolvedAttribute` is resolved when `Analyzer` is link:spark-sql-Analyzer.adoc#execute[executed] with the following link:spark-sql-Analyzer.adoc#Resolution[logical resolution rules]:
-
-1. link:spark-sql-ResolveReferences.adoc#resolve[ResolveReferences]
-
-1. `ResolveMissingReferences`
-
-1. `ResolveDeserializer`
-
-1. `ResolveSubquery`
-
 [NOTE]
 ====
-A `UnresolvedAttribute` can be resolved to a `NamedExpression` using an link:spark-sql-LogicalPlan.adoc#resolveQuoted[analyzed logical plan] (of the structured query the attribute is part of).
+A `UnresolvedAttribute` can be replaced by (_resolved_) a `NamedExpression` using an link:spark-sql-LogicalPlan.adoc#resolveQuoted[analyzed logical plan] (of the structured query the attribute is part of).
 
 [source, scala]
 ----

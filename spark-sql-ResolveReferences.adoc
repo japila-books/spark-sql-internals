@@ -1,6 +1,6 @@
 == [[ResolveReferences]] ResolveReferences Logical Resolution Rule
 
-`ResolveReferences` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[Spark Analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
+`ResolveReferences` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[logical query plan analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
 
 1. Resolves...FIXME
 
@@ -8,6 +8,7 @@ Technically, `ResolveReferences` is just a link:spark-sql-catalyst-Rule.adoc[Cat
 
 `ResolveReferences` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
+[[example]]
 [source, scala]
 ----
 scala> spark.version
