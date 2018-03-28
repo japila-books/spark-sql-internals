@@ -46,7 +46,7 @@ NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract
 +
 That case seems mostly for compatibility with Hive as `grouping__id` attribute name is used by Hive.
 
-1. For `UnresolvedGenerators`, `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a Generator function by name].
+1. For link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a Generator function by name].
 +
 If some other non-generator function is found for the name, `apply` fails the analysis phase by reporting an `AnalysisException`:
 +

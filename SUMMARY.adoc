@@ -206,6 +206,7 @@
 . link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
 . link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute]
 . link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]
+. link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator]
 . link:spark-sql-Expression-UnresolvedRegex.adoc[UnresolvedRegex]
 . link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
 . link:spark-sql-Expression-WindowExpression.adoc[WindowExpression]

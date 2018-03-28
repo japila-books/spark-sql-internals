@@ -10,11 +10,19 @@
 
 1. `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
-`UnresolvedFunction` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. give a value for an internal row) and link:spark-sql-Expression.adoc#resolved[resolved].
-
-NOTE: link:spark-sql-Expression.adoc#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] (or they fail analysis).
+[[resolved]]
+`UnresolvedFunction` can never be link:spark-sql-Expression.adoc#resolved[resolved] (and is replaced at analysis phase).
 
 NOTE: `UnresolvedFunction` is first looked up in `LookupFunctions` logical rule and then resolved in `ResolveFunctions` resolution rule.
+
+[[Unevaluable]][[eval]][[doGenCode]]
+Given `UnresolvedFunction` can never be resolved it should not come as a surprise that it link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedFunction` simply reports a `UnsupportedOperationException`.
+
+```
+Cannot evaluate expression: [this]
+```
+
+NOTE: link:spark-sql-Expression.adoc#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] (or they fail analysis).
 
 TIP: Use Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#function[function] or link:spark-sql-catalyst-dsl.adoc#distinctFunction[distinctFunction] to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
 

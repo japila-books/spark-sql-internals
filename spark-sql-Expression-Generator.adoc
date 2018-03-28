@@ -56,7 +56,7 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | [[Stack]] link:spark-sql-Expression-Stack.adoc[Stack]
 |
 
-| [[UnresolvedGenerator]] `UnresolvedGenerator`
+| [[UnresolvedGenerator]] link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator]
 a| Represents an unresolved <<Generator, generator>>.
 
 Created when `AstBuilder` link:spark-sql-AstBuilder.adoc#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
