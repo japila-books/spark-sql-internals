@@ -1,6 +1,6 @@
 == [[UnresolvedGenerator]] UnresolvedGenerator Expression
 
-`UnresolvedGenerator` is a concrete link:spark-sql-Expression-Generator.adoc[Generator] that represents an unresolved generator in a logical query plan.
+`UnresolvedGenerator` is a link:spark-sql-Expression-Generator.adoc[Generator] that represents an unresolved generator in a logical query plan.
 
 `UnresolvedGenerator` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withGenerate[withGenerate] (as part of link:spark-sql-LogicalPlan-Generate.adoc#generator[Generate] logical operator) for SQL's `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
