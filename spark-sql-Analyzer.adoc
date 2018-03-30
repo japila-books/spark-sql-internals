@@ -139,10 +139,10 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 | RemoveAllHints
 | Removes all the hints (valid or not).
 
-^.^| Simple Sanity Check
+^.^| [[Simple-Sanity-Check]] Simple Sanity Check
 ^.^| `Once`
-| [[LookupFunctions]] LookupFunctions
-| Checks whether a function identifier (referenced by an link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
+| link:spark-sql-LookupFunctions.adoc[LookupFunctions]
+| [[LookupFunctions]] Checks whether a function identifier (referenced by an link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
 
 .4+^.^| [[Substitution]] Substitution
 .4+^.^| <<fixedPoint, FixedPoint>>

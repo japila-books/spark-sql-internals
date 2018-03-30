@@ -317,11 +317,12 @@
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
-=== Logical Evaluation and Resolution Rules
+=== Logical Analysis (Evaluation and Resolution) Rules
 
 . link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+. link:spark-sql-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 . link:spark-sql-ResolveFunctions.adoc[ResolveFunctions]
