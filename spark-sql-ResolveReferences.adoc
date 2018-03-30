@@ -26,11 +26,11 @@ val t1 = table("t1")
 
 import org.apache.spark.sql.catalyst.dsl.expressions._
 val logicalPlan = t1
-  .select("a".attr, "*".attr)
-  .groupBy(groupingExprs = "b".attr)(aggregateExprs = "*".attr)
+  .select("a".attr, star())
+  .groupBy(groupingExprs = "b".attr)(aggregateExprs = star())
 scala> println(logicalPlan.numberedTreeString)
-00 'Aggregate ['b], ['*]
-01 +- 'Project ['a, '*]
+00 'Aggregate ['b], [*]
+01 +- 'Project ['a, *]
 02    +- 'UnresolvedRelation `t1`
 // END FIXME
 
@@ -124,15 +124,15 @@ buildExpandedProjectList(
   child: LogicalPlan): Seq[NamedExpression]
 ----
 
-`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression.adoc#NamedExpression[named expressions] recursively down the expression tree per expression:
+`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression.adoc#NamedExpression[named expressions] recursively (down the expression tree) per expression:
 
-1. For a `Star` expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand itself] given the input `child` logical plan
+1. For a `Star` expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan
 
-1. For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand itself] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
+1. For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
 
 1. For `exprs` with `Star` expressions down the expression tree, `buildExpandedProjectList` <<expandStarExpression, expandStarExpression>> passing the input `exprs` and `child`
 
-NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested to <<apply, resolve reference expressions>> (in `Project` and `Aggregate` operators with Star expressions).
+NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested to <<apply, resolve reference expressions>> (in `Project` and `Aggregate` operators with `Star` expressions).
 
 === [[expandStarExpression]] `expandStarExpression` Method
 
@@ -143,7 +143,23 @@ expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 
 `expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:spark-sql-Expression.adoc[expression]:
 
-1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression` requests the `Star` expressions to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan and the link:spark-sql-Analyzer.adoc#resolver[resolver].
++
+```
+// Using Catalyst DSL to create a logical plan with a function with Star child expression
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val f1 = 'f1.function(star())
+
+val plan = t1.select(f1)
+scala> println(plan.numberedTreeString)
+00 'Project [unresolvedalias('f1(*), None)]
+01 +- 'UnresolvedRelation `t1`
+
+// CAUTION: FIXME How to demo that the plan gets resolved using ResolveReferences.expandStarExpression?
+```
 
 1. For link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
 

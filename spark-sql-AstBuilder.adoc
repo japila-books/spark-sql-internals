@@ -170,6 +170,10 @@ NOTE: A single statement can be quite involved.
 | `singleTableIdentifier`
 | `TableIdentifier`
 
+| [[visitStar]] `visitStar`
+| `#star` labeled alternative
+| link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+
 | [[visitWindowDef]] `visitWindowDef`
 | `windowDef` labeled alternative
 a| link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]

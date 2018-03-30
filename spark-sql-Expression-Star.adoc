@@ -1,6 +1,6 @@
 == [[Star]] Star Expression Contract
 
-`Star` is a <<contract, contract>> of link:spark-sql-Expression.adoc#LeafExpression[leaf expressions] that...FIXME
+`Star` is a <<contract, contract>> of link:spark-sql-Expression.adoc#LeafExpression[leaf] and link:spark-sql-Expression.adoc#NamedExpression[named expressions] that...FIXME
 
 [[contract]]
 [source, scala]
@@ -24,7 +24,7 @@ a| [[expand]] Used when:
 
 1. `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#apply[expand Star expressions in ScriptTransformations in a logical plan]
 
-1. `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#buildExpandedProjectList[expand star expressions in Project and Aggregate operators]
+1. `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#buildExpandedProjectList[expand Star expressions in Project and Aggregate operators]
 |===
 
 [[implementations]]

@@ -1,3 +1,83 @@
-== [[UnresolvedStar]] UnresolvedStar
+== [[UnresolvedStar]] UnresolvedStar Expression
 
-`UnresolvedStar` is...FIXME
+`UnresolvedStar` is a link:spark-sql-Expression-Star.adoc[Star] expression that represents a star (i.e. all) expression in a logical query plan.
+
+`UnresolvedStar` is <<creating-instance, created>> when:
+
+1. `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitStar[visitStar]
+
+1. `Column` is link:spark-sql-Column.adoc#star[created] with `*`
+
+[[resolved]]
+`UnresolvedStar` can never be link:spark-sql-Expression.adoc#resolved[resolved].
+
+[[Unevaluable]][[eval]][[doGenCode]]
+Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
+
+```
+Cannot evaluate expression: [this]
+```
+
+[[creating-instance]]
+[[target]]
+When created, `UnresolvedStar` takes *name parts* that, once concatenated, should be the target of the expansion.
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.analysis.UnresolvedStar
+scala> val us = UnresolvedStar(None)
+us: org.apache.spark.sql.catalyst.analysis.UnresolvedStar = *
+
+scala> val ab = UnresolvedStar(Some("a" :: "b" :: Nil))
+ab: org.apache.spark.sql.catalyst.analysis.UnresolvedStar = List(a, b).*
+----
+
+[TIP]
+====
+Use `star` operator from Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#expressions[expressions] to create an `UnresolvedStar`.
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val s = star()
+scala> :type s
+org.apache.spark.sql.catalyst.expressions.Expression
+
+import org.apache.spark.sql.catalyst.analysis.UnresolvedStar
+assert(s.isInstanceOf[UnresolvedStar])
+
+val s = star("a", "b")
+scala> println(s)
+WrappedArray(a, b).*
+----
+
+You could also use `$"*"` or `'*` to create an `UnresolvedStar`, but that requires `sbt console` (with Spark libraries defined in `build.sbt`) as the Catalyst DSL `expressions` implicits interfere with the Spark implicits to create columns.
+====
+
+[NOTE]
+====
+`AstBuilder` link:spark-sql-AstBuilder.adoc#visitFunctionCall[replaces] `count(*)` (with no `DISTINCT` keyword) to `count(1)`.
+
+```
+val q = sql("SELECT COUNT(*) FROM RANGE(1,2,3)")
+scala> println(q.queryExecution.logical.numberedTreeString)
+00 'Project [unresolvedalias('count(1), None)]
+01 +- 'UnresolvedTableValuedFunction range, [1, 2, 3]
+
+val q = sql("SELECT COUNT(DISTINCT *) FROM RANGE(1,2,3)")
+scala> println(q.queryExecution.logical.numberedTreeString)
+00 'Project [unresolvedalias('COUNT(*), None)]
+01 +- 'UnresolvedTableValuedFunction RANGE, [1, 2, 3]
+```
+====
+
+=== [[expand]] `expand` Method
+
+[source, scala]
+----
+expand(input: LogicalPlan, resolver: Resolver): Seq[NamedExpression]
+----
+
+NOTE: `expand` is part of link:spark-sql-Expression-Star.adoc#expand[Star Contract] to...FIXME.
+
+`expand`...FIXME

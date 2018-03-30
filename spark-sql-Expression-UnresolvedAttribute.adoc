@@ -1,4 +1,4 @@
-== [[UnresolvedAttribute]] UnresolvedAttribute
+== [[UnresolvedAttribute]] UnresolvedAttribute Leaf Expression
 
 [[name]]
 `UnresolvedAttribute` is a named link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expression (i.e. it has a name) that represents a reference to an entity in a logical query plan.
