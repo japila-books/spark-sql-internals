@@ -124,7 +124,7 @@ buildExpandedProjectList(
   child: LogicalPlan): Seq[NamedExpression]
 ----
 
-`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression.adoc#NamedExpression[named expressions] recursively (down the expression tree) per expression:
+`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression-NamedExpression.adoc[named expressions] recursively (down the expression tree) per expression:
 
 1. For a `Star` expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan
 

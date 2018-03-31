@@ -71,11 +71,11 @@ CAUTION: FIXME
 
 `TungstenAggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes
 * [[originalInputAttributes]] Output attributes of the link:spark-sql-SparkPlan-HashAggregateExec.adoc#child[child] operator of `HashAggregateExec`
 * [[inputIter]] Iterator of `InternalRows` from a single partition of the child's result `RDD[InternalRow]`

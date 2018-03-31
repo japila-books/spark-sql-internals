@@ -62,5 +62,5 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 
 `ProjectExec` takes the following when created:
 
-* [[projectList]] link:spark-sql-Expression.adoc#NamedExpression[NamedExpressions] for the projection
+* [[projectList]] link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions] for the projection
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical operator]

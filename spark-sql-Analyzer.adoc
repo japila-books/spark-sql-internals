@@ -235,7 +235,7 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 | [[ResolveAliases]] ResolveAliases
 a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with concrete aliases:
 
-* link:spark-sql-Expression.adoc#NamedExpression[NamedExpressions]
+* link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions]
 * `MultiAlias` (for `GeneratorOuter` and `Generator`)
 * `Alias` (for `Cast` and `ExtractValue`)
 

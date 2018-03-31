@@ -201,15 +201,20 @@ resolveQuoted(
 
 NOTE: `resolveQuoted` is used when...FIXME
 
-=== [[resolve]] Resolving Attribute By Name Parts -- `resolve` Internal Method
+=== [[resolve]] Resolving Attribute By Name Parts -- `resolve` Method
 
 [source, scala]
 ----
+resolve(schema: StructType, resolver: Resolver): Seq[Attribute]
+resolve(
+  nameParts: Seq[String],
+  resolver: Resolver): Option[NamedExpression]
 resolve(
   nameParts: Seq[String],
   input: Seq[Attribute],
-  resolver: Resolver): Option[NamedExpression]
+  resolver: Resolver): Option[NamedExpression]  // <1>
 ----
+<1> A protected method
 
 `resolve`...FIXME
 

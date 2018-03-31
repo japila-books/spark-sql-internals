@@ -77,12 +77,12 @@ Used when...FIXME
 
 `AggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[inputAttributes]] Input link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Result link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[resultExpressions]] Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
 
 `AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.

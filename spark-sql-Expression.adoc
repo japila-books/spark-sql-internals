@@ -80,7 +80,7 @@ a|
 * link:spark-sql-Expression-Attribute.adoc[Attribute]
 * link:spark-sql-Expression-Literal.adoc[Literal]
 
-| [[NamedExpression]] `NamedExpression`
+| [[NamedExpression]] link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
 |
 | Can later be referenced in a dataflow graph.
 |
@@ -196,7 +196,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[dataType]] `dataType`
-|
+| link:spark-sql-DataType.adoc[DataType] of the result of evaluating the expression.
 
 | [[doGenCode]] `doGenCode`
 | *Code-generated evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).

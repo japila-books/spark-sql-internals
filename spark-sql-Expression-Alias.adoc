@@ -1,6 +1,6 @@
-== [[Alias]] Alias
+== [[Alias]] Alias Unary Expression
 
-`Alias` is a Catalyst link:spark-sql-Expression.adoc#UnaryExpression[unary expression] and a link:spark-sql-Expression.adoc#NamedExpression[named expression].
+`Alias` is a Catalyst link:spark-sql-Expression.adoc#UnaryExpression[unary expression] and a link:spark-sql-Expression-NamedExpression.adoc[named expression].
 
 `Alias` is <<creating-instance, created>> when...FIXME
 

@@ -107,7 +107,7 @@ scala> println(plan.numberedTreeString)
 
 `Project` takes the following when created:
 
-* [[projectList]] link:spark-sql-Expression.adoc#NamedExpression[Named expressions]
+* [[projectList]] link:spark-sql-Expression-NamedExpression.adoc[Named expressions]
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
 `Project` initializes the <<internal-registries, internal registries and counters>>.

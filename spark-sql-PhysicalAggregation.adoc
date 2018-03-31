@@ -2,11 +2,11 @@
 
 `PhysicalAggregation` is a Scala extractor to <<unapply, destructure an Aggregate logical operator>> into a four-element tuple with the following elements:
 
-1. Grouping link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+1. Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 
 1. link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpressions]
 
-1. Result link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+1. Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 
 1. Child link:spark-sql-LogicalPlan.adoc[logical operator]
 

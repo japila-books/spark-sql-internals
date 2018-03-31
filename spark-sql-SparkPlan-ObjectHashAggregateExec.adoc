@@ -112,9 +112,9 @@ NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` li
 `ObjectHashAggregateExec` takes the following when created:
 
 * [[requiredChildDistributionExpressions]] Required child distribution link:spark-sql-Expression.adoc[expressions]
-* [[groupingExpressions]] Grouping link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output link:spark-sql-Expression.adoc#NamedExpression[named expressions]
+* [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
