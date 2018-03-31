@@ -232,7 +232,7 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ----
 
-| [[ResolveAliases]] ResolveAliases
+| [[ResolveAliases]] link:spark-sql-ResolveAliases.adoc[ResolveAliases]
 a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with concrete aliases:
 
 * link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions]

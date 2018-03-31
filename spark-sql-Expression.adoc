@@ -72,6 +72,19 @@ a|
 |
 |
 
+| [[ExtractValue]] `ExtractValue`
+| trait
+| Marks `UnresolvedAliases` to be resolved to link:spark-sql-Expression-Alias.adoc[Aliases] with "pretty" SQLs when link:spark-sql-ResolveAliases.adoc#assignAliases[ResolveAliases] is executed
+a|
+
+* link:spark-sql-Expression-GetArrayItem.adoc[GetArrayItem]
+
+* link:spark-sql-Expression-GetArrayStructFields.adoc[GetArrayStructFields]
+
+* link:spark-sql-Expression-GetMapValue.adoc[GetMapValue]
+
+* link:spark-sql-Expression-GetStructField.adoc[GetStructField]
+
 | [[LeafExpression]] `LeafExpression`
 | abstract class
 | Has no link:spark-sql-catalyst-TreeNode.adoc#children[child expressions] (and hence "terminates" the expression tree).

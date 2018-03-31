@@ -70,7 +70,7 @@ scala> println(resolvedPlan.numberedTreeString)
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
 ----
 
-=== [[apply]] `apply` Method
+=== [[apply]] Applying ResolveRelations to Logical Plan -- `apply` Method
 
 [source, scala]
 ----

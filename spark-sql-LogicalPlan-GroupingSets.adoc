@@ -40,7 +40,7 @@ The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `GroupingS
 
 `GroupingSets` operator is resolved at link:spark-sql-Analyzer.adoc[analysis phase] in the following logical evaluation rules:
 
-* link:spark-sql-Analyzer.adoc#ResolveAliases[ResolveAliases] for unresolved aliases in <<aggregations, aggregate named expressions>>
+* link:spark-sql-ResolveAliases.adoc[ResolveAliases] for unresolved aliases in <<aggregations, aggregate named expressions>>
 
 * link:spark-sql-Analyzer.adoc#ResolveGroupingAnalytics[ResolveGroupingAnalytics]
 
