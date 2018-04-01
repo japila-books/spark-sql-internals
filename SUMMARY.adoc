@@ -131,7 +131,7 @@
 
 == Query Planning and Execution
 
-. link:spark-sql-QueryExecution.adoc[QueryExecution -- Query Execution of Dataset]
+. link:spark-sql-QueryExecution.adoc[QueryExecution -- Structured Query Execution Pipeline (of Dataset)]
 
 . link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
@@ -365,9 +365,8 @@
 . link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
 . link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
 
-=== Physical Preparations Rules
+=== Physical Query Optimizations
 
-. link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[Physical Preparations Rules]
 . link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
 . link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
 . link:spark-sql-ExtractPythonUDFs.adoc[ExtractPythonUDFs]

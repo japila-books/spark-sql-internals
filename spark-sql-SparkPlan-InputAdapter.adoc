@@ -1,23 +1,37 @@
 == [[InputAdapter]] InputAdapter Unary Physical Operator
 
-`InputAdapter` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements for link:spark-sql-CodegenSupport.adoc[whole-stage Java code generation] (possibly due to link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned off) but is in-between operators that participate in whole-stage Java code generation for a structured query.
+`InputAdapter` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of link:spark-sql-CodegenSupport.adoc[whole-stage Java code generation] (possibly due to link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
 
 .InputAdapter's doProduce
 image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
 
-`InputAdapter` is created exclusively when `CollapseCodegenStages` link:spark-sql-CollapseCodegenStages.adoc#insertInputAdapter[inserts] one into a physical plan with whole-stage Java code generation.
+[[child]]
+[[creating-instance]]
+`InputAdapter` takes a single `child` link:spark-sql-SparkPlan.adoc[physical plan] when created.
+
+`InputAdapter` is <<creating-instance, created>> exclusively when `CollapseCodegenStages` is requested to link:spark-sql-CollapseCodegenStages.adoc#insertInputAdapter[insert InputAdapters] into a physical query plan with whole-stage Java code generation enabled.
 
 [[generateTreeString]]
 `InputAdapter` makes sure that the prefix in the _stringified tree representation_ of a physical plan is an empty string (and so it removes the star from the tree representation that link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] adds), e.g. for link:spark-sql-dataset-operators.adoc#explain[explain] or link:spark-sql-catalyst-TreeNode.adoc#numberedTreeString[TreeNode.numberedTreeString] operators.
+
+TIP: The number of `InputAdapters` is exactly the number of subtrees in a physical query plan that do not have stars.
+
+[source, scala]
+----
+scala> println(plan.numberedTreeString)
+00 *(1) Project [id#117L]
+01 +- *(1) BroadcastHashJoin [id#117L], [cast(id#115 as bigint)], Inner, BuildRight
+02    :- *(1) Range (0, 1, step=1, splits=8)
+03    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
+04       +- Generate explode(ids#112), false, [id#115]
+05          +- LocalTableScan [ids#112]
+----
 
 [[needCopyResult]]
 `InputAdapter` requires that...FIXME, i.e. `needCopyResult` flag is turned off.
 
 [[inputRDDs]]
 `InputAdapter` link:spark-sql-SparkPlan.adoc#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs] for <<doProduce, whole-stage produce path code generation>>.
-
-[[child]]
-`InputAdapter` takes a single `child` physical plan when created.
 
 [source, scala]
 ----
@@ -27,21 +41,23 @@ res0: String = 2.3.0
 // explode expression (that uses Generate operator) does not support codegen
 val ids = Seq(Seq(0,1,2,3)).toDF("ids").select(explode($"ids") as "id")
 val q = spark.range(1).join(ids, "id")
-scala> q.explain
-== Physical Plan ==
-*Project [id#10L]
-+- *BroadcastHashJoin [id#10L], [cast(id#7 as bigint)], Inner, BuildRight
-   :- *Range (0, 1, step=1, splits=8)
-   +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
-      +- Generate explode(ids#3), false, false, [id#7]
-         +- LocalTableScan [ids#3]
-scala> println(q.queryExecution.executedPlan.numberedTreeString)
-00 *Project [id#10L]
-01 +- *BroadcastHashJoin [id#10L], [cast(id#7 as bigint)], Inner, BuildRight
-02    :- *Range (0, 1, step=1, splits=8)
+// Use executedPlan
+// This is after the whole-stage Java code generation optimization is applied to a physical plan
+val plan = q.queryExecution.executedPlan
+scala> println(plan.numberedTreeString)
+00 *(1) Project [id#117L]
+01 +- *(1) BroadcastHashJoin [id#117L], [cast(id#115 as bigint)], Inner, BuildRight
+02    :- *(1) Range (0, 1, step=1, splits=8)
 03    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
-04       +- Generate explode(ids#3), false, false, [id#7]
-05          +- LocalTableScan [ids#3]
+04       +- Generate explode(ids#112), false, [id#115]
+05          +- LocalTableScan [ids#112]
+
+// Find all InputAdapters in the physical query plan
+import org.apache.spark.sql.execution.InputAdapter
+scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, idx) => s"$idx) $op" }.foreach(println)
+0) BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
++- Generate explode(ids#112), false, [id#115]
+   +- LocalTableScan [ids#112]
 ----
 
 === [[doProduce]] Generating Java Source Code for Whole-Stage Produce Path Code Generation -- `doProduce` Method
@@ -81,6 +97,9 @@ val plan = q.queryExecution.executedPlan
 import org.apache.spark.sql.execution.InputAdapter
 // there are two InputAdapters (for Generate and BroadcastExchange operators) so get is safe
 val adapter = plan.collectFirst { case a: InputAdapter => a }.get
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
 
 import org.apache.spark.sql.execution.CodegenSupport
 val code = adapter.produce(ctx, plan.asInstanceOf[CodegenSupport])

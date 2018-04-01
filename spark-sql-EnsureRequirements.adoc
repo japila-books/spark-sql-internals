@@ -1,13 +1,15 @@
-== [[EnsureRequirements]] EnsureRequirements Physical Preparation Rule
+== [[EnsureRequirements]] EnsureRequirements Physical Query Plan Optimization Rule
 
 [[apply]]
-`EnsureRequirements` is a link:spark-sql-QueryExecution-SparkPlan-Preparations.adoc[physical preparation rule] that transforms link:spark-sql-SparkPlan.adoc[physical operators] (up the plan tree):
+`EnsureRequirements` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by transforming the following physical operators (up the plan tree):
 
 1. Removes two adjacent link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] physical operators if the child partitioning scheme guarantees the parent's partitioning
 
-1. For other non-``ShuffleExchange`` physical operators, <<ensureDistributionAndOrdering, ensures partition distribution and ordering>> (possibly adding new physical operators, e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] and link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] for distribution or `SortExec` for sorting)
+1. For other non-``ShuffleExchange`` physical operators, <<ensureDistributionAndOrdering, ensures partition distribution and ordering>> (possibly adding new physical operators, e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] and link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] for distribution or link:spark-sql-SparkPlan-SortExec.adoc[SortExec] for sorting)
 
-`EnsureRequirements` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution.
+Technically, `EnsureRequirements` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
+
+`EnsureRequirements` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution.
 
 [[conf]]
 `EnsureRequirements` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
@@ -67,7 +69,7 @@ If the children's output partitionings are not all compatible, then...FIXME
 
 NOTE: At this point in `ensureDistributionAndOrdering` the required child distributions are already handled.
 
-`ensureDistributionAndOrdering` matches the operator's required sort ordering of children (`requiredChildOrderings`) to the children's link:spark-sql-SparkPlan.adoc#outputPartitioning[output partitioning] and if the orderings do not match, `SortExec` unary physical operator is created as a new child.
+`ensureDistributionAndOrdering` matches the operator's required sort ordering of children (`requiredChildOrderings`) to the children's link:spark-sql-SparkPlan.adoc#outputPartitioning[output partitioning] and if the orderings do not match, link:spark-sql-SparkPlan-SortExec.adoc#creating-instance[SortExec] unary physical operator is created as a new child.
 
 `ensureDistributionAndOrdering` link:spark-sql-catalyst-TreeNode.adoc#withNewChildren[sets the new children] for the input `operator`.
 
