@@ -25,9 +25,8 @@
 .. link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]
 
 . link:spark-sql-dataset-operators.adoc[Dataset Operators]
-.. link:spark-sql-Column.adoc[Column Expressions and Operators]
-.. link:spark-sql-TypedColumn.adoc[TypedColumn Expressions]
-.. link:spark-sql-Aggregator.adoc[Aggregator Expressions]
+. link:spark-sql-Column.adoc[Column Expressions and Operators]
+. link:spark-sql-TypedColumn.adoc[TypedColumn]
 
 . link:spark-sql-basic-aggregation.adoc[Basic Aggregation -- Typed and Untyped Grouping Operators]
 .. link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset -- Untyped Row-based Grouping]
@@ -50,7 +49,8 @@
 .. link:spark-sql-udfs-blackbox.adoc[UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice]
 .. link:spark-sql-UserDefinedFunction.adoc[UserDefinedFunction]
 
-. link:spark-sql-UserDefinedAggregateFunction.adoc[UserDefinedAggregateFunction -- Contract for User-Defined Aggregate Functions (UDAFs)]
+. link:spark-sql-UserDefinedAggregateFunction.adoc[UserDefinedAggregateFunction -- Contract for User-Defined Untyped Aggregate Functions (UDAFs)]
+. link:spark-sql-Aggregator.adoc[Aggregator -- Contract for User-Defined Typed Aggregate Functions (UDAFs)]
 
 . link:spark-sql-schema.adoc[Schema -- Structure of Data]
 .. link:spark-sql-StructType.adoc[StructType]
@@ -179,6 +179,7 @@
 . link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection]
 . link:spark-sql-Expression-CodegenFallback.adoc[CodegenFallback]
 . link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator]
+. link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc[ComplexTypedAggregateExpression]
 . link:spark-sql-Expression-CreateArray.adoc[CreateArray]
 . link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct]
 . link:spark-sql-Expression-CreateNamedStructUnsafe.adoc[CreateNamedStructUnsafe]
@@ -202,11 +203,13 @@
 . link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF]
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
+. link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
 . link:spark-sql-Expression-SizeBasedWindowFunction.adoc[SizeBasedWindowFunction]
 . link:spark-sql-Expression-Stack.adoc[Stack]
 . link:spark-sql-Expression-Star.adoc[Star]
 . link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]
 . link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
+. link:spark-sql-Expression-TypedAggregateExpression.adoc[TypedAggregateExpression]
 . link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
 . link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
 . link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute]

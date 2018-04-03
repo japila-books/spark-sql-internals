@@ -410,6 +410,17 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-
 1. link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
 ====
 
+=== [[selectUntyped]] `selectUntyped` Internal Method
+
+[source, scala]
+----
+selectUntyped(columns: TypedColumn[_, _]*): Dataset[_]
+----
+
+`selectUntyped`...FIXME
+
+NOTE: `selectUntyped` is used exclusively when link:spark-sql-dataset-operators.adoc#select[Dataset.select] typed operator is used.
+
 === [[i-want-more]] Further Reading and Watching
 
 * (video) https://youtu.be/i7l3JQRx7Qw[Structuring Spark: DataFrames, Datasets, and Streaming]

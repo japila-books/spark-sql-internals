@@ -44,7 +44,7 @@
 | `Collect`
 |
 
-| `ComplexTypedAggregateExpression`
+| link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc[ComplexTypedAggregateExpression]
 |
 
 | `CountMinSketchAgg`

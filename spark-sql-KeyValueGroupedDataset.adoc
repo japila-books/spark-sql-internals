@@ -20,7 +20,7 @@ tokensByName: org.apache.spark.sql.KeyValueGroupedDataset[String,Token] = org.ap
 | Operator
 | Description
 
-| `agg`
+| [[agg]] `agg`
 |
 
 | `cogroup`
@@ -66,3 +66,14 @@ scala> tokensByName.keys.show
 |  bbb|
 +-----+
 ----
+
+=== [[aggUntyped]] `aggUntyped` Internal Method
+
+[source, scala]
+----
+aggUntyped(columns: TypedColumn[_, _]*): Dataset[_]
+----
+
+`aggUntyped`...FIXME
+
+NOTE: `aggUntyped` is used exclusively when <<agg, KeyValueGroupedDataset.agg>> typed operator is used.

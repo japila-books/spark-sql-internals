@@ -21,25 +21,25 @@ NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used
 | <<agg, agg>>
 |
 
-| `avg`
+| [[avg]] `avg`
 |
 
-| `count`
+| [[count]] `count`
 |
 
-| `max`
+| [[max]] `max`
 |
 
-| `mean`
+| [[mean]] `mean`
 |
 
-| `min`
+| [[min]] `min`
 |
 
 | <<pivot, pivot>>
 | Pivots on a column (with new columns per distinct value)
 
-| `sum`
+| [[sum]] `sum`
 |
 |===
 
@@ -142,6 +142,26 @@ Internally, `toDF` branches off per group type.
 CAUTION: FIXME
 
 [[toDF-PivotType]] For `PivotType`, `toDF` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] unary logical operator.
+
+[NOTE]
+====
+`toDF` is used when the following `RelationalGroupedDataset` operators are used:
+
+1. <<agg, agg>> and <<count, count>>
+
+1. <<mean, mean>>, <<max, max>>, <<avg, avg>>, <<min, min>> and <<sum, sum>> (indirectly through <<aggregateNumericColumns, aggregateNumericColumns>>)
+====
+
+=== [[aggregateNumericColumns]] `aggregateNumericColumns` Internal Method
+
+[source, scala]
+----
+aggregateNumericColumns(colNames: String*)(f: Expression => AggregateFunction): DataFrame
+----
+
+`aggregateNumericColumns`...FIXME
+
+NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDataset` operators are used: <<mean, mean>>, <<max, max>>, <<avg, avg>>, <<min, min>> and <<sum, sum>>.
 
 === [[creating-instance]] Creating RelationalGroupedDataset Instance
 
@@ -253,3 +273,14 @@ strToExpr(expr: String): (Expression => Expression)
 `strToExpr`...FIXME
 
 NOTE: `strToExpr` is used exclusively when `RelationalGroupedDataset` is requested to <<agg, agg with aggregation functions specified by name>>
+
+=== [[alias]] `alias` Method
+
+[source, scala]
+----
+alias(expr: Expression): NamedExpression
+----
+
+`alias`...FIXME
+
+NOTE: `alias` is used exclusively when `RelationalGroupedDataset` is requested to <<toDF, create a DataFrame from aggregate expressions>>.

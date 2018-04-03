@@ -1,6 +1,6 @@
-== [[TypedColumn]] TypedColumn Expressions
+== [[TypedColumn]] TypedColumn
 
-`TypedColumn` is...FIXME
+`TypedColumn` is a link:spark-sql-Column.adoc[Column] with the <<encoder, ExpressionEncoder>> for the types of the input and the output.
 
 `TypedColumn` is <<creating-instance, created>> using link:spark-sql-Column.adoc#as[as] operator on a `Column`.
 
@@ -26,7 +26,7 @@ NOTE: `name` is a part of link:spark-sql-Column.adoc#name[Column Contract] to...
 
 NOTE: `name` is used when...FIXME
 
-=== [[withInputType]] `withInputType` Internal Method
+=== [[withInputType]] Creating TypedColumn -- `withInputType` Internal Method
 
 [source, scala]
 ----
@@ -37,7 +37,16 @@ withInputType(
 
 `withInputType`...FIXME
 
-NOTE: `withInputType` is used when...FIXME
+[NOTE]
+====
+`withInputType` is used when the following typed operators are used:
+
+1. link:spark-sql-dataset-operators.adoc#select[Dataset.select]
+
+1. link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
+
+1. link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg]
+====
 
 === [[creating-instance]] Creating TypedColumn Instance
 

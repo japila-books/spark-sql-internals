@@ -1,4 +1,4 @@
-== [[UserDefinedAggregateFunction]] UserDefinedAggregateFunction -- Contract for User-Defined Aggregate Functions (UDAFs)
+== [[UserDefinedAggregateFunction]] UserDefinedAggregateFunction -- Contract for User-Defined Untyped Aggregate Functions (UDAFs)
 
 `UserDefinedAggregateFunction` is the <<contract, contract>> to define *user-defined aggregate functions (UDAFs)*.
 

@@ -306,3 +306,39 @@ scala> df.select(col("label").cast(DoubleType)).map { case Row(label) => label.g
 |java.lang.Double|
 +----------------+
 ----
+
+=== [[generateAlias]] `generateAlias` Method
+
+[source, scala]
+----
+generateAlias(e: Expression): String
+----
+
+`generateAlias`...FIXME
+
+[NOTE]
+====
+`generateAlias` is used when:
+
+1. `Column` is requested to <<named, named>>
+
+1. `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#alias[alias]
+====
+
+=== [[named]] `named` Method
+
+[source, scala]
+----
+named: NamedExpression
+----
+
+`named`...FIXME
+
+[NOTE]
+====
+`named` is used when the following operators are used:
+
+1. link:spark-sql-dataset-operators.adoc#select[Dataset.select]
+
+1. link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
+====
