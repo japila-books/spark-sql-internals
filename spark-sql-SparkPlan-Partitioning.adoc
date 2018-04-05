@@ -54,7 +54,7 @@ Used in:
 | `BroadcastPartitioning` with the same `BroadcastMode`
 | Exactly the same `BroadcastPartitioning`
 ^| 1
-| `BroadcastDistribution` with the same `BroadcastMode`
+| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with the same `BroadcastMode`
 
 a| [[HashPartitioning]] `HashPartitioning`
 
@@ -66,9 +66,9 @@ a| [[HashPartitioning]] `HashPartitioning`
 | Input `numPartitions`
 a|
 
-* `UnspecifiedDistribution`
+* link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
-* `ClusteredDistribution` with all the hashing link:spark-sql-Expression.adoc[expressions] included in `clustering` expressions
+* link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] with all the hashing link:spark-sql-Expression.adoc[expressions] included in `clustering` expressions
 
 a| [[PartitioningCollection]] `PartitioningCollection`
 
@@ -89,9 +89,9 @@ a| [[RangePartitioning]] `RangePartitioning`
 | Input `numPartitions`
 a|
 
-* `UnspecifiedDistribution`
-* `OrderedDistribution` with `requiredOrdering` that matches the input `ordering`
-* `ClusteredDistribution` with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
+* link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+* link:spark-sql-OrderedDistribution.adoc[OrderedDistribution] with `requiredOrdering` that matches the input `ordering`
+* link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
 
 a| [[RoundRobinPartitioning]] `RoundRobinPartitioning`
 
@@ -100,13 +100,13 @@ a| [[RoundRobinPartitioning]] `RoundRobinPartitioning`
 | Always negative
 | Always negative
 | Input `numPartitions`
-| `UnspecifiedDistribution`
+| link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
 | [[SinglePartition]] `SinglePartition`
 | Any `Partitioning` with exactly one partition
 | Any `Partitioning` with exactly one partition
 ^| 1
-| Any `Distribution` except `BroadcastDistribution`
+| Any `Distribution` except link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
 
 a| [[UnknownPartitioning]] `UnknownPartitioning`
 
@@ -114,5 +114,5 @@ a| [[UnknownPartitioning]] `UnknownPartitioning`
 | Always negative
 | Always negative
 | Input `numPartitions`
-| `UnspecifiedDistribution`
+| link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 |===

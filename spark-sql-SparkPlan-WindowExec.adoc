@@ -187,10 +187,10 @@ root
 |===
 | Single Child
 
-| `ClusteredDistribution` (per <<partitionSpec, window partition specifications expressions>>)
+| link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] (per <<partitionSpec, window partition specifications expressions>>)
 |===
 
-If no window partition specification is specified, `WindowExec` prints out the following WARN message to the logs (and the child's distribution requirement is `AllTuples`):
+If no window partition specification is specified, `WindowExec` prints out the following WARN message to the logs (and the child's distribution requirement is link:spark-sql-AllTuples.adoc[AllTuples]):
 
 ```
 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.

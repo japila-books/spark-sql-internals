@@ -1,0 +1,19 @@
+== [[UnspecifiedDistribution]] UnspecifiedDistribution
+
+`UnspecifiedDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+
+[[requiredNumPartitions]]
+`UnspecifiedDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
+
+CAUTION: FIXME What does `None` mean?
+
+=== [[createPartitioning]] `createPartitioning` Method
+
+[source, scala]
+----
+createPartitioning(numPartitions: Int): Partitioning
+----
+
+NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to...FIXME.
+
+`createPartitioning`...FIXME

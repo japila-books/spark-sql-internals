@@ -257,7 +257,7 @@ a| Required *partition requirements* (_aka_ *child output distributions*) of the
 requiredChildDistribution: Seq[Distribution]
 ----
 
-Defaults to `UnspecifiedDistribution` for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
+Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
 
 Used exclusively when `EnsureRequirements` physical preparation rule link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements of a physical operator].
 

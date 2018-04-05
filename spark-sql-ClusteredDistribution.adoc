@@ -1,0 +1,25 @@
+== [[ClusteredDistribution]] ClusteredDistribution
+
+`ClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+
+`ClusteredDistribution` requires that the <<clustering, clustering expressions>> should not be empty (i.e. `Nil`).
+
+`ClusteredDistribution` is <<creating-instance, created>> when...FIXME
+
+=== [[createPartitioning]] `createPartitioning` Method
+
+[source, scala]
+----
+createPartitioning(numPartitions: Int): Partitioning
+----
+
+NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to...FIXME.
+
+`createPartitioning`...FIXME
+
+=== [[creating-instance]] Creating ClusteredDistribution Instance
+
+`ClusteredDistribution` takes the following when created:
+
+* [[clustering]] Clustering link:spark-sql-Expression.adoc[expressions]
+* [[requiredNumPartitions]] Optional number of partitions (default: `None`)

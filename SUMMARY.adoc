@@ -167,6 +167,14 @@
 . link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
+. link:spark-sql-Distribution.adoc[Distribution -- Contract For Data Distribution Across Partitions]
+.. link:spark-sql-AllTuples.adoc[AllTuples]
+.. link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
+.. link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution]
+.. link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution]
+.. link:spark-sql-OrderedDistribution.adoc[OrderedDistribution]
+.. link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+
 === Catalyst Expressions
 
 . link:spark-sql-Expression.adoc[Catalyst Expression -- Executable Node in Catalyst Tree]

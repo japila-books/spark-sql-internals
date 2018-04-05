@@ -1,0 +1,27 @@
+== [[HashClusteredDistribution]] HashClusteredDistribution
+
+`HashClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+
+[[requiredNumPartitions]]
+`HashClusteredDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
+
+CAUTION: FIXME What does `None` mean?
+
+`HashClusteredDistribution` is <<creating-instance, created>> when...FIXME
+
+[[creating-instance]]
+[[expressions]]
+`HashClusteredDistribution` takes link:spark-sql-Expression.adoc[expressions] for hash when created.
+
+`HashClusteredDistribution` requires that the <<expressions, expressions for hash>> should not be empty (i.e. `Nil`).
+
+=== [[createPartitioning]] `createPartitioning` Method
+
+[source, scala]
+----
+createPartitioning(numPartitions: Int): Partitioning
+----
+
+NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to...FIXME.
+
+`createPartitioning`...FIXME

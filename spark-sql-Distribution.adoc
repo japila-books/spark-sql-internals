@@ -1,0 +1,55 @@
+== [[Distribution]] Distribution -- Contract For Data Distribution Across Partitions
+
+`Distribution` is the <<contract, contract>> of...FIXME
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.plans.physical
+
+sealed trait Distribution {
+  def requiredNumPartitions: Option[Int]
+  def createPartitioning(numPartitions: Int): Partitioning
+}
+----
+
+NOTE: `Distribution` is a Scala `sealed` contract which means that all possible distributions are all in the same compilation unit (file).
+
+.Distribution Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[requiredNumPartitions]] `requiredNumPartitions`
+| Used when...FIXME
+
+| [[createPartitioning]] `createPartitioning`
+| Used when...FIXME
+|===
+
+[[implementations]]
+.Distributions
+[cols="1,2",options="header",width="100%"]
+|===
+| Distribution
+| Description
+
+| [[AllTuples]] link:spark-sql-AllTuples.adoc[AllTuples]
+|
+
+| [[BroadcastDistribution]] link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
+|
+
+| [[ClusteredDistribution]] link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution]
+|
+
+| [[HashClusteredDistribution]] link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution]
+|
+
+| [[OrderedDistribution]] link:spark-sql-OrderedDistribution.adoc[OrderedDistribution]
+|
+
+| [[UnspecifiedDistribution]] link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+|
+|===
