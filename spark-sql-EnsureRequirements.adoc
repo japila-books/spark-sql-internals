@@ -34,7 +34,7 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[ensureDistributionAndOrdering]] Ensuring Partition Requirements (Distribution and Ordering) of Physical Operator -- `ensureDistributionAndOrdering` Internal Method
+=== [[ensureDistributionAndOrdering]] Enforcing Partition Requirements (Distribution and Ordering) of Physical Operator -- `ensureDistributionAndOrdering` Internal Method
 
 [source, scala]
 ----
