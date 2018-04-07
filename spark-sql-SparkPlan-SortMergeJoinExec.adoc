@@ -127,14 +127,14 @@ The link:spark-sql-SparkPlan.adoc#requiredChildOrdering[ordering requirements] o
 
 NOTE: `SortMergeJoinExec` operator is chosen in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy (after link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] and link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec] physical join operators have not met the requirements).
 
-=== [[doProduce]] Generating Java Source Code -- `doProduce` Method
+=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
 [source, scala]
 ----
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[whole-stage-codegen produce code path].
+NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
 
 `doProduce`...FIXME
 
