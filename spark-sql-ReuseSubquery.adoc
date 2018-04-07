@@ -13,6 +13,6 @@ Technically, `ReuseSubquery` is just a link:spark-sql-catalyst-Rule.adoc[Catalys
 apply(plan: SparkPlan): SparkPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-SparkPlan.adoc[physical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-SparkPlan.adoc[physical plan].
 
 `apply`...FIXME

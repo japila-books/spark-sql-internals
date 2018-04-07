@@ -118,7 +118,7 @@ NOTE: `AnalyzeColumnCommand` is not supported on views.
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
 `run` calculates the following statistics:
 

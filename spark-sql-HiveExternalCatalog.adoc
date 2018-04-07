@@ -87,7 +87,7 @@ doAlterTableStats(
   stats: Option[CatalogStatistics]): Unit
 ----
 
-NOTE: `doAlterTableStats` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
+NOTE: `doAlterTableStats` is part of link:spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
 
 `doAlterTableStats`...FIXME
 
@@ -173,7 +173,7 @@ listPartitionsByFilter(
   defaultTimeZoneId: String): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitionsByFilter` is a part of link:spark-sql-ExternalCatalog.adoc#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
+NOTE: `listPartitionsByFilter` is part of link:spark-sql-ExternalCatalog.adoc#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
 
 `listPartitionsByFilter`...FIXME
 
@@ -187,7 +187,7 @@ alterPartitions(
   newParts: Seq[CatalogTablePartition]): Unit
 ----
 
-NOTE: `alterPartitions` is a part of link:spark-sql-ExternalCatalog.adoc#alterPartitions[ExternalCatalog Contract] to...FIXME.
+NOTE: `alterPartitions` is part of link:spark-sql-ExternalCatalog.adoc#alterPartitions[ExternalCatalog Contract] to...FIXME.
 
 `alterPartitions`...FIXME
 
@@ -198,7 +198,7 @@ NOTE: `alterPartitions` is a part of link:spark-sql-ExternalCatalog.adoc#alterPa
 getTable(db: String, table: String): CatalogTable
 ----
 
-NOTE: `getTable` is a part of link:spark-sql-ExternalCatalog.adoc#getTable[ExternalCatalog Contract] to...FIXME.
+NOTE: `getTable` is part of link:spark-sql-ExternalCatalog.adoc#getTable[ExternalCatalog Contract] to...FIXME.
 
 `getTable`...FIXME
 
@@ -209,7 +209,7 @@ NOTE: `getTable` is a part of link:spark-sql-ExternalCatalog.adoc#getTable[Exter
 doAlterTable(tableDefinition: CatalogTable): Unit
 ----
 
-NOTE: `doAlterTable` is a part of link:spark-sql-ExternalCatalog.adoc#doAlterTable[ExternalCatalog Contract] to alter a table.
+NOTE: `doAlterTable` is part of link:spark-sql-ExternalCatalog.adoc#doAlterTable[ExternalCatalog Contract] to alter a table.
 
 `doAlterTable`...FIXME
 
@@ -242,7 +242,7 @@ getPartition(
   spec: TablePartitionSpec): CatalogTablePartition
 ----
 
-NOTE: `getPartition` is a part of link:spark-sql-ExternalCatalog.adoc#getPartition[ExternalCatalog Contract] to...FIXME.
+NOTE: `getPartition` is part of link:spark-sql-ExternalCatalog.adoc#getPartition[ExternalCatalog Contract] to...FIXME.
 
 `getPartition`...FIXME
 
@@ -256,7 +256,7 @@ getPartitionOption(
   spec: TablePartitionSpec): Option[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionOption` is a part of link:spark-sql-ExternalCatalog.adoc#getPartitionOption[ExternalCatalog Contract] to...FIXME.
+NOTE: `getPartitionOption` is part of link:spark-sql-ExternalCatalog.adoc#getPartitionOption[ExternalCatalog Contract] to...FIXME.
 
 `getPartitionOption`...FIXME
 

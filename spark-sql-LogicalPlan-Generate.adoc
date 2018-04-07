@@ -9,7 +9,7 @@
 [[resolved]]
 `resolved` flag is...FIXME
 
-NOTE: `resolved` is a part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan Contract] to...FIXME.
+NOTE: `resolved` is part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan Contract] to...FIXME.
 
 [[producedAttributes]]
 `producedAttributes`...FIXME

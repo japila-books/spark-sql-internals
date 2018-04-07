@@ -5,7 +5,7 @@
 * `LocalLimit` with `Union`
 * `LocalLimit` with link:spark-sql-LogicalPlan-Join.adoc[Join]
 
-`LimitPushDown` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
+`LimitPushDown` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
 
 [source, scala]
 ----

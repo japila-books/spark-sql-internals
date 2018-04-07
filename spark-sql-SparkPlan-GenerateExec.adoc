@@ -243,7 +243,7 @@ image::images/spark-sql-GenerateExec-webui-details-for-query.png[align="center"]
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is a part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate a Java source code for...FIXME
+NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate a Java source code for...FIXME
 
 `doProduce`...FIXME
 
@@ -254,7 +254,7 @@ NOTE: `doProduce` is a part of link:spark-sql-CodegenSupport.adoc#doProduce[Code
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is a part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
+NOTE: `doConsume` is part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
 
 `doConsume`...FIXME
 
@@ -323,6 +323,6 @@ NOTE: `codeGenAccessor` is used...FIXME
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
 `doExecute`...FIXME

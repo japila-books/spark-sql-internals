@@ -80,7 +80,7 @@ NOTE: `DescribeColumnCommand` is described by `describeTable` labeled alternativ
 run(session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
 `run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
 

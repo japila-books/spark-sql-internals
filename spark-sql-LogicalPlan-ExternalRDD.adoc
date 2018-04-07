@@ -47,7 +47,7 @@ NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInst
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
 `computeStats`...FIXME
 

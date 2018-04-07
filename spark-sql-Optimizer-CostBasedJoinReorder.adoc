@@ -125,7 +125,7 @@ FIXME Examples of other join queries
 1. Project with attributes only and Cross join with join condition
 ====
 
-`CostBasedJoinReorder` is a part of link:spark-sql-Optimizer.adoc#Join-Reorder[Join Reorder] once-executed batch of rules.
+`CostBasedJoinReorder` is part of link:spark-sql-Optimizer.adoc#Join-Reorder[Join Reorder] once-executed batch of rules.
 
 [[logging]]
 [TIP]
@@ -148,7 +148,7 @@ Refer to link:spark-logging.adoc[Logging].
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] (aka _execute a rule_).
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] (aka _execute a rule_).
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
 

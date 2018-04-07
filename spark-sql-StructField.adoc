@@ -2,7 +2,7 @@
 
 A `StructField` describes a single field in a link:spark-sql-StructType.adoc[StructType]. It has a name, the type and whether or not it be empty, and an optional metadata and a comment.
 
-A comment is a part of metadata under `comment` key and is used to build a Hive column or when describing a table.
+A comment is part of metadata under `comment` key and is used to build a Hive column or when describing a table.
 
 [source, scala]
 ----

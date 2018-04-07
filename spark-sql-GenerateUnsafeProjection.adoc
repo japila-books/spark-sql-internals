@@ -115,7 +115,7 @@ See link:spark-sql-CodeGenerator.adoc#logging[CodeGenerator].
 
 `create` requests `CodegenContext` for link:spark-sql-CodegenContext.adoc#references[references] and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
 
-NOTE: (Single-argument) `create` is a part of link:spark-sql-CodeGenerator.adoc#create[CodeGenerator Contract].
+NOTE: (Single-argument) `create` is part of link:spark-sql-CodeGenerator.adoc#create[CodeGenerator Contract].
 
 === [[createCode]] Creating ExprCode for Expressions (With Optional Subexpression Elimination) -- `createCode` Method
 

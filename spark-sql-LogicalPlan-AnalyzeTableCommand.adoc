@@ -22,7 +22,7 @@ AnalyzeTableCommand `t1`, false
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
 `run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 

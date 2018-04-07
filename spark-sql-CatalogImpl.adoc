@@ -18,7 +18,7 @@ createTable(
   options: Map[String, String]): DataFrame
 ----
 
-NOTE: `createTable` is a part of link:spark-sql-Catalog.adoc#createTable[Catalog Contract] to...FIXME.
+NOTE: `createTable` is part of link:spark-sql-Catalog.adoc#createTable[Catalog Contract] to...FIXME.
 
 `createTable`...FIXME
 
@@ -49,7 +49,7 @@ Internally, `cacheTable` first link:spark-sql-SparkSession.adoc#table[creates a 
 
 NOTE: `cacheTable` uses the link:spark-sql-SparkSession.adoc#sharedState[session-scoped SharedState] to access the `CacheManager`.
 
-NOTE: `cacheTable` is a part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
+NOTE: `cacheTable` is part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
 
 === [[clearCache]] Removing All Cached Tables From In-Memory Cache -- `clearCache` Method
 
@@ -60,7 +60,7 @@ clearCache(): Unit
 
 `clearCache` requests `CacheManager` to link:spark-sql-CacheManager.adoc#clearCache[remove all cached tables from in-memory cache].
 
-NOTE: `clearCache` is a part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
+NOTE: `clearCache` is part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
 
 === [[createExternalTable]] Creating External Table From Path -- `createExternalTable` Method
 
@@ -115,7 +115,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
 
-NOTE: `createExternalTable` is a part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
+NOTE: `createExternalTable` is part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
 
 === [[listTables]] Listing Tables in Database (as Dataset) -- `listTables` Method
 
@@ -140,7 +140,7 @@ listColumns(dbName: String, tableName: String): Dataset[Column]
 listColumns(tableIdentifier: TableIdentifier): Dataset[Column]
 ----
 
-NOTE: `listColumns` is a part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
+NOTE: `listColumns` is part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
 
 `listColumns` requests <<sessionCatalog, SessionCatalog>> for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
 
@@ -183,7 +183,7 @@ NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, 
 refreshTable(tableName: String): Unit
 ----
 
-NOTE: `refreshTable` is a part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
+NOTE: `refreshTable` is part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
 
 `refreshTable` requests `SessionState` for the link:spark-sql-SessionState.adoc#sqlParser[SQL parser] to link:spark-sql-ParserInterface.adoc#parseTableIdentifier[parse a TableIdentifier given the table name].
 

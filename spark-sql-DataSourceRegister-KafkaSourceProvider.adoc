@@ -47,7 +47,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is a part of link:spark-sql-RelationProvider.adoc#createRelation[RelationProvider Contract] used exclusively when `DataSource` is requested to create a `BaseRelation` (`resolveRelation` method) for reading or writing.
+NOTE: `createRelation` is part of link:spark-sql-RelationProvider.adoc#createRelation[RelationProvider Contract] used exclusively when `DataSource` is requested to create a `BaseRelation` (`resolveRelation` method) for reading or writing.
 
 `createRelation` creates a link:spark-sql-streaming-KafkaRelation.adoc[KafkaRelation].
 
@@ -89,7 +89,7 @@ createRelation(
 
 CAUTION: FIXME
 
-NOTE: `createRelation` is a part of link:spark-sql-CreatableRelationProvider.adoc#contract[CreatableRelationProvider Contract].
+NOTE: `createRelation` is part of link:spark-sql-CreatableRelationProvider.adoc#contract[CreatableRelationProvider Contract].
 
 === [[createSource]] `createSource` Method
 
@@ -105,7 +105,7 @@ createSource(
 
 CAUTION: FIXME
 
-NOTE: `createSource` is a part of Structured Streaming's `StreamSourceProvider` Contract.
+NOTE: `createSource` is part of Structured Streaming's `StreamSourceProvider` Contract.
 
 === [[sourceSchema]] `sourceSchema` Method
 
@@ -134,4 +134,4 @@ root
  |-- timestampType: integer (nullable = true)
 ----
 
-NOTE: `sourceSchema` is a part of Structured Streaming's `StreamSourceProvider` Contract.
+NOTE: `sourceSchema` is part of Structured Streaming's `StreamSourceProvider` Contract.

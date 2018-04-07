@@ -77,7 +77,7 @@ spark.sessionState.conf.starSchemaDetection
 spark.sessionState.conf.cboEnabled
 ----
 
-`ReorderJoin` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
+`ReorderJoin` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
 
 === [[apply]] Transforming Logical Plan -- `apply` Method
 
@@ -86,7 +86,7 @@ spark.sessionState.conf.cboEnabled
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and finds the following logical operators for <<flattenJoin, flattenJoin>>:
 

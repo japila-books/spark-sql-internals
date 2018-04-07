@@ -23,4 +23,4 @@ CAUTION: FIXME
 
 NOTE: `run` accepts tables only (not views) with the provider defined.
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract].
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract].

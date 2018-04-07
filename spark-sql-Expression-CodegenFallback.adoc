@@ -9,6 +9,6 @@
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is a part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
+NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
 
 `doGenCode`...FIXME

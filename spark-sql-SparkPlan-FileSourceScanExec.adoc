@@ -83,7 +83,7 @@ Used when `FileSourceScanExec` is requested for <<inputRDDs, inputRDDs>> and <<d
 | [[metadata]] `metadata`
 a| Metadata (as a collection of key-value pairs)
 
-NOTE: `metadata` is a part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to..FIXME.
+NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to..FIXME.
 
 | [[needsUnsafeRowConversion]] `needsUnsafeRowConversion`
 |
@@ -115,7 +115,7 @@ Refer to link:spark-logging.adoc[Logging].
 vectorTypes: Option[Seq[String]]
 ----
 
-NOTE: `vectorTypes` is a part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
 
 `vectorTypes`...FIXME
 
@@ -126,7 +126,7 @@ NOTE: `vectorTypes` is a part of link:spark-sql-ColumnarBatchScan.adoc#vectorTyp
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
 
 `doExecute`...FIXME
 
@@ -137,7 +137,7 @@ NOTE: `doExecute` is a part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is a part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate a Java source code for...FIXME
+NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate a Java source code for...FIXME
 
 `doProduce`...FIXME
 

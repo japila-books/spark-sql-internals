@@ -67,7 +67,7 @@ def doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 NOTE: `doExecuteBroadcast` waits link:spark-sql-SQLConf.adoc#broadcastTimeout[spark.sql.broadcastTimeout] (defaults to 5 minutes).
 
-NOTE: `doExecuteBroadcast` is a part of link:spark-sql-SparkPlan.adoc#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
+NOTE: `doExecuteBroadcast` is part of link:spark-sql-SparkPlan.adoc#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
 
 === [[relationFuture]] Lazily-Once-Initialized Asynchronously-Broadcast `relationFuture` Internal Attribute
 
@@ -109,6 +109,6 @@ NOTE: `relationFuture` is used when `BroadcastExchangeExec` is requested to <<do
 doPrepare(): Unit
 ----
 
-NOTE: `doPrepare` is a part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
 
 `doPrepare` simply "materializes" the internal lazily-once-initialized <<relationFuture, asynchronous broadcast>>.

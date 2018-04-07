@@ -20,7 +20,7 @@ res1: org.apache.spark.sql.catalyst.expressions.Expression = 'id
 name(alias: String): TypedColumn[T, U]
 ----
 
-NOTE: `name` is a part of link:spark-sql-Column.adoc#name[Column Contract] to...FIXME.
+NOTE: `name` is part of link:spark-sql-Column.adoc#name[Column Contract] to...FIXME.
 
 `name`...FIXME
 

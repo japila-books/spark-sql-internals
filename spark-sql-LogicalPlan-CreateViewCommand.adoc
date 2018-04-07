@@ -50,6 +50,6 @@ NOTE: `prepareTable` is used when...FIXME
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is a part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to...FIXME.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to...FIXME.
 
 `run`...FIXME

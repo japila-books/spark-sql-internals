@@ -5,7 +5,7 @@
 . The input is already the type to cast to.
 . The input is of `ArrayType` or `MapType` type and contains no `null` elements.
 
-`SimplifyCasts` is a part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
+`SimplifyCasts` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
 
 [source, scala]
 ----

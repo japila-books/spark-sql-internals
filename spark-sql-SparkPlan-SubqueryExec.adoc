@@ -51,7 +51,7 @@ NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of link:spark-s
 doPrepare(): Unit
 ----
 
-NOTE: `doPrepare` is a part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
 
 `doPrepare` simply triggers initialization of the internal lazily-once-initialized <<relationFuture, relationFuture>> asynchronous computation.
 

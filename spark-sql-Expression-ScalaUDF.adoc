@@ -118,7 +118,7 @@ scala> q.show
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is a part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
+NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
 
 `doGenCode`...FIXME
 
@@ -129,7 +129,7 @@ NOTE: `doGenCode` is a part of link:spark-sql-Expression.adoc#doGenCode[Expressi
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is a part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
+NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
 
 `eval` executes the <<function, Scala function>> on the input link:spark-sql-InternalRow.adoc[InternalRow].
 

@@ -93,7 +93,7 @@ collectPlaceholders(plan: SparkPlan): Seq[(SparkPlan, LogicalPlan)]
 
 `collectPlaceholders` collects all link:spark-sql-SparkStrategy.adoc#PlanLater[PlanLater] physical operators in the `plan` link:spark-sql-SparkPlan.adoc[physical plan].
 
-NOTE: `collectPlaceholders` is a part of link:spark-sql-catalyst-QueryPlanner.adoc#collectPlaceholders[QueryPlanner Contract].
+NOTE: `collectPlaceholders` is part of link:spark-sql-catalyst-QueryPlanner.adoc#collectPlaceholders[QueryPlanner Contract].
 
 === [[prunePlans]] Pruning "Bad" Physical Plans -- `prunePlans` Method
 
@@ -104,7 +104,7 @@ prunePlans(plans: Iterator[SparkPlan]): Iterator[SparkPlan]
 
 `prunePlans` gives the input `plans` link:spark-sql-SparkPlan.adoc[physical plans] back (i.e. with no changes).
 
-NOTE: `prunePlans` is a part of link:spark-sql-catalyst-QueryPlanner.adoc#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
+NOTE: `prunePlans` is part of link:spark-sql-catalyst-QueryPlanner.adoc#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
 
 === [[pruneFilterProject]] `pruneFilterProject` Method
 

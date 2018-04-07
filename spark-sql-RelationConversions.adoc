@@ -15,7 +15,7 @@ CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
 

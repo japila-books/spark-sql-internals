@@ -104,7 +104,7 @@ initialize(buffer: InternalRow): Unit
 .ScalaUDAF initializes UserDefinedAggregateFunction
 image::images/spark-sql-ScalaUDAF-initialize.png[align="center"]
 
-NOTE: `initialize` is a part of link:spark-sql-Expression-ImperativeAggregate.adoc#initialize[ImperativeAggregate Contract].
+NOTE: `initialize` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#initialize[ImperativeAggregate Contract].
 
 === [[update]] `update` Method
 
@@ -120,7 +120,7 @@ NOTE: `update` uses <<inputProjection, inputProjection>> on the input `input` an
 .ScalaUDAF updates UserDefinedAggregateFunction
 image::images/spark-sql-ScalaUDAF-update.png[align="center"]
 
-NOTE: `update` is a part of link:spark-sql-Expression-ImperativeAggregate.adoc#update[ImperativeAggregate Contract].
+NOTE: `update` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#update[ImperativeAggregate Contract].
 
 === [[merge]] `merge` Method
 
@@ -139,4 +139,4 @@ merge(buffer1: InternalRow, buffer2: InternalRow): Unit
 .ScalaUDAF requests UserDefinedAggregateFunction to merge
 image::images/spark-sql-ScalaUDAF-merge.png[align="center"]
 
-NOTE: `merge` is a part of link:spark-sql-Expression-ImperativeAggregate.adoc#merge[ImperativeAggregate Contract].
+NOTE: `merge` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#merge[ImperativeAggregate Contract].

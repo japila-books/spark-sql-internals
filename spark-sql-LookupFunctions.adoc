@@ -53,7 +53,7 @@ org.apache.spark.sql.AnalysisException: Undefined function: 'f1'. This function 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` finds all link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions (in every logical operator in the input link:spark-sql-LogicalPlan.adoc[logical plan]) and requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#functionExists[check if their functions exist].
 

@@ -143,7 +143,7 @@ CAUTION: FIXME
 isStreaming: Boolean
 ----
 
-`isStreaming` is a part of the public API of `LogicalPlan` and is enabled (i.e. `true`) when a logical plan is a link:spark-sql-streaming-source.adoc[streaming source].
+`isStreaming` is part of the public API of `LogicalPlan` and is enabled (i.e. `true`) when a logical plan is a link:spark-sql-streaming-source.adoc[streaming source].
 
 By default, it walks over subtrees and calls itself, i.e. `isStreaming`, on every child node to find a streaming source.
 

@@ -53,7 +53,7 @@ Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:spark-sql
 planner: SparkPlanner
 ----
 
-NOTE: `planner` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#planner[BaseSessionStateBuilder Contract] to create a query planner.
+NOTE: `planner` is part of link:spark-sql-BaseSessionStateBuilder.adoc#planner[BaseSessionStateBuilder Contract] to create a query planner.
 
 `planner` is a link:spark-sql-SparkPlanner.adoc[SparkPlanner] with...FIXME
 
@@ -80,7 +80,7 @@ NOTE: `planner` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#planner
 analyzer: Analyzer
 ----
 
-NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
+NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
 
 `analyzer` is a link:spark-sql-Analyzer.adoc[Analyzer] with <<catalog, Hive-specific SessionCatalog>> (and link:spark-sql-BaseSessionStateBuilder.adoc#conf[SQLConf]).
 
@@ -150,7 +150,7 @@ NOTE: `analyzer` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#analyz
 newBuilder: NewBuilder
 ----
 
-NOTE: `newBuilder` is a part of link:spark-sql-BaseSessionStateBuilder.adoc#newBuilder[BaseSessionStateBuilder Contract] to...FIXME.
+NOTE: `newBuilder` is part of link:spark-sql-BaseSessionStateBuilder.adoc#newBuilder[BaseSessionStateBuilder Contract] to...FIXME.
 
 `newBuilder`...FIXME
 

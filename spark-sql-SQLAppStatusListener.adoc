@@ -40,7 +40,7 @@ NOTE: `onExecutionStart` is used exclusively when `SQLAppStatusListener` <<onOth
 onJobStart(event: SparkListenerJobStart): Unit
 ----
 
-NOTE: `onJobStart` is a part of link:spark-SparkListener.adoc#onJobStart[SparkListener Contract] to...FIXME
+NOTE: `onJobStart` is part of link:spark-SparkListener.adoc#onJobStart[SparkListener Contract] to...FIXME
 
 `onJobStart`...FIXME
 
@@ -51,7 +51,7 @@ NOTE: `onJobStart` is a part of link:spark-SparkListener.adoc#onJobStart[SparkLi
 onStageSubmitted(event: SparkListenerStageSubmitted): Unit
 ----
 
-NOTE: `onStageSubmitted` is a part of link:spark-SparkListener.adoc#onStageSubmitted[SparkListener Contract] to...FIXME
+NOTE: `onStageSubmitted` is part of link:spark-SparkListener.adoc#onStageSubmitted[SparkListener Contract] to...FIXME
 
 `onStageSubmitted`...FIXME
 
@@ -62,7 +62,7 @@ NOTE: `onStageSubmitted` is a part of link:spark-SparkListener.adoc#onStageSubmi
 onJobEnd(event: SparkListenerJobEnd): Unit
 ----
 
-NOTE: `onJobEnd` is a part of link:spark-SparkListener.adoc#onJobEnd[SparkListener Contract] to...FIXME
+NOTE: `onJobEnd` is part of link:spark-SparkListener.adoc#onJobEnd[SparkListener Contract] to...FIXME
 
 `onJobEnd`...FIXME
 
@@ -73,7 +73,7 @@ NOTE: `onJobEnd` is a part of link:spark-SparkListener.adoc#onJobEnd[SparkListen
 onExecutorMetricsUpdate(event: SparkListenerExecutorMetricsUpdate): Unit
 ----
 
-NOTE: `onExecutorMetricsUpdate` is a part of link:spark-SparkListener.adoc#onExecutorMetricsUpdate[SparkListener Contract] to...FIXME
+NOTE: `onExecutorMetricsUpdate` is part of link:spark-SparkListener.adoc#onExecutorMetricsUpdate[SparkListener Contract] to...FIXME
 
 `onExecutorMetricsUpdate`...FIXME
 
@@ -84,7 +84,7 @@ NOTE: `onExecutorMetricsUpdate` is a part of link:spark-SparkListener.adoc#onExe
 onTaskEnd(event: SparkListenerTaskEnd): Unit
 ----
 
-NOTE: `onTaskEnd` is a part of link:spark-SparkListener.adoc#onTaskEnd[SparkListener Contract] to...FIXME
+NOTE: `onTaskEnd` is part of link:spark-SparkListener.adoc#onTaskEnd[SparkListener Contract] to...FIXME
 
 `onTaskEnd`...FIXME
 
@@ -95,6 +95,6 @@ NOTE: `onTaskEnd` is a part of link:spark-SparkListener.adoc#onTaskEnd[SparkList
 onOtherEvent(event: SparkListenerEvent): Unit
 ----
 
-NOTE: `onOtherEvent` is a part of link:spark-SparkListener.adoc#onOtherEvent[SparkListener Contract] to...FIXME
+NOTE: `onOtherEvent` is part of link:spark-SparkListener.adoc#onOtherEvent[SparkListener Contract] to...FIXME
 
 `onOtherEvent`...FIXME

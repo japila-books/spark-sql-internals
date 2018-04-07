@@ -42,7 +42,7 @@ CAUTION: FIXME
 compute(split: Partition, context: TaskContext): Iterator[InternalRow]
 ----
 
-NOTE: `compute` is a part of link:spark-rdd.adoc#contract[RDD contract] to compute a given partition in a link:spark-taskscheduler-taskcontext.adoc[TaskContext].
+NOTE: `compute` is part of link:spark-rdd.adoc#contract[RDD contract] to compute a given partition in a link:spark-taskscheduler-taskcontext.adoc[TaskContext].
 
 Internally, `compute` makes sure that the input `split` is a <<ShuffledRowRDDPartition, ShuffledRowRDDPartition>>. It then link:spark-ShuffleManager.adoc#contract[requests `ShuffleManager` for a `ShuffleReader`] to read ``InternalRow``s for the `split`.
 
@@ -57,7 +57,7 @@ NOTE: `compute` uses `ShuffleHandle` (of link:spark-rdd-ShuffleDependency.adoc[S
 getPreferredLocations(partition: Partition): Seq[String]
 ----
 
-NOTE: `getPreferredLocations` is a part of link:spark-rdd.adoc#contract[RDD contract] to specify placement preferences (aka _preferred task locations_), i.e. where tasks should be executed to be as close to the data as possible.
+NOTE: `getPreferredLocations` is part of link:spark-rdd.adoc#contract[RDD contract] to specify placement preferences (aka _preferred task locations_), i.e. where tasks should be executed to be as close to the data as possible.
 
 Internally, `getPreferredLocations` requests link:spark-service-MapOutputTrackerMaster.adoc#getPreferredLocationsForShuffle[`MapOutputTrackerMaster` for the preferred locations] of the input `partition` (for the single link:spark-rdd-ShuffleDependency.adoc[ShuffleDependency]).
 

@@ -55,7 +55,7 @@ Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAgg
 
 * <<AggUtils-planAggregateWithOneDistinct, AggUtils.planAggregateWithOneDistinct>> when at least one distinct aggregate expression is used.
 
-NOTE: `apply` is a part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to execute a planning strategy.
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to execute a planning strategy.
 
 === [[AggUtils-createAggregate]] Selecting Aggregate Physical Operator Given Aggregate Expressions -- `AggUtils.createAggregate` Internal Method
 

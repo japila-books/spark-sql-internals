@@ -87,7 +87,7 @@ The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a ca
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is a part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
 `computeStats` takes the link:spark-sql-CatalogTable.adoc#stats[table statistics] from the <<tableMeta, table metadata>> if defined and link:spark-sql-CatalogStatistics.adoc#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
 

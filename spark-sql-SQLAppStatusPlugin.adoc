@@ -9,6 +9,6 @@
 setupUI(ui: SparkUI): Unit
 ----
 
-NOTE: `setupUI` is a part of link:spark-core-AppStatusPlugin.adoc#setupUI[AppStatusPlugin Contract] to...FIXME.
+NOTE: `setupUI` is part of link:spark-core-AppStatusPlugin.adoc#setupUI[AppStatusPlugin Contract] to...FIXME.
 
 `setupUI`...FIXME

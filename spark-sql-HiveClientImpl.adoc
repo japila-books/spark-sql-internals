@@ -124,7 +124,7 @@ NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitio
 def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
 ----
 
-NOTE: `getTableOption` is a part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
+NOTE: `getTableOption` is part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
 
 When executed, `getTableOption` prints out the following DEBUG message to the logs:
 

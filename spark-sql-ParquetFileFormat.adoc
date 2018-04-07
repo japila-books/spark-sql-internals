@@ -44,7 +44,7 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is a part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] to...FIXME.
+NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] to...FIXME.
 
 `prepareWrite`...FIXME
 
@@ -58,7 +58,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is a part of link:spark-sql-FileFormat.adoc#inferSchema[FileFormat Contract] to...FIXME.
+NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFormat Contract] to...FIXME.
 
 `inferSchema`...FIXME
 
@@ -76,6 +76,6 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReaderWithPartitionValues` is a part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
+NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
 
 `buildReaderWithPartitionValues`...FIXME
