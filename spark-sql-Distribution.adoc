@@ -27,7 +27,7 @@ NOTE: `Distribution` is a Scala `sealed` contract which means that all possible 
 | [[createPartitioning]] `createPartitioning`
 | Creates a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
 
-Used exclusively when `EnsureRequirements` physical optimization is requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements of a physical operator] (and creates a link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchangeExec] physical operator with a required `Partitioning`).
+Used exclusively when `EnsureRequirements` physical optimization is requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements of a physical operator] (and creates a link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] physical operator with a required `Partitioning`).
 |===
 
 [[implementations]]

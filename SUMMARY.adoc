@@ -303,7 +303,7 @@
 . link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
 . link:spark-sql-SparkPlan-ReusedExchangeExec.adoc[ReusedExchangeExec]
 . link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec]
-. link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange]
+. link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchange]
 . link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec]
 . link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
 . link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec]

@@ -28,7 +28,7 @@
 | `CoGroup` | `CoGroupExec`
 
 | `Repartition` (with shuffle enabled)
-| link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange]
+| link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
 
 | `Repartition`
 | link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
@@ -68,7 +68,7 @@
 | link:spark-sql-SparkPlan-RangeExec.adoc[RangeExec]
 
 | `RepartitionByExpression`
-| link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange]
+| link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
 
 | [[ExternalRDD]] link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
 | [[ExternalRDDScanExec]] link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]

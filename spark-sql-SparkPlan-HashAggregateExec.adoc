@@ -82,7 +82,7 @@ NOTE: `numProbes` and `numKeyLookups` are used in link:spark-sql-BytesToBytesMap
 
 | `numOutputRows`
 | number of output rows
-a| Number of groups (per partition) that (depending on the number of partitions and the side of link:spark-sql-SparkPlan-ShuffleExchange.adoc[ShuffleExchange] operator) is the number of groups
+a| Number of groups (per partition) that (depending on the number of partitions and the side of link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] operator) is the number of groups
 
 * `0` for no input with a grouping expression, e.g. `spark.range(0).groupBy($"id").count.show`
 
