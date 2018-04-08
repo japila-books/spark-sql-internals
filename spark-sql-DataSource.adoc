@@ -286,7 +286,7 @@ Internally, `resolveRelation` creates an instance of <<providingClass, providing
 * `CreateTempViewUsing` runnable command is executed
 * `FindDataSourceTable` does link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
 * `ResolveSQLOnFile` converts a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
-* `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
+* `HiveMetastoreCatalog` is requested for link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[]
 * Structured Streaming's `FileStreamSource` creates batches of records
 
 ====

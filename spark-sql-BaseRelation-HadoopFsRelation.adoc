@@ -2,7 +2,26 @@
 
 `HadoopFsRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] and `FileRelation`.
 
-`HadoopFsRelation` is <<creating-instance, created>> when...FIXME
+`HadoopFsRelation` is <<creating-instance, created>> when:
+
+. `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (when `RelationConversions` logical evaluation rule is requested to link:spark-sql-RelationConversions.adoc#convert[convert a HiveTableRelation to a LogicalRelation] for `parquet` and `native` and `hive` ORC storage formats
+
+. `DataSource` is requested to link:spark-sql-DataSource.adoc#resolveRelation[create a BaseRelation] (for a non-streaming file-based data source, i.e. `FileFormat`)
+
+NOTE: The optional <<bucketSpec, BucketSpec>> is defined exclusively for a non-streaming file-based data source.
+
+CAUTION: FIXME What about bucketing in a Hive metastore? Is this used at all? Where?
+
+[source, scala]
+----
+CAUTION: Demo the different cases when `HadoopFsRelation` is created
+
+CAUTION: Demo when `BucketSpec` is defined
+
+// Exercise 1: spark.table for Hive tables
+
+// Exercise 2: spark.read with format as a `FileFormat`
+----
 
 === [[creating-instance]] Creating HadoopFsRelation Instance
 
@@ -11,7 +30,7 @@
 * [[location]] Location (as `FileIndex`)
 * [[partitionSchema]] Partition link:spark-sql-StructType.adoc[schema]
 * [[dataSchema]] Data link:spark-sql-StructType.adoc[schema]
-* [[bucketSpec]] Optional `BucketSpec`
+* [[bucketSpec]] Optional `BucketSpec` (that describes the bucketing, i.e. hash-partitioning of the files by some column values)
 * [[fileFormat]] link:spark-sql-FileFormat.adoc[FileFormat]
 * [[options]] Options
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]

@@ -70,9 +70,9 @@ NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:s
 
 [NOTE]
 ====
-`convert` is used when `RelationConversions` does the following transformations:
+`convert` is used when `RelationConversions` logical evaluation rule does the following transformations:
 
 1. Transforms a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
 
-1. Transforms `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
+1. Transforms a link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation] with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
 ====
