@@ -1,10 +1,24 @@
 == [[ClusteredDistribution]] ClusteredDistribution
 
-`ClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+`ClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
 
 `ClusteredDistribution` requires that the <<clustering, clustering expressions>> should not be empty (i.e. `Nil`).
 
-`ClusteredDistribution` is <<creating-instance, created>> when...FIXME
+`ClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for a required child distribution:
+
+* `MapGroupsExec`, link:spark-sql-SparkPlan-HashAggregateExec.adoc#requiredChildDistribution[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#requiredChildDistribution[ObjectHashAggregateExec], link:spark-sql-SparkPlan-SortAggregateExec.adoc#requiredChildDistribution[SortAggregateExec], link:spark-sql-SparkPlan-WindowExec.adoc#requiredChildDistribution[WindowExec]
+
+* Spark Structured Streaming's `FlatMapGroupsWithStateExec`, `StateStoreRestoreExec`, `StateStoreSaveExec`, `StreamingDeduplicateExec`, `StreamingSymmetricHashJoinExec`, `StreamingSymmetricHashJoinExec`
+
+* SparkR's `FlatMapGroupsInRExec`
+
+* PySpark's `FlatMapGroupsInPandasExec`
+
+`ClusteredDistribution` is used when:
+
+1. `DataSourcePartitioning`, `SinglePartition`, `HashPartitioning`, and `RangePartitioning` are requested to `satisfies`
+
+1. `EnsureRequirements` is requested to link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution.
 
 === [[createPartitioning]] `createPartitioning` Method
 
@@ -13,7 +27,7 @@
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to...FIXME.
+NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to create a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
 
 `createPartitioning` creates a `HashPartitioning` for the <<clustering, clustering expressions>> and the input `numPartitions`.
 
