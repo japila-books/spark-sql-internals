@@ -1,19 +1,27 @@
 == [[HashClusteredDistribution]] HashClusteredDistribution
 
-`HashClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+`HashClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<expressions, hash expressions>> and a requested number of partitions.
 
 [[requiredNumPartitions]]
 `HashClusteredDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
 
-CAUTION: FIXME What does `None` mean?
+NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
-`HashClusteredDistribution` is <<creating-instance, created>> when...FIXME
+`HashClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for a required child distribution:
+
+* `CoGroupExec`, link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc#requiredChildDistribution[ShuffledHashJoinExec], link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#requiredChildDistribution[SortMergeJoinExec]
 
 [[creating-instance]]
 [[expressions]]
-`HashClusteredDistribution` takes link:spark-sql-Expression.adoc[expressions] for hash when created.
+`HashClusteredDistribution` takes hash link:spark-sql-Expression.adoc[expressions] when created.
 
-`HashClusteredDistribution` requires that the <<expressions, expressions for hash>> should not be empty (i.e. `Nil`).
+`HashClusteredDistribution` requires that the <<expressions, hash expressions>> should not be empty (i.e. `Nil`).
+
+`HashClusteredDistribution` is used when:
+
+1. `EnsureRequirements` is requested to link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
+
+1. `HashPartitioning` is requested to `satisfies`
 
 === [[createPartitioning]] `createPartitioning` Method
 
@@ -24,4 +32,4 @@ createPartitioning(numPartitions: Int): Partitioning
 
 NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to create a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
 
-`createPartitioning`...FIXME
+`createPartitioning` creates a `HashPartitioning` for the <<expressions, hash expressions>> and the input `numPartitions`.

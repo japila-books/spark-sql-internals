@@ -5,7 +5,7 @@
 [[requiredNumPartitions]]
 `UnspecifiedDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
 
-CAUTION: FIXME What does `None` mean?
+NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
 === [[createPartitioning]] `createPartitioning` Method
 

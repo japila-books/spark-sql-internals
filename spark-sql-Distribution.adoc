@@ -22,7 +22,11 @@ NOTE: `Distribution` is a Scala `sealed` contract which means that all possible 
 | Description
 
 | [[requiredNumPartitions]] `requiredNumPartitions`
-| Used when...FIXME
+a| Gives the required number of partitions for a distribution.
+
+Used exclusively when `EnsureRequirements` physical optimization is requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements of a physical operator] (and a child operator's output partitioning does not satisfy a required child distribution that leads to inserting a `ShuffleExchangeExec` operator to a physical plan).
+
+NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
 | [[createPartitioning]] `createPartitioning`
 | Creates a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
