@@ -8,7 +8,7 @@
 ====
 Spark SQL supports SQL statements as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4]. Using the file can tell you (almost) exactly what Spark SQL supports at any given time.
 
-"Almost" being that although the grammar accepts a SQL statement it can be reported as not allowed by `AstBuilder`, e.g.
+_"Almost"_ being that although the grammar accepts a SQL statement it can be reported as not allowed by `AstBuilder`, e.g.
 
 ```
 scala> sql("EXPLAIN FORMATTED SELECT * FROM myTable").show
@@ -41,10 +41,10 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 ```
 ====
 
+`AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4] ANTLR grammar for Spark SQL.
+
 [NOTE]
 ====
-Technically, `AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4] ANTLR grammar for Spark SQL.
-
 `SqlBaseBaseVisitor` is a ANTLR-specific base class that is auto-generated at build time from a ANTLR grammar in `SqlBase.g4`.
 
 `SqlBaseBaseVisitor` is an ANTLR http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html[AbstractParseTreeVisitor].
@@ -248,7 +248,7 @@ Joins can be `NATURAL` (with no join criteria).
 |
 
 | [[withQuerySpecification]] `withQuerySpecification`
-| Adds a query specification to a logical plan.
+a| Adds a query specification to a logical operator.
 
 For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` does...FIXME
 

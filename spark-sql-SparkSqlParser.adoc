@@ -17,12 +17,12 @@ val spark: SparkSession = ...
 spark.sessionState.sqlParser
 ----
 
-`SparkSqlParser` is used to translate an expression to its corresponding link:spark-sql-Column.adoc[Column] in the following:
+`SparkSqlParser` is used to translate an expression to the corresponding link:spark-sql-Column.adoc[Column] in the following:
 
 * link:spark-sql-functions.adoc#expr[expr] function
-* link:spark-sql-Dataset.adoc#selectExpr[selectExpr] method (of `Dataset`)
-* link:spark-sql-Dataset.adoc#filter[filter] method (of `Dataset`)
-* link:spark-sql-Dataset.adoc#where[where] method (of `Dataset`)
+* link:spark-sql-Dataset.adoc#selectExpr[Dataset.selectExpr] operator
+* link:spark-sql-Dataset.adoc#filter[Dataset.filter] operator
+* link:spark-sql-Dataset.adoc#where[Dataset.where] operator
 
 [source, scala]
 ----
@@ -37,7 +37,7 @@ res0: org.apache.spark.sql.Column = (token = hello)
 * link:spark-sql-DataFrameWriter.adoc#insertInto[insertInto] and link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] methods of `DataFrameWriter`
 * `createExternalTable` and `refreshTable` methods of link:spark-sql-Catalog.adoc[Catalog] (and link:spark-sql-SessionState.adoc#refreshTable[SessionState])
 
-`SparkSqlParser` is used to translate a SQL text to its corresponding link:spark-sql-LogicalPlan.adoc[LogicalPlan] in link:spark-sql-SparkSession.adoc#sql[sql] method in `SparkSession`.
+`SparkSqlParser` is used to translate a SQL text to its corresponding link:spark-sql-LogicalPlan.adoc[logical operator] in link:spark-sql-SparkSession.adoc#sql[SparkSession.sql] method.
 
 [[logging]]
 [TIP]

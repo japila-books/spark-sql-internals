@@ -20,6 +20,9 @@ import org.apache.spark.sql.execution.FileSourceScanExec
 val fileScanExec = sparkPlan.asInstanceOf[FileSourceScanExec]
 ----
 
+[[outputPartitioning]]
+`FileSourceScanExec` uses...FIXME
+
 `FileSourceScanExec` supports `ColumnarBatchScan`.
 
 [[inputRDDs]]

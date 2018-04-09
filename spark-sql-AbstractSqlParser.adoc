@@ -1,33 +1,8 @@
 == [[AbstractSqlParser]] AbstractSqlParser -- Base SQL Parsing Infrastructure
 
-`AbstractSqlParser` is the one and only link:spark-sql-ParserInterface.adoc[ParserInterface] in Spark SQL that acts as the foundation of the SQL parsing infrastructure with two concrete <<implementations, implementations>> (that are _merely_ required to define their custom <<astBuilder, AstBuilder>> for the final transformation of SQL textual representation to their Spark SQL equivalent entities, i.e. link:spark-sql-DataType.adoc[DataType], link:spark-sql-Expression.adoc[Expression], link:spark-sql-LogicalPlan.adoc[LogicalPlan] and `TableIdentifier`).
+`AbstractSqlParser` is the one and only link:spark-sql-ParserInterface.adoc[ParserInterface] in Spark SQL that acts as the foundation of the SQL parsing infrastructure.
 
-`AbstractSqlParser` first <<parse, sets up `SqlBaseLexer` and `SqlBaseParser` for parsing>> (and pass the latter on to a parsing function) and use <<astBuilder, AstBuilder>> for the actual parsing.
-
-[[implementations]]
-.AbstractSqlParser's Implementations
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
-
-| link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]
-a| The default SQL parser in link:spark-sql-SessionState.adoc#sqlParser[SessionState] available as `sqlParser` property.
-
-[source, scala]
-----
-val spark: SparkSession = ...
-spark.sessionState.sqlParser
-----
-
-| link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser]
-| Parses link:spark-sql-DataType.adoc[DataType] or link:spark-sql-StructType.adoc[StructType] (schema) from their canonical string representation.
-|===
-
-`AbstractSqlParser` simply relays all the SQL parsing to translate a SQL string to that specialized <<astBuilder, AstBuilder>>.
-
-=== [[contract]] AbstractSqlParser Contract
-
+[[contract]]
 [source, scala]
 ----
 abstract class AbstractSqlParser extends ParserInterface {
@@ -40,6 +15,32 @@ abstract class AbstractSqlParser extends ParserInterface {
   def parseTableSchema(sqlText: String): StructType
 }
 ----
+
+`AbstractSqlParser` has two concrete <<implementations, implementations>>: <<SparkSqlParser, SparkSqlParser>> and <<CatalystSqlParser, CatalystSqlParser>> (that are _merely_ required to define their custom <<astBuilder, AstBuilder>> for the final transformation of SQL textual representation to their Spark SQL equivalent entities, i.e. link:spark-sql-DataType.adoc[DataType], link:spark-sql-Expression.adoc[Expression], link:spark-sql-LogicalPlan.adoc[LogicalPlan] and `TableIdentifier`).
+
+`AbstractSqlParser` first <<parse, sets up `SqlBaseLexer` and `SqlBaseParser` for parsing>> (and pass the latter on to a parsing function) and use <<astBuilder, AstBuilder>> for the actual parsing.
+
+[[implementations]]
+.AbstractSqlParser's Implementations
+[width="100%",cols="1,2",options="header"]
+|===
+| Name
+| Description
+
+| link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]
+a| [[SparkSqlParser]] The default SQL parser in link:spark-sql-SessionState.adoc#sqlParser[SessionState] available as `sqlParser` property.
+
+[source, scala]
+----
+val spark: SparkSession = ...
+spark.sessionState.sqlParser
+----
+
+| link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser]
+| [[CatalystSqlParser]] Parses link:spark-sql-DataType.adoc[DataType] or link:spark-sql-StructType.adoc[StructType] (schema) from their canonical string representation.
+|===
+
+`AbstractSqlParser` simply relays all the SQL parsing to translate a SQL string to that specialized <<astBuilder, AstBuilder>>.
 
 .AbstractSqlParser Contract
 [cols="1,2",options="header",width="100%"]
