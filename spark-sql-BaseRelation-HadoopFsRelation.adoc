@@ -1,6 +1,6 @@
 == [[HadoopFsRelation]] HadoopFsRelation
 
-`HadoopFsRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] and `FileRelation`.
+`HadoopFsRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] and link:spark-sql-FileRelation.adoc[FileRelation].
 
 `HadoopFsRelation` is <<creating-instance, created>> when:
 

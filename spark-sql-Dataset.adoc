@@ -149,18 +149,18 @@ val dataset = spark.range(5).withColumn("group", 'id % 2)
 scala> dataset.rdd.toDebugString
 res1: String =
 (8) MapPartitionsRDD[8] at rdd at <console>:26 [] // <-- extra deserialization step
- |  MapPartitionsRDD[7] at rdd at <console>:26 []
- |  MapPartitionsRDD[6] at rdd at <console>:26 []
- |  MapPartitionsRDD[5] at rdd at <console>:26 []
- |  ParallelCollectionRDD[4] at rdd at <console>:26 []
+ \|  MapPartitionsRDD[7] at rdd at <console>:26 []
+ \|  MapPartitionsRDD[6] at rdd at <console>:26 []
+ \|  MapPartitionsRDD[5] at rdd at <console>:26 []
+ \|  ParallelCollectionRDD[4] at rdd at <console>:26 []
 
 // Compare with a more memory-optimized alternative
 // Avoids copies and has no schema
 scala> dataset.queryExecution.toRdd.toDebugString
 res2: String =
 (8) MapPartitionsRDD[11] at toRdd at <console>:26 []
-|  MapPartitionsRDD[10] at toRdd at <console>:26 []
-|  ParallelCollectionRDD[9] at toRdd at <console>:26 []
+\|  MapPartitionsRDD[10] at toRdd at <console>:26 []
+\|  ParallelCollectionRDD[9] at toRdd at <console>:26 []
 ----
 
 `rdd` then requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the logical plan] to get the corresponding link:spark-sql-QueryExecution.adoc#toRdd[RDD of binary rows].
@@ -199,6 +199,17 @@ NOTE: You can also create a `Dataset` using link:spark-sql-LogicalPlan.adoc[Logi
 Internally, `Dataset` requests <<queryExecution, QueryExecution>> to link:spark-sql-QueryExecution.adoc#assertAnalyzed[analyze itself].
 
 `Dataset` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[inputFiles]] `inputFiles` Method
+
+[source, scala]
+----
+inputFiles: Array[String]
+----
+
+`inputFiles`...FIXME
+
+NOTE: `inputFiles` is used when...FIXME
 
 === [[isLocal]] Is Dataset Local? -- `isLocal` Method
 

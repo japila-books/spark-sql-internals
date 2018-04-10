@@ -121,6 +121,8 @@
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
 .. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
 
+. link:spark-sql-FileRelation.adoc[FileRelation]
+
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
