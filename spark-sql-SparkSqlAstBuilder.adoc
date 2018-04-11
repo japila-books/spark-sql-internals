@@ -113,14 +113,14 @@ a|
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] logical command for `CACHE LAZY? TABLE [table] (AS? [query])?`
 
 | [[visitCreateHiveTable]] `visitCreateHiveTable`
-|
-|
+| `#createHiveTable`
+| link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
 
 | [[visitCreateTable]] `visitCreateTable`
 | `#createTable`
 a|
 
-* `CreateTable` logical operator for `CREATE TABLE &hellip; AS &hellip;`
+* link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for `CREATE TABLE &hellip; AS &hellip;`
 
 * `CreateTempViewUsing` logical operators for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
 
@@ -141,7 +141,7 @@ scala> println(cmd)
 DescribeColumnCommand `t1`, [p1], true
 ----
 
-* [[DescribeTableCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc#DescribeTableCommand[DescribeTableCommand] logical command for all other variants of `DESCRIBE TABLE` (i.e. no column)
+* [[DescribeTableCommand]] link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand] logical command for all other variants of `DESCRIBE TABLE` (i.e. no column)
 +
 [source, scala]
 ----
@@ -153,6 +153,10 @@ val cmd = plan.asInstanceOf[DescribeTableCommand]
 scala> println(cmd)
 DescribeTableCommand `t1`, false
 ----
+
+| [[visitInsertOverwriteHiveDir]] `visitInsertOverwriteHiveDir`
+| `#insertOverwriteHiveDir`
+|
 |===
 
 [[with-methods]]

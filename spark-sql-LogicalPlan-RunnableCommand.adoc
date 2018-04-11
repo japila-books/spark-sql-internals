@@ -21,7 +21,7 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 
 * `InsertIntoHadoopFsRelationCommand` is link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[executed]
 
-* `QueryExecution` link:spark-sql-QueryExecution.adoc#hiveResultString[transforms the result of executing `DescribeTableCommand` to a Hive-compatible output format]
+* `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#hiveResultString[transform the result of executing DescribeTableCommand to a Hive-compatible output format]
 ====
 
 [[available-commands]]
@@ -122,7 +122,7 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | [[CreateDataSourceTableAsSelectCommand]] `CreateDataSourceTableAsSelectCommand`
 | When <<run, executed>>, ...FIXME
 
-Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves `CreateTable` logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
 
 | link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
 |
@@ -154,7 +154,7 @@ Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSo
 | DescribeFunctionCommand
 |
 
-| [[DescribeTableCommand]] DescribeTableCommand
+| [[DescribeTableCommand]] link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
 |
 
 | DropDatabaseCommand

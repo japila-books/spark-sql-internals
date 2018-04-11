@@ -1,6 +1,6 @@
 == [[HiveTableRelation]] HiveTableRelation Leaf Logical Operator -- Representing Hive Tables in Logical Plan
 
-`HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a table in Apache Hive.
+`HiveTableRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a Hive table in a link:spark-sql-LogicalPlan.adoc[logical query plan].
 
 `HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-FindDataSourceTable.adoc#apply[resolve UnresolvedCatalogRelations in a logical plan] (for link:spark-sql-FindDataSourceTable.adoc#readHiveTable[Hive tables]).
 

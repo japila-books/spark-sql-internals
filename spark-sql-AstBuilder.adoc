@@ -68,7 +68,7 @@ a| link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
 
 [NOTE]
 ====
-Can be a `OneRowRelation` for a `EXPLAIN` for unexplainable link:spark-sql-LogicalPlan-RunnableCommand.adoc#DescribeTableCommand[DescribeTableCommand] logical command as created from SQL's <<visitDescribeTable, DESCRIBE TABLE>>.
+Can be a `OneRowRelation` for an `EXPLAIN` for an unexplainable link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand] logical command as created from <<visitDescribeTable, DESCRIBE TABLE>> SQL statement.
 
 ```
 val q = sql("EXPLAIN DESCRIBE TABLE t")

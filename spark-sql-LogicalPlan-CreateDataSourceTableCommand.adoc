@@ -2,7 +2,7 @@
 
 `CreateDataSourceTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, creates a new table>> (in a session-scoped `SessionCatalog`).
 
-`CreateDataSourceTableCommand` is created exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves `CreateTable` logical operator for a non-Hive table provider with no query.
+`CreateDataSourceTableCommand` is created exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a non-Hive table provider with no query.
 
 `CreateDataSourceTableCommand` takes a `table` metadata and `ignoreIfExists` flag.
 

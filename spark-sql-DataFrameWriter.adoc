@@ -241,7 +241,7 @@ First, `tableName` is parsed to an internal table identifier. `saveAsTable` then
 | Does table exist? | Save Mode | Behaviour
 | yes       | `Ignore` | Does nothing
 | yes       | `ErrorIfExists` | Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
-| _anything_       | _anything_ | Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the `CreateTable` operator
+| _anything_       | _anything_ | Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator
 |===
 
 [source, scala]

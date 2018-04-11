@@ -1,0 +1,67 @@
+== [[DescribeTableCommand]] DescribeTableCommand
+
+`DescribeTableCommand` is...FIXME
+
+`DescribeTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse link:spark-sql-SparkSqlAstBuilder.adoc#visitDescribeTable[DESCRIBE TABLE] (with no column specified).
+
+=== [[run]] Executing DescribeTableCommand -- `run` Method
+
+[source, scala]
+----
+run(sparkSession: SparkSession): Seq[Row]
+----
+
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+
+`run`...FIXME
+
+=== [[describeFormattedDetailedPartitionInfo]] `describeFormattedDetailedPartitionInfo` Internal Method
+
+[source, scala]
+----
+describeFormattedDetailedPartitionInfo(
+  tableIdentifier: TableIdentifier,
+  table: CatalogTable,
+  partition: CatalogTablePartition,
+  buffer: ArrayBuffer[Row]): Unit
+----
+
+`describeFormattedDetailedPartitionInfo`...FIXME
+
+NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with the <<isExtended, isExtended>> flag on.
+
+=== [[describeFormattedTableInfo]] `describeFormattedTableInfo` Internal Method
+
+[source, scala]
+----
+describeFormattedTableInfo(table: CatalogTable, buffer: ArrayBuffer[Row]): Unit
+----
+
+`describeFormattedTableInfo`...FIXME
+
+NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a link:spark-sql-SessionCatalog.adoc#isTemporaryTable[non-temporary table] and the <<isExtended, isExtended>> flag on.
+
+=== [[describeDetailedPartitionInfo]] `describeDetailedPartitionInfo` Internal Method
+
+[source, scala]
+----
+describeDetailedPartitionInfo(
+  tableIdentifier: TableIdentifier,
+  table: CatalogTable,
+  partition: CatalogTablePartition,
+  buffer: ArrayBuffer[Row]): Unit
+----
+
+`describeDetailedPartitionInfo`...FIXME
+
+NOTE: `describeDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> with a non-empty <<partitionSpec, partitionSpec>>.
+
+=== [[creating-instance]] Creating DescribeTableCommand Instance
+
+`DescribeTableCommand` takes the following when created:
+
+* [[table]] `TableIdentifier`
+* [[partitionSpec]] `TablePartitionSpec`
+* [[isExtended]] `isExtended` flag
+
+`DescribeTableCommand` initializes the <<internal-registries, internal registries and counters>>.

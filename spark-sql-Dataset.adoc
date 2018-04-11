@@ -177,6 +177,27 @@ NOTE: `rdd` is at the "boundary" between the internal binary row format and the 
 Used when...FIXME
 |===
 
+=== [[inputFiles]] Getting Input Files of Relations (in Structured Query) -- `inputFiles` Method
+
+[source, scala]
+----
+inputFiles: Array[String]
+----
+
+`inputFiles` requests <<queryExecution, QueryExecution>> for link:spark-sql-QueryExecution.adoc#optimizedPlan[optimized logical plan] and collects the following logical operators:
+
+1. link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-FileRelation.adoc[FileRelation] as the link:spark-sql-LogicalPlan-LogicalRelation.adoc#relation[BaseRelation]
+
+1. link:spark-sql-FileRelation.adoc[FileRelation]
+
+1. link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
+
+`inputFiles` then requests the logical operators for their underlying files:
+
+1. link:spark-sql-FileRelation.adoc#inputFiles[inputFiles] of the `FileRelations`
+
+1. link:spark-sql-CatalogStorageFormat.adoc#locationUri[locationUri] of the `HiveTableRelation`
+
 === [[resolve]] `resolve` Internal Method
 
 [source, scala]
@@ -199,17 +220,6 @@ NOTE: You can also create a `Dataset` using link:spark-sql-LogicalPlan.adoc[Logi
 Internally, `Dataset` requests <<queryExecution, QueryExecution>> to link:spark-sql-QueryExecution.adoc#assertAnalyzed[analyze itself].
 
 `Dataset` initializes the <<internal-registries, internal registries and counters>>.
-
-=== [[inputFiles]] `inputFiles` Method
-
-[source, scala]
-----
-inputFiles: Array[String]
-----
-
-`inputFiles`...FIXME
-
-NOTE: `inputFiles` is used when...FIXME
 
 === [[isLocal]] Is Dataset Local? -- `isLocal` Method
 

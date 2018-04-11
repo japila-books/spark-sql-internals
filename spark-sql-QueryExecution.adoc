@@ -301,7 +301,7 @@ Internally, `hiveResultString` <<hiveResultString-transformations, transformatio
 | SparkPlan
 | Description
 
-| link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] for `DescribeTableCommand`
+| link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] for link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
 | Executes `DescribeTableCommand` and transforms every link:spark-sql-Row.adoc[Row] to a Hive-compatible output format.
 
 | link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] for `ShowTablesCommand`

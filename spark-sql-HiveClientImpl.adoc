@@ -117,7 +117,7 @@ NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitio
 
 `HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[getTableOption]] Retrieving Table Metadata If Available -- `getTableOption` Method
+=== [[getTableOption]] Retrieving Optional Table Metadata -- `getTableOption` Method
 
 [source, scala]
 ----

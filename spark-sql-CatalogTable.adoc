@@ -43,6 +43,14 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
 
+[[simpleString]]
+The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME
+
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is executed (with a partition specification).
+
+[[toString]]
+The *text representation* of a `CatalogTable` (aka `toString`) is...FIXME
+
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
 You manage a table metadata using the link:spark-sql-Catalog.adoc[catalog] interface (aka _metastore_). Among the management tasks is to get the <<stats, statistics>> of a table (that are used for link:spark-sql-cost-based-optimization.adoc[cost-based query optimization]).
@@ -105,7 +113,12 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 `toLinkedHashMap`...FIXME
 
-NOTE: `toLinkedHashMap` is used when...FIXME
+[NOTE]
+====
+`toLinkedHashMap` is used when:
+
+* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] for a non-temporary table and the `isExtended` flag on)
+====
 
 === [[creating-instance]] Creating CatalogTable Instance
 
@@ -113,7 +126,7 @@ NOTE: `toLinkedHashMap` is used when...FIXME
 
 * [[identifier]] `TableIdentifier`
 * [[tableType]] `CatalogTableType`
-* [[storage]] `CatalogStorageFormat`
+* [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
 * [[provider]] Optional provider name
 * [[partitionColumnNames]] Partition column names

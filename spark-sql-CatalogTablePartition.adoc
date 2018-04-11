@@ -6,13 +6,39 @@
 
 `CatalogTablePartition` can hold the <<stats, table statistics>> that...FIXME
 
+[[simpleString]]
+The *readable text representation* of a `CatalogTablePartition` (aka `simpleString`) is...FIXME
+
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is executed (with a partition specification).
+
+[[toString]]
+The *text representation* of a `CatalogTablePartition` (aka `toString`) is...FIXME
+
 === [[creating-instance]] Creating CatalogTablePartition Instance
 
 `CatalogTablePartition` takes the following when created:
 
 * [[spec]] Partition specification
-* [[storage]] `CatalogStorageFormat`
+* [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
 * [[parameters]] Parameters (default: an empty collection)
 * [[stats]] link:spark-sql-CatalogStatistics.adoc[Table statistics] (default: `None`)
 
 `CatalogTablePartition` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+
+[source, scala]
+----
+toLinkedHashMap: mutable.LinkedHashMap[String, String]
+----
+
+`toLinkedHashMap`...FIXME
+
+[NOTE]
+====
+`toLinkedHashMap` is used when:
+
+* `CatalogTablePartition` is requested for either a <<simpleString, readable>> or a <<toString, catalog>> text representation
+
+* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] (with the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on and a non-empty link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#partitionSpec[partitionSpec]).
+====

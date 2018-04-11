@@ -1,6 +1,6 @@
-== [[LogicalRelation]] LogicalRelation Logical Operator -- Adapter for BaseRelation
+== [[LogicalRelation]] LogicalRelation Leaf Logical Operator -- Representing BaseRelations in Logical Plan
 
-`LogicalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that is an adapter for link:spark-sql-BaseRelation.adoc[BaseRelation] to be part of a link:spark-sql-LogicalPlan.adoc[logical query plan].
+`LogicalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a <<relation, BaseRelation>> in a link:spark-sql-LogicalPlan.adoc[logical query plan].
 
 [source, scala]
 ----
