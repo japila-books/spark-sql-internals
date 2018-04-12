@@ -32,10 +32,12 @@ a| Analyzed <<logical, logical plan>> that has passed link:spark-sql-Analyzer.ad
 TIP: Use Dataset's link:spark-sql-dataset-operators.adoc#explain[explain(extended = true)] or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
 | [[withCachedData]] `withCachedData`
-| `LogicalPlan` that is the `analyzed` plan after being analyzed, checked (for unsupported operations) and replaced with cached segments.
+| <<analyzed, analyzed>> logical plan after `CacheManager` was requested to link:spark-sql-CacheManager.adoc#useCachedData[use cached data].
+
+`withCachedData` makes sure that the logical plan <<assertAnalyzed, can be analyzed>> and <<assertSupported, uses supported operations only>>.
 
 | [[optimizedPlan]] `optimizedPlan`
-| Optimized link:spark-sql-LogicalPlan.adoc[logical plan] being the result of executing the session-owned link:spark-sql-SessionState.adoc#optimizer[Catalyst Query Optimizer] to <<withCachedData, withCachedData>>.
+| Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on <<withCachedData, withCachedData>>.
 
 | [[sparkPlan]] `sparkPlan`
 a| link:spark-sql-SparkPlan.adoc[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
@@ -182,6 +184,17 @@ prepareForExecution(plan: SparkPlan): SparkPlan
 `prepareForExecution` takes <<preparations, physical preparation rules>> and applies them one by one to the input physical `plan`.
 
 NOTE: `prepareForExecution` is used exclusively when `QueryExecution` <<executedPlan, prepares physical plan for execution>>.
+
+=== [[assertSupported]] `assertSupported` Method
+
+[source, scala]
+----
+assertSupported(): Unit
+----
+
+`assertSupported` requests `UnsupportedOperationChecker` to link:spark-sql-UnsupportedOperationChecker.adoc#checkForBatch[checkForBatch] when...FIXME
+
+NOTE: `assertSupported` is used exclusively when `QueryExecution` is requested for <<withCachedData, withCachedData>> logical plan.
 
 === [[assertAnalyzed]] Creating Analyzed Logical Plan and Checking Correctness -- `assertAnalyzed` Method
 

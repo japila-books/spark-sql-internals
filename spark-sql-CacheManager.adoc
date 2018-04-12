@@ -6,10 +6,22 @@
 
 [source, scala]
 ----
-sparkSession.sharedState.cacheManager
+val spark: SparkSession = ...
+spark.sharedState.cacheManager
 ----
 
 NOTE: A Spark developer can use `CacheManager` to cache ``Dataset``s using link:spark-sql-caching.adoc#cache[cache] or link:spark-sql-caching.adoc#persist[persist] operators.
+
+=== [[useCachedData]] Using Cached Data -- `useCachedData` Method
+
+[source, scala]
+----
+useCachedData(plan: LogicalPlan): LogicalPlan
+----
+
+`useCachedData`...FIXME
+
+NOTE: `useCachedData` is used when...FIXME
 
 === [[cachedData]] Cached Queries -- `cachedData` Internal Registry
 
