@@ -190,20 +190,9 @@ runCommand
   (command: LogicalPlan): Unit
 ----
 
-CAUTION: FIXME
+`runCommand`...FIXME
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested for <<save, save>>, <<insertInto, insertInto>> and <<createTable, createTable>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
-
-=== [[createTable]] Creating Table -- `createTable` Internal Method
-
-[source, scala]
-----
-createTable(tableIdent: TableIdentifier): Unit
-----
-
-CAUTION: FIXME
-
-NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTable>>.
 
 === [[internal-state]] Internal State
 
@@ -212,14 +201,29 @@ NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTab
 .Attributes and Corresponding Setters
 [cols="1,2",options="header"]
 |===
-|Attribute |Setters
-|`source`        |<<format, format>>
-|`mode` | <<mode, mode>>
-|`extraOptions` | <<option, option>>, <<options, options>>, <<save, save>>
-|`partitioningColumns` | <<partitionBy, partitionBy>>
-|`bucketColumnNames` | <<bucketBy, bucketBy>>
-|`numBuckets` | <<bucketBy, bucketBy>>
-|`sortColumnNames` | <<sortBy, sortBy>>
+| Attribute
+| Setters
+
+| [[source]] `source`
+| <<format, format>>
+
+| [[mode]] `mode`
+| <<mode, mode>>
+
+| [[extraOptions]] `extraOptions`
+| <<option, option>>, <<options, options>>, <<save, save>>
+
+| [[partitioningColumns]] `partitioningColumns`
+| <<partitionBy, partitionBy>>
+
+| [[bucketColumnNames]] `bucketColumnNames`
+| <<bucketBy, bucketBy>>
+
+| [[numBuckets]] `numBuckets`
+| <<bucketBy, bucketBy>>
+
+| [[sortColumnNames]] `sortColumnNames`
+| <<sortBy, sortBy>>
 |===
 
 === [[saveAsTable]] `saveAsTable` Method
@@ -305,7 +309,12 @@ It creates the input `table` (using `CREATE TABLE table (schema)` where `schema`
 
 === [[bucketBy]] `bucketBy` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+bucketBy(numBuckets: Int, colName: String, colNames: String*): DataFrameWriter[T]
+----
+
+`bucketBy` simply sets the internal <<numBuckets, numBuckets>> and <<bucketColumnNames, bucketColumnNames>> to the input `numBuckets` and `colName` with `colNames`, respectively.
 
 === [[partitionBy]] `partitionBy` Method
 
@@ -419,3 +428,37 @@ org.apache.spark.sql.AnalysisException: insertInto() can't be used together with
   at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:298)
   ... 49 elided
 ----
+
+=== [[getBucketSpec]] `getBucketSpec` Internal Method
+
+[source, scala]
+----
+getBucketSpec: Option[BucketSpec]
+----
+
+`getBucketSpec` creates a link:spark-sql-BucketSpec.adoc#creating-instance[BucketSpec] with <<numBuckets, numBuckets>>, <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>.
+
+`getBucketSpec` reports a `IllegalArgumentException` when <<numBuckets, numBuckets>> are not defined when <<sortColumnNames, sortColumnNames>> are.
+
+```
+sortBy must be used together with bucketBy
+```
+
+NOTE: `getBucketSpec` is used exclusively when `DataFrameWriter` is requested to <<createTable, create a table>>.
+
+=== [[createTable]] Creating Table -- `createTable` Internal Method
+
+[source, scala]
+----
+createTable(tableIdent: TableIdentifier): Unit
+----
+
+`createTable` requests `DataSource` to link:spark-sql-DataSource.adoc#buildStorageFormatFromOptions[buildStorageFormatFromOptions] for <<extraOptions, extraOptions>>.
+
+`createTable` assumes `CatalogTableType.EXTERNAL` when link:spark-sql-CatalogStorageFormat.adoc#locationUri[location URI] of `CatalogStorageFormat` is defined and `CatalogTableType.MANAGED` otherwise.
+
+`createTable` creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable].
+
+In the end, `createTable` creates a link:spark-sql-LogicalPlan-CreateTable.adoc#creating-instance[CreateTable] (with the table description, <<mode, mode>> and the link:spark-sql-Dataset.adoc#logicalPlan[logical query plan] of the dataset) and <<runCommand, runs>> it.
+
+NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTable>>.

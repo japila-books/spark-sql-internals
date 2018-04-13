@@ -38,7 +38,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ====
 `toLinkedHashMap` is used when:
 
-* `CatalogTablePartition` is requested for either a <<simpleString, readable>> or a <<toString, catalog>> text representation
-
 * `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] (with the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on and a non-empty link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#partitionSpec[partitionSpec]).
+
+* `CatalogTablePartition` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====

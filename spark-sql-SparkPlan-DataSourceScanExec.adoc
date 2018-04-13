@@ -7,7 +7,7 @@
 NOTE: The prefix for variable names for `DataSourceScanExec` operators in a link:spark-sql-CodegenSupport.adoc#variablePrefix[generated Java source code] is *scan*.
 
 [[nodeNamePrefix]]
-The default *node name prefix* is an empty string (that is used at the very beginning of <<simpleString, simple node description>>).
+The default *node name prefix* is an empty string (that is used at the very beginning of <<simpleString, simple text node description>>).
 
 [[implementations]]
 .DataSourceScanExecs
@@ -46,7 +46,7 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 | [[metadata]] `metadata`
 | Metadata (as a collection of key-value pairs) that describes this scan.
 
-Used for <<simpleString, simpleString>>
+Used for <<simpleString, simple text representation>>
 
 | [[metastoreTableIdentifier]] `metastoreTableIdentifier`
 | `TableIdentifier` that...FIXME

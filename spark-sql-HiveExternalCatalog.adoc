@@ -143,25 +143,6 @@ In the end, `statsFromProperties` creates a link:spark-sql-CatalogStatistics.ado
 
 NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
 
-=== [[restoreTableMetadata]] `restoreTableMetadata` Internal Method
-
-[source, scala]
-----
-restoreTableMetadata(inputTable: CatalogTable): CatalogTable
-----
-
-`restoreTableMetadata`...FIXME
-
-[NOTE]
-====
-`restoreTableMetadata` is used when `HiveExternalCatalog` is requested for:
-
-1. <<getTable, getTable>>
-1. <<doAlterTableStats, doAlterTableStats>>
-1. <<alterPartitions, alterPartitions>>
-1. <<listPartitionsByFilter, listPartitionsByFilter>>
-====
-
 === [[listPartitionsByFilter]] `listPartitionsByFilter` Method
 
 [source, scala]
@@ -276,4 +257,56 @@ columnStatKeyPropName(columnName: String, statKey: String): String
 
 `columnStatKeyPropName` builds a property name of the form *spark.sql.statistics.colStats.[columnName].[statKey]* for the input `columnName` and `statKey`.
 
-NOTE: `columnStatKeyPropName` is used when `HiveExternalCatalog` is requested to <<statsToProperties, statsToProperties>> or <<statsFromProperties, statsFromProperties>>.
+NOTE: `columnStatKeyPropName` is used when `HiveExternalCatalog` is requested to <<statsToProperties, statsToProperties>> and <<statsFromProperties, statsFromProperties>>.
+
+=== [[getBucketSpecFromTableProperties]] `getBucketSpecFromTableProperties` Internal Method
+
+[source, scala]
+----
+getBucketSpecFromTableProperties(metadata: CatalogTable): Option[BucketSpec]
+----
+
+`getBucketSpecFromTableProperties`...FIXME
+
+NOTE: `getBucketSpecFromTableProperties` is used when `HiveExternalCatalog` is requested to <<restoreHiveSerdeTable, restoreHiveSerdeTable>> or <<restoreDataSourceTable, restoreDataSourceTable>>.
+
+=== [[restoreHiveSerdeTable]] Restoring Hive Serde Table -- `restoreHiveSerdeTable` Internal Method
+
+[source, scala]
+----
+restoreHiveSerdeTable(table: CatalogTable): CatalogTable
+----
+
+`restoreHiveSerdeTable`...FIXME
+
+NOTE: `restoreHiveSerdeTable` is used exclusively when `HiveExternalCatalog` is requested to <<restoreTableMetadata, restoreTableMetadata>> (when there is no provider specified in table properties, which means this is a Hive serde table).
+
+=== [[restoreDataSourceTable]] Restoring Data Source Table -- `restoreDataSourceTable` Internal Method
+
+[source, scala]
+----
+restoreDataSourceTable(table: CatalogTable, provider: String): CatalogTable
+----
+
+`restoreDataSourceTable`...FIXME
+
+NOTE: `restoreDataSourceTable` is used exclusively when `HiveExternalCatalog` is requested to <<restoreTableMetadata, restoreTableMetadata>> (for regular data source table with provider specified in table properties).
+
+=== [[restoreTableMetadata]] `restoreTableMetadata` Internal Method
+
+[source, scala]
+----
+restoreTableMetadata(inputTable: CatalogTable): CatalogTable
+----
+
+`restoreTableMetadata`...FIXME
+
+[NOTE]
+====
+`restoreTableMetadata` is used when `HiveExternalCatalog` is requested for:
+
+1. <<getTable, getTable>>
+1. <<doAlterTableStats, doAlterTableStats>>
+1. <<alterPartitions, alterPartitions>>
+1. <<listPartitionsByFilter, listPartitionsByFilter>>
+====

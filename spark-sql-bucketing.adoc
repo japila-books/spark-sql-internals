@@ -1,0 +1,81 @@
+== Bucketing
+
+*Bucketing* is a mechanism to _hash-partition_ a data set into *buckets* and avoid a shuffle in table joins.
+
+Bucketing is applicable for all file-based data sources, e.g. Parquet, JSON.
+
+You use link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] method to specify the number of buckets and the bucketing columns (that ends up as a link:spark-sql-BucketSpec.adoc[BucketSpec]).
+
+[source, scala]
+----
+peopleDF.write
+  .bucketBy(42, "name")
+  .sortBy("age")
+  .saveAsTable("people_bucketed")
+----
+
+Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (for the partitions).
+
+```
+FIXME Show the number of files in spark-warehouse
+```
+
+The number of buckets is exactly the number of partitions in link:spark-sql-SparkSession.adoc#table[SparkSession.table].
+
+[source, scala]
+----
+// FIXME Show the number of buckets
+val table = spark.table("bucketed_table")
+val rdd = table.queryExecution.toRdd
+println(rdd.partitions.length)
+----
+
+Use link:spark-sql-SessionCatalog.adoc#getTableMetadata[SessionCatalog] or `DESCRIBE EXTENDED` SQL command to find the bucket information.
+
+[source, scala]
+----
+scala> spark.catalog.listTables.show(false)
++---------------------+--------+-----------+---------+-----------+
+|name                 |database|description|tableType|isTemporary|
++---------------------+--------+-----------+---------+-----------+
+|buckets_8_10e6_sorted|default |null       |MANAGED  |false      |
++---------------------+--------+-----------+---------+-----------+
+
+scala> sql("DESCRIBE EXTENDED buckets_8_10e6_sorted").show(21, false)
++----------------------------+---------------------------------------------------------------------+-------+
+|col_name                    |data_type                                                            |comment|
++----------------------------+---------------------------------------------------------------------+-------+
+|id                          |bigint                                                               |null   |
+|                            |                                                                     |       |
+|# Detailed Table Information|                                                                     |       |
+|Database                    |default                                                              |       |
+|Table                       |buckets_8_10e6_sorted                                                |       |
+|Owner                       |jacek                                                                |       |
+|Created Time                |Tue Apr 17 18:42:37 CEST 2018                                        |       |
+|Last Access                 |Thu Jan 01 01:00:00 CET 1970                                         |       |
+|Created By                  |Spark 2.3.1-SNAPSHOT                                                 |       |
+|Type                        |MANAGED                                                              |       |
+|Provider                    |parquet                                                              |       |
+|Num Buckets                 |8                                                                    |       |
+|Bucket Columns              |[`id`]                                                               |       |
+|Sort Columns                |[`id`]                                                               |       |
+|Table Properties            |[transient_lastDdlTime=1523983357]                                   |       |
+|Statistics                  |4055953 bytes                                                        |       |
+|Location                    |file:/Users/jacek/dev/oss/spark/spark-warehouse/buckets_8_10e6_sorted|       |
+|Serde Library               |org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe                   |       |
+|InputFormat                 |org.apache.hadoop.mapred.SequenceFileInputFormat                     |       |
+|OutputFormat                |org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat            |       |
+|Storage Properties          |[serialization.format=1]                                             |       |
++----------------------------+---------------------------------------------------------------------+-------+
+
+import org.apache.spark.sql.catalyst.TableIdentifier
+val metadata = spark.sessionState.catalog.getTableMetadata(TableIdentifier("buckets_8_10e6_sorted"))
+scala> metadata.bucketSpec.foreach(println)
+8 buckets, bucket columns: [id], sort columns: [id]
+----
+
+The link:spark-sql-BucketSpec.adoc#numBuckets[number of buckets] has to be between `0` and `100000` exclusive or Spark SQL reports an `AnalysisException`:
+
+```
+Number of buckets should be greater than 0 but less than 100000. Got `[numBuckets]`
+```

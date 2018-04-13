@@ -106,6 +106,10 @@ AnalyzeTableCommand `t1`, false
 `NOSCAN` is used for `AnalyzePartitionCommand` and `AnalyzeTableCommand` logical commands only.
 ====
 
+| [[visitBucketSpec]] `visitBucketSpec`
+| `#bucketSpec`
+|
+
 | [[visitCacheTable]] `visitCacheTable`
 | `#cacheTable`
 a|

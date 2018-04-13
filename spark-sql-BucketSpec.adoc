@@ -1,0 +1,66 @@
+== [[BucketSpec]] BucketSpec
+
+[[creating-instance]]
+`BucketSpec` is a metadata of a link:spark-sql-bucketing.adoc[bucketing] of a table:
+
+* [[numBuckets]] Number of buckets
+* [[bucketColumnNames]] Bucket column names
+* [[sortColumnNames]] Column names for sorting
+
+NOTE: The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusive.
+
+`BucketSpec` is <<creating-instance, created>> when:
+
+. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#getBucketSpec[getBucketSpec] (when `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
+
+. `HiveExternalCatalog` is requested to link:spark-sql-HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:spark-sql-HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
+
+. `HiveClientImpl` is requested to link:spark-sql-HiveClientImpl.adoc#getTableOption[retrieve a table metadata]
+
+. `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitBucketSpec[visitBucketSpec] (for `CREATE TABLE` SQL statement with `CLUSTERED BY` and `INTO n BUCKETS` with optional `SORTED BY` clauses)
+
+[[toString]]
+The text representation of a `BucketSpec` is as follows:
+
+```
+[numBuckets] buckets, bucket columns: [[bucketColumnNames]], sort columns: [[sortColumnNames]]
+```
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.catalog.BucketSpec
+val bucketSpec = BucketSpec(
+  numBuckets = 8,
+  bucketColumnNames = Seq("col1"),
+  sortColumnNames = Seq("col2"))
+scala> println(bucketSpec)
+8 buckets, bucket columns: [col1], sort columns: [col2]
+----
+
+=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+
+[source, scala]
+----
+toLinkedHashMap: mutable.LinkedHashMap[String, String]
+----
+
+`toLinkedHashMap` gives a collection of pairs:
+
+* Num Buckets
+* Bucket Columns
+* Sort Columns
+
+[source, scala]
+----
+scala> println(bucketSpec.toLinkedHashMap)
+Map(Num Buckets -> 8, Bucket Columns -> [`col1`], Sort Columns -> [`col2`])
+----
+
+[NOTE]
+====
+`toLinkedHashMap` is used when:
+
+* `CatalogTable` is requested to link:spark-sql-CatalogTable.adoc#toLinkedHashMap[toLinkedHashMap]
+
+* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] with a non-empty <<partitionSpec, partitionSpec>> and the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on (that boils down to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedDetailedPartitionInfo[describeFormattedDetailedPartitionInfo]).
+====

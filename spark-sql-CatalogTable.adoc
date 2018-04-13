@@ -117,7 +117,9 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ====
 `toLinkedHashMap` is used when:
 
-* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] for a non-temporary table and the `isExtended` flag on)
+* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] for a non-temporary table and the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on)
+
+* `CatalogTable` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====
 
 === [[creating-instance]] Creating CatalogTable Instance

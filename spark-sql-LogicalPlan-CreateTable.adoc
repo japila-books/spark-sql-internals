@@ -1,3 +1,15 @@
 == [[CreateTable]] CreateTable
 
 `CreateTable` is...FIXME
+
+`CreateTable` is <<creating-instance, created>> when...FIXME
+
+=== [[creating-instance]] Creating CreateTable Instance
+
+`CreateTable` takes the following when created:
+
+* [[tableDesc]] link:spark-sql-CatalogTable.adoc[CatalogTable]
+* [[mode]] link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode]
+* [[query]] link:spark-sql-LogicalPlan.adoc[Logical query plan]
+
+`CreateTable` initializes the <<internal-registries, internal registries and counters>>.

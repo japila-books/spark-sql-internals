@@ -288,5 +288,15 @@ Internally, `resolveRelation` creates an instance of <<providingClass, providing
 * `ResolveSQLOnFile` converts a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 * `HiveMetastoreCatalog` is requested for link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[]
 * Structured Streaming's `FileStreamSource` creates batches of records
-
 ====
+
+=== [[buildStorageFormatFromOptions]] `buildStorageFormatFromOptions` Method
+
+[source, scala]
+----
+buildStorageFormatFromOptions(options: Map[String, String]): CatalogStorageFormat
+----
+
+`buildStorageFormatFromOptions`...FIXME
+
+NOTE: `buildStorageFormatFromOptions` is used when...FIXME

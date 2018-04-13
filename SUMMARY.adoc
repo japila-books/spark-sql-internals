@@ -411,6 +411,9 @@
 
 . link:spark-sql-debugging-execution.adoc[Debugging Query Execution]
 
+. link:spark-sql-bucketing.adoc[Bucketing]
+.. link:spark-sql-BucketSpec.adoc[BucketSpec]
+
 == Catalyst -- Tree Manipulation Framework
 
 . link:spark-sql-catalyst.adoc[Catalyst -- Tree Manipulation Framework]
