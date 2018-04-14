@@ -316,6 +316,18 @@ bucketBy(numBuckets: Int, colName: String, colNames: String*): DataFrameWriter[T
 
 `bucketBy` simply sets the internal <<numBuckets, numBuckets>> and <<bucketColumnNames, bucketColumnNames>> to the input `numBuckets` and `colName` with `colNames`, respectively.
 
+[source, scala]
+----
+val df = spark.range(5)
+import org.apache.spark.sql.DataFrameWriter
+val writer: DataFrameWriter[java.lang.Long] = df.write
+
+val bucketedTable = writer.bucketBy(numBuckets = 8, "col1", "col2")
+
+scala> :type bucketedTable
+org.apache.spark.sql.DataFrameWriter[Long]
+----
+
 === [[partitionBy]] `partitionBy` Method
 
 [source, scala]
