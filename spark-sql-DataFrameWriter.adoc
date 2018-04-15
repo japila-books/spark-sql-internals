@@ -242,10 +242,21 @@ First, `tableName` is parsed to an internal table identifier. `saveAsTable` then
 .saveAsTable's Behaviour per Save Mode
 [cols="1,1,2",options="header"]
 |===
-| Does table exist? | Save Mode | Behaviour
-| yes       | `Ignore` | Does nothing
-| yes       | `ErrorIfExists` | Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
-| _anything_       | _anything_ | Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator
+| Does table exist?
+| Save Mode
+| Behaviour
+
+| yes
+| `Ignore`
+| Does nothing
+
+| yes
+| `ErrorIfExists`
+| Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
+
+| _anything_
+| _anything_
+| Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator
 |===
 
 [source, scala]
@@ -255,8 +266,8 @@ ids.write.
   option("path", "/tmp/five_ids").
   saveAsTable("five_ids")
 
-// Check out if saveAsTable was successful
-val q = spark.catalog.listTables().filter($"name" === "five_ids")
+// Check out if saveAsTable as five_ids was successful
+val q = spark.catalog.listTables.filter($"name" === "five_ids")
 scala> q.show
 +--------+--------+-----------+---------+-----------+
 |    name|database|description|tableType|isTemporary|
@@ -367,6 +378,19 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 | Existing data is overwritten by new records.
 |===
 
+=== [[sortBy]] Specifying Sorting Columns -- `sortBy` Method
+
+[source, scala]
+----
+sortBy(colName: String, colNames: String*): DataFrameWriter[T]
+----
+
+`sortBy` simply sets <<sortColumnNames, sorting columns>> to the input `colName` and `colNames` column names.
+
+NOTE: `sortBy` must be used together with <<bucketBy, bucketBy>> or `DataFrameWriter` reports an `IllegalArgumentException`.
+
+NOTE: <<assertNotBucketed, assertNotBucketed>> asserts that bucketing is not used by some methods.
+
 === [[option]][[options]] Writer Configuration -- `option` and `options` Methods
 
 CAUTION: FIXME
@@ -474,3 +498,18 @@ createTable(tableIdent: TableIdentifier): Unit
 In the end, `createTable` creates a link:spark-sql-LogicalPlan-CreateTable.adoc#creating-instance[CreateTable] (with the table description, <<mode, mode>> and the link:spark-sql-Dataset.adoc#logicalPlan[logical query plan] of the dataset) and <<runCommand, runs>> it.
 
 NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTable>>.
+
+=== [[assertNotBucketed]] `assertNotBucketed` Internal Method
+
+[source, scala]
+----
+assertNotBucketed(operation: String): Unit
+----
+
+`assertNotBucketed` checks whether <<numBuckets, numBuckets>> or <<sortColumnNames, sortColumnNames>> are defined and if they do reports an `AnalysisException`:
+
+```
+'[operation]' does not support bucketing right now
+```
+
+NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save, save>>, <<insertInto, insertInto>> and <<jdbc, jdbc>>.
