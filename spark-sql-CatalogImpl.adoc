@@ -7,7 +7,7 @@ image::images/spark-sql-CatalogImpl.png[align="center"]
 
 NOTE: `CatalogImpl` is in `org.apache.spark.sql.internal` package.
 
-=== [[createTable]] `createTable` Method
+=== [[createTable]] Creating Table -- `createTable` Method
 
 [source, scala]
 ----

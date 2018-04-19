@@ -2,7 +2,13 @@
 
 `CreateTable` is...FIXME
 
-`CreateTable` is <<creating-instance, created>> when...FIXME
+`CreateTable` is <<creating-instance, created>> when:
+
+. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable] (when `DataFrameWriter` does link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
+
+. `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
+
+. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[create a table]
 
 === [[creating-instance]] Creating CreateTable Instance
 

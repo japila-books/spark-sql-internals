@@ -11,7 +11,7 @@ NOTE: Bucketing can show the biggest benefit when *pre-shuffled bucketed tables*
 // Example: SortMergeJoin of two FileScans
 
 // Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
-// Disable auto broadcasting, e.g. spark.sql.autoBroadcastJoinThreshold
+// Disable auto broadcasting
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
 scala> spark.catalog.listTables.show
@@ -34,7 +34,7 @@ The above join query is a fine example of a link:spark-sql-SparkPlan-SortMergeJo
 .SortMergeJoin of FileScans (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-filescans.png[align="center"]
 
-One way to optimize the join query is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using link:spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWrite.saveAsTable].
+One way to avoid the exchanges and so optimize the join query is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using link:spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a link:spark-sql-Catalog.adoc[catalog] by link:spark-sql-SparkSession.adoc#table[SparkSession.table].
 
 NOTE: Bucketing link:spark-sql-DataFrameWriter.adoc#assertNotBucketed[is not supported] for link:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save], link:spark-sql-DataFrameWriter.adoc#insertInto[DataFrameWriter.insertInto] and link:spark-sql-DataFrameWriter.adoc#jdbc[DataFrameWriter.jdbc] methods.
 
@@ -50,7 +50,7 @@ people.write
   .saveAsTable("people_bucketed")
 ----
 
-NOTE: link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] and link:spark-sql-DataFrameWriter.adoc#sortBy[DataFrameWriter.sortBy] simply set respective internal properties that are simply used to create a link:spark-sql-BucketSpec.adoc[BucketSpec].
+NOTE: link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] and link:spark-sql-DataFrameWriter.adoc#sortBy[DataFrameWriter.sortBy] simply set respective internal properties that eventually become a link:spark-sql-BucketSpec.adoc[BucketSpec].
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 
@@ -149,3 +149,105 @@ The link:spark-sql-BucketSpec.adoc#numBuckets[number of buckets] has to be betwe
 ```
 Number of buckets should be greater than 0 but less than 100000. Got `[numBuckets]`
 ```
+
+There are however requirements that have to be met before link:spark-sql-SparkOptimizer.adoc[Spark Optimizer] gives a no-Exchange query plan:
+
+. The number of partitions on both sides of a join has to be exactly the same.
+
+. Both join operators have to use link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] partitioning scheme.
+
+It is acceptable to use bucketing for one side of a join.
+
+[source, scala]
+----
+// Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
+// Disable auto broadcasting
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+
+val bucketedTableName = "bucketed_4_id"
+val large = spark.range(1000000)
+large.write
+  .bucketBy(4, "id")
+  .sortBy("id")
+  .mode("overwrite")
+  .saveAsTable(bucketedTableName)
+val bucketedTable = spark.table(bucketedTableName)
+
+val t1 = spark
+  .range(4)
+  .repartition(4, $"id")  // Make sure that the number of partitions matches the other side
+
+val q = t1.join(bucketedTable, "id")
+scala> q.explain
+== Physical Plan ==
+*(4) Project [id#104L]
++- *(4) SortMergeJoin [id#104L], [id#102L], Inner
+   :- *(2) Sort [id#104L ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(id#104L, 4)
+   :     +- *(1) Range (0, 4, step=1, splits=8)
+   +- *(3) Sort [id#102L ASC NULLS FIRST], false, 0
+      +- *(3) Project [id#102L]
+         +- *(3) Filter isnotnull(id#102L)
+            +- *(3) FileScan parquet default.bucketed_4_id[id#102L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct<id:bigint>
+
+q.foreach(_ => ())
+----
+
+.SortMergeJoin of One Bucketed Table (Details for Query)
+image::images/spark-sql-bucketing-sortmergejoin-one-bucketed-table.png[align="center"]
+
+=== Sorting
+
+[source, scala]
+----
+// Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
+// Disable auto broadcasting
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+
+val bucketedTableName = "bucketed_4_id"
+val large = spark.range(1000000)
+large.write
+  .bucketBy(4, "id")
+  .sortBy("id")
+  .mode("overwrite")
+  .saveAsTable(bucketedTableName)
+
+// Describe the table and include bucketing spec only
+val descSQL = sql(s"DESC FORMATTED $bucketedTableName").filter($"col_name".contains("Bucket") || $"col_name" === "Sort Columns")
+scala> descSQL.show(truncate = false)
++--------------+---------+-------+
+|col_name      |data_type|comment|
++--------------+---------+-------+
+|Num Buckets   |4        |       |
+|Bucket Columns|[`id`]   |       |
+|Sort Columns  |[`id`]   |       |
++--------------+---------+-------+
+
+val bucketedTable = spark.table(bucketedTableName)
+val t1 = spark.range(4)
+  .repartition(2, $"id")  // Use just 2 partitions
+  .sortWithinPartitions("id") // sort partitions
+
+val q = t1.join(bucketedTable, "id")
+// Note two exchanges and sorts
+scala> q.explain
+== Physical Plan ==
+*(5) Project [id#79L]
++- *(5) SortMergeJoin [id#79L], [id#77L], Inner
+   :- *(3) Sort [id#79L ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(id#79L, 4)
+   :     +- *(2) Sort [id#79L ASC NULLS FIRST], false, 0
+   :        +- Exchange hashpartitioning(id#79L, 2)
+   :           +- *(1) Range (0, 4, step=1, splits=8)
+   +- *(4) Sort [id#77L ASC NULLS FIRST], false, 0
+      +- *(4) Project [id#77L]
+         +- *(4) Filter isnotnull(id#77L)
+            +- *(4) FileScan parquet default.bucketed_4_id[id#77L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct<id:bigint>
+
+q.foreach(_ => ())
+----
+
+WARNING: There are two exchanges and sorts which makes the above use case almost unusable. I filed an issue at https://issues.apache.org/jira/browse/SPARK-24025[SPARK-24025 Join of bucketed and non-bucketed tables can give two exchanges and sorts for non-bucketed side].
+
+.SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)
+image::images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png[align="center"]

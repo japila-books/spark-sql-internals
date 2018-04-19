@@ -11,7 +11,7 @@ NOTE: The <<numBuckets, number of buckets>> has to be between `0` and `100000` e
 
 `BucketSpec` is <<creating-instance, created>> when:
 
-. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#getBucketSpec[getBucketSpec] (when `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
+. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] (and does link:spark-sql-DataFrameWriter.adoc#getBucketSpec[getBucketSpec])
 
 . `HiveExternalCatalog` is requested to link:spark-sql-HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:spark-sql-HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
 
