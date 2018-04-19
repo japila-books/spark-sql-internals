@@ -2,7 +2,7 @@
 
 `CreateDataSourceTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, creates a new table>> (in a session-scoped `SessionCatalog`).
 
-`CreateDataSourceTableCommand` is created exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a non-Hive table provider with no query.
+`CreateDataSourceTableCommand` is created exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a non-Hive table provider with no query.
 
 `CreateDataSourceTableCommand` takes a `table` metadata and `ignoreIfExists` flag.
 
@@ -13,6 +13,8 @@
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+
 `run` link:spark-sql-SessionCatalog.adoc#createTable[creates a new table] in a session-scoped `SessionCatalog`.
 
 NOTE: `run` uses the input `SparkSession` to link:spark-sql-SparkSession.adoc#sessionState[access SessionState] that in turn is used to link:spark-sql-SessionState.adoc#catalog[access the current SessionCatalog].
@@ -22,5 +24,3 @@ Internally, `run` link:spark-sql-DataSource.adoc#resolveRelation[creates a BaseR
 CAUTION: FIXME
 
 NOTE: `run` accepts tables only (not views) with the provider defined.
-
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract].

@@ -10,11 +10,17 @@
 
 . `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[create a table]
 
+`CreateTable` is transformed in the following logical resolution rules:
+
+* (for non-hive data source tables) link:spark-sql-DataSourceAnalysis.adoc#apply[DataSourceAnalysis] posthoc logical resolution rule to a link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand] and link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical commands
+
+* (for hive tables) link:spark-sql-ResolveHiveSerdeTable.adoc#apply[ResolveHiveSerdeTable] and link:spark-sql-HiveAnalysis.adoc#apply[HiveAnalysis] logical rules
+
 === [[creating-instance]] Creating CreateTable Instance
 
 `CreateTable` takes the following when created:
 
-* [[tableDesc]] link:spark-sql-CatalogTable.adoc[CatalogTable]
+* [[tableDesc]] link:spark-sql-CatalogTable.adoc[Table metadata]
 * [[mode]] link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode]
 * [[query]] link:spark-sql-LogicalPlan.adoc[Logical query plan]
 

@@ -1,0 +1,30 @@
+== [[DataSourceAnalysis]] DataSourceAnalysis PostHoc Logical Resolution Rule
+
+`DataSourceAnalysis` is a link:spark-sql-Analyzer.adoc#postHocResolutionRules[posthoc logical resolution rule] that the link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
+
+Technically, `DataSourceAnalysis` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+[source, scala]
+----
+// FIXME Example of DataSourceAnalysis
+scala> spark.version
+res0: String = 2.3.0
+
+import org.apache.spark.sql.execution.datasources.DataSourceAnalysis
+val rule = DataSourceAnalysis(spark.sessionState.conf)
+
+val plan = FIXME
+
+rule(plan)
+----
+
+=== [[apply]] Applying DataSourceAnalysis Rule to Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME

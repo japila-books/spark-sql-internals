@@ -73,7 +73,7 @@ The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a ca
 
 [NOTE]
 ====
-`HiveTableRelation` is removed from a logical plan when `HiveAnalysis` rule is executed (and transforms a `InsertIntoTable` with `HiveTableRelation` to an link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]).
+`HiveTableRelation` is removed from a logical plan when link:spark-sql-HiveAnalysis.adoc#apply[HiveAnalysis] logical rule is executed (and transforms a `InsertIntoTable` with `HiveTableRelation` to an link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]).
 
 `HiveTableRelation` is when `RelationConversions` rule is executed (and converts `HiveTableRelations` to `LogicalRelations`).
 

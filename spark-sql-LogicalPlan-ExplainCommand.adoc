@@ -82,9 +82,9 @@ NOTE: `ExplainCommand` is created when...FIXME
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-`run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to execute a logical command.
+`run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
 
 Internally, `run` creates a `IncrementalExecution` for a streaming dataset directly or requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the `LogicalPlan`].
 

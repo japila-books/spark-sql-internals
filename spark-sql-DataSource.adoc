@@ -67,7 +67,7 @@ writeAndRead(mode: SaveMode, data: DataFrame): BaseRelation
 
 CAUTION: FIXME
 
-NOTE: `writeAndRead` is used exclusively when link:spark-sql-LogicalPlan-RunnableCommand.adoc#CreateDataSourceTableAsSelectCommand[CreateDataSourceTableAsSelectCommand] is executed.
+NOTE: `writeAndRead` is used exclusively when link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand] logical command is executed.
 
 === [[providingClass]] `providingClass` Property
 

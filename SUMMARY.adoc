@@ -245,6 +245,7 @@
 . link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
 . link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand]
 . link:spark-sql-LogicalPlan-Command.adoc[Command]
+. link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 . link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
 . link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
 . link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand]
@@ -339,16 +340,19 @@
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
-=== Logical Analysis (Evaluation and Resolution) Rules
+=== Logical Analysis Rules (Check, Evaluation and Resolution)
 
+. link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 . link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+. link:spark-sql-HiveAnalysis.adoc[HiveAnalysis]
 . link:spark-sql-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-ResolveAliases.adoc[ResolveAliases]
 . link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 . link:spark-sql-ResolveFunctions.adoc[ResolveFunctions]
+. link:spark-sql-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:spark-sql-ResolveReferences.adoc[ResolveReferences]
 . link:spark-sql-ResolveRelations.adoc[ResolveRelations]
 . link:spark-sql-ResolveSQLOnFile.adoc[ResolveSQLOnFile]

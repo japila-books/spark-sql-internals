@@ -182,7 +182,7 @@ createAnalyzer(
 | PreprocessTableInsertion
 |
 
-| [[DataSourceAnalysis]] `DataSourceAnalysis`
+| [[DataSourceAnalysis]] link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 |
 
 .2+^.^| extendedCheckRules

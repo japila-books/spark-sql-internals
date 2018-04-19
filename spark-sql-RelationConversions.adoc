@@ -1,6 +1,6 @@
-== [[RelationConversions]] RelationConversions Logical Evaluation Rule -- Converting Hive Tables
+== [[RelationConversions]] RelationConversions Logical PostHoc Evaluation Rule -- Converting Hive Tables
 
-`RelationConversions` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses (as part of link:spark-sql-HiveSessionStateBuilder.adoc#postHocResolutionRules[post-hoc resolution rules]) to convert a Hive table...FIXME
+`RelationConversions` is a link:spark-sql-HiveSessionStateBuilder.adoc#postHocResolutionRules[logical posthoc resolution rule] that the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, convert a Hive table...FIXME>>.
 
 NOTE: A Hive table is when the `provider` is `hive` in link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[table metadata].
 

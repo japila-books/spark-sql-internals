@@ -119,10 +119,10 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | CreateDatabaseCommand
 |
 
-| [[CreateDataSourceTableAsSelectCommand]] `CreateDataSourceTableAsSelectCommand`
+| [[CreateDataSourceTableAsSelectCommand]] link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 | When <<run, executed>>, ...FIXME
 
-Used exclusively when link:spark-sql-SessionState.adoc#DataSourceAnalysis[DataSourceAnalysis] evaluation rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
 
 | link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
 |

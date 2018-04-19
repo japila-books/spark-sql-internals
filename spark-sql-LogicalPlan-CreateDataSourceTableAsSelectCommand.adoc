@@ -1,0 +1,14 @@
+== [[CreateDataSourceTableCommand]] CreateDataSourceTableCommand Logical Command
+
+`CreateDataSourceTableAsSelectCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, FIXME>>.
+
+=== [[run]] `run` Method
+
+[source, scala]
+----
+run(session: SparkSession): Seq[Row]
+----
+
+NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+
+`run`...FIXME
