@@ -1,8 +1,10 @@
 == [[ShuffledHashJoinExec]] ShuffledHashJoinExec Binary Physical Operator
 
-`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] for hash-based joins.
+`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] for a *shuffle hash join*.
 
-`ShuffledHashJoinExec` is <<creating-instance, created>> for joins with joining keys and one of the following holds:
+`ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
+
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a Join logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed and one of the following requirements holds:
 
 * link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for right join side and finally right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than left side
 
@@ -12,43 +14,59 @@
 
 [source, scala]
 ----
-***********
-Start spark-shell with ShuffledHashJoinExec's selection requirements
+// Use ShuffledHashJoinExec's selection requirements
+// 1. Disable auto broadcasting
 
-./bin/spark-shell \
-    -c spark.sql.join.preferSortMergeJoin=false \
-    -c spark.sql.autoBroadcastJoinThreshold=1
-***********
+scala> println(spark.sessionState.conf.numShufflePartitions)
+200
 
-scala> spark.conf.get("spark.sql.join.preferSortMergeJoin")
-res0: String = false
+// JoinSelection (canBuildLocalHashMap specifically) requires that
+// plan.stats.sizeInBytes < autoBroadcastJoinThreshold * numShufflePartitions
+// That gives that autoBroadcastJoinThreshold has to be at least 1
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", 1)
 
-scala> spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
-res1: String = 1
-
-scala> spark.conf.get("spark.sql.shuffle.partitions")
-res2: String = 200
+// 2. Disable preference on SortMergeJoin
+spark.conf.set("spark.sql.join.preferSortMergeJoin", false)
 
 val dataset = Seq(
   (0, "playing"),
   (1, "with"),
   (2, "ShuffledHashJoinExec")
 ).toDF("id", "token")
-val query = dataset.join(dataset, Seq("id"), "leftsemi")
+val q = dataset.join(dataset, Seq("id"), "leftsemi")
 
-scala> query.queryExecution.optimizedPlan.stats(spark.sessionState.conf).sizeInBytes
-res3: BigInt = 72
+val sizeInBytes = q.queryExecution.optimizedPlan.stats.sizeInBytes
+scala> println(sizeInBytes)
+72
 
-scala> query.explain
+// BINGO! ShuffledHashJoin is here!
+
+scala> q.explain
 == Physical Plan ==
-ShuffledHashJoin [id#15], [id#20], LeftSemi, BuildRight
-:- Exchange hashpartitioning(id#15, 200)
-:  +- LocalTableScan [id#15, token#16]
-+- Exchange hashpartitioning(id#20, 200)
-   +- LocalTableScan [id#20]
-----
+ShuffledHashJoin [id#37], [id#41], LeftSemi, BuildRight
+:- Exchange hashpartitioning(id#37, 200)
+:  +- LocalTableScan [id#37, token#38]
++- Exchange hashpartitioning(id#41, 200)
+   +- LocalTableScan [id#41]
 
-NOTE: `ShuffledHashJoinExec` operator is chosen in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy.
+scala> println(q.queryExecution.executedPlan.numberedTreeString)
+00 ShuffledHashJoin [id#37], [id#41], LeftSemi, BuildRight
+01 :- Exchange hashpartitioning(id#37, 200)
+02 :  +- LocalTableScan [id#37, token#38]
+03 +- Exchange hashpartitioning(id#41, 200)
+04    +- LocalTableScan [id#41]
+
+scala> println(q.queryExecution.toRdd.toDebugString)
+(200) ZippedPartitionsRDD2[8] at toRdd at <console>:26 []
+  |   ShuffledRowRDD[3] at toRdd at <console>:26 []
+  +-(3) MapPartitionsRDD[2] at toRdd at <console>:26 []
+     |  MapPartitionsRDD[1] at toRdd at <console>:26 []
+     |  ParallelCollectionRDD[0] at toRdd at <console>:26 []
+  |   ShuffledRowRDD[7] at toRdd at <console>:26 []
+  +-(3) MapPartitionsRDD[6] at toRdd at <console>:26 []
+     |  MapPartitionsRDD[5] at toRdd at <console>:26 []
+     |  ParallelCollectionRDD[4] at toRdd at <console>:26 []
+----
 
 [[metrics]]
 .ShuffledHashJoinExec's Performance Metrics
@@ -57,6 +75,10 @@ NOTE: `ShuffledHashJoinExec` operator is chosen in link:spark-sql-SparkStrategy-
 | Key
 | Name (in web UI)
 | Description
+
+| [[avgHashProbe]] `avgHashProbe`
+| avg hash probe
+|
 
 | [[buildDataSize]] `buildDataSize`
 | data size of build side
@@ -96,10 +118,6 @@ NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan C
 
 `doExecute`...FIXME
 
-=== [[buildHashedRelation]] `buildHashedRelation` Internal Method
-
-CAUTION: FIXME
-
 === [[creating-instance]] Creating ShuffledHashJoinExec Instance
 
 `ShuffledHashJoinExec` takes the following when created:
@@ -111,3 +129,14 @@ CAUTION: FIXME
 * [[condition]] Optional join condition link:spark-sql-Expression.adoc[expression]
 * [[left]] Left link:spark-sql-SparkPlan.adoc[physical operator]
 * [[right]] Right link:spark-sql-SparkPlan.adoc[physical operator]
+
+=== [[buildHashedRelation]] `buildHashedRelation` Internal Method
+
+[source, scala]
+----
+buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
+----
+
+`buildHashedRelation`...FIXME
+
+NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` operator).

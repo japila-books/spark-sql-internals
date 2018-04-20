@@ -1,0 +1,60 @@
+== [[HashJoin]] HashJoin -- Contract for Hash-based Join Physical Operators
+
+`HashJoin` is the <<contract, contract>> for hash-based join physical operators (e.g. link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] and link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec]).
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.execution.joins
+
+trait HashJoin {
+  // only required methods that have no implementation
+  // the others follow
+  val leftKeys: Seq[Expression]
+  val rightKeys: Seq[Expression]
+  val joinType: JoinType
+  val buildSide: BuildSide
+  val condition: Option[Expression]
+  val left: SparkPlan
+  val right: SparkPlan
+}
+----
+
+.HashJoin Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[buildSide]] `buildSide`
+a|
+
+Used when:
+
+* `HashJoin` is requested for <<buildPlan, buildPlan>>, <<streamedPlan, streamedPlan>>, <<buildKeys, buildKeys>> and <<streamedKeys, streamedKeys>>
+
+* `BroadcastHashJoinExec` physical operator is requested for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#requiredChildDistribution[requiredChildDistribution], to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenInner[codegenInner] and link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenOuter[codegenOuter]
+|===
+
+[[internal-registries]]
+.HashJoin's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[boundCondition]] `boundCondition`
+|
+
+| [[buildKeys]] `buildKeys`
+|
+
+| [[buildPlan]] `buildPlan`
+|
+
+| [[streamedKeys]] `streamedKeys`
+|
+
+| [[streamedPlan]] `streamedPlan`
+|
+|===
