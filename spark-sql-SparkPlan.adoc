@@ -243,11 +243,11 @@ Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return
 
 Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
 
-| [[outputPartitioning]] `outputPartitioning`
+| [[outputOrdering]] `outputOrdering`
 | Specifies how data is ordered in each partition
 
-| [[outputOrdering]] `outputOrdering`
-| Specifies how data is partitioned across different nodes in the cluster
+| [[outputPartitioning]] `outputPartitioning`
+| Specifies output data partitioning, i.e. how output data is partitioned (across executors)
 
 | [[requiredChildDistribution]] `requiredChildDistribution`
 a| Required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.

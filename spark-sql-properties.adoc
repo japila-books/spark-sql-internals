@@ -263,6 +263,12 @@ Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Co
 
 Use link:spark-sql-SQLConf.adoc#numShufflePartitions[SQLConf.numShufflePartitions] method to access the current value.
 
+| [[spark.sql.sources.bucketing.enabled]] `spark.sql.sources.bucketing.enabled`
+| `true`
+a| Enables link:spark-sql-bucketing.adoc[bucketing] support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
+
+Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] method to access the current value.
+
 | [[spark.sql.sources.default]] `spark.sql.sources.default`
 | `parquet`
 a| Defines the default data source to use for link:spark-sql-DataFrameReader.adoc[DataFrameReader].

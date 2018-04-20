@@ -1,6 +1,6 @@
 == [[FileFormat]] FileFormat
 
-`FileFormat` is the <<contract, contract>> in Spark SQL to...FIXME
+`FileFormat` is the <<contract, contract>> in Spark SQL to <<buildReader, read>> and <<prepareWrite, write>> data stored in files (to/from the link:spark-sql-InternalRow.adoc[InternalRow] format).
 
 [[contract]]
 [source, scala]
@@ -32,7 +32,7 @@ trait FileFormat {
 | Used when...
 
 | [[prepareWrite]] `prepareWrite`
-| Used exclusively when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write a query result].
+| Used exclusively when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
 |===
 
 [[supportBatch]]
@@ -43,9 +43,6 @@ trait FileFormat {
 
 [[isSplitable]]
 `isSplitable`...FIXME
-
-[[buildReader]]
-`buildReader`...FIXME
 
 === [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
 
@@ -64,3 +61,21 @@ buildReaderWithPartitionValues(
 `buildReaderWithPartitionValues`...FIXME
 
 NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
+
+=== [[buildReader]] `buildReader` Method
+
+[source, scala]
+----
+buildReader(
+  sparkSession: SparkSession,
+  dataSchema: StructType,
+  partitionSchema: StructType,
+  requiredSchema: StructType,
+  filters: Seq[Filter],
+  options: Map[String, String],
+  hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
+----
+
+`buildReader`...FIXME
+
+NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, buildReaderWithPartitionValues>>

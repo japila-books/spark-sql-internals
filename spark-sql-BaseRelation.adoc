@@ -8,7 +8,7 @@ NOTE: A "data source" and "relation" and "table" are often used as synonyms.
 `BaseRelation` can optionally provide information about its estimated size in bytes (as `sizeInBytes`) that defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
 
 [[needConversion]]
-`BaseRelation` whether it needs a conversion.
+`BaseRelation` uses `needConversion` flag to enable conversion.
 
 [[unhandledFilters]]
 `BaseRelation` computes the list of `Filter` that this data source may not be able to handle.

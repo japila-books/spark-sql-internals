@@ -1,6 +1,14 @@
 == [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy
 
-`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that...FIXME
+`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that <<apply, plans scans over collections of files>> (that might be partitioned or bucketed).
+
+[source, scala]
+----
+// FIXME Finish me
+import org.apache.spark.sql.execution.datasources.FileSourceStrategy
+val plan = ...
+val executionPlan = FileSourceStrategy(plan)
+----
 
 [TIP]
 ====
@@ -25,6 +33,8 @@ apply(plan: LogicalPlan): LogicalPlan
 NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply`...FIXME
+
+NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions and a leaf logical operator.
 
 === [[collectProjectsAndFilters]] `collectProjectsAndFilters` Method
 

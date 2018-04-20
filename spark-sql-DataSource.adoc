@@ -248,7 +248,7 @@ There has to be one data source registered only or you will see the following `R
 Multiple sources found for [provider] ([comma-separated class names]), please specify the fully qualified class name.
 ----
 
-=== [[resolveRelation]] Creating BaseRelation -- `resolveRelation` Method
+=== [[resolveRelation]] Resolving Relation (Creating BaseRelation) -- `resolveRelation` Method
 
 [source, scala]
 ----

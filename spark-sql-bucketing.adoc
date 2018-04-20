@@ -1,14 +1,21 @@
 == Bucketing
 
-*Bucketing* is a mechanism to _hash-partition_ a data set into *buckets* per *bucketing columns*.
+*Bucketing* is an optimization technique in Spark SQL that uses *buckets* and *bucketing columns* to determine data partitioning.
+
+Bucketing is used exclusively in link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (when it is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] and to determine link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning[output partitioning] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering[output ordering]).
 
 The motivation is to optimize performance of a join query by avoiding shuffles (aka _exchanges_) of tables participating in the join. Bucketing results in fewer exchanges (and so stages).
 
 NOTE: Bucketing can show the biggest benefit when *pre-shuffled bucketed tables* are used more than once as bucketing itself takes time (that you will offset executing multiple join queries later).
 
+Bucketing is enabled by default. Spark SQL uses <<spark.sql.sources.bucketing.enabled, spark.sql.sources.bucketing.enabled>> configuration property to control whether the bucketing should be enabled and used for query optimization or not.
+
 [source, scala]
 ----
 // Example: SortMergeJoin of two FileScans
+
+// Make sure that bucketing is on
+assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 
 // Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
 // Disable auto broadcasting
@@ -50,7 +57,7 @@ people.write
   .saveAsTable("people_bucketed")
 ----
 
-NOTE: link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] and link:spark-sql-DataFrameWriter.adoc#sortBy[DataFrameWriter.sortBy] simply set respective internal properties that eventually become a link:spark-sql-BucketSpec.adoc[BucketSpec].
+NOTE: link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] and link:spark-sql-DataFrameWriter.adoc#sortBy[DataFrameWriter.sortBy] simply set respective internal properties that eventually become a link:spark-sql-BucketSpec.adoc[bucketing specification].
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 
@@ -251,3 +258,19 @@ WARNING: There are two exchanges and sorts which makes the above use case almost
 
 .SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png[align="center"]
+
+=== [[spark.sql.sources.bucketing.enabled]] spark.sql.sources.bucketing.enabled Spark SQL Configuration Property
+
+Bucketing is enabled when link:spark-sql-properties.adoc#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled] configuration property is turned on, i.e. `true`.
+
+NOTE: link:spark-sql-properties.adoc#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled] configuration property is turned on, i.e. `true`, by default.
+
+TIP: Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] to access the current value of `spark.sql.sources.bucketing.enabled` property.
+
+[source, scala]
+----
+// Bucketing is on by default
+val sqlConf = spark.sessionState.conf
+scala> println(sqlConf.bucketingEnabled)
+true
+----

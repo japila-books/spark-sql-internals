@@ -132,7 +132,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
 * [[provider]] Optional provider name
 * [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] Optional `BucketSpec`
+* [[bucketSpec]] Optional link:spark-sql-BucketSpec.adoc[bucketing specification]
 * [[owner]] Owner
 * [[createTime]] Create time
 * [[lastAccessTime]] Last access time

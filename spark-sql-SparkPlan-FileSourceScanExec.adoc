@@ -2,7 +2,7 @@
 
 `FileSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator]) that...FIXME
 
-`FileSourceScanExec` is <<creating-instance, created>> when `FileSourceStrategy` execution planning strategy link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[resolves] `LogicalRelation` logical operators.
+`FileSourceScanExec` is <<creating-instance, created>> exclusively when `FileSourceStrategy` execution planning strategy link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[plans a LogicalRelation logical operator with HadoopFsRelation].
 
 [source, scala]
 ----
@@ -20,13 +20,12 @@ import org.apache.spark.sql.execution.FileSourceScanExec
 val fileScanExec = sparkPlan.asInstanceOf[FileSourceScanExec]
 ----
 
-[[outputPartitioning]]
-`FileSourceScanExec` uses...FIXME
+`FileSourceScanExec` uses a `HashPartitioning` or an `UnknownPartitioning` <<outputPartitioning, output partitioning scheme>>.
 
 `FileSourceScanExec` supports `ColumnarBatchScan`.
 
 [[inputRDDs]]
-`FileSourceScanExec` always gives <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
 [[nodeNamePrefix]]
 `nodeNamePrefix` is *File* (and is used for the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple node description]).
@@ -79,9 +78,19 @@ CAUTION: FIXME Why is the node name of FileSourceScanExec in the diagram above w
 | Description
 
 | [[inputRDD]] `inputRDD`
-| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`)
+a| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`)
 
 Used when `FileSourceScanExec` is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
+
+NOTE: `inputRDD` is a Scala lazy value which is computed once when it is first accessed and cached afterwards.
+
+---
+
+Internally, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
+
+In case <<relation, HadoopFsRelation>> has link:spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec[bucketing specification] defined and link:spark-sql-bucketing.adoc#spark.sql.sources.bucketing.enabled[bucketing support is enabled], `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
+
+NOTE: <<createBucketedReadRDD, createBucketedReadRDD>> accepts a bucketing specification while <<createNonBucketedReadRDD, createNonBucketedReadRDD>> does not.
 
 | [[metadata]] `metadata`
 a| Metadata (as a collection of key-value pairs)
@@ -144,21 +153,6 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 
 `doProduce`...FIXME
 
-=== [[createBucketedReadRDD]] `createBucketedReadRDD` Internal Method
-
-[source, scala]
-----
-createBucketedReadRDD(
-  bucketSpec: BucketSpec,
-  readFile: (PartitionedFile) => Iterator[InternalRow],
-  selectedPartitions: Seq[PartitionDirectory],
-  fsRelation: HadoopFsRelation): RDD[InternalRow]
-----
-
-`createBucketedReadRDD`...FIXME
-
-NOTE: `createBucketedReadRDD` is used when...FIXME
-
 === [[createNonBucketedReadRDD]] `createNonBucketedReadRDD` Internal Method
 
 [source, scala]
@@ -203,3 +197,31 @@ selectedPartitions: Seq[PartitionDirectory]
 * [[tableIdentifier]] Optional `TableIdentifier`
 
 `FileSourceScanExec` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[outputPartitioning]] Output Partitioning Scheme -- `outputPartitioning` Attribute
+
+[source, scala]
+----
+outputPartitioning: Partitioning
+----
+
+NOTE: `outputPartitioning` is part of link:spark-sql-SparkPlan.adoc#outputPartitioning[SparkPlan Contract] to specify data partitioning.
+
+`outputPartitioning` may give a link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] output partitioning when bucketing is enabled.
+
+CAUTION: FIXME
+
+=== [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing -- `createBucketedReadRDD` Internal Method
+
+[source, scala]
+----
+createBucketedReadRDD(
+  bucketSpec: BucketSpec,
+  readFile: (PartitionedFile) => Iterator[InternalRow],
+  selectedPartitions: Seq[PartitionDirectory],
+  fsRelation: HadoopFsRelation): RDD[InternalRow]
+----
+
+`createBucketedReadRDD`...FIXME
+
+NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` is requested for <<inputRDD, inputRDD>> (for the very first time after which the result is cached).

@@ -1,4 +1,4 @@
-== [[BucketSpec]] BucketSpec
+== [[BucketSpec]] BucketSpec -- Bucketing Specification
 
 [[creating-instance]]
 `BucketSpec` is a metadata of a link:spark-sql-bucketing.adoc[bucketing] of a table:
