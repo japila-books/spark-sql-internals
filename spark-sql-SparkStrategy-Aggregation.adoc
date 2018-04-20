@@ -45,6 +45,8 @@ CAUTION: FIXME
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
+
 `apply` requests `PhysicalAggregation` extractor for link:spark-sql-PhysicalAggregation.adoc#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator found.
 
 Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] per whether they are distinct or not (using their link:spark-sql-Expression-AggregateExpression.adoc#isDistinct[isDistinct] flag).
@@ -54,8 +56,6 @@ Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAgg
 * <<AggUtils-planAggregateWithoutDistinct, AggUtils.planAggregateWithoutDistinct>> when no distinct aggregate expression is used
 
 * <<AggUtils-planAggregateWithOneDistinct, AggUtils.planAggregateWithOneDistinct>> when at least one distinct aggregate expression is used.
-
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to execute a planning strategy.
 
 === [[AggUtils-createAggregate]] Selecting Aggregate Physical Operator Given Aggregate Expressions -- `AggUtils.createAggregate` Internal Method
 

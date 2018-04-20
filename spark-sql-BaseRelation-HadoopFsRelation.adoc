@@ -1,4 +1,4 @@
-== [[HadoopFsRelation]] HadoopFsRelation
+== [[HadoopFsRelation]] HadoopFsRelation -- Relation for File-Based Data Source
 
 `HadoopFsRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] and link:spark-sql-FileRelation.adoc[FileRelation].
 
@@ -10,17 +10,17 @@
 
 NOTE: The optional <<bucketSpec, BucketSpec>> is defined exclusively for a non-streaming file-based data source.
 
-CAUTION: FIXME What about bucketing in a Hive metastore? Is this used at all? Where?
-
 [source, scala]
 ----
 CAUTION: Demo the different cases when `HadoopFsRelation` is created
 
 CAUTION: Demo when `BucketSpec` is defined
 
-// Exercise 1: spark.table for Hive tables
+// Exercise 1: spark.table for DataSource tables (provider != hive)
 
 // Exercise 2: spark.read with format as a `FileFormat`
+
+// Exercise 3: spark.table for Hive tables (provider == hive)
 ----
 
 === [[creating-instance]] Creating HadoopFsRelation Instance

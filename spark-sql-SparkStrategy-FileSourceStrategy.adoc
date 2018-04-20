@@ -1,13 +1,20 @@
-== [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy
+== [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy for HadoopFsRelations
 
-`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that <<apply, plans scans over collections of files>> (that might be partitioned or bucketed).
+`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, plan scans over collections of files>> (possibly partitioned or bucketed).
 
 [source, scala]
 ----
-// FIXME Finish me
-import org.apache.spark.sql.execution.datasources.FileSourceStrategy
-val plan = ...
-val executionPlan = FileSourceStrategy(plan)
+// Enable INFO logging level to see the details of the strategy
+val logger = FileSourceStrategy.getClass.getName.replace("$", "")
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger(logger).setLevel(Level.INFO)
+
+val q = spark.read.option("header", true).csv("../datasets/people.csv")
+val plan = q.queryExecution.optimizedPlan
+
+val executionPlan = FileSourceStrategy(plan).head
+scala> println(executionPlan.numberedTreeString)
+00 FileScan csv [id#36,name#37,city#38] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/datasets/people.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:string,name:string,city:string>
 ----
 
 [TIP]
@@ -23,18 +30,18 @@ log4j.logger.org.apache.spark.sql.execution.datasources.FileSourceStrategy=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[apply]] Planning LogicalRelation with HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
+=== [[apply]] Planning HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
 
 [source, scala]
 ----
-apply(plan: LogicalPlan): LogicalPlan
+apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
 
 `apply`...FIXME
 
-NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions and a leaf logical operator.
+NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
 
 === [[collectProjectsAndFilters]] `collectProjectsAndFilters` Method
 

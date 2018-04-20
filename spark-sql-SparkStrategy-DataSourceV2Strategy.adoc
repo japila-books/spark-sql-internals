@@ -1,0 +1,14 @@
+== [[DataSourceV2Strategy]] DataSourceV2Strategy Execution Planning Strategy
+
+`DataSourceV2Strategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, FIXME>>.
+
+=== [[apply]] Applying DataSourceV2Strategy Rule to Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): Seq[SparkPlan]
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
+
+`apply`...FIXME
