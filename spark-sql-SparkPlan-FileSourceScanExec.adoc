@@ -18,6 +18,11 @@ scala> println(sparkPlan.numberedTreeString)
 
 import org.apache.spark.sql.execution.FileSourceScanExec
 val fileScanExec = sparkPlan.asInstanceOf[FileSourceScanExec]
+
+// You could do the following instead
+// as that'd find the scan down the plan
+// if the query planning changes
+val fileScanExec = sparkPlan.collect { case op: FileSourceScanExec => op }.head
 ----
 
 `FileSourceScanExec` uses a `HashPartitioning` or an `UnknownPartitioning` <<outputPartitioning, output partitioning scheme>>.
@@ -26,19 +31,6 @@ val fileScanExec = sparkPlan.asInstanceOf[FileSourceScanExec]
 
 [[inputRDDs]]
 `FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
-
-[[nodeNamePrefix]]
-`nodeNamePrefix` is *File* (and is used for the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple node description]).
-
-[source, scala]
-----
-val fileScanExec: FileSourceScanExec = ... // see the example earlier
-scala> fileScanExec.nodeNamePrefix
-res1: String = File
-
-scala> fileScanExec.simpleString
-res2: String = FileScan csv [id#63,name#64,age#65] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/datasets/people.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:string,name:string,age:string>
-----
 
 [[metrics]]
 .FileSourceScanExec's Performance Metrics
@@ -65,10 +57,30 @@ res2: String = FileScan csv [id#63,name#64,age#65] Batched: false, Format: CSV, 
 |
 |===
 
+As a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#nodeName[node name].
+
+[source, scala]
+----
+val fileScanExec: FileSourceScanExec = ... // see the example earlier
+scala> println(fileScanExec.nodeName)
+Scan csv
+----
+
 .FileSourceScanExec in web UI (Details for Query)
 image::images/spark-sql-FileSourceScanExec-webui-query-details.png[align="center"]
 
-CAUTION: FIXME Why is the node name of FileSourceScanExec in the diagram above without `File` nodeNamePrefix?
+[[nodeNamePrefix]]
+`FileSourceScanExec` uses *File* for `nodeNamePrefix` (that is used for the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple node description] in query plans).
+
+[source, scala]
+----
+val fileScanExec: FileSourceScanExec = ... // see the example earlier
+scala> println(fileScanExec.nodeNamePrefix)
+File
+
+scala> println(fileScanExec.simpleString)
+FileScan csv [id#20,name#21,city#22] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/datasets/people.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:string,name:string,city:string>
+----
 
 [[internal-registries]]
 .FileSourceScanExec's Internal Properties (e.g. Registries, Counters and Flags)
