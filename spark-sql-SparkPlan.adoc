@@ -70,7 +70,7 @@ CAUTION: FIXME `SparkPlan` is `Serializable`. Why?
 | Description
 
 | [[execute]] `execute`
-a| "Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end creates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
+a| "Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end generates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
 
 [source, scala]
 ----

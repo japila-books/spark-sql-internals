@@ -16,14 +16,13 @@
 ----
 // Use ShuffledHashJoinExec's selection requirements
 // 1. Disable auto broadcasting
-
-scala> println(spark.sessionState.conf.numShufflePartitions)
-200
-
 // JoinSelection (canBuildLocalHashMap specifically) requires that
 // plan.stats.sizeInBytes < autoBroadcastJoinThreshold * numShufflePartitions
 // That gives that autoBroadcastJoinThreshold has to be at least 1
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", 1)
+
+scala> println(spark.sessionState.conf.numShufflePartitions)
+200
 
 // 2. Disable preference on SortMergeJoin
 spark.conf.set("spark.sql.join.preferSortMergeJoin", false)
@@ -55,17 +54,6 @@ scala> println(q.queryExecution.executedPlan.numberedTreeString)
 02 :  +- LocalTableScan [id#37, token#38]
 03 +- Exchange hashpartitioning(id#41, 200)
 04    +- LocalTableScan [id#41]
-
-scala> println(q.queryExecution.toRdd.toDebugString)
-(200) ZippedPartitionsRDD2[8] at toRdd at <console>:26 []
-  |   ShuffledRowRDD[3] at toRdd at <console>:26 []
-  +-(3) MapPartitionsRDD[2] at toRdd at <console>:26 []
-     |  MapPartitionsRDD[1] at toRdd at <console>:26 []
-     |  ParallelCollectionRDD[0] at toRdd at <console>:26 []
-  |   ShuffledRowRDD[7] at toRdd at <console>:26 []
-  +-(3) MapPartitionsRDD[6] at toRdd at <console>:26 []
-     |  MapPartitionsRDD[5] at toRdd at <console>:26 []
-     |  ParallelCollectionRDD[4] at toRdd at <console>:26 []
 ----
 
 [[metrics]]
@@ -107,17 +95,6 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 | link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
-=== [[doExecute]] Executing ShuffledHashJoinExec -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
-
-`doExecute`...FIXME
-
 === [[creating-instance]] Creating ShuffledHashJoinExec Instance
 
 `ShuffledHashJoinExec` takes the following when created:
@@ -139,4 +116,42 @@ buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
 
 `buildHashedRelation`...FIXME
 
-NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` operator).
+NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
+
+=== [[doExecute]] Executing ShuffledHashJoinExec -- `doExecute` Method
+
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
+
+`doExecute` requests link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] physical operator to link:spark-sql-SparkPlan.adoc#execute[execute] (and generate a `RDD[InternalRow]`).
+
+`doExecute` requests link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operator to link:spark-sql-SparkPlan.adoc#execute[execute] (and generate a `RDD[InternalRow]`).
+
+`doExecute` requests link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] physical operator's `RDD[InternalRow]` to zip partition-wise with link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operator's `RDD[InternalRow]` (using `RDD.zipPartitions` method with `preservesPartitioning` flag disabled).
+
+[NOTE]
+====
+`doExecute` generates a `ZippedPartitionsRDD2` that you can see in a RDD lineage.
+
+[source, scala]
+----
+scala> println(q.queryExecution.toRdd.toDebugString)
+(200) ZippedPartitionsRDD2[8] at toRdd at <console>:26 []
+  |   ShuffledRowRDD[3] at toRdd at <console>:26 []
+  +-(3) MapPartitionsRDD[2] at toRdd at <console>:26 []
+     |  MapPartitionsRDD[1] at toRdd at <console>:26 []
+     |  ParallelCollectionRDD[0] at toRdd at <console>:26 []
+  |   ShuffledRowRDD[7] at toRdd at <console>:26 []
+  +-(3) MapPartitionsRDD[6] at toRdd at <console>:26 []
+     |  MapPartitionsRDD[5] at toRdd at <console>:26 []
+     |  ParallelCollectionRDD[4] at toRdd at <console>:26 []
+----
+====
+
+`doExecute` uses `RDD.zipPartitions` with a function applied to zipped partitions that takes two iterators of rows from the partitions of `streamedPlan` and `buildPlan`.
+
+For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the `HashedRelation`, <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.

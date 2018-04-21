@@ -58,3 +58,18 @@ Used when:
 | [[streamedPlan]] `streamedPlan`
 |
 |===
+
+=== [[join]] `join` Method
+
+[source, scala]
+----
+join(
+  streamedIter: Iterator[InternalRow],
+  hashed: HashedRelation,
+  numOutputRows: SQLMetric,
+  avgHashProbe: SQLMetric): Iterator[InternalRow]
+----
+
+`join`...FIXME
+
+NOTE: `join` is used when link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#doExecute[BroadcastHashJoinExec] and link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc#doExecute[ShuffledHashJoinExec] are executed.
