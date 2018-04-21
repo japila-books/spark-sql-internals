@@ -34,6 +34,9 @@ Used when:
 * `HashJoin` is requested for <<buildPlan, buildPlan>>, <<streamedPlan, streamedPlan>>, <<buildKeys, buildKeys>> and <<streamedKeys, streamedKeys>>
 
 * `BroadcastHashJoinExec` physical operator is requested for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#requiredChildDistribution[requiredChildDistribution], to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenInner[codegenInner] and link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenOuter[codegenOuter]
+
+| [[joinType]] `joinType`
+| link:spark-sql-joins.adoc[JoinType]
 |===
 
 [[internal-registries]]
@@ -70,6 +73,104 @@ join(
   avgHashProbe: SQLMetric): Iterator[InternalRow]
 ----
 
-`join`...FIXME
+`join` branches off per <<joinType, joinType>> to create a join iterator of internal rows (i.e. `Iterator[InternalRow]`) for the input `streamedIter` and `hashed`:
+
+* <<innerJoin, innerJoin>> for a link:spark-sql-joins.adoc#InnerLike[InnerLike] join
+
+* <<outerJoin, outerJoin>> for a link:spark-sql-joins.adoc#LeftOuter[LeftOuter] or a link:spark-sql-joins.adoc#RightOuter[RightOuter] join
+
+* <<semiJoin, semiJoin>> for a link:spark-sql-joins.adoc#LeftSemi[LeftSemi] join
+
+* <<antiJoin, antiJoin>> for a link:spark-sql-joins.adoc#LeftAnti[LeftAnti] join
+
+* <<existenceJoin, existenceJoin>> for a `ExistenceJoin` join
+
+`join` requests `TaskContext` to add a `TaskCompletionListener` to update the input avg hash probe SQL metric. The `TaskCompletionListener` is executed on a task completion (regardless of the task status: success, failure, or cancellation) and uses link:spark-sql-HashedRelation.adoc#getAverageProbesPerLookup[getAverageProbesPerLookup] from the input `hashed` to set the input avg hash probe.
+
+`join` <<createResultProjection, createResultProjection>>.
+
+In the end, for every row in the join iterator of internal rows `join` increments the input `numOutputRows` SQL metric and applies the result projection.
+
+`join` reports a `IllegalArgumentException` when the <<joinType, joinType>> is incorrect.
+
+```
+[x] JoinType is not supported
+```
 
 NOTE: `join` is used when link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#doExecute[BroadcastHashJoinExec] and link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc#doExecute[ShuffledHashJoinExec] are executed.
+
+=== [[innerJoin]] `innerJoin` Internal Method
+
+[source, scala]
+----
+innerJoin(
+  streamIter: Iterator[InternalRow],
+  hashedRelation: HashedRelation): Iterator[InternalRow]
+----
+
+`innerJoin`...FIXME
+
+NOTE: `innerJoin` is used when...FIXME
+
+=== [[outerJoin]] `outerJoin` Internal Method
+
+[source, scala]
+----
+outerJoin(
+  streamedIter: Iterator[InternalRow],
+  hashedRelation: HashedRelation): Iterator[InternalRow]
+----
+
+`outerJoin`...FIXME
+
+NOTE: `outerJoin` is used when...FIXME
+
+=== [[semiJoin]] `semiJoin` Internal Method
+
+[source, scala]
+----
+semiJoin(
+  streamIter: Iterator[InternalRow],
+  hashedRelation: HashedRelation): Iterator[InternalRow]
+----
+
+`semiJoin`...FIXME
+
+NOTE: `semiJoin` is used when...FIXME
+
+=== [[antiJoin]] `antiJoin` Internal Method
+
+[source, scala]
+----
+antiJoin(
+  streamIter: Iterator[InternalRow],
+  hashedRelation: HashedRelation): Iterator[InternalRow]
+----
+
+`antiJoin`...FIXME
+
+NOTE: `antiJoin` is used when...FIXME
+
+=== [[existenceJoin]] `existenceJoin` Internal Method
+
+[source, scala]
+----
+existenceJoin(
+  streamIter: Iterator[InternalRow],
+  hashedRelation: HashedRelation): Iterator[InternalRow]
+----
+
+`existenceJoin`...FIXME
+
+NOTE: `existenceJoin` is used when...FIXME
+
+=== [[createResultProjection]] `createResultProjection` Method
+
+[source, scala]
+----
+createResultProjection(): (InternalRow) => InternalRow
+----
+
+`createResultProjection`...FIXME
+
+NOTE: `createResultProjection` is used when...FIXME

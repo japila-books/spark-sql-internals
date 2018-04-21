@@ -1,0 +1,32 @@
+== [[HashedRelation]] HashedRelation
+
+`HashedRelation` is the <<contract, contract>> to...FIXME
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.execution.joins
+
+trait HashedRelation extends KnownSizeEstimation {
+  // only required methods that have no implementation
+  // the others follow
+  def asReadOnlyCopy(): HashedRelation
+  def close(): Unit
+  def get(key: InternalRow): Iterator[InternalRow]
+  def getAverageProbesPerLookup: Double
+  def getValue(key: InternalRow): InternalRow
+  def keyIsUnique: Boolean
+}
+----
+
+NOTE: `HashedRelation` is a `private[execution]` contract.
+
+.HashedRelation Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[getAverageProbesPerLookup]] `getAverageProbesPerLookup`
+| Used when...FIXME
+|===

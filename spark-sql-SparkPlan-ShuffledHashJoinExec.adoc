@@ -154,4 +154,4 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 
 `doExecute` uses `RDD.zipPartitions` with a function applied to zipped partitions that takes two iterators of rows from the partitions of `streamedPlan` and `buildPlan`.
 
-For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the `HashedRelation`, <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
+For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the link:spark-sql-HashedRelation.adoc[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.

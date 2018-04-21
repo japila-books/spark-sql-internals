@@ -61,11 +61,11 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 
 | `CROSS`
 | [[cross]] `cross`
-| `Cross`
+| [[Cross]] `Cross`
 
 | `INNER`
 | [[inner]] `inner`
-| `Inner`
+| [[Inner]] `Inner`
 
 | [[FullOuter]] `FULL OUTER`
 | `outer`, `full`, `fullouter`
@@ -73,19 +73,19 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 
 | `LEFT ANTI`
 | `leftanti`
-| `LeftAnti`
+| [[LeftAnti]] `LeftAnti`
 
 | `LEFT OUTER`
 | `leftouter`, `left`
-| `LeftOuter`
+| [[LeftOuter]] `LeftOuter`
 
 | `LEFT SEMI`
 | `leftsemi`
-| `LeftSemi`
+| [[LeftSemi]] `LeftSemi`
 
 | `RIGHT OUTER`
 | `rightouter`, `right`
-| `RightOuter`
+| [[RightOuter]] `RightOuter`
 
 | `NATURAL`
 | Special case for `Inner`, `LeftOuter`, `RightOuter`, `FullOuter`
@@ -95,6 +95,9 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 | Special case for `Inner`, `LeftOuter`, `LeftSemi`, `RightOuter`, `FullOuter`, `LeftAnti`
 | [[UsingJoin]] `UsingJoin`
 |===
+
+[[InnerLike]]
+NOTE: `InnerLike` is used to refer to a family of joins with <<Inner, Inner>> and <<Cross, Cross>>.
 
 TIP: Name are case-insensitive and can use the underscore (`_`) at any position, i.e. `left_anti` and `LEFT_ANTI` are equivalent.
 
