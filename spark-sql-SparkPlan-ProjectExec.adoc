@@ -34,7 +34,7 @@ The following is the order of applying the above execution planning strategies t
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an RDD of internal rows that is the runtime representation of a structured query (aka _execute_).
 
 `doExecute` requests the input <<child, child physical plan>> to link:spark-sql-SparkPlan.adoc#execute[produce an RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
 

@@ -78,17 +78,29 @@ relationFuture: Future[broadcast.Broadcast[Any]]
 
 When "materialized" (aka _executed_), `relationFuture` finds the current link:spark-sql-SQLExecution.adoc#spark.sql.execution.id[execution id] and sets it to the `Future` thread.
 
-`relationFuture` requests <<child, child physical operator>> to link:spark-sql-SparkPlan.adoc#executeCollect[executeCollect].
+`relationFuture` requests <<child, child physical operator>> to link:spark-sql-SparkPlan.adoc#executeCollectIterator[executeCollectIterator].
 
-`relationFuture` records the time for `executeCollect` in <<collectTime, collectTime>> metrics and the size of the data in <<dataSize, dataSize>> metrics.
+`relationFuture` records the time for `executeCollectIterator` in <<collectTime, collectTime>> metrics.
 
 NOTE: `relationFuture` accepts a relation with up to 512 millions rows and 8GB in size, and reports a `SparkException` if the conditions are violated.
 
-`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows and records the time in <<buildTime, buildTime>> metrics.
+`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows to create a relation, e.g. link:spark-sql-HashedRelation.adoc[HashedRelation] or a `Array[InternalRow]`.
 
-`relationFuture` requests the current `SparkContext` to `broadcast` the transformed internal rows and records the time in <<broadcastTime, broadcastTime>> metrics.
+`relationFuture` calculates the data size:
 
-In the end, `relationFuture` link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posts `SparkListenerDriverAccumUpdates`] (with the execution id and the metrics) and returns the broadcast internal rows.
+* For a `HashedRelation`, `relationFuture` requests it to link:spark-sql-KnownSizeEstimation.adoc#estimatedSize[estimatedSize]
+
+* For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to link:spark-sql-UnsafeRow.adoc[UnsafeRows] and requests each to link:spark-sql-UnsafeRow.adoc#getSizeInBytes[getSizeInBytes] that it sums all up.
+
+`relationFuture` records the data size as the <<dataSize, dataSize>> metric.
+
+`relationFuture` records the <<buildTime, buildTime>> metric.
+
+`relationFuture` requests the link:spark-sql-SparkPlan.adoc#sparkContext[SparkContext] to `broadcast` the relation and records the time in <<broadcastTime, broadcastTime>> metrics.
+
+In the end, `relationFuture` requests `SQLMetrics` to link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[post a SparkListenerDriverAccumUpdates] (with the execution id and the SQL metrics) and returns the broadcast internal rows.
+
+NOTE: Since initialization of `relationFuture` happens on the driver, link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posting a SparkListenerDriverAccumUpdates] is the only way how all the SQL metrics could be accessible to other subsystems using `SparkListener` listeners (incl. web UI).
 
 In case of `OutOfMemoryError`, `relationFuture` reports another `OutOfMemoryError` with the following message:
 

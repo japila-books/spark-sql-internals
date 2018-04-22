@@ -340,6 +340,8 @@
 
 . link:spark-sql-HashJoin.adoc[HashJoin -- Contract for Hash-based Join Physical Operators]
 . link:spark-sql-HashedRelation.adoc[HashedRelation]
+. link:spark-sql-KnownSizeEstimation.adoc[KnownSizeEstimation]
+. link:spark-sql-SizeEstimator.adoc[SizeEstimator]
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 

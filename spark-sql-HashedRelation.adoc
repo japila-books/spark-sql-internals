@@ -1,6 +1,6 @@
 == [[HashedRelation]] HashedRelation
 
-`HashedRelation` is the <<contract, contract>> to...FIXME
+`HashedRelation` is the <<contract, contract>> to...FIXME with link:spark-sql-KnownSizeEstimation.adoc[KnownSizeEstimation].
 
 [[contract]]
 [source, scala]
@@ -30,3 +30,18 @@ NOTE: `HashedRelation` is a `private[execution]` contract.
 | [[getAverageProbesPerLookup]] `getAverageProbesPerLookup`
 | Used when...FIXME
 |===
+
+=== [[apply]] Creating HashedRelation Instance -- `apply` Factory Method
+
+[source, scala]
+----
+apply(
+  input: Iterator[InternalRow],
+  key: Seq[Expression],
+  sizeEstimate: Int = 64,
+  taskMemoryManager: TaskMemoryManager = null): HashedRelation
+----
+
+`apply`...FIXME
+
+NOTE: `apply` is used when...FIXME

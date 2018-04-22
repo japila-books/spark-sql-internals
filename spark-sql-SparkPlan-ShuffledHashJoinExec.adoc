@@ -95,29 +95,6 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 | link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
-=== [[creating-instance]] Creating ShuffledHashJoinExec Instance
-
-`ShuffledHashJoinExec` takes the following when created:
-
-* [[leftKeys]] Left join key link:spark-sql-Expression.adoc[expressions]
-* [[rightKeys]] Right join key link:spark-sql-Expression.adoc[expressions]
-* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
-* [[buildSide]] `BuildSide`
-* [[condition]] Optional join condition link:spark-sql-Expression.adoc[expression]
-* [[left]] Left link:spark-sql-SparkPlan.adoc[physical operator]
-* [[right]] Right link:spark-sql-SparkPlan.adoc[physical operator]
-
-=== [[buildHashedRelation]] `buildHashedRelation` Internal Method
-
-[source, scala]
-----
-buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
-----
-
-`buildHashedRelation`...FIXME
-
-NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
-
 === [[doExecute]] Executing ShuffledHashJoinExec -- `doExecute` Method
 
 [source, scala]
@@ -125,7 +102,7 @@ NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is r
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation that is a runtime representation of a structured query as an RDD of internal rows (aka _execute_).
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an RDD of internal rows that is the runtime representation of a structured query (aka _execute_).
 
 `doExecute` requests link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] physical operator to link:spark-sql-SparkPlan.adoc#execute[execute] (and generate a `RDD[InternalRow]`).
 
@@ -155,3 +132,32 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 `doExecute` uses `RDD.zipPartitions` with a function applied to zipped partitions that takes two iterators of rows from the partitions of `streamedPlan` and `buildPlan`.
 
 For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the link:spark-sql-HashedRelation.adoc[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
+
+=== [[buildHashedRelation]] `buildHashedRelation` Internal Method
+
+[source, scala]
+----
+buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
+----
+
+`buildHashedRelation` creates a link:spark-sql-HashedRelation.adoc#apply[HashedRelation] (for the input `iter` iterator of `InternalRows`, link:spark-sql-HashJoin.adoc#buildKeys[buildKeys] and the current `TaskMemoryManager`).
+
+NOTE: `buildHashedRelation` uses `TaskContext.get()` to access the current `TaskContext` that in turn is used to access the `TaskMemoryManager`.
+
+`buildHashedRelation` records the time to create the `HashedRelation` as <<buildTime, buildTime>>.
+
+`buildHashedRelation` requests the `HashedRelation` for link:spark-sql-KnownSizeEstimation.adoc#estimatedSize[estimatedSize] that is recorded as <<buildDataSize, buildDataSize>>.
+
+NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
+
+=== [[creating-instance]] Creating ShuffledHashJoinExec Instance
+
+`ShuffledHashJoinExec` takes the following when created:
+
+* [[leftKeys]] Left join key link:spark-sql-Expression.adoc[expressions]
+* [[rightKeys]] Right join key link:spark-sql-Expression.adoc[expressions]
+* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
+* [[buildSide]] `BuildSide`
+* [[condition]] Optional join condition link:spark-sql-Expression.adoc[expression]
+* [[left]] Left link:spark-sql-SparkPlan.adoc[physical operator]
+* [[right]] Right link:spark-sql-SparkPlan.adoc[physical operator]

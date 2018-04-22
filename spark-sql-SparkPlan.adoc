@@ -26,7 +26,8 @@ NOTE: Executing a structured query is simply a translation of the higher-level D
 
 CAUTION: FIXME Picture between Spark SQL's Dataset => Spark Core's RDD
 
-CAUTION: FIXME Picture with multiple stages of logical => physical translation, i.e. a logical query plan to its physical execution plan and a Dataset-based logical description to a RDD-based physical description.
+[[sparkContext]]
+`SparkPlan` has access to the owning `SparkContext`.
 
 [NOTE]
 ====
@@ -207,6 +208,17 @@ CAUTION: FIXME
 === [[executeToIterator]] `executeToIterator` Method
 
 CAUTION: FIXME
+
+=== [[executeCollectIterator]] `executeCollectIterator` Method
+
+[source, scala]
+----
+executeCollectIterator(): (Long, Iterator[InternalRow])
+----
+
+`executeCollectIterator`...FIXME
+
+NOTE: `executeCollectIterator` is used when...FIXME
 
 === [[contract]] SparkPlan Contract
 
