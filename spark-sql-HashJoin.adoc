@@ -27,7 +27,7 @@ trait HashJoin {
 | Description
 
 | [[buildSide]] `buildSide`
-a|
+a| Left or right build side
 
 Used when:
 
@@ -83,7 +83,7 @@ join(
 
 * <<antiJoin, antiJoin>> for a link:spark-sql-joins.adoc#LeftAnti[LeftAnti] join
 
-* <<existenceJoin, existenceJoin>> for a `ExistenceJoin` join
+* <<existenceJoin, existenceJoin>> for a link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] join
 
 `join` requests `TaskContext` to add a `TaskCompletionListener` to update the input avg hash probe SQL metric. The `TaskCompletionListener` is executed on a task completion (regardless of the task status: success, failure, or cancellation) and uses link:spark-sql-HashedRelation.adoc#getAverageProbesPerLookup[getAverageProbesPerLookup] from the input `hashed` to set the input avg hash probe.
 

@@ -4,7 +4,7 @@ From PostgreSQL's https://www.postgresql.org/docs/current/static/tutorial-join.h
 
 > Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a *join query*.
 
-You can join two datasets using the <<join-operators, join operators>> and an optional <<join-condition, join condition>>.
+You can join two datasets using the <<join-operators, join operators>> with an optional <<join-condition, join condition>>.
 
 [[join-operators]]
 .Join Operators (in alphabetical order)
@@ -16,15 +16,15 @@ You can join two datasets using the <<join-operators, join operators>> and an op
 
 | <<crossJoin, crossJoin>>
 | link:spark-sql-DataFrame.adoc[DataFrame]
-| Untyped, ``Row``-based cross join
+| Untyped ``Row``-based cross join
 
 | <<join, join>>
 | link:spark-sql-DataFrame.adoc[DataFrame]
-| Untyped, ``Row``-based join
+| Untyped ``Row``-based join
 
 | <<joinWith, joinWith>>
 | link:spark-sql-Dataset.adoc[Dataset]
-| Used for type-preserving join with two output columns for records for which a join condition holds
+| Used for a type-preserving join with two output columns for records for which a join condition holds
 |===
 
 You can also use link:spark-sql-SparkSession.adoc#sql[SQL mode] to join datasets using _good ol'_ SQL.
@@ -96,8 +96,16 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 | [[UsingJoin]] `UsingJoin`
 |===
 
-[[InnerLike]]
-NOTE: `InnerLike` is used to refer to a family of joins with <<Inner, Inner>> and <<Cross, Cross>>.
+[[ExistenceJoin]]
+`ExistenceJoin` is an artifical join type used to express an existential sub-query, that is often referred to as *existential join*.
+
+NOTE: <<LeftAnti, LeftAnti>> and <<ExistenceJoin, ExistenceJoin>> are special cases of <<LeftOuter, LeftOuter>>.
+
+You can also find that Spark SQL uses the following two families of joins:
+
+* [[InnerLike]] `InnerLike` with <<Inner, Inner>> and <<Cross, Cross>>
+
+* [[LeftExistence]] `LeftExistence` with <<LeftSemi, LeftSemi>>, <<LeftAnti, LeftAnti>> and <<ExistenceJoin, ExistenceJoin>>
 
 TIP: Name are case-insensitive and can use the underscore (`_`) at any position, i.e. `left_anti` and `LEFT_ANTI` are equivalent.
 
