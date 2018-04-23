@@ -61,7 +61,7 @@ NOTE: This is `getValue` that takes a long key. There is the more generic <<getV
 
 NOTE: `getValue` is used exclusively when `LongHashedRelation` is requested to link:spark-sql-LongHashedRelation.adoc#getValue[get the value for a given key].
 
-=== [[apply]] Creating Concrete HashedRelation Instance -- `apply` Factory Method
+=== [[apply]] Creating Concrete HashedRelation Instance (for Build Side of Hash-based Join) -- `apply` Factory Method
 
 [source, scala]
 ----
@@ -74,7 +74,14 @@ apply(
 
 `apply` creates a link:spark-sql-LongHashedRelation.adoc#apply[LongHashedRelation] when the input `key` collection has a single link:spark-sql-Expression.adoc[expression] of type long or link:spark-sql-UnsafeHashedRelation.adoc#apply[UnsafeHashedRelation] otherwise.
 
-CAUTION: FIXME What's the meaning of the inputs? Use it here and in the intro to spark-sql-LongHashedRelation.adoc.
+[NOTE]
+====
+The input `key` expressions are:
+
+* link:spark-sql-HashJoin.adoc#buildKeys[Build join keys] of `ShuffledHashJoinExec` physical operator
+
+* link:spark-sql-HashedRelationBroadcastMode.adoc#canonicalized[Canonicalized build-side join keys] of `HashedRelationBroadcastMode` (of link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#requiredChildDistribution[BroadcastHashJoinExec] physical operator)
+====
 
 [NOTE]
 ====
@@ -82,5 +89,5 @@ CAUTION: FIXME What's the meaning of the inputs? Use it here and in the intro to
 
 * `ShuffledHashJoinExec` is requested to link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc#buildHashedRelation[build a HashedRelation for given internal rows]
 
-* `HashedRelationBroadcastMode` is requested to `transform`
+* `HashedRelationBroadcastMode` is requested to link:spark-sql-HashedRelationBroadcastMode.adoc#transform[transform]
 ====

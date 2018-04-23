@@ -269,9 +269,9 @@ a| Required *partition requirements* (_aka_ *child output distributions*) of the
 requiredChildDistribution: Seq[Distribution]
 ----
 
-Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
+Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
 
-Used exclusively when `EnsureRequirements` physical preparation rule link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements of a physical operator].
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
 
 | [[requiredChildOrdering]] `requiredChildOrdering`
 a| Specifies required sort ordering for each partition requirement (from link:spark-sql-catalyst-TreeNode.adoc#children[children] operators)
@@ -283,7 +283,7 @@ requiredChildOrdering: Seq[Seq[SortOrder]]
 
 Defaults to no sort ordering for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
 
-Used exclusively when `EnsureRequirements` physical preparation rule link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces sort requirements of a physical operator].
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
 |===
 
 === [[executeQuery]] Preparing SparkPlan for Query Execution -- `executeQuery` Final Method

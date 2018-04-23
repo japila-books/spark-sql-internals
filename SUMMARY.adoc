@@ -488,6 +488,9 @@
 .. link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
 . link:spark-sql-KnownSizeEstimation.adoc[KnownSizeEstimation]
 . link:spark-sql-SizeEstimator.adoc[SizeEstimator]
+. link:spark-sql-BroadcastMode.adoc[BroadcastMode]
+.. link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]
+.. link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
 
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
