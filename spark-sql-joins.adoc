@@ -59,39 +59,39 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 | Name (joinType)
 | JoinType
 
-| `CROSS`
+| [[CROSS]] `CROSS`
 | [[cross]] `cross`
 | [[Cross]] `Cross`
 
-| `INNER`
+| [[INNER]] `INNER`
 | [[inner]] `inner`
 | [[Inner]] `Inner`
 
-| [[FullOuter]] `FULL OUTER`
+| [[FullOuter]][[FULL_OUTER]] `FULL OUTER`
 | `outer`, `full`, `fullouter`
 | `FullOuter`
 
-| `LEFT ANTI`
+| [[LEFT_ANTI]] `LEFT ANTI`
 | `leftanti`
 | [[LeftAnti]] `LeftAnti`
 
-| `LEFT OUTER`
+| [[LEFT_OUTER]] `LEFT OUTER`
 | `leftouter`, `left`
 | [[LeftOuter]] `LeftOuter`
 
-| `LEFT SEMI`
+| [[LEFT_SEMI]] `LEFT SEMI`
 | `leftsemi`
 | [[LeftSemi]] `LeftSemi`
 
-| `RIGHT OUTER`
+| [[RIGHT_OUTER]] `RIGHT OUTER`
 | `rightouter`, `right`
 | [[RightOuter]] `RightOuter`
 
-| `NATURAL`
+| [[NATURAL]] `NATURAL`
 | Special case for `Inner`, `LeftOuter`, `RightOuter`, `FullOuter`
 | `NaturalJoin`
 
-| [[using]] `USING`
+| [[using]][[USING]] `USING`
 | Special case for `Inner`, `LeftOuter`, `LeftSemi`, `RightOuter`, `FullOuter`, `LeftAnti`
 | [[UsingJoin]] `UsingJoin`
 |===

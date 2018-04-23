@@ -94,7 +94,7 @@ NOTE: `canBuildLocalHashMap` is used when `JoinSelection` checks <<join-selectio
 canBuildLeft(joinType: JoinType): Boolean
 ----
 
-`canBuildLeft` condition holds for CROSS, INNER and RIGHT OUTER join types. Otherwise, `canBuildLeft` is `false`.
+`canBuildLeft` condition holds for link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] and link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] join types. Otherwise, `canBuildLeft` is `false`.
 
 NOTE: `canBuildLeft` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `BroadcastHashJoinExec`, `ShuffledHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators.
 
@@ -105,9 +105,9 @@ NOTE: `canBuildLeft` is used when `JoinSelection` checks <<join-selection-requir
 canBuildRight(joinType: JoinType): Boolean
 ----
 
-`canBuildRight` condition holds for link:spark-sql-joins.adoc[joins] that are:
+`canBuildRight` condition holds for the input `joinType` that is one of the following:
 
-* CROSS, INNER, LEFT ANTI, LEFT OUTER, LEFT SEMI or Existence
+* link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin]
 
 Otherwise, `canBuildRight` is `false`.
 

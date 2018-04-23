@@ -1,6 +1,8 @@
-== [[BroadcastHashJoinExec]] BroadcastHashJoinExec Binary Physical Operator
+== [[BroadcastHashJoinExec]] BroadcastHashJoinExec Binary Physical Operator for Broadcast Hash Join
 
-`BroadcastHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] that is <<creating-instance, created>> after applying link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI]) of which the `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[can be broadcast].
+`BroadcastHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *broadcast hash join*.
+
+`BroadcastHashJoinExec` is <<creating-instance, created>> after applying link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI]) of which the `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[can be broadcast].
 
 `BroadcastHashJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 

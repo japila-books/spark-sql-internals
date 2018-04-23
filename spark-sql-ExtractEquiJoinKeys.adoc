@@ -51,6 +51,20 @@ Some((Inner,List(k1#148, k2#149, name#150),List(k1#161, k2#162, name#163),None,P
 ))
 ```
 
+[[logging]]
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
 === [[unapply]] `unapply` Method
 
 [source, scala]

@@ -1,16 +1,21 @@
-== [[ShuffledHashJoinExec]] ShuffledHashJoinExec Binary Physical Operator
+== [[ShuffledHashJoinExec]] ShuffledHashJoinExec Binary Physical Operator for Shuffled Hash Join
 
-`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] for a *shuffle hash join*.
+`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *shuffled hash join*.
 
 `ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a Join logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed and one of the following requirements holds:
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed and link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off and either requirement holds:
 
-* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for right join side and finally right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than left side
+* (For a right build side, i.e. `BuildRight`) link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for the right join side and finally the right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[at least three times smaller] than the left side
 
-* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for left join side and finally left join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[much smaller] than right
+* (For a right build side, i.e. `BuildRight`) Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable], i.e. cannot be sorted
 
-* Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
+* (For a left build side, i.e. `BuildLeft`) link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for left join side and finally left join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[at least three times smaller] than right
+
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys` logger to see the join condition and the left and right join keys.
+====
 
 [source, scala]
 ----
@@ -32,14 +37,27 @@ val dataset = Seq(
   (1, "with"),
   (2, "ShuffledHashJoinExec")
 ).toDF("id", "token")
+// Self LEFT SEMI join
 val q = dataset.join(dataset, Seq("id"), "leftsemi")
 
 val sizeInBytes = q.queryExecution.optimizedPlan.stats.sizeInBytes
 scala> println(sizeInBytes)
 72
 
+// 3. canBuildLeft is on for leftsemi
+
+// the right join side is at least three times smaller than the left side
+// Even though it's a self LEFT SEMI join there are two different join sides
+// How is that possible?
+
 // BINGO! ShuffledHashJoin is here!
 
+// Enable DEBUG logging level
+import org.apache.log4j.{Level, Logger}
+val logger = "org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys"
+Logger.getLogger(logger).setLevel(Level.DEBUG)
+
+// ShuffledHashJoin with BuildRight
 scala> q.explain
 == Physical Plan ==
 ShuffledHashJoin [id#37], [id#41], LeftSemi, BuildRight
