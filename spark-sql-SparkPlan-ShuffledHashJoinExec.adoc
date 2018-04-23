@@ -133,7 +133,7 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 
 For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the link:spark-sql-HashedRelation.adoc[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
 
-=== [[buildHashedRelation]] `buildHashedRelation` Internal Method
+=== [[buildHashedRelation]] Building HashedRelation for Internal Rows -- `buildHashedRelation` Internal Method
 
 [source, scala]
 ----

@@ -338,11 +338,6 @@
 .. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
 
-. link:spark-sql-HashJoin.adoc[HashJoin -- Contract for Hash-based Join Physical Operators]
-. link:spark-sql-HashedRelation.adoc[HashedRelation]
-. link:spark-sql-KnownSizeEstimation.adoc[KnownSizeEstimation]
-. link:spark-sql-SizeEstimator.adoc[SizeEstimator]
-
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
 === Logical Analysis Rules (Check, Evaluation and Resolution)
@@ -487,7 +482,12 @@
 . link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregation -- Scala Extractor for Destructuring Aggregate Logical Operators]
 . link:spark-sql-PhysicalOperation.adoc[PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans]
 
-. link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
+. link:spark-sql-HashJoin.adoc[HashJoin -- Contract for Hash-based Join Physical Operators]
+. link:spark-sql-HashedRelation.adoc[HashedRelation]
+.. link:spark-sql-LongHashedRelation.adoc[LongHashedRelation]
+.. link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]
+. link:spark-sql-KnownSizeEstimation.adoc[KnownSizeEstimation]
+. link:spark-sql-SizeEstimator.adoc[SizeEstimator]
 
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
