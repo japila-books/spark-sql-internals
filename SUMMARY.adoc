@@ -171,7 +171,6 @@
 . link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning -- Specification of Physical Operator's Output Partitions]
 
 . link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
-. link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 . link:spark-sql-Distribution.adoc[Distribution -- Contract For Data Distribution Across Partitions]
 .. link:spark-sql-AllTuples.adoc[AllTuples]
@@ -491,6 +490,11 @@
 . link:spark-sql-BroadcastMode.adoc[BroadcastMode]
 .. link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]
 .. link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
+
+. link:spark-sql-PartitionedFile.adoc[PartitionedFile]
+
+. link:spark-sql-FileScanRDD.adoc[FileScanRDD]
+. link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]

@@ -223,7 +223,7 @@ NOTE: `outputPartitioning` is part of link:spark-sql-SparkPlan.adoc#outputPartit
 
 CAUTION: FIXME
 
-=== [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing -- `createBucketedReadRDD` Internal Method
+=== [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing Support -- `createBucketedReadRDD` Internal Method
 
 [source, scala]
 ----
@@ -234,6 +234,46 @@ createBucketedReadRDD(
   fsRelation: HadoopFsRelation): RDD[InternalRow]
 ----
 
-`createBucketedReadRDD`...FIXME
+`createBucketedReadRDD` prints the following INFO message to the logs:
+
+```
+Planning with [numBuckets] buckets
+```
+
+`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into link:spark-sql-PartitionedFile.adoc[PartitionedFiles]. For every file, `createBucketedReadRDD` <<getBlockLocations, getBlockLocations>> and <<getBlockHosts, getBlockHosts>>.
+
+`createBucketedReadRDD` then groups the `PartitionedFiles` by bucket ID.
+
+NOTE: Bucket ID is of the format *_0000n*, i.e. the bucket ID prefixed with up to four ``0``s.
+
+`createBucketedReadRDD` creates a `FilePartition` for every bucket ID and the `PartitionedFiles` as grouped earlier.
+
+In the end, `createBucketedReadRDD` creates a link:spark-sql-FileScanRDD.adoc#creating-instance[FileScanRDD] (with the input `readFile` for the link:spark-sql-FileScanRDD.adoc#readFunction[read function] and the `FilePartitions` for every bucket ID for link:spark-sql-FileScanRDD.adoc#filePartitions[partitions])
+
+[TIP]
+====
+Use `RDD.toDebugString` to see `FileScanRDD` in the RDD execution plan (aka RDD lineage).
+
+[source, scala]
+----
+// Create a bucketed table
+spark.range(8).write.bucketBy(4, "id").saveAsTable("b1")
+
+scala> sql("desc extended b1").where($"col_name" like "%Bucket%").show
++--------------+---------+-------+
+|      col_name|data_type|comment|
++--------------+---------+-------+
+|   Num Buckets|        4|       |
+|Bucket Columns|   [`id`]|       |
++--------------+---------+-------+
+
+val bucketedTable = spark.table("b1")
+
+val lineage = bucketedTable.queryExecution.toRdd.toDebugString
+scala> println(lineage)
+(4) MapPartitionsRDD[26] at toRdd at <console>:26 []
+ |  FileScanRDD[25] at toRdd at <console>:26 []
+----
+====
 
 NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` is requested for <<inputRDD, inputRDD>> (for the very first time after which the result is cached).

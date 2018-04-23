@@ -1,0 +1,66 @@
+== [[FileScanRDD]] FileScanRDD -- RDD of Internal Rows for...FIXME
+
+`FileScanRDD` is a RDD of link:spark-sql-InternalRow.adoc[internal rows] (i.e. `RDD[InternalRow]` with no parent dependencies) that...FIXME
+
+`FileScanRDD` is <<creating-instance, created>> when...FIXME
+
+[[internal-registries]]
+.FileScanRDD's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[ignoreCorruptFiles]] `ignoreCorruptFiles`
+| Controls...FIXME
+
+Used when...FIXME
+
+| [[ignoreMissingFiles]] `ignoreMissingFiles`
+| Controls...FIXME
+
+Used when...FIXME
+|===
+
+=== [[getPreferredLocations]] `getPreferredLocations` Method
+
+[source, scala]
+----
+getPreferredLocations(split: RDDPartition): Seq[String]
+----
+
+NOTE: `getPreferredLocations` is part of the RDD Contract to...FIXME.
+
+`getPreferredLocations`...FIXME
+
+NOTE: `getPreferredLocations` is used when...FIXME
+
+=== [[getPartitions]] `getPartitions` Method
+
+[source, scala]
+----
+getPartitions: Array[RDDPartition]
+----
+
+NOTE: `getPartitions` is part of the RDD Contract to...FIXME.
+
+`getPartitions`...FIXME
+
+=== [[compute]] `compute` Method
+
+[source, scala]
+----
+compute(split: RDDPartition, context: TaskContext): Iterator[InternalRow]
+----
+
+NOTE: `compute` is part of the RDD Contract to...FIXME.
+
+`compute`...FIXME
+
+=== [[creating-instance]] Creating FileScanRDD Instance
+
+`FileScanRDD` takes the following when created:
+
+* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (i.e. `(PartitionedFile) => Iterator[InternalRow]`)
+* [[filePartitions]] `FilePartitions`

@@ -16,7 +16,7 @@
 
 `HadoopFileLinesReader` takes the following when created:
 
-* [[file]] `PartitionedFile`
+* [[file]] link:spark-sql-PartitionedFile.adoc[PartitionedFile]
 * [[conf]] Hadoop's `Configuration`
 
 === [[iterator]] `iterator` Internal Property
