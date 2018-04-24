@@ -4,7 +4,18 @@
 
 `ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed and link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off and either requirement holds:
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed and link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off.
+
+[NOTE]
+====
+link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+
+That means that link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy (and so Spark Planner) prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over shuffled hash join.
+
+In other words, you will _hardly_ see shuffled hash joins in your structured queries unless you turn `spark.sql.join.preferSortMergeJoin` on.
+====
+
+Beside the `spark.sql.join.preferSortMergeJoin` configuration property one of the following requirements has to hold:
 
 * (For a right build side, i.e. `BuildRight`) link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight], link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[canBuildLocalHashMap] for the right join side and finally the right join side is link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[at least three times smaller] than the left side
 

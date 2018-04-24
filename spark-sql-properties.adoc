@@ -204,9 +204,9 @@ Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method 
 
 Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
 
-| [[spark.sql.join.preferSortMergeJoin]] `spark.sql.join.preferSortMergeJoin`
+| `spark.sql.join.preferSortMergeJoin`
 | `true`
-| *(internal)* Controls link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
+| [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
 
 Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin] method to access the current value.
 
