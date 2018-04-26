@@ -1,8 +1,8 @@
 == [[BroadcastExchangeExec]] BroadcastExchangeExec Unary Physical Operator for Broadcast Joins
 
-`BroadcastExchangeExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to broadcast rows of a child relation (to worker nodes).
+`BroadcastExchangeExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to collect and broadcast rows of a child relation (to worker nodes).
 
-`BroadcastExchangeExec` is <<creating-instance, created>> exclusively when `EnsureRequirements` physical query plan optimization link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[ensures BroadcastDistribution of the input data of a physical operator] (that _seemingly_ can be either link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] operators).
+`BroadcastExchangeExec` is <<creating-instance, created>> exclusively when `EnsureRequirements` physical query plan optimization link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[ensures BroadcastDistribution of the input data of a physical operator] (that can really be either link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] operators).
 
 [source, scala]
 ----
@@ -48,13 +48,6 @@ image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align=
 
 [[outputPartitioning]]
 `BroadcastExchangeExec` uses link:spark-sql-SparkPlan-Partitioning.adoc#BroadcastPartitioning[BroadcastPartitioning] partitioning scheme (with the input <<mode, BroadcastMode>>).
-
-=== [[creating-instance]] Creating BroadcastExchangeExec Instance
-
-`BroadcastExchangeExec` takes the following when created:
-
-* [[mode]] `BroadcastMode`
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
 === [[doExecuteBroadcast]] Waiting Until Relation Has Been Broadcast -- `doExecuteBroadcast` Method
 
@@ -124,3 +117,10 @@ doPrepare(): Unit
 NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
 
 `doPrepare` simply "materializes" the internal lazily-once-initialized <<relationFuture, asynchronous broadcast>>.
+
+=== [[creating-instance]] Creating BroadcastExchangeExec Instance
+
+`BroadcastExchangeExec` takes the following when created:
+
+* [[mode]] link:spark-sql-BroadcastMode.adoc[BroadcastMode]
+* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]

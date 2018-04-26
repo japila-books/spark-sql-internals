@@ -256,13 +256,22 @@ Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return
 Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
 
 | [[outputOrdering]] `outputOrdering`
-| Specifies how data is ordered in each partition
+| Specifies *output data ordering*, i.e. how data is sorted (ordered) in each partition
+
+[source, scala]
+----
+outputOrdering: Seq[SortOrder] = Nil
+----
+
+`outputOrdering` is not defined (i.e. `Nil`) by default.
+
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
 
 | [[outputPartitioning]] `outputPartitioning`
-| Specifies output data partitioning, i.e. how output data is partitioned (across executors)
+| Specifies *output data partitioning*, i.e. how output data is partitioned (across executors)
 
 | [[requiredChildDistribution]] `requiredChildDistribution`
-a| Required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
+a| Specifies the required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
 
 [source, scala]
 ----

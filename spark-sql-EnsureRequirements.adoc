@@ -55,7 +55,7 @@ NOTE: The number of requirements for partitions and their sort ordering has to m
 
 1. If the child satisfies the requested distribution, the child is left unchanged
 
-1. For link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for broadcasting joins
+1. For link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[broadcast hash joins]
 
 1. Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
 
@@ -71,7 +71,7 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 
 `ensureDistributionAndOrdering` matches the operator's required sort ordering of children (`requiredChildOrderings`) to the children's link:spark-sql-SparkPlan.adoc#outputPartitioning[output partitioning] and if the orderings do not match, link:spark-sql-SparkPlan-SortExec.adoc#creating-instance[SortExec] unary physical operator is created as a new child.
 
-`ensureDistributionAndOrdering` link:spark-sql-catalyst-TreeNode.adoc#withNewChildren[sets the new children] for the input `operator`.
+In the end, `ensureDistributionAndOrdering` link:spark-sql-catalyst-TreeNode.adoc#withNewChildren[sets the new children] for the input `operator`.
 
 NOTE: `ensureDistributionAndOrdering` is used exclusively when `EnsureRequirements` is <<apply, executed>> (i.e. applied to a physical plan).
 

@@ -1,6 +1,8 @@
-== [[SortMergeJoinExec]] SortMergeJoinExec Binary Physical Operator
+== [[SortMergeJoinExec]] SortMergeJoinExec Binary Physical Operator for Sort Merge Join
 
-`SortMergeJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] that is <<creating-instance, created>> exclusively for joins with <<leftKeys, left join keys>> being <<orderable, orderable>>, i.e. that can be ordered (sorted).
+`SortMergeJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
+
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
 
 [[orderable]]
 [NOTE]
@@ -19,39 +21,52 @@ Therefore, a join key is *not* orderable when is of the following data type:
 * `ObjectType`
 ====
 
+[NOTE]
+====
+link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+
+That means that link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy (and so Spark Planner) prefers sort merge join over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
+====
+
 [[supportCodegen]]
-`SortMergeJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_) for inner and cross joins only.
+`SortMergeJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_) for inner and cross joins.
+
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys` logger to see the join condition and the left and right join keys.
+====
 
 [source, scala]
 ----
-// Start spark-shell with broadcast hash join disabled, i.e. spark.sql.autoBroadcastJoinThreshold=-1
-// ./bin/spark-shell -c spark.sql.autoBroadcastJoinThreshold=-1
-// Mind the data types so ShuffledHashJoinExec is not selected
-val dataset = Seq(
+// Disable auto broadcasting so Broadcast Hash Join won't take precedence
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+
+val tokens = Seq(
   (0, "playing"),
   (1, "with"),
   (2, "SortMergeJoinExec")
 ).toDF("id", "token")
 
 // all data types are orderable
-scala> dataset.printSchema
+scala> tokens.printSchema
 root
  |-- id: integer (nullable = false)
  |-- token: string (nullable = true)
 
-scala> spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
-res0: String = -1
+// Spark Planner prefers SortMergeJoin over Shuffled Hash Join
+scala> println(spark.conf.get("spark.sql.join.preferSortMergeJoin"))
+true
 
-val q = dataset.join(tokens, Seq("id"), "inner")
+val q = tokens.join(tokens, Seq("id"), "inner")
 scala> q.explain
 == Physical Plan ==
-*Project [id#27, token#28, token#6]
-+- *SortMergeJoin [id#27], [id#5], Inner
-   :- *Sort [id#27 ASC NULLS FIRST], false, 0
-   :  +- Exchange hashpartitioning(id#27, 200)
-   :     +- LocalTableScan [id#27, token#28]
-   +- *Sort [id#5 ASC NULLS FIRST], false, 0
-      +- ReusedExchange [id#5, token#6], Exchange hashpartitioning(id#27, 200)
+*(3) Project [id#5, token#6, token#10]
++- *(3) SortMergeJoin [id#5], [id#9], Inner
+   :- *(1) Sort [id#5 ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(id#5, 200)
+   :     +- LocalTableScan [id#5, token#6]
+   +- *(2) Sort [id#9 ASC NULLS FIRST], false, 0
+      +- ReusedExchange [id#9, token#10], Exchange hashpartitioning(id#5, 200)
 ----
 
 [[metrics]]

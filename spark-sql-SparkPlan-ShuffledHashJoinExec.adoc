@@ -1,6 +1,6 @@
 == [[ShuffledHashJoinExec]] ShuffledHashJoinExec Binary Physical Operator for Shuffled Hash Join
 
-`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *shuffled hash join*.
+`ShuffledHashJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *shuffled hash join*.
 
 `ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
 
