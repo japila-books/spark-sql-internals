@@ -1,6 +1,6 @@
 == [[JoinSelection]] JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to plan a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator to one of the supported join physical operators per <<join-physical-operator-selection-strategies, join physical operator selection requirements>>.
+`JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to plan a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator to one of the supported join physical operators per <<join-selection-requirements, join physical operator selection requirements>>.
 
 [[join-selection-requirements]]
 .Join Physical Operator Selection Requirements (in the order of preference)
@@ -10,7 +10,7 @@
 | Selection Requirements
 
 | link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec]
-a|
+a| [[BroadcastHashJoinExec]]
 
 There are joining keys and one of the following holds:
 
@@ -18,7 +18,7 @@ There are joining keys and one of the following holds:
 * <<canBuildLeft, canBuildLeft>> and left join side <<canBroadcast, can be broadcast>>
 
 | link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec]
-a|
+a| [[ShuffledHashJoinExec]]
 
 There are joining keys and one of the following holds:
 
@@ -29,10 +29,12 @@ There are joining keys and one of the following holds:
 * Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
 
 | link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec]
-| Left join keys link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
+| [[SortMergeJoinExec]]
+
+Left join keys link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
 
 | link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
-a|
+a| [[BroadcastNestedLoopJoinExec]]
 
 There are no joining keys and one of the following holds:
 
@@ -40,7 +42,7 @@ There are no joining keys and one of the following holds:
 * <<canBuildLeft, canBuildLeft>> and left join side <<canBroadcast, can be broadcast>>
 
 | `CartesianProductExec`
-|
+| [[CartesianProductExec]]
 
 There are no joining keys and link:spark-sql-joins.adoc#join-types[join type] is `INNER` or `CROSS`
 
@@ -48,18 +50,7 @@ There are no joining keys and link:spark-sql-joins.adoc#join-types[join type] is
 | Default when no other have matched
 |===
 
-NOTE: `JoinSelection` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] pattern to destructure a `Join` logical plan.
-
-=== [[apply]] `apply` Method
-
-[source, scala]
-----
-apply(plan: LogicalPlan): Seq[SparkPlan]
-----
-
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
-
-`apply`...FIXME
+NOTE: `JoinSelection` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure a `Join` logical operator.
 
 === [[muchSmaller]] Is Left-Side Plan At Least 3 Times Smaller Than Right-Side Plan? -- `muchSmaller` Internal Condition
 
@@ -149,3 +140,33 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.
 NOTE: `canBroadcast` uses the total size statistic from link:spark-sql-LogicalPlanStats.adoc#stats[Statistics] of a logical operator.
 
 NOTE: `canBroadcast` is used when `JoinSelection` does <<canBroadcastBySizes, canBroadcastBySizes>> and <<broadcastSideBySizes, broadcastSideBySizes>>.
+
+=== [[apply]] Planning Join Logical Operator -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): Seq[SparkPlan]
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
+
+`apply` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
+
+`apply` gives a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#creating-instance[BroadcastHashJoinExec] physical operator if <<canBroadcastByHints, canBroadcastByHints>> per the join type and left or right side of the join.
+
+`apply`...FIXME
+
+=== [[canBroadcastByHints]] `canBroadcastByHints` Internal Method
+
+[source, scala]
+----
+canBroadcastByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): Boolean
+----
+
+`canBroadcastByHints` is positive when either condition holds:
+
+. <<canBuildLeft, canBuildLeft>> on the input `joinType` and `left` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
+
+. <<canBuildRight, canBuildRight>> on the input `joinType` and `right` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
+
+NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).

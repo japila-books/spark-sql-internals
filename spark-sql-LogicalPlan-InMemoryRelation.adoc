@@ -82,6 +82,17 @@ apply(
 ----
 ====
 
+=== [[computeStats]] Computing Statistics -- `computeStats` Method
+
+[source, scala]
+----
+computeStats(): Statistics
+----
+
+NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+
+`computeStats`...FIXME
+
 === [[creating-instance]] Creating InMemoryRelation Instance
 
 `InMemoryRelation` takes the following when created:
@@ -89,6 +100,9 @@ apply(
 * [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[useCompression]] `useCompression` flag
 * [[batchSize]] batch size
-* [[storageLevel]] link:spark-rdd-StorageLevel.adoc[Storage level]
+* [[storageLevel]] Storage level
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
 * [[tableName]] Optional table name
+* [[_cachedColumnBuffers]] `RDD[CachedBatch]`
+* [[sizeInBytesStats]] `LongAccumulator`
+* [[statsOfPlanToCache]] link:spark-sql-Statistics.adoc[Statistics]

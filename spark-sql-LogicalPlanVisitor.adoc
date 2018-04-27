@@ -62,7 +62,7 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | `visitGlobalLimit`
 
 | [[Intersect]] `Intersect`
-| `visitIntersect`
+| [[visitIntersect]] `visitIntersect`
 
 | [[Join]] link:spark-sql-LogicalPlan-Join.adoc[Join]
 | [[visitJoin]] `visitJoin`

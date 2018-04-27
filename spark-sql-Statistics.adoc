@@ -6,7 +6,7 @@
 * [[sizeInBytes]] Total (output) size (in bytes)
 * [[rowCount]] Estimated number of rows (aka _row count_)
 * [[attributeStats]] Column attribute statistics (aka _column (equi-height) histograms_)
-* [[hints]] Query hints (i.e. `HintInfo`)
+* [[hints]] link:spark-sql-HintInfo.adoc[Query hints]
 
 NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
 

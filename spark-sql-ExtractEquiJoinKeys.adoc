@@ -2,13 +2,13 @@
 
 `ExtractEquiJoinKeys` is a Scala extractor to <<unapply, destructure a Join logical operator>> into a tuple with the following elements:
 
-1. Join type
+1. link:spark-sql-joins.adoc#join-types[Join type]
 
-1. Left and right keys (for non-empty join keys in the link:spark-sql-LogicalPlan-Join.adoc#condition[condition] of the Join operator)
+1. Left and right keys (for non-empty join keys in the link:spark-sql-LogicalPlan-Join.adoc#condition[condition] of the `Join` operator)
 
 1. Join condition (i.e. a Catalyst expression that could be used as a new join condition)
 
-1. The link:spark-sql-LogicalPlan-Join.adoc#left[left] and the link:spark-sql-LogicalPlan-Join.adoc#right[right] children
+1. The link:spark-sql-LogicalPlan-Join.adoc#left[left] and the link:spark-sql-LogicalPlan-Join.adoc#right[right] logical operators
 
 [[ReturnType]]
 .ReturnType

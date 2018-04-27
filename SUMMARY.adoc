@@ -151,6 +151,7 @@
 
 . link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics of Logical Operator]
 .. link:spark-sql-Statistics.adoc[Statistics -- Estimates of Plan Statistics and Query Hints]
+.. link:spark-sql-HintInfo.adoc[HintInfo]
 .. link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan]
 .. link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor -- LogicalPlanVisitor for Total Size (in Bytes) Statistic Only]
 .. link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor -- Computing Statistics for Cost-Based Optimization]

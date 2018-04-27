@@ -654,7 +654,7 @@ scala> df.withColumn("struct", struct($"name", $"val")).show
 broadcast[T](df: Dataset[T]): Dataset[T]
 ----
 
-`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast `join`.
+`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast join.
 
 TIP: Read up on link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)].
 

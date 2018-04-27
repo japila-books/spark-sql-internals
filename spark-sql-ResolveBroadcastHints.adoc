@@ -1,4 +1,4 @@
-== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN or MAPJOIN Hint Names
+== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN or MAPJOIN Hint Names
 
 `ResolveBroadcastHints` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hint names (case-insensitive).
 
@@ -45,7 +45,7 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply` transforms link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] operators into link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] for the hint names as `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` (case-insensitive).
 
-For `UnresolvedHints` with no link:spark-sql-LogicalPlan-UnresolvedHint.adoc#parameters[parameters], `apply` marks the entire child logical plan as eligible for broadcast, i.e.  link:spark-sql-LogicalPlan-ResolvedHint.adoc#creating-instance[creates] a `ResolvedHint` with the child operator and `HintInfo` with `broadcast` flag on.
+For `UnresolvedHints` with no link:spark-sql-LogicalPlan-UnresolvedHint.adoc#parameters[parameters], `apply` marks the entire child logical plan as eligible for broadcast, i.e.  link:spark-sql-LogicalPlan-ResolvedHint.adoc#creating-instance[creates] a `ResolvedHint` with the child operator and `HintInfo` with link:spark-sql-HintInfo.adoc#broadcast[broadcast] flag on.
 
 For `UnresolvedHints` with parameters defined, `apply` considers the parameters the names of the tables to <<applyBroadcastHint, apply broadcast hint>> to.
 
@@ -91,3 +91,14 @@ org.apache.spark.sql.AnalysisException: Broadcast hint parameter should be an id
   at org.apache.spark.sql.catalyst.analysis.ResolveHints$ResolveBroadcastHints.apply(ResolveHints.scala:88)
   ... 51 elided
 ----
+
+=== [[applyBroadcastHint]] `applyBroadcastHint` Internal Method
+
+[source, scala]
+----
+applyBroadcastHint(plan: LogicalPlan, toBroadcast: Set[String]): LogicalPlan
+----
+
+`applyBroadcastHint`...FIXME
+
+NOTE: `applyBroadcastHint` is used exclusively when `ResolveBroadcastHints` is requested to <<apply, execute>>.
