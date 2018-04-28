@@ -293,6 +293,7 @@
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
 . link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec]
 . link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
+. link:spark-sql-SparkPlan-CartesianProductExec.adoc[CartesianProductExec]
 . link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
 . link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec -- Contract for Leaf Physical Operators with Java Code Generation]
 . link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
