@@ -1,6 +1,6 @@
 == [[JoinSelection]] JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to plan a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator to one of the supported join physical operators per <<join-selection-requirements, join physical operator selection requirements>>.
+`JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
 
 [[join-selection-requirements]]
 .Join Physical Operator Selection Requirements (in the order of preference)
@@ -152,7 +152,7 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
 
-`apply` gives a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#creating-instance[BroadcastHashJoinExec] physical operator if <<canBroadcastByHints, canBroadcastByHints>> per the join type and left or right side of the join.
+`apply` gives a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastByHints, should be broadcast given hints>> (for the join type and left or right side of the join).
 
 `apply`...FIXME
 
@@ -163,10 +163,50 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 canBroadcastByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): Boolean
 ----
 
-`canBroadcastByHints` is positive when either condition holds:
+`canBroadcastByHints` is positive (i.e. `true`) when either condition holds:
 
 . <<canBuildLeft, canBuildLeft>> on the input `joinType` and `left` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
 
 . <<canBuildRight, canBuildRight>> on the input `joinType` and `right` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
 
+Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
+
 NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+
+=== [[broadcastSideByHints]] `broadcastSideByHints` Internal Method
+
+[source, scala]
+----
+broadcastSideByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): BuildSide
+----
+
+`broadcastSideByHints` computes `buildLeft` and `buildRight` flags:
+
+* `buildLeft` flag is positive (i.e. `true`) when <<canBuildLeft, canBuildLeft>> and the `left` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag are positive
+
+* `buildRight` flag is positive (i.e. `true`) when <<canBuildRight, canBuildRight>> and the `right` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag are positive
+
+In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
+
+NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+
+=== [[broadcastSide]] Choosing Join Side to Broadcast -- `broadcastSide` Internal Method
+
+[source, scala]
+----
+broadcastSide(
+  canBuildLeft: Boolean,
+  canBuildRight: Boolean,
+  left: LogicalPlan,
+  right: LogicalPlan): BuildSide
+----
+
+`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per link:spark-sql-Statistics.adoc#sizeInBytes[total size] when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
+
+`broadcastSide` gives `BuildRight` when `canBuildRight` is positive.
+
+`broadcastSide` gives `BuildLeft` when `canBuildLeft` is positive.
+
+When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per link:spark-sql-Statistics.adoc#sizeInBytes[total size] (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
+
+NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSideByHints, broadcastSideByHints>>, <<broadcastSideBySizes, broadcastSideBySizes>>, and <<apply, execute>> (and considers a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
