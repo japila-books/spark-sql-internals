@@ -136,6 +136,14 @@ Use link:spark-sql-SQLConf.adoc#defaultSizeInBytes[SQLConf.defaultSizeInBytes] m
 |
 |
 
+| [[spark.sql.exchange.reuse]] `spark.sql.exchange.reuse`
+| `true`
+a| *(internal)* When enabled (i.e. `true`), the link:spark-sql-SparkPlanner.adoc[Spark planner] will find duplicated exchanges and subqueries and re-use them.
+
+NOTE: When disabled (i.e. `false`), link:spark-sql-ReuseSubquery.adoc[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
+
+Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnabled] method to access the current value.
+
 | [[spark.sql.execution.useObjectHashAggregateExec]] `spark.sql.execution.useObjectHashAggregateExec`
 | `true`
 | Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] in link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[Aggregation] execution planning strategy.

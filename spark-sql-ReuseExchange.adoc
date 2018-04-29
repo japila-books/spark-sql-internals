@@ -1,6 +1,6 @@
 == [[ReuseExchange]] ReuseExchange Physical Query Plan Optimization Rule
 
-`ReuseExchange` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
+`ReuseExchange` is a physical query plan optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
 
 Technically, `ReuseExchange` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
 

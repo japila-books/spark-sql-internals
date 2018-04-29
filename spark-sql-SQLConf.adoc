@@ -131,6 +131,12 @@ Used when:
 
 1. `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
 
+| [[exchangeReuseEnabled]] `exchangeReuseEnabled`
+| link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse]
+a| Used when link:spark-sql-ReuseSubquery.adoc#apply[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc#apply[ReuseExchange] physical optimizations are executed
+
+NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical optimizations do no optimizations.
+
 | [[fallBackToHdfsForStatsEnabled]] `fallBackToHdfsForStatsEnabled`
 | link:spark-sql-properties.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs]
 | Used exclusively when `DetermineTableStats` logical resolution rule is executed.
