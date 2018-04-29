@@ -1,6 +1,6 @@
 == [[ShuffleExchangeExec]] ShuffleExchangeExec Unary Physical Operator
 
-`ShuffleExchangeExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to perform a shuffle.
+`ShuffleExchangeExec` is a link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary physical operator to perform a shuffle.
 
 `ShuffleExchangeExec` corresponds to `Repartition` (with shuffle enabled) and `RepartitionByExpression` logical operators (as resolved in link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy).
 

@@ -298,6 +298,7 @@
 . link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec -- Contract for Leaf Physical Operators with Java Code Generation]
 . link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
 . link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec]
+. link:spark-sql-SparkPlan-Exchange.adoc[Exchange]
 . link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 . link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
 . link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec]

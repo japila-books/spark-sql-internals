@@ -15,4 +15,8 @@ apply(plan: SparkPlan): SparkPlan
 
 NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-SparkPlan.adoc[physical plan].
 
-`apply`...FIXME
+`apply` finds all link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary operators and...FIXME
+
+`apply` does nothing and simply returns the input physical `plan` if link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse] internal configuration property is off (i.e. `false`).
+
+NOTE: link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse] internal configuration property is on (i.e. `true`) by default.

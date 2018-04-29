@@ -1,6 +1,6 @@
 == [[BroadcastExchangeExec]] BroadcastExchangeExec Unary Physical Operator for Broadcast Joins
 
-`BroadcastExchangeExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to collect and broadcast rows of a child relation (to worker nodes).
+`BroadcastExchangeExec` is a link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
 
 `BroadcastExchangeExec` is <<creating-instance, created>> exclusively when `EnsureRequirements` physical query plan optimization link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[ensures BroadcastDistribution of the input data of a physical operator] (that can really be either link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] operators).
 
