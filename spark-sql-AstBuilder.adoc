@@ -62,6 +62,10 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 |
 |
 
+| [[visitExists]] `visitExists`
+| `#exists` labeled alternative
+| link:spark-sql-Expression-Exists.adoc[Exists] expression
+
 | [[visitExplain]] `visitExplain`
 | `explain`
 a| link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]

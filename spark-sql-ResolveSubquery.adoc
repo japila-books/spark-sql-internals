@@ -1,0 +1,14 @@
+== [[ResolveSubquery]] ResolveSubquery
+
+`ResolveSubquery` is...FIXME
+
+=== [[resolveSubQueries]] `resolveSubQueries` Internal Method
+
+[source, scala]
+----
+resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
+----
+
+`resolveSubQueries`...FIXME
+
+NOTE: `resolveSubQueries` is used when...FIXME

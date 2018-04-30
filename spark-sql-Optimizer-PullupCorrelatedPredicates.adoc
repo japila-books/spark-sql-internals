@@ -1,0 +1,14 @@
+== [[PullupCorrelatedPredicates]] PullupCorrelatedPredicates
+
+`PullupCorrelatedPredicates` is...FIXME
+
+=== [[rewriteSubQueries]] `rewriteSubQueries` Internal Method
+
+[source, scala]
+----
+rewriteSubQueries(plan: LogicalPlan, outerPlans: Seq[LogicalPlan]): LogicalPlan
+----
+
+`rewriteSubQueries`...FIXME
+
+NOTE: `rewriteSubQueries` is used when...FIXME
