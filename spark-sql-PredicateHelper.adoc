@@ -1,6 +1,29 @@
-== [[PredicateHelper]] PredicateHelper
+== [[PredicateHelper]] PredicateHelper Scala Trait
 
-`PredicateHelper` is...FIXME
+`PredicateHelper` is a set of helper methods that different parts of Spark SQL use for working with predicates (mainly).
+
+[[methods]]
+.PredicateHelper's Methods
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<splitConjunctivePredicates, splitConjunctivePredicates>>
+|
+
+| <<splitDisjunctivePredicates, splitDisjunctivePredicates>>
+|
+
+| <<replaceAlias, replaceAlias>>
+|
+
+| <<canEvaluate, canEvaluate>>
+|
+
+| <<canEvaluateWithinJoin, canEvaluateWithinJoin>>
+|
+|===
 
 === [[splitConjunctivePredicates]] Splitting Conjunctive Predicates -- `splitConjunctivePredicates` Method
 
@@ -9,9 +32,33 @@
 splitConjunctivePredicates(condition: Expression): Seq[Expression]
 ----
 
-`splitConjunctivePredicates`...FIXME
+`splitConjunctivePredicates` takes the input condition link:spark-sql-Expression.adoc[expression] and splits it to two expressions if they are children of a `And` binary expression.
 
-NOTE: `splitConjunctivePredicates` is used when...FIXME
+`splitConjunctivePredicates` splits the child expressions recursively down the child expressions until no conjunctive `And` binary expressions exist.
+
+=== [[splitDisjunctivePredicates]] `splitDisjunctivePredicates` Method
+
+[source, scala]
+----
+splitDisjunctivePredicates(condition: Expression): Seq[Expression]
+----
+
+`splitDisjunctivePredicates`...FIXME
+
+NOTE: `splitDisjunctivePredicates` is used when...FIXME
+
+=== [[replaceAlias]] `replaceAlias` Method
+
+[source, scala]
+----
+replaceAlias(
+  condition: Expression,
+  aliases: AttributeMap[Expression]): Expression
+----
+
+`replaceAlias`...FIXME
+
+NOTE: `replaceAlias` is used when...FIXME
 
 === [[canEvaluate]] `canEvaluate` Method
 

@@ -1,6 +1,8 @@
 == [[SubExprUtils]] SubExprUtils Helper Object
 
-`SubExprUtils` is a link:spark-sql-PredicateHelper.adoc[PredicateHelper]...FIXME
+`SubExprUtils` is...FIXME
+
+`SubExprUtils` uses link:spark-sql-PredicateHelper.adoc[PredicateHelper] for...FIXME
 
 === [[hasNullAwarePredicateWithinNot]] Checking If Condition Expression Has Any Null-Aware Predicate Subqueries Inside Not -- `hasNullAwarePredicateWithinNot` Method
 
@@ -9,7 +11,7 @@
 hasNullAwarePredicateWithinNot(condition: Expression): Boolean
 ----
 
-`hasNullAwarePredicateWithinNot` <<splitConjunctivePredicates, splits conjunctive predicates>> (i.e. expressions separated by `And` expression).
+`hasNullAwarePredicateWithinNot` link:spark-sql-PredicateHelper.adoc#splitConjunctivePredicates[splits conjunctive predicates] (i.e. expressions separated by `And` expression).
 
 `hasNullAwarePredicateWithinNot` is positive (i.e. `true`) and is considered to have a *null-aware predicate subquery inside a Not expression* when conjuctive predicate expressions include a `Not` expression with an link:spark-sql-Expression-In.adoc[In] predicate expression with a `ListQuery` list expression (somewhere down the query tree).
 

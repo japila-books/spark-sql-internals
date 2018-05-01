@@ -482,8 +482,9 @@
 == Varia / Uncategorized
 
 . link:spark-sql-SQLExecution.adoc[SQLExecution Helper Object]
-. link:spark-sql-PredicateHelper.adoc[PredicateHelper]
+
 . link:spark-sql-SubExprUtils.adoc[SubExprUtils Helper Object]
+. link:spark-sql-PredicateHelper.adoc[PredicateHelper Scala Trait]
 
 . link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators]
 . link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregation -- Scala Extractor for Destructuring Aggregate Logical Operators]
