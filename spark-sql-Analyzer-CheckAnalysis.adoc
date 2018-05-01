@@ -6,7 +6,7 @@ NOTE: An analyzed logical plan is correct and ready for execution.
 
 `CheckAnalysis` defines <<extendedCheckRules, extendedCheckRules extension point>> that allows for extra analysis check rules.
 
-=== [[checkAnalysis]] Checking Results of Analysis of Logical Plan and Marking Plan As Analyzed -- `checkAnalysis` Method
+=== [[checkAnalysis]] Validating Analysis of Logical Plan (and Marking Plan As Analyzed) -- `checkAnalysis` Method
 
 [source, scala]
 ----

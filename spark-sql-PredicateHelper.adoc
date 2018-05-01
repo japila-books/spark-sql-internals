@@ -1,6 +1,17 @@
-== [[PredicateHelper]] PredicateHelper Helper Object
+== [[PredicateHelper]] PredicateHelper
 
 `PredicateHelper` is...FIXME
+
+=== [[splitConjunctivePredicates]] Splitting Conjunctive Predicates -- `splitConjunctivePredicates` Method
+
+[source, scala]
+----
+splitConjunctivePredicates(condition: Expression): Seq[Expression]
+----
+
+`splitConjunctivePredicates`...FIXME
+
+NOTE: `splitConjunctivePredicates` is used when...FIXME
 
 === [[canEvaluate]] `canEvaluate` Method
 
