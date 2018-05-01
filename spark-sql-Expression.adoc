@@ -209,7 +209,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[dataType]] `dataType`
-| link:spark-sql-DataType.adoc[DataType] of the result of evaluating the expression.
+| link:spark-sql-DataType.adoc[Data type] of the result of evaluating an expression
 
 | [[doGenCode]] `doGenCode`
 | *Code-generated evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).

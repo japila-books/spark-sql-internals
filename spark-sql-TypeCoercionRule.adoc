@@ -1,0 +1,3 @@
+== [[TypeCoercionRule]] TypeCoercionRule
+
+`TypeCoercionRule` is...FIXME

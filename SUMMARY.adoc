@@ -344,13 +344,14 @@
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
-=== Logical Analysis Rules (Check, Evaluation and Resolution)
+=== Logical Analysis Rules (Check, Evaluation, Conversion and Resolution)
 
 . link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 . link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 . link:spark-sql-HiveAnalysis.adoc[HiveAnalysis]
+. link:spark-sql-InConversion.adoc[InConversion]
 . link:spark-sql-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-ResolveAliases.adoc[ResolveAliases]
@@ -362,6 +363,7 @@
 . link:spark-sql-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
 . link:spark-sql-ResolveSubquery.adoc[ResolveSubquery]
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
+. link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
 === Logical Query Optimizations
@@ -375,6 +377,7 @@
 . link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase / ComputeCurrentTime]
 . link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 . link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
+. link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
 . link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
 . link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]

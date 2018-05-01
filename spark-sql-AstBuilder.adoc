@@ -272,6 +272,9 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 1. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
 
+| [[withPredicate]] `withPredicate`
+|
+
 | [[withWindows]] `withWindows`
 a| link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).
 

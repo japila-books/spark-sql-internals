@@ -1,3 +1,89 @@
 == [[In]] In Predicate Expression
 
-`In` is...FIXME
+[[dataType]]
+`In` is a predicate link:spark-sql-Expression.adoc[expression] (i.e. the result link:spark-sql-Expression.adoc#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]).
+
+`In` is <<creating-instance, created>> when:
+
+* link:spark-sql-Column.adoc#isin[isin] column method is used
+
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[withPredicate]
+
+* Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#in[in] operator is used
+
+* `ResolveSubquery` is requested to link:spark-sql-ResolveSubquery.adoc#resolveSubQueries[resolveSubQueries]
+
+* `InConversion` is requested to link:spark-sql-InConversion.adoc#coerceTypes[coerceTypes]
+
+[[creating-instance]]
+`In` takes the following when created:
+
+* [[value]] Value link:spark-sql-Expression.adoc[expression]
+* [[list]] List link:spark-sql-Expression.adoc[expressions]
+
+NOTE: <<list, List expressions>> must not be `null`.
+
+[[toString]]
+`In` has the following text representation:
+
+```
+[value] IN [list]
+```
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.{In, Literal}
+import org.apache.spark.sql.{functions => f}
+val in = In(value = Literal(1), list = Seq(f.array("1", "2", "3").expr))
+scala> println(in)
+1 IN (array('1, '2, '3))
+----
+
+[[sql]]
+`In` has the following link:spark-sql-Expression.adoc#sql[SQL representation]:
+
+```
+([valueSQL] IN ([listSQL]))
+```
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.{In, Literal}
+import org.apache.spark.sql.{functions => f}
+val in = In(value = Literal(1), list = Seq(f.array("1", "2", "3").expr))
+scala> println(in.sql)
+(1 IN (array(`1`, `2`, `3`)))
+----
+
+=== [[eval]] `eval` Method
+
+[source, scala]
+----
+eval(input: InternalRow): Any
+----
+
+NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to...FIXME.
+
+`eval`...FIXME
+
+=== [[doGenCode]] `doGenCode` Method
+
+[source, scala]
+----
+doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
+----
+
+NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract] to...FIXME.
+
+`doGenCode`...FIXME
+
+=== [[checkInputDataTypes]] `checkInputDataTypes` Method
+
+[source, scala]
+----
+checkInputDataTypes(): TypeCheckResult
+----
+
+NOTE: `checkInputDataTypes` is part of link:spark-sql-Expression.adoc#checkInputDataTypes[Expression Contract] to...FIXME.
+
+`checkInputDataTypes`...FIXME

@@ -165,8 +165,8 @@ scala> g.isDistinct
 res1: Boolean = true
 ----
 
-| [[ImplicitOperators]] `ImplicitOperators`
-| Operators for link:spark-sql-Expression.adoc[expressions]
+| `ImplicitOperators`
+| [[ImplicitOperators]][[in]] Operators for link:spark-sql-Expression.adoc[expressions], i.e. `in`.
 
 | [[plans]] `plans`
 a|

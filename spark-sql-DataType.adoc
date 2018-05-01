@@ -17,7 +17,7 @@
 
 (except <<FractionalType, fractional>> and <<IntegralType, integral>> types)
 | `BinaryType` |
-| `BooleanType` |
+| [[BooleanType]] `BooleanType` |
 | [[DateType]] `DateType` |
 | [[StringType]] `StringType` |
 | [[TimestampType]] `TimestampType` | `java.sql.Timestamp`

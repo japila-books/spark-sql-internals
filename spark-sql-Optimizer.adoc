@@ -131,10 +131,10 @@ spark.sessionState.optimizer
 | [[FoldablePropagation]] FoldablePropagation
 |
 
-| OptimizeIn
+| [[OptimizeIn]] link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
 |
 
-| link:spark-sql-Optimizer-ConstantFolding.adoc[ConstantFolding]
+| [[ConstantFolding]] link:spark-sql-Optimizer-ConstantFolding.adoc[ConstantFolding]
 |
 
 | ReorderAssociativeOperator

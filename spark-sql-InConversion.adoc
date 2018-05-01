@@ -1,0 +1,14 @@
+== [[InConversion]] InConversion
+
+`InConversion` is...FIXME
+
+=== [[coerceTypes]] `coerceTypes` Method
+
+[source, scala]
+----
+coerceTypes(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `coerceTypes` is part of link:spark-sql-TypeCoercionRule.adoc#coerceTypes[TypeCoercionRule Contract] to...FIXME.
+
+`coerceTypes`...FIXME
