@@ -117,17 +117,6 @@ Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the link:spark-
 Used exclusively when `In` is requested to <<eval, evaluate a value>> for a given input row.
 |===
 
-=== [[doGenCode]] `doGenCode` Method
-
-[source, scala]
-----
-doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
-----
-
-NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract] to...FIXME.
-
-`doGenCode`...FIXME
-
 === [[checkInputDataTypes]] `checkInputDataTypes` Method
 
 [source, scala]
@@ -139,7 +128,7 @@ NOTE: `checkInputDataTypes` is part of link:spark-sql-Expression.adoc#checkInput
 
 `checkInputDataTypes`...FIXME
 
-=== [[eval]] Evaluating In Expression -- `eval` Method
+=== [[eval]] Evaluating Expression -- `eval` Method
 
 [source, scala]
 ----
@@ -155,3 +144,32 @@ If the evaluated value is `null`, `eval` gives `null` too.
 `eval` takes every link:spark-sql-Expression.adoc[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
 
 `eval` records whether any of the expressions in <<list, list>> expressions gave `null` value. If no <<list, list>> expression led to `true` (per <<ordering, ordering>>), `eval` returns `null` if any <<list, list>> expression evaluated to `null` or `false`.
+
+=== [[doGenCode]] Generating Java Source Code For Code-Generated Expression Evaluation -- `doGenCode` Method
+
+[source, scala]
+----
+doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
+----
+
+NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract] to generate a Java source code for code-generated expression evaluation.
+
+`doGenCode`...FIXME
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.Literal
+import org.apache.spark.sql.{functions => f}
+
+// Using Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val in = Literal(1) in f.array("1", "2", "3").expr
+scala> println(in)
+1 IN (array('1, '2, '3))
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+
+// FIXME Make it work
+in.genCode(ctx)
+----

@@ -99,7 +99,7 @@ Internally, `initialize` <<initializeInternal, initializes>> itself (with the in
 
 NOTE: `initialize` is used exclusively when `InterpretedProjection` and `InterpretedMutableProjection` are requested to `initialize` themselves.
 
-=== [[eval]] Evaluating Nondeterministic Expression -- `eval` Method
+=== [[eval]] Evaluating Expression -- `eval` Method
 
 [source, scala]
 ----

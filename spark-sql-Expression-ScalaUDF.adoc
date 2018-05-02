@@ -111,18 +111,18 @@ scala> q.show
 +-----------+
 ----
 
-=== [[doGenCode]] Generating Java Source Code -- `doGenCode` Method
+=== [[doGenCode]] Generating Java Source Code For Code-Generated Expression Evaluation -- `doGenCode` Method
 
 [source, scala]
 ----
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract].
+NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract] to generate a Java source code for code-generated expression evaluation.
 
 `doGenCode`...FIXME
 
-=== [[eval]] Evaluating ScalaUDF Expression -- `eval` Method
+=== [[eval]] Evaluating Expression -- `eval` Method
 
 [source, scala]
 ----
