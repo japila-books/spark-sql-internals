@@ -15,13 +15,60 @@
 
 * `InConversion` is requested to link:spark-sql-InConversion.adoc#coerceTypes[coerceTypes]
 
+`In` expression can be <<eval, evaluated>> to a boolean value of `true` or `false` and the special value `null`.
+
+[source, scala]
+----
+import org.apache.spark.sql.functions.lit
+val value = lit(null)
+val list = Seq(lit(1))
+val in = (value isin (list: _*)).expr
+
+scala> println(in.sql)
+(NULL IN (1))
+
+import org.apache.spark.sql.catalyst.InternalRow
+val input = InternalRow(1, "hello")
+
+// Case 1: value.eval(input) was null => null
+val evaluatedValue = in.eval(input)
+assert(evaluatedValue == null)
+
+// Case 2: v = e.eval(input) && ordering.equiv(v, evaluatedValue) => true
+val value = lit(1)
+val list = Seq(lit(1))
+val in = (value isin (list: _*)).expr
+val evaluatedValue = in.eval(input)
+assert(evaluatedValue.asInstanceOf[Boolean])
+
+// Case 3: e.eval(input) = null and no ordering.equiv(v, evaluatedValue) => null
+val value = lit(1)
+val list = Seq(lit(null), lit(2))
+val in = (value isin (list: _*)).expr
+scala> println(in.sql)
+(1 IN (NULL, 2))
+
+val evaluatedValue = in.eval(input)
+assert(evaluatedValue == null)
+
+// Case 4: false
+val value = lit(1)
+val list = Seq(0, 2, 3).map(lit)
+val in = (value isin (list: _*)).expr
+scala> println(in.sql)
+(1 IN (0, 2, 3))
+
+val evaluatedValue = in.eval(input)
+assert(evaluatedValue.asInstanceOf[Boolean] == false)
+----
+
 [[creating-instance]]
 `In` takes the following when created:
 
 * [[value]] Value link:spark-sql-Expression.adoc[expression]
 * [[list]] List link:spark-sql-Expression.adoc[expressions]
 
-NOTE: <<list, List expressions>> must not be `null`.
+NOTE: <<list, List expressions>> must not be `null` (but can have expressions that can be evaluated to `null`).
 
 [[toString]]
 `In` has the following text representation:
@@ -55,16 +102,20 @@ scala> println(in.sql)
 (1 IN (array(`1`, `2`, `3`)))
 ----
 
-=== [[eval]] `eval` Method
+[[internal-registries]]
+.In's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-[source, scala]
-----
-eval(input: InternalRow): Any
-----
+| [[ordering]] `ordering`
+| Scala's https://www.scala-lang.org/api/2.11.12/index.html#scala.math.Ordering[Ordering] instance that represents a strategy for sorting instances of a type.
 
-NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to...FIXME.
+Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the link:spark-sql-Expression.adoc#dataType[data type] of the <<value, value>> expression.
 
-`eval`...FIXME
+Used exclusively when `In` is requested to <<eval, evaluate a value>> for a given input row.
+|===
 
 === [[doGenCode]] `doGenCode` Method
 
@@ -87,3 +138,20 @@ checkInputDataTypes(): TypeCheckResult
 NOTE: `checkInputDataTypes` is part of link:spark-sql-Expression.adoc#checkInputDataTypes[Expression Contract] to...FIXME.
 
 `checkInputDataTypes`...FIXME
+
+=== [[eval]] Evaluating In Expression -- `eval` Method
+
+[source, scala]
+----
+eval(input: InternalRow): Any
+----
+
+NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
+
+`eval` requests <<value, value>> expression to link:spark-sql-Expression.adoc#eval[evaluate a value] for the `input` link:spark-sql-InternalRow.adoc[internal row].
+
+If the evaluated value is `null`, `eval` gives `null` too.
+
+`eval` takes every link:spark-sql-Expression.adoc[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
+
+`eval` records whether any of the expressions in <<list, list>> expressions gave `null` value. If no <<list, list>> expression led to `true` (per <<ordering, ordering>>), `eval` returns `null` if any <<list, list>> expression evaluated to `null` or `false`.

@@ -26,7 +26,7 @@ val row = longExprEnc.toRow(5)
 val five = boundRef.eval(row).asInstanceOf[Long]
 ----
 
-=== [[eval]] `eval` Method
+=== [[eval]] Evaluating BoundReference Expression -- `eval` Method
 
 [source, scala]
 ----

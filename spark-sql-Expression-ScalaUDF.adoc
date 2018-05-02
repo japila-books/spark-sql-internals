@@ -122,7 +122,7 @@ NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression
 
 `doGenCode`...FIXME
 
-=== [[eval]] Evaluating ScalaUDF -- `eval` Method
+=== [[eval]] Evaluating ScalaUDF Expression -- `eval` Method
 
 [source, scala]
 ----
@@ -131,7 +131,7 @@ eval(input: InternalRow): Any
 
 NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
 
-`eval` executes the <<function, Scala function>> on the input link:spark-sql-InternalRow.adoc[InternalRow].
+`eval` executes the <<function, Scala function>> on the input link:spark-sql-InternalRow.adoc[internal row].
 
 === [[creating-instance]] Creating ScalaUDF Instance
 
