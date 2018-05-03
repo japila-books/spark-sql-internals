@@ -12,3 +12,14 @@ doProduce(ctx: CodegenContext): String
 NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
 
 `doProduce`...FIXME
+
+=== [[produceRows]] `produceRows` Internal Method
+
+[source, scala]
+----
+produceRows(ctx: CodegenContext, input: String): String
+----
+
+`produceRows`...FIXME
+
+NOTE: `produceRows` is used when...FIXME

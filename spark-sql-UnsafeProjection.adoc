@@ -28,7 +28,7 @@ create(
   subexpressionEliminationEnabled: Boolean): UnsafeProjection
 ----
 <1> `create` takes the link:spark-sql-DataType.adoc[DataTypes] from `schema` and calls the 2nd `create`
-<2> `create` creates link:spark-sql-Expression-BoundReference.adoc[BoundReference] per field in `fields` and calls the 5th `create`
+<2> `create` creates a link:spark-sql-Expression-BoundReference.adoc[BoundReference] per field in `fields` and calls the 5th `create`
 <3> `create` calls the 5th `create`
 <4> `create` calls the 5th `create`
 <5> The main `create` that does the heavy work

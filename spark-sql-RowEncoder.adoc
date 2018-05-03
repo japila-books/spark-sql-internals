@@ -26,7 +26,7 @@ res0: Boolean = false
 
 `RowEncoder` object belongs to `org.apache.spark.sql.catalyst.encoders` package.
 
-=== [[apply]] Creating ExpressionEncoder of Rows -- `apply` method
+=== [[apply]] Creating ExpressionEncoder For Row Type -- `apply` method
 
 [source, scala]
 ----

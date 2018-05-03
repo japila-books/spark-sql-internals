@@ -53,7 +53,7 @@ Used...FIXME
 
 NOTE: `Encoders` object contains the default `ExpressionEncoders` for Scala and Java primitive types, e.g. `boolean`, `long`, `String`, `java.sql.Date`, `java.sql.Timestamp`, `Array[Byte]`.
 
-=== [[apply]] Creating ExpressionEncoders -- `apply` Method
+=== [[apply]] Creating ExpressionEncoder -- `apply` Method
 
 [source, scala]
 ----
@@ -291,7 +291,7 @@ Error while decoding: [initial exception]
 * Structured Streaming's `ForeachSink`
 ====
 
-=== [[tuple]] Creating ExpressionEncoder For One or More ExpressionEncoders -- `tuple` Method
+=== [[tuple]] Creating ExpressionEncoder For N-Tuple -- `tuple` Method
 
 [source, scala]
 ----

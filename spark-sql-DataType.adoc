@@ -9,43 +9,81 @@
 
 [[standard-types]]
 .Standard Data Types
-[align="center",width="100%",options="header"]
+[align="center",width="100%",options="header",cols="1,1,1"]
 |===
-^.^| Type Family | Data Type          | Scala Types
+^.^| Type Family
+| Data Type
+| Scala Types
 
 .5+^.^| [[AtomicType]] *Atomic Types*
 
 (except <<FractionalType, fractional>> and <<IntegralType, integral>> types)
-| `BinaryType` |
-| [[BooleanType]] `BooleanType` |
-| [[DateType]] `DateType` |
-| [[StringType]] `StringType` |
+| [[BinaryType]] `BinaryType`
+|
+
+| [[BooleanType]] `BooleanType`
+|
+
+| [[DateType]] `DateType`
+|
+
+| [[StringType]] `StringType`
+|
+
 | [[TimestampType]] `TimestampType` | `java.sql.Timestamp`
 
 .3+^.^| [[FractionalType]] *Fractional Types*
 
 (concrete <<NumericType, NumericType>>)
-| [[DecimalType]] `DecimalType` |
-| `DoubleType` |
-| `FloatType` |
+| [[DecimalType]] `DecimalType`
+|
+
+| [[DoubleType]] `DoubleType`
+|
+
+| [[FloatType]] `FloatType`
+|
+
 
 .4+^.^| [[IntegralType]] *Integral Types*
 
 (concrete <<NumericType, NumericType>>)
-| `ByteType` |
-| `IntegerType` |
-| `LongType` |
-| `ShortType` |
+| [[ByteType]] `ByteType`
+|
+
+| [[IntegerType]] `IntegerType`
+|
+
+| [[LongType]] `LongType`
+|
+
+| [[ShortType]] `ShortType`
+|
+
 
 .8+^.^|
-| [[ArrayType]] `ArrayType` |
-| [[CalendarIntervalType]] `CalendarIntervalType` |
-| [[MapType]] `MapType` |
-| `NullType` |
-| `ObjectType` |
-| link:spark-sql-StructType.adoc[StructType] |
-| `UserDefinedType` |
-| `AnyDataType` | Matches any concrete data type
+| [[ArrayType]] `ArrayType`
+|
+
+| [[CalendarIntervalType]] `CalendarIntervalType`
+|
+
+| [[MapType]] `MapType`
+|
+
+| [[NullType]] `NullType`
+|
+
+| [[ObjectType]] `ObjectType`
+|
+
+| [[StructType]] link:spark-sql-StructType.adoc[StructType]
+|
+
+| [[UserDefinedType]] `UserDefinedType`
+|
+
+| [[AnyDataType]] `AnyDataType` | Matches any concrete data type
 |===
 
 CAUTION: FIXME What about AbstractDataType?

@@ -20,7 +20,7 @@ scala> :type $"hello"
 org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute
 ----
 
-[NOTE]
+[IMPORTANT]
 ====
 Some implicit conversions from the Catalyst DSL interfere with the implicits conversions from `SQLImplicits` that are imported automatically in `spark-shell` (through `spark.implicits._`).
 
@@ -41,6 +41,18 @@ Note that implicit conversions are not applicable because they are ambiguous:
 ```
 
 Use `sbt console` with Spark libraries defined (in `build.sbt`) instead.
+
+---
+
+You can also disable an implicit conversion using a trick described in https://stackoverflow.com/q/15592324/1305344[How can an implicit be unimported from the Scala repl?]
+
+[source, scala]
+----
+// HACK: Disable one SparkSession.implicits
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+----
 ====
 
 [[example]]
@@ -140,7 +152,7 @@ scala> println(s)
 WrappedArray(a, b).*
 ----
 
-* [[function]][[distinctFunction]] Creates link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] (`function` and `distinctFunction` operators) and link:spark-sql-Expression-BoundReference.adoc[BoundReference] (`at` operator) expressions
+* [[function]][[distinctFunction]] Creates link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] (`function` and `distinctFunction` operators)
 +
 [source, scala]
 ----
@@ -163,6 +175,29 @@ res0: Boolean = false
 val g = 'g.distinctFunction()
 scala> g.isDistinct
 res1: Boolean = true
+----
+
+* [[DslAttribute]][[notNull]][[canBeNull]] Adds `canBeNull` and `notNull` methods to create a `AttributeReference` with `nullability` on or off, respectively
++
+[source, scala]
+----
+notNull: AttributeReference
+canBeNull: AttributeReference
+----
+
+* [[at]] Adds `at` method to `AttributeReferences` to create a link:spark-sql-Expression-BoundReference.adoc[BoundReference]
++
+[source, scala]
+----
+at(ordinal: Int): BoundReference
+----
++
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val boundRef = 'hello.string.at(4)
+scala> println(boundRef)
+input[4, string, true]
 ----
 
 | `ImplicitOperators`
