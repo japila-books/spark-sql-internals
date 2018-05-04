@@ -97,7 +97,7 @@ initialize(partitionIndex: Int): Unit
 
 Internally, `initialize` <<initializeInternal, initializes>> itself (with the input partition index) and turns the internal <<initialized, initialized>> flag on.
 
-NOTE: `initialize` is used exclusively when `InterpretedProjection` and `InterpretedMutableProjection` are requested to `initialize` themselves.
+NOTE: `initialize` is used exclusively when link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` are requested to `initialize` themselves.
 
 === [[eval]] Evaluating Expression -- `eval` Method
 

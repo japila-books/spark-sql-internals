@@ -342,6 +342,7 @@
 .. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
 .. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
+.. link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
