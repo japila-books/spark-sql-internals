@@ -518,5 +518,9 @@
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
+. link:spark-sql-DataWriter.adoc[DataWriter]
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
+. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
+.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]

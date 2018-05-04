@@ -328,4 +328,13 @@ resolveAndBind(
 
 `resolveAndBind`...FIXME
 
-NOTE: `resolveAndBind` is used when...FIXME
+[NOTE]
+====
+`resolveAndBind` is used when:
+
+* `RowToUnsafeRowDataReaderFactory` is requested to link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc#createDataReader[create a DataReader]
+
+* `InternalRowDataWriterFactory` is requested to link:spark-sql-InternalRowDataWriterFactory.adoc#createDataWriter[create a DataWriter]
+
+* ...FIXME
+====

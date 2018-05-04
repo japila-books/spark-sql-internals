@@ -1,0 +1,31 @@
+== [[DataWritingSparkTask]] DataWritingSparkTask
+
+`DataWritingSparkTask` is...FIXME
+
+=== [[run]] `run` Method
+
+[source, scala]
+----
+run(
+  writeTask: DataWriterFactory[InternalRow],
+  context: TaskContext,
+  iter: Iterator[InternalRow]): WriterCommitMessage
+----
+
+`run`...FIXME
+
+NOTE: `run` is used when...FIXME
+
+=== [[runContinuous]] `runContinuous` Method
+
+[source, scala]
+----
+runContinuous(
+  writeTask: DataWriterFactory[InternalRow],
+  context: TaskContext,
+  iter: Iterator[InternalRow]): WriterCommitMessage
+----
+
+`runContinuous`...FIXME
+
+NOTE: `runContinuous` is used when...FIXME
