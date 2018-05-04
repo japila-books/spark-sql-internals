@@ -1,0 +1,14 @@
+== [[DataSourceRDD]] DataSourceRDD
+
+`DataSourceRDD` is...FIXME
+
+=== [[getPreferredLocations]] `getPreferredLocations` Method
+
+[source, scala]
+----
+getPreferredLocations(split: Partition): Seq[String]
+----
+
+NOTE: `getPreferredLocations` is part of RDD Contract to...FIXME.
+
+`getPreferredLocations`...FIXME

@@ -1,0 +1,47 @@
+== [[DataReaderFactory]] DataReaderFactory
+
+`DataReaderFactory` is a <<contract, contract>>...FIXME
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.sources.v2.reader;
+
+public interface DataReaderFactory<T> extends Serializable {
+  // only required methods that have no implementation
+  // the others follow
+  DataReader<T> createDataReader();
+}
+----
+
+NOTE: `DataReaderFactory` is an `Evolving` contract.
+
+.DataReaderFactory Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[createDataReader]] `createDataReader`
+| Used when...FIXME
+|===
+
+=== [[preferredLocations]] `preferredLocations` Method
+
+[source, java]
+----
+default String[] preferredLocations()
+----
+
+`preferredLocations` defaults to an empty collection of host names (as preferred locations) which simply means that this task has no location preference.
+
+[NOTE]
+====
+`preferredLocations` is used when:
+
+* `DataSourceRDD` is requested for link:spark-sql-DataSourceRDD.adoc#getPreferredLocations[getPreferredLocations]
+
+* `RowToUnsafeRowDataReaderFactory` is requested for link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc#preferredLocations[preferredLocations]
+
+* Spark Structured Streaming's `ContinuousDataSourceRDD` is requested for `getPreferredLocations`
+====

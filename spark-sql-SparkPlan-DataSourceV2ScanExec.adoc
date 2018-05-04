@@ -1,3 +1,16 @@
 == [[DataSourceV2ScanExec]] DataSourceV2ScanExec Leaf Physical Operator
 
 `DataSourceV2ScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] for...FIXME
+
+[[internal-registries]]
+.DataSourceV2ScanExec's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[readerFactories]] `readerFactories`
+| Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects of link:spark-sql-UnsafeRow.adoc[UnsafeRows]
+
+Used when...FIXME
+|===

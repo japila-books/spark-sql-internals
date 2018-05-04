@@ -62,10 +62,6 @@ apply[T : TypeTag](): ExpressionEncoder[T]
 
 CAUTION: FIXME
 
-=== [[resolveAndBind]] `resolveAndBind` Method
-
-CAUTION: FIXME
-
 === [[creating-instance]] Creating ExpressionEncoder Instance
 
 `ExpressionEncoder` takes the following when created:
@@ -320,3 +316,16 @@ tuple[T1, T2, T3, T4, T5](
 `tuple`...FIXME
 
 NOTE: `tuple` is used when...FIXME
+
+=== [[resolveAndBind]] `resolveAndBind` Method
+
+[source, scala]
+----
+resolveAndBind(
+  attrs: Seq[Attribute] = schema.toAttributes,
+  analyzer: Analyzer = SimpleAnalyzer): ExpressionEncoder[T]
+----
+
+`resolveAndBind`...FIXME
+
+NOTE: `resolveAndBind` is used when...FIXME

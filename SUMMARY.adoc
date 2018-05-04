@@ -515,4 +515,8 @@
 
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
 
+. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
+.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
+
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
