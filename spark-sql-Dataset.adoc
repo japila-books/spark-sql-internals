@@ -123,6 +123,19 @@ NOTE: `Dataset` makes sure that the underlying `QueryExecution` is link:spark-sq
 
 Used when...FIXME
 
+| [[deserializer]] `deserializer`
+a| Deserializer link:spark-sql-Expression.adoc[expression] to convert internal rows to objects of type `T`
+
+Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to link:spark-sql-ExpressionEncoder.adoc#resolveAndBind[resolveAndBind]
+
+Used when:
+
+* `Dataset` is <<apply, created>> (for a logical plan in a given `SparkSession`)
+
+* link:spark-sql-dataset-operators.adoc#spark-sql-dataset-operators.adoc[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
+
+* `Dataset` is requested to <<collectFromPlan, collect all rows from a spark plan>>
+
 | [[exprEnc]] `exprEnc`
 | Implicit link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder]
 
@@ -430,6 +443,28 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-
 
 1. link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
 ====
+
+=== [[apply]] Creating Dataset For SparkSession and LogicalPlan -- `apply` Method
+
+[source, scala]
+----
+apply[T: Encoder](sparkSession: SparkSession, logicalPlan: LogicalPlan): Dataset[T]
+----
+
+`apply`...FIXME
+
+NOTE: `apply` is used when...FIXME
+
+=== [[collectFromPlan]] Collecting All Rows From Spark Plan -- `collectFromPlan` Internal Method
+
+[source, scala]
+----
+collectFromPlan(plan: SparkPlan): Array[T]
+----
+
+`collectFromPlan`...FIXME
+
+NOTE: `collectFromPlan` is used for link:spark-sql-dataset-operators.adoc#head[Dataset.head], link:spark-sql-dataset-operators.adoc#collect[Dataset.collect] and link:spark-sql-dataset-operators.adoc#collectAsList[Dataset.collectAsList] operators.
 
 === [[selectUntyped]] `selectUntyped` Internal Method
 

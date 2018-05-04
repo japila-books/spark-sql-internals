@@ -61,7 +61,7 @@ trait TypedAggregateExpression extends AggregateFunction {
 |
 |===
 
-=== [[apply]] `apply` Factory Method
+=== [[apply]] Creating TypedAggregateExpression -- `apply` Factory Method
 
 [source, scala]
 ----

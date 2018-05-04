@@ -118,23 +118,50 @@ NOTE: `hint` adds a `UnresolvedHint` to an analyzed logical plan that indirectly
 
 === [[head]] `head` Operator
 
-CAUTION: FIXME
+[source, scala]
+----
+head(): T // <1>
+head(n: Int): Array[T]
+----
+<1> Calls the other `head` with `n` as `1` and takes the first element
+
+`head`...FIXME
 
 === [[collect]] `collect` Operator
 
-CAUTION: FIXME
+[source, scala]
+----
+collect(): Array[T]
+----
+
+`collect`...FIXME
 
 === [[collectAsList]] `collectAsList` Operator
 
-CAUTION: FIXME
+[source, scala]
+----
+collectAsList(): java.util.List[T]
+----
+
+`collectAsList`...FIXME
 
 === [[count]] `count` Operator
 
-CAUTION: FIXME
+[source, scala]
+----
+count(): Long
+----
+
+`count`...FIXME
 
 === [[toLocalIterator]] `toLocalIterator` Operator
 
-CAUTION: FIXME
+[source, scala]
+----
+toLocalIterator(): java.util.Iterator[T]
+----
+
+`toLocalIterator`...FIXME
 
 === [[createTempViewCommand]] `createTempViewCommand` Internal Operator
 

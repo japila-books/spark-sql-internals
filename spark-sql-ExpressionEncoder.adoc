@@ -1,8 +1,8 @@
 == [[ExpressionEncoder]] ExpressionEncoder -- Expression-Based Encoder
 
-`ExpressionEncoder[T]` is a generic link:spark-sql-Encoder.adoc[Encoder] of JVM objects of the type `T` to link:spark-sql-InternalRow.adoc[internal binary row format] (as `InternalRow`).
+`ExpressionEncoder[T]` is a generic link:spark-sql-Encoder.adoc[Encoder] of JVM objects of the type `T` to and from link:spark-sql-InternalRow.adoc[internal binary rows].
 
-`ExpressionEncoder[T]` uses link:spark-sql-Expression.adoc[Catalyst expressions] for a <<serializer, serializer>> and a  <<deserializer, deserializer>>.
+`ExpressionEncoder[T]` uses link:spark-sql-Expression.adoc[expressions] for a <<serializer, serializer>> and a <<deserializer, deserializer>>.
 
 NOTE: `ExpressionEncoder` is the only supported implementation of `Encoder` which is explicitly enforced when `Dataset` link:spark-sql-Dataset.adoc#exprEnc[is created] (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
 
@@ -68,8 +68,8 @@ CAUTION: FIXME
 
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
 * [[flat]] Flag whether `ExpressionEncoder` is flat or not
-* [[serializer]] Serializer link:spark-sql-Expression.adoc[expressions]
-* [[deserializer]] Deserializer link:spark-sql-Expression.adoc[expression]
+* [[serializer]] Serializer link:spark-sql-Expression.adoc[expressions] (to convert objects of type `T` to internal rows)
+* [[deserializer]] Deserializer link:spark-sql-Expression.adoc[expression] (to convert internal rows to objects of type `T`)
 * [[clsTag]] Scala's http://www.scala-lang.org/api/current/scala/reflect/ClassTag.html[ClassTag] for the JVM type `T`
 
 === [[deserializerFor]][[ScalaReflection-deserializerFor]] Creating Deserialize Expression -- `ScalaReflection.deserializerFor` Method
@@ -328,6 +328,32 @@ resolveAndBind(
 
 `resolveAndBind`...FIXME
 
+[source, scala]
+----
+// A very common use case
+case class Person(id: Long, name: String)
+import org.apache.spark.sql.Encoders
+val schema = Encoders.product[Person].schema
+
+import org.apache.spark.sql.catalyst.encoders.{RowEncoder, ExpressionEncoder}
+import org.apache.spark.sql.Row
+val encoder: ExpressionEncoder[Row] = RowEncoder.apply(schema).resolveAndBind()
+
+import org.apache.spark.sql.catalyst.InternalRow
+val row = InternalRow(1, "Jacek")
+
+val deserializer = encoder.deserializer
+
+scala> deserializer.eval(row)
+java.lang.UnsupportedOperationException: Only code-generated evaluation is supported
+  at org.apache.spark.sql.catalyst.expressions.objects.CreateExternalRow.eval(objects.scala:1105)
+  ... 54 elided
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val code = deserializer.genCode(ctx).code
+----
+
 [NOTE]
 ====
 `resolveAndBind` is used when:
@@ -336,5 +362,13 @@ resolveAndBind(
 
 * `InternalRowDataWriterFactory` is requested to link:spark-sql-InternalRowDataWriterFactory.adoc#createDataWriter[create a DataWriter]
 
-* ...FIXME
+* `Dataset` is requested for the link:spark-sql-Dataset.adoc#deserializer[deserializer expression] (to convert internal rows to objects of type `T`)
+
+* `TypedAggregateExpression` is link:spark-sql-Expression-TypedAggregateExpression.adoc#apply[created]
+
+* `JdbcUtils` is requested to `resultSetToRows`
+
+* Spark Structured Streaming's `FlatMapGroupsWithStateExec` physical operator is requested for the state deserializer (i.e. `stateDeserializer`)
+
+* Spark Structured Streaming's `ForeachSink` is requested to add a streaming batch (i.e. `addBatch`)
 ====
