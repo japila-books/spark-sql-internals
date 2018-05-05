@@ -1,7 +1,7 @@
 == [[CSVFileFormat]] CSVFileFormat
 
 [[shortName]]
-`CSVFileFormat` is a `TextBasedFileFormat` for *csv* data source format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).
+`CSVFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *csv* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).
 
 [source, scala]
 ----
@@ -11,10 +11,12 @@ spark.read.format("csv").load("csv-datasets")
 spark.read.csv("csv-datasets")
 ----
 
+`CSVFileFormat` uses <<CSVOptions, CSV options>> (that in turn are used to configure the underlying CSV parser from https://github.com/uniVocity/univocity-parsers[uniVocity-parsers] project).
+
 [[options]]
 [[CSVOptions]]
 .CSVFileFormat's Options
-[cols="1,1,2",options="header",width="100%"]
+[cols="1,1,3",options="header",width="100%"]
 |===
 | Option
 | Default Value
@@ -30,6 +32,12 @@ Alias of <<encoding, encoding>>
 | `\\`
 | One character to...FIXME
 
+| [[codec]] `codec`
+|
+a| Compression codec that can be one of the following aliases of the <<shortCompressionCodecNames, known codecs>> or the fully-qualified class name of a compression codec.
+
+Alias of <<compression, compression>>
+
 | [[columnNameOfCorruptRecord]] `columnNameOfCorruptRecord`
 |
 |
@@ -37,6 +45,16 @@ Alias of <<encoding, encoding>>
 | [[comment]] `comment`
 | `\u0000`
 |
+
+| [[compression]] `compression`
+|
+a| Compression codec that can be one of the following aliases of the <<shortCompressionCodecNames, known codecs>> or the fully-qualified class name of a compression codec.
+
+Alias of <<codec, codec>>
+
+| [[dateFormat]] `dateFormat`
+| `yyyy-MM-dd`
+| Uses `en_US` locale
 
 | [[delimiter]] `delimiter`
 | `,` (comma)
@@ -54,7 +72,11 @@ Alias of <<charset, charset>>
 | `\\`
 |
 
-| [[header]] `header`
+| [[escapeQuotes]] `escapeQuotes`
+| `true`
+|
+
+| [[header_]] `header`
 |
 |
 
@@ -74,6 +96,14 @@ a|
 |
 |
 
+| [[maxCharsPerColumn]] `maxCharsPerColumn`
+| `-1`
+|
+
+| [[maxColumns]] `maxColumns`
+| `20480`
+|
+
 | [[mode]] `mode`
 | `PERMISSIVE`
 a|
@@ -83,6 +113,10 @@ Possible values:
 * `DROPMALFORMED`
 * `PERMISSIVE` (default)
 * `FAILFAST`
+
+| [[multiLine]] `multiLine`
+| `false`
+|
 
 | [[nanValue]] `nanValue`
 | `NaN`
@@ -106,7 +140,49 @@ Possible values:
 
 Alias of <<delimiter, delimiter>>
 
+| [[timestampFormat]] `timestampFormat`
+| `yyyy-MM-dd'T'HH:mm:ss.SSSXXX`
+| Uses <<timeZone, timeZone>> and `en_US` locale
+
+| [[timeZone]] `timeZone`
+| link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
+|
+
 | [[quote]] `quote`
 | `\"`
 |
+
+| [[quoteAll]] `quoteAll`
+| `false`
+|
+|===
+
+[[getCodecClassName]]
+[[shortCompressionCodecNames]]
+.Known Compression Codecs
+[cols="1,3",options="header",width="100%"]
+|===
+| Alias
+| Fully-Qualified Class Name
+
+| `none`
+|
+
+| `uncompressed`
+|
+
+| `bzip2`
+| `org.apache.hadoop.io.compress.BZip2Codec`
+
+| `deflate`
+| `org.apache.hadoop.io.compress.DeflateCodec`
+
+| `gzip`
+| `org.apache.hadoop.io.compress.GzipCodec`
+
+| `lz4`
+| `org.apache.hadoop.io.compress.Lz4Codec`
+
+| `snappy`
+| `org.apache.hadoop.io.compress.SnappyCodec`
 |===

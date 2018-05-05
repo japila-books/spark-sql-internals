@@ -263,6 +263,12 @@ Use link:spark-sql-SQLConf.adoc#runSQLonFile[SQLConf.runSQLonFile] method to acc
 | `true`
 | Controls whether to resolve ambiguity in join conditions for link:spark-sql-joins.adoc#join[self-joins] automatically.
 
+| [[spark.sql.session.timeZone]] `spark.sql.session.timeZone`
+| Java's `TimeZone.getDefault.getID`
+| The ID of session-local timezone, e.g. "GMT", "America/Los_Angeles", etc.
+
+Use link:spark-sql-SQLConf.adoc#sessionLocalTimeZone[SQLConf.sessionLocalTimeZone] method to access the current value.
+
 | [[spark.sql.shuffle.partitions]] `spark.sql.shuffle.partitions`
 | `200`
 | Number of partitions to use by default when shuffling data for joins or aggregations

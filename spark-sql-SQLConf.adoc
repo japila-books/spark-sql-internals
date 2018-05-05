@@ -183,6 +183,10 @@ Used when:
 
 * `ResolveSQLOnFile` does link:spark-sql-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
 
+| [[sessionLocalTimeZone]] `sessionLocalTimeZone`
+| link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
+|
+
 | [[starSchemaDetection]] `starSchemaDetection`
 | link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
 | Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
