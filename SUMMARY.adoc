@@ -100,6 +100,19 @@
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 
+== Notable Features
+
+. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
+.. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Contract for Physical Operators with Java Code Generation]
+.. link:spark-sql-CodegenContext.adoc[CodegenContext]
+.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan -- Physical Operators With Vectorized Reader]
+.. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
+... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
+... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
+... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
+... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
+.. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
+
 == Extending Spark SQL
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
@@ -327,17 +340,6 @@
 .. link:spark-sql-AggregateProcessor.adoc[AggregateProcessor]
 .. link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame]
 . link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec]
-
-. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
-.. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Physical Operators with Optional Java Code Generation]
-.. link:spark-sql-CodegenContext.adoc[CodegenContext]
-.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan]
-.. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
-... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
-... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
-... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
-... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
-.. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-Projection.adoc[Projection -- Contract for Functions to Produce InternalRow for InternalRow]
 .. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]

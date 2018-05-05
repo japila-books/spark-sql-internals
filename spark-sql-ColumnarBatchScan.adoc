@@ -1,6 +1,87 @@
-== [[ColumnarBatchScan]] ColumnarBatchScan
+== [[ColumnarBatchScan]] ColumnarBatchScan -- Physical Operators With Vectorized Reader
 
-`ColumnarBatchScan` is...FIXME
+`ColumnarBatchScan` is a custom link:spark-sql-CodegenSupport.adoc[Java code generation] for <<implementations, physical operators>> that want to <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
+
+[[vectorTypes]]
+`ColumnarBatchScan` uses the optional `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
+
+[[supportsBatch]]
+`ColumnarBatchScan` uses the `supportsBatch` flag to enable returning rows as batch or not. `supportsBatch` is enabled (i.e. `true`) by default.
+
+[[needsUnsafeRowConversion]]
+`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag for...FIXME `needsUnsafeRowConversion` is enabled (i.e. `true`) by default.
+
+[[metrics]]
+.ColumnarBatchScan's Performance Metrics
+[cols="1,2,2",options="header",width="100%"]
+|===
+| Key
+| Name (in web UI)
+| Description
+
+| [[numOutputRows]] `numOutputRows`
+| number of output rows
+|
+
+| [[scanTime]] `scanTime`
+| scan time
+|
+|===
+
+[[implementations]]
+.ColumnarBatchScans
+[cols="1,2",options="header",width="100%"]
+|===
+| ColumnarBatchScan
+| Description
+
+| [[DataSourceV2ScanExec]] link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
+|
+
+| [[FileSourceScanExec]] link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
+|
+
+| [[InMemoryTableScanExec]] link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec]
+|
+|===
+
+=== [[genCodeColumnVector]] `genCodeColumnVector` Internal Method
+
+[source, scala]
+----
+genCodeColumnVector(
+  ctx: CodegenContext,
+  columnVar: String,
+  ordinal: String,
+  dataType: DataType,
+  nullable: Boolean): ExprCode
+----
+
+`genCodeColumnVector`...FIXME
+
+NOTE: `genCodeColumnVector` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.
+
+=== [[produceBatches]] `produceBatches` Internal Method
+
+[source, scala]
+----
+produceBatches(ctx: CodegenContext, input: String): String
+----
+
+`produceBatches`...FIXME
+
+NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is on).
+
+=== [[produceRows]] `produceRows` Internal Method
+
+[source, scala]
+----
+produceRows(ctx: CodegenContext, input: String): String
+----
+
+`produceRows`...FIXME
+
+NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
@@ -12,14 +93,3 @@ doProduce(ctx: CodegenContext): String
 NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
 
 `doProduce`...FIXME
-
-=== [[produceRows]] `produceRows` Internal Method
-
-[source, scala]
-----
-produceRows(ctx: CodegenContext, input: String): String
-----
-
-`produceRows`...FIXME
-
-NOTE: `produceRows` is used when...FIXME
