@@ -118,6 +118,12 @@ Use link:spark-sql-SQLConf.adoc#wholeStageSplitConsumeFuncByOperator[SQLConf.who
 
 Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] method to access the current value.
 
+| [[spark.sql.columnVector.offheap.enabled]] `spark.sql.columnVector.offheap.enabled`
+| `false`
+| *(internal)* Whether to use `OffHeapColumnVector` in link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] (`true`) or not (`false`)
+
+Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumnVectorEnabled] method to access the current value.
+
 | [[spark.sql.columnNameOfCorruptRecord]] `spark.sql.columnNameOfCorruptRecord`
 |
 |

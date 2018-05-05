@@ -79,3 +79,14 @@ buildReaderWithPartitionValues(
 NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
 
 `buildReaderWithPartitionValues`...FIXME
+
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]]
+----
+
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+
+`vectorTypes`...FIXME

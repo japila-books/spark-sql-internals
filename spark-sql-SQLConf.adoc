@@ -17,6 +17,9 @@ org.apache.spark.sql.SparkSession
 scala> :type spark.sessionState.conf
 org.apache.spark.sql.internal.SQLConf
 
+scala> println(spark.sessionState.conf.offHeapColumnVectorEnabled)
+false
+
 import spark.sessionState.conf
 
 // accessing properties through accessor methods
@@ -168,6 +171,16 @@ Used in:
 | [[limitScaleUpFactor]] `limitScaleUpFactor`
 | link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor]
 | Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
+
+| [[offHeapColumnVectorEnabled]] `offHeapColumnVectorEnabled`
+| link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
+a| Used when:
+
+* `InMemoryTableScanExec` is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
+
+* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+
+* `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
 
 | [[preferSortMergeJoin]] `preferSortMergeJoin`
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]

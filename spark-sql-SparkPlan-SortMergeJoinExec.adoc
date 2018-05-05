@@ -170,7 +170,7 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an RDD of internal rows that is the runtime representation of a structured query (aka _execute_).
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
 
 `doExecute`...FIXME
 

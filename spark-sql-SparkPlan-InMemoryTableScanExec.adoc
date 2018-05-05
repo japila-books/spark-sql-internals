@@ -53,6 +53,41 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 
 `InMemoryTableScanExec` uses `spark.sql.inMemoryTableScanStatistics.enable` flag (default: disabled) to enable accumulators (that appears exclusively for testing purposes).
 
+=== [[inputRDD]] `inputRDD` Property
+
+[source, scala]
+----
+inputRDD: RDD[InternalRow]
+----
+
+NOTE: `inputRDD` is a Scala lazy value which is computed once when it is first accessed and cached afterwards.
+
+`inputRDD`...FIXME
+
+NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, inputRDDs>> and to <<doExecute, execute>>.
+
+=== [[doExecute]] Executing InMemoryTableScanExec -- `doExecute` Method
+
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+
+`doExecute`...FIXME
+
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]]
+----
+
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+
+`vectorTypes`...FIXME
+
 === [[creating-instance]] Creating InMemoryTableScanExec Instance
 
 `InMemoryTableScanExec` takes the following when created:
@@ -60,3 +95,14 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 * [[attributes]] link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
 * [[predicates]] Predicate link:spark-sql-Expression.adoc[expressions]
 * [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
+
+=== [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
+
+[source, scala]
+----
+createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
+----
+
+`createAndDecompressColumn`...FIXME
+
+NOTE: `createAndDecompressColumn` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, inputRDD>>.
