@@ -41,9 +41,6 @@ trait FileFormat {
 [[vectorTypes]]
 `vectorTypes`...FIXME
 
-[[isSplitable]]
-`isSplitable`...FIXME
-
 === [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
 
 [source, scala]
@@ -79,3 +76,19 @@ buildReader(
 `buildReader`...FIXME
 
 NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, buildReaderWithPartitionValues>>
+
+=== [[isSplitable]] Is File Splitable Or Not -- `isSplitable` Method
+
+[source, scala]
+----
+isSplitable(
+  sparkSession: SparkSession,
+  options: Map[String, String],
+  path: Path): Boolean
+----
+
+`isSplitable` always gives `false` by default.
+
+NOTE: link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] comes with `isSplitable` that uses a Hadoop compression codec to know whether a given file is splitable or not.
+
+NOTE: `isSplitable` is used exclusively when `FileSourceScanExec` is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD].

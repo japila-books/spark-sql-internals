@@ -10,3 +10,103 @@ spark.read.format("csv").load("csv-datasets")
 // or the same as above using a shortcut
 spark.read.csv("csv-datasets")
 ----
+
+[[options]]
+[[CSVOptions]]
+.CSVFileFormat's Options
+[cols="1,1,2",options="header",width="100%"]
+|===
+| Option
+| Default Value
+| Description
+
+| [[charset]] `charset`
+| `UTF-8`
+|
+
+Alias of <<encoding, encoding>>
+
+| [[charToEscapeQuoteEscaping]] `charToEscapeQuoteEscaping`
+| `\\`
+| One character to...FIXME
+
+| [[columnNameOfCorruptRecord]] `columnNameOfCorruptRecord`
+|
+|
+
+| [[comment]] `comment`
+| `\u0000`
+|
+
+| [[delimiter]] `delimiter`
+| `,` (comma)
+|
+
+Alias of <<sep, sep>>
+
+| [[encoding]] `encoding`
+| `UTF-8`
+|
+
+Alias of <<charset, charset>>
+
+| [[escape]] `escape`
+| `\\`
+|
+
+| [[header]] `header`
+|
+|
+
+| [[ignoreLeadingWhiteSpace]] `ignoreLeadingWhiteSpace`
+a|
+* `false` (for reading)
+* `true` (for writing)
+|
+
+| [[ignoreTrailingWhiteSpace]] `ignoreTrailingWhiteSpace`
+a|
+* `false` (for reading)
+* `true` (for writing)
+|
+
+| [[inferSchema]] `inferSchema`
+|
+|
+
+| [[mode]] `mode`
+| `PERMISSIVE`
+a|
+
+Possible values:
+
+* `DROPMALFORMED`
+* `PERMISSIVE` (default)
+* `FAILFAST`
+
+| [[nanValue]] `nanValue`
+| `NaN`
+|
+
+| [[negativeInf]] `negativeInf`
+| `-Inf`
+|
+
+| [[nullValue]] `nullValue`
+| (empty string)
+|
+
+| [[positiveInf]] `positiveInf`
+| `Inf`
+|
+
+| [[sep]] `sep`
+| `,` (comma)
+|
+
+Alias of <<delimiter, delimiter>>
+
+| [[quote]] `quote`
+| `\"`
+|
+|===

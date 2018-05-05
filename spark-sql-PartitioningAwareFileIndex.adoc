@@ -1,0 +1,6 @@
+== [[PartitioningAwareFileIndex]] PartitioningAwareFileIndex
+
+`PartitioningAwareFileIndex` is...FIXME
+
+[[hadoopConf]]
+`PartitioningAwareFileIndex` uses a Hadoop http://hadoop.apache.org/docs/current/api/org/apache/hadoop/conf/Configuration.html[Configuration] for...FIXME

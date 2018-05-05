@@ -110,6 +110,7 @@
 . link:spark-sql-DataSourceRegister.adoc[DataSourceRegister -- Interface for Registering Data Source Format]
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
+.. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
 .. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
 .. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 .. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
@@ -514,6 +515,8 @@
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
 
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
+
+. link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]

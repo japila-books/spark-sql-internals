@@ -228,3 +228,25 @@ newHadoopConf(): Configuration
 NOTE: `newHadoopConf` is used by `ScriptTransformation`, `ParquetRelation`, `StateStoreRDD`, and `SessionState` itself, and few other places.
 
 CAUTION: FIXME What is `ScriptTransformation`? `StateStoreRDD`?
+
+=== [[newHadoopConfWithOptions]] Creating New Hadoop Configuration With Extra Options -- `newHadoopConfWithOptions` Method
+
+[source, scala]
+----
+newHadoopConfWithOptions(options: Map[String, String]): Configuration
+----
+
+`newHadoopConfWithOptions` <<newHadoopConf, creates a new Hadoop Configuration>> with the input `options` set (except `path` and `paths` options that are skipped).
+
+[NOTE]
+====
+`newHadoopConfWithOptions` is used when:
+
+* `TextBasedFileFormat` is requested to link:spark-sql-TextBasedFileFormat.adoc#isSplitable[say whether it is splitable or not]
+
+* `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[inputRDD]
+
+* `InsertIntoHadoopFsRelationCommand` is requested to link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[run]
+
+* `PartitioningAwareFileIndex` is requested for the link:spark-sql-PartitioningAwareFileIndex.adoc#hadoopConf[Hadoop Configuration]
+====

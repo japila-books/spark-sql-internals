@@ -90,7 +90,7 @@ FileScan csv [id#20,name#21,city#22] Batched: false, Format: CSV, Location: InMe
 | Description
 
 | [[inputRDD]] `inputRDD`
-a| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`)
+a| Input `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`)
 
 Used when `FileSourceScanExec` is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
 
