@@ -77,17 +77,6 @@ NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan C
 
 `doExecute`...FIXME
 
-=== [[vectorTypes]] `vectorTypes` Method
-
-[source, scala]
-----
-vectorTypes: Option[Seq[String]]
-----
-
-NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
-
-`vectorTypes`...FIXME
-
 === [[creating-instance]] Creating InMemoryTableScanExec Instance
 
 `InMemoryTableScanExec` takes the following when created:
@@ -106,3 +95,16 @@ createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
 `createAndDecompressColumn`...FIXME
 
 NOTE: `createAndDecompressColumn` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, inputRDD>>.
+
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]]
+----
+
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+
+`vectorTypes` uses link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property to select the name of the column vector, i.e. `OnHeapColumnVector` or `OffHeapColumnVector` when the property is off or on, respectively.
+
+`vectorTypes` gives as many column vectors as the <<attributes, attribute expressions>>.

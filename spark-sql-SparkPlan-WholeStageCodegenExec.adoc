@@ -34,7 +34,10 @@ NOTE: As `WholeStageCodegenExec` is created as a result of link:spark-sql-Collap
 [source, scala]
 ----
 val q = spark.range(9)
+
+// we need executedPlan with WholeStageCodegenExec physical operator "injected"
 val plan = q.queryExecution.executedPlan
+
 // Note the star prefix of Range that marks WholeStageCodegenExec
 // As a matter of fact, there are two physical operators in play here
 // i.e. WholeStageCodegenExec with Range as the child

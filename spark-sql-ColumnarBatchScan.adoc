@@ -3,7 +3,7 @@
 `ColumnarBatchScan` is a custom link:spark-sql-CodegenSupport.adoc[Java code generation] for <<implementations, physical operators>> that want to <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
 [[vectorTypes]]
-`ColumnarBatchScan` uses the optional `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
+`ColumnarBatchScan` uses the `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
 
 [[supportsBatch]]
 `ColumnarBatchScan` uses the `supportsBatch` flag to enable returning rows as batch or not. `supportsBatch` is enabled (i.e. `true`) by default.
@@ -61,14 +61,81 @@ genCodeColumnVector(
 
 NOTE: `genCodeColumnVector` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.
 
-=== [[produceBatches]] `produceBatches` Internal Method
+=== [[produceBatches]] Generating Java Source Code to Produce Batches -- `produceBatches` Internal Method
 
 [source, scala]
 ----
 produceBatches(ctx: CodegenContext, input: String): String
 ----
 
-`produceBatches`...FIXME
+`produceBatches` gives the Java source code to produce batches...FIXME
+
+[source, scala]
+----
+// Example to show produceBatches to generate a Java source code
+// Uses InMemoryTableScanExec as a ColumnarBatchScan
+
+// Create a DataFrame
+val ids = spark.range(10)
+// Cache it (and trigger the caching since it is lazy)
+ids.cache.foreach(_ => ())
+
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+// we need executedPlan with WholeStageCodegenExec physical operator
+// this will make sure the code generation starts at the right place
+val plan = ids.queryExecution.executedPlan
+val scan = plan.collectFirst { case e: InMemoryTableScanExec => e }.get
+
+assert(scan.supportsBatch, "supportsBatch flag should be on to trigger produceBatches")
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+
+// produceBatches is private so we have to trigger it from "outside"
+// It could be doProduce with supportsBatch flag on but it is protected
+// (doProduce will also take care of the extra input `input` parameter)
+// let's do this the only one right way
+import org.apache.spark.sql.execution.CodegenSupport
+val parent = plan.p(0).asInstanceOf[CodegenSupport]
+val produceCode = scan.produce(ctx, parent)
+
+scala> println(produceCode)
+
+
+
+if (inmemorytablescan_mutableStateArray1[1] == null) {
+  inmemorytablescan_nextBatch1();
+}
+while (inmemorytablescan_mutableStateArray1[1] != null) {
+  int inmemorytablescan_numRows1 = inmemorytablescan_mutableStateArray1[1].numRows();
+  int inmemorytablescan_localEnd1 = inmemorytablescan_numRows1 - inmemorytablescan_batchIdx1;
+  for (int inmemorytablescan_localIdx1 = 0; inmemorytablescan_localIdx1 < inmemorytablescan_localEnd1; inmemorytablescan_localIdx1++) {
+    int inmemorytablescan_rowIdx1 = inmemorytablescan_batchIdx1 + inmemorytablescan_localIdx1;
+    long inmemorytablescan_value2 = inmemorytablescan_mutableStateArray2[1].getLong(inmemorytablescan_rowIdx1);
+inmemorytablescan_mutableStateArray5[1].write(0, inmemorytablescan_value2);
+append(inmemorytablescan_mutableStateArray3[1]);
+    if (shouldStop()) { inmemorytablescan_batchIdx1 = inmemorytablescan_rowIdx1 + 1; return; }
+  }
+  inmemorytablescan_batchIdx1 = inmemorytablescan_numRows1;
+  inmemorytablescan_mutableStateArray1[1] = null;
+  inmemorytablescan_nextBatch1();
+}
+((org.apache.spark.sql.execution.metric.SQLMetric) references[3] /* scanTime */).add(inmemorytablescan_scanTime1 / (1000 * 1000));
+inmemorytablescan_scanTime1 = 0;
+
+// the code does not look good and begs for some polishing
+// (You can only imagine how the Polish me looks when I say "polishing" :))
+
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = plan.asInstanceOf[WholeStageCodegenExec]
+
+// Trigger code generation of the entire query plan tree
+val (ctx, code) = wsce.doCodeGen
+
+// CodeFormatter can pretty-print the code
+import org.apache.spark.sql.catalyst.expressions.codegen.CodeFormatter
+println(CodeFormatter.format(code))
+----
 
 NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is on).
 
