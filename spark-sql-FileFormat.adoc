@@ -41,7 +41,7 @@ trait FileFormat {
 [[vectorTypes]]
 `vectorTypes`...FIXME
 
-=== [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
+=== [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
 [source, scala]
 ----
@@ -55,11 +55,17 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ----
 
-`buildReaderWithPartitionValues`...FIXME
+`buildReaderWithPartitionValues` is simply an enhanced <<buildReader, buildReader>> that appends link:spark-sql-PartitionedFile.adoc#partitionValues[partition column values] to the internal rows produced by the reader function from <<buildReader, buildReader>>.
 
-NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
+Internally, `buildReaderWithPartitionValues` <<buildReader, builds a data reader>> with the input parameters and gives a *data reader function* (of a link:spark-sql-PartitionedFile.adoc[PartitionedFile] to an `Iterator[InternalRow]`) that does the following:
 
-=== [[buildReader]] `buildReader` Method
+. Creates a converter by requesting `GenerateUnsafeProjection` to link:spark-sql-GenerateUnsafeProjection.adoc#generate[generate an UnsafeProjection] for the attributes of the input `requiredSchema` and `partitionSchema`
+
+. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the link:spark-sql-PartitionedFile.adoc#partitionValues[partition column values] appended.
+
+NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
+
+=== [[buildReader]] Building Data Reader -- `buildReader` Method
 
 [source, scala]
 ----
@@ -75,7 +81,7 @@ buildReader(
 
 `buildReader`...FIXME
 
-NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, buildReaderWithPartitionValues>>
+NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, build a data reader with partition column values appended>>.
 
 === [[isSplitable]] Is File Splitable Or Not -- `isSplitable` Method
 

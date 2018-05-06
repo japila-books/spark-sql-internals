@@ -1,3 +1,34 @@
-== [[PartitionedFile]] PartitionedFile
+== [[PartitionedFile]] PartitionedFile -- Part of Single File
 
-`PartitionedFile` is...FIXME
+`PartitionedFile` is a part (aka _block_) of a single file that should be read, along with <<partitionValues, partition column values>> that need to be appended to each row.
+
+NOTE: *Partition column values* are values of the columns that are column partitions and therefore part of the directory structure not the partitioned files themselves (that together are the partitioned dataset).
+
+`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create RDDs for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[bucketed] or link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[non-bucketed] reads.
+
+[[toString]]
+`PartitionedFile` has the following *text representation* (i.e. `toString`).
+
+```
+path: [filePath], range: [start]-[end], partition values: [partitionValues]
+```
+
+[source, scala]
+----
+import org.apache.spark.sql.execution.datasources.PartitionedFile
+import org.apache.spark.sql.catalyst.InternalRow
+val partFile = PartitionedFile(InternalRow.empty, "fakePath0", 0, 10, Array("host0", "host1"))
+
+scala> println(partFile)
+path: fakePath0, range: 0-10, partition values: [empty row]
+----
+
+=== [[creating-instance]] Creating PartitionedFile Instance
+
+`PartitionedFile` takes the following when created:
+
+* [[partitionValues]] Partition column values to be appended to each row (as an link:spark-sql-InternalRow.adoc[internal row])
+* [[filePath]] Path of the file to read
+* [[start]] Beginning offset (in bytes)
+* [[length]] Number of bytes to read (aka `length`)
+* [[locations]] Locality information as a list of nodes that have the data (aka `locations`). Empty by default.

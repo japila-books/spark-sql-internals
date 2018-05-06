@@ -4,6 +4,20 @@
 
 `VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues] (when link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] property is on and the result schema uses link:spark-sql-DataType.adoc#AtomicType[AtomicType] data types only).
 
+[NOTE]
+====
+link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0
+
+val isParquetVectorizedReaderEnabled = spark.conf.get("spark.sql.parquet.enableVectorizedReader").toBoolean
+assert(isParquetVectorizedReaderEnabled, "spark.sql.parquet.enableVectorizedReader should be enabled by default")
+----
+====
+
 [[internal-registries]]
 .VectorizedParquetRecordReader's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]

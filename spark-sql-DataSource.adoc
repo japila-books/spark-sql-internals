@@ -113,9 +113,7 @@ For link:spark-sql-FileFormat.adoc[FileFormat] data sources, `write` takes all `
 
 NOTE: `write` uses Hadoop's https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/Path.html[Path] to access the https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html[FileSystem] and calculate the qualified output path.
 
-`write` does `PartitioningUtils.validatePartitionColumn`.
-
-CAUTION: FIXME What is `PartitioningUtils.validatePartitionColumn` for?
+`write` requests `PartitioningUtils` to link:spark-sql-PartitioningUtils.adoc#validatePartitionColumn[validatePartitionColumn].
 
 When appending to a table, ...FIXME
 

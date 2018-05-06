@@ -512,7 +512,8 @@
 .. link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]
 .. link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
 
-. link:spark-sql-PartitionedFile.adoc[PartitionedFile]
+. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- Part of Single File]
+. link:spark-sql-PartitioningUtils.adoc[PartitioningUtils]
 
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
