@@ -243,6 +243,18 @@ Acceptable values:
 * `hive`
 * `native`
 
+| [[spark.sql.parquet.binaryAsString]] `spark.sql.parquet.binaryAsString`
+| `false`
+| Some other Parquet-producing systems, in particular Impala and older versions of Spark SQL, do not differentiate between binary data and strings when writing out the Parquet schema. This flag tells Spark SQL to interpret binary data as a string to provide compatibility with these systems.
+
+Use link:spark-sql-SQLConf.adoc#isParquetBinaryAsString[SQLConf.isParquetBinaryAsString] method to access the current value.
+
+| [[spark.sql.parquet.int96AsTimestamp]] `spark.sql.parquet.int96AsTimestamp`
+| `true`
+| Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
+
+Use link:spark-sql-SQLConf.adoc#isParquetINT96AsTimestamp[SQLConf.isParquetINT96AsTimestamp] method to access the current value.
+
 | [[spark.sql.parquet.enableVectorizedReader]] `spark.sql.parquet.enableVectorizedReader`
 | `true`
 | Enables link:spark-sql-vectorized-parquet-decoding.adoc[vectorized parquet decoding].

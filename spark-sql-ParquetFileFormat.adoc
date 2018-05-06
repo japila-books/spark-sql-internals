@@ -65,7 +65,18 @@ NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFo
 
 `inferSchema`...FIXME
 
-=== [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]]
+----
+
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+
+`vectorTypes`...FIXME
+
+=== [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
 [source, scala]
 ----
@@ -79,17 +90,36 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
+NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to build a data reader with the partition column values appended.
 
-`buildReaderWithPartitionValues`...FIXME
+`buildReaderWithPartitionValues` sets the <<options, configuration options>> in the input `hadoopConf`.
 
-=== [[vectorTypes]] `vectorTypes` Method
+[[options]]
+.Configuration Options
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Value
 
-[source, scala]
-----
-vectorTypes: Option[Seq[String]]
-----
+| `parquet.read.support.class`
+| `org.apache.spark.sql.execution.datasources.parquet.ParquetReadSupport`
 
-NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+| `org.apache.spark.sql.parquet.row.requested_schema`
+| link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
 
-`vectorTypes`...FIXME
+| `org.apache.spark.sql.parquet.row.attributes`
+| link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
+
+| `spark.sql.session.timeZone`
+| link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
+
+| `spark.sql.parquet.binaryAsString`
+| link:spark-sql-properties.adoc#spark.sql.parquet.binaryAsString[spark.sql.parquet.binaryAsString]
+
+| `spark.sql.parquet.int96AsTimestamp`
+| link:spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp[spark.sql.parquet.int96AsTimestamp]
+|===
+
+`buildReaderWithPartitionValues` requests `ParquetWriteSupport` to `setSchema`.
+
+CAUTION: FIXME Finish me

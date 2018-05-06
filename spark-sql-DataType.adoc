@@ -132,7 +132,7 @@ mapType: org.apache.spark.sql.types.MapType = MapType(StringType,LongType,true)
 
 Any type in Spark SQL follows the `DataType` contract which means that the types define the following methods:
 
-* `json` and `prettyJson` to build JSON representations of a data type
+* [[json]] `json` and `prettyJson` to build JSON representations of a data type
 * `defaultSize` to know the default size of values of a type
 * `simpleString` and `catalogString` to build user-friendly string representations (with the latter for external catalogs)
 * `sql` to build SQL representation

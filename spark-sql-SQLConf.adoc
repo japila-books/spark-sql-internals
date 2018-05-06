@@ -152,6 +152,14 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
 | Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
 
+| [[isParquetBinaryAsString]] `isParquetBinaryAsString`
+| link:spark-sql-properties.adoc#spark.sql.parquet.binaryAsString[spark.sql.parquet.binaryAsString]
+|
+
+| [[isParquetINT96AsTimestamp]] `isParquetINT96AsTimestamp`
+| link:spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp[spark.sql.parquet.int96AsTimestamp]
+|
+
 | [[numShufflePartitions]] `numShufflePartitions`
 | link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
 a|
