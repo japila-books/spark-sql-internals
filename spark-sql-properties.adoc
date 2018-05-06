@@ -243,6 +243,12 @@ Acceptable values:
 * `hive`
 * `native`
 
+| [[spark.sql.parquet.enableVectorizedReader]] `spark.sql.parquet.enableVectorizedReader`
+| `true`
+| Enables link:spark-sql-vectorized-parquet-decoding.adoc[vectorized parquet decoding].
+
+Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderEnabled[SQLConf.parquetVectorizedReaderEnabled] method to access the current value.
+
 | [[spark.sql.parquet.filterPushdown]] `spark.sql.parquet.filterPushdown`
 | `true`
 | Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate push-down optimization] for data sources using parquet file format

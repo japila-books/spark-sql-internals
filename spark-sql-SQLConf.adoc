@@ -182,6 +182,14 @@ a| Used when:
 
 * `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
 
+| [[parquetVectorizedReaderEnabled]] `parquetVectorizedReaderEnabled`
+| link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader]
+a| Used when:
+
+* `FileSourceScanExec` is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#needsUnsafeRowConversion[needsUnsafeRowConversion] flag
+
+* `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+
 | [[preferSortMergeJoin]] `preferSortMergeJoin`
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
 | Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.

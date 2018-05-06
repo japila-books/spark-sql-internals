@@ -1,0 +1,34 @@
+== [[ColumnarBatch]] ColumnarBatch
+
+`ColumnarBatch` is...FIXME
+
+`ColumnarBatch` is <<creating-instance, created>> when:
+
+* `InMemoryTableScanExec` is requested to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
+
+* `VectorizedParquetRecordReader` is requested to link:spark-sql-VectorizedParquetRecordReader.adoc#initBatch[initBatch]
+
+* `OrcColumnarBatchReader` is requested to `initBatch`
+
+* `ColumnVectorUtils` is requested to `toBatch`
+
+* `ArrowPythonRunner` is requested for a `Iterator[ColumnarBatch]` (i.e. `newReaderIterator`)
+
+* `ArrowConverters` is requested for a `ArrowRowIterator` (i.e. `fromPayloadIterator`)
+
+NOTE: `ColumnarBatch` is an `Evolving` contract that is meant to evolve towards becoming stable APIs, but are not stable APIs yet and can change from one feature release to another release.
+
+[[creating-instance]]
+[[columns]]
+`ColumnarBatch` takes an array of `ColumnVectors` when created. `ColumnarBatch` initializes the internal <<row, MutableColumnarRow>>.
+
+[[internal-registries]]
+.ColumnarBatch's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[row]] `row`
+| `MutableColumnarRow`
+|===

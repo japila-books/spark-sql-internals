@@ -1,0 +1,5 @@
+== Vectorized Parquet Decoding
+
+*Vectorized Parquet Decoding* is...FIXME
+
+* See link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader] and the property

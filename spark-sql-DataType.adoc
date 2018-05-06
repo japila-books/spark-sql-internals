@@ -4,7 +4,7 @@
 
 `DataType` has two main type families:
 
-* <<AtomicType, Atomic Types>>
+* <<AtomicType, Atomic Types>> as an internal type to represent types that are not `null`, UDTs, arrays, structs, and maps
 * [[NumericType]] *Numeric Types* with <<FractionalType, fractional>> and <<IntegralType, integral>> types
 
 [[standard-types]]

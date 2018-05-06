@@ -20,6 +20,9 @@ spark.read.schema(schema).load("parquet-datasets")
 [[isSplitable]]
 `ParquetFileFormat` is splitable, i.e. FIXME
 
+[[supportBatch]]
+`ParquetFileFormat` uses link:spark-sql-FileFormat.adoc#supportBatch[supportBatch] flag to...FIXME
+
 [TIP]
 ====
 Enable `DEBUG` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat` logger to see what happens inside.
