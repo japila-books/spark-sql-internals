@@ -225,6 +225,7 @@
 . link:spark-sql-Expression-GetMapValue.adoc[GetMapValue]
 . link:spark-sql-Expression-GetStructField.adoc[GetStructField]
 . link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate]
+. link:spark-sql-Expression-In.adoc[In]
 . link:spark-sql-Expression-Inline.adoc[Inline]
 . link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
