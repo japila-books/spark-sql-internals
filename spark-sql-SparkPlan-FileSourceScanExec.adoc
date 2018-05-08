@@ -98,7 +98,7 @@ NOTE: `inputRDD` is a Scala lazy value which is computed once when it is first a
 
 ---
 
-Internally, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
+Internally, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
 
 In case <<relation, HadoopFsRelation>> has link:spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec[bucketing specification] defined and link:spark-sql-bucketing.adoc#spark.sql.sources.bucketing.enabled[bucketing support is enabled], `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
 

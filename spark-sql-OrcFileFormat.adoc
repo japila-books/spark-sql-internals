@@ -16,6 +16,6 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to...FIXME.
+NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[FileFormat Contract] to build a data reader with partition column values appended.
 
 `buildReaderWithPartitionValues`...FIXME

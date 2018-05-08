@@ -172,6 +172,10 @@ Used in:
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
 * link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
 
+| [[isParquetINT96TimestampConversion]] `isParquetINT96TimestampConversion`
+| link:spark-sql-properties.adoc#spark.sql.parquet.int96TimestampConversion[spark.sql.parquet.int96TimestampConversion]
+| Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
+
 | [[joinReorderEnabled]] `joinReorderEnabled`
 | link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled]
 | Used exclusively in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
@@ -186,9 +190,17 @@ a| Used when:
 
 * `InMemoryTableScanExec` is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
 
-* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-* `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+* `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+
+| [[parquetFilterPushDown]] `parquetFilterPushDown`
+| link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown]
+| Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
+
+| [[parquetRecordFilterEnabled]] `parquetRecordFilterEnabled`
+| link:spark-sql-properties.adoc#spark.sql.parquet.recordLevelFilter.enabled[spark.sql.parquet.recordLevelFilter.enabled]
+| Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
 
 | [[parquetVectorizedReaderEnabled]] `parquetVectorizedReaderEnabled`
 | link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader]
@@ -196,7 +208,7 @@ a| Used when:
 
 * `FileSourceScanExec` is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#needsUnsafeRowConversion[needsUnsafeRowConversion] flag
 
-* `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+* `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
 | [[preferSortMergeJoin]] `preferSortMergeJoin`
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]

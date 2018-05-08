@@ -1,0 +1,22 @@
+== Vectorized Parquet Reader
+
+*Vectorized Parquet Reader* (aka *Vectorized Parquet Decoding*) allows for reading files in parquet format in batch, i.e. rows are decoded in batches that aims at improving memory locality and cache utilization.
+
+Quoting https://issues.apache.org/jira/browse/SPARK-12854[SPARK-12854 Vectorize Parquet reader]:
+
+> The parquet encodings are largely designed to decode faster in batches, column by column. This can speed up the decoding considerably.
+
+link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader] is responsible for vectorized decoding and is used only when <<spark.sql.parquet.enableVectorizedReader, spark.sql.parquet.enableVectorizedReader>> configuration property is enabled and the result schema uses link:spark-sql-DataType.adoc#AtomicType[AtomicType] data types only.
+
+=== [[spark.sql.parquet.enableVectorizedReader]] spark.sql.parquet.enableVectorizedReader Configuration Property
+
+link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
+
+[source, scala]
+----
+scala> spark.version
+res0: String = 2.3.0
+
+val isParquetVectorizedReaderEnabled = spark.conf.get("spark.sql.parquet.enableVectorizedReader").toBoolean
+assert(isParquetVectorizedReaderEnabled, "spark.sql.parquet.enableVectorizedReader should be enabled by default")
+----

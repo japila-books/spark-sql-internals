@@ -13,7 +13,11 @@ import org.apache.spark.sql.types.StructType
 val schema = StructType($"id".int :: Nil)
 
 spark.read.schema(schema).format("parquet").load("parquet-datasets")
+
+// Implicitly does format("parquet").load
 spark.read.schema(schema).parquet("parquet-datasets")
+
+// parquet is the default data source format
 spark.read.schema(schema).load("parquet-datasets")
 ----
 
@@ -122,4 +126,97 @@ NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc
 
 `buildReaderWithPartitionValues` requests `ParquetWriteSupport` to `setSchema`.
 
-CAUTION: FIXME Finish me
+`buildReaderWithPartitionValues` tries to push filters down to create a Parquet `FilterPredicate` (aka `pushed`).
+
+NOTE: Filter predicate push-down optimization for parquet data sources uses link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property which is enabled by default.
+
+With link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the table). Otherwise, the Parquet filter predicate is not specified.
+
+[[ParquetFilters]][[createFilter]]
+.Spark Data Source Filters to Parquet Filter Predicates Conversions (ParquetFilters.createFilter)
+[cols="1,2",options="header",width="100%"]
+|===
+| Data Source Filter
+| Parquet FilterPredicate
+
+| [[IsNull]] `IsNull`
+|
+
+| [[IsNotNull]] `IsNotNull`
+|
+
+| [[EqualTo]] `EqualTo`
+|
+
+| [[NotEqualTo]] `Not EqualTo`
+|
+
+| [[EqualNullSafe]] `EqualNullSafe`
+|
+
+| [[NotEqualNullSafe]] `Not EqualNullSafe`
+|
+
+| [[LessThan]] `LessThan`
+|
+
+| [[LessThanOrEqual]] `LessThanOrEqual`
+|
+
+| [[GreaterThan]] `GreaterThan`
+|
+
+| [[GreaterThanOrEqual]] `GreaterThanOrEqual`
+|
+
+| [[And]] `And`
+|
+
+| [[Or]] `Or`
+|
+
+| [[Not]] `Not`
+|
+|===
+
+`buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
+
+In the end, `buildReaderWithPartitionValues` gives a function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and does the following:
+
+. Creates a Hadoop `FileSplit` for the input `PartitionedFile`
+
+. Creates a Parquet `ParquetInputSplit` for the Hadoop `FileSplit` created
+
+. Gets the broadcast Hadoop `Configuration`
+
+. Creates a flag that says whether to apply timezone conversions to int96 timestamps or not (aka `convertTz`)
+
+. Creates a Hadoop `TaskAttemptContextImpl` (with the broadcast Hadoop `Configuration` and a Hadoop `TaskAttemptID` for a map task)
+
+. Sets the Parquet `FilterPredicate` (only when link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property is enabled and it is by default)
+
+The function then branches off on whether link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] is enabled or not.
+
+NOTE: link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] is enabled by default.
+
+With link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] enabled, the function does the following:
+
+. Creates a link:spark-sql-VectorizedParquetRecordReader.adoc#creating-instance[VectorizedParquetRecordReader] and a `RecordReaderIterator`
+
+. Requests `VectorizedParquetRecordReader` to link:spark-sql-VectorizedParquetRecordReader.adoc#initialize[initialize] (with the Parquet `ParquetInputSplit` and the Hadoop `TaskAttemptContextImpl`)
+
+. Prints out the following DEBUG message to the logs:
++
+```
+Appending [partitionSchema] [partitionValues]
+```
+
+. Requests `VectorizedParquetRecordReader` to link:spark-sql-VectorizedParquetRecordReader.adoc#initBatch[initBatch]
+
+. (only with <<supportBatch, supportBatch>> enabled) Requests `VectorizedParquetRecordReader` to link:spark-sql-VectorizedParquetRecordReader.adoc#enableReturningBatches[enableReturningBatches]
+
+. In the end, the function gives the `RecordReaderIterator` (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
+
+With link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] disabled, the function does the following:
+
+. FIXME (since Parquet vectorized reader is enabled by default it's of less interest currently)

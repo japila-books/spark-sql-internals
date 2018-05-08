@@ -39,11 +39,11 @@ generate(
 
 1. `ExpressionEncoder` is requested to link:spark-sql-ExpressionEncoder.adoc#extractProjection[initialize the internal UnsafeProjection]
 
-1. `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+1. `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-1. `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+1. `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-1. `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+1. `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
 1. `GroupedIterator` is requested for `keyProjection`
 

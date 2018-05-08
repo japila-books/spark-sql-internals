@@ -114,7 +114,7 @@
 ... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
-. link:spark-sql-vectorized-parquet-decoding.adoc[Vectorized Parquet Decoding]
+. link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
 
 == Extending Spark SQL

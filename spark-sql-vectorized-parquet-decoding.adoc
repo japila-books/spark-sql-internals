@@ -1,9 +1,0 @@
-== Vectorized Parquet Decoding
-
-*Vectorized Parquet Reader* (aka *Vectorized Parquet Decoding*) allows for Parquet decoding in batch (that is supposed to be much more efficient).
-
-According to https://issues.apache.org/jira/browse/SPARK-12854[SPARK-12854 Vectorize Parquet reader]:
-
-> The parquet encodings are largely designed to decode faster in batches, column by column. This can speed up the decoding considerably.
-
-* See link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader] and the property

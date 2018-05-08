@@ -257,13 +257,29 @@ Use link:spark-sql-SQLConf.adoc#isParquetINT96AsTimestamp[SQLConf.isParquetINT96
 
 | [[spark.sql.parquet.enableVectorizedReader]] `spark.sql.parquet.enableVectorizedReader`
 | `true`
-| Enables link:spark-sql-vectorized-parquet-decoding.adoc[vectorized parquet decoding].
+| Enables link:spark-sql-vectorized-parquet-reader.adoc[vectorized parquet decoding].
 
 Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderEnabled[SQLConf.parquetVectorizedReaderEnabled] method to access the current value.
 
 | [[spark.sql.parquet.filterPushdown]] `spark.sql.parquet.filterPushdown`
 | `true`
-| Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate push-down optimization] for data sources using parquet file format
+| Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate push-down optimization] for data sources using link:spark-sql-ParquetFileFormat.adoc[parquet] file format
+
+Use link:spark-sql-SQLConf.adoc#parquetFilterPushDown[SQLConf.parquetFilterPushDown] method to access the current value.
+
+| [[spark.sql.parquet.int96TimestampConversion]] `spark.sql.parquet.int96TimestampConversion`
+| `false`
+| Controls whether timestamp adjustments should be applied to INT96 data when converting to timestamps, for data written by Impala.  This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
+
+Use link:spark-sql-SQLConf.adoc#isParquetINT96TimestampConversion[SQLConf.isParquetINT96TimestampConversion] method to access the current value.
+
+| [[spark.sql.parquet.recordLevelFilter.enabled]] `spark.sql.parquet.recordLevelFilter.enabled`
+| `false`
+a| Enables Parquet's native record-level filtering using the pushed down filters.
+
+NOTE: This configuration only has an effect when <<spark.sql.parquet.filterPushdown, spark.sql.parquet.filterPushdown>> is enabled (and it is by default).
+
+Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecordFilterEnabled] method to access the current value.
 
 | [[spark.sql.pivotMaxValues]] `spark.sql.pivotMaxValues`
 | `10000`
