@@ -1,9 +1,11 @@
 == [[ParquetFileFormat]] ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is a link:spark-sql-FileFormat.adoc[FileFormat] for *parquet* data source format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and convert them to Spark SQL rows).
+`ParquetFileFormat` is a link:spark-sql-FileFormat.adoc[FileFormat] for data sources in *parquet* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and convert them to Spark SQL rows).
 
 NOTE: `parquet` is the link:spark-sql-DataFrameReader.adoc#source[default data source format] in Spark SQL.
+
+NOTE: http://parquet.apache.org/[Apache Parquet] is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 
 [source, scala]
 ----
@@ -132,51 +134,54 @@ NOTE: Filter predicate push-down optimization for parquet data sources uses link
 
 With link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the table). Otherwise, the Parquet filter predicate is not specified.
 
-[[ParquetFilters]][[createFilter]]
-.Spark Data Source Filters to Parquet Filter Predicates Conversions (ParquetFilters.createFilter)
+NOTE: `buildReaderWithPartitionValues` creates filter predicates for the following types: link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType], link:spark-sql-DataType.adoc#StringType[StringType], link:spark-sql-DataType.adoc#BinaryType[BinaryType].
+
+[[ParquetFilters]]
+[[createFilter]]
+.Spark Data Source Filters to Parquet Filter Predicates Conversions (aka ParquetFilters.createFilter)
 [cols="1,2",options="header",width="100%"]
 |===
 | Data Source Filter
 | Parquet FilterPredicate
 
 | [[IsNull]] `IsNull`
-|
+| `FilterApi.eq`
 
 | [[IsNotNull]] `IsNotNull`
-|
+| `FilterApi.notEq`
 
 | [[EqualTo]] `EqualTo`
-|
+| `FilterApi.eq`
 
 | [[NotEqualTo]] `Not EqualTo`
-|
+| `FilterApi.notEq`
 
 | [[EqualNullSafe]] `EqualNullSafe`
-|
+| `FilterApi.eq`
 
 | [[NotEqualNullSafe]] `Not EqualNullSafe`
-|
+| `FilterApi.notEq`
 
 | [[LessThan]] `LessThan`
-|
+| `FilterApi.lt`
 
 | [[LessThanOrEqual]] `LessThanOrEqual`
-|
+| `FilterApi.ltEq`
 
 | [[GreaterThan]] `GreaterThan`
-|
+| `FilterApi.gt`
 
 | [[GreaterThanOrEqual]] `GreaterThanOrEqual`
-|
+| `FilterApi.gtEq`
 
 | [[And]] `And`
-|
+| `FilterApi.and`
 
 | [[Or]] `Or`
-|
+| `FilterApi.or`
 
 | [[Not]] `Not`
-|
+| `FilterApi.not`
 |===
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
