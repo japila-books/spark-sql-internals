@@ -116,6 +116,7 @@
 
 . link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
+.. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
 
 == Extending Spark SQL
 

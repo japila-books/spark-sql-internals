@@ -110,7 +110,7 @@ NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc
 | `parquet.read.support.class`
 | `org.apache.spark.sql.execution.datasources.parquet.ParquetReadSupport`
 
-| `org.apache.spark.sql.parquet.row.requested_schema`
+| [[org.apache.spark.sql.parquet.row.requested_schema]] `org.apache.spark.sql.parquet.row.requested_schema`
 | link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
 
 | `org.apache.spark.sql.parquet.row.attributes`
