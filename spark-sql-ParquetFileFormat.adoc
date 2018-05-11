@@ -27,7 +27,15 @@ spark.read.schema(schema).load("parquet-datasets")
 `ParquetFileFormat` is splitable, i.e. FIXME
 
 [[supportBatch]]
-`ParquetFileFormat` uses link:spark-sql-FileFormat.adoc#supportBatch[supportBatch] flag to...FIXME
+`ParquetFileFormat` link:spark-sql-FileFormat.adoc#supportBatch[supports batch] when all of the following hold:
+
+. link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled
+
+. link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] internal configuration property is enabled
+
+. The number of fields in the schema is at most link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
+
+. All the fields in the output schema are of link:spark-sql-DataType.adoc#AtomicType[AtomicType]
 
 [TIP]
 ====

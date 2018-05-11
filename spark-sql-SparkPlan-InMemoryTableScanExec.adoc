@@ -35,6 +35,14 @@ scala> q.explain
                      +- *Range (0, 10, step=1, splits=8)
 ----
 
+[[supportCodegen]]
+`InMemoryTableScanExec` uses <<supportsBatch, supportsBatch>> flag to control whether link:spark-sql-whole-stage-codegen.adoc[Java code generation] (aka _whole-stage codegen_) is supported or not, i.e. link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag.
+
+[source, scala]
+----
+// FIXME Example of InMemoryTableScanExec with supportCodegen flag on and off
+----
+
 [[metrics]]
 .InMemoryTableScanExec's Performance Metrics
 [cols="1,2,2",options="header",width="100%"]

@@ -5,9 +5,6 @@
 [[vectorTypes]]
 `ColumnarBatchScan` uses the `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
 
-[[supportsBatch]]
-`ColumnarBatchScan` uses the `supportsBatch` flag to enable returning rows as batch or not. `supportsBatch` is enabled (i.e. `true`) by default.
-
 [[needsUnsafeRowConversion]]
 `ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag for...FIXME `needsUnsafeRowConversion` is enabled (i.e. `true`) by default.
 
@@ -160,3 +157,25 @@ doProduce(ctx: CodegenContext): String
 NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
 
 `doProduce`...FIXME
+
+=== [[supportsBatch]] `supportsBatch` Method
+
+[source, scala]
+----
+supportsBatch: Boolean = true
+----
+
+`supportsBatch` flag controls whether a link:spark-sql-FileFormat.adoc[FileFormat] supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not. `supportsBatch` is enabled (i.e. `true`) by default.
+
+[NOTE]
+====
+`supportsBatch` is used when:
+
+* `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>>
+
+* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#metadata[metadata] (for *Batched* metadata) and to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute[execute]
+
+* `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportCodegen[supportCodegen] flag, link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#inputRDD[inputRDD] and to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute[execute]
+
+* `DataSourceV2ScanExec` physical operator is requested to link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute[execute]
+====

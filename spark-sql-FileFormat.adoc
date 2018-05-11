@@ -35,9 +35,6 @@ trait FileFormat {
 | Used exclusively when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
 |===
 
-[[supportBatch]]
-`supportBatch`...FIXME
-
 [[vectorTypes]]
 `vectorTypes`...FIXME
 
@@ -98,3 +95,23 @@ isSplitable(
 NOTE: link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] comes with `isSplitable` that uses a Hadoop compression codec to know whether a given file is splitable or not.
 
 NOTE: `isSplitable` is used exclusively when `FileSourceScanExec` is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD].
+
+=== [[supportBatch]] `supportBatch` Method
+
+[source, scala]
+----
+supportBatch(sparkSession: SparkSession, dataSchema: StructType): Boolean
+----
+
+`supportBatch` is always disabled, i.e. `false` (and is expected to be overriden by `FileFormats` that want to support link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding]).
+
+[NOTE]
+====
+`supportBatch` is used when:
+
+* `FileSourceScanExec` physical operator is link:spark-sql-SparkPlan-FileSourceScanExec.adoc#creating-instance[created] (and initializes link:spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch[supportsBatch] flag)
+
+* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+
+* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
+====

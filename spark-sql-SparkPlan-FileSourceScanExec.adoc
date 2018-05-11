@@ -114,9 +114,6 @@ NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#met
 
 | [[pushedDownFilters]] `pushedDownFilters`
 |
-
-| [[supportsBatch]] `supportsBatch`
-|
 |===
 
 [TIP]
@@ -277,3 +274,14 @@ scala> println(lineage)
 ====
 
 NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` is requested for <<inputRDD, inputRDD>> (for the very first time after which the result is cached).
+
+=== [[supportsBatch]] `supportsBatch` Property
+
+[source, scala]
+----
+supportsBatch: Boolean
+----
+
+NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether a link:spark-sql-FileFormat.adoc[FileFormat] supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
+
+`supportBatch` requests the <<relation, HadoopFsRelation>> for the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested for link:spark-sql-FileFormat.adoc#supportBatch[supportBatch] flag.

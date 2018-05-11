@@ -45,7 +45,7 @@ a| Memory mode of the <<columnarBatch, ColumnarBatch>>
 Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatch, initBatch>>.
 
 | [[missingColumns]] `missingColumns`
-| Boolean mask of columns that are missing (per index)
+| Bitmap of columns (per index) that are missing (or simply the ones that the reader should not read)
 |===
 
 === [[nextKeyValue]] `nextKeyValue` Method
