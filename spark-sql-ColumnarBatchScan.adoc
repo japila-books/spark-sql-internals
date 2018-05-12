@@ -147,17 +147,6 @@ produceRows(ctx: CodegenContext, input: String): String
 
 NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).
 
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
-
-`doProduce`...FIXME
-
 === [[supportsBatch]] `supportsBatch` Method
 
 [source, scala]
@@ -179,3 +168,94 @@ supportsBatch: Boolean = true
 
 * `DataSourceV2ScanExec` physical operator is requested to link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute[execute]
 ====
+
+=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
+
+[source, scala]
+----
+doProduce(ctx: CodegenContext): String
+----
+
+NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
+
+`doProduce` firstly requests the input `CodegenContext` to link:spark-sql-CodegenContext.adoc#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
+
+`doProduce` <<produceBatches, produceBatches>> when <<supportsBatch, supportsBatch>> is enabled or <<produceRows, produceRows>>.
+
+NOTE: <<supportsBatch, supportsBatch>> is enabled by default unless overriden by a physical operator.
+
+[source, scala]
+----
+// Example 1: ColumnarBatchScan with supportsBatch enabled
+// Let's create a query with a InMemoryTableScanExec physical operator that supports batch decoding
+// InMemoryTableScanExec is a ColumnarBatchScan
+val q = spark.range(4).cache
+val plan = q.queryExecution.executedPlan
+
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
+
+assert(inmemoryScan.supportsBatch)
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+import org.apache.spark.sql.execution.CodegenSupport
+val parent = plan.asInstanceOf[CodegenSupport]
+val code = inmemoryScan.produce(ctx, parent)
+scala> println(code)
+
+
+
+if (inmemorytablescan_mutableStateArray1[1] == null) {
+  inmemorytablescan_nextBatch1();
+}
+while (inmemorytablescan_mutableStateArray1[1] != null) {
+  int inmemorytablescan_numRows1 = inmemorytablescan_mutableStateArray1[1].numRows();
+  int inmemorytablescan_localEnd1 = inmemorytablescan_numRows1 - inmemorytablescan_batchIdx1;
+  for (int inmemorytablescan_localIdx1 = 0; inmemorytablescan_localIdx1 < inmemorytablescan_localEnd1; inmemorytablescan_localIdx1++) {
+    int inmemorytablescan_rowIdx1 = inmemorytablescan_batchIdx1 + inmemorytablescan_localIdx1;
+    long inmemorytablescan_value2 = inmemorytablescan_mutableStateArray2[1].getLong(inmemorytablescan_rowIdx1);
+inmemorytablescan_mutableStateArray5[1].write(0, inmemorytablescan_value2);
+append(inmemorytablescan_mutableStateArray3[1]);
+    if (shouldStop()) { inmemorytablescan_batchIdx1 = inmemorytablescan_rowIdx1 + 1; return; }
+  }
+  inmemorytablescan_batchIdx1 = inmemorytablescan_numRows1;
+  inmemorytablescan_mutableStateArray1[1] = null;
+  inmemorytablescan_nextBatch1();
+}
+((org.apache.spark.sql.execution.metric.SQLMetric) references[3] /* scanTime */).add(inmemorytablescan_scanTime1 / (1000 * 1000));
+inmemorytablescan_scanTime1 = 0;
+
+// Example 2: ColumnarBatchScan with supportsBatch disabled
+
+val q = Seq(Seq(1,2,3)).toDF("ids").cache
+val plan = q.queryExecution.executedPlan
+
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
+
+assert(inmemoryScan.supportsBatch == false)
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+import org.apache.spark.sql.execution.CodegenSupport
+val parent = plan.asInstanceOf[CodegenSupport]
+scala> val code = inmemoryScan.produce(ctx, parent)
+java.lang.UnsupportedOperationException
+  at org.apache.spark.sql.execution.CodegenSupport$class.doConsume(WholeStageCodegenExec.scala:315)
+  at org.apache.spark.sql.execution.columnar.InMemoryTableScanExec.doConsume(InMemoryTableScanExec.scala:33)
+  at org.apache.spark.sql.execution.CodegenSupport$class.constructDoConsumeFunction(WholeStageCodegenExec.scala:208)
+  at org.apache.spark.sql.execution.CodegenSupport$class.consume(WholeStageCodegenExec.scala:179)
+  at org.apache.spark.sql.execution.columnar.InMemoryTableScanExec.consume(InMemoryTableScanExec.scala:33)
+  at org.apache.spark.sql.execution.ColumnarBatchScan$class.produceRows(ColumnarBatchScan.scala:166)
+  at org.apache.spark.sql.execution.ColumnarBatchScan$class.doProduce(ColumnarBatchScan.scala:80)
+  at org.apache.spark.sql.execution.columnar.InMemoryTableScanExec.doProduce(InMemoryTableScanExec.scala:33)
+  at org.apache.spark.sql.execution.CodegenSupport$$anonfun$produce$1.apply(WholeStageCodegenExec.scala:88)
+  at org.apache.spark.sql.execution.CodegenSupport$$anonfun$produce$1.apply(WholeStageCodegenExec.scala:83)
+  at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)
+  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)
+  at org.apache.spark.sql.execution.CodegenSupport$class.produce(WholeStageCodegenExec.scala:83)
+  at org.apache.spark.sql.execution.columnar.InMemoryTableScanExec.produce(InMemoryTableScanExec.scala:33)
+  ... 49 elided
+----

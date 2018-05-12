@@ -174,3 +174,24 @@ For every equivalent expression set, `subexpressionElimination` does the followi
 1. Creates a `SubExprEliminationState` and adds it with every common expression in the equivalent expression set to <<subExprEliminationExprs, subExprEliminationExprs>>
 
 NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
+
+=== [[addMutableState]] Adding Mutable State -- `addMutableState` Method
+
+[source, scala]
+----
+addMutableState(
+  javaType: String,
+  variableName: String,
+  initFunc: String => String = _ => "",
+  forceInline: Boolean = false,
+  useFreshName: Boolean = true): String
+----
+
+`addMutableState`...FIXME
+
+[source, scala]
+----
+val input = ctx.addMutableState("scala.collection.Iterator", "input", v => s"$v = inputs[0];")
+----
+
+NOTE: `addMutableState` is used when...FIXME
