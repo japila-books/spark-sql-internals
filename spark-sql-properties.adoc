@@ -218,6 +218,12 @@ Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method 
 
 Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
 
+| [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] `spark.sql.inMemoryColumnarStorage.enableVectorizedReader`
+| `true`
+| Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for columnar caching.
+
+Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
+
 | `spark.sql.join.preferSortMergeJoin`
 | `true`
 | [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].

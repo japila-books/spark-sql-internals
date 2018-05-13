@@ -282,6 +282,6 @@ NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` is r
 supportsBatch: Boolean
 ----
 
-NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether a link:spark-sql-FileFormat.adoc[FileFormat] supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
+NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
 
 `supportBatch` requests the <<relation, HadoopFsRelation>> for the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested for link:spark-sql-FileFormat.adoc#supportBatch[supportBatch] flag.

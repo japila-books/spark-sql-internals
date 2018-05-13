@@ -36,11 +36,15 @@ scala> q.explain
 ----
 
 [[supportCodegen]]
-`InMemoryTableScanExec` uses <<supportsBatch, supportsBatch>> flag to control whether link:spark-sql-whole-stage-codegen.adoc[Java code generation] (aka _whole-stage codegen_) is supported or not, i.e. link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag.
+`InMemoryTableScanExec` uses <<supportsBatch, supportsBatch>> flag to control whether it should link:spark-sql-CodegenSupport.adoc#supportCodegen[support Java code generation] (aka _whole-stage codegen_) or not.
 
 [source, scala]
 ----
-// FIXME Example of InMemoryTableScanExec with supportCodegen flag on and off
+val q = spark.range(4).cache
+val plan = q.queryExecution.executedPlan
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
+assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
 ----
 
 [[metrics]]
@@ -116,3 +120,20 @@ NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes
 `vectorTypes` uses link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property to select the name of the column vector, i.e. `OnHeapColumnVector` or `OffHeapColumnVector` when the property is off or on, respectively.
 
 `vectorTypes` gives as many column vectors as the <<attributes, attribute expressions>>.
+
+=== [[supportsBatch]] `supportsBatch` Property
+
+[source, scala]
+----
+supportsBatch: Boolean
+----
+
+NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
+
+`supportsBatch` is enabled when all of the following holds:
+
+. link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader] configuration property is enabled
+
+. The link:spark-sql-catalyst-QueryPlan.adoc#schema[output schema] of the <<relation, InMemoryRelation>> uses primitive data types only, i.e. link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#ByteType[ByteType], link:spark-sql-DataType.adoc#ShortType[ShortType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType]
+
+. The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property

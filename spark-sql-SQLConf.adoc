@@ -97,6 +97,10 @@ Used when:
 | link:spark-sql-properties.adoc#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled]
 | Used when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] and to determine link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning[output partitioning] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering[output ordering]
 
+| [[cacheVectorizedReaderEnabled]] `cacheVectorizedReaderEnabled`
+| link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]
+| Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[supportsBatch] flag.
+
 | [[cboEnabled]] `cboEnabled`
 | link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled]
 a|
