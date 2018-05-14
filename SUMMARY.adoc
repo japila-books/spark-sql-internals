@@ -105,8 +105,6 @@
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Contract for Physical Operators with Java Code Generation]
 .. link:spark-sql-CodegenContext.adoc[CodegenContext]
-.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan -- Physical Operators With Vectorized Reader]
-.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
 .. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
 ... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
 ... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
@@ -115,6 +113,10 @@
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution]
+.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan -- Physical Operators With Vectorized Reader]
+.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
+.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
+
 . link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
 .. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]

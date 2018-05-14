@@ -1,3 +1,3 @@
-== [[DataSourceV2Relation]] DataSourceV2Relation
+== [[DataSourceV2Relation]] DataSourceV2Relation Leaf Logical Operator
 
 `DataSourceV2Relation` is...FIXME

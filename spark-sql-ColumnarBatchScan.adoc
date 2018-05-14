@@ -1,6 +1,8 @@
 == [[ColumnarBatchScan]] ColumnarBatchScan -- Physical Operators With Vectorized Reader
 
-`ColumnarBatchScan` is a custom link:spark-sql-CodegenSupport.adoc[Java code generation] for <<implementations, physical operators>> that want to <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
+`ColumnarBatchScan` is a custom link:spark-sql-CodegenSupport.adoc[Java code generation] for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
+
+`ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. link:spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch[FileSourceScanExec], link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[InMemoryTableScanExec] and link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch[DataSourceV2ScanExec] physical operators).
 
 [[vectorTypes]]
 `ColumnarBatchScan` uses the `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
