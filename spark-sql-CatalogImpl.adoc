@@ -200,3 +200,14 @@ For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatal
 If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to link:spark-sql-CacheManager.adoc#uncacheQuery[uncache] and link:spark-sql-CacheManager.adoc#cacheQuery[cache] the table `DataFrame` again.
 
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:spark-sql-SparkSession.adoc#sharedState[SharedState] that is used to access link:spark-sql-SharedState.adoc#cacheManager[CacheManager].
+
+=== [[refreshByPath]] `refreshByPath` Method
+
+[source, scala]
+----
+refreshByPath(resourcePath: String): Unit
+----
+
+NOTE: `refreshByPath` is part of link:spark-sql-Catalog.adoc#refreshByPath[Catalog Contract] to...FIXME.
+
+`refreshByPath`...FIXME

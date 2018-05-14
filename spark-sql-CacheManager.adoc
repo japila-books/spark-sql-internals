@@ -12,17 +12,6 @@ spark.sharedState.cacheManager
 
 NOTE: A Spark developer can use `CacheManager` to cache ``Dataset``s using link:spark-sql-caching.adoc#cache[cache] or link:spark-sql-caching.adoc#persist[persist] operators.
 
-=== [[useCachedData]] Using Cached Data -- `useCachedData` Method
-
-[source, scala]
-----
-useCachedData(plan: LogicalPlan): LogicalPlan
-----
-
-`useCachedData`...FIXME
-
-NOTE: `useCachedData` is used when...FIXME
-
 === [[cachedData]] Cached Queries -- `cachedData` Internal Registry
 
 `cachedData` is a collection of <<CachedData, CachedData>> with link:spark-sql-LogicalPlan.adoc[logical plans] and their cached link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] representation.
@@ -30,10 +19,6 @@ NOTE: `useCachedData` is used when...FIXME
 A new <<CachedData, CachedData>> is added when <<cacheQuery, a Dataset is cached>> and removed when a <<uncacheQuery, Dataset is uncached>> or when <<invalidateCachedPath, invalidating cache data with a resource path>>.
 
 `cachedData` is <<clearCache, cleared>> when...FIXME
-
-=== [[recacheByCondition]] `recacheByCondition` Method
-
-CAUTION: FIXME
 
 === [[invalidateCachedPath]] `invalidateCachedPath` Method
 
@@ -65,17 +50,25 @@ cacheQuery(
   storageLevel: StorageLevel = MEMORY_AND_DISK): Unit
 ----
 
-Internally, `cacheQuery` registers link:spark-sql-Dataset.adoc#logicalPlan[logical plan] of the input `query` in <<cachedData, cachedData>> internal registry of cached queries.
+`cacheQuery` adds the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] of the input `query` to the <<cachedData, cachedData>> internal registry of cached queries.
 
-While registering, `cacheQuery` creates a link:spark-sql-LogicalPlan-InMemoryRelation.adoc#apply[InMemoryRelation] with the following properties:
+Internally, `cacheQuery` firstly requests the input `query` for the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] and creates a link:spark-sql-LogicalPlan-InMemoryRelation.adoc#apply[InMemoryRelation] with the following properties:
 
 * link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed] (enabled by default)
+
 * link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize] (default: `10000`)
-* Input `storageLevel` link:spark-rdd-StorageLevel.adoc[storage level]
-* link:spark-sql-QueryExecution.adoc#executedPlan[Physical plan] ready for execution (after `planToCache` logical plan was link:spark-sql-SessionState.adoc#executePlan[executed])
+
+* Input `storageLevel` storage level
+
+* link:spark-sql-QueryExecution.adoc#executedPlan[Optimized physical query plan ready for execution] (after requesting `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute] the analyzed logical plan)
+
 * Input `tableName`
 
-If however the input `query` has already been cached, `cacheQuery` simply prints the following WARN message to the logs and exits:
+* link:spark-sql-LogicalPlanStats.adoc#stats[Statistics] of the analyzed query plan
+
+`cacheQuery` then creates a <<CachedData, CachedData>> (for the analyzed query plan and the `InMemoryRelation`) and adds it to the <<cachedData, cachedData>> internal registry.
+
+If the input `query` has already been cached, `cacheQuery` simply prints the following WARN message to the logs and exits (i.e. does nothing but printing out the WARN message):
 
 ```
 WARN CacheManager: Asked to cache already cached data.
@@ -85,7 +78,8 @@ WARN CacheManager: Asked to cache already cached data.
 ====
 `cacheQuery` is used when:
 
-* ``Dataset``'s link:spark-sql-caching.adoc#persist[persist] operator is executed
+* link:spark-sql-caching.adoc#persist[Dataset.persist] operator is used
+
 * `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#cacheTable[cache a table or view in-memory] or link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
 ====
 
@@ -98,8 +92,52 @@ clearCache(): Unit
 
 `clearCache` acquires a write lock and unpersists ``RDD[CachedBatch]``s of the queries in <<cachedData, cachedData>> before removing them altogether.
 
-NOTE: `clearCache` is executed when the link:spark-sql-Catalog.adoc#CatalogImpl[CatalogImpl] is requested to link:spark-sql-Catalog.adoc#contract[clearCache].
+NOTE: `clearCache` is used when the `CatalogImpl` is requested to link:spark-sql-Catalog.adoc#contract[clearCache].
 
 === [[CachedData]] CachedData
 
 CAUTION: FIXME
+
+=== [[recacheByCondition]] `recacheByCondition` Internal Method
+
+[source, scala]
+----
+recacheByCondition(spark: SparkSession, condition: LogicalPlan => Boolean): Unit
+----
+
+`recacheByCondition`...FIXME
+
+NOTE: `recacheByCondition` is used when `CacheManager` is requested to <<recacheByPlan, recacheByPlan>> or <<recacheByPath, recacheByPath>>.
+
+=== [[recacheByPlan]] `recacheByPlan` Method
+
+[source, scala]
+----
+recacheByPlan(spark: SparkSession, plan: LogicalPlan): Unit
+----
+
+`recacheByPlan`...FIXME
+
+NOTE: `recacheByPlan` is used exclusively when `InsertIntoDataSourceCommand` logical command is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed].
+
+=== [[recacheByPath]] `recacheByPath` Method
+
+[source, scala]
+----
+recacheByPath(spark: SparkSession, resourcePath: String): Unit
+----
+
+`recacheByPath`...FIXME
+
+NOTE: `recacheByPath` is used exclusively when `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshByPath[refreshByPath].
+
+=== [[useCachedData]] Replacing Logical Query Segments With Cached Query Plans -- `useCachedData` Method
+
+[source, scala]
+----
+useCachedData(plan: LogicalPlan): LogicalPlan
+----
+
+`useCachedData`...FIXME
+
+NOTE: `useCachedData` is used exclusively when `QueryExecution` is requested for a link:spark-sql-QueryExecution.adoc#withCachedData[cached logical query plan].

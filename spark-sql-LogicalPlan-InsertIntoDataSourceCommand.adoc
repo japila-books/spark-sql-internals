@@ -1,4 +1,4 @@
-== [[InsertIntoDataSourceCommand]] InsertIntoDataSourceCommand
+== [[InsertIntoDataSourceCommand]] InsertIntoDataSourceCommand Logical Command
 
 `InsertIntoDataSourceCommand` is...FIXME
 

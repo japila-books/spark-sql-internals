@@ -102,7 +102,7 @@
 
 == Notable Features
 
-. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)]
+. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
 .. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Contract for Physical Operators with Java Code Generation]
 .. link:spark-sql-CodegenContext.adoc[CodegenContext]
 .. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
@@ -112,7 +112,7 @@
 ... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
-. link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution]
+. link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
 .. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan -- Physical Operators With Vectorized Reader]
 .. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
 .. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]

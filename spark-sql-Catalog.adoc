@@ -87,4 +87,7 @@ Used for SQL's link:spark-sql-caching.adoc#cache-table[CACHE TABLE] and `AlterTa
 
 | [[listTables]] `listTables`
 | Gives a list of tables in the specified database
+
+| [[refreshByPath]] `refreshByPath`
+|
 |===

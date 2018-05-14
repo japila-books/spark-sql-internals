@@ -1,8 +1,18 @@
-== [[InMemoryRelation]] InMemoryRelation Leaf Logical Operator For Cached Query Plans
+== [[InMemoryRelation]] InMemoryRelation Leaf Logical Operator For Cached Physical Query Plans
 
-`InMemoryRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a cached <<child, physical query plan>>.
+`InMemoryRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a cached <<child, child>> physical query plan.
 
-`InMemoryRelation` is <<apply, created>> when `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset].
+`InMemoryRelation` is <<apply, created>> when:
+
+* link:spark-sql-caching.adoc#persist[Dataset.persist] operator is used (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache a structured query])
+
+* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#cacheTable[cache a table or view in-memory] or link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
+
+* `InsertIntoDataSourceCommand` logical command is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed] (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#recacheByPlan[recacheByPlan])
+
+* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshByPath[refreshByPath] (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#recacheByPath[recacheByPath])
+
+* `QueryExecution` is requested for a link:spark-sql-QueryExecution.adoc#withCachedData[cached logical query plan] (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans])
 
 [source, scala]
 ----
@@ -31,7 +41,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 04             +- *Range (0, 10, step=1, splits=8)
 ----
 
-`InMemoryRelation` is a `MultiInstanceRelation` which means that the same instance will appear multiple times in a physical plan.
+`InMemoryRelation` is a `MultiInstanceRelation` so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan.
 
 [source, scala]
 ----
@@ -69,7 +79,7 @@ res1: Boolean = true
 [[apply]]
 [NOTE]
 ====
-`InMemoryRelation` is <<creating-instance, created>> using `apply` factory method that has no <<output, output attributes>> (and uses `child` physical plan's `output`).
+`InMemoryRelation` is <<creating-instance, created>> using `apply` factory method that accepts no <<output, output attributes>> and so uses the `output` of the <<child, child>> physical plan instead.
 
 [source, scala]
 ----
@@ -99,10 +109,32 @@ NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#compute
 
 * [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[useCompression]] `useCompression` flag
-* [[batchSize]] batch size
+* [[batchSize]] Batch size
 * [[storageLevel]] Storage level
-* [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
-* [[tableName]] Optional table name
-* [[_cachedColumnBuffers]] `RDD[CachedBatch]`
-* [[sizeInBytesStats]] `LongAccumulator`
-* [[statsOfPlanToCache]] link:spark-sql-Statistics.adoc[Statistics]
+* [[child]] Child link:spark-sql-SparkPlan.adoc[physical query plan]
+* [[tableName]] Table name (if used)
+* [[_cachedColumnBuffers]] Cached column buffers (as `RDD[CachedBatch]`)
+* [[sizeInBytesStats]] Size in bytes statistic (as `LongAccumulator`)
+* [[statsOfPlanToCache]] link:spark-sql-Statistics.adoc[Statistics] of the <<child, child>> query plan
+
+=== [[withOutput]] `withOutput` Method
+
+[source, scala]
+----
+withOutput(newOutput: Seq[Attribute]): InMemoryRelation
+----
+
+`withOutput`...FIXME
+
+NOTE: `withOutput` is used exclusively when `CacheManager` is requested to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans].
+
+=== [[newInstance]] `newInstance` Method
+
+[source, scala]
+----
+newInstance(): this.type
+----
+
+NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInstance[MultiInstanceRelation Contract] to...FIXME.
+
+`newInstance`...FIXME

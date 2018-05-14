@@ -1,8 +1,10 @@
 == [[InMemoryTableScanExec]] InMemoryTableScanExec Physical Operator
 
-`InMemoryTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] that...FIXME
+`InMemoryTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] to represent an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator at execution time.
 
-`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] execution planning strategy finds `InMemoryRelation` logical operators.
+`InMemoryTableScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
+
+`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when `InMemoryScans` execution planning strategy is link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[executed] and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
 
 [source, scala]
 ----
@@ -35,9 +37,6 @@ scala> q.explain
                      +- *Range (0, 10, step=1, splits=8)
 ----
 
-[[supportCodegen]]
-`InMemoryTableScanExec` uses <<supportsBatch, supportsBatch>> flag to control whether it should link:spark-sql-CodegenSupport.adoc#supportCodegen[support Java code generation] (aka _whole-stage codegen_) or not.
-
 [source, scala]
 ----
 val q = spark.range(4).cache
@@ -62,6 +61,9 @@ assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
 
 .InMemoryTableScanExec in web UI (Details for Query)
 image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="center"]
+
+[[supportCodegen]]
+`InMemoryTableScanExec` link:spark-sql-CodegenSupport.adoc#supportCodegen[supports Java code generation] only if <<supportsBatch, batch decoding>> is enabled.
 
 `InMemoryTableScanExec` uses `spark.sql.inMemoryTableScanStatistics.enable` flag (default: disabled) to enable accumulators (that appears exclusively for testing purposes).
 
