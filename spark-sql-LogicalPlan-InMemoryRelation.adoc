@@ -92,6 +92,19 @@ apply(
 ----
 ====
 
+[[internal-registries]]
+.InMemoryRelation's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| [[partitionStatistics]] `partitionStatistics`
+| <<PartitionStatistics, PartitionStatistics>> for the <<output, output>> schema
+
+Used exclusively when `InMemoryTableScanExec` is <<creating-instance, created>> (and initializes link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#stats[stats] internal property).
+|===
+
 === [[computeStats]] Computing Statistics -- `computeStats` Method
 
 [source, scala]
@@ -138,3 +151,27 @@ newInstance(): this.type
 NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInstance[MultiInstanceRelation Contract] to...FIXME.
 
 `newInstance`...FIXME
+
+=== [[cachedColumnBuffers]] `cachedColumnBuffers` Method
+
+[source, scala]
+----
+cachedColumnBuffers: RDD[CachedBatch]
+----
+
+`cachedColumnBuffers`...FIXME
+
+NOTE: `cachedColumnBuffers` is used when...FIXME
+
+=== [[PartitionStatistics]] `PartitionStatistics`
+
+[source, scala]
+----
+PartitionStatistics(tableSchema: Seq[Attribute])
+----
+
+NOTE: `PartitionStatistics` is a `private[columnar]` class.
+
+`PartitionStatistics`...FIXME
+
+NOTE: `PartitionStatistics` is used exclusively when `InMemoryRelation` is <<creating-instance, created>> (and initializes <<partitionStatistics, partitionStatistics>>).

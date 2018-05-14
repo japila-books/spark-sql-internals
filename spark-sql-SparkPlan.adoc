@@ -456,3 +456,14 @@ executeCollectPublic(): Array[Row]
 `executeCollectPublic`...FIXME
 
 NOTE: `executeCollectPublic` is used when...FIXME
+
+=== [[newPredicate]] `newPredicate` Method
+
+[source, scala]
+----
+newPredicate(expression: Expression, inputSchema: Seq[Attribute]): GenPredicate
+----
+
+`newPredicate`...FIXME
+
+NOTE: `newPredicate` is used when...FIXME

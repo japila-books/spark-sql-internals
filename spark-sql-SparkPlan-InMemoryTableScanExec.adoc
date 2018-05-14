@@ -4,6 +4,8 @@
 
 `InMemoryTableScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
 
+`InMemoryTableScanExec` supports <<filteredCachedBatches, partition batch pruning>> (only when link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is enabled which is so by default).
+
 `InMemoryTableScanExec` is <<creating-instance, created>> exclusively when `InMemoryScans` execution planning strategy is link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[executed] and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
 
 [source, scala]
@@ -65,20 +67,23 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 [[supportCodegen]]
 `InMemoryTableScanExec` link:spark-sql-CodegenSupport.adoc#supportCodegen[supports Java code generation] only if <<supportsBatch, batch decoding>> is enabled.
 
+[[inputRDDs]]
+`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+
 `InMemoryTableScanExec` uses `spark.sql.inMemoryTableScanStatistics.enable` flag (default: disabled) to enable accumulators (that appears exclusively for testing purposes).
 
-=== [[inputRDD]] `inputRDD` Property
+[[internal-registries]]
+.InMemoryTableScanExec's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-[source, scala]
-----
-inputRDD: RDD[InternalRow]
-----
+| [[stats]] `stats`
+| link:spark-sql-LogicalPlan-InMemoryRelation.adoc#partitionStatistics[PartitionStatistics] of the <<relation, InMemoryRelation>>
 
-NOTE: `inputRDD` is a Scala lazy value which is computed once when it is first accessed and cached afterwards.
-
-`inputRDD`...FIXME
-
-NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, inputRDDs>> and to <<doExecute, execute>>.
+Used when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>, <<filteredCachedBatches, partition batch pruning>> and <<statsFor, statsFor>>.
+|===
 
 === [[doExecute]] Executing InMemoryTableScanExec -- `doExecute` Method
 
@@ -98,6 +103,8 @@ NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan C
 * [[attributes]] link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
 * [[predicates]] Predicate link:spark-sql-Expression.adoc[expressions]
 * [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
+
+`InMemoryTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
 
@@ -139,3 +146,65 @@ NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsB
 . The link:spark-sql-catalyst-QueryPlan.adoc#schema[output schema] of the <<relation, InMemoryRelation>> uses primitive data types only, i.e. link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#ByteType[ByteType], link:spark-sql-DataType.adoc#ShortType[ShortType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType]
 
 . The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
+
+=== [[inputRDD]] `inputRDD` Property
+
+[source, scala]
+----
+inputRDD: RDD[InternalRow]
+----
+
+NOTE: `inputRDD` is a Scala lazy value which is computed once when first accessed and cached afterwards.
+
+`inputRDD` firstly <<filteredCachedBatches, filteredCachedBatches>> (as a `RDD[CachedBatch]`).
+
+`inputRDD`...FIXME
+
+NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
+
+=== [[partitionFilters]] `partitionFilters` Property
+
+[source, scala]
+----
+partitionFilters: Seq[Expression]
+----
+
+NOTE: `partitionFilters` is a Scala lazy value which is computed once when first accessed and cached afterwards.
+
+`partitionFilters`...FIXME
+
+NOTE: `partitionFilters` is used when...FIXME
+
+=== [[filteredCachedBatches]] Applying Partition Batch Pruning (Creating MapPartitionsRDD of Filtered CachedBatches) -- `filteredCachedBatches` Internal Method
+
+[source, scala]
+----
+filteredCachedBatches(): RDD[CachedBatch]
+----
+
+`filteredCachedBatches` requests <<stats, PartitionStatistics>> for the output schema and <<relation, InMemoryRelation>> for link:spark-sql-LogicalPlan-InMemoryRelation.adoc#cachedColumnBuffers[cached column buffers] (as a `RDD[CachedBatch]`).
+
+`filteredCachedBatches` takes the cached column buffers (as a `RDD[CachedBatch]`) and transforms the RDD per partition with index (i.e. `RDD.mapPartitionsWithIndexInternal`) as follows:
+
+. Creates a partition filter as a new link:spark-sql-SparkPlan.adoc#newPredicate[GenPredicate] for the <<partitionFilters, partitionFilters>> expressions (concatenated together using `And` binary operator and the schema)
+
+. Requests the generated partition filter `Predicate` to `initialize`
+
+. Uses link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property to enable *partition batch pruning* and filtering out (skipping) `CachedBatches` in a partition based on column stats and the generated partition filter `Predicate`
+
+NOTE: If link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is disabled (i.e. `false`), `filteredCachedBatches` does nothing and simply passes all CachedBatch elements along.
+
+NOTE: link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is enabled by default.
+
+NOTE: `filteredCachedBatches` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, inputRDD>> internal property.
+
+=== [[statsFor]] `statsFor` Internal Method
+
+[source, scala]
+----
+statsFor(a: Attribute)
+----
+
+`statsFor`...FIXME
+
+NOTE: `statsFor` is used when...FIXME

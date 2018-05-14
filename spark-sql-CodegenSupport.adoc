@@ -67,9 +67,9 @@ Used exclusively when a physical operator is requested to <<produce, generate th
 | [[inputRDDs]] `inputRDDs`
 a| Input RDDs of a physical operator
 
-NOTE: Up to two input RDDs can be supported.
+NOTE: Up to two input RDDs are supported.
 
-Used exclusively when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
+Used exclusively when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
 |===
 
 === [[consume]] Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator -- `consume` Final Method

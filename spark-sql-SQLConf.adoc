@@ -156,6 +156,10 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
 | Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
 
+| [[inMemoryPartitionPruning]] `inMemoryPartitionPruning`
+| link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning]
+| Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#filteredCachedBatches[filtered cached column batches] (as a `RDD[CachedBatch]`).
+
 | [[isParquetBinaryAsString]] `isParquetBinaryAsString`
 | link:spark-sql-properties.adoc#spark.sql.parquet.binaryAsString[spark.sql.parquet.binaryAsString]
 |

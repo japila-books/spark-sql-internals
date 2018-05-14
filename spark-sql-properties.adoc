@@ -224,6 +224,12 @@ Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to
 
 Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
 
+| [[spark.sql.inMemoryColumnarStorage.partitionPruning]] `spark.sql.inMemoryColumnarStorage.partitionPruning`
+| `true`
+| *(internal)* Enables partition pruning for in-memory columnar tables
+
+Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartitionPruning] method to access the current value.
+
 | `spark.sql.join.preferSortMergeJoin`
 | `true`
 | [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
