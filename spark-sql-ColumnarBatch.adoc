@@ -29,6 +29,9 @@ NOTE: `ColumnarBatch` is an `Evolving` contract that is meant to evolve towards 
 | Name
 | Description
 
+| [[numRows]] `numRows`
+| Number of rows
+
 | [[row]] `row`
 | `MutableColumnarRow`
 |===

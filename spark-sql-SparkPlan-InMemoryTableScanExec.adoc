@@ -79,6 +79,11 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 | Name
 | Description
 
+| [[columnarBatchSchema]] `columnarBatchSchema`
+| link:spark-sql-StructType.adoc[Schema] of a columnar batch
+
+Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompressColumn, createAndDecompressColumn>>.
+
 | [[stats]] `stats`
 | link:spark-sql-LogicalPlan-InMemoryRelation.adoc#partitionStatistics[PartitionStatistics] of the <<relation, InMemoryRelation>>
 
@@ -105,17 +110,6 @@ NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan C
 * [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
 
 `InMemoryTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
-
-=== [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
-
-[source, scala]
-----
-createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
-----
-
-`createAndDecompressColumn`...FIXME
-
-NOTE: `createAndDecompressColumn` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, inputRDD>>.
 
 === [[vectorTypes]] `vectorTypes` Method
 
@@ -156,7 +150,13 @@ inputRDD: RDD[InternalRow]
 
 NOTE: `inputRDD` is a Scala lazy value which is computed once when first accessed and cached afterwards.
 
-`inputRDD` firstly <<filteredCachedBatches, filteredCachedBatches>> (as a `RDD[CachedBatch]`).
+`inputRDD` firstly <<filteredCachedBatches, applies partition batch pruning to cached column buffers>> (and creates a filtered cached batches as a `RDD[CachedBatch]`).
+
+With <<supportsBatch, supportsBatch>> enabled, `inputRDD` creates a `MapPartitionsRDD` (using `RDD.map`) by <<createAndDecompressColumn, createAndDecompressColumn>> on all elements.
+
+CAUTION: Show examples of <<supportsBatch, supportsBatch>> enabled and disabled
+
+CAUTION: FIXME Show the RDD lineage.
 
 `inputRDD`...FIXME
 
@@ -175,7 +175,7 @@ NOTE: `partitionFilters` is a Scala lazy value which is computed once when first
 
 NOTE: `partitionFilters` is used when...FIXME
 
-=== [[filteredCachedBatches]] Applying Partition Batch Pruning (Creating MapPartitionsRDD of Filtered CachedBatches) -- `filteredCachedBatches` Internal Method
+=== [[filteredCachedBatches]] Applying Partition Batch Pruning to Cached Column Buffers (Creating MapPartitionsRDD of Filtered CachedBatches) -- `filteredCachedBatches` Internal Method
 
 [source, scala]
 ----
@@ -208,3 +208,28 @@ statsFor(a: Attribute)
 `statsFor`...FIXME
 
 NOTE: `statsFor` is used when...FIXME
+
+=== [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
+
+[source, scala]
+----
+createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
+----
+
+`createAndDecompressColumn` takes the number of rows in the input `CachedBatch`.
+
+`createAndDecompressColumn` requests `OffHeapColumnVector` or `OnHeapColumnVector` to `allocateColumns` (with the number of rows and <<columnarBatchSchema, columnarBatchSchema>>) per the link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag, i.e. `true` or `false`, respectively.
+
+NOTE: link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag is disabled by default which means that `OnHeapColumnVector` is used.
+
+`createAndDecompressColumn` creates a link:spark-sql-ColumnarBatch.adoc#creating-instance[ColumnarBatch] for the allocated column vectors (as an array of `ColumnVector`).
+
+`createAndDecompressColumn` link:spark-sql-ColumnarBatch.adoc#numRows[sets the number of rows in the columnar batch].
+
+For every <<attributes, Attribute>> `createAndDecompressColumn` requests `ColumnAccessor` to `decompress` the column.
+
+`createAndDecompressColumn` registers a callback to be executed on a task completion that will close the `ColumnarBatch`.
+
+In the end, `createAndDecompressColumn` returns the `ColumnarBatch`.
+
+NOTE: `createAndDecompressColumn` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, input RDD of internal rows>>.
