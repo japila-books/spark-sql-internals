@@ -1,6 +1,6 @@
 == [[GenerateColumnAccessor]] GenerateColumnAccessor
 
-`GenerateColumnAccessor` is...FIXME
+`GenerateColumnAccessor` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] for...FIXME
 
 === [[create]] Creating ColumnarIterator -- `create` Method
 

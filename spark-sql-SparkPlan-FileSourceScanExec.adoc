@@ -30,7 +30,7 @@ val fileScanExec = sparkPlan.collect { case op: FileSourceScanExec => op }.head
 `FileSourceScanExec` supports `ColumnarBatchScan`.
 
 [[inputRDDs]]
-`FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD of internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
 [[metrics]]
 .FileSourceScanExec's Performance Metrics
@@ -94,7 +94,7 @@ a| Input `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `I
 
 Used when `FileSourceScanExec` is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
 
-NOTE: `inputRDD` is a Scala lazy value which is computed once when it is first accessed and cached afterwards.
+NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 ---
 

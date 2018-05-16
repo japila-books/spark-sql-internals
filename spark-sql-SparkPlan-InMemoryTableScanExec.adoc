@@ -68,9 +68,11 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 `InMemoryTableScanExec` link:spark-sql-CodegenSupport.adoc#supportCodegen[supports Java code generation] only if <<supportsBatch, batch decoding>> is enabled.
 
 [[inputRDDs]]
-`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD that generates internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD of internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
-`InMemoryTableScanExec` uses `spark.sql.inMemoryTableScanStatistics.enable` flag (default: disabled) to enable accumulators (that appears exclusively for testing purposes).
+[[enableAccumulatorsForTest]]
+[[spark.sql.inMemoryTableScanStatistics.enable]]
+`InMemoryTableScanExec` uses `spark.sql.inMemoryTableScanStatistics.enable` flag (default: `false`) to enable accumulators (that seems to be exclusively for testing purposes).
 
 [[internal-registries]]
 .InMemoryTableScanExec's Internal Properties (e.g. Registries, Counters and Flags)
@@ -141,27 +143,6 @@ NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsB
 
 . The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
 
-=== [[inputRDD]] `inputRDD` Property
-
-[source, scala]
-----
-inputRDD: RDD[InternalRow]
-----
-
-NOTE: `inputRDD` is a Scala lazy value which is computed once when first accessed and cached afterwards.
-
-`inputRDD` firstly <<filteredCachedBatches, applies partition batch pruning to cached column buffers>> (and creates a filtered cached batches as a `RDD[CachedBatch]`).
-
-With <<supportsBatch, supportsBatch>> enabled, `inputRDD` creates a `MapPartitionsRDD` (using `RDD.map`) by <<createAndDecompressColumn, createAndDecompressColumn>> on all elements.
-
-CAUTION: Show examples of <<supportsBatch, supportsBatch>> enabled and disabled
-
-CAUTION: FIXME Show the RDD lineage.
-
-`inputRDD`...FIXME
-
-NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
-
 === [[partitionFilters]] `partitionFilters` Property
 
 [source, scala]
@@ -169,7 +150,7 @@ NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inp
 partitionFilters: Seq[Expression]
 ----
 
-NOTE: `partitionFilters` is a Scala lazy value which is computed once when first accessed and cached afterwards.
+NOTE: `partitionFilters` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 `partitionFilters`...FIXME
 
@@ -233,3 +214,80 @@ For every <<attributes, Attribute>> `createAndDecompressColumn` requests `Column
 In the end, `createAndDecompressColumn` returns the `ColumnarBatch`.
 
 NOTE: `createAndDecompressColumn` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, input RDD of internal rows>>.
+
+=== [[inputRDD]] Creating Input RDD of Internal Rows -- `inputRDD` Internal Property
+
+[source, scala]
+----
+inputRDD: RDD[InternalRow]
+----
+
+NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`inputRDD` firstly <<filteredCachedBatches, applies partition batch pruning to cached column buffers>> (and creates a filtered cached batches as a `RDD[CachedBatch]`).
+
+With <<supportsBatch, supportsBatch>> flag on, `inputRDD` finishes with a new `MapPartitionsRDD` (using `RDD.map`) by <<createAndDecompressColumn, createAndDecompressColumn>> on all cached columnar batches.
+
+CAUTION: Show examples of <<supportsBatch, supportsBatch>> enabled and disabled
+
+[source, scala]
+----
+// Demo: A MapPartitionsRDD in the RDD lineage
+val q = spark.range(4).cache
+val plan = q.queryExecution.executedPlan
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
+
+// supportsBatch flag is on since the schema is a single column of longs
+assert(inmemoryScan.supportsBatch)
+
+val rdd = inmemoryScan.inputRDDs.head
+scala> rdd.toDebugString
+res2: String =
+(8) MapPartitionsRDD[5] at inputRDDs at <console>:27 []
+ |  MapPartitionsRDD[4] at inputRDDs at <console>:27 []
+ |  *(1) Range (0, 4, step=1, splits=8)
+ MapPartitionsRDD[3] at cache at <console>:23 []
+ |  MapPartitionsRDD[2] at cache at <console>:23 []
+ |  MapPartitionsRDD[1] at cache at <console>:23 []
+ |  ParallelCollectionRDD[0] at cache at <console>:23 []
+----
+
+With <<supportsBatch, supportsBatch>> flag off, `inputRDD` firstly <<filteredCachedBatches, applies partition batch pruning to cached column buffers>> (and creates a filtered cached batches as a `RDD[CachedBatch]`).
+
+NOTE: Indeed. `inputRDD` <<filteredCachedBatches, applies partition batch pruning to cached column buffers>> (and creates a filtered cached batches as a `RDD[CachedBatch]`) twice which seems unnecessary.
+
+In the end, `inputRDD` creates a new `MapPartitionsRDD` (using `RDD.map`) with a `ColumnarIterator` applied to all cached columnar batches that is created as follows:
+
+. For every `CachedBatch` in the partition iterator adds the total number of rows in the batch to <<numOutputRows, numOutputRows>> SQL metric
+
+. Requests `GenerateColumnAccessor` to link:spark-sql-CodeGenerator.adoc#generate[generate] the Java code for a `ColumnarIterator` to perform expression evaluation for the given <<attributes, column types>>.
+
+. Requests `ColumnarIterator` to initialize
+
+[source, scala]
+----
+// Demo: A MapPartitionsRDD in the RDD lineage (supportsBatch flag off)
+import java.sql.Date
+import java.time.LocalDate
+val q = Seq(Date.valueOf(LocalDate.now)).toDF("date").cache
+val plan = q.queryExecution.executedPlan
+
+import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
+val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
+
+// supportsBatch flag is off since the schema uses java.sql.Date
+assert(inmemoryScan.supportsBatch == false)
+
+val rdd = inmemoryScan.inputRDDs.head
+scala> rdd.toDebugString
+res2: String =
+(1) MapPartitionsRDD[12] at inputRDDs at <console>:28 []
+ |  MapPartitionsRDD[11] at inputRDDs at <console>:28 []
+ |  LocalTableScan [date#15]
+ MapPartitionsRDD[9] at cache at <console>:25 []
+ |  MapPartitionsRDD[8] at cache at <console>:25 []
+ |  ParallelCollectionRDD[7] at cache at <console>:25 []
+----
+
+NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
