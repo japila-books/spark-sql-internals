@@ -288,7 +288,7 @@ supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 
 NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[selects an aggregate physical operator given aggregate expressions].
 
-=== [[doExecute]] Executing HashAggregateExec -- `doExecute` Method
+=== [[doExecute]] Executing HashAggregateExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

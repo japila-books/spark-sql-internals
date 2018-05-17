@@ -2,7 +2,7 @@
 
 CAUTION: FIXME
 
-=== [[doExecute]] Executing SortAggregateExec -- `doExecute` Method
+=== [[doExecute]] Executing SortAggregateExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

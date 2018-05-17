@@ -316,7 +316,7 @@ NOTE: `codeGenAccessor` is used...FIXME
 * [[generatorOutput]] Generator's output schema
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical operator]
 
-=== [[doExecute]] Executing GenerateExec -- `doExecute` Method
+=== [[doExecute]] Executing GenerateExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

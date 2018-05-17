@@ -92,17 +92,6 @@ Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompr
 Used when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>, <<filteredCachedBatches, partition batch pruning>> and <<statsFor, statsFor>>.
 |===
 
-=== [[doExecute]] Executing InMemoryTableScanExec -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
-
-`doExecute`...FIXME
-
 === [[creating-instance]] Creating InMemoryTableScanExec Instance
 
 `InMemoryTableScanExec` takes the following when created:
@@ -291,3 +280,18 @@ res2: String =
 ----
 
 NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
+
+=== [[doExecute]] Executing InMemoryTableScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
+
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+
+`doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
+
+With <<supportsBatch, supportsBatch>> flag on, `doExecute` creates a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance[WholeStageCodegenExec] (with the `InMemoryTableScanExec` physical operator as the link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#child[child] and link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and requests it to link:spark-sql-SparkPlan.adoc#execute[execute].
+
+Otherwise, when <<supportsBatch, supportsBatch>> flag is off, `doExecute` simply gives the <<inputRDD, input RDD of internal rows>>.

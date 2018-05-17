@@ -124,7 +124,7 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 | link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
-=== [[doExecute]] Executing ShuffledHashJoinExec -- `doExecute` Method
+=== [[doExecute]] Executing ShuffledHashJoinExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

@@ -163,7 +163,7 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 
 `doProduce`...FIXME
 
-=== [[doExecute]] Executing SortMergeJoinExec -- `doExecute` Method
+=== [[doExecute]] Executing SortMergeJoinExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

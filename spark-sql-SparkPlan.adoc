@@ -78,9 +78,9 @@ a| "Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc
 final def execute(): RDD[InternalRow]
 ----
 
-Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD infrastructure).
+Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
-Internally, `execute` calls the physical operator's <<doExecute, doExecute>> after <<executeQuery, preparing the query for execution>>.
+Internally, `execute` requests the physical operator to <<doExecute, doExecute>> after <<executeQuery, preparing it for execution>>.
 
 NOTE: Executing `doExecute` in a named scope happens only after the operator is <<prepare, prepared for execution>> followed by <<waitForSubqueries, waiting for any subqueries to finish>>.
 

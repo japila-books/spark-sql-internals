@@ -140,7 +140,7 @@ NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes
 
 `vectorTypes`...FIXME
 
-=== [[doExecute]] Executing FileSourceScanExec -- `doExecute` Method
+=== [[doExecute]] Executing FileSourceScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

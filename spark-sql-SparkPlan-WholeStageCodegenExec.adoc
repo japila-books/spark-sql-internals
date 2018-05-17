@@ -9,7 +9,17 @@ NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other phys
 [[codegenStageId]]
 `WholeStageCodegenExec` takes a single `child` link:spark-sql-SparkPlan.adoc[physical plan] and *per-query codegen stage ID* when created.
 
-`WholeStageCodegenExec` is created exclusively when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule is executed with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark SQL property enabled.
+[source, scala]
+----
+import org.apache.spark.sql.execution.RangeExec
+import org.apache.spark.sql.catalyst.plans.logical.Range
+val rangeExec = RangeExec(Range(start = 0, end = 1, step = 1, numSlices = 1))
+
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val rdd = WholeStageCodegenExec(rangeExec)(codegenStageId = 0).execute()
+----
+
+`WholeStageCodegenExec` is created exclusively when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule is executed with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled.
 
 NOTE: link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
@@ -123,7 +133,7 @@ log4j.logger.org.apache.spark.sql.execution.WholeStageCodegenExec=DEBUG
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[doExecute]] Executing WholeStageCodegenExec -- `doExecute` Method
+=== [[doExecute]] Executing WholeStageCodegenExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

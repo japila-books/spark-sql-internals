@@ -64,7 +64,7 @@ When <<doExecute, doExecute>>, `ShuffleExchangeExec` computes a link:spark-sql-S
 | link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] that is cached after `ShuffleExchangeExec` has been <<doExecute, executed>>.
 |===
 
-=== [[doExecute]] Executing ShuffleExchangeExec (and Creating ShuffledRowRDD with Internal Binary Rows Using Optional ExchangeCoordinator) -- `doExecute` Method
+=== [[doExecute]] Executing ShuffleExchangeExec (Creating ShuffledRowRDD with Internal Binary Rows Using Optional ExchangeCoordinator) -- `doExecute` Method
 
 [source, scala]
 ----

@@ -23,7 +23,7 @@ NOTE: A link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relatio
 Used when...FIXME
 |===
 
-=== [[doExecute]] Executing DataSourceV2ScanExec -- `doExecute` Method
+=== [[doExecute]] Executing DataSourceV2ScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

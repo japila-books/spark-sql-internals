@@ -124,7 +124,7 @@ image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center
 |
 |===
 
-=== [[doExecute]] Executing LocalTableScanExec -- `doExecute` Method
+=== [[doExecute]] Executing LocalTableScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

@@ -85,7 +85,7 @@ scala> println(aggExec.aggregateExpressions.head.numberedTreeString)
 .ObjectHashAggregateExec in web UI (Details for Query)
 image::images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png[align="center"]
 
-=== [[doExecute]] Executing ObjectHashAggregateExec -- `doExecute` Method
+=== [[doExecute]] Executing ObjectHashAggregateExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----

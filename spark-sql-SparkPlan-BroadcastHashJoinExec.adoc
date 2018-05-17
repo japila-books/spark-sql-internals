@@ -97,7 +97,7 @@ Generated code:
 | link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] broadcast mode of link:spark-sql-HashJoin.adoc#buildKeys[build join keys]
 |===
 
-=== [[doExecute]] Executing BroadcastHashJoinExec -- `doExecute` Method
+=== [[doExecute]] Executing BroadcastHashJoinExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
 [source, scala]
 ----
