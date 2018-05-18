@@ -37,18 +37,18 @@ res1: Long = 251
 
 .4+^.^| *Collection functions*
 
-| link:spark-sql-collection-functions.adoc#array_contains[array_contains]
+| link:spark-sql-functions-collection.adoc#array_contains[array_contains]
 |
 
-| link:spark-sql-collection-functions.adoc#explode[explode]
+| link:spark-sql-functions-collection.adoc#explode[explode]
 |
 
-| link:spark-sql-collection-functions.adoc#explode_outer[explode_outer]
+| link:spark-sql-functions-collection.adoc#explode_outer[explode_outer]
 | *(new in 2.2.0)* Creates a new row for each element in the given array or map column.
 
 If the array/map is `null` or empty then `null` is produced.
 
-| link:spark-sql-collection-functions.adoc#from_json[from_json]
+| link:spark-sql-functions-collection.adoc#from_json[from_json]
 | Parses a column with a JSON string into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema.
 
 .5+^.^| *Date and time functions*

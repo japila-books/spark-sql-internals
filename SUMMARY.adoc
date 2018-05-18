@@ -42,7 +42,7 @@
 .. link:spark-sql-caching-webui-storage.adoc[User-Friendly Names Of Cached Queries in web UI's Storage Tab]
 
 . link:spark-sql-functions.adoc[Standard Functions -- functions Object]
-.. link:spark-sql-collection-functions.adoc[Collection Functions]
+.. link:spark-sql-functions-collection.adoc[Collection Functions]
 .. link:spark-sql-functions-datetime.adoc[Date and Time Functions]
 .. link:spark-sql-functions-windows.adoc[Window Aggregation Functions]
 
