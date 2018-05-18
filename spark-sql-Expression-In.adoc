@@ -5,7 +5,7 @@
 
 `In` is <<creating-instance, created>> when:
 
-* link:spark-sql-Column.adoc#isin[isin] column method is used
+* link:spark-sql-Column.adoc#isin[Column.isin] method is used
 
 * `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[withPredicate]
 
@@ -15,7 +15,7 @@
 
 * `InConversion` is requested to link:spark-sql-InConversion.adoc#coerceTypes[coerceTypes]
 
-`In` expression can be <<eval, evaluated>> to a boolean value of `true` or `false` and the special value `null`.
+`In` expression can be <<eval, evaluated>> to a boolean value (i.e. `true` or `false`) or the special value `null`.
 
 [source, scala]
 ----

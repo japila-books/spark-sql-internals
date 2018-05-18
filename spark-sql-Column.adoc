@@ -357,8 +357,30 @@ Internally, `isin` creates a `Column` with link:spark-sql-Expression-In.adoc[In]
 
 [source, scala]
 ----
-val c = $"ids" isin $"value"
+val ids = Seq((1, 2, 2), (2, 3, 1)).toDF("x", "y", "id")
+scala> ids.show
++---+---+---+
+|  x|  y| id|
++---+---+---+
+|  1|  2|  2|
+|  2|  3|  1|
++---+---+---+
 
-val ids = Seq((Seq(1,2,3), 2), (Seq(2,3), 1)).toDF("ids", "value")
-ids.filter(c) // FIXME
+val c = $"id" isin ($"x", $"y")
+val q = ids.filter(c)
+scala> q.show
++---+---+---+
+|  x|  y| id|
++---+---+---+
+|  1|  2|  2|
++---+---+---+
+
+// Note that isin accepts non-Column values
+val c = $"id" isin ("x", "y")
+val q = ids.filter(c)
+scala> q.show
++---+---+---+
+|  x|  y| id|
++---+---+---+
++---+---+---+
 ----
