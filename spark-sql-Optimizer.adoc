@@ -59,7 +59,7 @@ spark.sessionState.optimizer
 
 ^.^| Subquery
 ^.^| `Once`
-| OptimizeSubqueries
+| link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
 |
 
 .3+^.^| [[Replace-Operators]] Replace Operators

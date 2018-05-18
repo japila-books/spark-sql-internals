@@ -1,6 +1,21 @@
-== [[ResolveSubquery]] ResolveSubquery
+== [[ResolveSubquery]] ResolveSubquery Logical Resolution Rule
 
-`ResolveSubquery` is...FIXME
+`ResolveSubquery` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, FIXME>>.
+
+Technically, `ResolveSubquery` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+`ResolveSubquery` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+
+=== [[apply]] Applying ResolveSubquery to Logical Plan -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME
 
 === [[resolveSubQueries]] `resolveSubQueries` Internal Method
 
@@ -12,3 +27,17 @@ resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
 `resolveSubQueries`...FIXME
 
 NOTE: `resolveSubQueries` is used when...FIXME
+
+=== [[resolveSubQuery]] `resolveSubQuery` Internal Method
+
+[source, scala]
+----
+resolveSubQuery(
+  e: SubqueryExpression,
+  plans: Seq[LogicalPlan])(
+  f: (LogicalPlan, Seq[Expression]) => SubqueryExpression): SubqueryExpression
+----
+
+`resolveSubQuery`...FIXME
+
+NOTE: `resolveSubQuery` is used when...FIXME

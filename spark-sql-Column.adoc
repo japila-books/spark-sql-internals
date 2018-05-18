@@ -114,20 +114,6 @@ scala> $"id".as[Int]
 res1: org.apache.spark.sql.TypedColumn[Any,Int] = id
 ----
 
-=== [[isin]] `isin` Operator
-
-[source, scala]
-----
-isin(list: Any*): Column
-----
-
-`isin`...FIXME
-
-[source, scala]
-----
-// FIXME Example
-----
-
 === [[name]] `name` Operator
 
 [source, scala]
@@ -359,3 +345,20 @@ named: NamedExpression
 
 1. link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
 ====
+
+=== [[isin]] `isin` Operator
+
+[source, scala]
+----
+isin(list: Any*): Column
+----
+
+Internally, `isin` creates a `Column` with link:spark-sql-Expression-In.adoc[In] predicate expression.
+
+[source, scala]
+----
+val c = $"ids" isin $"value"
+
+val ids = Seq((Seq(1,2,3), 2), (Seq(2,3), 1)).toDF("ids", "value")
+ids.filter(c) // FIXME
+----

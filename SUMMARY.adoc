@@ -233,6 +233,7 @@
 . link:spark-sql-Expression-Inline.adoc[Inline]
 . link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
+. link:spark-sql-Expression-ListQuery.adoc[ListQuery]
 . link:spark-sql-Expression-Literal.adoc[Literal]
 . link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash]
 . link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
@@ -240,6 +241,7 @@
 . link:spark-sql-Expression-OffsetWindowFunction.adoc[OffsetWindowFunction]
 . link:spark-sql-Expression-PlanExpression.adoc[PlanExpression]
 . link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
+. link:spark-sql-Expression-ScalarSubquery.adoc[ScalarSubquery]
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF]
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
 . link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
@@ -378,6 +380,7 @@
 . link:spark-sql-ResolveSubquery.adoc[ResolveSubquery]
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule]
+. link:spark-sql-UpdateOuterReferences.adoc[UpdateOuterReferences]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
 === Logical Query Optimizations
@@ -392,6 +395,7 @@
 . link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 . link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 . link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
+. link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
 . link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
 . link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]

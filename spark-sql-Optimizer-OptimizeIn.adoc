@@ -1,3 +1,3 @@
 == [[OptimizeIn]] OptimizeIn Logical Query Optimization
 
-`OptimizeIn` is a link:spark-sql-Optimizer.adoc#OptimizeIn[logical query optimization] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-Optimizer.adoc[Optimizer] uses to...FIXME
+`OptimizeIn` is a link:spark-sql-Optimizer.adoc#OptimizeIn[logical query optimization rule] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-Optimizer.adoc[Optimizer] uses to...FIXME

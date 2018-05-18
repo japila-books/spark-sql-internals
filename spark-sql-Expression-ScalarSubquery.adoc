@@ -1,0 +1,6 @@
+== [[ScalarSubquery]] ScalarSubquery
+
+`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression].
+
+[[Unevaluable]]
+`ScalarSubquery` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.

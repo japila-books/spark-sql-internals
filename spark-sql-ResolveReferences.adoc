@@ -168,3 +168,27 @@ Invalid usage of '*' in expression '[exprName]'
 ```
 
 NOTE: `expandStarExpression` is used exclusively when `ResolveReferences` is requested to <<buildExpandedProjectList, expand Star expressions>> (in `Project` and `Aggregate` operators).
+
+=== [[dedupRight]] `dedupRight` Internal Method
+
+[source, scala]
+----
+dedupRight(left: LogicalPlan, right: LogicalPlan): LogicalPlan
+----
+
+`dedupRight`...FIXME
+
+NOTE: `dedupRight` is used when...FIXME
+
+=== [[dedupOuterReferencesInSubquery]] `dedupOuterReferencesInSubquery` Internal Method
+
+[source, scala]
+----
+dedupOuterReferencesInSubquery(
+  plan: LogicalPlan,
+  attrMap: AttributeMap[Attribute]): LogicalPlan
+----
+
+`dedupOuterReferencesInSubquery`...FIXME
+
+NOTE: `dedupOuterReferencesInSubquery` is used when...FIXME
