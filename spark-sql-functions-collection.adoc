@@ -273,7 +273,7 @@ Internally, `array_contains` creates a link:spark-sql-Column.adoc#apply[Column] 
 
 [source, scala]
 ----
-// Arguments must be an array followed by a value of same type as the array members
+// Arguments must be an array followed by a value of same type as the array elements
 import org.apache.spark.sql.functions.array_contains
 val c = array_contains(column = $"ids", value = 1)
 
@@ -298,4 +298,55 @@ val c = array_contains(column = $"ids", value = Array(1, 2))
 val e = c.expr
 scala> println(e.sql)
 array_contains(`ids`, [1,2])
+----
+
+TIP: Use SQL's `array_contains` to use values from columns for the `column` and `value` arguments.
+
+[source, scala]
+----
+val codes = Seq(
+  (Seq(1, 2, 3), 2),
+  (Seq(1), 1),
+  (Seq.empty[Int], 1),
+  (Seq(2, 4, 6), 0)).toDF("codes", "cd")
+scala> codes.show
++---------+---+
+|    codes| cd|
++---------+---+
+|[1, 2, 3]|  2|
+|      [1]|  1|
+|       []|  1|
+|[2, 4, 6]|  0|
++---------+---+
+
+val q = codes.where("array_contains(codes, cd)")
+scala> q.show
++---------+---+
+|    codes| cd|
++---------+---+
+|[1, 2, 3]|  2|
+|      [1]|  1|
++---------+---+
+
+// array_contains standard function with Columns does NOT work. Why?!
+// Asked this question on StackOverflow --> https://stackoverflow.com/q/50412939/1305344
+val q = codes.where(array_contains($"codes", $"cd"))
+scala> q.show
+java.lang.RuntimeException: Unsupported literal type class org.apache.spark.sql.ColumnName cd
+  at org.apache.spark.sql.catalyst.expressions.Literal$.apply(literals.scala:77)
+  at org.apache.spark.sql.functions$.array_contains(functions.scala:3046)
+  ... 50 elided
+
+// Thanks Russel for this excellent "workaround"
+// https://stackoverflow.com/a/50413766/1305344
+import org.apache.spark.sql.Column
+import org.apache.spark.sql.catalyst.expressions.ArrayContains
+val q = codes.where(new Column(ArrayContains($"codes".expr, $"cd".expr)))
+scala> q.show
++---------+---+
+|    codes| cd|
++---------+---+
+|[1, 2, 3]|  2|
+|      [1]|  1|
++---------+---+
 ----
