@@ -35,7 +35,10 @@ res1: Long = 251
 | <<grouping_id, grouping_id>>
 | Computes the level of grouping
 
-.3+^.^| *Collection functions*
+.4+^.^| *Collection functions*
+
+| link:spark-sql-collection-functions.adoc#array_contains[array_contains]
+|
 
 | link:spark-sql-collection-functions.adoc#explode[explode]
 |

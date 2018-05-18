@@ -1,4 +1,4 @@
-== Collection Functions
+== Standard Functions for Collections (Collections Functions)
 
 [[functions]]
 .(Subset of) Standard Functions for Handling Collections
@@ -6,6 +6,9 @@
 |===
 | Name
 | Description
+
+| <<array_contains, array_contains>>
+|
 
 | <<explode, explode>>
 |
@@ -256,3 +259,43 @@ scala> jsons.select(from_json($"json", schema, opts) as "ids").show
 ----
 
 NOTE: `from_json` corresponds to SQL's `from_json`.
+
+=== [[array_contains]] `array_contains` Function
+
+[source, scala]
+----
+array_contains(column: Column, value: Any): Column
+----
+
+`array_contains` creates a `Column` for a `column` argument as an link:spark-sql-DataType.adoc#ArrayType[array] and the `value` of same type as the type of the elements of the array.
+
+Internally, `array_contains` creates a link:spark-sql-Column.adoc#apply[Column] with a `ArrayContains` expression.
+
+[source, scala]
+----
+// Arguments must be an array followed by a value of same type as the array members
+import org.apache.spark.sql.functions.array_contains
+val c = array_contains(column = $"ids", value = 1)
+
+val ids = Seq(Seq(1,2,3), Seq(1), Seq(2,3)).toDF("ids")
+val q = ids.filter(c)
+scala> q.show
++---------+
+|      ids|
++---------+
+|[1, 2, 3]|
+|      [1]|
++---------+
+----
+
+[[prettyName]]
+`array_contains` corresponds to SQL's `array_contains`.
+
+[source, scala]
+----
+import org.apache.spark.sql.functions.array_contains
+val c = array_contains(column = $"ids", value = Array(1, 2))
+val e = c.expr
+scala> println(e.sql)
+array_contains(`ids`, [1,2])
+----
