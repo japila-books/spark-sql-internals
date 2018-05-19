@@ -202,6 +202,10 @@ a| Used when:
 
 * `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
+| [[optimizerInSetConversionThreshold]] `optimizerInSetConversionThreshold`
+| link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
+| Used exclusively when `OptimizeIn` logical query optimization is link:spark-sql-Optimizer-OptimizeIn.adoc#apply[applied to a logical plan] (and replaces an link:spark-sql-Expression-In.adoc[In] predicate expression with an link:spark-sql-Expression-InSet.adoc[InSet])
+
 | [[parquetFilterPushDown]] `parquetFilterPushDown`
 | link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown]
 | Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].

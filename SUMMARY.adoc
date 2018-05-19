@@ -231,6 +231,7 @@
 . link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate]
 . link:spark-sql-Expression-In.adoc[In]
 . link:spark-sql-Expression-Inline.adoc[Inline]
+. link:spark-sql-Expression-InSet.adoc[InSet]
 . link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
 . link:spark-sql-Expression-ListQuery.adoc[ListQuery]

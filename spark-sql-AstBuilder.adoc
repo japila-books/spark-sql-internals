@@ -140,6 +140,10 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ```
 ====
 
+| [[visitPredicated]] `visitPredicated`
+| `predicated`
+| link:spark-sql-Expression.adoc[Expression]
+
 | [[visitRelation]] `visitRelation`
 | `relation`
 | link:spark-sql-LogicalPlan.adoc[LogicalPlan] for a `FROM` clause.
@@ -273,7 +277,10 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 1. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
 
 | [[withPredicate]] `withPredicate`
-|
+a|
+* `NOT? IN '(' query ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression with link:spark-sql-Expression-ListQuery.adoc[ListQuery] expression
+
+* `NOT? IN '(' expression (',' expression)* ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression
 
 | [[withWindows]] `withWindows`
 a| link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).

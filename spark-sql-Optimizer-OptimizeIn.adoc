@@ -1,3 +1,47 @@
-== [[OptimizeIn]] OptimizeIn Logical Query Optimization
+== [[OptimizeIn]] OptimizeIn Logical Optimization
 
-`OptimizeIn` is a link:spark-sql-Optimizer.adoc#OptimizeIn[logical query optimization rule] (i.e. `Rule[LogicalPlan]`) that link:spark-sql-Optimizer.adoc[Optimizer] uses to...FIXME
+`OptimizeIn` is a *logical optimization* that...FIXME
+
+`OptimizeIn` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the base link:spark-sql-Optimizer.adoc#batches[logical optimizer].
+
+Technically, `OptimizeIn` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+[source, scala]
+----
+// Use Catalyst DSL to define a logical plan
+// HACK: Disable one SparkSession.implicits
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+import org.apache.spark.sql.catalyst.dsl.plans._
+
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+val rel = LocalRelation('a.int, 'b.int, 'c.int)
+
+import org.apache.spark.sql.catalyst.expressions.{In, Literal}
+val plan = rel
+  .where(In('a, Seq[Literal](1, 2, 3)))
+  .analyze
+scala> println(plan.numberedTreeString)
+00 Filter a#6 IN (1,2,3)
+01 +- LocalRelation <empty>, [a#6, b#7, c#8]
+
+import org.apache.spark.sql.catalyst.optimizer.OptimizeIn
+val optimizedPlan = OptimizeIn(plan)
+scala> println(optimizedPlan.numberedTreeString)
+00 Filter a#6 IN (1,2,3)
+01 +- LocalRelation <empty>, [a#6, b#7, c#8]
+----
+
+=== [[apply]] Applying OptimizeIn To Logical Plan (Executing OptimizeIn) -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical query plan].
+
+`apply`...FIXME

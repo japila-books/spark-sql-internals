@@ -242,6 +242,12 @@ Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin]
 
 Use link:spark-sql-SQLConf.adoc#limitScaleUpFactor[SQLConf.limitScaleUpFactor] method to access the current value.
 
+| [[spark.sql.optimizer.inSetConversionThreshold]] `spark.sql.optimizer.inSetConversionThreshold`
+| `10`
+| *(internal)* The threshold of set size for `InSet` conversion.
+
+Use link:spark-sql-SQLConf.adoc#optimizerInSetConversionThreshold[SQLConf.optimizerInSetConversionThreshold] method to access the current value.
+
 | [[spark.sql.optimizer.maxIterations]] `spark.sql.optimizer.maxIterations`
 | `100`
 | Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
