@@ -58,7 +58,7 @@ abstract class AggregateFunction extends Expression {
 }
 ----
 
-.AggregateFunction Contract (in alphabetical order)
+.AggregateFunction Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

@@ -233,7 +233,7 @@ doExecute(): RDD[InternalRow]
 `doExecute` allows a physical operator to describe a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`, and thus _execute_.
 
 [[hooks]]
-.SparkPlan's Extension Hooks (in alphabetical order)
+.SparkPlan's Extension Hooks
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

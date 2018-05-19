@@ -79,7 +79,7 @@ Project [count(1) OVER (PARTITION BY token ORDER BY id ASC NULLS FIRST RANGE BET
 ----
 
 [[properties]]
-.WindowSpecDefinition's Properties (in alphabetical order)
+.WindowSpecDefinition's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Name

@@ -12,7 +12,7 @@ NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used
 * <<pivot, pivot>> (after link:spark-sql-basic-aggregation.adoc#groupBy[groupBy] operator)
 
 [[operators]]
-.RelationalGroupedDataset's Aggregate Operators (in alphabetical order)
+.RelationalGroupedDataset's Aggregate Operators
 [cols="1,3",options="header",width="100%"]
 |===
 | Operator

@@ -5,7 +5,7 @@
 NOTE: The default `CatalystConf` is link:spark-sql-SQLConf.adoc[SQLConf] that is...FIXME
 
 [[configuration-methods]]
-.CatalystConf's Internal Properties (in alphabetical order)
+.CatalystConf's Internal Properties
 [cols="1,1,2",options="header",width="100%"]
 |===
 | Name

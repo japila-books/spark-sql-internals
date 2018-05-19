@@ -28,7 +28,7 @@ abstract class QueryPlan[T] extends TreeNode[T] {
 }
 ----
 
-.QueryPlan Contract (in alphabetical order)
+.QueryPlan Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

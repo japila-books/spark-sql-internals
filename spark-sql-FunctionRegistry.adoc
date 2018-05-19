@@ -15,7 +15,7 @@ spark.sessionState.functionRegistry
 NOTE: You can register a new user-defined function using link:spark-sql-UDFRegistration.adoc[UDFRegistration].
 
 [[attributes]]
-.FunctionRegistry's Attributes (in alphabetical order)
+.FunctionRegistry's Attributes
 [width="100%",cols="1,2",options="header"]
 |===
 | Name

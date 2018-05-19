@@ -39,7 +39,7 @@
 |===
 
 [[properties]]
-.AggregateExpression's Properties (in alphabetical order)
+.AggregateExpression's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Name

@@ -19,7 +19,7 @@ abstract class QueryPlanner[PhysicalPlan <: TreeNode[PhysicalPlan]] {
 }
 ----
 
-.QueryPlanner Contract (in alphabetical order)
+.QueryPlanner Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

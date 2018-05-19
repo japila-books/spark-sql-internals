@@ -3,7 +3,7 @@
 `ExperimentalMethods` holds extra <<extraStrategies, strategies>> and <<extraOptimizations, optimizations>> (as `Rule[LogicalPlan]`) that are used in link:spark-sql-SparkPlanner.adoc[SparkPlanner] and link:spark-sql-SparkOptimizer.adoc[SparkOptimizer], respectively.
 
 [[attributes]]
-.ExperimentalMethods' Attributes (in alphabetical order)
+.ExperimentalMethods' Attributes
 [width="100%",cols="1,2",options="header"]
 |===
 | Name

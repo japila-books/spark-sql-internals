@@ -26,7 +26,7 @@ NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operato
 |===
 
 [[internal-registries]]
-.AggregationIterator's Internal Registries and Counters (in alphabetical order)
+.AggregationIterator's Internal Registries and Counters
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

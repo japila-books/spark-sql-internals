@@ -31,7 +31,7 @@ NOTE: `WindowExpression` is also used in `Analyzer` for link:spark-sql-Analyzer-
 NOTE: `WindowExpression` is used in link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation] optimization.
 
 [[properties]]
-.WindowExpression's Properties (in alphabetical order)
+.WindowExpression's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Name
@@ -74,7 +74,7 @@ res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexp
 ----
 
 [[UnresolvedWindowExpression-properties]]
-.UnresolvedWindowExpression's Properties (in alphabetical order)
+.UnresolvedWindowExpression's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Name

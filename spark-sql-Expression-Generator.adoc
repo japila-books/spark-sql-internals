@@ -139,7 +139,7 @@ trait Generator extends Expression {
 }
 ----
 
-.(Subset of) Generator Contract (in alphabetical order)
+.(Subset of) Generator Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

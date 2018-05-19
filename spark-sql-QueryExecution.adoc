@@ -79,7 +79,7 @@ dataset.queryExecution.executedPlan
 ----
 
 [[properties]]
-.QueryExecution's Properties (in alphabetical order)
+.QueryExecution's Properties
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

@@ -54,7 +54,7 @@ While link:spark-sql-SparkPlan.adoc#doPrepare[preparing execution] (using `doPre
 When <<doExecute, doExecute>>, `ShuffleExchangeExec` computes a link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] and caches it (to reuse avoiding possibly expensive executions).
 
 [[internal-registries]]
-.ShuffleExchangeExec's Internal Registries and Counters (in alphabetical order)
+.ShuffleExchangeExec's Internal Registries and Counters
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

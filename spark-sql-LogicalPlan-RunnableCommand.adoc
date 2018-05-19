@@ -25,7 +25,7 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 ====
 
 [[available-commands]]
-.Available RunnableCommands (in alphabetical order)
+.Available RunnableCommands
 [width="100%",cols="1,2",options="header"]
 |===
 | RunnableCommand

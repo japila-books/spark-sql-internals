@@ -5,7 +5,7 @@
 `ExecutedCommandExec` runs a command and caches the result in <<sideEffectResult, sideEffectResult>> internal attribute.
 
 [[methods]]
-.ExecutedCommandExec's Methods (in alphabetical order)
+.ExecutedCommandExec's Methods
 [width="100%",cols="1,2",options="header"]
 |===
 | Method

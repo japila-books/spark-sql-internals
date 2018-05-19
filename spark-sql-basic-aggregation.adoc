@@ -3,7 +3,7 @@
 You can calculate aggregates over a group of rows in a link:spark-sql-Dataset.adoc[Dataset] using <<aggregate-operators, aggregate operators>> (possibly with link:spark-sql-functions.adoc#aggregate-functions[aggregate functions]).
 
 [[aggregate-operators]]
-.Aggregate Operators (in alphabetical order)
+.Aggregate Operators
 [width="100%",cols="1,1,2",options="header"]
 |===
 | Operator

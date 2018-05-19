@@ -26,7 +26,7 @@ trait ParserInterface {
 }
 ----
 
-.ParserInterface Contract (in alphabetical order)
+.ParserInterface Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

@@ -381,7 +381,7 @@ jdbc(url: String,
 
 [[JDBCOptions]]
 [[jdbc-options]]
-.Options for JDBC Data Source (in alphabetical order)
+.Options for JDBC Data Source
 [cols="1,2",options="header",width="100%"]
 |===
 | Option

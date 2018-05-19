@@ -47,7 +47,7 @@ abstract class BaseRelation {
 }
 ----
 
-.(Subset of) BaseRelation Contract (in alphabetical order)
+.(Subset of) BaseRelation Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

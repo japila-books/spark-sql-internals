@@ -359,7 +359,7 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 `mode` defines the behaviour of <<save, save>> when an external file or table (Spark writes to) already exists, i.e. `SaveMode`.
 
 [[SaveMode]]
-.Types of SaveMode (in alphabetical order)
+.Types of SaveMode
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

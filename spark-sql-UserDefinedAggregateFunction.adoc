@@ -105,7 +105,7 @@ abstract class UserDefinedAggregateFunction {
 }
 ----
 
-.(Subset of) UserDefinedAggregateFunction Contract (in alphabetical order)
+.(Subset of) UserDefinedAggregateFunction Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

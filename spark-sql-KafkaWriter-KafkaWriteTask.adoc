@@ -7,7 +7,7 @@
 `KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the link:spark-sql-UnsafeRow.adoc[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
 
 [[internal-properties]]
-.KafkaWriteTask's Internal Properties (in alphabetical order)
+.KafkaWriteTask's Internal Properties
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

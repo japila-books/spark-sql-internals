@@ -48,7 +48,7 @@ trait CodegenSupport extends SparkPlan {
 }
 ----
 
-.(Subset of) CodegenSupport Contract (in alphabetical order)
+.(Subset of) CodegenSupport Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

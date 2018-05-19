@@ -36,7 +36,7 @@ The fields of a data row are placed using *field offsets*.
 
 [[mutableFieldTypes]]
 [[mutable-types]]
-UnsafeRow's mutable field link:spark-sql-DataType.adoc[data types] (in alphabetical order):
+UnsafeRow's mutable field link:spark-sql-DataType.adoc[data types]:
 
 * `BooleanType`
 * `ByteType`

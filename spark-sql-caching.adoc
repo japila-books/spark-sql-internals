@@ -1,7 +1,7 @@
 == Dataset Caching and Persistence
 
 [[operators]]
-.Caching Operators (in alphabetical order)
+.Caching Operators
 [width="100%",cols="1,2",options="header"]
 |===
 | Operator

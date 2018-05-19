@@ -62,7 +62,7 @@ scala> println(plan.numberedTreeString)
 `CallMethodViaReflection` supports a link:spark-sql-Expression.adoc#CodegenFallback[fallback mode for expression code generation].
 
 [[properties]]
-.CallMethodViaReflection's Properties (in alphabetical order)
+.CallMethodViaReflection's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Property

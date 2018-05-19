@@ -83,7 +83,7 @@ NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc
 |===
 
 [[internal-registries]]
-.LogicalPlan's Internal Registries and Counters (in alphabetical order)
+.LogicalPlan's Internal Registries and Counters
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

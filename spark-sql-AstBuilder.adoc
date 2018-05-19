@@ -51,7 +51,7 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 ====
 
 [[visit-callbacks]]
-.AstBuilder's Visit Callback Methods (in alphabetical order)
+.AstBuilder's Visit Callback Methods
 [cols="1,1,3",options="header",width="100%"]
 |===
 | Callback Method
@@ -194,7 +194,7 @@ a| link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
 |===
 
 [[with-methods]]
-.AstBuilder's Parsing Handlers (in alphabetical order)
+.AstBuilder's Parsing Handlers
 [cols="1,3",options="header",width="100%"]
 |===
 | Parsing Handler

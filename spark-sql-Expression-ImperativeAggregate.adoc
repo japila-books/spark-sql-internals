@@ -41,7 +41,7 @@ abstract class ImperativeAggregate {
 }
 ----
 
-.ImperativeAggregate Contract (in alphabetical order)
+.ImperativeAggregate Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

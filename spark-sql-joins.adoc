@@ -7,7 +7,7 @@ From PostgreSQL's https://www.postgresql.org/docs/current/static/tutorial-join.h
 You can join two datasets using the <<join-operators, join operators>> with an optional <<join-condition, join condition>>.
 
 [[join-operators]]
-.Join Operators (in alphabetical order)
+.Join Operators
 [width="100%",cols="1,1,2",options="header"]
 |===
 | Operator
@@ -53,7 +53,7 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 ----
 
 [[join-types]]
-.Join Types (in alphabetical order)
+.Join Types
 [cols="1,1,1",options="header",width="100%"]
 |===
 | SQL

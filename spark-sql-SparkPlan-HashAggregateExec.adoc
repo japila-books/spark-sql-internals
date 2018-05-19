@@ -118,7 +118,7 @@ spark.
 image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="center"]
 
 [[properties]]
-.HashAggregateExec's Properties (in alphabetical order)
+.HashAggregateExec's Properties
 [width="100%",cols="1,2",options="header"]
 |===
 | Name
@@ -172,7 +172,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 NOTE: The prefix for variable names for `HashAggregateExec` operators in link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code is *agg*.
 
 [[internal-registries]]
-.HashAggregateExec's Internal Registries and Counters (in alphabetical order)
+.HashAggregateExec's Internal Registries and Counters
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

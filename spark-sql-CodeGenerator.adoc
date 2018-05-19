@@ -3,7 +3,7 @@
 `CodeGenerator` is a base class for generators of JVM bytecode for expression evaluation.
 
 [[internal-properties]]
-.CodeGenerator's Internal Properties (in alphabetical order)
+.CodeGenerator's Internal Properties
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
@@ -45,7 +45,7 @@ abstract class CodeGenerator[InType, OutType] {
 }
 ----
 
-.CodeGenerator Contract (in alphabetical order)
+.CodeGenerator Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

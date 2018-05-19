@@ -193,7 +193,7 @@ abstract class Expression extends TreeNode[Expression] {
 }
 ----
 
-.(Subset of) Expression Contract (in alphabetical order)
+.(Subset of) Expression Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

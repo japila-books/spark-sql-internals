@@ -65,7 +65,7 @@ abstract class Catalog {
 }
 ----
 
-.Catalog Contract (in alphabetical order)
+.Catalog Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

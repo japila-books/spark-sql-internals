@@ -64,7 +64,7 @@ NOTE: link:spark-sql-SessionState.adoc[SessionState] uses its own `Analyzer` wit
 `Analyzer` is <<creating-instance, created>> while the owning link:spark-sql-SessionState.adoc#apply[SessionState] is.
 
 [[internal-registries]]
-.Analyzer's Internal Registries and Counters (in alphabetical order)
+.Analyzer's Internal Registries and Counters
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

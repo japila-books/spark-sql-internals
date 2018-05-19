@@ -15,7 +15,7 @@ sealed trait Partitioning {
 }
 ----
 
-.Partitioning Contract (in alphabetical order)
+.Partitioning Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

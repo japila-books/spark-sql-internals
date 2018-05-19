@@ -73,7 +73,7 @@ abstract class TypedImperativeAggregate[T] extends ImperativeAggregate {
 }
 ----
 
-.TypedImperativeAggregate Contract (in alphabetical order)
+.TypedImperativeAggregate Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

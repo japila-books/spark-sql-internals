@@ -93,7 +93,7 @@ It is _assumed_ that using one of the operators is usually more efficient (than 
 ====
 
 [[aggregate-operators]]
-.Multi-dimensional Aggregate Operators (in alphabetical order)
+.Multi-dimensional Aggregate Operators
 [width="100%",cols="1,1,2",options="header"]
 |===
 | Operator

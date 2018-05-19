@@ -5,7 +5,7 @@
 `AggregateProcessor` supports link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate] and link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] aggregate <<functions, functions>> only (which link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[happen to] be link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] in link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]).
 
 [[properties]]
-.AggregateProcessor's Properties (in alphabetical order)
+.AggregateProcessor's Properties
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

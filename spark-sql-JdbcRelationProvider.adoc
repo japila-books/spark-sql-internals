@@ -53,7 +53,7 @@ If the table *does not* exist, `createRelation` creates the table (by executing 
 If however the table *does* exist, `createRelation` branches off per link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode] (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
 
 [[createRelation-CreatableRelationProvider-SaveMode]]
-.createRelation and SaveMode (in alphabetical order)
+.createRelation and SaveMode
 [cols="1,2",options="header",width="100%"]
 |===
 | Name

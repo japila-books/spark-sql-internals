@@ -35,7 +35,7 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 }
 ----
 
-.(Subset of) TreeNode Contract (in alphabetical order)
+.(Subset of) TreeNode Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method
