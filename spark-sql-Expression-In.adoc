@@ -102,6 +102,16 @@ scala> println(in.sql)
 (1 IN (array(`1`, `2`, `3`)))
 ----
 
+[[inSetConvertible]]
+`In` expression is *inSetConvertible* when the <<list, list>> contains link:spark-sql-Expression-Literal.adoc[Literal] expressions only.
+
+[source, scala]
+----
+// FIXME Example 1: inSetConvertible true
+
+// FIXME Example 2: inSetConvertible false
+----
+
 [[internal-registries]]
 .In's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
