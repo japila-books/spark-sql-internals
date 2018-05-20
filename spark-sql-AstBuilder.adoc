@@ -182,6 +182,10 @@ NOTE: A single statement can be quite involved.
 | `#star` labeled alternative
 | link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
 
+| [[visitSubqueryExpression]] `visitSubqueryExpression`
+| `#subqueryExpression` labeled alternative
+| link:spark-sql-Expression-ScalarSubquery.adoc[ScalarSubquery]
+
 | [[visitWindowDef]] `visitWindowDef`
 | `windowDef` labeled alternative
 a| link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]

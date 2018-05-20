@@ -1,32 +1,28 @@
 == [[ResolveSubquery]] ResolveSubquery Logical Resolution Rule
 
-`ResolveSubquery` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, FIXME>>.
+`ResolveSubquery` is a *logical resolution* that <<apply, transforms logical plans with FIXME>> as follows:
 
-Technically, `ResolveSubquery` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+. FIXME
 
-`ResolveSubquery` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveSubquery` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules of the link:spark-sql-Analyzer.adoc[Spark Analyzer].
 
-=== [[apply]] Applying ResolveSubquery to Logical Plan -- `apply` Method
+Technically, `ResolveSubquery` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+
+[source, scala]
+----
+// FIXME Example
+----
+
+=== [[apply]] Applying ResolveSubquery to Logical Plan (Executing ResolveSubquery) -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply`...FIXME
-
-=== [[resolveSubQueries]] `resolveSubQueries` Internal Method
-
-[source, scala]
-----
-resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
-----
-
-`resolveSubQueries`...FIXME
-
-NOTE: `resolveSubQueries` is used when...FIXME
 
 === [[resolveSubQuery]] `resolveSubQuery` Internal Method
 
@@ -41,3 +37,20 @@ resolveSubQuery(
 `resolveSubQuery`...FIXME
 
 NOTE: `resolveSubQuery` is used when...FIXME
+
+=== [[resolveSubQueries]] Resolving Subquery Expressions (ScalarSubquery, Exists and In) -- `resolveSubQueries` Internal Method
+
+[source, scala]
+----
+resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
+----
+
+`resolveSubQueries` requests the input link:spark-sql-LogicalPlan.adoc[logical plan] to link:spark-sql-catalyst-QueryPlan.adoc#transformExpressions[transform expressions] (down the operator tree) as follows:
+
+. For link:spark-sql-Expression-ScalarSubquery.adoc[ScalarSubquery] expressions with link:spark-sql-Expression-ScalarSubquery.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `ScalarSubquery` expressions
+
+. For link:spark-sql-Expression-Exists.adoc[Exists] expressions with link:spark-sql-Expression-Exists.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `Exists` expressions
+
+. For link:spark-sql-Expression-In.adoc[In] expressions with link:spark-sql-Expression-ListQuery.adoc[ListQuery] not link:spark-sql-Expression-ListQuery.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `In` expressions
+
+NOTE: `resolveSubQueries` is used exclusively when `ResolveSubquery` is <<apply, executed>>.

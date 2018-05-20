@@ -32,3 +32,14 @@ trait NamedExpression extends Expression {
 | [[qualifier]] `qualifier`
 | Used when...FIXME
 |===
+
+=== [[newExprId]] Creating ExprId -- `newExprId` Object Method
+
+[source, scala]
+----
+newExprId: ExprId
+----
+
+`newExprId`...FIXME
+
+NOTE: `newExprId` is used when...FIXME

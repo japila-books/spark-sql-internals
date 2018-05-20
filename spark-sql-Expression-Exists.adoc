@@ -37,6 +37,6 @@ When requested for a link:spark-sql-BroadcastMode.adoc#canonicalized[canonicaliz
 
 `Exists` takes the following when created:
 
-* [[plan]] link:spark-sql-LogicalPlan.adoc[Logical plan]
+* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
 * [[children]] Child link:spark-sql-Expression.adoc[expressions]
 * [[exprId]] `ExprId`

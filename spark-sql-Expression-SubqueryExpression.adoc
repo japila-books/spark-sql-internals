@@ -1,6 +1,6 @@
 == [[SubqueryExpression]] SubqueryExpression Contract -- Expressions With Logical Query Plans
 
-`SubqueryExpression` is the <<contract, contract>> for link:spark-sql-Expression-PlanExpression.adoc[expressions that contain logical query plans] (i.e. `PlanExpression[LogicalPlan]`).
+`SubqueryExpression` is the <<contract, contract>> for link:spark-sql-Expression-PlanExpression.adoc[expressions with logical query plans] (i.e. `PlanExpression[LogicalPlan]`).
 
 [[contract]]
 [source, scala]
@@ -61,7 +61,7 @@ a| Used when:
 |===
 
 [[resolved]]
-`resolved`...FIXME
+`SubqueryExpression` is link:spark-sql-Expression.adoc#resolved[resolved] when the link:spark-sql-Expression.adoc#childrenResolved[children are resolved] and the <<plan, subquery logical plan>> is link:spark-sql-LogicalPlan.adoc#resolved[resolved].
 
 [[references]]
 `references`...FIXME
@@ -104,3 +104,11 @@ hasSubquery(e: Expression): Boolean
 `hasSubquery`...FIXME
 
 NOTE: `hasSubquery` is used when...FIXME
+
+=== [[creating-instance]] Creating SubqueryExpression Instance
+
+`SubqueryExpression` takes the following when created:
+
+* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[children]] Child link:spark-sql-Expression.adoc[expressions]
+* [[exprId]] Expression ID (as `ExprId`)

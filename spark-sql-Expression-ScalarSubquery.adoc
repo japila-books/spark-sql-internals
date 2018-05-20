@@ -1,6 +1,16 @@
-== [[ScalarSubquery]] ScalarSubquery
+== [[ScalarSubquery]] ScalarSubquery Expression
 
-`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression].
+`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns one row and one column only.
+
+`ScalarSubquery` is <<creating-instance, created>> when...FIXME
 
 [[Unevaluable]]
 `ScalarSubquery` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
+
+=== [[creating-instance]] Creating ScalarSubquery Instance
+
+`ScalarSubquery` takes the following when created:
+
+* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[children]] Child link:spark-sql-Expression.adoc[expressions]
+* [[exprId]] Expression ID (as `ExprId` and defaults to a link:spark-sql-Expression-NamedExpression.adoc#newExprId[new ExprId])
