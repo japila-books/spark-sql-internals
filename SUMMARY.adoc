@@ -401,6 +401,7 @@
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
 . link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 . link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
+. link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
 . link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
 
 === Execution Planning Strategies

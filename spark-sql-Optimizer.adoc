@@ -221,12 +221,18 @@ spark.sessionState.optimizer
 | OptimizeCodegen
 |
 
-.2+^.^| RewriteSubquery
-.2+^.^| `Once`
-| RewritePredicateSubquery
+.4+^.^| [[RewriteSubquery]] RewriteSubquery
+.4+^.^| `Once`
+| [[RewritePredicateSubquery]] link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
+|
+
+| link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 |
 
 | CollapseProject
+|
+
+| RemoveRedundantProject
 |
 |===
 

@@ -8,7 +8,7 @@
 
 . Replaces an `In` predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible] with link:spark-sql-Expression-InSet.adoc[InSet] expressions when the number of link:spark-sql-Expression-Literal.adoc[literal] expressions in the link:spark-sql-Expression-In.adoc#list[list] expression is greater than link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold] internal configuration property (default: `10`)
 
-`OptimizeIn` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the base link:spark-sql-Optimizer.adoc#batches[logical optimizer].
+`OptimizeIn` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the base link:spark-sql-Optimizer.adoc[Spark Optimizer].
 
 Technically, `OptimizeIn` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
