@@ -1,6 +1,6 @@
-== [[InConversion]] InConversion
+== [[InConversion]] InConversion Type Coercion Rule
 
-`InConversion` is...FIXME
+`InConversion` is a link:spark-sql-TypeCoercionRule.adoc[type coercion rule] that...FIXME
 
 === [[coerceTypes]] `coerceTypes` Method
 

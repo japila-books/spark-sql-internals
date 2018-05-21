@@ -1,19 +1,50 @@
 == [[In]] In Predicate Expression
 
 [[dataType]]
-`In` is a predicate link:spark-sql-Expression.adoc[expression] (i.e. the result link:spark-sql-Expression.adoc#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]).
+`In` is a link:spark-sql-Expression.adoc#Predicate[predicate expression] (i.e. the result link:spark-sql-Expression.adoc#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]).
 
 `In` is <<creating-instance, created>> when:
 
 * link:spark-sql-Column.adoc#isin[Column.isin] method is used
 
-* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[withPredicate]
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[parse SQL's IN predicate with a subquery]
 
-* Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#in[in] operator is used
+[TIP]
+====
+Use Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#in[in] operator to create an `In` expression.
 
-* `ResolveSubquery` is requested to link:spark-sql-ResolveSubquery.adoc#resolveSubQueries[resolveSubQueries]
+[source, scala]
+----
+in(list: Expression*): Expression
+----
+====
 
-* `InConversion` is requested to link:spark-sql-InConversion.adoc#coerceTypes[coerceTypes]
+[source, scala]
+----
+// Using Catalyst DSL to create an In expression
+import org.apache.spark.sql.catalyst.dsl.expressions._
+
+// HACK: Disable one SparkSession.implicits
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+val value = 'a.long
+import org.apache.spark.sql.catalyst.expressions.{Expression, Literal}
+import org.apache.spark.sql.types.StringType
+val list: Seq[Expression] = Seq(1, Literal.create(null, StringType), true)
+
+val e = value in (list: _*)
+
+scala> :type e
+org.apache.spark.sql.catalyst.expressions.Expression
+
+scala> println(e.dataType)
+BooleanType
+
+scala> println(e.sql)
+(`a` IN (1, CAST(NULL AS STRING), true))
+----
 
 `In` expression can be <<eval, evaluated>> to a boolean value (i.e. `true` or `false`) or the special value `null`.
 
@@ -111,6 +142,12 @@ scala> println(in.sql)
 
 // FIXME Example 2: inSetConvertible false
 ----
+
+`In` expressions are analyzed using the following rules:
+
+* link:spark-sql-ResolveSubquery.adoc[ResolveSubquery] resolution rule
+
+* link:spark-sql-InConversion.adoc[InConversion] type coercion rule
 
 [[internal-registries]]
 .In's Internal Properties (e.g. Registries, Counters and Flags)

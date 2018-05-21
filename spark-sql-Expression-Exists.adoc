@@ -1,6 +1,6 @@
 == [[Exists]] Exists -- Correlated Predicate Subquery Expression
 
-`Exists` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] and a `Predicate`.
+`Exists` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] and a link:spark-sql-Expression.adoc#Predicate[predicate expression] (i.e. the result link:spark-sql-Expression.adoc#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]).
 
 `Exists` is <<creating-instance, created>> when:
 

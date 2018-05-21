@@ -380,7 +380,6 @@
 . link:spark-sql-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
 . link:spark-sql-ResolveSubquery.adoc[ResolveSubquery]
 . link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
-. link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule]
 . link:spark-sql-UpdateOuterReferences.adoc[UpdateOuterReferences]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
@@ -507,6 +506,9 @@
 
 . link:spark-sql-SubExprUtils.adoc[SubExprUtils Helper Object]
 . link:spark-sql-PredicateHelper.adoc[PredicateHelper Scala Trait]
+
+. link:spark-sql-TypeCoercion.adoc[TypeCoercion Object]
+. link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule -- Contract For Type Coercion Rules]
 
 . link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators]
 . link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregation -- Scala Extractor for Destructuring Aggregate Logical Operators]

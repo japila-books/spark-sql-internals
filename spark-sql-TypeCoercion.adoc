@@ -1,0 +1,32 @@
+== [[TypeCoercion]] TypeCoercion Object
+
+`TypeCoercion` is a Scala object that...FIXME
+
+`TypeCoercion` defines the <<typeCoercionRules, type coercion rules>> for Spark Analyzer.
+
+=== [[typeCoercionRules]] Defining Type Coercion Rules (For Spark Analyzer) -- `typeCoercionRules` Method
+
+[source, scala]
+----
+typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
+----
+
+`typeCoercionRules` gives a collection of link:spark-sql-catalyst-Rule.adoc[Catalyst rules] to manipulate link:spark-sql-LogicalPlan.adoc[logical plans] in the following order:
+
+. link:spark-sql-InConversion.adoc[InConversion]
+. `WidenSetOperationTypes`
+. `PromoteStrings`
+. `DecimalPrecision`
+. `BooleanEquality`
+. `FunctionArgumentConversion`
+. `ConcatCoercion`
+. `EltCoercion`
+. `CaseWhenCoercion`
+. `IfCoercion`
+. `StackCoercion`
+. `Division`
+. `ImplicitTypeCasts`
+. `DateTimeOperations`
+. `WindowFrameCoercion`
+
+NOTE: `typeCoercionRules` is used exclusively when `Analyzer` is requested for link:spark-sql-Analyzer.adoc#batches[batches] (with link:spark-sql-Analyzer.adoc#Resolution[Resolution] rules).

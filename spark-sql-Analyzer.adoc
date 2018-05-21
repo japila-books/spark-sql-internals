@@ -268,7 +268,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 | ResolveInlineTables
 | Resolves `UnresolvedInlineTable` with `LocalRelation`
 
-| TypeCoercion.typeCoercionRules
+| link:spark-sql-TypeCoercion.adoc#typeCoercionRules[TypeCoercion.typeCoercionRules]
 |
 | <<extendedResolutionRules, extendedResolutionRules>>
 |

@@ -116,6 +116,16 @@ a|
 * link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]
 * link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
 
+| [[Predicate]] `Predicate`
+| trait
+| Result link:spark-sql-Expression.adoc#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]
+a|
+* `And`
+* `AtLeastNNonNulls`
+* link:spark-sql-Expression-Exists.adoc[Exists]
+* link:spark-sql-Expression-In.adoc[In]
+* link:spark-sql-Expression-InSet.adoc[InSet]
+
 | [[TernaryExpression]] `TernaryExpression`
 | abstract class
 |

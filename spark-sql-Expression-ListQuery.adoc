@@ -1,6 +1,6 @@
 == [[ListQuery]] ListQuery Subquery Expression
 
-`ListQuery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that represents SQL's link:spark-sql-AstBuilder.adoc#withPredicate[IN predicate with a query], e.g. `NOT? IN '(' query ')'`.
+`ListQuery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that represents SQL's link:spark-sql-AstBuilder.adoc#withPredicate[IN predicate with a subquery], e.g. `NOT? IN '(' query ')'`.
 
 [[Unevaluable]]
 `ListQuery` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] and produce a value given an internal row.
