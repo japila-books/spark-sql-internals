@@ -97,9 +97,9 @@ assert(evaluatedValue.asInstanceOf[Boolean] == false)
 `In` takes the following when created:
 
 * [[value]] Value link:spark-sql-Expression.adoc[expression]
-* [[list]] List link:spark-sql-Expression.adoc[expressions]
+* [[list]] link:spark-sql-Expression.adoc[Expression] list
 
-NOTE: <<list, List expressions>> must not be `null` (but can have expressions that can be evaluated to `null`).
+NOTE: <<list, Expression list>> must not be `null` (but can have expressions that can be evaluated to `null`).
 
 [[toString]]
 `In` has the following text representation:
@@ -148,6 +148,17 @@ scala> println(in.sql)
 * link:spark-sql-ResolveSubquery.adoc[ResolveSubquery] resolution rule
 
 * link:spark-sql-InConversion.adoc[InConversion] type coercion rule
+
+[[InMemoryTableScanExec]]
+`In` expression has a link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#buildFilter-expressions[custom support] in link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec] physical operator.
+
+[source, scala]
+----
+// FIXME
+// Demo: InMemoryTableScanExec and In expression
+// 1. Create an In(a: AttributeReference, list: Seq[Literal]) with the list.nonEmpty
+// 2. Use InMemoryTableScanExec.buildFilter partial function to produce the expression
+----
 
 [[internal-registries]]
 .In's Internal Properties (e.g. Registries, Counters and Flags)
