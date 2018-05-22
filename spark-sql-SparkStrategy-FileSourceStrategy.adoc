@@ -30,19 +30,6 @@ log4j.logger.org.apache.spark.sql.execution.datasources.FileSourceStrategy=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[apply]] Planning HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
-
-[source, scala]
-----
-apply(plan: LogicalPlan): Seq[SparkPlan]
-----
-
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
-
-`apply`...FIXME
-
-NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
-
 === [[collectProjectsAndFilters]] `collectProjectsAndFilters` Method
 
 [source, scala]
@@ -52,3 +39,16 @@ collectProjectsAndFilters(plan: LogicalPlan):
 ----
 
 `collectProjectsAndFilters` is a pattern used to destructure a link:spark-sql-LogicalPlan.adoc[LogicalPlan] that can be `Project` or `Filter`. Any other `LogicalPlan` give an _all-empty_ response.
+
+=== [[apply]] Planning HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): Seq[SparkPlan]
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME
+
+NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.

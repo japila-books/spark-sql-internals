@@ -9,6 +9,6 @@
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan] and produce link:spark-sql-SparkPlan.adoc[physical query plans].
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply`...FIXME
