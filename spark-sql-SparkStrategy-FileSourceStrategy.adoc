@@ -1,4 +1,4 @@
-== [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy for HadoopFsRelations
+== [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy for LogicalRelations with HadoopFsRelation
 
 `FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
 
@@ -6,17 +6,35 @@
 
 [source, scala]
 ----
+import org.apache.spark.sql.execution.datasources.FileSourceStrategy
+
 // Enable INFO logging level to see the details of the strategy
 val logger = FileSourceStrategy.getClass.getName.replace("$", "")
 import org.apache.log4j.{Level, Logger}
 Logger.getLogger(logger).setLevel(Level.INFO)
 
-val q = spark.read.option("header", true).csv("../datasets/people.csv")
+// Create a bucketed data source table
+val tableName = "bucketed_4_id"
+spark
+  .range(100000000)
+  .write
+  .bucketBy(4, "id")
+  .sortBy("id")
+  .mode("overwrite")
+  .saveAsTable(tableName)
+val q = spark.table(tableName)
 val plan = q.queryExecution.optimizedPlan
 
 val executionPlan = FileSourceStrategy(plan).head
+
 scala> println(executionPlan.numberedTreeString)
-00 FileScan csv [id#36,name#37,city#38] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/datasets/people.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:string,name:string,city:string>
+00 FileScan parquet default.bucketed_4_id[id#140L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/apps/spark-2.3.0-bin-hadoop2.7/spark-warehouse/bucketed_4..., PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint>
+
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan = executionPlan.collectFirst { case fsse: FileSourceScanExec => fsse }.get
+
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
 ----
 
 [TIP]
@@ -42,7 +60,7 @@ collectProjectsAndFilters(plan: LogicalPlan):
 
 `collectProjectsAndFilters` is a pattern used to destructure a link:spark-sql-LogicalPlan.adoc[LogicalPlan] that can be `Project` or `Filter`. Any other `LogicalPlan` give an _all-empty_ response.
 
-=== [[apply]] Planning HadoopFsRelation (Applying FileSourceStrategy Rule to Logical Plan) -- `apply` Method
+=== [[apply]] Planning LogicalRelation with HadoopFsRelation as FileSourceScanExec -- `apply` Method
 
 [source, scala]
 ----
@@ -53,4 +71,34 @@ NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[Gene
 
 `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only cares about link:spark-sql-LogicalPlan.adoc[logical plans] with a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation].
+`apply` only works with link:spark-sql-LogicalPlan.adoc[logical plans] that are actually a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] (possibly as a child of link:spark-sql-LogicalPlan-Project.adoc[Project] and link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operators).
+
+`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#partitionSchema[partitionSchema] of the `HadoopFsRelation`.
+
+`apply` prints out the following INFO message to the logs:
+
+```
+Pruning directories with: [partitionKeyFilters]
+```
+
+`apply` computes `afterScanFilters` predicate link:spark-sql-Expression.adoc[expressions] that should be evaluated after the scan.
+
+`apply` prints out the following INFO message to the logs:
+
+```
+Post-Scan Filters: [afterScanFilters]
+```
+
+`apply` computes `readDataColumns` link:spark-sql-Expression-Attribute.adoc[attributes] that are the required attributes except the partition columns.
+
+`apply` prints out the following INFO message to the logs:
+
+```
+Output Data Schema: [outputSchema]
+```
+
+`apply` creates a link:spark-sql-SparkPlan-FileSourceScanExec.adoc#creating-instance[FileSourceScanExec] physical operator.
+
+If there are any `afterScanFilter` predicate expressions, `apply` creates a `FilterExec` physical operator with them and the `FileSourceScanExec` operator.
+
+If the output of the FilterExec physical operator is not the `projects` expressions, `apply` creates a link:spark-sql-SparkPlan-ProjectExec.adoc#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.

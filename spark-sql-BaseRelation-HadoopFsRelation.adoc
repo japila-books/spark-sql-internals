@@ -16,7 +16,7 @@ CAUTION: Demo the different cases when `HadoopFsRelation` is created
 
 import org.apache.spark.sql.execution.datasources.{HadoopFsRelation, LogicalRelation}
 
-// Exercise 1: spark.table for DataSource tables (provider != hive)
+// Example 1: spark.table for DataSource tables (provider != hive)
 import org.apache.spark.sql.catalyst.TableIdentifier
 val t1ID = TableIdentifier(tableName = "t1")
 spark.sessionState.catalog.dropTable(name = t1ID, ignoreIfNotExists = true, purge = true)
@@ -39,7 +39,7 @@ scala> println(plan1.numberedTreeString)
 val LogicalRelation(rel1, _, _, _) = plan1.asInstanceOf[LogicalRelation]
 val hadoopFsRel = rel1.asInstanceOf[HadoopFsRelation]
 
-// Exercise 2: spark.read with format as a `FileFormat`
+// Example 2: spark.read with format as a `FileFormat`
 val q = spark.read.text("README.md")
 val plan2 = q.queryExecution.logical
 
@@ -49,7 +49,7 @@ scala> println(plan2.numberedTreeString)
 val LogicalRelation(relation, _, _, _) = plan2.asInstanceOf[LogicalRelation]
 val hadoopFsRel = relation.asInstanceOf[HadoopFsRelation]
 
-// Example with BucketSpec defined
+// Example 3: Bucketing specified
 val tableName = "bucketed_4_id"
 spark
   .range(100000000)
