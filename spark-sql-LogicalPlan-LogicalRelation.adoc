@@ -36,6 +36,18 @@ apply(relation: BaseRelation, table: CatalogTable): LogicalRelation
 ----
 ====
 
+[[simpleString]]
+The link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
+
+[source, scala]
+----
+val q = spark.read.text("README.md")
+val logicalPlan = q.queryExecution.logical
+
+scala> println(logicalPlan.simpleString)
+Relation[value#2] text
+----
+
 === [[refresh]] `refresh` Method
 
 [source, scala]

@@ -14,11 +14,62 @@ NOTE: The optional <<bucketSpec, BucketSpec>> is defined exclusively for a non-s
 ----
 CAUTION: Demo the different cases when `HadoopFsRelation` is created
 
-CAUTION: Demo when `BucketSpec` is defined
+import org.apache.spark.sql.execution.datasources.{HadoopFsRelation, LogicalRelation}
 
 // Exercise 1: spark.table for DataSource tables (provider != hive)
+import org.apache.spark.sql.catalyst.TableIdentifier
+val t1ID = TableIdentifier(tableName = "t1")
+spark.sessionState.catalog.dropTable(name = t1ID, ignoreIfNotExists = true, purge = true)
+spark.range(5).write.saveAsTable("t1")
+
+val metadata = spark.sessionState.catalog.getTableMetadata(t1ID)
+scala> println(metadata.provider.get)
+parquet
+
+assert(metadata.provider.get != "hive")
+
+val q = spark.table("t1")
+// Avoid dealing with UnresolvedRelations and SubqueryAliases
+// Hence going stright for optimizedPlan
+val plan1 = q.queryExecution.optimizedPlan
+
+scala> println(plan1.numberedTreeString)
+00 Relation[id#7L] parquet
+
+val LogicalRelation(rel1, _, _, _) = plan1.asInstanceOf[LogicalRelation]
+val hadoopFsRel = rel1.asInstanceOf[HadoopFsRelation]
 
 // Exercise 2: spark.read with format as a `FileFormat`
+val q = spark.read.text("README.md")
+val plan2 = q.queryExecution.logical
+
+scala> println(plan2.numberedTreeString)
+00 Relation[value#2] text
+
+val LogicalRelation(relation, _, _, _) = plan2.asInstanceOf[LogicalRelation]
+val hadoopFsRel = relation.asInstanceOf[HadoopFsRelation]
+
+// Example with BucketSpec defined
+val tableName = "bucketed_4_id"
+spark
+  .range(100000000)
+  .write
+  .bucketBy(4, "id")
+  .sortBy("id")
+  .mode("overwrite")
+  .saveAsTable(tableName)
+
+val q = spark.table(tableName)
+// Avoid dealing with UnresolvedRelations and SubqueryAliases
+// Hence going stright for optimizedPlan
+val plan3 = q.queryExecution.optimizedPlan
+
+scala> println(plan3.numberedTreeString)
+00 Relation[id#52L] parquet
+
+val LogicalRelation(rel3, _, _, _) = plan3.asInstanceOf[LogicalRelation]
+val hadoopFsRel = rel3.asInstanceOf[HadoopFsRelation]
+val bucketSpec = hadoopFsRel.bucketSpec.get
 
 // Exercise 3: spark.table for Hive tables (provider == hive)
 ----

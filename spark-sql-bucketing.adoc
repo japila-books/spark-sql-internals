@@ -61,9 +61,9 @@ NOTE: link:spark-sql-DataFrameWriter.adoc#bucketBy[DataFrameWriter.bucketBy] and
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 
-```
+[source, scala]
+----
 val large = spark.range(100000000)
-
 large.write
   .bucketBy(4, "id")
   .sortBy("id")
@@ -77,7 +77,7 @@ scala> println(large.queryExecution.toRdd.getNumPartitions)
 // With _SUCCESS extra file and the ls -l header "total 794624" that gives 66 files
 $ ls -tlr spark-warehouse/buckets_8_10e8 | wc -l
       66
-```
+----
 
 After you bucketed the table data sets, you should notice that the Exchanges are no longer needed (as the tables are already pre-shuffled).
 

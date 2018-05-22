@@ -1,6 +1,8 @@
 == [[FileSourceStrategy]] FileSourceStrategy Execution Planning Strategy for HadoopFsRelations
 
-`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, plan scans over collections of files>> (possibly partitioned or bucketed).
+`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
+
+`FileSourceStrategy` is part of link:spark-sql-SparkPlanner.adoc#strategies[predefined strategies] of the link:spark-sql-SparkPlanner.adoc[Spark Planner].
 
 [source, scala]
 ----
@@ -49,6 +51,6 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`apply`...FIXME
+`apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
 
-NOTE: `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
+`apply` only cares about link:spark-sql-LogicalPlan.adoc[logical plans] with a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation].

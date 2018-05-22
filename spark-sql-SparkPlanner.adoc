@@ -9,7 +9,8 @@ NOTE: `SparkPlanner` is expected to plan (aka _generate_) at least one link:spar
 [source, scala]
 ----
 val spark: SparkSession = ...
-spark.sessionState.planner
+scala> :type spark.sessionState.planner
+org.apache.spark.sql.execution.SparkPlanner
 ----
 
 [[strategies]]
@@ -25,13 +26,16 @@ spark.sessionState.planner
 | <<extraPlanningStrategies, extraPlanningStrategies>>
 | Extension point for extra link:spark-sql-SparkStrategy.adoc[planning strategies]
 
+| link:spark-sql-SparkStrategy-DataSourceV2Strategy.adoc[DataSourceV2Strategy]
+|
+
 | link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
 |
 
 | link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy]
 |
 
-| `SpecialLimits`
+| link:spark-sql-SparkStrategy-SpecialLimits.adoc[SpecialLimits]
 |
 
 | link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation]
