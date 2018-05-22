@@ -8,7 +8,7 @@
 `ColumnarBatchScan` uses the `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
 
 [[needsUnsafeRowConversion]]
-`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag for...FIXME `needsUnsafeRowConversion` is enabled (i.e. `true`) by default.
+`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while link:spark-sql-CodegenSupport.adoc#consume[generating the Java source code to consume generated columns or row from a physical operator] that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
 
 [[metrics]]
 .ColumnarBatchScan's Performance Metrics
@@ -138,17 +138,6 @@ println(CodeFormatter.format(code))
 
 NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is on).
 
-=== [[produceRows]] `produceRows` Internal Method
-
-[source, scala]
-----
-produceRows(ctx: CodegenContext, input: String): String
-----
-
-`produceRows`...FIXME
-
-NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).
-
 === [[supportsBatch]] `supportsBatch` Method
 
 [source, scala]
@@ -238,6 +227,7 @@ val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec 
 
 assert(inmemoryScan.supportsBatch == false)
 
+// NOTE: The following codegen won't work since supportsBatch is off and so is codegen
 import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
 val ctx = new CodegenContext
 import org.apache.spark.sql.execution.CodegenSupport
@@ -261,3 +251,56 @@ java.lang.UnsupportedOperationException
   at org.apache.spark.sql.execution.columnar.InMemoryTableScanExec.produce(InMemoryTableScanExec.scala:33)
   ... 49 elided
 ----
+
+=== [[produceRows]] Generating Java Source Code for Producing Rows -- `produceRows` Internal Method
+
+[source, scala]
+----
+produceRows(ctx: CodegenContext, input: String): String
+----
+
+`produceRows` creates a link:spark-sql-CodegenSupport.adoc#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
+
+`produceRows` creates a link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for a `row` variable and assigns it as the name of the link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW].
+
+`produceRows` resets (`nulls`) link:spark-sql-CodegenContext.adoc#currentVars[currentVars].
+
+For every link:spark-sql-catalyst-QueryPlan.adoc#output[output schema attribute], `produceRows` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:spark-sql-Expression.adoc#genCode[generate code for expression evaluation].
+
+`produceRows` selects the name of the row term per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
+
+`produceRows` link:spark-sql-CodegenSupport.adoc#consume[generates the Java source code to consume generated columns or row from the current physical operator] and uses it to generate the final Java source code for producing rows.
+
+[source, scala]
+----
+// Demo: ColumnarBatchScan.produceRows in Action
+// 1. FileSourceScanExec as a ColumnarBatchScan
+val q = spark.read.text("README.md")
+
+val plan = q.queryExecution.executedPlan
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan = plan.collectFirst { case exec: FileSourceScanExec => exec }.get
+
+// 2. supportsBatch is off
+assert(scan.supportsBatch == false)
+
+// 3. InMemoryTableScanExec.produce
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+import org.apache.spark.sql.execution.CodegenSupport
+
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = plan.collectFirst { case exec: WholeStageCodegenExec => exec }.get
+
+val code = scan.produce(ctx, parent = wsce)
+scala> println(code)
+// blank lines removed
+while (scan_mutableStateArray[2].hasNext()) {
+  InternalRow scan_row2 = (InternalRow) scan_mutableStateArray[2].next();
+  ((org.apache.spark.sql.execution.metric.SQLMetric) references[2] /* numOutputRows */).add(1);
+  append(scan_row2);
+  if (shouldStop()) return;
+}
+----
+
+NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).

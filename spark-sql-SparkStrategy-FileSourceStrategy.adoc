@@ -16,7 +16,7 @@ Logger.getLogger(logger).setLevel(Level.INFO)
 // Create a bucketed data source table
 val tableName = "bucketed_4_id"
 spark
-  .range(100000000)
+  .range(100)
   .write
   .bucketBy(4, "id")
   .sortBy("id")

@@ -59,6 +59,12 @@ a| [[equivalentExpressions]] link:spark-sql-EquivalentExpressions.adoc[Equivalen
 
 Expressions are link:spark-sql-EquivalentExpressions.adoc#addExprTree[added] and then link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
+| `currentVars`
+| [[currentVars]] The list of generated columns as input of current operator
+
+| `INPUT_ROW`
+| [[INPUT_ROW]] The variable name of the input row of the current operator
+
 | `placeHolderToComments`
 | [[placeHolderToComments]][[getPlaceHolderToComments]]
 
@@ -195,3 +201,14 @@ val input = ctx.addMutableState("scala.collection.Iterator", "input", v => s"$v 
 ----
 
 NOTE: `addMutableState` is used when...FIXME
+
+=== [[freshName]] `freshName` Method
+
+[source, scala]
+----
+freshName(name: String): String
+----
+
+`freshName`...FIXME
+
+NOTE: `freshName` is used when...FIXME
