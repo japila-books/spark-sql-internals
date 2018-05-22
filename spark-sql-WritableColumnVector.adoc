@@ -1,0 +1,45 @@
+== [[WritableColumnVector]] WritableColumnVector
+
+`WritableColumnVector` is the <<contract, contract>> for...FIXME
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.execution.vectorized;
+
+abstract class WritableColumnVector extends ColumnVector {
+  // only required methods that have no implementation
+  // the others follow
+  public abstract int getDictId(int rowId);
+  protected abstract void reserveInternal(int capacity);
+  public abstract void putNotNull(int rowId);
+  public abstract void putNull(int rowId);
+  public abstract void putNulls(int rowId, int count);
+  public abstract void putNotNulls(int rowId, int count);
+  // other type-specific puts
+}
+----
+
+.(Subset of) WritableColumnVector Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[reserveInternal]] `reserveInternal`
+| Used when...FIXME
+|===
+
+[[implementations]]
+.WritableColumnVectors
+[cols="1,2",options="header",width="100%"]
+|===
+| WritableColumnVector
+| Description
+
+| [[OffHeapColumnVector]] link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
+|
+
+| [[OnHeapColumnVector]] link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
+|
+|===

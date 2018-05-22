@@ -1,0 +1,69 @@
+== [[ColumnVector]] ColumnVector
+
+`ColumnVector` is the <<contract, contract>> for...FIXME
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.vectorized;
+
+abstract class ColumnVector implements AutoCloseable {
+  // only required methods that have no implementation
+  // the others follow
+  public abstract void close();
+  public abstract boolean hasNull();
+  public abstract int numNulls();
+  public abstract boolean isNullAt(int rowId);
+  public abstract boolean getBoolean(int rowId);
+  // other type-specific getters
+  protected abstract ColumnVector getChild(int ordinal);
+}
+----
+
+[[type]]
+`ColumnVector` has a link:spark-sql-DataType.adoc[data type] that you can access using `dataType` method.
+
+[source, java]
+----
+DataType dataType()
+----
+
+[NOTE]
+====
+`ColumnVector` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+
+In other words, using the contract is as treading on thin ice.
+====
+
+.(Subset of) ColumnVector Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[getChild]] `getChild`
+| Used when...FIXME
+|===
+
+[[implementations]]
+.ColumnVectors
+[cols="1,2",options="header",width="100%"]
+|===
+| ColumnVector
+| Description
+
+| [[ArrowColumnVector]] `ArrowColumnVector`
+|
+
+| [[OffHeapColumnVector]] link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
+|
+
+| [[OnHeapColumnVector]] link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
+|
+
+| [[OrcColumnVector]] `OrcColumnVector`
+|
+
+| [[WritableColumnVector]] link:spark-sql-WritableColumnVector.adoc[WritableColumnVector]
+|
+|===

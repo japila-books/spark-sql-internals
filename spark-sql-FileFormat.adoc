@@ -35,9 +35,6 @@ trait FileFormat {
 | Used exclusively when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
 |===
 
-[[vectorTypes]]
-`vectorTypes`...FIXME
-
 === [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
 [source, scala]
@@ -115,3 +112,17 @@ supportBatch(sparkSession: SparkSession, dataSchema: StructType): Boolean
 
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
 ====
+
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes(
+  requiredSchema: StructType,
+  partitionSchema: StructType,
+  sqlConf: SQLConf): Option[Seq[String]]
+----
+
+`vectorTypes` returns `None`, i.e. no class names of link:spark-sql-ColumnVector.adoc[ColumnVectors] for every column used in a columnar batch.
+
+NOTE: `vectorTypes` is used exclusively when `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes[concrete ColumnVector class names].

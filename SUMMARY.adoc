@@ -531,6 +531,11 @@
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
+. link:spark-sql-ColumnVector.adoc[ColumnVector]
+. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector]
+. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
+. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
+
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
 

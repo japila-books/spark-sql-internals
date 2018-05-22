@@ -14,7 +14,12 @@ public interface DataReaderFactory<T> extends Serializable {
 }
 ----
 
-NOTE: `DataReaderFactory` is an `Evolving` contract.
+[NOTE]
+====
+`DataReaderFactory` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+
+In other words, using the contract is as treading on thin ice.
+====
 
 .DataReaderFactory Contract
 [cols="1,2",options="header",width="100%"]

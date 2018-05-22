@@ -4,9 +4,6 @@
 
 `ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. link:spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch[FileSourceScanExec], link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[InMemoryTableScanExec] and link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch[DataSourceV2ScanExec] physical operators).
 
-[[vectorTypes]]
-`ColumnarBatchScan` uses the `vectorTypes` names when requested to <<produceBatches, produceBatches>>.
-
 [[needsUnsafeRowConversion]]
 `ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while link:spark-sql-CodegenSupport.adoc#consume[generating the Java source code to consume generated columns or row from a physical operator] that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
 
@@ -304,3 +301,16 @@ while (scan_mutableStateArray[2].hasNext()) {
 ----
 
 NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).
+
+=== [[vectorTypes]] `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]] = None
+----
+
+`vectorTypes` are the class names of concrete link:spark-sql-ColumnVector.adoc[ColumnVectors] for every column used in a columnar batch.
+
+`vectorTypes` gives no vector types by default.
+
+NOTE: `vectorTypes` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.

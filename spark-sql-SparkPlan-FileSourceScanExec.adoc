@@ -102,15 +102,6 @@ a| Metadata (as a collection of key-value pairs)
 
 NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to..FIXME.
 
-| [[needsUnsafeRowConversion]] `needsUnsafeRowConversion`
-a| link:spark-sql-ColumnarBatchScan.adoc#needsUnsafeRowConversion[Flag] that enables...FIXME
-
-Enabled (i.e. `true`) when the following conditions all hold:
-
-. link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> is `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat`
-
-. link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (default: `true`)
-
 | [[pushedDownFilters]] `pushedDownFilters`
 |
 |===
@@ -127,23 +118,6 @@ log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=INFO
 
 Refer to link:spark-logging.adoc[Logging].
 ====
-
-=== [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
-
-`FileSourceScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] and <<supportsBatch, supports batch decoding>> only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports it].
-
-CAUTION: FIXME Describe / link to <<vectorTypes, vectorTypes>> and <<needsUnsafeRowConversion, needsUnsafeRowConversion>>
-
-=== [[vectorTypes]] `vectorTypes` Method
-
-[source, scala]
-----
-vectorTypes: Option[Seq[String]]
-----
-
-NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
-
-`vectorTypes`...FIXME
 
 === [[doExecute]] Executing FileSourceScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
 
@@ -292,3 +266,41 @@ NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsB
 `supportsBatch` is enabled (i.e. `true`) only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized decoding].
 
 Otherwise, `supportsBatch` is disabled (i.e. `false`).
+
+=== [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
+
+`FileSourceScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] and <<supportsBatch, supports batch decoding>> only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports it].
+
+`FileSourceScanExec` has <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag enabled for `ParquetFileFormat` data sources exclusively.
+
+`FileSourceScanExec` has <<vectorTypes, vectorTypes>>...FIXME
+
+==== [[needsUnsafeRowConversion]] `needsUnsafeRowConversion` Flag
+
+[source, scala]
+----
+needsUnsafeRowConversion: Boolean
+----
+
+NOTE: `needsUnsafeRowConversion` is part of link:spark-sql-ColumnarBatchScan.adoc#needsUnsafeRowConversion[ColumnarBatchScan Contract] to control the name of the variable for an input row while link:spark-sql-CodegenSupport.adoc#consume[generating the Java source code to consume generated columns or row from a physical operator].
+
+`needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
+
+. link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> is link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
+
+. link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (default: `true`)
+
+Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
+
+NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecute, executed>> (and <<supportsBatch, supportsBatch>> flag is off).
+
+==== [[vectorTypes]] Requesting Concrete ColumnVector Class Names -- `vectorTypes` Method
+
+[source, scala]
+----
+vectorTypes: Option[Seq[String]]
+----
+
+NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
+
+`vectorTypes` simply requests the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> for link:spark-sql-FileFormat.adoc#vectorTypes[vectorTypes].

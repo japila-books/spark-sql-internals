@@ -120,7 +120,7 @@ Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] met
 
 | [[spark.sql.columnVector.offheap.enabled]] `spark.sql.columnVector.offheap.enabled`
 | `false`
-| *(internal)* Enables `OffHeapColumnVector` in link:spark-sql-ColumnarBatch.adoc[ColumnarBatch] (`true`) or not (`false`). When disabled, `OnHeapColumnVector` is used instead.
+| *(internal)* Enables link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] in link:spark-sql-ColumnarBatch.adoc[ColumnarBatch] (`true`) or not (`false`). When disabled, link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used instead.
 
 Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumnVectorEnabled] method to access the current value.
 

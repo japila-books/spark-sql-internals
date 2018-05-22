@@ -1,0 +1,3 @@
+== [[OffHeapColumnVector]] OffHeapColumnVector
+
+`OffHeapColumnVector` is a concrete link:spark-sql-WritableColumnVector.adoc[WritableColumnVector] that...FIXME
