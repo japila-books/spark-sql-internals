@@ -1,0 +1,5 @@
+== DataSource API V2
+
+*DataSource API V2* (aka *DataSource V2*) is a new Data Source API (that will eventually replace the current link:spark-sql-datasource-api.adoc[DataSource API]).
+
+DataSource V2 is already used to read and write data for *Continuous Processing* in Spark Structured Streaming.

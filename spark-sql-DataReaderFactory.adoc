@@ -38,7 +38,7 @@ In other words, using the contract is as treading on thin ice.
 default String[] preferredLocations()
 ----
 
-`preferredLocations` defaults to an empty collection of host names (as preferred locations) which simply means that this task has no location preference.
+`preferredLocations` defaults to an empty collection of host names (as the *preferred locations*) which simply means that this task has no location preference.
 
 [NOTE]
 ====

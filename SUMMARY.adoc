@@ -121,6 +121,8 @@
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
 .. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
 
+. link:spark-sql-datasource-v2.adoc[DataSource V2]
+
 == Extending Spark SQL
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
@@ -496,6 +498,18 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
+== DataSource V2
+
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
+. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
+.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
+. link:spark-sql-DataWriter.adoc[DataWriter]
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
+. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
+.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
+
 == Spark Thrift Server
 
 . link:spark-sql-thrift-server.adoc[Thrift JDBC/ODBC Server -- Spark Thrift Server (STS)]
@@ -544,13 +558,5 @@
 . link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
-
-. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
-.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
-. link:spark-sql-DataWriter.adoc[DataWriter]
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
-. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
-.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]

@@ -1,0 +1,34 @@
+== [[SupportsPushDownFilters]] SupportsPushDownFilters
+
+`SupportsPushDownFilters` is the <<contract, contract>> for link:spark-sql-DataSourceReader.adoc[DataSourceReaders] that support <<pushedFilters, push down filters>> to the data source (and hence reduce the size of the data to be read).
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.sources.v2.reader;
+
+interface SupportsPushDownFilters extends DataSourceReader {
+  Filter[] pushFilters(Filter[] filters);
+  Filter[] pushedFilters();
+}
+----
+
+[NOTE]
+====
+`SupportsPushDownFilters` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+
+In other words, using the contract is as treading on thin ice.
+====
+
+.SupportsPushDownFilters Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[pushFilters]] `pushFilters`
+| Used when...FIXME
+
+| [[pushedFilters]] `pushedFilters`
+| Used when...FIXME
+|===

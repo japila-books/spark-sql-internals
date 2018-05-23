@@ -1,0 +1,69 @@
+== [[DataSourceReader]] DataSourceReader
+
+`DataSourceReader` is the <<contract, contract>> for <<implementations, data source readers>> with a <<createDataReaderFactories, custom DataReaderFactory>>.
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.sources.v2.reader;
+
+interface DataSourceReader {
+  StructType readSchema();
+  List<DataReaderFactory<Row>> createDataReaderFactories();
+}
+----
+
+[NOTE]
+====
+`DataSourceReader` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+
+In other words, using the contract is as treading on thin ice.
+====
+
+.DataSourceReader Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[readSchema]] `readSchema`
+| Used when...FIXME
+
+| [[createDataReaderFactories]] `createDataReaderFactories`
+| Used when...FIXME
+|===
+
+[[implementations]]
+.DataSourceReaders
+[cols="1,2",options="header",width="100%"]
+|===
+| DataSourceReader
+| Description
+
+| [[ContinuousReader]] `ContinuousReader`
+| Used in Spark Structured Streaming
+
+| [[MicroBatchReader]] `MicroBatchReader`
+| Used in Spark Structured Streaming
+
+| [[SupportsPushDownCatalystFilters]] `SupportsPushDownCatalystFilters`
+|
+
+| [[SupportsPushDownFilters]] `SupportsPushDownFilters`
+|
+
+| [[SupportsPushDownRequiredColumns]] `SupportsPushDownRequiredColumns`
+|
+
+| [[SupportsReportPartitioning]] `SupportsReportPartitioning`
+|
+
+| [[SupportsReportStatistics]] `SupportsReportStatistics`
+|
+
+| [[SupportsScanColumnarBatch]] `SupportsScanColumnarBatch`
+|
+
+| [[SupportsScanUnsafeRow]] `SupportsScanUnsafeRow`
+|
+|===
