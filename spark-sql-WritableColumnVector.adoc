@@ -17,6 +17,7 @@ abstract class WritableColumnVector extends ColumnVector {
   public abstract void putNulls(int rowId, int count);
   public abstract void putNotNulls(int rowId, int count);
   // other type-specific puts
+  protected abstract WritableColumnVector reserveNewColumn(int capacity, DataType type);
 }
 ----
 
@@ -27,7 +28,14 @@ abstract class WritableColumnVector extends ColumnVector {
 | Description
 
 | [[reserveInternal]] `reserveInternal`
-| Used when...FIXME
+a| Used when:
+
+* link:spark-sql-OnHeapColumnVector.adoc#creating-instance[OnHeapColumnVector] and `OffHeapColumnVector` are created
+
+* `WritableColumnVector` is requested to <<reserve, reserve>>
+
+| [[reserveNewColumn]] `reserveNewColumn`
+| Used when `WritableColumnVector` is <<creating-instance, created>> and requested to <<reserveDictionaryIds, reserveDictionaryIds>>
 |===
 
 [[implementations]]
@@ -43,3 +51,49 @@ abstract class WritableColumnVector extends ColumnVector {
 | [[OnHeapColumnVector]] link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
 |
 |===
+
+=== [[reset]] `reset` Method
+
+[source, scala]
+----
+void reset()
+----
+
+`reset`...FIXME
+
+NOTE: `reset` is used when...FIXME
+
+=== [[reserve]] `reserve` Method
+
+[source, scala]
+----
+void reserve(int requiredCapacity)
+----
+
+`reserve`...FIXME
+
+NOTE: `reserve` is used when...FIXME
+
+=== [[reserveDictionaryIds]] `reserveDictionaryIds` Method
+
+[source, scala]
+----
+WritableColumnVector reserveDictionaryIds(int capacity)
+----
+
+`reserveDictionaryIds`...FIXME
+
+NOTE: `reserveDictionaryIds` is used when...FIXME
+
+=== [[creating-instance]] Creating WritableColumnVector Instance
+
+`WritableColumnVector` takes the following when created:
+
+* [[capacity]] Number of elements to hold in a vector (aka `capacity`)
+* [[type]] link:spark-sql-DataType.adoc[Data type] of the elements stored
+
+`WritableColumnVector` initializes the <<internal-registries, internal registries and counters>>.
+
+`WritableColumnVector`...FIXME
+
+NOTE: `WritableColumnVector` is a Java abstract class and cannot be created directly.

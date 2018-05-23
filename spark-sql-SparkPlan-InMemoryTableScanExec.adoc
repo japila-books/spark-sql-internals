@@ -111,7 +111,7 @@ vectorTypes: Option[Seq[String]]
 
 NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
 
-`vectorTypes` uses link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property to select the name of the column vector, i.e. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] or link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] when the property is off or on, respectively.
+`vectorTypes` uses link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property to select the name of the concrete column vector, i.e. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] or link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] when the property is off or on, respectively.
 
 `vectorTypes` gives as many column vectors as the <<attributes, attribute expressions>>.
 
@@ -188,7 +188,7 @@ createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
 
 `createAndDecompressColumn` takes the number of rows in the input `CachedBatch`.
 
-`createAndDecompressColumn` requests link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] or link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] to `allocateColumns` (with the number of rows and <<columnarBatchSchema, columnarBatchSchema>>) per the link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag, i.e. `true` or `false`, respectively.
+`createAndDecompressColumn` requests link:spark-sql-OffHeapColumnVector.adoc#allocateColumns[OffHeapColumnVector] or link:spark-sql-OnHeapColumnVector.adoc#allocateColumns[OnHeapColumnVector] to allocate column vectors (with the number of rows and <<columnarBatchSchema, columnarBatchSchema>>) per the link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag, i.e. `true` or `false`, respectively.
 
 NOTE: link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag is disabled by default which means that link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used.
 

@@ -120,7 +120,7 @@ private void initBatch(
 
 `initBatch` creates the batch link:spark-sql-schema.adoc[schema] that is link:spark-sql-SpecificParquetRecordReaderBase.adoc#sparkSchema[sparkSchema] and the input `partitionColumns` schema.
 
-`initBatch` requests link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] or link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] to `allocateColumns` per the input `memMode`, i.e. <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, respectively. `initBatch` records the allocated column vectors as the internal <<columnVectors, WritableColumnVectors>>.
+`initBatch` requests link:spark-sql-OffHeapColumnVector.adoc#allocateColumns[OffHeapColumnVector] or link:spark-sql-OnHeapColumnVector.adoc#allocateColumns[OnHeapColumnVector] to allocate column vectors per the input `memMode`, i.e. <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, respectively. `initBatch` records the allocated column vectors as the internal <<columnVectors, WritableColumnVectors>>.
 
 [NOTE]
 ====
