@@ -2,7 +2,7 @@
 
 `TreeNode` is a node in link:spark-sql-catalyst.adoc[Catalyst] tree with zero or more <<children, children>> (and can build link:spark-sql-Expression.adoc[expression] or link:spark-sql-catalyst-QueryPlan.adoc[structured query plan] trees).
 
-`TreeNode` offers not only functions that you may have used from Scala Collection API, e.g. `map`, `flatMap`, `collect`, `collectFirst`, `foreach`, but also `mapChildren`, `transform`, `transformDown`, `transformUp`, `foreachUp`, `numberedTreeString`, `p`, `asCode`, `prettyJson`, etc. that are particularly useful for tree manipulation or debugging.
+`TreeNode` offers not only functions that you may have used from Scala Collection API, e.g. `map`, `flatMap`, `collect`, `collectFirst`, `foreach`, but also `mapChildren`, `transform`, `transformDown`, `transformUp`, `foreachUp`, `numberedTreeString`, `p`, `asCode`, `prettyJson`, etc. for tree manipulation or debugging.
 
 NOTE: Scala-specific, `TreeNode` is an abstract class that is the base class of link:spark-sql-Expression.adoc[Expression] and Catalyst's link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan] abstract classes.
 
@@ -19,6 +19,9 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 }
 ----
 ====
+
+[[nodeName]]
+`TreeNode` has a *node name* as `nodeName`.
 
 === [[contract]] TreeNode Contract
 

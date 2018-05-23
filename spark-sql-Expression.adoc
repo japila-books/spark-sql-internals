@@ -231,13 +231,17 @@ a| *Interpreted (non-code-generated) expression evaluation* that evaluates an ex
 
 NOTE: By default accepts `EmptyRow`, i.e. `null`.
 
+`eval` is a slower "relative" of the <<genCode, code-generated (non-interpreted) expression evaluation>>.
+
 | [[foldable]] `foldable`
 |
 
 | [[genCode]] `genCode`
-| *Code-generated (non-interpreted) expression evaluation* that generates a Java source code that is used to evaluate an expression (on an input link:spark-sql-InternalRow.adoc[internal row] in a more optimized way not directly using <<eval, eval>>).
+| Generates the Java source code for *code-generated (non-interpreted) expression evaluation* (on an input link:spark-sql-InternalRow.adoc[internal row] in a more optimized way not directly using <<eval, eval>>).
 
 Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka link:spark-sql-subexpression-elimination.adoc[subexpression elimination]).
+
+`genCode` is a faster "relative" of the <<eval, interpreted (non-code-generated) expression evaluation>>.
 
 | [[nullable]] `nullable`
 |
@@ -273,3 +277,34 @@ scala> expr.sql
 res0: String = ((count('*') = 5) AND (count(sentences('Hi there! Good morning.', 'en', 'US')) = 5))
 ```
 |===
+
+=== [[reduceCodeSize]] `reduceCodeSize` Internal Method
+
+[source, scala]
+----
+reduceCodeSize(ctx: CodegenContext, eval: ExprCode): Unit
+----
+
+`reduceCodeSize` does its work only when all of the following are met:
+
+. Length of the generate code is above 1024
+
+. link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] of the input `CodegenContext` is defined
+
+. link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the input `CodegenContext` is not defined
+
+CAUTION: FIXME When would the above not be met? What's so special about such an expression?
+
+`reduceCodeSize` sets the `value` of the input `ExprCode` to the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the `value` name.
+
+In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the following:
+
+```
+[javaType] [newValue] = [funcFullName]([INPUT_ROW]);
+```
+
+The `funcFullName` is the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the link:spark-sql-catalyst-TreeNode.adoc#nodeName[name of the current expression node].
+
+TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
+
+NOTE: `reduceCodeSize` is used exclusively when `Expression` is requested to <<genCode, generate the Java source code for code-generated expression evaluation>>.

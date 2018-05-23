@@ -89,7 +89,7 @@ When <<doExecute, executed>>, `WholeStageCodegenExec` gives <<pipelineTime, pipe
 
 | [[pipelineTime]] `pipelineTime`
 | (empty)
-| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying `BufferedRowIterator` had been created and the internal rows were all consumed).
+| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator] had been created and the internal rows were all consumed).
 |===
 
 .WholeStageCodegenExec in web UI (Details for Query)

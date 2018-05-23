@@ -543,6 +543,8 @@
 
 . link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
+. link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
+
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]

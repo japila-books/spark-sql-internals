@@ -216,18 +216,25 @@ NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression
 
 [source, scala]
 ----
-import org.apache.spark.sql.catalyst.expressions.Literal
-import org.apache.spark.sql.{functions => f}
+val in = $"id" isin (1, 2, 3)
+val q = spark.range(4).filter(in)
+val plan = q.queryExecution.executedPlan
 
-// Using Catalyst DSL
-import org.apache.spark.sql.catalyst.dsl.expressions._
-val in = Literal(1) in f.array("1", "2", "3").expr
-scala> println(in)
-1 IN (array('1, '2, '3))
+import org.apache.spark.sql.execution.FilterExec
+val filterExec = plan.collectFirst { case f: FilterExec => f }.get
 
-import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
-val ctx = new CodegenContext
+import org.apache.spark.sql.catalyst.expressions.In
+val inExpr = filterExec.expressions.head.asInstanceOf[In]
+
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = plan.asInstanceOf[WholeStageCodegenExec]
+val (ctx, code) = wsce.doCodeGen
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodeFormatter
+scala> println(CodeFormatter.format(code))
+...code omitted
 
 // FIXME Make it work
-in.genCode(ctx)
+// I thought I'd reuse ctx to have expression: id#14L evaluated
+inExpr.genCode(ctx)
 ----

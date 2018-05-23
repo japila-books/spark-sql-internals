@@ -13,11 +13,11 @@ val ctx = new CodegenContext
 
 `CodegenContext` is <<creating-instance, created>> when:
 
-1. `CodeGenerator` is requested for link:spark-sql-CodeGenerator.adoc#newCodeGenContext[one]
+* `WholeStageCodegenExec` physical operator is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed])
 
-1. `WholeStageCodegenExec` is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate a Java source code for a child subtree]
+* `CodeGenerator` is requested for a link:spark-sql-CodeGenerator.adoc#newCodeGenContext[new CodegenContext]
 
-1. `GenerateUnsafeRowJoiner` is requested for a `UnsafeRowJoiner`
+* `GenerateUnsafeRowJoiner` is requested for a `UnsafeRowJoiner`
 
 `CodegenContext` stores expressions that don't support codegen.
 
@@ -53,6 +53,13 @@ assert(commonExprs.length > 0, "No common expressions found")
 |===
 | Name
 | Description
+
+| `classFunctions`
+| [[classFunctions]] Mutable Scala `Map` with function names, their Java source code and a class name
+
+New entries are added when `CodegenContext` is requested to <<addClass, addClass>> and <<addNewFunctionToClass, addNewFunctionToClass>>
+
+Used when `CodegenContext` is requested to <<declareAddedFunctions, declareAddedFunctions>>
 
 | `equivalentExpressions`
 a| [[equivalentExpressions]] link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
@@ -212,3 +219,83 @@ freshName(name: String): String
 `freshName`...FIXME
 
 NOTE: `freshName` is used when...FIXME
+
+=== [[addNewFunctionToClass]] `addNewFunctionToClass` Internal Method
+
+[source, scala]
+----
+addNewFunctionToClass(
+  funcName: String,
+  funcCode: String,
+  className: String): mutable.Map[String, mutable.Map[String, String]]
+----
+
+`addNewFunctionToClass`...FIXME
+
+NOTE: `addNewFunctionToClass` is used when...FIXME
+
+=== [[addClass]] `addClass` Internal Method
+
+[source, scala]
+----
+addClass(className: String, classInstance: String): Unit
+----
+
+`addClass`...FIXME
+
+NOTE: `addClass` is used when...FIXME
+
+=== [[declareAddedFunctions]] `declareAddedFunctions` Method
+
+[source, scala]
+----
+declareAddedFunctions(): String
+----
+
+`declareAddedFunctions`...FIXME
+
+NOTE: `declareAddedFunctions` is used when...FIXME
+
+=== [[declareMutableStates]] `declareMutableStates` Method
+
+[source, scala]
+----
+declareMutableStates(): String
+----
+
+`declareMutableStates`...FIXME
+
+NOTE: `declareMutableStates` is used when...FIXME
+
+=== [[initMutableStates]] `initMutableStates` Method
+
+[source, scala]
+----
+initMutableStates(): String
+----
+
+`initMutableStates`...FIXME
+
+NOTE: `initMutableStates` is used when...FIXME
+
+=== [[initPartition]] `initPartition` Method
+
+[source, scala]
+----
+initPartition(): String
+----
+
+`initPartition`...FIXME
+
+NOTE: `initPartition` is used when...FIXME
+
+=== [[emitExtraCode]] `emitExtraCode` Method
+
+[source, scala]
+----
+emitExtraCode(): String
+----
+
+`emitExtraCode`...FIXME
+
+NOTE: `emitExtraCode` is used when...FIXME
