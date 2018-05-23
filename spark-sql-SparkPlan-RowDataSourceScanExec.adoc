@@ -1,8 +1,19 @@
 == [[RowDataSourceScanExec]] RowDataSourceScanExec Leaf Physical Operator
 
-`RowDataSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator]) for scanning data from a relation.
+`RowDataSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator]) for scanning data from a <<relation, BaseRelation>>.
 
-`RowDataSourceScanExec` is <<creating-instance, created>> for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with different kinds of relations (in link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[DataSourceStrategy] execution planning strategy).
+`RowDataSourceScanExec` is <<creating-instance, created>> to represent a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with the following scan types when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed]:
+
+* `CatalystScan`, `PrunedFilteredScan`, `PrunedScan` (indirectly when `DataSourceStrategy` is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw[pruneFilterProjectRaw])
+
+* `TableScan`
+
+`RowDataSourceScanExec` marks the <<filters, filters>> that are included in the <<handledFilters, handledFilters>> with `*` (star) in the <<metadata, metadata>> that is used for a simple text representation.
+
+[source, scala]
+----
+// DEMO RowDataSourceScanExec with a simple text representation with stars
+----
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
@@ -19,9 +30,27 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 
 `RowDataSourceScanExec` takes the following when created:
 
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[fullOutput]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[requiredColumnsIndex]] Indices of required columns
+* [[filters]] `Filters`
+* [[handledFilters]] Handled `Filters`
 * [[rdd]] RDD of link:spark-sql-InternalRow.adoc[internal binary rows]
 * [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
-* [[outputPartitioning]] Output partitioning
-* [[metadata]] Metadata (as a collection of pairs)
-* [[metastoreTableIdentifier]] Optional `TableIdentifier`
+* [[tableIdentifier]] `TableIdentifier`
+
+=== [[metadata]] `metadata` Property
+
+[source, scala]
+----
+metadata: Map[String, String]
+----
+
+NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a simple text representation.
+
+`metadata` marks the <<filters, filters>> that are included in the <<handledFilters, handledFilters>> with `*` (star).
+
+In the end, `metadata` creates the following mapping:
+
+. *ReadSchema* with the <<output, output>> converted to link:spark-sql-StructType.adoc#catalogString[catalog representation]
+
+. *PushedFilters* with the marked and unmarked <<filters, filters>>

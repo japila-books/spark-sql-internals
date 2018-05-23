@@ -44,7 +44,7 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 | Description
 
 | [[metadata]] `metadata`
-| Metadata (as a collection of key-value pairs) that describes this scan.
+| Metadata (as a collection of key-value pairs) that describes a scan.
 
 Used for <<simpleString, simple text representation>>
 

@@ -1,6 +1,6 @@
 == [[DataSourceStrategy]] DataSourceStrategy Execution Planning Strategy
 
-`DataSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that converts link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operator to link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec] physical operator.
+`DataSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that converts link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators to link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec] physical operators.
 
 [[apply]]
 [[selection-requirements]]
@@ -26,7 +26,7 @@ a| Uses <<pruneFilterProject, pruneFilterProject>>
 NOTE: `PrunedScan` does not seem to be used in Spark SQL.
 
 | `LogicalRelation` with `TableScan` relation
-| Matches `KafkaRelation` exclusively (as it is `TableScan`)
+| Matches `KafkaRelation` exclusively (as it is a `TableScan`)
 |===
 
 [source, scala]
@@ -57,7 +57,7 @@ pruneFilterProject(
 
 NOTE: `pruneFilterProject` is used when `DataSourceStrategy` plans a `LogicalRelation` with <<PrunedFilteredScan, PrunedFilteredScan>> or <<PrunedScan, PrunedScan>> scans.
 
-=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec (under FilterExec and ProjectExec) -- `pruneFilterProjectRaw` Internal Method
+=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec (under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
 
 [source, scala]
 ----
