@@ -1,8 +1,8 @@
 == [[WholeStageCodegenExec]] WholeStageCodegenExec Unary Physical Operator for Java Code Generation
 
-`WholeStageCodegenExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is one of the two building blocks of link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] for a *codegened execution pipeline* of a physical query plan.
+`WholeStageCodegenExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] that is the foundation of link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] for a *Codegened Execution Pipeline* of a structured query.
 
-NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other physical operator for whole-stage Java code generation.
+NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
 
 [[creating-instance]]
 [[child]]
@@ -19,14 +19,14 @@ import org.apache.spark.sql.execution.WholeStageCodegenExec
 val rdd = WholeStageCodegenExec(rangeExec)(codegenStageId = 0).execute()
 ----
 
-`WholeStageCodegenExec` is created exclusively when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule is executed with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled.
+`WholeStageCodegenExec` is created exclusively when `CollapseCodegenStages` physical query optimization is link:spark-sql-CollapseCodegenStages.adoc#apply[executed] with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled.
 
 NOTE: link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
-`WholeStageCodegenExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] and marks a node in a query plan that, once <<doExecute, executed>>, triggers code generation.
+`WholeStageCodegenExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] and once <<doExecute, executed>> triggers code generation for the entire structured query.
 
 [[generateTreeString]]
-`WholeStageCodegenExec` is marked with `*` prefix with <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the tree output of a physical plan.
+`WholeStageCodegenExec` marks a <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the link:spark-sql-catalyst-TreeNode.adoc#generateTreeString[text representation of a physical plan].
 
 [source, scala]
 ----

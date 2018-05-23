@@ -1,4 +1,4 @@
-== [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Plan Optimization Rule -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
+== [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Optimization -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
 
 `CollapseCodegenStages` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, collapsing chained physical operators together and generate Java code for execution>>.
 
