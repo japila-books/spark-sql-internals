@@ -253,7 +253,7 @@ doProduceWithKeys(ctx: CodegenContext): String
 
 `doProduceWithKeys`...FIXME
 
-NOTE: `doProduceWithKeys` is used when...FIXME
+NOTE: `doProduceWithKeys` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduce, generate the Java source code for "produce" path in whole-stage code generation>>.
 
 === [[doProduceWithoutKeys]] `doProduceWithoutKeys` Internal Method
 
@@ -264,7 +264,7 @@ doProduceWithoutKeys(ctx: CodegenContext): String
 
 `doProduceWithoutKeys`...FIXME
 
-NOTE: `doProduceWithoutKeys` is used when...FIXME
+NOTE: `doProduceWithoutKeys` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduce, generate the Java source code for "produce" path in whole-stage code generation>>.
 
 === [[generateResultFunction]] `generateResultFunction` Internal Method
 
@@ -275,7 +275,7 @@ generateResultFunction(ctx: CodegenContext): String
 
 `generateResultFunction`...FIXME
 
-NOTE: `generateResultFunction` is used when...FIXME
+NOTE: `generateResultFunction` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, doProduceWithKeys>> (when `HashAggregateExec` physical operator is requested to <<doProduce, generate the Java source code for "produce" path in whole-stage code generation>>)
 
 === [[supportsAggregate]] `supportsAggregate` Method
 

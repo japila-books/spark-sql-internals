@@ -117,9 +117,9 @@ codegenInner(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 `codegenInner`...FIXME
 
-NOTE: `codegenInner` is used when...FIXME
+NOTE: `codegenInner` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
 
-=== [[codegenOuter]] Generating Java Source Code for Outer Join -- `codegenOuter` Internal Method
+=== [[codegenOuter]] Generating Java Source Code for Left or Right Outer Join -- `codegenOuter` Internal Method
 
 [source, scala]
 ----
@@ -128,7 +128,7 @@ codegenOuter(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 `codegenOuter`...FIXME
 
-NOTE: `codegenOuter` is used when...FIXME
+NOTE: `codegenOuter` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
 
 === [[codegenSemi]] Generating Java Source Code for Left Semi Join -- `codegenSemi` Internal Method
 
@@ -139,7 +139,7 @@ codegenSemi(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 `codegenSemi`...FIXME
 
-NOTE: `codegenSemi` is used when...FIXME
+NOTE: `codegenSemi` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
 
 === [[codegenAnti]] Generating Java Source Code for Anti Join -- `codegenAnti` Internal Method
 
@@ -150,7 +150,7 @@ codegenAnti(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 `codegenAnti`...FIXME
 
-NOTE: `codegenAnti` is used when...FIXME
+NOTE: `codegenAnti` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
 
 === [[codegenExistence]] `codegenExistence` Internal Method
 
@@ -161,7 +161,7 @@ codegenExistence(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 `codegenExistence`...FIXME
 
-NOTE: `codegenExistence` is used when...FIXME
+NOTE: `codegenExistence` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
 
 === [[genStreamSideJoinKey]] `genStreamSideJoinKey` Internal Method
 
@@ -174,7 +174,7 @@ genStreamSideJoinKey(
 
 `genStreamSideJoinKey`...FIXME
 
-NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested to generate the Java source code for <<codegenInner, inner>>, <<codegenOuter, outer>>, <<codegenSemi, left semi>>, <<codegenAnti, anti>> and <<codegenExistence, existence>> joins.
+NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested to generate the Java source code for <<codegenInner, inner>>, <<codegenOuter, outer>>, <<codegenSemi, left semi>>, <<codegenAnti, anti>> and <<codegenExistence, existence>> joins (for the "consume" path in whole-stage code generation).
 
 === [[creating-instance]] Creating BroadcastHashJoinExec Instance
 

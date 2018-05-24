@@ -17,6 +17,9 @@ A `QueryPlan` has zero, one or more link:spark-sql-Expression.adoc[Catalyst expr
 
 NOTE: `QueryPlan` is a tree of operators that have a tree of expressions.
 
+[[references]]
+`QueryPlan` has `references` property that is the attributes that appear in <<expressions, expressions>> from this operator.
+
 === [[contract]] QueryPlan Contract
 
 [source, scala]
