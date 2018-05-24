@@ -33,6 +33,12 @@ org.apache.spark.sql.execution.FileSourceScanExec
 [[inputRDDs]]
 `FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD of internal rows] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
+`FileSourceScanExec` supports <<pushedDownFilters, data source filters>> that are printed out to the console (at <<logging, INFO>> logging level) and available as <<metadata, metadata>> (e.g. in web UI or link:spark-sql-dataset-operators.adoc#explain[explain]).
+
+```
+Pushed Filters: [pushedDownFilters]
+```
+
 [[metrics]]
 .FileSourceScanExec's Performance Metrics
 [cols="1,2,2",options="header",width="100%"]
@@ -103,9 +109,21 @@ a| Metadata (as a collection of key-value pairs)
 NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to..FIXME.
 
 | [[pushedDownFilters]] `pushedDownFilters`
-|
+a| link:spark-sql-Filter.adoc[Data source filters] that are <<dataFilters, dataFilters>> expressions link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#translateFilter[converted to their respective filters]
+
+[TIP]
+====
+Enable <<logging, INFO>> logging level to see <<pushedDownFilters, pushedDownFilters>> printed out to the console.
+
+```
+Pushed Filters: [pushedDownFilters]
+```
+====
+
+Used when `FileSourceScanExec` is requested for the <<metadata, metadata>> and <<inputRDD, input RDD>>
 |===
 
+[[logging]]
 [TIP]
 ====
 Enable `INFO` logging level for `org.apache.spark.sql.execution.FileSourceScanExec` logger to see what happens inside.
