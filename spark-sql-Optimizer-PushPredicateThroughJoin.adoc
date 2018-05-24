@@ -1,4 +1,4 @@
-== [[PushPredicateThroughJoin]] PushPredicateThroughJoin Logical Query Optimization
+== [[PushPredicateThroughJoin]] PushPredicateThroughJoin Logical Optimization
 
 `PushPredicateThroughJoin` is...FIXME
 

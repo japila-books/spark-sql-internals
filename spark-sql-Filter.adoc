@@ -1,0 +1,94 @@
+== [[Filter]] Data Source Filter
+
+`Filter` is the <<contract, contract>> for <<implementations, data source filters>> that can be pushed down to a data source.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.sources
+
+abstract class Filter {
+  def references: Array[String]
+}
+----
+
+.Filter Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| [[references]] `references`
+a| List of columns that are referenced by a filter
+
+Used when:
+
+* `Filter` is requested to <<findReferences, find the column references in a value>>
+
+* `And`, `Or` and `Not` filters are requested for the column references
+|===
+
+[[implementations]]
+.Filters
+[cols="1,2",options="header",width="100%"]
+|===
+| Filter
+| Description
+
+| `And`
+| [[And]]
+
+| `EqualNullSafe`
+| [[EqualNullSafe]]
+
+| `EqualTo`
+| [[EqualTo]]
+
+| `GreaterThan`
+| [[GreaterThan]]
+
+| `GreaterThanOrEqual`
+| [[GreaterThanOrEqual]]
+
+| `In`
+| [[In]]
+
+| `IsNotNull`
+| [[IsNotNull]]
+
+| `IsNull`
+| [[IsNull]]
+
+| `LessThan`
+| [[LessThan]]
+
+| `LessThanOrEqual`
+| [[LessThanOrEqual]]
+
+| `Not`
+| [[Not]]
+
+| `Or`
+| [[Or]]
+
+| `StringContains`
+| [[StringContains]]
+
+| `StringEndsWith`
+| [[StringEndsWith]]
+
+| `StringStartsWith`
+| [[StringStartsWith]]
+
+|===
+
+=== [[findReferences]] Finding Column References in Any Value -- `findReferences` Method
+
+[source, scala]
+----
+findReferences(value: Any): Array[String]
+----
+
+`findReferences` takes the <<references, references>> from the `value` filter is it is one or returns an empty array.
+
+NOTE: `findReferences` is used when `EqualTo`, `EqualNullSafe`, `GreaterThan`, `GreaterThanOrEqual`, `LessThan`, `LessThanOrEqual` and `In` filters are requested for the column references.

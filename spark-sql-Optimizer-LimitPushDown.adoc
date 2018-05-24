@@ -1,4 +1,4 @@
-== [[LimitPushDown]] LimitPushDown Logical Query Optimization
+== [[LimitPushDown]] LimitPushDown Logical Optimization
 
 `LimitPushDown` is a link:spark-sql-LogicalPlan.adoc[LogicalPlan] optimization rule that <<apply, transforms>> the following logical plans:
 

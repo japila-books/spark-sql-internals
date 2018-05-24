@@ -1,6 +1,6 @@
-== [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
+== [[PruneFileSourcePartitions]] PruneFileSourcePartitions Logical Optimization
 
-`OptimizeSubqueries` is...FIXME
+`PruneFileSourcePartitions` is...FIXME
 
 === [[apply]] `apply` Method
 

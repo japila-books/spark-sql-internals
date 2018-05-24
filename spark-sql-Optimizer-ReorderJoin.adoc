@@ -1,4 +1,4 @@
-== [[ReorderJoin]] ReorderJoin Logical Query Optimization -- Reordering Inner and Cross Joins
+== [[ReorderJoin]] ReorderJoin Logical Optimization -- Reordering Inner and Cross Joins
 
 `ReorderJoin` is an optimization of a link:spark-sql-LogicalPlan.adoc[logical plan] that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
 

@@ -1,8 +1,6 @@
-== [[SparkOptimizer]] SparkOptimizer -- Rule-Based Optimizer
+== [[SparkOptimizer]] SparkOptimizer -- Default Spark Optimizer
 
-`SparkOptimizer` is the concrete link:spark-sql-Optimizer.adoc[rule-based optimizer] (for logical query plans) in Spark SQL that uses <<batches, additional logical plan optimizations>>.
-
-NOTE: You can extend the available logical plan optimizations and register yours using <<experimentalMethods, ExperimentalMethods>>.
+`SparkOptimizer` is the concrete link:spark-sql-Optimizer.adoc[logical optimizer] in Spark SQL that uses the <<batches, regular optimizations>>.
 
 `SparkOptimizer` is available as link:spark-sql-SessionState.adoc#optimizer[optimizer] property of `SessionState`.
 
@@ -11,11 +9,9 @@ NOTE: You can extend the available logical plan optimizations and register yours
 sparkSession.sessionState.optimizer
 ----
 
-[NOTE]
-====
-The result of applying the <<batches, batches>> of `SparkOptimizer` to a link:spark-sql-LogicalPlan.adoc[LogicalPlan] is called *optimized logical plan*.
+Executing the <<batches, optimization rules>> on a link:spark-sql-LogicalPlan.adoc[logical query plan] gives an *optimized logical plan* of a structured query.
 
-Optimized logical plan of a structured query is available as link:spark-sql-QueryExecution.adoc#optimizedPlan[optimizedPlan] attribute of `QueryExecution`.
+You can access the optimization logical plan of a structured query through the `QueryExecution` as link:spark-sql-QueryExecution.adoc#optimizedPlan[optimizedPlan].
 
 [source, scala]
 ----
@@ -32,10 +28,17 @@ res0: org.apache.spark.sql.catalyst.plans.logical.LogicalPlan =
 TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)], newInstance(class java.lang.Long)
 +- Range (0, 10, step=1, splits=Some(8))
 ----
-====
+
+A Spark developer can extend the <<batches, available logical optimizations>> and register <<User-Provided-Optimizers, user-provided optimizations>> using <<experimentalMethods, ExperimentalMethods>>.
+
+`SparkOptimizer` comes however with three extension points for additional optimization batches (two of which are for custom `SparkOptimizers`):
+
+. <<preOptimizationBatches, preOptimizationBatches>>
+. <<postHocOptimizationBatches, postHocOptimizationBatches>>
+. <<User-Provided-Optimizers, User Provided Optimizers>>
 
 [[batches]]
-.SparkOptimizer's Optimization Rules (in the order of execution)
+.SparkOptimizer's Regular Optimization Batches (in the order of execution)
 [cols="2,1,3,3",options="header",width="100%"]
 |===
 ^.^| Batch Name
@@ -43,19 +46,39 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 | Rules
 | Description
 
+|
+|
+| <<preOptimizationBatches, preOptimizationBatches>>
+|
+
+|
+|
+| link:spark-sql-Optimizer.adoc#batches[Default Optimization Batches]
+|
+
 ^.^| Optimize Metadata Only Query
 ^.^| `Once`
-| OptimizeMetadataOnlyQuery
+| link:spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc[OptimizeMetadataOnlyQuery]
 |
 
 ^.^| Extract Python UDF from Aggregate
 ^.^| `Once`
-| ExtractPythonUDFFromAggregate
+| link:spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.adoc[ExtractPythonUDFFromAggregate]
 |
 
 ^.^| Prune File Source Table Partitions
 ^.^| `Once`
-| PruneFileSourcePartitions
+| link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions]
+|
+
+^.^| Push down operators to data source scan
+^.^| `Once`
+| link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc[PushDownOperatorsToDataSource]
+|
+
+^.^|
+^.^|
+| <<postHocOptimizationBatches, postHocOptimizationBatches>>
 |
 
 ^.^| [[User-Provided-Optimizers]] User Provided Optimizers
@@ -86,6 +109,24 @@ Refer to link:spark-logging.adoc[Logging].
 * [[experimentalMethods]] link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
 NOTE: `SparkOptimizer` is created when `SessionState` link:spark-sql-SessionState.adoc#creating-instance[is created] (that initializes link:spark-sql-SessionState.adoc#optimizer[optimizer] property).
+
+=== [[preOptimizationBatches]] Extension Point for Additional Pre-Optimization Batches -- `preOptimizationBatches` Method
+
+[source, scala]
+----
+preOptimizationBatches: Seq[Batch]
+----
+
+`preOptimizationBatches` are the additional *pre-optimization batches* that are executed right before the <<batches, regular optimization batches>>.
+
+=== [[postHocOptimizationBatches]] Extension Point for Additional Post-Hoc Optimization Batches -- `postHocOptimizationBatches` Method
+
+[source, scala]
+----
+postHocOptimizationBatches: Seq[Batch] = Nil
+----
+
+`postHocOptimizationBatches` are the additional *post-optimization batches* that are executed right after the <<batches, regular optimization batches>> (before <<User-Provided-Optimizers, User Provided Optimizers>>).
 
 === [[i-want-more]] Further Reading and Watching
 

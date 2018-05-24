@@ -1,4 +1,4 @@
-== [[PushDownPredicate]] PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Query Optimization
+== [[PushDownPredicate]] PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Optimization
 
 `PushDownPredicate` is a logical optimization rule in link:spark-sql-Optimizer.adoc[Optimizer] that...FIXME
 

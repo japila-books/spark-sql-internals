@@ -152,6 +152,9 @@
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
+. link:spark-sql-PrunedScan.adoc[PrunedScan]
+. link:spark-sql-TableScan.adoc[TableScan]
+. link:spark-sql-CatalystScan.adoc[CatalystScan]
 
 . link:spark-sql-hint-framework.adoc[Hint Framework]
 
@@ -165,8 +168,8 @@
 . link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 
-. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Rule-Based Optimizer]
-.. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Optimizer]
+. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Default Spark Optimizer]
+.. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Logical Optimizer (Catalyst Optimizer)]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
@@ -385,7 +388,7 @@
 . link:spark-sql-UpdateOuterReferences.adoc[UpdateOuterReferences]
 . link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
 
-=== Logical Query Optimizations
+=== Logical Optimizations
 
 . link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 . link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
@@ -393,13 +396,17 @@
 . link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
 . link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
 . link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
+. link:spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.adoc[ExtractPythonUDFFromAggregate]
 . link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase / ComputeCurrentTime]
 . link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 . link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 . link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
+. link:spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc[OptimizeMetadataOnlyQuery]
 . link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
 . link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
+. link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions]
 . link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
+. link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc[PushDownOperatorsToDataSource]
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
 . link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 . link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
@@ -549,6 +556,8 @@
 . link:spark-sql-WritableColumnVector.adoc[WritableColumnVector]
 . link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
 . link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
+
+. link:spark-sql-Filter.adoc[Data Source Filter]
 
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]

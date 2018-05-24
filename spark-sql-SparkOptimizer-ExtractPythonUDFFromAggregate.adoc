@@ -1,6 +1,6 @@
-== [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
+== [[ExtractPythonUDFFromAggregate]] ExtractPythonUDFFromAggregate Logical Optimization
 
-`OptimizeSubqueries` is...FIXME
+`ExtractPythonUDFFromAggregate` is...FIXME
 
 === [[apply]] `apply` Method
 

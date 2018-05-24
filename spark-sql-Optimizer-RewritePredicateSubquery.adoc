@@ -1,4 +1,4 @@
-== [[RewritePredicateSubquery]] RewritePredicateSubquery Logical Query Optimization
+== [[RewritePredicateSubquery]] RewritePredicateSubquery Logical Optimization
 
 `RewritePredicateSubquery` is a *logical optimization* that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>>:
 

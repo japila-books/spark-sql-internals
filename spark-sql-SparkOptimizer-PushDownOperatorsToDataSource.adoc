@@ -1,6 +1,6 @@
-== [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
+== [[PushDownOperatorsToDataSource]] PushDownOperatorsToDataSource Logical Optimization
 
-`OptimizeSubqueries` is...FIXME
+`PushDownOperatorsToDataSource` is...FIXME
 
 === [[apply]] `apply` Method
 

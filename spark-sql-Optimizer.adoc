@@ -1,4 +1,4 @@
-== [[Optimizer]] Optimizer -- Generic Rule-Based Query Optimizer (Catalyst Optimizer)
+== [[Optimizer]] Optimizer -- Generic Rule-Based Logical Optimizer (Catalyst Optimizer)
 
 `Optimizer` (aka *Catalyst Optimizer*) is the generic *rule-based logical query plan optimizer* in Spark SQL that uses link:spark-sql-catalyst.adoc[Catalyst Framework] to optimize link:spark-sql-LogicalPlan.adoc[logical query plans] using <<batches, optimization rules>>.
 
@@ -16,7 +16,7 @@ spark.sessionState.optimizer
 `Optimizer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines <<batches, collection of logical plan optimization rules>>.
 
 [[batches]]
-.Optimizer's Logical Query Optimization Rules (in the order of execution)
+.Optimizer's Default Optimization Batches (in the order of execution)
 [cols="2,1,3,3",options="header",width="100%"]
 |===
 ^.^| Batch Name

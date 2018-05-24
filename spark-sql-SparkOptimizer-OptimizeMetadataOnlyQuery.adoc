@@ -1,6 +1,6 @@
-== [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
+== [[OptimizeMetadataOnlyQuery]] OptimizeMetadataOnlyQuery Logical Optimization
 
-`OptimizeSubqueries` is...FIXME
+`OptimizeMetadataOnlyQuery` is...FIXME
 
 === [[apply]] `apply` Method
 
