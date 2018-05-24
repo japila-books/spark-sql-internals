@@ -64,3 +64,14 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 
 * [[projectList]] link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions] for the projection
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical operator]
+
+=== [[doConsume]] Generating Java Source Code for Whole-Stage Consume Path Code Generation -- `doConsume` Method
+
+[source, scala]
+----
+doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
+----
+
+NOTE: `doConsume` is part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
+
+`doConsume`...FIXME

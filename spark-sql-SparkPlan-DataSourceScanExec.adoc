@@ -7,7 +7,7 @@
 NOTE: The prefix for variable names for `DataSourceScanExec` operators in a link:spark-sql-CodegenSupport.adoc#variablePrefix[generated Java source code] is *scan*.
 
 [[nodeNamePrefix]]
-The default *node name prefix* is an empty string (that is used at the very beginning of <<simpleString, simple text node description>>).
+The default *node name prefix* is an empty string (that is used in the <<simpleString, simple node description>>).
 
 [[implementations]]
 .DataSourceScanExecs

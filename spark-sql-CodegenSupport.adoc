@@ -1,10 +1,36 @@
 == [[CodegenSupport]] CodegenSupport -- Contract for Physical Operators with Java Code Generation
 
-`CodegenSupport` is the <<contract, contract>> for link:spark-sql-SparkPlan.adoc[physical operators] that support *Java code generation* (aka *whole-stage codegen*).
+`CodegenSupport` is the <<contract, contract>> for link:spark-sql-SparkPlan.adoc[physical operators] that want to support *Java code generation* for link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)].
+
+`CodegenSupport` is made up of the <<final-methods, final methods>> that are responsible for generating the Java source code for Whole-Stage Java Code Generation.
+
+[[final-methods]]
+.SparkPlan's Final Methods
+[cols="1,3",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| <<consume, consume>>
+a| Code for consuming generated columns or a row from a physical operator
+
+[source, scala]
+----
+consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): String
+----
+
+| <<produce, produce>>
+a| Code for "produce" code path
+
+[source, scala]
+----
+produce(ctx: CodegenContext, parent: CodegenSupport): String
+----
+|===
 
 `CodegenSupport` allows physical operators to <<supportCodegen, disable Java code generation>>.
 
-TIP: Use link:spark-sql-debugging-execution.adoc#debugCodegen[debugCodegen] (or link:spark-sql-QueryExecution.adoc#debug[QueryExecution.debug.codegen]) method to access a ``CodegenSupport``-generated Java source code.
+TIP: Use link:spark-sql-debugging-execution.adoc#debugCodegen[debugCodegen] or link:spark-sql-QueryExecution.adoc#debug[QueryExecution.debug.codegen] methods to access the generated Java source code for a structured query.
 
 [[variablePrefix]]
 `variablePrefix` is...FIXME
@@ -71,83 +97,6 @@ NOTE: Up to two input RDDs are supported.
 
 Used exclusively when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
 |===
-
-=== [[consume]] Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator -- `consume` Final Method
-
-[source, scala]
-----
-consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): String
-----
-
-`consume`...FIXME
-
-TIP: Enable link:spark-sql-properties.adoc#spark.sql.codegen.comments[spark.sql.codegen.comments] Spark SQL property to have `CONSUME` markers in the generated Java source code.
-
-[source, scala]
-----
-// ./bin/spark-shell --conf spark.sql.codegen.comments=true
-import org.apache.spark.sql.execution.debug._
-val q = Seq((0 to 4).toList).toDF.
-  select(explode('value) as "id").
-  join(spark.range(1), "id")
-scala> q.debugCodegen
-Found 2 WholeStageCodegen subtrees.
-...
-== Subtree 2 / 2 ==
-*Project [id#6]
-+- *BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
-   :- Generate explode(value#1), false, false, [id#6]
-   :  +- LocalTableScan [value#1]
-   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
-      +- *Range (0, 1, step=1, splits=8)
-...
-/* 066 */     while (inputadapter_input.hasNext() && !stopEarly()) {
-/* 067 */       InternalRow inputadapter_row = (InternalRow) inputadapter_input.next();
-/* 068 */       // CONSUME: BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
-/* 069 */       // input[0, int, false]
-/* 070 */       int inputadapter_value = inputadapter_row.getInt(0);
-...
-/* 079 */       // find matches from HashedRelation
-/* 080 */       UnsafeRow bhj_matched = bhj_isNull ? null: (UnsafeRow)bhj_relation.getValue(bhj_value);
-/* 081 */       if (bhj_matched != null) {
-/* 082 */         {
-/* 083 */           bhj_numOutputRows.add(1);
-/* 084 */
-/* 085 */           // CONSUME: Project [id#6]
-/* 086 */           // CONSUME: WholeStageCodegen
-/* 087 */           project_rowWriter.write(0, inputadapter_value);
-/* 088 */           append(project_result);
-/* 089 */
-/* 090 */         }
-/* 091 */       }
-/* 092 */       if (shouldStop()) return;
-...
-----
-
-[NOTE]
-====
-`consume` is used when:
-
-* `BroadcastHashJoinExec` is requested to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenInner[codegenInner], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenOuter[codegenOuter], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenSemi[codegenSemi], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenAnti[codegenAnti], and link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenExistence[codegenExistence]
-
-* `ColumnarBatchScan` is requested to link:spark-sql-ColumnarBatchScan.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `FileSourceScanExec` is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `GenerateExec` is requested to link:spark-sql-SparkPlan-GenerateExec.adoc#codeGenCollection[codeGenCollection] and link:spark-sql-SparkPlan-GenerateExec.adoc#codeGenTraversableOnce[codeGenTraversableOnce]
-
-* `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithoutKeys[doProduceWithoutKeys] and link:spark-sql-SparkPlan-HashAggregateExec.adoc#generateResultFunction[generateResultFunction]
-
-* `InputAdapter` is requested to link:spark-sql-SparkPlan-InputAdapter.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `RangeExec` is requested to link:spark-sql-SparkPlan-RangeExec.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `RowDataSourceScanExec` is requested to link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `SortExec` is requested to link:spark-sql-SparkPlan-SortExec.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-
-* `SortMergeJoinExec` is requested to link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#doProduce[generate the Java source code to process the rows from input RDDs]
-====
 
 === [[supportCodegen]] `supportCodegen` Flag
 
@@ -265,3 +214,76 @@ metricTerm(ctx: CodegenContext, name: String): String
 `metricTerm`...FIXME
 
 NOTE: `metricTerm` is used when...FIXME
+
+=== [[consume]] Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator -- `consume` Final Method
+
+[source, scala]
+----
+consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): String
+----
+
+NOTE: `consume` is a final method that cannot be changed and is the foundation of codegen support.
+
+`consume`...FIXME
+
+TIP: Enable link:spark-sql-properties.adoc#spark.sql.codegen.comments[spark.sql.codegen.comments] Spark SQL property to have `CONSUME` markers in the generated Java source code.
+
+[source, scala]
+----
+// ./bin/spark-shell --conf spark.sql.codegen.comments=true
+import org.apache.spark.sql.execution.debug._
+val q = Seq((0 to 4).toList).toDF.
+  select(explode('value) as "id").
+  join(spark.range(1), "id")
+scala> q.debugCodegen
+Found 2 WholeStageCodegen subtrees.
+...
+== Subtree 2 / 2 ==
+*Project [id#6]
++- *BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
+   :- Generate explode(value#1), false, false, [id#6]
+   :  +- LocalTableScan [value#1]
+   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
+      +- *Range (0, 1, step=1, splits=8)
+...
+/* 066 */     while (inputadapter_input.hasNext() && !stopEarly()) {
+/* 067 */       InternalRow inputadapter_row = (InternalRow) inputadapter_input.next();
+/* 068 */       // CONSUME: BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
+/* 069 */       // input[0, int, false]
+/* 070 */       int inputadapter_value = inputadapter_row.getInt(0);
+...
+/* 079 */       // find matches from HashedRelation
+/* 080 */       UnsafeRow bhj_matched = bhj_isNull ? null: (UnsafeRow)bhj_relation.getValue(bhj_value);
+/* 081 */       if (bhj_matched != null) {
+/* 082 */         {
+/* 083 */           bhj_numOutputRows.add(1);
+/* 084 */
+/* 085 */           // CONSUME: Project [id#6]
+/* 086 */           // CONSUME: WholeStageCodegen
+/* 087 */           project_rowWriter.write(0, inputadapter_value);
+/* 088 */           append(project_result);
+/* 089 */
+/* 090 */         }
+/* 091 */       }
+/* 092 */       if (shouldStop()) return;
+...
+----
+
+[NOTE]
+====
+`consume` is used when:
+
+* `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, `FilterExec`, link:spark-sql-SparkPlan-ProjectExec.adoc#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path["consume" code path] in whole-stage code generation
+
+* `ColumnarBatchScan` is requested to link:spark-sql-ColumnarBatchScan.adoc#produceBatches[produceBatches] and link:spark-sql-ColumnarBatchScan.adoc#produceRows[produceRows]
+
+* `RowDataSourceScanExec` is requested to link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#doProduce[generate the Java source code for the produce path in whole-stage code generation]
+
+* `GenerateExec` is requested to link:spark-sql-SparkPlan-GenerateExec.adoc#codeGenCollection[codeGenCollection] and link:spark-sql-SparkPlan-GenerateExec.adoc#codeGenTraversableOnce[codeGenTraversableOnce]
+
+* link:spark-sql-SparkPlan-RangeExec.adoc#doProduce[RangeExec], link:spark-sql-SparkPlan-SortExec.adoc#doProduce[SortExec], link:spark-sql-SparkPlan-InputAdapter.adoc#doProduce[InputAdapter], link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the produce path in whole-stage code generation
+
+* `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithoutKeys[doProduceWithoutKeys] and link:spark-sql-SparkPlan-HashAggregateExec.adoc#generateResultFunction[generateResultFunction]
+
+* `BroadcastHashJoinExec` is requested to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenInner[codegenInner], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenOuter[codegenOuter], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenSemi[codegenSemi], link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenAnti[codegenAnti], and link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#codegenExistence[codegenExistence]
+====

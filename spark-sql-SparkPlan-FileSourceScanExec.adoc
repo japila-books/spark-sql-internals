@@ -69,7 +69,7 @@ Scan csv
 image::images/spark-sql-FileSourceScanExec-webui-query-details.png[align="center"]
 
 [[nodeNamePrefix]]
-`FileSourceScanExec` uses *File* for `nodeNamePrefix` (that is used for the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple node description] in query plans).
+`FileSourceScanExec` uses *File* for link:spark-sql-SparkPlan-DataSourceScanExec.adoc#nodeNamePrefix[nodeNamePrefix] (that is used for the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple node description] in query plans).
 
 [source, scala]
 ----
@@ -147,17 +147,6 @@ doExecute(): RDD[InternalRow]
 NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
 
 `doExecute`...FIXME
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
-
-`doProduce`...FIXME
 
 === [[createNonBucketedReadRDD]] `createNonBucketedReadRDD` Internal Method
 
