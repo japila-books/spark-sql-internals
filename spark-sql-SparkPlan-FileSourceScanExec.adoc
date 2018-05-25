@@ -312,6 +312,25 @@ NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan C
 
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
-If <<supportsBatch, supportsBatch>> is on, `doExecute` creates a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance[WholeStageCodegenExec] (with link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and link:spark-sql-SparkPlan.adoc#execute[executes] it.
+If <<supportsBatch, supportsBatch>> is on, `doExecute` creates a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance[WholeStageCodegenExec] (with link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and link:spark-sql-SparkPlan.adoc#execute[executes] it right after.
 
-If <<supportsBatch, supportsBatch>> is off, `doExecute`...FIXME
+If <<supportsBatch, supportsBatch>> is off, `doExecute` creates an `unsafeRows` RDD to scan over which is different per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
+
+If <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag is on, `doExecute` takes the <<inputRDD, inputRDD>> and creates a new RDD by applying a function to each partition (using `RDD.mapPartitionsWithIndexInternal`):
+
+. Creates a link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection] for the link:spark-sql-catalyst-QueryPlan.adoc#schema[schema]
+
+. Initializes the link:spark-sql-Projection.adoc#initialize[UnsafeProjection]
+
+. Maps over the rows in a partition iterator using the `UnsafeProjection` projection
+
+Otherwise, `doExecute` simply takes the <<inputRDD, inputRDD>> as the `unsafeRows` RDD (with no changes).
+
+`doExecute` takes the link:spark-sql-ColumnarBatchScan.adoc#numOutputRows[numOutputRows] metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
+
+[TIP]
+====
+Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the values of the <<supportsBatch, supportsBatch>> and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flags given the number of RDDs.
+
+With <<supportsBatch, supportsBatch>> off and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> on you should see two more RDDs in the RDD lineage.
+====

@@ -27,16 +27,21 @@ res1: Boolean = true
 ----
 ====
 
-NOTE: Whole-Stage Code Generation is used by some modern massively parallel processing (MPP) databases to archive great performance. See http://www.vldb.org/pvldb/vol4/p539-neumann.pdf[Efficiently Compiling Efficient Query Plans for Modern Hardware (PDF)].
+[NOTE]
+====
+Whole-Stage Code Generation is used by some modern massively parallel processing (MPP) databases to achieve a better query execution performance.
 
-NOTE: Janino is used to compile a Java source code into a Java class at runtime.
+See http://www.vldb.org/pvldb/vol4/p539-neumann.pdf[Efficiently Compiling Efficient Query Plans for Modern Hardware (PDF)].
+====
+
+NOTE: https://janino-compiler.github.io/janino/[Janino] is used to compile a Java source code into a Java class at runtime.
 
 [[CollapseCodegenStages]]
 Before a query is executed, link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
 
 NOTE: `CollapseCodegenStages` is part of the sequence of physical preparation rules link:spark-sql-QueryExecution.adoc#preparations[QueryExecution.preparations] that will be applied in order to the physical plan before execution.
 
-There are the following code generation paths (as coined in [this commit](https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8)):
+There are the following code generation paths (as coined in https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8[this commit]):
 
 1. Non-whole-stage-codegen path
 
