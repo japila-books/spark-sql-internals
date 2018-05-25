@@ -57,9 +57,8 @@ q.queryExecution.sparkPlan
 
 The <<contract, SparkPlan contract>> assumes that concrete physical operators define <<doExecute, doExecute>> method (with optional <<hooks, hooks>> like <<doPrepare, doPrepare>>) which is executed when the physical operator is <<execute, executed>>.
 
-CAUTION: FIXME A picture with methods/hooks called.
-
-CAUTION: FIXME `SparkPlan` is `Serializable`. Why?
+.SparkPlan.execute -- Physical Operator Execution Pipeline
+image::images/spark-sql-SparkPlan-execute-pipeline.png[align="center"]
 
 `SparkPlan` has the following `final` methods that prepare execution environment and pass calls to corresponding methods (that constitute <<contract, SparkPlan Contract>>).
 
@@ -80,7 +79,7 @@ final def execute(): RDD[InternalRow]
 
 Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
-Internally, `execute` requests the physical operator to <<doExecute, doExecute>> after <<executeQuery, preparing it for execution>>.
+Internally, `execute` first <<executeQuery, prepares the physical operator for execution>> and eventually requests it to <<doExecute, doExecute>>.
 
 NOTE: Executing `doExecute` in a named scope happens only after the operator is <<prepare, prepared for execution>> followed by <<waitForSubqueries, waiting for any subqueries to finish>>.
 
@@ -172,6 +171,8 @@ Used when the following physical operators are requested to execute (i.e. descri
 
 * link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[WindowExec] (and creates a link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
 |===
+
+CAUTION: FIXME `SparkPlan` is `Serializable`. Why? Is this because `Dataset.cache` persists executed query plans?
 
 === [[decodeUnsafeRows]] Decoding Byte Arrays Back to UnsafeRows -- `decodeUnsafeRows` Method
 

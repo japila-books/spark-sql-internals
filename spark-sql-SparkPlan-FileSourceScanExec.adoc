@@ -137,17 +137,6 @@ log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[doExecute]] Executing FileSourceScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
-
-`doExecute`...FIXME
-
 === [[createNonBucketedReadRDD]] `createNonBucketedReadRDD` Internal Method
 
 [source, scala]
@@ -311,3 +300,18 @@ vectorTypes: Option[Seq[String]]
 NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
 
 `vectorTypes` simply requests the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> for link:spark-sql-FileFormat.adoc#vectorTypes[vectorTypes].
+
+=== [[doExecute]] Executing FileSourceScanExec (Generating RDD Of Internal Rows) -- `doExecute` Method
+
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+
+`doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
+
+If <<supportsBatch, supportsBatch>> is on, `doExecute` creates a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance[WholeStageCodegenExec] (with link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and link:spark-sql-SparkPlan.adoc#execute[executes] it.
+
+If <<supportsBatch, supportsBatch>> is off, `doExecute`...FIXME
