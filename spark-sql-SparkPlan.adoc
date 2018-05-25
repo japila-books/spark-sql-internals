@@ -15,7 +15,10 @@ NOTE: A structured query is basically a single `SparkPlan` physical operator wit
 
 NOTE: Spark SQL uses link:spark-sql-catalyst.adoc[Catalyst] tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
 
-When <<execute, executed>>, `SparkPlan` <<executeQuery, executes the internal query implementation>> in a named scope (for visualization like web UI) that triggers <<prepare, prepare>> of the children physical operators first followed by <<prepareSubqueries, prepareSubqueries>> and finally <<doPrepare, doPrepare>> methods. After <<waitForSubqueries, subqueries have finished>>, <<doExecute, doExecute>> method is triggered.
+[[Physical-Operator-Execution-Pipeline]]
+The entry point to *Physical Operator Execution Pipeline* is <<execute, execute>>.
+
+When <<execute, executed>>, `SparkPlan` <<executeQuery, executes the internal query implementation>> in a named scope (for visualization purposes, e.g. web UI) that triggers <<prepare, prepare>> of the children physical operators first followed by <<prepareSubqueries, prepareSubqueries>> and finally <<doPrepare, doPrepare>> methods. After <<waitForSubqueries, subqueries have finished>>, <<doExecute, doExecute>> method is eventually triggered.
 
 .SparkPlan's Execution (execute Method)
 image::images/spark-sql-SparkPlan-execute.png[align="center"]
@@ -199,10 +202,6 @@ resetMetrics(): Unit
 NOTE: `resetMetrics` is used when...FIXME
 
 === [[prepareSubqueries]] `prepareSubqueries` Method
-
-CAUTION: FIXME
-
-=== [[waitForSubqueries]] Waiting for Subqueries to Finish -- `waitForSubqueries` Method
 
 CAUTION: FIXME
 
@@ -468,3 +467,14 @@ newPredicate(expression: Expression, inputSchema: Seq[Attribute]): GenPredicate
 `newPredicate`...FIXME
 
 NOTE: `newPredicate` is used when...FIXME
+
+=== [[waitForSubqueries]] Waiting for Subqueries to Finish -- `waitForSubqueries` Method
+
+[source, scala]
+----
+waitForSubqueries(): Unit
+----
+
+`waitForSubqueries` requests every link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] in <<runningSubqueries, runningSubqueries>> to link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[updateResult].
+
+NOTE: `waitForSubqueries` is used exclusively when a physical operator is requested to <<executeQuery, prepare itself for query execution>> (when it is <<execute, executed>> or requested to <<executeBroadcast, executeBroadcast>>).

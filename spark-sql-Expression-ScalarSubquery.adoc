@@ -1,6 +1,6 @@
 == [[ScalarSubquery]] ScalarSubquery Expression
 
-`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns one row and one column only.
+`ScalarSubquery` is a link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] that returns one row and one column only.
 
 `ScalarSubquery` is <<creating-instance, created>> when...FIXME
 
@@ -11,6 +11,16 @@
 
 `ScalarSubquery` takes the following when created:
 
-* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[children]] Child link:spark-sql-Expression.adoc[expressions]
-* [[exprId]] Expression ID (as `ExprId` and defaults to a link:spark-sql-Expression-NamedExpression.adoc#newExprId[new ExprId])
+* [[plan]] link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] physical operator
+* [[exprId]] Expression ID (as `ExprId`)
+
+=== [[updateResult]] `updateResult` Method
+
+[source, scala]
+----
+updateResult(): Unit
+----
+
+NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to...FIXME.
+
+`updateResult`...FIXME
