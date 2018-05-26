@@ -1,6 +1,6 @@
 == [[CostBasedJoinReorder]] CostBasedJoinReorder Logical Optimization -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is an optimization that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a logical optimization that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
 Technically, `ReorderJoin` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 

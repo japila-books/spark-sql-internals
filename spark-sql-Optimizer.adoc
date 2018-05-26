@@ -52,9 +52,9 @@ spark.sessionState.optimizer
 | CombineUnions
 |
 
-^.^| Pullup Correlated Expressions
+^.^| [[Pullup-Correlated-Expressions]] Pullup Correlated Expressions
 ^.^| `Once`
-| link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
+| [[PullupCorrelatedPredicates]] link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
 |
 
 ^.^| Subquery
