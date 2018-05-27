@@ -169,7 +169,7 @@
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 
 . link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Default Spark Optimizer]
-.. link:spark-sql-Optimizer.adoc[Optimizer -- Generic Rule-Based Logical Optimizer (Catalyst Optimizer)]
+.. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Rule-Based Logical Optimizer]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
@@ -412,6 +412,7 @@
 . link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
 . link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 . link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
+. link:spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc[RewriteCorrelatedScalarSubquery]
 . link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
 . link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
 

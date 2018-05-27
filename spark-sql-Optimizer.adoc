@@ -1,4 +1,4 @@
-== [[Optimizer]] Optimizer -- Generic Rule-Based Logical Optimizer (Catalyst Optimizer)
+== [[Optimizer]] Catalyst Optimizer -- Generic Rule-Based Logical Optimizer
 
 `Optimizer` (aka *Catalyst Optimizer*) is the generic *rule-based logical query plan optimizer* in Spark SQL that uses link:spark-sql-catalyst.adoc[Catalyst Framework] to optimize link:spark-sql-LogicalPlan.adoc[logical query plans] using <<batches, optimization rules>>.
 
@@ -13,7 +13,17 @@ spark.sessionState.optimizer
 ----
 
 [[execute]]
-`Optimizer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines <<batches, collection of logical plan optimization rules>>.
+`Optimizer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines <<batches, collection of logical optimization rules>>.
+
+[[extendedOperatorOptimizationRules]]
+`Optimizer` has an extension point for additional rules for *operator optimization rules*.
+
+[source, scala]
+----
+extendedOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
+----
+
+The additional operator optimization rules are executed right after <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> and <<Operator_Optimization_after_Inferring_Filters, Operator Optimization after Inferring Filters>>.
 
 [[batches]]
 .Optimizer's Default Optimization Batches (in the order of execution)
@@ -24,32 +34,37 @@ spark.sessionState.optimizer
 | Rules
 | Description
 
-.7+^.^| Finish Analysis
+^.^| [[Eliminate_Distinct]] Eliminate Distinct
+^.^| `Once`
+| [[EliminateDistinct]] EliminateDistinct
+|
+
+.7+^.^| [[Finish_Analysis]] Finish Analysis
 .7+^.^| `Once`
-| EliminateSubqueryAliases
+| [[EliminateSubqueryAliases]] EliminateSubqueryAliases
 |
 
-| EliminateView
+| [[EliminateView]] EliminateView
 |
 
-| ReplaceExpressions
+| [[ReplaceExpressions]] ReplaceExpressions
 |
 
-| link:spark-sql-Optimizer-GetCurrentDatabase.adoc#ComputeCurrentTime[ComputeCurrentTime]
+| [[ComputeCurrentTime]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#ComputeCurrentTime[ComputeCurrentTime]
 |
 
-| link:spark-sql-Optimizer-GetCurrentDatabase.adoc#GetCurrentDatabase[GetCurrentDatabase]
+| [[GetCurrentDatabase]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#GetCurrentDatabase[GetCurrentDatabase]
 |
 
 | [[RewriteDistinctAggregates]] RewriteDistinctAggregates
 |
 
-| ReplaceDeduplicateWithAggregate
+| [[ReplaceDeduplicateWithAggregate]] ReplaceDeduplicateWithAggregate
 |
 
-^.^| Union
+^.^| [[Union]] Union
 ^.^| `Once`
-| CombineUnions
+| [[CombineUnions]] CombineUnions
 |
 
 ^.^| [[Pullup-Correlated-Expressions]] Pullup Correlated Expressions
@@ -57,14 +72,16 @@ spark.sessionState.optimizer
 | [[PullupCorrelatedPredicates]] link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
 |
 
-^.^| Subquery
+^.^| [[Subquery]] Subquery
 ^.^| `Once`
-| link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
+| [[OptimizeSubqueries]] link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
 |
 
-.3+^.^| [[Replace-Operators]] Replace Operators
-.3+^.^| <<fixedPoint, FixedPoint>>
+.4+^.^| [[Replace-Operators]] Replace Operators
+.4+^.^| <<fixedPoint, FixedPoint>>
 | ReplaceIntersectWithSemiJoin
+|
+| ReplaceExceptWithFilter
 |
 
 | ReplaceExceptWithAntiJoin
@@ -81,12 +98,13 @@ spark.sessionState.optimizer
 | RemoveRepetitionFromGroupExpressions
 |
 
-.35+^.^| [[Operator-Optimizations]] Operator Optimizations
-.35+^.^| <<fixedPoint, FixedPoint>>
-|PushProjectionThroughUnion
+.38+^.^| [[Operator_Optimization_before_Inferring_Filters]] Operator Optimization before Inferring Filters
+.38+^.^| <<fixedPoint, FixedPoint>>
+
+| PushProjectionThroughUnion
 |
 
-| [[ReorderJoin]] ReorderJoin
+| [[ReorderJoin]] link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
 |
 
 | EliminateOuterJoin
@@ -98,7 +116,7 @@ spark.sessionState.optimizer
 | [[PushDownPredicate]] link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
 |
 
-| link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
+| [[LimitPushDown]] link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 |
 
 | [[ColumnPruning]] link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
@@ -107,8 +125,8 @@ spark.sessionState.optimizer
 | InferFiltersFromConstraints
 |
 
-| [[CollapseRepartition]] CollapseRepartition
-| Collapses link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition and RepartitionByExpression]
+| CollapseRepartition
+|
 
 | CollapseProject
 |
@@ -128,7 +146,10 @@ spark.sessionState.optimizer
 | [[NullPropagation]] link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 |
 
-| [[FoldablePropagation]] FoldablePropagation
+| ConstantPropagation
+|
+
+| FoldablePropagation
 |
 
 | [[OptimizeIn]] link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
@@ -161,16 +182,16 @@ spark.sessionState.optimizer
 | EliminateSorts
 |
 
-| link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
+| [[SimplifyCasts]] link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
 |
 
 | SimplifyCaseConversionExpressions
 |
 
-| RewriteCorrelatedScalarSubquery
+| [[RewriteCorrelatedScalarSubquery]] link:spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc[RewriteCorrelatedScalarSubquery]
 |
 
-| link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
+| [[EliminateSerialization]] link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
 |
 
 | RemoveRedundantAliases
@@ -188,9 +209,20 @@ spark.sessionState.optimizer
 | SimplifyCreateMapOps
 |
 
-^.^| Check Cartesian Products
-^.^| `Once`
-| CheckCartesianProducts
+| CombineConcats
+|
+
+| <<extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>>
+|
+
+.1+^.^| [[Infer_Filters]] Infer Filters
+.1+^.^| `Once`
+| [[InferFiltersFromConstraints]] InferFiltersFromConstraints
+|
+
+.1+^.^| [[Operator_Optimization_after_Inferring_Filters]] Operator Optimization after Inferring Filters
+.1+^.^| <<fixedPoint, FixedPoint>>
+| The same as <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>>
 |
 
 ^.^| [[Join-Reorder]] Join Reorder
@@ -203,9 +235,12 @@ spark.sessionState.optimizer
 | [[DecimalAggregates]] link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
 |
 
-^.^| [[Typed-Filter-Optimization]] Typed Filter Optimization
-^.^| <<fixedPoint, FixedPoint>>
-| link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
+.2+^.^| [[Object_Expressions_Optimization]] Object Expressions Optimization
+.2+^.^| <<fixedPoint, FixedPoint>>
+| EliminateMapObjects
+|
+
+| [[CombineTypedFilters]] link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
 |
 
 .2+^.^| [[LocalRelation]] LocalRelation
@@ -216,9 +251,9 @@ spark.sessionState.optimizer
 | link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
 |
 
-^.^| OptimizeCodegen
+^.^| [[Check_Cartesian_Products]] Check Cartesian Products
 ^.^| `Once`
-| OptimizeCodegen
+| CheckCartesianProducts
 |
 
 .4+^.^| [[RewriteSubquery]] RewriteSubquery
@@ -226,13 +261,13 @@ spark.sessionState.optimizer
 | [[RewritePredicateSubquery]] link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
 |
 
-| link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
+| [[ColumnPruning]] link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 |
 
-| CollapseProject
+| [[CollapseProject]] CollapseProject
 |
 
-| RemoveRedundantProject
+| [[RemoveRedundantProject]] RemoveRedundantProject
 |
 |===
 
