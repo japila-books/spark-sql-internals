@@ -184,7 +184,7 @@ NOTE: A single statement can be quite involved.
 
 | [[visitSubqueryExpression]] `visitSubqueryExpression`
 | `#subqueryExpression` labeled alternative
-| link:spark-sql-Expression-ScalarSubquery.adoc[ScalarSubquery]
+| link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
 
 | [[visitWindowDef]] `visitWindowDef`
 | `windowDef` labeled alternative

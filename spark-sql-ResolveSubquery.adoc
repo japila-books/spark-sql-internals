@@ -47,7 +47,7 @@ resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
 
 `resolveSubQueries` requests the input link:spark-sql-LogicalPlan.adoc[logical plan] to link:spark-sql-catalyst-QueryPlan.adoc#transformExpressions[transform expressions] (down the operator tree) as follows:
 
-. For link:spark-sql-Expression-ScalarSubquery.adoc[ScalarSubquery] expressions with link:spark-sql-Expression-ScalarSubquery.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `ScalarSubquery` expressions
+. For link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery] expressions with link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `ScalarSubquery` expressions
 
 . For link:spark-sql-Expression-Exists.adoc[Exists] expressions with link:spark-sql-Expression-Exists.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `Exists` expressions
 

@@ -1,0 +1,38 @@
+== [[ScalarSubquery]] ScalarSubquery ExecSubqueryExpression
+
+`ScalarSubquery` is a link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] that returns one row and one column only.
+
+IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[SubqueryExpression]. You've been warned.
+
+`ScalarSubquery` is <<creating-instance, created>> exclusively when `PlanSubqueries` physical optimization is link:spark-sql-PlanSubqueries.adoc#apply[executed] (and plans a link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery] expression).
+
+[source, scala]
+----
+// FIXME DEMO
+import org.apache.spark.sql.execution.PlanSubqueries
+val spark = ...
+val planSubqueries = PlanSubqueries(spark)
+val plan = ...
+val executedPlan = planSubqueries(plan)
+----
+
+[[Unevaluable]]
+`ScalarSubquery` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
+
+=== [[updateResult]] `updateResult` Method
+
+[source, scala]
+----
+updateResult(): Unit
+----
+
+NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to...FIXME.
+
+`updateResult`...FIXME
+
+=== [[creating-instance]] Creating ScalarSubquery Instance
+
+`ScalarSubquery` takes the following when created:
+
+* [[plan]] link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] plan
+* [[exprId]] Expression ID (as `ExprId`)

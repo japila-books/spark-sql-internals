@@ -15,7 +15,13 @@ val ds: Dataset[Long] = ...
 val queryExec = ds.queryExecution
 ----
 
-`QueryExecution` is the result of link:spark-sql-SessionState.adoc#executePlan[executing a `LogicalPlan` in a `SparkSession`] (and so you could create a `Dataset` from a link:spark-sql-LogicalPlan.adoc[logical operator] or use the `QueryExecution` after executing a logical operator).
+`QueryExecution` is the result of link:spark-sql-SessionState.adoc#executePlan[executing a LogicalPlan in a SparkSession] (and so you could create a `Dataset` from a link:spark-sql-LogicalPlan.adoc[logical operator] or use the `QueryExecution` after executing a logical operator).
+
+[source, scala]
+----
+val plan: LogicalPlan = ...
+val qe = new QueryExecution(sparkSession, plan)
+----
 
 [[attributes]]
 [[execution-pipeline]]
