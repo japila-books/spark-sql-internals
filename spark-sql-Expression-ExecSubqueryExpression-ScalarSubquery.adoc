@@ -19,16 +19,19 @@ val executedPlan = planSubqueries(plan)
 [[Unevaluable]]
 `ScalarSubquery` link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
 
-=== [[updateResult]] `updateResult` Method
+[[internal-registries]]
+.ScalarSubquery's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-[source, scala]
-----
-updateResult(): Unit
-----
+| `result`
+| [[result]] The value of the single column in a single row after collecting the rows from executing the <<plan, subquery plan>> or `null` if no rows were collected.
 
-NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to...FIXME.
-
-`updateResult`...FIXME
+| `updated`
+| [[updated]] Flag that says whether `ScalarSubquery` was <<updateResult, updated>> with collected result of executing the <<plan, subquery plan>>.
+|===
 
 === [[creating-instance]] Creating ScalarSubquery Instance
 
@@ -36,3 +39,31 @@ NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression
 
 * [[plan]] link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] plan
 * [[exprId]] Expression ID (as `ExprId`)
+
+=== [[updateResult]] Updating ScalarSubquery With Collected Result -- `updateResult` Method
+
+[source, scala]
+----
+updateResult(): Unit
+----
+
+NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to fill an Catalyst expression with a collected result from executing a subquery plan.
+
+`updateResult` requests <<plan, SubqueryExec>> physical plan to link:spark-sql-SparkPlan-SubqueryExec.adoc#executeCollect[execute and collect internal rows].
+
+`updateResult` sets <<result, result>> to the value of the only column of the single row or `null` if no rows were collected.
+
+In the end, `updateResult` marks the `ScalarSubquery` instance as <<updated, updated>>.
+
+`updateResult` reports a `RuntimeException` when there are more than 1 rows in the result.
+
+```
+more than one row returned by a subquery used as an expression:
+[plan]
+```
+
+`updateResult` reports an `AssertionError` when the number of fields is not exactly 1.
+
+```
+Expects 1 field, but got [numFields] something went wrong in analysis
+```

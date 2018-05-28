@@ -81,3 +81,14 @@ NOTE: `relationFuture` is used when `SubqueryExec` is requested to <<doPrepare, 
 
 * [[name]] Name of the subquery
 * [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
+
+=== [[executeCollect]] Collecting Internal Rows of Executing SubqueryExec Operator -- `executeCollect` Method
+
+[source, scala]
+----
+executeCollect(): Array[InternalRow]
+----
+
+NOTE: `executeCollect` is part of link:spark-sql-SparkPlan.adoc#executeCollect[SparkPlan Contract] to execute a physical operator and collect the results as collection of internal rows.
+
+`executeCollect` waits till <<relationFuture, relationFuture>> gives a result (as a `Array[InternalRow]`).
