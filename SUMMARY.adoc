@@ -123,6 +123,8 @@
 
 . link:spark-sql-datasource-v2.adoc[DataSource V2]
 
+. link:spark-sql-subqueries.adoc[Subqueries]
+
 == Extending Spark SQL
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]

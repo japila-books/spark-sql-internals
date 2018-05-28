@@ -120,7 +120,7 @@ In the end, `checkAnalysis` link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks th
 ====
 `checkAnalysis` is used when:
 
-* `QueryExecution` link:spark-sql-QueryExecution.adoc#assertAnalyzed[creates analyzed logical plan and checks its correctness] (which happens mostly when a `Dataset` link:spark-sql-Dataset.adoc#creating-instance[is created])
+* `QueryExecution` link:spark-sql-QueryExecution.adoc#assertAnalyzed[creates analyzed logical plan and checks its correctness] (which happens mostly when a `Dataset` is link:spark-sql-Dataset.adoc#creating-instance[created])
 
 * `ExpressionEncoder` does link:spark-sql-ExpressionEncoder.adoc#resolveAndBind[resolveAndBind]
 
@@ -137,3 +137,14 @@ extendedCheckRules: Seq[LogicalPlan => Unit]
 `extendedCheckRules` is a collection of rules (functions) that <<checkAnalysis, checkAnalysis>> uses for custom analysis checks (after the <<checkAnalysis-validations, main validations>> have been executed).
 
 NOTE: When a condition of a rule does not hold the function throws an `AnalysisException` directly or using `failAnalysis` method.
+
+=== [[checkSubqueryExpression]] `checkSubqueryExpression` Internal Method
+
+[source, scala]
+----
+checkSubqueryExpression(plan: LogicalPlan, expr: SubqueryExpression): Unit
+----
+
+`checkSubqueryExpression`...FIXME
+
+NOTE: `checkSubqueryExpression` is used exclusively when `CheckAnalysis` is requested to <<checkAnalysis, validate analysis of a logical plan>> (for `SubqueryExpression` expressions).

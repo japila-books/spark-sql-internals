@@ -1,10 +1,12 @@
 == [[ScalarSubquery]] ScalarSubquery (SubqueryExpression) Expression
 
-`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns one row and one column only.
+`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns a single row and a single column only.
+
+`ScalarSubquery` represents a structured query that can be used as a "column".
 
 IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent a `SubqueryExpression` (this page) and  an link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ExecSubqueryExpression]. You've been warned.
 
-`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitSubqueryExpression[visitSubqueryExpression].
+`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitSubqueryExpression[parse a subquery expression].
 
 [source, scala]
 ----
