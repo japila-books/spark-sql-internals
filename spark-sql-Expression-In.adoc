@@ -186,14 +186,14 @@ NOTE: `checkInputDataTypes` is part of link:spark-sql-Expression.adoc#checkInput
 
 `checkInputDataTypes`...FIXME
 
-=== [[eval]] Evaluating Expression -- `eval` Method
+=== [[eval]] Evaluating In Expression -- `eval` Method
 
 [source, scala]
 ----
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
+NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
 
 `eval` requests <<value, value>> expression to link:spark-sql-Expression.adoc#eval[evaluate a value] for the `input` link:spark-sql-InternalRow.adoc[internal row].
 

@@ -99,14 +99,14 @@ Internally, `initialize` <<initializeInternal, initializes>> itself (with the in
 
 NOTE: `initialize` is used exclusively when link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` are requested to `initialize` themselves.
 
-=== [[eval]] Evaluating Expression -- `eval` Method
+=== [[eval]] Evaluating Nondeterministic Expression -- `eval` Method
 
 [source, scala]
 ----
 eval(input: InternalRow = null): Any
 ----
 
-NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] to evaluate a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
+NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract] for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row].
 
 `eval` is just a wrapper of <<evalInternal, evalInternal>> that makes sure that <<initialize, initialize>> has already been executed (and so the expression is initialized).
 
