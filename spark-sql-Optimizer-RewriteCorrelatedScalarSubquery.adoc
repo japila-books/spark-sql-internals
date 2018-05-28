@@ -66,7 +66,7 @@ constructLeftJoins(
 
 NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubquery` is <<apply, executed>> (i.e. applied to a link:spark-sql-LogicalPlan.adoc[logical plan]).
 
-=== [[apply]] Applying RewriteCorrelatedScalarSubquery To Logical Plan (Executing RewriteCorrelatedScalarSubquery) -- `apply` Method
+=== [[apply]] Applying RewriteCorrelatedScalarSubquery Rule To Logical Plan (Executing RewriteCorrelatedScalarSubquery) -- `apply` Method
 
 [source, scala]
 ----

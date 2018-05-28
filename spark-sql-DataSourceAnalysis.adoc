@@ -18,7 +18,7 @@ val plan = FIXME
 rule(plan)
 ----
 
-=== [[apply]] Applying DataSourceAnalysis Rule to Logical Plan -- `apply` Method
+=== [[apply]] Applying DataSourceAnalysis Rule to Logical Plan (Executing DataSourceAnalysis) -- `apply` Method
 
 [source, scala]
 ----

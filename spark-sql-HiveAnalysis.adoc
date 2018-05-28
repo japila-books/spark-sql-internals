@@ -9,7 +9,7 @@ Technically, `HiveAnalysis` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule
 // FIXME Example of HiveAnalysis
 ----
 
-=== [[apply]] Applying HiveAnalysis Rule to Logical Plan -- `apply` Method
+=== [[apply]] Applying HiveAnalysis Rule to Logical Plan (Executing HiveAnalysis) -- `apply` Method
 
 [source, scala]
 ----

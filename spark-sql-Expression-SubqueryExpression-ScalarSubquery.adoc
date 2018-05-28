@@ -1,4 +1,4 @@
-== [[ScalarSubquery]] ScalarSubquery SubqueryExpression
+== [[ScalarSubquery]] ScalarSubquery (SubqueryExpression) Expression
 
 `ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns one row and one column only.
 
@@ -32,6 +32,6 @@ val sql = "select g from t group by g having a > (select b from s)"
 
 `ScalarSubquery` takes the following when created:
 
-* [[plan]] link:spark-sql-LogicalPlan.adoc[Logical plan] of a subquery
+* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
 * [[children]] Child link:spark-sql-Expression.adoc[expressions] (default: no children)
 * [[exprId]] Expression ID (as `ExprId` and defaults to a link:spark-sql-Expression-NamedExpression.adoc#newExprId[new ExprId])

@@ -1,4 +1,4 @@
-== [[ScalarSubquery]] ScalarSubquery ExecSubqueryExpression
+== [[ScalarSubquery]] ScalarSubquery (ExecSubqueryExpression) Expression
 
 `ScalarSubquery` is a link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] that returns one row and one column only.
 
