@@ -4,11 +4,29 @@
 
 [[creating-instance]]
 [[children]]
-When created, `Coalesce` takes link:spark-sql-Expression.adoc[Catalyst expressions].
+When created, `Coalesce` takes link:spark-sql-Expression.adoc[Catalyst expressions] (as the children).
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.expressions.Coalesce
+
+// Use Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.expressions._
+
+import org.apache.spark.sql.functions.lit
+val coalesceExpr = Coalesce(children = Seq(lit(null).expr % 1, lit(null).expr, 1d))
+scala> println(coalesceExpr.numberedTreeString)
+00 coalesce((null % 1), null, 1.0)
+01 :- (null % 1)
+02 :  :- null
+03 :  +- 1
+04 :- null
+05 +- 1.0
+----
 
 CAUTION: FIXME Describe FunctionArgumentConversion and Coalesce
 
-link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation] logical optimization removes `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all children are `null` literals.
+Spark Optimizer uses link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation] logical optimization to remove `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all <<children, children>> expressions are `null` literals.
 
 [source, scala]
 ----

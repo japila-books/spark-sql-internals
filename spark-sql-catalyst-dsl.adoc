@@ -52,6 +52,9 @@ You can also disable an implicit conversion using a trick described in https://s
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+// HACK: Disable $ implicit conversion
+implicit class StringToColumn(val sc: StringContext) {}
 ----
 ====
 
