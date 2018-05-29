@@ -349,3 +349,19 @@ resolveExpression(
 NOTE: `resolveExpression` is a `protected[sql]` method.
 
 NOTE: `resolveExpression` is used when...FIXME
+
+=== [[commonNaturalJoinProcessing]] `commonNaturalJoinProcessing` Internal Method
+
+[source, scala]
+----
+commonNaturalJoinProcessing(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  joinType: JoinType,
+  joinNames: Seq[String],
+  condition: Option[Expression]): Project
+----
+
+`commonNaturalJoinProcessing`...FIXME
+
+NOTE: `commonNaturalJoinProcessing` is used when...FIXME

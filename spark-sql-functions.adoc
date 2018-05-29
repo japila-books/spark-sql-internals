@@ -80,7 +80,7 @@ If the array/map is `null` or empty then `null` is produced.
 |
 
 | [[coalesce]] link:spark-sql-functions-regular-functions.adoc#coalesce[coalesce]
-|
+| Gives the first non-``null`` value among the given columns or `null`
 
 | [[col]][[column]] link:spark-sql-functions-regular-functions.adoc#col[col] and link:spark-sql-functions-regular-functions.adoc#column[column]
 | Creating link:spark-sql-Column.adoc[Columns]

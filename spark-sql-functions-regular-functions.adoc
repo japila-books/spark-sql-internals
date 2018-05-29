@@ -14,7 +14,7 @@
 |
 
 | <<coalesce, coalesce>>
-|
+| Gives the first non-``null`` value among the given columns or `null`.
 
 | <<col, col>> and <<column, column>>
 | Creating link:spark-sql-Column.adoc[Columns]
@@ -97,6 +97,39 @@ Project [token#127, id#126, prob#140]
 ----
 
 NOTE: `broadcast` standard function is a special case of link:spark-sql-dataset-operators.adoc[Dataset.hint] operator that allows for attaching any hint to a logical plan.
+
+=== [[coalesce]] `coalesce` Function
+
+[source, scala]
+----
+coalesce(e: Column*): Column
+----
+
+`coalesce` gives the first non-``null`` value among the given columns or `null`.
+
+`coalesce` requires at least one column and all columns have to be of the same or compatible types.
+
+Internally, `coalesce` creates a link:spark-sql-Column.adoc#apply[Column] with a link:spark-sql-Expression-Coalesce.adoc#creating-instance[Coalesce] expression (with the children being the link:spark-sql-Column.adoc#expr[expressions] of the input `Column`).
+
+==== [[coalesce-example]] Example: `coalesce` Function
+
+[source, scala]
+----
+val q = spark.range(2)
+  .select(
+    coalesce(
+      lit(null),
+      lit(null),
+      lit(2) + 2,
+      $"id") as "first non-null value")
+scala> q.show
++--------------------+
+|first non-null value|
++--------------------+
+|                   4|
+|                   4|
++--------------------+
+----
 
 === [[col]][[column]] Creating Columns -- `col` and `column` Functions
 
@@ -223,12 +256,3 @@ when(condition: Column, value: Any): Column
 ----
 
 `when`...FIXME
-
-=== [[coalesce]] `coalesce` Function
-
-[source, scala]
-----
-coalesce(e: Column*): Column
-----
-
-`coalesce`...FIXME

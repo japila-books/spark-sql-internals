@@ -25,7 +25,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 | <<SimpleFunctionRegistry, SimpleFunctionRegistry>> with the <<expressions, built-in functions>> registered.
 
 | [[expressions]] `expressions`
-| Collection of link:spark-sql-Expression.adoc[expressions] that represent built-in/native functions.
+| Collection of link:spark-sql-Expression.adoc[Catalyst expressions] that represent built-in/native functions that can be used in SQL statements.
 |===
 
 === [[lookupFunction]] `lookupFunction` Method

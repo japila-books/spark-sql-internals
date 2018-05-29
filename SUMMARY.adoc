@@ -222,6 +222,7 @@
 . link:spark-sql-Expression-Attribute.adoc[Attribute]
 . link:spark-sql-Expression-BoundReference.adoc[BoundReference]
 . link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection]
+. link:spark-sql-Expression-Coalesce.adoc[Coalesce]
 . link:spark-sql-Expression-CodegenFallback.adoc[CodegenFallback]
 . link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator]
 . link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc[ComplexTypedAggregateExpression]

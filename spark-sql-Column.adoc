@@ -178,7 +178,7 @@ scala> dataset.withColumn("group", 'id % 2).show
 +---+-----+
 ----
 
-=== [[apply]] Referencing Column -- `apply` Method
+=== [[apply]] Creating Column Instance (Referencing Column) -- `apply` Factory Method
 
 [source, scala]
 ----
@@ -193,18 +193,6 @@ idCol: org.apache.spark.sql.Column = id
 // the following is equivalent to the above explicit apply call
 scala> val idCol = dataset("id")
 idCol: org.apache.spark.sql.Column = id
-----
-
-=== [[col]] Creating Column -- `col` method
-
-[source, scala]
-----
-val spark: SparkSession = ...
-case class Word(id: Long, text: String)
-val dataset = Seq(Word(0, "hello"), Word(1, "spark")).toDS
-
-scala> val textCol = dataset.col("text")
-textCol: org.apache.spark.sql.Column = text
 ----
 
 === [[like]] `like` Operator

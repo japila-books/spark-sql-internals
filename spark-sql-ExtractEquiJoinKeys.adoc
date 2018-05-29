@@ -65,7 +65,7 @@ log4j.logger.org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys=DEBUG
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[unapply]] `unapply` Method
+=== [[unapply]] Destructuring Logical Plan -- `unapply` Method
 
 [source, scala]
 ----

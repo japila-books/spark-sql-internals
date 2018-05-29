@@ -289,3 +289,17 @@ rowToColumnStat(
 If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
 
 NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] (to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[compute the statistics for specified columns]).
+
+=== [[statExprs]] `statExprs` Method
+
+[source, scala]
+----
+statExprs(
+  col: Attribute,
+  conf: SQLConf,
+  colPercentiles: AttributeMap[ArrayData]): CreateNamedStruct
+----
+
+`statExprs`...FIXME
+
+NOTE: `statExprs` is used when...FIXME
