@@ -1,0 +1,234 @@
+== Regular Functions (Non-Aggregate Functions)
+
+[[functions]]
+.(Subset of) Regular Functions
+[align="center",cols="1,2",width="100%",options="header"]
+|===
+| Name
+| Description
+
+| <<array, array>>
+|
+
+| <<broadcast, broadcast>>
+|
+
+| <<coalesce, coalesce>>
+|
+
+| <<col, col>> and <<column, column>>
+| Creating link:spark-sql-Column.adoc[Columns]
+
+| <<expr, expr>>
+|
+
+| <<lit, lit>>
+|
+
+| <<map, map>>
+|
+
+| <<struct, struct>>
+|
+
+| <<typedLit, typedLit>>
+|
+
+| <<when, when>>
+|
+|===
+
+=== [[broadcast]] `broadcast` Function
+
+[source, scala]
+----
+broadcast[T](df: Dataset[T]): Dataset[T]
+----
+
+`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast join.
+
+TIP: Read up on link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)].
+
+[source, scala]
+----
+val left = Seq((0, "aa"), (0, "bb")).toDF("id", "token").as[(Int, String)]
+val right = Seq(("aa", 0.99), ("bb", 0.57)).toDF("token", "prob").as[(String, Double)]
+
+scala> left.join(broadcast(right), "token").explain(extended = true)
+== Parsed Logical Plan ==
+'Join UsingJoin(Inner,List(token))
+:- Project [_1#123 AS id#126, _2#124 AS token#127]
+:  +- LocalRelation [_1#123, _2#124]
++- BroadcastHint
+   +- Project [_1#136 AS token#139, _2#137 AS prob#140]
+      +- LocalRelation [_1#136, _2#137]
+
+== Analyzed Logical Plan ==
+token: string, id: int, prob: double
+Project [token#127, id#126, prob#140]
++- Join Inner, (token#127 = token#139)
+   :- Project [_1#123 AS id#126, _2#124 AS token#127]
+   :  +- LocalRelation [_1#123, _2#124]
+   +- BroadcastHint
+      +- Project [_1#136 AS token#139, _2#137 AS prob#140]
+         +- LocalRelation [_1#136, _2#137]
+
+== Optimized Logical Plan ==
+Project [token#127, id#126, prob#140]
++- Join Inner, (token#127 = token#139)
+   :- Project [_1#123 AS id#126, _2#124 AS token#127]
+   :  +- Filter isnotnull(_2#124)
+   :     +- LocalRelation [_1#123, _2#124]
+   +- BroadcastHint
+      +- Project [_1#136 AS token#139, _2#137 AS prob#140]
+         +- Filter isnotnull(_1#136)
+            +- LocalRelation [_1#136, _2#137]
+
+== Physical Plan ==
+*Project [token#127, id#126, prob#140]
++- *BroadcastHashJoin [token#127], [token#139], Inner, BuildRight
+   :- *Project [_1#123 AS id#126, _2#124 AS token#127]
+   :  +- *Filter isnotnull(_2#124)
+   :     +- LocalTableScan [_1#123, _2#124]
+   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, true]))
+      +- *Project [_1#136 AS token#139, _2#137 AS prob#140]
+         +- *Filter isnotnull(_1#136)
+            +- LocalTableScan [_1#136, _2#137]
+----
+
+NOTE: `broadcast` standard function is a special case of link:spark-sql-dataset-operators.adoc[Dataset.hint] operator that allows for attaching any hint to a logical plan.
+
+=== [[col]][[column]] Creating Columns -- `col` and `column` Functions
+
+[source, scala]
+----
+col(colName: String): Column
+column(colName: String): Column
+----
+
+`col` and `column` methods create a link:spark-sql-Column.adoc[Column] that you can later use to reference a column in a dataset.
+
+[source, scala]
+----
+import org.apache.spark.sql.functions._
+
+scala> val nameCol = col("name")
+nameCol: org.apache.spark.sql.Column = name
+
+scala> val cityCol = column("city")
+cityCol: org.apache.spark.sql.Column = city
+----
+
+=== [[expr]] `expr` Function
+
+[source, scala]
+----
+expr(expr: String): Column
+----
+
+`expr` function parses the input `expr` SQL statement to a `Column` it represents.
+
+[source, scala]
+----
+val ds = Seq((0, "hello"), (1, "world"))
+  .toDF("id", "token")
+  .as[(Long, String)]
+
+scala> ds.show
++---+-----+
+| id|token|
++---+-----+
+|  0|hello|
+|  1|world|
++---+-----+
+
+val filterExpr = expr("token = 'hello'")
+
+scala> ds.filter(filterExpr).show
++---+-----+
+| id|token|
++---+-----+
+|  0|hello|
++---+-----+
+----
+
+Internally, `expr` uses the active session's link:spark-sql-SessionState.adoc[sqlParser] or creates a new  link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] to call link:spark-sql-ParserInterface.adoc#parseExpression[parseExpression] method.
+
+=== [[lit]] `lit` Function
+
+[source, scala]
+----
+lit(literal: Any): Column
+----
+
+`lit` function...FIXME
+
+=== [[struct]] `struct` Functions
+
+[source, scala]
+----
+struct(cols: Column*): Column
+struct(colName: String, colNames: String*): Column
+----
+
+`struct` family of functions allows you to create a new struct column based on a collection of `Column` or their names.
+
+NOTE: The difference between `struct` and another similar `array` function is that the types of the columns can be different (in `struct`).
+
+[source, scala]
+----
+scala> df.withColumn("struct", struct($"name", $"val")).show
++---+---+-----+---------+
+| id|val| name|   struct|
++---+---+-----+---------+
+|  0|  1|hello|[hello,1]|
+|  2|  3|world|[world,3]|
+|  2|  4|  ala|  [ala,4]|
++---+---+-----+---------+
+----
+
+=== [[typedLit]] `typedLit` Function
+
+[source, scala]
+----
+typedLit[T : TypeTag](literal: T): Column
+----
+
+`typedLit`...FIXME
+
+=== [[array]] `array` Function
+
+[source, scala]
+----
+array(cols: Column*): Column
+array(colName: String, colNames: String*): Column
+----
+
+`array`...FIXME
+
+=== [[map]] `map` Function
+
+[source, scala]
+----
+map(cols: Column*): Column
+----
+
+`map`...FIXME
+
+=== [[when]] `when` Function
+
+[source, scala]
+----
+when(condition: Column, value: Any): Column
+----
+
+`when`...FIXME
+
+=== [[coalesce]] `coalesce` Function
+
+[source, scala]
+----
+coalesce(e: Column*): Column
+----
+
+`coalesce`...FIXME

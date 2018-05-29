@@ -1,8 +1,8 @@
 == [[functions]] Standard Functions -- functions Object
 
-`org.apache.spark.sql.functions` object defines built-in standard functions to work with values in link:spark-sql-Column.adoc[Columns].
+`org.apache.spark.sql.functions` object defines built-in *standard functions* to work with (values in) link:spark-sql-Column.adoc[columns].
 
-You can access the functions using the following `import` statement:
+You can access the standard functions using the following `import` statement in your Scala application:
 
 [source, scala]
 ----
@@ -71,18 +71,36 @@ If the array/map is `null` or empty then `null` is produced.
 | <<bin, bin>>
 | Converts the value of a long column to binary format
 
-.4+^.^| *Regular functions*
+.10+^.^| *Regular functions* (Non-aggregate functions)
 
-| <<broadcast, broadcast>>
+| [[array]] link:spark-sql-functions-regular-functions.adoc#array[array]
 |
 
-| <<creating-columns, col>> and <<creating-columns, column>>
+| [[broadcast]] link:spark-sql-functions-regular-functions.adoc#broadcast[broadcast]
+|
+
+| [[coalesce]] link:spark-sql-functions-regular-functions.adoc#coalesce[coalesce]
+|
+
+| [[col]][[column]] link:spark-sql-functions-regular-functions.adoc#col[col] and link:spark-sql-functions-regular-functions.adoc#column[column]
 | Creating link:spark-sql-Column.adoc[Columns]
 
-| <<expr, expr>>
+| [[expr]] link:spark-sql-functions-regular-functions.adoc#expr[expr]
 |
 
-| <<struct, struct>>
+| [[lit]] link:spark-sql-functions-regular-functions.adoc#lit[lit]
+|
+
+| [[map]] link:spark-sql-functions-regular-functions.adoc#map[map]
+|
+
+| [[struct]] link:spark-sql-functions-regular-functions.adoc#struct[struct]
+|
+
+| [[typedLit]] link:spark-sql-functions-regular-functions.adoc#typedLit[typedLit]
+|
+
+| [[when]] link:spark-sql-functions-regular-functions.adoc#when[when]
 |
 
 .2+^.^| *String functions*
@@ -486,27 +504,6 @@ scala> dataset.select('*, ntile(3) over byBuckets as "ntile").show
 
 CAUTION: FIXME How is `ntile` different from `rank`? What about performance?
 
-=== [[creating-columns]][[col]][[column]] Creating Columns -- `col` and `column` Functions
-
-[source, scala]
-----
-col(colName: String): Column
-column(colName: String): Column
-----
-
-`col` and `column` methods create a link:spark-sql-Column.adoc[Column] that you can later use to reference a column in a dataset.
-
-[source, scala]
-----
-import org.apache.spark.sql.functions._
-
-scala> val nameCol = col("name")
-nameCol: org.apache.spark.sql.Column = name
-
-scala> val cityCol = column("city")
-cityCol: org.apache.spark.sql.Column = city
-----
-
 === [[callUDF]] Executing UDF by Name and Variable-Length Column List -- `callUDF` Function
 
 [source, scala]
@@ -625,125 +622,6 @@ scala> withUpperReversed.show
 |  2|  4|  ala|  ALA|
 +---+---+-----+-----+
 ----
-
-=== [[struct]] `struct` Functions
-
-[source, scala]
-----
-struct(cols: Column*): Column
-struct(colName: String, colNames: String*): Column
-----
-
-`struct` family of functions allows you to create a new struct column based on a collection of `Column` or their names.
-
-NOTE: The difference between `struct` and another similar `array` function is that the types of the columns can be different (in `struct`).
-
-[source, scala]
-----
-scala> df.withColumn("struct", struct($"name", $"val")).show
-+---+---+-----+---------+
-| id|val| name|   struct|
-+---+---+-----+---------+
-|  0|  1|hello|[hello,1]|
-|  2|  3|world|[world,3]|
-|  2|  4|  ala|  [ala,4]|
-+---+---+-----+---------+
-----
-
-=== [[broadcast]] `broadcast` Function
-
-[source, scala]
-----
-broadcast[T](df: Dataset[T]): Dataset[T]
-----
-
-`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast join.
-
-TIP: Read up on link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)].
-
-[source, scala]
-----
-val left = Seq((0, "aa"), (0, "bb")).toDF("id", "token").as[(Int, String)]
-val right = Seq(("aa", 0.99), ("bb", 0.57)).toDF("token", "prob").as[(String, Double)]
-
-scala> left.join(broadcast(right), "token").explain(extended = true)
-== Parsed Logical Plan ==
-'Join UsingJoin(Inner,List(token))
-:- Project [_1#123 AS id#126, _2#124 AS token#127]
-:  +- LocalRelation [_1#123, _2#124]
-+- BroadcastHint
-   +- Project [_1#136 AS token#139, _2#137 AS prob#140]
-      +- LocalRelation [_1#136, _2#137]
-
-== Analyzed Logical Plan ==
-token: string, id: int, prob: double
-Project [token#127, id#126, prob#140]
-+- Join Inner, (token#127 = token#139)
-   :- Project [_1#123 AS id#126, _2#124 AS token#127]
-   :  +- LocalRelation [_1#123, _2#124]
-   +- BroadcastHint
-      +- Project [_1#136 AS token#139, _2#137 AS prob#140]
-         +- LocalRelation [_1#136, _2#137]
-
-== Optimized Logical Plan ==
-Project [token#127, id#126, prob#140]
-+- Join Inner, (token#127 = token#139)
-   :- Project [_1#123 AS id#126, _2#124 AS token#127]
-   :  +- Filter isnotnull(_2#124)
-   :     +- LocalRelation [_1#123, _2#124]
-   +- BroadcastHint
-      +- Project [_1#136 AS token#139, _2#137 AS prob#140]
-         +- Filter isnotnull(_1#136)
-            +- LocalRelation [_1#136, _2#137]
-
-== Physical Plan ==
-*Project [token#127, id#126, prob#140]
-+- *BroadcastHashJoin [token#127], [token#139], Inner, BuildRight
-   :- *Project [_1#123 AS id#126, _2#124 AS token#127]
-   :  +- *Filter isnotnull(_2#124)
-   :     +- LocalTableScan [_1#123, _2#124]
-   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, true]))
-      +- *Project [_1#136 AS token#139, _2#137 AS prob#140]
-         +- *Filter isnotnull(_1#136)
-            +- LocalTableScan [_1#136, _2#137]
-----
-
-NOTE: `broadcast` standard function is a special case of link:spark-sql-dataset-operators.adoc[Dataset.hint] operator that allows for attaching any hint to a logical plan.
-
-=== [[expr]] `expr` Function
-
-[source, scala]
-----
-expr(expr: String): Column
-----
-
-`expr` function parses the input `expr` SQL statement to a `Column` it represents.
-
-[source, scala]
-----
-val ds = Seq((0, "hello"), (1, "world"))
-  .toDF("id", "token")
-  .as[(Long, String)]
-
-scala> ds.show
-+---+-----+
-| id|token|
-+---+-----+
-|  0|hello|
-|  1|world|
-+---+-----+
-
-val filterExpr = expr("token = 'hello'")
-
-scala> ds.filter(filterExpr).show
-+---+-----+
-| id|token|
-+---+-----+
-|  0|hello|
-+---+-----+
-----
-
-Internally, `expr` uses the active session's link:spark-sql-SessionState.adoc[sqlParser] or creates a new  link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] to call link:spark-sql-ParserInterface.adoc#parseExpression[parseExpression] method.
 
 === [[grouping]] `grouping` Aggregate Function
 
