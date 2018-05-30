@@ -1,6 +1,6 @@
 == [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
 
-`OptimizeSubqueries` is...FIXME
+`OptimizeSubqueries` is a *logical optimization* that <<apply, FIXME>>.
 
 === [[apply]] `apply` Method
 

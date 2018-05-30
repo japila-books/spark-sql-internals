@@ -170,3 +170,14 @@ statePrefix: String
 Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a link:spark-sql-catalyst-TreeNode.adoc#children[parent node]. Otherwise, `statePrefix` gives an empty string.
 
 NOTE: `statePrefix` is used exclusively when `QueryPlan` is requested for the <<simpleString, simple text node description>>.
+
+=== [[transformAllExpressions]] Transforming All Expressions -- `transformAllExpressions` Method
+
+[source, scala]
+----
+transformAllExpressions(rule: PartialFunction[Expression, Expression]): this.type
+----
+
+`transformAllExpressions`...FIXME
+
+NOTE: `transformAllExpressions` is used when...FIXME

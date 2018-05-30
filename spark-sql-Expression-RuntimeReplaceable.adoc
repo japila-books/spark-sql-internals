@@ -1,0 +1,51 @@
+== [[RuntimeReplaceable]] RuntimeReplaceable Contract -- Unevaluable Unary Expressions
+
+`RuntimeReplaceable` is the <<contract, marker contract>> for link:spark-sql-Expression.adoc#UnaryExpression[unary expressions] that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can be evaluated).
+
+NOTE: Catalyst Optimizer uses link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
+
+[[Unevaluable]]
+`RuntimeReplaceable` expressions link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row).
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.expressions
+
+trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
+  // as a marker contract it only marks a class
+  // no methods are required
+}
+----
+
+[[implementations]]
+.RuntimeReplaceables
+[cols="1,2",options="header",width="100%"]
+|===
+| RuntimeReplaceable
+| Description
+
+| `IfNull`
+|
+
+| `Left`
+|
+
+| `NullIf`
+|
+
+| `Nvl`
+| [[Nvl]]
+
+| `Nvl2`
+|
+
+| `ParseToDate`
+| [[ParseToDate]]
+
+| `ParseToTimestamp`
+| [[ParseToTimestamp]]
+
+| `Right`
+|
+|===

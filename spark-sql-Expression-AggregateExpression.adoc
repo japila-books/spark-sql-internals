@@ -1,4 +1,4 @@
-== [[AggregateExpression]] AggregateExpression -- Expression Container for AggregateFunction
+== [[AggregateExpression]] AggregateExpression -- Unevaluable Expression Container for AggregateFunction
 
 `AggregateExpression` is an link:spark-sql-Expression.adoc#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
 

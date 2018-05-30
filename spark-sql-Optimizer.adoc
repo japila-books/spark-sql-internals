@@ -47,7 +47,7 @@ The additional operator optimization rules are executed right after <<Operator_O
 | [[EliminateView]] EliminateView
 |
 
-| [[ReplaceExpressions]] ReplaceExpressions
+| [[ReplaceExpressions]] link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]
 |
 
 | [[ComputeCurrentTime]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#ComputeCurrentTime[ComputeCurrentTime]
