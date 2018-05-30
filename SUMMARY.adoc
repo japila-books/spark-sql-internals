@@ -4,6 +4,7 @@
 
 . link:spark-sql.adoc[Spark SQL -- Structured Data Processing with Relational Queries on Massive Scale]
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
+. link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
 == Developing Spark SQL Applications
 
