@@ -1,6 +1,6 @@
 == [[ReorderJoin]] ReorderJoin Logical Optimization -- Reordering Inner and Cross Joins
 
-`ReorderJoin` is an optimization of a link:spark-sql-LogicalPlan.adoc[logical plan] that the link:spark-sql-Optimizer.adoc#ReorderJoin[Spark Optimizer] uses for <<apply, join reordering>>.
+`ReorderJoin` is a *logical optimization* for <<apply, join reordering>>.
 
 `ReorderJoin` <<apply, applies>> the join optimizations on a logical plan with 2 or more inner and cross joins with at least one join condition.
 
@@ -77,9 +77,9 @@ spark.sessionState.conf.starSchemaDetection
 spark.sessionState.conf.cboEnabled
 ----
 
-`ReorderJoin` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
+`ReorderJoin` is part of the link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 
-=== [[apply]] Transforming Logical Plan -- `apply` Method
+=== [[apply]] Applying ReorderJoin Rule To Logical Plan (Executing ReorderJoin) -- `apply` Method
 
 [source, scala]
 ----

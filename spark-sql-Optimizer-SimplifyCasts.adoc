@@ -1,11 +1,11 @@
 == [[SimplifyCasts]] SimplifyCasts Logical Optimization
 
-`SimplifyCasts` is a link:spark-sql-LogicalPlan.adoc[LogicalPlan] optimization rule that eliminates redundant casts in the following cases:
+`SimplifyCasts` is a *logical optimization* that <<apply, eliminates redundant casts>> in the following cases:
 
 . The input is already the type to cast to.
 . The input is of `ArrayType` or `MapType` type and contains no `null` elements.
 
-`SimplifyCasts` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
+Technically, `SimplifyCasts` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -139,3 +139,16 @@ LocalRelation [m#272]
 == Physical Plan ==
 LocalTableScan [m#272]
 ----
+
+`SimplifyCasts` is part of the link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+
+=== [[apply]] Applying SimplifyCasts Rule To Logical Plan (Executing SimplifyCasts) -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+
+`apply`...FIXME

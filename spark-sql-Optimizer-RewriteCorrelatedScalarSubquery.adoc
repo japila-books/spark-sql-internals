@@ -4,8 +4,6 @@
 
 . FIXME
 
-`RewriteCorrelatedScalarSubquery` is part of link:spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters[Operator Optimization before Inferring Filters] and link:spark-sql-Optimizer.adoc#Operator_Optimization_after_Inferring_Filters[Operator Optimization after Inferring Filters] batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
-
 Technically, `RewriteCorrelatedScalarSubquery` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
@@ -19,6 +17,8 @@ import org.apache.spark.sql.catalyst.optimizer.RewriteCorrelatedScalarSubquery
 val plan = ???
 val optimizedPlan = RewriteCorrelatedScalarSubquery(plan)
 ----
+
+`RewriteCorrelatedScalarSubquery` is part of the link:spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters[Operator Optimization before Inferring Filters] and link:spark-sql-Optimizer.adoc#Operator_Optimization_after_Inferring_Filters[Operator Optimization after Inferring Filters] batches in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 
 === [[evalExpr]] `evalExpr` Internal Method
 

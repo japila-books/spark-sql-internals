@@ -1,12 +1,14 @@
 == [[RewritePredicateSubquery]] RewritePredicateSubquery Logical Optimization
 
-`RewritePredicateSubquery` is a *logical optimization* that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>>:
+`RewritePredicateSubquery` is a *logical optimization* that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>> as follows:
 
 * `Filter` operators with `Exists` and `In` with `ListQuery` expressions give *left-semi joins*
 
 * `Filter` operators with `Not` with `Exists` and `In` with `ListQuery` expressions give *left-anti joins*
 
 NOTE: Prefer `EXISTS` (over `Not` with `In` with `ListQuery` subquery expression) if performance matters since https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/subquery.scala?utf8=%E2%9C%93#L110[they say] "that will almost certainly be planned as a Broadcast Nested Loop join".
+
+Technically, `RewritePredicateSubquery` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -33,9 +35,7 @@ val q = ...
 val optimized = Optimize.execute(q.analyze)
 ----
 
-`RewritePredicateSubquery` is part of link:spark-sql-Optimizer.adoc#RewriteSubquery[RewriteSubquery] once-executed batch in the standard batches of the base link:spark-sql-Optimizer.adoc[Spark Optimizer].
-
-Technically, `RewritePredicateSubquery` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`RewritePredicateSubquery` is part of the link:spark-sql-Optimizer.adoc#RewriteSubquery[RewriteSubquery] once-executed batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 
 === [[rewriteExistentialExpr]] `rewriteExistentialExpr` Internal Method
 

@@ -19,7 +19,7 @@ scala> println(optimizedPlan.numberedTreeString)
 01 +- LocalRelation [col1#2]
 ----
 
-`ReplaceExpressions` is part of the link:spark-sql-Optimizer.adoc#Finish_Analysis[Finish Analysis] once-executed batch of link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`ReplaceExpressions` is part of the link:spark-sql-Optimizer.adoc#Finish_Analysis[Finish Analysis] once-executed batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 
 === [[apply]] Applying ReplaceExpressions Rule To Logical Plan (Executing ReplaceExpressions) -- `apply` Method
 
