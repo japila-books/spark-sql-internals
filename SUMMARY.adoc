@@ -252,6 +252,7 @@
 . link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
 . link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic]
 . link:spark-sql-Expression-OffsetWindowFunction.adoc[OffsetWindowFunction]
+. link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
 . link:spark-sql-Expression-PlanExpression.adoc[PlanExpression]
 . link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
 . link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable]

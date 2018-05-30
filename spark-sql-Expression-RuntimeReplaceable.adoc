@@ -1,11 +1,11 @@
 == [[RuntimeReplaceable]] RuntimeReplaceable Contract -- Unevaluable Unary Expressions
 
-`RuntimeReplaceable` is the <<contract, marker contract>> for link:spark-sql-Expression.adoc#UnaryExpression[unary expressions] that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can be evaluated).
+`RuntimeReplaceable` is the <<contract, marker contract>> for link:spark-sql-Expression.adoc#UnaryExpression[unary expressions] that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can then be evaluated).
 
 NOTE: Catalyst Optimizer uses link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
 
 [[Unevaluable]]
-`RuntimeReplaceable` expressions link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row).
+`RuntimeReplaceable` expressions link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row) and therefore have to be replaced in the link:spark-sql-QueryExecution.adoc[query execution pipeline].
 
 [[contract]]
 [source, scala]
@@ -17,6 +17,8 @@ trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
   // no methods are required
 }
 ----
+
+NOTE: `RuntimeReplaceable` contract allows for _"expression aliases"_, i.e. expressions that are more complex in the inside than on the outside.
 
 [[implementations]]
 .RuntimeReplaceables
@@ -43,8 +45,8 @@ trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
 | `ParseToDate`
 | [[ParseToDate]]
 
-| `ParseToTimestamp`
-| [[ParseToTimestamp]]
+| link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
+| [[ParseToTimestamp]] Represents link:spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp] functions in logical query plans
 
 | `Right`
 |
