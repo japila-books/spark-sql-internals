@@ -2,13 +2,13 @@
 
 `HiveTableScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner]) that <<apply, resolves HiveTableRelation>>.
 
-=== [[apply]] Applying HiveTableScans Rule to Logical Query Plan -- `apply` Method
+=== [[apply]] Applying HiveTableScans Strategy to Logical Plan (Executing HiveTableScans) -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-SparkPlan.adoc[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply`...FIXME

@@ -202,14 +202,14 @@ In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broad
 
 NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
 
-=== [[apply]] Planning Join Logical Operator -- `apply` Method
+=== [[apply]] Applying JoinSelection Strategy to Logical Plan (Executing JoinSelection) -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-SparkPlan.adoc[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
 

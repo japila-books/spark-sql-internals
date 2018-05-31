@@ -60,14 +60,14 @@ collectProjectsAndFilters(plan: LogicalPlan):
 
 `collectProjectsAndFilters` is a pattern used to destructure a link:spark-sql-LogicalPlan.adoc[LogicalPlan] that can be `Project` or `Filter`. Any other `LogicalPlan` give an _all-empty_ response.
 
-=== [[apply]] Planning LogicalRelation with HadoopFsRelation as FileSourceScanExec -- `apply` Method
+=== [[apply]] Applying FileSourceStrategy Strategy to Logical Plan (Executing FileSourceStrategy) -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-catalyst-TreeNode.adoc[TreeNodes], i.e. link:spark-sql-SparkPlan.adoc[SparkPlans], for a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-SparkPlan.adoc[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
 

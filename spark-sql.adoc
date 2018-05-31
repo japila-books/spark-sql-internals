@@ -9,7 +9,7 @@ Quoting the http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf[S
 > Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
 queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
 
-The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for ingesting, querying and persisting (semi)structured data using *structured queries* that can be expressed using _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative type-safe *Structured Query DSL*.
+The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for ingesting, querying and persisting (semi)structured data using *relational queries* (aka *structured queries*) that can be expressed in _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative link:spark-sql-Dataset.adoc[Dataset API] (aka *Structured Query DSL*).
 
 NOTE: Semi- and structured data are collections of records that can be described using link:spark-sql-schema.adoc[schema] with column names, their types and whether a column can be null or not (aka _nullability_).
 
