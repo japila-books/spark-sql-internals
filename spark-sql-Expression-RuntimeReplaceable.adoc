@@ -52,7 +52,7 @@ NOTE: To make sure the `explain` plan and expression SQL works correctly, a `Run
 |
 | link:spark-sql-FunctionRegistry.adoc#nvl2[nvl2]
 
-| [[ParseToDate]] `ParseToDate`
+| [[ParseToDate]] link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
 | link:spark-sql-functions-datetime.adoc#to_date[to_date]
 | link:spark-sql-FunctionRegistry.adoc#to_date[to_date]
 

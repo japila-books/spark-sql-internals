@@ -49,7 +49,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 | `Nvl2`
 | [[nvl2]] `nvl2`
 
-| `ParseToDate`
+| link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
 | [[to_date]] `to_date`
 
 | link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]

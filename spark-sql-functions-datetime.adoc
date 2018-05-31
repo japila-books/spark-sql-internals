@@ -102,25 +102,6 @@ CAUTION: FIXME
 
 NOTE: `current_timestamp` is also `now` function in SQL.
 
-=== [[to_date]] `to_date` Function
-
-[source, scala]
-----
-to_date(e: Column, fmt: String): Column
-----
-
-CAUTION: FIXME
-
-=== [[to_timestamp]] `to_timestamp` Function
-
-[source, scala]
-----
-to_timestamp(s: Column): Column
-to_timestamp(s: Column, fmt: String): Column
-----
-
-CAUTION: FIXME
-
 === [[unix_timestamp]] Converting Current or Specified Time to Unix Timestamp -- `unix_timestamp` Function
 
 [source, scala]
@@ -332,3 +313,23 @@ scala> println(timeColumn.expr.numberedTreeString)
 NOTE: The example is borrowed from https://flink.apache.org/news/2015/12/04/Introducing-windows.html[Introducing Stream Windows in Apache Flink].
 
 The example shows how to use `window` function to model a traffic sensor that counts every 15 seconds the number of vehicles passing a certain location.
+
+=== [[to_date]] `to_date` Function
+
+[source, scala]
+----
+to_date(e: Column): Column
+to_date(e: Column, fmt: String): Column
+----
+
+CAUTION: FIXME
+
+=== [[to_timestamp]] `to_timestamp` Function
+
+[source, scala]
+----
+to_timestamp(s: Column): Column
+to_timestamp(s: Column, fmt: String): Column
+----
+
+CAUTION: FIXME
