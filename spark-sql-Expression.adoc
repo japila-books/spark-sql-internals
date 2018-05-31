@@ -260,22 +260,6 @@ Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka link:spar
 
 | [[semanticHash]] `semanticHash`
 |
-
-| [[sql]] `sql`
-a| SQL representation
-
-<<prettyName, prettyName>> followed by `sql` of link:spark-sql-catalyst-TreeNode.adoc#children[children] in the round brackets and concatenated using the comma (`,`), e.g.
-
-```
-import org.apache.spark.sql.catalyst.dsl.expressions._
-import org.apache.spark.sql.catalyst.expressions.Sentences
-val sentences = Sentences("Hi there! Good morning.", "en", "US")
-
-import org.apache.spark.sql.catalyst.expressions.Expression
-val expr: Expression = count("*") === 5 && count(sentences) === 5
-scala> expr.sql
-res0: String = ((count('*') = 5) AND (count(sentences('Hi there! Good morning.', 'en', 'US')) = 5))
-```
 |===
 
 === [[reduceCodeSize]] `reduceCodeSize` Internal Method
@@ -308,3 +292,39 @@ The `funcFullName` is the link:spark-sql-CodegenContext.adoc#freshName[fresh ter
 TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
 
 NOTE: `reduceCodeSize` is used exclusively when `Expression` is requested to <<genCode, generate the Java source code for code-generated expression evaluation>>.
+
+=== [[flatArguments]] `flatArguments` Method
+
+[source, scala]
+----
+flatArguments: Iterator[Any]
+----
+
+`flatArguments`...FIXME
+
+NOTE: `flatArguments` is used when...FIXME
+
+=== [[sql]] SQL Representation -- `sql` Method
+
+[source, scala]
+----
+sql: String
+----
+
+`sql` gives a SQL representation.
+
+Internally, `sql` gives a text representation with <<prettyName, prettyName>> followed by `sql` of link:spark-sql-catalyst-TreeNode.adoc#children[children] in the round brackets and concatenated using the comma (`,`).
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.expressions._
+import org.apache.spark.sql.catalyst.expressions.Sentences
+val sentences = Sentences("Hi there! Good morning.", "en", "US")
+
+import org.apache.spark.sql.catalyst.expressions.Expression
+val expr: Expression = count("*") === 5 && count(sentences) === 5
+scala> expr.sql
+res0: String = ((count('*') = 5) AND (count(sentences('Hi there! Good morning.', 'en', 'US')) = 5))
+----
+
+NOTE: `sql` is used when...FIXME

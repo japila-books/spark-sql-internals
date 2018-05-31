@@ -1,8 +1,12 @@
-== [[RuntimeReplaceable]] RuntimeReplaceable Contract -- Unevaluable Unary Expressions
+== [[RuntimeReplaceable]] RuntimeReplaceable Contract -- Replaceable SQL Expressions
 
 `RuntimeReplaceable` is the <<contract, marker contract>> for link:spark-sql-Expression.adoc#UnaryExpression[unary expressions] that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can then be evaluated).
 
 NOTE: Catalyst Optimizer uses link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
+
+`RuntimeReplaceable` contract allows for *expression aliases*, i.e. expressions that are fairly complex in the inside than on the outside, and is used to provide compatibility with other SQL databases by supporting SQL functions with their more complex Catalyst expressions (that are already supported by Spark SQL).
+
+NOTE: <<implementations, RuntimeReplaceables>> are tied up to their SQL functions in link:spark-sql-FunctionRegistry.adoc#expressions[FunctionRegistry].
 
 [[Unevaluable]]
 `RuntimeReplaceable` expressions link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row) and therefore have to be replaced in the link:spark-sql-QueryExecution.adoc[query execution pipeline].
@@ -18,36 +22,45 @@ trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
 }
 ----
 
-NOTE: `RuntimeReplaceable` contract allows for _"expression aliases"_, i.e. expressions that are more complex in the inside than on the outside.
+NOTE: To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override link:spark-sql-Expression.adoc#flatArguments[flatArguments] and link:spark-sql-Expression.adoc#sql[sql] methods.
 
 [[implementations]]
 .RuntimeReplaceables
-[cols="1,2",options="header",width="100%"]
+[cols="1,1,1",options="header",width="100%"]
 |===
 | RuntimeReplaceable
-| Description
+| Standard Function
+| SQL Function
 
-| `IfNull`
+| [[IfNull]] `IfNull`
 |
+| link:spark-sql-FunctionRegistry.adoc#ifnull[ifnull]
 
-| `Left`
+| [[Left]] `Left`
 |
+| link:spark-sql-FunctionRegistry.adoc#left[left]
 
-| `NullIf`
+| [[NullIf]] `NullIf`
 |
+| link:spark-sql-FunctionRegistry.adoc#nullif[nullif]
 
-| `Nvl`
-| [[Nvl]]
-
-| `Nvl2`
+| [[Nvl]] `Nvl`
 |
+| link:spark-sql-FunctionRegistry.adoc#nvl[nvl]
 
-| `ParseToDate`
-| [[ParseToDate]]
-
-| link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
-| [[ParseToTimestamp]] Represents link:spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp] functions in logical query plans
-
-| `Right`
+| [[Nvl2]] `Nvl2`
 |
+| link:spark-sql-FunctionRegistry.adoc#nvl2[nvl2]
+
+| [[ParseToDate]] `ParseToDate`
+| link:spark-sql-functions-datetime.adoc#to_date[to_date]
+| link:spark-sql-FunctionRegistry.adoc#to_date[to_date]
+
+| [[ParseToTimestamp]] link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
+| link:spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp]
+| link:spark-sql-FunctionRegistry.adoc#to_timestamp[to_timestamp]
+
+| [[Right]] `Right`
+|
+| link:spark-sql-FunctionRegistry.adoc#right[right]
 |===

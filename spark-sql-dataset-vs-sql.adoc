@@ -8,6 +8,6 @@ You could at some point consider writing structured queries using link:spark-sql
 
 This section describes the differences between Spark SQL features to develop Spark applications using Dataset API and SQL mode.
 
-. link:spark-sql-Expression-RuntimeReplaceable.adoc#implementations[RuntimeReplaceable Unevaluable Unary Expressions] are only available using SQL mode by means of SQL functions like `nvl`, `nvl2`, `ifnull`, `nullif`, etc.
+. link:spark-sql-Expression-RuntimeReplaceable.adoc#implementations[RuntimeReplaceable Expressions] are only available using SQL mode by means of SQL functions like `nvl`, `nvl2`, `ifnull`, `nullif`, etc.
 
 . link:spark-sql-Column.adoc#isin[Column.isin] and link:spark-sql-AstBuilder.adoc#withPredicate[SQL IN predicate with a subquery] (and link:spark-sql-Expression-In.adoc[In Predicate Expression])

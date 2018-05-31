@@ -255,7 +255,7 @@
 . link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
 . link:spark-sql-Expression-PlanExpression.adoc[PlanExpression]
 . link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
-. link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable]
+. link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable Contract -- Replaceable SQL Expressions]
 . link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery SubqueryExpression]
 . link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery ExecSubqueryExpression]
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF]
