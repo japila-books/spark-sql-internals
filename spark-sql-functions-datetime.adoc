@@ -17,10 +17,10 @@
 |
 
 | <<to_date, to_date>>
-|
+| Converts column to date type (with an optional date format)
 
 | <<to_timestamp, to_timestamp>>
-|
+| Converts column to timestamp type (with an optional timestamp format)
 
 | <<unix_timestamp, unix_timestamp>>
 | Converts current or specified time to Unix timestamp (in seconds)
@@ -314,7 +314,7 @@ NOTE: The example is borrowed from https://flink.apache.org/news/2015/12/04/Intr
 
 The example shows how to use `window` function to model a traffic sensor that counts every 15 seconds the number of vehicles passing a certain location.
 
-=== [[to_date]] `to_date` Function
+=== [[to_date]] Converting Column To DateType -- `to_date` Function
 
 [source, scala]
 ----
@@ -322,9 +322,15 @@ to_date(e: Column): Column
 to_date(e: Column, fmt: String): Column
 ----
 
-CAUTION: FIXME
+`to_date` converts the column into link:spark-sql-DataType.adoc#DateType[DateType] (by casting to `DateType`).
 
-=== [[to_timestamp]] `to_timestamp` Function
+NOTE: `fmt` follows http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html[the formatting styles].
+
+Internally, `to_date` creates a link:spark-sql-Column.adoc#creating-instance[Column] with link:spark-sql-Expression-ParseToDate.adoc[ParseToDate] expression (and `Literal` expression for `fmt`).
+
+TIP: Use link:spark-sql-Expression-ParseToDate.adoc[ParseToDate] expression to use a column for the values of `fmt`.
+
+=== [[to_timestamp]] Converting Column To TimestampType -- `to_timestamp` Function
 
 [source, scala]
 ----
@@ -332,4 +338,10 @@ to_timestamp(s: Column): Column
 to_timestamp(s: Column, fmt: String): Column
 ----
 
-CAUTION: FIXME
+`to_timestamp` converts the column into link:spark-sql-DataType.adoc#TimestampType[TimestampType] (by casting to `TimestampType`).
+
+NOTE: `fmt` follows http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html[the formatting styles].
+
+Internally, `to_timestamp` creates a link:spark-sql-Column.adoc#creating-instance[Column] with link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp] expression (and `Literal` expression for `fmt`).
+
+TIP: Use link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp] expression to use a column for the values of `fmt`.
