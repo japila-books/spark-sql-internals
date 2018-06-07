@@ -57,25 +57,7 @@ Internally, `buildReaderWithPartitionValues` <<buildReader, builds a data reader
 
 . Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the link:spark-sql-PartitionedFile.adoc#partitionValues[partition column values] appended.
 
-NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
-
-=== [[buildReader]] Building Data Reader -- `buildReader` Method
-
-[source, scala]
-----
-buildReader(
-  sparkSession: SparkSession,
-  dataSchema: StructType,
-  partitionSchema: StructType,
-  requiredSchema: StructType,
-  filters: Seq[Filter],
-  options: Map[String, String],
-  hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
-----
-
-`buildReader`...FIXME
-
-NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, build a data reader with partition column values appended>>.
+NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` physical operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
 
 === [[isSplitable]] Is File Splitable Or Not -- `isSplitable` Method
 
@@ -126,3 +108,25 @@ vectorTypes(
 `vectorTypes` returns `None`, i.e. no class names of link:spark-sql-ColumnVector.adoc[ColumnVectors] for every column used in a columnar batch.
 
 NOTE: `vectorTypes` is used exclusively when `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes[concrete ColumnVector class names].
+
+=== [[buildReader]] Building InternalRow Data Reader -- `buildReader` Method
+
+[source, scala]
+----
+buildReader(
+  sparkSession: SparkSession,
+  dataSchema: StructType,
+  partitionSchema: StructType,
+  requiredSchema: StructType,
+  filters: Seq[Filter],
+  options: Map[String, String],
+  hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
+----
+
+`buildReader` simply reports a `UnsupportedOperationException`:
+
+```
+buildReader is not supported for [className]
+```
+
+NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, build a data reader with partition column values appended>>.

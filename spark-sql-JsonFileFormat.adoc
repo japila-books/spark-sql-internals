@@ -72,7 +72,7 @@ NOTE: Internally, `allowUnquotedFieldNames` becomes `JsonParser.Feature.ALLOW_UN
 
 | [[compression]] `compression`
 |
-|
+a| Compression codec that can be either one of the link:spark-sql-CompressionCodecs.adoc#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
 
 | [[dateFormat]] `dateFormat`
 | `yyyy-MM-dd`
@@ -143,21 +143,6 @@ NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFo
 
 `inferSchema`...FIXME
 
-=== [[prepareWrite]] `prepareWrite` Method
-
-[source, scala]
-----
-prepareWrite(
-  sparkSession: SparkSession,
-  job: Job,
-  options: Map[String, String],
-  dataSchema: StructType): OutputWriterFactory
-----
-
-NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract].
-
-`prepareWrite`...FIXME
-
 === [[buildReader]] `buildReader` Method
 
 [source, scala]
@@ -175,3 +160,18 @@ buildReader(
 NOTE: `buildReader` is part of link:spark-sql-FileFormat.adoc#buildReader[FileFormat Contract].
 
 `buildReader`...FIXME
+
+=== [[prepareWrite]] `prepareWrite` Method
+
+[source, scala]
+----
+prepareWrite(
+  sparkSession: SparkSession,
+  job: Job,
+  options: Map[String, String],
+  dataSchema: StructType): OutputWriterFactory
+----
+
+NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
+
+`prepareWrite`...FIXME

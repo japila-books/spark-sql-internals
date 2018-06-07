@@ -34,7 +34,7 @@ Alias of <<encoding, encoding>>
 
 | [[codec]] `codec`
 |
-a| Compression codec that can be one of the following aliases of the <<shortCompressionCodecNames, known codecs>> or the fully-qualified class name of a compression codec.
+a| Compression codec that can be either one of the link:spark-sql-CompressionCodecs.adoc#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
 
 Alias of <<compression, compression>>
 
@@ -48,7 +48,7 @@ Alias of <<compression, compression>>
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be one of the following aliases of the <<shortCompressionCodecNames, known codecs>> or the fully-qualified class name of a compression codec.
+a| Compression codec that can be either one of the link:spark-sql-CompressionCodecs.adoc#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
 
 Alias of <<codec, codec>>
 
@@ -157,32 +157,17 @@ Alias of <<delimiter, delimiter>>
 |
 |===
 
-[[getCodecClassName]]
-[[shortCompressionCodecNames]]
-.Known Compression Codecs
-[cols="1,3",options="header",width="100%"]
-|===
-| Alias
-| Fully-Qualified Class Name
+=== [[prepareWrite]] `prepareWrite` Method
 
-| `none`
-|
+[source, scala]
+----
+prepareWrite(
+  sparkSession: SparkSession,
+  job: Job,
+  options: Map[String, String],
+  dataSchema: StructType): OutputWriterFactory
+----
 
-| `uncompressed`
-|
+NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
 
-| `bzip2`
-| `org.apache.hadoop.io.compress.BZip2Codec`
-
-| `deflate`
-| `org.apache.hadoop.io.compress.DeflateCodec`
-
-| `gzip`
-| `org.apache.hadoop.io.compress.GzipCodec`
-
-| `lz4`
-| `org.apache.hadoop.io.compress.Lz4Codec`
-
-| `snappy`
-| `org.apache.hadoop.io.compress.SnappyCodec`
-|===
+`prepareWrite`...FIXME

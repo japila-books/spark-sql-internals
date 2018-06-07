@@ -196,7 +196,7 @@ org.apache.spark.sql.AnalysisException: Path does not exist: file:/Users/jacek/d
   ... 48 elided
 ```
 
-If link:spark-sql-properties.adoc#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than `TextFileFormat`, and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
+If link:spark-sql-properties.adoc#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than link:spark-sql-TextFileFormat.adoc[TextFileFormat], and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
 
 [options="wrap"]
 ----

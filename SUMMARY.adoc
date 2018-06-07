@@ -144,8 +144,12 @@
 .. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 .. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
 .. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
+.. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
 .. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
+
 . link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
+
+. link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
 
 . link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]

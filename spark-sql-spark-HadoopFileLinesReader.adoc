@@ -8,7 +8,7 @@
 * `LibSVMFileFormat`
 * `TextInputCSVDataSource`
 * `TextInputJsonDataSource`
-* `TextFileFormat`
+* link:spark-sql-TextFileFormat.adoc[TextFileFormat]
 
 `HadoopFileLinesReader` uses the internal <<iterator, iterator>> that handles accessing files using Hadoop's FileSystem API.
 
