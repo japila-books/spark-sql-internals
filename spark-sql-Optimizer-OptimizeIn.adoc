@@ -15,7 +15,9 @@ Technically, `OptimizeIn` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] 
 [source, scala]
 ----
 // Use Catalyst DSL to define a logical plan
-// HACK: Disable one SparkSession.implicits
+
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack

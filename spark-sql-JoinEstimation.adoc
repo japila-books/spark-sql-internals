@@ -150,6 +150,41 @@ scala> val stats = JoinEstimation(join).estimate
 stats: Option[org.apache.spark.sql.catalyst.plans.logical.Statistics] = None
 ----
 
+[source, scala]
+----
+// FIXME Describe the purpose of the demo
+
+// Using Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.plans._
+
+val t1 = table(ref = "t1")
+
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val id = 'id.long
+
+val t2 = table("t2")
+import org.apache.spark.sql.catalyst.plans.LeftSemi
+val plan = t1.join(t2, joinType = LeftSemi, condition = Some(id))
+scala> println(plan.numberedTreeString)
+00 'Join LeftSemi, id#2: bigint
+01 :- 'UnresolvedRelation `t1`
+02 +- 'UnresolvedRelation `t2`
+
+import org.apache.spark.sql.catalyst.plans.logical.Join
+val join = plan match { case j: Join => j }
+
+import org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation
+
+// FIXME java.lang.UnsupportedOperationException
+val stats = JoinEstimation(join).estimate
+----
+
 [[logging]]
 [TIP]
 ====
@@ -253,7 +288,7 @@ NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is re
 estimate: Option[Statistics]
 ----
 
-`estimate` estimates statistics and query hints per link:spark-sql-LogicalPlan-Join.adoc#joinType[join type] (of the <<join, Join>> logical operator):
+`estimate` estimates statistics and query hints of the <<join, Join>> logical operator per link:spark-sql-LogicalPlan-Join.adoc#joinType[join type]:
 
 * For `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` join types, `estimate` <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
 
@@ -264,38 +299,5 @@ For other join types, `estimate` prints out the following DEBUG message to the l
 ```
 [CBO] Unsupported join type: [joinType]
 ```
-
-[source, scala]
-----
-// Demo 1
-// Using Catalyst DSL
-import org.apache.spark.sql.catalyst.dsl.plans._
-
-val t1 = table(ref = "t1")
-
-// HACK: Disable one SparkSession.implicits
-// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
-trait ThatWasABadIdea
-implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
-
-import org.apache.spark.sql.catalyst.dsl.expressions._
-val id = 'id.long
-
-val t2 = table("t2")
-import org.apache.spark.sql.catalyst.plans.LeftSemi
-val plan = t1.join(t2, joinType = LeftSemi, condition = Some(id))
-scala> println(plan.numberedTreeString)
-00 'Join LeftSemi, id#2: bigint
-01 :- 'UnresolvedRelation `t1`
-02 +- 'UnresolvedRelation `t2`
-
-import org.apache.spark.sql.catalyst.plans.logical.Join
-val join = plan match { case j: Join => j }
-
-import org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation
-
-// FIXME java.lang.UnsupportedOperationException
-val stats = JoinEstimation(join).estimate
-----
 
 NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics and query hints of a Join logical operator].

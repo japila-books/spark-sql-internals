@@ -67,12 +67,14 @@ You can also disable an implicit conversion using a trick described in https://s
 
 [source, scala]
 ----
-// HACK: Disable one SparkSession.implicits
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
 
-// HACK: Disable $ implicit conversion
+// HACK: Disable $ string interpolator
+// It is imported automatically in spark-shell (and makes demos impossible)
 implicit class StringToColumn(val sc: StringContext) {}
 ----
 ====
@@ -358,7 +360,8 @@ import org.apache.spark.sql.catalyst.dsl.plans._
 
 val t1 = table(ref = "t1")
 
-// HACK: Disable one SparkSession.implicits
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack

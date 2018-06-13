@@ -24,7 +24,8 @@ in(list: Expression*): Expression
 // Using Catalyst DSL to create an In expression
 import org.apache.spark.sql.catalyst.dsl.expressions._
 
-// HACK: Disable one SparkSession.implicits
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack

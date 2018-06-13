@@ -180,8 +180,8 @@ image::images/ReorderJoin-createOrderedJoin-four-plans-after.png[align="center"]
 scala> spark.version
 res0: String = 2.3.0
 
-// HACK: Disable one SparkSession.implicits
-// https://stackoverflow.com/q/15592324/1305344
+// HACK: Disable symbolToColumn implicit conversion
+// It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
 trait ThatWasABadIdea
 implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
