@@ -38,7 +38,7 @@ rowCountsExist(plans: LogicalPlan*): Boolean
 
 Otherwise, `rowCountsExist` is negative (i.e. `false`).
 
-NOTE: `rowCountsExist` uses `LogicalPlanStats` to access the link:spark-sql-LogicalPlanStats.adoc#stats[statistics and query hints] of a logical plan.
+NOTE: `rowCountsExist` uses `LogicalPlanStats` to access the link:spark-sql-LogicalPlanStats.adoc#stats[estimated statistics and query hints] of a logical plan.
 
 [NOTE]
 ====

@@ -185,7 +185,7 @@
 .. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
 .. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 
-. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics of Logical Operator]
+. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator]
 .. link:spark-sql-Statistics.adoc[Statistics -- Estimates of Plan Statistics and Query Hints]
 .. link:spark-sql-HintInfo.adoc[HintInfo]
 .. link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan]

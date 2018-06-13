@@ -1,7 +1,7 @@
 == [[Statistics]] Statistics -- Estimates of Plan Statistics and Query Hints
 
 [[creating-instance]]
-`Statistics` holds the statistics estimates and hints of a logical operator:
+`Statistics` holds the statistics estimates and query hints of a logical operator:
 
 * [[sizeInBytes]] Total (output) size (in bytes)
 * [[rowCount]] Estimated number of rows (aka _row count_)
