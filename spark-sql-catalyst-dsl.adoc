@@ -1,17 +1,36 @@
 == [[dsl]] Catalyst DSL -- Implicit Conversions for Catalyst Data Structures
 
-*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> that allow for constructing link:spark-sql-catalyst.adoc[Catalyst data structures], i.e. link:spark-sql-Expression.adoc[expressions] and link:spark-sql-LogicalPlan.adoc[logical plans], more easily.
+*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> for constructing Catalyst data structures, i.e. <<ExpressionConversions, expressions>> and <<plans, logical plans>>, more easily.
 
 The goal of Catalyst DSL is to make working with Spark SQL's building blocks easier (e.g. for testing or Spark SQL internals exploration).
 
-Catalyst DSL is part of `package object dsl` with the following Scala `objects` (and their Scala implicit conversions):
+[[implicit-conversions]]
+.Catalyst DSL's Implicit Conversions
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
 
-* [[expressions]] `expressions` for link:spark-sql-Expression.adoc[Catalyst expressions]
-** Creating link:spark-sql-Expression-Literal.adoc[Literals] from Scala (e.g. `Boolean`, `Int`, `String`, `Array[Byte]`) or Java (e.g. `java.sql.Date`, `java.sql.Timestamp`) types
-** Creating `UnresolvedAttributes` from Scala's `Symbol` or `$`-prefixed strings (using `$` string interpolator)
-** Creating `AttributeReferences` from Scala's `Symbol`
-** Creating `Expressions` or `UnresolvedAttributes` right from `Strings`
-** FIXME
+| <<ExpressionConversions, ExpressionConversions>>
+a| Creates expressions
+
+* Literals
+* UnresolvedAttribute and UnresolvedReference
+* ...
+
+| <<ImplicitOperators, ImplicitOperators>>
+| Adds operators to expressions for complex expressions
+
+| <<plans, plans>>
+a| Creates logical plans
+
+* <<hint, hint>>
+* <<join, join>>
+* <<table, table>>
+* <<DslLogicalPlan, DslLogicalPlan>>
+|===
+
+Catalyst DSL is part of `org.apache.spark.sql.catalyst.dsl` package object.
 
 [source, scala]
 ----
@@ -117,31 +136,51 @@ import org.apache.spark.sql.catalyst.analysis.SimpleAnalyzer
 scala> p.analyze
 ----
 
-[[implicit-conversions]]
-.Catalyst DSL's Implicit Conversions
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+=== [[ImplicitOperators]] `ImplicitOperators` Implicit Conversions
 
-| `ExpressionConversions`
-a| [[ExpressionConversions]]
+[[in]]
+Operators for link:spark-sql-Expression.adoc[expressions], i.e. `in`.
 
-* Adds <<ImplicitOperators, ImplicitOperators>> operators to link:spark-sql-Expression.adoc[Catalyst expressions]
+=== [[ExpressionConversions]] `ExpressionConversions` Implicit Conversions
 
-* Converts Scala native types (e.g. `Boolean`, `Long`, `String`, `Date`, `Timestamp`) and Spark SQL types (i.e. `Decimal`) to link:spark-sql-Expression-Literal.adoc[Literal expressions]
+`ExpressionConversions` implicit conversions add <<ImplicitOperators, ImplicitOperators>> operators to link:spark-sql-Expression.adoc[Catalyst expressions].
 
-* Converts Scala's `Symbol` to `UnresolvedAttribute` and `AttributeReference` expressions
+==== Type Conversions to Literal Expressions
 
-* Converts `$"col name"` to an `UnresolvedAttribute` expression
+`ExpressionConversions` adds conversions of Scala native types (e.g. `Boolean`, `Long`, `String`, `Date`, `Timestamp`) and Spark SQL types (i.e. `Decimal`) to link:spark-sql-Expression-Literal.adoc[Literal] expressions.
 
-* [[star]] Adds aggregate and non-aggregate functions to link:spark-sql-Expression.adoc[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
-+
+[source, scala]
+----
+// DEMO FIXME
+----
+
+==== Converting Symbols to UnresolvedAttribute and AttributeReference Expressions
+
+`ExpressionConversions` adds conversions of Scala's `Symbol` to link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute] and `AttributeReference` expressions.
+
+[source, scala]
+----
+// DEMO FIXME
+----
+
+==== Converting $-Prefixed String Literals to UnresolvedAttribute Expressions
+
+`ExpressionConversions` adds conversions of `$"col name"` to an link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute] expression.
+
+[source, scala]
+----
+// DEMO FIXME
+----
+
+==== [[star]] Adding Aggregate And Non-Aggregate Functions to Expressions
+
 [source, scala]
 ----
 star(names: String*): Expression
 ----
-+
+
+`ExpressionConversions` adds the aggregate and non-aggregate functions to link:spark-sql-Expression.adoc[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
+
 [source, scala]
 ----
 import org.apache.spark.sql.catalyst.dsl.expressions._
@@ -155,14 +194,16 @@ scala> println(s)
 WrappedArray(a, b).*
 ----
 
-* [[function]][[distinctFunction]] Creates link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] (`function` and `distinctFunction` operators)
-+
+==== [[function]][[distinctFunction]] Creating UnresolvedFunction Expressions -- `function` and `distinctFunction` Methods
+
+`ExpressionConversions` allows creating link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with `function` and `distinctFunction` operators.
+
 [source, scala]
 ----
 function(exprs: Expression*): UnresolvedFunction
 distinctFunction(exprs: Expression*): UnresolvedFunction
 ----
-+
+
 [source, scala]
 ----
 import org.apache.spark.sql.catalyst.dsl.expressions._
@@ -180,21 +221,30 @@ scala> g.isDistinct
 res1: Boolean = true
 ----
 
-* [[DslAttribute]][[notNull]][[canBeNull]] Adds `canBeNull` and `notNull` methods to create a `AttributeReference` with `nullability` on or off, respectively
-+
+==== [[DslAttribute]][[notNull]][[canBeNull]] Creating AttributeReference Expressions With nullability On or Off -- `notNull` and `canBeNull` Methods
+
+`ExpressionConversions` adds `canBeNull` and `notNull` operators to create a `AttributeReference` with `nullability` turned on or off, respectively.
+
 [source, scala]
 ----
 notNull: AttributeReference
 canBeNull: AttributeReference
 ----
 
-* [[at]] Adds `at` method to `AttributeReferences` to create a link:spark-sql-Expression-BoundReference.adoc[BoundReference]
-+
+[source, scala]
+----
+// DEMO FIXME
+----
+
+==== [[at]] Creating BoundReference -- `at` Method
+
 [source, scala]
 ----
 at(ordinal: Int): BoundReference
 ----
-+
+
+`ExpressionConversions` adds `at` method to `AttributeReferences` to create link:spark-sql-Expression-BoundReference.adoc[BoundReference] expressions.
+
 [source, scala]
 ----
 import org.apache.spark.sql.catalyst.dsl.expressions._
@@ -203,21 +253,21 @@ scala> println(boundRef)
 input[4, string, true]
 ----
 
-| `ImplicitOperators`
-| [[ImplicitOperators]][[in]] Operators for link:spark-sql-Expression.adoc[expressions], i.e. `in`.
+=== [[plans]] `plans` Implicit Conversions for Logical Plans
 
-| [[plans]] `plans`
-a|
+==== [[hint]] Creating UnresolvedHint Logical Operator -- `hint` Method
 
-* [[hint]] `hint` for a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator
-+
+`plans` adds `hint` method to create a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator.
+
 [source, scala]
 ----
 hint(name: String, parameters: Any*): LogicalPlan
 ----
 
-* [[join]] `join` for a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator
-+
+==== [[join]] Creating Join Logical Operator -- `join` Method
+
+`join` creates a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator.
+
 [source, scala]
 ----
 join(
@@ -226,13 +276,123 @@ join(
   condition: Option[Expression] = None): LogicalPlan
 ----
 
-* [[table]] `table` for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator
-+
+==== [[table]] Creating UnresolvedRelation Logical Operator -- `table` Method
+
+`table` creates a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator.
+
 [source, scala]
 ----
 table(ref: String): LogicalPlan
 table(db: String, ref: String): LogicalPlan
 ----
 
-* [[DslLogicalPlan]] Logical operators (e.g. `select`, `where`, `filter`, `serialize`, `groupBy`, `window`, `generate`)
-|===
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.plans._
+
+val t1 = table("t1")
+scala> println(t1.treeString)
+'UnresolvedRelation `t1`
+----
+
+==== [[DslLogicalPlan]] `DslLogicalPlan` Implicit Class
+
+[source, scala]
+----
+implicit class DslLogicalPlan(val logicalPlan: LogicalPlan)
+----
+
+`DslLogicalPlan` implicit class is part of <<plans, plans>> implicit conversions with extension methods (of link:spark-sql-LogicalPlan.adoc[logical operators]) to build entire logical plans.
+
+[source, scala]
+----
+select(exprs: Expression*): LogicalPlan
+where(condition: Expression): LogicalPlan
+filter[T: Encoder](func: T => Boolean): LogicalPlan
+filter[T: Encoder](func: FilterFunction[T]): LogicalPlan
+serialize[T: Encoder]: LogicalPlan
+deserialize[T: Encoder]: LogicalPlan
+limit(limitExpr: Expression): LogicalPlan
+join(
+  otherPlan: LogicalPlan,
+  joinType: JoinType = Inner,
+  condition: Option[Expression] = None): LogicalPlan
+cogroup[Key: Encoder, Left: Encoder, Right: Encoder, Result: Encoder](
+  otherPlan: LogicalPlan,
+  func: (Key, Iterator[Left], Iterator[Right]) => TraversableOnce[Result],
+  leftGroup: Seq[Attribute],
+  rightGroup: Seq[Attribute],
+  leftAttr: Seq[Attribute],
+  rightAttr: Seq[Attribute]): LogicalPlan
+orderBy(sortExprs: SortOrder*): LogicalPlan
+sortBy(sortExprs: SortOrder*): LogicalPlan
+groupBy(groupingExprs: Expression*)(aggregateExprs: Expression*): LogicalPlan
+window(
+  windowExpressions: Seq[NamedExpression],
+  partitionSpec: Seq[Expression],
+  orderSpec: Seq[SortOrder]): LogicalPlan
+subquery(alias: Symbol): LogicalPlan
+except(otherPlan: LogicalPlan): LogicalPlan
+intersect(otherPlan: LogicalPlan): LogicalPlan
+union(otherPlan: LogicalPlan): LogicalPlan
+generate(
+  generator: Generator,
+  unrequiredChildIndex: Seq[Int] = Nil,
+  outer: Boolean = false,
+  alias: Option[String] = None,
+  outputNames: Seq[String] = Nil): LogicalPlan
+insertInto(tableName: String, overwrite: Boolean = false): LogicalPlan
+as(alias: String): LogicalPlan
+coalesce(num: Integer): LogicalPlan
+repartition(num: Integer): LogicalPlan
+distribute(exprs: Expression*)(n: Int): LogicalPlan
+hint(name: String, parameters: Any*): LogicalPlan
+----
+
+[source, scala]
+----
+// Import plans object
+// That loads implicit class DslLogicalPlan
+// And so every LogicalPlan is the "target" of the DslLogicalPlan methods
+import org.apache.spark.sql.catalyst.dsl.plans._
+
+val t1 = table(ref = "t1")
+
+// HACK: Disable one SparkSession.implicits
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val id = 'id.long
+val logicalPlan = t1.select(id)
+scala> println(logicalPlan.numberedTreeString)
+00 'Project [id#1L]
+01 +- 'UnresolvedRelation `t1`
+
+val t2 = table("t2")
+import org.apache.spark.sql.catalyst.plans.LeftSemi
+val logicalPlan = t1.join(t2, joinType = LeftSemi, condition = Some(id))
+scala> println(logicalPlan.numberedTreeString)
+00 'Join LeftSemi, id#1: bigint
+01 :- 'UnresolvedRelation `t1`
+02 +- 'UnresolvedRelation `t2`
+----
+
+=== [[analyze]] Analyzing Logical Plan -- `analyze` Method
+
+[source, scala]
+----
+analyze: LogicalPlan
+----
+
+`analyze` resolves attribute references.
+
+`analyze` method is part of <<DslLogicalPlan, DslLogicalPlan>> implicit class.
+
+Internally, `analyze` uses `EliminateSubqueryAliases` logical rule and `SimpleAnalyzer` logical analyzer.
+
+[source, scala]
+----
+// DEMO FIXME
+----

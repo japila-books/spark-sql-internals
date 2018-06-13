@@ -6,6 +6,7 @@
 
 NOTE: `BasicStatsPlanVisitor` is used only when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
 
+[[creating-instance]]
 [[join]]
 `JoinEstimation` takes a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when created.
 
@@ -87,7 +88,7 @@ scala> println(plan.numberedTreeString)
 01 :- Relation[id#45L] parquet
 02 +- Relation[id#57L] parquet
 
-// Take Join operator from the logical plan
+// Take Join operator off the logical plan
 // JoinEstimation works with Joins only
 import org.apache.spark.sql.catalyst.plans.logical.Join
 val join = plan.collect { case j: Join => j }.head
@@ -108,9 +109,60 @@ val stats = JoinEstimation(join).estimate
 scala> :type stats
 Option[org.apache.spark.sql.catalyst.plans.logical.Statistics]
 
-scala> println(stats.map(_.simpleString))
+// Stats have to be available so Option.get should just work
+scala> println(stats.get.simpleString)
 Some(sizeInBytes=1200.0 B, rowCount=50, hints=none)
 ----
+
+`JoinEstimation` can <<estimate, estimate statistics and query hints of a Join logical operator>> with the following link:spark-sql-LogicalPlan-Join.adoc#joinType[join types]:
+
+* `Inner`, `Cross`, `LeftOuter`, `RightOuter`, `FullOuter`, `LeftSemi` and `LeftAnti`
+
+For the other join types (e.g. `ExistenceJoin`), `JoinEstimation` prints out a DEBUG message to the logs and returns `None` (to "announce" that no statistics could be computed).
+
+[source, scala]
+----
+// Demo: Unsupported join type, i.e. ExistenceJoin
+
+// Some parts were copied from the earlier demo
+// FIXME Make it self-contained
+
+// Using Catalyst DSL
+// Don't even know if such existance join could ever be possible in Spark SQL
+// For demo purposes it's OK, isn't it?
+import org.apache.spark.sql.catalyst.plans.ExistenceJoin
+val left = t1NoAliasesPlan
+val right = t2NoAliasesPlan
+val plan = left.join(right,
+  joinType = ExistenceJoin(exists = 'id.long))
+
+// Take Join operator off the logical plan
+// JoinEstimation works with Joins only
+import org.apache.spark.sql.catalyst.plans.logical.Join
+val join = plan.collect { case j: Join => j }.head
+
+// Enable DEBUG logging level
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger("org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation").setLevel(Level.DEBUG)
+
+scala> val stats = JoinEstimation(join).estimate
+18/06/13 10:29:37 DEBUG JoinEstimation: [CBO] Unsupported join type: ExistenceJoin(id#35L)
+stats: Option[org.apache.spark.sql.catalyst.plans.logical.Statistics] = None
+----
+
+[[logging]]
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
 
 === [[estimateInnerOuterJoin]] `estimateInnerOuterJoin` Internal Method
 
@@ -151,17 +203,6 @@ computeCardinalityAndStats(
 `computeCardinalityAndStats`...FIXME
 
 NOTE: `computeCardinalityAndStats` is used exclusively when `JoinEstimation` is requested for <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
-
-=== [[estimate]] Estimating Statistics and Query Hints of Join Logical Operator -- `estimate` Method
-
-[source, scala]
-----
-estimate: Option[Statistics]
-----
-
-`estimate`...FIXME
-
-NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics and query hints of a Join logical operator].
 
 === [[computeByHistogram]] Computing Join Cardinality Using Equi-Height Histograms -- `computeByHistogram` Internal Method
 
@@ -204,3 +245,57 @@ With row count statistics for the left side of the join available, `estimateLeft
 1. link:spark-sql-Statistics.adoc#attributeStats[Column histograms] as the column histograms of the left side
 
 NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics>> for `LeftSemi` and `LeftAnti` joins.
+
+=== [[estimate]] Estimating Statistics and Query Hints of Join Logical Operator -- `estimate` Method
+
+[source, scala]
+----
+estimate: Option[Statistics]
+----
+
+`estimate` estimates statistics and query hints per link:spark-sql-LogicalPlan-Join.adoc#joinType[join type] (of the <<join, Join>> logical operator):
+
+* For `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` join types, `estimate` <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
+
+* For `LeftSemi` and `LeftAnti` join types, `estimate` <<estimateLeftSemiAntiJoin, estimateLeftSemiAntiJoin>>
+
+For other join types, `estimate` prints out the following DEBUG message to the logs and returns `None` (to "announce" that no statistics could be computed).
+
+```
+[CBO] Unsupported join type: [joinType]
+```
+
+[source, scala]
+----
+// Demo 1
+// Using Catalyst DSL
+import org.apache.spark.sql.catalyst.dsl.plans._
+
+val t1 = table(ref = "t1")
+
+// HACK: Disable one SparkSession.implicits
+// implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
+trait ThatWasABadIdea
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val id = 'id.long
+
+val t2 = table("t2")
+import org.apache.spark.sql.catalyst.plans.LeftSemi
+val plan = t1.join(t2, joinType = LeftSemi, condition = Some(id))
+scala> println(plan.numberedTreeString)
+00 'Join LeftSemi, id#2: bigint
+01 :- 'UnresolvedRelation `t1`
+02 +- 'UnresolvedRelation `t2`
+
+import org.apache.spark.sql.catalyst.plans.logical.Join
+val join = plan match { case j: Join => j }
+
+import org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation
+
+// FIXME java.lang.UnsupportedOperationException
+val stats = JoinEstimation(join).estimate
+----
+
+NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics and query hints of a Join logical operator].
