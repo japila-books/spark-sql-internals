@@ -1,6 +1,6 @@
-== [[DataFrameReader]] DataFrameReader -- Reading Datasets from External Data Sources
+== [[DataFrameReader]] DataFrameReader -- Loading Datasets from External Data Sources
 
-`DataFrameReader` is an interface to load datasets from external data sources, e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, Hive tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>, into untyped `DataFrames` (mostly) or typed `Datasets`.
+`DataFrameReader` is responsible for <<load, loading datasets from external data sources>>, e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, Hive tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>, into untyped `DataFrames` (mostly) or typed `Datasets`.
 
 `DataFrameReader` is available using link:spark-sql-SparkSession.adoc#read[SparkSession.read].
 
@@ -171,7 +171,7 @@ You can also use `options` method to describe different options in a single `Map
 options(options: scala.collection.Map[String, String]): DataFrameReader
 ----
 
-=== [[load]] Loading Data from Data Sources with Multiple Files Support -- `load` Method
+=== [[load]] Loading Dataset from Data Source -- `load` Method
 
 [source, scala]
 ----
@@ -180,7 +180,7 @@ load(path: String): DataFrame
 load(paths: String*): DataFrame
 ----
 
-`load` loads a data from data sources that support multiple `paths` and represents it as an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+`load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped link:spark-sql-DataFrame.adoc[DataFrame].
 
 Internally, `load` link:spark-sql-DataSource.adoc#creating-instance[creates a `DataSource`] (for the current link:spark-sql-SparkSession.adoc[SparkSession], a user-specified <<schema, schema>>, a source <<format, format>> and <<options, options>>). It then immediately link:spark-sql-DataSource.adoc#resolveRelation[resolves it] and link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[converts `BaseRelation` into a `DataFrame`].
 
@@ -498,3 +498,16 @@ Internally, `textFile` passes calls on to <<text, text>> method and link:spark-s
 `DataFrameReader` takes the following when created:
 
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+
+=== [[loadV1Source]] Loading Dataset (Data Source API V1) -- `loadV1Source` Internal Method
+
+[source, scala]
+----
+loadV1Source(paths: String*): DataFrame
+----
+
+`loadV1Source` creates a link:spark-sql-DataSource.adoc#apply[DataSource] and requests it to link:spark-sql-DataSource.adoc#resolveRelation[resolve the underlying relation (as a BaseRelation)].
+
+In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
+
+NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a link:spark-sql-DataSourceReader.adoc[DataSourceReader] could not be created).

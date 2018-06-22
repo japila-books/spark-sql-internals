@@ -1,8 +1,10 @@
 == [[DataSource]] DataSource -- Pluggable Data Provider Framework
 
-`DataSource` is among the main components of *Data Source API* in Spark SQL (together with link:spark-sql-DataFrameReader.adoc[DataFrameReader] for loading datasets, link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for saving datasets and `StreamSourceProvider` for creating streaming sources).
+`DataSource` is one of the main parts of *Data Source API* in Spark SQL (together with link:spark-sql-DataFrameReader.adoc[DataFrameReader] for loading datasets, link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for saving datasets and `StreamSourceProvider` for creating streaming sources).
 
 `DataSource` models a **pluggable data provider framework** with <<providers, extension points>> for Spark SQL integrators to expand the list of supported external data sources in Spark SQL.
+
+`DataSource` is <<creating-instance, created>> when...MEFIXME
 
 [[providers]]
 .DataSource's Provider (and Format) Contracts
@@ -58,6 +60,34 @@ val messages: DataFrame = spark.readStream
 
 NOTE: Data source is also called a *table provider*.
 
+[[internal-registries]]
+.DataSource's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| `providingClass`
+| [[providingClass]] FIXME
+
+Used when...FIXME
+
+| `sourceInfo`
+| [[sourceInfo]] FIXME
+
+Used when...FIXME
+
+| `caseInsensitiveOptions`
+| [[caseInsensitiveOptions]] FIXME
+
+Used when...FIXME
+
+| `equality`
+| [[equality]] FIXME
+
+Used when...FIXME
+|===
+
 === [[writeAndRead]] Writing DataFrame to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
 [source, scala]
@@ -68,10 +98,6 @@ writeAndRead(mode: SaveMode, data: DataFrame): BaseRelation
 CAUTION: FIXME
 
 NOTE: `writeAndRead` is used exclusively when link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand] logical command is executed.
-
-=== [[providingClass]] `providingClass` Property
-
-CAUTION: FIXME
 
 === [[write]] Writing DataFrame to Data Source Per Save Mode -- `write` Method
 
@@ -133,25 +159,6 @@ CAUTION: FIXME
 === [[createSink]] `createSink` Method
 
 CAUTION: FIXME
-
-=== [[creating-instance]] Creating DataSource Instance
-
-[source, scala]
-----
-class DataSource(
-  sparkSession: SparkSession,
-  className: String,
-  paths: Seq[String] = Nil,
-  userSpecifiedSchema: Option[StructType] = None,
-  partitionColumns: Seq[String] = Seq.empty,
-  bucketSpec: Option[BucketSpec] = None,
-  options: Map[String, String] = Map.empty,
-  catalogTable: Option[CatalogTable] = None)
-----
-
-When being created, `DataSource` first <<lookupDataSource, looks up the providing class>> given `className` (considering it an alias or a fully-qualified class name) and computes the <<sourceSchema, name and schema>> of the data source.
-
-NOTE: `DataSource` does the initialization lazily on demand and only once.
 
 ==== [[sourceSchema]] `sourceSchema` Internal Method
 
@@ -255,18 +262,18 @@ resolveRelation(checkFilesExist: Boolean = true): BaseRelation
 
 `resolveRelation` resolves (i.e. creates) a link:spark-sql-BaseRelation.adoc[BaseRelation].
 
-Internally, `resolveRelation` creates an instance of <<providingClass, providingClass>> (of a `DataSource`) and branches off per its type, i.e. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider], link:spark-sql-RelationProvider.adoc[RelationProvider] or <<FileFormat, FileFormat>>.
+Internally, `resolveRelation` tries to create an instance of the <<providingClass, providingClass>> and branches off per its type and whether the optional <<userSpecifiedSchema, user-specified schema>> was specified or not.
 
-.Resolving BaseRelation per Providers
+.Resolving BaseRelation per Provider and User-Specified Schema
 [cols="1,3",options="header",width="100%"]
 |===
 | Provider
 | Behaviour
 
-| `SchemaRelationProvider`
+| link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
 | Executes link:spark-sql-SchemaRelationProvider.adoc#createRelation[SchemaRelationProvider.createRelation] with the provided schema
 
-| `RelationProvider`
+| link:spark-sql-RelationProvider.adoc[RelationProvider]
 | Executes link:spark-sql-RelationProvider.adoc#createRelation[RelationProvider.createRelation]
 
 | link:spark-sql-FileFormat.adoc[FileFormat]
@@ -298,3 +305,18 @@ buildStorageFormatFromOptions(options: Map[String, String]): CatalogStorageForma
 `buildStorageFormatFromOptions`...FIXME
 
 NOTE: `buildStorageFormatFromOptions` is used when...FIXME
+
+=== [[creating-instance]][[apply]] Creating DataSource Instance
+
+`DataSource` takes the following when created:
+
+* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[className]] Name of the provider class (aka _input data source format_)
+* [[paths]] Paths to load (default: empty)
+* [[userSpecifiedSchema]] (optional) User-specified link:spark-sql-StructType.adoc[schema] (default: undefined)
+* [[partitionColumns]] (optional) Names of the partition columns (default: empty)
+* [[bucketSpec]] Optional link:spark-sql-BucketSpec.adoc[bucketing specification] (default: undefined)
+* [[options]] Options (default: empty)
+* [[catalogTable]] (optional) link:spark-sql-CatalogTable.adoc[CatalogTable] (default: undefined)
+
+`DataSource` initializes the <<internal-registries, internal registries and counters>>.

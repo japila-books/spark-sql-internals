@@ -23,7 +23,7 @@
 ... link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
 
 . link:spark-sql-datasource-api.adoc[DataSource API -- Managing Datasets in External Data Sources]
-.. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Reading Datasets from External Data Sources]
+.. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Loading Datasets from External Data Sources]
 .. link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]
 
 . link:spark-sql-dataset-operators.adoc[Dataset Operators]
