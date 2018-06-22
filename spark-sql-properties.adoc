@@ -252,9 +252,9 @@ Use link:spark-sql-SQLConf.adoc#optimizerInSetConversionThreshold[SQLConf.optimi
 | `100`
 | Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
 
-| [[spark.sql.orc.impl]] `spark.sql.orc.impl`
+| `spark.sql.orc.impl`
 | `native`
-a| *(internal)* When `native`, use the native version of ORC support instead of the ORC library in Hive 1.2.1.
+a| [[spark.sql.orc.impl]] *(internal)* When `native`, use the native version of ORC support instead of the ORC library in Hive 1.2.1.
 
 Acceptable values:
 
