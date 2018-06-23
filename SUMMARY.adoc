@@ -543,6 +543,7 @@
 
 . link:spark-sql-SQLExecution.adoc[SQLExecution Helper Object]
 . link:spark-sql-RDDConversions.adoc[RDDConversions Helper Object]
+. link:spark-sql-CatalystTypeConverters.adoc[CatalystTypeConverters Helper Object]
 
 . link:spark-sql-SubExprUtils.adoc[SubExprUtils Helper Object]
 . link:spark-sql-PredicateHelper.adoc[PredicateHelper Scala Trait]

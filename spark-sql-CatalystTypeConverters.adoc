@@ -1,0 +1,14 @@
+== [[CatalystTypeConverters]] CatalystTypeConverters Helper Object
+
+`CatalystTypeConverters` is a Scala helper object with functions to convert Scala types to Catalyst types and vice versa.
+
+=== [[createToCatalystConverter]] `createToCatalystConverter` Method
+
+[source, scala]
+----
+createToCatalystConverter(dataType: DataType): Any => Any
+----
+
+`createToCatalystConverter`...FIXME
+
+NOTE: `createToCatalystConverter` is used when...FIXME
