@@ -513,3 +513,14 @@ assertNotBucketed(operation: String): Unit
 ```
 
 NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save, save>>, <<insertInto, insertInto>> and <<jdbc, jdbc>>.
+
+=== [[saveToV1Source]] `saveToV1Source` Internal Method
+
+[source, scala]
+----
+saveToV1Source(): Unit
+----
+
+`saveToV1Source`...FIXME
+
+NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save>> (for `DataSourceV2` writers with no `WriteSupport` and non-``DataSourceV2`` writers).

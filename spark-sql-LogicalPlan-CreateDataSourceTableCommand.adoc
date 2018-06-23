@@ -6,7 +6,7 @@
 
 `CreateDataSourceTableCommand` takes a `table` metadata and `ignoreIfExists` flag.
 
-=== [[run]] `run` Method
+=== [[run]] Running Logical Command -- `run` Method
 
 [source, scala]
 ----

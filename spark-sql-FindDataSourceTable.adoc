@@ -66,17 +66,6 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply`...FIXME
 
-=== [[readDataSourceTable]] `readDataSourceTable` Internal Method
-
-[source, scala]
-----
-readDataSourceTable(table: CatalogTable): LogicalPlan
-----
-
-`readDataSourceTable`...FIXME
-
-NOTE: `readDataSourceTable` is used when...FIXME
-
 === [[readHiveTable]] `readHiveTable` Internal Method
 
 [source, scala]
@@ -87,3 +76,14 @@ readHiveTable(table: CatalogTable): LogicalPlan
 `readHiveTable` simply link:spark-sql-LogicalPlan-HiveTableRelation.adoc#creating-instance[creates] a `HiveTableRelation` for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
 
 NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolving UnresolvedCatalogRelations in a logical plan>>.
+
+=== [[readDataSourceTable]] `readDataSourceTable` Internal Method
+
+[source, scala]
+----
+readDataSourceTable(table: CatalogTable): LogicalPlan
+----
+
+`readDataSourceTable`...FIXME
+
+NOTE: `readDataSourceTable` is used exclusively when `FindDataSourceTable` logical evaluation rule is <<apply, executed>> (for data source tables).

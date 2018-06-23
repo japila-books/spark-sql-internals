@@ -4,7 +4,17 @@
 
 `DataSource` models a **pluggable data provider framework** with <<providers, extension points>> for Spark SQL integrators to expand the list of supported external data sources in Spark SQL.
 
-`DataSource` is <<creating-instance, created>> when...MEFIXME
+`DataSource` is <<creating-instance, created>> when:
+
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (per Data Source V1 contract)]
+
+* link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[FindDataSourceTable] and link:spark-sql-ResolveSQLOnFile.adoc#apply[ResolveSQLOnFile] logical evaluation rules are executed
+
+* link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[CreateDataSourceTableCommand], link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand], link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#run[InsertIntoDataSourceDirCommand], link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run[CreateTempViewUsing] are executed
+
+* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation]
+
+* Spark Structured Streaming's `FileStreamSource`, `DataStreamReader` and `DataStreamWriter`
 
 [[providers]]
 .DataSource's Provider (and Format) Contracts
