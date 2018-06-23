@@ -1,4 +1,4 @@
-== [[DataFrameReader]] DataFrameReader -- Loading Datasets from External Data Sources
+== [[DataFrameReader]] DataFrameReader -- Loading Datasets From External Data Sources
 
 `DataFrameReader` is responsible for <<load, loading datasets from external data sources>>, e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, Hive tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>, into untyped `DataFrames` (mostly) or typed `Datasets`.
 
@@ -15,7 +15,6 @@ val reader: DataFrameReader = spark.read
 
 `DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom file formats>>.
 
-[[source]]
 NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] Spark property.
 
 After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually trigger the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>) operators that create untyped `DataFrames`.
@@ -103,7 +102,22 @@ scala> citiesDF.show
 +---+------+-------+
 ----
 
-=== [[format]] Defining Format -- `format` method
+[[internal-registries]]
+.DataFrameReader's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| `source`
+a| [[source]] Name of the input data source (aka _format_ or _provider_) with the default format per link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] configuration property (default: <<parquet, parquet>>).
+
+`source` can be changed using <<format, format>> method.
+
+Used exclusively when `DataFrameReader` is requested to <<load, load>>.
+|===
+
+=== [[format]] Specifying Format Of Input Data Source -- `format` method
 
 [source, scala]
 ----
