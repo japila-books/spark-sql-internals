@@ -26,7 +26,9 @@ a| Uses <<pruneFilterProject, pruneFilterProject>>
 NOTE: `PrunedScan` does not seem to be used in Spark SQL.
 
 | [[TableScan]] `LogicalRelation` with a link:spark-sql-TableScan.adoc[TableScan] relation
-| Matches `KafkaRelation` exclusively (as a `TableScan`)
+a|
+
+NOTE: Matches `KafkaRelation` exclusively (as a link:spark-sql-TableScan.adoc[TableScan])
 |===
 
 [source, scala]
@@ -123,3 +125,25 @@ NOTE: The expressions and their corresponding data source filters have the same 
 
 * `PushDownOperatorsToDataSource` logical optimization is link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc#apply[executed] (for link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation] leaf operators with a link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters] data source reader)
 ====
+
+=== [[toCatalystRDD]] Converting RDD of Rows to Catalyst RDD (RDD of InternalRows) -- `toCatalystRDD` Internal Method
+
+[source, scala]
+----
+toCatalystRDD(
+  relation: LogicalRelation,
+  output: Seq[Attribute],
+  rdd: RDD[Row]): RDD[InternalRow]
+toCatalystRDD(relation: LogicalRelation, rdd: RDD[Row]) // <1>
+----
+<1> Calls the former `toCatalystRDD` with the link:spark-sql-LogicalPlan-LogicalRelation.adoc#output[output] of the `LogicalRelation`
+
+`toCatalystRDD` branches off per the link:spark-sql-BaseRelation.adoc#needConversion[needConversion] flag of the link:spark-sql-LogicalPlan-LogicalRelation.adoc#relation[BaseRelation] of the input link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation].
+
+When enabled (`true`), `toCatalystRDD` link:spark-sql-RDDConversions.adoc#rowToRowRdd[converts the objects inside Rows to Catalyst types].
+
+Otherwise, `toCatalystRDD` simply casts the input `RDD[Row]` to a `RDD[InternalRow]` (as a simple untyped Scala type conversion).
+
+NOTE: link:spark-sql-BaseRelation.adoc#needConversion[needConversion] flag is enabled (`true`) by default.
+
+NOTE: `toCatalystRDD` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>>.

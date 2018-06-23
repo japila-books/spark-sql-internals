@@ -7,8 +7,14 @@ NOTE: "Data source", "relation" and "table" are often used as synonyms.
 [[sizeInBytes]]
 `BaseRelation` can optionally provide information about its estimated size in bytes (as `sizeInBytes`) that defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
 
-[[needConversion]]
-`BaseRelation` uses `needConversion` flag to enable conversion.
+[source, scala]
+----
+sizeInBytes: Long
+----
+
+`BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside link:spark-sql-Row.adoc[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
+
+NOTE: It is recommended that custom data sources (outside Spark SQL) should leave <<needConversion, needConversion>> flag enabled, i.e. `true`.
 
 [[unhandledFilters]]
 `BaseRelation` computes the list of `Filter` that this data source may not be able to handle.
@@ -59,3 +65,16 @@ abstract class BaseRelation {
 | [[sqlContext]] `sqlContext`
 | link:spark-sql-SQLContext.adoc[SQLContext]
 |===
+
+=== [[needConversion]] Should Objects Inside Rows Be Converted to Catalyst Types? -- `needConversion` Method
+
+[source, scala]
+----
+needConversion: Boolean
+----
+
+`needConversion` flag is enabled (`true`) by default.
+
+NOTE: It is recommended to leave `needConversion` enabled for data sources outside Spark SQL.
+
+NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[converts an RDD of Rows to Catalyst RDD (RDD of InternalRows)]).
