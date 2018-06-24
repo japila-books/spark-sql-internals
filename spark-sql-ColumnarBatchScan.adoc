@@ -152,7 +152,7 @@ supportsBatch: Boolean = true
 
 * `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#metadata[metadata] (for *Batched* metadata) and to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute[execute]
 
-* `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportCodegen[supportCodegen] flag, link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#inputRDD[inputRDD] and to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute[execute]
+* `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportCodegen[supportCodegen] flag, link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#inputRDD[input RDD] and to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute[execute]
 
 * `DataSourceV2ScanExec` physical operator is requested to link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute[execute]
 ====

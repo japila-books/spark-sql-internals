@@ -244,7 +244,7 @@ newHadoopConfWithOptions(options: Map[String, String]): Configuration
 
 * `TextBasedFileFormat` is requested to link:spark-sql-TextBasedFileFormat.adoc#isSplitable[say whether it is splitable or not]
 
-* `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[inputRDD]
+* `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD]
 
 * `InsertIntoHadoopFsRelationCommand` is requested to link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[run]
 

@@ -522,13 +522,14 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
-== DataSource V2
+== Data Source API V2
 
 . link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 . link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- RDD Of Data Source]
+.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 . link:spark-sql-DataWriter.adoc[DataWriter]
 . link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
 . link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]

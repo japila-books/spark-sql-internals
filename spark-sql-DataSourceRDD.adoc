@@ -1,14 +1,49 @@
-== [[DataSourceRDD]] DataSourceRDD
+== [[DataSourceRDD]] DataSourceRDD -- RDD Of Data Source
 
-`DataSourceRDD` is...FIXME
+`DataSourceRDD` is an `RDD` that is <<creating-instance, created>> exclusively when `DataSourceV2ScanExec` physical operator is requested for the link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#inputRDD[input RDD] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
-=== [[getPreferredLocations]] `getPreferredLocations` Method
+`DataSourceRDD` uses link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition] partitions.
+
+=== [[getPreferredLocations]] Requesting Preferred Locations Of DataReaderFactory (For Partition) -- `getPreferredLocations` Method
 
 [source, scala]
 ----
 getPreferredLocations(split: Partition): Seq[String]
 ----
 
-NOTE: `getPreferredLocations` is part of RDD Contract to...FIXME.
+NOTE: `getPreferredLocations` is part of Spark Core's `RDD` Contract to...FIXME.
 
-`getPreferredLocations`...FIXME
+`getPreferredLocations` simply requests the link:spark-sql-DataReaderFactory.adoc#preferredLocations[preferred locations] of the link:spark-sql-DataSourceRDDPartition.adoc#readerFactory[DataReaderFactory] of the input `DataSourceRDDPartition` partition.
+
+=== [[getPartitions]] `getPartitions` Method
+
+[source, scala]
+----
+getPartitions: Array[Partition]
+----
+
+NOTE: `getPartitions` is part of Spark Core's `RDD` Contract to...FIXME
+
+`getPartitions` simply creates a link:spark-sql-DataSourceRDDPartition.adoc#creating-instance[DataSourceRDDPartition] for every link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] in the <<readerFactories, readerFactories>>.
+
+=== [[creating-instance]] Creating DataSourceRDD Instance
+
+`DataSourceRDD` takes the following when created:
+
+* [[sc]] Spark Core's `SparkContext`
+* [[readerFactories]] Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects
+
+=== [[compute]] Computing Partition (in TaskContext) -- `compute` Method
+
+[source, scala]
+----
+compute(split: Partition, context: TaskContext): Iterator[T]
+----
+
+NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
+
+`compute` requests the link:spark-sql-DataSourceRDDPartition.adoc#readerFactory[DataReaderFactory] (of the link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition] partition) to link:spark-sql-DataReaderFactory.adoc#createDataReader[createDataReader].
+
+`compute` registers a Spark Core `TaskCompletionListener` that requests the `DataReader` to close at a task completion.
+
+`compute` returns a Spark Core `InterruptibleIterator` that...FIXME
