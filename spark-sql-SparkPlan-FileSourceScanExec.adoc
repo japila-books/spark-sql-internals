@@ -88,21 +88,6 @@ FileScan csv [id#20,name#21,city#22] Batched: false, Format: CSV, Location: InMe
 | Name
 | Description
 
-| [[inputRDD]] `inputRDD`
-a| Input `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`)
-
-Used when `FileSourceScanExec` is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
-
-NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
-
----
-
-Internally, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
-
-In case <<relation, HadoopFsRelation>> has link:spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec[bucketing specification] defined and link:spark-sql-bucketing.adoc#spark.sql.sources.bucketing.enabled[bucketing support is enabled], `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
-
-NOTE: <<createBucketedReadRDD, createBucketedReadRDD>> accepts a bucketing specification while <<createNonBucketedReadRDD, createNonBucketedReadRDD>> does not.
-
 | [[metadata]] `metadata`
 a| Metadata (as a collection of key-value pairs)
 
@@ -334,3 +319,20 @@ Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the val
 
 With <<supportsBatch, supportsBatch>> off and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> on you should see two more RDDs in the RDD lineage.
 ====
+
+=== [[inputRDD]] Creating Input RDD of Internal Rows -- `inputRDD` Internal Property
+
+[source, scala]
+----
+inputRDD: RDD[InternalRow]
+----
+
+NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`inputRDD` is an input `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `InternalRow`) that is used when `FileSourceScanExec` physical operator is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
+
+When created, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] that is in turn requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
+
+In case <<relation, HadoopFsRelation>> has link:spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec[bucketing specification] defined and link:spark-sql-bucketing.adoc#spark.sql.sources.bucketing.enabled[bucketing support is enabled], `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
+
+NOTE: <<createBucketedReadRDD, createBucketedReadRDD>> accepts a bucketing specification while <<createNonBucketedReadRDD, createNonBucketedReadRDD>> does not.

@@ -1,8 +1,6 @@
-== [[FileScanRDD]] FileScanRDD -- RDD of Internal Rows for...FIXME
+== [[FileScanRDD]] FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
 
-`FileScanRDD` is a RDD of link:spark-sql-InternalRow.adoc[internal rows] (i.e. `RDD[InternalRow]` with no parent dependencies) that...FIXME
-
-`FileScanRDD` is <<creating-instance, created>> when...FIXME
+`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (which is when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] that `WholeStageCodegenExec` physical operator uses when link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
 [[internal-registries]]
 .FileScanRDD's Internal Properties (e.g. Registries, Counters and Flags)

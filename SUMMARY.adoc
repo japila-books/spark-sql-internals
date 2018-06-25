@@ -528,7 +528,7 @@
 . link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- RDD Of Data Source]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
 .. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 . link:spark-sql-DataWriter.adoc[DataWriter]
 . link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
@@ -569,7 +569,7 @@
 . link:spark-sql-PartitionedFile.adoc[PartitionedFile -- Part of Single File]
 . link:spark-sql-PartitioningUtils.adoc[PartitioningUtils]
 
-. link:spark-sql-FileScanRDD.adoc[FileScanRDD]
+. link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 . link:spark-sql-ColumnVector.adoc[ColumnVector]

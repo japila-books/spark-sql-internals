@@ -8,8 +8,6 @@
 
 1. `SparkSession` is requested to link:spark-sql-SparkSession.adoc#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
-1. `LogicalRDD` is requested to <<newInstance, create a new instance>>
-
 NOTE: `LogicalRDD` is resolved to link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#LogicalRDD[executed].
 
 === [[newInstance]] `newInstance` Method

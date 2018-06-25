@@ -1,4 +1,4 @@
-== [[DataSourceRDD]] DataSourceRDD -- RDD Of Data Source
+== [[DataSourceRDD]] DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator
 
 `DataSourceRDD` is an `RDD` that is <<creating-instance, created>> exclusively when `DataSourceV2ScanExec` physical operator is requested for the link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#inputRDD[input RDD] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
