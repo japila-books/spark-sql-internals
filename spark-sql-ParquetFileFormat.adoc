@@ -233,3 +233,16 @@ Appending [partitionSchema] [partitionValues]
 With link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] disabled, the function does the following:
 
 . FIXME (since Parquet vectorized reader is enabled by default it's of less interest currently)
+
+=== [[mergeSchemasInParallel]] `mergeSchemasInParallel` Method
+
+[source, scala]
+----
+mergeSchemasInParallel(
+  filesToTouch: Seq[FileStatus],
+  sparkSession: SparkSession): Option[StructType]
+----
+
+`mergeSchemasInParallel`...FIXME
+
+NOTE: `mergeSchemasInParallel` is used when...FIXME

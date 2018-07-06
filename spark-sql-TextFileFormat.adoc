@@ -57,10 +57,10 @@ buildReader(
   requiredSchema: StructType,
   filters: Seq[Filter],
   options: Map[String, String],
-  hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
+  hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of link:spark-sql-FileFormat.adoc#buildReader[FileFormat Contract].
+NOTE: `buildReader` is part of link:spark-sql-FileFormat.adoc#buildReader[FileFormat Contract] to...FIXME
 
 `buildReader`...FIXME
 

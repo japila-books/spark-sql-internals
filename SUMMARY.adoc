@@ -159,7 +159,7 @@
 
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan -- Contract for Relations to Prune Columns for Scans]
+. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
 . link:spark-sql-PrunedScan.adoc[PrunedScan]
 . link:spark-sql-TableScan.adoc[TableScan]
 . link:spark-sql-CatalystScan.adoc[CatalystScan]

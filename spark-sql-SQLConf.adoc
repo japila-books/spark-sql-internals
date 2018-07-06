@@ -156,6 +156,16 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
 | Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
 
+| [[ignoreCorruptFiles]] `ignoreCorruptFiles`
+| link:spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
+a| Used when:
+
+* `FileScanRDD` is link:spark-sql-FileScanRDD.adoc#ignoreCorruptFiles[created]
+
+* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#inferSchema[inferSchema] and link:spark-sql-OrcFileFormat.adoc#buildReader[buildReader]
+
+* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#mergeSchemasInParallel[mergeSchemasInParallel]
+
 | [[inMemoryPartitionPruning]] `inMemoryPartitionPruning`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning]
 | Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#filteredCachedBatches[filtered cached column batches] (as a `RDD[CachedBatch]`).

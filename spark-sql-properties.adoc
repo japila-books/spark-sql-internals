@@ -156,6 +156,12 @@ Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnable
 
 Use link:spark-sql-SQLConf.adoc#useObjectHashAggregation[SQLConf.useObjectHashAggregation] method to access the current value.
 
+| `spark.sql.files.ignoreCorruptFiles`
+| `false`
+| [[spark.sql.files.ignoreCorruptFiles]] Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering corrupted files and the contents that have been read will still be returned.
+
+Use link:spark-sql-SQLConf.adoc#ignoreCorruptFiles[SQLConf.ignoreCorruptFiles] method to access the current value.
+
 | `spark.sql.hive.convertMetastoreOrc`
 | `true`
 | [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).

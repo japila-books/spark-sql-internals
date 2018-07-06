@@ -9,13 +9,13 @@
 | Name
 | Description
 
-| [[ignoreCorruptFiles]] `ignoreCorruptFiles`
-| Controls...FIXME
+| `ignoreCorruptFiles`
+| [[ignoreCorruptFiles]] link:spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
 
-Used when...FIXME
+Used exclusively when `FileScanRDD` is requested to <<compute, compute a partition>>
 
-| [[ignoreMissingFiles]] `ignoreMissingFiles`
-| Controls...FIXME
+| `ignoreMissingFiles`
+| [[ignoreMissingFiles]] Controls...FIXME
 
 Used when...FIXME
 |===
@@ -44,17 +44,6 @@ NOTE: `getPartitions` is part of the RDD Contract to...FIXME.
 
 `getPartitions`...FIXME
 
-=== [[compute]] `compute` Method
-
-[source, scala]
-----
-compute(split: RDDPartition, context: TaskContext): Iterator[InternalRow]
-----
-
-NOTE: `compute` is part of the RDD Contract to...FIXME.
-
-`compute`...FIXME
-
 === [[creating-instance]] Creating FileScanRDD Instance
 
 `FileScanRDD` takes the following when created:
@@ -62,3 +51,14 @@ NOTE: `compute` is part of the RDD Contract to...FIXME.
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 * [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (i.e. `(PartitionedFile) => Iterator[InternalRow]`)
 * [[filePartitions]] `FilePartitions`
+
+=== [[compute]] Computing Partition (in TaskContext) -- `compute` Method
+
+[source, scala]
+----
+compute(split: RDDPartition, context: TaskContext): Iterator[InternalRow]
+----
+
+NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
+
+`compute`...FIXME

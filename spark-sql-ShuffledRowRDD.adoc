@@ -42,7 +42,7 @@ CAUTION: FIXME
 compute(split: Partition, context: TaskContext): Iterator[InternalRow]
 ----
 
-NOTE: `compute` is part of link:spark-rdd.adoc#contract[RDD contract] to compute a given partition in a link:spark-taskscheduler-taskcontext.adoc[TaskContext].
+NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
 
 Internally, `compute` makes sure that the input `split` is a <<ShuffledRowRDDPartition, ShuffledRowRDDPartition>>. It then link:spark-ShuffleManager.adoc#contract[requests `ShuffleManager` for a `ShuffleReader`] to read ``InternalRow``s for the `split`.
 
