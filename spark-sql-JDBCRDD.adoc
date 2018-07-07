@@ -1,0 +1,42 @@
+== [[JDBCRDD]] JDBCRDD
+
+`JDBCRDD` is...FIXME
+
+=== [[compute]] Computing Partition (in TaskContext) -- `compute` Method
+
+[source, scala]
+----
+compute(thePart: Partition, context: TaskContext): Iterator[InternalRow]
+----
+
+NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
+
+`compute`...FIXME
+
+=== [[resolveTable]] `resolveTable` Method
+
+[source, scala]
+----
+resolveTable(options: JDBCOptions): StructType
+----
+
+`resolveTable`...FIXME
+
+NOTE: `resolveTable` is used when...FIXME
+
+=== [[scanTable]] `scanTable` Method
+
+[source, scala]
+----
+scanTable(
+  sc: SparkContext,
+  schema: StructType,
+  requiredColumns: Array[String],
+  filters: Array[Filter],
+  parts: Array[Partition],
+  options: JDBCOptions): RDD[InternalRow]
+----
+
+`scanTable`...FIXME
+
+NOTE: `scanTable` is used when...FIXME

@@ -331,7 +331,7 @@ val ds = Seq(Record(0, "Warsaw"), Record(1, "London")).toDS
 ds.foreachPartition { iter: Iterator[Record] => iter.foreach(println) }
 ----
 
-NOTE: `foreachPartition` is used to link:spark-sql-DataFrameWriter.adoc#jdbc[save a `DataFrame` to a JDBC table] (indirectly through `JdbcUtils.saveTable`) and link:spark-sql-streaming-ForeachSink.adoc[ForeachSink].
+NOTE: `foreachPartition` is used to link:spark-sql-DataFrameWriter.adoc#jdbc[save a `DataFrame` to a JDBC table] (indirectly through link:spark-sql-JdbcUtils.adoc#saveTable[JdbcUtils.saveTable]) and link:spark-sql-streaming-ForeachSink.adoc[ForeachSink].
 
 === [[mapPartitions]] `mapPartitions` Operator
 

@@ -1,0 +1,162 @@
+== [[JdbcUtils]] JdbcUtils Helper Object
+
+`JdbcUtils` is a Scala helper object with <<methods, methods>> for `JDBCRDD`, `JDBCRelation` and `JdbcRelationProvider`.
+
+[[methods]]
+.JdbcUtils's Methods
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| <<createConnectionFactory, createConnectionFactory>>
+a| Used when:
+
+* `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#scanTable[scanTable] and link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable]
+
+* `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
+
+| <<getCustomSchema, getCustomSchema>>
+| Used when `JDBCRelation` is link:spark-sql-BaseRelation-JDBCRelation.adoc#schema[created]
+
+| <<getSchema, getSchema>>
+| Used when `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable]
+
+| <<getSchemaOption, getSchemaOption>>
+| Used when `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
+
+| <<resultSetToSparkInternalRows, resultSetToSparkInternalRows>>
+| Used when `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#compute[compute a partition]
+
+| <<tableExists, tableExists>>
+| Used when `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
+|===
+
+=== [[createConnectionFactory]] `createConnectionFactory` Method
+
+[source, scala]
+----
+createConnectionFactory(options: JDBCOptions): () => Connection
+----
+
+`createConnectionFactory`...FIXME
+
+NOTE: `createConnectionFactory` is used when...FIXME
+
+=== [[getCommonJDBCType]] `getCommonJDBCType` Method
+
+[source, scala]
+----
+getCommonJDBCType(dt: DataType): Option[JdbcType]
+----
+
+`getCommonJDBCType`...FIXME
+
+NOTE: `getCommonJDBCType` is used when...FIXME
+
+=== [[getCatalystType]] `getCatalystType` Internal Method
+
+[source, scala]
+----
+getCatalystType(
+  sqlType: Int,
+  precision: Int,
+  scale: Int,
+  signed: Boolean): DataType
+----
+
+`getCatalystType`...FIXME
+
+NOTE: `getCatalystType` is used when...FIXME
+
+=== [[getSchemaOption]] `getSchemaOption` Method
+
+[source, scala]
+----
+getSchemaOption(conn: Connection, options: JDBCOptions): Option[StructType]
+----
+
+`getSchemaOption`...FIXME
+
+NOTE: `getSchemaOption` is used when...FIXME
+
+=== [[getSchema]] `getSchema` Method
+
+[source, scala]
+----
+getSchema(
+  resultSet: ResultSet,
+  dialect: JdbcDialect,
+  alwaysNullable: Boolean = false): StructType
+----
+
+`getSchema`...FIXME
+
+NOTE: `getSchema` is used when...FIXME
+
+=== [[resultSetToRows]] `resultSetToRows` Method
+
+[source, scala]
+----
+resultSetToRows(resultSet: ResultSet, schema: StructType): Iterator[Row]
+----
+
+`resultSetToRows`...FIXME
+
+NOTE: `resultSetToRows` is used when...FIXME
+
+=== [[resultSetToSparkInternalRows]] `resultSetToSparkInternalRows` Method
+
+[source, scala]
+----
+resultSetToSparkInternalRows(
+  resultSet: ResultSet,
+  schema: StructType,
+  inputMetrics: InputMetrics): Iterator[InternalRow]
+----
+
+`resultSetToSparkInternalRows`...FIXME
+
+NOTE: `resultSetToSparkInternalRows` is used when...FIXME
+
+=== [[schemaString]] `schemaString` Method
+
+[source, scala]
+----
+schemaString(
+  df: DataFrame,
+  url: String,
+  createTableColumnTypes: Option[String] = None): String
+----
+
+`schemaString`...FIXME
+
+NOTE: `schemaString` is used when...FIXME
+
+=== [[parseUserSpecifiedCreateTableColumnTypes]] `parseUserSpecifiedCreateTableColumnTypes` Internal Method
+
+[source, scala]
+----
+parseUserSpecifiedCreateTableColumnTypes(
+  df: DataFrame,
+  createTableColumnTypes: String): Map[String, String]
+----
+
+`parseUserSpecifiedCreateTableColumnTypes`...FIXME
+
+NOTE: `parseUserSpecifiedCreateTableColumnTypes` is used when...FIXME
+
+=== [[saveTable]] `saveTable` Method
+
+[source, scala]
+----
+saveTable(
+  df: DataFrame,
+  tableSchema: Option[StructType],
+  isCaseSensitive: Boolean,
+  options: JDBCOptions): Unit
+----
+
+`saveTable`...FIXME
+
+NOTE: `saveTable` is used when...FIXME

@@ -34,17 +34,17 @@ scala> df.explain
 | Method
 | Description
 
-| [[needConversion]] `needConversion`
-| Disabled (i.e. `false`)
+| `needConversion`
+| [[needConversion]] Disabled (i.e. `false`)
 
-| [[schema]] `schema`
-| StructType
+| `schema`
+| [[schema]] link:spark-sql-StructType.adoc[StructType]
 
-| [[sqlContext]] `sqlContext`
-| SQLContext from <<sparkSession, SparkSession>>
+| `sqlContext`
+| [[sqlContext]] SQLContext from <<sparkSession, SparkSession>>
 
-| [[unhandledFilters]] `unhandledFilters`
-| FIXME
+| `unhandledFilters`
+| [[unhandledFilters]] FIXME
 |===
 
 === [[PrunedFilteredScan]] JDBCRelation as PrunedFilteredScan

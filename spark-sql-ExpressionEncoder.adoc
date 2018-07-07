@@ -366,7 +366,7 @@ val code = deserializer.genCode(ctx).code
 
 * `TypedAggregateExpression` is link:spark-sql-Expression-TypedAggregateExpression.adoc#apply[created]
 
-* `JdbcUtils` is requested to `resultSetToRows`
+* `JdbcUtils` is requested to link:spark-sql-JdbcUtils.adoc#resultSetToRows[resultSetToRows]
 
 * Spark Structured Streaming's `FlatMapGroupsWithStateExec` physical operator is requested for the state deserializer (i.e. `stateDeserializer`)
 
