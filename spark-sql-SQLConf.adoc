@@ -160,11 +160,15 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 | link:spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
 a| Used when:
 
-* `FileScanRDD` is link:spark-sql-FileScanRDD.adoc#ignoreCorruptFiles[created]
+* `FileScanRDD` is link:spark-sql-FileScanRDD.adoc#ignoreCorruptFiles[created] (and then to link:spark-sql-FileScanRDD.adoc#compute[compute a partition])
 
 * `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#inferSchema[inferSchema] and link:spark-sql-OrcFileFormat.adoc#buildReader[buildReader]
 
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#mergeSchemasInParallel[mergeSchemasInParallel]
+
+| [[ignoreMissingFiles]] `ignoreMissingFiles`
+| link:spark-sql-properties.adoc#spark.sql.files.ignoreMissingFiles[spark.sql.files.ignoreMissingFiles]
+| Used exclusively when `FileScanRDD` is link:spark-sql-FileScanRDD.adoc#ignoreMissingFiles[created] (and then to link:spark-sql-FileScanRDD.adoc#compute[compute a partition])
 
 | [[inMemoryPartitionPruning]] `inMemoryPartitionPruning`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning]

@@ -2,7 +2,7 @@
 
 `FileSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator]) that represents a scan over collections of files (including Hive tables).
 
-`FileSourceScanExec` is <<creating-instance, created>> exclusively for `LogicalRelation` logical operators with a `HadoopFsRelation` when `FileSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[executed] (on a logical plan).
+`FileSourceScanExec` is <<creating-instance, created>> exclusively for a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operator with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] when `FileSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[executed] (i.e. applied to a logical plan).
 
 [source, scala]
 ----

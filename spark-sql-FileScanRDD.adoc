@@ -1,6 +1,28 @@
 == [[FileScanRDD]] FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
 
-`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (which is when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] that `WholeStageCodegenExec` physical operator uses when link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is the one and only input RDD of link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator.
+
+`FileScanRDD` is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (which is when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] that `WholeStageCodegenExec` physical operator uses when link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+
+[source, scala]
+----
+val q = spark.read.text("README.md")
+
+val sparkPlan = q.queryExecution.executedPlan
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan = sparkPlan.collectFirst { case exec: FileSourceScanExec => exec }.get
+val inputRDD = scan.inputRDDs.head
+
+val rdd = q.queryExecution.toRdd
+scala> println(rdd.toDebugString)
+(1) MapPartitionsRDD[1] at toRdd at <console>:26 []
+ |  FileScanRDD[0] at toRdd at <console>:26 []
+
+val fileScanRDD = q.queryExecution.toRdd.dependencies.head.rdd
+
+// What FileSourceScanExec uses for the input RDD is exactly the first RDD in the lineage
+assert(inputRDD == fileScanRDD)
+----
 
 [[internal-registries]]
 .FileScanRDD's Internal Properties (e.g. Registries, Counters and Flags)
@@ -15,9 +37,9 @@
 Used exclusively when `FileScanRDD` is requested to <<compute, compute a partition>>
 
 | `ignoreMissingFiles`
-| [[ignoreMissingFiles]] Controls...FIXME
+| [[ignoreMissingFiles]] link:spark-sql-properties.adoc#spark.sql.files.ignoreMissingFiles[spark.sql.files.ignoreMissingFiles]
 
-Used when...FIXME
+Used exclusively when `FileScanRDD` is requested to <<compute, compute a partition>>
 |===
 
 === [[getPreferredLocations]] `getPreferredLocations` Method
@@ -61,4 +83,8 @@ compute(split: RDDPartition, context: TaskContext): Iterator[InternalRow]
 
 NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
 
-`compute`...FIXME
+`compute` creates a Scala https://www.scala-lang.org/api/2.11.12/#scala.collection.Iterator[Iterator] (of Java `Objects`) that...FIXME
+
+`compute` then requests the input `TaskContext` to register a completion listener to be executed when a task completes (i.e. `addTaskCompletionListener`) that simply closes the iterator.
+
+In the end, `compute` returns the iterator.
