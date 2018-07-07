@@ -1,6 +1,6 @@
 == [[ShuffledRowRDD]] ShuffledRowRDD
 
-`ShuffledRowRDD` is a specialized link:spark-rdd.adoc[RDD] of link:spark-sql-InternalRow.adoc[InternalRow]s.
+`ShuffledRowRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
 
 NOTE: `ShuffledRowRDD` looks like link:spark-rdd-ShuffledRDD.adoc[ShuffledRDD], and the difference is in the type of the values to process, i.e. link:spark-sql-InternalRow.adoc[InternalRow] and `(K, C)` key-value pairs, respectively.
 
