@@ -155,6 +155,8 @@
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
 .. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
 
+. link:spark-sql-Filter.adoc[Data Source Filter]
+
 . link:spark-sql-FileRelation.adoc[FileRelation]
 
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
@@ -579,8 +581,6 @@
 . link:spark-sql-WritableColumnVector.adoc[WritableColumnVector]
 . link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
 . link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
-
-. link:spark-sql-Filter.adoc[Data Source Filter]
 
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]

@@ -1,6 +1,6 @@
 == [[JDBCRelation]] JDBCRelation
 
-`JDBCRelation` is a <<BaseRelation, BaseRelation>> and <<InsertableRelation, InsertableRelation>> with support for <<PrunedFilteredScan, PrunedFilteredScan>>.
+`JDBCRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] with support for <<InsertableRelation, InsertableRelation>> and <<PrunedFilteredScan, PrunedFilteredScan>>.
 
 `JDBCRelation` is <<creating-instance, created>> when:
 
@@ -9,7 +9,7 @@
 * `JdbcRelationProvider` link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[creates a BaseRelation]
 
 [[toString]]
-`JDBCRelation` presents itself with the name of the table and the number of partitions (if given).
+`JDBCRelation` requests <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
 
 ```
 JDBCRelation([table]) [numPartitions=[number]]
@@ -24,28 +24,19 @@ scala> df.explain
 *Scan JDBCRelation(projects) [numPartitions=1] [id#0,name#1,website#2] ReadSchema: struct<id:int,name:string,website:string>
 ```
 
-=== [[BaseRelation]] JDBCRelation as BaseRelation
+[[sqlContext]]
+`JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:spark-sql-SparkSession.adoc#sqlContext[SQLContext].
 
-`JDBCRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] which represents a collection of tuples with a schema.
+=== [[schema]] `schema` Attribute
 
-.JDBCRelation as BaseRelation
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+[source, scala]
+----
+schema: StructType
+----
 
-| `needConversion`
-| [[needConversion]] Disabled (i.e. `false`)
+NOTE: `schema` is part of link:spark-sql-BaseRelation.adoc#schema[BaseRelation Contract] to return the link:spark-sql-StructType.adoc[StructType] that describes the schema of tuples.
 
-| `schema`
-| [[schema]] link:spark-sql-StructType.adoc[StructType]
-
-| `sqlContext`
-| [[sqlContext]] SQLContext from <<sparkSession, SparkSession>>
-
-| `unhandledFilters`
-| [[unhandledFilters]] FIXME
-|===
+`schema`...FIXME
 
 === [[PrunedFilteredScan]] JDBCRelation as PrunedFilteredScan
 
@@ -86,3 +77,14 @@ CAUTION: FIXME Is this still in use?
 * [[parts]] RDD link:spark-rdd-partitions.adoc[partitions]
 * [[jdbcOptions]] link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions]
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+
+=== [[unhandledFilters]] `unhandledFilters` Method
+
+[source, scala]
+----
+unhandledFilters(filters: Array[Filter]): Array[Filter]
+----
+
+NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFilters[BaseRelation Contract] to find unhandled link:spark-sql-Filter.adoc[Filters].
+
+`unhandledFilters`...FIXME

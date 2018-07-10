@@ -32,22 +32,56 @@ You can link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[enable Hive s
 .SparkSession's Class and Instance Methods
 [cols="1,2",options="header",width="100%"]
 |===
-| Method | Description
-| <<builder, builder>> | "Opens" a builder to get or create a `SparkSession` instance
-| <<version, version>> | Returns the current version of Spark.
-| <<implicits, implicits>> | Use `import spark.implicits._` to import the implicits conversions and create `Datasets` from (almost arbitrary) Scala objects.
-| <<emptyDataset, emptyDataset[T]>> | Creates an empty `Dataset[T]`.
-| <<range, range>> | Creates a `Dataset[Long]`.
-| <<sql, sql>> | Executes a SQL query (and returns a `DataFrame`).
-| <<udf, udf>> | Access to user-defined functions (UDFs).
-| <<table, table>> | Loads the content of a table (to a `DataFrame`).
-| <<catalog, catalog>> | Access to the catalog of the entities of structured queries
-| <<read, read>> | Access to `DataFrameReader` to read a `DataFrame` from external files and storage systems.
-| <<conf, conf>> | Access to the current runtime configuration.
-| <<readStream, readStream>> | Access to `DataStreamReader` to read streaming datasets.
-| <<streams, streams>> | Access to `StreamingQueryManager` to manage structured streaming queries.
-| <<newSession, newSession>> | Creates a new `SparkSession`.
-| <<stop, stop>> | Stops the `SparkSession`.
+| Method
+| Description
+
+| <<builder, builder>>
+| "Opens" a builder to get or create a `SparkSession` instance
+
+| <<version, version>>
+| Returns the current version of Spark
+
+| <<implicits, implicits>>
+| Use `import spark.implicits._` to import the implicits conversions and create `Datasets` from (almost arbitrary) Scala objects
+
+| <<emptyDataset, emptyDataset[T]>>
+| Creates an empty `Dataset[T]`
+
+| <<range, range>>
+| Creates a `Dataset[Long]`
+
+| <<sql, sql>>
+| Executes a SQL query (and returns a `DataFrame`)
+
+| <<udf, udf>>
+| Access to user-defined functions (UDFs)
+
+| <<table, table>>
+| Loads the content of a table (to a `DataFrame`)
+
+| <<catalog, catalog>>
+| Access to the catalog of the entities of structured queries
+
+| <<read, read>>
+| Access to `DataFrameReader` to read a `DataFrame` from external files and storage systems
+
+| <<conf, conf>>
+| Access to the current runtime configuration
+
+| <<readStream, readStream>>
+| Access to `DataStreamReader` to read streaming datasets
+
+| `sqlContext`
+| [[sqlContext]] link:spark-sql-SQLContext.adoc[SQLContext]
+
+| <<streams, streams>>
+| Access to `StreamingQueryManager` to manage structured streaming queries
+
+| <<newSession, newSession>>
+| Creates a new `SparkSession`
+
+| <<stop, stop>>
+| Stops the `SparkSession`
 |===
 
 [TIP]

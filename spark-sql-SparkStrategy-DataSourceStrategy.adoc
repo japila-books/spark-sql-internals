@@ -85,7 +85,7 @@ selectFilters(
 
 `selectFilters`...FIXME
 
-NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<pruneFilterProjectRaw, pruneFilterProjectRaw>>.
+NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<pruneFilterProjectRaw, create a RowDataSourceScanExec (possibly under FilterExec and ProjectExec operators)>> (which is when `DataSourceStrategy` is <<apply, executed>> and <<pruneFilterProject, pruneFilterProject>>).
 
 === [[translateFilter]] Translating Catalyst Expression Into Data Source Filter -- `translateFilter` Method
 

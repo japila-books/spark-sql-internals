@@ -1,47 +1,10 @@
 == [[BaseRelation]] BaseRelation -- Collection of Tuples with Schema
 
-`BaseRelation` is the <<contract, contract>> in Spark SQL to model a collection of tuples (from a data source) with a <<schema, schema>>.
+`BaseRelation` is the <<contract, contract>> of <<implementations, collections of tuples>> with a known <<schema, schema>>.
 
 NOTE: "Data source", "relation" and "table" are often used as synonyms.
 
-[[sizeInBytes]]
-`BaseRelation` can optionally provide information about its estimated size in bytes (as `sizeInBytes`) that defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
-
-[source, scala]
-----
-sizeInBytes: Long
-----
-
-`BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside link:spark-sql-Row.adoc[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
-
-NOTE: It is recommended that custom data sources (outside Spark SQL) should leave <<needConversion, needConversion>> flag enabled, i.e. `true`.
-
-[[unhandledFilters]]
-`BaseRelation` computes the list of `Filter` that this data source may not be able to handle.
-
-[[implementations]]
-.BaseRelations
-[width="100%",cols="1,2",options="header"]
-|===
-| BaseRelation
-| Description
-
-| link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
-|
-
-| link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
-|
-
-| `KafkaRelation`
-| Structured Streaming's `BaseRelation` for datasets with records from Apache Kafka
-|===
-
-NOTE: `BaseRelation` is "created" using ``DataSource``'s link:spark-sql-DataSource.adoc#resolveRelation[resolveRelation].
-
-NOTE: `BaseRelation` is transformed into a link:spark-sql-DataFrame.adoc[DataFrame] using link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame].
-
-=== [[contract]] BaseRelation Contract
-
+[[contract]]
 [source, scala]
 ----
 package org.apache.spark.sql.sources
@@ -59,11 +22,41 @@ abstract class BaseRelation {
 | Method
 | Description
 
-| [[schema]] `schema`
-| link:spark-sql-StructType.adoc[StructType]
+| `schema`
+| [[schema]] link:spark-sql-StructType.adoc[StructType] that describes the schema of tuples
 
-| [[sqlContext]] `sqlContext`
-| link:spark-sql-SQLContext.adoc[SQLContext]
+| `sqlContext`
+| [[sqlContext]] link:spark-sql-SQLContext.adoc[SQLContext]
+|===
+
+`BaseRelation` is "created" when `DataSource` is requested to link:spark-sql-DataSource.adoc#resolveRelation[resolve a relation].
+
+`BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame].
+
+`BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside link:spark-sql-Row.adoc[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
+
+NOTE: It is recommended that custom data sources (outside Spark SQL) should leave <<needConversion, needConversion>> flag enabled, i.e. `true`.
+
+`BaseRelation` can optionally give an <<sizeInBytes, estimated size>> (in bytes).
+
+[[implementations]]
+.BaseRelations
+[width="100%",cols="1,2",options="header"]
+|===
+| BaseRelation
+| Description
+
+| `ConsoleRelation`
+| [[ConsoleRelation]] Used in Spark Structured Streaming
+
+| link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
+| [[HadoopFsRelation]]
+
+| link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
+| [[JDBCRelation]]
+
+| `KafkaRelation`
+| [[KafkaRelation]] Spark Structured Streaming's `BaseRelation` for datasets with records from Apache Kafka
 |===
 
 === [[needConversion]] Should JVM Objects Inside Rows Be Converted to Catalyst Types? -- `needConversion` Method
@@ -78,3 +71,29 @@ needConversion: Boolean
 NOTE: It is recommended to leave `needConversion` enabled for data sources outside Spark SQL.
 
 NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[converts an RDD of Rows to Catalyst RDD (RDD of InternalRows)]).
+
+=== [[unhandledFilters]] Finding Unhandled Filters -- `unhandledFilters` Method
+
+[source, scala]
+----
+unhandledFilters(filters: Array[Filter]): Array[Filter]
+----
+
+`unhandledFilters` takes the input link:spark-sql-Filter.adoc[Filter] collection and returns the ones that the data source may not be able to handle.
+
+NOTE: `unhandledFilters` returns the input `filters` by default as it is considered safe to double evaluate filters.
+
+NOTE: `unhandledFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters[selectFilters].
+
+=== [[sizeInBytes]] Requesting Estimated Size -- `sizeInBytes` Method
+
+[source, scala]
+----
+sizeInBytes: Long
+----
+
+`sizeInBytes` is the estimated size of a relation (used in query planning).
+
+NOTE: `sizeInBytes` defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
+
+NOTE: `sizeInBytes` is used exclusively when `LogicalRelation` is requested to link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[computeStats] (and they are not available in link:spark-sql-LogicalPlan-LogicalRelation.adoc#catalogTable[CatalogTable]).

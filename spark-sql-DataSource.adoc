@@ -279,14 +279,22 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 ====
 `resolveRelation` is used when:
 
-* `DataSource` <<writeAndRead, writes and reads>> the result of a link:spark-sql-DataFrame.adoc[structured query] (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
-* `DataFrameReader` link:spark-sql-DataFrameReader.adoc#load[loads data from a data source that supports multiple paths]
+* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
+
+* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#load[load data from a data source that supports multiple paths]
+
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
+
 * `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[executed]
+
 * `CreateTempViewUsing` runnable command is executed
-* `FindDataSourceTable` does link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
-* `ResolveSQLOnFile` converts a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
-* `HiveMetastoreCatalog` is requested for link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[]
+
+* `FindDataSourceTable` is requested to link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
+
+* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
+
+* `HiveMetastoreCatalog` is requested for link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation]
+
 * Structured Streaming's `FileStreamSource` creates batches of records
 ====
 
