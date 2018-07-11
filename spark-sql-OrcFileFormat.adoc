@@ -34,7 +34,7 @@ NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFo
 
 `inferSchema`...FIXME
 
-=== [[buildReader]] Building InternalRow Data Reader -- `buildReader` Method
+=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
 
 [source, scala]
 ----

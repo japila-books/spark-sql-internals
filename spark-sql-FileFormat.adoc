@@ -109,7 +109,7 @@ vectorTypes(
 
 NOTE: `vectorTypes` is used exclusively when `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes[concrete ColumnVector class names].
 
-=== [[buildReader]] Building InternalRow Data Reader -- `buildReader` Method
+=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
 
 [source, scala]
 ----

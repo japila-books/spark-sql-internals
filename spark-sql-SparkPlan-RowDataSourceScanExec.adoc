@@ -32,11 +32,13 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 
 * [[fullOutput]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[requiredColumnsIndex]] Indices of required columns
-* [[filters]] `Filters`
-* [[handledFilters]] Handled `Filters`
+* [[filters]] link:spark-sql-Filter.adoc[Filter predicates]
+* [[handledFilters]] Handled link:spark-sql-Filter.adoc[filter predicates]
 * [[rdd]] RDD of link:spark-sql-InternalRow.adoc[internal binary rows]
 * [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
 * [[tableIdentifier]] `TableIdentifier`
+
+NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)].
 
 === [[metadata]] `metadata` Property
 
@@ -45,12 +47,14 @@ NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[Codege
 metadata: Map[String, String]
 ----
 
-NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a simple text representation.
+NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)].
 
-`metadata` marks the <<filters, filters>> that are included in the <<handledFilters, handledFilters>> with `*` (star).
+`metadata` marks the <<filters, filter predicates>> that are included in the <<handledFilters, handled filters predicates>> with `*` (star).
+
+NOTE: Filter predicates with `*` (star) are to denote filters that are pushed down to a relation (aka _data source_).
 
 In the end, `metadata` creates the following mapping:
 
 . *ReadSchema* with the <<output, output>> converted to link:spark-sql-StructType.adoc#catalogString[catalog representation]
 
-. *PushedFilters* with the marked and unmarked <<filters, filters>>
+. *PushedFilters* with the marked and unmarked <<filters, filter predicates>>

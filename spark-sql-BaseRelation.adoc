@@ -72,7 +72,7 @@ NOTE: It is recommended to leave `needConversion` enabled for data sources outsi
 
 NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[converts an RDD of Rows to Catalyst RDD (RDD of InternalRows)]).
 
-=== [[unhandledFilters]] Finding Unhandled Filters -- `unhandledFilters` Method
+=== [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 
 [source, scala]
 ----

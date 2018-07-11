@@ -1,6 +1,6 @@
 == [[PrunedFilteredScan]] PrunedFilteredScan -- Contract for Relations with Column Pruning and Filter Pushdown
 
-`PrunedFilteredScan` is the <<contract, contract>> in Spark SQL for link:spark-sql-BaseRelation.adoc[relations] that can <<buildScan, eliminate unneeded columns>> (aka _column pruning_) and <<buildScan, filter using selected predicates only>> (aka _filter pushdown_).
+`PrunedFilteredScan` is the <<contract, contract>> in Spark SQL for link:spark-sql-BaseRelation.adoc[relations] (aka _data sources_) that can <<buildScan, eliminate unneeded columns>> (aka _column pruning_) and <<buildScan, filter using selected predicates only>> (aka _filter pushdown_).
 
 [[contract]]
 [[buildScan]]

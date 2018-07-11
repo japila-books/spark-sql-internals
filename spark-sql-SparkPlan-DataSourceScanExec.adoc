@@ -44,9 +44,7 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 | Description
 
 | [[metadata]] `metadata`
-| Metadata (as a collection of key-value pairs) that describes a scan.
-
-Used for <<simpleString, simple text representation>>
+| Metadata (as a collection of key-value pairs) that describes a scan in the <<simpleString, simple text representation (in a query plan tree)>>.
 
 | [[metastoreTableIdentifier]] `metastoreTableIdentifier`
 | `TableIdentifier` that...FIXME
@@ -55,7 +53,7 @@ Used for <<simpleString, simple text representation>>
 | link:spark-sql-BaseRelation.adoc[BaseRelation] that...FIXME
 |===
 
-=== [[simpleString]] Simple Text Node Description -- `simpleString` Method
+=== [[simpleString]] Simple Text Node Description (in Query Plan Tree) -- `simpleString` Method
 
 [source, scala]
 ----

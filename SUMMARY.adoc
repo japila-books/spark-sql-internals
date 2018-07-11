@@ -139,7 +139,6 @@
 . link:spark-sql-FileFormat.adoc[FileFormat]
 .. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
 .. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-.. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 .. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
 .. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 .. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
@@ -151,24 +150,38 @@
 
 . link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
 
-. link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
-.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
-.. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
-
-. link:spark-sql-Filter.adoc[Data Source Filter]
+. link:spark-sql-Filter.adoc[Filter Predicate for Data Sources (For Filter Pushdown)]
 
 . link:spark-sql-FileRelation.adoc[FileRelation]
 
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
+
+. link:spark-sql-hint-framework.adoc[Hint Framework]
+
+. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+
+=== Data Source API V1
+
+. link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
+.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
 
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
 . link:spark-sql-PrunedScan.adoc[PrunedScan]
 . link:spark-sql-TableScan.adoc[TableScan]
 . link:spark-sql-CatalystScan.adoc[CatalystScan]
 
-. link:spark-sql-hint-framework.adoc[Hint Framework]
+=== Data Source API V2
 
-. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
+. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
+.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
+.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+. link:spark-sql-DataWriter.adoc[DataWriter]
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
+. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
+.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
 == Query Planning and Execution
 
@@ -457,7 +470,6 @@
 
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
-. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
 
 == Monitoring
 
@@ -530,19 +542,6 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
-== Data Source API V2
-
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
-. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
-. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
-.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
-.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
-. link:spark-sql-DataWriter.adoc[DataWriter]
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
-. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
-.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
-
 == Spark Thrift Server
 
 . link:spark-sql-thrift-server.adoc[Thrift JDBC/ODBC Server -- Spark Thrift Server (STS)]
@@ -582,7 +581,6 @@
 . link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
 . link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
 
-. link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
 
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
@@ -591,6 +589,12 @@
 
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
 
-. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
-
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
+
+== JDBC Data Source
+
+. link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
+. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
+. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
+. link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
+. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]

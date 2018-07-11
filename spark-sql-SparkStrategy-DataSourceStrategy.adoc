@@ -87,14 +87,14 @@ selectFilters(
 
 NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<pruneFilterProjectRaw, create a RowDataSourceScanExec (possibly under FilterExec and ProjectExec operators)>> (which is when `DataSourceStrategy` is <<apply, executed>> and <<pruneFilterProject, pruneFilterProject>>).
 
-=== [[translateFilter]] Translating Catalyst Expression Into Data Source Filter -- `translateFilter` Method
+=== [[translateFilter]] Translating Catalyst Expression Into Data Source Filter Predicate -- `translateFilter` Method
 
 [source, scala]
 ----
 translateFilter(predicate: Expression): Option[Filter]
 ----
 
-`translateFilter` translates a Catalyst link:spark-sql-Expression.adoc[expression] into a corresponding link:spark-sql-Filter.adoc[data source filter] (if possible):
+`translateFilter` translates a Catalyst link:spark-sql-Expression.adoc[expression] into a corresponding link:spark-sql-Filter.adoc[Filter predicate] (if possible):
 
 * EqualTo
 * EqualNullSafe

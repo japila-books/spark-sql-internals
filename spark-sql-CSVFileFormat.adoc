@@ -171,3 +171,21 @@ prepareWrite(
 NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
 
 `prepareWrite`...FIXME
+
+=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
+
+[source, scala]
+----
+buildReader(
+  sparkSession: SparkSession,
+  dataSchema: StructType,
+  partitionSchema: StructType,
+  requiredSchema: StructType,
+  filters: Seq[Filter],
+  options: Map[String, String],
+  hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
+----
+
+NOTE: `buildReader` is part of link:spark-sql-FileFormat.adoc#buildReader[FileFormat Contract] to...FIXME
+
+`buildReader`...FIXME

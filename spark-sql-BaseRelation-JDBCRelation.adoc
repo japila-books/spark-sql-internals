@@ -78,13 +78,13 @@ CAUTION: FIXME Is this still in use?
 * [[jdbcOptions]] link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions]
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 
-=== [[unhandledFilters]] `unhandledFilters` Method
+=== [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 
 [source, scala]
 ----
 unhandledFilters(filters: Array[Filter]): Array[Filter]
 ----
 
-NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFilters[BaseRelation Contract] to find unhandled link:spark-sql-Filter.adoc[Filters].
+NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFilters[BaseRelation Contract] to find unhandled link:spark-sql-Filter.adoc[Filter predicates].
 
 `unhandledFilters`...FIXME
