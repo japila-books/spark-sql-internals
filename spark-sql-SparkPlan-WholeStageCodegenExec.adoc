@@ -26,7 +26,7 @@ NOTE: link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark
 `WholeStageCodegenExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] and once <<doExecute, executed>> triggers code generation for the entire structured query.
 
 [[generateTreeString]]
-`WholeStageCodegenExec` marks a <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the link:spark-sql-catalyst-TreeNode.adoc#generateTreeString[text representation of a physical plan].
+`WholeStageCodegenExec` marks the <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the link:spark-sql-catalyst-TreeNode.adoc#generateTreeString[text representation of a physical plan tree].
 
 [source, scala]
 ----

@@ -51,36 +51,6 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 |
 |===
 
-=== [[treeString]] Text Representation of All Nodes in Tree -- `treeString` Method
-
-[source, scala]
-----
-treeString: String  // <1>
-treeString(verbose: Boolean, addSuffix: Boolean = false): String
-----
-<1> Turns verbose flag on
-
-`treeString` gives the string representation of all the nodes in a `TreeNode`.
-
-NOTE: `treeString` is used mainly when `TreeNode` is requested for the <<numberedTreeString, numbered text representation>> for display purposes (and also for the string representation of a `TreeNode` object).
-
-=== [[generateTreeString]] `generateTreeString` Method
-
-[source, scala]
-----
-generateTreeString(
-  depth: Int,
-  lastChildren: Seq[Boolean],
-  builder: StringBuilder,
-  verbose: Boolean,
-  prefix: String = "",
-  addSuffix: Boolean = false): StringBuilder
-----
-
-`generateTreeString`...FIXME
-
-NOTE: `generateTreeString` is used when...FIXME
-
 === [[withNewChildren]] `withNewChildren` Method
 
 CAUTION: FIXME
@@ -142,4 +112,59 @@ NOTE: `p` can be used for interactive debugging.
 * link:spark-sql-SparkPlan.adoc[SparkPlan] for physical plan trees
 
 * link:spark-sql-Expression.adoc[Expression] for expression trees
+====
+
+=== [[generateTreeString]] `generateTreeString` Method
+
+[source, scala]
+----
+generateTreeString(
+  depth: Int,
+  lastChildren: Seq[Boolean],
+  builder: StringBuilder,
+  verbose: Boolean,
+  prefix: String = "",
+  addSuffix: Boolean = false): StringBuilder
+----
+
+`generateTreeString`...FIXME
+
+[NOTE]
+====
+`generateTreeString` is used when:
+
+* `TreeNode` is requested for <<treeString, treeString>>
+
+* link:spark-sql-SparkPlan-InputAdapter.adoc#generateTreeString[InputAdapter] and link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#generateTreeString[WholeStageCodegenExec] physical operators are requested to `generateTreeString`
+====
+
+=== [[toString]] `toString` Method
+
+[source, scala]
+----
+toString: String
+----
+
+NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
+
+`toString`...FIXME
+
+=== [[treeString]] Text Representation of All Nodes in Tree -- `treeString` Method
+
+[source, scala]
+----
+treeString: String  // <1>
+treeString(verbose: Boolean, addSuffix: Boolean = false): String
+----
+<1> Turns verbose flag on
+
+`treeString` gives the string representation of all the nodes in a `TreeNode`.
+
+[NOTE]
+====
+`treeString` is used when:
+
+* `TreeNode` is requested for the <<numberedTreeString, numbered text representation>> and the <<toString, string representation>>
+
+* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#simpleString[simpleString], link:spark-sql-QueryExecution.adoc#toString[toString] and link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats]
 ====

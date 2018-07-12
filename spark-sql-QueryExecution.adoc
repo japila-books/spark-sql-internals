@@ -139,11 +139,7 @@ stringWithStats: String
 
 `stringWithStats`...FIXME
 
-NOTE: `stringWithStats` is used exclusively when `ExplainCommand` command is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed] (with `cost` flag enabled).
-
-=== [[simpleString]] `simpleString` Method
-
-CAUTION: FIXME
+NOTE: `stringWithStats` is used exclusively when `ExplainCommand` logical command is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed] (with `cost` flag enabled).
 
 === [[debug]] debug Object
 
@@ -238,19 +234,6 @@ In case of any `AnalysisException`, `assertAnalyzed` creates a new `AnalysisExce
 * link:spark-sql-LogicalPlan-CreateViewCommand.adoc#run[CreateViewCommand] and link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run[AlterViewAsCommand] are executed
 ====
 
-=== [[toString]] Building Extended Text Representation with Logical and Physical Plans -- `toString` Method
-
-[source, scala]
-----
-toString: String
-----
-
-`toString` is a mere alias for <<completeString, completeString>> with `appendStats` flag disabled.
-
-NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStats>> which has `appendStats` flag enabled.
-
-NOTE: `toString` is used when...FIXME
-
 === [[toStringWithStats]] Building Text Representation with Cost Stats -- `toStringWithStats` Method
 
 [source, scala]
@@ -331,3 +314,34 @@ Internally, `hiveResultString` <<hiveResultString-transformations, transformatio
 |===
 
 NOTE: `hiveResultString` is used exclusively when `SparkSQLDriver` (of ThriftServer) runs a command.
+
+=== [[toString]] Building Extended Text Representation with Logical and Physical Plans -- `toString` Method
+
+[source, scala]
+----
+toString: String
+----
+
+NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
+
+`toString` is a mere alias for <<completeString, completeString>> with `appendStats` flag disabled.
+
+NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStats>> which has `appendStats` flag enabled.
+
+=== [[simpleString]] `simpleString` Method
+
+[source, scala]
+----
+simpleString: String
+----
+
+`simpleString`...FIXME
+
+[NOTE]
+====
+`simpleString` is used when:
+
+* `ExplainCommand` is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed]
+
+* Spark Structured Streaming's `StreamingExplainCommand` is executed
+====
