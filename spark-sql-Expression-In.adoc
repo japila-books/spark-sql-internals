@@ -103,7 +103,7 @@ assert(evaluatedValue.asInstanceOf[Boolean] == false)
 NOTE: <<list, Expression list>> must not be `null` (but can have expressions that can be evaluated to `null`).
 
 [[toString]]
-`In` has the following text representation:
+`In` uses the following *text representation* (i.e. `toString`):
 
 ```
 [value] IN [list]

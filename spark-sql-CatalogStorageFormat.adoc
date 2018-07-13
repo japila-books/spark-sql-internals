@@ -17,7 +17,7 @@
 1. `SparkSqlAstBuilder` is requested to parse Hive-specific link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[CREATE TABLE] or link:spark-sql-SparkSqlAstBuilder.adoc#visitInsertOverwriteHiveDir[INSERT OVERWRITE DIRECTORY] SQL statements
 
 [[toString]]
-When requested for a text representation (aka `toString`), `CatalogStorageFormat`...FIXME
+`CatalogStorageFormat` uses the following *text representation* (i.e. `toString`)...FIXME
 
 === [[toLinkedHashMap]] `toLinkedHashMap` Method
 

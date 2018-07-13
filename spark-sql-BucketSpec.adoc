@@ -20,7 +20,7 @@ NOTE: The <<numBuckets, number of buckets>> has to be between `0` and `100000` e
 . `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitBucketSpec[visitBucketSpec] (for `CREATE TABLE` SQL statement with `CLUSTERED BY` and `INTO n BUCKETS` with optional `SORTED BY` clauses)
 
 [[toString]]
-The text representation of a `BucketSpec` is as follows:
+`BucketSpec` uses the following *text representation* (i.e. `toString`):
 
 ```
 [numBuckets] buckets, bucket columns: [[bucketColumnNames]], sort columns: [[sortColumnNames]]

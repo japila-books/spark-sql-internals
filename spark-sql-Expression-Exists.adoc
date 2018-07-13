@@ -24,7 +24,7 @@ Cannot evaluate expression: [this]
 `Exists` is never link:spark-sql-Expression.adoc#nullable[nullable].
 
 [[toString]]
-The text representation of a `Exists` is as follows:
+`Exists` uses the following *text representation*:
 
 ```
 exists#[exprId] [conditionString]

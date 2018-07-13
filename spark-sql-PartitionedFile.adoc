@@ -7,7 +7,7 @@ NOTE: *Partition column values* are values of the columns that are column partit
 `PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create RDDs for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[bucketed] or link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[non-bucketed] reads.
 
 [[toString]]
-`PartitionedFile` has the following *text representation* (i.e. `toString`).
+`PartitionedFile` uses the following *text representation* (i.e. `toString`):
 
 ```
 path: [filePath], range: [start]-[end], partition values: [partitionValues]

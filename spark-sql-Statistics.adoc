@@ -50,7 +50,7 @@ link:spark-sql-CatalogStatistics.adoc[CatalogStatistics] is a "subset" of all po
 ====
 
 [[simpleString]][[toString]]
-`Statistics` comes with `simpleString` method that is used for the readable text representation (that `toString` with *Statistics* prefix).
+`Statistics` comes with `simpleString` method that is used for the readable *text representation* (that is `toString` with *Statistics* prefix).
 
 [source, scala]
 ----

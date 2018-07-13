@@ -49,7 +49,7 @@ The *readable text representation* of a `CatalogTable` (aka `simpleString`) is..
 NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is executed (with a partition specification).
 
 [[toString]]
-The *text representation* of a `CatalogTable` (aka `toString`) is...FIXME
+`CatalogTable` uses the following *text representation* (i.e. `toString`)...FIXME
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
