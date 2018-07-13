@@ -60,7 +60,7 @@ Internally, `cacheQuery` firstly requests the input `query` for the link:spark-s
 
 * Input `storageLevel` storage level
 
-* link:spark-sql-QueryExecution.adoc#executedPlan[Optimized physical query plan ready for execution] (after requesting `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute] the analyzed logical plan)
+* link:spark-sql-QueryExecution.adoc#executedPlan[Optimized physical query plan] (after requesting `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute] the analyzed logical plan)
 
 * Input `tableName`
 

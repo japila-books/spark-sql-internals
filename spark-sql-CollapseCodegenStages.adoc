@@ -1,10 +1,10 @@
-== [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Optimization -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
+== [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Plan Optimization -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
 
-`CollapseCodegenStages` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, collapsing chained physical operators together and generate Java code for execution>>.
+`CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, collapsing chained physical operators together and generate Java code for execution>>.
 
 Technically, `CollapseCodegenStages` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
 
-`CollapseCodegenStages` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution.
+`CollapseCodegenStages` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
 With link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property enabled (which is on by default), `CollapseCodegenStages` <<insertWholeStageCodegen, finds physical operators with CodegenSupport>> for which <<supportCodegen, whole-stage codegen requirements hold>> and collapses them together as `WholeStageCodegenExec` physical operator (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
 

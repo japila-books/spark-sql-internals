@@ -185,7 +185,7 @@ prepareForExecution(plan: SparkPlan): SparkPlan
 
 `prepareForExecution` takes <<preparations, physical preparation rules>> and applies them one by one to the input physical `plan`.
 
-NOTE: `prepareForExecution` is used exclusively when `QueryExecution` <<executedPlan, prepares physical plan for execution>>.
+NOTE: `prepareForExecution` is used exclusively when `QueryExecution` is requested to <<executedPlan, prepare the physical plan for execution>>.
 
 === [[assertSupported]] `assertSupported` Method
 
@@ -315,7 +315,7 @@ Internally, `hiveResultString` <<hiveResultString-transformations, transformatio
 
 NOTE: `hiveResultString` is used exclusively when `SparkSQLDriver` (of ThriftServer) runs a command.
 
-=== [[toString]] Building Extended Text Representation with Logical and Physical Plans -- `toString` Method
+=== [[toString]] Extended Text Representation with Logical and Physical Plans -- `toString` Method
 
 [source, scala]
 ----
@@ -328,14 +328,28 @@ NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
 
 NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStats>> which has `appendStats` flag enabled.
 
-=== [[simpleString]] `simpleString` Method
+=== [[simpleString]] Simple (Basic) Text Representation -- `simpleString` Method
 
 [source, scala]
 ----
 simpleString: String
 ----
 
-`simpleString`...FIXME
+`simpleString` requests the <<executedPlan, optimized SparkPlan>> for the link:spark-sql-catalyst-TreeNode.adoc#treeString[text representation] (of all nodes in the query tree) with `verbose` flag turned off.
+
+In the end, `simpleString` adds *== Physical Plan ==* header to the text representation and <<withRedaction, redacts sensitive information>>.
+
+[source, scala]
+----
+import org.apache.spark.sql.{functions => f}
+val q = spark.range(10).withColumn("rand", f.rand())
+val output = q.queryExecution.simpleString
+
+scala> println(output)
+== Physical Plan ==
+*(1) Project [id#5L, rand(6017561978775952851) AS rand#7]
++- *(1) Range (0, 10, step=1, splits=8)
+----
 
 [NOTE]
 ====
@@ -345,3 +359,16 @@ simpleString: String
 
 * Spark Structured Streaming's `StreamingExplainCommand` is executed
 ====
+
+=== [[withRedaction]] Redacting Sensitive Information -- `withRedaction` Internal Method
+
+[source, scala]
+----
+withRedaction(message: String): String
+----
+
+`withRedaction` takes the value of link:spark-sql-properties.adoc#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex] configuration property (as the regular expression to point at sensitive information) and requests Spark Core's `Utils` to redact sensitive information in the input `message`.
+
+NOTE: Internally, Spark Core's `Utils.redact` uses Java's `Regex.replaceAllIn` to replace all matches of a pattern with a string.
+
+NOTE: `withRedaction` is used when `QueryExecution` is requested for the <<simpleString, simple>>, <<toString, extended>> and <<stringWithStats, with statistics>> text representations.

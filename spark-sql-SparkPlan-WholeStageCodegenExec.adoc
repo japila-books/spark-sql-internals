@@ -39,7 +39,7 @@ scala> println(plan.numberedTreeString)
 05          +- LocalTableScan [ids#112]
 ----
 
-NOTE: As `WholeStageCodegenExec` is created as a result of link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule, you should use link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution to have `WholeStageCodegenExec` in a plan (that you can only notice by the star prefix in a plan output).
+NOTE: As `WholeStageCodegenExec` is created as a result of link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule, it is only executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
 
 [source, scala]
 ----

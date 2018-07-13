@@ -1,10 +1,10 @@
-== [[ReuseSubquery]] ReuseSubquery Physical Query Plan Optimization Rule
+== [[ReuseSubquery]] ReuseSubquery Physical Query Plan Optimization
 
-`ReuseSubquery` is a physical query plan optimization (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
+`ReuseSubquery` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
 
 Technically, `ReuseSubquery` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
 
-`ReuseSubquery` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution.
+`ReuseSubquery` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
 === [[apply]] `apply` Method
 

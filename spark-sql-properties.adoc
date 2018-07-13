@@ -317,6 +317,16 @@ Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecord
 
 Use link:spark-sql-SQLConf.adoc#dataFramePivotMaxValues[SQLConf.dataFramePivotMaxValues] method to access the current value.
 
+| `spark.sql.redaction.string.regex`
+| (undefined)
+a| [[spark.sql.redaction.string.regex]] Regular expression to point at sensitive information in text output
+
+When this regex matches a string part, that string part is replaced by a dummy value (i.e. `*********(redacted)`). This is currently used to redact the output of SQL explain commands.
+
+NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is used instead.
+
+Use link:spark-sql-SQLConf.adoc#stringRedactionPattern[SQLConf.stringRedactionPattern] method to access the current value.
+
 | `spark.sql.retainGroupColumns`
 | `true`
 | [[spark.sql.retainGroupColumns]] Controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).

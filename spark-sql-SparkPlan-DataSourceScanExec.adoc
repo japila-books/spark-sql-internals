@@ -102,3 +102,14 @@ def basicDataSourceScanExec = {
     output, requiredColumnsIndex, filters, handledFilters, rdd, baseRelation, tableIdentifier)
 }
 ----
+
+=== [[redact]] `redact` Internal Method
+
+[source, scala]
+----
+redact(text: String): String
+----
+
+`redact`...FIXME
+
+NOTE: `redact` is used when...FIXME

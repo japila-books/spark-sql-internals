@@ -158,7 +158,20 @@ treeString(verbose: Boolean, addSuffix: Boolean = false): String
 ----
 <1> Turns verbose flag on
 
-`treeString` gives the string representation of all the nodes in a `TreeNode`.
+`treeString` gives the string representation of all the nodes in the `TreeNode`.
+
+[source, scala]
+----
+import org.apache.spark.sql.{functions => f}
+val q = spark.range(10).withColumn("rand", f.rand())
+val executedPlan = q.queryExecution.executedPlan
+
+val output = executedPlan.treeString(verbose = true)
+
+scala> println(output)
+*(1) Project [id#0L, rand(6790207094253656854) AS rand#2]
++- *(1) Range (0, 10, step=1, splits=8)
+----
 
 [NOTE]
 ====

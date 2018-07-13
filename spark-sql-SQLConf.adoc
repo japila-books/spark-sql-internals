@@ -258,13 +258,21 @@ Used when:
 | link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
 | Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
 
+| [[stringRedactionPattern]] `stringRedactionPattern`
+| link:spark-sql-properties.adoc#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex]
+a| Used when:
+
+* `DataSourceScanExec` is requested to link:spark-sql-SparkPlan-DataSourceScanExec.adoc#redact[redact sensitive information]
+
+* `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#withRedaction[redact sensitive information]
+
 | [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
 | link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
 | Used exclusively when `SparkPlan` is requested for link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
 
 | [[useCompression]] `useCompression`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
-| Used...FIXME
+| Used when...FIXME
 
 | [[wholeStageEnabled]] `wholeStageEnabled`
 | link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage]

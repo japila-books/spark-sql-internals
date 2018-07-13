@@ -1,6 +1,6 @@
-== [[PlanSubqueries]] PlanSubqueries Physical Optimization
+== [[PlanSubqueries]] PlanSubqueries Physical Query Plan Optimization
 
-`PlanSubqueries` is a *physical optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, plans ScalarSubquery (SubqueryExpression) expressions>> (as `ScalarSubquery ExecSubqueryExpression` expressions).
+`PlanSubqueries` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, plans ScalarSubquery (SubqueryExpression) expressions>> (as `ScalarSubquery ExecSubqueryExpression` expressions).
 
 [source, scala]
 ----
@@ -46,7 +46,7 @@ scala> println(optimizedPlan.numberedTreeString)
 07    +- LocalTableScan [_1#49, _2#50]
 ----
 
-`PlanSubqueries` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical optimizations and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] of a structured query.
+`PlanSubqueries` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
 Technically, `PlanSubqueries` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
 
