@@ -33,6 +33,7 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
   self: BaseType =>
 
   // only required methods that have no implementation
+  // the others follow
   def children: Seq[BaseType]
   def verboseString: String
 }
@@ -44,11 +45,11 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 | Method
 | Description
 
-| [[children]] `children`
-| Child nodes
+| `children`
+| [[children]] Child nodes
 
-| [[verboseString]] `verboseString`
-|
+| `verboseString`
+| [[verboseString]]
 |===
 
 === [[withNewChildren]] `withNewChildren` Method

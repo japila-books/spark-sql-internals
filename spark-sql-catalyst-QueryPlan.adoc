@@ -149,7 +149,7 @@ scala> dataset.queryExecution.analyzed.output.toStructType
 res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
 ----
 
-=== [[simpleString]] Simple Text Node Description with State Prefix -- `simpleString` Method
+=== [[simpleString]] Simple (Basic) Text Node Description with State Prefix -- `simpleString` Method
 
 [source, scala]
 ----
@@ -181,3 +181,14 @@ transformAllExpressions(rule: PartialFunction[Expression, Expression]): this.typ
 `transformAllExpressions`...FIXME
 
 NOTE: `transformAllExpressions` is used when...FIXME
+
+=== [[verboseString]] `verboseString` Method
+
+[source, scala]
+----
+verboseString: String
+----
+
+NOTE: `verboseString` is part of link:spark-sql-catalyst-TreeNode.adoc#verboseString[TreeNode Contract] to...FIXME.
+
+`verboseString` simply returns the <<simpleString, simple (basic) text node description with state prefix>>.
