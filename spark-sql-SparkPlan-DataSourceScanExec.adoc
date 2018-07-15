@@ -1,6 +1,10 @@
-== [[DataSourceScanExec]] DataSourceScanExec -- Contract for Leaf Physical Operators with Java Code Generation
+== [[DataSourceScanExec]] DataSourceScanExec -- Contract for Leaf Physical Operators to Scan Over BaseRelation
 
-`DataSourceScanExec` is a <<contract, contract>> for link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operators] that...FIXME
+`DataSourceScanExec` is the <<contract, contract>> of <<implementations, leaf physical operators>> that represent scans over <<relation, BaseRelation>>.
+
+NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] and generic link:spark-sql-BaseRelation.adoc[BaseRelation] relations, respectively.
+
+`DataSourceScanExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_)
 
 [[contract]]
 [source, scala]
@@ -19,20 +23,18 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 .(Subset of) DataSourceScanExec Contract
 [cols="1,2",options="header",width="100%"]
 |===
-| Method
+| Property
 | Description
 
 | `metadata`
-| [[metadata]] Metadata (as a collection of key-value pairs) that describes a scan in the <<simpleString, simple text representation (in a query plan tree)>>.
+| [[metadata]] Metadata (as a collection of key-value pairs) that describes the scan when requested for the <<simpleString, simple text representation>>.
 
 | `relation`
-| [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation] that...FIXME
+| [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation] that is used in the <<nodeName, node name>> and...FIXME
 
 | `tableIdentifier`
-| [[tableIdentifier]] `TableIdentifier`
+| [[tableIdentifier]] Optional `TableIdentifier`
 |===
-
-`DataSourceScanExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 
 NOTE: The prefix for variable names for `DataSourceScanExec` operators in a link:spark-sql-CodegenSupport.adoc#variablePrefix[generated Java source code] is *scan*.
 
@@ -54,10 +56,10 @@ Scan [relation] [tableIdentifier]
 | Description
 
 | link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
-|
+| [[FileSourceScanExec]]
 
 | link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec]
-|
+| [[RowDataSourceScanExec]]
 |===
 
 === [[simpleString]] Simple (Basic) Text Node Description (in Query Plan Tree) -- `simpleString` Method
@@ -149,4 +151,4 @@ redact(text: String): String
 
 `redact`...FIXME
 
-NOTE: `redact` is used when `DataSourceScanExec` is requested for the <<simpleString, simple>>, <<verboseString, verboseString>> and <<treeString, treeString>> text representations.
+NOTE: `redact` is used when `DataSourceScanExec` is requested for the <<simpleString, simple>>, <<verboseString, verbose>> and <<treeString, tree>> text representations.

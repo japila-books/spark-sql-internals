@@ -262,9 +262,9 @@ Used when:
 | link:spark-sql-properties.adoc#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex]
 a| Used when:
 
-* `DataSourceScanExec` is requested to link:spark-sql-SparkPlan-DataSourceScanExec.adoc#redact[redact sensitive information]
+* `DataSourceScanExec` is requested to link:spark-sql-SparkPlan-DataSourceScanExec.adoc#redact[redact sensitive information] (in text representations)
 
-* `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#withRedaction[redact sensitive information]
+* `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#withRedaction[redact sensitive information] (in text representations)
 
 | [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
 | link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
