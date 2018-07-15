@@ -49,14 +49,23 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 | [[children]] Child nodes
 
 | `verboseString`
-| [[verboseString]]
+| [[verboseString]] One-line *verbose description*
+
+Used when `TreeNode` is requested for <<generateTreeString, generateTreeString>> (with `verbose` flag enabled) and <<verboseStringWithSuffix, verboseStringWithSuffix>>
 |===
 
 === [[withNewChildren]] `withNewChildren` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+withNewChildren(newChildren: Seq[BaseType]): BaseType
+----
 
-=== [[simpleString]] Simple Text Node Description -- `simpleString` Method
+`withNewChildren`...FIXME
+
+NOTE: `withNewChildren` is used when...FIXME
+
+=== [[simpleString]] Simple Node Description -- `simpleString` Method
 
 [source, scala]
 ----
@@ -69,7 +78,7 @@ Internally, `simpleString` is the <<nodeName, nodeName>> followed by <<argString
 
 NOTE: `simpleString` is used when `TreeNode` is requested for <<argString, argString>> (of child nodes) and <<generateTreeString, tree text representation>> (with `verbose` flag off).
 
-=== [[numberedTreeString]] Building Numbered Text Representation -- `numberedTreeString` Method
+=== [[numberedTreeString]] Numbered Text Representation -- `numberedTreeString` Method
 
 [source, scala]
 ----
@@ -115,40 +124,16 @@ NOTE: `p` can be used for interactive debugging.
 * link:spark-sql-Expression.adoc[Expression] for expression trees
 ====
 
-=== [[generateTreeString]] `generateTreeString` Method
-
-[source, scala]
-----
-generateTreeString(
-  depth: Int,
-  lastChildren: Seq[Boolean],
-  builder: StringBuilder,
-  verbose: Boolean,
-  prefix: String = "",
-  addSuffix: Boolean = false): StringBuilder
-----
-
-`generateTreeString`...FIXME
-
-[NOTE]
-====
-`generateTreeString` is used when:
-
-* `TreeNode` is requested for <<treeString, treeString>>
-
-* link:spark-sql-SparkPlan-InputAdapter.adoc#generateTreeString[InputAdapter] and link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#generateTreeString[WholeStageCodegenExec] physical operators are requested to `generateTreeString`
-====
-
-=== [[toString]] `toString` Method
+=== [[toString]] Text Representation -- `toString` Method
 
 [source, scala]
 ----
 toString: String
 ----
 
-NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
+NOTE: `toString` is part of Java's link:++https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--++[Object Contract] for the string representation of an object, e.g. `TreeNode`.
 
-`toString`...FIXME
+`toString` simply returns the <<treeString, text representation of all nodes in the tree>>.
 
 === [[treeString]] Text Representation of All Nodes in Tree -- `treeString` Method
 
@@ -178,7 +163,85 @@ scala> println(output)
 ====
 `treeString` is used when:
 
-* `TreeNode` is requested for the <<numberedTreeString, numbered text representation>> and the <<toString, string representation>>
+* `TreeNode` is requested for the <<numberedTreeString, numbered text representation>> and the <<toString, text representation>>
 
-* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#simpleString[simpleString], link:spark-sql-QueryExecution.adoc#toString[toString] and link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats]
+* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#simpleString[simple], link:spark-sql-QueryExecution.adoc#toString[extended] and link:spark-sql-QueryExecution.adoc#stringWithStats[with statistics] text representations
 ====
+
+=== [[verboseStringWithSuffix]] Verbose Description with Suffix -- `verboseStringWithSuffix` Method
+
+[source, scala]
+----
+verboseStringWithSuffix: String
+----
+
+`verboseStringWithSuffix` simply returns <<verboseString, verbose description>>.
+
+NOTE: `verboseStringWithSuffix` is used exclusively when `TreeNode` is requested to <<generateTreeString, generateTreeString>> (with `verbose` and `addSuffix` flags enabled).
+
+=== [[generateTreeString]] Generating Text Representation of Inner and Regular Child Nodes -- `generateTreeString` Method
+
+[source, scala]
+----
+generateTreeString(
+  depth: Int,
+  lastChildren: Seq[Boolean],
+  builder: StringBuilder,
+  verbose: Boolean,
+  prefix: String = "",
+  addSuffix: Boolean = false): StringBuilder
+----
+
+Internally, `generateTreeString` appends the following node descriptions per the `verbose` and `addSuffix` flags:
+
+* <<verboseStringWithSuffix, verbose description with suffix>> when both are enabled (i.e. `verbose` and `addSuffix` flags are all `true`)
+
+* <<verboseString, verbose description>> when `verbose` is enabled (i.e. `verbose` is `true` and `addSuffix` is `false`)
+
+* <<simpleString, simple description>> when `verbose` is disabled (i.e. `verbose` is `false`)
+
+In the end, `generateTreeString` calls itself recursively for the <<innerChildren, innerChildren>> and the <<children, child nodes>>.
+
+NOTE: `generateTreeString` is used exclusively when `TreeNode` is requested for <<treeString, text representation of all nodes in the tree>>.
+
+=== [[innerChildren]] `innerChildren` Method
+
+[source, scala]
+----
+innerChildren: Seq[TreeNode[_]]
+----
+
+`innerChildren` simply returns an empty collection of `TreeNodes`.
+
+[NOTE]
+====
+`innerChildren` is used when:
+
+* `TreeNode` is requested to <<generateTreeString, generate the text representation of inner and regular child nodes>>, <<allChildren, allChildren>> and <<getNodeNumbered, getNodeNumbered>>
+
+* `InMemoryTableScanExec` is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#innerChildren[innerChildren]
+====
+
+=== [[allChildren]] `allChildren` Property
+
+[source, scala]
+----
+allChildren: Set[TreeNode[_]]
+----
+
+NOTE: `allChildren` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`allChildren`...FIXME
+
+NOTE: `allChildren` is used when...FIXME
+
+=== [[getNodeNumbered]] `getNodeNumbered` Internal Method
+
+[source, scala]
+----
+getNodeNumbered(number: MutableInt): Option[TreeNode[_]]
+----
+
+`getNodeNumbered`...FIXME
+
+NOTE: `getNodeNumbered` is used when...FIXME

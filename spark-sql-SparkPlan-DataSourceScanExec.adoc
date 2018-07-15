@@ -149,4 +149,4 @@ redact(text: String): String
 
 `redact`...FIXME
 
-NOTE: `redact` is used when...FIXME
+NOTE: `redact` is used when `DataSourceScanExec` is requested for the <<simpleString, simple>>, <<verboseString, verboseString>> and <<treeString, treeString>> text representations.

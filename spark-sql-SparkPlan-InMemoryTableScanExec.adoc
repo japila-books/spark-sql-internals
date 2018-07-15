@@ -352,3 +352,14 @@ In the end, `buildFilter` joins the `And` expressions with `Or` expressions.
 |===
 
 NOTE: `buildFilter` is used exclusively when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>.
+
+=== [[innerChildren]] `innerChildren` Method
+
+[source, scala]
+----
+innerChildren: Seq[QueryPlan[_]]
+----
+
+NOTE: `innerChildren` is part of link:spark-sql-catalyst-QueryPlan.adoc#innerChildren[QueryPlan Contract] to...FIXME.
+
+`innerChildren`...FIXME

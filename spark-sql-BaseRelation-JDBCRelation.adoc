@@ -9,7 +9,7 @@
 * `JdbcRelationProvider` link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[creates a BaseRelation]
 
 [[toString]]
-`JDBCRelation` requests <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
+When requested for a text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
 
 ```
 JDBCRelation([table]) [numPartitions=[number]]
