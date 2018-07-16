@@ -4,9 +4,9 @@
 
 `Filter` is used when:
 
-* (Data Source API V1) `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. link:spark-sql-BaseRelation-JDBCRelation.adoc#unhandledFilters[JDBCRelation])
+* (Data Source API V1) `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. link:spark-sql-JDBCRelation.adoc#unhandledFilters[JDBCRelation])
 
-* (Data Source API V1) `PrunedFilteredScan` is requested for link:spark-sql-PrunedFilteredScan.adoc#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. link:spark-sql-BaseRelation-JDBCRelation.adoc#buildScan[JDBCRelation])
+* (Data Source API V1) `PrunedFilteredScan` is requested for link:spark-sql-PrunedFilteredScan.adoc#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. link:spark-sql-JDBCRelation.adoc#buildScan[JDBCRelation])
 
 * `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReader[buildReader] (and hence `FileFormat` implementations, i.e. link:spark-sql-OrcFileFormat.adoc#buildReader[OrcFileFormat], link:spark-sql-CSVFileFormat.adoc#buildReader[CSVFileFormat], link:spark-sql-JsonFileFormat.adoc#buildReader[JsonFileFormat], link:spark-sql-TextFileFormat.adoc#buildReader[TextFileFormat] and Spark MLlib's `LibSVMFileFormat`)
 

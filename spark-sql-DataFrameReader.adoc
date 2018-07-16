@@ -544,7 +544,7 @@ Internally, `jdbc` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[J
 
 `jdbc` then creates one `JDBCPartition` per `predicates`.
 
-In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
+In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
 
 [NOTE]
 ====

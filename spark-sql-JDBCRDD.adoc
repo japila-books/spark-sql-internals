@@ -4,7 +4,7 @@
 
 NOTE: `JDBCRDD` represents a "SELECT requiredColumns FROM table" query.
 
-`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to link:spark-sql-BaseRelation-JDBCRelation.adoc#buildScan[build a scan]).
+`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to link:spark-sql-JDBCRelation.adoc#buildScan[build a scan]).
 
 [[internal-registries]]
 .JDBCRDD's Internal Properties (e.g. Registries, Counters and Flags)

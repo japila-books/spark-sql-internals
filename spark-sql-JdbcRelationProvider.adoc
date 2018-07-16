@@ -23,7 +23,7 @@ createRelation(
 
 NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[partitionColumn], link:spark-sql-DataFrameReader.adoc#lowerBound[lowerBound], link:spark-sql-DataFrameReader.adoc#upperBound[upperBound] and link:spark-sql-DataFrameReader.adoc#numPartitions[numPartitions].
 
-In the end, `createRelation` creates a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] using link:spark-sql-BaseRelation-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
+In the end, `createRelation` creates a link:spark-sql-JDBCRelation.adoc[JDBCRelation] using link:spark-sql-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 
 NOTE: `createRelation` is part of link:spark-sql-RelationProvider.adoc[RelationProvider Contract].
 

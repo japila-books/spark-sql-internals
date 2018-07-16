@@ -17,7 +17,7 @@ a| Used when:
 * `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
 
 | <<getCustomSchema, getCustomSchema>>
-| Used when `JDBCRelation` is link:spark-sql-BaseRelation-JDBCRelation.adoc#schema[created]
+| Used when `JDBCRelation` is link:spark-sql-JDBCRelation.adoc#schema[created]
 
 | <<getSchema, getSchema>>
 | Used when `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable]

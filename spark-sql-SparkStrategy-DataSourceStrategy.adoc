@@ -18,7 +18,7 @@
 | [[PrunedFilteredScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] relation
 a| Uses <<pruneFilterProject, pruneFilterProject>>
 
-NOTE: Matches link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] exclusively (as a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan])
+NOTE: Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively (as a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan])
 
 | [[PrunedScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-PrunedScan.adoc[PrunedScan] relation
 a| Uses <<pruneFilterProject, pruneFilterProject>>

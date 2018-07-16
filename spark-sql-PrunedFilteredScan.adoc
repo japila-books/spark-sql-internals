@@ -55,6 +55,6 @@ scala> println(sparkPlan.numberedTreeString)
 00 Scan MyBaseRelation(org.apache.spark.sql.SQLContext@4a57ad67) [a#8] PushedFilters: [], ReadSchema: struct<a:string>
 ----
 
-NOTE: The only known implementation of `PrunedFilteredScan` contract in Spark SQL is link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation].
+NOTE: The only known implementation of `PrunedFilteredScan` contract in Spark SQL is link:spark-sql-JDBCRelation.adoc[JDBCRelation].
 
 NOTE: `PrunedFilteredScan` is a "lighter" and stable version of `CatalystScan` contract.
