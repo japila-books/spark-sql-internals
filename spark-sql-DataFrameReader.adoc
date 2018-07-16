@@ -467,3 +467,18 @@ Otherwise, if the <<source, source>> is not a "Data Source V2" data source, `loa
 ```
 Hive data source can only be used with tables, you can not read files of Hive data source directly.
 ```
+
+=== [[assertNoSpecifiedSchema]] `assertNoSpecifiedSchema` Internal Method
+
+[source, scala]
+----
+assertNoSpecifiedSchema(operation: String): Unit
+----
+
+`assertNoSpecifiedSchema` throws a `AnalysisException` if the <<userSpecifiedSchema, userSpecifiedSchema>> is defined.
+
+```
+User specified schema not supported with `[operation]`
+```
+
+NOTE: `assertNoSpecifiedSchema` is used when `DataFrameReader` is requested to load data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>.
