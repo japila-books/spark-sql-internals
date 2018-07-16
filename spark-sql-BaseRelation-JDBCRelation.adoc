@@ -75,7 +75,7 @@ CAUTION: FIXME Is this still in use?
 `JDBCRelation` takes the following when created:
 
 * [[parts]] RDD link:spark-rdd-partitions.adoc[partitions]
-* [[jdbcOptions]] link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions]
+* [[jdbcOptions]] link:spark-sql-JDBCOptions.adoc[JDBCOptions]
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 
 === [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method

@@ -593,8 +593,10 @@
 
 == JDBC Data Source
 
+. link:spark-sql-jdbc.adoc[JDBC Data Source]
 . link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation]
 . link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 . link:spark-sql-JDBCRDD.adoc[JDBCRDD]
+. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
 . link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]

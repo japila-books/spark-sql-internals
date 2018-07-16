@@ -365,11 +365,13 @@ NOTE: `table` simply passes the call to link:spark-sql-SparkSession.adoc#table[S
 [source, scala]
 ----
 jdbc(url: String, table: String, properties: Properties): DataFrame
-jdbc(url: String,
+jdbc(
+  url: String,
   table: String,
   predicates: Array[String],
   connectionProperties: Properties): DataFrame
-jdbc(url: String,
+jdbc(
+  url: String,
   table: String,
   columnName: String,
   lowerBound: Long,
@@ -380,81 +382,11 @@ jdbc(url: String,
 
 `jdbc` loads data from an external table using JDBC and represents it as an untyped link:spark-sql-DataFrame.adoc[DataFrame].
 
-[[JDBCOptions]]
-[[jdbc-options]]
-.Options for JDBC Data Source
-[cols="1,2",options="header",width="100%"]
-|===
-| Option
-| Description
-
-| `batchsize`
-| The minimum value is `1`
-
-Defaults to `1000`
-
-| `createTableColumnTypes`
-|
-
-| `createTableOptions`
-|
-
-| `dbtable`
-| (*required*)
-
-| `driver`
-| (*recommended*) JDBC driver's class name.
-
-When defined, the class will get registered with Java's https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html[java.sql.DriverManager]
-
-| `fetchsize`
-|
-
-Defaults to `0`
-
-| `isolationLevel`
-a|
-
-One of the following:
-
-* NONE
-* READ_UNCOMMITTED (default)
-* READ_COMMITTED
-* REPEATABLE_READ
-* SERIALIZABLE
-
-| [[jdbc-lowerBound]] `lowerBound`
-| Lower bound of partition column
-
-| [[jdbc-numPartitions]] `numPartitions`
-| Number of partitions
-
-| [[jdbc-partitionColumn]] `partitionColumn`
-| Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
-
-Used in `JdbcRelationProvider` to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a `JDBCRelation`] (with proper `JDBCPartitions` with `WHERE` clause).
-
-When defined, <<jdbc-lowerBound, lowerBound>>, <<jdbc-upperBound, upperBound>> and <<jdbc-numPartitions, numPartitions>> options are required.
-
-When undefined, <<jdbc-lowerBound, lowerBound>> and <<jdbc-upperBound, upperBound>> have to be undefined.
-
-| `truncate`
-| (used only for writing) Enables table truncation.
-
-Defaults to `false`
-
-| [[jdbc-upperBound]] `upperBound`
-| Upper bound of the partition column
-
-| `url`
-| (*required*)
-|===
-
-Internally, `jdbc` creates a <<JDBCOptions, JDBCOptions>> from `url`, `table` and `extraOptions` with `connectionProperties`.
+Internally, `jdbc` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[JDBCOptions] from the input `url`, `table` and `extraOptions` with `connectionProperties`.
 
 `jdbc` then creates one `JDBCPartition` per `predicates`.
 
-In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a `DataFrame`] for a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] (given `JDBCPartitions` and `JDBCOptions` created earlier).
+In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
 
 [NOTE]
 ====

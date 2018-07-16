@@ -41,7 +41,16 @@ createConnectionFactory(options: JDBCOptions): () => Connection
 
 `createConnectionFactory`...FIXME
 
-NOTE: `createConnectionFactory` is used when...FIXME
+[NOTE]
+====
+`createConnectionFactory` is used when:
+
+* `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#scanTable[scanTable] (and in turn creates a link:spark-sql-JDBCRDD.adoc#creating-instance[JDBCRDD]) and link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable]
+
+* `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation[create a BaseRelation]
+
+* `JdbcUtils` is requested to <<saveTable, saveTable>>
+====
 
 === [[getCommonJDBCType]] `getCommonJDBCType` Method
 

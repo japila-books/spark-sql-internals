@@ -74,7 +74,7 @@ NOTE: `scanTable` is used when...FIXME
 * [[filters]] Array of link:spark-sql-Filter.adoc[Filter predicates]
 * [[partitions]] Array of Spark Core's `Partitions`
 * [[url]] Connection URL
-* [[options]] link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions]
+* [[options]] link:spark-sql-JDBCOptions.adoc[JDBCOptions]
 
 `JDBCRDD` initializes the <<internal-registries, internal registries and counters>>.
 

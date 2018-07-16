@@ -19,11 +19,11 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-`createRelation` creates a `JDBCPartitioningInfo` (using link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions] and the input `parameters` that correspond to link:spark-sql-DataFrameReader.adoc#jdbc-options[Options for JDBC Data Source]).
+`createRelation` creates a `JDBCPartitioningInfo` (using link:spark-sql-JDBCOptions.adoc[JDBCOptions] and the input `parameters` that correspond to link:spark-sql-JDBCOptions.adoc#options[Options for JDBC Data Source]).
 
-NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#jdbc-partitionColumn[partitionColumn], link:spark-sql-DataFrameReader.adoc#jdbc-lowerBound[lowerBound], link:spark-sql-DataFrameReader.adoc#jdbc-upperBound[upperBound] and link:spark-sql-DataFrameReader.adoc#jdbc-numPartitions[numPartitions].
+NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[partitionColumn], link:spark-sql-DataFrameReader.adoc#lowerBound[lowerBound], link:spark-sql-DataFrameReader.adoc#upperBound[upperBound] and link:spark-sql-DataFrameReader.adoc#numPartitions[numPartitions].
 
-In the end, `createRelation` creates a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] using link:spark-sql-BaseRelation-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions]).
+In the end, `createRelation` creates a link:spark-sql-BaseRelation-JDBCRelation.adoc[JDBCRelation] using link:spark-sql-BaseRelation-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 
 NOTE: `createRelation` is part of link:spark-sql-RelationProvider.adoc[RelationProvider Contract].
 
@@ -38,17 +38,17 @@ createRelation(
   df: DataFrame): BaseRelation
 ----
 
-Internally, `createRelation` creates a link:spark-sql-DataFrameReader.adoc#JDBCOptions[JDBCOptions] (from the input `parameters`).
+Internally, `createRelation` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[JDBCOptions] (from the input `parameters`).
 
 `createRelation` reads link:spark-sql-CatalystConf.adoc#caseSensitiveAnalysis[caseSensitiveAnalysis] (using the input `sqlContext`).
 
-`createRelation` checks whether the table (given `dbtable` and `url` link:spark-sql-DataFrameReader.adoc#jdbc-options[options] in the input `parameters`) exists.
+`createRelation` checks whether the table (given `dbtable` and `url` link:spark-sql-JDBCOptions.adoc#options[options] in the input `parameters`) exists.
 
 NOTE: `createRelation` uses a database-specific `JdbcDialect` to link:spark-sql-spark-JdbcDialect.adoc#getTableExistsQuery[check whether a table exists].
 
 `createRelation` branches off per whether the table already exists in the database or not.
 
-If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with `createTableColumnTypes` and `createTableOptions` link:spark-sql-DataFrameReader.adoc#jdbc-options[options] from the input `parameters`) and saves the records to the database in a single transaction.
+If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with `createTableColumnTypes` and `createTableOptions` link:spark-sql-JDBCOptions.adoc#options[options] from the input `parameters`) and saves the records to the database in a single transaction.
 
 If however the table *does* exist, `createRelation` branches off per link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode] (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
 
@@ -75,7 +75,7 @@ Table or view '[table]' already exists. SaveMode: ErrorIfExists.
 | `Overwrite`
 a| Truncates or drops the table
 
-NOTE: `createRelation` truncates the table only when `truncate` link:spark-sql-DataFrameReader.adoc#jdbc-options[option] is enabled and link:spark-sql-spark-JdbcDialect.adoc#isCascadingTruncateTable[isCascadingTruncateTable] is disabled.
+NOTE: `createRelation` truncates the table only when link:spark-sql-JDBCOptions.adoc#truncate[truncate] JDBC option is enabled and link:spark-sql-spark-JdbcDialect.adoc#isCascadingTruncateTable[isCascadingTruncateTable] is disabled.
 |===
 
 In the end, `createRelation` closes the JDBC connection to the database and <<createRelation-RelationProvider, creates a JDBCRelation>>.

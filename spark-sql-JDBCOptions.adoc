@@ -1,0 +1,135 @@
+== [[JDBCOptions]] JDBCOptions
+
+`JDBCOptions` represents the <<options, options>> of the link:spark-sql-jdbc.adoc[JDBC data source].
+
+NOTE: The <<options, options>> are case-insensitive.
+
+[[options]]
+.Options for JDBC Data Source
+[cols="1,1,2",options="header",width="100%"]
+|===
+| Option / Key
+| Default Value
+| Description
+
+| `batchsize`
+| `1000`
+a| [[batchsize]]
+
+NOTE: The minimum value is `1`
+
+| `createTableColumnTypes`
+|
+| [[createTableColumnTypes]]
+
+| `createTableOptions`
+| Empty
+| [[createTableOptions]]
+
+| `customSchema`
+|
+| [[customSchema]]
+
+| `dbtable`
+|
+| [[dbtable]] (*required*)
+
+| `driver`
+|
+| [[driver]][[driverClass]] (*recommended*) JDBC driver's class name.
+
+When defined, the class will get registered with Java's https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html[java.sql.DriverManager]
+
+| `fetchsize`
+| `0`
+| [[fetchsize]]
+
+| `isolationLevel`
+| `READ_UNCOMMITTED`
+a| [[isolationLevel]] One of the following:
+
+* NONE
+* READ_UNCOMMITTED
+* READ_COMMITTED
+* REPEATABLE_READ
+* SERIALIZABLE
+
+| `lowerBound`
+|
+| [[lowerBound]] Lower bound of partition column
+
+| `numPartitions`
+|
+| [[numPartitions]] Number of partitions
+
+| `partitionColumn`
+|
+| [[partitionColumn]] Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
+
+Used in `JdbcRelationProvider` to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a `JDBCRelation`] (with proper `JDBCPartitions` with `WHERE` clause).
+
+When defined, <<lowerBound, lowerBound>>, <<upperBound, upperBound>> and <<numPartitions, numPartitions>> options are required.
+
+When undefined, <<lowerBound, lowerBound>> and <<upperBound, upperBound>> have to be undefined.
+
+| `truncate`
+| `false`
+| [[truncate]][[isTruncate]] (used only for writing) Enables table truncation.
+
+| `sessionInitStatement`
+|
+| [[sessionInitStatement]]
+
+| `upperBound`
+|
+| [[upperBound]] Upper bound of the partition column
+
+| `url`
+|
+| [[url]] (*required*)
+|===
+
+`JDBCOptions` is <<creating-instance, created>> when:
+
+* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#jdbc[load data from an external table using JDBC] (and create a `DataFrame` to represent the process of loading the data)
+
+* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[RelationProvider] and link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[CreatableRelationProvider])
+
+=== [[creating-instance]] Creating JDBCOptions Instance
+
+`JDBCOptions` takes the following when created:
+
+* URL
+* [[table]] Name of the table
+* [[parameters]] Collection of key-value pairs (i.e. `Map[String, String]`)
+
+The input `URL` and <<table, table>> are set as the current <<url, url>> and <<dbtable, dbtable>> options (overriding the values in the input <<parameters, parameters>> if defined).
+
+=== [[asProperties]] `asProperties` Property
+
+[source, scala]
+----
+asProperties: Properties
+----
+
+`asProperties`...FIXME
+
+[NOTE]
+====
+`asProperties` is used when:
+
+* `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#compute[compute a partition] (that requests a `JdbcDialect` to link:spark-sql-spark-JdbcDialect.adoc#beforeFetch[beforeFetch])
+
+* `JDBCRelation` is requested to link:spark-sql-BaseRelation-JDBCRelation.adoc#insert[insert a data (from a DataFrame) to a table]
+====
+
+=== [[asConnectionProperties]] `asConnectionProperties` Property
+
+[source, scala]
+----
+asConnectionProperties: Properties
+----
+
+`asConnectionProperties`...FIXME
+
+NOTE: `asConnectionProperties` is used exclusively when `JdbcUtils` is requested to link:spark-sql-JdbcUtils.adoc#createConnectionFactory[createConnectionFactory]
