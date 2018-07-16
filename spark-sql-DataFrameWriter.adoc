@@ -3,7 +3,7 @@
 `DataFrameWriter` is the <<methods, public interface>> to write the result of executing a structured query (i.e. the content of a link:spark-sql-Dataset.adoc[Dataset]) to an external storage system in a batch fashion.
 
 [[methods]]
-.DataFrameWriter's Public Methods
+.DataFrameWriter API
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

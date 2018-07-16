@@ -1,6 +1,150 @@
-== [[DataFrameReader]] DataFrameReader -- Loading Datasets From External Data Sources
+== [[DataFrameReader]] DataFrameReader -- Loading Data From External Data Sources
 
-`DataFrameReader` is responsible for <<load, loading datasets from external data sources>>, e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, Hive tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>, into untyped `DataFrames` (mostly) or typed `Datasets`.
+`DataFrameReader` is responsible for <<load, loading data from external data sources>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>) into an untyped `DataFrame` or a typed `Dataset`.
+
+[[methods]]
+.DataFrameReader API
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<csv, csv>>
+a|
+
+[source, scala]
+----
+csv(csvDataset: Dataset[String]): DataFrame
+csv(path: String): DataFrame
+csv(paths: String*): DataFrame
+----
+
+| <<format, format>>
+a|
+
+[source, scala]
+----
+format(source: String): DataFrameReader
+----
+
+| <<jdbc, jdbc>>
+a|
+
+[source, scala]
+----
+jdbc(
+  url: String,
+  table: String,
+  predicates: Array[String],
+  connectionProperties: Properties): DataFrame
+jdbc(
+  url: String,
+  table: String,
+  properties: Properties): DataFrame
+jdbc(
+  url: String,
+  table: String,
+  columnName: String,
+  lowerBound: Long,
+  upperBound: Long,
+  numPartitions: Int,
+  connectionProperties: Properties): DataFrame
+----
+
+| <<json, json>>
+a|
+
+[source, scala]
+----
+json(jsonDataset: Dataset[String]): DataFrame
+json(path: String): DataFrame
+json(paths: String*): DataFrame
+----
+
+| <<load, load>>
+a|
+
+[source, scala]
+----
+load(): DataFrame
+load(path: String): DataFrame
+load(paths: String*): DataFrame
+----
+
+| <<option, option>>
+a|
+
+[source, scala]
+----
+option(key: String, value: Boolean): DataFrameReader
+option(key: String, value: Double): DataFrameReader
+option(key: String, value: Long): DataFrameReader
+option(key: String, value: String): DataFrameReader
+----
+
+| <<options, options>>
+a|
+
+[source, scala]
+----
+options(options: scala.collection.Map[String, String]): DataFrameReader
+options(options: java.util.Map[String, String]): DataFrameReader
+----
+
+| <<orc, orc>>
+a|
+
+[source, scala]
+----
+orc(path: String): DataFrame
+orc(paths: String*): DataFrame
+----
+
+| <<parquet, parquet>>
+a|
+
+[source, scala]
+----
+parquet(path: String): DataFrame
+parquet(paths: String*): DataFrame
+----
+
+| <<schema, schema>>
+a|
+
+[source, scala]
+----
+schema(schemaString: String): DataFrameReader
+schema(schema: StructType): DataFrameReader
+----
+
+| <<table, table>>
+a|
+
+[source, scala]
+----
+table(tableName: String): DataFrame
+----
+
+| <<text, text>>
+a|
+
+[source, scala]
+----
+text(path: String): DataFrame
+text(paths: String*): DataFrame
+----
+
+| <<textFile, textFile>>
+a|
+
+[source, scala]
+----
+textFile(path: String): Dataset[String]
+textFile(paths: String*): Dataset[String]
+----
+
+|===
 
 `DataFrameReader` is available using link:spark-sql-SparkSession.adoc#read[SparkSession.read].
 
@@ -13,11 +157,11 @@ import org.apache.spark.sql.DataFrameReader
 val reader: DataFrameReader = spark.read
 ----
 
-`DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom file formats>>.
+`DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom formats>>.
 
 NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] Spark property.
 
-After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually trigger the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>) operators that create untyped `DataFrames`.
+After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually "trigger" the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>, <<jdbc, jdbc>>) operators.
 
 [source, scala]
 ----
@@ -39,6 +183,8 @@ val jsons: DataFrame = spark
   .read
   .json("metrics/*.json")
 ----
+
+NOTE: All <<methods, methods>> of `DataFrameReader` merely describe a process of loading a data and do not trigger a Spark job (until an action is called).
 
 ---
 
@@ -109,12 +255,24 @@ scala> citiesDF.show
 | Name
 | Description
 
+| `extraOptions`
+| [[extraOptions]]
+
+Used when...FIXME
+
 | `source`
 a| [[source]] Name of the input data source (aka _format_ or _provider_) with the default format per link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] configuration property (default: <<parquet, parquet>>).
 
 `source` can be changed using <<format, format>> method.
 
 Used exclusively when `DataFrameReader` is requested to <<load, load>>.
+
+| `userSpecifiedSchema`
+| [[userSpecifiedSchema]] Optional *used-specified schema* (default: `None`, i.e. undefined)
+
+Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a link:spark-sql-DataSource.adoc#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
+
+Used when `DataFrameReader` is requested to <<assertNoSpecifiedSchema, assertNoSpecifiedSchema>> (while loading data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>)
 |===
 
 === [[format]] Specifying Format Of Input Data Source -- `format` method
@@ -482,3 +640,16 @@ User specified schema not supported with `[operation]`
 ```
 
 NOTE: `assertNoSpecifiedSchema` is used when `DataFrameReader` is requested to load data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>.
+
+=== [[verifyColumnNameOfCorruptRecord]] `verifyColumnNameOfCorruptRecord` Internal Method
+
+[source, scala]
+----
+verifyColumnNameOfCorruptRecord(
+  schema: StructType,
+  columnNameOfCorruptRecord: String): Unit
+----
+
+`verifyColumnNameOfCorruptRecord`...FIXME
+
+NOTE: `verifyColumnNameOfCorruptRecord` is used when `DataFrameReader` is requested to load data using <<json, json>> and <<csv, csv>>.
