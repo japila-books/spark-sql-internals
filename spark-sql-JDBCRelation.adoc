@@ -27,17 +27,6 @@ scala> df.explain
 [[sqlContext]]
 `JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:spark-sql-SparkSession.adoc#sqlContext[SQLContext].
 
-=== [[schema]] `schema` Attribute
-
-[source, scala]
-----
-schema: StructType
-----
-
-NOTE: `schema` is part of link:spark-sql-BaseRelation.adoc#schema[BaseRelation Contract] to return the link:spark-sql-StructType.adoc[StructType] that describes the schema of tuples.
-
-`schema`...FIXME
-
 === [[PrunedFilteredScan]] JDBCRelation as PrunedFilteredScan
 
 `JDBCRelation` is a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan].
@@ -88,3 +77,16 @@ unhandledFilters(filters: Array[Filter]): Array[Filter]
 NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFilters[BaseRelation Contract] to find unhandled link:spark-sql-Filter.adoc[Filter predicates].
 
 `unhandledFilters`...FIXME
+
+=== [[schema]] Relation Schema -- `schema` Property
+
+[source, scala]
+----
+schema: StructType
+----
+
+NOTE: `schema` is part of link:spark-sql-BaseRelation.adoc#schema[BaseRelation Contract] to return the link:spark-sql-StructType.adoc[schema] of a relation.
+
+`schema` uses `JDBCRDD` to link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable] given the <<jdbcOptions, JDBCOptions>> (that simply returns the link:spark-sql-StructType.adoc[Catalyst schema] of the table, also known as the default table schema).
+
+If link:spark-sql-JDBCOptions.adoc#customSchema[customSchema] JDBC option was defined, `schema` uses `JdbcUtils` to link:spark-sql-JdbcUtils.adoc#getCustomSchema[replace the data types in the default table schema].

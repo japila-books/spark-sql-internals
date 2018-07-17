@@ -2,53 +2,72 @@
 
 `JDBCOptions` represents the <<options, options>> of the link:spark-sql-jdbc.adoc[JDBC data source].
 
-NOTE: The <<options, options>> are case-insensitive.
-
 [[options]]
 .Options for JDBC Data Source
-[cols="1,1,2",options="header",width="100%"]
+[cols="1,1,2",options="header",width="100%",separator="!"]
 |===
-| Option / Key
-| Default Value
-| Description
+! Option / Key
+! Default Value
+! Description
 
-| `batchsize`
-| `1000`
-a| [[batchsize]]
+! `batchsize`
+! `1000`
+a! [[batchsize]]
 
 NOTE: The minimum value is `1`
 
-| `createTableColumnTypes`
-|
-| [[createTableColumnTypes]]
+! `createTableColumnTypes`
+!
+! [[createTableColumnTypes]]
 
-| `createTableOptions`
-| Empty string
-| [[createTableOptions]]
+! `createTableOptions`
+! Empty string
+! [[createTableOptions]]
 
-| `customSchema`
-| (undefined)
-| [[customSchema]]
+! `customSchema`
+! (undefined)
+a! [[customSchema]] Specifies the custom data types of the read schema (that is used at link:spark-sql-DataFrameReader.adoc#jdbc[load time])
+
+`customSchema` is a comma-separated list of field definitions with column names and their link:spark-sql-DataType.adoc[data types] in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
+
+`customSchema` defines the data types of the columns that will override the data types inferred from the table schema and follows the following pattern:
+
+```
+colTypeList
+    : colType (',' colType)*
+    ;
+
+colType
+    : identifier dataType (COMMENT STRING)?
+    ;
+
+dataType
+    : complex=ARRAY '<' dataType '>'                            #complexDataType
+    | complex=MAP '<' dataType ',' dataType '>'                 #complexDataType
+    | complex=STRUCT ('<' complexColTypeList? '>' | NEQ)        #complexDataType
+    | identifier ('(' INTEGER_VALUE (',' INTEGER_VALUE)* ')')?  #primitiveDataType
+    ;
+```
 
 Used exclusively when `JDBCRelation` is requested for the link:spark-sql-JDBCRelation.adoc#schema[schema]
 
-| `dbtable`
-|
-| [[dbtable]] (*required*)
+! `dbtable`
+!
+! [[dbtable]] (*required*)
 
-| `driver`
-|
-| [[driver]][[driverClass]] (*recommended*) JDBC driver's class name.
+! `driver`
+!
+! [[driver]][[driverClass]] (*recommended*) JDBC driver's class name.
 
 When defined, the class will get registered with Java's https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html[java.sql.DriverManager]
 
-| `fetchsize`
-| `0`
-| [[fetchsize]]
+! `fetchsize`
+! `0`
+! [[fetchsize]]
 
-| `isolationLevel`
-| `READ_UNCOMMITTED`
-a| [[isolationLevel]] One of the following:
+! `isolationLevel`
+! `READ_UNCOMMITTED`
+a! [[isolationLevel]] One of the following:
 
 * NONE
 * READ_UNCOMMITTED
@@ -56,17 +75,17 @@ a| [[isolationLevel]] One of the following:
 * REPEATABLE_READ
 * SERIALIZABLE
 
-| `lowerBound`
-|
-| [[lowerBound]] Lower bound of partition column
+! `lowerBound`
+!
+! [[lowerBound]] Lower bound of partition column
 
-| `numPartitions`
-|
-| [[numPartitions]] Number of partitions
+! `numPartitions`
+!
+! [[numPartitions]] Number of partitions
 
-| `partitionColumn`
-|
-| [[partitionColumn]] Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
+! `partitionColumn`
+!
+! [[partitionColumn]] Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
 
 Used in `JdbcRelationProvider` to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a `JDBCRelation`] (with proper `JDBCPartitions` with `WHERE` clause).
 
@@ -74,22 +93,24 @@ When defined, <<lowerBound, lowerBound>>, <<upperBound, upperBound>> and <<numPa
 
 When undefined, <<lowerBound, lowerBound>> and <<upperBound, upperBound>> have to be undefined.
 
-| `truncate`
-| `false`
-| [[truncate]][[isTruncate]] (used only for writing) Enables table truncation.
+! `truncate`
+! `false`
+! [[truncate]][[isTruncate]] (used only for writing) Enables table truncation.
 
-| `sessionInitStatement`
-|
-| [[sessionInitStatement]]
+! `sessionInitStatement`
+!
+! [[sessionInitStatement]]
 
-| `upperBound`
-|
-| [[upperBound]] Upper bound of the partition column
+! `upperBound`
+!
+! [[upperBound]] Upper bound of the partition column
 
-| `url`
-|
-| [[url]] (*required*)
+! `url`
+!
+! [[url]] (*required*)
 |===
+
+NOTE: The <<options, options>> are case-insensitive.
 
 `JDBCOptions` is <<creating-instance, created>> when:
 
