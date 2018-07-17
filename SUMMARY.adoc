@@ -64,6 +64,16 @@
 
 . link:spark-sql-properties.adoc[Configuration Properties]
 
+== JDBC Data Source
+
+. link:spark-sql-jdbc.adoc[JDBC Data Source]
+. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
+. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
+. link:spark-sql-JDBCRelation.adoc[JDBCRelation]
+. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
+. link:spark-sql-JdbcDialect.adoc[JdbcDialect]
+. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
+
 == SparkSession Registries
 
 . link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
@@ -592,13 +602,3 @@
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
-
-== JDBC Data Source
-
-. link:spark-sql-jdbc.adoc[JDBC Data Source]
-. link:spark-sql-JDBCRelation.adoc[JDBCRelation]
-. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
-. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
-. link:spark-sql-spark-JdbcDialect.adoc[JdbcDialect]
-. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]

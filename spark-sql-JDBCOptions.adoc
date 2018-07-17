@@ -120,7 +120,7 @@ asProperties: Properties
 ====
 `asProperties` is used when:
 
-* `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#compute[compute a partition] (that requests a `JdbcDialect` to link:spark-sql-spark-JdbcDialect.adoc#beforeFetch[beforeFetch])
+* `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#compute[compute a partition] (that requests a `JdbcDialect` to link:spark-sql-JdbcDialect.adoc#beforeFetch[beforeFetch])
 
 * `JDBCRelation` is requested to link:spark-sql-JDBCRelation.adoc#insert[insert a data (from a DataFrame) to a table]
 ====
