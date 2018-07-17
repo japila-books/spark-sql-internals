@@ -94,26 +94,65 @@ NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution pl
 translateFilter(predicate: Expression): Option[Filter]
 ----
 
-`translateFilter` translates a Catalyst link:spark-sql-Expression.adoc[expression] into a corresponding link:spark-sql-Filter.adoc[Filter predicate] (if possible):
+`translateFilter` translates a link:spark-sql-Expression.adoc[Catalyst expression] into a corresponding link:spark-sql-Filter.adoc[Filter predicate] if possible. If not, `translateFilter` returns `None`.
 
-* EqualTo
-* EqualNullSafe
-* GreaterThan
-* LessThan
-* GreaterThanOrEqual
-* LessThanOrEqual
-* link:spark-sql-Expression-InSet.adoc[InSet]
-* link:spark-sql-Expression-In.adoc[In]
-* IsNull
-* IsNotNull
-* And
-* Or
-* Not
-* StartsWith
-* EndsWith
-* Contains
+[[translateFilter-conversions]]
+.translateFilter's Conversions
+[cols="1,1",options="header",width="100%"]
+|===
+| Catalyst Expression
+| Filter Predicate
 
-NOTE: The expressions and their corresponding data source filters have the same names but belong to different packages (except `InSet` and `In` expressions).
+| `EqualTo`
+| `EqualTo`
+
+| `EqualNullSafe`
+| `EqualNullSafe`
+
+| `GreaterThan`
+| `GreaterThan`
+
+| `LessThan`
+| `LessThan`
+
+| `GreaterThanOrEqual`
+| `GreaterThanOrEqual`
+
+| `LessThanOrEqual`
+| `LessThanOrEqual`
+
+| link:spark-sql-Expression-InSet.adoc[InSet]
+| `In`
+
+| link:spark-sql-Expression-In.adoc[In]
+| `In`
+
+| `IsNull`
+| `IsNull`
+
+| `IsNotNull`
+| `IsNotNull`
+
+| `And`
+| `And`
+
+| `Or`
+| `Or`
+
+| `Not`
+| `Not`
+
+| `StartsWith`
+| `StringStartsWith`
+
+| `EndsWith`
+| `StringEndsWith`
+
+| `Contains`
+| `StringContains`
+|===
+
+NOTE: The Catalyst expressions and their corresponding data source filter predicates have the same names _in most cases_ but belong to different Scala packages, i.e. `org.apache.spark.sql.catalyst.expressions` and `org.apache.spark.sql.sources`, respectively.
 
 [NOTE]
 ====
