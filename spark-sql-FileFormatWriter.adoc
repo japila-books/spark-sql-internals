@@ -39,7 +39,7 @@ write(
 ====
 `write` is used when:
 
-1. link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand] and link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable] commands are executed
+* link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand] and link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable] commands are executed
 
-1. Spark Structured Streaming's `FileStreamSink` is requested to add a streaming batch.
+* Spark Structured Streaming's `FileStreamSink` is requested to add a streaming batch.
 ====

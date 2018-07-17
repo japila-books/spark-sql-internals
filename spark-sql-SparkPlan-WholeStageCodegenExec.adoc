@@ -186,10 +186,10 @@ NOTE: `doConsume` is part of link:spark-sql-CodegenSupport.adoc#doConsume[Codege
 
 `doConsume` generates a Java source code that:
 
-1. Takes (from the input `row`) the code to evaluate a Catalyst expression on an input `InternalRow`
-1. Takes (from the input `row`) the term for a value of the result of the evaluation
-  i. Adds `.copy()` to the term if <<needCopyResult, needCopyResult>> is turned on
-1. Wraps the term inside `append()` code block
+. Takes (from the input `row`) the code to evaluate a Catalyst expression on an input `InternalRow`
+. Takes (from the input `row`) the term for a value of the result of the evaluation
+  a. Adds `.copy()` to the term if <<needCopyResult, needCopyResult>> is turned on
+. Wraps the term inside `append()` code block
 
 [source, scala]
 ----

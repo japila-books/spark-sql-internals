@@ -53,11 +53,11 @@ NOTE: The number of requirements for partitions and their sort ordering has to m
 
 `ensureDistributionAndOrdering` matches the operator's required partition requirements of children (`requiredChildDistributions`) to the children's link:spark-sql-SparkPlan.adoc#outputPartitioning[output partitioning] and (in that order):
 
-1. If the child satisfies the requested distribution, the child is left unchanged
+. If the child satisfies the requested distribution, the child is left unchanged
 
-1. For link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[broadcast hash joins]
+. For link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[broadcast hash joins]
 
-1. Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
+. Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
 
 NOTE: link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] can appear in the physical plan when the children's output partitioning cannot satisfy the physical operator's required child distribution.
 

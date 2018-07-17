@@ -98,15 +98,15 @@ newCodeGenContext(): CodegenContext
 ====
 `newCodeGenContext` is used when:
 
-1. `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
+* `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
 
-1. `GenerateOrdering` is requested to link:spark-sql-GenerateOrdering.adoc#create[create a BaseOrdering]
+* `GenerateOrdering` is requested to link:spark-sql-GenerateOrdering.adoc#create[create a BaseOrdering]
 
-1. `GeneratePredicate` is requested to link:spark-sql-GeneratePredicate.adoc#create[create a Predicate]
+* `GeneratePredicate` is requested to link:spark-sql-GeneratePredicate.adoc#create[create a Predicate]
 
-1. `GenerateSafeProjection` is requested to link:spark-sql-GenerateSafeProjection.adoc#create[create a Projection]
+* `GenerateSafeProjection` is requested to link:spark-sql-GenerateSafeProjection.adoc#create[create a Projection]
 
-1. `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#create[create a UnsafeProjection]
+* `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#create[create a UnsafeProjection]
 
-1. `GenerateColumnAccessor` is requested to link:spark-sql-GenerateColumnAccessor.adoc#create[create a ColumnarIterator]
+* `GenerateColumnAccessor` is requested to link:spark-sql-GenerateColumnAccessor.adoc#create[create a ColumnarIterator]
 ====

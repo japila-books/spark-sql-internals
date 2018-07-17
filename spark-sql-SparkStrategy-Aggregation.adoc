@@ -28,11 +28,11 @@ scala> println(physicalPlan.head.numberedTreeString)
 [[aggregate-physical-operator-preference]]
 `Aggregation` <<aggregate-physical-operator-selection-criteria, can select>> the following aggregate physical operators (in order of preference):
 
-1. link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec]
+. link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec]
 
-1. link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
+. link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
 
-1. link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
+. link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
 
 === [[planAggregateWithOneDistinct]][[AggUtils-planAggregateWithOneDistinct]] `AggUtils.planAggregateWithOneDistinct` Method
 
@@ -86,9 +86,9 @@ a| `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#supportsA
 | link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
 a|
 
-1. link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
+. link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
 
-1. `ObjectHashAggregateExec` link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#supportsAggregate[supports] the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
+. `ObjectHashAggregateExec` link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#supportsAggregate[supports] the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
 
 | link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
 | When all the above requirements could not be met.

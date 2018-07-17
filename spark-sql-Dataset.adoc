@@ -199,17 +199,17 @@ inputFiles: Array[String]
 
 `inputFiles` requests <<queryExecution, QueryExecution>> for link:spark-sql-QueryExecution.adoc#optimizedPlan[optimized logical plan] and collects the following logical operators:
 
-1. link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-FileRelation.adoc[FileRelation] as the link:spark-sql-LogicalPlan-LogicalRelation.adoc#relation[BaseRelation]
+* link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-FileRelation.adoc[FileRelation] (as the link:spark-sql-LogicalPlan-LogicalRelation.adoc#relation[BaseRelation])
 
-1. link:spark-sql-FileRelation.adoc[FileRelation]
+* link:spark-sql-FileRelation.adoc[FileRelation]
 
-1. link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
+* link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
 
 `inputFiles` then requests the logical operators for their underlying files:
 
-1. link:spark-sql-FileRelation.adoc#inputFiles[inputFiles] of the `FileRelations`
+* link:spark-sql-FileRelation.adoc#inputFiles[inputFiles] of the `FileRelations`
 
-1. link:spark-sql-CatalogStorageFormat.adoc#locationUri[locationUri] of the `HiveTableRelation`
+* link:spark-sql-CatalogStorageFormat.adoc#locationUri[locationUri] of the `HiveTableRelation`
 
 === [[resolve]] `resolve` Internal Method
 
@@ -439,9 +439,9 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-
 ====
 `withAction` is used when `Dataset` is requested for the following:
 
-1. <<logicalPlan, Computing the logical plan>> (and executing a link:spark-sql-LogicalPlan-Command.adoc[logical command] or their `Union`)
+* <<logicalPlan, Computing the logical plan>> (and executing a link:spark-sql-LogicalPlan-Command.adoc[logical command] or their `Union`)
 
-1. link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
+* link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
 ====
 
 === [[apply]] Creating Dataset For SparkSession and LogicalPlan -- `apply` Method

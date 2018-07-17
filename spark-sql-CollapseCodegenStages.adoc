@@ -191,9 +191,9 @@ NOTE: `insertWholeStageCodegen` skips physical operators with link:spark-sql-cat
 ====
 `insertWholeStageCodegen` is used recursively when `CollapseCodegenStages`:
 
-1. <<apply, Executes>> (and walks down a physical plan)
+* <<apply, Executes>> (and walks down a physical plan)
 
-1. <<insertInputAdapter, Inserts InputAdapter physical operator>>
+* <<insertInputAdapter, Inserts InputAdapter physical operator>>
 ====
 
 === [[insertInputAdapter]] Inserting InputAdapter Unary Physical Operator -- `insertInputAdapter` Internal Method
@@ -224,17 +224,17 @@ supportCodegen(plan: SparkPlan): Boolean
 
 `supportCodegen` is positive when all of the following conditions hold:
 
-1. The input link:spark-sql-SparkPlan.adoc[physical plan] supports link:spark-sql-CodegenSupport.adoc[Java code generation] and has link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned on.
+* The input link:spark-sql-SparkPlan.adoc[physical plan] supports link:spark-sql-CodegenSupport.adoc[Java code generation] and has link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned on.
 +
 NOTE: link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag is turned on by default.
 
-1. All link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the input physical `plan` are link:spark-sql-Expression.adoc#LeafExpression[leaf] or are not link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback].
+* All link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the input physical `plan` are link:spark-sql-Expression.adoc#LeafExpression[leaf] or are not link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback].
 
-1. The number of fields in the schema of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
+* The number of fields in the schema of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
 +
 NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
 
-1. The number of fields in the schema of every link:spark-sql-catalyst-TreeNode.adoc#children[child physical operator] of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
+* The number of fields in the schema of every link:spark-sql-catalyst-TreeNode.adoc#children[child physical operator] of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
 +
 NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
 
@@ -301,9 +301,9 @@ Project [_2#122 AS c0#126]
 ====
 `supportCodegen` is used when `CollapseCodegenStages` does the following:
 
-1. <<insertInputAdapter, Inserts InputAdapter physical operator>> for physical plans that do not support whole-stage Java code generation (i.e. `supportCodegen` is turned off).
+* <<insertInputAdapter, Inserts InputAdapter physical operator>> for physical plans that do not support whole-stage Java code generation (i.e. `supportCodegen` is turned off).
 
-1. <<insertWholeStageCodegen, Inserts WholeStageCodegenExec physical operator>> for physical operators that do support whole-stage Java code generation (i.e. `supportCodegen` is turned on).
+* <<insertWholeStageCodegen, Inserts WholeStageCodegenExec physical operator>> for physical operators that do support whole-stage Java code generation (i.e. `supportCodegen` is turned on).
 ====
 
 === [[supportCodegen-Expression]] Expressions with Codegen Support -- `supportCodegen` Internal Predicate
@@ -315,8 +315,9 @@ supportCodegen(e: Expression): Boolean
 
 `supportCodegen` is positive when the link:spark-sql-Expression.adoc[Catalyst expression] `e` is (in the order of verification):
 
-1. link:spark-sql-Expression.adoc#LeafExpression[LeafExpression]
-1. non-link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback] expression
+. link:spark-sql-Expression.adoc#LeafExpression[LeafExpression]
+
+. non-link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback] expression
 
 Otherwise, `supportCodegen` is negative.
 

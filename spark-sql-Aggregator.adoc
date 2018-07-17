@@ -55,12 +55,11 @@ ds.select(typed.sum((i: Int) => i))
 In other words, using the contract is as treading on thin ice.
 ====
 
-
 `Aggregator` is used when:
 
-1. link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc#creating-instance[SimpleTypedAggregateExpression] and link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc#creating-instance[ComplexTypedAggregateExpression] are created
+* link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc#creating-instance[SimpleTypedAggregateExpression] and link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc#creating-instance[ComplexTypedAggregateExpression] are created
 
-1. `TypedAggregateExpression` is requested for the link:spark-sql-Expression-TypedAggregateExpression.adoc#aggregator[aggregator]
+* `TypedAggregateExpression` is requested for the link:spark-sql-Expression-TypedAggregateExpression.adoc#aggregator[aggregator]
 
 .Aggregator Contract
 [cols="1,2",options="header",width="100%"]

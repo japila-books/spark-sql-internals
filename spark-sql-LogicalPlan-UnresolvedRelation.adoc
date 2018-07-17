@@ -14,13 +14,13 @@ Table or view not found: [tableIdentifier]
 
 `UnresolvedRelation` is <<creating-instance, created>> when:
 
-1. `SparkSession` is requested to link:spark-sql-SparkSession.adoc#table[create a DataFrame from a table]
+* `SparkSession` is requested to link:spark-sql-SparkSession.adoc#table[create a DataFrame from a table]
 
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
 
-1. `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are link:spark-sql-LogicalPlan-InsertIntoTable.adoc#INSERT_INTO_TABLE[executed]
+* `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are link:spark-sql-LogicalPlan-InsertIntoTable.adoc#INSERT_INTO_TABLE[executed]
 
-1. `CreateHiveTableAsSelectCommand` command is executed
+* `CreateHiveTableAsSelectCommand` command is executed
 
 [TIP]
 ====

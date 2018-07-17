@@ -2,9 +2,9 @@
 
 `ResolveRelations` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
-1. Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
+* Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
 
-1. Other uses of `UnresolvedRelation`
+* Other uses of `UnresolvedRelation`
 
 Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
@@ -99,15 +99,15 @@ NOTE: `resolveRelation` is used when...FIXME
 isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 ----
 
-`isRunningDirectlyOnFiles` is enabled (i.e. `true`) where the following all hold:
+`isRunningDirectlyOnFiles` is enabled (i.e. `true`) when all of the following conditions hold:
 
-1. The database of the input `table` is defined
+* The database of the input `table` is defined
 
-1. link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
+* link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
 
-1. The `table` is not a link:spark-sql-SessionCatalog.adoc#isTemporaryTable[temporary table]
+* The `table` is not a link:spark-sql-SessionCatalog.adoc#isTemporaryTable[temporary table]
 
-1. The link:spark-sql-SessionCatalog.adoc#databaseExists[database] or the link:spark-sql-SessionCatalog.adoc#tableExists[table] do not exist (in the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog])
+* The link:spark-sql-SessionCatalog.adoc#databaseExists[database] or the link:spark-sql-SessionCatalog.adoc#tableExists[table] do not exist (in the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog])
 
 NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf logical operator for a table reference).
 

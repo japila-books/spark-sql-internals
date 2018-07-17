@@ -119,7 +119,7 @@ The additional operator optimization rules are executed right after <<Operator_O
 | [[LimitPushDown]] link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 |
 
-| [[ColumnPruning]] link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
+| link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 |
 
 | InferFiltersFromConstraints

@@ -22,6 +22,6 @@ link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] is...FIXME
 
 === [[i-want-more]] Further Reading and Watching
 
-1. (video) https://youtu.be/FZgojLWdjaw[An Adaptive Execution Engine For Apache Spark SQL &mdash; Carson Wang]
+. (video) https://youtu.be/FZgojLWdjaw[An Adaptive Execution Engine For Apache Spark SQL &mdash; Carson Wang]
 
-1. https://conferences.oreilly.com/strata/strata-sg/public/schedule/detail/62938[An adaptive execution mode for Spark SQL] by Carson Wang (Intel), Yucai Yu (Intel) at Strata Data Conference in Singapore, December 7, 2017
+. https://conferences.oreilly.com/strata/strata-sg/public/schedule/detail/62938[An adaptive execution mode for Spark SQL] by Carson Wang (Intel), Yucai Yu (Intel) at Strata Data Conference in Singapore, December 7, 2017

@@ -34,13 +34,13 @@ Internally, `newClientForMetadata` creates a new link:spark-sql-SQLConf.adoc[SQL
 
 `newClientForMetadata` then creates a `IsolatedClientLoader` per the input parameters and the following configuration properties:
 
-1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
+* link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
 
-1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
+* link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
 
-1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
+* link:spark-sql-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
 
-1. link:spark-sql-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
+* link:spark-sql-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
 
 You should see one of the following INFO messages in the logs:
 

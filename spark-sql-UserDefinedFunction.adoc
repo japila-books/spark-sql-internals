@@ -4,8 +4,9 @@
 
 `UserDefinedFunction` is <<creating-instance, created>> when:
 
-1. link:spark-sql-functions.adoc#udf[udf] function is executed
-1. `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
+* link:spark-sql-functions.adoc#udf[udf] function is executed
+
+* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 
 [source, scala]
 ----

@@ -85,9 +85,9 @@ a|
 
 Used when:
 
-1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]
+* `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]
 
-1. `AlterTableAddPartitionCommand` is executed
+* `AlterTableAddPartitionCommand` is executed
 
 | [[broadcastTimeout]] `broadcastTimeout`
 | link:spark-sql-properties.adoc#spark.sql.broadcastTimeout[spark.sql.broadcastTimeout]
@@ -128,15 +128,15 @@ a|
 
 Used when:
 
-1. `DetermineTableStats` logical resolution rule could not compute the table size or <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>> is turned off
+* `DetermineTableStats` logical resolution rule could not compute the table size or <<spark.sql.statistics.fallBackToHdfs, spark.sql.statistics.fallBackToHdfs>> is turned off
 
-1. link:spark-sql-LogicalPlan-ExternalRDD.adoc#computeStats[ExternalRDD], link:spark-sql-LogicalPlan-LogicalRDD.adoc#computeStats[LogicalRDD] and `DataSourceV2Relation` are requested for statistics (i.e. `computeStats`)
+* link:spark-sql-LogicalPlan-ExternalRDD.adoc#computeStats[ExternalRDD], link:spark-sql-LogicalPlan-LogicalRDD.adoc#computeStats[LogicalRDD] and `DataSourceV2Relation` are requested for statistics (i.e. `computeStats`)
 
-1.  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
+*  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
 
-1. `DataSource` link:spark-sql-DataSource.adoc#resolveRelation[creates a HadoopFsRelation for FileFormat data source] (and builds a CatalogFileIndex when no table statistics are available)
+* `DataSource` link:spark-sql-DataSource.adoc#resolveRelation[creates a HadoopFsRelation for FileFormat data source] (and builds a CatalogFileIndex when no table statistics are available)
 
-1. `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
+* `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
 
 | [[exchangeReuseEnabled]] `exchangeReuseEnabled`
 | link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse]

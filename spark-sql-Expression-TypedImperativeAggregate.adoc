@@ -15,19 +15,10 @@
 | [[aggBufferSchema]] `aggBufferSchema`
 |
 
-| [[eval]] `eval`
-|
-
 | [[initialize]] link:spark-sql-Expression-ImperativeAggregate.adoc#initialize[initialize]
 | <<createAggregationBuffer, Creates an aggregation buffer>> and puts it at link:spark-sql-Expression-ImperativeAggregate.adoc#mutableAggBufferOffset[mutableAggBufferOffset] position in the input `buffer` link:spark-sql-InternalRow.adoc[InternalRow].
 
 | [[inputAggBufferAttributes]] `inputAggBufferAttributes`
-|
-
-| [[merge]] `merge`
-|
-
-| [[update]] `update`
 |
 |===
 

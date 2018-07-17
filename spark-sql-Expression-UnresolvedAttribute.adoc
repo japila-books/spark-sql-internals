@@ -5,11 +5,11 @@
 
 `UnresolvedAttribute` is <<creating-instance, created>> when:
 
-1. `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitDereference[visitDereference]
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitDereference[visitDereference]
 
-1. `LogicalPlan` is requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve an attribute by name parts]
+* `LogicalPlan` is requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve an attribute by name parts]
 
-1. `DescribeColumnCommand` is link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[executed]
+* `DescribeColumnCommand` is link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[executed]
 
 [[resolved]]
 `UnresolvedAttribute` can never be link:spark-sql-Expression.adoc#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
@@ -19,13 +19,13 @@
 ====
 `UnresolvedAttribute` is resolved when `Analyzer` is link:spark-sql-Analyzer.adoc#execute[executed] by the following link:spark-sql-Analyzer.adoc#Resolution[logical resolution rules]:
 
-1. link:spark-sql-ResolveReferences.adoc#resolve[ResolveReferences]
+* link:spark-sql-ResolveReferences.adoc#resolve[ResolveReferences]
 
-1. `ResolveMissingReferences`
+* `ResolveMissingReferences`
 
-1. `ResolveDeserializer`
+* `ResolveDeserializer`
 
-1. `ResolveSubquery`
+* `ResolveSubquery`
 ====
 
 [[Unevaluable]][[eval]][[doGenCode]]
@@ -90,9 +90,9 @@ Number of name parts: 1
 ====
 Catalyst DSL defines two Scala implicits to create an `UnresolvedAttribute`:
 
-1. `StringToAttributeConversionHelper` is a Scala implicit class that converts `$"colName"` into an `UnresolvedAttribute`
+* `StringToAttributeConversionHelper` is a Scala implicit class that converts `$"colName"` into an `UnresolvedAttribute`
 
-1. `symbolToUnresolvedAttribute` is a Scala implicit method that converts `'colName` into an `UnresolvedAttribute`
+* `symbolToUnresolvedAttribute` is a Scala implicit method that converts `'colName` into an `UnresolvedAttribute`
 
 Both implicits are part of link:spark-sql-catalyst-dsl.adoc#ExpressionConversions[ExpressionConversions] Scala trait of Catalyst DSL.
 

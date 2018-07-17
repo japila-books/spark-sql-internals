@@ -4,10 +4,10 @@
 
 `CommandUtils` defines the following utilities:
 
-1. <<calculateTotalSize, Calculating Total Size of Table or Its Partitions>>
-1. <<calculateLocationSize, Calculating Total File Size Under Path>>
-1. <<compareAndGetNewStats, Creating CatalogStatistics with Current Statistics>>
-1. <<updateTableStats, Updating Existing Table Statistics>>
+* <<calculateTotalSize, Calculating Total Size of Table or Its Partitions>>
+* <<calculateLocationSize, Calculating Total File Size Under Path>>
+* <<compareAndGetNewStats, Creating CatalogStatistics with Current Statistics>>
+* <<updateTableStats, Updating Existing Table Statistics>>
 
 [[logging]]
 [TIP]
@@ -60,9 +60,9 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the link:spar
 ====
 `calculateTotalSize` is used when:
 
-1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand] and link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand] commands are executed
+* ©link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand] and link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand] commands are executed
 
-1. `CommandUtils` is requested for <<updateTableStats, updating existing table statistics>>
+* `CommandUtils` is requested for <<updateTableStats, updating existing table statistics>>
 ====
 
 === [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
@@ -97,9 +97,9 @@ INFO CommandUtils: It took [durationInMs] ms to calculate the total file size un
 ====
 `calculateLocationSize` is used when:
 
-1. link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc#run[AnalyzePartitionCommand] and link:spark-sql-LogicalPlan-RunnableCommand.adoc#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] commands are executed
+* link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc#run[AnalyzePartitionCommand] and link:spark-sql-LogicalPlan-RunnableCommand.adoc#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] commands are executed
 
-1. `CommandUtils` is requested for <<calculateTotalSize, total size of a table or its partitions>>
+* `CommandUtils` is requested for <<calculateTotalSize, total size of a table or its partitions>>
 ====
 
 === [[compareAndGetNewStats]] Creating CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method

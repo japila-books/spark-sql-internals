@@ -27,21 +27,21 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 `CatalogTable` is <<creating-instance, created>> when:
 
-1. `SessionCatalog` is requested for a link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata]
+* `SessionCatalog` is requested for a link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata]
 
-1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
+* `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
 
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
 
-1. `InsertIntoHiveDirCommand` is executed
+* `InsertIntoHiveDirCommand` is executed
 
-1. `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
+* `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
 
-1. `CreateTableLikeCommand` is executed
+* `CreateTableLikeCommand` is executed
 
-1. `CreateViewCommand` does link:spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable[prepareTable]
+* `CreateViewCommand` does link:spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable[prepareTable]
 
-1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
+* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
 
 [[simpleString]]
 The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME

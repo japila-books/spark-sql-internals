@@ -90,9 +90,9 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and finds the following logical operators for <<flattenJoin, flattenJoin>>:
 
-1. link:spark-sql-LogicalPlan-Filter.adoc[Filter] with a inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator
+* link:spark-sql-LogicalPlan-Filter.adoc[Filter] with a inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator
 
-1. link:spark-sql-LogicalPlan-Join.adoc[Join] (of any type)
+* link:spark-sql-LogicalPlan-Join.adoc[Join] (of any type)
 
 NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <<ExtractFiltersAndInnerJoins-unapply, unapply>> method) to "destructure" a logical plan to its logical operators.
 
@@ -165,9 +165,9 @@ scala> println(plan.numberedTreeString)
 
 For three or more link:spark-sql-LogicalPlan.adoc[logical plans] in the `input`, `createOrderedJoin` takes the first plan and tries to find another that has at least one _matching_ join condition, i.e. a logical plan with the following:
 
-1. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
+. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
 
-1. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
+. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
 .createOrderedJoin with Three Joins (Before)
 image::images/ReorderJoin-createOrderedJoin-four-plans-before.png[align="center"]
@@ -263,25 +263,25 @@ scala> println(plan.numberedTreeString)
 
 `createOrderedJoin` partitions (aka _splits_) the input condition expressions to expressions that meet the following requirements (aka _join conditions_) or not (aka _others_):
 
-1. link:spark-sql-Expression.adoc#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
+. link:spark-sql-Expression.adoc#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
 
-1. link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[Can be evaluated within a join]
+. link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[Can be evaluated within a join]
 
 `createOrderedJoin` creates a link:spark-sql-LogicalPlan-Join.adoc#creating-instance[Join] logical operator with:
 
-1. Left logical operator as the first operator from the `input`
+. Left logical operator as the first operator from the `input`
 
-1. Right logical operator as the right as chosen above
+. Right logical operator as the right as chosen above
 
-1. Join type as the right's join type as chosen above
+. Join type as the right's join type as chosen above
 
-1. Join conditions combined together using `And` expression
+. Join conditions combined together using `And` expression
 
 `createOrderedJoin` calls itself recursively with the following:
 
-1. `input` logical joins as a new pair of the new `Join` and `Inner` join type with the remaining logical plans (all but the right)
+. `input` logical joins as a new pair of the new `Join` and `Inner` join type with the remaining logical plans (all but the right)
 
-1. `conditions` expressions as the _others_ conditions (all but the _join conditions_ used for the new join)
+. `conditions` expressions as the _others_ conditions (all but the _join conditions_ used for the new join)
 
 .createOrderedJoin with Three Joins
 image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
@@ -356,9 +356,9 @@ unapply(plan: LogicalPlan): Option[(Seq[(LogicalPlan, InnerLike)], Seq[Expressio
 
 NOTE: `unapply` is a feature of the Scala programming language to define https://docs.scala-lang.org/tour/extractor-objects.html[extractor objects] that take an object and try to give the arguments back. This is most often used in pattern matching and partial functions.
 
-1. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator with a cross or inner link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Filter`.
+. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator with a cross or inner link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Filter`.
 
-1. For a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Join`.
+. For a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `unapply` <<ExtractFiltersAndInnerJoins-flattenJoin, flattenJoin>> on the `Join`.
 
 [source, scala]
 ----
@@ -421,17 +421,17 @@ flattenJoin(plan: LogicalPlan, parentJoinType: InnerLike = Inner):
 
 `flattenJoin` branches off per the input logical `plan`:
 
-1. For an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively with the left-side of the join and the type of the join, and gives:
+* For an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator, `flattenJoin` calls itself recursively with the left-side of the join and the type of the join, and gives:
 
-i. The logical plans from recursive `flattenJoin` with the right-side of the join and the right join's type
-i. The join conditions from `flattenJoin` with the conditions of the join
+a. The logical plans from recursive `flattenJoin` with the right-side of the join and the right join's type
+b. The join conditions from `flattenJoin` with the conditions of the join
 
-1. For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] with an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join (that simply removes the `Filter` "layer" and assumes an inner join) and gives:
+* For a link:spark-sql-LogicalPlan-Filter.adoc[Filter] with an inner or cross link:spark-sql-LogicalPlan-Join.adoc[Join] child operator, `flattenJoin` calls itself recursively on the join (that simply removes the `Filter` "layer" and assumes an inner join) and gives:
 
-i. The logical plans from recursive `flattenJoin`
-i. The join conditions from `flattenJoin` with ``Filter``'s link:spark-sql-LogicalPlan-Filter.adoc#condition[conditions]
+a. The logical plans from recursive `flattenJoin`
+b. The join conditions from `flattenJoin` with ``Filter``'s link:spark-sql-LogicalPlan-Filter.adoc#condition[conditions]
 
-1. For all other logical operators, `flattenJoin` gives the input `plan`, the current join type (an inner or cross join) and the empty join condition.
+* For all other logical operators, `flattenJoin` gives the input `plan`, the current join type (an inner or cross join) and the empty join condition.
 
 In either case, `flattenJoin` splits _conjunctive predicates_, i.e. removes `And` expressions and gives their child expressions.
 

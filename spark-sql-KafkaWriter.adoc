@@ -7,11 +7,11 @@ image::images/spark-sql-KafkaWriter-write-webui.png[align="center"]
 
 `KafkaWriter` <<validateQuery, makes sure>> that the schema of the `Dataset` to write records of contains:
 
-1. Required *topic* as a field of type `StringType` or specified explicitly
+* Required *topic* as a field of type `StringType` or specified explicitly
 
-1. Required *value* as a field of type `StringType` or `BinaryType`
+* Required *value* as a field of type `StringType` or `BinaryType`
 
-1. Optional *key* as a field of type `StringType` or `BinaryType`
+* Optional *key* as a field of type `StringType` or `BinaryType`
 
 [source, scala]
 ----
@@ -82,10 +82,10 @@ validateQuery(
 
 `validateQuery` validates the schema of the input link:spark-sql-QueryExecution.adoc#analyzed[analyzed] `QueryExecution`, i.e.
 
-1. Whether the required *topic* is available as a field of type `StringType` in the schema or as the input `topic`
+* Whether the required *topic* is available as a field of type `StringType` in the schema or as the input `topic`
 
-1. Whether the optional *key* is available as a field of type `StringType` or `BinaryType` in the schema
+* Whether the optional *key* is available as a field of type `StringType` or `BinaryType` in the schema
 
-1. Whether the required *value* is available as a field of type `StringType` or `BinaryType` in the schema
+* Whether the required *value* is available as a field of type `StringType` or `BinaryType` in the schema
 
 NOTE: `validateQuery` is used exclusively when `KafkaWriter` <<write, writes the result of a query to Kafka>>.

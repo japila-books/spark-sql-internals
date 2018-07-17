@@ -595,9 +595,9 @@ internalCreateDataFrame(
 ====
 `internalCreateDataFrame` is used when:
 
-1. `DataFrameReader` is requested to create a DataFrame from Dataset of link:spark-sql-DataFrameReader.adoc#json[JSONs] or link:spark-sql-DataFrameReader.adoc#json[CSVs]
+* `DataFrameReader` is requested to create a DataFrame from Dataset of link:spark-sql-DataFrameReader.adoc#json[JSONs] or link:spark-sql-DataFrameReader.adoc#json[CSVs]
 
-1. `SparkSession` is requested to <<createDataFrame, create a DataFrame from RDD of rows>>
+* `SparkSession` is requested to <<createDataFrame, create a DataFrame from RDD of rows>>
 
-1. `InsertIntoDataSourceCommand` is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed]
+* `InsertIntoDataSourceCommand` is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed]
 ====

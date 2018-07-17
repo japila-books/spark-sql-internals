@@ -2,9 +2,9 @@
 
 Development of a Spark SQL application requires the following steps:
 
-1. Setting up Development Environment (IntelliJ IDEA, Scala and sbt)
-1. Specifying Library Dependencies
-1. Creating SparkSession
-1. Loading Datasets from External Data Sources
-1. Transforming Datasets
-1. Saving Datasets to Persistent Storage
+. Setting up Development Environment (IntelliJ IDEA, Scala and sbt)
+. Specifying Library Dependencies
+. Creating SparkSession
+. Loading Datasets from External Data Sources
+. Transforming Datasets
+. Saving Datasets to Persistent Storage

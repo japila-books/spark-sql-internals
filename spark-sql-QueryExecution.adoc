@@ -165,12 +165,12 @@ preparations: Seq[Rule[SparkPlan]]
 
 `preparations` are link:spark-sql-SparkPlan.adoc[physical plan] preparation rules (i.e. `Rule[SparkPlan]`) that...FIXME
 
-1. link:spark-sql-ExtractPythonUDFs.adoc[ExtractPythonUDFs]
-1. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
-1. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
-1. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
-1. link:spark-sql-ReuseExchange.adoc[ReuseExchange]
-1. link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
+. link:spark-sql-ExtractPythonUDFs.adoc[ExtractPythonUDFs]
+. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
+. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
+. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
+. link:spark-sql-ReuseExchange.adoc[ReuseExchange]
+. link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
 
 TIP: A `SparkPlan` preparation rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] to a more efficient variant.
 

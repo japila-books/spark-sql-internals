@@ -172,12 +172,12 @@ fromHivePartition(hp: HivePartition): CatalogTablePartition
 
 `fromHivePartition` simply creates a link:spark-sql-CatalogTablePartition.adoc#creating-instance[CatalogTablePartition] with the following:
 
-1. link:spark-sql-CatalogTablePartition.adoc#spec[spec] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
+* link:spark-sql-CatalogTablePartition.adoc#spec[spec] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
 
-1. link:spark-sql-CatalogTablePartition.adoc#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
+* link:spark-sql-CatalogTablePartition.adoc#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
 
-1. link:spark-sql-CatalogTablePartition.adoc#parameters[parameters] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
+* link:spark-sql-CatalogTablePartition.adoc#parameters[parameters] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
 
-1. link:spark-sql-CatalogTablePartition.adoc#stats[stats] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
+* link:spark-sql-CatalogTablePartition.adoc#stats[stats] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
 
 NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.

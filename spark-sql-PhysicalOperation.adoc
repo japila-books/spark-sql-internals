@@ -2,11 +2,11 @@
 
 `PhysicalOperation` is a Scala extractor to <<unapply, destructure a logical query plan>> into a tuple with the following elements:
 
-1. link:spark-sql-Expression-NamedExpression.adoc[Named expressions] (aka _projects_)
+. link:spark-sql-Expression-NamedExpression.adoc[Named expressions] (aka _projects_)
 
-1. link:spark-sql-Expression.adoc[Expressions] (aka _filters_)
+. link:spark-sql-Expression.adoc[Expressions] (aka _filters_)
 
-1. link:spark-sql-LogicalPlan.adoc[Logical operator] (aka _leaf node_)
+. link:spark-sql-LogicalPlan.adoc[Logical operator] (aka _leaf node_)
 
 [[ReturnType]]
 .ReturnType

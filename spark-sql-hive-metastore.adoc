@@ -92,9 +92,9 @@ res2: String = jdbc:derby:;databaseName=metastore_db;create=true
 
 The benefits of using an external Hive metastore:
 
-1. Allow multiple Spark applications (sessions) to access it concurrently
+. Allow multiple Spark applications (sessions) to access it concurrently
 
-1. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
+. Allow a single Spark application to use table statistics without running "ANALYZE TABLE" every execution
 
 NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPARK-18112 Spark2.x does not support read data from Hive 2.x metastore]) Spark SQL supports reading data from Hive 2.1.1 metastore.
 
@@ -112,15 +112,15 @@ link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.di
 
 In order to use an external Hive metastore you should do the following:
 
-1. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
+. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
 
-1. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
+. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
 
-1. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
+. Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
-1. Check out link:spark-sql-SharedState.adoc#warehousePath[warehousePath]
+. Check out link:spark-sql-SharedState.adoc#warehousePath[warehousePath]
 
-1. Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
+. Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
 When not configured by the <<hive-site.xml, hive-site.xml>>, `SparkSession` automatically creates `metastore_db` in the current directory and creates a directory configured by <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>>, which defaults to the directory `spark-warehouse` in the current directory that the Spark application is started.
 
@@ -271,7 +271,7 @@ $ ./bin/hdfs getconf -confKey hadoop.tmp.dir
 ```
 ====
 
-1. Edit `etc/hadoop/core-site.xml` to add the following:
+. Edit `etc/hadoop/core-site.xml` to add the following:
 +
 [source, xml]
 ----
@@ -283,7 +283,7 @@ $ ./bin/hdfs getconf -confKey hadoop.tmp.dir
 </configuration>
 ----
 
-1. `./bin/hdfs namenode -format` right after you've installed Hadoop and before starting any HDFS services (NameNode in particular)
+. `./bin/hdfs namenode -format` right after you've installed Hadoop and before starting any HDFS services (NameNode in particular)
 +
 ```
 $ ./bin/hdfs namenode -format
@@ -352,7 +352,7 @@ org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /pr
 ```
 ====
 
-1. Start Hadoop HDFS using `./sbin/start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
+. Start Hadoop HDFS using `./sbin/start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
 +
 ```
 $ ./sbin/start-dfs.sh
@@ -363,7 +363,7 @@ Starting secondary namenodes [0.0.0.0]
 0.0.0.0: starting secondarynamenode, logging to /Users/jacek/dev/apps/hadoop-2.7.5/logs/hadoop-jacek-secondarynamenode-japila.local.out
 ```
 
-1. Use `jps -lm` to list Hadoop's JVM processes.
+. Use `jps -lm` to list Hadoop's JVM processes.
 +
 ```
 $ jps -lm
@@ -372,7 +372,7 @@ $ jps -lm
 26381 org.apache.hadoop.hdfs.server.namenode.NameNode
 ```
 
-1. Create `hive-site.xml` in `$SPARK_HOME/conf` with the following:
+. Create `hive-site.xml` in `$SPARK_HOME/conf` with the following:
 +
 [source, xml]
 ----

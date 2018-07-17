@@ -89,6 +89,7 @@ from_json(e: Column, schema: DataType): Column  // <4>
 from_json(e: Column, schema: String, options: Map[String, String]): Column // <5>
 ----
 <1> Calls <2> with `StructType` converted to `DataType`
+<2> (fixme)
 <3> Calls <1> with empty `options`
 <4> Relays to the other `from_json` with empty `options`
 <5> (*2.3.0*) Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
@@ -116,8 +117,9 @@ scala> jsons.select(from_json($"json", schema) as "ids").show
 ====
 A schema can be one of the following:
 
-1. link:spark-sql-DataType.adoc[DataType] as a Scala object or in the JSON format
-1. link:spark-sql-StructType.adoc[StructType] in the DDL format
+. link:spark-sql-DataType.adoc[DataType] as a Scala object or in the JSON format
+
+. link:spark-sql-StructType.adoc[StructType] in the DDL format
 ====
 
 [source, scala]

@@ -22,9 +22,9 @@ abstract class Star extends LeafExpression with NamedExpression {
 | `expand`
 a| [[expand]] Used exclusively when `ResolveReferences` logical resolution rule is requested to expand `Star` expressions in the following logical operators:
 
-1. link:spark-sql-ResolveReferences.adoc#apply[ScriptTransformation]
+* link:spark-sql-ResolveReferences.adoc#apply[ScriptTransformation]
 
-1. link:spark-sql-ResolveReferences.adoc#buildExpandedProjectList[Project and Aggregate]
+* link:spark-sql-ResolveReferences.adoc#buildExpandedProjectList[Project and Aggregate]
 |===
 
 [[implementations]]

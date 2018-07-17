@@ -268,17 +268,17 @@ For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQu
 
 For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` adds (in that order):
 
-1. <<withGenerate, Generate>> unary logical operators (if used in the parsed SQL text)
+. <<withGenerate, Generate>> unary logical operators (if used in the parsed SQL text)
 
-1. `Filter` unary logical plan (if used in the parsed SQL text)
+. `Filter` unary logical plan (if used in the parsed SQL text)
 
-1. <<withAggregation, GroupingSets or Aggregate>> unary logical operators (if used in the parsed SQL text)
+. <<withAggregation, GroupingSets or Aggregate>> unary logical operators (if used in the parsed SQL text)
 
-1. `Project` and/or `Filter` unary logical operators
+. `Project` and/or `Filter` unary logical operators
 
-1. <<withWindows, WithWindowDefinition>> unary logical operator (if used in the parsed SQL text)
+. <<withWindows, WithWindowDefinition>> unary logical operator (if used in the parsed SQL text)
 
-1. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
+. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
 
 | [[withPredicate]] `withPredicate`
 a|

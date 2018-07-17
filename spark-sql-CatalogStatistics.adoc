@@ -18,15 +18,15 @@
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
-1. link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in link:spark-sql-ExternalCatalog.adoc[ExternalCatalog])
+* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in link:spark-sql-ExternalCatalog.adoc[ExternalCatalog])
 
-1. `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
+* `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
 
-1. `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
+* `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
 
-1. link:spark-sql-DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#apply[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
+* link:spark-sql-DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#apply[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
-1. `HiveClientImpl` is requested for a table or partition link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
+* `HiveClientImpl` is requested for a table or partition link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
 
 [source, scala]
 ----

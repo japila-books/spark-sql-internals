@@ -2,8 +2,8 @@
 
 `BytesToBytesMap` is...FIXME
 
-1. Low space overhead,
-1. Good memory locality, esp. for scans.
+* Low space overhead,
+* Good memory locality, esp. for scans.
 
 === [[lookup]] `lookup` Method
 

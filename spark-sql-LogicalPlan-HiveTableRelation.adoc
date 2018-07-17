@@ -64,9 +64,9 @@ scala> println(planWithTables.numberedTreeString)
 
 The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a catalog) has to meet the requirements:
 
-1. The link:spark-sql-CatalogTable.adoc#identifier[database] is defined
-1. The link:spark-sql-CatalogTable.adoc#partitionSchema[partition schema] is of the same type as <<partitionCols, partitionCols>>
-1. The link:spark-sql-CatalogTable.adoc#dataSchema[data schema] is of the same type as <<dataCols, dataCols>>
+* The link:spark-sql-CatalogTable.adoc#identifier[database] is defined
+* The link:spark-sql-CatalogTable.adoc#partitionSchema[partition schema] is of the same type as <<partitionCols, partitionCols>>
+* The link:spark-sql-CatalogTable.adoc#dataSchema[data schema] is of the same type as <<dataCols, dataCols>>
 
 [[output]]
 `HiveTableRelation` has the output attributes made up of <<dataCols, data>> followed by <<partitionCols, partition>> columns.

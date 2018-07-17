@@ -104,8 +104,8 @@ statsToProperties(
 
 `statsToProperties` adds the following properties to the properties:
 
-1. *spark.sql.statistics.totalSize* with link:spark-sql-CatalogStatistics.adoc#sizeInBytes[total size (in bytes)]
-1. (if defined) *spark.sql.statistics.numRows* with link:spark-sql-CatalogStatistics.adoc#rowCount[number of rows]
+* *spark.sql.statistics.totalSize* with link:spark-sql-CatalogStatistics.adoc#sizeInBytes[total size (in bytes)]
+* (if defined) *spark.sql.statistics.numRows* with link:spark-sql-CatalogStatistics.adoc#rowCount[number of rows]
 
 `statsToProperties` takes the link:spark-sql-CatalogStatistics.adoc#colStats[column statistics] and for every column (field) in `schema` link:spark-sql-ColumnStat.adoc#toMap[converts the column statistics to properties] and adds the properties (as <<columnStatKeyPropName, column statistic property>>) to the properties.
 
@@ -113,8 +113,9 @@ statsToProperties(
 ====
 `statsToProperties` is used when `HiveExternalCatalog` is requested for:
 
-1. <<doAlterTableStats, doAlterTableStats>>
-1. <<alterPartitions, alterPartitions>>
+* <<doAlterTableStats, doAlterTableStats>>
+
+* <<alterPartitions, alterPartitions>>
 ====
 
 === [[statsFromProperties]] Restoring Table Statistics from Properties (from Hive Metastore) -- `statsFromProperties` Internal Method
@@ -209,8 +210,9 @@ restorePartitionMetadata(
 ====
 `restorePartitionMetadata` is used when `HiveExternalCatalog` is requested for:
 
-1. <<getPartition, getPartition>>
-1. <<getPartitionOption, getPartitionOption>>
+* <<getPartition, getPartition>>
+
+* <<getPartitionOption, getPartitionOption>>
 ====
 
 === [[getPartition]] `getPartition` Method
@@ -305,8 +307,11 @@ restoreTableMetadata(inputTable: CatalogTable): CatalogTable
 ====
 `restoreTableMetadata` is used when `HiveExternalCatalog` is requested for:
 
-1. <<getTable, getTable>>
-1. <<doAlterTableStats, doAlterTableStats>>
-1. <<alterPartitions, alterPartitions>>
-1. <<listPartitionsByFilter, listPartitionsByFilter>>
+* <<getTable, getTable>>
+
+* <<doAlterTableStats, doAlterTableStats>>
+
+* <<alterPartitions, alterPartitions>>
+
+* <<listPartitionsByFilter, listPartitionsByFilter>>
 ====

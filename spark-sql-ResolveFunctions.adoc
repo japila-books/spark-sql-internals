@@ -86,11 +86,11 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply` takes a link:spark-sql-LogicalPlan.adoc[logical plan] and transforms each expression (for every logical operator found in the query plan) as follows:
 
-1. For link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttributes] with link:spark-sql-Expression-UnresolvedAttribute.adoc#name[names] as `grouping__id`, `apply` creates a link:spark-sql-Expression-Alias.adoc#creating-instance[Alias] (with a `GroupingID` child expression and `grouping__id` name).
+* For link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttributes] with link:spark-sql-Expression-UnresolvedAttribute.adoc#name[names] as `grouping__id`, `apply` creates a link:spark-sql-Expression-Alias.adoc#creating-instance[Alias] (with a `GroupingID` child expression and `grouping__id` name).
 +
 That case seems mostly for compatibility with Hive as `grouping__id` attribute name is used by Hive.
 
-1. For link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a Generator function by name].
+* For link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a Generator function by name].
 +
 If some other non-generator function is found for the name, `apply` fails the analysis phase by reporting an `AnalysisException`:
 +
@@ -98,7 +98,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ```
 
-1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunctions], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a function by name].
+* For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunctions], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a function by name].
 
 * link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has link:spark-sql-Expression-UnresolvedFunction.adoc#isDistinct[isDistinct] flag enabled.
 +

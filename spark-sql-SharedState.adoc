@@ -88,9 +88,9 @@ warehousePath: String
 
 `warehousePath` is the warehouse path with the value of:
 
-1. link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] if defined and link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is not
+. link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] if defined and link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is not
 
-1. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is undefined
+. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if `hive.metastore.warehouse.dir` is undefined
 
 You should see the following INFO message in the logs when `SharedState` is <<creating-instance, created>>:
 
@@ -102,13 +102,13 @@ INFO Warehouse path is '[warehousePath]'.
 
 While initialized, `warehousePath` does the following:
 
-1. Loads `hive-site.xml` if available on CLASSPATH, i.e. adds it as a configuration resource to Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (of `SparkContext`).
+. Loads `hive-site.xml` if available on CLASSPATH, i.e. adds it as a configuration resource to Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (of `SparkContext`).
 
-1. Removes `hive.metastore.warehouse.dir` from `SparkConf` (of `SparkContext`) and leaves it off if defined using any of the Hadoop configuration resources.
+. Removes `hive.metastore.warehouse.dir` from `SparkConf` (of `SparkContext`) and leaves it off if defined using any of the Hadoop configuration resources.
 
-1. [[hive.metastore.warehouse.dir]] Sets link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] or link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] in the Hadoop configuration (of `SparkContext`)
+. [[hive.metastore.warehouse.dir]] Sets link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] or link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] in the Hadoop configuration (of `SparkContext`)
 
-i. If `hive.metastore.warehouse.dir` has been defined in any of the Hadoop configuration resources but link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] has not, `spark.sql.warehouse.dir` becomes the value of `hive.metastore.warehouse.dir`.
+a. If `hive.metastore.warehouse.dir` has been defined in any of the Hadoop configuration resources but link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] has not, `spark.sql.warehouse.dir` becomes the value of `hive.metastore.warehouse.dir`.
 +
 You should see the following INFO message in the logs:
 +
@@ -116,7 +116,7 @@ You should see the following INFO message in the logs:
 spark.sql.warehouse.dir is not set, but hive.metastore.warehouse.dir is set. Setting spark.sql.warehouse.dir to the value of hive.metastore.warehouse.dir ('[hiveWarehouseDir]').
 ```
 
-i. Otherwise, the Hadoop configuration's `hive.metastore.warehouse.dir` is set to `spark.sql.warehouse.dir`
+b. Otherwise, the Hadoop configuration's `hive.metastore.warehouse.dir` is set to `spark.sql.warehouse.dir`
 +
 You should see the following INFO message in the logs:
 +
@@ -138,9 +138,9 @@ externalCatalog: ExternalCatalog
 
 While initialized:
 
-1. link:spark-sql-ExternalCatalog.adoc#createDatabase[Creates] the *default* database (with `default database` description and <<warehousePath, warehousePath>> location) if link:spark-sql-ExternalCatalog.adoc#databaseExists[it doesn't exist].
+. link:spark-sql-ExternalCatalog.adoc#createDatabase[Creates] the *default* database (with `default database` description and <<warehousePath, warehousePath>> location) if link:spark-sql-ExternalCatalog.adoc#databaseExists[it doesn't exist].
 
-1. link:spark-sql-ExternalCatalog.adoc#addListener[Registers] a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
+. link:spark-sql-ExternalCatalog.adoc#addListener[Registers] a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
 
 === [[externalCatalogClassName]] `externalCatalogClassName` Internal Method
 

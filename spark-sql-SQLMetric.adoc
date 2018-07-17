@@ -81,9 +81,9 @@ NOTE: `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
 ====
 `postDriverMetricUpdates` is used when:
 
-1. `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
+* `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
 
-1. `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
+* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
 
-1. `SubqueryExec` physical operator is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
+* `SubqueryExec` physical operator is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
 ====

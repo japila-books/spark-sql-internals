@@ -433,17 +433,17 @@ NOTE: `executeCollect` returns `Array[InternalRow]`, i.e. keeps the internal rep
 ====
 `executeCollect` is used when:
 
-1. `Dataset` is requested for the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] (being a single link:spark-sql-LogicalPlan-Command.adoc[Command] or their `Union`)
+* `Dataset` is requested for the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] (being a single link:spark-sql-LogicalPlan-Command.adoc[Command] or their `Union`)
 
-1. link:spark-sql-dataset-operators.adoc#explain[explain] and link:spark-sql-dataset-operators.adoc#count[count] operators are executed
+* link:spark-sql-dataset-operators.adoc#explain[explain] and link:spark-sql-dataset-operators.adoc#count[count] operators are executed
 
-1. `Dataset` is requested to `collectFromPlan`
+* `Dataset` is requested to `collectFromPlan`
 
-1. `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
+* `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
 
-1. `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
+* `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
 
-1. `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
+* `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
 ====
 
 === [[executeCollectPublic]] `executeCollectPublic` Method

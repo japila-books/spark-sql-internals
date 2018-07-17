@@ -143,9 +143,9 @@ build(): SessionState
 ====
 `build` is used when:
 
-1. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] (and link:spark-sql-SparkSession.adoc#instantiateSessionState[builds it using a class name] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property
+* `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState] (and link:spark-sql-SparkSession.adoc#instantiateSessionState[builds it using a class name] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property
 
-1. `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
+* `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
 ====
 
 === [[creating-instance]] Creating BaseSessionStateBuilder Instance

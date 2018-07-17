@@ -68,8 +68,8 @@ scala> spark.sql(descExtSQL).show
 [[output]]
 `DescribeColumnCommand` defines the link:spark-sql-LogicalPlan-Command.adoc#output[output schema] with the following columns:
 
-1. `info_name` with "name of the column info" comment
-1. `info_value` with "value of the column info" comment
+* `info_name` with "name of the column info" comment
+* `info_value` with "value of the column info" comment
 
 NOTE: `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc#visitDescribeTable[SparkSqlParser].
 
@@ -96,19 +96,19 @@ NOTE: link:spark-sql-CatalogStatistics.adoc#colStats[Column statistics] are avai
 
 `run` gives the following rows (in that order):
 
-1. `col_name`
-1. `data_type`
-1. `comment`
+. `col_name`
+. `data_type`
+. `comment`
 
 If `DescribeColumnCommand` command was executed with <<isExtended, EXTENDED or FORMATTED option>>, `run` gives the following additional rows (in that order):
 
-1. `min`
-1. `max`
-1. `num_nulls`
-1. `distinct_count`
-1. `avg_col_len`
-1. `max_col_len`
-1. <<histogramDescription, histogram>>
+. `min`
+. `max`
+. `num_nulls`
+. `distinct_count`
+. `avg_col_len`
+. `max_col_len`
+. <<histogramDescription, histogram>>
 
 `run` gives `NULL` for the value of the comment and statistics if not available.
 

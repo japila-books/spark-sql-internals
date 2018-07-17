@@ -4,9 +4,9 @@
 
 `LogicalRDD` is <<creating-instance, created>> when:
 
-1. `Dataset` is requested to link:spark-sql-checkpointing.adoc#checkpoint[checkpoint]
+* `Dataset` is requested to link:spark-sql-checkpointing.adoc#checkpoint[checkpoint]
 
-1. `SparkSession` is requested to link:spark-sql-SparkSession.adoc#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
+* `SparkSession` is requested to link:spark-sql-SparkSession.adoc#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
 NOTE: `LogicalRDD` is resolved to link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#LogicalRDD[executed].
 

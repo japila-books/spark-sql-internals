@@ -15,4 +15,4 @@ TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spa
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
 
-Now, let me introduce you to link:spark-sql.adoc[Spark SQL].
+Now, let me introduce you to <<spark-sql.adoc#, Spark SQL>>.

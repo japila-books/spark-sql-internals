@@ -80,9 +80,9 @@ getTable(dbName: String, tableName: String): CatalogTable
 ====
 `getTable` is used when:
 
-1. `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#getRawTable[table metadata]
+* `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#getRawTable[table metadata]
 
-1. `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
+* `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 
-1. `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:spark-sql-HiveClientImpl.adoc#alterPartitions[alterPartitions]
+* `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:spark-sql-HiveClientImpl.adoc#alterPartitions[alterPartitions]
 ====

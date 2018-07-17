@@ -89,8 +89,8 @@ NOTE: link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] strategy 
 
 === [[optimizations]] Repartition Operation Optimizations
 
-1. link:spark-sql-Optimizer.adoc#CollapseRepartition[CollapseRepartition] logical optimization collapses adjacent repartition operations.
+* link:spark-sql-Optimizer.adoc#CollapseRepartition[CollapseRepartition] logical optimization collapses adjacent repartition operations.
 
-1. Repartition operations allow link:spark-sql-Optimizer.adoc#FoldablePropagation[FoldablePropagation] and link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate] logical optimizations to "push through".
+* Repartition operations allow link:spark-sql-Optimizer.adoc#FoldablePropagation[FoldablePropagation] and link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate] logical optimizations to "push through".
 
-1.  link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation] logical optimization may result in an empty link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] for repartition operations.
+* link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation] logical optimization may result in an empty link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] for repartition operations.

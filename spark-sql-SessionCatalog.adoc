@@ -31,11 +31,6 @@ org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
 Used when...FIXME
 
-| [[functionResourceLoader]] `functionResourceLoader`
-| FIXME
-
-Used when...FIXME
-
 | [[tableRelationCache]] `tableRelationCache`
 | A cache of fully-qualified table names to link:spark-sql-LogicalPlan.adoc[table relation plans] (i.e. `LogicalPlan`).
 
@@ -152,9 +147,9 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 ====
 `alterTableStats` is used when the following logical commands are executed:
 
-1. link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand], link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
+* link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand], link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
 
-1. (*indirectly* through `CommandUtils` when requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]) link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable], link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
+* (*indirectly* through `CommandUtils` when requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]) link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable], link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
 ====
 
 === [[tableExists]] `tableExists` Method
@@ -339,19 +334,19 @@ scala> println(plan.numberedTreeString)
 
 Internally, `lookupRelation` looks up the `name` table using:
 
-1. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager`
+. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager`
 
-i. Gives `SubqueryAlias` or reports a `NoSuchTableException`
+a. Gives `SubqueryAlias` or reports a `NoSuchTableException`
 
-1. <<externalCatalog, ExternalCatalog>> when the database name of the table is specified explicitly or the <<tempViews, registry of temporary views>> does not contain the table
+. <<externalCatalog, ExternalCatalog>> when the database name of the table is specified explicitly or the <<tempViews, registry of temporary views>> does not contain the table
 
-i. Gives `SubqueryAlias` with `View` when the table is a view (aka _temporary table_)
+a. Gives `SubqueryAlias` with `View` when the table is a view (aka _temporary table_)
 
-i. Gives `SubqueryAlias` with `UnresolvedCatalogRelation` otherwise
+b. Gives `SubqueryAlias` with `UnresolvedCatalogRelation` otherwise
 
-1. The <<tempViews, registry of temporary views>>
+. The <<tempViews, registry of temporary views>>
 
-i. Gives `SubqueryAlias` with the logical plan per the table as registered in the <<tempViews, registry of temporary views>>
+a. Gives `SubqueryAlias` with the logical plan per the table as registered in the <<tempViews, registry of temporary views>>
 
 NOTE: `lookupRelation` considers *default* to be the name of the database if the `name` table does not specify the database explicitly.
 
@@ -359,9 +354,9 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 ====
 `lookupRelation` is used when:
 
-1. `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run]
+* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run]
 
-1. `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
+* `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
 ====
 
 === [[getTableMetadata]] Retrieving Table Metadata from External Catalog (Metastore) -- `getTableMetadata` Method
@@ -394,9 +389,9 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 ====
 `getTempViewOrPermanentTableMetadata` is used when:
 
-1. `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
+* `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
 
-1. `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
+* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
 ====
 
 === [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method

@@ -2,10 +2,10 @@
 
 `Project` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following:
 
-1. Dataset operators, i.e. link:spark-sql-joins.adoc#joinWith[joinWith], link:spark-sql-dataset-operators.adoc#select[select] (incl. `selectUntyped`), `unionByName`
-1. `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
-1. `CreateViewCommand.aliasPlan`
-1. SQL's link:spark-sql-AstBuilder.adoc#withQuerySpecification[SELECT] queries with named expressions
+* Dataset operators, i.e. link:spark-sql-joins.adoc#joinWith[joinWith], link:spark-sql-dataset-operators.adoc#select[select] (incl. `selectUntyped`), `unionByName`
+* `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
+* `CreateViewCommand.aliasPlan`
+* SQL's link:spark-sql-AstBuilder.adoc#withQuerySpecification[SELECT] queries with named expressions
 
 `Project` can also appear in a logical plan after link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] phases.
 

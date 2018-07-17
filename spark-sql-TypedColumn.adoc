@@ -41,11 +41,11 @@ withInputType(
 ====
 `withInputType` is used when the following typed operators are used:
 
-1. link:spark-sql-dataset-operators.adoc#select[Dataset.select]
+* link:spark-sql-dataset-operators.adoc#select[Dataset.select]
 
-1. link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
+* link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
 
-1. link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg]
+* link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg]
 ====
 
 === [[creating-instance]] Creating TypedColumn Instance

@@ -2,9 +2,11 @@
 
 `ExecutionListenerManager` is the <<methods, management interface>> for `QueryExecutionListeners` that listen for execution metrics:
 
-1. Name of the action (that triggered a query execution)
-1. link:spark-sql-QueryExecution.adoc[QueryExecution]
-1. Execution time of this query (in nanoseconds)
+* Name of the action (that triggered a query execution)
+
+* link:spark-sql-QueryExecution.adoc[QueryExecution]
+
+* Execution time of this query (in nanoseconds)
 
 `ExecutionListenerManager` is available as link:spark-sql-SparkSession.adoc#listenerManager[listenerManager] property of `SparkSession` (and link:spark-sql-SessionState.adoc#listenerManager[listenerManager] property of `SessionState`).
 
@@ -73,9 +75,9 @@ onSuccess(funcName: String, qe: QueryExecution, duration: Long): Unit
 ====
 `onSuccess` is used when:
 
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has finished with no exceptions)
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has finished with no exceptions)
 
-1. `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
+* `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
 ====
 
 === [[onFailure]] `onFailure` Internal Method
@@ -91,9 +93,9 @@ onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit
 ====
 `onFailure` is used when:
 
-1. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has reported an exception)
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has reported an exception)
 
-1. `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
+* `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
 ====
 
 === [[withErrorHandling]] `withErrorHandling` Internal Method

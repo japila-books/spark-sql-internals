@@ -58,12 +58,12 @@ scala> sql(s"DESC EXTENDED $tableName id").show
 
 `AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following link:spark-sql-DataType.adoc[data types]:
 
-1. `IntegralType`
-1. `DecimalType`
-1. `DoubleType`
-1. `FloatType`
-1. `DateType`
-1. `TimestampType`
+* `IntegralType`
+* `DecimalType`
+* `DoubleType`
+* `FloatType`
+* `DateType`
+* `TimestampType`
 
 NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
 
@@ -122,8 +122,8 @@ NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[Runna
 
 `run` calculates the following statistics:
 
-1. sizeInBytes
-1. stats for each column
+* sizeInBytes
+* stats for each column
 
 CAUTION: FIXME
 

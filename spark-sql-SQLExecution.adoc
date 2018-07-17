@@ -126,7 +126,7 @@ Hello World
 ====
 `withExecutionId` is used when:
 
-1. `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
+* `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
 
-1. `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
+* `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
 ====

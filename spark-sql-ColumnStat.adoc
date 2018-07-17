@@ -279,12 +279,12 @@ rowToColumnStat(
 `rowToColumnStat` <<creating-instance, creates>> a `ColumnStat` from the input `row` and the following positions:
 
 [start=0]
-1. <<distinctCount, distinctCount>>
-1. <<min, min>>
-1. <<max, max>>
-1. <<nullCount, nullCount>>
-1. <<avgLen, avgLen>>
-1. <<maxLen, maxLen>>
+. <<distinctCount, distinctCount>>
+. <<min, min>>
+. <<max, max>>
+. <<nullCount, nullCount>>
+. <<avgLen, avgLen>>
+. <<maxLen, maxLen>>
 
 If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
 

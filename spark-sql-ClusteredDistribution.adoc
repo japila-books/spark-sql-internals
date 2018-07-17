@@ -16,9 +16,9 @@
 
 `ClusteredDistribution` is used when:
 
-1. `DataSourcePartitioning`, `SinglePartition`, `HashPartitioning`, and `RangePartitioning` are requested to `satisfies`
+* `DataSourcePartitioning`, `SinglePartition`, `HashPartitioning`, and `RangePartitioning` are requested to `satisfies`
 
-1. `EnsureRequirements` is requested to link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
+* `EnsureRequirements` is requested to link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
 
 === [[createPartitioning]] `createPartitioning` Method
 

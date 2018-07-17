@@ -4,11 +4,11 @@
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
-1. link:spark-sql-functions.adoc#callUDF[callUDF] standard function
+* link:spark-sql-functions.adoc#callUDF[callUDF] standard function
 
-1. link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg] operator with aggregation functions specified by name (that link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
+* link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg] operator with aggregation functions specified by name (that link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
 
-1. `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitFunctionCall[visitFunctionCall] (in SQL queries)
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
 [[resolved]]
 `UnresolvedFunction` can never be link:spark-sql-Expression.adoc#resolved[resolved] (and is replaced at analysis phase).
@@ -57,9 +57,9 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 ====
 `apply` is used when:
 
-1. link:spark-sql-functions.adoc#callUDF[callUDF] standard function is used
+* link:spark-sql-functions.adoc#callUDF[callUDF] standard function is used
 
-1. `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#agg[agg] with aggregation functions specified by name (and link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
+* `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#agg[agg] with aggregation functions specified by name (and link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
 ====
 
 === [[creating-instance]] Creating UnresolvedFunction Instance

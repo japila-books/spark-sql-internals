@@ -4,9 +4,9 @@
 
 `ExternalRDD` is <<creating-instance, created>> when:
 
-1. `SparkSession` is requested to create a link:spark-sql-SparkSession.adoc#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:spark-sql-SparkSession.adoc#createDataset[Dataset from RDD of a given type]
+* `SparkSession` is requested to create a link:spark-sql-SparkSession.adoc#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:spark-sql-SparkSession.adoc#createDataset[Dataset from RDD of a given type]
 
-1. `ExternalRDD` is requested to <<newInstance, create a new instance>>
+* `ExternalRDD` is requested to <<newInstance, create a new instance>>
 
 [source, scala]
 ----

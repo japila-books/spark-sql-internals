@@ -223,6 +223,6 @@ scala> sql("SELECT IF(a > 0, a, 0) FROM (SELECT key a FROM src) temp").show
 
 === [[i-want-more]] Further Reading and Watching
 
-1. http://spark.apache.org/sql/[Spark SQL] home page
-1. (video) https://youtu.be/e-Ys-2uVxM0?t=6m44s[Spark's Role in the Big Data Ecosystem - Matei Zaharia]
-1. https://databricks.com/blog/2016/07/26/introducing-apache-spark-2-0.html[Introducing Apache Spark 2.0]
+. http://spark.apache.org/sql/[Spark SQL] home page
+. (video) https://youtu.be/e-Ys-2uVxM0?t=6m44s[Spark's Role in the Big Data Ecosystem - Matei Zaharia]
+. https://databricks.com/blog/2016/07/26/introducing-apache-spark-2-0.html[Introducing Apache Spark 2.0]

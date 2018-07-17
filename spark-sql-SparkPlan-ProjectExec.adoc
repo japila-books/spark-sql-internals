@@ -6,15 +6,15 @@
 
 `ProjectExec` is <<creating-instance, created>> when:
 
-1. link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
+* link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
 
-1. `BasicOperators` execution planning strategy is requested to link:spark-sql-SparkStrategy-BasicOperators.adoc#Project[resolve a Project logical operator]
+* `BasicOperators` execution planning strategy is requested to link:spark-sql-SparkStrategy-BasicOperators.adoc#Project[resolve a Project logical operator]
 
-1. `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw[creates a RowDataSourceScanExec]
+* `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw[creates a RowDataSourceScanExec]
 
-1. `FileSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[plan a LogicalRelation with a HadoopFsRelation]
+* `FileSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[plan a LogicalRelation with a HadoopFsRelation]
 
-1. `ExtractPythonUDFs` physical optimization is requested to link:spark-sql-ExtractPythonUDFs.adoc#apply[optimize a physical query plan] (and link:spark-sql-ExtractPythonUDFs.adoc#extract[extracts Python UDFs])
+* `ExtractPythonUDFs` physical optimization is requested to link:spark-sql-ExtractPythonUDFs.adoc#apply[optimize a physical query plan] (and link:spark-sql-ExtractPythonUDFs.adoc#extract[extracts Python UDFs])
 
 [NOTE]
 ====
@@ -50,11 +50,11 @@ mapPartitionsWithIndexInternal[U](
 
 Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` creates an link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection] with the following:
 
-1. <<projectList, Named expressions>>
+. <<projectList, Named expressions>>
 
-1. link:spark-sql-catalyst-QueryPlan.adoc#output[Output] of the <<child, child>> physical operator as the input schema
+. link:spark-sql-catalyst-QueryPlan.adoc#output[Output] of the <<child, child>> physical operator as the input schema
 
-1. link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
+. link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
 
 `doExecute` requests the `UnsafeProjection` to link:spark-sql-Projection.adoc#initialize[initialize] and maps over the internal rows (of a partition) using the projection.
 

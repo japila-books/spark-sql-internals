@@ -9,7 +9,7 @@ Technically, `ResolveWindowFrame` is just a link:spark-sql-catalyst-Rule.adoc[Ca
 [[transformations]]
 `ResolveWindowFrame` takes a link:spark-sql-LogicalPlan.adoc[logical plan] and does the following:
 
-1. Makes sure that the window frame of a `WindowFunction` is unspecified or matches the `SpecifiedWindowFrame` of the link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition] expression.
+. Makes sure that the window frame of a `WindowFunction` is unspecified or matches the `SpecifiedWindowFrame` of the link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition] expression.
 +
 Reports a `AnalysisException` when the frames do not match:
 +
@@ -17,9 +17,9 @@ Reports a `AnalysisException` when the frames do not match:
 Window Frame [f] must match the required frame [frame]
 ```
 
-1. Copies the frame specification of `WindowFunction` to link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
+. Copies the frame specification of `WindowFunction` to link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
 
-1. Creates a new `SpecifiedWindowFrame` for `WindowExpression` with the resolved Catalyst expression and `UnspecifiedFrame`
+. Creates a new `SpecifiedWindowFrame` for `WindowExpression` with the resolved Catalyst expression and `UnspecifiedFrame`
 
 NOTE: `ResolveWindowFrame` is a Scala object inside link:spark-sql-Analyzer.adoc[Analyzer] class.
 

@@ -39,9 +39,9 @@ addExpr(expr: Expression): Boolean
 ====
 `addExpr` is used when:
 
-1. `EquivalentExpressions` is requested to <<addExprTree, addExprTree>>
+* `EquivalentExpressions` is requested to <<addExprTree, addExprTree>>
 
-1. `PhysicalAggregation` is requested to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure an Aggregate logical operator]
+* `PhysicalAggregation` is requested to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure an Aggregate logical operator]
 ====
 
 === [[getAllEquivalentExprs]] Getting Equivalent Sets Of Expressions -- `getAllEquivalentExprs` Method

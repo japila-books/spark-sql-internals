@@ -183,9 +183,9 @@ NOTE: `refresh` is overriden by link:spark-sql-LogicalPlan-LogicalRelation.adoc#
 ====
 `refresh` is used when:
 
-1. `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#refreshTable[refresh a table]
+* `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#refreshTable[refresh a table]
 
-1. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshTable[refresh a table]
+* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshTable[refresh a table]
 ====
 
 === [[resolveQuoted]] `resolveQuoted` Method

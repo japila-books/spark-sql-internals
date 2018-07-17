@@ -4,9 +4,9 @@
 
 `UnresolvedStar` is <<creating-instance, created>> when:
 
-1. `Column` is link:spark-sql-Column.adoc#star[created] with `*`
+* `Column` is link:spark-sql-Column.adoc#star[created] with `*`
 
-1. `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitStar[visitStar]
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitStar[visitStar]
 
 [source, scala]
 ----
@@ -101,9 +101,9 @@ NOTE: `expand` is part of link:spark-sql-Expression-Star.adoc#expand[Star Contra
 
 `expand` first expands to named expressions per <<target, target>>:
 
-1. For unspecified <<target, target>>, `expand` gives the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
+* For unspecified <<target, target>>, `expand` gives the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
 
-1. For <<target, target>> with one element, `expand` gives the table (attribute) in the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (using link:spark-sql-Expression-NamedExpression.adoc#qualifier[qualifiers]) if available
+* For <<target, target>> with one element, `expand` gives the table (attribute) in the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (using link:spark-sql-Expression-NamedExpression.adoc#qualifier[qualifiers]) if available
 
 With no result earlier, `expand` then requests the `input` logical query plan to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>> name parts to a named expression.
 
@@ -131,13 +131,13 @@ scala> getStructFields.foreach(println)
 
 `expand` reports a `AnalysisException` when:
 
-1. The link:spark-sql-Expression.adoc#dataType[data type] of the named expression (when the `input` logical plan was requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>>) is not a link:spark-sql-StructType.adoc[StructType].
+* The link:spark-sql-Expression.adoc#dataType[data type] of the named expression (when the `input` logical plan was requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>>) is not a link:spark-sql-StructType.adoc[StructType].
 +
 ```
 Can only star expand struct data types. Attribute: `[target]`
 ```
 
-1. Earlier attempts gave no results
+* Earlier attempts gave no results
 +
 ```
 cannot resolve '[target].*' given input columns '[from]'

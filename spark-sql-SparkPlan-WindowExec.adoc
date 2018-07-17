@@ -248,8 +248,7 @@ Internally, `doExecute` first takes link:spark-sql-Expression-WindowExpression.a
 [[result]]
 When created, `Iterator[InternalRow]` first creates two link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] conversion functions (to convert `InternalRows` to `UnsafeRows`) as <<createResultProjection, result>> and `grouping`.
 
-[[grouping]]
-NOTE: `grouping` conversion function is link:spark-sql-GenerateUnsafeProjection.adoc#create[created] for <<partitionSpec, window partition specifications expressions>> and used exclusively to create <<nextGroup, nextGroup>> when `Iterator[InternalRow]` is requested <<fetchNextRow, next row>>.
+NOTE: <<grouping, grouping>> conversion function is link:spark-sql-GenerateUnsafeProjection.adoc#create[created] for <<partitionSpec, window partition specifications expressions>> and used exclusively to create <<nextGroup, nextGroup>> when `Iterator[InternalRow]` is requested <<fetchNextRow, next row>>.
 
 [TIP]
 ====

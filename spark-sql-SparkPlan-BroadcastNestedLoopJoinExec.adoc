@@ -2,9 +2,11 @@
 
 `BroadcastNestedLoopJoinExec` is a link:spark-sql-SparkPlan.adoc#BinaryExecNode[binary physical operator] (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] physical plan strategy finds a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator that meets either case:
 
-1. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight] join type and `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
-1. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft] join type and `left` link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
-1. non-``InnerLike`` join type
+* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight] join type and `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
+
+* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft] join type and `left` link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
+
+* non-``InnerLike`` join type
 
 NOTE: `BroadcastNestedLoopJoinExec` is the default physical operator when no other operators have matched link:spark-sql-SparkStrategy-JoinSelection.adoc#join-selection-requirements[selection requirements].
 
@@ -58,14 +60,13 @@ image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[
 | Right Child
 
 | `BuildLeft`
-| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] <1>
+| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
 | link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
 | `BuildRight`
 | link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
-| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] <1>
+| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
 |===
-<1> `BroadcastDistribution` uses `IdentityBroadcastMode` broadcast mode
 
 === [[creating-instance]] Creating BroadcastNestedLoopJoinExec Instance
 

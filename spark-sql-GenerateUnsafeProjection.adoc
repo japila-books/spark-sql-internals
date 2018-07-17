@@ -35,23 +35,23 @@ generate(
 ====
 `generate` is used when:
 
-1. `UnsafeProjection` factory object is requested for a link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection]
+* `UnsafeProjection` factory object is requested for a link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection]
 
-1. `ExpressionEncoder` is requested to link:spark-sql-ExpressionEncoder.adoc#extractProjection[initialize the internal UnsafeProjection]
+* `ExpressionEncoder` is requested to link:spark-sql-ExpressionEncoder.adoc#extractProjection[initialize the internal UnsafeProjection]
 
-1. `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-1. `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-1. `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-1. `GroupedIterator` is requested for `keyProjection`
+* `GroupedIterator` is requested for `keyProjection`
 
-1. `ObjectOperator` is requested to `serializeObjectToRow`
+* `ObjectOperator` is requested to `serializeObjectToRow`
 
-1. (Spark MLlib) `LibSVMFileFormat` is requested to `buildReader`
+* (Spark MLlib) `LibSVMFileFormat` is requested to `buildReader`
 
-1. (Spark Structured Streaming) `StateStoreRestoreExec`, `StateStoreSaveExec` and `StreamingDeduplicateExec` are requested to execute
+* (Spark Structured Streaming) `StateStoreRestoreExec`, `StateStoreSaveExec` and `StreamingDeduplicateExec` are requested to execute
 ====
 
 === [[canonicalize]] `canonicalize` Method

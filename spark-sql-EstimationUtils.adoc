@@ -44,9 +44,9 @@ NOTE: `rowCountsExist` uses `LogicalPlanStats` to access the link:spark-sql-Logi
 ====
 `rowCountsExist` is used when:
 
-1. `AggregateEstimation` is requested to link:spark-sql-AggregateEstimation.adoc#estimate[estimate statistics and query hints of a Aggregate logical operator]
+* `AggregateEstimation` is requested to link:spark-sql-AggregateEstimation.adoc#estimate[estimate statistics and query hints of a Aggregate logical operator]
 
-1. `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimate[estimate statistics and query hints of a Join logical operator] (regardless of the join type)
+* `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimate[estimate statistics and query hints of a Join logical operator] (regardless of the join type)
 
-1. `ProjectEstimation` is requested to link:spark-sql-ProjectEstimation.adoc#estimate[estimate statistics and query hints of a Project logical operator]
+* `ProjectEstimation` is requested to link:spark-sql-ProjectEstimation.adoc#estimate[estimate statistics and query hints of a Project logical operator]
 ====

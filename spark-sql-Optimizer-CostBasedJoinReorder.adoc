@@ -119,10 +119,10 @@ q.collect.foreach(_ => ())
 [CAUTION]
 ====
 FIXME Examples of other join queries
-1. Cross join with join condition
 
-1. Project with attributes only and Inner join with join condition
-1. Project with attributes only and Cross join with join condition
+* Cross join with join condition
+* Project with attributes only and Inner join with join condition
+* Project with attributes only and Cross join with join condition
 ====
 
 `CostBasedJoinReorder` is part of link:spark-sql-Optimizer.adoc#Join-Reorder[Join Reorder] once-executed batch of rules.
@@ -152,9 +152,9 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
 
-1. link:spark-sql-LogicalPlan-Join.adoc[Join] for `CROSS` or `INNER` joins with a join condition
+* link:spark-sql-LogicalPlan-Join.adoc[Join] for `CROSS` or `INNER` joins with a join condition
 
-1. link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
+* link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
 
 === [[reorder]] Reordering Logical Plan with Join Operators -- `reorder` Internal Method
 

@@ -174,21 +174,21 @@ In the end, `statsCache` caches the statistics for later use.
 ====
 `stats` is used when:
 
-1. `JoinSelection` execution planning strategy matches a logical plan:
-  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[that is small enough for broadcast join] (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
-  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[whose a single partition should be small enough to build a hash table] (using `ShuffledHashJoinExec` physical operator)
-  i. link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[that is much smaller (3X) than the other plan] (for `ShuffledHashJoinExec` physical operator)
-  i. ...
+* `JoinSelection` execution planning strategy matches a logical plan:
+  . link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[that is small enough for broadcast join] (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
+  . link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[whose a single partition should be small enough to build a hash table] (using `ShuffledHashJoinExec` physical operator)
+  . link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[that is much smaller (3X) than the other plan] (for `ShuffledHashJoinExec` physical operator)
+  . ...
 
-1. `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
+* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
 
-1. `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset] or link:spark-sql-CacheManager.adoc#recacheByCondition[recacheByCondition]
+* `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset] or link:spark-sql-CacheManager.adoc#recacheByCondition[recacheByCondition]
 
-1. `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
+* `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 
-1. `StarSchemaDetection`
+* `StarSchemaDetection`
 
-1. `CostBasedJoinReorder` is link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#apply[executed] (and does link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#reorder[reordering])
+* `CostBasedJoinReorder` is link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#apply[executed] (and does link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#reorder[reordering])
 ====
 
 === [[invalidateStatsCache]] Invalidating Statistics Cache (of All Operators in Logical Plan) -- `invalidateStatsCache` Method

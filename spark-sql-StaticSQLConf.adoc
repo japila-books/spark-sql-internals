@@ -43,13 +43,13 @@ TIP: Read link:spark-sql-ExternalCatalog.adoc[ExternalCatalog -- Base Metastore 
 
 Used when:
 
-1. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
+. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
 
-1. `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
+. `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
 
-1. `SetCommand` command is executed (with *hive* keys)
+. `SetCommand` command is executed (with *hive* keys)
 
-1. `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
+. `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
 | [[spark.sql.queryExecutionListeners]] `spark.sql.queryExecutionListeners`
 | (empty)

@@ -147,9 +147,9 @@ CAUTION: FIXME
 ====
 `toDF` is used when the following `RelationalGroupedDataset` operators are used:
 
-1. <<agg, agg>> and <<count, count>>
+* <<agg, agg>> and <<count, count>>
 
-1. <<mean, mean>>, <<max, max>>, <<avg, avg>>, <<min, min>> and <<sum, sum>> (indirectly through <<aggregateNumericColumns, aggregateNumericColumns>>)
+* <<mean, mean>>, <<max, max>>, <<avg, avg>>, <<min, min>> and <<sum, sum>> (indirectly through <<aggregateNumericColumns, aggregateNumericColumns>>)
 ====
 
 === [[aggregateNumericColumns]] `aggregateNumericColumns` Internal Method
