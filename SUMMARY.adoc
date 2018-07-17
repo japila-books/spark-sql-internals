@@ -556,6 +556,8 @@
 . link:spark-sql-SubExprUtils.adoc[SubExprUtils Helper Object]
 . link:spark-sql-PredicateHelper.adoc[PredicateHelper Scala Trait]
 
+. link:spark-sql-SchemaUtils.adoc[SchemaUtils Helper Object]
+
 . link:spark-sql-TypeCoercion.adoc[TypeCoercion Object]
 . link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule -- Contract For Type Coercion Rules]
 

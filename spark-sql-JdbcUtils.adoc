@@ -1,9 +1,9 @@
 == [[JdbcUtils]] JdbcUtils Helper Object
 
-`JdbcUtils` is a Scala helper object with <<methods, methods>> for `JDBCRDD`, `JDBCRelation` and `JdbcRelationProvider`.
+`JdbcUtils` is a Scala object with <<methods, methods>> to support link:spark-sql-JDBCRDD.adoc[JDBCRDD], link:spark-sql-JDBCRelation.adoc[JDBCRelation] and link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider].
 
 [[methods]]
-.JdbcUtils's Methods
+.JdbcUtils API
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
@@ -16,8 +16,22 @@ a| Used when:
 
 * `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
 
+| <<createTable, createTable>>
+|
+
+| <<dropTable, dropTable>>
+|
+
+| <<getCommonJDBCType, getCommonJDBCType>>
+|
+
 | <<getCustomSchema, getCustomSchema>>
-| Used when `JDBCRelation` is link:spark-sql-JDBCRelation.adoc#schema[created]
+| Replaces data types in a table schema
+
+Used exclusively when `JDBCRelation` is link:spark-sql-JDBCRelation.adoc#schema[created] (and link:spark-sql-JDBCOptions.adoc#customSchema[customSchema] JDBC option was defined)
+
+| <<getInsertStatement, getInsertStatement>>
+|
 
 | <<getSchema, getSchema>>
 | Used when `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable]
@@ -25,8 +39,14 @@ a| Used when:
 | <<getSchemaOption, getSchemaOption>>
 | Used when `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
 
+| <<resultSetToRows, resultSetToRows>>
+| Used when...FIXME
+
 | <<resultSetToSparkInternalRows, resultSetToSparkInternalRows>>
 | Used when `JDBCRDD` is requested to link:spark-sql-JDBCRDD.adoc#compute[compute a partition]
+
+| <<schemaString, schemaString>>
+|
 
 | <<tableExists, tableExists>>
 | Used when `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
@@ -169,3 +189,79 @@ saveTable(
 `saveTable`...FIXME
 
 NOTE: `saveTable` is used when...FIXME
+
+=== [[getCustomSchema]] Replacing Data Types In Table Schema -- `getCustomSchema` Method
+
+[source, scala]
+----
+getCustomSchema(
+  tableSchema: StructType,
+  customSchema: String,
+  nameEquality: Resolver): StructType
+----
+
+`getCustomSchema` replaces the data type of the fields in the input `tableSchema` link:spark-sql-StructType.adoc[schema] that are included in the input `customSchema` (if defined).
+
+Internally, `getCustomSchema` branches off per the input `customSchema`.
+
+If the input `customSchema` is undefined or empty, `getCustomSchema` simply returns the input `tableSchema` unchanged.
+
+Otherwise, if the input `customSchema` is not empty, `getCustomSchema` requests `CatalystSqlParser` to link:spark-sql-AbstractSqlParser.adoc#parseTableSchema[parse it] (i.e. create a new link:spark-sql-StructType.adoc[StructType] for the given `customSchema` canonical schema representation).
+
+`getCustomSchema` then uses `SchemaUtils` to link:spark-sql-SchemaUtils.adoc#checkColumnNameDuplication[checkColumnNameDuplication] (in the column names of the user-defined `customSchema` schema with the input `nameEquality`).
+
+In the end, `getCustomSchema` replaces the data type of the fields in the input `tableSchema` that are included in the input `userSchema`.
+
+NOTE: `getCustomSchema` is used exclusively when `JDBCRelation` is link:spark-sql-JDBCRelation.adoc#schema[created] (and link:spark-sql-JDBCOptions.adoc#customSchema[customSchema] JDBC option was defined).
+
+=== [[dropTable]] `dropTable` Method
+
+[source, scala]
+----
+dropTable(conn: Connection, table: String): Unit
+----
+
+`dropTable`...FIXME
+
+NOTE: `dropTable` is used when...FIXME
+
+=== [[createTable]] `createTable` Method
+
+[source, scala]
+----
+createTable(
+  conn: Connection,
+  df: DataFrame,
+  options: JDBCOptions): Unit
+----
+
+`createTable`...FIXME
+
+NOTE: `createTable` is used when...FIXME
+
+=== [[getInsertStatement]] `getInsertStatement` Method
+
+[source, scala]
+----
+getInsertStatement(
+  table: String,
+  rddSchema: StructType,
+  tableSchema: Option[StructType],
+  isCaseSensitive: Boolean,
+  dialect: JdbcDialect): String
+----
+
+`getInsertStatement`...FIXME
+
+NOTE: `getInsertStatement` is used when...FIXME
+
+=== [[getJdbcType]] `getJdbcType` Internal Method
+
+[source, scala]
+----
+getJdbcType(dt: DataType, dialect: JdbcDialect): JdbcType
+----
+
+`getJdbcType`...FIXME
+
+NOTE: `getJdbcType` is used when...FIXME

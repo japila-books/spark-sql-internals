@@ -1,6 +1,6 @@
 == [[RDDConversions]] RDDConversions Helper Object
 
-`RDDConversions` is a helper object with <<productToRowRdd, productToRowRdd>> and <<rowToRowRdd, rowToRowRdd>> methods.
+`RDDConversions` is a Scala object that is used to <<productToRowRdd, productToRowRdd>> and <<rowToRowRdd, rowToRowRdd>> methods.
 
 === [[productToRowRdd]] `productToRowRdd` Method
 
