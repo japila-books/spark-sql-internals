@@ -160,7 +160,7 @@
 
 . link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
 
-. link:spark-sql-Filter.adoc[Filter Predicate for Data Sources (For Filter Pushdown)]
+. link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
 
 . link:spark-sql-FileRelation.adoc[FileRelation]
 

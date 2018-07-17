@@ -1,4 +1,4 @@
-== [[Filter]] Filter Predicate for Data Sources (For Filter Pushdown)
+== [[Filter]] Data Source Filter Predicate (For Filter Pushdown)
 
 `Filter` is the <<contract, contract>> for <<implementations, filter predicates>> that can be pushed down to a relation (aka _data source_).
 

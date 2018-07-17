@@ -8,7 +8,7 @@
 [cols="1,2",options="header",width="100%"]
 |===
 | Logical Operator
-| Selection Requirements
+| Description
 
 | [[CatalystScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-CatalystScan.adoc[CatalystScan] relation
 | Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>>
@@ -16,19 +16,19 @@
 `CatalystScan` does not seem to be used in Spark SQL.
 
 | [[PrunedFilteredScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] relation
-a| Uses <<pruneFilterProject, pruneFilterProject>>
+| Uses <<pruneFilterProject, pruneFilterProject>>
 
-NOTE: Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively (as a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan])
+Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively
 
 | [[PrunedScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-PrunedScan.adoc[PrunedScan] relation
-a| Uses <<pruneFilterProject, pruneFilterProject>>
+| Uses <<pruneFilterProject, pruneFilterProject>>
 
-NOTE: `PrunedScan` does not seem to be used in Spark SQL.
+`PrunedScan` does not seem to be used in Spark SQL.
 
 | [[TableScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-TableScan.adoc[TableScan] relation
-a|
+a| Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] and <<toCatalystRDD, converting the result to Catalyst RDD>>)
 
-NOTE: Matches `KafkaRelation` exclusively (as a link:spark-sql-TableScan.adoc[TableScan])
+Matches `KafkaRelation` exclusively
 |===
 
 [source, scala]
@@ -59,7 +59,7 @@ pruneFilterProject(
 
 NOTE: `pruneFilterProject` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators with a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] or a link:spark-sql-PrunedScan.adoc[PrunedScan]).
 
-=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec (under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
+=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec Physical Operator (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
 
 [source, scala]
 ----
@@ -70,11 +70,13 @@ pruneFilterProjectRaw(
   scanBuilder: (Seq[Attribute], Seq[Expression], Seq[Filter]) => RDD[InternalRow]): SparkPlan
 ----
 
-`pruneFilterProjectRaw` creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec] (possibly as a child of a `FilterExec` and a `ProjectExec`).
+`pruneFilterProjectRaw` creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] leaf physical operator (possibly as a child of a `FilterExec` and a `ProjectExec` physical operators).
 
-NOTE: `pruneFilterProjectRaw` is used exclusively when `DataSourceStrategy` execution planning strategy is <<apply, executed>> and <<pruneFilterProject, pruneFilterProject>>.
+Internally, `pruneFilterProjectRaw`...FIXME
 
-=== [[selectFilters]] `selectFilters` Method
+NOTE: `pruneFilterProjectRaw` is used exclusively when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for a `LogicalRelation` with a `CatalystScan` relation) and <<pruneFilterProject, pruneFilterProject>> (when <<apply, executed>> for a `LogicalRelation` with a `PrunedFilteredScan` or a `PrunedScan` relation).
+
+=== [[selectFilters]] Selecting Catalyst Expressions Convertible to Data Source Filter Predicates (and Handled by BaseRelation) -- `selectFilters` Method
 
 [source, scala]
 ----
@@ -83,9 +85,19 @@ selectFilters(
   predicates: Seq[Expression]): (Seq[Expression], Seq[Filter], Set[Filter])
 ----
 
-`selectFilters`...FIXME
+`selectFilters` builds a map of link:spark-sql-Expression.adoc[Catalyst predicate expressions] (from the input `predicates`) that can be <<translateFilter, translated>> to a link:spark-sql-Filter.adoc[data source filter predicate].
 
-NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<pruneFilterProjectRaw, create a RowDataSourceScanExec (possibly under FilterExec and ProjectExec operators)>> (which is when `DataSourceStrategy` is <<apply, executed>> and <<pruneFilterProject, pruneFilterProject>>).
+`selectFilters` then requests the input `BaseRelation` for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filters] (out of the convertible ones that `selectFilters` built the map with).
+
+In the end, `selectFilters` returns a tuple with the following fields:
+
+. Nonconvertible and unhandled Catalyst predicate expressions
+
+. All converted data source filters
+
+. Pushed-down data source filters (that the input `BaseRelation` can handle)
+
+NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<pruneFilterProjectRaw, create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)>> (which is when `DataSourceStrategy` is <<apply, executed>> and <<pruneFilterProject, pruneFilterProject>>).
 
 === [[translateFilter]] Translating Catalyst Expression Into Data Source Filter Predicate -- `translateFilter` Method
 
