@@ -175,10 +175,11 @@
 . link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
 
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
-. link:spark-sql-PrunedScan.adoc[PrunedScan]
-. link:spark-sql-TableScan.adoc[TableScan]
-. link:spark-sql-CatalystScan.adoc[CatalystScan]
+. link:spark-sql-CatalystScan.adoc[CatalystScan Contract]
+. <<spark-sql-InsertableRelation.adoc, InsertableRelation Contract -- Relations with Inserting or Overwriting Data>>
+. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
+. link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
+. link:spark-sql-TableScan.adoc[TableScan Contract]
 
 === Data Source API V2
 

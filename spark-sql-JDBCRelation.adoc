@@ -1,12 +1,21 @@
-== [[JDBCRelation]] JDBCRelation
+== [[JDBCRelation]] JDBCRelation -- Relation with Inserting or Overwriting Data, Column Pruning and Filter Pushdown
 
-`JDBCRelation` is a link:spark-sql-BaseRelation.adoc[BaseRelation] with support for <<InsertableRelation, InsertableRelation>> and <<PrunedFilteredScan, PrunedFilteredScan>>.
+`JDBCRelation` is a <<BaseRelation, relation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
+
+[[BaseRelation]]
+As a <<spark-sql-BaseRelation.adoc#,BaseRelation>>, `JDBCRelation` defines the <<schema, schema of tuples (data)>> and the <<sqlContext, SQLContext>>.
+
+[[InsertableRelation]]
+As a <<spark-sql-InsertableRelation.adoc#,InsertableRelation>>, `JDBCRelation` supports <<insert, inserting or overwriting data>>.
+
+[[PrunedFilteredScan]]
+As a <<spark-sql-PrunedFilteredScan.adoc#,PrunedFilteredScan>>, `JDBCRelation` supports <<buildScan, building distributed data scan with column pruning and filter pushdown>>.
 
 `JDBCRelation` is <<creating-instance, created>> when:
 
-* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#jdbc[load data from external table using JDBC] (with `predicates` for `WHERE` clause per partition)
+* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#jdbc[load data from an external table using JDBC]
 
-* `JdbcRelationProvider` link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[creates a BaseRelation]
+* `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a BaseRelation]
 
 [[toString]]
 When requested for a text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
@@ -27,43 +36,14 @@ scala> df.explain
 [[sqlContext]]
 `JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:spark-sql-SparkSession.adoc#sqlContext[SQLContext].
 
-=== [[PrunedFilteredScan]] JDBCRelation as PrunedFilteredScan
-
-`JDBCRelation` is a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan].
-
-.JDBCRelation as PrunedFilteredScan
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[buildScan]] `buildScan`
-| FIXME
-|===
-
-=== [[InsertableRelation]] JDBCRelation as InsertableRelation
-
-`JDBCRelation` is a `InsertableRelation`.
-
-.JDBCRelation as InsertableRelation
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[insert]] `insert`
-| FIXME
-|===
-
-=== [[columnPartition]] `columnPartition` Method
-
-CAUTION: FIXME Is this still in use?
+[[needConversion]]
+`JDBCRelation` turns the `needConversion` flag off, i.e. FIXME
 
 === [[creating-instance]] Creating JDBCRelation Instance
 
 `JDBCRelation` takes the following when created:
 
-* [[parts]] RDD link:spark-rdd-partitions.adoc[partitions]
+* [[parts]] Array of Spark Core's `Partitions`
 * [[jdbcOptions]] link:spark-sql-JDBCOptions.adoc[JDBCOptions]
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 
@@ -78,15 +58,37 @@ NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFi
 
 `unhandledFilters`...FIXME
 
-=== [[schema]] Relation Schema -- `schema` Property
+=== [[schema]] Schema of Tuples (Data) -- `schema` Property
 
 [source, scala]
 ----
 schema: StructType
 ----
 
-NOTE: `schema` is part of link:spark-sql-BaseRelation.adoc#schema[BaseRelation Contract] to return the link:spark-sql-StructType.adoc[schema] of a relation.
+NOTE: `schema` is part of link:spark-sql-BaseRelation.adoc#schema[BaseRelation Contract] to return the link:spark-sql-StructType.adoc[schema] of the tuples in a relation.
 
 `schema` uses `JDBCRDD` to link:spark-sql-JDBCRDD.adoc#resolveTable[resolveTable] given the <<jdbcOptions, JDBCOptions>> (that simply returns the link:spark-sql-StructType.adoc[Catalyst schema] of the table, also known as the default table schema).
 
 If link:spark-sql-JDBCOptions.adoc#customSchema[customSchema] JDBC option was defined, `schema` uses `JdbcUtils` to link:spark-sql-JdbcUtils.adoc#getCustomSchema[replace the data types in the default table schema].
+
+=== [[insert]] Inserting or Overwriting Data -- `insert` Method
+
+[source, scala]
+----
+insert(data: DataFrame, overwrite: Boolean): Unit
+----
+
+NOTE: `insert` is part of <<spark-sql-InsertableRelation.adoc#insert, InsertableRelation Contract>> that inserts or overwrites data in a relation.
+
+`insert`...FIXME
+
+=== [[buildScan]] Building Distributed Data Scan with Column Pruning and Filter Pushdown -- `buildScan` Method
+
+[source, scala]
+----
+buildScan(requiredColumns: Array[String], filters: Array[Filter]): RDD[Row]
+----
+
+NOTE: `buildScan` is part of <<spark-sql-PrunedFilteredScan.adoc#buildScan, PrunedFilteredScan Contract>> to build a distributed data scan (as a `RDD[Row]`) with support for column pruning and filter pushdown.
+
+`buildScan`...FIXME

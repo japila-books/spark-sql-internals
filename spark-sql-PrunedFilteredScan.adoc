@@ -1,9 +1,8 @@
-== [[PrunedFilteredScan]] PrunedFilteredScan -- Contract for Relations with Column Pruning and Filter Pushdown
+== [[PrunedFilteredScan]] PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown
 
-`PrunedFilteredScan` is the <<contract, contract>> in Spark SQL for link:spark-sql-BaseRelation.adoc[relations] (aka _data sources_) that can <<buildScan, eliminate unneeded columns>> (aka _column pruning_) and <<buildScan, filter using selected predicates only>> (aka _filter pushdown_).
+`PrunedFilteredScan` is the <<contract, contract>> of <<implementations, BaseRelations>> with support for <<buildScan, column pruning>> (i.e. eliminating unneeded columns) and <<buildScan, filter pushdown>> (i.e. filtering using selected predicates only).
 
 [[contract]]
-[[buildScan]]
 [source, scala]
 ----
 package org.apache.spark.sql.sources
@@ -13,8 +12,26 @@ trait PrunedFilteredScan {
 }
 ----
 
-`PrunedFilteredScan` is used exclusively when `DataSourceStrategy` execution planning strategy link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#PrunedFilteredScan[plans scans] over `LogicalRelations` with support for `PrunedFilteredScans`.
+.PrunedFilteredScan Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Property
+| Description
 
+| `buildScan`
+| [[buildScan]] Building Distributed Data Scan with Column Pruning and Filter Pushdown
+
+In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data scan (i.e. scanning over data in a relation)
+
+Used exclusively when `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#PrunedFilteredScan[plan a LogicalRelation with a PrunedFilteredScan].
+|===
+
+NOTE: `PrunedFilteredScan` is a "lighter" and stable version of the <<spark-sql-CatalystScan.adoc#, CatalystScan Contract>>.
+
+[[implementations]]
+NOTE: <<spark-sql-JDBCRelation.adoc#,JDBCRelation>> is the one and only known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+
+[[example]]
 [source, scala]
 ----
 // Use :paste to define MyBaseRelation case class
@@ -54,7 +71,3 @@ val sparkPlan = strategy(plan).head
 scala> println(sparkPlan.numberedTreeString)
 00 Scan MyBaseRelation(org.apache.spark.sql.SQLContext@4a57ad67) [a#8] PushedFilters: [], ReadSchema: struct<a:string>
 ----
-
-NOTE: The only known implementation of `PrunedFilteredScan` contract in Spark SQL is link:spark-sql-JDBCRelation.adoc[JDBCRelation].
-
-NOTE: `PrunedFilteredScan` is a "lighter" and stable version of `CatalystScan` contract.

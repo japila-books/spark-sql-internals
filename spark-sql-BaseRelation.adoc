@@ -1,6 +1,6 @@
 == [[BaseRelation]] BaseRelation -- Collection of Tuples with Schema
 
-`BaseRelation` is the <<contract, contract>> of <<implementations, collections of tuples>> with a known <<schema, schema>>.
+`BaseRelation` is the <<contract, contract>> of <<implementations, relations>> (aka _collections of tuples_) with a known <<schema, schema>>.
 
 NOTE: "Data source", "relation" and "table" are often used as synonyms.
 
@@ -10,7 +10,8 @@ NOTE: "Data source", "relation" and "table" are often used as synonyms.
 package org.apache.spark.sql.sources
 
 abstract class BaseRelation {
-  // only required methods that have no implementation
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
   def schema: StructType
   def sqlContext: SQLContext
 }

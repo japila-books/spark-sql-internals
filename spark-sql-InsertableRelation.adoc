@@ -1,0 +1,28 @@
+== [[InsertableRelation]] InsertableRelation Contract -- Relations with Inserting or Overwriting Data
+
+`InsertableRelation` is the <<contract, contract>> of <<implementations, BaseRelations>> with support for <<insert, inserting or overwriting data>>.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.sources
+
+trait InsertableRelation {
+  def insert(data: DataFrame, overwrite: Boolean): Unit
+}
+----
+
+.InsertableRelation Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Property
+| Description
+
+| `insert`
+| [[insert]] Inserting or overwriting data in a relation
+
+Used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run,executed>>
+|===
+
+[[implementations]]
+NOTE: <<spark-sql-JDBCRelation.adoc#,JDBCRelation>> is the one and only known direct implementation of <<contract, InsertableRelation Contract>> in Spark SQL.
