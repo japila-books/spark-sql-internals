@@ -1,19 +1,14 @@
-== [[SchemaRelationProvider]] SchemaRelationProvider -- Data Sources With Mandatory User-Defined Schema
+== [[SchemaRelationProvider]] SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema
 
-`SchemaRelationProvider` is a <<contract, contract>> for link:spark-sql-DataSource.adoc#providers[data source providers] that <<createRelation, require a user-defined schema>>.
+`SchemaRelationProvider` is the <<contract, contract>> of <<implementations, BaseRelation providers>> that <<createRelation, require a user-defined schema while creating a relation>>.
 
-`SchemaRelationProvider` is used exclusively when:
+The requirement of specifying a user-defined schema is enforced when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format. If not specified, `DataSource` throws a `AnalysisException`:
 
-* `DataSource` is <<resolveRelation, requested for a BaseRelation>> for a data source
+```
+A schema needs to be specified when using [className].
+```
 
-NOTE: link:spark-sql-BaseRelation.adoc[BaseRelation] models a collection of tuples from an external data source with a schema.
-
-TIP: Use link:spark-sql-RelationProvider.adoc[RelationProvider] for data source providers with schema inference.
-
-TIP: Use both `SchemaRelationProvider` and link:spark-sql-RelationProvider.adoc[RelationProvider] if a data source can support both schema inference and user-defined schemas.
-
-=== [[contract]] SchemaRelationProvider Contract
-
+[[contract]]
 [source, scala]
 ----
 package org.apache.spark.sql.sources
@@ -32,6 +27,15 @@ trait SchemaRelationProvider {
 | Method
 | Description
 
-| [[createRelation]] `createRelation`
-| Creates a link:spark-sql-BaseRelation.adoc[BaseRelation] for the `parameters` and user-defined `schema`
+| `createRelation`
+| [[createRelation]] Creates a link:spark-sql-BaseRelation.adoc[BaseRelation] for the user-defined schema
+
+Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format
 |===
+
+[[implementations]]
+NOTE: There are no known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+
+TIP: Use link:spark-sql-RelationProvider.adoc[RelationProvider] for data source providers with schema inference.
+
+TIP: Use both `SchemaRelationProvider` and link:spark-sql-RelationProvider.adoc[RelationProvider] if a data source should support both schema inference and user-defined schemas.

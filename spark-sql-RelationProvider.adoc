@@ -1,33 +1,16 @@
-== [[RelationProvider]] RelationProvider -- Data Sources With Schema Inference
+== [[RelationProvider]] RelationProvider Contract -- Relation Providers With Schema Inference
 
-`RelationProvider` is a <<contract, contract>> for link:spark-sql-DataSource.adoc#providers[data source providers] that <<createRelation, support schema inference>> (and also can be accessed using SQL's USING clause, i.e. in `CREATE TEMPORARY VIEW` and `DROP DATABASE` DDL operators).
+`RelationProvider` is the <<contract, contract>> of <<implementations, BaseRelation providers>> that <<createRelation, create a relation with schema inference>>.
 
 NOTE: *Schema inference* is also called *schema discovery*.
 
-`RelationProvider` is used exclusively when:
+The requirement of not specifying a user-defined schema or having one that does not match the relation is enforced when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format. If specified and does not match, `DataSource` throws a `AnalysisException`:
 
-* `DataSource` <<resolveRelation, creates a BaseRelation>> (with no user-defined schema or the user-defined schema matches ``RelationProvider``'s)
+```
+[className] does not allow user-specified schemas.
+```
 
-NOTE: link:spark-sql-BaseRelation.adoc[BaseRelation] models a collection of tuples from an external data source with a schema.
-
-[[implementations]]
-.RelationProviders
-[width="100%",cols="1,2",options="header"]
-|===
-| RelationProvider
-| Description
-
-| link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-|
-
-| link:spark-sql-DataSourceRegister-KafkaSourceProvider.adoc[KafkaSourceProvider]
-|
-|===
-
-TIP: Use link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider] for relation providers that require a user-defined schema.
-
-=== [[contract]] RelationProvider Contract
-
+[[contract]]
 [source, scala]
 ----
 package org.apache.spark.sql.sources
@@ -45,6 +28,24 @@ trait RelationProvider {
 | Method
 | Description
 
-| [[createRelation]] `createRelation`
-| Accepts optional parameters (from SQL's `OPTIONS` clause)
+| `createRelation`
+| [[createRelation]] Creates a link:spark-sql-BaseRelation.adoc[BaseRelation]
+
+Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format (and no user-defined schema or the user-defined schema matches <<spark-sql-BaseRelation.adoc#schema, schema>> of the `BaseRelation`)
 |===
+
+[[implementations]]
+.RelationProviders
+[width="100%",cols="1,2",options="header"]
+|===
+| RelationProvider
+| Description
+
+| link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
+| [[JdbcRelationProvider]]
+
+| link:spark-sql-DataSourceRegister-KafkaSourceProvider.adoc[KafkaSourceProvider]
+| [[KafkaSourceProvider]]
+|===
+
+TIP: Use link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider] for relation providers that require a user-defined schema.

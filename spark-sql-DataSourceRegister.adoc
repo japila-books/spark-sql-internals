@@ -1,4 +1,4 @@
-== [[DataSourceRegister]] DataSourceRegister -- Interface for Registering Data Source Format
+== [[DataSourceRegister]] DataSourceRegister Contract -- Registering Data Source Format
 
 [[shortName]]
 `DataSourceRegister` is a <<contract, contract>> to register a link:spark-sql-DataSource.adoc[DataSource] provider under `shortName` alias (so it can be link:spark-sql-DataSource.adoc#lookupDataSource[looked up] by the alias not its fully-qualified class name).

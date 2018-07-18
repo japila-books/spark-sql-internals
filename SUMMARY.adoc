@@ -137,14 +137,24 @@
 
 . link:spark-sql-subqueries.adoc[Subqueries]
 
-== Extending Spark SQL
+== Extending Spark SQL / Data Source API V1
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
-.. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode]
-.. link:spark-sql-RelationProvider.adoc[RelationProvider -- Data Sources With Schema Inference]
-.. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider -- Data Sources With Mandatory User-Defined Schema]
 
-. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister -- Interface for Registering Data Source Format]
+. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider Contract -- Data Sources That Save Rows Per Save Mode]
+. link:spark-sql-RelationProvider.adoc[RelationProvider Contract -- Relation Providers With Schema Inference]
+. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema]
+
+. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister Contract -- Registering Data Source Format]
+
+. link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
+.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
+
+. link:spark-sql-CatalystScan.adoc[CatalystScan Contract]
+. link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Relations with Inserting or Overwriting Data]
+. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
+. link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
+. link:spark-sql-TableScan.adoc[TableScan Contract]
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
 .. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
@@ -169,17 +179,6 @@
 . link:spark-sql-hint-framework.adoc[Hint Framework]
 
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
-
-=== Data Source API V1
-
-. link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
-.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
-
-. link:spark-sql-CatalystScan.adoc[CatalystScan Contract]
-. link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Relations with Inserting or Overwriting Data]
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
-. link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
-. link:spark-sql-TableScan.adoc[TableScan Contract]
 
 === Data Source API V2
 

@@ -1,4 +1,4 @@
-== [[CreatableRelationProvider]] CreatableRelationProvider -- Data Sources That Save Rows Per Save Mode
+== [[CreatableRelationProvider]] CreatableRelationProvider Contract -- Data Sources That Save Rows Per Save Mode
 
 `CreatableRelationProvider` is a <<contract, contract>> for link:spark-sql-DataSource.adoc#providers[data source providers] that <<createRelation, save the result of a structured query per save mode and return the schema>>.
 
