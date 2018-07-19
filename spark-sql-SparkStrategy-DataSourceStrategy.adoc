@@ -1,6 +1,6 @@
 == [[DataSourceStrategy]] DataSourceStrategy Execution Planning Strategy
 
-`DataSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that plans link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators as link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec] physical operators (possibly under `FilterExec` and `ProjectExec` operators).
+`DataSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that <<apply, plans LogicalRelation logical operators as RowDataSourceScanExec physical operators>> (possibly under `FilterExec` and `ProjectExec` operators).
 
 [[apply]]
 [[selection-requirements]]

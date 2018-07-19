@@ -39,8 +39,11 @@
 | [[Project]] `Project`
 | [[ProjectExec]] `ProjectExec`
 
-| `Filter` | `FilterExec`
-| `TypedFilter` | `FilterExec`
+| [[Filter]] `Filter`
+| <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>>
+
+| [[TypedFilter]] `TypedFilter`
+| <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>>
 
 | [[Expand]] link:spark-sql-LogicalPlan-Expand.adoc[Expand]
 | `ExpandExec`

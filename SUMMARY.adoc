@@ -355,6 +355,7 @@
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
 . link:spark-sql-LogicalPlan-Sort.adoc[Sort]
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
+. link:spark-sql-LogicalPlan-TypedFilter.adoc[TypedFilter]
 . link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint]
 . link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 . link:spark-sql-LogicalPlan-Window.adoc[Window]

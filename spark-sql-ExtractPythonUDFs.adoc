@@ -17,3 +17,14 @@ extract(plan: SparkPlan): SparkPlan
 `extract`...FIXME
 
 NOTE: `extract` is used exclusively when `ExtractPythonUDFs` is requested to <<apply, optimize a physical query plan>>.
+
+=== [[trySplitFilter]] `trySplitFilter` Internal Method
+
+[source, scala]
+----
+trySplitFilter(plan: SparkPlan): SparkPlan
+----
+
+`trySplitFilter`...FIXME
+
+NOTE: `trySplitFilter` is used exclusively when `ExtractPythonUDFs` is requested to <<extract, extract>>.

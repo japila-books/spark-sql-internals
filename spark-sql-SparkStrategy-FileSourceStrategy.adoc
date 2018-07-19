@@ -99,6 +99,6 @@ Output Data Schema: [outputSchema]
 
 `apply` creates a link:spark-sql-SparkPlan-FileSourceScanExec.adoc#creating-instance[FileSourceScanExec] physical operator.
 
-If there are any `afterScanFilter` predicate expressions, `apply` creates a `FilterExec` physical operator with them and the `FileSourceScanExec` operator.
+If there are any `afterScanFilter` predicate expressions, `apply` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
 
-If the output of the FilterExec physical operator is not the `projects` expressions, `apply` creates a link:spark-sql-SparkPlan-ProjectExec.adoc#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
+If the <<spark-sql-SparkPlan-FilterExec.adoc#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a link:spark-sql-SparkPlan-ProjectExec.adoc#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
