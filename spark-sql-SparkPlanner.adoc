@@ -1,4 +1,4 @@
-== [[SparkPlanner]] SparkPlanner -- Query Planner
+== [[SparkPlanner]] SparkPlanner -- Spark Query Planner
 
 `SparkPlanner` is a concrete link:spark-sql-catalyst-QueryPlanner.adoc[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:spark-sql-SparkPlan.adoc[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
 
@@ -110,7 +110,7 @@ prunePlans(plans: Iterator[SparkPlan]): Iterator[SparkPlan]
 
 NOTE: `prunePlans` is part of link:spark-sql-catalyst-QueryPlanner.adoc#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
 
-=== [[pruneFilterProject]] `pruneFilterProject` Method
+=== [[pruneFilterProject]] Creating Physical Operator (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProject` Method
 
 [source, scala]
 ----
@@ -121,6 +121,33 @@ pruneFilterProject(
   scanBuilder: Seq[Attribute] => SparkPlan): SparkPlan
 ----
 
-`pruneFilterProject`...FIXME
+NOTE: `pruneFilterProject` is almost like <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw, DataSourceStrategy.pruneFilterProjectRaw>>.
 
-NOTE: `pruneFilterProject` is a helper method used when link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed.
+`pruneFilterProject` branches off per whether it is possible to use a column pruning only (to get the right projection) and the input `projectList` columns of this projection are enough to evaluate all input `filterPredicates` filter conditions.
+
+If so, `pruneFilterProject` does the following:
+
+. Applies the input `scanBuilder` function to the input `projectList` columns that creates a new <<spark-sql-SparkPlan.adoc#, physical operator>>
+
+. If there are Catalyst predicate expressions in the input `prunePushedDownFilters` that cannot be pushed down, `pruneFilterProject` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions)
+
+. Otherwise, `pruneFilterProject` simply returns the physical operator
+
+NOTE: In this case no extra <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> unary physical operator is created.
+
+If not (i.e. it is neither possible to use a column pruning only nor evaluate filter conditions), `pruneFilterProject` does the following:
+
+. Applies the input `scanBuilder` function to the projection and filtering columns that creates a new <<spark-sql-SparkPlan.adoc#, physical operator>>
+
+. Creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions if available)
+
+. Creates a <<spark-sql-SparkPlan-ProjectExec.adoc#creating-instance, ProjectExec>> unary physical operator with the optional `FilterExec` operator (with the scan physical operator) or simply the scan physical operator alone
+
+[NOTE]
+====
+`pruneFilterProject` is used when:
+
+* `HiveTableScans` execution planning strategy is <<spark-sql-SparkStrategy-HiveTableScans.adoc#apply, executed>> (to plan <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>> leaf logical operators)
+
+* `InMemoryScans` execution planning strategy is <<spark-sql-SparkStrategy-InMemoryScans.adoc#apply, executed>> (to plan <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators)
+====

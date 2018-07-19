@@ -197,6 +197,8 @@ pruneFilterProjectRaw(
 
 In other words, `pruneFilterProjectRaw` simply converts a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> leaf logical operator into a <<spark-sql-SparkPlan-RowDataSourceScanExec.adoc#, RowDataSourceScanExec>> leaf physical operator (possibly under a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> and a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> unary physical operators).
 
+NOTE: `pruneFilterProjectRaw` is almost like <<spark-sql-SparkPlanner.adoc#pruneFilterProject, SparkPlanner.pruneFilterProject>>.
+
 Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressions to <<selectFilters, select the Catalyst expressions that can be converted to data source filter predicates>> (and handled by the <<spark-sql-LogicalPlan-LogicalRelation.adoc#relation, BaseRelation>> of the `LogicalRelation`).
 
 `pruneFilterProjectRaw` combines all expressions that are neither convertible to data source filters nor can be handled by the relation using `And` binary expression (that creates a so-called `filterCondition` that will eventually be used to create a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> physical operator if non-empty).

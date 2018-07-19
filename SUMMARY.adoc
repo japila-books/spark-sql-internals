@@ -226,7 +226,7 @@
 . link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
 .. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
 
-. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Query Planner]
+. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Spark Query Planner]
 .. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
 .. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
 
