@@ -1,0 +1,16 @@
+== [[FilterExec]] FilterExec Unary Physical Operator
+
+`FilterExec` is a <<spark-sql-SparkPlan.adoc#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that...FIXME
+
+`FilterExec` supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> (aka _codegen_).
+
+`FilterExec` is <<creating-instance, created>> when:
+
+* ...FIXME
+
+=== [[creating-instance]] Creating FilterExec Instance
+
+`FilterExec` takes the following when created:
+
+* [[condition]] Catalyst expression for the filter condition
+* [[child]] Child <<spark-sql-SparkPlan.adoc#, physical operator>>

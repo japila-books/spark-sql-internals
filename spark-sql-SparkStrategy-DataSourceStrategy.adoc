@@ -59,23 +59,6 @@ pruneFilterProject(
 
 NOTE: `pruneFilterProject` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators with a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] or a link:spark-sql-PrunedScan.adoc[PrunedScan]).
 
-=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec Physical Operator (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
-
-[source, scala]
-----
-pruneFilterProjectRaw(
-  relation: LogicalRelation,
-  projects: Seq[NamedExpression],
-  filterPredicates: Seq[Expression],
-  scanBuilder: (Seq[Attribute], Seq[Expression], Seq[Filter]) => RDD[InternalRow]): SparkPlan
-----
-
-`pruneFilterProjectRaw` creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] leaf physical operator (possibly as a child of a `FilterExec` and a `ProjectExec` physical operators).
-
-Internally, `pruneFilterProjectRaw`...FIXME
-
-NOTE: `pruneFilterProjectRaw` is used exclusively when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for a `LogicalRelation` with a `CatalystScan` relation) and <<pruneFilterProject, pruneFilterProject>> (when <<apply, executed>> for a `LogicalRelation` with a `PrunedFilteredScan` or a `PrunedScan` relation).
-
 === [[selectFilters]] Selecting Catalyst Expressions Convertible to Data Source Filter Predicates (and Handled by BaseRelation) -- `selectFilters` Method
 
 [source, scala]
@@ -89,9 +72,9 @@ selectFilters(
 
 `selectFilters` then requests the input `BaseRelation` for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filters] (out of the convertible ones that `selectFilters` built the map with).
 
-In the end, `selectFilters` returns a tuple with the following fields:
+In the end, `selectFilters` returns a 3-element tuple with the following:
 
-. Nonconvertible and unhandled Catalyst predicate expressions
+. Inconvertible and unhandled Catalyst predicate expressions
 
 . All converted data source filters
 
@@ -198,3 +181,32 @@ Otherwise, `toCatalystRDD` simply casts the input `RDD[Row]` to a `RDD[InternalR
 NOTE: link:spark-sql-BaseRelation.adoc#needConversion[needConversion] flag is enabled (`true`) by default.
 
 NOTE: `toCatalystRDD` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>>.
+
+=== [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec Physical Operator for LogicalRelation (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
+
+[source, scala]
+----
+pruneFilterProjectRaw(
+  relation: LogicalRelation,
+  projects: Seq[NamedExpression],
+  filterPredicates: Seq[Expression],
+  scanBuilder: (Seq[Attribute], Seq[Expression], Seq[Filter]) => RDD[InternalRow]): SparkPlan
+----
+
+`pruneFilterProjectRaw` creates a <<spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance, RowDataSourceScanExec>> leaf physical operator given a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> leaf logical operator (possibly as a child of a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> and a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> unary physical operators).
+
+In other words, `pruneFilterProjectRaw` simply converts a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> leaf logical operator into a <<spark-sql-SparkPlan-RowDataSourceScanExec.adoc#, RowDataSourceScanExec>> leaf physical operator (possibly under a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> and a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> unary physical operators).
+
+Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressions to <<selectFilters, select the Catalyst expressions that can be converted to data source filter predicates>> (and handled by the <<spark-sql-LogicalPlan-LogicalRelation.adoc#relation, BaseRelation>> of the `LogicalRelation`).
+
+`pruneFilterProjectRaw` combines all expressions that are neither convertible to data source filters nor can be handled by the relation using `And` binary expression (that creates a so-called `filterCondition` that will eventually be used to create a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> physical operator if non-empty).
+
+`pruneFilterProjectRaw` creates a <<spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance, RowDataSourceScanExec>> leaf physical operator.
+
+If it is possible to use a column pruning only to get the right projection and if the columns of this projection are enough to evaluate all filter conditions, `pruneFilterProjectRaw` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions and the `RowDataSourceScanExec` leaf physical operator as the child).
+
+NOTE: In this case no extra <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> unary physical operator is created.
+
+Otherwise, `pruneFilterProjectRaw` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions and the `RowDataSourceScanExec` leaf physical operator as the child) that in turn becomes the <<spark-sql-SparkPlan-ProjectExec.adoc#child, child>> of a new <<spark-sql-SparkPlan-ProjectExec.adoc#creating-instance, ProjectExec>> unary physical operator.
+
+NOTE: `pruneFilterProjectRaw` is used exclusively when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for a `LogicalRelation` with a `CatalystScan` relation) and <<pruneFilterProject, pruneFilterProject>> (when <<apply, executed>> for a `LogicalRelation` with a `PrunedFilteredScan` or a `PrunedScan` relation).

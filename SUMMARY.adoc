@@ -375,6 +375,7 @@
 . link:spark-sql-SparkPlan-Exchange.adoc[Exchange]
 . link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 . link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
+. link:spark-sql-SparkPlan-FilterExec.adoc[FilterExec]
 . link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec]
 . link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec]
 . link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec]
