@@ -35,7 +35,7 @@ Tuples output: 0
  id LongType: {}
 ----
 
-=== [[debugCodegen]] "Debugging" Codegen -- `debugCodegen` Method
+=== [[debugCodegen]] Displaying Java Source Code Generated for Structured Query in Whole-Stage Code Generation ("Debugging" Codegen) -- `debugCodegen` Method
 
 You use `debugCodegen` method to review the link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code.
 

@@ -7,7 +7,19 @@ NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other phys
 [[creating-instance]]
 [[child]]
 [[codegenStageId]]
-`WholeStageCodegenExec` takes a single `child` link:spark-sql-SparkPlan.adoc[physical plan] and *per-query codegen stage ID* when created.
+`WholeStageCodegenExec` takes a single `child` link:spark-sql-SparkPlan.adoc[physical operator] (a physical subquery tree) and *per-query codegen stage ID* when created.
+
+NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.adoc#, supports Java code generation>>.
+
+[TIP]
+====
+Use the following to enable comments in generated code.
+
+[source, scala]
+----
+org.apache.spark.SparkEnv.get.conf.set("spark.sql.codegen.comments", "true")
+----
+====
 
 [source, scala]
 ----
@@ -111,15 +123,22 @@ TIP: Consider using link:spark-sql-debugging-execution.adoc[Debugging Query Exec
 
 [source, scala]
 ----
+val q /* Dataset[_] or DataFrame */ = ...
+
 scala> q.queryExecution.debug.codegen
 Found 1 WholeStageCodegen subtrees.
 == Subtree 1 / 1 ==
 *Filter (id#5L = 4)
 +- *Range (0, 10, step=1, splits=8)
+
+// Alternatively / Easier (?)
+import org.apache.spark.sql.execution.debug._
+q.debugCodegen()
 ----
 
 NOTE: link:spark-sql-SparkPlan.adoc[Physical plans] that support code generation extend link:spark-sql-CodegenSupport.adoc[CodegenSupport].
 
+[[logging]]
 [TIP]
 ====
 Enable `DEBUG` logging level for `org.apache.spark.sql.execution.WholeStageCodegenExec` logger to see what happens inside.
@@ -133,16 +152,16 @@ log4j.logger.org.apache.spark.sql.execution.WholeStageCodegenExec=DEBUG
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[doExecute]] Executing WholeStageCodegenExec (Generating RDD Of Internal Rows) -- `doExecute` Method
+=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
 ----
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to describe a structured query as a distributed computation using an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (that becomes the representation of a structured query at runtime).
 
-`doExecute` <<doCodeGen, generates the Java code>> that is link:spark-sql-CodeGenerator.adoc#compile[compiled] right afterwards.
+`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> and link:spark-sql-CodeGenerator.adoc#compile[compiles] it right afterwards.
 
 If compilation fails and link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] is enabled, you should see the following WARN message in the logs and `doExecute` returns the link:spark-sql-SparkPlan.adoc#execute[result of executing the child physical operator].
 
@@ -164,16 +183,68 @@ CAUTION: FIXME
 doCodeGen(): (CodegenContext, CodeAndComment)
 ----
 
-CAUTION: FIXME
+`doCodeGen` creates a new <<spark-sql-CodegenContext.adoc#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to <<spark-sql-CodegenSupport.adoc#produce, generate a Java source code for produce code path>> (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
 
-You should see the following DEBUG message in the logs:
+`doCodeGen` <<spark-sql-CodegenContext.adoc#addNewFunction, adds the new function>> under the name of `processNext`.
+
+`doCodeGen` <<generatedClassName, generates the class name>>.
+
+`doCodeGen` generates the final Java source code of the following format:
+
+[source, scala]
+----
+public Object generate(Object[] references) {
+  return new [className](references);
+}
+
+/**
+ * Codegend pipeline for stage (id=[codegenStageId])
+ * [treeString]
+ */
+final class [className] extends BufferedRowIterator {
+
+  private Object[] references;
+  private scala.collection.Iterator[] inputs;
+  // ctx.declareMutableStates()
+
+  public [className](Object[] references) {
+    this.references = references;
+  }
+
+  public void init(int index, scala.collection.Iterator[] inputs) {
+    partitionIndex = index;
+    this.inputs = inputs;
+    // ctx.initMutableStates()
+    // ctx.initPartition()
+  }
+
+  // ctx.emitExtraCode()
+
+  // ctx.declareAddedFunctions()
+}
+----
+
+NOTE: `doCodeGen` requires that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.adoc#, supports Java code generation>>.
+
+`doCodeGen` cleans up the generated code (using `CodeFormatter` to `stripExtraNewLines`, `stripOverlappingComments`).
+
+`doCodeGen` prints out the following DEBUG message to the logs:
 
 ```
 DEBUG WholeStageCodegenExec:
 [cleanedSource]
 ```
 
-NOTE: `doCodeGen` is used when `WholeStageCodegenExec` <<doExecute, doExecute>> (and for link:spark-sql-debugging-execution.adoc#debugCodegen[debugCodegen]).
+In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenContext>> and the Java source code (as a `CodeAndComment`).
+
+[NOTE]
+====
+`doCodeGen` is used when:
+
+* `WholeStageCodegenExec` is <<doExecute, executed>>
+
+* Debugging Query Execution is requested to <<spark-sql-debugging-execution.adoc#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
+====
 
 === [[doConsume]] Generating Java Source Code for Whole-Stage Consume Path Code Generation -- `doConsume` Method
 
@@ -205,3 +276,14 @@ scala> println(consumeCode)
 my_code
 append(my_value);
 ----
+
+=== [[generatedClassName]] Generating Class Name -- `generatedClassName` Method
+
+[source, scala]
+----
+generatedClassName(): String
+----
+
+`generatedClassName`...FIXME
+
+NOTE: `generatedClassName` is used when...FIXME

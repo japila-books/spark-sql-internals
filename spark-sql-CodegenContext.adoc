@@ -153,7 +153,7 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 
 NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[with grouping keys] or link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithoutKeys[not]).
 
-=== [[addNewFunction]] `addNewFunction` Method
+=== [[addNewFunction]] Adding Function to Generated Class -- `addNewFunction` Method
 
 [source, scala]
 ----
