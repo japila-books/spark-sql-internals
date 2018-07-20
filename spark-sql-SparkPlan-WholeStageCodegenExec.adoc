@@ -157,7 +157,7 @@ NOTE: `doExecute` only supports up to two link:spark-sql-CodegenSupport.adoc#inp
 
 CAUTION: FIXME
 
-=== [[doCodeGen]] Generating Java Code for Child Subtree -- `doCodeGen` Method
+=== [[doCodeGen]] Generating Java Source Code for Child Physical Plan Subtree -- `doCodeGen` Method
 
 [source, scala]
 ----

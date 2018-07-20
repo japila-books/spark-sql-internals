@@ -35,8 +35,7 @@ TIP: Use link:spark-sql-debugging-execution.adoc#debugCodegen[debugCodegen] or l
 [[variablePrefix]]
 `variablePrefix` is...FIXME
 
-[[parent]]
-`CodegenSupport` has a `parent` link:spark-sql-SparkPlan.adoc[physical operator].
+`CodegenSupport` uses a <<parent, parent>> physical operator (with `CodegenSupport`) for...FIXME
 
 [source, scala]
 ----
@@ -83,18 +82,18 @@ trait CodegenSupport extends SparkPlan {
 | Method
 | Description
 
-| [[doConsume]] `doConsume`
-| Generating plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation]
+| `doConsume`
+| [[doConsume]] Generating plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation]
 
 Used exclusively when `CodegenSupport` is requested for the Java code to <<consume, consume>> the generated columns or a row from a physical operator.
 
-| [[doProduce]] `doProduce`
-| Generating plain Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[whole-stage "produce" path code generation]
+| `doProduce`
+| [[doProduce]] Generating a plain Java source code (as a text) for the link:spark-sql-whole-stage-codegen.adoc#produce-path["produce" path] in whole-stage Java code generation.
 
 Used exclusively when a physical operator is requested to <<produce, generate the Java source code for produce code path>>, i.e. a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators.
 
-| [[inputRDDs]] `inputRDDs`
-a| Input RDDs of a physical operator
+| `inputRDDs`
+a| [[inputRDDs]] Input RDDs of a physical operator
 
 NOTE: Up to two input RDDs are supported.
 
@@ -169,7 +168,21 @@ Found 2 WholeStageCodegen subtrees.
 ...
 ----
 
-NOTE: `produce` is used mainly when `WholeStageCodegenExec` is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate the Java source code for a physical plan] (i.e. a physical operator and its children).
+[NOTE]
+====
+`produce` is used when:
+
+* (most importantly) `WholeStageCodegenExec` is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen, generate the Java source code for a child physical plan subtree>> (i.e. a physical operator and its children)
+
+* A physical operator (with `CodegenSupport`) is requested to <<doProduce, generate a Java source code for the produce path in whole-stage Java code generation>> that usually looks as follows:
++
+[source, scala]
+----
+protected override def doProduce(ctx: CodegenContext): String = {
+  child.asInstanceOf[CodegenSupport].produce(ctx, this)
+}
+----
+====
 
 === [[prepareRowVar]] `prepareRowVar` Internal Method
 
@@ -225,9 +238,11 @@ NOTE: `metricTerm` is used when...FIXME
 usedInputs: AttributeSet
 ----
 
-`usedInputs` is the link:spark-sql-catalyst-QueryPlan.adoc#references[expression references].
+`usedInputs` returns the link:spark-sql-catalyst-QueryPlan.adoc#references[expression references].
 
-NOTE: `usedInputs` is used when...FIXME
+NOTE: Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the <<spark-sql-CodegenSupport.adoc#consume, generated Java source code for consume path>>).
+
+NOTE: `usedInputs` is used exclusively when `CodegenSupport` is requested to <<consume, generate a Java source code for consume path>>.
 
 === [[consume]] Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator -- `consume` Final Method
 
@@ -324,3 +339,16 @@ Found 2 WholeStageCodegen subtrees.
 
 * link:spark-sql-ColumnarBatchScan.adoc#doProduce[ColumnarBatchScan], link:spark-sql-SparkPlan-HashAggregateExec.adoc#doProduce[HashAggregateExec], link:spark-sql-SparkPlan-InputAdapter.adoc#doProduce[InputAdapter], link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#doProduce[RowDataSourceScanExec], link:spark-sql-SparkPlan-RangeExec.adoc#doProduce[RangeExec], link:spark-sql-SparkPlan-SortExec.adoc#doProduce[SortExec], link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the link:spark-sql-whole-stage-codegen.adoc#produce-path["produce" path] in whole-stage code generation
 ====
+
+=== [[parent]] `parent` Internal Variable Property
+
+[source, scala]
+----
+parent: CodegenSupport
+----
+
+`parent` is a <<CodegenSupport, physical operator that supports whole-stage Java code generation>>.
+
+`parent` starts empty, (i.e. defaults to `null` value) and is assigned a physical operator (with `CodegenContext`) only when `CodegenContext` is requested to <<produce, generate a Java source code for produce code path>>. The physical operator is passed in as an input argument for the <<produce, produce>> code path.
+
+NOTE: `parent` is used when...FIXME

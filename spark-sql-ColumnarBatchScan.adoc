@@ -256,7 +256,7 @@ java.lang.UnsupportedOperationException
 produceRows(ctx: CodegenContext, input: String): String
 ----
 
-`produceRows` creates a link:spark-sql-CodegenSupport.adoc#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
+`produceRows` creates a new link:spark-sql-CodegenSupport.adoc#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
 
 `produceRows` creates a link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for a `row` variable and assigns it as the name of the link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW].
 

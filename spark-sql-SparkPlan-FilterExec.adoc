@@ -4,7 +4,7 @@
 
 `FilterExec` supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> (aka _codegen_) as follows:
 
-* Uses <<usedInputs, usedInputs>> that...FIXME
+* <<usedInputs, usedInputs>> is an empty `AttributeSet` (to defer evaluation of attribute expressions until they are actually used, i.e. in the <<spark-sql-CodegenSupport.adoc#consume, generated Java source code for consume path>>)
 
 * Uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.adoc#inputRDDs, input RDDs>>
 
@@ -132,7 +132,27 @@ doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 
 NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in whole-stage code generation.
 
+`doConsume` creates a new <<spark-sql-CodegenSupport.adoc#metricTerm, metric term>> for the <<numOutputRows, numOutputRows>> metric.
+
 `doConsume`...FIXME
+
+In the end, `doConsume` uses <<spark-sql-CodegenSupport.adoc#consume, consume>> and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
+
+[source, scala]
+----
+// DEMO Write one
+----
+
+==== [[doConsume-genPredicate]] `genPredicate` Internal Method
+
+[source, scala]
+----
+genPredicate(c: Expression, in: Seq[ExprCode], attrs: Seq[Attribute]): String
+----
+
+NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
+
+`genPredicate`...FIXME
 
 === [[doExecute]] Executing Physical Operator (Generating RDD Of Internal Rows) -- `doExecute` Method
 

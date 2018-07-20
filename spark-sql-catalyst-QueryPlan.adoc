@@ -114,40 +114,40 @@ res6: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType
 output: Seq[Attribute]
 ----
 
-`output` is a collection of Catalyst link:spark-sql-Expression-Attribute.adoc[attributes] that represent the result of a projection in a query that is later used to build the output link:spark-sql-schema.adoc[schema].
+`output` is a collection of link:spark-sql-Expression-Attribute.adoc[Catalyst attribute expressions] that represent the result of a projection in a query that is later used to build the output link:spark-sql-schema.adoc[schema].
 
 NOTE: `output` property is also called *output schema* or *result schema*.
 
-You can access the `output` schema through a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
-
 [source, scala]
 ----
-// the query
-val dataset = spark.range(3)
+val q = spark.range(3)
 
-scala> dataset.queryExecution.analyzed.output
+scala> q.queryExecution.analyzed.output
 res0: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 
-scala> dataset.queryExecution.withCachedData.output
+scala> q.queryExecution.withCachedData.output
 res1: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 
-scala> dataset.queryExecution.optimizedPlan.output
+scala> q.queryExecution.optimizedPlan.output
 res2: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 
-scala> dataset.queryExecution.sparkPlan.output
+scala> q.queryExecution.sparkPlan.output
 res3: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 
-scala> dataset.queryExecution.executedPlan.output
+scala> q.queryExecution.executedPlan.output
 res4: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 ----
 
+[TIP]
+====
 You can build a link:spark-sql-StructType.adoc[StructType] from `output` collection of attributes using `toStructType` method (that is available through the implicit class `AttributeSeq`).
 
 [source, scala]
 ----
-scala> dataset.queryExecution.analyzed.output.toStructType
+scala> q.queryExecution.analyzed.output.toStructType
 res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
 ----
+====
 
 === [[simpleString]] Simple (Basic) Description with State Prefix -- `simpleString` Method
 
