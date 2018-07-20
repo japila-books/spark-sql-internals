@@ -154,7 +154,7 @@ NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
 
 `genPredicate`...FIXME
 
-=== [[doExecute]] Executing Physical Operator (Generating RDD Of Internal Rows) -- `doExecute` Method
+=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
 ----
@@ -163,4 +163,20 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to describe a structured query as a distributed computation using an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (that becomes the representation of a structured query at runtime).
 
-`doExecute`...FIXME
+`doExecute` executes the <<child, child>> physical operator and creates a new `MapPartitionsRDD` that does the filtering.
+
+[source, scala]
+----
+// DEMO Show the RDD lineage with the new MapPartitionsRDD after FilterExec
+----
+
+Internally, `doExecute` takes the <<numOutputRows, numOutputRows>> metric.
+
+In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and translates it (that creates a new RDD) by applying a function to each partition with index (using `RDD.mapPartitionsWithIndexInternal`) as follows:
+
+. Creates a partition filter as a new <<spark-sql-SparkPlan.adoc#newPredicate, GenPredicate>> (for the <<condition, filter condition>> expression and the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<child, child>> physical operator)
+
+. Requests the generated partition filter `Predicate` to `initialize` (with `0` partition index)
+
+. Filters out elements from the partition iterator (`Iterator[InternalRow]`) by requesting the generated partition filter `Predicate` to evaluate for every `InternalRow`
+.. Increments the <<numOutputRows, numOutputRows>> metric for positive evaluations (i.e. that returned `true`)
