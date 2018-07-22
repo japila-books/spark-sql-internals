@@ -1,4 +1,4 @@
-== [[InMemoryTableScanExec]] InMemoryTableScanExec Physical Operator
+== [[InMemoryTableScanExec]] InMemoryTableScanExec Leaf Physical Operator
 
 `InMemoryTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] to represent an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator at execution time.
 

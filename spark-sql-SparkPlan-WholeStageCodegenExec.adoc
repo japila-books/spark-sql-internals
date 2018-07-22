@@ -8,25 +8,45 @@ NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other phys
 
 [source, scala]
 ----
-val q /* Dataset[_] or DataFrame */ = spark.range(10).where('id === 4)
-
+val q = spark.range(10).where('id === 4)
 scala> q.queryExecution.debug.codegen
 Found 1 WholeStageCodegen subtrees.
 == Subtree 1 / 1 ==
-*Filter (id#5L = 4)
-+- *Range (0, 10, step=1, splits=8)
+*(1) Filter (id#3L = 4)
++- *(1) Range (0, 10, step=1, splits=8)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+...
 ----
 
 [TIP]
 ====
 Consider using link:spark-sql-debugging-execution.adoc[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
+====
 
 [source, scala]
 ----
+val q = spark.range(10).where('id === 4)
 import org.apache.spark.sql.execution.debug._
-q.debugCodegen()
+scala> q.debugCodegen()
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*(1) Filter (id#0L = 4)
++- *(1) Range (0, 10, step=1, splits=8)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+...
 ----
-====
 
 [TIP]
 ====
@@ -38,14 +58,46 @@ org.apache.spark.SparkEnv.get.conf.set("spark.sql.codegen.comments", "true")
 ----
 ====
 
-`WholeStageCodegenExec` is <<creating-instance, created>> exclusively when `CollapseCodegenStages` physical query optimization is link:spark-sql-CollapseCodegenStages.adoc#apply[executed] with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled.
+[source, scala]
+----
+val q = spark.range(10).where('id === 4)
+import org.apache.spark.sql.execution.debug._
+scala> q.debugCodegen()
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*(1) Filter (id#6L = 4)
++- *(1) Range (0, 10, step=1, splits=8)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ /**
+ * Codegend pipeline for stage (id=1)
+ * *(1) Filter (id#6L = 4)
+ * +- *(1) Range (0, 10, step=1, splits=8)
+ */
+/* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+...
+----
+
+`WholeStageCodegenExec` is <<creating-instance, created>> when:
+
+* `CollapseCodegenStages` physical query optimization is link:spark-sql-CollapseCodegenStages.adoc#apply[executed] (with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
+
+* `FileSourceScanExec` leaf physical operator is <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
+
+* `InMemoryTableScanExec` leaf physical operator is <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
+
+* `DataSourceV2ScanExec` leaf physical operator is <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
 
 NOTE: link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
 [[creating-instance]]
 [[child]]
 [[codegenStageId]]
-`WholeStageCodegenExec` takes a single `child` link:spark-sql-SparkPlan.adoc[physical operator] (a physical subquery tree) and *per-query codegen stage ID* when created.
+`WholeStageCodegenExec` takes a single `child` link:spark-sql-SparkPlan.adoc[physical operator] (a physical subquery tree) and *codegen stage ID* when created.
 
 NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.adoc#, supports Java code generation>>.
 
@@ -167,19 +219,32 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to describe a structured query as a distributed computation using an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (that becomes the representation of a structured query at runtime).
 
-`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> and link:spark-sql-CodeGenerator.adoc#compile[compiles] it right afterwards.
+`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to link:spark-sql-CodeGenerator.adoc#compile[compile it] right afterwards.
 
-If all goes well, `doExecute` branches off per the number of link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs].
+If compilation goes well, `doExecute` branches off per the number of link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs].
 
 NOTE: `doExecute` only supports up to two link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs].
 
 CAUTION: FIXME Finish the "success" path
 
-If compilation fails and link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] is enabled, you should see the following WARN message in the logs and `doExecute` returns the link:spark-sql-SparkPlan.adoc#execute[result of executing the child physical operator].
+
+
+If the size of the generated codes is greater than <<spark-sql-properties.adoc#spark.sql.codegen.hugeMethodLimit, spark.sql.codegen.hugeMethodLimit>> (which defaults to `65535`), `doExecute` prints out the following INFO message:
 
 ```
-WARN WholeStageCodegenExec: Whole-stage codegen disabled for this plan:
-[tree]
+Found too long generated codes and JIT optimization might not work: the bytecode size ([maxCodeSize]) is above the limit [spark.sql.codegen.hugeMethodLimit], and the whole-stage codegen was disabled for this plan (id=[codegenStageId]). To avoid this, you can raise the limit `spark.sql.codegen.hugeMethodLimit`:
+[treeString]
+```
+
+In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> and returns it.
+
+NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> leaf physical operator with <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, FileSourceScanExec>>).
+
+If compilation fails and link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] configuration property is enabled, `doExecute` prints out the following WARN message to the logs, requests the <<child, child>> physical operator to link:spark-sql-SparkPlan.adoc#execute[execute] and returns it.
+
+```
+Whole-stage codegen disabled for plan (id=[codegenStageId]):
+ [treeString]
 ```
 
 === [[doCodeGen]] Generating Java Source Code for Child Physical Plan Subtree -- `doCodeGen` Method
@@ -290,6 +355,10 @@ append(my_value);
 generatedClassName(): String
 ----
 
-`generatedClassName`...FIXME
+`generatedClassName` gives a class name per link:spark-sql-properties.adoc#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName] configuration property:
 
-NOTE: `generatedClassName` is used when...FIXME
+* `GeneratedIteratorForCodegenStage` with the <<codegenStageId, codegen stage ID>> when enabled (`true`)
+
+* `GeneratedIterator` when disabled (`false`)
+
+NOTE: `generatedClassName` is used exclusively when `WholeStageCodegenExec` unary physical operator is requested to <<doCodeGen, generate the Java source code for the child physical plan subtree>>.
