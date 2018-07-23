@@ -1,10 +1,100 @@
 == [[TreeNode]] TreeNode -- Node in Catalyst Tree
 
-`TreeNode` is a node in link:spark-sql-catalyst.adoc[Catalyst] tree with zero or more <<children, children>> (and can build link:spark-sql-Expression.adoc[expression] or link:spark-sql-catalyst-QueryPlan.adoc[structured query plan] trees).
+`TreeNode` is a node in <<spark-sql-catalyst.adoc#, Catalyst>> tree with zero or more <<children, children>>.
 
-`TreeNode` offers not only functions that you may have used from Scala Collection API, e.g. `map`, `flatMap`, `collect`, `collectFirst`, `foreach`, but also `mapChildren`, `transform`, `transformDown`, `transformUp`, `foreachUp`, `numberedTreeString`, `p`, `asCode`, `prettyJson`, etc. for tree manipulation or debugging.
+`TreeNode` is a recursive data structure that holds itself only or other `TreeNodes` which is used to build trees (e.g. of <<spark-sql-Expression.adoc#, Catalyst expressions>> or operators in <<spark-sql-catalyst-QueryPlan.adoc#, query plan>>).
 
 NOTE: Scala-specific, `TreeNode` is an abstract class that is the base class of link:spark-sql-Expression.adoc[Expression] and Catalyst's link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan] abstract classes.
+
+`TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. The <<methods, TreeNode API>> therefore offers not only methods that you may have used in link:https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>, etc. that can be used for advanced tree manipulation or simply debugging.
+
+[[methods]]
+.TreeNode API
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<apply, apply>>
+a|
+
+[source, scala]
+----
+apply(number: Int): TreeNode[_]
+----
+
+| <<collect, collect>>
+a|
+
+[source, scala]
+----
+collect[B](pf: PartialFunction[BaseType, B]): Seq[B]
+----
+
+| <<collectFirst, collectFirst>>
+a|
+
+[source, scala]
+----
+collectFirst[B](pf: PartialFunction[BaseType, B]): Option[B]
+----
+
+| <<collectLeaves, collectLeaves>>
+a|
+
+[source, scala]
+----
+collectLeaves(): Seq[BaseType]
+----
+
+| <<find, find>>
+a|
+
+[source, scala]
+----
+find(f: BaseType => Boolean): Option[BaseType]
+----
+
+| <<flatMap, flatMap>>
+a|
+
+[source, scala]
+----
+flatMap[A](f: BaseType => TraversableOnce[A]): Seq[A]
+----
+
+| <<foreach, foreach>>
+a|
+
+[source, scala]
+----
+foreach(f: BaseType => Unit): Unit
+----
+
+| <<foreachUp, foreachUp>>
+a|
+
+[source, scala]
+----
+foreachUp(f: BaseType => Unit): Unit
+----
+
+| <<map, map>>
+a|
+
+[source, scala]
+----
+map[A](f: BaseType => A): Seq[A]
+----
+
+| <<mapChildren, mapChildren>>
+a|
+
+[source, scala]
+----
+mapChildren(f: BaseType => BaseType): BaseType
+----
+|===
 
 [TIP]
 ====
@@ -245,3 +335,111 @@ getNodeNumbered(number: MutableInt): Option[TreeNode[_]]
 `getNodeNumbered`...FIXME
 
 NOTE: `getNodeNumbered` is used when...FIXME
+
+=== [[foreach]] `foreach` Method
+
+[source, scala]
+----
+foreach(f: BaseType => Unit): Unit
+----
+
+`foreach` applies the input function `f` to itself (`this`) first and then (recursively) to the <<children, children>>.
+
+=== [[collect]] `collect` Method
+
+[source, scala]
+----
+collect[B](pf: PartialFunction[BaseType, B]): Seq[B]
+----
+
+`collect`...FIXME
+
+=== [[collectFirst]] `collectFirst` Method
+
+[source, scala]
+----
+collectFirst[B](pf: PartialFunction[BaseType, B]): Option[B]
+----
+
+`collectFirst`...FIXME
+
+=== [[collectLeaves]] `collectLeaves` Method
+
+[source, scala]
+----
+collectLeaves(): Seq[BaseType]
+----
+
+`collectLeaves`...FIXME
+
+=== [[find]] `find` Method
+
+[source, scala]
+----
+find(f: BaseType => Boolean): Option[BaseType]
+----
+
+`find`...FIXME
+
+=== [[flatMap]] `flatMap` Method
+
+[source, scala]
+----
+flatMap[A](f: BaseType => TraversableOnce[A]): Seq[A]
+----
+
+`flatMap`...FIXME
+
+=== [[foreachUp]] `foreachUp` Method
+
+[source, scala]
+----
+foreachUp(f: BaseType => Unit): Unit
+----
+
+`foreachUp`...FIXME
+
+=== [[map]] `map` Method
+
+[source, scala]
+----
+map[A](f: BaseType => A): Seq[A]
+----
+
+`map`...FIXME
+
+=== [[mapChildren]] `mapChildren` Method
+
+[source, scala]
+----
+mapChildren(f: BaseType => BaseType): BaseType
+----
+
+`mapChildren`...FIXME
+
+=== [[transform]] `transform` Method
+
+[source, scala]
+----
+transform(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+`transform`...FIXME
+
+=== [[transformDown]] `transformDown` Method
+
+[source, scala]
+----
+transformDown(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+`transformDown`...FIXME
+
+=== [[transformUp]] `transformUp` Method
+
+[source, scala]
+----
+transformUp(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+`transformUp`...FIXME

@@ -224,7 +224,7 @@ abstract class Expression extends TreeNode[Expression] {
 | [[doGenCode]] `doGenCode`
 | *Code-generated expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
 
-Used as part of <<genCode, genCode>>.
+Used when `Expression` is requested to <<genCode, genCode>>.
 
 | [[eval]] `eval`
 a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row] (without <<genCode, generating a corresponding Java code>>.)

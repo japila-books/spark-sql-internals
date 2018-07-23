@@ -299,3 +299,14 @@ emitExtraCode(): String
 `emitExtraCode`...FIXME
 
 NOTE: `emitExtraCode` is used when...FIXME
+
+=== [[addPartitionInitializationStatement]] `addPartitionInitializationStatement` Method
+
+[source, scala]
+----
+addPartitionInitializationStatement(statement: String): Unit
+----
+
+`addPartitionInitializationStatement`...FIXME
+
+NOTE: `addPartitionInitializationStatement` is used when...FIXME
