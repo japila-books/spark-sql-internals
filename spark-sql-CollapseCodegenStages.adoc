@@ -1,10 +1,114 @@
 == [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Plan Optimization -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
 
-`CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, collapsing chained physical operators together and generate Java code for execution>>.
+`CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, collapses physical operators and generates Java source code for their execution>>.
 
-Technically, `CollapseCodegenStages` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-SparkPlan.adoc[physical query plans], i.e. `Rule[SparkPlan]`.
+When requested to <<insertWholeStageCodegen, insertWholeStageCodegen>>, `CollapseCodegenStages` uses different *control gates* before deciding whether a <<spark-sql-SparkPlan.adoc#, physical operator>> supports the <<spark-sql-whole-stage-codegen.adoc#, whole-stage Java code generation>> or not:
 
-`CollapseCodegenStages` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
+. Factors in physical operators with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> only
+
+. Enforces the <<supportCodegen, supportCodegen>> custom requirements on a physical operator, i.e.
+.. <<spark-sql-CodegenSupport.adoc#supportCodegen, supportCodegen>> flag turned on (`true`)
+.. No <<spark-sql-Expression.adoc#, Catalyst expressions>> are <<spark-sql-Expression-CodegenFallback.adoc#, CodegenFallback>>
+.. <<spark-sql-catalyst-QueryPlan.adoc#schema, Output schema>> is *neither wide nor deep* and  <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, uses just enough fields (including nested fields)>>
+.. <<spark-sql-catalyst-TreeNode.adoc#children, Children>> use output schema that is also <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, neither wide nor deep>>
+
+[NOTE]
+====
+link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property controls the total number of fields in a schema that is acceptable for whole-stage code generation.
+
+The number is `100` by default.
+====
+
+Technically, `CollapseCodegenStages` is just a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-SparkPlan.adoc#, physical query plans>>, i.e. `Rule[SparkPlan]`.
+
+`CollapseCodegenStages` is part of <<spark-sql-QueryExecution.adoc#preparations, preparations>> batch of physical query plan rules and is executed when `QueryExecution` is requested for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>> (i.e. in *executedPlan* phase of a query execution).
+
+[source, scala]
+----
+val q = spark.range(3).groupBy('id % 2 as "gid").count
+
+// Let's see where and how many "stars" does this query get
+scala> q.explain
+== Physical Plan ==
+*(2) HashAggregate(keys=[(id#0L % 2)#9L], functions=[count(1)])
++- Exchange hashpartitioning((id#0L % 2)#9L, 200)
+   +- *(1) HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#9L], functions=[partial_count(1)])
+      +- *(1) Range (0, 3, step=1, splits=8)
+
+// There are two stage IDs: 1 and 2 (see the round brackets)
+// Looks like Exchange physical operator does not support codegen
+// Let's walk through the query execution phases and see it ourselves
+
+// sparkPlan phase is just before CollapseCodegenStages physical optimization is applied
+val sparkPlan = q.queryExecution.sparkPlan
+scala> println(sparkPlan.numberedTreeString)
+00 HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[gid#2L, count#5L])
+01 +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#11L])
+02    +- Range (0, 3, step=1, splits=8)
+
+// Compare the above with the executedPlan phase
+// which happens to be after CollapseCodegenStages physical optimization
+scala> println(q.queryExecution.executedPlan.numberedTreeString)
+00 *(2) HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[gid#2L, count#5L])
+01 +- Exchange hashpartitioning((id#0L % 2)#12L, 200)
+02    +- *(1) HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#11L])
+03       +- *(1) Range (0, 3, step=1, splits=8)
+
+// Let's apply the CollapseCodegenStages rule ourselves
+import org.apache.spark.sql.execution.CollapseCodegenStages
+val ccsRule = CollapseCodegenStages(spark.sessionState.conf)
+scala> val planAfterCCS = ccsRule.apply(sparkPlan)
+planAfterCCS: org.apache.spark.sql.execution.SparkPlan =
+*(1) HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[gid#2L, count#5L])
++- *(1) HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#11L])
+   +- *(1) Range (0, 3, step=1, splits=8)
+
+// The number of stage IDs do not match
+// Looks like the above misses one or more rules
+// EnsureRequirements optimization rule?
+// It is indeed executed before CollapseCodegenStages
+import org.apache.spark.sql.execution.exchange.EnsureRequirements
+val erRule = EnsureRequirements(spark.sessionState.conf)
+val planAfterER = erRule.apply(sparkPlan)
+scala> println(planAfterER.numberedTreeString)
+00 HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[gid#2L, count#5L])
+01 +- Exchange hashpartitioning((id#0L % 2)#12L, 200)
+02    +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#11L])
+03       +- Range (0, 3, step=1, splits=8)
+
+// Time for CollapseCodegenStages
+val planAfterCCS = ccsRule.apply(planAfterER)
+scala> println(planAfterCCS.numberedTreeString)
+00 *(2) HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[gid#2L, count#5L])
+01 +- Exchange hashpartitioning((id#0L % 2)#12L, 200)
+02    +- *(1) HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#11L])
+03       +- *(1) Range (0, 3, step=1, splits=8)
+
+assert(planAfterCCS == q.queryExecution.executedPlan, "Plan after ER and CCS rules should match the executedPlan plan")
+
+// Bingo!
+// The result plan matches the executedPlan plan
+
+// HashAggregateExec and Range physical operators support codegen (is a CodegenSupport)
+// - HashAggregateExec disables codegen for ImperativeAggregate aggregate functions
+// ShuffleExchangeExec does not support codegen (is not a CodegenSupport)
+
+// The top-level physical operator should be WholeStageCodegenExec
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = planAfterCCS.asInstanceOf[WholeStageCodegenExec]
+
+// The single child operator should be HashAggregateExec
+import org.apache.spark.sql.execution.aggregate.HashAggregateExec
+val hae = wsce.child.asInstanceOf[HashAggregateExec]
+
+// Since ShuffleExchangeExec does not support codegen, the child of HashAggregateExec is InputAdapter
+import org.apache.spark.sql.execution.InputAdapter
+val ia = hae.child.asInstanceOf[InputAdapter]
+
+// And it's only now when we can get at ShuffleExchangeExec
+import org.apache.spark.sql.execution.exchange.ShuffleExchangeExec
+val se = ia.child.asInstanceOf[ShuffleExchangeExec]
+----
 
 With link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property enabled (which is on by default), `CollapseCodegenStages` <<insertWholeStageCodegen, finds physical operators with CodegenSupport>> for which <<supportCodegen, whole-stage codegen requirements hold>> and collapses them together as `WholeStageCodegenExec` physical operator (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
 
@@ -180,12 +284,23 @@ Otherwise, `apply` does nothing at all (i.e. passes the input physical plan thro
 insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 ----
 
-`insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` applies to the input physical `plan` recursively while walking down the `plan` tree and inserting link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] physical operator.
+`insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` applies to the input physical `plan` recursively while walking down the `plan` tree and inserting <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator.
 
-`insertWholeStageCodegen` adds link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] physical operator into the input `plan` if the root physical operator supports link:spark-sql-CodegenSupport.adoc[Java code generation] and meets all of the <<supportCodegen, whole-stage codegen requirements>>.
+Internally, `insertWholeStageCodegen` (recursively) tries to find <<spark-sql-SparkPlan.adoc#, physical operators>> with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> and meet the <<supportCodegen, supportCodegen>> requirements.
+
+For any physical operators found, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the input `plan`) and requests `WholeStageCodegenId` for the `getNextStageId` that are both used to create a <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator that `insertWholeStageCodegen` returns.
+
+[source, scala]
+----
+// FIXME: DEMO
+// Step 1. The top-level physical operator is CodegenSupport with supportCodegen enabled
+// Step 2. The top-level operator is CodegenSupport with supportCodegen disabled
+// Step 3. The top-level operator is not CodegenSupport
+// Step 4. "plan.output.length == 1 && plan.output.head.dataType.isInstanceOf[ObjectType]"
+----
 
 [[insertWholeStageCodegen-ObjectType]]
-NOTE: `insertWholeStageCodegen` skips physical operators with link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] with a single expression of `ObjectType` type and tries to insert `WholeStageCodegenExec` physical operator to its link:spark-sql-catalyst-TreeNode.adoc#children[children].
+`insertWholeStageCodegen` skips physical operators with link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] with a single expression of `ObjectType` type and tries to insert `WholeStageCodegenExec` physical operator to its link:spark-sql-catalyst-TreeNode.adoc#children[children].
 
 [NOTE]
 ====
@@ -209,36 +324,34 @@ insertInputAdapter(plan: SparkPlan): SparkPlan
 
 * For <<supportCodegen, codegen-unsupported>> operators <<insertWholeStageCodegen, inserts an InputAdapter operator>>
 
-* For other operators (except `SortMergeJoinExec` operator above or for which <<supportCodegen, Java code cannot be generated>>) <<insertWholeStageCodegen, inserts an InputAdapter operator>> for every child operator
+* For other operators (except `SortMergeJoinExec` operator above or for which <<supportCodegen, Java code cannot be generated>>) <<insertWholeStageCodegen, inserts a WholeStageCodegenExec operator>> for every child operator
 
 CAUTION: FIXME Examples for every case + screenshots from web UI
 
 NOTE: `insertInputAdapter` is used exclusively when `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec physical operator>> and recursively down the physical plan.
 
-=== [[supportCodegen]][[supportCodegen-SparkPlan]] Checking Whether Physical Operator Supports Whole-Stage Java Code Generation (aka Whole-Stage CodeGen Requirements) -- `supportCodegen` Internal Predicate
+=== [[supportCodegen]] Enforcing Whole-Stage CodeGen Requirements For Physical Operators -- `supportCodegen` Internal Predicate
 
 [source, scala]
 ----
 supportCodegen(plan: SparkPlan): Boolean
 ----
 
-`supportCodegen` is positive when all of the following conditions hold:
+`supportCodegen` is positive (`true`) when the input <<spark-sql-SparkPlan.adoc#, physical operator>> is as follows:
 
-* The input link:spark-sql-SparkPlan.adoc[physical plan] supports link:spark-sql-CodegenSupport.adoc[Java code generation] and has link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned on.
+. link:spark-sql-CodegenSupport.adoc[CodegenSupport] and the <<spark-sql-CodegenSupport.adoc#supportCodegen, supportCodegen>> flag is turned on
 +
 NOTE: link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag is turned on by default.
 
-* All link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] of the input physical `plan` are link:spark-sql-Expression.adoc#LeafExpression[leaf] or are not link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback].
+. No <<supportCodegen-Expression, Catalyst expressions are CodegenFallback (except LeafExpressions)>>
 
-* The number of fields in the schema of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
+. Output schema is *neither wide not deep*, i.e. <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, uses just enough fields (including nested fields)>>
 +
 NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
 
-* The number of fields in the schema of every link:spark-sql-catalyst-TreeNode.adoc#children[child physical operator] of the input physical `plan` is less than link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property.
-+
-NOTE: link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property defaults to `100`.
+. <<spark-sql-catalyst-TreeNode.adoc#children, Children>> also have the output schema that is <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, neither wide nor deep>>
 
-Otherwise, `supportCodegen` is negative/disabled.
+Otherwise, `supportCodegen` is negative (`false`).
 
 [source, scala]
 ----
@@ -276,7 +389,7 @@ res3: Int = 3
 import org.apache.spark.sql.SparkSession
 val spark: SparkSession = ...
 // both where and select support codegen
-// let's break the requirement of having up to spark.sql.codegen.maxFields
+// let's break the requirement of spark.sql.codegen.maxFields
 val newSpark = spark.newSession()
 import org.apache.spark.sql.internal.SQLConf.WHOLESTAGE_MAX_NUM_FIELDS
 newSpark.sessionState.conf.setConf(WHOLESTAGE_MAX_NUM_FIELDS, 2)
@@ -306,19 +419,19 @@ Project [_2#122 AS c0#126]
 * <<insertWholeStageCodegen, Inserts WholeStageCodegenExec physical operator>> for physical operators that do support whole-stage Java code generation (i.e. `supportCodegen` is turned on).
 ====
 
-=== [[supportCodegen-Expression]] Expressions with Codegen Support -- `supportCodegen` Internal Predicate
+=== [[supportCodegen-Expression]] Enforcing Whole-Stage CodeGen Requirements For Catalyst Expressions -- `supportCodegen` Internal Predicate
 
 [source, scala]
 ----
 supportCodegen(e: Expression): Boolean
 ----
 
-`supportCodegen` is positive when the link:spark-sql-Expression.adoc[Catalyst expression] `e` is (in the order of verification):
+`supportCodegen` is positive (`true`) when the input link:spark-sql-Expression.adoc[Catalyst expression] is the following (in the order of verification):
 
 . link:spark-sql-Expression.adoc#LeafExpression[LeafExpression]
 
-. non-link:spark-sql-Expression.adoc#CodegenFallback[CodegenFallback] expression
+. non-<<spark-sql-Expression.adoc#CodegenFallback, CodegenFallback>>
 
-Otherwise, `supportCodegen` is negative.
+Otherwise, `supportCodegen` is negative (`false`).
 
-NOTE: `supportCodegen` (for expressions) is used when <<supportCodegen, supportCodegen>> (for physical plans) finds operators that support codegen.
+NOTE: `supportCodegen` (for <<spark-sql-Expression.adoc#, Catalyst expressions>>) is used exclusively when `CollapseCodegenStages` physical optimization is requested to <<supportCodegen, enforce whole-stage codegen requirements for a physical operator>>.

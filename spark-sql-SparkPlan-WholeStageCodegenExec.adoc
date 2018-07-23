@@ -362,3 +362,14 @@ generatedClassName(): String
 * `GeneratedIterator` when disabled (`false`)
 
 NOTE: `generatedClassName` is used exclusively when `WholeStageCodegenExec` unary physical operator is requested to <<doCodeGen, generate the Java source code for the child physical plan subtree>>.
+
+=== [[isTooManyFields]] `isTooManyFields` Object Method
+
+[source, scala]
+----
+isTooManyFields(conf: SQLConf, dataType: DataType): Boolean
+----
+
+`isTooManyFields`...FIXME
+
+NOTE: `isTooManyFields` is used when...FIXME

@@ -53,9 +53,9 @@ NOTE: `sparkPlan` is the first physical plan from the collection of all possible
 NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:spark-sql-catalyst-QueryPlanner.adoc#plan[will always generate at least one physical plan].
 
 | [[executedPlan]] `executedPlan`
-a| Optimized link:spark-sql-SparkPlan.adoc[physical plan] ready for execution, i.e. <<sparkPlan, physical plan>> with <<prepareForExecution, optimization rules applied sequentially>>.
+a| Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final "shape" and ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
 
-NOTE: `executedPlan` is the phase when link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical preparation rule is executed to collapse physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
+NOTE: `executedPlan` phase is when the <<spark-sql-CollapseCodegenStages.adoc, CollapseCodegenStages>> physical preparation rule is executed to collapse physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
 
 | [[toRdd]] `toRdd`
 a| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>).

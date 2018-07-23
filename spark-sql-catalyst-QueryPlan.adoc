@@ -94,7 +94,7 @@ def missingInput: AttributeSet
 
 `missingInput` are link:spark-sql-Expression-Attribute.adoc[attributes] that are referenced in expressions but not provided by this node's children (as `inputSet`) and are not produced by this node (as `producedAttributes`).
 
-=== [[schema]] Query Output Schema -- `schema` Property
+=== [[schema]] Output Schema -- `schema` Property
 
 You can request the schema of a `QueryPlan` using `schema` that builds link:spark-sql-StructType.adoc[StructType] from the <<output, output attributes>>.
 
