@@ -1,6 +1,44 @@
-== [[CodegenFallback]] CodegenFallback
+== [[CodegenFallback]] CodegenFallback Contract -- Catalyst Expressions with Fallback Code Generation Mode
 
-`CodegenFallback` is...FIXME
+`CodegenFallback` is the <<contract, contract>> of <<implementations, Catalyst expressions>> that do not support a Java code generation and want to <<doGenCode, fall back to interpreted mode>> (aka _fallback mode_).
+
+`CodegenFallback` is used when `CollapseCodegenStages` physical optimization is requested to <<spark-sql-CollapseCodegenStages.adoc#apply, execute>> (and <<spark-sql-CollapseCodegenStages.adoc#supportCodegen-Expression, enforce whole-stage codegen requirements for Catalyst expressions>>).
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.expressions.codegen
+
+trait CodegenFallback extends Expression {
+  // No properties (vals and methods) that have no implementation
+}
+----
+
+[[implementations]]
+.(Some Examples of) CodegenFallbacks
+[cols="1,2",options="header",width="100%"]
+|===
+| CodegenFallback
+| Description
+
+| `CurrentDate`
+| [[CurrentDate]]
+
+| `CurrentTimestamp`
+| [[CurrentTimestamp]]
+
+| `Cube`
+| [[Cube]]
+
+| <<spark-sql-Expression-JsonToStructs.adoc#, JsonToStructs>>
+| [[JsonToStructs]]
+
+| `Rollup`
+| [[Rollup]]
+
+| `StructsToJson`
+| [[StructsToJson]]
+|===
 
 === [[doGenCode]] Generating Java Source Code For Code-Generated Expression Evaluation -- `doGenCode` Method
 

@@ -1,8 +1,8 @@
 == [[CollapseCodegenStages]] CollapseCodegenStages Physical Query Plan Optimization -- Collapsing Physical Operators for Whole-Stage Java Code Generation (aka Whole-Stage CodeGen)
 
-`CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, collapses physical operators and generates Java source code for their execution>>.
+`CollapseCodegenStages` is a *physical query plan optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, collapses physical operators and generates a Java source code for their execution>>.
 
-When requested to <<insertWholeStageCodegen, insertWholeStageCodegen>>, `CollapseCodegenStages` uses different *control gates* before deciding whether a <<spark-sql-SparkPlan.adoc#, physical operator>> supports the <<spark-sql-whole-stage-codegen.adoc#, whole-stage Java code generation>> or not:
+When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage, whole-stage code generation enabled>>), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a <<spark-sql-SparkPlan.adoc#, physical operator>> supports the <<spark-sql-whole-stage-codegen.adoc#, whole-stage Java code generation>> or not (and what physical operator to insert):
 
 . Factors in physical operators with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> only
 
@@ -264,7 +264,7 @@ scala> println(execPlan.numberedTreeString)
 06 +- Range (0, 2, step=1, splits=8)
 ----
 
-=== [[apply]] Inserting WholeStageCodegenExec or InputAdapter into Physical Query Plan for Whole-Stage Java Code Generation -- `apply` Method
+=== [[apply]] Executing Physical Optimization Rule (Inserting WholeStageCodegenExec or InputAdapter into Physical Query Plan for Whole-Stage Java Code Generation) -- `apply` Method
 
 [source, scala]
 ----
