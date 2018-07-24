@@ -267,7 +267,7 @@ when(condition: Column, value: Any): Column
 monotonically_increasing_id(): Column
 ----
 
-`monotonically_increasing_id` returns monotonically increasing 64-bit integers. The generated IDs are guaranteed to be monotonically increasing and unique, but not consecutive  (unless all rows are in the same single partition which you rarely want due to the amount of the data).
+`monotonically_increasing_id` returns monotonically increasing 64-bit integers. The generated IDs are guaranteed to be monotonically increasing and unique, but not consecutive (unless all rows are in the same single partition which you rarely want due to the amount of the data).
 
 [source, scala]
 ----

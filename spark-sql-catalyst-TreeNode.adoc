@@ -1,12 +1,27 @@
 == [[TreeNode]] TreeNode -- Node in Catalyst Tree
 
-`TreeNode` is a node in <<spark-sql-catalyst.adoc#, Catalyst>> tree with zero or more <<children, children>>.
+`TreeNode` is the <<contract, contract>> of <<implementations, nodes>> in <<spark-sql-catalyst.adoc#, Catalyst>> tree with zero or more <<children, children>>.
 
-`TreeNode` is a recursive data structure that holds itself only or other `TreeNodes` which is used to build trees (e.g. of <<spark-sql-Expression.adoc#, Catalyst expressions>> or operators in <<spark-sql-catalyst-QueryPlan.adoc#, query plan>>).
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.trees
 
-NOTE: Scala-specific, `TreeNode` is an abstract class that is the base class of link:spark-sql-Expression.adoc[Expression] and Catalyst's link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan] abstract classes.
+abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
+  self: BaseType =>
 
-`TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. The <<methods, TreeNode API>> therefore offers not only methods that you may have used in link:https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>, etc. that can be used for advanced tree manipulation or simply debugging.
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
+  def children: Seq[BaseType]
+  def verboseString: String
+}
+----
+
+`TreeNode` is a recursive data structure that holds itself only or other `TreeNodes` which is used to build trees (e.g. <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with <<spark-sql-LogicalPlan.adoc#, logical>> and <<spark-sql-SparkPlan.adoc#, physical>> operators and <<spark-sql-Expression.adoc#, Catalyst expressions>>).
+
+Scala-specific, `TreeNode` is an abstract class that is the base class of Catalyst <<spark-sql-Expression.adoc#, Expression>> and <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>> abstract classes.
+
+`TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. The <<methods, TreeNode API>> therefore offers not only methods that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>, etc. that can be used for advanced tree manipulation or simply debugging.
 
 [[methods]]
 .TreeNode API
@@ -21,6 +36,14 @@ a|
 [source, scala]
 ----
 apply(number: Int): TreeNode[_]
+----
+
+| <<asCode, asCode>>
+a|
+
+[source, scala]
+----
+asCode: String
 ----
 
 | <<collect, collect>>
@@ -79,6 +102,20 @@ a|
 foreachUp(f: BaseType => Unit): Unit
 ----
 
+| <<generateTreeString, generateTreeString>>
+a|
+
+[source, scala]
+----
+generateTreeString(
+  depth: Int,
+  lastChildren: Seq[Boolean],
+  builder: StringBuilder,
+  verbose: Boolean,
+  prefix: String = "",
+  addSuffix: Boolean = false): StringBuilder
+----
+
 | <<map, map>>
 a|
 
@@ -94,40 +131,99 @@ a|
 ----
 mapChildren(f: BaseType => BaseType): BaseType
 ----
-|===
 
-[TIP]
-====
-`TreeNode` abstract type is a quite advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
+| <<p, p>>
+a|
 
 [source, scala]
 ----
-abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
-  self: BaseType =>
-
-  // ...
-}
+p(number: Int): BaseType
 ----
-====
+
+| <<prettyJson, prettyJson>>
+a|
+
+[source, scala]
+----
+prettyJson: String
+----
+
+| <<simpleString, simpleString>>
+a|
+
+[source, scala]
+----
+simpleString: String
+----
+
+| <<toJSON, toJSON>>
+a|
+
+[source, scala]
+----
+toJSON: String
+----
+
+| <<transform, transform>>
+a|
+
+[source, scala]
+----
+transform(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+| <<transformDown, transformDown>>
+a|
+
+[source, scala]
+----
+transformDown(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+| <<transformUp, transformUp>>
+a|
+
+[source, scala]
+----
+transformUp(rule: PartialFunction[BaseType, BaseType]): BaseType
+----
+
+| <<treeString, treeString>>
+a|
+
+[source, scala]
+----
+treeString: String
+treeString(verbose: Boolean, addSuffix: Boolean = false): String
+----
+
+| <<verboseString, verboseString>>
+a|
+
+[source, scala]
+----
+verboseString: String
+----
+
+| <<verboseStringWithSuffix, verboseStringWithSuffix>>
+a|
+
+[source, scala]
+----
+verboseStringWithSuffix: String
+----
+
+| <<withNewChildren, withNewChildren>>
+a|
+
+[source, scala]
+----
+withNewChildren(newChildren: Seq[BaseType]): BaseType
+----
+|===
 
 [[nodeName]]
 `TreeNode` has a *node name* as `nodeName`.
-
-=== [[contract]] TreeNode Contract
-
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.trees
-
-abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
-  self: BaseType =>
-
-  // only required methods that have no implementation
-  // the others follow
-  def children: Seq[BaseType]
-  def verboseString: String
-}
-----
 
 .(Subset of) TreeNode Contract
 [cols="1,2",options="header",width="100%"]
@@ -143,6 +239,34 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 
 Used when `TreeNode` is requested for <<generateTreeString, generateTreeString>> (with `verbose` flag enabled) and <<verboseStringWithSuffix, verboseStringWithSuffix>>
 |===
+
+[[implementations]]
+.TreeNodes
+[cols="1,2",options="header",width="100%"]
+|===
+| TreeNode
+| Description
+
+| <<spark-sql-Expression.adoc#, Expression>>
+| [[Expression]]
+
+| <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>>
+| [[QueryPlan]]
+|===
+
+[TIP]
+====
+`TreeNode` abstract type is a fairly advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
+
+[source, scala]
+----
+abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
+  self: BaseType =>
+
+  // ...
+}
+----
+====
 
 === [[withNewChildren]] `withNewChildren` Method
 
@@ -443,3 +567,34 @@ transformUp(rule: PartialFunction[BaseType, BaseType]): BaseType
 ----
 
 `transformUp`...FIXME
+
+=== [[asCode]] `asCode` Method
+
+[source, scala]
+----
+asCode: String
+----
+
+`asCode`...FIXME
+
+=== [[prettyJson]] `prettyJson` Method
+
+[source, scala]
+----
+prettyJson: String
+----
+
+`prettyJson`...FIXME
+
+NOTE: `prettyJson` is used when...FIXME
+
+=== [[toJSON]] `toJSON` Method
+
+[source, scala]
+----
+toJSON: String
+----
+
+`toJSON`...FIXME
+
+NOTE: `toJSON` is used when...FIXME
