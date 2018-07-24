@@ -28,7 +28,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 [[expressions]]
 `FunctionRegistry` tracks the mapping between link:spark-sql-Expression.adoc[Catalyst expressions] and their built-in/native SQL functions (that can be used in SQL statements).
 
-.FunctionRegistry's Catalyst Expressions and SQL Functions Mapping
+.(Subset of) FunctionRegistry's Catalyst Expressions and SQL Functions Mapping
 [cols="1,2",options="header",width="100%"]
 |===
 | Catalyst Expression
@@ -39,6 +39,9 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 
 | `Left`
 | [[left]] `left`
+
+| <<spark-sql-Expression-MonotonicallyIncreasingID.adoc#, MonotonicallyIncreasingID>>
+| [[monotonically_increasing_id]] <<spark-sql-functions.adoc#monotonically_increasing_id, monotonically_increasing_id>>
 
 | `NullIf`
 | [[nullif]] `nullif`
@@ -57,9 +60,6 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 
 | `Right`
 | [[right]] `right`
-
-| _others_
-|
 |===
 
 === [[expression]] `expression` Internal Method

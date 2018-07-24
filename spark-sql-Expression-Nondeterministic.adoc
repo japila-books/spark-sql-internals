@@ -22,11 +22,15 @@ trait Nondeterministic extends Expression {
 | Method
 | Description
 
-| [[initializeInternal]] `initializeInternal`
-| Used exclusively when `Nondeterministic` expression is requested to <<initialize, initialize>>
+| `initializeInternal`
+| [[initializeInternal]] Initializing the `Nondeterministic` expression
 
-| [[evalInternal]] `evalInternal`
-| Used exclusively when `Nondeterministic` expression is requested to <<eval, evaluate a value>>
+Used exclusively when `Nondeterministic` expression is requested to <<initialize, initialize>>
+
+| `evalInternal`
+| [[evalInternal]] Evaluating the `Nondeterministic` expression
+
+Used exclusively when `Nondeterministic` expression is requested to <<eval, evaluate a value>>
 |===
 
 NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic` logical plan rule.
@@ -38,35 +42,35 @@ NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic`
 | Expression
 | Description
 
-| [[CurrentBatchTimestamp]] `CurrentBatchTimestamp`
-|
+| `CurrentBatchTimestamp`
+| [[CurrentBatchTimestamp]]
 
-| [[InputFileBlockLength]] `InputFileBlockLength`
-|
+| `InputFileBlockLength`
+| [[InputFileBlockLength]]
 
-| [[InputFileBlockStart]] `InputFileBlockStart`
-|
+| `InputFileBlockStart`
+| [[InputFileBlockStart]]
 
-| [[InputFileName]] `InputFileName`
-|
+| `InputFileName`
+| [[InputFileName]]
 
-| [[MonotonicallyIncreasingID]] `MonotonicallyIncreasingID`
-|
+| link:spark-sql-Expression-MonotonicallyIncreasingID.adoc[MonotonicallyIncreasingID]
+| [[MonotonicallyIncreasingID]]
 
-| [[NondeterministicExpression]] `NondeterministicExpression`
-|
+| `NondeterministicExpression`
+| [[NondeterministicExpression]]
 
-| [[Rand]] `Rand`
-|
+| `Rand`
+| [[Rand]]
 
-| [[Randn]] `Randn`
-|
+| `Randn`
+| [[Randn]]
 
-| [[RDG]] `RDG`
-|
+| `RDG`
+| [[RDG]]
 
-| [[SparkPartitionID]] `SparkPartitionID`
-|
+| `SparkPartitionID`
+| [[SparkPartitionID]]
 |===
 
 [[internal-registries]]

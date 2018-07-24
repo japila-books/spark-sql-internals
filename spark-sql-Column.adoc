@@ -178,7 +178,7 @@ scala> dataset.withColumn("group", 'id % 2).show
 +---+-----+
 ----
 
-=== [[apply]] Creating Column Instance (Referencing Column) -- `apply` Factory Method
+=== [[apply]] Creating Column Instance For Catalyst Expression -- `apply` Factory Method
 
 [source, scala]
 ----

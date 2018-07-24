@@ -277,6 +277,7 @@
 . link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
 . link:spark-sql-Expression-ListQuery.adoc[ListQuery]
 . link:spark-sql-Expression-Literal.adoc[Literal]
+. link:spark-sql-Expression-MonotonicallyIncreasingID.adoc[MonotonicallyIncreasingID]
 . link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash]
 . link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
 . link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic]

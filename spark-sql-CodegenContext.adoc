@@ -209,6 +209,27 @@ val input = ctx.addMutableState("scala.collection.Iterator", "input", v => s"$v 
 
 NOTE: `addMutableState` is used when...FIXME
 
+=== [[addImmutableStateIfNotExists]] Adding Immutable State (Unless Exists Already) -- `addImmutableStateIfNotExists` Method
+
+[source, scala]
+----
+addImmutableStateIfNotExists(
+  javaType: String,
+  variableName: String,
+  initFunc: String => String = _ => ""): Unit
+----
+
+`addImmutableStateIfNotExists`...FIXME
+
+[source, scala]
+----
+val ctx: CodegenContext = ???
+val partitionMaskTerm = "partitionMask"
+ctx.addImmutableStateIfNotExists(ctx.JAVA_LONG, partitionMaskTerm)
+----
+
+NOTE: `addImmutableStateIfNotExists` is used when...FIXME
+
 === [[freshName]] `freshName` Method
 
 [source, scala]

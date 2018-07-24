@@ -94,6 +94,9 @@ If the array/map is `null` or empty then `null` is produced.
 | [[map]] link:spark-sql-functions-regular-functions.adoc#map[map]
 |
 
+| <<spark-sql-functions-regular-functions.adoc#monotonically_increasing_id, monotonically_increasing_id>>
+| [[monotonically_increasing_id]] Returns monotonically increasing 64-bit integers that are guaranteed to be monotonically increasing and unique, but not consecutive.
+
 | [[struct]] link:spark-sql-functions-regular-functions.adoc#struct[struct]
 |
 
