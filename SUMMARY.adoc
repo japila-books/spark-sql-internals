@@ -367,7 +367,7 @@
 . link:spark-sql-CodegenSupport.adoc[CodegenSupport Contract -- Physical Operators with Java Code Generation]
 . link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec Contract -- Leaf Physical Operators to Scan Over BaseRelation]
 . link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
-. link:spark-sql-ObjectConsumerExec.adoc[ObjectConsumerExec Contract]
+. link:spark-sql-ObjectConsumerExec.adoc[ObjectConsumerExec Contract -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema]
 
 . link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec]
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]

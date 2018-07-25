@@ -77,9 +77,16 @@ mapExpressions(f: Expression => Expression): this.type
 
 NOTE: `mapExpressions` is used when...FIXME
 
-=== [[outputSet]] `outputSet` Property
+=== [[outputSet]] Output Schema Attribute Set -- `outputSet` Property
 
-CAUTION: FIXME
+[source, scala]
+----
+outputSet: AttributeSet
+----
+
+`outputSet` simply returns an `AttributeSet` for the <<output, output schema attributes>>.
+
+NOTE: `outputSet` is used when...FIXME
 
 === [[producedAttributes]] `producedAttributes` Property
 
