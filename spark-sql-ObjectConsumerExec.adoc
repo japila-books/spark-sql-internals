@@ -1,0 +1,3 @@
+== [[ObjectConsumerExec]] ObjectConsumerExec Contract
+
+`ObjectConsumerExec` is...FIXME

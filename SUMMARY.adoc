@@ -124,7 +124,6 @@
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
-.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
 .. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
 .. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
 
@@ -367,6 +366,8 @@
 . link:spark-sql-SparkPlan.adoc[SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query]
 . link:spark-sql-CodegenSupport.adoc[CodegenSupport Contract -- Physical Operators with Java Code Generation]
 . link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec Contract -- Leaf Physical Operators to Scan Over BaseRelation]
+. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
+. link:spark-sql-ObjectConsumerExec.adoc[ObjectConsumerExec Contract]
 
 . link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec]
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
@@ -409,7 +410,7 @@
 .. link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame]
 . link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec]
 
-. link:spark-sql-Projection.adoc[Projection -- Contract for Functions to Produce InternalRow for InternalRow]
+. link:spark-sql-Projection.adoc[Projection Contract -- Functions to Produce InternalRow for InternalRow]
 .. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
 .. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
