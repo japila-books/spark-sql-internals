@@ -217,7 +217,7 @@ Refer to link:spark-logging.adoc[Logging].
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to describe a structured query as a distributed computation using an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (that becomes the representation of a structured query at runtime).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to link:spark-sql-CodeGenerator.adoc#compile[compile it] right afterwards.
 
@@ -317,14 +317,14 @@ In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenCon
 * Debugging Query Execution is requested to <<spark-sql-debugging-execution.adoc#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
 ====
 
-=== [[doConsume]] Generating Java Source Code for Whole-Stage Consume Path Code Generation -- `doConsume` Method
+=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
 [source, scala]
 ----
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume` generates a Java source code that:
 

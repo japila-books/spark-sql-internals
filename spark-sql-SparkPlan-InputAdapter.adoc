@@ -60,14 +60,14 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
    +- LocalTableScan [ids#112]
 ----
 
-=== [[doProduce]] Generating Java Source Code for Whole-Stage Produce Path Code Generation -- `doProduce` Method
+=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
 [source, scala]
 ----
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce` generates a Java source code that consumes link:spark-sql-InternalRow.adoc[internal row] of a single input `RDD` one at a time (in a `while` loop).
 

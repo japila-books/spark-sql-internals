@@ -164,7 +164,7 @@ supportsBatch: Boolean = true
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce` firstly requests the input `CodegenContext` to link:spark-sql-CodegenContext.adoc#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
 

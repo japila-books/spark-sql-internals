@@ -159,18 +159,18 @@ NOTE: `SortMergeJoinExec` operator is chosen in link:spark-sql-SparkStrategy-Joi
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
-=== [[doExecute]] Executing SortMergeJoinExec (Generating RDD Of Internal Rows) -- `doExecute` Method
+=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
 ----
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 

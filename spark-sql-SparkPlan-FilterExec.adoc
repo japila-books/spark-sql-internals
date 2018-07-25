@@ -119,7 +119,7 @@ NOTE: `output` is part of <<spark-sql-catalyst-QueryPlan.adoc#output, QueryPlan 
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in whole-stage code generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -130,7 +130,7 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in whole-stage code generation.
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume` creates a new <<spark-sql-CodegenSupport.adoc#metricTerm, metric term>> for the <<numOutputRows, numOutputRows>> metric.
 
@@ -161,7 +161,7 @@ NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to describe a structured query as a distributed computation using an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (that becomes the representation of a structured query at runtime).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` executes the <<child, child>> physical operator and creates a new `MapPartitionsRDD` that does the filtering.
 

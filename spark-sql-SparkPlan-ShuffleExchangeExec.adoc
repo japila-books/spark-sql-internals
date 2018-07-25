@@ -64,14 +64,14 @@ When <<doExecute, doExecute>>, `ShuffleExchangeExec` computes a link:spark-sql-S
 | link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] that is cached after `ShuffleExchangeExec` has been <<doExecute, executed>>.
 |===
 
-=== [[doExecute]] Executing ShuffleExchangeExec (Creating ShuffledRowRDD with Internal Binary Rows Using Optional ExchangeCoordinator) -- `doExecute` Method
+=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
 ----
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` creates a new link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] or takes <<cachedShuffleRDD, cached one>>.
 

@@ -233,14 +233,14 @@ doConsumeWithoutKeys(ctx: CodegenContext, input: Seq[ExprCode]): String
 
 NOTE: `doConsumeWithoutKeys` is used exclusively when `HashAggregateExec` is requested to <<doConsume, generate the Java code for whole-stage consume path>> (with no <<groupingExpressions, named expressions for the grouping keys>>).
 
-=== [[doConsume]] Generating Java Source Code for Whole-Stage Consume Path Code Generation -- `doConsume` Method
+=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
 [source, scala]
 ----
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of link:spark-sql-CodegenSupport.adoc#doConsume[CodegenSupport Contract] to generate plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation].
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume` executes <<doConsumeWithoutKeys, doConsumeWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doConsumeWithKeys, doConsumeWithKeys>> otherwise.
 
@@ -288,14 +288,14 @@ supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 
 NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[selects an aggregate physical operator given aggregate expressions].
 
-=== [[doExecute]] Executing HashAggregateExec (Generating RDD Of Internal Rows) -- `doExecute` Method
+=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
 ----
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:spark-sql-SparkPlan.adoc#doExecute[SparkPlan Contract] to describe a distributed computation as an `RDD` of link:spark-sql-InternalRow.adoc[internal rows] that is the runtime representation of a structured query (aka _execute_).
+NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` executes the input <<child, child SparkPlan>> (to produce link:spark-sql-InternalRow.adoc[InternalRow] objects) and applies calculation over partitions (using `RDD.mapPartitions`).
 
@@ -314,7 +314,7 @@ In the `mapPartitions` block, `doExecute` creates one of the following:
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of link:spark-sql-CodegenSupport.adoc#doProduce[CodegenSupport Contract] to generate the Java source code for link:spark-sql-whole-stage-codegen.adoc#produce-path[produce path] in whole-stage code generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce` executes <<doProduceWithoutKeys, doProduceWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doProduceWithKeys, doProduceWithKeys>> otherwise.
 
