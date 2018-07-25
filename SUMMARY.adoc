@@ -115,7 +115,6 @@
 == Notable Features
 
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
-.. link:spark-sql-CodegenSupport.adoc[CodegenSupport -- Contract for Physical Operators with Java Code Generation]
 .. link:spark-sql-CodegenContext.adoc[CodegenContext]
 .. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
 ... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
@@ -125,7 +124,7 @@
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
-.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan -- Physical Operators With Vectorized Reader]
+.. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
 .. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
 .. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
 
@@ -365,16 +364,22 @@
 
 === Physical Operators
 
-. link:spark-sql-SparkPlan.adoc[SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query]
+. link:spark-sql-SparkPlan.adoc[SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query]
+. link:spark-sql-CodegenSupport.adoc[CodegenSupport Contract -- Physical Operators with Java Code Generation]
+. link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec Contract -- Leaf Physical Operators to Scan Over BaseRelation]
+
+. link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec]
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
 . link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec]
 . link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
 . link:spark-sql-SparkPlan-CartesianProductExec.adoc[CartesianProductExec]
 . link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
-. link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec -- Contract for Leaf Physical Operators to Scan Over BaseRelation]
 . link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
-. link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec]
+. link:spark-sql-SparkPlan-DebugExec.adoc[DebugExec]
+. link:spark-sql-SparkPlan-DeserializeToObjectExec.adoc[DeserializeToObjectExec]
 . link:spark-sql-SparkPlan-Exchange.adoc[Exchange]
+. link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec]
+. link:spark-sql-SparkPlan-ExpandExec.adoc[ExpandExec]
 . link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
 . link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
 . link:spark-sql-SparkPlan-FilterExec.adoc[FilterExec]
@@ -383,14 +388,17 @@
 . link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec]
 . link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec]
 . link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
+. link:spark-sql-SparkPlan-MapElementsExec.adoc[MapElementsExec]
 . link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
 . link:spark-sql-SparkPlan-ProjectExec.adoc[ProjectExec]
 . link:spark-sql-SparkPlan-RangeExec.adoc[RangeExec]
 . link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
 . link:spark-sql-SparkPlan-ReusedExchangeExec.adoc[ReusedExchangeExec]
 . link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec]
-. link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchange]
+. link:spark-sql-SparkPlan-SampleExec.adoc[SampleExec]
+. link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
 . link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec]
+. link:spark-sql-SparkPlan-SerializeFromObjectExec.adoc[SerializeFromObjectExec]
 . link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
 . link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec]
 . link:spark-sql-SparkPlan-SortExec.adoc[SortExec]

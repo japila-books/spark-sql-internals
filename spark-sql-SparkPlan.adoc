@@ -1,4 +1,4 @@
-== [[SparkPlan]] SparkPlan -- Contract of Physical Operators in Physical Query Plan of Structured Query
+== [[SparkPlan]] SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query
 
 `SparkPlan` is the <<contract, contract>> in Spark SQL for link:spark-sql-catalyst-QueryPlan.adoc[physical operators] to build a *physical query plan* (aka *query execution plan*).
 

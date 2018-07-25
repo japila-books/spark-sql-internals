@@ -284,9 +284,9 @@ Otherwise, `apply` does nothing at all (i.e. passes the input physical plan thro
 insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 ----
 
-`insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` applies to the input physical `plan` recursively while walking down the `plan` tree and inserting <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator.
+`insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` physical optimization applies to the input physical `plan` recursively while walking down the `plan` tree and inserting <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator.
 
-Internally, `insertWholeStageCodegen` (recursively) tries to find <<spark-sql-SparkPlan.adoc#, physical operators>> with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> and meet the <<supportCodegen, supportCodegen>> requirements.
+Internally, `insertWholeStageCodegen` walks down the tree (recursively) to find <<spark-sql-SparkPlan.adoc#, physical operators>> with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> and meet the <<supportCodegen, supportCodegen>> requirements.
 
 For any physical operators found, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the input `plan`) and requests `WholeStageCodegenId` for the `getNextStageId` that are both used to create a <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator that `insertWholeStageCodegen` returns.
 

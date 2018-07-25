@@ -1,8 +1,48 @@
-== [[CodegenSupport]] CodegenSupport -- Contract for Physical Operators with Java Code Generation
+== [[CodegenSupport]] CodegenSupport Contract -- Physical Operators with Java Code Generation
 
-`CodegenSupport` is the <<contract, contract>> for link:spark-sql-SparkPlan.adoc[physical operators] that want to support *Java code generation* for link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)].
+`CodegenSupport` is the <<contract, contract>> of <<implementations, physical operators>> that want to support *Java code generation* and participate in the <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation (Whole-Stage CodeGen)>>.
 
-`CodegenSupport` is made up of the <<final-methods, final methods>> that are responsible for generating the Java source code for Whole-Stage Java Code Generation.
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.execution
+
+trait CodegenSupport extends SparkPlan {
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
+  def doProduce(ctx: CodegenContext): String
+  def inputRDDs(): Seq[RDD[InternalRow]]
+
+  // ...except the following that throws an UnsupportedOperationException by default
+  def doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
+}
+----
+
+.(Subset of) CodegenSupport Contract
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| `doConsume`
+| [[doConsume]] Generating a plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation]
+
+Used exclusively when `CodegenSupport` is requested for the Java source code to <<consume, consume>> the generated columns or a row from a physical operator.
+
+| `doProduce`
+| [[doProduce]] Generating a plain Java source code (as a text) for the link:spark-sql-whole-stage-codegen.adoc#produce-path["produce" path] in whole-stage Java code generation.
+
+Used exclusively when a physical operator is requested to <<produce, generate the Java source code for produce code path>>, i.e. a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators.
+
+| `inputRDDs`
+a| [[inputRDDs]] Input RDDs of a physical operator
+
+NOTE: Up to two input RDDs are supported only.
+
+Used when `WholeStageCodegenExec` unary physical operator is <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute, executed>>.
+|===
+
+`CodegenSupport` has the <<final-methods, final methods>> that are used to generate the Java source code in different phases of Whole-Stage Java Code Generation.
 
 [[final-methods]]
 .SparkPlan's Final Methods
@@ -60,44 +100,70 @@ Generated code:
 ...
 ----
 
-=== [[contract]] CodegenSupport Contract
-
-[source, scala]
-----
-package org.apache.spark.sql.execution
-
-trait CodegenSupport extends SparkPlan {
-  // only required methods that have no implementation
-  def doProduce(ctx: CodegenContext): String
-  def inputRDDs(): Seq[RDD[InternalRow]]
-
-  // ...except the following that throws an UnsupportedOperationException by default
-  def doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-}
-----
-
-.(Subset of) CodegenSupport Contract
-[cols="1,2",options="header",width="100%"]
+[[implementations]]
+.CodegenSupports
+[cols="1m,2",options="header",width="100%"]
 |===
-| Method
+| CodegenSupport
 | Description
 
-| `doConsume`
-| [[doConsume]] Generating plain Java source code for link:spark-sql-whole-stage-codegen.adoc#consume-path[whole-stage "consume" path code generation]
+| <<spark-sql-SparkPlan-BaseLimitExec.adoc#, BaseLimitExec>>
+| [[BaseLimitExec]]
 
-Used exclusively when `CodegenSupport` is requested for the Java code to <<consume, consume>> the generated columns or a row from a physical operator.
+| <<spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#, BroadcastHashJoinExec>>
+| [[BroadcastHashJoinExec]]
 
-| `doProduce`
-| [[doProduce]] Generating a plain Java source code (as a text) for the link:spark-sql-whole-stage-codegen.adoc#produce-path["produce" path] in whole-stage Java code generation.
+| <<spark-sql-ColumnarBatchScan.adoc#, ColumnarBatchScan>>
+| [[ColumnarBatchScan]]
 
-Used exclusively when a physical operator is requested to <<produce, generate the Java source code for produce code path>>, i.e. a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators.
+| <<spark-sql-SparkPlan-DataSourceScanExec.adoc#, DataSourceScanExec>>
+| [[DataSourceScanExec]]
 
-| `inputRDDs`
-a| [[inputRDDs]] Input RDDs of a physical operator
+| <<spark-sql-SparkPlan-DebugExec.adoc#, DebugExec>>
+| [[DebugExec]]
 
-NOTE: Up to two input RDDs are supported.
+| <<spark-sql-SparkPlan-DeserializeToObjectExec.adoc#, DeserializeToObjectExec>>
+| [[DeserializeToObjectExec]]
 
-Used exclusively when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
+| <<spark-sql-SparkPlan-ExpandExec.adoc#, ExpandExec>>
+| [[ExpandExec]]
+
+| <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>>
+| [[FilterExec]]
+
+| <<spark-sql-SparkPlan-GenerateExec.adoc#, GenerateExec>>
+| [[GenerateExec]]
+
+| <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>>
+| [[HashAggregateExec]]
+
+| <<spark-sql-SparkPlan-InputAdapter.adoc#, InputAdapter>>
+| [[InputAdapter]]
+
+| <<spark-sql-SparkPlan-MapElementsExec.adoc#, MapElementsExec>>
+| [[MapElementsExec]]
+
+| <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>>
+| [[ProjectExec]]
+
+| <<spark-sql-SparkPlan-RangeExec.adoc#, RangeExec>>
+| [[RangeExec]]
+
+| <<spark-sql-SparkPlan-SampleExec.adoc#, SampleExec>>
+| [[SampleExec]]
+
+| <<spark-sql-SparkPlan-SerializeFromObjectExec.adoc#, SerializeFromObjectExec>>
+| [[SerializeFromObjectExec]]
+
+| <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>>
+| [[SortExec]]
+
+| <<spark-sql-SparkPlan-SortMergeJoinExec.adoc#, SortMergeJoinExec>>
+| [[SortMergeJoinExec]]
+
+| <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>>
+| [[WholeStageCodegenExec]]
+
 |===
 
 === [[supportCodegen]] `supportCodegen` Flag
