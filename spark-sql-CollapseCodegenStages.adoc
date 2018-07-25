@@ -277,7 +277,7 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 Otherwise, `apply` does nothing at all (i.e. passes the input physical plan through unchanged).
 
-=== [[insertWholeStageCodegen]] Inserting WholeStageCodegenExec (with optional InputAdapter) for Physical Operators with Whole-Stage Java Code Generation Support -- `insertWholeStageCodegen` Internal Method
+=== [[insertWholeStageCodegen]] Creating WholeStageCodegenExec for Physical Operator with Java Code Generation Support -- `insertWholeStageCodegen` Internal Method
 
 [source, scala]
 ----
@@ -286,9 +286,10 @@ insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 
 `insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` physical optimization applies to the input physical `plan` recursively while walking down the `plan` tree and inserting <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator.
 
-Internally, `insertWholeStageCodegen` walks down the tree (recursively) to find <<spark-sql-SparkPlan.adoc#, physical operators>> with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> and meet the <<supportCodegen, supportCodegen>> requirements.
+Internally, `insertWholeStageCodegen` branches off per <<spark-sql-SparkPlan.adoc#, physical operator>>.
 
-For any physical operators found, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the input `plan`) and requests `WholeStageCodegenId` for the `getNextStageId` that are both used to create a <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator that `insertWholeStageCodegen` returns.
+[[insertWholeStageCodegen-CodegenSupport]]
+If a physical operator supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> and meets the <<supportCodegen, supportCodegen>> requirements, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the input `plan` operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator.
 
 [source, scala]
 ----
@@ -299,8 +300,10 @@ For any physical operators found, `insertWholeStageCodegen` <<insertInputAdapter
 // Step 4. "plan.output.length == 1 && plan.output.head.dataType.isInstanceOf[ObjectType]"
 ----
 
+For any other physical operators, `insertWholeStageCodegen` requests the operator for its <<spark-sql-catalyst-TreeNode.adoc#children, child>> physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them.
+
 [[insertWholeStageCodegen-ObjectType]]
-`insertWholeStageCodegen` skips physical operators with link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] with a single expression of `ObjectType` type and tries to insert `WholeStageCodegenExec` physical operator to its link:spark-sql-catalyst-TreeNode.adoc#children[children].
+NOTE: `insertWholeStageCodegen` explicitly skips physical operators with a single-attribute link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] with the type of the attribute being `ObjectType` type.
 
 [NOTE]
 ====
