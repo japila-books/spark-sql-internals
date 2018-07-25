@@ -204,14 +204,14 @@ If the evaluated value is `null`, `eval` gives `null` too.
 
 `eval` records whether any of the expressions in <<list, list>> expressions gave `null` value. If no <<list, list>> expression led to `true` (per <<ordering, ordering>>), `eval` returns `null` if any <<list, list>> expression evaluated to `null` or `false`.
 
-=== [[doGenCode]] Generating Java Source Code For Code-Generated Expression Evaluation -- `doGenCode` Method
+=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 
 [source, scala]
 ----
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of link:spark-sql-Expression.adoc#doGenCode[Expression Contract] to generate a Java source code for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<spark-sql-Expression.adoc#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME
 

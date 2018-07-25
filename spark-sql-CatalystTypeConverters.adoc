@@ -12,3 +12,14 @@ createToCatalystConverter(dataType: DataType): Any => Any
 `createToCatalystConverter`...FIXME
 
 NOTE: `createToCatalystConverter` is used when...FIXME
+
+=== [[convertToCatalyst]] `convertToCatalyst` Method
+
+[source, scala]
+----
+convertToCatalyst(a: Any): Any
+----
+
+`convertToCatalyst`...FIXME
+
+NOTE: `convertToCatalyst` is used when...FIXME

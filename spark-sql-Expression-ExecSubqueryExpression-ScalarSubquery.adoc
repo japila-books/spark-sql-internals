@@ -19,6 +19,9 @@ val executedPlan = planSubqueries(plan)
 [[Unevaluable]]
 `ScalarSubquery` expression link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
 
+[[dataType]]
+`ScalarSubquery` uses...FIXME...for the <<spark-sql-Expression.adoc#dataType, data type>>.
+
 [[internal-registries]]
 .ScalarSubquery's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
@@ -80,3 +83,20 @@ NOTE: `eval` is part of link:spark-sql-Expression.adoc#eval[Expression Contract]
 `eval` simply returns <<result, result>> value.
 
 `eval` reports an `IllegalArgumentException` if the `ScalarSubquery` expression has not been <<updated, updated>> yet.
+
+=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
+
+[source, scala]
+----
+doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
+----
+
+NOTE: `doGenCode` is part of <<spark-sql-Expression.adoc#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+
+`doGenCode` first makes sure that the <<updated, updated>> flag is on (`true`). If not, `doGenCode` throws an `IllegalArgumentException` exception with the following message:
+
+```
+requirement failed: [this] has not finished
+```
+
+`doGenCode` then creates a <<spark-sql-Expression-Literal.adoc#create, Literal>> (for the <<result, result>> and the <<dataType, dataType>>) and simply requests it to <<spark-sql-Expression-Literal.adoc#doGenCode, generate a Java source code>>.
