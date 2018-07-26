@@ -1,0 +1,43 @@
+== Dataset API -- Basic Actions
+
+*Basic actions* are part of the Dataset API for transforming a `Dataset` into a session-scoped or global temporary view.
+
+[[methods]]
+.Dataset API's Basic Actions
+[cols="1,2",options="header",width="100%"]
+|===
+| Transformation
+| Description
+
+| <<createTempView, createTempView>>
+a|
+
+[source, scala]
+----
+createTempView(viewName: String): Unit
+----
+
+| <<createOrReplaceTempView, createOrReplaceTempView>>
+a|
+
+[source, scala]
+----
+createOrReplaceTempView(viewName: String): Unit
+----
+
+| <<createGlobalTempView, createGlobalTempView>>
+a|
+
+[source, scala]
+----
+createGlobalTempView(viewName: String): Unit
+----
+
+| <<createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>
+a|
+
+[source, scala]
+----
+createOrReplaceGlobalTempView(viewName: String): Unit
+----
+|===

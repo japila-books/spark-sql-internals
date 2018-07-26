@@ -581,7 +581,7 @@ sortInternal(global: Boolean, sortExprs: Seq[Column]): Dataset[T]
 
 `sortInternal`...FIXME
 
-NOTE: `sortInternal` is used for the `Dataset` typed transformations: <<spark-sql-Dataset-typed-transformations.adoc#sort, sort>> and <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>>.
+NOTE: `sortInternal` is used for the `Dataset` <<spark-sql-Dataset-typed-transformations.adoc#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.adoc#sort, sort>> and <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>>.
 
 === [[checkpoint]] `checkpoint` Internal Method
 
@@ -592,20 +592,20 @@ checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
 
 `checkpoint`...FIXME
 
-NOTE: `checkpoint` is used for the `Dataset` untyped transformations: <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
+NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
 
-=== [[withPlan]] Helper Method for Untyped Transformations -- `withPlan` Internal Method
+=== [[withPlan]] Helper Method for Untyped Transformations and Basic Actions -- `withPlan` Internal Method
 
 [source, scala]
 ----
 withPlan(logicalPlan: LogicalPlan): DataFrame
 ----
 
-`withPlan`...FIXME
+`withPlan` simply uses <<ofRows, ofRows>> internal factory method to create a `DataFrame` for the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and the current <<sparkSession, SparkSession>>.
 
 NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withPlan` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. FIXME.
+NOTE: `withPlan` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>> (i.e. <<spark-sql-Dataset-untyped-transformations.adoc#join, join>>, <<spark-sql-Dataset-untyped-transformations.adoc#crossJoin, crossJoin>> and <<spark-sql-Dataset-untyped-transformations.adoc#select, select>>) and <<spark-sql-Dataset-basic-actions.adoc#, basic actions>> (i.e. <<spark-sql-Dataset-basic-actions.adoc#createTempView, createTempView>>, <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceTempView, createOrReplaceTempView>>, <<spark-sql-Dataset-basic-actions.adoc#createGlobalTempView, createGlobalTempView>> and <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>).
 
 === [[i-want-more]] Further Reading and Watching
 

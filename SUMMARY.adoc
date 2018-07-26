@@ -29,6 +29,7 @@
 . link:spark-sql-dataset-operators.adoc[Dataset API -- Dataset Operators]
 . link:spark-sql-Dataset-typed-transformations.adoc[Dataset API -- Typed Transformations]
 . link:spark-sql-Dataset-untyped-transformations.adoc[Dataset API -- Untyped Transformations]
+. link:spark-sql-Dataset-basic-actions.adoc[Dataset API -- Basic Actions]
 . link:spark-sql-Column.adoc[Column API -- Column Expressions and Operators]
 . link:spark-sql-TypedColumn.adoc[TypedColumn]
 . link:spark-sql-DataFrameNaFunctions.adoc[DataFrameNaFunctions]
