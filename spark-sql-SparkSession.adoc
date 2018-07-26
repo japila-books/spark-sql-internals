@@ -29,7 +29,7 @@ You can have as many `SparkSessions` as you want in a single Spark application. 
 You can link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[enable Hive support] with support for an link:spark-sql-hive-metastore.adoc[external Hive metastore] (that could be particularly useful in projects that use other Big Data projects like Apache Impala or Apache Hive itself).
 
 [[methods]]
-.SparkSession's Class and Instance Methods
+.SparkSession API (Class and Instance Methods)
 [cols="1,2",options="header",width="100%"]
 |===
 | Method
@@ -185,7 +185,7 @@ It also offers conversions from `RDD` or `Seq` of `Product` types (e.g. case cla
 
 NOTE: It is only possible to call `toDF` methods on `RDD` objects of `Int`, `Long`, and `String` "primitive" types.
 
-=== [[emptyDataset]] Creating Empty Dataset -- `emptyDataset` method
+=== [[emptyDataset]] Creating Empty Dataset (Given Encoder) -- `emptyDataset` Operator
 
 [source, scala]
 ----
@@ -251,7 +251,7 @@ NOTE: Only unresolved link:spark-sql-ExpressionEncoder.adoc[expression encoders]
 
 The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of link:spark-sql-InternalRow.adoc[InternalRows]. With the references and rows, `createDataset` returns a link:spark-sql-Dataset.adoc[Dataset] with a link:spark-sql-LogicalPlan-LocalRelation.adoc[`LocalRelation` logical query plan].
 
-=== [[range]] Creating Dataset With Single Long Column -- `range` methods
+=== [[range]] Creating Dataset With Single Long Column -- `range` Operator
 
 [source, scala]
 ----

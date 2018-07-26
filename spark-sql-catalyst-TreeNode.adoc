@@ -24,7 +24,7 @@ Scala-specific, `TreeNode` is an abstract class that is the base class of Cataly
 `TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. The <<methods, TreeNode API>> therefore offers not only methods that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>, etc. that can be used for advanced tree manipulation or simply debugging.
 
 [[methods]]
-.TreeNode API
+.TreeNode API (Public Methods)
 [cols="1,2",options="header",width="100%"]
 |===
 | Method

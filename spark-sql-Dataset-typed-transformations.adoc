@@ -1,0 +1,158 @@
+== Dataset API -- Typed Transformations
+
+*Typed transformations* are part of the Dataset API for transforming a `Dataset` with an <<spark-sql-Encoder.adoc#, Encoder>> (except the <<spark-sql-RowEncoder.adoc#, RowEncoder>>).
+
+[[methods]]
+.Dataset API's Typed Transformations
+[cols="1,2",options="header",width="100%"]
+|===
+| Transformation
+| Description
+
+| <<as, as>>
+a|
+
+[source, scala]
+----
+as(alias: String): Dataset[T]
+----
+
+| <<coalesce, coalesce>>
+a|
+
+[source, scala]
+----
+coalesce(numPartitions: Int): Dataset[T]
+----
+
+| <<dropDuplicates, dropDuplicates>>
+a|
+
+[source, scala]
+----
+dropDuplicates(colNames: Seq[String]): Dataset[T]
+----
+
+| <<except, except>>
+a|
+
+[source, scala]
+----
+except(other: Dataset[T]): Dataset[T]
+----
+
+| <<filter, filter>>
+a|
+
+[source, scala]
+----
+filter(condition: Column): Dataset[T]
+filter(func: T => Boolean): Dataset[T]
+----
+
+| <<hint, hint>>
+a|
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+| <<intersect, intersect>>
+a|
+
+[source, scala]
+----
+intersect(other: Dataset[T]): Dataset[T]
+----
+
+| <<joinWith, joinWith>>
+a|
+
+[source, scala]
+----
+joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
+----
+
+| <<limit, limit>>
+a|
+
+[source, scala]
+----
+limit(n: Int): Dataset[T]
+----
+
+| <<map, map>>
+a|
+
+[source, scala]
+----
+map[U: Encoder](func: T => U): Dataset[U]
+map[U](func: MapFunction[T, U], encoder: Encoder[U]): Dataset[U]
+----
+
+| <<repartition, repartition>>
+a|
+
+[source, scala]
+----
+repartition(numPartitions: Int): Dataset[T]
+repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+| <<repartitionByRange, repartitionByRange>>
+a|
+
+[source, scala]
+----
+repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+| <<sample, sample>>
+a|
+
+[source, scala]
+----
+sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
+----
+
+| <<sort, sort>>
+a|
+
+[source, scala]
+----
+sort(sortExprs: Column*): Dataset[T]
+----
+
+| <<sortWithinPartitions, sortWithinPartitions>>
+a|
+
+[source, scala]
+----
+sortWithinPartitions(sortExprs: Column*): Dataset[T]
+----
+
+| <<union, union>>
+a|
+
+[source, scala]
+----
+union(other: Dataset[T]): Dataset[T]
+----
+
+| <<unionByName, unionByName>>
+a| (*New in 2.3.0*)
+
+[source, scala]
+----
+unionByName(other: Dataset[T]): Dataset[T]
+----
+
+| <<withWatermark, withWatermark>>
+a|
+
+[source, scala]
+----
+withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
+----
+|===

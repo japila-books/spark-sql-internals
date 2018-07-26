@@ -1,0 +1,171 @@
+== Dataset API -- Untyped Transformations
+
+*Untyped transformations* are part of the Dataset API for transforming a `Dataset`...FIXME
+
+[[methods]]
+.Dataset API's Untyped Transformations
+[cols="1,2",options="header",width="100%"]
+|===
+| Transformation
+| Description
+
+| <<agg, agg>>
+a|
+
+[source, scala]
+----
+agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
+agg(exprs: Map[String, String]): DataFrame
+agg(exprs: java.util.Map[String, String]): DataFrame
+agg(expr: Column, exprs: Column*): DataFrame
+----
+
+| <<apply, apply>>
+a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+apply(colName: String): Column
+----
+
+| <<checkpoint, checkpoint>>
+a|
+
+[source, scala]
+----
+checkpoint(): Dataset[T]
+checkpoint(eager: Boolean): Dataset[T]
+----
+
+| <<col, col>>
+a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+col(colName: String): Column
+----
+
+| <<colRegex, colRegex>>
+a| (*New in 2.3.0*) Selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+colRegex(colName: String): Column
+----
+
+| <<crossJoin, crossJoin>>
+a|
+
+[source, scala]
+----
+crossJoin(right: Dataset[_]): DataFrame
+----
+
+| <<cube, cube>>
+a|
+
+[source, scala]
+----
+cube(cols: Column*): RelationalGroupedDataset
+cube(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+| <<drop, drop>>
+a|
+
+[source, scala]
+----
+drop(colName: String): DataFrame
+drop(colNames: String*): DataFrame
+drop(col: Column): DataFrame
+----
+
+| <<groupBy, groupBy>>
+a|
+
+[source, scala]
+----
+groupBy(cols: Column*): RelationalGroupedDataset
+groupBy(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+| <<join, join>>
+a|
+
+[source, scala]
+----
+join(right: Dataset[_]): DataFrame
+join(right: Dataset[_], usingColumn: String): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
+join(right: Dataset[_], joinExprs: Column): DataFrame
+join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
+----
+
+| <<localCheckpoint, localCheckpoint>>
+a| (*New in 2.3.0*)
+
+[source, scala]
+----
+localCheckpoint(): Dataset[T]
+localCheckpoint(eager: Boolean): Dataset[T]
+----
+
+| <<na, na>>
+a|
+
+[source, scala]
+----
+na: DataFrameNaFunctions
+----
+
+| <<rollup, rollup>>
+a|
+
+[source, scala]
+----
+rollup(cols: Column*): RelationalGroupedDataset
+rollup(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+| <<select, select>>
+a|
+
+[source, scala]
+----
+select(cols: Column*): DataFrame
+select(col: String, cols: String*): DataFrame
+----
+
+| <<selectExpr, selectExpr>>
+a|
+
+[source, scala]
+----
+selectExpr(exprs: String*): DataFrame
+----
+
+| <<stat, stat>>
+a|
+
+[source, scala]
+----
+stat: DataFrameStatFunctions
+----
+
+| <<withColumn, withColumn>>
+a|
+
+[source, scala]
+----
+withColumn(colName: String, col: Column): DataFrame
+----
+
+| <<withColumnRenamed, withColumnRenamed>>
+a|
+
+[source, scala]
+----
+withColumnRenamed(existingName: String, newName: String): DataFrame
+----
+|===

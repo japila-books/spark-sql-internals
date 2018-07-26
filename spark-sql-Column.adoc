@@ -1,4 +1,4 @@
-== [[Column]] Column Expressions and Operators
+== [[Column]] Column API -- Column Expressions and Operators
 
 [[creating-instance]]
 [[expr]]

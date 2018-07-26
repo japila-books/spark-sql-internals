@@ -84,6 +84,8 @@ val dataset: Dataset[Long] = ...
 dataset.queryExecution.executedPlan
 ----
 
+`QueryExecution` uses the <<spark-sql-Optimizer.adoc#, Catalyst Query Optimizer>> and <<spark-sql-tungsten.adoc#, Tungsten>> for better structured query performance.
+
 [[properties]]
 .QueryExecution's Properties
 [cols="1,2",options="header",width="100%"]

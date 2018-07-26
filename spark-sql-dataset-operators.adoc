@@ -1,6 +1,6 @@
-== Dataset Operators
+== Dataset API -- Dataset Operators
 
-You can group the set of all operators to work with `Datasets` per target, i.e. the part of a `Dataset` they are applied to.
+Dataset API offers a rich set of operators that can be grouped per target, i.e. the part of a `Dataset` they are applied to.
 
 . link:spark-sql-Column.adoc[Column Operators]
 . link:spark-sql-functions.adoc[Standard Functions] (from `functions` object)
