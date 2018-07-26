@@ -91,6 +91,32 @@ map[U: Encoder](func: T => U): Dataset[U]
 map[U](func: MapFunction[T, U], encoder: Encoder[U]): Dataset[U]
 ----
 
+| <<mapPartitions, mapPartitions>>
+a|
+
+[source, scala]
+----
+mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
+mapPartitions[U](f: MapPartitionsFunction[T, U], encoder: Encoder[U]): Dataset[U]
+----
+
+| <<randomSplit, randomSplit>>
+a|
+
+[source, scala]
+----
+randomSplit(weights: Array[Double]): Array[Dataset[T]]
+randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
+----
+
+| <<randomSplitAsList, randomSplitAsList>>
+a|
+
+[source, scala]
+----
+randomSplitAsList(weights: Array[Double], seed: Long): java.util.List[Dataset[T]]
+----
+
 | <<repartition, repartition>>
 a|
 
@@ -114,6 +140,32 @@ a|
 [source, scala]
 ----
 sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
+----
+
+| <<select, select>>
+a|
+
+[source, scala]
+----
+select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
+select[U1, U2](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
+select[U1, U2, U3](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
+select[U1, U2, U3, U4](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
+select[U1, U2, U3, U4, U5](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4],
+  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
 ----
 
 | <<sort, sort>>

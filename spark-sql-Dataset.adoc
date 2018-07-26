@@ -25,15 +25,9 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 * <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<spark-sql-SparkSession.adoc#, SparkSession>>)
 
-* Dataset.toDF operator is used
+* <<spark-sql-Dataset-untyped-transformations.adoc#toDF, Dataset.toDF>> untyped transformation is used
 
-* Dataset.select operator (with a TypedColumn) is used
-
-* Dataset.selectUntyped
-
-* Dataset.randomSplit operator is used
-
-* Dataset.mapPartitions operator is used
+* <<spark-sql-Dataset-typed-transformations.adoc#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.adoc#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.adoc#mapPartitions, Dataset.mapPartitions>> typed transformations are used
 
 * <<spark-sql-KeyValueGroupedDataset.adoc#agg, KeyValueGroupedDataset.agg>> operator is used (that requests `KeyValueGroupedDataset` to <<spark-sql-KeyValueGroupedDataset.adoc#aggUntyped, aggUntyped>>)
 
@@ -544,7 +538,7 @@ selectUntyped(columns: TypedColumn[_, _]*): Dataset[_]
 
 `selectUntyped`...FIXME
 
-NOTE: `selectUntyped` is used exclusively when link:spark-sql-dataset-operators.adoc#select[Dataset.select] typed operator is used.
+NOTE: `selectUntyped` is used exclusively when <<spark-sql-Dataset-typed-transformations.adoc#select, Dataset.select>> typed transformation is used.
 
 === [[withTypedPlan]] Helper Method for Typed Transformations -- `withTypedPlan` Internal Method
 

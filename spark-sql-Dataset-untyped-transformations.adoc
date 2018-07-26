@@ -153,6 +153,14 @@ a|
 stat: DataFrameStatFunctions
 ----
 
+| <<toDF, toDF>>
+a|
+
+[source, scala]
+----
+toDF(): DataFrame
+----
+
 | <<withColumn, withColumn>>
 a|
 
