@@ -67,8 +67,9 @@
 == Kafka Data Source
 
 . link:spark-sql-kafka.adoc[Kafka Data Source]
-. link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
 . link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
+. link:spark-sql-KafkaRelation.adoc[KafkaRelation]
+. link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
 . link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
 
 == JDBC Data Source

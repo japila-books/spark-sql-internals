@@ -1,9 +1,11 @@
 == [[JdbcRelationProvider]] JdbcRelationProvider
 
 [[shortName]]
-`JdbcRelationProvider` is a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>> and a <<createRelation-RelationProvider, RelationProvider>> that is registered to handle *jdbc* data source format.
+`JdbcRelationProvider` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself to handle *jdbc* data source format.
 
-`JdbcRelationProvider` is a link:spark-sql-DataSourceRegister.adoc[DataSourceRegister] that is registered in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` (that you can find in the https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark).
+NOTE: `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
+
+`JdbcRelationProvider` is a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>> and a <<createRelation-RelationProvider, RelationProvider>>.
 
 `JdbcRelationProvider` is used when `DataFrameReader` is requested to load data from link:spark-sql-DataFrameReader.adoc#jdbc[jdbc] data source.
 
@@ -15,7 +17,7 @@ val table = spark.read.jdbc(...)
 val table = spark.read.format("jdbc").load(...)
 ----
 
-=== [[createRelation-RelationProvider]] Creating JDBCRelation -- `createRelation` Method (from RelationProvider)
+=== [[createRelation-RelationProvider]] Creating BaseRelation -- `createRelation` Method (from RelationProvider)
 
 [source, scala]
 ----
@@ -24,7 +26,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is part of link:spark-sql-RelationProvider.adoc[RelationProvider Contract].
+NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
 
 `createRelation` creates a `JDBCPartitioningInfo` (using link:spark-sql-JDBCOptions.adoc[JDBCOptions] and the input `parameters` that correspond to the link:spark-sql-JDBCOptions.adoc#options[Options for JDBC Data Source]).
 

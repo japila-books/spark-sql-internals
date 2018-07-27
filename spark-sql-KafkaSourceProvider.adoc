@@ -1,11 +1,11 @@
 == [[KafkaSourceProvider]] KafkaSourceProvider
 
-`KafkaSourceProvider` is an link:spark-sql-DataSourceRegister.adoc[interface to register] Apache Kafka as a data source.
-
-`KafkaSourceProvider` is a link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider] and link:spark-sql-RelationProvider.adoc[RelationProvider].
-
 [[shortName]]
-`KafkaSourceProvider` is registered under `kafka` alias.
+`KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself to handle *kafka* data source format.
+
+NOTE: `KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/v2.3.1/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
+
+`KafkaSourceProvider` is a link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider] and a <<createRelation-RelationProvider, RelationProvider>>.
 
 [source, scala]
 ----
@@ -39,7 +39,14 @@ org.apache.spark.sql.AnalysisException: kafka does not allow user-specified sche
   ... 48 elided
 ----
 
-=== [[createRelation-RelationProvider]] Creating KafkaRelation -- `createRelation` Method (from RelationProvider)
+[NOTE]
+====
+`KafkaSourceProvider` is also a `StreamSourceProvider`, a `StreamSinkProvider`, a `StreamWriteSupport` and a `ContinuousReadSupport` that are contracts used in Spark Structured Streaming.
+
+You can find more on Spark Structured Streaming in my gitbook https://jaceklaskowski.gitbooks.io/spark-structured-streaming/[Spark Structured Streaming].
+====
+
+=== [[createRelation-RelationProvider]] Creating BaseRelation -- `createRelation` Method (from RelationProvider)
 
 [source, scala]
 ----
@@ -48,25 +55,23 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is part of link:spark-sql-RelationProvider.adoc#createRelation[RelationProvider Contract] used exclusively when `DataSource` is requested to create a `BaseRelation` (`resolveRelation` method) for reading or writing.
+NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
 
-`createRelation` creates a link:spark-sql-streaming-KafkaRelation.adoc[KafkaRelation].
+`createRelation` starts by <<validateBatchOptions, validating batch options>> in the input `parameters`.
 
-Internally, `createRelation` first <<validateBatchOptions, validates batch options>> and collects all the *kafka.*-prefixed parameters.
+`createRelation` collects all ``kafka.``-prefixed key options (in the input `parameters`) and creates a local `specifiedKafkaParams` with the keys without the `kafka.` prefix (e.g. `kafka.whatever` is simply `whatever`).
 
-`createRelation` then creates a `KafkaOffsetRangeLimit` per `startingoffsets` option with `EarliestOffsetRangeLimit` being the default.
+`createRelation` <<getKafkaOffsetRangeLimit, creates a KafkaOffsetRangeLimit>> with the `startingoffsets` offset option key (in the given `parameters`) and `EarliestOffsetRangeLimit` as the default offsets.
 
-NOTE: `startingoffsets` can be `latest`, `earliest`, a JSON or undefined.
+createRelation` makes sure that the `KafkaOffsetRangeLimit` is not `EarliestOffsetRangeLimit` or throws a `AssertionError`.
 
-NOTE: `createRelation` asserts that `startingoffsets` is not `latest`.
+`createRelation` <<getKafkaOffsetRangeLimit, creates another KafkaOffsetRangeLimit>>, but this time with the `endingoffsets` offset option key (in the given `parameters`) and `LatestOffsetRangeLimit` as the default offsets.
 
-`createRelation` creates a `KafkaOffsetRangeLimit` per `endingoffsets` option with `LatestOffsetRangeLimit` being the default.
+`createRelation` makes sure that the `KafkaOffsetRangeLimit` is not `EarliestOffsetRangeLimit` or throws a `AssertionError`.
 
-NOTE: `createRelation` asserts that `endingoffsets` is not `earliest`.
+In the end, `createRelation` creates a <<spark-sql-KafkaRelation.adoc#creating-instance, KafkaRelation>> with the <<strategy, subscription strategy>> (in the given `parameters`), <<failOnDataLoss, failOnDataLoss>> option, and the starting and ending offsets.
 
-In the end, `createRelation` creates a link:spark-sql-streaming-KafkaRelation.adoc#creating-instance[KafkaRelation] with the subscription strategy (per `assign`, `subscribe`, `subscribepattern` options), with `failondataloss` option, and the parameters and offsets (as calculated above).
-
-=== [[validateBatchOptions]] `validateBatchOptions` Internal Method
+=== [[validateBatchOptions]] Validating Batch Options -- `validateBatchOptions` Internal Method
 
 [source, scala]
 ----
@@ -91,22 +96,6 @@ createRelation(
 CAUTION: FIXME
 
 NOTE: `createRelation` is part of link:spark-sql-CreatableRelationProvider.adoc#contract[CreatableRelationProvider Contract].
-
-=== [[createSource]] `createSource` Method
-
-[source, scala]
-----
-createSource(
-  sqlContext: SQLContext,
-  metadataPath: String,
-  schema: Option[StructType],
-  providerName: String,
-  parameters: Map[String, String]): Source
-----
-
-CAUTION: FIXME
-
-NOTE: `createSource` is part of Structured Streaming's `StreamSourceProvider` Contract.
 
 === [[sourceSchema]] `sourceSchema` Method
 
@@ -136,3 +125,39 @@ root
 ----
 
 NOTE: `sourceSchema` is part of Structured Streaming's `StreamSourceProvider` Contract.
+
+=== [[getKafkaOffsetRangeLimit]] `getKafkaOffsetRangeLimit` Object Method
+
+[source, scala]
+----
+getKafkaOffsetRangeLimit(
+  params: Map[String, String],
+  offsetOptionKey: String,
+  defaultOffsets: KafkaOffsetRangeLimit): KafkaOffsetRangeLimit
+----
+
+`getKafkaOffsetRangeLimit`...FIXME
+
+NOTE: `getKafkaOffsetRangeLimit` is used when `KafkaSourceProvider` is requested to <<validateBatchOptions, validate batch options>> and <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
+
+=== [[strategy]] `strategy` Internal Method
+
+[source, scala]
+----
+strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
+----
+
+`strategy`...FIXME
+
+NOTE: `strategy` is used when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
+
+=== [[failOnDataLoss]] `failOnDataLoss` Internal Method
+
+[source, scala]
+----
+failOnDataLoss(caseInsensitiveParams: Map[String, String]): Boolean
+----
+
+`failOnDataLoss`...FIXME
+
+NOTE: `failOnDataLoss` is used when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).

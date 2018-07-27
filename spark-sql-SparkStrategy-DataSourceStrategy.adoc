@@ -28,7 +28,7 @@ Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively
 | [[TableScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-TableScan.adoc[TableScan] relation
 a| Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] and <<toCatalystRDD, converting the result to Catalyst RDD>>)
 
-Matches `KafkaRelation` exclusively
+Matches <<spark-sql-KafkaRelation.adoc#, KafkaRelation>> exclusively
 |===
 
 [source, scala]

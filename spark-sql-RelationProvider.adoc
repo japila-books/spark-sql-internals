@@ -29,7 +29,7 @@ trait RelationProvider {
 | Description
 
 | `createRelation`
-| [[createRelation]] Creates a link:spark-sql-BaseRelation.adoc[BaseRelation]
+| [[createRelation]] Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing)
 
 Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format (and no user-defined schema or the user-defined schema matches <<spark-sql-BaseRelation.adoc#schema, schema>> of the `BaseRelation`)
 |===

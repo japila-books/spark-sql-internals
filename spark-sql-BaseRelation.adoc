@@ -56,8 +56,8 @@ NOTE: It is recommended that custom data sources (outside Spark SQL) should leav
 | link:spark-sql-JDBCRelation.adoc[JDBCRelation]
 | [[JDBCRelation]]
 
-| `KafkaRelation`
-| [[KafkaRelation]] Spark Structured Streaming's `BaseRelation` for datasets with records from Apache Kafka
+| <<spark-sql-KafkaRelation.adoc#, KafkaRelation>>
+| [[KafkaRelation]] Datasets with records from Apache Kafka
 |===
 
 === [[needConversion]] Should JVM Objects Inside Rows Be Converted to Catalyst Types? -- `needConversion` Method
