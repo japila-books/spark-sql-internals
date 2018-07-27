@@ -14,13 +14,8 @@
 .. link:spark-sql-SparkSession-Builder.adoc[Builder -- Building SparkSession using Fluent API]
 
 . link:spark-sql-Dataset.adoc[Dataset -- Strongly-Typed Structured Query with Encoder]
-.. link:spark-sql-Encoder.adoc[Encoder -- Internal Row Converter]
-.. link:spark-sql-Encoders.adoc[Encoders Factory Object]
-.. link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder -- Expression-Based Encoder]
-.. link:spark-sql-ExpressionEncoder-LocalDateTime.adoc[LocalDateTimeEncoder -- Custom ExpressionEncoder for java.time.LocalDateTime]
-.. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows with RowEncoder]
-... link:spark-sql-Row.adoc[Row]
-... link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
+. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows with RowEncoder]
+. link:spark-sql-Row.adoc[Row]
 
 . link:spark-sql-datasource-api.adoc[DataSource API -- Managing Datasets in External Data Sources]
 .. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Loading Data From External Data Sources]
@@ -68,6 +63,13 @@
 . link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
 
 . link:spark-sql-properties.adoc[Configuration Properties]
+
+== Kafka Data Source
+
+. link:spark-sql-kafka.adoc[Kafka Data Source]
+. link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
+. link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
+. link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
 
 == JDBC Data Source
 
@@ -196,7 +198,7 @@
 . link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
 .. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
-== Query Planning and Execution
+== Structured Query Execution
 
 . link:spark-sql-QueryExecution.adoc[QueryExecution -- Structured Query Execution Pipeline (of Dataset)]
 .. link:spark-sql-UnsupportedOperationChecker.adoc[UnsupportedOperationChecker]
@@ -493,6 +495,14 @@
 . link:spark-sql-ReuseExchange.adoc[ReuseExchange]
 . link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
 
+== Encoders
+
+. link:spark-sql-Encoder.adoc[Encoder -- Internal Row Converter]
+.. link:spark-sql-Encoders.adoc[Encoders Factory Object]
+.. link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder -- Expression-Based Encoder]
+.. link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
+.. link:spark-sql-ExpressionEncoder-LocalDateTime.adoc[LocalDateTimeEncoder -- Custom ExpressionEncoder for java.time.LocalDateTime]
+
 === RDDs
 
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
@@ -551,13 +561,7 @@
 . link:spark-sql-SparkSqlAstBuilder.adoc[SparkSqlAstBuilder]
 . link:spark-sql-SparkSqlParser.adoc[SparkSqlParser -- Default SQL Parser]
 
-== Kafka Integration
-
-. link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
-.. link:spark-sql-DataSourceRegister-KafkaSourceProvider.adoc[KafkaSourceProvider]
-.. link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
-
-== Hive Integration
+== Hive Data Source
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]
 .. link:spark-sql-hive-metastore.adoc[Hive Metastore]

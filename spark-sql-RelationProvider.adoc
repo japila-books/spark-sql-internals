@@ -44,7 +44,7 @@ Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.ado
 | link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 | [[JdbcRelationProvider]]
 
-| link:spark-sql-DataSourceRegister-KafkaSourceProvider.adoc[KafkaSourceProvider]
+| link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
 | [[KafkaSourceProvider]]
 |===
 

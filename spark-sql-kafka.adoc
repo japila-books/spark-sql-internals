@@ -1,0 +1,21 @@
+== Kafka Data Source
+
+Spark SQL supports loading data from topics in Apache Kafka.
+
+====
+Apache Kafka is mainly a storage of records in a fault-tolerant durable way.
+
+Read more on Apache Kafka in the http://kafka.apache.org/documentation/[official documentation] or in my other gitbook https://jaceklaskowski.gitbooks.io/apache-kafka/[Apache Kafka Notebook].
+====
+
+As a Spark developer, you use <<spark-sql-DataFrameReader.adoc#format, DataFrameReader.format>> method to specify Apache Kafka as the data source to load data from. You can use <<spark-sql-KafkaSourceProvider.adoc#shortName, kafka>> or `org.apache.spark.sql.kafka010.KafkaSourceProvider` as the input data source format.
+
+[source, scala]
+----
+val kafka = spark.read.format("kafka").load
+
+// Alternatively
+val kafka = spark.read.format("org.apache.spark.sql.kafka010.KafkaSourceProvider").load
+----
+
+These one-liners create a <<spark-sql-DataFrame.adoc#, DataFrame>> that represents the distributed process of loading data from one or many Kafka topics (with additional properties).

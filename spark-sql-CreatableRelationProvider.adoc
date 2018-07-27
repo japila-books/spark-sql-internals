@@ -20,7 +20,7 @@ NOTE: A structured query is a link:spark-sql-DataFrame.adoc[DataFrame] while the
 | link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 |
 
-| link:spark-sql-DataSourceRegister-KafkaSourceProvider.adoc[KafkaSourceProvider]
+| link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
 |
 |===
 

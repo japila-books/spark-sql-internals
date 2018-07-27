@@ -4,6 +4,7 @@
 
 `KafkaSourceProvider` is a link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider] and link:spark-sql-RelationProvider.adoc[RelationProvider].
 
+[[shortName]]
 `KafkaSourceProvider` is registered under `kafka` alias.
 
 [source, scala]
