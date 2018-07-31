@@ -1,3 +1,109 @@
 == [[KafkaRelation]] KafkaRelation
 
-`KafkaRelation` is...FIXME
+`KafkaRelation` is a <<spark-sql-BaseRelation.adoc#, BaseRelation>> with a <<spark-sql-TableScan.adoc#, TableScan>>.
+
+`KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
+
+[[schema]]
+`KafkaRelation` uses the fixed <<spark-sql-BaseRelation.adoc#schema, schema>>.
+
+[[kafkaSchema]]
+.KafkaRelation's Schema (in the positional order)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Field Name
+| Data Type
+
+| `key`
+| `BinaryType`
+
+| `value`
+| `BinaryType`
+
+| `topic`
+| `StringType`
+
+| `partition`
+| `IntegerType`
+
+| `offset`
+| `LongType`
+
+| `timestamp`
+| `TimestampType`
+
+| `timestampType`
+| `IntegerType`
+|===
+
+[[toString]]
+`KafkaRelation` uses the following human-readable text representation:
+
+```
+KafkaRelation(strategy=[strategy], start=[startingOffsets], end=[endingOffsets])
+```
+
+[[internal-registries]]
+.KafkaRelation's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| pollTimeoutMs
+| [[pollTimeoutMs]] FIXME
+
+Used when...FIXME
+|===
+
+[[logging]]
+[TIP]
+====
+Enable `INFO` or `DEBUG` logging level for `org.apache.spark.sql.kafka010.KafkaRelation` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.kafka010.KafkaRelation=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
+=== [[creating-instance]] Creating KafkaRelation Instance
+
+`KafkaRelation` takes the following when created:
+
+* [[sqlContext]] `SQLContext`
+* [[strategy]] `ConsumerStrategy`
+* [[sourceOptions]] Source options (as `Map[String, String]`)
+* [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
+* [[failOnDataLoss]] `failOnDataLoss` flag
+* [[startingOffsets]] Starting offsets (as `KafkaOffsetRangeLimit`)
+* [[endingOffsets]] Ending offsets (as `KafkaOffsetRangeLimit`)
+
+`KafkaRelation` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[buildScan]] `buildScan` Method
+
+[source, scala]
+----
+buildScan(): RDD[Row]
+----
+
+NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Contract>> to...FIXME.
+
+`buildScan`...FIXME
+
+=== [[getPartitionOffsets]] `getPartitionOffsets` Internal Method
+
+[source, scala]
+----
+getPartitionOffsets(
+  kafkaReader: KafkaOffsetReader,
+  kafkaOffsets: KafkaOffsetRangeLimit): Map[TopicPartition, Long]
+----
+
+`getPartitionOffsets`...FIXME
+
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, buildScan>>.
