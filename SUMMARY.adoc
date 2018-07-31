@@ -160,7 +160,7 @@
 . link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Relations with Inserting or Overwriting Data]
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
 . link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
-. link:spark-sql-TableScan.adoc[TableScan Contract]
+. link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
 .. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]

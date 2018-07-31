@@ -19,7 +19,7 @@ trait PrunedFilteredScan {
 | Description
 
 | `buildScan`
-| [[buildScan]] Building Distributed Data Scan with Column Pruning and Filter Pushdown
+| [[buildScan]] Building distributed data scan with column pruning and filter pushdown
 
 In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data scan (i.e. scanning over data in a relation)
 
@@ -29,7 +29,7 @@ Used exclusively when `DataSourceStrategy` execution planning strategy is reques
 NOTE: `PrunedFilteredScan` is a "lighter" and stable version of the <<spark-sql-CatalystScan.adoc#, CatalystScan Contract>>.
 
 [[implementations]]
-NOTE: <<spark-sql-JDBCRelation.adoc#,JDBCRelation>> is the one and only known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+NOTE: <<spark-sql-JDBCRelation.adoc#, JDBCRelation>> is the one and only known implementation of the <<contract, PrunedFilteredScan Contract>> in Spark SQL.
 
 [[example]]
 [source, scala]

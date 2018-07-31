@@ -10,23 +10,23 @@
 | Logical Operator
 | Description
 
-| [[CatalystScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-CatalystScan.adoc[CatalystScan] relation
-| Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>>
+| link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-CatalystScan.adoc[CatalystScan] relation
+| [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>>
 
 `CatalystScan` does not seem to be used in Spark SQL.
 
-| [[PrunedFilteredScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] relation
-| Uses <<pruneFilterProject, pruneFilterProject>>
+| link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] relation
+| [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>>
 
 Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively
 
-| [[PrunedScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-PrunedScan.adoc[PrunedScan] relation
-| Uses <<pruneFilterProject, pruneFilterProject>>
+| link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-PrunedScan.adoc[PrunedScan] relation
+| [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>>
 
 `PrunedScan` does not seem to be used in Spark SQL.
 
-| [[TableScan]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-TableScan.adoc[TableScan] relation
-a| Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] and <<toCatalystRDD, converting the result to Catalyst RDD>>)
+| link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-TableScan.adoc[TableScan] relation
+a| [[TableScan]] Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] and <<toCatalystRDD, converting the result to Catalyst RDD>>)
 
 Matches <<spark-sql-KafkaRelation.adoc#, KafkaRelation>> exclusively
 |===
