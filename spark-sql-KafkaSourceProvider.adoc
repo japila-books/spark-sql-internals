@@ -57,7 +57,7 @@ createRelation(
 
 NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
 
-`createRelation` starts by <<validateBatchOptions, validating batch options>> in the input `parameters`.
+`createRelation` starts by <<validateBatchOptions, validating Kafka options>> in the input `parameters`.
 
 `createRelation` collects all ``kafka.``-prefixed key options (in the input `parameters`) and creates a local `specifiedKafkaParams` with the keys without the `kafka.` prefix (e.g. `kafka.whatever` is simply `whatever`).
 
@@ -71,16 +71,32 @@ createRelation` makes sure that the `KafkaOffsetRangeLimit` is not `EarliestOffs
 
 In the end, `createRelation` creates a <<spark-sql-KafkaRelation.adoc#creating-instance, KafkaRelation>> with the <<strategy, subscription strategy>> (in the given `parameters`), <<failOnDataLoss, failOnDataLoss>> option, and the starting and ending offsets.
 
-=== [[validateBatchOptions]] Validating Batch Options -- `validateBatchOptions` Internal Method
+=== [[validateBatchOptions]] Validating Kafka Options (for Batch Queries) -- `validateBatchOptions` Internal Method
 
 [source, scala]
 ----
 validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
 ----
 
-`validateBatchOptions`...FIXME
+`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the KafkaOffsetRangeLimit>> for the input `caseInsensitiveParams`, the `startingoffsets` option key and `EarliestOffsetRangeLimit` (as the default `KafkaOffsetRangeLimit`).
 
-NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation, create a KafkaRelation>>.
+`validateBatchOptions` then matches the returned `KafkaOffsetRangeLimit` as follows:
+
+. `EarliestOffsetRangeLimit` is acceptable and `validateBatchOptions` does nothing
+
+. `LatestOffsetRangeLimit` is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
++
+```
+starting offset can't be latest for batch queries on Kafka
+```
+
+. Any `SpecificOffsetRangeLimit` is acceptable unless the offset is `-1L` and `validateBatchOptions` throws an `IllegalArgumentException`:
++
+```
+startingOffsets for [tp] can't be latest for batch queries on Kafka
+```
+
+NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
 
 === [[createRelation-CreatableRelationProvider]] `createRelation` Method (from CreatableRelationProvider)
 
@@ -138,7 +154,7 @@ getKafkaOffsetRangeLimit(
 
 `getKafkaOffsetRangeLimit`...FIXME
 
-NOTE: `getKafkaOffsetRangeLimit` is used when `KafkaSourceProvider` is requested to <<validateBatchOptions, validate batch options>> and <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
+NOTE: `getKafkaOffsetRangeLimit` is used when `KafkaSourceProvider` is requested to <<validateBatchOptions, validate Kafka options>> and <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
 
 === [[strategy]] `strategy` Internal Method
 
