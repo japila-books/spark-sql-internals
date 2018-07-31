@@ -1,6 +1,6 @@
 == Dataset API -- Untyped Transformations
 
-*Untyped transformations* are part of the Dataset API for transforming a `Dataset`...FIXME
+*Untyped transformations* are part of the Dataset API for transforming a `Dataset` to a <<spark-sql-DataFrame.adoc#, DataFrame>>, a <<spark-sql-Column.adoc#, Column>>, a <<spark-sql-RelationalGroupedDataset.adoc#, RelationalGroupedDataset>>, a <<spark-sql-DataFrameNaFunctions.adoc#, DataFrameNaFunctions>> or a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> (and hence _untyped_).
 
 [[methods]]
 .Dataset API's Untyped Transformations
@@ -177,3 +177,190 @@ a|
 withColumnRenamed(existingName: String, newName: String): DataFrame
 ----
 |===
+
+=== [[agg]] `agg` Untyped Transformation
+
+[source, scala]
+----
+agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
+agg(exprs: Map[String, String]): DataFrame
+agg(exprs: java.util.Map[String, String]): DataFrame
+agg(expr: Column, exprs: Column*): DataFrame
+----
+
+`agg`...FIXME
+
+=== [[apply]] `apply` Untyped Transformation
+
+[source, scala]
+----
+apply(colName: String): Column
+----
+
+`apply` selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`).
+
+=== [[checkpoint]] `checkpoint` Untyped Transformation
+
+[source, scala]
+----
+checkpoint(): Dataset[T]
+checkpoint(eager: Boolean): Dataset[T]
+----
+
+`checkpoint`...FIXME
+
+=== [[col]] `col` Untyped Transformation
+
+[source, scala]
+----
+col(colName: String): Column
+----
+
+`col` selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`).
+
+=== [[colRegex]] `colRegex` Untyped Transformation
+
+[source, scala]
+----
+colRegex(colName: String): Column
+----
+
+(*New in 2.3.0*) `colRegex` selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`).
+
+=== [[crossJoin]] `crossJoin` Untyped Transformation
+
+[source, scala]
+----
+crossJoin(right: Dataset[_]): DataFrame
+----
+
+`crossJoin`...FIXME
+
+=== [[cube]] `cube` Untyped Transformation
+
+[source, scala]
+----
+cube(cols: Column*): RelationalGroupedDataset
+cube(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+`cube`...FIXME
+
+=== [[drop]] `drop` Untyped Transformation
+
+[source, scala]
+----
+drop(colName: String): DataFrame
+drop(colNames: String*): DataFrame
+drop(col: Column): DataFrame
+----
+
+`drop`...FIXME
+
+=== [[groupBy]] `groupBy` Untyped Transformation
+
+[source, scala]
+----
+groupBy(cols: Column*): RelationalGroupedDataset
+groupBy(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+`groupBy`...FIXME
+
+=== [[join]] `join` Untyped Transformation
+
+[source, scala]
+----
+join(right: Dataset[_]): DataFrame
+join(right: Dataset[_], usingColumn: String): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
+join(right: Dataset[_], joinExprs: Column): DataFrame
+join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
+----
+
+`join`...FIXME
+
+=== [[localCheckpoint]] `localCheckpoint` Untyped Transformation
+
+[source, scala]
+----
+localCheckpoint(): Dataset[T]
+localCheckpoint(eager: Boolean): Dataset[T]
+----
+
+(*New in 2.3.0*) `localCheckpoint`...FIXME
+
+=== [[na]] `na` Untyped Transformation
+
+[source, scala]
+----
+na: DataFrameNaFunctions
+----
+
+`na`...FIXME
+
+=== [[rollup]] `rollup` Untyped Transformation
+
+[source, scala]
+----
+rollup(cols: Column*): RelationalGroupedDataset
+rollup(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+`rollup`...FIXME
+
+=== [[select]] `select` Untyped Transformation
+
+[source, scala]
+----
+select(cols: Column*): DataFrame
+select(col: String, cols: String*): DataFrame
+----
+
+`select`...FIXME
+
+=== [[selectExpr]] `selectExpr` Untyped Transformation
+
+[source, scala]
+----
+selectExpr(exprs: String*): DataFrame
+----
+
+`selectExpr`...FIXME
+
+=== [[stat]] `stat` Untyped Transformation
+
+[source, scala]
+----
+stat: DataFrameStatFunctions
+----
+
+`stat`...FIXME
+
+=== [[toDF]] `toDF` Untyped Transformation
+
+[source, scala]
+----
+toDF(): DataFrame
+----
+
+`toDF`...FIXME
+
+=== [[withColumn]] `withColumn` Untyped Transformation
+
+[source, scala]
+----
+withColumn(colName: String, col: Column): DataFrame
+----
+
+`withColumn`...FIXME
+
+=== [[withColumnRenamed]] `withColumnRenamed` Untyped Transformation
+
+[source, scala]
+----
+withColumnRenamed(existingName: String, newName: String): DataFrame
+----
+
+`withColumnRenamed`...FIXME
