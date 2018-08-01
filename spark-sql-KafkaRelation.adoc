@@ -84,16 +84,38 @@ Refer to link:spark-logging.adoc[Logging].
 
 `KafkaRelation` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[buildScan]] `buildScan` Method
+=== [[buildScan]] Building Distributed Data Scan with Column Pruning -- `buildScan` Method
 
 [source, scala]
 ----
 buildScan(): RDD[Row]
 ----
 
-NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Contract>> to...FIXME.
+NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Contract>> to build a distributed data scan with column pruning.
 
-`buildScan`...FIXME
+`buildScan` <<spark-sql-KafkaSourceProvider.adoc#kafkaParamsForDriver, kafkaParamsForDriver>> from the <<specifiedKafkaParams, user-defined Kafka parameters>> and uses it to create a <<spark-sql-KafkaOffsetReader.adoc#creating-instance, KafkaOffsetReader>> (together with the <<strategy, ConsumerStrategy>>, the <<sourceOptions, source options>> and a unique group ID of the format `spark-kafka-relation-[randomUUID]-driver`).
+
+`buildScan` then uses the `KafkaOffsetReader` to <<getPartitionOffsets, getPartitionOffsets>> for the starting and ending offsets and <<spark-sql-KafkaOffsetReader.adoc#close, closes>> it right after.
+
+`buildScan` creates a `KafkaSourceRDDOffsetRange` for every pair of the starting and ending offsets.
+
+`buildScan` prints out the following INFO message to the logs:
+
+```
+GetBatch generating RDD of offset range: [comma-separated offsetRanges]
+```
+
+`buildScan` then <<spark-sql-KafkaSourceProvider.adoc#kafkaParamsForExecutors, kafkaParamsForExecutors>> and uses it to create a `KafkaSourceRDD` (with the <<pollTimeoutMs, pollTimeoutMs>>) and maps over all the elements (using `RDD.map` operator that creates a `MapPartitionsRDD`).
+
+TIP: Use `RDD.toDebugString` to see the two RDDs, i.e. `KafkaSourceRDD` and `MapPartitionsRDD`, in the RDD lineage.
+
+In the end, `buildScan` requests the <<sqlContext, SQLContext>> to <<spark-sql-SparkSession.adoc#internalCreateDataFrame, create a DataFrame>> from the `KafkaSourceRDD` and the <<schema, schema>>.
+
+`buildScan` throws an `IllegalStateException` when the topic partitions for starting offsets are different from the ending offsets topics:
+
+```
+different topic partitions for starting offsets topics[[fromTopics]] and ending offsets topics[[untilTopics]]
+```
 
 === [[getPartitionOffsets]] `getPartitionOffsets` Internal Method
 

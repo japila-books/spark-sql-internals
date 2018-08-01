@@ -579,7 +579,7 @@ sessionStateClassName(conf: SparkConf): String
 
 NOTE: `sessionStateClassName` is used exclusively when `SparkSession` is requested for the <<sessionState, SessionState>> (and one is not available yet).
 
-=== [[internalCreateDataFrame]] Creating DataFrame From RDD Of Internal Binary Rows -- `internalCreateDataFrame` Internal Method
+=== [[internalCreateDataFrame]] Creating DataFrame From RDD Of Internal Binary Rows and Schema -- `internalCreateDataFrame` Internal Method
 
 [source, scala]
 ----
