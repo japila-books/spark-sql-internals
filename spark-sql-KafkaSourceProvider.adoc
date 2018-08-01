@@ -63,7 +63,7 @@ NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelati
 
 `createRelation` <<getKafkaOffsetRangeLimit, creates a KafkaOffsetRangeLimit>> with the `startingoffsets` offset option key (in the given `parameters`) and `EarliestOffsetRangeLimit` as the default offsets.
 
-createRelation` makes sure that the `KafkaOffsetRangeLimit` is not `EarliestOffsetRangeLimit` or throws a `AssertionError`.
+`createRelation` makes sure that the `KafkaOffsetRangeLimit` is not `EarliestOffsetRangeLimit` or throws a `AssertionError`.
 
 `createRelation` <<getKafkaOffsetRangeLimit, creates another KafkaOffsetRangeLimit>>, but this time with the `endingoffsets` offset option key (in the given `parameters`) and `LatestOffsetRangeLimit` as the default offsets.
 
@@ -109,7 +109,7 @@ createRelation(
   df: DataFrame): BaseRelation
 ----
 
-CAUTION: FIXME
+`createRelation`...FIXME
 
 NOTE: `createRelation` is part of link:spark-sql-CreatableRelationProvider.adoc#contract[CreatableRelationProvider Contract].
 
@@ -124,7 +124,7 @@ sourceSchema(
   parameters: Map[String, String]): (String, StructType)
 ----
 
-CAUTION: FIXME
+`sourceSchema`...FIXME
 
 [source, scala]
 ----
@@ -178,16 +178,85 @@ failOnDataLoss(caseInsensitiveParams: Map[String, String]): Boolean
 
 NOTE: `failOnDataLoss` is used when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
 
-=== [[kafkaParamsForDriver]] `kafkaParamsForDriver` Object Method
+=== [[kafkaParamsForDriver]] Setting Kafka Configuration Parameters for Driver -- `kafkaParamsForDriver` Object Method
 
 [source, scala]
 ----
 kafkaParamsForDriver(specifiedKafkaParams: Map[String, String]): java.util.Map[String, Object]
 ----
 
-`kafkaParamsForDriver`...FIXME
+`kafkaParamsForDriver` simply sets the <<kafkaParamsForDriver-Kafka-parameters, additional Kafka configuration parameters>> for the driver.
 
-NOTE: `kafkaParamsForDriver` is used when...FIXME
+[[kafkaParamsForDriver-Kafka-parameters]]
+.Driver's Kafka Configuration Parameters
+[cols="1m,1m,1m,2",options="header",width="100%"]
+|===
+| Name
+| Value
+| ConsumerConfig
+| Description
+
+| key.deserializer
+| org.apache.kafka.common.serialization.ByteArrayDeserializer
+| KEY_DESERIALIZER_CLASS_CONFIG
+| [[key.deserializer]] Deserializer class for keys that implements the Kafka `Deserializer` interface.
+
+| value.deserializer
+| org.apache.kafka.common.serialization.ByteArrayDeserializer
+| VALUE_DESERIALIZER_CLASS_CONFIG
+| [[value.deserializer]] Deserializer class for values that implements the Kafka `Deserializer` interface.
+
+| auto.offset.reset
+| earliest
+| AUTO_OFFSET_RESET_CONFIG
+a| [[auto.offset.reset]] What to do when there is no initial offset in Kafka or if the current offset does not exist any more on the server (e.g. because that data has been deleted):
+
+* `earliest` -- automatically reset the offset to the earliest offset
+
+* `latest` -- automatically reset the offset to the latest offset
+
+* `none` -- throw an exception to the Kafka consumer if no previous offset is found for the consumer's group
+
+* _anything else_ -- throw an exception to the Kafka consumer
+
+| enable.auto.commit
+| false
+| ENABLE_AUTO_COMMIT_CONFIG
+| [[enable.auto.commit]] If `true` the Kafka consumer's offset will be periodically committed in the background
+
+| max.poll.records
+| 1
+| MAX_POLL_RECORDS_CONFIG
+| [[max.poll.records]] The maximum number of records returned in a single call to `Consumer.poll()`
+
+| receive.buffer.bytes
+| 65536
+| MAX_POLL_RECORDS_CONFIG
+| [[receive.buffer.bytes]] Only set if not set already
+|===
+
+[[ConfigUpdater-logging]]
+[TIP]
+====
+Enable `DEBUG` logging level for `org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater` logger to see updates of Kafka configuration parameters.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=DEBUG
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
+[NOTE]
+====
+`kafkaParamsForDriver` is used when:
+
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>>
+
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
+====
 
 === [[kafkaParamsForExecutors]] `kafkaParamsForExecutors` Object Method
 
