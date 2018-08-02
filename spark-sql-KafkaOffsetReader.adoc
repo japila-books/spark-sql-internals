@@ -4,7 +4,7 @@
 
 `KafkaOffsetReader` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (to <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, get the initial partition offsets>>)
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>) (to <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, get the initial partition offsets>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 

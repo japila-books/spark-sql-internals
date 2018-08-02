@@ -1,0 +1,25 @@
+== [[KafkaSourceRDD]] KafkaSourceRDD
+
+`KafkaSourceRDD` is an `RDD` of Kafka's https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/ConsumerRecords.html[ConsumerRecords] (with keys and values being collections of bytes, i.e. `Array[Byte]`).
+
+`KafkaSourceRDD` is <<creating-instance, created>> when:
+
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>)
+
+* (Spark Structured Streaming) `KafkaSource` is requested to `getBatch`
+
+=== [[creating-instance]] Creating KafkaSourceRDD Instance
+
+`KafkaSourceRDD` takes the following when created:
+
+* [[sc]] `SparkContext`
+* [[executorKafkaParams]] Collection of key-value settings for executors reading records from Kafka topics
+* [[offsetRanges]] Collection of `KafkaSourceRDDOffsetRange` offsets
+* [[pollTimeoutMs]] Timeout (in milliseconds) to poll data from Kafka
++
+Used exclusively when `KafkaSourceRDD` is requested to <<compute, compute a RDD partition>> (and requests a `KafkaDataConsumer` for a `ConsumerRecord`)
+
+* [[failOnDataLoss]] `failOnDataLoss` flag to control...FIXME
+* [[reuseKafkaConsumer]] `reuseKafkaConsumer` flag to control...FIXME
+
+`KafkaSourceRDD` initializes the <<internal-registries, internal registries and counters>>.

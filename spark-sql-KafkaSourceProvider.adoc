@@ -253,7 +253,7 @@ Refer to link:spark-logging.adoc[Logging].
 ====
 `kafkaParamsForDriver` is used when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>>
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====

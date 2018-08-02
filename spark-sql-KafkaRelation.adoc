@@ -7,7 +7,7 @@
 [[schema]]
 `KafkaRelation` uses the fixed <<spark-sql-BaseRelation.adoc#schema, schema>>.
 
-[[kafkaSchema]]
+[[schema]]
 .KafkaRelation's Schema (in the positional order)
 [cols="1m,2",options="header",width="100%"]
 |===
@@ -51,9 +51,17 @@ KafkaRelation(strategy=[strategy], start=[startingOffsets], end=[endingOffsets])
 | Description
 
 | pollTimeoutMs
-| [[pollTimeoutMs]] FIXME
+a| [[pollTimeoutMs]] Timeout (in milliseconds) to poll data from Kafka (<<spark-sql-KafkaSourceRDD.adoc#pollTimeoutMs, pollTimeoutMs>> for `KafkaSourceRDD`)
 
-Used when...FIXME
+Initialized with the value of the following configuration properties (in the order until one found):
+
+. `kafkaConsumer.pollTimeoutMs` in the <<sourceOptions, source options>>
+
+. `spark.network.timeout` in the `SparkConf`
+
+If neither is set, defaults to `120s`.
+
+Used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (and creates a <<spark-sql-KafkaSourceRDD.adoc#pollTimeoutMs, KafkaSourceRDD>>).
 |===
 
 [[logging]]
@@ -76,7 +84,7 @@ Refer to link:spark-logging.adoc[Logging].
 
 * [[sqlContext]] `SQLContext`
 * [[strategy]] `ConsumerStrategy`
-* [[sourceOptions]] Source options (as `Map[String, String]`)
+* [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of <<spark-sql-DataFrameReader.adoc#option, DataFrameReader>>
 * [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
 * [[failOnDataLoss]] `failOnDataLoss` flag
 * [[startingOffsets]] Starting offsets (as `KafkaOffsetRangeLimit`)
