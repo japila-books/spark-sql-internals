@@ -87,12 +87,12 @@ Refer to link:spark-logging.adoc[Logging].
 * [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of <<spark-sql-DataFrameReader.adoc#option, DataFrameReader>>
 * [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
 * [[failOnDataLoss]] `failOnDataLoss` flag
-* [[startingOffsets]] Starting offsets (as `KafkaOffsetRangeLimit`)
-* [[endingOffsets]] Ending offsets (as `KafkaOffsetRangeLimit`)
+* [[startingOffsets]] Starting offsets (as <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>>)
+* [[endingOffsets]] Ending offsets (as <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>>)
 
 `KafkaRelation` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[buildScan]] Building Distributed Data Scan with Column Pruning -- `buildScan` Method
+=== [[buildScan]] Building Distributed Data Scan with Column Pruning (as TableScan) -- `buildScan` Method
 
 [source, scala]
 ----
@@ -134,6 +134,43 @@ getPartitionOffsets(
   kafkaOffsets: KafkaOffsetRangeLimit): Map[TopicPartition, Long]
 ----
 
-`getPartitionOffsets`...FIXME
+`getPartitionOffsets` requests the input `KafkaOffsetReader` to <<spark-sql-KafkaOffsetReader.adoc#fetchTopicPartitions, fetchTopicPartitions>>.
 
-NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>>.
+`getPartitionOffsets` uses the input <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> to return the mapping of offsets per Kafka `TopicPartition` fetched:
+
+. For `EarliestOffsetRangeLimit`, `getPartitionOffsets` returns a map with every `TopicPartition` and `-2L` (as the offset)
+
+. For `LatestOffsetRangeLimit`, `getPartitionOffsets` returns a map with every `TopicPartition` and `-1L` (as the offset)
+
+. For `SpecificOffsetRangeLimit`, `getPartitionOffsets` returns a map from <<validateTopicPartitions, validateTopicPartitions>>
+
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>).
+
+==== [[getPartitionOffsets-validateTopicPartitions]] Validating TopicPartitions (Against Partition Offsets) -- `validateTopicPartitions` Inner Method
+
+[source, scala]
+----
+validateTopicPartitions(
+  partitions: Set[TopicPartition],
+  partitionOffsets: Map[TopicPartition, Long]): Map[TopicPartition, Long]
+----
+
+NOTE: `validateTopicPartitions` is a Scala inner method of <<getPartitionOffsets, getPartitionOffsets>>, i.e. `validateTopicPartitions` is defined within the body of `getPartitionOffsets` and so is visible and can only be used in `getPartitionOffsets`.
+
+`validateTopicPartitions` asserts that the input set of Kafka `TopicPartitions` is exactly the set of the keys in the input `partitionOffsets`.
+
+`validateTopicPartitions` prints out the following DEBUG message to the logs:
+
+```
+Partitions assigned to consumer: [partitions]. Seeking to [partitionOffsets]
+```
+
+In the end, `validateTopicPartitions` returns the input `partitionOffsets`.
+
+If the input set of Kafka `TopicPartitions` is not the set of the keys in the input `partitionOffsets`, `validateTopicPartitions` throws an `AssertionError`:
+
+```
+assertion failed: If startingOffsets contains specific offsets, you must specify all TopicPartitions.
+Use -1 for latest, -2 for earliest, if you don't care.
+Specified: [partitionOffsets] Assigned: [partitions]
+```

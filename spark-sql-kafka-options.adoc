@@ -1,0 +1,42 @@
+== Kafka Data Source Options
+
+[[options]]
+.Kafka Data Source Options
+[cols="1m,1,2",options="header",width="100%"]
+|===
+| Option
+| Default
+| Description
+
+| startingoffsets
+|
+| [[startingoffsets]]
+
+| endingoffsets
+|
+| [[endingoffsets]]
+
+| failondataloss
+|
+| [[failondataloss]]
+
+| kafkaConsumer.pollTimeoutMs
+|
+| [[kafkaConsumer.pollTimeoutMs]] See <<spark-sql-KafkaRelation.adoc#pollTimeoutMs, kafkaConsumer.pollTimeoutMs>>
+
+| topic
+|
+| [[topic]]
+
+| subscribe
+|
+| [[subscribe]]
+
+| subscribepattern
+|
+| [[subscribepattern]]
+
+| assign
+|
+| [[assign]]
+|===

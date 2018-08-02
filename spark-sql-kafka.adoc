@@ -9,7 +9,7 @@ Spark SQL supports <<reading, reading>> data from or <<writing, writing>> data t
 Read up on Apache Kafka in the http://kafka.apache.org/documentation/[official documentation] or in my other gitbook https://jaceklaskowski.gitbooks.io/apache-kafka/[Apache Kafka Notebook].
 ====
 
-Kafka Data Source uses <<spark-sql-KafkaRelation.adoc#pollTimeoutMs, kafkaConsumer.pollTimeoutMs>> configuration property for...FIXME
+Kafka Data Source supports <<spark-sql-kafka-options.adoc#options, options>> to get better performance of structured queries that use it.
 
 === [[reading]] Reading Data from Kafka Topics
 
