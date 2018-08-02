@@ -1,0 +1,29 @@
+== [[JsonUtils]] JsonUtils Helper Object
+
+`JsonUtils` is a Scala object with <<methods, methods>> to support...FIXME
+
+[[methods]]
+.JsonUtils API
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| <<partitionOffsets, partitionOffsets>>
+a| Reading per-``TopicPartition`` offsets from a JSON text
+
+Used when:
+
+* FIXME
+|===
+
+=== [[partitionOffsets]] `partitionOffsets` Method
+
+[source, scala]
+----
+partitionOffsets(str: String): Map[TopicPartition, Long]
+----
+
+`partitionOffsets`...FIXME
+
+NOTE: `partitionOffsets` is used when...FIXME

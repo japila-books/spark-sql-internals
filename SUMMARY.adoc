@@ -78,6 +78,7 @@
 . link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
 . link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
 . link:spark-sql-KafkaOffsetRangeLimit.adoc[KafkaOffsetRangeLimit]
+. link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
 
 == JDBC Data Source
 

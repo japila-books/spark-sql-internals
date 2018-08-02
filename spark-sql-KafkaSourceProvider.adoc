@@ -57,7 +57,7 @@ createRelation(
 
 NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
 
-`createRelation` starts by <<validateBatchOptions, validating Kafka options>> in the input `parameters`.
+`createRelation` starts by <<validateBatchOptions, validating the Kafka options (for batch queries)>> in the input `parameters`.
 
 `createRelation` collects all ``kafka.``-prefixed key options (in the input `parameters`) and creates a local `specifiedKafkaParams` with the keys without the `kafka.` prefix (e.g. `kafka.whatever` is simply `whatever`).
 
@@ -142,7 +142,7 @@ root
 
 NOTE: `sourceSchema` is part of Structured Streaming's `StreamSourceProvider` Contract.
 
-=== [[getKafkaOffsetRangeLimit]] Getting Desired KafkaOffsetRangeLimit -- `getKafkaOffsetRangeLimit` Object Method
+=== [[getKafkaOffsetRangeLimit]] Getting Desired KafkaOffsetRangeLimit (for Offset Option) -- `getKafkaOffsetRangeLimit` Object Method
 
 [source, scala]
 ----
@@ -152,15 +152,23 @@ getKafkaOffsetRangeLimit(
   defaultOffsets: KafkaOffsetRangeLimit): KafkaOffsetRangeLimit
 ----
 
-`getKafkaOffsetRangeLimit`...FIXME
+`getKafkaOffsetRangeLimit` tries to find the given `offsetOptionKey` in the input `params` and converts the value found to a <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> as follows:
+
+* `latest` becomes <<spark-sql-KafkaOffsetRangeLimit.adoc#LatestOffsetRangeLimit, LatestOffsetRangeLimit>>
+
+* `earliest` becomes <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>>
+
+* For a JSON text, `getKafkaOffsetRangeLimit` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.adoc#partitionOffsets, read per-TopicPartition offsets from it>> and creates a <<spark-sql-KafkaOffsetRangeLimit.adoc#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>>
+
+When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` returns the input `defaultOffsets`.
 
 [NOTE]
 ====
 `getKafkaOffsetRangeLimit` is used when:
 
-* `KafkaSourceProvider` is requested to <<validateBatchOptions, validate Kafka options>> and <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#, RelationProvider>>)
+* `KafkaSourceProvider` is requested to <<validateBatchOptions, validate Kafka options (for batch queries)>> and <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>)
 
-* (Spark Structured Streaming) `createSource` and `createContinuousReader`
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====
 
 === [[strategy]] `strategy` Internal Method
