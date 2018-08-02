@@ -105,7 +105,7 @@ NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Con
 
 `buildScan` then uses the `KafkaOffsetReader` to <<getPartitionOffsets, getPartitionOffsets>> for the starting and ending offsets and <<spark-sql-KafkaOffsetReader.adoc#close, closes>> it right after.
 
-`buildScan` creates a `KafkaSourceRDDOffsetRange` for every pair of the starting and ending offsets.
+`buildScan` creates a <<spark-sql-KafkaSourceRDDOffsetRange.adoc#creating-instance, KafkaSourceRDDOffsetRange>> for every pair of the starting and ending offsets.
 
 `buildScan` prints out the following INFO message to the logs:
 

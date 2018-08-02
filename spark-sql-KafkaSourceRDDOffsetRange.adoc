@@ -1,0 +1,11 @@
+== [[KafkaSourceRDDOffsetRange]] KafkaSourceRDDOffsetRange
+
+`KafkaSourceRDDOffsetRange` is...FIXME
+
+[[creating-instance]]
+`KafkaSourceRDDOffsetRange` takes the following when created:
+
+* [[topicPartition]] Kafka https://kafka.apache.org/20/javadoc/org/apache/kafka/common/TopicPartition.html[TopicPartition]
+* [[fromOffset]] `fromOffset`
+* [[untilOffset]] `untilOffset`
+* [[preferredLoc]] Preferred location

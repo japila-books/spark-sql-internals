@@ -70,6 +70,8 @@
 . link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
 . link:spark-sql-KafkaRelation.adoc[KafkaRelation]
 . link:spark-sql-KafkaSourceRDD.adoc[KafkaSourceRDD]
+.. link:spark-sql-KafkaSourceRDDOffsetRange.adoc[KafkaSourceRDDOffsetRange]
+.. link:spark-sql-KafkaSourceRDDPartition.adoc[KafkaSourceRDDPartition]
 . link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy]
 . link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
 . link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]

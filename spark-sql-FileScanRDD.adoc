@@ -53,8 +53,6 @@ NOTE: `getPreferredLocations` is part of the RDD Contract to...FIXME.
 
 `getPreferredLocations`...FIXME
 
-NOTE: `getPreferredLocations` is used when...FIXME
-
 === [[getPartitions]] `getPartitions` Method
 
 [source, scala]
