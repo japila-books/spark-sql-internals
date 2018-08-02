@@ -69,9 +69,10 @@
 . link:spark-sql-kafka.adoc[Kafka Data Source]
 . link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
 . link:spark-sql-KafkaRelation.adoc[KafkaRelation]
-. link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
+. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy]
 . link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
 . link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
+. link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
 
 == JDBC Data Source
 

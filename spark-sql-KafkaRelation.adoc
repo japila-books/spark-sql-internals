@@ -128,4 +128,4 @@ getPartitionOffsets(
 
 `getPartitionOffsets`...FIXME
 
-NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, buildScan>>.
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>>.

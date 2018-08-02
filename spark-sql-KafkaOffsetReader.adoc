@@ -1,5 +1,16 @@
 == [[KafkaOffsetReader]] KafkaOffsetReader
 
+`KafkaOffsetReader` is used to query a Kafka cluster for partition offsets.
+
+`KafkaOffsetReader` is <<creating-instance, created>> when:
+
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (to <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, get the initial partition offsets>>)
+
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
+
+[[toString]]
+When requested for the human-readable text representation, `KafkaOffsetReader` simply requests the <<consumerStrategy, ConsumerStrategy>> for one.
+
 [[options]]
 .KafkaOffsetReader's Options
 [cols="1,1,2",options="header",width="100%"]
@@ -24,8 +35,8 @@
 | Name
 | Description
 
-| [[consumer]] `consumer`
-a| Kafka's https://kafka.apache.org/0110/javadoc/org/apache/kafka/clients/consumer/Consumer.html[Consumer] (with keys and values of `Array[Byte]` type)
+| `consumer`
+a| [[consumer]] Kafka's https://kafka.apache.org/0110/javadoc/org/apache/kafka/clients/consumer/Consumer.html[Consumer] (with keys and values of `Array[Byte]` type)
 
 <<createConsumer, Initialized>> when `KafkaOffsetReader` is <<creating-instance, created>>.
 
@@ -38,23 +49,23 @@ Used when `KafkaOffsetReader`:
 * <<resetConsumer, resetConsumer>>
 * <<close, is closed>>
 
-| [[execContext]] `execContext`
-|
+| `execContext`
+| [[execContext]]
 
-| [[groupId]] `groupId`
-|
+| `groupId`
+| [[groupId]]
 
-| [[kafkaReaderThread]] `kafkaReaderThread`
-|
+| `kafkaReaderThread`
+| [[kafkaReaderThread]]
 
-| [[maxOffsetFetchAttempts]] `maxOffsetFetchAttempts`
-|
+| `maxOffsetFetchAttempts`
+| [[maxOffsetFetchAttempts]]
 
-| [[nextId]] `nextId`
-|
+| `nextId`
+| [[nextId]]
 
-| [[offsetFetchAttemptIntervalMs]] `offsetFetchAttemptIntervalMs`
-|
+| `offsetFetchAttemptIntervalMs`
+| [[offsetFetchAttemptIntervalMs]]
 |===
 
 [TIP]
@@ -74,7 +85,9 @@ Refer to link:spark-sql-streaming-logging.adoc[Logging].
 
 [source, scala]
 ----
-fetchSpecificOffsets(partitionOffsets: Map[TopicPartition, Long]): Map[TopicPartition, Long]
+fetchSpecificOffsets(
+  partitionOffsets: Map[TopicPartition, Long],
+  reportDataLoss: String => Unit): KafkaSourceOffset
 ----
 
 .KafkaOffsetReader's fetchSpecificOffsets
@@ -109,7 +122,7 @@ NOTE: `fetchSpecificOffsets` is used when `KafkaSource` is requested to <<spark-
 createConsumer(): Consumer[Array[Byte], Array[Byte]]
 ----
 
-`createConsumer` requests <<consumerStrategy, ConsumerStrategy>> to link:spark-sql-streaming-ConsumerStrategy.adoc#createConsumer[create a Kafka Consumer] with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
+`createConsumer` requests the <<consumerStrategy, ConsumerStrategy>> to <<spark-sql-ConsumerStrategy.adoc#createConsumer, create a Kafka Consumer>> with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
 
 NOTE: `createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, created>> (and initializes <<consumer, consumer>>) and <<resetConsumer, resetConsumer>>
 
@@ -117,7 +130,7 @@ NOTE: `createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, 
 
 `KafkaOffsetReader` takes the following when created:
 
-* [[consumerStrategy]] `ConsumerStrategy`,
+* [[consumerStrategy]] <<spark-sql-ConsumerStrategy.adoc#, ConsumerStrategy>>
 * [[driverKafkaParams]] Kafka parameters (as `Map[String, Object]`)
 * [[readerOptions]] Reader options (as `Map[String, String]`)
 * [[driverGroupIdPrefix]] Prefix for the group id
@@ -134,3 +147,91 @@ close(): Unit
 `close`...FIXME
 
 NOTE: `close` is used when...FIXME
+
+=== [[fetchEarliestOffsets]] `fetchEarliestOffsets` Method
+
+[source, scala]
+----
+fetchEarliestOffsets(): Map[TopicPartition, Long]
+----
+
+`fetchEarliestOffsets`...FIXME
+
+NOTE: `fetchEarliestOffsets` is used when...FIXME
+
+=== [[fetchEarliestOffsets-newPartitions]] `fetchEarliestOffsets` Method
+
+[source, scala]
+----
+fetchEarliestOffsets(newPartitions: Seq[TopicPartition]): Map[TopicPartition, Long]
+----
+
+`fetchEarliestOffsets`...FIXME
+
+NOTE: `fetchEarliestOffsets` is used when...FIXME
+
+=== [[fetchLatestOffsets]] `fetchLatestOffsets` Method
+
+[source, scala]
+----
+fetchLatestOffsets(): Map[TopicPartition, Long]
+----
+
+`fetchLatestOffsets`...FIXME
+
+NOTE: `fetchLatestOffsets` is used when...FIXME
+
+=== [[fetchTopicPartitions]] `fetchTopicPartitions` Method
+
+[source, scala]
+----
+fetchTopicPartitions(): Set[TopicPartition]
+----
+
+`fetchTopicPartitions`...FIXME
+
+NOTE: `fetchTopicPartitions` is used when...FIXME
+
+=== [[nextGroupId]] `nextGroupId` Internal Method
+
+[source, scala]
+----
+nextGroupId(): String
+----
+
+`nextGroupId`...FIXME
+
+NOTE: `nextGroupId` is used when...FIXME
+
+=== [[resetConsumer]] `resetConsumer` Internal Method
+
+[source, scala]
+----
+resetConsumer(): Unit
+----
+
+`resetConsumer`...FIXME
+
+NOTE: `resetConsumer` is used when...FIXME
+
+=== [[runUninterruptibly]] `runUninterruptibly` Internal Method
+
+[source, scala]
+----
+runUninterruptibly[T](body: => T): T
+----
+
+`runUninterruptibly`...FIXME
+
+NOTE: `runUninterruptibly` is used when...FIXME
+
+=== [[withRetriesWithoutInterrupt]] `withRetriesWithoutInterrupt` Internal Method
+
+[source, scala]
+----
+withRetriesWithoutInterrupt(body: => Map[TopicPartition, Long]): Map[TopicPartition, Long]
+----
+
+`withRetriesWithoutInterrupt`...FIXME
+
+NOTE: `withRetriesWithoutInterrupt` is used when...FIXME
