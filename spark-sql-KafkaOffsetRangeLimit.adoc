@@ -25,8 +25,8 @@ Takes `partitionOffsets` (as `Map[TopicPartition, Long]`) when created.
 
 `KafkaOffsetRangeLimit` defines two constants to denote offset range limits that are resolved via Kafka:
 
-* `-1L` for the latest offset
+* [[LATEST]] `-1L` for the latest offset
 
-* `-2L` for the earliest offset
+* [[EARLIEST]] `-2L` for the earliest offset
 
 NOTE: `KafkaOffsetRangeLimit` is a Scala *sealed trait* which means that all the <<extensions, extensions>> are in the same compilation unit (a single file).

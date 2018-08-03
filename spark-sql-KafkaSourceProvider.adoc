@@ -78,11 +78,11 @@ In the end, `createRelation` creates a <<spark-sql-KafkaRelation.adoc#creating-i
 validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
 ----
 
-`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the input `caseInsensitiveParams`, the `startingoffsets` option key and `EarliestOffsetRangeLimit` (as the default `KafkaOffsetRangeLimit`).
+`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the <<spark-sql-kafka-options.adoc#startingoffsets, startingoffsets>> option in the input `caseInsensitiveParams` and with <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default `KafkaOffsetRangeLimit`.
 
 `validateBatchOptions` then matches the returned <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> as follows:
 
-. <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> is acceptable and `validateBatchOptions` does nothing
+. <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> is acceptable and `validateBatchOptions` simply does nothing
 
 . <<spark-sql-KafkaOffsetRangeLimit.adoc#LatestOffsetRangeLimit, LatestOffsetRangeLimit>> is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
 +
@@ -90,7 +90,7 @@ validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
 starting offset can't be latest for batch queries on Kafka
 ```
 
-. <<spark-sql-KafkaOffsetRangeLimit.adoc#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>> is acceptable unless the offset is `-1L` for which `validateBatchOptions` throws an `IllegalArgumentException`:
+. <<spark-sql-KafkaOffsetRangeLimit.adoc#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>> is acceptable unless one of the offsets is <<spark-sql-KafkaOffsetRangeLimit.adoc#LATEST, -1L>> for which `validateBatchOptions` throws an `IllegalArgumentException`:
 +
 ```
 startingOffsets for [tp] can't be latest for batch queries on Kafka
