@@ -1,0 +1,31 @@
+== [[KafkaSourceOffset]] KafkaSourceOffset
+
+CAUTION: FIXME
+
+[[partitionToOffsets]]
+`KafkaSourceOffset` is created for `partitionToOffsets` collection of `TopicPartitions` and their offsets.
+
+=== [[creating-instance]] Creating KafkaSourceOffset Instance
+
+CAUTION: FIXME
+
+=== [[getPartitionOffsets]] Getting Partition Offsets -- `getPartitionOffsets` Method
+
+[source, scala]
+----
+getPartitionOffsets(offset: Offset): Map[TopicPartition, Long]
+----
+
+`getPartitionOffsets` takes <<partitionToOffsets, KafkaSourceOffset.partitionToOffsets>> from `offset`.
+
+If `offset` is `KafkaSourceOffset`, `getPartitionOffsets` takes the partitions and offsets straight from it.
+
+If however `offset` is `SerializedOffset`, `getPartitionOffsets` deserializes the offsets from JSON.
+
+`getPartitionOffsets` reports an `IllegalArgumentException` when `offset` is neither `KafkaSourceOffset` or `SerializedOffset`.
+
+```
+Invalid conversion from offset of [class] to KafkaSourceOffset
+```
+
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaSource` link:spark-sql-streaming-KafkaSource.adoc#getBatch[generates a DataFrame with records from Kafka for a batch].

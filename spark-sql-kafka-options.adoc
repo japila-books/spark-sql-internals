@@ -8,9 +8,9 @@
 | Default
 | Description
 
-| startingoffsets
+| assign
 |
-| [[startingoffsets]]
+| [[assign]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
 | endingoffsets
 |
@@ -24,19 +24,19 @@
 |
 | [[kafkaConsumer.pollTimeoutMs]] See <<spark-sql-KafkaRelation.adoc#pollTimeoutMs, kafkaConsumer.pollTimeoutMs>>
 
-| topic
+| startingoffsets
 |
-| [[topic]]
+| [[startingoffsets]]
 
 | subscribe
 |
-| [[subscribe]]
+| [[subscribe]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
 | subscribepattern
 |
-| [[subscribepattern]]
+| [[subscribepattern]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
-| assign
+| topic
 |
-| [[assign]]
+| [[topic]]
 |===

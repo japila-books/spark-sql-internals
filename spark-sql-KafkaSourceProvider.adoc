@@ -180,7 +180,14 @@ strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
 
 `strategy`...FIXME
 
-NOTE: `strategy` is used when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
+[NOTE]
+====
+`strategy` is used when:
+
+* `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>)
+
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
+====
 
 === [[failOnDataLoss]] `failOnDataLoss` Internal Method
 
