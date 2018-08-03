@@ -10,7 +10,9 @@
 
 | assign
 |
-| [[assign]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+| [[assign]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribe, subscribe>> and <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>>)
+
+See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
 | endingoffsets
 |
@@ -30,11 +32,15 @@
 
 | subscribe
 |
-| [[subscribe]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+| [[subscribe]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.adoc#assign, assign>>)
+
+See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
 | subscribepattern
 |
-| [[subscribepattern]] See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+| [[subscribepattern]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribe, subscribe>> and <<spark-sql-kafka-options.adoc#assign, assign>>)
+
+See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
 
 | topic
 |

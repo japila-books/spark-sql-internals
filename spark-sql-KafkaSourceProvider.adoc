@@ -171,14 +171,20 @@ When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` retur
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====
 
-=== [[strategy]] `strategy` Internal Method
+=== [[strategy]] Getting ConsumerStrategy per Subscription Strategy Option -- `strategy` Internal Method
 
 [source, scala]
 ----
 strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
 ----
 
-`strategy`...FIXME
+`strategy` finds one of the strategy options: <<spark-sql-kafka-options.adoc#subscribe, subscribe>>, <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.adoc#assign, assign>>.
+
+For <<spark-sql-kafka-options.adoc#assign, assign>>, `strategy` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.adoc#partitions-String-Array, deserialize TopicPartitions from JSON>> (e.g. `{"topicA":[0,1],"topicB":[0,1]}`) and returns a new <<spark-sql-ConsumerStrategy.adoc#AssignStrategy, AssignStrategy>>.
+
+For <<spark-sql-kafka-options.adoc#subscribe, subscribe>>, `strategy` splits the value by `,` (comma) and returns a new <<spark-sql-ConsumerStrategy.adoc#SubscribeStrategy, SubscribeStrategy>>.
+
+For <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>>, `strategy` returns a new <<spark-sql-ConsumerStrategy.adoc#SubscribePatternStrategy, SubscribePatternStrategy>>
 
 [NOTE]
 ====
