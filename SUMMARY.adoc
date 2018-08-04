@@ -73,7 +73,7 @@
 . link:spark-sql-KafkaSourceRDD.adoc[KafkaSourceRDD]
 .. link:spark-sql-KafkaSourceRDDOffsetRange.adoc[KafkaSourceRDDOffsetRange]
 .. link:spark-sql-KafkaSourceRDDPartition.adoc[KafkaSourceRDDPartition]
-. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy]
+. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy Contract -- Kafka Consumer Providers]
 . link:spark-sql-KafkaWriter.adoc[KafkaWriter -- Writing Dataset to Kafka]
 . link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[KafkaWriteTask]
 . link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
