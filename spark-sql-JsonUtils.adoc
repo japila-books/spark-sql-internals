@@ -12,7 +12,7 @@
 | Description
 
 | <<partitionOffsets-String-Map, partitionOffsets>>
-a| Deserializing `TopicPartition` offsets from JSON, e.g. `{"topicA":{"0":23,"1":-1},"topicB":{"0":-2}}`
+a| Deserializing partition offsets (i.e. offsets per Kafka `TopicPartition`) from JSON, e.g. `{"topicA":{"0":23,"1":-1},"topicB":{"0":-2}}`
 
 [source, scala]
 ----
@@ -20,7 +20,7 @@ partitionOffsets(str: String): Map[TopicPartition, Long]
 ----
 
 | <<partitionOffsets-Map-String, partitionOffsets>>
-a| Serializing `TopicPartition` offsets to JSON
+a| Serializing partition offsets (i.e. offsets per Kafka `TopicPartition`) to JSON
 
 [source, scala]
 ----
@@ -44,7 +44,7 @@ partitions(partitions: Iterable[TopicPartition]): String
 ----
 |===
 
-=== [[partitionOffsets-String-Map]] Deserializing TopicPartition Offsets From JSON -- `partitionOffsets` Method
+=== [[partitionOffsets-String-Map]] Deserializing Partition Offsets From JSON -- `partitionOffsets` Method
 
 [source, scala]
 ----
@@ -64,7 +64,7 @@ partitionOffsets(str: String): Map[TopicPartition, Long]
 * (Spark Structured Streaming) `KafkaSourceOffset` is created (from a `SerializedOffset`)
 ====
 
-=== [[partitionOffsets-Map-String]] `partitionOffsets` Method
+=== [[partitionOffsets-Map-String]] Serializing Partition Offsets to JSON -- `partitionOffsets` Method
 
 [source, scala]
 ----
