@@ -146,16 +146,24 @@ fetchLatestOffsets(): Map[TopicPartition, Long]
 
 NOTE: `fetchLatestOffsets` is used when...FIXME
 
-=== [[fetchTopicPartitions]] `fetchTopicPartitions` Method
+=== [[fetchTopicPartitions]] Fetching (and Pausing) Assigned Kafka TopicPartitions -- `fetchTopicPartitions` Method
 
 [source, scala]
 ----
 fetchTopicPartitions(): Set[TopicPartition]
 ----
 
-`fetchTopicPartitions`...FIXME
+`fetchTopicPartitions` <<runUninterruptibly, uses an UninterruptibleThread thread>> to do the following:
 
-NOTE: `fetchTopicPartitions` is used when...FIXME
+. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/Consumer.html#poll-long-++[poll] (fetch data) for the topics and partitions (with `0` timeout)
+
+. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#assignment--++[get the set of partitions currently assigned]
+
+. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#pause-java.util.Collection-++[suspend fetching from the partitions assigned]
+
+In the end, `fetchTopicPartitions` returns the `TopicPartitions` assigned (and paused).
+
+NOTE: `fetchTopicPartitions` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>) through <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, getPartitionOffsets>>.
 
 === [[nextGroupId]] `nextGroupId` Internal Method
 
