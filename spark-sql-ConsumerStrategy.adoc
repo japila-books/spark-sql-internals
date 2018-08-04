@@ -43,4 +43,4 @@ a| [[SubscribePatternStrategy]] Uses link:++http://kafka.apache.org/20/javadoc/o
 TIP: Refer to http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[java.util.regex.Pattern] for the format of supported topic subscription regex patterns.
 |===
 
-NOTE: `ConsumerStrategy` is a Scala *sealed trait* which means that all the <<extensions, extensions>> are in the same compilation unit (a single file).
+NOTE: `ConsumerStrategy` is a Scala *sealed trait* which means that all the <<implementations, implementations>> are in the same compilation unit (a single file).
