@@ -9,7 +9,7 @@
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 
 [[toString]]
-When requested for the human-readable text representation, `KafkaOffsetReader` simply requests the <<consumerStrategy, ConsumerStrategy>> for one.
+When requested for the human-readable text representation (aka `toString`), `KafkaOffsetReader` simply requests the <<consumerStrategy, ConsumerStrategy>> for one.
 
 [[options]]
 .KafkaOffsetReader's Options
@@ -43,7 +43,6 @@ a| [[consumer]] Kafka's https://kafka.apache.org/0110/javadoc/org/apache/kafka/c
 Used when `KafkaOffsetReader`:
 
 * <<fetchTopicPartitions, fetchTopicPartitions>>
-* <<fetchSpecificOffsets, fetches offsets for selected TopicPartitions>>
 * <<fetchEarliestOffsets, fetchEarliestOffsets>>
 * <<fetchLatestOffsets, fetchLatestOffsets>>
 * <<resetConsumer, resetConsumer>>
@@ -80,40 +79,6 @@ log4j.logger.org.apache.spark.sql.kafka010.KafkaOffsetReader=DEBUG
 
 Refer to link:spark-sql-streaming-logging.adoc[Logging].
 ====
-
-=== [[fetchSpecificOffsets]] Fetching Offsets for Selected TopicPartitions -- `fetchSpecificOffsets` Method
-
-[source, scala]
-----
-fetchSpecificOffsets(
-  partitionOffsets: Map[TopicPartition, Long],
-  reportDataLoss: String => Unit): KafkaSourceOffset
-----
-
-.KafkaOffsetReader's fetchSpecificOffsets
-image::images/KafkaOffsetReader-fetchSpecificOffsets.png[align="center"]
-
-`fetchSpecificOffsets` requests the <<consumer, Kafka Consumer>> to `poll(0)`.
-
-`fetchSpecificOffsets` requests the <<consumer, Kafka Consumer>> for assigned partitions (using `Consumer.assignment()`).
-
-`fetchSpecificOffsets` requests the <<consumer, Kafka Consumer>> to `pause(partitions)`.
-
-You should see the following DEBUG message in the logs:
-
-```
-DEBUG KafkaOffsetReader: Partitions assigned to consumer: [partitions]. Seeking to [partitionOffsets]
-```
-
-For every partition offset in the input `partitionOffsets`, `fetchSpecificOffsets` requests the <<consumer, Kafka Consumer>> to:
-
-* `seekToEnd` for the latest (aka `-1`)
-* `seekToBeginning` for the earliest (aka `-2`)
-* `seek` for other offsets
-
-In the end, `fetchSpecificOffsets` creates a collection of Kafka's `TopicPartition` and `position` (using the <<consumer, Kafka Consumer>>).
-
-NOTE: `fetchSpecificOffsets` is used when `KafkaSource` is requested to <<spark-sql-streaming-KafkaSource.adoc#fetchAndVerify, fetch and verify initial partition offsets>>.
 
 === [[createConsumer]] Creating Kafka Consumer -- `createConsumer` Internal Method
 
