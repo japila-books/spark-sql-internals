@@ -44,7 +44,7 @@ resolveTable(options: JDBCOptions): StructType
 
 `resolveTable`...FIXME
 
-NOTE: `resolveTable` is used when...FIXME
+NOTE: `resolveTable` is used exclusively when `JDBCRelation` is requested for the <<spark-sql-JDBCOptions.adoc#schema, schema>>.
 
 === [[scanTable]] `scanTable` Method
 

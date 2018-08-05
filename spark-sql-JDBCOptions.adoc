@@ -1,28 +1,34 @@
-== [[JDBCOptions]] JDBCOptions
+== [[JDBCOptions]] JDBCOptions -- JDBC Data Source Options
 
-`JDBCOptions` represents the <<options, options>> of the link:spark-sql-jdbc.adoc[JDBC data source].
+`JDBCOptions` represents the <<options, options>> of the <<spark-sql-jdbc.adoc#, JDBC data source>>.
 
 [[options]]
 .Options for JDBC Data Source
-[cols="1,1,2",options="header",width="100%",separator="!"]
+[cols="1m,1,2",options="header",width="100%",separator="!"]
 |===
 ! Option / Key
 ! Default Value
 ! Description
 
-! `batchsize`
+! batchsize
 ! `1000`
-a! [[batchsize]]
+! [[batchsize]]
 
-NOTE: The minimum value is `1`
+The minimum value is `1`
 
-! `createTableColumnTypes`
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>>.
+
+! createTableColumnTypes
 !
 ! [[createTableColumnTypes]]
+
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
 
 ! `createTableOptions`
 ! Empty string
 ! [[createTableOptions]]
+
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
 
 ! `customSchema`
 ! (undefined)
@@ -49,11 +55,25 @@ dataType
     ;
 ```
 
-Used exclusively when `JDBCRelation` is requested for the link:spark-sql-JDBCRelation.adoc#schema[schema]
+Used exclusively when `JDBCRelation` is requested for the <<spark-sql-JDBCRelation.adoc#schema, schema>>.
 
 ! `dbtable`
 !
-! [[dbtable]] (*required*)
+a! [[dbtable]] (*required*)
+
+Used when:
+
+* `JDBCRDD` is requested to <<spark-sql-JDBCRDD.adoc#resolveTable, resolveTable>> (when `JDBCRelation` is requested for the <<spark-sql-JDBCRelation.adoc#schema, schema>>) and <<spark-sql-JDBCRelation.adoc#compute, compute a partition>>
+
+* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.adoc#insert, insert or overwrite data>> and for the <<spark-sql-JDBCRelation.adoc#toString, human-friendly text representation>>
+
+* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>)
+
+* `JdbcUtils` is requested to <<spark-sql-JdbcUtils.adoc#tableExists, tableExists>>, <<spark-sql-JdbcUtils.adoc#truncateTable, truncateTable>>, <<spark-sql-JdbcUtils.adoc#getSchemaOption, getSchemaOption>>, <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>> and <<spark-sql-JdbcUtils.adoc#createTable, createTable>>
+
+* `JDBCOptions` is <<creating-instance, created>> (with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
+
+* `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#jdbc, load data from external table using JDBC data source>> (using `DataFrameReader.jdbc` method with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
 
 ! `driver`
 !

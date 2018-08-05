@@ -518,7 +518,7 @@ val t1 = spark.read.table("t1")
 
 NOTE: `table` simply passes the call to link:spark-sql-SparkSession.adoc#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
 
-=== [[jdbc]] Loading Data From External Table using JDBC -- `jdbc` Method
+=== [[jdbc]] Loading Data From External Table using JDBC Data Source -- `jdbc` Method
 
 [source, scala]
 ----

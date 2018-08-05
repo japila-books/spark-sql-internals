@@ -48,8 +48,14 @@ Used exclusively when `JDBCRelation` is link:spark-sql-JDBCRelation.adoc#schema[
 | <<schemaString, schemaString>>
 |
 
+| <<saveTable, saveTable>>
+|
+
 | <<tableExists, tableExists>>
 | Used when `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider[createRelation] (as a `CreatableRelationProvider`)
+
+| <<truncateTable, truncateTable>>
+| Used when...FIXME
 |===
 
 === [[createConnectionFactory]] `createConnectionFactory` Method
@@ -188,7 +194,7 @@ saveTable(
 
 `saveTable`...FIXME
 
-NOTE: `saveTable` is used when...FIXME
+NOTE: `saveTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).
 
 === [[getCustomSchema]] Replacing Data Types In Table Schema -- `getCustomSchema` Method
 
@@ -237,7 +243,7 @@ createTable(
 
 `createTable`...FIXME
 
-NOTE: `createTable` is used when...FIXME
+NOTE: `createTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).
 
 === [[getInsertStatement]] `getInsertStatement` Method
 
@@ -265,3 +271,25 @@ getJdbcType(dt: DataType, dialect: JdbcDialect): JdbcType
 `getJdbcType`...FIXME
 
 NOTE: `getJdbcType` is used when...FIXME
+
+=== [[tableExists]] `tableExists` Method
+
+[source, scala]
+----
+tableExists(conn: Connection, options: JDBCOptions): Boolean
+----
+
+`tableExists`...FIXME
+
+NOTE: `tableExists` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).
+
+=== [[truncateTable]] `truncateTable` Method
+
+[source, scala]
+----
+truncateTable(conn: Connection, options: JDBCOptions): Unit
+----
+
+`truncateTable`...FIXME
+
+NOTE: `truncateTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).

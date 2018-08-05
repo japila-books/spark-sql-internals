@@ -18,7 +18,7 @@ As a <<spark-sql-PrunedFilteredScan.adoc#,PrunedFilteredScan>>, `JDBCRelation` s
 * `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a BaseRelation]
 
 [[toString]]
-When requested for a text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
+When requested for a human-friendly text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
 
 ```
 JDBCRelation([table]) [numPartitions=[number]]

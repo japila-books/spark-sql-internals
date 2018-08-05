@@ -85,7 +85,7 @@
 == JDBC Data Source
 
 . link:spark-sql-jdbc.adoc[JDBC Data Source]
-. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
+. link:spark-sql-JDBCOptions.adoc[JDBCOptions -- JDBC Data Source Options]
 . link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 . link:spark-sql-JDBCRelation.adoc[JDBCRelation]
 . link:spark-sql-JDBCRDD.adoc[JDBCRDD]
