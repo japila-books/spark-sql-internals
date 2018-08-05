@@ -153,15 +153,22 @@
 
 . link:spark-sql-subqueries.adoc[Subqueries]
 
+. link:spark-sql-hint-framework.adoc[Hint Framework]
+
+. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+
 == Extending Spark SQL / Data Source API V1
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
 
+=== Data Source Providers
+
 . link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider Contract -- Data Sources That Save Rows Per Save Mode]
+. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister Contract -- Registering Data Source Format]
 . link:spark-sql-RelationProvider.adoc[RelationProvider Contract -- Relation Providers With Schema Inference]
 . link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema]
 
-. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister Contract -- Registering Data Source Format]
+=== Data Source Relations
 
 . link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
@@ -171,6 +178,8 @@
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
 . link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
 . link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]
+
+=== File-Based Data Sources
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
 .. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
@@ -182,19 +191,13 @@
 .. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
 .. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
 
-. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
+=== Others
 
-. link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
+. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
 
 . link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
 
-. link:spark-sql-FileRelation.adoc[FileRelation]
-
-. link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
-
-. link:spark-sql-hint-framework.adoc[Hint Framework]
-
-. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+. link:spark-sql-FileRelation.adoc[FileRelation Contract]
 
 === Data Source API V2
 
@@ -515,7 +518,7 @@
 .. link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
 .. link:spark-sql-ExpressionEncoder-LocalDateTime.adoc[LocalDateTimeEncoder -- Custom ExpressionEncoder for java.time.LocalDateTime]
 
-=== RDDs
+== RDDs
 
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
@@ -601,6 +604,8 @@
 
 . link:spark-sql-SchemaUtils.adoc[SchemaUtils Helper Object]
 
+. link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
+
 . link:spark-sql-TypeCoercion.adoc[TypeCoercion Object]
 . link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule -- Contract For Type Coercion Rules]
 
@@ -633,5 +638,7 @@
 . link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
+
+. link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]
