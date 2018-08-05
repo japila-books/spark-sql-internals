@@ -276,24 +276,43 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ----
 
-=== [[save]] Saving DataFrame -- `save` Method
+=== [[save]] Writing Result of Structured Query (DataFrame) to Data Source -- `save` Method
 
 [source, scala]
 ----
 save(): Unit
 ----
 
-`save` saves the result of a structured query (the content of a link:spark-sql-Dataset.adoc[Dataset]) to a data source.
+`save` writes the result of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
 
-Internally, `save` <<runCommand, runs>> a link:spark-sql-LogicalPlan-RunnableCommand.adoc#SaveIntoDataSourceCommand[SaveIntoDataSourceCommand] runnable command under the name `save`.
+Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<spark-sql-SessionState.adoc#conf, SQLConf>>).
 
-NOTE: `save` does not support saving to Hive (when `source` is `hive`) and bucketing.
+[NOTE]
+====
+`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn used to access the <<spark-sql-SessionState.adoc#conf, SQLConf>>.
 
-CAUTION: FIXME What does `bucketing` mean? What about `assertNotBucketed`?
+[source, scala]
+----
+val df: DataFrame = ???
+df.sparkSession.sessionState.conf
+----
+====
 
-CAUTION: FIXME What is `partitioningColumns`?
+If the class is a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>>...FIXME
 
-NOTE: `save` uses `source`, `partitioningColumns`, `extraOptions`, and `mode` internal properties.
+Otherwise, if not a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>>, `save` simply <<saveToV1Source, saveToV1Source>>.
+
+`save` does not support saving to Hive (i.e. the <<source, source>> is `hive`) and throws an `AnalysisException` when requested so.
+
+```
+Hive data source can only be used with tables, you can not write files of Hive data source directly.
+```
+
+`save` <<assertNotBucketed, does not support bucketing>> (i.e. when the <<numBuckets, numBuckets>> or <<sortColumnNames, sortColumnNames>> options are defined) and throws an `AnalysisException` when requested so.
+
+```
+'[operation]' does not support bucketing right now
+```
 
 === [[jdbc]] `jdbc` Method
 
@@ -523,4 +542,4 @@ saveToV1Source(): Unit
 
 `saveToV1Source`...FIXME
 
-NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save>> (for `DataSourceV2` writers with no `WriteSupport` and non-``DataSourceV2`` writers).
+NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, write the result of a structured query (DataFrame) to data source>> (for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers).

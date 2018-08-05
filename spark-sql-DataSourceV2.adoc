@@ -1,0 +1,63 @@
+== [[DataSourceV2]] DataSourceV2
+
+`DataSourceV2` is the <<contract, contract>> of <<implementations, Data Sources V2>> that <<FIXME, FIXME>>.
+
+`DataSourceV2` defines no methods or values and acts as a marker interface.
+
+[[contract]]
+[source, java]
+----
+package org.apache.spark.sql.sources.v2;
+
+public interface DataSourceV2 {}
+----
+
+NOTE: Implementations should mix-in at least one of the interfaces like `ReadSupport` and `WriteSupport`. Otherwise it's simply a dummy data source which is un-readable and un-writable.
+
+[NOTE]
+====
+`DataSourceV2` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+
+In other words, using the contract is as treading on thin ice.
+====
+
+[[implementations]]
+.DataSourceV2s
+[cols="1,2",options="header",width="100%"]
+|===
+| DataSourceV2
+| Description
+
+| `ConsoleSinkProvider`
+| [[ConsoleSinkProvider]] Used in Spark Structured Streaming
+
+| `ContinuousReadSupport`
+| [[ContinuousReadSupport]] Used in Spark Structured Streaming
+
+| `MemorySinkV2`
+| [[MemorySinkV2]] Used in Spark Structured Streaming
+
+| `MicroBatchReadSupport`
+| [[MicroBatchReadSupport]] Used in Spark Structured Streaming
+
+| `RateSourceProvider`
+| [[RateSourceProvider]] Used in Spark Structured Streaming
+
+| `RateSourceProviderV2`
+| [[RateSourceProviderV2]] Used in Spark Structured Streaming
+
+| `ReadSupport`
+| [[ReadSupport]]
+
+| `ReadSupportWithSchema`
+| [[ReadSupportWithSchema]]
+
+| `SessionConfigSupport`
+| [[SessionConfigSupport]]
+
+| `StreamWriteSupport`
+| [[StreamWriteSupport]]
+
+| `WriteSupport`
+| [[WriteSupport]]
+|===

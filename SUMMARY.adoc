@@ -198,6 +198,7 @@
 
 === Data Source API V2
 
+. link:spark-sql-DataSourceV2.adoc[DataSourceV2]
 . link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 . link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
