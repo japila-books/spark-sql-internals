@@ -1,31 +1,8 @@
 == [[CreatableRelationProvider]] CreatableRelationProvider Contract -- Data Sources That Save Rows Per Save Mode
 
-`CreatableRelationProvider` is a <<contract, contract>> for link:spark-sql-DataSource.adoc#providers[data source providers] that <<createRelation, save the result of a structured query per save mode and return the schema>>.
+`CreatableRelationProvider` is the <<contract, contract>> for <<implementations, data source providers>> that want to support <<createRelation, saving the result of a structured query (DataFrame) per save mode and return the schema>>.
 
-NOTE: A structured query is a link:spark-sql-DataFrame.adoc[DataFrame] while the result are link:spark-sql-Row.adoc[Rows].
-
-`CreatableRelationProvider` is used when:
-
-* `DataSource` is requested to link:spark-sql-DataSource.adoc#write[write the result of a structured query to data source per save mode] (after `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#save[save])
-
-* `DataSource` is requested to link:spark-sql-DataSource.adoc#writeAndRead[write the result of a structured query to data source per save mode followed by reading rows back] (after `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[save to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
-
-[[implementations]]
-.CreatableRelationProviders
-[width="100%",cols="1,2",options="header"]
-|===
-| CreatableRelationProvider
-| Description
-
-| link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-|
-
-| link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
-|
-|===
-
-=== [[contract]] CreatableRelationProvider Contract
-
+[[contract]]
 [source, scala]
 ----
 package org.apache.spark.sql.sources
@@ -46,12 +23,32 @@ trait CreatableRelationProvider {
 | Description
 
 | `createRelation`
-a| [[createRelation]] Saves the result of a link:spark-sql-DataFrame.adoc[structured query] to a target relation per save mode and parameters. Creates a link:spark-sql-BaseRelation.adoc[BaseRelation] to describe the scheme.
+a| [[createRelation]] Saves the result of a link:spark-sql-DataFrame.adoc[structured query] to a target relation per save mode and parameters. In the end, `createRelation` creates a link:spark-sql-BaseRelation.adoc[BaseRelation] to describe the scheme.
 
-The save mode specifies what happens when the destination already exists:
+The save mode specifies what happens when the destination already exists and can be one of the following:
 
-* Append
-* ErrorIfExists
-* Ignore
-* Overwrite
+* [[Append]] `Append`
+* [[ErrorIfExists]] `ErrorIfExists`
+* [[Ignore]] `Ignore`
+* [[Overwrite]] `Overwrite`
+|===
+
+`CreatableRelationProvider` is used when:
+
+* `DataSource` is requested to link:spark-sql-DataSource.adoc#write[write the result of a structured query to data source per save mode] (after `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#save[save])
+
+* `DataSource` is requested to link:spark-sql-DataSource.adoc#writeAndRead[write the result of a structured query to data source per save mode followed by reading rows back] (after `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[save to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select (CTAS)] SQL statements)
+
+[[implementations]]
+.CreatableRelationProviders
+[width="100%",cols="1,2",options="header"]
+|===
+| CreatableRelationProvider
+| Description
+
+| <<spark-sql-JdbcRelationProvider.adoc#, JdbcRelationProvider>>
+| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.adoc#, JDBC data source>>
+
+| <<spark-sql-KafkaSourceProvider.adoc#, KafkaSourceProvider>>
+| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.adoc#, Kafka data source>>
 |===

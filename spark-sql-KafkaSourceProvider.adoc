@@ -5,7 +5,7 @@
 
 NOTE: `KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/v2.3.1/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
 
-`KafkaSourceProvider` is a link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider] and a <<createRelation-RelationProvider, RelationProvider>>.
+`KafkaSourceProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 
 [source, scala]
 ----

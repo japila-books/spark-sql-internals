@@ -5,7 +5,7 @@
 
 NOTE: `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
 
-`JdbcRelationProvider` is a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>> and a <<createRelation-RelationProvider, RelationProvider>>.
+`JdbcRelationProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 
 `JdbcRelationProvider` is used when `DataFrameReader` is requested to load data from link:spark-sql-DataFrameReader.adoc#jdbc[jdbc] data source.
 
@@ -34,7 +34,7 @@ NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[
 
 In the end, `createRelation` creates a link:spark-sql-JDBCRelation.adoc#creating-instance[JDBCRelation] with link:spark-sql-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 
-=== [[createRelation-CreatableRelationProvider]] Creating BaseRelation (JDBCRelation) After Preparing Table in Database -- `createRelation` Method (from CreatableRelationProvider)
+=== [[createRelation-CreatableRelationProvider]] Creating BaseRelation (JDBCRelation For Table After Saving DataFrame) -- `createRelation` Method (from CreatableRelationProvider)
 
 [source, scala]
 ----
