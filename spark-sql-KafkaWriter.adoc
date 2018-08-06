@@ -1,17 +1,17 @@
-== [[KafkaWriter]] KafkaWriter -- Writing Dataset to Kafka
+== [[KafkaWriter]] KafkaWriter Helper Object -- Writing Datasets to Kafka
 
-`KafkaWriter` is used to <<write, write>> the result of a batch or structured streaming query to Apache Kafka (with a new execution id attached so you can see the execution in web UI's SQL tab).
+`KafkaWriter` is a Scala object that is used to <<write, write>> the rows of a batch (or a streaming) structured query to Apache Kafka (with a new execution id attached so you can see the execution in web UI's SQL tab).
 
 .KafkaWriter (write) in web UI
 image::images/spark-sql-KafkaWriter-write-webui.png[align="center"]
 
-`KafkaWriter` <<validateQuery, makes sure>> that the schema of the `Dataset` to write records of contains:
+`KafkaWriter` <<validateQuery, makes sure>> that the schema of the `Dataset` to write rows of contains the following columns:
 
 * Required *topic* as a field of type `StringType` or specified explicitly
 
-* Required *value* as a field of type `StringType` or `BinaryType`
-
 * Optional *key* as a field of type `StringType` or `BinaryType`
+
+* Required *value* as a field of type `StringType` or `BinaryType`
 
 [source, scala]
 ----
@@ -48,7 +48,7 @@ org.apache.spark.sql.AnalysisException: topic option required when no 'topic' at
   ... 50 elided
 ----
 
-=== [[write]] Writing Results of Structured Query to Kafka -- `write` Method
+=== [[write]] Writing Rows of Structured Query to Kafka Topic -- `write` Method
 
 [source, scala]
 ----
@@ -59,15 +59,25 @@ write(
   topic: Option[String] = None): Unit
 ----
 
-`write` link:spark-sql-KafkaWriter-KafkaWriteTask.adoc[creates and executes a KafkaWriteTask] per partition of the ``QueryExecution``'s link:spark-sql-QueryExecution.adoc#toRdd[RDD] (link:spark-sql-SQLExecution.adoc#withNewExecutionId[with a new execution id] attached so you can see the execution in web UI's link:spark-sql-webui.adoc[SQL tab]).
+`write` gets the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.adoc#, QueryExecution>>.
+
+`write` then <<validateQuery, validateQuery>>.
+
+In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
+
+. Creates a <<spark-sql-KafkaWriteTask.adoc#creating-instance, KafkaWriteTask>> (for the input `kafkaParameters`, the schema and the input `topic`)
+
+. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.adoc#execute, write the rows (of the partition) to Kafka topic>>
+
+. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.adoc#close, close>>
 
 [NOTE]
 ====
 `write` is used when:
 
-* `KafkaSourceProvider` link:spark-sql-KafkaSourceProvider.adoc#createRelation-CreatableRelationProvider[creates a BaseRelation] (after writing the result of a structure query)
+* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic>>
 
-* Structured Streaming's `KafkaSink` commits a batch
+* (Spark Structured Streaming) `KafkaSink` is requested to `addBatch`
 ====
 
 === [[validateQuery]] Validating Query -- `validateQuery` Method
@@ -80,12 +90,6 @@ validateQuery(
   topic: Option[String] = None): Unit
 ----
 
-`validateQuery` validates the schema of the input link:spark-sql-QueryExecution.adoc#analyzed[analyzed] `QueryExecution`, i.e.
+`validateQuery`...FIXME
 
-* Whether the required *topic* is available as a field of type `StringType` in the schema or as the input `topic`
-
-* Whether the optional *key* is available as a field of type `StringType` or `BinaryType` in the schema
-
-* Whether the required *value* is available as a field of type `StringType` or `BinaryType` in the schema
-
-NOTE: `validateQuery` is used exclusively when `KafkaWriter` <<write, writes the result of a query to Kafka>>.
+NOTE: `validateQuery` is used when...FIXME

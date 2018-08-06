@@ -27,38 +27,38 @@ val qe = new QueryExecution(sparkSession, plan)
 [[execution-pipeline]]
 [[query-plan-lifecycle]]
 .QueryExecution's Properties (aka Structured Query Execution Pipeline)
-[cols="1,3",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Attribute / Phase
 | Description
 
-| [[analyzed]] `analyzed`
-a| Analyzed <<logical, logical plan>> that has passed link:spark-sql-Analyzer.adoc#execute[Analyzer]'s check rules.
+| analyzed
+a| [[analyzed]] Analyzed <<logical, logical plan>> that has passed link:spark-sql-Analyzer.adoc#execute[Analyzer]'s check rules.
 
 TIP: Use Dataset's link:spark-sql-dataset-operators.adoc#explain[explain(extended = true)] or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
-| [[withCachedData]] `withCachedData`
-| <<analyzed, analyzed>> logical plan after `CacheManager` was requested to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans].
+| withCachedData
+| [[withCachedData]] <<analyzed, analyzed>> logical plan after `CacheManager` was requested to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans].
 
 `withCachedData` makes sure that the logical plan <<assertAnalyzed, can be analyzed>> and <<assertSupported, uses supported operations only>>.
 
-| [[optimizedPlan]] `optimizedPlan`
-| Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on <<withCachedData, withCachedData>>.
+| optimizedPlan
+| [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on <<withCachedData, withCachedData>>.
 
-| [[sparkPlan]] `sparkPlan`
-a| link:spark-sql-SparkPlan.adoc[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
+| sparkPlan
+a| [[sparkPlan]] link:spark-sql-SparkPlan.adoc[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
 
 NOTE: `sparkPlan` is the first physical plan from the collection of all possible physical plans.
 
 NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:spark-sql-catalyst-QueryPlanner.adoc#plan[will always generate at least one physical plan].
 
-| [[executedPlan]] `executedPlan`
-a| Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final "shape" and ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
+| executedPlan
+a| [[executedPlan]] Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final "shape" and ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
 
 NOTE: `executedPlan` phase is when the <<spark-sql-CollapseCodegenStages.adoc, CollapseCodegenStages>> physical preparation rule is executed to collapse physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
 
-| [[toRdd]] `toRdd`
-a| `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>).
+| toRdd
+a| [[toRdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>.
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 

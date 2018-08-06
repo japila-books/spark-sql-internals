@@ -2,24 +2,30 @@
 
 `KafkaWriteTask` is used to <<execute, write rows>> (from a structured query) to Apache Kafka.
 
-`KafkaWriteTask` is used exclusively when `KafkaWriter` is requested to link:spark-sql-KafkaWriter.adoc#write[write query results to Kafka] (and creates one per partition).
+`KafkaWriteTask` is <<creating-instance, created>> exclusively when `KafkaWriter` is requested to <<spark-sql-KafkaWriter.adoc#write, write the rows of a structured query to a Kafka topic>>.
 
 `KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the link:spark-sql-UnsafeRow.adoc[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
 
 [[internal-properties]]
 .KafkaWriteTask's Internal Properties
-[cols="1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[projection]] `projection`
-| link:spark-sql-UnsafeProjection.adoc[UnsafeProjection]
+| callback
+| [[callback]]
+
+| failedWrite
+| [[failedWrite]]
+
+| projection
+| [[projection]] <<spark-sql-UnsafeProjection.adoc#, UnsafeProjection>>
 
 <<createProjection, Created>> once when `KafkaWriteTask` is created.
 |===
 
-=== [[execute]] Sending Rows to Kafka Asynchronously -- `execute` Method
+=== [[execute]] Writing Rows to Kafka Asynchronously -- `execute` Method
 
 [source, scala]
 ----
@@ -61,3 +67,24 @@ createProjection: UnsafeProjection
 `createProjection` casts `key` and `value` expressions to `BinaryType` in link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
 
 NOTE: `createProjection` is used exclusively when `KafkaWriteTask` is created (as <<projection, projection>>).
+
+=== [[close]] `close` Method
+
+[source, scala]
+----
+close(): Unit
+----
+
+`close`...FIXME
+
+NOTE: `close` is used when...FIXME
+
+=== [[creating-instance]] Creating KafkaWriteTask Instance
+
+`KafkaWriteTask` takes the following when created:
+
+* [[producerConfiguration]] Kafka Producer configuration (as `Map[String, Object]`)
+* [[inputSchema]] Input schema (as `Seq[Attribute]`)
+* [[topic]] Topic name
+
+`KafkaWriteTask` initializes the <<internal-registries, internal registries and counters>>.
