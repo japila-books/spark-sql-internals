@@ -70,13 +70,13 @@ write(
 * Structured Streaming's `KafkaSink` commits a batch
 ====
 
-=== [[validateQuery]] Validating QueryExecution -- `validateQuery` Method
+=== [[validateQuery]] Validating Query -- `validateQuery` Method
 
 [source, scala]
 ----
 validateQuery(
-  queryExecution: QueryExecution,
-  kafkaParameters: java.util.Map[String, Object],
+  schema: Seq[Attribute],
+  kafkaParameters: ju.Map[String, Object],
   topic: Option[String] = None): Unit
 ----
 

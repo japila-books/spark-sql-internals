@@ -98,7 +98,7 @@ startingOffsets for [tp] can't be latest for batch queries on Kafka
 
 NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
 
-=== [[createRelation-CreatableRelationProvider]] Creating BaseRelation After Writing -- `createRelation` Method (from CreatableRelationProvider)
+=== [[createRelation-CreatableRelationProvider]] Writing DataFrame to Kafka Topic -- `createRelation` Method (from CreatableRelationProvider)
 
 [source, scala]
 ----

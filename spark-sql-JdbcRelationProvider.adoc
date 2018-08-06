@@ -34,7 +34,7 @@ NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[
 
 In the end, `createRelation` creates a link:spark-sql-JDBCRelation.adoc#creating-instance[JDBCRelation] with link:spark-sql-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 
-=== [[createRelation-CreatableRelationProvider]] Creating BaseRelation (JDBCRelation) After Writing -- `createRelation` Method (from CreatableRelationProvider)
+=== [[createRelation-CreatableRelationProvider]] Writing DataFrame to Table Using JDBC -- `createRelation` Method (from CreatableRelationProvider)
 
 [source, scala]
 ----
@@ -57,7 +57,7 @@ NOTE: `createRelation` uses a database-specific `JdbcDialect` to link:spark-sql-
 
 `createRelation` branches off per whether the table already exists in the database or not.
 
-If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with `createTableColumnTypes` and `createTableOptions` link:spark-sql-JDBCOptions.adoc#options[options] from the input `parameters`) and saves the records to the database in a single transaction.
+If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with <<spark-sql-JDBCOptions.adoc#createTableColumnTypes, createTableColumnTypes>> and <<spark-sql-JDBCOptions.adoc#createTableOptions, createTableOptions>> options from the input `parameters`) and writes the rows to the database in a single transaction.
 
 If however the table *does* exist, `createRelation` branches off per link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode] (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
 

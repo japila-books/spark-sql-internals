@@ -44,5 +44,11 @@ See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>
 
 | topic
 |
-| [[topic]]
+a| [[topic]] *Required* for writing a DataFrame to Kafka
+
+Used when:
+
+* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic and create a BaseRelation afterwards>>
+
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createStreamWriter` and `createSink`
 |===
