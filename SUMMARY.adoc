@@ -78,7 +78,7 @@
 . link:spark-sql-KafkaOffsetRangeLimit.adoc[KafkaOffsetRangeLimit]
 . link:spark-sql-KafkaDataConsumer.adoc[KafkaDataConsumer Contract]
 .. link:spark-sql-InternalKafkaConsumer.adoc[InternalKafkaConsumer]
-. link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Datasets to Kafka]
+. link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Structured Queries to Kafka]
 .. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
 . link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
 

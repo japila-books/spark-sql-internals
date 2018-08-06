@@ -1,17 +1,17 @@
-== [[KafkaWriter]] KafkaWriter Helper Object -- Writing Datasets to Kafka
+== [[KafkaWriter]] KafkaWriter Helper Object -- Writing Structured Queries to Kafka
 
-`KafkaWriter` is a Scala object that is used to <<write, write>> the rows of a batch (or a streaming) structured query to Apache Kafka (with a new execution id attached so you can see the execution in web UI's SQL tab).
+`KafkaWriter` is a Scala object that is used to <<write, write>> the rows of a batch (or a streaming) structured query to Apache Kafka.
 
 .KafkaWriter (write) in web UI
 image::images/spark-sql-KafkaWriter-write-webui.png[align="center"]
 
-`KafkaWriter` <<validateQuery, makes sure>> that the schema of the `Dataset` to write rows of contains the following columns:
+`KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>):
 
-* Required *topic* as a field of type `StringType` or specified explicitly
+* Either *topic* of type `StringType` or the <<spark-sql-kafka-options.adoc#topic, topic>> option are defined
 
-* Optional *key* as a field of type `StringType` or `BinaryType`
+* Optional *key* of type `StringType` or `BinaryType`
 
-* Required *value* as a field of type `StringType` or `BinaryType`
+* Required *value* of type `StringType` or `BinaryType`
 
 [source, scala]
 ----
@@ -61,7 +61,7 @@ write(
 
 `write` gets the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.adoc#, QueryExecution>>.
 
-`write` then <<validateQuery, validateQuery>>.
+`write` then <<validateQuery, validates the schema of a structured query>>.
 
 In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
 
@@ -80,7 +80,7 @@ In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution
 * (Spark Structured Streaming) `KafkaSink` is requested to `addBatch`
 ====
 
-=== [[validateQuery]] Validating Query -- `validateQuery` Method
+=== [[validateQuery]] Validating Schema (Attributes) of Structured Query and Topic Option Availability -- `validateQuery` Method
 
 [source, scala]
 ----
@@ -90,6 +90,23 @@ validateQuery(
   topic: Option[String] = None): Unit
 ----
 
-`validateQuery`...FIXME
+`validateQuery` makes sure that the following attributes are in the input schema (or their alternatives) and of the right data types:
 
-NOTE: `validateQuery` is used when...FIXME
+* Either `topic` attribute of type `StringType` or the <<spark-sql-kafka-options.adoc#topic, topic>> option are defined
+
+* If `key` attribute is defined it is of type `StringType` or `BinaryType`
+
+* `value` attribute is of type `StringType` or `BinaryType`
+
+If any of the requirements are not met, `validateQuery` throws an `AnalysisException`.
+
+[NOTE]
+====
+`validateQuery` is used when:
+
+* `KafkaWriter` object is requested to <<write, write the rows of a structured query to a Kafka topic>>
+
+* (Spark Structured Streaming) `KafkaStreamWriter` is created
+
+* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createStreamWriter`
+====
