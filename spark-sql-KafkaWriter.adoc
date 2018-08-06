@@ -48,7 +48,7 @@ org.apache.spark.sql.AnalysisException: topic option required when no 'topic' at
   ... 50 elided
 ----
 
-=== [[write]] Writing Query Results to Kafka -- `write` Method
+=== [[write]] Writing Results of Structured Query to Kafka -- `write` Method
 
 [source, scala]
 ----

@@ -163,7 +163,7 @@
 
 === Data Source Providers
 
-. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider Contract -- Data Sources That Save Rows Per Save Mode]
+. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider Contract -- Data Sources That Write Rows Per Save Mode]
 . link:spark-sql-DataSourceRegister.adoc[DataSourceRegister Contract -- Registering Data Source Format]
 . link:spark-sql-RelationProvider.adoc[RelationProvider Contract -- Relation Providers With Schema Inference]
 . link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema]

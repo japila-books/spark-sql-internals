@@ -98,7 +98,7 @@ startingOffsets for [tp] can't be latest for batch queries on Kafka
 
 NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
 
-=== [[createRelation-CreatableRelationProvider]] `createRelation` Method (from CreatableRelationProvider)
+=== [[createRelation-CreatableRelationProvider]] Creating BaseRelation After Writing -- `createRelation` Method (from CreatableRelationProvider)
 
 [source, scala]
 ----
@@ -109,9 +109,21 @@ createRelation(
   df: DataFrame): BaseRelation
 ----
 
-`createRelation`...FIXME
+NOTE: `createRelation` is part of the <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider Contract>> to write the rows of a structured query (a DataFrame) to an external data source.
 
-NOTE: `createRelation` is part of link:spark-sql-CreatableRelationProvider.adoc#contract[CreatableRelationProvider Contract].
+`createRelation` gets the <<spark-sql-kafka-options.adoc#topic, topic>> option from the input `parameters`.
+
+`createRelation` gets the <<kafkaParamsForProducer, Kafka-specific options for writing>> from the input `parameters`.
+
+`createRelation` then uses the `KafkaWriter` helper object to <<spark-sql-KafkaWriter.adoc#write, write the rows of the DataFrame to the Kafka topic>>.
+
+In the end, `createRelation` creates a fake <<spark-sql-BaseRelation.adoc#, BaseRelation>> that simply throws an `UnsupportedOperationException` for all its methods.
+
+`createRelation` supports <<spark-sql-CreatableRelationProvider.adoc#Append, Append>> and <<spark-sql-CreatableRelationProvider.adoc#ErrorIfExists, ErrorIfExists>> only. `createRelation` throws an `AnalysisException` for the other save modes:
+
+```
+Save mode [mode] not allowed for Kafka. Allowed save modes are [Append] and [ErrorIfExists] (default).
+```
 
 === [[sourceSchema]] `sourceSchema` Method
 
@@ -298,3 +310,14 @@ kafkaParamsForExecutors(
 `kafkaParamsForExecutors`...FIXME
 
 NOTE: `kafkaParamsForExecutors` is used when...FIXME
+
+=== [[kafkaParamsForProducer]] `kafkaParamsForProducer` Object Method
+
+[source, scala]
+----
+kafkaParamsForProducer(parameters: Map[String, String]): Map[String, String]
+----
+
+`kafkaParamsForProducer`...FIXME
+
+NOTE: `kafkaParamsForProducer` is used when...FIXME
