@@ -1,6 +1,6 @@
 == [[FileFormat]] FileFormat
 
-`FileFormat` is the <<contract, contract>> in Spark SQL to <<buildReader, read>> and <<prepareWrite, write>> data stored in files (to/from the link:spark-sql-InternalRow.adoc[InternalRow] format).
+`FileFormat` is the <<contract, contract>> for <<implementations, data source providers>> that want to <<buildReader, read>> and <<prepareWrite, write>> data stored in files (to/from the link:spark-sql-InternalRow.adoc[InternalRow] format).
 
 [[contract]]
 [source, scala]
@@ -33,6 +33,38 @@ trait FileFormat {
 
 | [[prepareWrite]] `prepareWrite`
 | Used exclusively when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
+|===
+
+[[implementations]]
+.FileFormats
+[width="100%",cols="1,2",options="header"]
+|===
+| FileFormat
+| Description
+
+| `HiveFileFormat`
+| [[HiveFileFormat]]
+
+| <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>>
+| [[OrcFileFormat]]
+
+| <<spark-sql-ParquetFileFormat.adoc#, ParquetFileFormat>>
+| [[ParquetFileFormat]]
+
+| <<spark-sql-TextBasedFileFormat.adoc#, TextBasedFileFormat>>
+| [[TextBasedFileFormat]]
+
+| <<spark-sql-CSVFileFormat.adoc#, CSVFileFormat>>
+| [[CSVFileFormat]]
+
+| <<spark-sql-JsonFileFormat.adoc#, JsonFileFormat>>
+| [[JsonFileFormat]]
+
+| `LibSVMFileFormat`
+| [[LibSVMFileFormat]] (Spark MLlib)
+
+| <<spark-sql-TextFileFormat.adoc#, TextFileFormat>>
+| [[TextFileFormat]]
 |===
 
 === [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method

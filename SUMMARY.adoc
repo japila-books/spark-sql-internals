@@ -168,7 +168,7 @@
 . link:spark-sql-RelationProvider.adoc[RelationProvider Contract -- Relation Providers With Schema Inference]
 . link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema]
 
-=== Data Source Relations
+=== Data Source Relations / Extension Contracts
 
 . link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
