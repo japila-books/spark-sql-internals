@@ -348,13 +348,15 @@ clear(): Unit
 
 You can use `clear` to remove all the parameters and hints in `SQLConf`.
 
-=== [[redactOptions]] `redactOptions` Method
+=== [[redactOptions]] Redacting Data Source Options with Sensitive Information -- `redactOptions` Method
 
 [source, scala]
 ----
 redactOptions(options: Map[String, String]): Map[String, String]
 ----
 
-`redactOptions`...FIXME
+`redactOptions` takes the values of the <<spark-sql-properties.adoc#spark.sql.redaction.options.regex, spark.sql.redaction.options.regex>> and `spark.redaction.regex` configuration properties.
 
-NOTE: `redactOptions` is used when...FIXME
+For every regular expression (in the order), `redactOptions` redacts sensitive information, i.e. finds the first match of a regular expression pattern in every option key or value and if either matches replaces the value with `*********(redacted)`.
+
+NOTE: `redactOptions` is used exclusively when `SaveIntoDataSourceCommand` logical command is requested for the <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#simpleString, simple description>>.

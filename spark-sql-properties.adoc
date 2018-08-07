@@ -331,6 +331,16 @@ Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecord
 
 Use link:spark-sql-SQLConf.adoc#dataFramePivotMaxValues[SQLConf.dataFramePivotMaxValues] method to access the current value.
 
+| `spark.sql.redaction.options.regex`
+| `(?i)secret!password`
+a| [[spark.sql.redaction.options.regex]] Regular expression to find options of a Spark SQL command with sensitive information
+
+The values of the options matched will be redacted in the explain output.
+
+This redaction is applied on top of the global redaction configuration defined by `spark.redaction.regex` configuration.
+
+Used exclusively when `SQLConf` is requested to <<spark-sql-SQLConf.adoc#redactOptions, redactOptions>>.
+
 | `spark.sql.redaction.string.regex`
 | (undefined)
 a| [[spark.sql.redaction.string.regex]] Regular expression to point at sensitive information in text output
