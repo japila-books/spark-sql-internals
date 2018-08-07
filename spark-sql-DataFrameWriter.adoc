@@ -181,7 +181,7 @@ NOTE: `DataFrameWriter` is really a type constructor in Scala and keeps a refere
 
 NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing the content of streaming Datasets in a streaming fashion.
 
-=== [[runCommand]] Running Command -- `runCommand` Internal Method
+=== [[runCommand]] Running Logical Command -- `runCommand` Internal Method
 
 [source, scala]
 ----
@@ -533,13 +533,26 @@ assertNotBucketed(operation: String): Unit
 
 NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save, save>>, <<insertInto, insertInto>> and <<jdbc, jdbc>>.
 
-=== [[saveToV1Source]] `saveToV1Source` Internal Method
+=== [[saveToV1Source]] Executing Logical Command for Writing to Data Source V1 -- `saveToV1Source` Internal Method
 
 [source, scala]
 ----
 saveToV1Source(): Unit
 ----
 
-`saveToV1Source`...FIXME
+`saveToV1Source` creates a <<spark-sql-DataSource.adoc#apply, DataSource>> (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the <<spark-sql-DataSource.adoc#planForWriting, logical command for writing>> (with the <<mode, mode>> and the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> of the structured query).
 
-NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, write the result of a structured query (DataFrame) to data source>> (for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers).
+NOTE: While requesting the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
+
+In the end, `saveToV1Source` <<runCommand, runs the logical command for writing>>.
+
+[NOTE]
+====
+The <<spark-sql-DataSource.adoc#planForWriting, logical command for writing>> can be one of the following:
+
+* A <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#, SaveIntoDataSourceCommand>> for <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProviders>>
+
+* An <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> for <<spark-sql-FileFormat.adoc#, FileFormats>>
+====
+
+NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> writers with `WriteSupport`).
