@@ -347,3 +347,14 @@ clear(): Unit
 ----
 
 You can use `clear` to remove all the parameters and hints in `SQLConf`.
+
+=== [[redactOptions]] `redactOptions` Method
+
+[source, scala]
+----
+redactOptions(options: Map[String, String]): Map[String, String]
+----
+
+`redactOptions`...FIXME
+
+NOTE: `redactOptions` is used when...FIXME

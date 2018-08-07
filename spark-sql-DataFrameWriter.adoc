@@ -276,14 +276,14 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ----
 
-=== [[save]] Writing Result of Structured Query (DataFrame) to Data Source -- `save` Method
+=== [[save]] Saving Result of Structured Query (DataFrame) to Data Source -- `save` Method
 
 [source, scala]
 ----
 save(): Unit
 ----
 
-`save` writes the result of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
+`save` saves the result of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
 
 Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<spark-sql-SessionState.adoc#conf, SQLConf>>).
 

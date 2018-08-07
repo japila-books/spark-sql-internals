@@ -23,24 +23,24 @@
 | Extension Point
 | Description
 
-| [[CreatableRelationProvider]] link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
-| Data source that saves the result of a structured query per save mode and returns the schema
+| link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
+| [[CreatableRelationProvider]] Data source that saves the result of a structured query per save mode and returns the schema
 
-| [[FileFormat]] link:spark-sql-FileFormat.adoc[FileFormat]
-a| Used in:
+| link:spark-sql-FileFormat.adoc[FileFormat]
+a| [[FileFormat]] Used in:
 
 * <<sourceSchema, sourceSchema>> for streamed reading
 
 * <<write, write>> for writing a `DataFrame` to a `DataSource` (as part of creating a table as select)
 
-| [[RelationProvider]] link:spark-sql-RelationProvider.adoc[RelationProvider]
-| Data source that supports schema inference and can be accessed using SQL's `USING` clause
+| link:spark-sql-RelationProvider.adoc[RelationProvider]
+| [[RelationProvider]] Data source that supports schema inference and can be accessed using SQL's `USING` clause
 
-| [[SchemaRelationProvider]] link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
-| Data source that requires a user-defined schema
+| link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
+| [[SchemaRelationProvider]] Data source that requires a user-defined schema
 
 | `StreamSourceProvider`
-a| Used in:
+a| [[StreamSourceProvider]] Used in:
 
 * <<sourceSchema, sourceSchema>> and <<createSource, createSource>> for streamed reading
 
@@ -78,7 +78,7 @@ NOTE: Data source is also called a *table provider*.
 | Description
 
 | `providingClass`
-| [[providingClass]] FIXME
+| [[providingClass]] The Java class (`java.lang.Class`) that...FIXME
 
 Used when...FIXME
 
@@ -359,3 +359,45 @@ java.lang.ClassNotFoundException: Failed to find data source: [provider1]. Pleas
 ----
 
 If however, `lookupDataSource` found multiple registered aliases for the provider name...FIXME
+
+=== [[planForWriting]] Creating Logical Command for Writing (for CreatableRelationProvider and FileFormat Data Sources) -- `planForWriting` Method
+
+[source, scala]
+----
+planForWriting(mode: SaveMode, data: LogicalPlan): LogicalPlan
+----
+
+`planForWriting` creates an instance of the <<providingClass, providingClass>> and branches off per its type as follows:
+
+* For a <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>>, `planForWriting` creates a <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
+
+* For a <<spark-sql-FileFormat.adoc#, FileFormat>>, `planForWriting` <<planForWritingFileFormat, planForWritingFileFormat>> (with the `FileFormat` format and the input `mode` and `data`)
+
+* For other types, `planForWriting` simply throws a `RuntimeException`:
++
+```
+[providingClass] does not allow create table as select.
+```
+
+[NOTE]
+====
+`planForWriting` is used when:
+
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveToV1Source, saveToV1Source>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#save, save the result of a structured query (a DataFrame) to a data source>> for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers)
+
+* `InsertIntoDataSourceDirCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#run, executed>>
+====
+
+=== [[planForWritingFileFormat]] `planForWritingFileFormat` Internal Method
+
+[source, scala]
+----
+planForWritingFileFormat(
+  format: FileFormat,
+  mode: SaveMode,
+  data: LogicalPlan): InsertIntoHadoopFsRelationCommand
+----
+
+`planForWritingFileFormat`...FIXME
+
+NOTE: `planForWritingFileFormat` is used when...FIXME

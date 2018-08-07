@@ -418,23 +418,18 @@ In the end, `generateTreeString` calls itself recursively for the <<innerChildre
 
 NOTE: `generateTreeString` is used exclusively when `TreeNode` is requested for <<treeString, text representation of all nodes in the tree>>.
 
-=== [[innerChildren]] `innerChildren` Method
+=== [[innerChildren]] Inner Child Nodes -- `innerChildren` Method
 
 [source, scala]
 ----
 innerChildren: Seq[TreeNode[_]]
 ----
 
+`innerChildren` returns the inner nodes that should be shown as an inner nested tree of this node.
+
 `innerChildren` simply returns an empty collection of `TreeNodes`.
 
-[NOTE]
-====
-`innerChildren` is used when:
-
-* `TreeNode` is requested to <<generateTreeString, generate the text representation of inner and regular child nodes>>, <<allChildren, allChildren>> and <<getNodeNumbered, getNodeNumbered>>
-
-* `InMemoryTableScanExec` is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#innerChildren[innerChildren]
-====
+NOTE: `innerChildren` is used when `TreeNode` is requested to <<generateTreeString, generate the text representation of inner and regular child nodes>>, <<allChildren, allChildren>> and <<getNodeNumbered, getNodeNumbered>>.
 
 === [[allChildren]] `allChildren` Property
 

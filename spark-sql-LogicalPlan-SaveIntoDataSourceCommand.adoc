@@ -1,0 +1,45 @@
+== [[SaveIntoDataSourceCommand]] SaveIntoDataSourceCommand Logical Command
+
+`SaveIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> that <<run, FIXME>>.
+
+`SaveIntoDataSourceCommand` is <<creating-instance, created>> when...MEFIXME
+
+[[innerChildren]]
+`SaveIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes (that should be shown as an inner nested tree of this node)>>
+
+[source, scala]
+----
+// FIXME Example with inner nodes that should be shown as an inner nested tree of this node
+----
+
+[[simpleString]]
+`SaveIntoDataSourceCommand` <<spark-sql-SQLConf.adoc#redactOptions, redacts>> the <<options, options>> for the <<spark-sql-catalyst-QueryPlan.adoc#simpleString, simple description with state prefix>>.
+
+```
+SaveIntoDataSourceCommand [dataSource], [redacted], [mode]
+```
+
+[source, scala]
+----
+// FIXME Example with options redacted for the simple description with state prefix
+----
+
+=== [[run]] `run` Method
+
+[source, scala]
+----
+run(sparkSession: SparkSession): Seq[Row]
+----
+
+NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to run a logical command.
+
+`run`...FIXME
+
+=== [[creating-instance]] Creating SaveIntoDataSourceCommand Instance
+
+`SaveIntoDataSourceCommand` takes the following when created:
+
+* [[query]] <<spark-sql-LogicalPlan.adoc#, Logical query plan>>
+* [[dataSource]] <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>> data source
+* [[options]] Options (as `Map[String, String]`)
+* [[mode]] <<spark-sql-DataFrameWriter.adoc#SaveMode, SaveMode>>
