@@ -62,7 +62,7 @@ NOTE: Jobs without <<spark.sql.execution.id, spark.sql.execution.id>> key are no
 
 TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the link:spark-sql-QueryExecution.adoc[QueryExecution] for an execution id.
 
-=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Tracked Under New Execution Id -- `withNewExecutionId` Method
+=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Under New Execution Id -- `withNewExecutionId` Method
 
 [source, scala]
 ----

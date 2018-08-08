@@ -101,31 +101,28 @@ See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManu
 | Type
 | Description
 
-| [[functionRegistry]] `functionRegistry`
+| `functionRegistry`
 |
-|
+| [[functionRegistry]]
 
-| [[listenerManager]] `listenerManager`
+| `listenerManager`
 | link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
-| link:spark-sql-SessionState.adoc#listenerManager[ExecutionListenerManager] of the <<sessionState, SessionState>>
+| [[listenerManager]] link:spark-sql-SessionState.adoc#listenerManager[ExecutionListenerManager] of the <<sessionState, SessionState>>
 
-| [[sessionState]] `sessionState`
+| `sessionState`
 | link:spark-sql-SessionState.adoc[SessionState]
-a|
-
-Internally, `sessionState` link:spark-sql-SessionState.adoc#clone[clones] the optional <<parentSessionState, parent `SessionState`>> (if given when <<creating-instance, creating SparkSession>>) or <<instantiateSessionState, creates a new `SessionState`>> using link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] as defined by link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property:
+a| [[sessionState]] Internally, `sessionState` link:spark-sql-SessionState.adoc#clone[clones] the optional <<parentSessionState, parent `SessionState`>> (if given when <<creating-instance, creating SparkSession>>) or <<instantiateSessionState, creates a new `SessionState`>> using link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] as defined by link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property:
 
 * *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
 * *hive* for link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
-| [[sharedState]] `sharedState`
+| `sharedState`
 | link:spark-sql-SharedState.adoc[SharedState]
-|
+| [[sharedState]]
 
-| [[streamingQueryManager]] `streamingQueryManager`
+| `streamingQueryManager`
 |
-|
-
+| [[streamingQueryManager]]
 |===
 
 NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism to plug `BaseRelation` object hierarchy in into link:spark-sql-LogicalPlan.adoc[LogicalPlan] object hierarchy that `SparkSession` uses to bridge them.

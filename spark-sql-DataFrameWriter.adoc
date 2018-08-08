@@ -181,18 +181,26 @@ NOTE: `DataFrameWriter` is really a type constructor in Scala and keeps a refere
 
 NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing the content of streaming Datasets in a streaming fashion.
 
-=== [[runCommand]] Running Logical Command -- `runCommand` Internal Method
+=== [[runCommand]] Executing Logical Command(s) -- `runCommand` Internal Method
 
 [source, scala]
 ----
-runCommand
-  (session: SparkSession, name: String)
-  (command: LogicalPlan): Unit
+runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 ----
 
-`runCommand`...FIXME
+`runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
 
-NOTE: `runCommand` is used when `DataFrameWriter` is requested for <<save, save>>, <<insertInto, insertInto>> and <<createTable, createTable>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
+`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, executing the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
+
+TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
+
+`runCommand` records the current time (end time).
+
+In the end, `runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
+
+In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.adoc#onFailure, onFailure>> (with the exception) and (re)throws it.
+
+NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
 === [[internal-state]] Internal State
 
@@ -276,14 +284,14 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ----
 
-=== [[save]] Saving Result of Structured Query (DataFrame) to Data Source -- `save` Method
+=== [[save]] Saving Rows of Structured Query (DataFrame) to Data Source -- `save` Method
 
 [source, scala]
 ----
 save(): Unit
 ----
 
-`save` saves the result of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
+`save` saves the rows of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
 
 Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<spark-sql-SessionState.adoc#conf, SQLConf>>).
 
@@ -428,7 +436,7 @@ CAUTION: FIXME
 
 NOTE: Parquet is the default data source format.
 
-=== [[insertInto]] Inserting DataFrame into Table -- `insertInto` Method
+=== [[insertInto]] Inserting Rows of Structured Streaming (DataFrame) into Table -- `insertInto` Method
 
 [source, scala]
 ----
