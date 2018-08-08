@@ -34,7 +34,7 @@ NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[
 
 In the end, `createRelation` creates a link:spark-sql-JDBCRelation.adoc#creating-instance[JDBCRelation] with link:spark-sql-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 
-=== [[createRelation-CreatableRelationProvider]] Writing DataFrame to Table Using JDBC -- `createRelation` Method (from CreatableRelationProvider)
+=== [[createRelation-CreatableRelationProvider]] Writing Rows of Structured Query (DataFrame) to Table Using JDBC -- `createRelation` Method (from CreatableRelationProvider)
 
 [source, scala]
 ----
