@@ -192,7 +192,13 @@ saveTable(
   options: JDBCOptions): Unit
 ----
 
-`saveTable`...FIXME
+`saveTable` takes the <<spark-sql-JDBCOptions.adoc#url, url>>, <<spark-sql-JDBCOptions.adoc#table, table>>, <<spark-sql-JDBCOptions.adoc#batchSize, batchSize>>, <<spark-sql-JDBCOptions.adoc#isolationLevel, isolationLevel>> options and <<createConnectionFactory, createConnectionFactory>>.
+
+`saveTable` <<getInsertStatement, getInsertStatement>>.
+
+`saveTable` takes the <<spark-sql-JDBCOptions.adoc#numPartitions, numPartitions>> option and applies <<spark-sql-dataset-operators.adoc#coalesce, coalesce>> operator to the input `DataFrame` if the number of partitions of its <<spark-sql-Dataset.adoc#rdd, RDD>> is less than the `numPartitions` option.
+
+In the end, `saveTable` requests the possibly-repartitioned `DataFrame` for its <<spark-sql-Dataset.adoc#rdd, RDD>> (it may have changed after the <<spark-sql-dataset-operators.adoc#coalesce, coalesce>> operator) and executes <<savePartition, savePartition>> for every partition (using `RDD.foreachPartition`).
 
 NOTE: `saveTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).
 
@@ -293,3 +299,24 @@ truncateTable(conn: Connection, options: JDBCOptions): Unit
 `truncateTable`...FIXME
 
 NOTE: `truncateTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>).
+
+=== [[savePartition]] `savePartition` Method
+
+[source, scala]
+----
+savePartition(
+  getConnection: () => Connection,
+  table: String,
+  iterator: Iterator[Row],
+  rddSchema: StructType,
+  insertStmt: String,
+  batchSize: Int,
+  dialect: JdbcDialect,
+  isolationLevel: Int): Iterator[Byte]
+----
+
+NOTE: `savePartition` is part of <<ADOC#savePartition, HERE Contract>> to...FIXME.
+
+`savePartition`...FIXME
+
+NOTE: `savePartition` is used when...FIXME
