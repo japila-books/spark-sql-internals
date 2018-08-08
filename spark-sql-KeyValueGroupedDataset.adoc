@@ -77,3 +77,14 @@ aggUntyped(columns: TypedColumn[_, _]*): Dataset[_]
 `aggUntyped`...FIXME
 
 NOTE: `aggUntyped` is used exclusively when <<agg, KeyValueGroupedDataset.agg>> typed operator is used.
+
+=== [[logicalPlan]] `logicalPlan` Internal Method
+
+[source, scala]
+----
+logicalPlan: AnalysisBarrier
+----
+
+`logicalPlan`...FIXME
+
+NOTE: `logicalPlan` is used when...FIXME

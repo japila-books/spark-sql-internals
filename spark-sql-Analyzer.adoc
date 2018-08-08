@@ -212,8 +212,10 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 
 | ResolveOrdinalInOrderByAndGroupBy
 |
+
 | ResolveMissingReferences
-|
+| [[ResolveMissingReferences]]
+
 | [[ExtractGenerator]] ExtractGenerator
 |
 | ResolveGenerate

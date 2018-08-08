@@ -176,6 +176,14 @@ logicalPlan: LogicalPlan
 
 When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.adoc#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<spark-sql-SparkPlan.adoc#executeCollect, executeCollect>>).
 
+! `planWithBarrier`
+a! [[planWithBarrier]]
+
+[source, scala]
+----
+planWithBarrier: AnalysisBarrier
+----
+
 ! [[rdd]] `rdd`
 a! (lazily-created) link:spark-rdd.adoc[RDD] of JVM objects of type `T` (as converted from rows in `Dataset` in the link:spark-sql-InternalRow.adoc[internal binary row format]).
 
