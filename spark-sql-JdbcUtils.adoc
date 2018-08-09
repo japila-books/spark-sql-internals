@@ -304,7 +304,7 @@ truncateTable(conn: Connection, options: JDBCOptions): Unit
 
 NOTE: `truncateTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
 
-=== [[savePartition]] `savePartition` Method
+=== [[savePartition]] Saving Rows (Per Partition) to Table -- `savePartition` Method
 
 [source, scala]
 ----
@@ -319,8 +319,10 @@ savePartition(
   isolationLevel: Int): Iterator[Byte]
 ----
 
-NOTE: `savePartition` is part of <<ADOC#savePartition, HERE Contract>> to...FIXME.
+`savePartition` creates a JDBC `Connection` using the input `getConnection` function.
 
-`savePartition`...FIXME
+`savePartition` tries to set the input `isolationLevel` if it is different than `TRANSACTION_NONE` and the database supports transactions.
 
-NOTE: `savePartition` is used when...FIXME
+`savePartition` then writes rows (in the input `Iterator[Row]`) using batches that are submitted after `batchSize` rows where added.
+
+NOTE: `savePartition` is used exclusively when `JdbcUtils` is requested to <<saveTable, saveTable>>.
