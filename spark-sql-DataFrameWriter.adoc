@@ -190,7 +190,7 @@ writer.save
 | [[source]] `source`
 | <<format, format>>
 
-| [[mode]] `mode`
+| `mode`
 | <<mode, mode>>
 
 | [[extraOptions]] `extraOptions`
