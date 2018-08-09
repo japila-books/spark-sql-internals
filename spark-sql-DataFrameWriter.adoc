@@ -177,36 +177,11 @@ In the end, you trigger the actual saving of the content of a `Dataset` (i.e. th
 writer.save
 ----
 
-NOTE: `DataFrameWriter` is really a type constructor in Scala and keeps a reference to a source `DataFrame` during its lifecycle (starting right from the moment it was created).
+[[internal-state]]
+`DataFrameWriter` uses <<internal-attributes-and-corresponding-setters, internal mutable attributes>> to build a properly-defined _"write specification"_ for <<insertInto, insertInto>>, <<save, save>> and <<saveAsTable, saveAsTable>> methods.
 
-NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing the content of streaming Datasets in a streaming fashion.
-
-=== [[runCommand]] Executing Logical Command(s) -- `runCommand` Internal Method
-
-[source, scala]
-----
-runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
-----
-
-`runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
-
-`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, executing the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
-
-TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
-
-`runCommand` records the current time (end time).
-
-In the end, `runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
-
-In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.adoc#onFailure, onFailure>> (with the exception) and (re)throws it.
-
-NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
-
-=== [[internal-state]] Internal State
-
-`DataFrameWriter` uses the following mutable attributes to build a properly-defined write specification for <<insertInto, insertInto>>, <<saveAsTable, saveAsTable>>, and <<save, save>>:
-
-.Attributes and Corresponding Setters
+[[internal-attributes-and-corresponding-setters]]
+.Internal Attributes and Corresponding Setters
 [cols="1,2",options="header"]
 |===
 | Attribute
@@ -234,38 +209,42 @@ NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save t
 | <<sortBy, sortBy>>
 |===
 
+[[df]]
+NOTE: `DataFrameWriter` is a type constructor in Scala that keeps an internal reference to the source `DataFrame` for the whole lifecycle (starting right from the moment it was created).
+
+NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing the content of streaming Datasets in a streaming fashion.
+
+=== [[runCommand]] Executing Logical Command(s) -- `runCommand` Internal Method
+
+[source, scala]
+----
+runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
+----
+
+`runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
+
+`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, executing the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
+
+TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
+
+`runCommand` records the current time (end time).
+
+In the end, `runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
+
+In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.adoc#onFailure, onFailure>> (with the exception) and (re)throws it.
+
+NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
+
 === [[saveAsTable]] `saveAsTable` Method
 
 [source, scala]
 ----
 saveAsTable(tableName: String): Unit
+// PRIVATE API
+saveAsTable(tableIdent: TableIdentifier): Unit
 ----
 
-`saveAsTable` saves the content of a `DataFrame` as the `tableName` table.
-
-First, `tableName` is parsed to an internal table identifier. `saveAsTable` then checks whether the table exists or not and uses <<mode, save mode>> to decide what to do.
-
-`saveAsTable` uses the link:spark-sql-SessionCatalog.adoc[SessionCatalog] for the current session.
-
-.saveAsTable's Behaviour per Save Mode
-[cols="1,1,2",options="header"]
-|===
-| Does table exist?
-| Save Mode
-| Behaviour
-
-| yes
-| `Ignore`
-| Does nothing
-
-| yes
-| `ErrorIfExists`
-| Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
-
-| _anything_
-| _anything_
-| Creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and link:spark-sql-SessionState.adoc#executePlan[executes] the link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator
-|===
+`saveAsTable` saves the content of a `DataFrame` to the `tableName` table.
 
 [source, scala]
 ----
@@ -283,6 +262,40 @@ scala> q.show
 |five_ids| default|       null| EXTERNAL|      false|
 +--------+--------+-----------+---------+-----------+
 ----
+
+Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.adoc#parseTableIdentifier, parse the input table name>>.
+
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#sqlParser, ParserInterface>>.
+
+`saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#tableExists, check whether the table exists or not>>.
+
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
+
+In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
+
+.saveAsTable's Behaviour per Save Mode
+[cols="1,1,2",options="header",width="100%"]
+|===
+| Does table exist?
+| Save Mode
+| Behaviour
+
+| yes
+| `Ignore`
+| Does nothing
+
+| yes
+| `ErrorIfExists`
+| Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
+
+| yes
+| `Overwrite`
+| FIXME
+
+| _anything_
+| _anything_
+| <<createTable, createTable>>
+|===
 
 === [[save]] Saving Rows of Structured Query (DataFrame) to Data Source -- `save` Method
 
