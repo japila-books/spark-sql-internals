@@ -16,19 +16,19 @@
 
 The minimum value is `1`
 
-Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>> through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>>.
 
 ! createTableColumnTypes
 !
 ! [[createTableColumnTypes]]
 
-Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>> through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
 
 ! `createTableOptions`
 ! Empty string
 ! [[createTableOptions]]
 
-Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>> through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.adoc#createTable, createTable>>.
 
 ! `customSchema`
 ! (undefined)
@@ -67,7 +67,7 @@ Used when:
 
 * `JDBCRelation` is requested to <<spark-sql-JDBCRelation.adoc#insert, insert or overwrite data>> and for the <<spark-sql-JDBCRelation.adoc#toString, human-friendly text representation>>
 
-* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, create a BaseRelation>> (as a <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider>>)
+* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>
 
 * `JdbcUtils` is requested to <<spark-sql-JdbcUtils.adoc#tableExists, tableExists>>, <<spark-sql-JdbcUtils.adoc#truncateTable, truncateTable>>, <<spark-sql-JdbcUtils.adoc#getSchemaOption, getSchemaOption>>, <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>> and <<spark-sql-JdbcUtils.adoc#createTable, createTable>>
 
@@ -135,7 +135,7 @@ When undefined, <<lowerBound, lowerBound>> and <<upperBound, upperBound>> have t
 ! `false`
 ! [[truncate]][[isTruncate]] (used only for writing) Enables table truncation
 
-Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, writing the rows of a structured query (a DataFrame) to a table>>
+Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>
 
 ! `sessionInitStatement`
 !
@@ -160,7 +160,7 @@ NOTE: The <<options, options>> are case-insensitive.
 
 * `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#jdbc, load data from an external table using JDBC>> (and create a `DataFrame` to represent the process of loading the data)
 
-* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a <<spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider, RelationProvider>> for reading and a <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, CreatableRelationProvider>> for writing)
+* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a <<spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider, RelationProvider>> for loading and a <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, CreatableRelationProvider>> for writing)
 
 === [[creating-instance]] Creating JDBCOptions Instance
 
