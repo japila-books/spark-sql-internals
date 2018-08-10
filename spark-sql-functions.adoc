@@ -1,6 +1,6 @@
 == [[functions]] Standard Functions -- functions Object
 
-`org.apache.spark.sql.functions` object defines built-in *standard functions* to work with (values in) link:spark-sql-Column.adoc[columns].
+`org.apache.spark.sql.functions` object defines built-in <<standard-functions, standard functions>> to work with (values produced by) <<spark-sql-Column.adoc#, columns>>.
 
 You can access the standard functions using the following `import` statement in your Scala application:
 

@@ -298,7 +298,7 @@ localCheckpoint(eager: Boolean): Dataset[T]
 na: DataFrameNaFunctions
 ----
 
-`na`...FIXME
+`na` simply creates a <<spark-sql-DataFrameNaFunctions.adoc#, DataFrameNaFunctions>> to work with missing data.
 
 === [[rollup]] `rollup` Untyped Transformation
 
