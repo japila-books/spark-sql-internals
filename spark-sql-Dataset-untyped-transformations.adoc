@@ -336,7 +336,7 @@ selectExpr(exprs: String*): DataFrame
 stat: DataFrameStatFunctions
 ----
 
-`stat`...FIXME
+`stat` simply creates a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> to work with statistic functions.
 
 === [[toDF]] `toDF` Untyped Transformation
 

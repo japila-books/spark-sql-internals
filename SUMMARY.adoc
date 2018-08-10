@@ -26,7 +26,7 @@
 .. link:spark-sql-Dataset-untyped-transformations.adoc[Dataset API -- Untyped Transformations]
 .. link:spark-sql-Dataset-basic-actions.adoc[Dataset API -- Basic Actions]
 .. link:spark-sql-DataFrameNaFunctions.adoc[DataFrameNaFunctions -- Working With Missing Data]
-.. link:spark-sql-DataFrameStatFunctions.adoc[DataFrameStatFunctions]
+.. link:spark-sql-DataFrameStatFunctions.adoc[DataFrameStatFunctions -- Working With Statistic Functions]
 
 . link:spark-sql-Column.adoc[Column API -- Column Expressions and Operators]
 . link:spark-sql-TypedColumn.adoc[TypedColumn]
