@@ -15,6 +15,7 @@ a|
 [source, scala]
 ----
 as(alias: String): Dataset[T]
+as(alias: Symbol): Dataset[T]
 ----
 
 | <<coalesce, coalesce>>
@@ -30,7 +31,10 @@ a|
 
 [source, scala]
 ----
+dropDuplicates(): Dataset[T]
+dropDuplicates(colNames: Array[String]): Dataset[T]
 dropDuplicates(colNames: Seq[String]): Dataset[T]
+dropDuplicates(col1: String, cols: String*): Dataset[T]
 ----
 
 | <<except, except>>
@@ -47,6 +51,7 @@ a|
 [source, scala]
 ----
 filter(condition: Column): Dataset[T]
+filter(conditionExpr: String): Dataset[T]
 filter(func: T => Boolean): Dataset[T]
 ----
 
@@ -71,6 +76,7 @@ a|
 
 [source, scala]
 ----
+joinWith[U](other: Dataset[U], condition: Column): Dataset[(T, U)]
 joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
 ----
 
@@ -88,7 +94,6 @@ a|
 [source, scala]
 ----
 map[U: Encoder](func: T => U): Dataset[U]
-map[U](func: MapFunction[T, U], encoder: Encoder[U]): Dataset[U]
 ----
 
 | <<mapPartitions, mapPartitions>>
@@ -97,7 +102,6 @@ a|
 [source, scala]
 ----
 mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
-mapPartitions[U](f: MapPartitionsFunction[T, U], encoder: Encoder[U]): Dataset[U]
 ----
 
 | <<randomSplit, randomSplit>>
@@ -109,19 +113,12 @@ randomSplit(weights: Array[Double]): Array[Dataset[T]]
 randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
 ----
 
-| <<randomSplitAsList, randomSplitAsList>>
-a|
-
-[source, scala]
-----
-randomSplitAsList(weights: Array[Double], seed: Long): java.util.List[Dataset[T]]
-----
-
 | <<repartition, repartition>>
 a|
 
 [source, scala]
 ----
+repartition(partitionExprs: Column*): Dataset[T]
 repartition(numPartitions: Int): Dataset[T]
 repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
@@ -129,8 +126,11 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 | <<repartitionByRange, repartitionByRange>>
 a|
 
+(*New in 2.3.0*)
+
 [source, scala]
 ----
+repartitionByRange(partitionExprs: Column*): Dataset[T]
 repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 
@@ -139,18 +139,23 @@ a|
 
 [source, scala]
 ----
+sample(withReplacement: Boolean, fraction: Double): Dataset[T]
 sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
+sample(fraction: Double): Dataset[T]  // <1>
+sample(fraction: Double, seed: Long): Dataset[T]  // <2>
 ----
+<1> *New in 2.3.0*
+<2> *New in 2.3.0*
 
 | <<select, select>>
 a|
 
 [source, scala]
 ----
+select(cols: Column*): DataFrame
+select(col: String, cols: String*): DataFrame
 select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
-select[U1, U2](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
+select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
 select[U1, U2, U3](
   c1: TypedColumn[T, U1],
   c2: TypedColumn[T, U2],
@@ -174,6 +179,7 @@ a|
 [source, scala]
 ----
 sort(sortExprs: Column*): Dataset[T]
+sort(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
 | <<sortWithinPartitions, sortWithinPartitions>>
@@ -182,6 +188,7 @@ a|
 [source, scala]
 ----
 sortWithinPartitions(sortExprs: Column*): Dataset[T]
+sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
 | <<union, union>>
@@ -208,3 +215,228 @@ a|
 withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
 ----
 |===
+
+=== [[as]] `as` Typed Transformation
+
+[source, scala]
+----
+as(alias: String): Dataset[T]
+as(alias: Symbol): Dataset[T]
+----
+
+`as`...FIXME
+
+=== [[coalesce]] `coalesce` Typed Transformation
+
+[source, scala]
+----
+coalesce(numPartitions: Int): Dataset[T]
+----
+
+`coalesce`...FIXME
+
+=== [[dropDuplicates]] `dropDuplicates` Typed Transformation
+
+[source, scala]
+----
+dropDuplicates(): Dataset[T]
+dropDuplicates(colNames: Array[String]): Dataset[T]
+dropDuplicates(colNames: Seq[String]): Dataset[T]
+dropDuplicates(col1: String, cols: String*): Dataset[T]
+----
+
+`dropDuplicates`...FIXME
+
+=== [[except]] `except` Typed Transformation
+
+[source, scala]
+----
+except(other: Dataset[T]): Dataset[T]
+----
+
+`except`...FIXME
+
+=== [[filter]] `filter` Typed Transformation
+
+[source, scala]
+----
+filter(condition: Column): Dataset[T]
+filter(conditionExpr: String): Dataset[T]
+filter(func: T => Boolean): Dataset[T]
+----
+
+`filter`...FIXME
+
+=== [[hint]] `hint` Typed Transformation
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+`hint`...FIXME
+
+=== [[intersect]] `intersect` Typed Transformation
+
+[source, scala]
+----
+intersect(other: Dataset[T]): Dataset[T]
+----
+
+`intersect`...FIXME
+
+=== [[joinWith]] `joinWith` Typed Transformation
+
+[source, scala]
+----
+joinWith[U](other: Dataset[U], condition: Column): Dataset[(T, U)]
+joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
+----
+
+`joinWith`...FIXME
+
+=== [[limit]] `limit` Typed Transformation
+
+[source, scala]
+----
+limit(n: Int): Dataset[T]
+----
+
+`limit`...FIXME
+
+=== [[map]] `map` Typed Transformation
+
+[source, scala]
+----
+map[U : Encoder](func: T => U): Dataset[U]
+----
+
+`map`...FIXME
+
+=== [[mapPartitions]] `mapPartitions` Typed Transformation
+
+[source, scala]
+----
+mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
+----
+
+`mapPartitions`...FIXME
+
+=== [[randomSplit]] `randomSplit` Typed Transformation
+
+[source, scala]
+----
+randomSplit(weights: Array[Double]): Array[Dataset[T]]
+randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
+----
+
+`randomSplit`...FIXME
+
+=== [[repartition]] `repartition` Typed Transformation
+
+[source, scala]
+----
+repartition(partitionExprs: Column*): Dataset[T]
+repartition(numPartitions: Int): Dataset[T]
+repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+`repartition`...FIXME
+
+=== [[repartitionByRange]] `repartitionByRange` Typed Transformation
+
+[source, scala]
+----
+repartitionByRange(partitionExprs: Column*): Dataset[T]
+repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+(*New in 2.3.0*) `repartitionByRange`...FIXME
+
+=== [[sample]] `sample` Typed Transformation
+
+[source, scala]
+----
+sample(withReplacement: Boolean, fraction: Double): Dataset[T]
+sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
+sample(fraction: Double): Dataset[T]  // <1>
+sample(fraction: Double, seed: Long): Dataset[T]  // <2>
+----
+<1> *New in 2.3.0*
+<2> *New in 2.3.0*
+
+`sample`...FIXME
+
+=== [[select]] `select` Typed Transformation
+
+[source, scala]
+----
+select(cols: Column*): DataFrame
+select(col: String, cols: String*): DataFrame
+select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
+select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
+select[U1, U2, U3](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
+select[U1, U2, U3, U4](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
+select[U1, U2, U3, U4, U5](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4],
+  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
+----
+
+`select`...FIXME
+
+=== [[sort]] `sort` Typed Transformation
+
+[source, scala]
+----
+sort(sortExprs: Column*): Dataset[T]
+sort(sortCol: String, sortCols: String*): Dataset[T]
+----
+
+`sort`...FIXME
+
+=== [[sortWithinPartitions]] `sortWithinPartitions` Typed Transformation
+
+[source, scala]
+----
+sortWithinPartitions(sortExprs: Column*): Dataset[T]
+sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
+----
+
+`sortWithinPartitions`...FIXME
+
+=== [[union]] `union` Typed Transformation
+
+[source, scala]
+----
+union(other: Dataset[T]): Dataset[T]
+----
+
+`union`...FIXME
+
+=== [[unionByName]] `unionByName` Typed Transformation
+
+[source, scala]
+----
+unionByName(other: Dataset[T]): Dataset[T]
+----
+
+(*New in 2.3.0*) `unionByName`...FIXME
+
+=== [[withWatermark]] `withWatermark` Typed Transformation
+
+[source, scala]
+----
+withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
+----
+
+`withWatermark`...FIXME
