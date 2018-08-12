@@ -58,6 +58,10 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
+| `visitColumnReference`
+|
+| [[visitColumnReference]]
+
 | [[visitDereference]] `visitDereference`
 |
 |

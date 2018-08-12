@@ -99,6 +99,10 @@ a| [[autoSizeUpdateEnabled]] Used when:
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]
 | [[cacheVectorizedReaderEnabled]] Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[supportsBatch] flag.
 
+| `caseSensitiveAnalysis`
+| link:spark-sql-properties.adoc#spark.sql.caseSensitive[spark.sql.caseSensitive]
+a| [[caseSensitiveAnalysis]] Used in:
+
 | `cboEnabled`
 | link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled]
 a| [[cboEnabled]] Used in:
@@ -263,6 +267,14 @@ a| [[stringRedactionPattern]] Used when:
 | `subexpressionEliminationEnabled`
 | link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
 | [[subexpressionEliminationEnabled]] Used exclusively when `SparkPlan` is requested for link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
+
+| `supportQuotedRegexColumnName`
+| link:spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames[spark.sql.parser.quotedRegexColumnNames]
+a| [[supportQuotedRegexColumnName]] Used when:
+
+* <<spark-sql-Dataset-untyped-transformations.adoc#col, Dataset.col>> operator is used
+
+* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitDereference, visitDereference>> and <<spark-sql-AstBuilder.adoc#visitColumnReference, visitColumnReference>>
 
 | `useCompression`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]

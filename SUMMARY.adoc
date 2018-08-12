@@ -29,7 +29,7 @@
 .. link:spark-sql-DataFrameStatFunctions.adoc[DataFrameStatFunctions -- Working With Statistic Functions]
 
 . link:spark-sql-Column.adoc[Column API -- Column Expressions and Operators]
-. link:spark-sql-TypedColumn.adoc[TypedColumn]
+.. link:spark-sql-TypedColumn.adoc[TypedColumn]
 
 . link:spark-sql-basic-aggregation.adoc[Basic Aggregation -- Typed and Untyped Grouping Operators]
 .. link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset -- Untyped Row-based Grouping]

@@ -72,6 +72,12 @@ When negative, it is assumed infinite (i.e. `Duration.Inf`)
 
 Use link:spark-sql-SQLConf.adoc#broadcastTimeout[SQLConf.broadcastTimeout] method to access the current value.
 
+| `spark.sql.caseSensitive`
+| `false`
+| [[spark.sql.caseSensitive]] *(internal)* Controls whether the query analyzer should be case sensitive (`true`) or not (`false`). It is highly discouraged to turn on case sensitive mode.
+
+Use link:spark-sql-SQLConf.adoc#caseSensitiveAnalysis[SQLConf.caseSensitiveAnalysis] method to access the current value.
+
 | `spark.sql.cbo.enabled`
 | `false`
 | [[spark.sql.cbo.enabled]] Enables link:spark-sql-cost-based-optimization.adoc[cost-based optimization] (CBO) for estimation of plan statistics when `true`.
@@ -324,6 +330,12 @@ a| [[spark.sql.parquet.recordLevelFilter.enabled]] Enables Parquet's native reco
 NOTE: This configuration only has an effect when <<spark.sql.parquet.filterPushdown, spark.sql.parquet.filterPushdown>> is enabled (and it is by default).
 
 Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecordFilterEnabled] method to access the current value.
+
+| `spark.sql.parser.quotedRegexColumnNames`
+| `false`
+| [[spark.sql.parser.quotedRegexColumnNames]] Controls whether quoted identifiers (using backticks) in SELECT statements should be interpreted as regular expressions.
+
+Use link:spark-sql-SQLConf.adoc#supportQuotedRegexColumnName[SQLConf.supportQuotedRegexColumnName] method to access the current value.
 
 | `spark.sql.pivotMaxValues`
 | `10000`
