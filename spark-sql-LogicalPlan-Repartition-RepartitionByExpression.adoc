@@ -48,7 +48,13 @@ Coalesce 5
 ----
 
 [[RepartitionByExpression]]
-<<RepartitionByExpression, RepartitionByExpression>> is the result of link:spark-sql-dataset-operators.adoc#repartition[repartition] operator with explicit partition expressions defined and SQL's link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[DISTRIBUTE BY clause].
+<<RepartitionByExpression, RepartitionByExpression>> is the result of the following operators:
+
+* link:spark-sql-dataset-operators.adoc#repartition[Dataset.repartition] operator (with explicit partition expressions defined)
+
+* <<spark-sql-Dataset-typed-transformations.adoc#repartitionByRange, Dataset.repartitionByRange>>
+
+* link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[DISTRIBUTE BY] SQL clause.
 
 [source, scala]
 ----

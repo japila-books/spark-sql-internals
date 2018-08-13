@@ -101,7 +101,7 @@ a| [[autoSizeUpdateEnabled]] Used when:
 
 | `caseSensitiveAnalysis`
 | link:spark-sql-properties.adoc#spark.sql.caseSensitive[spark.sql.caseSensitive]
-a| [[caseSensitiveAnalysis]] Used in:
+a| [[caseSensitiveAnalysis]]
 
 | `cboEnabled`
 | link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled]

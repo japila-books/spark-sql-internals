@@ -347,11 +347,42 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 [source, scala]
 ----
-repartitionByRange(partitionExprs: Column*): Dataset[T]
+repartitionByRange(partitionExprs: Column*): Dataset[T] // <1>
 repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
+<1> Uses <<spark-sql-properties.adoc#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
 
-(*New in 2.3.0*) `repartitionByRange`...FIXME
+(*New in 2.3.0*) `repartitionByRange` simply <<spark-sql-Dataset.adoc#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression, RepartitionByExpression>> logical operator.
+
+[source, scala]
+----
+scala> spark.version
+res1: String = 2.3.1
+
+val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
+scala> println(q.queryExecution.logical.numberedTreeString)
+00 'RepartitionByExpression ['id ASC NULLS FIRST], 5
+01 +- AnalysisBarrier
+02       +- Range (0, 10, step=1, splits=Some(8))
+
+scala> println(q.queryExecution.toRdd.getNumPartitions)
+5
+
+scala> println(q.queryExecution.toRdd.toDebugString)
+(5) ShuffledRowRDD[18] at toRdd at <console>:26 []
+ +-(8) MapPartitionsRDD[17] at toRdd at <console>:26 []
+    |  MapPartitionsRDD[13] at toRdd at <console>:26 []
+    |  MapPartitionsRDD[12] at toRdd at <console>:26 []
+    |  ParallelCollectionRDD[11] at toRdd at <console>:26 []
+----
+
+`repartitionByRange` uses a `SortOrder` with the `Ascending` sort order, i.e. _ascending nulls first_, when no explicit sort order is specified.
+
+`repartitionByRange` throws a `IllegalArgumentException` when no `partitionExprs` partition-by expression is specified.
+
+```
+requirement failed: At least one partition-by expression must be specified.
+```
 
 === [[sample]] `sample` Typed Transformation
 
