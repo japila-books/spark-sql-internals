@@ -64,7 +64,7 @@ The additional operator optimization rules are executed right after <<Operator_O
 
 ^.^| [[Union]] Union
 ^.^| `Once`
-| [[CombineUnions]] CombineUnions
+| [[CombineUnions]] <<spark-sql-Optimizer-CombineUnions.adoc#, CombineUnions>>
 |
 
 ^.^| [[Pullup-Correlated-Expressions]] Pullup Correlated Expressions
