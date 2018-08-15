@@ -599,7 +599,15 @@ NOTE: `sortInternal` is used for the `Dataset` <<spark-sql-Dataset-typed-transfo
 checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
 ----
 
-`checkpoint`...FIXME
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+
+Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
+
+With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
+
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
+
+In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
 NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
 

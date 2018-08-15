@@ -29,7 +29,7 @@ apply(colName: String): Column
 ----
 
 | <<checkpoint, checkpoint>>
-a|
+a| Reliably checkpointing a Dataset
 
 [source, scala]
 ----
@@ -103,7 +103,7 @@ join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
 ----
 
 | <<localCheckpoint, localCheckpoint>>
-a| (*New in 2.3.0*)
+a| (*New in 2.3.0*) Locally (and unreliably) checkpointing a Dataset
 
 [source, scala]
 ----
@@ -199,15 +199,19 @@ apply(colName: String): Column
 
 `apply` selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`).
 
-=== [[checkpoint]] `checkpoint` Untyped Transformation
+=== [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Untyped Transformation
 
 [source, scala]
 ----
-checkpoint(): Dataset[T]
-checkpoint(eager: Boolean): Dataset[T]
+checkpoint(): Dataset[T]  // <1>
+checkpoint(eager: Boolean): Dataset[T]  // <2>
 ----
+<1> `eager` and `reliableCheckpoint` flags enabled
+<2> `reliableCheckpoint` flag enabled
 
-`checkpoint`...FIXME
+NOTE: `checkpoint` is an experimental operator and the API is evolving towards becoming stable.
+
+`checkpoint` simply requests the `Dataset` to <<spark-sql-Dataset.adoc#checkpoint, checkpoint>> with the given `eager` flag and the `reliableCheckpoint` flag enabled.
 
 === [[col]] `col` Untyped Transformation
 
@@ -299,15 +303,16 @@ join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
 
 `join`...FIXME
 
-=== [[localCheckpoint]] `localCheckpoint` Untyped Transformation
+=== [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Untyped Transformation
 
 [source, scala]
 ----
-localCheckpoint(): Dataset[T]
+localCheckpoint(): Dataset[T] // <1>
 localCheckpoint(eager: Boolean): Dataset[T]
 ----
+<1> `eager` flag enabled
 
-(*New in 2.3.0*) `localCheckpoint`...FIXME
+(*New in 2.3.0*) `localCheckpoint` simply uses <<checkpoint, Dataset.checkpoint>> operator with the input `eager` flag and `reliableCheckpoint` flag disabled (`false`).
 
 === [[na]] `na` Untyped Transformation
 

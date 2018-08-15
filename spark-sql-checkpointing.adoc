@@ -11,12 +11,12 @@ Checkpointing truncates the lineage of a RDD to be checkpointed. That has been s
 Dataset checkpointing in Spark SQL uses checkpointing to truncate the lineage of the underlying RDD of a `Dataset` being checkpointed.
 ====
 
-Checkpointing can be eager or lazy per `eager` flag of <<checkpoint, checkpoint>> operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
+Checkpointing can be eager or lazy per `eager` flag of <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
 
 [[checkpoint-directory]]
 Using Dataset checkpointing requires that you specify the *checkpoint directory*. The directory stores the checkpoint files for RDDs to be checkpointed. Use <<sparkcontext-setCheckpointDir, SparkContext.setCheckpointDir>> to set the path to a checkpoint directory.
 
-Checkpointing can be <<localCheckpoint, local>> or <<checkpoint, reliable>> which defines how reliable the <<checkpoint-directory, checkpoint directory>> is. *Local checkpointing* uses executor storage to write checkpoint files to and due to the executor lifecycle is considered unreliable. *Reliable checkpointing* uses a reliable data storage like Hadoop HDFS.
+Checkpointing can be <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, local>> or <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, reliable>> which defines how reliable the <<checkpoint-directory, checkpoint directory>> is. *Local checkpointing* uses executor storage to write checkpoint files to and due to the executor lifecycle is considered unreliable. *Reliable checkpointing* uses a reliable data storage like Hadoop HDFS.
 
 .Dataset Checkpointing Types
 [cols="1,^1,^2",options="header",width="100%"]
@@ -26,12 +26,12 @@ Checkpointing can be <<localCheckpoint, local>> or <<checkpoint, reliable>> whic
 | Lazy
 
 ^| *Reliable*
-| <<checkpoint, checkpoint>>
-| <<checkpoint, checkpoint(eager = false)>>
+| <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>>
+| <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint(eager = false)>>
 
 ^| *Local*
-| <<localCheckpoint, localCheckpoint>>
-| <<localCheckpoint, localCheckpoint(eager = false)>>
+| <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>
+| <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint(eager = false)>>
 |===
 
 A RDD can be recovered from a checkpoint files using <<sparkcontext-checkpointFile, SparkContext.checkpointFile>>. You can use link:spark-sql-SparkSession.adoc#internalCreateDataFrame[SparkSession.internalCreateDataFrame] method to (re)create the DataFrame from the RDD of internal binary rows.
@@ -165,32 +165,6 @@ scala> numsRecovered.show
 +---+------------------+
 ----
 
-=== [[checkpoint]] Checkpointing Dataset -- `checkpoint` Operator
-
-[source, scala]
-----
-checkpoint(): Dataset[T]  // <1>
-checkpoint(eager: Boolean): Dataset[T]  // <2>
-// private
-checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
-----
-<1> `eager` and `reliableCheckpoint` flags enabled
-<2> `reliableCheckpoint` flag enabled
-
-NOTE: `checkpoint` is an experimental operator and the API is evolving towards becoming stable.
-
-`checkpoint`...FIXME
-
-Internally, `checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
-
-Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
-
-With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
-
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
-
-In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
-
 === [[sparkcontext-setCheckpointDir]] Specyfing Checkpoint Directory -- `SparkContext.setCheckpointDir` Method
 
 [source, scala]
@@ -201,17 +175,6 @@ SparkContext.setCheckpointDir(directory: String)
 `setCheckpointDir` sets the <<checkpoint-directory, checkpoint directory>>.
 
 Internally, `setCheckpointDir`...FIXME
-
-=== [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Method
-
-[source, scala]
-----
-localCheckpoint(): Dataset[T] // <1>
-localCheckpoint(eager: Boolean): Dataset[T]
-----
-<1> `eager` flag enabled with `reliableCheckpoint` flag disabled
-
-`localCheckpoint` simply executes <<checkpoint, checkpoint>> with the input `eager` flag and `reliableCheckpoint` flag disabled.
 
 === [[sparkcontext-checkpointFile]] Recovering RDD From Checkpoint Files -- `SparkContext.checkpointFile` Method
 

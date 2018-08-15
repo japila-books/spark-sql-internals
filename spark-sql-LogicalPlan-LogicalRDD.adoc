@@ -4,7 +4,7 @@
 
 `LogicalRDD` is <<creating-instance, created>> when:
 
-* `Dataset` is requested to link:spark-sql-checkpointing.adoc#checkpoint[checkpoint]
+* `Dataset` is requested to <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>>
 
 * `SparkSession` is requested to link:spark-sql-SparkSession.adoc#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
