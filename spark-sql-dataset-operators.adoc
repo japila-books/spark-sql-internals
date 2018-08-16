@@ -105,7 +105,7 @@ Internally, `foreachPartition` executes `foreachPartition` action on the Dataset
 | Action to...FIXME
 
 | <<spark-sql-Dataset-actions.adoc#summary, summary>>
-| Action to...FIXME
+| [[summary]] Action to calculate statistics (e.g. `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles)
 
 | <<spark-sql-Dataset-actions.adoc#take, take>>
 | Action to take n first records of the `Dataset`
