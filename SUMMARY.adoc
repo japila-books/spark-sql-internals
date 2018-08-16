@@ -22,9 +22,10 @@
 .. link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]
 
 . link:spark-sql-dataset-operators.adoc[Dataset API -- Dataset Operators]
-.. link:spark-sql-Dataset-typed-transformations.adoc[Dataset API -- Typed Transformations]
-.. link:spark-sql-Dataset-untyped-transformations.adoc[Dataset API -- Untyped Transformations]
-.. link:spark-sql-Dataset-basic-actions.adoc[Dataset API -- Basic Actions]
+.. link:spark-sql-Dataset-typed-transformations.adoc[Typed Transformations]
+.. link:spark-sql-Dataset-untyped-transformations.adoc[Untyped Transformations]
+.. link:spark-sql-Dataset-basic-actions.adoc[Basic Actions]
+.. link:spark-sql-Dataset-actions.adoc[Actions]
 .. link:spark-sql-DataFrameNaFunctions.adoc[DataFrameNaFunctions -- Working With Missing Data]
 .. link:spark-sql-DataFrameStatFunctions.adoc[DataFrameStatFunctions -- Working With Statistic Functions]
 

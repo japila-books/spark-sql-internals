@@ -2,6 +2,8 @@
 
 *Untyped transformations* are part of the Dataset API for transforming a `Dataset` to a <<spark-sql-DataFrame.adoc#, DataFrame>>, a <<spark-sql-Column.adoc#, Column>>, a <<spark-sql-RelationalGroupedDataset.adoc#, RelationalGroupedDataset>>, a <<spark-sql-DataFrameNaFunctions.adoc#, DataFrameNaFunctions>> or a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> (and hence _untyped_).
 
+NOTE: Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.
+
 [[methods]]
 .Dataset API's Untyped Transformations
 [cols="1,2",options="header",width="100%"]
@@ -159,6 +161,7 @@ a|
 [source, scala]
 ----
 toDF(): DataFrame
+toDF(colNames: String*): DataFrame
 ----
 
 | <<withColumn, withColumn>>
@@ -268,7 +271,7 @@ cube(col1: String, cols: String*): RelationalGroupedDataset
 
 `cube`...FIXME
 
-=== [[drop]] `drop` Untyped Transformation
+=== [[drop]] Dropping One or More Columns -- `drop` Untyped Transformation
 
 [source, scala]
 ----
@@ -343,14 +346,47 @@ select(col: String, cols: String*): DataFrame
 
 `select`...FIXME
 
-=== [[selectExpr]] `selectExpr` Untyped Transformation
+=== [[selectExpr]] Projecting Columns using SQL Statements -- `selectExpr` Untyped Transformation
 
 [source, scala]
 ----
 selectExpr(exprs: String*): DataFrame
 ----
 
-`selectExpr`...FIXME
+`selectExpr` is like `select`, but accepts SQL statements.
+
+[source, scala]
+----
+val ds = spark.range(5)
+
+scala> ds.selectExpr("rand() as random").show
+16/04/14 23:16:06 INFO HiveSqlParser: Parsing command: rand() as random
++-------------------+
+|             random|
++-------------------+
+|  0.887675894185651|
+|0.36766085091074086|
+| 0.2700020856675186|
+| 0.1489033635529543|
+| 0.5862990791950973|
++-------------------+
+----
+
+Internally, it executes `select` with every expression in `exprs` mapped to link:spark-sql-Column.adoc[Column] (using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser.parseExpression]).
+
+[source, scala]
+----
+scala> ds.select(expr("rand() as random")).show
++------------------+
+|            random|
++------------------+
+|0.5514319279894851|
+|0.2876221510433741|
+|0.4599999092045741|
+|0.5708558868374893|
+|0.6223314406247136|
++------------------+
+----
 
 === [[stat]] `stat` Untyped Transformation
 
@@ -361,14 +397,19 @@ stat: DataFrameStatFunctions
 
 `stat` simply creates a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> to work with statistic functions.
 
-=== [[toDF]] `toDF` Untyped Transformation
+=== [[toDF]] Converting Typed Dataset to Untyped DataFrame -- `toDF` Untyped Transformation
 
 [source, scala]
 ----
 toDF(): DataFrame
+toDF(colNames: String*): DataFrame
 ----
 
-`toDF`...FIXME
+`toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
+
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
+
+CAUTION: FIXME Describe `toDF(colNames: String*)`
 
 === [[withColumn]] `withColumn` Untyped Transformation
 

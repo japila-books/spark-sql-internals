@@ -1,6 +1,8 @@
 == Dataset API -- Dataset Operators
 
-Dataset API offers a rich set of operators that can be grouped per target, i.e. the part of a `Dataset` they are applied to.
+Dataset API is a <<methods, set of operators>> with typed and untyped transformations, and actions.
+
+Dataset API can be grouped per target, i.e. the part of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) they are applied to and work with.
 
 . link:spark-sql-Column.adoc[Column Operators]
 . link:spark-sql-functions.adoc[Standard Functions] (from `functions` object)
@@ -14,246 +16,126 @@ Dataset API offers a rich set of operators that can be grouped per target, i.e. 
 
 Beside the above operators, there are the following ones working with a `Dataset` as a whole.
 
+[[methods]]
 [[operators]]
-.Dataset Operators
+.Dataset Operators (Transformations and Actions)
 [cols="1,3",options="header",width="100%"]
 |===
-| Operator | Description
-| <<as, as>> | Converting a `Dataset` to a `Dataset`
-| <<coalesce, coalesce>> | Repartitioning a `Dataset` with shuffle disabled.
-| <<count, count>> | Counts the number of rows
-| <<createGlobalTempView, createGlobalTempView>> |
-| <<createOrReplaceTempView, createOrReplaceTempView>> |
-| <<createTempView, createTempView>> |
+| Operator
+| Description
 
-| <<drop, drop>>
+| <<as, as>>
+| Enforcing types, i.e. marking the records in the `Dataset` as of a given data type (_data type conversion_)
+
+| <<spark-sql-Dataset-typed-transformations.adoc#coalesce, coalesce>>
+| Repartitioning a `Dataset` with shuffle disabled.
+
+| <<spark-sql-Dataset-actions.adoc#collect, collect>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-actions.adoc#count, count>>
+| Action to count the number of rows
+
+| <<spark-sql-Dataset-basic-actions.adoc#createGlobalTempView, createGlobalTempView>>
 |
 
-| <<explain, explain>> | Explain logical and physical plans of a `Dataset`
-| <<filter, filter>> |
-| <<flatMap, flatMap>> |
-
-| [[foreach]] `foreach`
+| <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceTempView, createOrReplaceTempView>>
 |
 
-Internally, `foreach` executes `foreach` action on the Dataset's link:spark-sql-Dataset.adoc#rdd[RDD].
-
-| <<foreachPartition, foreachPartition>>
+| <<spark-sql-Dataset-basic-actions.adoc#createTempView, createTempView>>
 |
+
+| <<spark-sql-Dataset-actions.adoc#describe, describe>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#drop, drop>>
+|
+
+| <<explain, explain>>
+| Explain logical and physical plans of a `Dataset`
+
+| <<spark-sql-Dataset-typed-transformations.adoc#filter, filter>>
+|
+
+| <<spark-sql-Dataset-actions.adoc#first, first>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-typed-transformations.adoc#flatMap, flatMap>>
+|
+
+| <<spark-sql-Dataset-actions.adoc#foreach, foreach>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-actions.adoc#foreachPartition, foreachPartition>>
+| Action to...FIXME
 
 Internally, `foreachPartition` executes `foreachPartition` action on the Dataset's link:spark-sql-Dataset.adoc#rdd[RDD].
 
-| <<head, head>>
-|
+| <<spark-sql-Dataset-actions.adoc#head, head>>
+| Action to...FIXME
 
-| <<hint, hint>>
+| <<spark-sql-Dataset-typed-transformations.adoc#hint, hint>>
 | Specifying a hint (and optional parameters)
 
-| <<mapPartition, mapPartition>> |
-| <<randomSplit, randomSplit>> | Randomly split a `Dataset` into two ``Dataset``s
-| <<rdd, rdd>> |
+| <<spark-sql-Dataset-typed-transformations.adoc#mapPartitions, mapPartitions>>
+|
 
-| [[reduce]] `reduce`
-| Reduces the elements of a `Dataset` using the specified binary function.
+| <<spark-sql-Dataset-typed-transformations.adoc#randomSplit, randomSplit>>
+| Randomly split a `Dataset` into two ``Dataset``s
 
-Internally, `reduce` executes `reduce` action on the Dataset's link:spark-sql-Dataset.adoc#rdd[RDD].
+| <<rdd, rdd>>
+|
 
-| <<repartition, repartition>> | Repartitioning a `Dataset` with shuffle enabled.
-| <<schema, schema>> |
-| <<select, select>> |
-| <<selectExpr, selectExpr>> |
-| <<show, show>> |
-| <<take, take>> |
-| <<toDF, toDF>> | Converts a `Dataset` to a `DataFrame`
-| <<toJSON, toJSON>> |
-| <<transform, transform>> | Transforms a `Dataset`
-| <<where, where>> |
+| <<spark-sql-Dataset-actions.adoc#reduce, reduce>>
+|  Action to reduce the records of the `Dataset` using the specified binary function.
 
-| <<withWatermark, withWatermark>>
-| Creates a streaming `Dataset` with `EventTimeWatermark` logical operator
+| <<spark-sql-Dataset-typed-transformations.adoc#repartition, repartition>>
+| Repartitioning a `Dataset` with shuffle enabled.
 
-Used exclusively in Structured Streaming.
-| <<write, write>> |
-| <<writeStream, writeStream>> |
+| <<schema, schema>>
+|
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#select, select>>
+|
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#selectExpr, selectExpr>>
+|
+
+| <<spark-sql-Dataset-actions.adoc#show, show>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-actions.adoc#summary, summary>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-actions.adoc#take, take>>
+| Action to take n first records of the `Dataset`
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#toDF, toDF>>
+| Converts a `Dataset` to a `DataFrame`
+
+| <<spark-sql-Dataset-typed-transformations.adoc#toJSON, toJSON>>
+|
+
+| <<spark-sql-Dataset-actions.adoc#toLocalIterator, toLocalIterator>>
+| Action to...FIXME
+
+| <<spark-sql-Dataset-typed-transformations.adoc#transform, transform>>
+| Transforms a `Dataset`
+
+| <<spark-sql-Dataset-typed-transformations.adoc#where, where>>
+|
+
+| <<spark-sql-Dataset-typed-transformations.adoc#withWatermark, withWatermark>>
+| (*Spark Structured Streaming*) Creates a streaming `Dataset` with `EventTimeWatermark` logical operator
+
+| <<write, write>>
+|
+
+| <<writeStream, writeStream>>
+| (*Spark Structured Streaming*)
 |===
 
-=== [[drop]] Dropping One or More Columns -- `drop` Operator
-
-[source, scala]
-----
-drop(colName: String): DataFrame
-drop(colNames: String*): DataFrame
-drop(col: Column): DataFrame
-----
-
-CAUTION: FIXME
-
-=== [[hint]] Specifying Hint -- `hint` Operator
-
-[source, scala]
-----
-hint(name: String, parameters: Any*): Dataset[T]
-----
-
-`hint` operator is part of link:spark-sql-hint-framework.adoc[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
-
-Internally, `hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] of a `Dataset`).
-
-[source, scala]
-----
-val ds = spark.range(3)
-val plan = ds.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 Range (0, 3, step=1, splits=Some(8))
-
-// Attach a hint
-val dsHinted = ds.hint("myHint", 100, true)
-val plan = dsHinted.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 'UnresolvedHint myHint, [100, true]
-01 +- Range (0, 3, step=1, splits=Some(8))
-----
-
-NOTE: `hint` adds a `UnresolvedHint` to an analyzed logical plan that indirectly triggers link:spark-sql-QueryExecution.adoc#analyzed[analysis phase] that executes link:spark-sql-LogicalPlan-Command.adoc[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
-
-=== [[head]] `head` Operator
-
-[source, scala]
-----
-head(): T // <1>
-head(n: Int): Array[T]
-----
-<1> Calls the other `head` with `n` as `1` and takes the first element
-
-`head`...FIXME
-
-=== [[collect]] `collect` Operator
-
-[source, scala]
-----
-collect(): Array[T]
-----
-
-`collect`...FIXME
-
-=== [[collectAsList]] `collectAsList` Operator
-
-[source, scala]
-----
-collectAsList(): java.util.List[T]
-----
-
-`collectAsList`...FIXME
-
-=== [[count]] `count` Operator
-
-[source, scala]
-----
-count(): Long
-----
-
-`count`...FIXME
-
-=== [[toLocalIterator]] `toLocalIterator` Operator
-
-[source, scala]
-----
-toLocalIterator(): java.util.Iterator[T]
-----
-
-`toLocalIterator`...FIXME
-
-=== [[createTempViewCommand]] `createTempViewCommand` Internal Operator
-
-CAUTION: FIXME
-
-=== [[createGlobalTempView]] `createGlobalTempView` Operator
-
-CAUTION: FIXME
-
-=== [[createOrReplaceTempView]] `createOrReplaceTempView` Operator
-
-CAUTION: FIXME
-
-=== [[createTempView]] `createTempView` Operator
-
-CAUTION: FIXME
-
-=== [[transform]] Transforming Datasets -- `transform` Operator
-
-[source, scala]
-----
-transform[U](t: Dataset[T] => Dataset[U]): Dataset[U]
-----
-
-`transform` applies `t` function to the source `Dataset[T]` to produce a result `Dataset[U]`. It is for chaining custom transformations.
-
-[source, scala]
-----
-val dataset = spark.range(5)
-
-// Transformation t
-import org.apache.spark.sql.Dataset
-def withDoubled(longs: Dataset[java.lang.Long]) = longs.withColumn("doubled", 'id * 2)
-
-scala> dataset.transform(withDoubled).show
-+---+-------+
-| id|doubled|
-+---+-------+
-|  0|      0|
-|  1|      2|
-|  2|      4|
-|  3|      6|
-|  4|      8|
-+---+-------+
-----
-
-Internally, `transform` executes `t` function on the current `Dataset[T]`.
-
-=== [[toDF]] Converting "Typed" `Dataset` to "Untyped" `DataFrame` -- `toDF` Methods
-
-[source, scala]
-----
-toDF(): DataFrame
-toDF(colNames: String*): DataFrame
-----
-
-`toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
-
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
-
-CAUTION: FIXME Describe `toDF(colNames: String*)`
-
-=== [[as]] Enforcing Types -- `as` Method
-
-[source, scala]
-----
-as[U: Encoder]: Dataset[U]
-----
-
-`as[T]` allows for converting from a weakly-typed `Dataset` of link:spark-sql-Row.adoc[Rows] to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
-
-[source, scala]
-----
-// Create DataFrame of pairs
-val df = Seq("hello", "world!").zipWithIndex.map(_.swap).toDF("id", "token")
-
-scala> df.printSchema
-root
- |-- id: integer (nullable = false)
- |-- token: string (nullable = true)
-
-scala> val ds = df.as[(Int, String)]
-ds: org.apache.spark.sql.Dataset[(Int, String)] = [id: int, token: string]
-
-// It's more helpful to have a case class for the conversion
-final case class MyRecord(id: Int, token: String)
-
-scala> val myRecords = df.as[MyRecord]
-myRecords: org.apache.spark.sql.Dataset[MyRecord] = [id: int, token: string]
-----
-
-=== [[write]] Accessing DataFrameWriter (to Describe Writing Dataset) -- `write` Method
+=== [[write]] Accessing DataFrameWriter (to Describe Writing Dataset) -- `write` Operator
 
 [source, scala]
 ----
@@ -268,304 +150,6 @@ import org.apache.spark.sql.{DataFrameWriter, Dataset}
 val ints: Dataset[Int] = (0 to 5).toDS
 val writer: DataFrameWriter[Int] = ints.write
 ----
-
-=== [[writeStream]] Accessing `DataStreamWriter` -- `writeStream` Method
-
-[source, scala]
-----
-writeStream: DataStreamWriter[T]
-----
-
-`writeStream` method returns link:spark-sql-streaming-DataStreamWriter.adoc[DataStreamWriter] for records of type `T`.
-
-[source, scala]
-----
-val papers = spark.readStream.text("papers").as[String]
-
-import org.apache.spark.sql.streaming.DataStreamWriter
-val writer: DataStreamWriter[String] = papers.writeStream
-----
-
-=== [[show]] Display Records -- `show` Methods
-
-[source, scala]
-----
-show(): Unit
-show(numRows: Int): Unit
-show(truncate: Boolean): Unit
-show(numRows: Int, truncate: Boolean): Unit
-show(numRows: Int, truncate: Int): Unit
-----
-
-CAUTION: FIXME
-
-Internally, `show` relays to a private `showString` to do the formatting. It turns the `Dataset` into a `DataFrame` (by calling `toDF()`) and <<take, takes first `n` records>>.
-
-=== [[take]] Taking First n Records -- `take` Action
-
-[source, scala]
-----
-take(n: Int): Array[T]
-----
-
-`take` is an action on a `Dataset` that returns a collection of `n` records.
-
-WARNING: `take` loads all the data into the memory of the Spark application's driver process and for a large `n` could result in `OutOfMemoryError`.
-
-Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the link:spark-sql-SparkPlan.adoc[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded link:spark-sql-Encoder.adoc[encoder].
-
-=== [[foreachPartition]] `foreachPartition` Action
-
-[source, scala]
-----
-foreachPartition(f: Iterator[T] => Unit): Unit
-----
-
-`foreachPartition` applies the `f` function to each partition of the `Dataset`.
-
-[source, scala]
-----
-case class Record(id: Int, city: String)
-val ds = Seq(Record(0, "Warsaw"), Record(1, "London")).toDS
-
-ds.foreachPartition { iter: Iterator[Record] => iter.foreach(println) }
-----
-
-NOTE: `foreachPartition` is used to link:spark-sql-DataFrameWriter.adoc#jdbc[save a `DataFrame` to a JDBC table] (indirectly through link:spark-sql-JdbcUtils.adoc#saveTable[JdbcUtils.saveTable]) and link:spark-sql-streaming-ForeachSink.adoc[ForeachSink].
-
-=== [[mapPartitions]] `mapPartitions` Operator
-
-[source, scala]
-----
-mapPartitions[U: Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
-----
-
-`mapPartitions` returns a new `Dataset` (of type `U`) with the function `func` applied to each partition.
-
-CAUTION: FIXME Example
-
-=== [[flatMap]] Creating Zero or More Records -- `flatMap` Operator
-
-[source, scala]
-----
-flatMap[U: Encoder](func: T => TraversableOnce[U]): Dataset[U]
-----
-
-`flatMap` returns a new `Dataset` (of type `U`) with all records (of type `T`) mapped over using the function `func` and then flattening the results.
-
-NOTE: `flatMap` can create new records. It deprecated `explode`.
-
-[source, scala]
-----
-final case class Sentence(id: Long, text: String)
-val sentences = Seq(Sentence(0, "hello world"), Sentence(1, "witaj swiecie")).toDS
-
-scala> sentences.flatMap(s => s.text.split("\\s+")).show
-+-------+
-|  value|
-+-------+
-|  hello|
-|  world|
-|  witaj|
-|swiecie|
-+-------+
-----
-
-Internally, `flatMap` calls <<mapPartitions, mapPartitions>> with the partitions `flatMap(ped)`.
-
-=== [[coalesce]] Repartitioning Dataset with Shuffle Disabled -- `coalesce` Operator
-
-[source, scala]
-----
-coalesce(numPartitions: Int): Dataset[T]
-----
-
-`coalesce` operator repartitions the `Dataset` to exactly `numPartitions` partitions.
-
-Internally, `coalesce` creates a `Repartition` logical operator with `shuffle` disabled (which is marked as `false` in the below ``explain``'s output).
-
-[source, scala]
-----
-scala> spark.range(5).coalesce(1).explain(extended = true)
-== Parsed Logical Plan ==
-Repartition 1, false
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Analyzed Logical Plan ==
-id: bigint
-Repartition 1, false
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Optimized Logical Plan ==
-Repartition 1, false
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Physical Plan ==
-Coalesce 1
-+- *Range (0, 5, step=1, splits=Some(8))
-----
-
-=== [[repartition]] Repartitioning Dataset (Shuffle Enabled) -- `repartition` Operator
-
-[source, scala]
-----
-repartition(numPartitions: Int): Dataset[T]
-repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
-repartition(partitionExprs: Column*): Dataset[T]
-----
-
-`repartition` operators repartition the `Dataset` to exactly `numPartitions` partitions or using `partitionExprs` expressions.
-
-Internally, `repartition` creates a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#Repartition[Repartition] or link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
-
-[source, scala]
-----
-scala> spark.range(5).repartition(1).explain(extended = true)
-== Parsed Logical Plan ==
-Repartition 1, true
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Analyzed Logical Plan ==
-id: bigint
-Repartition 1, true
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Optimized Logical Plan ==
-Repartition 1, true
-+- Range (0, 5, step=1, splits=Some(8))
-
-== Physical Plan ==
-Exchange RoundRobinPartitioning(1)
-+- *Range (0, 5, step=1, splits=Some(8))
-----
-
-NOTE: `repartition` methods correspond to SQL's link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[DISTRIBUTE BY or CLUSTER BY clauses].
-
-=== [[select]] Projecting Columns -- `select` Operator
-
-[source, scala]
-----
-select[U1: Encoder](c1: TypedColumn[T, U1]): Dataset[U1]
-select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
-select[U1, U2, U3](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
-select[U1, U2, U3, U4](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
-select[U1, U2, U3, U4, U5](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4],
-  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
-----
-
-CAUTION: FIXME
-
-=== [[filter]] `filter` Operator
-
-CAUTION: FIXME
-
-=== [[where]] `where` Operator
-
-[source, scala]
-----
-where(condition: Column): Dataset[T]
-where(conditionExpr: String): Dataset[T]
-----
-
-`where` is a synonym for <<filter, filter>> operator, i.e. it simply passes the parameters on to `filter`.
-
-=== [[selectExpr]] Projecting Columns using Expressions -- `selectExpr` Operator
-
-[source, scala]
-----
-selectExpr(exprs: String*): DataFrame
-----
-
-`selectExpr` is like `select`, but accepts SQL expressions `exprs`.
-
-[source, scala]
-----
-val ds = spark.range(5)
-
-scala> ds.selectExpr("rand() as random").show
-16/04/14 23:16:06 INFO HiveSqlParser: Parsing command: rand() as random
-+-------------------+
-|             random|
-+-------------------+
-|  0.887675894185651|
-|0.36766085091074086|
-| 0.2700020856675186|
-| 0.1489033635529543|
-| 0.5862990791950973|
-+-------------------+
-----
-
-Internally, it executes `select` with every expression in `exprs` mapped to link:spark-sql-Column.adoc[Column] (using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser.parseExpression]).
-
-[source, scala]
-----
-scala> ds.select(expr("rand() as random")).show
-+------------------+
-|            random|
-+------------------+
-|0.5514319279894851|
-|0.2876221510433741|
-|0.4599999092045741|
-|0.5708558868374893|
-|0.6223314406247136|
-+------------------+
-----
-
-NOTE: A new feature in Spark **2.0.0**.
-
-=== [[randomSplit]] Randomly Split Dataset -- `randomSplit` Operator
-
-[source, scala]
-----
-randomSplit(weights: Array[Double]): Array[Dataset[T]]
-randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
-----
-
-`randomSplit` randomly splits the `Dataset` per `weights`.
-
-`weights` doubles should sum up to `1` and will be normalized if they do not.
-
-You can define `seed` and if you don't, a random `seed` will be used.
-
-NOTE: It is used in link:spark-mllib/spark-mllib-estimators.adoc#TrainValidationSplit[TrainValidationSplit] to split dataset into training and validation datasets.
-
-[source, scala]
-----
-val ds = spark.range(10)
-scala> ds.randomSplit(Array[Double](2, 3)).foreach(_.show)
-+---+
-| id|
-+---+
-|  0|
-|  1|
-|  2|
-+---+
-
-+---+
-| id|
-+---+
-|  3|
-|  4|
-|  5|
-|  6|
-|  7|
-|  8|
-|  9|
-+---+
-----
-
-NOTE: A new feature in Spark **2.0.0**.
 
 === [[explain]] Displaying Logical and Physical Plans, Their Cost and Codegen -- `explain` Operator
 
@@ -613,31 +197,6 @@ Range (0, 10, step=1, splits=Some(8))
 *Range (0, 10, step=1, splits=Some(8))
 ----
 
-=== [[toJSON]] `toJSON` Method
-
-`toJSON` maps the content of `Dataset` to a `Dataset` of JSON strings.
-
-NOTE: A new feature in Spark **2.0.0**.
-
-[source, scala]
-----
-scala> val ds = Seq("hello", "world", "foo bar").toDS
-ds: org.apache.spark.sql.Dataset[String] = [value: string]
-
-scala> ds.toJSON.show
-+-------------------+
-|              value|
-+-------------------+
-|  {"value":"hello"}|
-|  {"value":"world"}|
-|{"value":"foo bar"}|
-+-------------------+
-----
-
-Internally, `toJSON` grabs the `RDD[InternalRow]` (of the link:spark-sql-QueryExecution.adoc#toRdd[QueryExecution] of the `Dataset`) and link:spark-rdd-transformations.adoc#mapPartitions[maps the records (per RDD partition)] into JSON.
-
-NOTE: `toJSON` uses Jackson's JSON parser -- https://github.com/FasterXML/jackson-module-scala[jackson-module-scala].
-
 === [[schema]] Accessing Schema -- `schema` Method
 
 A `Dataset` has a *schema*.
@@ -677,76 +236,3 @@ NOTE: A deserializer expression is used to decode an link:spark-sql-InternalRow.
 It then executes a link:spark-sql-LogicalPlan-DeserializeToObject.adoc[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
 
 NOTE: It is a lazy operation that "produces" a `RDD[T]`.
-
-=== [[withWatermark]] Creating Streaming Dataset with EventTimeWatermark Logical Operator -- `withWatermark` Operator
-
-[source, scala]
-----
-withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
-----
-
-Internally, `withWatermark` creates a `Dataset` with `EventTimeWatermark` logical plan for link:spark-sql-Dataset.adoc#isStreaming[streaming Datasets].
-
-NOTE: `withWatermark` uses `EliminateEventTimeWatermark` logical rule to eliminate `EventTimeWatermark` logical plan for non-streaming batch `Datasets`.
-
-[source, scala]
-----
-// Create a batch dataset
-val events = spark.range(0, 50, 10).
-  withColumn("timestamp", from_unixtime(unix_timestamp - 'id)).
-  select('timestamp, 'id as "count")
-scala> events.show
-+-------------------+-----+
-|          timestamp|count|
-+-------------------+-----+
-|2017-06-25 21:21:14|    0|
-|2017-06-25 21:21:04|   10|
-|2017-06-25 21:20:54|   20|
-|2017-06-25 21:20:44|   30|
-|2017-06-25 21:20:34|   40|
-+-------------------+-----+
-
-// the dataset is a non-streaming batch one...
-scala> events.isStreaming
-res1: Boolean = false
-
-// ...so EventTimeWatermark is not included in the logical plan
-val watermarked = events.
-  withWatermark(eventTime = "timestamp", delayThreshold = "20 seconds")
-scala> println(watermarked.queryExecution.logical.numberedTreeString)
-00 Project [timestamp#284, id#281L AS count#288L]
-01 +- Project [id#281L, from_unixtime((unix_timestamp(current_timestamp(), yyyy-MM-dd HH:mm:ss, Some(America/Chicago)) - id#281L), yyyy-MM-dd HH:mm:ss, Some(America/Chicago)) AS timestamp#284]
-02    +- Range (0, 50, step=10, splits=Some(8))
-
-// Let's create a streaming Dataset
-import org.apache.spark.sql.types.StructType
-val schema = new StructType().
-  add($"timestamp".timestamp).
-  add($"count".long)
-scala> schema.printTreeString
-root
- |-- timestamp: timestamp (nullable = true)
- |-- count: long (nullable = true)
-
-val events = spark.
-  readStream.
-  schema(schema).
-  csv("events").
-  withWatermark(eventTime = "timestamp", delayThreshold = "20 seconds")
-scala> println(events.queryExecution.logical.numberedTreeString)
-00 'EventTimeWatermark 'timestamp, interval 20 seconds
-01 +- StreamingRelation DataSource(org.apache.spark.sql.SparkSession@75abcdd4,csv,List(),Some(StructType(StructField(timestamp,TimestampType,true), StructField(count,LongType,true))),List(),None,Map(path -> events),None), FileSource[events], [timestamp#329, count#330L]
-----
-
-[NOTE]
-====
-`delayThreshold` is parsed using `CalendarInterval.fromString` with *interval* formatted as described in link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] unary expression.
-
-```
-0 years 0 months 1 week 0 days 0 hours 1 minute 20 seconds 0 milliseconds 0 microseconds
-```
-====
-
-NOTE: `delayThreshold` must not be negative (and `milliseconds` and `months` should both be equal or greater than `0`).
-
-NOTE: `withWatermark` is used when...FIXME

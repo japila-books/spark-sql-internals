@@ -1,12 +1,14 @@
 == Dataset API -- Basic Actions
 
-*Basic actions* are part of the Dataset API for transforming a `Dataset` into a session-scoped or global temporary view.
+*Basic actions* are part of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view.
+
+NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
 [[methods]]
 .Dataset API's Basic Actions
 [cols="1,2",options="header",width="100%"]
 |===
-| Transformation
+| Action
 | Description
 
 | <<createTempView, createTempView>>
@@ -41,3 +43,61 @@ a|
 createOrReplaceGlobalTempView(viewName: String): Unit
 ----
 |===
+
+=== [[createTempView]] `createTempView` Method
+
+[source, scala]
+----
+createTempView(viewName: String): Unit
+----
+
+`createTempView`...FIXME
+
+NOTE: `createTempView` is used when...FIXME
+
+=== [[createOrReplaceTempView]] `createOrReplaceTempView` Method
+
+[source, scala]
+----
+createOrReplaceTempView(viewName: String): Unit
+----
+
+`createOrReplaceTempView`...FIXME
+
+NOTE: `createOrReplaceTempView` is used when...FIXME
+
+=== [[createGlobalTempView]] `createGlobalTempView` Method
+
+[source, scala]
+----
+createGlobalTempView(viewName: String): Unit
+----
+
+`createGlobalTempView`...FIXME
+
+NOTE: `createGlobalTempView` is used when...FIXME
+
+=== [[createOrReplaceGlobalTempView]] `createOrReplaceGlobalTempView` Method
+
+[source, scala]
+----
+createOrReplaceGlobalTempView(viewName: String): Unit
+----
+
+`createOrReplaceGlobalTempView`...FIXME
+
+NOTE: `createOrReplaceGlobalTempView` is used when...FIXME
+
+=== [[createTempViewCommand]] `createTempViewCommand` Internal Method
+
+[source, scala]
+----
+createTempViewCommand(
+  viewName: String,
+  replace: Boolean,
+  global: Boolean): CreateViewCommand
+----
+
+`createTempViewCommand`...FIXME
+
+NOTE: `createTempViewCommand` is used when...FIXME
