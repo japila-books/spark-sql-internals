@@ -13,9 +13,9 @@
 . link:spark-sql-SparkSession.adoc[SparkSession -- The Entry Point to Spark SQL]
 .. link:spark-sql-SparkSession-Builder.adoc[Builder -- Building SparkSession using Fluent API]
 
-. link:spark-sql-Dataset.adoc[Dataset -- Strongly-Typed Structured Query with Encoder]
-. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows with RowEncoder]
-. link:spark-sql-Row.adoc[Row]
+. link:spark-sql-Dataset.adoc[Dataset -- Structured Query with Data Encoder]
+.. link:spark-sql-DataFrame.adoc[DataFrame -- Dataset of Rows with RowEncoder]
+.. link:spark-sql-Row.adoc[Row]
 
 . link:spark-sql-datasource-api.adoc[DataSource API -- Managing Datasets in External Data Sources]
 .. link:spark-sql-DataFrameReader.adoc[DataFrameReader -- Loading Data From External Data Sources]
@@ -54,9 +54,6 @@
 .. link:spark-sql-udfs-blackbox.adoc[UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice]
 .. link:spark-sql-UserDefinedFunction.adoc[UserDefinedFunction]
 
-. link:spark-sql-UserDefinedAggregateFunction.adoc[UserDefinedAggregateFunction -- Contract for User-Defined Untyped Aggregate Functions (UDAFs)]
-. link:spark-sql-Aggregator.adoc[Aggregator -- Contract for User-Defined Typed Aggregate Functions (UDAFs)]
-
 . link:spark-sql-schema.adoc[Schema -- Structure of Data]
 .. link:spark-sql-StructType.adoc[StructType]
 .. link:spark-sql-StructField.adoc[StructField]
@@ -64,35 +61,10 @@
 
 . link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
 
+. link:spark-sql-UserDefinedAggregateFunction.adoc[UserDefinedAggregateFunction -- Contract for User-Defined Untyped Aggregate Functions (UDAFs)]
+. link:spark-sql-Aggregator.adoc[Aggregator -- Contract for User-Defined Typed Aggregate Functions (UDAFs)]
+
 . link:spark-sql-properties.adoc[Configuration Properties]
-
-== Kafka Data Source
-
-. link:spark-sql-kafka.adoc[Kafka Data Source]
-. link:spark-sql-kafka-options.adoc[Kafka Data Source Options]
-. link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
-. link:spark-sql-KafkaRelation.adoc[KafkaRelation]
-. link:spark-sql-KafkaSourceRDD.adoc[KafkaSourceRDD]
-.. link:spark-sql-KafkaSourceRDDOffsetRange.adoc[KafkaSourceRDDOffsetRange]
-.. link:spark-sql-KafkaSourceRDDPartition.adoc[KafkaSourceRDDPartition]
-. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy Contract -- Kafka Consumer Providers]
-. link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
-. link:spark-sql-KafkaOffsetRangeLimit.adoc[KafkaOffsetRangeLimit]
-. link:spark-sql-KafkaDataConsumer.adoc[KafkaDataConsumer Contract]
-.. link:spark-sql-InternalKafkaConsumer.adoc[InternalKafkaConsumer]
-. link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Structured Queries to Kafka]
-.. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
-. link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
-
-== JDBC Data Source
-
-. link:spark-sql-jdbc.adoc[JDBC Data Source]
-. link:spark-sql-JDBCOptions.adoc[JDBCOptions -- JDBC Data Source Options]
-. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-. link:spark-sql-JDBCRelation.adoc[JDBCRelation]
-. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
-. link:spark-sql-JdbcDialect.adoc[JdbcDialect]
-. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
 
 == SparkSession Registries
 
@@ -159,9 +131,50 @@
 
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
+=== File-Based Data Sources
+
+. link:spark-sql-FileFormat.adoc[FileFormat]
+.. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
+
+. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
+. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
+. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
+. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
+. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
+. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
+
+== Kafka Data Source
+
+. link:spark-sql-kafka.adoc[Kafka Data Source]
+. link:spark-sql-kafka-options.adoc[Kafka Data Source Options]
+. link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
+. link:spark-sql-KafkaRelation.adoc[KafkaRelation]
+. link:spark-sql-KafkaSourceRDD.adoc[KafkaSourceRDD]
+.. link:spark-sql-KafkaSourceRDDOffsetRange.adoc[KafkaSourceRDDOffsetRange]
+.. link:spark-sql-KafkaSourceRDDPartition.adoc[KafkaSourceRDDPartition]
+. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy Contract -- Kafka Consumer Providers]
+. link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
+. link:spark-sql-KafkaOffsetRangeLimit.adoc[KafkaOffsetRangeLimit]
+. link:spark-sql-KafkaDataConsumer.adoc[KafkaDataConsumer Contract]
+.. link:spark-sql-InternalKafkaConsumer.adoc[InternalKafkaConsumer]
+. link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Structured Queries to Kafka]
+.. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
+. link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
+
+== JDBC Data Source
+
+. link:spark-sql-jdbc.adoc[JDBC Data Source]
+. link:spark-sql-JDBCOptions.adoc[JDBCOptions -- JDBC Data Source Options]
+. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
+. link:spark-sql-JDBCRelation.adoc[JDBCRelation]
+. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
+. link:spark-sql-JdbcDialect.adoc[JdbcDialect]
+. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
+
 == Extending Spark SQL / Data Source API V1
 
 . link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
+. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
 
 === Data Source Providers
 
@@ -180,18 +193,6 @@
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
 . link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
 . link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]
-
-=== File-Based Data Sources
-
-. link:spark-sql-FileFormat.adoc[FileFormat]
-.. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
-.. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-.. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
-.. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
-.. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
-.. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
-.. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
-.. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
 
 === Others
 
