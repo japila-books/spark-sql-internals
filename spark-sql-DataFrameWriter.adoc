@@ -223,7 +223,7 @@ runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 
 `runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
 
-`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, executing the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
+`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
 
 TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
 

@@ -1,6 +1,6 @@
 == Dataset API -- Basic Actions
 
-*Basic actions* are part of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view.
+*Basic actions* are part of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
 
 NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
@@ -10,6 +10,15 @@ NOTE: Basic actions are the methods in the `Dataset` Scala class that are groupe
 |===
 | Action
 | Description
+
+| <<checkpoint, checkpoint>>
+a| Checkpoints the Dataset in a reliable way
+
+[source, scala]
+----
+checkpoint(): Dataset[T]
+checkpoint(eager: Boolean): Dataset[T]
+----
 
 | <<createTempView, createTempView>>
 a|
@@ -42,9 +51,50 @@ a|
 ----
 createOrReplaceGlobalTempView(viewName: String): Unit
 ----
+
+| <<explain, explain>>
+a| Displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
+
+[source, scala]
+----
+explain(): Unit
+explain(extended: Boolean): Unit
+----
+
+| <<localCheckpoint, localCheckpoint>>
+a| (*New in 2.3.0*) Checkpoints the Dataset locally on executors (and therefore unreliably)
+
+[source, scala]
+----
+localCheckpoint(): Dataset[T]
+localCheckpoint(eager: Boolean): Dataset[T]
+----
+
+| <<persist, persist>>
+a| Persists a Dataset
+
+[source, scala]
+----
+persist(): this.type
+persist(newLevel: StorageLevel): this.type
+----
 |===
 
-=== [[createTempView]] `createTempView` Method
+=== [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Basic Action
+
+[source, scala]
+----
+checkpoint(): Dataset[T]  // <1>
+checkpoint(eager: Boolean): Dataset[T]  // <2>
+----
+<1> `eager` and `reliableCheckpoint` flags enabled
+<2> `reliableCheckpoint` flag enabled
+
+NOTE: `checkpoint` is an experimental operator and the API is evolving towards becoming stable.
+
+`checkpoint` simply requests the `Dataset` to <<checkpoint-internal, checkpoint>> with the given `eager` flag and the `reliableCheckpoint` flag enabled.
+
+=== [[createTempView]] `createTempView` Basic Action
 
 [source, scala]
 ----
@@ -55,7 +105,7 @@ createTempView(viewName: String): Unit
 
 NOTE: `createTempView` is used when...FIXME
 
-=== [[createOrReplaceTempView]] `createOrReplaceTempView` Method
+=== [[createOrReplaceTempView]] `createOrReplaceTempView` Basic Action
 
 [source, scala]
 ----
@@ -66,7 +116,7 @@ createOrReplaceTempView(viewName: String): Unit
 
 NOTE: `createOrReplaceTempView` is used when...FIXME
 
-=== [[createGlobalTempView]] `createGlobalTempView` Method
+=== [[createGlobalTempView]] `createGlobalTempView` Basic Action
 
 [source, scala]
 ----
@@ -77,7 +127,7 @@ createGlobalTempView(viewName: String): Unit
 
 NOTE: `createGlobalTempView` is used when...FIXME
 
-=== [[createOrReplaceGlobalTempView]] `createOrReplaceGlobalTempView` Method
+=== [[createOrReplaceGlobalTempView]] `createOrReplaceGlobalTempView` Basic Action
 
 [source, scala]
 ----
@@ -101,3 +151,94 @@ createTempViewCommand(
 `createTempViewCommand`...FIXME
 
 NOTE: `createTempViewCommand` is used when...FIXME
+
+=== [[explain]] Displaying Logical and Physical Plans, Their Cost and Codegen -- `explain` Basic Action
+
+[source, scala]
+----
+explain(): Unit // <1>
+explain(extended: Boolean): Unit
+----
+<1> Turns the `extended` flag on
+
+`explain` prints the link:spark-sql-LogicalPlan.adoc[logical] and (with `extended` flag enabled) link:spark-sql-SparkPlan.adoc[physical] plans, their cost and codegen to the console.
+
+TIP: Use `explain` to review the structured queries and optimizations applied.
+
+Internally, `explain` creates a link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command and requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute it] (to get a link:spark-sql-QueryExecution.adoc[QueryExecution] back).
+
+NOTE: `explain` uses link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command that, when link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed], gives different text representations of link:spark-sql-QueryExecution.adoc[QueryExecution] (for the Dataset's link:spark-sql-LogicalPlan.adoc[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
+
+`explain` then requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:spark-sql-SparkPlan.adoc#executeCollect[collects the records] (as link:spark-sql-InternalRow.adoc[InternalRow] objects).
+
+[NOTE]
+====
+`explain` uses Dataset's link:spark-sql-Dataset.adoc#sparkSession[SparkSession] to link:spark-sql-SparkSession.adoc#sessionState[access the current `SessionState`].
+====
+
+In the end, `explain` goes over the `InternalRow` records and converts them to lines to display to console.
+
+NOTE: `explain` "converts" an `InternalRow` record to a line using link:spark-sql-InternalRow.adoc#getString[getString] at position `0`.
+
+TIP: If you are serious about query debugging you could also use the link:spark-sql-debugging-execution.adoc[Debugging Query Execution facility].
+
+[source, scala]
+----
+scala> spark.range(10).explain(extended = true)
+== Parsed Logical Plan ==
+Range (0, 10, step=1, splits=Some(8))
+
+== Analyzed Logical Plan ==
+id: bigint
+Range (0, 10, step=1, splits=Some(8))
+
+== Optimized Logical Plan ==
+Range (0, 10, step=1, splits=Some(8))
+
+== Physical Plan ==
+*Range (0, 10, step=1, splits=Some(8))
+----
+
+=== [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Basic Action
+
+[source, scala]
+----
+localCheckpoint(): Dataset[T] // <1>
+localCheckpoint(eager: Boolean): Dataset[T]
+----
+<1> `eager` flag enabled
+
+(*New in 2.3.0*) `localCheckpoint` simply uses <<checkpoint, Dataset.checkpoint>> operator with the input `eager` flag and `reliableCheckpoint` flag disabled (`false`).
+
+=== [[checkpoint-internal]] `checkpoint` Internal Method
+
+[source, scala]
+----
+checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
+----
+
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+
+Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
+
+With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
+
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
+
+In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+
+NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
+
+=== [[persist]] Persisting Dataset -- `persist` Basic Action
+
+[source, scala]
+----
+persist(): this.type
+persist(newLevel: StorageLevel): this.type
+----
+
+`persist` caches the `Dataset` using the default storage level `MEMORY_AND_DISK` or `newLevel` and returns it.
+
+Internally, `persist` requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache the structured query] (that is accessible through link:spark-sql-SharedState.adoc[SharedState] of the current link:spark-sql-SparkSession.adoc[SparkSession]).
+
+CAUTION: FIXME

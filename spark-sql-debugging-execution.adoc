@@ -81,3 +81,25 @@ Generated code:
 ...
 ----
 ====
+
+=== [[codegen]] `codegen` Method
+
+[source, scala]
+----
+codegen(): Unit
+----
+
+`codegen`...FIXME
+
+NOTE: `codegen` is used when...FIXME
+
+=== [[codegenToSeq]] `codegenToSeq` Method
+
+[source, scala]
+----
+codegenToSeq(): Seq[(String, String)]
+----
+
+`codegenToSeq`...FIXME
+
+NOTE: `codegenToSeq` is used when...FIXME

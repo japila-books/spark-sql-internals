@@ -423,11 +423,11 @@ CAUTION: FIXME
 withNewRDDExecutionId[U](body: => U): U
 ----
 
-`withNewRDDExecutionId` executes the input `body` action under link:spark-sql-SQLExecution.adoc#withNewExecutionId[new execution id].
+`withNewRDDExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.adoc#withNewExecutionId, new execution id>>.
 
 CAUTION: FIXME What's the difference between `withNewRDDExecutionId` and <<withNewExecutionId, withNewExecutionId>>?
 
-NOTE: `withNewRDDExecutionId` is used when `Dataset` executes link:spark-sql-dataset-operators.adoc#foreach[foreach] and link:spark-sql-dataset-operators.adoc#foreachPartition[foreachPartition] actions.
+NOTE: `withNewRDDExecutionId` is used when <<spark-sql-dataset-operators.adoc#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.adoc#foreachPartition, Dataset.foreachPartition>> actions are used.
 
 === [[ofRows]] Creating DataFrame -- `ofRows` Internal Factory Method
 
@@ -478,7 +478,7 @@ Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the i
 withNewExecutionId[U](body: => U): U
 ----
 
-`withNewExecutionId` executes the input `body` action under link:spark-sql-SQLExecution.adoc#withNewExecutionId[new execution id].
+`withNewExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.adoc#withNewExecutionId, new execution id>>.
 
 NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs belong to the `Dataset` action execution.
 
@@ -489,7 +489,7 @@ NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs bel
 Feel free to contact me at jacek@japila.pl if you think I should re-consider my decision.
 ====
 
-=== [[withAction]] Executing Action Under New Execution Id -- `withAction` Internal Method
+=== [[withAction]] Executing Action Under New Execution ID -- `withAction` Internal Method
 
 [source, scala]
 ----
@@ -498,7 +498,7 @@ withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 
 `withAction` requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:spark-sql-SparkPlan.adoc[resets the metrics] of every physical operator (in the physical plan).
 
-`withAction` requests `SQLExecution` for link:spark-sql-SQLExecution.adoc#withNewExecutionId[executing] the input `action` with the executable physical plan (tracked under a new execution id).
+`withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
 
 In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished link:spark-sql-ExecutionListenerManager.adoc#onSuccess[successfully] or link:spark-sql-ExecutionListenerManager.adoc#onFailure[with an exception].
 
@@ -510,7 +510,7 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-
 
 * <<logicalPlan, Computing the logical plan>> (and executing a link:spark-sql-LogicalPlan-Command.adoc[logical command] or their `Union`)
 
-* link:spark-sql-dataset-operators.adoc#collect[collect], link:spark-sql-dataset-operators.adoc#collectAsList[collectAsList], link:spark-sql-dataset-operators.adoc#count[count], link:spark-sql-dataset-operators.adoc[head] and link:spark-sql-dataset-operators.adoc#toLocalIterator[toLocalIterator] Dataset operators
+* Dataset operators: <<spark-sql-dataset-operators.adoc#collect, collect>>, <<spark-sql-dataset-operators.adoc#count, count>>, <<spark-sql-dataset-operators.adoc#head, head>> and <<spark-sql-dataset-operators.adoc#toLocalIterator, toLocalIterator>>
 ====
 
 === [[apply]] Creating Dataset Instance (For LogicalPlan and SparkSession) -- `apply` Internal Factory Method
@@ -591,25 +591,6 @@ sortInternal(global: Boolean, sortExprs: Seq[Column]): Dataset[T]
 `sortInternal`...FIXME
 
 NOTE: `sortInternal` is used for the `Dataset` <<spark-sql-Dataset-typed-transformations.adoc#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.adoc#sort, sort>> and <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>>.
-
-=== [[checkpoint]] `checkpoint` Internal Method
-
-[source, scala]
-----
-checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
-----
-
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
-
-Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
-
-With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
-
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
-
-In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
-
-NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
 
 === [[withPlan]] Helper Method for Untyped Transformations and Basic Actions -- `withPlan` Internal Method
 

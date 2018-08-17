@@ -10,7 +10,7 @@
 | <<cache, cache>>
 |
 
-| <<persist, persist>>
+| <<spark-sql-dataset-operators.adoc#persist, persist>>
 |
 
 | <<unpersist, unpersist>>
@@ -72,7 +72,7 @@ res1: Array[org.apache.spark.sql.Row] = Array()
 
 [NOTE]
 ====
-You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
+You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<spark-sql-dataset-operators.adoc#persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
 
 [source,scala]
 ----
@@ -147,26 +147,12 @@ Internally, `CACHE TABLE` becomes link:spark-sql-LogicalPlan-RunnableCommand.ado
 cache(): this.type
 ----
 
-`cache` merely executes the no-argument <<persist, persist>> method.
+`cache` merely executes the no-argument <<spark-sql-dataset-operators.adoc#persist, persist>> basic action.
 
 [source, scala]
 ----
 val ds = spark.range(5).cache
 ----
-
-=== [[persist]] Persisting Dataset -- `persist` Method
-
-[source, scala]
-----
-persist(): this.type
-persist(newLevel: StorageLevel): this.type
-----
-
-`persist` caches the `Dataset` using the default storage level `MEMORY_AND_DISK` or `newLevel` and returns it.
-
-Internally, `persist` requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache the structured query] (that is accessible through link:spark-sql-SharedState.adoc[SharedState] of the current link:spark-sql-SparkSession.adoc[SparkSession]).
-
-CAUTION: FIXME
 
 === [[unpersist]] Unpersisting Dataset -- `unpersist` Method
 

@@ -78,9 +78,9 @@ WARN CacheManager: Asked to cache already cached data.
 ====
 `cacheQuery` is used when:
 
-* link:spark-sql-caching.adoc#persist[Dataset.persist] operator is used
+* <<spark-sql-dataset-operators.adoc#persist, Dataset.persist>> basic action is used
 
-* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#cacheTable[cache a table or view in-memory] or link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#cacheTable, cache a table or view in-memory>> or <<spark-sql-CatalogImpl.adoc#refreshTable, refresh a table>>
 ====
 
 === [[clearCache]] Removing All Cached Tables From In-Memory Cache -- `clearCache` Method

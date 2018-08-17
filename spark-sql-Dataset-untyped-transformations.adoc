@@ -30,15 +30,6 @@ a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Colu
 apply(colName: String): Column
 ----
 
-| <<checkpoint, checkpoint>>
-a| Reliably checkpointing a Dataset
-
-[source, scala]
-----
-checkpoint(): Dataset[T]
-checkpoint(eager: Boolean): Dataset[T]
-----
-
 | <<col, col>>
 a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
 
@@ -102,15 +93,6 @@ join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
 join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
 join(right: Dataset[_], joinExprs: Column): DataFrame
 join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
-----
-
-| <<localCheckpoint, localCheckpoint>>
-a| (*New in 2.3.0*) Locally (and unreliably) checkpointing a Dataset
-
-[source, scala]
-----
-localCheckpoint(): Dataset[T]
-localCheckpoint(eager: Boolean): Dataset[T]
 ----
 
 | <<na, na>>
@@ -202,20 +184,6 @@ apply(colName: String): Column
 
 `apply` selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`).
 
-=== [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Untyped Transformation
-
-[source, scala]
-----
-checkpoint(): Dataset[T]  // <1>
-checkpoint(eager: Boolean): Dataset[T]  // <2>
-----
-<1> `eager` and `reliableCheckpoint` flags enabled
-<2> `reliableCheckpoint` flag enabled
-
-NOTE: `checkpoint` is an experimental operator and the API is evolving towards becoming stable.
-
-`checkpoint` simply requests the `Dataset` to <<spark-sql-Dataset.adoc#checkpoint, checkpoint>> with the given `eager` flag and the `reliableCheckpoint` flag enabled.
-
 === [[col]] `col` Untyped Transformation
 
 [source, scala]
@@ -305,17 +273,6 @@ join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
 ----
 
 `join`...FIXME
-
-=== [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Untyped Transformation
-
-[source, scala]
-----
-localCheckpoint(): Dataset[T] // <1>
-localCheckpoint(eager: Boolean): Dataset[T]
-----
-<1> `eager` flag enabled
-
-(*New in 2.3.0*) `localCheckpoint` simply uses <<checkpoint, Dataset.checkpoint>> operator with the input `eager` flag and `reliableCheckpoint` flag disabled (`false`).
 
 === [[na]] `na` Untyped Transformation
 

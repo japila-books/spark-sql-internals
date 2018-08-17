@@ -53,9 +53,34 @@ NOTE: `sparkPlan` is the first physical plan from the collection of all possible
 NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:spark-sql-catalyst-QueryPlanner.adoc#plan[will always generate at least one physical plan].
 
 | executedPlan
-a| [[executedPlan]] Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final "shape" and ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
+a| [[executedPlan]] Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
 
-NOTE: `executedPlan` phase is when the <<spark-sql-CollapseCodegenStages.adoc, CollapseCodegenStages>> physical preparation rule is executed to collapse physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
+NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers is the <<spark-sql-CollapseCodegenStages.adoc#, CollapseCodegenStages>> physical preparation rule that collapses physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
+
+[NOTE]
+====
+`executedPlan` physical plan is used when:
+
+* <<spark-sql-dataset-operators.adoc#explain, Dataset.explain>> operator is used to show the logical and physical query plans of a structured query
+
+* <<spark-sql-dataset-operators.adoc#localCheckpoint, Dataset.localCheckpoint>> and <<spark-sql-dataset-operators.adoc#checkpoint, Dataset.checkpoint>> operators are used (through <<spark-sql-Dataset-basic-actions.adoc#checkpoint-internal, checkpoint>>)
+
+* <<spark-sql-dataset-operators.adoc#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.adoc#foreachPartition, Dataset.foreachPartition>> actions are used (through <<spark-sql-Dataset.adoc#withNewRDDExecutionId, withNewRDDExecutionId>>)
+
+* `Dataset` is requested to <<spark-sql-Dataset.adoc#withAction, execute an action under a new execution ID>> (e.g. for the Dataset operators: <<spark-sql-dataset-operators.adoc#collect, collect>>, <<spark-sql-dataset-operators.adoc#count, count>>, <<spark-sql-dataset-operators.adoc#head, head>> and <<spark-sql-dataset-operators.adoc#toLocalIterator, toLocalIterator>>)
+
+* `CacheManager` is requested to <<spark-sql-CacheManager.adoc#cacheQuery, cacheQuery>> (e.g. for <<spark-sql-dataset-operators.adoc#persist, Dataset.persist>> basic action) or <<spark-sql-CacheManager.adoc#recacheByCondition, recacheByCondition>>
+
+* `QueryExecution` is requested for the `RDD[InternalRow]` of a structured query (in the <<toRdd, toRdd>> query execution phase), <<simpleString, simpleString>>, <<toString, toString>>, <<stringWithStats, stringWithStats>>, <<spark-sql-debugging-execution.adoc#codegen, codegen>>, <<spark-sql-debugging-execution.adoc#codegenToSeq, codegenToSeq>>, and the <<hiveResultString, Hive-compatible output format>>
+
+* `SQLExecution` is requested to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute a Dataset action under a new execution id>>
+
+* `PlanSubqueries` physical query optimization is <<spark-sql-PlanSubqueries.adoc#apply, executed>>
+
+* <<spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-ExplainCommand.adoc#, ExplainCommand>> logical commands are executed
+
+* `DebugQuery` is requested for `debug` and `debugCodegen`
+====
 
 | toRdd
 a| [[toRdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>.
@@ -158,27 +183,34 @@ CAUTION: FIXME
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 * [[logical]] link:spark-sql-LogicalPlan.adoc[Logical plan]
 
-=== [[preparations]] Physical Query Optimizations (Physical Query Plan Preparation Rules) -- `preparations` Method
+=== [[preparations]] Physical Query Optimizations (Physical Plan Preparation Rules) -- `preparations` Method
 
 [source, scala]
 ----
 preparations: Seq[Rule[SparkPlan]]
 ----
 
-`preparations` are link:spark-sql-SparkPlan.adoc[physical plan] preparation rules (i.e. `Rule[SparkPlan]`) that...FIXME
+`preparations` is the set of the physical query optimization rules that transform a <<spark-sql-SparkPlan.adoc#, physical query plan>> to be more efficient and optimized for execution (i.e. `Rule[SparkPlan]`).
 
-. link:spark-sql-ExtractPythonUDFs.adoc[ExtractPythonUDFs]
-. link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
-. link:spark-sql-EnsureRequirements.adoc[EnsureRequirements]
-. link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages]
-. link:spark-sql-ReuseExchange.adoc[ReuseExchange]
-. link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
+The `preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
 
-TIP: A `SparkPlan` preparation rule transforms a link:spark-sql-SparkPlan.adoc[physical plan] to a more efficient variant.
+. <<spark-sql-ExtractPythonUDFs.adoc#, ExtractPythonUDFs>>
+. <<spark-sql-PlanSubqueries.adoc#, PlanSubqueries>>
+. <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>>
+. <<spark-sql-CollapseCodegenStages.adoc#, CollapseCodegenStages>>
+. <<spark-sql-ReuseExchange.adoc#, ReuseExchange>>
+. <<spark-sql-ReuseSubquery.adoc#, ReuseSubquery>>
 
-NOTE: The physical preparation rules are applied sequentially in order to the physical plan before execution, i.e. they generate a `SparkPlan` when <<executedPlan, executedPlan>> lazy value is first accessed (and is cached afterwards).
+[NOTE]
+====
+`preparations` rules are used when:
 
-=== [[prepareForExecution]] Applying preparations Physical Query Plan Optimization Rules to Physical Plan -- `prepareForExecution` Method
+* `QueryExecution` is requested for the <<executedPlan, executedPlan>> physical plan (through <<prepareForExecution, prepareForExecution>>)
+
+* (Spark Structured Streaming) `IncrementalExecution` is requested for the physical optimization rules for streaming structured queries
+====
+
+=== [[prepareForExecution]] Applying preparations Physical Query Optimization Rules to Physical Plan -- `prepareForExecution` Method
 
 [source, scala]
 ----
