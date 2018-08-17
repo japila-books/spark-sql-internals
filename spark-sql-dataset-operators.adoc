@@ -1,20 +1,6 @@
 == Dataset API -- Dataset Operators
 
-Dataset API is a <<methods, set of operators>> with typed and untyped transformations, and actions.
-
-Dataset API can be grouped per target, i.e. the part of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) they are applied to and work with.
-
-. link:spark-sql-Column.adoc[Column Operators]
-. link:spark-sql-functions.adoc[Standard Functions] (from `functions` object)
-. link:spark-sql-udfs.adoc[User-Defined Functions (UDFs)]
-. link:spark-sql-basic-aggregation.adoc[Basic Aggregation -- Typed and Untyped Grouping Operators]
-. link:spark-sql-functions-windows.adoc[Window Aggregate Functions]
-. link:spark-sql-UserDefinedAggregateFunction.adoc[User-Defined Aggregate Functions (UDAFs)]
-. link:spark-sql-joins.adoc[Dataset Join Operators]
-. link:spark-sql-caching.adoc[Dataset Caching and Persistence]
-. link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
-
-Beside the above operators, there are the following ones working with a `Dataset` as a whole.
+Dataset API is a <<methods, set of operators>> with typed and untyped transformations, and actions to work with a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) as a whole.
 
 [[methods]]
 [[operators]]
@@ -24,11 +10,60 @@ Beside the above operators, there are the following ones working with a `Dataset
 | Operator
 | Description
 
-| <<as, as>>
-| Enforcing types, i.e. marking the records in the `Dataset` as of a given data type (_data type conversion_)
+| <<spark-sql-Dataset-untyped-transformations.adoc#agg, agg>>
+a| [[agg]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
+agg(expr: Column, exprs: Column*): DataFrame
+agg(exprs: Map[String, String]): DataFrame
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#alias, alias>>
+a| [[alias]] Typed transformation to...FIXME
+
+[source, scala]
+----
+alias(alias: String): Dataset[T]
+alias(alias: Symbol): Dataset[T]
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#apply, apply>>
+a| [[apply]] Untyped transformation to select a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+apply(colName: String): Column
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#as-alias, as>>
+a| [[as-alias]] Typed transformation to...FIXME
+
+[source, scala]
+----
+as(alias: String): Dataset[T]
+as(alias: Symbol): Dataset[T]
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#as-type, as>>
+a| [[as-type]] Typed transformation to enforce a type, i.e. marking the records in the `Dataset` as of a given data type (_data type conversion_)
+
+[source, scala]
+----
+as[U : Encoder]: Dataset[U]
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#cache, cache>>
+a| [[cache]] Basic action to cache a Dataset
+
+[source, scala]
+----
+cache(): this.type
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#checkpoint, checkpoint>>
-a| [[checkpoint]] Basic action to checkpoint the Dataset in a reliable way
+a| [[checkpoint]] Basic action to checkpoint a Dataset in a reliable way
 
 [source, scala]
 ----
@@ -37,28 +72,149 @@ checkpoint(eager: Boolean): Dataset[T]
 ----
 
 | <<spark-sql-Dataset-typed-transformations.adoc#coalesce, coalesce>>
-| Repartitioning a `Dataset` with shuffle disabled.
+a| [[coalesce]] Typed transformation to repartition a Dataset
+
+[source, scala]
+----
+coalesce(numPartitions: Int): Dataset[T]
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#col, col>>
+a| [[col]] Untyped transformation to select a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+col(colName: String): Column
+----
 
 | <<spark-sql-Dataset-actions.adoc#collect, collect>>
 | [[collect]] Action to...FIXME
 
+| <<spark-sql-Dataset-untyped-transformations.adoc#colRegex, colRegex>>
+a| [[colRegex]] (*New in 2.3.0*) Untyped transformation to select a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`)
+
+[source, scala]
+----
+colRegex(colName: String): Column
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#columns, columns>>
+a| [[columns]] Basic action to...FIXME
+
+[source, scala]
+----
+columns: Array[String]
+----
+
 | <<spark-sql-Dataset-actions.adoc#count, count>>
-| [[count]] Action to count the number of rows
+a| [[count]] Action to count the number of rows
+
+[source, scala]
+----
+count(): Long
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#createGlobalTempView, createGlobalTempView>>
-|
+a| [[createGlobalTempView]] Basic action to...FIXME
+
+[source, scala]
+----
+createGlobalTempView(viewName: String): Unit
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>
+a| [[createOrReplaceGlobalTempView]] Basic action to...FIXME
+
+[source, scala]
+----
+createOrReplaceGlobalTempView(viewName: String): Unit
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceTempView, createOrReplaceTempView>>
-|
+a| [[createOrReplaceTempView]] Basic action to...FIXME
+
+[source, scala]
+----
+createOrReplaceTempView(viewName: String): Unit
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#createTempView, createTempView>>
-|
+a| [[createTempView]] Basic action to...FIXME
+
+[source, scala]
+----
+createTempView(viewName: String): Unit
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#crossJoin, crossJoin>>
+a| [[crossJoin]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+crossJoin(right: Dataset[_]): DataFrame
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#cube, cube>>
+a| [[cube]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+cube(cols: Column*): RelationalGroupedDataset
+cube(col1: String, cols: String*): RelationalGroupedDataset
+----
 
 | <<spark-sql-Dataset-actions.adoc#describe, describe>>
-| Action to...FIXME
+a| [[describe]] Action to...FIXME
+
+[source, scala]
+----
+describe(cols: String*): DataFrame
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#distinct, distinct>>
+a| [[distinct]] Typed transformation to...FIXME
+
+[source, scala]
+----
+distinct(): Dataset[T]
+----
 
 | <<spark-sql-Dataset-untyped-transformations.adoc#drop, drop>>
-|
+a| [[drop]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+drop(colName: String): DataFrame
+drop(colNames: String*): DataFrame
+drop(col: Column): DataFrame
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#dropDuplicates, dropDuplicates>>
+a| [[dropDuplicates]] Typed transformation to...FIXME
+
+[source, scala]
+----
+dropDuplicates(): Dataset[T]
+dropDuplicates(colNames: Array[String]): Dataset[T]
+dropDuplicates(colNames: Seq[String]): Dataset[T]
+dropDuplicates(col1: String, cols: String*): Dataset[T]
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#dtypes, dtypes>>
+a| [[dtypes]] Basic action to...FIXME
+
+[source, scala]
+----
+dtypes: Array[(String, String)]
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#except, except>>
+a| [[except]] Typed transformation to...FIXME
+
+[source, scala]
+----
+except(other: Dataset[T]): Dataset[T]
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#explain, explain>>
 a| [[explain]] Basic action to explain the logical and physical plans of the `Dataset`, i.e. displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
@@ -70,27 +226,134 @@ explain(extended: Boolean): Unit
 ----
 
 | <<spark-sql-Dataset-typed-transformations.adoc#filter, filter>>
-|
+a| [[filter]] Typed transformation to...FIXME
+
+[source, scala]
+----
+filter(condition: Column): Dataset[T]
+filter(conditionExpr: String): Dataset[T]
+filter(func: T => Boolean): Dataset[T]
+----
 
 | <<spark-sql-Dataset-actions.adoc#first, first>>
-| Action to...FIXME
+a| [[first]] Action to...FIXME
+
+[source, scala]
+----
+first(): T
+----
 
 | <<spark-sql-Dataset-typed-transformations.adoc#flatMap, flatMap>>
-|
+a| [[flatMap]] Typed transformation to...FIXME
+
+[source, scala]
+----
+flatMap[U : Encoder](func: T => TraversableOnce[U]): Dataset[U]
+----
 
 | <<spark-sql-Dataset-actions.adoc#foreach, foreach>>
-| [[foreach]] Action to...FIXME
+a| [[foreach]] Action to...FIXME
+
+[source, scala]
+----
+foreach(f: T => Unit): Unit
+----
 
 | <<spark-sql-Dataset-actions.adoc#foreachPartition, foreachPartition>>
-| [[foreachPartition]] Action to...FIXME
+a| [[foreachPartition]] Action to...FIXME
 
-Internally, `foreachPartition` executes `foreachPartition` action on the Dataset's link:spark-sql-Dataset.adoc#rdd[RDD].
+[source, scala]
+----
+foreachPartition(f: Iterator[T] => Unit): Unit
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#groupBy, groupBy>>
+a| [[groupBy]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+groupBy(cols: Column*): RelationalGroupedDataset
+groupBy(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#groupByKey, groupByKey>>
+a| [[groupByKey]] Typed transformation to...FIXME
+
+[source, scala]
+----
+groupByKey[K: Encoder](func: T => K): KeyValueGroupedDataset[K, T]
+----
 
 | <<spark-sql-Dataset-actions.adoc#head, head>>
-| [[head]] Action to...FIXME
+a| [[head]] Action to...FIXME
 
-| <<spark-sql-Dataset-typed-transformations.adoc#hint, hint>>
-| Specifying a hint (and optional parameters)
+[source, scala]
+----
+head(): T
+head(n: Int): Array[T]
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#hint, hint>>
+a| [[hint]] Basic action to specify a hint (and optional parameters)
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#inputFiles, inputFiles>>
+a| [[inputFiles]] Basic action to...FIXME
+
+[source, scala]
+----
+inputFiles: Array[String]
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#intersect, intersect>>
+a| [[intersect]] Typed transformation to...FIXME
+
+[source, scala]
+----
+intersect(other: Dataset[T]): Dataset[T]
+----
+
+| <<spark-sql-Dataset-basic-actions.adoc#isLocal, isLocal>>
+a| [[isLocal]] Basic action to...FIXME
+
+[source, scala]
+----
+isLocal: Boolean
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#join, join>>
+a| [[join]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+join(right: Dataset[_]): DataFrame
+join(right: Dataset[_], usingColumn: String): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
+join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
+join(right: Dataset[_], joinExprs: Column): DataFrame
+join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#joinWith, joinWith>>
+a| [[joinWith]] Typed transformation to...FIXME
+
+[source, scala]
+----
+joinWith[U](other: Dataset[U], condition: Column): Dataset[(T, U)]
+joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#limit, limit>>
+a| [[limit]] Typed transformation to...FIXME
+
+[source, scala]
+----
+limit(n: Int): Dataset[T]
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#localCheckpoint, localCheckpoint>>
 a| [[localCheckpoint]] (*New in 2.3.0*) Basic action to checkpoint the Dataset locally on executors (and therefore unreliably)
@@ -101,8 +364,38 @@ localCheckpoint(): Dataset[T]
 localCheckpoint(eager: Boolean): Dataset[T]
 ----
 
+| <<spark-sql-Dataset-typed-transformations.adoc#map, map>>
+a| [[map]] Typed transformation to...FIXME
+
+[source, scala]
+----
+map[U: Encoder](func: T => U): Dataset[U]
+----
+
 | <<spark-sql-Dataset-typed-transformations.adoc#mapPartitions, mapPartitions>>
-|
+a| [[mapPartitions]] Typed transformation to...FIXME
+
+[source, scala]
+----
+mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#na, na>>
+a| [[na]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+na: DataFrameNaFunctions
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#orderBy, orderBy>>
+a| [[orderBy]] Typed transformation to...FIXME
+
+[source, scala]
+----
+orderBy(sortExprs: Column*): Dataset[T]
+orderBy(sortCol: String, sortCols: String*): Dataset[T]
+----
 
 | <<spark-sql-Dataset-basic-actions.adoc#persist, persist>>
 a| [[persist]] Basic action to persist a Dataset
@@ -113,29 +406,133 @@ persist(): this.type
 persist(newLevel: StorageLevel): this.type
 ----
 
+| <<spark-sql-Dataset-basic-actions.adoc#printSchema, printSchema>>
+a| [[printSchema]] Basic action to...FIXME
+
+[source, scala]
+----
+printSchema(): Unit
+----
+
 | <<spark-sql-Dataset-typed-transformations.adoc#randomSplit, randomSplit>>
-| Randomly split a `Dataset` into two ``Dataset``s
+a| [[randomSplit]] Typed transformation to split a Dataset randomly into two Datasets
+
+[source, scala]
+----
+randomSplit(weights: Array[Double]): Array[Dataset[T]]
+randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
+----
 
 | <<rdd, rdd>>
 |
 
 | <<spark-sql-Dataset-actions.adoc#reduce, reduce>>
-|  Action to reduce the records of the `Dataset` using the specified binary function.
+a| [[reduce]] Action to reduce the records of the `Dataset` using the specified binary function.
+
+[source, scala]
+----
+reduce(func: (T, T) => T): T
+----
 
 | <<spark-sql-Dataset-typed-transformations.adoc#repartition, repartition>>
-| Repartitioning a `Dataset` with shuffle enabled.
+a| [[repartition]] Typed transformation to repartition a Dataset
 
-| <<schema, schema>>
-|
+[source, scala]
+----
+repartition(partitionExprs: Column*): Dataset[T]
+repartition(numPartitions: Int): Dataset[T]
+repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#repartitionByRange, repartitionByRange>>
+a| [[repartitionByRange]] (*New in 2.3.0*) Typed transformation to...FIXME
+
+[source, scala]
+----
+repartitionByRange(partitionExprs: Column*): Dataset[T]
+repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
+----
+
+| <<spark-sql-Dataset-untyped-transformations.adoc#rollup, rollup>>
+a| [[rollup]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+rollup(cols: Column*): RelationalGroupedDataset
+rollup(col1: String, cols: String*): RelationalGroupedDataset
+----
+
+| <<spark-sql-Dataset-typed-transformations.adoc#sample, sample>>
+a| [[sample]] Typed transformation to...FIXME
+
+[source, scala]
+----
+sample(withReplacement: Boolean, fraction: Double): Dataset[T]
+sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
+sample(fraction: Double): Dataset[T]  // <1>
+sample(fraction: Double, seed: Long): Dataset[T]  // <2>
+----
+<1> *New in 2.3.0*
+<2> *New in 2.3.0*
+
+| <<spark-sql-Dataset-basic-actions.adoc#schema, schema>>
+a| [[schema]] Basic action to...FIXME
+
+[source, scala]
+----
+schema: StructType
+----
 
 | <<spark-sql-Dataset-untyped-transformations.adoc#select, select>>
-|
+a| [[select]] Transformation to...FIXME
+
+[source, scala]
+----
+// Untyped transformations
+select(cols: Column*): DataFrame
+select(col: String, cols: String*): DataFrame
+
+// Typed transformations
+select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
+select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
+select[U1, U2, U3](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
+select[U1, U2, U3, U4](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
+select[U1, U2, U3, U4, U5](
+  c1: TypedColumn[T, U1],
+  c2: TypedColumn[T, U2],
+  c3: TypedColumn[T, U3],
+  c4: TypedColumn[T, U4],
+  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
+----
 
 | <<spark-sql-Dataset-untyped-transformations.adoc#selectExpr, selectExpr>>
-|
+a| [[selectExpr]] Untyped transformation to...FIXME
+
+[source, scala]
+----
+selectExpr(exprs: String*): DataFrame
+----
 
 | <<spark-sql-Dataset-actions.adoc#show, show>>
-| Action to...FIXME
+a| [[show]] Action to...FIXME
+
+[source, scala]
+----
+show(): Unit
+show(truncate: Boolean): Unit
+show(numRows: Int): Unit
+show(numRows: Int, truncate: Boolean): Unit
+show(numRows: Int, truncate: Int): Unit
+show(numRows: Int, truncate: Int, vertical: Boolean): Unit // <1>
+----
+<1> *New in 2.3.0*
 
 | <<spark-sql-Dataset-actions.adoc#summary, summary>>
 | [[summary]] Action to calculate statistics (e.g. `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles)

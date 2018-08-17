@@ -11,6 +11,15 @@ NOTE: Typed transformations are the methods in the `Dataset` Scala class that ar
 | Transformation
 | Description
 
+| <<alias, alias>>
+a|
+
+[source, scala]
+----
+alias(alias: String): Dataset[T]
+alias(alias: Symbol): Dataset[T]
+----
+
 | <<as-alias, as>>
 a|
 
@@ -29,11 +38,19 @@ as[U : Encoder]: Dataset[U]
 ----
 
 | <<coalesce, coalesce>>
-a|
+a| Repartitions a Dataset
 
 [source, scala]
 ----
 coalesce(numPartitions: Int): Dataset[T]
+----
+
+| <<distinct, distinct>>
+a|
+
+[source, scala]
+----
+distinct(): Dataset[T]
 ----
 
 | <<dropDuplicates, dropDuplicates>>
@@ -73,12 +90,12 @@ a|
 flatMap[U : Encoder](func: T => TraversableOnce[U]): Dataset[U]
 ----
 
-| <<hint, hint>>
+| <<groupByKey, groupByKey>>
 a|
 
 [source, scala]
 ----
-hint(name: String, parameters: Any*): Dataset[T]
+groupByKey[K: Encoder](func: T => K): KeyValueGroupedDataset[K, T]
 ----
 
 | <<intersect, intersect>>
@@ -122,6 +139,15 @@ a|
 mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
 ----
 
+| <<orderBy, orderBy>>
+a|
+
+[source, scala]
+----
+orderBy(sortExprs: Column*): Dataset[T]
+orderBy(sortCol: String, sortCols: String*): Dataset[T]
+----
+
 | <<randomSplit, randomSplit>>
 a|
 
@@ -142,9 +168,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 
 | <<repartitionByRange, repartitionByRange>>
-a|
-
-(*New in 2.3.0*)
+a| (*New in 2.3.0*)
 
 [source, scala]
 ----
@@ -388,39 +412,6 @@ scala> sentences.flatMap(s => s.text.split("\\s+")).show
 ----
 
 Internally, `flatMap` calls <<mapPartitions, mapPartitions>> with the partitions `flatMap(ped)`.
-
-=== [[hint]] Specifying Hint -- `hint` Typed Transformation
-
-[source, scala]
-----
-hint(name: String, parameters: Any*): Dataset[T]
-----
-
-`hint` operator is part of link:spark-sql-hint-framework.adoc[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
-
-Internally, `hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] of a `Dataset`).
-
-[source, scala]
-----
-val ds = spark.range(3)
-val plan = ds.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 Range (0, 3, step=1, splits=Some(8))
-
-// Attach a hint
-val dsHinted = ds.hint("myHint", 100, true)
-val plan = dsHinted.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 'UnresolvedHint myHint, [100, true]
-01 +- Range (0, 3, step=1, splits=Some(8))
-----
-
-NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers link:spark-sql-QueryExecution.adoc#analyzed[analysis phase] that executes link:spark-sql-LogicalPlan-Command.adoc[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
-
-[source, scala]
-----
-// FIXME Demo with UnresolvedHint
-----
 
 === [[intersect]] `intersect` Typed Transformation
 

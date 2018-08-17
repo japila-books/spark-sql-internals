@@ -11,6 +11,14 @@ NOTE: Basic actions are the methods in the `Dataset` Scala class that are groupe
 | Action
 | Description
 
+| <<cache, cache>>
+a| Caches a Dataset
+
+[source, scala]
+----
+cache(): this.type
+----
+
 | <<checkpoint, checkpoint>>
 a| Checkpoints the Dataset in a reliable way
 
@@ -20,20 +28,12 @@ checkpoint(): Dataset[T]
 checkpoint(eager: Boolean): Dataset[T]
 ----
 
-| <<createTempView, createTempView>>
+| <<columns, columns>>
 a|
 
 [source, scala]
 ----
-createTempView(viewName: String): Unit
-----
-
-| <<createOrReplaceTempView, createOrReplaceTempView>>
-a|
-
-[source, scala]
-----
-createOrReplaceTempView(viewName: String): Unit
+columns: Array[String]
 ----
 
 | <<createGlobalTempView, createGlobalTempView>>
@@ -52,6 +52,30 @@ a|
 createOrReplaceGlobalTempView(viewName: String): Unit
 ----
 
+| <<createOrReplaceTempView, createOrReplaceTempView>>
+a|
+
+[source, scala]
+----
+createOrReplaceTempView(viewName: String): Unit
+----
+
+| <<createTempView, createTempView>>
+a|
+
+[source, scala]
+----
+createTempView(viewName: String): Unit
+----
+
+| <<dtypes, dtypes>>
+a|
+
+[source, scala]
+----
+dtypes: Array[(String, String)]
+----
+
 | <<explain, explain>>
 a| Displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
 
@@ -59,6 +83,30 @@ a| Displays the logical and physical plans (with optional cost and codegen summa
 ----
 explain(): Unit
 explain(extended: Boolean): Unit
+----
+
+| <<hint, hint>>
+a|
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+| <<inputFiles, inputFiles>>
+a|
+
+[source, scala]
+----
+inputFiles: Array[String]
+----
+
+| <<isLocal, isLocal>>
+a|
+
+[source, scala]
+----
+isLocal: Boolean
 ----
 
 | <<localCheckpoint, localCheckpoint>>
@@ -78,7 +126,37 @@ a| Persists a Dataset
 persist(): this.type
 persist(newLevel: StorageLevel): this.type
 ----
+
+| <<printSchema, printSchema>>
+a|
+
+[source, scala]
+----
+printSchema(): Unit
+----
+
+| <<schema, schema>>
+a|
+
+[source, scala]
+----
+schema: StructType
+----
 |===
+
+=== [[cache]] Caching Dataset -- `cache` Basic Action
+
+[source, scala]
+----
+cache(): this.type
+----
+
+`cache` merely executes the no-argument <<spark-sql-dataset-operators.adoc#persist, persist>> basic action.
+
+[source, scala]
+----
+val ds = spark.range(5).cache
+----
 
 === [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Basic Action
 
@@ -197,6 +275,39 @@ Range (0, 10, step=1, splits=Some(8))
 
 == Physical Plan ==
 *Range (0, 10, step=1, splits=Some(8))
+----
+
+=== [[hint]] Specifying Hint -- `hint` Typed Transformation
+
+[source, scala]
+----
+hint(name: String, parameters: Any*): Dataset[T]
+----
+
+`hint` operator is part of link:spark-sql-hint-framework.adoc[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
+
+Internally, `hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] of a `Dataset`).
+
+[source, scala]
+----
+val ds = spark.range(3)
+val plan = ds.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 Range (0, 3, step=1, splits=Some(8))
+
+// Attach a hint
+val dsHinted = ds.hint("myHint", 100, true)
+val plan = dsHinted.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'UnresolvedHint myHint, [100, true]
+01 +- Range (0, 3, step=1, splits=Some(8))
+----
+
+NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers link:spark-sql-QueryExecution.adoc#analyzed[analysis phase] that executes link:spark-sql-LogicalPlan-Command.adoc[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
+
+[source, scala]
+----
+// FIXME Demo with UnresolvedHint
 ----
 
 === [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Basic Action

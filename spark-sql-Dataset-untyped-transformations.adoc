@@ -17,9 +17,8 @@ a|
 [source, scala]
 ----
 agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
-agg(exprs: Map[String, String]): DataFrame
-agg(exprs: java.util.Map[String, String]): DataFrame
 agg(expr: Column, exprs: Column*): DataFrame
+agg(exprs: Map[String, String]): DataFrame
 ----
 
 | <<apply, apply>>
@@ -168,9 +167,8 @@ withColumnRenamed(existingName: String, newName: String): DataFrame
 [source, scala]
 ----
 agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
-agg(exprs: Map[String, String]): DataFrame
-agg(exprs: java.util.Map[String, String]): DataFrame
 agg(expr: Column, exprs: Column*): DataFrame
+agg(exprs: Map[String, String]): DataFrame
 ----
 
 `agg`...FIXME

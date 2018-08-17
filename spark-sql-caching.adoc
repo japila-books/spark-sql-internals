@@ -140,20 +140,6 @@ SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to 
 
 Internally, `CACHE TABLE` becomes link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] runnable command that...FIXME
 
-=== [[cache]] Caching Dataset -- `cache` Method
-
-[source, scala]
-----
-cache(): this.type
-----
-
-`cache` merely executes the no-argument <<spark-sql-dataset-operators.adoc#persist, persist>> basic action.
-
-[source, scala]
-----
-val ds = spark.range(5).cache
-----
-
 === [[unpersist]] Unpersisting Dataset -- `unpersist` Method
 
 [source, scala]
