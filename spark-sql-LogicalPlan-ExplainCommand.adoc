@@ -58,10 +58,6 @@ EXPLAIN LOGICAL show tables
 [[output]]
 The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `ExplainCommand` is...FIXME
 
-=== [[codegenString]] `codegenString` Attribute
-
-CAUTION: FIXME
-
 === [[creating-instance]] Creating ExplainCommand Instance
 
 `ExplainCommand` takes the following when created:

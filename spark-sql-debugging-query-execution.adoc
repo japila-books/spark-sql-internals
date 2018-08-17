@@ -1,43 +1,108 @@
 == Debugging Query Execution
 
-`debug` package object contains tools for *debugging query execution* that you can use to do the full analysis of your link:spark-sql-Dataset.adoc[structured queries] (i.e. `Datasets`).
+`debug` Scala package object contains <<methods, tools>> for *debugging query execution*, i.e. the full analysis of structured queries (as <<spark-sql-Dataset.adoc#, Datasets>>).
 
-NOTE: Let's make it clear -- they are methods, _my dear_.
-
-The methods are in `org.apache.spark.sql.execution.debug` package and work on your `Datasets` and link:spark-sql-SparkSession.adoc[SparkSession].
-
-CAUTION: FIXME Expand on the `SparkSession` part.
-
-[source, scala]
-----
-debug()
-debugCodegen()
-----
-
-Import the package and do the full analysis using <<debug, debug>> or <<debugCodegen, debugCodegen>> methods.
-
-=== [[debug]] `debug` Method
+The methods are in `org.apache.spark.sql.execution.debug` package. Import the package to do the full analysis of a structured query using <<debug, debug>> or <<debugCodegen, debugCodegen>> methods.
 
 [source, scala]
 ----
 import org.apache.spark.sql.execution.debug._
 
-scala> spark.range(10).where('id === 4).debug
+val q: DataFrame = ...
+q.debug
+q.debugCodegen
+----
+
+[[methods]]
+.debug Methods
+[cols="1,3",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<debug, debug>>
+a| Debugging a structured query
+
+[source, scala]
+----
+debug(): Unit
+----
+
+| <<debugCodegen, debugCodegen>>
+a| *"Debugging" Codegen* -- Displays the Java source code generated for a structured query in whole-stage code generation (i.e. the output of each <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegen subtree>>).
+
+[source, scala]
+----
+debugCodegen(): Unit
+----
+|===
+
+[[DebugQuery]]
+[[query]]
+`debug` package object defines `DebugQuery` Scala implicit class that extends `Dataset[_]` Scala type with the <<methods, debug methods>>.
+
+[source, scala]
+----
+implicit class DebugQuery(query: Dataset[_]) {
+  def debug(): Unit = ...
+  def debugCodegen(): Unit = ...
+}
+----
+
+TIP: Read up on https://docs.scala-lang.org/overviews/core/implicit-classes.html[Implicit Classes] in the official documentation of the Scala programming language.
+
+=== [[debug]] Debugging Dataset -- `debug` Method
+
+[source, scala]
+----
+debug(): Unit
+----
+
+`debug` requests the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>>.
+
+`debug` <<spark-sql-catalyst-TreeNode.adoc#transform, transforms>> the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.adoc#, DebugExec>> physical operator for every physical operator.
+
+`debug` requests the query plan to <<spark-sql-SparkPlan.adoc#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
+
+```
+Results returned: [count]
+```
+
+In the end, `debug` requests every `DebugExec` physical operator (in the query plan) to <<spark-sql-SparkPlan-DebugExec.adoc#dumpStats, dumpStats>>.
+
+[source, scala]
+----
+val q = spark.range(10).where('id === 4)
+
+scala> :type q
+org.apache.spark.sql.Dataset[Long]
+
+// Extend Dataset[Long] with debug and debugCodegen methods
+import org.apache.spark.sql.execution.debug._
+
+scala> q.debug
 Results returned: 1
 == WholeStageCodegen ==
 Tuples output: 1
  id LongType: {java.lang.Long}
-== Filter (id#25L = 4) ==
+== Filter (id#0L = 4) ==
 Tuples output: 0
  id LongType: {}
-== Range (0, 10, splits=8) ==
+== Range (0, 10, step=1, splits=8) ==
 Tuples output: 0
  id LongType: {}
 ----
 
 === [[debugCodegen]] Displaying Java Source Code Generated for Structured Query in Whole-Stage Code Generation ("Debugging" Codegen) -- `debugCodegen` Method
 
-You use `debugCodegen` method to review the link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code.
+[source, scala]
+----
+debugCodegen(): Unit
+----
+
+`debugCodegen` requests the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>>.
+
+In the end, `debugCodegen` simply <<codegenString, codegenString>> the query plan and prints it out to the standard output.
 
 [source, scala]
 ----
@@ -82,17 +147,6 @@ Generated code:
 ----
 ====
 
-=== [[codegen]] `codegen` Method
-
-[source, scala]
-----
-codegen(): Unit
-----
-
-`codegen`...FIXME
-
-NOTE: `codegen` is used when...FIXME
-
 === [[codegenToSeq]] `codegenToSeq` Method
 
 [source, scala]
@@ -103,3 +157,14 @@ codegenToSeq(): Seq[(String, String)]
 `codegenToSeq`...FIXME
 
 NOTE: `codegenToSeq` is used when...FIXME
+
+=== [[codegenString]] `codegenString` Method
+
+[source, scala]
+----
+codegenString(plan: SparkPlan): String
+----
+
+`codegenString`...FIXME
+
+NOTE: `codegenString` is used when...FIXME
