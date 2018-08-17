@@ -271,14 +271,6 @@ a|
 where(condition: Column): Dataset[T]
 where(conditionExpr: String): Dataset[T]
 ----
-
-| <<withWatermark, withWatermark>>
-a|
-
-[source, scala]
-----
-withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
-----
 |===
 
 === [[as]][[as-alias]] `as` Typed Transformation
@@ -767,7 +759,7 @@ where(conditionExpr: String): Dataset[T]
 
 `where` is simply a synonym of the <<filter, filter>> operator, i.e. passes the input parameters along to `filter`.
 
-=== [[withWatermark]] Creating Streaming Dataset with EventTimeWatermark Logical Operator -- `withWatermark` Typed Transformation
+=== [[withWatermark]] Creating Streaming Dataset with EventTimeWatermark Logical Operator -- `withWatermark` Streaming Typed Transformation
 
 [source, scala]
 ----

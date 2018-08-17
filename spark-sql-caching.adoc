@@ -139,16 +139,3 @@ res0: Boolean = false
 SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to link:spark-sql-Catalog.adoc#cacheTable[caching the table].
 
 Internally, `CACHE TABLE` becomes link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] runnable command that...FIXME
-
-=== [[unpersist]] Unpersisting Dataset -- `unpersist` Method
-
-[source, scala]
-----
-unpersist(blocking: Boolean): this.type
-----
-
-`unpersist` uncache the `Dataset` possibly by `blocking` the call.
-
-Internally, `unpersist` requests `CacheManager` link:spark-cachemanager.adoc#uncacheQuery[to uncache the query].
-
-CAUTION: FIXME

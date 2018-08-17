@@ -136,15 +136,6 @@ a|
 stat: DataFrameStatFunctions
 ----
 
-| <<toDF, toDF>>
-a|
-
-[source, scala]
-----
-toDF(): DataFrame
-toDF(colNames: String*): DataFrame
-----
-
 | <<withColumn, withColumn>>
 a|
 
@@ -351,20 +342,6 @@ stat: DataFrameStatFunctions
 ----
 
 `stat` simply creates a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> to work with statistic functions.
-
-=== [[toDF]] Converting Typed Dataset to Untyped DataFrame -- `toDF` Untyped Transformation
-
-[source, scala]
-----
-toDF(): DataFrame
-toDF(colNames: String*): DataFrame
-----
-
-`toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
-
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
-
-CAUTION: FIXME Describe `toDF(colNames: String*)`
 
 === [[withColumn]] `withColumn` Untyped Transformation
 

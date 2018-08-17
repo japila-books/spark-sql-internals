@@ -135,12 +135,54 @@ a|
 printSchema(): Unit
 ----
 
+| <<rdd, rdd>>
+a|
+
+[source, scala]
+----
+rdd: RDD[T]
+----
+
 | <<schema, schema>>
 a|
 
 [source, scala]
 ----
 schema: StructType
+----
+
+| <<storageLevel, storageLevel>>
+a|
+
+[source, scala]
+----
+storageLevel: StorageLevel
+----
+
+| <<toDF, toDF>>
+a|
+
+[source, scala]
+----
+toDF(): DataFrame
+toDF(colNames: String*): DataFrame
+----
+
+| <<unpersist, unpersist>>
+a|
+
+[source, scala]
+----
+unpersist(): this.type
+unpersist(blocking: Boolean): this.type
+----
+
+| <<write, write>>
+a|
+
+[source, scala]
+----
+write: DataFrameWriter[T]
 ----
 |===
 
@@ -277,7 +319,7 @@ Range (0, 10, step=1, splits=Some(8))
 *Range (0, 10, step=1, splits=Some(8))
 ----
 
-=== [[hint]] Specifying Hint -- `hint` Typed Transformation
+=== [[hint]] Specifying Hint -- `hint` Basic Action
 
 [source, scala]
 ----
@@ -353,3 +395,87 @@ persist(newLevel: StorageLevel): this.type
 Internally, `persist` requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache the structured query] (that is accessible through link:spark-sql-SharedState.adoc[SharedState] of the current link:spark-sql-SparkSession.adoc[SparkSession]).
 
 CAUTION: FIXME
+
+=== [[rdd]] Generating RDD of Internal Binary Rows -- `rdd` Basic Action
+
+[source, scala]
+----
+rdd: RDD[T]
+----
+
+Whenever you are in need to convert a `Dataset` into a `RDD`, executing `rdd` method gives you the RDD of the proper input object type (not link:spark-sql-DataFrame.adoc#features[Row as in DataFrames]) that sits behind the `Dataset`.
+
+[source, scala]
+----
+scala> val rdd = tokens.rdd
+rdd: org.apache.spark.rdd.RDD[Token] = MapPartitionsRDD[11] at rdd at <console>:30
+----
+
+Internally, it looks link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the link:spark-sql-DataType.adoc[DataType] of the result of evaluating the expression.
+
+NOTE: A deserializer expression is used to decode an link:spark-sql-InternalRow.adoc[InternalRow] to an object of type `T`. See link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder].
+
+It then executes a link:spark-sql-LogicalPlan-DeserializeToObject.adoc[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
+
+NOTE: It is a lazy operation that "produces" a `RDD[T]`.
+
+=== [[schema]] Accessing Schema -- `schema` Basic Action
+
+A `Dataset` has a *schema*.
+
+[source, scala]
+----
+schema: StructType
+----
+
+[TIP]
+====
+You may also use the following methods to learn about the schema:
+
+* `printSchema(): Unit`
+* <<spark-sql-Dataset-basic-actions.adoc#explain, explain>>
+====
+
+=== [[toDF]] Converting Typed Dataset to Untyped DataFrame -- `toDF` Basic Action
+
+[source, scala]
+----
+toDF(): DataFrame
+toDF(colNames: String*): DataFrame
+----
+
+`toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
+
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
+
+CAUTION: FIXME Describe `toDF(colNames: String*)`
+
+=== [[unpersist]] Unpersisting Dataset -- `unpersist` Basic Action
+
+[source, scala]
+----
+unpersist(): this.type
+unpersist(blocking: Boolean): this.type
+----
+
+`unpersist` uncache the `Dataset` possibly by `blocking` the call.
+
+Internally, `unpersist` requests `CacheManager` link:spark-cachemanager.adoc#uncacheQuery[to uncache the query].
+
+CAUTION: FIXME
+
+=== [[write]] Accessing DataFrameWriter (to Describe Writing Dataset) -- `write` Basic Action
+
+[source, scala]
+----
+write: DataFrameWriter[T]
+----
+
+`write` gives link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for records of type `T`.
+
+[source, scala]
+----
+import org.apache.spark.sql.{DataFrameWriter, Dataset}
+val ints: Dataset[Int] = (0 to 5).toDS
+val writer: DataFrameWriter[Int] = ints.write
+----
