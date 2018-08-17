@@ -300,7 +300,7 @@ In the end, `explain` goes over the `InternalRow` records and converts them to l
 
 NOTE: `explain` "converts" an `InternalRow` record to a line using link:spark-sql-InternalRow.adoc#getString[getString] at position `0`.
 
-TIP: If you are serious about query debugging you could also use the link:spark-sql-debugging-execution.adoc[Debugging Query Execution facility].
+TIP: If you are serious about query debugging you could also use the link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution facility].
 
 [source, scala]
 ----

@@ -26,7 +26,7 @@ Generated code:
 
 [TIP]
 ====
-Consider using link:spark-sql-debugging-execution.adoc[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
+Consider using link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
 ====
 
 [source, scala]
@@ -314,7 +314,7 @@ In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenCon
 
 * `WholeStageCodegenExec` is <<doExecute, executed>>
 
-* Debugging Query Execution is requested to <<spark-sql-debugging-execution.adoc#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
+* Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.adoc#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
 ====
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method

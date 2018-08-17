@@ -550,7 +550,7 @@
 . link:spark-sql-performance-tuning.adoc[Spark SQL's Performance Tuning Tips and Tricks (aka Case Studies)]
 .. link:spark-sql-performance-tuning-groupBy-aggregation.adoc[Number of Partitions for groupBy Aggregation]
 
-. link:spark-sql-debugging-execution.adoc[Debugging Query Execution]
+. link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution]
 
 . link:spark-sql-bucketing.adoc[Bucketing]
 .. link:spark-sql-BucketSpec.adoc[BucketSpec]

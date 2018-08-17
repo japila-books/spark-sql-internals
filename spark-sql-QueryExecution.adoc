@@ -71,7 +71,7 @@ NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers
 
 * `CacheManager` is requested to <<spark-sql-CacheManager.adoc#cacheQuery, cacheQuery>> (e.g. for <<spark-sql-dataset-operators.adoc#persist, Dataset.persist>> basic action) or <<spark-sql-CacheManager.adoc#recacheByCondition, recacheByCondition>>
 
-* `QueryExecution` is requested for the `RDD[InternalRow]` of a structured query (in the <<toRdd, toRdd>> query execution phase), <<simpleString, simpleString>>, <<toString, toString>>, <<stringWithStats, stringWithStats>>, <<spark-sql-debugging-execution.adoc#codegen, codegen>>, <<spark-sql-debugging-execution.adoc#codegenToSeq, codegenToSeq>>, and the <<hiveResultString, Hive-compatible output format>>
+* `QueryExecution` is requested for the `RDD[InternalRow]` of a structured query (in the <<toRdd, toRdd>> query execution phase), <<simpleString, simpleString>>, <<toString, toString>>, <<stringWithStats, stringWithStats>>, <<spark-sql-debugging-query-execution.adoc#codegen, codegen>>, <<spark-sql-debugging-query-execution.adoc#codegenToSeq, codegenToSeq>>, and the <<hiveResultString, Hive-compatible output format>>
 
 * `SQLExecution` is requested to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute a Dataset action under a new execution id>>
 
