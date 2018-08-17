@@ -169,7 +169,7 @@ toDF(colNames: String*): DataFrame
 ----
 
 | <<unpersist, unpersist>>
-a|
+a| Unpersists a cached Dataset
 
 [source, scala]
 ----
@@ -450,7 +450,7 @@ Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Datas
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 
-=== [[unpersist]] Unpersisting Dataset -- `unpersist` Basic Action
+=== [[unpersist]] Unpersisting Cached Dataset -- `unpersist` Basic Action
 
 [source, scala]
 ----

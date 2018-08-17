@@ -1,20 +1,37 @@
 == Dataset Caching and Persistence
 
 [[operators]]
-.Caching Operators
+.Caching Operators (Basic Actions)
 [width="100%",cols="1,2",options="header"]
 |===
 | Operator
 | Description
 
-| <<cache, cache>>
-|
+| <<spark-sql-dataset-operators.adoc#cache, cache>>
+a| [[cache]] Basic action to cache a Dataset
+
+[source, scala]
+----
+cache(): this.type
+----
 
 | <<spark-sql-dataset-operators.adoc#persist, persist>>
-|
+a| [[persist]] Basic action to persist a Dataset
 
-| <<unpersist, unpersist>>
-|
+[source, scala]
+----
+persist(): this.type
+persist(newLevel: StorageLevel): this.type
+----
+
+| <<spark-sql-dataset-operators.adoc#unpersist, unpersist>>
+a| [[unpersist]] Basic action to unpersist a cached Dataset
+
+[source, scala]
+----
+unpersist(): this.type
+unpersist(blocking: Boolean): this.type
+----
 |===
 
 ```

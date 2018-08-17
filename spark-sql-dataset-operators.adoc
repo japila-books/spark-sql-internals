@@ -639,7 +639,7 @@ unionByName(other: Dataset[T]): Dataset[T]
 ----
 
 | <<spark-sql-Dataset-basic-actions.adoc#unpersist, unpersist>>
-a| [[unpersist]] Basic action
+a| [[unpersist]] Basic action to unpersist a cached Dataset
 
 [source, scala]
 ----
