@@ -26,7 +26,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
+NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> for reading.
 
 `createRelation` creates a `JDBCPartitioningInfo` (using link:spark-sql-JDBCOptions.adoc[JDBCOptions] and the input `parameters` that correspond to the link:spark-sql-JDBCOptions.adoc#options[Options for JDBC Data Source]).
 

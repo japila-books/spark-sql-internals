@@ -1,6 +1,6 @@
 == [[JDBCRelation]] JDBCRelation -- Relation with Inserting or Overwriting Data, Column Pruning and Filter Pushdown
 
-`JDBCRelation` is a <<BaseRelation, relation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
+`JDBCRelation` is a <<BaseRelation, BaseRelation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
 
 [[BaseRelation]]
 As a <<spark-sql-BaseRelation.adoc#,BaseRelation>>, `JDBCRelation` defines the <<schema, schema of tuples (data)>> and the <<sqlContext, SQLContext>>.
@@ -15,7 +15,7 @@ As a <<spark-sql-PrunedFilteredScan.adoc#,PrunedFilteredScan>>, `JDBCRelation` s
 
 * `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#jdbc[load data from an external table using JDBC]
 
-* `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a BaseRelation]
+* `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a BaseRelation for reading data from a JDBC table]
 
 [[toString]]
 When requested for a human-friendly text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
@@ -91,4 +91,4 @@ buildScan(requiredColumns: Array[String], filters: Array[Filter]): RDD[Row]
 
 NOTE: `buildScan` is part of <<spark-sql-PrunedFilteredScan.adoc#buildScan, PrunedFilteredScan Contract>> to build a distributed data scan (as a `RDD[Row]`) with support for column pruning and filter pushdown.
 
-`buildScan`...FIXME
+`buildScan` uses the `JDBCRDD` object to <<spark-sql-JDBCRDD.adoc#scanTable, create a RDD[Row] for a distributed data scan>>.
