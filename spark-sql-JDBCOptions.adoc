@@ -113,11 +113,11 @@ Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRel
 
 ! `numPartitions`
 !
-a! [[numPartitions]] Number of partitions
+a! [[numPartitions]] Number of partitions to use for loading or saving data
 
 Used when:
 
-* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider, create a BaseRelation>> for reading
+* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider, loading data from a table using JDBC>>
 
 * `JdbcUtils` is requested to <<spark-sql-JdbcUtils.adoc#saveTable, saveTable>>
 

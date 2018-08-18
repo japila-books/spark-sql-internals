@@ -17,7 +17,7 @@ val table = spark.read.jdbc(...)
 val table = spark.read.format("jdbc").load(...)
 ----
 
-=== [[createRelation-RelationProvider]] Creating BaseRelation -- `createRelation` Method (from RelationProvider)
+=== [[createRelation-RelationProvider]] Loading Data from Table Using JDBC -- `createRelation` Method (from RelationProvider)
 
 [source, scala]
 ----

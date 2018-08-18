@@ -538,7 +538,7 @@ jdbc(
   connectionProperties: Properties): DataFrame
 ----
 
-`jdbc` loads data from an external table using JDBC and represents it as an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+`jdbc` loads data from an external table using the <<spark-sql-jdbc.adoc#, JDBC data source>>.
 
 Internally, `jdbc` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[JDBCOptions] from the input `url`, `table` and `extraOptions` with `connectionProperties`.
 
@@ -548,7 +548,7 @@ In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql
 
 [NOTE]
 ====
-`jdbc` does not support a custom <<schema, schema>> and reports an `AnalysisException` if defined:
+`jdbc` does not support a custom <<schema, schema>> and throws an `AnalysisException` if defined:
 
 ```
 User specified schema not supported with `[jdbc]`
