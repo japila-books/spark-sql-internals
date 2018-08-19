@@ -163,7 +163,6 @@ Generated code:
 
 | <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>>
 | [[WholeStageCodegenExec]]
-
 |===
 
 === [[supportCodegen]] `supportCodegen` Flag

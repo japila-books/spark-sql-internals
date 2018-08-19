@@ -277,19 +277,21 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] 
 
 Otherwise, `apply` does nothing at all (i.e. passes the input physical plan through unchanged).
 
-=== [[insertWholeStageCodegen]] Creating WholeStageCodegenExec for Physical Operator with Java Code Generation Support -- `insertWholeStageCodegen` Internal Method
+=== [[insertWholeStageCodegen]] Inserting WholeStageCodegenExec Physical Operator For Codegen Stages -- `insertWholeStageCodegen` Internal Method
 
 [source, scala]
 ----
 insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 ----
 
-`insertWholeStageCodegen` is the <<apply, main>> method that `CollapseCodegenStages` physical optimization applies to the input physical `plan` recursively while walking down the `plan` tree and inserting <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator.
+Internally, `insertWholeStageCodegen` branches off per <<spark-sql-SparkPlan.adoc#, physical operator>>:
 
-Internally, `insertWholeStageCodegen` branches off per <<spark-sql-SparkPlan.adoc#, physical operator>>.
+. For physical operators with a single <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attribute>> of type `ObjectType`, `insertWholeStageCodegen` requests the operator for the <<spark-sql-catalyst-TreeNode.adoc#children, child>> physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
 [[insertWholeStageCodegen-CodegenSupport]]
-If a physical operator supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> and meets the <<supportCodegen, supportCodegen>> requirements, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the input `plan` operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator.
+. For physical operators that support <<spark-sql-CodegenSupport.adoc#, Java code generation>> and meets the <<supportCodegen, additional requirements for codegen>>, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator.
+
+. For any other physical operators, `insertWholeStageCodegen` requests the operator for the <<spark-sql-catalyst-TreeNode.adoc#children, child>> physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
 [source, scala]
 ----
@@ -300,14 +302,12 @@ If a physical operator supports <<spark-sql-CodegenSupport.adoc#, Java code gene
 // Step 4. "plan.output.length == 1 && plan.output.head.dataType.isInstanceOf[ObjectType]"
 ----
 
-For any other physical operators, `insertWholeStageCodegen` requests the operator for its <<spark-sql-catalyst-TreeNode.adoc#children, child>> physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them.
-
 [[insertWholeStageCodegen-ObjectType]]
-NOTE: `insertWholeStageCodegen` explicitly skips physical operators with a single-attribute link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] with the type of the attribute being `ObjectType` type.
+NOTE: `insertWholeStageCodegen` explicitly skips physical operators with a single-attribute <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> with the type of the attribute being `ObjectType` type.
 
 [NOTE]
 ====
-`insertWholeStageCodegen` is used recursively when `CollapseCodegenStages`:
+`insertWholeStageCodegen` is used recursively when `CollapseCodegenStages` is requested for the following:
 
 * <<apply, Executes>> (and walks down a physical plan)
 
