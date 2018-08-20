@@ -1,11 +1,12 @@
 == [[RuleExecutor]] RuleExecutor -- Tree Transformation Rule Executor
 
-`RuleExecutor` <<execute, executes>> a collection of link:spark-sql-catalyst-Rule.adoc[rules] (as <<batch, batches>>) to transform a link:spark-sql-catalyst-TreeNode.adoc[TreeNode].
+`RuleExecutor` <<execute, executes>> a <<batches, collection of batches of rules>> to transform a link:spark-sql-catalyst-TreeNode.adoc[TreeNode].
 
 NOTE: Available `TreeNodes` are eithe link:spark-sql-LogicalPlan.adoc[logical] or link:spark-sql-SparkPlan.adoc[physical] operators.
 
 `RuleExecutor` defines the protected `batches` method that implementations are supposed to define with the collection of <<batch, Batch>> instances to <<execute, execute>>.
 
+[[batches]]
 [source, scala]
 ----
 protected def batches: Seq[Batch]
@@ -56,9 +57,9 @@ Otherwise, when the rules had no changes to a plan, you should see the following
 TRACE HiveSessionStateBuilder$$anon$1: Batch [batchName] has no effect.
 ```
 
-=== [[batch]] Batch -- Collection of Rules
+=== [[batch]][[Batch]] Batch -- Collection of Rules
 
-`Batch` in Catalyst is a named collection of link:spark-sql-catalyst-Rule.adoc[optimization rules] with a strategy, e.g.
+Catalyst `Batch` is a named collection of link:spark-sql-catalyst-Rule.adoc[rules] with a strategy, e.g.
 
 [source, scala]
 ----

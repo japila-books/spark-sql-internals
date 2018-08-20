@@ -1,6 +1,6 @@
 == [[TreeNode]] TreeNode -- Node in Catalyst Tree
 
-`TreeNode` is the <<contract, contract>> of <<implementations, nodes>> in <<spark-sql-catalyst.adoc#, Catalyst>> tree with zero or more <<children, children>>.
+`TreeNode` is the <<contract, contract>> of <<implementations, nodes>> in <<spark-sql-catalyst.adoc#, Catalyst>> tree with <<nodeName, name>> and zero or more <<children, children>>.
 
 [[contract]]
 [source, scala]
@@ -266,8 +266,6 @@ withNewChildren(newChildren: Seq[BaseType]): BaseType
 
 Used when `TreeNode` is requested for <<generateTreeString, generateTreeString>> (with `verbose` flag enabled) and <<verboseStringWithSuffix, verboseStringWithSuffix>>
 |===
-
-`TreeNode` has a <<nodeName, node name>>.
 
 [[implementations]]
 .TreeNodes
