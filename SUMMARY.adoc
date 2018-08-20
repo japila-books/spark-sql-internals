@@ -567,11 +567,14 @@
 == Catalyst -- Tree Manipulation Framework
 
 . link:spark-sql-catalyst.adoc[Catalyst -- Tree Manipulation Framework]
+
 . link:spark-sql-catalyst-TreeNode.adoc[TreeNode -- Node in Catalyst Tree]
-. link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan -- Structured Query Plan]
+.. link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan -- Structured Query Plan]
+
+. link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor Contract -- Tree Transformation Rule Executor]
+.. link:spark-sql-catalyst-Rule.adoc[Catalyst Rule -- Named Transformation of TreeNodes]
+
 . link:spark-sql-catalyst-QueryPlanner.adoc[QueryPlanner -- Converting Logical Plan to Physical Trees]
-. link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor -- Tree Transformation Rule Executor]
-. link:spark-sql-catalyst-Rule.adoc[Catalyst Rule -- Named Transformation of TreeNodes]
 . link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy]
 
 == Tungsten Execution Backend

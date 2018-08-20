@@ -1,27 +1,61 @@
-== [[RuleExecutor]] RuleExecutor -- Tree Transformation Rule Executor
+== [[RuleExecutor]] RuleExecutor Contract -- Tree Transformation Rule Executor
 
-`RuleExecutor` <<execute, executes>> a <<batches, collection of batches of rules>> to transform a link:spark-sql-catalyst-TreeNode.adoc[TreeNode].
+`RuleExecutor` is the <<contract, base>> of <<extensions, rule executors>> that are responsible for <<execute, executing>> a collection of <<batches, batches (of rules)>> to transform a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>>.
 
-NOTE: Available `TreeNodes` are eithe link:spark-sql-LogicalPlan.adoc[logical] or link:spark-sql-SparkPlan.adoc[physical] operators.
-
-`RuleExecutor` defines the protected `batches` method that implementations are supposed to define with the collection of <<batch, Batch>> instances to <<execute, execute>>.
-
-[[batches]]
+[[contract]]
 [source, scala]
 ----
-protected def batches: Seq[Batch]
+package org.apache.spark.sql.catalyst.rules
+
+abstract class RuleExecutor[TreeType <: TreeNode[_]] {
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
+  protected def batches: Seq[Batch]
+}
 ----
 
-=== [[execute]] Applying Rules to Tree -- `execute` Method
+[[TreeType]]
+NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `RuleExecutor` can be <<execute, execute>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, <<spark-sql-SparkPlan.adoc#, SparkPlan>> or <<spark-sql-Expression.adoc#, Expression>> or a combination thereof.
+
+.RuleExecutor Contract
+[cols="1m,2",options="header",width="100%"]
+|===
+| Property
+| Description
+
+| batches
+| [[batches]] Sequence of <<Batch, rule batches>>, i.e. a sequence of a collection of <<spark-sql-catalyst-Rule.adoc#, rules>> with a name and a <<Strategy, strategy>>
+
+Used when `RuleExecutor` is requested to <<execute, execute>>.
+|===
+
+[[extensions]]
+.RuleExecutors (Direct Implementations)
+[cols="1,2",options="header",width="100%"]
+|===
+| RuleExecutor
+| Description
+
+| <<spark-sql-Analyzer.adoc#, Analyzer>>
+| [[Analyzer]]
+
+| `ExpressionCanonicalizer`
+| [[ExpressionCanonicalizer]]
+
+| <<spark-sql-Optimizer.adoc#, Optimizer>>
+| [[Optimizer]]
+|===
+
+=== [[execute]] Applying Rule Batches to TreeNode -- `execute` Method
 
 [source, scala]
 ----
 execute(plan: TreeType): TreeType
 ----
 
-`execute` iterates over <<batch, batches>> and applies rules sequentially to the input `plan`.
+`execute` iterates over <<batches, rule batches>> and applies rules sequentially to the input `plan`.
 
-It tracks the number of iterations and the time of executing each rule (with a plan).
+`execute` tracks the number of iterations and the time of executing each rule (with a plan).
 
 When a rule changes a plan, you should see the following TRACE message in the logs:
 
@@ -57,19 +91,48 @@ Otherwise, when the rules had no changes to a plan, you should see the following
 TRACE HiveSessionStateBuilder$$anon$1: Batch [batchName] has no effect.
 ```
 
-=== [[batch]][[Batch]] Batch -- Collection of Rules
+=== [[Batch]] Rule Batch -- Collection of Rules
 
-Catalyst `Batch` is a named collection of link:spark-sql-catalyst-Rule.adoc[rules] with a strategy, e.g.
+`Batch` is a named collection of <<spark-sql-catalyst-Rule.adoc#, rules>> with a <<Strategy, strategy>>.
+
+[[Batch-creating-instance]]
+`Batch` takes the following when created:
+
+* [[name]] Batch name
+* [[strategy]] <<Strategy, Strategy>>
+* [[rules]] Collection of <<spark-sql-catalyst-Rule.adoc#, rules>>
+
+=== [[Strategy]] Batch Execution Strategy
+
+`Strategy` is the base of the batch execution strategies that indicate the maximum number of executions (aka _maxIterations_).
 
 [source, scala]
 ----
-Batch("Substitution", fixedPoint,
-  CTESubstitution,
-  WindowsSubstitution,
-  EliminateUnions,
-  new SubstituteUnresolvedOrdinals(conf)),
+abstract class Strategy {
+  def maxIterations: Int
+}
 ----
 
-A `Strategy` can be `Once` or `FixedPoint` (with a number of iterations).
+.Strategies
+[cols="1,2",options="header",width="100%"]
+|===
+| Strategy
+| Description
 
-NOTE: `Once` strategy is a `FixedPoint` strategy with one iteration.
+| `Once`
+| [[Once]] A strategy that runs only once (with `maxIterations` as `1`)
+
+| `FixedPoint`
+| [[FixedPoint]] A strategy that runs until fix point (i.e. converge) or `maxIterations` times, whichever comes first
+|===
+
+=== [[isPlanIntegral]] `isPlanIntegral` Method
+
+[source, scala]
+----
+isPlanIntegral(plan: TreeType): Boolean
+----
+
+`isPlanIntegral` simply returns `true`.
+
+NOTE: `isPlanIntegral` is used exclusively when `RuleExecutor` is requested to <<execute, execute>>.
