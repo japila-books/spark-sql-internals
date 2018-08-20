@@ -1,6 +1,6 @@
 == [[Rule]] Catalyst Rule
 
-`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_) a link:spark-sql-catalyst-TreeNode.adoc[TreeNode].
+`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_) a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>>.
 
 [[TreeType]]
 NOTE: `TreeNode` can either be a link:spark-sql-Expression.adoc[Catalyst expression] or a link:spark-sql-catalyst-QueryPlan.adoc[query plan] (i.e. concrete link:spark-sql-LogicalPlan.adoc[logical] or link:spark-sql-SparkPlan.adoc[physical] plans).
