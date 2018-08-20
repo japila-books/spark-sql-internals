@@ -335,7 +335,14 @@
 
 === Logical Operators
 
-. link:spark-sql-LogicalPlan.adoc[LogicalPlan -- Logical Operator with Children and Expressions / Logical Query Plan]
+. link:spark-sql-LogicalPlan.adoc[LogicalPlan Contract -- Logical Operator with Children and Expressions / Logical Query Plan]
+. link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
+. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Data]
+. link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
+. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract]
+
+==== Concrete Logical Operators
+
 . link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
 . link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc[AlterViewAsCommand]
 . link:spark-sql-LogicalPlan-AnalysisBarrier.adoc[AnalysisBarrier]
@@ -343,9 +350,9 @@
 . link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
 . link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
 . link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand]
-. link:spark-sql-LogicalPlan-Command.adoc[Command]
 . link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 . link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
+. link:spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 . link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
 . link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand]
 . link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation]
@@ -378,7 +385,6 @@
 . link:spark-sql-LogicalPlan-Range.adoc[Range]
 . link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition and RepartitionByExpression]
 . link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
-. link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
 . link:spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc[SaveIntoDataSourceCommand]
 . link:spark-sql-LogicalPlan-Sort.adoc[Sort]
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
@@ -397,17 +403,28 @@
 . link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec Contract -- Leaf Physical Operators to Scan Over BaseRelation]
 . link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
 . link:spark-sql-ObjectConsumerExec.adoc[ObjectConsumerExec Contract -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema]
+. link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec Contract]
+. link:spark-sql-SparkPlan-Exchange.adoc[Exchange Contract]
 
-. link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec]
+. link:spark-sql-Projection.adoc[Projection Contract -- Functions to Produce InternalRow for InternalRow]
+.. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
+.. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
+.. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
+.. link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
+
+. link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
+
+==== Concrete Physical Operators
+
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
 . link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec]
 . link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
 . link:spark-sql-SparkPlan-CartesianProductExec.adoc[CartesianProductExec]
 . link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
 . link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
+. link:spark-sql-SparkPlan-DataWritingCommandExec.adoc[DataWritingCommandExec]
 . link:spark-sql-SparkPlan-DebugExec.adoc[DebugExec]
 . link:spark-sql-SparkPlan-DeserializeToObjectExec.adoc[DeserializeToObjectExec]
-. link:spark-sql-SparkPlan-Exchange.adoc[Exchange]
 . link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec]
 . link:spark-sql-SparkPlan-ExpandExec.adoc[ExpandExec]
 . link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
@@ -438,14 +455,6 @@
 .. link:spark-sql-AggregateProcessor.adoc[AggregateProcessor]
 .. link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame]
 . link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec]
-
-. link:spark-sql-Projection.adoc[Projection Contract -- Functions to Produce InternalRow for InternalRow]
-.. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
-.. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
-.. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
-.. link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
-
-. link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 
 === Logical Analysis Rules (Check, Evaluation, Conversion and Resolution)
 

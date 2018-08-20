@@ -1,4 +1,4 @@
-== [[LogicalPlan]] LogicalPlan -- Logical Relational Operator with Children and Expressions / Logical Query Plan
+== [[LogicalPlan]] LogicalPlan Contract -- Logical Relational Operator with Children and Expressions / Logical Query Plan
 
 `LogicalPlan` is a base Catalyst link:spark-sql-catalyst-QueryPlan.adoc[query plan] for *logical operators* to build a tree of logical operator nodes known as *logical query plan*.
 

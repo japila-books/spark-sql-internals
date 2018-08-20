@@ -1,6 +1,6 @@
-== [[CreateDataSourceTableAsSelectCommand]] CreateDataSourceTableAsSelectCommand Logical Command
+== [[CreateHiveTableAsSelectCommand]] CreateHiveTableAsSelectCommand Logical Command
 
-`CreateDataSourceTableAsSelectCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, logical command>> that <<run, FIXME>>.
+`CreateHiveTableAsSelectCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, logical command>> that <<run, FIXME>>.
 
 === [[run]] `run` Method
 

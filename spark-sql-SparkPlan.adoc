@@ -321,14 +321,18 @@ Internally, `executeBroadcast` calls <<doExecuteBroadcast, doExecuteBroadcast>> 
 
 NOTE: `executeBroadcast` is called in link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec], link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] and link:spark-sql-SparkPlan-ReusedExchangeExec.adoc[ReusedExchangeExec] physical operators.
 
-=== [[metrics]] `metrics` Internal Registry
+=== [[metrics]] Performance Metrics -- `metrics` Method
 
 [source, scala]
 ----
 metrics: Map[String, SQLMetric] = Map.empty
 ----
 
-`metrics` is a registry of supported link:spark-sql-SQLMetric.adoc[SQLMetrics] by their names.
+`metrics` returns the <<spark-sql-SQLMetric.adoc#, SQLMetrics>> by their names.
+
+By default, `metrics` contains no `SQLMetrics` (i.e. `Map.empty`).
+
+NOTE: `metrics` is used when...FIXME
 
 === [[executeTake]] Taking First N UnsafeRows -- `executeTake` Method
 

@@ -103,7 +103,7 @@ Used when...FIXME
 Used when...FIXME
 |===
 
-=== [[writeAndRead]] Writing DataFrame to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
+=== [[writeAndRead]] Writing Data to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
 [source, scala]
 ----

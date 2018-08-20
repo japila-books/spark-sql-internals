@@ -1,0 +1,108 @@
+== [[DataWritingCommand]] DataWritingCommand Contract -- Logical Commands That Write Data
+
+`DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.adoc#, Command contract>> for <<implementations, logical commands>> that write <<query, data>> to a relation when <<run, executed>>.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.execution.command
+
+trait DataWritingCommand extends Command {
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
+  def outputColumns: Seq[Attribute]
+  def query: LogicalPlan
+  def run(sparkSession: SparkSession, child: SparkPlan): Seq[Row]
+}
+----
+
+.DataWritingCommand Contract
+[cols="1m,2",options="header",width="100%"]
+|===
+| Property
+| Description
+
+| outputColumns
+| [[outputColumns]] Used when...FIXME
+
+| query
+| [[query]] <<spark-sql-LogicalPlan.adoc#, Logical query plan>> representing data to write (i.e. whose result will be inserted)
+
+Used when `DataWritingCommand` is requested for the <<spark-sql-LogicalPlan-Command.adoc#children, child nodes>>.
+
+| run
+a| [[run]]
+
+Used when:
+
+* `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#sideEffectResult, sideEffectResult>>
+
+* `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run, CreateDataSourceTableAsSelectCommand>> logical command is executed.)
+|===
+
+[[children]]
+When requested for the <<spark-sql-LogicalPlan-Command.adoc#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
+
+`DataWritingCommand` defines <<metrics, performance metrics>>.
+
+[[metrics]]
+.DataWritingCommand's Performance Metrics
+[cols="1,2,2",options="header",width="100%"]
+|===
+| Key
+| Name (in web UI)
+| Description
+
+| `numFiles`
+| number of written files
+| [[numFiles]]
+
+| `numOutputBytes`
+| bytes of written output
+| [[numOutputBytes]]
+
+| `numOutputRows`
+| number of output rows
+| [[numOutputRows]]
+
+| `numParts`
+| number of dynamic part
+| [[numParts]]
+|===
+
+The <<metrics, performance metrics>> are used when:
+
+* `DataWritingCommand` is requested to <<basicWriteJobStatsTracker, basicWriteJobStatsTracker>>
+
+* `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#metrics, metrics>>
+
+[[extensions]]
+.DataWritingCommands (Direct Implementations)
+[cols="1,2",options="header",width="100%"]
+|===
+| DataWritingCommand
+| Description
+
+| <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>>
+| [[CreateDataSourceTableAsSelectCommand]]
+
+| <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>>
+| [[CreateHiveTableAsSelectCommand]]
+
+| <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>
+| [[InsertIntoHadoopFsRelationCommand]]
+
+| <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#, SaveAsHiveFile>>
+| [[SaveAsHiveFile]]
+|===
+
+=== [[basicWriteJobStatsTracker]] `basicWriteJobStatsTracker` Method
+
+[source, scala]
+----
+basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
+----
+
+`basicWriteJobStatsTracker`...FIXME
+
+NOTE: `basicWriteJobStatsTracker` is used when...FIXME

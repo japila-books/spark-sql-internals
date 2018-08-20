@@ -1,0 +1,28 @@
+== [[DataWritingCommandExec]] DataWritingCommandExec Physical Operator
+
+`DataWritingCommandExec` is a <<spark-sql-SparkPlan.adoc#, physical operator>> that...FIXME
+
+`DataWritingCommandExec` is <<creating-instance, created>> when...FIXME
+
+[[metrics]]
+When requested for <<spark-sql-SparkPlan.adoc#metrics, performance metrics>>, `DataWritingCommandExec` simply requests the <<cmd, DataWritingCommand>> for <<spark-sql-LogicalPlan-DataWritingCommand.adoc#metrics, them>>.
+
+[[internal-registries]]
+.DataWritingCommandExec's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| sideEffectResult
+| [[sideEffectResult]] FIXME
+
+Used when...FIXME
+|===
+
+=== [[creating-instance]] Creating DataWritingCommandExec Instance
+
+`DataWritingCommandExec` takes the following when created:
+
+* [[cmd]] <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>>
+* [[child]] Child <<spark-sql-SparkPlan.adoc#, physical plan>>

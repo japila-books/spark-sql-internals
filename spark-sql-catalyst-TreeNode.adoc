@@ -19,15 +19,15 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 
 `TreeNode` is a recursive data structure that can have one or many <<children, children>> that are again `TreeNodes`.
 
-TIP: Read up on ``<:` type operator in Scala in https://docs.scala-lang.org/tour/upper-type-bounds.html[Upper Type Bounds].
+TIP: Read up on `<:` type operator in Scala in https://docs.scala-lang.org/tour/upper-type-bounds.html[Upper Type Bounds].
 
 Scala-specific, `TreeNode` is an abstract class that is the <<implementations, base class>> of Catalyst <<spark-sql-Expression.adoc#, Expression>> and <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>> abstract classes.
 
 `TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and <<spark-sql-SparkPlan.adoc#, physical>> operators that both use <<spark-sql-Expression.adoc#, Catalyst expressions>> (which are `TreeNodes` again).
 
-NOTE: Spark SQL uses `TreeNode` for <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> and <<spark-sql-Expression.adoc#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans that are simply <<spark-sql-subqueries.adoc#, subquery expressions>>.
+NOTE: Spark SQL uses `TreeNode` for <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> and <<spark-sql-Expression.adoc#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.adoc#, subquery expressions>>.
 
-`TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. The <<methods, TreeNode API>> therefore offers not only methods that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>, etc. that can be used for advanced tree manipulation.
+`TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. Not only does `TreeNode` come with the <<methods, methods>> that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones for more advanced tree manipulation, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>.
 
 [[methods]]
 .TreeNode API (Public Methods)
@@ -252,9 +252,6 @@ withNewChildren(newChildren: Seq[BaseType]): BaseType
 ----
 |===
 
-[[nodeName]]
-`TreeNode` has a *node name* as `nodeName`.
-
 .(Subset of) TreeNode Contract
 [cols="1,2",options="header",width="100%"]
 |===
@@ -269,6 +266,8 @@ withNewChildren(newChildren: Seq[BaseType]): BaseType
 
 Used when `TreeNode` is requested for <<generateTreeString, generateTreeString>> (with `verbose` flag enabled) and <<verboseStringWithSuffix, verboseStringWithSuffix>>
 |===
+
+`TreeNode` has a <<nodeName, node name>>.
 
 [[implementations]]
 .TreeNodes
@@ -634,3 +633,14 @@ argString: String
 `argString`...FIXME
 
 NOTE: `argString` is used when...FIXME
+
+=== [[nodeName]] `nodeName` Method
+
+[source, scala]
+----
+nodeName: String
+----
+
+`nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of <<spark-sql-SparkPlan.adoc#, physical operators>>).
+
+NOTE: `nodeName` is used when `TreeNode` is requested for <<simpleString, simpleString>> and <<asCode, asCode>>.
