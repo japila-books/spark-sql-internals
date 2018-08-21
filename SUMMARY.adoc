@@ -129,6 +129,17 @@
 
 . link:spark-sql-hint-framework.adoc[Hint Framework]
 
+. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
+
+. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
+.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+
+. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
+.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
+.. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
+.. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
+
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
 === File-Based Data Sources
@@ -143,7 +154,7 @@
 . link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
 . link:spark-sql-TextFileFormat.adoc[TextFileFormat]
 
-== Kafka Data Source
+=== Kafka Data Source
 
 . link:spark-sql-kafka.adoc[Kafka Data Source]
 . link:spark-sql-kafka-options.adoc[Kafka Data Source Options]
@@ -161,7 +172,7 @@
 .. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
 . link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
 
-== JDBC Data Source
+=== JDBC Data Source
 
 . link:spark-sql-jdbc.adoc[JDBC Data Source]
 . link:spark-sql-JDBCOptions.adoc[JDBCOptions -- JDBC Data Source Options]
@@ -224,14 +235,12 @@
 . link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 
-. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Logical Query Plan Optimizer]
-.. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Default Spark Optimizer]
+. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Logical Query Plan Optimizer]
+.. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Logical Query Plan Optimizer]
 
-. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
-.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
-.. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
-.. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
+. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Spark Query Planner]
+.. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
+.. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
 
 . link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator]
 .. link:spark-sql-Statistics.adoc[Statistics -- Estimates of Plan Statistics and Query Hints]
@@ -243,15 +252,6 @@
 ... link:spark-sql-FilterEstimation.adoc[FilterEstimation]
 ... link:spark-sql-JoinEstimation.adoc[JoinEstimation]
 ... link:spark-sql-ProjectEstimation.adoc[ProjectEstimation]
-
-. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
-
-. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
-.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
-
-. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Spark Query Planner]
-.. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
-.. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
 
 . link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning -- Specification of Physical Operator's Output Partitions]
 

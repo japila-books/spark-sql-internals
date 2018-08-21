@@ -60,11 +60,16 @@ Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
 | [[conf]] `conf`
 | link:spark-sql-SQLConf.adoc[SQLConf]
 
+| `customOperatorOptimizationRules`
+| [[customOperatorOptimizationRules]] Custom operator optimization rules to add to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, base Operator Optimization batch>>.
+
+When requested for the custom rules, `customOperatorOptimizationRules` simply requests the <<extensions, SparkSessionExtensions>> to `buildOptimizerRules`.
+
 | [[experimentalMethods]] `experimentalMethods`
 | link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
-| [[extensions]] `extensions`
-| `SparkSessionExtensions`
+| `extensions`
+| [[extensions]] `SparkSessionExtensions`
 
 | [[functionRegistry]] `functionRegistry`
 | link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
@@ -73,7 +78,11 @@ Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
 | link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
 
 | [[optimizer]] `optimizer`
-| link:spark-sql-Optimizer.adoc[Optimizer]
+| <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> (that is downcast to the base <<spark-sql-Optimizer.adoc#, Optimizer>>) that is <<spark-sql-SparkOptimizer.adoc#creating-instance, created>> with the <<catalog, SessionCatalog>> and the <<experimentalMethods, ExperimentalMethods>>.
+
+Note that the `SparkOptimizer` adds the <<customOperatorOptimizationRules, customOperatorOptimizationRules>> to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, operator optimization rules>>.
+
+`optimizer` is used when `BaseSessionStateBuilder` is requested to <<build, create a SessionState>> (for the <<spark-sql-SessionState.adoc#optimizerBuilder, optimizerBuilder>> function to create an <<spark-sql-Optimizer.adoc#, Optimizer>> when requested for the <<spark-sql-SessionState.adoc#optimizer, Optimizer>>).
 
 | [[planner]] `planner`
 | link:spark-sql-SparkPlanner.adoc[SparkPlanner]

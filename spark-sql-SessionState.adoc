@@ -134,8 +134,8 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[udfRegistration]] <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
 * [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (i.e. `() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.adoc#, ParserInterface>>
-* [[analyzerBuilder]] `analyzerBuilder` function to create a <<spark-sql-Analyzer.adoc#, Analyzer>> (i.e. `() => Analyzer`)
-* [[optimizerBuilder]] `optimizerBuilder` function to create a <<spark-sql-Optimizer.adoc#, Optimizer>> (i.e. `() => Optimizer`)
+* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.adoc#, Analyzer>> (i.e. `() => Analyzer`)
+* [[optimizerBuilder]] `optimizerBuilder` function to create an <<spark-sql-Optimizer.adoc#, Optimizer>> (i.e. `() => Optimizer`)
 * [[planner]] <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
