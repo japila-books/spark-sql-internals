@@ -2,13 +2,10 @@
 
 `SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a link:spark-sql-SQLConf.adoc[SQLConf].
 
-You can access the `SessionState` of a `SparkSession` requesting it for the link:spark-sql-SparkSession.adoc#sessionState[sessionState].
+`SessionState` is available as the <<spark-sql-SparkSession.adoc#sessionState, sessionState>> property of a `SparkSession`.
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -91,12 +88,6 @@ Used when...FIXME
 | [[optimizer]] Logical query plan optimizer
 
 Used exclusively when `QueryExecution`  link:spark-sql-QueryExecution.adoc#optimizedPlan[creates an optimized logical plan].
-
-| planner
-| link:spark-sql-SparkPlanner.adoc[SparkPlanner]
-| [[planner]] FIXME
-
-Used when...FIXME
 
 | resourceLoader
 | `SessionResourceLoader`

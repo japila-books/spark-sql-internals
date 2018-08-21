@@ -97,7 +97,7 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 
 ^.^| [[User-Provided-Optimizers]] User Provided Optimizers
 ^.^| link:spark-sql-Optimizer.adoc#fixedPoint[FixedPoint]
-| link:spark-sql-ExperimentalMethods.adoc#extraOptimizations[extraOptimizations]
+| <<spark-sql-ExperimentalMethods.adoc#extraOptimizations, extraOptimizations>> of the <<experimentalMethods, ExperimentalMethods>>
 |
 |===
 

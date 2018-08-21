@@ -1,21 +1,64 @@
 == [[ExperimentalMethods]] ExperimentalMethods
 
-`ExperimentalMethods` holds extra <<extraStrategies, strategies>> and <<extraOptimizations, optimizations>> (as `Rule[LogicalPlan]`) that are used in link:spark-sql-SparkPlanner.adoc[SparkPlanner] and link:spark-sql-SparkOptimizer.adoc[SparkOptimizer], respectively.
+`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in <<spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers, SparkOptimizer>> and <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>, respectively.
 
 [[attributes]]
 .ExperimentalMethods' Attributes
-[width="100%",cols="1,2",options="header"]
+[width="100%",cols="1m,2",options="header"]
 |===
 | Name
 | Description
 
-| [[extraStrategies]] extraStrategies
-a| Collection of `Strategy` objects that are used when:
+| extraOptimizations
+a| [[extraOptimizations]] Collection of link:spark-sql-catalyst-Rule.adoc[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects)
 
-* `SessionState` link:spark-sql-SessionState.adoc#planner[is requested for `SparkPlanner`]
+[source, scala]
+----
+extraOptimizations: Seq[Rule[LogicalPlan]]
+----
 
-| [[extraOptimizations]] extraOptimizations
-a| Collection of link:spark-sql-catalyst-Rule.adoc[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects) that are used when:
+Used when `SparkOptimizer` is requested for the <<spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers, User Provided Optimizers>>
 
-* `SparkOptimizer` link:spark-sql-SparkOptimizer.adoc[is requested for the batches] (with "User Provided Optimizers" batch for the extra optimizations)
+| extraStrategies
+a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.adoc#, SparkStrategies>>
+
+[source, scala]
+----
+extraStrategies: Seq[Strategy]
+----
+
+Used when `SessionState` is requested for the link:spark-sql-SessionState.adoc#planner[SparkPlanner]
 |===
+
+`ExperimentalMethods` is available as the <<spark-sql-SparkSession.adoc#experimental, experimental>> property of a `SparkSession`.
+
+[source, scala]
+----
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.experimental
+org.apache.spark.sql.ExperimentalMethods
+----
+
+=== Example
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.rules.Rule
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+
+object SampleRule extends Rule[LogicalPlan] {
+  def apply(p: LogicalPlan): LogicalPlan = p
+}
+
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+spark.experimental.extraOptimizations = Seq(SampleRule)
+
+// extraOptimizations is used in Spark Optimizer
+val batch = spark.sessionState.optimizer.batches.find(_.rules.contains(SampleRule)).get
+scala> batch.rules.head.ruleName
+res7: String = SampleRule
+----
