@@ -1,12 +1,19 @@
 == [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
 
-`Analyzer` is the *logical query plan analyzer* in Spark SQL that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
+`Analyzer` is the *logical query plan analyzer* (aka _Spark Analyzer_ or _Query Analyzer_) that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
+
+`Analyzer` is a concrete <<spark-sql-catalyst-RuleExecutor.adoc#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`) with the <<batches, logical evaluation rules>>.
 
 ```
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 ```
 
-`Analyzer` uses <<catalog, SessionCatalog>> and <<batches, logical evaluation rules>> to resolve relational entities, e.g. databases, tables, columns (e.g. link:spark-sql-ResolveRelations.adoc[ResolveRelations] evaluation rule to resolve link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators)
+`Analyzer` uses <<catalog, SessionCatalog>> while resolving relational entities, e.g. databases, tables, columns.
+
+`Analyzer` is <<creating-instance, created>> when `SessionState` is requested for the <<spark-sql-SessionState.adoc#analyzer, analyzer>>.
+
+.Creating Analyzer
+image::images/spark-sql-Analyzer.png[align="center"]
 
 `Analyzer` is available as link:spark-sql-SessionState.adoc#analyzer[analyzer] property of a session-specific `SessionState`.
 
@@ -19,12 +26,13 @@ scala> :type spark.sessionState.analyzer
 org.apache.spark.sql.catalyst.analysis.Analyzer
 ----
 
-You can access the analyzed logical plan of a `Dataset` using link:spark-sql-dataset-operators.adoc#explain[explain] (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+You can access the analyzed logical plan of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) using <<spark-sql-dataset-operators.adoc#explain, Dataset.explain>> basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 [source, scala]
 ----
 // sample Dataset
-val inventory = spark.range(5)
+val inventory = spark
+  .range(5)
   .withColumn("new_column", 'id + 5 as "plus5")
 
 // Using explain operator (with extended flag enabled)
@@ -47,7 +55,7 @@ Project [id#78L, (id#78L + 5) AS new_column#82L]
 +- *Range (0, 5, step=1, splits=8)
 ----
 
-Alternatively, you can also access the analyzed logical plan using link:spark-sql-QueryExecution.adoc#analyzed[analyzed] property of `QueryExecution` (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.adoc#analyzed, analyzed>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 [source, scala]
 ----
@@ -57,11 +65,9 @@ scala> println(analyzedPlan.numberedTreeString)
 01 +- Range (0, 5, step=1, splits=Some(8))
 ----
 
-`Analyzer` defines <<extendedResolutionRules, extendedResolutionRules>> extension point for additional logical evaluation rules that a custom `Analyzer` can use to extend the <<Resolution, Resolution>> batch. The rules are added at the end of the `Resolution` batch.
+`Analyzer` defines <<extendedResolutionRules, extendedResolutionRules>> extension point for additional logical evaluation rules that a custom `Analyzer` can use to extend the <<Resolution, Resolution>> rule batch. The rules are added at the end of the `Resolution` batch.
 
 NOTE: link:spark-sql-SessionState.adoc[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
-
-`Analyzer` is <<creating-instance, created>> while the owning link:spark-sql-SessionState.adoc#apply[SessionState] is.
 
 [[internal-registries]]
 .Analyzer's Internal Registries and Counters
@@ -319,11 +325,11 @@ TIP: Consult the https://github.com/apache/spark/blob/master/sql/catalyst/src/ma
 
 * [[catalog]] link:spark-sql-SessionCatalog.adoc[SessionCatalog]
 * [[conf]] link:spark-sql-CatalystConf.adoc[CatalystConf]
-* [[maxIterations]] Number of iterations before <<fixedPoint, FixedPoint>> rule batches have converged (i.e. <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>>)
+* [[maxIterations]] Maximum number of iterations (of the <<fixedPoint, FixedPoint>> rule batches, i.e. <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>>)
 
 `Analyzer` initializes the <<internal-registries, internal registries and counters>>.
 
-NOTE: `Analyzer` can also be created without specifying the <<maxIterations, maxIterations>> which is then configured using link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
+NOTE: `Analyzer` can also be created without specifying the <<maxIterations, maxIterations>> argument which is then configured using link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
 
 === [[resolver]] `resolver` Method
 
@@ -367,3 +373,14 @@ commonNaturalJoinProcessing(
 `commonNaturalJoinProcessing`...FIXME
 
 NOTE: `commonNaturalJoinProcessing` is used when...FIXME
+
+=== [[executeAndCheck]] `executeAndCheck` Method
+
+[source, scala]
+----
+executeAndCheck(plan: LogicalPlan): LogicalPlan
+----
+
+`executeAndCheck`...FIXME
+
+NOTE: `executeAndCheck` is used exclusively when `QueryExecution` is requested for the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>.

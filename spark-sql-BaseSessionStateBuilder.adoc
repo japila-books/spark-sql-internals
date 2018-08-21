@@ -114,7 +114,7 @@ createClone: (SparkSession, SessionState) => SessionState
 
 NOTE: `createClone` is used exclusively when `BaseSessionStateBuilder` is requested for a <<build, SessionState>>
 
-=== [[build]] Building SessionState -- `build` Method
+=== [[build]] Creating SessionState Instance -- `build` Method
 
 [source, scala]
 ----

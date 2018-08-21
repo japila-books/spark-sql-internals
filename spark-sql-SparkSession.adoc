@@ -545,7 +545,7 @@ NOTE: link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] is an log
 * `TextInputJsonDataSource` creates a base `Dataset` (of Strings)
 ====
 
-=== [[instantiateSessionState]] Building SessionState -- `instantiateSessionState` Internal Method
+=== [[instantiateSessionState]] Creating SessionState Instance -- `instantiateSessionState` Internal Method
 
 [source, scala]
 ----

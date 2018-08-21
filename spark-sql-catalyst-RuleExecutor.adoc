@@ -14,9 +14,6 @@ abstract class RuleExecutor[TreeType <: TreeNode[_]] {
 }
 ----
 
-[[TreeType]]
-NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `RuleExecutor` can be <<execute, execute>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, <<spark-sql-SparkPlan.adoc#, SparkPlan>> or <<spark-sql-Expression.adoc#, Expression>> or a combination thereof.
-
 .RuleExecutor Contract
 [cols="1m,2",options="header",width="100%"]
 |===
@@ -29,6 +26,9 @@ NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implement
 Used when `RuleExecutor` is requested to <<execute, execute>>.
 |===
 
+[[TreeType]]
+NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, <<spark-sql-SparkPlan.adoc#, SparkPlan>>, <<spark-sql-Expression.adoc#, Expression>> or a combination thereof.
+
 [[extensions]]
 .RuleExecutors (Direct Implementations)
 [cols="1,2",options="header",width="100%"]
@@ -37,7 +37,7 @@ Used when `RuleExecutor` is requested to <<execute, execute>>.
 | Description
 
 | <<spark-sql-Analyzer.adoc#, Analyzer>>
-| [[Analyzer]]
+| [[Analyzer]] Logical query plan analyzer
 
 | `ExpressionCanonicalizer`
 | [[ExpressionCanonicalizer]]

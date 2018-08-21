@@ -1,8 +1,8 @@
-== [[SessionState]] SessionState
+== [[SessionState]] SessionState -- State Separation Layer Between SparkSessions
 
 `SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a link:spark-sql-SQLConf.adoc[SQLConf].
 
-You can access `SessionState` of a `SparkSession` through link:spark-sql-SparkSession.adoc#sessionState[sessionState] property.
+You can access the `SessionState` of a `SparkSession` requesting it for the link:spark-sql-SparkSession.adoc#sessionState[sessionState].
 
 [source, scala]
 ----
@@ -16,91 +16,107 @@ scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState
 ----
 
-`SessionState` is created when...FIXME
+`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<spark-sql-SparkSession.adoc#instantiateSessionState, instantiateSessionState>> (when requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
+
+.Creating SessionState
+image::images/spark-sql-SessionState.png[align="center"]
+
+[NOTE]
+====
+When requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<spark-sql-BaseSessionStateBuilder.adoc#, BaseSessionStateBuilder>> that is then requested to <<spark-sql-BaseSessionStateBuilder.adoc#build, create a SessionState instance>>.
+
+There are two `BaseSessionStateBuilders` available:
+
+* (default) <<spark-sql-SessionStateBuilder.adoc#, SessionStateBuilder>> for `in-memory` catalog
+
+* <<spark-sql-HiveSessionStateBuilder.adoc#, HiveSessionStateBuilder>> for `hive` catalog
+
+`hive` catalog is set when the `SparkSession` was <<spark-sql-SparkSession-Builder.adoc#getOrCreate, created>> with the Hive support enabled (using <<spark-sql-SparkSession-Builder.adoc#enableHiveSupport, Builder.enableHiveSupport>>).
+====
 
 [[attributes]]
 .SessionState's (Lazily-Initialized) Attributes
-[cols="1,1,2",options="header",width="100%"]
+[cols="1m,1,2",options="header",width="100%"]
 |===
 | Name
 | Type
 | Description
 
-| [[analyzer]] `analyzer`
+| analyzer
 | link:spark-sql-Analyzer.adoc[Analyzer]
-| FIXME
+| [[analyzer]] <<spark-sql-Analyzer.adoc#, Spark Analyzer>>
+
+Initialized lazily (i.e. only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
 
 Used when...FIXME
 
-| [[catalog]] `catalog`
+| catalog
 | link:spark-sql-SessionCatalog.adoc[SessionCatalog]
-| Metastore of tables and databases.
+| [[catalog]] Metastore of tables and databases.
 
 Used when...FIXME
 
-| [[conf]] `conf`
+| conf
 | link:spark-sql-SQLConf.adoc[SQLConf]
-| FIXME
+| [[conf]] FIXME
 
 Used when...FIXME
 
-| [[experimentalMethods]] `experimentalMethods`
+| experimentalMethods
 | link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
-| FIXME
+| [[experimentalMethods]] FIXME
 
 Used when...FIXME
 
-| [[functionRegistry]] `functionRegistry`
+| functionRegistry
 | link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
-| FIXME
+| [[functionRegistry]] FIXME
 
 Used when...FIXME
 
-| [[functionResourceLoader]] `functionResourceLoader`
+| functionResourceLoader
 | `FunctionResourceLoader`
-| FIXME
+| [[functionResourceLoader]] FIXME
 
 Used when...FIXME
 
-| [[listenerManager]] `listenerManager`
+| listenerManager
 | link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
-| FIXME
+| [[listenerManager]] FIXME
 
 Used when...FIXME
 
-| [[optimizer]] `optimizer`
+| optimizer
 | link:spark-sql-Optimizer.adoc[Optimizer]
-| Logical query plan optimizer
+| [[optimizer]] Logical query plan optimizer
 
 Used exclusively when `QueryExecution`  link:spark-sql-QueryExecution.adoc#optimizedPlan[creates an optimized logical plan].
 
-| [[planner]] `planner`
+| planner
 | link:spark-sql-SparkPlanner.adoc[SparkPlanner]
-| FIXME
+| [[planner]] FIXME
 
 Used when...FIXME
 
-| [[resourceLoader]] `resourceLoader`
+| resourceLoader
 | `SessionResourceLoader`
-| FIXME
+| [[resourceLoader]] FIXME
 
 Used when...FIXME
 
-| [[sqlParser]] `sqlParser`
+| sqlParser
 | link:spark-sql-ParserInterface.adoc[ParserInterface]
-| FIXME
+| [[sqlParser]] FIXME
 
 Used when...FIXME
 
-| [[streamingQueryManager]] `streamingQueryManager`
+| streamingQueryManager
 | `StreamingQueryManager`
-| FIXME
+| [[streamingQueryManager]] Used to manage streaming queries in *Spark Structured Streaming*
 
-Used when...FIXME
-
-| [[udfRegistration]] `udfRegistration`
+| udfRegistration
 | link:spark-sql-UDFRegistration.adoc[UDFRegistration]
-| Interface to register user-defined functions.
+| [[udfRegistration]] Interface to register user-defined functions.
 
 Used when...FIXME
 |===
@@ -111,23 +127,21 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 `SessionState` takes the following when created:
 
-* [[sharedState]] link:spark-sql-SharedState.adoc[SharedState]
-* link:spark-sql-SQLConf.adoc[SQLConf]
-* link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
-* link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
-* link:spark-sql-UDFRegistration.adoc[UDFRegistration]
-* link:spark-sql-SessionCatalog.adoc[SessionCatalog]
-* link:spark-sql-ParserInterface.adoc[ParserInterface]
-* link:spark-sql-Analyzer.adoc[Analyzer]
-* link:spark-sql-Optimizer.adoc[Optimizer]
-* link:spark-sql-SparkPlanner.adoc[SparkPlanner]
-* `StreamingQueryManager`
-* link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
-* `SessionResourceLoader`
-* [[createQueryExecution]] Function to create link:spark-sql-QueryExecution.adoc[QueryExecution] for a given link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[createClone]] Function to clone the current `SessionState` for a given pair of link:spark-sql-SparkSession.adoc[SparkSession] and `SessionState`
-
-`SessionState` initializes the <<attributes, attributes>>.
+* [[sharedState]] <<spark-sql-SharedState.adoc#, SharedState>>
+* [[conf]] <<spark-sql-SQLConf.adoc#, SQLConf>>
+* [[experimentalMethods]] <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
+* [[functionRegistry]] <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>>
+* [[udfRegistration]] <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
+* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (i.e. `() => SessionCatalog`)
+* [[sqlParser]] <<spark-sql-ParserInterface.adoc#, ParserInterface>>
+* [[analyzerBuilder]] `analyzerBuilder` function to create a <<spark-sql-Analyzer.adoc#, Analyzer>> (i.e. `() => Analyzer`)
+* [[optimizerBuilder]] `optimizerBuilder` function to create a <<spark-sql-Optimizer.adoc#, Optimizer>> (i.e. `() => Optimizer`)
+* [[planner]] <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>
+* [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
+* [[listenerManager]] <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
+* [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (i.e. `() => SessionResourceLoader`)
+* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `LogicalPlan => QueryExecution`)
+* [[createClone]] `createClone` function to clone the `SessionState` given a <<spark-sql-SparkSession.adoc#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
 
 === [[apply]] `apply` Factory Methods
 
