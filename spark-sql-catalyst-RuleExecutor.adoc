@@ -43,7 +43,7 @@ NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implement
 | [[ExpressionCanonicalizer]]
 
 | <<spark-sql-Optimizer.adoc#, Optimizer>>
-| [[Optimizer]]
+| [[Optimizer]] Generic logical query plan optimizer
 |===
 
 === [[execute]] Applying Rule Batches to TreeNode -- `execute` Method

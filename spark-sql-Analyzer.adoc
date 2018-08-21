@@ -1,6 +1,6 @@
 == [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
 
-`Analyzer` is the *logical query plan analyzer* (aka _Spark Analyzer_ or _Query Analyzer_) that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
+`Analyzer` (aka _Spark Analyzer_ or _Query Analyzer_) is the *logical query plan analyzer* that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
 
 `Analyzer` is a concrete <<spark-sql-catalyst-RuleExecutor.adoc#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`) with the <<batches, logical evaluation rules>>.
 
@@ -15,12 +15,12 @@ Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 .Creating Analyzer
 image::images/spark-sql-Analyzer.png[align="center"]
 
-`Analyzer` is available as link:spark-sql-SessionState.adoc#analyzer[analyzer] property of a session-specific `SessionState`.
+`Analyzer` is available as the <<spark-sql-SessionState.adoc#analyzer, analyzer>> property of a session-specific `SessionState`.
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
 scala> :type spark.sessionState.analyzer
 org.apache.spark.sql.catalyst.analysis.Analyzer
@@ -30,7 +30,7 @@ You can access the analyzed logical plan of a structured query (as a <<spark-sql
 
 [source, scala]
 ----
-// sample Dataset
+// sample structured query
 val inventory = spark
   .range(5)
   .withColumn("new_column", 'id + 5 as "plus5")
@@ -38,21 +38,22 @@ val inventory = spark
 // Using explain operator (with extended flag enabled)
 scala> inventory.explain(extended = true)
 == Parsed Logical Plan ==
-'Project [*, ('id + 5) AS plus5#81 AS new_column#82]
-+- Range (0, 5, step=1, splits=Some(8))
+'Project [id#0L, ('id + 5) AS plus5#2 AS new_column#3]
++- AnalysisBarrier
+      +- Range (0, 5, step=1, splits=Some(8))
 
 == Analyzed Logical Plan ==
 id: bigint, new_column: bigint
-Project [id#78L, (id#78L + cast(5 as bigint)) AS new_column#82L]
+Project [id#0L, (id#0L + cast(5 as bigint)) AS new_column#3L]
 +- Range (0, 5, step=1, splits=Some(8))
 
 == Optimized Logical Plan ==
-Project [id#78L, (id#78L + 5) AS new_column#82L]
+Project [id#0L, (id#0L + 5) AS new_column#3L]
 +- Range (0, 5, step=1, splits=Some(8))
 
 == Physical Plan ==
-*Project [id#78L, (id#78L + 5) AS new_column#82L]
-+- *Range (0, 5, step=1, splits=8)
+*(1) Project [id#0L, (id#0L + 5) AS new_column#3L]
++- *(1) Range (0, 5, step=1, splits=8)
 ----
 
 Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.adoc#analyzed, analyzed>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
@@ -61,7 +62,7 @@ Alternatively, you can access the analyzed logical plan using `QueryExecution` a
 ----
 val analyzedPlan = inventory.queryExecution.analyzed
 scala> println(analyzedPlan.numberedTreeString)
-00 Project [id#78L, (id#78L + cast(5 as bigint)) AS new_column#82L]
+00 Project [id#0L, (id#0L + cast(5 as bigint)) AS new_column#3L]
 01 +- Range (0, 5, step=1, splits=Some(8))
 ----
 

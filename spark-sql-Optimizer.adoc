@@ -1,32 +1,69 @@
-== [[Optimizer]] Catalyst Optimizer -- Generic Rule-Based Logical Optimizer
+== [[Optimizer]] Catalyst Optimizer -- Generic Logical Query Plan Optimizer
 
-`Optimizer` (aka *Catalyst Optimizer*) is the generic *rule-based logical query plan optimizer* in Spark SQL that uses link:spark-sql-catalyst.adoc[Catalyst Framework] to optimize link:spark-sql-LogicalPlan.adoc[logical query plans] using <<batches, optimization rules>>.
+`Optimizer` (aka *Catalyst Optimizer*) is the base of <<extensions, logical query plan optimizers>> that defines the <<batches, common logical optimization rules>> and the <<extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>> extension point for additional rules for the Operator Optimization batch.
 
-NOTE: link:spark-sql-SparkOptimizer.adoc[SparkOptimizer] is the one and only custom `Optimizer`.
+[[extensions]]
+NOTE: <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> is the one and only direct implementation of the `Optimizer` Contract in Spark SQL.
 
-`Optimizer` is available as link:spark-sql-SessionState.adoc#optimizer[optimizer] of a `SessionState`.
+`Optimizer` is a <<spark-sql-catalyst-RuleExecutor.adoc#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`) with the <<batches, common logical operator optimization rules>>.
 
-[source, scala]
-----
-val spark: SparkSession = ...
-spark.sessionState.optimizer
-----
+```
+Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
+```
 
-[[execute]]
-`Optimizer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines <<batches, collection of logical optimization rules>>.
-
-[[extendedOperatorOptimizationRules]]
-`Optimizer` has an extension point for additional rules for *operator optimization rules*.
+`Optimizer` is available as the <<spark-sql-SessionState.adoc#optimizer, optimizer>> property of a session-specific `SessionState`.
 
 [source, scala]
 ----
-extendedOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState.optimizer
+org.apache.spark.sql.catalyst.optimizer.Optimizer
 ----
 
-The additional operator optimization rules are executed right after <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> and <<Operator_Optimization_after_Inferring_Filters, Operator Optimization after Inferring Filters>>.
+You can access the optimized logical plan of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) using <<spark-sql-dataset-operators.adoc#explain, Dataset.explain>> basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+
+[source, scala]
+----
+// sample structured query
+val inventory = spark
+  .range(5)
+  .withColumn("new_column", 'id + 5 as "plus5")
+
+// Using explain operator (with extended flag enabled)
+scala> inventory.explain(extended = true)
+== Parsed Logical Plan ==
+'Project [id#0L, ('id + 5) AS plus5#2 AS new_column#3]
++- AnalysisBarrier
+      +- Range (0, 5, step=1, splits=Some(8))
+
+== Analyzed Logical Plan ==
+id: bigint, new_column: bigint
+Project [id#0L, (id#0L + cast(5 as bigint)) AS new_column#3L]
++- Range (0, 5, step=1, splits=Some(8))
+
+== Optimized Logical Plan ==
+Project [id#0L, (id#0L + 5) AS new_column#3L]
++- Range (0, 5, step=1, splits=Some(8))
+
+== Physical Plan ==
+*(1) Project [id#0L, (id#0L + 5) AS new_column#3L]
++- *(1) Range (0, 5, step=1, splits=8)
+----
+
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.adoc#optimizedPlan, optimizedPlan>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
+
+[source, scala]
+----
+val optimizedPlan = inventory.queryExecution.optimizedPlan
+scala> println(optimizedPlan.numberedTreeString)
+00 Project [id#0L, (id#0L + 5) AS new_column#3L]
+01 +- Range (0, 5, step=1, splits=Some(8))
+----
 
 [[batches]]
-.Optimizer's Default Optimization Batches (in the order of execution)
+.Optimizer's Common Logical Operator Optimization Rules (in the order of execution)
 [cols="2,1,3,3",options="header",width="100%"]
 |===
 ^.^| Batch Name
@@ -271,33 +308,10 @@ The additional operator optimization rules are executed right after <<Operator_O
 |
 |===
 
-TIP: Consult the https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/Optimizer.scala#L48-L137[sources of `Optimizer`] for the up-to-date list of the optimization rules.
-
-NOTE: *Catalyst* is a Spark SQL framework for manipulating trees. It can work with trees of relational operators and expressions in link:spark-sql-LogicalPlan.adoc[logical plans] before they end up as link:spark-sql-SparkPlan.adoc[physical execution plans].
-
-[source, scala]
-----
-scala> sql("select 1 + 1 + 1").explain(true)
-== Parsed Logical Plan ==
-'Project [unresolvedalias(((1 + 1) + 1), None)]
-+- OneRowRelation$
-
-== Analyzed Logical Plan ==
-((1 + 1) + 1): int
-Project [((1 + 1) + 1) AS ((1 + 1) + 1)#4]
-+- OneRowRelation$
-
-== Optimized Logical Plan ==
-Project [3 AS ((1 + 1) + 1)#4]
-+- OneRowRelation$
-
-== Physical Plan ==
-*Project [3 AS ((1 + 1) + 1)#4]
-+- Scan OneRowRelation[]
-----
+TIP: Consult the https://github.com/apache/spark/blob/v2.3.1/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/Optimizer.scala#L49-L92[sources] of the `Optimizer` class for the up-to-date list of the optimization rules.
 
 [[internal-properties]]
-.Optimizer's Properties
+.Optimizer's Internal Registries and Counters
 [cols="1,1,2",options="header",width="100%"]
 |===
 | Name
@@ -313,7 +327,19 @@ Project [3 AS ((1 + 1) + 1)#4]
 
 `Optimizer` takes the following when created:
 
-* [[sessionCatalog]] link:spark-sql-SessionCatalog.adoc[SessionCatalog]
-* [[conf]] link:spark-sql-CatalystConf.adoc[CatalystConf]
+* [[sessionCatalog]] <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>
 
 `Optimizer` initializes the <<internal-properties, internal properties>>.
+
+NOTE: `Optimizer` is a Scala abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly when the <<extensions, concrete Optimizers>> are.
+
+=== [[extendedOperatorOptimizationRules]] Additional Operator Optimization Rules -- `extendedOperatorOptimizationRules` Extension Point
+
+[source, scala]
+----
+extendedOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
+----
+
+`extendedOperatorOptimizationRules` extension point defines additional rules for the Operator Optimization batch.
+
+NOTE: `extendedOperatorOptimizationRules` rules are executed right after <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> and <<Operator_Optimization_after_Inferring_Filters, Operator Optimization after Inferring Filters>>.

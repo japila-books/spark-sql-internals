@@ -224,8 +224,8 @@
 . link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
 .. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
 
-. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Default Spark Optimizer]
-.. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Rule-Based Logical Optimizer]
+. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Logical Query Plan Optimizer]
+.. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Default Spark Optimizer]
 
 . link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
 .. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]

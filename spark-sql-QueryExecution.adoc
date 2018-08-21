@@ -43,7 +43,7 @@ TIP: Beside `analyzed`, you can use link:spark-sql-dataset-operators.adoc#explai
 `withCachedData` makes sure that the logical plan <<assertAnalyzed, can be analyzed>> and <<assertSupported, uses supported operations only>>.
 
 | optimizedPlan
-| [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on <<withCachedData, withCachedData>>.
+| [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
 
 | sparkPlan
 a| [[sparkPlan]] link:spark-sql-SparkPlan.adoc[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
