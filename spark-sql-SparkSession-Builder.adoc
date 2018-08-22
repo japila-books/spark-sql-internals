@@ -1,18 +1,37 @@
 == [[Builder]] Builder -- Building SparkSession using Fluent API
 
-`Builder` is the fluent API to build a fully-configured link:spark-sql-SparkSession.adoc[SparkSession].
+`Builder` is the <<methods, fluent API>> to create a <<spark-sql-SparkSession.adoc#, SparkSession>>.
 
-.Builder Methods
+[[methods]]
+.Builder API
 [cols="1,2",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| <<getOrCreate, getOrCreate>>
-| Gets the current link:spark-sql-SparkSession.adoc[SparkSession] or creates a new one.
-
 | <<enableHiveSupport, enableHiveSupport>>
-| Enables Hive support
+a| Enables Hive support
+
+[source, scala]
+----
+enableHiveSupport(): Builder
+----
+
+| <<getOrCreate, getOrCreate>>
+a| Gets the current link:spark-sql-SparkSession.adoc[SparkSession] or creates a new one.
+
+[source, scala]
+----
+getOrCreate(): SparkSession
+----
+
+| <<withExtensions, withExtensions>>
+a| Access to the <<spark-sql-SparkSessionExtensions.adoc#, SparkSessionExtensions>>
+
+[source, scala]
+----
+withExtensions(f: SparkSessionExtensions => Unit): Builder
+----
 |===
 
 [source, scala]
@@ -28,6 +47,19 @@ val spark: SparkSession = SparkSession.builder
 You can use the fluent design pattern to set the various properties of a `SparkSession` that opens a session to Spark SQL.
 
 NOTE: You can have multiple ``SparkSession``s in a single Spark application for different link:spark-sql-SparkSession.adoc#catalog[data catalogs] (through relational entities).
+
+[[internal-registries]]
+.Builder's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| extensions
+| [[extensions]] <<spark-sql-SparkSessionExtensions.adoc#, SparkSessionExtensions>>
+
+Used when...FIXME
+|===
 
 === [[getOrCreate]] `getOrCreate` Method
 
@@ -54,3 +86,12 @@ Refer to link:spark-sql-SharedState.adoc[SharedState].
 ====
 
 Internally, `enableHiveSupport` makes sure that the Hive classes are on CLASSPATH, i.e. Spark SQL's `org.apache.hadoop.hive.conf.HiveConf`, and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`.
+
+=== [[withExtensions]] `withExtensions` Method
+
+[source, scala]
+----
+withExtensions(f: SparkSessionExtensions => Unit): Builder
+----
+
+`withExtensions` simply executes the input `f` function with the <<extensions, SparkSessionExtensions>>.

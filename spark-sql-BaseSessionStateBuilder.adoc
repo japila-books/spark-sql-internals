@@ -63,13 +63,13 @@ Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
 | `customOperatorOptimizationRules`
 | [[customOperatorOptimizationRules]] Custom operator optimization rules to add to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, base Operator Optimization batch>>.
 
-When requested for the custom rules, `customOperatorOptimizationRules` simply requests the <<extensions, SparkSessionExtensions>> to `buildOptimizerRules`.
+When requested for the custom rules, `customOperatorOptimizationRules` simply requests the <<extensions, SparkSessionExtensions>> to <<spark-sql-SparkSessionExtensions.adoc#buildOptimizerRules, buildOptimizerRules>>.
 
 | [[experimentalMethods]] `experimentalMethods`
 | link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
 | `extensions`
-| [[extensions]] `SparkSessionExtensions`
+| [[extensions]] <<spark-sql-SparkSessionExtensions.adoc#, SparkSessionExtensions>>
 
 | [[functionRegistry]] `functionRegistry`
 | link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]

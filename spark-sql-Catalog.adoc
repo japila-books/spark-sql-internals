@@ -1,6 +1,6 @@
 == [[Catalog]] Catalog -- Metastore Management Interface
 
-`Catalog` is the <<contract, interface>> for working with a *metastore* (aka _metadata catalog_) of database(s), (local and external) tables, functions, table columns, and temporary views in Spark SQL.
+`Catalog` is the <<contract, interface>> for working with a *metastore* (aka _metadata catalog_) of relational entities, e.g. database(s), tables, functions, table columns, and temporary views.
 
 You can access the current catalog using link:spark-sql-SparkSession.adoc#catalog[SparkSession.catalog] property.
 

@@ -58,7 +58,7 @@ org.apache.spark.sql.SparkSession
 spark.experimental.extraOptimizations = Seq(SampleRule)
 
 // extraOptimizations is used in Spark Optimizer
-val batch = spark.sessionState.optimizer.batches.find(_.rules.contains(SampleRule)).get
-scala> batch.rules.head.ruleName
-res7: String = SampleRule
+val rule = spark.sessionState.optimizer.batches.flatMap(_.rules).filter(_ == SampleRule).head
+scala> rule.ruleName
+res0: String = SampleRule
 ----
