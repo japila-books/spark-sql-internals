@@ -87,8 +87,8 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 
 ^.^| Push down operators to data source scan
 ^.^| `Once`
-| link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc[PushDownOperatorsToDataSource]
-|
+| [[PushDownOperatorsToDataSource]] <<spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc#, PushDownOperatorsToDataSource>>
+| Pushes down operators to underlying data sources (i.e. <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relations>>) 
 
 ^.^|
 ^.^|

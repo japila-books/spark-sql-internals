@@ -10,9 +10,6 @@ Technically, `ReorderJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule]
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // Build analyzed logical plan with at least 3 joins and zero or more filters
 val belowBroadcastJoinThreshold = spark.sessionState.conf.autoBroadcastJoinThreshold - 1
 val belowBroadcast = spark.range(belowBroadcastJoinThreshold)
@@ -345,7 +342,7 @@ scala> println(plan.numberedTreeString)
 07    +- 'UnresolvedRelation `t4`
 ----
 
-=== [[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
+=== [[ExtractFiltersAndInnerJoins]][[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
 
 [source, scala]
 ----

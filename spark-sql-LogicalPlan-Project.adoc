@@ -1,6 +1,12 @@
 == [[Project]] Project Unary Logical Operator
 
-`Project` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following:
+[[creating-instance]]
+`Project` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that takes the following when created:
+
+* [[projectList]] <<spark-sql-Expression-NamedExpression.adoc#, Named expressions>>
+* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
+
+`Project` is <<creating-instance, created>> to represent the following:
 
 * Dataset operators, i.e. link:spark-sql-joins.adoc#joinWith[joinWith], link:spark-sql-dataset-operators.adoc#select[select] (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
@@ -91,9 +97,6 @@ Use `select` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to cre
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.catalyst.dsl.plans._  // <-- gives table and select
 import org.apache.spark.sql.catalyst.dsl.expressions.star
 val plan = table("a").select(star())
@@ -102,12 +105,3 @@ scala> println(plan.numberedTreeString)
 01 +- 'UnresolvedRelation `a`
 ----
 ====
-
-=== [[creating-instance]] Creating Project Instance
-
-`Project` takes the following when created:
-
-* [[projectList]] link:spark-sql-Expression-NamedExpression.adoc[Named expressions]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
-
-`Project` initializes the <<internal-registries, internal registries and counters>>.
