@@ -125,7 +125,7 @@ A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to
 
 NOTE: link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the link:spark-sql-Encoder.adoc[Encoder].
 
-You can <<implicits, convert a type-safe Dataset to a "untyped" DataFrame>> or access the link:spark-sql-dataset-operators.adoc#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
+You can request the <<spark-sql-dataset-operators.adoc#toDF, "untyped" view>> of a Dataset or access the link:spark-sql-dataset-operators.adoc#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
 The default storage level for `Datasets` is link:spark-rdd-caching.adoc[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however link:spark-sql-caching.adoc#persist[persist a `Dataset`].
 
@@ -295,122 +295,6 @@ isStreaming: Boolean
 `isStreaming` is enabled (i.e. `true`) when the logical plan link:spark-sql-LogicalPlan.adoc#isStreaming[is streaming].
 
 Internally, `isStreaming` takes the Dataset's link:spark-sql-LogicalPlan.adoc[logical plan] and gives link:spark-sql-LogicalPlan.adoc#isStreaming[whether the plan is streaming or not].
-
-=== [[implicits]][[toDS]][[toDF]] Implicit Type Conversions to Datasets -- `toDS` and `toDF` methods
-
-`DatasetHolder` case class offers three methods that do the conversions from `Seq[T]` or `RDD[T]` types to a `Dataset[T]`:
-
-* `toDS(): Dataset[T]`
-* `toDF(): DataFrame`
-* `toDF(colNames: String*): DataFrame`
-
-NOTE: `DataFrame` is a _mere_ type alias for `Dataset[Row]` since Spark *2.0.0*.
-
-`DatasetHolder` is used by `SQLImplicits` that is available to use after link:spark-sql-SparkSession.adoc#implicits[importing `implicits` object of `SparkSession`].
-
-[source, scala]
-----
-val spark: SparkSession = ...
-import spark.implicits._
-
-scala> val ds = Seq("I am a shiny Dataset!").toDS
-ds: org.apache.spark.sql.Dataset[String] = [value: string]
-
-scala> val df = Seq("I am an old grumpy DataFrame!").toDF
-df: org.apache.spark.sql.DataFrame = [value: string]
-
-scala> val df = Seq("I am an old grumpy DataFrame!").toDF("text")
-df: org.apache.spark.sql.DataFrame = [text: string]
-
-scala> val ds = sc.parallelize(Seq("hello")).toDS
-ds: org.apache.spark.sql.Dataset[String] = [value: string]
-----
-
-[NOTE]
-====
-This import of `implicits` object's values is automatically executed in link:spark-shell.adoc[Spark Shell] and so you don't need to do anything but use the conversions.
-
-```
-scala> spark.version
-res11: String = 2.0.0
-
-scala> :imports
- 1) import spark.implicits._  (59 terms, 38 are implicit)
- 2) import spark.sql          (1 terms)
-```
-====
-
-[source, scala]
-----
-val spark: SparkSession = ...
-import spark.implicits._
-
-case class Token(name: String, productId: Int, score: Double)
-val data = Seq(
-  Token("aaa", 100, 0.12),
-  Token("aaa", 200, 0.29),
-  Token("bbb", 200, 0.53),
-  Token("bbb", 300, 0.42))
-
-// Transform data to a Dataset[Token]
-// It doesn't work with type annotation
-// https://issues.apache.org/jira/browse/SPARK-13456
-val ds = data.toDS
-
-// ds: org.apache.spark.sql.Dataset[Token] = [name: string, productId: int ... 1 more field]
-
-// Transform data into a DataFrame with no explicit schema
-val df = data.toDF
-
-// Transform DataFrame into a Dataset
-val ds = df.as[Token]
-
-scala> ds.show
-+----+---------+-----+
-|name|productId|score|
-+----+---------+-----+
-| aaa|      100| 0.12|
-| aaa|      200| 0.29|
-| bbb|      200| 0.53|
-| bbb|      300| 0.42|
-+----+---------+-----+
-
-scala> ds.printSchema
-root
- |-- name: string (nullable = true)
- |-- productId: integer (nullable = false)
- |-- score: double (nullable = false)
-
-// In DataFrames we work with Row instances
-scala> df.map(_.getClass.getName).show(false)
-+--------------------------------------------------------------+
-|value                                                         |
-+--------------------------------------------------------------+
-|org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema|
-|org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema|
-|org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema|
-|org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema|
-+--------------------------------------------------------------+
-
-// In Datasets we work with case class instances
-scala> ds.map(_.getClass.getName).show(false)
-+---------------------------+
-|value                      |
-+---------------------------+
-|$line40.$read$$iw$$iw$Token|
-|$line40.$read$$iw$$iw$Token|
-|$line40.$read$$iw$$iw$Token|
-|$line40.$read$$iw$$iw$Token|
-+---------------------------+
-----
-
-==== [[toDS-internals]] Internals of toDS
-
-Internally, the Scala compiler makes `toDS` implicitly available to any `Seq[T]` (using `SQLImplicits.localSeqToDatasetHolder` implicit method).
-
-NOTE: This and other implicit methods are in scope whenever you do `import spark.implicits._`.
-
-The input `Seq[T]` is converted into `Dataset[T]` by means of link:spark-sql-SQLContext.adoc#createDataset[SQLContext.createDataset] that in turn passes all calls on to link:spark-sql-SparkSession.adoc#createDataset[SparkSession.createDataset]. Once created, the `Dataset[T]` is wrapped in `DatasetHolder[T]` with `toDS` that just returns the input `ds`.
 
 === [[Queryable]] Queryable
 

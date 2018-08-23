@@ -12,6 +12,7 @@
 
 . link:spark-sql-SparkSession.adoc[SparkSession -- The Entry Point to Spark SQL]
 .. link:spark-sql-SparkSession-Builder.adoc[Builder -- Building SparkSession using Fluent API]
+.. link:spark-sql-SparkSession-implicits.adoc[implicits Object -- Implicits Conversions]
 .. link:spark-sql-SparkSessionExtensions.adoc[SparkSessionExtensions]
 
 . link:spark-sql-Dataset.adoc[Dataset -- Structured Query with Data Encoder]

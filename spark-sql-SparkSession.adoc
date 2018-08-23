@@ -163,8 +163,8 @@ a| Object method
 getDefaultSession: Option[SparkSession]
 ----
 
-| <<implicits, implicits>>
-a| Implicits conversions
+| <<spark-sql-SparkSession-implicits.adoc#, implicits>>
+a| [[implicits]] <<spark-sql-SparkSession-implicits.adoc#, Implicits conversions>>
 
 [source, scala]
 ----
@@ -338,29 +338,6 @@ version: String
 
 Internally, `version` uses `spark.SPARK_VERSION` value that is the `version` property in `spark-version-info.properties` properties file on CLASSPATH.
 
-=== [[implicits]] Implicit Conversions -- `implicits` object
-
-The `implicits` object is a helper class with the Scala implicit methods (aka _conversions_) to convert Scala objects to link:spark-sql-Dataset.adoc[Datasets], link:spark-sql-DataFrame.adoc[DataFrames] and link:spark-sql-Column.adoc[Columns]. It also defines link:spark-sql-Encoder.adoc[Encoders] for Scala's "primitive" types, e.g. `Int`, `Double`, `String`, and their products and collections.
-
-[NOTE]
-====
-Import the implicits by `import spark.implicits._`.
-
-[source, scala]
-----
-val spark = SparkSession.builder.getOrCreate()
-import spark.implicits._
-----
-====
-
-`implicits` object offers support for creating `Dataset` from `RDD` of any type (for which an link:spark-sql-Encoder.adoc[encoder] exists in scope), or case classes or tuples, and `Seq`.
-
-`implicits` object also offers conversions from Scala's `Symbol` or `$` to `Column`.
-
-It also offers conversions from `RDD` or `Seq` of `Product` types (e.g. case classes or tuples) to `DataFrame`. It has direct conversions from `RDD` of `Int`, `Long` and `String` to `DataFrame` with a single column name `_1`.
-
-NOTE: It is only possible to call `toDF` methods on `RDD` objects of `Int`, `Long`, and `String` "primitive" types.
-
 === [[emptyDataset]] Creating Empty Dataset (Given Encoder) -- `emptyDataset` Operator
 
 [source, scala]
@@ -409,7 +386,7 @@ scala> one.show
 
 [TIP]
 ====
-You'd be better off using link:spark-sql-Dataset.adoc#implicits[Scala implicits and `toDS` method] instead (that does this conversion automatically for you).
+You may want to consider <<spark-sql-SparkSession-implicits.adoc#, implicits>> object and `toDS` method instead.
 
 [source, scala]
 ----
