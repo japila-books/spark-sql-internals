@@ -10,35 +10,35 @@
 | Type
 | Description
 
-| [[cacheManager]] `cacheManager`
+| `cacheManager`
 | link:spark-sql-CacheManager.adoc[CacheManager]
-|
+| [[cacheManager]]
 
-| [[externalCatalog]] <<externalCatalog-indepth, externalCatalog>>
+| <<externalCatalog-indepth, externalCatalog>>
 | link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
-a| Metastore of permanent relational entities, i.e. databases, tables, partitions, and functions.
+a| [[externalCatalog]] Metastore of permanent relational entities, i.e. databases, tables, partitions, and functions.
 
 NOTE: `externalCatalog` is initialized lazily on the first access.
 
-| [[globalTempViewManager]] `globalTempViewManager`
+| `globalTempViewManager`
 | link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
-|
+| [[globalTempViewManager]]
 
-| [[jarClassLoader]] `jarClassLoader`
+| `jarClassLoader`
 | `NonClosableMutableURLClassLoader`
-|
+| [[jarClassLoader]]
 
-| [[sparkContext]] `sparkContext`
+| `sparkContext`
 | `SparkContext`
-| Spark Core's `SparkContext`
+| [[sparkContext]] Spark Core's `SparkContext`
 
-| [[statusStore]] `statusStore`
+| `statusStore`
 | link:spark-sql-SQLAppStatusStore.adoc[SQLAppStatusStore]
-|
+| [[statusStore]]
 
-| [[warehousePath]] <<warehousePath-indepth, warehousePath>>
+| <<warehousePath-indepth, warehousePath>>
 | `String`
-| Warehouse path
+| [[warehousePath]] Warehouse path
 |===
 
 `SharedState` is available as link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of a `SparkSession`.

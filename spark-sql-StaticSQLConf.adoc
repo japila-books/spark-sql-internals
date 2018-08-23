@@ -22,17 +22,17 @@ org.apache.spark.sql.AnalysisException: Cannot modify the value of a static conf
 
 [[properties]]
 .StaticSQLConf's Configuration Properties
-[cols="1,1,1,2",options="header",width="100%"]
+[cols="1,1,1m,2",options="header",width="100%"]
 |===
 | Name
 | Default Value
 | Scala Value
 | Description
 
-| [[spark.sql.catalogImplementation]] `spark.sql.catalogImplementation`
+| `spark.sql.catalogImplementation`
 | `in-memory`
-| `CATALOG_IMPLEMENTATION`
-a| Selects the active catalog implementation from the available link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalogs]:
+| CATALOG_IMPLEMENTATION
+a| [[spark.sql.catalogImplementation]] Selects the active catalog implementation from the available link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalogs]:
 
 * link:spark-sql-ExternalCatalog.adoc#in-memory[in-memory]
 * link:spark-sql-ExternalCatalog.adoc#hive[hive]
@@ -51,17 +51,26 @@ Used when:
 
 . `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
-| [[spark.sql.queryExecutionListeners]] `spark.sql.queryExecutionListeners`
+| `spark.sql.globalTempDatabase`
+| `global_temp`
+| GLOBAL_TEMP_DATABASE
+a| [[spark.sql.globalTempDatabase]] *(internal)* Spark-owned internal database that keeps all the global temporary views
+
+Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<spark-sql-SharedState.adoc#globalTempViewManager, GlobalTempViewManager>>.
+
+NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<spark-sql-SharedState.adoc#externalCatalog, ExternalCatalog>>.
+
+| `spark.sql.queryExecutionListeners`
 | (empty)
-| `QUERY_EXECUTION_LISTENERS`
-a| List of class names that implement link:spark-sql-QueryExecutionListener.adoc[QueryExecutionListener] that will be automatically added to newly created sessions.
+| QUERY_EXECUTION_LISTENERS
+a| [[spark.sql.queryExecutionListeners]] List of class names that implement link:spark-sql-QueryExecutionListener.adoc[QueryExecutionListener] that will be automatically added to newly created sessions.
 
 The classes should have either a no-arg constructor, or a constructor that expects a `SparkConf` argument.
 
-| [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir`
+| `spark.sql.warehouse.dir`
 | `spark-warehouse`
-| `WAREHOUSE_PATH`
-a| The directory of a Hive warehouse (using Derby) with managed databases and tables (aka _Spark warehouse_)
+| WAREHOUSE_PATH
+a| [[spark.sql.warehouse.dir]] The directory of a Hive warehouse (using Derby) with managed databases and tables (aka _Spark warehouse_)
 
 TIP: Read the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document to learn more.
 
