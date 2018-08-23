@@ -104,7 +104,14 @@ Spark SQL uses the Hive-specific configuration properties that further fine-tune
 
 === [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir` Configuration Property
 
-link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that...FIXME
+link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
+
+[TIP]
+====
+Refer to link:spark-sql-SharedState.adoc[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
+
+See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
+====
 
 === Hive Metastore Deployment Modes
 
