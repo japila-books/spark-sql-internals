@@ -287,7 +287,7 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 
 * `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[executed]
 
-* `CreateTempViewUsing` runnable command is executed
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 
 * `FindDataSourceTable` is requested to link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
 

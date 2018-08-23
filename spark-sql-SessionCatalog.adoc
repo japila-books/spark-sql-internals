@@ -73,13 +73,23 @@ NOTE: `databaseExists` is used when...FIXME
 
 [source, scala]
 ----
-listTables(db: String): Seq[TableIdentifier]
+listTables(db: String): Seq[TableIdentifier] // <1>
 listTables(db: String, pattern: String): Seq[TableIdentifier]
 ----
+<1> Uses `"*"` as the pattern
 
 `listTables`...FIXME
 
-NOTE: `listTables` is used when...FIXME
+[NOTE]
+====
+`listTables` is used when:
+
+* `ShowTablesCommand` logical command is requested to <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, run>>
+
+* `SessionCatalog` is requested to <<reset, reset>> (for testing)
+
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listTables, listTables>> (for testing)
+====
 
 === [[isTemporaryTable]] `isTemporaryTable` Method
 
@@ -220,9 +230,26 @@ NOTE: "Temporary table" and "temporary view" are synonyms.
 
 CAUTION: FIXME
 
-=== [[createGlobalTempView]] `createGlobalTempView` Method
+=== [[createGlobalTempView]] Creating (Registering) Global Temporary View -- `createGlobalTempView` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+createGlobalTempView(
+  name: String,
+  viewDefinition: LogicalPlan,
+  overrideIfExists: Boolean): Unit
+----
+
+`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.adoc#create, create a global temporary view>>.
+
+[NOTE]
+====
+`createGlobalTempView` is used when:
+
+* `CreateViewCommand` logical command is requested to <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, run>> (for a global temporary view)
+
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>> (for a global temporary view)
+====
 
 === [[createTable]] `createTable` Method
 
@@ -393,7 +420,7 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 
 * `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
 
-* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and `ShowTablesCommand` logical commands are executed
+* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, ShowTablesCommand>> logical commands are requested to run (executed)
 ====
 
 === [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method
@@ -404,3 +431,39 @@ requireDbExists(db: String): Unit
 ----
 
 `requireDbExists` reports a `NoSuchDatabaseException` if the <<databaseExists, specified database does not exist>>. Otherwise, `requireDbExists` does nothing.
+
+=== [[reset]] `reset` Method
+
+[source, scala]
+----
+reset(): Unit
+----
+
+`reset`...FIXME
+
+NOTE: `reset` is used exclusively in the Spark SQL internal tests.
+
+=== [[dropGlobalTempView]] Dropping Global Temporary View -- `dropGlobalTempView` Method
+
+[source, scala]
+----
+dropGlobalTempView(name: String): Boolean
+----
+
+`dropGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.adoc#remove, remove>> the `name` global temporary view.
+
+NOTE: `dropGlobalTempView` is used when...FIXME
+
+=== [[dropTable]] Dropping Table -- `dropTable` Method
+
+[source, scala]
+----
+dropTable(
+  name: TableIdentifier,
+  ignoreIfNotExists: Boolean,
+  purge: Boolean): Unit
+----
+
+`dropTable`...FIXME
+
+NOTE: `dropTable` is used when...FIXME

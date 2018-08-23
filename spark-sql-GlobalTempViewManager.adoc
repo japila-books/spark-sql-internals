@@ -112,11 +112,11 @@ Used when...FIXME
 clear(): Unit
 ----
 
-`clear`...FIXME
+`clear` simply removes all the entries in the <<viewDefinitions, viewDefinitions>> internal registry.
 
-NOTE: `clear` is used when...FIXME
+NOTE: `clear` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#reset, reset>> (that happens to be exclusively in the Spark SQL internal tests).
 
-=== [[create]] `create` Method
+=== [[create]] Creating (Registering) Global Temporary View -- `create` Method
 
 [source, scala]
 ----
@@ -126,9 +126,15 @@ create(
   overrideIfExists: Boolean): Unit
 ----
 
-`create`...FIXME
+`create` simply registers (adds) the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> under the input `name`.
 
-NOTE: `create` is used when...FIXME
+`create` throws an `AnalysisException` when the input `overrideIfExists` flag is off and the <<viewDefinitions, viewDefinitions>> internal registry contains the input `name`.
+
+```
+Temporary view '[table]' already exists
+```
+
+NOTE: `create` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#createGlobalTempView, createGlobalTempView>> (when <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, CreateViewCommand>> and <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, CreateTempViewUsing>> logical commands are executed).
 
 === [[get]] Retrieving Global View Definition Per Name -- `get` Method
 
@@ -141,27 +147,27 @@ get(name: String): Option[LogicalPlan]
 
 NOTE: `get` is used when...FIXME
 
-=== [[listViewNames]] `listViewNames` Method
+=== [[listViewNames]] Listing Global Temporary Views For Pattern -- `listViewNames` Method
 
 [source, scala]
 ----
 listViewNames(pattern: String): Seq[String]
 ----
 
-`listViewNames`...FIXME
+`listViewNames` simply gives a list of the global temporary views with names matching the input `pattern`.
 
-NOTE: `listViewNames` is used when...FIXME
+NOTE: `listViewNames` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#listTables, listTables>>
 
-=== [[remove]] `remove` Method
+=== [[remove]] Removing (De-Registering) Global Temporary View -- `remove` Method
 
 [source, scala]
 ----
 remove(name: String): Boolean
 ----
 
-`remove`...FIXME
+`remove` simply tries to remove the `name` from the <<viewDefinitions, viewDefinitions>> internal registry and returns `true` when removed or `false` otherwise.
 
-NOTE: `remove` is used when...FIXME
+NOTE: `remove` is used when `SessionCatalog` is requested to drop a <<spark-sql-SessionCatalog.adoc#dropGlobalTempView, global temporary view>> or <<spark-sql-SessionCatalog.adoc#dropTable, table>>.
 
 === [[rename]] `rename` Method
 

@@ -21,7 +21,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `ResolveSQLOnFile` converts a logical plan
 * `FindDataSourceTable` logical evaluation rule is link:spark-sql-FindDataSourceTable.adoc#apply[executed]
 * `RelationConversions` logical evaluation rule is link:spark-sql-RelationConversions.adoc#apply[executed]
-* `CreateTempViewUsing` runnable command is executed
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 
 [[apply]]

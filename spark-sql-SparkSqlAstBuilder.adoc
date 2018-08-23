@@ -126,7 +126,7 @@ a|
 
 * link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for `CREATE TABLE &hellip; AS &hellip;`
 
-* `CreateTempViewUsing` logical operators for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
+* <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>> logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
 
 | [[visitDescribeTable]][[DESCRIBE]] `visitDescribeTable`
 | `#describeTable`

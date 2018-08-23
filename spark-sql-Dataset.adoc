@@ -338,7 +338,7 @@ Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the i
 
 * `SparkSession` is requested to <<spark-sql-SparkSession.adoc#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<spark-sql-SparkSession.adoc#createDataFrame, createDataFrame>>, <<spark-sql-SparkSession.adoc#internalCreateDataFrame, internalCreateDataFrame>>, <<spark-sql-SparkSession.adoc#sql, sql>> and <<spark-sql-SparkSession.adoc#table, table>>
 
-* `CacheTableCommand`, `CreateTempViewUsing`, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (`run`)
+* `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are requested to run (executed)
 
 * `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, writeAndRead>> (for a <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>>)
 

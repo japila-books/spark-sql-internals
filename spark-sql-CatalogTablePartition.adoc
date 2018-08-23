@@ -9,7 +9,7 @@
 [[simpleString]]
 The *readable text representation* of a `CatalogTablePartition` (aka `simpleString`) is...FIXME
 
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is executed (with a partition specification).
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, executed>> (with a partition specification).
 
 [[toString]]
 `CatalogTablePartition` uses the following *text representation* (i.e. `toString`)...FIXME

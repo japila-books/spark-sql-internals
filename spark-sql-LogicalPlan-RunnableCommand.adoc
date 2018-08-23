@@ -139,8 +139,8 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | CreateTableLikeCommand
 |
 
-| CreateTempViewUsing
-|
+| <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>>
+| [[CreateTempViewUsing]]
 
 | CreateViewCommand
 |
@@ -225,8 +225,8 @@ Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrame
 | ShowTablePropertiesCommand
 |
 
-| ShowTablesCommand
-|
+| <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#, ShowTablesCommand>>
+| [[ShowTablesCommand]]
 
 | StreamingExplainCommand
 |
