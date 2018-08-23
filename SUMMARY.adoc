@@ -81,7 +81,7 @@
 
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 
-. link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
+. link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager -- Management Interface of Global Temporary Views]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
 .. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]

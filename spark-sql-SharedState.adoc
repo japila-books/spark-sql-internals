@@ -20,9 +20,9 @@ a| [[externalCatalog]] Metastore of permanent relational entities, i.e. database
 
 NOTE: `externalCatalog` is initialized lazily on the first access.
 
-| `globalTempViewManager`
-| link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
-| [[globalTempViewManager]]
+| <<globalTempViewManager-indepth, globalTempViewManager>>
+| <<spark-sql-GlobalTempViewManager.adoc#, GlobalTempViewManager>>
+| [[globalTempViewManager]] Management interface of global temporary views
 
 | `jarClassLoader`
 | `NonClosableMutableURLClassLoader`
@@ -45,8 +45,8 @@ NOTE: `externalCatalog` is initialized lazily on the first access.
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
 scala> :type spark.sharedState
 org.apache.spark.sql.internal.SharedState
@@ -56,9 +56,6 @@ org.apache.spark.sql.internal.SharedState
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> spark.newSession.sharedState == spark.sharedState
 res1: Boolean = true
 ----
@@ -79,7 +76,7 @@ log4j.logger.org.apache.spark.sql.internal.SharedState=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[warehousePath-indepth]] warehousePath Property
+=== [[warehousePath-indepth]] `warehousePath` Property
 
 [source, scala]
 ----
@@ -124,7 +121,7 @@ You should see the following INFO message in the logs:
 Setting hive.metastore.warehouse.dir ('[hiveWarehouseDir]') to the value of spark.sql.warehouse.dir ('[sparkWarehouseDir]').
 ```
 
-=== [[externalCatalog-indepth]] externalCatalog Property
+=== [[externalCatalog-indepth]] `externalCatalog` Property
 
 [source, scala]
 ----
@@ -155,3 +152,22 @@ externalCatalogClassName(conf: SparkConf): String
 * link:spark-sql-InMemoryCatalog.adoc[org.apache.spark.sql.catalyst.catalog.InMemoryCatalog] for `in-memory`
 
 NOTE: `externalCatalogClassName` is used exclusively when `SharedState` is requested for the <<externalCatalog, ExternalCatalog>>.
+
+=== [[globalTempViewManager-indepth]] Accessing Management Interface of Global Temporary Views -- `globalTempViewManager` Property
+
+[source, scala]
+----
+globalTempViewManager: GlobalTempViewManager
+----
+
+When accessed for the very first time, `globalTempViewManager` gets the name of the global temporary view database (as the value of <<spark-sql-StaticSQLConf.adoc#spark.sql.globalTempDatabase, spark.sql.globalTempDatabase>> internal static configuration property).
+
+In the end, `globalTempViewManager` creates a new <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> (with the database name).
+
+`globalTempViewManager` throws a `SparkException` when the global temporary view database <<spark-sql-ExternalCatalog.adoc#databaseExists, exist>> in the <<externalCatalog, ExternalCatalog>>.
+
+```
+[globalTempDB] is a system preserved database, please rename your existing database to resolve the name conflict, or set a different value for spark.sql.globalTempDatabase, and launch your Spark application again.
+```
+
+NOTE: `globalTempViewManager` is used when <<spark-sql-BaseSessionStateBuilder.adoc#catalog, BaseSessionStateBuilder>> and <<spark-sql-HiveSessionStateBuilder.adoc#catalog, HiveSessionStateBuilder>> are requested for the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>.

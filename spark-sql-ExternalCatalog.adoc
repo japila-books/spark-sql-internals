@@ -176,8 +176,8 @@ abstract class ExternalCatalog {
 | Method
 | Description
 
-| [[databaseExists]] `databaseExists`
-| Used when...FIXME
+| `databaseExists`
+| [[databaseExists]] Used when...FIXME
 |===
 
 === [[doAlterTableStats]] Altering Table Statistics -- `doAlterTableStats` Method

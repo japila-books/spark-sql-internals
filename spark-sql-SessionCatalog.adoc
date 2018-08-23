@@ -1,8 +1,10 @@
 == [[SessionCatalog]] SessionCatalog -- Session-Scoped Catalog of Relational Entities
 
-`SessionCatalog` is the catalog of (the metadata of) session-scoped relational temporary and permanent relational entities, i.e. databases, tables, views, partitions, and functions.
+`SessionCatalog` is the catalog (_registry_) of relational entities, i.e. databases, tables, views, partitions, and functions (in a <<spark-sql-SparkSession.adoc#catalog, SparkSession>>).
 
-For the metadata of permanent entities (i.e. <<getTableMetadata, tables>>) `SessionCatalog` requests <<externalCatalog, ExternalCatalog>>.
+One notable usage of `SessionCatalog` is to create a <<spark-sql-Analyzer.adoc#catalog, Analyzer>> or a <<spark-sql-SparkOptimizer.adoc#catalog, SparkOptimizer>>.
+
+`SessionCatalog` uses the <<externalCatalog, ExternalCatalog>> for the metadata of permanent entities (i.e. <<getTableMetadata, tables>>).
 
 NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (i.e. `in-memory` or `hive`) to be used.
 
@@ -10,8 +12,8 @@ NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog

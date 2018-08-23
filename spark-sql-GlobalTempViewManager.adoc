@@ -1,12 +1,134 @@
-== [[GlobalTempViewManager]] GlobalTempViewManager
+== [[GlobalTempViewManager]] GlobalTempViewManager -- Management Interface of Global Temporary Views
 
-`GlobalTempViewManager` is...FIXME
+`GlobalTempViewManager` is the <<methods, management interface>> to manage global temporary views.
 
-`GlobalTempViewManager` is <<creating-instance, created>> when...FIXME
+`GlobalTempViewManager` is available as <<spark-sql-SharedState.adoc#globalTempViewManager, globalTempViewManager>> property of a `SharedState`.
+
+.GlobalTempViewManager and SparkSession
+image::images/spark-sql-GlobalTempViewManager.png[align="center"]
+
+[source, scala]
+----
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sharedState.globalTempViewManager
+org.apache.spark.sql.catalyst.catalog.GlobalTempViewManager
+----
+
+[[methods]]
+.GlobalTempViewManager API
+[cols="1,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| <<clear, clear>>
+a|
+
+[source, scala]
+----
+clear(): Unit
+----
+
+| <<create, create>>
+a|
+
+[source, scala]
+----
+create(
+  name: String,
+  viewDefinition: LogicalPlan,
+  overrideIfExists: Boolean): Unit
+----
+
+| <<get, get>>
+a|
+
+[source, scala]
+----
+get(name: String): Option[LogicalPlan]
+----
+
+| <<listViewNames, listViewNames>>
+a|
+
+[source, scala]
+----
+listViewNames(pattern: String): Seq[String]
+----
+
+| <<remove, remove>>
+a|
+
+[source, scala]
+----
+remove(name: String): Boolean
+----
+
+| <<rename, rename>>
+a|
+
+[source, scala]
+----
+rename(oldName: String, newName: String): Boolean
+----
+
+| <<update, update>>
+a|
+
+[source, scala]
+----
+update(name: String, viewDefinition: LogicalPlan): Boolean
+----
+|===
+
+`GlobalTempViewManager` is <<creating-instance, created>> exclusively when `SharedState` is requested for <<spark-sql-SharedState.adoc#globalTempViewManager, one>> (for the very first time only as it is cached).
 
 [[database]]
 [[creating-instance]]
 `GlobalTempViewManager` takes the name of the database when created.
+
+.Creating GlobalTempViewManager
+image::images/spark-sql-GlobalTempViewManager-creating-instance.png[align="center"]
+
+[[internal-registries]]
+.GlobalTempViewManager's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| viewDefinitions
+| [[viewDefinitions]] Registry of global view definitions with <<spark-sql-LogicalPlan.adoc#, logical plans>> per view name.
+
+Used when...FIXME
+|===
+
+=== [[clear]] `clear` Method
+
+[source, scala]
+----
+clear(): Unit
+----
+
+`clear`...FIXME
+
+NOTE: `clear` is used when...FIXME
+
+=== [[create]] `create` Method
+
+[source, scala]
+----
+create(
+  name: String,
+  viewDefinition: LogicalPlan,
+  overrideIfExists: Boolean): Unit
+----
+
+`create`...FIXME
+
+NOTE: `create` is used when...FIXME
 
 === [[get]] Retrieving Global View Definition Per Name -- `get` Method
 
@@ -18,3 +140,47 @@ get(name: String): Option[LogicalPlan]
 `get`...FIXME
 
 NOTE: `get` is used when...FIXME
+
+=== [[listViewNames]] `listViewNames` Method
+
+[source, scala]
+----
+listViewNames(pattern: String): Seq[String]
+----
+
+`listViewNames`...FIXME
+
+NOTE: `listViewNames` is used when...FIXME
+
+=== [[remove]] `remove` Method
+
+[source, scala]
+----
+remove(name: String): Boolean
+----
+
+`remove`...FIXME
+
+NOTE: `remove` is used when...FIXME
+
+=== [[rename]] `rename` Method
+
+[source, scala]
+----
+rename(oldName: String, newName: String): Boolean
+----
+
+`rename`...FIXME
+
+NOTE: `rename` is used when...FIXME
+
+=== [[update]] `update` Method
+
+[source, scala]
+----
+update(name: String, viewDefinition: LogicalPlan): Boolean
+----
+
+`update`...FIXME
+
+NOTE: `update` is used when...FIXME

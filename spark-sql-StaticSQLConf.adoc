@@ -54,7 +54,7 @@ Used when:
 | `spark.sql.globalTempDatabase`
 | `global_temp`
 | GLOBAL_TEMP_DATABASE
-a| [[spark.sql.globalTempDatabase]] *(internal)* Spark-owned internal database that keeps all the global temporary views
+a| [[spark.sql.globalTempDatabase]] *(internal)* Name of the Spark-owned internal database of global temporary views
 
 Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<spark-sql-SharedState.adoc#globalTempViewManager, GlobalTempViewManager>>.
 

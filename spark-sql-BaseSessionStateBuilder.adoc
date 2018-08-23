@@ -52,10 +52,12 @@ NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.
 | [[analyzer]] analyzer
 | link:spark-sql-Analyzer.adoc[Analyzer]
 
-| [[catalog]] `catalog`
-| link:spark-sql-SessionCatalog.adoc[SessionCatalog]
+| `catalog`
+a| [[catalog]] <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>
 
-Used to create <<analyzer, Analyzer>> and <<optimizer, Optimizer>>
+Used to create <<analyzer, Analyzer>>, <<optimizer, Optimizer>> and a <<build, SessionState>> itself
+
+NOTE: <<spark-sql-HiveSessionStateBuilder.adoc#, HiveSessionStateBuilder>> manages its own Hive-aware <<spark-sql-HiveSessionStateBuilder.adoc#catalog, HiveSessionCatalog>>.
 
 | [[conf]] `conf`
 | link:spark-sql-SQLConf.adoc[SQLConf]
