@@ -1,6 +1,8 @@
 == [[GlobalTempViewManager]] GlobalTempViewManager -- Management Interface of Global Temporary Views
 
-`GlobalTempViewManager` is the <<methods, management interface>> to manage global temporary views.
+`GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views.
+
+Strictly speaking, `GlobalTempViewManager` simply manages the names and the corresponding <<spark-sql-LogicalPlan.adoc#, logical plans>> in the <<viewDefinitions, viewDefinitions>> internal registry and has no interaction with other services in Spark SQL.
 
 `GlobalTempViewManager` is available as <<spark-sql-SharedState.adoc#globalTempViewManager, globalTempViewManager>> property of a `SharedState`.
 
@@ -100,9 +102,7 @@ image::images/spark-sql-GlobalTempViewManager-creating-instance.png[align="cente
 | Description
 
 | viewDefinitions
-| [[viewDefinitions]] Registry of global view definitions with <<spark-sql-LogicalPlan.adoc#, logical plans>> per view name.
-
-Used when...FIXME
+| [[viewDefinitions]] Registry of global temporary view definitions as <<spark-sql-LogicalPlan.adoc#, logical plans>> per view name.
 |===
 
 === [[clear]] `clear` Method
@@ -116,7 +116,7 @@ clear(): Unit
 
 NOTE: `clear` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#reset, reset>> (that happens to be exclusively in the Spark SQL internal tests).
 
-=== [[create]] Creating (Registering) Global Temporary View -- `create` Method
+=== [[create]] Creating (Registering) Global Temporary View (Definition) -- `create` Method
 
 [source, scala]
 ----
@@ -143,9 +143,9 @@ NOTE: `create` is used when `SessionCatalog` is requested to <<spark-sql-Session
 get(name: String): Option[LogicalPlan]
 ----
 
-`get`...FIXME
+`get` simply returns the <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> that was registered under the `name` if it defined.
 
-NOTE: `get` is used when...FIXME
+NOTE: `get` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#getGlobalTempView, getGlobalTempView>>, <<spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata, getTempViewOrPermanentTableMetadata>>, <<spark-sql-SessionCatalog.adoc#lookupRelation, lookupRelation>>, <<spark-sql-SessionCatalog.adoc#isTemporaryTable, isTemporaryTable>> or <<spark-sql-SessionCatalog.adoc#refreshTable, refreshTable>>.
 
 === [[listViewNames]] Listing Global Temporary Views For Pattern -- `listViewNames` Method
 

@@ -299,9 +299,6 @@ lookupRelation(name: TableIdentifier): LogicalPlan
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
@@ -467,3 +464,14 @@ dropTable(
 `dropTable`...FIXME
 
 NOTE: `dropTable` is used when...FIXME
+
+=== [[getGlobalTempView]] Getting Global Temporary View (Definition) -- `getGlobalTempView` Method
+
+[source, scala]
+----
+getGlobalTempView(name: String): Option[LogicalPlan]
+----
+
+`getGlobalTempView`...FIXME
+
+NOTE: `getGlobalTempView` is used when...FIXME
