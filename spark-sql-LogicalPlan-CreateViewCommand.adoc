@@ -1,8 +1,12 @@
 == [[CreateViewCommand]] CreateViewCommand Logical Command
 
-`CreateViewCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for creating a view or a table.
+`CreateViewCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for <<run, creating a view or a table>>.
 
-`CreateViewCommand` is a result of parsing `CREATE VIEW` (and variants) in SQL and executing `Dataset` operators: link:spark-sql-dataset-operators.adoc#createTempView[createTempView], link:spark-sql-dataset-operators.adoc#createOrReplaceTempView[createOrReplaceTempView], and link:spark-sql-dataset-operators.adoc#createGlobalTempView[createGlobalTempView].
+`CreateViewCommand` is <<creating-instance, created>> to represent the following:
+
+* `CREATE VIEW` SQL statements (with variants)
+
+* `Dataset` operators: <<spark-sql-dataset-operators.adoc#createTempView, createTempView>>, <<spark-sql-dataset-operators.adoc#createOrReplaceTempView, createOrReplaceTempView>>, and <<spark-sql-dataset-operators.adoc#createGlobalTempView, createGlobalTempView>>.
 
 TIP: `CreateViewCommand` is described by `createView` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser].
 
@@ -53,3 +57,17 @@ run(sparkSession: SparkSession): Seq[Row]
 NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
 
 `run`...FIXME
+
+=== [[creating-instance]] Creating CreateViewCommand Instance
+
+`CreateViewCommand` takes the following when created:
+
+* [[name]] `TableIdentifier`
+* [[userSpecifiedColumns]] User-defined columns (as `Seq[(String, Option[String])]`)
+* [[comment]] Optional comment
+* [[properties]] Properties (as `Map[String, String]`)
+* [[originalText]] Optional DDL statement
+* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
+* [[allowExisting]] `allowExisting` flag
+* [[replace]] `replace` flag
+* [[viewType]] `ViewType`

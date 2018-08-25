@@ -166,8 +166,8 @@ Used when:
 
 Used when...FIXME
 
-! [[logicalPlan]] `logicalPlan`
-a! Analyzed <<spark-sql-LogicalPlan.adoc#, logical plan>> with all <<spark-sql-LogicalPlan-Command.adoc#, logical commands>> executed and turned into a <<spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance, LocalRelation>>.
+! `logicalPlan`
+a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.adoc#, logical plan>> with all <<spark-sql-LogicalPlan-Command.adoc#, logical commands>> executed and turned into a <<spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance, LocalRelation>>.
 
 [source, scala]
 ----

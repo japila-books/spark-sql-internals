@@ -2,7 +2,7 @@
 
 `DataSource` is one of the main parts of *Data Source API* in Spark SQL (together with link:spark-sql-DataFrameReader.adoc[DataFrameReader] for loading datasets, link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for saving datasets and `StreamSourceProvider` for creating streaming sources).
 
-`DataSource` models a **pluggable data provider framework** with <<providers, extension points>> for Spark SQL integrators to expand the list of supported external data sources in Spark SQL.
+`DataSource` models a *pluggable data provider framework* with the <<providers, extension points>> for Spark SQL integrators to expand the list of supported external data sources in Spark SQL.
 
 `DataSource` is <<creating-instance, created>> when:
 
