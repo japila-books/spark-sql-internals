@@ -213,7 +213,7 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[alterTempViewDefinition]] `alterTempViewDefinition` Method
+=== [[alterTempViewDefinition]] Altering (Updating) Temporary View (Logical Plan) -- `alterTempViewDefinition` Method
 
 [source, scala]
 ----
@@ -225,6 +225,8 @@ alterTempViewDefinition(name: TableIdentifier, viewDefinition: LogicalPlan): Boo
 NOTE: "Temporary table" and "temporary view" are synonyms.
 
 `alterTempViewDefinition` returns `true` when an update could be executed and finished successfully.
+
+NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run, executed>>.
 
 === [[createTempView]] `createTempView` Method
 
@@ -246,9 +248,9 @@ createGlobalTempView(
 ====
 `createGlobalTempView` is used when:
 
-* `CreateViewCommand` logical command is requested to <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, run>> (for a global temporary view)
+* `CreateViewCommand` logical command is requested to <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, run>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType, view type>> is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView, GlobalTempView>>)
 
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>> (for a global temporary view)
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global, global>> flag is on)
 ====
 
 === [[createTable]] `createTable` Method
@@ -463,7 +465,20 @@ dropTable(
 
 `dropTable`...FIXME
 
-NOTE: `dropTable` is used when...FIXME
+[NOTE]
+====
+`dropTable` is used when:
+
+* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>>
+
+* `DropTableCommand` logical command is <<spark-sql-LogicalPlan-DropTableCommand.adoc#run, executed>>
+
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveAsTable, save a DataFrame to a table>> (with `Overwrite` save mode)
+
+* `CreateHiveTableAsSelectCommand` logical command is <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#run, executed>>
+
+* `SessionCatalog` is requested to <<reset, reset>>
+====
 
 === [[getGlobalTempView]] Getting Global Temporary View (Definition) -- `getGlobalTempView` Method
 

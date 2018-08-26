@@ -374,6 +374,7 @@
 . link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
 . link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
 . link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
+. link:spark-sql-LogicalPlan-DropTableCommand.adoc[DropTableCommand]
 . link:spark-sql-LogicalPlan-Except.adoc[Except]
 . link:spark-sql-LogicalPlan-Expand.adoc[Expand]
 . link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]

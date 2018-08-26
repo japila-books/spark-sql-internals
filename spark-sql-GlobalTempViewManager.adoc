@@ -1,8 +1,8 @@
 == [[GlobalTempViewManager]] GlobalTempViewManager -- Management Interface of Global Temporary Views
 
-`GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views.
+`GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views (that `SessionCatalog` uses when requested to <<spark-sql-SessionCatalog.adoc#createGlobalTempView, create>>, <<spark-sql-SessionCatalog.adoc#alterTempViewDefinition, alter>> or <<spark-sql-SessionCatalog.adoc#dropGlobalTempView, drop>> global temporary views).
 
-Strictly speaking, `GlobalTempViewManager` simply manages the names and the corresponding <<spark-sql-LogicalPlan.adoc#, logical plans>> in the <<viewDefinitions, viewDefinitions>> internal registry and has no interaction with other services in Spark SQL.
+Strictly speaking, `GlobalTempViewManager` simply <<viewDefinitions, manages>> the names of the global temporary views registered (and the corresponding <<spark-sql-LogicalPlan.adoc#, logical plans>>) and has no interaction with other services in Spark SQL.
 
 `GlobalTempViewManager` is available as <<spark-sql-SharedState.adoc#globalTempViewManager, globalTempViewManager>> property of a `SharedState`.
 
@@ -156,7 +156,7 @@ listViewNames(pattern: String): Seq[String]
 
 `listViewNames` simply gives a list of the global temporary views with names matching the input `pattern`.
 
-NOTE: `listViewNames` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#listTables, listTables>>
+NOTE: `listViewNames` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#listTables, listTables>>
 
 === [[remove]] Removing (De-Registering) Global Temporary View -- `remove` Method
 
@@ -189,4 +189,4 @@ update(name: String, viewDefinition: LogicalPlan): Boolean
 
 `update`...FIXME
 
-NOTE: `update` is used when...FIXME
+NOTE: `update` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#alterTempViewDefinition, alter a global temporary view>>.

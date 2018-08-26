@@ -235,7 +235,7 @@ In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` 
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
-=== [[saveAsTable]] `saveAsTable` Method
+=== [[saveAsTable]] Saving DataFrame to Table -- `saveAsTable` Method
 
 [source, scala]
 ----

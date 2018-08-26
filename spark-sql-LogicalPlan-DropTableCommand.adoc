@@ -1,0 +1,14 @@
+== [[DropTableCommand]] DropTableCommand Logical Command
+
+`DropTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> for <<run, FIXME>>.
+
+=== [[run]] `run` Method
+
+[source, scala]
+----
+run(sparkSession: SparkSession): Seq[Row]
+----
+
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to run a logical command.
+
+`run`...FIXME
