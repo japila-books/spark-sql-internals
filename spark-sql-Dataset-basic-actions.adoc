@@ -270,7 +270,7 @@ createTempViewCommand(
 
 `createTempViewCommand`...FIXME
 
-NOTE: `createTempViewCommand` is used when...FIXME
+NOTE: `createTempViewCommand` is used when the following `Dataset` operators are used: <<spark-sql-dataset-operators.adoc#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.adoc#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.adoc#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.adoc#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>.
 
 === [[explain]] Displaying Logical and Physical Plans, Their Cost and Codegen -- `explain` Basic Action
 
