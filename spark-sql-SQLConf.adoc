@@ -48,13 +48,10 @@ res4: Boolean = true
 ====
 `SQLConf` is an internal part of Spark SQL and is not meant to be used directly.
 
-Spark SQL configuration is available through the user-facing interface `RuntimeConfig` that you can access using link:spark-sql-SparkSession.adoc#conf[SparkSession].
+Spark SQL configuration is available through <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using link:spark-sql-SparkSession.adoc#conf[SparkSession].
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark
 org.apache.spark.sql.SparkSession
 

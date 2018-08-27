@@ -609,16 +609,16 @@ val spark: SparkSession = // create instance
 val dfReader: DataFrameReader = spark.read
 ----
 
-=== [[conf]] Runtime Configuration -- `conf` attribute
+=== [[conf]] Getting Runtime Configuration -- `conf` Attribute
 
 [source, scala]
 ----
 conf: RuntimeConfig
 ----
 
-`conf` returns the current runtime configuration (as `RuntimeConfig`) that wraps link:spark-sql-SQLConf.adoc[SQLConf].
+`conf` returns the current <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>>.
 
-CAUTION: FIXME
+Internally, `conf` creates a <<spark-sql-RuntimeConfig.adoc#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<spark-sql-SessionState.adoc#conf, SQLConf>> of the <<sessionState, SessionState>>.
 
 === [[readStream]] `readStream` method
 
