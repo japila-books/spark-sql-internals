@@ -1,19 +1,16 @@
 == [[LogicalPlan]] LogicalPlan Contract -- Logical Relational Operator with Children and Expressions / Logical Query Plan
 
-`LogicalPlan` is a base Catalyst link:spark-sql-catalyst-QueryPlan.adoc[query plan] for *logical operators* to build a tree of logical operator nodes known as *logical query plan*.
+`LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
 `LogicalPlan` can be <<analyzed, analyzed>> and <<resolved, resolved>>.
 
-[TIP]
-====
-Use link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] of a structured query to see the link:spark-sql-QueryExecution.adoc#logical[logical plan].
+In order to get the <<spark-sql-QueryExecution.adoc#logical, logical plan>> of a structured query you should use the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>>.
 
 [source, scala]
 ----
 val q: DataFrame = ...
 val plan = q.queryExecution.logical
 ----
-====
 
 NOTE: A logical query plan is a tree of link:spark-sql-catalyst-TreeNode.adoc[nodes] of logical operators with their own trees of expressions. In other words, there are _at least_ two trees at every level (operator).
 
@@ -25,6 +22,19 @@ NOTE: A logical query plan is a tree of link:spark-sql-catalyst-TreeNode.adoc[no
 scala> plan.analyzed
 res1: Boolean = true
 ----
+
+[[logical-plan-to-be-analyzed-idiom]]
+[NOTE]
+====
+A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+
+[source, scala]
+----
+val qe = sparkSession.sessionState.executePlan(child)
+qe.assertAnalyzed()
+val analyzedPlan = qe.analyzed
+----
+====
 
 [[childrenResolved]]
 A logical operator is considered *partially resolved* when its link:spark-sql-catalyst-TreeNode.adoc#children[child operators] are resolved (aka _children resolved_).
@@ -59,6 +69,7 @@ maxRows: Option[Long] = None
 
 NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc[physical query plan].
 
+[[implementations]]
 [[specialized-logical-plans]]
 .Logical Operators / Specialized Logical Plans
 [cols="1,2",options="header",width="100%"]

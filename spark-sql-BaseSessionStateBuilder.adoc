@@ -165,3 +165,14 @@ build(): SessionState
 
 * [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
 * [[parentState]] Optional link:spark-sql-SessionState.adoc[SessionState]
+
+=== [[createQueryExecution]] Getting Function to Create QueryExecution For LogicalPlan -- `createQueryExecution` Method
+
+[source, scala]
+----
+createQueryExecution: LogicalPlan => QueryExecution
+----
+
+`createQueryExecution` simply returns a function that takes a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>> with the <<session, SparkSession>> and the logical plan.
+
+NOTE: `createQueryExecution` is used exclusively when `BaseSessionStateBuilder` is requested to <<build, create a SessionState instance>>.

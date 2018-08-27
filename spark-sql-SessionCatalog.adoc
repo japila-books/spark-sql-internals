@@ -228,11 +228,21 @@ NOTE: "Temporary table" and "temporary view" are synonyms.
 
 NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run, executed>>.
 
-=== [[createTempView]] `createTempView` Method
+=== [[createTempView]] Creating (Registering) Or Replacing Local Temporary View -- `createTempView` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+createTempView(
+  name: String,
+  tableDefinition: LogicalPlan,
+  overrideIfExists: Boolean): Unit
+----
 
-=== [[createGlobalTempView]] Creating (Registering) Global Temporary View -- `createGlobalTempView` Method
+`createTempView`...FIXME
+
+NOTE: `createTempView` is used when...FIXME
+
+=== [[createGlobalTempView]] Creating (Registering) Or Replacing Global Temporary View -- `createGlobalTempView` Method
 
 [source, scala]
 ----
@@ -255,7 +265,14 @@ createGlobalTempView(
 
 === [[createTable]] `createTable` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+createTable(tableDefinition: CatalogTable, ignoreIfExists: Boolean): Unit
+----
+
+`createTable`...FIXME
+
+NOTE: `createTable` is used when...FIXME
 
 === [[creating-instance]] Creating SessionCatalog Instance
 
