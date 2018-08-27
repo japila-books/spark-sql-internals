@@ -130,7 +130,15 @@ a|
 
 | `visitCreateView`
 | `#createView`
-| [[visitCreateView]] <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>> for `CREATE VIEW &hellip; AS &hellip;`
+a| [[visitCreateView]] <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>> for `CREATE VIEW AS` SQL statements
+
+```
+CREATE [OR REPLACE] [[GLOBAL] TEMPORARY]
+VIEW [IF NOT EXISTS] tableIdentifier
+[identifierCommentList] [COMMENT STRING]
+[PARTITIONED ON identifierList]
+[TBLPROPERTIES tablePropertyList] AS query
+```
 
 | `visitCreateTempViewUsing`
 | `#createTempViewUsing`
