@@ -310,7 +310,7 @@ version: String
 
 NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism to plug `BaseRelation` object hierarchy in into link:spark-sql-LogicalPlan.adoc[LogicalPlan] object hierarchy that `SparkSession` uses to bridge them.
 
-=== [[builder]] Creating SparkSession Using Builder Pattern -- `builder` Method
+=== [[builder]] Creating SparkSession Using Builder Pattern -- `builder` Object Method
 
 [source, scala]
 ----
