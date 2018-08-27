@@ -38,7 +38,7 @@ SaveIntoDataSourceCommand [dataSource], [redacted], [mode]
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` simply requests the <<dataSource, CreatableRelationProvider data source>> to <<spark-sql-CreatableRelationProvider.adoc#createRelation, save the rows of a structured query (a DataFrame)>>.
 

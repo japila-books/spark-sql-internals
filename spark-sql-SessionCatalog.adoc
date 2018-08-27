@@ -258,9 +258,9 @@ createGlobalTempView(
 ====
 `createGlobalTempView` is used when:
 
-* `CreateViewCommand` logical command is requested to <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, run>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType, view type>> is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView, GlobalTempView>>)
+* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType, view type>> is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView, GlobalTempView>>)
 
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global, global>> flag is on)
+* `CreateTempViewUsing` logical command is <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, executed>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global, global>> flag is on)
 ====
 
 === [[createTable]] `createTable` Method

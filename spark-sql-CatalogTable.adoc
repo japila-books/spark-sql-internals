@@ -33,13 +33,13 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
 
-* `InsertIntoHiveDirCommand` is executed
+* `InsertIntoHiveDirCommand` logical command is executed
 
 * `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
 
-* `CreateTableLikeCommand` is executed
+* `CreateTableLikeCommand` logical command is executed
 
-* `CreateViewCommand` does link:spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable[prepareTable]
+* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.adoc#prepareTable, prepareTable>>)
 
 * `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[createTable]
 

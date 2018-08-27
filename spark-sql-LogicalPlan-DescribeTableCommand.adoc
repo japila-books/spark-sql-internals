@@ -4,14 +4,14 @@
 
 `DescribeTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse link:spark-sql-SparkSqlAstBuilder.adoc#visitDescribeTable[DESCRIBE TABLE] (with no column specified).
 
-=== [[run]] Executing DescribeTableCommand -- `run` Method
+=== [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
 ----
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME
 

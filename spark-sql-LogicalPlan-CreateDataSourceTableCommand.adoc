@@ -6,14 +6,14 @@
 
 `CreateDataSourceTableCommand` takes a `table` metadata and `ignoreIfExists` flag.
 
-=== [[run]] Running Logical Command -- `run` Method
+=== [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
 ----
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` link:spark-sql-SessionCatalog.adoc#createTable[creates a new table] in a session-scoped `SessionCatalog`.
 

@@ -40,8 +40,8 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 | AlterDatabasePropertiesCommand
 |
 
-| [[AlterTableAddPartitionCommand]] `AlterTableAddPartitionCommand`
-|
+| AlterTableAddPartitionCommand
+| [[AlterTableAddPartitionCommand]]
 
 | AlterTableChangeColumnCommand
 |
@@ -73,17 +73,17 @@ NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan
 | AlterViewAsCommand
 |
 
-| [[AnalyzeColumnCommand]] link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
-|
+| link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
+| [[AnalyzeColumnCommand]]
 
-| [[AnalyzePartitionCommand]] link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
-|
+| link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
+| [[AnalyzePartitionCommand]]
 
-| [[AnalyzeTableCommand]] link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
-|
+| link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
+| [[AnalyzeTableCommand]]
 
-| [[CacheTableCommand]] CacheTableCommand
-a| When <<run, executed>>, `CacheTableCommand` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] followed by link:spark-sql-dataset-operators.adoc#createTempView[registering a temporary view] for the optional `query`.
+| CacheTableCommand
+a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] followed by link:spark-sql-dataset-operators.adoc#createTempView[registering a temporary view] for the optional `query`.
 
 [source, scala]
 ----
@@ -119,19 +119,19 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | CreateDatabaseCommand
 |
 
-| [[CreateDataSourceTableAsSelectCommand]] link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
-| When <<run, executed>>, ...FIXME
+| link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
+| [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
 
 Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
 
 | link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
-|
+| [[CreateDataSourceTableCommand]]
 
 | CreateFunctionCommand
 |
 
-| [[CreateHiveTableAsSelectCommand]] `CreateHiveTableAsSelectCommand`
-|
+| CreateHiveTableAsSelectCommand
+| [[CreateHiveTableAsSelectCommand]]
 
 | CreateTableCommand
 |
@@ -142,11 +142,11 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>>
 | [[CreateTempViewUsing]]
 
-| CreateViewCommand
-|
+| <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>>
+| [[CreateViewCommand]]
 
-| [[DescribeColumnCommand]] link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
-|
+| link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
+| [[DescribeColumnCommand]]
 
 | DescribeDatabaseCommand
 |
@@ -154,8 +154,8 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | DescribeFunctionCommand
 |
 
-| [[DescribeTableCommand]] link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
-|
+| link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
+| [[DescribeTableCommand]]
 
 | DropDatabaseCommand
 |
@@ -169,14 +169,14 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | ExplainCommand
 |
 
-| [[InsertIntoDataSourceCommand]] link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
-|
+| link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
+| [[InsertIntoDataSourceCommand]]
 
-| [[InsertIntoHadoopFsRelationCommand]] link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
-|
+| link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
+| [[InsertIntoHadoopFsRelationCommand]]
 
-| [[InsertIntoHiveTable]] link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
-|
+| link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+| [[InsertIntoHiveTable]]
 
 | ListFilesCommand
 |
@@ -196,13 +196,13 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | ResetCommand
 |
 
-| [[SaveIntoDataSourceCommand]] `SaveIntoDataSourceCommand`
-| When <<run, executed>>, requests `DataSource` to link:spark-sql-DataSource.adoc#write[write a DataFrame to a data source per save mode].
+| SaveIntoDataSourceCommand
+| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to link:spark-sql-DataSource.adoc#write[write a DataFrame to a data source per save mode].
 
 Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#save[save a DataFrame to a data source].
 
-| [[SetCommand]] SetCommand
-|
+| SetCommand
+| [[SetCommand]]
 
 | SetDatabaseCommand
 |

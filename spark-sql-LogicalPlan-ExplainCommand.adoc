@@ -71,14 +71,14 @@ The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `ExplainCo
 
 NOTE: `ExplainCommand` is created when...FIXME
 
-=== [[run]] Computing Text Representation of QueryExecution (as Single Row) -- `run` Method
+=== [[run]] Executing Logical Command (Computing Text Representation of QueryExecution) -- `run` Method
 
 [source, scala]
 ----
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
 

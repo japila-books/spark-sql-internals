@@ -111,14 +111,14 @@ NOTE: `AnalyzeColumnCommand` is described by `analyze` labeled alternative in `s
 
 NOTE: `AnalyzeColumnCommand` is not supported on views.
 
-=== [[run]] `run` Method
+=== [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
 ----
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` calculates the following statistics:
 
