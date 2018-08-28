@@ -8,7 +8,7 @@
 
 * `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#cacheTable[cache a table or view in-memory] or link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
 
-* `InsertIntoDataSourceCommand` logical command is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed] (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#recacheByPlan[recacheByPlan])
+* `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>> (and in turn requests `CacheManager` to <<spark-sql-CacheManager.adoc#recacheByPlan, recacheByPlan>>)
 
 * `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshByPath[refreshByPath] (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#recacheByPath[recacheByPath])
 

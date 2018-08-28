@@ -118,7 +118,7 @@ recacheByPlan(spark: SparkSession, plan: LogicalPlan): Unit
 
 `recacheByPlan`...FIXME
 
-NOTE: `recacheByPlan` is used exclusively when `InsertIntoDataSourceCommand` logical command is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed].
+NOTE: `recacheByPlan` is used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>>.
 
 === [[recacheByPath]] `recacheByPath` Method
 

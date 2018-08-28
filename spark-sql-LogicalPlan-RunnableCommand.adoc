@@ -169,7 +169,7 @@ Used exclusively when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 | ExplainCommand
 |
 
-| link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
+| <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]]
 
 | link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]

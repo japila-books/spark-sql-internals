@@ -41,7 +41,7 @@ NOTE: `externalCatalog` is initialized lazily on the first access.
 | [[warehousePath]] Warehouse path
 |===
 
-`SharedState` is available as link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of a `SparkSession`.
+`SharedState` is available as the <<spark-sql-SparkSession.adoc#sharedState, sharedState>> property of a `SparkSession`.
 
 [source, scala]
 ----

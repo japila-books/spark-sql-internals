@@ -754,7 +754,7 @@ internalCreateDataFrame(
 
 * `SparkSession` is requested to <<createDataFrame, create a DataFrame from RDD of rows>>
 
-* `InsertIntoDataSourceCommand` is link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run[executed]
+* `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>>
 ====
 
 === [[creating-instance]] Creating SparkSession Instance

@@ -19,7 +19,7 @@ trait InsertableRelation {
 | Description
 
 | `insert`
-| [[insert]] Inserts or overwrites data in a <<spark-sql-BaseRelation.adoc#, relation>>
+| [[insert]] Inserts or overwrites data (as <<spark-sql-DataFrame.adoc#, DataFrame>>) in a <<spark-sql-BaseRelation.adoc#, relation>>
 
 Used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>>
 |===
