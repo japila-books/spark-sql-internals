@@ -335,7 +335,7 @@ Hive data source can only be used with tables, you can not write files of Hive d
 '[operation]' does not support bucketing right now
 ```
 
-=== [[jdbc]] `jdbc` Method
+=== [[jdbc]] Saving Data to Table Using JDBC Data Source -- `jdbc` Method
 
 [source, scala]
 ----
@@ -388,7 +388,7 @@ partitionBy(colNames: String*): DataFrameWriter[T]
 
 CAUTION: FIXME
 
-=== [[mode]] Defining Write Behaviour Per Sink's Existence (aka Save Mode) -- `mode` Method
+=== [[mode]] Specifying Save Mode -- `mode` Method
 
 [source, scala]
 ----
@@ -406,16 +406,16 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 | Description
 
 | `Append`
-| Records are appended to existing data.
+| [[Append]] Records are appended to existing data.
 
 | `ErrorIfExists`
-| Exception is thrown.
+| [[ErrorIfExists]] Exception is thrown.
 
 | `Ignore`
-| Do not save the records and not change the existing data in any way.
+| [[Ignore]] Do not save the records and not change the existing data in any way.
 
 | `Overwrite`
-| Existing data is overwritten by new records.
+| [[Overwrite]] Existing data is overwritten by new records.
 |===
 
 === [[sortBy]] Specifying Sorting Columns -- `sortBy` Method

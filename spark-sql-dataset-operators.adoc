@@ -673,7 +673,7 @@ withColumnRenamed(existingName: String, newName: String): DataFrame
 ----
 
 | <<spark-sql-Dataset-basic-actions.adoc#write, write>>
-a| [[write]] Basic action
+a| [[write]] Basic action to return a <<spark-sql-DataFrameWriter.adoc#, DataFrameWriter>>
 
 [source, scala]
 ----

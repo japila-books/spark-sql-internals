@@ -68,20 +68,20 @@ If however the table *does* exist, `createRelation` branches off per link:spark-
 | Name
 | Description
 
-| `Append`
+| <<spark-sql-DataFrameWriter.adoc#Append, Append>>
 | Saves the records to the table.
 
-| `ErrorIfExists`
+| <<spark-sql-DataFrameWriter.adoc#ErrorIfExists, ErrorIfExists>>
 a| Throws a `AnalysisException` with the message:
 
 ```
 Table or view '[table]' already exists. SaveMode: ErrorIfExists.
 ```
 
-| `Ignore`
+| <<spark-sql-DataFrameWriter.adoc#Ignore, Ignore>>
 | Does nothing.
 
-| `Overwrite`
+| <<spark-sql-DataFrameWriter.adoc#Overwrite, Overwrite>>
 a| Truncates or drops the table
 
 NOTE: `createRelation` truncates the table only when link:spark-sql-JDBCOptions.adoc#truncate[truncate] JDBC option is enabled and link:spark-sql-JdbcDialect.adoc#isCascadingTruncateTable[isCascadingTruncateTable] is disabled.

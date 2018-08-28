@@ -172,7 +172,7 @@ NOTE: The <<options, options>> are case-insensitive.
 
 The input `URL` and <<table, table>> are set as the current <<url, url>> and <<dbtable, dbtable>> options (overriding the values in the input <<parameters, parameters>> if defined).
 
-=== [[asProperties]] `asProperties` Property
+=== [[asProperties]] Converting Parameters (Options) to Java Properties -- `asProperties` Property
 
 [source, scala]
 ----
