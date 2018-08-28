@@ -8,9 +8,6 @@
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // make sure that the tables are available in a catalog
 sql("CREATE TABLE IF NOT EXISTS t1(id long)")
 sql("CREATE TABLE IF NOT EXISTS t2(id long)")
@@ -35,7 +32,7 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 
 * `RelationConversions` logical evaluation rule is link:spark-sql-RelationConversions.adoc#apply[executed] (and transforms `InsertIntoTable` operators)
 
-* `CreateHiveTableAsSelectCommand` command is executed
+* `CreateHiveTableAsSelectCommand` logical command is <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#run, executed>>
 
 [[output]]
 `InsertIntoTable` has an empty output schema.
@@ -48,7 +45,7 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 
 * link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical command (when link:spark-sql-HiveAnalysis.adoc#apply[HiveAnalysis] resolution rule transforms `InsertIntoTable` with link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation])
 
-* link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand] logical command (when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on a <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>)
+* link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand] logical command (when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on a <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>)
 
 * link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand] logical command (when link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule transforms `InsertIntoTable` with `LogicalRelation` on `HadoopFsRelation`)
 

@@ -1,6 +1,27 @@
 == [[InsertIntoDataSourceCommand]] InsertIntoDataSourceCommand Logical Command
 
-`InsertIntoDataSourceCommand` is...FIXME
+`InsertIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, RunnableCommand>> that <<run, FIXME>>.
+
+`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSourceAnalysis` logical resolution is <<spark-sql-DataSourceAnalysis.adoc#apply, executed>> (and <<spark-sql-DataSourceAnalysis.adoc#InsertIntoTable-InsertableRelation, resolves>> an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on a <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>).
+
+[source, scala]
+----
+// FIXME: DEMO
+----
+
+[[innerChildren]]
+`InsertIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes>> (that should be shown as an inner nested tree of this node).
+
+[source, scala]
+----
+// FIXME
+val sqlText = "CREATE VIEW v1 AS " + asQuery
+val plan = spark.sessionState.sqlParser.parsePlan(sqlText)
+scala> println(plan.numberedTreeString)
+00 CreateViewCommand `v1`, SELECT * FROM t1, false, false, PersistedView
+01    +- 'Project [*]
+02       +- 'UnresolvedRelation `t1`
+----
 
 === [[run]] Executing Logical Command -- `run` Method
 
@@ -12,3 +33,11 @@ run(session: SparkSession): Seq[Row]
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME
+
+=== [[creating-instance]] Creating InsertIntoDataSourceCommand Instance
+
+`InsertIntoDataSourceCommand` takes the following when created:
+
+* [[logicalRelation]] <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>>
+* [[query]] <<spark-sql-LogicalPlan.adoc#, Logical query plan>>
+* [[overwrite]] `overwrite` flag

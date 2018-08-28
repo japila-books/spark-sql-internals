@@ -2,25 +2,36 @@
 
 `LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
-`LogicalPlan` can be <<analyzed, analyzed>> and <<resolved, resolved>>.
+NOTE: A logical query plan is a tree of <<spark-sql-catalyst-TreeNode.adoc#, nodes>> of logical operators that in turn can have (trees of) <<spark-sql-Expression.adoc#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
+
+`LogicalPlan` can be <<resolved, resolved>>.
 
 In order to get the <<spark-sql-QueryExecution.adoc#logical, logical plan>> of a structured query you should use the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>>.
 
 [source, scala]
 ----
-val q: DataFrame = ...
+scala> :type q
+org.apache.spark.sql.Dataset[Long]
+
 val plan = q.queryExecution.logical
+scala> :type plan
+org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 ----
 
-NOTE: A logical query plan is a tree of link:spark-sql-catalyst-TreeNode.adoc[nodes] of logical operators with their own trees of expressions. In other words, there are _at least_ two trees at every level (operator).
-
-[[analyzed]]
-`LogicalPlan` can be *analyzed* which is to say that the plan (including children) has gone through analysis and verification.
+`LogicalPlan` goes through <<spark-sql-QueryExecution.adoc#execution-pipeline, execution stages>> (as a <<spark-sql-QueryExecution.adoc#, QueryExecution>>). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to <<spark-sql-SessionState.adoc#executePlan, "execute" the plan>>.
 
 [source, scala]
 ----
-scala> plan.analyzed
-res1: Boolean = true
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+// You could use Catalyst DSL to create a logical query plan
+scala> :type plan
+org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+
+val qe = spark.sessionState.executePlan(plan)
+scala> :type qe
+org.apache.spark.sql.execution.QueryExecution
 ----
 
 [[logical-plan-to-be-analyzed-idiom]]
@@ -30,10 +41,21 @@ A common idiom in Spark SQL to make sure that a logical plan can be analyzed is 
 
 [source, scala]
 ----
-val qe = sparkSession.sessionState.executePlan(child)
+scala> :type plan
+org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+
+val qe = sparkSession.sessionState.executePlan(plan)
 qe.assertAnalyzed()
+// the following gives the analyzed logical plan
+// no exceptions are expected since analysis went fine
 val analyzedPlan = qe.analyzed
 ----
+====
+
+[[converting-logical-plan-to-dataset]]
+[NOTE]
+====
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use <<spark-sql-Dataset.adoc#ofRows, Dataset.ofRows>> internal method that <<spark-sql-SessionState.adoc#executePlan, "executes">> the logical plan followed by creating a <<spark-sql-Dataset.adoc#creating-instance, Dataset>> with the <<spark-sql-QueryExecution.adoc#, QueryExecution>> and a <<spark-sql-RowEncoder.adoc#, RowEncoder>>.
 ====
 
 [[childrenResolved]]

@@ -1,6 +1,6 @@
 == [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline (of Dataset)
 
-`QueryExecution` is the <<execution-pipeline, execution pipeline>> of a structured query (i.e. link:spark-sql-Dataset.adoc[Dataset]).
+`QueryExecution` represents the <<execution-pipeline, execution pipeline>> of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) with execution stages (phases).
 
 .Query Execution &mdash; From SQL through Dataset to RDD
 image::images/QueryExecution-execution-pipeline.png[align="center"]

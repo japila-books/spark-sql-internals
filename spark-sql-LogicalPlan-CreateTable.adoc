@@ -1,4 +1,4 @@
-== [[CreateTable]] CreateTable
+== [[CreateTable]] CreateTable Logical Operator
 
 `CreateTable` is...FIXME
 
