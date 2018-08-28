@@ -73,14 +73,14 @@ scala> spark.sql(descExtSQL).show
 
 NOTE: `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc#visitDescribeTable[SparkSqlParser].
 
-=== [[run]] Describing Column with Optional Statistics (Executing DescribeColumnCommand) -- `run` Method
+=== [[run]] Executing Logical Command (Describing Column with Optional Statistics) -- `run` Method
 
 [source, scala]
 ----
 run(session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand Contract] to run a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
 
