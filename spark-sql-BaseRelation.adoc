@@ -71,7 +71,7 @@ needConversion: Boolean
 
 NOTE: It is recommended to leave `needConversion` enabled for data sources outside Spark SQL.
 
-NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[converts an RDD of Rows to Catalyst RDD (RDD of InternalRows)]).
+NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[does the RDD conversion] from `RDD[Row]` to `RDD[InternalRow]`).
 
 === [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 

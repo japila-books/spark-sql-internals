@@ -11,22 +11,22 @@
 | Description
 
 | link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-CatalystScan.adoc[CatalystScan] relation
-| [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>>
+| [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 `CatalystScan` does not seem to be used in Spark SQL.
 
 | link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] relation
-| [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>>
+| [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 Matches link:spark-sql-JDBCRelation.adoc[JDBCRelation] exclusively
 
 | link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-PrunedScan.adoc[PrunedScan] relation
-| [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>>
+| [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 `PrunedScan` does not seem to be used in Spark SQL.
 
 | link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-TableScan.adoc[TableScan] relation
-a| [[TableScan]] Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] and <<toCatalystRDD, converting the result to Catalyst RDD>>)
+a| [[TableScan]] Creates a link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to link:spark-sql-TableScan.adoc#buildScan[buildScan] followed by <<toCatalystRDD, RDD conversion to RDD[InternalRow]>>)
 
 Matches <<spark-sql-KafkaRelation.adoc#, KafkaRelation>> exclusively
 |===
@@ -160,7 +160,7 @@ NOTE: The Catalyst expressions and their corresponding data source filter predic
 * `PushDownOperatorsToDataSource` logical optimization is link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc#apply[executed] (for link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation] leaf operators with a link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters] data source reader)
 ====
 
-=== [[toCatalystRDD]] Converting RDD of Rows to Catalyst RDD (RDD of InternalRows) -- `toCatalystRDD` Internal Method
+=== [[toCatalystRDD]] RDD Conversion (Converting RDD of Rows to Catalyst RDD of InternalRows) -- `toCatalystRDD` Internal Method
 
 [source, scala]
 ----
@@ -176,11 +176,11 @@ toCatalystRDD(relation: LogicalRelation, rdd: RDD[Row]) // <1>
 
 When enabled (`true`), `toCatalystRDD` link:spark-sql-RDDConversions.adoc#rowToRowRdd[converts the objects inside Rows to Catalyst types].
 
-Otherwise, `toCatalystRDD` simply casts the input `RDD[Row]` to a `RDD[InternalRow]` (as a simple untyped Scala type conversion).
-
 NOTE: link:spark-sql-BaseRelation.adoc#needConversion[needConversion] flag is enabled (`true`) by default.
 
-NOTE: `toCatalystRDD` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>>.
+Otherwise, `toCatalystRDD` simply casts the input `RDD[Row]` to a `RDD[InternalRow]` (as a simple untyped Scala type conversion using Java's `asInstanceOf` operator).
+
+NOTE: `toCatalystRDD` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for all kinds of <<selection-requirements, BaseRelations>>).
 
 === [[pruneFilterProjectRaw]] Creating RowDataSourceScanExec Physical Operator for LogicalRelation (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProjectRaw` Internal Method
 
