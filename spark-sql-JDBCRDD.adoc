@@ -105,3 +105,21 @@ pruneSchema(schema: StructType, columns: Array[String]): StructType
 `pruneSchema`...FIXME
 
 NOTE: `pruneSchema` is used when...FIXME
+
+=== [[compileFilter]] Converting Filter Predicate to SQL Expression -- `compileFilter` Object Method
+
+[source, scala]
+----
+compileFilter(f: Filter, dialect: JdbcDialect): Option[String]
+----
+
+`compileFilter`...FIXME
+
+[NOTE]
+====
+`compileFilter` is used when:
+
+* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.adoc#unhandledFilters, find unhandled Filter predicates>>
+
+* `JDBCRDD` is <<filterWhereClause, created>>
+====

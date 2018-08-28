@@ -80,11 +80,11 @@ NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution p
 unhandledFilters(filters: Array[Filter]): Array[Filter]
 ----
 
-`unhandledFilters` takes the input link:spark-sql-Filter.adoc[Filter] collection and returns the ones that the data source may not be able to handle.
+`unhandledFilters` returns <<spark-sql-Filter.adoc#, Filter predicates>> that the data source does not support (handle) natively.
 
-NOTE: `unhandledFilters` returns the input `filters` by default as it is considered safe to double evaluate filters.
+NOTE: `unhandledFilters` returns the input `filters` by default as it is considered safe to double evaluate filters regardless whether they could be supported or not.
 
-NOTE: `unhandledFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters[selectFilters].
+NOTE: `unhandledFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters, selectFilters>>.
 
 === [[sizeInBytes]] Requesting Estimated Size -- `sizeInBytes` Method
 

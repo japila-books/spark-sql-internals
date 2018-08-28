@@ -54,9 +54,9 @@ scala> df.explain
 unhandledFilters(filters: Array[Filter]): Array[Filter]
 ----
 
-NOTE: `unhandledFilters` is part of link:spark-sql-BaseRelation.adoc#unhandledFilters[BaseRelation Contract] to find unhandled link:spark-sql-Filter.adoc[Filter predicates].
+NOTE: `unhandledFilters` is part of <<spark-sql-BaseRelation.adoc#unhandledFilters, BaseRelation Contract>> to find unhandled <<spark-sql-Filter.adoc#, Filter predicates>>.
 
-`unhandledFilters`...FIXME
+`unhandledFilters` returns the <<spark-sql-Filter.adoc#, Filter predicates>> in the input `filters` that could not be <<spark-sql-JDBCRDD.adoc#compileFilter, converted to a SQL expression>> (and are therefore unhandled by the JDBC data source natively).
 
 === [[schema]] Schema of Tuples (Data) -- `schema` Property
 
