@@ -22,42 +22,42 @@ When `ResolveReferences` logical evaluation is link:spark-sql-ResolveReferences.
 | MultiInstanceRelation
 | Description
 
-| [[ContinuousExecutionRelation]] `ContinuousExecutionRelation`
-| Used in Spark Structured Streaming
+| `ContinuousExecutionRelation`
+| [[ContinuousExecutionRelation]] Used in Spark Structured Streaming
 
-| [[DataSourceV2Relation]] link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation]
-|
+| link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation]
+| [[DataSourceV2Relation]]
 
-| [[ExternalRDD]] link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
-|
+| link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
+| [[ExternalRDD]]
 
-| [[HiveTableRelation]] link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
-|
+| link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
+| [[HiveTableRelation]]
 
-| [[InMemoryRelation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
-|
+| link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
+| [[InMemoryRelation]]
 
-| [[LocalRelation]] link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
-|
+| link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
+| [[LocalRelation]]
 
-| [[LogicalRDD]] link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
-|
+| link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
+| [[LogicalRDD]]
 
-| [[LogicalRelation]] link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation]
-|
+| link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation]
+| [[LogicalRelation]]
 
-| [[Range]] link:spark-sql-LogicalPlan-Range.adoc[Range]
-|
+| link:spark-sql-LogicalPlan-Range.adoc[Range]
+| [[Range]]
 
-| [[View]] link:spark-sql-LogicalPlan-View.adoc[View]
-|
+| link:spark-sql-LogicalPlan-View.adoc[View]
+| [[View]]
 
-| [[StreamingExecutionRelation]] `StreamingExecutionRelation`
-| Used in Spark Structured Streaming
+| `StreamingExecutionRelation`
+| [[StreamingExecutionRelation]] Used in Spark Structured Streaming
 
-| [[StreamingRelation]] `StreamingRelation`
-| Used in Spark Structured Streaming
+| `StreamingRelation`
+| [[StreamingRelation]] Used in Spark Structured Streaming
 
-| [[StreamingRelationV2]] `StreamingRelationV2`
-| Used in Spark Structured Streaming
+| `StreamingRelationV2`
+| [[StreamingRelationV2]] Used in Spark Structured Streaming
 |===

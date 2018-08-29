@@ -1,3 +1,55 @@
-== [[View]] View
+== [[View]] View Unary Logical Operator
 
-`View` is...FIXME
+[[children]]
+`View` is a <<spark-sql-LogicalPlan.adoc#, logical operator>> with a single <<child, child>> logical operator.
+
+`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupRelation, find a relation in the catalogs>> (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>> and the table type is `VIEW`)
+
+[[newInstance]]
+`View` is a <<spark-sql-MultiInstanceRelation.adoc#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan. When requested for a new instance, `View` <<spark-sql-Expression-Attribute.adoc#newInstance, creates new instances>> of the <<output, output attributes>>.
+
+[[resolved]]
+`View` is considered <<spark-sql-LogicalPlan.adoc#resolved, resolved>> only when the <<child, child>> is.
+
+[[simpleString]]
+`View` has the following <<spark-sql-catalyst-QueryPlan.adoc#simpleString, simple description (with state prefix)>>:
+
+```
+View ([identifier], [output])
+```
+
+[source, scala]
+----
+val viewName = "demo_view"
+sql(s"DROP VIEW IF EXISTS $viewName")
+assert(spark.catalog.tableExists(viewName) == false)
+sql(s"CREATE VIEW $viewName COMMENT 'demo view' AS SELECT 1,2,3")
+assert(spark.catalog.tableExists(viewName))
+
+val q = spark.table(viewName)
+val qe = q.queryExecution
+
+val logicalPlan = qe.logical
+scala> println(logicalPlan.simpleString)
+'UnresolvedRelation `demo_view`
+
+val analyzedPlan = qe.analyzed
+scala> println(analyzedPlan.numberedTreeString)
+00 SubqueryAlias demo_view
+01 +- View (`default`.`demo_view`, [1#12,2#13,3#14])
+02    +- Project [cast(1#15 as int) AS 1#12, cast(2#16 as int) AS 2#13, cast(3#17 as int) AS 3#14]
+03       +- Project [1 AS 1#15, 2 AS 2#16, 3 AS 3#17]
+04          +- OneRowRelation
+
+// Skip SubqueryAlias
+scala> println(analyzedPlan.children.head.simpleString)
+View (`default`.`demo_view`, [1#12,2#13,3#14])
+----
+
+=== [[creating-instance]] Creating View Instance
+
+`View` takes the following when created:
+
+* [[desc]] <<spark-sql-CatalogTable.adoc#, CatalogTable>>
+* [[output]] <<spark-sql-catalyst-QueryPlan.adoc#output, Output schema attributes>> (as `Seq[Attribute]`)
+* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>

@@ -41,7 +41,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 04             +- *Range (0, 10, step=1, splits=8)
 ----
 
-`InMemoryRelation` is a `MultiInstanceRelation` so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan.
+`InMemoryRelation` is a <<spark-sql-MultiInstanceRelation.adoc#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan.
 
 [source, scala]
 ----

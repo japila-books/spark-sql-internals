@@ -1,4 +1,4 @@
-== [[DescribeTableCommand]] DescribeTableCommand
+== [[DescribeTableCommand]] DescribeTableCommand Logical Command
 
 `DescribeTableCommand` is...FIXME
 

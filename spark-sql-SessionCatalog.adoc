@@ -397,7 +397,7 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 ====
 `lookupRelation` is used when:
 
-* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run]
+* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>>
 
 * `ResolveRelations` logical evaluation rule is requested to link:spark-sql-ResolveRelations.adoc#lookupTableFromCatalog[lookupTableFromCatalog]
 ====

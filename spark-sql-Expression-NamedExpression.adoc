@@ -23,14 +23,17 @@ trait NamedExpression extends Expression {
 | Method
 | Description
 
-| [[exprId]] `exprId`
-| Used when...FIXME
+| `exprId`
+| [[exprId]] Used when...FIXME
 
-| [[name]] `name`
-| Used when...FIXME
+| `name`
+| [[name]] Used when...FIXME
 
-| [[qualifier]] `qualifier`
-| Used when...FIXME
+| `qualifier`
+| [[qualifier]] Used when...FIXME
+
+| `toAttribute`
+| [[toAttribute]]
 |===
 
 === [[newExprId]] Creating ExprId -- `newExprId` Object Method
