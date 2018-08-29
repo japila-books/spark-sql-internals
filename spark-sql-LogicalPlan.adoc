@@ -99,20 +99,20 @@ NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc
 | LogicalPlan
 | Description
 
-| [[LeafNode]] link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
-| Logical operator with no link:spark-sql-catalyst-TreeNode.adoc#children[child] operators
+| link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
+| [[LeafNode]] Logical operator with no link:spark-sql-catalyst-TreeNode.adoc#children[child] operators
 
-| [[UnaryNode]] `UnaryNode`
-| Logical plan with a single child (logical plan).
+| `UnaryNode`
+| [[UnaryNode]] Logical plan with a single child logical plan.
 
-| [[BinaryNode]] `BinaryNode`
-| Logical operator with two child operators
+| `BinaryNode`
+| [[BinaryNode]] Logical operator with two child operators
 
-| [[Command]] link:spark-sql-LogicalPlan-Command.adoc[Command]
-|
+| link:spark-sql-LogicalPlan-Command.adoc[Command]
+| [[Command]]
 
-| [[RunnableCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
-|
+| link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
+| [[RunnableCommand]]
 |===
 
 [[internal-registries]]

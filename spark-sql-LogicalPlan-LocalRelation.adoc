@@ -1,6 +1,6 @@
-== [[LocalRelation]] LocalRelation Logical Query Plan
+== [[LocalRelation]] LocalRelation Leaf Logical Operator
 
-`LocalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that allow functions like `collect` or `take` to be executed locally, i.e. without using Spark executors.
+`LocalRelation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that allow functions like `collect` or `take` to be executed locally, i.e. without using Spark executors.
 
 `LocalRelation` is <<creating-instance, created>> when...FIXME
 

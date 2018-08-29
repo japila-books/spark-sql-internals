@@ -1,0 +1,3 @@
+== [[PreWriteCheck]] PreWriteCheck Extended Logical Check
+
+`PreWriteCheck` is...FIXME
