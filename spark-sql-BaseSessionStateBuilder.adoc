@@ -49,8 +49,8 @@ NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.
 | Name
 | Description
 
-| [[analyzer]] analyzer
-| link:spark-sql-Analyzer.adoc[Analyzer]
+| analyzer
+| [[analyzer]] <<spark-sql-Analyzer.adoc#, Logical analyzer>>
 
 | `catalog`
 a| [[catalog]] <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>
@@ -59,47 +59,47 @@ Used to create <<analyzer, Analyzer>>, <<optimizer, Optimizer>> and a <<build, S
 
 NOTE: <<spark-sql-HiveSessionStateBuilder.adoc#, HiveSessionStateBuilder>> manages its own Hive-aware <<spark-sql-HiveSessionStateBuilder.adoc#catalog, HiveSessionCatalog>>.
 
-| [[conf]] `conf`
-| link:spark-sql-SQLConf.adoc[SQLConf]
+| `conf`
+| [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
 
 | `customOperatorOptimizationRules`
 | [[customOperatorOptimizationRules]] Custom operator optimization rules to add to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, base Operator Optimization batch>>.
 
 When requested for the custom rules, `customOperatorOptimizationRules` simply requests the <<extensions, SparkSessionExtensions>> to <<spark-sql-SparkSessionExtensions.adoc#buildOptimizerRules, buildOptimizerRules>>.
 
-| [[experimentalMethods]] `experimentalMethods`
-| link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
+| `experimentalMethods`
+| [[experimentalMethods]] link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
 | `extensions`
 | [[extensions]] <<spark-sql-SparkSessionExtensions.adoc#, SparkSessionExtensions>>
 
-| [[functionRegistry]] `functionRegistry`
-| link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+| `functionRegistry`
+| [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 
-| [[listenerManager]] `listenerManager`
-| link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
+| `listenerManager`
+| [[listenerManager]] link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
 
-| [[optimizer]] `optimizer`
-| <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> (that is downcast to the base <<spark-sql-Optimizer.adoc#, Optimizer>>) that is <<spark-sql-SparkOptimizer.adoc#creating-instance, created>> with the <<catalog, SessionCatalog>> and the <<experimentalMethods, ExperimentalMethods>>.
+| `optimizer`
+| [[optimizer]] <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> (that is downcast to the base <<spark-sql-Optimizer.adoc#, Optimizer>>) that is <<spark-sql-SparkOptimizer.adoc#creating-instance, created>> with the <<catalog, SessionCatalog>> and the <<experimentalMethods, ExperimentalMethods>>.
 
 Note that the `SparkOptimizer` adds the <<customOperatorOptimizationRules, customOperatorOptimizationRules>> to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, operator optimization rules>>.
 
 `optimizer` is used when `BaseSessionStateBuilder` is requested to <<build, create a SessionState>> (for the <<spark-sql-SessionState.adoc#optimizerBuilder, optimizerBuilder>> function to create an <<spark-sql-Optimizer.adoc#, Optimizer>> when requested for the <<spark-sql-SessionState.adoc#optimizer, Optimizer>>).
 
-| [[planner]] `planner`
-| link:spark-sql-SparkPlanner.adoc[SparkPlanner]
+| `planner`
+| [[planner]] link:spark-sql-SparkPlanner.adoc[SparkPlanner]
 
-| [[resourceLoader]] `resourceLoader`
-| `SessionResourceLoader`
+| `resourceLoader`
+| [[resourceLoader]] `SessionResourceLoader`
 
-| [[sqlParser]] `sqlParser`
-| link:spark-sql-ParserInterface.adoc[ParserInterface]
+| `sqlParser`
+| [[sqlParser]] link:spark-sql-ParserInterface.adoc[ParserInterface]
 
-| [[streamingQueryManager]] `streamingQueryManager`
-| Spark Structured Streaming's `StreamingQueryManager`
+| `streamingQueryManager`
+| [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 
-| [[udfRegistration]] `udfRegistration`
-| link:spark-sql-UDFRegistration.adoc[UDFRegistration]
+| `udfRegistration`
+| [[udfRegistration]] link:spark-sql-UDFRegistration.adoc[UDFRegistration]
 |===
 
 [NOTE]

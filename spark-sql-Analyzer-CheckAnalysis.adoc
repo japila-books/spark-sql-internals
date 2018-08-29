@@ -127,7 +127,7 @@ In the end, `checkAnalysis` link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks th
 * `ResolveAggregateFunctions` is executed (for `Sort` logical plan)
 ====
 
-=== [[extendedCheckRules]] Extra Analysis Check Rules -- `extendedCheckRules` Extension Point
+=== [[extendedCheckRules]] Extended Analysis Check Rules -- `extendedCheckRules` Extension Point
 
 [source, scala]
 ----

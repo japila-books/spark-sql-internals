@@ -17,11 +17,11 @@ image::images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="center"]
 | Name
 | Description
 
-| [[analyzer]] <<analyzer-indepth, analyzer>>
-a| Hive-specific link:spark-sql-Analyzer.adoc[logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
+| <<analyzer-indepth, analyzer>>
+a| [[analyzer]] Hive-specific link:spark-sql-Analyzer.adoc[logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
 
-| [[catalog]] `catalog`
-a| link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
+| `catalog`
+a| [[catalog]] link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
 
 * <<externalCatalog, HiveExternalCatalog>>
 * link:spark-sql-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
@@ -36,14 +36,14 @@ NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalo
 
 Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:spark-sql-RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
-| [[externalCatalog]] `externalCatalog`
-| link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+| `externalCatalog`
+| [[externalCatalog]] link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
 
-| [[planner]] <<planner-indepth, planner>>
-| link:spark-sql-SparkPlanner.adoc[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
+| <<planner-indepth, planner>>
+| [[planner]] link:spark-sql-SparkPlanner.adoc[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
 
-| [[resourceLoader]] `resourceLoader`
-| `HiveSessionResourceLoader`
+| `resourceLoader`
+| [[resourceLoader]] `HiveSessionResourceLoader`
 |===
 
 === [[planner-indepth]] SparkPlanner with Hive-Specific Strategies -- `planner` Property

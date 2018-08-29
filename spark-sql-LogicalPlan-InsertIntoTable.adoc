@@ -79,7 +79,7 @@ scala> println(plan.numberedTreeString)
 
 `InsertIntoTable` takes the following when created:
 
-* [[table]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing the table to insert into
+* [[table]] link:spark-sql-LogicalPlan.adoc[Logical plan] for the table to insert into
 * [[partition]] Partitions (as a collection of partition keys and optional partition values for dynamic partition insert)
 * [[query]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing the data to be written
 * [[overwrite]] `overwrite` flag that indicates whether to overwrite an existing table or partitions (`true`) or not (`false`)
