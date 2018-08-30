@@ -2,7 +2,7 @@
 
 `ReplaceExpressions` is a *logical optimization* that <<apply, replaces RuntimeReplaceable expressions with their single child>>.
 
-Technically, `ReplaceExpressions` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`ReplaceExpressions` is simply a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----

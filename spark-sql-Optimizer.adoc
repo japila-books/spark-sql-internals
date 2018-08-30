@@ -81,7 +81,7 @@ scala> println(optimizedPlan.numberedTreeString)
 | [[EliminateSubqueryAliases]] EliminateSubqueryAliases
 |
 
-| [[EliminateView]] EliminateView
+| [[EliminateView]] <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>>
 |
 
 | [[ReplaceExpressions]] link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]

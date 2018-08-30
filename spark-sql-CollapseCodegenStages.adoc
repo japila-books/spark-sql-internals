@@ -264,7 +264,7 @@ scala> println(execPlan.numberedTreeString)
 06 +- Range (0, 2, step=1, splits=8)
 ----
 
-=== [[apply]] Executing Physical Optimization Rule (Inserting WholeStageCodegenExec or InputAdapter into Physical Query Plan for Whole-Stage Java Code Generation) -- `apply` Method
+=== [[apply]] Executing Rule (Inserting WholeStageCodegenExec or InputAdapter into Physical Query Plan for Whole-Stage Java Code Generation) -- `apply` Method
 
 [source, scala]
 ----

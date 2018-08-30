@@ -87,7 +87,7 @@ scala> println(plan.numberedTreeString)
 
 === [[inserting-into-view-not-allowed]] Inserting Into View Not Allowed
 
-Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> leaf operator that is resolved to <<spark-sql-LogicalPlan-View.adoc#, View>> unary operator fails at analysis (when <<spark-sql-ResolveRelations.adoc#, ResolveRelations>> logical resolution is executed).
+Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> leaf operator that is resolved to a <<spark-sql-LogicalPlan-View.adoc#, View>> unary operator fails at analysis (when <<spark-sql-ResolveRelations.adoc#, ResolveRelations>> logical resolution is executed).
 
 ```
 Inserting into a view is not allowed. View: [name].

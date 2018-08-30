@@ -80,6 +80,14 @@ scala> println(analyzedPlan.children.head.simpleString)
 View (`default`.`demo_view`, [col1#33])
 ----
 
+NOTE: `View` is resolved by <<spark-sql-ResolveRelations.adoc#, ResolveRelations>> logical resolution.
+
+NOTE: <<spark-sql-AliasViewChild.adoc#, AliasViewChild>> logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
+
+NOTE: <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
+
+NOTE: <<spark-sql-LogicalPlan-InsertIntoTable.adoc#inserting-into-view-not-allowed, Inserting into a view is not allowed>>.
+
 === [[creating-instance]] Creating View Instance
 
 `View` takes the following when created:

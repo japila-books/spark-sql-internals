@@ -121,7 +121,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 
 === [[execute]] Executing Logical Evaluation Rules -- `execute` Method
 
-`Analyzer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines the <<batches, logical evaluation rules>> (i.e. resolving, removing, and in general modifying it), e.g.
+`Analyzer` is a link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor] that defines the <<batches, logical rules>> (i.e. resolving, removing, and in general modifying it), e.g.
 
 * Resolves unresolved <<ResolveRelations, relations>> and <<ResolveFunctions, functions>> (including link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators]) using provided <<catalog, SessionCatalog>>
 * ...
@@ -289,7 +289,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 
 ^.^| View
 ^.^| `Once`
-| AliasViewChild
+| [[AliasViewChild]] <<spark-sql-AliasViewChild.adoc#, AliasViewChild>>
 |
 
 ^.^| Nondeterministic

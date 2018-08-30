@@ -6,14 +6,14 @@ Technically, `PushDownOperatorsToDataSource` is a <<spark-sql-catalyst-Rule.adoc
 
 `PushDownOperatorsToDataSource` is part of the <<spark-sql-SparkOptimizer.adoc#PushDownOperatorsToDataSource, Push down operators to data source scan>> once-executed rule batch of the <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>>.
 
-=== [[apply]] Executing Transformation (Applying Rule to Logical Plan) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to apply a rule to a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>>, e.g. <<spark-sql-LogicalPlan.adoc#, logical query plan>>.
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply`...FIXME
 

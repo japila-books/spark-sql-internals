@@ -484,6 +484,7 @@
 
 === Logical Analysis Rules (Check, Evaluation, Conversion and Resolution)
 
+. link:spark-sql-AliasViewChild.adoc[AliasViewChild]
 . link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
 . link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
 . link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
@@ -515,6 +516,7 @@
 . link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
 . link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
 . link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
+. link:spark-sql-Optimizer-EliminateView.adoc[EliminateView]
 . link:spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.adoc[ExtractPythonUDFFromAggregate]
 . link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase / ComputeCurrentTime]
 . link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
