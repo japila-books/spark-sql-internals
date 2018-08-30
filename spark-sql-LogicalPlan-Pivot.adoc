@@ -26,7 +26,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 `Pivot` operator is resolved at link:spark-sql-Analyzer.adoc[analysis phase] in the following logical evaluation rules:
 
-* link:spark-sql-ResolveAliases.adoc[ResolveAliases]
+* link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
 * link:spark-sql-Analyzer.adoc#ResolvePivot[ResolvePivot]
 
 [source, scala]

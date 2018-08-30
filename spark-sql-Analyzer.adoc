@@ -138,7 +138,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 .2+^.^| [[Hints]] Hints
 .2+^.^| <<fixedPoint, FixedPoint>>
 
-| [[ResolveBroadcastHints]] link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
+| [[ResolveBroadcastHints]] link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 |
 
 Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
@@ -148,7 +148,7 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 
 ^.^| [[Simple-Sanity-Check]] Simple Sanity Check
 ^.^| `Once`
-| link:spark-sql-LookupFunctions.adoc[LookupFunctions]
+| link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
 | [[LookupFunctions]] Checks whether a function identifier (referenced by an link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
 
 .4+^.^| [[Substitution]] Substitution
@@ -156,7 +156,7 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 | CTESubstitution
 | Resolves `With` operators (and substitutes named common table expressions -- CTEs)
 
-| [[WindowsSubstitution]] link:spark-sql-WindowsSubstitution.adoc[WindowsSubstitution]
+| [[WindowsSubstitution]] link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
 | Substitutes link:spark-sql-Expression-WindowExpression.adoc#UnresolvedWindowExpression[UnresolvedWindowExpression] with link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] logical operators.
 
 | EliminateUnions
@@ -170,13 +170,13 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 | ResolveTableValuedFunctions
 | Replaces `UnresolvedTableValuedFunction` with table-valued function.
 
-| [[ResolveRelations]] link:spark-sql-ResolveRelations.adoc[ResolveRelations]
+| [[ResolveRelations]] link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]
 a| Resolves:
 
 * link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 * link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 
-| [[ResolveReferences]] link:spark-sql-ResolveReferences.adoc[ResolveReferences]
+| [[ResolveReferences]] link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
 a| Resolves:
 
 * FIXME
@@ -227,7 +227,7 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 |
 | ResolveGenerate
 |
-| link:spark-sql-ResolveFunctions.adoc[ResolveFunctions]
+| link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
 a| [[ResolveFunctions]] Resolves functions using link:spark-sql-SessionCatalog.adoc#lookupFunction[SessionCatalog]:
 
 * link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] to a link:spark-sql-Expression-Generator.adoc[Generator]
@@ -241,7 +241,7 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ----
 
-| [[ResolveAliases]] link:spark-sql-ResolveAliases.adoc[ResolveAliases]
+| [[ResolveAliases]] link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
 a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with concrete aliases:
 
 * link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions]
@@ -252,7 +252,7 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 |
 | [[ResolveWindowOrder]] ResolveWindowOrder
 |
-| [[ResolveWindowFrame]] link:spark-sql-ResolveWindowFrame.adoc[ResolveWindowFrame]
+| [[ResolveWindowFrame]] link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
 | Resolves link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] expressions
 
 | ResolveNaturalAndUsingJoin
@@ -289,7 +289,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 
 ^.^| View
 ^.^| `Once`
-| [[AliasViewChild]] <<spark-sql-AliasViewChild.adoc#, AliasViewChild>>
+| [[AliasViewChild]] <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>>
 |
 
 ^.^| Nondeterministic
@@ -299,7 +299,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 
 ^.^| UDF
 ^.^| `Once`
-| [[HandleNullInputsForUDF]] link:spark-sql-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+| [[HandleNullInputsForUDF]] link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 |
 
 ^.^| FixNullability

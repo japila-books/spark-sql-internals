@@ -7,7 +7,7 @@
 
 . link:spark-sql-functions.adoc#broadcast[Dataset.broadcast] function is used
 
-. `ResolveBroadcastHints` logical resolution rule is link:spark-sql-ResolveBroadcastHints.adoc#apply[executed] (and resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operators)
+. `ResolveBroadcastHints` logical resolution rule is link:spark-sql-Analyzer-ResolveBroadcastHints.adoc#apply[executed] (and resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operators)
 
 . link:spark-sql-LogicalPlan-ResolvedHint.adoc#creating-instance[ResolvedHint] and link:spark-sql-Statistics.adoc#creating-instance[Statistics] are created
 

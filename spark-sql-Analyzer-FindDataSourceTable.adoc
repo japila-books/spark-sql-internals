@@ -6,7 +6,7 @@
 
 * "Standalone" `UnresolvedCatalogRelations`
 
-NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that link:spark-sql-ResolveRelations.adoc[ResolveRelations] logical evaluation rule adds to a logical plan while resolving link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations] leaf logical operators.
+NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations] logical evaluation rule adds to a logical plan while resolving link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations] leaf logical operators.
 
 `FindDataSourceTable` is part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 

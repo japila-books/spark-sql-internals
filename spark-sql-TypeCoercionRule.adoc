@@ -33,7 +33,7 @@ Technically, `TypeCoercionRule` is just a link:spark-sql-catalyst-Rule.adoc[Cata
 | TypeCoercionRule
 | Description
 
-| [[InConversion]] link:spark-sql-InConversion.adoc[InConversion]
+| [[InConversion]] link:spark-sql-Analyzer-InConversion.adoc[InConversion]
 |
 
 | _others_

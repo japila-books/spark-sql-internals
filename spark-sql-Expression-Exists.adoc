@@ -4,7 +4,7 @@
 
 `Exists` is <<creating-instance, created>> when:
 
-. `ResolveSubquery` is requested to link:spark-sql-ResolveSubquery.adoc#resolveSubQueries[resolveSubQueries]
+. `ResolveSubquery` is requested to link:spark-sql-Analyzer-ResolveSubquery.adoc#resolveSubQueries[resolveSubQueries]
 
 . `PullupCorrelatedPredicates` is requested to link:spark-sql-PullupCorrelatedPredicates.adoc#rewriteSubQueries[rewriteSubQueries]
 

@@ -34,7 +34,7 @@ a| [[catalog]] link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with t
 
 NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalog`
 
-Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:spark-sql-RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
+Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:spark-sql-Analyzer-RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
 | `externalCatalog`
 | [[externalCatalog]] link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
@@ -96,7 +96,7 @@ NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer
 | [[ResolveHiveSerdeTable]] `ResolveHiveSerdeTable`
 |
 
-| [[FindDataSourceTable]] link:spark-sql-FindDataSourceTable.adoc[FindDataSourceTable]
+| [[FindDataSourceTable]] link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 |
 
 | [[ResolveSQLOnFile]] `ResolveSQLOnFile`
@@ -110,10 +110,10 @@ NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer
 | Logical Rule
 | Description
 
-| [[DetermineTableStats]] link:spark-sql-DetermineTableStats.adoc[DetermineTableStats]
+| [[DetermineTableStats]] link:spark-sql-Analyzer-DetermineTableStats.adoc[DetermineTableStats]
 |
 
-| [[RelationConversions]] link:spark-sql-RelationConversions.adoc[RelationConversions]
+| [[RelationConversions]] link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
 |
 
 | [[PreprocessTableCreation]] `PreprocessTableCreation`
@@ -122,10 +122,10 @@ NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer
 | [[PreprocessTableInsertion]] `PreprocessTableInsertion`
 |
 
-| [[DataSourceAnalysis]] link:spark-sql-DataSourceAnalysis.adoc[DataSourceAnalysis]
+| [[DataSourceAnalysis]] link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
 |
 
-| [[HiveAnalysis]] link:spark-sql-HiveAnalysis.adoc[HiveAnalysis]
+| [[HiveAnalysis]] link:spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
 |
 |===
 

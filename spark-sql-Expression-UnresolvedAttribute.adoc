@@ -19,7 +19,7 @@
 ====
 `UnresolvedAttribute` is resolved when `Analyzer` is link:spark-sql-Analyzer.adoc#execute[executed] by the following link:spark-sql-Analyzer.adoc#Resolution[logical resolution rules]:
 
-* link:spark-sql-ResolveReferences.adoc#resolve[ResolveReferences]
+* link:spark-sql-Analyzer-ResolveReferences.adoc#resolve[ResolveReferences]
 
 * `ResolveMissingReferences`
 

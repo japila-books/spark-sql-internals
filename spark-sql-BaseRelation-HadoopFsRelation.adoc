@@ -4,7 +4,7 @@
 
 `HadoopFsRelation` is <<creating-instance, created>> when:
 
-* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (when `RelationConversions` logical evaluation rule is requested to link:spark-sql-RelationConversions.adoc#convert[convert a HiveTableRelation to a LogicalRelation] for `parquet` or `native` and `hive` ORC storage formats
+* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (when `RelationConversions` logical evaluation rule is requested to link:spark-sql-Analyzer-RelationConversions.adoc#convert[convert a HiveTableRelation to a LogicalRelation] for `parquet` or `native` and `hive` ORC storage formats
 
 * `DataSource` is requested to link:spark-sql-DataSource.adoc#resolveRelation[create a BaseRelation] (for a non-streaming file-based data source, i.e. link:spark-sql-FileFormat.adoc[FileFormat])
 

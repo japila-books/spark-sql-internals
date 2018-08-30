@@ -74,7 +74,7 @@ a|
 
 | [[ExtractValue]] `ExtractValue`
 | trait
-| Marks `UnresolvedAliases` to be resolved to link:spark-sql-Expression-Alias.adoc[Aliases] with "pretty" SQLs when link:spark-sql-ResolveAliases.adoc#assignAliases[ResolveAliases] is executed
+| Marks `UnresolvedAliases` to be resolved to link:spark-sql-Expression-Alias.adoc[Aliases] with "pretty" SQLs when link:spark-sql-Analyzer-ResolveAliases.adoc#assignAliases[ResolveAliases] is executed
 a|
 
 * link:spark-sql-Expression-GetArrayItem.adoc[GetArrayItem]

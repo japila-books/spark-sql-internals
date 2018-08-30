@@ -28,11 +28,11 @@ a| Used when:
 
 * `CTESubstitution` substitution analyzer rule is requested to `substituteCTE`
 
-* `ResolveReferences` logical resolution rule is requested to link:spark-sql-ResolveReferences.adoc#dedupRight[dedupRight] and link:spark-sql-ResolveReferences.adoc#dedupOuterReferencesInSubquery[dedupOuterReferencesInSubquery]
+* `ResolveReferences` logical resolution rule is requested to link:spark-sql-Analyzer-ResolveReferences.adoc#dedupRight[dedupRight] and link:spark-sql-Analyzer-ResolveReferences.adoc#dedupOuterReferencesInSubquery[dedupOuterReferencesInSubquery]
 
-* `ResolveSubquery` logical resolution rule is requested to link:spark-sql-ResolveSubquery.adoc#resolveSubQuery[resolveSubQuery]
+* `ResolveSubquery` logical resolution rule is requested to link:spark-sql-Analyzer-ResolveSubquery.adoc#resolveSubQuery[resolveSubQuery]
 
-* `UpdateOuterReferences` logical rule is link:spark-sql-UpdateOuterReferences.adoc#apply[executed]
+* `UpdateOuterReferences` logical rule is link:spark-sql-Analyzer-UpdateOuterReferences.adoc#apply[executed]
 
 * `ResolveTimeZone` logical resolution rule is link:spark-sql-ResolveTimeZone.adoc#apply[executed]
 

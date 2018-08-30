@@ -241,9 +241,9 @@ a| [[parquetVectorizedReaderEnabled]] Used when:
 | link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]
 a| [[runSQLonFile]] Used when:
 
-* `ResolveRelations` does link:spark-sql-ResolveRelations.adoc#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
+* `ResolveRelations` does link:spark-sql-Analyzer-ResolveRelations.adoc#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
 
-* `ResolveSQLOnFile` does link:spark-sql-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
+* `ResolveSQLOnFile` does link:spark-sql-Analyzer-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
 
 | `sessionLocalTimeZone`
 | link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]

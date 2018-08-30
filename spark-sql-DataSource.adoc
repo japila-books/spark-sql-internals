@@ -8,7 +8,7 @@
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (per Data Source V1 contract)]
 
-* link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[FindDataSourceTable] and link:spark-sql-ResolveSQLOnFile.adoc#apply[ResolveSQLOnFile] logical evaluation rules are executed
+* link:spark-sql-Analyzer-FindDataSourceTable.adoc#readDataSourceTable[FindDataSourceTable] and link:spark-sql-Analyzer-ResolveSQLOnFile.adoc#apply[ResolveSQLOnFile] logical evaluation rules are executed
 
 * link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[CreateDataSourceTableCommand], link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand], link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#run[InsertIntoDataSourceDirCommand], link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run[CreateTempViewUsing] are executed
 
@@ -289,7 +289,7 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 
-* `FindDataSourceTable` is requested to link:spark-sql-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
+* `FindDataSourceTable` is requested to link:spark-sql-Analyzer-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
 
 * `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 

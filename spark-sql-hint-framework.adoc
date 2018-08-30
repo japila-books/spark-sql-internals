@@ -92,7 +92,7 @@ scala> println(plan.numberedTreeString)
 
 There are two logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operators:
 
-. link:spark-sql-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators (with names `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` and an empty parameter list) to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators (with names `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` and an empty parameter list) to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
 
 . `RemoveAllHints` simply removes all `UnresolvedHint` operators
 

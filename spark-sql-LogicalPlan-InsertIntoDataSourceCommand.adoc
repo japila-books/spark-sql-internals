@@ -2,7 +2,7 @@
 
 `InsertIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
 
-`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSourceAnalysis` logical resolution is <<spark-sql-DataSourceAnalysis.adoc#apply, executed>> (and <<spark-sql-DataSourceAnalysis.adoc#InsertIntoTable-InsertableRelation, resolves>> an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>).
+`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSourceAnalysis` logical resolution is <<spark-sql-Analyzer-DataSourceAnalysis.adoc#apply, executed>> (and <<spark-sql-Analyzer-DataSourceAnalysis.adoc#InsertIntoTable-InsertableRelation, resolves>> an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>).
 
 [source, scala]
 ----

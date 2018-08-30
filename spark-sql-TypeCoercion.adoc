@@ -13,7 +13,7 @@ typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
 
 `typeCoercionRules` gives a collection of link:spark-sql-catalyst-Rule.adoc[Catalyst rules] to manipulate link:spark-sql-LogicalPlan.adoc[logical plans] in the following order:
 
-. link:spark-sql-InConversion.adoc[InConversion]
+. link:spark-sql-Analyzer-InConversion.adoc[InConversion]
 . `WidenSetOperationTypes`
 . `PromoteStrings`
 . `DecimalPrecision`

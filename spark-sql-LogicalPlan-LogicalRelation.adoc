@@ -19,8 +19,8 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `DataFrameReader` is requested to load data from an external table using link:spark-sql-DataFrameReader.adoc#jdbc[JDBC] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
-* `FindDataSourceTable` logical evaluation rule is link:spark-sql-FindDataSourceTable.adoc#apply[executed]
-* `RelationConversions` logical evaluation rule is link:spark-sql-RelationConversions.adoc#apply[executed]
+* `FindDataSourceTable` logical evaluation rule is link:spark-sql-Analyzer-FindDataSourceTable.adoc#apply[executed]
+* `RelationConversions` logical evaluation rule is link:spark-sql-Analyzer-RelationConversions.adoc#apply[executed]
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 
