@@ -82,7 +82,7 @@ scala> println(optimizedPlan.numberedTreeString)
 |
 
 | [[EliminateView]] <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>>
-|
+| Removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator
 
 | [[ReplaceExpressions]] link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]
 |
