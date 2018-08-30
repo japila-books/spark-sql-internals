@@ -6,9 +6,9 @@
 
 . link:spark-sql-LogicalPlan.adoc#UnaryNode[UnaryNode] operators
 
-`PullupCorrelatedPredicates` is part of link:spark-sql-Optimizer.adoc#Pullup-Correlated-Expressions[Pullup Correlated Expressions] once-executed batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`PullupCorrelatedPredicates` is part of the <<spark-sql-Optimizer.adoc#Pullup-Correlated-Expressions, Pullup Correlated Expressions>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-Technically, `PullupCorrelatedPredicates` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`PullupCorrelatedPredicates` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -48,14 +48,14 @@ rewriteSubQueries(plan: LogicalPlan, outerPlans: Seq[LogicalPlan]): LogicalPlan
 
 NOTE: `rewriteSubQueries` is used exclusively when `PullupCorrelatedPredicates` is <<apply, executed>> (i.e. applied to a link:spark-sql-LogicalPlan.adoc[logical plan]).
 
-=== [[apply]] Applying PullupCorrelatedPredicates To Logical Plan (Executing PullupCorrelatedPredicates) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply` transforms the input link:spark-sql-LogicalPlan.adoc[logical plan] as follows:
 

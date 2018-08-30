@@ -1,8 +1,10 @@
-== [[NullPropagation]] NullPropagation -- Nullability (NULL Value) Propagation Logical Optimization
+== [[NullPropagation]] NullPropagation Logical Optimization -- Nullability (NULL Value) Propagation
 
-`NullPropagation` is a link:spark-sql-Optimizer.adoc#NullPropagation[logical optimization] (aka `Rule[LogicalPlan]`) in link:spark-sql-Optimizer.adoc[Optimizer].
+`NullPropagation` is a *logical optimization* that <<apply, FIXME>>.
 
-NOTE: `NullPropagation` is one of the optimizations in the fixed-point link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] optimization rule batch in `Optimizer`.
+`NullPropagation` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`NullPropagation` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 === [[example-count-with-nullable-expressions-only]] Example: Count Aggregate Operator with Nullable Expressions Only
 
@@ -114,3 +116,14 @@ LocalRelation <empty>, [num#3]
 == Physical Plan ==
 LocalTableScan <empty>, [num#3]
 ----
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME

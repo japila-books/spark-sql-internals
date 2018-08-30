@@ -1,23 +1,19 @@
 == [[CombineTypedFilters]] CombineTypedFilters Logical Optimization
 
-`CombineTypedFilters` combines two back to back (typed) filters into one that ultimately ends up as a single method call.
+`CombineTypedFilters` is a *logical optimization* that <<apply, combines two back to back (typed) filters into one>> that ultimately ends up as a single method call.
+
+`CombineTypedFilters` is part of the <<spark-sql-Optimizer.adoc#Object_Expressions_Optimization, Object Expressions Optimization>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`CombineTypedFilters` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
-val spark: SparkSession = ...
-// Notice two consecutive filters
-spark.range(10).filter(_ % 2 == 0).filter(_ == 0)
-----
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
-`CombineTypedFilters` is the only logical plan optimization rule in *Typed Filter Optimization* link:spark-sql-Analyzer.adoc#batch[batch] in the base link:spark-sql-Optimizer.adoc[Optimizer].
-
-[source, scala]
-----
-val spark: SparkSession = ...
-
-// Notice two consecutive filters
-val dataset = spark.range(10).filter(_ % 2 == 0).filter(_ == 0)
-scala> dataset.queryExecution.optimizedPlan
+// A query with two consecutive typed filters
+val q = spark.range(10).filter(_ % 2 == 0).filter(_ == 0)
+scala> q.queryExecution.optimizedPlan
 ...
 TRACE SparkOptimizer:
 === Applying Rule org.apache.spark.sql.catalyst.optimizer.CombineTypedFilters ===
@@ -33,3 +29,14 @@ DEBUG SparkOptimizer:
 !   +- Range (0, 10, step=1, splits=Some(8))
 ...
 ----
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME

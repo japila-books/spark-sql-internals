@@ -1,8 +1,10 @@
 == [[EliminateSerialization]] EliminateSerialization Logical Optimization
 
-`EliminateSerialization` is a link:spark-sql-Analyzer.adoc#Rule[optimization rule] for a link:spark-sql-LogicalPlan.adoc[logical plan] in link:spark-sql-SparkOptimizer.adoc[SparkOptimizer].
+`EliminateSerialization` is a *logical optimization* that <<apply, optimizes>> logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
 
-`EliminateSerialization` optimizes logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
+`EliminateSerialization` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`EliminateSerialization` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 Examples include:
 
@@ -133,3 +135,14 @@ Aggregate [value#454L], [value#454L, typedsumdouble(org.apache.spark.sql.executi
             +- DeserializeToObject newInstance(class java.lang.Long), obj#448: java.lang.Long
                +- *Range (0, 4, step=1, splits=Some(8))
 ```
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME

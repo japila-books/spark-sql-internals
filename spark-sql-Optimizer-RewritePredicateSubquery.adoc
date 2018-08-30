@@ -8,7 +8,9 @@
 
 NOTE: Prefer `EXISTS` (over `Not` with `In` with `ListQuery` subquery expression) if performance matters since https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/subquery.scala?utf8=%E2%9C%93#L110[they say] "that will almost certainly be planned as a Broadcast Nested Loop join".
 
-Technically, `RewritePredicateSubquery` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`RewritePredicateSubquery` is part of the <<spark-sql-Optimizer.adoc#RewriteSubquery, RewriteSubquery>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`RewritePredicateSubquery` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -72,14 +74,14 @@ getValueExpression(e: Expression): Seq[Expression]
 
 NOTE: `getValueExpression` is used when...FIXME
 
-=== [[apply]] Transforming Filter Operators with Exists and In (with ListQuery) Expressions to Join Operators (Executing RewritePredicateSubquery) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply` transforms link:spark-sql-LogicalPlan-Filter.adoc[Filter] unary operators in the input link:spark-sql-LogicalPlan.adoc[logical plan].
 

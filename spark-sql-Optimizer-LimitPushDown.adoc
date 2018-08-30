@@ -1,11 +1,13 @@
 == [[LimitPushDown]] LimitPushDown Logical Optimization
 
-`LimitPushDown` is a link:spark-sql-LogicalPlan.adoc[LogicalPlan] optimization rule that <<apply, transforms>> the following logical plans:
+`LimitPushDown` is a *logical optimization* that <<apply, transforms>> the following logical plans:
 
 * `LocalLimit` with `Union`
 * `LocalLimit` with link:spark-sql-LogicalPlan-Join.adoc[Join]
 
-`LimitPushDown` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the base link:spark-sql-Optimizer.adoc[Optimizer].
+`LimitPushDown` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`LimitPushDown` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -51,9 +53,16 @@ CollectLimit 2
       +- *Range (0, 2, step=1, splits=Some(8))
 ----
 
-=== [[apply]] `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME
 
 === [[creating-instance]] Creating LimitPushDown Instance
 

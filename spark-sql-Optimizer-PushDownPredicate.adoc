@@ -1,8 +1,10 @@
 == [[PushDownPredicate]] PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Optimization
 
-`PushDownPredicate` is a logical optimization rule in link:spark-sql-Optimizer.adoc[Optimizer] that...FIXME
+`PushDownPredicate` is a *logical optimization* that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
 
-`PushDownPredicate` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] fixed-point batch of rules.
+`PushDownPredicate` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`PushDownPredicate` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 When you execute link:spark-sql-Dataset.adoc#where[where] or link:spark-sql-Dataset.adoc#filter[filter] operators right after link:spark-sql-DataFrameReader.adoc#load[loading a dataset], Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
 
@@ -182,3 +184,14 @@ res24: org.apache.spark.sql.execution.SparkPlan =
 === [[hive]] Hive Data Source
 
 CAUTION: FIXME
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME

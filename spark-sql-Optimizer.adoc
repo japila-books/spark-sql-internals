@@ -1,6 +1,6 @@
 == [[Optimizer]] Catalyst Optimizer -- Generic Logical Query Plan Optimizer
 
-`Optimizer` (aka *Catalyst Optimizer*) is the base of <<extensions, logical query plan optimizers>> that defines the <<batches, base logical optimization rules>> and the <<extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>> extension point for additional rules for the Operator Optimization batch.
+`Optimizer` (aka *Catalyst Optimizer*) is the base of <<extensions, logical query plan optimizers>> that defines the <<batches, base logical optimization rules>> and the <<extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>> extension point for additional rules for the *Operator Optimization* batch.
 
 [[extensions]]
 NOTE: <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> is the one and only direct implementation of the `Optimizer` Contract in Spark SQL.
@@ -84,8 +84,8 @@ scala> println(optimizedPlan.numberedTreeString)
 | [[EliminateView]] <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>>
 | Removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator
 
-| [[ReplaceExpressions]] link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]
-|
+| [[ReplaceExpressions]] <<spark-sql-Optimizer-ReplaceExpressions.adoc#, ReplaceExpressions>>
+| Replaces <<spark-sql-Expression-RuntimeReplaceable.adoc#, RuntimeReplaceable>> expressions with their single child expression
 
 | [[ComputeCurrentTime]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#ComputeCurrentTime[ComputeCurrentTime]
 |
@@ -262,12 +262,12 @@ scala> println(optimizedPlan.numberedTreeString)
 | The same as <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>>
 |
 
-^.^| [[Join-Reorder]] Join Reorder
+^.^| [[Join-Reorder]][[Join_Reorder]] Join Reorder
 ^.^| `Once`
 | [[CostBasedJoinReorder]] link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
-|
+| Reorders <<spark-sql-LogicalPlan-Join.adoc#, Join>> logical operators
 
-^.^| [[Decimal-Optimizations]] Decimal Optimizations
+^.^| [[Decimal-Optimizations]][[Decimal_Optimizations]] Decimal Optimizations
 ^.^| <<fixedPoint, FixedPoint>>
 | [[DecimalAggregates]] link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
 |

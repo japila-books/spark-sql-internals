@@ -5,7 +5,9 @@
 . The input is already the type to cast to.
 . The input is of `ArrayType` or `MapType` type and contains no `null` elements.
 
-Technically, `SimplifyCasts` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`SimplifyCasts` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`SimplifyCasts` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -140,15 +142,13 @@ LocalRelation [m#272]
 LocalTableScan [m#272]
 ----
 
-`SimplifyCasts` is part of the link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
-
-=== [[apply]] Applying SimplifyCasts Rule To Logical Plan (Executing SimplifyCasts) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply`...FIXME

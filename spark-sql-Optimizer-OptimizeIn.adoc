@@ -8,9 +8,9 @@
 
 . Replaces an `In` predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible] with link:spark-sql-Expression-InSet.adoc[InSet] expressions when the number of link:spark-sql-Expression-Literal.adoc[literal] expressions in the link:spark-sql-Expression-In.adoc#list[list] expression is greater than link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold] internal configuration property (default: `10`)
 
-`OptimizeIn` is part of link:spark-sql-Optimizer.adoc#Operator-Optimizations[Operator Optimizations] batch in the standard batches of the base link:spark-sql-Optimizer.adoc[Spark Optimizer].
+`OptimizeIn` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-Technically, `OptimizeIn` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+`OptimizeIn` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -46,13 +46,13 @@ scala> println(optimizedPlan.numberedTreeString)
 01 +- LocalRelation <empty>, [a#6, b#7, c#8]
 ----
 
-=== [[apply]] Applying OptimizeIn To Logical Plan (Executing OptimizeIn) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply`...FIXME

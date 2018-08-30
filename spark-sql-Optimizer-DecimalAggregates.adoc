@@ -1,8 +1,10 @@
 == [[DecimalAggregates]] DecimalAggregates Logical Optimization
 
-`DecimalAggregates` is a logical optimization rule in link:spark-sql-Optimizer.adoc[Optimizer] that transforms `Sum` and `Average` aggregate functions on fixed-precision `DecimalType` values to use `UnscaledValue` (unscaled Long) values in link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] and link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] expressions.
+`DecimalAggregates` is a *logical optimization* that <<apply, transforms>> `Sum` and `Average` aggregate functions on fixed-precision `DecimalType` values to use `UnscaledValue` (unscaled Long) values in link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] and link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] expressions.
 
-`DecimalAggregates` is the only optimization in link:spark-sql-Optimizer.adoc#Decimal-Optimizations[Decimal Optimizations] fixed-point batch of rules in `Optimizer`.
+`DecimalAggregates` is part of the <<spark-sql-Optimizer.adoc#Decimal_Optimizations, Decimal Optimizations>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+
+`DecimalAggregates` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [TIP]
 ====
@@ -89,3 +91,14 @@ Aggregate [cast((avg(UnscaledValue(cast(id#115L as decimal(10,0)))) / 1.0) as de
    +- *HashAggregate(keys=[], functions=[partial_avg(UnscaledValue(cast(id#115L as decimal(10,0))))], output=[sum#120, count#121L])
       +- *Range (0, 1, step=1, splits=None)
 ----
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME
