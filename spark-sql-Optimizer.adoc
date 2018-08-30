@@ -87,10 +87,10 @@ scala> println(optimizedPlan.numberedTreeString)
 | [[ReplaceExpressions]] <<spark-sql-Optimizer-ReplaceExpressions.adoc#, ReplaceExpressions>>
 | Replaces <<spark-sql-Expression-RuntimeReplaceable.adoc#, RuntimeReplaceable>> expressions with their single child expression
 
-| [[ComputeCurrentTime]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#ComputeCurrentTime[ComputeCurrentTime]
+| [[ComputeCurrentTime]] <<spark-sql-Optimizer-ComputeCurrentTime.adoc#, ComputeCurrentTime>>
 |
 
-| [[GetCurrentDatabase]] link:spark-sql-Optimizer-GetCurrentDatabase.adoc#GetCurrentDatabase[GetCurrentDatabase]
+| [[GetCurrentDatabase]] <<spark-sql-Optimizer-GetCurrentDatabase.adoc#, GetCurrentDatabase>>
 |
 
 | [[RewriteDistinctAggregates]] RewriteDistinctAggregates
