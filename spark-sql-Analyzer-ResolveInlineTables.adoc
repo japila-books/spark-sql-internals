@@ -1,0 +1,3 @@
+== [[ResolveInlineTables]] ResolveInlineTables Logical Resolution Rule
+
+`ResolveInlineTables` is...FIXME

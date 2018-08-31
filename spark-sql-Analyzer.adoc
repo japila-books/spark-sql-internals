@@ -274,8 +274,8 @@ a| Resolves link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] expressions to
 
 NOTE: Multiple distinct time window expressions are not currently supported (and yield a `AnalysisException`)
 
-| ResolveInlineTables
-| Resolves `UnresolvedInlineTable` with `LocalRelation`
+| [[ResolveInlineTables]] <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>>
+| Resolves a <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> to <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelations>>
 
 | link:spark-sql-TypeCoercion.adoc#typeCoercionRules[TypeCoercion.typeCoercionRules]
 |
@@ -287,7 +287,7 @@ NOTE: Multiple distinct time window expressions are not currently supported (and
 | <<postHocResolutionRules, postHocResolutionRules>>
 |
 
-^.^| View
+^.^| [[View]] View
 ^.^| `Once`
 | [[AliasViewChild]] <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>>
 |

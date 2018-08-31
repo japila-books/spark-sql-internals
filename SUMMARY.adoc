@@ -498,6 +498,7 @@
 . link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 . link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
 . link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
+. link:spark-sql-Analyzer-ResolveInlineTables.adoc[ResolveInlineTables]
 . link:spark-sql-Analyzer-ResolveMissingReferences.adoc[ResolveMissingReferences]
 . link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
 . link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]

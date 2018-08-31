@@ -62,16 +62,16 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 |
 | [[visitColumnReference]]
 
-| [[visitDereference]] `visitDereference`
+| `visitDereference`
 |
-|
+| [[visitDereference]]
 
-| [[visitExists]] `visitExists`
+| `visitExists`
 | `#exists` labeled alternative
-| link:spark-sql-Expression-Exists.adoc[Exists] expression
+| [[visitExists]] link:spark-sql-Expression-Exists.adoc[Exists] expression
 
 | [[visitExplain]] `visitExplain`
-| `explain`
+| `explain` rule
 a| link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
 
 [NOTE]
@@ -107,6 +107,22 @@ a|
 * link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for a function over a window
 
 TIP: See the <<function-examples, function examples>> below.
+
+| `visitInlineTable`
+| `inlineTable` rule
+a| [[visitInlineTable]] <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> unary logical operator (as the child of <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>> for `tableAlias`)
+
+```
+VALUES expression (',' expression)* tableAlias
+```
+
+`expression` can be as follows:
+
+* <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expression for multiple-column tables
+
+* Any <<spark-sql-Expression.adoc#, Catalyst expression>> for one-column tables
+
+`tableAlias` can be specified explicitly or defaults to `colN` for every column (starting from `1` for `N`).
 
 | [[visitMultiInsertQuery]] `visitMultiInsertQuery`
 | `multiInsertQueryBody`
