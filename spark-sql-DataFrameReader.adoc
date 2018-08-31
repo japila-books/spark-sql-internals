@@ -1,6 +1,6 @@
 == [[DataFrameReader]] DataFrameReader -- Loading Data From External Data Sources
 
-`DataFrameReader` is responsible for <<load, loading data from external data sources>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>) into an untyped `DataFrame` or a typed `Dataset`.
+`DataFrameReader` is the <<methods, public interface>> to describe how to <<load, load data from an external data source>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>).
 
 [[methods]]
 .DataFrameReader API

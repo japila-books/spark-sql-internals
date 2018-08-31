@@ -1,6 +1,6 @@
-== [[DataFrameWriter]] DataFrameWriter
+== [[DataFrameWriter]] DataFrameWriter -- Saving Data To External Data Sources
 
-`DataFrameWriter` is the <<methods, public interface>> to write the result of executing a structured query (i.e. the content of a link:spark-sql-Dataset.adoc[Dataset]) to an external storage system in a batch fashion.
+`DataFrameWriter` is the <<methods, public interface>> to describe how data (as the result of executing a structured query) should be <<save, saved to an external data source>> (storage system).
 
 [[methods]]
 .DataFrameWriter API
