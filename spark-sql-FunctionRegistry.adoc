@@ -8,8 +8,11 @@ You can access a session-specific `FunctionRegistry` through link:spark-sql-Sess
 
 [source, scala]
 ----
-val spark: SparkSession = ...
-spark.sessionState.functionRegistry
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState.functionRegistry
+org.apache.spark.sql.catalyst.analysis.FunctionRegistry
 ----
 
 NOTE: You can register a new user-defined function using link:spark-sql-UDFRegistration.adoc[UDFRegistration].

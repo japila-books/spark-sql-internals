@@ -193,7 +193,7 @@ deserializerFor(
 serializerFor[T: TypeTag](inputObject: Expression): CreateNamedStruct
 ----
 
-`serializerFor` creates a `CreateNamedStruct` link:spark-sql-Expression.adoc[expression] to serialize a Scala object of type `T` to link:spark-sql-InternalRow.adoc[internal binary row format].
+`serializerFor` creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> expression to serialize a Scala object of type `T` to link:spark-sql-InternalRow.adoc[internal binary row format].
 
 [source, scala]
 ----

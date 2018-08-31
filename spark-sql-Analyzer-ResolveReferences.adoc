@@ -155,7 +155,7 @@ scala> println(plan.numberedTreeString)
 // CAUTION: FIXME How to demo that the plan gets resolved using ResolveReferences.expandStarExpression?
 ```
 
-* For link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
+* For <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
 
 * For link:spark-sql-Expression-CreateArray.adoc[CreateArray] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
 

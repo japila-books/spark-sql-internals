@@ -247,7 +247,7 @@ Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka link:spar
 |
 
 | [[prettyName]] `prettyName`
-|
+| User-facing name
 
 | [[references]] `references`
 |

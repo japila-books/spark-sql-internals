@@ -33,7 +33,7 @@ create(
 <4> `create` calls the 5th `create`
 <5> The main `create` that does the heavy work
 
-`create` transforms all `CreateNamedStruct` to `CreateNamedStructUnsafe` in every link:spark-sql-Expression-BoundReference.adoc[BoundReference] in the input `exprs`.
+`create` transforms all <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions to `CreateNamedStructUnsafe` in every link:spark-sql-Expression-BoundReference.adoc[BoundReference] in the input `exprs`.
 
 In the end, `create` requests `GenerateUnsafeProjection` to link:spark-sql-GenerateUnsafeProjection.adoc#generate[generate a UnsafeProjection].
 

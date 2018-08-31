@@ -18,7 +18,7 @@ val ExprCode(code, _, _) = monotonicallyIncreasingID.genCode(ctx)
 
 // Helper methods
 def trim(code: String): String = {
-  code.trim.split("\n").map(_.trim).mkString("\n")
+  code.trim.split("\n").map(_.trim).filter(line => line.nonEmpty).mkString("\n")
 }
 def prettyPrint(code: String) = println(trim(code))
 // END: Helper methods
@@ -35,7 +35,7 @@ count_0++;
 `MonotonicallyIncreasingID` is never <<spark-sql-Expression.adoc#nullable, nullable>>.
 
 [[prettyName]]
-`MonotonicallyIncreasingID` uses *monotonically_increasing_id* for the <<spark-sql-Expression.adoc#prettyName, user-facing text representation>>.
+`MonotonicallyIncreasingID` uses *monotonically_increasing_id* for the <<spark-sql-Expression.adoc#prettyName, user-facing name>>.
 
 [[sql]]
 `MonotonicallyIncreasingID` uses *monotonically_increasing_id()* for the <<spark-sql-Expression.adoc#sql, SQL representation>>.
