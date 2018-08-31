@@ -63,7 +63,7 @@ scala> println(optimizedPlan.numberedTreeString)
 ----
 
 [[batches]]
-.Optimizer's Base Logical Optimizations (in the order of execution)
+.Optimizer's Batches and Base Logical Optimizations (in the order of execution)
 [cols="2,1,3,3",options="header",width="100%"]
 |===
 ^.^| Batch Name
