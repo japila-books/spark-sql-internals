@@ -1,6 +1,6 @@
 == [[PushPredicateThroughJoin]] PushPredicateThroughJoin Logical Optimization
 
-`PushPredicateThroughJoin` is a *logical optimization* that <<apply, FIXME>>.
+`PushPredicateThroughJoin` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, FIXME>>.
 
 `PushPredicateThroughJoin` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

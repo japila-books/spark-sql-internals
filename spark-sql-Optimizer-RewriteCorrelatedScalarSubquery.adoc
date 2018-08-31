@@ -1,6 +1,6 @@
 == [[RewriteCorrelatedScalarSubquery]] RewriteCorrelatedScalarSubquery Logical Optimization
 
-`RewriteCorrelatedScalarSubquery` is a *logical optimization* that <<apply, transforms logical plans>> with the following operators:
+`RewriteCorrelatedScalarSubquery` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans>> with the following operators:
 
 . FIXME
 

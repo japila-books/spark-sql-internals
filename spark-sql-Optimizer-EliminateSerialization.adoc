@@ -1,6 +1,6 @@
 == [[EliminateSerialization]] EliminateSerialization Logical Optimization
 
-`EliminateSerialization` is a *logical optimization* that <<apply, optimizes>> logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
+`EliminateSerialization` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, optimizes>> logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
 
 `EliminateSerialization` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

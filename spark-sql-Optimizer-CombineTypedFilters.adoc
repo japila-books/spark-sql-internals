@@ -1,6 +1,6 @@
 == [[CombineTypedFilters]] CombineTypedFilters Logical Optimization
 
-`CombineTypedFilters` is a *logical optimization* that <<apply, combines two back to back (typed) filters into one>> that ultimately ends up as a single method call.
+`CombineTypedFilters` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, combines two back to back (typed) filters into one>> that ultimately ends up as a single method call.
 
 `CombineTypedFilters` is part of the <<spark-sql-Optimizer.adoc#Object_Expressions_Optimization, Object Expressions Optimization>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

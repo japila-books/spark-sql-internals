@@ -1,6 +1,6 @@
 == [[PullupCorrelatedPredicates]] PullupCorrelatedPredicates Logical Optimization
 
-`PullupCorrelatedPredicates` is a *logical optimization* that <<apply, transforms logical plans>> with the following operators:
+`PullupCorrelatedPredicates` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans>> with the following operators:
 
 . link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] child operator
 

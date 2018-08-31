@@ -1,6 +1,6 @@
 == [[RewritePredicateSubquery]] RewritePredicateSubquery Logical Optimization
 
-`RewritePredicateSubquery` is a *logical optimization* that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>> as follows:
+`RewritePredicateSubquery` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>> as follows:
 
 * `Filter` operators with `Exists` and `In` with `ListQuery` expressions give *left-semi joins*
 

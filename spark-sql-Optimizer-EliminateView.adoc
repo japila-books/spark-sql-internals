@@ -1,6 +1,6 @@
 == [[EliminateView]] EliminateView Logical Optimization
 
-`EliminateView` is a *logical optimization* that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
+`EliminateView` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
 
 `EliminateView` is part of the <<spark-sql-Optimizer.adoc#Finish_Analysis, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

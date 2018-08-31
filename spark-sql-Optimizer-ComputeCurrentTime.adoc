@@ -1,6 +1,6 @@
 == [[ComputeCurrentTime]] ComputeCurrentTime Logical Optimization
 
-`ComputeCurrentTime` is a *logical optimization* that <<apply, computes the current date and timestamp>>.
+`ComputeCurrentTime` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, computes the current date and timestamp>>.
 
 `ComputeCurrentTime` is part of the <<spark-sql-Optimizer.adoc#ComputeCurrentTime, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

@@ -1,6 +1,6 @@
 == [[OptimizeSubqueries]] OptimizeSubqueries Logical Optimization
 
-`OptimizeSubqueries` is a *logical optimization* that <<apply, FIXME>>.
+`OptimizeSubqueries` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, FIXME>>.
 
 `OptimizeSubqueries` is part of the <<spark-sql-Optimizer.adoc#Subquery, Subquery>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

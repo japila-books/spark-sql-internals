@@ -1,6 +1,6 @@
 == [[LimitPushDown]] LimitPushDown Logical Optimization
 
-`LimitPushDown` is a *logical optimization* that <<apply, transforms>> the following logical plans:
+`LimitPushDown` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms>> the following logical plans:
 
 * `LocalLimit` with `Union`
 * `LocalLimit` with link:spark-sql-LogicalPlan-Join.adoc[Join]

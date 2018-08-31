@@ -1,6 +1,6 @@
 == [[ReplaceExpressions]] ReplaceExpressions Logical Optimization
 
-`ReplaceExpressions` is a *logical optimization* that <<apply, replaces RuntimeReplaceable expressions with their single child expression>>.
+`ReplaceExpressions` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, replaces RuntimeReplaceable expressions with their single child expression>>.
 
 `ReplaceExpressions` is part of the <<spark-sql-Optimizer.adoc#Finish_Analysis, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 

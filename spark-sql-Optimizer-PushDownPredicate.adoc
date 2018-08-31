@@ -1,6 +1,6 @@
 == [[PushDownPredicate]] PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Optimization
 
-`PushDownPredicate` is a *logical optimization* that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
+`PushDownPredicate` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
 
 `PushDownPredicate` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
