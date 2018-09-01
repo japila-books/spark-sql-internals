@@ -166,7 +166,7 @@ schemaString(
 
 `schemaString`...FIXME
 
-NOTE: `schemaString` is used when...FIXME
+NOTE: `schemaString` is used exclusively when `JdbcUtils` is requested to <<createTable, create a table>>.
 
 === [[parseUserSpecifiedCreateTableColumnTypes]] `parseUserSpecifiedCreateTableColumnTypes` Internal Method
 
@@ -179,7 +179,7 @@ parseUserSpecifiedCreateTableColumnTypes(
 
 `parseUserSpecifiedCreateTableColumnTypes`...FIXME
 
-NOTE: `parseUserSpecifiedCreateTableColumnTypes` is used when...FIXME
+NOTE: `parseUserSpecifiedCreateTableColumnTypes` is used exclusively when `JdbcUtils` is requested to <<schemaString, schemaString>>.
 
 === [[saveTable]] `saveTable` Method
 

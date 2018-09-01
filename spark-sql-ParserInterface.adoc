@@ -1,19 +1,8 @@
 == [[ParserInterface]] ParserInterface -- SQL Parser Contract
 
-`ParserInterface` is the <<contract, parser contract>> for creating `Expression` (to create link:spark-sql-Column.adoc[Columns] from), link:spark-sql-LogicalPlan.adoc[LogicalPlan], `TableIdentifier`, and link:spark-sql-StructType.adoc[StructType] for the textual representation of a SQL statement.
+`ParserInterface` is the <<contract, contract>> of <<extensions, SQL parsers>> that can parse <<parseExpression, Expressions>>, <<parsePlan, LogicalPlans>>, <<parseTableIdentifier, TableIdentifiers>>, and <<parseTableSchema, StructTypes>> given the textual representation of SQL statements.
 
-NOTE: The one and only `ParserInterface` in Spark SQL is link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser].
-
-`ParserInterface` is available as `sqlParser` in link:spark-sql-SessionState.adoc#sqlParser[SessionState].
-
-[source, scala]
-----
-val spark: org.apache.spark.sql.SparkSession = ...
-spark.sessionState.sqlParser
-----
-
-=== [[contract]] ParserInterface Contract
-
+[[contract]]
 [source, scala]
 ----
 package org.apache.spark.sql.catalyst.parser
@@ -26,33 +15,67 @@ trait ParserInterface {
 }
 ----
 
+[[extensions]]
+NOTE: <<spark-sql-AbstractSqlParser.adoc#, AbstractSqlParser>> is the one and only known extension of the `ParserInterface` Contract in Spark SQL.
+
+`ParserInterface` is available as `sqlParser` in <<spark-sql-SessionState.adoc#sqlParser, SessionState>>.
+
+[source, scala]
+----
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sessionState.sqlParser
+org.apache.spark.sql.catalyst.parser.ParserInterface
+----
+
 .ParserInterface Contract
 [cols="1,2",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| [[parseExpression]] `parseExpression`
-| Used when...
+| `parseExpression`
+a| [[parseExpression]] Parses a SQL text to an <<spark-sql-Expression.adoc#, Expression>>
 
-| [[parsePlan]] `parsePlan`
-a| Used mainly when `SparkSession` is requested to link:spark-sql-SparkSession.adoc#sql[execute a SQL query] using `sql` method.
+Used in the following:
 
-```
-scala> :type spark
-org.apache.spark.sql.SparkSession
+* Dataset transformations: <<spark-sql-dataset-operators.adoc#selectExpr, Dataset.selectExpr>>, <<spark-sql-dataset-operators.adoc#filter, Dataset.filter>> and <<spark-sql-dataset-operators.adoc#where, Dataset.where>>
 
-scala> spark.sql("show databases").show
-+------------+
-\|databaseName\|
-+------------+
-\|     default\|
-+------------+
-```
+* <<spark-sql-functions.adoc#expr, expr>> standard function
 
-| [[parseTableIdentifier]] `parseTableIdentifier`
-| Used when...
+| `parsePlan`
+a| [[parsePlan]] Parses a SQL text to a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>
 
-| [[parseTableSchema]] `parseTableSchema`
-| Used when...
+Used when:
+
+* `SparkSession` is requested to <<spark-sql-SparkSession.adoc#sql, execute a SQL statement>>
+
+* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupRelation, find a view in catalogs>>
+
+| `parseTableIdentifier`
+a| [[parseTableIdentifier]] Parses a SQL text to a `TableIdentifier`
+
+Used when:
+
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#insertInto, insertInto>> and <<spark-sql-DataFrameWriter.adoc#saveAsTable, saveAsTable>>
+
+* Dataset basic actions are used: <<spark-sql-dataset-operators.adoc#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.adoc#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.adoc#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.adoc#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>> (using <<spark-sql-Dataset-basic-actions.adoc#createTempViewCommand, Dataset.createTempViewCommand>>)
+
+* `SparkSession` is requested to <<spark-sql-SparkSession.adoc#table, load data from a table>>
+
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listColumns, listColumns>>, <<spark-sql-CatalogImpl.adoc#getTable, getTable>>, <<spark-sql-CatalogImpl.adoc#tableExists, tableExists>>, <<spark-sql-CatalogImpl.adoc#createTable, createTable>>, <<spark-sql-CatalogImpl.adoc#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.adoc#refreshTable, refreshTable>>
+
+* `SessionState` is requested to <<spark-sql-SessionState.adoc#refreshTable, refreshTable>>
+
+| `parseTableSchema`
+a| [[parseTableSchema]] Parses a SQL text to a <<spark-sql-StructType.adoc#, StructType>>
+
+Used when:
+
+* `StructType` is requested to <<spark-sql-StructType.adoc#fromDDL, create a StructType for a DDL-formatted text>>
+
+* `JdbcUtils` is requested to <<spark-sql-JdbcUtils.adoc#getCustomSchema, replace data types in table schema>> and <<spark-sql-JdbcUtils.adoc#parseUserSpecifiedCreateTableColumnTypes, parseUserSpecifiedCreateTableColumnTypes>>
+
+* `JsonExprUtils` is requested to `validateSchemaLiteral`
 |===

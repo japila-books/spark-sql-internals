@@ -164,3 +164,14 @@ root
 ----
 
 Internally, it uses `treeString` method to build the tree and then `println` it.
+
+=== [[fromDDL]] Creating StructType For DDL-Formatted Text -- `fromDDL` Object Method
+
+[source, scala]
+----
+fromDDL(ddl: String): StructType
+----
+
+`fromDDL`...FIXME
+
+NOTE: `fromDDL` is used when...FIXME
