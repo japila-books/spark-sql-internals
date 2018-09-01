@@ -38,7 +38,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 `CreateNamedStruct` is <<creating-instance, created>> when:
 
-* `ScalaReflection` and `RowEncoder` are requested to `serializerFor`
+* <<spark-sql-ScalaReflection.adoc#serializerFor, ScalaReflection>> and `RowEncoder` are requested to `serializerFor`
 
 * `TimeWindowing` and <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#apply, ResolveCreateNamedStruct>> logical resolution rules are executed
 

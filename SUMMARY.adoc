@@ -650,6 +650,8 @@
 
 . link:spark-sql-SchemaUtils.adoc[SchemaUtils Helper Object]
 
+. link:spark-sql-ScalaReflection.adoc[ScalaReflection]
+
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 
 . link:spark-sql-TypeCoercion.adoc[TypeCoercion Object]

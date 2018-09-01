@@ -6,37 +6,64 @@ Spark SQL does not support `java.time.LocalDateTime` values in a `Dataset`.
 ----
 import java.time.LocalDateTime
 
-scala> val times = Seq(LocalDateTime.now).toDF("time")
-<console>:24: error: value toDF is not a member of Seq[java.time.LocalDateTime]
-       val times = Seq(LocalDateTime.now).toDF("time")
-                                          ^
+val data = Seq((0, LocalDateTime.now))
+scala> val times = data.toDF("time")
+java.lang.UnsupportedOperationException: No Encoder found for java.time.LocalDateTime
+- field (class: "java.time.LocalDateTime", name: "_2")
+- root class: "scala.Tuple2"
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:643)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:445)
+  at scala.reflect.internal.tpe.TypeConstraints$UndoLog.undo(TypeConstraints.scala:56)
+  at org.apache.spark.sql.catalyst.ScalaReflection$class.cleanUpReflectionObjects(ScalaReflection.scala:824)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.cleanUpReflectionObjects(ScalaReflection.scala:39)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor(ScalaReflection.scala:445)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1$$anonfun$8.apply(ScalaReflection.scala:637)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1$$anonfun$8.apply(ScalaReflection.scala:625)
+  at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+  at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+  at scala.collection.immutable.List.foreach(List.scala:381)
+  at scala.collection.TraversableLike$class.flatMap(TraversableLike.scala:241)
+  at scala.collection.immutable.List.flatMap(List.scala:344)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:625)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:445)
+  at scala.reflect.internal.tpe.TypeConstraints$UndoLog.undo(TypeConstraints.scala:56)
+  at org.apache.spark.sql.catalyst.ScalaReflection$class.cleanUpReflectionObjects(ScalaReflection.scala:824)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.cleanUpReflectionObjects(ScalaReflection.scala:39)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor(ScalaReflection.scala:445)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.serializerFor(ScalaReflection.scala:434)
+  at org.apache.spark.sql.catalyst.encoders.ExpressionEncoder$.apply(ExpressionEncoder.scala:71)
+  at org.apache.spark.sql.Encoders$.product(Encoders.scala:275)
+  at org.apache.spark.sql.LowPrioritySQLImplicits$class.newProductEncoder(SQLImplicits.scala:248)
+  at org.apache.spark.sql.SQLImplicits.newProductEncoder(SQLImplicits.scala:34)
+  ... 50 elided
 ----
 
-The reason for the error is that there is no link:spark-sql-Encoder.adoc[encoder] for `java.time.LocalDateTime`.
+As it is clearly said in the exception, the root cause is no <<spark-sql-Encoder.adoc#, Encoder>> found for `java.time.LocalDateTime` (as there is not one available in Spark SQL).
+
+You could define one using <<spark-sql-ExpressionEncoder.adoc#, ExpressionEncoder>>, but that does not seem to work either.
 
 [source, scala]
 ----
-import java.time.LocalDateTime
-import org.apache.spark.sql.Encoder
 import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder
-
-implicit def scalaLocalDateTime: Encoder[java.time.LocalDateTime] = ExpressionEncoder()
-
-scala> val times = Seq(LocalDateTime.now).toDF("time")
+scala> ExpressionEncoder[java.time.LocalDateTime]
 java.lang.UnsupportedOperationException: No Encoder found for java.time.LocalDateTime
 - root class: "java.time.LocalDateTime"
-  at org.apache.spark.sql.catalyst.ScalaReflection$.org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor(ScalaReflection.scala:625)
-  at org.apache.spark.sql.catalyst.ScalaReflection$.serializerFor(ScalaReflection.scala:438)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:643)
+  at org.apache.spark.sql.catalyst.ScalaReflection$$anonfun$org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor$1.apply(ScalaReflection.scala:445)
+  at scala.reflect.internal.tpe.TypeConstraints$UndoLog.undo(TypeConstraints.scala:56)
+  at org.apache.spark.sql.catalyst.ScalaReflection$class.cleanUpReflectionObjects(ScalaReflection.scala:824)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.cleanUpReflectionObjects(ScalaReflection.scala:39)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.org$apache$spark$sql$catalyst$ScalaReflection$$serializerFor(ScalaReflection.scala:445)
+  at org.apache.spark.sql.catalyst.ScalaReflection$.serializerFor(ScalaReflection.scala:434)
   at org.apache.spark.sql.catalyst.encoders.ExpressionEncoder$.apply(ExpressionEncoder.scala:71)
-  at scalaLocalDateTime(<console>:27)
-  ... 48 elided
+  ... 50 elided
 ----
 
-One solution is to map `java.time.LocalDateTime` to a supported type that Spark SQL offers an encoder for.
+The simplest solution is to transform the `Dataset` with `java.time.LocalDateTime` to a supported type that Spark SQL offers an encoder for.
 
-A much better solution would be to provide a custom encoder that would expand the types supported in Spark SQL.
+A much better solution would be to provide a custom `Encoder` that would expand the types supported in Spark SQL.
 
-`LocalDateTimeEncoder` is an _attempt_ to develop a custom link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] for Java's https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html[java.time.LocalDateTime].
+`LocalDateTimeEncoder` is an _attempt_ to develop a custom <<spark-sql-ExpressionEncoder.adoc#, ExpressionEncoder>> for Java's https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html[java.time.LocalDateTime] so you don't have to map values to another supported type.
 
 ====
 public final class *LocalDateTime*
@@ -45,6 +72,66 @@ A date-time without a time-zone in the ISO-8601 calendar system, such as `2007-1
 
 `LocalDateTime` is an immutable date-time object that represents a date-time, often viewed as year-month-day-hour-minute-second.
 ====
+
+[source, scala]
+----
+// A very fresh attempt at creating an Encoder for java.time.LocalDateTime
+
+// See ExpressionEncoder.apply
+import org.apache.spark.sql.catalyst.expressions.BoundReference
+import org.apache.spark.sql.catalyst.ScalaReflection
+import java.time.LocalDateTime
+val inputObject = BoundReference(0, ScalaReflection.dataTypeFor[LocalDateTime], nullable = true)
+
+// ScalaReflection.serializerFor[LocalDateTime](inputObject)
+import org.apache.spark.sql.catalyst.expressions.{CreateNamedStruct, Literal}
+import org.apache.spark.sql.catalyst.expressions.objects.StaticInvoke
+import org.apache.spark.sql.catalyst.util.DateTimeUtils
+import org.apache.spark.sql.types.DateType
+// Simply invokes DateTimeUtils.fromJavaDate
+// fromJavaDate(date: Date): Int
+// serializing a Date to an Int
+
+// Util object to do conversion (serialization)
+object LocalDateTimeUtils {
+  import java.time.LocalDateTime
+  def fromLocalDateTime(date: LocalDateTime): Long = date.toEpochSecond(java.time.ZoneOffset.UTC)
+}
+
+val other = StaticInvoke(
+  LocalDateTimeUtils.getClass,
+  DateType,
+  "fromLocalDateTime",
+  inputObject :: Nil,
+  returnNullable = false)
+val serializer = CreateNamedStruct(Literal("value") :: other :: Nil)
+val schema = serializer.dataType
+
+// ScalaReflection.deserializerFor[T]
+// FIXME Create it as for ScalaReflection.serializerFor above
+val deserializer = serializer // FIXME
+
+import scala.reflect.ClassTag
+import scala.reflect.runtime.universe.{typeTag, TypeTag}
+val mirror = ScalaReflection.mirror
+val tpe = typeTag[java.time.LocalDateTime].in(mirror).tpe
+val cls = mirror.runtimeClass(tpe)
+
+import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder
+val localDateTimeEncoder = new ExpressionEncoder[java.time.LocalDateTime](
+  schema,
+  flat = true,
+  serializer.flatten,
+  deserializer,
+  ClassTag[java.time.LocalDateTime](cls))
+
+import org.apache.spark.sql.Encoder
+implicit val encLocalDateTime: Encoder[java.time.LocalDateTime] = localDateTimeEncoder
+
+// DEMO
+val data = Seq(LocalDateTime.now)
+val times = spark.createDataset(data) // (encLocalDateTime)
+----
 
 [source, scala]
 ----
@@ -76,8 +163,7 @@ val staticInvoke = StaticInvoke(
 // Based on UDTRegistration
 val clazz = classOf[java.time.LocalDateTime]
 import org.apache.spark.sql.catalyst.expressions.objects.NewInstance
-import org.apache.spark.sql.catalyst.expressions.Expression
-val obj: Expression = NewInstance(
+val obj = NewInstance(
   cls = clazz,
   arguments = Nil,
   dataType = ObjectType(clazz))
