@@ -1,6 +1,6 @@
 == [[CreateNamedStruct]] CreateNamedStruct Expression
 
-`CreateNamedStruct` is a `CreateNamedStructLike` <<spark-sql-Expression.adoc#, Catalyst expression>> that...FIXME
+`CreateNamedStruct` is a <<spark-sql-Expression-CreateNamedStructLike.adoc#, CreateNamedStructLike>> expression that...FIXME
 
 [[prettyName]]
 `CreateNamedStruct` uses *named_struct* for the <<spark-sql-Expression.adoc#prettyName, user-facing name>>.
