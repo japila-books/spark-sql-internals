@@ -40,7 +40,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 * `ScalaReflection` and `RowEncoder` are requested to `serializerFor`
 
-* `TimeWindowing` and `ResolveCreateNamedStruct` logical resolution rules are executed
+* `TimeWindowing` and <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#apply, ResolveCreateNamedStruct>> logical resolution rules are executed
 
 * `CreateStruct` is executed
 

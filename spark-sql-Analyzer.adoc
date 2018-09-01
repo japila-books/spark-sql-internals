@@ -177,16 +177,17 @@ a| Resolves:
 * link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 
 | [[ResolveReferences]] link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
-a| Resolves:
-
-* FIXME
-
-| ResolveCreateNamedStruct
 |
+
+| [[ResolveCreateNamedStruct]] <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#, ResolveCreateNamedStruct>>
+| Resolves <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions (with `NamePlaceholders`) to use <<spark-sql-Expression-Literal.adoc#, Literal>> expressions
+
 | ResolveDeserializer
 |
+
 | ResolveNewInstance
 |
+
 | ResolveUpCast
 |
 
