@@ -4,6 +4,20 @@
 
 `SimpleTypedAggregateExpression` is <<creating-instance, created>> when...FIXME
 
+[[internal-registries]]
+.SimpleTypedAggregateExpression's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| evaluateExpression
+| [[evaluateExpression]] <<spark-sql-Expression.adoc#, Expression>>
+
+| resultObjToRow
+| [[resultObjToRow]] <<spark-sql-UnsafeProjection.adoc#, UnsafeProjection>>
+|===
+
 === [[creating-instance]] Creating SimpleTypedAggregateExpression Instance
 
 `SimpleTypedAggregateExpression` takes the following when created:

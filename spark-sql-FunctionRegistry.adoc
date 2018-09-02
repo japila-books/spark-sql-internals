@@ -29,7 +29,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 |===
 
 [[expressions]]
-`FunctionRegistry` tracks the mapping between link:spark-sql-Expression.adoc[Catalyst expressions] and their built-in/native SQL functions (that can be used in SQL statements).
+`FunctionRegistry` manages a *function expression registry* of <<spark-sql-Expression.adoc#, Catalyst expressions>> and corresponding built-in/native SQL functions (that can be used in SQL statements).
 
 .(Subset of) FunctionRegistry's Catalyst Expressions and SQL Functions Mapping
 [cols="1,2",options="header",width="100%"]
@@ -63,6 +63,9 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 
 | `Right`
 | [[right]] `right`
+
+| <<spark-sql-CreateStruct.adoc#registryEntry, CreateNamedStruct>>
+|[[struct]] `struct`
 |===
 
 === [[expression]] `expression` Internal Method

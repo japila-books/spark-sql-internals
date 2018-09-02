@@ -42,7 +42,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 * `TimeWindowing` and <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#apply, ResolveCreateNamedStruct>> logical resolution rules are executed
 
-* `CreateStruct` is executed
+* `CreateStruct` is requested to <<spark-sql-CreateStruct.adoc#apply, create a CreateNamedStruct expression>>
 
 * `JavaTypeInference` is requested to `serializerFor`
 

@@ -287,7 +287,7 @@ Error while decoding: [initial exception]
 * Structured Streaming's `ForeachSink`
 ====
 
-=== [[tuple]] Creating ExpressionEncoder For N-Tuple -- `tuple` Method
+=== [[tuple]] Creating ExpressionEncoder For Tuple -- `tuple` Method
 
 [source, scala]
 ----

@@ -168,6 +168,10 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 | `relation`
 | link:spark-sql-LogicalPlan.adoc[LogicalPlan] for a `FROM` clause.
 
+| `visitRowConstructor`
+|
+| [[visitRowConstructor]]
+
 | [[visitSingleDataType]] `visitSingleDataType`
 | `singleDataType`
 | link:spark-sql-DataType.adoc[DataType]
@@ -201,6 +205,10 @@ NOTE: A single statement can be quite involved.
 | [[visitStar]] `visitStar`
 | `#star` labeled alternative
 | link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+
+| `visitStruct`
+|
+| [[visitStruct]]
 
 | [[visitSubqueryExpression]] `visitSubqueryExpression`
 | `#subqueryExpression` labeled alternative

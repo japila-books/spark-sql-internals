@@ -1,4 +1,4 @@
-== [[Generator]] Generator Expression to Generate Zero Or More Rows (aka Lateral Views)
+== [[Generator]] Generator Contract -- Expressions to Generate Zero Or More Rows (aka Lateral Views)
 
 `Generator` is a <<contract, contract>> for link:spark-sql-Expression.adoc[Catalyst expressions] that can <<eval, produce>> zero or more rows given a single input row.
 

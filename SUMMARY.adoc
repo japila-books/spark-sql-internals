@@ -320,7 +320,7 @@
 . link:spark-sql-Expression-Literal.adoc[Literal]
 . link:spark-sql-Expression-MonotonicallyIncreasingID.adoc[MonotonicallyIncreasingID]
 . link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash]
-. link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
+. link:spark-sql-Expression-NamedExpression.adoc[NamedExpression Contract]
 . link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic Contract]
 . link:spark-sql-Expression-OffsetWindowFunction.adoc[OffsetWindowFunction]
 . link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
@@ -651,6 +651,7 @@
 . link:spark-sql-SchemaUtils.adoc[SchemaUtils Helper Object]
 
 . link:spark-sql-ScalaReflection.adoc[ScalaReflection]
+. link:spark-sql-CreateStruct.adoc[CreateStruct Function Builder]
 
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 

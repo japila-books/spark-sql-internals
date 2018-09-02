@@ -1,4 +1,4 @@
-== [[NamedExpression]] NamedExpression
+== [[NamedExpression]] NamedExpression Contract -- Catalyst Expressions with Name, ID and Qualifier
 
 `NamedExpression` is a <<contract, contract>> of link:spark-sql-Expression.adoc[Catalyst expressions] that have a <<name, name>>, <<exprId, exprId>>, and optional <<qualifier, qualifier>>.
 
