@@ -190,7 +190,15 @@ functionExists(name: FunctionIdentifier): Boolean
 
 === [[listFunctions]] `listFunctions` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+listFunctions(db: String): Seq[(FunctionIdentifier, String)]
+listFunctions(db: String, pattern: String): Seq[(FunctionIdentifier, String)]
+----
+
+`listFunctions`...FIXME
+
+NOTE: `listFunctions` is used when...FIXME
 
 === [[refreshTable]] Invalidating Table Relation Cache (aka Refreshing Table) -- `refreshTable` Method
 
@@ -203,13 +211,16 @@ refreshTable(name: TableIdentifier): Unit
 
 NOTE: `refreshTable` is used when...FIXME
 
-=== [[createTempFunction]] `createTempFunction` Method
-
-CAUTION: FIXME
-
 === [[loadFunctionResources]] `loadFunctionResources` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+loadFunctionResources(resources: Seq[FunctionResource]): Unit
+----
+
+`loadFunctionResources`...FIXME
+
+NOTE: `loadFunctionResources` is used when...FIXME
 
 === [[alterTempViewDefinition]] Altering (Updating) Temporary View (Logical Plan) -- `alterTempViewDefinition` Method
 
@@ -303,7 +314,14 @@ If the `name` function has the database defined or does not exist in `FunctionRe
 
 For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and link:spark-sql-FunctionRegistry.adoc#lookupFunction[looks up the function] again.
 
-NOTE: `lookupFunction` is used exclusively when `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves functions].
+[NOTE]
+====
+`lookupFunction` is used when:
+
+* `ResolveFunctions` logical resolution rule is <<spark-sql-Analyzer-ResolveFunctions.adoc#apply, executed>> (and resolves <<spark-sql-Expression-UnresolvedGenerator.adoc#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.adoc#, UnresolvedFunction>> expressions)
+
+* `HiveSessionCatalog` is requested to <<spark-sql-HiveSessionCatalog.adoc#lookupFunction0, lookupFunction0>>
+====
 
 === [[lookupRelation]] Finding Relation in Catalogs (and Creating SubqueryAlias per Table Type) -- `lookupRelation` Method
 
@@ -518,7 +536,16 @@ registerFunction(
 
 `registerFunction`...FIXME
 
-NOTE: `registerFunction` is used when...FIXME
+[NOTE]
+====
+`registerFunction` is used when:
+
+* `SessionCatalog` is requested to <<lookupFunction, lookupFunction>>
+
+* `HiveSessionCatalog` is requested to <<spark-sql-HiveSessionCatalog.adoc#lookupFunction0, lookupFunction0>>
+
+* `CreateFunctionCommand` logical command is executed
+====
 
 === [[lookupFunctionInfo]] `lookupFunctionInfo` Method
 

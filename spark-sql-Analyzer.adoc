@@ -270,10 +270,8 @@ a| Resolves aggregate functions in `Filter` and `Sort` operators
 
 NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functions that are resolved by <<ResolveGroupingAnalytics, ResolveGroupingAnalytics>> rule.
 
-| [[TimeWindowing]] TimeWindowing
-a| Resolves link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] expressions to `Filter` with link:spark-sql-LogicalPlan-Expand.adoc[Expand] logical operators.
-
-NOTE: Multiple distinct time window expressions are not currently supported (and yield a `AnalysisException`)
+| <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>>
+| [[TimeWindowing]] Resolves <<spark-sql-Expression-TimeWindow.adoc#, TimeWindow>> expressions to `Filter` with <<spark-sql-LogicalPlan-Expand.adoc#, Expand>> logical operators.
 
 | [[ResolveInlineTables]] <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>>
 | Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelations>>

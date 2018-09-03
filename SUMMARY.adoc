@@ -507,6 +507,7 @@
 . link:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
 . link:spark-sql-Analyzer-ResolveSubquery.adoc[ResolveSubquery]
 . link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
+. link:spark-sql-Analyzer-TimeWindowing.adoc[TimeWindowing]
 . link:spark-sql-Analyzer-UpdateOuterReferences.adoc[UpdateOuterReferences]
 . link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
 

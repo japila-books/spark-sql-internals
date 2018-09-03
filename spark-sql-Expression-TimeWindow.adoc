@@ -58,7 +58,7 @@ CAUTION: FIXME
 
 === [[analyzer]] Analysis Phase
 
-`TimeWindow` is resolved to link:spark-sql-LogicalPlan-Expand.adoc[Expand] logical operator in link:spark-sql-Analyzer.adoc#TimeWindowing[TimeWindowing] logical evaluation rule.
+`TimeWindow` is resolved to link:spark-sql-LogicalPlan-Expand.adoc[Expand] logical operator when <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>> logical evaluation rule is executed.
 
 ```
 // https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
