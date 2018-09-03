@@ -78,11 +78,11 @@ scala> println(optimizedPlan.numberedTreeString)
 
 .7+^.^| [[Finish_Analysis]] Finish Analysis
 .7+^.^| `Once`
-| [[EliminateSubqueryAliases]] EliminateSubqueryAliases
-|
+| [[EliminateSubqueryAliases]] <<spark-sql-Optimizer-EliminateSubqueryAliases.adoc#, EliminateSubqueryAliases>>
+| Removes (eliminates) <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>> unary logical operators from a <<spark-sql-LogicalPlan.adoc#, logical plan>>
 
 | [[EliminateView]] <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>>
-| Removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator
+| Removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from a <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator
 
 | [[ReplaceExpressions]] <<spark-sql-Optimizer-ReplaceExpressions.adoc#, ReplaceExpressions>>
 | Replaces <<spark-sql-Expression-RuntimeReplaceable.adoc#, RuntimeReplaceable>> expressions with their single child expression

@@ -323,7 +323,7 @@ For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> 
 * `HiveSessionCatalog` is requested to <<spark-sql-HiveSessionCatalog.adoc#lookupFunction0, lookupFunction0>>
 ====
 
-=== [[lookupRelation]] Finding Relation in Catalogs (and Creating SubqueryAlias per Table Type) -- `lookupRelation` Method
+=== [[lookupRelation]] Finding Relation (Table or View) in Catalogs -- `lookupRelation` Method
 
 [source, scala]
 ----

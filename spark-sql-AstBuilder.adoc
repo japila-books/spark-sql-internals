@@ -58,6 +58,10 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
+| `visitAliasedQuery`
+|
+| [[visitAliasedQuery]]
+
 | `visitColumnReference`
 |
 | [[visitColumnReference]]
@@ -143,6 +147,10 @@ a|
 * `Alias` (for a single alias)
 * `MultiAlias` (for a parenthesis enclosed alias list
 * a bare link:spark-sql-Expression.adoc[Expression]
+
+| `visitNamedQuery`
+|
+| [[visitNamedQuery]] <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>>
 
 | [[visitQuerySpecification]] `visitQuerySpecification`
 | `querySpecification`
@@ -346,3 +354,25 @@ res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexp
 scala> sqlParser.parseExpression("foo() OVER (CLUSTER BY field)")
 res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecdefinition('field, UnspecifiedFrame)
 ----
+
+=== [[aliasPlan]] `aliasPlan` Internal Method
+
+[source, scala]
+----
+aliasPlan(alias: ParserRuleContext, plan: LogicalPlan): LogicalPlan
+----
+
+`aliasPlan`...FIXME
+
+NOTE: `aliasPlan` is used when...FIXME
+
+=== [[mayApplyAliasPlan]] `mayApplyAliasPlan` Internal Method
+
+[source, scala]
+----
+mayApplyAliasPlan(tableAlias: TableAliasContext, plan: LogicalPlan): LogicalPlan
+----
+
+`mayApplyAliasPlan`...FIXME
+
+NOTE: `mayApplyAliasPlan` is used when...FIXME

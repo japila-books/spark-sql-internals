@@ -222,7 +222,7 @@ subqueries: Seq[PlanType]
 
 NOTE: `subqueries` is used when...FIXME
 
-=== [[doCanonicalize]] `doCanonicalize` Method
+=== [[doCanonicalize]] Canonicalizing Query Plan -- `doCanonicalize` Method
 
 [source, scala]
 ----

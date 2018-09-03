@@ -28,4 +28,4 @@
 `AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<spark-sql-LogicalPlan.adoc#isStreaming, isStreaming>> flag.
 
 [[doCanonicalize]]
-`AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<spark-sql-catalyst-QueryPlan.adoc#doCanonicalize, canonicalized version>>.
+`AnalysisBarrier` simply requests the <<child, child logical operator>> for the <<spark-sql-catalyst-QueryPlan.adoc#doCanonicalize, canonicalized version>>.

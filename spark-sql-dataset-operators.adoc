@@ -10,6 +10,15 @@ Dataset API is a <<methods, set of operators>> with typed and untyped transforma
 | Operator
 | Description
 
+| <<spark-sql-Dataset-typed-transformations.adoc#as, as>>
+a| [[as]] Typed transformation
+
+[source, scala]
+----
+as(alias: String): Dataset[T]
+as(alias: Symbol): Dataset[T]
+----
+
 | <<spark-sql-Dataset-untyped-transformations.adoc#agg, agg>>
 a| [[agg]] Untyped transformation
 

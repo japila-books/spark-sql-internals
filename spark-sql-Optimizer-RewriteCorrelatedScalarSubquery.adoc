@@ -64,7 +64,7 @@ constructLeftJoins(
 
 `constructLeftJoins`...FIXME
 
-NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubquery` is <<apply, executed>> (i.e. applied to a link:spark-sql-LogicalPlan.adoc[logical plan]).
+NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubquery` logical optimization is <<apply, executed>> (i.e. applied to <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>>, <<spark-sql-LogicalPlan-Project.adoc#, Project>> or <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> logical operators with correlated scalar subqueries)
 
 === [[apply]] Executing Rule -- `apply` Method
 

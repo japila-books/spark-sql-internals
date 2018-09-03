@@ -25,9 +25,6 @@ Use `generate` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to c
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.catalyst.plans.logical._
 import org.apache.spark.sql.types._
 val lr = LocalRelation('key.int, 'values.array(StringType))

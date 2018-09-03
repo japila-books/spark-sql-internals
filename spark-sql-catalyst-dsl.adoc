@@ -393,7 +393,7 @@ analyze: LogicalPlan
 
 `analyze` method is part of <<DslLogicalPlan, DslLogicalPlan>> implicit class.
 
-Internally, `analyze` uses `EliminateSubqueryAliases` logical rule and `SimpleAnalyzer` logical analyzer.
+Internally, `analyze` uses <<spark-sql-Optimizer-EliminateSubqueryAliases.adoc#, EliminateSubqueryAliases>> logical optimization and `SimpleAnalyzer` logical analyzer.
 
 [source, scala]
 ----

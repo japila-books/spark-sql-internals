@@ -100,13 +100,13 @@ NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc
 | Description
 
 | link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
-| [[LeafNode]] Logical operator with no link:spark-sql-catalyst-TreeNode.adoc#children[child] operators
+| [[LeafNode]] Logical operator with no <<spark-sql-catalyst-TreeNode.adoc#children, child>> operators
 
 | `UnaryNode`
-| [[UnaryNode]] Logical plan with a single child logical plan.
+| [[UnaryNode]] Logical plan with a single <<spark-sql-catalyst-TreeNode.adoc#children, child>> logical operator
 
 | `BinaryNode`
-| [[BinaryNode]] Logical operator with two child operators
+| [[BinaryNode]] Logical operator with two <<spark-sql-catalyst-TreeNode.adoc#children, child>> logical operators
 
 | link:spark-sql-LogicalPlan-Command.adoc[Command]
 | [[Command]]
