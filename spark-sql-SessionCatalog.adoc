@@ -505,3 +505,28 @@ getGlobalTempView(name: String): Option[LogicalPlan]
 `getGlobalTempView`...FIXME
 
 NOTE: `getGlobalTempView` is used when...FIXME
+
+=== [[registerFunction]] `registerFunction` Method
+
+[source, scala]
+----
+registerFunction(
+  funcDefinition: CatalogFunction,
+  overrideIfExists: Boolean,
+  functionBuilder: Option[FunctionBuilder] = None): Unit
+----
+
+`registerFunction`...FIXME
+
+NOTE: `registerFunction` is used when...FIXME
+
+=== [[lookupFunctionInfo]] `lookupFunctionInfo` Method
+
+[source, scala]
+----
+lookupFunctionInfo(name: FunctionIdentifier): ExpressionInfo
+----
+
+`lookupFunctionInfo`...FIXME
+
+NOTE: `lookupFunctionInfo` is used when...FIXME

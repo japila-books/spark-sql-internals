@@ -9,9 +9,6 @@ image::images/spark-sql-HiveSessionCatalog.png[align="center"]
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
 scala> println(catalogType)
@@ -42,3 +39,14 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 * [[hadoopConf]] Hadoop http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]
 * [[parser]] link:spark-sql-ParserInterface.adoc[ParserInterface]
 * [[functionResourceLoader]] `FunctionResourceLoader`
+
+=== [[lookupFunction0]] `lookupFunction0` Internal Method
+
+[source, scala]
+----
+lookupFunction0(name: FunctionIdentifier, children: Seq[Expression]): Expression
+----
+
+`lookupFunction0`...FIXME
+
+NOTE: `lookupFunction0` is used when...FIXME

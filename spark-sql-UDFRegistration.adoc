@@ -11,9 +11,13 @@ val spark: SparkSession = ...
 spark.udf
 ----
 
+[[functionRegistry]]
+[[creating-instance]]
+`UDFRegistration` takes a <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>> when created.
+
 `UDFRegistration` is <<creating-instance, created>> exclusively for link:spark-sql-SessionState.adoc#creating-instance[SessionState].
 
-=== [[register-UDF]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
+=== [[register]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
 
 [source, scala]
 ----
@@ -27,13 +31,18 @@ register(name: String, func: Function22[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10,
 
 NOTE: `register` is used when...FIXME
 
-=== [[creating-instance]] Creating UDFRegistration Instance
+=== [[register-UserDefinedFunction]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
 
-`UDFRegistration` takes the following when created:
+[source, scala]
+----
+register(name: String, udf: UserDefinedFunction): UserDefinedFunction
+----
 
-* [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+`register`...FIXME
 
-=== [[register]] Registering UserDefinedAggregateFunction (with FunctionRegistry) -- `register` Method
+NOTE: `register` is used when...FIXME
+
+=== [[register-UserDefinedAggregateFunction]] Registering UserDefinedAggregateFunction (with FunctionRegistry) -- `register` Method
 
 [source, scala]
 ----

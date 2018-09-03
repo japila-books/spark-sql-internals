@@ -80,7 +80,7 @@
 .. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
 .. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities]
 
-. link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+. link:spark-sql-FunctionRegistry.adoc[FunctionRegistry -- Contract for Function Registries (Catalogs)]
 
 . link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager -- Management Interface of Global Temporary Views]
 
