@@ -1,28 +1,10 @@
 == [[StaticSQLConf]] StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration
 
-`StaticSQLConf` holds cross-session, immutable and static SQL configuration properties.
-
-NOTE: Configuration properties in `StaticSQLConf` can only be queried and never changed after the first `SparkSession` has been created.
-
-[source, scala]
-----
-scala> spark.version
-res0: String = 2.3.0
-
-import org.apache.spark.sql.internal.StaticSQLConf
-scala> val metastoreName = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
-metastoreName: String = hive
-
-scala> spark.conf.set(StaticSQLConf.CATALOG_IMPLEMENTATION.key, "hive")
-org.apache.spark.sql.AnalysisException: Cannot modify the value of a static config: spark.sql.catalogImplementation;
-  at org.apache.spark.sql.RuntimeConfig.requireNonStaticConf(RuntimeConfig.scala:144)
-  at org.apache.spark.sql.RuntimeConfig.set(RuntimeConfig.scala:41)
-  ... 50 elided
-----
+`StaticSQLConf` holds <<properties, cross-session, immutable and static SQL configuration properties>>.
 
 [[properties]]
 .StaticSQLConf's Configuration Properties
-[cols="1,1,1m,2",options="header",width="100%"]
+[cols="1,1m,1m,2",options="header",width="100%"]
 |===
 | Name
 | Default Value
@@ -51,6 +33,23 @@ Used when:
 
 . `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
+| `spark.sql.debug`
+| false
+| DEBUG_MODE
+| [[spark.sql.debug]] *(internal)* Only used for internal debugging when `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#restoreTableMetadata, restoreTableMetadata>>.
+
+Not all functions are supported when enabled.
+
+| `spark.sql.extensions`
+| (empty)
+| SPARK_SESSION_EXTENSIONS
+| [[spark.sql.extensions]] Name of the *SQL extension configuration class* that is used to configure `SparkSession` extensions (when `Builder` is requested to <<spark-sql-SparkSession-Builder.adoc#getOrCreate, get or create a SparkSession>>). The class should implement `Function1[SparkSessionExtensions, Unit]`, and must have a no-args constructor.
+
+| `spark.sql.filesourceTableRelationCacheSize`
+| 1000
+| FILESOURCE_TABLE_RELATION_CACHE_SIZE
+| [[spark.sql.filesourceTableRelationCacheSize]] *(internal)* The maximum size of the cache that maps qualified table names to table relation plans. Must not be negative.
+
 | `spark.sql.globalTempDatabase`
 | `global_temp`
 | GLOBAL_TEMP_DATABASE
@@ -60,12 +59,27 @@ Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-ins
 
 NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<spark-sql-SharedState.adoc#externalCatalog, ExternalCatalog>>.
 
+| `spark.sql.hive.thriftServer.singleSession`
+| false
+| HIVE_THRIFT_SERVER_SINGLESESSION
+| [[spark.sql.hive.thriftServer.singleSession]] When set to true, Hive Thrift server is running in a single session mode. All the JDBC/ODBC connections share the temporary views, function registries, SQL configuration and the current database.
+
 | `spark.sql.queryExecutionListeners`
 | (empty)
 | QUERY_EXECUTION_LISTENERS
-a| [[spark.sql.queryExecutionListeners]] List of class names that implement link:spark-sql-QueryExecutionListener.adoc[QueryExecutionListener] that will be automatically added to newly created sessions.
+a| [[spark.sql.queryExecutionListeners]] List of class names that implement <<spark-sql-QueryExecutionListener.adoc#, QueryExecutionListener>> that will be automatically <<spark-sql-ExecutionListenerManager.adoc#register, registered>> to new `SparkSessions`.
 
 The classes should have either a no-arg constructor, or a constructor that expects a `SparkConf` argument.
+
+| `spark.sql.sources.schemaStringLengthThreshold`
+| 4000
+| SCHEMA_STRING_LENGTH_THRESHOLD
+| [[spark.sql.sources.schemaStringLengthThreshold]] *(internal)* The maximum length allowed in a single cell when storing additional schema information in Hive's metastore
+
+| `spark.sql.ui.retainedExecutions`
+| 1000
+| UI_RETAINED_EXECUTIONS
+| [[spark.sql.ui.retainedExecutions]] Number of executions to retain in the Spark UI.
 
 | `spark.sql.warehouse.dir`
 | `spark-warehouse`
@@ -75,3 +89,18 @@ a| [[spark.sql.warehouse.dir]] The directory of a Hive warehouse (using Derby) w
 TIP: Read the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document to learn more.
 
 |===
+
+The <<properties, properties>> in `StaticSQLConf` can only be queried and can never be changed once the first `SparkSession` is created.
+
+[source, scala]
+----
+import org.apache.spark.sql.internal.StaticSQLConf
+scala> val metastoreName = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
+metastoreName: String = hive
+
+scala> spark.conf.set(StaticSQLConf.CATALOG_IMPLEMENTATION.key, "hive")
+org.apache.spark.sql.AnalysisException: Cannot modify the value of a static config: spark.sql.catalogImplementation;
+  at org.apache.spark.sql.RuntimeConfig.requireNonStaticConf(RuntimeConfig.scala:144)
+  at org.apache.spark.sql.RuntimeConfig.set(RuntimeConfig.scala:41)
+  ... 50 elided
+----

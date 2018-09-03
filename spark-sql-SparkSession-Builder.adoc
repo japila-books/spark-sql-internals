@@ -103,7 +103,7 @@ Used when...FIXME
 Used when...FIXME
 |===
 
-=== [[getOrCreate]] `getOrCreate` Method
+=== [[getOrCreate]] Getting Or Creating SparkSession Instance -- `getOrCreate` Method
 
 [source, scala]
 ----
