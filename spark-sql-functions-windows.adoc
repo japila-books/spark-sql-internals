@@ -1,4 +1,4 @@
-== Window Aggregation Functions
+== Standard Functions for Window Aggregation (Window Functions)
 
 *Window aggregate functions* (aka *window functions* or *windowed aggregates*) are functions that perform a calculation over a group of records called *window* that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
@@ -21,30 +21,30 @@ Spark SQL supports three kinds of window functions:
 
 .5+^.^|*Ranking functions*
 
-|link:spark-sql-functions.adoc#rank[rank]
+| <<rank, rank>>
 |
 
-|link:spark-sql-functions.adoc#dense_rank[dense_rank]
+| <<dense_rank, dense_rank>>
 |
 
-|link:spark-sql-functions.adoc#percent_rank[percent_rank]
+| <<percent_rank, percent_rank>>
 |
 
-|link:spark-sql-functions.adoc#ntile[ntile]
+| <<ntile, ntile>>
 |
 
-|link:spark-sql-functions.adoc#row_number[row_number]
+| <<row_number, row_number>>
 |
 
-.3+^.^|*Analytic functions*
+.3+^.^| *Analytic functions*
 
-|link:spark-sql-functions.adoc#cume_dist[cume_dist]
+| <<cume_dist, cume_dist>>
+a|
+
+| <<lag, lag>>
 |
 
-|link:spark-sql-functions.adoc#lag[lag]
-|
-
-|link:spark-sql-functions.adoc#lead[lead]
+| <<lead, lead>>
 |
 |===
 
@@ -608,6 +608,394 @@ Window [rank(salary#7L) windowspecdefinition(depname#5, salary#7L DESC, ROWS BET
    +- Exchange hashpartitioning(depname#5, 200)
       +- LocalTableScan [depName#5, empNo#6L, salary#7L]
 ```
+
+=== [[lag]] `lag` Window Function
+
+[source, scala]
+----
+lag(e: Column, offset: Int): Column
+lag(columnName: String, offset: Int): Column
+lag(columnName: String, offset: Int, defaultValue: Any): Column
+lag(e: Column, offset: Int, defaultValue: Any): Column
+----
+
+`lag` returns the value in `e` / `columnName` column that is `offset` records before the current record. `lag` returns `null` value if the number of records in a window partition is less than `offset` or `defaultValue`.
+
+[source, scala]
+----
+val buckets = spark.range(9).withColumn("bucket", 'id % 3)
+// Make duplicates
+val dataset = buckets.union(buckets)
+
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.partitionBy('bucket).orderBy('id)
+scala> dataset.withColumn("lag", lag('id, 1) over windowSpec).show
++---+------+----+
+| id|bucket| lag|
++---+------+----+
+|  0|     0|null|
+|  3|     0|   0|
+|  6|     0|   3|
+|  1|     1|null|
+|  4|     1|   1|
+|  7|     1|   4|
+|  2|     2|null|
+|  5|     2|   2|
+|  8|     2|   5|
++---+------+----+
+
+scala> dataset.withColumn("lag", lag('id, 2, "<default_value>") over windowSpec).show
++---+------+----+
+| id|bucket| lag|
++---+------+----+
+|  0|     0|null|
+|  3|     0|null|
+|  6|     0|   0|
+|  1|     1|null|
+|  4|     1|null|
+|  7|     1|   1|
+|  2|     2|null|
+|  5|     2|null|
+|  8|     2|   2|
++---+------+----+
+----
+
+CAUTION: FIXME It looks like `lag` with a default value has a bug -- the default value's not used at all.
+
+=== [[lead]] `lead` Window Function
+
+[source, scala]
+----
+lead(columnName: String, offset: Int): Column
+lead(e: Column, offset: Int): Column
+lead(columnName: String, offset: Int, defaultValue: Any): Column
+lead(e: Column, offset: Int, defaultValue: Any): Column
+----
+
+`lead` returns the value that is `offset` records after the current records, and `defaultValue` if there is less than `offset` records after the current record. `lag` returns `null` value if the number of records in a window partition is less than `offset` or `defaultValue`.
+
+[source, scala]
+----
+val buckets = spark.range(9).withColumn("bucket", 'id % 3)
+// Make duplicates
+val dataset = buckets.union(buckets)
+
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.partitionBy('bucket).orderBy('id)
+scala> dataset.withColumn("lead", lead('id, 1) over windowSpec).show
++---+------+----+
+| id|bucket|lead|
++---+------+----+
+|  0|     0|   0|
+|  0|     0|   3|
+|  3|     0|   3|
+|  3|     0|   6|
+|  6|     0|   6|
+|  6|     0|null|
+|  1|     1|   1|
+|  1|     1|   4|
+|  4|     1|   4|
+|  4|     1|   7|
+|  7|     1|   7|
+|  7|     1|null|
+|  2|     2|   2|
+|  2|     2|   5|
+|  5|     2|   5|
+|  5|     2|   8|
+|  8|     2|   8|
+|  8|     2|null|
++---+------+----+
+
+scala> dataset.withColumn("lead", lead('id, 2, "<default_value>") over windowSpec).show
++---+------+----+
+| id|bucket|lead|
++---+------+----+
+|  0|     0|   3|
+|  0|     0|   3|
+|  3|     0|   6|
+|  3|     0|   6|
+|  6|     0|null|
+|  6|     0|null|
+|  1|     1|   4|
+|  1|     1|   4|
+|  4|     1|   7|
+|  4|     1|   7|
+|  7|     1|null|
+|  7|     1|null|
+|  2|     2|   5|
+|  2|     2|   5|
+|  5|     2|   8|
+|  5|     2|   8|
+|  8|     2|null|
+|  8|     2|null|
++---+------+----+
+----
+
+CAUTION: FIXME It looks like `lead` with a default value has a bug -- the default value's not used at all.
+
+=== [[cume_dist]] Cumulative Distribution of Records Across Window Partitions -- `cume_dist` Window Function
+
+[source, scala]
+----
+cume_dist(): Column
+----
+
+`cume_dist` computes the cumulative distribution of the records in window partitions. This is equivalent to SQL's `CUME_DIST` function.
+
+[source, scala]
+----
+val buckets = spark.range(9).withColumn("bucket", 'id % 3)
+// Make duplicates
+val dataset = buckets.union(buckets)
+
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.partitionBy('bucket).orderBy('id)
+scala> dataset.withColumn("cume_dist", cume_dist over windowSpec).show
++---+------+------------------+
+| id|bucket|         cume_dist|
++---+------+------------------+
+|  0|     0|0.3333333333333333|
+|  3|     0|0.6666666666666666|
+|  6|     0|               1.0|
+|  1|     1|0.3333333333333333|
+|  4|     1|0.6666666666666666|
+|  7|     1|               1.0|
+|  2|     2|0.3333333333333333|
+|  5|     2|0.6666666666666666|
+|  8|     2|               1.0|
++---+------+------------------+
+----
+
+=== [[row_number]] Sequential numbering per window partition -- `row_number` Window Function
+
+[source, scala]
+----
+row_number(): Column
+----
+
+`row_number` returns a sequential number starting at `1` within a window partition.
+
+[source, scala]
+----
+val buckets = spark.range(9).withColumn("bucket", 'id % 3)
+// Make duplicates
+val dataset = buckets.union(buckets)
+
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.partitionBy('bucket).orderBy('id)
+scala> dataset.withColumn("row_number", row_number() over windowSpec).show
++---+------+----------+
+| id|bucket|row_number|
++---+------+----------+
+|  0|     0|         1|
+|  0|     0|         2|
+|  3|     0|         3|
+|  3|     0|         4|
+|  6|     0|         5|
+|  6|     0|         6|
+|  1|     1|         1|
+|  1|     1|         2|
+|  4|     1|         3|
+|  4|     1|         4|
+|  7|     1|         5|
+|  7|     1|         6|
+|  2|     2|         1|
+|  2|     2|         2|
+|  5|     2|         3|
+|  5|     2|         4|
+|  8|     2|         5|
+|  8|     2|         6|
++---+------+----------+
+----
+
+=== [[ntile]] `ntile` Window Function
+
+[source, scala]
+----
+ntile(n: Int): Column
+----
+
+`ntile` computes the ntile group id (from `1` to `n` inclusive) in an ordered window partition.
+
+[source, scala]
+----
+val dataset = spark.range(7).select('*, 'id % 3 as "bucket")
+
+import org.apache.spark.sql.expressions.Window
+val byBuckets = Window.partitionBy('bucket).orderBy('id)
+scala> dataset.select('*, ntile(3) over byBuckets as "ntile").show
++---+------+-----+
+| id|bucket|ntile|
++---+------+-----+
+|  0|     0|    1|
+|  3|     0|    2|
+|  6|     0|    3|
+|  1|     1|    1|
+|  4|     1|    2|
+|  2|     2|    1|
+|  5|     2|    2|
++---+------+-----+
+----
+
+CAUTION: FIXME How is `ntile` different from `rank`? What about performance?
+
+=== [[rank]][[dense_rank]][[percent_rank]] Ranking Records per Window Partition -- `rank` Window Function
+
+[source, scala]
+----
+rank(): Column
+dense_rank(): Column
+percent_rank(): Column
+----
+
+`rank` functions assign the sequential rank of each distinct value per window partition. They are equivalent to `RANK`, `DENSE_RANK` and `PERCENT_RANK` functions in the good ol' SQL.
+
+[source, scala]
+----
+val dataset = spark.range(9).withColumn("bucket", 'id % 3)
+
+import org.apache.spark.sql.expressions.Window
+val byBucket = Window.partitionBy('bucket).orderBy('id)
+
+scala> dataset.withColumn("rank", rank over byBucket).show
++---+------+----+
+| id|bucket|rank|
++---+------+----+
+|  0|     0|   1|
+|  3|     0|   2|
+|  6|     0|   3|
+|  1|     1|   1|
+|  4|     1|   2|
+|  7|     1|   3|
+|  2|     2|   1|
+|  5|     2|   2|
+|  8|     2|   3|
++---+------+----+
+
+scala> dataset.withColumn("percent_rank", percent_rank over byBucket).show
++---+------+------------+
+| id|bucket|percent_rank|
++---+------+------------+
+|  0|     0|         0.0|
+|  3|     0|         0.5|
+|  6|     0|         1.0|
+|  1|     1|         0.0|
+|  4|     1|         0.5|
+|  7|     1|         1.0|
+|  2|     2|         0.0|
+|  5|     2|         0.5|
+|  8|     2|         1.0|
++---+------+------------+
+----
+
+`rank` function assigns the same rank for duplicate rows with a gap in the sequence (similarly to Olympic medal places). `dense_rank` is like `rank` for duplicate rows but compacts the ranks and removes the gaps.
+
+[source, scala]
+----
+// rank function with duplicates
+// Note the missing/sparse ranks, i.e. 2 and 4
+scala> dataset.union(dataset).withColumn("rank", rank over byBucket).show
++---+------+----+
+| id|bucket|rank|
++---+------+----+
+|  0|     0|   1|
+|  0|     0|   1|
+|  3|     0|   3|
+|  3|     0|   3|
+|  6|     0|   5|
+|  6|     0|   5|
+|  1|     1|   1|
+|  1|     1|   1|
+|  4|     1|   3|
+|  4|     1|   3|
+|  7|     1|   5|
+|  7|     1|   5|
+|  2|     2|   1|
+|  2|     2|   1|
+|  5|     2|   3|
+|  5|     2|   3|
+|  8|     2|   5|
+|  8|     2|   5|
++---+------+----+
+
+// dense_rank function with duplicates
+// Note that the missing ranks are now filled in
+scala> dataset.union(dataset).withColumn("dense_rank", dense_rank over byBucket).show
++---+------+----------+
+| id|bucket|dense_rank|
++---+------+----------+
+|  0|     0|         1|
+|  0|     0|         1|
+|  3|     0|         2|
+|  3|     0|         2|
+|  6|     0|         3|
+|  6|     0|         3|
+|  1|     1|         1|
+|  1|     1|         1|
+|  4|     1|         2|
+|  4|     1|         2|
+|  7|     1|         3|
+|  7|     1|         3|
+|  2|     2|         1|
+|  2|     2|         1|
+|  5|     2|         2|
+|  5|     2|         2|
+|  8|     2|         3|
+|  8|     2|         3|
++---+------+----------+
+
+// percent_rank function with duplicates
+scala> dataset.union(dataset).withColumn("percent_rank", percent_rank over byBucket).show
++---+------+------------+
+| id|bucket|percent_rank|
++---+------+------------+
+|  0|     0|         0.0|
+|  0|     0|         0.0|
+|  3|     0|         0.4|
+|  3|     0|         0.4|
+|  6|     0|         0.8|
+|  6|     0|         0.8|
+|  1|     1|         0.0|
+|  1|     1|         0.0|
+|  4|     1|         0.4|
+|  4|     1|         0.4|
+|  7|     1|         0.8|
+|  7|     1|         0.8|
+|  2|     2|         0.0|
+|  2|     2|         0.0|
+|  5|     2|         0.4|
+|  5|     2|         0.4|
+|  8|     2|         0.8|
+|  8|     2|         0.8|
++---+------+------------+
+----
+
+=== [[currentRow]] `currentRow` Window Function
+
+[source, scala]
+----
+currentRow(): Column
+----
+
+`currentRow`...FIXME
+
+=== [[unboundedFollowing]] `unboundedFollowing` Window Function
+
+[source, scala]
+----
+unboundedFollowing(): Column
+----
+
+*(new in 2.3.0)* `unboundedFollowing`...FIXME
+
+=== [[unboundedPreceding]] `unboundedPreceding` Window Function
+
+[source, scala]
+----
+unboundedPreceding(): Column
+----
+
+*(new in 2.3.0)* `unboundedPreceding`...FIXME
 
 === [[i-want-more]] Further Reading and Watching
 

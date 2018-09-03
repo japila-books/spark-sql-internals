@@ -1,4 +1,4 @@
-== Standard Functions for Collections (Collections Functions)
+== Standard Functions for Collections (Collection Functions)
 
 [[functions]]
 .(Subset of) Standard Functions for Handling Collections
@@ -8,21 +8,104 @@
 | Description
 
 | <<array_contains, array_contains>>
-|
+a|
+
+[source, scala]
+----
+array_contains(column: Column, value: Any): Column
+----
 
 | <<explode, explode>>
-|
+a|
+
+[source, scala]
+----
+explode(e: Column): Column
+----
 
 | <<explode_outer, explode_outer>>
-| *(new in 2.2.0)* Creates a new row for each element in the given array or map column.
+a|
+
+[source, scala]
+----
+explode_outer(e: Column): Column
+----
+
+Creates a new row for each element in the given array or map column.
 
 If the array/map is `null` or empty then `null` is produced.
 
 | <<from_json, from_json>>
-| Extract data from arbitrary JSON-encoded values into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema
+a|
+
+[source, scala]
+----
+from_json(e: Column, schema: DataType): Column
+from_json(e: Column, schema: DataType, options: Map[String, String]): Column
+from_json(e: Column, schema: String, options: Map[String, String]): Column // <1>
+from_json(e: Column, schema: StructType): Column
+from_json(e: Column, schema: StructType, options: Map[String, String]): Column
+----
+<1> *New in 2.3.0*
+
+Extract data from arbitrary JSON-encoded values into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema
+
+| <<map_keys, map_keys>>
+a|
+
+[source, scala]
+----
+map_keys(e: Column): Column
+----
+
+*(new in 2.3.0)*
+
+| <<map_values, map_values>>
+a|
+
+[source, scala]
+----
+map_values(e: Column): Column
+----
+
+*(new in 2.3.0)*
+
+| <<posexplode, posexplode>>
+a|
+
+[source, scala]
+----
+posexplode(e: Column): Column
+----
+
+| <<posexplode_outer, posexplode_outer>>
+a|
+
+[source, scala]
+----
+posexplode_outer(e: Column): Column
+----
 |===
 
-=== [[explode]] `explode` Function
+=== [[posexplode]] `posexplode` Collection Function
+
+[source, scala]
+----
+posexplode(e: Column): Column
+----
+
+`posexplode`...FIXME
+
+=== [[posexplode_outer]] `posexplode_outer` Collection Function
+
+[source, scala]
+----
+posexplode_outer(e: Column): Column
+----
+
+`posexplode_outer`...FIXME
+
+=== [[explode]] `explode` Collection Function
 
 CAUTION: FIXME
 
@@ -40,7 +123,7 @@ scala> Seq(Array(0,1,2)).toDF("array").withColumn("num", explode('array)).show
 
 NOTE: `explode` function is an equivalent of link:spark-sql-dataset-operators.adoc#flatMap[`flatMap` operator] for `Dataset`.
 
-=== [[explode_outer]] `explode_outer` Function
+=== [[explode_outer]] `explode_outer` Collection Function
 
 [source, scala]
 ----
@@ -78,7 +161,7 @@ scala> println(explodeOuter.numberedTreeString)
 02    +- 'array
 ----
 
-=== [[from_json]] Extracting Data from Arbitrary JSON-Encoded Values -- `from_json` Functions
+=== [[from_json]] Extracting Data from Arbitrary JSON-Encoded Values -- `from_json` Collection Function
 
 [source, scala]
 ----
@@ -262,7 +345,7 @@ scala> jsons.select(from_json($"json", schema, opts) as "ids").show
 
 NOTE: `from_json` corresponds to SQL's `from_json`.
 
-=== [[array_contains]] `array_contains` Function
+=== [[array_contains]] `array_contains` Collection Function
 
 [source, scala]
 ----
@@ -352,3 +435,21 @@ scala> q.show
 |      [1]|  1|
 +---------+---+
 ----
+
+=== [[map_keys]] `map_keys` Collection Function
+
+[source, scala]
+----
+map_keys(e: Column): Column
+----
+
+*(new in 2.3.0)* `map_keys`...FIXME
+
+=== [[map_values]] `map_values` Collection Function
+
+[source, scala]
+----
+map_values(e: Column): Column
+----
+
+*(new in 2.3.0)* `map_values`...FIXME
