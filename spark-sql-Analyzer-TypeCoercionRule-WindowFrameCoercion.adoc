@@ -1,0 +1,81 @@
+== [[WindowFrameCoercion]] WindowFrameCoercion Type Coercion Logical Rule
+
+`WindowFrameCoercion` is a <<spark-sql-TypeCoercionRule.adoc#, type coercion logical rule>> that <<coerceTypes, cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition>> in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
+
+[source, scala]
+----
+import java.time.LocalDate
+import java.sql.Date
+val sales = Seq(
+  (0, 5, Date.valueOf(LocalDate.of(2018, 9, 1)), "interval 2 days"),
+  (1, 5, Date.valueOf(LocalDate.of(2018, 9, 2)), "interval 2 days"),
+  // Mind the 1-day gap
+  (2, 5, Date.valueOf(LocalDate.of(2018, 9, 4)), "interval 1 days")
+).toDF("id", "amount", "date", "end")
+
+scala> sales.show
++---+------+----------+---------------+
+| id|amount|      date|            end|
++---+------+----------+---------------+
+|  0|     5|2018-09-01|interval 2 days|
+|  1|     5|2018-09-02|interval 2 days|
+|  2|     5|2018-09-04|interval 1 days|
++---+------+----------+---------------+
+
+scala> sales.printSchema
+root
+ |-- id: integer (nullable = false)
+ |-- amount: integer (nullable = false)
+ |-- date: date (nullable = true)
+ |-- end: string (nullable = true)
+
+// FIXME Use Catalyst DSL
+import org.apache.spark.sql.expressions.Window
+// New in 2.3.0
+// rangeBetween with column expressions
+// data type of orderBy expression is date
+// data types of range frame boundaries is interval
+// WindowSpecDefinition(_, Seq(order), SpecifiedWindowFrame(RangeFrame, lower, upper))
+import org.apache.spark.unsafe.types.CalendarInterval
+val interval = lit(CalendarInterval.fromSingleUnitString("day", "1"))
+val windowSpec = Window.orderBy($"date" as "timestamp").rangeBetween(currentRow(), interval)
+
+// FIXME Finish the demo
+val q = sales.select(count($"amount") over windowSpec)
+val plan = q.qE
+println(plan.numberedTreeString)
+
+import org.apache.spark.sql.catalyst.analysis.TypeCoercion.WindowFrameCoercion
+val afterWindowFrameCoercion = WindowFrameCoercion(plan)
+println(afterWindowFrameCoercion.numberedTreeString)
+----
+
+=== [[coerceTypes]] Coercing Types in Logical Plan -- `coerceTypes` Method
+
+[source, scala]
+----
+coerceTypes(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
+
+`coerceTypes` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<spark-sql-Expression.adoc#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<spark-sql-Expression.adoc#dataType, data type>> of the order specification expression.
+
+=== [[createBoundaryCast]] `createBoundaryCast` Internal Method
+
+[source, scala]
+----
+createBoundaryCast(boundary: Expression, dt: DataType): Expression
+----
+
+`createBoundaryCast` returns a <<spark-sql-Expression.adoc#, Catalyst expression>> per the input `boundary` <<spark-sql-Expression.adoc#, Expression>> and the `dt` <<spark-sql-DataType.adoc#, DataType>> (in the order of execution):
+
+* The input `boundary` expression if it is a `SpecialFrameBoundary`
+
+* The input `boundary` expression if the `dt` data type is <<spark-sql-DataType.adoc#DateType, DateType>> or <<spark-sql-DataType.adoc#TimestampType, TimestampType>>
+
+* `Cast` unary operator with the input `boundary` expression and the `dt` data type if the <<spark-sql-Expression.adoc#dataType, result type>> of the `boundary` expression is not the `dt` data type, but the result type can be cast to the `dt` data type
+
+* The input `boundary` expression
+
+NOTE: `createBoundaryCast` is used exclusively when `WindowFrameCoercion` type coercion logical rule is requested to <<coerceTypes, coerceTypes>>.

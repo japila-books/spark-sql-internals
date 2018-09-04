@@ -30,4 +30,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
-`apply` link:spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions[traverses all Catalyst expressions] in the input link:spark-sql-LogicalPlan.adoc[logical plan] and replaces a link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression into its single child.
+`apply` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces a link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression into its single child.

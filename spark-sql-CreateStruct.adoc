@@ -36,7 +36,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `ResolveReferences` logical resolution rule is requested to <<spark-sql-Analyzer-ResolveReferences.adoc#expandStarExpression, expandStarExpression>>
 
-* `InConversion` type coercion rule is requested to <<spark-sql-Analyzer-InConversion.adoc#coerceTypes, coerceTypes>>
+* `InConversion` type coercion rule is requested to <<spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc#coerceTypes, coerceTypes>>
 
 * `ExpressionEncoder` is requested to <<spark-sql-ExpressionEncoder.adoc#tuple, create an ExpressionEncoder for a tuple>>
 

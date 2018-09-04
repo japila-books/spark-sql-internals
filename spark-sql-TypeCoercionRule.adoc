@@ -1,6 +1,6 @@
-== [[TypeCoercionRule]] TypeCoercionRule -- Contract For Type Coercion Rules
+== [[TypeCoercionRule]] TypeCoercionRule Contract -- Type Coercion Rules
 
-`TypeCoercionRule` is the <<contract, contract>> for Catalyst rules to <<coerceTypes, coerce>> and <<propagateTypes, propagate>> types in logical plans.
+`TypeCoercionRule` is the <<contract, contract>> of <<implementations, logical rules>> to <<coerceTypes, coerce>> and <<propagateTypes, propagate>> types in <<spark-sql-LogicalPlan.adoc#, logical plans>>.
 
 [[contract]]
 [source, scala]
@@ -15,16 +15,18 @@ trait TypeCoercionRule extends Rule[LogicalPlan] {
 ----
 
 .(Subset of) TypeCoercionRule Contract
-[cols="1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| [[coerceTypes]] `coerceTypes`
-| Used when...FIXME
+| coerceTypes
+| [[coerceTypes]] Coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>
+
+Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 |===
 
-Technically, `TypeCoercionRule` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical query plans], i.e. `Rule[LogicalPlan]`.
+`TypeCoercionRule` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[implementations]]
 .TypeCoercionRules
@@ -33,23 +35,57 @@ Technically, `TypeCoercionRule` is just a link:spark-sql-catalyst-Rule.adoc[Cata
 | TypeCoercionRule
 | Description
 
-| [[InConversion]] link:spark-sql-Analyzer-InConversion.adoc[InConversion]
-|
+| CaseWhenCoercion
+| [[CaseWhenCoercion]]
 
-| _others_
-|
+| ConcatCoercion
+| [[ConcatCoercion]]
+
+| DecimalPrecision
+| [[DecimalPrecision]]
+
+| Division
+| [[Division]]
+
+| EltCoercion
+| [[EltCoercion]]
+
+| FunctionArgumentConversion
+| [[FunctionArgumentConversion]]
+
+| IfCoercion
+| [[IfCoercion]]
+
+| ImplicitTypeCasts
+| [[ImplicitTypeCasts]]
+
+| <<spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc#, InConversion>>
+| [[InConversion]]
+
+| PromoteStrings
+| [[PromoteStrings]]
+
+| StackCoercion
+| [[StackCoercion]]
+
+| <<spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.adoc#, WindowFrameCoercion>>
+| [[WindowFrameCoercion]]
 |===
 
-=== [[apply]] Applying TypeCoercionRule To Logical Plan (Executing TypeCoercionRule) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
-`apply`...FIXME
+`apply` <<coerceTypes, coerceTypes>> in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and returns the following:
+
+* The input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> itself if <<spark-sql-catalyst-TreeNode.adoc#fastEquals, matches>> the coerced plan
+
+* The plan after <<propagateTypes, propagateTypes>> on the coerced plan
 
 === [[propagateTypes]] `propagateTypes` Internal Method
 
@@ -60,4 +96,4 @@ propagateTypes(plan: LogicalPlan): LogicalPlan
 
 `propagateTypes`...FIXME
 
-NOTE: `propagateTypes` is used exclusively when `TypeCoercionRule` is <<apply, executed>> (i.e. applied to a link:spark-sql-LogicalPlan.adoc[logical plan]).
+NOTE: `propagateTypes` is used exclusively when `TypeCoercionRule` is <<apply, executed>>.

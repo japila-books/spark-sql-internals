@@ -491,7 +491,7 @@
 . link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 . link:spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
-. link:spark-sql-Analyzer-InConversion.adoc[InConversion]
+. link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion]
 . link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-Analyzer-PreWriteCheck.adoc[PreWriteCheck]
 . link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
@@ -509,6 +509,7 @@
 . link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
 . link:spark-sql-Analyzer-TimeWindowing.adoc[TimeWindowing]
 . link:spark-sql-Analyzer-UpdateOuterReferences.adoc[UpdateOuterReferences]
+. link:spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.adoc[WindowFrameCoercion]
 . link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
 
 === Base Logical Optimizations (Optimizer)

@@ -148,7 +148,7 @@ scala> println(in.sql)
 
 * link:spark-sql-Analyzer-ResolveSubquery.adoc[ResolveSubquery] resolution rule
 
-* link:spark-sql-Analyzer-InConversion.adoc[InConversion] type coercion rule
+* link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion] type coercion rule
 
 [[InMemoryTableScanExec]]
 `In` expression has a link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#buildFilter-expressions[custom support] in link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec] physical operator.

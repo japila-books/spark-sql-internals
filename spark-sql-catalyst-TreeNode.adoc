@@ -84,6 +84,14 @@ a|
 collectLeaves(): Seq[BaseType]
 ----
 
+| <<fastEquals, fastEquals>>
+a|
+
+[source, scala]
+----
+fastEquals(other: TreeNode[_]): Boolean
+----
+
 | <<find, find>>
 a|
 
@@ -642,3 +650,14 @@ nodeName: String
 `nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of <<spark-sql-SparkPlan.adoc#, physical operators>>).
 
 NOTE: `nodeName` is used when `TreeNode` is requested for <<simpleString, simpleString>> and <<asCode, asCode>>.
+
+=== [[fastEquals]] `fastEquals` Method
+
+[source, scala]
+----
+fastEquals(other: TreeNode[_]): Boolean
+----
+
+`fastEquals`...FIXME
+
+NOTE: `fastEquals` is used when...FIXME

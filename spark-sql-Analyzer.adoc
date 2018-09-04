@@ -249,15 +249,17 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 * `MultiAlias` (for `GeneratorOuter` and `Generator`)
 * `Alias` (for `Cast` and `ExtractValue`)
 
-| ResolveSubquery
-|
-| [[ResolveWindowOrder]] ResolveWindowOrder
-|
-| [[ResolveWindowFrame]] link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
-| Resolves link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] expressions
+| <<spark-sql-Analyzer-ResolveSubquery.adoc#, ResolveSubquery>>
+| [[ResolveSubquery]] Resolves subquery expressions (i.e. <<spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#, ScalarSubquery>>, <<spark-sql-Expression-Exists.adoc#, Exists>> and <<spark-sql-Expression-In.adoc#, In>>)
+
+| ResolveWindowOrder
+| [[ResolveWindowOrder]]
+
+| link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
+| [[ResolveWindowFrame]] Resolves link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] expressions
 
 | ResolveNaturalAndUsingJoin
-|
+| [[ResolveNaturalAndUsingJoin]]
 
 | [[ExtractWindowExpressions]] ExtractWindowExpressions
 |
@@ -273,11 +275,12 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 | <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>>
 | [[TimeWindowing]] Resolves <<spark-sql-Expression-TimeWindow.adoc#, TimeWindow>> expressions to `Filter` with <<spark-sql-LogicalPlan-Expand.adoc#, Expand>> logical operators.
 
-| [[ResolveInlineTables]] <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>>
-| Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelations>>
+| <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>>
+| [[ResolveInlineTables]] Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelations>>
 
-| link:spark-sql-TypeCoercion.adoc#typeCoercionRules[TypeCoercion.typeCoercionRules]
-|
+| <<spark-sql-TypeCoercion.adoc#typeCoercionRules, TypeCoercion.typeCoercionRules>>
+| [[typeCoercionRules]] Type coercion rules
+
 | <<extendedResolutionRules, extendedResolutionRules>>
 |
 
