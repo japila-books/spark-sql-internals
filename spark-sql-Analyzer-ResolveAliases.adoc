@@ -11,9 +11,6 @@ NOTE: `ResolveAliases` is a Scala object inside link:spark-sql-Analyzer.adoc[Ana
 [[example]]
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import spark.sessionState.analyzer.ResolveAliases
 
 // FIXME Using ResolveAliases rule

@@ -5,49 +5,64 @@
 [source, scala]
 ----
 import java.time.LocalDate
-import java.sql.Date
+import java.sql.Timestamp
 val sales = Seq(
-  (0, 5, Date.valueOf(LocalDate.of(2018, 9, 1)), "interval 2 days"),
-  (1, 5, Date.valueOf(LocalDate.of(2018, 9, 2)), "interval 2 days"),
-  // Mind the 1-day gap
-  (2, 5, Date.valueOf(LocalDate.of(2018, 9, 4)), "interval 1 days")
-).toDF("id", "amount", "date", "end")
+  (Timestamp.valueOf(LocalDate.of(2018, 9, 1).atStartOfDay), 5),
+  (Timestamp.valueOf(LocalDate.of(2018, 9, 2).atStartOfDay), 10),
+  // Mind the 2-day gap
+  (Timestamp.valueOf(LocalDate.of(2018, 9, 5).atStartOfDay), 5)
+).toDF("time", "volume")
 
 scala> sales.show
-+---+------+----------+---------------+
-| id|amount|      date|            end|
-+---+------+----------+---------------+
-|  0|     5|2018-09-01|interval 2 days|
-|  1|     5|2018-09-02|interval 2 days|
-|  2|     5|2018-09-04|interval 1 days|
-+---+------+----------+---------------+
++-------------------+------+
+|               time|volume|
++-------------------+------+
+|2018-09-01 00:00:00|     5|
+|2018-09-02 00:00:00|    10|
+|2018-09-05 00:00:00|     5|
++-------------------+------+
 
 scala> sales.printSchema
 root
- |-- id: integer (nullable = false)
- |-- amount: integer (nullable = false)
- |-- date: date (nullable = true)
- |-- end: string (nullable = true)
+ |-- time: timestamp (nullable = true)
+ |-- volume: integer (nullable = false)
 
 // FIXME Use Catalyst DSL
-import org.apache.spark.sql.expressions.Window
 // New in 2.3.0
 // rangeBetween with column expressions
 // data type of orderBy expression is date
 // data types of range frame boundaries is interval
 // WindowSpecDefinition(_, Seq(order), SpecifiedWindowFrame(RangeFrame, lower, upper))
 import org.apache.spark.unsafe.types.CalendarInterval
-val interval = lit(CalendarInterval.fromSingleUnitString("day", "1"))
-val windowSpec = Window.orderBy($"date" as "timestamp").rangeBetween(currentRow(), interval)
+val interval = lit(CalendarInterval.fromString("interval 1 days"))
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.orderBy($"time").rangeBetween(currentRow(), interval)
 
-// FIXME Finish the demo
-val q = sales.select(count($"amount") over windowSpec)
-val plan = q.qE
-println(plan.numberedTreeString)
+val q = sales.select(
+  $"time",
+  (sum($"volume") over windowSpec) as "sum",
+  (count($"volume") over windowSpec) as "count")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'Project [unresolvedalias('time, None), sum('volume) windowspecdefinition('time ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS sum#156, count('volume) windowspecdefinition('time ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS count#158]
+01 +- AnalysisBarrier
+02       +- Project [_1#129 AS time#132, _2#130 AS volume#133]
+03          +- LocalRelation [_1#129, _2#130]
 
+import spark.sessionState.analyzer.ResolveReferences
+val planWithRefsResolved = ResolveReferences(plan)
+
+import spark.sessionState.analyzer.ResolveAliases
+val planWithAliasesResolved = ResolveReferences(planWithRefsResolved)
+
+// FIXME Looks like nothing changes in the query plan with regard to WindowFrameCoercion
 import org.apache.spark.sql.catalyst.analysis.TypeCoercion.WindowFrameCoercion
-val afterWindowFrameCoercion = WindowFrameCoercion(plan)
-println(afterWindowFrameCoercion.numberedTreeString)
+val afterWindowFrameCoercion = WindowFrameCoercion(planWithRefsResolved)
+scala> println(afterWindowFrameCoercion.numberedTreeString)
+00 'Project [unresolvedalias(time#132, None), sum(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS sum#156L, count(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS count#158L]
+01 +- AnalysisBarrier
+02       +- Project [_1#129 AS time#132, _2#130 AS volume#133]
+03          +- LocalRelation [_1#129, _2#130]
 ----
 
 === [[coerceTypes]] Coercing Types in Logical Plan -- `coerceTypes` Method
