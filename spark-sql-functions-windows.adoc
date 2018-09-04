@@ -2,7 +2,7 @@
 
 *Window aggregate functions* (aka *window functions* or *windowed aggregates*) are functions that perform a calculation over a group of records called *window* that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
-In other words, when executed, a window function computes a value for each and every row in a window (per <<WindowSpec, window specification>>).
+In other words, when executed, a window function computes a value for each and every row in a window (per <<spark-sql-WindowSpec.adoc#, window specification>>).
 
 NOTE: Window functions are also called *over functions* due to how they are applied using link:spark-sql-Column.adoc#over[over] operator.
 
@@ -90,7 +90,7 @@ scala> empsalary.withColumn("avg", avg('salary) over byDepName).show
 +---------+-----+------+-----------------+
 ----
 
-You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<WindowSpec, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
+You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<spark-sql-WindowSpec.adoc#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
 
 After you describe a window you can apply <<functions, window aggregate functions>> like *ranking* functions (e.g. `RANK`), *analytic* functions (e.g. `LAG`), and the regular link:spark-sql-basic-aggregation.adoc[aggregate functions], e.g. `sum`, `avg`, `max`.
 
@@ -108,47 +108,9 @@ NOTE: Window functions belong to http://spark.apache.org/docs/latest/api/scala/i
 
 NOTE: Window-based framework is available as an experimental feature since Spark *1.4.0*.
 
-=== [[WindowSpec]] WindowSpec -- Window Specification
-
-A window function needs a window specification which is an instance of `WindowSpec` class.
-
-NOTE: `WindowSpec` class is marked as experimental since *1.4.0*.
-
-TIP: Consult https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.expressions.WindowSpec[org.apache.spark.sql.expressions.WindowSpec] API.
-
-A *window specification* defines which rows are included in a *window* (aka a _frame_), i.e. set of rows, that is associated with a given input row. It does so by *partitioning* an entire data set and specifying *frame boundary* with *ordering*.
-
-NOTE: Use static methods in <<Window-object, Window object>> to create a `WindowSpec`.
-
-[source, scala]
-----
-import org.apache.spark.sql.expressions.Window
-
-scala> val byHTokens = Window.partitionBy('token startsWith "h")
-byHTokens: org.apache.spark.sql.expressions.WindowSpec = org.apache.spark.sql.expressions.WindowSpec@574985d8
-----
-
-A window specification includes three parts:
-
-1. *Partitioning Specification* defines which records are in the same partition. With no partition defined, all records belong to a single partition.
-
-2. *Ordering Specification* defines how records in a partition are ordered that in turn defines the position of a record in a partition. The ordering could be ascending (`ASC` in SQL or `asc` in Scala) or descending (`DESC` or `desc`).
-
-3. *Frame Specification* (unsupported in Hive; see http://stackoverflow.com/a/32379437/1305344[Why do Window functions fail with "Window function X does not take a frame specification"?]) defines the records to be included in the frame for the current input row, based on their relative position to the current row. For example, _“the three rows preceding the current row to the current row”_ describes a frame including the current input row and three rows appearing before the current row.
-
-Once `WindowSpec` instance has been created using <<Window-object, Window object>>, you can further expand on window specification using the following methods to define <<frame, frames>>:
-
-* `rowsBetween(start: Long, end: Long): WindowSpec`
-* `rangeBetween(start: Long, end: Long): WindowSpec`
-
-Besides the two above, you can also use the following methods (that correspond to the methods in <<Window-object, Window object>>):
-
-* `partitionBy`
-* `orderBy`
-
 === [[Window-object]] Window object
 
-`Window` object provides functions to define windows (as <<WindowSpec, WindowSpec>> instances).
+`Window` object provides functions to define windows (as <<spark-sql-WindowSpec.adoc#, WindowSpec>> instances).
 
 `Window` object lives in `org.apache.spark.sql.expressions` package. Import it to use `Window` functions.
 
@@ -157,7 +119,7 @@ Besides the two above, you can also use the following methods (that correspond t
 import org.apache.spark.sql.expressions.Window
 ----
 
-There are two families of the functions available in `Window` object that create <<WindowSpec, WindowSpec>> instance for one or many link:spark-sql-Column.adoc[Column] instances:
+There are two families of the functions available in `Window` object that create <<spark-sql-WindowSpec.adoc#, WindowSpec>> instance for one or many link:spark-sql-Column.adoc[Column] instances:
 
 * <<partitionBy, partitionBy>>
 * <<orderBy, orderBy>>
@@ -236,7 +198,7 @@ scala> empsalary.select('*, rankByDepname as 'rank).show
 rangeBetween(start: Long, end: Long): WindowSpec
 ----
 
-`rangeBetween` creates a <<WindowSpec, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
+`rangeBetween` creates a <<spark-sql-WindowSpec.adoc#, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
 
 NOTE: It is recommended to use `Window.unboundedPreceding`, `Window.unboundedFollowing` and `Window.currentRow` to describe the frame boundaries when a frame is unbounded preceding, unbounded following and at current row, respectively.
 
@@ -248,20 +210,6 @@ val spec: WindowSpec = Window.rangeBetween(Window.unboundedPreceding, Window.cur
 ----
 
 Internally, `rangeBetween` creates a `WindowSpec` with `SpecifiedWindowFrame` and `RangeFrame` type.
-
-==== [[WindowSpec-examples]] Window Examples
-
-Two samples from https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.expressions.Window$[org.apache.spark.sql.expressions.Window] scaladoc:
-
-```
-// PARTITION BY country ORDER BY date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-Window.partitionBy('country).orderBy('date).rowsBetween(Long.MinValue, 0)
-```
-
-```
-// PARTITION BY country ORDER BY date ROWS BETWEEN 3 PRECEDING AND 3 FOLLOWING
-Window.partitionBy('country).orderBy('date).rowsBetween(-3, 3)
-```
 
 === [[frame]] Frame
 
@@ -284,12 +232,12 @@ Types of frames:
 * `ROW` - based on _physical offsets_ from the position of the current input row
 * `RANGE` - based on _logical offsets_ from the position of the current input row
 
-In the current implementation of <<WindowSpec, WindowSpec>> you can use two methods to define a frame:
+In the current implementation of <<spark-sql-WindowSpec.adoc#, WindowSpec>> you can use two methods to define a frame:
 
 * `rowsBetween`
 * `rangeBetween`
 
-See <<WindowSpec, WindowSpec>> for their coverage.
+See <<spark-sql-WindowSpec.adoc#, WindowSpec>> for their coverage.
 
 === [[sql]] Window Operators in SQL Queries
 

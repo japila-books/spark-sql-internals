@@ -239,7 +239,7 @@ scala> println(windowRDD.toDebugString)
      |  ParallelCollectionRDD[0] at execute at <console>:35 []
 ```
 
-Internally, `doExecute` first takes link:spark-sql-Expression-WindowExpression.adoc[WindowExpressions] and their link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame] factory functions (from <<windowFrameExpressionFactoryPairs, windowFrameExpressionFactoryPairs>>) followed by link:spark-sql-SparkPlan.adoc#execute[executing] the single `child` physical operator and mapping over partitions (using `RDD.mapPartitions` operator).
+Internally, `doExecute` first takes link:spark-sql-Expression-WindowExpression.adoc[WindowExpressions] and their link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame] factory functions (from <<windowFrameExpressionFactoryPairs, window frame factories>>) followed by link:spark-sql-SparkPlan.adoc#execute[executing] the single `child` physical operator and mapping over partitions (using `RDD.mapPartitions` operator).
 
 `doExecute` creates an `Iterator[InternalRow]` (of link:spark-sql-UnsafeRow.adoc[UnsafeRow] exactly).
 
@@ -489,3 +489,14 @@ a|
 NOTE: `lazy val` in Scala is computed when first accessed and once only (for the entire lifetime of the owning object instance).
 
 NOTE: `windowFrameExpressionFactoryPairs` is used exclusively when `WindowExec` is <<doExecute, executed>>.
+
+=== [[createBoundOrdering]] `createBoundOrdering` Internal Method
+
+[source, scala]
+----
+createBoundOrdering(frame: FrameType, bound: Expression, timeZone: String): BoundOrdering
+----
+
+`createBoundOrdering`...FIXME
+
+NOTE: `createBoundOrdering` is used exclusively when `WindowExec` physical operator is requested for the <<windowFrameExpressionFactoryPairs, window frame factories>>.

@@ -41,10 +41,9 @@
 . link:spark-sql-joins.adoc[Dataset Join Operators]
 .. link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)]
 
-. link:spark-sql-multi-dimensional-aggregation.adoc[Multi-Dimensional Aggregation]
-
-. link:spark-sql-caching.adoc[Dataset Caching and Persistence]
-.. link:spark-sql-caching-webui-storage.adoc[User-Friendly Names Of Cached Queries in web UI's Storage Tab]
+. link:spark-sql-window-aggregation.adoc[Window Aggregation]
+.. link:spark-sql-WindowSpec.adoc[WindowSpec -- Window Specification]
+.. link:spark-sql-WindowSpec-Window.adoc[Window Utility Object -- Defining Window Specification]
 
 . link:spark-sql-functions.adoc[Standard Functions -- functions Object]
 .. link:spark-sql-functions-collection.adoc[Collection Functions]
@@ -60,6 +59,11 @@
 .. link:spark-sql-StructType.adoc[StructType]
 .. link:spark-sql-StructField.adoc[StructField]
 .. link:spark-sql-DataType.adoc[Data Types]
+
+. link:spark-sql-multi-dimensional-aggregation.adoc[Multi-Dimensional Aggregation]
+
+. link:spark-sql-caching.adoc[Dataset Caching and Persistence]
+.. link:spark-sql-caching-webui-storage.adoc[User-Friendly Names Of Cached Queries in web UI's Storage Tab]
 
 . link:spark-sql-checkpointing.adoc[Dataset Checkpointing]
 

@@ -12,7 +12,6 @@ val sales = Seq(
   // Mind the 2-day gap
   (Timestamp.valueOf(LocalDate.of(2018, 9, 5).atStartOfDay), 5)
 ).toDF("time", "volume")
-
 scala> sales.show
 +-------------------+------+
 |               time|volume|
@@ -56,8 +55,68 @@ import spark.sessionState.analyzer.ResolveAliases
 val planWithAliasesResolved = ResolveReferences(planWithRefsResolved)
 
 // FIXME Looks like nothing changes in the query plan with regard to WindowFrameCoercion
+
 import org.apache.spark.sql.catalyst.analysis.TypeCoercion.WindowFrameCoercion
 val afterWindowFrameCoercion = WindowFrameCoercion(planWithRefsResolved)
+scala> println(afterWindowFrameCoercion.numberedTreeString)
+00 'Project [unresolvedalias(time#132, None), sum(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS sum#156L, count(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS count#158L]
+01 +- AnalysisBarrier
+02       +- Project [_1#129 AS time#132, _2#130 AS volume#133]
+03          +- LocalRelation [_1#129, _2#130]
+----
+
+[source, scala]
+----
+import java.time.LocalDate
+import java.sql.Date
+val sales = Seq(
+  (Date.valueOf(LocalDate.of(2018, 9, 1)), 5),
+  (Date.valueOf(LocalDate.of(2018, 9, 2)), 10),
+  // Mind the 2-day gap
+  (Date.valueOf(LocalDate.of(2018, 9, 5)), 5)
+).toDF("time", "volume")
+scala> sales.show
++----------+------+
+|      time|volume|
++----------+------+
+|2018-09-01|     5|
+|2018-09-02|    10|
+|2018-09-05|     5|
++----------+------+
+
+scala> sales.printSchema
+root
+ |-- time: date (nullable = true)
+ |-- volume: integer (nullable = false)
+
+// FIXME Use Catalyst DSL
+// New in 2.3.0
+// rangeBetween with column expressions
+// data type of orderBy expression is date
+// WindowSpecDefinition(_, Seq(order), SpecifiedWindowFrame(RangeFrame, lower, upper))
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.orderBy($"time").rangeBetween(currentRow(), lit(1))
+
+val q = sales.select(
+  $"time",
+  (sum($"volume") over windowSpec) as "sum")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'Project [unresolvedalias('time, None), sum('volume) windowspecdefinition('time ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), 1)) AS sum#238]
+01 +- AnalysisBarrier
+02       +- Project [_1#222 AS time#225, _2#223 AS volume#226]
+03          +- LocalRelation [_1#222, _2#223]
+
+import spark.sessionState.analyzer.ResolveReferences
+val planWithRefsResolved = ResolveReferences(plan)
+
+import spark.sessionState.analyzer.ResolveAliases
+val planWithAliasesResolved = ResolveReferences(planWithRefsResolved)
+
+// FIXME Looks like nothing changes in the query plan with regard to WindowFrameCoercion
+
+import org.apache.spark.sql.catalyst.analysis.TypeCoercion.WindowFrameCoercion
+val afterWindowFrameCoercion = WindowFrameCoercion(planWithAliasesResolved)
 scala> println(afterWindowFrameCoercion.numberedTreeString)
 00 'Project [unresolvedalias(time#132, None), sum(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS sum#156L, count(volume#133) windowspecdefinition(time#132 ASC NULLS FIRST, specifiedwindowframe(RangeFrame, currentrow$(), interval 1 days)) AS count#158L]
 01 +- AnalysisBarrier

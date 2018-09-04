@@ -176,14 +176,14 @@ Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the link:spark-
 Used exclusively when `In` is requested to <<eval, evaluate a value>> for a given input row.
 |===
 
-=== [[checkInputDataTypes]] `checkInputDataTypes` Method
+=== [[checkInputDataTypes]] Checking Input Data Types -- `checkInputDataTypes` Method
 
 [source, scala]
 ----
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of link:spark-sql-Expression.adoc#checkInputDataTypes[Expression Contract] to...FIXME.
+NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to checks the input data types.
 
 `checkInputDataTypes`...FIXME
 

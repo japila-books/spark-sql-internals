@@ -213,7 +213,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[checkInputDataTypes]] `checkInputDataTypes`
-|
+| Checks the input data types
 
 | [[childrenResolved]] `childrenResolved`
 |

@@ -52,14 +52,14 @@ trait CreateNamedStructLike extends Expression {
 | [[valExprs]] <<spark-sql-Expression.adoc#, Catalyst expressions>> for values
 |===
 
-=== [[checkInputDataTypes]] `checkInputDataTypes` Method
+=== [[checkInputDataTypes]] Checking Input Data Types -- `checkInputDataTypes` Method
 
 [source, scala]
 ----
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to...FIXME.
+NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to checks the input data types.
 
 `checkInputDataTypes`...FIXME
 

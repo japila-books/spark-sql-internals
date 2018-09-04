@@ -2,18 +2,21 @@
 
 `WindowSpecDefinition` is an link:spark-sql-Expression.adoc#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods).
 
-`WindowSpecDefinition` is created for a link:spark-sql-AstBuilder.adoc#visitWindowDef[window specification] in a SQL query or ``Column``'s link:spark-sql-Column.adoc#over[over] operator.
+`WindowSpecDefinition` is <<creating-instance, created>> when:
+
+* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitWindowDef[parse a window specification] in a SQL query
+
+* link:spark-sql-Column.adoc#over[Column.over] operator is used
 
 [source, scala]
 ----
 import org.apache.spark.sql.expressions.Window
 val byValueDesc = Window.partitionBy("value").orderBy($"value".desc)
 
-val query = table.withColumn(
-  "count over window", count("*") over byValueDesc)
+val q = table.withColumn("count over window", count("*") over byValueDesc)
 
 import org.apache.spark.sql.catalyst.expressions.WindowExpression
-val windowExpr = query.queryExecution
+val windowExpr = q.queryExecution
   .logical
   .expressions(1)
   .children(0)
@@ -22,12 +25,6 @@ val windowExpr = query.queryExecution
 scala> windowExpr.windowSpec
 res0: org.apache.spark.sql.catalyst.expressions.WindowSpecDefinition = windowspecdefinition('value, 'value DESC NULLS LAST, UnspecifiedFrame)
 ----
-
-`WindowSpecDefinition` contains the following:
-
-* [[partitionSpec]] Window partition specification link:spark-sql-Expression.adoc[expressions]
-* [[orderSpec]] Window order specifications (as `SortOrder` unary expressions)
-* [[frameSpecification]] Window frame specification (as `WindowFrame`)
 
 [source, scala]
 ----
@@ -109,11 +106,40 @@ a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, par
 ----
 |===
 
-=== [[validate]] `validate` Method
+=== [[creating-instance]] Creating WindowSpecDefinition Instance
+
+`WindowSpecDefinition` takes the following when created:
+
+* [[partitionSpec]] <<spark-sql-Expression.adoc#, Expressions>> for window partition specification
+* [[orderSpec]] Window order specifications (as `SortOrder` unary expressions)
+* [[frameSpecification]] Window frame specification (as `WindowFrame`)
+
+=== [[isValidFrameType]] Validating Data Type Of Window Order-- `isValidFrameType` Internal Method
 
 [source, scala]
 ----
-validate: Option[String]
+isValidFrameType(ft: DataType): Boolean
 ----
 
-CAUTION: FIXME
+`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` <<spark-sql-DataType.adoc#, data type>> are as follows:
+
+* <<spark-sql-DataType.adoc#DateType, DateType>> and <<spark-sql-DataType.adoc#IntegerType, IntegerType>>
+
+* <<spark-sql-DataType.adoc#TimestampType, TimestampType>> and <<spark-sql-DataType.adoc#CalendarIntervalType, CalendarIntervalType>>
+
+* Equal
+
+Otherwise, `isValidFrameType` is negative (`false`).
+
+NOTE: `isValidFrameType` is used exclusively when `WindowSpecDefinition` is requested to <<checkInputDataTypes, checkInputDataTypes>> (with `RangeFrame` as the <<frameSpecification, window frame specification>>)
+
+=== [[checkInputDataTypes]] Checking Input Data Types -- `checkInputDataTypes` Method
+
+[source, scala]
+----
+checkInputDataTypes(): TypeCheckResult
+----
+
+NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to checks the input data types.
+
+`checkInputDataTypes`...FIXME

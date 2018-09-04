@@ -183,7 +183,7 @@ posexplode_outer(e: Column): Column
 | <<callUDF, callUDF>>
 | Executing an UDF by name with variable-length list of columns
 
-.11+^.^| *Window functions*
+.11+^.^| [[window-functions]] *Window functions*
 
 | [[cume_dist]] <<spark-sql-functions-windows.adoc#cume_dist, cume_dist>>
 a|
