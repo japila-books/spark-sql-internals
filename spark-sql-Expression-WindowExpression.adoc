@@ -12,7 +12,7 @@ NOTE: An <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> canno
 
 * `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitFunctionCall, parse a function call>> in a SQL statement
 
-NOTE: `WindowExpression` can only be <<creating-instance, created>> with <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>>, <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> expressions which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
+NOTE: `WindowExpression` can only be <<creating-instance, created>> with <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>>, <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> expressions which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression, analysis>>.
 
 [source, scala]
 ----
@@ -72,9 +72,9 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 
 NOTE: `WindowExpression` is subject to <<spark-sql-Optimizer-NullPropagation.adoc#, NullPropagation>> and <<spark-sql-Optimizer-DecimalAggregates.adoc#, DecimalAggregates>> logical optimizations.
 
-NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
+NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression-AggregateExpression-isDistinct, analysis>>.
 
-NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
+NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression-OffsetWindowFunction, analysis>>.
 
 === [[catalyst-dsl]] Catalyst DSL -- `windowExpr` Operator
 

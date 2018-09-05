@@ -249,7 +249,7 @@
 
 == Structured Query Execution
 
-. link:spark-sql-QueryExecution.adoc[QueryExecution -- Structured Query Execution Pipeline (of Dataset)]
+. link:spark-sql-QueryExecution.adoc[QueryExecution -- Structured Query Execution Pipeline]
 .. link:spark-sql-UnsupportedOperationChecker.adoc[UnsupportedOperationChecker]
 
 . link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]

@@ -70,7 +70,7 @@ a| Fails analysis with the error message:
 grouping_id() can only be used with GroupingSets/Cube/Rollup
 ```
 
-| link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] with `isDistinct` flag enabled
+| [[WindowExpression-AggregateExpression-isDistinct]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>> window function with <<spark-sql-Expression-AggregateExpression.adoc#isDistinct, isDistinct>> flag on
 a| Fails analysis with the error message:
 
 ```
@@ -95,6 +95,21 @@ Project [COUNT(1) OVER (PARTITION BY value UnspecifiedFrame)#97L]
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:108)
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
 ----
+
+| [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, window frame specification>>
+a| Fails analysis with the error message:
+
+[options="wrap"]
+----
+An offset window function can only be evaluated in an ordered row-based window frame with a single offset: [windowExpr]
+----
+
+| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.adoc#windowFunction, window function>> that is not one of the following expressions: <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>>, <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>>
+a| Fails analysis with the error message:
+
+```
+Expression '[e]' not supported within a window function.
+```
 
 | [[deterministic]] link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic] expressions
 | FIXME

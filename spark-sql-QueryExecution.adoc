@@ -1,4 +1,4 @@
-== [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline (of Dataset)
+== [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline
 
 `QueryExecution` represents the <<execution-pipeline, execution pipeline>> of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) with execution stages (phases).
 
