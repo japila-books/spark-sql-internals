@@ -290,7 +290,7 @@
 . link:spark-sql-Expression.adoc[Catalyst Expression -- Executable Node in Catalyst Tree]
 . link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]
 . link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]
-. link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
+. link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction Contract -- Declarative Window Aggregate Functions]
 . link:spark-sql-Expression-AttributeReference.adoc[AttributeReference]
 . link:spark-sql-Expression-Alias.adoc[Alias]
 . link:spark-sql-Expression-Attribute.adoc[Attribute]
