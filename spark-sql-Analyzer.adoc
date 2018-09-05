@@ -157,7 +157,7 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 | Resolves `With` operators (and substitutes named common table expressions -- CTEs)
 
 | [[WindowsSubstitution]] link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
-| Substitutes link:spark-sql-Expression-WindowExpression.adoc#UnresolvedWindowExpression[UnresolvedWindowExpression] with link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] logical operators.
+| Substitutes an <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> with a <<spark-sql-Expression-WindowExpression.adoc#, WindowExpression>> for link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] logical operators.
 
 | EliminateUnions
 | Eliminates `Union` of one child into that child
@@ -252,7 +252,7 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 | <<spark-sql-Analyzer-ResolveSubquery.adoc#, ResolveSubquery>>
 | [[ResolveSubquery]] Resolves subquery expressions (i.e. <<spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#, ScalarSubquery>>, <<spark-sql-Expression-Exists.adoc#, Exists>> and <<spark-sql-Expression-In.adoc#, In>>)
 
-| ResolveWindowOrder
+| <<spark-sql-Analyzer-ResolveWindowOrder.adoc#, ResolveWindowOrder>>
 | [[ResolveWindowOrder]]
 
 | link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]

@@ -107,7 +107,9 @@ A relation can be one of the following or a combination thereof:
 a|
 
 * link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] for a bare function (with no window specification)
-* [[visitFunctionCall-UnresolvedWindowExpression]] link:spark-sql-Expression-WindowExpression.adoc#UnresolvedWindowExpression[UnresolvedWindowExpression] for a function evaluated in a windowed context with a `WindowSpecReference`
+
+* [[visitFunctionCall-UnresolvedWindowExpression]] <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> for a function evaluated in a windowed context with a `WindowSpecReference`
+
 * link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for a function over a window
 
 TIP: See the <<function-examples, function examples>> below.

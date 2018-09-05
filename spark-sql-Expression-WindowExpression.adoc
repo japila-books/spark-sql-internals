@@ -1,7 +1,27 @@
 == [[WindowExpression]] WindowExpression Unevaluable Expression
 
-[[windowFunction]][[windowSpec]]
-`WindowExpression` is an link:spark-sql-Expression.adoc#Unevaluable[unevaluable expression] that contains the Catalyst expressions of a window function and link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition] in a query plan after `Analyzer` link:spark-sql-Analyzer.adoc#WindowsSubstitution[resolves `UnresolvedWindowExpressions`].
+`WindowExpression` is an <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> that represents a <<windowFunction, window function>> (over some <<windowSpec, WindowSpecDefinition>>).
+
+NOTE: An <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<spark-sql-Expression.adoc#eval, interpreted>> nor <<spark-sql-Expression.adoc#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+
+`WindowExpression` is <<creating-instance, created>> when:
+
+* `WindowSpec` is requested to <<spark-sql-WindowSpec.adoc#withAggregate, withAggregate>> (when <<spark-sql-Column.adoc#over, Column.over>> operator is used)
+
+* `WindowsSubstitution` logical evaluation rule is <<spark-sql-Analyzer-WindowsSubstitution.adoc#apply, executed>> (with <<spark-sql-LogicalPlan-WithWindowDefinition.adoc#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> expressions)
+
+* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitFunctionCall, parse a function call>> in a SQL statement
+
+NOTE: `WindowExpression` can only be <<creating-instance, created>> with <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>>, <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> expressions which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
+
+[source, scala]
+----
+// Using Catalyst DSL
+val wf = 'count.function(star())
+val windowSpec = ???
+----
+
+NOTE: `WindowExpression` is resolved in <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>>, <<spark-sql-Analyzer-ResolveWindowFrame.adoc#, ResolveWindowFrame>> and <<spark-sql-Analyzer-ResolveWindowOrder.adoc#, ResolveWindowOrder>> logical rules.
 
 [source, scala]
 ----
@@ -23,12 +43,6 @@ scala> windowExpr.sql
 res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 ----
 <1> Use `sqlParser` directly as in link:spark-sql-LogicalPlan-WithWindowDefinition.adoc#example[WithWindowDefinition Example]
-
-NOTE: `WindowExpression` is used in <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>>, link:spark-sql-Analyzer.adoc#ResolveWindowOrder[ResolveWindowOrder] and link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame] logical evaluation rules.
-
-NOTE: `WindowExpression` is also used in `Analyzer` for link:spark-sql-Analyzer-CheckAnalysis.adoc[analysis validation] for the following checks: FIXME...
-
-NOTE: `WindowExpression` is used in link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation] optimization.
 
 [[properties]]
 .WindowExpression's Properties
@@ -56,39 +70,29 @@ NOTE: `WindowExpression` is used in link:spark-sql-Optimizer-NullPropagation.ado
 | `"[windowFunction] [windowSpec]"`
 |===
 
-=== [[UnresolvedWindowExpression]] UnresolvedWindowExpression Unevaluable Expression -- WindowExpression With Unresolved Window Specification Reference
+NOTE: `WindowExpression` is subject to <<spark-sql-Optimizer-NullPropagation.adoc#, NullPropagation>> and <<spark-sql-Optimizer-DecimalAggregates.adoc#, DecimalAggregates>> logical optimizations.
 
-`UnresolvedWindowExpression` is an link:spark-sql-Expression.adoc#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods).
+NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
 
-[[UnresolvedWindowExpression-child]]
-`UnresolvedWindowExpression` is created to represent a `child` link:spark-sql-Expression.adoc[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` link:spark-sql-AstBuilder.adoc#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
+NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, analysis>>.
 
-`UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` link:spark-sql-Analyzer.adoc#WindowsSubstitution[resolves `UnresolvedWindowExpressions`].
+=== [[catalyst-dsl]] Catalyst DSL -- `windowExpr` Operator
 
 [source, scala]
 ----
-import spark.sessionState.sqlParser
-
-scala> sqlParser.parseExpression("foo() OVER windowSpecRef")
-res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexpression('foo(), WindowSpecReference(windowSpecRef))
+windowExpr(windowFunc: Expression, windowSpec: WindowSpecDefinition): WindowExpression
 ----
 
-[[UnresolvedWindowExpression-properties]]
-.UnresolvedWindowExpression's Properties
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
+<<spark-sql-catalyst-dsl.adoc#windowExpr, windowExpr>> operator in Catalyst DSL creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.
 
-| `dataType`
-| Reports a `UnresolvedException`
+[source, scala]
+----
+// FIXME: DEMO
+----
 
-| `foldable`
-| Reports a `UnresolvedException`
+=== [[creating-instance]] Creating WindowExpression Instance
 
-| `nullable`
-| Reports a `UnresolvedException`
+`WindowExpression` takes the following when created:
 
-| `resolved`
-| Disabled (i.e. `false`)
-|===
+* [[windowFunction]] Window function <<spark-sql-Expression.adoc#, expression>>
+* [[windowSpec]] <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> expression

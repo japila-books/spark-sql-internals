@@ -271,7 +271,7 @@ a| [[supportQuotedRegexColumnName]] Used when:
 
 * <<spark-sql-Dataset-untyped-transformations.adoc#col, Dataset.col>> operator is used
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitDereference, visitDereference>> and <<spark-sql-AstBuilder.adoc#visitColumnReference, visitColumnReference>>
+* `AstBuilder` is requested to parse a <<spark-sql-AstBuilder.adoc#visitDereference, dereference>> and <<spark-sql-AstBuilder.adoc#visitColumnReference, column reference>> in a SQL statement
 
 | `useCompression`
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
