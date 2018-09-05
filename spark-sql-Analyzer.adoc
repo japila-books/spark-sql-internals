@@ -261,14 +261,14 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 | ResolveNaturalAndUsingJoin
 | [[ResolveNaturalAndUsingJoin]]
 
-| [[ExtractWindowExpressions]] ExtractWindowExpressions
-|
+| <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>>
+| [[ExtractWindowExpressions]]
 
-| [[GlobalAggregates]] GlobalAggregates
-| Resolves (aka _replaces_) `Project` operators with link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] that are not link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with `Aggregate` unary logical operators.
+| GlobalAggregates
+| [[GlobalAggregates]] Resolves (aka _replaces_) `Project` operators with link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] that are not link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with `Aggregate` unary logical operators.
 
-| [[ResolveAggregateFunctions]] ResolveAggregateFunctions
-a| Resolves aggregate functions in `Filter` and `Sort` operators
+| ResolveAggregateFunctions
+a| [[ResolveAggregateFunctions]] Resolves aggregate functions in `Filter` and `Sort` operators
 
 NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functions that are resolved by <<ResolveGroupingAnalytics, ResolveGroupingAnalytics>> rule.
 
@@ -316,8 +316,8 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| [[Cleanup]] Cleanup
 ^.^| <<fixedPoint, FixedPoint>>
-| CleanupAliases
-|
+| <<spark-sql-Analyzer-CleanupAliases.adoc#, CleanupAliases>>
+| [[CleanupAliases]]
 |===
 
 TIP: Consult the https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/analysis/Analyzer.scala#L116-L167[sources of `Analyzer`] for the up-to-date list of the evaluation rules.

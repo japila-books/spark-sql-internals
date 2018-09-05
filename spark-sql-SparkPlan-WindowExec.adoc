@@ -1,6 +1,8 @@
 == [[WindowExec]] WindowExec Unary Physical Operator
 
-`WindowExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for *window function execution* that represents link:spark-sql-LogicalPlan-Window.adoc[Window] unary logical operator at execution.
+`WindowExec` is a <<spark-sql-SparkPlan.adoc#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) for *window aggregation execution* that represents <<spark-sql-LogicalPlan-Window.adoc#, Window>> unary logical operator at execution.
+
+`WindowExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy resolves a <<spark-sql-LogicalPlan-Window.adoc#, Window>> unary logical operator.
 
 [source, scala]
 ----
@@ -126,8 +128,6 @@ Window [sum(cast(level#901 as bigint)) windowspecdefinition(device#900, id#899 A
    +- Exchange hashpartitioning(device#900, 200)
       +- LocalTableScan [id#899, device#900, level#901]
 ----
-
-`WindowExec` is <<creating-instance, created>> exclusively when link:spark-sql-SparkStrategy-BasicOperators.adoc#Window[BasicOperators] execution planning strategy resolves link:spark-sql-LogicalPlan-Window.adoc[Window] unary logical operator.
 
 [source, scala]
 ----
@@ -385,9 +385,9 @@ NOTE: `createResultProjection` is used exclusively when `WindowExec` is <<doExec
 `WindowExec` takes the following when created:
 
 * [[windowExpression]] Window link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[partitionSpec]] Window partition specifications link:spark-sql-Expression.adoc[expressions]
-* [[orderSpec]] Collection of `SortOrder` objects for window order specifications
-* [[child]] Child link:spark-sql-SparkPlan.adoc[physical plan]
+* [[partitionSpec]] Window partition specification link:spark-sql-Expression.adoc[expressions]
+* [[orderSpec]] Window order specification (as a collection of `SortOrder` expressions)
+* [[child]] Child <<spark-sql-SparkPlan.adoc#, physical operator>>
 
 === [[windowFrameExpressionFactoryPairs]] Lookup Table for WindowExpressions and Factory Functions for WindowFunctionFrame -- `windowFrameExpressionFactoryPairs` Lazy Value
 

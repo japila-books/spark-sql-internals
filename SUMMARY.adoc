@@ -490,8 +490,10 @@
 === Logical Analysis Rules (Check, Evaluation, Conversion and Resolution)
 
 . link:spark-sql-Analyzer-AliasViewChild.adoc[AliasViewChild]
+. link:spark-sql-Analyzer-CleanupAliases.adoc[CleanupAliases]
 . link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
 . link:spark-sql-Analyzer-DetermineTableStats.adoc[DetermineTableStats]
+. link:spark-sql-Analyzer-ExtractWindowExpressions.adoc[ExtractWindowExpressions]
 . link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
 . link:spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
@@ -518,6 +520,7 @@
 
 === Base Logical Optimizations (Optimizer)
 
+. link:spark-sql-Optimizer-CollapseWindow.adoc[CollapseWindow]
 . link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
 . link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
 . link:spark-sql-Optimizer-CombineUnions.adoc[CombineUnions]

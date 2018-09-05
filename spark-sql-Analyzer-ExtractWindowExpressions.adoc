@@ -1,0 +1,47 @@
+== [[ExtractWindowExpressions]] ExtractWindowExpressions Logical Resolution Rule
+
+`ExtractWindowExpressions` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, transforms a logical query plan>> with...FIXME
+
+`ExtractWindowExpressions` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
+
+`ExtractWindowExpressions` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+
+[source, scala]
+----
+// FIXME: DEMO
+----
+
+=== [[apply]] Executing Rule -- `apply` Method
+
+[source, scala]
+----
+apply(plan: LogicalPlan): LogicalPlan
+----
+
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+
+`apply`...FIXME
+
+=== [[hasWindowFunction]] `hasWindowFunction` Internal Method
+
+[source, scala]
+----
+hasWindowFunction(projectList: Seq[NamedExpression]): Boolean // <1>
+hasWindowFunction(expr: NamedExpression): Boolean
+----
+<1> Executes the other `hasWindowFunction` on every `NamedExpression` in the `projectList`
+
+`hasWindowFunction` is positive (`true`) when the input `expr` <<spark-sql-Expression-NamedExpression.adoc#, named expression>> is a <<spark-sql-Expression-WindowExpression.adoc#, WindowExpression>> expression. Otherwise, `hasWindowFunction` is negative (`false`).
+
+NOTE: `hasWindowFunction` is used when `ExtractWindowExpressions` logical resolution rule is requested to <<extract, extract>> and <<apply, execute>>.
+
+=== [[extract]] `extract` Internal Method
+
+[source, scala]
+----
+extract(expressions: Seq[NamedExpression]): (Seq[NamedExpression], Seq[NamedExpression])
+----
+
+`extract`...FIXME
+
+NOTE: `extract` is used exclusively when `ExtractWindowExpressions` logical resolution rule is <<apply, executed>>.

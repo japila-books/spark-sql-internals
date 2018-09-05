@@ -306,6 +306,7 @@ implicit class DslLogicalPlan(val logicalPlan: LogicalPlan)
 
 `DslLogicalPlan` implicit class is part of <<plans, plans>> implicit conversions with extension methods (of link:spark-sql-LogicalPlan.adoc[logical operators]) to build entire logical plans.
 
+[[window]]
 [source, scala]
 ----
 select(exprs: Expression*): LogicalPlan

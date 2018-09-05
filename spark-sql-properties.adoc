@@ -458,9 +458,15 @@ Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEli
 
 When a query execution finishes, the execution is removed from the internal `activeExecutions` registry and stored in `failedExecutions` or `completedExecutions` given the end execution status. It is when `SQLListener` makes sure that the number of `SQLExecutionUIData` entires does not exceed `spark.sql.ui.retainedExecutions` Spark property and removes the excess of entries.
 
+| `spark.sql.windowExec.buffer.in.memory.threshold`
+| `4096`
+| [[spark.sql.windowExec.buffer.in.memory.threshold]] *(internal)* Threshold for number of rows guaranteed to be held in memory by <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
+
+Use <<spark-sql-SQLConf.adoc#windowExecBufferInMemoryThreshold, windowExecBufferInMemoryThreshold>> method to access the current value.
+
 | `spark.sql.windowExec.buffer.spill.threshold`
 | `4096`
-| [[spark.sql.windowExec.buffer.spill.threshold]] *(internal)* Threshold for number of rows buffered in a link:spark-sql-SparkPlan-WindowExec.adoc[WindowExec physical operator]
+| [[spark.sql.windowExec.buffer.spill.threshold]] *(internal)* Threshold for number of rows buffered in a <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
 
-Use link:spark-sql-SQLConf.adoc#windowExecBufferSpillThreshold[windowExecBufferSpillThreshold] method to access the current value.
+Use <<spark-sql-SQLConf.adoc#windowExecBufferSpillThreshold, windowExecBufferSpillThreshold>> method to access the current value.
 |===

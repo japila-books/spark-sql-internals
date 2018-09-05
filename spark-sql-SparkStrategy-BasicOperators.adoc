@@ -48,8 +48,8 @@
 | [[Expand]] link:spark-sql-LogicalPlan-Expand.adoc[Expand]
 | `ExpandExec`
 
-| [[Window]] link:spark-sql-LogicalPlan-Window.adoc[Window]
-| link:spark-sql-SparkPlan-WindowExec.adoc[WindowExec]
+| [[Window]] <<spark-sql-LogicalPlan-Window.adoc#, Window>>
+| [[WindowExec]] <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>>
 
 | `Sample`
 | `SampleExec`

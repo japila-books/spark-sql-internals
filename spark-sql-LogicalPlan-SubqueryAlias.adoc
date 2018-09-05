@@ -22,7 +22,7 @@ NOTE: <<spark-sql-Optimizer-EliminateSubqueryAliases.adoc#, EliminateSubqueryAli
 
 NOTE: <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc#, RewriteCorrelatedScalarSubquery>> logical optimization rewrites correlated scalar subqueries with `SubqueryAlias` operators.
 
-=== [[catalyst-dsl]] Catalyst DSL -- subquery And as Operators
+=== [[catalyst-dsl]] Catalyst DSL -- `subquery` And `as` Operators
 
 [source, scala]
 ----

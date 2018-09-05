@@ -303,9 +303,13 @@ a| [[wholeStageMaxNumFields]] Used in:
 | link:spark-sql-properties.adoc#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName]
 | [[wholeStageUseIdInClassName]] Used exclusively when `WholeStageCodegenExec` is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen, generate the Java source code for the child physical plan subtree>> (when <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, created>>)
 
+| `windowExecBufferInMemoryThreshold`
+| link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.in.memory.threshold[spark.sql.windowExec.buffer.in.memory.threshold]
+| [[windowExecBufferInMemoryThreshold]] Used exclusively when `WindowExec` unary physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#doExecute, executed>>.
+
 | `windowExecBufferSpillThreshold`
 | link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold]
-| [[windowExecBufferSpillThreshold]] Used exclusively when `WindowExec` unary physical operator is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed].
+| [[windowExecBufferSpillThreshold]] Used exclusively when `WindowExec` unary physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#doExecute, executed>>.
 
 | `useObjectHashAggregation`
 | link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec]

@@ -135,7 +135,7 @@ scala> println(optimizedPlan.numberedTreeString)
 | RemoveRepetitionFromGroupExpressions
 |
 
-.38+^.^| [[Operator_Optimization_before_Inferring_Filters]] Operator Optimization before Inferring Filters
+.38+^.^| [[Operator_Optimization]][[Operator_Optimization_before_Inferring_Filters]] Operator Optimization before Inferring Filters
 .38+^.^| <<fixedPoint, FixedPoint>>
 
 | PushProjectionThroughUnion
@@ -147,16 +147,16 @@ scala> println(optimizedPlan.numberedTreeString)
 | EliminateOuterJoin
 |
 
-| [[PushPredicateThroughJoin]] link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
-|
+| <<spark-sql-Optimizer-PushPredicateThroughJoin.adoc#, PushPredicateThroughJoin>>
+| [[PushPredicateThroughJoin]]
 
-| [[PushDownPredicate]] link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
-|
+| <<spark-sql-Optimizer-PushDownPredicate.adoc#, PushDownPredicate>>
+| [[PushDownPredicate]]
 
-| [[LimitPushDown]] link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
-|
+| <<spark-sql-Optimizer-LimitPushDown.adoc#, LimitPushDown>>
+| [[LimitPushDown]]
 
-| link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
+| <<spark-sql-Optimizer-ColumnPruning.adoc#, ColumnPruning>>
 |
 
 | InferFiltersFromConstraints
@@ -168,8 +168,8 @@ scala> println(optimizedPlan.numberedTreeString)
 | CollapseProject
 |
 
-| CollapseWindow
-|
+| <<spark-sql-Optimizer-CollapseWindow.adoc#, CollapseWindow>>
+| [[CollapseWindow]] Collapses two adjacent Window logical operators
 
 | CombineFilters
 |
