@@ -3,7 +3,7 @@
 [[creating-instance]]
 `Project` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that takes the following when created:
 
-* [[projectList]] <<spark-sql-Expression-NamedExpression.adoc#, Named expressions>>
+* [[projectList]] Project <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>
 * [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
 
 `Project` is <<creating-instance, created>> to represent the following:

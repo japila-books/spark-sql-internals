@@ -580,7 +580,7 @@ transform(rule: PartialFunction[BaseType, BaseType]): BaseType
 
 `transform`...FIXME
 
-=== [[transformDown]] `transformDown` Method
+=== [[transformDown]] Transforming Nodes Downwards -- `transformDown` Method
 
 [source, scala]
 ----
