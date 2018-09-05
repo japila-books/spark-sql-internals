@@ -339,7 +339,7 @@
 . link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF]
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
 . link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
-. link:spark-sql-Expression-SizeBasedWindowFunction.adoc[SizeBasedWindowFunction]
+. link:spark-sql-Expression-SizeBasedWindowFunction.adoc[SizeBasedWindowFunction Contract -- Declarative Window Aggregate Functions with Window Size]
 . link:spark-sql-Expression-Stack.adoc[Stack]
 . link:spark-sql-Expression-Star.adoc[Star]
 . link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]

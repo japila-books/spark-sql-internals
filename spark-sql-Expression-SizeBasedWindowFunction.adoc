@@ -1,3 +1,40 @@
-== [[SizeBasedWindowFunction]] SizeBasedWindowFunction
+== [[SizeBasedWindowFunction]] SizeBasedWindowFunction Contract -- Declarative Window Aggregate Functions with Window Size
 
-CAUTION: FIXME
+`SizeBasedWindowFunction` is the <<contract, contract>> of <<implementations, declarative window aggregate functions>> that require the <<n, size of the current window>> for calculation.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.expressions
+
+trait SizeBasedWindowFunction extends AggregateWindowFunction {
+  // No required properties (vals and methods) that have no implementation
+}
+----
+
+.SizeBasedWindowFunction Contract
+[cols="1m,2",options="header",width="100%"]
+|===
+| Property
+| Description
+
+| n
+| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.adoc#, AttributeReference>> expression with `++window__partition__size++` name, <<spark-sql-DataType.adoc#IntegerType, IntegerType>> data type and not nullable
+|===
+
+[[implementations]]
+.SizeBasedWindowFunctions (Direct Implementations)
+[cols="1,2",options="header",width="100%"]
+|===
+| SizeBasedWindowFunction
+| Description
+
+| CumeDist
+| [[CumeDist]]
+
+| NTile
+| [[NTile]]
+
+| PercentRank
+| [[PercentRank]]
+|===
