@@ -354,7 +354,7 @@
 . link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
 . link:spark-sql-Expression-UnresolvedWindowExpression.adoc[UnresolvedWindowExpression]
 . link:spark-sql-Expression-WindowExpression.adoc[WindowExpression]
-. link:spark-sql-Expression-WindowFunction.adoc[WindowFunction]
+. link:spark-sql-Expression-WindowFunction.adoc[WindowFunction Contract -- Window Function Expressions With WindowFrame]
 . link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
 
 === Logical Operators
