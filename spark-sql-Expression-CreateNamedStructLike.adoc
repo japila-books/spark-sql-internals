@@ -59,7 +59,7 @@ trait CreateNamedStructLike extends Expression {
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to checks the input data types.
+NOTE: `checkInputDataTypes` is part of the <<spark-sql-Expression.adoc#checkInputDataTypes, Expression Contract>> to verify (check the correctness of) the input data types.
 
 `checkInputDataTypes`...FIXME
 

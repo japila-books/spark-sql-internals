@@ -67,10 +67,10 @@ a|
 
 * link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection]
 
-| [[ExpectsInputTypes]] `ExpectsInputTypes`
+| <<spark-sql-Expression-ExpectsInputTypes.adoc#, ExpectsInputTypes>>
 | trait
 |
-|
+| [[ExpectsInputTypes]]
 
 | [[ExtractValue]] `ExtractValue`
 | trait
@@ -213,7 +213,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[checkInputDataTypes]] `checkInputDataTypes`
-| Checks the input data types
+| Verifies (checks the correctness of) the input data types
 
 | [[childrenResolved]] `childrenResolved`
 |

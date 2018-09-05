@@ -26,13 +26,15 @@ trait WindowFunction extends Expression {
 | [[OffsetWindowFunction]]
 |===
 
-=== [[frame]] `frame` Method
+=== [[frame]] Defining WindowFrame for Execution -- `frame` Method
 
 [source, scala]
 ----
 frame: WindowFrame
 ----
 
-`frame` returns the `WindowFrame` in which the window operator must be executed. It is `UnspecifiedFrame` by default.
+`frame` defines the `WindowFrame` for function execution, i.e. the `WindowFrame` in which the window operator must be executed.
+
+`frame` is `UnspecifiedFrame` by default.
 
 NOTE: `frame` is used when...FIXME

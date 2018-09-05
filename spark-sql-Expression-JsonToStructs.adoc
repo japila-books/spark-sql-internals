@@ -16,7 +16,7 @@ scala> println(jsonExpr.numberedTreeString)
 01 +- 'json
 ----
 
-`JsonToStructs` is link:spark-sql-Expression.adoc#ExpectsInputTypes[ExpectsInputTypes].
+`JsonToStructs` is a <<spark-sql-Expression-ExpectsInputTypes.adoc#, ExpectsInputTypes>> expression.
 
 [[FAILFAST]]
 [NOTE]
