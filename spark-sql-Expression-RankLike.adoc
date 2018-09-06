@@ -1,0 +1,3 @@
+== [[RankLike]] RankLike Contract
+
+`RankLike` is...FIXME

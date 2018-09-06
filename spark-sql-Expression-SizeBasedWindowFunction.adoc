@@ -1,6 +1,6 @@
 == [[SizeBasedWindowFunction]] SizeBasedWindowFunction Contract -- Declarative Window Aggregate Functions with Window Size
 
-`SizeBasedWindowFunction` is the <<contract, contract>> of <<implementations, declarative window aggregate functions>> that require the <<n, size of the current window>> for calculation.
+`SizeBasedWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
 
 [[contract]]
 [source, scala]
@@ -29,8 +29,8 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | SizeBasedWindowFunction
 | Description
 
-| CumeDist
-| [[CumeDist]]
+| <<spark-sql-Expression-CumeDist.adoc#, CumeDist>>
+| [[CumeDist]] Window function expression for <<spark-sql-functions.adoc#cume_dist, cume_dist>> standard function (Dataset API) and <<spark-sql-FunctionRegistry.adoc#expressions, cume_dist>> SQL function
 
 | NTile
 | [[NTile]]

@@ -1,4 +1,4 @@
-== [[AggregateWindowFunction]] AggregateWindowFunction Contract -- Declarative Window Aggregate Functions
+== [[AggregateWindowFunction]] AggregateWindowFunction Contract -- Declarative Window Aggregate Function Expressions
 
 `AggregateWindowFunction` is the <<contract, base>> of <<extensions, DeclarativeAggregates>> that are also <<spark-sql-Expression-WindowFunction.adoc#, WindowFunction>> expressions.
 
@@ -20,7 +20,7 @@ abstract class AggregateWindowFunction extends DeclarativeAggregate with WindowF
 `AggregateWindowFunction` is <<spark-sql-Expression.adoc#nullable, nullable>>.
 
 [[frame]]
-As a <<spark-sql-Expression-WindowFunction.adoc#, WindowFunction>> expression, `AggregateWindowFunction` uses a `SpecifiedWindowFrame` (with the `RowFrame` frame type, the `UnboundedPreceding` lower frame boundary and the `CurrentRow` upper frame boundary) as the <<spark-sql-Expression-WindowFunction.adoc#frame, frame>>.
+As a <<spark-sql-Expression-WindowFunction.adoc#, WindowFunction>> expression, `AggregateWindowFunction` uses a `SpecifiedWindowFrame` (with the `RowFrame` frame type, the `UnboundedPreceding` lower and the `CurrentRow` upper frame boundaries) as the <<spark-sql-Expression-WindowFunction.adoc#frame, frame>>.
 
 [[mergeExpressions]]
 `AggregateWindowFunction` does not support <<spark-sql-Expression-DeclarativeAggregate.adoc#mergeExpressions, merging>> (two aggregation buffers together) and throws an `UnsupportedOperationException` whenever requested for them.
@@ -36,10 +36,10 @@ Window Functions do not support merging.
 | AggregateWindowFunction
 | Description
 
-| RankLike
+| <<spark-sql-Expression-RankLike.adoc#, RankLike>>
 | [[RankLike]]
 
-| RowNumberLike
+| <<spark-sql-Expression-RowNumberLike.adoc#, RowNumberLike>>
 | [[RowNumberLike]]
 
 | <<spark-sql-Expression-SizeBasedWindowFunction.adoc#, SizeBasedWindowFunction>>

@@ -1,0 +1,3 @@
+== [[RowNumberLike]] RowNumberLike Contract
+
+`RowNumberLike` is...FIXME

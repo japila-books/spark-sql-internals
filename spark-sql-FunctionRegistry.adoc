@@ -92,43 +92,46 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 |===
 
 [[expressions]]
-`FunctionRegistry` manages a *function expression registry* of <<spark-sql-Expression.adoc#, Catalyst expressions>> and corresponding built-in/native SQL functions (that can be used in SQL statements).
+`FunctionRegistry` manages *function expression registry* of <<spark-sql-Expression.adoc#, Catalyst expressions>> and the corresponding built-in/native SQL functions (that can be used in SQL statements).
 
-.(Subset of) FunctionRegistry's Catalyst Expressions and SQL Functions Mapping
-[cols="1,2",options="header",width="100%"]
+.(Subset of) FunctionRegistry's Catalyst Expression to SQL Function Mapping
+[cols="1,1m",options="header",width="100%"]
 |===
 | Catalyst Expression
 | SQL Function
 
+| <<spark-sql-Expression-CumeDist.adoc#, CumeDist>>
+| [[cume_dist]] cume_dist
+
 | `IfNull`
-| [[ifnull]] `ifnull`
+| [[ifnull]] ifnull
 
 | `Left`
-| [[left]] `left`
+| [[left]] left
 
 | <<spark-sql-Expression-MonotonicallyIncreasingID.adoc#, MonotonicallyIncreasingID>>
-| [[monotonically_increasing_id]] <<spark-sql-functions.adoc#monotonically_increasing_id, monotonically_increasing_id>>
+| [[monotonically_increasing_id]] monotonically_increasing_id
 
 | `NullIf`
-| [[nullif]] `nullif`
+| [[nullif]] nullif
 
 | `Nvl`
-| [[nvl]] `nvl`
+| [[nvl]] nvl
 
 | `Nvl2`
-| [[nvl2]] `nvl2`
+| [[nvl2]] nvl2
 
-| link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
-| [[to_date]] `to_date`
+| <<spark-sql-Expression-ParseToDate.adoc#, ParseToDate>>
+| [[to_date]] to_date
 
-| link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
-| [[to_timestamp]] `to_timestamp`
+| <<spark-sql-Expression-ParseToTimestamp.adoc#, ParseToTimestamp>>
+| [[to_timestamp]] to_timestamp
 
 | `Right`
-| [[right]] `right`
+| [[right]] right
 
 | <<spark-sql-CreateStruct.adoc#registryEntry, CreateNamedStruct>>
-|[[struct]] `struct`
+| [[struct]] struct
 |===
 
 === [[expression]] `expression` Internal Method

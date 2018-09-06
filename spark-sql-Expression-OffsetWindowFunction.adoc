@@ -81,7 +81,7 @@ When requested for the <<spark-sql-Expression-ExpectsInputTypes.adoc#inputTypes,
 frame: WindowFrame
 ----
 
-NOTE: `frame` is part of the <<spark-sql-Expression-WindowFunction.adoc#frame, WindowFunction Contract>> to define the `WindowFrame` for function execution.
+NOTE: `frame` is part of the <<spark-sql-Expression-WindowFunction.adoc#frame, WindowFunction Contract>> to define the `WindowFrame` for function expression execution.
 
 `frame`...FIXME
 
