@@ -85,3 +85,14 @@ CAUTION: FIXME
 * [[spillSize]] `spillSize` link:spark-sql-SQLMetric.adoc[SQLMetric]
 
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[generateResultProjection]] `generateResultProjection` Method
+
+[source, scala]
+----
+generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
+----
+
+NOTE: `generateResultProjection` is part of the <<spark-sql-AggregationIterator.adoc#generateResultProjection, AggregationIterator Contract>> to...FIXME.
+
+`generateResultProjection`...FIXME

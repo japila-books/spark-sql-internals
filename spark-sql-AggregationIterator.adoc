@@ -87,10 +87,47 @@ Used when...FIXME
 
 `AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[initializeAggregateFunctions]] `initializeAggregateFunctions`
+=== [[initializeAggregateFunctions]] `initializeAggregateFunctions` Internal Method
 
-CAUTION: FIXME
+[source, scala]
+----
+initializeAggregateFunctions(
+  expressions: Seq[AggregateExpression],
+  startingInputBufferOffset: Int): Array[AggregateFunction]
+----
 
-=== [[generateProcessRow]] `generateProcessRow` Method
+`initializeAggregateFunctions`...FIXME
 
-CAUTION: FIXME
+NOTE: `initializeAggregateFunctions` is used when...FIXME
+
+=== [[generateProcessRow]] `generateProcessRow` Internal Method
+
+[source, scala]
+----
+generateProcessRow(
+  expressions: Seq[AggregateExpression],
+  functions: Seq[AggregateFunction],
+  inputAttributes: Seq[Attribute]): (InternalRow, InternalRow) => Unit
+----
+
+`generateProcessRow`...FIXME
+
+NOTE: `generateProcessRow` is used when...FIXME
+
+=== [[generateResultProjection]] `generateResultProjection` Method
+
+[source, scala]
+----
+generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
+----
+
+`generateResultProjection`...FIXME
+
+[NOTE]
+====
+`generateResultProjection` is used when:
+
+* `AggregationIterator` is <<generateOutput, created>>
+
+* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.adoc#generateResultProjection, generateResultProjection>>
+====

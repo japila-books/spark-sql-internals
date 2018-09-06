@@ -289,7 +289,7 @@
 
 . link:spark-sql-Expression.adoc[Catalyst Expression -- Executable Node in Catalyst Tree]
 . link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]
-. link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]
+. link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction Contract -- Aggregate Function Expressions]
 . link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction Contract -- Declarative Window Aggregate Function Expressions]
 . link:spark-sql-Expression-AttributeReference.adoc[AttributeReference]
 . link:spark-sql-Expression-Alias.adoc[Alias]
@@ -305,7 +305,7 @@
 . link:spark-sql-Expression-CreateNamedStructLike.adoc[CreateNamedStructLike Contract]
 . link:spark-sql-Expression-CreateNamedStructUnsafe.adoc[CreateNamedStructUnsafe]
 . link:spark-sql-Expression-CumeDist.adoc[CumeDist]
-. link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate]
+. link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate Contract -- Unevaluable Aggregate Function Expressions]
 . link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression]
 . link:spark-sql-Expression-Exists.adoc[Exists]
 . link:spark-sql-Expression-ExpectsInputTypes.adoc[ExpectsInputTypes Contract]
@@ -705,5 +705,7 @@
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
 
 . link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
+
+. link:spark-sql-DeclarativeAggregateEvaluator.adoc[DeclarativeAggregateEvaluator]
 
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]

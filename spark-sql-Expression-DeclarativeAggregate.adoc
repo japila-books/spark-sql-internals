@@ -1,3 +1,93 @@
-== [[DeclarativeAggregate]] DeclarativeAggregate
+== [[DeclarativeAggregate]] DeclarativeAggregate Contract -- Unevaluable Aggregate Function Expressions
 
-CAUTION: FIXME
+`DeclarativeAggregate` is an <<contract, extension>> of the <<spark-sql-Expression-AggregateFunction.adoc#, AggregateFunction Contract>> for <<implementations, aggregate function expressions>> that are <<spark-sql-Expression.adoc#Unevaluable, unevaluable>> and use expressions for evaluation.
+
+NOTE: An <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<spark-sql-Expression.adoc#eval, interpreted>> nor <<spark-sql-Expression.adoc#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+
+[[contract]]
+[source, scala]
+----
+package org.apache.spark.sql.catalyst.expressions.aggregate
+
+abstract class DeclarativeAggregate extends AggregateFunction {
+  // only required properties (vals and methods) that have no implementation
+  // the others follow
+  val evaluateExpression: Expression
+  val initialValues: Seq[Expression]
+  val mergeExpressions: Seq[Expression]
+  val updateExpressions: Seq[Expression]
+}
+----
+
+.(Subset of) DeclarativeAggregate Contract
+[cols="1m,2",options="header",width="100%"]
+|===
+| Property
+| Description
+
+| evaluateExpression
+a| [[evaluateExpression]] An <<spark-sql-Expression.adoc#, expression>> which returns the final value for the aggregate function.
+
+Used when:
+
+* `DeclarativeAggregateEvaluator` is requested for the <<spark-sql-DeclarativeAggregateEvaluator.adoc#evaluator, evaluator>> projection
+
+* `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.adoc#generateResultProjection, generateResultProjection>>
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithoutKeys, doProduceWithoutKeys>> and <<spark-sql-SparkPlan-HashAggregateExec.adoc#generateResultFunction, generateResultFunction>>
+
+* `AggregateProcessor` is <<spark-sql-AggregateProcessor.adoc#apply, created>> (when `WindowExec` physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#, executed>>)
+
+| initialValues
+| [[initialValues]]
+
+| mergeExpressions
+| [[mergeExpressions]]
+
+| updateExpressions
+| [[updateExpressions]]
+|===
+
+[[extensions]]
+.DeclarativeAggregates (Direct Implementations)
+[cols="1,2",options="header",width="100%"]
+|===
+| DeclarativeAggregate
+| Description
+
+| <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>>
+| [[AggregateWindowFunction]] Contract for declarative window aggregate function expressions
+
+| Average
+| [[Average]]
+
+| CentralMomentAgg
+| [[CentralMomentAgg]]
+
+| Corr
+| [[Corr]]
+
+| Count
+| [[Count]]
+
+| Covariance
+| [[Covariance]]
+
+| First
+| [[First]]
+
+| Last
+| [[Last]]
+
+| Max
+| [[Max]]
+
+| Min
+| [[Min]]
+
+| <<spark-sql-Expression-SimpleTypedAggregateExpression.adoc#, SimpleTypedAggregateExpression>>
+| [[SimpleTypedAggregateExpression]]
+
+| Sum
+| [[Sum]]
+|===

@@ -1,4 +1,4 @@
-== [[AggregateFunction]] AggregateFunction Expression
+== [[AggregateFunction]] AggregateFunction Contract -- Aggregate Function Expressions
 
 `AggregateFunction` is the <<contract, contract>> for link:spark-sql-Expression.adoc[Catalyst expressions] that represent *aggregate functions*.
 
