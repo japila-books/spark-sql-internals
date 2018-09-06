@@ -706,6 +706,4 @@
 
 . link:spark-sql-CompressionCodecs.adoc[CompressionCodecs]
 
-. link:spark-sql-DeclarativeAggregateEvaluator.adoc[DeclarativeAggregateEvaluator]
-
 . link:spark-sql-SQLContext.adoc[(obsolete) SQLContext]

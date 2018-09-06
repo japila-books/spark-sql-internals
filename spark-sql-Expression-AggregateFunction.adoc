@@ -74,7 +74,6 @@ a| Collection of `AttributeReference` objects of an aggregation buffer to hold p
 
 Used in:
 
-* `DeclarativeAggregateEvaluator`
 * `AggregateExpression` for link:spark-sql-Expression-AggregateExpression.adoc#references[references]
 * ``Expression``-based aggregate's `bufferSchema` in link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate]
 * ...

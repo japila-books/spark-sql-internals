@@ -30,8 +30,6 @@ a| [[evaluateExpression]] An <<spark-sql-Expression.adoc#, expression>> which re
 
 Used when:
 
-* `DeclarativeAggregateEvaluator` is requested for the <<spark-sql-DeclarativeAggregateEvaluator.adoc#evaluator, evaluator>> projection
-
 * `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.adoc#generateResultProjection, generateResultProjection>>
 
 * `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithoutKeys, doProduceWithoutKeys>> and <<spark-sql-SparkPlan-HashAggregateExec.adoc#generateResultFunction, generateResultFunction>>
