@@ -39,11 +39,25 @@ res0: Boolean = true
 
 === [[fromAttributes]] `fromAttributes` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+fromAttributes(attributes: Seq[Attribute]): StructType
+----
+
+`fromAttributes`...FIXME
+
+NOTE: `fromAttributes` is used when...FIXME
 
 === [[toAttributes]] `toAttributes` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+toAttributes: Seq[AttributeReference]
+----
+
+`toAttributes`...FIXME
+
+NOTE: `toAttributes` is used when...FIXME
 
 === [[add]] Adding Fields to Schema -- `add` Method
 

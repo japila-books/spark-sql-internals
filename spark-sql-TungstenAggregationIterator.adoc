@@ -1,6 +1,6 @@
 == [[TungstenAggregationIterator]] TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator
 
-`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process rows per partition).
+`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition).
 
 [source, scala]
 ----
@@ -36,6 +36,50 @@ val f = mpRDD.iterator(_, _)
 import org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
 // FIXME How to show that TungstenAggregationIterator is used?
 ----
+
+When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metrics from the <<spark-sql-SparkPlan-HashAggregateExec.adoc#metrics, HashAggregateExec>> aggregate physical operator being executed, i.e. <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics.
+
+* <<numOutputRows, numOutputRows>> is used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>> (and it <<hasNext, has one>>)
+
+* <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> are used at the <<addTaskCompletionListener, end of every task>> (one per partition)
+
+The metrics are then displayed as part of <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator (e.g. in web UI in <<spark-sql-webui.adoc#ExecutionPage, Details for Query>>).
+
+.HashAggregateExec in web UI (Details for Query)
+image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="center"]
+
+[[internal-registries]]
+.TungstenAggregationIterator's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| aggregationBufferMapIterator
+| [[aggregationBufferMapIterator]] `KVIterator[UnsafeRow, UnsafeRow]`
+
+Used when...FIXME
+
+| hashMap
+a| [[hashMap]] `UnsafeFixedWidthAggregationMap` that is created with the following:
+
+* <<initialAggregationBuffer, initialAggregationBuffer>>
+
+* <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from (the <<spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes, aggBufferAttributes>> of) the <<spark-sql-AggregationIterator.adoc#aggregateFunctions, aggregate function expressions>>
+
+* <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from (the <<spark-sql-Expression-NamedExpression.adoc#toAttribute, attributes>> of) the <<groupingExpressions, groupingExpressions>>
+
+* `1024 * 16` initial capacity
+
+* The page size of the `TaskMemoryManager` (defaults to `spark.buffer.pageSize` configuration)
+
+Used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>>, to <<outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>, <<processInputs, processInputs>>, to initialize the <<aggregationBufferMapIterator, aggregationBufferMapIterator>> and <<addTaskCompletionListener, every time a partition has been processed>>.
+
+| initialAggregationBuffer
+| [[initialAggregationBuffer]] <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> that is the aggregation buffer containing initial buffer values.
+
+Used when...FIXME
+|===
 
 === [[processInputs]] `processInputs` Internal Method
 
@@ -100,6 +144,8 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 * [[spillSize]] `spillSize` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
 * [[avgHashProbe]] `avgHashProbe` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
 
+NOTE: The SQL metrics (<<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>>) belong to the <<spark-sql-SparkPlan-HashAggregateExec.adoc#metrics, HashAggregateExec>> physical operator that created the `TungstenAggregationIterator`.
+
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[generateResultProjection]] `generateResultProjection` Method
@@ -123,3 +169,15 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 `outputForEmptyGroupingKeyWithoutInput`...FIXME
 
 NOTE: `outputForEmptyGroupingKeyWithoutInput` is used when...FIXME
+
+=== [[addTaskCompletionListener]] `addTaskCompletionListener`
+
+`TungstenAggregationIterator` registers a `TaskCompletionListener` that is executed on task completion (for every task that processes a partition).
+
+When executed (once per partition), the `TaskCompletionListener` updates the following metrics:
+
+* <<peakMemory, peakMemory>>
+
+* <<spillSize, spillSize>>
+
+* <<avgHashProbe, avgHashProbe>>
