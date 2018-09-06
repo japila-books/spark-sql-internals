@@ -631,13 +631,19 @@
 
 == Tungsten Execution Backend
 
-. link:spark-sql-tungsten.adoc[Tungsten Execution Backend (aka Project Tungsten)]
-. link:spark-sql-AggregationIterator.adoc[AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators]
-. link:spark-sql-CatalystSerde.adoc[CatalystSerde]
-. link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)]
+. link:spark-sql-tungsten.adoc[Tungsten Execution Backend (Project Tungsten)]
+
 . link:spark-sql-InternalRow.adoc[InternalRow -- Abstract Binary Row Format]
-. link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator]
-. link:spark-sql-UnsafeRow.adoc[UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format]
+.. link:spark-sql-UnsafeRow.adoc[UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format]
+
+. link:spark-sql-AggregationIterator.adoc[AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators]
+.. link:spark-sql-ObjectAggregationIterator.adoc[ObjectAggregationIterator]
+.. link:spark-sql-SortBasedAggregationIterator.adoc[SortBasedAggregationIterator]
+.. link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator]
+
+. link:spark-sql-CatalystSerde.adoc[CatalystSerde]
+
+. link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)]
 
 == SQL Support
 

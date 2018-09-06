@@ -1,10 +1,8 @@
 == [[AggregationIterator]] AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
 
-`AggregationIterator` is the base for Scala http://www.scala-lang.org/api/2.11.8/index.html#scala.collection.Iterator[Iterators] of link:spark-sql-UnsafeRow.adoc[UnsafeRow] elements that...FIXME
+`AggregationIterator` is the base for <<implementations, iterators>> of <<spark-sql-UnsafeRow.adoc, UnsafeRows>> that...FIXME
 
 > Iterators are data structures that allow to iterate over a sequence of elements. They have a `hasNext` method for checking if there is a next element available, and a `next` method which returns the next element and discards it from the iterator.
-
-NOTE: `AggregationIterator` is a Scala abstract class.
 
 [[implementations]]
 .AggregationIterator's Implementations
@@ -13,10 +11,10 @@ NOTE: `AggregationIterator` is a Scala abstract class.
 | Name
 | Description
 
-| `ObjectAggregationIterator`
+| <<spark-sql-ObjectAggregationIterator.adoc#, ObjectAggregationIterator>>
 | Used exclusively when `ObjectHashAggregateExec` physical operator is link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#doExecute[executed].
 
-| `SortBasedAggregationIterator`
+| <<spark-sql-SortBasedAggregationIterator.adoc#, SortBasedAggregationIterator>>
 | Used exclusively when `SortAggregateExec` physical operator is link:spark-sql-SparkPlan-SortAggregateExec.adoc#doExecute[executed].
 
 | link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator]
@@ -52,10 +50,16 @@ Used when...FIXME
 
 Used when...FIXME
 
-| [[generateOutput]] `generateOutput`
-| `(UnsafeRow, InternalRow) => UnsafeRow`
+| `generateOutput`
+a| [[generateOutput]] Function used to generate an <<spark-sql-UnsafeRow.adoc#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
 
-Used when...FIXME
+Used when:
+
+* `ObjectAggregationIterator` is requested for the <<spark-sql-ObjectAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-ObjectAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+
+* `SortBasedAggregationIterator` is requested for the <<spark-sql-SortBasedAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-SortBasedAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+
+* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
 | [[groupingAttributes]] `groupingAttributes`
 | Grouping link:spark-sql-Expression-Attribute.adoc[attributes]
@@ -86,6 +90,8 @@ Used when...FIXME
 * [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
 
 `AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
+
+NOTE: `AggregationIterator` is a Scala abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete AggregationIterators>>.
 
 === [[initializeAggregateFunctions]] `initializeAggregateFunctions` Internal Method
 

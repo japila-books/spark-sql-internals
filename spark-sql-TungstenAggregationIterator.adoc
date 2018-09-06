@@ -1,6 +1,6 @@
 == [[TungstenAggregationIterator]] TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator
 
-`TungstenAggregationIterator` is a custom link:spark-sql-AggregationIterator.adoc[AggregationIterator] that is <<creating-instance, created>> when link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] aggregate physical operator is link:spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute[executed] (to process rows per partition).
+`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process rows per partition).
 
 [source, scala]
 ----
@@ -44,7 +44,7 @@ import org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
 processInputs(fallbackStartsAt: (Int, Int)): Unit
 ----
 
-CAUTION: FIXME
+`processInputs`...FIXME
 
 NOTE: `processInputs` is used when `TungstenAggregationIterator` is <<creating-instance, created>> (and sets the internal flags to indicate whether to use a hash-based aggregation or, in the worst case, a sort-based aggregation when there is not enough memory for groups and their buffers).
 
@@ -55,34 +55,50 @@ NOTE: `processInputs` is used when `TungstenAggregationIterator` is <<creating-i
 switchToSortBasedAggregation(): Unit
 ----
 
-CAUTION: FIXME
+`switchToSortBasedAggregation`...FIXME
 
 NOTE: `switchToSortBasedAggregation` is used when `TungstenAggregationIterator` <<processInputs, processInputs>> (and `externalSorter` is used).
 
-=== [[next]] `next` Method
+==== [[next]] `next` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+next(): UnsafeRow
+----
+
+NOTE: `next` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator[scala.collection.Iterator] interface that returns the next element and discards it from the iterator.
+
+`next`...FIXME
 
 === [[hasNext]] `hasNext` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+hasNext: Boolean
+----
+
+NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator[scala.collection.Iterator] interface that tests whether this iterator can provide another element.
+
+`hasNext`...FIXME
 
 === [[creating-instance]] Creating TungstenAggregationIterator Instance
 
 `TungstenAggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
-* [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[partIndex]] Partition index
+* [[groupingExpressions]] Grouping <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>
+* [[aggregateExpressions]] <<spark-sql-Expression-AggregateExpression.adoc#, Aggregate expressions>>
+* [[aggregateAttributes]] Aggregate <<spark-sql-Expression-Attribute.adoc#, attributes>>
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes
-* [[originalInputAttributes]] Output attributes of the link:spark-sql-SparkPlan-HashAggregateExec.adoc#child[child] operator of `HashAggregateExec`
-* [[inputIter]] Iterator of `InternalRows` from a single partition of the child's result `RDD[InternalRow]`
+* [[resultExpressions]] Output <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>
+* [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes (i.e. `(Seq[Expression], Seq[Attribute]) => MutableProjection`)
+* [[originalInputAttributes]] Output attributes (of the <<spark-sql-SparkPlan-HashAggregateExec.adoc#child, child>> of the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> physical operator)
+* [[inputIter]] Iterator of <<spark-sql-InternalRow.adoc#, InternalRows>> (from a single partition of the <<spark-sql-SparkPlan-HashAggregateExec.adoc#child, child>> of the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> physical operator)
 * [[testFallbackStartsAt]] (used for testing) Optional ``HashAggregateExec``'s link:spark-sql-SparkPlan-HashAggregateExec.adoc#testFallbackStartsAt[testFallbackStartsAt]
-* [[numOutputRows]] `numOutputRows` link:spark-sql-SQLMetric.adoc[SQLMetric]
-* [[peakMemory]] `peakMemory` link:spark-sql-SQLMetric.adoc[SQLMetric]
-* [[spillSize]] `spillSize` link:spark-sql-SQLMetric.adoc[SQLMetric]
+* [[numOutputRows]] `numOutputRows` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
+* [[peakMemory]] `peakMemory` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
+* [[spillSize]] `spillSize` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
+* [[avgHashProbe]] `avgHashProbe` <<spark-sql-SQLMetric.adoc#, SQLMetric>>
 
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -96,3 +112,14 @@ generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 NOTE: `generateResultProjection` is part of the <<spark-sql-AggregationIterator.adoc#generateResultProjection, AggregationIterator Contract>> to...FIXME.
 
 `generateResultProjection`...FIXME
+
+=== [[outputForEmptyGroupingKeyWithoutInput]] `outputForEmptyGroupingKeyWithoutInput` Method
+
+[source, scala]
+----
+outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
+----
+
+`outputForEmptyGroupingKeyWithoutInput`...FIXME
+
+NOTE: `outputForEmptyGroupingKeyWithoutInput` is used when...FIXME

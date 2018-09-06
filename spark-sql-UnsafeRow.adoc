@@ -75,7 +75,8 @@ Otherwise, `isMutable` is disabled (i.e. returns `false`).
 `isMutable` is used when:
 
 * `UnsafeFixedWidthAggregationMap` does `supportsAggregationBufferSchema`
-* `SortBasedAggregationIterator` does `newBuffer`
+
+* `SortBasedAggregationIterator` is requested for <<spark-sql-SortBasedAggregationIterator.adoc#newBuffer, newBuffer>>
 ====
 
 === [[KryoSerializable]] Kryo's KryoSerializable SerDe Protocol
