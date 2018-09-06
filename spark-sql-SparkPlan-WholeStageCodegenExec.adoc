@@ -236,7 +236,7 @@ Found too long generated codes and JIT optimization might not work: the bytecode
 [treeString]
 ```
 
-In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> and returns it.
+In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and returns it.
 
 NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> leaf physical operator with <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, FileSourceScanExec>>).
 

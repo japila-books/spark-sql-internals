@@ -113,7 +113,7 @@ NOTE: `generateResultProjection` is part of the <<spark-sql-AggregationIterator.
 
 `generateResultProjection`...FIXME
 
-=== [[outputForEmptyGroupingKeyWithoutInput]] `outputForEmptyGroupingKeyWithoutInput` Method
+=== [[outputForEmptyGroupingKeyWithoutInput]] Creating UnsafeRow -- `outputForEmptyGroupingKeyWithoutInput` Method
 
 [source, scala]
 ----

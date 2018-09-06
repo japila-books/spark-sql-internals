@@ -53,7 +53,7 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (and produce an `RDD[InternalRow]`) and executes the following computation on internal rows per partition (using `RDD.mapPartitionsWithIndexInternal`):
+`doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 
 . Creates an <<spark-sql-UnsafeProjection.adoc#create, UnsafeProjection>> for the <<serializer, serializer>>
 

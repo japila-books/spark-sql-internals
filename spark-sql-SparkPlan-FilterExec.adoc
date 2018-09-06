@@ -172,7 +172,7 @@ NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Con
 
 Internally, `doExecute` takes the <<numOutputRows, numOutputRows>> metric.
 
-In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and translates it (that creates a new RDD) by applying a function to each partition with index (using `RDD.mapPartitionsWithIndexInternal`) as follows:
+In the end, `doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 
 . Creates a partition filter as a new <<spark-sql-SparkPlan.adoc#newPredicate, GenPredicate>> (for the <<condition, filter condition>> expression and the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<child, child>> physical operator)
 
@@ -180,3 +180,5 @@ In the end, `doExecute` requests the <<child, child>> physical operator to <<spa
 
 . Filters out elements from the partition iterator (`Iterator[InternalRow]`) by requesting the generated partition filter `Predicate` to evaluate for every `InternalRow`
 .. Increments the <<numOutputRows, numOutputRows>> metric for positive evaluations (i.e. that returned `true`)
+
+NOTE: `doExecute` (by `RDD.mapPartitionsWithIndexInternal`) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.

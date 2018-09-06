@@ -10,6 +10,8 @@ NOTE: `HashAggregateExec` is the link:spark-sql-SparkStrategy-Aggregation.adoc#a
 
 `HashAggregateExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 
+`HashAggregateExec` uses <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>> (to iterate over `UnsafeRows` in partitions) when <<doExecute, executed>>.
+
 [source, scala]
 ----
 val q = spark.range(10).
@@ -72,17 +74,17 @@ scala> println(hashAggExecRDD.toDebugString)
 
 | `aggTime`
 | aggregate time
-|
+| [[aggTime]]
 
 | `avgHashProbe`
 | avg hash probe
-a| Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
+a| [[avgHashProbe]] Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
 NOTE: `numProbes` and `numKeyLookups` are used in link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap] append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
 
 | `numOutputRows`
 | number of output rows
-a| Number of groups (per partition) that (depending on the number of partitions and the side of link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] operator) is the number of groups
+a| [[numOutputRows]] Number of groups (per partition) that (depending on the number of partitions and the side of link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] operator) is the number of groups
 
 * `0` for no input with a grouping expression, e.g. `spark.range(0).groupBy($"id").count.show`
 
@@ -107,11 +109,11 @@ spark.
 
 | `peakMemory`
 | peak memory
-|
+| [[peakMemory]]
 
 | `spillSize`
 | spill size
-|
+| [[spillSize]]
 |===
 
 .HashAggregateExec in web UI (Details for Query)
@@ -297,15 +299,61 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` executes the input <<child, child SparkPlan>> (to produce link:spark-sql-InternalRow.adoc[InternalRow] objects) and applies calculation over partitions (using `RDD.mapPartitions`).
+`doExecute` requests the <<child, child>> physical operator to <<spark-sql-SparkPlan.adoc#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndex` that creates another RDD):
 
-IMPORTANT: `RDD.mapPartitions` does *not* preserve partitioning and neither does `HashAggregateExec` when executed.
+. Records the start execution time (`beforeAgg`)
 
-In the `mapPartitions` block, `doExecute` creates one of the following:
+. Requests the `Iterator[InternalRow]` (from executing the <<child, child>> physical operator) for the next element
 
-* an empty iterator for no-record partitions with at least one grouping expression
+.. If there is no input (an empty partition), but there are <<groupingExpressions, grouping keys>> used, `doExecute` simply returns an empty iterator
 
-* link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator]
+.. Otherwise, `doExecute` creates a <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
+
+For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
+
+For non-empty partitions or there are <<groupingExpressions, grouping keys>> used, `doExecute` returns the `TungstenAggregationIterator`.
+
+In the end, `doExecute` calculates the <<aggTime, aggTime>> metric and returns an `Iterator[UnsafeRow]` that can be as follows:
+
+* Empty
+
+* A single-element `Iterator[UnsafeRow]` with the <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
+
+* The <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>>
+
+NOTE: The <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics are used exclusively to create the <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>>.
+
+[NOTE]
+====
+`doExecute` (by `RDD.mapPartitionsWithIndex` transformation) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
+
+[source, scala]
+----
+val ids = spark.range(1)
+scala> println(ids.queryExecution.toRdd.toDebugString)
+(8) MapPartitionsRDD[12] at toRdd at <console>:29 []
+ |  MapPartitionsRDD[11] at toRdd at <console>:29 []
+ |  ParallelCollectionRDD[10] at toRdd at <console>:29 []
+
+// Use groupBy that gives HashAggregateExec operator
+val q = ids.groupBy('id).count
+scala> q.explain
+== Physical Plan ==
+*(2) HashAggregate(keys=[id#30L], functions=[count(1)])
++- Exchange hashpartitioning(id#30L, 200)
+   +- *(1) HashAggregate(keys=[id#30L], functions=[partial_count(1)])
+      +- *(1) Range (0, 1, step=1, splits=8)
+
+val rdd = q.queryExecution.toRdd
+scala> println(rdd.toDebugString)
+(200) MapPartitionsRDD[18] at toRdd at <console>:28 []
+  |   ShuffledRowRDD[17] at toRdd at <console>:28 []
+  +-(8) MapPartitionsRDD[16] at toRdd at <console>:28 []
+     |  MapPartitionsRDD[15] at toRdd at <console>:28 []
+     |  MapPartitionsRDD[14] at toRdd at <console>:28 []
+     |  ParallelCollectionRDD[13] at toRdd at <console>:28 []
+----
+====
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
