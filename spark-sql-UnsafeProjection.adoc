@@ -1,6 +1,6 @@
-== [[UnsafeProjection]] UnsafeProjection -- Generic Function to Map InternalRows to UnsafeRows
+== [[UnsafeProjection]] UnsafeProjection -- Generic Function to Encode InternalRows to UnsafeRows
 
-`UnsafeProjection` is a `Projection` function that takes link:spark-sql-InternalRow.adoc[InternalRow] and gives link:spark-sql-UnsafeRow.adoc[UnsafeRow].
+`UnsafeProjection` is a `Projection` function that encodes <<spark-sql-InternalRow.adoc#, InternalRows>> as <<spark-sql-UnsafeRow.adoc#, UnsafeRows>>.
 
 ```
 UnsafeProjection: InternalRow =[apply]=> UnsafeRow

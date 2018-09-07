@@ -36,18 +36,19 @@ The fields of a data row are placed using *field offsets*.
 
 [[mutableFieldTypes]]
 [[mutable-types]]
-UnsafeRow's mutable field link:spark-sql-DataType.adoc[data types]:
+`UnsafeRow` considers a <<spark-sql-DataType.adoc#, data type>> mutable if it is one of the following:
 
-* `BooleanType`
-* `ByteType`
-* link:spark-sql-DataType.adoc#DateType[DateType]
-* `DoubleType`
-* `FloatType`
-* `IntegerType`
-* `LongType`
-* `NullType`
-* `ShortType`
-* `TimestampType`
+* <<spark-sql-DataType.adoc#BooleanType, BooleanType>>
+* <<spark-sql-DataType.adoc#ByteType, ByteType>>
+* <<spark-sql-DataType.adoc#DateType, DateType>>
+* <<spark-sql-DataType.adoc#DecimalType, DecimalType>> (see <<isMutable, isMutable>>)
+* <<spark-sql-DataType.adoc#DoubleType, DoubleType>>
+* <<spark-sql-DataType.adoc#FloatType, FloatType>>
+* <<spark-sql-DataType.adoc#IntegerType, IntegerType>>
+* <<spark-sql-DataType.adoc#LongType, LongType>>
+* <<spark-sql-DataType.adoc#NullType, NullType>>
+* <<spark-sql-DataType.adoc#ShortType, ShortType>>
+* <<spark-sql-DataType.adoc#TimestampType, TimestampType>>
 
 `UnsafeRow` is composed of three regions:
 
@@ -59,16 +60,16 @@ That gives the property of rows being always 8-byte word aligned and so their si
 
 Equality comparision and hashing of rows can be performed on raw bytes since if two rows are identical so should be their bit-wise representation. No type-specific interpretation is required.
 
-=== [[isMutable]] `isMutable` Method
+=== [[isMutable]] `isMutable` Static Predicate
 
 [source, java]
 ----
 static boolean isMutable(DataType dt)
 ----
 
-`isMutable` is enabled (i.e. returns `true`) when the input `dt` link:spark-sql-DataType.adoc[DataType] is a <<mutableFieldTypes, mutable field type>> or link:spark-sql-DataType.adoc#DecimalType[DecimalType].
+`isMutable` is enabled (`true`) when the input <<spark-sql-DataType.adoc#, DataType>> is among the <<mutableFieldTypes, mutable field types>> or a <<spark-sql-DataType.adoc#DecimalType, DecimalType>>.
 
-Otherwise, `isMutable` is disabled (i.e. returns `false`).
+Otherwise, `isMutable` is disabled (`false`).
 
 [NOTE]
 ====
@@ -116,3 +117,14 @@ throws IOException
 void readExternal(ObjectInput in)
 throws IOException, ClassNotFoundException
 ----
+
+=== [[pointTo]] `pointTo` Method
+
+[source, java]
+----
+void pointTo(Object baseObject, long baseOffset, int sizeInBytes)
+----
+
+`pointTo`...FIXME
+
+NOTE: `pointTo` is used when...FIXME

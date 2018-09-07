@@ -1,20 +1,10 @@
 == [[StructType]] StructType -- Data Type for Schema Definition
 
-`StructType` is a built-in link:spark-sql-DataType.adoc[data type] in Spark SQL to represent a collection of link:spark-sql-StructField.adoc[StructField]s that together define a schema or its part.
+[[fields]]
+[[creating-instance]]
+`StructType` is a built-in <<spark-sql-DataType.adoc#, data type>> that is a collection of <<spark-sql-StructField.adoc#, StructFields>>.
 
-[NOTE]
-====
-`StructType` is a `Seq[StructField]` and therefore all things `Seq` apply equally here.
-
-[source, scala]
-----
-scala> schemaTyped.foreach(println)
-StructField(a,IntegerType,true)
-StructField(b,StringType,true)
-----
-
-Read the official documentation of http://www.scala-lang.org/api/current/scala/collection/Seq.html[scala.collection.Seq].
-====
+`StructType` is used to define a schema or its part.
 
 You can compare two `StructType` instances to see whether they are equal.
 
@@ -36,6 +26,20 @@ res0: Boolean = true
 ----
 
 `StructType` <<sql, presents itself>> as `<struct>` or `STRUCT` in query plans or SQL.
+
+[NOTE]
+====
+`StructType` is a `Seq[StructField]` and therefore all things `Seq` apply equally here.
+
+[source, scala]
+----
+scala> schemaTyped.foreach(println)
+StructField(a,IntegerType,true)
+StructField(b,StringType,true)
+----
+
+Read the official documentation of Scala's http://www.scala-lang.org/api/current/scala/collection/Seq.html[scala.collection.Seq].
+====
 
 === [[fromAttributes]] `fromAttributes` Method
 

@@ -2,6 +2,8 @@
 
 `TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition).
 
+`TungstenAggregationIterator` prefers hash-based aggregation (before <<switchToSortBasedAggregation, switching to sort-based aggregation>>).
+
 [source, scala]
 ----
 val q = spark.range(10).
@@ -79,6 +81,18 @@ Used when `TungstenAggregationIterator` is requested for the <<next, next Unsafe
 | [[initialAggregationBuffer]] <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> that is the aggregation buffer containing initial buffer values.
 
 Used when...FIXME
+
+| externalSorter
+| [[externalSorter]] `UnsafeKVExternalSorter` used for sort-based aggregation
+
+| sortBased
+| [[sortBased]] Flag to indicate whether `TungstenAggregationIterator` uses sort-based aggregation (not hash-based aggregation).
+
+`sortBased` flag is disabled (`false`) by default.
+
+Enabled (`true`) when `TungstenAggregationIterator` is requested to <<switchToSortBasedAggregation, switch to sort-based aggregation>>.
+
+Used when...FIXME
 |===
 
 === [[processInputs]] `processInputs` Internal Method
@@ -90,9 +104,9 @@ processInputs(fallbackStartsAt: (Int, Int)): Unit
 
 `processInputs`...FIXME
 
-NOTE: `processInputs` is used when `TungstenAggregationIterator` is <<creating-instance, created>> (and sets the internal flags to indicate whether to use a hash-based aggregation or, in the worst case, a sort-based aggregation when there is not enough memory for groups and their buffers).
+NOTE: `processInputs` is used exclusively when `TungstenAggregationIterator` is <<creating-instance, created>> (and sets the internal flags to indicate whether to use a hash-based aggregation or, in the worst case, a sort-based aggregation when there is not enough memory for groups and their buffers).
 
-=== [[switchToSortBasedAggregation]] `switchToSortBasedAggregation` Internal Method
+=== [[switchToSortBasedAggregation]] Switching to Sort-Based Aggregation (From Preferred Hash-Based Aggregation) -- `switchToSortBasedAggregation` Internal Method
 
 [source, scala]
 ----
@@ -101,7 +115,7 @@ switchToSortBasedAggregation(): Unit
 
 `switchToSortBasedAggregation`...FIXME
 
-NOTE: `switchToSortBasedAggregation` is used when `TungstenAggregationIterator` <<processInputs, processInputs>> (and `externalSorter` is used).
+NOTE: `switchToSortBasedAggregation` is used exclusively when `TungstenAggregationIterator` is requested to <<processInputs, processInputs>> (and the <<externalSorter, externalSorter>> is used).
 
 ==== [[next]] `next` Method
 
@@ -147,6 +161,8 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 NOTE: The SQL metrics (<<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>>) belong to the <<spark-sql-SparkPlan-HashAggregateExec.adoc#metrics, HashAggregateExec>> physical operator that created the `TungstenAggregationIterator`.
 
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
+
+`TungstenAggregationIterator` starts <<processInputs, processing input rows>> and pre-load the first key-value pair from the <<hashMap, UnsafeFixedWidthAggregationMap>> if did not <<sortBased, switch to sort-based aggregation>>.
 
 === [[generateResultProjection]] `generateResultProjection` Method
 
