@@ -70,7 +70,7 @@ abstract class AggregateFunction extends Expression {
 Used mostly in link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] and link:spark-sql-AggregationIterator.adoc#initializeAggregateFunctions[AggregationIterator]
 
 | [[aggBufferAttributes]] `aggBufferAttributes`
-a| Collection of `AttributeReference` objects of an aggregation buffer to hold partial aggregate results.
+a| <<spark-sql-Expression-AttributeReference.adoc#, AttributeReferences>> of an aggregation buffer to hold partial aggregate results.
 
 Used in:
 

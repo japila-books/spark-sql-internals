@@ -126,9 +126,6 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 | Name
 | Description
 
-| [[aggregateBufferAttributes]] `aggregateBufferAttributes`
-| Collection of `AttributeReference` references of the aggregate functions of the input <<aggregateExpressions, AggregateExpressions>>
-
 | [[output]] `output`
 | link:spark-sql-catalyst-QueryPlan.adoc#output[Output schema] for the input <<resultExpressions, NamedExpressions>>
 |===
@@ -174,14 +171,29 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 NOTE: The prefix for variable names for `HashAggregateExec` operators in link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code is *agg*.
 
 [[internal-registries]]
-.HashAggregateExec's Internal Registries and Counters
-[cols="1,2",options="header",width="100%"]
+.HashAggregateExec's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,2",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[testFallbackStartsAt]] `testFallbackStartsAt`
-| Optional pair of numbers for controlled fall-back to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
+| aggregateBufferAttributes
+| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes, AttributeReferences>> of the <<spark-sql-Expression-AggregateExpression.adoc#aggregateFunction, AggregateFunctions>> of the <<aggregateExpressions, AggregateExpressions>>
+
+| testFallbackStartsAt
+| [[testFallbackStartsAt]] Optional pair of numbers for controlled fall-back to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
+
+| declFunctions
+| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.adoc#, DeclarativeAggregate>> expressions (from the <<spark-sql-Expression-AggregateExpression.adoc#aggregateFunction, AggregateFunctions>> of the <<aggregateExpressions, AggregateExpressions>>)
+
+| bufferSchema
+| [[bufferSchema]] <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
+
+| groupingKeySchema
+| [[groupingKeySchema]] <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from the <<groupingAttributes, groupingAttributes>>
+
+| groupingAttributes
+| [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.adoc#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
 |===
 
 [NOTE]
@@ -379,7 +391,7 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 
 * [[requiredChildDistributionExpressions]] Required child distribution link:spark-sql-Expression.adoc[expressions]
 * [[groupingExpressions]] link:spark-sql-Expression-NamedExpression.adoc[Named expressions] for grouping keys
-* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
+* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpressions]
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
@@ -394,6 +406,6 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 createHashMap(): UnsafeFixedWidthAggregationMap
 ----
 
-`createHashMap`...FIXME
+`createHashMap` creates a <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#creating-instance, UnsafeFixedWidthAggregationMap>> (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
 NOTE: `createHashMap` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, doProduceWithKeys>>

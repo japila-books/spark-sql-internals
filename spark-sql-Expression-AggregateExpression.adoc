@@ -4,7 +4,7 @@
 
 `AggregateExpression` contains the following:
 
-* [[aggregateFunction]] link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]
+* [[aggregateFunction]] <<spark-sql-Expression-AggregateFunction.adoc#, AggregateFunction>>
 * [[mode]] `AggregateMode`
 * [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the <<aggregateFunction, aggregate function>>)
 * [[resultId]] `ExprId`

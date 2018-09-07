@@ -1,6 +1,6 @@
 == [[UnsafeFixedWidthAggregationMap]] UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer around Spark Core's <<map, BytesToBytesMap>> to allow for <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's <<map, BytesToBytesMap>> to allow for <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> keys and values.
 
 Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
 
@@ -118,7 +118,14 @@ KVIterator<UnsafeRow, UnsafeRow> iterator()
 
 `iterator`...FIXME
 
-NOTE: `iterator` is used when...FIXME
+[NOTE]
+====
+`iterator` is used when:
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate, finishAggregate>>
+
+* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, created>> (and pre-loads the first key-value pair from the map)
+====
 
 === [[getPeakMemoryUsedBytes]] `getPeakMemoryUsedBytes` Method
 
@@ -129,7 +136,14 @@ long getPeakMemoryUsedBytes()
 
 `getPeakMemoryUsedBytes`...FIXME
 
-NOTE: `getPeakMemoryUsedBytes` is used when...FIXME
+[NOTE]
+====
+`getPeakMemoryUsedBytes` is used when:
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate, finishAggregate>>
+
+* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#TaskCompletionListener, used in TaskCompletionListener>>
+====
 
 === [[getAverageProbesPerLookup]] `getAverageProbesPerLookup` Method
 
@@ -140,7 +154,14 @@ double getAverageProbesPerLookup()
 
 `getAverageProbesPerLookup`...FIXME
 
-NOTE: `getAverageProbesPerLookup` is used when...FIXME
+[NOTE]
+====
+`getAverageProbesPerLookup` is used when:
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate, finishAggregate>>
+
+* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#TaskCompletionListener, used in TaskCompletionListener>>
+====
 
 === [[free]] `free` Method
 
@@ -151,7 +172,14 @@ void free()
 
 `free`...FIXME
 
-NOTE: `free` is used when...FIXME
+[NOTE]
+====
+`free` is used when:
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate, finishAggregate>>
+
+* `TungstenAggregationIterator` is requested to <<spark-sql-TungstenAggregationIterator.adoc#processInputs, processInputs>> (when `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, created>>), <<spark-sql-TungstenAggregationIterator.adoc#next, get the next UnsafeRow>>, <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>> and is <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, created>>
+====
 
 === [[destructAndCreateExternalSorter]] `destructAndCreateExternalSorter` Method
 
@@ -162,4 +190,11 @@ UnsafeKVExternalSorter destructAndCreateExternalSorter() throws IOException
 
 `destructAndCreateExternalSorter`...FIXME
 
-NOTE: `destructAndCreateExternalSorter` is used when...FIXME
+[NOTE]
+====
+`destructAndCreateExternalSorter` is used when:
+
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate, finishAggregate>>
+
+* `TungstenAggregationIterator` is requested to <<spark-sql-TungstenAggregationIterator.adoc#processInputs, processInputs>> (when `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, created>>)
+====

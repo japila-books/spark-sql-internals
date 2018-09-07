@@ -1,6 +1,6 @@
 == [[TungstenAggregationIterator]] TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator
 
-`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition).
+`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition and calculate aggregations).
 
 `TungstenAggregationIterator` prefers hash-based aggregation (before <<switchToSortBasedAggregation, switching to sort-based aggregation>>).
 
@@ -117,7 +117,7 @@ switchToSortBasedAggregation(): Unit
 
 NOTE: `switchToSortBasedAggregation` is used exclusively when `TungstenAggregationIterator` is requested to <<processInputs, processInputs>> (and the <<externalSorter, externalSorter>> is used).
 
-==== [[next]] `next` Method
+==== [[next]] Getting Next UnsafeRow -- `next` Method
 
 [source, scala]
 ----
@@ -162,7 +162,7 @@ NOTE: The SQL metrics (<<numOutputRows, numOutputRows>>, <<peakMemory, peakMemor
 
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
 
-`TungstenAggregationIterator` starts <<processInputs, processing input rows>> and pre-load the first key-value pair from the <<hashMap, UnsafeFixedWidthAggregationMap>> if did not <<sortBased, switch to sort-based aggregation>>.
+`TungstenAggregationIterator` starts <<processInputs, processing input rows>> and pre-loads the first key-value pair from the <<hashMap, UnsafeFixedWidthAggregationMap>> if did not <<sortBased, switch to sort-based aggregation>>.
 
 === [[generateResultProjection]] `generateResultProjection` Method
 
