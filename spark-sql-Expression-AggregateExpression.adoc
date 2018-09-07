@@ -15,7 +15,7 @@
 
 * `UserDefinedAggregateFunction` is created with `isDistinct` flag link:spark-sql-UserDefinedAggregateFunction.adoc#apply[disabled] or link:spark-sql-UserDefinedAggregateFunction.adoc#distinct[enabled]
 
-* link:spark-sql-SparkStrategy-Aggregation.adoc#planAggregateWithOneDistinct[AggUtils.planAggregateWithOneDistinct] (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
+* `AggUtils` is requested to <<spark-sql-AggUtils.adoc#planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
 * `Aggregator` is requested for a link:spark-sql-TypedColumn.adoc[TypedColumn] (using `Aggregator.toColumn`)
 

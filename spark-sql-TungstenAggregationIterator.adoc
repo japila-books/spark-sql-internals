@@ -41,7 +41,7 @@ When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metr
 
 * <<numOutputRows, numOutputRows>> is used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>> (and it <<hasNext, has one>>)
 
-* <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> are used at the <<addTaskCompletionListener, end of every task>> (one per partition)
+* <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> are used at the <<TaskCompletionListener, end of every task>> (one per partition)
 
 The metrics are then displayed as part of <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator (e.g. in web UI in <<spark-sql-webui.adoc#ExecutionPage, Details for Query>>).
 
@@ -61,7 +61,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 Used when...FIXME
 
 | hashMap
-a| [[hashMap]] `UnsafeFixedWidthAggregationMap` that is created with the following:
+a| [[hashMap]] <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#, UnsafeFixedWidthAggregationMap>> with the following:
 
 * <<initialAggregationBuffer, initialAggregationBuffer>>
 
@@ -73,7 +73,7 @@ a| [[hashMap]] `UnsafeFixedWidthAggregationMap` that is created with the followi
 
 * The page size of the `TaskMemoryManager` (defaults to `spark.buffer.pageSize` configuration)
 
-Used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>>, to <<outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>, <<processInputs, processInputs>>, to initialize the <<aggregationBufferMapIterator, aggregationBufferMapIterator>> and <<addTaskCompletionListener, every time a partition has been processed>>.
+Used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>>, to <<outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>, <<processInputs, processInputs>>, to initialize the <<aggregationBufferMapIterator, aggregationBufferMapIterator>> and <<TaskCompletionListener, every time a partition has been processed>>.
 
 | initialAggregationBuffer
 | [[initialAggregationBuffer]] <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> that is the aggregation buffer containing initial buffer values.
@@ -170,7 +170,7 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 NOTE: `outputForEmptyGroupingKeyWithoutInput` is used when...FIXME
 
-=== [[addTaskCompletionListener]] `addTaskCompletionListener`
+=== [[TaskCompletionListener]] TaskCompletionListener
 
 `TungstenAggregationIterator` registers a `TaskCompletionListener` that is executed on task completion (for every task that processes a partition).
 

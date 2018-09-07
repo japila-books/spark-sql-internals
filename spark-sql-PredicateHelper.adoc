@@ -1,6 +1,6 @@
 == [[PredicateHelper]] PredicateHelper Scala Trait
 
-`PredicateHelper` is a set of helper methods that different parts of Spark SQL use for working with predicates (mainly).
+`PredicateHelper` defines the <<methods, methods>> that are used to work with predicates (mainly).
 
 [[methods]]
 .PredicateHelper's Methods

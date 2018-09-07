@@ -172,7 +172,7 @@ Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnable
 
 | `spark.sql.execution.useObjectHashAggregateExec`
 | `true`
-| [[spark.sql.execution.useObjectHashAggregateExec]] Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] in link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[Aggregation] execution planning strategy.
+| [[spark.sql.execution.useObjectHashAggregateExec]] Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] when <<spark-sql-SparkStrategy-Aggregation.adoc#, Aggregation>> execution planning strategy is executed.
 
 Use link:spark-sql-SQLConf.adoc#useObjectHashAggregation[SQLConf.useObjectHashAggregation] method to access the current value.
 

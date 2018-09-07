@@ -1,0 +1,14 @@
+== [[UnsafeFixedWidthAggregationMap]] UnsafeFixedWidthAggregationMap
+
+`UnsafeFixedWidthAggregationMap` is...FIXME
+
+=== [[supportsAggregationBufferSchema]] `supportsAggregationBufferSchema` Static Method
+
+[source, java]
+----
+boolean supportsAggregationBufferSchema(StructType schema)
+----
+
+`supportsAggregationBufferSchema`...FIXME
+
+NOTE: `supportsAggregationBufferSchema` is used exclusively when `HashAggregateExec` is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#supportsAggregate, supportsAggregate>>.

@@ -1,6 +1,6 @@
 == [[SubExprUtils]] SubExprUtils Helper Object
 
-`SubExprUtils` is a Scala object that...FIXME
+`SubExprUtils` is a Scala object that is used for...FIXME
 
 `SubExprUtils` uses link:spark-sql-PredicateHelper.adoc[PredicateHelper] for...FIXME
 

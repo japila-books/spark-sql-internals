@@ -74,7 +74,7 @@ Otherwise, `isMutable` is disabled (i.e. returns `false`).
 ====
 `isMutable` is used when:
 
-* `UnsafeFixedWidthAggregationMap` does `supportsAggregationBufferSchema`
+* `UnsafeFixedWidthAggregationMap` is requested to <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#supportsAggregationBufferSchema, supportsAggregationBufferSchema>>
 
 * `SortBasedAggregationIterator` is requested for <<spark-sql-SortBasedAggregationIterator.adoc#newBuffer, newBuffer>>
 ====

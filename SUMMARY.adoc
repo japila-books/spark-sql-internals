@@ -642,8 +642,8 @@
 .. link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator]
 
 . link:spark-sql-CatalystSerde.adoc[CatalystSerde]
-
 . link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)]
+. link:spark-sql-UnsafeFixedWidthAggregationMap.adoc[UnsafeFixedWidthAggregationMap]
 
 == SQL Support
 
@@ -671,6 +671,7 @@
 . link:spark-sql-PredicateHelper.adoc[PredicateHelper Scala Trait]
 
 . link:spark-sql-SchemaUtils.adoc[SchemaUtils Helper Object]
+. link:spark-sql-AggUtils.adoc[AggUtils Helper Object]
 
 . link:spark-sql-ScalaReflection.adoc[ScalaReflection]
 . link:spark-sql-CreateStruct.adoc[CreateStruct Function Builder]

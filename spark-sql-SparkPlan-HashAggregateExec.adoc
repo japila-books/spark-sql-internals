@@ -1,6 +1,6 @@
 == [[HashAggregateExec]] HashAggregateExec Aggregate Physical Operator for Hash-Based Aggregation
 
-`HashAggregateExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[AggUtils.createAggregate]) when:
+`HashAggregateExec` is a link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>>) when:
 
 * link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation] execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
 
@@ -154,7 +154,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 
 [NOTE]
 ====
-`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[AggUtils.createAggregate] and is undefined by default.
+`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>> and is undefined by default.
 
 ---
 
@@ -279,16 +279,23 @@ generateResultFunction(ctx: CodegenContext): String
 
 NOTE: `generateResultFunction` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, doProduceWithKeys>> (when `HashAggregateExec` physical operator is requested to <<doProduce, generate the Java source code for "produce" path in whole-stage code generation>>)
 
-=== [[supportsAggregate]] `supportsAggregate` Method
+=== [[supportsAggregate]] `supportsAggregate` Object Method
 
 [source, scala]
 ----
 supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 ----
 
-`supportsAggregate` first link:spark-sql-StructType.adoc#fromAttributes[builds the schema] of the aggregation buffer (from the input `aggregateBufferAttributes` attributes) and checks if `UnsafeFixedWidthAggregationMap` supports it (i.e. the schema uses link:spark-sql-UnsafeRow.adoc#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an link:spark-sql-UnsafeRow.adoc[UnsafeRow]).
+`supportsAggregate` firstly <<spark-sql-StructType.adoc#fromAttributes, creates the schema>> (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses link:spark-sql-UnsafeRow.adoc#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an link:spark-sql-UnsafeRow.adoc[UnsafeRow]).
 
-NOTE: `supportsAggregate` is used exclusively when `AggUtils.createAggregate` link:spark-sql-SparkStrategy-Aggregation.adoc#AggUtils-createAggregate[selects an aggregate physical operator given aggregate expressions].
+[NOTE]
+====
+`supportsAggregate` is used when:
+
+* `AggUtils` is requested to <<spark-sql-AggUtils.adoc#createAggregate, creates an aggregate physical operator given aggregate expressions>>
+
+* `HashAggregateExec` physical operator is <<creating-instance, created>> (to assert that the <<aggregateBufferAttributes, aggregateBufferAttributes>> are supported)
+====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

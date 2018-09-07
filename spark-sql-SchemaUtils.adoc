@@ -1,6 +1,10 @@
 == [[SchemaUtils]] SchemaUtils Helper Object
 
-`SchemaUtils` is a Scala object that is used to <<checkColumnNameDuplication, checkColumnNameDuplication>> and <<checkSchemaColumnNameDuplication, checkSchemaColumnNameDuplication>>.
+`SchemaUtils` is a Scala object that is used for the following:
+
+* <<checkColumnNameDuplication, checkColumnNameDuplication>>
+
+* <<checkSchemaColumnNameDuplication, checkSchemaColumnNameDuplication>>
 
 === [[checkColumnNameDuplication]] `checkColumnNameDuplication` Method
 

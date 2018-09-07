@@ -1,6 +1,6 @@
 == [[StatFunctions]] StatFunctions Helper Object
 
-`StatFunctions` is a Scala object that offers the <<methods, methods>> that are used for...FIXME
+`StatFunctions` is a Scala object that defines the <<methods, methods>> that are used for...FIXME
 
 [[methods]]
 .StatFunctions API
