@@ -6,9 +6,9 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 
 `UnsafeFixedWidthAggregationMap` is <<creating-instance, created>> when:
 
-* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#createHashMap, createHashMap>>
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#createHashMap, create a new UnsafeFixedWidthAggregationMap>> (when `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithKeys, generate the Java source code for "produce" path in Whole-Stage Code Generation>>)
 
-* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#hashMap, created>>
+* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.adoc#hashMap, created>> (when `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute, execute>> in traditional / non-Whole-Stage-Code-Generation execution path)
 
 [[internal-registries]]
 .UnsafeFixedWidthAggregationMap's Internal Properties (e.g. Registries, Counters and Flags)

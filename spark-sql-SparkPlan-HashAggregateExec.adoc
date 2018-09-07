@@ -258,7 +258,7 @@ NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenS
 
 `doConsume` executes <<doConsumeWithoutKeys, doConsumeWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doConsumeWithKeys, doConsumeWithKeys>> otherwise.
 
-=== [[doProduceWithKeys]] Generating Java Source Code (For "produce" Path In Whole-Stage Code Generation) -- `doProduceWithKeys` Internal Method
+=== [[doProduceWithKeys]] Generating Java Source Code For "produce" Path (In Whole-Stage Code Generation) -- `doProduceWithKeys` Internal Method
 
 [source, scala]
 ----
@@ -408,4 +408,4 @@ createHashMap(): UnsafeFixedWidthAggregationMap
 
 `createHashMap` creates a <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#creating-instance, UnsafeFixedWidthAggregationMap>> (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
-NOTE: `createHashMap` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, doProduceWithKeys>>
+NOTE: `createHashMap` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, generate the Java source code for "produce" path (in Whole-Stage Code Generation)>>.

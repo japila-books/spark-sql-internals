@@ -1,6 +1,6 @@
 == [[TungstenAggregationIterator]] TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator
 
-`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that is used exclusively when the <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>> aggregate physical operator is executed (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition and calculate aggregations).
+`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.adoc#, AggregationIterator>> that the `HashAggregateExec` aggregate physical operator uses when <<spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute, executed>> (to process <<spark-sql-UnsafeRow.adoc#, UnsafeRows>> per partition and calculate aggregations).
 
 `TungstenAggregationIterator` prefers hash-based aggregation (before <<switchToSortBasedAggregation, switching to sort-based aggregation>>).
 
