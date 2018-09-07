@@ -1,6 +1,8 @@
 == [[UnsafeFixedWidthAggregationMap]] UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is...FIXME
+`UnsafeFixedWidthAggregationMap` is a tiny layer around Spark Core's <<map, BytesToBytesMap>> to allow for <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> keys and values.
+
+Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
 
 `UnsafeFixedWidthAggregationMap` is <<creating-instance, created>> when:
 
@@ -27,7 +29,7 @@ Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggr
 | [[groupingKeyProjection]] <<spark-sql-UnsafeProjection.adoc#, UnsafeProjection>> for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
 
 | map
-| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled
+a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled
 |===
 
 === [[supportsAggregationBufferSchema]] `supportsAggregationBufferSchema` Static Method
@@ -83,6 +85,8 @@ UnsafeRow getAggregationBufferFromUnsafeRow(UnsafeRow key, int hash)
 ----
 <1> Uses the hash code of the key
 
+`getAggregationBufferFromUnsafeRow` requests the <<map, BytesToBytesMap>> to `lookup` the input `key` (to get a `BytesToBytesMap.Location`).
+
 `getAggregationBufferFromUnsafeRow`...FIXME
 
 [NOTE]
@@ -104,3 +108,58 @@ UnsafeRow getAggregationBuffer(InternalRow groupingKey)
 `getAggregationBuffer`...FIXME
 
 NOTE: `getAggregationBuffer` seems to be used exclusively for testing.
+
+=== [[iterator]] Getting KVIterator -- `iterator` Method
+
+[source, java]
+----
+KVIterator<UnsafeRow, UnsafeRow> iterator()
+----
+
+`iterator`...FIXME
+
+NOTE: `iterator` is used when...FIXME
+
+=== [[getPeakMemoryUsedBytes]] `getPeakMemoryUsedBytes` Method
+
+[source, java]
+----
+long getPeakMemoryUsedBytes()
+----
+
+`getPeakMemoryUsedBytes`...FIXME
+
+NOTE: `getPeakMemoryUsedBytes` is used when...FIXME
+
+=== [[getAverageProbesPerLookup]] `getAverageProbesPerLookup` Method
+
+[source, java]
+----
+double getAverageProbesPerLookup()
+----
+
+`getAverageProbesPerLookup`...FIXME
+
+NOTE: `getAverageProbesPerLookup` is used when...FIXME
+
+=== [[free]] `free` Method
+
+[source, java]
+----
+void free()
+----
+
+`free`...FIXME
+
+NOTE: `free` is used when...FIXME
+
+=== [[destructAndCreateExternalSorter]] `destructAndCreateExternalSorter` Method
+
+[source, java]
+----
+UnsafeKVExternalSorter destructAndCreateExternalSorter() throws IOException
+----
+
+`destructAndCreateExternalSorter`...FIXME
+
+NOTE: `destructAndCreateExternalSorter` is used when...FIXME
