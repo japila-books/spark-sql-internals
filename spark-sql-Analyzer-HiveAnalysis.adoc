@@ -1,4 +1,4 @@
-== [[HiveAnalysis]] HiveAnalysis Logical PostHoc Resolution Rule
+== [[HiveAnalysis]] HiveAnalysis PostHoc Logical Resolution Rule
 
 `HiveAnalysis` is a link:spark-sql-HiveSessionStateBuilder.adoc#postHocResolutionRules[logical posthoc resolution rule] that the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, FIXME>>.
 

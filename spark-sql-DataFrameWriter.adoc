@@ -1,64 +1,66 @@
 == [[DataFrameWriter]] DataFrameWriter -- Saving Data To External Data Sources
 
-`DataFrameWriter` is the <<methods, public interface>> to describe how data (as the result of executing a structured query) should be <<save, saved to an external data source>> (storage system).
+`DataFrameWriter` is the <<methods, interface>> to describe how data (as the result of executing a structured query) should be <<save, saved to an external data source>>.
 
 [[methods]]
-.DataFrameWriter API
+.DataFrameWriter API / Writing Operators
 [cols="1,2",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| <<bucketBy, bucketBy>>
-a|
+| <<bucketBy-internals, bucketBy>>
+a| [[bucketBy]]
 
 [source, scala]
 ----
 bucketBy(numBuckets: Int, colName: String, colNames: String*): DataFrameWriter[T]
 ----
 
-| <<csv, csv>>
-a|
+| <<csv-internals, csv>>
+a| [[csv]]
 
 [source, scala]
 ----
 csv(path: String): Unit
 ----
 
-| <<format, format>>
-a|
+| <<format-internals, format>>
+a| [[format]]
 
 [source, scala]
 ----
 format(source: String): DataFrameWriter[T]
 ----
 
-| <<insertInto, insertInto>>
-a| Inserts a DataFrame into a table
+| <<insertInto-internals, insertInto>>
+a| [[insertInto]]
 
 [source, scala]
 ----
 insertInto(tableName: String): Unit
 ----
 
-| <<jdbc, jdbc>>
-a|
+Inserts (the results of) a `DataFrame` into a table
+
+| <<jdbc-internals, jdbc>>
+a| [[jdbc]]
 
 [source, scala]
 ----
 jdbc(url: String, table: String, connectionProperties: Properties): Unit
 ----
 
-| <<json, json>>
-a|
+| <<json-internals, json>>
+a| [[json]]
 
 [source, scala]
 ----
 json(path: String): Unit
 ----
 
-| <<mode, mode>>
-a|
+| <<mode-internals, mode>>
+a| [[mode]]
 
 [source, scala]
 ----
@@ -66,8 +68,8 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 mode(saveMode: String): DataFrameWriter[T]
 ----
 
-| <<option, option>>
-a|
+| <<option-internals, option>>
+a| [[option]]
 
 [source, scala]
 ----
@@ -77,40 +79,40 @@ option(key: String, value: Long): DataFrameWriter[T]
 option(key: String, value: Double): DataFrameWriter[T]
 ----
 
-| <<options, options>>
-a|
+| <<options-internals, options>>
+a| [[options]]
 
 [source, scala]
 ----
 options(options: scala.collection.Map[String, String]): DataFrameWriter[T]
 ----
 
-| <<orc, orc>>
-a|
+| <<orc-internals, orc>>
+a| [[orc]]
 
 [source, scala]
 ----
 orc(path: String): Unit
 ----
 
-| <<parquet, parquet>>
-a|
+| <<parquet-internals, parquet>>
+a| [[parquet]]
 
 [source, scala]
 ----
 parquet(path: String): Unit
 ----
 
-| <<partitionBy, partitionBy>>
-a|
+| <<partitionBy-internals, partitionBy>>
+a| [[partitionBy]]
 
 [source, scala]
 ----
 partitionBy(colNames: String*): DataFrameWriter[T]
 ----
 
-| <<save, save>>
-a|
+| <<save-internals, save>>
+a| [[save]]
 
 [source, scala]
 ----
@@ -118,24 +120,24 @@ save(): Unit
 save(path: String): Unit
 ----
 
-| <<saveAsTable, saveAsTable>>
-a|
+| <<saveAsTable-internals, saveAsTable>>
+a| [[saveAsTable]]
 
 [source, scala]
 ----
 saveAsTable(tableName: String): Unit
 ----
 
-| <<sortBy, sortBy>>
-a|
+| <<sortBy-internals, sortBy>>
+a| [[sortBy]]
 
 [source, scala]
 ----
 sortBy(colName: String, colNames: String*): DataFrameWriter[T]
 ----
 
-| <<text, text>>
-a|
+| <<text-internals, text>>
+a| [[text]]
 
 [source, scala]
 ----
@@ -143,16 +145,20 @@ text(path: String): Unit
 ----
 |===
 
-`DataFrameWriter` is available using link:spark-sql-DataFrame.adoc#write[write] method of a `Dataset`.
+`DataFrameWriter` is available using <<spark-sql-DataFrame.adoc#write, Dataset.write>> operator.
 
 [source, scala]
 ----
-import org.apache.spark.sql.DataFrameWriter
-val nums: Dataset[Long] = ...
-val writer: DataFrameWriter[Long] = nums.write
+scala> :type df
+org.apache.spark.sql.DataFrame
+
+val writer = df.write
+
+scala> :type writer
+org.apache.spark.sql.DataFrameWriter[org.apache.spark.sql.Row]
 ----
 
-`DataFrameWriter` has a direct support for many <<writing-dataframes-to-files, file formats>>, <<jdbc, JDBC databases>> and an extension point to plug in <<format, new formats>>.
+`DataFrameWriter` supports many <<writing-dataframes-to-files, file formats>> and <<jdbc, JDBC databases>>. It also allows for plugging in <<format, new formats>>.
 
 `DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using link:spark-sql-properties.adoc[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
 
@@ -182,31 +188,31 @@ writer.save
 
 [[internal-attributes-and-corresponding-setters]]
 .Internal Attributes and Corresponding Setters
-[cols="1,2",options="header"]
+[cols="1m,2",options="header"]
 |===
 | Attribute
 | Setters
 
-| [[source]] `source`
-| <<format, format>>
+| source
+| [[source]] <<format, format>>
 
-| `mode`
-| <<mode, mode>>
+| mode
+| [[mode-internal-property]] <<mode, mode>>
 
-| [[extraOptions]] `extraOptions`
-| <<option, option>>, <<options, options>>, <<save, save>>
+| extraOptions
+| [[extraOptions]] <<option, option>>, <<options, options>>, <<save, save>>
 
-| [[partitioningColumns]] `partitioningColumns`
-| <<partitionBy, partitionBy>>
+| partitioningColumns
+| [[partitioningColumns]] <<partitionBy, partitionBy>>
 
-| [[bucketColumnNames]] `bucketColumnNames`
-| <<bucketBy, bucketBy>>
+| bucketColumnNames
+| [[bucketColumnNames]] <<bucketBy, bucketBy>>
 
-| [[numBuckets]] `numBuckets`
-| <<bucketBy, bucketBy>>
+| numBuckets
+| [[numBuckets]] <<bucketBy, bucketBy>>
 
-| [[sortColumnNames]] `sortColumnNames`
-| <<sortBy, sortBy>>
+| sortColumnNames
+| [[sortColumnNames]] <<sortBy, sortBy>>
 |===
 
 [[df]]
@@ -235,7 +241,7 @@ In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` 
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
-=== [[saveAsTable]] Saving Rows of Structured Streaming (DataFrame) to Table -- `saveAsTable` Method
+=== [[saveAsTable-internals]] Saving Rows of Structured Streaming (DataFrame) to Table -- `saveAsTable` Method
 
 [source, scala]
 ----
@@ -297,7 +303,7 @@ In the end, `saveAsTable` branches off per whether the table exists or not and t
 | <<createTable, createTable>>
 |===
 
-=== [[save]] Saving Rows of Structured Query (DataFrame) to Data Source -- `save` Method
+=== [[save-internals]] Saving Rows of Structured Query (DataFrame) to Data Source -- `save` Method
 
 [source, scala]
 ----
@@ -335,7 +341,7 @@ Hive data source can only be used with tables, you can not write files of Hive d
 '[operation]' does not support bucketing right now
 ```
 
-=== [[jdbc]] Saving Data to Table Using JDBC Data Source -- `jdbc` Method
+=== [[jdbc-internals]] Saving Data to Table Using JDBC Data Source -- `jdbc` Method
 
 [source, scala]
 ----
@@ -358,7 +364,7 @@ When `table` exists and the <<mode, override save mode>> is in use, `DROP TABLE 
 
 It creates the input `table` (using `CREATE TABLE table (schema)` where `schema` is the schema of the `DataFrame`).
 
-=== [[bucketBy]] `bucketBy` Method
+=== [[bucketBy-internals]] `bucketBy` Method
 
 [source, scala]
 ----
@@ -388,7 +394,7 @@ partitionBy(colNames: String*): DataFrameWriter[T]
 
 CAUTION: FIXME
 
-=== [[mode]] Specifying Save Mode -- `mode` Method
+=== [[mode-internals]] Specifying Save Mode -- `mode` Method
 
 [source, scala]
 ----
@@ -418,7 +424,7 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 | [[Overwrite]] Existing data is overwritten by new records.
 |===
 
-=== [[sortBy]] Specifying Sorting Columns -- `sortBy` Method
+=== [[sortBy-internals]] Specifying Sorting Columns -- `sortBy` Method
 
 [source, scala]
 ----
@@ -431,17 +437,39 @@ NOTE: `sortBy` must be used together with <<bucketBy, bucketBy>> or `DataFrameWr
 
 NOTE: <<assertNotBucketed, assertNotBucketed>> asserts that bucketing is not used by some methods.
 
-=== [[option]][[options]] Writer Configuration -- `option` and `options` Methods
+=== [[option-internals]] Specifying Writer Configuration -- `option` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+option(key: String, value: Boolean): DataFrameWriter[T]
+option(key: String, value: Double): DataFrameWriter[T]
+option(key: String, value: Long): DataFrameWriter[T]
+option(key: String, value: String): DataFrameWriter[T]
+----
+
+`option`...FIXME
+
+=== [[options-internals]] Specifying Writer Configuration -- `options` Method
+
+[source, scala]
+----
+options(options: scala.collection.Map[String, String]): DataFrameWriter[T]
+----
+
+`options`...FIXME
 
 === [[writing-dataframes-to-files]] Writing DataFrames to Files
 
 CAUTION: FIXME
 
-=== [[format]] Specifying Alias or Fully-Qualified Class Name of DataSource -- `format` Method
+=== [[format-internals]] Specifying Data Source (by Alias or Fully-Qualified Class Name) -- `format` Method
 
-CAUTION: FIXME Compare to DataFrameReader.
+[source, scala]
+----
+format(source: String): DataFrameWriter[T]
+----
+
+`format` simply sets the <<source, source>> internal property.
 
 === [[parquet]] Parquet
 
@@ -449,7 +477,7 @@ CAUTION: FIXME
 
 NOTE: Parquet is the default data source format.
 
-=== [[insertInto]] Inserting Rows of Structured Streaming (DataFrame) into Table -- `insertInto` Method
+=== [[insertInto-internals]] Inserting Rows of Structured Streaming (DataFrame) into Table -- `insertInto` Method
 
 [source, scala]
 ----
@@ -512,9 +540,9 @@ org.apache.spark.sql.AnalysisException: insertInto() can't be used together with
 getBucketSpec: Option[BucketSpec]
 ----
 
-`getBucketSpec` creates a link:spark-sql-BucketSpec.adoc#creating-instance[BucketSpec] with <<numBuckets, numBuckets>>, <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>.
+`getBucketSpec` returns a new <<spark-sql-BucketSpec.adoc#, BucketSpec>> if <<numBuckets, numBuckets>> was defined (with <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>).
 
-`getBucketSpec` reports a `IllegalArgumentException` when <<numBuckets, numBuckets>> are not defined when <<sortColumnNames, sortColumnNames>> are.
+`getBucketSpec` throws an `IllegalArgumentException` when <<numBuckets, numBuckets>> are not defined when <<sortColumnNames, sortColumnNames>> are.
 
 ```
 sortBy must be used together with bucketBy
@@ -529,15 +557,15 @@ NOTE: `getBucketSpec` is used exclusively when `DataFrameWriter` is requested to
 createTable(tableIdent: TableIdentifier): Unit
 ----
 
-`createTable` requests `DataSource` to link:spark-sql-DataSource.adoc#buildStorageFormatFromOptions[buildStorageFormatFromOptions] for <<extraOptions, extraOptions>>.
+`createTable` <<spark-sql-DataSource.adoc#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
 
 `createTable` assumes `CatalogTableType.EXTERNAL` when link:spark-sql-CatalogStorageFormat.adoc#locationUri[location URI] of `CatalogStorageFormat` is defined and `CatalogTableType.MANAGED` otherwise.
 
-`createTable` creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable].
+`createTable` creates a <<spark-sql-CatalogTable.adoc#, CatalogTable>> (with the <<spark-sql-CatalogTable.adoc#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
 
-In the end, `createTable` creates a link:spark-sql-LogicalPlan-CreateTable.adoc#creating-instance[CreateTable] (with the table description, <<mode, mode>> and the link:spark-sql-Dataset.adoc#logicalPlan[logical query plan] of the dataset) and <<runCommand, runs>> it.
+In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.adoc#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<spark-sql-Dataset.adoc#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
 
-NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTable>>.
+NOTE: `createTable` is used when `DataFrameWriter` is requested to <<saveAsTable, saveAsTable>>.
 
 === [[assertNotBucketed]] `assertNotBucketed` Internal Method
 
@@ -546,7 +574,7 @@ NOTE: `createTable` is used when `DataFrameWriter` does <<saveAsTable, saveAsTab
 assertNotBucketed(operation: String): Unit
 ----
 
-`assertNotBucketed` checks whether <<numBuckets, numBuckets>> or <<sortColumnNames, sortColumnNames>> are defined and if they do reports an `AnalysisException`:
+`assertNotBucketed` simply throws an `AnalysisException` if either <<numBuckets, numBuckets>> or <<sortColumnNames, sortColumnNames>> internal property is defined:
 
 ```
 '[operation]' does not support bucketing right now
@@ -577,3 +605,68 @@ The <<spark-sql-DataSource.adoc#planForWriting, logical command for writing>> ca
 ====
 
 NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> writers with `WriteSupport`).
+
+=== [[assertNotPartitioned]] `assertNotPartitioned` Internal Method
+
+[source, scala]
+----
+assertNotPartitioned(operation: String): Unit
+----
+
+`assertNotPartitioned`...FIXME
+
+NOTE: `assertNotPartitioned` is used when...FIXME
+
+=== [[csv-internals]] `csv` Method
+
+[source, scala]
+----
+csv(path: String): Unit
+----
+
+`csv`...FIXME
+
+=== [[json-internals]] `json` Method
+
+[source, scala]
+----
+json(path: String): Unit
+----
+
+`json`...FIXME
+
+=== [[orc-internals]] `orc` Method
+
+[source, scala]
+----
+orc(path: String): Unit
+----
+
+`orc`...FIXME
+
+=== [[parquet-internals]] `parquet` Method
+
+[source, scala]
+----
+parquet(path: String): Unit
+----
+
+`parquet`...FIXME
+
+=== [[text-internals]] `text` Method
+
+[source, scala]
+----
+text(path: String): Unit
+----
+
+`text`...FIXME
+
+=== [[partitionBy]] `partitionBy` Method
+
+[source, scala]
+----
+partitionBy(colNames: String*): DataFrameWriter[T]
+----
+
+`partitionBy` simply sets the <<partitioningColumns, partitioningColumns>> internal property.

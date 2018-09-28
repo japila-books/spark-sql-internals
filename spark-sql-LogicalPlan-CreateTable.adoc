@@ -1,20 +1,25 @@
 == [[CreateTable]] CreateTable Logical Operator
 
-`CreateTable` is...FIXME
+`CreateTable` is a <<spark-sql-LogicalPlan.adoc#, logical operator>> that represents (is <<creating-instance, created>> for) the following:
 
-`CreateTable` is <<creating-instance, created>> when:
+* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable] (when requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
 
-. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable] (when `DataFrameWriter` does link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
+* `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
 
-. `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
+* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[create a table]
 
-. `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[create a table]
+`CreateTable` requires that the <<spark-sql-CatalogTable.adoc#provider, table provider>> of the <<tableDesc, CatalogTable>> is defined or throws an `AssertionError`:
 
-`CreateTable` is transformed in the following logical resolution rules:
+```
+assertion failed: The table to be created must have a provider.
+```
 
-* (for non-hive data source tables) link:spark-sql-Analyzer-DataSourceAnalysis.adoc#apply[DataSourceAnalysis] posthoc logical resolution rule to a link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand] and link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical commands
+[[resolved]]
+`CreateTable` can never be <<spark-sql-Expression.adoc#resolved, resolved>> and is replaced (_resolved_) with a logical command at analysis phase in the following rules:
 
-* (for hive tables) link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc#apply[ResolveHiveSerdeTable] and link:spark-sql-Analyzer-HiveAnalysis.adoc#apply[HiveAnalysis] logical rules
+* (for non-hive data source tables) <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#, CreateDataSourceTableCommand>> or a <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command (when the <<query, query>> was defined or not, respectively)
+
+* (for hive tables) <<spark-sql-Analyzer-HiveAnalysis.adoc#, HiveAnalysis>> post-hoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateTableCommand.adoc#, CreateTableCommand>> or a <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>> logical command (when <<query, query>> was defined or not, respectively)
 
 === [[creating-instance]] Creating CreateTable Instance
 

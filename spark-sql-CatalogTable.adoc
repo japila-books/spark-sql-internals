@@ -130,9 +130,9 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 * [[tableType]] `CatalogTableType`
 * [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
-* [[provider]] Optional provider name
+* [[provider]] Name of the table provider (optional)
 * [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] Optional link:spark-sql-BucketSpec.adoc[bucketing specification]
+* [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (optional)
 * [[owner]] Owner
 * [[createTime]] Create time
 * [[lastAccessTime]] Last access time
