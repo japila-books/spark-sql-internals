@@ -1,6 +1,6 @@
 == [[CatalogTable]] CatalogTable -- Table Metadata in Session-Scoped Catalog
 
-`CatalogTable` is the metadata of a table in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
+`CatalogTable` is the metadata of a table (*table metadata*) in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
 
 [source, scala]
 ----
