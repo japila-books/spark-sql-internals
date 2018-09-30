@@ -1,13 +1,15 @@
 == [[BucketSpec]] BucketSpec -- Bucketing Specification
 
 [[creating-instance]]
-`BucketSpec` is a metadata of a link:spark-sql-bucketing.adoc[bucketing] of a table:
+`BucketSpec` is a *bucketing specification* of a table, i.e. the metadata of link:spark-sql-bucketing.adoc[bucketing] of a table.
+
+`BucketSpec` includes the following:
 
 * [[numBuckets]] Number of buckets
-* [[bucketColumnNames]] Bucket column names
-* [[sortColumnNames]] Column names for sorting
+* [[bucketColumnNames]] Names of the columns used for buckets (_bucket column names_)
+* [[sortColumnNames]] Names of the columns used for sorting (_sort column names_)
 
-NOTE: The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusive.
+NOTE: The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusive (or an `AnalysisException` is thrown).
 
 `BucketSpec` is <<creating-instance, created>> when:
 
@@ -44,11 +46,13 @@ scala> println(bucketSpec)
 toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ----
 
-`toLinkedHashMap` gives a collection of pairs:
+`toLinkedHashMap` gives a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
 
-* Num Buckets
-* Bucket Columns
-* Sort Columns
+* *Num Buckets* with the <<numBuckets, numBuckets>>
+* *Bucket Columns* with the <<bucketColumnNames, bucketColumnNames>>
+* *Sort Columns* with the <<sortColumnNames, sortColumnNames>>
+
+`toLinkedHashMap` quotes the column names.
 
 [source, scala]
 ----
@@ -60,7 +64,7 @@ Map(Num Buckets -> 8, Bucket Columns -> [`col1`], Sort Columns -> [`col2`])
 ====
 `toLinkedHashMap` is used when:
 
-* `CatalogTable` is requested to link:spark-sql-CatalogTable.adoc#toLinkedHashMap[toLinkedHashMap]
+* `CatalogTable` is requested for <<spark-sql-CatalogTable.adoc#toLinkedHashMap, toLinkedHashMap>>
 
-* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run] with a non-empty <<partitionSpec, partitionSpec>> and the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on (that boils down to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedDetailedPartitionInfo[describeFormattedDetailedPartitionInfo]).
+* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>> with a non-empty <<partitionSpec, partitionSpec>> and the <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended, isExtended>> flag on (that uses <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedDetailedPartitionInfo, describeFormattedDetailedPartitionInfo>>).
 ====

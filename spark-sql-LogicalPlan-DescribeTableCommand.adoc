@@ -33,6 +33,7 @@ spark.sharedState.externalCatalog.dropTable(
 spark.range(10).write.bucketBy(5, "id").saveAsTable("bucketed")
 assert(spark.catalog.tableExists("bucketed"))
 
+// EXTENDED to include Detailed Table Information
 scala> sql("DESC EXTENDED bucketed").show(numRows = 50, truncate = false)
 +----------------------------+-----------------------------------------------------------------------------+-------+
 |col_name                    |data_type                                                                    |comment|
