@@ -171,11 +171,11 @@ selectedPartitions: Seq[PartitionDirectory]
 
 `FileSourceScanExec` takes the following when created:
 
-* [[relation]] link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[requiredSchema]] link:spark-sql-StructType.adoc[Schema]
-* [[partitionFilters]] `partitionFilters` Catalyst link:spark-sql-Expression.adoc[expressions]
-* [[dataFilters]] `dataFilters` Catalyst link:spark-sql-Expression.adoc[expressions]
+* [[relation]] <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
+* [[output]] Output schema <<spark-sql-Expression-Attribute.adoc#, attributes>>
+* [[requiredSchema]] <<spark-sql-StructType.adoc#, Schema>>
+* [[partitionFilters]] `partitionFilters` <<spark-sql-Expression.adoc#, expressions>>
+* [[dataFilters]] `dataFilters` <<spark-sql-Expression.adoc#, expressions>>
 * [[tableIdentifier]] Optional `TableIdentifier`
 
 `FileSourceScanExec` initializes the <<internal-registries, internal registries and counters>>.
