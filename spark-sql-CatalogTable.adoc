@@ -101,14 +101,46 @@ partitionSchema: StructType
 
 NOTE: `partitionSchema` is used when...FIXME
 
-=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+=== [[toLinkedHashMap]] Converting Table Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
 [source, scala]
 ----
 toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ----
 
-`toLinkedHashMap`...FIXME
+`toLinkedHashMap` converts the table specification to a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
+
+* *Database* with the database of the <<identifier, TableIdentifier>>
+
+* *Table* with the table of the <<identifier, TableIdentifier>>
+
+* *Owner* with the <<owner, owner>> (if defined)
+
+* *Created Time* with the <<createTime, createTime>>
+
+* *Created By* with `Spark` and the <<createVersion, createVersion>>
+
+* *Type* with the name of the <<tableType, CatalogTableType>>
+
+* *Provider* with the <<provider, provider>> (if defined)
+
+* <<spark-sql-BucketSpec.adoc#toLinkedHashMap, Bucket specification>> (of the <<bucketSpec, BucketSpec>> if defined)
+
+* *Comment* with the <<comment, comment>> (if defined)
+
+* *View Text*, *View Default Database* and *View Query Output Columns* for <<tableType, VIEW table type>>
+
+* *Table Properties* with the <<tableProperties, tableProperties>> (if not empty)
+
+* *Statistics* with the <<stats, CatalogStatistics>> (if defined)
+
+* <<spark-sql-CatalogStorageFormat.adoc#toLinkedHashMap, Storage specification>> (of the <<storage, CatalogStorageFormat>> if defined)
+
+* *Partition Provider* with *Catalog* if the <<tracksPartitionsInCatalog, tracksPartitionsInCatalog>> flag is on
+
+* *Partition Columns* with the <<partitionColumns, partitionColumns>> (if not empty)
+
+* *Schema* with the <<schema, schema>> (if not empty)
 
 [NOTE]
 ====
@@ -124,7 +156,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 `CatalogTable` takes the following when created:
 
 * [[identifier]] `TableIdentifier`
-* [[tableType]] `CatalogTableType`
+* [[tableType]] `CatalogTableType` (i.e. `EXTERNAL`, `MANAGED` or `VIEW`)
 * [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
 * [[provider]] Name of the table provider (optional)
