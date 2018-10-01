@@ -70,6 +70,8 @@ val messages: DataFrame = spark.readStream
 
 NOTE: Data source is also called a *table provider*.
 
+When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the optional <<bucketSpec, bucketing specification>>.
+
 [[internal-registries]]
 .DataSource's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]
@@ -318,9 +320,9 @@ NOTE: `buildStorageFormatFromOptions` is used when...FIXME
 * [[paths]] Paths to load (default: empty)
 * [[userSpecifiedSchema]] (optional) User-specified link:spark-sql-StructType.adoc[schema] (default: `None`, i.e. undefined)
 * [[partitionColumns]] (optional) Names of the partition columns (default: empty)
-* [[bucketSpec]] Optional link:spark-sql-BucketSpec.adoc[bucketing specification] (default: undefined)
+* [[bucketSpec]] Optional <<spark-sql-BucketSpec.adoc#, bucketing specification>> (default: `None`)
 * [[options]] Options (default: empty)
-* [[catalogTable]] (optional) link:spark-sql-CatalogTable.adoc[CatalogTable] (default: undefined)
+* [[catalogTable]] (optional) link:spark-sql-CatalogTable.adoc[CatalogTable] (default: `None`)
 
 `DataSource` initializes the <<internal-registries, internal registries and counters>>.
 

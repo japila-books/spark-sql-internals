@@ -336,3 +336,14 @@ When created, `inputRDD` requests <<relation, HadoopFsRelation>> to get the unde
 In case <<relation, HadoopFsRelation>> has link:spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec[bucketing specification] defined and link:spark-sql-bucketing.adoc#spark.sql.sources.bucketing.enabled[bucketing support is enabled], `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
 
 NOTE: <<createBucketedReadRDD, createBucketedReadRDD>> accepts a bucketing specification while <<createNonBucketedReadRDD, createNonBucketedReadRDD>> does not.
+
+=== [[outputOrdering]] Output Data Ordering -- `outputOrdering` Attribute
+
+[source, scala]
+----
+outputOrdering: Seq[SortOrder]
+----
+
+NOTE: `outputOrdering` is part of the <<spark-sql-SparkPlan.adoc#outputOrdering, SparkPlan Contract>> to...FIXME.
+
+`outputOrdering`...FIXME
