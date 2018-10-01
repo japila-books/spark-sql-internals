@@ -1,6 +1,91 @@
 == [[SparkPlan]] SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query
 
-`SparkPlan` is the <<contract, contract>> in Spark SQL for link:spark-sql-catalyst-QueryPlan.adoc[physical operators] to build a *physical query plan* (aka *query execution plan*).
+`SparkPlan` is the <<contract, contract>> of *physical operators* to build a *physical query plan* (aka _query execution plan_).
+
+[[contract]]
+`SparkPlan` contract requires that a concrete physical operator implements <<doExecute, doExecute>> method.
+
+[[doExecute]]
+[source, scala]
+----
+doExecute(): RDD[InternalRow]
+----
+
+`doExecute` allows a physical operator to describe a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`, and thus _execute_.
+
+[[hooks]]
+.SparkPlan's Extension Hooks
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| doExecuteBroadcast
+a| [[doExecuteBroadcast]]
+
+By default reports a `UnsupportedOperationException`.
+
+```
+[nodeName] does not implement doExecuteBroadcast
+```
+
+Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return the result of a structured query as a broadcast variable.
+
+| doPrepare
+a| [[doPrepare]] Prepares a physical operator for execution
+
+Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
+
+| outputOrdering
+a| [[outputOrdering]] Specifies *output data ordering*, i.e. how data is sorted (ordered) in each partition
+
+[source, scala]
+----
+outputOrdering: Seq[SortOrder] = Nil
+----
+
+`outputOrdering` is not defined (i.e. `Nil`) by default.
+
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
+
+| outputPartitioning
+a| [[outputPartitioning]]
+
+[source, scala]
+----
+outputPartitioning: Partitioning
+----
+
+Specifies *output data partitioning*, i.e. how output data is partitioned (across executors). Defaults to a `UnknownPartitioning`.
+
+| requiredChildDistribution
+a| [[requiredChildDistribution]]
+
+[source, scala]
+----
+requiredChildDistribution: Seq[Distribution]
+----
+
+Specifies the required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
+
+Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
+
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
+
+| requiredChildOrdering
+a| [[requiredChildOrdering]]
+
+[source, scala]
+----
+requiredChildOrdering: Seq[Seq[SortOrder]]
+----
+
+Specifies required sort ordering for each partition requirement (from link:spark-sql-catalyst-TreeNode.adoc#children[children] operators)
+
+Defaults to no sort ordering for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
+
+Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
+|===
 
 `SparkPlan` is a recursive data structure in Spark SQL's link:spark-sql-catalyst.adoc[Catalyst tree manipulation framework] and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
 
@@ -67,18 +152,20 @@ image::images/spark-sql-SparkPlan-execute-pipeline.png[align="center"]
 
 [[final-methods]]
 .SparkPlan's Final Methods
-[cols="1,3",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[execute]] `execute`
-a| "Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end generates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
+| execute
+a| [[execute]]
 
 [source, scala]
 ----
-final def execute(): RDD[InternalRow]
+execute(): RDD[InternalRow]
 ----
+
+"Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end generates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
 
 Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
@@ -87,12 +174,14 @@ Internally, `execute` first <<executeQuery, prepares the physical operator for e
 NOTE: Executing `doExecute` in a named scope happens only after the operator is <<prepare, prepared for execution>> followed by <<waitForSubqueries, waiting for any subqueries to finish>>.
 
 | <<executeQuery, executeQuery>>
-a| Executes a physical operator in a single RDD scope, i.e. all RDDs created during execution of the physical operator have the same scope.
+a|
 
 [source, scala]
 ----
-protected final def executeQuery[T](query: => T): T
+executeQuery[T](query: => T): T
 ----
+
+Executes a physical operator in a single RDD scope, i.e. all RDDs created during execution of the physical operator have the same scope.
 
 `executeQuery` executes the input `query` after the following methods (in order):
 
@@ -108,13 +197,15 @@ protected final def executeQuery[T](query: => T): T
 * `CodegenSupport` is requested for the link:spark-sql-CodegenSupport.adoc#produce[Java source code] of a physical operator (in which the input `query` is <<doProduce, doProduce>>)
 ====
 
-| [[prepare]] `prepare`
-a| Prepares a physical operator for execution
+| prepare
+a| [[prepare]]
 
 [source, scala]
 ----
-final def prepare(): Unit
+prepare(): Unit
 ----
+
+Prepares a physical operator for execution
 
 `prepare` is used mainly when a physical operator is requested to <<executeQuery, execute a structured query>>
 
@@ -125,25 +216,32 @@ NOTE: `prepare` is idempotent, i.e. can be called multiple times with no change 
 Internally, `prepare` calls <<doPrepare, doPrepare>> of its link:spark-sql-catalyst-TreeNode.adoc#children[children] before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
 
 | <<executeBroadcast, executeBroadcast>>
-| Calls <<doExecuteBroadcast, doExecuteBroadcast>>
+a|
+
+[source, scala]
+----
+executeBroadcast[T](): broadcast.Broadcast[T]
+----
+
+Calls <<doExecuteBroadcast, doExecuteBroadcast>>
 |===
 
 [[specialized-spark-plans]]
 .Physical Query Operators / Specialized SparkPlans
-[cols="1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[BinaryExecNode]] `BinaryExecNode`
-| Binary physical operator with two child `left` and `right` physical operators
+| BinaryExecNode
+| [[BinaryExecNode]] Binary physical operator with two child `left` and `right` physical operators
 
-| [[LeafExecNode]] `LeafExecNode`
-| Leaf physical operator with no children
+| LeafExecNode
+| [[LeafExecNode]] Leaf physical operator with no children
 
 By default, the link:spark-sql-catalyst-QueryPlan.adoc#producedAttributes[set of all attributes that are produced] is exactly the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[set of attributes that are output].
 
-| `UnaryExecNode`
+| UnaryExecNode
 | [[UnaryExecNode]] Unary physical operator with one `child` physical operator
 |===
 
@@ -151,16 +249,16 @@ NOTE: The naming convention for physical operators in Spark's source code is to 
 
 [[internal-registries]]
 .SparkPlan's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[prepared]] `prepared`
-| Flag that controls that <<prepare, prepare>> is executed only once.
+| prepared
+| [[prepared]] Flag that controls that <<prepare, prepare>> is executed only once.
 
-| [[subexpressionEliminationEnabled]] `subexpressionEliminationEnabled`
-a| Flag that controls whether the link:spark-sql-subexpression-elimination.adoc[subexpression elimination optimization] is enabled or not.
+| subexpressionEliminationEnabled
+a| [[subexpressionEliminationEnabled]] Flag that controls whether the link:spark-sql-subexpression-elimination.adoc[subexpression elimination optimization] is enabled or not.
 
 Used when the following physical operators are requested to execute (i.e. describe a distributed computation as an RDD of internal rows):
 
@@ -219,81 +317,6 @@ executeCollectIterator(): (Long, Iterator[InternalRow])
 `executeCollectIterator`...FIXME
 
 NOTE: `executeCollectIterator` is used when...FIXME
-
-=== [[contract]] SparkPlan Contract
-
-`SparkPlan` contract requires that concrete physical operators implement <<doExecute, doExecute>>.
-
-[[doExecute]]
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-`doExecute` allows a physical operator to describe a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`, and thus _execute_.
-
-[[hooks]]
-.SparkPlan's Extension Hooks
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[doExecuteBroadcast]] `doExecuteBroadcast`
-a|
-
-By default reports a `UnsupportedOperationException`.
-
-```
-[nodeName] does not implement doExecuteBroadcast
-```
-
-Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return the result of a structured query as a broadcast variable.
-
-| [[doPrepare]] `doPrepare`
-| Prepares a physical operator for execution
-
-Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
-
-| [[outputOrdering]] `outputOrdering`
-| Specifies *output data ordering*, i.e. how data is sorted (ordered) in each partition
-
-[source, scala]
-----
-outputOrdering: Seq[SortOrder] = Nil
-----
-
-`outputOrdering` is not defined (i.e. `Nil`) by default.
-
-Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
-
-| [[outputPartitioning]] `outputPartitioning`
-| Specifies *output data partitioning*, i.e. how output data is partitioned (across executors)
-
-| [[requiredChildDistribution]] `requiredChildDistribution`
-a| Specifies the required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
-
-[source, scala]
-----
-requiredChildDistribution: Seq[Distribution]
-----
-
-Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
-
-Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
-
-| [[requiredChildOrdering]] `requiredChildOrdering`
-a| Specifies required sort ordering for each partition requirement (from link:spark-sql-catalyst-TreeNode.adoc#children[children] operators)
-
-[source, scala]
-----
-requiredChildOrdering: Seq[Seq[SortOrder]]
-----
-
-Defaults to no sort ordering for all of the physical operator's link:spark-sql-catalyst-TreeNode.adoc#children[children].
-
-Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
-|===
 
 === [[executeQuery]] Preparing SparkPlan for Query Execution -- `executeQuery` Final Method
 

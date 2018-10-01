@@ -62,21 +62,21 @@ org.apache.spark.sql.RuntimeConfig
 
 [[accessor-methods]]
 .SQLConf's Accessor Methods
-[cols="1,1,1",options="header",width="100%"]
+[cols="1m,1,1",options="header",width="100%"]
 |===
 | Name
 | Parameter
 | Description
 
-| `adaptiveExecutionEnabled`
+| adaptiveExecutionEnabled
 | link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled]
 | [[adaptiveExecutionEnabled]] Used exclusively when `EnsureRequirements` link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[adds an ExchangeCoordinator] (for link:spark-sql-adaptive-query-execution.adoc[adaptive query execution])
 
-| `autoBroadcastJoinThreshold`
+| autoBroadcastJoinThreshold
 | link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold]
 | [[autoBroadcastJoinThreshold]] Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy
 
-| `autoSizeUpdateEnabled`
+| autoSizeUpdateEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled]
 a| [[autoSizeUpdateEnabled]] Used when:
 
@@ -84,42 +84,42 @@ a| [[autoSizeUpdateEnabled]] Used when:
 
 * `AlterTableAddPartitionCommand` is executed
 
-| `broadcastTimeout`
+| broadcastTimeout
 | link:spark-sql-properties.adoc#spark.sql.broadcastTimeout[spark.sql.broadcastTimeout]
 | [[broadcastTimeout]] Used exclusively in link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] (for broadcasting a table to executors).
 
-| `bucketingEnabled`
+| bucketingEnabled
 | link:spark-sql-properties.adoc#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled]
-| [[bucketingEnabled]] Used when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] and to determine link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning[output partitioning] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering[output ordering]
+| [[bucketingEnabled]] Used when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] and to determine link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning[output partitioning] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering[ordering]
 
-| `cacheVectorizedReaderEnabled`
+| cacheVectorizedReaderEnabled
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]
 | [[cacheVectorizedReaderEnabled]] Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[supportsBatch] flag.
 
-| `caseSensitiveAnalysis`
+| caseSensitiveAnalysis
 | link:spark-sql-properties.adoc#spark.sql.caseSensitive[spark.sql.caseSensitive]
 a| [[caseSensitiveAnalysis]]
 
-| `cboEnabled`
+| cboEnabled
 | link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled]
 a| [[cboEnabled]] Used in:
 
 * link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection` for `reorderStarJoins`)
 * link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
 
-| `columnBatchSize`
+| columnBatchSize
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize]
 | [[columnBatchSize]] Used when...FIXME
 
-| `dataFramePivotMaxValues`
+| dataFramePivotMaxValues
 | link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues]
 | [[dataFramePivotMaxValues]] Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] operator.
 
-| `dataFrameRetainGroupColumns`
+| dataFrameRetainGroupColumns
 | link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns]
 | [[dataFrameRetainGroupColumns]] Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
 
-| `defaultSizeInBytes`
+| defaultSizeInBytes
 | link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes]
 a| [[defaultSizeInBytes]] Used when:
 
@@ -133,29 +133,29 @@ a| [[defaultSizeInBytes]] Used when:
 
 * `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
 
-| `exchangeReuseEnabled`
+| exchangeReuseEnabled
 | link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse]
 a| [[exchangeReuseEnabled]] Used when link:spark-sql-ReuseSubquery.adoc#apply[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc#apply[ReuseExchange] physical optimizations are executed
 
 NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical optimizations do no optimizations.
 
-| `fallBackToHdfsForStatsEnabled`
+| fallBackToHdfsForStatsEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs]
 | [[fallBackToHdfsForStatsEnabled]] Used exclusively when `DetermineTableStats` logical resolution rule is executed.
 
-| `histogramEnabled`
+| histogramEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled]
 | [[histogramEnabled]] Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].
 
-| `histogramNumBins`
+| histogramNumBins
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
 | [[histogramNumBins]] Used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] with link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] turned on (and link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computePercentiles[calculates percentiles]).
 
-| `hugeMethodLimit`
+| hugeMethodLimit
 | link:spark-sql-properties.adoc#spark.sql.codegen.hugeMethodLimit[spark.sql.codegen.hugeMethodLimit]
 | [[hugeMethodLimit]] Used exclusively when `WholeStageCodegenExec` unary physical operator is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute, execute>> (and generate a `RDD[InternalRow]`), i.e. when the compiled function exceeds this threshold, the whole-stage codegen is deactivated for this subtree of the query plan.
 
-| `ignoreCorruptFiles`
+| ignoreCorruptFiles
 | link:spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
 a| [[ignoreCorruptFiles]] Used when:
 
@@ -165,23 +165,23 @@ a| [[ignoreCorruptFiles]] Used when:
 
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#mergeSchemasInParallel[mergeSchemasInParallel]
 
-| `ignoreMissingFiles`
+| ignoreMissingFiles
 | link:spark-sql-properties.adoc#spark.sql.files.ignoreMissingFiles[spark.sql.files.ignoreMissingFiles]
 | [[ignoreMissingFiles]] Used exclusively when `FileScanRDD` is link:spark-sql-FileScanRDD.adoc#ignoreMissingFiles[created] (and then to link:spark-sql-FileScanRDD.adoc#compute[compute a partition])
 
-| `inMemoryPartitionPruning`
+| inMemoryPartitionPruning
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning]
 | [[inMemoryPartitionPruning]] Used exclusively when `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#filteredCachedBatches[filtered cached column batches] (as a `RDD[CachedBatch]`).
 
-| `isParquetBinaryAsString`
+| isParquetBinaryAsString
 | link:spark-sql-properties.adoc#spark.sql.parquet.binaryAsString[spark.sql.parquet.binaryAsString]
 | [[isParquetBinaryAsString]]
 
-| `isParquetINT96AsTimestamp`
+| isParquetINT96AsTimestamp
 | link:spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp[spark.sql.parquet.int96AsTimestamp]
 | [[isParquetINT96AsTimestamp]]
 
-| `numShufflePartitions`
+| numShufflePartitions
 | link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
 a| [[numShufflePartitions]] Used in:
 
@@ -191,19 +191,19 @@ a| [[numShufflePartitions]] Used in:
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
 * link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
 
-| `isParquetINT96TimestampConversion`
+| isParquetINT96TimestampConversion
 | link:spark-sql-properties.adoc#spark.sql.parquet.int96TimestampConversion[spark.sql.parquet.int96TimestampConversion]
 | [[isParquetINT96TimestampConversion]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
 
-| `joinReorderEnabled`
+| joinReorderEnabled
 | link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled]
 | [[joinReorderEnabled]] Used exclusively in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization
 
-| `limitScaleUpFactor`
+| limitScaleUpFactor
 | link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor]
 | [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
 
-| `offHeapColumnVectorEnabled`
+| offHeapColumnVectorEnabled
 | link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
 a| [[offHeapColumnVectorEnabled]] Used when:
 
@@ -213,19 +213,19 @@ a| [[offHeapColumnVectorEnabled]] Used when:
 
 * `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-| `optimizerInSetConversionThreshold`
+| optimizerInSetConversionThreshold
 | link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
 | [[optimizerInSetConversionThreshold]] Used exclusively when `OptimizeIn` logical query optimization is link:spark-sql-Optimizer-OptimizeIn.adoc#apply[applied to a logical plan] (and replaces an link:spark-sql-Expression-In.adoc[In] predicate expression with an link:spark-sql-Expression-InSet.adoc[InSet])
 
-| `parquetFilterPushDown`
+| parquetFilterPushDown
 | link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown]
 | [[parquetFilterPushDown]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
 
-| `parquetRecordFilterEnabled`
+| parquetRecordFilterEnabled
 | link:spark-sql-properties.adoc#spark.sql.parquet.recordLevelFilter.enabled[spark.sql.parquet.recordLevelFilter.enabled]
 | [[parquetRecordFilterEnabled]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
 
-| `parquetVectorizedReaderEnabled`
+| parquetVectorizedReaderEnabled
 | link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader]
 a| [[parquetVectorizedReaderEnabled]] Used when:
 
@@ -233,11 +233,11 @@ a| [[parquetVectorizedReaderEnabled]] Used when:
 
 * `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-| `preferSortMergeJoin`
+| preferSortMergeJoin
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
 | [[preferSortMergeJoin]] Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
 
-| `runSQLonFile`
+| runSQLonFile
 | link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]
 a| [[runSQLonFile]] Used when:
 
@@ -245,15 +245,15 @@ a| [[runSQLonFile]] Used when:
 
 * `ResolveSQLOnFile` does link:spark-sql-Analyzer-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
 
-| `sessionLocalTimeZone`
+| sessionLocalTimeZone
 | link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
 | [[sessionLocalTimeZone]]
 
-| `starSchemaDetection`
+| starSchemaDetection
 | link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
 | [[starSchemaDetection]] Used exclusively in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection`)
 
-| `stringRedactionPattern`
+| stringRedactionPattern
 | link:spark-sql-properties.adoc#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex]
 a| [[stringRedactionPattern]] Used when:
 
@@ -261,11 +261,11 @@ a| [[stringRedactionPattern]] Used when:
 
 * `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#withRedaction[redact sensitive information] (in text representations)
 
-| `subexpressionEliminationEnabled`
+| subexpressionEliminationEnabled
 | link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
 | [[subexpressionEliminationEnabled]] Used exclusively when `SparkPlan` is requested for link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
 
-| `supportQuotedRegexColumnName`
+| supportQuotedRegexColumnName
 | link:spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames[spark.sql.parser.quotedRegexColumnNames]
 a| [[supportQuotedRegexColumnName]] Used when:
 
@@ -273,45 +273,45 @@ a| [[supportQuotedRegexColumnName]] Used when:
 
 * `AstBuilder` is requested to parse a <<spark-sql-AstBuilder.adoc#visitDereference, dereference>> and <<spark-sql-AstBuilder.adoc#visitColumnReference, column reference>> in a SQL statement
 
-| `useCompression`
+| useCompression
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
 | [[useCompression]] Used when...FIXME
 
-| `wholeStageEnabled`
+| wholeStageEnabled
 | link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage]
 a| [[wholeStageEnabled]] Used in:
 
 * link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
 * link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
 
-| `wholeStageFallback`
+| wholeStageFallback
 | link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback]
 | [[wholeStageFallback]] Used exclusively when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed].
 
-| `wholeStageMaxNumFields`
+| wholeStageMaxNumFields
 | link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields]
 a| [[wholeStageMaxNumFields]] Used in:
 
 * link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] to control codegen
 * link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] to control row batch reading
 
-| `wholeStageSplitConsumeFuncByOperator`
+| wholeStageSplitConsumeFuncByOperator
 | link:spark-sql-properties.adoc#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator]
 | [[wholeStageSplitConsumeFuncByOperator]] Used exclusively when `CodegenSupport` is requested to link:spark-sql-CodegenSupport.adoc#consume[consume]
 
-| `wholeStageUseIdInClassName`
+| wholeStageUseIdInClassName
 | link:spark-sql-properties.adoc#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName]
 | [[wholeStageUseIdInClassName]] Used exclusively when `WholeStageCodegenExec` is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen, generate the Java source code for the child physical plan subtree>> (when <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, created>>)
 
-| `windowExecBufferInMemoryThreshold`
+| windowExecBufferInMemoryThreshold
 | link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.in.memory.threshold[spark.sql.windowExec.buffer.in.memory.threshold]
 | [[windowExecBufferInMemoryThreshold]] Used exclusively when `WindowExec` unary physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#doExecute, executed>>.
 
-| `windowExecBufferSpillThreshold`
+| windowExecBufferSpillThreshold
 | link:spark-sql-properties.adoc#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold]
 | [[windowExecBufferSpillThreshold]] Used exclusively when `WindowExec` unary physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#doExecute, executed>>.
 
-| `useObjectHashAggregation`
+| useObjectHashAggregation
 | link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec]
 | [[useObjectHashAggregation]] Used exclusively when `Aggregation` execution planning strategy is <<spark-sql-SparkStrategy-Aggregation.adoc#apply, executed>> (and uses `AggUtils` to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregation physical operator>>).
 |===

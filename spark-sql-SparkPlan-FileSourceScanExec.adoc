@@ -1,6 +1,6 @@
 == [[FileSourceScanExec]] FileSourceScanExec Leaf Physical Operator
 
-`FileSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator]) that represents a scan over collections of files (including Hive tables).
+`FileSourceScanExec` is a <<spark-sql-SparkPlan.adoc#LeafExecNode, leaf physical operator>> (as a <<spark-sql-SparkPlan-DataSourceScanExec.adoc#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
 
 `FileSourceScanExec` is <<creating-instance, created>> exclusively for a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operator with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] when `FileSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[executed] (i.e. applied to a logical plan).
 
@@ -11,13 +11,18 @@
 val tableName = "bucketed_4_id"
 spark
   .range(100)
+  .withColumn("part", $"id" % 2)
   .write
+  .partitionBy("part")
   .bucketBy(4, "id")
   .sortBy("id")
   .mode("overwrite")
   .saveAsTable(tableName)
 val q = spark.table(tableName)
 val sparkPlan = q.queryExecution.executedPlan
+
+scala> println(sparkPlan.numberedTreeString)
+00 *(1) FileScan parquet default.bucketed_4_id[id#214L,part#215L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/apps/spark-2.3.1-bin-hadoop2.7/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint>
 
 import org.apache.spark.sql.execution.FileSourceScanExec
 val scan = sparkPlan.collectFirst { case exec: FileSourceScanExec => exec }.get
@@ -41,19 +46,27 @@ Pushed Filters: [pushedDownFilters]
 
 [[metrics]]
 .FileSourceScanExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
+[cols="1m,2,2",options="header",width="100%"]
 |===
 | Key
 | Name (in web UI)
 | Description
 
-| [[metadataTime]] `metadataTime`
+| metadataTime
 | metadata time (ms)
-|
+| [[metadataTime]]
 
-| [[numFiles]] `numFiles`
+| numFiles
 | number of files
-|
+| [[numFiles]]
+
+| numOutputRows
+| number of output rows
+| [[numOutputRows]]
+
+| scanTime
+| scan time
+| [[scanTime]]
 |===
 
 As a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the link:spark-sql-SparkPlan-DataSourceScanExec.adoc#nodeName[node name].
@@ -174,7 +187,7 @@ selectedPartitions: Seq[PartitionDirectory]
 outputPartitioning: Partitioning
 ----
 
-NOTE: `outputPartitioning` is part of link:spark-sql-SparkPlan.adoc#outputPartitioning[SparkPlan Contract] to specify data partitioning.
+NOTE: `outputPartitioning` is part of the <<spark-sql-SparkPlan.adoc#outputPartitioning, SparkPlan Contract>> to specify data partitioning.
 
 `outputPartitioning` may give a link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] output partitioning when bucketing is enabled.
 
