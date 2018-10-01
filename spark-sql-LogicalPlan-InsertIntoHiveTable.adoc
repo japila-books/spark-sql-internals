@@ -12,3 +12,20 @@ run(session: SparkSession): Seq[Row]
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME
+
+=== [[processInsert]] `processInsert` Internal Method
+
+[source, scala]
+----
+processInsert(
+  sparkSession: SparkSession,
+  externalCatalog: ExternalCatalog,
+  hadoopConf: Configuration,
+  tableDesc: TableDesc,
+  tmpLocation: Path,
+  child: SparkPlan): Unit
+----
+
+`processInsert`...FIXME
+
+NOTE: `processInsert` is used exclusively when `InsertIntoHiveTable` logical command is <<run, executed>>.

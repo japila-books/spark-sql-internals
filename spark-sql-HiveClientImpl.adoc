@@ -117,7 +117,7 @@ NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitio
 
 `HiveClientImpl` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[getTableOption]] Retrieving Optional Table Metadata -- `getTableOption` Method
+=== [[getTableOption]] Retrieving Table Metadata If Available -- `getTableOption` Method
 
 [source, scala]
 ----
@@ -181,3 +181,14 @@ fromHivePartition(hp: HivePartition): CatalogTablePartition
 * link:spark-sql-CatalogTablePartition.adoc#stats[stats] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
 
 NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.
+
+=== [[toHiveTable]] `toHiveTable` Method
+
+[source, scala]
+----
+toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
+----
+
+`toHiveTable`...FIXME
+
+NOTE: `toHiveTable` is used when...FIXME

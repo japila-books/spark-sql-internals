@@ -61,7 +61,7 @@ getPartitions(
   partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
 ----
 
-Returns <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>> of a table
+Returns the <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>> of a table
 
 Used exclusively when `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#listPartitions, list the partitions of a table>>.
 
@@ -72,7 +72,14 @@ Used exclusively when `HiveExternalCatalog` is requested to <<spark-sql-HiveExte
 | [[getPartitionOption]] Used when...FIXME
 
 | getTableOption
-a| [[getTableOption]] Retrieving table metadata if available
+a| [[getTableOption]]
+
+[source, scala]
+----
+getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+----
+
+Retrieves a table metadata if available
 
 Used exclusively when `HiveClient` is requested for a <<getTable, table metadata>>
 
@@ -82,7 +89,7 @@ NOTE: `getTableOption` is a safe version of <<getTable, getTable>> as it does no
 | [[renamePartitions]] Used when...FIXME
 |===
 
-=== [[getTable]] Retrieving Table Metadata If Available or Reporting NoSuchTableException -- `getTable` Method
+=== [[getTable]] Retrieving Table Metadata If Available or Throwing NoSuchTableException -- `getTable` Method
 
 [source, scala]
 ----

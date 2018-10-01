@@ -64,7 +64,15 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `CatalogTable` is requested to <<toLinkedHashMap, convert itself to LinkedHashMap>>
 
-* `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#doCreateTable, doCreateTable>>
+* `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#doCreateTable, doCreateTable>>, <<spark-sql-HiveExternalCatalog.adoc#tableMetaToTableProps, tableMetaToTableProps>>, <<spark-sql-HiveExternalCatalog.adoc#doAlterTable, doAlterTable>>, <<spark-sql-HiveExternalCatalog.adoc#restoreHiveSerdeTable, restoreHiveSerdeTable>> and <<spark-sql-HiveExternalCatalog.adoc#restoreDataSourceTable, restoreDataSourceTable>>
+
+* `HiveClientImpl` is requested to <<spark-sql-HiveClientImpl.adoc#getTableOption, retrieve a table metadata if available>> and <<spark-sql-HiveClientImpl.adoc#toHiveTable, toHiveTable>>
+
+* `InsertIntoHiveTable` logical command is <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#processInsert, processInsert>> (when <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run, executed>>)
+
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#createTable, create a table>> (via <<spark-sql-DataFrameWriter.adoc#saveAsTable, saveAsTable>>)
+
+* `SparkSqlAstBuilder` is requested to <<spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable, visitCreateTable>> and <<spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable, visitCreateHiveTable>>
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
