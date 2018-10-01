@@ -335,3 +335,55 @@ listPartitions(
 NOTE: `listPartitions` is part of the <<spark-sql-ExternalCatalog.adoc#listPartitions, ExternalCatalog Contract>> to list partitions of a table.
 
 `listPartitions`...FIXME
+
+=== [[doCreateTable]] `doCreateTable` Method
+
+[source, scala]
+----
+doCreateTable(
+  tableDefinition: CatalogTable,
+  ignoreIfExists: Boolean): Unit
+----
+
+NOTE: `doCreateTable` is part of the <<spark-sql-ExternalCatalog.adoc#doCreateTable, ExternalCatalog Contract>> to...FIXME.
+
+`doCreateTable`...FIXME
+
+=== [[tableMetaToTableProps]] `tableMetaToTableProps` Internal Method
+
+[source, scala]
+----
+tableMetaToTableProps(table: CatalogTable): mutable.Map[String, String]
+tableMetaToTableProps(
+  table: CatalogTable,
+  schema: StructType): mutable.Map[String, String]
+----
+
+`tableMetaToTableProps`...FIXME
+
+NOTE: `tableMetaToTableProps` is used when `HiveExternalCatalog` is requested to <<doAlterTableDataSchema, doAlterTableDataSchema>> and <<doCreateTable, doCreateTable>> (and <<createDataSourceTable, createDataSourceTable>>).
+
+=== [[doAlterTableDataSchema]] `doAlterTableDataSchema` Method
+
+[source, scala]
+----
+doAlterTableDataSchema(
+  db: String,
+  table: String,
+  newDataSchema: StructType): Unit
+----
+
+NOTE: `doAlterTableDataSchema` is part of the <<spark-sql-ExternalCatalog.adoc#doAlterTableDataSchema, ExternalCatalog Contract>> to...FIXME.
+
+`doAlterTableDataSchema`...FIXME
+
+=== [[createDataSourceTable]] `createDataSourceTable` Internal Method
+
+[source, scala]
+----
+createDataSourceTable(table: CatalogTable, ignoreIfExists: Boolean): Unit
+----
+
+`createDataSourceTable`...FIXME
+
+NOTE: `createDataSourceTable` is used exclusively when `HiveExternalCatalog` is requested to <<doCreateTable, doCreateTable>> (for non-hive providers).

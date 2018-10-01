@@ -557,3 +557,16 @@ lookupFunctionInfo(name: FunctionIdentifier): ExpressionInfo
 `lookupFunctionInfo`...FIXME
 
 NOTE: `lookupFunctionInfo` is used when...FIXME
+
+=== [[alterTableDataSchema]] `alterTableDataSchema` Method
+
+[source, scala]
+----
+alterTableDataSchema(
+  identifier: TableIdentifier,
+  newDataSchema: StructType): Unit
+----
+
+`alterTableDataSchema`...FIXME
+
+NOTE: `alterTableDataSchema` is used when...FIXME

@@ -1,4 +1,4 @@
-== [[ExternalCatalog]] ExternalCatalog -- Contract for External Catalog (Metastore) of Permanent Relational Entities
+== [[ExternalCatalog]] ExternalCatalog Contract -- External Catalog (Metastore) of Permanent Relational Entities
 
 `ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _metadata registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
 
@@ -7,51 +7,412 @@
 [cols="2,^1,^1,^1,^1",options="header",width="100%"]
 |===
 | Feature
+| Database
 | Function
-| Partitions
-| Tables
-| Databases
-
-| Create
-| X
-| X
-| X
-| [[createDatabase]] X
-
-| Drop | X | X | X | X
-| Rename | X | X | X |
-
-| Get
-| X
-| [[getPartition]][[getPartitionOption]] X
-| [[getTable]] X
-|
-
-| Check Existence | X | | X | X
+| Partition
+| Table
 
 | Alter
-|
-| [[alterPartitions]] X
-| X
-| X
+| <<alterDatabase, alterDatabase>>
+| <<alterFunction, alterFunction>>
+| <<alterPartitions, alterPartitions>>
+| <<alterTable, alterTable>>, <<alterTableDataSchema, alterTableDataSchema>>, <<alterTableStats, alterTableStats>>
+
+| Create
+| <<createDatabase, createDatabase>>
+| <<createFunction, createFunction>>
+| <<createPartitions, createPartitions>>
+| <<createTable, createTable>>
+
+| Drop
+| <<dropDatabase, dropDatabase>>
+| <<dropFunction, dropFunction>>
+| <<dropPartitions, dropPartitions>>
+| <<dropTable, dropTable>>
+
+| Get
+| <<getDatabase, getDatabase>>
+| <<getFunction, getFunction>>
+| <<getPartition, getPartition>>, <<getPartitionOption, getPartitionOption>>
+| <<getTable, getTable>>
 
 | List
-| [[listFunctions]] X
-| [[listPartitions]][[listPartitionNames]][[listPartitionsByFilter]] X
-| [[listTables]] X
-| [[listDatabases]] X
+| <<listDatabases, listDatabases>>
+| <<listFunctions, listFunctions>>
+| <<listPartitionNames, listPartitionNames>>, <<listPartitions, listPartitions>>, <<listPartitionsByFilter, listPartitionsByFilter>>
+| <<listTables, listTables>>
 
-| Load | | X | X | X
-| Set | | | | X
+| Load
+|
+|
+| <<loadDynamicPartitions, loadDynamicPartitions>>, <<loadPartition, loadPartition>>
+| <<loadTable, loadTable>>
+
+| Rename
+|
+| <<renameFunction, renameFunction>>
+| <<renamePartitions, renamePartitions>>
+| <<renameTable, renameTable>>
+
+| Check Existence
+| <<databaseExists, databaseExists>>
+| <<functionExists, functionExists>>
+|
+| <<tableExists, tableExists>>
+
+| Set
+|
+|
+|
+| <<setCurrentDatabase, setCurrentDatabase>>
+|===
+
+[[contract]]
+.ExternalCatalog Contract (incl. Protected Methods)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| alterPartitions
+a| [[alterPartitions]]
+
+[source, scala]
+----
+alterPartitions(
+  db: String,
+  table: String,
+  parts: Seq[CatalogTablePartition]): Unit
+----
+
+| createPartitions
+a| [[createPartitions]]
+
+[source, scala]
+----
+createPartitions(
+  db: String,
+  table: String,
+  parts: Seq[CatalogTablePartition],
+  ignoreIfExists: Boolean): Unit
+----
+
+| databaseExists
+a| [[databaseExists]]
+
+[source, scala]
+----
+databaseExists(db: String): Boolean
+----
+
+| doAlterDatabase
+a| [[doAlterDatabase]]
+
+[source, scala]
+----
+doAlterDatabase(dbDefinition: CatalogDatabase): Unit
+----
+
+| doAlterFunction
+a| [[doAlterFunction]]
+
+[source, scala]
+----
+doAlterFunction(db: String, funcDefinition: CatalogFunction): Unit
+----
+
+| doAlterTable
+a| [[doAlterTable]]
+
+[source, scala]
+----
+doAlterTable(tableDefinition: CatalogTable): Unit
+----
+
+| doAlterTableDataSchema
+a| [[doAlterTableDataSchema]]
+
+[source, scala]
+----
+doAlterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
+----
+
+| doAlterTableStats
+a| [[doAlterTableStats]]
+
+[source, scala]
+----
+doAlterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
+----
+
+| doCreateDatabase
+a| [[doCreateDatabase]]
+
+[source, scala]
+----
+doCreateDatabase(dbDefinition: CatalogDatabase, ignoreIfExists: Boolean): Unit
+----
+
+| doCreateFunction
+a| [[doCreateFunction]]
+
+[source, scala]
+----
+doCreateFunction(db: String, funcDefinition: CatalogFunction): Unit
+----
+
+| doCreateTable
+a| [[doCreateTable]]
+
+[source, scala]
+----
+doCreateTable(tableDefinition: CatalogTable, ignoreIfExists: Boolean): Unit
+----
+
+| doDropDatabase
+a| [[doDropDatabase]]
+
+[source, scala]
+----
+doDropDatabase(db: String, ignoreIfNotExists: Boolean, cascade: Boolean): Unit
+----
+
+| doDropFunction
+a| [[doDropFunction]]
+
+[source, scala]
+----
+doDropFunction(db: String, funcName: String): Unit
+----
+
+| doDropTable
+a| [[doDropTable]]
+
+[source, scala]
+----
+doDropTable(
+  db: String,
+  table: String,
+  ignoreIfNotExists: Boolean,
+  purge: Boolean): Unit
+----
+
+| doRenameFunction
+a| [[doRenameFunction]]
+
+[source, scala]
+----
+doRenameFunction(db: String, oldName: String, newName: String): Unit
+----
+
+| doRenameTable
+a| [[doRenameTable]]
+
+[source, scala]
+----
+doRenameTable(db: String, oldName: String, newName: String): Unit
+----
+
+| dropPartitions
+a| [[dropPartitions]]
+
+[source, scala]
+----
+dropPartitions(
+  db: String,
+  table: String,
+  parts: Seq[TablePartitionSpec],
+  ignoreIfNotExists: Boolean,
+  purge: Boolean,
+  retainData: Boolean): Unit
+----
+
+| functionExists
+a| [[functionExists]]
+
+[source, scala]
+----
+functionExists(db: String, funcName: String): Boolean
+----
+
+| getDatabase
+a| [[getDatabase]]
+
+[source, scala]
+----
+getDatabase(db: String): CatalogDatabase
+----
+
+| getFunction
+a| [[getFunction]]
+
+[source, scala]
+----
+getFunction(db: String, funcName: String): CatalogFunction
+----
+
+| getPartition
+a| [[getPartition]]
+
+[source, scala]
+----
+getPartition(db: String, table: String, spec: TablePartitionSpec): CatalogTablePartition
+----
+
+| getPartitionOption
+a| [[getPartitionOption]]
+
+[source, scala]
+----
+getPartitionOption(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): Option[CatalogTablePartition]
+----
+
+| getTable
+a| [[getTable]]
+
+[source, scala]
+----
+getTable(db: String, table: String): CatalogTable
+----
+
+| listDatabases
+a| [[listDatabases]]
+
+[source, scala]
+----
+listDatabases(): Seq[String]
+listDatabases(pattern: String): Seq[String]
+----
+
+| listFunctions
+a| [[listFunctions]]
+
+[source, scala]
+----
+listFunctions(db: String, pattern: String): Seq[String]
+----
+
+| listPartitionNames
+a| [[listPartitionNames]]
+
+[source, scala]
+----
+listPartitionNames(
+  db: String,
+  table: String,
+  partialSpec: Option[TablePartitionSpec] = None): Seq[String]
+----
+
+| listPartitions
+a| [[listPartitions]]
+
+[source, scala]
+----
+listPartitions(
+  db: String,
+  table: String,
+  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
+----
+
+| listPartitionsByFilter
+a| [[listPartitionsByFilter]]
+
+[source, scala]
+----
+listPartitionsByFilter(
+  db: String,
+  table: String,
+  predicates: Seq[Expression],
+  defaultTimeZoneId: String): Seq[CatalogTablePartition]
+----
+
+| listTables
+a| [[listTables]]
+
+[source, scala]
+----
+listTables(db: String): Seq[String]
+listTables(db: String, pattern: String): Seq[String]
+----
+
+| loadDynamicPartitions
+a| [[loadDynamicPartitions]]
+
+[source, scala]
+----
+loadDynamicPartitions(
+  db: String,
+  table: String,
+  loadPath: String,
+  partition: TablePartitionSpec,
+  replace: Boolean,
+  numDP: Int): Unit
+----
+
+| loadPartition
+a| [[loadPartition]]
+
+[source, scala]
+----
+loadPartition(
+  db: String,
+  table: String,
+  loadPath: String,
+  partition: TablePartitionSpec,
+  isOverwrite: Boolean,
+  inheritTableSpecs: Boolean,
+  isSrcLocal: Boolean): Unit
+----
+
+| loadTable
+a| [[loadTable]]
+
+[source, scala]
+----
+loadTable(
+  db: String,
+  table: String,
+  loadPath: String,
+  isOverwrite: Boolean,
+  isSrcLocal: Boolean): Unit
+----
+
+| renamePartitions
+a| [[renamePartitions]]
+
+[source, scala]
+----
+renamePartitions(
+  db: String,
+  table: String,
+  specs: Seq[TablePartitionSpec],
+  newSpecs: Seq[TablePartitionSpec]): Unit
+----
+
+| setCurrentDatabase
+a| [[setCurrentDatabase]]
+
+[source, scala]
+----
+setCurrentDatabase(db: String): Unit
+----
+
+| tableExists
+a| [[tableExists]]
+
+[source, scala]
+----
+tableExists(db: String, table: String): Boolean
+----
 |===
 
 `ExternalCatalog` is available as link:spark-sql-SharedState.adoc#externalCatalog[externalCatalog] of link:spark-sql-SparkSession.adoc#sharedState[SharedState] (in `SparkSession`).
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -84,9 +445,6 @@ The <<implementations, concrete>> `ExternalCatalog` is chosen using link:spark-s
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
 scala> println(catalogType)
@@ -157,43 +515,24 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTable[altering the statistics of a table in a metastore].
 
-=== [[contract]] ExternalCatalog Contract
+=== [[createTable]] `createTable` Method
 
 [source, scala]
 ----
-package org.apache.spark.sql.catalyst.catalog
-
-abstract class ExternalCatalog {
-  // only required methods that have no implementation
-  def databaseExists(db: String): Boolean
-  // FIXME The other methods
-}
+createTable(tableDefinition: CatalogTable, ignoreIfExists: Boolean): Unit
 ----
 
-.(Subset of) ExternalCatalog Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+`createTable`...FIXME
 
-| `databaseExists`
-| [[databaseExists]] Used when...FIXME
-|===
+NOTE: `createTable` is used when...FIXME
 
-=== [[doAlterTableStats]] Altering Table Statistics -- `doAlterTableStats` Method
+=== [[alterTableDataSchema]] `alterTableDataSchema` Method
 
 [source, scala]
 ----
-doAlterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
+alterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
 ----
 
-NOTE: `doAlterTableStats` is used exclusively when `ExternalCatalog` is requested to <<alterTableStats, alter the statistics of a table>>.
+`alterTableDataSchema`...FIXME
 
-=== [[doAlterTable]] Altering Table -- `doAlterTable` Method
-
-[source, scala]
-----
-doAlterTable(tableDefinition: CatalogTable): Unit
-----
-
-NOTE: `doAlterTable` is used exclusively when `ExternalCatalog` is requested to <<alterTable, alter a table>>.
+NOTE: `alterTableDataSchema` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#alterTableDataSchema, alterTableDataSchema>>.

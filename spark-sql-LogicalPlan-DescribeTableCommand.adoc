@@ -196,7 +196,7 @@ describeFormattedDetailedPartitionInfo(
 
 . <<spark-sql-CatalogStorageFormat.adoc#toLinkedHashMap, Storage specification>> of the <<spark-sql-CatalogTable.adoc#storage, table>>
 
-NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with the <<isExtended, isExtended>> flag on.
+NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with a non-empty <<partitionSpec, partitionSpec>> and the <<isExtended, isExtended>> flag on.
 
 === [[describeFormattedTableInfo]] Describing Detailed Table Information -- `describeFormattedTableInfo` Internal Method
 
