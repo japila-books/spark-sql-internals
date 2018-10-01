@@ -1,6 +1,6 @@
-== [[CatalogTablePartition]] CatalogTablePartition -- Table Partition Metadata in Session-Scoped Catalog
+== [[CatalogTablePartition]] CatalogTablePartition -- Partition Specification of Table
 
-`CatalogTablePartition` is the metadata of a table partition in a link:spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] (i.e. `SessionCatalog`).
+`CatalogTablePartition` is the *partition specification* of a table, i.e. the metadata of the partitions of a table.
 
 `CatalogTablePartition` is <<creating-instance, created>> when...FIXME
 
@@ -25,7 +25,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql
 
 `CatalogTablePartition` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+=== [[toLinkedHashMap]]  Converting Partition Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
 [source, scala]
 ----

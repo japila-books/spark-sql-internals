@@ -1,7 +1,7 @@
-== [[BucketSpec]] BucketSpec -- Bucketing Specification
+== [[BucketSpec]] BucketSpec -- Bucketing Specification of Table
 
 [[creating-instance]]
-`BucketSpec` is a *bucketing specification* of a table, i.e. the metadata of link:spark-sql-bucketing.adoc[bucketing] of a table.
+`BucketSpec` is the *bucketing specification* of a table, i.e. the metadata of link:spark-sql-bucketing.adoc[bucketing] of a table.
 
 `BucketSpec` includes the following:
 
@@ -39,14 +39,14 @@ scala> println(bucketSpec)
 8 buckets, bucket columns: [col1], sort columns: [col2]
 ----
 
-=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+=== [[toLinkedHashMap]] Converting Bucketing Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
 [source, scala]
 ----
 toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ----
 
-`toLinkedHashMap` gives a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
+`toLinkedHashMap` converts the bucketing specification to a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
 
 * *Num Buckets* with the <<numBuckets, numBuckets>>
 * *Bucket Columns* with the <<bucketColumnNames, bucketColumnNames>>

@@ -89,9 +89,10 @@
 . link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager -- Management Interface of Global Temporary Views]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Metadata in SessionCatalog]
-.. link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat -- Storage Metadata of Table or Partition in SessionCatalog]
-.. link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Table Partition Metadata in SessionCatalog]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Specification]
+... link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat -- Storage Specification of Table or Partition]
+... link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Partition Specification of Table]
+... link:spark-sql-BucketSpec.adoc[BucketSpec -- Bucketing Specification of Table]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
 .. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
 
@@ -122,6 +123,8 @@
 ... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
 ... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
+
+. link:spark-sql-bucketing.adoc[Bucketing]
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
 .. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
@@ -613,9 +616,6 @@
 .. link:spark-sql-performance-tuning-groupBy-aggregation.adoc[Number of Partitions for groupBy Aggregation]
 
 . link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution]
-
-. link:spark-sql-bucketing.adoc[Bucketing]
-.. link:spark-sql-BucketSpec.adoc[BucketSpec]
 
 == Catalyst -- Tree Manipulation Framework
 

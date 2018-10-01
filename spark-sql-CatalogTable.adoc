@@ -1,12 +1,9 @@
-== [[CatalogTable]] CatalogTable -- Table Metadata in Session-Scoped Catalog
+== [[CatalogTable]] CatalogTable -- Table Specification
 
-`CatalogTable` is the metadata of a table (*table metadata*) in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
+`CatalogTable` is the *table specification*, i.e. the metadata of a table that is stored in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
@@ -145,3 +142,18 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 * [[tracksPartitionsInCatalog]] `tracksPartitionsInCatalog` flag
 * [[schemaPreservesCase]] `schemaPreservesCase` flag
 * [[ignoredProperties]] Ignored properties
+
+=== [[database]] `database` Method
+
+[source, scala]
+----
+database: String
+----
+
+`database` simply returns the database (of the <<identifier, TableIdentifier>>) or throws an `AnalysisException`:
+
+```
+table [identifier] did not specify database
+```
+
+NOTE: `database` is used when...FIXME

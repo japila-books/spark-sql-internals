@@ -1,7 +1,7 @@
-== [[CatalogStorageFormat]] CatalogStorageFormat -- Storage Metadata of Table or Partition in SessionCatalog
+== [[CatalogStorageFormat]] CatalogStorageFormat -- Storage Specification of Table or Partition
 
 [[creating-instance]]
-`CatalogStorageFormat` is part of the metadata of a partition or a table that describes how they are stored:
+`CatalogStorageFormat` is the *storage specification* of a partition or a table, i.e. the metadata that includes the following:
 
 * [[locationUri]] Location URI
 * [[inputFormat]] Input format
@@ -19,7 +19,7 @@
 [[toString]]
 `CatalogStorageFormat` uses the following *text representation* (i.e. `toString`)...FIXME
 
-=== [[toLinkedHashMap]] `toLinkedHashMap` Method
+=== [[toLinkedHashMap]] Converting Storage Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
 [source, scala]
 ----
