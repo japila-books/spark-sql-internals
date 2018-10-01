@@ -39,32 +39,47 @@ trait HiveClient {
 NOTE: `HiveClient` is a `private[hive]` contract.
 
 .(Subset of) HiveClient Contract
-[cols="1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| [[alterPartitions]] `alterPartitions`
-| Used when...FIXME
+| alterPartitions
+| [[alterPartitions]]
 
-| [[getPartitions]] `getPartitions`
-| Used when...FIXME
+| `getPartitions`
+a| [[getPartitions]]
 
-| [[getPartitionsByFilter]] `getPartitionsByFilter`
-| Used when...FIXME
+[source, scala]
+----
+getPartitions(
+  db: String,
+  table: String,
+  partialSpec: Option[TablePartitionSpec]): Seq[CatalogTablePartition]
+getPartitions(
+  catalogTable: CatalogTable,
+  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
+----
 
-| [[getPartitionOption]] `getPartitionOption`
-| Used when...FIXME
+Returns <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>> of a table
 
-| [[getTableOption]] `getTableOption`
-a| Retrieving table metadata if available
+Used exclusively when `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#listPartitions, list the partitions of a table>>.
+
+| getPartitionsByFilter
+| [[getPartitionsByFilter]] Used when...FIXME
+
+| getPartitionOption
+| [[getPartitionOption]] Used when...FIXME
+
+| getTableOption
+a| [[getTableOption]] Retrieving table metadata if available
 
 Used exclusively when `HiveClient` is requested for a <<getTable, table metadata>>
 
 NOTE: `getTableOption` is a safe version of <<getTable, getTable>> as it does not throw a `NoSuchTableException`, but simply returns `None`.
 
-| [[renamePartitions]] `renamePartitions`
-| Used when...FIXME
+| renamePartitions
+| [[renamePartitions]] Used when...FIXME
 |===
 
 === [[getTable]] Retrieving Table Metadata If Available or Reporting NoSuchTableException -- `getTable` Method

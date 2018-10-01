@@ -13,9 +13,6 @@ NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog`
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
 scala> println(catalogType)
@@ -324,3 +321,17 @@ restoreTableMetadata(inputTable: CatalogTable): CatalogTable
 
 * <<listPartitionsByFilter, listPartitionsByFilter>>
 ====
+
+=== [[listPartitions]] Retrieving CatalogTablePartition of Table -- `listPartitions` Method
+
+[source, scala]
+----
+listPartitions(
+  db: String,
+  table: String,
+  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
+----
+
+NOTE: `listPartitions` is part of the <<spark-sql-ExternalCatalog.adoc#listPartitions, ExternalCatalog Contract>> to list partitions of a table.
+
+`listPartitions`...FIXME
