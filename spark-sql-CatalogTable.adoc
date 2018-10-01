@@ -48,6 +48,12 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 [[toString]]
 `CatalogTable` uses the following *text representation* (i.e. `toString`)...FIXME
 
+`CatalogTable` is <<creating-instance, created>> with the optional <<bucketSpec, bucketing specification>> that is used for the following:
+
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listColumns-internal, list the columns of a table>>
+
+* FIXME
+
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
 You manage a table metadata using the link:spark-sql-Catalog.adoc[catalog] interface (aka _metastore_). Among the management tasks is to get the <<stats, statistics>> of a table (that are used for link:spark-sql-cost-based-optimization.adoc[cost-based query optimization]).
@@ -161,7 +167,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 * [[schema]] link:spark-sql-StructType.adoc[Schema]
 * [[provider]] Name of the table provider (optional)
 * [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (optional)
+* [[bucketSpec]] Optional <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (default: `None`)
 * [[owner]] Owner
 * [[createTime]] Create time
 * [[lastAccessTime]] Last access time

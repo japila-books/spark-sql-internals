@@ -131,13 +131,12 @@ Internally, `listTables` requests <<sessionCatalog, SessionCatalog>> to link:spa
 
 In the end, `listTables` <<makeDataset, creates a Dataset>> with the tables.
 
-=== [[listColumns]] Listing Columns of Table (as Dataset) -- `listColumns` Internal Method
+=== [[listColumns]] Listing Columns of Table (as Dataset) -- `listColumns` Method
 
 [source, scala]
 ----
 listColumns(tableName: String): Dataset[Column]
 listColumns(dbName: String, tableName: String): Dataset[Column]
-listColumns(tableIdentifier: TableIdentifier): Dataset[Column]
 ----
 
 NOTE: `listColumns` is part of link:spark-sql-Catalog.adoc#listColumns[Catalog Contract] to...FIXME.
@@ -211,3 +210,14 @@ refreshByPath(resourcePath: String): Unit
 NOTE: `refreshByPath` is part of link:spark-sql-Catalog.adoc#refreshByPath[Catalog Contract] to...FIXME.
 
 `refreshByPath`...FIXME
+
+=== [[listColumns-internal]] `listColumns` Internal Method
+
+[source, scala]
+----
+listColumns(tableIdentifier: TableIdentifier): Dataset[Column]
+----
+
+`listColumns`...FIXME
+
+NOTE: `listColumns` is used exclusively when `CatalogImpl` is requested to <<listColumns, listColumns>>.
