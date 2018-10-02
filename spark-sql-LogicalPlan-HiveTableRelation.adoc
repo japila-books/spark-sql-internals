@@ -6,9 +6,6 @@
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 val tableName = "h1"
 
 // Make the example reproducible

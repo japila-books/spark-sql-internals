@@ -89,7 +89,7 @@
 . link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager -- Management Interface of Global Temporary Views]
 
 . link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Specification]
+.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Specification (Native Table Metadata)]
 ... link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat -- Storage Specification of Table or Partition]
 ... link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Partition Specification of Table]
 ... link:spark-sql-BucketSpec.adoc[BucketSpec -- Bucketing Specification of Table]
@@ -407,6 +407,7 @@
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand]
 . link:spark-sql-LogicalPlan-InsertIntoDir.adoc[InsertIntoDir]
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
+. link:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
 . link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 . link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]

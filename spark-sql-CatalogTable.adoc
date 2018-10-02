@@ -1,4 +1,4 @@
-== [[CatalogTable]] CatalogTable -- Table Specification
+== [[CatalogTable]] CatalogTable -- Table Specification (Native Table Metadata)
 
 `CatalogTable` is the *table specification*, i.e. the metadata of a table that is stored in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
 

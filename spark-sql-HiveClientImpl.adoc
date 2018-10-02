@@ -2,7 +2,7 @@
 
 `HiveClientImpl` is the only available link:spark-sql-HiveClient.adoc[HiveClient] in Spark SQL that does/uses...FIXME
 
-`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
+`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
 NOTE: The location of the default database for the Hive metastore warehouse is `/user/hive/warehouse` by default.
 
@@ -182,13 +182,24 @@ fromHivePartition(hp: HivePartition): CatalogTablePartition
 
 NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.
 
-=== [[toHiveTable]] `toHiveTable` Method
+=== [[toHiveTable]] Converting Native Table Metadata to Hive's Table -- `toHiveTable` Method
 
 [source, scala]
 ----
 toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
 ----
 
-`toHiveTable`...FIXME
+`toHiveTable` simply creates a new Hive `Table` and copies the properties from the input <<spark-sql-CatalogTable.adoc#, CatalogTable>>.
 
-NOTE: `toHiveTable` is used when...FIXME
+[NOTE]
+====
+`toHiveTable` is used when:
+
+* `HiveUtils` is requested to <<spark-sql-HiveUtils.adoc#inferSchema, inferSchema>>
+
+* `HiveClientImpl` is requested to <<createTable, createTable>>, <<alterTable, alterTable>>, <<renamePartitions, renamePartitions>>, <<alterPartitions, alterPartitions>>, <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>
+
+* `HiveTableScanExec` physical operator is requested for the <<hiveQlTable, hiveQlTable>>
+
+* <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical commands are executed
+====

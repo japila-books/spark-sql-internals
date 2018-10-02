@@ -53,3 +53,14 @@ Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
 In the end, `newClientForMetadata` requests the `IsolatedClientLoader` to create a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl].
 
 NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#client[HiveClient].
+
+=== [[inferSchema]] `inferSchema` Method
+
+[source, scala]
+----
+inferSchema(table: CatalogTable): CatalogTable
+----
+
+`inferSchema`...FIXME
+
+NOTE: `inferSchema` is used when...FIXME
