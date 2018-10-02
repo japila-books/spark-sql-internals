@@ -361,4 +361,12 @@ outputOrdering: Seq[SortOrder]
 
 NOTE: `outputOrdering` is part of the <<spark-sql-SparkPlan.adoc#outputOrdering, SparkPlan Contract>> to specify output data ordering.
 
-`outputOrdering`...FIXME
+`outputOrdering` is a `SortOrder` expression for every <<spark-sql-BucketSpec.adoc#sortColumnNames, sort column>> in `Ascending` order only when all the following hold:
+
+* <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>
+
+* <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> defined
+
+* All the buckets have a single file in it
+
+Otherwise, `outputOrdering` is simply empty (`Nil`).
