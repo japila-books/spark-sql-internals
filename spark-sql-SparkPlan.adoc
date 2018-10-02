@@ -36,18 +36,6 @@ a| [[doPrepare]] Prepares a physical operator for execution
 
 Executed exclusively as part of <<prepare, prepare>> and is supposed to set some state up before executing a query (e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[BroadcastExchangeExec] to broadcast a relation asynchronously or link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[SubqueryExec] to execute a child operator)
 
-| outputOrdering
-a| [[outputOrdering]] Specifies *output data ordering*, i.e. how data is sorted (ordered) in each partition
-
-[source, scala]
-----
-outputOrdering: Seq[SortOrder] = Nil
-----
-
-`outputOrdering` is not defined (i.e. `Nil`) by default.
-
-Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
-
 | requiredChildDistribution
 a| [[requiredChildDistribution]]
 
@@ -514,4 +502,26 @@ outputPartitioning: Partitioning
 * <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is executed (and in particular <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, adds an ExchangeCoordinator for adaptive query execution>>, <<spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering, enforces partition requirements>> and <<spark-sql-EnsureRequirements.adoc#reorderJoinPredicates, reorderJoinPredicates>>)
 
 * `Dataset` is requested to <<spark-sql-dataset-operators.adoc#checkpoint, checkpoint>>
+====
+
+=== [[outputOrdering]] Output Data Ordering -- `outputOrdering` Method
+
+[source, scala]
+----
+outputOrdering: Seq[SortOrder]
+----
+
+`outputOrdering` specifies the *output data ordering*, i.e. a hint for the Spark Physical Optimizer for the sorting (ordering) of the data in each partition.
+
+`outputOrdering` defaults to a no ordering (`Nil`).
+
+[NOTE]
+====
+`outputOrdering` is used when:
+
+* <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is executed (and <<spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering, enforces partition requirements>>)
+
+* `Dataset` is requested to <<spark-sql-dataset-operators.adoc#checkpoint, checkpoint>>
+
+* `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.adoc#write, write a query result>>
 ====
