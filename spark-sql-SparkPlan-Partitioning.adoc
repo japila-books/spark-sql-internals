@@ -1,44 +1,20 @@
 == [[Partitioning]] Partitioning -- Specification of Physical Operator's Output Partitions
 
-`Partitioning` is <<contract, specification>> that describes how a link:spark-sql-SparkPlan.adoc[physical operator]'s output is split across partitions.
+`Partitioning` is the <<contract, contract>> to hint the Spark Physical Optimizer for the number of partitions the output of a <<spark-sql-SparkPlan.adoc#, physical operator>> should be split across.
 
 [[contract]]
+[[numPartitions]]
 [source, scala]
 ----
-package org.apache.spark.sql.catalyst.plans.physical
-
-sealed trait Partitioning {
-  val numPartitions: Int
-  def satisfies(required: Distribution): Boolean
-  def compatibleWith(other: Partitioning): Boolean
-  def guarantees(other: Partitioning): Boolean
-}
+numPartitions: Int
 ----
 
-.Partitioning Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[compatibleWith]] `compatibleWith`
-| Used mainly in `Partitioning.allCompatible`
-
-| [[guarantees]] `guarantees`
-| Used mainly when `EnsureRequirements` physical preparation rule link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements of a physical operator]
-
-| [[numPartitions]] `numPartitions`
-a| Number of partitions that the data is split across
-
-Used in:
+`numPartitions` is used in:
 
 * `EnsureRequirements` physical preparation rule to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements of a physical operator]
+
 * link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec] for `outputPartitioning` for `FullOuter` join type
 * `Partitioning.allCompatible`
-
-| [[satisfies]] `satisfies`
-| Used mainly when `EnsureRequirements` physical preparation rule link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements of a physical operator]
-|===
 
 [[implementations]]
 .Partitioning Schemes (Partitionings) and Their Properties
@@ -50,13 +26,13 @@ Used in:
 | numPartitions
 | satisfies
 
-| [[BroadcastPartitioning]] `BroadcastPartitioning`
+m| BroadcastPartitioning
 | `BroadcastPartitioning` with the same `BroadcastMode`
 | Exactly the same `BroadcastPartitioning`
 ^| 1
-| link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with the same `BroadcastMode`
+| [[BroadcastPartitioning]] link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with the same `BroadcastMode`
 
-a| [[HashPartitioning]] `HashPartitioning`
+a| `HashPartitioning`
 
 * `clustering` expressions
 * `numPartitions`
@@ -64,22 +40,22 @@ a| [[HashPartitioning]] `HashPartitioning`
 | `HashPartitioning` (when their underlying expressions are semantically equal, i.e. deterministic and canonically equal)
 | `HashPartitioning` (when their underlying expressions are semantically equal, i.e. deterministic and canonically equal)
 | Input `numPartitions`
-a|
+a| [[HashPartitioning]]
 
 * link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
 * link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] with all the hashing link:spark-sql-Expression.adoc[expressions] included in `clustering` expressions
 
-a| [[PartitioningCollection]] `PartitioningCollection`
+a| `PartitioningCollection`
 
 * `partitionings`
 
 | Any `Partitioning` that is compatible with one of the input `partitionings`
 | Any `Partitioning` that is guaranteed by any of the input `partitionings`
 | Number of partitions of the first `Partitioning` in the input `partitionings`
-| Any `Distribution` that is satisfied by any of the input `partitionings`
+| [[PartitioningCollection]] Any `Distribution` that is satisfied by any of the input `partitionings`
 
-a| [[RangePartitioning]] `RangePartitioning`
+a| `RangePartitioning`
 
 * `ordering` collection of `SortOrder`
 * `numPartitions`
@@ -87,32 +63,32 @@ a| [[RangePartitioning]] `RangePartitioning`
 | `RangePartitioning` (when semantically equal, i.e. underlying expressions are deterministic and canonically equal)
 | `RangePartitioning` (when semantically equal, i.e. underlying expressions are deterministic and canonically equal)
 | Input `numPartitions`
-a|
+a| [[RangePartitioning]]
 
 * link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 * link:spark-sql-OrderedDistribution.adoc[OrderedDistribution] with `requiredOrdering` that matches the input `ordering`
 * link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
 
-a| [[RoundRobinPartitioning]] `RoundRobinPartitioning`
+a| `RoundRobinPartitioning`
 
 * `numPartitions`
 
 | Always negative
 | Always negative
 | Input `numPartitions`
-| link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| [[RoundRobinPartitioning]] link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
-| [[SinglePartition]] `SinglePartition`
+| `SinglePartition`
 | Any `Partitioning` with exactly one partition
 | Any `Partitioning` with exactly one partition
 ^| 1
-| Any `Distribution` except link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
+| [[SinglePartition]] Any `Distribution` except link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
 
-a| [[UnknownPartitioning]] `UnknownPartitioning`
+a| `UnknownPartitioning`
 
 * `numPartitions`
 | Always negative
 | Always negative
 | Input `numPartitions`
-| link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| [[UnknownPartitioning]] link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 |===

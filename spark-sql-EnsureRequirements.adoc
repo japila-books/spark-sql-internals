@@ -104,3 +104,14 @@ With link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] (i.e
 Otherwise (when adaptive query execution is disabled or `children` do not support `ExchangeCoordinator`), `withExchangeCoordinator` returns the input `children` unchanged.
 
 NOTE: `withExchangeCoordinator` is used exclusively for <<ensureDistributionAndOrdering, enforcing partition requirements of a physical operator>>.
+
+=== [[reorderJoinPredicates]] `reorderJoinPredicates` Internal Method
+
+[source, scala]
+----
+reorderJoinPredicates(plan: SparkPlan): SparkPlan
+----
+
+`reorderJoinPredicates`...FIXME
+
+NOTE: `reorderJoinPredicates` is used when...FIXME

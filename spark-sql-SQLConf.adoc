@@ -8,9 +8,6 @@ You can access a session-specific `SQLConf` using link:spark-sql-SparkSession.ad
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :type spark
 org.apache.spark.sql.SparkSession
 

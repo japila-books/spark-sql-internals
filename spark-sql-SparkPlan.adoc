@@ -48,16 +48,6 @@ outputOrdering: Seq[SortOrder] = Nil
 
 Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
 
-| outputPartitioning
-a| [[outputPartitioning]]
-
-[source, scala]
-----
-outputPartitioning: Partitioning
-----
-
-Specifies *output data partitioning*, i.e. how output data is partitioned (across executors). Defaults to a `UnknownPartitioning`.
-
 | requiredChildDistribution
 a| [[requiredChildDistribution]]
 
@@ -505,3 +495,23 @@ waitForSubqueries(): Unit
 `waitForSubqueries` requests every link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] in <<runningSubqueries, runningSubqueries>> to link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[updateResult].
 
 NOTE: `waitForSubqueries` is used exclusively when a physical operator is requested to <<executeQuery, prepare itself for query execution>> (when it is <<execute, executed>> or requested to <<executeBroadcast, executeBroadcast>>).
+
+=== [[outputPartitioning]] Output Data Partitioning -- `outputPartitioning` Method
+
+[source, scala]
+----
+outputPartitioning: Partitioning
+----
+
+`outputPartitioning` specifies the *output data partitioning*, i.e. a hint for the Spark Physical Optimizer for the number of partitions the output of the physical operator should be split across.
+
+`outputPartitioning` defaults to a `UnknownPartitioning` (with `0` partitions).
+
+[NOTE]
+====
+`outputPartitioning` is used when:
+
+* <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is executed (and in particular <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, adds an ExchangeCoordinator for adaptive query execution>>, <<spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering, enforces partition requirements>> and <<spark-sql-EnsureRequirements.adoc#reorderJoinPredicates, reorderJoinPredicates>>)
+
+* `Dataset` is requested to <<spark-sql-dataset-operators.adoc#checkpoint, checkpoint>>
+====

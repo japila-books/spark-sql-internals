@@ -187,11 +187,13 @@ selectedPartitions: Seq[PartitionDirectory]
 outputPartitioning: Partitioning
 ----
 
-NOTE: `outputPartitioning` is part of the <<spark-sql-SparkPlan.adoc#outputPartitioning, SparkPlan Contract>> to specify data partitioning.
+NOTE: `outputPartitioning` is part of the <<spark-sql-SparkPlan.adoc#outputPartitioning, SparkPlan Contract>> to specify output data partitioning.
 
-`outputPartitioning` may give a link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] output partitioning when bucketing is enabled.
+`outputPartitioning` can be one of the following:
 
-CAUTION: FIXME
+* <<spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning, HashPartitioning>> (with the <<spark-sql-BucketSpec.adoc#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.adoc#numBuckets, number of buckets>> of the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>>) when <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>> and the <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> defined
+
+* <<spark-sql-SparkPlan-Partitioning.adoc#UnknownPartitioning, UnknownPartitioning>> (with `0` partitions) otherwise
 
 === [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing Support -- `createBucketedReadRDD` Internal Method
 
