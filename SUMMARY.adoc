@@ -509,6 +509,7 @@
 . link:spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
 . link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion]
 . link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
+. link:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation]
 . link:spark-sql-Analyzer-PreWriteCheck.adoc[PreWriteCheck]
 . link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
@@ -707,6 +708,7 @@
 
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
 
+. link:spark-sql-CatalogUtils.adoc[CatalogUtils Helper Object]
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
 
 . link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]

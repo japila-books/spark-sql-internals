@@ -181,8 +181,8 @@ createAnalyzer(
 |
 
 .3+^.^| postHocResolutionRules
-| PreprocessTableCreation
-|
+| <<spark-sql-Analyzer-PreprocessTableCreation.adoc#, PreprocessTableCreation>>
+| [[PreprocessTableCreation]]
 
 | PreprocessTableInsertion
 |

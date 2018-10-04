@@ -1,10 +1,10 @@
-== [[CatalystSerde]] CatalystSerde
+== [[CatalystSerde]] CatalystSerde Helper Object
 
 `CatalystSerde` is a Scala object that consists of three utility methods:
 
-1. <<deserialize, deserialize>> to create a new logical plan with the input logical plan wrapped inside link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] logical operator.
-2. <<serialize, serialize>>
-3. <<generateObjAttr, generateObjAttr>>
+. <<deserialize, deserialize>> to create a new logical plan with the input logical plan wrapped inside link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] logical operator.
+. <<serialize, serialize>>
+. <<generateObjAttr, generateObjAttr>>
 
 `CatalystSerde` and belongs to `org.apache.spark.sql.catalyst.plans.logical` package.
 

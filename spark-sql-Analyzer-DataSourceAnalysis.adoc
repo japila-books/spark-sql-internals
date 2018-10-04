@@ -1,6 +1,6 @@
 == [[DataSourceAnalysis]] DataSourceAnalysis PostHoc Logical Resolution Rule
 
-`DataSourceAnalysis` is a link:spark-sql-Analyzer.adoc#postHocResolutionRules[posthoc logical resolution rule] that the link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
+`DataSourceAnalysis` is a <<spark-sql-Analyzer.adoc#postHocResolutionRules, posthoc logical resolution rule>> that the link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
 
 [[resolutions]]
 .DataSourceAnalysis's Logical Resolutions (Conversions)
@@ -44,13 +44,13 @@ val plan = FIXME
 rule(plan)
 ----
 
-=== [[apply]] Applying DataSourceAnalysis Rule to Logical Plan (Executing DataSourceAnalysis) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply`...FIXME

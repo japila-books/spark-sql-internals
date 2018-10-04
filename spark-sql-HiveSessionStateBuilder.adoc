@@ -116,7 +116,7 @@ NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer
 | [[RelationConversions]] link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
 |
 
-| [[PreprocessTableCreation]] `PreprocessTableCreation`
+| [[PreprocessTableCreation]] <<spark-sql-Analyzer-PreprocessTableCreation.adoc#, PreprocessTableCreation>>
 |
 
 | [[PreprocessTableInsertion]] `PreprocessTableInsertion`

@@ -8,14 +8,14 @@ CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
 
 `RelationConversions` is <<creating-instance, created>> exclusively when the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] is created.
 
-=== [[apply]] Executing RelationConversions on Logical Plan (and Converting HiveTableRelations to LogicalRelations) -- `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
 
