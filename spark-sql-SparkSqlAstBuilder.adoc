@@ -130,7 +130,7 @@ a|
 
 | `visitCreateView`
 | `#createView`
-a| [[visitCreateView]] <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>> for `CREATE VIEW AS` SQL statements
+a| [[visitCreateView]] <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>> for `CREATE VIEW AS` SQL statement
 
 ```
 CREATE [OR REPLACE] [[GLOBAL] TEMPORARY]
@@ -177,6 +177,15 @@ DescribeTableCommand `t1`, false
 | [[visitInsertOverwriteHiveDir]] `visitInsertOverwriteHiveDir`
 | `#insertOverwriteHiveDir`
 |
+
+| `visitShowCreateTable`
+| `#showCreateTable`
+a| [[visitShowCreateTable]] <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>> logical command for `SHOW CREATE TABLE` SQL statement
+
+```
+SHOW CREATE TABLE tableIdentifier
+```
+
 |===
 
 [[with-methods]]

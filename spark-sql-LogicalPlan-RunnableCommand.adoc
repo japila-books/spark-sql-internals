@@ -210,8 +210,8 @@ Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrame
 | ShowColumnsCommand
 |
 
-| ShowCreateTableCommand
-|
+| <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>>
+| [[ShowCreateTableCommand]]
 
 | ShowDatabasesCommand
 |

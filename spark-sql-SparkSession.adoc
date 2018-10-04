@@ -820,7 +820,7 @@ listenerManager: ExecutionListenerManager
 
 `listenerManager`...FIXME
 
-=== [[sessionState]] Accessing SessionState -- `sessionState` Method
+=== [[sessionState]] Accessing SessionState -- `sessionState` Lazy Attribute
 
 [source, scala]
 ----

@@ -423,6 +423,7 @@
 . link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition and RepartitionByExpression]
 . link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
 . link:spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc[SaveIntoDataSourceCommand]
+. link:spark-sql-LogicalPlan-ShowCreateTableCommand.adoc[ShowCreateTableCommand]
 . link:spark-sql-LogicalPlan-ShowTablesCommand.adoc[ShowTablesCommand]
 . link:spark-sql-LogicalPlan-Sort.adoc[Sort]
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]

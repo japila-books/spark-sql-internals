@@ -58,7 +58,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `DescribeTableCommand` logical command is requested to <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, describe detailed partition and storage information>> (when <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>>)
 
-* `ShowCreateTableCommand` logical command is executed
+* <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>> logical command is executed
 
 * <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run, CreateDataSourceTableCommand>> and <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run, CreateDataSourceTableAsSelectCommand>> logical commands are executed
 
