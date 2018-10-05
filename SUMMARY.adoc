@@ -230,7 +230,7 @@
 
 === Others
 
-. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
+. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter Helper Object]
 
 . link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
 
@@ -368,9 +368,9 @@
 
 . link:spark-sql-LogicalPlan.adoc[LogicalPlan Contract -- Logical Operator with Children and Expressions / Logical Query Plan]
 . link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
-. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Data]
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
-. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract]
+. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Data]
+. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract -- DataWritingCommands That Save Query Result As Hive Files]
 
 ==== Concrete Logical Operators
 

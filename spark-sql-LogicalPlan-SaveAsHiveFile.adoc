@@ -1,3 +1,43 @@
-== [[SaveAsHiveFile]] SaveAsHiveFile Contract
+== [[SaveAsHiveFile]] SaveAsHiveFile Contract -- DataWritingCommands That Save Query Result As Hive Files
 
-`SaveAsHiveFile` is...FIXME
+`SaveAsHiveFile` is the extension of the <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand contract>> for <<implementations, commands>> that <<saveAsHiveFile, saveAsHiveFile>>.
+
+[[implementations]]
+.SaveAsHiveFiles
+[cols="1,2",options="header",width="100%"]
+|===
+| SaveAsHiveFile
+| Description
+
+| <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>>
+| [[InsertIntoHiveDirCommand]]
+
+| <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>
+| [[InsertIntoHiveTable]]
+
+|===
+
+=== [[saveAsHiveFile]] `saveAsHiveFile` Method
+
+[source, scala]
+----
+saveAsHiveFile(
+  sparkSession: SparkSession,
+  plan: SparkPlan,
+  hadoopConf: Configuration,
+  fileSinkConf: FileSinkDesc,
+  outputLocation: String,
+  customPartitionLocations: Map[TablePartitionSpec, String] = Map.empty,
+  partitionAttributes: Seq[Attribute] = Nil): Set[String]
+----
+
+`saveAsHiveFile`...FIXME
+
+[NOTE]
+====
+`saveAsHiveFile` is used when:
+
+* <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> logical command is executed
+
+* <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical command is executed (and does <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#processInsert, processInsert>>)
+====

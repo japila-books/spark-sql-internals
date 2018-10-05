@@ -1,6 +1,6 @@
-== [[FileFormatWriter]] FileFormatWriter
+== [[FileFormatWriter]] FileFormatWriter Helper Object
 
-`FileFormatWriter` is...FIXME
+`FileFormatWriter` is a Scala object that allows for <<write, writing the result of a structured query>>.
 
 [[logging]]
 [TIP]
@@ -22,7 +22,7 @@ Refer to link:spark-logging.adoc[Logging].
 ----
 write(
   sparkSession: SparkSession,
-  queryExecution: QueryExecution,
+  plan: SparkPlan,
   fileFormat: FileFormat,
   committer: FileCommitProtocol,
   outputSpec: OutputSpec,
@@ -39,7 +39,39 @@ write(
 ====
 `write` is used when:
 
-* link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand] and link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run[InsertIntoHiveTable] commands are executed
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
 
-* Spark Structured Streaming's `FileStreamSink` is requested to add a streaming batch.
+* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+
+* Structured Streaming's `FileStreamSink` is requested to add a streaming batch (`addBatch`)
 ====
+
+=== [[executeTask]] `executeTask` Internal Method
+
+[source, scala]
+----
+executeTask(
+  description: WriteJobDescription,
+  sparkStageId: Int,
+  sparkPartitionId: Int,
+  sparkAttemptNumber: Int,
+  committer: FileCommitProtocol,
+  iterator: Iterator[InternalRow]): WriteTaskResult
+----
+
+`executeTask`...FIXME
+
+NOTE: `executeTask` is used exclusively when `FileFormatWriter` is requested to <<write, write the result of a structured query>>.
+
+=== [[processStats]] `processStats` Internal Method
+
+[source, scala]
+----
+processStats(
+  statsTrackers: Seq[WriteJobStatsTracker],
+  statsPerTask: Seq[Seq[WriteTaskStats]]): Unit
+----
+
+`processStats`...FIXME
+
+NOTE: `processStats` is used exclusively when `FileFormatWriter` is requested to <<write, write the result of a structured query>>.
