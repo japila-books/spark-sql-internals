@@ -1,6 +1,6 @@
-== [[TextBasedFileFormat]] TextBasedFileFormat -- Base FileFormat
+== [[TextBasedFileFormat]] TextBasedFileFormat -- Text Splitable FileFormat
 
-`TextBasedFileFormat` is a base link:spark-sql-FileFormat.adoc[FileFormat] that <<isSplitable, uses a Hadoop compression codec to know whether a given file is splitable or not>>.
+`TextBasedFileFormat` is an extension of the <<spark-sql-FileFormat.adoc#, FileFormat>> contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
 
 [[implementations]]
 .TextBasedFileFormats
@@ -9,17 +9,17 @@
 | TextBasedFileFormat
 | Description
 
-| [[CSVFileFormat]] link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-|
+| <<spark-sql-CSVFileFormat.adoc#, CSVFileFormat>>
+| [[CSVFileFormat]]
 
-| [[JsonFileFormat]] link:spark-sql-JsonFileFormat.adoc[JsonFileFormat]
-|
+| <<spark-sql-JsonFileFormat.adoc#, JsonFileFormat>>
+| [[JsonFileFormat]]
 
-| [[LibSVMFileFormat]] `LibSVMFileFormat`
-| Used in Spark MLlib
+| `LibSVMFileFormat`
+| [[LibSVMFileFormat]] Used in Spark MLlib
 
-| [[TextFileFormat]] link:spark-sql-TextFileFormat.adoc[TextFileFormat]
-|
+| <<spark-sql-TextFileFormat.adoc#, TextFileFormat>>
+| [[TextFileFormat]]
 |===
 
 [[codecFactory]]

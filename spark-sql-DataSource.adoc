@@ -85,7 +85,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 Used when...FIXME
 
 | `sourceInfo`
-| [[sourceInfo]] FIXME
+| [[sourceInfo]] `SourceInfo`
 
 Used when...FIXME
 
@@ -236,6 +236,8 @@ For any other data source, it throws `UnsupportedOperationException` exception:
 ```
 Data source [className] does not support streamed reading
 ```
+
+NOTE: `sourceSchema` is used exclusively when `DataSource` is requested for the <<sourceInfo, sourceInfo>>.
 
 ==== [[inferFileFormatSchema]] `inferFileFormatSchema` Internal Method
 
@@ -403,3 +405,16 @@ planForWritingFileFormat(
 `planForWritingFileFormat`...FIXME
 
 NOTE: `planForWritingFileFormat` is used when...FIXME
+
+=== [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
+
+[source, scala]
+----
+getOrInferFileFormatSchema(
+  format: FileFormat,
+  fileStatusCache: FileStatusCache = NoopCache): (StructType, StructType)
+----
+
+`getOrInferFileFormatSchema`...FIXME
+
+NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolveRelation>>.

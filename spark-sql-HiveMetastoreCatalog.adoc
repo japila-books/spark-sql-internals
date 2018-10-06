@@ -23,4 +23,19 @@ convertToLogicalRelation(
 
 `convertToLogicalRelation`...FIXME
 
-NOTE: `convertToLogicalRelation` is used exclusively when `RelationConversions` logical evaluation rule is requested to link:spark-sql-Analyzer-RelationConversions.adoc#convert[convert a HiveTableRelation to a LogicalRelation] for `parquet`, `native` and `hive` ORC storage formats.
+NOTE: `convertToLogicalRelation` is used exclusively when `RelationConversions` logical evaluation rule is requested to <<spark-sql-Analyzer-RelationConversions.adoc#convert, convert a HiveTableRelation to a LogicalRelation>> for `parquet`, `native` and `hive` ORC storage formats.
+
+=== [[inferIfNeeded]] `inferIfNeeded` Internal Method
+
+[source, scala]
+----
+inferIfNeeded(
+  relation: HiveTableRelation,
+  options: Map[String, String],
+  fileFormat: FileFormat,
+  fileIndexOpt: Option[FileIndex] = None): CatalogTable
+----
+
+`inferIfNeeded`...FIXME
+
+NOTE: `inferIfNeeded` is used exclusively when `HiveMetastoreCatalog` is requested to <<convertToLogicalRelation, convertToLogicalRelation>>.

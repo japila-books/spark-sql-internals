@@ -156,14 +156,15 @@
 === File-Based Data Sources
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
-.. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat -- Base FileFormat]
+.. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
+.. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
 
-. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat -- Built-In Support for Files in JSON Format]
+. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat]
+.. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
+.. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat]
+.. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
+
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
-. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
-. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
-. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
 
 === Kafka Data Source
 
@@ -199,6 +200,8 @@
 .. link:spark-sql-hive-metastore.adoc[Hive Metastore]
 .. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
 .. link:spark-sql-DataSinks.adoc[DataSinks Strategy]
+
+. link:spark-sql-HiveFileFormat.adoc[HiveFileFormat]
 
 . link:spark-sql-HiveClient.adoc[HiveClient]
 . link:spark-sql-HiveClientImpl.adoc[HiveClientImpl -- The One and Only HiveClient]
