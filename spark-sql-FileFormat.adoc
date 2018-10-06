@@ -1,4 +1,4 @@
-== [[FileFormat]] FileFormat
+== [[FileFormat]] FileFormat -- Data Sources to Read and Write Data In Files
 
 `FileFormat` is the <<contract, contract>> for <<implementations, data sources>> that <<buildReader, read>> and <<prepareWrite, write>> data stored in files.
 
@@ -24,9 +24,17 @@ buildReader(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ----
 
-Used when...FIXME
+`buildReader` returns a function that is used to read a single file in (as a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>>) as an `Iterator` of <<spark-sql-InternalRow.adoc#, InternalRows>>.
 
-| buildReaderWithPartitionValues
+`buildReader` throws an `UnsupportedOperationException` by default (and should therefore be overriden to work):
+
+```
+buildReader is not supported for [this]
+```
+
+Used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, buildReaderWithPartitionValues>>
+
+| <<buildReaderWithPartitionValues-internals, buildReaderWithPartitionValues>>
 a| [[buildReaderWithPartitionValues]]
 
 [source, scala]
@@ -41,7 +49,9 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ----
 
-Used when...FIXME
+`buildReaderWithPartitionValues` builds a data reader with partition column values appended, i.e. a function that is used to read a single file in (as a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>>) as an `Iterator` of <<spark-sql-InternalRow.adoc#, InternalRows>> (like <<buildReader, buildReader>>) with the partition values appended.
+
+Used exclusively when `FileSourceScanExec` physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD, inputRDD>> (when requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs, inputRDDs>> and <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, execution>>)
 
 | inferSchema
 a| [[inferSchema]]
@@ -73,7 +83,11 @@ isSplitable(
   path: Path): Boolean
 ----
 
-Used when...FIXME
+Flag that says whether a file (by Hadoop https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/Path.html[Path]) could be split or not.
+
+`isSplitable` is off (`false`) by default.
+
+Used exclusively when `FileSourceScanExec` physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>> (when requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD, inputRDD>> and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>)
 
 | prepareWrite
 a| [[prepareWrite]]
@@ -87,7 +101,7 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-Prepares a write job and returns a `OutputWriterFactory`
+Prepares a write job and returns an `OutputWriterFactory`
 
 Used exclusively when `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.adoc#write, write query result>>
 
@@ -101,12 +115,16 @@ supportBatch(
   dataSchema: StructType): Boolean
 ----
 
-Used when...FIXME
+Flag that says whether the format supports columnar batch (i.e. <<spark-sql-vectorized-parquet-reader.adoc#, vectorized decoding>>) or not.
+
+`isSplitable` is off (`false`) by default.
+
+Used exclusively when `FileSourceScanExec` physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>>
 
 | vectorTypes
 a| [[vectorTypes]]
 
-[source, java]
+[source, scala]
 ----
 vectorTypes(
   requiredSchema: StructType,
@@ -114,11 +132,15 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-Used when...FIXME
+`vectorTypes` is the concrete column vector class names for each column to be used in a columnar batch when <<supportBatch, enabled>>
+
+`vectorTypes` is undefined (`None`) by default.
+
+Used exclusively when `FileSourceScanExec` physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes, vectorTypes>>
 |===
 
 [[implementations]]
-.FileFormats
+.FileFormats (Direct Implementations and Extensions)
 [width="100%",cols="1,2",options="header"]
 |===
 | FileFormat
@@ -128,28 +150,16 @@ Used when...FIXME
 | [[HiveFileFormat]] Writes hive tables
 
 | <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>>
-| [[OrcFileFormat]]
+| [[OrcFileFormat]] ORC data source
 
 | <<spark-sql-ParquetFileFormat.adoc#, ParquetFileFormat>>
-| [[ParquetFileFormat]]
+| [[ParquetFileFormat]] Parquet data source
 
 | <<spark-sql-TextBasedFileFormat.adoc#, TextBasedFileFormat>>
-| [[TextBasedFileFormat]]
-
-| <<spark-sql-CSVFileFormat.adoc#, CSVFileFormat>>
-| [[CSVFileFormat]]
-
-| <<spark-sql-JsonFileFormat.adoc#, JsonFileFormat>>
-| [[JsonFileFormat]]
-
-| `LibSVMFileFormat`
-| [[LibSVMFileFormat]] (Spark MLlib)
-
-| <<spark-sql-TextFileFormat.adoc#, TextFileFormat>>
-| [[TextFileFormat]]
+| [[TextBasedFileFormat]] Base for text splitable `FileFormats`
 |===
 
-=== [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
+=== [[buildReaderWithPartitionValues-internals]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
 [source, scala]
 ----
@@ -172,75 +182,3 @@ Internally, `buildReaderWithPartitionValues` <<buildReader, builds a data reader
 . Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the link:spark-sql-PartitionedFile.adoc#partitionValues[partition column values] appended.
 
 NOTE: `buildReaderWithPartitionValues` is used exclusively when `FileSourceScanExec` physical operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDDs[input RDDs].
-
-=== [[isSplitable]] Is File Splitable Or Not -- `isSplitable` Method
-
-[source, scala]
-----
-isSplitable(
-  sparkSession: SparkSession,
-  options: Map[String, String],
-  path: Path): Boolean
-----
-
-`isSplitable` always gives `false` by default.
-
-NOTE: link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] comes with `isSplitable` that uses a Hadoop compression codec to know whether a given file is splitable or not.
-
-NOTE: `isSplitable` is used exclusively when `FileSourceScanExec` is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD].
-
-=== [[supportBatch]] `supportBatch` Method
-
-[source, scala]
-----
-supportBatch(sparkSession: SparkSession, dataSchema: StructType): Boolean
-----
-
-`supportBatch` is always disabled, i.e. `false` (and is expected to be overriden by `FileFormats` that want to support link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding]).
-
-[NOTE]
-====
-`supportBatch` is used when:
-
-* `FileSourceScanExec` physical operator is link:spark-sql-SparkPlan-FileSourceScanExec.adoc#creating-instance[created] (and initializes link:spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch[supportsBatch] flag)
-
-* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
-
-* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[buildReaderWithPartitionValues]
-====
-
-=== [[vectorTypes]] `vectorTypes` Method
-
-[source, scala]
-----
-vectorTypes(
-  requiredSchema: StructType,
-  partitionSchema: StructType,
-  sqlConf: SQLConf): Option[Seq[String]]
-----
-
-`vectorTypes` returns `None`, i.e. no class names of link:spark-sql-ColumnVector.adoc[ColumnVectors] for every column used in a columnar batch.
-
-NOTE: `vectorTypes` is used exclusively when `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes[concrete ColumnVector class names].
-
-=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
-
-[source, scala]
-----
-buildReader(
-  sparkSession: SparkSession,
-  dataSchema: StructType,
-  partitionSchema: StructType,
-  requiredSchema: StructType,
-  filters: Seq[Filter],
-  options: Map[String, String],
-  hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
-----
-
-`buildReader` simply reports a `UnsupportedOperationException`:
-
-```
-buildReader is not supported for [className]
-```
-
-NOTE: `buildReader` is used exclusively when `FileFormat` is requested to <<buildReaderWithPartitionValues, build a data reader with partition column values appended>>.

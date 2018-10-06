@@ -250,7 +250,7 @@ scala> println(lineage)
 
 NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, inputRDD>> (and the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined and <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
 
-=== [[supportsBatch]] `supportsBatch` Property
+=== [[supportsBatch]] `supportsBatch` Attribute
 
 [source, scala]
 ----
