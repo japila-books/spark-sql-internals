@@ -39,7 +39,7 @@ write(
 ====
 `write` is used when:
 
-* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical commands are executed)
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 

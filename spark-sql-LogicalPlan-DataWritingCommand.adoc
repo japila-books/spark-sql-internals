@@ -1,49 +1,61 @@
 == [[DataWritingCommand]] DataWritingCommand Contract -- Logical Commands That Write Data
 
-`DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.adoc#, Command contract>> for <<implementations, logical commands>> that write <<query, data>> to a relation when <<run, executed>>.
+`DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.adoc#, Command contract>> for <<implementations, logical commands>> that write <<query, query data>> to a relation when <<run, executed>>.
+
+`DataWritingCommand` is resolved to a <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#, DataWritingCommandExec>> physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<spark-sql-SparkPlan.adoc#, physical plan>>).
 
 [[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.execution.command
-
-trait DataWritingCommand extends Command {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def outputColumns: Seq[Attribute]
-  def query: LogicalPlan
-  def run(sparkSession: SparkSession, child: SparkPlan): Seq[Row]
-}
-----
-
 .DataWritingCommand Contract
 [cols="1m,2",options="header",width="100%"]
 |===
 | Property
 | Description
 
-| outputColumns
-| [[outputColumns]] Used when...FIXME
+| outputColumnNames
+a| [[outputColumnNames]]
+
+[source, scala]
+----
+outputColumnNames: Seq[String]
+----
+
+The output column names of the analyzed input query plan
+
+Used when `DataWritingCommand` is requested for the <<outputColumns, outputColumns>>
 
 | query
-| [[query]] <<spark-sql-LogicalPlan.adoc#, Logical query plan>> representing data to write (i.e. whose result will be inserted)
+a| [[query]]
 
-Used when `DataWritingCommand` is requested for the <<spark-sql-LogicalPlan-Command.adoc#children, child nodes>>.
+[source, scala]
+----
+query: LogicalPlan
+----
+
+The <<spark-sql-LogicalPlan.adoc#, logical query plan>> representing the data to write (i.e. whose result will be inserted into a relation)
+
+Used when `DataWritingCommand` is requested for the <<children, child nodes>> and <<outputColumns, outputColumns>>.
 
 | run
 a| [[run]]
+
+[source, scala]
+----
+run(sparkSession: SparkSession, child: SparkPlan): Seq[Row]
+----
+
+Executes the command
 
 Used when:
 
 * `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#sideEffectResult, sideEffectResult>>
 
-* `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run, CreateDataSourceTableAsSelectCommand>> logical command is executed.)
+* `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run, CreateDataSourceTableAsSelectCommand>> logical command is executed)
 |===
 
 [[children]]
 When requested for the <<spark-sql-LogicalPlan-Command.adoc#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
 
-`DataWritingCommand` defines <<metrics, performance metrics>>.
+`DataWritingCommand` defines custom <<metrics, performance metrics>>.
 
 [[metrics]]
 .DataWritingCommand's Performance Metrics
@@ -72,7 +84,7 @@ When requested for the <<spark-sql-LogicalPlan-Command.adoc#children, child node
 
 The <<metrics, performance metrics>> are used when:
 
-* `DataWritingCommand` is requested to <<basicWriteJobStatsTracker, basicWriteJobStatsTracker>>
+* `DataWritingCommand` is requested for the <<basicWriteJobStatsTracker, BasicWriteJobStatsTracker>>
 
 * `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#metrics, metrics>>
 
@@ -93,7 +105,7 @@ The <<metrics, performance metrics>> are used when:
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#, SaveAsHiveFile>>
-| [[SaveAsHiveFile]]
+| [[SaveAsHiveFile]] Contract for commands that write query result as Hive files
 |===
 
 === [[basicWriteJobStatsTracker]] `basicWriteJobStatsTracker` Method
@@ -105,4 +117,29 @@ basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 
 `basicWriteJobStatsTracker`...FIXME
 
-NOTE: `basicWriteJobStatsTracker` is used when...FIXME
+[NOTE]
+====
+`basicWriteJobStatsTracker` is used when:
+
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical commands are executed)
+
+* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+====
+
+=== [[outputColumns]] Output Columns -- `outputColumns` Method
+
+[source, scala]
+----
+outputColumns: Seq[Attribute]
+----
+
+`outputColumns`...FIXME
+
+[NOTE]
+====
+`outputColumns` is used when:
+
+* <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>>, <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
+
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
+====

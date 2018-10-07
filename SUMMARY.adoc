@@ -373,7 +373,7 @@
 . link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
 . link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Data]
-. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract -- DataWritingCommands That Save Query Result As Hive Files]
+. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract -- DataWritingCommands That Write Query Result As Hive Files]
 
 ==== Concrete Logical Operators
 

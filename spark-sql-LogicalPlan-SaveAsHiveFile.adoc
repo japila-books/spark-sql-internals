@@ -1,4 +1,4 @@
-== [[SaveAsHiveFile]] SaveAsHiveFile Contract -- DataWritingCommands That Save Query Result As Hive Files
+== [[SaveAsHiveFile]] SaveAsHiveFile Contract -- DataWritingCommands That Write Query Result As Hive Files
 
 `SaveAsHiveFile` is the extension of the <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand contract>> for <<implementations, commands>> that <<saveAsHiveFile, saveAsHiveFile>>.
 
