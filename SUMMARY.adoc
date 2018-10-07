@@ -614,6 +614,15 @@
 . link:spark-sql-SQLAppStatusPlugin.adoc[SQLAppStatusPlugin]
 . link:spark-sql-SQLAppStatusStore.adoc[SQLAppStatusStore]
 
+. link:spark-sql-WriteTaskStats.adoc[WriteTaskStats]
+.. link:spark-sql-BasicWriteTaskStats.adoc[BasicWriteTaskStats]
+
+. link:spark-sql-WriteTaskStatsTracker.adoc[WriteTaskStatsTracker]
+.. link:spark-sql-BasicWriteTaskStatsTracker.adoc[BasicWriteTaskStatsTracker]
+
+. link:spark-sql-WriteJobStatsTracker.adoc[WriteJobStatsTracker]
+.. link:spark-sql-BasicWriteJobStatsTracker.adoc[BasicWriteJobStatsTracker]
+
 . link:spark-logging.adoc[Logging]
 
 == Performance Tuning and Debugging

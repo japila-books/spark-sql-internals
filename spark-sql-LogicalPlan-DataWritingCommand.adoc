@@ -115,7 +115,7 @@ The <<metrics, performance metrics>> are used when:
 basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 ----
 
-`basicWriteJobStatsTracker`...FIXME
+`basicWriteJobStatsTracker` simply creates and returns a new <<spark-sql-BasicWriteJobStatsTracker.adoc#, BasicWriteJobStatsTracker>> (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
 
 [NOTE]
 ====
