@@ -20,7 +20,7 @@ NOTE: Hive data source can only be used with tables and you cannot read or write
 inferSchema is not supported for hive data source.
 ```
 
-=== [[prepareWrite]] `prepareWrite` Method
+=== [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
 [source, scala]
 ----
@@ -33,4 +33,10 @@ prepareWrite(
 
 NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.adoc#prepareWrite, FileFormat Contract>> to prepare a write job.
 
-`prepareWrite`...FIXME
+`prepareWrite` sets the *mapred.output.format.class* property to be the `getOutputFileFormatClassName` of the Hive `TableDesc` of the <<fileSinkConf, FileSinkDesc>>.
+
+`prepareWrite` requests the `HiveTableUtil` helper object to `configureJobPropertiesForStorageHandler`.
+
+`prepareWrite` requests the Hive `Utilities` helper object to `copyTableJobPropertiesToConf`.
+
+In the end, `prepareWrite` creates a new `OutputWriterFactory` that creates a new `HiveOutputWriter` when requested for a new `OutputWriter` instance.
