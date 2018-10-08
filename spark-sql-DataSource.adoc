@@ -389,7 +389,7 @@ planForWriting(mode: SaveMode, data: LogicalPlan): LogicalPlan
 
 * `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveToV1Source, saveToV1Source>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#save, save the result of a structured query (a DataFrame) to a data source>> for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers)
 
-* `InsertIntoDataSourceDirCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#run, executed>>
+* <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>> logical command is executed
 ====
 
 === [[planForWritingFileFormat]] `planForWritingFileFormat` Internal Method
@@ -404,7 +404,7 @@ planForWritingFileFormat(
 
 `planForWritingFileFormat`...FIXME
 
-NOTE: `planForWritingFileFormat` is used when...FIXME
+NOTE: `planForWritingFileFormat` is used when `DataSource` is requested to <<writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed) and for the <<planForWriting, logical command for writing>>.
 
 === [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
 

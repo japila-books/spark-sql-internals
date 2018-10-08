@@ -1,6 +1,12 @@
 == [[InsertIntoHadoopFsRelationCommand]] InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is...FIXME
+`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> that writes the data of the <<query, query>> out to the given <<fileFormat, FileFormat>>.
+
+`InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
+
+* `DataSource` is requested to <<spark-sql-DataSource.adoc#planForWritingFileFormat, planForWritingFileFormat>>
+
+* <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> post-hoc logical resolution rule is executed (and resolves a <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator with a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
 
 === [[run]] Executing Logical Command -- `run` Method
 
@@ -12,3 +18,20 @@ run(session: SparkSession): Seq[Row]
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME
+
+=== [[creating-instance]] Creating InsertIntoHadoopFsRelationCommand Instance
+
+`InsertIntoHadoopFsRelationCommand` takes the following when created:
+
+* [[outputPath]] Output Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/Path.html[Path]
+* [[staticPartitions]] Static table partition (`Map[String, String]`)
+* [[ifPartitionNotExists]] `ifPartitionNotExists` flag
+* [[partitionColumns]] Partition columns (`Seq[Attribute]`)
+* [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, BucketSpec>>
+* [[fileFormat]] <<spark-sql-FileFormat.adoc#, FileFormat>>
+* [[options]] Options (`Map[String, String]`)
+* [[query]] <<spark-sql-LogicalPlan.adoc#, Logical plan>>
+* [[mode]] `SaveMode`
+* [[catalogTable]] <<spark-sql-CatalogTable.adoc#, CatalogTable>>
+* [[fileIndex]] `FileIndex`
+* [[outputColumnNames]] Output column names
