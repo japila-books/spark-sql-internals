@@ -140,6 +140,14 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 | link:spark-sql-properties.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs]
 | [[fallBackToHdfsForStatsEnabled]] Used exclusively when `DetermineTableStats` logical resolution rule is executed.
 
+| fileCommitProtocolClass
+| link:spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass]
+a| [[fileCommitProtocolClass]] Used (to instantiate a `FileCommitProtocol`) when:
+
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
+
+* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+
 | histogramEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled]
 | [[histogramEnabled]] Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].
@@ -178,16 +186,6 @@ a| [[ignoreCorruptFiles]] Used when:
 | link:spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp[spark.sql.parquet.int96AsTimestamp]
 | [[isParquetINT96AsTimestamp]]
 
-| numShufflePartitions
-| link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
-a| [[numShufflePartitions]] Used in:
-
-* Dataset's link:spark-sql-dataset-operators.adoc#repartition[repartition] operator (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
-* link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[SparkSqlAstBuilder] (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
-* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[JoinSelection] execution planning strategy
-* link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
-* link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
-
 | isParquetINT96TimestampConversion
 | link:spark-sql-properties.adoc#spark.sql.parquet.int96TimestampConversion[spark.sql.parquet.int96TimestampConversion]
 | [[isParquetINT96TimestampConversion]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
@@ -199,6 +197,30 @@ a| [[numShufflePartitions]] Used in:
 | limitScaleUpFactor
 | link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor]
 | [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
+
+| manageFilesourcePartitions
+| <<spark-sql-properties.adoc#spark.sql.hive.manageFilesourcePartitions, spark.sql.hive.manageFilesourcePartitions>>
+a| [[manageFilesourcePartitions]] Used in:
+
+* `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation>>
+
+* <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#, CreateDataSourceTableCommand>>, <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
+
+* `DDLUtils` is requested to `verifyPartitionProviderIsHive`
+
+* `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a relation>> (for file-based data source tables and creates a `HadoopFsRelation`)
+
+* `FileStatusCache` is requested to `getOrCreate`
+
+| numShufflePartitions
+| link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
+a| [[numShufflePartitions]] Used in:
+
+* Dataset's link:spark-sql-dataset-operators.adoc#repartition[repartition] operator (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
+* link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[SparkSqlAstBuilder] (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
+* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[JoinSelection] execution planning strategy
+* link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
+* link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
 
 | offHeapColumnVectorEnabled
 | link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
@@ -229,6 +251,10 @@ a| [[parquetVectorizedReaderEnabled]] Used when:
 * `FileSourceScanExec` is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#needsUnsafeRowConversion[needsUnsafeRowConversion] flag
 
 * `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+
+| partitionOverwriteMode
+| link:spark-sql-properties.adoc#spark.sql.sources.partitionOverwriteMode[spark.sql.sources.partitionOverwriteMode]
+a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
 | preferSortMergeJoin
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]

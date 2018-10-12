@@ -17,7 +17,15 @@ run(session: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
+`run` uses the <<spark-sql-SQLConf.adoc#manageFilesourcePartitions, spark.sql.hive.manageFilesourcePartitions>> configuration property to...FIXME
+
+CAUTION: FIXME When is the <<catalogTable, catalogTable>> defined?
+
+CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
+
 `run`...FIXME
+
+`run` uses `SchemaUtils` to <<spark-sql-SchemaUtils.adoc#checkColumnNameDuplication, make sure that there are no duplicates>> in the <<outputColumnNames, outputColumnNames>>.
 
 === [[creating-instance]] Creating InsertIntoHadoopFsRelationCommand Instance
 

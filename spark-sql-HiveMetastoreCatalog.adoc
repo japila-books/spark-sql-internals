@@ -10,7 +10,7 @@ image::images/spark-sql-HiveMetastoreCatalog.png[align="center"]
 [[creating-instance]][[sparkSession]]
 `HiveMetastoreCatalog` takes a link:spark-sql-SparkSession.adoc[SparkSession] when created.
 
-=== [[convertToLogicalRelation]] `convertToLogicalRelation` Method
+=== [[convertToLogicalRelation]] Converting HiveTableRelation to LogicalRelation -- `convertToLogicalRelation` Method
 
 [source, scala]
 ----
