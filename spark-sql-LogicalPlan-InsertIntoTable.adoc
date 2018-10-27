@@ -2,7 +2,7 @@
 
 `InsertIntoTable` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following:
 
-* <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> and <<INSERT_INTO_TABLE, INSERT INTO>> SQL statements
+* <<INSERT_INTO_TABLE, INSERT INTO>> and <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> SQL statements
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert the rows of a DataFrame into a table]
 
@@ -11,6 +11,7 @@
 // make sure that the tables are available in a catalog
 sql("CREATE TABLE IF NOT EXISTS t1(id long)")
 sql("CREATE TABLE IF NOT EXISTS t2(id long)")
+
 val q = sql("INSERT INTO TABLE t2 SELECT * from t1 LIMIT 100")
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)
@@ -24,8 +25,52 @@ scala> println(plan.numberedTreeString)
 spark.range(10).write.mode("overwrite").insertInto("t2")
 ----
 
+.INSERT INTO partitioned_table
+[source, scala]
+----
+spark.range(10)
+  .withColumn("p1", 'id % 2)
+  .write
+  .mode("overwrite")
+  .partitionBy("p1")
+  .saveAsTable("partitioned_table")
+
+val insertIntoQ = sql("INSERT INTO TABLE partitioned_table PARTITION (p1 = 4) VALUES 41, 42")
+scala> println(insertIntoQ.queryExecution.logical.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), false, false
+01 +- 'UnresolvedInlineTable [col1], [List(41), List(42)]
+----
+
+.INSERT OVERWRITE TABLE partitioned_table
+[source, scala]
+----
+spark.range(10)
+  .withColumn("p1", 'id % 2)
+  .write
+  .mode("overwrite")
+  .partitionBy("p1")
+  .saveAsTable("partitioned_table")
+
+val insertOverwriteQ = sql("INSERT OVERWRITE TABLE partitioned_table PARTITION (p1 = 4) VALUES 40")
+scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), true, false
+01 +- 'UnresolvedInlineTable [col1], [List(40)]
+----
+
+`InsertIntoTable` is <<creating-instance, created>> with <<partition, partition keys>> that correspond to the `partitionSpec` part of the following SQL statements:
+
+* `INSERT INTO TABLE` (with the <<overwrite, overwrite>> and <<ifPartitionNotExists, ifPartitionNotExists>> flags off)
+
+* `INSERT OVERWRITE TABLE` (with the <<overwrite, overwrite>> and <<ifPartitionNotExists, ifPartitionNotExists>> flags off)
+
+`InsertIntoTable` has no <<partition, partition keys>> when <<creating-instance, created>> as follows:
+
+* <<insertInto, insertInto>> operator from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>>
+
+* <<spark-sql-DataFrameWriter.adoc#insertInto, DataFrameWriter.insertInto>> operator
+
 [[resolved]]
-`InsertIntoTable` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis and is supposed to be <<logical-conversions, converted to logical commands>> eventually).
+`InsertIntoTable` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis and is supposed to be <<logical-conversions, converted to logical commands>> at analysis phase).
 
 [[logical-conversions]]
 .InsertIntoTable's Logical Resolutions (Conversions)
@@ -38,7 +83,7 @@ spark.range(10).write.mode("overwrite").insertInto("t2")
 | [[InsertIntoHiveTable]] When <<spark-sql-Analyzer-HiveAnalysis.adoc#apply, HiveAnalysis>> resolution rule transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>>
 
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
-| [[InsertIntoDataSourceCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> over an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>
+| [[InsertIntoDataSourceCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> over an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>> (with no partitions defined)
 
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>
 | [[InsertIntoHadoopFsRelationCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> over a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
@@ -48,7 +93,7 @@ CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertI
 
 NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-into-rdd-based-table-not-allowed, RDD-based tables>> is not allowed (and fails at analysis).
 
-`InsertIntoTable` (with link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator) is <<creating-instance, created>> when:
+`InsertIntoTable` (with link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf logical operator) is <<creating-instance, created>> when:
 
 * [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO` or `INSERT OVERWRITE TABLE` SQL statements are executed (as a link:spark-sql-AstBuilder.adoc#visitSingleInsertQuery[single insert] or a link:spark-sql-AstBuilder.adoc#visitMultiInsertQuery[multi-insert] query)
 
@@ -61,9 +106,11 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 [[output]]
 `InsertIntoTable` has an empty <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
 
+[[insertInto]]
+[[catalyst-dsl]]
 [TIP]
 ====
-Use `insertInto` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `insertInto` operator from the link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----
@@ -72,6 +119,11 @@ val plan = table("a").insertInto(tableName = "t1", overwrite = true)
 scala> println(plan.numberedTreeString)
 00 'InsertIntoTable 'UnresolvedRelation `t1`, true, false
 01 +- 'UnresolvedRelation `a`
+
+import org.apache.spark.sql.catalyst.plans.logical.InsertIntoTable
+val op = plan.p(0).asInstanceOf[InsertIntoTable]
+scala> :type op
+org.apache.spark.sql.catalyst.plans.logical.InsertIntoTable
 ----
 ====
 
@@ -80,7 +132,7 @@ scala> println(plan.numberedTreeString)
 `InsertIntoTable` takes the following when created:
 
 * [[table]] link:spark-sql-LogicalPlan.adoc[Logical plan] for the table to insert into
-* [[partition]] Partitions (as a collection of partition keys and optional partition values for dynamic partition insert)
+* [[partition]] Partition keys (with optional partition values for <<spark-sql-dynamic-partition-inserts.adoc#, dynamic partition insert>>)
 * [[query]] link:spark-sql-LogicalPlan.adoc[Logical plan] representing the data to be written
 * [[overwrite]] `overwrite` flag that indicates whether to overwrite an existing table or partitions (`true`) or not (`false`)
 * [[ifPartitionNotExists]] `ifPartitionNotExists` flag

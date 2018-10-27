@@ -1,6 +1,6 @@
 == [[InsertIntoHadoopFsRelationCommand]] InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> that writes the data of the <<query, query>> out to the given <<fileFormat, FileFormat>>.
+`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> that writes the data of the <<query, query>> out in the given <<fileFormat, FileFormat>>.
 
 `InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
 
@@ -32,7 +32,7 @@ CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
 `InsertIntoHadoopFsRelationCommand` takes the following when created:
 
 * [[outputPath]] Output Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/Path.html[Path]
-* [[staticPartitions]] Static table partition (`Map[String, String]`)
+* [[staticPartitions]] Static table partitions (`Map[String, String]`)
 * [[ifPartitionNotExists]] `ifPartitionNotExists` flag
 * [[partitionColumns]] Partition columns (`Seq[Attribute]`)
 * [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, BucketSpec>>
@@ -43,3 +43,14 @@ CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
 * [[catalogTable]] <<spark-sql-CatalogTable.adoc#, CatalogTable>>
 * [[fileIndex]] `FileIndex`
 * [[outputColumnNames]] Output column names
+
+[NOTE]
+====
+<<staticPartitions, staticPartitions>> may hold zero or more partitions as follows:
+
+* Always empty when <<creating-instance, created>> when `DataSource` is requested to <<spark-sql-DataSource.adoc#planForWritingFileFormat, planForWritingFileFormat>>
+
+* Possibly with partitions when <<creating-instance, created>> when `DataSourceAnalysis` posthoc logical resolution rule is <<spark-sql-Analyzer-DataSourceAnalysis.adoc#apply, applied>> to an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator over a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> relation
+
+With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
+====

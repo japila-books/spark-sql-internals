@@ -52,31 +52,31 @@ EXPLAIN FORMATTED SELECT * FROM myTable
 
 [[visit-callbacks]]
 .AstBuilder's Visit Callback Methods
-[cols="1,1,3",options="header",width="100%"]
+[cols="1m,1,3",options="header",width="100%"]
 |===
 | Callback Method
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
-| `visitAliasedQuery`
+| visitAliasedQuery
 |
 | [[visitAliasedQuery]]
 
-| `visitColumnReference`
+| visitColumnReference
 |
 | [[visitColumnReference]]
 
-| `visitDereference`
+| visitDereference
 |
 | [[visitDereference]]
 
-| `visitExists`
+| visitExists
 | `#exists` labeled alternative
 | [[visitExists]] link:spark-sql-Expression-Exists.adoc[Exists] expression
 
-| [[visitExplain]] `visitExplain`
+| visitExplain
 | `explain` rule
-a| link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
+a| [[visitExplain]] link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
 
 [NOTE]
 ====
@@ -90,9 +90,9 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ```
 ====
 
-| [[visitFromClause]] `visitFromClause`
+| visitFromClause
 | `fromClause`
-a| link:spark-sql-LogicalPlan.adoc[LogicalPlan]
+a| [[visitFromClause]] link:spark-sql-LogicalPlan.adoc[LogicalPlan]
 
 Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional link:spark-sql-Expression-Generator.adoc#lateral-view[LATERAL VIEW].
 
@@ -102,9 +102,9 @@ A relation can be one of the following or a combination thereof:
 * Inline table using `VALUES exprs AS tableIdent`
 * Table-valued function (currently only `range` is supported)
 
-| [[visitFunctionCall]] `visitFunctionCall`
+| visitFunctionCall
 | `functionCall` labeled alternative
-a|
+a| [[visitFunctionCall]]
 
 * link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] for a bare function (with no window specification)
 
@@ -114,7 +114,7 @@ a|
 
 TIP: See the <<function-examples, function examples>> below.
 
-| `visitInlineTable`
+| visitInlineTable
 | `inlineTable` rule
 a| [[visitInlineTable]] <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> unary logical operator (as the child of <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>> for `tableAlias`)
 
@@ -130,9 +130,35 @@ VALUES expression (',' expression)* tableAlias
 
 `tableAlias` can be specified explicitly or defaults to `colN` for every column (starting from `1` for `N`).
 
-| [[visitMultiInsertQuery]] `visitMultiInsertQuery`
-| `multiInsertQueryBody`
-a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
+| visitInsertIntoTable
+| `#insertIntoTable` labeled alternative
+a| [[visitInsertIntoTable]] <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+
+A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag disabled
+
+```
+INSERT INTO TABLE? tableIdentifier partitionSpec?
+```
+
+NOTE: `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in <<singleInsertQuery, singleInsertQuery>> and <<multiInsertQueryBody, multiInsertQueryBody>> rules.
+
+| visitInsertOverwriteTable
+| `#insertOverwriteTable` labeled alternative
+a| [[visitInsertOverwriteTable]] <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+
+A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag
+
+```
+INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)?
+```
+
+In a way, `visitInsertOverwriteTable` is simply a more general version of the <<visitInsertIntoTable, visitInsertIntoTable>> with the `exists` flag on or off per `IF NOT EXISTS` used or not. The main difference is that <<spark-sql-dynamic-partition-inserts.adoc#dynamic-partitions, dynamic partitions>> are used with no `IF NOT EXISTS`.
+
+NOTE: `insertOverwriteTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in <<singleInsertQuery, singleInsertQuery>> and <<multiInsertQueryBody, multiInsertQueryBody>> rules.
+
+| `visitMultiInsertQuery`
+| [[multiInsertQueryBody]] `multiInsertQueryBody`
+a| [[visitMultiInsertQuery]] A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
 
 ```
 FROM relation (',' relation)* lateralView*
@@ -142,21 +168,21 @@ FROM relation (',' relation)* lateralView*
 INSERT INTO TABLE? ...
 ```
 
-| [[visitNamedExpression]] `visitNamedExpression`
+| visitNamedExpression
 | `namedExpression`
-a|
+a| [[visitNamedExpression]]
 
 * `Alias` (for a single alias)
 * `MultiAlias` (for a parenthesis enclosed alias list
 * a bare link:spark-sql-Expression.adoc[Expression]
 
-| `visitNamedQuery`
+| visitNamedQuery
 |
 | [[visitNamedQuery]] <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>>
 
-| [[visitQuerySpecification]] `visitQuerySpecification`
+| `visitQuerySpecification`
 | `querySpecification`
-a| `OneRowRelation` or link:spark-sql-LogicalPlan.adoc[LogicalPlan]
+a| [[visitQuerySpecification]] `OneRowRelation` or link:spark-sql-LogicalPlan.adoc[LogicalPlan]
 
 [NOTE]
 ====
@@ -170,31 +196,31 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ```
 ====
 
-| [[visitPredicated]] `visitPredicated`
+| visitPredicated
 | `predicated`
-| link:spark-sql-Expression.adoc[Expression]
+| [[visitPredicated]] link:spark-sql-Expression.adoc[Expression]
 
-| [[visitRelation]] `visitRelation`
+| visitRelation
 | `relation`
-| link:spark-sql-LogicalPlan.adoc[LogicalPlan] for a `FROM` clause.
+| [[visitRelation]] link:spark-sql-LogicalPlan.adoc[LogicalPlan] for a `FROM` clause.
 
-| `visitRowConstructor`
+| visitRowConstructor
 |
 | [[visitRowConstructor]]
 
-| [[visitSingleDataType]] `visitSingleDataType`
+| visitSingleDataType
 | `singleDataType`
-| link:spark-sql-DataType.adoc[DataType]
+| [[visitSingleDataType]] link:spark-sql-DataType.adoc[DataType]
 
-| [[visitSingleExpression]] `visitSingleExpression`
+| visitSingleExpression
 | `singleExpression`
-| link:spark-sql-Expression.adoc[Expression]
+| [[visitSingleExpression]] link:spark-sql-Expression.adoc[Expression]
 
 Takes the named expression and relays to <<visitNamedExpression, visitNamedExpression>>
 
-| [[visitSingleInsertQuery]] `visitSingleInsertQuery`
-| `#singleInsertQuery` labeled alternative
-a| A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+| visitSingleInsertQuery
+| [[singleInsertQuery]] `#singleInsertQuery` labeled alternative
+a| [[visitSingleInsertQuery]] A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 
 ```
 INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
@@ -202,31 +228,31 @@ INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
 ```
 
-| [[visitSingleStatement]] `visitSingleStatement`
+| visitSingleStatement
 | `singleStatement`
-a| link:spark-sql-LogicalPlan.adoc[LogicalPlan] from a single statement
+a| [[visitSingleStatement]] link:spark-sql-LogicalPlan.adoc[LogicalPlan] from a single statement
 
 NOTE: A single statement can be quite involved.
 
-| [[visitSingleTableIdentifier]] `visitSingleTableIdentifier`
+| visitSingleTableIdentifier
 | `singleTableIdentifier`
-| `TableIdentifier`
+| [[visitSingleTableIdentifier]] `TableIdentifier`
 
-| [[visitStar]] `visitStar`
+| visitStar
 | `#star` labeled alternative
-| link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+| [[visitStar]] link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
 
-| `visitStruct`
+| visitStruct
 |
 | [[visitStruct]]
 
-| [[visitSubqueryExpression]] `visitSubqueryExpression`
+| visitSubqueryExpression
 | `#subqueryExpression` labeled alternative
-| link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
+| [[visitSubqueryExpression]] link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
 
-| [[visitWindowDef]] `visitWindowDef`
+| visitWindowDef
 | `windowDef` labeled alternative
-a| link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
+a| [[visitWindowDef]] link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
 
 ```
 // CLUSTER BY with window frame

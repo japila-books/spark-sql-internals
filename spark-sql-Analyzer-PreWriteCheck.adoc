@@ -17,7 +17,8 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 `apply` <<spark-sql-catalyst-TreeNode.adoc#foreach, traverses>> the input <<spark-sql-LogicalPlan.adoc#, logical query plan>> and finds <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> unary logical operators.
 
-* For an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>>...FIXME
+
+* [[apply-InsertableRelation]] For an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>>...FIXME
 
 * For any `InsertIntoTable`, `apply` throws a `AnalysisException` if the <<spark-sql-LogicalPlan-InsertIntoTable.adoc#table, logical plan for the table to insert into>> is neither a <<spark-sql-LogicalPlan-LeafNode.adoc#, LeafNode>> nor one of the following leaf logical operators: <<spark-sql-LogicalPlan-Range.adoc#, Range>>, <<spark-sql-LogicalPlan-OneRowRelation.adoc#, OneRowRelation>>, <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelation>>.
 +

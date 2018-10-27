@@ -1,0 +1,20 @@
+== Dynamic Partition Inserts
+
+*Dynamic Partition Inserts* is a feature of Spark SQL that allows for executing `INSERT OVERWRITE TABLE` SQL statements over partitioned <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelations>> that...FIXME
+
+[[dynamic-partitions]]
+*Dynamic partitions* are the partition columns that have no values defined explicitly in the PARTITION clause of <<spark-sql-AstBuilder.adoc#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
+
+[[static-partitions]]
+*Static partitions* are the partition columns that have values defined explicitly in the PARTITION clause of <<spark-sql-AstBuilder.adoc#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
+
+[source, sql]
+----
+INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)?
+----
+
+NOTE: `INSERT OVERWRITE TABLE` SQL statement is translated into <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
+
+Dynamic Partition Inserts is only supported in SQL mode (for <<spark-sql-AstBuilder.adoc#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements).
+
+Dynamic Partition Inserts <<spark-sql-Analyzer-PreWriteCheck.adoc#apply-InsertableRelation, is not supported>> for non-file-based data sources, i.e. <<spark-sql-InsertableRelation.adoc#, InsertableRelations>>.

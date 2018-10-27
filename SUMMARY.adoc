@@ -115,6 +115,8 @@
 
 == Notable Features
 
+. link:spark-sql-dynamic-partition-inserts.adoc[Dynamic Partition Inserts]
+
 . link:spark-sql-bucketing.adoc[Bucketing]
 
 . link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
@@ -226,7 +228,7 @@
 .. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
 
 . link:spark-sql-CatalystScan.adoc[CatalystScan Contract]
-. link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Relations with Inserting or Overwriting Data]
+. link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Non-File-Based Relations with Inserting or Overwriting Data Support]
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
 . link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
 . link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]

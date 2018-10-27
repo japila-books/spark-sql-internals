@@ -1,6 +1,6 @@
-== [[InsertableRelation]] InsertableRelation Contract -- Relations with Inserting or Overwriting Data
+== [[InsertableRelation]] InsertableRelation Contract -- Non-File-Based Relations with Inserting or Overwriting Data Support
 
-`InsertableRelation` is the <<contract, contract>> of <<implementations, BaseRelations>> with support for <<insert, inserting or overwriting data>>.
+`InsertableRelation` is the <<contract, contract>> of non-file-based <<implementations, BaseRelations>> that support <<insert, inserting or overwriting data>>.
 
 [[contract]]
 [source, scala]

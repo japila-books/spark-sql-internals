@@ -253,7 +253,7 @@ a| [[parquetVectorizedReaderEnabled]] Used when:
 * `ParquetFileFormat` is requested for link:spark-sql-ParquetFileFormat.adoc#supportBatch[supportBatch] flag and link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
 | partitionOverwriteMode
-| link:spark-sql-properties.adoc#spark.sql.sources.partitionOverwriteMode[spark.sql.sources.partitionOverwriteMode]
+| <<spark-sql-properties.adoc#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>>
 a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
 | preferSortMergeJoin
