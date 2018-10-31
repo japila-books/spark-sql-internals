@@ -1,4 +1,4 @@
-== [[PartitioningUtils]] PartitioningUtils
+== [[PartitioningUtils]] PartitioningUtils Helper Object
 
 `PartitioningUtils` is...FIXME
 

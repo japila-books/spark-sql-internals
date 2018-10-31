@@ -226,13 +226,12 @@ executePlan(plan: LogicalPlan): QueryExecution
 [source, scala]
 ----
 newHadoopConf(): Configuration
+newHadoopConf(hadoopConf: Configuration, sqlConf: SQLConf): Configuration
 ----
 
-`newHadoopConf` returns Hadoop's `Configuration` that it builds using link:spark-SparkContext.adoc#hadoopConfiguration[SparkContext.hadoopConfiguration] (through link:spark-sql-SparkSession.adoc[SparkSession]) with all configuration settings added.
+`newHadoopConf` returns a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the <<conf, SQLConf>>).
 
 NOTE: `newHadoopConf` is used by `ScriptTransformation`, `ParquetRelation`, `StateStoreRDD`, and `SessionState` itself, and few other places.
-
-CAUTION: FIXME What is `ScriptTransformation`? `StateStoreRDD`?
 
 === [[newHadoopConfWithOptions]] Creating New Hadoop Configuration With Extra Options -- `newHadoopConfWithOptions` Method
 

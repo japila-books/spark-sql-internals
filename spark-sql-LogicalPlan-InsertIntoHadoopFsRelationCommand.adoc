@@ -1,6 +1,6 @@
 == [[InsertIntoHadoopFsRelationCommand]] InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> that writes the data of the <<query, query>> out in the given <<fileFormat, FileFormat>>.
+`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> that writes the data of the <<query, query>> out using the <<fileFormat, FileFormat>>.
 
 `InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
 
