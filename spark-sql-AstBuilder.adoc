@@ -90,6 +90,14 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ```
 ====
 
+| visitFirst
+| `#first` labeled alternative
+a| [[visitFirst]] <<spark-sql-Expression-First.adoc#, First>> aggregate function expression
+
+```
+FIRST '(' expression (IGNORE NULLS)? ')'
+```
+
 | visitFromClause
 | `fromClause`
 a| [[visitFromClause]] link:spark-sql-LogicalPlan.adoc[LogicalPlan]

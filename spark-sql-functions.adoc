@@ -24,10 +24,23 @@ res1: Long = 251
 |Name
 |Description
 
-.3+^.^| [[aggregate-functions]] *Aggregate functions*
+.4+^.^| [[aggregate-functions]][[agg_funcs]] *Aggregate functions*
 
 | <<count, count>>
 |
+
+| <<first, first>>
+a|
+
+[source, scala]
+----
+first(e: Column): Column
+first(e: Column, ignoreNulls: Boolean): Column
+first(columnName: String): Column
+first(columnName: String, ignoreNulls: Boolean): Column
+----
+
+Returns the first value in a group. Returns the first non-null value when `ignoreNulls` flag on. If all values are null, then returns null.
 
 | <<grouping, grouping>>
 | Indicates whether a specified column is aggregated or not

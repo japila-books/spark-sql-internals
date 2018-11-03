@@ -5,28 +5,21 @@
 NOTE: An <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<spark-sql-Expression.adoc#eval, interpreted>> nor <<spark-sql-Expression.adoc#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
 
 [[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions.aggregate
-
-abstract class DeclarativeAggregate extends AggregateFunction {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  val evaluateExpression: Expression
-  val initialValues: Seq[Expression]
-  val mergeExpressions: Seq[Expression]
-  val updateExpressions: Seq[Expression]
-}
-----
-
-.(Subset of) DeclarativeAggregate Contract
+.DeclarativeAggregate Contract
 [cols="1m,2",options="header",width="100%"]
 |===
 | Property
 | Description
 
 | evaluateExpression
-a| [[evaluateExpression]] An <<spark-sql-Expression.adoc#, expression>> which returns the final value for the aggregate function.
+a| [[evaluateExpression]]
+
+[source, scala]
+----
+evaluateExpression: Expression
+----
+
+The <<spark-sql-Expression.adoc#, expression>> that returns the final value for the aggregate function
 
 Used when:
 
@@ -37,13 +30,29 @@ Used when:
 * `AggregateProcessor` is <<spark-sql-AggregateProcessor.adoc#apply, created>> (when `WindowExec` physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#, executed>>)
 
 | initialValues
-| [[initialValues]]
+a| [[initialValues]]
+
+[source, scala]
+----
+initialValues: Seq[Expression]
+----
 
 | mergeExpressions
-| [[mergeExpressions]]
+a| [[mergeExpressions]]
+
+[source, scala]
+----
+mergeExpressions: Seq[Expression]
+----
 
 | updateExpressions
-| [[updateExpressions]]
+a| [[updateExpressions]]
+
+[source, scala]
+----
+updateExpressions: Seq[Expression]
+----
+
 |===
 
 [[extensions]]
@@ -71,7 +80,7 @@ Used when:
 | Covariance
 | [[Covariance]]
 
-| First
+| <<spark-sql-Expression-First.adoc#, First>>
 | [[First]]
 
 | Last
