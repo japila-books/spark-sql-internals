@@ -46,6 +46,7 @@
 .. link:spark-sql-WindowSpec-Window.adoc[Window Utility Object -- Defining Window Specification]
 
 . link:spark-sql-functions.adoc[Standard Functions -- functions Object]
+.. link:spark-sql-aggregate-functions.adoc[Aggregate Functions]
 .. link:spark-sql-functions-collection.adoc[Collection Functions]
 .. link:spark-sql-functions-datetime.adoc[Date and Time Functions]
 .. link:spark-sql-functions-regular-functions.adoc[Regular Functions (Non-Aggregate Functions)]
