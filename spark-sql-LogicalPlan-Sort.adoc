@@ -1,6 +1,6 @@
 == [[Sort]] Sort Unary Logical Operator
 
-`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following operators in logical plans:
+`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following operators in a logical plan:
 
 * `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#withQueryResultClauses, parse a query>> with `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses
 
@@ -21,6 +21,10 @@ The <<spark-sql-LogicalPlan.adoc#maxRows, maxRows>> of a `Sort` operator is the 
 
 [[catalyst-dsl]]
 TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>> to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
+
+NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, checkAnalysis>>).
+
+NOTE: `Sort` logical operator is resolved to <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> unary physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#Sort, BasicOperators>> execution planning strategy is executed.
 
 === [[orderBy]][[sortBy]] Catalyst DSL -- `orderBy` and `sortBy` Operators
 

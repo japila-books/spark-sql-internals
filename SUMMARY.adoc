@@ -31,7 +31,8 @@
 .. link:spark-sql-DataFrameNaFunctions.adoc[DataFrameNaFunctions -- Working With Missing Data]
 .. link:spark-sql-DataFrameStatFunctions.adoc[DataFrameStatFunctions -- Working With Statistic Functions]
 
-. link:spark-sql-Column.adoc[Column API -- Column Expressions and Operators]
+. link:spark-sql-Column.adoc[Column]
+.. link:spark-sql-column-operators.adoc[Column API -- Column Operators]
 .. link:spark-sql-TypedColumn.adoc[TypedColumn]
 
 . link:spark-sql-basic-aggregation.adoc[Basic Aggregation -- Typed and Untyped Grouping Operators]
@@ -353,6 +354,7 @@
 . link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
 . link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
 . link:spark-sql-Expression-SizeBasedWindowFunction.adoc[SizeBasedWindowFunction Contract -- Declarative Window Aggregate Functions with Window Size]
+. link:spark-sql-Expression-SortOrder.adoc[SortOrder]
 . link:spark-sql-Expression-Stack.adoc[Stack]
 . link:spark-sql-Expression-Star.adoc[Star]
 . link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]

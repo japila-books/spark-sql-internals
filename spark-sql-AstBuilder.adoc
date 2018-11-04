@@ -236,6 +236,23 @@ INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
 ```
 
+| visitSortItem
+| `sortItem`
+a| [[visitSortItem]] <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> unevaluable unary expression
+
+```
+sortItem
+    : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
+    ;
+
+// queryOrganization
+ORDER BY order+=sortItem (',' order+=sortItem)*
+SORT BY sort+=sortItem (',' sort+=sortItem)*
+
+// windowSpec
+(ORDER | SORT) BY sortItem (',' sortItem)*)?
+```
+
 | visitSingleStatement
 | `singleStatement`
 a| [[visitSingleStatement]] link:spark-sql-LogicalPlan.adoc[LogicalPlan] from a single statement

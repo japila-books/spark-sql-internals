@@ -24,13 +24,13 @@ Once the initial version of a `WindowSpec` is created, you use the <<methods, me
 
 [[methods]]
 .WindowSpec API
-[cols="1,3",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Method
 | Description
 
-| <<orderBy, orderBy>>
-a|
+| orderBy
+a| [[orderBy]]
 
 [source, scala]
 ----
@@ -38,8 +38,8 @@ orderBy(cols: Column*): WindowSpec
 orderBy(colName: String, colNames: String*): WindowSpec
 ----
 
-| <<partitionBy, partitionBy>>
-a|
+| partitionBy
+a| [[partitionBy]]
 
 [source, scala]
 ----
@@ -47,8 +47,8 @@ partitionBy(cols: Column*): WindowSpec
 partitionBy(colName: String, colNames: String*): WindowSpec
 ----
 
-| <<rangeBetween, rangeBetween>>
-a|
+| rangeBetween
+a| [[rangeBetween]]
 
 [source, scala]
 ----
@@ -56,8 +56,8 @@ rangeBetween(start: Column, end: Column): WindowSpec
 rangeBetween(start: Long, end: Long): WindowSpec
 ----
 
-| <<rowsBetween, rowsBetween>>
-a|
+| rowsBetween
+a| [[rowsBetween]]
 
 [source, scala]
 ----

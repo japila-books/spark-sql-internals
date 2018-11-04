@@ -34,7 +34,9 @@
 | link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
 
 | `SortPartitions` | link:spark-sql-SparkPlan-SortExec.adoc[SortExec]
-| `Sort` | link:spark-sql-SparkPlan-SortExec.adoc[SortExec]
+
+| [[Sort]] <<spark-sql-LogicalPlan-Sort.adoc#, Sort>>
+| [[SortExec]] <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>>
 
 | [[Project]] `Project`
 | [[ProjectExec]] `ProjectExec`

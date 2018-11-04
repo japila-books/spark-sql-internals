@@ -1,0 +1,60 @@
+== Column API -- Column Operators
+
+Column API is a <<methods, set of operators>> to work with values in a column (of a <<spark-sql-Dataset.adoc#, Dataset>>).
+
+[[methods]]
+[[operators]]
+.Column Operators
+[cols="1m,3",options="header",width="100%"]
+|===
+| Operator
+| Description
+
+| asc
+a| [[asc]]
+
+[source, scala]
+----
+asc: Column
+----
+
+| asc_nulls_first
+a| [[asc_nulls_first]]
+
+[source, scala]
+----
+asc_nulls_first: Column
+----
+
+| asc_nulls_last
+a| [[asc_nulls_last]]
+
+[source, scala]
+----
+asc_nulls_last: Column
+----
+
+| desc
+a| [[desc]]
+
+[source, scala]
+----
+desc: Column
+----
+
+| desc_nulls_first
+a| [[desc_nulls_first]]
+
+[source, scala]
+----
+desc_nulls_first: Column
+----
+
+| desc_nulls_last
+a| [[desc_nulls_last]]
+
+[source, scala]
+----
+desc_nulls_last: Column
+----
+|===
