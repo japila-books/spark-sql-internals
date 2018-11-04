@@ -163,7 +163,7 @@ Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:
 | Eliminates `Union` of one child into that child
 
 | SubstituteUnresolvedOrdinals
-| Replaces ordinals in `Sort` and `Aggregate` operators with `UnresolvedOrdinal`
+| Replaces ordinals in <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> expressions
 
 .26+^.^| [[Resolution]] Resolution
 .26+^.^| <<fixedPoint, FixedPoint>>
@@ -218,8 +218,8 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 | [[ResolvePivot]] ResolvePivot
 | Resolves link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] logical operator to `Project` with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] unary logical operator (for supported data types in aggregates) or just a single `Aggregate`.
 
-| ResolveOrdinalInOrderByAndGroupBy
-|
+| <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc#, ResolveOrdinalInOrderByAndGroupBy>>
+| [[ResolveOrdinalInOrderByAndGroupBy]]
 
 | ResolveMissingReferences
 | [[ResolveMissingReferences]]

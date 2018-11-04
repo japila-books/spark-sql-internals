@@ -9,7 +9,7 @@
 [[creating-instance]]
 `Sort` takes the following when created:
 
-* [[order]] Ordering expressions (a collection of `SortOrder` instances)
+* [[order]] <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> ordering expressions
 * [[global]] `global` flag for global (`true`) or partition-only (`false`) sorting
 * [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
 
