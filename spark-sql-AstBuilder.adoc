@@ -275,23 +275,23 @@ a| [[visitWindowDef]] link:spark-sql-Expression-WindowSpecDefinition.adoc[Window
 
 [[with-methods]]
 .AstBuilder's Parsing Handlers
-[cols="1,3",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Parsing Handler
 | LogicalPlan Added
 
-| [[withAggregation]] `withAggregation`
-a|
+| withAggregation
+a| [[withAggregation]]
 
 * link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets] for `GROUP BY &hellip; GROUPING SETS (&hellip;)`
 
 * link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] for `GROUP BY &hellip; (WITH CUBE \| WITH ROLLUP)?`
 
-| [[withGenerate]] `withGenerate`
-| link:spark-sql-Expression-Generator.adoc[Generate] with a link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] and link:spark-sql-LogicalPlan-Generate.adoc#join[join] flag turned on for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+| withGenerate
+| [[withGenerate]] link:spark-sql-Expression-Generator.adoc[Generate] with a link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] and link:spark-sql-LogicalPlan-Generate.adoc#join[join] flag turned on for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
-| [[withHints]] `withHints`
-a| link:spark-sql-LogicalPlan-Hint.adoc[Hint] for `/*+ hint */` in `SELECT` queries.
+| withHints
+a| [[withHints]] link:spark-sql-LogicalPlan-Hint.adoc[Hint] for `/*+ hint */` in `SELECT` queries.
 
 TIP: Note `+` (plus) between `/\*` and `*/`
 
@@ -301,15 +301,15 @@ TIP: Note `+` (plus) between `/\*` and `*/`
 /*+ BROADCAST (table) */
 ```
 
-| [[withInsertInto]] `withInsertInto`
-a|
+| withInsertInto
+a| [[withInsertInto]]
 
 * link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
 
 * `InsertIntoDir` for...FIXME
 
-| [[withJoinRelations]] `withJoinRelations`
-a| link:spark-sql-LogicalPlan-Join.adoc[Join] for a <<visitFromClause, FROM clause>> and <<visitRelation, relation>> alone.
+| withJoinRelations
+a| [[withJoinRelations]] link:spark-sql-LogicalPlan-Join.adoc[Join] for a <<visitFromClause, FROM clause>> and <<visitRelation, relation>> alone.
 
 The following join types are supported:
 
@@ -328,11 +328,11 @@ The following join criteria are supported:
 
 Joins can be `NATURAL` (with no join criteria).
 
-| [[withQueryResultClauses]] `withQueryResultClauses`
-|
+| withQueryResultClauses
+| [[withQueryResultClauses]]
 
-| [[withQuerySpecification]] `withQuerySpecification`
-a| Adds a query specification to a logical operator.
+| withQuerySpecification
+a| [[withQuerySpecification]] Adds a query specification to a logical operator.
 
 For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` does...FIXME
 
@@ -352,14 +352,14 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 . <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
 
-| [[withPredicate]] `withPredicate`
-a|
+| withPredicate
+a| [[withPredicate]]
 * `NOT? IN '(' query ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression
 
 * `NOT? IN '(' expression (',' expression)* ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression
 
-| [[withWindows]] `withWindows`
-a| link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).
+| withWindows
+a| [[withWindows]] link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).
 
 Used for <<withQueryResultClauses, withQueryResultClauses>> and <<withQuerySpecification, withQuerySpecification>> with `windows` definition.
 

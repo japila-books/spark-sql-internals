@@ -1,3 +1,53 @@
-== [[Sort]] Sort
+== [[Sort]] Sort Unary Logical Operator
 
-`Sort` is...FIXME
+`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following operators in logical plans:
+
+* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#withQueryResultClauses, parse a query>> with `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses
+
+* <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-dataset-operators.adoc#randomSplit, Dataset.randomSplit>> operators are used
+
+[[creating-instance]]
+`Sort` takes the following when created:
+
+* [[order]] Ordering expressions (a collection of `SortOrder` instances)
+* [[global]] `global` flag for global (`true`) or partition-only (`false`) sorting
+* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
+
+[[output]]
+The <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
+
+[[maxRows]]
+The <<spark-sql-LogicalPlan.adoc#maxRows, maxRows>> of a `Sort` operator is the maxRows of the <<child, child>> logical operator.
+
+[[catalyst-dsl]]
+TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>> to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
+
+=== [[orderBy]][[sortBy]] Catalyst DSL -- `orderBy` and `sortBy` Operators
+
+[source, scala]
+----
+orderBy(sortExprs: SortOrder*): LogicalPlan
+sortBy(sortExprs: SortOrder*): LogicalPlan
+----
+
+`orderBy` and `sortBy` <<creating-instance, create>> a `Sort` logical operator with the <<global, global>> flag on and off, respectively.
+
+[source, scala]
+----
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val globalSortById = t1.orderBy('id.asc_nullsLast)
+
+// Note true for the global flag
+scala> println(globalSortById.numberedTreeString)
+00 'Sort ['id ASC NULLS LAST], true
+01 +- 'UnresolvedRelation `t1`
+
+// Note false for the global flag
+val partitionOnlySortById = t1.sortBy('id.asc_nullsLast)
+scala> println(partitionOnlySortById.numberedTreeString)
+00 'Sort ['id ASC NULLS LAST], false
+01 +- 'UnresolvedRelation `t1`
+----
