@@ -1,6 +1,6 @@
-== Mastering Spark SQL (Apache Spark {{ book.version }})
+== The Internals of Spark SQL (Apache Spark {{ book.version }})
 
-Welcome to *Mastering Spark SQL* gitbook! I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I have.
+Welcome to *The Internals of Spark SQL* gitbook! I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I have.
 
 [quote, Flannery O'Connor]
 I write to discover what I know.
@@ -11,7 +11,7 @@ I offer software development and consultancy services with https://github.com/ja
 
 Consider joining me at http://www.meetup.com/WarsawScala/[Warsaw Scala Enthusiasts] and http://www.meetup.com/Warsaw-Spark[Warsaw Spark] meetups in Warsaw, Poland.
 
-TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2], https://bit.ly/mastering-kafka-streams[Mastering Kafka Streams], https://bit.ly/mastering-apache-kafka[Apache Kafka Notebook] and https://bit.ly/spark-structured-streaming[Spark Structured Streaming Notebook] gitbooks.
+TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spark], https://bit.ly/mastering-kafka-streams[Mastering Kafka Streams], https://bit.ly/mastering-apache-kafka[Mastering Apache Kafka] and https://bit.ly/spark-structured-streaming[The Internals of Spark Structured Streaming] gitbooks.
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
 
