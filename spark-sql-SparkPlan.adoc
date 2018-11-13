@@ -44,7 +44,7 @@ a| [[requiredChildDistribution]]
 requiredChildDistribution: Seq[Distribution]
 ----
 
-Specifies the required *partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
+The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
 
 Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
 
@@ -511,7 +511,7 @@ outputPartitioning: Partitioning
 outputOrdering: Seq[SortOrder]
 ----
 
-`outputOrdering` specifies the *output data ordering requirements* of the physical operator, i.e. a hint for the Spark Physical Optimizer for the sorting (ordering) of the data in each partition.
+`outputOrdering` specifies the *output data ordering requirements* of the physical operator, i.e. a hint for the Spark Physical Optimizer for the sorting (ordering) of the data (within and across partitions).
 
 `outputOrdering` defaults to no ordering (`Nil`).
 

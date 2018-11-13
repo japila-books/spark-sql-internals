@@ -342,6 +342,14 @@ Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecord
 
 Use link:spark-sql-SQLConf.adoc#supportQuotedRegexColumnName[SQLConf.supportQuotedRegexColumnName] method to access the current value.
 
+| spark.sql.sort.enableRadixSort
+| `true`
+a| [[spark.sql.sort.enableRadixSort]] *(internal)* Controls whether to use radix sort (`true`) or not (`false`) in <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#, ShuffleExchangeExec>> and <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> physical operators
+
+Radix sort is much faster but requires additional memory to be reserved up-front. The memory overhead may be significant when sorting very small rows (up to 50% more).
+
+Use link:spark-sql-SQLConf.adoc#enableRadixSort[SQLConf.enableRadixSort] method to access the current value.
+
 | spark.sql.sources.commitProtocolClass
 | `SQLHadoopMapReduceCommitProtocol`
 a| [[spark.sql.sources.commitProtocolClass]] *(internal)*

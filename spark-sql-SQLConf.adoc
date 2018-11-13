@@ -130,6 +130,10 @@ a| [[defaultSizeInBytes]] Used when:
 
 * `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#sizeInBytes[an estimated size of this relation] (in bytes)
 
+| enableRadixSort
+| <<spark-sql-properties.adoc#spark.sql.sort.enableRadixSort, spark.sql.sort.enableRadixSort>>
+a| [[enableRadixSort]] Used exclusively when `SortExec` physical operator is requested for a <<spark-sql-SparkPlan-SortExec.adoc#createSorter, UnsafeExternalRowSorter>>.
+
 | exchangeReuseEnabled
 | link:spark-sql-properties.adoc#spark.sql.exchange.reuse[spark.sql.exchange.reuse]
 a| [[exchangeReuseEnabled]] Used when link:spark-sql-ReuseSubquery.adoc#apply[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc#apply[ReuseExchange] physical optimizations are executed

@@ -1,10 +1,10 @@
 == [[Sort]] Sort Unary Logical Operator
 
-`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following operators in a logical plan:
+`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following in a logical plan:
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#withQueryResultClauses, parse a query>> with `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses
+* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#withQueryResultClauses, parse a query>>)
 
-* <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-dataset-operators.adoc#randomSplit, Dataset.randomSplit>> operators are used
+* <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-dataset-operators.adoc#randomSplit, Dataset.randomSplit>> operators
 
 [source, scala]
 ----
@@ -26,12 +26,26 @@ scala> println(sortOp.numberedTreeString)
 03          +- LocalRelation [value#22]
 ----
 
+[source, scala]
+----
+val nums = Seq((0, "zero"), (1, "one")).toDF("id", "name")
+// Creates a Sort logical operator:
+// - descending sort direction for id column (specified explicitly)
+// - name column is wrapped with ascending sort direction
+val numsOrdered = nums.sort('id.desc, 'name)
+val logicalPlan = numsOrdered.queryExecution.logical
+scala> println(logicalPlan.numberedTreeString)
+00 'Sort ['id DESC NULLS LAST, 'name ASC NULLS FIRST], true
+01 +- Project [_1#11 AS id#14, _2#12 AS name#15]
+02    +- LocalRelation [_1#11, _2#12]
+----
+
 [[creating-instance]]
 `Sort` takes the following when created:
 
 * [[order]] <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> ordering expressions
 * [[global]] `global` flag for global (`true`) or partition-only (`false`) sorting
-* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
+* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
 
 [[output]]
 The <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
