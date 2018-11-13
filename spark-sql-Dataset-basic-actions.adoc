@@ -12,21 +12,25 @@ NOTE: Basic actions are the methods in the `Dataset` Scala class that are groupe
 | Description
 
 | <<cache, cache>>
-a| Caches a Dataset
+a|
 
 [source, scala]
 ----
 cache(): this.type
 ----
 
+Caches the `Dataset`
+
 | <<checkpoint, checkpoint>>
-a| Checkpoints the Dataset in a reliable way
+a|
 
 [source, scala]
 ----
 checkpoint(): Dataset[T]
 checkpoint(eager: Boolean): Dataset[T]
 ----
+
+Checkpoints the `Dataset` in a reliable way (using a reliable HDFS-compliant file system, e.g. Hadoop HDFS or Amazon S3)
 
 | <<columns, columns>>
 a|
@@ -77,13 +81,15 @@ dtypes: Array[(String, String)]
 ----
 
 | <<explain, explain>>
-a| Displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
+a|
 
 [source, scala]
 ----
 explain(): Unit
 explain(extended: Boolean): Unit
 ----
+
+Displays the logical and physical plans of the `Dataset`, i.e. displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
 
 | <<hint, hint>>
 a|
@@ -101,6 +107,16 @@ a|
 inputFiles: Array[String]
 ----
 
+| <<isEmpty, isEmpty>>
+a|
+
+[source, scala]
+----
+isEmpty: Boolean
+----
+
+(*New in {{ book.version }}*)
+
 | <<isLocal, isLocal>>
 a|
 
@@ -110,7 +126,7 @@ isLocal: Boolean
 ----
 
 | <<localCheckpoint, localCheckpoint>>
-a| (*New in 2.3.0*) Checkpoints the Dataset locally on executors (and therefore unreliably)
+a|
 
 [source, scala]
 ----
@@ -118,14 +134,18 @@ localCheckpoint(): Dataset[T]
 localCheckpoint(eager: Boolean): Dataset[T]
 ----
 
+Checkpoints the `Dataset` locally on executors (and therefore unreliably)
+
 | <<persist, persist>>
-a| Persists a Dataset
+a|
 
 [source, scala]
 ----
 persist(): this.type
 persist(newLevel: StorageLevel): this.type
 ----
+
+Persists the `Dataset`
 
 | <<printSchema, printSchema>>
 a|
@@ -169,13 +189,15 @@ toDF(colNames: String*): DataFrame
 ----
 
 | <<unpersist, unpersist>>
-a| Unpersists a cached Dataset
+a|
 
 [source, scala]
 ----
 unpersist(): this.type
 unpersist(blocking: Boolean): this.type
 ----
+
+Unpersists the `Dataset`
 
 | <<write, write>>
 a|
@@ -184,6 +206,8 @@ a|
 ----
 write: DataFrameWriter[T]
 ----
+
+Returns a <<spark-sql-DataFrameWriter.adoc#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
 |===
 
 === [[cache]] Caching Dataset -- `cache` Basic Action
@@ -479,3 +503,21 @@ import org.apache.spark.sql.{DataFrameWriter, Dataset}
 val ints: Dataset[Int] = (0 to 5).toDS
 val writer: DataFrameWriter[Int] = ints.write
 ----
+
+=== [[isEmpty]] `isEmpty` Typed Transformation
+
+[source, scala]
+----
+isEmpty: Boolean
+----
+
+`isEmpty`...FIXME
+
+=== [[isLocal]] `isLocal` Typed Transformation
+
+[source, scala]
+----
+isLocal: Boolean
+----
+
+`isLocal`...FIXME

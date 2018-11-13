@@ -365,6 +365,15 @@ except(other: Dataset[T]): Dataset[T]
 
 `except`...FIXME
 
+=== [[exceptAll]] `exceptAll` Typed Transformation
+
+[source, scala]
+----
+exceptAll(other: Dataset[T]): Dataset[T]
+----
+
+`exceptAll`...FIXME
+
 === [[filter]] `filter` Typed Transformation
 
 [source, scala]
@@ -413,6 +422,15 @@ intersect(other: Dataset[T]): Dataset[T]
 ----
 
 `intersect`...FIXME
+
+=== [[intersectAll]] `intersectAll` Typed Transformation
+
+[source, scala]
+----
+intersectAll(other: Dataset[T]): Dataset[T]
+----
+
+`intersectAll`...FIXME
 
 === [[joinWith]] `joinWith` Typed Transformation
 
