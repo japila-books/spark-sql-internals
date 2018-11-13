@@ -472,9 +472,27 @@ NOTE: `withSetOperator` is used in the `Dataset` <<spark-sql-Dataset-typed-trans
 sortInternal(global: Boolean, sortExprs: Seq[Column]): Dataset[T]
 ----
 
-`sortInternal`...FIXME
+`sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> unary logical operator (and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.adoc#child, child logical plan>>).
 
-NOTE: `sortInternal` is used for the `Dataset` <<spark-sql-Dataset-typed-transformations.adoc#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.adoc#sort, sort>> and <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>>.
+[source, scala]
+----
+val nums = Seq((0, "zero"), (1, "one")).toDF("id", "name")
+// Creates a Sort logical operator:
+// - descending sort direction for id column (specified explicitly)
+// - name column is wrapped with ascending sort direction
+val numsSorted = nums.sort('id.desc, 'name)
+val logicalPlan = numsSorted.queryExecution.logical
+scala> println(logicalPlan.numberedTreeString)
+00 'Sort ['id DESC NULLS LAST, 'name ASC NULLS FIRST], true
+01 +- Project [_1#11 AS id#14, _2#12 AS name#15]
+02    +- LocalRelation [_1#11, _2#12]
+----
+
+Internally, `sortInternal` firstly builds ordering expressions for the given `sortExprs` columns, i.e. takes the `sortExprs` columns and makes sure that they are <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> expressions already (and leaves them untouched) or wraps them into <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> expressions with <<spark-sql-Expression-SortOrder.adoc#Ascending, Ascending>> sort direction.
+
+In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.adoc#child, child logical plan>>).
+
+NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.adoc#sort, sort>> and <<spark-sql-dataset-operators.adoc#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
 
 === [[withPlan]] Helper Method for Untyped Transformations and Basic Actions -- `withPlan` Internal Method
 

@@ -707,7 +707,7 @@ sort(sortExprs: Column*): Dataset[T]
 sort(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
-A typed transformation
+A typed transformation to sort elements globally (across partitions). Use <<sortWithinPartitions, sortWithinPartitions>> transformation for partition-local sort
 
 | <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>>
 a| [[sortWithinPartitions]]
@@ -718,7 +718,7 @@ sortWithinPartitions(sortExprs: Column*): Dataset[T]
 sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
-A typed transformation
+A typed transformation to sort elements within partitions (aka _local sort_). Use <<sort, sort>> transformation for global sort (across partitions)
 
 | <<spark-sql-Dataset-untyped-transformations.adoc#stat, stat>>
 a| [[stat]]

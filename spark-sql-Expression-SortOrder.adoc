@@ -18,7 +18,7 @@ NOTE: An <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> canno
 [[catalyst-dsl]]
 TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>> to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
 
-NOTE: <<spark-sql-dataset-operators.adoc#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-WindowSpec.adoc#orderBy, WindowSpec.orderBy>> default to `Ascending` sort direction.
+NOTE: <<spark-sql-dataset-operators.adoc#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-WindowSpec.adoc#orderBy, WindowSpec.orderBy>> default to <<Ascending, Ascending>> sort direction.
 
 === [[apply]] Creating SortOrder Instance -- `apply` Factory Method
 
@@ -30,7 +30,7 @@ apply(
   sameOrderExpressions: Set[Expression] = Set.empty): SortOrder
 ----
 
-`apply` is a convenience method to create a `SortOrder` with the `defaultNullOrdering` of the `SortDirection`.
+`apply` is a convenience method to create a <<SortOrder, SortOrder>> with the `defaultNullOrdering` of the <<SortDirection, SortDirection>>.
 
 NOTE: `apply` is used exclusively in link:spark-sql-functions-datetime.adoc#window[window] function.
 
@@ -59,6 +59,42 @@ scala> println(sortNullsLast.sql)
 `SortOrder` takes the following when created:
 
 * [[child]] Child <<spark-sql-Expression.adoc#, expression>>
-* [[direction]] `SortDirection`
+* [[direction]] <<SortDirection, SortDirection>>
 * [[nullOrdering]] `NullOrdering`
 * [[sameOrderExpressions]] "Same Order" <<spark-sql-Expression.adoc#, expressions>>
+
+=== [[SortDirection]] SortDirection Contract
+
+`SortDirection` is the <<SortDirection-contract, base>> of <<SortDirection-extensions, sort directions>>.
+
+[[SortDirection-contract]]
+.SortDirection Contract
+[cols="1m,2",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| defaultNullOrdering
+a| [[defaultNullOrdering]]
+
+[source, scala]
+----
+defaultNullOrdering: NullOrdering
+----
+
+Used when...FIXME
+
+| sql
+a| [[sql]]
+
+[source, scala]
+----
+sql: String
+----
+
+Used when...FIXME
+|===
+
+==== [[SortDirection-extensions]][[Ascending]][[Descending]] Ascending and Descending Sort Directions
+
+There are two <<SortDirection, sorting directions>> available, i.e. `Ascending` and `Descending`.

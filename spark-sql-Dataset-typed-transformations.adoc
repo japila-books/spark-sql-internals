@@ -644,7 +644,7 @@ sortWithinPartitions(sortExprs: Column*): Dataset[T]
 sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
-`sortWithinPartitions`...FIXME
+`sortWithinPartitions` simply calls the internal <<spark-sql-Dataset.adoc#sortInternal, sortInternal>> method with the `global` flag disabled (`false`).
 
 === [[toJSON]] `toJSON` Typed Transformation
 
