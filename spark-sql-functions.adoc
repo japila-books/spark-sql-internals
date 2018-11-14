@@ -265,26 +265,168 @@ var_samp(e: Column): Column
 var_samp(columnName: String): Column
 ----
 
-.8+^.^| *Collection functions*
+.29+^.^| [[collection_funcs]] *Collection functions*
 
-| [[array_contains]] <<spark-sql-functions-collection.adoc#array_contains, array_contains>>
-a|
+| <<spark-sql-functions-collection.adoc#array_contains, array_contains>>
+a| [[array_contains]]
 
 [source, scala]
 ----
 array_contains(column: Column, value: Any): Column
 ----
 
-| [[explode]] link:spark-sql-functions-collection.adoc#explode[explode]
-a|
+| <<spark-sql-functions-collection.adoc#array_distinct, array_distinct>>
+a| [[array_distinct]]
+
+[source, scala]
+----
+array_distinct(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_except, array_except>>
+a| [[array_except]]
+
+[source, scala]
+----
+array_except(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_intersect, array_intersect>>
+a| [[array_intersect]]
+
+[source, scala]
+----
+array_intersect(col1: Column, col2: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_join, array_join>>
+a| [[array_join]]
+
+[source, scala]
+----
+array_join(column: Column, delimiter: String): Column
+array_join(column: Column, delimiter: String, nullReplacement: String): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_max, array_max>>
+a| [[array_max]]
+
+[source, scala]
+----
+array_max(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_min, array_min>>
+a| [[array_min]]
+
+[source, scala]
+----
+array_min(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_position, array_position>>
+a| [[array_position]]
+
+[source, scala]
+----
+array_position(column: Column, value: Any): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_remove, array_remove>>
+a| [[array_remove]]
+
+[source, scala]
+----
+array_remove(column: Column, element: Any): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_repeat, array_repeat>>
+a| [[array_repeat]]
+
+[source, scala]
+----
+array_repeat(e: Column, count: Int): Column
+array_repeat(left: Column, right: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_sort, array_sort>>
+a| [[array_sort]]
+
+[source, scala]
+----
+array_sort(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#array_union, array_union>>
+a| [[array_union]]
+
+[source, scala]
+----
+array_union(col1: Column, col2: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#arrays_zip, arrays_zip>>
+a| [[arrays_zip]]
+
+[source, scala]
+----
+arrays_zip(e: Column*): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#arrays_overlap, arrays_overlap>>
+a| [[arrays_overlap]]
+
+[source, scala]
+----
+arrays_overlap(a1: Column, a2: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#element_at, element_at>>
+a| [[element_at]]
+
+[source, scala]
+----
+element_at(column: Column, value: Any): Column
+----
+
+(*New in 2.4.0*)
+
+| link:spark-sql-functions-collection.adoc#explode[explode]
+a| [[explode]]
 
 [source, scala]
 ----
 explode(e: Column): Column
 ----
 
-| [[explode_outer]] link:spark-sql-functions-collection.adoc#explode_outer[explode_outer]
-a|
+| link:spark-sql-functions-collection.adoc#explode_outer[explode_outer]
+a| [[explode_outer]]
 
 [source, scala]
 ----
@@ -293,51 +435,125 @@ explode_outer(e: Column): Column
 
 Creates a new row for each element in the given array or map column. If the array/map is `null` or empty then `null` is produced.
 
-| [[from_json]] link:spark-sql-functions-collection.adoc#from_json[from_json]
-a|
+| <<spark-sql-functions-collection.adoc#flatten, flatten>>
+a| [[flatten]]
 
 [source, scala]
 ----
+flatten(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#from_json, from_json>>
+a| [[from_json]]
+
+[source, scala]
+----
+from_json(e: Column, schema: Column): Column // <1>
 from_json(e: Column, schema: DataType): Column
 from_json(e: Column, schema: DataType, options: Map[String, String]): Column
 from_json(e: Column, schema: String, options: Map[String, String]): Column
 from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
+<1> *New in 2.4.0*
 
 Parses a column with a JSON string into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema.
 
-| [[map_keys]] <<spark-sql-functions-collection.adoc#map_keys, map_keys>>
-a|
+| <<spark-sql-functions-collection.adoc#map_concat, map_concat>>
+a| [[map_concat]]
+
+[source, scala]
+----
+map_concat(cols: Column*): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#map_from_entries, map_from_entries>>
+a| [[map_from_entries]]
+
+[source, scala]
+----
+map_from_entries(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#map_keys, map_keys>>
+a| [[map_keys]]
 
 [source, scala]
 ----
 map_keys(e: Column): Column
 ----
 
-| [[map_values]] <<spark-sql-functions-collection.adoc#map_values, map_values>>
-a|
+| <<spark-sql-functions-collection.adoc#map_values, map_values>>
+a| [[map_values]]
 
 [source, scala]
 ----
 map_values(e: Column): Column
 ----
 
-| [[posexplode]] <<spark-sql-functions-collection.adoc#posexplode, posexplode>>
-a|
+| <<spark-sql-functions-collection.adoc#posexplode, posexplode>>
+a| [[posexplode]]
 
 [source, scala]
 ----
 posexplode(e: Column): Column
 ----
 
-| [[posexplode_outer]] <<spark-sql-functions-collection.adoc#posexplode_outer, posexplode_outer>>
-a|
+| <<spark-sql-functions-collection.adoc#posexplode_outer, posexplode_outer>>
+a| [[posexplode_outer]]
 
 [source, scala]
 ----
 posexplode_outer(e: Column): Column
 ----
+
+| <<spark-sql-functions-collection.adoc#schema_of_json, schema_of_json>>
+a| [[schema_of_json]]
+
+[source, scala]
+----
+schema_of_json(json: Column): Column
+schema_of_json(json: String): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#sequence, sequence>>
+a| [[sequence]]
+
+[source, scala]
+----
+sequence(start: Column, stop: Column): Column
+sequence(start: Column, stop: Column, step: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#shuffle, shuffle>>
+a| [[shuffle]]
+
+[source, scala]
+----
+shuffle(e: Column): Column
+----
+
+(*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#slice, slice>>
+a| [[slice]]
+
+[source, scala]
+----
+slice(x: Column, start: Int, length: Int): Column
+----
+
+(*New in 2.4.0*)
 
 .9+^.^| [[datetime_funcs]] *Date and time functions*
 | <<spark-sql-functions-datetime.adoc#current_date, current_date>>
