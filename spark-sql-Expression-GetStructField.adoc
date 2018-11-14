@@ -1,6 +1,6 @@
 == [[GetStructField]] GetStructField Unary Expression
 
-`GetStructField` is a Catalyst link:spark-sql-Expression.adoc#UnaryExpression[unary expression] that...FIXME
+`GetStructField` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that...FIXME
 
 `GetStructField` is <<creating-instance, created>> when...FIXME
 

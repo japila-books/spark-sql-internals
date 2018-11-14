@@ -1,6 +1,6 @@
 == [[RuntimeReplaceable]] RuntimeReplaceable Contract -- Replaceable SQL Expressions
 
-`RuntimeReplaceable` is the <<contract, marker contract>> for link:spark-sql-Expression.adoc#UnaryExpression[unary expressions] that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can then be evaluated).
+`RuntimeReplaceable` is the <<contract, marker contract>> for <<spark-sql-Expression-UnaryExpression.adoc#, unary expressions>> that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can then be evaluated).
 
 NOTE: Catalyst Optimizer uses link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
 

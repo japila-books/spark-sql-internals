@@ -6,6 +6,11 @@
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 . link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
+=== Avro Data Source
+
+. link:spark-sql-avro.adoc[Avro Data Source]
+. link:spark-sql-CatalystDataToAvro.adoc[CatalystDataToAvro Unary Expression]
+
 == Developing Spark SQL Applications
 
 . link:spark-sql-fundamentals-spark-application-development.adoc[Fundamentals of Spark SQL Application Development]
@@ -362,6 +367,7 @@
 . link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
 . link:spark-sql-Expression-TypedAggregateExpression.adoc[TypedAggregateExpression]
 . link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
+. link:spark-sql-Expression-UnaryExpression.adoc[UnaryExpression Contract]
 . link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
 . link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute]
 . link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]

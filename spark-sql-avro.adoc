@@ -1,0 +1,101 @@
+== Avro Data Source
+
+As of Apache Spark 2.4.0, Spark SQL supports <<from_avro, reading>> and <<to_avro, writing>> data in Avro format.
+
+[NOTE]
+====
+https://avro.apache.org/[Apache Avro] is a data serialization format and provides the following features:
+
+* Rich data structures
+* A compact, fast, binary data format
+* A container file, to store persistent data
+* Remote procedure call (RPC)
+* Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation is an optional optimization, only worth implementing for statically typed languages.
+====
+
+[[functions]]
+.Functions for Avro
+[cols="1,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| <<from_avro-internals, from_avro>>
+a| [[from_avro]]
+
+[source, scala]
+----
+from_avro(data: Column, jsonFormatSchema: String): Column
+----
+
+| <<to_avro-internals, to_avro>>
+a| [[to_avro]]
+
+[source, scala]
+----
+to_avro(data: Column): Column
+----
+
+|===
+
+Avro data source is provided by the `spark-avro` external module. You should include it as a dependency of your Spark application (e.g. `spark-submit --packages` or in `build.sbt`).
+
+```
+org.apache.spark:spark-avro_2.12:2.4.0
+```
+
+The following example shows how to include the `spark-avro` module in a `spark-shell` session.
+
+```
+$ ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
+```
+
+After the module is loaded, you should import the `org.apache.spark.sql.avro` package to have the <<from_avro, from_avro>> and <<to_avro, to_avro>> functions available.
+
+[source, scala]
+----
+import org.apache.spark.sql.avro._
+----
+
+=== [[to_avro-internals]] `to_avro` Method
+
+[source, scala]
+----
+to_avro(data: Column): Column
+----
+
+`to_avro` creates a <<spark-sql-Column.adoc#, Column>> with the <<spark-sql-CatalystDataToAvro.adoc#, CatalystDataToAvro>> unary expression (with the <<spark-sql-Column.adoc#expr, Catalyst expression>> of the given `data` column).
+
+[source, scala]
+----
+import org.apache.spark.sql.avro._
+val q = spark.range(1).withColumn("to_avro_id", to_avro('id))
+scala> q.show
++---+----------+
+| id|to_avro_id|
++---+----------+
+|  0|      [00]|
++---+----------+
+
+val logicalPlan = q.queryExecution.logical
+scala> println(logicalPlan.numberedTreeString)
+00 'Project [id#33L, catalystdatatoavro('id) AS to_avro_id#35]
+01 +- Range (0, 1, step=1, splits=Some(8))
+
+import org.apache.spark.sql.avro.CatalystDataToAvro
+// Let's use QueryExecution.analyzed instead
+// https://issues.apache.org/jira/browse/SPARK-26063
+val analyzedPlan = q.queryExecution.analyzed
+val toAvroExpr = analyzedPlan.expressions.drop(1).head.children.head.asInstanceOf[CatalystDataToAvro]
+scala> println(toAvroExpr.sql)
+to_avro(`id`, bigint)
+----
+
+=== [[from_avro-internals]] `from_avro` Method
+
+[source, scala]
+----
+from_avro(data: Column, jsonFormatSchema: String): Column
+----
+
+`from_avro`...FIXME

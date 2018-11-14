@@ -139,7 +139,7 @@ a|
 * link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
 * link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
 
-| [[UnaryExpression]] `UnaryExpression`
+| [[UnaryExpression]] <<spark-sql-Expression-UnaryExpression.adoc#, UnaryExpression>>
 | abstract class
 |
 a|

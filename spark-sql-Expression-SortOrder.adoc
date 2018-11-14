@@ -1,6 +1,6 @@
 == [[SortOrder]] SortOrder Unevaluable Unary Expression
 
-`SortOrder` is a <<spark-sql-Expression.adoc#UnaryExpression, unary expression>> that represents the following operators in a logical plan:
+`SortOrder` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that represents the following operators in a logical plan:
 
 * `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitSortItem, parse ORDER BY or SORT BY sort specifications>>
 
