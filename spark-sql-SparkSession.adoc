@@ -55,37 +55,55 @@ spark.stop
 | Method
 | Description
 
+| `active`
+a| [[active]]
+
+[source, scala]
+----
+active: SparkSession
+----
+
+(*New in 2.4.0*)
+
 | <<builder, builder>>
-a| Object method to create a <<spark-sql-SparkSession-Builder.adoc#, Builder>> to get the current `SparkSession` instance or create a new one.
+a|
 
 [source, scala]
 ----
 builder(): Builder
 ----
 
+Object method to create a <<spark-sql-SparkSession-Builder.adoc#, Builder>> to get the current `SparkSession` instance or create a new one.
+
 | <<catalog, catalog>>
-a| Access to the current <<spark-sql-Catalog.adoc#, metadata catalog>> of relational entities, e.g. database(s), tables, functions, table columns, and temporary views.
+a|
 
 [source, scala]
 ----
 catalog: Catalog
 ----
 
+Access to the current <<spark-sql-Catalog.adoc#, metadata catalog>> of relational entities, e.g. database(s), tables, functions, table columns, and temporary views.
+
 | <<clearActiveSession, clearActiveSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 clearActiveSession(): Unit
 ----
 
+Object method
+
 | <<clearDefaultSession, clearDefaultSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 clearDefaultSession(): Unit
 ----
+
+Object method
 
 | <<close, close>>
 a|
@@ -96,12 +114,14 @@ close(): Unit
 ----
 
 | <<conf, conf>>
-a| Access to the current runtime configuration
+a|
 
 [source, scala]
 ----
 conf: RuntimeConfig
 ----
+
+Access to the current runtime configuration
 
 | <<createDataFrame, createDataFrame>>
 a|
@@ -140,55 +160,67 @@ emptyDataset[T: Encoder]: Dataset[T]
 ----
 
 | <<experimental, experimental>>
-a| Access to the current <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
+a|
 
 [source, scala]
 ----
 experimental: ExperimentalMethods
 ----
 
+Access to the current <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
+
 | <<getActiveSession, getActiveSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 getActiveSession: Option[SparkSession]
 ----
 
+Object method
+
 | <<getDefaultSession, getDefaultSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 getDefaultSession: Option[SparkSession]
 ----
 
+Object method
+
 | <<spark-sql-SparkSession-implicits.adoc#, implicits>>
-a| [[implicits]] <<spark-sql-SparkSession-implicits.adoc#, Implicits conversions>>
+a| [[implicits]]
 
 [source, scala]
 ----
 import spark.implicits._
 ----
 
+<<spark-sql-SparkSession-implicits.adoc#, Implicits conversions>>
+
 | <<listenerManager, listenerManager>>
-a| Access to the current <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
+a|
 
 [source, scala]
 ----
 listenerManager: ExecutionListenerManager
 ----
 
+Access to the current <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
+
 | <<newSession, newSession>>
-a| Creates a new `SparkSession`
+a|
 
 [source, scala]
 ----
 newSession(): SparkSession
 ----
 
+Creates a new `SparkSession`
+
 | <<range, range>>
-a| Creates a `Dataset[java.lang.Long]`
+a|
 
 [source, scala]
 ----
@@ -198,21 +230,27 @@ range(start: Long, end: Long, step: Long): Dataset[java.lang.Long]
 range(start: Long, end: Long, step: Long, numPartitions: Int): Dataset[java.lang.Long]
 ----
 
+Creates a `Dataset[java.lang.Long]`
+
 | <<read, read>>
-a| Access to the current <<spark-sql-DataFrameReader.adoc#, DataFrameReader>> to load data from external data sources
+a|
 
 [source, scala]
 ----
 read: DataFrameReader
 ----
 
+Access to the current <<spark-sql-DataFrameReader.adoc#, DataFrameReader>> to load data from external data sources
+
 | <<sessionState, sessionState>>
-a| Access to the current <<spark-sql-SessionState.adoc#, SessionState>>
+a|
 
 [source, scala]
 ----
 sessionState: SessionState
 ----
+
+Access to the current <<spark-sql-SessionState.adoc#, SessionState>>
 
 Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<spark-sql-BaseSessionStateBuilder.adoc#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
 
@@ -220,92 +258,114 @@ Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the opt
 * *hive* for link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
 | <<setActiveSession, setActiveSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 setActiveSession(session: SparkSession): Unit
 ----
 
+Object method
+
 | <<setDefaultSession, setDefaultSession>>
-a| Object method
+a|
 
 [source, scala]
 ----
 setDefaultSession(session: SparkSession): Unit
 ----
 
+Object method
+
 | <<sharedState, sharedState>>
-a| Access to the current <<spark-sql-SharedState.adoc#, SharedState>>
+a|
 
 [source, scala]
 ----
 sharedState: SharedState
 ----
 
+Access to the current <<spark-sql-SharedState.adoc#, SharedState>>
+
 | <<sparkContext, sparkContext>>
-a| Access to the underlying `SparkContext`
+a|
 
 [source, scala]
 ----
 sparkContext: SparkContext
 ----
 
+Access to the underlying `SparkContext`
+
 | <<sql, sql>>
-a| "Executes" a SQL query
+a|
 
 [source, scala]
 ----
 sql(sqlText: String): DataFrame
 ----
 
+"Executes" a SQL query
+
 | `sqlContext`
-a| [[sqlContext]] Access to the underlying <<spark-sql-SQLContext.adoc#, SQLContext>>
+a| [[sqlContext]]
 
 [source, scala]
 ----
 sqlContext: SQLContext
 ----
 
+Access to the underlying <<spark-sql-SQLContext.adoc#, SQLContext>>
+
 | <<stop, stop>>
-a| Stops the underlying <<sparkContext, SparkContext>>
+a|
 
 [source, scala]
 ----
 stop(): Unit
 ----
 
+Stops the associated <<sparkContext, SparkContext>>
+
 | <<table, table>>
-a| Loads data from a table
+a|
 
 [source, scala]
 ----
 table(tableName: String): DataFrame
 ----
 
+Loads data from a table
+
 | <<time, time>>
-a| Executes a code block and prints out (to standard output) the time taken to execute it
+a|
 
 [source, scala]
 ----
 time[T](f: => T): T
 ----
 
+Executes a code block and prints out (to standard output) the time taken to execute it
+
 | <<udf, udf>>
-a| Access to the current <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
+a|
 
 [source, scala]
 ----
 udf: UDFRegistration
 ----
 
+Access to the current <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
+
 | <<version, version>>
-a| Returns the version of Apache Spark
+a|
 
 [source, scala]
 ----
 version: String
 ----
+
+Returns the version of Apache Spark
 |===
 
 NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism to plug `BaseRelation` object hierarchy in into link:spark-sql-LogicalPlan.adoc[LogicalPlan] object hierarchy that `SparkSession` uses to bridge them.

@@ -2,14 +2,14 @@
 
 `RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a link:spark-sql-DataFrame.adoc[DataFrame].
 
-NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used for typed aggregates using custom Scala objects (not link:spark-sql-Row.adoc[Rows]).
+NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used for typed aggregates over groups of custom Scala objects (not link:spark-sql-Row.adoc[Rows]).
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
 * link:spark-sql-basic-aggregation.adoc#groupBy[groupBy]
 * link:spark-sql-multi-dimensional-aggregation.adoc#rollup[rollup]
 * link:spark-sql-multi-dimensional-aggregation.adoc#cube[cube]
-* <<pivot, pivot>> (after link:spark-sql-basic-aggregation.adoc#groupBy[groupBy] operator)
+* <<pivot, pivot>>
 
 [[operators]]
 .RelationalGroupedDataset's Aggregate Operators
@@ -19,41 +19,49 @@ NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used
 | Description
 
 | <<agg, agg>>
-|
+a|
 
-| [[avg]] `avg`
-|
+| `avg`
+a| [[avg]]
 
-| [[count]] `count`
-|
+| `count`
+a| [[count]]
 
-| [[max]] `max`
-|
+| `max`
+a| [[max]]
 
-| [[mean]] `mean`
-|
+| `mean`
+a| [[mean]]
 
-| [[min]] `min`
-|
+| `min`
+a| [[min]]
 
-| <<pivot, pivot>>
-| Pivots on a column (with new columns per distinct value)
+| <<pivot-internals, pivot>>
+a| [[pivot]]
 
-| [[sum]] `sum`
-|
+[source, scala]
+----
+pivot(pivotColumn: String): RelationalGroupedDataset
+pivot(pivotColumn: String, values: Seq[Any]): RelationalGroupedDataset
+pivot(pivotColumn: Column): RelationalGroupedDataset // <1>
+pivot(pivotColumn: Column, values: Seq[Any]): RelationalGroupedDataset // <1>
+----
+<1> *New in 2.4.0*
+
+Pivots on a column (with new columns per distinct value)
+
+| `sum`
+a| [[sum]]
 |===
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] Spark property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
+link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
 
-`spark.sql.retainGroupColumns` is turned on by default.
+`spark.sql.retainGroupColumns` is enabled by default.
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> spark.conf.get("spark.sql.retainGroupColumns")
 res1: String = true
 
@@ -179,15 +187,18 @@ NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDat
 
 ** `PivotType`
 
-=== [[pivot]] `pivot` Operator
+=== [[pivot-internals]] `pivot` Operator
 
 [source, scala]
 ----
-pivot(pivotColumn: String): RelationalGroupedDataset  // <1>
-pivot(pivotColumn: String, values: Seq[Any]): RelationalGroupedDataset  // <2>
+pivot(pivotColumn: String): RelationalGroupedDataset // <1>
+pivot(pivotColumn: String, values: Seq[Any]): RelationalGroupedDataset // <2>
+pivot(pivotColumn: Column): RelationalGroupedDataset // <3>
+pivot(pivotColumn: Column, values: Seq[Any]): RelationalGroupedDataset // <3>
 ----
 <1> Selects distinct and sorted values on `pivotColumn` and calls the other `pivot` (that results in 3 extra "scanning" jobs)
 <2> Preferred as more efficient because the unique values are aleady provided
+<3> *New in 2.4.0*
 
 `pivot` pivots on a `pivotColumn` column, i.e. adds new columns per distinct values in `pivotColumn`.
 

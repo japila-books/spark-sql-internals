@@ -34,6 +34,16 @@ a|
 getOption(key: String): Option[String]
 ----
 
+| `isModifiable`
+a| [[isModifiable]]
+
+[source, scala]
+----
+isModifiable(key: String): Boolean
+----
+
+(*New in 2.4.0*)
+
 | <<set, set>>
 a|
 
