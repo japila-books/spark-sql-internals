@@ -42,11 +42,10 @@ a|
 ----
 from_json(e: Column, schema: DataType): Column
 from_json(e: Column, schema: DataType, options: Map[String, String]): Column
-from_json(e: Column, schema: String, options: Map[String, String]): Column // <1>
+from_json(e: Column, schema: String, options: Map[String, String]): Column
 from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
-<1> *New in 2.3.0*
 
 Extract data from arbitrary JSON-encoded values into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema
 
@@ -58,8 +57,6 @@ a|
 map_keys(e: Column): Column
 ----
 
-*(new in 2.3.0)*
-
 | <<map_values, map_values>>
 a|
 
@@ -67,8 +64,6 @@ a|
 ----
 map_values(e: Column): Column
 ----
-
-*(new in 2.3.0)*
 
 | <<posexplode, posexplode>>
 a|
@@ -85,7 +80,58 @@ a|
 ----
 posexplode_outer(e: Column): Column
 ----
+
+| <<reverse-internals, reverse>>
+a| [[reverse]]
+
+[source, scala]
+----
+reverse(e: Column): Column
+----
+
+Returns a reversed string or an array with reverse order of elements
+
+NOTE: Support for reversing arrays is *new in 2.4.0*.
+
+| <<size-internals, size>>
+a| [[size]]
+
+[source, scala]
+----
+size(e: Column): Column
+----
+
+Returns the size of the given array or map. Returns -1 if `null`.
+
 |===
+
+=== [[reverse-internals]] `reverse` Collection Function
+
+[source, scala]
+----
+reverse(e: Column): Column
+----
+
+`reverse`...FIXME
+
+=== [[size-internals]] `size` Collection Function
+
+[source, scala]
+----
+size(e: Column): Column
+----
+
+`size` returns the size of the given array or map. Returns -1 if `null`.
+
+Internally, `size` creates a `Column` with `Size` unary expression.
+
+[source, scala]
+----
+import org.apache.spark.sql.functions.size
+val c = size('id)
+scala> println(c.expr.asCode)
+Size(UnresolvedAttribute(ArrayBuffer(id)))
+----
 
 === [[posexplode]] `posexplode` Collection Function
 

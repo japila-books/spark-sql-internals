@@ -265,7 +265,7 @@ var_samp(e: Column): Column
 var_samp(columnName: String): Column
 ----
 
-.29+^.^| [[collection_funcs]] *Collection functions*
+.31+^.^| [[collection_funcs]] *Collection functions*
 
 | <<spark-sql-functions-collection.adoc#array_contains, array_contains>>
 a| [[array_contains]]
@@ -513,6 +513,18 @@ a| [[posexplode_outer]]
 posexplode_outer(e: Column): Column
 ----
 
+| <<spark-sql-functions-collection.adoc#reverse, reverse>>
+a| [[reverse]]
+
+[source, scala]
+----
+reverse(e: Column): Column
+----
+
+Returns a reversed string or an array with reverse order of elements
+
+NOTE: Support for reversing arrays is *new in 2.4.0*.
+
 | <<spark-sql-functions-collection.adoc#schema_of_json, schema_of_json>>
 a| [[schema_of_json]]
 
@@ -544,6 +556,16 @@ shuffle(e: Column): Column
 ----
 
 (*New in 2.4.0*)
+
+| <<spark-sql-functions-collection.adoc#size, size>>
+a| [[size]]
+
+[source, scala]
+----
+size(e: Column): Column
+----
+
+Returns the size of the given array or map. Returns -1 if `null`.
 
 | <<spark-sql-functions-collection.adoc#slice, slice>>
 a| [[slice]]
