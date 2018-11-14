@@ -5,7 +5,7 @@
 
 `In` is <<creating-instance, created>> when:
 
-* link:spark-sql-Column.adoc#isin[Column.isin] method is used
+* <<spark-sql-column-operators.adoc#isin, Column.isin>> operator is used
 
 * `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[parse SQL's IN predicate with a subquery]
 

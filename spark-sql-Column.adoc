@@ -79,9 +79,6 @@ You can reference nested columns using `.` (dot).
 | <<as, as>>
 | Specifying type hint about the expected return value of the column
 
-| <<isin, isin>>
-|
-
 | <<name, name>>
 |
 |===
@@ -333,42 +330,3 @@ named: NamedExpression
 
 * link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
 ====
-
-=== [[isin]] `isin` Operator
-
-[source, scala]
-----
-isin(list: Any*): Column
-----
-
-Internally, `isin` creates a `Column` with link:spark-sql-Expression-In.adoc[In] predicate expression.
-
-[source, scala]
-----
-val ids = Seq((1, 2, 2), (2, 3, 1)).toDF("x", "y", "id")
-scala> ids.show
-+---+---+---+
-|  x|  y| id|
-+---+---+---+
-|  1|  2|  2|
-|  2|  3|  1|
-+---+---+---+
-
-val c = $"id" isin ($"x", $"y")
-val q = ids.filter(c)
-scala> q.show
-+---+---+---+
-|  x|  y| id|
-+---+---+---+
-|  1|  2|  2|
-+---+---+---+
-
-// Note that isin accepts non-Column values
-val c = $"id" isin ("x", "y")
-val q = ids.filter(c)
-scala> q.show
-+---+---+---+
-|  x|  y| id|
-+---+---+---+
-+---+---+---+
-----

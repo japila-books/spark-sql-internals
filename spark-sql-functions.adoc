@@ -9,13 +9,6 @@ You can access the standard functions using the following `import` statement in 
 import org.apache.spark.sql.functions._
 ----
 
-There are over 200 functions in the `functions` object.
-
-```
-scala> spark.catalog.listFunctions.count
-res1: Long = 251
-```
-
 [[standard-functions]]
 .(Subset of) Standard Functions in Spark SQL
 [align="center",cols="1,1,2",width="100%",options="header"]
@@ -307,11 +300,10 @@ a|
 ----
 from_json(e: Column, schema: DataType): Column
 from_json(e: Column, schema: DataType, options: Map[String, String]): Column
-from_json(e: Column, schema: String, options: Map[String, String]): Column // <1>
+from_json(e: Column, schema: String, options: Map[String, String]): Column
 from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
-<1> *New in 2.3.0*
 
 Parses a column with a JSON string into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema.
 
@@ -323,8 +315,6 @@ a|
 map_keys(e: Column): Column
 ----
 
-*(new in 2.3.0)*
-
 | [[map_values]] <<spark-sql-functions-collection.adoc#map_values, map_values>>
 a|
 
@@ -332,8 +322,6 @@ a|
 ----
 map_values(e: Column): Column
 ----
-
-*(new in 2.3.0)*
 
 | [[posexplode]] <<spark-sql-functions-collection.adoc#posexplode, posexplode>>
 a|
@@ -351,21 +339,99 @@ a|
 posexplode_outer(e: Column): Column
 ----
 
-.5+^.^| *Date and time functions*
-| link:spark-sql-functions-datetime.adoc#current_timestamp[current_timestamp]
-|
+.9+^.^| [[datetime_funcs]] *Date and time functions*
+| <<spark-sql-functions-datetime.adoc#current_date, current_date>>
+a| [[current_date]]
 
-| link:spark-sql-functions-datetime.adoc#to_date[to_date]
-|
+[source, scala]
+----
+current_date(): Column
+----
 
-| link:spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp]
-|
+| <<spark-sql-functions-datetime.adoc#current_timestamp, current_timestamp>>
+a| [[current_timestamp]]
 
-| link:spark-sql-functions-datetime.adoc#unix_timestamp[unix_timestamp]
-| Converts current or specified time to Unix timestamp (in seconds)
+[source, scala]
+----
+current_timestamp(): Column
+----
 
-| link:spark-sql-functions-datetime.adoc#window[window]
-| Generates tumbling time windows
+| <<spark-sql-functions-datetime.adoc#from_utc_timestamp, from_utc_timestamp>>
+a| [[from_utc_timestamp]]
+
+[source, scala]
+----
+from_utc_timestamp(ts: Column, tz: String): Column
+from_utc_timestamp(ts: Column, tz: Column): Column  // <1>
+----
+<1> *New in 2.4.0*
+
+| <<spark-sql-functions-datetime.adoc#months_between, months_between>>
+a| [[months_between]]
+
+[source, scala]
+----
+months_between(end: Column, start: Column): Column
+months_between(end: Column, start: Column, roundOff: Boolean): Column // <1>
+----
+<1> *New in 2.4.0*
+
+| <<spark-sql-functions-datetime.adoc#to_date, to_date>>
+a| [[to_date]]
+
+[source, scala]
+----
+to_date(e: Column): Column
+to_date(e: Column, fmt: String): Column
+----
+
+| <<spark-sql-functions-datetime.adoc#to_timestamp, to_timestamp>>
+a| [[to_timestamp]]
+
+[source, scala]
+----
+to_timestamp(s: Column): Column
+to_timestamp(s: Column, fmt: String): Column
+----
+
+| <<spark-sql-functions-datetime.adoc#to_utc_timestamp, to_utc_timestamp>>
+a| [[to_utc_timestamp]]
+
+[source, scala]
+----
+to_utc_timestamp(ts: Column, tz: String): Column
+to_utc_timestamp(ts: Column, tz: Column): Column // <1>
+----
+<1> *New in 2.4.0*
+
+| <<spark-sql-functions-datetime.adoc#unix_timestamp, unix_timestamp>>
+a| [[unix_timestamp]] Converts current or specified time to Unix timestamp (in seconds)
+
+[source, scala]
+----
+unix_timestamp(): Column
+unix_timestamp(s: Column): Column
+unix_timestamp(s: Column, p: String): Column
+----
+
+| <<spark-sql-functions-datetime.adoc#window, window>>
+a| [[window]] Generates tumbling time windows
+
+[source, scala]
+----
+window(
+  timeColumn: Column,
+  windowDuration: String): Column
+window(
+  timeColumn: Column,
+  windowDuration: String,
+  slideDuration: String): Column
+window(
+  timeColumn: Column,
+  windowDuration: String,
+  slideDuration: String,
+  startTime: String): Column
+----
 
 1+^.^| *Math functions*
 | <<bin, bin>>
@@ -439,8 +505,6 @@ a|
 ----
 currentRow(): Column
 ----
-
-*(new in 2.3.0)*
 
 | [[dense_rank]] <<spark-sql-functions-windows.adoc#dense_rank, dense_rank>>
 a|
@@ -521,8 +585,6 @@ a|
 unboundedFollowing(): Column
 ----
 
-*(new in 2.3.0)*
-
 | [[unboundedPreceding]] <<spark-sql-functions-windows.adoc#unboundedPreceding, unboundedPreceding>>
 a|
 
@@ -530,8 +592,6 @@ a|
 ----
 unboundedPreceding(): Column
 ----
-
-*(new in 2.3.0)*
 |===
 
 TIP: The page gives only a brief ovierview of the many functions available in `functions` object and so you should read the http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.functions$[official documentation of the `functions` object].
