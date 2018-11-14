@@ -41,6 +41,20 @@ StructField(b,StringType,true)
 Read the official documentation of Scala's http://www.scala-lang.org/api/current/scala/collection/Seq.html[scala.collection.Seq].
 ====
 
+As of Spark 2.4.0, `StructType` can be converted to DDL format using <<toDDL, toDDL>> method.
+
+.Example: Using StructType.toDDL
+[source, scala]
+----
+// Generating a schema from a case class
+// Because we're all properly lazy
+case class Person(id: Long, name: String)
+import org.apache.spark.sql.Encoders
+val schema = Encoders.product[Person].schema
+scala> println(schema.toDDL)
+`id` BIGINT,`name` STRING
+----
+
 === [[fromAttributes]] `fromAttributes` Method
 
 [source, scala]
@@ -193,3 +207,12 @@ fromDDL(ddl: String): StructType
 `fromDDL`...FIXME
 
 NOTE: `fromDDL` is used when...FIXME
+
+=== [[toDDL]] Converting to DDL Format -- `toDDL` Method
+
+[source, scala]
+----
+toDDL: String
+----
+
+`toDDL` converts all the <<fields, fields>> to DDL format and concatenates them using the comma (`,`).

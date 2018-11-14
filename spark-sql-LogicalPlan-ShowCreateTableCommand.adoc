@@ -85,3 +85,14 @@ showCreateHiveTable(metadata: CatalogTable): String
 `showCreateHiveTable`...FIXME
 
 NOTE: `showCreateHiveTable` is used exclusively when `ShowCreateTableCommand` logical command is executed (with a Hive <<table, table>>).
+
+=== [[showHiveTableHeader]] `showHiveTableHeader` Internal Method
+
+[source, scala]
+----
+showHiveTableHeader(metadata: CatalogTable, builder: StringBuilder): Unit
+----
+
+`showHiveTableHeader`...FIXME
+
+NOTE: `showHiveTableHeader` is used exclusively when `ShowCreateTableCommand` logical command is requested to <<showCreateHiveTable, showCreateHiveTable>>.

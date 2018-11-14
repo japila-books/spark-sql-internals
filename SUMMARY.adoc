@@ -59,7 +59,7 @@
 
 . link:spark-sql-schema.adoc[Schema -- Structure of Data]
 .. link:spark-sql-StructType.adoc[StructType]
-.. link:spark-sql-StructField.adoc[StructField]
+.. link:spark-sql-StructField.adoc[StructField -- Single Field in StructType]
 .. link:spark-sql-DataType.adoc[Data Types]
 
 . link:spark-sql-multi-dimensional-aggregation.adoc[Multi-Dimensional Aggregation]
