@@ -6,11 +6,6 @@
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 . link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
-=== Avro Data Source
-
-. link:spark-sql-avro.adoc[Avro Data Source]
-. link:spark-sql-CatalystDataToAvro.adoc[CatalystDataToAvro Unary Expression]
-
 == Developing Spark SQL Applications
 
 . link:spark-sql-fundamentals-spark-application-development.adoc[Fundamentals of Spark SQL Application Development]
@@ -192,6 +187,12 @@
 . link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Structured Queries to Kafka]
 .. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
 . link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
+
+=== Avro Data Source
+
+. link:spark-sql-avro.adoc[Avro Data Source]
+. link:spark-sql-Expression-CatalystDataToAvro.adoc[CatalystDataToAvro Unary Expression]
+. link:spark-sql-Expression-AvroDataToCatalyst.adoc[AvroDataToCatalyst Unary Expression]
 
 === JDBC Data Source
 
