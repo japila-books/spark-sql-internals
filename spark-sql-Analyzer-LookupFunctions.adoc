@@ -15,9 +15,6 @@ NOTE: `LookupFunctions` is a Scala object inside link:spark-sql-Analyzer.adoc[An
 [[example]]
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // Using Catalyst DSL to create a logical plan with an unregistered function
 import org.apache.spark.sql.catalyst.dsl.plans._
 val t1 = table("t1")

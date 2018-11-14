@@ -387,9 +387,6 @@ scala> spark.tables.show
 `sql` is imported in spark-shell so you can execute Hive statements without `spark` prefix.
 
 ```
-scala> println(s"This is Spark ${sc.version}")
-This is Spark 2.3.0
-
 scala> :imports
  1) import spark.implicits._  (52 terms, 31 are implicit)
  2) import spark.sql          (1 terms)

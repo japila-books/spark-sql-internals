@@ -385,7 +385,7 @@ localCheckpoint(eager: Boolean): Dataset[T]
 ----
 <1> `eager` flag enabled
 
-(*New in 2.3.0*) `localCheckpoint` simply uses <<checkpoint, Dataset.checkpoint>> operator with the input `eager` flag and `reliableCheckpoint` flag disabled (`false`).
+`localCheckpoint` simply uses <<checkpoint, Dataset.checkpoint>> operator with the input `eager` flag and `reliableCheckpoint` flag disabled (`false`).
 
 === [[checkpoint-internal]] `checkpoint` Internal Method
 

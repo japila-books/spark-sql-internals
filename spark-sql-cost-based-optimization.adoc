@@ -10,7 +10,7 @@ You first use <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS>> SQL command to
 
 Logical operators have <<LogicalPlanStats, statistics support>> that is used for query planning.
 
-One of the main features of Spark 2.3.0 is support for <<column-histograms, equi-height column histograms>>.
+There is also support for <<column-histograms, equi-height column histograms>>.
 
 === [[statistics]] Table Statistics
 
@@ -113,9 +113,6 @@ TIP: Use `DESC EXTENDED tableName` for table-level statistics and `DESC EXTENDED
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // table-level statistics are in Statistics row
 scala> sql("DESC EXTENDED t1").show(numRows = 30, truncate = false)
 +----------------------------+--------------------------------------------------------------+-------+
@@ -324,9 +321,6 @@ NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 ----
 // Computing column statistics with histogram
 // ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
-scala> spark.version
-res0: String = 2.3.0
-
 scala> spark.sessionState.conf.histogramEnabled
 res1: Boolean = true
 

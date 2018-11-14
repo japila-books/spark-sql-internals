@@ -27,7 +27,6 @@ root
  |-- volume: integer (nullable = false)
 
 // FIXME Use Catalyst DSL
-// New in 2.3.0
 // rangeBetween with column expressions
 // data type of orderBy expression is date
 // data types of range frame boundaries is interval
@@ -90,7 +89,6 @@ root
  |-- volume: integer (nullable = false)
 
 // FIXME Use Catalyst DSL
-// New in 2.3.0
 // rangeBetween with column expressions
 // data type of orderBy expression is date
 // WindowSpecDefinition(_, Seq(order), SpecifiedWindowFrame(RangeFrame, lower, upper))

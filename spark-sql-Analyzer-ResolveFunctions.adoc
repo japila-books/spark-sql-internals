@@ -11,9 +11,6 @@ NOTE: `ResolveFunctions` is a Scala object inside link:spark-sql-Analyzer.adoc[A
 [[example]]
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import spark.sessionState.analyzer.ResolveFunctions
 
 // Example: UnresolvedAttribute with VirtualColumn.hiveGroupingIdName (grouping__id) => Alias

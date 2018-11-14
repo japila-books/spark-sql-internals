@@ -18,21 +18,19 @@ scala> lengthUDF($"name")
 res1: org.apache.spark.sql.Column = UDF(name)
 ----
 
-(new in *2.3.0*) `UserDefinedFunction` can also have a <<withName, name>>.
+`UserDefinedFunction` can also have a <<withName, name>>.
 
 [source, scala]
 ----
-// New in 2.3.0
 val namedLengthUDF = lengthUDF.withName("lengthUDF")
 scala> namedLengthUDF($"name")
 res2: org.apache.spark.sql.Column = UDF:lengthUDF(name)
 ----
 
-(new in *2.3.0*) `UserDefinedFunction` is *nullable* by default, but can be changed as <<asNonNullable, non-nullable>>.
+`UserDefinedFunction` is *nullable* by default, but can be changed as <<asNonNullable, non-nullable>>.
 
 [source, scala]
 ----
-// New in 2.3.0
 val nonNullableLengthUDF = lengthUDF.asNonNullable
 scala> nonNullableLengthUDF.nullable
 res1: Boolean = false

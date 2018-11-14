@@ -16,9 +16,6 @@ When <<creating-instance, created>>, `JoinEstimation` immediately takes the link
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // JoinEstimation requires row count stats for join statistics estimates
 // With cost-based optimization off, size in bytes is available only
 // That would give no join estimates whatsoever (except size in bytes)

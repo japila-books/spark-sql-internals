@@ -168,7 +168,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 
 | <<repartitionByRange, repartitionByRange>>
-a| (*New in 2.3.0*)
+a|
 
 [source, scala]
 ----
@@ -183,11 +183,9 @@ a|
 ----
 sample(withReplacement: Boolean, fraction: Double): Dataset[T]
 sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
-sample(fraction: Double): Dataset[T]  // <1>
-sample(fraction: Double, seed: Long): Dataset[T]  // <2>
+sample(fraction: Double): Dataset[T]
+sample(fraction: Double, seed: Long): Dataset[T]
 ----
-<1> *New in 2.3.0*
-<2> *New in 2.3.0*
 
 | <<select, select>>
 a|
@@ -256,7 +254,7 @@ union(other: Dataset[T]): Dataset[T]
 ----
 
 | <<unionByName, unionByName>>
-a| (*New in 2.3.0*)
+a|
 
 [source, scala]
 ----
@@ -555,7 +553,7 @@ repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 <1> Uses <<spark-sql-properties.adoc#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
 
-(*New in 2.3.0*) `repartitionByRange` simply <<spark-sql-Dataset.adoc#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression, RepartitionByExpression>> logical operator.
+`repartitionByRange` simply <<spark-sql-Dataset.adoc#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression, RepartitionByExpression>> logical operator.
 
 [source, scala]
 ----
@@ -593,11 +591,9 @@ requirement failed: At least one partition-by expression must be specified.
 ----
 sample(withReplacement: Boolean, fraction: Double): Dataset[T]
 sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
-sample(fraction: Double): Dataset[T]  // <1>
-sample(fraction: Double, seed: Long): Dataset[T]  // <2>
+sample(fraction: Double): Dataset[T]
+sample(fraction: Double, seed: Long): Dataset[T]
 ----
-<1> *New in 2.3.0*
-<2> *New in 2.3.0*
 
 `sample`...FIXME
 
@@ -721,7 +717,7 @@ union(other: Dataset[T]): Dataset[T]
 unionByName(other: Dataset[T]): Dataset[T]
 ----
 
-(*New in 2.3.0*) `unionByName` creates a new `Dataset` that is an union of the rows in this and the other Datasets column-wise, i.e. the order of columns in Datasets does not matter as long as their names and number match.
+`unionByName` creates a new `Dataset` that is an union of the rows in this and the other Datasets column-wise, i.e. the order of columns in Datasets does not matter as long as their names and number match.
 
 [source, scala]
 ----

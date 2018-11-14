@@ -934,7 +934,7 @@ currentRow(): Column
 unboundedFollowing(): Column
 ----
 
-*(new in 2.3.0)* `unboundedFollowing`...FIXME
+`unboundedFollowing`...FIXME
 
 === [[unboundedPreceding]] `unboundedPreceding` Window Function
 
@@ -943,7 +943,7 @@ unboundedFollowing(): Column
 unboundedPreceding(): Column
 ----
 
-*(new in 2.3.0)* `unboundedPreceding`...FIXME
+`unboundedPreceding`...FIXME
 
 === [[i-want-more]] Further Reading and Watching
 

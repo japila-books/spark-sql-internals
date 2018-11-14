@@ -86,12 +86,11 @@ show(truncate: Boolean): Unit
 show(numRows: Int): Unit
 show(numRows: Int, truncate: Boolean): Unit
 show(numRows: Int, truncate: Int): Unit
-show(numRows: Int, truncate: Int, vertical: Boolean): Unit // <1>
+show(numRows: Int, truncate: Int, vertical: Boolean): Unit
 ----
-<1> *New in 2.3.0*
 
 | <<summary, summary>>
-a| (*New in 2.3.0*) Computes specified statistics for numeric and string columns. The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles.
+a| Computes specified statistics for numeric and string columns. The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles.
 
 [source, scala]
 ----
@@ -200,9 +199,8 @@ show(truncate: Boolean): Unit
 show(numRows: Int): Unit
 show(numRows: Int, truncate: Boolean): Unit
 show(numRows: Int, truncate: Int): Unit
-show(numRows: Int, truncate: Int, vertical: Boolean): Unit // <1>
+show(numRows: Int, truncate: Int, vertical: Boolean): Unit
 ----
-<1> *New in 2.3.0*
 
 `show`...FIXME
 
@@ -213,7 +211,7 @@ show(numRows: Int, truncate: Int, vertical: Boolean): Unit // <1>
 summary(statistics: String*): DataFrame
 ----
 
-*(New in 2.3.0)* `summary` calculates specified statistics for numeric and string columns.
+`summary` calculates specified statistics for numeric and string columns.
 
 The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles.
 

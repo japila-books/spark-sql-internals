@@ -157,9 +157,6 @@ TIP: Import `CollapseCodegenStages` and apply the rule directly to a physical pl
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.SparkSession
 val spark: SparkSession = ...
 // Just a structured query with explode Generator expression that supports codegen "partially"

@@ -16,9 +16,6 @@ Technically, `EnsureRequirements` is just a link:spark-sql-catalyst-Rule.adoc[Ca
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 val q = ??? // FIXME
 val sparkPlan = q.queryExecution.sparkPlan
 

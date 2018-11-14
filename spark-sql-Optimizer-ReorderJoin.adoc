@@ -118,9 +118,6 @@ If there are condition expressions that link:spark-sql-PredicateHelper.adoc#canE
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.Literal
 val a: Expression = Literal("a")
@@ -174,9 +171,6 @@ image::images/ReorderJoin-createOrderedJoin-four-plans-after.png[align="center"]
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // HACK: Disable symbolToColumn implicit conversion
 // It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
@@ -285,9 +279,6 @@ image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.AttributeReference
 import org.apache.spark.sql.types.LongType
@@ -359,9 +350,6 @@ NOTE: `unapply` is a feature of the Scala programming language to define https:/
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 val d1 = Seq((0, "a"), (1, "b")).toDF("id", "c")
 val d2 = Seq((0, "c"), (2, "b")).toDF("id", "c")
 val q = d1.join(d2, "id").where($"id" > 0)
@@ -434,9 +422,6 @@ In either case, `flattenJoin` splits _conjunctive predicates_, i.e. removes `And
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // Use Catalyst DSL to create a logical plan
 // Example 1: One cross join
 import org.apache.spark.sql.catalyst.dsl.plans._

@@ -532,9 +532,6 @@ sql(sqlText: String): DataFrame
 `sql` is imported in link:spark-shell.adoc[spark-shell] so you can execute SQL statements as if `sql` were a part of the environment.
 
 ```
-scala> spark.version
-res0: String = 2.3.0
-
 scala> :imports
  1) import spark.implicits._       (72 terms, 43 are implicit)
  2) import spark.sql               (1 terms)
@@ -619,9 +616,6 @@ table(tableIdent: TableIdentifier): DataFrame
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> spark.catalog.tableExists("t1")
 res1: Boolean = true
 
@@ -726,9 +720,6 @@ newSession(): SparkSession
 
 [source, scala]
 ----
-scala> println(sc.version)
-2.3.0
-
 scala> val newSession = spark.newSession
 newSession: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@122f58a
 ----

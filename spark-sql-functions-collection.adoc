@@ -221,7 +221,7 @@ from_json(e: Column, schema: String, options: Map[String, String]): Column // <5
 <2> (fixme)
 <3> Calls <1> with empty `options`
 <4> Relays to the other `from_json` with empty `options`
-<5> (*2.3.0*) Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
+<5> Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
 
 `from_json` parses a column with a JSON-encoded value into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema.
 
@@ -489,7 +489,7 @@ scala> q.show
 map_keys(e: Column): Column
 ----
 
-*(new in 2.3.0)* `map_keys`...FIXME
+`map_keys`...FIXME
 
 === [[map_values]] `map_values` Collection Function
 
@@ -498,4 +498,4 @@ map_keys(e: Column): Column
 map_values(e: Column): Column
 ----
 
-*(new in 2.3.0)* `map_values`...FIXME
+`map_values`...FIXME

@@ -14,9 +14,6 @@ You can access statistics and query hints of a logical plan using link:spark-sql
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 val q = spark.range(5).hint("broadcast").join(spark.range(1), "id")
 val plan = q.queryExecution.optimizedPlan
 val stats = plan.stats

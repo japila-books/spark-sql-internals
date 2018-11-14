@@ -28,9 +28,6 @@ NOTE: link:spark-sql-Analyzer.adoc[Spark SQL Analyzer] uses link:spark-sql-Analy
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // Defining a zero-argument UDF
 val myUDF = udf { () => "Hello World" }
 

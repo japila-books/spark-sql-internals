@@ -14,9 +14,6 @@ link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sq
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 val isParquetVectorizedReaderEnabled = spark.conf.get("spark.sql.parquet.enableVectorizedReader").toBoolean
 assert(isParquetVectorizedReaderEnabled, "spark.sql.parquet.enableVectorizedReader should be enabled by default")
 ----

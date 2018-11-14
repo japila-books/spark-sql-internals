@@ -38,12 +38,14 @@ col(colName: String): Column
 ----
 
 | <<colRegex, colRegex>>
-a| (*New in 2.3.0*) Selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`)
+a|
 
 [source, scala]
 ----
 colRegex(colName: String): Column
 ----
+
+Selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`)
 
 | <<crossJoin, crossJoin>>
 a|
@@ -197,7 +199,7 @@ In the case when the column name is not `*` and <<spark-sql-properties.adoc#spar
 colRegex(colName: String): Column
 ----
 
-(*New in 2.3.0*) `colRegex` selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`).
+`colRegex` selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`).
 
 NOTE: `colRegex` is used in <<col, col>> when <<spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled (and the column name is not `*`).
 

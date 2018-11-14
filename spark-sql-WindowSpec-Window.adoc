@@ -46,10 +46,9 @@ a| [[rangeBetween]]
 
 [source, scala]
 ----
-rangeBetween(start: Column, end: Column): WindowSpec // <1>
+rangeBetween(start: Column, end: Column): WindowSpec
 rangeBetween(start: Long, end: Long): WindowSpec
 ----
-<1> *New in 2.3.0*
 
 Creates a <<spark-sql-WindowSpec.adoc#, WindowSpec>> with the <<spark-sql-WindowSpec.adoc#frame, frame boundaries>> defined, from `start` (inclusive) to `end` (inclusive). Both `start` and `end` are relative to the current row based on the actual value of the `ORDER BY` expression(s).
 

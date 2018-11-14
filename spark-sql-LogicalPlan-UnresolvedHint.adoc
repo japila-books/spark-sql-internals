@@ -10,9 +10,6 @@
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 // Dataset API
 val q = spark.range(1).hint("myHint", 100, true)
 val plan = q.queryExecution.logical

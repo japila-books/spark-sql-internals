@@ -26,9 +26,6 @@ TIP: Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressi
 
 [source, scala]
 ----
-scala> spark.version
-res0: String = 2.3.0
-
 scala> import spark.sessionState.conf
 import spark.sessionState.conf
 
