@@ -135,16 +135,17 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | Rules
 | Description
 
-.2+^.^| [[Hints]] Hints
-.2+^.^| <<fixedPoint, FixedPoint>>
+.3+^.^| [[Hints]] Hints
+.3+^.^| <<fixedPoint, FixedPoint>>
 
-| [[ResolveBroadcastHints]] link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
-|
+| <<spark-sql-Analyzer-ResolveBroadcastHints.adoc#, ResolveBroadcastHints>>
+| [[ResolveBroadcastHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators
 
-Resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] to link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+| <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>>
+| [[ResolveCoalesceHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators
 
 | RemoveAllHints
-| Removes all the hints (valid or not).
+| [[RemoveAllHints]] Removes all <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators
 
 ^.^| [[Simple-Sanity-Check]] Simple Sanity Check
 ^.^| `Once`

@@ -1,10 +1,10 @@
-== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN or MAPJOIN Hint Names
+== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN and MAPJOIN Hint Names
 
-`ResolveBroadcastHints` is a resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hint names (case-insensitive).
+`ResolveBroadcastHints` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators.
 
-Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveBroadcastHints` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveBroadcastHints` is part of link:spark-sql-Analyzer.adoc#Hints[Hints] fixed-point batch of rules (that in fact is executed before any other rule).
+`ResolveBroadcastHints` is part of link:spark-sql-Analyzer.adoc#Hints[Hints] fixed-point batch of rules (that is executed before any other rule).
 
 [[conf]]
 [[creating-instance]]

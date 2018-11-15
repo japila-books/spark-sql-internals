@@ -34,15 +34,17 @@ When created `UnresolvedHint` takes:
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
 [[resolved]]
-`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[query analysis] (or simply removed from a logical plan).
+`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during <<spark-sql-Analyzer.adoc#Hints, query analysis>> (or simply removed from a logical plan).
 
 [NOTE]
 ====
-There are two logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with `UnresolvedHint` logical operators:
+There are the following logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with the link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator:
 
-* link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators (with names `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` and an empty parameter list) to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
 
-* `RemoveAllHints` simply removes all `UnresolvedHint` operators
+. <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
+
+. `RemoveAllHints` simply removes all `UnresolvedHint` operators
 
 The order of executing the above rules matters.
 ====

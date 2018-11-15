@@ -6,7 +6,7 @@
 
 * Other uses of `UnresolvedRelation`
 
-Technically, `ResolveBroadcastHints` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveRelations` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 `ResolveRelations` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 

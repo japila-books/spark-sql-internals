@@ -532,6 +532,7 @@
 . link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
 . link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
+. link:spark-sql-Analyzer-ResolveCoalesceHints.adoc[ResolveCoalesceHints]
 . link:spark-sql-Analyzer-ResolveCreateNamedStruct.adoc[ResolveCreateNamedStruct]
 . link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
 . link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]

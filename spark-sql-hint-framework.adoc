@@ -1,8 +1,12 @@
-== Hint Framework (Spark SQL 2.2)
+== Hint Framework
 
-As of https://issues.apache.org/jira/browse/SPARK-20857[Spark SQL 2.2], structured queries can be optimized using *Hint Framework* that allows for <<specifying-query-hints, specifying query hints>>.
+Structured queries can be optimized using *Hint Framework* that allows for <<specifying-query-hints, specifying query hints>>.
 
 *Query hints* allow for annotating a query and give a hint to the query optimizer how to optimize logical plans. This can be very useful when the query optimizer cannot make optimal decision, e.g. with respect to join methods due to conservativeness or the lack of proper statistics.
+
+Spark SQL supports <<coalesce-repartition-hints, COALESCE and REPARTITION>> and <<broadcast-hints, BROADCAST>> hints. All remaining unresolved hints are silently removed from a query plan at <<spark-analyzer, analysis>>.
+
+NOTE: Hint Framework was added in https://issues.apache.org/jira/browse/SPARK-20857[Spark SQL 2.2].
 
 === [[specifying-query-hints]] Specifying Query Hints
 
@@ -30,9 +34,17 @@ scala> println(plan.numberedTreeString)
 
 `SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL link:spark-sql-AstBuilder.adoc#withHints[translates] into a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator in a logical plan.
 
+=== [[coalesce-repartition-hints]] COALESCE and REPARTITION Hints
+
+Spark SQL 2.4 added support for *COALESCE* and *REPARTITION* hints (using <<sql-hints, SQL comments>>):
+
+* `SELECT /*+ COALESCE(5) */ ...`
+
+* `SELECT /*+ REPARTITION(3) */ ...`
+
 === [[broadcast-hints]] Broadcast Hints
 
-Spark SQL supports *broadcast hints* using <<broadcast-function, broadcast standard function>> or <<sql-hints, SQL comments>>:
+Spark SQL 2.2 supports *BROADCAST* hints using <<broadcast-function, broadcast standard function>> or <<sql-hints, SQL comments>>:
 
 * `SELECT /*+ MAPJOIN(b) */ ...`
 
@@ -82,11 +94,13 @@ scala> println(plan.numberedTreeString)
 03    +- Range (0, 1, step=1, splits=Some(8))
 ----
 
-=== Spark Analyzer
+=== [[spark-analyzer]] Spark Analyzer
 
-There are two logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operators:
+There are the following logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with the link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator:
 
-. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators (with names `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` and an empty parameter list) to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+
+. <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
 . `RemoveAllHints` simply removes all `UnresolvedHint` operators
 
