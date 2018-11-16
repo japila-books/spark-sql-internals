@@ -61,6 +61,18 @@ Negative values or `0` disable broadcasting.
 
 Use link:spark-sql-SQLConf.adoc#autoBroadcastJoinThreshold[SQLConf.autoBroadcastJoinThreshold] method to access the current value.
 
+| spark.sql.avro.compression.codec
+| `snappy`
+a| [[spark.sql.avro.compression.codec]] The compression codec used in writing of Avro files.
+
+The supported codecs are:
+
+* `uncompressed`
+* `deflate`
+* `snappy`
+* `bzip2`
+* `xz`
+
 | spark.sql.broadcastTimeout
 | `5 * 60`
 | [[spark.sql.broadcastTimeout]] Timeout in seconds for the broadcast wait time in broadcast joins.

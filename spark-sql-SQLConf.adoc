@@ -81,6 +81,10 @@ a| [[autoSizeUpdateEnabled]] Used when:
 
 * `AlterTableAddPartitionCommand` is executed
 
+| avroCompressionCodec
+| <<spark-sql-properties.adoc#spark.sql.avro.compression.codec, spark.sql.avro.compression.codec>>
+| [[avroCompressionCodec]] Used exclusively when `AvroOptions` is requested for the <<spark-sql-AvroOptions.adoc#compression, compression>> configuration property (and it was not set explicitly)
+
 | broadcastTimeout
 | link:spark-sql-properties.adoc#spark.sql.broadcastTimeout[spark.sql.broadcastTimeout]
 | [[broadcastTimeout]] Used exclusively in link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] (for broadcasting a table to executors).

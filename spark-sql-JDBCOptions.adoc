@@ -168,7 +168,7 @@ NOTE: The <<options, options>> are case-insensitive.
 
 * JDBC URL
 * [[table]] Name of the table
-* [[parameters]] Collection of key-value pairs (i.e. `Map[String, String]`)
+* [[parameters]] Case-insensitive configuration parameters (i.e. `Map[String, String]`)
 
 The input `URL` and <<table, table>> are set as the current <<url, url>> and <<dbtable, dbtable>> options (overriding the values in the input <<parameters, parameters>> if defined).
 
