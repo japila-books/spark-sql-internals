@@ -3,7 +3,7 @@
 `HiveFileFormat` is a <<spark-sql-FileFormat.adoc#, FileFormat>> for <<prepareWrite, writing Hive tables>>.
 
 [[shortName]]
-`HiveFileFormat` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself as *hive* data source.
+`HiveFileFormat` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and <<spark-sql-DataSourceRegister.adoc#shortName, registers itself>> as *hive* data source.
 
 NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use <<spark-sql-DataFrameReader.adoc#table, DataFrameReader.table>> or <<spark-sql-DataFrameWriter.adoc#saveAsTable, DataFrameWriter.saveAsTable>> for loading from or writing data to Hive data source, respectively.
 

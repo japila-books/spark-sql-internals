@@ -1,7 +1,7 @@
 == [[ParquetFileFormat]] ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is a link:spark-sql-FileFormat.adoc[FileFormat] for data sources in *parquet* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and convert them to Spark SQL rows).
+`ParquetFileFormat` is a link:spark-sql-FileFormat.adoc[FileFormat] for data sources in *parquet* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).
 
 NOTE: `parquet` is the link:spark-sql-DataFrameReader.adoc#source[default data source format] in Spark SQL.
 
@@ -24,7 +24,7 @@ spark.read.schema(schema).load("parquet-datasets")
 ----
 
 [[isSplitable]]
-`ParquetFileFormat` is splitable, i.e. FIXME
+`ParquetFileFormat` is <<spark-sql-FileFormat.adoc#isSplitable, splitable>>, i.e. FIXME
 
 [[supportBatch]]
 `ParquetFileFormat` link:spark-sql-FileFormat.adoc#supportBatch[supports batch] when all of the following hold:
@@ -50,7 +50,7 @@ log4j.logger.org.apache.spark.sql.execution.datasources.parquet.ParquetFileForma
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[prepareWrite]] `prepareWrite` Method
+=== [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
 [source, scala]
 ----
@@ -61,7 +61,7 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] to...FIXME.
+NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.adoc#prepareWrite, FileFormat Contract>> to prepare a write job.
 
 `prepareWrite`...FIXME
 

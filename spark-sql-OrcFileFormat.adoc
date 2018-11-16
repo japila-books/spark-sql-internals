@@ -1,6 +1,6 @@
 == [[OrcFileFormat]] OrcFileFormat
 
-`OrcFileFormat` is...FIXME
+`OrcFileFormat` is a <<spark-sql-FileFormat.adoc#, FileFormat>> that...FIXME
 
 === [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
 

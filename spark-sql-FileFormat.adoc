@@ -24,7 +24,7 @@ buildReader(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ----
 
-`buildReader` returns a function that is used to read a single file in (as a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>>) as an `Iterator` of <<spark-sql-InternalRow.adoc#, InternalRows>>.
+Builds a Catalyst data reader, i.e. a function that reads a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>> file as <<spark-sql-InternalRow.adoc#, InternalRows>>.
 
 `buildReader` throws an `UnsupportedOperationException` by default (and should therefore be overriden to work):
 
@@ -64,7 +64,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-Returns the <<spark-sql-StructType.adoc#, schema>> of the given files (as Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileStatus.html[FileStatuses]) if supported. Otherwise, `None` should be returned.
+Infers (returns) the <<spark-sql-StructType.adoc#, schema>> of the given files (as Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileStatus.html[FileStatuses]) if supported. Otherwise, `None` should be returned.
 
 Used when:
 
@@ -83,9 +83,9 @@ isSplitable(
   path: Path): Boolean
 ----
 
-Flag that says whether a file (by Hadoop https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/Path.html[Path]) could be split or not.
+Controls whether the format (under the given path as Hadoop https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/Path.html[Path]) can be split or not.
 
-`isSplitable` is off (`false`) by default.
+`isSplitable` is disabled (`false`) by default.
 
 Used exclusively when `FileSourceScanExec` physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>> (when requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD, inputRDD>> and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>)
 
@@ -145,6 +145,9 @@ Used exclusively when `FileSourceScanExec` physical operator is requested for th
 |===
 | FileFormat
 | Description
+
+| <<spark-sql-AvroFileFormat.adoc#, AvroFileFormat>>
+| [[AvroFileFormat]] Avro data source
 
 | <<spark-sql-HiveFileFormat.adoc#, HiveFileFormat>>
 | [[HiveFileFormat]] Writes hive tables

@@ -1,6 +1,6 @@
 == Avro Data Source
 
-As of Apache Spark 2.4.0, Spark SQL supports <<from_avro, reading>> and <<to_avro, writing>> data in Avro format (within columns in a `DataFrame`).
+Spark SQL supports reading and writing data in Avro format in <<spark-sql-AvroFileFormat.adoc#, files>> as well as in <<functions, columns>> (in a `DataFrame`).
 
 [NOTE]
 ====
@@ -12,6 +12,18 @@ https://avro.apache.org/[Apache Avro] is a data serialization format and provide
 * Remote procedure call (RPC)
 * Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation is an optional optimization, only worth implementing for statically typed languages.
 ====
+
+Avro data source is provided by the `spark-avro` external module. You should include it as a dependency in your Spark application (e.g. `spark-submit --packages` or in `build.sbt`).
+
+```
+org.apache.spark:spark-avro_2.12:2.4.0
+```
+
+The following example shows how to include the `spark-avro` module in a `spark-shell` session.
+
+```
+$ ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
+```
 
 [[functions]]
 .Functions for Avro
@@ -40,18 +52,6 @@ to_avro(data: Column): Column
 
 Converts a column to an Avro-encoded binary column
 |===
-
-Avro data source is provided by the `spark-avro` external module. You should include it as a dependency in your Spark application (e.g. `spark-submit --packages` or in `build.sbt`).
-
-```
-org.apache.spark:spark-avro_2.12:2.4.0
-```
-
-The following example shows how to include the `spark-avro` module in a `spark-shell` session.
-
-```
-$ ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
-```
 
 After the module is loaded, you should import the `org.apache.spark.sql.avro` package to have the <<from_avro, from_avro>> and <<to_avro, to_avro>> functions available.
 

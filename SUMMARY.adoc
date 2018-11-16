@@ -191,6 +191,7 @@
 === Avro Data Source
 
 . link:spark-sql-avro.adoc[Avro Data Source]
+. link:spark-sql-AvroFileFormat.adoc[AvroFileFormat -- FileFormat For Avro-Encoded Files]
 . link:spark-sql-Expression-CatalystDataToAvro.adoc[CatalystDataToAvro Unary Expression]
 . link:spark-sql-Expression-AvroDataToCatalyst.adoc[AvroDataToCatalyst Unary Expression]
 
