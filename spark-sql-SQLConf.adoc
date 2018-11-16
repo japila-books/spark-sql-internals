@@ -11,17 +11,26 @@ You can access a session-specific `SQLConf` using link:spark-sql-SparkSession.ad
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
-scala> :type spark.sessionState.conf
+// Direct access to the session SQLConf
+val sqlConf = spark.sessionState.conf
+scala> :type sqlConf
 org.apache.spark.sql.internal.SQLConf
 
-scala> println(spark.sessionState.conf.offHeapColumnVectorEnabled)
+scala> println(sqlConf.offHeapColumnVectorEnabled)
 false
 
+// Or simply import the conf value
 import spark.sessionState.conf
 
 // accessing properties through accessor methods
 scala> conf.numShufflePartitions
 res1: Int = 200
+
+// Prefer SQLConf.get (over direct access)
+import org.apache.spark.sql.internal.SQLConf
+val cc = SQLConf.get
+scala> cc == conf
+res4: Boolean = true
 
 // setting properties using aliases
 import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
@@ -33,12 +42,6 @@ res2: Int = 2
 conf.unsetConf(SHUFFLE_PARTITIONS)
 scala> conf.numShufflePartitions
 res3: Int = 200
-
-// You could also access the internal SQLConf using get
-import org.apache.spark.sql.internal.SQLConf
-val cc = SQLConf.get
-scala> cc == conf
-res4: Boolean = true
 ----
 
 [NOTE]

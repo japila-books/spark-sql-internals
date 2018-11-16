@@ -1,16 +1,17 @@
 == Avro Data Source
 
-Spark SQL supports reading and writing data in Avro format in <<spark-sql-AvroFileFormat.adoc#, files>> as well as in <<functions, columns>> (in a `DataFrame`).
+Spark SQL supports structured queries over <<spark-sql-AvroFileFormat.adoc#, Avro files>> as well as in <<functions, columns>> (in a `DataFrame`).
 
 [NOTE]
 ====
 https://avro.apache.org/[Apache Avro] is a data serialization format and provides the following features:
 
+* Language-independent (with language bindings for popular programming languages, e.g. Java, Python)
 * Rich data structures
-* A compact, fast, binary data format
-* A container file, to store persistent data
+* A compact, fast, binary data format (encoding)
+* A container file for sequences of Avro data (aka _Avro data files_)
 * Remote procedure call (RPC)
-* Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation is an optional optimization, only worth implementing for statically typed languages.
+* Optional code generation (optimization) to read or write data files, and implement RPC protocols
 ====
 
 Avro data source is provided by the `spark-avro` external module. You should include it as a dependency in your Spark application (e.g. `spark-submit --packages` or in `build.sbt`).
@@ -19,7 +20,7 @@ Avro data source is provided by the `spark-avro` external module. You should inc
 org.apache.spark:spark-avro_2.12:2.4.0
 ```
 
-The following example shows how to include the `spark-avro` module in a `spark-shell` session.
+The following shows how to include the `spark-avro` module in a `spark-shell` session.
 
 ```
 $ ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
@@ -40,7 +41,7 @@ a| [[from_avro]]
 from_avro(data: Column, jsonFormatSchema: String): Column
 ----
 
-Converts an Avro-encoded binary column to a Catalyst value per JSON-encoded Avro schema
+Parses an Avro-encoded binary column and converts to a Catalyst value per JSON-encoded Avro schema
 
 | <<to_avro-internals, to_avro>>
 a| [[to_avro]]

@@ -10,10 +10,17 @@
 // ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
 
 // Writing data to Avro file(s)
-spark.range(1).write.format("avro").save("data.avro")
+spark
+  .range(1)
+  .write
+  .format("avro") // <-- Triggers AvroFileFormat
+  .save("data.avro")
 
 // Reading Avro data from file(s)
-val q = spark.read.format("avro").load("data.avro")
+val q = spark
+  .read
+  .format("avro") // <-- Triggers AvroFileFormat
+  .load("data.avro")
 scala> q.show
 +---+
 | id|
@@ -25,7 +32,7 @@ scala> q.show
 [[isSplitable]]
 `AvroFileFormat` is <<spark-sql-FileFormat.adoc#isSplitable, splitable>>, i.e. FIXME
 
-=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
+=== [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
 [source, scala]
 ----

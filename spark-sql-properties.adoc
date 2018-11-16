@@ -63,7 +63,7 @@ Use link:spark-sql-SQLConf.adoc#autoBroadcastJoinThreshold[SQLConf.autoBroadcast
 
 | spark.sql.avro.compression.codec
 | `snappy`
-a| [[spark.sql.avro.compression.codec]] The compression codec used in writing of Avro files.
+a| [[spark.sql.avro.compression.codec]] The compression codec to use when writing Avro data to disk
 
 The supported codecs are:
 
@@ -72,6 +72,8 @@ The supported codecs are:
 * `snappy`
 * `bzip2`
 * `xz`
+
+Use <<spark-sql-SQLConf.adoc#avroCompressionCodec, SQLConf.avroCompressionCodec>> method to access the current value.
 
 | spark.sql.broadcastTimeout
 | `5 * 60`

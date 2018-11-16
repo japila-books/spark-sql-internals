@@ -172,7 +172,7 @@ NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.adoc#prepareWrite, Fi
 
 `prepareWrite`...FIXME
 
-=== [[buildReader]] Building Catalyst Data Reader -- `buildReader` Method
+=== [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
 [source, scala]
 ----

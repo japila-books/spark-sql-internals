@@ -16,7 +16,7 @@
 
 | compression
 | (undefined)
-a| [[compression]] Specifies the compression codec used in writing Avro data
+a| [[compression]] Specifies the compression codec to use when writing Avro data to disk
 
 NOTE: If the option is not defined explicitly, Avro data source uses <<spark-sql-properties.adoc#spark.sql.avro.compression.codec, spark.sql.avro.compression.codec>> configuration property.
 
@@ -30,13 +30,13 @@ NOTE: If the option is not defined explicitly, Avro data source uses `avro.mapre
 
 | recordName
 | `topLevelRecord`
-| [[recordName]] Top-level record name in write result.
+| [[recordName]] Top-level record name when writing Avro data to disk
 
 Consult https://avro.apache.org/docs/1.8.2/spec.html#schema_record[Apache Avro™ 1.8.2 Specification]
 
 | recordNamespace
 | (empty)
-| [[recordNamespace]] Record namespace in write result.
+| [[recordNamespace]] Record namespace when writing Avro data to disk
 
 Consult https://avro.apache.org/docs/1.8.2/spec.html#schema_record[Apache Avro™ 1.8.2 Specification]
 |===
