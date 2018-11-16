@@ -472,6 +472,7 @@
 .. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
 .. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
 .. link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
+.. link:spark-sql-CodeGeneratorWithInterpretedFallback.adoc[CodeGeneratorWithInterpretedFallback]
 
 . link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
 

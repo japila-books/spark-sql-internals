@@ -111,6 +111,18 @@ Use link:spark-sql-SQLConf.adoc#starSchemaDetection[SQLConf.starSchemaDetection]
 | `false`
 | [[spark.sql.codegen.comments]] Controls whether `CodegenContext` should link:spark-sql-CodegenSupport.adoc#registerComment[register comments] (`true`) or not (`false`).
 
+| spark.sql.codegen.factoryMode
+| `FALLBACK`
+a| [[spark.sql.codegen.factoryMode]] *(internal)* Determines the codegen generator fallback behavior
+
+Acceptable values:
+
+* [[spark.sql.codegen.factoryMode-CODEGEN_ONLY]] `CODEGEN_ONLY` - disable fallback mode
+* [[spark.sql.codegen.factoryMode-FALLBACK]] `FALLBACK` - try codegen first and, if any compile error happens, fallback to interpreted mode
+* [[spark.sql.codegen.factoryMode-NO_CODEGEN]] `NO_CODEGEN` - skips codegen and always uses interpreted path
+
+Used when `CodeGeneratorWithInterpretedFallback` is requested to <<spark-sql-CodeGeneratorWithInterpretedFallback.adoc#createObject, createObject>> (when `UnsafeProjection` is requested to <<spark-sql-UnsafeProjection.adoc#create, create an UnsafeProjection for Catalyst expressions>>)
+
 | spark.sql.codegen.fallback
 | `true`
 | [[spark.sql.codegen.fallback]] *(internal)* Whether the whole stage codegen could be temporary disabled for the part of a query that has failed to compile generated code (`true`) or not (`false`).
