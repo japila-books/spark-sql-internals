@@ -481,6 +481,12 @@ NOTE: The number of bins must be greater than 1.
 
 Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] method to access the current value.
 
+| spark.sql.statistics.parallelFileListingInStatsComputation.enabled
+| `true`
+a| [[spark.sql.statistics.parallelFileListingInStatsComputation.enabled]] *(internal)* Enables parallel file listing in SQL commands, e.g. `ANALYZE TABLE` (as opposed to single thread listing that can be particularly slow with tables with hundreds of partitions)
+
+Use <<spark-sql-SQLConf.adoc#parallelFileListingInStatsComputation, SQLConf.parallelFileListingInStatsComputation>> method to access the current value.
+
 | spark.sql.statistics.size.autoUpdate.enabled
 | `false`
 a| [[spark.sql.statistics.size.autoUpdate.enabled]] Enables automatic update of the table size statistic of a table after the table has changed.

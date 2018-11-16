@@ -2,9 +2,41 @@
 
 `SQLConf` is an *internal key-value configuration store* for <<parameters, parameters and hints>> used in Spark SQL.
 
-`SQLConf` offers methods to <<get, get>>, <<set, set>>, <<unset, unset>> or <<clear, clear>> values of configuration properties, but has also the <<accessor-methods, accessor methods>> to read the current value of a configuration property or hint.
+[NOTE]
+====
+`SQLConf` is an internal part of Spark SQL and is not supposed to be used directly.
 
-You can access a session-specific `SQLConf` using link:spark-sql-SparkSession.adoc#sessionState[SessionState].
+Spark SQL configuration is available through <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using link:spark-sql-SparkSession.adoc#conf[SparkSession].
+
+[source, scala]
+----
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.conf
+org.apache.spark.sql.RuntimeConfig
+----
+====
+
+You can access a `SQLConf` using:
+
+. <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
+
+. <<spark-sql-SparkSession.adoc#sessionState, SessionState>> - direct access through <<spark-sql-SparkSession.adoc#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
+
+[source, scala]
+----
+import org.apache.spark.sql.internal.SQLConf
+
+// Use type-safe access to configuration properties
+// using SQLConf.get.getConf
+val parallelFileListingInStatsComputation = SQLConf.get.getConf(SQLConf.PARALLEL_FILE_LISTING_IN_STATS_COMPUTATION)
+
+// or even simpler
+SQLConf.get.parallelFileListingInStatsComputation
+----
+
+`SQLConf` offers methods to <<get, get>>, <<set, set>>, <<unset, unset>> or <<clear, clear>> values of configuration properties, but has also the <<accessor-methods, accessor methods>> to read the current value of a configuration property or hint.
 
 [source, scala]
 ----
@@ -43,22 +75,6 @@ conf.unsetConf(SHUFFLE_PARTITIONS)
 scala> conf.numShufflePartitions
 res3: Int = 200
 ----
-
-[NOTE]
-====
-`SQLConf` is an internal part of Spark SQL and is not meant to be used directly.
-
-Spark SQL configuration is available through <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using link:spark-sql-SparkSession.adoc#conf[SparkSession].
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.conf
-org.apache.spark.sql.RuntimeConfig
-----
-====
 
 [[accessor-methods]]
 .SQLConf's Accessor Methods
@@ -247,6 +263,10 @@ a| [[offHeapColumnVectorEnabled]] Used when:
 | link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
 | [[optimizerInSetConversionThreshold]] Used exclusively when `OptimizeIn` logical query optimization is link:spark-sql-Optimizer-OptimizeIn.adoc#apply[applied to a logical plan] (and replaces an link:spark-sql-Expression-In.adoc[In] predicate expression with an link:spark-sql-Expression-InSet.adoc[InSet])
 
+| parallelFileListingInStatsComputation
+| <<spark-sql-properties.adoc#spark.sql.statistics.parallelFileListingInStatsComputation.enabled, spark.sql.statistics.parallelFileListingInStatsComputation.enabled>>
+a| [[parallelFileListingInStatsComputation]] Used exclusively when `CommandUtils` helper object is requested to <<calculateTotalSize, calculate the total size of a table (with partitions)>> (for <<spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#, AnalyzeTableCommand>> commands)
+
 | parquetFilterPushDown
 | link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown]
 | [[parquetFilterPushDown]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
@@ -350,16 +370,16 @@ a| [[wholeStageMaxNumFields]] Used in:
 | [[useObjectHashAggregation]] Used exclusively when `Aggregation` execution planning strategy is <<spark-sql-SparkStrategy-Aggregation.adoc#apply, executed>> (and uses `AggUtils` to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregation physical operator>>).
 |===
 
-=== [[get]] Getting Parameters and Hints
+=== [[getConfString]][[getConf]][[getAllConfs]][[getAllDefinedConfs]] Getting Parameters and Hints
 
 You can get the current parameters and hints using the following family of `get` methods.
 
 [source, scala]
 ----
-getConfString(key: String): String
 getConf[T](entry: ConfigEntry[T], defaultValue: T): T
 getConf[T](entry: ConfigEntry[T]): T
 getConf[T](entry: OptionalConfigEntry[T]): Option[T]
+getConfString(key: String): String
 getConfString(key: String, defaultValue: String): String
 getAllConfs: immutable.Map[String, String]
 getAllDefinedConfs: Seq[(String, String, String)]
