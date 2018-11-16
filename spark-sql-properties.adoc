@@ -19,18 +19,18 @@ You can also set a property using SQL `SET` command.
 
 [source, scala]
 ----
-scala> spark.conf.getOption("spark.sql.hive.version")
+scala> spark.conf.getOption("spark.sql.hive.metastore.version")
 res1: Option[String] = None
 
-scala> spark.sql("SET spark.sql.hive.version=2.1.1").show(truncate = false)
-+----------------------+-----+
-|key                   |value|
-+----------------------+-----+
-|spark.sql.hive.version|2.1.1|
-+----------------------+-----+
+scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = false)
++--------------------------------+-----+
+|key                             |value|
++--------------------------------+-----+
+|spark.sql.hive.metastore.version|2.3.2|
++--------------------------------+-----+
 
-scala> spark.conf.get("spark.sql.hive.version")
-res3: String = 2.1.1
+scala> spark.conf.get("spark.sql.hive.metastore.version")
+res2: String = 2.3.2
 ----
 
 [[properties]]
@@ -243,7 +243,7 @@ a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to
 
 Supported locations:
 
-. `builtin` (default) - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
+. `builtin` - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
 
 . `maven` - download the Hive jars from Maven repositories
 
@@ -261,13 +261,9 @@ An example of classes that should be shared are:
 
 | spark.sql.hive.metastore.version
 | `1.2.1`
-| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the link:spark-sql-HiveUtils.adoc#newClientForMetadata[client classes and jars]).
+| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the <<spark-sql-HiveUtils.adoc#newClientForMetadata, client classes and jars>>).
 
-Supported versions from `0.12.0` up to and including `2.1.1`.
-
-| spark.sql.hive.version
-| `1.2.1`
-| [[spark.sql.hive.version]] Version of Hive used by Spark SQL internally
+Supported versions range from `0.12.0` up to and including `2.3.2`.
 
 | spark.sql.inMemoryColumnarStorage.batchSize
 | `10000`
