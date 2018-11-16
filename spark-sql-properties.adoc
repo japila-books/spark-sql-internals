@@ -301,6 +301,14 @@ Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin]
 
 Use link:spark-sql-SQLConf.adoc#limitScaleUpFactor[SQLConf.limitScaleUpFactor] method to access the current value.
 
+| spark.sql.optimizer.excludedRules
+| (empty)
+a| [[spark.sql.optimizer.excludedRules]] Comma-separated list of optimization rule names that should be disabled (excluded) in the <<spark-sql-Optimizer.adoc#spark.sql.optimizer.excludedRules, optimizer>>. The optimizer will log the rules that have indeed been excluded.
+
+NOTE: It is not guaranteed that all the rules in this configuration will eventually be excluded, as some rules are necessary for correctness.
+
+Use <<spark-sql-SQLConf.adoc#optimizerExcludedRules, SQLConf.optimizerExcludedRules>> method to access the current value.
+
 | spark.sql.optimizer.inSetConversionThreshold
 | `10`
 | [[spark.sql.optimizer.inSetConversionThreshold]] *(internal)* The threshold of set size for `InSet` conversion.

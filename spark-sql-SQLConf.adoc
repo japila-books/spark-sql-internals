@@ -259,6 +259,10 @@ a| [[offHeapColumnVectorEnabled]] Used when:
 
 * `ParquetFileFormat` is requested for link:spark-sql-SparkPlan-ParquetFileFormat.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
+| optimizerExcludedRules
+| <<spark-sql-properties.adoc#spark.sql.optimizer.excludedRules, spark.sql.optimizer.excludedRules>>
+a| [[optimizerExcludedRules]] Used exclusively when `Optimizer` is requested for the <<spark-sql-Optimizer.adoc#batches, optimization batches>>
+
 | optimizerInSetConversionThreshold
 | link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
 | [[optimizerInSetConversionThreshold]] Used exclusively when `OptimizeIn` logical query optimization is link:spark-sql-Optimizer-OptimizeIn.adoc#apply[applied to a logical plan] (and replaces an link:spark-sql-Expression-In.adoc[In] predicate expression with an link:spark-sql-Expression-InSet.adoc[InSet])

@@ -21,9 +21,14 @@ abstract class RuleExecutor[TreeType <: TreeNode[_]] {
 | Description
 
 | batches
-| [[batches]] Sequence of <<Batch, rule batches>>, i.e. a sequence of a collection of <<spark-sql-catalyst-Rule.adoc#, rules>> with a name and a <<Strategy, strategy>>
+a| [[batches]]
 
-Used when `RuleExecutor` is requested to <<execute, execute>>.
+[source, scala]
+----
+batches: Seq[Batch]
+----
+
+Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<spark-sql-catalyst-Rule.adoc#, rules>> with a name and a <<Strategy, strategy>> that `RuleExecutor` uses when <<execute, executed>>
 |===
 
 [[TreeType]]
