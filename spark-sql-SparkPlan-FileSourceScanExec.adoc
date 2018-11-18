@@ -41,10 +41,13 @@ ReadSchema -> struct<id:bigint>
 SelectedBucketsCount -> 4 out of 4
 ----
 
-`FileSourceScanExec` supports *bucket pruning* so it only scans the bucket files required for a query.
+`FileSourceScanExec` supports <<spark-sql-bucketing.adoc#bucket-pruning, bucket pruning>> so it only scans the bucket files required for a query.
 
 [source, scala]
 ----
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
+
 import org.apache.spark.sql.execution.datasources.FileScanRDD
 val rdd = scan.inputRDDs.head.asInstanceOf[FileScanRDD]
 
@@ -64,44 +67,6 @@ Bucket 0 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00005-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
 Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00000-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-431, partition values: [1]
 Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00007-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
-----
-
-.Example: Bucket Pruning
-[source, scala]
-----
-// Enable INFO logging level of FileSourceStrategy logger to see the details of the strategy
-import org.apache.spark.sql.execution.datasources.FileSourceStrategy
-val logger = FileSourceStrategy.getClass.getName.replace("$", "")
-import org.apache.log4j.{Level, Logger}
-Logger.getLogger(logger).setLevel(Level.INFO)
-
-val q57 = q.where($"id" isin (50, 70))
-scala> val sparkPlan57 = q57.queryExecution.executedPlan
-18/11/17 23:18:04 INFO FileSourceStrategy: Pruning directories with:
-18/11/17 23:18:04 INFO FileSourceStrategy: Pruned 2 out of 4 buckets.
-18/11/17 23:18:04 INFO FileSourceStrategy: Post-Scan Filters: id#0L IN (50,70)
-18/11/17 23:18:04 INFO FileSourceStrategy: Output Data Schema: struct<id: bigint>
-18/11/17 23:18:04 INFO FileSourceScanExec: Pushed Filters: In(id, [50,70])
-...
-
-scala> println(sparkPlan57.numberedTreeString)
-00 *(1) Filter id#0L IN (50,70)
-01 +- *(1) FileScan parquet default.bucketed_4_id[id#0L,part#1L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [In(id, [50,70])], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 2 out of 4
-
-import org.apache.spark.sql.execution.FileSourceScanExec
-val scan57 = sparkPlan57.collectFirst { case exec: FileSourceScanExec => exec }.get
-
-import org.apache.spark.sql.execution.datasources.FileScanRDD
-val rdd57 = scan57.inputRDDs.head.asInstanceOf[FileScanRDD]
-
-import org.apache.spark.sql.execution.datasources.FilePartition
-val bucketFiles57 = for {
-  FilePartition(bucketId, files) <- rdd57.filePartitions
-  f <- files
-} yield s"Bucket $bucketId => $f"
-
-scala> println(bucketFiles57.size)
-24
 ----
 
 `FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the <<outputPartitioning, output partitioning scheme>>.

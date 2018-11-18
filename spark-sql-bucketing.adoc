@@ -6,13 +6,13 @@ The motivation is to optimize performance of a join query by avoiding shuffles (
 
 NOTE: Bucketing can show the biggest benefit when *pre-shuffled bucketed tables* are used more than once as bucketing itself takes time (that you will offset executing multiple join queries later).
 
-Bucketing is enabled by default. Spark SQL uses <<spark.sql.sources.bucketing.enabled, spark.sql.sources.bucketing.enabled>> configuration property to control whether the bucketing should be enabled and used for query optimization or not.
+Bucketing is enabled by default. Spark SQL uses <<spark.sql.sources.bucketing.enabled, spark.sql.sources.bucketing.enabled>> configuration property to control whether bucketing should be enabled and used for query optimization or not.
 
 Bucketing is used exclusively in link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (when it is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] and to determine the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning[partitioning] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering[ordering] of the output).
 
+.Example: SortMergeJoin of two FileScans
 [source, scala]
 ----
-// Example: SortMergeJoin of two FileScans
 import org.apache.spark.sql.SaveMode
 spark.range(10e4.toLong).write.mode(SaveMode.Overwrite).saveAsTable("t10e4")
 spark.range(10e6.toLong).write.mode(SaveMode.Overwrite).saveAsTable("t10e6")
@@ -22,7 +22,7 @@ spark.range(10e6.toLong).write.mode(SaveMode.Overwrite).saveAsTable("t10e6")
 assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 
 // Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
-// Disable auto broadcasting
+// For that, let's disable auto broadcasting
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
 val tables = spark.catalog.listTables.where($"name" startsWith "t10e")
@@ -195,7 +195,7 @@ It is acceptable to use bucketing for one side of a join.
 [source, scala]
 ----
 // Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
-// Disable auto broadcasting
+// For this, let's disable auto broadcasting
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
 val bucketedTableName = "bucketed_4_id"
@@ -230,6 +230,61 @@ q.foreach(_ => ())
 
 .SortMergeJoin of One Bucketed Table (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-one-bucketed-table.png[align="center"]
+
+=== [[bucket-pruning]] Bucket Pruning -- Optimizing Filtering on Bucketed Column (Reducing Bucket Files to Scan)
+
+As of https://issues.apache.org/jira/browse/SPARK-23803[Spark 2.4], Spark SQL supports *bucket pruning* to optimize filtering on bucketed column (by reducing the number of bucket files to scan).
+
+Bucket pruning supports the following predicate expressions:
+
+* `EqualTo` (`=`)
+* `EqualNullSafe` (`++<=>++`)
+* <<spark-sql-Expression-In.adoc#, In>>
+* <<spark-sql-Expression-InSet.adoc#, InSet>>
+* `And` and `Or` of the above
+
+<<spark-sql-SparkStrategy-FileSourceStrategy.adoc#, FileSourceStrategy>> execution planning strategy is responsible for selecting only <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> with the following:
+
+. There is exactly one bucketing column
+. The number of buckets is greater than 1
+
+.Example: Bucket Pruning
+[source, scala]
+----
+// Enable INFO logging level of FileSourceStrategy logger to see the details of the strategy
+import org.apache.spark.sql.execution.datasources.FileSourceStrategy
+val logger = FileSourceStrategy.getClass.getName.replace("$", "")
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger(logger).setLevel(Level.INFO)
+
+val q57 = q.where($"id" isin (50, 70))
+scala> val sparkPlan57 = q57.queryExecution.executedPlan
+18/11/17 23:18:04 INFO FileSourceStrategy: Pruning directories with:
+18/11/17 23:18:04 INFO FileSourceStrategy: Pruned 2 out of 4 buckets.
+18/11/17 23:18:04 INFO FileSourceStrategy: Post-Scan Filters: id#0L IN (50,70)
+18/11/17 23:18:04 INFO FileSourceStrategy: Output Data Schema: struct<id: bigint>
+18/11/17 23:18:04 INFO FileSourceScanExec: Pushed Filters: In(id, [50,70])
+...
+
+scala> println(sparkPlan57.numberedTreeString)
+00 *(1) Filter id#0L IN (50,70)
+01 +- *(1) FileScan parquet default.bucketed_4_id[id#0L,part#1L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [In(id, [50,70])], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 2 out of 4
+
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan57 = sparkPlan57.collectFirst { case exec: FileSourceScanExec => exec }.get
+
+import org.apache.spark.sql.execution.datasources.FileScanRDD
+val rdd57 = scan57.inputRDDs.head.asInstanceOf[FileScanRDD]
+
+import org.apache.spark.sql.execution.datasources.FilePartition
+val bucketFiles57 = for {
+  FilePartition(bucketId, files) <- rdd57.filePartitions
+  f <- files
+} yield s"Bucket $bucketId => $f"
+
+scala> println(bucketFiles57.size)
+24
+----
 
 === Sorting
 

@@ -37,6 +37,45 @@ scala> :type scan
 org.apache.spark.sql.execution.FileSourceScanExec
 ----
 
+[[shouldPruneBuckets]]
+`FileSourceScanExec` supports <<spark-sql-bucketing.adoc#bucket-pruning, Bucket Pruning>> for <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> with the following:
+
+. There is exactly one bucketing column
+. The number of buckets is greater than 1
+
+[source, scala]
+----
+// Using the table created above
+// There is exactly one bucketing column, i.e. id
+// The number of buckets is greater than 1, i.e. 4
+val tableName = "bucketed_4_id"
+val q = spark.table(tableName).where($"id" isin (50, 90))
+val qe = q.queryExecution
+val plan = qe.optimizedPlan
+scala> println(optimizedPlan.numberedTreeString)
+00 Filter id#7L IN (50,90)
+01 +- Relation[id#7L] parquet
+
+import org.apache.spark.sql.execution.datasources.FileSourceStrategy
+
+// Enable INFO logging level to see the details of the strategy
+val logger = FileSourceStrategy.getClass.getName.replace("$", "")
+import org.apache.log4j.{Level, Logger}
+Logger.getLogger(logger).setLevel(Level.INFO)
+
+scala> val executionPlan = FileSourceStrategy(plan).head
+18/11/18 17:56:53 INFO FileSourceStrategy: Pruning directories with:
+18/11/18 17:56:53 INFO FileSourceStrategy: Pruned 2 out of 4 buckets.
+18/11/18 17:56:53 INFO FileSourceStrategy: Post-Scan Filters: id#7L IN (50,90)
+18/11/18 17:56:53 INFO FileSourceStrategy: Output Data Schema: struct<id: bigint>
+18/11/18 17:56:53 INFO FileSourceScanExec: Pushed Filters: In(id, [50,90])
+executionPlan: org.apache.spark.sql.execution.SparkPlan = ...
+
+scala> println(executionPlan.numberedTreeString)
+00 Filter id#7L IN (50,90)
+01 +- FileScan parquet default.bucketed_4_id[id#7L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [In(id, [50,90])], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 2 out of 4
+----
+
 [TIP]
 ====
 Enable `INFO` logging level for `org.apache.spark.sql.execution.datasources.FileSourceStrategy` logger to see what happens inside.
