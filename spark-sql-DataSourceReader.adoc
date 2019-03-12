@@ -1,69 +1,81 @@
-== [[DataSourceReader]] DataSourceReader
+== [[DataSourceReader]] DataSourceReader Contract
 
-`DataSourceReader` is the <<contract, contract>> for <<implementations, data source readers>> with a <<createDataReaderFactories, custom DataReaderFactory>>.
+`DataSourceReader` is the <<contract, abstraction>> of <<implementations, data source readers>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<planInputPartitions, planInputPartitions>> and <<readSchema, readSchema>>.
 
 [[contract]]
+.DataSourceReader Contract
+[cols="1m,3",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| planInputPartitions
+a| [[planInputPartitions]]
+
 [source, java]
 ----
-package org.apache.spark.sql.sources.v2.reader;
-
-interface DataSourceReader {
-  StructType readSchema();
-  List<DataReaderFactory<Row>> createDataReaderFactories();
-}
+List<InputPartition<InternalRow>> planInputPartitions()
 ----
+
+Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#partitions, input partitions>> (and simply delegates to the underlying <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
+
+| readSchema
+a| [[readSchema]]
+
+[source, java]
+----
+StructType readSchema()
+----
+
+Schema to use for reading (loading) data from a data source
+
+Used when:
+
+* `MicroBatchExecution` stream execution is requested to run a single streaming batch
+
+* `ContinuousExecution` stream execution is requested to run a streaming query in continuous mode
+
+* `DataStreamReader` is requested to "load" data (as a DataFrame)
+
+* `DataSourceV2Relation` factory object is requested to create a `DataSourceV2Relation`
+
+* `DataSourceV2Strategy` execution planning strategy is requested to apply column pruning (`pruneColumns`)
+
+|===
 
 [NOTE]
 ====
 `DataSourceReader` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
 
-In other words, using the contract is as treading on thin ice.
+In other words, using the contract is as _"treading on thin ice"_.
 ====
 
-.DataSourceReader Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[readSchema]] `readSchema`
-| Used when...FIXME
-
-| [[createDataReaderFactories]] `createDataReaderFactories`
-| Used when...FIXME
-|===
-
 [[implementations]]
-.DataSourceReaders
-[cols="1,2",options="header",width="100%"]
+.DataSourceReaders (Direct Implementations)
+[cols="1,3",options="header",width="100%"]
 |===
 | DataSourceReader
 | Description
 
-| [[ContinuousReader]] `ContinuousReader`
-| Used in Spark Structured Streaming
+| ContinuousReader
+| [[ContinuousReader]] DataSourceReaders for *Continuous Stream Processing* in Spark Structured Streaming
 
-| [[MicroBatchReader]] `MicroBatchReader`
-| Used in Spark Structured Streaming
+| MicroBatchReader
+| [[MicroBatchReader]] DataSourceReaders for *Micro-Batch Stream Processing* in Spark Structured Streaming
 
-| [[SupportsPushDownCatalystFilters]] `SupportsPushDownCatalystFilters`
-|
+| <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>>
+| [[SupportsPushDownFilters]]
 
-| [[SupportsPushDownFilters]] `SupportsPushDownFilters`
-|
+| SupportsPushDownRequiredColumns
+| [[SupportsPushDownRequiredColumns]]
 
-| [[SupportsPushDownRequiredColumns]] `SupportsPushDownRequiredColumns`
-|
+| SupportsReportPartitioning
+| [[SupportsReportPartitioning]]
 
-| [[SupportsReportPartitioning]] `SupportsReportPartitioning`
-|
+| SupportsReportStatistics
+| [[SupportsReportStatistics]]
 
-| [[SupportsReportStatistics]] `SupportsReportStatistics`
-|
+| <<spark-sql-SupportsScanColumnarBatch.adoc#, SupportsScanColumnarBatch>>
+| [[SupportsScanColumnarBatch]]
 
-| [[SupportsScanColumnarBatch]] `SupportsScanColumnarBatch`
-|
-
-| [[SupportsScanUnsafeRow]] `SupportsScanUnsafeRow`
-|
 |===

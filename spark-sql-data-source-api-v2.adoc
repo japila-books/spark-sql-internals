@@ -1,0 +1,17 @@
+== Data Source API V2
+
+*Data Source API V2* (_DataSource API V2_ or _DataSource V2_) is a new API for data sources that...FIXME
+
+NOTE: The work on Data Source API V2 was tracked under https://issues.apache.org/jira/browse/SPARK-15689[SPARK-15689 Data source API v2] that was fixed in Apache Spark 2.3.0.
+
+Data Source API V2 defines the following abstractions (_contracts_):
+
+* <<spark-sql-DataSourceReader.adoc#, DataSourceReader>>
+
+* FIXME
+
+Data Source API V2 is already used for *Continuous Stream Processing* in Spark Structured Streaming.
+
+=== [[i-want-more]] Further Reading and Watching
+
+. (video) https://databricks.com/session/apache-spark-data-source-v2[Apache Spark Data Source V2 by Wenchen Fan and Gengliang Wang]

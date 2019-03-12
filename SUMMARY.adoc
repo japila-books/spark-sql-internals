@@ -132,13 +132,12 @@
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
 .. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
-.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
 
 . link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
 .. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
 
-. link:spark-sql-datasource-v2.adoc[DataSource V2]
+. link:spark-sql-data-source-api-v2.adoc[Data Source API V2]
 
 . link:spark-sql-subqueries.adoc[Subqueries]
 
@@ -255,7 +254,8 @@
 
 . link:spark-sql-DataSourceV2.adoc[DataSourceV2]
 . link:spark-sql-DataSourceReader.adoc[DataSourceReader]
-. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
+.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
+.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]

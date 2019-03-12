@@ -15,15 +15,19 @@ NOTE: A link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relatio
 
 [[internal-registries]]
 .DataSourceV2ScanExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[readerFactories]] `readerFactories`
-| Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects of link:spark-sql-UnsafeRow.adoc[UnsafeRows]
+| partitions
+a| [[partitions]] Input partitions (`Seq[InputPartition[InternalRow]]`)
+
+| readerFactories
+a| [[readerFactories]] Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects of link:spark-sql-UnsafeRow.adoc[UnsafeRows]
 
 Used when...FIXME
+
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
