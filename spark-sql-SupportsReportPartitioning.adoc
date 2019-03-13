@@ -1,0 +1,3 @@
+== [[SupportsReportPartitioning]] SupportsReportPartitioning
+
+`SupportsReportPartitioning` is...FIXME

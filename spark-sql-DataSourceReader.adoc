@@ -17,7 +17,7 @@ a| [[planInputPartitions]]
 List<InputPartition<InternalRow>> planInputPartitions()
 ----
 
-Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#partitions, input partitions>> (and simply delegates to the underlying <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
+Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for the <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#partitions, input partitions>> (and simply delegates to the underlying <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
 
 | readSchema
 a| [[readSchema]]
@@ -27,7 +27,7 @@ a| [[readSchema]]
 StructType readSchema()
 ----
 
-Schema to use for reading (loading) data from a data source
+<<spark-sql-StructType.adoc#, Schema>> to use for reading (loading) data from a data source
 
 Used when:
 
@@ -60,19 +60,23 @@ In other words, using the contract is as _"treading on thin ice"_.
 | ContinuousReader
 | [[ContinuousReader]] DataSourceReaders for *Continuous Stream Processing* in Spark Structured Streaming
 
+Consult https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-ContinuousReader.html[The Internals of Spark Structured Streaming]
+
 | MicroBatchReader
 | [[MicroBatchReader]] DataSourceReaders for *Micro-Batch Stream Processing* in Spark Structured Streaming
+
+Consult https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-MicroBatchReader.html[The Internals of Spark Structured Streaming]
 
 | <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>>
 | [[SupportsPushDownFilters]]
 
-| SupportsPushDownRequiredColumns
+| <<spark-sql-SupportsPushDownRequiredColumns.adoc#, SupportsPushDownRequiredColumns>>
 | [[SupportsPushDownRequiredColumns]]
 
-| SupportsReportPartitioning
+| <<spark-sql-SupportsReportPartitioning.adoc#, SupportsReportPartitioning>>
 | [[SupportsReportPartitioning]]
 
-| SupportsReportStatistics
+| <<spark-sql-SupportsReportStatistics.adoc#, SupportsReportStatistics>>
 | [[SupportsReportStatistics]]
 
 | <<spark-sql-SupportsScanColumnarBatch.adoc#, SupportsScanColumnarBatch>>

@@ -6,6 +6,24 @@
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 . link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
+== (WIP) Data Source API V2
+
+. link:spark-sql-DataSourceV2.adoc[DataSourceV2]
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
+.. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
+.. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
+.. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
+.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
+. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
+.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
+.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+. link:spark-sql-DataWriter.adoc[DataWriter]
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
+. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
+.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
+
 == Developing Spark SQL Applications
 
 . link:spark-sql-fundamentals-spark-application-development.adoc[Fundamentals of Spark SQL Application Development]
@@ -249,21 +267,6 @@
 . link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
 
 . link:spark-sql-FileRelation.adoc[FileRelation Contract]
-
-=== Data Source API V2
-
-. link:spark-sql-DataSourceV2.adoc[DataSourceV2]
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
-.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
-.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
-. link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
-.. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
-.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
-. link:spark-sql-DataWriter.adoc[DataWriter]
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
-. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
-.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
 == Structured Query Execution
 

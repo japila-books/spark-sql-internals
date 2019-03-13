@@ -1,0 +1,3 @@
+== [[SupportsReportStatistics]] SupportsReportStatistics
+
+`SupportsReportStatistics` is...FIXME
