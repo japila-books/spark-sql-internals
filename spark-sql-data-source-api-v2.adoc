@@ -8,7 +8,11 @@ Data Source API V2 defines the following abstractions (_contracts_):
 
 * <<spark-sql-DataSourceReader.adoc#, DataSourceReader>>
 
-* FIXME
+* <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>
+
+* <<spark-sql-ReadSupport.adoc#, ReadSupport>>
+
+* _FIXME_
 
 Data Source API V2 is already used for *Continuous Stream Processing* in Spark Structured Streaming.
 

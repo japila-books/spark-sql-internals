@@ -23,6 +23,8 @@
 . link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
 . link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
 .. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
+. link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
+. link:spark-sql-ReadSupport.adoc[ReadSupport]
 
 == Developing Spark SQL Applications
 

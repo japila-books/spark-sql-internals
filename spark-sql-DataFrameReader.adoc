@@ -600,7 +600,7 @@ In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to link:spark
 
 NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a link:spark-sql-DataSourceReader.adoc[DataSourceReader] could not be created).
 
-=== [[load]] Loading Dataset from Data Source -- `load` Method
+=== [[load]] "Loading" Data As DataFrame -- `load` Method
 
 [source, scala]
 ----
