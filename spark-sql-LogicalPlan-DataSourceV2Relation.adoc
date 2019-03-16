@@ -1,6 +1,6 @@
 == [[DataSourceV2Relation]] DataSourceV2Relation Leaf Logical Operator
 
-`DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that represents a scan in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
+`DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that represents a data scan in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
 
 `DataSourceV2Relation` is <<create, created>> exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
 
@@ -13,7 +13,7 @@
 * [[tableIdent]] Optional `TableIdentifier` (default: undefined, i.e. `None`)
 * [[userSpecifiedSchema]] User-defined <<spark-sql-StructType.adoc#, schema>> (default: undefined, i.e. `None`)
 
-`DataSourceV2Relation` initializes the <<internal-registries, internal registries and counters>>.
+`DataSourceV2Relation` object defines a `SourceHelpers` implicit class that extends <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> instances with the additional <<extension-methods, extension methods>>.
 
 === [[create]] Creating DataSourceV2Relation Instance -- `create` Factory Method
 
@@ -33,3 +33,101 @@ create(
 In the end, `create` <<creating-instance, creates a DataSourceV2Relation>>.
 
 NOTE: `create` is used exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
+
+=== [[computeStats]] Computing Statistics -- `computeStats` Method
+
+[source, scala]
+----
+computeStats(): Statistics
+----
+
+NOTE: `computeStats` is part of the <<spark-sql-LogicalPlan-LeafNode.adoc#computeStats, LeafNode Contract>> to compute a <<spark-sql-Statistics.adoc#, Statistics>>.
+
+`computeStats`...FIXME
+
+=== [[newReader]] Creating DataSourceReader -- `newReader` Method
+
+[source, scala]
+----
+newReader(): DataSourceReader
+----
+
+`newReader` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createReader, create a DataSourceReader>>.
+
+[NOTE]
+====
+`newReader` is used when:
+
+* `DataSourceV2Relation` is requested to <<computeStats, computeStats>>
+
+* `DataSourceV2Strategy` execution planning strategy is <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply, executed>>
+====
+
+=== [[SourceHelpers]] SourceHelpers Implicit Class
+
+`DataSourceV2Relation` object defines a `SourceHelpers` implicit class that extends <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> instances with the additional <<extension-methods, extension methods>>.
+
+[[extension-methods]]
+.SourceHelpers' Extension Methods
+[cols="1m,3",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| asReadSupport
+a| [[asReadSupport]]
+
+[source, scala]
+----
+asReadSupport: ReadSupport
+----
+
+Used exclusively for <<createReader, createReader>> implicit method
+
+| asWriteSupport
+a| [[asWriteSupport]]
+
+[source, scala]
+----
+asWriteSupport: WriteSupport
+----
+
+Used when...FIXME
+
+| name
+a| [[name]]
+
+[source, scala]
+----
+name: String
+----
+
+Used when...FIXME
+
+| createReader
+a| [[createReader]]
+
+[source, scala]
+----
+createReader(
+  options: Map[String, String],
+  userSpecifiedSchema: Option[StructType]): DataSourceReader
+----
+
+Used when `DataSourceV2Relation` logical operator is requested to <<newReader, create a DataSourceReader>>
+
+| createWriter
+a| [[createWriter]]
+
+[source, scala]
+----
+createWriter(
+  options: Map[String, String],
+  schema: StructType): DataSourceWriter
+----
+
+Used when...FIXME
+
+|===
+
+TIP: Read up on https://docs.scala-lang.org/overviews/core/implicit-classes.html[implicit classes] in the https://docs.scala-lang.org/[official documentation of the Scala programming language].

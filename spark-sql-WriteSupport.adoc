@@ -1,0 +1,3 @@
+== [[WriteSupport]] WriteSupport Contract -- "Writable" Data Sources
+
+`WriteSupport` is...FIXME

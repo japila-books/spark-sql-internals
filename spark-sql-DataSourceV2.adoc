@@ -1,10 +1,10 @@
-== [[DataSourceV2]] DataSourceV2
+== [[DataSourceV2]] DataSourceV2 Contract
 
-`DataSourceV2` is the <<contract, contract>> of <<implementations, Data Sources V2>> that <<FIXME, FIXME>>.
-
-`DataSourceV2` defines no methods or values and acts as a marker interface.
+`DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
 
 [[contract]]
+`DataSourceV2` defines no methods or values and simply acts as a *marker interface*.
+
 [source, java]
 ----
 package org.apache.spark.sql.sources.v2;
@@ -12,7 +12,7 @@ package org.apache.spark.sql.sources.v2;
 public interface DataSourceV2 {}
 ----
 
-NOTE: Implementations should mix-in at least one of the interfaces like `ReadSupport` and `WriteSupport`. Otherwise it's simply a dummy data source which is un-readable and un-writable.
+NOTE: Implementations should at least use <<spark-sql-ReadSupport.adoc#, ReadSupport>> or <<spark-sql-WriteSupport.adoc#, WriteSupport>> interfaces for readable or writable data sources, respectively.
 
 [NOTE]
 ====
@@ -23,41 +23,42 @@ In other words, using the contract is as treading on thin ice.
 
 [[implementations]]
 .DataSourceV2s
-[cols="1,2",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | DataSourceV2
 | Description
 
-| `ConsoleSinkProvider`
+| ConsoleSinkProvider
 | [[ConsoleSinkProvider]] Used in Spark Structured Streaming
 
-| `ContinuousReadSupport`
+| ContinuousReadSupport
 | [[ContinuousReadSupport]] Used in Spark Structured Streaming
 
-| `MemorySinkV2`
+| MemorySinkV2
 | [[MemorySinkV2]] Used in Spark Structured Streaming
 
-| `MicroBatchReadSupport`
+| MicroBatchReadSupport
 | [[MicroBatchReadSupport]] Used in Spark Structured Streaming
 
-| `RateSourceProvider`
+| RateSourceProvider
 | [[RateSourceProvider]] Used in Spark Structured Streaming
 
-| `RateSourceProviderV2`
+| RateSourceProviderV2
 | [[RateSourceProviderV2]] Used in Spark Structured Streaming
 
-| `ReadSupport`
+| ReadSupport
 | [[ReadSupport]]
 
-| `ReadSupportWithSchema`
+| ReadSupportWithSchema
 | [[ReadSupportWithSchema]]
 
-| `SessionConfigSupport`
+| SessionConfigSupport
 | [[SessionConfigSupport]]
 
-| `StreamWriteSupport`
+| StreamWriteSupport
 | [[StreamWriteSupport]]
 
-| `WriteSupport`
+| WriteSupport
 | [[WriteSupport]]
+
 |===
