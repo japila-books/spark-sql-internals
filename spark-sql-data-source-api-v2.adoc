@@ -6,15 +6,19 @@ NOTE: The work on Data Source API V2 was tracked under https://issues.apache.org
 
 Data Source API V2 defines the following abstractions (_contracts_):
 
+* <<spark-sql-ReadSupport.adoc#, ReadSupport>>
+
 * <<spark-sql-DataSourceReader.adoc#, DataSourceReader>>
+
+* <<spark-sql-WriteSupport.adoc#, WriteSupport>>
+
+* <<spark-sql-DataSourceWriter.adoc#, DataSourceWriter>>
 
 * <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>
 
-* <<spark-sql-ReadSupport.adoc#, ReadSupport>>
-
 * _FIXME_
 
-Data Source API V2 is already used for *Continuous Stream Processing* in Spark Structured Streaming.
+Data Source API V2 is already used in Spark Structured Streaming.
 
 === [[i-want-more]] Further Reading and Watching
 

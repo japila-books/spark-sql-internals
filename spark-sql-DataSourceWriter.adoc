@@ -1,0 +1,3 @@
+== [[DataSourceWriter]] DataSourceWriter Contract
+
+`DataSourceWriter` is...FIXME

@@ -114,7 +114,11 @@ createReader(
   userSpecifiedSchema: Option[StructType]): DataSourceReader
 ----
 
-Used when `DataSourceV2Relation` logical operator is requested to <<newReader, create a DataSourceReader>>
+Used when:
+
+* `DataSourceV2Relation` logical operator is requested to <<newReader, create a DataSourceReader>>
+
+* `DataSourceV2Relation` factory object is requested to <<create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>)
 
 | createWriter
 a| [[createWriter]]

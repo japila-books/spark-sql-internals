@@ -20,3 +20,5 @@ DataSourceReader createReader(StructType schema, DataSourceOptions options)
 // spark.read.format(...) that is DataSourceV2 and ReadSupport
 // DataFrameReader.load() creates a DataFrame with a DataSourceV2Relation operator
 ----
+
+Internally, `ReadSupport` is accessed implicitly when `DataSourceV2Relation` logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newReader, create a DataSourceReader>>.

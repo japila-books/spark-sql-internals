@@ -12,14 +12,17 @@
 . link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
 . link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
 
+. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
 . link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 .. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
 .. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
 .. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
 .. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
 .. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
+
 . link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
 .. link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc[RowToUnsafeRowDataReaderFactory]
+
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
 .. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 . link:spark-sql-DataWriter.adoc[DataWriter]
