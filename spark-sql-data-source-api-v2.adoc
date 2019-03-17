@@ -20,6 +20,8 @@ Data Source API V2 defines the following abstractions (_contracts_):
 
 Data Source API V2 is already used in Spark Structured Streaming.
 
+Data Source API V2 relies on the <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy for query planning.
+
 === [[i-want-more]] Further Reading and Watching
 
 . (video) https://databricks.com/session/apache-spark-data-source-v2[Apache Spark Data Source V2 by Wenchen Fan and Gengliang Wang]

@@ -60,7 +60,7 @@ newReader(): DataSourceReader
 
 * `DataSourceV2Relation` is requested to <<computeStats, computeStats>>
 
-* `DataSourceV2Strategy` execution planning strategy is <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply, executed>>
+* `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, plan a DataSourceV2Relation logical operator>>
 ====
 
 === [[SourceHelpers]] SourceHelpers Implicit Class
