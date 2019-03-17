@@ -103,9 +103,15 @@ pushFilters(
   filters: Seq[Expression]): (Seq[Expression], Seq[Expression])
 ----
 
-`pushFilters`...FIXME
+NOTE: `pushFilters` handles <<spark-sql-DataSourceReader.adoc#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>> support only.
 
-NOTE: `pushFilters` is used when...FIXME
+For the given `DataSourceReaders` with `SupportsPushDownFilters` support, `pushFilters` uses the `DataSourceStrategy` object to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#translateFilter, translate every filter>> in the given `filters`.
+
+`pushFilters` requests the `SupportsPushDownFilters` reader to <<spark-sql-SupportsPushDownFilters.adoc#pushFilters, pushFilters>> first and then for the <<spark-sql-SupportsPushDownFilters.adoc#pushedFilters, pushedFilters>>.
+
+In the end, `pushFilters` returns a pair of filters pushed and not.
+
+NOTE: `pushFilters` is used exclusively when `DataSourceV2Strategy` execution planning strategy is <<apply, executed>> (applied to a <<apply-DataSourceV2Relation, DataSourceV2Relation>> logical operator).
 
 === [[pruneColumns]] `pruneColumns` Internal Method
 
