@@ -558,6 +558,7 @@
 . link:spark-sql-Analyzer-ResolveInlineTables.adoc[ResolveInlineTables]
 . link:spark-sql-Analyzer-ResolveMissingReferences.adoc[ResolveMissingReferences]
 . link:spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc[ResolveOrdinalInOrderByAndGroupBy]
+. link:spark-sql-Analyzer-ResolveOutputRelation.adoc[ResolveOutputRelation]
 . link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
 . link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]
 . link:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
