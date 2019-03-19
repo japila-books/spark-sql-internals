@@ -1,14 +1,14 @@
 == [[DataSourceV2ScanExec]] DataSourceV2ScanExec Leaf Physical Operator
 
-`DataSourceV2ScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] to represent link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation] logical operators at execution time.
+`DataSourceV2ScanExec` is a <<spark-sql-SparkPlan.adoc#LeafExecNode, leaf physical operator>> that represents a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator at execution time.
 
-NOTE: A link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation] logical operator is created when...FIXME
+NOTE: A <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator is created exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
 
-`DataSourceV2ScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] that <<supportsBatch, supports vectorized batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
+`DataSourceV2ScanExec` supports <<spark-sql-ColumnarBatchScan.adoc#, ColumnarBatchScan>> with <<supportsBatch, vectorized batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
 
-`DataSourceV2ScanExec` is also a `DataSourceReaderHolder`.
+`DataSourceV2ScanExec` is also a <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>, i.e....FIXME
 
-`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when `DataSourceV2Strategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply[executed] and finds a link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relation] logical operator in a logical query plan.
+`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator.
 
 [[inputRDDs]]
 `DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only input RDD of internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
@@ -69,6 +69,12 @@ inputRDD: RDD[InternalRow]
 
 NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
-`inputRDD`...FIXME
+`inputRDD` branches off per the type of the <<reader, DataSourceReader>>:
+
+. For a `ContinuousReader` in Spark Structured Streaming, `inputRDD` is a `ContinuousDataSourceRDD` that...FIXME
+
+. For a <<spark-sql-SupportsScanColumnarBatch.adoc#, SupportsScanColumnarBatch>> with the <<spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead, enableBatchRead>> flag enabled, `inputRDD` is a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> with the <<batchPartitions, batchPartitions>>
+
+. For all other types of the <<reader, DataSourceReader>>, `inputRDD` is a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> with the <<partitions, partitions>>.
 
 NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
