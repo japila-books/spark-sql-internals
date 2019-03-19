@@ -22,9 +22,7 @@
 . link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
 
 . link:spark-sql-InputPartition.adoc[InputPartition Contract]
-
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
-.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
 
 . link:spark-sql-DataWriter.adoc[DataWriter]
 . link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
@@ -33,6 +31,9 @@
 .. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
 
 . link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
+
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
+.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 
 == Developing Spark SQL Applications
 

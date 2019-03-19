@@ -1,0 +1,3 @@
+== [[InputPartitionReader]] InputPartitionReader Contract
+
+`InputPartitionReader` is...FIXME
