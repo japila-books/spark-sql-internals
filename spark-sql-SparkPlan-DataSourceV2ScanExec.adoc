@@ -23,11 +23,6 @@ NOTE: A link:spark-sql-LogicalPlan-DataSourceV2Relation.adoc[DataSourceV2Relatio
 | partitions
 a| [[partitions]] Input partitions (`Seq[InputPartition[InternalRow]]`)
 
-| readerFactories
-a| [[readerFactories]] Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects of link:spark-sql-UnsafeRow.adoc[UnsafeRows]
-
-Used when...FIXME
-
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method

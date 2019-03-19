@@ -16,6 +16,8 @@ Data Source API V2 defines the following abstractions (_contracts_):
 
 * <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>
 
+* <<spark-sql-InputPartition.adoc#, InputPartition>>
+
 * _FIXME_
 
 Data Source API V2 is already used in Spark Structured Streaming.

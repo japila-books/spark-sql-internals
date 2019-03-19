@@ -4,7 +4,13 @@
 
 `DataSourceRDD` uses link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition] partitions.
 
-=== [[getPreferredLocations]] Requesting Preferred Locations Of DataReaderFactory (For Partition) -- `getPreferredLocations` Method
+[[creating-instance]]
+`DataSourceRDD` takes the following to be created:
+
+* [[sc]] `SparkContext`
+* [[inputPartitions]] <<spark-sql-InputPartition.adoc#, InputPartitions>> (`Seq[InputPartition[T]]`)
+
+=== [[getPreferredLocations]] Requesting Preferred Locations (For Partition) -- `getPreferredLocations` Method
 
 [source, scala]
 ----
@@ -13,7 +19,7 @@ getPreferredLocations(split: Partition): Seq[String]
 
 NOTE: `getPreferredLocations` is part of Spark Core's `RDD` Contract to...FIXME.
 
-`getPreferredLocations` simply requests the link:spark-sql-DataReaderFactory.adoc#preferredLocations[preferred locations] of the link:spark-sql-DataSourceRDDPartition.adoc#readerFactory[DataReaderFactory] of the input `DataSourceRDDPartition` partition.
+`getPreferredLocations`...FIXME
 
 === [[getPartitions]] `getPartitions` Method
 
@@ -24,14 +30,7 @@ getPartitions: Array[Partition]
 
 NOTE: `getPartitions` is part of Spark Core's `RDD` Contract to...FIXME
 
-`getPartitions` simply creates a link:spark-sql-DataSourceRDDPartition.adoc#creating-instance[DataSourceRDDPartition] for every link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] in the <<readerFactories, readerFactories>>.
-
-=== [[creating-instance]] Creating DataSourceRDD Instance
-
-`DataSourceRDD` takes the following when created:
-
-* [[sc]] Spark Core's `SparkContext`
-* [[readerFactories]] Collection of link:spark-sql-DataReaderFactory.adoc[DataReaderFactory] objects
+`getPartitions`...FIXME
 
 === [[compute]] Computing Partition (in TaskContext) -- `compute` Method
 
@@ -42,7 +41,7 @@ compute(split: Partition, context: TaskContext): Iterator[T]
 
 NOTE: `compute` is part of Spark Core's `RDD` Contract to compute a partition (in a `TaskContext`).
 
-`compute` requests the link:spark-sql-DataSourceRDDPartition.adoc#readerFactory[DataReaderFactory] (of the link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition] partition) to link:spark-sql-DataReaderFactory.adoc#createDataReader[createDataReader].
+`compute`...FIXME
 
 `compute` registers a Spark Core `TaskCompletionListener` that requests the `DataReader` to close at a task completion.
 

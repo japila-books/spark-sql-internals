@@ -358,8 +358,6 @@ val code = deserializer.genCode(ctx).code
 ====
 `resolveAndBind` is used when:
 
-* `RowToUnsafeRowDataReaderFactory` is requested to link:spark-sql-RowToUnsafeRowDataReaderFactory.adoc#createDataReader[create a DataReader]
-
 * `InternalRowDataWriterFactory` is requested to link:spark-sql-InternalRowDataWriterFactory.adoc#createDataWriter[create a DataWriter]
 
 * `Dataset` is requested for the link:spark-sql-Dataset.adoc#deserializer[deserializer expression] (to convert internal rows to objects of type `T`)

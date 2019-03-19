@@ -14,4 +14,4 @@
 `DataSourceRDDPartition` takes the following when created:
 
 * [[index]] Partition index
-* [[readerFactory]] link:spark-sql-DataReaderFactory.adoc[DataReaderFactory]
+* [[inputPartition]] <<spark-sql-InputPartition.adoc#, InputPartition>>

@@ -1,0 +1,76 @@
+== [[InputPartition]] InputPartition Contract
+
+`InputPartition` is the <<contract, abstraction>> of <<implementations, input partitions>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<createPartitionReader, create an InputPartitionReader>> and optionally <<preferredLocations, specify preferred locations>>.
+
+[[contract]]
+.InputPartition Contract
+[cols="1m,3",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| createPartitionReader
+a| [[createPartitionReader]]
+
+[source, java]
+----
+InputPartitionReader<T> createPartitionReader()
+----
+
+Creates an `InputPartitionReader`
+
+Used when:
+
+* `DataSourceRDD` is requested to <<spark-sql-DataSourceRDD.adoc#compute, compute a partition>>
+
+* `ContinuousQueuedDataReader` is created
+
+| preferredLocations
+a| [[preferredLocations]]
+
+[source, java]
+----
+String[] preferredLocations()
+----
+
+Specifies the preferred locations (executor hosts)
+
+Default: `(empty)`
+
+Used when:
+
+* `DataSourceRDD` is requested for the <<spark-sql-DataSourceRDD.adoc#getPreferredLocations, preferred locations>>
+
+* `ContinuousDataSourceRDD` is requested for the preferred locations
+
+|===
+
+[[implementations]]
+.InputPartitions (Direct Implementations)
+[cols="1m,3",options="header",width="100%"]
+|===
+| InputPartition
+| Description
+
+| Anonymous
+| Used in Spark Structured Streaming's `TextSocketMicroBatchReader`
+
+| ContinuousInputPartition
+| [[ContinuousInputPartition]]
+
+| ContinuousMemoryStreamInputPartition
+| [[ContinuousMemoryStreamInputPartition]] Used in Spark Structured Streaming
+
+| KafkaMicroBatchInputPartition
+| [[KafkaMicroBatchInputPartition]] Used in Spark Structured Streaming
+
+| MemoryStreamInputPartition
+| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming
+
+| RateStreamMicroBatchInputPartition
+| [[RateStreamMicroBatchInputPartition]] Used in Spark Structured Streaming
+
+| TextSocketContinuousInputPartition
+| [[TextSocketContinuousInputPartition]] Used in Spark Structured Streaming
+
+|===
