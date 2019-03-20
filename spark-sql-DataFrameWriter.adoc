@@ -120,6 +120,8 @@ save(): Unit
 save(path: String): Unit
 ----
 
+Saves (writes) the result of executing a structured query to the <<source, data source>>
+
 | <<saveAsTable-internals, saveAsTable>>
 a| [[saveAsTable]]
 

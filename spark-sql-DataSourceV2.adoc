@@ -52,7 +52,7 @@ In other words, using the contract is as treading on thin ice.
 | ReadSupportWithSchema
 | [[ReadSupportWithSchema]]
 
-| SessionConfigSupport
+| <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>>
 | [[SessionConfigSupport]]
 
 | StreamWriteSupport

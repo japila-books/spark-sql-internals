@@ -2,6 +2,8 @@
 
 *Data Source API V2* (_DataSource API V2_ or _DataSource V2_) is a new API for data sources in Spark SQL with the following abstractions (_contracts_):
 
+* <<spark-sql-DataSourceV2.adoc#, DataSourceV2>>
+
 * <<spark-sql-ReadSupport.adoc#, ReadSupport>>
 
 * <<spark-sql-DataSourceReader.adoc#, DataSourceReader>>
@@ -9,6 +11,8 @@
 * <<spark-sql-WriteSupport.adoc#, WriteSupport>>
 
 * <<spark-sql-DataSourceWriter.adoc#, DataSourceWriter>>
+
+* <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>>
 
 * <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>
 

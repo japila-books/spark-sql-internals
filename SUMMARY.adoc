@@ -21,6 +21,8 @@
 
 . link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
 
+. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport Contract -- Data Sources with Session-Scoped Configuration Options]
+
 . link:spark-sql-InputPartition.adoc[InputPartition Contract]
 . link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
 
@@ -34,6 +36,8 @@
 
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
 .. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+
+. link:spark-sql-DataSourceV2Utils.adoc[DataSourceV2Utils Helper Object]
 
 == Developing Spark SQL Applications
 
