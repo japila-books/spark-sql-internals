@@ -54,6 +54,8 @@ newReader(): DataSourceReader
 
 `newReader` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createReader, create a DataSourceReader>>.
 
+NOTE: `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createReader, create a DataSourceReader>>.
+
 [NOTE]
 ====
 `newReader` is used when:
@@ -62,6 +64,19 @@ newReader(): DataSourceReader
 
 * `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, plan a DataSourceV2Relation logical operator>>
 ====
+
+=== [[newWriter]] Creating DataSourceWriter -- `newWriter` Method
+
+[source, scala]
+----
+newWriter(): DataSourceWriter
+----
+
+`newWriter` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createWriter, create a DataSourceWriter>>.
+
+NOTE: `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createWriter, create a DataSourceWriter>>.
+
+NOTE: `newWriter` is used exclusively when `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-AppendData, plan an AppendData logical operator>>.
 
 === [[SourceHelpers]] SourceHelpers Implicit Class
 

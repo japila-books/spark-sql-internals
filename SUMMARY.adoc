@@ -474,6 +474,7 @@
 . link:spark-sql-LogicalPlan-UnresolvedTableValuedFunction.adoc[UnresolvedTableValuedFunction]
 . link:spark-sql-LogicalPlan-Window.adoc[Window]
 . link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition]
+. link:spark-sql-LogicalPlan-WriteToDataSourceV2.adoc[WriteToDataSourceV2]
 . link:spark-sql-LogicalPlan-View.adoc[View]
 
 === Physical Operators
