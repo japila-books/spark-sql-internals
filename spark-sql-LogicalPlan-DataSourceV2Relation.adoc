@@ -145,6 +145,8 @@ createWriter(
   schema: StructType): DataSourceWriter
 ----
 
+Creates a <<spark-sql-DataSourceWriter.adoc#, DataSourceWriter>>
+
 Used when...FIXME
 
 |===
