@@ -30,7 +30,7 @@ Data Source API V2 relies on the <<spark-sql-SparkStrategy-DataSourceV2Strategy.
 
 Data Source API V2 uses <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator to represent data reading that is <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator.
 
-<<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator is planned as (_translated to_) a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> physical operator.
+`DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> with a <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator (possibly under the <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> operator) when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, plan a logical plan>>.
 
 <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute, At execution>>, `DataSourceV2ScanExec` physical operator creates a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> (or a `ContinuousReader` for Spark Structured Streaming).
 
@@ -38,7 +38,7 @@ Data Source API V2 uses <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, Data
 
 ==== Data Writing
 
-Data Source API V2 uses <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> and <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operators to represent data writing. As of Spark SQL 2.4.0, `WriteToDataSourceV2` operator was deprecated for the more specific `AppendData` operator (compare _"data writing"_ to _"data append"_ which is certainly more specific).
+Data Source API V2 uses <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> and <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operators to represent data writing (over a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator). As of Spark SQL 2.4.0, `WriteToDataSourceV2` operator was deprecated for the more specific `AppendData` operator (compare _"data writing"_ to _"data append"_ which is certainly more specific).
 
 NOTE: One of the differences between `WriteToDataSourceV2` and `AppendData` logical operators is that the former (`WriteToDataSourceV2`) uses <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#writer, DataSourceWriter>> directly while the latter (`AppendData`) uses <<spark-sql-LogicalPlan-AppendData.adoc#table, DataSourceV2Relation>> to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newWriter, get the DataSourceWriter from>>.
 
