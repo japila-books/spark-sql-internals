@@ -12,7 +12,21 @@ package org.apache.spark.sql.sources.v2;
 public interface DataSourceV2 {}
 ----
 
-NOTE: Implementations should at least use <<spark-sql-ReadSupport.adoc#, ReadSupport>> or <<spark-sql-WriteSupport.adoc#, WriteSupport>> interfaces for readable or writable data sources, respectively.
+[NOTE]
+====
+Implementations should at least use <<spark-sql-ReadSupport.adoc#, ReadSupport>> or <<spark-sql-WriteSupport.adoc#, WriteSupport>> interfaces for readable or writable data sources, respectively.
+
+Otherwise, an `AnalysisException` is thrown:
+
+```
+org.apache.spark.sql.AnalysisException: dawid is not a valid Spark SQL Data Source.;
+  at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:386)
+  at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:223)
+  at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:208)
+  at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:167)
+  ... 49 elided
+```
+====
 
 [NOTE]
 ====
