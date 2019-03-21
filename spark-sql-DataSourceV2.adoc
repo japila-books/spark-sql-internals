@@ -1,4 +1,4 @@
-== [[DataSourceV2]] DataSourceV2 Contract
+== [[DataSourceV2]] DataSourceV2 -- Data Sources in Data Source API V2
 
 `DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
 

@@ -8,11 +8,11 @@
 
 == (WIP) Data Source API V2
 
-. link:spark-sql-DataSourceV2.adoc[DataSourceV2 Contract]
+. link:spark-sql-DataSourceV2.adoc[DataSourceV2 -- Data Sources in Data Source API V2]
 . link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
 . link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
 
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader Contract]
 .. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters Contract -- Data Source Readers with Filter Pushdown Optimization Support]
 .. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
 .. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]

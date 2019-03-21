@@ -22,3 +22,6 @@ DataSourceReader createReader(StructType schema, DataSourceOptions options)
 ----
 
 Internally, `ReadSupport` is accessed implicitly when `DataSourceV2Relation` logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newReader, create a DataSourceReader>>.
+
+[[implementations]]
+NOTE: There are no production implementations of the <<contract, ReadSupport Contract>> in Spark SQL yet.
