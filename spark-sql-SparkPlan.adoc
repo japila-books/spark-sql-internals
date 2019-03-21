@@ -93,7 +93,7 @@ NOTE: Executing a structured query is simply a translation of the higher-level D
 CAUTION: FIXME Picture between Spark SQL's Dataset => Spark Core's RDD
 
 [[sparkContext]]
-`SparkPlan` has access to the owning `SparkContext`.
+`SparkPlan` has access to the owning `SparkContext` (from the Spark Core).
 
 [NOTE]
 ====
