@@ -27,7 +27,6 @@
 . link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
 
 . link:spark-sql-DataWriter.adoc[DataWriter]
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask]
 
 . link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
 .. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
@@ -37,6 +36,7 @@
 . link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
 .. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask Partition Processing Function]
 . link:spark-sql-DataSourceV2Utils.adoc[DataSourceV2Utils Helper Object]
 
 == Developing Spark SQL Applications

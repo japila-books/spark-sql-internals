@@ -53,6 +53,7 @@ NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Con
 Start processing data source writer: [writer]. The input RDD has [length] partitions.
 ```
 
+[[doExecute-runJob]]
 `doExecute` requests the <<spark-sql-SparkPlan.adoc#sparkContext, SparkContext>> to run a Spark job with the following:
 
 * The `RDD[InternalRow]` of the <<query, child physical plan>>
