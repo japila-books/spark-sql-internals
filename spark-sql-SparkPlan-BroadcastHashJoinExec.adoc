@@ -82,17 +82,17 @@ Generated code:
 
 [[requiredChildDistribution]]
 .BroadcastHashJoinExec's Required Child Output Distributions
-[cols="1,2,2",options="header",width="100%"]
+[cols="1m,2,2",options="header",width="100%"]
 |===
 | BuildSide
 | Left Child
 | Right Child
 
-| `BuildLeft`
+| BuildLeft
 | link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] broadcast mode of link:spark-sql-HashJoin.adoc#buildKeys[build join keys]
 | link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
-| `BuildRight`
+| BuildRight
 | link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 | link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution] with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] broadcast mode of link:spark-sql-HashJoin.adoc#buildKeys[build join keys]
 |===

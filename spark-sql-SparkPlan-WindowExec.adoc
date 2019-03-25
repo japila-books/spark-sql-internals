@@ -1,6 +1,6 @@
 == [[WindowExec]] WindowExec Unary Physical Operator
 
-`WindowExec` is a <<spark-sql-SparkPlan.adoc#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) for *window aggregation execution* that represents <<spark-sql-LogicalPlan-Window.adoc#, Window>> unary logical operator at execution.
+`WindowExec` is a <<spark-sql-SparkPlan.adoc#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) for *window aggregation execution* (i.e. represents <<spark-sql-LogicalPlan-Window.adoc#, Window>> unary logical operator at execution time).
 
 `WindowExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy resolves a <<spark-sql-LogicalPlan-Window.adoc#, Window>> unary logical operator.
 
@@ -31,7 +31,7 @@ import org.apache.spark.sql.expressions.Window
 val rangeWithTwoDevicesById = Window.
   partitionBy('device).
   orderBy('id).
-  rangeBetween(start = -1, end = Window.currentRow) // <-- use rangeBetween first
+  rangeBetween(start = -1, end = Window.currentRow) // <-- demo rangeBetween first
 val sumOverRange = metrics.withColumn("sum", sum('level) over rangeWithTwoDevicesById)
 
 // Logical plan with Window unary logical operator
@@ -53,7 +53,6 @@ Window [sum(cast(level#9 as bigint)) windowspecdefinition(device#8, id#7 ASC NUL
 val plan = sumOverRange.queryExecution.executedPlan
 import org.apache.spark.sql.execution.window.WindowExec
 val we = plan.asInstanceOf[WindowExec]
-
 val windowRDD = we.execute()
 scala> :type windowRDD
 org.apache.spark.rdd.RDD[org.apache.spark.sql.catalyst.InternalRow]
@@ -157,10 +156,11 @@ val we = plan.asInstanceOf[WindowExec]
 image::images/spark-sql-WindowExec-webui-query-details.png[align="center"]
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of `WindowExec` are the link:spark-sql-Expression-Attribute.adoc[attributes] of <<child, child>> physical operator and <<windowExpression, window expressions>>.
+The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of `WindowExec` are the link:spark-sql-Expression-Attribute.adoc[attributes] of the <<child, child>> physical operator and the <<windowExpression, window expressions>>.
 
 [source, scala]
 ----
+// the whole schema is as follows
 val schema = query.queryExecution.executedPlan.output.toStructType
 scala> println(schema.treeString)
 root
@@ -168,7 +168,11 @@ root
  |-- group: long (nullable = true)
  |-- sum: long (nullable = true)
 
-// we is WindowExec created earlier
+// Let's see ourselves how the schema is made up of
+
+scala> :type we
+org.apache.spark.sql.execution.window.WindowExec
+
 // child's output
 scala> println(we.child.output.toStructType.treeString)
 root
@@ -176,26 +180,26 @@ root
  |-- group: long (nullable = true)
 
 // window expressions' output
-scala> println(we.windowExpression.map(_.toAttribute).toStructType.treeString)
+val weExprSchema = we.windowExpression.map(_.toAttribute).toStructType
+scala> println(weExprSchema.treeString)
 root
  |-- sum: long (nullable = true)
 ----
 
 [[requiredChildDistribution]]
-.WindowExec's Required Child Output Distribution
-[cols="1",options="header",width="100%"]
-|===
-| Single Child
+The <<spark-sql-SparkPlan.adoc#requiredChildDistribution, required child output distribution>> of a `WindowExec` operator is one of the following:
 
-| link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution] (per <<partitionSpec, window partition specifications expressions>>)
-|===
+* <<spark-sql-AllTuples.adoc#, AllTuples>> when the <<partitionSpec, window partition specification expressions>> is empty
 
-If no window partition specification is specified, `WindowExec` prints out the following WARN message to the logs (and the child's distribution requirement is link:spark-sql-AllTuples.adoc[AllTuples]):
+* <<spark-sql-ClusteredDistribution.adoc#, ClusteredDistribution>> (with the <<partitionSpec, window partition specification expressions>>) with the <<partitionSpec, partition specification>> specified
+
+If no window partition specification is specified, `WindowExec` prints out the following WARN message to the logs:
 
 ```
 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
 ```
 
+[[logging]]
 [TIP]
 ====
 Enable `WARN` logging level for `org.apache.spark.sql.execution.WindowExec` logger to see what happens inside.
@@ -206,7 +210,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.WindowExec=WARN
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to <<spark-logging.adoc#, Logging>>.
 ====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
