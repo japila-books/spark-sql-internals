@@ -52,7 +52,7 @@ NOTE: The number of requirements for partitions and their sort ordering has to m
 
 . If the child satisfies the requested distribution, the child is left unchanged
 
-. For link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[broadcast hash joins]
+. For link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution], the child becomes the child of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] unary operator for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[broadcast hash joins]
 
 . Any other pair of child and distribution leads to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
 
@@ -90,7 +90,7 @@ Internally, `withExchangeCoordinator` checks if the input `children` operators s
 
 * If there is at least one link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] operator, all children are either `ShuffleExchangeExec` with link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] or their link:spark-sql-SparkPlan.adoc#outputPartitioning[output partitioning] is link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] (even inside link:spark-sql-SparkPlan-Partitioning.adoc#PartitioningCollection[PartitioningCollection])
 
-* There are at least two `children` operators and the input `requiredChildDistributions` are all link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution]
+* There are at least two `children` operators and the input `requiredChildDistributions` are all link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution]
 
 With link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] (i.e. when link:spark-sql-adaptive-query-execution.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property is `true`) and the <<supportsCoordinator, operator supports ExchangeCoordinator>>, `withExchangeCoordinator` creates a `ExchangeCoordinator` and:
 

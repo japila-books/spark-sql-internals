@@ -46,7 +46,7 @@ requiredChildDistribution: Seq[Distribution]
 
 The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how link:spark-sql-catalyst-TreeNode.adoc#children[children] physical operators' output is split across partitions.
 
-Defaults to a link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
+Defaults to a link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution] for all of the link:spark-sql-catalyst-TreeNode.adoc#children[child] operators.
 
 Used exclusively when `EnsureRequirements` physical query plan optimization is link:spark-sql-EnsureRequirements.adoc#apply[executed] (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements]).
 

@@ -135,7 +135,7 @@ The link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] of a `S
 The link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] of a `SortMergeJoinExec` is...FIXME
 
 [[requiredChildDistribution]]
-The link:spark-sql-SparkPlan.adoc#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistributions] of <<leftKeys, left>> and <<rightKeys, right>> join keys.
+The link:spark-sql-SparkPlan.adoc#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistributions] of <<leftKeys, left>> and <<rightKeys, right>> join keys.
 
 .SortMergeJoinExec's Required Child Output Distributions
 [cols="1,1",options="header",width="100%"]
@@ -143,8 +143,8 @@ The link:spark-sql-SparkPlan.adoc#requiredChildDistribution[partitioning require
 | Left Child
 | Right Child
 
-| link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
-| link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
+| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
+| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
 [[requiredChildOrdering]]

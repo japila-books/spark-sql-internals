@@ -49,7 +49,7 @@ When requested for the <<spark-sql-catalyst-QueryPlan.adoc#output, output attrib
 When requested for the <<spark-sql-SparkPlan.adoc#outputPartitioning, output data partitioning requirements>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
 
 [[requiredChildDistribution]]
-When requested for the <<spark-sql-SparkPlan.adoc#requiredChildDistribution, required partition requirements>>, `SortExec` gives the <<spark-sql-OrderedDistribution.adoc#, OrderedDistribution>> (with the <<sortOrder, sorting order expressions>> for the <<spark-sql-OrderedDistribution.adoc#ordering, ordering>>) when the <<global, global>> flag is enabled (`true`) or the <<spark-sql-UnspecifiedDistribution.adoc#, UnspecifiedDistribution>>.
+When requested for the <<spark-sql-SparkPlan.adoc#requiredChildDistribution, required partition requirements>>, `SortExec` gives the <<spark-sql-Distribution-OrderedDistribution.adoc#, OrderedDistribution>> (with the <<sortOrder, sorting order expressions>> for the <<spark-sql-Distribution-OrderedDistribution.adoc#ordering, ordering>>) when the <<global, global>> flag is enabled (`true`) or the <<spark-sql-Distribution-UnspecifiedDistribution.adoc#, UnspecifiedDistribution>>.
 
 `SortExec` operator uses the <<spark-sql-SQLConf.adoc#spark.sql.sort.enableRadixSort, spark.sql.sort.enableRadixSort>> internal configuration property (enabled by default) to control...FIXME
 

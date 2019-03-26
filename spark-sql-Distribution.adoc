@@ -1,4 +1,4 @@
-== [[Distribution]] Distribution -- Contract For Data Distribution Across Partitions
+== [[Distribution]] Distribution Contract -- Data Distribution Across Partitions
 
 `Distribution` is the <<contract, contract>> of...FIXME
 
@@ -41,21 +41,21 @@ Used exclusively when `EnsureRequirements` physical optimization is requested to
 | Distribution
 | Description
 
-| [[AllTuples]] link:spark-sql-AllTuples.adoc[AllTuples]
+| [[AllTuples]] link:spark-sql-Distribution-AllTuples.adoc[AllTuples]
 |
 
-| [[BroadcastDistribution]] link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
+| [[BroadcastDistribution]] link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution]
 |
 
-| [[ClusteredDistribution]] link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution]
+| [[ClusteredDistribution]] link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution]
 |
 
-| [[HashClusteredDistribution]] link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution]
+| [[HashClusteredDistribution]] link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution]
 |
 
-| [[OrderedDistribution]] link:spark-sql-OrderedDistribution.adoc[OrderedDistribution]
+| [[OrderedDistribution]] link:spark-sql-Distribution-OrderedDistribution.adoc[OrderedDistribution]
 |
 
-| [[UnspecifiedDistribution]] link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| [[UnspecifiedDistribution]] link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 |
 |===

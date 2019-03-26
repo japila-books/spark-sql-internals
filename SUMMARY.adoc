@@ -313,13 +313,13 @@
 
 . link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
 
-. link:spark-sql-Distribution.adoc[Distribution -- Contract For Data Distribution Across Partitions]
-.. link:spark-sql-AllTuples.adoc[AllTuples]
-.. link:spark-sql-BroadcastDistribution.adoc[BroadcastDistribution]
-.. link:spark-sql-ClusteredDistribution.adoc[ClusteredDistribution]
-.. link:spark-sql-HashClusteredDistribution.adoc[HashClusteredDistribution]
-.. link:spark-sql-OrderedDistribution.adoc[OrderedDistribution]
-.. link:spark-sql-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+. link:spark-sql-Distribution.adoc[Distribution Contract -- Data Distribution Across Partitions]
+.. link:spark-sql-Distribution-AllTuples.adoc[AllTuples]
+.. link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution]
+.. link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution]
+.. link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution]
+.. link:spark-sql-Distribution-OrderedDistribution.adoc[OrderedDistribution]
+.. link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
 === Catalyst Expressions
 
