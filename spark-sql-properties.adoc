@@ -35,25 +35,27 @@ res2: String = 2.3.2
 
 [[properties]]
 .Spark SQL Configuration Properties
-[cols="1m,1,2",options="header",width="100%"]
+[cols="1m,2",options="header",width="100%"]
 |===
 | Name
-| Default
 | Description
 
 | spark.sql.adaptive.enabled
-| `false`
 a| [[spark.sql.adaptive.enabled]] Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[SQLConf.adaptiveExecutionEnabled] method to access the current value.
 
 | spark.sql.allowMultipleContexts
-| `true`
-| [[spark.sql.allowMultipleContexts]] Controls whether creating multiple SQLContexts/HiveContexts is allowed
+| [[spark.sql.allowMultipleContexts]] Controls whether creating multiple SQLContexts/HiveContexts is allowed (`true`) or not (`false`)
+
+Default: `true`
 
 | spark.sql.autoBroadcastJoinThreshold
-| `10L * 1024 * 1024` (10M)
 | [[spark.sql.autoBroadcastJoinThreshold]] Maximum size (in bytes) for a table that will be broadcast to all worker nodes when performing a join.
+
+Default: `10L * 1024 * 1024` (10M)
 
 If the size of the statistics of the logical plan of a table is at most the setting, the DataFrame is broadcast for join.
 
@@ -62,8 +64,9 @@ Negative values or `0` disable broadcasting.
 Use link:spark-sql-SQLConf.adoc#autoBroadcastJoinThreshold[SQLConf.autoBroadcastJoinThreshold] method to access the current value.
 
 | spark.sql.avro.compression.codec
-| `snappy`
 a| [[spark.sql.avro.compression.codec]] The compression codec to use when writing Avro data to disk
+
+Default: `snappy`
 
 The supported codecs are:
 
@@ -76,44 +79,53 @@ The supported codecs are:
 Use <<spark-sql-SQLConf.adoc#avroCompressionCodec, SQLConf.avroCompressionCodec>> method to access the current value.
 
 | spark.sql.broadcastTimeout
-| `5 * 60`
 | [[spark.sql.broadcastTimeout]] Timeout in seconds for the broadcast wait time in broadcast joins.
+
+Default: `5 * 60`
 
 When negative, it is assumed infinite (i.e. `Duration.Inf`)
 
 Use link:spark-sql-SQLConf.adoc#broadcastTimeout[SQLConf.broadcastTimeout] method to access the current value.
 
 | spark.sql.caseSensitive
-| `false`
-| [[spark.sql.caseSensitive]] *(internal)* Controls whether the query analyzer should be case sensitive (`true`) or not (`false`). It is highly discouraged to turn on case sensitive mode.
+| [[spark.sql.caseSensitive]] *(internal)* Controls whether the query analyzer should be case sensitive (`true`) or not (`false`).
+
+Default: `false`
+
+It is highly discouraged to turn on case sensitive mode.
 
 Use link:spark-sql-SQLConf.adoc#caseSensitiveAnalysis[SQLConf.caseSensitiveAnalysis] method to access the current value.
 
 | spark.sql.cbo.enabled
-| `false`
 | [[spark.sql.cbo.enabled]] Enables link:spark-sql-cost-based-optimization.adoc[cost-based optimization] (CBO) for estimation of plan statistics when `true`.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] method to access the current value.
 
 | spark.sql.cbo.joinReorder.enabled
-| `false`
 a| [[spark.sql.cbo.joinReorder.enabled]] Enables join reorder for cost-based optimization (CBO).
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#joinReorderEnabled[SQLConf.joinReorderEnabled] method to access the current value.
 
 | spark.sql.cbo.starSchemaDetection
-| `false`
 a| [[spark.sql.cbo.starSchemaDetection]] Enables *join reordering* based on star schema detection for cost-based optimization (CBO) in link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin] logical plan optimization.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#starSchemaDetection[SQLConf.starSchemaDetection] method to access the current value.
 
 | spark.sql.codegen.comments
-| `false`
 | [[spark.sql.codegen.comments]] Controls whether `CodegenContext` should link:spark-sql-CodegenSupport.adoc#registerComment[register comments] (`true`) or not (`false`).
 
+Default: `false`
+
 | spark.sql.codegen.factoryMode
-| `FALLBACK`
 a| [[spark.sql.codegen.factoryMode]] *(internal)* Determines the codegen generator fallback behavior
+
+Default: `FALLBACK`
 
 Acceptable values:
 
@@ -124,56 +136,63 @@ Acceptable values:
 Used when `CodeGeneratorWithInterpretedFallback` is requested to <<spark-sql-CodeGeneratorWithInterpretedFallback.adoc#createObject, createObject>> (when `UnsafeProjection` is requested to <<spark-sql-UnsafeProjection.adoc#create, create an UnsafeProjection for Catalyst expressions>>)
 
 | spark.sql.codegen.fallback
-| `true`
 | [[spark.sql.codegen.fallback]] *(internal)* Whether the whole stage codegen could be temporary disabled for the part of a query that has failed to compile generated code (`true`) or not (`false`).
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#wholeStageFallback[SQLConf.wholeStageFallback] method to access the current value.
 
 | spark.sql.codegen.hugeMethodLimit
-| `65535`
 | [[spark.sql.codegen.hugeMethodLimit]] *(internal)* The maximum bytecode size of a single compiled Java function generated by whole-stage codegen.
+
+Default: `65535`
 
 The default value `65535` is the largest bytecode size possible for a valid Java method. When running on HotSpot, it may be preferable to set the value to `8000` (which is the value of `HugeMethodLimit` in the OpenJDK JVM settings)
 
 Use link:spark-sql-SQLConf.adoc#hugeMethodLimit[SQLConf.hugeMethodLimit] method to access the current value.
 
 | spark.sql.codegen.useIdInClassName
-| `true`
 | [[spark.sql.codegen.useIdInClassName]] *(internal)* Controls whether to embed the (whole-stage) codegen stage ID into the class name of the generated class as a suffix (`true`) or not (`false`)
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#wholeStageUseIdInClassName[SQLConf.wholeStageUseIdInClassName] method to access the current value.
 
 | spark.sql.codegen.maxFields
-| `100`
 | [[spark.sql.codegen.maxFields]] *(internal)* Maximum number of output fields (including nested fields) that whole-stage codegen supports. Going above the number deactivates whole-stage codegen.
+
+Default: `100`
 
 Use link:spark-sql-SQLConf.adoc#wholeStageMaxNumFields[SQLConf.wholeStageMaxNumFields] method to access the current value.
 
 | spark.sql.codegen.splitConsumeFuncByOperator
-| `true`
 | [[spark.sql.codegen.splitConsumeFuncByOperator]] *(internal)* Controls whether whole stage codegen puts the logic of consuming rows of each physical operator into individual methods, instead of a single big method. This can be used to avoid oversized function that can miss the opportunity of JIT optimization.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#wholeStageSplitConsumeFuncByOperator[SQLConf.wholeStageSplitConsumeFuncByOperator] method to access the current value.
 
 | spark.sql.codegen.wholeStage
-| `true`
 | [[spark.sql.codegen.wholeStage]] *(internal)* Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] method to access the current value.
 
 | spark.sql.columnVector.offheap.enabled
-| `false`
 | [[spark.sql.columnVector.offheap.enabled]] *(internal)* Enables link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] in link:spark-sql-ColumnarBatch.adoc[ColumnarBatch] (`true`) or not (`false`). When disabled, link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used instead.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumnVectorEnabled] method to access the current value.
 
 | spark.sql.columnNameOfCorruptRecord
-|
 | [[spark.sql.columnNameOfCorruptRecord]]
 
 | spark.sql.defaultSizeInBytes
-| Java's `Long.MaxValue`
 a| [[spark.sql.defaultSizeInBytes]] *(internal)* Estimated size of a table or relation used in query planning
+
+Default: Java's `Long.MaxValue`
 
 Set to Java's `Long.MaxValue` which is larger than <<spark.sql.autoBroadcastJoinThreshold, spark.sql.autoBroadcastJoinThreshold>> to be more conservative. That is to say by default the optimizer will not choose to broadcast a table unless it knows for sure that the table size is small enough.
 
@@ -182,76 +201,86 @@ Used by the planner to decide when it is safe to broadcast a relation. By defaul
 Use link:spark-sql-SQLConf.adoc#defaultSizeInBytes[SQLConf.defaultSizeInBytes] method to access the current value.
 
 | spark.sql.dialect
-|
 | [[spark.sql.dialect]]
 
 | spark.sql.exchange.reuse
-| `true`
 a| [[spark.sql.exchange.reuse]] *(internal)* When enabled (i.e. `true`), the link:spark-sql-SparkPlanner.adoc[Spark planner] will find duplicated exchanges and subqueries and re-use them.
+
+Default: `true`
 
 NOTE: When disabled (i.e. `false`), link:spark-sql-ReuseSubquery.adoc[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
 
 Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnabled] method to access the current value.
 
 | spark.sql.execution.useObjectHashAggregateExec
-| `true`
-| [[spark.sql.execution.useObjectHashAggregateExec]] Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] when <<spark-sql-SparkStrategy-Aggregation.adoc#, Aggregation>> execution planning strategy is executed.
+a| [[spark.sql.execution.useObjectHashAggregateExec]] Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] when <<spark-sql-SparkStrategy-Aggregation.adoc#, Aggregation>> execution planning strategy is executed.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#useObjectHashAggregation[SQLConf.useObjectHashAggregation] method to access the current value.
 
 | spark.sql.files.ignoreCorruptFiles
-| `false`
-| [[spark.sql.files.ignoreCorruptFiles]] Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering corrupted files and the contents that have been read will still be returned.
+a| [[spark.sql.files.ignoreCorruptFiles]] Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering corrupted files and the contents that have been read will still be returned.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#ignoreCorruptFiles[SQLConf.ignoreCorruptFiles] method to access the current value.
 
 | spark.sql.files.ignoreMissingFiles
-| `false`
-| [[spark.sql.files.ignoreMissingFiles]] Controls whether to ignore missing files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering missing files and the contents that have been read will still be returned.
+a| [[spark.sql.files.ignoreMissingFiles]] Controls whether to ignore missing files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering missing files and the contents that have been read will still be returned.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#ignoreMissingFiles[SQLConf.ignoreMissingFiles] method to access the current value.
 
 | spark.sql.hive.convertMetastoreOrc
-| `true`
-| [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
+a| [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
+
+Default: `true`
 
 | spark.sql.hive.convertMetastoreParquet
-| `true`
-| [[spark.sql.hive.convertMetastoreParquet]] Controls whether to use the built-in Parquet reader and writer to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
+a| [[spark.sql.hive.convertMetastoreParquet]] Controls whether to use the built-in Parquet reader and writer to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
+
+Default: `true`
 
 | spark.sql.hive.convertMetastoreParquet.mergeSchema
-| `false`
 a| [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] Enables trying to merge possibly different but compatible Parquet schemas in different Parquet data files.
+
+Default: `false`
 
 This configuration is only effective when <<spark.sql.hive.convertMetastoreParquet, spark.sql.hive.convertMetastoreParquet>> is enabled.
 
 | spark.sql.hive.manageFilesourcePartitions
-| `true`
-| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables. This includes both datasource and converted Hive tables.
+a| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables. This includes both datasource and converted Hive tables.
+
+Default: `true`
 
 When enabled (`true`), datasource tables store partition in the Hive metastore, and use the metastore to prune partitions during query planning.
 
 Use link:spark-sql-SQLConf.adoc#manageFilesourcePartitions[SQLConf.manageFilesourcePartitions] method to access the current value.
 
 | spark.sql.hive.metastore.barrierPrefixes
-| (empty)
-| [[spark.sql.hive.metastore.barrierPrefixes]] Comma-separated list of class prefixes that should explicitly be reloaded for each version of Hive that Spark SQL is communicating with, e.g. Hive UDFs that are declared in a prefix that typically would be shared (i.e. `org.apache.spark.*`)
+a| [[spark.sql.hive.metastore.barrierPrefixes]] Comma-separated list of class prefixes that should explicitly be reloaded for each version of Hive that Spark SQL is communicating with, e.g. Hive UDFs that are declared in a prefix that typically would be shared (i.e. `org.apache.spark.*`)
+
+Default: `(empty)`
 
 | spark.sql.hive.metastore.jars
-| `builtin`
 a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
+
+Default: `builtin`
 
 Supported locations:
 
-. `builtin` - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
+* `builtin` - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
 
-. `maven` - download the Hive jars from Maven repositories
+* `maven` - download the Hive jars from Maven repositories
 
-. Classpath in the standard format for both Hive and Hadoop
+* Classpath in the standard format for both Hive and Hadoop
 
 | spark.sql.hive.metastore.sharedPrefixes
-| `"com.mysql.jdbc", "org.postgresql", "com.microsoft.sqlserver", "oracle.jdbc"`
 a| [[spark.sql.hive.metastore.sharedPrefixes]] Comma-separated list of class prefixes that should be loaded using the classloader that is shared between Spark SQL and a specific version of Hive.
+
+Default: `"com.mysql.jdbc", "org.postgresql", "com.microsoft.sqlserver", "oracle.jdbc"`
 
 An example of classes that should be shared are:
 
@@ -260,68 +289,79 @@ An example of classes that should be shared are:
 * Other classes that interact with classes that are already shared, e.g. custom appenders that are used by log4j
 
 | spark.sql.hive.metastore.version
-| `1.2.1`
-| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the <<spark-sql-HiveUtils.adoc#newClientForMetadata, client classes and jars>>).
+a| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the <<spark-sql-HiveUtils.adoc#newClientForMetadata, client classes and jars>>).
+
+Default: `1.2.1`
 
 Supported versions range from `0.12.0` up to and including `2.3.2`.
 
 | spark.sql.inMemoryColumnarStorage.batchSize
-| `10000`
-| [[spark.sql.inMemoryColumnarStorage.batchSize]] *(internal)* Controls...FIXME
+a| [[spark.sql.inMemoryColumnarStorage.batchSize]] *(internal)* Controls...FIXME
+
+Default: `10000`
 
 Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method to access the current value.
 
 | spark.sql.inMemoryColumnarStorage.compressed
-| `true`
-| [[spark.sql.inMemoryColumnarStorage.compressed]] *(internal)* Controls...FIXME
+a| [[spark.sql.inMemoryColumnarStorage.compressed]] *(internal)* Controls...FIXME
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
 
 | spark.sql.inMemoryColumnarStorage.enableVectorizedReader
-| `true`
-| [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for columnar caching.
+a| [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for columnar caching.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
 
 | spark.sql.inMemoryColumnarStorage.partitionPruning
-| `true`
-| [[spark.sql.inMemoryColumnarStorage.partitionPruning]] *(internal)* Enables partition pruning for in-memory columnar tables
+a| [[spark.sql.inMemoryColumnarStorage.partitionPruning]] *(internal)* Enables partition pruning for in-memory columnar tables
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartitionPruning] method to access the current value.
 
 | spark.sql.join.preferSortMergeJoin
-| `true`
-| [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
+a| [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin] method to access the current value.
 
 | spark.sql.limit.scaleUpFactor
-| `4`
-| [[spark.sql.limit.scaleUpFactor]] *(internal)* Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
+a| [[spark.sql.limit.scaleUpFactor]] *(internal)* Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
+
+Default: `4`
 
 Use link:spark-sql-SQLConf.adoc#limitScaleUpFactor[SQLConf.limitScaleUpFactor] method to access the current value.
 
 | spark.sql.optimizer.excludedRules
-| (empty)
 a| [[spark.sql.optimizer.excludedRules]] Comma-separated list of optimization rule names that should be disabled (excluded) in the <<spark-sql-Optimizer.adoc#spark.sql.optimizer.excludedRules, optimizer>>. The optimizer will log the rules that have indeed been excluded.
+
+Default: `(empty)`
 
 NOTE: It is not guaranteed that all the rules in this configuration will eventually be excluded, as some rules are necessary for correctness.
 
 Use <<spark-sql-SQLConf.adoc#optimizerExcludedRules, SQLConf.optimizerExcludedRules>> method to access the current value.
 
 | spark.sql.optimizer.inSetConversionThreshold
-| `10`
-| [[spark.sql.optimizer.inSetConversionThreshold]] *(internal)* The threshold of set size for `InSet` conversion.
+a| [[spark.sql.optimizer.inSetConversionThreshold]] *(internal)* The threshold of set size for `InSet` conversion.
+
+Default: `10`
 
 Use link:spark-sql-SQLConf.adoc#optimizerInSetConversionThreshold[SQLConf.optimizerInSetConversionThreshold] method to access the current value.
 
 | spark.sql.optimizer.maxIterations
-| `100`
-| [[spark.sql.optimizer.maxIterations]] Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
+a| [[spark.sql.optimizer.maxIterations]] Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
+
+Default: `100`
 
 | spark.sql.orc.impl
-| `native`
 a| [[spark.sql.orc.impl]] *(internal)* When `native`, use the native version of ORC support instead of the ORC library in Hive 1.2.1.
+
+Default: `native`
 
 Acceptable values:
 
@@ -329,66 +369,76 @@ Acceptable values:
 * `native`
 
 | spark.sql.parquet.binaryAsString
-| `false`
-| [[spark.sql.parquet.binaryAsString]] Some other Parquet-producing systems, in particular Impala and older versions of Spark SQL, do not differentiate between binary data and strings when writing out the Parquet schema. This flag tells Spark SQL to interpret binary data as a string to provide compatibility with these systems.
+a| [[spark.sql.parquet.binaryAsString]] Some other Parquet-producing systems, in particular Impala and older versions of Spark SQL, do not differentiate between binary data and strings when writing out the Parquet schema. This flag tells Spark SQL to interpret binary data as a string to provide compatibility with these systems.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#isParquetBinaryAsString[SQLConf.isParquetBinaryAsString] method to access the current value.
 
 | spark.sql.parquet.int96AsTimestamp
-| `true`
-| [[spark.sql.parquet.int96AsTimestamp]] Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
+a| [[spark.sql.parquet.int96AsTimestamp]] Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#isParquetINT96AsTimestamp[SQLConf.isParquetINT96AsTimestamp] method to access the current value.
 
 | spark.sql.parquet.enableVectorizedReader
-| `true`
-| [[spark.sql.parquet.enableVectorizedReader]] Enables link:spark-sql-vectorized-parquet-reader.adoc[vectorized parquet decoding].
+a| [[spark.sql.parquet.enableVectorizedReader]] Enables link:spark-sql-vectorized-parquet-reader.adoc[vectorized parquet decoding].
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderEnabled[SQLConf.parquetVectorizedReaderEnabled] method to access the current value.
 
 | spark.sql.parquet.filterPushdown
-| `true`
-| [[spark.sql.parquet.filterPushdown]] Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate push-down optimization] for data sources using link:spark-sql-ParquetFileFormat.adoc[parquet] file format
+a| [[spark.sql.parquet.filterPushdown]] Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate push-down optimization] for data sources using link:spark-sql-ParquetFileFormat.adoc[parquet] file format
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#parquetFilterPushDown[SQLConf.parquetFilterPushDown] method to access the current value.
 
 | spark.sql.parquet.int96TimestampConversion
-| `false`
-| [[spark.sql.parquet.int96TimestampConversion]] Controls whether timestamp adjustments should be applied to INT96 data when converting to timestamps, for data written by Impala.  This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
+a| [[spark.sql.parquet.int96TimestampConversion]] Controls whether timestamp adjustments should be applied to INT96 data when converting to timestamps, for data written by Impala.  This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#isParquetINT96TimestampConversion[SQLConf.isParquetINT96TimestampConversion] method to access the current value.
 
 | spark.sql.parquet.recordLevelFilter.enabled
-| `false`
 a| [[spark.sql.parquet.recordLevelFilter.enabled]] Enables Parquet's native record-level filtering using the pushed down filters.
+
+Default: `false`
 
 NOTE: This configuration only has an effect when <<spark.sql.parquet.filterPushdown, spark.sql.parquet.filterPushdown>> is enabled (and it is by default).
 
 Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecordFilterEnabled] method to access the current value.
 
 | spark.sql.parser.quotedRegexColumnNames
-| `false`
 | [[spark.sql.parser.quotedRegexColumnNames]] Controls whether quoted identifiers (using backticks) in SELECT statements should be interpreted as regular expressions.
+
+Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#supportQuotedRegexColumnName[SQLConf.supportQuotedRegexColumnName] method to access the current value.
 
 | spark.sql.sort.enableRadixSort
-| `true`
 a| [[spark.sql.sort.enableRadixSort]] *(internal)* Controls whether to use radix sort (`true`) or not (`false`) in <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#, ShuffleExchangeExec>> and <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> physical operators
+
+Default: `true`
 
 Radix sort is much faster but requires additional memory to be reserved up-front. The memory overhead may be significant when sorting very small rows (up to 50% more).
 
 Use link:spark-sql-SQLConf.adoc#enableRadixSort[SQLConf.enableRadixSort] method to access the current value.
 
 | spark.sql.sources.commitProtocolClass
-| `SQLHadoopMapReduceCommitProtocol`
 a| [[spark.sql.sources.commitProtocolClass]] *(internal)*
+
+Default: `SQLHadoopMapReduceCommitProtocol`
 
 Use link:spark-sql-SQLConf.adoc#fileCommitProtocolClass[SQLConf.fileCommitProtocolClass] method to access the current value.
 
 | spark.sql.sources.partitionOverwriteMode
-| `static`
 a| [[spark.sql.sources.partitionOverwriteMode]] Enables <<spark-sql-dynamic-partition-inserts.adoc#, dynamic partition inserts>> when <<spark.sql.sources.partitionOverwriteMode-dynamic, dynamic>>
+
+Default: `static`
 
 When `INSERT OVERWRITE` a partitioned data source table with dynamic partition columns, Spark SQL supports two modes (case-insensitive):
 
@@ -401,14 +451,16 @@ The default (`STATIC`) is to keep the same behavior of Spark prior to 2.3. Note 
 Use <<spark-sql-SQLConf.adoc#partitionOverwriteMode, SQLConf.partitionOverwriteMode>> method to access the current value.
 
 | spark.sql.pivotMaxValues
-| `10000`
 | [[spark.sql.pivotMaxValues]] Maximum number of (distinct) values that will be collected without error (when doing a link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] without specifying the values for the pivot column)
+
+Default: `10000`
 
 Use link:spark-sql-SQLConf.adoc#dataFramePivotMaxValues[SQLConf.dataFramePivotMaxValues] method to access the current value.
 
 | spark.sql.redaction.options.regex
-| `(?i)secret!password`
 a| [[spark.sql.redaction.options.regex]] Regular expression to find options of a Spark SQL command with sensitive information
+
+Default: `(?i)secret!password`
 
 The values of the options matched will be redacted in the explain output.
 
@@ -417,9 +469,10 @@ This redaction is applied on top of the global redaction configuration defined b
 Used exclusively when `SQLConf` is requested to <<spark-sql-SQLConf.adoc#redactOptions, redactOptions>>.
 
 | spark.sql.redaction.string.regex
-| (undefined)
 a| [[spark.sql.redaction.string.regex]] Regular expression to point at sensitive information in text output
 
+Default: `(undefined)
+`
 When this regex matches a string part, that string part is replaced by a dummy value (i.e. `*********(redacted)`). This is currently used to redact the output of SQL explain commands.
 
 NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is used instead.
@@ -427,115 +480,134 @@ NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is 
 Use link:spark-sql-SQLConf.adoc#stringRedactionPattern[SQLConf.stringRedactionPattern] method to access the current value.
 
 | spark.sql.retainGroupColumns
-| `true`
-| [[spark.sql.retainGroupColumns]] Controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).
+a| [[spark.sql.retainGroupColumns]] Controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] operators).
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#dataFrameRetainGroupColumns[SQLConf.dataFrameRetainGroupColumns] method to access the current value.
 
 | spark.sql.runSQLOnFiles
-| `true`
-| [[spark.sql.runSQLOnFiles]] *(internal)* Controls whether Spark SQL could use `datasource`.`path` as a table in a SQL query.
+a| [[spark.sql.runSQLOnFiles]] *(internal)* Controls whether Spark SQL could use `datasource`.`path` as a table in a SQL query.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#runSQLonFile[SQLConf.runSQLonFile] method to access the current value.
 
 | spark.sql.selfJoinAutoResolveAmbiguity
-| `true`
-| [[spark.sql.selfJoinAutoResolveAmbiguity]] Controls whether to resolve ambiguity in join conditions for link:spark-sql-joins.adoc#join[self-joins] automatically.
+a| [[spark.sql.selfJoinAutoResolveAmbiguity]] Controls whether to resolve ambiguity in join conditions for link:spark-sql-joins.adoc#join[self-joins] automatically (`true`) or not (`false`)
+
+Default: `true`
 
 | spark.sql.session.timeZone
-| Java's `TimeZone.getDefault.getID`
-| [[spark.sql.session.timeZone]] The ID of session-local timezone, e.g. "GMT", "America/Los_Angeles", etc.
+a| [[spark.sql.session.timeZone]] The ID of session-local timezone, e.g. "GMT", "America/Los_Angeles", etc.
+
+Default: Java's `TimeZone.getDefault.getID`
 
 Use link:spark-sql-SQLConf.adoc#sessionLocalTimeZone[SQLConf.sessionLocalTimeZone] method to access the current value.
 
 | spark.sql.shuffle.partitions
-| `200`
 | [[spark.sql.shuffle.partitions]] Number of partitions to use by default when shuffling data for joins or aggregations
+
+Default: `200`
 
 Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks[mapred.reduce.tasks] property that Spark considers deprecated.
 
 Use link:spark-sql-SQLConf.adoc#numShufflePartitions[SQLConf.numShufflePartitions] method to access the current value.
 
 | spark.sql.sources.bucketing.enabled
-| `true`
 a| [[spark.sql.sources.bucketing.enabled]] Enables link:spark-sql-bucketing.adoc[bucketing] support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] method to access the current value.
 
 | spark.sql.sources.default
-| `parquet`
 a| [[spark.sql.sources.default]] Defines the default data source to use for link:spark-sql-DataFrameReader.adoc[DataFrameReader].
+
+Default: `parquet`
 
 Used when:
 
 * Reading (link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]) or writing (link:spark-sql-DataFrameReader.adoc[DataFrameReader]) datasets
+
 * link:spark-sql-Catalog.adoc#createExternalTable[Creating external table from a path] (in `Catalog.createExternalTable`)
 
 * Reading (`DataStreamReader`) or writing (`DataStreamWriter`) in Structured Streaming
 
 | spark.sql.statistics.fallBackToHdfs
-| `false`
 a| [[spark.sql.statistics.fallBackToHdfs]] Enables automatic calculation of table size statistic by falling back to HDFS if the table statistics are not available from table metadata.
+
+Default: `false`
 
 This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
 
 Use link:spark-sql-SQLConf.adoc#fallBackToHdfsForStatsEnabled[SQLConf.fallBackToHdfsForStatsEnabled] method to access the current value.
 
 | spark.sql.statistics.histogram.enabled
-| `false`
 a| [[spark.sql.statistics.histogram.enabled]] Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[computing column statistics]
+
+Default: `false`
 
 NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
 
 Use link:spark-sql-SQLConf.adoc#histogramEnabled[SQLConf.histogramEnabled] method to access the current value.
 
 | spark.sql.statistics.histogram.numBins
-| `254`
 a| [[spark.sql.statistics.histogram.numBins]] *(internal)* The number of bins when generating histograms.
+
+Default: `254`
 
 NOTE: The number of bins must be greater than 1.
 
 Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] method to access the current value.
 
 | spark.sql.statistics.parallelFileListingInStatsComputation.enabled
-| `true`
 a| [[spark.sql.statistics.parallelFileListingInStatsComputation.enabled]] *(internal)* Enables parallel file listing in SQL commands, e.g. `ANALYZE TABLE` (as opposed to single thread listing that can be particularly slow with tables with hundreds of partitions)
+
+Default: `true`
 
 Use <<spark-sql-SQLConf.adoc#parallelFileListingInStatsComputation, SQLConf.parallelFileListingInStatsComputation>> method to access the current value.
 
 | spark.sql.statistics.size.autoUpdate.enabled
-| `false`
 a| [[spark.sql.statistics.size.autoUpdate.enabled]] Enables automatic update of the table size statistic of a table after the table has changed.
+
+Default: `false`
 
 IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
 
 Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnabled] method to access the current value.
 
 | spark.sql.subexpressionElimination.enabled
-| `true`
 a| [[spark.sql.subexpressionElimination.enabled]] *(internal)* Enables link:spark-sql-subexpression-elimination.adoc[subexpression elimination]
+
+Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
 
 | spark.sql.TungstenAggregate.testFallbackStartsAt
-| (empty)
-| [[spark.sql.TungstenAggregate.testFallbackStartsAt]] A comma-separated pair of numbers, e.g. `5,10`, that `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#testFallbackStartsAt[uses] to inform `TungstenAggregationIterator` to switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
+a| [[spark.sql.TungstenAggregate.testFallbackStartsAt]] A comma-separated pair of numbers, e.g. `5,10`, that `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#testFallbackStartsAt[uses] to inform `TungstenAggregationIterator` to switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
+
+Default: `(empty)`
 
 | spark.sql.ui.retainedExecutions
-| `1000`
-| [[spark.sql.ui.retainedExecutions]] The number of link:spark-sql-SQLListener.adoc#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
+a| [[spark.sql.ui.retainedExecutions]] The number of link:spark-sql-SQLListener.adoc#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
+
+Default: `1000`
 
 When a query execution finishes, the execution is removed from the internal `activeExecutions` registry and stored in `failedExecutions` or `completedExecutions` given the end execution status. It is when `SQLListener` makes sure that the number of `SQLExecutionUIData` entires does not exceed `spark.sql.ui.retainedExecutions` Spark property and removes the excess of entries.
 
 | spark.sql.windowExec.buffer.in.memory.threshold
-| `4096`
-| [[spark.sql.windowExec.buffer.in.memory.threshold]] *(internal)* Threshold for number of rows guaranteed to be held in memory by <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
+a| [[spark.sql.windowExec.buffer.in.memory.threshold]] *(internal)* Threshold for number of rows guaranteed to be held in memory by <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
+
+Default: `4096`
 
 Use <<spark-sql-SQLConf.adoc#windowExecBufferInMemoryThreshold, windowExecBufferInMemoryThreshold>> method to access the current value.
 
 | spark.sql.windowExec.buffer.spill.threshold
-| `4096`
-| [[spark.sql.windowExec.buffer.spill.threshold]] *(internal)* Threshold for number of rows buffered in a <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
+a| [[spark.sql.windowExec.buffer.spill.threshold]] *(internal)* Threshold for number of rows buffered in a <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
+
+Default: `4096`
 
 Use <<spark-sql-SQLConf.adoc#windowExecBufferSpillThreshold, windowExecBufferSpillThreshold>> method to access the current value.
+
 |===
