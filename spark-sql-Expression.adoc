@@ -24,7 +24,7 @@ s: String = hello
 `Expression` can <<genCode, generate a Java source code>> that is then used in evaluation.
 
 [[deterministic]]
-`Expression` is *deterministic* when always evaluates the same result for the same inputs. By default, an expression is deterministic if all the link:spark-sql-catalyst-TreeNode.adoc#children[child] expressions are (which for <<LeafExpression, leaf expressions>> with no child expressions is true).
+`Expression` is *deterministic* when evaluates to the same result for the same input(s). An expression is deterministic if all the link:spark-sql-catalyst-TreeNode.adoc#children[child expressions] are (which for <<LeafExpression, leaf expressions>> with no child expressions is always true).
 
 NOTE: A deterministic expression is like a https://en.wikipedia.org/wiki/Pure_function[pure function] in functional programming languages.
 
@@ -37,6 +37,8 @@ org.apache.spark.sql.catalyst.expressions.Expression
 scala> println(e.deterministic)
 true
 ----
+
+NOTE: Non-deterministic expressions are not allowed in some logical operators and are excluded in some optimizations.
 
 [[verboseString]]
 `verboseString` is...FIXME

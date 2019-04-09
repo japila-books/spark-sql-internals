@@ -11,14 +11,18 @@
 [source, scala]
 ----
 import org.apache.spark.sql.functions.udf
-scala> val lengthUDF = udf { s: String => s.length }
-lengthUDF: org.apache.spark.sql.expressions.UserDefinedFunction = UserDefinedFunction(<function1>,IntegerType,Some(List(StringType)))
+val lengthUDF = udf { s: String => s.length }
 
-scala> lengthUDF($"name")
-res1: org.apache.spark.sql.Column = UDF(name)
+scala> :type lengthUDF
+org.apache.spark.sql.expressions.UserDefinedFunction
+
+val r = lengthUDF($"name")
+
+scala> :type r
+org.apache.spark.sql.Column
 ----
 
-`UserDefinedFunction` can also have a <<withName, name>>.
+`UserDefinedFunction` can have an optional <<withName, name>>.
 
 [source, scala]
 ----
@@ -32,9 +36,36 @@ res2: org.apache.spark.sql.Column = UDF:lengthUDF(name)
 [source, scala]
 ----
 val nonNullableLengthUDF = lengthUDF.asNonNullable
-scala> nonNullableLengthUDF.nullable
-res1: Boolean = false
+assert(nonNullableLengthUDF.nullable == false)
 ----
+
+[[deterministic]]
+`UserDefinedFunction` is *deterministic* <<_deterministic, by default>>, i.e. produces the same result for the same input. `UserDefinedFunction` can be changed to be <<asNondeterministic, non-deterministic>>.
+
+[source, scala]
+----
+assert(lengthUDF.deterministic)
+val ndUDF = lengthUDF.asNondeterministic
+assert(ndUDF.deterministic == false)
+----
+
+[[internal-registries]]
+.UserDefinedFunction's Internal Properties (e.g. Registries, Counters and Flags)
+[cols="1m,3",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| _deterministic
+a| [[_deterministic]] Flag that controls whether the function is <<deterministic, deterministic>> (`true`) or not (`false`).
+
+Default: `true`
+
+* Use <<asNondeterministic, asNondeterministic>> to change it to `false`
+
+Used when `UserDefinedFunction` is requested to <<apply, execute>>
+
+|===
 
 === [[apply]] Executing UserDefinedFunction (Creating Column with ScalaUDF Expression) -- `apply` Method
 

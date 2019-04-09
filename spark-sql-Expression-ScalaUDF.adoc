@@ -109,6 +109,9 @@ scala> q.show
 +-----------+
 ----
 
+[[deterministic]]
+`ScalaUDF` is <<spark-sql-Expression.adoc#deterministic, deterministic>> when the given <<udfDeterministic, udfDeterministic>> flag is enabled (`true`) and all the <<children, children expressions>> are deterministic.
+
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 
 [source, scala]
@@ -138,9 +141,9 @@ NOTE: `eval` is part of <<spark-sql-Expression.adoc#eval, Expression Contract>> 
 * [[function]] A Scala function (as Scala's `AnyRef`)
 * [[dataType]] Output link:spark-sql-DataType.adoc[data type]
 * [[children]] Child link:spark-sql-Expression.adoc[Catalyst expressions]
-* [[inputTypes]] Input link:spark-sql-DataType.adoc[data types] (if available)
-* [[udfName]] Name (if defined)
-* [[nullable]] `nullable` flag (turned on by default)
-* [[udfDeterministic]] `udfDeterministic` flag (turned on by default)
+* [[inputTypes]] Input link:spark-sql-DataType.adoc[data types] (default: `Nil`)
+* [[udfName]] Optional name (default: `None`)
+* [[nullable]] `nullable` flag (default: `true`)
+* [[udfDeterministic]] `udfDeterministic` flag (default: `true`)
 
 `ScalaUDF` initializes the <<internal-registries, internal registries and counters>>.
