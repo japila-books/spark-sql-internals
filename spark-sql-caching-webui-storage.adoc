@@ -1,11 +1,11 @@
 == User-Friendly Names Of Cached Queries in web UI's Storage Tab
 
-As you may have noticed, web UI's Storage tab displays some link:spark-sql-caching.adoc#cache[cached queries] with user-friendly RDD names (e.g. "In-memory table [name]") while others not (e.g. "Scan JDBCRelation...").
+As you may have noticed, web UI's Storage tab displays some link:spark-sql-caching-and-persistence.adoc#cache[cached queries] with user-friendly RDD names (e.g. "In-memory table [name]") while others not (e.g. "Scan JDBCRelation...").
 
 .Cached Queries in web UI (Storage Tab)
 image::images/spark-sql-caching-webui-storage.png[align="center"]
 
-"In-memory table [name]" RDD names are the result of SQL's link:spark-sql-caching.adoc#cache-table[CACHE TABLE] or when `Catalog` is requested to link:spark-sql-Catalog.adoc#cacheTable[cache a table].
+"In-memory table [name]" RDD names are the result of SQL's link:spark-sql-caching-and-persistence.adoc#cache-table[CACHE TABLE] or when `Catalog` is requested to link:spark-sql-Catalog.adoc#cacheTable[cache a table].
 
 [source, scala]
 ----
@@ -41,7 +41,7 @@ spark.sharedState.cacheManager.cacheQuery(ds, Some("twenty"))
 ds.head
 ----
 
-The other RDD names are due to link:spark-sql-caching.adoc#cache[caching a Dataset].
+The other RDD names are due to link:spark-sql-caching-and-persistence.adoc#cache[caching a Dataset].
 
 [source, scala]
 ----

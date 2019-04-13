@@ -146,7 +146,7 @@ persist(newLevel: StorageLevel): this.type
 ----
 <1> Assumes the default storage level `MEMORY_AND_DISK`
 
-Marks the `Dataset` to be <<spark-sql-caching.adoc#, persisted>> the next time an action is executed
+Marks the `Dataset` to be <<spark-sql-caching-and-persistence.adoc#, persisted>> the next time an action is executed
 
 Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.adoc#cacheQuery, cache the structured query>>.
 

@@ -31,7 +31,7 @@ cacheTable(tableName: String, storageLevel: StorageLevel): Unit
 
 Caches the specified table in memory
 
-Used for SQL's link:spark-sql-caching.adoc#cache-table[CACHE TABLE] and `AlterTableRenameCommand` command.
+Used for SQL's link:spark-sql-caching-and-persistence.adoc#cache-table[CACHE TABLE] and `AlterTableRenameCommand` command.
 
 | clearCache
 a| [[clearCache]]

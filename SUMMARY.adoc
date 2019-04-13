@@ -97,7 +97,7 @@
 
 . link:spark-sql-multi-dimensional-aggregation.adoc[Multi-Dimensional Aggregation]
 
-. link:spark-sql-caching.adoc[Dataset Caching and Persistence]
+. link:spark-sql-caching-and-persistence.adoc[Dataset Caching and Persistence]
 .. link:spark-sql-caching-webui-storage.adoc[User-Friendly Names Of Cached Queries in web UI's Storage Tab]
 
 . link:spark-sql-checkpointing.adoc[Dataset Checkpointing]

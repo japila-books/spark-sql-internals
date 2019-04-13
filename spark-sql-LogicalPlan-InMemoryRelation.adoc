@@ -14,7 +14,7 @@ NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory metho
 
 `InMemoryRelation` is <<apply, created>> when:
 
-* link:spark-sql-caching.adoc#persist[Dataset.persist] operator is used (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache a structured query])
+* link:spark-sql-caching-and-persistence.adoc#persist[Dataset.persist] operator is used (and in turn requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache a structured query])
 
 * `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#cacheTable[cache a table or view in-memory] or link:spark-sql-CatalogImpl.adoc#refreshTable[refreshTable]
 
