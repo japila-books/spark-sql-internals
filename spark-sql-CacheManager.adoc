@@ -1,6 +1,6 @@
 == [[CacheManager]] CacheManager -- In-Memory Cache for Tables and Views
 
-`CacheManager` is an in-memory cache for tables and views (as link:spark-sql-LogicalPlan.adoc[logical plans]). It uses the internal <<cachedData, cachedData>> collection of <<CachedData, CachedData>> to track logical plans and their cached link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] representation.
+`CacheManager` is an in-memory cache (_registry_) for structured queries (by their link:spark-sql-LogicalPlan.adoc[logical plans]).
 
 `CacheManager` is shared across `SparkSessions` through link:spark-sql-SparkSession.adoc#sharedState[SharedState].
 
@@ -12,13 +12,37 @@ spark.sharedState.cacheManager
 
 NOTE: A Spark developer can use `CacheManager` to cache ``Dataset``s using link:spark-sql-caching.adoc#cache[cache] or link:spark-sql-caching.adoc#persist[persist] operators.
 
-=== [[cachedData]] Cached Queries -- `cachedData` Internal Registry
+`CacheManager` uses the <<cachedData, cachedData>> internal registry to manage cached structured queries and their link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] cached representation.
 
-`cachedData` is a collection of <<CachedData, CachedData>> with link:spark-sql-LogicalPlan.adoc[logical plans] and their cached link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] representation.
+`CacheManager` <<isEmpty, can be empty>>.
 
-A new <<CachedData, CachedData>> is added when <<cacheQuery, a Dataset is cached>> and removed when a <<uncacheQuery, Dataset is uncached>> or when <<invalidateCachedPath, invalidating cache data with a resource path>>.
+[[CachedData]]
+[[plan]]
+[[cachedRepresentation]]
+`CacheManager` uses `CachedData` data structure for managing <<cachedData, cached structured queries>> with the <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (of a structured query) and a corresponding <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operator.
 
-`cachedData` is <<clearCache, cleared>> when...FIXME
+=== [[cachedData]] Cached Structured Queries -- `cachedData` Internal Registry
+
+[source, scala]
+----
+cachedData: LinkedList[CachedData]
+----
+
+`cachedData` is a collection of <<CachedData, CachedData>>.
+
+A new `CachedData` added when `CacheManager` is requested to:
+
+* <<cacheQuery, cacheQuery>>
+
+* <<recacheByCondition, recacheByCondition>>
+
+A `CachedData` removed when `CacheManager` is requested to:
+
+* <<uncacheQuery, uncacheQuery>>
+
+* <<recacheByCondition, recacheByCondition>>
+
+All `CachedData` removed (cleared) when `CacheManager` is requested to <<clearCache, clearCache>>
 
 === [[invalidateCachedPath]] `invalidateCachedPath` Method
 
@@ -40,7 +64,7 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[cacheQuery]] Caching Dataset (Registering Analyzed Logical Plan as InMemoryRelation) -- `cacheQuery` Method
+=== [[cacheQuery]] Caching Structured Query (Registering Analyzed Logical Plan as InMemoryRelation) -- `cacheQuery` Method
 
 [source, scala]
 ----
@@ -83,7 +107,7 @@ WARN CacheManager: Asked to cache already cached data.
 * `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#cacheTable, cache a table or view in-memory>> or <<spark-sql-CatalogImpl.adoc#refreshTable, refresh a table>>
 ====
 
-=== [[clearCache]] Removing All Cached Tables From In-Memory Cache -- `clearCache` Method
+=== [[clearCache]] Removing All Cached Tables (From In-Memory Cache) -- `clearCache` Method
 
 [source, scala]
 ----
@@ -94,11 +118,7 @@ clearCache(): Unit
 
 NOTE: `clearCache` is used when the `CatalogImpl` is requested to link:spark-sql-Catalog.adoc#contract[clearCache].
 
-=== [[CachedData]] CachedData
-
-CAUTION: FIXME
-
-=== [[recacheByCondition]] `recacheByCondition` Internal Method
+=== [[recacheByCondition]] Re-Caching Structured Query -- `recacheByCondition` Internal Method
 
 [source, scala]
 ----
@@ -107,7 +127,7 @@ recacheByCondition(spark: SparkSession, condition: LogicalPlan => Boolean): Unit
 
 `recacheByCondition`...FIXME
 
-NOTE: `recacheByCondition` is used when `CacheManager` is requested to <<recacheByPlan, recacheByPlan>> or <<recacheByPath, recacheByPath>>.
+NOTE: `recacheByCondition` is used when `CacheManager` is requested to <<uncacheQuery, uncache a structured query>>, <<recacheByPlan, recacheByPlan>>, and <<recacheByPath, recacheByPath>>.
 
 === [[recacheByPlan]] `recacheByPlan` Method
 
@@ -131,7 +151,7 @@ recacheByPath(spark: SparkSession, resourcePath: String): Unit
 
 NOTE: `recacheByPath` is used exclusively when `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshByPath[refreshByPath].
 
-=== [[useCachedData]] Replacing Logical Query Segments With Cached Query Plans -- `useCachedData` Method
+=== [[useCachedData]] Replacing Segments of Logical Query Plan With Cached Data -- `useCachedData` Method
 
 [source, scala]
 ----

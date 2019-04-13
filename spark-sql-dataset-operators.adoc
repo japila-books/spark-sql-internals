@@ -544,6 +544,8 @@ persist(newLevel: StorageLevel): this.type
 
 A basic action to persist the `Dataset`
 
+NOTE: Although its category `persist` is not an action in the common sense that means executing _anything_ in a Spark cluster (i.e. execution on the driver or on executors). It acts only as a marker to perform Dataset persistence once an action is really executed.
+
 | <<spark-sql-Dataset-basic-actions.adoc#printSchema, printSchema>>
 a| [[printSchema]]
 

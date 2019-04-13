@@ -1,25 +1,25 @@
 == Dataset API -- Basic Actions
 
-*Basic actions* are part of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
+*Basic actions* are a group of operators (_methods_) of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
 
 NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
 [[methods]]
 .Dataset API's Basic Actions
-[cols="1,2",options="header",width="100%"]
+[cols="1,3",options="header",width="100%"]
 |===
 | Action
 | Description
 
-| <<cache, cache>>
-a|
+| `cache`
+a| [[cache]]
 
 [source, scala]
 ----
 cache(): this.type
 ----
 
-Caches the `Dataset`
+Marks the `Dataset` to be persisted (_cached_) and is actually a synonym of <<spark-sql-dataset-operators.adoc#persist, persist>> basic action
 
 | <<checkpoint, checkpoint>>
 a|
@@ -136,16 +136,21 @@ localCheckpoint(eager: Boolean): Dataset[T]
 
 Checkpoints the `Dataset` locally on executors (and therefore unreliably)
 
-| <<persist, persist>>
-a|
+| `persist`
+a| [[persist]]
 
 [source, scala]
 ----
-persist(): this.type
+persist(): this.type // <1>
 persist(newLevel: StorageLevel): this.type
 ----
+<1> Assumes the default storage level `MEMORY_AND_DISK`
 
-Persists the `Dataset`
+Marks the `Dataset` to be <<spark-sql-caching.adoc#, persisted>> the next time an action is executed
+
+Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.adoc#cacheQuery, cache the structured query>>.
+
+NOTE: `persist` uses the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>> from the <<spark-sql-SparkSession.adoc#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|
@@ -209,20 +214,6 @@ write: DataFrameWriter[T]
 
 Returns a <<spark-sql-DataFrameWriter.adoc#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
 |===
-
-=== [[cache]] Caching Dataset -- `cache` Basic Action
-
-[source, scala]
-----
-cache(): this.type
-----
-
-`cache` merely executes the no-argument <<spark-sql-dataset-operators.adoc#persist, persist>> basic action.
-
-[source, scala]
-----
-val ds = spark.range(5).cache
-----
 
 === [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Basic Action
 
@@ -405,20 +396,6 @@ With `eager` flag on, `checkpoint` counts the number of records in the RDD (by e
 In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
 NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
-
-=== [[persist]] Persisting Dataset -- `persist` Basic Action
-
-[source, scala]
-----
-persist(): this.type
-persist(newLevel: StorageLevel): this.type
-----
-
-`persist` caches the `Dataset` using the default storage level `MEMORY_AND_DISK` or `newLevel` and returns it.
-
-Internally, `persist` requests `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache the structured query] (that is accessible through link:spark-sql-SharedState.adoc[SharedState] of the current link:spark-sql-SparkSession.adoc[SparkSession]).
-
-CAUTION: FIXME
 
 === [[rdd]] Generating RDD of Internal Binary Rows -- `rdd` Basic Action
 

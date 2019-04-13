@@ -1,6 +1,16 @@
 == [[InMemoryRelation]] InMemoryRelation Leaf Logical Operator For Cached Physical Query Plans
 
-`InMemoryRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a cached <<child, child>> physical query plan.
+`InMemoryRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a cached <<child, physical query plan>>.
+
+[[creating-instance]]
+`InMemoryRelation` takes the following to be created:
+
+* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[cacheBuilder]] `CachedRDDBuilder`
+* [[statsOfPlanToCache]] link:spark-sql-Statistics.adoc[Statistics] of the <<child, child>> query plan
+* [[outputOrdering]] Output <<spark-sql-Expression-SortOrder.adoc#, orderings>> (`Seq[SortOrder]`)
+
+NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory methods.
 
 `InMemoryRelation` is <<apply, created>> when:
 
@@ -76,21 +86,7 @@ scala> optimizedPlan.children(0).sameResult(optimizedPlan.children(1))
 res1: Boolean = true
 ----
 
-[[apply]]
-[NOTE]
-====
-`InMemoryRelation` is <<creating-instance, created>> using `apply` factory method that accepts no <<output, output attributes>> and so uses the `output` of the <<child, child>> physical plan instead.
-
-[source, scala]
-----
-apply(
-  useCompression: Boolean,
-  batchSize: Int,
-  storageLevel: StorageLevel,
-  child: SparkPlan,
-  tableName: Option[String]): InMemoryRelation
-----
-====
+NOTE: `InMemoryRelation` is resolved to <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#, InMemoryTableScanExec>> leaf physical operator when <<spark-sql-SparkStrategy-InMemoryScans.adoc#, InMemoryScans>> execution planning strategy is executed.
 
 [[internal-registries]]
 .InMemoryRelation's Internal Properties (e.g. Registries, Counters and Flags)
@@ -115,20 +111,6 @@ computeStats(): Statistics
 NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
 
 `computeStats`...FIXME
-
-=== [[creating-instance]] Creating InMemoryRelation Instance
-
-`InMemoryRelation` takes the following when created:
-
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[useCompression]] `useCompression` flag
-* [[batchSize]] Batch size
-* [[storageLevel]] Storage level
-* [[child]] Child link:spark-sql-SparkPlan.adoc[physical query plan]
-* [[tableName]] Table name (if used)
-* [[_cachedColumnBuffers]] Cached column buffers (as `RDD[CachedBatch]`)
-* [[sizeInBytesStats]] Size in bytes statistic (as `LongAccumulator`)
-* [[statsOfPlanToCache]] link:spark-sql-Statistics.adoc[Statistics] of the <<child, child>> query plan
 
 === [[withOutput]] `withOutput` Method
 
@@ -175,3 +157,23 @@ NOTE: `PartitionStatistics` is a `private[columnar]` class.
 `PartitionStatistics`...FIXME
 
 NOTE: `PartitionStatistics` is used exclusively when `InMemoryRelation` is <<creating-instance, created>> (and initializes <<partitionStatistics, partitionStatistics>>).
+
+=== [[apply]] Creating InMemoryRelation Instance -- `apply` Factory Methods
+
+[source, scala]
+----
+apply(
+  useCompression: Boolean,
+  batchSize: Int,
+  storageLevel: StorageLevel,
+  child: SparkPlan,
+  tableName: Option[String],
+  logicalPlan: LogicalPlan): InMemoryRelation
+apply(
+  cacheBuilder: CachedRDDBuilder,
+  logicalPlan: LogicalPlan): InMemoryRelation
+----
+
+`apply` creates an <<InMemoryRelation, InMemoryRelation>> logical operator.
+
+NOTE: `apply` is used when `CacheManager` is requested to <<spark-sql-CacheManager.adoc#cacheQuery, cache>> and <<spark-sql-CacheManager.adoc#recacheByCondition, re-cache>> a structured query.

@@ -26,7 +26,7 @@ val qe = new QueryExecution(sparkSession, plan)
 [[attributes]]
 [[execution-pipeline]]
 [[query-plan-lifecycle]]
-.QueryExecution's Properties (aka Structured Query Execution Pipeline)
+.QueryExecution's Properties (aka QueryExecution Phases / Structured Query Execution Pipeline)
 [cols="1m,3",options="header",width="100%"]
 |===
 | Attribute / Phase
@@ -40,7 +40,7 @@ TIP: Beside `analyzed`, you can use link:spark-sql-dataset-operators.adoc#explai
 | withCachedData
 | [[withCachedData]] <<analyzed, analyzed>> logical plan after `CacheManager` was requested to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans].
 
-`withCachedData` makes sure that the logical plan <<assertAnalyzed, can be analyzed>> and <<assertSupported, uses supported operations only>>.
+`withCachedData` makes sure that the logical plan was <<assertAnalyzed, analyzed>> and <<assertSupported, uses supported operations only>>.
 
 | optimizedPlan
 | [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
