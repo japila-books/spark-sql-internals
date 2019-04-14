@@ -43,7 +43,6 @@ The link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple text representati
 ----
 val q = spark.read.text("README.md")
 val logicalPlan = q.queryExecution.logical
-
 scala> println(logicalPlan.simpleString)
 Relation[value#2] text
 ----

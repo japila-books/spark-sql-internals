@@ -139,6 +139,7 @@
 . link:spark-sql-SharedState.adoc[SharedState -- State Shared Across SparkSessions]
 
 . link:spark-sql-CacheManager.adoc[CacheManager -- In-Memory Cache for Tables and Views]
+.. link:spark-sql-CachedRDDBuilder.adoc[CachedRDDBuilder]
 
 . link:spark-sql-RuntimeConfig.adoc[RuntimeConfig -- Management Interface of Runtime Configuration]
 

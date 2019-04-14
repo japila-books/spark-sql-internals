@@ -1,12 +1,19 @@
 == [[InMemoryTableScanExec]] InMemoryTableScanExec Leaf Physical Operator
 
-`InMemoryTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] to represent an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator at execution time.
+`InMemoryTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] that represents an <<relation, InMemoryRelation>> logical operator at execution time.
+
+`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when `InMemoryScans` execution planning strategy is link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[executed] and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
+
+[[creating-instance]]
+`InMemoryTableScanExec` takes the following to be created:
+
+* [[attributes]] link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
+* [[predicates]] Predicate link:spark-sql-Expression.adoc[expressions]
+* [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
 
 `InMemoryTableScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
 
 `InMemoryTableScanExec` supports <<filteredCachedBatches, partition batch pruning>> (only when link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is enabled which is so by default).
-
-`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when `InMemoryScans` execution planning strategy is link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[executed] and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
 
 [source, scala]
 ----
@@ -91,16 +98,6 @@ Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompr
 
 Used when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>, <<filteredCachedBatches, partition batch pruning>> and <<statsFor, statsFor>>.
 |===
-
-=== [[creating-instance]] Creating InMemoryTableScanExec Instance
-
-`InMemoryTableScanExec` takes the following when created:
-
-* [[attributes]] link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
-* [[predicates]] Predicate link:spark-sql-Expression.adoc[expressions]
-* [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
-
-`InMemoryTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[vectorTypes]] `vectorTypes` Method
 
