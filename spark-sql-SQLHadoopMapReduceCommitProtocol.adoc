@@ -1,0 +1,3 @@
+== [[SQLHadoopMapReduceCommitProtocol]] SQLHadoopMapReduceCommitProtocol
+
+`SQLHadoopMapReduceCommitProtocol` is...FIXME

@@ -1,0 +1,189 @@
+== [[FileCommitProtocol]] FileCommitProtocol Contract
+
+`FileCommitProtocol` is the <<contract, abstraction>> of <<implementations, FIXME>> that can <<FIXME, FIXME>>.
+
+[[contract]]
+.FileCommitProtocol Contract
+[cols="1m,3",options="header",width="100%"]
+|===
+| Method
+| Description
+
+| abortJob
+a| [[abortJob]]
+
+[source, scala]
+----
+abortJob(jobContext: JobContext): Unit
+----
+
+Used when...FIXME
+
+| abortTask
+a| [[abortTask]]
+
+[source, scala]
+----
+abortTask(taskContext: TaskAttemptContext): Unit
+----
+
+Used when...FIXME
+
+| commitJob
+a| [[commitJob]]
+
+[source, scala]
+----
+commitJob(
+  jobContext: JobContext,
+  taskCommits: Seq[TaskCommitMessage]): Unit
+----
+
+Used when...FIXME
+
+| commitTask
+a| [[commitTask]]
+
+[source, scala]
+----
+commitTask(taskContext: TaskAttemptContext): TaskCommitMessage
+----
+
+Used when...FIXME
+
+| newTaskTempFile
+a| [[newTaskTempFile]]
+
+[source, scala]
+----
+newTaskTempFile(
+  taskContext: TaskAttemptContext,
+  dir: Option[String],
+  ext: String): String
+----
+
+Used when...FIXME
+
+| newTaskTempFileAbsPath
+a| [[newTaskTempFileAbsPath]]
+
+[source, scala]
+----
+newTaskTempFileAbsPath(
+  taskContext: TaskAttemptContext,
+  absoluteDir: String,
+  ext: String): String
+----
+
+Used when...FIXME
+
+| onTaskCommit
+a| [[onTaskCommit]]
+
+[source, scala]
+----
+onTaskCommit(taskCommit: TaskCommitMessage): Unit = {}
+----
+
+Used when...FIXME
+
+| setupJob
+a| [[setupJob]]
+
+[source, scala]
+----
+setupJob(jobContext: JobContext): Unit
+----
+
+Used when...FIXME
+
+| setupTask
+a| [[setupTask]]
+
+[source, scala]
+----
+setupTask(taskContext: TaskAttemptContext): Unit
+----
+
+Used when...FIXME
+
+| setupJob
+a| [[setupJob]]
+
+[source, scala]
+----
+setupJob(jobContext: JobContext): Unit
+----
+
+Used when...FIXME
+
+|===
+
+[[implementations]]
+.FileCommitProtocols (Direct Implementations and Extensions)
+[cols="1,3",options="header",width="100%"]
+|===
+| FileCommitProtocol
+| Description
+
+| HadoopMapReduceCommitProtocol
+| [[HadoopMapReduceCommitProtocol]]
+
+| ManifestFileCommitProtocol
+| [[ManifestFileCommitProtocol]]
+
+|===
+
+[[logging]]
+[TIP]
+====
+Enable `ALL` logging level for `org.apache.spark.internal.io.FileCommitProtocol` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.internal.io.FileCommitProtocol=ALL
+```
+
+Refer to <<spark-logging.adoc#, Logging>>.
+====
+
+=== [[instantiate]] Creating FileCommitProtocol Instance (Given Class Name) -- `instantiate` Object Method
+
+[source, scala]
+----
+instantiate(
+  className: String,
+  jobId: String,
+  outputPath: String,
+  dynamicPartitionOverwrite: Boolean = false): FileCommitProtocol
+----
+
+`instantiate` prints out the following DEBUG message to the logs:
+
+```
+Creating committer [className]; job [jobId]; output=[outputPath]; dynamic=[dynamicPartitionOverwrite]
+```
+
+`instantiate` creates an instance of `FileCommitProtocol` for the given fully-qualified `className` using either 3-argument or 2-argument constructor and prints out the following DEBUG messages to the logs per the argument variant:
+
+```
+Using (String, String, Boolean) constructor
+```
+
+```
+Falling back to (String, String) constructor
+```
+
+[NOTE]
+====
+`instantiate` is used when:
+
+* `InsertIntoHadoopFsRelationCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run, executed>>
+
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
+
+* `HadoopMapRedWriteConfigUtil` and `HadoopMapReduceWriteConfigUtil` are requested to `createCommitter`
+
+* Spark Structured Streaming's `FileStreamSink` is requested to `addBatch`
+====

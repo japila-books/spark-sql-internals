@@ -203,6 +203,9 @@
 
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 
+. link:spark-sql-FileCommitProtocol.adoc[FileCommitProtocol]
+.. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
+
 === Kafka Data Source
 
 . link:spark-sql-kafka.adoc[Kafka Data Source]
@@ -404,10 +407,12 @@
 
 === Logical Operators
 
+==== Base Logical Operators (Contracts)
+
 . link:spark-sql-LogicalPlan.adoc[LogicalPlan Contract -- Logical Operator with Children and Expressions / Logical Query Plan]
 . link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
-. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Data]
+. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Query Data]
 . link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract -- DataWritingCommands That Write Query Result As Hive Files]
 
 ==== Concrete Logical Operators
