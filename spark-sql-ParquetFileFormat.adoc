@@ -37,17 +37,67 @@ spark.read.schema(schema).load("parquet-datasets")
 
 . All the fields in the output schema are of link:spark-sql-DataType.adoc#AtomicType[AtomicType]
 
+`ParquetFileFormat` supports *filter predicate push-down optimization* (via <<createFilter, createFilter>>) as per the following <<ParquetFilters, table>>.
+
+[[ParquetFilters]]
+.Spark Data Source Filters to Parquet Filter Predicates Conversions (aka `ParquetFilters.createFilter`)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Data Source Filter
+| Parquet FilterPredicate
+
+| IsNull
+| [[IsNull]] `FilterApi.eq`
+
+| IsNotNull
+| [[IsNotNull]] `FilterApi.notEq`
+
+| EqualTo
+| [[EqualTo]] `FilterApi.eq`
+
+| Not EqualTo
+| [[NotEqualTo]] `FilterApi.notEq`
+
+| EqualNullSafe
+| [[EqualNullSafe]] `FilterApi.eq`
+
+| Not EqualNullSafe
+| [[NotEqualNullSafe]] `FilterApi.notEq`
+
+| LessThan
+| [[LessThan]] `FilterApi.lt`
+
+| LessThanOrEqual
+| [[LessThanOrEqual]] `FilterApi.ltEq`
+
+| GreaterThan
+| [[GreaterThan]] `FilterApi.gt`
+
+| GreaterThanOrEqual
+| [[GreaterThanOrEqual]] `FilterApi.gtEq`
+
+| And
+| [[And]] `FilterApi.and`
+
+| Or
+| [[Or]] `FilterApi.or`
+
+| No
+| [[Not]] `FilterApi.not`
+|===
+
+[[logging]]
 [TIP]
 ====
-Enable `DEBUG` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat` logger to see what happens inside.
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
 ```
-log4j.logger.org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat=DEBUG
+log4j.logger.org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat=ALL
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to <<spark-logging.adoc#, Logging>>.
 ====
 
 === [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
@@ -138,59 +188,11 @@ NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc
 
 `buildReaderWithPartitionValues` tries to push filters down to create a Parquet `FilterPredicate` (aka `pushed`).
 
-NOTE: Filter predicate push-down optimization for parquet data sources uses link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property which is enabled by default.
+NOTE: Filter predicate push-down optimization for parquet data sources uses link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property (default: enabled).
 
-With link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the table). Otherwise, the Parquet filter predicate is not specified.
+With link:spark-sql-properties.adoc#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the <<ParquetFilters, table>>). Otherwise, the Parquet filter predicate is not specified.
 
 NOTE: `buildReaderWithPartitionValues` creates filter predicates for the following types: link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType], link:spark-sql-DataType.adoc#StringType[StringType], link:spark-sql-DataType.adoc#BinaryType[BinaryType].
-
-[[ParquetFilters]]
-[[createFilter]]
-.Spark Data Source Filters to Parquet Filter Predicates Conversions (aka ParquetFilters.createFilter)
-[cols="1,2",options="header",width="100%"]
-|===
-| Data Source Filter
-| Parquet FilterPredicate
-
-| [[IsNull]] `IsNull`
-| `FilterApi.eq`
-
-| [[IsNotNull]] `IsNotNull`
-| `FilterApi.notEq`
-
-| [[EqualTo]] `EqualTo`
-| `FilterApi.eq`
-
-| [[NotEqualTo]] `Not EqualTo`
-| `FilterApi.notEq`
-
-| [[EqualNullSafe]] `EqualNullSafe`
-| `FilterApi.eq`
-
-| [[NotEqualNullSafe]] `Not EqualNullSafe`
-| `FilterApi.notEq`
-
-| [[LessThan]] `LessThan`
-| `FilterApi.lt`
-
-| [[LessThanOrEqual]] `LessThanOrEqual`
-| `FilterApi.ltEq`
-
-| [[GreaterThan]] `GreaterThan`
-| `FilterApi.gt`
-
-| [[GreaterThanOrEqual]] `GreaterThanOrEqual`
-| `FilterApi.gtEq`
-
-| [[And]] `And`
-| `FilterApi.and`
-
-| [[Or]] `Or`
-| `FilterApi.or`
-
-| [[Not]] `Not`
-| `FilterApi.not`
-|===
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
 
