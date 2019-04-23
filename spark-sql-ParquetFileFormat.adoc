@@ -1,7 +1,7 @@
 == [[ParquetFileFormat]] ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is a link:spark-sql-FileFormat.adoc[FileFormat] for data sources in *parquet* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).
+`ParquetFileFormat` is the link:spark-sql-FileFormat.adoc[FileFormat] for *parquet* data source (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).
 
 NOTE: `parquet` is the link:spark-sql-DataFrameReader.adoc#source[default data source format] in Spark SQL.
 
@@ -16,6 +16,7 @@ val schema = StructType($"id".int :: Nil)
 
 spark.read.schema(schema).format("parquet").load("parquet-datasets")
 
+// The above is equivalent to the following shortcut
 // Implicitly does format("parquet").load
 spark.read.schema(schema).parquet("parquet-datasets")
 
@@ -133,12 +134,19 @@ NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFo
 
 [source, scala]
 ----
-vectorTypes: Option[Seq[String]]
+vectorTypes(
+  requiredSchema: StructType,
+  partitionSchema: StructType,
+  sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-NOTE: `vectorTypes` is part of link:spark-sql-ColumnarBatchScan.adoc#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
+NOTE: `vectorTypes` is part of link:spark-sql-FileFormat.adoc#vectorTypes[FileFormat Contract] to define the concrete column vector class names for each column used in a columnar batch when <<supportBatch, enabled>>.
 
-`vectorTypes`...FIXME
+`vectorTypes` creates a collection of the names of <<spark-sql-OffHeapColumnVector.adoc#, OffHeapColumnVector>> or <<spark-sql-OnHeapColumnVector.adoc#, OnHeapColumnVector>> when <<spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is enabled or disabled, respectively.
+
+NOTE: <<spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is disabled (`false`) by default.
+
+The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
 === [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 

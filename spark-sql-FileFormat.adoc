@@ -132,11 +132,11 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-`vectorTypes` is the concrete column vector class names for each column to be used in a columnar batch when <<supportBatch, enabled>>
+Defines the fully-qualified class names (_types_) of the concrete <<spark-sql-ColumnVector.adoc#, ColumnVectors>> for every column in the input `requiredSchema` and `partitionSchema` schemas that are used in a columnar batch.
 
-`vectorTypes` is undefined (`None`) by default.
+Default: undefined (`None`)
 
-Used exclusively when `FileSourceScanExec` physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes, vectorTypes>>
+Used exclusively when `FileSourceScanExec` leaf physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#vectorTypes, vectorTypes>>
 |===
 
 [[implementations]]

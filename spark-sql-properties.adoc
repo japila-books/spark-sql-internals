@@ -180,7 +180,7 @@ Default: `true`
 Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] method to access the current value.
 
 | spark.sql.columnVector.offheap.enabled
-| [[spark.sql.columnVector.offheap.enabled]] *(internal)* Enables link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] in link:spark-sql-ColumnarBatch.adoc[ColumnarBatch] (`true`) or not (`false`). When disabled, link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used instead.
+| [[spark.sql.columnVector.offheap.enabled]] *(internal)* Enables link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector] in link:spark-sql-ColumnarBatch.adoc[ColumnarBatch] (`true`) or not (`false`). When `false`, link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used instead.
 
 Default: `false`
 

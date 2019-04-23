@@ -302,15 +302,15 @@ while (scan_mutableStateArray[2].hasNext()) {
 
 NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>> (when <<supportsBatch, supportsBatch>> flag is off).
 
-=== [[vectorTypes]] `vectorTypes` Method
+=== [[vectorTypes]] Fully-Qualified Class Names (Types) of Concrete ColumnVectors -- `vectorTypes` Method
 
 [source, scala]
 ----
 vectorTypes: Option[Seq[String]] = None
 ----
 
-`vectorTypes` are the class names of concrete link:spark-sql-ColumnVector.adoc[ColumnVectors] for every column used in a columnar batch.
+`vectorTypes` defines the fully-qualified class names (_types_) of the concrete <<spark-sql-ColumnVector.adoc#, ColumnVectors>> for every column used in a columnar batch.
 
-`vectorTypes` gives no vector types by default.
+`vectorTypes` gives no vector types by default (`None`).
 
 NOTE: `vectorTypes` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.

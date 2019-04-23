@@ -253,7 +253,7 @@ a| [[numShufflePartitions]] Used in:
 | link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
 a| [[offHeapColumnVectorEnabled]] Used when:
 
-* `InMemoryTableScanExec` is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#vectorTypes[vectorTypes] and link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
+* `InMemoryTableScanExec` is requested for the link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#vectorTypes[vectorTypes] and the link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#inputRDD[input RDD]
 
 * `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 

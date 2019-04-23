@@ -338,7 +338,7 @@ Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
 
 NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecute, executed>> (and <<supportsBatch, supportsBatch>> flag is off).
 
-==== [[vectorTypes]] Requesting Concrete ColumnVector Class Names -- `vectorTypes` Method
+==== [[vectorTypes]] Fully-Qualified Class Names (Types) of Concrete ColumnVectors -- `vectorTypes` Method
 
 [source, scala]
 ----
