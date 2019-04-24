@@ -4,11 +4,21 @@
 
 NOTE: `ShuffledRowRDD` looks like link:spark-rdd-ShuffledRDD.adoc[ShuffledRDD], and the difference is in the type of the values to process, i.e. link:spark-sql-InternalRow.adoc[InternalRow] and `(K, C)` key-value pairs, respectively.
 
-`ShuffledRowRDD` takes a link:spark-rdd-ShuffleDependency.adoc[ShuffleDependency] (of integer keys and link:spark-sql-InternalRow.adoc[InternalRow] values).
+`ShuffledRowRDD` is <<creating-instance, created>> when:
+
+* `ShuffleExchangeExec` physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#preparePostShuffleRDD, preparePostShuffleRDD>>
+
+* `CollectLimitExec` and `TakeOrderedAndProjectExec` physical operators are requested to `doExecute`
+
+[[creating-instance]]
+`ShuffledRowRDD` takes the following to be created:
+
+* [[dependency]] `ShuffleDependency[Int, InternalRow, InternalRow]`
+* [[specifiedPartitionStartIndices]] Optional *partition start indices* (`Option[Array[Int]]` , default: `None`)
 
 NOTE: The `dependency` property is mutable and is of type `ShuffleDependency[Int, InternalRow, InternalRow]`.
 
-`ShuffledRowRDD` takes an optional `specifiedPartitionStartIndices` collection of integers that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the link:spark-rdd-Partitioner.adoc[Partitioner] of the input `ShuffleDependency`.
+`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the link:spark-rdd-Partitioner.adoc[Partitioner] of the input `ShuffleDependency`.
 
 NOTE: *Post-shuffle partition* is...FIXME
 

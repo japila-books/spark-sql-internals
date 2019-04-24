@@ -239,6 +239,10 @@ a| [[manageFilesourcePartitions]] Used in:
 
 * `FileStatusCache` is requested to `getOrCreate`
 
+| minNumPostShufflePartitions
+| <<spark-sql-properties.adoc#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>
+a| [[minNumPostShufflePartitions]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
+
 | numShufflePartitions
 | link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
 a| [[numShufflePartitions]] Used in:
@@ -334,6 +338,10 @@ a| [[supportQuotedRegexColumnName]] Used when:
 * <<spark-sql-Dataset-untyped-transformations.adoc#col, Dataset.col>> operator is used
 
 * `AstBuilder` is requested to parse a <<spark-sql-AstBuilder.adoc#visitDereference, dereference>> and <<spark-sql-AstBuilder.adoc#visitColumnReference, column reference>> in a SQL statement
+
+| targetPostShuffleInputSize
+| <<spark-sql-properties.adoc#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>>
+| [[targetPostShuffleInputSize]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
 
 | useCompression
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]

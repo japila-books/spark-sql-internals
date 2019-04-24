@@ -30,15 +30,15 @@ When created, `ShuffleExchangeExec` takes a `Partitioning`, a single `child` lin
 
 [[metrics]]
 .ShuffleExchangeExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
+[cols="1m,2,2",options="header",width="100%"]
 |===
 | Key
 | Name (in web UI)
 | Description
 
-| [[dataSize]] `dataSize`
+| dataSize
 | data size
-|
+| [[dataSize]]
 |===
 
 .ShuffleExchangeExec in web UI (Details for Query)
@@ -55,13 +55,13 @@ When <<doExecute, doExecute>>, `ShuffleExchangeExec` computes a link:spark-sql-S
 
 [[internal-registries]]
 .ShuffleExchangeExec's Internal Registries and Counters
-[cols="1,2",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[cachedShuffleRDD]] `cachedShuffleRDD`
-| link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] that is cached after `ShuffleExchangeExec` has been <<doExecute, executed>>.
+| cachedShuffleRDD
+| [[cachedShuffleRDD]] link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] that is cached after `ShuffleExchangeExec` has been <<doExecute, executed>>.
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
@@ -85,7 +85,23 @@ In the end, `doExecute` <<cachedShuffleRDD, saves the result `ShuffledRowRDD` fo
 
 === [[preparePostShuffleRDD]] `preparePostShuffleRDD` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+preparePostShuffleRDD(
+  shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow],
+  specifiedPartitionStartIndices: Option[Array[Int]] = None): ShuffledRowRDD
+----
+
+`preparePostShuffleRDD`...FIXME
+
+[NOTE]
+====
+`preparePostShuffleRDD` is used when:
+
+* `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.adoc#doEstimationIfNecessary, doEstimationIfNecessary>>
+
+* `ShuffleExchangeExec` physical operator is requested to <<doExecute, execute>>
+====
 
 === [[prepareShuffleDependency]] `prepareShuffleDependency` Internal Method
 
@@ -110,3 +126,14 @@ prepareShuffleDependency(
 `prepareShuffleDependency` creates a link:spark-rdd-ShuffleDependency.adoc[ShuffleDependency] dependency.
 
 NOTE: `prepareShuffleDependency` is used when `ShuffleExchangeExec` <<prepareShuffleDependency, prepares a `ShuffleDependency`>> (as part of...FIXME), `CollectLimitExec` and `TakeOrderedAndProjectExec` physical operators are executed.
+
+=== [[doPrepare]] Preparing Physical Operator for Execution -- `doPrepare` Method
+
+[source, scala]
+----
+doPrepare(): Unit
+----
+
+NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+
+`doPrepare` simply requests the <<coordinator, ExchangeCoordinator>> to <<spark-sql-ExchangeCoordinator.adoc#registerExchange, register the ShuffleExchangeExec unary physical operator>>.

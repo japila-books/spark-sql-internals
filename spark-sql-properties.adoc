@@ -47,6 +47,22 @@ Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[SQLConf.adaptiveExecutionEnabled] method to access the current value.
 
+| spark.sql.adaptive.minNumPostShufflePartitions
+a| [[spark.sql.adaptive.minNumPostShufflePartitions]] *(internal)* The advisory minimal number of post-shuffle partitions for <<spark-sql-ExchangeCoordinator.adoc#minNumPostShufflePartitions, ExchangeCoordinator>>.
+
+Default: `-1`
+
+This setting is used in Spark SQL tests to have enough parallelism to expose issues that will not be exposed with a single partition. Only positive values are used.
+
+Use link:spark-sql-SQLConf.adoc#minNumPostShufflePartitions[SQLConf.minNumPostShufflePartitions] method to access the current value.
+
+| spark.sql.adaptive.shuffle.targetPostShuffleInputSize
+a| [[spark.sql.adaptive.shuffle.targetPostShuffleInputSize]] Recommended size of the input data of a post-shuffle partition (in bytes)
+
+Default: `64 * 1024 * 1024` bytes
+
+Use link:spark-sql-SQLConf.adoc#targetPostShuffleInputSize[SQLConf.targetPostShuffleInputSize] method to access the current value.
+
 | spark.sql.allowMultipleContexts
 | [[spark.sql.allowMultipleContexts]] Controls whether creating multiple SQLContexts/HiveContexts is allowed (`true`) or not (`false`)
 

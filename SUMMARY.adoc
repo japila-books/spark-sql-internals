@@ -178,6 +178,7 @@
 . link:spark-sql-hint-framework.adoc[Hint Framework]
 
 . link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
+.. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
 
 . link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
 .. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
@@ -314,8 +315,6 @@
 ... link:spark-sql-ProjectEstimation.adoc[ProjectEstimation]
 
 . link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning -- Specification of Physical Operator's Output Partitions]
-
-. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
 
 . link:spark-sql-Distribution.adoc[Distribution Contract -- Data Distribution Across Partitions]
 .. link:spark-sql-Distribution-AllTuples.adoc[AllTuples]
