@@ -167,12 +167,12 @@ Used when `FileSourceScanExec` is requested for the <<metadata, metadata>> and <
 [[logging]]
 [TIP]
 ====
-Enable `INFO` logging level for `org.apache.spark.sql.execution.FileSourceScanExec` logger to see what happens inside.
+Enable `ALL` logging level for `org.apache.spark.sql.execution.FileSourceScanExec` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
 ```
-log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=INFO
+log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=ALL
 ```
 
 Refer to link:spark-logging.adoc[Logging].
@@ -418,3 +418,20 @@ NOTE: `outputOrdering` is part of the <<spark-sql-SparkPlan.adoc#outputOrdering,
 * All the buckets have a single file in it
 
 Otherwise, `outputOrdering` is simply empty (`Nil`).
+
+=== [[updateDriverMetrics]] `updateDriverMetrics` Internal Method
+
+[source, scala]
+----
+updateDriverMetrics(): Unit
+----
+
+`updateDriverMetrics` updates the following <<metrics, performance metrics>>:
+
+* <<numFiles, numFiles>> metric with the total of all the sizes of the files in the <<selectedPartitions, selectedPartitions>>
+
+* <<metadataTime, metadataTime>> metric with the time spent in the <<selectedPartitions, selectedPartitions>>
+
+In the end, `updateDriverMetrics` requests the `SQLMetrics` object to link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posts the metric updates].
+
+NOTE: `updateDriverMetrics` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (the very first time).
