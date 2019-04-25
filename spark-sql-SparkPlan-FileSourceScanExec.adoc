@@ -19,7 +19,10 @@ spark
   .mode("overwrite")
   .saveAsTable(tableName)
 val q = spark.table(tableName)
+
 val sparkPlan = q.queryExecution.executedPlan
+scala> :type sparkPlan
+org.apache.spark.sql.execution.SparkPlan
 
 scala> println(sparkPlan.numberedTreeString)
 00 *(1) FileScan parquet default.bucketed_4_id[id#7L,part#8L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 4 out of 4
@@ -39,6 +42,22 @@ PartitionFilters -> []
 PushedFilters -> []
 ReadSchema -> struct<id:bigint>
 SelectedBucketsCount -> 4 out of 4
+----
+
+[[inputRDDs]]
+`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs] (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
+
+When <<doExecute, executed>>, `FileSourceScanExec` operator creates a <<spark-sql-FileScanRDD.adoc#, FileScanRDD>> (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
+
+[source, scala]
+----
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
+
+val rdd = scan.execute
+scala> println(rdd.toDebugString)
+(6) MapPartitionsRDD[7] at execute at <console>:28 []
+ |  FileScanRDD[2] at execute at <console>:27 []
 ----
 
 `FileSourceScanExec` supports <<spark-sql-bucketing.adoc#bucket-pruning, bucket pruning>> so it only scans the bucket files required for a query.
@@ -72,9 +91,6 @@ Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 `FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the <<outputPartitioning, output partitioning scheme>>.
 
 `FileSourceScanExec` is a <<ColumnarBatchScan, ColumnarBatchScan>> and <<supportsBatch, supports batch decoding>> only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports it].
-
-[[inputRDDs]]
-`FileSourceScanExec` always gives the single <<inputRDD, inputRDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only RDD of internal rows] (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
 
 `FileSourceScanExec` supports <<pushedDownFilters, data source filters>> that are printed out to the console (at <<logging, INFO>> logging level) and available as <<metadata, metadata>> (e.g. in web UI or link:spark-sql-dataset-operators.adoc#explain[explain]).
 
@@ -188,9 +204,29 @@ createNonBucketedReadRDD(
   fsRelation: HadoopFsRelation): RDD[InternalRow]
 ----
 
-`createNonBucketedReadRDD`...FIXME
+`createNonBucketedReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
 
-NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, inputRDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
+* <<spark-sql-properties.adoc#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>> (default: `128m`)
+
+* <<spark-sql-properties.adoc#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>> (default: `4m`)
+
+`createNonBucketedReadRDD` sums up the size of all the files (with the extra <<spark-sql-properties.adoc#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>>) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
+
+The maximum size of partitions is then the minimum of <<spark-sql-properties.adoc#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>> and the bigger of <<spark-sql-properties.adoc#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>> and the `bytesPerCore`.
+
+`createNonBucketedReadRDD` prints out the following INFO message to the logs:
+
+```
+Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
+```
+
+For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>> (possibly split per the maximum size of partitions if the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat, FileFormat>> of the <<fsRelation, HadoopFsRelation>> is <<spark-sql-FileFormat.adoc#isSplitable, splittable>>). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+
+`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (`FilePartition`).
+
+In the end, `createNonBucketedReadRDD` creates a <<spark-sql-FileScanRDD.adoc#, FileScanRDD>> (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
+
+NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
 
 === [[selectedPartitions]] `selectedPartitions` Internal Lazy-Initialized Property
 
@@ -435,3 +471,14 @@ updateDriverMetrics(): Unit
 In the end, `updateDriverMetrics` requests the `SQLMetrics` object to link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posts the metric updates].
 
 NOTE: `updateDriverMetrics` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (the very first time).
+
+=== [[getBlockLocations]] `getBlockLocations` Internal Method
+
+[source, scala]
+----
+getBlockLocations(file: FileStatus): Array[BlockLocation]
+----
+
+`getBlockLocations` simply requests the given Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[FileStatus] for the block locations (`getBlockLocations`) if it is a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[LocatedFileStatus]. Otherwise, `getBlockLocations` returns an empty array.
+
+NOTE: `getBlockLocations` is used when `FileSourceScanExec` physical operator is requested to <<createBucketedReadRDD, createBucketedReadRDD>> and <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.

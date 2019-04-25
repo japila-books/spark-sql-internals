@@ -249,6 +249,22 @@ Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#ignoreMissingFiles[SQLConf.ignoreMissingFiles] method to access the current value.
 
+| spark.sql.files.maxPartitionBytes
+a| [[spark.sql.files.maxPartitionBytes]] The maximum number of bytes to pack into a single partition when reading files.
+
+Default: `128 * 1024 * 1024` (which corresponds to `parquet.block.size`)
+
+Use link:spark-sql-SQLConf.adoc#filesMaxPartitionBytes[SQLConf.filesMaxPartitionBytes] method to access the current value.
+
+| spark.sql.files.openCostInBytes
+a| [[spark.sql.files.openCostInBytes]] *(internal)* The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).
+
+Default: `4 * 1024 * 1024`
+
+It's better to over estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
+
+Use link:spark-sql-SQLConf.adoc#filesOpenCostInBytes[SQLConf.filesOpenCostInBytes] method to access the current value.
+
 | spark.sql.hive.convertMetastoreOrc
 a| [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
 

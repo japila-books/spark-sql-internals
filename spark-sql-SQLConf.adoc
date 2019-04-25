@@ -175,6 +175,14 @@ a| [[fileCommitProtocolClass]] Used (to instantiate a <<spark-sql-FileCommitProt
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
+| filesMaxPartitionBytes
+| <<spark-sql-properties.adoc#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>>
+a| [[filesMaxPartitionBytes]] Used exclusively when <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> leaf physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>>
+
+| filesOpenCostInBytes
+| <<spark-sql-properties.adoc#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>>
+a| [[filesOpenCostInBytes]] Used exclusively when <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> leaf physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>>
+
 | histogramEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled]
 | [[histogramEnabled]] Used exclusively when `AnalyzeColumnCommand` logical command is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed].

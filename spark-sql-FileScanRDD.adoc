@@ -1,8 +1,8 @@
 == [[FileScanRDD]] FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
 
-`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is the one and only input RDD of link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator.
+`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is used as the input RDD of a link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
 
-`FileScanRDD` is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] and link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (which is when `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] that `WholeStageCodegenExec` physical operator uses when link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`FileScanRDD` is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] or link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (when `FileSourceScanExec` operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
 [source, scala]
 ----
