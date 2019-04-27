@@ -207,7 +207,8 @@
 . link:spark-sql-FileCommitProtocol.adoc[FileCommitProtocol]
 .. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
 
-. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- Part of File in FileFormat Data Sources]
+. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- File Block in FileFormat Data Source]
+. link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 
 === Kafka Data Source
 
@@ -648,7 +649,6 @@
 
 == RDDs
 
-. link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 == Monitoring

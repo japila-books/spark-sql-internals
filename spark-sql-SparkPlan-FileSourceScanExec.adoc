@@ -225,7 +225,7 @@ Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is co
 
 For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>> (possibly split per the maximum size of partitions if the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat, FileFormat>> of the <<fsRelation, HadoopFsRelation>> is <<spark-sql-FileFormat.adoc#isSplitable, splittable>>). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
 
-`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (`FilePartition`).
+`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as <<spark-sql-FileScanRDD.adoc#FilePartition, FilePartitions>>).
 
 In the end, `createNonBucketedReadRDD` creates a <<spark-sql-FileScanRDD.adoc#, FileScanRDD>> (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
 
@@ -305,9 +305,9 @@ NOTE: Bucket ID is of the format *_0000n*, i.e. the bucket ID prefixed with up t
 
 `createBucketedReadRDD` prunes (filters out) the bucket files for the bucket IDs that are not listed in the <<optionalBucketSet, bucket IDs for bucket pruning>>.
 
-`createBucketedReadRDD` creates a `FilePartition` for every bucket ID and the (pruned) bucket `PartitionedFiles`.
+`createBucketedReadRDD` creates a <<spark-sql-FileScanRDD.adoc#FilePartition, FilePartition>> (_file block_) for every bucket ID and the (pruned) bucket `PartitionedFiles`.
 
-In the end, `createBucketedReadRDD` creates a link:spark-sql-FileScanRDD.adoc#creating-instance[FileScanRDD] (with the input `readFile` for the link:spark-sql-FileScanRDD.adoc#readFunction[read function] and the `FilePartitions` for every bucket ID for link:spark-sql-FileScanRDD.adoc#filePartitions[partitions])
+In the end, `createBucketedReadRDD` creates a link:spark-sql-FileScanRDD.adoc#creating-instance[FileScanRDD] (with the input `readFile` for the link:spark-sql-FileScanRDD.adoc#readFunction[read function] and the file blocks (`FilePartitions`) for every bucket ID for link:spark-sql-FileScanRDD.adoc#filePartitions[partitions])
 
 [TIP]
 ====

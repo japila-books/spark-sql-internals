@@ -1,6 +1,6 @@
 == [[FileScanRDD]] FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
 
-`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is used as the input RDD of a link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
+`FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is the input RDD of a link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
 
 `FileScanRDD` is <<creating-instance, created>> exclusively when `FileSourceScanExec` physical operator is requested to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[createBucketedReadRDD] or link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[createNonBucketedReadRDD] (when `FileSourceScanExec` operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD] when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
@@ -25,6 +25,11 @@ val fileScanRDD = rdd.dependencies.head.rdd
 assert(fileScanRDD.isInstanceOf[FileScanRDD])
 ----
 
+[[FilePartition]]
+[[files]]
+[[index]]
+When <<creating-instance, created>>, `FileScanRDD` is given <<filePartitions, FilePartitions>> that are custom RDD partitions with <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>> (_file blocks_).
+
 `FileScanRDD` uses the following properties when requested to <<compute, compute a partition>>:
 
 * [[ignoreCorruptFiles]] <<spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles, spark.sql.files.ignoreCorruptFiles>>
@@ -36,7 +41,7 @@ assert(fileScanRDD.isInstanceOf[FileScanRDD])
 
 * [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
 * [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (`(PartitionedFile) => Iterator[InternalRow]`)
-* [[filePartitions]] `FilePartitions`
+* [[filePartitions]] <<FilePartition, FilePartitions>> (_file blocks_)
 
 [[logging]]
 [TIP]
@@ -61,7 +66,7 @@ getPreferredLocations(split: RDDPartition): Seq[String]
 
 NOTE: `getPreferredLocations` is part of the RDD Contract to...FIXME.
 
-`getPreferredLocations` requests the given `FilePartition` (as `split`) for <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>>.
+`getPreferredLocations` requests the given <<FilePartition, FilePartition>> (`split`) for <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>>.
 
 For every `PartitionedFile`, `getPreferredLocations` add the file size to the host (location) it is available at and finally gives the top 3 hosts with the most data to be retrieved.
 
