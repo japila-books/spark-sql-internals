@@ -11,7 +11,7 @@ I offer software development and consultancy services with https://github.com/ja
 
 Consider joining me at http://www.meetup.com/WarsawScala/[Warsaw Scala Enthusiasts] and http://www.meetup.com/Warsaw-Spark[Warsaw Spark] meetups in Warsaw, Poland.
 
-TIP: I'm also writing https://bit.ly/mastering-apache-spark[Mastering Apache Spark], https://bit.ly/mastering-kafka-streams[Mastering Kafka Streams], https://bit.ly/mastering-apache-kafka[Mastering Apache Kafka] and https://bit.ly/spark-structured-streaming[The Internals of Spark Structured Streaming] gitbooks.
+TIP: I'm also writing other books in the "The Internals of" series about https://bit.ly/apache-spark-internals[Apache Spark], https://bit.ly/kafka-streams-internals[Kafka Streams], https://bit.ly/apache-kafka-internals[Apache Kafka] and https://bit.ly/spark-structured-streaming[Spark Structured Streaming].
 
 Expect text and code snippets from a variety of public sources. Attribution follows.
 
