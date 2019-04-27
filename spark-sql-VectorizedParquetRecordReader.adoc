@@ -6,7 +6,7 @@
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
+link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (`true`) by default.
 
 [source, scala]
 ----

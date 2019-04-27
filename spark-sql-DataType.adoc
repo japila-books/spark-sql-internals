@@ -15,10 +15,10 @@
 | Data Type
 | Scala Types
 
-.5+^.^| [[AtomicType]] *Atomic Types*
+.5+^.^| *Atomic Types*
 
 (except <<FractionalType, fractional>> and <<IntegralType, integral>> types)
-| [[BinaryType]] `BinaryType`
+| [[AtomicType]][[BinaryType]] `BinaryType`
 |
 
 | [[BooleanType]] `BooleanType`
