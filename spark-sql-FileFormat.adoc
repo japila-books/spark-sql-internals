@@ -115,9 +115,9 @@ supportBatch(
   dataSchema: StructType): Boolean
 ----
 
-Flag that says whether the format supports columnar batch (i.e. <<spark-sql-vectorized-parquet-reader.adoc#, vectorized decoding>>) or not.
+Flag that says whether the format supports <<spark-sql-vectorized-parquet-reader.adoc#, vectorized decoding>> (aka _columnar batch_) or not.
 
-`isSplitable` is off (`false`) by default.
+Default: `false`
 
 Used exclusively when `FileSourceScanExec` physical operator is requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>>
 

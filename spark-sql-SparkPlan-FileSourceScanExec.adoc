@@ -58,6 +58,9 @@ val rdd = scan.execute
 scala> println(rdd.toDebugString)
 (6) MapPartitionsRDD[7] at execute at <console>:28 []
  |  FileScanRDD[2] at execute at <console>:27 []
+
+import org.apache.spark.sql.execution.datasources.FileScanRDD
+assert(rdd.dependencies.head.rdd.isInstanceOf[FileScanRDD])
 ----
 
 `FileSourceScanExec` supports <<spark-sql-bucketing.adoc#bucket-pruning, bucket pruning>> so it only scans the bucket files required for a query.
@@ -343,9 +346,9 @@ supportsBatch: Boolean
 
 NOTE: `supportsBatch` is part of the link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to enable link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding].
 
-`supportsBatch` is enabled (i.e. `true`) only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized decoding].
+`supportsBatch` is enabled (i.e. `true`) only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized decoding]. Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
-Otherwise, `supportsBatch` is disabled (i.e. `false`).
+NOTE: <<spark-sql-FileFormat.adoc#, FileFormat>> does not support vectorized decoding by default (i.e. <<spark-sql-FileFormat.adoc#supportBatch, supportBatch>> flag is disabled). Only <<spark-sql-ParquetFileFormat.adoc#, ParquetFileFormat>> and <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>> have support for it under certain conditions.
 
 === [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
 
@@ -396,9 +399,11 @@ NOTE: `doExecute` is part of the <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan
 
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
-If <<supportsBatch, supportsBatch>> is on, `doExecute` creates a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance[WholeStageCodegenExec] (with link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and link:spark-sql-SparkPlan.adoc#execute[executes] it right after.
+NOTE: <<supportsBatch, supportsBatch>> flag can be enabled for <<spark-sql-ParquetFileFormat.adoc#, ParquetFileFormat>> and <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>> built-in file formats (under certain conditions).
 
-If <<supportsBatch, supportsBatch>> is off, `doExecute` creates an `unsafeRows` RDD to scan over which is different per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
+With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#child, child physical operator>> and link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#codegenStageId[codegenStageId] as `0`) and link:spark-sql-SparkPlan.adoc#execute[executes] it right after.
+
+With <<supportsBatch, supportsBatch>> flag disabled, `doExecute` creates an `unsafeRows` RDD to scan over which is different per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
 
 If <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag is on, `doExecute` takes the <<inputRDD, inputRDD>> and creates a new RDD by applying a function to each partition (using `RDD.mapPartitionsWithIndexInternal`):
 

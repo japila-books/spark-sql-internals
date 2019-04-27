@@ -13,34 +13,44 @@ import org.apache.spark.sql.execution.FileSourceScanExec
 val scan = sparkPlan.collectFirst { case exec: FileSourceScanExec => exec }.get
 val inputRDD = scan.inputRDDs.head
 
-val rdd = q.queryExecution.toRdd
+import org.apache.spark.sql.execution.datasources.FileScanRDD
+assert(inputRDD.isInstanceOf[FileScanRDD])
+
+val rdd = scan.execute
 scala> println(rdd.toDebugString)
-(1) MapPartitionsRDD[1] at toRdd at <console>:26 []
- |  FileScanRDD[0] at toRdd at <console>:26 []
+(1) MapPartitionsRDD[1] at execute at <console>:27 []
+ |  FileScanRDD[0] at inputRDDs at <console>:26 []
 
-val fileScanRDD = q.queryExecution.toRdd.dependencies.head.rdd
-
-// What FileSourceScanExec uses for the input RDD is exactly the first RDD in the lineage
-assert(inputRDD == fileScanRDD)
+val fileScanRDD = rdd.dependencies.head.rdd
+assert(fileScanRDD.isInstanceOf[FileScanRDD])
 ----
 
-[[internal-registries]]
-.FileScanRDD's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+`FileScanRDD` uses the following properties when requested to <<compute, compute a partition>>:
 
-| `ignoreCorruptFiles`
-| [[ignoreCorruptFiles]] link:spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
+* [[ignoreCorruptFiles]] <<spark-sql-properties.adoc#spark.sql.files.ignoreCorruptFiles, spark.sql.files.ignoreCorruptFiles>>
 
-Used exclusively when `FileScanRDD` is requested to <<compute, compute a partition>>
+* [[ignoreMissingFiles]] <<spark-sql-properties.adoc#spark.sql.files.ignoreMissingFiles, spark.sql.files.ignoreMissingFiles>>
 
-| `ignoreMissingFiles`
-| [[ignoreMissingFiles]] link:spark-sql-properties.adoc#spark.sql.files.ignoreMissingFiles[spark.sql.files.ignoreMissingFiles]
+[[creating-instance]]
+`FileScanRDD` takes the following to be created:
 
-Used exclusively when `FileScanRDD` is requested to <<compute, compute a partition>>
-|===
+* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (`(PartitionedFile) => Iterator[InternalRow]`)
+* [[filePartitions]] `FilePartitions`
+
+[[logging]]
+[TIP]
+====
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.FileScanRDD` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.execution.datasources.FileScanRDD=ALL
+```
+
+Refer to <<spark-logging.adoc#, Logging>>.
+====
 
 === [[getPreferredLocations]] `getPreferredLocations` Method
 
@@ -51,7 +61,9 @@ getPreferredLocations(split: RDDPartition): Seq[String]
 
 NOTE: `getPreferredLocations` is part of the RDD Contract to...FIXME.
 
-`getPreferredLocations`...FIXME
+`getPreferredLocations` requests the given `FilePartition` (as `split`) for <<spark-sql-PartitionedFile.adoc#, PartitionedFiles>>.
+
+For every `PartitionedFile`, `getPreferredLocations` add the file size to the host (location) it is available at and finally gives the top 3 hosts with the most data to be retrieved.
 
 === [[getPartitions]] `getPartitions` Method
 
@@ -62,15 +74,7 @@ getPartitions: Array[RDDPartition]
 
 NOTE: `getPartitions` is part of the RDD Contract to...FIXME.
 
-`getPartitions`...FIXME
-
-=== [[creating-instance]] Creating FileScanRDD Instance
-
-`FileScanRDD` takes the following when created:
-
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
-* [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (i.e. `(PartitionedFile) => Iterator[InternalRow]`)
-* [[filePartitions]] `FilePartitions`
+`getPartitions` simply returns the given <<filePartitions, FilePartitions>>.
 
 === [[compute]] Computing Partition (in TaskContext) -- `compute` Method
 
