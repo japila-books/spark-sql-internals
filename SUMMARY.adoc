@@ -207,6 +207,8 @@
 . link:spark-sql-FileCommitProtocol.adoc[FileCommitProtocol]
 .. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
 
+. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- Part of File in FileFormat Data Sources]
+
 === Kafka Data Source
 
 . link:spark-sql-kafka.adoc[Kafka Data Source]
@@ -757,7 +759,6 @@
 .. link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]
 .. link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
 
-. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- Part of Single File]
 . link:spark-sql-PartitioningUtils.adoc[PartitioningUtils]
 
 . link:spark-sql-ColumnVector.adoc[ColumnVector]
