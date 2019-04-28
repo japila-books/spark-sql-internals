@@ -6,38 +6,56 @@
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 . link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
-== (WIP) Data Source API V2
+== (WIP) Vectorized Parquet Decoding
 
-. link:spark-sql-DataSourceV2.adoc[DataSourceV2 -- Data Sources in Data Source API V2]
-. link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
-. link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
+. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
+. link:spark-sql-VectorizedColumnReader.adoc[VectorizedColumnReader]
+. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
 
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader Contract]
-.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters Contract -- Data Source Readers with Filter Pushdown Optimization Support]
-.. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
-.. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
-.. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
-.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
+. link:spark-sql-ColumnVector.adoc[ColumnVector]
+.. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector Contract]
+.. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
+.. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
 
-. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
+== Notable Features
 
-. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport Contract -- Data Sources with Session-Scoped Configuration Options]
+. link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Decoding (Reader)]
 
-. link:spark-sql-InputPartition.adoc[InputPartition Contract]
-. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
+. link:spark-sql-dynamic-partition-inserts.adoc[Dynamic Partition Inserts]
 
-. link:spark-sql-DataWriter.adoc[DataWriter]
+. link:spark-sql-bucketing.adoc[Bucketing]
 
-. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
-.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
+. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
+.. link:spark-sql-CodegenContext.adoc[CodegenContext]
+.. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
+... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
+... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
+... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
+... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
+.. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
-. link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
+. link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
+.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch -- ColumnVectors as Row-Wise Table]
 
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
-.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+. link:spark-sql-data-source-api-v2.adoc[Data Source API V2]
 
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask Partition Processing Function]
-. link:spark-sql-DataSourceV2Utils.adoc[DataSourceV2Utils Helper Object]
+. link:spark-sql-subqueries.adoc[Subqueries]
+
+. link:spark-sql-hint-framework.adoc[Hint Framework]
+
+. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
+.. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
+
+. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
+.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+
+. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
+.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
+.. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
+.. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
+.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
+
+. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
 
 == Developing Spark SQL Applications
 
@@ -149,49 +167,6 @@
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 
-== Notable Features
-
-. link:spark-sql-dynamic-partition-inserts.adoc[Dynamic Partition Inserts]
-
-. link:spark-sql-bucketing.adoc[Bucketing]
-
-. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
-.. link:spark-sql-CodegenContext.adoc[CodegenContext]
-.. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
-... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
-... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
-... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
-... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
-.. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
-
-. link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
-.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch -- ColumnVectors as Row-Wise Table]
-
-. link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
-.. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
-.. link:spark-sql-VectorizedColumnReader.adoc[VectorizedColumnReader]
-.. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
-
-. link:spark-sql-data-source-api-v2.adoc[Data Source API V2]
-
-. link:spark-sql-subqueries.adoc[Subqueries]
-
-. link:spark-sql-hint-framework.adoc[Hint Framework]
-
-. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
-.. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
-
-. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
-.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
-
-. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
-.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
-.. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
-.. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
-
-. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
-
 === File-Based Data Sources
 
 . link:spark-sql-FileFormat.adoc[FileFormat]
@@ -260,6 +235,39 @@
 . link:spark-sql-HiveClientImpl.adoc[HiveClientImpl -- The One and Only HiveClient]
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
+
+== Extending Spark SQL / Data Source API V2
+
+. link:spark-sql-DataSourceV2.adoc[DataSourceV2 -- Data Sources in Data Source API V2]
+. link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
+. link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
+
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader Contract]
+.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters Contract -- Data Source Readers with Filter Pushdown Optimization Support]
+.. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
+.. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
+.. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
+.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
+
+. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
+
+. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport Contract -- Data Sources with Session-Scoped Configuration Options]
+
+. link:spark-sql-InputPartition.adoc[InputPartition Contract]
+. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
+
+. link:spark-sql-DataWriter.adoc[DataWriter]
+
+. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
+.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
+
+. link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
+
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
+.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
+
+. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask Partition Processing Function]
+. link:spark-sql-DataSourceV2Utils.adoc[DataSourceV2Utils Helper Object]
 
 == Extending Spark SQL / Data Source API V1
 
@@ -761,11 +769,6 @@
 .. link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
 
 . link:spark-sql-PartitioningUtils.adoc[PartitioningUtils]
-
-. link:spark-sql-ColumnVector.adoc[ColumnVector]
-. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector]
-. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
-. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
 
 . link:spark-sql-spark-HadoopFileLinesReader.adoc[HadoopFileLinesReader]
 

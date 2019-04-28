@@ -6,7 +6,7 @@
 
 Once <<creating-instance, created>>, `VectorizedColumnReader` is requested to <<readBatch, read rows as a batch>> (when `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.adoc#nextBatch, read next rows into a columnar batch>>).
 
-`VectorizedColumnReader` is given a <<spark-sql-WritableColumnVector.adoc#, WritableColumnVector>> to store rows read.
+`VectorizedColumnReader` is given a <<spark-sql-WritableColumnVector.adoc#, WritableColumnVector>> to store rows  <<readBatch, read as a batch>>.
 
 [[creating-instance]]
 `VectorizedColumnReader` takes the following to be created:
