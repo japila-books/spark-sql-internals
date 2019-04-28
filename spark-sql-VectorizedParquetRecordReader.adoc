@@ -31,7 +31,13 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spar
 | Description
 
 | batchIdx
-| [[batchIdx]]
+| [[batchIdx]] Current batch index that is the index of an `InternalRow` in the <<columnarBatch, ColumnarBatch>>. Used when `VectorizedParquetRecordReader` is requested to <<getCurrentValue, getCurrentValue>> with the <<returnColumnarBatch, returnColumnarBatch>> flag disabled
+
+Starts at `0`
+
+Increments every <<nextKeyValue, nextKeyValue>>
+
+Reset to `0` when <<nextBatch, reading next rows into a columnar batch>>
 
 | columnarBatch
 | [[columnarBatch]] <<spark-sql-ColumnarBatch.adoc#, ColumnarBatch>>
@@ -54,7 +60,13 @@ Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatc
 | [[numBatched]]
 
 | returnColumnarBatch
-| [[returnColumnarBatch]] Flag to control whether rows are returned as <<spark-sql-ColumnarBatch.adoc#, ColumnarBatches>>
+| [[returnColumnarBatch]] Optimization flag to control whether `VectorizedParquetRecordReader` offers rows as the <<columnarBatch, ColumnarBatch>> or one row at a time only
+
+Default: `false`
+
+Enabled (`true`) when `VectorizedParquetRecordReader` is requested to <<enableReturningBatches, enable returning batches>>
+
+Used in <<nextKeyValue, nextKeyValue>> (to <<nextBatch, read next rows into a columnar batch>>) and <<getCurrentValue, getCurrentValue>> (to return the internal <<columnarBatch, ColumnarBatch>> not a single `InternalRow`)
 
 | rowsReturned
 | [[rowsReturned]] Number of rows read already
@@ -161,7 +173,7 @@ link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 ====
 
-=== [[nextBatch]] Reading Rows Into Columnar Batch -- `nextBatch` Method
+=== [[nextBatch]] Reading Next Rows Into Columnar Batch -- `nextBatch` Method
 
 [source, java]
 ----
@@ -209,4 +221,24 @@ void checkEndOfRowGroup() throws IOException
 
 `checkEndOfRowGroup`...FIXME
 
-NOTE: `checkEndOfRowGroup` is used when...FIXME
+NOTE: `checkEndOfRowGroup` is used exclusively when `VectorizedParquetRecordReader` is requested to <<nextBatch, read next rows into a columnar batch>>.
+
+=== [[getCurrentValue]] Getting Current Value (as Columnar Batch or Single InternalRow) -- `getCurrentValue` Method
+
+[source, java]
+----
+Object getCurrentValue()
+----
+
+NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.7.5/api/org/apache/hadoop/mapreduce/RecordReader.html[RecordReader] Contract to break the data into key/value pairs for input to a Hadoop `Mapper`.
+
+`getCurrentValue` returns the entire <<columnarBatch, ColumnarBatch>> with the <<returnColumnarBatch, returnColumnarBatch>> flag enabled (`true`) or requests it for a <<spark-sql-ColumnarBatch.adoc#getRow, single row>> instead.
+
+[NOTE]
+====
+`getCurrentValue` is used when:
+
+* `NewHadoopRDD` is requested to compute a partition (`compute`)
+
+* `RecordReaderIterator` is requested to get the next element (`next`)
+====
