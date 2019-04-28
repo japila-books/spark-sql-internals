@@ -165,7 +165,7 @@ scala> numsRecovered.show
 +---+------------------+
 ----
 
-=== [[sparkcontext-setCheckpointDir]] Specyfing Checkpoint Directory -- `SparkContext.setCheckpointDir` Method
+=== [[sparkcontext-setCheckpointDir]] Specifying Checkpoint Directory -- `SparkContext.setCheckpointDir` Method
 
 [source, scala]
 ----

@@ -30,8 +30,11 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spar
 | Name
 | Description
 
+| batchIdx
+| [[batchIdx]]
+
 | columnarBatch
-| [[columnarBatch]] link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
+| [[columnarBatch]] <<spark-sql-ColumnarBatch.adoc#, ColumnarBatch>>
 
 | columnVectors
 | [[columnVectors]] Allocated `WritableColumnVectors`
@@ -47,8 +50,20 @@ Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatc
 | missingColumns
 | [[missingColumns]] Bitmap of columns (per index) that are missing (or simply the ones that the reader should not read)
 
+| numBatched
+| [[numBatched]]
+
 | returnColumnarBatch
 | [[returnColumnarBatch]] Flag to control whether rows are returned as <<spark-sql-ColumnarBatch.adoc#, ColumnarBatches>>
+
+| rowsReturned
+| [[rowsReturned]] Number of rows read already
+
+| totalCountLoadedSoFar
+| [[totalCountLoadedSoFar]]
+
+| totalRowCount
+| [[totalRowCount]] Total number of rows to be read
 
 |===
 
@@ -146,13 +161,52 @@ link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 ====
 
-=== [[nextBatch]] `nextBatch` Method
+=== [[nextBatch]] Reading Rows Into Columnar Batch -- `nextBatch` Method
 
 [source, java]
 ----
 boolean nextBatch() throws IOException
 ----
 
-`nextBatch`...FIXME
+`nextBatch` reads at least <<capacity, capacity>> rows and returns `true` when there are rows available. Otherwise, `nextBatch` returns `false` (to "announce" there are no rows available).
+
+Internally, `nextBatch` firstly requests every <<spark-sql-WritableColumnVector.adoc#, WritableColumnVector>> (in the <<columnVectors, columnVectors>> internal registry) to <<spark-sql-WritableColumnVector.adoc#reset, reset itself>>.
+
+`nextBatch` requests the <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.adoc#setNumRows, specify the number of rows (in batch)>> as `0` (effectively resetting the batch and making it available for reuse).
+
+When the <<rowsReturned, rowsReturned>> is greater than the <<totalRowCount, totalRowCount>>, `nextBatch` finishes with (_returns_) `false` (to "announce" there are no rows available).
+
+`nextBatch` <<checkEndOfRowGroup, checkEndOfRowGroup>>.
+
+`nextBatch` calculates the number of rows left to be returned as a minimum of the <<capacity, capacity>> and the <<totalCountLoadedSoFar, totalCountLoadedSoFar>> reduced by the <<rowsReturned, rowsReturned>>.
+
+`nextBatch` requests every <<columnReaders, VectorizedColumnReader>> to <<spark-sql-VectorizedColumnReader.adoc#readBatch, readBatch>> (with the number of rows left to be returned and associated <<columnVectors, WritableColumnVector>>).
+
+NOTE: <<columnReaders, VectorizedColumnReaders>> use their own <<columnVectors, WritableColumnVectors>> for storing values read. The numbers of <<columnReaders, VectorizedColumnReaders>> and <<columnVectors, WritableColumnVector>> are equal.
+
+NOTE: The number of rows in the internal <<columnarBatch, ColumnarBatch>> matches the number of rows that <<columnReaders, VectorizedColumnReaders>> decoded and stored in corresponding <<columnVectors, WritableColumnVectors>>.
+
+In the end, `nextBatch` registers the progress as follows:
+
+* The number of rows read is added to the <<rowsReturned, rowsReturned>> counter
+
+* Requests the internal <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.adoc#setNumRows, set the number of rows (in batch)>> to be the number of rows read
+
+* The <<numBatched, numBatched>> registry is exactly the number of rows read
+
+* The <<batchIdx, batchIdx>> registry becomes `0`
+
+`nextBatch` finishes with (_returns_) `true` (to "announce" there are rows available).
 
 NOTE: `nextBatch` is used exclusively when `VectorizedParquetRecordReader` is requested to <<nextKeyValue, nextKeyValue>>.
+
+=== [[checkEndOfRowGroup]] `checkEndOfRowGroup` Internal Method
+
+[source, java]
+----
+void checkEndOfRowGroup() throws IOException
+----
+
+`checkEndOfRowGroup`...FIXME
+
+NOTE: `checkEndOfRowGroup` is used when...FIXME

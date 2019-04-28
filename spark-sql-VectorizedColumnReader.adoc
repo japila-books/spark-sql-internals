@@ -1,0 +1,16 @@
+== [[VectorizedColumnReader]] VectorizedColumnReader
+
+`VectorizedColumnReader` is...FIXME
+
+=== [[readBatch]] `readBatch` Method
+
+[source, java]
+----
+void readBatch(
+  int total,
+  WritableColumnVector column) throws IOException
+----
+
+`readBatch`...FIXME
+
+NOTE: `readBatch` is used when...FIXME

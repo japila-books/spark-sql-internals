@@ -303,7 +303,7 @@ NOTE: Spark SQL allows for link:spark-sql-datasource-custom-formats.adoc[develop
 schema(schema: StructType): DataFrameReader
 ----
 
-`schema` allows for specyfing the `schema` of a data source (that the `DataFrameReader` is about to read a dataset from).
+`schema` allows for specifying the `schema` of a data source (that the `DataFrameReader` is about to read a dataset from).
 
 [source, scala]
 ----

@@ -93,14 +93,16 @@ Iterator<InternalRow> rowIterator()
 * `ArrowEvalPythonExec` physical operator is requested to `evaluate`
 ====
 
-=== [[setNumRows]] Specyfing Number of Rows (in Batch) -- `setNumRows` Method
+=== [[setNumRows]] Specifying Number of Rows (in Batch) -- `setNumRows` Method
 
 [source, java]
 ----
 void setNumRows(int numRows)
 ----
 
-`setNumRows` simply sets the <<numRows, numRows>> to the given `numRows`.
+In essence, `setNumRows` resets the batch and makes it available for reuse.
+
+Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numRows`.
 
 [NOTE]
 ====
