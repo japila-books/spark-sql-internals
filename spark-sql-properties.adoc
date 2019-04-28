@@ -407,6 +407,15 @@ Default: `false`
 
 Use link:spark-sql-SQLConf.adoc#isParquetBinaryAsString[SQLConf.isParquetBinaryAsString] method to access the current value.
 
+| spark.sql.parquet.columnarReaderBatchSize
+a| [[spark.sql.parquet.columnarReaderBatchSize]] The number of rows to include in a parquet vectorized reader batch (the capacity of <<spark-sql-VectorizedParquetRecordReader.adoc#, VectorizedParquetRecordReader>>).
+
+Default: `4096` (4k)
+
+The number should be carefully chosen to minimize overhead and avoid OOMs while reading data.
+
+Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderBatchSize[SQLConf.parquetVectorizedReaderBatchSize] method to access the current value.
+
 | spark.sql.parquet.int96AsTimestamp
 a| [[spark.sql.parquet.int96AsTimestamp]] Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
 

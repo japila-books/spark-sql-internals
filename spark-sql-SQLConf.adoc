@@ -295,6 +295,10 @@ a| [[parallelFileListingInStatsComputation]] Used exclusively when `CommandUtils
 | link:spark-sql-properties.adoc#spark.sql.parquet.recordLevelFilter.enabled[spark.sql.parquet.recordLevelFilter.enabled]
 | [[parquetRecordFilterEnabled]] Used exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended].
 
+| parquetVectorizedReaderBatchSize
+| <<spark-sql-properties.adoc#spark.sql.parquet.columnarReaderBatchSize, spark.sql.parquet.columnarReaderBatchSize>>
+a| [[parquetVectorizedReaderBatchSize]] Used exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, data reader>> (and creates a <<spark-sql-VectorizedParquetRecordReader.adoc#, VectorizedParquetRecordReader>> for <<spark-sql-vectorized-parquet-reader.adoc#, Vectorized Parquet Decoding>>)
+
 | parquetVectorizedReaderEnabled
 | link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader]
 a| [[parquetVectorizedReaderEnabled]] Used when:
