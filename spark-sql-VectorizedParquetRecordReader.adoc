@@ -1,48 +1,46 @@
 == [[VectorizedParquetRecordReader]] VectorizedParquetRecordReader
 
-`VectorizedParquetRecordReader` is a link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase] for *parquet* file format that directly materialize to Java `Objects`.
+`VectorizedParquetRecordReader` is a concrete link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase] for <<spark-sql-ParquetFileFormat.adoc#, parquet>> file format for <<spark-sql-vectorized-parquet-reader.adoc#, Vectorized Parquet Decoding>>.
 
-`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended] (when link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled and the result schema uses link:spark-sql-DataType.adoc#AtomicType[AtomicType] data types only).
+`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[data reader] (with link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] property enabled and the read schema uses link:spark-sql-DataType.adoc#AtomicType[AtomicType] data types only).
 
 [NOTE]
 ====
 link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (`true`) by default.
-
-[source, scala]
-----
-val isParquetVectorizedReaderEnabled = spark.conf.get("spark.sql.parquet.enableVectorizedReader").toBoolean
-assert(isParquetVectorizedReaderEnabled, "spark.sql.parquet.enableVectorizedReader should be enabled by default")
-----
 ====
 
-`VectorizedParquetRecordReader` uses `OFF_HEAP` <<MEMORY_MODE, memory mode>> when link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property is enabled (which is not by default).
+`VectorizedParquetRecordReader` uses `OFF_HEAP` <<MEMORY_MODE, memory mode>> when link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property is enabled (which is disabled by default).
 
 [[CAPACITY]]
 `VectorizedParquetRecordReader` uses `4 * 1024` for capacity.
 
 [[internal-registries]]
 .VectorizedParquetRecordReader's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
+[cols="1m,3",options="header",width="100%"]
 |===
 | Name
 | Description
 
-| [[columnarBatch]] `columnarBatch`
-| link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
+| columnarBatch
+| [[columnarBatch]] link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
 
-| [[columnVectors]] `columnVectors`
-| Allocated `WritableColumnVectors`
+| columnVectors
+| [[columnVectors]] Allocated `WritableColumnVectors`
 
-| [[MEMORY_MODE]] `MEMORY_MODE`
-a| Memory mode of the <<columnarBatch, ColumnarBatch>>
+| MEMORY_MODE
+a| [[MEMORY_MODE]] Memory mode of the <<columnarBatch, ColumnarBatch>>
 
 * [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as per link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property)
 * [[ON_HEAP]] `ON_HEAP`
 
 Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatch, initBatch>>.
 
-| [[missingColumns]] `missingColumns`
-| Bitmap of columns (per index) that are missing (or simply the ones that the reader should not read)
+| missingColumns
+| [[missingColumns]] Bitmap of columns (per index) that are missing (or simply the ones that the reader should not read)
+
+| returnColumnarBatch
+| [[returnColumnarBatch]] Flag to control whether rows are returned as <<spark-sql-ColumnarBatch.adoc#, ColumnarBatches>>
+
 |===
 
 === [[nextKeyValue]] `nextKeyValue` Method
@@ -56,7 +54,14 @@ NOTE: `nextKeyValue` is part of Hadoop's https://hadoop.apache.org/docs/r2.7.4/a
 
 `nextKeyValue`...FIXME
 
-NOTE: `nextKeyValue` is used when...FIXME
+[NOTE]
+====
+`nextKeyValue` is used when:
+
+* `NewHadoopRDD` is requested to compute a partition (`compute`)
+
+* `RecordReaderIterator` is requested to `hasNext`
+====
 
 === [[resultBatch]] `resultBatch` Method
 
@@ -78,7 +83,7 @@ NOTE: `resultBatch` is used exclusively when `VectorizedParquetRecordReader` is 
 
 `VectorizedParquetRecordReader` initializes the <<internal-registries, internal registries and counters>>.
 
-=== [[initialize]] `initialize` Method
+=== [[initialize]] Initializing -- `initialize` Method
 
 [source, java]
 ----
@@ -96,11 +101,11 @@ NOTE: `initialize` is part of link:spark-sql-SpecificParquetRecordReaderBase.ado
 void enableReturningBatches()
 ----
 
-`enableReturningBatches`...FIXME
+`enableReturningBatches` simply turns <<returnColumnarBatch, returnColumnarBatch>> internal flag on.
 
-NOTE: `enableReturningBatches` is used when...FIXME
+NOTE: `enableReturningBatches` is used exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, data reader>> (for <<spark-sql-ParquetFileFormat.adoc#supportBatch, vectorized parquet decoding in whole-stage codegen>>).
 
-=== [[initBatch]] `initBatch` Method
+=== [[initBatch]] Initializing Batch -- `initBatch` Method
 
 [source, java]
 ----
@@ -140,3 +145,14 @@ link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.
 
 * `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 ====
+
+=== [[nextBatch]] `nextBatch` Method
+
+[source, java]
+----
+boolean nextBatch() throws IOException
+----
+
+`nextBatch`...FIXME
+
+NOTE: `nextBatch` is used exclusively when `VectorizedParquetRecordReader` is requested to <<nextKeyValue, nextKeyValue>>.

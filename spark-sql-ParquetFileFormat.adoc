@@ -28,7 +28,7 @@ spark.read.schema(schema).load("parquet-datasets")
 `ParquetFileFormat` is <<spark-sql-FileFormat.adoc#isSplitable, splitable>>, i.e. FIXME
 
 [[supportBatch]]
-`ParquetFileFormat` link:spark-sql-FileFormat.adoc#supportBatch[supports batch] when all of the following hold:
+`ParquetFileFormat` link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized parquet decoding in whole-stage code generation] when all of the following hold:
 
 . link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled
 

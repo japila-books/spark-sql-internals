@@ -165,7 +165,7 @@
 .. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
 
 . link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
-.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch]
+.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch -- ColumnVectors as Row-Wise Table]
 
 . link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Reader]
 .. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
