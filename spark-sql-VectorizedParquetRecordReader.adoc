@@ -42,6 +42,11 @@ Reset to `0` when <<nextBatch, reading next rows into a columnar batch>>
 | columnarBatch
 | [[columnarBatch]] <<spark-sql-ColumnarBatch.adoc#, ColumnarBatch>>
 
+| columnReaders
+| [[columnReaders]] <<spark-sql-VectorizedColumnReader.adoc#, VectorizedColumnReaders>> (one reader per column) to <<nextBatch, read rows as batches>>
+
+Intialized when <<checkEndOfRowGroup, checkEndOfRowGroup>> (when requested to <<nextBatch, read next rows into a columnar batch>>)
+
 | columnVectors
 | [[columnVectors]] Allocated `WritableColumnVectors`
 
