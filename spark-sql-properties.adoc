@@ -445,9 +445,11 @@ Default: `true`
 Use <<spark-sql-SQLConf.adoc#parquetFilterPushDownDate, SQLConf.parquetFilterPushDownDate>> method to access the current value.
 
 | spark.sql.parquet.int96TimestampConversion
-a| [[spark.sql.parquet.int96TimestampConversion]] Controls whether timestamp adjustments should be applied to INT96 data when converting to timestamps, for data written by Impala.  This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
+a| [[spark.sql.parquet.int96TimestampConversion]] Controls whether timestamp adjustments should be applied to INT96 data when converting to timestamps, for data written by Impala.
 
 Default: `false`
+
+This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
 
 Use link:spark-sql-SQLConf.adoc#isParquetINT96TimestampConversion[SQLConf.isParquetINT96TimestampConversion] method to access the current value.
 

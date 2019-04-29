@@ -167,29 +167,30 @@ NOTE: `buildReaderWithPartitionValues` is part of link:spark-sql-FileFormat.adoc
 `buildReaderWithPartitionValues` sets the <<options, configuration options>> in the input `hadoopConf`.
 
 [[options]]
-.Configuration Options
-[cols="1,2",options="header",width="100%"]
+.Hadoop Configuration Options
+[cols="1m,3",options="header",width="100%"]
 |===
 | Name
 | Value
 
-| `parquet.read.support.class`
-| `org.apache.spark.sql.execution.datasources.parquet.ParquetReadSupport`
+| parquet.read.support.class
+| [[parquet.read.support.class]] <<spark-sql-ParquetReadSupport.adoc#, ParquetReadSupport>>
 
-| [[org.apache.spark.sql.parquet.row.requested_schema]] `org.apache.spark.sql.parquet.row.requested_schema`
-| link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
+| org.apache.spark.sql.parquet.row.requested_schema
+| [[org.apache.spark.sql.parquet.row.requested_schema]] link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
 
-| `org.apache.spark.sql.parquet.row.attributes`
-| link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
+| org.apache.spark.sql.parquet.row.attributes
+| [[org.apache.spark.sql.parquet.row.attributes]] link:spark-sql-DataType.adoc#json[JSON] representation of `requiredSchema`
 
-| `spark.sql.session.timeZone`
-| link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
+| spark.sql.session.timeZone
+| [[spark.sql.session.timeZone]] <<spark-sql-properties.adoc#spark.sql.session.timeZone, spark.sql.session.timeZone>>
 
-| `spark.sql.parquet.binaryAsString`
-| link:spark-sql-properties.adoc#spark.sql.parquet.binaryAsString[spark.sql.parquet.binaryAsString]
+| spark.sql.parquet.binaryAsString
+| [[spark.sql.parquet.binaryAsString]] <<spark-sql-properties.adoc#spark.sql.parquet.binaryAsString, spark.sql.parquet.binaryAsString>>
 
-| `spark.sql.parquet.int96AsTimestamp`
-| link:spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp[spark.sql.parquet.int96AsTimestamp]
+| spark.sql.parquet.int96AsTimestamp
+| [[spark.sql.parquet.int96AsTimestamp]] <<spark-sql-properties.adoc#spark.sql.parquet.int96AsTimestamp, spark.sql.parquet.int96AsTimestamp>>
+
 |===
 
 `buildReaderWithPartitionValues` requests `ParquetWriteSupport` to `setSchema`.
