@@ -11,7 +11,7 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ----
 
-Structured query actions are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's link:spark-sparkcontext-local-properties.adoc#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's link:spark-sql-webui.adoc[SQL tab]).
+Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's link:spark-sparkcontext-local-properties.adoc#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's link:spark-sql-webui.adoc[SQL tab]).
 
 [TIP]
 ====
@@ -85,8 +85,7 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 ====
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to link:spark-sql-Dataset.adoc#withNewExecutionId[Dataset.withNewExecutionId]
-* `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
+* `Dataset` is requested to <<spark-sql-Dataset.adoc#withNewExecutionId, Dataset.withNewExecutionId>> and <<spark-sql-Dataset.adoc#withAction, withAction>>
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a command]
 
@@ -102,7 +101,7 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 getQueryExecution(executionId: Long): QueryExecution
 ----
 
-`getQueryExecution` gives the link:spark-sql-QueryExecution.adoc[QueryExecution] for the `executionId` or `null` if not found.
+`getQueryExecution` simply gives the link:spark-sql-QueryExecution.adoc[QueryExecution] for the `executionId` or `null` if not found.
 
 === [[withExecutionId]] Executing Action (with Zero or More Spark Jobs) Tracked Under Given Execution Id -- `withExecutionId` Method
 
@@ -129,4 +128,35 @@ Hello World
 * `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
 
 * `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
+====
+
+=== [[checkSQLExecutionId]] `checkSQLExecutionId` Method
+
+[source, scala]
+----
+checkSQLExecutionId(sparkSession: SparkSession): Unit
+----
+
+`checkSQLExecutionId`...FIXME
+
+NOTE: `checkSQLExecutionId` is used exclusively when `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>.
+
+=== [[withSQLConfPropagated]] `withSQLConfPropagated` Method
+
+[source, scala]
+----
+withSQLConfPropagated[T](sparkSession: SparkSession)(body: => T): T
+----
+
+`withSQLConfPropagated`...FIXME
+
+[NOTE]
+====
+`withSQLConfPropagated` is used when:
+
+* `SQLExecution` is requested to <<withNewExecutionId, withNewExecutionId>> and <<withExecutionId, withExecutionId>>
+
+* `TextInputJsonDataSource` is requested to `inferFromDataset`
+
+* `MultiLineJsonDataSource` is requested to `infer`
 ====

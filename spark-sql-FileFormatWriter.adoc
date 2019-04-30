@@ -16,7 +16,7 @@ log4j.logger.org.apache.spark.sql.execution.datasources.FileFormatWriter=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[write]] Writing Query Result -- `write` Method
+=== [[write]] Writing Result of Structured Query (Query Result) -- `write` Method
 
 [source, scala]
 ----
