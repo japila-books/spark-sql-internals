@@ -225,7 +225,7 @@ NOTE: link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reade
 
 With link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] enabled, the function does the following:
 
-. Creates a link:spark-sql-VectorizedParquetRecordReader.adoc#creating-instance[VectorizedParquetRecordReader] and a `RecordReaderIterator`
+. Creates a link:spark-sql-VectorizedParquetRecordReader.adoc#creating-instance[VectorizedParquetRecordReader] and a <<spark-sql-RecordReaderIterator.adoc#, RecordReaderIterator>>
 
 . Requests `VectorizedParquetRecordReader` to link:spark-sql-VectorizedParquetRecordReader.adoc#initialize[initialize] (with the Parquet `ParquetInputSplit` and the Hadoop `TaskAttemptContextImpl`)
 
@@ -239,7 +239,7 @@ Appending [partitionSchema] [partitionValues]
 
 . (only with <<supportBatch, supportBatch>> enabled) Requests `VectorizedParquetRecordReader` to link:spark-sql-VectorizedParquetRecordReader.adoc#enableReturningBatches[enableReturningBatches]
 
-. In the end, the function gives the `RecordReaderIterator` (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
+. In the end, the function gives the <<spark-sql-RecordReaderIterator.adoc#, RecordReaderIterator>> (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
 
 With link:spark-sql-VectorizedParquetRecordReader.adoc[Parquet vectorized reader] disabled, the function does the following:
 

@@ -187,6 +187,7 @@
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
 
 . link:spark-sql-ParquetReadSupport.adoc[ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source]
+. link:spark-sql-RecordReaderIterator.adoc[RecordReaderIterator -- Scala Iterator over Hadoop RecordReader's Values]
 
 === Kafka Data Source
 

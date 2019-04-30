@@ -101,7 +101,7 @@ NOTE: `nextKeyValue` is part of Hadoop's https://hadoop.apache.org/docs/r2.7.4/a
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested to `hasNext`
+* `RecordReaderIterator` is requested to <<spark-sql-RecordReaderIterator.adoc#hasNext, check whether or not there are more internal rows>>
 ====
 
 === [[resultBatch]] `resultBatch` Method
@@ -245,5 +245,5 @@ NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested to get the next element (`next`)
+* `RecordReaderIterator` is requested for the <<spark-sql-RecordReaderIterator.adoc#next, next internal row>>
 ====
