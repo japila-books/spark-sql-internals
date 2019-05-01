@@ -9,36 +9,42 @@
 
 [[metrics]]
 .ColumnarBatchScan's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
+[cols="1m,2,2",options="header",width="100%"]
 |===
 | Key
 | Name (in web UI)
 | Description
 
-| [[numOutputRows]] `numOutputRows`
+| numOutputRows
 | number of output rows
-|
+| [[numOutputRows]]
 
-| [[scanTime]] `scanTime`
+| scanTime
 | scan time
-|
+| [[scanTime]]
 |===
 
 [[implementations]]
 .ColumnarBatchScans
-[cols="1,2",options="header",width="100%"]
+[cols="1,3",options="header",width="100%"]
 |===
 | ColumnarBatchScan
 | Description
 
-| link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
-| [[DataSourceV2ScanExec]]
+| <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>>
+a| [[DataSourceV2ScanExec]] <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.adoc#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead, can read data in batch>> (default: `true`)
 
-| link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
-| [[FileSourceScanExec]]
+| <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>>
+| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, Supports vectorized decoding>> for <<spark-sql-FileFormat.adoc#, FileFormats>> that <<spark-sql-FileFormat.adoc#supportBatch, support returning columnar batches>> (default: `false`)
 
-| link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec]
-| [[InMemoryTableScanExec]]
+| <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#, InMemoryTableScanExec>>
+a| [[InMemoryTableScanExec]] <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch, Supports vectorized decoding>> when all of the following hold:
+
+* <<spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader, spark.sql.inMemoryColumnarStorage.enableVectorizedReader>> property is enabled (default: `true`)
+
+* Uses primitive data types only for the output schema
+
+* Number of fields in the output schema is not more than <<spark-sql-properties.adoc#spark.sql.codegen.maxFields, spark.sql.codegen.maxFields>> property (default: `100`)
 |===
 
 === [[genCodeColumnVector]] `genCodeColumnVector` Internal Method
@@ -57,7 +63,7 @@ genCodeColumnVector(
 
 NOTE: `genCodeColumnVector` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.
 
-=== [[produceBatches]] Generating Java Source Code to Produce Batches -- `produceBatches` Internal Method
+=== [[produceBatches]] Generating Java Source Code to Produce Columnar Batches (for Vectorized Reading) -- `produceBatches` Internal Method
 
 [source, scala]
 ----

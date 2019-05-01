@@ -45,7 +45,7 @@ supportsBatch: Boolean
 
 NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
 
-`supportsBatch` is enabled (i.e. `true`) only when the <<reader, DataSourceReader>> is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled.
+`supportsBatch` is enabled (`true`) only when the <<reader, DataSourceReader>> is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled.
 
 NOTE: link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag is enabled by default.
 

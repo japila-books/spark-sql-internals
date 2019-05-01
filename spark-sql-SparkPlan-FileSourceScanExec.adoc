@@ -346,7 +346,7 @@ supportsBatch: Boolean
 
 NOTE: `supportsBatch` is part of the link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to enable link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding].
 
-`supportsBatch` is enabled (i.e. `true`) only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized decoding]. Otherwise, `supportsBatch` is disabled (i.e. `false`).
+`supportsBatch` is enabled (`true`) only when the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) link:spark-sql-FileFormat.adoc#supportBatch[supports vectorized decoding]. Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
 NOTE: <<spark-sql-FileFormat.adoc#, FileFormat>> does not support vectorized decoding by default (i.e. <<spark-sql-FileFormat.adoc#supportBatch, supportBatch>> flag is disabled). Only <<spark-sql-ParquetFileFormat.adoc#, ParquetFileFormat>> and <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>> have support for it under certain conditions.
 
