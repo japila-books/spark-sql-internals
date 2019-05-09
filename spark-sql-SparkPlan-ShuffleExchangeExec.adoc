@@ -69,15 +69,17 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` creates a new link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] (or takes <<cachedShuffleRDD, cached one>> if `doExecute` was executed before).
+`doExecute` creates a new link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD] or (re)uses the <<cachedShuffleRDD, cached one>> if `doExecute` was executed before.
 
 NOTE: `ShuffleExchangeExec` caches a `ShuffledRowRDD` for later reuse.
 
-`doExecute` branches off per optional <<coordinator, ExchangeCoordinator>>.
+`doExecute` branches off per the optional <<coordinator, ExchangeCoordinator>>.
 
-If `ExchangeCoordinator` was specified, `doExecute` link:spark-sql-ExchangeCoordinator.adoc#postShuffleRDD[requests ExchangeCoordinator for a ShuffledRowRDD].
+NOTE: The optional <<coordinator, ExchangeCoordinator>> is available only when <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>> is enabled (and `EnsureRequirements` physical query optimization is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#ensureDistributionAndOrdering, enforce partition requirements (distribution and ordering) of a physical operator>>).
 
-Otherwise (with no `ExchangeCoordinator` specified), `doExecute` <<prepareShuffleDependency, prepareShuffleDependency>> and <<preparePostShuffleRDD, preparePostShuffleRDD>>.
+If `ExchangeCoordinator` was available, `doExecute` requests the <<coordinator, ExchangeCoordinator>> for a <<spark-sql-ExchangeCoordinator.adoc#postShuffleRDD, ShuffledRowRDD>>.
+
+Otherwise (when no `ExchangeCoordinator` is available), `doExecute` <<prepareShuffleDependency, prepareShuffleDependency>> and <<preparePostShuffleRDD, preparePostShuffleRDD>>.
 
 In the end, `doExecute` saves (_caches_) the result `ShuffledRowRDD` (as <<cachedShuffleRDD, cachedShuffleRDD>> internal registry).
 
@@ -154,7 +156,7 @@ NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan C
 | Description
 
 | cachedShuffleRDD
-| [[cachedShuffleRDD]] <<spark-sql-ShuffledRowRDD.adoc#, ShuffledRowRDD>> that is created once when `ShuffleExchangeExec` operator is <<doExecute, executed>> and reused if the operator is used by multiple plans
+| [[cachedShuffleRDD]] <<spark-sql-ShuffledRowRDD.adoc#, ShuffledRowRDD>> that is created when `ShuffleExchangeExec` operator is <<doExecute, executed (to generate RDD[InternalRow])>> and reused (_cached_) if the operator is used by multiple plans
 
 | serializer
 | [[serializer]] `UnsafeRowSerializer` (of the size as the number of the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>> of the <<child, child>> physical operator and the <<dataSize, dataSize>> performance metric)

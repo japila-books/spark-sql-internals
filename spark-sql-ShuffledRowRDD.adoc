@@ -1,10 +1,6 @@
 == [[ShuffledRowRDD]] ShuffledRowRDD
 
-`ShuffledRowRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
-
-NOTE: `ShuffledRowRDD` looks like link:spark-rdd-ShuffledRDD.adoc[ShuffledRDD], and the difference is in the type of the values to process, i.e. link:spark-sql-InternalRow.adoc[InternalRow] and `(K, C)` key-value pairs, respectively.
-
-`ShuffledRowRDD` is <<creating-instance, created>> when:
+`ShuffledRowRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> when:
 
 * `ShuffleExchangeExec` physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#preparePostShuffleRDD, preparePostShuffleRDD>>
 
@@ -16,14 +12,16 @@ NOTE: `ShuffledRowRDD` looks like link:spark-rdd-ShuffledRDD.adoc[ShuffledRDD], 
 * [[dependency]] `ShuffleDependency[Int, InternalRow, InternalRow]`
 * [[specifiedPartitionStartIndices]] Optional *partition start indices* (`Option[Array[Int]]` , default: `None`)
 
-NOTE: The `dependency` property is mutable and is of type `ShuffleDependency[Int, InternalRow, InternalRow]`.
+NOTE: The <<dependency, dependency>> property is mutable so it can be <<clearDependencies, cleared>>.
 
-`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the link:spark-rdd-Partitioner.adoc[Partitioner] of the input `ShuffleDependency`.
+`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified (when executing `CollectLimitExec` and `TakeOrderedAndProjectExec` physical operators), the number of post-shuffle partitions is managed by the link:spark-rdd-Partitioner.adoc[Partitioner] of the input `ShuffleDependency`. Otherwise, when specified (when `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.adoc#doEstimationIfNecessary, doEstimationIfNecessary>>), `ShuffledRowRDD`...FIXME
 
 NOTE: *Post-shuffle partition* is...FIXME
 
+NOTE: `ShuffledRowRDD` looks like link:spark-rdd-ShuffledRDD.adoc[ShuffledRDD], and the difference is in the type of the values to process, i.e. link:spark-sql-InternalRow.adoc[InternalRow] and `(K, C)` key-value pairs, respectively.
+
 .ShuffledRowRDD and RDD Contract
-[cols="1,2",options="header",width="100%"]
+[cols="1,3",options="header",width="100%"]
 |===
 | Name
 | Description
@@ -80,3 +78,14 @@ CAUTION: FIXME
 === [[ShuffledRowRDDPartition]] `ShuffledRowRDDPartition`
 
 CAUTION: FIXME
+
+=== [[clearDependencies]] Clearing Dependencies -- `clearDependencies` Method
+
+[source, scala]
+----
+clearDependencies(): Unit
+----
+
+NOTE: `clearDependencies` is part of the RDD Contract to clear dependencies of the RDD (to enable the parent RDDs to be garbage collected).
+
+`clearDependencies` simply requests the parent RDD to `clearDependencies` followed by clear the given <<dependency, dependency>> (i.e. set to `null`).
