@@ -539,6 +539,7 @@
 . link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
 . link:spark-sql-SparkPlan-MapElementsExec.adoc[MapElementsExec]
 . link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
+. link:spark-sql-SparkPlan-ObjectProducerExec.adoc[ObjectProducerExec]
 . link:spark-sql-SparkPlan-ProjectExec.adoc[ProjectExec]
 . link:spark-sql-SparkPlan-RangeExec.adoc[RangeExec]
 . link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
