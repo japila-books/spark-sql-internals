@@ -113,7 +113,7 @@ In the end, `pushFilters` returns a pair of filters pushed and not.
 
 NOTE: `pushFilters` is used exclusively when `DataSourceV2Strategy` execution planning strategy is <<apply, executed>> (applied to a <<apply-DataSourceV2Relation, DataSourceV2Relation>> logical operator).
 
-=== [[pruneColumns]] `pruneColumns` Internal Method
+=== [[pruneColumns]] Column Pruning -- `pruneColumns` Internal Method
 
 [source, scala]
 ----

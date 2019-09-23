@@ -16,7 +16,7 @@ NOTE: It _appears_ that all concrete <<implementations, input partitions>> are u
 
 [[contract]]
 .InputPartition Contract
-[cols="1m,3",options="header",width="100%"]
+[cols="30m,70",options="header",width="100%"]
 |===
 | Method
 | Description
@@ -66,7 +66,18 @@ Used when:
 | Description
 
 | ContinuousInputPartition
-| [[ContinuousInputPartition]] Extension that is used in Spark Structured Streaming for Continuous Stream Processing
+| [[ContinuousInputPartition]] InputPartitions for *Continuous Stream Processing* in Spark Structured Streaming
+
+Consult https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-ContinuousReader.html[The Internals of Spark Structured Streaming]
+
+| ContinuousMemoryStreamInputPartition
+| [[ContinuousMemoryStreamInputPartition]] Used in Spark Structured Streaming
+
+| KafkaMicroBatchInputPartition
+| [[KafkaMicroBatchInputPartition]] Used in Spark Structured Streaming
+
+| MemoryStreamInputPartition
+| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming
 
 | RateStreamMicroBatchInputPartition
 | [[RateStreamMicroBatchInputPartition]] Used in Spark Structured Streaming
@@ -74,16 +85,7 @@ Used when:
 | TextSocketContinuousInputPartition
 | [[TextSocketContinuousInputPartition]] Used in Spark Structured Streaming
 
-| ContinuousMemoryStreamInputPartition
-| [[ContinuousMemoryStreamInputPartition]] Used in Spark Structured Streaming
-
-| MemoryStreamInputPartition
-| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming
-
-| KafkaMicroBatchInputPartition
-| [[KafkaMicroBatchInputPartition]] Used in Spark Structured Streaming
-
 | Anonymous
-| [[TextSocketMicroBatchReader]] Used in Spark Structured Streaming for Text Socket Data Source
+| [[TextSocketMicroBatchReader]] Used in Spark Structured Streaming
 
 |===

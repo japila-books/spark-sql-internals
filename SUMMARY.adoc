@@ -245,16 +245,16 @@
 . link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
 . link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
 
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader Contract]
-.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters Contract -- Data Source Readers with Filter Pushdown Optimization Support]
+. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
 .. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
 .. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
 .. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
 .. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
 
-. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter Contract]
+. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter]
 
-. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport Contract -- Data Sources with Session-Scoped Configuration Options]
+. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport]
 
 . link:spark-sql-InputPartition.adoc[InputPartition]
 . link:spark-sql-InputPartitionReader.adoc[InputPartitionReader]
