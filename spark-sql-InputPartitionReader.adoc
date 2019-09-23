@@ -1,6 +1,6 @@
 == [[InputPartitionReader]] InputPartitionReader Contract
 
-`InputPartitionReader` is the <<contract, abstraction>> of <<implementations, input partition readers>> that can <<next, proceed to the next record>> and <<get, get the current record>>.
+`InputPartitionReader` is the <<contract, abstraction>> of <<implementations, input partition readers>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<next, proceed to the next record>> and <<get, get the current record>>.
 
 `InputPartitionReader` is also a Java https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html[Closeable].
 
@@ -62,15 +62,15 @@ Used when:
 | [[ContinuousInputPartitionReader]] Extension that is used in Spark Structured Streaming for Continuous Stream Processing
 
 | KafkaMicroBatchInputPartitionReader
-a| [[KafkaMicroBatchInputPartitionReader]] Used in Spark Structured Streaming for Kafka Data Source
+| [[KafkaMicroBatchInputPartitionReader]] Used in Spark Structured Streaming for Kafka Data Source
 
-| MemoryStreamInputPartition
-a| [[MemoryStreamInputPartition]] Anonymous that is used in Spark Structured Streaming for Memory Data Source
+| Anonymous
+| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming for Memory Data Source
 
 | RateStreamMicroBatchInputPartitionReader
-a| [[RateStreamMicroBatchInputPartitionReader]] Used in Spark Structured Streaming for Rate Data Source
+| [[RateStreamMicroBatchInputPartitionReader]] Used in Spark Structured Streaming for Rate Data Source
 
-| TextSocketMicroBatchReader
-a| [[TextSocketMicroBatchReader]] Anonymous that is used in Spark Structured Streaming for Text Socket Data Source
+| Anonymous
+| [[TextSocketMicroBatchReader]] Used in Spark Structured Streaming for Text Socket Data Source
 
 |===

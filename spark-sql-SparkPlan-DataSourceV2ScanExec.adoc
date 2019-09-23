@@ -13,18 +13,6 @@ NOTE: A <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation
 [[inputRDDs]]
 `DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only input RDD of internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
 
-[[internal-registries]]
-.DataSourceV2ScanExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,3",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| partitions
-a| [[partitions]] Input partitions (`Seq[InputPartition[InternalRow]]`)
-
-|===
-
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
@@ -58,7 +46,7 @@ NOTE: link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchR
 * [[output]] Output schema (as a collection of `AttributeReferences`)
 * [[reader]] link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 
-`DataSourceV2ScanExec` initializes the <<internal-registries, internal registries and counters>>.
+`DataSourceV2ScanExec` initializes the <<internal-properties, internal properties>>.
 
 === [[inputRDD]] Creating Input RDD of Internal Rows -- `inputRDD` Internal Property
 
@@ -78,3 +66,18 @@ NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and 
 . For all other types of the <<reader, DataSourceReader>>, `inputRDD` is a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> with the <<partitions, partitions>>.
 
 NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| batchPartitions
+a| [[batchPartitions]] Input partitions of <<spark-sql-ColumnarBatch.adoc#, ColumnarBatches>> (`Seq[InputPartition[ColumnarBatch]]`)
+
+| partitions
+a| [[partitions]] Input partitions of <<spark-sql-InternalRow.adoc#, InternalRows>> (`Seq[InputPartition[InternalRow]]`)
+
+|===

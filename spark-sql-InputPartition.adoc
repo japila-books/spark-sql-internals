@@ -2,6 +2,18 @@
 
 `InputPartition` is the <<contract, abstraction>> of <<implementations, input partitions>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<createPartitionReader, create an InputPartitionReader>> and optionally <<preferredLocations, specify preferred locations>>.
 
+`InputPartition` is also a Java https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html[Serializable].
+
+`InputPartition` is associated with <<spark-sql-DataSourceReader.adoc#, DataSourceReader>> abstraction and its extension <<spark-sql-SupportsScanColumnarBatch.adoc#, SupportsScanColumnarBatch>>.
+
+`InputPartition` is used for the following:
+
+* Creating <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>>, <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>>, `ContinuousDataSourceRDD` and `ContinuousDataSourceRDDPartition`
+
+* Requesting <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator for the <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#partitions, partitions>> or <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#batchPartitions, batchPartitions>> (of the input RDD)
+
+NOTE: It _appears_ that all concrete <<implementations, input partitions>> are used in Spark Structured Streaming only.
+
 [[contract]]
 .InputPartition Contract
 [cols="1m,3",options="header",width="100%"]
@@ -46,31 +58,32 @@ Used when:
 |===
 
 [[implementations]]
-.InputPartitions (Direct Implementations)
-[cols="1m,3",options="header",width="100%"]
+[[extensions]]
+.InputPartitions (Direct Implementations and Extensions Only)
+[cols="30m,70",options="header",width="100%"]
 |===
 | InputPartition
 | Description
 
-| Anonymous
-| Used in Spark Structured Streaming's `TextSocketMicroBatchReader`
-
 | ContinuousInputPartition
-| [[ContinuousInputPartition]]
-
-| ContinuousMemoryStreamInputPartition
-| [[ContinuousMemoryStreamInputPartition]] Used in Spark Structured Streaming
-
-| KafkaMicroBatchInputPartition
-| [[KafkaMicroBatchInputPartition]] Used in Spark Structured Streaming
-
-| MemoryStreamInputPartition
-| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming
+| [[ContinuousInputPartition]] Extension that is used in Spark Structured Streaming for Continuous Stream Processing
 
 | RateStreamMicroBatchInputPartition
 | [[RateStreamMicroBatchInputPartition]] Used in Spark Structured Streaming
 
 | TextSocketContinuousInputPartition
 | [[TextSocketContinuousInputPartition]] Used in Spark Structured Streaming
+
+| ContinuousMemoryStreamInputPartition
+| [[ContinuousMemoryStreamInputPartition]] Used in Spark Structured Streaming
+
+| MemoryStreamInputPartition
+| [[MemoryStreamInputPartition]] Used in Spark Structured Streaming
+
+| KafkaMicroBatchInputPartition
+| [[KafkaMicroBatchInputPartition]] Used in Spark Structured Streaming
+
+| Anonymous
+| [[TextSocketMicroBatchReader]] Used in Spark Structured Streaming for Text Socket Data Source
 
 |===
