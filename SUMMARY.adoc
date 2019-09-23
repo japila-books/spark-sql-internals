@@ -256,8 +256,8 @@
 
 . link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport Contract -- Data Sources with Session-Scoped Configuration Options]
 
-. link:spark-sql-InputPartition.adoc[InputPartition Contract]
-. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader Contract]
+. link:spark-sql-InputPartition.adoc[InputPartition]
+. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader]
 
 . link:spark-sql-DataWriter.adoc[DataWriter]
 
