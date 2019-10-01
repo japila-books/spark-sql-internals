@@ -1,4 +1,4 @@
-== [[LocalTableScanExec]] LocalTableScanExec Physical Operator
+== [[LocalTableScanExec]] LocalTableScanExec Leaf Physical Operator
 
 `LocalTableScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] (i.e. no link:spark-sql-catalyst-TreeNode.adoc#children[children]) and `producedAttributes` being `outputSet`.
 

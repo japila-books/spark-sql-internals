@@ -419,7 +419,7 @@ root
 
 `emptyDataset` creates a  link:spark-sql-LogicalPlan-LocalRelation.adoc[`LocalRelation` logical query plan].
 
-=== [[createDataset]] Creating Dataset from Local Collections or RDDs -- `createDataset` methods
+=== [[createDataset]] Creating Dataset from Local Collections or RDDs -- `createDataset` Methods
 
 [source, scala]
 ----
@@ -427,7 +427,7 @@ createDataset[T : Encoder](data: RDD[T]): Dataset[T]
 createDataset[T : Encoder](data: Seq[T]): Dataset[T]
 ----
 
-`createDataset` is an experimental API to create a link:spark-sql-Dataset.adoc[Dataset] from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
+`createDataset` creates a link:spark-sql-Dataset.adoc[Dataset] from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
 
 [source, scala]
 ----

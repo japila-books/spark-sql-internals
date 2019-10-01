@@ -64,7 +64,10 @@ NOTE: `calculateCov` is used when...FIXME
 
 [source, scala]
 ----
-crossTabulate(df: DataFrame, col1: String, col2: String): DataFrame
+crossTabulate(
+  df: DataFrame,
+  col1: String,
+  col2: String): DataFrame
 ----
 
 `crossTabulate`...FIXME
@@ -97,11 +100,13 @@ pearsonCorrelation(df: DataFrame, cols: Seq[String]): Double
 
 NOTE: `pearsonCorrelation` is used when...FIXME
 
-=== [[summary]] Calculating Statistics For Dataset -- `summary` Method
+=== [[summary]] Generate Summary Statistics of Dataset (as DataFrame) -- `summary` Method
 
 [source, scala]
 ----
-summary(ds: Dataset[_], statistics: Seq[String]): DataFrame
+summary(
+  ds: Dataset[_],
+  statistics: Seq[String]): DataFrame
 ----
 
 `summary`...FIXME
