@@ -22,30 +22,40 @@ Spark SQL supports three kinds of window functions:
 .5+^.^|*Ranking functions*
 
 | <<rank, rank>>
-|
+| Computes the rank of a value in a group of values. The result is one plus the number of rows preceding or equal to the current row in the ordering of the partition. The values will produce gaps in the sequence.
 
 | <<dense_rank, dense_rank>>
-|
+| Computes the rank of a value in a group of values. The result is one plus the previously assigned rank value. Unlike the function rank, dense_rank will not produce gaps in the ranking sequence.
 
 | <<percent_rank, percent_rank>>
-|
+|  Computes the percentage ranking of a value in a group of values.
+
+
 
 | <<ntile, ntile>>
-|
+|  Divides the rows for each window partition into n buckets ranging from 1 to at most n.
 
 | <<row_number, row_number>>
-|
+| Assigns a unique, sequential number to each row, starting with one, according to the ordering of rows within the window partition
 
 .3+^.^| *Analytic functions*
 
 | <<cume_dist, cume_dist>>
-a|
+a| Computes the position of a value relative to all values in the partition
 
 | <<lag, lag>>
-|
+|  lag(input[, offset[, default]]) - Returns the value of ```input``` at the ```offset```th row
+before the current row in the window. The default value of ```offset``` is 1 and the default
+value of ```default``` is null. If the value of ```input``` at the ```offset```th row is null,
+null is returned. If there is no such offset row (e.g., when the offset is 1, the first
+row of the window does not have any previous row), ```default``` is returned. 
 
 | <<lead, lead>>
-|
+|  lead(input[, offset[, default]]) - Returns the value of ```input``` at the ```offset```th row
+after the current row in the window. The default value of ```offset``` is 1 and the default
+value of ```default``` is null. If the value of ```input``` at the ```offset```th row is null,
+null is returned. If there is no such an offset row (e.g., when the offset is 1, the last
+row of the window does not have any subsequent row), ```default``` is returned. 
 |===
 
 For aggregate functions, you can use the existing link:spark-sql-basic-aggregation.adoc[aggregate functions] as window functions, e.g. `sum`, `avg`, `min`, `max` and `count`.
