@@ -1,6 +1,18 @@
 == [[DataFrameReader]] DataFrameReader -- Loading Data From External Data Sources
 
-`DataFrameReader` is the <<methods, public interface>> to describe how to <<load, load data from an external data source>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>).
+`DataFrameReader` is a <<methods, fluent API>> to describe the <<source, input data source>> that will be used to <<load, "load" data from an external data source>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>).
+
+`DataFrameReader` is <<creating-instance, created>> (available) exclusively using <<spark-sql-SparkSession.adoc#read, SparkSession.read>>.
+
+[source, scala]
+----
+import org.apache.spark.sql.SparkSession
+assert(spark.isInstanceOf[SparkSession])
+
+import org.apache.spark.sql.DataFrameReader
+val reader = spark.read
+assert(reader.isInstanceOf[DataFrameReader])
+----
 
 [[methods]]
 .DataFrameReader API
@@ -146,20 +158,9 @@ textFile(paths: String*): Dataset[String]
 
 |===
 
-`DataFrameReader` is available using link:spark-sql-SparkSession.adoc#read[SparkSession.read].
-
-[source, scala]
-----
-import org.apache.spark.sql.SparkSession
-val spark: SparkSession = ...
-
-import org.apache.spark.sql.DataFrameReader
-val reader: DataFrameReader = spark.read
-----
-
 `DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom formats>>.
 
-NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] Spark property.
+NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] configuration property.
 
 After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually "trigger" the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>, <<jdbc, jdbc>>) operators.
 
@@ -247,33 +248,6 @@ scala> citiesDF.show
 |  0|Warsaw| Poland|
 +---+------+-------+
 ----
-
-[[internal-registries]]
-.DataFrameReader's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| `extraOptions`
-| [[extraOptions]]
-
-Used when...FIXME
-
-| `source`
-a| [[source]] Name of the input data source (aka _format_ or _provider_) with the default format per link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] configuration property (default: <<parquet, parquet>>).
-
-`source` can be changed using <<format, format>> method.
-
-Used exclusively when `DataFrameReader` is requested to <<load, load>>.
-
-| `userSpecifiedSchema`
-| [[userSpecifiedSchema]] Optional *used-specified schema* (default: `None`, i.e. undefined)
-
-Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a link:spark-sql-DataSource.adoc#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
-
-Used when `DataFrameReader` is requested to <<assertNoSpecifiedSchema, assertNoSpecifiedSchema>> (while loading data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>)
-|===
 
 === [[format]] Specifying Format Of Input Data Source -- `format` method
 
@@ -583,9 +557,11 @@ Internally, `textFile` passes calls on to <<text, text>> method and link:spark-s
 
 === [[creating-instance]] Creating DataFrameReader Instance
 
-`DataFrameReader` takes the following when created:
+`DataFrameReader` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] <<spark-sql-SparkSession.adoc#, SparkSession>>
+
+`DataFrameReader` initializes the <<internal-properties, internal properties>>.
 
 === [[loadV1Source]] Loading Dataset (Data Source API V1) -- `loadV1Source` Internal Method
 
@@ -650,3 +626,52 @@ verifyColumnNameOfCorruptRecord(
 `verifyColumnNameOfCorruptRecord`...FIXME
 
 NOTE: `verifyColumnNameOfCorruptRecord` is used when `DataFrameReader` is requested to load data using <<json, json>> and <<csv, csv>>.
+
+=== [[source]] Input Data Source -- `source` Internal Property
+
+[source, scala]
+----
+source: String
+----
+
+`source` is the name of the input data source (aka _format_ or _provider_) that will be used to <<load, "load" data (as a DataFrame)>>.
+
+In other words, the <<methods, DataFrameReader fluent API>> is simply to describe the input data source.
+
+The default data source is <<parquet, parquet>> per <<spark-sql-properties.adoc#spark.sql.sources.default, spark.sql.sources.default>> configuration property.
+
+`source` is usually specified using <<format, format>> method.
+
+[IMPORTANT]
+====
+`source` must not be `hive` or an `AnalysisException` is thrown:
+
+```
+Hive data source can only be used with tables, you can not read files of Hive data source directly.
+```
+====
+
+Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.adoc#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using <<spark-sql-DataSource.adoc#lookupDataSource, DataSource>> utility.
+
+NOTE: `source` is used exclusively when `DataFrameReader` is requested to <<load, "load" data (as a DataFrame)>> (explicitly or using <<loadV1Source, loadV1Source>>).
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| extraOptions
+a| [[extraOptions]]
+
+Used when...FIXME
+
+| userSpecifiedSchema
+| [[userSpecifiedSchema]] Optional *used-specified schema* (default: `None`, i.e. undefined)
+
+Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a link:spark-sql-DataSource.adoc#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
+
+Used when `DataFrameReader` is requested to <<assertNoSpecifiedSchema, assertNoSpecifiedSchema>> (while loading data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>)
+
+|===

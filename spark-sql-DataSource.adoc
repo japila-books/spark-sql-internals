@@ -340,7 +340,9 @@ NOTE: `buildStorageFormatFromOptions` is used when...FIXME
 
 [source, scala]
 ----
-lookupDataSource(provider: String, conf: SQLConf): Class[_]
+lookupDataSource(
+  provider: String,
+  conf: SQLConf): Class[_]
 ----
 
 `lookupDataSource` looks up the class name in the <<backwardCompatibilityMap, backwardCompatibilityMap>> and then replaces the class name exclusively for the `orc` provider per link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] internal configuration property:
