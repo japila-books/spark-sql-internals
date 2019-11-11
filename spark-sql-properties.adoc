@@ -40,29 +40,6 @@ res2: String = 2.3.2
 | Name
 | Description
 
-| spark.sql.adaptive.enabled
-a| [[spark.sql.adaptive.enabled]] Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
-
-Default: `false`
-
-Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[SQLConf.adaptiveExecutionEnabled] method to access the current value.
-
-| spark.sql.adaptive.minNumPostShufflePartitions
-a| [[spark.sql.adaptive.minNumPostShufflePartitions]] *(internal)* The advisory minimal number of post-shuffle partitions for <<spark-sql-ExchangeCoordinator.adoc#minNumPostShufflePartitions, ExchangeCoordinator>>.
-
-Default: `-1`
-
-This setting is used in Spark SQL tests to have enough parallelism to expose issues that will not be exposed with a single partition. Only positive values are used.
-
-Use link:spark-sql-SQLConf.adoc#minNumPostShufflePartitions[SQLConf.minNumPostShufflePartitions] method to access the current value.
-
-| spark.sql.adaptive.shuffle.targetPostShuffleInputSize
-a| [[spark.sql.adaptive.shuffle.targetPostShuffleInputSize]] Recommended size of the input data of a post-shuffle partition (in bytes)
-
-Default: `64 * 1024 * 1024` bytes
-
-Use link:spark-sql-SQLConf.adoc#targetPostShuffleInputSize[SQLConf.targetPostShuffleInputSize] method to access the current value.
-
 | spark.sql.allowMultipleContexts
 | [[spark.sql.allowMultipleContexts]] Controls whether creating multiple SQLContexts/HiveContexts is allowed (`true`) or not (`false`)
 
@@ -264,96 +241,6 @@ Default: `4 * 1024 * 1024`
 It's better to over estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
 
 Use link:spark-sql-SQLConf.adoc#filesOpenCostInBytes[SQLConf.filesOpenCostInBytes] method to access the current value.
-
-| spark.sql.hive.convertMetastoreOrc
-a| [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
-
-Default: `true`
-
-| spark.sql.hive.convertMetastoreParquet
-a| [[spark.sql.hive.convertMetastoreParquet]] Controls whether to use the built-in Parquet reader and writer to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
-
-Default: `true`
-
-| spark.sql.hive.convertMetastoreParquet.mergeSchema
-a| [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] Enables trying to merge possibly different but compatible Parquet schemas in different Parquet data files.
-
-Default: `false`
-
-This configuration is only effective when <<spark.sql.hive.convertMetastoreParquet, spark.sql.hive.convertMetastoreParquet>> is enabled.
-
-| spark.sql.hive.manageFilesourcePartitions
-a| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables. This includes both datasource and converted Hive tables.
-
-Default: `true`
-
-When enabled (`true`), datasource tables store partition in the Hive metastore, and use the metastore to prune partitions during query planning.
-
-Use link:spark-sql-SQLConf.adoc#manageFilesourcePartitions[SQLConf.manageFilesourcePartitions] method to access the current value.
-
-| spark.sql.hive.metastore.barrierPrefixes
-a| [[spark.sql.hive.metastore.barrierPrefixes]] Comma-separated list of class prefixes that should explicitly be reloaded for each version of Hive that Spark SQL is communicating with, e.g. Hive UDFs that are declared in a prefix that typically would be shared (i.e. `org.apache.spark.*`)
-
-Default: `(empty)`
-
-| spark.sql.hive.metastore.jars
-a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
-
-Default: `builtin`
-
-Supported locations:
-
-* `builtin` - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
-
-* `maven` - download the Hive jars from Maven repositories
-
-* Classpath in the standard format for both Hive and Hadoop
-
-| spark.sql.hive.metastore.sharedPrefixes
-a| [[spark.sql.hive.metastore.sharedPrefixes]] Comma-separated list of class prefixes that should be loaded using the classloader that is shared between Spark SQL and a specific version of Hive.
-
-Default: `"com.mysql.jdbc", "org.postgresql", "com.microsoft.sqlserver", "oracle.jdbc"`
-
-An example of classes that should be shared are:
-
-* JDBC drivers that are needed to talk to the metastore
-
-* Other classes that interact with classes that are already shared, e.g. custom appenders that are used by log4j
-
-| spark.sql.hive.metastore.version
-a| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the <<spark-sql-HiveUtils.adoc#newClientForMetadata, client classes and jars>>).
-
-Default: `1.2.1`
-
-Supported versions range from `0.12.0` up to and including `2.3.2`.
-
-| spark.sql.inMemoryColumnarStorage.batchSize
-a| [[spark.sql.inMemoryColumnarStorage.batchSize]] *(internal)* Controls...FIXME
-
-Default: `10000`
-
-Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method to access the current value.
-
-| spark.sql.inMemoryColumnarStorage.compressed
-a| [[spark.sql.inMemoryColumnarStorage.compressed]] *(internal)* Controls...FIXME
-
-Default: `true`
-
-Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
-
-| spark.sql.inMemoryColumnarStorage.enableVectorizedReader
-a| [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for columnar caching.
-
-Default: `true`
-
-Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
-
-| spark.sql.inMemoryColumnarStorage.partitionPruning
-a| [[spark.sql.inMemoryColumnarStorage.partitionPruning]] *(internal)* Enables partition pruning for in-memory columnar tables
-
-Default: `true`
-
-Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartitionPruning] method to access the current value.
 
 | spark.sql.join.preferSortMergeJoin
 a| [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
@@ -584,60 +471,12 @@ Used when:
 
 * Reading (`DataStreamReader`) or writing (`DataStreamWriter`) in Structured Streaming
 
-| spark.sql.statistics.fallBackToHdfs
-a| [[spark.sql.statistics.fallBackToHdfs]] Enables automatic calculation of table size statistic by falling back to HDFS if the table statistics are not available from table metadata.
-
-Default: `false`
-
-This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
-
-Use link:spark-sql-SQLConf.adoc#fallBackToHdfsForStatsEnabled[SQLConf.fallBackToHdfsForStatsEnabled] method to access the current value.
-
-| spark.sql.statistics.histogram.enabled
-a| [[spark.sql.statistics.histogram.enabled]] Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[computing column statistics]
-
-Default: `false`
-
-NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
-
-Use link:spark-sql-SQLConf.adoc#histogramEnabled[SQLConf.histogramEnabled] method to access the current value.
-
-| spark.sql.statistics.histogram.numBins
-a| [[spark.sql.statistics.histogram.numBins]] *(internal)* The number of bins when generating histograms.
-
-Default: `254`
-
-NOTE: The number of bins must be greater than 1.
-
-Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] method to access the current value.
-
-| spark.sql.statistics.parallelFileListingInStatsComputation.enabled
-a| [[spark.sql.statistics.parallelFileListingInStatsComputation.enabled]] *(internal)* Enables parallel file listing in SQL commands, e.g. `ANALYZE TABLE` (as opposed to single thread listing that can be particularly slow with tables with hundreds of partitions)
-
-Default: `true`
-
-Use <<spark-sql-SQLConf.adoc#parallelFileListingInStatsComputation, SQLConf.parallelFileListingInStatsComputation>> method to access the current value.
-
-| spark.sql.statistics.size.autoUpdate.enabled
-a| [[spark.sql.statistics.size.autoUpdate.enabled]] Enables automatic update of the table size statistic of a table after the table has changed.
-
-Default: `false`
-
-IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
-
-Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnabled] method to access the current value.
-
 | spark.sql.subexpressionElimination.enabled
 a| [[spark.sql.subexpressionElimination.enabled]] *(internal)* Enables link:spark-sql-subexpression-elimination.adoc[subexpression elimination]
 
 Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
-
-| spark.sql.TungstenAggregate.testFallbackStartsAt
-a| [[spark.sql.TungstenAggregate.testFallbackStartsAt]] A comma-separated pair of numbers, e.g. `5,10`, that `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#testFallbackStartsAt[uses] to inform `TungstenAggregationIterator` to switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
-
-Default: `(empty)`
 
 | spark.sql.ui.retainedExecutions
 a| [[spark.sql.ui.retainedExecutions]] The number of link:spark-sql-SQLListener.adoc#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
@@ -646,14 +485,248 @@ Default: `1000`
 
 When a query execution finishes, the execution is removed from the internal `activeExecutions` registry and stored in `failedExecutions` or `completedExecutions` given the end execution status. It is when `SQLListener` makes sure that the number of `SQLExecutionUIData` entires does not exceed `spark.sql.ui.retainedExecutions` Spark property and removes the excess of entries.
 
-| spark.sql.windowExec.buffer.in.memory.threshold
+|===
+
+[[properties-statistics]]
+.Spark SQL Configuration Properties (spark.sql.statistics)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| s.s.s.fallBackToHdfs
+a| [[spark.sql.statistics.fallBackToHdfs]] Enables automatic calculation of table size statistic by falling back to HDFS if the table statistics are not available from table metadata.
+
+Default: `false`
+
+This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
+
+Use link:spark-sql-SQLConf.adoc#fallBackToHdfsForStatsEnabled[SQLConf.fallBackToHdfsForStatsEnabled] method to access the current value.
+
+| s.s.s.histogram.enabled
+a| [[spark.sql.statistics.histogram.enabled]] Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[computing column statistics]
+
+Default: `false`
+
+NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
+
+Use link:spark-sql-SQLConf.adoc#histogramEnabled[SQLConf.histogramEnabled] method to access the current value.
+
+| s.s.s.histogram.numBins
+a| [[spark.sql.statistics.histogram.numBins]] *(internal)* The number of bins when generating histograms.
+
+Default: `254`
+
+NOTE: The number of bins must be greater than 1.
+
+Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] method to access the current value.
+
+| s.s.s.parallelFileListingInStatsComputation.enabled
+a| [[spark.sql.statistics.parallelFileListingInStatsComputation.enabled]] *(internal)* Enables parallel file listing in SQL commands, e.g. `ANALYZE TABLE` (as opposed to single thread listing that can be particularly slow with tables with hundreds of partitions)
+
+Default: `true`
+
+Use <<spark-sql-SQLConf.adoc#parallelFileListingInStatsComputation, SQLConf.parallelFileListingInStatsComputation>> method to access the current value.
+
+| spark.sql.statistics.ndv.maxError
+a| [[spark.sql.statistics.ndv.maxError]] *(internal)* The maximum estimation error allowed in HyperLogLog++ algorithm when generating column level statistics.
+
+Default: `0.05`
+
+| spark.sql.statistics.percentile.accuracy
+a| [[spark.sql.statistics.percentile.accuracy]] *(internal)* Accuracy of percentile approximation when generating equi-height histograms. Larger value means better accuracy. The relative error can be deduced by 1.0 / PERCENTILE_ACCURACY.
+
+Default: `10000`
+
+| s.s.s.size.autoUpdate.enabled
+a| [[spark.sql.statistics.size.autoUpdate.enabled]] Enables automatic update of the table size statistic of a table after the table has changed.
+
+Default: `false`
+
+IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
+
+Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnabled] method to access the current value.
+
+|===
+
+[[properties-adaptive]]
+.Spark SQL Configuration Properties (spark.sql.adaptive)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| s.s.adaptive.enabled
+a| [[spark.sql.adaptive.enabled]] Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
+
+Default: `false`
+
+Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[SQLConf.adaptiveExecutionEnabled] method to access the current value.
+
+| s.s.adaptive.minNumPostShufflePartitions
+a| [[spark.sql.adaptive.minNumPostShufflePartitions]] *(internal)* The advisory minimal number of post-shuffle partitions for <<spark-sql-ExchangeCoordinator.adoc#minNumPostShufflePartitions, ExchangeCoordinator>>.
+
+Default: `-1`
+
+This setting is used in Spark SQL tests to have enough parallelism to expose issues that will not be exposed with a single partition. Only positive values are used.
+
+Use link:spark-sql-SQLConf.adoc#minNumPostShufflePartitions[SQLConf.minNumPostShufflePartitions] method to access the current value.
+
+| s.s.adaptive.shuffle.targetPostShuffleInputSize
+a| [[spark.sql.adaptive.shuffle.targetPostShuffleInputSize]] Recommended size of the input data of a post-shuffle partition (in bytes)
+
+Default: `64 * 1024 * 1024` bytes
+
+Use link:spark-sql-SQLConf.adoc#targetPostShuffleInputSize[SQLConf.targetPostShuffleInputSize] method to access the current value.
+
+|===
+
+[[properties-hive]]
+.Spark SQL Configuration Properties (spark.sql.hive)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| s.s.h.convertMetastoreOrc
+a| [[spark.sql.hive.convertMetastoreOrc]] *(internal)* When enabled (i.e. `true`), the built-in ORC reader and writer are used to process ORC tables created by using the HiveQL syntax (instead of Hive serde).
+
+Default: `true`
+
+| s.s.h.convertMetastoreParquet
+a| [[spark.sql.hive.convertMetastoreParquet]] Controls whether to use the built-in Parquet reader and writer to process parquet tables created by using the HiveQL syntax (instead of Hive serde).
+
+Default: `true`
+
+| s.s.h.convertMetastoreParquet.mergeSchema
+a| [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] Enables trying to merge possibly different but compatible Parquet schemas in different Parquet data files.
+
+Default: `false`
+
+This configuration is only effective when <<spark.sql.hive.convertMetastoreParquet, spark.sql.hive.convertMetastoreParquet>> is enabled.
+
+| s.s.h.manageFilesourcePartitions
+a| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables. This includes both datasource and converted Hive tables.
+
+Default: `true`
+
+When enabled (`true`), datasource tables store partition in the Hive metastore, and use the metastore to prune partitions during query planning.
+
+Use link:spark-sql-SQLConf.adoc#manageFilesourcePartitions[SQLConf.manageFilesourcePartitions] method to access the current value.
+
+| s.s.h.metastore.barrierPrefixes
+a| [[spark.sql.hive.metastore.barrierPrefixes]] Comma-separated list of class prefixes that should explicitly be reloaded for each version of Hive that Spark SQL is communicating with, e.g. Hive UDFs that are declared in a prefix that typically would be shared (i.e. `org.apache.spark.*`)
+
+Default: `(empty)`
+
+| s.s.h.metastore.jars
+a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
+
+Default: `builtin`
+
+Supported locations:
+
+* `builtin` - the jars that were used to load Spark SQL (aka _Spark classes_). Valid only when using the execution version of Hive, i.e. <<spark.sql.hive.metastore.version, spark.sql.hive.metastore.version>>
+
+* `maven` - download the Hive jars from Maven repositories
+
+* Classpath in the standard format for both Hive and Hadoop
+
+| s.s.h.metastore.sharedPrefixes
+a| [[spark.sql.hive.metastore.sharedPrefixes]] Comma-separated list of class prefixes that should be loaded using the classloader that is shared between Spark SQL and a specific version of Hive.
+
+Default: `"com.mysql.jdbc", "org.postgresql", "com.microsoft.sqlserver", "oracle.jdbc"`
+
+An example of classes that should be shared are:
+
+* JDBC drivers that are needed to talk to the metastore
+
+* Other classes that interact with classes that are already shared, e.g. custom appenders that are used by log4j
+
+| s.s.h.metastore.version
+a| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the <<spark-sql-HiveUtils.adoc#newClientForMetadata, client classes and jars>>).
+
+Default: `1.2.1`
+
+Supported versions range from `0.12.0` up to and including `2.3.2`.
+
+| s.s.h.verifyPartitionPath
+a| [[spark.sql.hive.verifyPartitionPath]] When true, check all the partition paths under the table's root directory when reading data stored in HDFS. This configuration will be deprecated in the future releases and replaced by spark.files.ignoreMissingFiles.
+
+Default: `false`
+
+| s.s.h.metastorePartitionPruning
+a| [[spark.sql.hive.metastorePartitionPruning]]
+
+| s.s.h.filesourcePartitionFileCacheSize
+a| [[spark.sql.hive.filesourcePartitionFileCacheSize]]
+
+| s.s.h.caseSensitiveInferenceMode
+a| [[spark.sql.hive.caseSensitiveInferenceMode]]
+
+| s.s.h.convertCTAS
+a| [[spark.sql.hive.convertCTAS]]
+
+| s.s.h.gatherFastStats
+a| [[spark.sql.hive.gatherFastStats]]
+
+| s.s.h.advancedPartitionPredicatePushdown.enabled
+a| [[spark.sql.hive.advancedPartitionPredicatePushdown.enabled]]
+
+|===
+
+[[properties-inMemoryColumnarStorage]]
+.Spark SQL Configuration Properties (spark.sql.inMemoryColumnarStorage)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| s.s.i.batchSize
+a| [[spark.sql.inMemoryColumnarStorage.batchSize]] *(internal)* Controls...FIXME
+
+Default: `10000`
+
+Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method to access the current value.
+
+| s.s.i.compressed
+a| [[spark.sql.inMemoryColumnarStorage.compressed]] *(internal)* Controls...FIXME
+
+Default: `true`
+
+Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
+
+| s.s.i.enableVectorizedReader
+a| [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for columnar caching.
+
+Default: `true`
+
+Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
+
+| s.s.i.partitionPruning
+a| [[spark.sql.inMemoryColumnarStorage.partitionPruning]] *(internal)* Enables partition pruning for in-memory columnar tables
+
+Default: `true`
+
+Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartitionPruning] method to access the current value.
+
+|===
+
+[[properties-windowExec]]
+.Spark SQL Configuration Properties (spark.sql.windowExec)
+[cols="1m,2",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| s.s.w.buffer.in.memory.threshold
 a| [[spark.sql.windowExec.buffer.in.memory.threshold]] *(internal)* Threshold for number of rows guaranteed to be held in memory by <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
 
 Default: `4096`
 
 Use <<spark-sql-SQLConf.adoc#windowExecBufferInMemoryThreshold, windowExecBufferInMemoryThreshold>> method to access the current value.
 
-| spark.sql.windowExec.buffer.spill.threshold
+| s.s.w.buffer.spill.threshold
 a| [[spark.sql.windowExec.buffer.spill.threshold]] *(internal)* Threshold for number of rows buffered in a <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> physical operator.
 
 Default: `4096`
