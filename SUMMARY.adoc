@@ -218,12 +218,17 @@
 === JDBC Data Source
 
 . link:spark-sql-jdbc.adoc[JDBC Data Source]
-. link:spark-sql-JDBCOptions.adoc[JDBCOptions -- JDBC Data Source Options]
+. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
 . link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
 . link:spark-sql-JDBCRelation.adoc[JDBCRelation]
 . link:spark-sql-JDBCRDD.adoc[JDBCRDD]
 . link:spark-sql-JdbcDialect.adoc[JdbcDialect]
 . link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
+
+=== Console Data Source
+
+. link:spark-sql-console.adoc[Console Data Source]
+. link:spark-sql-ConsoleSinkProvider.adoc[ConsoleSinkProvider]
 
 === Hive Data Source
 

@@ -117,12 +117,16 @@ Used when...FIXME
 
 [source, scala]
 ----
-writeAndRead(mode: SaveMode, data: DataFrame): BaseRelation
+writeAndRead(
+  mode: SaveMode,
+  data: DataFrame): BaseRelation
 ----
 
-CAUTION: FIXME
+`writeAndRead`...FIXME
 
-NOTE: `writeAndRead` is used exclusively when link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand] logical command is executed.
+NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
+
+NOTE: `writeAndRead` is used exclusively when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed.
 
 === [[write]] Writing DataFrame to Data Source Per Save Mode -- `write` Method
 
