@@ -71,12 +71,6 @@ Used when...FIXME
 
 Used when...FIXME
 
-| functionResourceLoader
-| `FunctionResourceLoader`
-| [[functionResourceLoader]] FIXME
-
-Used when...FIXME
-
 | listenerManager
 | link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
 | [[listenerManager]] FIXME
@@ -134,71 +128,16 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `LogicalPlan => QueryExecution`)
 * [[createClone]] `createClone` function to clone the `SessionState` given a <<spark-sql-SparkSession.adoc#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
 
-=== [[apply]] `apply` Factory Methods
-
-CAUTION: FIXME
-
-[source, scala]
-----
-apply(sparkSession: SparkSession): SessionState // <1>
-apply(sparkSession: SparkSession, sqlConf: SQLConf): SessionState
-----
-<1> Passes `sparkSession` to the other `apply` with a new `SQLConf`
-
-NOTE: `apply` is used when `SparkSession` link:spark-sql-SparkSession.adoc#instantiateSessionState[is requested for `SessionState`].
-
 === [[clone]] `clone` Method
 
-CAUTION: FIXME
-
-NOTE: `clone` is used when...
-
-=== [[createAnalyzer]] `createAnalyzer` Internal Method
-
 [source, scala]
 ----
-createAnalyzer(
-  sparkSession: SparkSession,
-  catalog: SessionCatalog,
-  sqlConf: SQLConf): Analyzer
+clone(newSparkSession: SparkSession): SessionState
 ----
 
-`createAnalyzer` creates a logical query plan link:spark-sql-Analyzer.adoc[Analyzer] with rules specific to a non-Hive `SessionState`.
+`clone`...FIXME
 
-[[batches]]
-.Analyzer's Evaluation Rules for non-Hive SessionState (in the order of execution)
-[cols="2,1,3",options="header",width="100%"]
-|===
-^.^| Method
-| Rules
-| Description
-
-.2+^.^| extendedResolutionRules
-| FindDataSourceTable
-| Replaces link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (with `CatalogRelation`) and `CatalogRelation` logical plans with link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation].
-
-| ResolveSQLOnFile
-|
-
-.3+^.^| postHocResolutionRules
-| <<spark-sql-Analyzer-PreprocessTableCreation.adoc#, PreprocessTableCreation>>
-| [[PreprocessTableCreation]]
-
-| PreprocessTableInsertion
-|
-
-| [[DataSourceAnalysis]] link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
-|
-
-.2+^.^| extendedCheckRules
-| PreWriteCheck
-|
-
-| HiveOnlyCheck
-|
-|===
-
-NOTE: `createAnalyzer` is used when `SessionState` is <<apply, created>> or <<clone, cloned>>.
+NOTE: `clone` is used when...
 
 === [[executePlan]] "Executing" Logical Plan (Creating QueryExecution For LogicalPlan) -- `executePlan` Method
 
@@ -211,22 +150,20 @@ executePlan(plan: LogicalPlan): QueryExecution
 
 === [[refreshTable]] `refreshTable` Method
 
-`refreshTable` is...
+[source, scala]
+----
+refreshTable(tableName: String): Unit
+----
 
-=== [[addJar]] `addJar` Method
+`refreshTable`...FIXME
 
-`addJar` is...
-
-=== [[analyze]] `analyze` Method
-
-`analyze` is...
+NOTE: `refreshTable` is used...FIXME
 
 === [[newHadoopConf]] Creating New Hadoop Configuration -- `newHadoopConf` Method
 
 [source, scala]
 ----
 newHadoopConf(): Configuration
-newHadoopConf(hadoopConf: Configuration, sqlConf: SQLConf): Configuration
 ----
 
 `newHadoopConf` returns a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the <<conf, SQLConf>>).

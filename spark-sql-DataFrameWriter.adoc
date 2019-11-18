@@ -41,7 +41,7 @@ a| [[insertInto]]
 insertInto(tableName: String): Unit
 ----
 
-Inserts (the results of) a `DataFrame` into a table
+Inserts (the results of) a structured query (`DataFrame`) into a table
 
 | <<jdbc-internals, jdbc>>
 a| [[jdbc]]

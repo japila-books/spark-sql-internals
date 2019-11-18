@@ -730,12 +730,12 @@
 == SQL Support
 
 . link:spark-sql-parsing-framework.adoc[SQL Parsing Framework]
-. link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser -- Base SQL Parsing Infrastructure]
-. link:spark-sql-AstBuilder.adoc[AstBuilder -- ANTLR-based SQL Parser]
-. link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser -- DataTypes and StructTypes Parser]
-. link:spark-sql-ParserInterface.adoc[ParserInterface -- SQL Parser Contract]
+. link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser]
+. link:spark-sql-AstBuilder.adoc[AstBuilder]
+. link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser]
+. link:spark-sql-ParserInterface.adoc[ParserInterface]
 . link:spark-sql-SparkSqlAstBuilder.adoc[SparkSqlAstBuilder]
-. link:spark-sql-SparkSqlParser.adoc[SparkSqlParser -- Default SQL Parser]
+. link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]
 
 == Spark Thrift Server
 

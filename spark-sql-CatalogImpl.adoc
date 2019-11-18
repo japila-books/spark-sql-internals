@@ -34,9 +34,35 @@ NOTE: `getTable` is part of link:spark-sql-Catalog.adoc#getTable[Catalog Contrac
 
 `getTable`...FIXME
 
+=== [[getFunction]] `getFunction` Method
+
+[source, scala]
+----
+getFunction(
+  functionName: String): Function
+getFunction(
+  dbName: String,
+  functionName: String): Function
+----
+
+NOTE: `getFunction` is part of link:spark-sql-Catalog.adoc#getFunction[Catalog Contract] to...FIXME.
+
+`getFunction`...FIXME
+
 === [[functionExists]] `functionExists` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+functionExists(
+  functionName: String): Boolean
+functionExists(
+  dbName: String,
+  functionName: String): Boolean
+----
+
+NOTE: `functionExists` is part of link:spark-sql-Catalog.adoc#functionExists[Catalog Contract] to...FIXME.
+
+`functionExists`...FIXME
 
 === [[cacheTable]] Caching Table or View In-Memory -- `cacheTable` Method
 

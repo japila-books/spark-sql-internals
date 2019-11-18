@@ -203,3 +203,14 @@ toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
 
 * <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical commands are executed
 ====
+
+=== [[getSparkSQLDataType]] `getSparkSQLDataType` Internal Utility
+
+[source, scala]
+----
+getSparkSQLDataType(hc: FieldSchema): DataType
+----
+
+`getSparkSQLDataType`...FIXME
+
+NOTE: `getSparkSQLDataType` is used when...FIXME

@@ -192,8 +192,11 @@ functionExists(name: FunctionIdentifier): Boolean
 
 [source, scala]
 ----
-listFunctions(db: String): Seq[(FunctionIdentifier, String)]
-listFunctions(db: String, pattern: String): Seq[(FunctionIdentifier, String)]
+listFunctions(
+  db: String): Seq[(FunctionIdentifier, String)]
+listFunctions(
+  db: String,
+  pattern: String): Seq[(FunctionIdentifier, String)]
 ----
 
 `listFunctions`...FIXME
