@@ -17,8 +17,6 @@ a| [[abortJob]]
 abortJob(jobContext: JobContext): Unit
 ----
 
-Used when...FIXME
-
 | abortTask
 a| [[abortTask]]
 
@@ -26,8 +24,6 @@ a| [[abortTask]]
 ----
 abortTask(taskContext: TaskAttemptContext): Unit
 ----
-
-Used when...FIXME
 
 | commitJob
 a| [[commitJob]]
@@ -39,8 +35,6 @@ commitJob(
   taskCommits: Seq[TaskCommitMessage]): Unit
 ----
 
-Used when...FIXME
-
 | commitTask
 a| [[commitTask]]
 
@@ -48,8 +42,6 @@ a| [[commitTask]]
 ----
 commitTask(taskContext: TaskAttemptContext): TaskCommitMessage
 ----
-
-Used when...FIXME
 
 | newTaskTempFile
 a| [[newTaskTempFile]]
@@ -62,8 +54,6 @@ newTaskTempFile(
   ext: String): String
 ----
 
-Used when...FIXME
-
 | newTaskTempFileAbsPath
 a| [[newTaskTempFileAbsPath]]
 
@@ -75,8 +65,6 @@ newTaskTempFileAbsPath(
   ext: String): String
 ----
 
-Used when...FIXME
-
 | onTaskCommit
 a| [[onTaskCommit]]
 
@@ -85,17 +73,14 @@ a| [[onTaskCommit]]
 onTaskCommit(taskCommit: TaskCommitMessage): Unit = {}
 ----
 
-Used when...FIXME
-
 | setupJob
 a| [[setupJob]]
 
 [source, scala]
 ----
-setupJob(jobContext: JobContext): Unit
+setupJob(
+  jobContext: JobContext): Unit
 ----
-
-Used when...FIXME
 
 | setupTask
 a| [[setupTask]]
@@ -105,8 +90,6 @@ a| [[setupTask]]
 setupTask(taskContext: TaskAttemptContext): Unit
 ----
 
-Used when...FIXME
-
 | setupJob
 a| [[setupJob]]
 
@@ -114,8 +97,6 @@ a| [[setupJob]]
 ----
 setupJob(jobContext: JobContext): Unit
 ----
-
-Used when...FIXME
 
 |===
 

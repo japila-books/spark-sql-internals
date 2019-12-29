@@ -180,6 +180,8 @@
 
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 
+. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
+
 . link:spark-sql-FileCommitProtocol.adoc[FileCommitProtocol]
 .. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
 
@@ -301,8 +303,6 @@
 . link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]
 
 === Others
-
-. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter Helper Object]
 
 . link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
 

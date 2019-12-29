@@ -242,6 +242,13 @@ It's better to over estimate it, then the partitions with small files will be fa
 
 Use link:spark-sql-SQLConf.adoc#filesOpenCostInBytes[SQLConf.filesOpenCostInBytes] method to access the current value.
 
+| spark.sql.files.maxRecordsPerFile
+a| [[spark.sql.files.maxRecordsPerFile]] Maximum number of records to write out to a single file. If this value is `0` or negative, there is no limit.
+
+Default: `0`
+
+Use <<spark-sql-SQLConf.adoc#maxRecordsPerFile, SQLConf.maxRecordsPerFile>> method to access the current value.
+
 | spark.sql.join.preferSortMergeJoin
 a| [[spark.sql.join.preferSortMergeJoin]] *(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
 
@@ -440,7 +447,7 @@ a| [[spark.sql.session.timeZone]] The ID of session-local timezone, e.g. "GMT", 
 
 Default: Java's `TimeZone.getDefault.getID`
 
-Use link:spark-sql-SQLConf.adoc#sessionLocalTimeZone[SQLConf.sessionLocalTimeZone] method to access the current value.
+Use <<spark-sql-SQLConf.adoc#sessionLocalTimeZone, SQLConf.sessionLocalTimeZone>> method to access the current value.
 
 | spark.sql.shuffle.partitions
 | [[spark.sql.shuffle.partitions]] Number of partitions to use by default when shuffling data for joins or aggregations

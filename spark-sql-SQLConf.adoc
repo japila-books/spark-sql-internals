@@ -247,6 +247,10 @@ a| [[manageFilesourcePartitions]] Used in:
 
 * `FileStatusCache` is requested to `getOrCreate`
 
+| maxRecordsPerFile
+| <<spark-sql-properties.adoc#spark.sql.files.maxRecordsPerFile, spark.sql.files.maxRecordsPerFile>>
+a| [[maxRecordsPerFile]][[MAX_RECORDS_PER_FILE]] Used when `FileFormatWriter` utility is used to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>
+
 | minNumPostShufflePartitions
 | <<spark-sql-properties.adoc#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>
 a| [[minNumPostShufflePartitions]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
@@ -324,8 +328,8 @@ a| [[runSQLonFile]] Used when:
 * `ResolveSQLOnFile` does link:spark-sql-Analyzer-ResolveSQLOnFile.adoc#maybeSQLFile[maybeSQLFile]
 
 | sessionLocalTimeZone
-| link:spark-sql-properties.adoc#spark.sql.session.timeZone[spark.sql.session.timeZone]
-| [[sessionLocalTimeZone]]
+| <<spark-sql-properties.adoc#spark.sql.session.timeZone, spark.sql.session.timeZone>>
+a| [[sessionLocalTimeZone]]
 
 | starSchemaDetection
 | link:spark-sql-properties.adoc#spark.sql.cbo.starSchemaDetection[spark.sql.cbo.starSchemaDetection]
