@@ -169,7 +169,7 @@ NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical
 
 | fileCommitProtocolClass
 | link:spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass]
-a| [[fileCommitProtocolClass]] Used (to instantiate a <<spark-sql-FileCommitProtocol.adoc#, FileCommitProtocol>>) when:
+a| [[fileCommitProtocolClass]] Used (to instantiate a `FileCommitProtocol`) when:
 
 * `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
 

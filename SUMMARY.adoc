@@ -181,9 +181,7 @@
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 
 . link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
-
-. link:spark-sql-FileCommitProtocol.adoc[FileCommitProtocol]
-.. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
+. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
 
 . link:spark-sql-PartitionedFile.adoc[PartitionedFile -- File Block in FileFormat Data Source]
 . link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]

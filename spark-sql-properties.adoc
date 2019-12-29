@@ -373,7 +373,7 @@ Radix sort is much faster but requires additional memory to be reserved up-front
 Use link:spark-sql-SQLConf.adoc#enableRadixSort[SQLConf.enableRadixSort] method to access the current value.
 
 | spark.sql.sources.commitProtocolClass
-a| [[spark.sql.sources.commitProtocolClass]] *(internal)* Fully-qualified class name of the <<spark-sql-FileCommitProtocol.adoc#, FileCommitProtocol>> to use for...FIXME
+a| [[spark.sql.sources.commitProtocolClass]] *(internal)* Fully-qualified class name of the `FileCommitProtocol` to use for...FIXME
 
 Default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.adoc#, SQLHadoopMapReduceCommitProtocol>>
 
