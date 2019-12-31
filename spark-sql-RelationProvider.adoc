@@ -1,51 +1,51 @@
 == [[RelationProvider]] RelationProvider Contract -- Relation Providers With Schema Inference
 
-`RelationProvider` is the <<contract, contract>> of <<implementations, BaseRelation providers>> that <<createRelation, create a relation with schema inference>>.
+`RelationProvider` is an <<contract, abstraction>> of <<implementations, data source providers>> of <<createRelation, relational data sources with schema inference>> (aka *schema discovery*).
 
-NOTE: *Schema inference* is also called *schema discovery*.
+[[contract]]
+.RelationProvider Contract
+[cols="30m,70",options="header",width="100%"]
+|===
+| Method
+| Description
 
-The requirement of not specifying a user-defined schema or having one that does not match the relation is enforced when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format. If specified and does not match, `DataSource` throws a `AnalysisException`:
+| createRelation
+a| [[createRelation]]
+
+[source, scala]
+----
+createRelation(
+  sqlContext: SQLContext,
+  parameters: Map[String, String]): BaseRelation
+----
+
+Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> for loading data from an external data source
+
+Used exclusively when `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a data source>> for a given data source format
+
+|===
+
+When <<spark-sql-DataSource.adoc#resolveRelation, resolving a data source>>, `DataSource` makes sure that a schema is not defined or matches the <<spark-sql-BaseRelation.adoc#schema, schema>> of the data source. `DataSource` throws an `AnalysisException` for a user-specified schema that does not match the data source's schema:
 
 ```
 [className] does not allow user-specified schemas.
 ```
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.sources
+TIP: Use <<spark-sql-SchemaRelationProvider.adoc#, SchemaRelationProvider>> for data source providers that require a user-defined schema.
 
-trait RelationProvider {
-  def createRelation(
-    sqlContext: SQLContext,
-    parameters: Map[String, String]): BaseRelation
-}
-----
-
-.RelationProvider Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| `createRelation`
-| [[createRelation]] Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> for loading data from an external data source
-
-Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format (and no user-defined schema or the user-defined schema matches <<spark-sql-BaseRelation.adoc#schema, schema>> of the `BaseRelation`)
-|===
+NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>> when requested for a <<spark-sql-CreatableRelationProvider.adoc#createRelation, relation>> (after writing out a structured query).
 
 [[implementations]]
 .RelationProviders
-[width="100%",cols="1,2",options="header"]
+[cols="30,70",options="header",width="100%"]
 |===
 | RelationProvider
 | Description
 
-| link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-| [[JdbcRelationProvider]]
+| <<spark-sql-JdbcRelationProvider.adoc#, JdbcRelationProvider>>
+| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.adoc#, JDBC data source>>
 
-| link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
-| [[KafkaSourceProvider]]
+| <<spark-sql-KafkaSourceProvider.adoc#, KafkaSourceProvider>>
+| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.adoc#, Kafka data source>>
+
 |===
-
-TIP: Use link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider] for relation providers that require a user-defined schema.

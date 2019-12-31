@@ -21,7 +21,7 @@ createRelation(
   data: DataFrame): BaseRelation
 ----
 
-Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> that represents the rows of a structured query (a DataFrame) saved to an external data source differently per <<spark-sql-DataFrameWriter.adoc#SaveMode, SaveMode>>
+Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> that represents the rows of a structured query (a DataFrame) saved to an external data source (per <<spark-sql-DataFrameWriter.adoc#SaveMode, SaveMode>>)
 
 The save mode specifies what should happen when the target relation (destination) already exists.
 

@@ -279,32 +279,32 @@
 
 == Extending Spark SQL / Data Source API V1
 
-. link:spark-sql-DataSource.adoc[DataSource -- Pluggable Data Provider Framework]
+. link:spark-sql-DataSource.adoc[DataSource]
 . link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
 
-=== Data Source Providers
+=== Data Source Providers / Relation Providers
 
-. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider Contract -- Data Sources That Write Rows Per Save Mode]
-. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister Contract -- Registering Data Source Format]
-. link:spark-sql-RelationProvider.adoc[RelationProvider Contract -- Relation Providers With Schema Inference]
-. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider Contract -- Relation Providers With Mandatory User-Defined Schema]
+. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
+. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister]
+. link:spark-sql-RelationProvider.adoc[RelationProvider]
+. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
 
 === Data Source Relations / Extension Contracts
 
-. link:spark-sql-BaseRelation.adoc[BaseRelation -- Collection of Tuples with Schema]
-.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation -- Relation for File-Based Data Source]
+. link:spark-sql-BaseRelation.adoc[BaseRelation]
+.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
 
-. link:spark-sql-CatalystScan.adoc[CatalystScan Contract]
-. link:spark-sql-InsertableRelation.adoc[InsertableRelation Contract -- Non-File-Based Relations with Inserting or Overwriting Data Support]
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan Contract -- Relations with Column Pruning and Filter Pushdown]
-. link:spark-sql-PrunedScan.adoc[PrunedScan Contract]
-. link:spark-sql-TableScan.adoc[TableScan Contract -- Relations with Column Pruning]
+. link:spark-sql-CatalystScan.adoc[CatalystScan]
+. link:spark-sql-InsertableRelation.adoc[InsertableRelation]
+. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
+. link:spark-sql-PrunedScan.adoc[PrunedScan]
+. link:spark-sql-TableScan.adoc[TableScan]
+
+. link:spark-sql-FileRelation.adoc[FileRelation]
 
 === Others
 
 . link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
-
-. link:spark-sql-FileRelation.adoc[FileRelation Contract]
 
 == Structured Query Execution
 
