@@ -443,4 +443,4 @@ getOrInferFileFormatSchema(
 
 `getOrInferFileFormatSchema`...FIXME
 
-NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolveRelation>>.
+NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a relation>>.

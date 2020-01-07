@@ -1,3 +1,15 @@
 == CatalogFileIndex
 
 `CatalogFileIndex` is a <<spark-sql-FileIndex.adoc#, FileIndex>>.
+
+=== [[filterPartitions]] `filterPartitions` Method
+
+[source, scala]
+----
+filterPartitions(
+  filters: Seq[Expression]): InMemoryFileIndex
+----
+
+`filterPartitions`...FIXME
+
+NOTE: `filterPartitions` is used when...FIXME
