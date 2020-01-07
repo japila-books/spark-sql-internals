@@ -1,0 +1,3 @@
+== CatalogFileIndex
+
+`CatalogFileIndex` is a <<spark-sql-FileIndex.adoc#, FileIndex>>.

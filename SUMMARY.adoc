@@ -782,7 +782,9 @@
 . link:spark-sql-CatalogUtils.adoc[CatalogUtils Helper Object]
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
 
-. link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
+. link:spark-sql-FileIndex.adoc[FileIndex]
+.. link:spark-sql-CatalogFileIndex.adoc[CatalogFileIndex]
+.. link:spark-sql-PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
 

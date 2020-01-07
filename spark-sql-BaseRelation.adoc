@@ -86,7 +86,7 @@ NOTE: `unhandledFilters` returns the input `filters` by default as it is conside
 
 NOTE: `unhandledFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters, selectFilters>>.
 
-=== [[sizeInBytes]] Requesting Estimated Size -- `sizeInBytes` Method
+=== [[sizeInBytes]] Estimated Size Of Relation (In Bytes) -- `sizeInBytes` Method
 
 [source, scala]
 ----
