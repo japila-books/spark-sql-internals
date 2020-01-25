@@ -1,10 +1,17 @@
 == [[CreateDataSourceTableCommand]] CreateDataSourceTableCommand Logical Command
 
-`CreateDataSourceTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, creates a new table>> (in a session-scoped `SessionCatalog`).
+`CreateDataSourceTableCommand` is a xref:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, creates a new table>> (in a xref:spark-sql-SessionCatalog.adoc[SessionCatalog]).
 
-`CreateDataSourceTableCommand` is created exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a non-Hive table provider with no query.
+`CreateDataSourceTableCommand` is created when xref:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a xref:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a non-Hive table provider with no query.
 
-`CreateDataSourceTableCommand` takes a `table` metadata and `ignoreIfExists` flag.
+=== [[creating-instance]] Creating CreateDataSourceTableCommand Instance
+
+`CreateDataSourceTableCommand` takes the following to be created:
+
+* [[table]] xref:spark-sql-CatalogTable.adoc[CatalogTable]
+* [[ignoreIfExists]] `ignoreIfExists` Flag
+
+`CreateDataSourceTableCommand` initializes the <<internal-properties, internal properties>>.
 
 === [[run]] Executing Logical Command -- `run` Method
 

@@ -1,12 +1,12 @@
 == [[CreateTable]] CreateTable Logical Operator
 
-`CreateTable` is a <<spark-sql-LogicalPlan.adoc#, logical operator>> that represents (is <<creating-instance, created>> for) the following:
+`CreateTable` is a xref:spark-sql-LogicalPlan.adoc[logical operator] that represents (is <<creating-instance, created>> for) the following:
 
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[createTable] (when requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable])
+* `DataFrameWriter` is requested to xref:spark-sql-DataFrameWriter.adoc#createTable[create a table] (for xref:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] operator)
 
-* `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
+* `SparkSqlAstBuilder` is requested to xref:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or xref:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
 
-* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#createTable[create a table]
+* `CatalogImpl` is requested to xref:spark-sql-CatalogImpl.adoc#createTable[create a table]
 
 `CreateTable` requires that the <<spark-sql-CatalogTable.adoc#provider, table provider>> of the <<tableDesc, CatalogTable>> is defined or throws an `AssertionError`:
 
@@ -23,10 +23,14 @@ assertion failed: The table to be created must have a provider.
 
 === [[creating-instance]] Creating CreateTable Instance
 
-`CreateTable` takes the following when created:
+`CreateTable` takes the following to be created:
 
-* [[tableDesc]] link:spark-sql-CatalogTable.adoc[Table metadata]
-* [[mode]] link:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode]
-* [[query]] link:spark-sql-LogicalPlan.adoc[Logical query plan]
+* [[tableDesc]] xref:spark-sql-CatalogTable.adoc[Table metadata]
+* [[mode]] xref:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode]
+* [[query]] Optional xref:spark-sql-LogicalPlan.adoc[Logical query plan]
 
-`CreateTable` initializes the <<internal-registries, internal registries and counters>>.
+When created, `CreateTable` makes sure that the optional <<query, logical query plan>> is undefined only when the <<mode, mode>> is `ErrorIfExists` or `Ignore`. `CreateTable` throws an `AssertionError` otherwise:
+
+```
+assertion failed: create table without data insertion can only use ErrorIfExists or Ignore as SaveMode.
+```
