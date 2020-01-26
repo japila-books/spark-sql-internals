@@ -4,7 +4,7 @@
 
 * <<INSERT_INTO_TABLE, INSERT INTO>> and <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> SQL statements
 
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert the rows of a DataFrame into a table]
+* xref:spark-sql-DataFrameWriter.adoc#insertInto[DataFrameWriter.insertInto] high-level operator
 
 [source, scala]
 ----
@@ -106,13 +106,18 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 [[output]]
 `InsertIntoTable` has an empty <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
 
-[[insertInto]]
-[[catalyst-dsl]]
-[TIP]
-====
-Use `insertInto` operator from the link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
+=== [[catalyst-dsl]][[insertInto]] Catalyst DSL -- `insertInto` Operator
 
 [source, scala]
+----
+insertInto(
+  tableName: String,
+  overwrite: Boolean = false): LogicalPlan
+----
+
+xref:spark-sql-catalyst-dsl.adoc#insertInto[insertInto] operator in xref:spark-sql-catalyst-dsl.adoc[Catalyst DSL] creates an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
+
+[source,plaintext]
 ----
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table("a").insertInto(tableName = "t1", overwrite = true)
@@ -125,7 +130,6 @@ val op = plan.p(0).asInstanceOf[InsertIntoTable]
 scala> :type op
 org.apache.spark.sql.catalyst.plans.logical.InsertIntoTable
 ----
-====
 
 === [[creating-instance]] Creating InsertIntoTable Instance
 

@@ -76,11 +76,13 @@ NOTE: Distinct window functions are not supported which is enforced at <<spark-s
 
 NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression-OffsetWindowFunction, analysis>>.
 
-=== [[catalyst-dsl]] Catalyst DSL -- `windowExpr` Operator
+=== [[catalyst-dsl]][[windowExpr]] Catalyst DSL -- `windowExpr` Operator
 
 [source, scala]
 ----
-windowExpr(windowFunc: Expression, windowSpec: WindowSpecDefinition): WindowExpression
+windowExpr(
+  windowFunc: Expression,
+  windowSpec: WindowSpecDefinition): WindowExpression
 ----
 
 <<spark-sql-catalyst-dsl.adoc#windowExpr, windowExpr>> operator in Catalyst DSL creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.

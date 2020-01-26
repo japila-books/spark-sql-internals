@@ -1,28 +1,31 @@
-== [[InsertableRelation]] InsertableRelation Contract -- Non-File-Based Relations with Inserting or Overwriting Data Support
+== [[InsertableRelation]] InsertableRelation Contract -- Relations with Inserting or Overwriting Data Support
 
-`InsertableRelation` is the <<contract, contract>> of non-file-based <<implementations, BaseRelations>> that support <<insert, inserting or overwriting data>>.
+`InsertableRelation` is an <<contract, abstraction>> of <<implementations, BaseRelations>> that support <<insert, inserting or overwriting data>>.
+
+NOTE: xref:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] unary logical operator is used to insert into an `InsertableRelation`.
 
 [[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.sources
-
-trait InsertableRelation {
-  def insert(data: DataFrame, overwrite: Boolean): Unit
-}
-----
-
 .InsertableRelation Contract
-[cols="1,2",options="header",width="100%"]
+[cols="30m,70",options="header",width="100%"]
 |===
-| Property
+| Method
 | Description
 
-| `insert`
-| [[insert]] Inserts or overwrites data (as <<spark-sql-DataFrame.adoc#, DataFrame>>) in a <<spark-sql-BaseRelation.adoc#, relation>>
+| createRelation
+a| [[createRelation]]
 
-Used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>>
+[source, scala]
+----
+insert(
+  data: DataFrame,
+  overwrite: Boolean): Unit
+----
+
+Inserts or overwrites data (from the given <<spark-sql-DataFrame.adoc#, DataFrame>>) into a <<spark-sql-BaseRelation.adoc#, relation>> per `overwrite` flag
+
+Used when xref:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand] logical command is executed
+
 |===
 
 [[implementations]]
-NOTE: <<spark-sql-JDBCRelation.adoc#,JDBCRelation>> is the one and only known direct implementation of <<contract, InsertableRelation Contract>> in Spark SQL.
+NOTE: xref:spark-sql-JDBCRelation.adoc[JDBCRelation] is the one and only known direct implementation of <<contract, InsertableRelation Contract>> in Spark SQL.

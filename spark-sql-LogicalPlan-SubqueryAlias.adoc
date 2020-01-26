@@ -22,7 +22,7 @@ NOTE: <<spark-sql-Optimizer-EliminateSubqueryAliases.adoc#, EliminateSubqueryAli
 
 NOTE: <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc#, RewriteCorrelatedScalarSubquery>> logical optimization rewrites correlated scalar subqueries with `SubqueryAlias` operators.
 
-=== [[catalyst-dsl]] Catalyst DSL -- `subquery` And `as` Operators
+=== [[catalyst-dsl]][[subquery]][[as]] Catalyst DSL -- `subquery` And `as` Operators
 
 [source, scala]
 ----
@@ -30,7 +30,7 @@ as(alias: String): LogicalPlan
 subquery(alias: Symbol): LogicalPlan
 ----
 
-<<spark-sql-catalyst-dsl.adoc#subquery, subquery>> and <<spark-sql-catalyst-dsl.adoc#as, as>> operators in Catalyst DSL create a <<creating-instance, SubqueryAlias>> logical operator, e.g. for testing or Spark SQL internals exploration.
+<<spark-sql-catalyst-dsl.adoc#subquery, subquery>> and <<spark-sql-catalyst-dsl.adoc#as, as>> operators in xref:spark-sql-catalyst-dsl.adoc[Catalyst DSL] create a <<creating-instance, SubqueryAlias>> logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----
