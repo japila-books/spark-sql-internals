@@ -246,9 +246,9 @@
 
 == Extending Spark SQL / Data Source API V2
 
-. link:spark-sql-DataSourceV2.adoc[DataSourceV2 -- Data Sources in Data Source API V2]
-. link:spark-sql-ReadSupport.adoc[ReadSupport Contract -- "Readable" Data Sources]
-. link:spark-sql-WriteSupport.adoc[WriteSupport Contract -- "Writable" Data Sources]
+. link:spark-sql-DataSourceV2.adoc[DataSourceV2]
+. link:spark-sql-ReadSupport.adoc[ReadSupport Contract]
+. link:spark-sql-WriteSupport.adoc[WriteSupport Contract]
 
 . link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 .. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
@@ -271,7 +271,7 @@
 
 . link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
 
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD -- Input RDD Of DataSourceV2ScanExec Physical Operator]
+. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
 .. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
 
 . link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask Partition Processing Function]

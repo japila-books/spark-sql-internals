@@ -283,6 +283,15 @@ a| [[optimizerExcludedRules]] Used exclusively when `Optimizer` is requested for
 | link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
 | [[optimizerInSetConversionThreshold]] Used exclusively when `OptimizeIn` logical query optimization is link:spark-sql-Optimizer-OptimizeIn.adoc#apply[applied to a logical plan] (and replaces an link:spark-sql-Expression-In.adoc[In] predicate expression with an link:spark-sql-Expression-InSet.adoc[InSet])
 
+|
+|
+a| [[ORC_IMPLEMENTATION]]
+
+Supported values:
+
+* `native` for xref:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
+* `hive` for `org.apache.spark.sql.hive.orc.OrcFileFormat`
+
 | parallelFileListingInStatsComputation
 | <<spark-sql-properties.adoc#spark.sql.statistics.parallelFileListingInStatsComputation.enabled, spark.sql.statistics.parallelFileListingInStatsComputation.enabled>>
 a| [[parallelFileListingInStatsComputation]] Used exclusively when `CommandUtils` helper object is requested to <<calculateTotalSize, calculate the total size of a table (with partitions)>> (for <<spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#, AnalyzeTableCommand>> commands)
@@ -318,6 +327,10 @@ a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-Inse
 | preferSortMergeJoin
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
 | [[preferSortMergeJoin]] Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
+
+| replaceDatabricksSparkAvroEnabled
+| xref:spark-sql-properties.adoc#spark.sql.legacy.replaceDatabricksSparkAvro.enabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]
+| [[replaceDatabricksSparkAvroEnabled]][[LEGACY_REPLACE_DATABRICKS_SPARK_AVRO_ENABLED]]
 
 | runSQLonFile
 | link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]

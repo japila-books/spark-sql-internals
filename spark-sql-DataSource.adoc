@@ -1,8 +1,26 @@
 == [[DataSource]] DataSource -- Pluggable Data Provider Framework
 
-`DataSource` is one of the main parts of *Data Source API* in Spark SQL (together with link:spark-sql-DataFrameReader.adoc[DataFrameReader] for loading datasets, link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for saving datasets and `StreamSourceProvider` for creating streaming sources).
+`DataSource` is the entry point of *Data Source API* in Spark SQL.
 
-`DataSource` models a *pluggable data provider framework* with the <<providers, extension points>> for Spark SQL integrators to expand the list of supported external data sources in Spark SQL.
+`DataSource` models a *pluggable data provider framework*. It comes with the <<providers, extension points>> so Spark SQL integrators can expand the external data sources supported (incl. Spark Structured Streaming).
+
+NOTE: Data source is also called a *table provider*.
+
+`DataSource` requires a <<sparkSession, SparkSession>> and a <<className, fully-qualified class name of the data source provider>> to be created (among <<creating-instance, other optional parameters>>). `DataSource` uses them to <<lookupDataSource, lookupDataSource>> (for the <<providingClass, providingClass>>). Once created, `DataSource` is used to <<resolveRelation, resolve a relation>> (the xref:spark-sql-BaseRelation.adoc[BaseRelation] that represents the external data source in logical plans with xref:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] leaf logical operator).
+
+`DataSource` is <<creating-instance, created>> when:
+
+* `HiveMetastoreCatalog` is requested to xref:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+
+* `DataFrameReader` is requested to xref:spark-sql-DataFrameReader.adoc#loadV1Source[load data from a data source (Data Source V1)]
+
+* `DataFrameWriter` is requested to xref:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (Data Source V1)]
+
+* xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand], xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand], xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand], xref:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] commands are executed
+
+* xref:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] and xref:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] logical evaluation rules are executed
+
+* For Spark Structured Streaming's `FileStreamSource`, `DataStreamReader` and `DataStreamWriter`
 
 `DataSource` takes a list of <<paths, file system paths that hold data>>. The list is empty by default, but can be different per data source:
 
@@ -11,18 +29,6 @@
 * The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.adoc#, ResolveSQLOnFile>> logical evaluation rule is executed)
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
-
-`DataSource` is <<creating-instance, created>> when:
-
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (per Data Source V1 contract)]
-
-* link:spark-sql-Analyzer-FindDataSourceTable.adoc#readDataSourceTable[FindDataSourceTable] and link:spark-sql-Analyzer-ResolveSQLOnFile.adoc#apply[ResolveSQLOnFile] logical evaluation rules are executed
-
-* link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[CreateDataSourceTableCommand], link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#run[CreateDataSourceTableAsSelectCommand], link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#run[InsertIntoDataSourceDirCommand], link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run[CreateTempViewUsing] are executed
-
-* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation]
-
-* Spark Structured Streaming's `FileStreamSource`, `DataStreamReader` and `DataStreamWriter`
 
 [[providers]]
 .DataSource's Provider (and Format) Contracts
@@ -57,7 +63,7 @@ a| [[StreamSourceProvider]] Used in:
 * <<resolveRelation, resolveRelation>> for resolved link:spark-sql-BaseRelation.adoc[BaseRelation].
 |===
 
-As a user, you interact with `DataSource` by link:spark-sql-DataFrameReader.adoc[DataFrameReader] (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
+As a Spark SQL developer (_user_), you interact with `DataSource` by link:spark-sql-DataFrameReader.adoc[DataFrameReader] (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
 
 [source, scala]
 ----
@@ -74,44 +80,77 @@ val messages: DataFrame = spark.readStream
   .load
 ----
 
-`DataSource` uses a link:spark-sql-SparkSession.adoc[SparkSession], a class name, a collection of `paths`, optional user-specified link:spark-sql-schema.adoc[schema], a collection of partition columns, a bucket specification, and configuration options.
-
-NOTE: Data source is also called a *table provider*.
-
 When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the optional <<bucketSpec, bucketing specification>>.
 
-[[internal-registries]]
-.DataSource's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+=== [[creating-instance]][[apply]] Creating DataSource Instance
 
-| `providingClass`
-| [[providingClass]] The Java class (`java.lang.Class`) that...FIXME
+`DataSource` takes the following to be created:
 
-Used when...FIXME
+* [[sparkSession]] xref:spark-sql-SparkSession.adoc[SparkSession]
+* [[className]] Fully-qualified class name of the data source provider (aka _data source format_)
+* [[paths]] Data paths (default: empty)
+* [[userSpecifiedSchema]] (optional) User-specified xref:spark-sql-StructType.adoc[schema] (default: undefined)
+* [[partitionColumns]] (optional) Names of the partition columns (default: empty)
+* [[bucketSpec]] (optional) xref:spark-sql-BucketSpec.adoc[Bucketing specification] (default: undefined)
+* [[options]] (optional) Options (default: empty)
+* [[catalogTable]] (optional) xref:spark-sql-CatalogTable.adoc[CatalogTable] (default: undefined)
 
-| `sourceInfo`
-| [[sourceInfo]] `SourceInfo`
+`DataSource` initializes the <<internal-properties, internal properties>>.
 
-Used when...FIXME
+NOTE: Only the <<sparkSession, SparkSession>> and the <<className, fully-qualified class name of the data source provider>> are required to create an instance of `DataSource`.
 
-| `caseInsensitiveOptions`
-| [[caseInsensitiveOptions]] FIXME
+=== [[lookupDataSource]] Looking Up Java Class For Data Source Provider -- `lookupDataSource` Utility
 
-Used when...FIXME
+[source, scala]
+----
+lookupDataSource(
+  provider: String,
+  conf: SQLConf): Class[_]
+----
 
-| `equality`
-| [[equality]] FIXME
+[[lookupDataSource-provider1]]
+`lookupDataSource` first finds the given `provider` in the <<backwardCompatibilityMap, backwardCompatibilityMap>> internal registry, and falls back to the `provider` name itself when not found.
 
-Used when...FIXME
+NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parquet`) or a fully-qualified class name (e.g. `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat`).
 
-| `backwardCompatibilityMap`
-| [[backwardCompatibilityMap]] FIXME
+`lookupDataSource` then uses the given xref:spark-sql-SQLConf.adoc[SQLConf] to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-Used when...FIXME
-|===
+* For `orc` provider and <<spark-sql-SQLConf.adoc#ORC_IMPLEMENTATION, native>>, `lookupDataSource` uses the new ORC file format xref:spark-sql-OrcFileFormat.adoc[OrcFileFormat] (based on Apache ORC)
+
+* For `orc` provider and <<spark-sql-SQLConf.adoc#ORC_IMPLEMENTATION, hive>>, `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
+
+* For `com.databricks.spark.avro` and xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled] configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.adoc[Avro data source] module
+
+CAUTION: FIXME (review me)
+
+`lookupDataSource` looks up the Java's https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html[Class] for the given `provider` in the <<backwardCompatibilityMap, backwardCompatibilityMap>> first and then replaces the class name exclusively for the `orc` provider per link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] internal configuration property:
+
+* For `hive` (default), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
+
+* For `native`, `lookupDataSource` uses the canonical class name of link:spark-sql-OrcFileFormat.adoc[OrcFileFormat], i.e. `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat`
+
+With the provider's class name (aka _provider1_ internally) `lookupDataSource` assumes another name variant of format `[provider1].DefaultSource` (aka _provider2_ internally).
+
+`lookupDataSource` then uses Java's link:++https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-++[ServiceLoader] to find all link:spark-sql-DataSourceRegister.adoc[DataSourceRegister] provider classes on the CLASSPATH.
+
+`lookupDataSource` filters out the `DataSourceRegister` provider classes (by their link:spark-sql-DataSourceRegister.adoc#shortName[alias]) that match the _provider1_ (case-insensitive), e.g. `parquet` or `kafka`.
+
+If a single provider class was found for the alias, `lookupDataSource` simply returns the provider class.
+
+If no `DataSourceRegister` could be found by the short name (alias), `lookupDataSource` considers the names of the format provider as the fully-qualified class names and tries to load them instead (using Java's link:++https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html#loadClass-java.lang.String-++[ClassLoader.loadClass]).
+
+NOTE: You can reference your own custom `DataSource` in your code by link:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] method which is the alias or a fully-qualified class name.
+
+CAUTION: FIXME Describe the other cases (orc and avro)
+
+If no provider class could be found, `lookupDataSource` throws a `RuntimeException`:
+
+[options="wrap"]
+----
+java.lang.ClassNotFoundException: Failed to find data source: [provider1]. Please find packages at http://spark.apache.org/third-party-projects.html
+----
+
+If however, `lookupDataSource` found multiple registered aliases for the provider name...FIXME
 
 === [[writeAndRead]] Writing Data to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
@@ -325,59 +364,6 @@ buildStorageFormatFromOptions(options: Map[String, String]): CatalogStorageForma
 
 NOTE: `buildStorageFormatFromOptions` is used when...FIXME
 
-=== [[creating-instance]][[apply]] Creating DataSource Instance
-
-`DataSource` takes the following when created:
-
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
-* [[className]] Name of the provider class (aka _input data source format_)
-* [[paths]] A list of file system paths that hold data (default: empty)
-* [[userSpecifiedSchema]] (optional) User-specified link:spark-sql-StructType.adoc[schema] (default: `None`, i.e. undefined)
-* [[partitionColumns]] (optional) Names of the partition columns (default: empty)
-* [[bucketSpec]] Optional <<spark-sql-BucketSpec.adoc#, bucketing specification>> (default: `None`)
-* [[options]] Options (default: empty)
-* [[catalogTable]] (optional) link:spark-sql-CatalogTable.adoc[CatalogTable] (default: `None`)
-
-`DataSource` initializes the <<internal-registries, internal registries and counters>>.
-
-==== [[lookupDataSource]] Looking Up Class By Name Of Data Source Provider -- `lookupDataSource` Method
-
-[source, scala]
-----
-lookupDataSource(
-  provider: String,
-  conf: SQLConf): Class[_]
-----
-
-`lookupDataSource` looks up the class name in the <<backwardCompatibilityMap, backwardCompatibilityMap>> and then replaces the class name exclusively for the `orc` provider per link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] internal configuration property:
-
-* For `hive` (default), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
-
-* For `native`, `lookupDataSource` uses the canonical class name of link:spark-sql-OrcFileFormat.adoc[OrcFileFormat], i.e. `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat`
-
-With the provider's class name (aka _provider1_ internally) `lookupDataSource` assumes another name variant of format `[provider1].DefaultSource` (aka _provider2_ internally).
-
-`lookupDataSource` then uses Java's link:++https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-++[ServiceLoader] to find all link:spark-sql-DataSourceRegister.adoc[DataSourceRegister] provider classes on the CLASSPATH.
-
-`lookupDataSource` filters out the `DataSourceRegister` provider classes (by their link:spark-sql-DataSourceRegister.adoc#shortName[alias]) that match the _provider1_ (case-insensitive), e.g. `parquet` or `kafka`.
-
-If a single provider class was found for the alias, `lookupDataSource` simply returns the provider class.
-
-If no `DataSourceRegister` could be found by the short name (alias), `lookupDataSource` considers the names of the format provider as the fully-qualified class names and tries to load them instead (using Java's link:++https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html#loadClass-java.lang.String-++[ClassLoader.loadClass]).
-
-NOTE: You can reference your own custom `DataSource` in your code by link:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] method which is the alias or a fully-qualified class name.
-
-CAUTION: FIXME Describe the other cases (orc and avro)
-
-If no provider class could be found, `lookupDataSource` throws a `RuntimeException`:
-
-[options="wrap"]
-----
-java.lang.ClassNotFoundException: Failed to find data source: [provider1]. Please find packages at http://spark.apache.org/third-party-projects.html
-----
-
-If however, `lookupDataSource` found multiple registered aliases for the provider name...FIXME
-
 === [[planForWriting]] Creating Logical Command for Writing (for CreatableRelationProvider and FileFormat Data Sources) -- `planForWriting` Method
 
 [source, scala]
@@ -444,3 +430,37 @@ getOrInferFileFormatSchema(
 `getOrInferFileFormatSchema`...FIXME
 
 NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a relation>>.
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| providingClass
+| [[providingClass]] https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html[java.lang.Class] that...FIXME
+
+Used when...FIXME
+
+| sourceInfo
+| [[sourceInfo]] `SourceInfo`
+
+Used when...FIXME
+
+| caseInsensitiveOptions
+| [[caseInsensitiveOptions]] FIXME
+
+Used when...FIXME
+
+| equality
+| [[equality]] FIXME
+
+Used when...FIXME
+
+| backwardCompatibilityMap
+| [[backwardCompatibilityMap]] FIXME
+
+Used when...FIXME
+
+|===

@@ -256,6 +256,13 @@ Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin] method to access the current value.
 
+| spark.sql.legacy.replaceDatabricksSparkAvro.enabled
+a| [[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]] Enables resolving (_mapping_) the data source provider `com.databricks.spark.avro` to the built-in (but external) Avro data source module for backward compatibility.
+
+Default: `true`
+
+Use xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[SQLConf.replaceDatabricksSparkAvroEnabled] method to access the current value.
+
 | spark.sql.limit.scaleUpFactor
 a| [[spark.sql.limit.scaleUpFactor]] *(internal)* Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
 
