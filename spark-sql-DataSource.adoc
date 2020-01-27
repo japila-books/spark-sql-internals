@@ -6,7 +6,9 @@
 
 NOTE: Data source is also called a *table provider*.
 
-`DataSource` requires a <<sparkSession, SparkSession>> and a <<className, fully-qualified class name of the data source provider>> to be created (among <<creating-instance, other optional parameters>>). `DataSource` uses them to <<lookupDataSource, lookupDataSource>> (for the <<providingClass, providingClass>>). Once created, `DataSource` is used to <<resolveRelation, resolve a relation>> (the xref:spark-sql-BaseRelation.adoc[BaseRelation] that represents the external data source in logical plans with xref:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] leaf logical operator).
+`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the xref:spark-sql-BaseRelation.adoc[BaseRelation]) to represent the data source in logical plans (using xref:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] leaf logical operator).
+
+`DataSource` also requires a <<sparkSession, SparkSession>> for the configuration properties to <<lookupDataSource, resolve the data source provider>>.
 
 `DataSource` is <<creating-instance, created>> when:
 
@@ -87,7 +89,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 `DataSource` takes the following to be created:
 
 * [[sparkSession]] xref:spark-sql-SparkSession.adoc[SparkSession]
-* [[className]] Fully-qualified class name of the data source provider (aka _data source format_)
+* [[className]] Fully-qualified class name or an alias of the data source provider (aka _data source format_)
 * [[paths]] Data paths (default: empty)
 * [[userSpecifiedSchema]] (optional) User-specified xref:spark-sql-StructType.adoc[schema] (default: undefined)
 * [[partitionColumns]] (optional) Names of the partition columns (default: empty)
@@ -99,7 +101,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 
 NOTE: Only the <<sparkSession, SparkSession>> and the <<className, fully-qualified class name of the data source provider>> are required to create an instance of `DataSource`.
 
-=== [[lookupDataSource]] Looking Up Java Class For Data Source Provider -- `lookupDataSource` Utility
+=== [[lookupDataSource]] Loading Java Class Of Data Source Provider -- `lookupDataSource` Utility
 
 [source, scala]
 ----
@@ -121,36 +123,23 @@ NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parqu
 
 * For `com.databricks.spark.avro` and xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled] configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.adoc[Avro data source] module
 
-CAUTION: FIXME (review me)
+[[lookupDataSource-provider2]]
+`lookupDataSource` uses `DefaultSource` as the class name (in the <<lookupDataSource-provider1, provider1>> package) as another provider name variant, i.e. `[provider1].DefaultSource`.
 
-`lookupDataSource` looks up the Java's https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html[Class] for the given `provider` in the <<backwardCompatibilityMap, backwardCompatibilityMap>> first and then replaces the class name exclusively for the `orc` provider per link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] internal configuration property:
+[[lookupDataSource-serviceLoader]]
+`lookupDataSource` uses Java's https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html[ServiceLoader] service-provider loading facility to find all data source providers of type xref:spark-sql-DataSourceRegister.adoc[DataSourceRegister] on the Spark CLASSPATH.
 
-* For `hive` (default), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
+NOTE: xref:spark-sql-DataSourceRegister.adoc[DataSourceRegister] is used to register a data source provider by a short name (_alias_).
 
-* For `native`, `lookupDataSource` uses the canonical class name of link:spark-sql-OrcFileFormat.adoc[OrcFileFormat], i.e. `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat`
+`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their xref:spark-sql-DataSourceRegister.adoc#shortName[alias]) that match the <<lookupDataSource-provider1, provider1>> name (case-insensitive, e.g. `parquet` or `kafka`).
 
-With the provider's class name (aka _provider1_ internally) `lookupDataSource` assumes another name variant of format `[provider1].DefaultSource` (aka _provider2_ internally).
+If a single `DataSourceRegister` provider class is found, `lookupDataSource` simply returns the instance of the data source provider.
 
-`lookupDataSource` then uses Java's link:++https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-++[ServiceLoader] to find all link:spark-sql-DataSourceRegister.adoc[DataSourceRegister] provider classes on the CLASSPATH.
+If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the <<lookupDataSource-provider1, provider1>> name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the <<lookupDataSource-provider2, provider2>> name (aka _DefaultSource_) instead.
 
-`lookupDataSource` filters out the `DataSourceRegister` provider classes (by their link:spark-sql-DataSourceRegister.adoc#shortName[alias]) that match the _provider1_ (case-insensitive), e.g. `parquet` or `kafka`.
+NOTE: xref:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] and xref:spark-sql-DataFrameReader.adoc#format[DataFrameReader.format] methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
 
-If a single provider class was found for the alias, `lookupDataSource` simply returns the provider class.
-
-If no `DataSourceRegister` could be found by the short name (alias), `lookupDataSource` considers the names of the format provider as the fully-qualified class names and tries to load them instead (using Java's link:++https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html#loadClass-java.lang.String-++[ClassLoader.loadClass]).
-
-NOTE: You can reference your own custom `DataSource` in your code by link:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] method which is the alias or a fully-qualified class name.
-
-CAUTION: FIXME Describe the other cases (orc and avro)
-
-If no provider class could be found, `lookupDataSource` throws a `RuntimeException`:
-
-[options="wrap"]
-----
-java.lang.ClassNotFoundException: Failed to find data source: [provider1]. Please find packages at http://spark.apache.org/third-party-projects.html
-----
-
-If however, `lookupDataSource` found multiple registered aliases for the provider name...FIXME
+CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
 === [[writeAndRead]] Writing Data to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
