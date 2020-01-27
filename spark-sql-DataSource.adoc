@@ -1,8 +1,35 @@
 == [[DataSource]] DataSource -- Pluggable Data Provider Framework
 
-`DataSource` is the entry point of *Data Source API* in Spark SQL.
+`DataSource` paves the way for *Pluggable Data Provider Framework* (_Data Source API_) in Spark SQL.
 
-`DataSource` models a *pluggable data provider framework*. It comes with the <<providers, extension points>> so Spark SQL integrators can expand the external data sources supported (incl. Spark Structured Streaming).
+Together with the <<providers, provider interfaces>>, `DataSource` allows Spark SQL integrators to use external data systems as data sources and sinks in structured queries in Spark SQL (incl. Spark Structured Streaming).
+
+[[providers]]
+.Provider Interfaces
+[cols="1,3",options="header",width="100%"]
+|===
+| Interface
+| Description
+
+| xref:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
+| [[CreatableRelationProvider]] Saves the result of a structured query per save mode and returns the schema
+
+| xref:spark-sql-FileFormat.adoc[FileFormat]
+a| [[FileFormat]]
+
+| xref:spark-sql-RelationProvider.adoc[RelationProvider]
+| [[RelationProvider]] Supports schema inference and can be referenced in SQL's `USING` clause
+
+| xref:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
+| [[SchemaRelationProvider]] Requires a user-defined schema
+
+| StreamSinkProvider
+| [[StreamSinkProvider]] Used in Structured Streaming
+
+| StreamSourceProvider
+| [[StreamSourceProvider]] Used in Structured Streaming
+
+|===
 
 NOTE: Data source is also called a *table provider*.
 
@@ -31,39 +58,6 @@ NOTE: Data source is also called a *table provider*.
 * The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.adoc#, ResolveSQLOnFile>> logical evaluation rule is executed)
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
-
-[[providers]]
-.DataSource's Provider (and Format) Contracts
-[cols="1,3",options="header",width="100%"]
-|===
-| Extension Point
-| Description
-
-| link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
-| [[CreatableRelationProvider]] Data source that saves the result of a structured query per save mode and returns the schema
-
-| link:spark-sql-FileFormat.adoc[FileFormat]
-a| [[FileFormat]] Used in:
-
-* <<sourceSchema, sourceSchema>> for streamed reading
-
-* <<write, write>> for writing a `DataFrame` to a `DataSource` (as part of creating a table as select)
-
-| link:spark-sql-RelationProvider.adoc[RelationProvider]
-| [[RelationProvider]] Data source that supports schema inference and can be accessed using SQL's `USING` clause
-
-| link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
-| [[SchemaRelationProvider]] Data source that requires a user-defined schema
-
-| `StreamSourceProvider`
-a| [[StreamSourceProvider]] Used in:
-
-* <<sourceSchema, sourceSchema>> and <<createSource, createSource>> for streamed reading
-
-* <<createSink, createSink>> for streamed writing
-
-* <<resolveRelation, resolveRelation>> for resolved link:spark-sql-BaseRelation.adoc[BaseRelation].
-|===
 
 As a Spark SQL developer (_user_), you interact with `DataSource` by link:spark-sql-DataFrameReader.adoc[DataFrameReader] (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
 
@@ -139,7 +133,34 @@ If no `DataSourceRegister` provider class could be found by the short name (alia
 
 NOTE: xref:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] and xref:spark-sql-DataFrameReader.adoc#format[DataFrameReader.format] methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
 
+.Demo: Resolving Data Source by Name
+[source, scala]
+----
+import org.apache.spark.sql.execution.datasources.DataSource
+val source = "parquet"
+val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
+----
+
 CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
+
+[NOTE]
+====
+`lookupDataSource` is used when:
+
+* xref:spark-sql-DataFrameReader.adoc#load[DataFrameReader.load] operator is used (to create a source node)
+
+* xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator is used (to create a sink node)
+
+* (Structured Streaming) `DataStreamReader.load` operator is used
+
+* (Structured Streaming) `DataStreamWriter.start` operator is used
+
+* `AlterTableAddColumnsCommand` command is executed
+
+* `DataSource` is requested (_lazily_) for the <<providingClass, providingClass>> internal registry
+
+* xref:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation] posthoc logical resolution rule is executed
+====
 
 === [[writeAndRead]] Writing Data to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
@@ -147,77 +168,42 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 ----
 writeAndRead(
   mode: SaveMode,
-  data: DataFrame): BaseRelation
+  data: LogicalPlan,
+  outputColumnNames: Seq[String],
+  physicalPlan: SparkPlan): BaseRelation
 ----
 
 `writeAndRead`...FIXME
 
 NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
 
-NOTE: `writeAndRead` is used exclusively when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed.
-
-=== [[write]] Writing DataFrame to Data Source Per Save Mode -- `write` Method
-
-[source, scala]
-----
-write(mode: SaveMode, data: DataFrame): BaseRelation
-----
-
-`write` writes the result of executing a structured query (as link:spark-sql-DataFrame.adoc[DataFrame]) to a data source per save `mode`.
-
-Internally, `write` <<lookupDataSource, looks up the data source>> and branches off per <<providingClass, providingClass>>.
-
-[[write-providingClass-branches]]
-.write's Branches per Supported providingClass (in execution order)
-[width="100%",cols="1,2",options="header"]
-|===
-| providingClass
-| Description
-
-| link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
-| Executes link:spark-sql-CreatableRelationProvider.adoc#createRelation[CreatableRelationProvider.createRelation]
-
-| link:spark-sql-FileFormat.adoc[FileFormat]
-| <<writeInFileFormat, writeInFileFormat>>
-
-| _others_
-| Reports a `RuntimeException`
-|===
-
-NOTE: `write` does not support the internal `CalendarIntervalType` in the link:spark-sql-schema.adoc[schema of `data` `DataFrame`] and throws a `AnalysisException` when there is one.
-
-NOTE: `write` is used exclusively when link:spark-sql-LogicalPlan-RunnableCommand.adoc#SaveIntoDataSourceCommand[SaveIntoDataSourceCommand] is executed.
-
-=== [[writeInFileFormat]] `writeInFileFormat` Internal Method
-
-CAUTION: FIXME
-
-For link:spark-sql-FileFormat.adoc[FileFormat] data sources, `write` takes all `paths` and `path` option and makes sure that there is only one.
-
-NOTE: `write` uses Hadoop's https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/Path.html[Path] to access the https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html[FileSystem] and calculate the qualified output path.
-
-`write` requests `PartitioningUtils` to link:spark-sql-PartitioningUtils.adoc#validatePartitionColumn[validatePartitionColumn].
-
-When appending to a table, ...FIXME
-
-In the end, `write` (for a link:spark-sql-FileFormat.adoc[FileFormat] data source) link:spark-sql-SessionState.adoc#executePlan[prepares a `InsertIntoHadoopFsRelationCommand` logical plan] with link:spark-sql-QueryExecution.adoc#toRdd[executes] it.
-
-CAUTION: FIXME Is `toRdd` a job execution?
+NOTE: `writeAndRead` is used when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed.
 
 === [[createSource]] `createSource` Method
 
 [source, scala]
 ----
-createSource(metadataPath: String): Source
+createSource(
+  metadataPath: String): Source
 ----
 
-CAUTION: FIXME
+`createSource`...FIXME
+
+NOTE: `createSource` is used when...FIXME
 
 === [[createSink]] `createSink` Method
 
-CAUTION: FIXME
+[source, scala]
+----
+createSink(
+  outputMode: OutputMode): Sink
+----
 
-==== [[sourceSchema]] `sourceSchema` Internal Method
+`createSink`...FIXME
+
+NOTE: `createSink` is used when...FIXME
+
+=== [[sourceSchema]] `sourceSchema` Internal Method
 
 [source, scala]
 ----
@@ -279,24 +265,12 @@ Data source [className] does not support streamed reading
 
 NOTE: `sourceSchema` is used exclusively when `DataSource` is requested for the <<sourceInfo, sourceInfo>>.
 
-==== [[inferFileFormatSchema]] `inferFileFormatSchema` Internal Method
-
-[source, scala]
-----
-inferFileFormatSchema(format: FileFormat): StructType
-----
-
-`inferFileFormatSchema` private method computes (aka _infers_) schema (as link:spark-sql-StructType.adoc[StructType]). It returns `userSpecifiedSchema` if specified or uses `FileFormat.inferSchema`. It throws a `AnalysisException` when is unable to infer schema.
-
-It uses `path` option for the list of directory paths.
-
-NOTE: It is used by <<sourceSchema, DataSource.sourceSchema>> and <<createSource, DataSource.createSource>> when link:spark-sql-FileFormat.adoc[FileFormat] is processed.
-
 === [[resolveRelation]] Resolving Relation (Creating BaseRelation) -- `resolveRelation` Method
 
 [source, scala]
 ----
-resolveRelation(checkFilesExist: Boolean = true): BaseRelation
+resolveRelation(
+  checkFilesExist: Boolean = true): BaseRelation
 ----
 
 `resolveRelation` resolves (i.e. creates) a link:spark-sql-BaseRelation.adoc[BaseRelation].
@@ -342,11 +316,12 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 * Structured Streaming's `FileStreamSource` creates batches of records
 ====
 
-=== [[buildStorageFormatFromOptions]] `buildStorageFormatFromOptions` Method
+=== [[buildStorageFormatFromOptions]] `buildStorageFormatFromOptions` Utility
 
 [source, scala]
 ----
-buildStorageFormatFromOptions(options: Map[String, String]): CatalogStorageFormat
+buildStorageFormatFromOptions(
+  options: Map[String, String]): CatalogStorageFormat
 ----
 
 `buildStorageFormatFromOptions`...FIXME
@@ -357,7 +332,9 @@ NOTE: `buildStorageFormatFromOptions` is used when...FIXME
 
 [source, scala]
 ----
-planForWriting(mode: SaveMode, data: LogicalPlan): LogicalPlan
+planForWriting(
+  mode: SaveMode,
+  data: LogicalPlan): LogicalPlan
 ----
 
 `planForWriting` creates an instance of the <<providingClass, providingClass>> and branches off per its type as follows:
@@ -413,12 +390,37 @@ NOTE: `planForWritingFileFormat` is used when `DataSource` is requested to <<wri
 ----
 getOrInferFileFormatSchema(
   format: FileFormat,
-  fileStatusCache: FileStatusCache = NoopCache): (StructType, StructType)
+  fileIndex: Option[InMemoryFileIndex] = None): (StructType, StructType)
 ----
 
 `getOrInferFileFormatSchema`...FIXME
 
 NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a relation>>.
+
+=== [[checkAndGlobPathIfNecessary]] `checkAndGlobPathIfNecessary` Internal Method
+
+[source, scala]
+----
+checkAndGlobPathIfNecessary(
+  checkEmptyGlobPath: Boolean,
+  checkFilesExist: Boolean): Seq[Path]
+----
+
+`checkAndGlobPathIfNecessary`...FIXME
+
+NOTE: `checkAndGlobPathIfNecessary` is used when...FIXME
+
+=== [[createInMemoryFileIndex]] `createInMemoryFileIndex` Internal Method
+
+[source, scala]
+----
+createInMemoryFileIndex(
+  globbedPaths: Seq[Path]): InMemoryFileIndex
+----
+
+`createInMemoryFileIndex`...FIXME
+
+NOTE: `createInMemoryFileIndex` is used when...FIXME
 
 === [[internal-properties]] Internal Properties
 
@@ -428,9 +430,13 @@ NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for th
 | Description
 
 | providingClass
-| [[providingClass]] https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html[java.lang.Class] that...FIXME
+a| [[providingClass]] https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html[java.lang.Class] that was <<lookupDataSource, loaded>> for the given <<className, data source provider>>
 
-Used when...FIXME
+Used when:
+
+* `DataSource` is requested to <<sourceSchema, sourceSchema>>, <<createSource, createSource>>, <<createSink, createSink>>, <<resolveRelation, resolveRelation>>, <<writeAndRead, writeAndRead>>, and <<planForWriting, planForWriting>>
+
+* xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] logical evaluation rule are executed (to ensure that only xref:spark-sql-FileFormat.adoc[FileFormat]-based data sources are used)
 
 | sourceInfo
 | [[sourceInfo]] `SourceInfo`
@@ -448,8 +454,6 @@ Used when...FIXME
 Used when...FIXME
 
 | backwardCompatibilityMap
-| [[backwardCompatibilityMap]] FIXME
-
-Used when...FIXME
+| [[backwardCompatibilityMap]] Names of the data sources that are no longer available but should still be accepted (<<lookupDataSource, "resolvable">>) for backward-compatibility
 
 |===
