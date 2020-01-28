@@ -162,7 +162,7 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 * xref:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation] posthoc logical resolution rule is executed
 ====
 
-=== [[writeAndRead]] Writing Data to Data Source per Save Mode Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
+=== [[writeAndRead]] Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
 
 [source, scala]
 ----
@@ -177,7 +177,7 @@ writeAndRead(
 
 NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
 
-NOTE: `writeAndRead` is used when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed.
+NOTE: `writeAndRead` is used when xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command is executed.
 
 === [[createSource]] `createSource` Method
 
@@ -358,7 +358,7 @@ planForWriting(
 * <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>> logical command is executed
 ====
 
-=== [[planForWritingFileFormat]] Planning for Writing (Using FileFormat) -- `planForWritingFileFormat` Internal Method
+=== [[planForWritingFileFormat]] Planning for Writing (to FileFormat-Based Data Source) -- `planForWritingFileFormat` Internal Method
 
 [source, scala]
 ----
@@ -382,7 +382,7 @@ When the number of the <<paths, paths>> is different than `1`, `planForWritingFi
 Expected exactly one path to be specified, but got: [allPaths]
 ```
 
-NOTE: `planForWritingFileFormat` is used when `DataSource` is requested to <<writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed) and for the <<planForWriting, logical command for writing>>.
+NOTE: `planForWritingFileFormat` is used when `DataSource` is requested to <<writeAndRead, write data to a data source followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed) and for the <<planForWriting, logical command for writing>>.
 
 === [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
 
