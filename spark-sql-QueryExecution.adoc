@@ -1,13 +1,15 @@
 == [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline
 
-`QueryExecution` represents the <<execution-pipeline, execution pipeline>> of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) with execution stages (phases).
+`QueryExecution` is the <<execution-pipeline, execution pipeline>> (_workflow_) of a <<logical, structured query>>.
+
+`QueryExecution` is made up of *execution stages* (phases).
 
 .Query Execution &mdash; From SQL through Dataset to RDD
 image::images/QueryExecution-execution-pipeline.png[align="center"]
 
 NOTE: When you execute an operator on a `Dataset` it triggers <<toRdd, query execution>> that gives the good ol' `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows], i.e. `RDD[InternalRow]`, that is Spark's execution plan followed by executing an RDD action and so the result of the structured query.
 
-You can access the `QueryExecution` of a `Dataset` using link:spark-sql-Dataset.adoc#queryExecution[queryExecution] attribute.
+`QueryExecution` is part of any `Dataset` using xref:spark-sql-Dataset.adoc#queryExecution[queryExecution] attribute.
 
 [source, scala]
 ----

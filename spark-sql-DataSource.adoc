@@ -162,23 +162,6 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 * xref:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation] posthoc logical resolution rule is executed
 ====
 
-=== [[writeAndRead]] Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
-
-[source, scala]
-----
-writeAndRead(
-  mode: SaveMode,
-  data: LogicalPlan,
-  outputColumnNames: Seq[String],
-  physicalPlan: SparkPlan): BaseRelation
-----
-
-`writeAndRead`...FIXME
-
-NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
-
-NOTE: `writeAndRead` is used when xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command is executed.
-
 === [[createSource]] `createSource` Method
 
 [source, scala]
@@ -358,6 +341,23 @@ planForWriting(
 * <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>> logical command is executed
 ====
 
+=== [[writeAndRead]] Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
+
+[source, scala]
+----
+writeAndRead(
+  mode: SaveMode,
+  data: LogicalPlan,
+  outputColumnNames: Seq[String],
+  physicalPlan: SparkPlan): BaseRelation
+----
+
+`writeAndRead`...FIXME
+
+NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
+
+NOTE: `writeAndRead` is used when xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command is executed.
+
 === [[planForWritingFileFormat]] Planning for Writing (to FileFormat-Based Data Source) -- `planForWritingFileFormat` Internal Method
 
 [source, scala]
@@ -382,7 +382,14 @@ When the number of the <<paths, paths>> is different than `1`, `planForWritingFi
 Expected exactly one path to be specified, but got: [allPaths]
 ```
 
-NOTE: `planForWritingFileFormat` is used when `DataSource` is requested to <<writeAndRead, write data to a data source followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed) and for the <<planForWriting, logical command for writing>>.
+[NOTE]
+====
+`planForWritingFileFormat` is used when `DataSource` is requested for the following:
+
+* <<writeAndRead, Writing data to a data source followed by "reading" rows back>> (for xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command)
+
+* <<planForWriting, Creating a logical command for writing>> (for xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator with DataSource V1 data sources)
+====
 
 === [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
 

@@ -95,17 +95,18 @@ The <<metrics, performance metrics>> are used when:
 | DataWritingCommand
 | Description
 
-| <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>>
+| xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]]
 
-| <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>>
+| xref:spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 | [[CreateHiveTableAsSelectCommand]]
 
-| <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>
+| xref:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
-| <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#, SaveAsHiveFile>>
-| [[SaveAsHiveFile]] Contract for commands that write query result as Hive files (e.g. <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>>, <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>)
+| xref:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile]
+| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. xref:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and xref:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable])
+
 |===
 
 === [[basicWriteJobStatsTracker]] `basicWriteJobStatsTracker` Method

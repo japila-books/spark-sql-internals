@@ -689,8 +689,8 @@ window(
 | [[col]][[column]] link:spark-sql-functions-regular-functions.adoc#col[col] and link:spark-sql-functions-regular-functions.adoc#column[column]
 | Creating link:spark-sql-Column.adoc[Columns]
 
-| [[expr]] link:spark-sql-functions-regular-functions.adoc#expr[expr]
-|
+| xref:spark-sql-functions-regular-functions.adoc#expr[expr]
+| [[expr]]
 
 | [[lit]] link:spark-sql-functions-regular-functions.adoc#lit[lit]
 |

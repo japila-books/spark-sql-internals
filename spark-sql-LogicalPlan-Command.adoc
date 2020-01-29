@@ -12,14 +12,15 @@ NOTE: `Command` is executed when a `Dataset` is requested for the link:spark-sql
 
 [[implementations]]
 .Commands (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
+[cols="30m,70",options="header",width="100%"]
 |===
 | Command
 | Description
 
-| <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>>
+| xref:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand]
 | [[DataWritingCommand]]
 
-| <<spark-sql-LogicalPlan-RunnableCommand.adoc#, RunnableCommand>>
+| xref:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
 | [[RunnableCommand]]
+
 |===

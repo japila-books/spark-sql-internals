@@ -4,9 +4,10 @@
 
 `InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
 
-CAUTION: FIXME: When is DataSource.planForWritingFileFormat?
-
-* `DataSource` is requested to xref:spark-sql-DataSource.adoc#planForWritingFileFormat[plan for writing to a FileFormat-based data source]
+* `DataSource` is requested to xref:spark-sql-DataSource.adoc#planForWritingFileFormat[plan for writing to a FileFormat-based data source] for the following:
+** xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command
+** xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command
+** xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator with DataSource V1 data sources
 
 * xref:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] logical operator with a xref:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation])
 
