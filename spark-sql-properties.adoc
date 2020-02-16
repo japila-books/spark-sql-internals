@@ -256,6 +256,15 @@ Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin] method to access the current value.
 
+| spark.sql.legacy.rdd.applyConf
+a| [[spark.sql.legacy.rdd.applyConf]] *(internal)* Enables propagation of xref:spark-sql-SQLConf.adoc#getAllConfs[SQL configurations] when executing operations on the xref:spark-sql-QueryExecution.adoc#toRdd[RDD that represents a structured query]. This is the (buggy) behavior up to 2.4.4.
+
+Default: `true`
+
+This is for cases not tracked by xref:spark-sql-SQLExecution.adoc[SQL execution], as it happens when a `Dataset` is converted to an RDD either using xref:spark-sql-Dataset.adoc#rdd[rdd] operation or xref:spark-sql-QueryExecution.adoc#toRdd[QueryExecution], and then the returned RDD is used to invoke actions on it.
+
+This config is deprecated and will be removed in 3.0.0.
+
 | spark.sql.legacy.replaceDatabricksSparkAvro.enabled
 a| [[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]] Enables resolving (_mapping_) the data source provider `com.databricks.spark.avro` to the built-in (but external) Avro data source module for backward compatibility.
 

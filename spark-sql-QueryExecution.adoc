@@ -85,7 +85,14 @@ NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers
 ====
 
 | toRdd
-a| [[toRdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) after link:spark-sql-SparkPlan.adoc#execute[executing] the <<executedPlan, executedPlan>>.
+a| [[toRdd]]
+
+[source, scala]
+----
+toRdd: RDD[InternalRow]
+----
+
+Spark Core's execution graph of a distributed computation (`RDD` of xref:spark-sql-InternalRow.adoc[internal binary rows]) from the <<executedPlan, executedPlan>> after xref:spark-sql-SparkPlan.adoc#execute[execution].
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 
