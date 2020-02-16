@@ -372,6 +372,10 @@ a| [[supportQuotedRegexColumnName]] Used when:
 | <<spark-sql-properties.adoc#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>>
 | [[targetPostShuffleInputSize]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
 
+| truncateTableIgnorePermissionAcl
+| xref:spark-sql-properties.adoc#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]
+| [[truncateTableIgnorePermissionAcl]][[TRUNCATE_TABLE_IGNORE_PERMISSION_ACL]] Used when xref:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand] is executed
+
 | useCompression
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
 | [[useCompression]] Used when...FIXME

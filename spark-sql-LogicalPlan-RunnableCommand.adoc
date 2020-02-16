@@ -231,8 +231,8 @@ Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrame
 | StreamingExplainCommand
 |
 
-| TruncateTableCommand
-|
+| xref:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand]
+| [[TruncateTableCommand]]
 
 | UncacheTableCommand
 |

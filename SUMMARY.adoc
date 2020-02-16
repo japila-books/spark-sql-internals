@@ -488,6 +488,7 @@
 . link:spark-sql-LogicalPlan-ShowTablesCommand.adoc[ShowTablesCommand]
 . link:spark-sql-LogicalPlan-Sort.adoc[Sort]
 . link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias]
+. link:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand]
 . link:spark-sql-LogicalPlan-TypedFilter.adoc[TypedFilter]
 . link:spark-sql-LogicalPlan-Union.adoc[Union]
 . link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation]

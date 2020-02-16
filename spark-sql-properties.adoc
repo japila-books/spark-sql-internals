@@ -261,7 +261,7 @@ a| [[spark.sql.legacy.rdd.applyConf]] *(internal)* Enables propagation of xref:s
 
 Default: `true`
 
-This is for cases not tracked by xref:spark-sql-SQLExecution.adoc[SQL execution], as it happens when a `Dataset` is converted to an RDD either using xref:spark-sql-Dataset.adoc#rdd[rdd] operation or xref:spark-sql-QueryExecution.adoc#toRdd[QueryExecution], and then the returned RDD is used to invoke actions on it.
+This is for cases not tracked by xref:spark-sql-SQLExecution.adoc[SQL execution], when a `Dataset` is converted to an RDD either using xref:spark-sql-Dataset.adoc#rdd[rdd] operation or xref:spark-sql-QueryExecution.adoc#toRdd[QueryExecution], and then the returned RDD is used to invoke actions on it.
 
 This config is deprecated and will be removed in 3.0.0.
 
@@ -500,6 +500,13 @@ a| [[spark.sql.subexpressionElimination.enabled]] *(internal)* Enables link:spar
 Default: `true`
 
 Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
+
+| spark.sql.truncateTable.ignorePermissionAcl.enabled
+a| [[spark.sql.truncateTable.ignorePermissionAcl.enabled]] *(internal)* Disables setting back original permission and ACLs when re-creating the table/partition paths for xref:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TRUNCATE TABLE] command.
+
+Default: `false`
+
+Use xref:spark-sql-SQLConf.adoc#truncateTableIgnorePermissionAcl[truncateTableIgnorePermissionAcl] method to access the current value.
 
 | spark.sql.ui.retainedExecutions
 a| [[spark.sql.ui.retainedExecutions]] The number of link:spark-sql-SQLListener.adoc#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
