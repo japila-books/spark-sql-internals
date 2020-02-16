@@ -561,7 +561,7 @@ createTable(tableIdent: TableIdentifier): Unit
 
 `createTable` <<spark-sql-DataSource.adoc#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
 
-`createTable` assumes `CatalogTableType.EXTERNAL` when link:spark-sql-CatalogStorageFormat.adoc#locationUri[location URI] of `CatalogStorageFormat` is defined and `CatalogTableType.MANAGED` otherwise.
+`createTable` assumes the table being xref:spark-sql-CatalogTable.adoc#CatalogTableType[external] when link:spark-sql-CatalogStorageFormat.adoc#locationUri[location URI] of `CatalogStorageFormat` is defined, and xref:spark-sql-CatalogTable.adoc#CatalogTableType[managed] otherwise.
 
 `createTable` creates a <<spark-sql-CatalogTable.adoc#, CatalogTable>> (with the <<spark-sql-CatalogTable.adoc#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
 

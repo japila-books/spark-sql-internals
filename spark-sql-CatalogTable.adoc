@@ -1,6 +1,8 @@
-== [[CatalogTable]] CatalogTable -- Table Specification (Native Table Metadata)
+== [[CatalogTable]] CatalogTable -- Table Specification (Metadata)
 
-`CatalogTable` is the *table specification*, i.e. the metadata of a table that is stored in a session-scoped catalog of relational entities (i.e. <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>).
+`CatalogTable` is the *specification* (_metadata_) of a table.
+
+`CatalogTable` is stored in a xref:spark-sql-SessionCatalog.adoc[SessionCatalog] (session-scoped catalog of relational entities).
 
 [source, scala]
 ----
@@ -73,6 +75,40 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 * `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#createTable, create a table>> (via <<spark-sql-DataFrameWriter.adoc#saveAsTable, saveAsTable>>)
 
 * `SparkSqlAstBuilder` is requested to <<spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable, visitCreateTable>> and <<spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable, visitCreateHiveTable>>
+
+=== [[creating-instance]] Creating CatalogTable Instance
+
+`CatalogTable` takes the following to be created:
+
+* [[identifier]] `TableIdentifier`
+* [[tableType]] <<CatalogTableType, Table type>>
+* [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
+* [[schema]] link:spark-sql-StructType.adoc[Schema]
+* [[provider]] Name of the table provider (optional)
+* [[partitionColumnNames]] Partition column names
+* [[bucketSpec]] Optional <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (default: `None`)
+* [[owner]] Owner
+* [[createTime]] Create time
+* [[lastAccessTime]] Last access time
+* [[createVersion]] Create version
+* [[properties]] Properties
+* [[stats]] Optional link:spark-sql-CatalogStatistics.adoc[table statistics]
+* [[viewText]] Optional view text
+* [[comment]] Optional comment
+* [[unsupportedFeatures]] Unsupported features
+* [[tracksPartitionsInCatalog]] `tracksPartitionsInCatalog` flag
+* [[schemaPreservesCase]] `schemaPreservesCase` flag
+* [[ignoredProperties]] Ignored properties
+
+=== [[CatalogTableType]] Table Type
+
+The type of a table (`CatalogTableType`) can be one of the following:
+
+* `EXTERNAL` for external tables (xref:spark-sql-HiveClientImpl.adoc#getTableOption[EXTERNAL_TABLE] in Hive)
+* `MANAGED` for managed tables (xref:spark-sql-HiveClientImpl.adoc#getTableOption[MANAGED_TABLE] in Hive)
+* `VIEW` for views (xref:spark-sql-HiveClientImpl.adoc#getTableOption[VIRTUAL_VIEW] in Hive)
+
+`CatalogTableType` is included when a `TreeNode` is requested for a xref:spark-sql-catalyst-TreeNode.adoc#shouldConvertToJson[JSON representation] for...FIXME
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
@@ -176,30 +212,6 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 * `CatalogTable` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====
-
-=== [[creating-instance]] Creating CatalogTable Instance
-
-`CatalogTable` takes the following when created:
-
-* [[identifier]] `TableIdentifier`
-* [[tableType]] `CatalogTableType` (i.e. `EXTERNAL`, `MANAGED` or `VIEW`)
-* [[storage]] link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
-* [[schema]] link:spark-sql-StructType.adoc[Schema]
-* [[provider]] Name of the table provider (optional)
-* [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] Optional <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (default: `None`)
-* [[owner]] Owner
-* [[createTime]] Create time
-* [[lastAccessTime]] Last access time
-* [[createVersion]] Create version
-* [[properties]] Properties
-* [[stats]] Optional link:spark-sql-CatalogStatistics.adoc[table statistics]
-* [[viewText]] Optional view text
-* [[comment]] Optional comment
-* [[unsupportedFeatures]] Unsupported features
-* [[tracksPartitionsInCatalog]] `tracksPartitionsInCatalog` flag
-* [[schemaPreservesCase]] `schemaPreservesCase` flag
-* [[ignoredProperties]] Ignored properties
 
 === [[database]] `database` Method
 

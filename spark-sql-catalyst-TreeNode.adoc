@@ -661,3 +661,15 @@ fastEquals(other: TreeNode[_]): Boolean
 `fastEquals`...FIXME
 
 NOTE: `fastEquals` is used when...FIXME
+
+=== [[shouldConvertToJson]] `shouldConvertToJson` Internal Method
+
+[source, scala]
+----
+shouldConvertToJson(
+  product: Product): Boolean
+----
+
+`shouldConvertToJson`...FIXME
+
+NOTE: `shouldConvertToJson` is used when...FIXME
