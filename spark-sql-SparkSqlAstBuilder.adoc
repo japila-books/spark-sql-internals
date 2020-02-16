@@ -1,10 +1,10 @@
 == [[SparkSqlAstBuilder]] SparkSqlAstBuilder
 
-`SparkSqlAstBuilder` is an link:spark-sql-AstBuilder.adoc[AstBuilder] that converts valid Spark SQL statements into Catalyst expressions, logical plans or table identifiers (using <<visit-callbacks, visit callback methods>>).
+`SparkSqlAstBuilder` is an link:spark-sql-AstBuilder.adoc[AstBuilder] that converts SQL statements into Catalyst expressions, logical plans or table identifiers (using <<visit-callbacks, visit callback methods>>).
 
 NOTE: Spark SQL uses http://www.antlr.org/[ANTLR parser generator] for parsing structured text.
 
-`SparkSqlAstBuilder` is created exclusively when `SparkSqlParser` is link:spark-sql-SparkSqlParser.adoc#astBuilder[created] (which is when `SparkSession` is requested for the lazily-created link:spark-sql-SparkSession.adoc#sessionState[SessionState]).
+`SparkSqlAstBuilder` is created when `SparkSqlParser` is link:spark-sql-SparkSqlParser.adoc#astBuilder[created] (which is when `SparkSession` is requested for the lazily-created link:spark-sql-SparkSession.adoc#sessionState[SessionState]).
 
 .Creating SparkSqlAstBuilder
 image::images/spark-sql-SparkSqlAstBuilder.png[align="center"]
@@ -46,15 +46,15 @@ scala> println(c.expr.numberedTreeString)
 
 [[visit-callbacks]]
 .SparkSqlAstBuilder's Visit Callback Methods
-[cols="1,1,3",options="header",width="100%"]
+[cols="20m,10m,70m",options="header",width="100%"]
 |===
 | Callback Method
 | ANTLR rule / labeled alternative
 | Spark SQL Entity
 
-| [[visitAnalyze]][[ANALYZE-TABLE]] `visitAnalyze`
-| `#analyze`
-a|
+| visitAnalyze
+| #analyze
+a| [[visitAnalyze]][[ANALYZE-TABLE]]
 
 [[AnalyzeColumnCommand]]
 * link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause (but no `PARTITION` specification)
@@ -106,30 +106,30 @@ AnalyzeTableCommand `t1`, false
 `NOSCAN` is used for `AnalyzePartitionCommand` and `AnalyzeTableCommand` logical commands only.
 ====
 
-| [[visitBucketSpec]] `visitBucketSpec`
-| `#bucketSpec`
-|
+| visitBucketSpec
+| #bucketSpec
+| [[visitBucketSpec]]
 
-| [[visitCacheTable]] `visitCacheTable`
-| `#cacheTable`
-a|
+| visitCacheTable
+| #cacheTable
+a| [[visitCacheTable]]
 
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] logical command for `CACHE LAZY? TABLE [table] (AS? [query])?`
 
-| [[visitCreateHiveTable]] `visitCreateHiveTable`
-| `#createHiveTable`
-| link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
+| visitCreateHiveTable
+| #createHiveTable
+| [[visitCreateHiveTable]] link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
 
-| [[visitCreateTable]] `visitCreateTable`
-| `#createTable`
-a|
+| visitCreateTable
+| #createTable
+a| [[visitCreateTable]]
 
 * link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for `CREATE TABLE &hellip; AS &hellip;`
 
 * <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>> logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
 
-| `visitCreateView`
-| `#createView`
+| visitCreateView
+| #createView
 a| [[visitCreateView]] <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>> for `CREATE VIEW AS` SQL statement
 
 ```
@@ -140,13 +140,13 @@ VIEW [IF NOT EXISTS] tableIdentifier
 [TBLPROPERTIES tablePropertyList] AS query
 ```
 
-| `visitCreateTempViewUsing`
-| `#createTempViewUsing`
+| visitCreateTempViewUsing
+| #createTempViewUsing
 | [[visitCreateTempViewUsing]] <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>> for `CREATE TEMPORARY VIEW &hellip; USING`
 
-| [[visitDescribeTable]][[DESCRIBE]] `visitDescribeTable`
-| `#describeTable`
-a|
+| visitDescribeTable
+| #describeTable
+a| [[visitDescribeTable]][[DESCRIBE]]
 
 * [[DescribeColumnCommand]] link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand] logical command for `DESCRIBE TABLE` with a single column only (i.e. no `PARTITION` specification).
 +
@@ -174,16 +174,24 @@ scala> println(cmd)
 DescribeTableCommand `t1`, false
 ----
 
-| [[visitInsertOverwriteHiveDir]] `visitInsertOverwriteHiveDir`
-| `#insertOverwriteHiveDir`
-|
+| visitInsertOverwriteHiveDir
+| #insertOverwriteHiveDir
+a| [[visitInsertOverwriteHiveDir]]
 
-| `visitShowCreateTable`
-| `#showCreateTable`
+| visitShowCreateTable
+| #showCreateTable
 a| [[visitShowCreateTable]] <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>> logical command for `SHOW CREATE TABLE` SQL statement
 
 ```
 SHOW CREATE TABLE tableIdentifier
+```
+
+| visitTruncateTable
+| #truncateTable
+a| [[visitTruncateTable]] xref:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand] logical command for `TRUNCATE TABLE` SQL statement
+
+```
+TRUNCATE TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
 |===

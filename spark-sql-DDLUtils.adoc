@@ -1,0 +1,17 @@
+== [[DDLUtils]] DDLUtils Helper Object
+
+`DDLUtils` is a helper object that...FIXME
+
+=== [[verifyPartitionProviderIsHive]] `verifyPartitionProviderIsHive` Utility
+
+[source, scala]
+----
+verifyPartitionProviderIsHive(
+  spark: SparkSession,
+  table: CatalogTable,
+  action: String): Unit
+----
+
+`verifyPartitionProviderIsHive`...FIXME
+
+NOTE: `verifyPartitionProviderIsHive` is used when...FIXME
