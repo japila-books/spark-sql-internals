@@ -6,18 +6,22 @@
 . link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
 . link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
 
-== (WIP) Vectorized Parquet Decoding
+== Hive Integration / Hive Data Source
 
-. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
-. link:spark-sql-VectorizedColumnReader.adoc[VectorizedColumnReader]
-. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
+. link:spark-sql-hive-metastore.adoc[Hive Metastore]
+. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
+. link:spark-sql-DataSinks.adoc[DataSinks Strategy]
 
-. link:spark-sql-ColumnVector.adoc[ColumnVector Contract -- In-Memory Columnar Data]
-.. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector Contract]
-.. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
-.. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
+. link:spark-sql-HiveFileFormat.adoc[HiveFileFormat]
+
+. link:spark-sql-HiveClient.adoc[HiveClient]
+.. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl]
+
+. link:spark-sql-HiveUtils.adoc[HiveUtils]
 
 == Notable Features
+
+. link:spark-sql-hive-integration.adoc[Hive Integration]
 
 . link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Decoding (Reader)]
 
@@ -229,20 +233,6 @@
 
 . link:spark-sql-console.adoc[Console Data Source]
 . link:spark-sql-ConsoleSinkProvider.adoc[ConsoleSinkProvider]
-
-=== Hive Data Source
-
-. link:spark-sql-hive-integration.adoc[Hive Integration]
-.. link:spark-sql-hive-metastore.adoc[Hive Metastore]
-.. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
-.. link:spark-sql-DataSinks.adoc[DataSinks Strategy]
-
-. link:spark-sql-HiveFileFormat.adoc[HiveFileFormat]
-
-. link:spark-sql-HiveClient.adoc[HiveClient]
-. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl -- The One and Only HiveClient]
-
-. link:spark-sql-HiveUtils.adoc[HiveUtils]
 
 == Extending Spark SQL / Data Source API V2
 
@@ -663,6 +653,17 @@
 .. link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder -- Expression-Based Encoder]
 .. link:spark-sql-RowEncoder.adoc[RowEncoder -- Encoder for DataFrames]
 .. link:spark-sql-ExpressionEncoder-LocalDateTime.adoc[LocalDateTimeEncoder -- Custom ExpressionEncoder for java.time.LocalDateTime]
+
+== Vectorized Parquet Decoding
+
+. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
+. link:spark-sql-VectorizedColumnReader.adoc[VectorizedColumnReader]
+. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
+
+. link:spark-sql-ColumnVector.adoc[ColumnVector Contract -- In-Memory Columnar Data]
+.. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector Contract]
+.. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
+.. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
 
 == RDDs
 

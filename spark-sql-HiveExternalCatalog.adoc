@@ -1,15 +1,17 @@
 == [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities
 
-`HiveExternalCatalog` is a link:spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (aka _metastore_) that is used when `SparkSession` was created with link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
+`HiveExternalCatalog` is an xref:spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
+
+`HiveExternalCatalog` is used for `SparkSession` with xref:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
 
 .HiveExternalCatalog and SharedState
 image::images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is <<creating-instance, created>> exclusively when `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] for the first time (and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
+`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the xref:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] (and xref:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog` is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix.
 
-`HiveExternalCatalog` uses the internal <<client, HiveClient>> to retrieve metadata from a Hive metastore.
+`HiveExternalCatalog` uses an <<client, HiveClient>> to interact with a Hive metastore.
 
 [source, scala]
 ----
@@ -35,21 +37,6 @@ scala> println(metastore)
 org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
 ----
 
-[NOTE]
-====
-link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property is `in-memory` by default.
-
-Use link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] to enable Hive support (that sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` when the Hive classes are available).
-
-[source, scala]
-----
-import org.apache.spark.sql.SparkSession
-val spark: SparkSession = SparkSession.builder
-  .enableHiveSupport()  // <-- enables Hive support
-  .getOrCreate
-----
-====
-
 [TIP]
 ====
 Use link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
@@ -59,18 +46,37 @@ Refer to link:spark-sql-SharedState.adoc[SharedState] to learn about (the low-le
 See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 ====
 
-[[internal-registries]]
-.HiveExternalCatalog's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+[[logging]]
+[TIP]
+====
+Enable `ALL` logging level for `org.apache.spark.sql.hive.HiveExternalCatalog` logger to see what happens inside.
 
-| [[client]] `client`
-| link:spark-sql-HiveClient.adoc[HiveClient] for retrieving metadata from a Hive metastore
+Add the following line to `conf/log4j.properties`:
 
-Created by requesting `HiveUtils` for a new link:spark-sql-HiveUtils.adoc#newClientForMetadata[HiveClientImpl] (with the current <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>)
-|===
+```
+log4j.logger.org.apache.spark.sql.hive.HiveExternalCatalog=ALL
+```
+
+Refer to xref:spark-logging.adoc[Logging].
+====
+
+=== [[creating-instance]] Creating HiveExternalCatalog Instance
+
+`HiveExternalCatalog` takes the following to be created:
+
+* [[conf]] Spark configuration (`SparkConf`)
+* [[hadoopConf]] Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]
+
+=== [[client]] HiveClient -- `client` Lazy Property
+
+[source, scala]
+----
+client: HiveClient
+----
+
+`client` is a xref:spark-sql-HiveClient.adoc[HiveClient] to interact with a Hive metastore.
+
+`client` is created lazily (when first requested) using xref:spark-sql-HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
 
 === [[getRawTable]] `getRawTable` Method
 
@@ -248,13 +254,6 @@ getPartitionOption(
 NOTE: `getPartitionOption` is part of link:spark-sql-ExternalCatalog.adoc#getPartitionOption[ExternalCatalog Contract] to...FIXME.
 
 `getPartitionOption`...FIXME
-
-=== [[creating-instance]] Creating HiveExternalCatalog Instance
-
-`HiveExternalCatalog` takes the following when created:
-
-* [[conf]] Spark configuration (i.e. `SparkConf`)
-* [[hadoopConf]] Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]
 
 === [[columnStatKeyPropName]] Building Property Name for Column and Statistic Key -- `columnStatKeyPropName` Internal Method
 
