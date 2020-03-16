@@ -4,7 +4,28 @@
 
 `HiveTableScanExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-HiveTableScans.adoc#, HiveTableScans>> execution planning strategy plans a <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>> logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
-[[metrics]]
+[[nodeName]]
+`HiveTableScanExec` uses the link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the link:spark-sql-catalyst-TreeNode.adoc#nodeName[node name]:
+
+```
+Scan hive [table]
+```
+
+`HiveTableScanExec` supports <<partitionPruningPred, partition pruning predicates>> for partitioned Hive tables only (and requires that either the <<partitionPruningPred, partitionPruningPred>> has no expressions or the <<relation, HiveTableRelation>> is link:spark-sql-LogicalPlan-HiveTableRelation.adoc#isPartitioned[partitioned]). Otherwise, `HiveTableScanExec` throws an `IllegalArgumentException`.
+
+=== [[creating-instance]] Creating HiveTableScanExec Instance
+
+`HiveTableScanExec` takes the following when created:
+
+* [[requestedAttributes]] Requested <<spark-sql-Expression-Attribute.adoc#, attributes>>
+* [[relation]] <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>>
+* [[partitionPruningPred]] Partition pruning predicate <<spark-sql-Expression.adoc#, expression>> (only when the <<relation, Hive table>> is link:spark-sql-LogicalPlan-HiveTableRelation.adoc#isPartitioned[partitioned])
+* [[sparkSession]] <<spark-sql-SparkSession.adoc#, SparkSession>>
+
+`HiveTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
+
+=== [[metrics]] Performance Metrics -- `metrics` Method
+
 .HiveTableScanExec's Performance Metrics
 [cols="1m,2,2",options="header",width="100%"]
 |===
@@ -17,36 +38,6 @@
 | [[numOutputRows]]
 |===
 
-[[internal-registries]]
-.HiveTableScanExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| hiveQlTable
-a| [[hiveQlTable]] Hive's `Table` metadata (<<spark-sql-HiveClientImpl.adoc#toHiveTable, converted>> from the <<spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta, CatalogTable>> of the <<relation, HiveTableRelation>>)
-
-Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<rawPartitions, rawPartitions>> and is <<doExecute, executed>>
-
-| rawPartitions
-a| [[rawPartitions]]
-
-| tableDesc
-a| [[tableDesc]] Hive's `TableDesc`
-|===
-
-=== [[creating-instance]] Creating HiveTableScanExec Instance
-
-`HiveTableScanExec` takes the following when created:
-
-* [[requestedAttributes]] Requested <<spark-sql-Expression-Attribute.adoc#, attributes>>
-* [[relation]] <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>>
-* [[partitionPruningPred]] Partition pruning predicate <<spark-sql-Expression.adoc#, expression>>
-* [[sparkSession]] <<spark-sql-SparkSession.adoc#, SparkSession>>
-
-`HiveTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
-
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]
@@ -57,3 +48,25 @@ doExecute(): RDD[InternalRow]
 NOTE: `doExecute` is part of <<spark-sql-SparkPlan.adoc#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| boundPruningPred
+a| [[boundPruningPred]] Catalyst link:spark-sql-Expression.adoc[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the link:spark-sql-LogicalPlan-HiveTableRelation.adoc#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
+
+| hiveQlTable
+a| [[hiveQlTable]] Hive's `Table` metadata (<<spark-sql-HiveClientImpl.adoc#toHiveTable, converted>> from the <<spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta, CatalogTable>> of the <<relation, HiveTableRelation>>)
+
+Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<rawPartitions, rawPartitions>> and is <<doExecute, executed>>
+
+| rawPartitions
+a| [[rawPartitions]] link:spark-sql-HiveClientImpl.adoc#toHivePartition[Hive partitions] (`Seq[Partition]`)
+
+| tableDesc
+a| [[tableDesc]] Hive's `TableDesc`
+|===

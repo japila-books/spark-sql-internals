@@ -214,3 +214,23 @@ getSparkSQLDataType(hc: FieldSchema): DataType
 `getSparkSQLDataType`...FIXME
 
 NOTE: `getSparkSQLDataType` is used when...FIXME
+
+=== [[toHivePartition]] Converting CatalogTablePartition to Hive Partition -- `toHivePartition` Utility
+
+[source, scala]
+----
+toHivePartition(
+  p: CatalogTablePartition,
+  ht: Table): Partition
+----
+
+`toHivePartition` creates a Hive `org.apache.hadoop.hive.ql.metadata.Partition` for the input link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition] and the Hive `org.apache.hadoop.hive.ql.metadata.Table`.
+
+[NOTE]
+====
+`toHivePartition` is used when:
+
+* `HiveClientImpl` is requested to <<renamePartitions, renamePartitions>> or <<alterPartitions, alterPartitions>>
+
+* `HiveTableScanExec` physical operator is requested for the link:spark-sql-SparkPlan-HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
+====

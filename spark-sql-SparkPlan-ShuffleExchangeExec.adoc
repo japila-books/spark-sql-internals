@@ -43,7 +43,7 @@ When requested for the <<spark-sql-SparkPlan.adoc#outputPartitioning, output dat
 [[doPrepare]]
 When requested to <<spark-sql-SparkPlan.adoc#doPrepare, prepare for execution>>, `ShuffleExchangeExec` registers itself with the optional <<coordinator, ExchangeCoordinator>> if defined.
 
-=== [[metrics]] Performance Metrics
+=== [[metrics]] Performance Metrics -- `metrics` Method
 
 .ShuffleExchangeExec's Performance Metrics
 [cols="1m,2,2",options="header",width="100%"]
