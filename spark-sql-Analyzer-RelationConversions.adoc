@@ -19,8 +19,10 @@ NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
 
+[[apply-InsertIntoTable]]
 For a `InsertIntoTable` with link:spark-sql-LogicalPlan-HiveTableRelation.adoc#isPartitioned[non-partitioned] `HiveTableRelation` relation (that can be <<isConvertible, converted>>) `apply` <<convert, converts>> the `HiveTableRelation` to a `LogicalRelation`.
 
+[[apply-HiveTableRelation]]
 For a `HiveTableRelation` logical operator alone `apply`...FIXME
 
 === [[creating-instance]] Creating RelationConversions Instance

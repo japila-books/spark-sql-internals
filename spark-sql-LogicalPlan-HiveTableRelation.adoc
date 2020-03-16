@@ -4,6 +4,11 @@
 
 `HiveTableRelation` is <<creating-instance, created>> exclusively when `FindDataSourceTable` logical evaluation rule is requested to link:spark-sql-Analyzer-FindDataSourceTable.adoc#apply[resolve UnresolvedCatalogRelations in a logical plan] (for link:spark-sql-Analyzer-FindDataSourceTable.adoc#readHiveTable[Hive tables]).
 
+`HiveTableRelation` is <<isPartitioned, partitioned>> when it has at least one <<partitionCols, partition column>>.
+
+[[MultiInstanceRelation]]
+`HiveTableRelation` is a link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation].
+
 [source, scala]
 ----
 val tableName = "h1"
@@ -56,9 +61,6 @@ scala> println(planWithTables.numberedTreeString)
 02    +- HiveTableRelation `default`.`h1`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [id#13L]
 ----
 
-[[isPartitioned]]
-`HiveTableRelation` is *partitioned* when it has at least one <<partitionCols, partition>>.
-
 The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a catalog) has to meet the requirements:
 
 * The link:spark-sql-CatalogTable.adoc#identifier[database] is defined
@@ -101,3 +103,23 @@ table stats must be specified.
 * [[tableMeta]] link:spark-sql-CatalogTable.adoc[Table metadata]
 * [[dataCols]] Columns (as a collection of `AttributeReferences`)
 * [[partitionCols]] Partitions (as a collection of `AttributeReferences`)
+
+=== [[isPartitioned]] `isPartitioned` Method
+
+[source, scala]
+----
+isPartitioned: Boolean
+----
+
+`isPartitioned` is `true` when there is at least one <<partitionCols, partition column>>.
+
+[NOTE]
+====
+`isPartitioned` is used when:
+
+* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+
+* link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical posthoc evaluation rule is executed (on a link:spark-sql-Analyzer-RelationConversions.adoc#apply-InsertIntoTable[InsertIntoTable])
+
+* `HiveTableScanExec` physical operator is link:spark-sql-SparkPlan-HiveTableScanExec.adoc#doExecute[executed]
+====
