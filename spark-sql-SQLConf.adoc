@@ -131,6 +131,14 @@ a| [[cboEnabled]] Used in:
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize]
 | [[columnBatchSize]] Used when...FIXME
 
+| CONVERT_METASTORE_ORC
+| link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc]
+| [[CONVERT_METASTORE_ORC]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:spark-sql-Analyzer-RelationConversions.adoc#isConvertible[isConvertible])
+
+| CONVERT_METASTORE_PARQUET
+| link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet]
+| [[CONVERT_METASTORE_PARQUET]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:spark-sql-Analyzer-RelationConversions.adoc#isConvertible[isConvertible])
+
 | dataFramePivotMaxValues
 | link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues]
 | [[dataFramePivotMaxValues]] Used exclusively in link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] operator.
@@ -234,8 +242,8 @@ a| [[ignoreCorruptFiles]] Used when:
 | [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
 
 | manageFilesourcePartitions
-| <<spark-sql-properties.adoc#spark.sql.hive.manageFilesourcePartitions, spark.sql.hive.manageFilesourcePartitions>>
-a| [[manageFilesourcePartitions]] Used in:
+| link:spark-sql-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions]
+a| [[manageFilesourcePartitions]][[HIVE_MANAGE_FILESOURCE_PARTITIONS]] Used when:
 
 * `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation>>
 
@@ -250,6 +258,10 @@ a| [[manageFilesourcePartitions]] Used in:
 | maxRecordsPerFile
 | <<spark-sql-properties.adoc#spark.sql.files.maxRecordsPerFile, spark.sql.files.maxRecordsPerFile>>
 a| [[maxRecordsPerFile]][[MAX_RECORDS_PER_FILE]] Used when `FileFormatWriter` utility is used to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>
+
+| metastorePartitionPruning
+| link:spark-sql-properties.adoc#spark.sql.hive.metastorePartitionPruning[spark.sql.hive.metastorePartitionPruning]
+a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec] physical operator is executed with a partitioned table (and requested for link:spark-sql-SparkPlan-HiveTableScanExec.adoc#rawPartitions[rawPartitions])
 
 | minNumPostShufflePartitions
 | <<spark-sql-properties.adoc#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>

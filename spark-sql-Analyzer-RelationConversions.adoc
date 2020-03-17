@@ -36,7 +36,8 @@ For a `HiveTableRelation` logical operator alone `apply`...FIXME
 
 [source, scala]
 ----
-isConvertible(relation: HiveTableRelation): Boolean
+isConvertible(
+  relation: HiveTableRelation): Boolean
 ----
 
 `isConvertible` is positive when the input link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[HiveTableRelation] is a parquet or ORC table (and corresponding SQL properties are enabled).

@@ -67,6 +67,8 @@ Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<r
 | rawPartitions
 a| [[rawPartitions]] link:spark-sql-HiveClientImpl.adoc#toHivePartition[Hive partitions] (`Seq[Partition]`)
 
+Used when `HiveTableScanExec` physical operator is <<doExecute, executed>> with a partitioned table
+
 | tableDesc
 a| [[tableDesc]] Hive's `TableDesc`
 |===
