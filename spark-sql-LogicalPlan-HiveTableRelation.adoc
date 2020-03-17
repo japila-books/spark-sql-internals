@@ -102,7 +102,15 @@ table stats must be specified.
 
 * [[tableMeta]] link:spark-sql-CatalogTable.adoc[Table metadata]
 * [[dataCols]] Columns (as a collection of `AttributeReferences`)
-* [[partitionCols]] Partitions (as a collection of `AttributeReferences`)
+* [[partitionCols]] <<partition-columns, Partition columns>> (as a collection of `AttributeReferences`)
+
+=== [[partition-columns]] Partition Columns
+
+When created, `HiveTableRelation` is given the <<partitionCols, partition columns>>.
+
+link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical evaluation rule creates a `HiveTableRelation` based on a link:spark-sql-CatalogTable.adoc[table specification] (from a catalog).
+
+The <<partitionCols, partition columns>> are exactly link:spark-sql-CatalogTable.adoc#partitionSchema[partitions] of the link:spark-sql-CatalogTable.adoc[table specification].
 
 === [[isPartitioned]] `isPartitioned` Method
 
