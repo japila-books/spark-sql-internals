@@ -19,7 +19,7 @@
 . link:spark-sql-HiveClient.adoc[HiveClient]
 .. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl]
 
-. link:spark-sql-HiveUtils.adoc[HiveUtils]
+. link:hive/HiveUtils.adoc[HiveUtils]
 . link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
 
 . link:hive/configuration-properties.adoc[Configuration Properties]
@@ -29,7 +29,7 @@
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
 
-. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+. link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 
 . link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 

@@ -1,6 +1,6 @@
 == Configuration Properties
 
-This page lists the link:../spark-sql-properties.adoc[configuration properties] that are specific to the link:index.adoc[Hive data source].
+This page contains the link:../spark-sql-properties.adoc[configuration properties] of the link:index.adoc[Hive data source].
 
 [[properties]]
 .Spark SQL Configuration Properties (spark.sql.hive)
@@ -45,7 +45,7 @@ a| [[spark.sql.hive.metastore.barrierPrefixes]] Comma-separated list of class pr
 Default: `(empty)`
 
 | s.s.h.metastore.jars
-a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to link:spark-sql-HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
+a| [[spark.sql.hive.metastore.jars]] Location of the jars that should be used to link:HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
 
 Default: `builtin`
 
@@ -69,9 +69,9 @@ An example of classes that should be shared are:
 * Other classes that interact with classes that are already shared, e.g. custom appenders that are used by log4j
 
 | s.s.h.metastore.version
-a| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the link:../spark-sql-HiveUtils.adoc#newClientForMetadata[client classes and jars]).
+a| [[spark.sql.hive.metastore.version]] Version of the Hive metastore (and the link:HiveUtils.adoc#newClientForMetadata[client classes and jars]).
 
-Default: link:../spark-sql-HiveUtils.adoc#builtinHiveVersion[1.2.1]
+Default: link:HiveUtils.adoc#builtinHiveVersion[1.2.1]
 
 Supported versions link:IsolatedClientLoader.adoc#hiveVersion[range from `0.12.0` up to and including `2.3.3`]
 

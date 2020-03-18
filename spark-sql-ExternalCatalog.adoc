@@ -430,7 +430,7 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 | Alias
 | Description
 
-| link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+| link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 | [[hive]] `hive`
 | A persistent system catalog using a Hive metastore.
 

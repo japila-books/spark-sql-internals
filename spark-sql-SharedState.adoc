@@ -130,7 +130,7 @@ externalCatalog: ExternalCatalog
 
 `externalCatalog` is created reflectively per <<externalCatalogClassName, spark.sql.catalogImplementation>> internal configuration property (with the current Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] as `SparkContext.hadoopConfiguration`):
 
-* link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog] for `hive`
+* link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog] for `hive`
 * link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] for `in-memory` (default)
 
 While initialized:
@@ -148,7 +148,7 @@ externalCatalogClassName(conf: SparkConf): String
 
 `externalCatalogClassName` gives the name of the class of the link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalog] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
 
-* link:spark-sql-HiveExternalCatalog.adoc[org.apache.spark.sql.hive.HiveExternalCatalog] for `hive`
+* link:hive/HiveExternalCatalog.adoc[org.apache.spark.sql.hive.HiveExternalCatalog] for `hive`
 * link:spark-sql-InMemoryCatalog.adoc[org.apache.spark.sql.catalyst.catalog.InMemoryCatalog] for `in-memory`
 
 NOTE: `externalCatalogClassName` is used exclusively when `SharedState` is requested for the <<externalCatalog, ExternalCatalog>>.

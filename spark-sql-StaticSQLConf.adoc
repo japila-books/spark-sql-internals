@@ -28,7 +28,7 @@ Used when:
 . `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
 | spark.sql.debug
-a| [[spark.sql.debug]][[DEBUG_MODE]] *(internal)* Only used for internal debugging when `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#restoreTableMetadata, restoreTableMetadata>>.
+a| [[spark.sql.debug]][[DEBUG_MODE]] *(internal)* Only used for internal debugging when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#restoreTableMetadata[restoreTableMetadata].
 
 Default: `false`
 

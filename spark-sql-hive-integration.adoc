@@ -1,6 +1,6 @@
 == Hive Integration -- Working with Data in Apache Hive
 
-Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using xref:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog].
+Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog].
 
 [NOTE]
 ====

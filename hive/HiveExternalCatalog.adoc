@@ -1,5 +1,10 @@
 == [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities
 
+:hive-version: 3.1.2
+:hadoop-version: 2.7.3
+:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
+:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+
 `HiveExternalCatalog` is an xref:spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
 
 `HiveExternalCatalog` is used for `SparkSession` with xref:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
@@ -65,7 +70,7 @@ Refer to xref:spark-logging.adoc[Logging].
 `HiveExternalCatalog` takes the following to be created:
 
 * [[conf]] Spark configuration (`SparkConf`)
-* [[hadoopConf]] Hadoop's http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]
+* [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
 
 === [[client]] HiveClient -- `client` Lazy Property
 
@@ -76,7 +81,7 @@ client: HiveClient
 
 `client` is a xref:spark-sql-HiveClient.adoc[HiveClient] to interact with a Hive metastore.
 
-`client` is created lazily (when first requested) using xref:spark-sql-HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
+`client` is created lazily (when first requested) using link:HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
 
 === [[getRawTable]] `getRawTable` Method
 

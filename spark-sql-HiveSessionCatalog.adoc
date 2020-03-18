@@ -31,7 +31,7 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 
 `HiveSessionCatalog` takes the following when created:
 
-* [[externalCatalog]] link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+* [[externalCatalog]] link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 * [[globalTempViewManager]] link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
 * [[metastoreCatalog]] Legacy link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]

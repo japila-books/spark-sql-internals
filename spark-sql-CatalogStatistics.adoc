@@ -22,7 +22,7 @@
 
 * `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
 
-* `HiveExternalCatalog` is requested for link:spark-sql-HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
+* `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
 
 * link:spark-sql-Analyzer-DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#apply[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
@@ -83,7 +83,7 @@ CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 
 [NOTE]
 ====
-`toPlanStats` does the reverse of link:spark-sql-HiveExternalCatalog.adoc#statsToProperties[HiveExternalCatalog.statsToProperties].
+`toPlanStats` does the reverse of link:hive/HiveExternalCatalog.adoc#statsToProperties[HiveExternalCatalog.statsToProperties].
 
 [source, scala]
 ----

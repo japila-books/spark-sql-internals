@@ -1,6 +1,6 @@
 == [[HiveUtils]] HiveUtils
 
-`HiveUtils` is used to create a <<newClientForMetadata, HiveClientImpl>> that link:spark-sql-HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
+`HiveUtils` is used to create a <<newClientForMetadata, HiveClientImpl>> that link:HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
 
 [[logging]]
 [TIP]
@@ -70,7 +70,7 @@ Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
 
 In the end, `newClientForMetadata` requests the `IsolatedClientLoader` to create a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl].
 
-NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:spark-sql-HiveExternalCatalog.adoc#client[HiveClient].
+NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#client[HiveClient].
 
 === [[inferSchema]] `inferSchema` Method
 

@@ -66,7 +66,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `CatalogTable` is requested to <<toLinkedHashMap, convert itself to LinkedHashMap>>
 
-* `HiveExternalCatalog` is requested to <<spark-sql-HiveExternalCatalog.adoc#doCreateTable, doCreateTable>>, <<spark-sql-HiveExternalCatalog.adoc#tableMetaToTableProps, tableMetaToTableProps>>, <<spark-sql-HiveExternalCatalog.adoc#doAlterTable, doAlterTable>>, <<spark-sql-HiveExternalCatalog.adoc#restoreHiveSerdeTable, restoreHiveSerdeTable>> and <<spark-sql-HiveExternalCatalog.adoc#restoreDataSourceTable, restoreDataSourceTable>>
+* `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#doCreateTable[doCreateTable], link:hive/HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps], link:hive/HiveExternalCatalog.adoc#doAlterTable[doAlterTable], link:hive/HiveExternalCatalog.adoc#restoreHiveSerdeTable[restoreHiveSerdeTable] and link:hive/HiveExternalCatalog.adoc#restoreDataSourceTable[restoreDataSourceTable]
 
 * `HiveClientImpl` is requested to <<spark-sql-HiveClientImpl.adoc#getTableOption, retrieve a table metadata if available>> and <<spark-sql-HiveClientImpl.adoc#toHiveTable, toHiveTable>>
 

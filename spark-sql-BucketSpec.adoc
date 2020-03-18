@@ -15,7 +15,7 @@ The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusi
 
 . `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] (and does link:spark-sql-DataFrameWriter.adoc#getBucketSpec[getBucketSpec])
 
-. `HiveExternalCatalog` is requested to link:spark-sql-HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:spark-sql-HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
+. `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:hive/HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
 
 . `HiveClientImpl` is requested to link:spark-sql-HiveClientImpl.adoc#getTableOption[retrieve a table metadata]
 
