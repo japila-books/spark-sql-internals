@@ -20,7 +20,7 @@
 | <<spark-sql-LogicalPlan-ExternalRDD.adoc#, ExternalRDD>>
 | [[ExternalRDD]]
 
-| <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>>
+| link:hive/HiveTableRelation.adoc[HiveTableRelation]
 | [[HiveTableRelation]]
 
 | <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>>

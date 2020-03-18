@@ -31,7 +31,7 @@ When `ResolveReferences` logical evaluation is link:spark-sql-Analyzer-ResolveRe
 | link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
 | [[ExternalRDD]]
 
-| link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
+| link:hive/HiveTableRelation.adoc[HiveTableRelation]
 | [[HiveTableRelation]]
 
 | link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]

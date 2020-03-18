@@ -19,6 +19,7 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
+. link:hive/HiveTableRelation.adoc[HiveTableRelation]
 . link:hive/HiveTableScanExec.adoc[HiveTableScanExec]
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
@@ -456,7 +457,6 @@
 . link:spark-sql-LogicalPlan-Generate.adoc[Generate]
 . link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets]
 . link:spark-sql-LogicalPlan-Hint.adoc[Hint]
-. link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation]
 . link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand]

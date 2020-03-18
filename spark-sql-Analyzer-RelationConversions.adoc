@@ -2,7 +2,7 @@
 
 `RelationConversions` is a link:spark-sql-HiveSessionStateBuilder.adoc#postHocResolutionRules[logical posthoc resolution rule] that the link:spark-sql-HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, convert a Hive table...FIXME>>.
 
-NOTE: A Hive table is when the `provider` is `hive` in link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[table metadata].
+NOTE: A Hive table is when the `provider` is `hive` in link:hive/HiveTableRelation.adoc#tableMeta[table metadata].
 
 CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
 
@@ -20,7 +20,7 @@ NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] looking for a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` logical operators or `HiveTableRelation` logical operator alone.
 
 [[apply-InsertIntoTable]]
-For a `InsertIntoTable` with link:spark-sql-LogicalPlan-HiveTableRelation.adoc#isPartitioned[non-partitioned] `HiveTableRelation` relation (that can be <<isConvertible, converted>>) `apply` <<convert, converts>> the `HiveTableRelation` to a `LogicalRelation`.
+For a `InsertIntoTable` with link:hive/HiveTableRelation.adoc#isPartitioned[non-partitioned] `HiveTableRelation` relation (that can be <<isConvertible, converted>>) `apply` <<convert, converts>> the `HiveTableRelation` to a `LogicalRelation`.
 
 [[apply-HiveTableRelation]]
 For a `HiveTableRelation` logical operator alone `apply`...FIXME
@@ -40,9 +40,9 @@ isConvertible(
   relation: HiveTableRelation): Boolean
 ----
 
-`isConvertible` is positive when the input link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[HiveTableRelation] is a parquet or ORC table (and corresponding SQL properties are enabled).
+`isConvertible` is positive when the input link:hive/HiveTableRelation.adoc#tableMeta[HiveTableRelation] is a parquet or ORC table (and corresponding SQL properties are enabled).
 
-Internally, `isConvertible` takes the Hive SerDe of the table (from link:spark-sql-LogicalPlan-HiveTableRelation.adoc#tableMeta[table metadata]) if available or assumes no SerDe.
+Internally, `isConvertible` takes the Hive SerDe of the table (from link:hive/HiveTableRelation.adoc#tableMeta[table metadata]) if available or assumes no SerDe.
 
 `isConvertible` is turned on when either condition holds:
 
@@ -59,7 +59,7 @@ NOTE: `isConvertible` is used when `RelationConversions` is <<apply, executed>>.
 convert(relation: HiveTableRelation): LogicalRelation
 ----
 
-`convert` takes SerDe of (the storage of) the input link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation] and converts `HiveTableRelation` to link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation], i.e.
+`convert` takes SerDe of (the storage of) the input link:hive/HiveTableRelation.adoc[HiveTableRelation] and converts `HiveTableRelation` to link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation], i.e.
 
 1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
 
@@ -77,5 +77,5 @@ NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:s
 
 * Transforms a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
 
-* Transforms a link:spark-sql-LogicalPlan-HiveTableRelation.adoc[HiveTableRelation] with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
+* Transforms a link:hive/HiveTableRelation.adoc[HiveTableRelation] with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
 ====

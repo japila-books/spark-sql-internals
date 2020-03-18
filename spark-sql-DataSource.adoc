@@ -53,7 +53,7 @@ NOTE: Data source is also called a *table provider*.
 
 `DataSource` takes a list of <<paths, file system paths that hold data>>. The list is empty by default, but can be different per data source:
 
-* The <<spark-sql-CatalogTable.adoc#location, location URI>> of a <<spark-sql-LogicalPlan-HiveTableRelation.adoc#, HiveTableRelation>> (when `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation>>)
+* The <<spark-sql-CatalogTable.adoc#location, location URI>> of a link:hive/HiveTableRelation.adoc[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation>>)
 
 * The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.adoc#, ResolveSQLOnFile>> logical evaluation rule is executed)
 

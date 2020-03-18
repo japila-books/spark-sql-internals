@@ -91,4 +91,4 @@ FIXME Example
 ----
 ====
 
-NOTE: `toPlanStats` is used when link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics.
+NOTE: `toPlanStats` is used when link:hive/HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics.

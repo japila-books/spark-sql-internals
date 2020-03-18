@@ -35,7 +35,7 @@ NOTE: Use `Dataset.hint` or `SELECT` SQL statement with hints to link:spark-sql-
 
 * link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[Leaf logical operators] (specifically) and link:spark-sql-LogicalPlanStats.adoc#stats[logical operators] (in general) are requested for statistics estimates
 
-* link:spark-sql-LogicalPlan-HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics estimates (through link:spark-sql-CatalogStatistics.adoc#toPlanStats[CatalogStatistics])
+* link:hive/HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics estimates (through link:spark-sql-CatalogStatistics.adoc#toPlanStats[CatalogStatistics])
 
 NOTE: <<rowCount, row count>> estimate is used in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical optimization when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
 

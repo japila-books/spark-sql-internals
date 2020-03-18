@@ -71,7 +71,7 @@ readHiveTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readHiveTable` simply link:spark-sql-LogicalPlan-HiveTableRelation.adoc#creating-instance[creates] a `HiveTableRelation` for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+`readHiveTable` simply link:hive/HiveTableRelation.adoc#creating-instance[creates] a `HiveTableRelation` for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
 
 NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>>.
 
