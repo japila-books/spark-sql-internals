@@ -31,7 +31,7 @@ Default: `false`
 This configuration is only effective when <<spark.sql.hive.convertMetastoreParquet, spark.sql.hive.convertMetastoreParquet>> is enabled.
 
 | s.s.h.manageFilesourcePartitions
-a| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables. This includes both datasource and converted Hive tables.
+a| [[spark.sql.hive.manageFilesourcePartitions]] Enables *metastore partition management* for file source tables (_filesource partition management_). This includes both datasource and converted Hive tables.
 
 Default: `true`
 

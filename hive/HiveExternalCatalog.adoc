@@ -392,13 +392,41 @@ NOTE: `doAlterTableDataSchema` is part of the <<spark-sql-ExternalCatalog.adoc#d
 
 `doAlterTableDataSchema`...FIXME
 
+=== [[createTable]] `createTable` Method
+
+[source, scala]
+----
+createTable(
+  tableDefinition: CatalogTable,
+  ignoreIfExists: Boolean): Unit
+----
+
+NOTE: `createTable` is part of the link:spark-sql-ExternalCatalog.adoc#createTable[ExternalCatalog] to...FIXME.
+
+`createTable`...FIXME
+
 === [[createDataSourceTable]] `createDataSourceTable` Internal Method
 
 [source, scala]
 ----
-createDataSourceTable(table: CatalogTable, ignoreIfExists: Boolean): Unit
+createDataSourceTable(
+  table: CatalogTable,
+  ignoreIfExists: Boolean): Unit
 ----
 
 `createDataSourceTable`...FIXME
 
-NOTE: `createDataSourceTable` is used exclusively when `HiveExternalCatalog` is requested to <<doCreateTable, doCreateTable>> (for non-hive providers).
+NOTE: `createDataSourceTable` is used when `HiveExternalCatalog` is requested to <<createTable, createTable>>.
+
+=== [[saveTableIntoHive]] `saveTableIntoHive` Internal Method
+
+[source, scala]
+----
+saveTableIntoHive(
+  tableDefinition: CatalogTable,
+  ignoreIfExists: Boolean): Unit
+----
+
+`saveTableIntoHive`...FIXME
+
+NOTE: `saveTableIntoHive` is used when `HiveExternalCatalog` is requested to <<createDataSourceTable, createDataSourceTable>>.

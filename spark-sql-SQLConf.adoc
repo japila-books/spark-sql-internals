@@ -242,7 +242,7 @@ a| [[ignoreCorruptFiles]] Used when:
 | [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
 
 | manageFilesourcePartitions
-| link:spark-sql-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions]
+| link:hive/configuration-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions]
 a| [[manageFilesourcePartitions]][[HIVE_MANAGE_FILESOURCE_PARTITIONS]] Used when:
 
 * `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation>>

@@ -89,12 +89,13 @@ NOTE: `newClientForExecution` is used for link:../spark-sql-thrift-server.adoc[H
 
 [source, scala]
 ----
-inferSchema(table: CatalogTable): CatalogTable
+inferSchema(
+  table: CatalogTable): CatalogTable
 ----
 
 `inferSchema`...FIXME
 
-NOTE: `inferSchema` is used when...FIXME
+NOTE: `inferSchema` is used when link:ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable] logical resolution rule is executed.
 
 === [[withHiveExternalCatalog]] `withHiveExternalCatalog` Method
 

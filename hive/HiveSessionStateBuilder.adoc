@@ -93,14 +93,15 @@ NOTE: `analyzer` is part of link:spark-sql-BaseSessionStateBuilder.adoc#analyzer
 | Logical Rule
 | Description
 
-| [[ResolveHiveSerdeTable]] `ResolveHiveSerdeTable`
-|
+| link:ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
+| [[ResolveHiveSerdeTable]]
 
-| [[FindDataSourceTable]] link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
-|
+| link:../spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
+| [[FindDataSourceTable]]
 
-| [[ResolveSQLOnFile]] `ResolveSQLOnFile`
-|
+| link:../spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
+| [[ResolveSQLOnFile]]
+
 |===
 
 [[postHocResolutionRules]]
