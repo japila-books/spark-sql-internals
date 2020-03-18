@@ -62,7 +62,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.HiveExternalCatalog=ALL
 ```
 
-Refer to xref:spark-logging.adoc[Logging].
+Refer to link:../spark-logging.adoc[Logging].
 ====
 
 === [[creating-instance]] Creating HiveExternalCatalog Instance
@@ -82,6 +82,8 @@ client: HiveClient
 `client` is a xref:spark-sql-HiveClient.adoc[HiveClient] to interact with a Hive metastore.
 
 `client` is created lazily (when first requested) using link:HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
+
+NOTE: `client` is used when...FIXME
 
 === [[getRawTable]] `getRawTable` Method
 

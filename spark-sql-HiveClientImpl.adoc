@@ -234,3 +234,14 @@ toHivePartition(
 
 * `HiveTableScanExec` physical operator is requested for the link:hive/HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
 ====
+
+=== [[newSession]] Creating New HiveClientImpl -- `newSession` Method
+
+[source, scala]
+----
+newSession(): HiveClientImpl
+----
+
+NOTE: `newSession` is part of the link:spark-sql-HiveClient.adoc#newSession[HiveClient] contract to...FIXME.
+
+`newSession`...FIXME

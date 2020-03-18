@@ -29,7 +29,7 @@ builtinHiveVersion: String = "1.2.1"
 
 * link:hive/configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
 
-* `IsolatedClientLoader` utility is used to link:hive/IsolatedClientLoader.adoc#newClientForExecution[newClientForExecution] and link:hive/IsolatedClientLoader.adoc##newClientForMetadata[newClientForMetadata]
+* `HiveUtils` utility is used to <<newClientForExecution, newClientForExecution>> and <<newClientForMetadata, newClientForMetadata>>
 
 * link:spark-sql-thrift-server.adoc[Spark Thrift Server] is used
 ====
@@ -46,19 +46,19 @@ newClientForMetadata(
   hadoopConf: Configuration,
   configurations: Map[String, String]): HiveClient
 ----
-<1> Executes the other `newClientForMetadata` with time configurations formatted
+<1> Uses time configurations formatted
 
-Internally, `newClientForMetadata` creates a new link:spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
+Internally, `newClientForMetadata` creates a new link:../spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
 
-`newClientForMetadata` then creates a `IsolatedClientLoader` per the input parameters and the following configuration properties:
+`newClientForMetadata` then creates an link:IsolatedClientLoader.adoc[IsolatedClientLoader] per the input parameters and the following configuration properties:
 
-* link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
+* link:configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
 
-* link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
+* link:configuration-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
 
-* link:spark-sql-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
+* link:configuration-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
 
-* link:spark-sql-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
+* link:configuration-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
 
 You should see one of the following INFO messages in the logs:
 
@@ -68,9 +68,22 @@ Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using maven.
 Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
 ```
 
-In the end, `newClientForMetadata` requests the `IsolatedClientLoader` to create a link:spark-sql-HiveClientImpl.adoc#creating-instance[HiveClientImpl].
+In the end, `newClientForMetadata` requests the `IsolatedClientLoader` for a link:IsolatedClientLoader.adoc#createClient[HiveClient].
 
-NOTE: `newClientForMetadata` is used exclusively when `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#client[HiveClient].
+NOTE: `newClientForMetadata` is used when `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#client[HiveClient].
+
+=== [[newClientForExecution]] `newClientForExecution` Utility
+
+[source, scala]
+----
+newClientForExecution(
+  conf: SparkConf,
+  hadoopConf: Configuration): HiveClientImpl
+----
+
+`newClientForExecution`...FIXME
+
+NOTE: `newClientForExecution` is used for link:../spark-sql-thrift-server.adoc[HiveThriftServer2].
 
 === [[inferSchema]] `inferSchema` Method
 
