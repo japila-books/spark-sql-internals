@@ -19,7 +19,7 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
-. link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec]
+. link:hive/HiveTableScanExec.adoc[HiveTableScanExec]
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
 

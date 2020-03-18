@@ -232,5 +232,5 @@ toHivePartition(
 
 * `HiveClientImpl` is requested to <<renamePartitions, renamePartitions>> or <<alterPartitions, alterPartitions>>
 
-* `HiveTableScanExec` physical operator is requested for the link:spark-sql-SparkPlan-HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
+* `HiveTableScanExec` physical operator is requested for the link:hive/HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
 ====

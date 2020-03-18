@@ -261,7 +261,7 @@ a| [[maxRecordsPerFile]][[MAX_RECORDS_PER_FILE]] Used when `FileFormatWriter` ut
 
 | metastorePartitionPruning
 | link:spark-sql-properties.adoc#spark.sql.hive.metastorePartitionPruning[spark.sql.hive.metastorePartitionPruning]
-a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec] physical operator is executed with a partitioned table (and requested for link:spark-sql-SparkPlan-HiveTableScanExec.adoc#rawPartitions[rawPartitions])
+a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when link:hive/HiveTableScanExec.adoc[HiveTableScanExec] physical operator is executed with a partitioned table (and requested for link:HiveTableScanExec.adoc#rawPartitions[rawPartitions])
 
 | minNumPostShufflePartitions
 | <<spark-sql-properties.adoc#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>

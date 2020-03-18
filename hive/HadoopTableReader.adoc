@@ -7,7 +7,7 @@
 
 `HadoopTableReader` is a link:TableReader.adoc[TableReader] to create an `HadoopRDD` for scanning <<makeRDDForPartitionedTable, partitioned>> or <<makeRDDForTable, unpartitioned>> tables stored in Hadoop.
 
-`HadoopTableReader` is used by link:../spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec] physical operator when requested to link:../spark-sql-SparkPlan-HiveTableScanExec.adoc#doExecute[execute].
+`HadoopTableReader` is used by link:HiveTableScanExec.adoc[HiveTableScanExec] physical operator when requested to link:HiveTableScanExec.adoc#doExecute[execute].
 
 === [[creating-instance]] Creating HadoopTableReader Instance
 
