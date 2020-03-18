@@ -19,6 +19,10 @@
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
 
+. link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec]
+. link:hive/TableReader.adoc[TableReader]
+.. link:hive/HadoopTableReader.adoc[HadoopTableReader]
+
 == Notable Features
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]
@@ -528,7 +532,6 @@
 . link:spark-sql-SparkPlan-FilterExec.adoc[FilterExec]
 . link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec]
 . link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec]
-. link:spark-sql-SparkPlan-HiveTableScanExec.adoc[HiveTableScanExec]
 . link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec]
 . link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
 . link:spark-sql-SparkPlan-MapElementsExec.adoc[MapElementsExec]
