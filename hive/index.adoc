@@ -1,0 +1,3 @@
+== Hive Data Source
+
+* link:configuration-properties.adoc[Configuration Properties]

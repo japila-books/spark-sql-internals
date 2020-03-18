@@ -1,0 +1,55 @@
+== [[IsolatedClientLoader]] IsolatedClientLoader Utility
+
+`IsolatedClientLoader` is...FIXME
+
+=== [[hiveVersion]] `hiveVersion` Utility
+
+[source, scala]
+----
+hiveVersion(
+  version: String): HiveVersion
+----
+
+`hiveVersion` creates a `HiveVersion` based on the input `version`.
+
+Acceptable versions and synonyms:
+
+* `12`, `0.12`, `0.12.0`
+* `13`, `0.13`, `0.13.0`, `0.13.1`
+* `14`, `0.14`, `0.14.0`
+* `1.0`, `1.0.0`
+* `1.1`, `1.1.0`
+* `1.2`, `1.2.0`, `1.2.1`, `1.2.2`
+* `2.0`, `2.0.0`, `2.0.1`
+* `2.1`, `2.1.0`, `2.1.1`
+* `2.2`, `2.2.0`
+* `2.3`, `2.3.0`, `2.3.1`, `2.3.2`, `2.3.3`
+
+NOTE: `hiveVersion` is used when...FIXME
+
+=== [[newClientForExecution]] `newClientForExecution` Utility
+
+[source, scala]
+----
+newClientForExecution(
+  conf: SparkConf,
+  hadoopConf: Configuration): HiveClientImpl
+----
+
+`newClientForExecution`...FIXME
+
+NOTE: `newClientForExecution` is used when...FIXME
+
+=== [[newClientForMetadata]] `newClientForMetadata` Utility
+
+[source, scala]
+----
+newClientForMetadata(
+  conf: SparkConf,
+  hadoopConf: Configuration,
+  configurations: Map[String, String]): HiveClient
+----
+
+`newClientForMetadata`...FIXME
+
+NOTE: `newClientForMetadata` is used when...FIXME

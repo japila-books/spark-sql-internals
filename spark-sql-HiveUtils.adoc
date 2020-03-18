@@ -16,6 +16,24 @@ log4j.logger.org.apache.spark.sql.hive.HiveUtils=INFO
 Refer to link:spark-logging.adoc[Logging].
 ====
 
+=== [[builtinHiveVersion]] `builtinHiveVersion` Property
+
+[source, scala]
+----
+builtinHiveVersion: String = "1.2.1"
+----
+
+[NOTE]
+====
+`builtinHiveVersion` is used when:
+
+* link:hive/configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
+
+* `IsolatedClientLoader` utility is used to link:hive/IsolatedClientLoader.adoc#newClientForExecution[newClientForExecution] and link:hive/IsolatedClientLoader.adoc##newClientForMetadata[newClientForMetadata]
+
+* link:spark-sql-thrift-server.adoc[Spark Thrift Server] is used
+====
+
 === [[newClientForMetadata]] Creating HiveClientImpl -- `newClientForMetadata` Method
 
 [source, scala]
@@ -64,3 +82,15 @@ inferSchema(table: CatalogTable): CatalogTable
 `inferSchema`...FIXME
 
 NOTE: `inferSchema` is used when...FIXME
+
+=== [[withHiveExternalCatalog]] `withHiveExternalCatalog` Method
+
+[source, scala]
+----
+withHiveExternalCatalog(
+  sc: SparkContext): SparkContext
+----
+
+`withHiveExternalCatalog` simply sets the link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
+
+NOTE: `withHiveExternalCatalog` is used when `HiveContext` is created.

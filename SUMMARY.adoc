@@ -8,6 +8,8 @@
 
 == Hive Integration / Hive Data Source
 
+. link:hive/index.adoc[Hive Data Source]
+
 . link:spark-sql-hive-metastore.adoc[Hive Metastore]
 . link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
 . link:spark-sql-DataSinks.adoc[DataSinks Strategy]
@@ -18,11 +20,18 @@
 .. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl]
 
 . link:spark-sql-HiveUtils.adoc[HiveUtils]
+. link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
+
+. link:hive/configuration-properties.adoc[Configuration Properties]
 
 . link:hive/HiveTableRelation.adoc[HiveTableRelation]
 . link:hive/HiveTableScanExec.adoc[HiveTableScanExec]
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
+
+. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog]
+
+. link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 
 == Notable Features
 
@@ -144,7 +153,6 @@
 
 . link:spark-sql-ExternalCatalog.adoc[ExternalCatalog Contract -- External Catalog (Metastore) of Permanent Relational Entities]
 .. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
-.. link:spark-sql-HiveExternalCatalog.adoc[HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities]
 
 . link:spark-sql-FunctionRegistry.adoc[FunctionRegistry -- Contract for Function Registries (Catalogs)]
 
@@ -577,7 +585,6 @@
 . link:spark-sql-Analyzer-ResolveCoalesceHints.adoc[ResolveCoalesceHints]
 . link:spark-sql-Analyzer-ResolveCreateNamedStruct.adoc[ResolveCreateNamedStruct]
 . link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
-. link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:spark-sql-Analyzer-ResolveInlineTables.adoc[ResolveInlineTables]
 . link:spark-sql-Analyzer-ResolveMissingReferences.adoc[ResolveMissingReferences]
 . link:spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc[ResolveOrdinalInOrderByAndGroupBy]
