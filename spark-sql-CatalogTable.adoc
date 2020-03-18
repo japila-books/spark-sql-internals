@@ -28,7 +28,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `SessionCatalog` is requested for a link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata]
 
-* `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
+* `HiveClientImpl` is requested for link:hive/HiveClientImpl.adoc#getTableOption[looking up a table in a metastore]
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
 
@@ -68,7 +68,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#doCreateTable[doCreateTable], link:hive/HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps], link:hive/HiveExternalCatalog.adoc#doAlterTable[doAlterTable], link:hive/HiveExternalCatalog.adoc#restoreHiveSerdeTable[restoreHiveSerdeTable] and link:hive/HiveExternalCatalog.adoc#restoreDataSourceTable[restoreDataSourceTable]
 
-* `HiveClientImpl` is requested to <<spark-sql-HiveClientImpl.adoc#getTableOption, retrieve a table metadata if available>> and <<spark-sql-HiveClientImpl.adoc#toHiveTable, toHiveTable>>
+* `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#getTableOption[retrieve a table metadata if available]>> and link:hive/HiveClientImpl.adoc#toHiveTable[toHiveTable]
 
 * `InsertIntoHiveTable` logical command is <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#processInsert, processInsert>> (when <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#run, executed>>)
 
@@ -104,9 +104,9 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 The type of a table (`CatalogTableType`) can be one of the following:
 
-* `EXTERNAL` for external tables (xref:spark-sql-HiveClientImpl.adoc#getTableOption[EXTERNAL_TABLE] in Hive)
-* `MANAGED` for managed tables (xref:spark-sql-HiveClientImpl.adoc#getTableOption[MANAGED_TABLE] in Hive)
-* `VIEW` for views (xref:spark-sql-HiveClientImpl.adoc#getTableOption[VIRTUAL_VIEW] in Hive)
+* `EXTERNAL` for external tables (link:hive/HiveClientImpl.adoc#getTableOption[EXTERNAL_TABLE] in Hive)
+* `MANAGED` for managed tables (link:hive/HiveClientImpl.adoc#getTableOption[MANAGED_TABLE] in Hive)
+* `VIEW` for views (link:hive/HiveClientImpl.adoc#getTableOption[VIRTUAL_VIEW] in Hive)
 
 `CatalogTableType` is included when a `TreeNode` is requested for a xref:spark-sql-catalyst-TreeNode.adoc#shouldConvertToJson[JSON representation] for...FIXME
 
@@ -133,7 +133,7 @@ Internally, Spark alters table statistics using link:spark-sql-ExternalCatalog.a
 
 Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if link:spark-sql-properties.adoc#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs] property is turned on) or assume link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] (that effectively disables table broadcasting).
 
-When requested to link:spark-sql-HiveClientImpl.adoc#getTableOption[look up a table in a metastore], `HiveClientImpl` link:spark-sql-HiveClientImpl.adoc#readHiveStats[reads table or partition statistics directly from a Hive metastore].
+When requested to link:hive/HiveClientImpl.adoc#getTableOption[look up a table in a metastore], `HiveClientImpl` link:hive/HiveClientImpl.adoc#readHiveStats[reads table or partition statistics directly from a Hive metastore].
 
 You can use link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand], link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand], link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand] commands to record statistics in a catalog.
 

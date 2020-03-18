@@ -2,7 +2,7 @@
 
 `HiveClient` is the <<contract, contract>> for...FIXME
 
-NOTE: link:spark-sql-HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
+NOTE: link:HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
 
 `HiveClient` offers _safe_ variants of many methods that do not report exceptions when a relational entity is not found in a Hive metastore, e.g. <<getTableOption, getTableOption>> for <<getTable, getTable>>.
 
@@ -106,5 +106,5 @@ getTable(dbName: String, tableName: String): CatalogTable
 
 * `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 
-* `HiveClientImpl` is requested for link:spark-sql-HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:spark-sql-HiveClientImpl.adoc#alterPartitions[alterPartitions]
+* `HiveClientImpl` is requested for link:HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:HiveClientImpl.adoc#alterPartitions[alterPartitions]
 ====

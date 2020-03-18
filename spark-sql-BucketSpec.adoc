@@ -17,7 +17,7 @@ The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusi
 
 . `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:hive/HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
 
-. `HiveClientImpl` is requested to link:spark-sql-HiveClientImpl.adoc#getTableOption[retrieve a table metadata]
+. `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#getTableOption[retrieve a table metadata]
 
 . `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitBucketSpec[visitBucketSpec] (for `CREATE TABLE` SQL statement with `CLUSTERED BY` and `INTO n BUCKETS` with optional `SORTED BY` clauses)
 

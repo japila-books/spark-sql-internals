@@ -4,7 +4,7 @@
 
 `CatalogTablePartition` is <<creating-instance, created>> when:
 
-* `HiveClientImpl` is requested to <<spark-sql-HiveClientImpl.adoc#fromHivePartition, retrieve a table partition metadata>>
+* `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#fromHivePartition[retrieve a table partition metadata]
 
 * `AlterTableAddPartitionCommand` and `AlterTableRecoverPartitionsCommand` logical commands are executed
 

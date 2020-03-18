@@ -16,8 +16,8 @@
 
 . link:spark-sql-HiveFileFormat.adoc[HiveFileFormat]
 
-. link:spark-sql-HiveClient.adoc[HiveClient]
-.. link:spark-sql-HiveClientImpl.adoc[HiveClientImpl]
+. link:hive/HiveClient.adoc[HiveClient]
+.. link:hive/HiveClientImpl.adoc[HiveClientImpl]
 
 . link:hive/HiveUtils.adoc[HiveUtils]
 . link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
@@ -29,6 +29,7 @@
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
 
+. link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 . link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 
 . link:spark-sql-Analyzer-ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
@@ -169,7 +170,6 @@
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
 .. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
-.. link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder -- Builder of Hive-Specific SessionState]
 
 . link:spark-sql-SharedState.adoc[SharedState -- State Shared Across SparkSessions]
 

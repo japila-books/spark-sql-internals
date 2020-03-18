@@ -170,4 +170,4 @@ In the end, `globalTempViewManager` creates a new <<spark-sql-GlobalTempViewMana
 [globalTempDB] is a system preserved database, please rename your existing database to resolve the name conflict, or set a different value for spark.sql.globalTempDatabase, and launch your Spark application again.
 ```
 
-NOTE: `globalTempViewManager` is used when <<spark-sql-BaseSessionStateBuilder.adoc#catalog, BaseSessionStateBuilder>> and <<spark-sql-HiveSessionStateBuilder.adoc#catalog, HiveSessionStateBuilder>> are requested for the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>.
+NOTE: `globalTempViewManager` is used when <<spark-sql-BaseSessionStateBuilder.adoc#catalog, BaseSessionStateBuilder>> and link:hive/HiveSessionStateBuilder.adoc#catalog[HiveSessionStateBuilder] are requested for the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>.

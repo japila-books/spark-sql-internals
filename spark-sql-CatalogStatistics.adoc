@@ -26,7 +26,7 @@
 
 * link:spark-sql-Analyzer-DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#apply[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
-* `HiveClientImpl` is requested for a table or partition link:spark-sql-HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
+* `HiveClientImpl` is requested for a table or partition link:hive/HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
 
 [source, scala]
 ----

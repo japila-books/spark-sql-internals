@@ -1,6 +1,6 @@
 == [[HiveClientImpl]] HiveClientImpl -- The One and Only HiveClient
 
-`HiveClientImpl` is the only available link:spark-sql-HiveClient.adoc[HiveClient] in Spark SQL that does/uses...FIXME
+`HiveClientImpl` is the only available link:HiveClient.adoc[HiveClient] in Spark SQL that does/uses...FIXME
 
 `HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
@@ -35,7 +35,7 @@ renamePartitions(
   newSpecs: Seq[TablePartitionSpec]): Unit
 ----
 
-NOTE: `renamePartitions` is part of link:spark-sql-HiveClient.adoc#renamePartitions[HiveClient Contract] to...FIXME.
+NOTE: `renamePartitions` is part of link:HiveClient.adoc#renamePartitions[HiveClient Contract] to...FIXME.
 
 `renamePartitions`...FIXME
 
@@ -49,7 +49,7 @@ alterPartitions(
   newParts: Seq[CatalogTablePartition]): Unit
 ----
 
-NOTE: `alterPartitions` is part of link:spark-sql-HiveClient.adoc#alterPartitions[HiveClient Contract] to...FIXME.
+NOTE: `alterPartitions` is part of link:HiveClient.adoc#alterPartitions[HiveClient Contract] to...FIXME.
 
 `alterPartitions`...FIXME
 
@@ -73,7 +73,7 @@ getPartitions(
   spec: Option[TablePartitionSpec]): Seq[CatalogTablePartition]
 ----
 
-NOTE: `getPartitions` is part of link:spark-sql-HiveClient.adoc#getPartitions[HiveClient Contract] to...FIXME.
+NOTE: `getPartitions` is part of link:HiveClient.adoc#getPartitions[HiveClient Contract] to...FIXME.
 
 `getPartitions`...FIXME
 
@@ -86,7 +86,7 @@ getPartitionsByFilter(
   predicates: Seq[Expression]): Seq[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionsByFilter` is part of link:spark-sql-HiveClient.adoc#getPartitionsByFilter[HiveClient Contract] to...FIXME.
+NOTE: `getPartitionsByFilter` is part of link:HiveClient.adoc#getPartitionsByFilter[HiveClient Contract] to...FIXME.
 
 `getPartitionsByFilter`...FIXME
 
@@ -99,7 +99,7 @@ getPartitionOption(
   spec: TablePartitionSpec): Option[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitionOption[HiveClient Contract] to...FIXME.
+NOTE: `getPartitionOption` is part of link:HiveClient.adoc#getPartitionOption[HiveClient Contract] to...FIXME.
 
 `getPartitionOption`...FIXME
 
@@ -124,7 +124,7 @@ NOTE: `getPartitionOption` is part of link:spark-sql-HiveClient.adoc#getPartitio
 def getTableOption(dbName: String, tableName: String): Option[CatalogTable]
 ----
 
-NOTE: `getTableOption` is part of link:spark-sql-HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
+NOTE: `getTableOption` is part of link:HiveClient.adoc#getTableOption[HiveClient Contract] to...FIXME.
 
 When executed, `getTableOption` prints out the following DEBUG message to the logs:
 
@@ -242,6 +242,6 @@ toHivePartition(
 newSession(): HiveClientImpl
 ----
 
-NOTE: `newSession` is part of the link:spark-sql-HiveClient.adoc#newSession[HiveClient] contract to...FIXME.
+NOTE: `newSession` is part of the link:HiveClient.adoc#newSession[HiveClient] contract to...FIXME.
 
 `newSession`...FIXME

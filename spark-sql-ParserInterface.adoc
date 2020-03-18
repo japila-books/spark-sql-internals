@@ -28,7 +28,7 @@ Used when:
 
 * <<spark-sql-Column.adoc#cast, Column.cast>>
 
-* `HiveClientImpl` utility is requested to <<spark-sql-HiveClientImpl.adoc#getSparkSQLDataType, getSparkSQLDataType>>
+* `HiveClientImpl` utility is requested to link:hive/HiveClientImpl.adoc#getSparkSQLDataType[getSparkSQLDataType]
 
 * `OrcFileOperator` is requested to `readSchema`
 

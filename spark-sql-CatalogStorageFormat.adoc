@@ -12,7 +12,7 @@
 
 `CatalogStorageFormat` is <<creating-instance, created>> when:
 
-* `HiveClientImpl` is requested for metadata of a link:spark-sql-HiveClientImpl.adoc#getTableOption[table] or link:spark-sql-HiveClientImpl.adoc#fromHivePartition[table partition]
+* `HiveClientImpl` is requested for metadata of a link:hive/HiveClientImpl.adoc#getTableOption[table] or link:hive/HiveClientImpl.adoc#fromHivePartition[table partition]
 
 * `SparkSqlAstBuilder` is requested to parse Hive-specific link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[CREATE TABLE] or link:spark-sql-SparkSqlAstBuilder.adoc#visitInsertOverwriteHiveDir[INSERT OVERWRITE DIRECTORY] SQL statements
 

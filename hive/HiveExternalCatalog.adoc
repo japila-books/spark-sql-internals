@@ -5,14 +5,14 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveExternalCatalog` is an xref:spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
+`HiveExternalCatalog` is an xref:../spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
 
-`HiveExternalCatalog` is used for `SparkSession` with xref:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
+`HiveExternalCatalog` is used for `SparkSession` with xref:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
 
 .HiveExternalCatalog and SharedState
-image::images/spark-sql-HiveExternalCatalog.png[align="center"]
+image::../images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the xref:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] (and xref:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
+`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the xref:../spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] (and xref:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog` is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix.
 
@@ -44,9 +44,9 @@ org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
 
 [TIP]
 ====
-Use link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
+Use link:../spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
 
-Refer to link:spark-sql-SharedState.adoc[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
+Refer to link:../spark-sql-SharedState.adoc[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
 
 See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 ====
@@ -79,11 +79,20 @@ Refer to link:../spark-logging.adoc[Logging].
 client: HiveClient
 ----
 
-`client` is a xref:spark-sql-HiveClient.adoc[HiveClient] to interact with a Hive metastore.
+`client` is a link:HiveClient.adoc[HiveClient] that `HiveExternalCatalog` uses to interact with a Hive metastore.
 
 `client` is created lazily (when first requested) using link:HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
 
-NOTE: `client` is used when...FIXME
+[NOTE]
+====
+`client` is also used when:
+
+* `HiveSessionStateBuilder` is requested for an link:HiveSessionStateBuilder.adoc#resourceLoader[HiveSessionResourceLoader]
+
+* link:../spark-sql-thrift-server.adoc[Spark Thrift Server] is used
+
+* `SaveAsHiveFile` is used to link:../spark-sql-LogicalPlan-SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath]
+====
 
 === [[getRawTable]] `getRawTable` Method
 

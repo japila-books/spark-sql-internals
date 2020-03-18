@@ -106,5 +106,5 @@ createClient(): HiveClient
 
 * `HiveUtils` utility is used to link:HiveUtils.adoc#newClientForExecution[newClientForExecution] and link:HiveUtils.adoc#newClientForMetadata[newClientForMetadata]
 
-* `HiveClientImpl` is requested for a link:../spark-sql-HiveClientImpl.adoc#newSession[new HiveClientImpl]
+* `HiveClientImpl` is requested for a link:HiveClientImpl.adoc#newSession[new HiveClientImpl]
 ====

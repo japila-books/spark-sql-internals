@@ -9,11 +9,11 @@
 | BaseSessionStateBuilder
 | Description
 
-| [[SessionStateBuilder]] link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
-|
+| link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
+| [[SessionStateBuilder]]
 
-| [[HiveSessionStateBuilder]] link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
-|
+| link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
+| [[HiveSessionStateBuilder]]
 |===
 
 `BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#instantiateSessionState[SessionState].
@@ -54,7 +54,7 @@ a| [[catalog]] <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>
 
 Used to create <<analyzer, Analyzer>>, <<optimizer, Optimizer>> and a <<build, SessionState>> itself
 
-NOTE: <<spark-sql-HiveSessionStateBuilder.adoc#, HiveSessionStateBuilder>> manages its own Hive-aware <<spark-sql-HiveSessionStateBuilder.adoc#catalog, HiveSessionCatalog>>.
+NOTE: link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] manages its own Hive-aware link:hive/HiveSessionStateBuilder.adoc#catalog[HiveSessionCatalog].
 
 | `conf`
 | [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]

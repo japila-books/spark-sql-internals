@@ -71,7 +71,7 @@ NOTE: `doExecute` is part of link:../spark-sql-SparkPlan.adoc#doExecute[SparkPla
 a| [[boundPruningPred]] Catalyst link:../spark-sql-Expression.adoc[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the link:HiveTableRelation.adoc#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
 
 | hiveQlTable
-a| [[hiveQlTable]] Hive's `Table` metadata (link:../spark-sql-HiveClientImpl.adoc#toHiveTable[converted] from the link:HiveTableRelation.adoc#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
+a| [[hiveQlTable]] Hive's `Table` metadata (link:HiveClientImpl.adoc#toHiveTable[converted] from the link:HiveTableRelation.adoc#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
 
 Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<rawPartitions, rawPartitions>> and is <<doExecute, executed>>
 
@@ -79,7 +79,7 @@ Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<r
 a| [[hadoopReader]] link:HadoopTableReader.adoc[HadoopTableReader]
 
 | rawPartitions
-a| [[rawPartitions]] link:../spark-sql-HiveClientImpl.adoc#toHivePartition[Hive partitions] (`Seq[Partition]`)
+a| [[rawPartitions]] link:HiveClientImpl.adoc#toHivePartition[Hive partitions] (`Seq[Partition]`)
 
 Used when `HiveTableScanExec` physical operator is <<doExecute, executed>> with a partitioned table
 

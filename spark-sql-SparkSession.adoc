@@ -255,7 +255,7 @@ Access to the current <<spark-sql-SessionState.adoc#, SessionState>>
 Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<spark-sql-BaseSessionStateBuilder.adoc#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
 
 * *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
-* *hive* for link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
+* *hive* for link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
 | <<setActiveSession, setActiveSession>>
 a|
@@ -780,7 +780,7 @@ sessionStateClassName(conf: SparkConf): String
 
 `sessionStateClassName` gives the name of the class of the link:spark-sql-SessionState.adoc[SessionState] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
 
-* link:spark-sql-HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder] for `hive`
+* link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder] for `hive`
 * link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder] for `in-memory`
 
 NOTE: `sessionStateClassName` is used exclusively when `SparkSession` is requested for the <<sessionState, SessionState>> (and one is not available yet).

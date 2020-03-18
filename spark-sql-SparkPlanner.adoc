@@ -66,7 +66,7 @@ NOTE: `SparkPlanner` extends link:spark-sql-SparkStrategies.adoc[SparkStrategies
 `SparkPlanner` is <<creating-instance, created>> in:
 
 * link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder]
-* link:spark-sql-HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
+* link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 * Structured Streaming's `IncrementalExecution`
 ====
 
@@ -85,7 +85,7 @@ NOTE: `extraPlanningStrategies` are executed after <<extraStrategies, extraStrat
 ====
 `extraPlanningStrategies` is used when `SparkPlanner` <<strategies, is requested for planning strategies>>.
 
-`extraPlanningStrategies` is overriden in the `SessionState` builders -- link:spark-sql-BaseSessionStateBuilder.adoc#planner[BaseSessionStateBuilder] and link:spark-sql-HiveSessionStateBuilder.adoc#planner[HiveSessionStateBuilder].
+`extraPlanningStrategies` is overriden in the `SessionState` builders -- link:spark-sql-BaseSessionStateBuilder.adoc#planner[BaseSessionStateBuilder] and link:hive/HiveSessionStateBuilder.adoc#planner[HiveSessionStateBuilder].
 ====
 
 === [[collectPlaceholders]] Collecting PlanLater Physical Operators -- `collectPlaceholders` Method

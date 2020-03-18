@@ -1,6 +1,6 @@
 == [[HiveTableScans]] HiveTableScans Execution Planning Strategy
 
-`HiveTableScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner]) that <<apply, resolves HiveTableRelation>>.
+`HiveTableScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:hive/HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner]) that <<apply, resolves HiveTableRelation>>.
 
 === [[apply]] Applying HiveTableScans Strategy to Logical Plan (Executing HiveTableScans) -- `apply` Method
 
