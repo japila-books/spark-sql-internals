@@ -1,15 +1,21 @@
 == [[HiveMetastoreCatalog]] HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
 
-`HiveMetastoreCatalog` is a legacy link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that `HiveSessionCatalog` link:HiveSessionCatalog.adoc#metastoreCatalog[uses] for <<convertToLogicalRelation, converting Hive metastore relations to data source relations>> (when link:../spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical evaluation rule is executed).
+`HiveMetastoreCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that knows how to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>>.
 
-`HiveMetastoreCatalog` is <<creating-instance, created>> for `HiveSessionStateBuilder` when requested for the link:HiveSessionStateBuilder.adoc#catalog[SessionCatalog] (and creates a link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog]).
+`HiveMetastoreCatalog` is used by link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog] for link:../spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical evaluation rule.
+
+`HiveMetastoreCatalog` is <<creating-instance, created>> when `HiveSessionStateBuilder` is requested for a link:HiveSessionStateBuilder.adoc#catalog[SessionCatalog] (and creates a link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog]).
 
 .HiveMetastoreCatalog, HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveMetastoreCatalog.png[align="center"]
 
-[[creating-instance]]
-[[sparkSession]]
-`HiveMetastoreCatalog` takes a link:../spark-sql-SparkSession.adoc[SparkSession] when created.
+=== [[creating-instance]] Creating HiveMetastoreCatalog Instance
+
+`HiveMetastoreCatalog` takes the following to be created:
+
+* [[sparkSession]] link:../spark-sql-SparkSession.adoc[SparkSession]
+
+`HiveMetastoreCatalog` initializes the <<internal-properties, internal properties>>.
 
 === [[convertToLogicalRelation]] Converting HiveTableRelation to LogicalRelation over HadoopFsRelation -- `convertToLogicalRelation` Method
 
@@ -49,7 +55,7 @@ inferIfNeeded(
 
 `inferIfNeeded`...FIXME
 
-NOTE: `inferIfNeeded` is used when `HiveMetastoreCatalog` is requested to <<convertToLogicalRelation, convertToLogicalRelation>>.
+NOTE: `inferIfNeeded` is used when `HiveMetastoreCatalog` is requested to <<convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation>>.
 
 === [[getCached]] `getCached` Internal Method
 
@@ -65,4 +71,18 @@ getCached(
 
 `getCached`...FIXME
 
-NOTE: `getCached` is used when...FIXME
+NOTE: `getCached` is used when `HiveMetastoreCatalog` is requested to <<convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation>>.
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
+|===
+| Name
+| Description
+
+| catalogProxy
+a| [[catalogProxy]] link:../spark-sql-SessionCatalog.adoc[SessionCatalog] (of the <<sparkSession, SparkSession>>).
+
+Used when `HiveMetastoreCatalog` is requested to <<getCached, getCached>>, <<convertToLogicalRelation, convertToLogicalRelation>>
+
+|===

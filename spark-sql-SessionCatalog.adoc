@@ -573,3 +573,15 @@ alterTableDataSchema(
 `alterTableDataSchema`...FIXME
 
 NOTE: `alterTableDataSchema` is used when...FIXME
+
+=== [[getCachedTable]] `getCachedTable` Method
+
+[source, scala]
+----
+getCachedTable(
+  key: QualifiedTableName): LogicalPlan
+----
+
+`getCachedTable`...FIXME
+
+NOTE: `getCachedTable` is used when...FIXME
