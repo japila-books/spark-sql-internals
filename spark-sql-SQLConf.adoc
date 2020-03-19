@@ -245,11 +245,11 @@ a| [[ignoreCorruptFiles]] Used when:
 | link:hive/configuration-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions]
 a| [[manageFilesourcePartitions]][[HIVE_MANAGE_FILESOURCE_PARTITIONS]] Used when:
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#, CreateDataSourceTableCommand>>, <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
 
-* `DDLUtils` is requested to `verifyPartitionProviderIsHive`
+* `DDLUtils` utility is used to link:spark-sql-DDLUtils.adoc#verifyPartitionProviderIsHive[verifyPartitionProviderIsHive]
 
 * `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a relation>> (for file-based data source tables and creates a `HadoopFsRelation`)
 

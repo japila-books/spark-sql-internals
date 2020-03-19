@@ -39,7 +39,7 @@ NOTE: Data source is also called a *table provider*.
 
 `DataSource` is <<creating-instance, created>> when:
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * `DataFrameReader` is requested to xref:spark-sql-DataFrameReader.adoc#loadV1Source[load data from a data source (Data Source V1)]
 
@@ -53,7 +53,7 @@ NOTE: Data source is also called a *table provider*.
 
 `DataSource` takes a list of <<paths, file system paths that hold data>>. The list is empty by default, but can be different per data source:
 
-* The <<spark-sql-CatalogTable.adoc#location, location URI>> of a link:hive/HiveTableRelation.adoc[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation])
+* The <<spark-sql-CatalogTable.adoc#location, location URI>> of a link:hive/HiveTableRelation.adoc[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation])
 
 * The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.adoc#, ResolveSQLOnFile>> logical evaluation rule is executed)
 
@@ -294,7 +294,7 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 
 * `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 
-* `HiveMetastoreCatalog` is requested for link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation]
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * Structured Streaming's `FileStreamSource` creates batches of records
 ====
