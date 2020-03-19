@@ -33,7 +33,7 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 
 * [[externalCatalog]] link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 * [[globalTempViewManager]] link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
-* [[metastoreCatalog]] Legacy link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
+* [[metastoreCatalog]] Legacy link:hive/HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
 * [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
 * [[hadoopConf]] Hadoop http://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration]

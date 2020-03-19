@@ -25,7 +25,7 @@ a| [[catalog]] link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog] with t
 
 * <<externalCatalog, HiveExternalCatalog>>
 * link:spark-sql-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
-* New link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
+* New link:HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * link:spark-sql-BaseSessionStateBuilder.adoc#functionRegistry[FunctionRegistry]
 * link:spark-sql-BaseSessionStateBuilder.adoc#conf[SQLConf]
 * New Hadoop link:spark-sql-SessionState.adoc#newHadoopConf[Configuration]

@@ -33,7 +33,7 @@ File names (grouped into partitions when the data is partitioned)
 
 Used when:
 
-* `HiveMetastoreCatalog` is requested to <<spark-sql-HiveMetastoreCatalog.adoc#inferIfNeeded, inferIfNeeded>>
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#inferIfNeeded[inferIfNeeded]
 
 * `FileSourceScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions, selectedPartitions>>
 

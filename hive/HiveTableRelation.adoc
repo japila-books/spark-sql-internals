@@ -125,7 +125,7 @@ isPartitioned: Boolean
 ====
 `isPartitioned` is used when:
 
-* `HiveMetastoreCatalog` is requested to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+* `HiveMetastoreCatalog` is requested to link:HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
 
 * link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical posthoc evaluation rule is executed (on a link:spark-sql-Analyzer-RelationConversions.adoc#apply-InsertIntoTable[InsertIntoTable])
 

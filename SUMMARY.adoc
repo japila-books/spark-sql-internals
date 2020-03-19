@@ -32,6 +32,8 @@
 . link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 . link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 
+. link:hive/HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
+
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 
 == Notable Features
@@ -165,7 +167,6 @@
 ... link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Partition Specification of Table]
 ... link:spark-sql-BucketSpec.adoc[BucketSpec -- Bucketing Specification of Table]
 .. link:spark-sql-HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
-.. link:spark-sql-HiveMetastoreCatalog.adoc[HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations]
 
 . link:spark-sql-SessionState.adoc[SessionState]
 .. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]

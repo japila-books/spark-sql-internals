@@ -61,13 +61,13 @@ convert(relation: HiveTableRelation): LogicalRelation
 
 `convert` takes SerDe of (the storage of) the input link:hive/HiveTableRelation.adoc[HiveTableRelation] and converts `HiveTableRelation` to link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation], i.e.
 
-1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
+1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
 
 For non-`parquet` serde, `convert` assumes ORC format.
 
-* When link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] configuration property is `native` (default) `convert` requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat` as `fileFormatClass`).
+* When link:spark-sql-properties.adoc#spark.sql.orc.impl[spark.sql.orc.impl] configuration property is `native` (default) `convert` requests `HiveMetastoreCatalog` to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.execution.datasources.orc.OrcFileFormat` as `fileFormatClass`).
 
-* Otherwise, `convert` requests `HiveMetastoreCatalog` to link:spark-sql-HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.hive.orc.OrcFileFormat` as `fileFormatClass`).
+* Otherwise, `convert` requests `HiveMetastoreCatalog` to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.hive.orc.OrcFileFormat` as `fileFormatClass`).
 
 NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:spark-sql-HiveSessionCatalog.adoc#metastoreCatalog[HiveMetastoreCatalog].
 
