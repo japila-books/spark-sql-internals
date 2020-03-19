@@ -40,6 +40,8 @@
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
 . link:hive/HiveAnalysis.adoc[HiveAnalysis]
 
+. link:hive/HiveTableScans.adoc[HiveTableScans]
+
 == Notable Features
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]
@@ -643,7 +645,6 @@
 . link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy]
 . link:spark-sql-SparkStrategy-DataSourceV2Strategy.adoc[DataSourceV2Strategy]
 . link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
-. link:spark-sql-SparkStrategy-HiveTableScans.adoc[HiveTableScans]
 . link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
 . link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
 . link:spark-sql-SparkStrategy-SpecialLimits.adoc[SpecialLimits]

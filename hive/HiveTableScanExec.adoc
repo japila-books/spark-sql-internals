@@ -7,7 +7,7 @@
 
 `HiveTableScanExec` is a link:../spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] that represents a link:HiveTableRelation.adoc[HiveTableRelation] logical operator at execution time.
 
-`HiveTableScanExec` is <<creating-instance, created>> exclusively when link:spark-sql-SparkStrategy-HiveTableScans.adoc[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
+`HiveTableScanExec` is <<creating-instance, created>> exclusively when link:HiveTableScans.adoc[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
 [[nodeName]]
 `HiveTableScanExec` uses the link:HiveTableRelation.adoc#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the link:../spark-sql-catalyst-TreeNode.adoc#nodeName[node name]:
@@ -33,7 +33,7 @@ Scan hive [table]
 
 `HiveTableScanExec` requires that either the <<partitionPruningPred, partitionPruningPred>> has no expressions or the <<relation, HiveTableRelation>> is partitioned. Otherwise, `HiveTableScanExec` throws an `IllegalArgumentException`.
 
-link:../spark-sql-SparkStrategy-HiveTableScans.adoc[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every link:HiveTableRelation.adoc[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the link:HiveTableRelation.adoc#partitionCols[partition columns] of the `HiveTableRelation`.
+link:HiveTableScans.adoc[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every link:HiveTableRelation.adoc[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the link:HiveTableRelation.adoc#partitionCols[partition columns] of the `HiveTableRelation`.
 
 === [[metrics]] Performance Metrics -- `metrics` Method
 

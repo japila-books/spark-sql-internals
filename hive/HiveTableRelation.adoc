@@ -76,7 +76,7 @@ The link:spark-sql-CatalogTable.adoc[metadata] of a `HiveTableRelation` (in a ca
 
 `HiveTableRelation` is when `RelationConversions` rule is executed (and converts `HiveTableRelations` to `LogicalRelations`).
 
-`HiveTableRelation` is resolved to link:hive/HiveTableScanExec.adoc[HiveTableScanExec] physical operator when link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] strategy is executed.
+`HiveTableRelation` is resolved to link:hive/HiveTableScanExec.adoc[HiveTableScanExec] physical operator when link:HiveTableScans.adoc[HiveTableScans] strategy is executed.
 ====
 
 === [[computeStats]] Computing Statistics -- `computeStats` Method

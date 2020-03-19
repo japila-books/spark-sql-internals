@@ -147,7 +147,7 @@ If not (i.e. it is neither possible to use a column pruning only nor evaluate fi
 ====
 `pruneFilterProject` is used when:
 
-* `HiveTableScans` execution planning strategy is <<spark-sql-SparkStrategy-HiveTableScans.adoc#apply, executed>> (to plan link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators)
+* link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategy is executed (to plan link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators)
 
 * `InMemoryScans` execution planning strategy is <<spark-sql-SparkStrategy-InMemoryScans.adoc#apply, executed>> (to plan <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators)
 ====

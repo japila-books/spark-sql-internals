@@ -6,7 +6,7 @@
 
 `ProjectExec` is <<creating-instance, created>> when:
 
-* link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans] and link:spark-sql-SparkStrategy-HiveTableScans.adoc#apply[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
+* link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] and link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
 
 * `BasicOperators` execution planning strategy is requested to link:spark-sql-SparkStrategy-BasicOperators.adoc#Project[resolve a Project logical operator]
 
