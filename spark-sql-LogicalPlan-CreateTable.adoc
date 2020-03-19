@@ -25,7 +25,7 @@ The optional <<query, AS query>> is defined when used for the following:
 
 * (for non-hive data source tables) <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#, CreateDataSourceTableCommand>> or a <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command (when the <<query, query>> was defined or not, respectively)
 
-* (for hive tables) <<spark-sql-Analyzer-HiveAnalysis.adoc#, HiveAnalysis>> post-hoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateTableCommand.adoc#, CreateTableCommand>> or a <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>> logical command (when <<query, query>> was defined or not, respectively)
+* (for hive tables) link:hive/HiveAnalysis.adoc[HiveAnalysis] post-hoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateTableCommand.adoc#, CreateTableCommand>> or a <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>> logical command (when <<query, query>> was defined or not, respectively)
 
 === [[creating-instance]] Creating CreateTable Instance
 

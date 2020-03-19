@@ -80,7 +80,7 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 | Description
 
 | <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>
-| [[InsertIntoHiveTable]] When <<spark-sql-Analyzer-HiveAnalysis.adoc#apply, HiveAnalysis>> resolution rule transforms `InsertIntoTable` with a link:hive/HiveTableRelation.adoc[HiveTableRelation]
+| [[InsertIntoHiveTable]] When link:hive/HiveAnalysis.adoc#apply[HiveAnalysis] resolution rule transforms `InsertIntoTable` with a link:hive/HiveTableRelation.adoc[HiveTableRelation]
 
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> over an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>> (with no partitions defined)

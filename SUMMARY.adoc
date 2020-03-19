@@ -38,6 +38,7 @@
 . link:hive/RelationConversions.adoc[RelationConversions]
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
+. link:hive/HiveAnalysis.adoc[HiveAnalysis]
 
 == Notable Features
 
@@ -576,7 +577,6 @@
 . link:spark-sql-Analyzer-ExtractWindowExpressions.adoc[ExtractWindowExpressions]
 . link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
-. link:spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
 . link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion]
 . link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation]

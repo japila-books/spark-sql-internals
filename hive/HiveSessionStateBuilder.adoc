@@ -126,7 +126,7 @@ NOTE: `analyzer` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#analy
 | [[DataSourceAnalysis]] link:../spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
 |
 
-| [[HiveAnalysis]] link:../spark-sql-Analyzer-HiveAnalysis.adoc[HiveAnalysis]
+| [[HiveAnalysis]] link:HiveAnalysis.adoc[HiveAnalysis]
 |
 |===
 
