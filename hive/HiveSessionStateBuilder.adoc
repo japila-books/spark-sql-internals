@@ -111,7 +111,7 @@ NOTE: `analyzer` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#analy
 | Logical Rule
 | Description
 
-| [[DetermineTableStats]] link:../spark-sql-Analyzer-DetermineTableStats.adoc[DetermineTableStats]
+| [[DetermineTableStats]] link:DetermineTableStats.adoc[DetermineTableStats]
 |
 
 | [[RelationConversions]] link:RelationConversions.adoc[RelationConversions]

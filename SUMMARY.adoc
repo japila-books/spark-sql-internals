@@ -37,6 +37,7 @@
 
 . link:hive/RelationConversions.adoc[RelationConversions]
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
+. link:hive/DetermineTableStats.adoc[DetermineTableStats]
 
 == Notable Features
 
@@ -572,7 +573,6 @@
 . link:spark-sql-Analyzer-AliasViewChild.adoc[AliasViewChild]
 . link:spark-sql-Analyzer-CleanupAliases.adoc[CleanupAliases]
 . link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
-. link:spark-sql-Analyzer-DetermineTableStats.adoc[DetermineTableStats]
 . link:spark-sql-Analyzer-ExtractWindowExpressions.adoc[ExtractWindowExpressions]
 . link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
 . link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
