@@ -20,7 +20,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
 * `FindDataSourceTable` logical evaluation rule is link:spark-sql-Analyzer-FindDataSourceTable.adoc#apply[executed]
-* `RelationConversions` logical evaluation rule is link:spark-sql-Analyzer-RelationConversions.adoc#apply[executed]
+* link:hive/RelationConversions.adoc[RelationConversions] logical evaluation rule is executed
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 

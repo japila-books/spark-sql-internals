@@ -6,7 +6,7 @@
 
 * `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a relation>> for <<spark-sql-FileFormat.adoc#, file-based data sources>>
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (for <<spark-sql-Analyzer-RelationConversions.adoc#, RelationConversions>> logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (for link:hive/RelationConversions.adoc[RelationConversions] logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
 
 [source, scala]
 ----

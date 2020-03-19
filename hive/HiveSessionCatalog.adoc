@@ -30,7 +30,7 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 
 `HiveSessionCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for the link:HiveSessionStateBuilder.adoc#catalog[SessionCatalog].
 
-`HiveSessionCatalog` uses the legacy <<metastoreCatalog, HiveMetastoreCatalog>> (which is another session-scoped catalog of relational entities) exclusively to allow `RelationConversions` logical evaluation rule to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>> when link:../spark-sql-Analyzer-RelationConversions.adoc#apply[executed].
+`HiveSessionCatalog` uses the legacy <<metastoreCatalog, HiveMetastoreCatalog>> (which is another session-scoped catalog of relational entities) exclusively to allow `RelationConversions` logical evaluation rule to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>> when link:RelationConversions.adoc#apply[executed].
 
 === [[creating-instance]] Creating HiveSessionCatalog Instance
 

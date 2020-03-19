@@ -34,7 +34,7 @@ a| [[catalog]] link:HiveSessionCatalog.adoc[HiveSessionCatalog] with the followi
 
 NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalog`
 
-Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:../spark-sql-Analyzer-RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
+Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
 | `externalCatalog`
 | [[externalCatalog]] link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
@@ -114,7 +114,7 @@ NOTE: `analyzer` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#analy
 | [[DetermineTableStats]] link:../spark-sql-Analyzer-DetermineTableStats.adoc[DetermineTableStats]
 |
 
-| [[RelationConversions]] link:../spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
+| [[RelationConversions]] link:RelationConversions.adoc[RelationConversions]
 |
 
 | [[PreprocessTableCreation]] <<spark-sql-Analyzer-PreprocessTableCreation.adoc#, PreprocessTableCreation>>

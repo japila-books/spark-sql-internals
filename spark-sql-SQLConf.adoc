@@ -133,11 +133,11 @@ a| [[cboEnabled]] Used in:
 
 | CONVERT_METASTORE_ORC
 | link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc]
-| [[CONVERT_METASTORE_ORC]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:spark-sql-Analyzer-RelationConversions.adoc#isConvertible[isConvertible])
+| [[CONVERT_METASTORE_ORC]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:hive/RelationConversions.adoc#isConvertible[isConvertible])
 
 | CONVERT_METASTORE_PARQUET
 | link:spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet]
-| [[CONVERT_METASTORE_PARQUET]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:spark-sql-Analyzer-RelationConversions.adoc#isConvertible[isConvertible])
+| [[CONVERT_METASTORE_PARQUET]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:hive/RelationConversions.adoc#isConvertible[isConvertible])
 
 | dataFramePivotMaxValues
 | link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues]

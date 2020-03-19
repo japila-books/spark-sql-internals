@@ -99,7 +99,7 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
 
-* `RelationConversions` logical evaluation rule is link:spark-sql-Analyzer-RelationConversions.adoc#apply[executed] (and transforms `InsertIntoTable` operators)
+* `RelationConversions` logical evaluation rule is link:hive/RelationConversions.adoc#apply[executed] (and transforms `InsertIntoTable` operators)
 
 * `CreateHiveTableAsSelectCommand` logical command is <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#run, executed>>
 

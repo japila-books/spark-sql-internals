@@ -2,7 +2,7 @@
 
 `HiveMetastoreCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that knows how to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>>.
 
-`HiveMetastoreCatalog` is used by link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog] for link:../spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical evaluation rule.
+`HiveMetastoreCatalog` is used by link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog] for link:RelationConversions.adoc[RelationConversions] logical evaluation rule.
 
 `HiveMetastoreCatalog` is <<creating-instance, created>> when `HiveSessionStateBuilder` is requested for a link:HiveSessionStateBuilder.adoc#catalog[SessionCatalog] (and creates a link:HiveSessionCatalog.adoc#metastoreCatalog[HiveSessionCatalog]).
 
@@ -40,7 +40,7 @@ When the `HiveTableRelation` is not partitioned, `convertToLogicalRelation`...FI
 
 In the end, `convertToLogicalRelation` replaces `exprIds` in the link:../spark-sql-LogicalPlan-LogicalRelation.adoc#output[table relation output (schema)].
 
-NOTE: `convertToLogicalRelation` is used when link:../spark-sql-Analyzer-RelationConversions.adoc[RelationConversions] logical evaluation rule is executed (with Hive tables in `parquet` as well as `native` and `hive` ORC storage formats).
+NOTE: `convertToLogicalRelation` is used when link:RelationConversions.adoc[RelationConversions] logical evaluation rule is executed (with Hive tables in `parquet` as well as `native` and `hive` ORC storage formats).
 
 === [[inferIfNeeded]] `inferIfNeeded` Internal Method
 

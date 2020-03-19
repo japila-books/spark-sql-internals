@@ -35,6 +35,7 @@
 . link:hive/HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
 . link:hive/HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 
+. link:hive/RelationConversions.adoc[RelationConversions]
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 
 == Notable Features
@@ -580,7 +581,6 @@
 . link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
 . link:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation]
 . link:spark-sql-Analyzer-PreWriteCheck.adoc[PreWriteCheck]
-. link:spark-sql-Analyzer-RelationConversions.adoc[RelationConversions]
 . link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
 . link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
 . link:spark-sql-Analyzer-ResolveCoalesceHints.adoc[ResolveCoalesceHints]
