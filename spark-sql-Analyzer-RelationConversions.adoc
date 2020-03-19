@@ -30,7 +30,7 @@ For a `HiveTableRelation` logical operator alone `apply`...FIXME
 `RelationConversions` takes the following when created:
 
 * [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
-* [[sessionCatalog]] link:spark-sql-HiveSessionCatalog.adoc[Hive-specific session catalog]
+* [[sessionCatalog]] link:hive/HiveSessionCatalog.adoc[Hive-specific session catalog]
 
 === [[isConvertible]] Does Table Use Parquet or ORC SerDe? -- `isConvertible` Internal Method
 
@@ -69,7 +69,7 @@ For non-`parquet` serde, `convert` assumes ORC format.
 
 * Otherwise, `convert` requests `HiveMetastoreCatalog` to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convertToLogicalRelation] (with `org.apache.spark.sql.hive.orc.OrcFileFormat` as `fileFormatClass`).
 
-NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:spark-sql-HiveSessionCatalog.adoc#metastoreCatalog[HiveMetastoreCatalog].
+NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:hive/HiveSessionCatalog.adoc#metastoreCatalog[HiveMetastoreCatalog].
 
 [NOTE]
 ====

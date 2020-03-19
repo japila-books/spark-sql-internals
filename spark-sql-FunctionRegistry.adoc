@@ -47,7 +47,7 @@ Used when:
 
 * `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupFunction, find a function by name>>, <<spark-sql-SessionCatalog.adoc#lookupFunctionInfo, lookupFunctionInfo>> or <<spark-sql-SessionCatalog.adoc#reset, reset>>
 
-* `HiveSessionCatalog` is requested to <<spark-sql-HiveSessionCatalog.adoc#lookupFunction0, lookupFunction0>>
+* `HiveSessionCatalog` is requested to link:hive/HiveSessionCatalog.adoc#lookupFunction0[lookupFunction0]
 
 | lookupFunctionBuilder
 | [[lookupFunctionBuilder]] Used when...FIXME
