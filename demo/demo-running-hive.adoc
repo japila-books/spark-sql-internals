@@ -1,0 +1,302 @@
+== Demo: Running Hive
+
+:spark-version: 2.4.5
+:hive-version: 3.1.2
+:hadoop-version: 3.1.2
+:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
+:url-hadoop-docs: https://hadoop.apache.org/docs/r{hadoop-version}
+:url-hadoop-javadoc: {url-hadoop-docs}/api
+
+The demo shows how to run Apache Spark {spark-version} with Apache Hive {hive-version} (on Apache Hadoop {hadoop-version}).
+
+=== Install Java 8
+
+As per Hadoop's https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions[Hadoop Java Versions]:
+
+> Apache Hadoop from 2.7.x to 2.x support Java 7 and 8
+
+As per Spark's https://spark.apache.org/docs/latest/#downloading[Downloading]:
+
+> Spark runs on Java 8
+
+Make sure you have Java 8 installed.
+
+```
+$ sdk version
+
+SDKMAN 5.7.4+362
+
+$ sdk u java 8.0.242.hs-adpt
+
+$ java -version
+openjdk version "1.8.0_242"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_242-b08)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.242-b08, mixed mode)
+```
+
+=== Build Apache Spark for Apache Hadoop 3.1
+
+Build Apache Spark with support for Apache Hadoop 3.1 using `hadoop-3.1` Maven profile.
+
+```
+$ cd $SPARK_HOME
+$ ./build/mvn \
+    -Phadoop-3.1,yarn,hive,hive-thriftserver \
+    -Pscala-2.12 \
+    -Pkubernetes \ // optional
+    -DskipTests \
+    clean install
+...
+$ ./bin/spark-shell --version
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.4.5
+      /_/
+
+Using Scala version 2.12.10, OpenJDK 64-Bit Server VM, 1.8.0_222
+Branch HEAD
+Compiled by user centos on 2020-02-02T21:10:50Z
+Revision cee4ecbb16917fa85f02c635925e2687400aa56b
+Url https://gitbox.apache.org/repos/asf/spark.git
+Type --help for more information.
+```
+
+=== Set Up Single-Node Hadoop Cluster
+
+Hive uses Hadoop.
+
+Download https://hadoop.apache.org/release/3.1.2.html[Hadoop 3.1.2] or more recent stable release of Apache Hadoop 3.1 line if available.
+
+IMPORTANT: As of this writing Hadoop 3.1.3 was already available, but leads to https://stackoverflow.com/q/58176627/1305344[NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;Ljava/lang/Object;)V] that makes this version unusable with Hive {hive-version}.
+
+```
+export HADOOP_HOME=/Users/jacek/dev/apps/hadoop
+```
+
+Follow the official documentation in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html[Hadoop: Setting up a Single Node Cluster] that shows you how to set up a single-node Hadoop installation.
+
+```
+$ cd $HADOOP_HOME
+$ ./bin/hadoop version
+Hadoop 3.1.2
+Source code repository https://github.com/apache/hadoop.git -r 1019dde65bcf12e05ef48ac71e84550d589e5d9a
+Compiled by sunilg on 2019-01-29T01:39Z
+Compiled with protoc 2.5.0
+From source with checksum 64b8bdd4ca6e77cce75a93eb09ab2a9
+This command was run using /Users/jacek/dev/apps/hadoop-3.1.2/share/hadoop/common/hadoop-common-3.1.2.jar
+```
+
+This demo assumes running {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation[a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process].
+
+[TIP]
+====
+Use `hadoop.tmp.dir` configuration property as the base for temporary directories.
+
+[source, xml]
+----
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/tmp/my-hadoop-tmp-dir/hdfs/tmp</value>
+  <description>The base for temporary directories.</description>
+</property>
+----
+
+Use `./bin/hdfs getconf -confKey hadoop.tmp.dir` to check out the value
+
+```
+$ ./bin/hdfs getconf -confKey hadoop.tmp.dir
+/tmp/my-hadoop-tmp-dir/hdfs/tmp
+```
+====
+
+=== fs.defaultFS Configuration Property (core-site.xml)
+
+Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.` properties as follows
+
+[source, xml]
+----
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+    <property>
+      <name>hadoop.proxyuser.[username].groups</name>
+      <value>*</value>
+    </property>
+    <property>
+      <name>hadoop.proxyuser.[username].hosts</name>
+      <value>*</value>
+    </property>
+</configuration>
+----
+
+IMPORTANT: Replace `[username]` above with the local user (e.g. `jacek`) that will be used in `beeline`. Consult https://stackoverflow.com/q/43180305/1305344[this question] on StackOverflow.
+
+=== dfs.replication Configuration Property (hdfs-site.xml)
+
+Edit `etc/hadoop/hdfs-site.xml` and define `dfs.replication` property as follows:
+
+[source, xml]
+----
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+----
+
+=== Passphrase-less SSH (macOS)
+
+Turn *Remote Login* on in Mac OS X's Sharing preferences that allow remote users to connect to a Mac using the OpenSSH protocols.
+
+```
+$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa_hadoop
+$ cat ~/.ssh/id_rsa_hadoop.pub >> ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys
+```
+
+=== Other Steps
+
+```
+$ cd $HADOOP_HOME
+$ ./bin/hdfs namenode -format
+...
+INFO common.Storage: Storage directory /tmp/hadoop-jacek/dfs/name has been successfully formatted.
+...
+```
+
+[NOTE]
+====
+Use `./bin/hdfs namenode` to start a NameNode that will tell you that the local filesystem is not ready.
+
+```
+$ ./bin/hdfs namenode
+18/01/09 15:43:11 INFO namenode.NameNode: STARTUP_MSG:
+/************************************************************
+STARTUP_MSG: Starting NameNode
+STARTUP_MSG:   host = japila.local/192.168.1.2
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 2.7.5
+...
+18/01/09 15:43:11 INFO namenode.NameNode: fs.defaultFS is hdfs://localhost:9000
+18/01/09 15:43:11 INFO namenode.NameNode: Clients are to use localhost:9000 to access this namenode/service.
+...
+18/01/09 15:43:12 INFO hdfs.DFSUtil: Starting Web-server for hdfs at: http://0.0.0.0:50070
+...
+18/01/09 15:43:13 WARN common.Storage: Storage directory /private/tmp/hadoop-jacek/dfs/name does not exist
+18/01/09 15:43:13 WARN namenode.FSNamesystem: Encountered exception loading fsimage
+org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+...
+18/01/09 15:43:13 ERROR namenode.NameNode: Failed to start namenode.
+org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+```
+====
+
+Start Hadoop DFS using `start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
+
+```
+$ cd $HADOOP_HOME
+$ ./sbin/start-dfs.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [japila-new.local]
+```
+
+List Hadoop's JVM processes using `jps -lm`.
+
+```
+$ jps -lm
+33937 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
+33700 org.apache.hadoop.hdfs.server.namenode.NameNode
+33801 org.apache.hadoop.hdfs.server.datanode.DataNode
+```
+
+* the web UI of the NameNode at http://localhost:9870
+
+NOTE: FIXME Are the steps in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node[YARN on a Single Node] required for Hive?
+
+=== Running Hive
+
+NOTE: Following the steps in https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive[Running Hive].
+
+```
+$HADOOP_HOME/bin/hadoop fs -mkdir /tmp
+$HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp
+```
+
+```
+$HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
+$HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
+```
+
+Download http://hive.apache.org/downloads.html[Hive 3.1.2] or more recent stable release of Apache Hive 3.1 line if available.
+
+```
+export HIVE_HOME=/Users/jacek/dev/apps/hive
+```
+
+As per the https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHiveServer2andBeeline.1[official documentation of Hive]:
+
+> HiveCLI is now deprecated in favor of Beeline
+
+```
+$HIVE_HOME/bin/schematool -dbType derby -initSchema
+```
+
+Run HiveServer2.
+
+```
+$HIVE_HOME/bin/hiveserver2
+```
+
+Run Beeline (the HiveServer2 CLI).
+
+```
+$ $HIVE_HOME/bin/beeline -u jdbc:hive2://localhost:10000
+Connecting to jdbc:hive2://localhost:10000
+Connected to: Apache Hive (version 3.1.2)
+Driver: Hive JDBC (version 3.1.2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+Beeline version 3.1.2 by Apache Hive
+0: jdbc:hive2://localhost:10000>
+```
+
+=== Connecting Apache Spark to Apache Hive
+
+Create `$SPARK_HOME/conf/hive-site.xml` with the following:
+
+[source, xml]
+----
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>hdfs://localhost:9000/hive/warehouse</value>
+    <description>Warehouse Location</description>
+  </property>
+</configuration>
+----
