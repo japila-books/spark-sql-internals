@@ -19,13 +19,13 @@ NOTE: Use link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.ena
 
 Used when:
 
-. `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
+* `SparkSession` is requested for the link:spark-sql-SparkSession.adoc#sessionState[SessionState]
 
-. `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
+* `SharedState` is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[ExternalCatalog]
 
-. `SetCommand` command is executed (with *hive* keys)
+* `SetCommand` command is executed (with *hive* keys)
 
-. `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
+* `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support]
 
 | spark.sql.debug
 a| [[spark.sql.debug]][[DEBUG_MODE]] *(internal)* Only used for internal debugging when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#restoreTableMetadata[restoreTableMetadata].

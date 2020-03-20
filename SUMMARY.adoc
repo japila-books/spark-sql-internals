@@ -32,7 +32,7 @@
 . link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 . link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
 
-. link:hive/HiveSessionCatalog.adoc[HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities]
+. link:hive/HiveSessionCatalog.adoc[HiveSessionCatalog]
 . link:hive/HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 
 . link:hive/RelationConversions.adoc[RelationConversions]

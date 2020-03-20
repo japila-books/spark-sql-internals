@@ -1,11 +1,13 @@
 == [[HiveSessionStateBuilder]] HiveSessionStateBuilder -- Builder of Hive-Specific SessionState
 
-`HiveSessionStateBuilder` is a link:../spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] that has Hive-specific <<analyzer, Analyzer>>, <<planner, SparkPlanner>>, <<catalog, HiveSessionCatalog>>, <<externalCatalog, HiveExternalCatalog>> and <<resourceLoader, HiveSessionResourceLoader>>.
+`HiveSessionStateBuilder` is a concrete link:../spark-sql-BaseSessionStateBuilder.adoc[builder] to produce a Hive-aware link:../spark-sql-SessionState.adoc[SessionState] for...FIXME
+
+`HiveSessionStateBuilder` comes with Hive-specific <<analyzer, Analyzer>>, <<planner, SparkPlanner>>, <<catalog, HiveSessionCatalog>>, <<externalCatalog, HiveExternalCatalog>> and <<resourceLoader, HiveSessionResourceLoader>>.
 
 .HiveSessionStateBuilder's Hive-Specific Properties
 image::../images/spark-sql-HiveSessionStateBuilder.png[align="center"]
 
-`HiveSessionStateBuilder` is <<creating-instance, created>> (using <<newBuilder, newBuilder>>) exclusively when...FIXME
+`HiveSessionStateBuilder` is <<creating-instance, created>> (using <<newBuilder, newBuilder>>) when...FIXME
 
 .HiveSessionStateBuilder and SessionState (in SparkSession)
 image::../images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="center"]
@@ -144,20 +146,20 @@ NOTE: `analyzer` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#analy
 |
 |===
 
-=== [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- newBuilder Factory Method
-
-[source, scala]
-----
-newBuilder: NewBuilder
-----
-
-NOTE: `newBuilder` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#newBuilder[BaseSessionStateBuilder Contract] to...FIXME.
-
-`newBuilder`...FIXME
-
 === [[creating-instance]] Creating HiveSessionStateBuilder Instance
 
 `HiveSessionStateBuilder` takes the following when created:
 
 * [[session]] link:../spark-sql-SparkSession.adoc[SparkSession]
-* [[parentState]] Optional link:../spark-sql-SessionState.adoc[SessionState] (`None` by default)
+* [[parentState]] Optional link:../spark-sql-SessionState.adoc[SessionState] (default: `None`)
+
+=== [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- `newBuilder` Method
+
+[source, scala]
+----
+newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
+----
+
+NOTE: `newBuilder` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#newBuilder[BaseSessionStateBuilder] contract to...FIXME.
+
+`newBuilder`...FIXME
