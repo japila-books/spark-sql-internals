@@ -1,13 +1,15 @@
 == Demo: Running Hive
 
 :spark-version: 2.4.5
-:hive-version: 3.1.2
-:hadoop-version: 3.1.2
+:hive-version: 2.3.6
+:hadoop-version: 2.10.0
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-docs: https://hadoop.apache.org/docs/r{hadoop-version}
 :url-hadoop-javadoc: {url-hadoop-docs}/api
 
 The demo shows how to run Apache Spark {spark-version} with Apache Hive {hive-version} (on Apache Hadoop {hadoop-version}).
+
+IMPORTANT: Support for Hadoop 3.x is expected to be available in https://issues.apache.org/jira/browse/SPARK-23710[Spark 3.0.0].
 
 === Install Java 8
 
@@ -22,31 +24,28 @@ As per Spark's https://spark.apache.org/docs/latest/#downloading[Downloading]:
 Make sure you have Java 8 installed.
 
 ```
-$ sdk version
-
-SDKMAN 5.7.4+362
-
-$ sdk u java 8.0.242.hs-adpt
-
 $ java -version
 openjdk version "1.8.0_242"
 OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_242-b08)
 OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.242-b08, mixed mode)
 ```
 
-=== Build Apache Spark for Apache Hadoop 3.1
+=== Build Apache Spark for Apache Hadoop
 
-Build Apache Spark with support for Apache Hadoop 3.1 using `hadoop-3.1` Maven profile.
+Build Apache Spark with support for Apache Hadoop {hadoop-version}.
 
 ```
 $ cd $SPARK_HOME
 $ ./build/mvn \
-    -Phadoop-3.1,yarn,hive,hive-thriftserver \
+    -Dhadoop.version=2.10.0 \
+    -Pyarn,hive,hive-thriftserver \
     -Pscala-2.12 \
-    -Pkubernetes \ // optional
+    -Pkubernetes \
     -DskipTests \
     clean install
-...
+```
+
+```
 $ ./bin/spark-shell --version
 Welcome to
       ____              __
@@ -55,7 +54,7 @@ Welcome to
    /___/ .__/\_,_/_/ /_/\_\   version 2.4.5
       /_/
 
-Using Scala version 2.12.10, OpenJDK 64-Bit Server VM, 1.8.0_222
+Using Scala version 2.12.10, OpenJDK 64-Bit Server VM, 1.8.0_242
 Branch HEAD
 Compiled by user centos on 2020-02-02T21:10:50Z
 Revision cee4ecbb16917fa85f02c635925e2687400aa56b
@@ -63,29 +62,37 @@ Url https://gitbox.apache.org/repos/asf/spark.git
 Type --help for more information.
 ```
 
+Assert the versions work in `spark-shell` before proceeding.
+
+```
+$ ./bin/spark-shell
+scala> assert(spark.version == "2.4.5")
+
+scala> assert(org.apache.hadoop.util.VersionInfo.getVersion == "2.10.0")
+
+scala> assert(org.apache.hadoop.hive.shims.ShimLoader.getMajorVersion == "0.23")
+```
+
 === Set Up Single-Node Hadoop Cluster
 
-Hive uses Hadoop.
+_Hive uses Hadoop._
 
-Download https://hadoop.apache.org/release/3.1.2.html[Hadoop 3.1.2] or more recent stable release of Apache Hadoop 3.1 line if available.
-
-IMPORTANT: As of this writing Hadoop 3.1.3 was already available, but leads to https://stackoverflow.com/q/58176627/1305344[NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;Ljava/lang/Object;)V] that makes this version unusable with Hive {hive-version}.
+Download and install https://hadoop.apache.org/release/{hadoop-version}.html[Hadoop {hadoop-version}] (or more recent stable release of Apache Hadoop 2 line if available).
 
 ```
 export HADOOP_HOME=/Users/jacek/dev/apps/hadoop
 ```
 
-Follow the official documentation in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html[Hadoop: Setting up a Single Node Cluster] that shows you how to set up a single-node Hadoop installation.
+Follow the official documentation in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html[Hadoop: Setting up a Single Node Cluster] to set up a single-node Hadoop installation.
 
 ```
-$ cd $HADOOP_HOME
-$ ./bin/hadoop version
-Hadoop 3.1.2
-Source code repository https://github.com/apache/hadoop.git -r 1019dde65bcf12e05ef48ac71e84550d589e5d9a
-Compiled by sunilg on 2019-01-29T01:39Z
+$ $HADOOP_HOME/bin/hadoop version
+Hadoop 2.10.0
+Subversion ssh://git.corp.linkedin.com:29418/hadoop/hadoop.git -r e2f1f118e465e787d8567dfa6e2f3b72a0eb9194
+Compiled by jhung on 2019-10-22T19:10Z
 Compiled with protoc 2.5.0
-From source with checksum 64b8bdd4ca6e77cce75a93eb09ab2a9
-This command was run using /Users/jacek/dev/apps/hadoop-3.1.2/share/hadoop/common/hadoop-common-3.1.2.jar
+From source with checksum 7b2d8877c5ce8c9a2cca5c7e81aa4026
+This command was run using /Users/jacek/dev/apps/hadoop-2.10.0/share/hadoop/common/hadoop-common-2.10.0.jar
 ```
 
 This demo assumes running {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation[a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process].
@@ -113,7 +120,7 @@ $ ./bin/hdfs getconf -confKey hadoop.tmp.dir
 
 === fs.defaultFS Configuration Property (core-site.xml)
 
-Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.` properties as follows
+Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.` properties.
 
 [source, xml]
 ----
@@ -161,9 +168,18 @@ $ chmod 0600 ~/.ssh/authorized_keys
 
 === Other Steps
 
+You may want to set up `JAVA_HOME` in `etc/hadoop/hadoop-env.sh` as told in the file:
+
+[quote]
+----
+# The only required environment variable is JAVA_HOME.  All others are
+# optional.  When running a distributed configuration it is best to
+# set JAVA_HOME in this file, so that it is correctly defined on
+# remote nodes.
+----
+
 ```
-$ cd $HADOOP_HOME
-$ ./bin/hdfs namenode -format
+$ $HADOOP_HOME/bin/hdfs namenode -format
 ...
 INFO common.Storage: Storage directory /tmp/hadoop-jacek/dfs/name has been successfully formatted.
 ...
@@ -219,23 +235,22 @@ org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /pr
 Start Hadoop DFS using `start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
 
 ```
-$ cd $HADOOP_HOME
-$ ./sbin/start-dfs.sh
+$ $HADOOP_HOME/sbin/start-dfs.sh
 Starting namenodes on [localhost]
-Starting datanodes
-Starting secondary namenodes [japila-new.local]
+localhost: starting namenode, logging to /Users/jacek/dev/apps/hadoop-2.10.0/logs/hadoop-jacek-namenode-japila-new.local.out
+localhost: starting datanode, logging to /Users/jacek/dev/apps/hadoop-2.10.0/logs/hadoop-jacek-datanode-japila-new.local.out
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /Users/jacek/dev/apps/hadoop-2.10.0/logs/hadoop-jacek-secondarynamenode-japila-new.local.out
 ```
 
 List Hadoop's JVM processes using `jps -lm`.
 
 ```
 $ jps -lm
-33937 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
-33700 org.apache.hadoop.hdfs.server.namenode.NameNode
-33801 org.apache.hadoop.hdfs.server.datanode.DataNode
+50773 org.apache.hadoop.hdfs.server.datanode.DataNode
+50870 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
+50695 org.apache.hadoop.hdfs.server.namenode.NameNode
 ```
-
-* the web UI of the NameNode at http://localhost:9870
 
 NOTE: FIXME Are the steps in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node[YARN on a Single Node] required for Hive?
 
@@ -253,19 +268,27 @@ $HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
 $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
 ```
 
-Download http://hive.apache.org/downloads.html[Hive 3.1.2] or more recent stable release of Apache Hive 3.1 line if available.
+Download and install http://hive.apache.org/downloads.html[Hive {hive-version}] (or more recent stable release of Apache Hive 2 line if available).
 
 ```
 export HIVE_HOME=/Users/jacek/dev/apps/hive
 ```
 
+```
+$ $HIVE_HOME/bin/schematool -dbType derby -initSchema
+...
+Metastore connection URL:	 jdbc:derby:;databaseName=metastore_db;create=true
+Metastore Connection Driver :	 org.apache.derby.jdbc.EmbeddedDriver
+Metastore connection User:	 APP
+Starting metastore schema initialization to 2.3.0
+Initialization script hive-schema-2.3.0.derby.sql
+Initialization script completed
+schemaTool completed
+```
+
 As per the https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHiveServer2andBeeline.1[official documentation of Hive]:
 
 > HiveCLI is now deprecated in favor of Beeline
-
-```
-$HIVE_HOME/bin/schematool -dbType derby -initSchema
-```
 
 Run HiveServer2.
 
@@ -277,17 +300,18 @@ Run Beeline (the HiveServer2 CLI).
 
 ```
 $ $HIVE_HOME/bin/beeline -u jdbc:hive2://localhost:10000
+...
 Connecting to jdbc:hive2://localhost:10000
-Connected to: Apache Hive (version 3.1.2)
-Driver: Hive JDBC (version 3.1.2)
+Connected to: Apache Hive (version 2.3.6)
+Driver: Hive JDBC (version 2.3.6)
 Transaction isolation: TRANSACTION_REPEATABLE_READ
-Beeline version 3.1.2 by Apache Hive
+Beeline version 2.3.6 by Apache Hive
 0: jdbc:hive2://localhost:10000>
 ```
 
 === Connecting Apache Spark to Apache Hive
 
-Create `$SPARK_HOME/conf/hive-site.xml` with the following:
+Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.warehouse.dir` configuration property.
 
 [source, xml]
 ----
@@ -300,3 +324,54 @@ Create `$SPARK_HOME/conf/hive-site.xml` with the following:
   </property>
 </configuration>
 ----
+
+You may want to add the following to `conf/log4j.properties` for a more low-level logging:
+
+```
+log4j.logger.org.apache.spark.sql.hive=ALL
+```
+
+Start `spark-shell`.
+
+```
+./bin/spark-shell \
+  --jars \
+    /Users/jacek/dev/apps/hive/lib/hive-metastore-2.3.6.jar,\
+    /Users/jacek/dev/apps/hive/lib/hive-exec-2.3.6.jar,\
+    /Users/jacek/dev/apps/hive/lib/hive-common-2.3.6.jar,\
+    /Users/jacek/dev/apps/hive/lib/hive-serde-2.3.6.jar,\
+    /Users/jacek/dev/apps/hive/lib/guava-14.0.1.jar
+  --conf spark.sql.hive.metastore.version=2.3.3 \
+  --conf spark.sql.hive.metastore.jars=maven
+```
+
+There is one database in Hive by default.
+
+```
+0: jdbc:hive2://localhost:10000> show databases;
++----------------+
+| database_name  |
++----------------+
+| default        |
++----------------+
+1 row selected (0.067 seconds)
+```
+
+List the tables in the `default` database. There should be some Hive tables listed.
+
+```
+scala> spark.sharedState.externalCatalog.listTables("default")
+```
+
+List the tables in the Spark catalog (that should also include the Hive tables).
+
+```
+scala> spark.catalog.listTables.show
++-------------+--------+------------+---------+-----------+
+|         name|database| description|tableType|isTemporary|
++-------------+--------+------------+---------+-----------+
+| hive_bigints| default|        null| EXTERNAL|      false|
+|hive_part_tbl| default|        null|  MANAGED|      false|
+| hive_records| default|        null|  MANAGED|      false|
++-------------+--------+------------+---------+-----------+
+```
