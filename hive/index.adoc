@@ -2,6 +2,8 @@
 
 Spark SQL supports relational entities (tables, functions, etc.) managed by Apache Hive using *Hive data source*.
 
+TIP: Consult link:../demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)] to learn in a more practical approach.
+
 You can enable Hive-related features using link:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] while building a link:../spark-sql-SparkSession.adoc[SparkSession] (that in turn sets link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` when required Hive classes are available).
 
 When `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#sessionState[SessionState] that...FIXME

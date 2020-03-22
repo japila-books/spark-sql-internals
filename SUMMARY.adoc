@@ -9,7 +9,7 @@
 == Hive Integration / Hive Data Source
 
 . link:hive/index.adoc[Hive Data Source]
-.. link:demo/demo-running-hive.adoc[Demo: Running Hive]
+.. link:demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]
 
 . link:spark-sql-hive-metastore.adoc[Hive Metastore]
 . link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
