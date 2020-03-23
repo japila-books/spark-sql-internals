@@ -119,16 +119,40 @@ getOrCreate(): SparkSession
 enableHiveSupport(): Builder
 ----
 
-`enableHiveSupport` enables Hive support, i.e. running structured queries on Hive tables (and a persistent Hive metastore, support for Hive serdes and Hive user-defined functions).
+`enableHiveSupport` enables link:hive/index.adoc[Hive support] (that allows running structured queries on Hive tables, a persistent Hive metastore, support for Hive serdes and user-defined functions).
 
 [NOTE]
 ====
-You do *not* need any existing Hive installation to use Spark's Hive support. `SparkSession` context will automatically create `metastore_db` in the current directory of a Spark application and a directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir].
+You do *not* need any existing Hive installation to use Spark's Hive support. `SparkSession` context will automatically create `metastore_db` in the current directory of a Spark application and the directory configured by link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] configuration property.
 
 Refer to link:spark-sql-SharedState.adoc[SharedState].
 ====
 
-Internally, `enableHiveSupport` makes sure that the Hive classes are on CLASSPATH, i.e. Spark SQL's `org.apache.hadoop.hive.conf.HiveConf`, and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`.
+Internally, `enableHiveSupport` checks out if the <<hiveClassesArePresent, Hive classes are available>>. If so, `enableHiveSupport` sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`. Otherwise, `enableHiveSupport` throws an `IllegalArgumentException`:
+
+```
+Unable to instantiate SparkSession with Hive support because Hive classes are not found.
+```
+
+=== [[hiveClassesArePresent]] `hiveClassesArePresent` Method
+
+[source, scala]
+----
+hiveClassesArePresent: Boolean
+----
+
+`hiveClassesArePresent` loads and initializes link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder] and `org.apache.hadoop.hive.conf.HiveConf` classes from the current classloader.
+
+`hiveClassesArePresent` returns `true` when the initialization succeeded, and `false` otherwise (due to `ClassNotFoundException` or `NoClassDefFoundError` errors).
+
+[NOTE]
+====
+`hiveClassesArePresent` is used when:
+
+* `Builder` is requested to <<enableHiveSupport, enableHiveSupport>>
+
+* `spark-shell` is executed
+====
 
 === [[withExtensions]] `withExtensions` Method
 

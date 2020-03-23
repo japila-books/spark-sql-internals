@@ -36,8 +36,6 @@ trait HiveClient {
 }
 ----
 
-NOTE: `HiveClient` is a `private[hive]` contract.
-
 .(Subset of) HiveClient Contract
 [cols="1m,2",options="header",width="100%"]
 |===
@@ -63,7 +61,7 @@ getPartitions(
 
 Returns the <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>> of a table
 
-Used exclusively when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#listPartitions[list the partitions of a table]
+Used exclusively when `HiveExternalCatalog` is requested to link:HiveExternalCatalog.adoc#listPartitions[list the partitions of a table]
 
 | getPartitionsByFilter
 | [[getPartitionsByFilter]] Used when...FIXME
@@ -76,33 +74,36 @@ a| [[getTableOption]]
 
 [source, scala]
 ----
-getTableOption(dbName: String, tableName: String): Option[CatalogTable]
+getTableOption(
+  dbName: String,
+  tableName: String): Option[CatalogTable]
 ----
 
-Retrieves a table metadata if available
+Retrieves a table metadata from a Hive metastore
 
-Used exclusively when `HiveClient` is requested for a <<getTable, table metadata>>
-
-NOTE: `getTableOption` is a safe version of <<getTable, getTable>> as it does not throw a `NoSuchTableException`, but simply returns `None`.
+Used when `HiveClient` is requested for a <<getTable, table metadata>>
 
 | renamePartitions
 | [[renamePartitions]] Used when...FIXME
+
 |===
 
-=== [[getTable]] Retrieving Table Metadata If Available or Throwing NoSuchTableException -- `getTable` Method
+=== [[getTable]] Retrieving Table Metadata From Hive Metastore -- `getTable` Method
 
 [source, scala]
 ----
-getTable(dbName: String, tableName: String): CatalogTable
+getTable(
+  dbName: String,
+  tableName: String): CatalogTable
 ----
 
-`getTable` <<getTableOption, retrieves the metadata of a table in a Hive metastore>> if available or reports a `NoSuchTableException`.
+`getTable` <<getTableOption, retrieves the table metadata from a Hive metastore>> if available or throws a `NoSuchTableException`.
 
 [NOTE]
 ====
 `getTable` is used when:
 
-* `HiveExternalCatalog` is requested for a link:hive/HiveExternalCatalog.adoc#getRawTable[table metadata]
+* `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#getRawTable[table metadata]
 
 * `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 

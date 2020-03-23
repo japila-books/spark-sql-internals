@@ -405,13 +405,13 @@ Start `spark-shell`.
 ```
 $ $SPARK_HOME/bin/spark-shell \
   --jars \
-    /Users/jacek/dev/apps/hive/lib/hive-metastore-2.3.6.jar,\
-    /Users/jacek/dev/apps/hive/lib/hive-exec-2.3.6.jar,\
-    /Users/jacek/dev/apps/hive/lib/hive-common-2.3.6.jar,\
-    /Users/jacek/dev/apps/hive/lib/hive-serde-2.3.6.jar,\
-    /Users/jacek/dev/apps/hive/lib/guava-14.0.1.jar \
+    $HIVE_HOME/lib/hive-metastore-2.3.6.jar,\
+    $HIVE_HOME/lib/hive-exec-2.3.6.jar,\
+    $HIVE_HOME/lib/hive-common-2.3.6.jar,\
+    $HIVE_HOME/lib/hive-serde-2.3.6.jar,\
+    $HIVE_HOME/lib/guava-14.0.1.jar \
   --conf spark.sql.hive.metastore.version=2.3 \
-  --conf spark.sql.hive.metastore.jars="/Users/jacek/dev/apps/hive/lib/*" \
+  --conf spark.sql.hive.metastore.jars=$HIVE_HOME"/lib/*" \
   --conf spark.sql.warehouse.dir=hdfs://localhost:9000/user/hive/warehouse
 ...
 Welcome to

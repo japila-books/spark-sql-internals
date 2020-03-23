@@ -307,6 +307,16 @@ sql(sqlText: String): DataFrame
 
 "Executes" a SQL query
 
+| `sessionState`
+a| [[sessionState]]
+
+[source, scala]
+----
+sessionState: SessionState
+----
+
+link:spark-sql-SessionState.adoc[SessionState]
+
 | `sqlContext`
 a| [[sqlContext]]
 
@@ -775,7 +785,8 @@ NOTE: `instantiateSessionState` is used exclusively when `SparkSession` is reque
 
 [source, scala]
 ----
-sessionStateClassName(conf: SparkConf): String
+sessionStateClassName(
+  conf: SparkConf): String
 ----
 
 `sessionStateClassName` gives the name of the class of the link:spark-sql-SessionState.adoc[SessionState] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
@@ -870,15 +881,6 @@ listenerManager: ExecutionListenerManager
 ----
 
 `listenerManager`...FIXME
-
-=== [[sessionState]] Accessing SessionState -- `sessionState` Lazy Attribute
-
-[source, scala]
-----
-sessionState: SessionState
-----
-
-`sessionState`...FIXME
 
 === [[setActiveSession]] `setActiveSession` Object Method
 

@@ -143,10 +143,11 @@ While initialized:
 
 [source, scala]
 ----
-externalCatalogClassName(conf: SparkConf): String
+externalCatalogClassName(
+  conf: SparkConf): String
 ----
 
-`externalCatalogClassName` gives the name of the class of the link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalog] per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
+`externalCatalogClassName` gives the name of the class of the link:spark-sql-ExternalCatalog.adoc#implementations[ExternalCatalog] implementation per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation], i.e.
 
 * link:hive/HiveExternalCatalog.adoc[org.apache.spark.sql.hive.HiveExternalCatalog] for `hive`
 * link:spark-sql-InMemoryCatalog.adoc[org.apache.spark.sql.catalyst.catalog.InMemoryCatalog] for `in-memory`

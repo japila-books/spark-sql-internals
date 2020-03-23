@@ -5,12 +5,12 @@
 [[logging]]
 [TIP]
 ====
-Enable `INFO` logging level for `org.apache.spark.sql.hive.HiveUtils` logger to see what happens inside.
+Enable `ALL` logging level for `org.apache.spark.sql.hive.HiveUtils$` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
 ```
-log4j.logger.org.apache.spark.sql.hive.HiveUtils=INFO
+log4j.logger.org.apache.spark.sql.hive.HiveUtils=ALL
 ```
 
 Refer to link:spark-logging.adoc[Logging].
@@ -97,7 +97,7 @@ inferSchema(
 
 NOTE: `inferSchema` is used when link:ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable] logical resolution rule is executed.
 
-=== [[withHiveExternalCatalog]] `withHiveExternalCatalog` Method
+=== [[withHiveExternalCatalog]] `withHiveExternalCatalog` Utility
 
 [source, scala]
 ----
@@ -105,6 +105,6 @@ withHiveExternalCatalog(
   sc: SparkContext): SparkContext
 ----
 
-`withHiveExternalCatalog` simply sets the link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
+`withHiveExternalCatalog` simply sets the link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
 
-NOTE: `withHiveExternalCatalog` is used when `HiveContext` is created.
+NOTE: `withHiveExternalCatalog` is used when the deprecated `HiveContext` is created.
