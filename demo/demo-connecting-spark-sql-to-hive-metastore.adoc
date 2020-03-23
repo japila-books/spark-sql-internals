@@ -369,17 +369,20 @@ Beeline version 2.3.6 by Apache Hive
 0: jdbc:hive2://localhost:10000>
 ```
 
-In the end, start a Hive Metastore Server (as described in https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreServer[Remote Metastore Server]).
+=== Start Hive Metastore Server
 
+Start the Hive Metastore Server (as described in https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreServer[Remote Metastore Server]).
 ```
-hive --service metastore
+$HIVE_HOME/bin/hive --service metastore
 ...
 Starting Hive Metastore Server
 ```
 
+That is the server Spark SQL applications are going to connect to for metadata of Hive tables.
+
 === Connecting Apache Spark to Apache Hive
 
-Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.warehouse.dir` configuration property.
+Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.uris` configuration property (that is the thrift URL of the Hive Metastore Server).
 
 [source, xml]
 ----
@@ -393,17 +396,18 @@ Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.warehouse.dir
 </configuration>
 ----
 
-You may want to add the following to `conf/log4j.properties` for a more low-level logging:
+Optionally, you may want to add the following to `conf/log4j.properties` for a more low-level logging:
 
 ```
 log4j.logger.org.apache.spark.sql.hive.HiveUtils$=ALL
 log4j.logger.org.apache.spark.sql.internal.SharedState=ALL
+log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=ALL
 ```
 
 Start `spark-shell`.
 
 ```
-$ $SPARK_HOME/bin/spark-shell \
+$SPARK_HOME/bin/spark-shell \
   --jars \
     $HIVE_HOME/lib/hive-metastore-2.3.6.jar,\
     $HIVE_HOME/lib/hive-exec-2.3.6.jar,\
@@ -413,7 +417,11 @@ $ $SPARK_HOME/bin/spark-shell \
   --conf spark.sql.hive.metastore.version=2.3 \
   --conf spark.sql.hive.metastore.jars=$HIVE_HOME"/lib/*" \
   --conf spark.sql.warehouse.dir=hdfs://localhost:9000/user/hive/warehouse
-...
+```
+
+You should see the following welcome message:
+
+```
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
@@ -428,15 +436,19 @@ Type :help for more information.
 scala>
 ```
 
-With the `scala>` prompt you made sure that the `spark.sql.hive.metastore.version` and the JAR files are all correct (as the check happens while the `SparkSession` is created). Congratulations!
+With the `scala>` prompt you made sure that the `spark.sql.hive.metastore.version` and the JAR files are all correct (as the check happens while the `SparkSession` is created). _Congratulations!_
 
-You may also want to check out the `spark.sql.catalogImplementation` internal property that should be `hive`.
+You may also want to check out the `spark.sql.catalogImplementation` internal property that should be `hive`. With the extra logging turned on, you should also see the configuration file loaded (`hive-site.xml`) and the warehouse location.
 
 ```
-assert(spark.conf.get("spark.sql.catalogImplementation") == "hive")
+scala> spark.conf.get("spark.sql.catalogImplementation")
+INFO SharedState: loading hive config file: file:/Users/jacek/dev/oss/spark/conf/hive-site.xml
+INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('hdfs://localhost:9000/user/hive/warehouse').
+INFO SharedState: Warehouse path is 'hdfs://localhost:9000/user/hive/warehouse'.
+res0: String = hive
 ```
 
-The most critical step is to check out the remote connection with the Hive Metastore Server via thrift. Execute the following command to list all tables known to Spark SQL (incl. Hive tables if there were any, but there are none by default).
+The most critical step is to check out the remote connection with the Hive Metastore Server (via the thrift protocol). Execute the following command to list all tables known to Spark SQL (incl. Hive tables if there were any, but there are none by default).
 
 ```
 scala> spark.catalog.listTables.show

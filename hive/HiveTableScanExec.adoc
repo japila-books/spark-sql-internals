@@ -1,7 +1,7 @@
 == [[HiveTableScanExec]] HiveTableScanExec Leaf Physical Operator
 
-:hive-version: 3.1.2
-:hadoop-version: 2.7.3
+:hive-version: 2.3.6
+:hadoop-version: 2.10.0
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 

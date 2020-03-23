@@ -1,14 +1,17 @@
-== [[HiveClientImpl]] HiveClientImpl -- The One and Only HiveClient
+== [[HiveClientImpl]] HiveClientImpl
 
-`HiveClientImpl` is the only available link:HiveClient.adoc[HiveClient] in Spark SQL that does/uses...FIXME
+:hive-version: 2.3.6
+:hadoop-version: 2.10.0
+:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
+:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+
+`HiveClientImpl` is a link:HiveClient.adoc[HiveClient] that uses a <<client, Hive metastore client>> (for meta data/DDL operations using calls to a Hive metastore).
 
 `HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:../spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
 NOTE: The location of the default database for the Hive metastore warehouse is `/user/hive/warehouse` by default.
 
-NOTE: You may be interested in https://issues.apache.org/jira/browse/SPARK-19664[SPARK-19664 put 'hive.metastore.warehouse.dir' in hadoopConf place] if you use Spark before 2.1 (which you should not really as it is not supported anymore).
-
-NOTE: The Hadoop configuration is what link:hive/HiveExternalCatalog.adoc#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
+NOTE: The Hadoop configuration is what link:HiveExternalCatalog.adoc#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
 
 [[logging]]
 [TIP]
@@ -38,6 +41,15 @@ Refer to link:../spark-logging.adoc[Logging].
 
 `HiveClientImpl` initializes the <<internal-properties, internal properties>>.
 
+=== [[client]] Hive Metastore Client -- `client` Internal Method
+
+[source, scala]
+----
+client: Hive
+----
+
+`client` is a Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Hive.html[metastore client] (for meta data/DDL operations using calls to the metastore).
+
 === [[getTableOption]] Retrieving Table Metadata From Hive Metastore -- `getTableOption` Method
 
 [source, scala]
@@ -55,7 +67,7 @@ NOTE: `getTableOption` is part of link:HiveClient.adoc#getTableOption[HiveClient
 Looking up [dbName].[tableName]
 ```
 
-`getTableOption` requests <<client, Hive client>> to retrieve the metadata of the table and creates a link:../spark-sql-CatalogTable.adoc#creating-instance[CatalogTable].
+`getTableOption` <<getRawTableOption, getRawTableOption>> and converts the Hive table metadata to Spark's link:../spark-sql-CatalogTable.adoc[CatalogTable]
 
 === [[renamePartitions]] `renamePartitions` Method
 
@@ -85,17 +97,6 @@ alterPartitions(
 NOTE: `alterPartitions` is part of link:HiveClient.adoc#alterPartitions[HiveClient Contract] to...FIXME.
 
 `alterPartitions`...FIXME
-
-=== [[client]] `client` Internal Method
-
-[source, scala]
-----
-client: Hive
-----
-
-`client`...FIXME
-
-NOTE: `client` is used...FIXME
 
 === [[getPartitions]] `getPartitions` Method
 
@@ -234,7 +235,7 @@ toHivePartition(
 
 * `HiveClientImpl` is requested to <<renamePartitions, renamePartitions>> or <<alterPartitions, alterPartitions>>
 
-* `HiveTableScanExec` physical operator is requested for the link:hive/HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
+* `HiveTableScanExec` physical operator is requested for the link:HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
 ====
 
 === [[newSession]] Creating New HiveClientImpl -- `newSession` Method
@@ -247,3 +248,16 @@ newSession(): HiveClientImpl
 NOTE: `newSession` is part of the link:HiveClient.adoc#newSession[HiveClient] contract to...FIXME.
 
 `newSession`...FIXME
+
+=== [[getRawTableOption]] `getRawTableOption` Internal Method
+
+[source, scala]
+----
+getRawTableOption(
+  dbName: String,
+  tableName: String): Option[Table]
+----
+
+`getRawTableOption` requests the <<client, Hive metastore client>> for the Hive's {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[metadata] of the input table.
+
+NOTE: `getRawTableOption` is used when `HiveClientImpl` is requested to <<tableExists, tableExists>> and <<getTableOption, getTableOption>>.

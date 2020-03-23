@@ -8,4 +8,6 @@ Every Spark SQL application uses a link:../spark-sql-SparkSession.adoc[SparkSess
 
 Hive Data Source uses link:HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] (to build a Hive-specific link:../spark-sql-SparkSession.adoc#sessionState[SessionState]) and link:HiveExternalCatalog.adoc[HiveExternalCatalog].
 
+Hive Data Source uses link:HiveClientImpl.adoc[HiveClientImpl] for meta data/DDL operations (using calls to a Hive metastore).
+
 Hive Data Source uses custom link:configuration-properties.adoc[configuration properties].
