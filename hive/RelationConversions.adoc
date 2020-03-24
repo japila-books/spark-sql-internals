@@ -47,13 +47,13 @@ Internally, `isConvertible` takes the Hive SerDe of the table (from link:HiveTab
 
 `isConvertible` is turned on when either condition holds:
 
-* The Hive SerDe is `parquet` (aka _parquet table_) and link:../spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is by default)
+* The Hive SerDe is `parquet` (aka _parquet table_) and link:configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is by default)
 
 * The Hive SerDe is `orc` (aka _orc table_) and link:../spark-sql-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] internal configuration property is enabled (which is by default)
 
 NOTE: `isConvertible` is used when `RelationConversions` is <<apply, executed>>.
 
-=== [[convert]] Converting HiveTableRelation to LogicalRelation -- `convert` Internal Method
+=== [[convert]] Converting HiveTableRelation to HadoopFsRelation -- `convert` Internal Method
 
 [source, scala]
 ----
@@ -63,7 +63,7 @@ convert(
 
 `convert` takes SerDe of (the storage of) the input link:HiveTableRelation.adoc[HiveTableRelation] and converts `HiveTableRelation` to link:../spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation], i.e.
 
-1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:../spark-sql-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (with link:../spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
+1. For `parquet` serde, `convert` adds `mergeSchema` option being the value of link:configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property (disabled by default) and requests `HiveMetastoreCatalog` to link:HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (with link:../spark-sql-ParquetFileFormat.adoc[ParquetFileFormat] as `fileFormatClass`).
 
 For non-`parquet` serde, `convert` assumes ORC format.
 

@@ -12,6 +12,8 @@ Hive Data Source uses link:HiveClientImpl.adoc[HiveClientImpl] for meta data/DDL
 
 Hive Data Source uses custom link:configuration-properties.adoc[configuration properties].
 
+Hive Data Source uses link:HiveTableRelation.adoc[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be link:RelationConversions.adoc#convert[converted to a HadoopFsRelation] based on link:configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and link:configuration-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
+
 === [[hive-configuration-files]] Hive Configuration Files
 
 `HiveConf` loads `hive-default.xml` when on the classpath.
@@ -36,7 +38,7 @@ NOTE: Spark SQL loads `hive-site.xml` found in `$SPARK_HOME/conf` while Hive in 
 
 Hive uses <<properties, configuration properties>> that can be defined in <<hive-configuration-files, configuration files>> and as System properties (that have a higher precedence).
 
-In Spark applications, you should use `--driver-java-options` to define Hive configuration properties as a System property.
+In Spark applications, you could use `--driver-java-options` or `--conf spark.hadoop.[property]` to define Hive configuration properties.
 
 ```
 $SPARK_HOME/bin/spark-shell \
@@ -49,7 +51,8 @@ $SPARK_HOME/bin/spark-shell \
   --conf spark.sql.hive.metastore.version=2.3 \
   --conf spark.sql.hive.metastore.jars=$HIVE_HOME"/lib/*" \
   --conf spark.sql.warehouse.dir=hdfs://localhost:9000/user/hive/warehouse \
-  --driver-java-options="-Dhive.exec.scratchdir=/tmp/hive-scratchdir"
+  --driver-java-options="-Dhive.exec.scratchdir=/tmp/hive-scratchdir" \
+  --conf spark.hadoop.hive.exec.scratchdir=/tmp/hive-scratchdir-conf
 ```
 
 [[properties]]

@@ -43,6 +43,8 @@
 
 . link:hive/HiveTableScans.adoc[HiveTableScans]
 
+. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+
 == Notable Features
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]
@@ -478,7 +480,6 @@
 . link:spark-sql-LogicalPlan-InsertIntoDir.adoc[InsertIntoDir]
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 . link:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
-. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 . link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]
 . link:spark-sql-LogicalPlan-Join.adoc[Join]

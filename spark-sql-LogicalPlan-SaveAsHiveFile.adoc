@@ -12,7 +12,7 @@
 | <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>>
 | [[InsertIntoHiveDirCommand]]
 
-| <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>
+| link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 | [[InsertIntoHiveTable]]
 
 |===
@@ -39,5 +39,5 @@ saveAsHiveFile(
 
 * <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> logical command is executed
 
-* <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical command is executed (and does <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#processInsert, processInsert>>)
+* link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical command is executed
 ====

@@ -105,7 +105,7 @@ The <<metrics, performance metrics>> are used when:
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | xref:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile]
-| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. xref:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and xref:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable])
+| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. xref:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable])
 
 |===
 
@@ -122,7 +122,7 @@ basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 ====
 `basicWriteJobStatsTracker` is used when:
 
-* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>> logical commands are executed)
+* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 ====

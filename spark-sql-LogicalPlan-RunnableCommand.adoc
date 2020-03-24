@@ -175,7 +175,7 @@ Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSource
 | link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
-| link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+| link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 | [[InsertIntoHiveTable]]
 
 | ListFilesCommand

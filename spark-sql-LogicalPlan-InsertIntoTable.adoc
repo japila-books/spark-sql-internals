@@ -79,7 +79,7 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 | Logical Command
 | Description
 
-| <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>
+| link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 | [[InsertIntoHiveTable]] When link:hive/HiveAnalysis.adoc#apply[HiveAnalysis] resolution rule transforms `InsertIntoTable` with a link:hive/HiveTableRelation.adoc[HiveTableRelation]
 
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>

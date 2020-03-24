@@ -38,7 +38,7 @@ IMPORTANT: `updateTableStats` uses link:spark-sql-properties.adoc#spark.sql.stat
 
 NOTE: `updateTableStats` uses `SparkSession` to access the current link:spark-sql-SparkSession.adoc#sessionState[SessionState] that it then uses to access the session-scoped link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
-NOTE: `updateTableStats` is used when <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>, <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
+NOTE: `updateTableStats` is used when link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
 
 === [[calculateTotalSize]] Calculating Total Size of Table (with Partitions) -- `calculateTotalSize` Method
 
@@ -57,7 +57,7 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the link:spar
 
 * <<spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#, AnalyzeTableCommand>> commands are executed
 
-* `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when <<spark-sql-LogicalPlan-InsertIntoHiveTable.adoc#, InsertIntoHiveTable>>, <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
+* `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
 ====
 
 === [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method

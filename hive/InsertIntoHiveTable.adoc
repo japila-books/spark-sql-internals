@@ -6,10 +6,11 @@
 
 [source, scala]
 ----
-run(session: SparkSession): Seq[Row]
+run(
+  session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of link:../spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand] contract.
 
 `run`...FIXME
 

@@ -266,7 +266,7 @@ The following are the logical commands that link:spark-sql-SessionCatalog.adoc#a
 
 . `TruncateTableCommand`
 
-. link:spark-sql-LogicalPlan-InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 
