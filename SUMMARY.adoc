@@ -185,8 +185,8 @@
 
 . link:spark-sql-RuntimeConfig.adoc[RuntimeConfig -- Management Interface of Runtime Configuration]
 
-. link:spark-sql-SQLConf.adoc[SQLConf -- Internal Configuration Store]
-.. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration]
+. link:spark-sql-SQLConf.adoc[SQLConf]
+.. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf]
 .. link:spark-sql-CatalystConf.adoc[CatalystConf]
 
 . link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]

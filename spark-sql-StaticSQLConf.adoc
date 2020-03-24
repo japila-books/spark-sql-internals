@@ -10,7 +10,7 @@
 
 | [[spark.sql.catalogImplementation]][[CATALOG_IMPLEMENTATION]] *spark.sql.catalogImplementation*
 
-*(internal)* Configures `in-memory` (default) or ``hive``-related link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
+(internal) Configures `in-memory` (default) or ``hive``-related link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
 
 link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:spark-sql-SparkSession.adoc[SparkSession].
 
@@ -28,7 +28,7 @@ Used when:
 
 | [[spark.sql.debug]][[DEBUG_MODE]] *spark.sql.debug*
 
-*(internal)* Only used for internal debugging when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#restoreTableMetadata[restoreTableMetadata].
+(internal) Only used for internal debugging when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#restoreTableMetadata[restoreTableMetadata].
 
 Default: `false`
 
@@ -42,13 +42,13 @@ Default: (empty)
 
 | [[spark.sql.filesourceTableRelationCacheSize]][[FILESOURCE_TABLE_RELATION_CACHE_SIZE]] *spark.sql.filesourceTableRelationCacheSize*
 
-*(internal)* The maximum size of the cache that maps qualified table names to table relation plans. Must not be negative.
+(internal) The maximum size of the cache that maps qualified table names to table relation plans. Must not be negative.
 
 Default: `1000`
 
 | [[spark.sql.globalTempDatabase]][[GLOBAL_TEMP_DATABASE]] *spark.sql.globalTempDatabase*
 
-*(internal)* Name of the Spark-owned internal database of global temporary views
+(internal) Name of the Spark-owned internal database of global temporary views
 
 Default: `global_temp`
 
@@ -72,7 +72,7 @@ The classes should have either a no-arg constructor, or a constructor that expec
 
 | [[spark.sql.sources.schemaStringLengthThreshold]][[SCHEMA_STRING_LENGTH_THRESHOLD]] *spark.sql.sources.schemaStringLengthThreshold*
 
-*(internal)* The maximum length allowed in a single cell when storing additional schema information in Hive's metastore
+(internal) The maximum length allowed in a single cell when storing additional schema information in Hive's metastore
 
 Default: `4000`
 
