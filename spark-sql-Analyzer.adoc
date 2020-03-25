@@ -174,7 +174,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | [[ResolveRelations]] link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]
 a| Resolves:
 
-* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+* link:InsertIntoTable.adoc[InsertIntoTable]
 * link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
 
 | [[ResolveReferences]] link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]

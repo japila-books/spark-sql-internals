@@ -2,7 +2,7 @@
 
 `ResolveRelations` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
-* Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators)
+* Resolves link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators (in link:InsertIntoTable.adoc[InsertIntoTable] operators)
 
 * Other uses of `UnresolvedRelation`
 
@@ -128,4 +128,4 @@ NOTE: The table is described using link:spark-sql-LogicalPlan-UnresolvedRelation
 
 `lookupTableFromCatalog` fails the analysis phase (by reporting a `AnalysisException`) when the table or the table's database cannot be found.
 
-NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations]).
+NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for link:InsertIntoTable.adoc[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations]).

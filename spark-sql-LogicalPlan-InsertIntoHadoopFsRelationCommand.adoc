@@ -9,7 +9,7 @@
 ** xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command
 ** xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator with DataSource V1 data sources
 
-* xref:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] logical operator with a xref:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation])
+* xref:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:InsertIntoTable.adoc[InsertIntoTable] logical operator with a xref:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation])
 
 [[partitionOverwriteMode]][[PartitionOverwriteMode]]
 `InsertIntoHadoopFsRelationCommand` uses *partitionOverwriteMode* option that overrides <<spark-sql-properties.adoc#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>> property for <<spark-sql-dynamic-partition-inserts.adoc#, dynamic partition inserts>>.
@@ -37,9 +37,9 @@
 
 * Always empty when <<creating-instance, created>> when `DataSource` is requested to <<spark-sql-DataSource.adoc#planForWritingFileFormat, planForWritingFileFormat>>
 
-* Possibly with partitions when <<creating-instance, created>> when `DataSourceAnalysis` posthoc logical resolution rule is <<spark-sql-Analyzer-DataSourceAnalysis.adoc#apply, applied>> to an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator over a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> relation
+* Possibly with partitions when <<creating-instance, created>> when `DataSourceAnalysis` posthoc logical resolution rule is <<spark-sql-Analyzer-DataSourceAnalysis.adoc#apply, applied>> to an <<InsertIntoTable.adoc#, InsertIntoTable>> logical operator over a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> relation
 
-With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
+With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
 ====
 
 === [[run]] Executing Command -- `run` Method

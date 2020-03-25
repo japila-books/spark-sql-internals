@@ -480,7 +480,7 @@
 . link:spark-sql-LogicalPlan-InsertIntoDir.adoc[InsertIntoDir]
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 . link:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
-. link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+. link:InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]
 . link:spark-sql-LogicalPlan-Join.adoc[Join]
 . link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]

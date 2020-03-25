@@ -25,10 +25,10 @@ apply(
 
 NOTE: `apply` is part of the link:../spark-sql-catalyst-Rule.adoc#apply[Rule] contract to execute (apply) a rule on a link:../spark-sql-LogicalPlan.adoc[LogicalPlan].
 
-`apply` traverses the input link:../spark-sql-LogicalPlan.adoc[logical plan] looking for link:../spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] (over a link:HiveTableRelation.adoc[HiveTableRelation]) or link:HiveTableRelation.adoc[HiveTableRelation] logical operators:
+`apply` traverses the input link:../spark-sql-LogicalPlan.adoc[logical plan] looking for link:../InsertIntoTable.adoc[InsertIntoTables] (over a link:HiveTableRelation.adoc[HiveTableRelation]) or link:HiveTableRelation.adoc[HiveTableRelation] logical operators:
 
 [[apply-InsertIntoTable]]
-* For an link:../spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] over a link:HiveTableRelation.adoc[HiveTableRelation] that is link:HiveTableRelation.adoc#isPartitioned[non-partitioned] and <<isConvertible, is convertible>>, `apply` creates a new `InsertIntoTable` with the `HiveTableRelation` <<convert, converted to a LogicalRelation>>.
+* For an link:../InsertIntoTable.adoc[InsertIntoTable] over a link:HiveTableRelation.adoc[HiveTableRelation] that is link:HiveTableRelation.adoc#isPartitioned[non-partitioned] and <<isConvertible, is convertible>>, `apply` creates a new `InsertIntoTable` with the `HiveTableRelation` <<convert, converted to a LogicalRelation>>.
 
 [[apply-HiveTableRelation]]
 * For a `HiveTableRelation` logical operator alone `apply`...FIXME
@@ -77,7 +77,7 @@ NOTE: `convert` uses <<sessionCatalog, HiveSessionCatalog>> to access the link:H
 ====
 `convert` is used when `RelationConversions` logical evaluation rule is <<apply, executed>> and does the following transformations:
 
-* Transforms an link:../spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] over a `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
+* Transforms an link:../InsertIntoTable.adoc[InsertIntoTable] over a `HiveTableRelation` with a Hive table (i.e. with `hive` provider) that is not partitioned and uses `parquet` or `orc` data storage format
 
 * Transforms an link:HiveTableRelation.adoc[HiveTableRelation] with a Hive table (i.e. with `hive` provider) that uses `parquet` or `orc` data storage format
 ====

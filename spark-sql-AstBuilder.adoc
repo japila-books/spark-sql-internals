@@ -140,7 +140,7 @@ VALUES expression (',' expression)* tableAlias
 
 | visitInsertIntoTable
 | `#insertIntoTable` labeled alternative
-a| [[visitInsertIntoTable]] <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+a| [[visitInsertIntoTable]] <<InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag disabled
 
@@ -152,7 +152,7 @@ NOTE: `insertIntoTable` is part of `insertInto` that is in turn used only as a h
 
 | visitInsertOverwriteTable
 | `#insertOverwriteTable` labeled alternative
-a| [[visitInsertOverwriteTable]] <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+a| [[visitInsertOverwriteTable]] <<InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag
 
@@ -166,7 +166,7 @@ NOTE: `insertOverwriteTable` is part of `insertInto` that is in turn used only a
 
 | `visitMultiInsertQuery`
 | [[multiInsertQueryBody]] `multiInsertQueryBody`
-a| [[visitMultiInsertQuery]] A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
+a| [[visitMultiInsertQuery]] A logical operator with a link:InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
 
 ```
 FROM relation (',' relation)* lateralView*
@@ -228,7 +228,7 @@ Takes the named expression and relays to <<visitNamedExpression, visitNamedExpre
 
 | visitSingleInsertQuery
 | [[singleInsertQuery]] `#singleInsertQuery` labeled alternative
-a| [[visitSingleInsertQuery]] A logical operator with a link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable]
+a| [[visitSingleInsertQuery]] A logical operator with a link:InsertIntoTable.adoc[InsertIntoTable]
 
 ```
 INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
@@ -321,7 +321,7 @@ TIP: Note `+` (plus) between `/\*` and `*/`
 | withInsertInto
 a| [[withInsertInto]]
 
-* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
+* link:InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
 
 * `InsertIntoDir` for...FIXME
 

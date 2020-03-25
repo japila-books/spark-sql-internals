@@ -18,7 +18,7 @@ Table or view not found: [tableIdentifier]
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
 
-* `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are link:spark-sql-LogicalPlan-InsertIntoTable.adoc#INSERT_INTO_TABLE[executed]
+* `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are link:InsertIntoTable.adoc#INSERT_INTO_TABLE[executed]
 
 * `CreateHiveTableAsSelectCommand` command is executed
 

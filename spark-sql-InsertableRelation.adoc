@@ -2,7 +2,7 @@
 
 `InsertableRelation` is an <<contract, abstraction>> of <<implementations, BaseRelations>> that support <<insert, inserting or overwriting data>>.
 
-NOTE: xref:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] unary logical operator is used to insert into an `InsertableRelation`.
+NOTE: xref:InsertIntoTable.adoc[InsertIntoTable] unary logical operator is used to insert into an `InsertableRelation`.
 
 [[contract]]
 .InsertableRelation Contract

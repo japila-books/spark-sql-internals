@@ -18,7 +18,7 @@
 | <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>>
 | [[CreateTable-query]]
 
-| <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> with <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>
+| <<InsertIntoTable.adoc#, InsertIntoTable>> with <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
 | [[InsertIntoTable-InsertableRelation]]
 
@@ -26,7 +26,7 @@
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>>
 | [[InsertIntoDir]]
 
-| <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> with <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
+| <<InsertIntoTable.adoc#, InsertIntoTable>> with <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>
 | [[InsertIntoTable-HadoopFsRelation]]
 |===

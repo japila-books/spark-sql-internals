@@ -35,7 +35,7 @@ FROM impression_logs
 GROUP BY ad;
 ```
 
-NOTE: `INSERT OVERWRITE TABLE` SQL statement is translated into <<spark-sql-LogicalPlan-InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
+NOTE: `INSERT OVERWRITE TABLE` SQL statement is translated into <<InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
 
 Dynamic Partition Inserts is only supported in SQL mode (for <<spark-sql-AstBuilder.adoc#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements).
 

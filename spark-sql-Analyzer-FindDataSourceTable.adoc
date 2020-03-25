@@ -2,7 +2,7 @@
 
 `FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> in a logical query plan as follows:
 
-* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for Spark and Hive tables)
+* link:InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for Spark and Hive tables)
 
 * "Standalone" `UnresolvedCatalogRelations`
 
@@ -64,9 +64,9 @@ NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule] contract.
 
 `apply` resolves link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
 
-* `apply` <<readDataSourceTable, readDataSourceTable>> for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table] or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table]
+* `apply` <<readDataSourceTable, readDataSourceTable>> for link:InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table] or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table]
 
-* `apply` <<readHiveTable, readHiveTable>> for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a Hive table or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a Hive table
+* `apply` <<readHiveTable, readHiveTable>> for link:InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a Hive table or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a Hive table
 
 === [[readHiveTable]] `readHiveTable` Internal Method
 
