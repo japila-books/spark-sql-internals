@@ -128,7 +128,7 @@ You do *not* need any existing Hive installation to use Spark's Hive support. `S
 Refer to link:spark-sql-SharedState.adoc[SharedState].
 ====
 
-Internally, `enableHiveSupport` checks out if the <<hiveClassesArePresent, Hive classes are available>>. If so, `enableHiveSupport` sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`. Otherwise, `enableHiveSupport` throws an `IllegalArgumentException`:
+Internally, `enableHiveSupport` checks whether the <<hiveClassesArePresent, Hive classes are available>> or not. If so, `enableHiveSupport` sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`. Otherwise, `enableHiveSupport` throws an `IllegalArgumentException`:
 
 ```
 Unable to instantiate SparkSession with Hive support because Hive classes are not found.
