@@ -24,18 +24,6 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 
-[[apply]]
-[NOTE]
-====
-`LogicalRelation` can be created using `apply` factory methods that accept <<relation, BaseRelation>> with optional <<catalogTable, CatalogTable>>.
-
-[source, scala]
-----
-apply(relation: BaseRelation): LogicalRelation
-apply(relation: BaseRelation, table: CatalogTable): LogicalRelation
-----
-====
-
 [[simpleString]]
 The link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
 
@@ -46,6 +34,41 @@ val logicalPlan = q.queryExecution.logical
 scala> println(logicalPlan.simpleString)
 Relation[value#2] text
 ----
+
+=== [[creating-instance]] Creating LogicalRelation Instance
+
+`LogicalRelation` takes the following when created:
+
+* [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
+* [[output]] Output schema `AttributeReferences`
+* [[catalogTable]] Optional link:spark-sql-CatalogTable.adoc[CatalogTable]
+
+=== [[apply]] `apply` Factory Utility
+
+[source, scala]
+----
+apply(
+  relation: BaseRelation,
+  isStreaming: Boolean = false): LogicalRelation
+apply(
+  relation: BaseRelation,
+  table: CatalogTable): LogicalRelation
+----
+
+`apply` <<creating-instance, creates>> a `LogicalRelation` for the input link:spark-sql-BaseRelation.adoc[BaseRelation] (and link:spark-sql-CatalogTable.adoc[CatalogTable] or optional `isStreaming` flag).
+
+[NOTE]
+====
+`apply` is used when:
+
+* `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[DataFrame for a BaseRelation]
+
+* link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] command is executed
+
+* link:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] and link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical evaluation rules are executed
+
+* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
+====
 
 === [[refresh]] `refresh` Method
 
@@ -59,11 +82,3 @@ NOTE: `refresh` is part of link:spark-sql-LogicalPlan.adoc#refresh[LogicalPlan C
 `refresh` requests the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#location[FileIndex] of a `HadoopFsRelation` <<relation, relation>> to refresh.
 
 NOTE: `refresh` does the work for link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] relations only.
-
-=== [[creating-instance]] Creating LogicalRelation Instance
-
-`LogicalRelation` takes the following when created:
-
-* [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
-* [[output]] Output schema `AttributeReferences`
-* [[catalogTable]] Optional link:spark-sql-CatalogTable.adoc[CatalogTable]

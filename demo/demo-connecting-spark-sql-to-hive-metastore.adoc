@@ -486,6 +486,15 @@ PARTITIONED BY (rx_mth_cd STRING COMMENT 'Prescription Date YYYYMM aggregated')
 STORED AS PARQUET;
 ```
 
+[TIP]
+====
+You can also create a Hive table from `spark-shell` using `CREATE TABLE ... USING hive` queries.
+
+```
+CREATE TABLE hive_table_name (id LONG) USING hive
+```
+====
+
 In case of permission denied errors as the one below:
 
 ```

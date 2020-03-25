@@ -743,11 +743,12 @@ stop(): Unit
 
 `stop` stops the `SparkSession`, i.e. link:spark-SparkContext.adoc#stop[stops the underlying `SparkContext`].
 
-=== [[baseRelationToDataFrame]] Create DataFrame from BaseRelation -- `baseRelationToDataFrame` Method
+=== [[baseRelationToDataFrame]] Create DataFrame for BaseRelation -- `baseRelationToDataFrame` Method
 
 [source, scala]
 ----
-baseRelationToDataFrame(baseRelation: BaseRelation): DataFrame
+baseRelationToDataFrame(
+  baseRelation: BaseRelation): DataFrame
 ----
 
 Internally, `baseRelationToDataFrame` creates a link:spark-sql-DataFrame.adoc[DataFrame] from the input link:spark-sql-BaseRelation.adoc[BaseRelation] wrapped inside link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation].
