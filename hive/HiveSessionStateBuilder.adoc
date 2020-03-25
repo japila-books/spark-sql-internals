@@ -63,16 +63,16 @@ NOTE: `planner` is part of link:../spark-sql-BaseSessionStateBuilder.adoc#planne
 
 [[planner-strategies]]
 .Hive-Specific SparkPlanner's Hive-Specific Strategies
-[cols="1,2",options="header",width="100%"]
+[cols="30m,70",options="header",width="100%"]
 |===
 | Strategy
 | Description
 
-| [[HiveTableScans]] link:HiveTableScans.adoc[HiveTableScans]
-|
+| link:HiveTableScans.adoc[HiveTableScans]
+| [[HiveTableScans]] Replaces link:HiveTableRelation.adoc[HiveTableRelation] logical operators with link:HiveTableScanExec.adoc[HiveTableScanExec] physical operators
 
-| [[Scripts]] `Scripts`
-|
+| `Scripts`
+| [[Scripts]]
 |===
 
 === [[analyzer-indepth]] Logical Query Plan Analyzer with Hive-Specific Rules -- `analyzer` Property

@@ -143,11 +143,4 @@ If not (i.e. it is neither possible to use a column pruning only nor evaluate fi
 
 . Creates a <<spark-sql-SparkPlan-ProjectExec.adoc#creating-instance, ProjectExec>> unary physical operator with the optional `FilterExec` operator (with the scan physical operator) or simply the scan physical operator alone
 
-[NOTE]
-====
-`pruneFilterProject` is used when:
-
-* link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategy is executed (to plan link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators)
-
-* `InMemoryScans` execution planning strategy is <<spark-sql-SparkStrategy-InMemoryScans.adoc#apply, executed>> (to plan <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators)
-====
+NOTE: `pruneFilterProject` is used when link:hive/HiveTableScans.adoc[HiveTableScans] and link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] execution planning strategies are executed.

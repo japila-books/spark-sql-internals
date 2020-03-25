@@ -20,11 +20,11 @@
 ====
 The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or link:hive/HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner] are requested to link:spark-sql-catalyst-QueryPlanner.adoc#plan[plan a logical query plan into one or more physical query plans]:
 
-. `HiveTableScans`
-. `FileSourceStrategy`
-. `DataSourceStrategy`
+. link:hive/HiveTableScans.adoc[HiveTableScans]
+. link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
+. link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy]
 . link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
-. `BasicOperators`
+. link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators]
 ====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method

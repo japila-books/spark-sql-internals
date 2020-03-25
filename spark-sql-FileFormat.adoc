@@ -149,7 +149,7 @@ Used exclusively when `FileSourceScanExec` leaf physical operator is requested f
 | <<spark-sql-AvroFileFormat.adoc#, AvroFileFormat>>
 | [[AvroFileFormat]] Avro data source
 
-| <<spark-sql-HiveFileFormat.adoc#, HiveFileFormat>>
+| link:hive/HiveFileFormat.adoc[HiveFileFormat]
 | [[HiveFileFormat]] Writes hive tables
 
 | <<spark-sql-OrcFileFormat.adoc#, OrcFileFormat>>

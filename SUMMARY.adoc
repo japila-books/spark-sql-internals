@@ -12,10 +12,9 @@
 .. link:demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]
 
 . link:spark-sql-hive-metastore.adoc[Hive Metastore]
-. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
 . link:spark-sql-DataSinks.adoc[DataSinks Strategy]
 
-. link:spark-sql-HiveFileFormat.adoc[HiveFileFormat]
+. link:hive/HiveFileFormat.adoc[HiveFileFormat]
 
 . link:hive/HiveClient.adoc[HiveClient]
 .. link:hive/HiveClientImpl.adoc[HiveClientImpl]
@@ -26,7 +25,12 @@
 . link:hive/configuration-properties.adoc[Configuration Properties]
 
 . link:hive/HiveTableRelation.adoc[HiveTableRelation]
+. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+
+. link:hive/HiveTableScans.adoc[HiveTableScans]
+
 . link:hive/HiveTableScanExec.adoc[HiveTableScanExec]
+
 . link:hive/TableReader.adoc[TableReader]
 .. link:hive/HadoopTableReader.adoc[HadoopTableReader]
 
@@ -40,10 +44,6 @@
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
 . link:hive/HiveAnalysis.adoc[HiveAnalysis]
-
-. link:hive/HiveTableScans.adoc[HiveTableScans]
-
-. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
 == Notable Features
 
@@ -86,6 +86,8 @@
 .. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
 
 . link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
+
+. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
 
 == Developing Spark SQL Applications
 
