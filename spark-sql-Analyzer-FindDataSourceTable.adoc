@@ -1,12 +1,12 @@
-== [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule for Resolving UnresolvedCatalogRelations
+== [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
 
-`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] that the link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:hive/HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use for <<apply, resolving UnresolvedCatalogRelations in a logical plan>> for the following cases:
+`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> in a logical query plan as follows:
 
-* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for datasource and hive tables)
+* link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTables] with `UnresolvedCatalogRelation` (for Spark and Hive tables)
 
 * "Standalone" `UnresolvedCatalogRelations`
 
-NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations] logical evaluation rule adds to a logical plan while resolving link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations] leaf logical operators.
+NOTE: `UnresolvedCatalogRelation` leaf logical operator is a placeholder that link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations] logical evaluation rule adds to a logical plan while resolving link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelations] logical operators.
 
 `FindDataSourceTable` is part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 
@@ -52,16 +52,21 @@ scala> println(tablesResolvedPlan.numberedTreeString)
 02    +- Relation[id#10L] parquet
 ----
 
-=== [[apply]] Applying FindDataSourceTable Rule to Logical Plan (and Resolving UnresolvedCatalogRelations in Logical Plan) -- `apply` Method
+=== [[apply]] Applying Rule to Logical Plan (Resolving UnresolvedCatalogRelations) -- `apply` Method
 
 [source, scala]
 ----
-apply(plan: LogicalPlan): LogicalPlan
+apply(
+  plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule] contract.
 
-`apply`...FIXME
+`apply` resolves link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
+
+* `apply` <<readDataSourceTable, readDataSourceTable>> for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table] or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a link:spark-sql-DDLUtils.adoc#isDatasourceTable[datasource table]
+
+* `apply` <<readHiveTable, readHiveTable>> for link:spark-sql-LogicalPlan-InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a Hive table or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a Hive table
 
 === [[readHiveTable]] `readHiveTable` Internal Method
 
@@ -71,7 +76,7 @@ readHiveTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readHiveTable` simply link:hive/HiveTableRelation.adoc#creating-instance[creates] a `HiveTableRelation` for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+`readHiveTable` creates a link:hive/HiveTableRelation.adoc[HiveTableRelation] for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
 
 NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>>.
 
@@ -79,7 +84,8 @@ NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply
 
 [source, scala]
 ----
-readDataSourceTable(table: CatalogTable): LogicalPlan
+readDataSourceTable(
+  table: CatalogTable): LogicalPlan
 ----
 
 `readDataSourceTable`...FIXME
