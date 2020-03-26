@@ -45,6 +45,11 @@
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
 . link:hive/HiveAnalysis.adoc[HiveAnalysis]
 
+. link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
+.. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
+
+. link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
+
 == Notable Features
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]
@@ -444,7 +449,6 @@
 . link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
 . link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
 . link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Query Data]
-. link:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile Contract -- DataWritingCommands That Write Query Result As Hive Files]
 
 ==== Concrete Logical Operators
 
@@ -458,7 +462,6 @@
 . link:spark-sql-LogicalPlan-ClearCacheCommand.adoc[ClearCacheCommand]
 . link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 . link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
-. link:spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 . link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable]
 . link:spark-sql-LogicalPlan-CreateTableCommand.adoc[CreateTableCommand]
 . link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing]
@@ -481,7 +484,6 @@
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand]
 . link:spark-sql-LogicalPlan-InsertIntoDir.adoc[InsertIntoDir]
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
-. link:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
 . link:InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]
 . link:spark-sql-LogicalPlan-Join.adoc[Join]

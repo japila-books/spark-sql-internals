@@ -39,7 +39,7 @@ NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalo
 Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
 | `externalCatalog`
-| [[externalCatalog]] link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
+| [[externalCatalog]] link:HiveExternalCatalog.adoc[HiveExternalCatalog]
 
 | <<planner-indepth, planner>>
 | [[planner]] link:../spark-sql-SparkPlanner.adoc[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.

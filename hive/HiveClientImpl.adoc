@@ -204,7 +204,7 @@ toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
 
 * `HiveTableScanExec` physical operator is requested for the <<hiveQlTable, hiveQlTable>>
 
-* <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed
+* link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed
 ====
 
 === [[getSparkSQLDataType]] `getSparkSQLDataType` Internal Utility

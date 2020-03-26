@@ -128,5 +128,5 @@ isPartitioned: Boolean
 
 * link:RelationConversions.adoc[RelationConversions] logical posthoc evaluation rule is executed (on a link:RelationConversions.adoc#apply-InsertIntoTable[InsertIntoTable])
 
-* `HiveTableScanExec` physical operator is link:hive/HiveTableScanExec.adoc#doExecute[executed]
+* `HiveTableScanExec` physical operator is link:HiveTableScanExec.adoc#doExecute[executed]
 ====

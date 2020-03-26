@@ -511,7 +511,7 @@ dropTable(
 
 * `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveAsTable, save a DataFrame to a table>> (with `Overwrite` save mode)
 
-* `CreateHiveTableAsSelectCommand` logical command is <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#run, executed>>
+* link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
 
 * `SessionCatalog` is requested to <<reset, reset>>
 ====

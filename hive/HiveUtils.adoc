@@ -27,7 +27,7 @@ builtinHiveVersion: String = "1.2.1"
 ====
 `builtinHiveVersion` is used when:
 
-* link:hive/configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
+* link:configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
 
 * `HiveUtils` utility is used to <<newClientForExecution, newClientForExecution>> and <<newClientForMetadata, newClientForMetadata>>
 

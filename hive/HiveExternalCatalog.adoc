@@ -91,7 +91,7 @@ client: HiveClient
 
 * link:../spark-sql-thrift-server.adoc[Spark Thrift Server] is used
 
-* `SaveAsHiveFile` is used to link:../spark-sql-LogicalPlan-SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath]
+* `SaveAsHiveFile` is used to link:../hive/SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath]
 ====
 
 === [[getRawTable]] `getRawTable` Method

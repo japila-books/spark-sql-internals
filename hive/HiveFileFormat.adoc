@@ -7,7 +7,7 @@
 
 NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use link:../spark-sql-DataFrameReader.adoc#table[DataFrameReader.table] to load from or link:../spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWriter.saveAsTable] to write data to a Hive table.
 
-`HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to link:../spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile[saveAsHiveFile] (when link:../spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed).
+`HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to link:../hive/SaveAsHiveFile.adoc#saveAsHiveFile[saveAsHiveFile] (when link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed).
 
 [[creating-instance]]
 [[fileSinkConf]]

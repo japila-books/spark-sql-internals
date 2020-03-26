@@ -32,7 +32,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#createTable[create a table]
 
-* `InsertIntoHiveDirCommand` logical command is executed
+* link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] logical command is executed
 
 * `SparkSqlAstBuilder` does link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] and link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable]
 

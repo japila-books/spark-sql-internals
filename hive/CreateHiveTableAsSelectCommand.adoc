@@ -1,0 +1,15 @@
+== [[CreateHiveTableAsSelectCommand]] CreateHiveTableAsSelectCommand Logical Command
+
+`CreateHiveTableAsSelectCommand` is a link:../spark-sql-LogicalPlan-DataWritingCommand.adoc[logical command] that <<run, FIXME>>.
+
+=== [[run]] Executing Logical Command -- `run` Method
+
+[source, scala]
+----
+run(
+  session: SparkSession): Seq[Row]
+----
+
+NOTE: `run` is part of link:../spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand] contract.
+
+`run`...FIXME

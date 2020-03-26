@@ -85,7 +85,7 @@ In the end, `write` returns all the partition paths that were updated during thi
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
-* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
+* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
 
 * Structured Streaming's `FileStreamSink` is requested to add a streaming batch (`addBatch`)
 ====

@@ -98,14 +98,14 @@ The <<metrics, performance metrics>> are used when:
 | xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]]
 
-| xref:spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
+| link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 | [[CreateHiveTableAsSelectCommand]]
 
 | xref:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
-| xref:spark-sql-LogicalPlan-SaveAsHiveFile.adoc[SaveAsHiveFile]
-| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. xref:spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable])
+| link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
+| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable])
 
 |===
 
@@ -122,7 +122,7 @@ basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 ====
 `basicWriteJobStatsTracker` is used when:
 
-* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
+* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 ====
@@ -140,7 +140,7 @@ outputColumns: Seq[Attribute]
 ====
 `outputColumns` is used when:
 
-* <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#, CreateHiveTableAsSelectCommand>>, <<spark-sql-LogicalPlan-InsertIntoHiveDirCommand.adoc#, InsertIntoHiveDirCommand>> and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
+* link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand], link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
 
-* `SaveAsHiveFile` is requested to <<spark-sql-LogicalPlan-SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
+* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>>
 ====

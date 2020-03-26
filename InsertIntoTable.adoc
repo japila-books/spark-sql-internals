@@ -101,7 +101,7 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 
 * `RelationConversions` logical evaluation rule is link:hive/RelationConversions.adoc#apply[executed] (and transforms `InsertIntoTable` operators)
 
-* `CreateHiveTableAsSelectCommand` logical command is <<spark-sql-LogicalPlan-CreateHiveTableAsSelectCommand.adoc#run, executed>>
+* link:CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
 
 [[output]]
 `InsertIntoTable` has an empty <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
