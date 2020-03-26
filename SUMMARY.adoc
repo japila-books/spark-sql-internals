@@ -10,6 +10,7 @@
 
 . link:hive/index.adoc[Hive Data Source]
 .. link:demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]
+. link:hive/configuration-properties.adoc[Configuration Properties]
 
 . link:spark-sql-hive-metastore.adoc[Hive Metastore]
 . link:spark-sql-DataSinks.adoc[DataSinks Strategy]
@@ -22,10 +23,10 @@
 . link:hive/HiveUtils.adoc[HiveUtils]
 . link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
 
-. link:hive/configuration-properties.adoc[Configuration Properties]
-
 . link:hive/HiveTableRelation.adoc[HiveTableRelation]
-. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+. link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
+.. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
+.. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
 
 . link:hive/HiveTableScans.adoc[HiveTableScans]
 
@@ -44,9 +45,6 @@
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
 . link:hive/HiveAnalysis.adoc[HiveAnalysis]
-
-. link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
-.. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
 
 . link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 

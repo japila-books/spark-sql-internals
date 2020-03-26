@@ -41,6 +41,10 @@ $SPARK_HOME/bin/spark-shell \
 |===
 | Configuration Property
 
+| [[hive.exec.compress.output]] *hive.exec.compress.output*
+
+Default: `false`
+
 | [[hive.exec.log4j.file]][[HIVE_EXEC_LOG4J_FILE]] *hive.exec.log4j.file*
 
 Hive log4j configuration file for execution mode(sub command).
@@ -54,6 +58,14 @@ If the property is set, the value must be a valid URI (`java.net.URI`, e.g. `fil
 HDFS root scratch dir for Hive jobs which gets created with write all (733) permission. For each connecting user, an HDFS scratch dir: `hive.exec.scratchdir`/<username> is created, with <<hive.scratch.dir.permission, hive.scratch.dir.permission>>.
 
 Default: `/tmp/hive`
+
+| [[hive.exec.stagingdir]][[STAGINGDIR]] *hive.exec.stagingdir*
+
+Temporary staging directory that will be created inside table locations in order to support HDFS encryption.
+
+Default: `.hive-staging`
+
+This replaces <<hive.exec.scratchdir, hive.exec.scratchdir>> for query results with the exception of read-only tables. In all cases <<hive.exec.scratchdir, hive.exec.scratchdir>> is still used for other temporary files, such as job plans.
 
 | [[hive.log4j.file]][[HIVE_LOG4J_FILE]] *hive.log4j.file*
 

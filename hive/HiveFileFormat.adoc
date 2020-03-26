@@ -9,8 +9,7 @@ NOTE: Hive data source can only be used with tables and you cannot read or write
 
 `HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to link:../hive/SaveAsHiveFile.adoc#saveAsHiveFile[saveAsHiveFile] (when link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed).
 
-[[creating-instance]]
-[[fileSinkConf]]
+[[fileSinkConf]][[creating-instance]]
 `HiveFileFormat` takes a `FileSinkDesc` when created.
 
 [[inferSchema]]

@@ -86,6 +86,9 @@ Used when `HiveClient` is requested for a <<getTable, table metadata>>
 | renamePartitions
 | [[renamePartitions]] Used when...FIXME
 
+| version
+| [[version]] Hive version
+
 |===
 
 === [[getTable]] Retrieving Table Metadata From Hive Metastore -- `getTable` Method

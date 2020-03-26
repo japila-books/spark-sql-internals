@@ -61,7 +61,7 @@ CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
 
 `run` gets the <<partitionOverwriteMode, partitionOverwriteMode>> option...FIXME
 
-`run` uses `FileCommitProtocol` utility to instantiate a committer for the <<spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass, spark.sql.sources.commitProtocolClass>> (default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.adoc#, SQLHadoopMapReduceCommitProtocol>>) and the <<outputPath, outputPath>>, the <<dynamicPartitionOverwrite, dynamicPartitionOverwrite>>, and random jobId.
+`run` uses `FileCommitProtocol` utility to instantiate a committer based on the <<spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass, spark.sql.sources.commitProtocolClass>> (default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.adoc#, SQLHadoopMapReduceCommitProtocol>>) and the <<outputPath, outputPath>>, the <<dynamicPartitionOverwrite, dynamicPartitionOverwrite>>, and random `jobId`.
 
 For insertion, `run` simply uses the `FileFormatWriter` utility to `write` and then...FIXME (does some table-specific "tasks").
 
