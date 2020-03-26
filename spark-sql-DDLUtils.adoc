@@ -39,7 +39,7 @@ isDatasourceTable(
   table: CatalogTable): Boolean
 ----
 
-`isDatasourceTable` is positive (`true`) when the link:spark-sql-CatalogTable.adoc#provider[provider] of the input link:spark-sql-CatalogTable.adoc[CatalogTable] is not <<HIVE_PROVIDER, hive>> when defined.
+`isDatasourceTable` is positive (`true`) when the link:spark-sql-CatalogTable.adoc#provider[provider] of the input link:spark-sql-CatalogTable.adoc[CatalogTable] is not <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isDatasourceTable` is negative (`false`).
 
 [NOTE]
 ====
@@ -54,4 +54,25 @@ isDatasourceTable(
 * `DDLUtils` utility is used to <<verifyPartitionProviderIsHive, verifyPartitionProviderIsHive>>
 
 * link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] and link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical rules are executed
+====
+
+=== [[isHiveTable]] `isHiveTable` Utility
+
+[source, scala]
+----
+isHiveTable(
+  provider: Option[String]): Boolean
+----
+
+`isHiveTable` is positive (`true`) when the link:spark-sql-CatalogTable.adoc#provider[provider] is <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isHiveTable` is negative (`false`).
+
+[NOTE]
+====
+`isHiveTable` is used when:
+
+* link:hive/HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed
+
+* `DDLUtils` utility is used to <<isHiveTable, isHiveTable>>
+
+* `HiveOnlyCheck` extended check rule is executed
 ====

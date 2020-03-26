@@ -87,6 +87,7 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>
 | [[InsertIntoHadoopFsRelationCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> over a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
+
 |===
 
 CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertIntoTable(r: HiveTableRelation...)` to `InsertIntoHiveTable` and `RelationConversions` that converts `InsertIntoTable(r: HiveTableRelation,...)` to `InsertIntoTable` (with `LogicalRelation`)?

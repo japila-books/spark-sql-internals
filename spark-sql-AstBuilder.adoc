@@ -323,7 +323,7 @@ a| [[withInsertInto]]
 
 * link:InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
 
-* `InsertIntoDir` for...FIXME
+* link:InsertIntoDir.adoc[InsertIntoDir] for...FIXME
 
 | withJoinRelations
 a| [[withJoinRelations]] link:spark-sql-LogicalPlan-Join.adoc[Join] for a <<visitFromClause, FROM clause>> and <<visitRelation, relation>> alone.

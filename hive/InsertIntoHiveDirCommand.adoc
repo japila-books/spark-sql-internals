@@ -1,14 +1,27 @@
 == [[InsertIntoHiveDirCommand]] InsertIntoHiveDirCommand Logical Command
 
-`InsertIntoHiveDirCommand` is...FIXME
+`InsertIntoHiveDirCommand` is a link:SaveAsHiveFile.adoc[logical command] that saves the result of executing a <<query, structured query>> to link:index.adoc[Hive data source].
+
+`InsertIntoHiveDirCommand` is <<creating-instance, created>> when link:HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed and resolves a link:../InsertIntoDir.adoc[InsertIntoDir] logical operator with a link:../spark-sql-DDLUtils.adoc#isHiveTable[Hive table].
+
+=== [[creating-instance]] Creating InsertIntoHiveDirCommand Instance
+
+`InsertIntoHiveDirCommand` takes the following to be created:
+
+* [[isLocal]] `isLocal` Flag
+* [[storage]] link:../spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
+* [[query]] Structured query (as a link:../spark-sql-LogicalPlan.adoc[LogicalPlan])
+* [[overwrite]] `overwrite` Flag
+* [[outputColumnNames]] Names of the output columns
 
 === [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
 ----
-run(session: SparkSession): Seq[Row]
+run(
+  session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of link:../spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand] contract.
 
 `run`...FIXME

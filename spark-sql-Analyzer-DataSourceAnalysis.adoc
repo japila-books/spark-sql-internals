@@ -22,7 +22,7 @@
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
 | [[InsertIntoTable-InsertableRelation]]
 
-| <<spark-sql-LogicalPlan-InsertIntoDir.adoc#, InsertIntoDir>> [small]#(non-hive provider)#
+| link:InsertIntoDir.adoc[InsertIntoDir] [small]#(non-hive provider)#
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>>
 | [[InsertIntoDir]]
 

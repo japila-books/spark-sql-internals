@@ -480,7 +480,7 @@
 . link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation]
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc[InsertIntoDataSourceCommand]
 . link:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand]
-. link:spark-sql-LogicalPlan-InsertIntoDir.adoc[InsertIntoDir]
+. link:InsertIntoDir.adoc[InsertIntoDir]
 . link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 . link:InsertIntoTable.adoc[InsertIntoTable]
 . link:spark-sql-LogicalPlan-Intersect.adoc[Intersect]
