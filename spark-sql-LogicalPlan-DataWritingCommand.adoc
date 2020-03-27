@@ -40,10 +40,12 @@ a| [[run]]
 
 [source, scala]
 ----
-run(sparkSession: SparkSession, child: SparkPlan): Seq[Row]
+run(
+  sparkSession: SparkSession,
+  child: SparkPlan): Seq[Row]
 ----
 
-Executes the command to write query data
+Executes the command to write query data (the result of executing link:spark-sql-SparkPlan.adoc[structured query])
 
 Used when:
 

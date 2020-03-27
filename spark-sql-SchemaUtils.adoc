@@ -11,9 +11,13 @@
 [source, scala]
 ----
 checkColumnNameDuplication(
-  columnNames: Seq[String], colType: String, resolver: Resolver): Unit  // <1>
+  columnNames: Seq[String],
+  colType: String,
+  resolver: Resolver): Unit  // <1>
 checkColumnNameDuplication(
-  columnNames: Seq[String], colType: String, caseSensitiveAnalysis: Boolean): Unit
+  columnNames: Seq[String],
+  colType: String,
+  caseSensitiveAnalysis: Boolean): Unit
 ----
 <1> Uses the other `checkColumnNameDuplication` with `caseSensitiveAnalysis` flag per <<isCaseSensitiveAnalysis, isCaseSensitiveAnalysis>>
 

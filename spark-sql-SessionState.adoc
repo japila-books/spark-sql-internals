@@ -1,5 +1,8 @@
 == [[SessionState]] SessionState -- State Separation Layer Between SparkSessions
 
+:hadoop-version: 2.10.0
+:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+
 `SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a link:spark-sql-SQLConf.adoc[SQLConf].
 
 `SessionState` is available as the <<spark-sql-SparkSession.adoc#sessionState, sessionState>> property of a `SparkSession`.
@@ -166,7 +169,7 @@ NOTE: `refreshTable` is used...FIXME
 newHadoopConf(): Configuration
 ----
 
-`newHadoopConf` returns a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/conf/Configuration.html[Configuration] (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the <<conf, SQLConf>>).
+`newHadoopConf` returns a new Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration] (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the <<conf, SQLConf>>).
 
 NOTE: `newHadoopConf` is used by `ScriptTransformation`, `ParquetRelation`, `StateStoreRDD`, and `SessionState` itself, and few other places.
 
