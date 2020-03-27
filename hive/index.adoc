@@ -41,9 +41,17 @@ $SPARK_HOME/bin/spark-shell \
 |===
 | Configuration Property
 
+| [[hive.enforce.bucketing]] *hive.enforce.bucketing*
+
+| [[hive.enforce.sorting]] *hive.enforce.sorting*
+
 | [[hive.exec.compress.output]] *hive.exec.compress.output*
 
 Default: `false`
+
+| [[hive.exec.dynamic.partition]] *hive.exec.dynamic.partition*
+
+| [[hive.exec.dynamic.partition.mode]] *hive.exec.dynamic.partition.mode*
 
 | [[hive.exec.log4j.file]][[HIVE_EXEC_LOG4J_FILE]] *hive.exec.log4j.file*
 

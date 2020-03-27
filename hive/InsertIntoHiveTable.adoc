@@ -1,18 +1,36 @@
 == [[InsertIntoHiveTable]] InsertIntoHiveTable Logical Command
 
-`InsertIntoHiveTable` is...FIXME
+`InsertIntoHiveTable` is a link:SaveAsHiveFile.adoc[logical command] that writes the result of executing a <<query, structured query>> to a <<table, Hive table>>.
+
+`InsertIntoHiveTable` is <<creating-instance, created>> when:
+
+* link:HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed and resolves a link:../InsertIntoTable.adoc[InsertIntoTable] logical operator with a link:HiveTableRelation.adoc[Hive table]
+
+* link:CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] is executed
+
+=== [[creating-instance]] Creating InsertIntoHiveTable Instance
+
+`InsertIntoHiveTable` takes the following to be created:
+
+* [[table]] link:../spark-sql-CatalogTable.adoc[CatalogTable]
+* [[partition]] Partition keys with optional values (`Map[String, Option[String]]`)
+* [[query]] Structured query (as a link:../spark-sql-LogicalPlan.adoc[LogicalPlan])
+* [[overwrite]] `overwrite` Flag
+* [[ifPartitionNotExists]] `ifPartitionNotExists` Flag
+* [[outputColumnNames]] Names of the output columns
 
 === [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
 ----
 run(
-  session: SparkSession): Seq[Row]
+  sparkSession: SparkSession,
+  child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of link:../spark-sql-LogicalPlan-RunnableCommand.adoc#run[RunnableCommand] contract.
+NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
 
-`run`...FIXME
+`run` ...FIXME
 
 === [[processInsert]] `processInsert` Internal Method
 
@@ -29,4 +47,4 @@ processInsert(
 
 `processInsert`...FIXME
 
-NOTE: `processInsert` is used exclusively when `InsertIntoHiveTable` logical command is <<run, executed>>.
+NOTE: `processInsert` is used when `InsertIntoHiveTable` logical command is <<run, executed>>.
