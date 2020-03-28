@@ -91,19 +91,19 @@ The <<metrics, performance metrics>> are used when:
 * `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#metrics, metrics>>
 
 [[extensions]]
-.DataWritingCommands (Direct Implementations)
+.DataWritingCommands (Direct Implementations and Extensions Only)
 [cols="1,2",options="header",width="100%"]
 |===
 | DataWritingCommand
 | Description
 
-| xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
+| link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]]
 
 | link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 | [[CreateHiveTableAsSelectCommand]]
 
-| xref:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
+| link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]

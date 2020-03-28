@@ -161,10 +161,13 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 
 [source, scala]
 ----
-tableExists(name: TableIdentifier): Boolean
+tableExists(
+  name: TableIdentifier): Boolean
 ----
 
-`tableExists`...FIXME
+`tableExists` requests the <<externalCatalog, ExternalCatalog>> to link:../spark-sql-ExternalCatalog.adoc#tableExists[check out whether the table exists or not].
+
+`tableExists` assumes <<currentDb, default>> database unless defined in the input `TableIdentifier`.
 
 NOTE: `tableExists` is used when...FIXME
 

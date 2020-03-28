@@ -130,9 +130,6 @@ Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSource
 | CreateFunctionCommand
 |
 
-| CreateHiveTableAsSelectCommand
-| [[CreateHiveTableAsSelectCommand]]
-
 | <<spark-sql-LogicalPlan-CreateTableCommand.adoc#, CreateTableCommand>>
 | [[CreateTableCommand]]
 

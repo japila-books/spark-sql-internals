@@ -17,7 +17,6 @@
 // "Data not in the BIGINT data type range so converted to null"
 // It is enough to show the InsertIntoHiveDirCommand operator though
 //
-
 assert(spark.version == "2.4.5")
 
 val tableName = "insert_into_hive_dir_demo"

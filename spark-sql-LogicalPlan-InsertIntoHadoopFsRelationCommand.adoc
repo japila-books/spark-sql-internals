@@ -42,7 +42,7 @@
 With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<InsertIntoTable.adoc#, InsertIntoTable>> logical operator.
 ====
 
-=== [[run]] Executing Command -- `run` Method
+=== [[run]] Executing Data-Writing Logical Command -- `run` Method
 
 [source, scala]
 ----
@@ -51,7 +51,7 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of xref:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract to execute (run) a logical command to write query data.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
 
 `run` uses the <<spark-sql-SQLConf.adoc#manageFilesourcePartitions, spark.sql.hive.manageFilesourcePartitions>> configuration property to...FIXME
 

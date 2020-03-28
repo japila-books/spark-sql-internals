@@ -47,7 +47,7 @@ org.apache.spark.sql.AnalysisException: Table default.users already exists. You 
 * [[query]] AS query (xref:spark-sql-LogicalPlan.adoc[LogicalPlan])
 * [[outputColumnNames]] Output column names (`Seq[String]`)
 
-=== [[run]] Executing Logical Command -- `run` Method
+=== [[run]] Executing Data-Writing Logical Command -- `run` Method
 
 [source, scala]
 ----
@@ -56,7 +56,7 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of xref:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract to execute (run) a logical command to write query data.
+NOTE: `run` is part of link:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
 
 `run`...FIXME
 

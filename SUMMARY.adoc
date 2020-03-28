@@ -24,6 +24,7 @@
 . link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
 
 . link:hive/HiveTableRelation.adoc[HiveTableRelation]
+. link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 . link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
 .. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
 .. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
@@ -45,8 +46,6 @@
 . link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
 . link:hive/DetermineTableStats.adoc[DetermineTableStats]
 . link:hive/HiveAnalysis.adoc[HiveAnalysis]
-
-. link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
 
 == Notable Features
 

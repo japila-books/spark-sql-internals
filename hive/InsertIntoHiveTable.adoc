@@ -6,7 +6,7 @@
 
 * link:HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed and resolves a link:../InsertIntoTable.adoc[InsertIntoTable] logical operator with a link:HiveTableRelation.adoc[Hive table]
 
-* link:CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] is executed
+* link:CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
 
 === [[creating-instance]] Creating InsertIntoHiveTable Instance
 
@@ -19,7 +19,7 @@
 * [[ifPartitionNotExists]] `ifPartitionNotExists` Flag
 * [[outputColumnNames]] Names of the output columns
 
-=== [[run]] Executing Logical Command -- `run` Method
+=== [[run]] Executing Data-Writing Logical Command -- `run` Method
 
 [source, scala]
 ----

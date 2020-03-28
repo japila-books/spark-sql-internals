@@ -20,7 +20,7 @@ Table or view not found: [tableIdentifier]
 
 * `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are link:InsertIntoTable.adoc#INSERT_INTO_TABLE[executed]
 
-* `CreateHiveTableAsSelectCommand` command is executed
+* link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
 
 [TIP]
 ====
