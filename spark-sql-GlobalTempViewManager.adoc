@@ -4,7 +4,7 @@
 
 Strictly speaking, `GlobalTempViewManager` simply <<viewDefinitions, manages>> the names of the global temporary views registered (and the corresponding <<spark-sql-LogicalPlan.adoc#, logical plans>>) and has no interaction with other services in Spark SQL.
 
-`GlobalTempViewManager` is available as <<spark-sql-SharedState.adoc#globalTempViewManager, globalTempViewManager>> property of a `SharedState`.
+`GlobalTempViewManager` is available as link:spark-sql-SharedState.adoc#globalTempViewManager[globalTempViewManager] property of a `SharedState`.
 
 .GlobalTempViewManager and SparkSession
 image::images/spark-sql-GlobalTempViewManager.png[align="center"]
@@ -44,13 +44,22 @@ create(
   overrideIfExists: Boolean): Unit
 ----
 
+Registers (_creates_) a global temporary view (as a link:spark-sql-LogicalPlan.adoc[LogicalPlan]) by name
+
+Used when `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#createGlobalTempView[createGlobalTempView]
+
 | <<get, get>>
 a|
 
 [source, scala]
 ----
-get(name: String): Option[LogicalPlan]
+get(
+  name: String): Option[LogicalPlan]
 ----
+
+Finds the global view definition (as a link:spark-sql-LogicalPlan.adoc[LogicalPlan]) for the given name if available
+
+Used when `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#getGlobalTempView[getGlobalTempView], link:spark-sql-SessionCatalog.adoc##getTempViewOrPermanentTableMetadata[getTempViewOrPermanentTableMetadata], link:spark-sql-SessionCatalog.adoc##lookupRelation[lookupRelation], link:spark-sql-SessionCatalog.adoc##isTemporaryTable[isTemporaryTable], link:spark-sql-SessionCatalog.adoc##refreshTable[refreshTable]
 
 | <<listViewNames, listViewNames>>
 a|

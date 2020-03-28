@@ -267,15 +267,15 @@ createGlobalTempView(
   overrideIfExists: Boolean): Unit
 ----
 
-`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.adoc#create, create a global temporary view>>.
+`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to link:spark-sql-GlobalTempViewManager.adoc#create[register a global temporary view].
 
 [NOTE]
 ====
 `createGlobalTempView` is used when:
 
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType, view type>> is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView, GlobalTempView>>)
+* link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the link:spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType[view type] is link:spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView[GlobalTempView])
 
-* `CreateTempViewUsing` logical command is <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, executed>> (for a global temporary view, i.e. when the <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global, global>> flag is on)
+* link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global[global] flag is enabled)
 ====
 
 === [[createTable]] `createTable` Method
@@ -519,16 +519,17 @@ dropTable(
 * `SessionCatalog` is requested to <<reset, reset>>
 ====
 
-=== [[getGlobalTempView]] Getting Global Temporary View (Definition) -- `getGlobalTempView` Method
+=== [[getGlobalTempView]] Looking Up Global Temporary View by Name -- `getGlobalTempView` Method
 
 [source, scala]
 ----
-getGlobalTempView(name: String): Option[LogicalPlan]
+getGlobalTempView(
+  name: String): Option[LogicalPlan]
 ----
 
-`getGlobalTempView`...FIXME
+`getGlobalTempView` requests the <<globalTempViewManager, GlobalTempViewManager>> for the link:spark-sql-GlobalTempViewManager.adoc#get[temporary view definition by the input name].
 
-NOTE: `getGlobalTempView` is used when...FIXME
+NOTE: `getGlobalTempView` is used when `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#dropGlobalTempView[dropGlobalTempView].
 
 === [[registerFunction]] `registerFunction` Method
 

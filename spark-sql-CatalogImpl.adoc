@@ -237,6 +237,18 @@ NOTE: `refreshByPath` is part of link:spark-sql-Catalog.adoc#refreshByPath[Catal
 
 `refreshByPath`...FIXME
 
+=== [[dropGlobalTempView]] `dropGlobalTempView` Method
+
+[source, scala]
+----
+dropGlobalTempView(
+  viewName: String): Boolean
+----
+
+NOTE: `dropGlobalTempView` is part of link:spark-sql-Catalog.adoc#dropGlobalTempView[Catalog] contract].
+
+`dropGlobalTempView`...FIXME
+
 === [[listColumns-internal]] `listColumns` Internal Method
 
 [source, scala]
