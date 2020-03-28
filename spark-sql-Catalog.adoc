@@ -224,8 +224,10 @@ a| [[uncacheTable]]
 
 [source, scala]
 ----
-uncacheTable(tableName: String): Unit
+uncacheTable(
+  tableName: String): Unit
 ----
+
 |===
 
 NOTE: <<spark-sql-CatalogImpl.adoc#, CatalogImpl>> is the one and only known implementation of the <<contract, Catalog Contract>> in Apache Spark.
