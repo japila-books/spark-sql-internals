@@ -74,23 +74,33 @@ scala> println(resolvedPlan.numberedTreeString)
 
 [source, scala]
 ----
-apply(plan: LogicalPlan): LogicalPlan
+apply(
+  plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule on a link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`apply`...FIXME
+For a link:InsertIntoTable.adoc[InsertIntoTable] logical operator with a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] child operator, `apply` <<lookupTableFromCatalog, lookupTableFromCatalog>> and executes the link:spark-sql-Optimizer-EliminateSubqueryAliases.adoc[EliminateSubqueryAliases] optimization rule.
+
+For a link:spark-sql-LogicalPlan-View.adoc[View] operator, `apply` substitutes the resolved table for the link:InsertIntoTable.adoc[InsertIntoTable] operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For link:spark-sql-LogicalPlan-View.adoc[View] operator, `apply` fail analysis with the exception:
+
+```
+Inserting into a view is not allowed. View: [identifier].
+```
+
+For link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operators, `apply` simply <<resolveRelation, resolveRelation>>.
 
 === [[resolveRelation]] Resolving Relation -- `resolveRelation` Method
 
 [source, scala]
 ----
-resolveRelation(plan: LogicalPlan): LogicalPlan
+resolveRelation(
+  plan: LogicalPlan): LogicalPlan
 ----
 
 `resolveRelation`...FIXME
 
-NOTE: `resolveRelation` is used when...FIXME
+NOTE: `resolveRelation` is used when `ResolveRelations` rule is <<apply, executed>> (for a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator).
 
 === [[isRunningDirectlyOnFiles]] `isRunningDirectlyOnFiles` Internal Method
 
