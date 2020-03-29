@@ -6,7 +6,7 @@ NOTE: The demo is a follow-up to link:demo-connecting-spark-sql-to-hive-metastor
 
 The demo features the following:
 
-* link:configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
+* link:../hive/configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
 
 * Hadoop DFS for link:../spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
 

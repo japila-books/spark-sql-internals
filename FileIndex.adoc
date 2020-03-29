@@ -2,6 +2,8 @@
 
 `FileIndex` is the <<contract, abstraction>> of <<implementations, file indices>> that knows the <<rootPaths, root paths>> and <<partitionSchema, partition schema>> of a relation.
 
+`FileIndex` is associated with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation].
+
 [[contract]]
 .FileIndex Contract
 [cols="30m,70",options="header",width="100%"]
@@ -19,6 +21,12 @@ inputFiles: Array[String]
 
 File names to read when scanning this relation
 
+Used when:
+
+* `CatalogFileIndex` is requested for the link:CatalogFileIndex.adoc#inputFiles[input files]
+
+* `HadoopFsRelation` is requested for the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#inputFiles[input files]
+
 | listFiles
 a| [[listFiles]]
 
@@ -33,11 +41,13 @@ File names (grouped into partitions when the data is partitioned)
 
 Used when:
 
+* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions[selectedPartitions]
+
 * `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#inferIfNeeded[inferIfNeeded]
 
-* `FileSourceScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions, selectedPartitions>>
+* link:spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc[OptimizeMetadataOnlyQuery] logical optimization is executed
 
-* <<spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc#, OptimizeMetadataOnlyQuery>> logical optimization is executed
+* `CatalogFileIndex` is requested for the link:CatalogFileIndex.adoc#listFiles[files]
 
 | metadataOpsTimeNs
 a| [[metadataOpsTimeNs]]
@@ -116,10 +126,10 @@ Used when:
 | FileIndex
 | Description
 
-| <<CatalogFileIndex.adoc#, CatalogFileIndex>>
+| link:CatalogFileIndex.adoc[CatalogFileIndex]
 | [[CatalogFileIndex]]
 
-| <<PartitioningAwareFileIndex.adoc#, PartitioningAwareFileIndex>>
+| link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 | [[PartitioningAwareFileIndex]]
 
 |===

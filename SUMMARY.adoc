@@ -212,14 +212,21 @@
 
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 
+. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
+.. link:FileIndex.adoc[FileIndex]
+... link:CatalogFileIndex.adoc[CatalogFileIndex]
+... link:InMemoryFileIndex.adoc[InMemoryFileIndex]
+... link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
+... link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex]
+
 . link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
 . link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
 
-. link:spark-sql-PartitionedFile.adoc[PartitionedFile -- File Block in FileFormat Data Source]
-. link:spark-sql-FileScanRDD.adoc[FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator]
+. link:spark-sql-PartitionedFile.adoc[PartitionedFile]
+. link:spark-sql-FileScanRDD.adoc[FileScanRDD]
 
-. link:spark-sql-ParquetReadSupport.adoc[ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source]
-. link:spark-sql-RecordReaderIterator.adoc[RecordReaderIterator -- Scala Iterator over Hadoop RecordReader's Values]
+. link:spark-sql-ParquetReadSupport.adoc[ParquetReadSupport]
+. link:spark-sql-RecordReaderIterator.adoc[RecordReaderIterator]
 
 === Kafka Data Source
 
@@ -310,15 +317,13 @@
 === Data Source Relations / Extension Contracts
 
 . link:spark-sql-BaseRelation.adoc[BaseRelation]
-.. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
+. link:spark-sql-FileRelation.adoc[FileRelation]
 
 . link:spark-sql-CatalystScan.adoc[CatalystScan]
 . link:spark-sql-InsertableRelation.adoc[InsertableRelation]
 . link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
 . link:spark-sql-PrunedScan.adoc[PrunedScan]
 . link:spark-sql-TableScan.adoc[TableScan]
-
-. link:spark-sql-FileRelation.adoc[FileRelation]
 
 === Others
 
@@ -802,10 +807,6 @@
 
 . link:spark-sql-CatalogUtils.adoc[CatalogUtils Helper Object]
 . link:spark-sql-ExternalCatalogUtils.adoc[ExternalCatalogUtils]
-
-. link:FileIndex.adoc[FileIndex]
-.. link:CatalogFileIndex.adoc[CatalogFileIndex]
-.. link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
 
 . link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator]
 

@@ -84,11 +84,9 @@ Default: `1000`
 
 | [[spark.sql.warehouse.dir]][[WAREHOUSE_PATH]] *spark.sql.warehouse.dir*
 
-Directory of a Hive warehouse (using Derby) with managed databases and tables (_Spark warehouse_)
+Directory of a Spark warehouse
 
 Default: `spark-warehouse`
-
-TIP: Read the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document to learn more.
 
 |===
 

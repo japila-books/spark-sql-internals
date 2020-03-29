@@ -1,9 +1,12 @@
 == [[CatalogStorageFormat]] CatalogStorageFormat -- Storage Specification of Table or Partition
 
+:java-version: 8
+:java-api: https://docs.oracle.com/javase/{java-version}/docs/api
+
 [[creating-instance]]
 `CatalogStorageFormat` is the *storage specification* of a partition or a table, i.e. the metadata that includes the following:
 
-* [[locationUri]] Location URI
+* [[locationUri]] Location URI (as a Java {java-api}/java/net/URI.html[URI])
 * [[inputFormat]] Input format
 * [[outputFormat]] Output format
 * [[serde]] SerDe

@@ -1,6 +1,6 @@
 == [[FileSourceScanExec]] FileSourceScanExec Leaf Physical Operator
 
-`FileSourceScanExec` is a <<spark-sql-SparkPlan.adoc#LeafExecNode, leaf physical operator>> (as a <<spark-sql-SparkPlan-DataSourceScanExec.adoc#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
+`FileSourceScanExec` is a <<spark-sql-SparkPlan.adoc#LeafExecNode, leaf physical operator>> (being a <<spark-sql-SparkPlan-DataSourceScanExec.adoc#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
 
 `FileSourceScanExec` is <<creating-instance, created>> exclusively for a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operator with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] when <<spark-sql-SparkStrategy-FileSourceStrategy.adoc#, FileSourceStrategy>> execution planning strategy is executed.
 
@@ -231,7 +231,7 @@ In the end, `createNonBucketedReadRDD` creates a <<spark-sql-FileScanRDD.adoc#, 
 
 NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
 
-=== [[selectedPartitions]] `selectedPartitions` Internal Lazy-Initialized Property
+=== [[selectedPartitions]] `selectedPartitions` Internal Lazily-Initialized Property
 
 [source, scala]
 ----

@@ -124,6 +124,19 @@ listPartitions(
 
 NOTE: `listPartitions` is used when...FIXME
 
+=== [[listPartitionsByFilter]] `listPartitionsByFilter` Method
+
+[source, scala]
+----
+listPartitionsByFilter(
+  tableName: TableIdentifier,
+  predicates: Seq[Expression]): Seq[CatalogTablePartition]
+----
+
+`listPartitionsByFilter`...FIXME
+
+NOTE: `listPartitionsByFilter` is used when...FIXME
+
 === [[alterTable]] `alterTable` Method
 
 [source, scala]
