@@ -18,11 +18,11 @@ Use link:../spark-sql-SQLConf.adoc#CONVERT_METASTORE_ORC[SQLConf.CONVERT_METASTO
 
 | [[spark.sql.hive.convertMetastoreParquet]] *spark.sql.hive.convertMetastoreParquet*
 
-Controls whether to use the built-in Parquet reader and writer for Hive tables with the Parquet storage format (instead of Hive SerDe).
+Controls whether to use the built-in Parquet reader and writer for Hive tables with the parquet storage format (instead of Hive SerDe).
 
 Default: `true`
 
-In essence, enables link:RelationConversions.adoc[RelationConversions] logical rule to link:RelationConversions.adoc#convert[convert HiveTableRelations to HadoopFsRelation]
+Internally, this property enables link:RelationConversions.adoc[RelationConversions] logical rule to link:RelationConversions.adoc#convert[convert HiveTableRelations to HadoopFsRelation]
 
 Use link:../spark-sql-SQLConf.adoc#CONVERT_METASTORE_PARQUET[SQLConf.CONVERT_METASTORE_PARQUET] to reference the property
 
@@ -40,7 +40,7 @@ Enables *metastore partition management* for file source tables (_filesource par
 
 Default: `true`
 
-When enabled (`true`), datasource tables store partition in the Hive metastore, and use the metastore to prune partitions during query planning.
+When enabled (`true`), datasource tables store partition metadata in the Hive metastore, and use the metastore to prune partitions during query planning.
 
 Use link:../spark-sql-SQLConf.adoc#manageFilesourcePartitions[SQLConf.manageFilesourcePartitions] method to access the current value.
 

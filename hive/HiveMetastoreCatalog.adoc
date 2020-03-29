@@ -17,7 +17,7 @@ image::../images/spark-sql-HiveMetastoreCatalog.png[align="center"]
 
 `HiveMetastoreCatalog` initializes the <<internal-properties, internal properties>>.
 
-=== [[convertToLogicalRelation]] Converting HiveTableRelation to LogicalRelation over HadoopFsRelation -- `convertToLogicalRelation` Method
+=== [[convertToLogicalRelation]] Converting HiveTableRelation to LogicalRelation -- `convertToLogicalRelation` Method
 
 [source, scala]
 ----
