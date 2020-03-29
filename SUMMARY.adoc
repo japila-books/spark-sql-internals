@@ -785,13 +785,13 @@
 . link:spark-sql-MultiInstanceRelation.adoc[MultiInstanceRelation]
 
 . link:spark-sql-TypeCoercion.adoc[TypeCoercion Object]
-. link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule -- Contract For Type Coercion Rules]
+. link:spark-sql-TypeCoercionRule.adoc[TypeCoercionRule]
 
-. link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators]
-. link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregation -- Scala Extractor for Destructuring Aggregate Logical Operators]
-. link:spark-sql-PhysicalOperation.adoc[PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans]
+. link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]
+. link:spark-sql-PhysicalAggregation.adoc[PhysicalAggregationl Operators]
+. link:spark-sql-PhysicalOperation.adoc[PhysicalOperation]
 
-. link:spark-sql-HashJoin.adoc[HashJoin -- Contract for Hash-based Join Physical Operators]
+. link:spark-sql-HashJoin.adoc[HashJoin]
 . link:spark-sql-HashedRelation.adoc[HashedRelation]
 .. link:spark-sql-LongHashedRelation.adoc[LongHashedRelation]
 .. link:spark-sql-UnsafeHashedRelation.adoc[UnsafeHashedRelation]

@@ -9,6 +9,20 @@
 
 `PrunedInMemoryFileIndex` is <<creating-instance, created>> when `CatalogFileIndex` is requested to link:CatalogFileIndex.adoc#filterPartitions[filter the partitions of a partitioned table].
 
+[[logging]]
+[TIP]
+====
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.PrunedInMemoryFileIndex` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```
+log4j.logger.org.apache.spark.sql.execution.datasources.PrunedInMemoryFileIndex=ALL
+```
+
+Refer to link:spark-logging.adoc[Logging].
+====
+
 === [[creating-instance]] Creating PrunedInMemoryFileIndex Instance
 
 `PrunedInMemoryFileIndex` takes the following to be created:

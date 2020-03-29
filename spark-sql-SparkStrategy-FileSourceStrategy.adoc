@@ -108,7 +108,7 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-SparkPlan.adoc[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`apply` uses link:spark-sql-PhysicalOperation.adoc[PhysicalOperation] Scala extractor object to destructure a logical query plan into a tuple of projection and filter expressions together with a leaf logical operator.
+`apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
 `apply` only works with link:spark-sql-LogicalPlan.adoc[logical plans] that are actually a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] (possibly as a child of link:spark-sql-LogicalPlan-Project.adoc[Project] and link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operators).
 

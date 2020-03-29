@@ -127,9 +127,11 @@ Check out the table in Hive using `beeline`.
 
 === Explore Partition Pruning
 
-Use link:../spark-sql-Expression-In.adoc[In] expression in structured queries and review their query plans.
+You'll be using link:../spark-sql-Expression-In.adoc[In] expression in structured queries to learn more on partition pruning.
 
-Use a fixed list of cities to filter by and note the `PartitionFilters` field of `FileScan` operator.
+TIP: Enable `INFO` logging level for link:../PrunedInMemoryFileIndex.adoc#logging[org.apache.spark.sql.execution.datasources.PrunedInMemoryFileIndex] logger.
+
+Use a fixed list of cities to filter by (which should trigger partition pruning).
 
 ```
 val q = sql(s"""SELECT * FROM $tableName WHERE city IN ('Warsaw')""")
@@ -155,7 +157,26 @@ Project [id#101L, name#102, city#103]
 *(1) FileScan parquet default.hive_partitioned_table[id#101L,name#102,city#103] Batched: true, Format: Parquet, Location: PrunedInMemoryFileIndex[hdfs://localhost:9000/user/hive/warehouse/hive_partitioned_table/city=War..., PartitionCount: 1, PartitionFilters: [isnotnull(city#103), (city#103 = Warsaw)], PushedFilters: [], ReadSchema: struct<id:bigint,name:string>
 ```
 
-Use a subquery to filter by and note the `PartitionFilters` field of `FileScan` operator.
+Note the `PartitionFilters` field of the leaf `FileScan` node in the physical plan. It uses an link:../PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex] (for the partition index). Let's explore it.
+
+```
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan = q.queryExecution.executedPlan.collect { case op: FileSourceScanExec => op }.head
+
+val index = scan.relation.location
+scala> println(s"Time of partition metadata listing: ${index.metadataOpsTimeNs.get}ns")
+Time of partition metadata listing: 41703540ns
+
+// You may also want to review metadataTime metric in web UI
+// Includes the above time and the time to list files
+
+// You should see the following value (YMMV)
+scan.execute.collect
+scala> println(scan.metrics("metadataTime").value)
+41
+```
+
+Use a subquery to filter by and note the `PartitionFilters` field of `FileScan` operator (which is not supported for partition pruning since the values to filter partitions by are not known until the execution time).
 
 ```
 val q = sql(s"""SELECT * FROM $tableName WHERE city IN (SELECT * FROM cities)""")

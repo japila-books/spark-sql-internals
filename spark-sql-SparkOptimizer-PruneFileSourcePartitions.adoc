@@ -2,13 +2,18 @@
 
 `PruneFileSourcePartitions` is...FIXME
 
-=== [[apply]] `apply` Method
+=== [[apply]] Executing Rule -- `apply` Method
 
 [source, scala]
 ----
-apply(plan: LogicalPlan): LogicalPlan
+apply(
+  plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-catalyst-TreeNode.adoc[TreeNode], e.g. link:spark-sql-LogicalPlan.adoc[logical query plan].
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a link:spark-sql-catalyst-TreeNode.adoc[TreeNode] (e.g. link:spark-sql-LogicalPlan.adoc[LogicalPlan]).
+
+`apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
+
+`apply` transforms link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelations] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] and a link:CatalogFileIndex.adoc[CatalogFileIndex] (i.e. for Hive tables) when there are filter expressions defined and the Hive table is partitioned.
 
 `apply`...FIXME

@@ -32,6 +32,6 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:spark-sql-SparkPlan.adoc[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`apply` requests `PhysicalOperation` extractor to link:spark-sql-PhysicalOperation.adoc#unapply[destructure the input logical plan] to a link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator.
+`apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] to a link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator.
 
 In the end, `apply` link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject] with a new link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#creating-instance[InMemoryTableScanExec] physical operator.
