@@ -14,8 +14,6 @@ Controls whether to use the built-in ORC reader and writer for Hive tables with 
 
 Default: `true`
 
-Use link:../spark-sql-SQLConf.adoc#CONVERT_METASTORE_ORC[SQLConf.CONVERT_METASTORE_ORC] to reference the property
-
 | [[spark.sql.hive.convertMetastoreParquet]] *spark.sql.hive.convertMetastoreParquet*
 
 Controls whether to use the built-in Parquet reader and writer for Hive tables with the parquet storage format (instead of Hive SerDe).
@@ -23,8 +21,6 @@ Controls whether to use the built-in Parquet reader and writer for Hive tables w
 Default: `true`
 
 Internally, this property enables link:RelationConversions.adoc[RelationConversions] logical rule to link:RelationConversions.adoc#convert[convert HiveTableRelations to HadoopFsRelation]
-
-Use link:../spark-sql-SQLConf.adoc#CONVERT_METASTORE_PARQUET[SQLConf.CONVERT_METASTORE_PARQUET] to reference the property
 
 | [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] *spark.sql.hive.convertMetastoreParquet.mergeSchema*
 

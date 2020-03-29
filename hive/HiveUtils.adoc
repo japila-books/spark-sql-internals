@@ -1,6 +1,23 @@
 == [[HiveUtils]] HiveUtils
 
-`HiveUtils` is used to create a <<newClientForMetadata, HiveClientImpl>> that link:HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
+`HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that link:HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
+
+`HiveUtils` is a Scala object with `private[spark]` access modifier. Use the following utility to access the properties.
+
+[source, scala]
+----
+// Use :paste -raw to paste the following code in spark-shell
+// BEGIN
+package org.apache.spark
+import org.apache.spark.sql.hive.HiveUtils
+object opener {
+  def CONVERT_METASTORE_PARQUET = HiveUtils.CONVERT_METASTORE_PARQUET
+}
+// END
+
+import org.apache.spark.opener
+spark.sessionState.conf.getConf(opener.CONVERT_METASTORE_PARQUET)
+----
 
 [[logging]]
 [TIP]
@@ -13,7 +30,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.HiveUtils=ALL
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to link:../spark-logging.adoc[Logging].
 ====
 
 === [[builtinHiveVersion]] `builtinHiveVersion` Property

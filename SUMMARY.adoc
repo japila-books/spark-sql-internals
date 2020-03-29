@@ -10,6 +10,8 @@
 
 . link:hive/index.adoc[Hive Data Source]
 .. link:demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]
+.. link:demo/demo-hive-partitioned-parquet-table-partition-pruning.adoc[Demo: Hive Partitioned Parquet Table and Partition Pruning]
+
 . link:hive/configuration-properties.adoc[Configuration Properties]
 
 . link:spark-sql-hive-metastore.adoc[Hive Metastore]
