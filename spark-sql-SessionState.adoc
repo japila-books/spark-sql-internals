@@ -192,5 +192,5 @@ newHadoopConfWithOptions(options: Map[String, String]): Configuration
 
 * `InsertIntoHadoopFsRelationCommand` is requested to link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[run]
 
-* `PartitioningAwareFileIndex` is requested for the link:spark-sql-PartitioningAwareFileIndex.adoc#hadoopConf[Hadoop Configuration]
+* `PartitioningAwareFileIndex` is requested for the link:PartitioningAwareFileIndex.adoc#hadoopConf[Hadoop Configuration]
 ====

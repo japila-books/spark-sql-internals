@@ -1,6 +1,6 @@
 == CatalogFileIndex
 
-`CatalogFileIndex` is a <<spark-sql-FileIndex.adoc#, FileIndex>>.
+`CatalogFileIndex` is a link:FileIndex.adoc[FileIndex].
 
 === [[filterPartitions]] `filterPartitions` Method
 

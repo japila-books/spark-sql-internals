@@ -61,7 +61,7 @@ partitionSchema: StructType
 
 Used when:
 
-* `CatalogFileIndex` is requested to <<spark-sql-CatalogFileIndex.adoc#filterPartitions, filterPartitions>>
+* `CatalogFileIndex` is requested to <<CatalogFileIndex.adoc#filterPartitions, filterPartitions>>
 
 * `DataSource` is requested to <<spark-sql-DataSource.adoc#getOrInferFileFormatSchema, getOrInferFileFormatSchema>> and <<spark-sql-DataSource.adoc#resolveRelation, resolve a FileFormat-based relation>>
 
@@ -116,10 +116,10 @@ Used when:
 | FileIndex
 | Description
 
-| <<spark-sql-CatalogFileIndex.adoc#, CatalogFileIndex>>
+| <<CatalogFileIndex.adoc#, CatalogFileIndex>>
 | [[CatalogFileIndex]]
 
-| <<spark-sql-PartitioningAwareFileIndex.adoc#, PartitioningAwareFileIndex>>
+| <<PartitioningAwareFileIndex.adoc#, PartitioningAwareFileIndex>>
 | [[PartitioningAwareFileIndex]]
 
 |===

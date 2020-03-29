@@ -82,7 +82,7 @@ The optional <<bucketSpec, bucketing specification>> is defined exclusively for 
 
 `HadoopFsRelation` takes the following to be created:
 
-* [[location]] <<spark-sql-FileIndex.adoc#, FileIndex>> (for <<sizeInBytes, sizeInBytes>> and <<inputFiles, inputFiles>>)
+* [[location]] <<FileIndex.adoc#, FileIndex>> (for <<sizeInBytes, sizeInBytes>> and <<inputFiles, inputFiles>>)
 * [[partitionSchema]] Partition link:spark-sql-StructType.adoc[schema]
 * [[dataSchema]] Data link:spark-sql-StructType.adoc[schema]
 * [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (optional)
@@ -101,7 +101,7 @@ inputFiles: Array[String]
 
 NOTE: `inputFiles` is part of the <<spark-sql-FileRelation.adoc#inputFiles, FileRelation Contract>> for the list of files to read for scanning this relation.
 
-`inputFiles` simply requests the <<location, FileIndex>> for the <<spark-sql-FileIndex.adoc#inputFiles, inputFiles>>.
+`inputFiles` simply requests the <<location, FileIndex>> for the <<FileIndex.adoc#inputFiles, inputFiles>>.
 
 === [[sizeInBytes]] `sizeInBytes` Method
 
