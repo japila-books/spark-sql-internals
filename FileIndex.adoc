@@ -1,5 +1,8 @@
 == FileIndex Contract
 
+:hadoop-version: 2.10.0
+:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+
 `FileIndex` is the <<contract, abstraction>> of <<implementations, file indices>> that knows the <<rootPaths, root paths>> and <<partitionSchema, partition schema>> of a relation.
 
 `FileIndex` is associated with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation].
@@ -100,6 +103,20 @@ a| [[rootPaths]]
 ----
 rootPaths: Seq[Path]
 ----
+
+Root paths from which the catalog gets the files (as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths]). There could be a single root path of the entire table (with partition directories) or individual partitions.
+
+Used when:
+
+* `HiveMetastoreCatalog` is requested for a link:hive/HiveMetastoreCatalog.adoc#getCached[LogicalRelation over a HadoopFsRelation cached] (when requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation])
+
+* `CacheManager` is requested to link:spark-sql-CacheManager.adoc#lookupAndRefresh[lookupAndRefresh]
+
+* `FileSourceScanExec` physical operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#metadata[metadata]
+
+* `DDLUtils` utility is used to link:spark-sql-DDLUtils.adoc#verifyNotReadPath[verifyNotReadPath]
+
+* link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] logical resolution rule is executed (for a link:InsertIntoTable.adoc[InsertIntoTable] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation])
 
 | sizeInBytes
 a| [[sizeInBytes]]

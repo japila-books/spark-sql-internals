@@ -402,7 +402,7 @@ getOrInferFileFormatSchema(
 
 `getOrInferFileFormatSchema`...FIXME
 
-NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a relation>>.
+NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a non-streaming FileFormat-based relation>>.
 
 === [[checkAndGlobPathIfNecessary]] `checkAndGlobPathIfNecessary` Internal Method
 
@@ -427,7 +427,7 @@ createInMemoryFileIndex(
 
 `createInMemoryFileIndex`...FIXME
 
-NOTE: `createInMemoryFileIndex` is used when...FIXME
+NOTE: `createInMemoryFileIndex` is used when `DataSource` is requested to <<getOrInferFileFormatSchema, getOrInferFileFormatSchema>> and <<resolveRelation, resolve a non-streaming FileFormat-based relation>>.
 
 === [[internal-properties]] Internal Properties
 

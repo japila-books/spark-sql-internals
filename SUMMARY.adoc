@@ -213,11 +213,11 @@
 . link:spark-sql-JsonDataSource.adoc[JsonDataSource]
 
 . link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
-.. link:FileIndex.adoc[FileIndex]
-... link:CatalogFileIndex.adoc[CatalogFileIndex]
-... link:InMemoryFileIndex.adoc[InMemoryFileIndex]
-... link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
-... link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex]
+. link:FileIndex.adoc[FileIndex]
+.. link:CatalogFileIndex.adoc[CatalogFileIndex]
+.. link:InMemoryFileIndex.adoc[InMemoryFileIndex]
+.. link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
+.. link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex]
 
 . link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
 . link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]

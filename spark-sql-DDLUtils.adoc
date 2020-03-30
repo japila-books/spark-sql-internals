@@ -76,3 +76,19 @@ isHiveTable(
 
 * `HiveOnlyCheck` extended check rule is executed
 ====
+
+=== [[verifyNotReadPath]] `verifyNotReadPath` Utility
+
+[source, scala]
+----
+verifyNotReadPath(
+  query: LogicalPlan,
+  outputPath: Path) : Unit
+----
+
+`verifyNotReadPath`...FIXME
+
+[NOTE]
+====
+`verifyNotReadPath` is used when...FIXME
+====
