@@ -56,7 +56,7 @@ NOTE: `rootPaths` is part of the link:FileIndex.adoc#rootPaths[FileIndex] contra
 
 `rootPaths` simply returns the <<baseLocation, baseLocation>> converted to a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Path].
 
-=== [[filterPartitions]] Partitions By Filter -- `filterPartitions` Method
+=== [[filterPartitions]] Listing Partitions By Given Predicate Expressions -- `filterPartitions` Method
 
 [source, scala]
 ----

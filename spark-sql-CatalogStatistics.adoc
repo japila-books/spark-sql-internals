@@ -24,7 +24,7 @@
 
 * `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
 
-* link:hive/DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#apply[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
+* link:hive/DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
 * `HiveClientImpl` is requested for a table or partition link:hive/HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
 

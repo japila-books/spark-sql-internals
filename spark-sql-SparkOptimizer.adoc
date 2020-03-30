@@ -82,7 +82,7 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 | link:spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.adoc[ExtractPythonUDFFromAggregate]
 |
 
-^.^| Prune File Source Table Partitions
+^.^| [[prune-file-source-table-partitions]] Prune File Source Table Partitions
 ^.^| `Once`
 | link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions]
 |

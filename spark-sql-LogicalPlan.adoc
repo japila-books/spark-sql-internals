@@ -234,11 +234,13 @@ resolveQuoted(
 
 NOTE: `resolveQuoted` is used when...FIXME
 
-=== [[resolve]] Resolving Attribute By Name Parts -- `resolve` Method
+=== [[resolve]] Resolving Column Attributes to References in Query Plan -- `resolve` Method
 
 [source, scala]
 ----
-resolve(schema: StructType, resolver: Resolver): Seq[Attribute]
+resolve(
+  schema: StructType,
+  resolver: Resolver): Seq[Attribute]
 resolve(
   nameParts: Seq[String],
   resolver: Resolver): Option[NamedExpression]

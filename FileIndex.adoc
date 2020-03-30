@@ -115,7 +115,7 @@ Used when:
 
 * `HadoopFsRelation` is requested for the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#sizeInBytes, estimated size>>
 
-* <<spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc#, PruneFileSourcePartitions>> logical optimization is executed
+* link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions] logical optimization is executed
 
 |===
 

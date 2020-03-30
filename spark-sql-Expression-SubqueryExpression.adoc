@@ -94,11 +94,12 @@ hasCorrelatedSubquery(e: Expression): Boolean
 
 NOTE: `hasCorrelatedSubquery` is used when...FIXME
 
-=== [[hasSubquery]] `hasSubquery` Object Method
+=== [[hasSubquery]] `hasSubquery` Utility
 
 [source, scala]
 ----
-hasSubquery(e: Expression): Boolean
+hasSubquery(
+  e: Expression): Boolean
 ----
 
 `hasSubquery`...FIXME
