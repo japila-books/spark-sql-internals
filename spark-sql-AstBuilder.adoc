@@ -216,6 +216,10 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 |
 | [[visitRowConstructor]]
 
+| visitSetOperation
+| `setOperation`
+| [[visitSetOperation]]
+
 | visitSingleDataType
 | `singleDataType`
 | [[visitSingleDataType]] link:spark-sql-DataType.adoc[DataType]

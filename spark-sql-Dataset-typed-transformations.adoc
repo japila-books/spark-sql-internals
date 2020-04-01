@@ -64,13 +64,29 @@ dropDuplicates(colNames: Seq[String]): Dataset[T]
 dropDuplicates(col1: String, cols: String*): Dataset[T]
 ----
 
-| <<except, except>>
-a|
+| except
+a| [[except]]
 
 [source, scala]
 ----
-except(other: Dataset[T]): Dataset[T]
+except(
+  other: Dataset[T]): Dataset[T]
 ----
+
+Internally, `exceptAll` link:spark-sql-Dataset.adoc#withSetOperator[withSetOperator] with an link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator (with the `isAll` flag enabled).
+
+| exceptAll
+a| [[exceptAll]]
+
+[source, scala]
+----
+exceptAll(
+  other: Dataset[T]): Dataset[T]
+----
+
+(*New in 2.4.0*)
+
+Internally, `exceptAll` link:spark-sql-Dataset.adoc#withSetOperator[withSetOperator] with an link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator (with the `isAll` flag disabled).
 
 | <<filter, filter>>
 a|
@@ -98,13 +114,25 @@ a|
 groupByKey[K: Encoder](func: T => K): KeyValueGroupedDataset[K, T]
 ----
 
-| <<intersect, intersect>>
-a|
+| intersect
+a| [[intersect]]
 
 [source, scala]
 ----
-intersect(other: Dataset[T]): Dataset[T]
+intersect(
+  other: Dataset[T]): Dataset[T]
 ----
+
+| intersectAll
+a| [[intersectAll]]
+
+[source, scala]
+----
+intersectAll(
+  other: Dataset[T]): Dataset[T]
+----
+
+(*New in 2.4.0*)
 
 | <<joinWith, joinWith>>
 a|
@@ -245,12 +273,13 @@ a|
 transform[U](t: Dataset[T] => Dataset[U]): Dataset[U]
 ----
 
-| <<union, union>>
-a|
+| union
+a| [[union]]
 
 [source, scala]
 ----
-union(other: Dataset[T]): Dataset[T]
+union(
+  other: Dataset[T]): Dataset[T]
 ----
 
 | <<unionByName, unionByName>>
@@ -258,7 +287,8 @@ a|
 
 [source, scala]
 ----
-unionByName(other: Dataset[T]): Dataset[T]
+unionByName(
+  other: Dataset[T]): Dataset[T]
 ----
 
 | <<where, where>>
@@ -354,24 +384,6 @@ dropDuplicates(col1: String, cols: String*): Dataset[T]
 
 `dropDuplicates`...FIXME
 
-=== [[except]] `except` Typed Transformation
-
-[source, scala]
-----
-except(other: Dataset[T]): Dataset[T]
-----
-
-`except`...FIXME
-
-=== [[exceptAll]] `exceptAll` Typed Transformation
-
-[source, scala]
-----
-exceptAll(other: Dataset[T]): Dataset[T]
-----
-
-`exceptAll`...FIXME
-
 === [[filter]] `filter` Typed Transformation
 
 [source, scala]
@@ -411,24 +423,6 @@ scala> sentences.flatMap(s => s.text.split("\\s+")).show
 ----
 
 Internally, `flatMap` calls <<mapPartitions, mapPartitions>> with the partitions `flatMap(ped)`.
-
-=== [[intersect]] `intersect` Typed Transformation
-
-[source, scala]
-----
-intersect(other: Dataset[T]): Dataset[T]
-----
-
-`intersect`...FIXME
-
-=== [[intersectAll]] `intersectAll` Typed Transformation
-
-[source, scala]
-----
-intersectAll(other: Dataset[T]): Dataset[T]
-----
-
-`intersectAll`...FIXME
 
 === [[joinWith]] `joinWith` Typed Transformation
 
@@ -700,15 +694,6 @@ scala> dataset.transform(withDoubled).show
 ----
 
 Internally, `transform` executes `t` function on the current `Dataset[T]`.
-
-=== [[union]] `union` Typed Transformation
-
-[source, scala]
-----
-union(other: Dataset[T]): Dataset[T]
-----
-
-`union`...FIXME
 
 === [[unionByName]] `unionByName` Typed Transformation
 

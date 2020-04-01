@@ -1,3 +1,79 @@
-== [[Except]] Except
+== [[Except]] Except Logical Operator
 
-`Except` is...FIXME
+`Except` is a link:spark-sql-LogicalPlan.adoc#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:
+
+* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. link:spark-sql-AstBuilder.adoc#visitSetOperation[AstBuilder])
+
+* link:spark-sql-dataset-operators.adoc#except[Dataset.except] and link:spark-sql-dataset-operators.adoc#exceptAll[Dataset.exceptAll]
+
+`Except` is supposed to be resolved (_optimized_) to <<logical-conversions, other logical commands>> at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization). link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy throws an `IllegalStateException` if conversions did not happen.
+
+[[logical-conversions]]
+.Except's Logical Resolutions (Conversions)
+[cols="30,70",options="header",width="100%"]
+|===
+| Logical Operators
+| Description
+
+| Left-Anti link:spark-sql-LogicalPlan-Join.adoc[Join]
+| [[Join]] `Except` (with the <<isAll, isAll>> flag disabled) in link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin] logical optimization rule
+
+| link:spark-sql-LogicalPlan-Union.adoc[Union], link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] and link:spark-sql-LogicalPlan-Generate.adoc[Generate]
+| [[Join]] `Except` (with the <<isAll, isAll>> flag enabled) in link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll] logical optimization rule
+
+|===
+
+`Except` (with the <<isAll, isAll>> flag disabled) can be replaced in link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter] logical optimization rule.
+
+.Demo: Except Operator Replaced
+```
+// SELECT a1, a2 FROM Tab1 WHERE a2 = 12 EXCEPT SELECT a1, a2 FROM Tab1 WHERE a1 = 5
+```
+
+The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in link:spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.adoc[WidenSetOperationTypes] logical analysis type-coercion rule.
+
+=== [[creating-instance]] Creating Except Instance
+
+`Except` takes the following to be created:
+
+* [[left]] Left link:spark-sql-LogicalPlan.adoc[logical operator]
+* [[right]] Right link:spark-sql-LogicalPlan.adoc[logical operator]
+* [[isAll]] `isAll` flag for `DISTINCT` (`false`) or `ALL` (`true`)
+
+=== [[catalyst-dsl]] Catalyst DSL -- `except` Operator
+
+[source, scala]
+----
+except(
+  otherPlan: LogicalPlan,
+  isAll: Boolean): LogicalPlan
+----
+
+link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] defines link:spark-sql-catalyst-dsl.adoc#except[except] extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
+
+[source, plaintext]
+----
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table("a").except(table("b"), isAll = false)
+scala> println(plan.numberedTreeString)
+00 'Except false
+01 :- 'UnresolvedRelation `a`
+02 +- 'UnresolvedRelation `b`
+
+import org.apache.spark.sql.catalyst.plans.logical.Except
+val op = plan.p(0)
+assert(op.isInstanceOf[Except])
+----
+
+=== Demo: Except Operator Replaced with Left-Anti Join
+
+```
+// SELECT a1, a2 FROM Tab1 EXCEPT SELECT b1, b2 FROM Tab2
+// ==>  SELECT DISTINCT a1, a2 FROM Tab1 LEFT ANTI JOIN Tab2 ON a1<=>b1 AND a2<=>b2
+```
+
+=== Demo: Except Operator Replaced with Union, Aggregate and Generate Operators
+
+```
+// SELECT c1 FROM ut1 EXCEPT ALL SELECT c1 FROM ut2
+```

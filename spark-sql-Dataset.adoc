@@ -456,14 +456,15 @@ NOTE: `withTypedPlan` is used in the `Dataset` <<spark-sql-Dataset-typed-transfo
 
 [source, scala]
 ----
-withSetOperator[U: Encoder](logicalPlan: LogicalPlan): Dataset[U]
+withSetOperator[U: Encoder](
+  logicalPlan: LogicalPlan): Dataset[U]
 ----
 
 `withSetOperator`...FIXME
 
 NOTE: `withSetOperator` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withSetOperator` is used in the `Dataset` <<spark-sql-Dataset-typed-transformations.adoc#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.adoc#union, union>>, <<spark-sql-Dataset-typed-transformations.adoc#unionByName, unionByName>>, <<spark-sql-Dataset-typed-transformations.adoc#intersect, intersect>> and <<spark-sql-Dataset-typed-transformations.adoc#except, except>>.
+NOTE: `withSetOperator` is used for the link:spark-sql-Dataset-typed-transformations.adoc[Dataset's typed transformations] (i.e. link:spark-sql-Dataset-typed-transformations.adoc#union[union], link:spark-sql-Dataset-typed-transformations.adoc#unionByName[unionByName], link:spark-sql-Dataset-typed-transformations.adoc#intersect[intersect], link:spark-sql-Dataset-typed-transformations.adoc#intersectAll[intersectAll], link:spark-sql-Dataset-typed-transformations.adoc#except[except] and link:spark-sql-Dataset-typed-transformations.adoc#exceptAll[exceptAll]).
 
 === [[sortInternal]] `sortInternal` Internal Method
 

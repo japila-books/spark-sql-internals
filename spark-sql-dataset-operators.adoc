@@ -266,7 +266,8 @@ a| [[except]]
 
 [source, scala]
 ----
-except(other: Dataset[T]): Dataset[T]
+except(
+  other: Dataset[T]): Dataset[T]
 ----
 
 A typed transformation
@@ -276,10 +277,11 @@ a| [[exceptAll]]
 
 [source, scala]
 ----
-exceptAll(other: Dataset[T]): Dataset[T]
+exceptAll(
+  other: Dataset[T]): Dataset[T]
 ----
 
-(*New in {{ book.version }}*) A typed transformation
+(*New in 2.4.0*) A typed transformation
 
 | <<spark-sql-Dataset-basic-actions.adoc#explain, explain>>
 a| [[explain]]
@@ -415,7 +417,7 @@ a| [[intersectAll]]
 intersectAll(other: Dataset[T]): Dataset[T]
 ----
 
-(*New in {{ book.version }}*) A typed transformation
+(*New in 2.4.0*) A typed transformation
 
 | <<spark-sql-Dataset-basic-actions.adoc#isEmpty, isEmpty>>
 a| [[isEmpty]]
@@ -425,7 +427,7 @@ a| [[isEmpty]]
 isEmpty: Boolean
 ----
 
-(*New in {{ book.version }}*) A basic action
+(*New in 2.4.0*) A basic action
 
 | <<spark-sql-Dataset-basic-actions.adoc#isLocal, isLocal>>
 a| [[isLocal]]

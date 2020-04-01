@@ -611,6 +611,7 @@
 . link:spark-sql-Analyzer-TimeWindowing.adoc[TimeWindowing]
 . link:spark-sql-Analyzer-UpdateOuterReferences.adoc[UpdateOuterReferences]
 . link:spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.adoc[WindowFrameCoercion]
+. link:spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.adoc[WidenSetOperationTypes]
 . link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
 
 === Base Logical Optimizations (Optimizer)
@@ -637,7 +638,10 @@
 . link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
 . link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
 . link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]
+. link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin]
+. link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter]
 . link:spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc[RewriteCorrelatedScalarSubquery]
+. link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll]
 . link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
 . link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
 

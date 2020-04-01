@@ -74,7 +74,7 @@ a| [[isInCollection]]
 isInCollection(values: scala.collection.Iterable[_]): Column
 ----
 
-(*New in {{ book.version }}*) An expression operator that is `true` if the value of the column is in the given `values` collection
+(*New in 2.4.0*) An expression operator that is `true` if the value of the column is in the given `values` collection
 
 `isInCollection` is simply a synonym of <<isin, isin>> operator.
 |===

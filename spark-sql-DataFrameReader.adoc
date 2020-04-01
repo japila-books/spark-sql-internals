@@ -207,7 +207,7 @@ NOTE: Loading datasets using <<textFile, textFile>> methods allows for additiona
 ---
 
 [[loading-dataset-of-string]]
-(*New in Spark 2.2*) `DataFrameReader` can load datasets from `Dataset[String]` (with lines being complete "files") using format-specific <<csv, csv>> and <<json, json>> operators.
+`DataFrameReader` can load datasets from `Dataset[String]` (with lines being complete "files") using format-specific <<csv, csv>> and <<json, json>> operators.
 
 [source, scala]
 ----

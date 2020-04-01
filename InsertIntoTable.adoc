@@ -1,6 +1,6 @@
 == [[InsertIntoTable]] InsertIntoTable Unary Logical Operator
 
-`InsertIntoTable` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following:
+`InsertIntoTable` is an <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following high-level operators in a logical plan:
 
 * <<INSERT_INTO_TABLE, INSERT INTO>> and <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> SQL statements
 
@@ -127,9 +127,8 @@ scala> println(plan.numberedTreeString)
 01 +- 'UnresolvedRelation `a`
 
 import org.apache.spark.sql.catalyst.plans.logical.InsertIntoTable
-val op = plan.p(0).asInstanceOf[InsertIntoTable]
-scala> :type op
-org.apache.spark.sql.catalyst.plans.logical.InsertIntoTable
+val op = plan.p(0)
+assert(op.isInstanceOf[InsertIntoTable])
 ----
 
 === [[creating-instance]] Creating InsertIntoTable Instance

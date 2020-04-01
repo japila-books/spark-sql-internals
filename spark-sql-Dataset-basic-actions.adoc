@@ -115,7 +115,7 @@ a|
 isEmpty: Boolean
 ----
 
-(*New in {{ book.version }}*)
+(*New in 2.4.0*)
 
 | <<isLocal, isLocal>>
 a|
