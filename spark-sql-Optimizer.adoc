@@ -138,8 +138,8 @@ scala> println(optimizedPlan.numberedTreeString)
 | [[ReplaceExceptWithFilter]] ReplaceExceptWithFilter
 |
 
-| [[ReplaceExceptWithAntiJoin]] ReplaceExceptWithAntiJoin
-|
+| link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin]
+| [[ReplaceExceptWithAntiJoin]]
 
 | [[ReplaceDistinctWithAggregate]] ReplaceDistinctWithAggregate
 |

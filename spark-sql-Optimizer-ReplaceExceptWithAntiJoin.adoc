@@ -1,3 +1,25 @@
-== [[ReplaceExceptWithAntiJoin]] ReplaceExceptWithAntiJoin
+== [[ReplaceExceptWithAntiJoin]] ReplaceExceptWithAntiJoin Logical Optimization Rule -- Converting Except Distincts
 
-`ReplaceExceptWithAntiJoin` is...FIXME
+`ReplaceExceptWithAntiJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+
+[[apply]]
+When link:spark-sql-catalyst-Rule.adoc#apply[applied to a logical plan], `ReplaceExceptWithAntiJoin` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to a `Distinct` unary logical operator with a left-anti link:spark-sql-LogicalPlan-Join.adoc[Join] operator. The output columns of the left and right child logical operators of the `Except` operator are used to build a logical `AND` join condition of `EqualNullSafe` expressions.
+
+`ReplaceExceptWithAntiJoin` requires that the number of columns of the left- and right-side of the `Except` operator are the same or throws an `AssertionError`.
+
+`ReplaceExceptWithAntiJoin` is a part of the link:spark-sql-Optimizer.adoc#Replace-Operators[Replace Operators] fixed-point rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+
+[[demo]]
+.Demo: ReplaceExceptWithAntiJoin
+```
+import org.apache.spark.sql.catalyst.dsl.plans._
+val plan = table("a").except(table("b"), isAll = false)
+
+import org.apache.spark.sql.catalyst.optimizer.ReplaceExceptWithAntiJoin
+val rewrittenPlan = ReplaceExceptWithAntiJoin(plan)
+scala> println(rewrittenPlan.numberedTreeString)
+00 'Distinct
+01 +- 'Join LeftAnti
+02    :- 'UnresolvedRelation `a`
+03    +- 'UnresolvedRelation `b`
+```
