@@ -344,6 +344,10 @@ a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-Inse
 | xref:spark-sql-properties.adoc#spark.sql.legacy.replaceDatabricksSparkAvro.enabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]
 | [[replaceDatabricksSparkAvroEnabled]][[LEGACY_REPLACE_DATABRICKS_SPARK_AVRO_ENABLED]]
 
+| replaceExceptWithFilter
+| link:spark-sql-properties.adoc#spark.sql.optimizer.replaceExceptWithFilter[spark.sql.optimizer.replaceExceptWithFilter]
+| [[replaceExceptWithFilter]][[REPLACE_EXCEPT_WITH_FILTER]] Used when link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter] is executed
+
 | runSQLonFile
 | link:spark-sql-properties.adoc#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]
 a| [[runSQLonFile]] Used when:

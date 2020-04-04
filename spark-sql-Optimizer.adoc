@@ -135,8 +135,8 @@ scala> println(optimizedPlan.numberedTreeString)
 | [[ReplaceIntersectWithSemiJoin]] ReplaceIntersectWithSemiJoin
 |
 
-| [[ReplaceExceptWithFilter]] ReplaceExceptWithFilter
-|
+| link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter]
+| [[ReplaceExceptWithFilter]]
 
 | link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin]
 | [[ReplaceExceptWithAntiJoin]]
@@ -366,7 +366,7 @@ TIP: Consult the https://github.com/apache/spark/blob/v2.4.0/sql/catalyst/src/ma
 
 NOTE: `Optimizer` is a Scala abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly when the <<extensions, concrete Optimizers>> are.
 
-`Optimizer` defines the <<nonExcludableRules, non-excludable optimization rules>> that are considered critical for query optimization and will never be excluded (even if they are specified in <<spark.sql.optimizer.excludedRules, spark.sql.optimizer.excludedRules>> configuration property).
+`Optimizer` defines the <<nonExcludableRules, non-excludable optimization rules>> that are considered critical for query optimization and are not recommended to be excluded (even if they are specified in <<spark.sql.optimizer.excludedRules, spark.sql.optimizer.excludedRules>> configuration property).
 
 [[nonExcludableRules]]
 .Optimizer's Non-Excludable Optimization Rules
@@ -376,61 +376,61 @@ NOTE: `Optimizer` is a Scala abstract class and cannot be <<creating-instance, c
 | Description
 
 | PushProjectionThroughUnion
-| [[PushProjectionThroughUnion]]
+|
 
 | EliminateDistinct
-| [[EliminateDistinct]]
+|
 
 | EliminateSubqueryAliases
-| [[EliminateSubqueryAliases]]
+|
 
 | EliminateView
-| [[EliminateView]]
+|
 
 | ReplaceExpressions
-| [[ReplaceExpressions]]
+|
 
 | ComputeCurrentTime
-| [[ComputeCurrentTime]]
+|
 
 | GetCurrentDatabase
-| [[GetCurrentDatabase]]
+|
 
 | RewriteDistinctAggregates
-| [[RewriteDistinctAggregates]]
+|
 
 | ReplaceDeduplicateWithAggregate
-| [[ReplaceDeduplicateWithAggregate]]
+|
 
 | ReplaceIntersectWithSemiJoin
-| [[ReplaceIntersectWithSemiJoin]]
+|
 
-| ReplaceExceptWithFilter
-| [[ReplaceExceptWithFilter]]
+| link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter]
+|
 
 | ReplaceExceptWithAntiJoin
-| [[ReplaceExceptWithAntiJoin]]
+|
 
 | RewriteExceptAll
-| [[RewriteExceptAll]]
+|
 
 | RewriteIntersectAll
-| [[RewriteIntersectAll]]
+|
 
 | ReplaceDistinctWithAggregate
-| [[ReplaceDistinctWithAggregate]]
+|
 
 | PullupCorrelatedPredicates
-| [[PullupCorrelatedPredicates]]
+|
 
 | RewriteCorrelatedScalarSubquery
-| [[RewriteCorrelatedScalarSubquery]]
+|
 
 | RewritePredicateSubquery
-| [[RewritePredicateSubquery]]
+|
 
 | PullOutPythonUDFInJoinCondition
-| [[PullOutPythonUDFInJoinCondition]]
+|
 
 |===
 
