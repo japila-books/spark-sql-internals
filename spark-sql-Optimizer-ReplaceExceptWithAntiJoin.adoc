@@ -1,4 +1,4 @@
-== [[ReplaceExceptWithAntiJoin]] ReplaceExceptWithAntiJoin Logical Optimization Rule -- Converting Except Distincts
+== [[ReplaceExceptWithAntiJoin]] ReplaceExceptWithAntiJoin Logical Optimization Rule -- Rewriting Except (DISTINCT) Operators
 
 `ReplaceExceptWithAntiJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
@@ -12,14 +12,24 @@ When link:spark-sql-catalyst-Rule.adoc#apply[executed], `ReplaceExceptWithAntiJo
 [[demo]]
 .Demo: ReplaceExceptWithAntiJoin
 ```
+import org.apache.spark.sql.catalyst.dsl.expressions._
 import org.apache.spark.sql.catalyst.dsl.plans._
-val plan = table("a").except(table("b"), isAll = false)
+
+// Using hacks to disable two Catalyst DSL implicits
+implicit def symbolToColumn(ack: ThatWasABadIdea) = ack
+implicit class StringToColumn(val sc: StringContext) {}
+
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+val t1 = LocalRelation('a.int, 'b.int)
+val t2 = LocalRelation('C.int, 'D.int)
+
+val plan = t1.except(t2, isAll = false)
 
 import org.apache.spark.sql.catalyst.optimizer.ReplaceExceptWithAntiJoin
 val optimizedPlan = ReplaceExceptWithAntiJoin(plan)
 scala> println(optimizedPlan.numberedTreeString)
-00 'Distinct
-01 +- 'Join LeftAnti
-02    :- 'UnresolvedRelation `a`
-03    +- 'UnresolvedRelation `b`
+00 Distinct
+01 +- Join LeftAnti, ((a#14 <=> C#18) && (b#15 <=> D#19))
+02    :- LocalRelation <empty>, [a#14, b#15]
+03    +- LocalRelation <empty>, [C#18, D#19]
 ```
