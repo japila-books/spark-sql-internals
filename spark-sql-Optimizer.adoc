@@ -343,15 +343,15 @@ TIP: Consult the https://github.com/apache/spark/blob/v2.4.0/sql/catalyst/src/ma
 ^.^| Strategy
 | Rules
 
-| Operator Optimization before Inferring Filters
+| [[Operator-Optimization-before-Inferring-Filters]] Operator Optimization before Inferring Filters
 | <<fixedPoint, FixedPoint>>
 | <<operatorOptimizationRuleSet, Operator optimization rules>>
 
-| Infer Filters
+| [[Infer-Filters]] Infer Filters
 | `Once`
-| InferFiltersFromConstraints
+| link:spark-sql-Optimizer-InferFiltersFromConstraints.adoc[InferFiltersFromConstraints]
 
-| Operator Optimization after Inferring Filters
+| [[Operator-Optimization-after-Inferring-Filters]] Operator Optimization after Inferring Filters
 | <<fixedPoint, FixedPoint>>
 | <<operatorOptimizationRuleSet, Operator optimization rules>>
 |===
@@ -410,7 +410,7 @@ extendedOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
 
 `extendedOperatorOptimizationRules` extension point defines additional rules for the Operator Optimization batch.
 
-NOTE: `extendedOperatorOptimizationRules` rules are executed right after <<Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> and <<Operator_Optimization_after_Inferring_Filters, Operator Optimization after Inferring Filters>>.
+NOTE: `extendedOperatorOptimizationRules` rules are executed right after <<Operator-Optimization-before-Inferring-Filters, Operator Optimization before Inferring Filters>> and <<Operator-Optimization-after-Inferring-Filters, Operator Optimization after Inferring Filters>>.
 
 === [[batches]] `batches` Final Method
 

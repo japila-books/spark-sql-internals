@@ -628,6 +628,7 @@
 . link:spark-sql-Optimizer-EliminateSubqueryAliases.adoc[EliminateSubqueryAliases]
 . link:spark-sql-Optimizer-EliminateView.adoc[EliminateView]
 . link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase]
+. link:spark-sql-Optimizer-InferFiltersFromConstraints.adoc[InferFiltersFromConstraints]
 . link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
 . link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
 . link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]

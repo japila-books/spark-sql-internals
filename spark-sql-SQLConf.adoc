@@ -131,6 +131,14 @@ a| [[cboEnabled]] Used in:
 | link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize]
 | [[columnBatchSize]] Used when...FIXME
 
+| constraintPropagationEnabled
+| link:spark-sql-properties.adoc#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled]
+a| [[constraintPropagationEnabled]][[CONSTRAINT_PROPAGATION_ENABLED]] Used when:
+
+* link:spark-sql-Optimizer-InferFiltersFromConstraints.adoc[InferFiltersFromConstraints] logical optimization is executed
+
+* `QueryPlanConstraints` is requested for the constraints
+
 | CONVERT_METASTORE_ORC
 | link:hive/configuration-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc]
 | [[CONVERT_METASTORE_ORC]] Used when `RelationConversions` logical post-hoc evaluation rule is executed (and requested to link:hive/RelationConversions.adoc#isConvertible[isConvertible])

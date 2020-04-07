@@ -12,21 +12,21 @@
 .Except's Logical Resolutions (Conversions)
 [cols="30,70",options="header",width="100%"]
 |===
-| Logical Operators
-| Conversions
+| Target Logical Operators
+| Optimization Rules and Demos
 
 | Left-Anti link:spark-sql-LogicalPlan-Join.adoc[Join]
-| `Except` (with the <<isAll, isAll>> flag disabled) in link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin] logical optimization rule
+| `Except` (DISTINCT) in link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin] logical optimization rule
 
 Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
 
 | link:spark-sql-LogicalPlan-Filter.adoc[Filter]
-| `Except` (with the <<isAll, isAll>> flag disabled) in link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter] logical optimization rule
+| `Except` (DISTINCT) in link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter] logical optimization rule
 
 Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
 
 | link:spark-sql-LogicalPlan-Union.adoc[Union], link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] and link:spark-sql-LogicalPlan-Generate.adoc[Generate]
-| `Except` (with the <<isAll, isAll>> flag enabled) in link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll] logical optimization rule
+| `Except` (ALL) in link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll] logical optimization rule
 
 Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators>>
 

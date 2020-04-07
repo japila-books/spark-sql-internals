@@ -223,6 +223,14 @@ Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumn
 
 | [[spark.sql.columnNameOfCorruptRecord]] *spark.sql.columnNameOfCorruptRecord*
 
+| [[spark.sql.constraintPropagation.enabled]] *spark.sql.constraintPropagation.enabled*
+
+*(internal)* When true, the query optimizer will infer and propagate data constraints in the query plan to optimize them. Constraint propagation can sometimes be computationally expensive for certain kinds of query plans (such as those with a large number of predicates and aliases) which might negatively impact overall runtime.
+
+Default: `true`
+
+Use link:spark-sql-SQLConf.adoc#constraintPropagationEnabled[SQLConf.constraintPropagationEnabled] method to access the current value.
+
 | [[spark.sql.defaultSizeInBytes]] *spark.sql.defaultSizeInBytes*
 
 *(internal)* Estimated size of a table or relation used in query planning
