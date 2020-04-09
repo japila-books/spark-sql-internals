@@ -103,12 +103,18 @@ preparePostShuffleRDD(
 * `ShuffleExchangeExec` physical operator is requested to <<doExecute, execute>>
 ====
 
-=== [[prepareShuffleDependency]] `prepareShuffleDependency` Internal Method
+=== [[prepareShuffleDependency]] Preparing ShuffleDependency -- `prepareShuffleDependency` Internal Method
 
 [source, scala]
 ----
-prepareShuffleDependency(): ShuffleDependency[Int, InternalRow, InternalRow]
+prepareShuffleDependency(): ShuffleDependency[Int, InternalRow, InternalRow] // <1>
+prepareShuffleDependency(
+  rdd: RDD[InternalRow],
+  outputAttributes: Seq[Attribute],
+  newPartitioning: Partitioning,
+  serializer: Serializer): ShuffleDependency[Int, InternalRow, InternalRow]
 ----
+<1> Uses the <<child, child>> operator (for the `rdd` and `outputAttributes`) and the <<serializer, serializer>>
 
 `prepareShuffleDependency`...FIXME
 
@@ -118,7 +124,7 @@ prepareShuffleDependency(): ShuffleDependency[Int, InternalRow, InternalRow]
 
 * `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.adoc#doEstimationIfNecessary, doEstimationIfNecessary>> (when `ExchangeCoordinator` is requested for a <<spark-sql-ExchangeCoordinator.adoc#postShuffleRDD, post-shuffle RDD (ShuffledRowRDD)>>)
 
-* `ShuffleExchangeExec` physical operator is requested to <<doExecute, execute>>
+* `CollectLimitExec`, <<doExecute, ShuffleExchangeExec>> and TakeOrderedAndProjectExec physical operators are executed
 ====
 
 === [[prepareShuffleDependency-helper]] `prepareShuffleDependency` Helper Method

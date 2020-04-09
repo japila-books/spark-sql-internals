@@ -331,33 +331,34 @@
 
 == Structured Query Execution
 
-. link:spark-sql-QueryExecution.adoc[QueryExecution -- Structured Query Execution Pipeline]
+. link:spark-sql-QueryExecution.adoc[QueryExecution]
 .. link:spark-sql-UnsupportedOperationChecker.adoc[UnsupportedOperationChecker]
 
-. link:spark-sql-Analyzer.adoc[Analyzer -- Logical Query Plan Analyzer]
-.. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis -- Analysis Validation]
+. link:spark-sql-Analyzer.adoc[Analyzer]
+.. link:spark-sql-Analyzer-CheckAnalysis.adoc[CheckAnalysis]
 
-. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer -- Logical Query Plan Optimizer]
-.. link:spark-sql-Optimizer.adoc[Catalyst Optimizer -- Generic Logical Query Plan Optimizer]
+. link:spark-sql-SparkOptimizer.adoc[SparkOptimizer]
+.. link:spark-sql-Optimizer.adoc[Catalyst Optimizer]
 
-. link:spark-sql-SparkPlanner.adoc[SparkPlanner -- Spark Query Planner]
-.. link:spark-sql-SparkStrategy.adoc[SparkStrategy -- Base for Execution Planning Strategies]
-.. link:spark-sql-SparkStrategies.adoc[SparkStrategies -- Container of Execution Planning Strategies]
+. link:spark-sql-SparkPlanner.adoc[SparkPlanner]
+.. link:spark-sql-SparkStrategy.adoc[SparkStrategy]
+.. link:spark-sql-SparkStrategies.adoc[SparkStrategies]
 
-. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator]
-.. link:spark-sql-Statistics.adoc[Statistics -- Estimates of Plan Statistics and Query Hints]
+. link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]
+.. link:spark-sql-Statistics.adoc[Statistics]
 .. link:spark-sql-HintInfo.adoc[HintInfo]
-.. link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor -- Base Visitor for Computing Statistics of Logical Plan]
-.. link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor -- LogicalPlanVisitor for Total Size (in Bytes) Statistic Only]
-.. link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor -- Computing Statistics for Cost-Based Optimization]
+.. link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor]
+.. link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+.. link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
 ... link:spark-sql-AggregateEstimation.adoc[AggregateEstimation]
 ... link:spark-sql-FilterEstimation.adoc[FilterEstimation]
 ... link:spark-sql-JoinEstimation.adoc[JoinEstimation]
 ... link:spark-sql-ProjectEstimation.adoc[ProjectEstimation]
 
-. link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning -- Specification of Physical Operator's Output Partitions]
+. link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning]
+.. link:spark-sql-HashPartitioning.adoc[HashPartitioning]
 
-. link:spark-sql-Distribution.adoc[Distribution Contract -- Data Distribution Across Partitions]
+. link:spark-sql-Distribution.adoc[Distribution]
 .. link:spark-sql-Distribution-AllTuples.adoc[AllTuples]
 .. link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution]
 .. link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution]
@@ -545,6 +546,7 @@
 . link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
 . link:spark-sql-SparkPlan-CartesianProductExec.adoc[CartesianProductExec]
 . link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
+. link:spark-sql-SparkPlan-CoGroupExec.adoc[CoGroupExec]
 . link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc[DataSourceV2ScanExec]
 . link:spark-sql-SparkPlan-DataWritingCommandExec.adoc[DataWritingCommandExec]
 . link:spark-sql-SparkPlan-DebugExec.adoc[DebugExec]
