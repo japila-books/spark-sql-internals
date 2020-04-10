@@ -1,8 +1,12 @@
 == [[ShuffleExchangeExec]] ShuffleExchangeExec Unary Physical Operator
 
-`ShuffleExchangeExec` is a concrete link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary physical operator that is used to <<doExecute, perform a shuffle>>.
+`ShuffleExchangeExec` is an link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary physical operator that is used to <<doExecute, perform a shuffle>>.
 
-`ShuffleExchangeExec` corresponds to <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#, Repartition>> (with shuffle enabled) and <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#, RepartitionByExpression>> logical operators at execution time (as resolved by link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy).
+`ShuffleExchangeExec` is created (possibly indirectly using <<apply, apply>> factory) when:
+
+* link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy is executed and plans link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] (with `shuffle` flag enabled) and link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression] logical operators
+
+* link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] physical query optimization is executed (and requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements])
 
 NOTE: `ShuffleExchangeExec` <<nodeName, presents itself>> as *Exchange* in physical query plans.
 
@@ -25,15 +29,6 @@ Exchange hashpartitioning((id#38L % 2), 2)
 +- *Range (0, 6, step=1, splits=Some(8))
 ----
 
-[[creating-instance]]
-`ShuffleExchangeExec` takes the following to be created:
-
-* [[newPartitioning]] <<spark-sql-SparkPlan-Partitioning.adoc#, Partitioning>>
-* [[child]] Child <<spark-sql-SparkPlan.adoc#, physical operator>>
-* [[coordinator]] Optional <<spark-sql-ExchangeCoordinator.adoc#, ExchangeCoordinator>>
-
-The optional <<coordinator, ExchangeCoordinator>> is defined only for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>> (when <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is <<apply, executed>>).
-
 [[nodeName]]
 When requested for <<spark-sql-catalyst-TreeNode.adoc#nodeName, nodeName>>, `ShuffleExchangeExec` gives *Exchange* prefix possibly followed by *(coordinator id: [coordinator-hash-code])* per the optional <<coordinator, ExchangeCoordinator>>.
 
@@ -42,6 +37,16 @@ When requested for the <<spark-sql-SparkPlan.adoc#outputPartitioning, output dat
 
 [[doPrepare]]
 When requested to <<spark-sql-SparkPlan.adoc#doPrepare, prepare for execution>>, `ShuffleExchangeExec` registers itself with the optional <<coordinator, ExchangeCoordinator>> if defined.
+
+=== [[creating-instance]] Creating ShuffleExchangeExec Instance
+
+`ShuffleExchangeExec` takes the following to be created:
+
+* [[newPartitioning]] link:spark-sql-SparkPlan-Partitioning.adoc[[Partitioning]]
+* [[child]] Child link:spark-sql-SparkPlan.adoc[[physical operator]]
+* [[coordinator]] Optional link:spark-sql-ExchangeCoordinator.adoc[[ExchangeCoordinator]]
+
+The optional <<coordinator, ExchangeCoordinator>> is defined only for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>> (when <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is <<apply, executed>>).
 
 === [[metrics]] Performance Metrics -- `metrics` Method
 
@@ -77,11 +82,11 @@ NOTE: `ShuffleExchangeExec` caches a `ShuffledRowRDD` for later reuse.
 
 NOTE: The optional <<coordinator, ExchangeCoordinator>> is available only when <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>> is enabled (and `EnsureRequirements` physical query optimization is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#ensureDistributionAndOrdering, enforce partition requirements (distribution and ordering) of a physical operator>>).
 
-If `ExchangeCoordinator` was available, `doExecute` requests the <<coordinator, ExchangeCoordinator>> for a <<spark-sql-ExchangeCoordinator.adoc#postShuffleRDD, ShuffledRowRDD>>.
+With an `ExchangeCoordinator` available, `doExecute` requests the <<coordinator, ExchangeCoordinator>> for a <<spark-sql-ExchangeCoordinator.adoc#postShuffleRDD, ShuffledRowRDD>>.
 
-Otherwise (when no `ExchangeCoordinator` is available), `doExecute` <<prepareShuffleDependency, prepareShuffleDependency>> and <<preparePostShuffleRDD, preparePostShuffleRDD>>.
+Otherwise (with no `ExchangeCoordinator` available), `doExecute` <<prepareShuffleDependency, prepares a ShuffleDependency>> and then <<preparePostShuffleRDD, creates a ShuffledRowRDD>>.
 
-In the end, `doExecute` saves (_caches_) the result `ShuffledRowRDD` (as <<cachedShuffleRDD, cachedShuffleRDD>> internal registry).
+In the end, `doExecute` saves (_caches_) the result `ShuffledRowRDD` (as the <<cachedShuffleRDD, cachedShuffleRDD>> internal registry).
 
 === [[preparePostShuffleRDD]] `preparePostShuffleRDD` Method
 
@@ -116,7 +121,9 @@ prepareShuffleDependency(
 ----
 <1> Uses the <<child, child>> operator (for the `rdd` and `outputAttributes`) and the <<serializer, serializer>>
 
-`prepareShuffleDependency`...FIXME
+`prepareShuffleDependency` creates a Spark Core `ShuffleDependency` with a `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the <<serializer, Serializer>> of the `ShuffleExchangeExec` physical operator).
+
+Internally, `prepareShuffleDependency`...FIXME
 
 [NOTE]
 ====
@@ -153,10 +160,29 @@ NOTE: `doPrepare` is part of link:spark-sql-SparkPlan.adoc#doPrepare[SparkPlan C
 
 `doPrepare` simply requests the <<coordinator, ExchangeCoordinator>> to <<spark-sql-ExchangeCoordinator.adoc#registerExchange, register the ShuffleExchangeExec unary physical operator>>.
 
-=== [[internal-registries]] Internal Properties
+=== [[apply]] Creating ShuffleExchangeExec Without ExchangeCoordinator -- `apply` Utility
 
-.ShuffleExchangeExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,3",options="header",width="100%"]
+[source, scala]
+----
+apply(
+  newPartitioning: Partitioning,
+  child: SparkPlan): ShuffleExchangeExec
+----
+
+`apply` creates a new <<creating-instance, ShuffleExchangeExec>> physical operator with an empty link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator].
+
+[NOTE]
+====
+`apply` is used when:
+
+* link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy is executed (and plans a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] logical operator with `shuffle` flag enabled, a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression])
+
+* link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] physical query optimization is executed (and requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements])
+====
+
+=== [[internal-properties]] Internal Properties
+
+[cols="30m,70",options="header",width="100%"]
 |===
 | Name
 | Description
