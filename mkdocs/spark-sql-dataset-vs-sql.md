@@ -1,4 +1,4 @@
-== Dataset API vs SQL
+# Dataset API and SQL
 
 Spark SQL supports two "modes" to write structured queries: xref:spark-sql-dataset-operators.adoc[Dataset API] and xref:spark-sql-SparkSession.adoc#sql[SQL].
 
@@ -15,10 +15,3 @@ This section describes the differences between Spark SQL features to develop Spa
 . link:spark-sql-Expression-RuntimeReplaceable.adoc#implementations[RuntimeReplaceable Expressions] are only available using SQL mode by means of SQL functions like `nvl`, `nvl2`, `ifnull`, `nullif`, etc.
 
 . <<spark-sql-column-operators.adoc#isin, Column.isin>> and link:spark-sql-AstBuilder.adoc#withPredicate[SQL IN predicate with a subquery] (and link:spark-sql-Expression-In.adoc[In Predicate Expression])
-
-[[demo]]
-.Demo: Structured Query in SQL Mode VS Dataset API
-[source,scala]
-----
-// FIXME: Example of a structured query that is only possible in SQL mode
-----

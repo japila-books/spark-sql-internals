@@ -1,0 +1,67 @@
+# many settings are copied verbatim from mkdocs-material
+# https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+
+site_name: The Internals of Spark SQL
+site_url: https://books.japila.pl/spark-sql-internals
+site_author: Jacek Laskowski
+
+docs_dir: mkdocs
+
+repo_name: mastering-spark-sql-book
+repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
+edit_uri: ""
+
+copyright: Copyright &copy; 2020 Jacek Laskowski
+
+theme:
+  name: 'material'
+  language: en
+  features:
+    # - tabs
+    - instant
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed
+  - pymdownx.tilde
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: timeago
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/jaceklaskowski
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/jaceklaskowski
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/jaceklaskowski
+
+nav:
+- Home: index.md
+- spark-sql.md
+- spark-sql-dataset-rdd.md
+- spark-sql-dataset-vs-sql.md

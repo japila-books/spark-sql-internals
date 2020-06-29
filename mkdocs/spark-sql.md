@@ -1,31 +1,34 @@
-== Spark SQL -- Structured Data Processing with Relational Queries on Massive Scale
+title: Spark SQL
 
-Like Apache Spark in general, *Spark SQL* in particular is all about distributed in-memory computations on massive scale.
+# Spark SQL
 
-Quoting the http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf[Spark SQL: Relational Data Processing in Spark] paper on Spark SQL:
+## Structured Data Processing with Relational Queries on Massive Scale
 
-> Spark SQL is a new module in Apache Spark that integrates relational processing with Spark's functional programming API.
+Like Apache Spark in general, **Spark SQL** in particular is all about distributed in-memory computations on massive scale.
 
-> Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
-queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
+!!! quote "[Spark SQL: Relational Data Processing in Spark](http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf) paper on Spark SQL"
+    Spark SQL is a new module in Apache Spark that integrates relational processing with Spark's functional programming API.
 
-The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for ingesting, querying and persisting (semi)structured data using *relational queries* (aka *structured queries*) that can be expressed in _good ol'_ *SQL* (with many features of HiveQL) and the high-level SQL-like functional declarative link:spark-sql-Dataset.adoc[Dataset API] (aka *Structured Query DSL*).
+    Spark SQL lets Spark programmers leverage the benefits of relational processing (e.g., declarative
+    queries and optimized storage), and lets SQL users call complex analytics libraries in Spark (e.g., machine learning).
 
-NOTE: Semi- and structured data are collections of records that can be described using link:spark-sql-schema.adoc[schema] with column names, their types and whether a column can be null or not (aka _nullability_).
+The primary difference between the computation models of Spark SQL and Spark Core is the relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (with many features of HiveQL) and the high-level SQL-like functional declarative [Dataset API](spark-sql-Dataset.md) (_Structured Query DSL_).
 
-Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a link:spark-sql-Dataset.adoc[Dataset] (with a mandatory link:spark-sql-Encoder.adoc[Encoder]).
+!!! note
+    Semi- and structured data are collections of records that can be described using [schema](spark-sql-schema.md) with column names, their types and whether a column can be null or not (_nullability_).
 
-From https://databricks.com/blog/2014/07/01/shark-spark-sql-hive-on-spark-and-the-future-of-sql-on-spark.html[Shark, Spark SQL, Hive on Spark, and the future of SQL on Apache Spark]:
+Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a [Dataset](spark-sql-Dataset.md) (with a mandatory [Encoder](spark-sql-Encoder.md)).
 
-> For *SQL users*, Spark SQL provides state-of-the-art SQL performance and maintains compatibility with Shark/Hive. In particular, like Shark, Spark SQL supports all existing Hive data formats, user-defined functions (UDF), and the Hive metastore.
+!!! quote "[Shark, Spark SQL, Hive on Spark, and the future of SQL on Apache Spark](https://databricks.com/blog/2014/07/01/shark-spark-sql-hive-on-spark-and-the-future-of-sql-on-spark.html)"
+    For **SQL users**, Spark SQL provides state-of-the-art SQL performance and maintains compatibility with Shark/Hive. In particular, like Shark, Spark SQL supports all existing Hive data formats, user-defined functions (UDF), and the Hive metastore.
 
-> For *Spark users*, Spark SQL becomes the narrow-waist for manipulating (semi-) structured data as well as ingesting data from sources that provide schema, such as JSON, Parquet, Hive, or EDWs. It truly unifies SQL and sophisticated analysis, allowing users to mix and match SQL and more imperative programming APIs for advanced analytics.
+    For **Spark users**, Spark SQL becomes the narrow-waist for manipulating (semi-) structured data as well as ingesting data from sources that provide schema, such as JSON, Parquet, Hive, or EDWs. It truly unifies SQL and sophisticated analysis, allowing users to mix and match SQL and more imperative programming APIs for advanced analytics.
 
-> For *open source hackers*, Spark SQL proposes a novel, elegant way of building query planners. It is incredibly easy to add new optimizations under this framework.
+    For **open source hackers**, Spark SQL proposes a novel, elegant way of building query planners. It is incredibly easy to add new optimizations under this framework.
 
-A `Dataset` is a programming interface to the link:spark-sql-QueryExecution.adoc[structured query execution pipeline] with link:spark-sql-dataset-operators.adoc[transformations and actions] (as in the good old days of RDD API in Spark Core).
+A `Dataset` is a programming interface to the [structured query execution pipeline](spark-sql-QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
 
-Internally, a structured query is a link:spark-sql-catalyst.adoc[Catalyst tree] of (logical and physical) link:spark-sql-catalyst-QueryPlan.adoc[relational operators] and link:spark-sql-Expression.adoc[expressions].
+Internally, a structured query is a [Catalyst tree](spark-sql-catalyst.md) of (logical and physical) [relational operators](spark-sql-catalyst-QueryPlan.md) and [expressions](spark-sql-Expression.md).
 
 When an action is executed on a `Dataset` (directly, e.g. link:spark-sql-dataset-operators.adoc#show[show] or link:spark-sql-dataset-operators.adoc#count[count], or indirectly, e.g. link:spark-sql-DataFrameWriter.adoc#save[save] or link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the link:spark-sql-QueryExecution.adoc#execution-pipeline[execution stages]:
 
@@ -48,8 +51,7 @@ Spark SQL supports structured queries in *batch* and *streaming* modes (with the
 
 NOTE: You can find out more on Spark Structured Streaming in https://bit.ly/spark-structured-streaming[Spark Structured Streaming (Apache Spark 2.2+)] gitbook.
 
-[source, scala]
-----
+```text
 // Define the schema using a case class
 case class Person(name: String, age: Int)
 
@@ -89,12 +91,11 @@ scala> teenagers.show
 +-----+---+
 |Jacek| 10|
 +-----+---+
-----
+```
 
 Spark SQL supports loading datasets from various data sources including tables in Apache Hive. With Hive support enabled, you can load datasets from existing Apache Hive deployments and save them back to Hive tables if needed.
 
-[source, scala]
-----
+```text
 sql("CREATE OR REPLACE TEMPORARY VIEW v1 (key INT, value STRING) USING csv OPTIONS ('path'='people.csv', 'header'='true')")
 
 // Queries are expressed in HiveQL
@@ -108,7 +109,7 @@ scala> sql("desc EXTENDED v1").show(false)
 |key       |int      |null   |
 |value     |string   |null   |
 +----------+---------+-------+
-----
+```
 
 Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using link:spark-sql-Optimizer.adoc[rule-based query optimizer] (aka *Catalyst Optimizer*), link:spark-sql-whole-stage-codegen.adoc[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and link:spark-sql-tungsten.adoc[Tungsten execution engine] with its own link:spark-sql-InternalRow.adoc[internal binary row format].
 
@@ -125,8 +126,7 @@ Quoting https://drill.apache.org/[Apache Drill] which applies to Spark SQL perfe
 
 The following snippet shows a *batch ETL pipeline* to process JSON files and saving their subset as CSVs.
 
-[source, scala]
-----
+```scala
 spark.read
   .format("json")
   .load("input-json")
@@ -135,37 +135,9 @@ spark.read
   .write
   .format("csv")
   .save("output-csv")
-----
+```
 
-With link:spark-structured-streaming.adoc[Structured Streaming] feature however, the above static batch query becomes dynamic and continuous paving the way for *continuous applications*.
-
-[source, scala]
-----
-import org.apache.spark.sql.types._
-val schema = StructType(
-  StructField("id", LongType, nullable = false) ::
-  StructField("name", StringType, nullable = false) ::
-  StructField("score", DoubleType, nullable = false) :: Nil)
-
-spark.readStream
-  .format("json")
-  .schema(schema)
-  .load("input-json")
-  .select("name", "score")
-  .where('score > 15)
-  .writeStream
-  .format("console")
-  .start
-
-// -------------------------------------------
-// Batch: 1
-// -------------------------------------------
-// +-----+-----+
-// | name|score|
-// +-----+-----+
-// |Jacek| 20.5|
-// +-----+-----+
-----
+With Structured Streaming feature however, the above static batch query becomes dynamic and continuous paving the way for **continuous applications**.
 
 As of Spark 2.0, the main data abstraction of Spark SQL is link:spark-sql-Dataset.adoc[Dataset]. It represents a *structured data* which are records with a known schema. This structured data representation `Dataset` enables link:spark-sql-tungsten.adoc[compact binary representation] using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
@@ -199,8 +171,7 @@ to find max/min or any other aggregates? SELECT MAX(column_name) FROM dftable_na
 
 You can parse data from external data sources and let the _schema inferencer_ to deduct the schema.
 
-[source, scala]
-----
+```
 // Example 1
 val df = Seq(1 -> 2).toDF("i", "j")
 val query = df.groupBy('i)
@@ -219,10 +190,10 @@ scala> sql("SELECT IF(a > 0, a, 0) FROM (SELECT key a FROM src) temp").show
 |                  1|
 |                  0|
 +-------------------+
-----
+```
 
-=== [[i-want-more]] Further Reading and Watching
+## Further Reading and Watching
 
-. http://spark.apache.org/sql/[Spark SQL] home page
-. (video) https://youtu.be/e-Ys-2uVxM0?t=6m44s[Spark's Role in the Big Data Ecosystem - Matei Zaharia]
-. https://databricks.com/blog/2016/07/26/introducing-apache-spark-2-0.html[Introducing Apache Spark 2.0]
+* [Spark SQL](http://spark.apache.org/sql/) home page
+* (video) [Spark's Role in the Big Data Ecosystem - Matei Zaharia](https://youtu.be/e-Ys-2uVxM0?t=6m44s)
+* [Introducing Apache Spark 2.0](https://databricks.com/blog/2016/07/26/introducing-apache-spark-2-0.html)
