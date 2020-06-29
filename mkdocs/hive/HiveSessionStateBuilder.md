@@ -1,4 +1,4 @@
-== [[HiveSessionStateBuilder]] HiveSessionStateBuilder -- Builder of Hive-Specific SessionState
+# HiveSessionStateBuilder
 
 `HiveSessionStateBuilder` is a concrete link:../spark-sql-BaseSessionStateBuilder.adoc[builder] to produce a Hive-aware link:../spark-sql-SessionState.adoc[SessionState] for...FIXME
 

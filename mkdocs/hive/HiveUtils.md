@@ -1,4 +1,4 @@
-== [[HiveUtils]] HiveUtils
+# HiveUtils
 
 `HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that link:HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
 

@@ -17,7 +17,7 @@ theme:
   name: 'material'
   language: en
   features:
-    # - tabs
+    - tabs
     - instant
 
 markdown_extensions:
@@ -61,7 +61,38 @@ extra:
       link: https://linkedin.com/in/jaceklaskowski
 
 nav:
-- Home: index.md
-- spark-sql.md
-- spark-sql-dataset-rdd.md
-- spark-sql-dataset-vs-sql.md
+  - Home: index.md
+  - spark-sql.md
+  - spark-sql-dataset-rdd.md
+  - spark-sql-dataset-vs-sql.md
+  - Hive:
+    - hive/index.md
+    - hive/configuration-properties.md
+    - hive/spark-sql-hive-metastore.md
+    - hive/spark-sql-DataSinks.md
+    - hive/HiveFileFormat.md
+    - HiveClient:
+      - hive/HiveClient.md
+      - hive/HiveClientImpl.md
+    - hive/HiveUtils.md
+    - hive/IsolatedClientLoader.md
+    - hive/HiveTableRelation.md
+    - hive/CreateHiveTableAsSelectCommand.md
+    - hive/SaveAsHiveFile.md
+    - hive/InsertIntoHiveDirCommand.md
+    - hive/InsertIntoHiveTable.md
+    - hive/HiveTableScans.md
+    - hive/HiveTableScanExec.md
+    - hive/TableReader.md
+    - hive/HadoopTableReader.md
+    - hive/HiveSessionStateBuilder.md
+    - hive/HiveExternalCatalog.md
+    - hive/HiveSessionCatalog.md
+    - hive/HiveMetastoreCatalog.md
+    - hive/RelationConversions.md
+    - hive/ResolveHiveSerdeTable.md
+    - hive/DetermineTableStats.md
+    - hive/HiveAnalysis.md
+  - Demos:
+    - demo/demo-connecting-spark-sql-to-hive-metastore.md
+    - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

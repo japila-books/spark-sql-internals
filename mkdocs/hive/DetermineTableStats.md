@@ -1,4 +1,6 @@
-== [[DetermineTableStats]] DetermineTableStats Logical PostHoc Resolution Rule -- Computing Total Size Table Statistic for HiveTableRelations
+title: DetermineTableStats
+
+# DetermineTableStats Logical PostHoc Resolution Rule -- Computing Total Size Table Statistic for HiveTableRelations
 
 `DetermineTableStats` is a link:HiveSessionStateBuilder.adoc#postHocResolutionRules[logical posthoc resolution rule] that the link:HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, compute total size table statistic for HiveTableRelations with no statistics>>.
 

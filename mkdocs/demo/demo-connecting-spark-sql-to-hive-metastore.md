@@ -1,4 +1,6 @@
-== Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)
+title: Connecting Spark SQL to Hive Metastore
+
+# Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)
 
 :spark-version: 2.4.5
 :hive-version: 2.3.6
@@ -15,7 +17,7 @@ You'll be using a separate Remote Metastore Server to access table metadata via 
 
 TIP: Read up https://docs.databricks.com/data/metastores/external-hive-metastore.html[External Apache Hive metastore] in the official documentation of Databricks platform that describes the topic in more details from the perspective of Apache Spark developers.
 
-=== Install Java 8
+## Install Java 8
 
 As per Hadoop's https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions[Hadoop Java Versions]:
 
@@ -34,7 +36,7 @@ OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_242-b08)
 OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.242-b08, mixed mode)
 ```
 
-=== Build Apache Spark for Apache Hadoop
+## Build Apache Spark for Apache Hadoop
 
 Build Apache Spark with support for Apache Hadoop {hadoop-version}.
 
@@ -77,7 +79,7 @@ scala> assert(org.apache.hadoop.util.VersionInfo.getVersion == "2.10.0")
 scala> assert(org.apache.hadoop.hive.shims.ShimLoader.getMajorVersion == "0.23")
 ```
 
-=== Set Up Single-Node Hadoop Cluster
+## Set Up Single-Node Hadoop Cluster
 
 _Hive uses Hadoop._
 
@@ -122,7 +124,7 @@ $ ./bin/hdfs getconf -confKey hadoop.tmp.dir
 ```
 ====
 
-=== fs.defaultFS Configuration Property (core-site.xml)
+## fs.defaultFS Configuration Property (core-site.xml)
 
 Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.` properties.
 
@@ -146,7 +148,7 @@ Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.
 
 IMPORTANT: Replace `[username]` above with the local user (e.g. `jacek`) that will be used in `beeline`. Consult https://stackoverflow.com/q/43180305/1305344[this question] on StackOverflow.
 
-=== dfs.replication Configuration Property (hdfs-site.xml)
+## dfs.replication Configuration Property (hdfs-site.xml)
 
 Edit `etc/hadoop/hdfs-site.xml` and define `dfs.replication` property as follows:
 
@@ -160,7 +162,7 @@ Edit `etc/hadoop/hdfs-site.xml` and define `dfs.replication` property as follows
 </configuration>
 ----
 
-=== Passphrase-less SSH (macOS)
+## Passphrase-less SSH (macOS)
 
 Turn *Remote Login* on in Mac OS X's Sharing preferences that allow remote users to connect to a Mac using the OpenSSH protocols.
 
@@ -170,7 +172,7 @@ $ cat ~/.ssh/id_rsa_hadoop.pub >> ~/.ssh/authorized_keys
 $ chmod 0600 ~/.ssh/authorized_keys
 ```
 
-=== Other Steps
+## Other Steps
 
 You may want to set up `JAVA_HOME` in `etc/hadoop/hadoop-env.sh` as told in the file:
 
@@ -258,7 +260,7 @@ $ jps -lm
 
 NOTE: FIXME Are the steps in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node[YARN on a Single Node] required for Hive?
 
-=== Running Hive
+## Running Hive
 
 NOTE: Following the steps in https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive[Running Hive].
 
@@ -278,7 +280,7 @@ Download and install http://hive.apache.org/downloads.html[Hive {hive-version}] 
 export HIVE_HOME=/Users/jacek/dev/apps/hive
 ```
 
-=== Install PostgreSQL
+## Install PostgreSQL
 
 You'll set up a remote metastore database (as https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreDatabase[This configuration of metastore database is recommended for any real use.]) and you'll be using https://www.enterprisedb.com/downloads/postgres-postgresql-downloads[PostgreSQL 12.2].
 
@@ -289,7 +291,7 @@ server started
 
 Download the most current version of https://jdbc.postgresql.org/download.html#current[PostgreSQL JDBC Driver], e.g. PostgreSQL JDBC 4.2 Driver, 42.2.11. Save the jar file (`postgresql-42.2.11.jar`) in `$HIVE_HOME/lib`.
 
-=== Setting Up Remote Metastore Database
+## Setting Up Remote Metastore Database
 
 Create a database and a user in PostgreSQL for Hive.
 
@@ -369,7 +371,7 @@ Beeline version 2.3.6 by Apache Hive
 0: jdbc:hive2://localhost:10000>
 ```
 
-=== Start Hive Metastore Server
+## Start Hive Metastore Server
 
 Start the Hive Metastore Server (as described in https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreServer[Remote Metastore Server]).
 ```
@@ -380,7 +382,7 @@ Starting Hive Metastore Server
 
 That is the server Spark SQL applications are going to connect to for metadata of Hive tables.
 
-=== Connecting Apache Spark to Apache Hive
+## Connecting Apache Spark to Apache Hive
 
 Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.uris` configuration property (that is the thrift URL of the Hive Metastore Server).
 

@@ -1,54 +1,5 @@
 = Summary
 
-. link:book-intro.adoc[Introduction]
-
-. link:spark-sql.adoc[Spark SQL -- Structured Data Processing with Relational Queries on Massive Scale]
-. link:spark-sql-dataset-rdd.adoc[Datasets vs DataFrames vs RDDs]
-. link:spark-sql-dataset-vs-sql.adoc[Dataset API vs SQL]
-
-== Hive Integration / Hive Data Source
-
-. link:hive/index.adoc[Hive Data Source]
-.. link:demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]
-.. link:demo/demo-hive-partitioned-parquet-table-partition-pruning.adoc[Demo: Hive Partitioned Parquet Table and Partition Pruning]
-
-. link:hive/configuration-properties.adoc[Configuration Properties]
-
-. link:spark-sql-hive-metastore.adoc[Hive Metastore]
-. link:spark-sql-DataSinks.adoc[DataSinks Strategy]
-
-. link:hive/HiveFileFormat.adoc[HiveFileFormat]
-
-. link:hive/HiveClient.adoc[HiveClient]
-.. link:hive/HiveClientImpl.adoc[HiveClientImpl]
-
-. link:hive/HiveUtils.adoc[HiveUtils]
-. link:hive/IsolatedClientLoader.adoc[IsolatedClientLoader]
-
-. link:hive/HiveTableRelation.adoc[HiveTableRelation]
-. link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand]
-. link:hive/SaveAsHiveFile.adoc[SaveAsHiveFile]
-.. link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
-.. link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
-
-. link:hive/HiveTableScans.adoc[HiveTableScans]
-
-. link:hive/HiveTableScanExec.adoc[HiveTableScanExec]
-
-. link:hive/TableReader.adoc[TableReader]
-.. link:hive/HadoopTableReader.adoc[HadoopTableReader]
-
-. link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
-. link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
-
-. link:hive/HiveSessionCatalog.adoc[HiveSessionCatalog]
-. link:hive/HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
-
-. link:hive/RelationConversions.adoc[RelationConversions]
-. link:hive/ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
-. link:hive/DetermineTableStats.adoc[DetermineTableStats]
-. link:hive/HiveAnalysis.adoc[HiveAnalysis]
-
 == Notable Features
 
 . link:spark-sql-hive-integration.adoc[Hive Integration]

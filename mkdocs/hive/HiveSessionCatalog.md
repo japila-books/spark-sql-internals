@@ -1,4 +1,6 @@
-== [[HiveSessionCatalog]] HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities
+title: HiveSessionCatalog
+
+# HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities
 
 :hive-version: 2.3.6
 :hadoop-version: 2.10.0

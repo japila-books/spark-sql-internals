@@ -1,4 +1,4 @@
-== [[HiveExternalCatalog]] HiveExternalCatalog -- Hive-Aware Metastore of Permanent Relational Entities
+# HiveExternalCatalog
 
 :hive-version: 2.3.6
 :hadoop-version: 2.10.0

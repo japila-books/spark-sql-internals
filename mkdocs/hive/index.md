@@ -1,4 +1,4 @@
-== Hive Data Source
+# Hive Data Source
 
 Spark SQL supports Apache Hive using *Hive data source*. Spark SQL allows executing structured queries on Hive tables, a persistent Hive metastore, support for Hive serdes and user-defined functions.
 
@@ -14,13 +14,13 @@ Hive Data Source uses link:HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
 
 Hive Data Source uses link:HiveClientImpl.adoc[HiveClientImpl] for meta data/DDL operations (using calls to a Hive metastore).
 
-=== [[hive-configuration-properties]] Hive Configuration Properties
+## Hive Configuration Properties
 
 Hive uses <<properties, configuration properties>> that can be defined in <<hive-configuration-files, configuration files>> and as System properties (that have a higher precedence).
 
 In Spark applications, you could use `--driver-java-options` or `--conf spark.hadoop.[property]` to define Hive configuration properties.
 
-```
+```shell
 $SPARK_HOME/bin/spark-shell \
   --jars \
     $HIVE_HOME/lib/hive-metastore-2.3.6.jar,\
@@ -131,7 +131,7 @@ Default: `APP`
 
 |===
 
-=== [[hive-configuration-files]] Hive Configuration Files
+## Hive Configuration Files
 
 `HiveConf` loads `hive-default.xml` when on the classpath.
 

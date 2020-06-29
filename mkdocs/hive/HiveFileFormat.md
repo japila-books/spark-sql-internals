@@ -1,4 +1,4 @@
-== [[HiveFileFormat]] HiveFileFormat -- FileFormat of Hive Tables
+# HiveFileFormat
 
 `HiveFileFormat` is a link:../spark-sql-FileFormat.adoc[FileFormat] for <<prepareWrite, writing Hive tables>>.
 

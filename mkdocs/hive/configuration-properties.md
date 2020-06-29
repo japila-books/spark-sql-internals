@@ -1,4 +1,4 @@
-== Configuration Properties
+# Configuration Properties
 
 This page contains the link:../spark-sql-properties.adoc[configuration properties] of the link:index.adoc[Hive data source].
 

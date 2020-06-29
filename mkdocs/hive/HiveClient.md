@@ -1,6 +1,6 @@
-== [[HiveClient]] HiveClient -- Contract for Retrieving Metadata from Hive Metastore
+# HiveClient
 
-`HiveClient` is the <<contract, contract>> for...FIXME
+`HiveClient` is the <<contract, contract>> for retrieving metadata from a Hive metastore.
 
 NOTE: link:HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
 

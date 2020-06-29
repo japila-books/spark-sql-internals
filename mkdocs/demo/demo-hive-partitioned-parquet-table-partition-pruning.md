@@ -1,4 +1,6 @@
-== Demo: Hive Partitioned Parquet Table and Partition Pruning
+title: Hive Partitioned Parquet Table and Partition Pruning
+
+# Demo: Hive Partitioned Parquet Table and Partition Pruning
 
 The demo shows partition pruning optimization in Spark SQL for Hive partitioned tables in parquet format.
 
@@ -10,7 +12,7 @@ The demo features the following:
 
 * Hadoop DFS for link:../spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
 
-=== Create Hive Partitioned Table in Parquet Format
+## Create Hive Partitioned Table in Parquet Format
 
 Create a Hive partitioned table in parquet format with some data.
 
@@ -30,7 +32,7 @@ PARTITION (city="Paris")
 VALUES (1, 'Agata');
 ```
 
-=== Accessing Hive Table in Spark Shell
+## Accessing Hive Table in Spark Shell
 
 Make sure that the table is accessible in Spark SQL.
 
@@ -125,7 +127,7 @@ Check out the table in Hive using `beeline`.
 32 rows selected (0.075 seconds)
 ```
 
-=== Explore Partition Pruning
+## Explore Partition Pruning
 
 You'll be using link:../spark-sql-Expression-In.adoc[In] expression in structured queries to learn more on partition pruning.
 

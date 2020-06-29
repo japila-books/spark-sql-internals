@@ -1,4 +1,4 @@
-== Hive Metastore
+# Hive Metastore
 
 Spark SQL uses a Hive metastore to manage the metadata of persistent relational entities (e.g. databases, tables, columns, partitions) in a relational database (for fast access).
 
