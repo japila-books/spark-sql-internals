@@ -1,4 +1,4 @@
-== Bucketing
+# Bucketing
 
 *Bucketing* is an optimization technique that uses *buckets* (and *bucketing columns*) to determine data partitioning and avoid data shuffle.
 

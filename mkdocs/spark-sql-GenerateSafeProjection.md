@@ -1,4 +1,4 @@
-== [[GenerateSafeProjection]] GenerateSafeProjection
+# GenerateSafeProjection
 
 `GenerateSafeProjection` is...FIXME
 

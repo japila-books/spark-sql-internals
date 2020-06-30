@@ -1,4 +1,4 @@
-== [[EquivalentExpressions]] EquivalentExpressions
+# EquivalentExpressions
 
 `EquivalentExpressions` is...FIXME
 

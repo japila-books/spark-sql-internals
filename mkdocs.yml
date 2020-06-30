@@ -31,9 +31,9 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
+  - pymdownx.emoji
   # this doesn't seem to work on ReadTheDocs
   # https://github.com/readthedocs/readthedocs.org/issues/6889
-  # - pymdownx.emoji:
   #     emoji_index: !!python/name:materialx.emoji.twemoji
   #     emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.inlinehilite
@@ -68,6 +68,41 @@ nav:
   - spark-sql.md
   - spark-sql-dataset-rdd.md
   - spark-sql-dataset-vs-sql.md
+  - Notable Features:
+    - spark-sql-hive-integration.md
+    - spark-sql-vectorized-parquet-reader.md
+    - spark-sql-dynamic-partition-inserts.md
+    - spark-sql-bucketing.md
+    - Whole-Stage CodeGen:
+      - spark-sql-whole-stage-codegen.md
+      - spark-sql-CodegenContext.md
+      - spark-sql-CodeGenerator.md
+      - spark-sql-GenerateColumnAccessor.md
+      - spark-sql-GenerateOrdering.md
+      - spark-sql-GeneratePredicate.md
+      - spark-sql-GenerateSafeProjection.md
+      - spark-sql-BytesToBytesMap.md
+      - Subexpression Elimination:
+        - spark-sql-subexpression-elimination.md
+        - spark-sql-EquivalentExpressions.md
+    - Vectorized Query Execution:
+      - spark-sql-vectorized-query-execution.md
+      - spark-sql-ColumnarBatch.md
+    - spark-sql-data-source-api-v2.md
+    - spark-sql-subqueries.md
+    - spark-sql-hint-framework.md
+    - Adaptive Query Execution:
+      - spark-sql-adaptive-query-execution.md
+      - spark-sql-ExchangeCoordinator.md
+    - Cost-Based Optimization:
+      - spark-sql-cost-based-optimization.md
+      - spark-sql-CatalogStatistics.md
+      - spark-sql-ColumnStat.md
+      - spark-sql-EstimationUtils.md
+      - spark-sql-CommandUtils.md
+    - spark-sql-catalyst-dsl.md
+  - Tools:
+    - tools/spark-sql-spark-sql.md
   - Hive:
     - hive/index.md
     - hive/configuration-properties.md

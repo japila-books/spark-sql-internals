@@ -1,4 +1,4 @@
-== [[ColumnarBatch]] ColumnarBatch -- ColumnVectors as Row-Wise Table
+# ColumnarBatch
 
 `ColumnarBatch` allows to work with multiple <<columns, ColumnVectors>> as a row-wise table.
 

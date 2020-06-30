@@ -1,4 +1,4 @@
-== [[GenerateOrdering]] GenerateOrdering
+# GenerateOrdering
 
 `GenerateOrdering` is...FIXME
 

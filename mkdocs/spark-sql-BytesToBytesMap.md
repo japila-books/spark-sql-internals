@@ -1,4 +1,6 @@
-== [[BytesToBytesMap]] BytesToBytesMap Append-Only Hash Map
+title: BytesToBytesMap
+
+# BytesToBytesMap Append-Only Hash Map
 
 `BytesToBytesMap` is...FIXME
 

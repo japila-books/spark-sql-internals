@@ -1,4 +1,6 @@
-== Subqueries (Subquery Expressions)
+title: Subqueries
+
+# Subqueries (Subquery Expressions)
 
 As of Spark 2.0, Spark SQL supports subqueries.
 

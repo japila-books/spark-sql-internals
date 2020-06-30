@@ -1,4 +1,6 @@
-== Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
+title: Subexpression Elimination
+
+# Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
 
 *Subexpression Elimination* (aka *Common Expression Reuse*) is an optimisation of a link:spark-sql-LogicalPlan.adoc[logical query plan] that link:spark-sql-CodegenContext.adoc#subexpressionElimination[eliminates expressions in code-generated (non-interpreted) expression evaluation].
 

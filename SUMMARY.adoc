@@ -1,48 +1,5 @@
 = Summary
 
-== Notable Features
-
-. link:spark-sql-hive-integration.adoc[Hive Integration]
-
-. link:spark-sql-vectorized-parquet-reader.adoc[Vectorized Parquet Decoding (Reader)]
-
-. link:spark-sql-dynamic-partition-inserts.adoc[Dynamic Partition Inserts]
-
-. link:spark-sql-bucketing.adoc[Bucketing]
-
-. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation (Whole-Stage CodeGen)]
-.. link:spark-sql-CodegenContext.adoc[CodegenContext]
-.. link:spark-sql-CodeGenerator.adoc[CodeGenerator]
-... link:spark-sql-GenerateColumnAccessor.adoc[GenerateColumnAccessor]
-... link:spark-sql-GenerateOrdering.adoc[GenerateOrdering]
-... link:spark-sql-GeneratePredicate.adoc[GeneratePredicate]
-... link:spark-sql-GenerateSafeProjection.adoc[GenerateSafeProjection]
-.. link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap Append-Only Hash Map]
-
-. link:spark-sql-vectorized-query-execution.adoc[Vectorized Query Execution (Batch Decoding)]
-.. link:spark-sql-ColumnarBatch.adoc[ColumnarBatch -- ColumnVectors as Row-Wise Table]
-
-. link:spark-sql-data-source-api-v2.adoc[Data Source API V2]
-
-. link:spark-sql-subqueries.adoc[Subqueries]
-
-. link:spark-sql-hint-framework.adoc[Hint Framework]
-
-. link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution]
-.. link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator]
-
-. link:spark-sql-subexpression-elimination.adoc[Subexpression Elimination For Code-Generated Expression Evaluation (Common Expression Reuse)]
-.. link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
-
-. link:spark-sql-cost-based-optimization.adoc[Cost-Based Optimization (CBO)]
-.. link:spark-sql-CatalogStatistics.adoc[CatalogStatistics -- Table Statistics in Metastore (External Catalog)]
-.. link:spark-sql-ColumnStat.adoc[ColumnStat -- Column Statistics]
-.. link:spark-sql-EstimationUtils.adoc[EstimationUtils]
-.. link:spark-sql-CommandUtils.adoc[CommandUtils -- Utilities for Table Statistics]
-
-. link:spark-sql-catalyst-dsl.adoc[Catalyst DSL -- Implicit Conversions for Catalyst Data Structures]
-
-. link:spark-sql-spark-sql.adoc[Spark SQL CLI -- spark-sql]
 
 == Developing Spark SQL Applications
 

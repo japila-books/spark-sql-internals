@@ -1,4 +1,4 @@
-== [[ExchangeCoordinator]] ExchangeCoordinator
+# ExchangeCoordinator
 
 `ExchangeCoordinator` is <<creating-instance, created>> when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
 

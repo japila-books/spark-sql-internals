@@ -1,4 +1,4 @@
-== Data Source API V2
+# Data Source API V2
 
 *Data Source API V2* (_DataSource API V2_ or _DataSource V2_) is a new API for data sources in Spark SQL with the following abstractions (_contracts_):
 

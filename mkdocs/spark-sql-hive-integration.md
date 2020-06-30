@@ -1,4 +1,4 @@
-== Hive Integration -- Working with Data in Apache Hive
+# Hive Integration
 
 Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog].
 

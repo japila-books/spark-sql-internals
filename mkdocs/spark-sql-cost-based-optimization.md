@@ -1,4 +1,6 @@
-== Cost-Based Optimization (CBO) of Logical Query Plan
+title: Cost-Based Optimization
+
+# Cost-Based Optimization (CBO) of Logical Query Plan
 
 *Cost-Based Optimization* (aka *Cost-Based Query Optimization* or *CBO Optimizer*) is an optimization technique in Spark SQL that uses <<statistics, table statistics>> to determine the most efficient query execution plan of a structured query (given the logical query plan).
 

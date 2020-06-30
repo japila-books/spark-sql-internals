@@ -1,3 +1,0 @@
-== Vectorized Query Execution (Batch Decoding)
-
-*Vectorized Query Execution* (aka *Vectorized Decoding* or *Batch Decoding*) is...FIXME

@@ -1,4 +1,4 @@
-== [[ColumnStat]] ColumnStat -- Column Statistics
+# ColumnStat
 
 [[creating-instance]]
 `ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the link:spark-sql-CatalogStatistics.adoc[table statistics] in a metastore).

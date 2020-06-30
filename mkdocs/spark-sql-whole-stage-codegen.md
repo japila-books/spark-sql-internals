@@ -1,4 +1,4 @@
-== Whole-Stage Java Code Generation (Whole-Stage CodeGen)
+# Whole-Stage Java Code Generation
 
 *Whole-Stage Java Code Generation* (aka _Whole-Stage CodeGen_) is a physical query optimization in Spark SQL that fuses multiple physical operators (as a subtree of plans that link:spark-sql-CodegenSupport.adoc[support code generation]) together into a single Java function.
 

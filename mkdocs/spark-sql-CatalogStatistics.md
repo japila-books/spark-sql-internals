@@ -1,4 +1,6 @@
-== [[CatalogStatistics]] CatalogStatistics -- Table Statistics From External Catalog (Metastore)
+title: CatalogStatistics
+
+# CatalogStatistics -- Table Statistics From External Catalog (Metastore)
 
 [[creating-instance]][[table-statistics]]
 `CatalogStatistics` are *table statistics* that are stored in an link:spark-sql-ExternalCatalog.adoc[external catalog] (aka _metastore_):

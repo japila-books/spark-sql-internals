@@ -1,4 +1,4 @@
-== [[GeneratePredicate]] GeneratePredicate
+# GeneratePredicate
 
 `GeneratePredicate` is...FIXME
 

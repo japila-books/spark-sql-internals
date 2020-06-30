@@ -1,4 +1,4 @@
-== [[GenerateColumnAccessor]] GenerateColumnAccessor
+# GenerateColumnAccessor
 
 `GenerateColumnAccessor` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] for...FIXME
 

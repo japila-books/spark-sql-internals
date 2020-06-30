@@ -1,4 +1,6 @@
-== [[CommandUtils]] CommandUtils -- Utilities for Table Statistics
+title: CommandUtils
+
+# CommandUtils -- Utilities for Table Statistics
 
 `CommandUtils` is a helper class that logical commands, e.g. `InsertInto*`, `AlterTable*Command`, `LoadDataCommand`, and CBO's `Analyze*`, use to manage table statistics.
 

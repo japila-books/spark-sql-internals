@@ -1,4 +1,4 @@
-== [[CodeGenerator]] CodeGenerator
+# CodeGenerator
 
 `CodeGenerator` is a base class for generators of JVM bytecode for expression evaluation.
 

@@ -1,4 +1,4 @@
-== Vectorized Parquet Decoding (Reader)
+# Vectorized Parquet Decoding (Reader)
 
 *Vectorized Parquet Decoding* (aka *Vectorized Parquet Reader*) allows for reading datasets in parquet format in batches, i.e. rows are decoded in batches. That aims at improving memory locality and cache utilization.
 

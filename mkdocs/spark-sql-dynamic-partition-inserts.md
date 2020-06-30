@@ -1,4 +1,4 @@
-== Dynamic Partition Inserts
+# Dynamic Partition Inserts
 
 *Partitioning* uses *partitioning columns* to divide a dataset into smaller chunks (based on the values of certain columns) that will be written into separate directories.
 

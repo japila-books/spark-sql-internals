@@ -1,4 +1,6 @@
-== [[dsl]] Catalyst DSL -- Implicit Conversions for Catalyst Data Structures
+title: Catalyst DSL
+
+# Catalyst DSL -- Implicit Conversions for Catalyst Data Structures
 
 *Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> for constructing Catalyst data structures, i.e. <<ExpressionConversions, expressions>> and <<plans, logical plans>>, more easily.
 

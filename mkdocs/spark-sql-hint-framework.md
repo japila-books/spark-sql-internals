@@ -1,4 +1,4 @@
-== Hint Framework
+# Hint Framework
 
 Structured queries can be optimized using *Hint Framework* that allows for <<specifying-query-hints, specifying query hints>>.
 
