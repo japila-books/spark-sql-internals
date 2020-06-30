@@ -1,4 +1,6 @@
-== [[Encoder]] Encoder -- Internal Row Converter
+title: Encoder
+
+# Encoder -- InternalRow Converter
 
 *Encoder* is the fundamental concept in the *serialization and deserialization (SerDe) framework* in Spark SQL 2.0. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
 

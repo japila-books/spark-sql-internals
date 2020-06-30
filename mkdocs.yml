@@ -50,8 +50,8 @@ plugins:
   - search
   - minify:
       minify_html: true
-  - git-revision-date-localized:
-      type: date
+  # - git-revision-date-localized:
+  #     type: date
   - awesome-pages
 
 extra:
@@ -64,10 +64,77 @@ extra:
       link: https://linkedin.com/in/jaceklaskowski
 
 nav:
-  - Home: index.md
-  - spark-sql.md
-  - spark-sql-dataset-rdd.md
-  - spark-sql-dataset-vs-sql.md
+  - Home:
+    - index.md
+    - spark-sql.md
+    - spark-sql-dataset-rdd.md
+    - spark-sql-dataset-vs-sql.md
+    - Developing Applications: spark-sql-fundamentals-spark-application-development.md
+    - SparkSession:
+      - spark-sql-SparkSession.md
+      - spark-sql-SparkSession-Builder.md
+      - spark-sql-SparkSession-implicits.md
+      - spark-sql-SparkSessionExtensions.md
+    - Dataset:
+      - spark-sql-Dataset.md
+      - Encoder:
+        - spark-sql-Encoder.md
+        - spark-sql-Encoders.md
+        - spark-sql-ExpressionEncoder.md
+        - spark-sql-RowEncoder.md
+        - spark-sql-ExpressionEncoder-LocalDateTime.md
+      - spark-sql-DataFrame.md
+      - spark-sql-Row.md
+    - spark-sql-datasource-api.md
+    - spark-sql-DataFrameReader.md
+    - spark-sql-DataFrameWriter.md
+    - Dataset API:
+      - spark-sql-dataset-operators.md
+      - spark-sql-Dataset-typed-transformations.md
+      - spark-sql-Dataset-untyped-transformations.md
+      - spark-sql-Dataset-basic-actions.md
+      - spark-sql-Dataset-actions.md
+      - spark-sql-DataFrameNaFunctions.md
+      - spark-sql-DataFrameStatFunctions.md
+    - Column:
+      - spark-sql-Column.md
+      - spark-sql-column-operators.md
+      - spark-sql-TypedColumn.md
+    - Basic Aggregation:
+      - spark-sql-basic-aggregation.md
+      - spark-sql-RelationalGroupedDataset.md
+      - spark-sql-KeyValueGroupedDataset.md
+    - Joins:
+      - spark-sql-joins.md
+      - spark-sql-joins-broadcast.md
+    - Window Aggregation:
+      - spark-sql-window-aggregation.md
+      - spark-sql-WindowSpec.md
+      - spark-sql-WindowSpec-Window.md
+    - Standard Functions:
+      - spark-sql-functions.md
+      - spark-sql-aggregate-functions.md
+      - spark-sql-functions-collection.md
+      - spark-sql-functions-datetime.md
+      - spark-sql-functions-regular-functions.md
+      - spark-sql-functions-windows.md
+    - User-Defined Functions:
+      - spark-sql-udfs.md
+      - spark-sql-udfs-blackbox.md
+      - spark-sql-UserDefinedFunction.md
+    - Schema:
+      - spark-sql-schema.md
+      - spark-sql-StructType.md
+      - spark-sql-StructField.md
+      - spark-sql-DataType.md
+    - spark-sql-multi-dimensional-aggregation.md
+    - Caching and Persistence:
+      - spark-sql-caching-and-persistence.md
+      - spark-sql-caching-webui-storage.md
+    - spark-sql-checkpointing.md
+    - spark-sql-UserDefinedAggregateFunction.md
+    - spark-sql-Aggregator.md
+    - spark-sql-properties.md
   - Notable Features:
     - spark-sql-hive-integration.md
     - spark-sql-vectorized-parquet-reader.md

@@ -1,4 +1,6 @@
-== Schema -- Structure of Data
+title: Schema
+
+# Schema -- Structure of Data
 
 A *schema* is the description of the structure of your data (which together create a link:spark-sql-Dataset.adoc[Dataset] in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
 

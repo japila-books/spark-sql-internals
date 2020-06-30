@@ -1,4 +1,6 @@
-== [[Dataset]] Dataset -- Structured Query with Data Encoder
+title: Dataset
+
+# Dataset -- Structured Query with Data Encoder
 
 *Dataset* is a strongly-typed data structure in Spark SQL that represents a structured query.
 
