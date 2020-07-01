@@ -1,4 +1,4 @@
-== [[ParquetFileFormat]] ParquetFileFormat
+# ParquetFileFormat
 
 [[shortName]]
 `ParquetFileFormat` is the link:spark-sql-FileFormat.adoc[FileFormat] for *parquet* data source (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).

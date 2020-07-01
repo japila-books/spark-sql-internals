@@ -1,4 +1,6 @@
-== [[PartitionedFile]] PartitionedFile -- File Block in FileFormat Data Source
+title: PartitionedFile
+
+# PartitionedFile -- File Block in FileFormat Data Source
 
 `PartitionedFile` is a part (_block_) of a file that is in a sense similar to a Pqruet block or a HDFS split.
 

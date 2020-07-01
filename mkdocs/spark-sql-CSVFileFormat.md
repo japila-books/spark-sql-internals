@@ -1,4 +1,4 @@
-== [[CSVFileFormat]] CSVFileFormat
+# CSVFileFormat
 
 [[shortName]]
 `CSVFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *csv* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).

@@ -1,4 +1,4 @@
-== FileIndex Contract
+# FileIndex
 
 :hadoop-version: 2.10.0
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api

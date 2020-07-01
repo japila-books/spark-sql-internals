@@ -1,4 +1,6 @@
-== [[JsonFileFormat]] JsonFileFormat -- Built-In Support for Files in JSON Format
+title: JsonFileFormat
+
+# JsonFileFormat -- Built-In Support for Files in JSON Format
 
 [[shortName]]
 `JsonFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *json* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).

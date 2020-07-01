@@ -1,4 +1,6 @@
-== [[FileFormat]] FileFormat -- Data Sources to Read and Write Data In Files
+title: FileFormat
+
+# FileFormat -- Data Sources to Read and Write Data In Files
 
 `FileFormat` is the <<contract, contract>> for <<implementations, data sources>> that <<buildReader, read>> and <<prepareWrite, write>> data stored in files.
 

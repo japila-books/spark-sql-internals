@@ -1,4 +1,6 @@
-== [[TextBasedFileFormat]] TextBasedFileFormat -- Base for Text Splitable FileFormats
+title: TextBasedFileFormat
+
+# TextBasedFileFormat -- Base for Text Splitable FileFormats
 
 `TextBasedFileFormat` is an extension of the <<spark-sql-FileFormat.adoc#, FileFormat>> contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
 

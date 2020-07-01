@@ -1,4 +1,4 @@
-== CatalogFileIndex
+# CatalogFileIndex
 
 :hadoop-version: 2.10.0
 :java-version: 8

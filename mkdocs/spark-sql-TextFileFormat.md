@@ -1,4 +1,4 @@
-== [[TextFileFormat]] TextFileFormat
+# TextFileFormat
 
 [[shortName]]
 `TextFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *text* format.

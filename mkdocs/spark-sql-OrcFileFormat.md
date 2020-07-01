@@ -1,4 +1,4 @@
-== [[OrcFileFormat]] OrcFileFormat
+# OrcFileFormat
 
 `OrcFileFormat` is a <<spark-sql-FileFormat.adoc#, FileFormat>> that...FIXME
 

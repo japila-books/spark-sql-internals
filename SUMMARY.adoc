@@ -1,35 +1,5 @@
 = Summary
 
-
-=== File-Based Data Sources
-
-. link:spark-sql-FileFormat.adoc[FileFormat]
-.. link:spark-sql-OrcFileFormat.adoc[OrcFileFormat]
-.. link:spark-sql-ParquetFileFormat.adoc[ParquetFileFormat]
-
-. link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat]
-.. link:spark-sql-CSVFileFormat.adoc[CSVFileFormat]
-.. link:spark-sql-JsonFileFormat.adoc[JsonFileFormat]
-.. link:spark-sql-TextFileFormat.adoc[TextFileFormat]
-
-. link:spark-sql-JsonDataSource.adoc[JsonDataSource]
-
-. link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
-. link:FileIndex.adoc[FileIndex]
-.. link:CatalogFileIndex.adoc[CatalogFileIndex]
-.. link:InMemoryFileIndex.adoc[InMemoryFileIndex]
-.. link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
-.. link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex]
-
-. link:spark-sql-FileFormatWriter.adoc[FileFormatWriter]
-. link:spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]
-
-. link:spark-sql-PartitionedFile.adoc[PartitionedFile]
-. link:spark-sql-FileScanRDD.adoc[FileScanRDD]
-
-. link:spark-sql-ParquetReadSupport.adoc[ParquetReadSupport]
-. link:spark-sql-RecordReaderIterator.adoc[RecordReaderIterator]
-
 === Kafka Data Source
 
 . link:spark-sql-kafka.adoc[Kafka Data Source]

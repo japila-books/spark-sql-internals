@@ -1,4 +1,6 @@
-== [[HadoopFsRelation]] HadoopFsRelation -- Relation Of File-Based Data Sources
+title: HadoopFsRelation
+
+# HadoopFsRelation -- Relation Of File-Based Data Sources
 
 `HadoopFsRelation` is a <<spark-sql-BaseRelation.adoc#, BaseRelation>> and <<spark-sql-FileRelation.adoc#, FileRelation>>.
 

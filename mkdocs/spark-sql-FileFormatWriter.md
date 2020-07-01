@@ -1,4 +1,4 @@
-== [[FileFormatWriter]] FileFormatWriter Utility
+# FileFormatWriter Utility
 
 `FileFormatWriter` utility is used to <<write, write the result of a structured query>>.
 

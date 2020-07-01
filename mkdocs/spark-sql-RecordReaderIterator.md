@@ -1,4 +1,6 @@
-== [[RecordReaderIterator]] RecordReaderIterator -- Scala Iterator over Hadoop RecordReader's Values
+title: RecordReaderIterator
+
+# RecordReaderIterator -- Scala Iterator over Hadoop RecordReader's Values
 
 [[creating-instance]]
 [[rowReader]]

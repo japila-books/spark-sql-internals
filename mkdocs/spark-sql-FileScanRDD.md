@@ -1,4 +1,6 @@
-== [[FileScanRDD]] FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
+title: FileScanRDD
+
+# FileScanRDD -- Input RDD of FileSourceScanExec Physical Operator
 
 `FileScanRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is the input RDD of a link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec] physical operator (in <<spark-sql-whole-stage-codegen.adoc#, Whole-Stage Java Code Generation>>).
 

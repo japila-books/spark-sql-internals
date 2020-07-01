@@ -1,0 +1,3 @@
+# SQLHadoopMapReduceCommitProtocol
+
+`SQLHadoopMapReduceCommitProtocol` is...FIXME

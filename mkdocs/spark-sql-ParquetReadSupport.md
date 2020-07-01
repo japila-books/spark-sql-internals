@@ -1,4 +1,6 @@
-== [[ParquetReadSupport]] ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source
+title: ParquetReadSupport
+
+# ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source
 
 `ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of <<spark-sql-UnsafeRow.adoc#, UnsafeRows>>.
 

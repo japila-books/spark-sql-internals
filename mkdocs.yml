@@ -203,7 +203,31 @@ nav:
       - spark-sql-StaticSQLConf.md
       - spark-sql-CatalystConf.md
     - spark-sql-UDFRegistration.md
-  - Hive:
+  - File-Based Data Sources:
+    - FileFormat:
+      - spark-sql-FileFormat.md
+      - spark-sql-OrcFileFormat.md
+      - spark-sql-ParquetFileFormat.md
+    - TextBasedFileFormat:
+      - spark-sql-TextBasedFileFormat.md
+      - spark-sql-CSVFileFormat.md
+      - spark-sql-JsonFileFormat.md
+      - spark-sql-TextFileFormat.md
+    - spark-sql-JsonDataSource.md
+    - spark-sql-BaseRelation-HadoopFsRelation.md
+    - FileIndex:
+      - FileIndex.md
+      - CatalogFileIndex.md
+      - InMemoryFileIndex.md
+      - PartitioningAwareFileIndex.md
+      - PrunedInMemoryFileIndex.md
+    - spark-sql-FileFormatWriter.md
+    - spark-sql-SQLHadoopMapReduceCommitProtocol.md
+    - spark-sql-PartitionedFile.md
+    - spark-sql-FileScanRDD.md
+    - spark-sql-ParquetReadSupport.md
+    - spark-sql-RecordReaderIterator.md
+  - Hive Integration:
     - hive/index.md
     - hive/configuration-properties.md
     - hive/spark-sql-hive-metastore.md
