@@ -1,4 +1,6 @@
-== [[AvroFileFormat]] AvroFileFormat -- FileFormat For Avro-Encoded Files
+title: AvroFileFormat
+
+# AvroFileFormat -- FileFormat For Avro-Encoded Files
 
 `AvroFileFormat` is a <<spark-sql-FileFormat.adoc#, FileFormat>> for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 

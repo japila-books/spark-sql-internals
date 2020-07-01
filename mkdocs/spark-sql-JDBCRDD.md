@@ -1,4 +1,4 @@
-== [[JDBCRDD]] JDBCRDD
+# JDBCRDD
 
 `JDBCRDD` is a `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] that represents a structured query over a table in a database accessed via JDBC.
 

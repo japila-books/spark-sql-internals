@@ -1,4 +1,6 @@
-== [[AvroDataToCatalyst]] AvroDataToCatalyst Unary Expression
+title: AvroDataToCatalyst
+
+# AvroDataToCatalyst Unary Expression
 
 `AvroDataToCatalyst` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that represents <<spark-sql-avro.adoc#from_avro, from_avro>> function in a structured query.
 

@@ -245,6 +245,23 @@ nav:
     - spark-sql-KafkaWriter.md
     - spark-sql-KafkaWriteTask.md
     - spark-sql-JsonUtils.md
+  - Avro Data Source:
+    - spark-sql-avro.md
+    - spark-sql-AvroOptions.md
+    - spark-sql-AvroFileFormat.md
+    - spark-sql-Expression-CatalystDataToAvro.md
+    - spark-sql-Expression-AvroDataToCatalyst.md
+  - JDBC Data Source:
+    - spark-sql-jdbc.md
+    - spark-sql-JDBCOptions.md
+    - spark-sql-JdbcRelationProvider.md
+    - spark-sql-JDBCRelation.md
+    - spark-sql-JDBCRDD.md
+    - spark-sql-JdbcDialect.md
+    - spark-sql-JdbcUtils.md
+  - Console Data Source:
+    - spark-sql-console.md
+    - spark-sql-ConsoleSinkProvider.md
   - Hive Integration:
     - hive/index.md
     - hive/configuration-properties.md

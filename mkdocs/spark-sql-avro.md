@@ -1,4 +1,4 @@
-== Avro Data Source
+# Avro Data Source
 
 Spark SQL supports structured queries over <<spark-sql-AvroFileFormat.adoc#, Avro files>> as well as in <<functions, columns>> (in a `DataFrame`).
 

@@ -1,29 +1,6 @@
 = Summary
 
 
-=== Avro Data Source
-
-. link:spark-sql-avro.adoc[Avro Data Source]
-. link:spark-sql-AvroFileFormat.adoc[AvroFileFormat -- FileFormat For Avro-Encoded Files]
-. link:spark-sql-AvroOptions.adoc[AvroOptions -- Avro Data Source Options]
-. link:spark-sql-Expression-CatalystDataToAvro.adoc[CatalystDataToAvro Unary Expression]
-. link:spark-sql-Expression-AvroDataToCatalyst.adoc[AvroDataToCatalyst Unary Expression]
-
-=== JDBC Data Source
-
-. link:spark-sql-jdbc.adoc[JDBC Data Source]
-. link:spark-sql-JDBCOptions.adoc[JDBCOptions]
-. link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider]
-. link:spark-sql-JDBCRelation.adoc[JDBCRelation]
-. link:spark-sql-JDBCRDD.adoc[JDBCRDD]
-. link:spark-sql-JdbcDialect.adoc[JdbcDialect]
-. link:spark-sql-JdbcUtils.adoc[JdbcUtils Helper Object]
-
-=== Console Data Source
-
-. link:spark-sql-console.adoc[Console Data Source]
-. link:spark-sql-ConsoleSinkProvider.adoc[ConsoleSinkProvider]
-
 == Extending Spark SQL / Data Source API V2
 
 . link:spark-sql-DataSourceV2.adoc[DataSourceV2]

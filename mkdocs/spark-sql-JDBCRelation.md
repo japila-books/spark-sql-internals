@@ -1,4 +1,6 @@
-== [[JDBCRelation]] JDBCRelation -- Relation with Inserting or Overwriting Data, Column Pruning and Filter Pushdown
+title: JDBCRelation
+
+# JDBCRelation -- Relation with Inserting or Overwriting Data, Column Pruning and Filter Pushdown
 
 `JDBCRelation` is a <<BaseRelation, BaseRelation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
 

@@ -1,4 +1,6 @@
-== [[CatalystDataToAvro]] CatalystDataToAvro Unary Expression
+title: CatalystDataToAvro
+
+# CatalystDataToAvro Unary Expression
 
 `CatalystDataToAvro` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that represents <<spark-sql-avro.adoc#to_avro, to_avro>> function in a structured query.
 
@@ -8,8 +10,7 @@
 
 `CatalystDataToAvro` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
 
-[source, scala]
-----
+```
 import org.apache.spark.sql.avro.CatalystDataToAvro
 val catalystDataToAvro = CatalystDataToAvro($"id".expr)
 
@@ -29,10 +30,9 @@ def prettyPrint(code: String) = println(trim(code))
 scala> println(trim(code))
 // FIXME: Finish me once https://issues.apache.org/jira/browse/SPARK-26063 is fixed
 // See the following example
-----
+```
 
-[source, scala]
-----
+```
 // Let's use a workaround to create a CatalystDataToAvro expression
 // with the child resolved
 val q = spark.range(1).withColumn("to_avro_id", to_avro('id))
@@ -70,7 +70,7 @@ scala> println(trim(code.toString))
 long value_7 = i.getLong(0);
 byte[] value_6 = null;
 value_6 = (byte[]) ((org.apache.spark.sql.avro.CatalystDataToAvro) references[2] /* this */).nullSafeEval(value_7);
-----
+```
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 

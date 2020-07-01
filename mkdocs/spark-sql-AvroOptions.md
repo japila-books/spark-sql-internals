@@ -1,4 +1,6 @@
-== [[AvroOptions]] AvroOptions -- Avro Data Source Options
+title: Options
+
+# AvroOptions -- Avro Data Source Options
 
 `AvroOptions` represents the <<options, options>> of the <<spark-sql-avro.adoc#, Avro data source>>.
 

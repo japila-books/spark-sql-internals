@@ -1,4 +1,6 @@
-== [[JDBCOptions]] JDBCOptions -- JDBC Data Source Options
+title: Options
+
+# JDBCOptions -- JDBC Data Source Options
 
 `JDBCOptions` represents the <<options, options>> of the <<spark-sql-jdbc.adoc#, JDBC data source>>.
 

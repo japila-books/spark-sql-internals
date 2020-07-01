@@ -1,4 +1,4 @@
-== [[JdbcRelationProvider]] JdbcRelationProvider
+# JdbcRelationProvider
 
 [[shortName]]
 `JdbcRelationProvider` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself to handle *jdbc* data source format.

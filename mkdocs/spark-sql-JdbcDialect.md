@@ -1,4 +1,4 @@
-== [[JdbcDialect]] JdbcDialect
+# JdbcDialect
 
 `JdbcDialect` is the <<contract, base>> of <<extensions, JDBC dialects>> that <<canHandle, handle a specific JDBC URL>> (and handle necessary type-related conversions to properly load a data from a table into a `DataFrame`).
 

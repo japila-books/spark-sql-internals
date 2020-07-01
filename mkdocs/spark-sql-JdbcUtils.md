@@ -1,4 +1,6 @@
-== [[JdbcUtils]] JdbcUtils Helper Object
+title: JdbcUtils
+
+# JdbcUtils Helper Object
 
 `JdbcUtils` is a Scala object with <<methods, methods>> to support link:spark-sql-JDBCRDD.adoc[JDBCRDD], link:spark-sql-JDBCRelation.adoc[JDBCRelation] and link:spark-sql-JdbcRelationProvider.adoc[JdbcRelationProvider].
 
