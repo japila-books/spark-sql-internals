@@ -1,66 +1,6 @@
 = Summary
 
 
-== Extending Spark SQL / Data Source API V2
-
-. link:spark-sql-DataSourceV2.adoc[DataSourceV2]
-. link:spark-sql-ReadSupport.adoc[ReadSupport Contract]
-. link:spark-sql-WriteSupport.adoc[WriteSupport Contract]
-
-. link:spark-sql-DataSourceReader.adoc[DataSourceReader]
-.. link:spark-sql-SupportsPushDownFilters.adoc[SupportsPushDownFilters]
-.. link:spark-sql-SupportsPushDownRequiredColumns.adoc[SupportsPushDownRequiredColumns]
-.. link:spark-sql-SupportsReportPartitioning.adoc[SupportsReportPartitioning]
-.. link:spark-sql-SupportsReportStatistics.adoc[SupportsReportStatistics]
-.. link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch]
-
-. link:spark-sql-DataSourceWriter.adoc[DataSourceWriter]
-
-. link:spark-sql-SessionConfigSupport.adoc[SessionConfigSupport]
-
-. link:spark-sql-InputPartition.adoc[InputPartition]
-. link:spark-sql-InputPartitionReader.adoc[InputPartitionReader]
-
-. link:spark-sql-DataWriter.adoc[DataWriter]
-
-. link:spark-sql-DataWriterFactory.adoc[DataWriterFactory]
-.. link:spark-sql-InternalRowDataWriterFactory.adoc[InternalRowDataWriterFactory]
-
-. link:spark-sql-DataSourceV2StringFormat.adoc[DataSourceV2StringFormat]
-
-. link:spark-sql-DataSourceRDD.adoc[DataSourceRDD]
-.. link:spark-sql-DataSourceRDDPartition.adoc[DataSourceRDDPartition]
-
-. link:spark-sql-DataWritingSparkTask.adoc[DataWritingSparkTask Partition Processing Function]
-. link:spark-sql-DataSourceV2Utils.adoc[DataSourceV2Utils Helper Object]
-
-== Extending Spark SQL / Data Source API V1
-
-. link:spark-sql-DataSource.adoc[DataSource]
-. link:spark-sql-datasource-custom-formats.adoc[Custom Data Source Formats]
-
-=== Data Source Providers / Relation Providers
-
-. link:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
-. link:spark-sql-DataSourceRegister.adoc[DataSourceRegister]
-. link:spark-sql-RelationProvider.adoc[RelationProvider]
-. link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
-
-=== Data Source Relations / Extension Contracts
-
-. link:spark-sql-BaseRelation.adoc[BaseRelation]
-. link:spark-sql-FileRelation.adoc[FileRelation]
-
-. link:spark-sql-CatalystScan.adoc[CatalystScan]
-. link:spark-sql-InsertableRelation.adoc[InsertableRelation]
-. link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan]
-. link:spark-sql-PrunedScan.adoc[PrunedScan]
-. link:spark-sql-TableScan.adoc[TableScan]
-
-=== Others
-
-. link:spark-sql-Filter.adoc[Data Source Filter Predicate (For Filter Pushdown)]
-
 == Structured Query Execution
 
 . link:spark-sql-QueryExecution.adoc[QueryExecution]

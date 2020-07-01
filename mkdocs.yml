@@ -290,6 +290,49 @@ nav:
     - hive/ResolveHiveSerdeTable.md
     - hive/DetermineTableStats.md
     - hive/HiveAnalysis.md
+  - Extending Spark SQL:
+    - Data Source API V2:
+      - spark-sql-DataSourceV2.md
+      - spark-sql-ReadSupport.md
+      - spark-sql-WriteSupport.md
+      - DataSourceReader:
+        - spark-sql-DataSourceReader.md
+        - spark-sql-SupportsPushDownFilters.md
+        - spark-sql-SupportsPushDownRequiredColumns.md
+        - spark-sql-SupportsReportPartitioning.md
+        - spark-sql-SupportsReportStatistics.md
+        - spark-sql-SupportsScanColumnarBatch.md
+      - spark-sql-DataSourceWriter.md
+      - spark-sql-SessionConfigSupport.md
+      - spark-sql-InputPartition.md
+      - spark-sql-InputPartitionReader.md
+      - spark-sql-DataWriter.md
+      - DataWriterFactory:
+        - spark-sql-DataWriterFactory.md
+        - spark-sql-InternalRowDataWriterFactory.md
+      - spark-sql-DataSourceV2StringFormat.md
+      - DataSourceRDD:
+        - spark-sql-DataSourceRDD.md
+        - spark-sql-DataSourceRDDPartition.md
+      - spark-sql-DataWritingSparkTask.md
+      - spark-sql-DataSourceV2Utils.md
+    - Data Source API V1:
+      - spark-sql-DataSource.md
+      - spark-sql-datasource-custom-formats.md
+      - Relation Providers:
+        - spark-sql-CreatableRelationProvider.md
+        - spark-sql-DataSourceRegister.md
+        - spark-sql-RelationProvider.md
+        - spark-sql-SchemaRelationProvider.md
+      - Extension Contracts:
+        - spark-sql-BaseRelation.md
+        - spark-sql-FileRelation.md
+        - spark-sql-CatalystScan.md
+        - spark-sql-InsertableRelation.md
+        - spark-sql-PrunedFilteredScan.md
+        - spark-sql-PrunedScan.md
+        - spark-sql-TableScan.md
+      - spark-sql-Filter.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

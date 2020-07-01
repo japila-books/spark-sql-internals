@@ -1,3 +1,0 @@
-== [[DataWriter]] DataWriter
-
-`DataWriter` is...FIXME
