@@ -1,4 +1,6 @@
-== [[ExternalCatalog]] ExternalCatalog Contract -- External Catalog (Metastore) of Permanent Relational Entities
+title: ExternalCatalog
+
+# ExternalCatalog -- External Catalog (Metastore) of Permanent Relational Entities
 
 `ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _metadata registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
 

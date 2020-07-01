@@ -1,4 +1,4 @@
-== [[CachedRDDBuilder]] CachedRDDBuilder
+# CachedRDDBuilder
 
 `CachedRDDBuilder` is <<creating-instance, created>> exclusively when <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operator is created.
 

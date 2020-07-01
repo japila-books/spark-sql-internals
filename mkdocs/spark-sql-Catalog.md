@@ -1,4 +1,6 @@
-== [[Catalog]] Catalog -- Metastore Management Interface
+title: Catalog
+
+# Catalog -- Metastore Management Interface
 
 `Catalog` is the <<contract, interface>> for managing a *metastore* (aka _metadata catalog_) of relational entities (e.g. database(s), tables, functions, table columns and temporary views).
 

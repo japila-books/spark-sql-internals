@@ -1,42 +1,5 @@
 = Summary
 
-== SparkSession Registries
-
-. link:spark-sql-Catalog.adoc[Catalog -- Metastore Management Interface]
-.. link:spark-sql-CatalogImpl.adoc[CatalogImpl]
-
-. link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager -- Management Interface of QueryExecutionListeners]
-. link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
-
-. link:spark-sql-ExternalCatalog.adoc[ExternalCatalog Contract -- External Catalog (Metastore) of Permanent Relational Entities]
-.. link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
-
-. link:spark-sql-FunctionRegistry.adoc[FunctionRegistry -- Contract for Function Registries (Catalogs)]
-
-. link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager -- Management Interface of Global Temporary Views]
-
-. link:spark-sql-SessionCatalog.adoc[SessionCatalog -- Session-Scoped Catalog of Relational Entities]
-.. link:spark-sql-CatalogTable.adoc[CatalogTable -- Table Specification (Native Table Metadata)]
-... link:spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat -- Storage Specification of Table or Partition]
-... link:spark-sql-CatalogTablePartition.adoc[CatalogTablePartition -- Partition Specification of Table]
-... link:spark-sql-BucketSpec.adoc[BucketSpec -- Bucketing Specification of Table]
-
-. link:spark-sql-SessionState.adoc[SessionState]
-.. link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder -- Generic Builder of SessionState]
-.. link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
-
-. link:spark-sql-SharedState.adoc[SharedState -- State Shared Across SparkSessions]
-
-. link:spark-sql-CacheManager.adoc[CacheManager -- In-Memory Cache for Tables and Views]
-.. link:spark-sql-CachedRDDBuilder.adoc[CachedRDDBuilder]
-
-. link:spark-sql-RuntimeConfig.adoc[RuntimeConfig -- Management Interface of Runtime Configuration]
-
-. link:spark-sql-SQLConf.adoc[SQLConf]
-.. link:spark-sql-StaticSQLConf.adoc[StaticSQLConf]
-.. link:spark-sql-CatalystConf.adoc[CatalystConf]
-
-. link:spark-sql-UDFRegistration.adoc[UDFRegistration -- Session-Scoped FunctionRegistry]
 
 === File-Based Data Sources
 

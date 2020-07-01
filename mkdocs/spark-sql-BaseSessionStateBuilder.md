@@ -1,4 +1,6 @@
-== [[BaseSessionStateBuilder]] BaseSessionStateBuilder -- Generic Builder of SessionState
+title: BaseSessionStateBuilder
+
+# BaseSessionStateBuilder -- Generic Builder of SessionState
 
 `BaseSessionStateBuilder` is the <<contract, abstraction>> of <<implementations, builders>> that can <<newBuilder, produce a new BaseSessionStateBuilder>> to <<createClone, create a SessionState>>.
 

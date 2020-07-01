@@ -1,4 +1,4 @@
-== [[CatalogImpl]] CatalogImpl
+# CatalogImpl
 
 `CatalogImpl` is the link:spark-sql-Catalog.adoc[Catalog] in Spark SQL that...FIXME
 

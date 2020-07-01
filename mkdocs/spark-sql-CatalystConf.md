@@ -1,4 +1,4 @@
-== [[CatalystConf]] CatalystConf
+# CatalystConf
 
 `CatalystConf` is...FIXME
 

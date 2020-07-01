@@ -1,4 +1,6 @@
-== [[SharedState]] SharedState -- State Shared Across SparkSessions
+title: SharedState
+
+# SharedState -- State Shared Across SparkSessions
 
 `SharedState` holds the <<attributes, shared state>> across multiple link:spark-sql-SparkSession.adoc#newSession[SparkSessions].
 

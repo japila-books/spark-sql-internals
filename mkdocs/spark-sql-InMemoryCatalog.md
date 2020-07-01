@@ -1,4 +1,4 @@
-== [[InMemoryCatalog]] InMemoryCatalog
+# InMemoryCatalog
 
 `InMemoryCatalog` is...FIXME
 

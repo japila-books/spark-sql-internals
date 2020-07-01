@@ -1,4 +1,6 @@
-== [[GlobalTempViewManager]] GlobalTempViewManager -- Management Interface of Global Temporary Views
+title: GlobalTempViewManager
+
+# GlobalTempViewManager -- Management Interface of Global Temporary Views
 
 `GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views (that `SessionCatalog` uses when requested to <<spark-sql-SessionCatalog.adoc#createGlobalTempView, create>>, <<spark-sql-SessionCatalog.adoc#alterTempViewDefinition, alter>> or <<spark-sql-SessionCatalog.adoc#dropGlobalTempView, drop>> global temporary views).
 

@@ -1,4 +1,6 @@
-== [[CatalogTable]] CatalogTable -- Table Specification (Metadata)
+title: CatalogTable
+
+# CatalogTable -- Table Specification (Metadata)
 
 `CatalogTable` is the *specification* (_metadata_) of a table.
 

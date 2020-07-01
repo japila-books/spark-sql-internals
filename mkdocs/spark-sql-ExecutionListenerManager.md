@@ -1,4 +1,6 @@
-== [[ExecutionListenerManager]] ExecutionListenerManager -- Management Interface of QueryExecutionListeners
+title: ExecutionListenerManager
+
+# ExecutionListenerManager -- Management Interface of QueryExecutionListeners
 
 `ExecutionListenerManager` is the <<methods, management interface>> for `QueryExecutionListeners` that listen for execution metrics:
 

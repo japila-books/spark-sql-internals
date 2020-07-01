@@ -1,4 +1,6 @@
-== [[CatalogStorageFormat]] CatalogStorageFormat -- Storage Specification of Table or Partition
+title: CatalogStorageFormat
+
+# CatalogStorageFormat -- Storage Specification of Table or Partition
 
 :java-version: 8
 :java-api: https://docs.oracle.com/javase/{java-version}/docs/api

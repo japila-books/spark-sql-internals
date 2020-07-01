@@ -1,4 +1,6 @@
-== [[CatalogTablePartition]] CatalogTablePartition -- Partition Specification of Table
+title: CatalogTablePartition
+
+# CatalogTablePartition -- Partition Specification of Table
 
 `CatalogTablePartition` is the *partition specification* of a table, i.e. the metadata of the partitions of a table.
 

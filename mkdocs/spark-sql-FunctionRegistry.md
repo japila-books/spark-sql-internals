@@ -1,4 +1,6 @@
-== [[FunctionRegistry]] FunctionRegistry -- Contract for Function Registries (Catalogs)
+title: FunctionRegistry
+
+# FunctionRegistry -- Contract for Function Registries (Catalogs)
 
 `FunctionRegistry` is the <<contract, contract>> of <<implementations, function registries>> (_catalogs_) of native and user-defined functions.
 

@@ -1,4 +1,4 @@
-== [[ExperimentalMethods]] ExperimentalMethods
+# ExperimentalMethods
 
 `ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in <<spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers, SparkOptimizer>> and <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>, respectively.
 

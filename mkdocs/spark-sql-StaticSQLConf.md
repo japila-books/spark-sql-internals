@@ -1,4 +1,6 @@
-== [[StaticSQLConf]] StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration
+title: StaticSQLConf
+
+# StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration
 
 `StaticSQLConf` holds <<properties, cross-session, immutable and static SQL configuration properties>>.
 

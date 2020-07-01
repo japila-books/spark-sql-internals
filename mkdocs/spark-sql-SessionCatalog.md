@@ -1,4 +1,6 @@
-== [[SessionCatalog]] SessionCatalog -- Session-Scoped Catalog of Relational Entities
+title: SessionCatalog
+
+# SessionCatalog -- Session-Scoped Catalog of Relational Entities
 
 `SessionCatalog` is the catalog (_registry_) of relational entities, i.e. databases, tables, views, partitions, and functions (in a <<spark-sql-SparkSession.adoc#catalog, SparkSession>>).
 

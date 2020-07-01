@@ -1,4 +1,6 @@
-== [[RuntimeConfig]] RuntimeConfig -- Management Interface of Runtime Configuration
+title: RuntimeConfig
+
+# RuntimeConfig -- Management Interface of Runtime Configuration
 
 `RuntimeConfig` is the <<methods, management interface>> of the <<sqlConf, runtime configuration>>.
 

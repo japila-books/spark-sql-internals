@@ -1,4 +1,6 @@
-== [[CacheManager]] CacheManager -- In-Memory Cache for Tables and Views
+title: CacheManager
+
+# CacheManager -- In-Memory Cache for Tables and Views
 
 `CacheManager` is an in-memory cache (_registry_) for structured queries (by their link:spark-sql-LogicalPlan.adoc[logical plans]).
 

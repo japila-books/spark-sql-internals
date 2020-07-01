@@ -17,7 +17,9 @@ theme:
   name: 'material'
   language: en
   features:
-    - tabs
+    # I have to reconsider using tabs
+    # once I make up my mind about how to structure tabs right
+    # - tabs
     - instant
 
 markdown_extensions:
@@ -170,6 +172,37 @@ nav:
     - spark-sql-catalyst-dsl.md
   - Tools:
     - tools/spark-sql-spark-sql.md
+  - SparkSession Registries:
+    - Catalog:
+      - spark-sql-Catalog.md
+      - spark-sql-CatalogImpl.md
+    - spark-sql-ExecutionListenerManager.md
+    - spark-sql-ExperimentalMethods.md
+    - ExternalCatalog:
+      - spark-sql-ExternalCatalog.md
+      - spark-sql-InMemoryCatalog.md
+    - spark-sql-FunctionRegistry.md
+    - spark-sql-GlobalTempViewManager.md
+    - SessionCatalog:
+      - spark-sql-SessionCatalog.md
+      - spark-sql-CatalogTable.md
+      - spark-sql-CatalogStorageFormat.md
+      - spark-sql-CatalogTablePartition.md
+      - spark-sql-BucketSpec.md
+    - SessionState:
+      - spark-sql-SessionState.md
+      - spark-sql-BaseSessionStateBuilder.md
+      - spark-sql-SessionStateBuilder.md
+    - spark-sql-SharedState.md
+    - CacheManager:
+      - spark-sql-CacheManager.md
+      - spark-sql-CachedRDDBuilder.md
+    - spark-sql-RuntimeConfig.md
+    - SQLConf:
+      - spark-sql-SQLConf.md
+      - spark-sql-StaticSQLConf.md
+      - spark-sql-CatalystConf.md
+    - spark-sql-UDFRegistration.md
   - Hive:
     - hive/index.md
     - hive/configuration-properties.md

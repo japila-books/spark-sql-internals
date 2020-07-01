@@ -1,4 +1,6 @@
-== [[SQLConf]] SQLConf -- Internal Configuration Store
+title: SQLConf
+
+# SQLConf -- Internal Configuration Store
 
 `SQLConf` is an *internal key-value configuration store* for <<parameters, parameters and hints>> used in Spark SQL.
 

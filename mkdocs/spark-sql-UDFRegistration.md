@@ -1,4 +1,6 @@
-== [[UDFRegistration]] UDFRegistration -- Session-Scoped FunctionRegistry
+title: UDFRegistration
+
+# UDFRegistration -- Session-Scoped FunctionRegistry
 
 `UDFRegistration` is an interface to the session-scoped <<functionRegistry, FunctionRegistry>> to register user-defined functions (UDFs) and <<register, user-defined aggregate functions>> (UDAFs).
 
