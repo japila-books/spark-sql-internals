@@ -1,4 +1,4 @@
-== [[KafkaSourceProvider]] KafkaSourceProvider
+# KafkaSourceProvider
 
 [[shortName]]
 `KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself to handle *kafka* data source format.

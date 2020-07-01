@@ -1,4 +1,4 @@
-== [[KafkaOffsetRangeLimit]] KafkaOffsetRangeLimit
+# KafkaOffsetRangeLimit
 
 `KafkaOffsetRangeLimit` is the desired <<extensions, offset range limits>> for starting, ending, and specific offsets.
 

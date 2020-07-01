@@ -1,4 +1,4 @@
-== Kafka Data Source
+# Kafka Data Source
 
 Spark SQL supports <<reading, reading>> data from or <<writing, writing>> data to one or more topics in Apache Kafka.
 

@@ -1,22 +1,5 @@
 = Summary
 
-=== Kafka Data Source
-
-. link:spark-sql-kafka.adoc[Kafka Data Source]
-. link:spark-sql-kafka-options.adoc[Kafka Data Source Options]
-. link:spark-sql-KafkaSourceProvider.adoc[KafkaSourceProvider]
-. link:spark-sql-KafkaRelation.adoc[KafkaRelation]
-. link:spark-sql-KafkaSourceRDD.adoc[KafkaSourceRDD]
-.. link:spark-sql-KafkaSourceRDDOffsetRange.adoc[KafkaSourceRDDOffsetRange]
-.. link:spark-sql-KafkaSourceRDDPartition.adoc[KafkaSourceRDDPartition]
-. link:spark-sql-ConsumerStrategy.adoc[ConsumerStrategy Contract -- Kafka Consumer Providers]
-. link:spark-sql-KafkaOffsetReader.adoc[KafkaOffsetReader]
-. link:spark-sql-KafkaOffsetRangeLimit.adoc[KafkaOffsetRangeLimit]
-. link:spark-sql-KafkaDataConsumer.adoc[KafkaDataConsumer Contract]
-.. link:spark-sql-InternalKafkaConsumer.adoc[InternalKafkaConsumer]
-. link:spark-sql-KafkaWriter.adoc[KafkaWriter Helper Object -- Writing Structured Queries to Kafka]
-.. link:spark-sql-KafkaWriteTask.adoc[KafkaWriteTask]
-. link:spark-sql-JsonUtils.adoc[JsonUtils Helper Object]
 
 === Avro Data Source
 

@@ -1,4 +1,4 @@
-== [[KafkaWriteTask]] KafkaWriteTask
+# KafkaWriteTask
 
 `KafkaWriteTask` is used to <<execute, write rows>> (from a structured query) to Apache Kafka.
 

@@ -1,4 +1,6 @@
-== [[JsonUtils]] JsonUtils Helper Object
+title: JsonUtils
+
+# JsonUtils Helper Object
 
 `JsonUtils` is a Scala object with <<methods, methods>> for serializing and deserializing Kafka https://kafka.apache.org/20/javadoc/org/apache/kafka/common/TopicPartition.html[TopicPartitions] to and from a single JSON text.
 

@@ -1,4 +1,6 @@
-== [[KafkaWriter]] KafkaWriter Helper Object -- Writing Structured Queries to Kafka
+title: KafkaWriter
+
+# KafkaWriter Helper Object -- Writing Structured Queries to Kafka
 
 `KafkaWriter` is a Scala object that is used to <<write, write>> the rows of a batch (or a streaming) structured query to Apache Kafka.
 

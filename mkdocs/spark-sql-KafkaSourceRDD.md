@@ -1,4 +1,4 @@
-== [[KafkaSourceRDD]] KafkaSourceRDD
+# KafkaSourceRDD
 
 `KafkaSourceRDD` is an `RDD` of Kafka's https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/ConsumerRecords.html[ConsumerRecords] (with keys and values being collections of bytes, i.e. `Array[Byte]`).
 

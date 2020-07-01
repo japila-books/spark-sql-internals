@@ -1,4 +1,4 @@
-== [[KafkaRelation]] KafkaRelation
+# KafkaRelation
 
 `KafkaRelation` is a <<spark-sql-BaseRelation.adoc#, BaseRelation>> with a <<spark-sql-TableScan.adoc#, TableScan>>.
 

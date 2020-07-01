@@ -227,6 +227,24 @@ nav:
     - spark-sql-FileScanRDD.md
     - spark-sql-ParquetReadSupport.md
     - spark-sql-RecordReaderIterator.md
+  - Kafka Data Source:
+    - spark-sql-kafka.md
+    - spark-sql-kafka-options.md
+    - spark-sql-KafkaSourceProvider.md
+    - spark-sql-KafkaRelation.md
+    - KafkaSourceRDD:
+      - spark-sql-KafkaSourceRDD.md
+      - spark-sql-KafkaSourceRDDOffsetRange.md
+      - spark-sql-KafkaSourceRDDPartition.md
+    - spark-sql-ConsumerStrategy.md
+    - spark-sql-KafkaOffsetReader.md
+    - spark-sql-KafkaOffsetRangeLimit.md
+    - KafkaDataConsumer:
+      - spark-sql-KafkaDataConsumer.md
+      - spark-sql-InternalKafkaConsumer.md
+    - spark-sql-KafkaWriter.md
+    - spark-sql-KafkaWriteTask.md
+    - spark-sql-JsonUtils.md
   - Hive Integration:
     - hive/index.md
     - hive/configuration-properties.md

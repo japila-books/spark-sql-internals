@@ -1,4 +1,6 @@
-== [[ConsumerStrategy]] ConsumerStrategy Contract -- Kafka Consumer Providers
+title: ConsumerStrategy
+
+# ConsumerStrategy -- Kafka Consumer Providers
 
 `ConsumerStrategy` is the <<contract, contract>> for <<implementations, Kafka Consumer providers>> that can <<createConsumer, create a Kafka Consumer>> given Kafka parameters.
 

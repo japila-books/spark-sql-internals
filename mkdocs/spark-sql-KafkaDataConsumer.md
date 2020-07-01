@@ -1,4 +1,4 @@
-== [[KafkaDataConsumer]] KafkaDataConsumer Contract
+# KafkaDataConsumer
 
 `KafkaDataConsumer` is the <<contract, contract>> for <<implementations, KafkaDataConsumers>> that use an <<internalConsumer, InternalKafkaConsumer>> for the following:
 

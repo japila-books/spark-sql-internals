@@ -1,4 +1,4 @@
-== [[InternalKafkaConsumer]] InternalKafkaConsumer
+# InternalKafkaConsumer
 
 `InternalKafkaConsumer` is...FIXME
 

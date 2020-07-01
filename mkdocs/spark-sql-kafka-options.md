@@ -1,4 +1,6 @@
-== Kafka Data Source Options
+title: Options
+
+# Kafka Data Source Options
 
 [[options]]
 .Kafka Data Source Options

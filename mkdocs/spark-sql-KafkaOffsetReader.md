@@ -1,4 +1,4 @@
-== [[KafkaOffsetReader]] KafkaOffsetReader
+# KafkaOffsetReader
 
 `KafkaOffsetReader` is used to query a Kafka cluster for partition offsets.
 

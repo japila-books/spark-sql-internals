@@ -1,4 +1,4 @@
-== [[KafkaSourceRDDOffsetRange]] KafkaSourceRDDOffsetRange
+# KafkaSourceRDDOffsetRange
 
 `KafkaSourceRDDOffsetRange` is an <<spark-sql-KafkaSourceRDDPartition.adoc#offsetRange, offset range>> that one  `KafkaSourceRDDPartition` partition of a <<spark-sql-KafkaSourceRDD.adoc#getPartitions, KafkaSourceRDD>> has to read.
 
