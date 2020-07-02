@@ -1,4 +1,4 @@
-== [[JoinEstimation]] JoinEstimation
+# JoinEstimation
 
 `JoinEstimation` is a utility that <<estimate, computes statistics estimates and query hints of a Join logical operator>>.
 

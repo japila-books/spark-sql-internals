@@ -1,4 +1,6 @@
-== [[Analyzer]] Analyzer -- Logical Query Plan Analyzer
+title: Analyzer
+
+# Analyzer -- Logical Query Plan Analyzer
 
 `Analyzer` (aka _Spark Analyzer_ or _Query Analyzer_) is the *logical query plan analyzer* that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
 

@@ -1,4 +1,6 @@
-== [[Statistics]] Statistics -- Estimates of Plan Statistics and Query Hints
+title: Statistics
+
+# Statistics -- Estimates of Plan Statistics and Query Hints
 
 [[creating-instance]]
 `Statistics` holds the statistics estimates and query hints of a logical operator:

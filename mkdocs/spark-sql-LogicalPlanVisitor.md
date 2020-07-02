@@ -1,4 +1,6 @@
-== [[LogicalPlanVisitor]] LogicalPlanVisitor -- Contract for Computing Statistic Estimates and Query Hints of Logical Plan
+title: LogicalPlanVisitor
+
+# LogicalPlanVisitor -- Contract for Computing Statistic Estimates and Query Hints of Logical Plan
 
 `LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute link:spark-sql-Statistics.adoc[estimates of plan statistics and query hints].
 

@@ -1,4 +1,6 @@
-== [[CheckAnalysis]] CheckAnalysis -- Analysis Validation
+title: CheckAnalysis
+
+# CheckAnalysis -- Analysis Validation
 
 `CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that link:spark-sql-Analyzer.adoc[Analyzer] uses to check if a link:spark-sql-LogicalPlan.adoc[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
 

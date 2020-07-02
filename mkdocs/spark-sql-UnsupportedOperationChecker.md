@@ -1,4 +1,4 @@
-== [[UnsupportedOperationChecker]] UnsupportedOperationChecker
+# UnsupportedOperationChecker
 
 `UnsupportedOperationChecker` is...FIXME
 

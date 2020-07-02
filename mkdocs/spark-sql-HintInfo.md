@@ -1,4 +1,4 @@
-== [[HintInfo]] HintInfo
+# HintInfo
 
 [[creating-instance]]
 `HintInfo` takes a single <<broadcast, broadcast>> flag when created.

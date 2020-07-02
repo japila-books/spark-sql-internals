@@ -1,4 +1,6 @@
-== [[Partitioning]] Partitioning -- Specification of Physical Operator's Output Partitions
+title: Partitioning
+
+# Partitioning -- Specification of Physical Operator's Output Partitions
 
 `Partitioning` is the <<contract, contract>> to hint the Spark Physical Optimizer for the number of partitions the output of a <<spark-sql-SparkPlan.adoc#, physical operator>> should be split across.
 

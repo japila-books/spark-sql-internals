@@ -1,4 +1,4 @@
-== [[AggregateEstimation]] AggregateEstimation
+# AggregateEstimation
 
 `AggregateEstimation` is...FIXME
 

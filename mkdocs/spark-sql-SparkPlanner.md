@@ -1,4 +1,6 @@
-== [[SparkPlanner]] SparkPlanner -- Spark Query Planner
+title: SparkPlanner
+
+# SparkPlanner -- Spark Query Planner
 
 `SparkPlanner` is a concrete link:spark-sql-catalyst-QueryPlanner.adoc[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:spark-sql-SparkPlan.adoc[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
 

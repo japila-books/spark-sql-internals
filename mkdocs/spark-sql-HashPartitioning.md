@@ -1,4 +1,4 @@
-== [[HashPartitioning]] HashPartitioning
+# HashPartitioning
 
 [[Partitioning]]
 `HashPartitioning` is a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).

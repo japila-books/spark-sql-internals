@@ -1,4 +1,6 @@
-== [[SizeInBytesOnlyStatsPlanVisitor]] SizeInBytesOnlyStatsPlanVisitor -- LogicalPlanVisitor for Total Size (in Bytes) Statistic Only
+title: SizeInBytesOnlyStatsPlanVisitor
+
+# SizeInBytesOnlyStatsPlanVisitor -- LogicalPlanVisitor for Total Size (in Bytes) Statistic Only
 
 `SizeInBytesOnlyStatsPlanVisitor` is a link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor] that computes a single dimension for link:spark-sql-Statistics.adoc[plan statistics], i.e. the total size (in bytes).
 

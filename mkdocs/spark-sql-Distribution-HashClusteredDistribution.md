@@ -1,4 +1,4 @@
-== [[HashClusteredDistribution]] HashClusteredDistribution
+# HashClusteredDistribution
 
 `HashClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<expressions, hash expressions>> and a requested number of partitions.
 

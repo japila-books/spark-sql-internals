@@ -1,4 +1,6 @@
-== [[SparkStrategy]] SparkStrategy -- Base for Execution Planning Strategies
+title: SparkStrategy
+
+# SparkStrategy -- Base for Execution Planning Strategies
 
 `SparkStrategy` is a Catalyst link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] into zero or more link:spark-sql-SparkPlan.adoc[physical plans].
 

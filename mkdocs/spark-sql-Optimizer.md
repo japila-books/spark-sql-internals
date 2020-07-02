@@ -1,4 +1,6 @@
-== [[Optimizer]] Catalyst Optimizer -- Generic Logical Query Plan Optimizer
+title: Optimizer
+
+# Catalyst Optimizer -- Generic Logical Query Plan Optimizer
 
 `Optimizer` (aka *Catalyst Optimizer*) is the base of <<extensions, logical query plan optimizers>> that defines the <<batches, rule batches of logical optimizations>> (i.e. logical optimizations that are the rules that transform the query plan of a structured query to produce the <<spark-sql-QueryExecution.adoc#optimizedPlan, optimized logical plan>>).
 

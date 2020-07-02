@@ -1,4 +1,4 @@
-== [[AllTuples]] AllTuples
+# AllTuples
 
 [[requiredNumPartitions]]
 `AllTuples` is a link:spark-sql-Distribution.adoc[Distribution] that indicates to use one partition only.

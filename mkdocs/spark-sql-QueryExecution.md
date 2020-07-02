@@ -1,4 +1,6 @@
-== [[QueryExecution]] QueryExecution -- Structured Query Execution Pipeline
+title: QueryExecution
+
+# QueryExecution -- Structured Query Execution Pipeline
 
 `QueryExecution` is the <<execution-pipeline, execution pipeline>> (_workflow_) of a <<logical, structured query>>.
 

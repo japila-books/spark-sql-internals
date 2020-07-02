@@ -333,6 +333,43 @@ nav:
         - spark-sql-PrunedScan.md
         - spark-sql-TableScan.md
       - spark-sql-Filter.md
+  - Structured Query Execution:
+    - QueryExecution:
+      - spark-sql-QueryExecution.md
+      - spark-sql-UnsupportedOperationChecker.md
+    - Analyzer:
+      - spark-sql-Analyzer.md
+      - spark-sql-Analyzer-CheckAnalysis.md
+    - SparkOptimizer:
+      - spark-sql-SparkOptimizer.md
+      - spark-sql-Optimizer.md
+    - SparkPlanner:
+      - spark-sql-SparkPlanner.md
+      - spark-sql-SparkStrategy.md
+      - spark-sql-SparkStrategies.md
+    - LogicalPlanStats:
+      - spark-sql-LogicalPlanStats.md
+      - spark-sql-Statistics.md
+      - spark-sql-HintInfo.md
+      - spark-sql-LogicalPlanVisitor.md
+      - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
+      - BasicStatsPlanVisitor:
+        - spark-sql-BasicStatsPlanVisitor.md
+        - spark-sql-AggregateEstimation.md
+        - spark-sql-FilterEstimation.md
+        - spark-sql-JoinEstimation.md
+        - spark-sql-ProjectEstimation.md
+    - Partitioning:
+      - spark-sql-SparkPlan-Partitioning.md
+      - spark-sql-HashPartitioning.md
+    - Distribution:
+      - spark-sql-Distribution.md
+      - spark-sql-Distribution-AllTuples.md
+      - spark-sql-Distribution-BroadcastDistribution.md
+      - spark-sql-Distribution-ClusteredDistribution.md
+      - spark-sql-Distribution-HashClusteredDistribution.md
+      - spark-sql-Distribution-OrderedDistribution.md
+      - spark-sql-Distribution-UnspecifiedDistribution.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

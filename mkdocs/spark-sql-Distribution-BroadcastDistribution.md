@@ -1,4 +1,4 @@
-== [[BroadcastDistribution]] BroadcastDistribution
+# BroadcastDistribution
 
 [[requiredNumPartitions]]
 `BroadcastDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that indicates to use one partition only and...FIXME.

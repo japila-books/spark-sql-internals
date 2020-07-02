@@ -1,4 +1,6 @@
-== [[Distribution]] Distribution Contract -- Data Distribution Across Partitions
+title: Distribution
+
+# Distribution -- Data Distribution Across Partitions
 
 `Distribution` is the <<contract, contract>> of...FIXME
 

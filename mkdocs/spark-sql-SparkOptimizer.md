@@ -1,4 +1,6 @@
-== [[SparkOptimizer]] SparkOptimizer -- Logical Query Plan Optimizer
+title: SparkOptimizer
+
+# SparkOptimizer -- Logical Query Plan Optimizer
 
 `SparkOptimizer` is a concrete <<spark-sql-Optimizer.adoc#, logical query plan optimizer>> with additional <<batches, optimization rules>> (that extend the <<spark-sql-Optimizer.adoc#batches, base logical optimization rules>>).
 

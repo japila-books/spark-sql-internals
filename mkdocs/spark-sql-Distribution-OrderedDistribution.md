@@ -1,11 +1,19 @@
-== [[UnspecifiedDistribution]] UnspecifiedDistribution
+# OrderedDistribution
 
-`UnspecifiedDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
+`OrderedDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that...FIXME
 
 [[requiredNumPartitions]]
-`UnspecifiedDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
+`OrderedDistribution` specifies `None` for the link:spark-sql-Distribution.adoc#requiredNumPartitions[required number of partitions].
 
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
+
+`OrderedDistribution` is <<creating-instance, created>> when...FIXME
+
+[[creating-instance]]
+[[ordering]]
+`OrderedDistribution` takes `SortOrder` expressions for ordering when created.
+
+`OrderedDistribution` requires that the <<ordering, ordering expressions>> should not be empty (i.e. `Nil`).
 
 === [[createPartitioning]] `createPartitioning` Method
 
