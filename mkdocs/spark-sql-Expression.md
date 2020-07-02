@@ -1,4 +1,6 @@
-== [[Expression]] Catalyst Expression -- Executable Node in Catalyst Tree
+title: Expression
+
+# Catalyst Expression -- Executable Node in Catalyst Tree
 
 `Expression` is a executable link:spark-sql-catalyst-TreeNode.adoc[node] (in a Catalyst tree) that can <<eval, evaluate>> a result value given input values, i.e. can produce a JVM object per `InternalRow`.
 

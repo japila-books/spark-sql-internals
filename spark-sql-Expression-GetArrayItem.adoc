@@ -1,3 +1,0 @@
-== [[GetArrayItem]] GetArrayItem
-
-`GetArrayItem` is...FIXME

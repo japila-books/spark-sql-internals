@@ -1,3 +1,0 @@
-== [[GetArrayStructFields]] GetArrayStructFields
-
-`GetArrayStructFields` is...FIXME

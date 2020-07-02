@@ -1,4 +1,6 @@
-== [[Catalyst]] Catalyst -- Tree Manipulation Framework
+title: Catalyst
+
+# Catalyst Tree Manipulation Framework
 
 *Catalyst* is an execution-agnostic framework to represent and manipulate a *dataflow graph*, i.e. trees of link:spark-sql-catalyst-QueryPlan.adoc[relational operators] and link:spark-sql-Expression.adoc[expressions].
 

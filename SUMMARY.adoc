@@ -1,85 +1,5 @@
 = Summary
 
-=== Catalyst Expressions
-
-. link:spark-sql-Expression.adoc[Catalyst Expression -- Executable Node in Catalyst Tree]
-. link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]
-. link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction Contract -- Aggregate Function Expressions]
-. link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction Contract -- Declarative Window Aggregate Function Expressions]
-. link:spark-sql-Expression-AttributeReference.adoc[AttributeReference]
-. link:spark-sql-Expression-Alias.adoc[Alias]
-. link:spark-sql-Expression-Attribute.adoc[Attribute]
-. link:spark-sql-Expression-BoundReference.adoc[BoundReference]
-. link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection]
-. link:spark-sql-Expression-Coalesce.adoc[Coalesce]
-. link:spark-sql-Expression-CodegenFallback.adoc[CodegenFallback]
-. link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator]
-. link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc[ComplexTypedAggregateExpression]
-. link:spark-sql-Expression-CreateArray.adoc[CreateArray]
-. link:spark-sql-Expression-CreateNamedStruct.adoc[CreateNamedStruct]
-. link:spark-sql-Expression-CreateNamedStructLike.adoc[CreateNamedStructLike Contract]
-. link:spark-sql-Expression-CreateNamedStructUnsafe.adoc[CreateNamedStructUnsafe]
-. link:spark-sql-Expression-CumeDist.adoc[CumeDist]
-. link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate Contract -- Unevaluable Aggregate Function Expressions]
-. link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression]
-. link:spark-sql-Expression-Exists.adoc[Exists]
-. link:spark-sql-Expression-ExpectsInputTypes.adoc[ExpectsInputTypes Contract]
-. link:spark-sql-Expression-ExplodeBase.adoc[ExplodeBase Contract]
-. link:spark-sql-Expression-First.adoc[First]
-. link:spark-sql-Expression-Generator.adoc[Generator]
-. link:spark-sql-Expression-GetArrayStructFields.adoc[GetArrayStructFields]
-. link:spark-sql-Expression-GetArrayItem.adoc[GetArrayItem]
-. link:spark-sql-Expression-GetMapValue.adoc[GetMapValue]
-. link:spark-sql-Expression-GetStructField.adoc[GetStructField]
-. link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate]
-. link:spark-sql-Expression-In.adoc[In]
-. link:spark-sql-Expression-Inline.adoc[Inline]
-. link:spark-sql-Expression-InSet.adoc[InSet]
-. link:spark-sql-Expression-InSubquery.adoc[InSubquery]
-. link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
-. link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
-. link:spark-sql-Expression-ListQuery.adoc[ListQuery]
-. link:spark-sql-Expression-Literal.adoc[Literal]
-. link:spark-sql-Expression-MonotonicallyIncreasingID.adoc[MonotonicallyIncreasingID]
-. link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash]
-. link:spark-sql-Expression-NamedExpression.adoc[NamedExpression Contract]
-. link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic Contract]
-. link:spark-sql-Expression-OffsetWindowFunction.adoc[OffsetWindowFunction Contract -- Unevaluable Window Function Expressions]
-. link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
-. link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
-. link:spark-sql-Expression-PlanExpression.adoc[PlanExpression]
-. link:spark-sql-Expression-PrettyAttribute.adoc[PrettyAttribute]
-. link:spark-sql-Expression-RankLike.adoc[RankLike Contract]
-. link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
-. link:spark-sql-Expression-RowNumberLike.adoc[RowNumberLike Contract]
-. link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable Contract]
-. link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery SubqueryExpression]
-. link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery ExecSubqueryExpression]
-. link:spark-sql-Expression-ScalaUDF.adoc[ScalaUDF]
-. link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
-. link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
-. link:spark-sql-Expression-SizeBasedWindowFunction.adoc[SizeBasedWindowFunction Contract -- Declarative Window Aggregate Functions with Window Size]
-. link:spark-sql-Expression-SortOrder.adoc[SortOrder]
-. link:spark-sql-Expression-Stack.adoc[Stack]
-. link:spark-sql-Expression-Star.adoc[Star]
-. link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]
-. link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression]
-. link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
-. link:spark-sql-Expression-TypedAggregateExpression.adoc[TypedAggregateExpression]
-. link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
-. link:spark-sql-Expression-UnaryExpression.adoc[UnaryExpression Contract]
-. link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
-. link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute]
-. link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]
-. link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator]
-. link:spark-sql-Expression-UnresolvedOrdinal.adoc[UnresolvedOrdinal]
-. link:spark-sql-Expression-UnresolvedRegex.adoc[UnresolvedRegex]
-. link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
-. link:spark-sql-Expression-UnresolvedWindowExpression.adoc[UnresolvedWindowExpression]
-. link:spark-sql-Expression-WindowExpression.adoc[WindowExpression]
-. link:spark-sql-Expression-WindowFunction.adoc[WindowFunction Contract -- Window Function Expressions With WindowFrame]
-. link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
-
 === Logical Operators
 
 ==== Base Logical Operators (Contracts)
@@ -309,17 +229,6 @@
 . link:spark-sql-ReuseExchange.adoc[ReuseExchange]
 . link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
 
-== Vectorized Parquet Decoding
-
-. link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader]
-. link:spark-sql-VectorizedColumnReader.adoc[VectorizedColumnReader]
-. link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase]
-
-. link:spark-sql-ColumnVector.adoc[ColumnVector Contract -- In-Memory Columnar Data]
-.. link:spark-sql-WritableColumnVector.adoc[WritableColumnVector Contract]
-.. link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector]
-.. link:spark-sql-OffHeapColumnVector.adoc[OffHeapColumnVector]
-
 == RDDs
 
 . link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
@@ -352,19 +261,6 @@
 .. link:spark-sql-performance-tuning-groupBy-aggregation.adoc[Number of Partitions for groupBy Aggregation]
 
 . link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution]
-
-== Catalyst -- Tree Manipulation Framework
-
-. link:spark-sql-catalyst.adoc[Catalyst -- Tree Manipulation Framework]
-
-. link:spark-sql-catalyst-TreeNode.adoc[TreeNode -- Node in Catalyst Tree]
-.. link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan -- Structured Query Plan]
-
-. link:spark-sql-catalyst-RuleExecutor.adoc[RuleExecutor Contract -- Tree Transformation Rule Executor]
-.. link:spark-sql-catalyst-Rule.adoc[Catalyst Rule -- Named Transformation of TreeNodes]
-
-. link:spark-sql-catalyst-QueryPlanner.adoc[QueryPlanner -- Converting Logical Plan to Physical Trees]
-. link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy]
 
 == Tungsten Execution Backend
 

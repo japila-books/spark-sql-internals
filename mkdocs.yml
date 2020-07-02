@@ -370,6 +370,101 @@ nav:
       - spark-sql-Distribution-HashClusteredDistribution.md
       - spark-sql-Distribution-OrderedDistribution.md
       - spark-sql-Distribution-UnspecifiedDistribution.md
+  - Catalyst (Tree Manipulation Framework):
+    - spark-sql-catalyst.md
+    - spark-sql-catalyst-TreeNode.md
+    - spark-sql-catalyst-QueryPlan.md
+    - spark-sql-catalyst-RuleExecutor.md
+    - spark-sql-catalyst-Rule.md
+    - spark-sql-catalyst-QueryPlanner.md
+    - spark-sql-catalyst-GenericStrategy.md
+  - Catalyst Expressions:
+    - spark-sql-Expression.md
+    - spark-sql-Expression-AggregateExpression.md
+    - spark-sql-Expression-AggregateFunction.md
+    - spark-sql-Expression-AggregateWindowFunction.md
+    - spark-sql-Expression-AttributeReference.md
+    - spark-sql-Expression-Alias.md
+    - spark-sql-Expression-Attribute.md
+    - spark-sql-Expression-BoundReference.md
+    - spark-sql-Expression-CallMethodViaReflection.md
+    - spark-sql-Expression-Coalesce.md
+    - spark-sql-Expression-CodegenFallback.md
+    - spark-sql-Expression-CollectionGenerator.md
+    - spark-sql-Expression-ComplexTypedAggregateExpression.md
+    - spark-sql-Expression-CreateArray.md
+    - spark-sql-Expression-CreateNamedStruct.md
+    - spark-sql-Expression-CreateNamedStructLike.md
+    - spark-sql-Expression-CreateNamedStructUnsafe.md
+    - spark-sql-Expression-CumeDist.md
+    - spark-sql-Expression-DeclarativeAggregate.md
+    - spark-sql-Expression-ExecSubqueryExpression.md
+    - spark-sql-Expression-Exists.md
+    - spark-sql-Expression-ExpectsInputTypes.md
+    - spark-sql-Expression-ExplodeBase.md
+    - spark-sql-Expression-First.md
+    - spark-sql-Expression-Generator.md
+    - spark-sql-Expression-GetArrayStructFields.md
+    - spark-sql-Expression-GetArrayItem.md
+    - spark-sql-Expression-GetMapValue.md
+    - spark-sql-Expression-GetStructField.md
+    - spark-sql-Expression-ImperativeAggregate.md
+    - spark-sql-Expression-In.md
+    - spark-sql-Expression-Inline.md
+    - spark-sql-Expression-InSet.md
+    - spark-sql-Expression-InSubquery.md
+    - spark-sql-Expression-JsonToStructs.md
+    - spark-sql-Expression-JsonTuple.md
+    - spark-sql-Expression-ListQuery.md
+    - spark-sql-Expression-Literal.md
+    - spark-sql-Expression-MonotonicallyIncreasingID.md
+    - spark-sql-Expression-Murmur3Hash.md
+    - spark-sql-Expression-NamedExpression.md
+    - spark-sql-Expression-Nondeterministic.md
+    - spark-sql-Expression-OffsetWindowFunction.md
+    - spark-sql-Expression-ParseToDate.md
+    - spark-sql-Expression-ParseToTimestamp.md
+    - spark-sql-Expression-PlanExpression.md
+    - spark-sql-Expression-PrettyAttribute.md
+    - spark-sql-Expression-RankLike.md
+    - spark-sql-Expression-ResolvedStar.md
+    - spark-sql-Expression-RowNumberLike.md
+    - spark-sql-Expression-RuntimeReplaceable.md
+    - spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
+    - spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
+    - spark-sql-Expression-ScalaUDF.md
+    - spark-sql-Expression-ScalaUDAF.md
+    - spark-sql-Expression-SimpleTypedAggregateExpression.md
+    - spark-sql-Expression-SizeBasedWindowFunction.md
+    - spark-sql-Expression-SortOrder.md
+    - spark-sql-Expression-Stack.md
+    - spark-sql-Expression-Star.md
+    - spark-sql-Expression-StaticInvoke.md
+    - spark-sql-Expression-SubqueryExpression.md
+    - spark-sql-Expression-TimeWindow.md
+    - spark-sql-Expression-TypedAggregateExpression.md
+    - spark-sql-Expression-TypedImperativeAggregate.md
+    - spark-sql-Expression-UnaryExpression.md
+    - spark-sql-Expression-UnixTimestamp.md
+    - spark-sql-Expression-UnresolvedAttribute.md
+    - spark-sql-Expression-UnresolvedFunction.md
+    - spark-sql-Expression-UnresolvedGenerator.md
+    - spark-sql-Expression-UnresolvedOrdinal.md
+    - spark-sql-Expression-UnresolvedRegex.md
+    - spark-sql-Expression-UnresolvedStar.md
+    - spark-sql-Expression-UnresolvedWindowExpression.md
+    - spark-sql-Expression-WindowExpression.md
+    - spark-sql-Expression-WindowFunction.md
+    - spark-sql-Expression-WindowSpecDefinition.md
+  - Vectorized Parquet Decoding:
+    - spark-sql-VectorizedParquetRecordReader.md
+    - spark-sql-VectorizedColumnReader.md
+    - spark-sql-SpecificParquetRecordReaderBase.md
+    - ColumnVector:
+      - spark-sql-ColumnVector.md
+      - spark-sql-WritableColumnVector.md
+      - spark-sql-OnHeapColumnVector.md
+      - spark-sql-OffHeapColumnVector.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

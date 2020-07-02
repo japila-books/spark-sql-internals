@@ -1,3 +1,0 @@
-== [[GetMapValue]] GetMapValue
-
-`GetMapValue` is...FIXME
