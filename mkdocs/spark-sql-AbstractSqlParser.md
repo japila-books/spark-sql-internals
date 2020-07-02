@@ -1,4 +1,6 @@
-== [[AbstractSqlParser]] AbstractSqlParser -- Base SQL Parsing Infrastructure
+title: AbstractSqlParser
+
+# AbstractSqlParser -- Base SQL Parsing Infrastructure
 
 `AbstractSqlParser` is the <<contract, base>> of <<implementations, ParserInterfaces>> that use an <<astBuilder, AstBuilder>> to parse SQL statements and convert them to Spark SQL entities, i.e. link:spark-sql-DataType.adoc[DataType], link:spark-sql-StructType.adoc[StructType], link:spark-sql-Expression.adoc[Expression], link:spark-sql-LogicalPlan.adoc[LogicalPlan] and `TableIdentifier`.
 

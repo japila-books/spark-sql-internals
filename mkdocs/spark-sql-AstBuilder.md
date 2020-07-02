@@ -1,4 +1,6 @@
-== [[AstBuilder]] AstBuilder -- ANTLR-based SQL Parser
+title: AstBuilder
+
+# AstBuilder -- ANTLR-based SQL Parser
 
 `AstBuilder` converts SQL statements into Spark SQL's relational entities (i.e. link:spark-sql-DataType.adoc[data types], link:spark-sql-Expression.adoc[Catalyst expressions], link:spark-sql-LogicalPlan.adoc[logical plans] or `TableIdentifiers`) using <<visit-callbacks, visit callback methods>>.
 

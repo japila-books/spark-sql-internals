@@ -1,4 +1,6 @@
-== [[ParserInterface]] ParserInterface Contract -- SQL Parsers
+title: ParserInterface
+
+# ParserInterface -- SQL Parsers
 
 `ParserInterface` is the <<contract, abstraction>> of <<extensions, SQL parsers>> that can convert (_parse_) textual representation of SQL statements into <<parseExpression, Expressions>>, <<parsePlan, LogicalPlans>>, <<parseTableIdentifier, TableIdentifiers>>, <<parseFunctionIdentifier, FunctionIdentifier>>, <<parseTableSchema, StructType>>, and <<parseDataType, DataType>>.
 

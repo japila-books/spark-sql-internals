@@ -535,6 +535,14 @@ nav:
       - spark-sql-LogicalPlan-WithWindowDefinition.md
       - spark-sql-LogicalPlan-WriteToDataSourceV2.md
       - spark-sql-LogicalPlan-View.md
+  - SQL Support:
+    - spark-sql-parsing-framework.md
+    - spark-sql-AbstractSqlParser.md
+    - spark-sql-AstBuilder.md
+    - spark-sql-CatalystSqlParser.md
+    - spark-sql-ParserInterface.md
+    - spark-sql-SparkSqlAstBuilder.md
+    - spark-sql-SparkSqlParser.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

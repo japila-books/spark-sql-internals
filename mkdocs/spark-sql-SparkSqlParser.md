@@ -1,4 +1,6 @@
-== [[SparkSqlParser]] SparkSqlParser -- Default SQL Parser
+title: SparkSqlParser
+
+# SparkSqlParser -- Default SQL Parser
 
 `SparkSqlParser` is the default link:spark-sql-AbstractSqlParser.adoc[SQL parser] of the SQL statements supported in Spark SQL.
 

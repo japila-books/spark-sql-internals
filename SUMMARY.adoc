@@ -204,16 +204,6 @@
 . link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)]
 . link:spark-sql-UnsafeFixedWidthAggregationMap.adoc[UnsafeFixedWidthAggregationMap]
 
-== SQL Support
-
-. link:spark-sql-parsing-framework.adoc[SQL Parsing Framework]
-. link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser]
-. link:spark-sql-AstBuilder.adoc[AstBuilder]
-. link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser]
-. link:spark-sql-ParserInterface.adoc[ParserInterface]
-. link:spark-sql-SparkSqlAstBuilder.adoc[SparkSqlAstBuilder]
-. link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]
-
 == Spark Thrift Server
 
 . link:spark-sql-thrift-server.adoc[Thrift JDBC/ODBC Server -- Spark Thrift Server (STS)]

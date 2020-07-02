@@ -1,4 +1,6 @@
-== [[CatalystSqlParser]] CatalystSqlParser -- DataTypes and StructTypes Parser
+title: CatalystSqlParser
+
+# CatalystSqlParser -- DataTypes and StructTypes Parser
 
 [[astBuilder]]
 `CatalystSqlParser` is a link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser] with link:spark-sql-AstBuilder.adoc[AstBuilder] as the required `astBuilder`.

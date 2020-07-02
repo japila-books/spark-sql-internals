@@ -1,4 +1,4 @@
-== SQL Parsing Framework
+# SQL Parsing Framework
 
 *SQL Parser Framework* in Spark SQL uses ANTLR to translate a SQL text to a link:spark-sql-DataType.adoc[data type], link:spark-sql-Expression.adoc[Expression], `TableIdentifier` or link:spark-sql-LogicalPlan.adoc[LogicalPlan].
 

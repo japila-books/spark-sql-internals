@@ -1,4 +1,4 @@
-== [[SparkSqlAstBuilder]] SparkSqlAstBuilder
+# SparkSqlAstBuilder
 
 `SparkSqlAstBuilder` is an link:spark-sql-AstBuilder.adoc[AstBuilder] that converts SQL statements into Catalyst expressions, logical plans or table identifiers (using <<visit-callbacks, visit callback methods>>).
 
