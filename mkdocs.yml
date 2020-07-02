@@ -139,7 +139,16 @@ nav:
     - spark-sql-properties.md
   - Notable Features:
     - spark-sql-hive-integration.md
-    - spark-sql-vectorized-parquet-reader.md
+    - Vectorized Parquet Decoding:
+      - spark-sql-vectorized-parquet-reader.md
+      - spark-sql-VectorizedParquetRecordReader.md
+      - spark-sql-VectorizedColumnReader.md
+      - spark-sql-SpecificParquetRecordReaderBase.md
+      - ColumnVector:
+        - spark-sql-ColumnVector.md
+        - spark-sql-WritableColumnVector.md
+        - spark-sql-OnHeapColumnVector.md
+        - spark-sql-OffHeapColumnVector.md
     - spark-sql-dynamic-partition-inserts.md
     - spark-sql-bucketing.md
     - Whole-Stage CodeGen:
@@ -203,65 +212,66 @@ nav:
       - spark-sql-StaticSQLConf.md
       - spark-sql-CatalystConf.md
     - spark-sql-UDFRegistration.md
-  - File-Based Data Sources:
-    - FileFormat:
-      - spark-sql-FileFormat.md
-      - spark-sql-OrcFileFormat.md
-      - spark-sql-ParquetFileFormat.md
-    - TextBasedFileFormat:
-      - spark-sql-TextBasedFileFormat.md
-      - spark-sql-CSVFileFormat.md
-      - spark-sql-JsonFileFormat.md
-      - spark-sql-TextFileFormat.md
-    - spark-sql-JsonDataSource.md
-    - spark-sql-BaseRelation-HadoopFsRelation.md
-    - FileIndex:
-      - FileIndex.md
-      - CatalogFileIndex.md
-      - InMemoryFileIndex.md
-      - PartitioningAwareFileIndex.md
-      - PrunedInMemoryFileIndex.md
-    - spark-sql-FileFormatWriter.md
-    - spark-sql-SQLHadoopMapReduceCommitProtocol.md
-    - spark-sql-PartitionedFile.md
-    - spark-sql-FileScanRDD.md
-    - spark-sql-ParquetReadSupport.md
-    - spark-sql-RecordReaderIterator.md
-  - Kafka Data Source:
-    - spark-sql-kafka.md
-    - spark-sql-kafka-options.md
-    - spark-sql-KafkaSourceProvider.md
-    - spark-sql-KafkaRelation.md
-    - KafkaSourceRDD:
-      - spark-sql-KafkaSourceRDD.md
-      - spark-sql-KafkaSourceRDDOffsetRange.md
-      - spark-sql-KafkaSourceRDDPartition.md
-    - spark-sql-ConsumerStrategy.md
-    - spark-sql-KafkaOffsetReader.md
-    - spark-sql-KafkaOffsetRangeLimit.md
-    - KafkaDataConsumer:
-      - spark-sql-KafkaDataConsumer.md
-      - spark-sql-InternalKafkaConsumer.md
-    - spark-sql-KafkaWriter.md
-    - spark-sql-KafkaWriteTask.md
-    - spark-sql-JsonUtils.md
-  - Avro Data Source:
-    - spark-sql-avro.md
-    - spark-sql-AvroOptions.md
-    - spark-sql-AvroFileFormat.md
-    - spark-sql-Expression-CatalystDataToAvro.md
-    - spark-sql-Expression-AvroDataToCatalyst.md
-  - JDBC Data Source:
-    - spark-sql-jdbc.md
-    - spark-sql-JDBCOptions.md
-    - spark-sql-JdbcRelationProvider.md
-    - spark-sql-JDBCRelation.md
-    - spark-sql-JDBCRDD.md
-    - spark-sql-JdbcDialect.md
-    - spark-sql-JdbcUtils.md
-  - Console Data Source:
-    - spark-sql-console.md
-    - spark-sql-ConsoleSinkProvider.md
+  - Data Sources:
+    - File-Based Data Sources:
+      - FileFormat:
+        - spark-sql-FileFormat.md
+        - spark-sql-OrcFileFormat.md
+        - spark-sql-ParquetFileFormat.md
+      - TextBasedFileFormat:
+        - spark-sql-TextBasedFileFormat.md
+        - spark-sql-CSVFileFormat.md
+        - spark-sql-JsonFileFormat.md
+        - spark-sql-TextFileFormat.md
+      - spark-sql-JsonDataSource.md
+      - spark-sql-BaseRelation-HadoopFsRelation.md
+      - FileIndex:
+        - FileIndex.md
+        - CatalogFileIndex.md
+        - InMemoryFileIndex.md
+        - PartitioningAwareFileIndex.md
+        - PrunedInMemoryFileIndex.md
+      - spark-sql-FileFormatWriter.md
+      - spark-sql-SQLHadoopMapReduceCommitProtocol.md
+      - spark-sql-PartitionedFile.md
+      - spark-sql-FileScanRDD.md
+      - spark-sql-ParquetReadSupport.md
+      - spark-sql-RecordReaderIterator.md
+    - Kafka:
+      - spark-sql-kafka.md
+      - spark-sql-kafka-options.md
+      - spark-sql-KafkaSourceProvider.md
+      - spark-sql-KafkaRelation.md
+      - KafkaSourceRDD:
+        - spark-sql-KafkaSourceRDD.md
+        - spark-sql-KafkaSourceRDDOffsetRange.md
+        - spark-sql-KafkaSourceRDDPartition.md
+      - spark-sql-ConsumerStrategy.md
+      - spark-sql-KafkaOffsetReader.md
+      - spark-sql-KafkaOffsetRangeLimit.md
+      - KafkaDataConsumer:
+        - spark-sql-KafkaDataConsumer.md
+        - spark-sql-InternalKafkaConsumer.md
+      - spark-sql-KafkaWriter.md
+      - spark-sql-KafkaWriteTask.md
+      - spark-sql-JsonUtils.md
+    - Avro:
+      - spark-sql-avro.md
+      - spark-sql-AvroOptions.md
+      - spark-sql-AvroFileFormat.md
+      - spark-sql-Expression-CatalystDataToAvro.md
+      - spark-sql-Expression-AvroDataToCatalyst.md
+    - JDBC:
+      - spark-sql-jdbc.md
+      - spark-sql-JDBCOptions.md
+      - spark-sql-JdbcRelationProvider.md
+      - spark-sql-JDBCRelation.md
+      - spark-sql-JDBCRDD.md
+      - spark-sql-JdbcDialect.md
+      - spark-sql-JdbcUtils.md
+    - Console:
+      - spark-sql-console.md
+      - spark-sql-ConsoleSinkProvider.md
   - Hive Integration:
     - hive/index.md
     - hive/configuration-properties.md
@@ -456,15 +466,6 @@ nav:
     - spark-sql-Expression-WindowExpression.md
     - spark-sql-Expression-WindowFunction.md
     - spark-sql-Expression-WindowSpecDefinition.md
-  - Vectorized Parquet Decoding:
-    - spark-sql-VectorizedParquetRecordReader.md
-    - spark-sql-VectorizedColumnReader.md
-    - spark-sql-SpecificParquetRecordReaderBase.md
-    - ColumnVector:
-      - spark-sql-ColumnVector.md
-      - spark-sql-WritableColumnVector.md
-      - spark-sql-OnHeapColumnVector.md
-      - spark-sql-OffHeapColumnVector.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
