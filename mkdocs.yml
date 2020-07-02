@@ -543,6 +543,18 @@ nav:
     - spark-sql-ParserInterface.md
     - spark-sql-SparkSqlAstBuilder.md
     - spark-sql-SparkSqlParser.md
+  - Tungsten Execution Backend:
+    - spark-sql-tungsten.md
+    - spark-sql-InternalRow.md
+    - spark-sql-UnsafeRow.md
+    - AggregationIterator:
+      - spark-sql-AggregationIterator.md
+      - spark-sql-ObjectAggregationIterator.md
+      - spark-sql-SortBasedAggregationIterator.md
+      - spark-sql-TungstenAggregationIterator.md
+    - spark-sql-CatalystSerde.md
+    - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
+    - spark-sql-UnsafeFixedWidthAggregationMap.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

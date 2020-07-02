@@ -1,4 +1,4 @@
-== [[ObjectAggregationIterator]] ObjectAggregationIterator
+# ObjectAggregationIterator
 
 `ObjectAggregationIterator` is...FIXME
 

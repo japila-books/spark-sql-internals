@@ -1,4 +1,6 @@
-== [[ExternalAppendOnlyUnsafeRowArray]] ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)
+title: ExternalAppendOnlyUnsafeRowArray
+
+# ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)
 
 `ExternalAppendOnlyUnsafeRowArray` is an append-only array for link:spark-sql-UnsafeRow.adoc[UnsafeRows] that spills content to disk when a <<numRowsSpillThreshold, predefined spill threshold of rows>> is reached.
 

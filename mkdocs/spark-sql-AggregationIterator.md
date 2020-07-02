@@ -1,4 +1,6 @@
-== [[AggregationIterator]] AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
+title: AggregationIterator
+
+# AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
 
 `AggregationIterator` is the base for <<implementations, iterators>> of <<spark-sql-UnsafeRow.adoc, UnsafeRows>> that...FIXME
 

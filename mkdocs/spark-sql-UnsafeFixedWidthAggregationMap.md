@@ -1,4 +1,4 @@
-== [[UnsafeFixedWidthAggregationMap]] UnsafeFixedWidthAggregationMap
+# UnsafeFixedWidthAggregationMap
 
 `UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's <<map, BytesToBytesMap>> to allow for <<spark-sql-UnsafeRow.adoc#, UnsafeRow>> keys and values.
 

@@ -1,4 +1,6 @@
-== [[InternalRow]] InternalRow -- Abstract Binary Row Format
+title: InternalRow
+
+# InternalRow -- Abstract Binary Row Format
 
 NOTE: `InternalRow` is also called *Catalyst row* or *Spark SQL row*.
 

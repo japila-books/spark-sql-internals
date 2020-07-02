@@ -1,4 +1,6 @@
-== [[CatalystSerde]] CatalystSerde Helper Object
+title: CatalystSerde
+
+# CatalystSerde Helper Object
 
 `CatalystSerde` is a Scala object that consists of three utility methods:
 

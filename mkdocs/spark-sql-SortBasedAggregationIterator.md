@@ -1,4 +1,4 @@
-== [[SortBasedAggregationIterator]] SortBasedAggregationIterator
+# SortBasedAggregationIterator
 
 `SortBasedAggregationIterator` is...FIXME
 
