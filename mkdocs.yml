@@ -555,6 +555,9 @@ nav:
     - spark-sql-CatalystSerde.md
     - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
     - spark-sql-UnsafeFixedWidthAggregationMap.md
+  - Spark Thrift Server:
+    - thrift-server/spark-sql-thrift-server.md
+    - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

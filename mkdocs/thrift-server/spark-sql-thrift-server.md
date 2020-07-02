@@ -1,10 +1,12 @@
-== [[HiveThriftServer2]] Thrift JDBC/ODBC Server -- Spark Thrift Server (STS)
+title: HiveThriftServer2
 
-*Thrift JDBC/ODBC Server* (aka _Spark Thrift Server_ or _STS_) is Spark SQL's port of https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview[Apache Hive's HiveServer2] that allows JDBC/ODBC clients to execute SQL queries over JDBC and ODBC protocols on Apache Spark.
+# Thrift JDBC/ODBC Server -- Spark Thrift Server (STS)
 
-With Spark Thrift Server, business users can work with their shiny Business Intelligence (BI) tools, e.g. http://www.tableau.com[Tableau] or Microsoft Excel, and connect to Apache Spark using the ODBC interface. That brings the in-memory distributed capabilities of Spark SQL's query engine (with all the link:spark-sql-Optimizer.adoc[Catalyst query optimizations] you surely like very much) to environments that were initially "disconnected".
+*Thrift JDBC/ODBC Server* (aka _Spark Thrift Server_ or _STS_) is Spark SQL's port of [Apache Hive's HiveServer2](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview) that allows JDBC/ODBC clients to execute SQL queries over JDBC and ODBC protocols on Apache Spark.
 
-Beside, SQL queries in Spark Thrift Server share the same link:spark-SparkContext.adoc[SparkContext] that helps further improve performance of SQL queries using the same data sources.
+With Spark Thrift Server, business users can work with their shiny Business Intelligence (BI) tools, e.g. [Tableau](http://www.tableau.com) or Microsoft Excel, and connect to Apache Spark using the ODBC interface. That brings the in-memory distributed capabilities of Spark SQL's query engine (with all the [Catalyst query optimizations](../spark-sql-Optimizer.md) you surely like very much) to environments that were initially "disconnected".
+
+Beside, SQL queries in Spark Thrift Server share the same SparkContext that helps further improve performance of SQL queries using the same data sources.
 
 Spark Thrift Server is a Spark standalone application that you start using <<start-thriftserver, `start-thriftserver.sh`>> and stop using <<stop-thriftserver, `stop-thriftserver.sh`>> shell scripts.
 
@@ -110,7 +112,7 @@ Once connected, you can send SQL queries (as if Spark SQL were a JDBC-compliant 
 
 Spark Thrift Server allows for remote access to Spark SQL using JDBC protocol.
 
-NOTE: This section was tested with http://squirrel-sql.sourceforge.net/[SQuirreL SQL Client 3.7.1] (`squirrelsql-3.7.1-standard.zip`) on Mac OS X.
+NOTE: This section was tested with [SQuirreL SQL Client 3.7.1](http://squirrel-sql.sourceforge.net/) (`squirrelsql-3.7.1-standard.zip`) on Mac OS X.
 
 SQuirreL SQL Client is a Java SQL client for JDBC-compliant databases.
 
@@ -168,8 +170,7 @@ Use link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehous
 You should also not share the same home directory between them since `metastore_db` becomes an issue.
 ====
 
-[source, scala]
-----
+```scala
 // Inside spark-shell
 // Paste in :paste mode
 val df = spark
@@ -178,7 +179,7 @@ val df = spark
   .option("dbtable", "people") // <2>
   .format("jdbc")
   .load
-----
+```
 <1> Connect to Spark Thrift Server at localhost on port 10000
 <2> Use `people` table. It assumes that `people` table is available.
 
