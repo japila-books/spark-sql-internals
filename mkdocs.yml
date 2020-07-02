@@ -472,6 +472,69 @@ nav:
       - spark-sql-LogicalPlan-Command.md
       - spark-sql-LogicalPlan-RunnableCommand.md
       - spark-sql-LogicalPlan-DataWritingCommand.md
+    - Concrete Logical Operators:
+      - spark-sql-LogicalPlan-Aggregate.md
+      - spark-sql-LogicalPlan-AlterViewAsCommand.md
+      - spark-sql-LogicalPlan-AnalysisBarrier.md
+      - spark-sql-LogicalPlan-AnalyzeColumnCommand.md
+      - spark-sql-LogicalPlan-AnalyzePartitionCommand.md
+      - spark-sql-LogicalPlan-AnalyzeTableCommand.md
+      - spark-sql-LogicalPlan-AppendData.md
+      - spark-sql-LogicalPlan-ClearCacheCommand.md
+      - spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md
+      - spark-sql-LogicalPlan-CreateDataSourceTableCommand.md
+      - spark-sql-LogicalPlan-CreateTable.md
+      - spark-sql-LogicalPlan-CreateTableCommand.md
+      - spark-sql-LogicalPlan-CreateTempViewUsing.md
+      - spark-sql-LogicalPlan-CreateViewCommand.md
+      - spark-sql-LogicalPlan-DataSourceV2Relation.md
+      - spark-sql-LogicalPlan-DescribeColumnCommand.md
+      - spark-sql-LogicalPlan-DescribeTableCommand.md
+      - spark-sql-LogicalPlan-DeserializeToObject.md
+      - spark-sql-LogicalPlan-DropTableCommand.md
+      - spark-sql-LogicalPlan-Except.md
+      - spark-sql-LogicalPlan-Expand.md
+      - spark-sql-LogicalPlan-ExplainCommand.md
+      - spark-sql-LogicalPlan-ExternalRDD.md
+      - spark-sql-LogicalPlan-Filter.md
+      - spark-sql-LogicalPlan-Generate.md
+      - spark-sql-LogicalPlan-GroupingSets.md
+      - spark-sql-LogicalPlan-Hint.md
+      - spark-sql-LogicalPlan-InMemoryRelation.md
+      - spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md
+      - spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md
+      - InsertIntoDir.md
+      - spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md
+      - InsertIntoTable.md
+      - spark-sql-LogicalPlan-Intersect.md
+      - spark-sql-LogicalPlan-Join.md
+      - spark-sql-LogicalPlan-LeafNode.md
+      - spark-sql-LogicalPlan-LocalRelation.md
+      - spark-sql-LogicalPlan-LogicalRDD.md
+      - spark-sql-LogicalPlan-LogicalRelation.md
+      - spark-sql-LogicalPlan-OneRowRelation.md
+      - spark-sql-LogicalPlan-Pivot.md
+      - spark-sql-LogicalPlan-Project.md
+      - spark-sql-LogicalPlan-Range.md
+      - spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md
+      - spark-sql-LogicalPlan-ResolvedHint.md
+      - spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md
+      - spark-sql-LogicalPlan-ShowCreateTableCommand.md
+      - spark-sql-LogicalPlan-ShowTablesCommand.md
+      - spark-sql-LogicalPlan-Sort.md
+      - spark-sql-LogicalPlan-SubqueryAlias.md
+      - spark-sql-LogicalPlan-TruncateTableCommand.md
+      - spark-sql-LogicalPlan-TypedFilter.md
+      - spark-sql-LogicalPlan-Union.md
+      - spark-sql-LogicalPlan-UnresolvedCatalogRelation.md
+      - spark-sql-LogicalPlan-UnresolvedHint.md
+      - spark-sql-LogicalPlan-UnresolvedInlineTable.md
+      - spark-sql-LogicalPlan-UnresolvedRelation.md
+      - spark-sql-LogicalPlan-UnresolvedTableValuedFunction.md
+      - spark-sql-LogicalPlan-Window.md
+      - spark-sql-LogicalPlan-WithWindowDefinition.md
+      - spark-sql-LogicalPlan-WriteToDataSourceV2.md
+      - spark-sql-LogicalPlan-View.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
