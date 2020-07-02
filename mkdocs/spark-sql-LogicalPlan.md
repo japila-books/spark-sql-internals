@@ -1,4 +1,6 @@
-== [[LogicalPlan]] LogicalPlan Contract -- Logical Relational Operator with Children and Expressions / Logical Query Plan
+title: LogicalPlan
+
+# LogicalPlan -- Logical Relational Operator with Children and Expressions / Logical Query Plan
 
 `LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 

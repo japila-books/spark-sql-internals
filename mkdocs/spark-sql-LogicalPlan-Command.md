@@ -1,4 +1,6 @@
-== [[Command]] Command Contract -- Eagerly-Executed Logical Operator
+title: Command
+
+# Command -- Eagerly-Executed Logical Operator
 
 `Command` is the *marker interface* for link:spark-sql-LogicalPlan.adoc[logical operators] that represent non-query commands that are executed early in the link:spark-sql-QueryExecution.adoc#query-plan-lifecycle[query plan lifecycle] (unlike logical plans in general).
 

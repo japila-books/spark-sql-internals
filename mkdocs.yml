@@ -466,6 +466,12 @@ nav:
     - spark-sql-Expression-WindowExpression.md
     - spark-sql-Expression-WindowFunction.md
     - spark-sql-Expression-WindowSpecDefinition.md
+  - Logical Operators:
+    - Base Logical Operators:
+      - spark-sql-LogicalPlan.md
+      - spark-sql-LogicalPlan-Command.md
+      - spark-sql-LogicalPlan-RunnableCommand.md
+      - spark-sql-LogicalPlan-DataWritingCommand.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

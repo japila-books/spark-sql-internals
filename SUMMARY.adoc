@@ -1,14 +1,5 @@
 = Summary
 
-=== Logical Operators
-
-==== Base Logical Operators (Contracts)
-
-. link:spark-sql-LogicalPlan.adoc[LogicalPlan Contract -- Logical Operator with Children and Expressions / Logical Query Plan]
-. link:spark-sql-LogicalPlan-Command.adoc[Command Contract -- Eagerly-Executed Logical Operator]
-. link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand Contract -- Generic Logical Command with Side Effects]
-. link:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand Contract -- Logical Commands That Write Query Data]
-
 ==== Concrete Logical Operators
 
 . link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]

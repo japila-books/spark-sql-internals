@@ -1,4 +1,6 @@
-== [[DataWritingCommand]] DataWritingCommand Contract -- Logical Commands That Write Query Data
+title: DataWritingCommand
+
+# DataWritingCommand -- Logical Commands That Write Query Data
 
 `DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.adoc#, Command contract>> for <<implementations, logical commands>> that write the result of executing <<query, query>> (_query data_) to a relation when <<run, executed>>.
 
