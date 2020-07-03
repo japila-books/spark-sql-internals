@@ -1,4 +1,4 @@
-== [[ResolveWindowFrame]] ResolveWindowFrame Logical Resolution Rule
+# ResolveWindowFrame Logical Resolution Rule
 
 `ResolveWindowFrame` is a logical resolution rule that the link:spark-sql-Analyzer.adoc[logical query plan analyzer] uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
 

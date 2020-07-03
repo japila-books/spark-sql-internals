@@ -1,4 +1,4 @@
-== [[PreprocessTableCreation]] PreprocessTableCreation PostHoc Logical Resolution Rule
+# PreprocessTableCreation PostHoc Logical Resolution Rule
 
 `PreprocessTableCreation` is a <<spark-sql-Analyzer.adoc#postHocResolutionRules, posthoc logical resolution rule>> that <<apply, resolves a logical query plan>> with <<spark-sql-LogicalPlan-CreateTable.adoc#, CreateTable>> logical operators.
 

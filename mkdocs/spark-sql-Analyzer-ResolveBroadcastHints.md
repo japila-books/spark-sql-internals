@@ -1,4 +1,4 @@
-== [[ResolveBroadcastHints]] ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN and MAPJOIN Hint Names
+# ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN and MAPJOIN Hint Names
 
 `ResolveBroadcastHints` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators.
 

@@ -1,4 +1,4 @@
-== [[FindDataSourceTable]] FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
+# FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
 
 `FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
 

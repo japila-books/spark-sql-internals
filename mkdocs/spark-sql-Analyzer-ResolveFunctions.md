@@ -1,4 +1,4 @@
-== [[ResolveFunctions]] ResolveFunctions Logical Resolution Rule -- Resolving grouping__id UnresolvedAttribute, UnresolvedGenerator And UnresolvedFunction Expressions
+# ResolveFunctions Logical Resolution Rule -- Resolving grouping__id UnresolvedAttribute, UnresolvedGenerator And UnresolvedFunction Expressions
 
 `ResolveFunctions` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveFunctions[logical query plan analyzer] uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
 

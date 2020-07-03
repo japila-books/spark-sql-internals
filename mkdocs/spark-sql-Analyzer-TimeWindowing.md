@@ -1,4 +1,4 @@
-== [[TimeWindowing]] TimeWindowing Logical Resolution Rule
+# TimeWindowing Logical Resolution Rule
 
 `TimeWindowing` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, FIXME>> in a logical query plan.
 

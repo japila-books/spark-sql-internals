@@ -1,4 +1,4 @@
-== [[AliasViewChild]] AliasViewChild Logical Analysis Rule
+# AliasViewChild Logical Analysis Rule
 
 `AliasViewChild` is a <<spark-sql-Analyzer.adoc#batches, logical analysis rule>> that <<apply, transforms a logical query plan>> with <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators and adds <<spark-sql-LogicalPlan-Project.adoc#, Project>> logical operator (possibly with <<spark-sql-Expression-Alias.adoc#, Alias>> expressions) when the outputs of a view and the underlying table do not match (and therefore require aliasing and projection).
 

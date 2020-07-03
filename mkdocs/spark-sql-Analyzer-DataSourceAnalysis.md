@@ -1,4 +1,4 @@
-== [[DataSourceAnalysis]] DataSourceAnalysis PostHoc Logical Resolution Rule
+# DataSourceAnalysis PostHoc Logical Resolution Rule
 
 `DataSourceAnalysis` is a <<spark-sql-Analyzer.adoc#postHocResolutionRules, posthoc logical resolution rule>> that the link:spark-sql-BaseSessionStateBuilder.adoc#analyzer[default] and link:hive/HiveSessionStateBuilder.adoc#analyzer[Hive-specific] logical query plan analyzers use to <<apply, FIXME>>.
 

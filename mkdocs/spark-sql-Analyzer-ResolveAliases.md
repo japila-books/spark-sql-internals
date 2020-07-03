@@ -1,4 +1,4 @@
-== [[ResolveAliases]] ResolveAliases Logical Resolution Rule
+# ResolveAliases Logical Resolution Rule
 
 `ResolveAliases` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveAliases[logical query plan analyzer] uses to <<apply, FIXME>> in an entire logical query plan.
 

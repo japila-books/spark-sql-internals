@@ -1,4 +1,4 @@
-== [[WindowsSubstitution]] WindowsSubstitution Logical Evaluation Rule
+# WindowsSubstitution Logical Evaluation Rule
 
 `WindowsSubstitution` is a link:spark-sql-catalyst-Rule.adoc[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the link:spark-sql-Analyzer.adoc[logical query plan analyzer] uses to resolve (_aka_ substitute) link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] unary logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> to their corresponding link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with resolved link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition].
 

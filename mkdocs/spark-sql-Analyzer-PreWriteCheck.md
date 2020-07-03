@@ -1,4 +1,4 @@
-== [[PreWriteCheck]] PreWriteCheck Extended Analysis Check
+# PreWriteCheck Extended Analysis Check
 
 `PreWriteCheck` is an *extended analysis check* that verifies correctness of a <<spark-sql-LogicalPlan.adoc#, logical query plan>> with regard to <<InsertIntoTable.adoc#, InsertIntoTable>> unary logical operator (right before analysis can be considered complete).
 

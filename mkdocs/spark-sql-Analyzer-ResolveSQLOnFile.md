@@ -1,4 +1,4 @@
-== [[ResolveSQLOnFile]] ResolveSQLOnFile Logical Evaluation Rule for...FIXME
+# ResolveSQLOnFile Logical Evaluation Rule for...FIXME
 
 `ResolveSQLOnFile` is...FIXME
 

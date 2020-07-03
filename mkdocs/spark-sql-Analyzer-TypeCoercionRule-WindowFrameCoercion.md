@@ -1,4 +1,4 @@
-== [[WindowFrameCoercion]] WindowFrameCoercion Type Coercion Logical Rule
+# WindowFrameCoercion Type Coercion Logical Rule
 
 `WindowFrameCoercion` is a <<spark-sql-TypeCoercionRule.adoc#, type coercion logical rule>> that <<coerceTypes, cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition>> in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
 

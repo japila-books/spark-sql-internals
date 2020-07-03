@@ -1,4 +1,4 @@
-== [[CleanupAliases]] CleanupAliases Logical Analysis Rule
+# CleanupAliases Logical Analysis Rule
 
 `CleanupAliases` is a <<spark-sql-Analyzer.adoc#batches, logical analysis rule>> that <<apply, transforms a logical query plan>> with...FIXME
 

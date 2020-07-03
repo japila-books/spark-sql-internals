@@ -1,4 +1,4 @@
-== [[ResolveReferences]] ResolveReferences Logical Resolution Rule
+# ResolveReferences Logical Resolution Rule
 
 `ResolveReferences` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[logical query plan analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
 

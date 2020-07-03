@@ -1,4 +1,4 @@
-== [[ResolveInlineTables]] ResolveInlineTables Logical Resolution Rule
+# ResolveInlineTables Logical Resolution Rule
 
 `ResolveInlineTables` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.
 

@@ -1,4 +1,4 @@
-== [[ResolveOrdinalInOrderByAndGroupBy]] ResolveOrdinalInOrderByAndGroupBy Logical Resolution Rule
+# ResolveOrdinalInOrderByAndGroupBy Logical Resolution Rule
 
 `ResolveOrdinalInOrderByAndGroupBy` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.
 

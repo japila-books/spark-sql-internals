@@ -1,4 +1,4 @@
-== [[UpdateOuterReferences]] UpdateOuterReferences Logical Rule
+# UpdateOuterReferences Logical Rule
 
 `UpdateOuterReferences` is...FIXME
 

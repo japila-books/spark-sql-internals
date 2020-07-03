@@ -536,6 +536,37 @@ nav:
       - spark-sql-LogicalPlan-WithWindowDefinition.md
       - spark-sql-LogicalPlan-WriteToDataSourceV2.md
       - spark-sql-LogicalPlan-View.md
+  - Logical Analysis Rules:
+    - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
+    - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md
+    - DataSourceAnalysis: spark-sql-Analyzer-DataSourceAnalysis.md
+    - ExtractWindowExpressions: spark-sql-Analyzer-ExtractWindowExpressions.md
+    - FindDataSourceTable: spark-sql-Analyzer-FindDataSourceTable.md
+    - HandleNullInputsForUDF: spark-sql-Analyzer-HandleNullInputsForUDF.md
+    - InConversion: spark-sql-Analyzer-TypeCoercionRule-InConversion.md
+    - LookupFunctions: spark-sql-Analyzer-LookupFunctions.md
+    - PreprocessTableCreation: spark-sql-Analyzer-PreprocessTableCreation.md
+    - PreWriteCheck: spark-sql-Analyzer-PreWriteCheck.md
+    - ResolveAliases: spark-sql-Analyzer-ResolveAliases.md
+    - ResolveBroadcastHints: spark-sql-Analyzer-ResolveBroadcastHints.md
+    - ResolveCoalesceHints: spark-sql-Analyzer-ResolveCoalesceHints.md
+    - ResolveCreateNamedStruct: spark-sql-Analyzer-ResolveCreateNamedStruct.md
+    - ResolveFunctions: spark-sql-Analyzer-ResolveFunctions.md
+    - ResolveInlineTables: spark-sql-Analyzer-ResolveInlineTables.md
+    - ResolveMissingReferences: spark-sql-Analyzer-ResolveMissingReferences.md
+    - ResolveOrdinalInOrderByAndGroupBy: spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md
+    - ResolveOutputRelation: spark-sql-Analyzer-ResolveOutputRelation.md
+    - ResolveReferences: spark-sql-Analyzer-ResolveReferences.md
+    - ResolveRelations: spark-sql-Analyzer-ResolveRelations.md
+    - ResolveSQLOnFile: spark-sql-Analyzer-ResolveSQLOnFile.md
+    - ResolveSubquery: spark-sql-Analyzer-ResolveSubquery.md
+    - ResolveWindowFrame: spark-sql-Analyzer-ResolveWindowFrame.md
+    - ResolveWindowOrder: spark-sql-Analyzer-ResolveWindowOrder.md
+    - TimeWindowing: spark-sql-Analyzer-TimeWindowing.md
+    - UpdateOuterReferences: spark-sql-Analyzer-UpdateOuterReferences.md
+    - WindowFrameCoercion: spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md
+    - WidenSetOperationTypes: spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.md
+    - WindowsSubstitution: spark-sql-Analyzer-WindowsSubstitution.md
   - Physical Operators:
     - spark-sql-SparkPlan.md
     - spark-sql-CodegenSupport.md

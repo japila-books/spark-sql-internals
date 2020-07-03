@@ -1,4 +1,4 @@
-== [[ResolveRelations]] ResolveRelations Logical Resolution Rule -- Resolving UnresolvedRelations With Tables in Catalog
+# ResolveRelations Logical Resolution Rule -- Resolving UnresolvedRelations With Tables in Catalog
 
 `ResolveRelations` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 

@@ -1,4 +1,4 @@
-== [[ResolveSubquery]] ResolveSubquery Logical Resolution Rule
+# ResolveSubquery Logical Resolution Rule
 
 `ResolveSubquery` is a *logical resolution* that <<resolveSubQueries, resolves subquery expressions>> (<<spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#, ScalarSubquery>>, <<spark-sql-Expression-Exists.adoc#, Exists>> and <<spark-sql-Expression-In.adoc#, In>>) when <<apply, transforming a logical plan>> with the following logical operators:
 

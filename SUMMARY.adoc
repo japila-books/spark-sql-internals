@@ -1,38 +1,5 @@
 = Summary
 
-=== Logical Analysis Rules (Check, Evaluation, Conversion and Resolution)
-
-. link:spark-sql-Analyzer-AliasViewChild.adoc[AliasViewChild]
-. link:spark-sql-Analyzer-CleanupAliases.adoc[CleanupAliases]
-. link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
-. link:spark-sql-Analyzer-ExtractWindowExpressions.adoc[ExtractWindowExpressions]
-. link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
-. link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
-. link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion]
-. link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
-. link:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation]
-. link:spark-sql-Analyzer-PreWriteCheck.adoc[PreWriteCheck]
-. link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
-. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints]
-. link:spark-sql-Analyzer-ResolveCoalesceHints.adoc[ResolveCoalesceHints]
-. link:spark-sql-Analyzer-ResolveCreateNamedStruct.adoc[ResolveCreateNamedStruct]
-. link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
-. link:spark-sql-Analyzer-ResolveInlineTables.adoc[ResolveInlineTables]
-. link:spark-sql-Analyzer-ResolveMissingReferences.adoc[ResolveMissingReferences]
-. link:spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc[ResolveOrdinalInOrderByAndGroupBy]
-. link:spark-sql-Analyzer-ResolveOutputRelation.adoc[ResolveOutputRelation]
-. link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
-. link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]
-. link:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
-. link:spark-sql-Analyzer-ResolveSubquery.adoc[ResolveSubquery]
-. link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
-. link:spark-sql-Analyzer-ResolveWindowOrder.adoc[ResolveWindowOrder]
-. link:spark-sql-Analyzer-TimeWindowing.adoc[TimeWindowing]
-. link:spark-sql-Analyzer-UpdateOuterReferences.adoc[UpdateOuterReferences]
-. link:spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.adoc[WindowFrameCoercion]
-. link:spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.adoc[WidenSetOperationTypes]
-. link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
-
 === Base Logical Optimizations (Optimizer)
 
 . link:spark-sql-Optimizer-CollapseWindow.adoc[CollapseWindow]

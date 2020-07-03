@@ -1,4 +1,4 @@
-== [[ResolveCreateNamedStruct]] ResolveCreateNamedStruct Logical Resolution Rule -- Resolving NamePlaceholders In CreateNamedStruct Expressions
+# ResolveCreateNamedStruct Logical Resolution Rule -- Resolving NamePlaceholders In CreateNamedStruct Expressions
 
 `ResolveCreateNamedStruct` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
 

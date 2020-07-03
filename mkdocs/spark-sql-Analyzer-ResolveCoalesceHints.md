@@ -1,4 +1,4 @@
-== [[ResolveCoalesceHints]] ResolveCoalesceHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with COALESCE and REPARTITION Hints
+# ResolveCoalesceHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with COALESCE and REPARTITION Hints
 
 `ResolveCoalesceHints` is a logical resolution rule that the <<spark-sql-Analyzer.adoc#ResolveCoalesceHints, Spark Analyzer>> uses to <<apply, resolve UnresolvedHint logical operators>> with `COALESCE` or `REPARTITION` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators.
 

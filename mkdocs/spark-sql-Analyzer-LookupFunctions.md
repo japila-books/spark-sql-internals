@@ -1,4 +1,4 @@
-== [[LookupFunctions]] LookupFunctions Logical Rule -- Checking Whether UnresolvedFunctions Are Resolvable
+# LookupFunctions Logical Rule -- Checking Whether UnresolvedFunctions Are Resolvable
 
 `LookupFunctions` is a logical rule that the link:spark-sql-Analyzer.adoc#LookupFunctions[logical query plan analyzer] uses to <<apply, make sure that UnresolvedFunction expressions can be resolved>> in an entire logical query plan.
 

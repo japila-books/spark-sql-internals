@@ -1,4 +1,4 @@
-== [[ExtractWindowExpressions]] ExtractWindowExpressions Logical Resolution Rule
+# ExtractWindowExpressions Logical Resolution Rule
 
 `ExtractWindowExpressions` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, transforms a logical query plan>> and replaces (extracts) <<spark-sql-Expression-WindowExpression.adoc#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.adoc#, Window>> logical operators.
 
