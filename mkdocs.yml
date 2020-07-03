@@ -567,6 +567,43 @@ nav:
     - WindowFrameCoercion: spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md
     - WidenSetOperationTypes: spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.md
     - WindowsSubstitution: spark-sql-Analyzer-WindowsSubstitution.md
+  - Logical Optimizations:
+    - Base Optimizations (Optimizer):
+      - CollapseWindow: spark-sql-Optimizer-CollapseWindow.md
+      - ColumnPruning: spark-sql-Optimizer-ColumnPruning.md
+      - CombineTypedFilters: spark-sql-Optimizer-CombineTypedFilters.md
+      - CombineUnions: spark-sql-Optimizer-CombineUnions.md
+      - ComputeCurrentTime: spark-sql-Optimizer-ComputeCurrentTime.md
+      - ConstantFolding: spark-sql-Optimizer-ConstantFolding.md
+      - CostBasedJoinReorder: spark-sql-Optimizer-CostBasedJoinReorder.md
+      - DecimalAggregates: spark-sql-Optimizer-DecimalAggregates.md
+      - EliminateSerialization: spark-sql-Optimizer-EliminateSerialization.md
+      - EliminateSubqueryAliases: spark-sql-Optimizer-EliminateSubqueryAliases.md
+      - EliminateView: spark-sql-Optimizer-EliminateView.md
+      - GetCurrentDatabase: spark-sql-Optimizer-GetCurrentDatabase.md
+      - InferFiltersFromConstraints: spark-sql-Optimizer-InferFiltersFromConstraints.md
+      - LimitPushDown: spark-sql-Optimizer-LimitPushDown.md
+      - NullPropagation: spark-sql-Optimizer-NullPropagation.md
+      - OptimizeIn: spark-sql-Optimizer-OptimizeIn.md
+      - OptimizeSubqueries: spark-sql-Optimizer-OptimizeSubqueries.md
+      - PropagateEmptyRelation: spark-sql-Optimizer-PropagateEmptyRelation.md
+      - PullupCorrelatedPredicates: spark-sql-Optimizer-PullupCorrelatedPredicates.md
+      - PushDownPredicate: spark-sql-Optimizer-PushDownPredicate.md
+      - PushPredicateThroughJoin: spark-sql-Optimizer-PushPredicateThroughJoin.md
+      - ReorderJoin: spark-sql-Optimizer-ReorderJoin.md
+      - ReplaceExpressions: spark-sql-Optimizer-ReplaceExpressions.md
+      - ReplaceExceptWithAntiJoin: spark-sql-Optimizer-ReplaceExceptWithAntiJoin.md
+      - ReplaceExceptWithFilter: spark-sql-Optimizer-ReplaceExceptWithFilter.md
+      - RewriteCorrelatedScalarSubquery: spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md
+      - RewriteExceptAll: spark-sql-Optimizer-RewriteExceptAll.md
+      - RewritePredicateSubquery: spark-sql-Optimizer-RewritePredicateSubquery.md
+      - SimplifyCasts: spark-sql-Optimizer-SimplifyCasts.md
+    - Extended Optimizations (SparkOptimizer):
+      - ExtractPythonUDFFromAggregate: spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.md
+      - OptimizeMetadataOnlyQuery: spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.md
+      - PruneFileSourcePartitions: spark-sql-SparkOptimizer-PruneFileSourcePartitions.md
+      - PushDownOperatorsToDataSource: spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.md
+
   - Physical Operators:
     - spark-sql-SparkPlan.md
     - spark-sql-CodegenSupport.md

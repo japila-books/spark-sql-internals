@@ -1,44 +1,5 @@
 = Summary
 
-=== Base Logical Optimizations (Optimizer)
-
-. link:spark-sql-Optimizer-CollapseWindow.adoc[CollapseWindow]
-. link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
-. link:spark-sql-Optimizer-CombineTypedFilters.adoc[CombineTypedFilters]
-. link:spark-sql-Optimizer-CombineUnions.adoc[CombineUnions]
-. link:spark-sql-Optimizer-ComputeCurrentTime.adoc[ComputeCurrentTime]
-. link:spark-sql-Optimizer-ConstantFolding.adoc[ConstantFolding]
-. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder]
-. link:spark-sql-Optimizer-DecimalAggregates.adoc[DecimalAggregates]
-. link:spark-sql-Optimizer-EliminateSerialization.adoc[EliminateSerialization]
-. link:spark-sql-Optimizer-EliminateSubqueryAliases.adoc[EliminateSubqueryAliases]
-. link:spark-sql-Optimizer-EliminateView.adoc[EliminateView]
-. link:spark-sql-Optimizer-GetCurrentDatabase.adoc[GetCurrentDatabase]
-. link:spark-sql-Optimizer-InferFiltersFromConstraints.adoc[InferFiltersFromConstraints]
-. link:spark-sql-Optimizer-LimitPushDown.adoc[LimitPushDown]
-. link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation]
-. link:spark-sql-Optimizer-OptimizeIn.adoc[OptimizeIn]
-. link:spark-sql-Optimizer-OptimizeSubqueries.adoc[OptimizeSubqueries]
-. link:spark-sql-Optimizer-PropagateEmptyRelation.adoc[PropagateEmptyRelation]
-. link:spark-sql-Optimizer-PullupCorrelatedPredicates.adoc[PullupCorrelatedPredicates]
-. link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate]
-. link:spark-sql-Optimizer-PushPredicateThroughJoin.adoc[PushPredicateThroughJoin]
-. link:spark-sql-Optimizer-ReorderJoin.adoc[ReorderJoin]
-. link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions]
-. link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin]
-. link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter]
-. link:spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc[RewriteCorrelatedScalarSubquery]
-. link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll]
-. link:spark-sql-Optimizer-RewritePredicateSubquery.adoc[RewritePredicateSubquery]
-. link:spark-sql-Optimizer-SimplifyCasts.adoc[SimplifyCasts]
-
-=== Extended Logical Optimizations (SparkOptimizer)
-
-. link:spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.adoc[ExtractPythonUDFFromAggregate]
-. link:spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc[OptimizeMetadataOnlyQuery]
-. link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions]
-. link:spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.adoc[PushDownOperatorsToDataSource]
-
 === Execution Planning Strategies
 
 . link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation]
