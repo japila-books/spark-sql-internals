@@ -7,9 +7,13 @@ site_author: Jacek Laskowski
 
 docs_dir: mkdocs
 
+# https://squidfunk.github.io/mkdocs-material/getting-started/#adding-a-source-repository
 repo_name: mastering-spark-sql-book
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
-edit_uri: ""
+
+google_analytics:
+  - UA-86782445-6
+  - auto
 
 copyright: Copyright &copy; 2020 Jacek Laskowski
 
@@ -560,6 +564,7 @@ nav:
     - ResolveRelations: spark-sql-Analyzer-ResolveRelations.md
     - ResolveSQLOnFile: spark-sql-Analyzer-ResolveSQLOnFile.md
     - ResolveSubquery: spark-sql-Analyzer-ResolveSubquery.md
+    - ResolveTimeZone: ResolveTimeZone.md
     - ResolveWindowFrame: spark-sql-Analyzer-ResolveWindowFrame.md
     - ResolveWindowOrder: spark-sql-Analyzer-ResolveWindowOrder.md
     - TimeWindowing: spark-sql-Analyzer-TimeWindowing.md
@@ -719,6 +724,46 @@ nav:
   - Spark Thrift Server:
     - thrift-server/spark-sql-thrift-server.md
     - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
+  - Performance Tuning and Debugging:
+    - Performance Tuning: spark-sql-performance-tuning.md
+    - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
+    - Debugging Query Execution: spark-sql-debugging-query-execution.md
+  - Varia:
+    - SQLExecution: spark-sql-SQLExecution.md
+    - RDDConversions: spark-sql-RDDConversions.md
+    - CatalystTypeConverters: spark-sql-CatalystTypeConverters.md
+    - StatFunctions: spark-sql-StatFunctions.md
+    - SubExprUtils: spark-sql-SubExprUtils.md
+    - PredicateHelper: spark-sql-PredicateHelper.md
+    - DDLUtils: spark-sql-DDLUtils.md
+    - SchemaUtils: spark-sql-SchemaUtils.md
+    - AggUtils: spark-sql-AggUtils.md
+    - ScalaReflection: spark-sql-ScalaReflection.md
+    - CreateStruct: spark-sql-CreateStruct.md
+    - MultiInstanceRelation: spark-sql-MultiInstanceRelation.md
+    - TypeCoercion: spark-sql-TypeCoercion.md
+    - TypeCoercionRule: spark-sql-TypeCoercionRule.md
+    - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md
+    - PhysicalAggregation: spark-sql-PhysicalAggregation.md
+    - PhysicalOperation: spark-sql-PhysicalOperation.md
+    - HashJoin: spark-sql-HashJoin.md
+    - HashedRelation:
+      - HashedRelation: spark-sql-HashedRelation.md
+      - LongHashedRelation: spark-sql-LongHashedRelation.md
+      - UnsafeHashedRelation: spark-sql-UnsafeHashedRelation.md
+    - KnownSizeEstimation: spark-sql-KnownSizeEstimation.md
+    - SizeEstimator: spark-sql-SizeEstimator.md
+    - BroadcastMode:
+      - BroadcastMode: spark-sql-BroadcastMode.md
+      - HashedRelationBroadcastMode: spark-sql-HashedRelationBroadcastMode.md
+      - IdentityBroadcastMode: spark-sql-IdentityBroadcastMode.md
+    - PartitioningUtils: spark-sql-PartitioningUtils.md
+    - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
+    - CatalogUtils: spark-sql-CatalogUtils.md
+    - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
+    - BufferedRowIterator: spark-sql-BufferedRowIterator.md
+    - CompressionCodecs: spark-sql-CompressionCodecs.md
+    - SQLContext: spark-sql-SQLContext.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
