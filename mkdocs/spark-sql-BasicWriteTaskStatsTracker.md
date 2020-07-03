@@ -1,4 +1,4 @@
-== [[BasicWriteTaskStatsTracker]] BasicWriteTaskStatsTracker
+# BasicWriteTaskStatsTracker
 
 `BasicWriteTaskStatsTracker` is a concrete <<spark-sql-WriteTaskStatsTracker.adoc#, WriteTaskStatsTracker>>.
 

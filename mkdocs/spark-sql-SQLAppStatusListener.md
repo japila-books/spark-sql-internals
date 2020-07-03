@@ -1,4 +1,4 @@
-== [[SQLAppStatusListener]] SQLAppStatusListener Spark Listener
+# SQLAppStatusListener Spark Listener
 
 `SQLAppStatusListener` is a link:spark-SparkListener.adoc[SparkListener] that...FIXME
 

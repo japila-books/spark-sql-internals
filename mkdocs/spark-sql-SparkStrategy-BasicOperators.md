@@ -1,4 +1,4 @@
-== [[BasicOperators]] BasicOperators Execution Planning Strategy
+# BasicOperators Execution Planning Strategy
 
 `BasicOperators` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that in general does simple <<conversions, conversions>> from link:spark-sql-LogicalPlan.adoc[logical operators] to their link:spark-sql-SparkPlan.adoc[physical counterparts].
 

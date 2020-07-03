@@ -1,4 +1,4 @@
-== [[ReuseSubquery]] ReuseSubquery Physical Query Optimization
+# ReuseSubquery Physical Query Optimization
 
 `ReuseSubquery` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
 

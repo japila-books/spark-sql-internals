@@ -1,4 +1,4 @@
-== [[WriteTaskStatsTracker]] WriteTaskStatsTracker
+# WriteTaskStatsTracker
 
 `WriteTaskStatsTracker` is the <<contract, abstraction>> of <<implementations, WriteTaskStatsTrackers>> that collect the statistics of the number of <<newBucket, buckets>>, <<newFile, files>>, <<newPartition, partitions>> and <<newRow, rows>> processed.
 

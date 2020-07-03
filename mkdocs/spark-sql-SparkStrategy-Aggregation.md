@@ -1,4 +1,4 @@
-== [[Aggregation]] Aggregation Execution Planning Strategy for Aggregate Physical Operators
+# Aggregation Execution Planning Strategy for Aggregate Physical Operators
 
 `Aggregation` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to <<apply, select aggregate physical operator>> for <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.adoc#, logical query plan>>.
 

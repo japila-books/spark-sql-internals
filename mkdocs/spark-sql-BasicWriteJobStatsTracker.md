@@ -1,4 +1,4 @@
-== [[BasicWriteJobStatsTracker]] BasicWriteJobStatsTracker
+# BasicWriteJobStatsTracker
 
 `BasicWriteJobStatsTracker` is a concrete <<spark-sql-WriteJobStatsTracker.adoc#, WriteJobStatsTracker>>.
 

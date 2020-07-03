@@ -1,4 +1,4 @@
-== [[JoinSelection]] JoinSelection Execution Planning Strategy
+# JoinSelection Execution Planning Strategy
 
 `JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
 

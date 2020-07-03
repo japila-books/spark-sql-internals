@@ -1,4 +1,4 @@
-== [[ExtractPythonUDFs]] ExtractPythonUDFs Physical Query Optimization
+# ExtractPythonUDFs Physical Query Optimization
 
 [[apply]]
 `ExtractPythonUDFs` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` link:spark-sql-QueryExecution.adoc#preparations[uses] to optimize the physical plan of a structured query by <<extract, extracting Python UDFs from a physical query plan>> (excluding `FlatMapGroupsInPandasExec` operators that it simply skips over).

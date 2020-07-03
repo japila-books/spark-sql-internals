@@ -1,4 +1,4 @@
-== [[InMemoryScans]] InMemoryScans Execution Planning Strategy
+# InMemoryScans Execution Planning Strategy
 
 `InMemoryScans` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that <<apply, plans InMemoryRelation logical operators to InMemoryTableScanExec physical operators>>.
 

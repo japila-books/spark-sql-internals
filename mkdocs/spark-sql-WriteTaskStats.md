@@ -1,4 +1,4 @@
-== [[WriteTaskStats]] WriteTaskStats
+# WriteTaskStats
 
 `WriteTaskStats` is the no-method contract of <<implementations, data statistics>> collected during a Write Task.
 

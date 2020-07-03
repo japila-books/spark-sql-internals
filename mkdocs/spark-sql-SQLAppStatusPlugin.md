@@ -1,4 +1,4 @@
-== [[SQLAppStatusPlugin]] SQLAppStatusPlugin
+# SQLAppStatusPlugin
 
 `SQLAppStatusPlugin` is a `AppStatusPlugin`...FIXME
 

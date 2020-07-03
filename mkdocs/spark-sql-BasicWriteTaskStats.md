@@ -1,4 +1,4 @@
-== [[BasicWriteTaskStats]] BasicWriteTaskStats
+# BasicWriteTaskStats
 
 [[creating-instance]]
 `BasicWriteTaskStats` is a basic <<spark-sql-WriteTaskStats.adoc#, WriteTaskStats>> that carries the following statistics:

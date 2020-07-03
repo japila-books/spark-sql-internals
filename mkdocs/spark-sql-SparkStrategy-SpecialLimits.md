@@ -1,4 +1,4 @@
-== [[SpecialLimits]] SpecialLimits Execution Planning Strategy
+# SpecialLimits Execution Planning Strategy
 
 `SpecialLimits` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, FIXME>>.
 

@@ -1,4 +1,4 @@
-== [[SQLAppStatusStore]] SQLAppStatusStore
+# SQLAppStatusStore
 
 `SQLAppStatusStore` is...FIXME
 

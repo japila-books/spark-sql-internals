@@ -603,7 +603,22 @@ nav:
       - OptimizeMetadataOnlyQuery: spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.md
       - PruneFileSourcePartitions: spark-sql-SparkOptimizer-PruneFileSourcePartitions.md
       - PushDownOperatorsToDataSource: spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.md
-
+  - Execution Planning Strategies:
+    - Aggregation: spark-sql-SparkStrategy-Aggregation.md
+    - BasicOperators: spark-sql-SparkStrategy-BasicOperators.md
+    - DataSourceStrategy: spark-sql-SparkStrategy-DataSourceStrategy.md
+    - DataSourceV2Strategy: spark-sql-SparkStrategy-DataSourceV2Strategy.md
+    - FileSourceStrategy: spark-sql-SparkStrategy-FileSourceStrategy.md
+    - InMemoryScans: spark-sql-SparkStrategy-InMemoryScans.md
+    - JoinSelection: spark-sql-SparkStrategy-JoinSelection.md
+    - SpecialLimits: spark-sql-SparkStrategy-SpecialLimits.md
+  - Physical Optimizations:
+    - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
+    - EnsureRequirements: spark-sql-EnsureRequirements.md
+    - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
+    - PlanSubqueries: spark-sql-PlanSubqueries.md
+    - ReuseExchange: spark-sql-ReuseExchange.md
+    - ReuseSubquery: spark-sql-ReuseSubquery.md
   - Physical Operators:
     - spark-sql-SparkPlan.md
     - spark-sql-CodegenSupport.md
@@ -683,6 +698,24 @@ nav:
     - spark-sql-CatalystSerde.md
     - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
     - spark-sql-UnsafeFixedWidthAggregationMap.md
+  - Monitoring:
+    - Web UI and SQL Tab:
+      - SQLTab: spark-sql-webui.md
+      - SQLListener: spark-sql-SQLListener.md
+    - QueryExecutionListener: spark-sql-QueryExecutionListener.md
+    - SQLAppStatusListener: spark-sql-SQLAppStatusListener.md
+    - SQLAppStatusPlugin: spark-sql-SQLAppStatusPlugin.md
+    - SQLAppStatusStore: spark-sql-SQLAppStatusStore.md
+    - WriteTaskStats:
+      - WriteTaskStats: spark-sql-WriteTaskStats.md
+      - BasicWriteTaskStats: spark-sql-BasicWriteTaskStats.md
+    - WriteTaskStatsTracker:
+      - WriteTaskStatsTracker: spark-sql-WriteTaskStatsTracker.md
+      - BasicWriteTaskStatsTracker: spark-sql-BasicWriteTaskStatsTracker.md
+    - WriteJobStatsTracker:
+      - WriteJobStatsTracker: spark-sql-WriteJobStatsTracker.md
+      - BasicWriteJobStatsTracker: spark-sql-BasicWriteJobStatsTracker.md
+    - Logging: spark-logging.md
   - Spark Thrift Server:
     - thrift-server/spark-sql-thrift-server.md
     - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md

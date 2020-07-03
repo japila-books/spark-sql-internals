@@ -1,4 +1,4 @@
-== [[WriteJobStatsTracker]] WriteJobStatsTracker
+# WriteJobStatsTracker
 
 `WriteJobStatsTracker` is the <<contract, abstraction>> of <<implementations, WriteJobStatsTrackers>> that can <<newTaskInstance, create a new WriteTaskStatsTracker>> and <<processStats, processStats>>.
 

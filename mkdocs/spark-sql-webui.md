@@ -1,4 +1,4 @@
-== [[SQLTab]] SQL Tab -- Monitoring Structured Queries in web UI
+# SQL Tab -- Monitoring Structured Queries in web UI
 
 *SQL* tab in link:spark-webui.adoc[web UI] shows link:spark-sql-SQLMetric.adoc[SQLMetrics] per link:spark-sql-SparkPlan.adoc[physical operator] in a structured query physical plan.
 

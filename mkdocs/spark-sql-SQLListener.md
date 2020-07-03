@@ -1,4 +1,4 @@
-== [[SQLListener]] SQLListener Spark Listener
+# SQLListener Spark Listener
 
 `SQLListener` is a custom link:spark-SparkListener.adoc[SparkListener] that collects information about SQL query executions for web UI (to display in link:spark-sql-webui.adoc[SQL tab]). It relies on link:spark-sql-SQLExecution.adoc#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
 
