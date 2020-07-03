@@ -552,6 +552,49 @@ nav:
       - spark-sql-InterpretedProjection.md
       - spark-sql-CodeGeneratorWithInterpretedFallback.md
     - spark-sql-SQLMetric.md
+    - Concrete Physical Operators:
+      - spark-sql-SparkPlan-BroadcastExchangeExec.md
+      - spark-sql-SparkPlan-BroadcastHashJoinExec.md
+      - spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md
+      - spark-sql-SparkPlan-CartesianProductExec.md
+      - spark-sql-SparkPlan-CoalesceExec.md
+      - spark-sql-SparkPlan-CoGroupExec.md
+      - spark-sql-SparkPlan-DataSourceV2ScanExec.md
+      - spark-sql-SparkPlan-DataWritingCommandExec.md
+      - spark-sql-SparkPlan-DebugExec.md
+      - spark-sql-SparkPlan-DeserializeToObjectExec.md
+      - spark-sql-SparkPlan-ExecutedCommandExec.md
+      - spark-sql-SparkPlan-ExpandExec.md
+      - spark-sql-SparkPlan-ExternalRDDScanExec.md
+      - spark-sql-SparkPlan-FileSourceScanExec.md
+      - spark-sql-SparkPlan-FilterExec.md
+      - spark-sql-SparkPlan-GenerateExec.md
+      - spark-sql-SparkPlan-HashAggregateExec.md
+      - spark-sql-SparkPlan-InMemoryTableScanExec.md
+      - spark-sql-SparkPlan-LocalTableScanExec.md
+      - spark-sql-SparkPlan-MapElementsExec.md
+      - spark-sql-SparkPlan-ObjectHashAggregateExec.md
+      - spark-sql-SparkPlan-ObjectProducerExec.md
+      - spark-sql-SparkPlan-ProjectExec.md
+      - spark-sql-SparkPlan-RangeExec.md
+      - spark-sql-SparkPlan-RDDScanExec.md
+      - spark-sql-SparkPlan-ReusedExchangeExec.md
+      - spark-sql-SparkPlan-RowDataSourceScanExec.md
+      - spark-sql-SparkPlan-SampleExec.md
+      - spark-sql-SparkPlan-ShuffleExchangeExec.md
+      - spark-sql-SparkPlan-ShuffledHashJoinExec.md
+      - spark-sql-SparkPlan-SerializeFromObjectExec.md
+      - spark-sql-SparkPlan-SortAggregateExec.md
+      - spark-sql-SparkPlan-SortMergeJoinExec.md
+      - spark-sql-SparkPlan-SortExec.md
+      - spark-sql-SparkPlan-SubqueryExec.md
+      - spark-sql-SparkPlan-InputAdapter.md
+      - WindowExec:
+        - spark-sql-SparkPlan-WindowExec.md
+        - spark-sql-AggregateProcessor.md
+        - spark-sql-WindowFunctionFrame.md
+      - spark-sql-SparkPlan-WholeStageCodegenExec.md
+      - spark-sql-SparkPlan-WriteToDataSourceV2Exec.md
   - SQL Support:
     - spark-sql-parsing-framework.md
     - spark-sql-AbstractSqlParser.md
