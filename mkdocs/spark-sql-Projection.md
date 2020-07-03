@@ -1,4 +1,6 @@
-== [[Projection]] Projection Contract -- Functions to Produce InternalRow for InternalRow
+title: Projection
+
+# Projection -- Functions to Produce InternalRow for InternalRow
 
 `Projection` is a <<contract, contract>> of Scala functions that produce an link:spark-sql-InternalRow.adoc[internal binary row] for a given internal row.
 

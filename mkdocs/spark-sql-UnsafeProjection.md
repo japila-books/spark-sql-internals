@@ -1,4 +1,6 @@
-== [[UnsafeProjection]] UnsafeProjection -- Generic Function to Encode InternalRows to UnsafeRows
+title: UnsafeProjection
+
+# UnsafeProjection -- Generic Function to Encode InternalRows to UnsafeRows
 
 `UnsafeProjection` is a `Projection` function that encodes <<spark-sql-InternalRow.adoc#, InternalRows>> as <<spark-sql-UnsafeRow.adoc#, UnsafeRows>>.
 

@@ -1,4 +1,6 @@
-== [[SQLMetric]] SQLMetric -- SQL Execution Metric of Physical Operator
+title: SQLMetric
+
+# SQLMetric -- SQL Execution Metric of Physical Operator
 
 `SQLMetric` is a SQL metric for monitoring execution of a link:spark-sql-SparkPlan.adoc[physical operator].
 

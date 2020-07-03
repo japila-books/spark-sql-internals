@@ -1,4 +1,6 @@
-== [[SparkPlan]] SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query
+title: SparkPlan
+
+# SparkPlan -- Physical Operators in Physical Query Plan of Structured Query
 
 `SparkPlan` is the <<contract, contract>> of *physical operators* to build a *physical query plan* (aka _query execution plan_).
 

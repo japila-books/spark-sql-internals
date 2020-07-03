@@ -1,4 +1,4 @@
-== [[ShuffledRowRDD]] ShuffledRowRDD
+# ShuffledRowRDD
 
 `ShuffledRowRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> when:
 

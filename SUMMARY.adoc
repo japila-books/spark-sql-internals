@@ -1,24 +1,5 @@
 = Summary
 
-=== Physical Operators
-
-. link:spark-sql-SparkPlan.adoc[SparkPlan Contract -- Physical Operators in Physical Query Plan of Structured Query]
-. link:spark-sql-CodegenSupport.adoc[CodegenSupport Contract -- Physical Operators with Java Code Generation]
-. link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec Contract -- Leaf Physical Operators to Scan Over BaseRelation]
-. link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader]
-. link:spark-sql-ObjectConsumerExec.adoc[ObjectConsumerExec Contract -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema]
-. link:spark-sql-SparkPlan-BaseLimitExec.adoc[BaseLimitExec Contract]
-. link:spark-sql-SparkPlan-Exchange.adoc[Exchange Contract]
-
-. link:spark-sql-Projection.adoc[Projection Contract -- Functions to Produce InternalRow for InternalRow]
-.. link:spark-sql-UnsafeProjection.adoc[UnsafeProjection -- Generic Function to Project InternalRows to UnsafeRows]
-.. link:spark-sql-GenerateUnsafeProjection.adoc[GenerateUnsafeProjection]
-.. link:spark-sql-GenerateMutableProjection.adoc[GenerateMutableProjection]
-.. link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
-.. link:spark-sql-CodeGeneratorWithInterpretedFallback.adoc[CodeGeneratorWithInterpretedFallback]
-
-. link:spark-sql-SQLMetric.adoc[SQLMetric -- SQL Execution Metric of Physical Operator]
-
 ==== Concrete Physical Operators
 
 . link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
@@ -154,10 +135,6 @@
 . link:spark-sql-PlanSubqueries.adoc[PlanSubqueries]
 . link:spark-sql-ReuseExchange.adoc[ReuseExchange]
 . link:spark-sql-ReuseSubquery.adoc[ReuseSubquery]
-
-== RDDs
-
-. link:spark-sql-ShuffledRowRDD.adoc[ShuffledRowRDD]
 
 == Monitoring
 

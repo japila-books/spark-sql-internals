@@ -1,4 +1,4 @@
-== [[CodeGeneratorWithInterpretedFallback]] CodeGeneratorWithInterpretedFallback
+# CodeGeneratorWithInterpretedFallback
 
 `CodeGeneratorWithInterpretedFallback` is the <<contract, base>> of <<extensions, codegen object generators>> that can create objects for <<createCodeGeneratedObject, codegen>> and <<createInterpretedObject, interpreted>> evaluation paths.
 

@@ -380,6 +380,7 @@ nav:
       - spark-sql-Distribution-HashClusteredDistribution.md
       - spark-sql-Distribution-OrderedDistribution.md
       - spark-sql-Distribution-UnspecifiedDistribution.md
+    - spark-sql-ShuffledRowRDD.md
   - Catalyst (Tree Manipulation Framework):
     - spark-sql-catalyst.md
     - spark-sql-catalyst-TreeNode.md
@@ -535,6 +536,22 @@ nav:
       - spark-sql-LogicalPlan-WithWindowDefinition.md
       - spark-sql-LogicalPlan-WriteToDataSourceV2.md
       - spark-sql-LogicalPlan-View.md
+  - Physical Operators:
+    - spark-sql-SparkPlan.md
+    - spark-sql-CodegenSupport.md
+    - spark-sql-SparkPlan-DataSourceScanExec.md
+    - spark-sql-ColumnarBatchScan.md
+    - spark-sql-ObjectConsumerExec.md
+    - spark-sql-SparkPlan-BaseLimitExec.md
+    - spark-sql-SparkPlan-Exchange.md
+    - Projection:
+      - spark-sql-Projection.md
+      - spark-sql-UnsafeProjection.md
+      - spark-sql-GenerateUnsafeProjection.md
+      - spark-sql-GenerateMutableProjection.md
+      - spark-sql-InterpretedProjection.md
+      - spark-sql-CodeGeneratorWithInterpretedFallback.md
+    - spark-sql-SQLMetric.md
   - SQL Support:
     - spark-sql-parsing-framework.md
     - spark-sql-AbstractSqlParser.md

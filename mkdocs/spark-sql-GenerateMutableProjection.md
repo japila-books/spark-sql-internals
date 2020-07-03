@@ -1,4 +1,4 @@
-== [[GenerateMutableProjection]] GenerateMutableProjection
+# GenerateMutableProjection
 
 `GenerateMutableProjection` is...FIXME
 

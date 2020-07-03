@@ -1,4 +1,4 @@
-== [[InterpretedProjection]] InterpretedProjection
+# InterpretedProjection
 
 `InterpretedProjection` is a link:spark-sql-Projection.adoc[Projection] that...FIXME
 

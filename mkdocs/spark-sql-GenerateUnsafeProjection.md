@@ -1,4 +1,4 @@
-== [[GenerateUnsafeProjection]] GenerateUnsafeProjection
+# GenerateUnsafeProjection
 
 `GenerateUnsafeProjection` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 

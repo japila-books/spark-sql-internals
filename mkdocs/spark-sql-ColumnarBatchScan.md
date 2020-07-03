@@ -1,4 +1,6 @@
-== [[ColumnarBatchScan]] ColumnarBatchScan Contract -- Physical Operators With Vectorized Reader
+title: ColumnarBatchScan
+
+# ColumnarBatchScan -- Physical Operators With Vectorized Reader
 
 `ColumnarBatchScan` is an <<contract, extension>> of <<spark-sql-CodegenSupport.adoc#, CodegenSupport contract>> for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
