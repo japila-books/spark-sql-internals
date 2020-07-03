@@ -1,4 +1,4 @@
-== [[InsertIntoHiveDirCommand]] InsertIntoHiveDirCommand Logical Command
+# InsertIntoHiveDirCommand Logical Command
 
 :spark-version: 2.4.5
 :hive-version: 2.3.6

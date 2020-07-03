@@ -1,4 +1,4 @@
-== [[SaveAsHiveFile]] SaveAsHiveFile Contract -- DataWritingCommands That Write Query Result As Hive Files
+# SaveAsHiveFile -- DataWritingCommands That Write Query Result As Hive Files
 
 :spark-version: 2.4.5
 :hive-version: 2.3.6

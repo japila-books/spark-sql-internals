@@ -1,5 +1,3 @@
-title: ObjectConsumerExec
-
 # ObjectConsumerExec -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema
 
 `ObjectConsumerExec` is the <<contract, contract>> of <<implementations, unary physical operators>> with the child physical operator using a one-attribute <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.

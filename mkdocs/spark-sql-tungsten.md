@@ -1,5 +1,3 @@
-title: Project Tungsten
-
 # Tungsten Execution Backend (Project Tungsten)
 
 The goal of *Project Tungsten* is to improve Spark execution by optimizing Spark jobs for *CPU and memory efficiency* (as opposed to network and disk I/O which are considered fast enough). Tungsten focuses on the hardware architecture of the platform Spark runs on, including but not limited to JVM, LLVM, GPU, NVRAM, etc. It does so by offering the following optimization features:

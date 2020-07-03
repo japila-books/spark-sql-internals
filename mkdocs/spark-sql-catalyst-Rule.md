@@ -1,5 +1,3 @@
-title: Rule
-
 # Rule -- Named Transformation of TreeNodes
 
 `Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_ or _transform_) a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> to produce a new `TreeNode`.

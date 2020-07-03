@@ -1,5 +1,3 @@
-title: Exchange
-
 # Exchange -- Unary Physical Operators for Data Exchange
 
 `Exchange` is the base of link:spark-sql-SparkPlan.adoc#UnaryExecNode[unary physical operators] that exchange data among multiple threads or processes.

@@ -1,5 +1,3 @@
-title: HiveAnalysis
-
 # HiveAnalysis PostHoc Logical Resolution Rule
 
 `HiveAnalysis` is a link:HiveSessionStateBuilder.adoc#postHocResolutionRules[logical posthoc resolution rule] that the link:HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, FIXME>>.

@@ -1,5 +1,3 @@
-title: RuleExecutor
-
 # RuleExecutor -- Tree Transformation Rule Executor
 
 `RuleExecutor` is the <<contract, base>> of <<extensions, rule executors>> that are responsible for <<execute, executing>> a collection of <<batches, batches (of rules)>> to transform a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>>.

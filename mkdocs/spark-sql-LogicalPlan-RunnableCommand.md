@@ -1,5 +1,3 @@
-title: RunnableCommand
-
 # RunnableCommand -- Generic Logical Command with Side Effects
 
 `RunnableCommand` is the generic link:spark-sql-LogicalPlan-Command.adoc[logical command] that is <<run, executed>> eagerly for its side effects.

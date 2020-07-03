@@ -1,5 +1,3 @@
-title: UnsafeRow
-
 # UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format
 
 `UnsafeRow` is a concrete link:spark-sql-InternalRow.adoc[InternalRow] that represents a mutable internal raw-memory (and hence unsafe) binary row format.

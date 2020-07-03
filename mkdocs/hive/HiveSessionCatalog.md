@@ -1,5 +1,3 @@
-title: HiveSessionCatalog
-
 # HiveSessionCatalog -- Hive-Specific Catalog of Relational Entities
 
 :hive-version: 2.3.6

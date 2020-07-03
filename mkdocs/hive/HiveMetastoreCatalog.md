@@ -1,5 +1,3 @@
-title: HiveMetastoreCatalog
-
 # HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
 
 `HiveMetastoreCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that knows how to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>>.

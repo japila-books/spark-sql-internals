@@ -1,5 +1,3 @@
-title: QueryPlanner
-
 # QueryPlanner -- Converting Logical Plan to Physical Trees
 
 `QueryPlanner` <<plan, plans a logical plan for execution>>, i.e. converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:spark-sql-SparkPlan.adoc[physical plans] using <<strategies, strategies>>.

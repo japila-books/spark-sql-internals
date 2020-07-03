@@ -1,5 +1,3 @@
-title: HiveTableScans
-
 # HiveTableScans Execution Planning Strategy
 
 `HiveTableScans` is an link:../spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner]) that <<apply, replaces HiveTableRelation logical operators with HiveTableScanExec physical operators>>.

@@ -1,5 +1,3 @@
-title: ResolveHiveSerdeTable
-
 # ResolveHiveSerdeTable Logical Resolution Rule
 
 `ResolveHiveSerdeTable` is a logical resolution rule (i.e. `Rule[LogicalPlan]`) that the link:HiveSessionStateBuilder.adoc#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, resolve the metadata of a hive table for CreateTable logical operators>>.

@@ -1,4 +1,4 @@
-== [[HadoopTableReader]] HadoopTableReader
+# HadoopTableReader
 
 :hive-version: 2.3.6
 :hadoop-version: 2.10.0

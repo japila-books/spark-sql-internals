@@ -1,4 +1,4 @@
-== [[InsertIntoHiveTable]] InsertIntoHiveTable Logical Command
+# InsertIntoHiveTable Logical Command
 
 `InsertIntoHiveTable` is a link:SaveAsHiveFile.adoc[logical command] that writes the result of executing a <<query, structured query>> to a <<table, Hive table>>.
 

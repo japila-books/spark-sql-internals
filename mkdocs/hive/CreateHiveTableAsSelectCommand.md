@@ -1,4 +1,4 @@
-== [[CreateHiveTableAsSelectCommand]] CreateHiveTableAsSelectCommand Logical Command
+# CreateHiveTableAsSelectCommand Logical Command
 
 `CreateHiveTableAsSelectCommand` is a link:../spark-sql-LogicalPlan-DataWritingCommand.adoc[logical command] that writes the result of executing a <<query, structured query>> to a <<tableDesc, Hive table>> (per <<mode, save mode>>).
 

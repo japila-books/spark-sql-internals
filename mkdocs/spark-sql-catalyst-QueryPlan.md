@@ -1,5 +1,3 @@
-title: QueryPlan
-
 # QueryPlan -- Structured Query Plan
 
 `QueryPlan` is part of link:spark-sql-catalyst.adoc[Catalyst] to build a link:spark-sql-catalyst-TreeNode.adoc[tree of relational operators] of a structured query.

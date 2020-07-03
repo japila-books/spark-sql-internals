@@ -1,5 +1,3 @@
-title: TreeNode
-
 # TreeNode -- Node in Catalyst Tree
 
 `TreeNode` is the <<contract, contract>> of <<implementations, nodes>> in <<spark-sql-catalyst.adoc#, Catalyst>> tree with <<nodeName, name>> and zero or more <<children, children>>.
