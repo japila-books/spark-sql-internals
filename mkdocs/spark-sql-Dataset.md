@@ -332,7 +332,7 @@ Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the i
 ====
 `ofRows` is used when:
 
-* `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, load data from a data source>>
+* `DataFrameReader` is requested to [load data from a data source](DataFrameReader.md#load)
 
 * `Dataset` is requested to execute <<checkpoint, checkpoint>>, `mapPartitionsInR`, <<withPlan, untyped transformations>> and <<withSetOperator, set-based typed transformations>>
 

@@ -14,7 +14,7 @@ DataSourceReader createReader(DataSourceOptions options)
 DataSourceReader createReader(StructType schema, DataSourceOptions options)
 ----
 
-`createReader` is used when `DataSourceV2Relation` leaf logical operator is <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#create, created>> (when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
+`createReader` is used when `DataSourceV2Relation` leaf logical operator is <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#create, created>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md)).
 
 [source, scala]
 ----

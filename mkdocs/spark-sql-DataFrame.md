@@ -60,7 +60,7 @@ scala> counted.show
 +----+-----+
 ----
 
-You can create DataFrames by <<read, loading data from structured files (JSON, Parquet, CSV), RDDs, tables in Hive, or external databases (JDBC)>>. You can also create DataFrames from scratch and build upon them (as in the above example). See https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.DataFrame[DataFrame API]. You can read any format given you have appropriate Spark SQL extension of link:spark-sql-DataFrameReader.adoc[DataFrameReader] to format the dataset appropriately.
+You can create DataFrames by <<read, loading data from structured files (JSON, Parquet, CSV), RDDs, tables in Hive, or external databases (JDBC)>>. You can also create DataFrames from scratch and build upon them (as in the above example). See https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.DataFrame[DataFrame API]. You can read any format given you have appropriate Spark SQL extension of [DataFrameReader](DataFrameReader.md) to format the dataset appropriately.
 
 CAUTION: FIXME Diagram of reading data from sources to create DataFrame
 
@@ -331,9 +331,9 @@ You can create DataFrames by loading data from structured files (JSON, Parquet, 
 read: DataFrameReader
 ----
 
-`read` returns a link:spark-sql-DataFrameReader.adoc[DataFrameReader] instance.
+`read` returns a [DataFrameReader](DataFrameReader.md) instance.
 
-Among the supported structured data (file) formats are (consult link:spark-sql-DataFrameReader.adoc#format[Specifying Data Format (format method)] for `DataFrameReader`):
+Among the supported structured data (file) formats are (consult [Specifying Data Format (format method)](DataFrameReader.md#format) for `DataFrameReader`):
 
 * JSON
 * parquet

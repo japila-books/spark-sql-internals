@@ -7,7 +7,7 @@ NOTE: `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.source
 
 `JdbcRelationProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 
-`JdbcRelationProvider` is used when `DataFrameReader` is requested to load data from link:spark-sql-DataFrameReader.adoc#jdbc[jdbc] data source.
+`JdbcRelationProvider` is used when `DataFrameReader` is requested to load data from [jdbc](DataFrameReader.md#jdbc) data source.
 
 [source, scala]
 ----
@@ -30,7 +30,7 @@ NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelati
 
 `createRelation` creates a `JDBCPartitioningInfo` (using link:spark-sql-JDBCOptions.adoc[JDBCOptions] and the input `parameters` that correspond to the link:spark-sql-JDBCOptions.adoc#options[Options for JDBC Data Source]).
 
-NOTE: `createRelation` uses link:spark-sql-DataFrameReader.adoc#partitionColumn[partitionColumn], link:spark-sql-DataFrameReader.adoc#lowerBound[lowerBound], link:spark-sql-DataFrameReader.adoc#upperBound[upperBound] and link:spark-sql-DataFrameReader.adoc#numPartitions[numPartitions].
+NOTE: `createRelation` uses [partitionColumn](DataFrameReader.md#partitionColumn), [lowerBound](DataFrameReader.md#lowerBound), [upperBound](DataFrameReader.md#upperBound) and [numPartitions](DataFrameReader.md#numPartitions).
 
 In the end, `createRelation` creates a link:spark-sql-JDBCRelation.adoc#creating-instance[JDBCRelation] with link:spark-sql-JDBCRelation.adoc#columnPartition[column partitions] (and link:spark-sql-JDBCOptions.adoc[JDBCOptions]).
 

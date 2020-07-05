@@ -70,12 +70,12 @@ extra:
       link: https://linkedin.com/in/jaceklaskowski
 
 nav:
-  - Home:
-    - index.md
-    - spark-sql.md
-    - spark-sql-dataset-rdd.md
-    - spark-sql-dataset-vs-sql.md
-    - Developing Applications: spark-sql-fundamentals-spark-application-development.md
+  - Home: index.md
+  - spark-sql.md
+  - spark-sql-dataset-rdd.md
+  - spark-sql-dataset-vs-sql.md
+  - Developing Applications:
+    - spark-sql-fundamentals-spark-application-development.md
     - SparkSession:
       - spark-sql-SparkSession.md
       - spark-sql-SparkSession-Builder.md
@@ -91,9 +91,10 @@ nav:
         - spark-sql-ExpressionEncoder-LocalDateTime.md
       - spark-sql-DataFrame.md
       - spark-sql-Row.md
-    - spark-sql-datasource-api.md
-    - spark-sql-DataFrameReader.md
-    - spark-sql-DataFrameWriter.md
+    - Data Source API:
+      - DataSource API: spark-sql-datasource-api.md
+      - DataFrameReader: DataFrameReader.md
+      - spark-sql-DataFrameWriter.md
     - Dataset API:
       - spark-sql-dataset-operators.md
       - spark-sql-Dataset-typed-transformations.md

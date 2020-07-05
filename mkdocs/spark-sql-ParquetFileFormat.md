@@ -3,7 +3,7 @@
 [[shortName]]
 `ParquetFileFormat` is the link:spark-sql-FileFormat.adoc[FileFormat] for *parquet* data source (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).
 
-NOTE: `parquet` is the link:spark-sql-DataFrameReader.adoc#source[default data source format] in Spark SQL.
+NOTE: `parquet` is the [default data source format](DataFrameReader.md#source) in Spark SQL.
 
 NOTE: http://parquet.apache.org/[Apache Parquet] is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 

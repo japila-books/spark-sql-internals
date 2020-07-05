@@ -1,5 +1,3 @@
-title: DataFrameReader
-
 # DataFrameReader -- Loading Data From External Data Sources
 
 `DataFrameReader` is a <<methods, fluent API>> to describe the <<source, input data source>> that will be used to <<load, "load" data from an external data source>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>).

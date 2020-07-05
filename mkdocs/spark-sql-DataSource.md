@@ -43,7 +43,7 @@ NOTE: Data source is also called a *table provider*.
 
 * `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
-* `DataFrameReader` is requested to xref:spark-sql-DataFrameReader.adoc#loadV1Source[load data from a data source (Data Source V1)]
+* `DataFrameReader` is requested to [load data from a data source (Data Source V1)](DataFrameReader.md#loadV1Source)
 
 * `DataFrameWriter` is requested to xref:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (Data Source V1)]
 
@@ -61,7 +61,7 @@ NOTE: Data source is also called a *table provider*.
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
 
-As a Spark SQL developer (_user_), you interact with `DataSource` by link:spark-sql-DataFrameReader.adoc[DataFrameReader] (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
+As a Spark SQL developer (_user_), you interact with `DataSource` by [DataFrameReader](DataFrameReader.md) (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
 
 [source, scala]
 ----
@@ -133,7 +133,7 @@ If a single `DataSourceRegister` provider class is found, `lookupDataSource` sim
 
 If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the <<lookupDataSource-provider1, provider1>> name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the <<lookupDataSource-provider2, provider2>> name (aka _DefaultSource_) instead.
 
-NOTE: xref:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] and xref:spark-sql-DataFrameReader.adoc#format[DataFrameReader.format] methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
+NOTE: xref:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
 
 .Demo: Resolving Data Source by Name
 [source, scala]
@@ -145,11 +145,9 @@ val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
 
 CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
-[NOTE]
-====
 `lookupDataSource` is used when:
 
-* xref:spark-sql-DataFrameReader.adoc#load[DataFrameReader.load] operator is used (to create a source node)
+* [DataFrameReader.load](DataFrameReader.md#load) operator is used (to create a source node)
 
 * xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator is used (to create a sink node)
 
@@ -162,7 +160,6 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 * `DataSource` is requested (_lazily_) for the <<providingClass, providingClass>> internal registry
 
 * xref:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation] posthoc logical resolution rule is executed
-====
 
 === [[createSource]] `createSource` Method
 
@@ -278,13 +275,11 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 | Creates a link:spark-sql-BaseRelation.adoc#HadoopFsRelation[HadoopFsRelation]
 |===
 
-[NOTE]
-====
 `resolveRelation` is used when:
 
 * `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
 
-* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#load[load data from a data source that supports multiple paths]
+* `DataFrameReader` is requested to [load data from a data source that supports multiple paths](DataFrameReader.md#load)
 
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 
@@ -299,7 +294,6 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 * `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * Structured Streaming's `FileStreamSource` creates batches of records
-====
 
 === [[buildStorageFormatFromOptions]] `buildStorageFormatFromOptions` Utility
 

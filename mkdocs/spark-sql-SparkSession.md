@@ -242,7 +242,7 @@ a|
 read: DataFrameReader
 ----
 
-Access to the current <<spark-sql-DataFrameReader.adoc#, DataFrameReader>> to load data from external data sources
+Access to the current [DataFrameReader](DataFrameReader.md) to load data from external data sources
 
 | <<sessionState, sessionState>>
 a|
@@ -667,7 +667,7 @@ Internally, `catalog` creates a link:spark-sql-CatalogImpl.adoc[CatalogImpl] (th
 read: DataFrameReader
 ----
 
-`read` method returns a link:spark-sql-DataFrameReader.adoc[DataFrameReader] that is used to read data from external storage systems and load it into a `DataFrame`.
+`read` method returns a [DataFrameReader](DataFrameReader.md) that is used to read data from external storage systems and load it into a `DataFrame`.
 
 [source, scala]
 ----
@@ -761,8 +761,8 @@ NOTE: link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] is an log
 ====
 `baseRelationToDataFrame` is used when:
 
-* `DataFrameReader` link:spark-sql-DataFrameReader.adoc#load[loads data from a data source that supports multiple paths]
-* `DataFrameReader` link:spark-sql-DataFrameReader.adoc#jdbc[loads data from an external table using JDBC]
+* `DataFrameReader` [loads data from a data source that supports multiple paths](DataFrameReader.md#load)
+* `DataFrameReader` [loads data from an external table using JDBC](DataFrameReader.md#jdbc)
 * `TextInputCSVDataSource` creates a base `Dataset` (of Strings)
 * `TextInputJsonDataSource` creates a base `Dataset` (of Strings)
 ====
@@ -811,16 +811,13 @@ internalCreateDataFrame(
 
 `internalCreateDataFrame` creates a link:spark-sql-Dataset.adoc#ofRows[DataFrame] with a link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[LogicalRDD].
 
-[NOTE]
-====
 `internalCreateDataFrame` is used when:
 
-* `DataFrameReader` is requested to create a DataFrame from Dataset of link:spark-sql-DataFrameReader.adoc#json[JSONs] or link:spark-sql-DataFrameReader.adoc#json[CSVs]
+* `DataFrameReader` is requested to create a DataFrame from Dataset of [JSONs](DataFrameReader.md#json) or [CSVs](DataFrameReader.md#csv)
 
 * `SparkSession` is requested to <<createDataFrame, create a DataFrame from RDD of rows>>
 
 * `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, executed>>
-====
 
 === [[creating-instance]] Creating SparkSession Instance
 

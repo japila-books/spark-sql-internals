@@ -4,7 +4,7 @@ title: DataSourceV2ScanExec
 
 `DataSourceV2ScanExec` is a <<spark-sql-SparkPlan.adoc#LeafExecNode, leaf physical operator>> that represents a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator at execution time.
 
-NOTE: A <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator is created exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
+NOTE: A <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator is created exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) (from a data source with [ReadSupport](spark-sql-ReadSupport.md)).
 
 `DataSourceV2ScanExec` supports <<spark-sql-ColumnarBatchScan.adoc#, ColumnarBatchScan>> with <<supportsBatch, vectorized batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
 

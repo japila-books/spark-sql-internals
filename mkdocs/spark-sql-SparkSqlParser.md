@@ -35,9 +35,9 @@ res0: org.apache.spark.sql.Column = (token = hello)
 
 `SparkSqlParser` is used to parse table strings into their corresponding table identifiers in the following:
 
-* `table` methods in link:spark-sql-DataFrameReader.adoc#table[DataFrameReader] and link:spark-sql-SparkSession.adoc#table[SparkSession]
-* link:spark-sql-DataFrameWriter.adoc#insertInto[insertInto] and link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] methods of `DataFrameWriter`
-* `createExternalTable` and `refreshTable` methods of link:spark-sql-Catalog.adoc[Catalog] (and link:spark-sql-SessionState.adoc#refreshTable[SessionState])
+* `table` methods in [DataFrameReader](DataFrameReader.md#table) and [SparkSession](spark-sql-SparkSession.md#table)
+* [insertInto](spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
+* `createExternalTable` and `refreshTable` methods of [Catalog](spark-sql-Catalog.md) (and [SessionState](spark-sql-SessionState.md#refreshTable))
 
 `SparkSqlParser` is used to translate a SQL text to its corresponding link:spark-sql-LogicalPlan.adoc[logical operator] in link:spark-sql-SparkSession.adoc#sql[SparkSession.sql] method.
 

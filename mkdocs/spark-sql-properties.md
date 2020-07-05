@@ -606,13 +606,13 @@ Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] metho
 
 | [[spark.sql.sources.default]] *spark.sql.sources.default*
 
-Defines the default data source to use for link:spark-sql-DataFrameReader.adoc[DataFrameReader].
+Defines the default data source to use for [DataFrameReader](DataFrameReader.md).
 
 Default: `parquet`
 
 Used when:
 
-* Reading (link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]) or writing (link:spark-sql-DataFrameReader.adoc[DataFrameReader]) datasets
+* Reading (link:spark-sql-DataFrameWriter.adoc[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
 
 * link:spark-sql-Catalog.adoc#createExternalTable[Creating external table from a path] (in `Catalog.createExternalTable`)
 

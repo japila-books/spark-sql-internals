@@ -34,7 +34,7 @@ Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRel
 
 ! `customSchema`
 ! (undefined)
-a! [[customSchema]] Specifies the custom data types of the read schema (that is used at link:spark-sql-DataFrameReader.adoc#jdbc[load time])
+a! [[customSchema]] Specifies the custom data types of the read schema (that is used at [load time](DataFrameReader.md#jdbc))
 
 `customSchema` is a comma-separated list of field definitions with column names and their link:spark-sql-DataType.adoc[data types] in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
 
@@ -75,7 +75,7 @@ Used when:
 
 * `JDBCOptions` is <<creating-instance, created>> (with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
 
-* `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#jdbc, load data from external table using JDBC data source>> (using `DataFrameReader.jdbc` method with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
+* `DataFrameReader` is requested to [load data from external table using JDBC data source](DataFrameReader.md#jdbc) (using `DataFrameReader.jdbc` method with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
 
 ! `driver`
 !
@@ -160,7 +160,7 @@ NOTE: The <<options, options>> are case-insensitive.
 
 `JDBCOptions` is <<creating-instance, created>> when:
 
-* `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#jdbc, load data from an external table using JDBC>> (and create a `DataFrame` to represent the process of loading the data)
+* `DataFrameReader` is requested to [load data from an external table using JDBC](DataFrameReader.md#jdbc) (and create a `DataFrame` to represent the process of loading the data)
 
 * `JdbcRelationProvider` is requested to create a `BaseRelation` (as a <<spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider, RelationProvider>> for loading and a <<spark-sql-JdbcRelationProvider.adoc#createRelation-CreatableRelationProvider, CreatableRelationProvider>> for writing)
 

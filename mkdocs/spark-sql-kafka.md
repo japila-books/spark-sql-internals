@@ -13,7 +13,7 @@ Kafka Data Source supports <<spark-sql-kafka-options.adoc#options, options>> to 
 
 === [[reading]] Reading Data from Kafka Topics
 
-As a Spark developer, you use <<spark-sql-DataFrameReader.adoc#format, DataFrameReader.format>> method to specify Apache Kafka as the external data source to load data from.
+As a Spark developer, you use [DataFrameReader.format](DataFrameReader.md#format) method to specify Apache Kafka as the external data source to load data from.
 
 You use <<spark-sql-KafkaSourceProvider.adoc#shortName, kafka>> (or `org.apache.spark.sql.kafka010.KafkaSourceProvider`) as the input data source format.
 

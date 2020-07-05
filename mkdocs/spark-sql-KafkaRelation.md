@@ -84,7 +84,7 @@ Refer to link:spark-logging.adoc[Logging].
 
 * [[sqlContext]] `SQLContext`
 * [[strategy]] `ConsumerStrategy`
-* [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of <<spark-sql-DataFrameReader.adoc#option, DataFrameReader>>
+* [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of [DataFrameReader](DataFrameReader.md#option)
 * [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
 * [[failOnDataLoss]] `failOnDataLoss` flag
 * [[startingOffsets]] Starting offsets (as <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>>)

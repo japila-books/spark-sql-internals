@@ -17,8 +17,8 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 
 `LogicalRelation` is <<creating-instance, created>> when:
 
-* `DataFrameReader` link:spark-sql-DataFrameReader.adoc#load[loads data from a data source that supports multiple paths] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
-* `DataFrameReader` is requested to load data from an external table using link:spark-sql-DataFrameReader.adoc#jdbc[JDBC] (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
+* `DataFrameReader` [loads data from a data source that supports multiple paths](DataFrameReader.md#load) (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
+* `DataFrameReader` is requested to load data from an external table using [JDBC](DataFrameReader.md#jdbc) (through link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
 * `FindDataSourceTable` logical evaluation rule is link:spark-sql-Analyzer-FindDataSourceTable.adoc#apply[executed]

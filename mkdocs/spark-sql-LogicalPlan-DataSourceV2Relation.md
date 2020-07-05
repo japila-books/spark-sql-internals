@@ -4,7 +4,7 @@ title: DataSourceV2Relation
 
 `DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
 
-`DataSourceV2Relation` is <<creating-instance, created>> (indirectly via <<create, create>> helper method) exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
+`DataSourceV2Relation` is <<creating-instance, created>> (indirectly via <<create, create>> helper method) exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
 
 [[creating-instance]]
 `DataSourceV2Relation` takes the following to be created:
@@ -38,7 +38,7 @@ create(
 
 In the end, `create` <<creating-instance, creates a DataSourceV2Relation>>.
 
-NOTE: `create` is used exclusively when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> (from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>).
+NOTE: `create` is used exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) (from a data source with [ReadSupport](spark-sql-ReadSupport.md)).
 
 === [[computeStats]] Computing Statistics -- `computeStats` Method
 
@@ -139,7 +139,7 @@ Used when:
 
 * `DataSourceV2Relation` logical operator is requested to <<newReader, create a DataSourceReader>>
 
-* `DataSourceV2Relation` factory object is requested to <<create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data (as a DataFrame)>> from a data source with <<spark-sql-ReadSupport.adoc#, ReadSupport>>)
+* `DataSourceV2Relation` factory object is requested to <<create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md))
 
 | createWriter
 a| [[createWriter]]

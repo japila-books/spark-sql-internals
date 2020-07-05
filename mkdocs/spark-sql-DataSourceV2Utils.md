@@ -22,7 +22,7 @@ NOTE: `extractSessionConfigs` supports data sources with <<spark-sql-SessionConf
 ====
 `extractSessionConfigs` is used when:
 
-* `DataFrameReader` is requested to <<spark-sql-DataFrameReader.adoc#load, "load" data as a DataFrame>> (for a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with <<spark-sql-ReadSupport.adoc#, ReadSupport>>)
+* `DataFrameReader` is requested to ["load" data as a DataFrame](DataFrameReader.md#load) (for a [DataSourceV2](spark-sql-DataSourceV2.md) with [ReadSupport](spark-sql-ReadSupport.md))
 
 * `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#save, saves a DataFrame to a data source>> (for a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with <<spark-sql-WriteSupport.adoc#, WriteSupport>>)
 

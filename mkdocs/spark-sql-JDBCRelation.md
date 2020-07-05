@@ -15,7 +15,7 @@ As a <<spark-sql-PrunedFilteredScan.adoc#,PrunedFilteredScan>>, `JDBCRelation` s
 
 `JDBCRelation` is <<creating-instance, created>> when:
 
-* `DataFrameReader` is requested to link:spark-sql-DataFrameReader.adoc#jdbc[load data from an external table using JDBC data source]
+* `DataFrameReader` is requested to [load data from an external table using JDBC data source](DataFrameReader.md#jdbc)
 
 * `JdbcRelationProvider` is requested to link:spark-sql-JdbcRelationProvider.adoc#createRelation-RelationProvider[create a BaseRelation for reading data from a JDBC table]
 

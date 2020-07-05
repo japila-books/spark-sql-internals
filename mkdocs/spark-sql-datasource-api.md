@@ -1,10 +1,8 @@
-title: DataSource API
-
 # DataSource API -- Managing Datasets in External Data Sources
 
 === [[reading-datasets]] Reading Datasets
 
-Spark SQL can read data from external storage systems like files, Hive tables and JDBC databases through link:spark-sql-DataFrameReader.adoc[DataFrameReader] interface.
+Spark SQL can read data from external storage systems like files, Hive tables and JDBC databases through [DataFrameReader](DataFrameReader.md) interface.
 
 You use link:spark-sql-SparkSession.adoc[SparkSession] to access `DataFrameReader` using link:spark-sql-SparkSession.adoc#read[read] operation.
 
@@ -16,7 +14,7 @@ val spark = SparkSession.builder.getOrCreate
 val reader = spark.read
 ----
 
-`DataFrameReader` is an interface to create link:spark-sql-DataFrame.adoc[DataFrames] (aka `Dataset[Row]`) from link:spark-sql-DataFrameReader.adoc#creating-dataframes-from-files[files], link:spark-sql-DataFrameReader.adoc#creating-dataframes-from-tables[Hive tables] or link:spark-sql-DataFrameReader.adoc#jdbc[tables using JDBC].
+`DataFrameReader` is an interface to create link:spark-sql-DataFrame.adoc[DataFrames] (aka `Dataset[Row]`) from [files](DataFrameReader.md#creating-dataframes-from-files), [Hive tables](DataFrameReader.md#creating-dataframes-from-tables) or [tables using JDBC](DataFrameReader.md#jdbc).
 
 [source, scala]
 ----
@@ -24,7 +22,7 @@ val people = reader.csv("people.csv")
 val cities = reader.format("json").load("cities.json")
 ----
 
-As of Spark 2.0, `DataFrameReader` can read text files using link:spark-sql-DataFrameReader.adoc#textFile[textFile] methods that return `Dataset[String]` (not `DataFrames`).
+As of Spark 2.0, `DataFrameReader` can read text files using [textFile](DataFrameReader.md#textFile) methods that return `Dataset[String]` (not `DataFrames`).
 
 [source, scala]
 ----
