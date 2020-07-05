@@ -1,5 +1,3 @@
-title: Spark SQL
-
 # Spark SQL
 
 ## Structured Data Processing with Relational Queries on Massive Scale

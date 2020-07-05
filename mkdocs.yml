@@ -1,29 +1,31 @@
-# many settings are copied verbatim from mkdocs-material
-# https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+# Based on the following mkdocs.yml's:
+# - https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
+# - https://github.com/facelessuser/pymdown-extensions/blob/master/docs/src/mkdocs.yml
 
 site_name: The Internals of Spark SQL
 site_url: https://books.japila.pl/spark-sql-internals
 site_author: Jacek Laskowski
-
-docs_dir: mkdocs
+site_description: Demystifying inner-workings of Spark SQL
 
 # https://squidfunk.github.io/mkdocs-material/getting-started/#adding-a-source-repository
 repo_name: mastering-spark-sql-book
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
 
-google_analytics:
-  - UA-86782445-6
-  - auto
+# FIXME Replace with docs (the default)
+docs_dir: mkdocs
+# FIXME Replace with master (the default) once merged
+edit_uri: tree/mkdocs/mkdocs
 
-copyright: Copyright &copy; 2020 Jacek Laskowski
+copyright: |
+  Copyright &copy; 2020 <a href="https://twitter.com/jaceklaskowski" target="_blank" rel="noopener">Jacek Laskowski</a>
 
 theme:
-  name: 'material'
+  name: material
   language: en
+  icon:
+    logo: material/book-open-page-variant
   features:
-    # I have to reconsider using tabs
-    # once I make up my mind about how to structure tabs right
-    # - tabs
+    - tabs
     - instant
 
 markdown_extensions:
@@ -56,24 +58,27 @@ plugins:
   - search
   - minify:
       minify_html: true
-  # - git-revision-date-localized:
-  #     type: date
+  - git-revision-date-localized
   - awesome-pages
 
 extra:
   social:
-    - icon: fontawesome/brands/github-alt
+    - icon: fontawesome/brands/github
       link: https://github.com/jaceklaskowski
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/jaceklaskowski
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
 
+google_analytics:
+  - UA-86782445-6
+  - auto
+
 nav:
   - Home: index.md
-  - spark-sql.md
-  - spark-sql-dataset-rdd.md
-  - spark-sql-dataset-vs-sql.md
+  - Spark SQL: spark-sql.md
+  - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
+  - Dataset and SQL: spark-sql-dataset-vs-sql.md
   - Developing Applications:
     - spark-sql-fundamentals-spark-application-development.md
     - SparkSession:
@@ -184,551 +189,554 @@ nav:
       - spark-sql-EstimationUtils.md
       - spark-sql-CommandUtils.md
     - spark-sql-catalyst-dsl.md
-  - Tools:
-    - tools/spark-sql-spark-sql.md
-  - SparkSession Registries:
-    - Catalog:
-      - spark-sql-Catalog.md
-      - spark-sql-CatalogImpl.md
-    - spark-sql-ExecutionListenerManager.md
-    - spark-sql-ExperimentalMethods.md
-    - ExternalCatalog:
-      - spark-sql-ExternalCatalog.md
-      - spark-sql-InMemoryCatalog.md
-    - spark-sql-FunctionRegistry.md
-    - spark-sql-GlobalTempViewManager.md
-    - SessionCatalog:
-      - spark-sql-SessionCatalog.md
-      - spark-sql-CatalogTable.md
-      - spark-sql-CatalogStorageFormat.md
-      - spark-sql-CatalogTablePartition.md
-      - spark-sql-BucketSpec.md
-    - SessionState:
-      - spark-sql-SessionState.md
-      - spark-sql-BaseSessionStateBuilder.md
-      - spark-sql-SessionStateBuilder.md
-    - spark-sql-SharedState.md
-    - CacheManager:
-      - spark-sql-CacheManager.md
-      - spark-sql-CachedRDDBuilder.md
-    - spark-sql-RuntimeConfig.md
-    - SQLConf:
-      - spark-sql-SQLConf.md
-      - spark-sql-StaticSQLConf.md
-      - spark-sql-CatalystConf.md
-    - spark-sql-UDFRegistration.md
-  - Data Sources:
-    - File-Based Data Sources:
-      - FileFormat:
-        - spark-sql-FileFormat.md
-        - spark-sql-OrcFileFormat.md
-        - spark-sql-ParquetFileFormat.md
-      - TextBasedFileFormat:
-        - spark-sql-TextBasedFileFormat.md
-        - spark-sql-CSVFileFormat.md
-        - spark-sql-JsonFileFormat.md
-        - spark-sql-TextFileFormat.md
-      - spark-sql-JsonDataSource.md
-      - spark-sql-BaseRelation-HadoopFsRelation.md
-      - FileIndex:
-        - FileIndex.md
-        - CatalogFileIndex.md
-        - InMemoryFileIndex.md
-        - PartitioningAwareFileIndex.md
-        - PrunedInMemoryFileIndex.md
-      - spark-sql-FileFormatWriter.md
-      - spark-sql-SQLHadoopMapReduceCommitProtocol.md
-      - spark-sql-PartitionedFile.md
-      - spark-sql-FileScanRDD.md
-      - spark-sql-ParquetReadSupport.md
-      - spark-sql-RecordReaderIterator.md
-    - Kafka:
-      - spark-sql-kafka.md
-      - spark-sql-kafka-options.md
-      - spark-sql-KafkaSourceProvider.md
-      - spark-sql-KafkaRelation.md
-      - KafkaSourceRDD:
-        - spark-sql-KafkaSourceRDD.md
-        - spark-sql-KafkaSourceRDDOffsetRange.md
-        - spark-sql-KafkaSourceRDDPartition.md
-      - spark-sql-ConsumerStrategy.md
-      - spark-sql-KafkaOffsetReader.md
-      - spark-sql-KafkaOffsetRangeLimit.md
-      - KafkaDataConsumer:
-        - spark-sql-KafkaDataConsumer.md
-        - spark-sql-InternalKafkaConsumer.md
-      - spark-sql-KafkaWriter.md
-      - spark-sql-KafkaWriteTask.md
-      - spark-sql-JsonUtils.md
-    - Avro:
-      - spark-sql-avro.md
-      - spark-sql-AvroOptions.md
-      - spark-sql-AvroFileFormat.md
-      - spark-sql-Expression-CatalystDataToAvro.md
-      - spark-sql-Expression-AvroDataToCatalyst.md
-    - JDBC:
-      - spark-sql-jdbc.md
-      - spark-sql-JDBCOptions.md
-      - spark-sql-JdbcRelationProvider.md
-      - spark-sql-JDBCRelation.md
-      - spark-sql-JDBCRDD.md
-      - spark-sql-JdbcDialect.md
-      - spark-sql-JdbcUtils.md
-    - Console:
-      - spark-sql-console.md
-      - spark-sql-ConsoleSinkProvider.md
-  - Hive Integration:
-    - hive/index.md
-    - hive/configuration-properties.md
-    - hive/spark-sql-hive-metastore.md
-    - DataSinks: hive/spark-sql-DataSinks.md
-    - HiveFileFormat: hive/HiveFileFormat.md
-    - HiveClient:
-      - hive/HiveClient.md
-      - hive/HiveClientImpl.md
-    - HiveUtils: hive/HiveUtils.md
-    - IsolatedClientLoader: hive/IsolatedClientLoader.md
-    - HiveTableRelation: hive/HiveTableRelation.md
-    - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
-    - SaveAsHiveFile: hive/SaveAsHiveFile.md
-    - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
-    - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
-    - HiveTableScans: hive/HiveTableScans.md
-    - HiveTableScanExec: hive/HiveTableScanExec.md
-    - TableReader: hive/TableReader.md
-    - HadoopTableReader: hive/HadoopTableReader.md
-    - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
-    - HiveExternalCatalog: hive/HiveExternalCatalog.md
-    - HiveSessionCatalog: hive/HiveSessionCatalog.md
-    - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
-    - RelationConversions: hive/RelationConversions.md
-    - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
-    - DetermineTableStats: hive/DetermineTableStats.md
-    - HiveAnalysis: hive/HiveAnalysis.md
-  - Extending Spark SQL:
-    - Data Source API V2:
-      - spark-sql-DataSourceV2.md
-      - spark-sql-ReadSupport.md
-      - spark-sql-WriteSupport.md
-      - DataSourceReader:
-        - spark-sql-DataSourceReader.md
-        - spark-sql-SupportsPushDownFilters.md
-        - spark-sql-SupportsPushDownRequiredColumns.md
-        - spark-sql-SupportsReportPartitioning.md
-        - spark-sql-SupportsReportStatistics.md
-        - spark-sql-SupportsScanColumnarBatch.md
-      - spark-sql-DataSourceWriter.md
-      - spark-sql-SessionConfigSupport.md
-      - spark-sql-InputPartition.md
-      - spark-sql-InputPartitionReader.md
-      - spark-sql-DataWriter.md
-      - DataWriterFactory:
-        - spark-sql-DataWriterFactory.md
-        - spark-sql-InternalRowDataWriterFactory.md
-      - spark-sql-DataSourceV2StringFormat.md
-      - DataSourceRDD:
-        - spark-sql-DataSourceRDD.md
-        - spark-sql-DataSourceRDDPartition.md
-      - spark-sql-DataWritingSparkTask.md
-      - spark-sql-DataSourceV2Utils.md
-    - Data Source API V1:
-      - spark-sql-DataSource.md
-      - spark-sql-datasource-custom-formats.md
-      - Relation Providers:
-        - spark-sql-CreatableRelationProvider.md
-        - spark-sql-DataSourceRegister.md
-        - spark-sql-RelationProvider.md
-        - spark-sql-SchemaRelationProvider.md
-      - Extension Contracts:
-        - spark-sql-BaseRelation.md
-        - spark-sql-FileRelation.md
-        - spark-sql-CatalystScan.md
-        - spark-sql-InsertableRelation.md
-        - spark-sql-PrunedFilteredScan.md
-        - spark-sql-PrunedScan.md
-        - spark-sql-TableScan.md
-      - spark-sql-Filter.md
-  - Structured Query Execution:
-    - QueryExecution:
-      - spark-sql-QueryExecution.md
-      - spark-sql-UnsupportedOperationChecker.md
-    - Analyzer:
-      - spark-sql-Analyzer.md
-      - spark-sql-Analyzer-CheckAnalysis.md
-    - SparkOptimizer:
-      - spark-sql-SparkOptimizer.md
-      - spark-sql-Optimizer.md
-    - SparkPlanner:
-      - spark-sql-SparkPlanner.md
-      - spark-sql-SparkStrategy.md
-      - spark-sql-SparkStrategies.md
-    - LogicalPlanStats:
-      - spark-sql-LogicalPlanStats.md
-      - spark-sql-Statistics.md
-      - spark-sql-HintInfo.md
-      - spark-sql-LogicalPlanVisitor.md
-      - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
-      - BasicStatsPlanVisitor:
-        - spark-sql-BasicStatsPlanVisitor.md
-        - spark-sql-AggregateEstimation.md
-        - spark-sql-FilterEstimation.md
-        - spark-sql-JoinEstimation.md
-        - spark-sql-ProjectEstimation.md
-    - Partitioning:
-      - spark-sql-SparkPlan-Partitioning.md
-      - spark-sql-HashPartitioning.md
-    - Distribution:
-      - spark-sql-Distribution.md
-      - spark-sql-Distribution-AllTuples.md
-      - spark-sql-Distribution-BroadcastDistribution.md
-      - spark-sql-Distribution-ClusteredDistribution.md
-      - spark-sql-Distribution-HashClusteredDistribution.md
-      - spark-sql-Distribution-OrderedDistribution.md
-      - spark-sql-Distribution-UnspecifiedDistribution.md
-    - spark-sql-ShuffledRowRDD.md
-  - Catalyst:
-    - Tree Manipulation Framework: spark-sql-catalyst.md
-    - TreeNode: spark-sql-catalyst-TreeNode.md
-    - QueryPlan: spark-sql-catalyst-QueryPlan.md
-    - RuleExecutor: spark-sql-catalyst-RuleExecutor.md
-    - Rule: spark-sql-catalyst-Rule.md
-    - QueryPlanner: spark-sql-catalyst-QueryPlanner.md
-    - GenericStrategy: spark-sql-catalyst-GenericStrategy.md
-  - Catalyst Expressions:
-    - spark-sql-Expression.md
-    - spark-sql-Expression-AggregateExpression.md
-    - spark-sql-Expression-AggregateFunction.md
-    - spark-sql-Expression-AggregateWindowFunction.md
-    - spark-sql-Expression-AttributeReference.md
-    - spark-sql-Expression-Alias.md
-    - spark-sql-Expression-Attribute.md
-    - spark-sql-Expression-BoundReference.md
-    - spark-sql-Expression-CallMethodViaReflection.md
-    - spark-sql-Expression-Coalesce.md
-    - spark-sql-Expression-CodegenFallback.md
-    - spark-sql-Expression-CollectionGenerator.md
-    - spark-sql-Expression-ComplexTypedAggregateExpression.md
-    - spark-sql-Expression-CreateArray.md
-    - spark-sql-Expression-CreateNamedStruct.md
-    - spark-sql-Expression-CreateNamedStructLike.md
-    - spark-sql-Expression-CreateNamedStructUnsafe.md
-    - spark-sql-Expression-CumeDist.md
-    - spark-sql-Expression-DeclarativeAggregate.md
-    - spark-sql-Expression-ExecSubqueryExpression.md
-    - spark-sql-Expression-Exists.md
-    - spark-sql-Expression-ExpectsInputTypes.md
-    - spark-sql-Expression-ExplodeBase.md
-    - spark-sql-Expression-First.md
-    - spark-sql-Expression-Generator.md
-    - spark-sql-Expression-GetArrayStructFields.md
-    - spark-sql-Expression-GetArrayItem.md
-    - spark-sql-Expression-GetMapValue.md
-    - spark-sql-Expression-GetStructField.md
-    - spark-sql-Expression-ImperativeAggregate.md
-    - spark-sql-Expression-In.md
-    - spark-sql-Expression-Inline.md
-    - spark-sql-Expression-InSet.md
-    - spark-sql-Expression-InSubquery.md
-    - spark-sql-Expression-JsonToStructs.md
-    - spark-sql-Expression-JsonTuple.md
-    - spark-sql-Expression-ListQuery.md
-    - spark-sql-Expression-Literal.md
-    - spark-sql-Expression-MonotonicallyIncreasingID.md
-    - spark-sql-Expression-Murmur3Hash.md
-    - spark-sql-Expression-NamedExpression.md
-    - spark-sql-Expression-Nondeterministic.md
-    - spark-sql-Expression-OffsetWindowFunction.md
-    - spark-sql-Expression-ParseToDate.md
-    - spark-sql-Expression-ParseToTimestamp.md
-    - spark-sql-Expression-PlanExpression.md
-    - spark-sql-Expression-PrettyAttribute.md
-    - spark-sql-Expression-RankLike.md
-    - spark-sql-Expression-ResolvedStar.md
-    - spark-sql-Expression-RowNumberLike.md
-    - spark-sql-Expression-RuntimeReplaceable.md
-    - spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
-    - spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
-    - spark-sql-Expression-ScalaUDF.md
-    - spark-sql-Expression-ScalaUDAF.md
-    - spark-sql-Expression-SimpleTypedAggregateExpression.md
-    - spark-sql-Expression-SizeBasedWindowFunction.md
-    - spark-sql-Expression-SortOrder.md
-    - spark-sql-Expression-Stack.md
-    - spark-sql-Expression-Star.md
-    - spark-sql-Expression-StaticInvoke.md
-    - spark-sql-Expression-SubqueryExpression.md
-    - spark-sql-Expression-TimeWindow.md
-    - spark-sql-Expression-TypedAggregateExpression.md
-    - spark-sql-Expression-TypedImperativeAggregate.md
-    - spark-sql-Expression-UnaryExpression.md
-    - spark-sql-Expression-UnixTimestamp.md
-    - spark-sql-Expression-UnresolvedAttribute.md
-    - spark-sql-Expression-UnresolvedFunction.md
-    - spark-sql-Expression-UnresolvedGenerator.md
-    - spark-sql-Expression-UnresolvedOrdinal.md
-    - spark-sql-Expression-UnresolvedRegex.md
-    - spark-sql-Expression-UnresolvedStar.md
-    - spark-sql-Expression-UnresolvedWindowExpression.md
-    - spark-sql-Expression-WindowExpression.md
-    - spark-sql-Expression-WindowFunction.md
-    - spark-sql-Expression-WindowSpecDefinition.md
-  - Logical Operators:
-    - LogicalPlan: spark-sql-LogicalPlan.md
-    - Command: spark-sql-LogicalPlan-Command.md
-    - RunnableCommand: spark-sql-LogicalPlan-RunnableCommand.md
-    - DataWritingCommand: spark-sql-LogicalPlan-DataWritingCommand.md
-    - Concrete Operators:
-      - spark-sql-LogicalPlan-Aggregate.md
-      - spark-sql-LogicalPlan-AlterViewAsCommand.md
-      - spark-sql-LogicalPlan-AnalysisBarrier.md
-      - spark-sql-LogicalPlan-AnalyzeColumnCommand.md
-      - spark-sql-LogicalPlan-AnalyzePartitionCommand.md
-      - spark-sql-LogicalPlan-AnalyzeTableCommand.md
-      - spark-sql-LogicalPlan-AppendData.md
-      - spark-sql-LogicalPlan-ClearCacheCommand.md
-      - spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md
-      - spark-sql-LogicalPlan-CreateDataSourceTableCommand.md
-      - spark-sql-LogicalPlan-CreateTable.md
-      - spark-sql-LogicalPlan-CreateTableCommand.md
-      - spark-sql-LogicalPlan-CreateTempViewUsing.md
-      - spark-sql-LogicalPlan-CreateViewCommand.md
-      - spark-sql-LogicalPlan-DataSourceV2Relation.md
-      - spark-sql-LogicalPlan-DescribeColumnCommand.md
-      - spark-sql-LogicalPlan-DescribeTableCommand.md
-      - spark-sql-LogicalPlan-DeserializeToObject.md
-      - spark-sql-LogicalPlan-DropTableCommand.md
-      - spark-sql-LogicalPlan-Except.md
-      - spark-sql-LogicalPlan-Expand.md
-      - spark-sql-LogicalPlan-ExplainCommand.md
-      - spark-sql-LogicalPlan-ExternalRDD.md
-      - spark-sql-LogicalPlan-Filter.md
-      - spark-sql-LogicalPlan-Generate.md
-      - spark-sql-LogicalPlan-GroupingSets.md
-      - spark-sql-LogicalPlan-Hint.md
-      - spark-sql-LogicalPlan-InMemoryRelation.md
-      - spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md
-      - spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md
-      - InsertIntoDir.md
-      - spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md
-      - InsertIntoTable.md
-      - spark-sql-LogicalPlan-Intersect.md
-      - spark-sql-LogicalPlan-Join.md
-      - spark-sql-LogicalPlan-LeafNode.md
-      - spark-sql-LogicalPlan-LocalRelation.md
-      - spark-sql-LogicalPlan-LogicalRDD.md
-      - spark-sql-LogicalPlan-LogicalRelation.md
-      - spark-sql-LogicalPlan-OneRowRelation.md
-      - spark-sql-LogicalPlan-Pivot.md
-      - spark-sql-LogicalPlan-Project.md
-      - spark-sql-LogicalPlan-Range.md
-      - spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md
-      - spark-sql-LogicalPlan-ResolvedHint.md
-      - spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md
-      - spark-sql-LogicalPlan-ShowCreateTableCommand.md
-      - spark-sql-LogicalPlan-ShowTablesCommand.md
-      - spark-sql-LogicalPlan-Sort.md
-      - spark-sql-LogicalPlan-SubqueryAlias.md
-      - spark-sql-LogicalPlan-TruncateTableCommand.md
-      - spark-sql-LogicalPlan-TypedFilter.md
-      - spark-sql-LogicalPlan-Union.md
-      - spark-sql-LogicalPlan-UnresolvedCatalogRelation.md
-      - spark-sql-LogicalPlan-UnresolvedHint.md
-      - spark-sql-LogicalPlan-UnresolvedInlineTable.md
-      - spark-sql-LogicalPlan-UnresolvedRelation.md
-      - spark-sql-LogicalPlan-UnresolvedTableValuedFunction.md
-      - spark-sql-LogicalPlan-Window.md
-      - spark-sql-LogicalPlan-WithWindowDefinition.md
-      - spark-sql-LogicalPlan-WriteToDataSourceV2.md
-      - spark-sql-LogicalPlan-View.md
-  - Physical Operators:
-    - SparkPlan: spark-sql-SparkPlan.md
-    - CodegenSupport: spark-sql-CodegenSupport.md
-    - DataSourceScanExec: spark-sql-SparkPlan-DataSourceScanExec.md
-    - ColumnarBatchScan: spark-sql-ColumnarBatchScan.md
-    - ObjectConsumerExec: spark-sql-ObjectConsumerExec.md
-    - BaseLimitExec: spark-sql-SparkPlan-BaseLimitExec.md
-    - Exchange: spark-sql-SparkPlan-Exchange.md
-    - Projection:
-      - spark-sql-Projection.md
-      - spark-sql-UnsafeProjection.md
-      - spark-sql-GenerateUnsafeProjection.md
-      - spark-sql-GenerateMutableProjection.md
-      - spark-sql-InterpretedProjection.md
-      - spark-sql-CodeGeneratorWithInterpretedFallback.md
-    - spark-sql-SQLMetric.md
-    - Concrete Operators:
-      - spark-sql-SparkPlan-BroadcastExchangeExec.md
-      - spark-sql-SparkPlan-BroadcastHashJoinExec.md
-      - spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md
-      - spark-sql-SparkPlan-CartesianProductExec.md
-      - spark-sql-SparkPlan-CoalesceExec.md
-      - spark-sql-SparkPlan-CoGroupExec.md
-      - spark-sql-SparkPlan-DataSourceV2ScanExec.md
-      - spark-sql-SparkPlan-DataWritingCommandExec.md
-      - spark-sql-SparkPlan-DebugExec.md
-      - spark-sql-SparkPlan-DeserializeToObjectExec.md
-      - spark-sql-SparkPlan-ExecutedCommandExec.md
-      - spark-sql-SparkPlan-ExpandExec.md
-      - spark-sql-SparkPlan-ExternalRDDScanExec.md
-      - spark-sql-SparkPlan-FileSourceScanExec.md
-      - spark-sql-SparkPlan-FilterExec.md
-      - spark-sql-SparkPlan-GenerateExec.md
-      - spark-sql-SparkPlan-HashAggregateExec.md
-      - spark-sql-SparkPlan-InMemoryTableScanExec.md
-      - spark-sql-SparkPlan-LocalTableScanExec.md
-      - spark-sql-SparkPlan-MapElementsExec.md
-      - spark-sql-SparkPlan-ObjectHashAggregateExec.md
-      - spark-sql-SparkPlan-ObjectProducerExec.md
-      - spark-sql-SparkPlan-ProjectExec.md
-      - spark-sql-SparkPlan-RangeExec.md
-      - spark-sql-SparkPlan-RDDScanExec.md
-      - spark-sql-SparkPlan-ReusedExchangeExec.md
-      - spark-sql-SparkPlan-RowDataSourceScanExec.md
-      - spark-sql-SparkPlan-SampleExec.md
-      - spark-sql-SparkPlan-ShuffleExchangeExec.md
-      - spark-sql-SparkPlan-ShuffledHashJoinExec.md
-      - spark-sql-SparkPlan-SerializeFromObjectExec.md
-      - spark-sql-SparkPlan-SortAggregateExec.md
-      - spark-sql-SparkPlan-SortMergeJoinExec.md
-      - spark-sql-SparkPlan-SortExec.md
-      - spark-sql-SparkPlan-SubqueryExec.md
-      - spark-sql-SparkPlan-InputAdapter.md
-      - WindowExec:
-        - spark-sql-SparkPlan-WindowExec.md
-        - spark-sql-AggregateProcessor.md
-        - spark-sql-WindowFunctionFrame.md
-      - spark-sql-SparkPlan-WholeStageCodegenExec.md
-      - spark-sql-SparkPlan-WriteToDataSourceV2Exec.md
-  - Logical Analysis Rules:
-    - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
-    - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md
-    - DataSourceAnalysis: spark-sql-Analyzer-DataSourceAnalysis.md
-    - ExtractWindowExpressions: spark-sql-Analyzer-ExtractWindowExpressions.md
-    - FindDataSourceTable: spark-sql-Analyzer-FindDataSourceTable.md
-    - HandleNullInputsForUDF: spark-sql-Analyzer-HandleNullInputsForUDF.md
-    - InConversion: spark-sql-Analyzer-TypeCoercionRule-InConversion.md
-    - LookupFunctions: spark-sql-Analyzer-LookupFunctions.md
-    - PreprocessTableCreation: spark-sql-Analyzer-PreprocessTableCreation.md
-    - PreWriteCheck: spark-sql-Analyzer-PreWriteCheck.md
-    - ResolveAliases: spark-sql-Analyzer-ResolveAliases.md
-    - ResolveBroadcastHints: spark-sql-Analyzer-ResolveBroadcastHints.md
-    - ResolveCoalesceHints: spark-sql-Analyzer-ResolveCoalesceHints.md
-    - ResolveCreateNamedStruct: spark-sql-Analyzer-ResolveCreateNamedStruct.md
-    - ResolveFunctions: spark-sql-Analyzer-ResolveFunctions.md
-    - ResolveInlineTables: spark-sql-Analyzer-ResolveInlineTables.md
-    - ResolveMissingReferences: spark-sql-Analyzer-ResolveMissingReferences.md
-    - ResolveOrdinalInOrderByAndGroupBy: spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md
-    - ResolveOutputRelation: spark-sql-Analyzer-ResolveOutputRelation.md
-    - ResolveReferences: spark-sql-Analyzer-ResolveReferences.md
-    - ResolveRelations: spark-sql-Analyzer-ResolveRelations.md
-    - ResolveSQLOnFile: spark-sql-Analyzer-ResolveSQLOnFile.md
-    - ResolveSubquery: spark-sql-Analyzer-ResolveSubquery.md
-    - ResolveTimeZone: ResolveTimeZone.md
-    - ResolveWindowFrame: spark-sql-Analyzer-ResolveWindowFrame.md
-    - ResolveWindowOrder: spark-sql-Analyzer-ResolveWindowOrder.md
-    - TimeWindowing: spark-sql-Analyzer-TimeWindowing.md
-    - UpdateOuterReferences: spark-sql-Analyzer-UpdateOuterReferences.md
-    - WindowFrameCoercion: spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md
-    - WidenSetOperationTypes: spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.md
-    - WindowsSubstitution: spark-sql-Analyzer-WindowsSubstitution.md
-  - Logical Optimizations:
-    - Base Optimizations (Optimizer):
-      - CollapseWindow: spark-sql-Optimizer-CollapseWindow.md
-      - ColumnPruning: spark-sql-Optimizer-ColumnPruning.md
-      - CombineTypedFilters: spark-sql-Optimizer-CombineTypedFilters.md
-      - CombineUnions: spark-sql-Optimizer-CombineUnions.md
-      - ComputeCurrentTime: spark-sql-Optimizer-ComputeCurrentTime.md
-      - ConstantFolding: spark-sql-Optimizer-ConstantFolding.md
-      - CostBasedJoinReorder: spark-sql-Optimizer-CostBasedJoinReorder.md
-      - DecimalAggregates: spark-sql-Optimizer-DecimalAggregates.md
-      - EliminateSerialization: spark-sql-Optimizer-EliminateSerialization.md
-      - EliminateSubqueryAliases: spark-sql-Optimizer-EliminateSubqueryAliases.md
-      - EliminateView: spark-sql-Optimizer-EliminateView.md
-      - GetCurrentDatabase: spark-sql-Optimizer-GetCurrentDatabase.md
-      - InferFiltersFromConstraints: spark-sql-Optimizer-InferFiltersFromConstraints.md
-      - LimitPushDown: spark-sql-Optimizer-LimitPushDown.md
-      - NullPropagation: spark-sql-Optimizer-NullPropagation.md
-      - OptimizeIn: spark-sql-Optimizer-OptimizeIn.md
-      - OptimizeSubqueries: spark-sql-Optimizer-OptimizeSubqueries.md
-      - PropagateEmptyRelation: spark-sql-Optimizer-PropagateEmptyRelation.md
-      - PullupCorrelatedPredicates: spark-sql-Optimizer-PullupCorrelatedPredicates.md
-      - PushDownPredicate: spark-sql-Optimizer-PushDownPredicate.md
-      - PushPredicateThroughJoin: spark-sql-Optimizer-PushPredicateThroughJoin.md
-      - ReorderJoin: spark-sql-Optimizer-ReorderJoin.md
-      - ReplaceExpressions: spark-sql-Optimizer-ReplaceExpressions.md
-      - ReplaceExceptWithAntiJoin: spark-sql-Optimizer-ReplaceExceptWithAntiJoin.md
-      - ReplaceExceptWithFilter: spark-sql-Optimizer-ReplaceExceptWithFilter.md
-      - RewriteCorrelatedScalarSubquery: spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md
-      - RewriteExceptAll: spark-sql-Optimizer-RewriteExceptAll.md
-      - RewritePredicateSubquery: spark-sql-Optimizer-RewritePredicateSubquery.md
-      - SimplifyCasts: spark-sql-Optimizer-SimplifyCasts.md
-    - Extended Optimizations (SparkOptimizer):
-      - ExtractPythonUDFFromAggregate: spark-sql-SparkOptimizer-ExtractPythonUDFFromAggregate.md
-      - OptimizeMetadataOnlyQuery: spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.md
-      - PruneFileSourcePartitions: spark-sql-SparkOptimizer-PruneFileSourcePartitions.md
-      - PushDownOperatorsToDataSource: spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.md
-  - Execution Planning Strategies:
-    - Aggregation: spark-sql-SparkStrategy-Aggregation.md
-    - BasicOperators: spark-sql-SparkStrategy-BasicOperators.md
-    - DataSourceStrategy: spark-sql-SparkStrategy-DataSourceStrategy.md
-    - DataSourceV2Strategy: spark-sql-SparkStrategy-DataSourceV2Strategy.md
-    - FileSourceStrategy: spark-sql-SparkStrategy-FileSourceStrategy.md
-    - InMemoryScans: spark-sql-SparkStrategy-InMemoryScans.md
-    - JoinSelection: spark-sql-SparkStrategy-JoinSelection.md
-    - SpecialLimits: spark-sql-SparkStrategy-SpecialLimits.md
-  - Physical Optimizations:
-    - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
-    - EnsureRequirements: spark-sql-EnsureRequirements.md
-    - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
-    - PlanSubqueries: spark-sql-PlanSubqueries.md
-    - ReuseExchange: spark-sql-ReuseExchange.md
-    - ReuseSubquery: spark-sql-ReuseSubquery.md
-  - SQL Support:
-    - spark-sql-parsing-framework.md
-    - spark-sql-AbstractSqlParser.md
-    - spark-sql-AstBuilder.md
-    - spark-sql-CatalystSqlParser.md
-    - spark-sql-ParserInterface.md
-    - spark-sql-SparkSqlAstBuilder.md
-    - spark-sql-SparkSqlParser.md
-  - Project Tungsten:
-    - Tungsten Execution Backend: spark-sql-tungsten.md
-    - InternalRow: spark-sql-InternalRow.md
-    - UnsafeRow: spark-sql-UnsafeRow.md
-    - AggregationIterator:
-      - spark-sql-AggregationIterator.md
-      - spark-sql-ObjectAggregationIterator.md
-      - spark-sql-SortBasedAggregationIterator.md
-      - spark-sql-TungstenAggregationIterator.md
-    - spark-sql-CatalystSerde.md
-    - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
-    - spark-sql-UnsafeFixedWidthAggregationMap.md
-  - Monitoring:
-    - Web UI and SQL Tab:
-      - SQLTab: spark-sql-webui.md
-      - SQLListener: spark-sql-SQLListener.md
-    - QueryExecutionListener: spark-sql-QueryExecutionListener.md
-    - SQLAppStatusListener: spark-sql-SQLAppStatusListener.md
-    - SQLAppStatusPlugin: spark-sql-SQLAppStatusPlugin.md
-    - SQLAppStatusStore: spark-sql-SQLAppStatusStore.md
-    - WriteTaskStats:
-      - WriteTaskStats: spark-sql-WriteTaskStats.md
-      - BasicWriteTaskStats: spark-sql-BasicWriteTaskStats.md
-    - WriteTaskStatsTracker:
-      - WriteTaskStatsTracker: spark-sql-WriteTaskStatsTracker.md
-      - BasicWriteTaskStatsTracker: spark-sql-BasicWriteTaskStatsTracker.md
-    - WriteJobStatsTracker:
-      - WriteJobStatsTracker: spark-sql-WriteJobStatsTracker.md
-      - BasicWriteJobStatsTracker: spark-sql-BasicWriteJobStatsTracker.md
-    - Logging: spark-logging.md
-  - Spark Thrift Server:
-    - thrift-server/spark-sql-thrift-server.md
-    - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
-  - Performance Tuning and Debugging:
-    - Performance Tuning: spark-sql-performance-tuning.md
-    - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
-    - Debugging Query Execution: spark-sql-debugging-query-execution.md
-  - Varia:
+  - Internals:
+    - SparkSession Registries:
+      - Catalog:
+        - spark-sql-Catalog.md
+        - spark-sql-CatalogImpl.md
+      - spark-sql-ExecutionListenerManager.md
+      - spark-sql-ExperimentalMethods.md
+      - ExternalCatalog:
+        - spark-sql-ExternalCatalog.md
+        - spark-sql-InMemoryCatalog.md
+      - spark-sql-FunctionRegistry.md
+      - spark-sql-GlobalTempViewManager.md
+      - SessionCatalog:
+        - spark-sql-SessionCatalog.md
+        - spark-sql-CatalogTable.md
+        - spark-sql-CatalogStorageFormat.md
+        - spark-sql-CatalogTablePartition.md
+        - spark-sql-BucketSpec.md
+      - SessionState:
+        - spark-sql-SessionState.md
+        - spark-sql-BaseSessionStateBuilder.md
+        - spark-sql-SessionStateBuilder.md
+      - spark-sql-SharedState.md
+      - CacheManager:
+        - spark-sql-CacheManager.md
+        - spark-sql-CachedRDDBuilder.md
+      - spark-sql-RuntimeConfig.md
+      - SQLConf:
+        - spark-sql-SQLConf.md
+        - spark-sql-StaticSQLConf.md
+        - spark-sql-CatalystConf.md
+      - spark-sql-UDFRegistration.md
+    - Data Sources:
+      - File-Based Data Sources:
+        - FileFormat:
+          - spark-sql-FileFormat.md
+          - spark-sql-OrcFileFormat.md
+          - spark-sql-ParquetFileFormat.md
+        - TextBasedFileFormat:
+          - spark-sql-TextBasedFileFormat.md
+          - spark-sql-CSVFileFormat.md
+          - spark-sql-JsonFileFormat.md
+          - spark-sql-TextFileFormat.md
+        - spark-sql-JsonDataSource.md
+        - spark-sql-BaseRelation-HadoopFsRelation.md
+        - FileIndex:
+          - FileIndex.md
+          - CatalogFileIndex.md
+          - InMemoryFileIndex.md
+          - PartitioningAwareFileIndex.md
+          - PrunedInMemoryFileIndex.md
+        - spark-sql-FileFormatWriter.md
+        - spark-sql-SQLHadoopMapReduceCommitProtocol.md
+        - spark-sql-PartitionedFile.md
+        - spark-sql-FileScanRDD.md
+        - spark-sql-ParquetReadSupport.md
+        - spark-sql-RecordReaderIterator.md
+      - Kafka:
+        - spark-sql-kafka.md
+        - spark-sql-kafka-options.md
+        - spark-sql-KafkaSourceProvider.md
+        - spark-sql-KafkaRelation.md
+        - KafkaSourceRDD:
+          - spark-sql-KafkaSourceRDD.md
+          - spark-sql-KafkaSourceRDDOffsetRange.md
+          - spark-sql-KafkaSourceRDDPartition.md
+        - spark-sql-ConsumerStrategy.md
+        - spark-sql-KafkaOffsetReader.md
+        - spark-sql-KafkaOffsetRangeLimit.md
+        - KafkaDataConsumer:
+          - spark-sql-KafkaDataConsumer.md
+          - spark-sql-InternalKafkaConsumer.md
+        - spark-sql-KafkaWriter.md
+        - spark-sql-KafkaWriteTask.md
+        - spark-sql-JsonUtils.md
+      - Avro:
+        - spark-sql-avro.md
+        - spark-sql-AvroOptions.md
+        - spark-sql-AvroFileFormat.md
+        - spark-sql-Expression-CatalystDataToAvro.md
+        - spark-sql-Expression-AvroDataToCatalyst.md
+      - JDBC:
+        - spark-sql-jdbc.md
+        - spark-sql-JDBCOptions.md
+        - spark-sql-JdbcRelationProvider.md
+        - spark-sql-JDBCRelation.md
+        - spark-sql-JDBCRDD.md
+        - spark-sql-JdbcDialect.md
+        - spark-sql-JdbcUtils.md
+      - Console:
+        - spark-sql-console.md
+        - spark-sql-ConsoleSinkProvider.md
+    - Hive Integration:
+      - hive/index.md
+      - hive/configuration-properties.md
+      - hive/spark-sql-hive-metastore.md
+      - DataSinks: hive/spark-sql-DataSinks.md
+      - HiveFileFormat: hive/HiveFileFormat.md
+      - HiveClient:
+        - hive/HiveClient.md
+        - hive/HiveClientImpl.md
+      - HiveUtils: hive/HiveUtils.md
+      - IsolatedClientLoader: hive/IsolatedClientLoader.md
+      - HiveTableRelation: hive/HiveTableRelation.md
+      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
+      - SaveAsHiveFile: hive/SaveAsHiveFile.md
+      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
+      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
+      - HiveTableScans: hive/HiveTableScans.md
+      - HiveTableScanExec: hive/HiveTableScanExec.md
+      - TableReader: hive/TableReader.md
+      - HadoopTableReader: hive/HadoopTableReader.md
+      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
+      - HiveExternalCatalog: hive/HiveExternalCatalog.md
+      - HiveSessionCatalog: hive/HiveSessionCatalog.md
+      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
+      - RelationConversions: hive/RelationConversions.md
+      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
+      - DetermineTableStats: hive/DetermineTableStats.md
+      - HiveAnalysis: hive/HiveAnalysis.md
+    - Extending Spark SQL:
+      - Data Source API V2:
+        - spark-sql-DataSourceV2.md
+        - spark-sql-ReadSupport.md
+        - spark-sql-WriteSupport.md
+        - DataSourceReader:
+          - spark-sql-DataSourceReader.md
+          - spark-sql-SupportsPushDownFilters.md
+          - spark-sql-SupportsPushDownRequiredColumns.md
+          - spark-sql-SupportsReportPartitioning.md
+          - spark-sql-SupportsReportStatistics.md
+          - spark-sql-SupportsScanColumnarBatch.md
+        - spark-sql-DataSourceWriter.md
+        - spark-sql-SessionConfigSupport.md
+        - spark-sql-InputPartition.md
+        - spark-sql-InputPartitionReader.md
+        - spark-sql-DataWriter.md
+        - DataWriterFactory:
+          - spark-sql-DataWriterFactory.md
+          - spark-sql-InternalRowDataWriterFactory.md
+        - spark-sql-DataSourceV2StringFormat.md
+        - DataSourceRDD:
+          - spark-sql-DataSourceRDD.md
+          - spark-sql-DataSourceRDDPartition.md
+        - spark-sql-DataWritingSparkTask.md
+        - spark-sql-DataSourceV2Utils.md
+      - Data Source API V1:
+        - spark-sql-DataSource.md
+        - spark-sql-datasource-custom-formats.md
+        - Relation Providers:
+          - spark-sql-CreatableRelationProvider.md
+          - spark-sql-DataSourceRegister.md
+          - spark-sql-RelationProvider.md
+          - spark-sql-SchemaRelationProvider.md
+        - Extension Contracts:
+          - spark-sql-BaseRelation.md
+          - spark-sql-FileRelation.md
+          - spark-sql-CatalystScan.md
+          - spark-sql-InsertableRelation.md
+          - spark-sql-PrunedFilteredScan.md
+          - spark-sql-PrunedScan.md
+          - spark-sql-TableScan.md
+        - spark-sql-Filter.md
+    - Structured Query Execution:
+      - QueryExecution:
+        - spark-sql-QueryExecution.md
+        - spark-sql-UnsupportedOperationChecker.md
+      - Analyzer:
+        - spark-sql-Analyzer.md
+        - spark-sql-Analyzer-CheckAnalysis.md
+      - SparkOptimizer:
+        - spark-sql-SparkOptimizer.md
+        - spark-sql-Optimizer.md
+      - SparkPlanner:
+        - spark-sql-SparkPlanner.md
+        - spark-sql-SparkStrategy.md
+        - spark-sql-SparkStrategies.md
+      - LogicalPlanStats:
+        - spark-sql-LogicalPlanStats.md
+        - spark-sql-Statistics.md
+        - spark-sql-HintInfo.md
+        - spark-sql-LogicalPlanVisitor.md
+        - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
+        - BasicStatsPlanVisitor:
+          - spark-sql-BasicStatsPlanVisitor.md
+          - spark-sql-AggregateEstimation.md
+          - spark-sql-FilterEstimation.md
+          - spark-sql-JoinEstimation.md
+          - spark-sql-ProjectEstimation.md
+      - Partitioning:
+        - spark-sql-SparkPlan-Partitioning.md
+        - spark-sql-HashPartitioning.md
+      - Distribution:
+        - spark-sql-Distribution.md
+        - spark-sql-Distribution-AllTuples.md
+        - spark-sql-Distribution-BroadcastDistribution.md
+        - spark-sql-Distribution-ClusteredDistribution.md
+        - spark-sql-Distribution-HashClusteredDistribution.md
+        - spark-sql-Distribution-OrderedDistribution.md
+        - spark-sql-Distribution-UnspecifiedDistribution.md
+      - spark-sql-ShuffledRowRDD.md
+    - Catalyst:
+      - Tree Manipulation Framework: spark-sql-catalyst.md
+      - TreeNode: spark-sql-catalyst-TreeNode.md
+      - QueryPlan: spark-sql-catalyst-QueryPlan.md
+      - RuleExecutor: spark-sql-catalyst-RuleExecutor.md
+      - Rule: spark-sql-catalyst-Rule.md
+      - QueryPlanner: spark-sql-catalyst-QueryPlanner.md
+      - GenericStrategy: spark-sql-catalyst-GenericStrategy.md
+    - Catalyst Expressions:
+      - spark-sql-Expression.md
+      - spark-sql-Expression-AggregateExpression.md
+      - spark-sql-Expression-AggregateFunction.md
+      - spark-sql-Expression-AggregateWindowFunction.md
+      - spark-sql-Expression-AttributeReference.md
+      - spark-sql-Expression-Alias.md
+      - spark-sql-Expression-Attribute.md
+      - spark-sql-Expression-BoundReference.md
+      - spark-sql-Expression-CallMethodViaReflection.md
+      - spark-sql-Expression-Coalesce.md
+      - spark-sql-Expression-CodegenFallback.md
+      - spark-sql-Expression-CollectionGenerator.md
+      - spark-sql-Expression-ComplexTypedAggregateExpression.md
+      - spark-sql-Expression-CreateArray.md
+      - spark-sql-Expression-CreateNamedStruct.md
+      - spark-sql-Expression-CreateNamedStructLike.md
+      - spark-sql-Expression-CreateNamedStructUnsafe.md
+      - spark-sql-Expression-CumeDist.md
+      - spark-sql-Expression-DeclarativeAggregate.md
+      - spark-sql-Expression-ExecSubqueryExpression.md
+      - spark-sql-Expression-Exists.md
+      - spark-sql-Expression-ExpectsInputTypes.md
+      - spark-sql-Expression-ExplodeBase.md
+      - spark-sql-Expression-First.md
+      - spark-sql-Expression-Generator.md
+      - spark-sql-Expression-GetArrayStructFields.md
+      - spark-sql-Expression-GetArrayItem.md
+      - spark-sql-Expression-GetMapValue.md
+      - spark-sql-Expression-GetStructField.md
+      - spark-sql-Expression-ImperativeAggregate.md
+      - spark-sql-Expression-In.md
+      - spark-sql-Expression-Inline.md
+      - spark-sql-Expression-InSet.md
+      - spark-sql-Expression-InSubquery.md
+      - spark-sql-Expression-JsonToStructs.md
+      - spark-sql-Expression-JsonTuple.md
+      - spark-sql-Expression-ListQuery.md
+      - spark-sql-Expression-Literal.md
+      - spark-sql-Expression-MonotonicallyIncreasingID.md
+      - spark-sql-Expression-Murmur3Hash.md
+      - spark-sql-Expression-NamedExpression.md
+      - spark-sql-Expression-Nondeterministic.md
+      - spark-sql-Expression-OffsetWindowFunction.md
+      - spark-sql-Expression-ParseToDate.md
+      - spark-sql-Expression-ParseToTimestamp.md
+      - spark-sql-Expression-PlanExpression.md
+      - spark-sql-Expression-PrettyAttribute.md
+      - spark-sql-Expression-RankLike.md
+      - spark-sql-Expression-ResolvedStar.md
+      - spark-sql-Expression-RowNumberLike.md
+      - spark-sql-Expression-RuntimeReplaceable.md
+      - spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
+      - spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
+      - spark-sql-Expression-ScalaUDF.md
+      - spark-sql-Expression-ScalaUDAF.md
+      - spark-sql-Expression-SimpleTypedAggregateExpression.md
+      - spark-sql-Expression-SizeBasedWindowFunction.md
+      - spark-sql-Expression-SortOrder.md
+      - spark-sql-Expression-Stack.md
+      - spark-sql-Expression-Star.md
+      - spark-sql-Expression-StaticInvoke.md
+      - spark-sql-Expression-SubqueryExpression.md
+      - spark-sql-Expression-TimeWindow.md
+      - spark-sql-Expression-TypedAggregateExpression.md
+      - spark-sql-Expression-TypedImperativeAggregate.md
+      - spark-sql-Expression-UnaryExpression.md
+      - spark-sql-Expression-UnixTimestamp.md
+      - spark-sql-Expression-UnresolvedAttribute.md
+      - spark-sql-Expression-UnresolvedFunction.md
+      - spark-sql-Expression-UnresolvedGenerator.md
+      - spark-sql-Expression-UnresolvedOrdinal.md
+      - spark-sql-Expression-UnresolvedRegex.md
+      - spark-sql-Expression-UnresolvedStar.md
+      - spark-sql-Expression-UnresolvedWindowExpression.md
+      - spark-sql-Expression-WindowExpression.md
+      - spark-sql-Expression-WindowFunction.md
+      - spark-sql-Expression-WindowSpecDefinition.md
+    - Logical Operators:
+      - LogicalPlan: logical-operators/LogicalPlan.md
+      - Command: logical-operators/Command.md
+      - RunnableCommand: logical-operators/RunnableCommand.md
+      - DataWritingCommand: logical-operators/DataWritingCommand.md
+      - Concrete Operators:
+        - logical-operators/Aggregate.md
+        - logical-operators/AlterViewAsCommand.md
+        - logical-operators/AnalysisBarrier.md
+        - logical-operators/AnalyzeColumnCommand.md
+        - logical-operators/AnalyzePartitionCommand.md
+        - logical-operators/AnalyzeTableCommand.md
+        - logical-operators/AppendData.md
+        - logical-operators/ClearCacheCommand.md
+        - logical-operators/CreateDataSourceTableAsSelectCommand.md
+        - logical-operators/CreateDataSourceTableCommand.md
+        - logical-operators/CreateTable.md
+        - logical-operators/CreateTableCommand.md
+        - logical-operators/CreateTempViewUsing.md
+        - logical-operators/CreateViewCommand.md
+        - logical-operators/DataSourceV2Relation.md
+        - logical-operators/DescribeColumnCommand.md
+        - logical-operators/DescribeTableCommand.md
+        - logical-operators/DeserializeToObject.md
+        - logical-operators/DropTableCommand.md
+        - logical-operators/Except.md
+        - logical-operators/Expand.md
+        - logical-operators/ExplainCommand.md
+        - logical-operators/ExternalRDD.md
+        - logical-operators/Filter.md
+        - logical-operators/Generate.md
+        - logical-operators/GroupingSets.md
+        - logical-operators/Hint.md
+        - logical-operators/InMemoryRelation.md
+        - logical-operators/InsertIntoDataSourceCommand.md
+        - logical-operators/InsertIntoDataSourceDirCommand.md
+        - logical-operators/InsertIntoDir.md
+        - logical-operators/InsertIntoHadoopFsRelationCommand.md
+        - logical-operators/InsertIntoTable.md
+        - logical-operators/Intersect.md
+        - logical-operators/Join.md
+        - logical-operators/LeafNode.md
+        - logical-operators/LocalRelation.md
+        - logical-operators/LogicalRDD.md
+        - logical-operators/LogicalRelation.md
+        - logical-operators/OneRowRelation.md
+        - logical-operators/Pivot.md
+        - logical-operators/Project.md
+        - logical-operators/Range.md
+        - logical-operators/Repartition-RepartitionByExpression.md
+        - logical-operators/ResolvedHint.md
+        - logical-operators/SaveIntoDataSourceCommand.md
+        - logical-operators/ShowCreateTableCommand.md
+        - logical-operators/ShowTablesCommand.md
+        - logical-operators/Sort.md
+        - logical-operators/SubqueryAlias.md
+        - logical-operators/TruncateTableCommand.md
+        - logical-operators/TypedFilter.md
+        - logical-operators/Union.md
+        - logical-operators/UnresolvedCatalogRelation.md
+        - logical-operators/UnresolvedHint.md
+        - logical-operators/UnresolvedInlineTable.md
+        - logical-operators/UnresolvedRelation.md
+        - logical-operators/UnresolvedTableValuedFunction.md
+        - logical-operators/Window.md
+        - logical-operators/WithWindowDefinition.md
+        - logical-operators/WriteToDataSourceV2.md
+        - logical-operators/View.md
+    - Physical Operators:
+      - SparkPlan: spark-sql-SparkPlan.md
+      - CodegenSupport: spark-sql-CodegenSupport.md
+      - DataSourceScanExec: spark-sql-SparkPlan-DataSourceScanExec.md
+      - ColumnarBatchScan: spark-sql-ColumnarBatchScan.md
+      - ObjectConsumerExec: spark-sql-ObjectConsumerExec.md
+      - BaseLimitExec: spark-sql-SparkPlan-BaseLimitExec.md
+      - Exchange: spark-sql-SparkPlan-Exchange.md
+      - Projection:
+        - spark-sql-Projection.md
+        - spark-sql-UnsafeProjection.md
+        - spark-sql-GenerateUnsafeProjection.md
+        - spark-sql-GenerateMutableProjection.md
+        - spark-sql-InterpretedProjection.md
+        - spark-sql-CodeGeneratorWithInterpretedFallback.md
+      - spark-sql-SQLMetric.md
+      - Concrete Operators:
+        - spark-sql-SparkPlan-BroadcastExchangeExec.md
+        - spark-sql-SparkPlan-BroadcastHashJoinExec.md
+        - spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md
+        - spark-sql-SparkPlan-CartesianProductExec.md
+        - spark-sql-SparkPlan-CoalesceExec.md
+        - spark-sql-SparkPlan-CoGroupExec.md
+        - spark-sql-SparkPlan-DataSourceV2ScanExec.md
+        - spark-sql-SparkPlan-DataWritingCommandExec.md
+        - spark-sql-SparkPlan-DebugExec.md
+        - spark-sql-SparkPlan-DeserializeToObjectExec.md
+        - spark-sql-SparkPlan-ExecutedCommandExec.md
+        - spark-sql-SparkPlan-ExpandExec.md
+        - spark-sql-SparkPlan-ExternalRDDScanExec.md
+        - spark-sql-SparkPlan-FileSourceScanExec.md
+        - spark-sql-SparkPlan-FilterExec.md
+        - spark-sql-SparkPlan-GenerateExec.md
+        - spark-sql-SparkPlan-HashAggregateExec.md
+        - spark-sql-SparkPlan-InMemoryTableScanExec.md
+        - spark-sql-SparkPlan-LocalTableScanExec.md
+        - spark-sql-SparkPlan-MapElementsExec.md
+        - spark-sql-SparkPlan-ObjectHashAggregateExec.md
+        - spark-sql-SparkPlan-ObjectProducerExec.md
+        - spark-sql-SparkPlan-ProjectExec.md
+        - spark-sql-SparkPlan-RangeExec.md
+        - spark-sql-SparkPlan-RDDScanExec.md
+        - spark-sql-SparkPlan-ReusedExchangeExec.md
+        - spark-sql-SparkPlan-RowDataSourceScanExec.md
+        - spark-sql-SparkPlan-SampleExec.md
+        - spark-sql-SparkPlan-ShuffleExchangeExec.md
+        - spark-sql-SparkPlan-ShuffledHashJoinExec.md
+        - spark-sql-SparkPlan-SerializeFromObjectExec.md
+        - spark-sql-SparkPlan-SortAggregateExec.md
+        - spark-sql-SparkPlan-SortMergeJoinExec.md
+        - spark-sql-SparkPlan-SortExec.md
+        - spark-sql-SparkPlan-SubqueryExec.md
+        - spark-sql-SparkPlan-InputAdapter.md
+        - WindowExec:
+          - spark-sql-SparkPlan-WindowExec.md
+          - spark-sql-AggregateProcessor.md
+          - spark-sql-WindowFunctionFrame.md
+        - spark-sql-SparkPlan-WholeStageCodegenExec.md
+        - spark-sql-SparkPlan-WriteToDataSourceV2Exec.md
+    - Logical Analysis Rules:
+      - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
+      - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md
+      - DataSourceAnalysis: spark-sql-Analyzer-DataSourceAnalysis.md
+      - ExtractWindowExpressions: spark-sql-Analyzer-ExtractWindowExpressions.md
+      - FindDataSourceTable: spark-sql-Analyzer-FindDataSourceTable.md
+      - HandleNullInputsForUDF: spark-sql-Analyzer-HandleNullInputsForUDF.md
+      - InConversion: spark-sql-Analyzer-TypeCoercionRule-InConversion.md
+      - LookupFunctions: spark-sql-Analyzer-LookupFunctions.md
+      - PreprocessTableCreation: spark-sql-Analyzer-PreprocessTableCreation.md
+      - PreWriteCheck: spark-sql-Analyzer-PreWriteCheck.md
+      - ResolveAliases: spark-sql-Analyzer-ResolveAliases.md
+      - ResolveBroadcastHints: spark-sql-Analyzer-ResolveBroadcastHints.md
+      - ResolveCoalesceHints: spark-sql-Analyzer-ResolveCoalesceHints.md
+      - ResolveCreateNamedStruct: spark-sql-Analyzer-ResolveCreateNamedStruct.md
+      - ResolveFunctions: spark-sql-Analyzer-ResolveFunctions.md
+      - ResolveInlineTables: spark-sql-Analyzer-ResolveInlineTables.md
+      - ResolveMissingReferences: spark-sql-Analyzer-ResolveMissingReferences.md
+      - ResolveOrdinalInOrderByAndGroupBy: spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md
+      - ResolveOutputRelation: spark-sql-Analyzer-ResolveOutputRelation.md
+      - ResolveReferences: spark-sql-Analyzer-ResolveReferences.md
+      - ResolveRelations: spark-sql-Analyzer-ResolveRelations.md
+      - ResolveSQLOnFile: spark-sql-Analyzer-ResolveSQLOnFile.md
+      - ResolveSubquery: spark-sql-Analyzer-ResolveSubquery.md
+      - ResolveTimeZone: ResolveTimeZone.md
+      - ResolveWindowFrame: spark-sql-Analyzer-ResolveWindowFrame.md
+      - ResolveWindowOrder: spark-sql-Analyzer-ResolveWindowOrder.md
+      - TimeWindowing: spark-sql-Analyzer-TimeWindowing.md
+      - UpdateOuterReferences: spark-sql-Analyzer-UpdateOuterReferences.md
+      - WindowFrameCoercion: spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md
+      - WidenSetOperationTypes: spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.md
+      - WindowsSubstitution: spark-sql-Analyzer-WindowsSubstitution.md
+    - Logical Optimizations:
+      - Base (Optimizer):
+        - CollapseWindow: logical-optimizations/CollapseWindow.md
+        - ColumnPruning: logical-optimizations/ColumnPruning.md
+        - CombineTypedFilters: logical-optimizations/CombineTypedFilters.md
+        - CombineUnions: logical-optimizations/CombineUnions.md
+        - ComputeCurrentTime: logical-optimizations/ComputeCurrentTime.md
+        - ConstantFolding: logical-optimizations/ConstantFolding.md
+        - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
+        - DecimalAggregates: logical-optimizations/DecimalAggregates.md
+        - EliminateSerialization: logical-optimizations/EliminateSerialization.md
+        - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
+        - EliminateView: logical-optimizations/EliminateView.md
+        - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
+        - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
+        - LimitPushDown: logical-optimizations/LimitPushDown.md
+        - NullPropagation: logical-optimizations/NullPropagation.md
+        - OptimizeIn: logical-optimizations/OptimizeIn.md
+        - OptimizeSubqueries: logical-optimizations/OptimizeSubqueries.md
+        - PropagateEmptyRelation: logical-optimizations/PropagateEmptyRelation.md
+        - PullupCorrelatedPredicates: logical-optimizations/PullupCorrelatedPredicates.md
+        - PushDownPredicate: logical-optimizations/PushDownPredicate.md
+        - PushPredicateThroughJoin: logical-optimizations/PushPredicateThroughJoin.md
+        - ReorderJoin: logical-optimizations/ReorderJoin.md
+        - ReplaceExpressions: logical-optimizations/ReplaceExpressions.md
+        - ReplaceExceptWithAntiJoin: logical-optimizations/ReplaceExceptWithAntiJoin.md
+        - ReplaceExceptWithFilter: logical-optimizations/ReplaceExceptWithFilter.md
+        - RewriteCorrelatedScalarSubquery: logical-optimizations/RewriteCorrelatedScalarSubquery.md
+        - RewriteExceptAll: logical-optimizations/RewriteExceptAll.md
+        - RewritePredicateSubquery: logical-optimizations/RewritePredicateSubquery.md
+        - SimplifyCasts: logical-optimizations/SimplifyCasts.md
+      - Extended (SparkOptimizer):
+        - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
+        - OptimizeMetadataOnlyQuery: logical-optimizations/OptimizeMetadataOnlyQuery.md
+        - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
+        - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
+    - Execution Planning Strategies:
+      - Aggregation: spark-sql-SparkStrategy-Aggregation.md
+      - BasicOperators: spark-sql-SparkStrategy-BasicOperators.md
+      - DataSourceStrategy: spark-sql-SparkStrategy-DataSourceStrategy.md
+      - DataSourceV2Strategy: spark-sql-SparkStrategy-DataSourceV2Strategy.md
+      - FileSourceStrategy: spark-sql-SparkStrategy-FileSourceStrategy.md
+      - InMemoryScans: spark-sql-SparkStrategy-InMemoryScans.md
+      - JoinSelection: spark-sql-SparkStrategy-JoinSelection.md
+      - SpecialLimits: spark-sql-SparkStrategy-SpecialLimits.md
+    - Physical Optimizations:
+      - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
+      - EnsureRequirements: spark-sql-EnsureRequirements.md
+      - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
+      - PlanSubqueries: spark-sql-PlanSubqueries.md
+      - ReuseExchange: spark-sql-ReuseExchange.md
+      - ReuseSubquery: spark-sql-ReuseSubquery.md
+    - SQL Support:
+      - spark-sql-parsing-framework.md
+      - spark-sql-AbstractSqlParser.md
+      - spark-sql-AstBuilder.md
+      - spark-sql-CatalystSqlParser.md
+      - spark-sql-ParserInterface.md
+      - spark-sql-SparkSqlAstBuilder.md
+      - spark-sql-SparkSqlParser.md
+    - Project Tungsten:
+      - Tungsten Execution Backend: spark-sql-tungsten.md
+      - InternalRow: spark-sql-InternalRow.md
+      - UnsafeRow: spark-sql-UnsafeRow.md
+      - AggregationIterator:
+        - spark-sql-AggregationIterator.md
+        - spark-sql-ObjectAggregationIterator.md
+        - spark-sql-SortBasedAggregationIterator.md
+        - spark-sql-TungstenAggregationIterator.md
+      - spark-sql-CatalystSerde.md
+      - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
+      - spark-sql-UnsafeFixedWidthAggregationMap.md
+  - Demos:
+    - demo/demo-connecting-spark-sql-to-hive-metastore.md
+    - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
+  - Extras:
+    - Monitoring:
+      - Web UI and SQL Tab:
+        - SQLTab: spark-sql-webui.md
+        - SQLListener: spark-sql-SQLListener.md
+      - QueryExecutionListener: spark-sql-QueryExecutionListener.md
+      - SQLAppStatusListener: spark-sql-SQLAppStatusListener.md
+      - SQLAppStatusPlugin: spark-sql-SQLAppStatusPlugin.md
+      - SQLAppStatusStore: spark-sql-SQLAppStatusStore.md
+      - WriteTaskStats:
+        - WriteTaskStats: spark-sql-WriteTaskStats.md
+        - BasicWriteTaskStats: spark-sql-BasicWriteTaskStats.md
+      - WriteTaskStatsTracker:
+        - WriteTaskStatsTracker: spark-sql-WriteTaskStatsTracker.md
+        - BasicWriteTaskStatsTracker: spark-sql-BasicWriteTaskStatsTracker.md
+      - WriteJobStatsTracker:
+        - WriteJobStatsTracker: spark-sql-WriteJobStatsTracker.md
+        - BasicWriteJobStatsTracker: spark-sql-BasicWriteJobStatsTracker.md
+      - Logging: spark-logging.md
+    - Performance Tuning and Debugging:
+      - Performance Tuning: spark-sql-performance-tuning.md
+      - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
+      - Debugging Query Execution: spark-sql-debugging-query-execution.md
+    - Tools: tools/spark-sql-spark-sql.md
+    - Spark Thrift Server:
+      - thrift-server/spark-sql-thrift-server.md
+      - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
     - SQLExecution: spark-sql-SQLExecution.md
     - RDDConversions: spark-sql-RDDConversions.md
     - CatalystTypeConverters: spark-sql-CatalystTypeConverters.md
@@ -764,6 +772,3 @@ nav:
     - BufferedRowIterator: spark-sql-BufferedRowIterator.md
     - CompressionCodecs: spark-sql-CompressionCodecs.md
     - SQLContext: spark-sql-SQLContext.md
-  - Demos:
-    - demo/demo-connecting-spark-sql-to-hive-metastore.md
-    - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
