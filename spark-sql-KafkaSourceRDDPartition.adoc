@@ -1,3 +1,0 @@
-== [[KafkaSourceRDDPartition]] KafkaSourceRDDPartition
-
-`KafkaSourceRDDPartition` is...FIXME

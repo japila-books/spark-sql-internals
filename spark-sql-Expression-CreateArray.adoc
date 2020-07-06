@@ -1,3 +1,0 @@
-== [[CreateArray]] CreateArray
-
-`CreateArray` is...FIXME

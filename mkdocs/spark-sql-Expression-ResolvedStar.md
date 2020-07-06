@@ -1,0 +1,3 @@
+# ResolvedStar
+
+`ResolvedStar` is...FIXME

@@ -1,3 +1,0 @@
-== [[BufferedRowIterator]] BufferedRowIterator
-
-`BufferedRowIterator` is...FIXME

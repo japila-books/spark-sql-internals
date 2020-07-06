@@ -1,3 +1,0 @@
-== [[CatalystScan]] CatalystScan Contract
-
-`CatalystScan` is...FIXME
