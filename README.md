@@ -51,6 +51,16 @@ Commands:
 
 Use `mkdocs build --clean` to remove any stale files.
 
+Consider `--dirtyreload` for a faster reloads.
+
+```
+$ docker run --rm -it \
+    -p 8000:8000 \
+    -v ${PWD}:/docs \
+    squidfunk/mkdocs-material \
+    serve --dirtyreload --verbose --dev-addr 0.0.0.0:8000
+```
+
 ## No Sphinx?! Why?
 
 Read [Giving up on Read the Docs, reStructuredText and Sphinx](https://medium.com/@jaceklaskowski/giving-up-on-read-the-docs-restructuredtext-and-sphinx-674961804641).

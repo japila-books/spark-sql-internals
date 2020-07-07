@@ -27,6 +27,7 @@ theme:
 markdown_extensions:
   - admonition
   - codehilite
+  - footnotes
   - toc:
       permalink: true
   - pymdownx.arithmatex
@@ -87,6 +88,7 @@ nav:
       - Expressions: sql/Expressions.md
       - FieldReference: sql/FieldReference.md
       - CreateTableWriter: sql/CreateTableWriter.md
+      - WriteConfigMethods: sql/WriteConfigMethods.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - Command: logical-operators/Command.md
@@ -596,6 +598,7 @@ nav:
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
+  - New in Spark 3.0.0: since-300.md
   - Notable Features:
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
