@@ -75,12 +75,12 @@ nav:
     - index.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
+      - ParserInterface: sql/ParserInterface.md
       - AbstractSqlParser: sql/AbstractSqlParser.md
       - AstBuilder: sql/AstBuilder.md
       - CatalystSqlParser: sql/CatalystSqlParser.md
-      - ParserInterface: sql/ParserInterface.md
-      - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
       - SparkSqlParser: sql/SparkSqlParser.md
+      - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - Command: logical-operators/Command.md

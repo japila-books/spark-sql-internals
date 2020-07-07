@@ -1,10 +1,13 @@
 # SQL Parsing Framework
 
-*SQL Parser Framework* in Spark SQL uses ANTLR to translate a SQL text to a link:spark-sql-DataType.adoc[data type], link:spark-sql-Expression.adoc[Expression], `TableIdentifier` or link:spark-sql-LogicalPlan.adoc[LogicalPlan].
+**SQL Parser Framework** in Spark SQL uses [ANTLR](https://www.antlr.org/) to translate a SQL text to relational [data types](../spark-sql-DataType.md), [expressions](../spark-sql-Expression.md), `TableIdentifiers` and [logical operators](../logical-operators/LogicalPlan.md).
 
-The contract of the SQL Parser Framework is described by link:spark-sql-ParserInterface.adoc[ParserInterface] contract. The contract is then abstracted in link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser] class so subclasses have to provide custom link:spark-sql-AstBuilder.adoc[AstBuilder] only.
+!!! note "What is ANTLR?"
+    ANTLR (ANother Tool for Language Recognition) is a parser generator used to build languages, tools, and frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees.
 
-There are two concrete implementations of `AbstractSqlParser`:
+SQL Parser Framework is defined by [ParserInterface](ParserInterface.md) abstraction. This is extended by [AbstractSqlParser](AbstractSqlParser.md) so concrete SQL parsers can focus on a custom [AstBuilder](AstBuilder.md) only.
 
-1. link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] that is the default parser of the SQL expressions into Spark's types.
-2. link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser] that is used to parse data types from their canonical string representation.
+There are two concrete `AbstractSqlParsers`:
+
+1. [SparkSqlParser](SparkSqlParser.md) that is the default parser of the SQL expressions into Spark SQL types.
+1. [CatalystSqlParser](CatalystSqlParser.md) that is used to parse data types from their canonical string representation.

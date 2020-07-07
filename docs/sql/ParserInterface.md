@@ -1,26 +1,29 @@
-title: ParserInterface
+# ParserInterface &mdash; SQL Parsers
 
-# ParserInterface -- SQL Parsers
+`ParserInterface` is the [abstraction](#contract) of [SQL parsers](#extensions) that can convert (_parse_) textual representation of SQL statements (_SQL text_) into [Catalyst expressions](#parseExpression), [logical operators](#parsePlan), [table](#parseTableIdentifier) and [function](#parseFunctionIdentifier) identifiers, [table schema](#parseTableSchema), and [data types](#parseDataType).
 
-`ParserInterface` is the <<contract, abstraction>> of <<extensions, SQL parsers>> that can convert (_parse_) textual representation of SQL statements into <<parseExpression, Expressions>>, <<parsePlan, LogicalPlans>>, <<parseTableIdentifier, TableIdentifiers>>, <<parseFunctionIdentifier, FunctionIdentifier>>, <<parseTableSchema, StructType>>, and <<parseDataType, DataType>>.
+## Accessing ParserInterface
 
-[[contract]]
-.ParserInterface Contract
-[cols="30m,70",options="header",width="100%"]
-|===
-| Method
-| Description
+`ParserInterface` is available as [SessionState.sqlParser](../spark-sql-SessionState.md#sqlParser).
 
-| parseDataType
-a| [[parseDataType]]
+```
+scala> :type spark
+org.apache.spark.sql.SparkSession
 
-[source, scala]
-----
+scala> :type spark.sessionState.sqlParser
+org.apache.spark.sql.catalyst.parser.ParserInterface
+```
+
+## Contract
+
+### parseDataType
+
+```scala
 parseDataType(
   sqlText: String): DataType
-----
+```
 
-Parses a SQL text to an <<spark-sql-DataType.adoc#, DataType>>
+Parses a SQL text to an [DataType](../spark-sql-DataType.md)
 
 Used when:
 
@@ -40,16 +43,14 @@ Used when:
 
 * `OrcUtils` is requested to `readSchema`
 
-| parseExpression
-a| [[parseExpression]]
+### parseExpression
 
-[source, scala]
-----
+```scala
 parseExpression(
   sqlText: String): Expression
-----
+```
 
-Parses a SQL text to an <<spark-sql-Expression.adoc#, Expression>>
+Parses a SQL text to an [Expression](../spark-sql-Expression.md)
 
 Used in the following:
 
@@ -57,14 +58,12 @@ Used in the following:
 
 * <<spark-sql-functions.adoc#expr, expr>> standard function
 
-| parseFunctionIdentifier
-a| [[parseFunctionIdentifier]]
+### parseFunctionIdentifier
 
-[source, scala]
-----
+```scala
 parseFunctionIdentifier(
   sqlText: String): FunctionIdentifier
-----
+```
 
 Parses a SQL text to an `FunctionIdentifier`
 
@@ -74,16 +73,23 @@ Used when:
 
 * `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#getFunction, getFunction>> and <<spark-sql-CatalogImpl.adoc#functionExists, functionExists>>
 
-| parsePlan
-a| [[parsePlan]]
+### parseMultipartIdentifier
 
-[source, scala]
-----
+```scala
+parseMultipartIdentifier(
+  sqlText: String): Seq[String]
+```
+
+Used when...FIXME
+
+### parsePlan
+
+```scala
 parsePlan(
   sqlText: String): LogicalPlan
-----
+```
 
-Parses a SQL text to a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>
+Parses a SQL text to a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
 Used when:
 
@@ -91,14 +97,21 @@ Used when:
 
 * `SparkSession` is requested to <<spark-sql-SparkSession.adoc#sql, execute a SQL query (aka SQL Mode)>>
 
-| parseTableIdentifier
-a| [[parseTableIdentifier]]
+### parseRawDataType
 
-[source, scala]
-----
+```scala
+parseRawDataType(
+  sqlText: String): DataType
+```
+
+Used when...FIXME
+
+### parseTableIdentifier
+
+```scala
 parseTableIdentifier(
   sqlText: String): TableIdentifier
-----
+```
 
 Parses a SQL text to a `TableIdentifier`
 
@@ -114,16 +127,14 @@ Used when:
 
 * `SessionState` is requested to <<spark-sql-SessionState.adoc#refreshTable, refreshTable>>
 
-| parseTableSchema
-a| [[parseTableSchema]]
+### parseTableSchema
 
-[source, scala]
-----
+```scala
 parseTableSchema(
   sqlText: String): StructType
-----
+```
 
-Parses a SQL text to a schema (<<spark-sql-StructType.adoc#, StructType>>)
+Parses a SQL text to a [StructType](../spark-sql-StructType.md)
 
 Used when:
 
@@ -133,18 +144,6 @@ Used when:
 
 * `JdbcUtils` utility is requested to <<spark-sql-JdbcUtils.adoc#parseUserSpecifiedCreateTableColumnTypes, parseUserSpecifiedCreateTableColumnTypes>> and <<spark-sql-JdbcUtils.adoc#getCustomSchema, getCustomSchema>>
 
-|===
+## Extensions
 
-[[extensions]]
-NOTE: <<spark-sql-AbstractSqlParser.adoc#, AbstractSqlParser>> is the base extension of the `ParserInterface` contract in Spark SQL.
-
-`ParserInterface` is available as <<spark-sql-SessionState.adoc#sqlParser, sqlParser>> property of <<spark-sql-SessionState.adoc#, SessionState>>.
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sessionState.sqlParser
-org.apache.spark.sql.catalyst.parser.ParserInterface
-----
+[AbstractSqlParser](AbstractSqlParser.md) is the base extension of the `ParserInterface` abstraction.
