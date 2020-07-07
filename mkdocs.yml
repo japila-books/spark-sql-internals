@@ -3,18 +3,14 @@
 # - https://github.com/facelessuser/pymdown-extensions/blob/master/docs/src/mkdocs.yml
 
 site_name: The Internals of Spark SQL
-site_url: https://books.japila.pl/spark-sql-internals
+# site_url: https://books.japila.pl/spark-sql-internals
+site_url: https://the-internals-of-spark-sql.readthedocs.io
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
 # https://squidfunk.github.io/mkdocs-material/getting-started/#adding-a-source-repository
 repo_name: mastering-spark-sql-book
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
-
-# FIXME Replace with docs (the default)
-docs_dir: mkdocs
-# FIXME Replace with master (the default) once merged
-edit_uri: tree/mkdocs/mkdocs
 
 copyright: |
   Copyright &copy; 2020 <a href="https://twitter.com/jaceklaskowski" target="_blank" rel="noopener">Jacek Laskowski</a>
@@ -75,121 +71,84 @@ google_analytics:
   - auto
 
 nav:
-  - Home: index.md
-  - Spark SQL: spark-sql.md
-  - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
-  - Dataset and SQL: spark-sql-dataset-vs-sql.md
-  - Developing Applications:
-    - spark-sql-fundamentals-spark-application-development.md
-    - SparkSession:
-      - spark-sql-SparkSession.md
-      - spark-sql-SparkSession-Builder.md
-      - spark-sql-SparkSession-implicits.md
-      - spark-sql-SparkSessionExtensions.md
-    - Dataset:
-      - spark-sql-Dataset.md
-      - Encoder:
-        - spark-sql-Encoder.md
-        - spark-sql-Encoders.md
-        - spark-sql-ExpressionEncoder.md
-        - spark-sql-RowEncoder.md
-        - spark-sql-ExpressionEncoder-LocalDateTime.md
-      - spark-sql-DataFrame.md
-      - spark-sql-Row.md
-    - Data Source API:
-      - DataSource API: spark-sql-datasource-api.md
-      - DataFrameReader: DataFrameReader.md
-      - spark-sql-DataFrameWriter.md
-    - Dataset API:
-      - spark-sql-dataset-operators.md
-      - spark-sql-Dataset-typed-transformations.md
-      - spark-sql-Dataset-untyped-transformations.md
-      - spark-sql-Dataset-basic-actions.md
-      - spark-sql-Dataset-actions.md
-      - spark-sql-DataFrameNaFunctions.md
-      - spark-sql-DataFrameStatFunctions.md
-    - Column:
-      - spark-sql-Column.md
-      - spark-sql-column-operators.md
-      - spark-sql-TypedColumn.md
-    - Basic Aggregation:
-      - spark-sql-basic-aggregation.md
-      - spark-sql-RelationalGroupedDataset.md
-      - spark-sql-KeyValueGroupedDataset.md
-    - Joins:
-      - spark-sql-joins.md
-      - spark-sql-joins-broadcast.md
-    - Window Aggregation:
-      - spark-sql-window-aggregation.md
-      - spark-sql-WindowSpec.md
-      - spark-sql-WindowSpec-Window.md
-    - Standard Functions:
-      - spark-sql-functions.md
-      - spark-sql-aggregate-functions.md
-      - spark-sql-functions-collection.md
-      - spark-sql-functions-datetime.md
-      - spark-sql-functions-regular-functions.md
-      - spark-sql-functions-windows.md
-    - User-Defined Functions:
-      - spark-sql-udfs.md
-      - spark-sql-udfs-blackbox.md
-      - spark-sql-UserDefinedFunction.md
-    - Schema:
-      - spark-sql-schema.md
-      - spark-sql-StructType.md
-      - spark-sql-StructField.md
-      - spark-sql-DataType.md
-    - spark-sql-multi-dimensional-aggregation.md
-    - Caching and Persistence:
-      - spark-sql-caching-and-persistence.md
-      - spark-sql-caching-webui-storage.md
-    - spark-sql-checkpointing.md
-    - spark-sql-UserDefinedAggregateFunction.md
-    - spark-sql-Aggregator.md
-    - spark-sql-properties.md
-  - Notable Features:
-    - spark-sql-hive-integration.md
-    - Vectorized Parquet Decoding:
-      - spark-sql-vectorized-parquet-reader.md
-      - spark-sql-VectorizedParquetRecordReader.md
-      - spark-sql-VectorizedColumnReader.md
-      - spark-sql-SpecificParquetRecordReaderBase.md
-      - ColumnVector:
-        - spark-sql-ColumnVector.md
-        - spark-sql-WritableColumnVector.md
-        - spark-sql-OnHeapColumnVector.md
-        - spark-sql-OffHeapColumnVector.md
-    - spark-sql-dynamic-partition-inserts.md
-    - spark-sql-bucketing.md
-    - Whole-Stage CodeGen:
-      - spark-sql-whole-stage-codegen.md
-      - spark-sql-CodegenContext.md
-      - spark-sql-CodeGenerator.md
-      - spark-sql-GenerateColumnAccessor.md
-      - spark-sql-GenerateOrdering.md
-      - spark-sql-GeneratePredicate.md
-      - spark-sql-GenerateSafeProjection.md
-      - spark-sql-BytesToBytesMap.md
-      - Subexpression Elimination:
-        - spark-sql-subexpression-elimination.md
-        - spark-sql-EquivalentExpressions.md
-    - Vectorized Query Execution:
-      - spark-sql-vectorized-query-execution.md
-      - spark-sql-ColumnarBatch.md
-    - spark-sql-data-source-api-v2.md
-    - spark-sql-subqueries.md
-    - spark-sql-hint-framework.md
-    - Adaptive Query Execution:
-      - spark-sql-adaptive-query-execution.md
-      - spark-sql-ExchangeCoordinator.md
-    - Cost-Based Optimization:
-      - spark-sql-cost-based-optimization.md
-      - spark-sql-CatalogStatistics.md
-      - spark-sql-ColumnStat.md
-      - spark-sql-EstimationUtils.md
-      - spark-sql-CommandUtils.md
-    - spark-sql-catalyst-dsl.md
-  - Internals:
+  - Home:
+    - index.md
+    - SQL Support:
+      - SQL Parsing Framework: sql/index.md
+      - AbstractSqlParser: sql/AbstractSqlParser.md
+      - AstBuilder: sql/AstBuilder.md
+      - CatalystSqlParser: sql/CatalystSqlParser.md
+      - ParserInterface: sql/ParserInterface.md
+      - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
+      - SparkSqlParser: sql/SparkSqlParser.md
+    - Logical Operators:
+      - LogicalPlan: logical-operators/LogicalPlan.md
+      - Command: logical-operators/Command.md
+      - RunnableCommand: logical-operators/RunnableCommand.md
+      - DataWritingCommand: logical-operators/DataWritingCommand.md
+      - Concrete Operators:
+        - logical-operators/Aggregate.md
+        - logical-operators/AlterViewAsCommand.md
+        - logical-operators/AnalysisBarrier.md
+        - logical-operators/AnalyzeColumnCommand.md
+        - logical-operators/AnalyzePartitionCommand.md
+        - logical-operators/AnalyzeTableCommand.md
+        - logical-operators/AppendData.md
+        - logical-operators/ClearCacheCommand.md
+        - logical-operators/CreateDataSourceTableAsSelectCommand.md
+        - logical-operators/CreateDataSourceTableCommand.md
+        - logical-operators/CreateTable.md
+        - logical-operators/CreateTableCommand.md
+        - logical-operators/CreateTempViewUsing.md
+        - logical-operators/CreateViewCommand.md
+        - logical-operators/DataSourceV2Relation.md
+        - logical-operators/DescribeColumnCommand.md
+        - logical-operators/DescribeTableCommand.md
+        - logical-operators/DeserializeToObject.md
+        - logical-operators/DropTableCommand.md
+        - logical-operators/Except.md
+        - logical-operators/Expand.md
+        - logical-operators/ExplainCommand.md
+        - logical-operators/ExternalRDD.md
+        - logical-operators/Filter.md
+        - logical-operators/Generate.md
+        - logical-operators/GroupingSets.md
+        - logical-operators/Hint.md
+        - logical-operators/InMemoryRelation.md
+        - logical-operators/InsertIntoDataSourceCommand.md
+        - logical-operators/InsertIntoDataSourceDirCommand.md
+        - logical-operators/InsertIntoDir.md
+        - logical-operators/InsertIntoHadoopFsRelationCommand.md
+        - logical-operators/InsertIntoTable.md
+        - logical-operators/Intersect.md
+        - logical-operators/Join.md
+        - logical-operators/LeafNode.md
+        - logical-operators/LocalRelation.md
+        - logical-operators/LogicalRDD.md
+        - logical-operators/LogicalRelation.md
+        - logical-operators/OneRowRelation.md
+        - logical-operators/Pivot.md
+        - logical-operators/Project.md
+        - logical-operators/Range.md
+        - logical-operators/Repartition-RepartitionByExpression.md
+        - logical-operators/ResolvedHint.md
+        - logical-operators/SaveIntoDataSourceCommand.md
+        - logical-operators/ShowCreateTableCommand.md
+        - logical-operators/ShowTablesCommand.md
+        - logical-operators/Sort.md
+        - logical-operators/SubqueryAlias.md
+        - logical-operators/TruncateTableCommand.md
+        - logical-operators/TypedFilter.md
+        - logical-operators/Union.md
+        - logical-operators/UnresolvedCatalogRelation.md
+        - logical-operators/UnresolvedHint.md
+        - logical-operators/UnresolvedInlineTable.md
+        - logical-operators/UnresolvedRelation.md
+        - logical-operators/UnresolvedTableValuedFunction.md
+        - logical-operators/Window.md
+        - logical-operators/WithWindowDefinition.md
+        - logical-operators/WriteToDataSourceV2.md
+        - logical-operators/View.md
     - SparkSession Registries:
       - Catalog:
         - spark-sql-Catalog.md
@@ -476,74 +435,6 @@ nav:
       - spark-sql-Expression-WindowExpression.md
       - spark-sql-Expression-WindowFunction.md
       - spark-sql-Expression-WindowSpecDefinition.md
-    - Logical Operators:
-      - LogicalPlan: logical-operators/LogicalPlan.md
-      - Command: logical-operators/Command.md
-      - RunnableCommand: logical-operators/RunnableCommand.md
-      - DataWritingCommand: logical-operators/DataWritingCommand.md
-      - Concrete Operators:
-        - logical-operators/Aggregate.md
-        - logical-operators/AlterViewAsCommand.md
-        - logical-operators/AnalysisBarrier.md
-        - logical-operators/AnalyzeColumnCommand.md
-        - logical-operators/AnalyzePartitionCommand.md
-        - logical-operators/AnalyzeTableCommand.md
-        - logical-operators/AppendData.md
-        - logical-operators/ClearCacheCommand.md
-        - logical-operators/CreateDataSourceTableAsSelectCommand.md
-        - logical-operators/CreateDataSourceTableCommand.md
-        - logical-operators/CreateTable.md
-        - logical-operators/CreateTableCommand.md
-        - logical-operators/CreateTempViewUsing.md
-        - logical-operators/CreateViewCommand.md
-        - logical-operators/DataSourceV2Relation.md
-        - logical-operators/DescribeColumnCommand.md
-        - logical-operators/DescribeTableCommand.md
-        - logical-operators/DeserializeToObject.md
-        - logical-operators/DropTableCommand.md
-        - logical-operators/Except.md
-        - logical-operators/Expand.md
-        - logical-operators/ExplainCommand.md
-        - logical-operators/ExternalRDD.md
-        - logical-operators/Filter.md
-        - logical-operators/Generate.md
-        - logical-operators/GroupingSets.md
-        - logical-operators/Hint.md
-        - logical-operators/InMemoryRelation.md
-        - logical-operators/InsertIntoDataSourceCommand.md
-        - logical-operators/InsertIntoDataSourceDirCommand.md
-        - logical-operators/InsertIntoDir.md
-        - logical-operators/InsertIntoHadoopFsRelationCommand.md
-        - logical-operators/InsertIntoTable.md
-        - logical-operators/Intersect.md
-        - logical-operators/Join.md
-        - logical-operators/LeafNode.md
-        - logical-operators/LocalRelation.md
-        - logical-operators/LogicalRDD.md
-        - logical-operators/LogicalRelation.md
-        - logical-operators/OneRowRelation.md
-        - logical-operators/Pivot.md
-        - logical-operators/Project.md
-        - logical-operators/Range.md
-        - logical-operators/Repartition-RepartitionByExpression.md
-        - logical-operators/ResolvedHint.md
-        - logical-operators/SaveIntoDataSourceCommand.md
-        - logical-operators/ShowCreateTableCommand.md
-        - logical-operators/ShowTablesCommand.md
-        - logical-operators/Sort.md
-        - logical-operators/SubqueryAlias.md
-        - logical-operators/TruncateTableCommand.md
-        - logical-operators/TypedFilter.md
-        - logical-operators/Union.md
-        - logical-operators/UnresolvedCatalogRelation.md
-        - logical-operators/UnresolvedHint.md
-        - logical-operators/UnresolvedInlineTable.md
-        - logical-operators/UnresolvedRelation.md
-        - logical-operators/UnresolvedTableValuedFunction.md
-        - logical-operators/Window.md
-        - logical-operators/WithWindowDefinition.md
-        - logical-operators/WriteToDataSourceV2.md
-        - logical-operators/View.md
     - Physical Operators:
       - SparkPlan: spark-sql-SparkPlan.md
       - CodegenSupport: spark-sql-CodegenSupport.md
@@ -687,14 +578,6 @@ nav:
       - PlanSubqueries: spark-sql-PlanSubqueries.md
       - ReuseExchange: spark-sql-ReuseExchange.md
       - ReuseSubquery: spark-sql-ReuseSubquery.md
-    - SQL Support:
-      - spark-sql-parsing-framework.md
-      - spark-sql-AbstractSqlParser.md
-      - spark-sql-AstBuilder.md
-      - spark-sql-CatalystSqlParser.md
-      - spark-sql-ParserInterface.md
-      - spark-sql-SparkSqlAstBuilder.md
-      - spark-sql-SparkSqlParser.md
     - Project Tungsten:
       - Tungsten Execution Backend: spark-sql-tungsten.md
       - InternalRow: spark-sql-InternalRow.md
@@ -707,10 +590,123 @@ nav:
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
+  - Notable Features:
+    - spark-sql-hive-integration.md
+    - Vectorized Parquet Decoding:
+      - spark-sql-vectorized-parquet-reader.md
+      - spark-sql-VectorizedParquetRecordReader.md
+      - spark-sql-VectorizedColumnReader.md
+      - spark-sql-SpecificParquetRecordReaderBase.md
+      - ColumnVector:
+        - spark-sql-ColumnVector.md
+        - spark-sql-WritableColumnVector.md
+        - spark-sql-OnHeapColumnVector.md
+        - spark-sql-OffHeapColumnVector.md
+    - spark-sql-dynamic-partition-inserts.md
+    - spark-sql-bucketing.md
+    - Whole-Stage CodeGen:
+      - spark-sql-whole-stage-codegen.md
+      - spark-sql-CodegenContext.md
+      - spark-sql-CodeGenerator.md
+      - spark-sql-GenerateColumnAccessor.md
+      - spark-sql-GenerateOrdering.md
+      - spark-sql-GeneratePredicate.md
+      - spark-sql-GenerateSafeProjection.md
+      - spark-sql-BytesToBytesMap.md
+      - Subexpression Elimination:
+        - spark-sql-subexpression-elimination.md
+        - spark-sql-EquivalentExpressions.md
+    - Vectorized Query Execution:
+      - spark-sql-vectorized-query-execution.md
+      - spark-sql-ColumnarBatch.md
+    - spark-sql-data-source-api-v2.md
+    - spark-sql-subqueries.md
+    - spark-sql-hint-framework.md
+    - Adaptive Query Execution:
+      - spark-sql-adaptive-query-execution.md
+      - spark-sql-ExchangeCoordinator.md
+    - Cost-Based Optimization:
+      - spark-sql-cost-based-optimization.md
+      - spark-sql-CatalogStatistics.md
+      - spark-sql-ColumnStat.md
+      - spark-sql-EstimationUtils.md
+      - spark-sql-CommandUtils.md
+    - spark-sql-catalyst-dsl.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
   - Extras:
+    - Spark SQL: spark-sql.md
+    - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
+    - Dataset and SQL: spark-sql-dataset-vs-sql.md
+    - Developing Applications:
+      - spark-sql-fundamentals-spark-application-development.md
+      - SparkSession:
+        - spark-sql-SparkSession.md
+        - spark-sql-SparkSession-Builder.md
+        - spark-sql-SparkSession-implicits.md
+        - spark-sql-SparkSessionExtensions.md
+      - Dataset:
+        - spark-sql-Dataset.md
+        - Encoder:
+          - spark-sql-Encoder.md
+          - spark-sql-Encoders.md
+          - spark-sql-ExpressionEncoder.md
+          - spark-sql-RowEncoder.md
+          - spark-sql-ExpressionEncoder-LocalDateTime.md
+        - spark-sql-DataFrame.md
+        - spark-sql-Row.md
+      - Data Source API:
+        - DataSource API: spark-sql-datasource-api.md
+        - DataFrameReader: DataFrameReader.md
+        - spark-sql-DataFrameWriter.md
+      - Dataset API:
+        - spark-sql-dataset-operators.md
+        - spark-sql-Dataset-typed-transformations.md
+        - spark-sql-Dataset-untyped-transformations.md
+        - spark-sql-Dataset-basic-actions.md
+        - spark-sql-Dataset-actions.md
+        - spark-sql-DataFrameNaFunctions.md
+        - spark-sql-DataFrameStatFunctions.md
+      - Column:
+        - spark-sql-Column.md
+        - spark-sql-column-operators.md
+        - spark-sql-TypedColumn.md
+      - Basic Aggregation:
+        - spark-sql-basic-aggregation.md
+        - spark-sql-RelationalGroupedDataset.md
+        - spark-sql-KeyValueGroupedDataset.md
+      - Joins:
+        - spark-sql-joins.md
+        - spark-sql-joins-broadcast.md
+      - Window Aggregation:
+        - spark-sql-window-aggregation.md
+        - spark-sql-WindowSpec.md
+        - spark-sql-WindowSpec-Window.md
+      - Standard Functions:
+        - spark-sql-functions.md
+        - spark-sql-aggregate-functions.md
+        - spark-sql-functions-collection.md
+        - spark-sql-functions-datetime.md
+        - spark-sql-functions-regular-functions.md
+        - spark-sql-functions-windows.md
+      - User-Defined Functions:
+        - spark-sql-udfs.md
+        - spark-sql-udfs-blackbox.md
+        - spark-sql-UserDefinedFunction.md
+      - Schema:
+        - spark-sql-schema.md
+        - spark-sql-StructType.md
+        - spark-sql-StructField.md
+        - spark-sql-DataType.md
+      - spark-sql-multi-dimensional-aggregation.md
+      - Caching and Persistence:
+        - spark-sql-caching-and-persistence.md
+        - spark-sql-caching-webui-storage.md
+      - spark-sql-checkpointing.md
+      - spark-sql-UserDefinedAggregateFunction.md
+      - spark-sql-Aggregator.md
+      - spark-sql-properties.md
     - Monitoring:
       - Web UI and SQL Tab:
         - SQLTab: spark-sql-webui.md

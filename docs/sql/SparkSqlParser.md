@@ -1,5 +1,3 @@
-title: SparkSqlParser
-
 # SparkSqlParser -- Default SQL Parser
 
 `SparkSqlParser` is the default link:spark-sql-AbstractSqlParser.adoc[SQL parser] of the SQL statements supported in Spark SQL.
@@ -9,7 +7,7 @@ title: SparkSqlParser
 [[astBuilder]]
 `SparkSqlParser` uses link:spark-sql-SparkSqlAstBuilder.adoc[SparkSqlAstBuilder] (as link:spark-sql-AbstractSqlParser.adoc#astBuilder[AstBuilder]).
 
-NOTE: Spark SQL supports SQL statements as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4] ANTLR grammar.
+NOTE: Spark SQL supports SQL statements as described in [SqlBase.g4](https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4) ANTLR grammar.
 
 `SparkSqlParser` is available as link:spark-sql-SessionState.adoc#sqlParser[sqlParser] of a `SessionState`.
 
@@ -35,9 +33,9 @@ res0: org.apache.spark.sql.Column = (token = hello)
 
 `SparkSqlParser` is used to parse table strings into their corresponding table identifiers in the following:
 
-* `table` methods in [DataFrameReader](DataFrameReader.md#table) and [SparkSession](spark-sql-SparkSession.md#table)
-* [insertInto](spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
-* `createExternalTable` and `refreshTable` methods of [Catalog](spark-sql-Catalog.md) (and [SessionState](spark-sql-SessionState.md#refreshTable))
+* `table` methods in [DataFrameReader](../DataFrameReader.md#table) and [SparkSession](../spark-sql-SparkSession.md#table)
+* [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
+* `createExternalTable` and `refreshTable` methods of [Catalog](../spark-sql-Catalog.md) (and [SessionState](../spark-sql-SessionState.md#refreshTable))
 
 `SparkSqlParser` is used to translate a SQL text to its corresponding link:spark-sql-LogicalPlan.adoc[logical operator] in link:spark-sql-SparkSession.adoc#sql[SparkSession.sql] method.
 
