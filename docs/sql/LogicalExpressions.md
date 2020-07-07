@@ -17,4 +17,4 @@ parseReference is used when:
 
 * `FieldReference` is requested to [apply](FieldReference.md#apply)
 
-* `DataFrameWriterV2` is requested to [partitionedBy](DataFrameWriterV2.md#partitionedBy)
+* `DataFrameWriterV2` is requested to [partitionedBy](../DataFrameWriterV2.md#partitionedBy)

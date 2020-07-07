@@ -84,11 +84,8 @@ nav:
       - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
       - CatalogV2Implicits: sql/CatalogV2Implicits.md
       - LogicalExpressions: sql/LogicalExpressions.md
-      - DataFrameWriterV2: sql/DataFrameWriterV2.md
       - Expressions: sql/Expressions.md
       - FieldReference: sql/FieldReference.md
-      - CreateTableWriter: sql/CreateTableWriter.md
-      - WriteConfigMethods: sql/WriteConfigMethods.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - Command: logical-operators/Command.md
@@ -598,7 +595,11 @@ nav:
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
-  - New in Spark 3.0.0: since-300.md
+  - New in Spark 3.0.0:
+    - since-300.md
+    - DataFrameWriterV2: DataFrameWriterV2.md
+    - CreateTableWriter: CreateTableWriter.md
+    - WriteConfigMethods: WriteConfigMethods.md
   - Notable Features:
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
