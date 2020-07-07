@@ -614,15 +614,16 @@ scala> sql("SELECT *, myUpper(value) UPPER FROM strs").show
 
 Internally, it is simply an alias for link:spark-sql-SessionState.adoc#udfRegistration[SessionState.udfRegistration].
 
-=== [[table]] Loading Data From Table -- `table` Method
+## [[table]] Loading Data From Table &mdash; `table` Method
 
-[source, scala]
-----
-table(tableName: String): DataFrame // <1>
-// private[sql]
-table(tableIdent: TableIdentifier): DataFrame
-----
-<1> Parses `tableName` to a `TableIdentifier` and calls the other `table`
+```scala
+table(
+  multipartIdentifier: Seq[String]): DataFrame
+table(
+  tableName: String): DataFrame
+table(
+  tableIdent: TableIdentifier): DataFrame
+```
 
 `table` creates a link:spark-sql-DataFrame.adoc[DataFrame] (wrapper) from the input `tableName` table (but only if link:spark-sql-SessionCatalog.adoc#lookupRelation[available in the session catalog]).
 

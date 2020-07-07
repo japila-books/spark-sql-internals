@@ -115,3 +115,13 @@ findReferences(value: Any): Array[String]
 `findReferences` takes the <<references, references>> from the `value` filter is it is one or returns an empty array.
 
 NOTE: `findReferences` is used when <<EqualTo, EqualTo>>, <<EqualNullSafe, EqualNullSafe>>, <<GreaterThan, GreaterThan>>, <<GreaterThanOrEqual, GreaterThanOrEqual>>, <<LessThan, LessThan>>, <<LessThanOrEqual, LessThanOrEqual>> and <<In, In>> filters are requested for their <<references, column references>>.
+
+## v2references
+
+```
+v2references: Array[Array[String]]
+```
+
+v2references...FIXME
+
+v2references is used when...FIXME

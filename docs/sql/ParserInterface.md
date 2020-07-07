@@ -23,7 +23,7 @@ parseDataType(
   sqlText: String): DataType
 ```
 
-Parses a SQL text to an [DataType](../spark-sql-DataType.md)
+Parses a SQL text to a [DataType](../spark-sql-DataType.md)
 
 Used when:
 
@@ -65,7 +65,7 @@ parseFunctionIdentifier(
   sqlText: String): FunctionIdentifier
 ```
 
-Parses a SQL text to an `FunctionIdentifier`
+Parses a SQL text to a `FunctionIdentifier`
 
 Used when:
 
@@ -80,7 +80,19 @@ parseMultipartIdentifier(
   sqlText: String): Seq[String]
 ```
 
-Used when...FIXME
+Parses a SQL text to a multi-part identifier
+
+Used when:
+
+* `CatalogV2Implicits` utility is requested to [parseColumnPath](CatalogV2Implicits.md#parseColumnPath)
+
+* `LogicalExpressions` utility is requested to [parseReference](LogicalExpressions.md#parseReference)
+
+* `DataFrameWriter` is requested to [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable)
+
+* [DataFrameWriterV2](DataFrameWriterV2.md) is created (and requested for [tableName](DataFrameWriterV2.md#tableName))
+
+* `SparkSession` is requested to [table](../spark-sql-SparkSession.md#table)
 
 ### parsePlan
 

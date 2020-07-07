@@ -81,6 +81,12 @@ nav:
       - CatalystSqlParser: sql/CatalystSqlParser.md
       - SparkSqlParser: sql/SparkSqlParser.md
       - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
+      - CatalogV2Implicits: sql/CatalogV2Implicits.md
+      - LogicalExpressions: sql/LogicalExpressions.md
+      - DataFrameWriterV2: sql/DataFrameWriterV2.md
+      - Expressions: sql/Expressions.md
+      - FieldReference: sql/FieldReference.md
+      - CreateTableWriter: sql/CreateTableWriter.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - Command: logical-operators/Command.md
