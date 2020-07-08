@@ -1,7 +1,6 @@
 # CatalystSqlParser &mdash; Parser for DataTypes and StructTypes
 
-[[astBuilder]]
-`CatalystSqlParser` is a link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser] with link:spark-sql-AstBuilder.adoc[AstBuilder] as the required `astBuilder`.
+`CatalystSqlParser` is a [AbstractSqlParser](AbstractSqlParser.md) with link:spark-sql-AstBuilder.adoc[AstBuilder] as the required `astBuilder`.
 
 ```scala
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser

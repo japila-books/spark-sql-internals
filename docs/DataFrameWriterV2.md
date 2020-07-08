@@ -2,6 +2,17 @@
 
 `DataFrameWriterV2` is a [CreateTableWriter](CreateTableWriter.md).
 
+```scala
+val nums = spark.range(5)
+scala> :type nums
+org.apache.spark.sql.Dataset[Long]
+
+// Create a DataFrameWriterV2
+val writerV2 = nums.writeTo("t1")
+scala> :type writerV2
+org.apache.spark.sql.DataFrameWriterV2[Long]
+```
+
 ## Creating Instance
 
 DataFrameWriterV2 takes the following to be created:

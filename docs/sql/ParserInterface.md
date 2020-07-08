@@ -1,6 +1,6 @@
 # ParserInterface &mdash; SQL Parsers
 
-`ParserInterface` is the [abstraction](#contract) of [SQL parsers](#extensions) that can convert (_parse_) textual representation of SQL statements (_SQL text_) into [Catalyst expressions](#parseExpression), [logical operators](#parsePlan), [table](#parseTableIdentifier) and [function](#parseFunctionIdentifier) identifiers, [table schema](#parseTableSchema), and [data types](#parseDataType).
+`ParserInterface` is the [abstraction](#contract) of [SQL parsers](#extensions) that can convert (_parse_) textual representation of SQL statements (_SQL text_) into Spark SQL's relational entities (e.g. [Catalyst expressions](#parseExpression), [logical operators](#parsePlan), [table](#parseTableIdentifier) and [function](#parseFunctionIdentifier) identifiers, [table schema](#parseTableSchema), and [data types](#parseDataType)).
 
 ## Accessing ParserInterface
 
