@@ -1,108 +1,45 @@
-# AstBuilder -- ANTLR-based SQL Parser
+# AstBuilder &mdash; ANTLR-based SQL Parser
 
-`AstBuilder` converts SQL statements into Spark SQL's relational entities (i.e. link:spark-sql-DataType.adoc[data types], link:spark-sql-Expression.adoc[Catalyst expressions], link:spark-sql-LogicalPlan.adoc[logical plans] or `TableIdentifiers`) using <<visit-callbacks, visit callback methods>>.
+`AstBuilder` converts ANTLR `ParseTree`s into Catalyst entities using [visit callbacks](#visit-callbacks).
 
-`AstBuilder` is the link:spark-sql-AbstractSqlParser.adoc#astBuilder[AST builder] of `AbstractSqlParser` (i.e. the base SQL parsing infrastructure in Spark SQL).
+`AstBuilder` is the only requirement of the [AbstractSqlParser](AbstractSqlParser.md#astBuilder) abstraction (and used by [CatalystSqlParser](CatalystSqlParser.md) directly while [SparkSqlParser](SparkSqlParser.md) uses [SparkSqlAstBuilder](SparkSqlAstBuilder.md) instead).
 
-[TIP]
-====
-Spark SQL supports SQL statements as described in https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4]. Using the file can tell you (almost) exactly what Spark SQL supports at any given time.
+??? note "AstBuilder and ANTLR"
+    `AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
 
-_"Almost"_ being that although the grammar accepts a SQL statement it can be reported as not allowed by `AstBuilder`, e.g.
+    `SqlBaseBaseVisitor` is a ANTLR-specific base class that is generated at build time from a ANTLR grammar in [SqlBase.g4](https://github.com/apache/spark/blob/v3.0.0/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4).
 
-```
-scala> sql("EXPLAIN FORMATTED SELECT * FROM myTable").show
-org.apache.spark.sql.catalyst.parser.ParseException:
-Operation not allowed: EXPLAIN FORMATTED(line 1, pos 0)
+    `SqlBaseBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
 
-== SQL ==
-EXPLAIN FORMATTED SELECT * FROM myTable
-^^^
+## Visit Callbacks
 
-  at org.apache.spark.sql.catalyst.parser.ParserUtils$.operationNotAllowed(ParserUtils.scala:39)
-  at org.apache.spark.sql.execution.SparkSqlAstBuilder$$anonfun$visitExplain$1.apply(SparkSqlParser.scala:275)
-  at org.apache.spark.sql.execution.SparkSqlAstBuilder$$anonfun$visitExplain$1.apply(SparkSqlParser.scala:273)
-  at org.apache.spark.sql.catalyst.parser.ParserUtils$.withOrigin(ParserUtils.scala:93)
-  at org.apache.spark.sql.execution.SparkSqlAstBuilder.visitExplain(SparkSqlParser.scala:273)
-  at org.apache.spark.sql.execution.SparkSqlAstBuilder.visitExplain(SparkSqlParser.scala:53)
-  at org.apache.spark.sql.catalyst.parser.SqlBaseParser$ExplainContext.accept(SqlBaseParser.java:480)
-  at org.antlr.v4.runtime.tree.AbstractParseTreeVisitor.visit(AbstractParseTreeVisitor.java:42)
-  at org.apache.spark.sql.catalyst.parser.AstBuilder$$anonfun$visitSingleStatement$1.apply(AstBuilder.scala:66)
-  at org.apache.spark.sql.catalyst.parser.AstBuilder$$anonfun$visitSingleStatement$1.apply(AstBuilder.scala:66)
-  at org.apache.spark.sql.catalyst.parser.ParserUtils$.withOrigin(ParserUtils.scala:93)
-  at org.apache.spark.sql.catalyst.parser.AstBuilder.visitSingleStatement(AstBuilder.scala:65)
-  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser$$anonfun$parsePlan$1.apply(ParseDriver.scala:62)
-  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser$$anonfun$parsePlan$1.apply(ParseDriver.scala:61)
-  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:90)
-  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:46)
-  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:61)
-  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:617)
-  ... 48 elided
-```
-====
+### visitExists
 
-`AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4[SqlBase.g4] ANTLR grammar for Spark SQL.
+Creates an [Exists](../spark-sql-Expression-Exists.md) expression
 
-[NOTE]
-====
-`SqlBaseBaseVisitor` is a ANTLR-specific base class that is auto-generated at build time from a ANTLR grammar in `SqlBase.g4`.
+ANTLR labeled alternative: `#exists`
 
-`SqlBaseBaseVisitor` is an ANTLR http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html[AbstractParseTreeVisitor].
-====
+### visitExplain
 
-[[visit-callbacks]]
-.AstBuilder's Visit Callback Methods
-[cols="1m,1,3",options="header",width="100%"]
-|===
-| Callback Method
-| ANTLR rule / labeled alternative
-| Spark SQL Entity
+Creates a [ExplainCommand](../logical-operators/ExplainCommand.md)
 
-| visitAliasedQuery
-|
-| [[visitAliasedQuery]]
+ANTLR rule: `explain`
 
-| visitColumnReference
-|
-| [[visitColumnReference]]
+### visitFirst
 
-| visitDereference
-|
-| [[visitDereference]]
-
-| visitExists
-| `#exists` labeled alternative
-| [[visitExists]] link:spark-sql-Expression-Exists.adoc[Exists] expression
-
-| visitExplain
-| `explain` rule
-a| [[visitExplain]] link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand]
-
-[NOTE]
-====
-Can be a `OneRowRelation` for an `EXPLAIN` for an unexplainable link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand] logical command as created from <<visitDescribeTable, DESCRIBE TABLE>> SQL statement.
-
-```
-val q = sql("EXPLAIN DESCRIBE TABLE t")
-scala> println(q.queryExecution.logical.numberedTreeString)
-scala> println(q.queryExecution.logical.numberedTreeString)
-00 ExplainCommand OneRowRelation$, false, false, false
-```
-====
-
-| visitFirst
-| `#first` labeled alternative
-a| [[visitFirst]] <<spark-sql-Expression-First.adoc#, First>> aggregate function expression
+Creates a [First](../spark-sql-Expression-First.md) aggregate function expression
 
 ```
 FIRST '(' expression (IGNORE NULLS)? ')'
 ```
 
-| visitFromClause
-| `fromClause`
-a| [[visitFromClause]] link:spark-sql-LogicalPlan.adoc[LogicalPlan]
+ANTLR labeled alternative: `#first`
 
-Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional link:spark-sql-Expression-Generator.adoc#lateral-view[LATERAL VIEW].
+### visitFromClause
+
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md)
+
+Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional [LATERAL VIEW](../spark-sql-Expression-Generator.md#lateral-view).
 
 A relation can be one of the following or a combination thereof:
 
@@ -110,21 +47,36 @@ A relation can be one of the following or a combination thereof:
 * Inline table using `VALUES exprs AS tableIdent`
 * Table-valued function (currently only `range` is supported)
 
-| visitFunctionCall
-| `functionCall` labeled alternative
-a| [[visitFunctionCall]]
+ANTLR rule: `fromClause`
 
-* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] for a bare function (with no window specification)
+### visitFunctionCall
 
-* [[visitFunctionCall-UnresolvedWindowExpression]] <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> for a function evaluated in a windowed context with a `WindowSpecReference`
+Creates one of the following:
 
-* link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] for a function over a window
+* [UnresolvedFunction](../spark-sql-Expression-UnresolvedFunction.md) for a bare function (with no window specification)
 
-TIP: See the <<function-examples, function examples>> below.
+* [UnresolvedWindowExpression](../spark-sql-Expression-UnresolvedWindowExpression.md) for a function evaluated in a windowed context with a `WindowSpecReference`
 
-| visitInlineTable
-| `inlineTable` rule
-a| [[visitInlineTable]] <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> unary logical operator (as the child of <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>> for `tableAlias`)
+* [WindowExpression](../spark-sql-Expression-WindowExpression.md) for a function over a window
+
+ANTLR rule: `functionCall`
+
+```
+import spark.sessionState.sqlParser
+
+scala> sqlParser.parseExpression("foo()")
+res0: org.apache.spark.sql.catalyst.expressions.Expression = 'foo()
+
+scala> sqlParser.parseExpression("foo() OVER windowSpecRef")
+res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexpression('foo(), WindowSpecReference(windowSpecRef))
+
+scala> sqlParser.parseExpression("foo() OVER (CLUSTER BY field)")
+res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecdefinition('field, UnspecifiedFrame)
+```
+
+### visitInlineTable
+
+Creates a [UnresolvedInlineTable](../logical-operators/UnresolvedInlineTable.md) unary logical operator (as the child of [SubqueryAlias](../logical-operators/SubqueryAlias.md) for `tableAlias`)
 
 ```
 VALUES expression (',' expression)* tableAlias
@@ -132,15 +84,17 @@ VALUES expression (',' expression)* tableAlias
 
 `expression` can be as follows:
 
-* <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expression for multiple-column tables
+* [CreateNamedStruct](../spark-sql-Expression-CreateNamedStruct.md) expression for multiple-column tables
 
-* Any <<spark-sql-Expression.adoc#, Catalyst expression>> for one-column tables
+* Any [Catalyst expression](../spark-sql-Expression.md) for one-column tables
 
 `tableAlias` can be specified explicitly or defaults to `colN` for every column (starting from `1` for `N`).
 
-| visitInsertIntoTable
-| `#insertIntoTable` labeled alternative
-a| [[visitInsertIntoTable]] <<InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+ANTLR rule: `inlineTable`
+
+### visitInsertIntoTable
+
+Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly)
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag disabled
 
@@ -148,11 +102,14 @@ A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exi
 INSERT INTO TABLE? tableIdentifier partitionSpec?
 ```
 
-NOTE: `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in <<singleInsertQuery, singleInsertQuery>> and <<multiInsertQueryBody, multiInsertQueryBody>> rules.
+ANTLR labeled alternative: `#insertIntoTable`
 
-| visitInsertOverwriteTable
-| `#insertOverwriteTable` labeled alternative
-a| [[visitInsertOverwriteTable]] <<InsertIntoTable.adoc#, InsertIntoTable>> (indirectly)
+!!! note
+    `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
+
+### visitInsertOverwriteTable
+
+Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly)
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag
 
@@ -160,13 +117,16 @@ A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exi
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)?
 ```
 
-In a way, `visitInsertOverwriteTable` is simply a more general version of the <<visitInsertIntoTable, visitInsertIntoTable>> with the `exists` flag on or off per `IF NOT EXISTS` used or not. The main difference is that <<spark-sql-dynamic-partition-inserts.adoc#dynamic-partitions, dynamic partitions>> are used with no `IF NOT EXISTS`.
+In a way, `visitInsertOverwriteTable` is simply a more general version of the [visitInsertIntoTable](#visitInsertIntoTable) with the `exists` flag on or off based on existence of `IF NOT EXISTS`. The main difference is that [dynamic partitions](../spark-sql-dynamic-partition-inserts.md#dynamic-partitions) are used with no `IF NOT EXISTS`.
 
-NOTE: `insertOverwriteTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in <<singleInsertQuery, singleInsertQuery>> and <<multiInsertQueryBody, multiInsertQueryBody>> rules.
+ANTLR labeled alternative: `#insertOverwriteTable`
 
-| `visitMultiInsertQuery`
-| [[multiInsertQueryBody]] `multiInsertQueryBody`
-a| [[visitMultiInsertQuery]] A logical operator with a link:InsertIntoTable.adoc[InsertIntoTable] (and link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] leaf operator)
+!!! note
+    `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
+
+### visitMultiInsertQuery
+
+Creates a logical operator with a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (and [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) leaf operator)
 
 ```
 FROM relation (',' relation)* lateralView*
@@ -176,63 +136,67 @@ FROM relation (',' relation)* lateralView*
 INSERT INTO TABLE? ...
 ```
 
-| visitNamedExpression
-| `namedExpression`
-a| [[visitNamedExpression]]
+ANTLR rule: `multiInsertQueryBody`
 
-* `Alias` (for a single alias)
-* `MultiAlias` (for a parenthesis enclosed alias list
-* a bare link:spark-sql-Expression.adoc[Expression]
+### visitNamedExpression
 
-| visitNamedQuery
-|
-| [[visitNamedQuery]] <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>>
+Creates one of the following Catalyst expressions:
 
-| `visitQuerySpecification`
-| `querySpecification`
-a| [[visitQuerySpecification]] `OneRowRelation` or link:spark-sql-LogicalPlan.adoc[LogicalPlan]
+* [Alias](../spark-sql-Expression-Alias.md) (for a single alias)
+* `MultiAlias` (for a parenthesis enclosed alias list)
+* a bare [Expression](../spark-sql-Expression.md)
 
-[NOTE]
-====
-`visitQuerySpecification` creates a `OneRowRelation` for a `SELECT` without a `FROM` clause.
+ANTLR rule: `namedExpression`
 
-```
-val q = sql("select 1")
-scala> println(q.queryExecution.logical.numberedTreeString)
-00 'Project [unresolvedalias(1, None)]
-01 +- OneRowRelation$
-```
-====
+### visitNamedQuery
 
-| visitPredicated
-| `predicated`
-| [[visitPredicated]] link:spark-sql-Expression.adoc[Expression]
+Creates a [SubqueryAlias](../logical-operators/SubqueryAlias.md)
 
-| visitRelation
-| `relation`
-| [[visitRelation]] link:spark-sql-LogicalPlan.adoc[LogicalPlan] for a `FROM` clause.
+### visitQuerySpecification
 
-| visitRowConstructor
-|
-| [[visitRowConstructor]]
+Creates [OneRowRelation](../logical-operators/OneRowRelation.md) or [LogicalPlan](../logical-operators/LogicalPlan.md)
 
-| visitSetOperation
-| `setOperation`
-| [[visitSetOperation]]
+??? note "OneRowRelation"
+    `visitQuerySpecification` creates a `OneRowRelation` for a `SELECT` without a `FROM` clause.
 
-| visitSingleDataType
-| `singleDataType`
-| [[visitSingleDataType]] link:spark-sql-DataType.adoc[DataType]
+    ```
+    val q = sql("select 1")
+    scala> println(q.queryExecution.logical.numberedTreeString)
+    00 'Project [unresolvedalias(1, None)]
+    01 +- OneRowRelation$
+    ```
 
-| visitSingleExpression
-| `singleExpression`
-| [[visitSingleExpression]] link:spark-sql-Expression.adoc[Expression]
+ANTLR rule: `querySpecification`
 
-Takes the named expression and relays to <<visitNamedExpression, visitNamedExpression>>
+### visitPredicated
 
-| visitSingleInsertQuery
-| [[singleInsertQuery]] `#singleInsertQuery` labeled alternative
-a| [[visitSingleInsertQuery]] A logical operator with a link:InsertIntoTable.adoc[InsertIntoTable]
+Creates an [Expression](../spark-sql-Expression.md)
+
+ANTLR rule: `predicated`
+
+### visitRelation
+
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause.
+
+ANTLR rule: `relation`
+
+### visitSingleDataType
+
+Creates a [DataType](../spark-sql-DataType.md)
+
+ANTLR rule: `singleDataType`
+
+### visitSingleExpression
+
+Creates an [Expression](../spark-sql-Expression.md)
+
+Takes the named expression and relays to [visitNamedExpression](#visitNamedExpression)
+
+ANTLR rule: `singleExpression`
+
+### visitSingleInsertQuery
+
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) with a [InsertIntoTable](../logical-operators/InsertIntoTable.md)
 
 ```
 INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
@@ -240,9 +204,11 @@ INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
 ```
 
-| visitSortItem
-| `sortItem`
-a| [[visitSortItem]] <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> unevaluable unary expression
+ANTLR labeled alternative: `#singleInsertQuery`
+
+### visitSortItem
+
+Creates a [SortOrder](../spark-sql-Expression-SortOrder.md) unevaluable unary expression
 
 ```
 sortItem
@@ -257,64 +223,63 @@ SORT BY sort+=sortItem (',' sort+=sortItem)*
 (ORDER | SORT) BY sortItem (',' sortItem)*)?
 ```
 
-| visitSingleStatement
-| `singleStatement`
-a| [[visitSingleStatement]] link:spark-sql-LogicalPlan.adoc[LogicalPlan] from a single statement
+ANTLR rule: `sortItem`
 
-NOTE: A single statement can be quite involved.
+### visitSingleStatement
 
-| visitSingleTableIdentifier
-| `singleTableIdentifier`
-| [[visitSingleTableIdentifier]] `TableIdentifier`
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) from a single SQL statement
 
-| visitStar
-| `#star` labeled alternative
-| [[visitStar]] link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+ANTLR rule: `singleStatement`
 
-| visitStruct
-|
-| [[visitStruct]]
+### visitStar
 
-| visitSubqueryExpression
-| `#subqueryExpression` labeled alternative
-| [[visitSubqueryExpression]] link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
+Creates a [UnresolvedStar](../spark-sql-Expression-UnresolvedStar.md)
 
-| visitWindowDef
-| `windowDef` labeled alternative
-a| [[visitWindowDef]] link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
+ANTLR labeled alternative: `#star`
+
+### visitSubqueryExpression
+
+Creates a [ScalarSubquery](../spark-sql-Expression-SubqueryExpression-ScalarSubquery.md)
+
+ANTLR labeled alternative: `#subqueryExpression`
+
+### visitWindowDef
+
+Creates a [WindowSpecDefinition](../spark-sql-Expression-WindowSpecDefinition.md)
 
 ```
 // CLUSTER BY with window frame
 '(' CLUSTER BY partition+=expression (',' partition+=expression)*) windowFrame? ')'
 
 // PARTITION BY and ORDER BY with window frame
-'(' ((PARTITION \| DISTRIBUTE) BY partition+=expression (',' partition+=expression)*)?
-  ((ORDER \| SORT) BY sortItem (',' sortItem)*)?)
+'(' ((PARTITION | DISTRIBUTE) BY partition+=expression (',' partition+=expression)*)?
+  ((ORDER | SORT) BY sortItem (',' sortItem)*)?)
   windowFrame? ')'
 ```
-|===
 
-[[with-methods]]
-.AstBuilder's Parsing Handlers
-[cols="1m,3",options="header",width="100%"]
-|===
-| Parsing Handler
-| LogicalPlan Added
+ANTLR rule: `windowDef`
 
-| withAggregation
-a| [[withAggregation]]
+## Parsing Handlers
 
-* link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets] for `GROUP BY &hellip; GROUPING SETS (&hellip;)`
+### withAggregation
 
-* link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] for `GROUP BY &hellip; (WITH CUBE \| WITH ROLLUP)?`
+Adds one of the following logical operators:
 
-| withGenerate
-| [[withGenerate]] link:spark-sql-Expression-Generator.adoc[Generate] with a link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] and link:spark-sql-LogicalPlan-Generate.adoc#join[join] flag turned on for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+* [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY &hellip; GROUPING SETS (&hellip;)`
 
-| withHints
-a| [[withHints]] link:spark-sql-LogicalPlan-Hint.adoc[Hint] for `/*+ hint */` in `SELECT` queries.
+* [Aggregate](../logical-operators/Aggregate.md) for `GROUP BY &hellip; (WITH CUBE | WITH ROLLUP)?`
 
-TIP: Note `+` (plus) between `/\*` and `*/`
+### withGenerate
+
+Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator](../spark-sql-Expression-UnresolvedGenerator.md) and [join](../logical-operators/Generate.md#join) flag enabled for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+
+### withHints
+
+Adds a [Hint](../logical-operators/Hint.md) for `/*+ hint */` in `SELECT` queries.
+
+!!! note
+    Note `+` (plus) between `/*` and `*/`
+
 
 `hint` is of the format `name` or `name (param1, param2, ...)`.
 
@@ -322,15 +287,17 @@ TIP: Note `+` (plus) between `/\*` and `*/`
 /*+ BROADCAST (table) */
 ```
 
-| withInsertInto
-a| [[withInsertInto]]
+### withInsertInto
 
-* link:InsertIntoTable.adoc[InsertIntoTable] for <<visitSingleInsertQuery, visitSingleInsertQuery>> or <<visitMultiInsertQuery, visitMultiInsertQuery>>
+Adds one of the following logical operators:
 
-* link:InsertIntoDir.adoc[InsertIntoDir] for...FIXME
+* [InsertIntoTable](../logical-operators/InsertIntoTable.md) for [visitSingleInsertQuery](#visitSingleInsertQuery) or [visitMultiInsertQuery](#visitMultiInsertQuery)
 
-| withJoinRelations
-a| [[withJoinRelations]] link:spark-sql-LogicalPlan-Join.adoc[Join] for a <<visitFromClause, FROM clause>> and <<visitRelation, relation>> alone.
+* [InsertIntoDir](../logical-operators/InsertIntoDir.md) for...FIXME
+
+### withJoinRelations
+
+Adds a [Join](../logical-operators/Join.md) for a [FROM clause](#visitFromClause) and [relation](#visitRelation) alone.
 
 The following join types are supported:
 
@@ -347,89 +314,65 @@ The following join criteria are supported:
 * `ON booleanExpression`
 * `USING '(' identifier (',' identifier)* ')'`
 
-Joins can be `NATURAL` (with no join criteria).
+Joins can be `NATURAL` (with no join criteria)
 
-| withQueryResultClauses
-| [[withQueryResultClauses]]
+### withQuerySpecification
 
-| withQuerySpecification
-a| [[withQuerySpecification]] Adds a query specification to a logical operator.
+Adds a query specification to a logical operator
 
 For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` does...FIXME
 
----
-
 For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` adds (in that order):
 
-. <<withGenerate, Generate>> unary logical operators (if used in the parsed SQL text)
+. [Generate](#withGenerate) unary logical operators (if used in the parsed SQL text)
 
-. `Filter` unary logical plan (if used in the parsed SQL text)
+. [Filter](../logical-operators/Filter.md) unary logical plan (if used in the parsed SQL text)
 
-. <<withAggregation, GroupingSets or Aggregate>> unary logical operators (if used in the parsed SQL text)
+. [GroupingSets or Aggregate](#withAggregation) unary logical operators (if used in the parsed SQL text)
 
 . `Project` and/or `Filter` unary logical operators
 
-. <<withWindows, WithWindowDefinition>> unary logical operator (if used in the parsed SQL text)
+. [WithWindowDefinition](#withWindows) unary logical operator (if used in the parsed SQL text)
 
-. <<withHints, UnresolvedHint>> unary logical operator (if used in the parsed SQL text)
+. [UnresolvedHint](#withHints) unary logical operator (if used in the parsed SQL text)
 
-| withPredicate
-a| [[withPredicate]]
-* `NOT? IN '(' query ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression
+### withPredicate
 
-* `NOT? IN '(' expression (',' expression)* ')'` gives an link:spark-sql-Expression-In.adoc[In] predicate expression
+* `NOT? IN '(' query ')'` adds an [In](../spark-sql-Expression-In.md) predicate expression with a [ListQuery](../spark-sql-Expression-ListQuery.md) subquery expression
 
-| withWindows
-a| [[withWindows]] link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] for link:spark-sql-functions-windows.adoc[window aggregates] (given `WINDOW` definitions).
+* `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../spark-sql-Expression-In.md) predicate expression
 
-Used for <<withQueryResultClauses, withQueryResultClauses>> and <<withQuerySpecification, withQuerySpecification>> with `windows` definition.
+### withWindows
+
+Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../spark-sql-functions-windows.md) (given `WINDOW` definitions).
+
+Used for [withQueryResultClauses](#withQueryResultClauses) and [withQuerySpecification](#withQuerySpecification) with `windows` definition.
 
 ```
 WINDOW identifier AS windowSpec
   (',' identifier AS windowSpec)*
 ```
 
-TIP: Consult `windows`, `namedWindow`, `windowSpec`, `windowFrame`, and `frameBound` (with `windowRef` and `windowDef`) ANTLR parsing rules for Spark SQL in link:++https://github.com/apache/spark/blob/master/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4#L629++[SqlBase.g4].
-|===
+## `aliasPlan` Method
 
-NOTE: `AstBuilder` belongs to `org.apache.spark.sql.catalyst.parser` package.
-
-=== [[function-examples]] Function Examples
-
-The examples are handled by <<visitFunctionCall, visitFunctionCall>>.
-
-[source, scala]
-----
-import spark.sessionState.sqlParser
-
-scala> sqlParser.parseExpression("foo()")
-res0: org.apache.spark.sql.catalyst.expressions.Expression = 'foo()
-
-scala> sqlParser.parseExpression("foo() OVER windowSpecRef")
-res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexpression('foo(), WindowSpecReference(windowSpecRef))
-
-scala> sqlParser.parseExpression("foo() OVER (CLUSTER BY field)")
-res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecdefinition('field, UnspecifiedFrame)
-----
-
-=== [[aliasPlan]] `aliasPlan` Internal Method
-
-[source, scala]
-----
-aliasPlan(alias: ParserRuleContext, plan: LogicalPlan): LogicalPlan
-----
+```scala
+aliasPlan(
+  alias: ParserRuleContext,
+  plan: LogicalPlan): LogicalPlan
+```
 
 `aliasPlan`...FIXME
 
-NOTE: `aliasPlan` is used when...FIXME
+`aliasPlan` is used when...FIXME
 
-=== [[mayApplyAliasPlan]] `mayApplyAliasPlan` Internal Method
+## `mayApplyAliasPlan` Method
 
-[source, scala]
-----
-mayApplyAliasPlan(tableAlias: TableAliasContext, plan: LogicalPlan): LogicalPlan
-----
+```scala
+mayApplyAliasPlan(
+  tableAlias: TableAliasContext,
+  plan: LogicalPlan): LogicalPlan
+```
 
 `mayApplyAliasPlan`...FIXME
 
-NOTE: `mayApplyAliasPlan` is used when...FIXME
+`mayApplyAliasPlan` is used when...FIXME
