@@ -131,7 +131,7 @@ catalog: SessionCatalog
 Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionState](#build) itself
 
 !!! note HiveSessionStateBuilder
-    [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.adoc) manages its own Hive-aware [HiveSessionCatalog](hive/HiveSessionStateBuilder.adoc#catalog).
+    [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) manages its own Hive-aware [HiveSessionCatalog](hive/HiveSessionStateBuilder.md#catalog).
 
 === [[creating-instance]] Creating BaseSessionStateBuilder Instance
 

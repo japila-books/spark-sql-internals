@@ -181,7 +181,7 @@ nav:
         - spark-sql-CachedRDDBuilder.md
       - spark-sql-RuntimeConfig.md
       - SQLConf:
-        - spark-sql-SQLConf.md
+        - SQLConf: spark-sql-SQLConf.md
         - spark-sql-StaticSQLConf.md
         - spark-sql-CatalystConf.md
       - spark-sql-UDFRegistration.md

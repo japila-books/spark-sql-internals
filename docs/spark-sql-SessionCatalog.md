@@ -2,7 +2,7 @@
 
 `SessionCatalog` is a catalog of relational entities in [SparkSession](spark-sql-SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).
 
-`SessionCatalog` is used to create [Analyzer](spark-sql-Analyzer.adoc#catalog) and [SparkOptimizer](spark-sql-SparkOptimizer.adoc#catalog) (_among other things_).
+`SessionCatalog` is used to create [Analyzer](spark-sql-Analyzer.md#catalog) and [SparkOptimizer](spark-sql-SparkOptimizer.md#catalog) (_among other things_).
 
 ## Creating Instance
 
@@ -36,7 +36,7 @@ org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
 `SessionCatalog` uses an [ExternalCatalog](spark-sql-ExternalCatalog.md) for the metadata of permanent entities (i.e. [tables](#getTableMetadata)).
 
-`SessionCatalog` is in fact a layer over ExternalCatalog in a [SparkSession](spark-sql-SparkSession.adoc#sessionState) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)) to be used.
+`SessionCatalog` is in fact a layer over ExternalCatalog in a [SparkSession](spark-sql-SparkSession.md#sessionState) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)) to be used.
 
 ## requireTableExists
 
