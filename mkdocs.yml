@@ -521,6 +521,7 @@ nav:
       - ResolveOutputRelation: spark-sql-Analyzer-ResolveOutputRelation.md
       - ResolveReferences: spark-sql-Analyzer-ResolveReferences.md
       - ResolveRelations: spark-sql-Analyzer-ResolveRelations.md
+      - ResolveSessionCatalog: ResolveSessionCatalog.md
       - ResolveSQLOnFile: spark-sql-Analyzer-ResolveSQLOnFile.md
       - ResolveSubquery: spark-sql-Analyzer-ResolveSubquery.md
       - ResolveTimeZone: ResolveTimeZone.md
