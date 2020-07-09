@@ -1,6 +1,4 @@
-title: SparkSession
-
-# SparkSession -- The Entry Point to Spark SQL
+# SparkSession &mdash; The Entry Point to Spark SQL
 
 `SparkSession` is the entry point to Spark SQL. It is one of the very first objects you create while developing a Spark SQL application.
 
@@ -309,16 +307,6 @@ sql(sqlText: String): DataFrame
 
 "Executes" a SQL query
 
-| `sessionState`
-a| [[sessionState]]
-
-[source, scala]
-----
-sessionState: SessionState
-----
-
-link:spark-sql-SessionState.adoc[SessionState]
-
 | `sqlContext`
 a| [[sqlContext]]
 
@@ -381,6 +369,14 @@ Returns the version of Apache Spark
 |===
 
 NOTE: <<baseRelationToDataFrame, baseRelationToDataFrame>> acts as a mechanism to plug `BaseRelation` object hierarchy in into link:spark-sql-LogicalPlan.adoc[LogicalPlan] object hierarchy that `SparkSession` uses to bridge them.
+
+## <span id="sessionState" /> SessionState
+
+```scala
+sessionState: SessionState
+```
+
+[SessionState](spark-sql-SessionState.md)
 
 === [[builder]] Creating SparkSession Using Builder Pattern -- `builder` Object Method
 

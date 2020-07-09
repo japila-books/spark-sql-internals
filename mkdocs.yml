@@ -166,14 +166,14 @@ nav:
       - spark-sql-FunctionRegistry.md
       - spark-sql-GlobalTempViewManager.md
       - SessionCatalog:
-        - spark-sql-SessionCatalog.md
+        - SessionCatalog: spark-sql-SessionCatalog.md
         - spark-sql-CatalogTable.md
         - spark-sql-CatalogStorageFormat.md
         - spark-sql-CatalogTablePartition.md
         - spark-sql-BucketSpec.md
       - SessionState:
-        - spark-sql-SessionState.md
-        - spark-sql-BaseSessionStateBuilder.md
+        - SessionState: spark-sql-SessionState.md
+        - BaseSessionStateBuilder: spark-sql-BaseSessionStateBuilder.md
         - spark-sql-SessionStateBuilder.md
       - spark-sql-SharedState.md
       - CacheManager:
@@ -652,7 +652,7 @@ nav:
     - Developing Applications:
       - spark-sql-fundamentals-spark-application-development.md
       - SparkSession:
-        - spark-sql-SparkSession.md
+        - SparkSession: spark-sql-SparkSession.md
         - spark-sql-SparkSession-Builder.md
         - spark-sql-SparkSession-implicits.md
         - spark-sql-SparkSessionExtensions.md

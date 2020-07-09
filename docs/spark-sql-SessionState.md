@@ -1,6 +1,4 @@
-title: SessionState
-
-# SessionState -- State Separation Layer Between SparkSessions
+# SessionState &mdash; State Separation Layer Between SparkSessions
 
 :hadoop-version: 2.10.0
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
@@ -49,12 +47,6 @@ There are two `BaseSessionStateBuilders` available:
 | [[analyzer]] <<spark-sql-Analyzer.adoc#, Spark Analyzer>>
 
 Initialized lazily (i.e. only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
-
-Used when...FIXME
-
-| catalog
-| link:spark-sql-SessionCatalog.adoc[SessionCatalog]
-| [[catalog]] Metastore of tables and databases
 
 Used when...FIXME
 
@@ -132,6 +124,10 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (i.e. `() => SessionResourceLoader`)
 * [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `LogicalPlan => QueryExecution`)
 * [[createClone]] `createClone` function to clone the `SessionState` given a <<spark-sql-SparkSession.adoc#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
+
+## <span id="catalog" /> SessionCatalog
+
+[SessionCatalog](spark-sql-SessionCatalog.md)
 
 === [[clone]] `clone` Method
 

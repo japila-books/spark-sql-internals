@@ -2,6 +2,14 @@
 
 `LogicalExpressions` is...FIXME
 
+## CatalystSqlParser
+
+```scala
+parser: CatalystSqlParser
+```
+
+`LogicalExpressions` creates a [CatalystSqlParser](CatalystSqlParser.md) lazily once when first requested to [parseReference](#parseReference).
+
 ## parseReference
 
 ```

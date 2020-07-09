@@ -1,73 +1,64 @@
-title: SessionCatalog
+# SessionCatalog &mdash; Session-Scoped Registry of Relational Entities
 
-# SessionCatalog -- Session-Scoped Catalog of Relational Entities
+`SessionCatalog` is a catalog of relational entities in [SparkSession](spark-sql-SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).
 
-`SessionCatalog` is the catalog (_registry_) of relational entities, i.e. databases, tables, views, partitions, and functions (in a <<spark-sql-SparkSession.adoc#catalog, SparkSession>>).
+`SessionCatalog` is used to create [Analyzer](spark-sql-Analyzer.adoc#catalog) and [SparkOptimizer](spark-sql-SparkOptimizer.adoc#catalog) (_among other things_).
 
-.SessionCatalog and Spark SQL Services
-image::images/spark-sql-SessionCatalog.png[align="center"]
+## Creating Instance
 
-`SessionCatalog` uses the <<externalCatalog, ExternalCatalog>> for the metadata of permanent entities (i.e. <<getTableMetadata, tables>>).
+SessionCatalog takes the following to be created:
 
-NOTE: `SessionCatalog` is a layer over <<externalCatalog, ExternalCatalog>> in a link:spark-sql-SparkSession.adoc#sessionState[SparkSession] which allows for different metastores (i.e. `in-memory` or link:hive/HiveSessionCatalog.adoc[hive]) to be used.
+* <span id="externalCatalogBuilder" /> Function to create an [ExternalCatalog](spark-sql-ExternalCatalog.md)
+* <span id="globalTempViewManagerBuilder" /> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
+* <span id="functionRegistry" /> [FunctionRegistry](spark-sql-FunctionRegistry.md)
+* <span id="conf" /> [SQLConf](spark-sql-SQLConf.md)
+* <span id="hadoopConf" /> Hadoop Configuration
+* <span id="parser" /> [ParserInterface](sql/ParserInterface.md)
+* <span id="functionResourceLoader" /> `FunctionResourceLoader`
 
-`SessionCatalog` is available through link:spark-sql-SessionState.adoc#catalog[SessionState] (of a link:spark-sql-SparkSession.adoc#sessionState[SparkSession]).
+![SessionCatalog and Spark SQL Services](images/spark-sql-SessionCatalog.png)
 
-[source, scala]
-----
+`SessionCatalog` is created (and cached for later usage) when `BaseSessionStateBuilder` is requested for [one](spark-sql-BaseSessionStateBuilder.md#catalog).
+
+## Accessing SessionCatalog
+
+`SessionCatalog` is available through [SessionState](spark-sql-SessionState.md#catalog) (of a [SparkSession](spark-sql-SparkSession.md#sessionState)).
+
+```
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
-----
+```
 
-`SessionCatalog` is <<creating-instance, created>> when `BaseSessionStateBuilder` is requested for the <<spark-sql-BaseSessionStateBuilder.adoc#catalog, SessionCatalog>> (when `SessionState` is requested for <<spark-sql-SessionState.adoc#catalogBuilder, it>>).
+## ExternalCatalog
 
-Amongst the notable usages of `SessionCatalog` is to create an <<spark-sql-Analyzer.adoc#catalog, Analyzer>> or a <<spark-sql-SparkOptimizer.adoc#catalog, SparkOptimizer>>.
+`SessionCatalog` uses an [ExternalCatalog](spark-sql-ExternalCatalog.md) for the metadata of permanent entities (i.e. [tables](#getTableMetadata)).
 
-[[internal-registries]]
-.SessionCatalog's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+`SessionCatalog` is in fact a layer over ExternalCatalog in a [SparkSession](spark-sql-SparkSession.adoc#sessionState) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)) to be used.
 
-| `currentDb`
-| [[currentDb]] FIXME
+## requireTableExists
 
-Used when...FIXME
-
-| `tableRelationCache`
-| [[tableRelationCache]] A cache of fully-qualified table names to link:spark-sql-LogicalPlan.adoc[table relation plans] (i.e. `LogicalPlan`).
-
-Used when `SessionCatalog` <<refreshTable, refreshes a table>>
-
-| `tempViews`
-| [[tempViews]] Registry of temporary views (i.e. non-global temporary tables)
-|===
-
-=== [[requireTableExists]] `requireTableExists` Internal Method
-
-[source, scala]
-----
-requireTableExists(name: TableIdentifier): Unit
-----
+```scala
+requireTableExists(
+  name: TableIdentifier): Unit
+```
 
 `requireTableExists`...FIXME
 
-NOTE: `requireTableExists` is used when...FIXME
+`requireTableExists` is used when...FIXME
 
-=== [[databaseExists]] `databaseExists` Method
+## databaseExists
 
-[source, scala]
-----
-databaseExists(db: String): Boolean
-----
+```scala
+databaseExists(
+  db: String): Boolean
+```
 
 `databaseExists`...FIXME
 
-NOTE: `databaseExists` is used when...FIXME
+`databaseExists` is used when...FIXME
 
 === [[listTables]] `listTables` Method
 
@@ -293,39 +284,25 @@ createGlobalTempView(
 * link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global[global] flag is enabled)
 ====
 
-=== [[createTable]] `createTable` Method
+## Creating Table
 
-[source, scala]
-----
-createTable(tableDefinition: CatalogTable, ignoreIfExists: Boolean): Unit
-----
+```
+createTable(
+  tableDefinition: CatalogTable,
+  ignoreIfExists: Boolean): Unit
+```
 
 `createTable`...FIXME
 
 NOTE: `createTable` is used when...FIXME
 
-=== [[creating-instance]] Creating SessionCatalog Instance
+## Finding Function by Name (Using FunctionRegistry)
 
-`SessionCatalog` takes the following when created:
-
-* [[externalCatalog]] link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
-* [[globalTempViewManager]] `GlobalTempViewManager`
-* [[functionResourceLoader]] `FunctionResourceLoader`
-* [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
-* [[conf]] link:spark-sql-CatalystConf.adoc[CatalystConf]
-* [[hadoopConf]] Hadoop's https://hadoop.apache.org/docs/current/api/org/apache/hadoop/conf/Configuration.html[Configuration]
-* [[parser]] link:spark-sql-ParserInterface.adoc[ParserInterface]
-
-`SessionCatalog` initializes the <<internal-registries, internal registries and counters>>.
-
-=== [[lookupFunction]] Finding Function by Name (Using FunctionRegistry) -- `lookupFunction` Method
-
-[source, scala]
-----
+```scala
 lookupFunction(
   name: FunctionIdentifier,
   children: Seq[Expression]): Expression
-----
+```
 
 `lookupFunction` finds a function by `name`.
 
@@ -604,3 +581,21 @@ getCachedTable(
 `getCachedTable`...FIXME
 
 NOTE: `getCachedTable` is used when...FIXME
+
+## Internal Properties
+
+### currentDb
+
+currentDb is...FIXME
+
+### tableRelationCache
+
+tableRelationCache is a cache of fully-qualified table names to link:spark-sql-LogicalPlan.adoc[table relation plans] (i.e. `LogicalPlan`).
+
+Used when `SessionCatalog` <<refreshTable, refreshes a table>>
+
+### tempViews
+
+tempViews is a registry of temporary views (i.e. non-global temporary tables)
+
+Used when `SessionCatalog` <<refreshTable, refreshes a table>>

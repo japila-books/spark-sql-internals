@@ -1,11 +1,13 @@
 # CatalystSqlParser &mdash; Parser for DataTypes and StructTypes
 
-`CatalystSqlParser` is a [AbstractSqlParser](AbstractSqlParser.md) with link:spark-sql-AstBuilder.adoc[AstBuilder] as the required `astBuilder`.
+`CatalystSqlParser` is an [AbstractSqlParser](AbstractSqlParser.md) that uses [AstBuilder](AstBuilder.md) for parsing SQL statements.
 
-```scala
+```
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 import org.apache.spark.sql.internal.SQLConf
 val catalystSqlParser = new CatalystSqlParser(SQLConf.get)
+scala> :type catalystSqlParser.astBuilder
+org.apache.spark.sql.catalyst.parser.AstBuilder
 ```
 
 `CatalystSqlParser` is used to translate link:spark-sql-DataType.adoc[DataTypes] from their canonical string representation (e.g. when link:spark-sql-schema.adoc#add[adding fields to a schema] or link:spark-sql-Column.adoc#cast[casting column to a different data type]) or link:spark-sql-StructType.adoc[StructTypes].
@@ -26,6 +28,20 @@ Parsing command: int
 ```
 
 It is also used in `HiveClientImpl` (when converting columns from Hive to Spark) and in `OrcFileOperator` (when inferring the schema for ORC files).
+
+## Creating Instance
+
+CatalystSqlParser takes the following to be created:
+
+* [SQLConf](../spark-sql-SQLConf.md)
+
+CatalystSqlParser is created when:
+
+* [SessionCatalog](../spark-sql-SessionCatalog.md) is created (as the [default ParserInterface](../spark-sql-SessionCatalog.md#parser))
+
+* CatalogV2Implicits utility is requested for a [SQL parser](CatalogV2Implicits.md#catalystSqlParser)
+
+* LogicalExpressions utility is requested for a [SQL parser](LogicalExpressions.md#parser)
 
 ## Accessing CatalystSqlParser
 

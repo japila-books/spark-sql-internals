@@ -1,6 +1,4 @@
-title: BaseSessionStateBuilder
-
-# BaseSessionStateBuilder -- Generic Builder of SessionState
+# BaseSessionStateBuilder &mdash; Generic Builder of SessionState
 
 `BaseSessionStateBuilder` is the <<contract, abstraction>> of <<implementations, builders>> that can <<newBuilder, produce a new BaseSessionStateBuilder>> to <<createClone, create a SessionState>>.
 
@@ -49,13 +47,6 @@ org.apache.spark.sql.internal.SessionState
 
 | analyzer
 | [[analyzer]] <<spark-sql-Analyzer.adoc#, Logical analyzer>>
-
-| catalog
-a| [[catalog]] <<spark-sql-SessionCatalog.adoc#, SessionCatalog>>
-
-Used to create <<analyzer, Analyzer>>, <<optimizer, Optimizer>> and a <<build, SessionState>> itself
-
-NOTE: link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] manages its own Hive-aware link:hive/HiveSessionStateBuilder.adoc#catalog[HiveSessionCatalog].
 
 | conf
 | [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
@@ -128,6 +119,19 @@ type NewBuilder = (SparkSession, Option[SessionState]) => BaseSessionStateBuilde
 ====
 
 NOTE: `BaseSessionStateBuilder` is an experimental and unstable API.
+
+## <span id="catalog" /> SessionCatalog
+
+```scala
+catalog: SessionCatalog
+```
+
+`BaseSessionStateBuilder` creates a [SessionCatalog](spark-sql-SessionCatalog.md) on demand (and caches it for later usage).
+
+Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionState](#build) itself
+
+!!! note HiveSessionStateBuilder
+    [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.adoc) manages its own Hive-aware [HiveSessionCatalog](hive/HiveSessionStateBuilder.adoc#catalog).
 
 === [[creating-instance]] Creating BaseSessionStateBuilder Instance
 
