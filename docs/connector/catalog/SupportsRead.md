@@ -1,0 +1,3 @@
+# SupportsRead
+
+`SupportsRead` is...FIXME

@@ -1,0 +1,3 @@
+# StagedTable
+
+`StagedTable` is...FIXME

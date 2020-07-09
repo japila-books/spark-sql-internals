@@ -598,6 +598,15 @@ nav:
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New in Spark 3.0.0:
     - since-300.md
+    - Connector API:
+      - Table: connector/catalog/Table.md
+      - FileTable: connector/catalog/FileTable.md
+      - KafkaTable: connector/catalog/KafkaTable.md
+      - NoopTable: connector/catalog/NoopTable.md
+      - StagedTable: connector/catalog/StagedTable.md
+      - SupportsRead: connector/catalog/SupportsRead.md
+      - SupportsWrite: connector/catalog/SupportsWrite.md
+      - V1Table: connector/catalog/V1Table.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - CreateTableWriter: CreateTableWriter.md
     - WriteConfigMethods: WriteConfigMethods.md
