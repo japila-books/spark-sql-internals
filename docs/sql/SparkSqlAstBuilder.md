@@ -98,6 +98,17 @@ scala> println(cmd)
 AnalyzeTableCommand `t1`, false
 ```
 
+### visitGenericFileFormat
+
+Creates a [CatalogStorageFormat](../spark-sql-CatalogStorageFormat.md) with the Hive SerDe for the data source name that can be one of the following (with their Hive-supported variants):
+
+* `sequencefile`
+* `rcfile`
+* `orc`
+* `parquet`
+* `textfile`
+* `avro`
+
 ### visitCacheTable
 
 Creates a [CacheTableCommand](../logical-operators/RunnableCommand.md#CacheTableCommand) logical command for `CACHE LAZY? TABLE [table] (AS? [query])?`
