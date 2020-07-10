@@ -2,7 +2,7 @@
 
 `Table` is an [abstraction](#contract) of [logical structured data set](#implementations) of data sources:
 
-* a directory on a file system
+* a directory or files on a file system (e.g. [FileTable](FileTable.md))
 * a topic of Apache Kafka
 * a table in a catalog
 * _others_
