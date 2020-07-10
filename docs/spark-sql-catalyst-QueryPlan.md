@@ -2,7 +2,7 @@
 
 `QueryPlan` is part of link:spark-sql-catalyst.adoc[Catalyst] to build a link:spark-sql-catalyst-TreeNode.adoc[tree of relational operators] of a structured query.
 
-Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:spark-sql-SparkPlan.adoc[SparkPlan] (for logical and physical plans, respectively).
+Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:SparkPlan.md[SparkPlan] (for logical and physical plans, respectively).
 
 A `QueryPlan` has an <<output, output>> attributes (that serves as the base for the schema), a collection of link:spark-sql-Expression.adoc[expressions] and a <<schema, schema>>.
 

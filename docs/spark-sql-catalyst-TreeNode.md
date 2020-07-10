@@ -23,7 +23,7 @@ TIP: Read up on `<:` type operator in Scala in https://docs.scala-lang.org/tour/
 
 Scala-specific, `TreeNode` is an abstract class that is the <<implementations, base class>> of Catalyst <<spark-sql-Expression.adoc#, Expression>> and <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>> abstract classes.
 
-`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and <<spark-sql-SparkPlan.adoc#, physical>> operators that both use <<spark-sql-Expression.adoc#, Catalyst expressions>> (which are `TreeNodes` again).
+`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and [physical](physical-operators/SparkPlan.md) operators that both use <<spark-sql-Expression.adoc#, Catalyst expressions>> (which are `TreeNodes` again).
 
 NOTE: Spark SQL uses `TreeNode` for <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> and <<spark-sql-Expression.adoc#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.adoc#, subquery expressions>>.
 
@@ -368,7 +368,7 @@ NOTE: `p` can be used for interactive debugging.
 
 * link:spark-sql-LogicalPlan.adoc[LogicalPlan] for logical plan trees
 
-* link:spark-sql-SparkPlan.adoc[SparkPlan] for physical plan trees
+* link:SparkPlan.md[SparkPlan] for physical plan trees
 
 * link:spark-sql-Expression.adoc[Expression] for expression trees
 ====
@@ -647,7 +647,7 @@ NOTE: `argString` is used when...FIXME
 nodeName: String
 ----
 
-`nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of <<spark-sql-SparkPlan.adoc#, physical operators>>).
+`nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of [physical operators](physical-operators/SparkPlan.md)).
 
 NOTE: `nodeName` is used when `TreeNode` is requested for <<simpleString, simpleString>> and <<asCode, asCode>>.
 

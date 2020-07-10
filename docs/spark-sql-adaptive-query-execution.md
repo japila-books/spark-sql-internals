@@ -1,6 +1,6 @@
 # Adaptive Query Execution
 
-*Adaptive Query Execution* (aka *Adaptive Query Optimisation* or *Adaptive Optimisation*) is an optimisation of a link:spark-sql-SparkPlan.adoc[query execution plan] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses for allowing alternative execution plans at runtime that would be optimized better based on runtime statistics.
+*Adaptive Query Execution* (aka *Adaptive Query Optimisation* or *Adaptive Optimisation*) is an optimisation of a [query execution plan](physical-operators/SparkPlan.md) that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses for allowing alternative execution plans at runtime that would be optimized better based on runtime statistics.
 
 Quoting the description of a <<i-want-more, talk>> by the authors of Adaptive Query Execution:
 

@@ -21,7 +21,7 @@ abstract class ExecSubqueryExpression extends PlanExpression[SubqueryExec] {
 | Description
 
 | `updateResult`
-| [[updateResult]] Used exclusively when a link:spark-sql-SparkPlan.adoc[physical operator] is requested to link:spark-sql-SparkPlan.adoc#waitForSubqueries[waitForSubqueries] (when link:spark-sql-SparkPlan.adoc#execute[executed] as part of link:spark-sql-SparkPlan.adoc#Physical-Operator-Execution-Pipeline[Physical Operator Execution Pipeline]).
+| [[updateResult]] Used exclusively when a link:SparkPlan.md[physical operator] is requested to link:SparkPlan.md#waitForSubqueries[waitForSubqueries] (when link:SparkPlan.md#execute[executed] as part of link:SparkPlan.md#Physical-Operator-Execution-Pipeline[Physical Operator Execution Pipeline]).
 |===
 
 [[implementations]]

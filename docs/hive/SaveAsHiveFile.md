@@ -49,7 +49,7 @@ saveAsHiveFile(
 
 `saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the link:../spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass] configuration property (default: link:../spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]).
 
-`saveAsHiveFile` uses `FileFormatWriter` utility to link:../spark-sql-FileFormatWriter.adoc#write[write] the result of executing the input link:../spark-sql-SparkPlan.adoc[physical query plan] (with a link:HiveFileFormat.adoc[HiveFileFormat] for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
+`saveAsHiveFile` uses `FileFormatWriter` utility to link:../spark-sql-FileFormatWriter.adoc#write[write] the result of executing the input link:../SparkPlan.md[physical query plan] (with a link:HiveFileFormat.adoc[HiveFileFormat] for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
 
 NOTE: link:../spark-sql-FileFormatWriter.adoc#write[BucketSpec] is undefined (`None`).
 

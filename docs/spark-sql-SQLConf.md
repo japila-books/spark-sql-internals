@@ -247,7 +247,7 @@ a| [[ignoreCorruptFiles]] Used when:
 
 | limitScaleUpFactor
 | link:spark-sql-properties.adoc#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor]
-| [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:spark-sql-SparkPlan.adoc#executeTake[the first n rows as an array].
+| [[limitScaleUpFactor]] Used exclusively when a physical operator is requested link:SparkPlan.md#executeTake[the first n rows as an array].
 
 | manageFilesourcePartitions
 | link:hive/configuration-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions]
@@ -382,7 +382,7 @@ a| [[stringRedactionPattern]] Used when:
 
 | subexpressionEliminationEnabled
 | link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
-| [[subexpressionEliminationEnabled]] Used exclusively when `SparkPlan` is requested for link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
+| [[subexpressionEliminationEnabled]] Used exclusively when `SparkPlan` is requested for link:SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag.
 
 | supportQuotedRegexColumnName
 | link:spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames[spark.sql.parser.quotedRegexColumnNames]

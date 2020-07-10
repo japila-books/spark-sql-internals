@@ -89,7 +89,7 @@ maxRows: Option[Long] = None
 
 `LogicalPlan` can be <<isStreaming, streaming>> if it contains one or more link:spark-sql-streaming-source.adoc[structured streaming sources].
 
-NOTE: `LogicalPlan` is in the end transformed to a link:spark-sql-SparkPlan.adoc[physical query plan].
+NOTE: `LogicalPlan` is in the end transformed to a link:SparkPlan.md[physical query plan].
 
 [[implementations]]
 [[specialized-logical-plans]]

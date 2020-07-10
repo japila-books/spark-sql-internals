@@ -28,7 +28,7 @@ a|
 
 Used when:
 
-* `BroadcastExchangeExec` is requested for link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time (when `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] as part of link:spark-sql-SparkPlan.adoc#executeQuery[executing a physical operator])
+* `BroadcastExchangeExec` is requested for link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time (when `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] as part of link:SparkPlan.md#executeQuery[executing a physical operator])
 
 * `HashedRelationBroadcastMode` is requested to link:spark-sql-HashedRelationBroadcastMode.adoc#transform[transform] internal rows (and build a link:spark-sql-HashedRelation.adoc#apply[HashedRelation])
 

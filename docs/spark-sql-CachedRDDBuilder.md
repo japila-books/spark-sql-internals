@@ -25,7 +25,7 @@
 * [[useCompression]] `useCompression` flag
 * [[batchSize]] Batch size
 * [[storageLevel]] `StorageLevel`
-* [[cachedPlan]] <<spark-sql-SparkPlan.adoc#, Physical operator>>
+* [[cachedPlan]] [Physical operator](physical-operators/SparkPlan.md)
 * [[tableName]] Table name
 * [[_cachedColumnBuffers]] `RDD[CachedBatch]` (default: `null`)
 

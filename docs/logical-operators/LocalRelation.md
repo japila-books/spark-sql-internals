@@ -44,7 +44,7 @@ scala> println(stats)
 Statistics(sizeInBytes=48.0 B, hints=none)
 ----
 
-`LocalRelation` is resolved to <<spark-sql-SparkPlan-LocalTableScanExec.adoc#, LocalTableScanExec>> leaf physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<spark-sql-SparkPlan.adoc#, physical plan>>).
+`LocalRelation` is resolved to <<spark-sql-SparkPlan-LocalTableScanExec.adoc#, LocalTableScanExec>> leaf physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
 
 [source, scala]
 ----

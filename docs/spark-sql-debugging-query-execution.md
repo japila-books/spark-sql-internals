@@ -66,7 +66,7 @@ debug(): Unit
 
 `debug` <<spark-sql-catalyst-TreeNode.adoc#transform, transforms>> the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.adoc#, DebugExec>> physical operator for every physical operator.
 
-`debug` requests the query plan to <<spark-sql-SparkPlan.adoc#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
+`debug` requests the query plan to <<SparkPlan.md#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
 
 ```
 Results returned: [count]

@@ -54,7 +54,7 @@ write(
 `write` requests the given `FileCommitProtocol` committer to `setupJob`.
 
 [[write-rdd]]
-`write` executes the given <<spark-sql-SparkPlan.adoc#, SparkPlan>> (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> physical operator (with `global` flag off).
+`write` executes the given <<SparkPlan.md#, SparkPlan>> (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> physical operator (with `global` flag off).
 
 [[write-runJob]]
 `write` runs a Spark job (action) on the <<write-rdd, RDD>> with <<executeTask, executeTask>> as the partition function. The result task handler simply requests the given `FileCommitProtocol` committer to `onTaskCommit` (with the `TaskCommitMessage` of a `WriteTaskResult`) and saves the `WriteTaskResult`.

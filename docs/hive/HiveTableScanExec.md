@@ -5,7 +5,7 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveTableScanExec` is a link:../spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] that represents a link:HiveTableRelation.adoc[HiveTableRelation] logical operator at execution time.
+`HiveTableScanExec` is a link:../SparkPlan.md#LeafExecNode[leaf physical operator] that represents a link:HiveTableRelation.adoc[HiveTableRelation] logical operator at execution time.
 
 `HiveTableScanExec` is <<creating-instance, created>> exclusively when link:HiveTableScans.adoc[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
@@ -56,7 +56,7 @@ link:HiveTableScans.adoc[HiveTableScans] execution planning strategy creates a `
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:../spark-sql-SparkPlan.adoc#doExecute[SparkPlan] contract to generate the runtime representation of a structured query as a distributed computation over link:../spark-sql-InternalRow.adoc[internal binary rows] on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of link:../SparkPlan.md#doExecute[SparkPlan] contract to generate the runtime representation of a structured query as a distributed computation over link:../spark-sql-InternalRow.adoc[internal binary rows] on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 

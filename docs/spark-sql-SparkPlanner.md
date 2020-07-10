@@ -2,9 +2,9 @@ title: SparkPlanner
 
 # SparkPlanner -- Spark Query Planner
 
-`SparkPlanner` is a concrete link:spark-sql-catalyst-QueryPlanner.adoc[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:spark-sql-SparkPlan.adoc[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
+`SparkPlanner` is a concrete link:spark-sql-catalyst-QueryPlanner.adoc[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:SparkPlan.md[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
 
-NOTE: `SparkPlanner` is expected to plan (aka _generate_) at least one link:spark-sql-SparkPlan.adoc[physical plan] per link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `SparkPlanner` is expected to plan (aka _generate_) at least one link:SparkPlan.md[physical plan] per link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `SparkPlanner` is available as link:spark-sql-SessionState.adoc#planner[planner] of a `SessionState`.
 
@@ -97,7 +97,7 @@ NOTE: `extraPlanningStrategies` are executed after <<extraStrategies, extraStrat
 collectPlaceholders(plan: SparkPlan): Seq[(SparkPlan, LogicalPlan)]
 ----
 
-`collectPlaceholders` collects all link:spark-sql-SparkStrategy.adoc#PlanLater[PlanLater] physical operators in the `plan` link:spark-sql-SparkPlan.adoc[physical plan].
+`collectPlaceholders` collects all link:spark-sql-SparkStrategy.adoc#PlanLater[PlanLater] physical operators in the `plan` link:SparkPlan.md[physical plan].
 
 NOTE: `collectPlaceholders` is part of link:spark-sql-catalyst-QueryPlanner.adoc#collectPlaceholders[QueryPlanner Contract].
 
@@ -108,7 +108,7 @@ NOTE: `collectPlaceholders` is part of link:spark-sql-catalyst-QueryPlanner.adoc
 prunePlans(plans: Iterator[SparkPlan]): Iterator[SparkPlan]
 ----
 
-`prunePlans` gives the input `plans` link:spark-sql-SparkPlan.adoc[physical plans] back (i.e. with no changes).
+`prunePlans` gives the input `plans` link:SparkPlan.md[physical plans] back (i.e. with no changes).
 
 NOTE: `prunePlans` is part of link:spark-sql-catalyst-QueryPlanner.adoc#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
 
@@ -129,7 +129,7 @@ NOTE: `pruneFilterProject` is almost like <<spark-sql-SparkStrategy-DataSourceSt
 
 If so, `pruneFilterProject` does the following:
 
-. Applies the input `scanBuilder` function to the input `projectList` columns that creates a new <<spark-sql-SparkPlan.adoc#, physical operator>>
+. Applies the input `scanBuilder` function to the input `projectList` columns that creates a new <<SparkPlan.md#, physical operator>>
 
 . If there are Catalyst predicate expressions in the input `prunePushedDownFilters` that cannot be pushed down, `pruneFilterProject` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions)
 
@@ -139,7 +139,7 @@ NOTE: In this case no extra <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec
 
 If not (i.e. it is neither possible to use a column pruning only nor evaluate filter conditions), `pruneFilterProject` does the following:
 
-. Applies the input `scanBuilder` function to the projection and filtering columns that creates a new <<spark-sql-SparkPlan.adoc#, physical operator>>
+. Applies the input `scanBuilder` function to the projection and filtering columns that creates a new <<SparkPlan.md#, physical operator>>
 
 . Creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions if available)
 

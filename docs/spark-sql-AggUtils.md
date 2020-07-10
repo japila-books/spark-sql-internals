@@ -59,7 +59,7 @@ createAggregate(
   child: SparkPlan): SparkPlan
 ----
 
-`createAggregate` creates a <<spark-sql-SparkPlan.adoc#, physical operator>> given the input `aggregateExpressions` <<spark-sql-Expression-AggregateExpression.adoc#, aggregate expressions>>.
+`createAggregate` creates a [physical operator](physical-operators/SparkPlan.md) given the input `aggregateExpressions` <<spark-sql-Expression-AggregateExpression.adoc#, aggregate expressions>>.
 
 [[aggregate-physical-operator-selection-criteria]]
 .createAggregate's Aggregate Physical Operator Selection Criteria (in execution order)

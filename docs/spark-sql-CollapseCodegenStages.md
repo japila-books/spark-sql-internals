@@ -2,7 +2,7 @@
 
 `CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, collapses physical operators and generates a Java source code for their execution>>.
 
-When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage, whole-stage code generation enabled>>), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a <<spark-sql-SparkPlan.adoc#, physical operator>> supports the <<spark-sql-whole-stage-codegen.adoc#, whole-stage Java code generation>> or not (and what physical operator to insert):
+When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage, whole-stage code generation enabled>>), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a [physical operator](physical-operators/SparkPlan.md) supports the <<spark-sql-whole-stage-codegen.adoc#, whole-stage Java code generation>> or not (and what physical operator to insert):
 
 . Factors in physical operators with <<spark-sql-CodegenSupport.adoc#, CodegenSupport>> only
 
@@ -19,7 +19,7 @@ link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.max
 The number is `100` by default.
 ====
 
-Technically, `CollapseCodegenStages` is just a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-SparkPlan.adoc#, physical query plans>>, i.e. `Rule[SparkPlan]`.
+Technically, `CollapseCodegenStages` is just a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming [physical query plans](physical-operators/SparkPlan.md), i.e. `Rule[SparkPlan]`.
 
 `CollapseCodegenStages` is part of <<spark-sql-QueryExecution.adoc#preparations, preparations>> batch of physical query plan rules and is executed when `QueryExecution` is requested for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>> (i.e. in *executedPlan* phase of a query execution).
 
@@ -268,7 +268,7 @@ scala> println(execPlan.numberedTreeString)
 apply(plan: SparkPlan): SparkPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to apply a rule to a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. link:spark-sql-SparkPlan.adoc[physical plan]).
+NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to apply a rule to a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. link:SparkPlan.md[physical plan]).
 
 `apply` starts <<insertWholeStageCodegen, inserting WholeStageCodegenExec (with InputAdapter)>> in the input `plan` physical plan only when link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property is turned on.
 
@@ -281,7 +281,7 @@ Otherwise, `apply` does nothing at all (i.e. passes the input physical plan thro
 insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 ----
 
-Internally, `insertWholeStageCodegen` branches off per <<spark-sql-SparkPlan.adoc#, physical operator>>:
+Internally, `insertWholeStageCodegen` branches off per [physical operator](physical-operators/SparkPlan.md):
 
 . For physical operators with a single <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attribute>> of type `ObjectType`, `insertWholeStageCodegen` requests the operator for the <<spark-sql-catalyst-TreeNode.adoc#children, child>> physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
@@ -337,7 +337,7 @@ NOTE: `insertInputAdapter` is used exclusively when `CollapseCodegenStages` <<in
 supportCodegen(plan: SparkPlan): Boolean
 ----
 
-`supportCodegen` is positive (`true`) when the input <<spark-sql-SparkPlan.adoc#, physical operator>> is as follows:
+`supportCodegen` is positive (`true`) when the input [physical operator](physical-operators/SparkPlan.md) is as follows:
 
 . link:spark-sql-CodegenSupport.adoc[CodegenSupport] and the <<spark-sql-CodegenSupport.adoc#supportCodegen, supportCodegen>> flag is turned on
 +

@@ -6,7 +6,7 @@ title: Subexpression Elimination
 
 Subexpression Elimination is enabled by default. Use the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property control whether the feature is enabled (`true`) or not (`false`).
 
-Subexpression Elimination is used (by means of link:spark-sql-SparkPlan.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
+Subexpression Elimination is used (by means of link:SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
 
 * link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
 

@@ -1,6 +1,6 @@
 # SQL Tab -- Monitoring Structured Queries in web UI
 
-*SQL* tab in link:spark-webui.adoc[web UI] shows link:spark-sql-SQLMetric.adoc[SQLMetrics] per link:spark-sql-SparkPlan.adoc[physical operator] in a structured query physical plan.
+*SQL* tab in link:spark-webui.adoc[web UI] shows link:spark-sql-SQLMetric.adoc[SQLMetrics] per link:SparkPlan.md[physical operator] in a structured query physical plan.
 
 You can access the SQL tab under `/SQL` URL, e.g. http://localhost:4040/SQL/.
 

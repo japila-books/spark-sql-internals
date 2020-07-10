@@ -176,7 +176,7 @@ a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.adoc#, logical plan>> with a
 logicalPlan: LogicalPlan
 ----
 
-When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.adoc#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<spark-sql-SparkPlan.adoc#executeCollect, executeCollect>>).
+When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.adoc#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
 
 ! `planWithBarrier`
 a! [[planWithBarrier]]
@@ -382,7 +382,7 @@ Feel free to contact me at jacek@japila.pl if you think I should re-consider my 
 withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 ----
 
-`withAction` requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:spark-sql-SparkPlan.adoc[resets the metrics] of every physical operator (in the physical plan).
+`withAction` requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
 
 `withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
 

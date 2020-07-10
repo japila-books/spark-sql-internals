@@ -1,5 +1,0 @@
-title: ExternalRDDScanExec
-
-# ExternalRDDScanExec Leaf Physical Operator
-
-`ExternalRDDScanExec` is a link:spark-sql-SparkPlan.adoc#LeafExecNode[leaf physical operator] for...FIXME

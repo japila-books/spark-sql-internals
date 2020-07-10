@@ -441,64 +441,64 @@ nav:
       - spark-sql-Expression-WindowFunction.md
       - spark-sql-Expression-WindowSpecDefinition.md
     - Physical Operators:
-      - SparkPlan: spark-sql-SparkPlan.md
-      - CodegenSupport: spark-sql-CodegenSupport.md
-      - DataSourceScanExec: spark-sql-SparkPlan-DataSourceScanExec.md
-      - ColumnarBatchScan: spark-sql-ColumnarBatchScan.md
-      - ObjectConsumerExec: spark-sql-ObjectConsumerExec.md
-      - BaseLimitExec: spark-sql-SparkPlan-BaseLimitExec.md
-      - Exchange: spark-sql-SparkPlan-Exchange.md
+      - SparkPlan: physical-operators/SparkPlan.md
+      - CodegenSupport: physical-operators/CodegenSupport.md
+      - DataSourceScanExec: physical-operators/DataSourceScanExec.md
+      - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
+      - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - BaseLimitExec: physical-operators/BaseLimitExec.md
+      - Exchange: physical-operators/Exchange.md
       - Projection:
-        - spark-sql-Projection.md
-        - spark-sql-UnsafeProjection.md
-        - spark-sql-GenerateUnsafeProjection.md
-        - spark-sql-GenerateMutableProjection.md
-        - spark-sql-InterpretedProjection.md
-        - spark-sql-CodeGeneratorWithInterpretedFallback.md
-      - spark-sql-SQLMetric.md
+        - physical-operators/Projection.md
+        - physical-operators/UnsafeProjection.md
+        - physical-operators/GenerateUnsafeProjection.md
+        - physical-operators/GenerateMutableProjection.md
+        - physical-operators/InterpretedProjection.md
+        - physical-operators/CodeGeneratorWithInterpretedFallback.md
+      - physical-operators/SQLMetric.md
       - Concrete Operators:
-        - spark-sql-SparkPlan-BroadcastExchangeExec.md
-        - spark-sql-SparkPlan-BroadcastHashJoinExec.md
-        - spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md
-        - spark-sql-SparkPlan-CartesianProductExec.md
-        - spark-sql-SparkPlan-CoalesceExec.md
-        - spark-sql-SparkPlan-CoGroupExec.md
-        - spark-sql-SparkPlan-DataSourceV2ScanExec.md
-        - spark-sql-SparkPlan-DataWritingCommandExec.md
-        - spark-sql-SparkPlan-DebugExec.md
-        - spark-sql-SparkPlan-DeserializeToObjectExec.md
-        - spark-sql-SparkPlan-ExecutedCommandExec.md
-        - spark-sql-SparkPlan-ExpandExec.md
-        - spark-sql-SparkPlan-ExternalRDDScanExec.md
-        - spark-sql-SparkPlan-FileSourceScanExec.md
-        - spark-sql-SparkPlan-FilterExec.md
-        - spark-sql-SparkPlan-GenerateExec.md
-        - spark-sql-SparkPlan-HashAggregateExec.md
-        - spark-sql-SparkPlan-InMemoryTableScanExec.md
-        - spark-sql-SparkPlan-LocalTableScanExec.md
-        - spark-sql-SparkPlan-MapElementsExec.md
-        - spark-sql-SparkPlan-ObjectHashAggregateExec.md
-        - spark-sql-SparkPlan-ObjectProducerExec.md
-        - spark-sql-SparkPlan-ProjectExec.md
-        - spark-sql-SparkPlan-RangeExec.md
-        - spark-sql-SparkPlan-RDDScanExec.md
-        - spark-sql-SparkPlan-ReusedExchangeExec.md
-        - spark-sql-SparkPlan-RowDataSourceScanExec.md
-        - spark-sql-SparkPlan-SampleExec.md
-        - spark-sql-SparkPlan-ShuffleExchangeExec.md
-        - spark-sql-SparkPlan-ShuffledHashJoinExec.md
-        - spark-sql-SparkPlan-SerializeFromObjectExec.md
-        - spark-sql-SparkPlan-SortAggregateExec.md
-        - spark-sql-SparkPlan-SortMergeJoinExec.md
-        - spark-sql-SparkPlan-SortExec.md
-        - spark-sql-SparkPlan-SubqueryExec.md
-        - spark-sql-SparkPlan-InputAdapter.md
+        - physical-operators/BroadcastExchangeExec.md
+        - physical-operators/BroadcastHashJoinExec.md
+        - physical-operators/BroadcastNestedLoopJoinExec.md
+        - physical-operators/CartesianProductExec.md
+        - physical-operators/CoalesceExec.md
+        - physical-operators/CoGroupExec.md
+        - physical-operators/DataSourceV2ScanExec.md
+        - physical-operators/DataWritingCommandExec.md
+        - physical-operators/DebugExec.md
+        - physical-operators/DeserializeToObjectExec.md
+        - physical-operators/ExecutedCommandExec.md
+        - physical-operators/ExpandExec.md
+        - physical-operators/ExternalRDDScanExec.md
+        - physical-operators/FileSourceScanExec.md
+        - physical-operators/FilterExec.md
+        - physical-operators/GenerateExec.md
+        - physical-operators/HashAggregateExec.md
+        - physical-operators/InMemoryTableScanExec.md
+        - physical-operators/LocalTableScanExec.md
+        - physical-operators/MapElementsExec.md
+        - physical-operators/ObjectHashAggregateExec.md
+        - physical-operators/ObjectProducerExec.md
+        - physical-operators/ProjectExec.md
+        - physical-operators/RangeExec.md
+        - physical-operators/RDDScanExec.md
+        - physical-operators/ReusedExchangeExec.md
+        - physical-operators/RowDataSourceScanExec.md
+        - physical-operators/SampleExec.md
+        - physical-operators/ShuffleExchangeExec.md
+        - physical-operators/ShuffledHashJoinExec.md
+        - physical-operators/SerializeFromObjectExec.md
+        - physical-operators/SortAggregateExec.md
+        - physical-operators/SortMergeJoinExec.md
+        - physical-operators/SortExec.md
+        - physical-operators/SubqueryExec.md
+        - physical-operators/InputAdapter.md
         - WindowExec:
-          - spark-sql-SparkPlan-WindowExec.md
-          - spark-sql-AggregateProcessor.md
-          - spark-sql-WindowFunctionFrame.md
-        - spark-sql-SparkPlan-WholeStageCodegenExec.md
-        - spark-sql-SparkPlan-WriteToDataSourceV2Exec.md
+          - physical-operators/WindowExec.md
+          - physical-operators/AggregateProcessor.md
+          - physical-operators/WindowFunctionFrame.md
+        - physical-operators/WholeStageCodegenExec.md
+        - physical-operators/WriteToDataSourceV2Exec.md
     - Logical Analysis Rules:
       - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
       - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md

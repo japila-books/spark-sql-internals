@@ -8,7 +8,7 @@ title: SortOrder
 
 * <<spark-sql-column-operators.adoc#asc, Column.asc>>, <<spark-sql-column-operators.adoc#asc_nulls_first, Column.asc_nulls_first>>, <<spark-sql-column-operators.adoc#asc_nulls_last, Column.asc_nulls_last>>, <<spark-sql-column-operators.adoc#desc, Column.desc>>, <<spark-sql-column-operators.adoc#desc_nulls_first, Column.desc_nulls_first>>, and <<spark-sql-column-operators.adoc#desc_nulls_last, Column.desc_nulls_last>> operators are used
 
-`SortOrder` is used to specify the <<spark-sql-SparkPlan.adoc#, output data ordering requirements>> of a physical operator.
+`SortOrder` is used to specify the <<SparkPlan.md#, output data ordering requirements>> of a physical operator.
 
 `SortOrder` is an <<spark-sql-Expression.adoc#Unevaluable, unevaluable expression>> and cannot be evaluated (i.e. produce a value given an internal row).
 

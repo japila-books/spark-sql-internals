@@ -298,7 +298,7 @@ explain(extended: Boolean): Unit
 ----
 <1> Turns the `extended` flag on
 
-`explain` prints the link:spark-sql-LogicalPlan.adoc[logical] and (with `extended` flag enabled) link:spark-sql-SparkPlan.adoc[physical] plans, their cost and codegen to the console.
+`explain` prints the link:spark-sql-LogicalPlan.adoc[logical] and (with `extended` flag enabled) link:SparkPlan.md[physical] plans, their cost and codegen to the console.
 
 TIP: Use `explain` to review the structured queries and optimizations applied.
 
@@ -306,7 +306,7 @@ Internally, `explain` creates a link:spark-sql-LogicalPlan-ExplainCommand.adoc[E
 
 NOTE: `explain` uses link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command that, when link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed], gives different text representations of link:spark-sql-QueryExecution.adoc[QueryExecution] (for the Dataset's link:spark-sql-LogicalPlan.adoc[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 
-`explain` then requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:spark-sql-SparkPlan.adoc#executeCollect[collects the records] (as link:spark-sql-InternalRow.adoc[InternalRow] objects).
+`explain` then requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:SparkPlan.md#executeCollect[collects the records] (as link:spark-sql-InternalRow.adoc[InternalRow] objects).
 
 [NOTE]
 ====
@@ -393,7 +393,7 @@ Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable
 
 With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
 
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:spark-sql-SparkPlan.adoc#outputPartitioning[outputPartitioning] and link:spark-sql-SparkPlan.adoc#outputOrdering[outputOrdering] for the result `Dataset`).
+`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:SparkPlan.md#outputPartitioning[outputPartitioning] and link:SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
 
 In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 

@@ -50,14 +50,14 @@ TIP: Beside `analyzed`, you can use link:spark-sql-dataset-operators.adoc#explai
 | [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
 
 | sparkPlan
-a| [[sparkPlan]] link:spark-sql-SparkPlan.adoc[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
+a| [[sparkPlan]] link:SparkPlan.md[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
 
 NOTE: `sparkPlan` is the first physical plan from the collection of all possible physical plans.
 
 NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:spark-sql-catalyst-QueryPlanner.adoc#plan[will always generate at least one physical plan].
 
 | executedPlan
-a| [[executedPlan]] Optimized <<spark-sql-SparkPlan.adoc#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
+a| [[executedPlan]] Optimized <<SparkPlan.md#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
 
 NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers is the <<spark-sql-CollapseCodegenStages.adoc#, CollapseCodegenStages>> physical preparation rule that collapses physical operators that support code generation together as a link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc[WholeStageCodegenExec] operator.
 
@@ -94,7 +94,7 @@ a| [[toRdd]]
 toRdd: RDD[InternalRow]
 ----
 
-Spark Core's execution graph of a distributed computation (`RDD` of xref:spark-sql-InternalRow.adoc[internal binary rows]) from the <<executedPlan, executedPlan>> after xref:spark-sql-SparkPlan.adoc#execute[execution].
+Spark Core's execution graph of a distributed computation (`RDD` of xref:spark-sql-InternalRow.adoc[internal binary rows]) from the <<executedPlan, executedPlan>> after xref:SparkPlan.md#execute[execution].
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 
@@ -105,7 +105,7 @@ The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical opera
 After you have executed `toRdd` (directly or not), you basically "leave" Spark SQL's Dataset world and "enter" Spark Core's RDD space.
 ====
 
-`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using link:spark-sql-SparkPlan.adoc#execute[SparkPlan.execute] that recursively triggers execution of every child physical operator in the physical plan tree.
+`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using link:SparkPlan.md#execute[SparkPlan.execute] that recursively triggers execution of every child physical operator in the physical plan tree.
 
 NOTE: You can use link:spark-sql-SparkSession.adoc#internalCreateDataFrame[SparkSession.internalCreateDataFrame] to apply a link:spark-sql-StructType.adoc[schema] to an `RDD[InternalRow]`.
 
@@ -133,7 +133,7 @@ dataset.queryExecution.executedPlan
 | link:spark-sql-SparkPlanner.adoc[SparkPlanner]
 |===
 
-`QueryExecution` uses the input `SparkSession` to access the current link:spark-sql-SparkPlanner.adoc[SparkPlanner] (through link:spark-sql-SessionState.adoc[SessionState]) when <<creating-instance, it is created>>. It then computes a link:spark-sql-SparkPlan.adoc[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
+`QueryExecution` uses the input `SparkSession` to access the current link:spark-sql-SparkPlanner.adoc[SparkPlanner] (through link:spark-sql-SessionState.adoc[SessionState]) when <<creating-instance, it is created>>. It then computes a link:SparkPlan.md[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 
 [NOTE]
 ====
@@ -201,7 +201,7 @@ CAUTION: FIXME
 preparations: Seq[Rule[SparkPlan]]
 ----
 
-`preparations` is the set of the physical query optimization rules that transform a <<spark-sql-SparkPlan.adoc#, physical query plan>> to be more efficient and optimized for execution (i.e. `Rule[SparkPlan]`).
+`preparations` is the set of the physical query optimization rules that transform a <<SparkPlan.md#, physical query plan>> to be more efficient and optimized for execution (i.e. `Rule[SparkPlan]`).
 
 The `preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
 
@@ -354,7 +354,7 @@ Internally, `hiveResultString` <<hiveResultString-transformations, transformatio
 | link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] for <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#, ShowTablesCommand>>
 | Executes `ExecutedCommandExec` and transforms the result to a collection of table names.
 
-| Any other link:spark-sql-SparkPlan.adoc[SparkPlan]
+| Any other link:SparkPlan.md[SparkPlan]
 | Executes `SparkPlan` and transforms the result to a Hive-compatible output format.
 |===
 
