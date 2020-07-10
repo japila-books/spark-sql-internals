@@ -12,11 +12,13 @@ The project is based on or uses the following tools:
 
 * [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme
 
-* [Read the Docs](https://readthedocs.org/) for deploying the online book
+* [Markdown](https://commonmark.org/help/)
 
-* [Atom editor](https://atom.io/)
+* [Visual Studio Code](https://code.visualstudio.com/) as a Markdown editor
 
 * [Docker](https://www.docker.com/) to [run the Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker-recommended) (with plugins and extensions)
+
+* [Read the Docs](https://readthedocs.org/) for online deployment
 
 ## Previewing Book
 
@@ -24,13 +26,13 @@ Simply use the [official Docker image](https://squidfunk.github.io/mkdocs-materi
 
 Start `mkdocs serve` in the project root (the folder with [mkdocs.yml](mkdocs.yml)) as follows:
 
-```
+```shell
 $ docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
 ```
 
 Consult the [MkDocs documentation](https://www.mkdocs.org/#getting-started) to get started and learn how to [build the project](https://www.mkdocs.org/#building-the-site).
 
-```
+```shell
 $ docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material --help
 Usage: mkdocs [OPTIONS] COMMAND [ARGS]...
 
@@ -53,7 +55,7 @@ Use `mkdocs build --clean` to remove any stale files.
 
 Consider `--dirtyreload` for a faster reloads.
 
-```
+```shell
 $ docker run --rm -it \
     -p 8000:8000 \
     -v ${PWD}:/docs \
