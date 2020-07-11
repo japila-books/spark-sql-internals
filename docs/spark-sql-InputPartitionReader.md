@@ -4,7 +4,7 @@
 
 `InputPartitionReader` is also a Java https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html[Closeable].
 
-`InputPartitionReader` is associated with two other abstractions: <<spark-sql-InputPartition.adoc#, InputPartition>> and `ContinuousInputPartition` that are responsible for creating <<implementations, concrete InputPartitionReaders>>.
+`InputPartitionReader` is associated with two other abstractions: [InputPartition](InputPartition.md) and `ContinuousInputPartition` that are responsible for creating <<implementations, concrete InputPartitionReaders>>.
 
 NOTE: It _appears_ that all concrete <<implementations, input partition readers>> are used in Spark Structured Streaming only.
 

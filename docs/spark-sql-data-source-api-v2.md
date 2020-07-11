@@ -16,7 +16,7 @@
 
 * <<spark-sql-DataSourceV2StringFormat.adoc#, DataSourceV2StringFormat>>
 
-* <<spark-sql-InputPartition.adoc#, InputPartition>>
+* [InputPartition](InputPartition.md)
 
 NOTE: The work on Data Source API V2 was tracked under https://issues.apache.org/jira/browse/SPARK-15689[SPARK-15689 Data source API v2] that was fixed in Apache Spark 2.3.0.
 
@@ -34,7 +34,7 @@ Data Source API V2 uses <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, Data
 
 <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute, At execution>>, `DataSourceV2ScanExec` physical operator creates a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> (or a `ContinuousReader` for Spark Structured Streaming).
 
-`DataSourceRDD` uses <<spark-sql-InputPartition.adoc#, InputPartitions>> for <<spark-sql-DataSourceRDD.adoc#getPartitions, partitions>>, <<spark-sql-DataSourceRDD.adoc#getPreferredLocations, preferred locations>>, and <<spark-sql-DataSourceRDD.adoc#compute, computing partitions>>.
+`DataSourceRDD` uses [InputPartitions](InputPartition.md) for <<spark-sql-DataSourceRDD.adoc#getPartitions, partitions>>, <<spark-sql-DataSourceRDD.adoc#getPreferredLocations, preferred locations>>, and <<spark-sql-DataSourceRDD.adoc#compute, computing partitions>>.
 
 ==== Data Writing
 

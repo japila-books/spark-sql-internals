@@ -1,0 +1,3 @@
+# PartitionReaderFactory
+
+`PartitionReaderFactory` is...FIXME

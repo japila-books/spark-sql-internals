@@ -9,8 +9,8 @@
 `DataSourceRDD` takes the following to be created:
 
 * <span id="sc"> `SparkContext`
-* <span id="inputPartitions"> [InputPartition](spark-sql-InputPartition.md)s
-* <span id="partitionReaderFactory"> `PartitionReaderFactory`
+* <span id="inputPartitions"> [InputPartition](InputPartition.md)s
+* <span id="partitionReaderFactory"> [PartitionReaderFactory](connector/PartitionReaderFactory.md)
 * <span id="columnarReads"> `columnarReads` flag
 
 `DataSourceRDD` is created when:
@@ -26,7 +26,7 @@ getPreferredLocations(
     split: Partition): Seq[String]
 ```
 
-`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested for the <<spark-sql-InputPartition.adoc#preferredLocations, preferred locations>>.
+`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](InputPartition.md#preferredLocations).
 
 `getPreferredLocations` is part of Spark Core's `RDD` abstraction.
 
@@ -48,7 +48,7 @@ compute(
     context: TaskContext): Iterator[T]
 ```
 
-`compute` requests the input <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> (the `split` partition) for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested to <<spark-sql-InputPartition.adoc#createPartitionReader, create an InputPartitionReader>>.
+`compute` requests the input <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> (the `split` partition) for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested to [create an InputPartitionReader](InputPartition.md#createPartitionReader).
 
 `compute` registers a Spark Core `TaskCompletionListener` that requests the `InputPartitionReader` to close when a task completes.
 
