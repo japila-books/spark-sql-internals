@@ -435,17 +435,17 @@ Calls <<doExecuteBroadcast, doExecuteBroadcast>>
 
 ## <span id="specialized-spark-plans"> Physical Query Operators
 
-### BinaryExecNode
+### <span id="BinaryExecNode"> BinaryExecNode
 
 Binary physical operator with two child `left` and `right` physical operators
 
-### LeafExecNode
+### <span id="LeafExecNode"> LeafExecNode
 
 Leaf physical operator with no children
 
 By default, the link:spark-sql-catalyst-QueryPlan.adoc#producedAttributes[set of all attributes that are produced] is exactly the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[set of attributes that are output].
 
-### UnaryExecNode
+### <span id="UnaryExecNode"> UnaryExecNode
 
 Unary physical operator with one `child` physical operator
 

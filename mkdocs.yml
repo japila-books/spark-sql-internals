@@ -106,7 +106,7 @@ nav:
         - logical-operators/CreateTableCommand.md
         - logical-operators/CreateTempViewUsing.md
         - logical-operators/CreateViewCommand.md
-        - logical-operators/DataSourceV2Relation.md
+        - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
         - logical-operators/DescribeColumnCommand.md
         - logical-operators/DescribeTableCommand.md
         - logical-operators/DeserializeToObject.md
@@ -463,7 +463,8 @@ nav:
         - physical-operators/CartesianProductExec.md
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
-        - physical-operators/DataSourceV2ScanExec.md
+        - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
+        - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
         - physical-operators/DataWritingCommandExec.md
         - physical-operators/DebugExec.md
         - physical-operators/DeserializeToObjectExec.md

@@ -1,5 +1,3 @@
-title: DataSourceV2Relation
-
 # DataSourceV2Relation Leaf Logical Operator
 
 `DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
