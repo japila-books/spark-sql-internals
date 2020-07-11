@@ -601,6 +601,7 @@ nav:
   - New in Spark 3.0.0:
     - since-300.md
     - Connector API:
+      - Scan: connector/Scan.md
       - Table: connector/catalog/Table.md
       - FileTable: connector/catalog/FileTable.md
       - KafkaTable: connector/catalog/KafkaTable.md
