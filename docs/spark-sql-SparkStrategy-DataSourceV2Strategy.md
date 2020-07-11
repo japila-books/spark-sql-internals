@@ -42,12 +42,12 @@ log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy=
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[apply]] Applying DataSourceV2Strategy Strategy to Logical Plan (Executing DataSourceV2Strategy) -- `apply` Method
+## <span id="apply"> Applying DataSourceV2Strategy Strategy to Logical Plan
 
-[source, scala]
-----
-apply(plan: LogicalPlan): Seq[SparkPlan]
-----
+```scala
+apply(
+  plan: LogicalPlan): Seq[SparkPlan]
+```
 
 NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 

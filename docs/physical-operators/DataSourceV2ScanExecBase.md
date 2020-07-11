@@ -38,7 +38,7 @@ Used when...FIXME
 
 ## Implementations
 
-* BatchScanExec
+* [BatchScanExec](BatchScanExec.md)
 * ContinuousScanExec
 * MicroBatchScanExec
 

@@ -444,6 +444,7 @@ nav:
       - SparkPlan: physical-operators/SparkPlan.md
       - CodegenSupport: physical-operators/CodegenSupport.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
+      - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
@@ -457,6 +458,7 @@ nav:
         - physical-operators/CodeGeneratorWithInterpretedFallback.md
       - physical-operators/SQLMetric.md
       - Concrete Operators:
+        - BatchScanExec: physical-operators/BatchScanExec.md
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
         - physical-operators/BroadcastNestedLoopJoinExec.md
@@ -464,7 +466,6 @@ nav:
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
         - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
-        - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
         - physical-operators/DataWritingCommandExec.md
         - physical-operators/DebugExec.md
         - physical-operators/DeserializeToObjectExec.md
