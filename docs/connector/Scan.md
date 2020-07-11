@@ -48,7 +48,7 @@ Used when...FIXME
 
 ## Implementations
 
-* FileScan
+* [FileScan](../FileScan.md)
 * KafkaScan
 * MemoryStreamScanBuilder
 * SupportsReportPartitioning

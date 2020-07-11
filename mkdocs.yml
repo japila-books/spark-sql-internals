@@ -600,8 +600,11 @@ nav:
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New in Spark 3.0.0:
     - since-300.md
+    - FileScan: FileScan.md
     - Connector API:
       - Scan: connector/Scan.md
+      - Batch: connector/Batch.md
+      - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - Table: connector/catalog/Table.md
       - FileTable: connector/catalog/FileTable.md
       - KafkaTable: connector/catalog/KafkaTable.md
