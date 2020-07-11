@@ -27,7 +27,7 @@ batch: Batch
 inputRDD: RDD[InternalRow]
 ```
 
-`inputRDD` creates a [DataSourceRDD](../spark-sql-DataSourceRDD.md).
+`inputRDD` creates a [DataSourceRDD](../DataSourceRDD.md).
 
 `inputRDD` is part of the [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#inputRDD) abstraction.
 

@@ -295,7 +295,7 @@ nav:
           - spark-sql-InternalRowDataWriterFactory.md
         - spark-sql-DataSourceV2StringFormat.md
         - DataSourceRDD:
-          - spark-sql-DataSourceRDD.md
+          - DataSourceRDD: DataSourceRDD.md
           - spark-sql-DataSourceRDDPartition.md
         - spark-sql-DataWritingSparkTask.md
         - spark-sql-DataSourceV2Utils.md
