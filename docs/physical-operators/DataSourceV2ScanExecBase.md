@@ -32,7 +32,15 @@ Used when:
 readerFactory: PartitionReaderFactory
 ```
 
-Used when...FIXME
+[PartitionReaderFactory](../connector/PartitionReaderFactory.md) for partition readers
+
+Used when:
+
+* `BatchScanExec` physical operator is requested for an [input RDD](BatchScanExec.md#inputRDD)
+
+* `ContinuousScanExec` and `MicroBatchScanExec` physical operators (from Spark Structured Streaming) are requested for an `inputRDD`
+
+* `DataSourceV2ScanExecBase` physical operator is requested to [outputPartitioning](#outputPartitioning) or [supportsColumnar](#supportsColumnar)
 
 ### <span id="scan"> scan
 
