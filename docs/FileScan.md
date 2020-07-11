@@ -144,7 +144,7 @@ estimateStatistics(): Statistics
 toBatch: Batch
 ```
 
-`toBatch`...FIXME
+`toBatch` is enabled (`true`) by default.
 
 `toBatch` is part of the [Scan](connector/Scan.md#toBatch) abstraction.
 

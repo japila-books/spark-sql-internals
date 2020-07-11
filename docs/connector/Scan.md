@@ -26,7 +26,15 @@ Used when...FIXME
 Batch toBatch()
 ```
 
-Used when...FIXME
+By default, `toBatch` throws an `UnsupportedOperationException` (with [description](#description)):
+
+```text
+[description]: Batch scan are not supported
+```
+
+Must be implemented (_overriden_), if the [Table](catalog/Table.md) that created this `Scan` has `BATCH_READ` capability (among the [capabilities](catalog/Table.md#capabilities)).
+
+Used when `BatchScanExec` physical operator is requested for [batch](../physical-operators/BatchScanExec.md#batch).
 
 ### <span id="toContinuousStream"> toContinuousStream
 
