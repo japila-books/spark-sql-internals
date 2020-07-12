@@ -11,7 +11,7 @@
 * <span id="isTempView" /> `isTempView` Function (`Seq[String] => Boolean`)
 * <span id="isTempFunction" /> `isTempFunction` Function (`String => Boolean`)
 
-`ResolveSessionCatalog` is created as an extended resolution rule when [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md#analyzer) and [BaseSessionStateBuilder](spark-sql-BaseSessionStateBuilder.md#analyzer) are requested for the analyzer.
+`ResolveSessionCatalog` is created as an extended resolution rule when [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md#analyzer) and [BaseSessionStateBuilder](BaseSessionStateBuilder.md#analyzer) are requested for the analyzer.
 
 ## Resolving Logical Operators
 

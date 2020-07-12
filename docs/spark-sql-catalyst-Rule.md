@@ -34,9 +34,9 @@ The other notable use cases of `Rule` are as follows:
 
 * When `ExperimentalMethods` is requested for <<spark-sql-ExperimentalMethods.adoc#extraOptimizations, extraOptimizations>>
 
-* When `BaseSessionStateBuilder` is requested for <<spark-sql-BaseSessionStateBuilder.adoc#customResolutionRules, customResolutionRules>>, <<spark-sql-BaseSessionStateBuilder.adoc#customPostHocResolutionRules, customPostHocResolutionRules>>, <<spark-sql-BaseSessionStateBuilder.adoc#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<spark-sql-BaseSessionStateBuilder.adoc#optimizer, Optimizer>>
+* When `BaseSessionStateBuilder` is requested for <<BaseSessionStateBuilder.md#customResolutionRules, customResolutionRules>>, <<BaseSessionStateBuilder.md#customPostHocResolutionRules, customPostHocResolutionRules>>, <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<BaseSessionStateBuilder.md#optimizer, Optimizer>>
 
-* When `Analyzer` is requested for <<spark-sql-Analyzer.adoc#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.adoc#postHocResolutionRules, postHocResolutionRules>> (see <<spark-sql-BaseSessionStateBuilder.adoc#analyzer, BaseSessionStateBuilder>> and link:hive/HiveSessionStateBuilder.adoc#analyzer[HiveSessionStateBuilder])
+* When `Analyzer` is requested for <<spark-sql-Analyzer.adoc#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.adoc#postHocResolutionRules, postHocResolutionRules>> (see <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and link:hive/HiveSessionStateBuilder.adoc#analyzer[HiveSessionStateBuilder])
 
 * When `Optimizer` is requested for <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>>
 

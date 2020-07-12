@@ -23,7 +23,7 @@ image::images/spark-sql-SessionState.png[align="center"]
 
 [NOTE]
 ====
-When requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<spark-sql-BaseSessionStateBuilder.adoc#, BaseSessionStateBuilder>> that is then requested to <<spark-sql-BaseSessionStateBuilder.adoc#build, create a SessionState instance>>.
+When requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
 
 There are two `BaseSessionStateBuilders` available:
 
@@ -147,7 +147,7 @@ NOTE: `clone` is used when...
 executePlan(plan: LogicalPlan): QueryExecution
 ----
 
-`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.adoc#, logical plan>> (that simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>> with the current <<spark-sql-BaseSessionStateBuilder.adoc#session, SparkSession>> and the input logical plan).
+`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.adoc#, logical plan>> (that simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>> with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
 
 === [[refreshTable]] `refreshTable` Method
 

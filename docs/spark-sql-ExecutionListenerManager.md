@@ -62,7 +62,7 @@ clear(): Unit
 ----
 |===
 
-`ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for link:spark-sql-BaseSessionStateBuilder.adoc#listenerManager[ExecutionListenerManager] (while `SessionState` is link:spark-sql-BaseSessionStateBuilder.adoc#build[built]).
+`ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for link:BaseSessionStateBuilder.md#listenerManager[ExecutionListenerManager] (while `SessionState` is link:BaseSessionStateBuilder.md#build[built]).
 
 [[listeners]]
 `ExecutionListenerManager` uses `listeners` internal registry for registered <<spark-sql-QueryExecutionListener.adoc#, QueryExecutionListeners>>.

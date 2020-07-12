@@ -12,7 +12,7 @@ title: StaticSQLConf
 
 | [[spark.sql.catalogImplementation]][[CATALOG_IMPLEMENTATION]] *spark.sql.catalogImplementation*
 
-(internal) Configures `in-memory` (default) or ``hive``-related link:spark-sql-BaseSessionStateBuilder.adoc[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
+(internal) Configures `in-memory` (default) or ``hive``-related link:BaseSessionStateBuilder.md[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
 
 link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:spark-sql-SparkSession.adoc[SparkSession].
 

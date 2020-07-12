@@ -18,7 +18,7 @@ SessionCatalog takes the following to be created:
 
 ![SessionCatalog and Spark SQL Services](images/spark-sql-SessionCatalog.png)
 
-`SessionCatalog` is created (and cached for later usage) when `BaseSessionStateBuilder` is requested for [one](spark-sql-BaseSessionStateBuilder.md#catalog).
+`SessionCatalog` is created (and cached for later usage) when `BaseSessionStateBuilder` is requested for [one](BaseSessionStateBuilder.md#catalog).
 
 ## Accessing SessionCatalog
 

@@ -2,7 +2,7 @@
 
 `SparkSqlParser` is a [SQL parser](AbstractSqlParser.md) to extract Catalyst expressions, plans, table identifiers from SQL texts using [SparkSqlAstBuilder](SparkSqlAstBuilder.md) (as [AstBuilder](AbstractSqlParser.md#astBuilder)).
 
-`SparkSqlParser` is the [initial SQL parser](../spark-sql-BaseSessionStateBuilder.md#sqlParser) in a `SparkSession`.
+`SparkSqlParser` is the [initial SQL parser](../BaseSessionStateBuilder.md#sqlParser) in a `SparkSession`.
 
 `SparkSqlParser` supports [variable substitution](#variable-substitution).
 
@@ -20,7 +20,7 @@
 
 `SparkSqlParser` is created when:
 
-* `BaseSessionStateBuilder` is requested for a [SQL parser](../spark-sql-BaseSessionStateBuilder.md#sqlParser)
+* `BaseSessionStateBuilder` is requested for a [SQL parser](../BaseSessionStateBuilder.md#sqlParser)
 
 * [expr](../spark-sql-functions.md#expr) standard function is used
 
@@ -30,7 +30,7 @@
 
 ## Accessing SparkSqlParser
 
-`SparkSqlParser` is available as [SessionState.sqlParser](spark-sql-SessionState.adoc#sqlParser) (unless...FIXME(note)).
+`SparkSqlParser` is available as [SessionState.sqlParser](../spark-sql-SessionState.md#sqlParser) (unless...FIXME(note)).
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -52,7 +52,7 @@ assert(spark.sessionState.sqlParser.isInstanceOf[SparkSqlParser])
 
 `SparkSqlParser` is used to translate an expression to the corresponding [Column](../spark-sql-Column.md) in the following:
 
-* [expr](../spark-sql-functions.adoc#expr) standard function
+* [expr](../spark-sql-functions.md#expr) standard function
 * Dataset operators: [selectExpr](../spark-sql-Dataset.md#selectExpr), [filter](../spark-sql-Dataset.md#filter), [where](../spark-sql-Dataset.md#where)
 
 ```text

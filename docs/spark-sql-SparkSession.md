@@ -252,7 +252,7 @@ sessionState: SessionState
 
 Access to the current <<spark-sql-SessionState.adoc#, SessionState>>
 
-Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<spark-sql-BaseSessionStateBuilder.adoc#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
+Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
 
 * *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
 * *hive* for link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
@@ -764,22 +764,23 @@ NOTE: link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] is an log
 * `TextInputJsonDataSource` creates a base `Dataset` (of Strings)
 ====
 
-=== [[instantiateSessionState]] Creating SessionState Instance -- `instantiateSessionState` Internal Method
+## <span id="instantiateSessionState"> Creating SessionState
 
-[source, scala]
-----
-instantiateSessionState(className: String, sparkSession: SparkSession): SessionState
-----
+```scala
+instantiateSessionState(
+  className: String,
+  sparkSession: SparkSession): SessionState
+```
 
-`instantiateSessionState` finds the `className` that is then used to link:spark-sql-BaseSessionStateBuilder.adoc#creating-instance[create] and link:spark-sql-BaseSessionStateBuilder.adoc#build[build] a `BaseSessionStateBuilder`.
+`instantiateSessionState` finds the `className` that is then used to [create](BaseSessionStateBuilder.md#creating-instance) and [build](BaseSessionStateBuilder.md#build) a `BaseSessionStateBuilder`.
 
 `instantiateSessionState` may report an `IllegalArgumentException` while instantiating the class of a `SessionState`:
 
-```
+```text
 Error while instantiating '[className]'
 ```
 
-NOTE: `instantiateSessionState` is used exclusively when `SparkSession` is requested for <<sessionState, SessionState>> per link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property (and one is not available yet).
+`instantiateSessionState` is used when `SparkSession` is requested for [SessionState](#sessionState) (based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
 
 === [[sessionStateClassName]] `sessionStateClassName` Internal Method
 

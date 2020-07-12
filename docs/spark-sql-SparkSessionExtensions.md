@@ -88,7 +88,7 @@ buildOptimizerRules(session: SparkSession): Seq[Rule[LogicalPlan]]
 
 `buildOptimizerRules` gives the <<optimizerRules, optimizerRules>> logical rules that are associated with the input <<spark-sql-SparkSession.adoc#, SparkSession>>.
 
-NOTE: `buildOptimizerRules` is used exclusively when `BaseSessionStateBuilder` is requested for the <<spark-sql-BaseSessionStateBuilder.adoc#customOperatorOptimizationRules, custom operator optimization rules to add to the base Operator Optimization batch>>.
+NOTE: `buildOptimizerRules` is used exclusively when `BaseSessionStateBuilder` is requested for the <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, custom operator optimization rules to add to the base Operator Optimization batch>>.
 
 === [[injectCheckRule]] Registering Custom Check Analysis Rule (Builder) -- `injectCheckRule` Method
 

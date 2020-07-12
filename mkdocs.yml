@@ -173,7 +173,7 @@ nav:
         - spark-sql-BucketSpec.md
       - SessionState:
         - SessionState: spark-sql-SessionState.md
-        - BaseSessionStateBuilder: spark-sql-BaseSessionStateBuilder.md
+        - BaseSessionStateBuilder: BaseSessionStateBuilder.md
         - spark-sql-SessionStateBuilder.md
       - spark-sql-SharedState.md
       - CacheManager:
