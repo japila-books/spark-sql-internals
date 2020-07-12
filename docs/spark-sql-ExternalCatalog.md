@@ -443,7 +443,7 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 It is intended for testing or exploration purposes only and therefore should not be used in production.
 |===
 
-The <<implementations, concrete>> `ExternalCatalog` is chosen using link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
+The <<implementations, concrete>> `ExternalCatalog` is chosen using link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
 
 [source, scala]
 ----

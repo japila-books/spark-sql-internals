@@ -4,7 +4,7 @@ Spark SQL supports Apache Hive using *Hive data source*. Spark SQL allows execut
 
 TIP: Consult link:../demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)] to learn in a more practical approach.
 
-In order to use Hive-related features in a Spark SQL application a link:../SparkSession.md[SparkSession] has to be created with link:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport].
+In order to use Hive-related features in a Spark SQL application a link:../SparkSession.md[SparkSession] has to be created with link:../SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport].
 
 Hive Data Source uses custom link:configuration-properties.adoc[Spark SQL configuration properties] (in addition to <<hive-configuration-properties, Hive's>>).
 

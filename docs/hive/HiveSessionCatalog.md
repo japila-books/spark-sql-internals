@@ -5,12 +5,12 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveSessionCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that is used when `SparkSession` was created with link:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
+`HiveSessionCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that is used when `SparkSession` was created with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
 .HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveSessionCatalog.png[align="center"]
 
-`HiveSessionCatalog` is available as link:../spark-sql-SessionState.adoc#catalog[catalog] property of `SessionState` when `SparkSession` was created with link:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled] (that in the end sets link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
+`HiveSessionCatalog` is available as link:../spark-sql-SessionState.adoc#catalog[catalog] property of `SessionState` when `SparkSession` was created with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled] (that in the end sets link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
 
 [source, scala]
 ----

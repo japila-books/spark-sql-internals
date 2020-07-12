@@ -670,7 +670,7 @@ nav:
       - spark-sql-fundamentals-spark-application-development.md
       - SparkSession:
         - SparkSession: SparkSession.md
-        - spark-sql-SparkSession-Builder.md
+        - SparkSession.Builder: SparkSession-Builder.md
         - spark-sql-SparkSession-implicits.md
         - spark-sql-SparkSessionExtensions.md
       - Dataset:

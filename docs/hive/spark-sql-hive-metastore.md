@@ -13,7 +13,7 @@ The default embedded deployment mode is not recommended for production use due t
 Read Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document that explains the available deployment modes of a Hive metastore.
 ====
 
-When `SparkSession` is link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]. `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
+When `SparkSession` is link:SparkSession-Builder.md#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]. `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
 
 [NOTE]
 ====
@@ -116,7 +116,7 @@ See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManu
 
 In order to use an external Hive metastore you should do the following:
 
-. Enable Hive support in link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
+. Enable Hive support in link:SparkSession-Builder.md#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
 
 . link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
 

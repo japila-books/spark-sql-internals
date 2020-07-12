@@ -2,7 +2,7 @@
 
 `SparkSession` is the entry point to Spark SQL. It is one of the very first objects created in a Spark SQL application.
 
-`SparkSession` is [created](#creating-instance) using the [SparkSession.builder](#builder) method (that gives access to [Builder API](spark-sql-SparkSession-Builder.md) to configure the `SparkSession`).
+`SparkSession` is [created](#creating-instance) using the [SparkSession.builder](#builder) method (that gives access to [Builder API](SparkSession-Builder.md) to configure the `SparkSession`).
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -57,7 +57,7 @@ Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the opt
 
 `SparkSession` is created when:
 
-* `SparkSession.Builder` is requested to [getOrCreate](spark-sql-SparkSession-Builder.md#getOrCreate)
+* `SparkSession.Builder` is requested to [getOrCreate](SparkSession-Builder.md#getOrCreate)
 * Indirectly using [newSession](#newSession) or [cloneSession](#cloneSession)
 
 ## <span id="newSession"> Creating New SparkSession
@@ -95,7 +95,7 @@ cloneSession(): SparkSession
 builder(): Builder
 ```
 
-`builder` is an object method that creates a new [Builder](spark-sql-SparkSession-Builder.md) to build a `SparkSession` using a _fluent API_.
+`builder` is an object method that creates a new [Builder](SparkSession-Builder.md) to build a `SparkSession` using a _fluent API_.
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -446,3 +446,24 @@ time[T](f: => T): T
 ```
 
 `time` executes a code block and prints out (to standard output) the time taken to execute it
+
+## <span id="applyExtensions"> applyExtensions Internal Method
+
+```scala
+applyExtensions(
+  extensionConfClassNames: Seq[String],
+  extensions: SparkSessionExtensions): SparkSessionExtensions
+```
+
+For every extension class name (in `extensionConfClassNames`) `applyExtensions` instantiates it and (since it's a function `SparkSessionExtensions => Unit`) passes the given [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md) in.
+
+!!! note
+    The given [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md) is mutated in-place.
+
+In case of `ClassCastException`, `ClassNotFoundException` or `NoClassDefFoundError`, `applyExtensions` prints out the following WARN message to the logs:
+
+```text
+Cannot use [extensionConfClassName] to configure session extensions.
+```
+
+`applyExtensions` is used when `SparkSession.Builder` is requested to [get active or create a new SparkSession instance](SparkSession-Builder.md#getOrCreate).

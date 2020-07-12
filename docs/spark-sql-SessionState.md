@@ -31,7 +31,7 @@ There are two `BaseSessionStateBuilders` available:
 
 * link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] for `hive` catalog
 
-`hive` catalog is set when the `SparkSession` was <<spark-sql-SparkSession-Builder.adoc#getOrCreate, created>> with the Hive support enabled (using <<spark-sql-SparkSession-Builder.adoc#enableHiveSupport, Builder.enableHiveSupport>>).
+`hive` catalog is set when the `SparkSession` was <<SparkSession-Builder.md#getOrCreate, created>> with the Hive support enabled (using <<SparkSession-Builder.md#enableHiveSupport, Builder.enableHiveSupport>>).
 ====
 
 [[attributes]]

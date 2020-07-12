@@ -13,7 +13,7 @@ From https://en.wikipedia.org/wiki/Apache_Hive[Wikipedia, the free encyclopedia]
 > All three execution engines can run in Hadoop YARN.
 ====
 
-xref:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable Hive support (that simply sets xref:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` only when the Hive classes are available).
+xref:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable Hive support (that simply sets xref:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` only when the Hive classes are available).
 
 ```
 import org.apache.spark.sql.SparkSession

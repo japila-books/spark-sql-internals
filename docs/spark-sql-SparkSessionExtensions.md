@@ -2,7 +2,7 @@
 
 `SparkSessionExtensions` is an <<methods, interface>> that a Spark developer can use to extend a <<SparkSession.md#extensions, SparkSession>> with custom query execution rules and a relational entity parser.
 
-As a Spark developer, you use <<spark-sql-SparkSession-Builder.adoc#withExtensions, Builder.withExtensions>> method (while building a new <<SparkSession.md#, SparkSession>>) to access the session-bound `SparkSessionExtensions`.
+As a Spark developer, you use <<SparkSession-Builder.md#withExtensions, Builder.withExtensions>> method (while building a new <<SparkSession.md#, SparkSession>>) to access the session-bound `SparkSessionExtensions`.
 
 [[methods]]
 .SparkSessionExtensions API

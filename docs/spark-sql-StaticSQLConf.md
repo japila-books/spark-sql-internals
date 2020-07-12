@@ -14,7 +14,7 @@ title: StaticSQLConf
 
 (internal) Configures `in-memory` (default) or ``hive``-related link:BaseSessionStateBuilder.md[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
 
-link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:SparkSession.md[SparkSession].
+link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:SparkSession.md[SparkSession].
 
 Used when:
 
@@ -22,7 +22,7 @@ Used when:
 
 * `SharedState` utility is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog])
 
-* `SparkSession.Builder` is requested to link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[enable Hive support]
+* `SparkSession.Builder` is requested to link:SparkSession-Builder.md#enableHiveSupport[enable Hive support]
 
 * `spark-shell` is executed
 
@@ -38,7 +38,7 @@ Not all functions are supported when enabled.
 
 | [[spark.sql.extensions]][[SPARK_SESSION_EXTENSIONS]] *spark.sql.extensions*
 
-Name of the *SQL extension configuration class* that is used to configure `SparkSession` extensions (when `Builder` is requested to <<spark-sql-SparkSession-Builder.adoc#getOrCreate, get or create a SparkSession>>). The class should implement `Function1[SparkSessionExtensions, Unit]`, and must have a no-args constructor.
+Name of the *SQL extension configuration class* that is used to configure `SparkSession` extensions (when `Builder` is requested to <<SparkSession-Builder.md#getOrCreate, get or create a SparkSession>>). The class should implement `Function1[SparkSessionExtensions, Unit]`, and must have a no-args constructor.
 
 Default: (empty)
 

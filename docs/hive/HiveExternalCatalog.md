@@ -7,7 +7,7 @@
 
 `HiveExternalCatalog` is an link:../spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
 
-`HiveExternalCatalog` is used for `SparkSession` with link:../spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Hive support enabled].
+`HiveExternalCatalog` is used for `SparkSession` with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
 .HiveExternalCatalog and SharedState
 image::../images/spark-sql-HiveExternalCatalog.png[align="center"]
