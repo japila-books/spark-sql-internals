@@ -1,10 +1,10 @@
 # SparkSession.Builder
 
-`SparkSession.Builder` is a [builder interface](#methods) to create [SparkSession](SparkSession.md)s.
+`SparkSession.Builder` is a builder interface to create [SparkSession](SparkSession.md)s.
 
 ## Accessing Builder
 
-`Builder` is available using the [SparkSession.builder](.md#builder) factory method.
+`Builder` is available using the [SparkSession.builder](SparkSession.md#builder) factory method.
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -59,7 +59,7 @@ While creating a new one, `getOrCreate` finds the SparkSession extensions (based
 extensions: SparkSessionExtensions
 ```
 
-`Builder` creates a new [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md) when [created](#creating-instance).
+`Builder` creates a new [SparkSessionExtensions](SparkSessionExtensions.md) when [created](#creating-instance).
 
 The `SparkSessionExtensions` is used to [apply SparkSession extensions](SparkSession.md#applyExtensions) registered using [spark.sql.extensions](spark-sql-StaticSQLConf.md#SPARK_SESSION_EXTENSIONS) configuration property or [Builder.withExtensions](#withExtensions) method.
 
@@ -72,7 +72,7 @@ withExtensions(
   f: SparkSessionExtensions => Unit): Builder
 ```
 
-Allows registering SparkSession extensions using [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md)
+Allows registering SparkSession extensions using [SparkSessionExtensions](SparkSessionExtensions.md)
 
 `withExtensions` simply executes the input `f` function with a `SparkSessionExtensions`.
 

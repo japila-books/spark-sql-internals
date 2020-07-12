@@ -106,7 +106,7 @@ sqlParser: ParserInterface
 v2SessionCatalog: V2SessionCatalog
 ```
 
-## <span id="customOperatorOptimizationRules"> customOperatorOptimizationRules
+## <span id="customOperatorOptimizationRules"> Custom Operator Optimization Rules
 
 ```scala
 customOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
@@ -114,7 +114,9 @@ customOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
 
 Custom operator optimization rules to add to the [base Operator Optimization batch](spark-sql-Optimizer.md#extendedOperatorOptimizationRules).
 
-When requested for the custom rules, `customOperatorOptimizationRules` simply requests the [SparkSessionExtensions](#extensions) to [buildOptimizerRules](spark-sql-SparkSessionExtensions.md#buildOptimizerRules).
+When requested for the custom rules, `customOperatorOptimizationRules` simply requests the [SparkSessionExtensions](#extensions) to [buildOptimizerRules](SparkSessionExtensions.md#buildOptimizerRules).
+
+`customOperatorOptimizationRules` is used when `BaseSessionStateBuilder` is requested for an [Optimizer](#optimizer).
 
 ## <span id="extensions"> SparkSessionExtensions
 
@@ -122,7 +124,7 @@ When requested for the custom rules, `customOperatorOptimizationRules` simply re
 extensions: SparkSessionExtensions
 ```
 
-[SparkSessionExtensions](spark-sql-SparkSessionExtensions.md)
+[SparkSessionExtensions](SparkSessionExtensions.md)
 
 ## <span id="listenerManager"> ExecutionListenerManager
 
@@ -138,11 +140,14 @@ listenerManager: ExecutionListenerManager
 optimizer: Optimizer
 ```
 
-[SparkOptimizer](spark-sql-SparkOptimizer.md) (that is downcast to the base [Optimizer](spark-sql-Optimizer.md)) that is [created](spark-sql-SparkOptimizer.md#creating-instance) with the [SessionCatalog](#catalog) and the [ExperimentalMethods](#experimentalMethods).
+`optimizer` creates a [SparkOptimizer](spark-sql-SparkOptimizer.md) for the [CatalogManager](#catalogManager), [SessionCatalog](#catalog) and [ExperimentalMethods](#experimentalMethods).
 
-Note that the `SparkOptimizer` adds the <<customOperatorOptimizationRules, customOperatorOptimizationRules>> to the <<spark-sql-Optimizer.md#extendedOperatorOptimizationRules, operator optimization rules>>.
+The `SparkOptimizer` uses the following extension methods:
 
-`optimizer` is used when `BaseSessionStateBuilder` is requested to <<build, create a SessionState>> (for the <<spark-sql-SessionState.md#optimizerBuilder, optimizerBuilder>> function to create an <<spark-sql-Optimizer.md#, Optimizer>> when requested for the <<spark-sql-SessionState.md#optimizer, Optimizer>>).
+* [customEarlyScanPushDownRules](#customEarlyScanPushDownRules) for [earlyScanPushDownRules](spark-sql-SparkOptimizer.md#earlyScanPushDownRules)
+* [customOperatorOptimizationRules](#customOperatorOptimizationRules) for [extendedOperatorOptimizationRules](spark-sql-SparkOptimizer.md#extendedOperatorOptimizationRules)
+
+`optimizer` is used when `BaseSessionStateBuilder` is requested to [build a SessionState](#build) (as the [optimizerBuilder](spark-sql-SessionState.md#optimizerBuilder) function to [build a logical query plan optimizer](spark-sql-SessionState.md#optimizer) on demand).
 
 ## <span id="planner"> SparkPlanner
 

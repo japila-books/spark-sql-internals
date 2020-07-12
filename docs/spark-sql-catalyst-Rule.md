@@ -30,7 +30,7 @@ ruleName: String
 
 The other notable use cases of `Rule` are as follows:
 
-* <<spark-sql-SparkSessionExtensions.adoc#, SparkSessionExtensions>>
+* [SparkSessionExtensions](SparkSessionExtensions.md)
 
 * When `ExperimentalMethods` is requested for <<spark-sql-ExperimentalMethods.adoc#extraOptimizations, extraOptimizations>>
 

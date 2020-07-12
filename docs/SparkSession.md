@@ -53,7 +53,7 @@ Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the opt
 * <span id="sparkContext"> `SparkContext`
 * <span id="existingSharedState"> Optional existing [SharedState](spark-sql-SharedState.md)
 * <span id="parentSessionState"> Optional parent [SessionState](spark-sql-SessionState.md)
-* <span id="extensions"> [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md)
+* <span id="extensions"> [SparkSessionExtensions](SparkSessionExtensions.md)
 
 `SparkSession` is created when:
 
@@ -455,10 +455,10 @@ applyExtensions(
   extensions: SparkSessionExtensions): SparkSessionExtensions
 ```
 
-For every extension class name (in `extensionConfClassNames`) `applyExtensions` instantiates it and (since it's a function `SparkSessionExtensions => Unit`) passes the given [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md) in.
+For every extension class name (in `extensionConfClassNames`) `applyExtensions` instantiates it and (since it's a function `SparkSessionExtensions => Unit`) passes the given [SparkSessionExtensions](SparkSessionExtensions.md) in.
 
 !!! note
-    The given [SparkSessionExtensions](spark-sql-SparkSessionExtensions.md) is mutated in-place.
+    The given [SparkSessionExtensions](SparkSessionExtensions.md) is mutated in-place.
 
 In case of `ClassCastException`, `ClassNotFoundException` or `NoClassDefFoundError`, `applyExtensions` prints out the following WARN message to the logs:
 

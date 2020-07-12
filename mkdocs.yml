@@ -671,8 +671,8 @@ nav:
       - SparkSession:
         - SparkSession: SparkSession.md
         - SparkSession.Builder: SparkSession-Builder.md
+        - SparkSessionExtensions: SparkSessionExtensions.md
         - spark-sql-SparkSession-implicits.md
-        - spark-sql-SparkSessionExtensions.md
       - Dataset:
         - spark-sql-Dataset.md
         - Encoder:
