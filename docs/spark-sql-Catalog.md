@@ -4,7 +4,7 @@ title: Catalog
 
 `Catalog` is the <<contract, interface>> for managing a *metastore* (aka _metadata catalog_) of relational entities (e.g. database(s), tables, functions, table columns and temporary views).
 
-`Catalog` is available using link:spark-sql-SparkSession.adoc#catalog[SparkSession.catalog] property.
+`Catalog` is available using link:SparkSession.md#catalog[SparkSession.catalog] property.
 
 [source, scala]
 ----

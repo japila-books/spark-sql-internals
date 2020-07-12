@@ -16,7 +16,7 @@ Table or view not found: [tableIdentifier]
 
 `UnresolvedRelation` is <<creating-instance, created>> when:
 
-* `SparkSession` is requested to link:spark-sql-SparkSession.adoc#table[create a DataFrame from a table]
+* `SparkSession` is requested to link:SparkSession.md#table[create a DataFrame from a table]
 
 * `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#insertInto[insert a DataFrame into a table]
 

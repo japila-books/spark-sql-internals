@@ -10,7 +10,7 @@ title: ExecutionListenerManager
 
 * Execution time of this query (in nanoseconds)
 
-`ExecutionListenerManager` is available as link:spark-sql-SparkSession.adoc#listenerManager[listenerManager] property of `SparkSession` (and link:spark-sql-SessionState.adoc#listenerManager[listenerManager] property of `SessionState`).
+`ExecutionListenerManager` is available as link:SparkSession.md#listenerManager[listenerManager] property of `SparkSession` (and link:spark-sql-SessionState.adoc#listenerManager[listenerManager] property of `SessionState`).
 
 [source, scala]
 ----

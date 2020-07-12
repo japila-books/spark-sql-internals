@@ -8,7 +8,7 @@
 
 [[sparkSession]]
 [[creating-instance]]
-`PreprocessTableCreation` takes a <<spark-sql-SparkSession.adoc#, SparkSession>> when created.
+`PreprocessTableCreation` takes a <<SparkSession.md#, SparkSession>> when created.
 
 === [[apply]] Executing Rule -- `apply` Method
 

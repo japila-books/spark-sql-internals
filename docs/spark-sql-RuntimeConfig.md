@@ -65,7 +65,7 @@ unset(key: String): Unit
 ----
 |===
 
-`RuntimeConfig` is available using the <<spark-sql-SparkSession.adoc#conf, conf>> attribute of a `SparkSession`.
+`RuntimeConfig` is available using the <<SparkSession.md#conf, conf>> attribute of a `SparkSession`.
 
 [source, scala]
 ----
@@ -79,7 +79,7 @@ org.apache.spark.sql.RuntimeConfig
 .RuntimeConfig, SparkSession and SQLConf
 image::images/spark-sql-RuntimeConfig.png[align="center"]
 
-`RuntimeConfig` is <<creating-instance, created>> exclusively when `SparkSession` is requested for <<spark-sql-SparkSession.adoc#conf, one>>.
+`RuntimeConfig` is <<creating-instance, created>> exclusively when `SparkSession` is requested for <<SparkSession.md#conf, one>>.
 
 [[sqlConf]]
 [[creating-instance]]

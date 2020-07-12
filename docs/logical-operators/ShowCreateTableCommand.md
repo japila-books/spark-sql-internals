@@ -58,7 +58,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the `SparkSession` for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is used to access the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
+`run` requests the `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is used to access the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
 
 `run` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>>.
 

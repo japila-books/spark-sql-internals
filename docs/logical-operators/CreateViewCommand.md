@@ -162,7 +162,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the input `SparkSession` for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the <<child, child logical plan>> (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the <<child, child logical plan>> (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
 
 [NOTE]
 ====
@@ -178,7 +178,7 @@ val analyzedPlan = qe.analyzed
 
 `run` <<verifyTemporaryObjectsNotExists, verifyTemporaryObjectsNotExists>>.
 
-`run` requests the input `SparkSession` for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested for the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
+`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested for the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
 
 `run` then branches off per the <<viewType, ViewType>>:
 

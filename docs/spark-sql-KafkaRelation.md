@@ -117,7 +117,7 @@ GetBatch generating RDD of offset range: [comma-separated offsetRanges]
 
 TIP: Use `RDD.toDebugString` to see the two RDDs, i.e. `KafkaSourceRDD` and `MapPartitionsRDD`, in the RDD lineage.
 
-In the end, `buildScan` requests the <<sqlContext, SQLContext>> to <<spark-sql-SparkSession.adoc#internalCreateDataFrame, create a DataFrame>> from the `KafkaSourceRDD` and the <<schema, schema>>.
+In the end, `buildScan` requests the <<sqlContext, SQLContext>> to <<SparkSession.md#internalCreateDataFrame, create a DataFrame>> from the `KafkaSourceRDD` and the <<schema, schema>>.
 
 `buildScan` throws an `IllegalStateException` when the topic partitions for starting offsets are different from the ending offsets topics:
 

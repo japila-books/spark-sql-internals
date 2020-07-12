@@ -2,7 +2,7 @@ title: SharedState
 
 # SharedState -- State Shared Across SparkSessions
 
-`SharedState` holds the <<attributes, shared state>> across multiple link:spark-sql-SparkSession.adoc#newSession[SparkSessions].
+`SharedState` holds the <<attributes, shared state>> across multiple link:SparkSession.md#newSession[SparkSessions].
 
 [[attributes]]
 .SharedState's Properties
@@ -43,7 +43,7 @@ NOTE: `externalCatalog` is initialized lazily on the first access.
 | [[warehousePath]] Warehouse path
 |===
 
-`SharedState` is available as the <<spark-sql-SparkSession.adoc#sharedState, sharedState>> property of a `SparkSession`.
+`SharedState` is available as the <<SparkSession.md#sharedState, sharedState>> property of a `SparkSession`.
 
 [source, scala]
 ----
@@ -63,7 +63,7 @@ res1: Boolean = true
 ----
 
 [[creating-instance]]
-`SharedState` is created exclusively when accessed using link:spark-sql-SparkSession.adoc#sharedState[sharedState] property of `SparkSession`.
+`SharedState` is created exclusively when accessed using link:SparkSession.md#sharedState[sharedState] property of `SparkSession`.
 
 [TIP]
 ====

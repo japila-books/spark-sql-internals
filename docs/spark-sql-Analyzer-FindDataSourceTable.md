@@ -5,7 +5,7 @@
 `FindDataSourceTable` is part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 
 [[sparkSession]][[creating-instance]]
-`FindDataSourceTable` takes a single link:spark-sql-SparkSession.adoc[SparkSession] to be created.
+`FindDataSourceTable` takes a single link:SparkSession.md[SparkSession] to be created.
 
 [source, scala]
 ----

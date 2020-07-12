@@ -37,7 +37,7 @@ org.apache.spark.sql.execution.QueryExecution
 [[logical-plan-to-be-analyzed-idiom]]
 [NOTE]
 ====
-A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
 
 [source, scala]
 ----

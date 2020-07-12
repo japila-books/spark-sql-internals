@@ -27,7 +27,7 @@ Refer to link:spark-logging.adoc[Logging].
 
 `PrunedInMemoryFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[tableBasePath]] Location of the Hive metastore table (as a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Path])
 * [[fileStatusCache]] `FileStatusCache`
 * [[partitionSpec]] `PartitionSpec` (from a Hive metastore)

@@ -23,7 +23,7 @@ Scan hive [table]
 * [[requestedAttributes]] Requested link:../spark-sql-Expression-Attribute.adoc[attributes]
 * [[relation]] link:HiveTableRelation.adoc[HiveTableRelation]
 * [[partitionPruningPred]] <<partition-pruning-predicates, Partition pruning predicates>>
-* [[sparkSession]] link:../spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:../SparkSession.md[SparkSession]
 
 `HiveTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
 

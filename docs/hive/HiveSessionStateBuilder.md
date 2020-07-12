@@ -150,7 +150,7 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 
 `HiveSessionStateBuilder` takes the following when created:
 
-* [[session]] link:../spark-sql-SparkSession.adoc[SparkSession]
+* [[session]] link:../SparkSession.md[SparkSession]
 * [[parentState]] Optional link:../spark-sql-SessionState.adoc[SessionState] (default: `None`)
 
 === [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- `newBuilder` Method

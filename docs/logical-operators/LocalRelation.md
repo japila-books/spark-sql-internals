@@ -10,7 +10,7 @@ title: LocalRelation
 
 * <<spark-sql-Optimizer.adoc#PruneFilters, PruneFilters>>, <<spark-sql-Optimizer.adoc#ConvertToLocalRelation, ConvertToLocalRelation>>, and <<spark-sql-Optimizer.adoc#PropagateEmptyRelation, PropagateEmptyRelation>>, <<spark-sql-Optimizer.adoc#OptimizeMetadataOnlyQuery, OptimizeMetadataOnlyQuery>> logical optimization rules are executed (applied to an analyzed logical plan)
 
-* <<spark-sql-SparkSession.adoc#createDataset, SparkSession.createDataset>>, <<spark-sql-SparkSession.adoc#emptyDataset, SparkSession.emptyDataset>>, <<spark-sql-SparkSession.adoc#createDataFrame, SparkSession.createDataFrame>> operators are used
+* <<SparkSession.md#createDataset, SparkSession.createDataset>>, <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>>, <<SparkSession.md#createDataFrame, SparkSession.createDataFrame>> operators are used
 
 * `CatalogImpl` is requested for a <<spark-sql-CatalogImpl.adoc#makeDataset, Dataset from DefinedByConstructorParams data>>
 

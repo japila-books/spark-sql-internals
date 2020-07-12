@@ -12,7 +12,7 @@ title: implicits Object
 | Description
 
 | `localSeqToDatasetHolder`
-a| [[localSeqToDatasetHolder]] Creates a <<DatasetHolder, DatasetHolder>> with the input `Seq[T]` converted to a `Dataset[T]` (using <<spark-sql-SparkSession.adoc#createDataset, SparkSession.createDataset>>).
+a| [[localSeqToDatasetHolder]] Creates a <<DatasetHolder, DatasetHolder>> with the input `Seq[T]` converted to a `Dataset[T]` (using <<SparkSession.md#createDataset, SparkSession.createDataset>>).
 
 [source, scala]
 ----
@@ -47,7 +47,7 @@ implicit def symbolToColumn(s: Symbol): ColumnName
 ----
 |===
 
-`implicits` object is defined inside <<spark-sql-SparkSession.adoc#implicits, SparkSession>> and hence requires that you build a <<spark-sql-SparkSession.adoc#builder, SparkSession>> instance first before importing `implicits` conversions.
+`implicits` object is defined inside <<SparkSession.md#implicits, SparkSession>> and hence requires that you build a <<SparkSession.md#builder, SparkSession>> instance first before importing `implicits` conversions.
 
 [source, scala]
 ----

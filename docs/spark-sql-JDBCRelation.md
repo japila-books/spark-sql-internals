@@ -36,7 +36,7 @@ scala> df.explain
 ```
 
 [[sqlContext]]
-`JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:spark-sql-SparkSession.adoc#sqlContext[SQLContext].
+`JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:SparkSession.md#sqlContext[SQLContext].
 
 [[needConversion]]
 `JDBCRelation` turns the <<spark-sql-BaseRelation.adoc#needConversion, needConversion>> flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#PrunedFilteredScan, RDD conversion>>).
@@ -47,7 +47,7 @@ scala> df.explain
 
 * [[parts]] Array of Spark Core's `Partitions`
 * [[jdbcOptions]] link:spark-sql-JDBCOptions.adoc[JDBCOptions]
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 
 === [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 

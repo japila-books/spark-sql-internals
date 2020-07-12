@@ -1,8 +1,8 @@
 # SparkSessionExtensions
 
-`SparkSessionExtensions` is an <<methods, interface>> that a Spark developer can use to extend a <<spark-sql-SparkSession.adoc#extensions, SparkSession>> with custom query execution rules and a relational entity parser.
+`SparkSessionExtensions` is an <<methods, interface>> that a Spark developer can use to extend a <<SparkSession.md#extensions, SparkSession>> with custom query execution rules and a relational entity parser.
 
-As a Spark developer, you use <<spark-sql-SparkSession-Builder.adoc#withExtensions, Builder.withExtensions>> method (while building a new <<spark-sql-SparkSession.adoc#, SparkSession>>) to access the session-bound `SparkSessionExtensions`.
+As a Spark developer, you use <<spark-sql-SparkSession-Builder.adoc#withExtensions, Builder.withExtensions>> method (while building a new <<SparkSession.md#, SparkSession>>) to access the session-bound `SparkSessionExtensions`.
 
 [[methods]]
 .SparkSessionExtensions API
@@ -60,7 +60,7 @@ injectResolutionRule(builder: SparkSession => Rule[LogicalPlan]): Unit
 ----
 |===
 
-`SparkSessionExtensions` is an integral part of <<spark-sql-SparkSession.adoc#extensions, SparkSession>> (and is indirectly required to create one).
+`SparkSessionExtensions` is an integral part of <<SparkSession.md#extensions, SparkSession>> (and is indirectly required to create one).
 
 [[internal-registries]]
 .SparkSessionExtensions's Internal Properties (e.g. Registries, Counters and Flags)
@@ -86,7 +86,7 @@ Used when `SparkSessionExtensions` is requested to:
 buildOptimizerRules(session: SparkSession): Seq[Rule[LogicalPlan]]
 ----
 
-`buildOptimizerRules` gives the <<optimizerRules, optimizerRules>> logical rules that are associated with the input <<spark-sql-SparkSession.adoc#, SparkSession>>.
+`buildOptimizerRules` gives the <<optimizerRules, optimizerRules>> logical rules that are associated with the input <<SparkSession.md#, SparkSession>>.
 
 NOTE: `buildOptimizerRules` is used exclusively when `BaseSessionStateBuilder` is requested for the <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, custom operator optimization rules to add to the base Operator Optimization batch>>.
 

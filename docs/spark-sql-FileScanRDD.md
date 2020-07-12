@@ -41,7 +41,7 @@ When <<creating-instance, created>>, `FileScanRDD` is given <<filePartitions, Fi
 [[creating-instance]]
 `FileScanRDD` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[readFunction]] Read function that takes a link:spark-sql-PartitionedFile.adoc[PartitionedFile] and gives link:spark-sql-InternalRow.adoc[internal rows] back (`(PartitionedFile) => Iterator[InternalRow]`)
 * [[filePartitions]] <<FilePartition, FilePartitions>> (_file blocks_)
 

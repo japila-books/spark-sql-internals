@@ -28,12 +28,12 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 
-NOTE: `run` uses the input `SparkSession` to access the session-specific link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn gives access to the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access the session-specific link:SparkSession.md#sessionState[SessionState] that in turn gives access to the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
 [[total-size-stat]][[row-count-stat]]
 `run` computes the link:spark-sql-CommandUtils.adoc#calculateTotalSize[total size] and, without <<noscan, NOSCAN>> flag, the link:spark-sql-dataset-operators.adoc#count[row count] statistics of the table.
 
-NOTE: `run` uses `SparkSession` to link:spark-sql-SparkSession.adoc#table[find the table] in a metastore.
+NOTE: `run` uses `SparkSession` to link:SparkSession.md#table[find the table] in a metastore.
 
 In the end, `run` link:spark-sql-SessionCatalog.adoc#alterTableStats[alters table statistics] if link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[different from the existing table statistics in metastore].
 

@@ -61,7 +61,7 @@ NOTE: Data source is also called a *table provider*.
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
 
-As a Spark SQL developer (_user_), you interact with `DataSource` by [DataFrameReader](DataFrameReader.md) (when you execute link:spark-sql-SparkSession.adoc#read[spark.read] or link:spark-sql-SparkSession.adoc#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
+As a Spark SQL developer (_user_), you interact with `DataSource` by [DataFrameReader](DataFrameReader.md) (when you execute link:SparkSession.md#read[spark.read] or link:SparkSession.md#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
 
 [source, scala]
 ----
@@ -84,7 +84,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 
 `DataSource` takes the following to be created:
 
-* [[sparkSession]] xref:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] xref:SparkSession.md[SparkSession]
 * [[className]] Fully-qualified class name or an alias of the data source provider (aka _data source format_)
 * [[paths]] Data paths (default: empty)
 * [[userSpecifiedSchema]] (optional) User-specified xref:spark-sql-StructType.adoc[schema] (default: undefined)

@@ -156,7 +156,7 @@ scala> Seq("2017/01/01 00:00:00").toDF("time").withColumn("unix_timestamp", unix
 
 [NOTE]
 ====
-`unix_timestamp` is also supported in link:spark-sql-SparkSession.adoc#sql[SQL mode].
+`unix_timestamp` is also supported in link:SparkSession.md#sql[SQL mode].
 
 ```
 scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show

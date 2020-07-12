@@ -8,7 +8,7 @@ title: LogicalRDD
 
 * `Dataset` is requested to <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>>
 
-* `SparkSession` is requested to link:spark-sql-SparkSession.adoc#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
+* `SparkSession` is requested to link:SparkSession.md#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
 NOTE: `LogicalRDD` is resolved to link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#LogicalRDD[executed].
 
@@ -43,4 +43,4 @@ NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#compute
 * [[outputPartitioning]] link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning]
 * [[outputOrdering]] Output ordering (`SortOrder`)
 * [[isStreaming]] `isStreaming` flag
-* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[session]] link:SparkSession.md[SparkSession]

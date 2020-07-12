@@ -28,7 +28,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view.
 
-NOTE: `run` uses the input `SparkSession` to access the session-specific link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn is used to access the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access the session-specific link:SparkSession.md#sessionState[SessionState] that in turn is used to access the current link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
 `run` <<getPartitionSpec, getPartitionSpec>>.
 

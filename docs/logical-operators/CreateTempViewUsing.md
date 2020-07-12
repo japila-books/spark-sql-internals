@@ -36,7 +36,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` creates a <<spark-sql-DataSource.adoc#apply, DataSource>> and requests it to <<spark-sql-DataSource.adoc#resolveRelation, resolve itself>> (i.e. create a <<spark-sql-BaseRelation.adoc#, BaseRelation>>).
 
-`run` then requests the input `SparkSession` to <<spark-sql-SparkSession.adoc#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<spark-sql-Dataset.adoc#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
+`run` then requests the input `SparkSession` to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<spark-sql-Dataset.adoc#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
 
 Depending on the <<global, global>> flag, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#createGlobalTempView, createGlobalTempView>> (`global` flag is on) or <<spark-sql-SessionCatalog.adoc#createTempView, createTempView>> (`global` flag is off).
 

@@ -66,10 +66,10 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` requests the `DataFrame` for the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> that in turn is requested for the <<spark-sql-QueryExecution.adoc#toRdd, RDD>> (of the structured query). `run` requests the <<logicalRelation, LogicalRelation>> for the <<spark-sql-catalyst-QueryPlan.adoc#schema, output schema>>.
 
-With the RDD and the output schema, `run` creates <<spark-sql-SparkSession.adoc#internalCreateDataFrame, another DataFrame>> that is the `RDD[InternalRow]` with the schema applied.
+With the RDD and the output schema, `run` creates <<SparkSession.md#internalCreateDataFrame, another DataFrame>> that is the `RDD[InternalRow]` with the schema applied.
 
 `run` requests the `InsertableRelation` to <<spark-sql-InsertableRelation.adoc#insert, insert or overwrite data>>.
 
 In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to <<spark-sql-CacheManager.adoc#recacheByPlan, recacheByPlan>> with the <<logicalRelation, LogicalRelation>>.
 
-NOTE: `run` requests the `SparkSession` for <<spark-sql-SparkSession.adoc#sharedState, SharedState>> that is in turn requested for the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>>.
+NOTE: `run` requests the `SparkSession` for <<SparkSession.md#sharedState, SharedState>> that is in turn requested for the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>>.

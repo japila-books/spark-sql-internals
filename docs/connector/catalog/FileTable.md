@@ -54,7 +54,7 @@ Used when...FIXME
 
 `FileTable` takes the following to be created:
 
-* <span id="sparkSession"> [SparkSession](../../spark-sql-SparkSession.md)
+* <span id="sparkSession"> [SparkSession](../../SparkSession.md)
 * <span id="options"> Case-Insensitive Map
 * <span id="paths"> Paths
 * <span id="userSpecifiedSchema"> Optional user-defined [schema](../../spark-sql-StructType.md) (`Option[StructType]`)

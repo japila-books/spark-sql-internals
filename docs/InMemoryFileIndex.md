@@ -19,7 +19,7 @@
 
 `InMemoryFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[rootPathsSpecified]] Root paths (as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths])
 * [[parameters]] Options for partition discovery
 * [[userSpecifiedSchema]] Optional user-defined link:spark-sql-StructType.adoc[schema]

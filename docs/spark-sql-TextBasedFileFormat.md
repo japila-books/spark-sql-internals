@@ -45,7 +45,7 @@ NOTE: `isSplitable` is part of link:spark-sql-FileFormat.adoc#isSplitable[FileFo
 
 If the <<codecFactory, CompressionCodecFactory>> is not defined, `isSplitable` creates a https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html[CompressionCodecFactory] (with a Hadoop `Configuration` by requesting the `SessionState` for a link:spark-sql-SessionState.adoc#newHadoopConfWithOptions[new Hadoop Configuration with extra options]).
 
-NOTE: `isSplitable` uses the input `sparkSession` to access link:spark-sql-SparkSession.adoc#sessionState[SessionState].
+NOTE: `isSplitable` uses the input `sparkSession` to access link:SparkSession.md#sessionState[SessionState].
 
 [NOTE]
 ====

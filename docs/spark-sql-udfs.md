@@ -37,7 +37,7 @@ scala> dataset.withColumn("upper", upperUDF('text)).show
 +---+-----+-----+
 ```
 
-You can register UDFs to use in link:spark-sql-SparkSession.adoc#sql[SQL-based query expressions] via link:spark-sql-UDFRegistration.adoc[UDFRegistration] (that is available through link:spark-sql-SparkSession.adoc#udf[`SparkSession.udf` attribute]).
+You can register UDFs to use in link:SparkSession.md#sql[SQL-based query expressions] via link:spark-sql-UDFRegistration.adoc[UDFRegistration] (that is available through link:SparkSession.md#udf[`SparkSession.udf` attribute]).
 
 [source, scala]
 ----
@@ -45,7 +45,7 @@ val spark: SparkSession = ...
 scala> spark.udf.register("myUpper", (input: String) => input.toUpperCase)
 ----
 
-You can query for available link:spark-sql-functions.adoc[standard] and user-defined functions using the link:spark-sql-Catalog.adoc[Catalog] interface (that is available through link:spark-sql-SparkSession.adoc#catalog[`SparkSession.catalog` attribute]).
+You can query for available link:spark-sql-functions.adoc[standard] and user-defined functions using the link:spark-sql-Catalog.adoc[Catalog] interface (that is available through link:SparkSession.md#catalog[`SparkSession.catalog` attribute]).
 
 [source, scala]
 ----

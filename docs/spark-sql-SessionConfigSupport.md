@@ -4,7 +4,7 @@ title: SessionConfigSupport
 
 `SessionConfigSupport` is the <<contract, contract>> of <<implementations, DataSourceV2 data sources>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that use <<keyPrefix, custom key prefix for configuration options>> (i.e. options with *spark.datasource* prefix for the keys in <<spark-sql-SQLConf.adoc#, SQLConf>>).
 
-With `SessionConfigSupport`, a data source can be configured by additional (session-scoped) configuration options that are specified in <<spark-sql-SparkSession.adoc#, SparkSession>> that extend user-defined options.
+With `SessionConfigSupport`, a data source can be configured by additional (session-scoped) configuration options that are specified in <<SparkSession.md#, SparkSession>> that extend user-defined options.
 
 [[contract]]
 [[keyPrefix]]

@@ -6,7 +6,7 @@ title: AggregateFunction
 
 `AggregateFunction` is used wrapped inside a link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] (using <<toAggregateExpression, toAggregateExpression>> method) when:
 
-* `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves functions] (for link:spark-sql-SparkSession.adoc#sql[SQL mode])
+* `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves functions] (for link:SparkSession.md#sql[SQL mode])
 
 * ...FIXME: Anywhere else?
 

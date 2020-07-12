@@ -152,7 +152,7 @@ Marks the `Dataset` to be <<spark-sql-caching-and-persistence.adoc#, persisted>>
 
 Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.adoc#cacheQuery, cache the structured query>>.
 
-NOTE: `persist` uses the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>> from the <<spark-sql-SparkSession.adoc#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
+NOTE: `persist` uses the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|
@@ -310,7 +310,7 @@ NOTE: `explain` uses link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainComma
 
 [NOTE]
 ====
-`explain` uses Dataset's link:spark-sql-Dataset.adoc#sparkSession[SparkSession] to link:spark-sql-SparkSession.adoc#sessionState[access the current `SessionState`].
+`explain` uses Dataset's link:spark-sql-Dataset.adoc#sparkSession[SparkSession] to link:SparkSession.md#sessionState[access the current `SessionState`].
 ====
 
 In the end, `explain` goes over the `InternalRow` records and converts them to lines to display to console.
@@ -449,7 +449,7 @@ toDF(colNames: String*): DataFrame
 
 `toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
 
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:SparkSession.md[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 

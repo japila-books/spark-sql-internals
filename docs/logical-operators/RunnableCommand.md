@@ -92,9 +92,9 @@ CACHE LAZY? TABLE [table] (AS? [query])?
 
 `CacheTableCommand` requests the session-specific `Catalog` to link:spark-sql-Catalog.adoc#cacheTable[cache the table].
 
-NOTE: `CacheTableCommand` uses `SparkSession` link:spark-sql-SparkSession.adoc#catalog[to access the `Catalog`].
+NOTE: `CacheTableCommand` uses `SparkSession` link:SparkSession.md#catalog[to access the `Catalog`].
 
-If the caching is not `LAZY` (which is not by default), `CacheTableCommand` link:spark-sql-SparkSession.adoc#table[creates a DataFrame for the table] and link:spark-sql-dataset-operators.adoc#count[counts the rows] (that will trigger the caching).
+If the caching is not `LAZY` (which is not by default), `CacheTableCommand` link:SparkSession.md#table[creates a DataFrame for the table] and link:spark-sql-dataset-operators.adoc#count[counts the rows] (that will trigger the caching).
 
 NOTE: `CacheTableCommand` uses a Spark SQL pattern to trigger DataFrame caching by executing `count` operation.
 

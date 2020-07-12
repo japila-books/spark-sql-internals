@@ -88,7 +88,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` requests the `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
 
-NOTE: `run` uses the input `SparkSession` to access link:spark-sql-SparkSession.adoc#sessionState[SessionState] that in turn is used to access the link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access link:SparkSession.md#sessionState[SessionState] that in turn is used to access the link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
 `run` takes the link:spark-sql-CatalogStatistics.adoc#colStats[column statistics] from the  link:spark-sql-CatalogTable.adoc#stats[table statistics] if available.
 

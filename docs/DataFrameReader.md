@@ -2,7 +2,7 @@
 
 `DataFrameReader` is a <<methods, fluent API>> to describe the <<source, input data source>> that will be used to <<load, "load" data from an external data source>> (e.g. <<creating-dataframes-from-files, files>>, <<creating-dataframes-from-tables, tables>>, <<jdbc, JDBC>> or <<loading-dataset-of-string, Dataset[String]>>).
 
-`DataFrameReader` is <<creating-instance, created>> (available) exclusively using <<spark-sql-SparkSession.adoc#read, SparkSession.read>>.
+`DataFrameReader` is <<creating-instance, created>> (available) exclusively using <<SparkSession.md#read, SparkSession.read>>.
 
 [source, scala]
 ----
@@ -487,7 +487,7 @@ res1: Boolean = true
 val t1 = spark.read.table("t1")
 ----
 
-NOTE: `table` simply passes the call to link:spark-sql-SparkSession.adoc#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
+NOTE: `table` simply passes the call to link:SparkSession.md#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
 
 === [[jdbc]] Loading Data From External Table using JDBC Data Source -- `jdbc` Method
 
@@ -515,7 +515,7 @@ Internally, `jdbc` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[J
 
 `jdbc` then creates one `JDBCPartition` per `predicates`.
 
-In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
+In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
 
 [NOTE]
 ====
@@ -559,7 +559,7 @@ Internally, `textFile` passes calls on to <<text, text>> method and link:spark-s
 
 `DataFrameReader` takes the following to be created:
 
-* [[sparkSession]] <<spark-sql-SparkSession.adoc#, SparkSession>>
+* [[sparkSession]] <<SparkSession.md#, SparkSession>>
 
 `DataFrameReader` initializes the <<internal-properties, internal properties>>.
 
@@ -572,7 +572,7 @@ loadV1Source(paths: String*): DataFrame
 
 `loadV1Source` creates a link:spark-sql-DataSource.adoc#apply[DataSource] and requests it to link:spark-sql-DataSource.adoc#resolveRelation[resolve the underlying relation (as a BaseRelation)].
 
-In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
+In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
 
 NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a link:spark-sql-DataSourceReader.adoc[DataSourceReader] could not be created).
 

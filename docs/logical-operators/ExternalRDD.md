@@ -4,7 +4,7 @@
 
 `ExternalRDD` is <<creating-instance, created>> when:
 
-* `SparkSession` is requested to create a link:spark-sql-SparkSession.adoc#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:spark-sql-SparkSession.adoc#createDataset[Dataset from RDD of a given type]
+* `SparkSession` is requested to create a link:SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:SparkSession.md#createDataset[Dataset from RDD of a given type]
 
 * `ExternalRDD` is requested to <<newInstance, create a new instance>>
 
@@ -57,7 +57,7 @@ NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#compute
 
 * [[outputObjAttr]] Output schema link:spark-sql-Expression-Attribute.adoc[attribute]
 * [[rdd]] `RDD` of `T`
-* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[session]] link:SparkSession.md[SparkSession]
 
 === [[apply]] Creating ExternalRDD -- `apply` Factory Method
 
@@ -68,4 +68,4 @@ apply[T: Encoder](rdd: RDD[T], session: SparkSession): LogicalPlan
 
 `apply`...FIXME
 
-NOTE: `apply` is used when `SparkSession` is requested to create a link:spark-sql-SparkSession.adoc#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:spark-sql-SparkSession.adoc#createDataset[Dataset from RDD of a given type].
+NOTE: `apply` is used when `SparkSession` is requested to create a link:SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:SparkSession.md#createDataset[Dataset from RDD of a given type].

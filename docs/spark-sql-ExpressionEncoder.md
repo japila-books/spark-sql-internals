@@ -257,9 +257,9 @@ Error while encoding: [initial exception]
 ====
 `toRow` is _mostly_ used when `SparkSession` is requested for:
 
-* link:spark-sql-SparkSession.adoc#createDataset[Dataset from a local dataset]
+* link:SparkSession.md#createDataset[Dataset from a local dataset]
 
-* link:spark-sql-SparkSession.adoc#createDataFrame[DataFrame from RDD[Row\]]
+* link:SparkSession.md#createDataFrame[DataFrame from RDD[Row\]]
 ====
 
 === [[fromRow]] Decoding JVM Object From Internal Binary Row Format -- `fromRow` Method

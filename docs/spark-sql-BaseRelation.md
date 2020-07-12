@@ -34,7 +34,7 @@ abstract class BaseRelation {
 
 `BaseRelation` is "created" when `DataSource` is requested to link:spark-sql-DataSource.adoc#resolveRelation[resolve a relation].
 
-`BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to link:spark-sql-SparkSession.adoc#baseRelationToDataFrame[create a DataFrame].
+`BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame].
 
 `BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside link:spark-sql-Row.adoc[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
 

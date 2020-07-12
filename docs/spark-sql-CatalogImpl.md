@@ -71,9 +71,9 @@ NOTE: `functionExists` is part of link:spark-sql-Catalog.adoc#functionExists[Cat
 cacheTable(tableName: String): Unit
 ----
 
-Internally, `cacheTable` first link:spark-sql-SparkSession.adoc#table[creates a DataFrame for the table] followed by requesting `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache it].
+Internally, `cacheTable` first link:SparkSession.md#table[creates a DataFrame for the table] followed by requesting `CacheManager` to link:spark-sql-CacheManager.adoc#cacheQuery[cache it].
 
-NOTE: `cacheTable` uses the link:spark-sql-SparkSession.adoc#sharedState[session-scoped SharedState] to access the `CacheManager`.
+NOTE: `cacheTable` uses the link:SparkSession.md#sharedState[session-scoped SharedState] to access the `CacheManager`.
 
 NOTE: `cacheTable` is part of link:spark-sql-Catalog.adoc#contract[Catalog contract].
 
@@ -212,11 +212,11 @@ NOTE: `refreshTable` is part of link:spark-sql-Catalog.adoc#refreshTable[Catalog
 
 `refreshTable` requests `SessionState` for the link:spark-sql-SessionState.adoc#sqlParser[SQL parser] to link:spark-sql-ParserInterface.adoc#parseTableIdentifier[parse a TableIdentifier given the table name].
 
-NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:spark-sql-SparkSession.adoc#sessionState[SessionState].
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:SparkSession.md#sessionState[SessionState].
 
 `refreshTable` requests <<sessionCatalog, SessionCatalog>> for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
 
-`refreshTable` then link:spark-sql-SparkSession.adoc#table[creates a DataFrame for the table name].
+`refreshTable` then link:SparkSession.md#table[creates a DataFrame for the table name].
 
 For a temporary or persistent `VIEW` table, `refreshTable` requests the link:spark-sql-QueryExecution.adoc#analyzed[analyzed] logical plan of the DataFrame (for the table) to link:spark-sql-LogicalPlan.adoc#refresh[refresh] itself.
 
@@ -224,7 +224,7 @@ For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatal
 
 If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to link:spark-sql-CacheManager.adoc#uncacheQuery[uncache] and link:spark-sql-CacheManager.adoc#cacheQuery[cache] the table `DataFrame` again.
 
-NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:spark-sql-SparkSession.adoc#sharedState[SharedState] that is used to access link:spark-sql-SharedState.adoc#cacheManager[CacheManager].
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:SparkSession.md#sharedState[SharedState] that is used to access link:spark-sql-SharedState.adoc#cacheManager[CacheManager].
 
 === [[refreshByPath]] `refreshByPath` Method
 

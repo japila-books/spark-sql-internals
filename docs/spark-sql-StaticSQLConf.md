@@ -14,11 +14,11 @@ title: StaticSQLConf
 
 (internal) Configures `in-memory` (default) or ``hive``-related link:BaseSessionStateBuilder.md[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
 
-link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:spark-sql-SparkSession.adoc[SparkSession].
+link:spark-sql-SparkSession-Builder.adoc#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:SparkSession.md[SparkSession].
 
 Used when:
 
-* `SparkSession` utility is requested for the link:spark-sql-SparkSession.adoc#sessionStateClassName[name of the BaseSessionStateBuilder implementation] (when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#sessionState[SessionState])
+* `SparkSession` utility is requested for the link:SparkSession.md#sessionStateClassName[name of the BaseSessionStateBuilder implementation] (when `SparkSession` is requested for a link:SparkSession.md#sessionState[SessionState])
 
 * `SharedState` utility is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog])
 

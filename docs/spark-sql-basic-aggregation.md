@@ -29,7 +29,7 @@ NOTE: Aggregate functions without aggregate operators return a single value. If 
 
 [NOTE]
 ====
-You can also use link:spark-sql-SparkSession.adoc#sql[SparkSession] to execute _good ol'_ SQL with `GROUP BY` should you prefer.
+You can also use link:SparkSession.md#sql[SparkSession] to execute _good ol'_ SQL with `GROUP BY` should you prefer.
 
 [source, scala]
 ----

@@ -4,7 +4,7 @@ title: UDFRegistration
 
 `UDFRegistration` is an interface to the session-scoped <<functionRegistry, FunctionRegistry>> to register user-defined functions (UDFs) and <<register, user-defined aggregate functions>> (UDAFs).
 
-`UDFRegistration` is available using link:spark-sql-SparkSession.adoc#udf[SparkSession].
+`UDFRegistration` is available using link:SparkSession.md#udf[SparkSession].
 
 [source, scala]
 ----

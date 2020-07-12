@@ -90,7 +90,7 @@ scala> jacek == jacekReborn
 res6: Boolean = true
 ----
 
-You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in link:spark-sql-SparkSession.adoc#implicits[`implicits` object].
+You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in link:SparkSession.md#implicits[`implicits` object].
 
 [source, scala]
 ----

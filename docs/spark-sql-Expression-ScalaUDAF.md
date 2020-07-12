@@ -8,7 +8,7 @@ title: ScalaUDAF
 
 * `UserDefinedAggregateFunction` creates a `Column` for a user-defined aggregate function using link:spark-sql-UserDefinedAggregateFunction.adoc#apply[all] and link:spark-sql-UserDefinedAggregateFunction.adoc#distinct[distinct] values (to use the UDAF in link:spark-sql-dataset-operators.adoc[Dataset operators])
 
-* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a user-defined aggregate function] (to use the UDAF in link:spark-sql-SparkSession.adoc#sql[SQL mode])
+* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a user-defined aggregate function] (to use the UDAF in link:SparkSession.md#sql[SQL mode])
 
 `ScalaUDAF` is a link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate].
 

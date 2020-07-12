@@ -65,7 +65,7 @@ getExternalTmpPath(
   path: Path): Path
 ----
 
-`getExternalTmpPath` finds the Hive version used. `getExternalTmpPath` requests the input link:../spark-sql-SparkSession.adoc[SparkSession] for the link:../spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] (that is expected to be a link:HiveExternalCatalog.adoc[HiveExternalCatalog]). `getExternalTmpPath` requests it for the underlying link:HiveExternalCatalog.adoc#client[HiveClient] that is in turn requested for the link:HiveClient.adoc#version[Hive version].
+`getExternalTmpPath` finds the Hive version used. `getExternalTmpPath` requests the input link:../SparkSession.md[SparkSession] for the link:../spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog] (that is expected to be a link:HiveExternalCatalog.adoc[HiveExternalCatalog]). `getExternalTmpPath` requests it for the underlying link:HiveExternalCatalog.adoc#client[HiveClient] that is in turn requested for the link:HiveClient.adoc#version[Hive version].
 
 `getExternalTmpPath` divides (_splits_) the supported Hive versions into the ones (_old versions_) that use link:index.adoc#hive.exec.scratchdir[hive.exec.scratchdir] directory (`0.12.0` to `1.0.0`) and the ones (_new versions_) that use link:index.adoc#hive.exec.stagingdir[hive.exec.stagingdir] directory (`1.1.0` to `2.3.3`).
 

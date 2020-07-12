@@ -13,7 +13,7 @@ image::../images/spark-sql-HiveMetastoreCatalog.png[align="center"]
 
 `HiveMetastoreCatalog` takes the following to be created:
 
-* [[sparkSession]] link:../spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:../SparkSession.md[SparkSession]
 
 `HiveMetastoreCatalog` initializes the <<internal-properties, internal properties>>.
 

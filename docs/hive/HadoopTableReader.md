@@ -16,7 +16,7 @@
 * [[attributes]] Attributes
 * [[partitionKeys]] Partition Keys (`Seq[Attribute]`)
 * [[tableDesc]] Hive {url-hive-javadoc}/org/apache/hive/hcatalog/templeton/TableDesc.html[TableDesc]
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
 
 `HadoopTableReader` initializes the <<internal-properties, internal properties>>.

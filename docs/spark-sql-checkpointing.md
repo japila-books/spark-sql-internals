@@ -34,7 +34,7 @@ Checkpointing can be <<spark-sql-Dataset-untyped-transformations.adoc#localCheck
 | <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint(eager = false)>>
 |===
 
-A RDD can be recovered from a checkpoint files using <<sparkcontext-checkpointFile, SparkContext.checkpointFile>>. You can use link:spark-sql-SparkSession.adoc#internalCreateDataFrame[SparkSession.internalCreateDataFrame] method to (re)create the DataFrame from the RDD of internal binary rows.
+A RDD can be recovered from a checkpoint files using <<sparkcontext-checkpointFile, SparkContext.checkpointFile>>. You can use link:SparkSession.md#internalCreateDataFrame[SparkSession.internalCreateDataFrame] method to (re)create the DataFrame from the RDD of internal binary rows.
 
 [[logging]]
 [TIP]

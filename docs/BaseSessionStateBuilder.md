@@ -23,7 +23,7 @@ org.apache.spark.sql.internal.SessionState
 newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
 ```
 
-Produces a new `BaseSessionStateBuilder` for given spark-sql-SparkSession.md[SparkSession] and optional spark-sql-SessionState.md[SessionState]
+Produces a new `BaseSessionStateBuilder` for given SparkSession.md[SparkSession] and optional spark-sql-SessionState.md[SessionState]
 
 Used when `BaseSessionStateBuilder` is requested to <<createClone, create a SessionState>>
 
@@ -36,10 +36,10 @@ Used when `BaseSessionStateBuilder` is requested to <<createClone, create a Sess
 
 `BaseSessionStateBuilder` takes the following to be created:
 
-* <span id="session"> [SparkSession](spark-sql-SparkSession.md)
+* <span id="session"> [SparkSession](SparkSession.md)
 * <span id="parentState"> Optional parent [SessionState](spark-sql-SessionState.md) (default: undefined)
 
-`BaseSessionStateBuilder` is created when `SparkSession` is requested to [instantiateSessionState](spark-sql-SparkSession.md#instantiateSessionState).
+`BaseSessionStateBuilder` is created when `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState).
 
 ## SQL Services
 
@@ -186,7 +186,7 @@ build(): SessionState
 
 `build` creates a [SessionState](spark-sql-SessionState.md) with the following:
 
-* spark-sql-SparkSession.md#sharedState[SharedState] of the <<session, SparkSession>>
+* SparkSession.md#sharedState[SharedState] of the <<session, SparkSession>>
 * <<conf, SQLConf>>
 * <<experimentalMethods, ExperimentalMethods>>
 * <<functionRegistry, FunctionRegistry>>
@@ -204,7 +204,7 @@ build(): SessionState
 
 `build` is used when:
 
-* `SparkSession` is requested for a spark-sql-SparkSession.md#sessionState[SessionState] (that in turn spark-sql-SparkSession.md#instantiateSessionState[builds one using a class name] based on spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property)
+* `SparkSession` is requested for a SparkSession.md#sessionState[SessionState] (that in turn SparkSession.md#instantiateSessionState[builds one using a class name] based on spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property)
 
 * `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
 

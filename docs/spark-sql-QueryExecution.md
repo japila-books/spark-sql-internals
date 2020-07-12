@@ -107,7 +107,7 @@ After you have executed `toRdd` (directly or not), you basically "leave" Spark S
 
 `toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using link:SparkPlan.md#execute[SparkPlan.execute] that recursively triggers execution of every child physical operator in the physical plan tree.
 
-NOTE: You can use link:spark-sql-SparkSession.adoc#internalCreateDataFrame[SparkSession.internalCreateDataFrame] to apply a link:spark-sql-StructType.adoc[schema] to an `RDD[InternalRow]`.
+NOTE: You can use link:SparkSession.md#internalCreateDataFrame[SparkSession.internalCreateDataFrame] to apply a link:spark-sql-StructType.adoc[schema] to an `RDD[InternalRow]`.
 
 NOTE: Use link:spark-sql-dataset-operators.adoc#rdd[Dataset.rdd] to access the `RDD[InternalRow]` with internal binary rows deserialized to a Scala type.
 |===
@@ -191,7 +191,7 @@ CAUTION: FIXME
 
 `QueryExecution` takes the following when created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[logical]] link:spark-sql-LogicalPlan.adoc[Logical plan]
 
 === [[preparations]] Physical Query Optimizations (Physical Plan Preparation Rules) -- `preparations` Method
@@ -258,7 +258,7 @@ NOTE: `assertAnalyzed` executes <<analyzed, analyzed>> by accessing it and throw
 
 [NOTE]
 ====
-`assertAnalyzed` uses <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#sessionState[access the current `SessionState`] that it then uses to link:spark-sql-SessionState.adoc#analyzer[access the `Analyzer`].
+`assertAnalyzed` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access the current `SessionState`] that it then uses to link:spark-sql-SessionState.adoc#analyzer[access the `Analyzer`].
 
 In Scala the access path looks as follows.
 

@@ -231,7 +231,7 @@ NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing
 runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 ----
 
-`runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
+`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
 
 `runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
 
@@ -239,7 +239,7 @@ TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notifi
 
 `runCommand` records the current time (end time).
 
-In the end, `runCommand` uses the input `SparkSession` to access the <<spark-sql-SparkSession.adoc#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
+In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSession.md#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
 
 In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.adoc#onFailure, onFailure>> (with the exception) and (re)throws it.
 
@@ -275,11 +275,11 @@ scala> q.show
 
 Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.adoc#parseTableIdentifier, parse the input table name>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#sqlParser, ParserInterface>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#sqlParser, ParserInterface>>.
 
 `saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#tableExists, check whether the table exists or not>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
 
 In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
 
@@ -320,7 +320,7 @@ Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSo
 
 [NOTE]
 ====
-`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> that is in turn used to access the <<spark-sql-SessionState.adoc#conf, SQLConf>>.
+`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<spark-sql-SessionState.adoc#conf, SQLConf>>.
 
 [source, scala]
 ----

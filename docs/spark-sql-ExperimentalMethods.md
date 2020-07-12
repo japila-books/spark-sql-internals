@@ -30,7 +30,7 @@ extraStrategies: Seq[Strategy]
 Used when `SessionState` is requested for the link:spark-sql-SessionState.adoc#planner[SparkPlanner]
 |===
 
-`ExperimentalMethods` is available as the <<spark-sql-SparkSession.adoc#experimental, experimental>> property of a `SparkSession`.
+`ExperimentalMethods` is available as the <<SparkSession.md#experimental, experimental>> property of a `SparkSession`.
 
 [source, scala]
 ----

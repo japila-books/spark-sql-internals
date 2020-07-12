@@ -29,7 +29,7 @@ You can join two datasets using the <<join-operators, join operators>> with an o
 | Used for a type-preserving join with two output columns for records for which a join condition holds
 |===
 
-You can also use link:spark-sql-SparkSession.adoc#sql[SQL mode] to join datasets using _good ol'_ SQL.
+You can also use link:SparkSession.md#sql[SQL mode] to join datasets using _good ol'_ SQL.
 
 [source, scala]
 ----
@@ -193,7 +193,7 @@ scala> left.join(right, Seq("id"), "leftanti").explain
    +- LocalTableScan [id#60]
 ----
 
-Internally, `join(right: Dataset[_])` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator (in the current link:spark-sql-SparkSession.adoc[SparkSession]).
+Internally, `join(right: Dataset[_])` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator (in the current link:SparkSession.md[SparkSession]).
 
 NOTE: `join(right: Dataset[_])` creates a link:spark-sql-LogicalPlan.adoc[logical plan] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] operator with two child logical plans of the both sides of the join.
 

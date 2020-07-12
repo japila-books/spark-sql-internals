@@ -15,7 +15,7 @@
 
 `CatalogFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[table]] link:spark-sql-CatalogTable.adoc[CatalogTable]
 * [[sizeInBytes]] Size (in bytes)
 

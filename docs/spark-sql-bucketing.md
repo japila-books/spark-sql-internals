@@ -49,7 +49,7 @@ The above join query is a fine example of a link:spark-sql-SparkPlan-SortMergeJo
 .SortMergeJoin of FileScans (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-filescans.png[align="center"]
 
-One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using link:spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a link:spark-sql-Catalog.adoc[catalog] by link:spark-sql-SparkSession.adoc#table[SparkSession.table].
+One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using link:spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a link:spark-sql-Catalog.adoc[catalog] by link:SparkSession.md#table[SparkSession.table].
 
 NOTE: Bucketing link:spark-sql-DataFrameWriter.adoc#assertNotBucketed[is not supported] for link:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save], link:spark-sql-DataFrameWriter.adoc#insertInto[DataFrameWriter.insertInto] and link:spark-sql-DataFrameWriter.adoc#jdbc[DataFrameWriter.jdbc] methods.
 

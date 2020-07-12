@@ -5,7 +5,7 @@
 
 `SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a link:spark-sql-SQLConf.adoc[SQLConf].
 
-`SessionState` is available as the <<spark-sql-SparkSession.adoc#sessionState, sessionState>> property of a `SparkSession`.
+`SessionState` is available as the <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`.
 
 [source, scala]
 ----
@@ -16,14 +16,14 @@ scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState
 ----
 
-`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<spark-sql-SparkSession.adoc#instantiateSessionState, instantiateSessionState>> (when requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
+`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<SparkSession.md#instantiateSessionState, instantiateSessionState>> (when requested for the <<SparkSession.md#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
 
 .Creating SessionState
 image::images/spark-sql-SessionState.png[align="center"]
 
 [NOTE]
 ====
-When requested for the <<spark-sql-SparkSession.adoc#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
+When requested for the <<SparkSession.md#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
 
 There are two `BaseSessionStateBuilders` available:
 
@@ -123,7 +123,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
 * [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (i.e. `() => SessionResourceLoader`)
 * [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `LogicalPlan => QueryExecution`)
-* [[createClone]] `createClone` function to clone the `SessionState` given a <<spark-sql-SparkSession.adoc#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
+* [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
 
 ## <span id="catalog" /> SessionCatalog
 

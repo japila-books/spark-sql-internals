@@ -90,7 +90,7 @@ The optional <<bucketSpec, bucketing specification>> is defined exclusively for 
 * [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (optional)
 * [[fileFormat]] link:spark-sql-FileFormat.adoc[FileFormat]
 * [[options]] Options
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 
 `HadoopFsRelation` initializes the <<internal-properties, internal properties>>.
 

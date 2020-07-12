@@ -9,7 +9,7 @@ NOTE: A `Column` is a value generator for every row in a `Dataset`.
 [[star]]
 A special column `*` references all columns in a `Dataset`.
 
-With the link:spark-sql-SparkSession.adoc#implicits[implicits] converstions imported, you can create "free" column references using Scala's symbols.
+With the link:SparkSession.md#implicits[implicits] converstions imported, you can create "free" column references using Scala's symbols.
 
 [source, scala]
 ----

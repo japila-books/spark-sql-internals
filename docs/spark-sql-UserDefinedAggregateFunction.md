@@ -76,7 +76,7 @@ image::images/spark-sql-UserDefinedAggregateFunction.png[align="center"]
 
 [NOTE]
 ====
-Use link:spark-sql-UDFRegistration.adoc[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in link:spark-sql-SparkSession.adoc#sql[SQL mode].
+Use link:spark-sql-UDFRegistration.adoc[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in link:SparkSession.md#sql[SQL mode].
 
 [source, scala]
 ----

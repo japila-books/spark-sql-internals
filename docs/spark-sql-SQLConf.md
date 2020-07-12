@@ -6,7 +6,7 @@
 ====
 `SQLConf` is an internal part of Spark SQL and is not supposed to be used directly.
 
-Spark SQL configuration is available through <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using link:spark-sql-SparkSession.adoc#conf[SparkSession].
+Spark SQL configuration is available through <<spark-sql-RuntimeConfig.adoc#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using link:SparkSession.md#conf[SparkSession].
 
 [source, scala]
 ----
@@ -22,7 +22,7 @@ You can access a `SQLConf` using:
 
 . <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
 
-. <<spark-sql-SparkSession.adoc#sessionState, SessionState>> - direct access through <<spark-sql-SparkSession.adoc#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
+. <<SparkSession.md#sessionState, SessionState>> - direct access through <<SparkSession.md#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
 
 [source, scala]
 ----

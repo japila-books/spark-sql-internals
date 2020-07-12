@@ -26,7 +26,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` link:spark-sql-SessionCatalog.adoc#createTable[creates a new table] in a session-scoped `SessionCatalog`.
 
-NOTE: `run` uses the input `SparkSession` to link:spark-sql-SparkSession.adoc#sessionState[access SessionState] that in turn is used to link:spark-sql-SessionState.adoc#catalog[access the current SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to link:SparkSession.md#sessionState[access SessionState] that in turn is used to link:spark-sql-SessionState.adoc#catalog[access the current SessionCatalog].
 
 Internally, `run` link:spark-sql-DataSource.adoc#resolveRelation[creates a BaseRelation] to access the table's schema.
 

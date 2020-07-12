@@ -92,7 +92,7 @@ Used when:
 
 * [DataFrameWriterV2](../DataFrameWriterV2.md) is created (and requested for [tableName](../DataFrameWriterV2.md#tableName))
 
-* `SparkSession` is requested to [table](../spark-sql-SparkSession.md#table)
+* `SparkSession` is requested to [table](../SparkSession.md#table)
 
 ### parsePlan
 
@@ -107,7 +107,7 @@ Used when:
 
 * `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupRelation, look up a relation (table or view) in catalogs>>
 
-* `SparkSession` is requested to <<spark-sql-SparkSession.adoc#sql, execute a SQL query (aka SQL Mode)>>
+* `SparkSession` is requested to <<SparkSession.md#sql, execute a SQL query (aka SQL Mode)>>
 
 ### parseRawDataType
 
@@ -133,7 +133,7 @@ Used when:
 
 * `Dataset` is requested to <<spark-sql-Dataset-basic-actions.adoc#createTempViewCommand, createTempViewCommand>>
 
-* `SparkSession` is requested to <<spark-sql-SparkSession.adoc#table, table>>
+* `SparkSession` is requested to <<SparkSession.md#table, table>>
 
 * `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listColumns, listColumns>>, <<spark-sql-CatalogImpl.adoc#getTable, getTable>>, <<spark-sql-CatalogImpl.adoc#tableExists, tableExists>>, <<spark-sql-CatalogImpl.adoc#createTable, createTable>>, <<spark-sql-CatalogImpl.adoc#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.adoc#uncacheTable, uncacheTable>>, and <<spark-sql-CatalogImpl.adoc#refreshTable, refreshTable>>
 

@@ -155,7 +155,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` uses the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (of the <<spark-sql-SparkSession.adoc#sessionState, SessionState>> of the input <<spark-sql-SparkSession.adoc#, SparkSession>>) and branches off per the type of the table to display.
+`run` uses the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
 
 For a <<spark-sql-SessionCatalog.adoc#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#lookupRelation, lookupRelation>> to access the <<spark-sql-catalyst-QueryPlan.adoc#schema, schema>> and <<describeSchema, describeSchema>>.
 

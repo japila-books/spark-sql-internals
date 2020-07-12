@@ -2,7 +2,7 @@ title: Builder
 
 # Builder -- Building SparkSession using Fluent API
 
-`Builder` is the <<methods, fluent API>> to create a <<spark-sql-SparkSession.adoc#, SparkSession>>.
+`Builder` is the <<methods, fluent API>> to create a <<SparkSession.md#, SparkSession>>.
 
 [[methods]]
 .Builder API
@@ -40,7 +40,7 @@ enableHiveSupport(): Builder
 ----
 
 | <<getOrCreate, getOrCreate>>
-a| Gets the current link:spark-sql-SparkSession.adoc[SparkSession] or creates a new one.
+a| Gets the current link:SparkSession.md[SparkSession] or creates a new one.
 
 [source, scala]
 ----
@@ -64,7 +64,7 @@ withExtensions(f: SparkSessionExtensions => Unit): Builder
 ----
 |===
 
-`Builder` is available using the <<spark-sql-SparkSession.adoc#builder, builder>> object method of a SparkSession.
+`Builder` is available using the <<SparkSession.md#builder, builder>> object method of a SparkSession.
 
 [source, scala]
 ----
@@ -85,7 +85,7 @@ val spark = SparkSession.builder
   .getOrCreate
 ----
 
-NOTE: You can have multiple ``SparkSession``s in a single Spark application for different link:spark-sql-SparkSession.adoc#catalog[data catalogs] (through relational entities).
+NOTE: You can have multiple ``SparkSession``s in a single Spark application for different link:SparkSession.md#catalog[data catalogs] (through relational entities).
 
 [[internal-registries]]
 .Builder's Internal Properties (e.g. Registries, Counters and Flags)

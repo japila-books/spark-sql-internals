@@ -17,15 +17,15 @@ It is therefore fair to say that `Dataset` consists of the following three eleme
 
 . <<spark-sql-Encoder.adoc#, Encoder>> (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.adoc#, InternalRow>>)
 
-. <<spark-sql-SparkSession.adoc#, SparkSession>>
+. <<SparkSession.md#, SparkSession>>
 
 When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with a `SparkSession`, a `QueryExecution` and an `Encoder`.
 
 `Dataset` is <<creating-instance, created>> when:
 
-* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<spark-sql-SparkSession.adoc#, SparkSession>> with the <<spark-sql-Encoder.adoc#, Encoder>> in a Scala implicit scope)
+* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the <<spark-sql-Encoder.adoc#, Encoder>> in a Scala implicit scope)
 
-* <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<spark-sql-SparkSession.adoc#, SparkSession>>)
+* <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
 
 * <<spark-sql-Dataset-untyped-transformations.adoc#toDF, Dataset.toDF>> untyped transformation is used
 
@@ -33,7 +33,7 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 * <<spark-sql-KeyValueGroupedDataset.adoc#agg, KeyValueGroupedDataset.agg>> operator is used (that requests `KeyValueGroupedDataset` to <<spark-sql-KeyValueGroupedDataset.adoc#aggUntyped, aggUntyped>>)
 
-* <<spark-sql-SparkSession.adoc#emptyDataset, SparkSession.emptyDataset>> and <<spark-sql-SparkSession.adoc#range, SparkSession.range>> operators are used
+* <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>> and <<SparkSession.md#range, SparkSession.range>> operators are used
 
 * `CatalogImpl` is requested to
 <<spark-sql-CatalogImpl.adoc#makeDataset, makeDataset>> (when requested to <<spark-sql-CatalogImpl.adoc#listDatabases, list databases>>, <<spark-sql-CatalogImpl.adoc#listTables, tables>>, <<spark-sql-CatalogImpl.adoc#listFunctions, functions>> and <<spark-sql-CatalogImpl.adoc#listColumns, columns>>)
@@ -125,7 +125,7 @@ If however a link:spark-sql-LogicalPlan.adoc[LogicalPlan] is used to <<creating-
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
-NOTE: link:spark-sql-SparkSession.adoc[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the link:spark-sql-Encoder.adoc[Encoder].
+NOTE: link:SparkSession.md[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the link:spark-sql-Encoder.adoc[Encoder].
 
 You can request the <<spark-sql-dataset-operators.adoc#toDF, "untyped" view>> of a Dataset or access the link:spark-sql-dataset-operators.adoc#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
@@ -133,7 +133,7 @@ The default storage level for `Datasets` is link:spark-rdd-caching.adoc[MEMORY_A
 
 NOTE: Spark 2.0 has introduced a new query model called link:spark-structured-streaming.adoc[Structured Streaming] for continuous incremental execution of structured queries. That made possible to consider Datasets a static and bounded as well as streaming and unbounded data sets with a single unified API for different execution models.
 
-A `Dataset` is link:spark-sql-dataset-operators.adoc#isLocal[local] if it was created from local collections using link:spark-sql-SparkSession.adoc#emptyDataset[SparkSession.emptyDataset] or link:spark-sql-SparkSession.adoc#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
+A `Dataset` is link:spark-sql-dataset-operators.adoc#isLocal[local] if it was created from local collections using link:SparkSession.md#emptyDataset[SparkSession.emptyDataset] or link:SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
 
 NOTE: `Dataset` makes sure that the underlying `QueryExecution` is link:spark-sql-QueryExecution.adoc#analyzed[analyzed] and link:spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis[checked].
 
@@ -220,7 +220,7 @@ res2: String =
 
 `rdd` then requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the logical plan] to get the corresponding link:spark-sql-QueryExecution.adoc#toRdd[RDD of binary rows].
 
-NOTE: `rdd` uses <<sparkSession, SparkSession>> to link:spark-sql-SparkSession.adoc#sessionState[access `SessionState`].
+NOTE: `rdd` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access `SessionState`].
 
 `rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the link:spark-sql-Expression.adoc#dataType[data type] of the rows (using link:spark-sql-ExpressionEncoder.adoc#deserializer[deserializer] expression) and link:spark-rdd-transformations.adoc#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
 
@@ -266,7 +266,7 @@ CAUTION: FIXME
 
 `Dataset` takes the following when created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[queryExecution]] link:spark-sql-QueryExecution.adoc[QueryExecution]
 * [[encoder]] link:spark-sql-Encoder.adoc[Encoder] for the type `T` of the records
 
@@ -326,7 +326,7 @@ NOTE: `ofRows` is part of `Dataset` Scala object that is marked as a `private[sq
 
 `ofRows` returns link:spark-sql-DataFrame.adoc[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses link:spark-sql-RowEncoder.adoc[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 
-Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:spark-sql-SparkSession.adoc[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
+Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:SparkSession.md[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
 
 [NOTE]
 ====
@@ -338,7 +338,7 @@ Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the i
 
 * `RelationalGroupedDataset` is requested to <<spark-sql-RelationalGroupedDataset.adoc#toDF, create a DataFrame from aggregate expressions>>, `flatMapGroupsInR` and `flatMapGroupsInPandas`
 
-* `SparkSession` is requested to <<spark-sql-SparkSession.adoc#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<spark-sql-SparkSession.adoc#createDataFrame, createDataFrame>>, <<spark-sql-SparkSession.adoc#internalCreateDataFrame, internalCreateDataFrame>>, <<spark-sql-SparkSession.adoc#sql, sql>> and <<spark-sql-SparkSession.adoc#table, table>>
+* `SparkSession` is requested to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<SparkSession.md#createDataFrame, createDataFrame>>, <<SparkSession.md#internalCreateDataFrame, internalCreateDataFrame>>, <<SparkSession.md#sql, sql>> and <<SparkSession.md#table, table>>
 
 * `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
 
@@ -388,7 +388,7 @@ withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 
 In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished link:spark-sql-ExecutionListenerManager.adoc#onSuccess[successfully] or link:spark-sql-ExecutionListenerManager.adoc#onFailure[with an exception].
 
-NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:spark-sql-SparkSession.adoc#listenerManager[ExecutionListenerManager].
+NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:SparkSession.md#listenerManager[ExecutionListenerManager].
 
 [NOTE]
 ====

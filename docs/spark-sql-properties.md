@@ -2,7 +2,7 @@
 
 <<properties, Configuration properties>> (aka _settings_) allow you to fine-tune a Spark SQL application.
 
-You can set a configuration property in a link:spark-sql-SparkSession.adoc[SparkSession] while creating a new instance using link:spark-sql-SparkSession-Builder.adoc#config[config] method.
+You can set a configuration property in a link:SparkSession.md[SparkSession] while creating a new instance using link:spark-sql-SparkSession-Builder.adoc#config[config] method.
 
 [source, scala]
 ----

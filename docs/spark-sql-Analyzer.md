@@ -102,7 +102,7 @@ Enable `TRACE` or `DEBUG` logging levels for the respective session-specific log
 
 * `pass:[org.apache.spark.sql.internal.SessionState$$anon$1]`
 
-* `pass:[org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1]` when link:spark-sql-SparkSession.adoc#enableHiveSupport[Hive support is enabled]
+* `pass:[org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1]` when link:SparkSession.md#enableHiveSupport[Hive support is enabled]
 
 Add the following line to `conf/log4j.properties`:
 

@@ -38,7 +38,7 @@ updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 
 IMPORTANT: `updateTableStats` uses link:spark-sql-properties.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property to auto-update table statistics and can be expensive (and slow down data change commands) if the total number of files of a table is very large.
 
-NOTE: `updateTableStats` uses `SparkSession` to access the current link:spark-sql-SparkSession.adoc#sessionState[SessionState] that it then uses to access the session-scoped link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `updateTableStats` uses `SparkSession` to access the current link:SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
 
 NOTE: `updateTableStats` is used when link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
 

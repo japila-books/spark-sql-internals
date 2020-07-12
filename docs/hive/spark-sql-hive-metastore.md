@@ -8,7 +8,7 @@ By default, Spark SQL uses the embedded deployment mode of a Hive metastore with
 
 [IMPORTANT]
 ====
-The default embedded deployment mode is not recommended for production use due to limitation of only one active link:spark-sql-SparkSession.adoc[SparkSession] at a time.
+The default embedded deployment mode is not recommended for production use due to limitation of only one active link:SparkSession.md[SparkSession] at a time.
 
 Read Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document that explains the available deployment modes of a Hive metastore.
 ====

@@ -66,7 +66,7 @@ Used when `PartitioningAwareFileIndex` is requested for the <<partitionSchema, p
 
 `PartitioningAwareFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:spark-sql-SparkSession.adoc[SparkSession]
+* [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[parameters]] Options for partition discovery
 * [[userSpecifiedSchema]] Optional user-defined link:spark-sql-StructType.adoc[schema]
 * [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)

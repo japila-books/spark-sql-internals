@@ -669,7 +669,7 @@ nav:
     - Developing Applications:
       - spark-sql-fundamentals-spark-application-development.md
       - SparkSession:
-        - SparkSession: spark-sql-SparkSession.md
+        - SparkSession: SparkSession.md
         - spark-sql-SparkSession-Builder.md
         - spark-sql-SparkSession-implicits.md
         - spark-sql-SparkSessionExtensions.md

@@ -4,7 +4,7 @@ title: CacheManager
 
 `CacheManager` is an in-memory cache (_registry_) for structured queries (by their link:spark-sql-LogicalPlan.adoc[logical plans]).
 
-`CacheManager` is shared across `SparkSessions` through link:spark-sql-SparkSession.adoc#sharedState[SharedState].
+`CacheManager` is shared across `SparkSessions` through link:SparkSession.md#sharedState[SharedState].
 
 [source, scala]
 ----
