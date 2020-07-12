@@ -2,7 +2,7 @@
 
 `BaseSessionStateBuilder` is the <<contract, abstraction>> of <<implementations, builders>> that can <<newBuilder, produce a new BaseSessionStateBuilder>> to <<createClone, create a SessionState>>.
 
-NOTE: `BaseSessionStateBuilder` and link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property allow for Hive and non-Hive Spark deployments.
+NOTE: `BaseSessionStateBuilder` and spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property allow for Hive and non-Hive Spark deployments.
 
 [[contract]]
 .BaseSessionStateBuilder Contract (Abstract Methods Only)
@@ -19,13 +19,13 @@ a| [[newBuilder]]
 newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
 ----
 
-Produces a new `BaseSessionStateBuilder` for given link:spark-sql-SparkSession.adoc[SparkSession] and optional link:spark-sql-SessionState.adoc[SessionState]
+Produces a new `BaseSessionStateBuilder` for given spark-sql-SparkSession.md[SparkSession] and optional spark-sql-SessionState.md[SessionState]
 
 Used when `BaseSessionStateBuilder` is requested to <<createClone, create a SessionState>>
 
 |===
 
-`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#instantiateSessionState[SessionState].
+`BaseSessionStateBuilder` is <<creating-instance, created>> when `SparkSession` is requested for a spark-sql-SparkSession.md#instantiateSessionState[SessionState].
 
 [source, scala]
 ----
@@ -36,73 +36,79 @@ scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState
 ----
 
-`BaseSessionStateBuilder` holds <<properties, properties>> that (together with <<newBuilder, newBuilder>>) are used to create a link:spark-sql-SessionState.adoc[SessionState].
+`BaseSessionStateBuilder` holds <<properties, properties>> that (together with <<newBuilder, newBuilder>>) are used to create a spark-sql-SessionState.md[SessionState].
 
-[[properties]]
-.BaseSessionStateBuilder's Properties
-[cols="30m,70",options="header",width="100%"]
-|===
-| Name
-| Description
+## Properties
 
-| analyzer
-| [[analyzer]] <<spark-sql-Analyzer.adoc#, Logical analyzer>>
+### <span id="analyzer"> analyzer
 
-| conf
-| [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
+[Logical analyzer](spark-sql-Analyzer.md)
 
-| customOperatorOptimizationRules
-| [[customOperatorOptimizationRules]] Custom operator optimization rules to add to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, base Operator Optimization batch>>.
+### <span id="conf"> conf
 
-When requested for the custom rules, `customOperatorOptimizationRules` simply requests the <<extensions, SparkSessionExtensions>> to <<spark-sql-SparkSessionExtensions.adoc#buildOptimizerRules, buildOptimizerRules>>.
+[SQLConf](spark-sql-SQLConf.md)
 
-| experimentalMethods
-| [[experimentalMethods]] link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
+### <span id="customOperatorOptimizationRules"> customOperatorOptimizationRules
 
-| extensions
-| [[extensions]] link:spark-sql-SparkSessionExtensions.adoc[SparkSessionExtensions]
+Custom operator optimization rules to add to the [base Operator Optimization batch](spark-sql-Optimizer.md#extendedOperatorOptimizationRules).
 
-| functionRegistry
-| [[functionRegistry]] link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+When requested for the custom rules, `customOperatorOptimizationRules` simply requests the [SparkSessionExtensions](#extensions) to [buildOptimizerRules](spark-sql-SparkSessionExtensions.md#buildOptimizerRules).
 
-| listenerManager
-| [[listenerManager]] link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
+### <span id="experimentalMethods"> experimentalMethods
 
-| optimizer
-| [[optimizer]] <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> (that is downcast to the base <<spark-sql-Optimizer.adoc#, Optimizer>>) that is <<spark-sql-SparkOptimizer.adoc#creating-instance, created>> with the <<catalog, SessionCatalog>> and the <<experimentalMethods, ExperimentalMethods>>.
+[ExperimentalMethods](spark-sql-ExperimentalMethods.md)
 
-Note that the `SparkOptimizer` adds the <<customOperatorOptimizationRules, customOperatorOptimizationRules>> to the <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, operator optimization rules>>.
+### <span id="extensions"> extensions
 
-`optimizer` is used when `BaseSessionStateBuilder` is requested to <<build, create a SessionState>> (for the <<spark-sql-SessionState.adoc#optimizerBuilder, optimizerBuilder>> function to create an <<spark-sql-Optimizer.adoc#, Optimizer>> when requested for the <<spark-sql-SessionState.adoc#optimizer, Optimizer>>).
+[SparkSessionExtensions](spark-sql-SparkSessionExtensions.md)
 
-| planner
-| [[planner]] link:spark-sql-SparkPlanner.adoc[SparkPlanner]
+### <span id="functionRegistry"> functionRegistry
 
-| resourceLoader
-| [[resourceLoader]] `SessionResourceLoader`
+[FunctionRegistry](spark-sql-FunctionRegistry.md)
 
-| sqlParser
-| [[sqlParser]] link:spark-sql-ParserInterface.adoc[ParserInterface]
+### <span id="listenerManager"> listenerManager
 
-| streamingQueryManager
-| [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
+[ExecutionListenerManager](spark-sql-ExecutionListenerManager.md)
 
-| udfRegistration
-| [[udfRegistration]] link:spark-sql-UDFRegistration.adoc[UDFRegistration]
+### <span id="optimizer"> optimizer
 
-|===
+[SparkOptimizer](spark-sql-SparkOptimizer.md) (that is downcast to the base <<spark-sql-Optimizer.md#, Optimizer>>) that is <<spark-sql-SparkOptimizer.md#creating-instance, created>> with the <<catalog, SessionCatalog>> and the <<experimentalMethods, ExperimentalMethods>>.
 
-[[implementations]]
-.BaseSessionStateBuilders
+Note that the `SparkOptimizer` adds the <<customOperatorOptimizationRules, customOperatorOptimizationRules>> to the <<spark-sql-Optimizer.md#extendedOperatorOptimizationRules, operator optimization rules>>.
+
+`optimizer` is used when `BaseSessionStateBuilder` is requested to <<build, create a SessionState>> (for the <<spark-sql-SessionState.md#optimizerBuilder, optimizerBuilder>> function to create an <<spark-sql-Optimizer.md#, Optimizer>> when requested for the <<spark-sql-SessionState.md#optimizer, Optimizer>>).
+
+### <span id="planner"> planner
+
+[SparkPlanner](spark-sql-SparkPlanner.md)
+
+### <span id="resourceLoader"> resourceLoader
+
+`SessionResourceLoader`
+
+### <span id="sqlParser"> sqlParser
+
+[ParserInterface](sql/ParserInterface.md)
+
+### <span id="streamingQueryManager"> streamingQueryManager
+
+Spark Structured Streaming's `StreamingQueryManager`
+
+### <span id="udfRegistration"> udfRegistration
+
+[UDFRegistration](spark-sql-UDFRegistration.md)
+
+## Implementations
+
 [cols="30,70",options="header",width="100%"]
 |===
 | BaseSessionStateBuilder
 | Description
 
-| link:spark-sql-SessionStateBuilder.adoc[SessionStateBuilder]
+| spark-sql-SessionStateBuilder.md[SessionStateBuilder]
 | [[SessionStateBuilder]]
 
-| link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder]
+| hive/HiveSessionStateBuilder.md[HiveSessionStateBuilder]
 | [[HiveSessionStateBuilder]]
 
 |===
@@ -137,8 +143,8 @@ Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionStat
 
 `BaseSessionStateBuilder` takes the following to be created:
 
-* [[session]] link:spark-sql-SparkSession.adoc[SparkSession]
-* [[parentState]] Optional link:spark-sql-SessionState.adoc[SessionState]
+* [[session]] spark-sql-SparkSession.md[SparkSession]
+* [[parentState]] Optional spark-sql-SessionState.md[SessionState]
 
 === [[createClone]] Creating Clone of SessionState (Lazily) -- `createClone` Method
 
@@ -147,7 +153,7 @@ Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionStat
 createClone: (SparkSession, SessionState) => SessionState
 ----
 
-`createClone` creates a link:spark-sql-SessionState.adoc[SessionState] (lazily as a function) using <<newBuilder, newBuilder>> followed by <<build, build>>.
+`createClone` creates a spark-sql-SessionState.md[SessionState] (lazily as a function) using <<newBuilder, newBuilder>> followed by <<build, build>>.
 
 NOTE: `createClone` is used when `BaseSessionStateBuilder` is requested for a <<build, SessionState>>.
 
@@ -158,9 +164,9 @@ NOTE: `createClone` is used when `BaseSessionStateBuilder` is requested for a <<
 build(): SessionState
 ----
 
-`build` creates a link:spark-sql-SessionState.adoc[SessionState] with the following:
+`build` creates a spark-sql-SessionState.md[SessionState] with the following:
 
-* link:spark-sql-SparkSession.adoc#sharedState[SharedState] of the <<session, SparkSession>>
+* spark-sql-SparkSession.md#sharedState[SharedState] of the <<session, SparkSession>>
 * <<conf, SQLConf>>
 * <<experimentalMethods, ExperimentalMethods>>
 * <<functionRegistry, FunctionRegistry>>
@@ -180,7 +186,7 @@ build(): SessionState
 ====
 `build` is used when:
 
-* `SparkSession` is requested for a link:spark-sql-SparkSession.adoc#sessionState[SessionState] (that in turn link:spark-sql-SparkSession.adoc#instantiateSessionState[builds one using a class name] based on link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property)
+* `SparkSession` is requested for a spark-sql-SparkSession.md#sessionState[SessionState] (that in turn spark-sql-SparkSession.md#instantiateSessionState[builds one using a class name] based on spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property)
 
 * `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
 ====
@@ -192,6 +198,6 @@ build(): SessionState
 createQueryExecution: LogicalPlan => QueryExecution
 ----
 
-`createQueryExecution` simply returns a function that takes a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>> with the <<session, SparkSession>> and the logical plan.
+`createQueryExecution` simply returns a function that takes a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>> with the <<session, SparkSession>> and the logical plan.
 
 NOTE: `createQueryExecution` is used exclusively when `BaseSessionStateBuilder` is requested to <<build, create a SessionState instance>>.
