@@ -38,8 +38,8 @@ val spark = SparkSession.builder
 `SparkSession` takes the following to be created:
 
 * <span id="sparkContext"> `SparkContext`
-* <span id="existingSharedState"> Existing [SharedState](SharedState.md) (if available)
-* <span id="parentSessionState"> Parent [SessionState](SessionState.md) (if available)
+* <span id="existingSharedState"> Existing [SharedState](SharedState.md) (if given)
+* <span id="parentSessionState"> Parent [SessionState](SessionState.md) (if given)
 * <span id="extensions"> [SparkSessionExtensions](SparkSessionExtensions.md)
 
 `SparkSession` is created when:
@@ -66,12 +66,14 @@ Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<pare
 newSession(): SparkSession
 ```
 
-`newSession` creates (starts) a new `SparkSession` (with the current `SparkContext` and [SharedState](SharedState.md)).
+`newSession` creates a new `SparkSession` with an undefined parent [SessionState](#parentSessionState) and (re)using the following:
 
-```text
-scala> val newSession = spark.newSession
-newSession: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@122f58a
-```
+* [SparkContext](#sparkContext)
+* [SharedState](#sharedState)
+* [SparkSessionExtensions](#extensions)
+
+!!! note "SparkSession.newSession and SparkSession.cloneSession"
+    `SparkSession.newSession` uses no parent [SessionState](#parentSessionState) while [SparkSession.cloneSession](#cloneSession) (re)uses [SessionState](#sessionState).
 
 ## <span id="cloneSession"> Cloning SparkSession
 
@@ -80,9 +82,6 @@ cloneSession(): SparkSession
 ```
 
 `cloneSession`...FIXME
-
-!!! note "cloneSession VS newSession"
-    How is cloneSession different from newSession? What's shared?
 
 `cloneSession` is used when:
 
