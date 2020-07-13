@@ -79,6 +79,7 @@ nav:
       - SparkSession.Builder: SparkSession-Builder.md
       - SparkSessionExtensions: SparkSessionExtensions.md
       - spark-sql-SparkSession-implicits.md
+      - SharedState: SharedState.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
       - ParserInterface: sql/ParserInterface.md
@@ -180,7 +181,6 @@ nav:
         - SessionState: SessionState.md
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md
         - spark-sql-SessionStateBuilder.md
-      - SharedState.md
       - CacheManager:
         - spark-sql-CacheManager.md
         - spark-sql-CachedRDDBuilder.md
