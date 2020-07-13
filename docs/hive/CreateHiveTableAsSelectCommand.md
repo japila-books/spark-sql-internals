@@ -65,7 +65,7 @@ NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run
 
 In summary, `run` runs a link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical command.
 
-`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sessionState[SessionState] that is then requested for the link:../spark-sql-SessionState.adoc#catalog[SessionCatalog].
+`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sessionState[SessionState] that is then requested for the link:../SessionState.md#catalog[SessionCatalog].
 
 `run` requests the `SessionCatalog` to link:../spark-sql-SessionCatalog.adoc#tableExists[check out whether the table exists or not].
 

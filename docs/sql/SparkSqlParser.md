@@ -10,7 +10,7 @@
 
 * `table` methods in [DataFrameReader](../DataFrameReader.md#table) and [SparkSession](../SparkSession.md#table)
 * [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
-* `createExternalTable` and `refreshTable` methods of [Catalog](../spark-sql-Catalog.md) (and [SessionState](../spark-sql-SessionState.md#refreshTable))
+* `createExternalTable` and `refreshTable` methods of [Catalog](../spark-sql-Catalog.md) (and [SessionState](../SessionState.md#refreshTable))
 
 ## Creating Instance
 
@@ -30,7 +30,7 @@
 
 ## Accessing SparkSqlParser
 
-`SparkSqlParser` is available as [SessionState.sqlParser](../spark-sql-SessionState.md#sqlParser) (unless...FIXME(note)).
+`SparkSqlParser` is available as [SessionState.sqlParser](../SessionState.md#sqlParser) (unless...FIXME(note)).
 
 ```scala
 import org.apache.spark.sql.SparkSession

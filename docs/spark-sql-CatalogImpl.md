@@ -136,7 +136,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]). It creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and then link:spark-sql-SessionState.adoc#executePlan[executes] (by link:spark-sql-QueryExecution.adoc#toRdd[toRDD]) a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical plan. The result link:spark-sql-DataFrame.adoc[DataFrame] is a `Dataset[Row]` with the link:spark-sql-QueryExecution.adoc[QueryExecution] after executing link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias] logical plan and link:spark-sql-RowEncoder.adoc[RowEncoder].
+`createExternalTable` parses `tableName` into `TableIdentifier` (using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser]). It creates a link:spark-sql-CatalogTable.adoc[CatalogTable] and then link:SessionState.md#executePlan[executes] (by link:spark-sql-QueryExecution.adoc#toRdd[toRDD]) a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical plan. The result link:spark-sql-DataFrame.adoc[DataFrame] is a `Dataset[Row]` with the link:spark-sql-QueryExecution.adoc[QueryExecution] after executing link:spark-sql-LogicalPlan-SubqueryAlias.adoc[SubqueryAlias] logical plan and link:spark-sql-RowEncoder.adoc[RowEncoder].
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
@@ -182,7 +182,7 @@ makeTable(tableIdent: TableIdentifier): Table
 
 `makeTable` creates a `Table` using the input `TableIdentifier` and the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata] (from the current link:spark-sql-SessionCatalog.adoc[SessionCatalog]) if available.
 
-NOTE: `makeTable` uses <<sparkSession, SparkSession>> to access link:spark-sql-SessionState.adoc#sessionState[SessionState] that is then used to access link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `makeTable` uses <<sparkSession, SparkSession>> to access link:SessionState.md#sessionState[SessionState] that is then used to access link:SessionState.md#catalog[SessionCatalog].
 
 NOTE: `makeTable` is used when `CatalogImpl` is requested to <<listTables, listTables>> or <<getTable, getTable>>.
 
@@ -197,7 +197,7 @@ makeDataset[T <: DefinedByConstructorParams](
 
 `makeDataset` creates an link:spark-sql-ExpressionEncoder.adoc#apply[ExpressionEncoder] (from link:spark-sql-ExpressionEncoder.adoc#DefinedByConstructorParams[DefinedByConstructorParams]) and link:spark-sql-ExpressionEncoder.adoc#toRow[encodes] elements of the input `data` to <<spark-sql-InternalRow.adoc#, internal binary rows>>.
 
-`makeDataset` then creates a link:spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the plan] and link:spark-sql-Dataset.adoc#creating-instance[creates] the result `Dataset`.
+`makeDataset` then creates a link:spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to link:SessionState.md#executePlan[execute the plan] and link:spark-sql-Dataset.adoc#creating-instance[creates] the result `Dataset`.
 
 NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, list databases>>, <<listTables, tables>>, <<listFunctions, functions>> and <<listColumns, columns>>
 
@@ -210,7 +210,7 @@ refreshTable(tableName: String): Unit
 
 NOTE: `refreshTable` is part of link:spark-sql-Catalog.adoc#refreshTable[Catalog Contract] to...FIXME.
 
-`refreshTable` requests `SessionState` for the link:spark-sql-SessionState.adoc#sqlParser[SQL parser] to link:spark-sql-ParserInterface.adoc#parseTableIdentifier[parse a TableIdentifier given the table name].
+`refreshTable` requests `SessionState` for the link:SessionState.md#sqlParser[SQL parser] to link:spark-sql-ParserInterface.adoc#parseTableIdentifier[parse a TableIdentifier given the table name].
 
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:SparkSession.md#sessionState[SessionState].
 
@@ -224,7 +224,7 @@ For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatal
 
 If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to link:spark-sql-CacheManager.adoc#uncacheQuery[uncache] and link:spark-sql-CacheManager.adoc#cacheQuery[cache] the table `DataFrame` again.
 
-NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:SparkSession.md#sharedState[SharedState] that is used to access link:spark-sql-SharedState.adoc#cacheManager[CacheManager].
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the link:SparkSession.md#sharedState[SharedState] that is used to access link:SharedState.md#cacheManager[CacheManager].
 
 === [[refreshByPath]] `refreshByPath` Method
 

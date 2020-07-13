@@ -27,7 +27,7 @@ a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.adoc#, SparkStrat
 extraStrategies: Seq[Strategy]
 ----
 
-Used when `SessionState` is requested for the link:spark-sql-SessionState.adoc#planner[SparkPlanner]
+Used when `SessionState` is requested for the link:SessionState.md#planner[SparkPlanner]
 |===
 
 `ExperimentalMethods` is available as the <<SparkSession.md#experimental, experimental>> property of a `SparkSession`.

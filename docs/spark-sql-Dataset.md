@@ -121,7 +121,7 @@ It is only with Datasets to have syntax and analysis checks at compile time (tha
 
 Using `Dataset` objects turns `DataFrames` of link:spark-sql-Row.adoc[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
-If however a link:spark-sql-LogicalPlan.adoc[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first link:spark-sql-SessionState.adoc#executePlan[executed] (using the current link:spark-sql-SessionState.adoc#executePlan[SessionState] in the `SparkSession`) that yields the link:spark-sql-QueryExecution.adoc[QueryExecution] plan.
+If however a link:spark-sql-LogicalPlan.adoc[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first link:SessionState.md#executePlan[executed] (using the current link:SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the link:spark-sql-QueryExecution.adoc[QueryExecution] plan.
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
@@ -218,7 +218,7 @@ res2: String =
  |  ParallelCollectionRDD[9] at toRdd at <console>:26 []
 ----
 
-`rdd` then requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the logical plan] to get the corresponding link:spark-sql-QueryExecution.adoc#toRdd[RDD of binary rows].
+`rdd` then requests `SessionState` to link:SessionState.md#executePlan[execute the logical plan] to get the corresponding link:spark-sql-QueryExecution.adoc#toRdd[RDD of binary rows].
 
 NOTE: `rdd` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access `SessionState`].
 
@@ -270,7 +270,7 @@ CAUTION: FIXME
 * [[queryExecution]] link:spark-sql-QueryExecution.adoc[QueryExecution]
 * [[encoder]] link:spark-sql-Encoder.adoc[Encoder] for the type `T` of the records
 
-NOTE: You can also create a `Dataset` using link:spark-sql-LogicalPlan.adoc[LogicalPlan] that is immediately link:spark-sql-SessionState.adoc#executePlan[executed using `SessionState`].
+NOTE: You can also create a `Dataset` using link:spark-sql-LogicalPlan.adoc[LogicalPlan] that is immediately link:SessionState.md#executePlan[executed using `SessionState`].
 
 Internally, `Dataset` requests <<queryExecution, QueryExecution>> to link:spark-sql-QueryExecution.adoc#assertAnalyzed[analyze itself].
 
@@ -326,7 +326,7 @@ NOTE: `ofRows` is part of `Dataset` Scala object that is marked as a `private[sq
 
 `ofRows` returns link:spark-sql-DataFrame.adoc[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses link:spark-sql-RowEncoder.adoc[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 
-Internally, `ofRows` link:spark-sql-SessionState.adoc#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:SparkSession.md[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
+Internally, `ofRows` link:SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:SparkSession.md[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
 
 [NOTE]
 ====

@@ -138,7 +138,7 @@ Internally, `cacheQuery` requests the `Dataset` for the link:spark-sql-Dataset.a
 
 * Input `storageLevel` storage level (default: `MEMORY_AND_DISK`)
 
-* link:spark-sql-QueryExecution.adoc#executedPlan[Optimized physical query plan] (after requesting `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute] the analyzed logical plan)
+* link:spark-sql-QueryExecution.adoc#executedPlan[Optimized physical query plan] (after requesting `SessionState` to link:SessionState.md#executePlan[execute] the analyzed logical plan)
 
 * Input `tableName`
 

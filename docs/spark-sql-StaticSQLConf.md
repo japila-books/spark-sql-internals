@@ -20,7 +20,7 @@ Used when:
 
 * `SparkSession` utility is requested for the link:SparkSession.md#sessionStateClassName[name of the BaseSessionStateBuilder implementation] (when `SparkSession` is requested for a link:SparkSession.md#sessionState[SessionState])
 
-* `SharedState` utility is requested for the link:spark-sql-SharedState.adoc#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an link:spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog])
+* `SharedState` utility is requested for the link:SharedState.md#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an link:SharedState.md#externalCatalog[ExternalCatalog])
 
 * `SparkSession.Builder` is requested to link:SparkSession-Builder.md#enableHiveSupport[enable Hive support]
 
@@ -54,9 +54,9 @@ Default: `1000`
 
 Default: `global_temp`
 
-Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<spark-sql-SharedState.adoc#globalTempViewManager, GlobalTempViewManager>>.
+Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<SharedState.md#globalTempViewManager, GlobalTempViewManager>>.
 
-NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<spark-sql-SharedState.adoc#externalCatalog, ExternalCatalog>>.
+NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<SharedState.md#externalCatalog, ExternalCatalog>>.
 
 | [[spark.sql.hive.thriftServer.singleSession]][[HIVE_THRIFT_SERVER_SINGLESESSION]] *spark.sql.hive.thriftServer.singleSession*
 

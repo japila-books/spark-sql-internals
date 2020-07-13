@@ -30,9 +30,9 @@ run(
 
 NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
 
-`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sharedState[SharedState] that is then requested for the link:../spark-sql-SharedState.adoc#externalCatalog[ExternalCatalog].
+`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sharedState[SharedState] that is then requested for the link:../SharedState.md#externalCatalog[ExternalCatalog].
 
-`run` requests the link:../spark-sql-SessionState.adoc[SessionState] for a new link:../spark-sql-SessionState.adoc#newHadoopConf[Hadoop Configuration].
+`run` requests the link:../SessionState.md[SessionState] for a new link:../SessionState.md#newHadoopConf[Hadoop Configuration].
 
 `run` link:HiveClientImpl.adoc#toHiveTable[converts the CatalogTable metadata to Hive's].
 
@@ -42,7 +42,7 @@ NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run
 
 `run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#catalog[Catalog] that is requested to link:../spark-sql-Catalog.adoc#uncacheTable[uncache the table].
 
-`run` un-caches the Hive table. `run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the link:../spark-sql-SessionState.adoc#catalog[SessionCatalog] that is requested to link:../spark-sql-SessionCatalog.adoc#refreshTable[invalidate the cache for the table].
+`run` un-caches the Hive table. `run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the link:../SessionState.md#catalog[SessionCatalog] that is requested to link:../spark-sql-SessionCatalog.adoc#refreshTable[invalidate the cache for the table].
 
 In the end, `run` link:../spark-sql-CommandUtils.adoc#updateTableStats[update the table statistics].
 

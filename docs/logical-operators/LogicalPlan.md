@@ -18,7 +18,7 @@ scala> :type plan
 org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 ----
 
-`LogicalPlan` goes through <<spark-sql-QueryExecution.adoc#execution-pipeline, execution stages>> (as a <<spark-sql-QueryExecution.adoc#, QueryExecution>>). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to <<spark-sql-SessionState.adoc#executePlan, "execute" the plan>>.
+`LogicalPlan` goes through <<spark-sql-QueryExecution.adoc#execution-pipeline, execution stages>> (as a <<spark-sql-QueryExecution.adoc#, QueryExecution>>). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to <<SessionState.md#executePlan, "execute" the plan>>.
 
 [source, scala]
 ----
@@ -37,7 +37,7 @@ org.apache.spark.sql.execution.QueryExecution
 [[logical-plan-to-be-analyzed-idiom]]
 [NOTE]
 ====
-A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
 
 [source, scala]
 ----
@@ -55,7 +55,7 @@ val analyzedPlan = qe.analyzed
 [[converting-logical-plan-to-dataset]]
 [NOTE]
 ====
-Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use <<spark-sql-Dataset.adoc#ofRows, Dataset.ofRows>> internal method that <<spark-sql-SessionState.adoc#executePlan, "executes">> the logical plan followed by creating a <<spark-sql-Dataset.adoc#creating-instance, Dataset>> with the <<spark-sql-QueryExecution.adoc#, QueryExecution>> and a <<spark-sql-RowEncoder.adoc#, RowEncoder>>.
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use <<spark-sql-Dataset.adoc#ofRows, Dataset.ofRows>> internal method that <<SessionState.md#executePlan, "executes">> the logical plan followed by creating a <<spark-sql-Dataset.adoc#creating-instance, Dataset>> with the <<spark-sql-QueryExecution.adoc#, QueryExecution>> and a <<spark-sql-RowEncoder.adoc#, RowEncoder>>.
 ====
 
 [[childrenResolved]]

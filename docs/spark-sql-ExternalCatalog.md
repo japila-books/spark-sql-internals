@@ -411,7 +411,7 @@ tableExists(db: String, table: String): Boolean
 ----
 |===
 
-`ExternalCatalog` is available as link:spark-sql-SharedState.adoc#externalCatalog[externalCatalog] of link:SparkSession.md#sharedState[SharedState] (in `SparkSession`).
+`ExternalCatalog` is available as link:SharedState.md#externalCatalog[externalCatalog] of link:SparkSession.md#sharedState[SharedState] (in `SparkSession`).
 
 [source, scala]
 ----

@@ -190,7 +190,7 @@ scala> ds.filter(filterExpr).show
 +---+-----+
 ----
 
-Internally, `expr` uses the active session's link:spark-sql-SessionState.adoc[sqlParser] or creates a new  link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] to call link:spark-sql-ParserInterface.adoc#parseExpression[parseExpression] method.
+Internally, `expr` uses the active session's link:SessionState.md[sqlParser] or creates a new  link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] to call link:spark-sql-ParserInterface.adoc#parseExpression[parseExpression] method.
 
 === [[lit]] `lit` Function
 

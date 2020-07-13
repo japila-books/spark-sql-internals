@@ -78,7 +78,7 @@ NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run
 
 `run` specifies `serialization.lib` metadata to the link:../spark-sql-CatalogStorageFormat.adoc#serde[serde] of the given <<storage, CatalogStorageFormat>> or `LazySimpleSerDe` if not defined.
 
-`run` creates a new map-reduce job for execution (a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/mapred/JobConf.html[JobConf]) with a link:../spark-sql-SessionState.adoc#newHadoopConf[new Hadoop Configuration] (from the input link:../SparkSession.md[SparkSession]).
+`run` creates a new map-reduce job for execution (a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/mapred/JobConf.html[JobConf]) with a link:../SessionState.md#newHadoopConf[new Hadoop Configuration] (from the input link:../SparkSession.md[SparkSession]).
 
 `run` prepares the path to write to (based on the given <<isLocal, isLocal>> flag and creating it if necessary). `run` link:SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath].
 

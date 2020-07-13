@@ -152,7 +152,7 @@ Marks the `Dataset` to be <<spark-sql-caching-and-persistence.adoc#, persisted>>
 
 Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.adoc#cacheQuery, cache the structured query>>.
 
-NOTE: `persist` uses the <<spark-sql-SharedState.adoc#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
+NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|
@@ -302,7 +302,7 @@ explain(extended: Boolean): Unit
 
 TIP: Use `explain` to review the structured queries and optimizations applied.
 
-Internally, `explain` creates a link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command and requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute it] (to get a link:spark-sql-QueryExecution.adoc[QueryExecution] back).
+Internally, `explain` creates a link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command and requests `SessionState` to link:SessionState.md#executePlan[execute it] (to get a link:spark-sql-QueryExecution.adoc[QueryExecution] back).
 
 NOTE: `explain` uses link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command that, when link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed], gives different text representations of link:spark-sql-QueryExecution.adoc[QueryExecution] (for the Dataset's link:spark-sql-LogicalPlan.adoc[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 

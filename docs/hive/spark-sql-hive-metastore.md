@@ -105,7 +105,7 @@ link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.di
 
 [TIP]
 ====
-Refer to link:spark-sql-SharedState.adoc[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
+Refer to link:SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
 
 See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 ====
@@ -122,7 +122,7 @@ In order to use an external Hive metastore you should do the following:
 
 . Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
-. Check out link:spark-sql-SharedState.adoc#warehousePath[warehousePath]
+. Check out link:SharedState.md#warehousePath[warehousePath]
 
 . Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
@@ -152,7 +152,7 @@ config("hive.metastore.uris", "thrift://192.168.175.160:9083")
 ```
 
 | [[hive.metastore.warehouse.dir]] `hive.metastore.warehouse.dir`
-a| `SharedState` uses link:spark-sql-SharedState.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+a| `SharedState` uses link:SharedState.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
 
 CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.warehouse.dir`? `SharedState.warehousePath`? Review https://github.com/apache/spark/pull/16996/files
 
@@ -183,7 +183,7 @@ res1: org.apache.spark.sql.internal.SharedState = org.apache.spark.sql.internal.
 
 `hive-site.xml` configures Hive clients (e.g. Spark SQL) with the Hive Metastore configuration.
 
-`hive-site.xml` is loaded when link:spark-sql-SharedState.adoc#warehousePath[SharedState] is created (which is...FIXME).
+`hive-site.xml` is loaded when link:SharedState.md#warehousePath[SharedState] is created (which is...FIXME).
 
 Configuration of Hive is done by placing your `hive-site.xml`, `core-site.xml` (for security configuration),
 and `hdfs-site.xml` (for HDFS configuration) file in `conf/` (that is automatically added to the CLASSPATH of a Spark application).

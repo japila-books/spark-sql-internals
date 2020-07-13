@@ -4,7 +4,7 @@
 
 ## Accessing ParserInterface
 
-`ParserInterface` is available as [SessionState.sqlParser](../spark-sql-SessionState.md#sqlParser).
+`ParserInterface` is available as [SessionState.sqlParser](../SessionState.md#sqlParser).
 
 ```
 scala> :type spark
@@ -137,7 +137,7 @@ Used when:
 
 * `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listColumns, listColumns>>, <<spark-sql-CatalogImpl.adoc#getTable, getTable>>, <<spark-sql-CatalogImpl.adoc#tableExists, tableExists>>, <<spark-sql-CatalogImpl.adoc#createTable, createTable>>, <<spark-sql-CatalogImpl.adoc#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.adoc#uncacheTable, uncacheTable>>, and <<spark-sql-CatalogImpl.adoc#refreshTable, refreshTable>>
 
-* `SessionState` is requested to <<spark-sql-SessionState.adoc#refreshTable, refreshTable>>
+* `SessionState` is requested to <<SessionState.md#refreshTable, refreshTable>>
 
 ### parseTableSchema
 

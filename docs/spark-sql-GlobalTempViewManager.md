@@ -6,7 +6,7 @@ title: GlobalTempViewManager
 
 Strictly speaking, `GlobalTempViewManager` simply <<viewDefinitions, manages>> the names of the global temporary views registered (and the corresponding <<spark-sql-LogicalPlan.adoc#, logical plans>>) and has no interaction with other services in Spark SQL.
 
-`GlobalTempViewManager` is available as link:spark-sql-SharedState.adoc#globalTempViewManager[globalTempViewManager] property of a `SharedState`.
+`GlobalTempViewManager` is available as link:SharedState.md#globalTempViewManager[globalTempViewManager] property of a `SharedState`.
 
 .GlobalTempViewManager and SparkSession
 image::images/spark-sql-GlobalTempViewManager.png[align="center"]
@@ -96,7 +96,7 @@ update(name: String, viewDefinition: LogicalPlan): Boolean
 ----
 |===
 
-`GlobalTempViewManager` is <<creating-instance, created>> exclusively when `SharedState` is requested for <<spark-sql-SharedState.adoc#globalTempViewManager, one>> (for the very first time only as it is cached).
+`GlobalTempViewManager` is <<creating-instance, created>> exclusively when `SharedState` is requested for <<SharedState.md#globalTempViewManager, one>> (for the very first time only as it is cached).
 
 [[database]]
 [[creating-instance]]

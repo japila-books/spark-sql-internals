@@ -6,7 +6,7 @@
 
 `ExtractWindowExpressions` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-NOTE: `ExtractWindowExpressions` is a Scala object inside <<spark-sql-Analyzer.adoc#, Analyzer>> class (so you have to create an instance of the `Analyzer` class to access it or simply use <<spark-sql-SessionState.adoc#analyzer, SessionState>>).
+NOTE: `ExtractWindowExpressions` is a Scala object inside <<spark-sql-Analyzer.adoc#, Analyzer>> class (so you have to create an instance of the `Analyzer` class to access it or simply use <<SessionState.md#analyzer, SessionState>>).
 
 [source, scala]
 ----

@@ -22,7 +22,7 @@ SessionCatalog takes the following to be created:
 
 ## Accessing SessionCatalog
 
-`SessionCatalog` is available through [SessionState](spark-sql-SessionState.md#catalog) (of a [SparkSession](SparkSession.md#sessionState)).
+`SessionCatalog` is available through [SessionState](SessionState.md#catalog) (of a [SparkSession](SparkSession.md#sessionState)).
 
 ```
 scala> :type spark

@@ -17,7 +17,7 @@ spark.udf
 [[creating-instance]]
 `UDFRegistration` takes a <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>> when created.
 
-`UDFRegistration` is <<creating-instance, created>> exclusively for link:spark-sql-SessionState.adoc#creating-instance[SessionState].
+`UDFRegistration` is <<creating-instance, created>> exclusively for link:SessionState.md#creating-instance[SessionState].
 
 === [[register]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
 

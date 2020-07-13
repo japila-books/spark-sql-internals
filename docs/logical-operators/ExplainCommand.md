@@ -84,7 +84,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
 
-Internally, `run` creates a `IncrementalExecution` for a streaming dataset directly or requests `SessionState` to link:spark-sql-SessionState.adoc#executePlan[execute the `LogicalPlan`].
+Internally, `run` creates a `IncrementalExecution` for a streaming dataset directly or requests `SessionState` to link:SessionState.md#executePlan[execute the `LogicalPlan`].
 
 NOTE: *Streaming Dataset* is part of Spark Structured Streaming.
 

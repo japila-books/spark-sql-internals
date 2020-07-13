@@ -13,7 +13,7 @@ scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState
 ```
 
-`BaseSessionStateBuilder` holds [properties](#properties) that (together with [newBuilder](#newBuilder)) are used to create a [SessionState](spark-sql-SessionState.md).
+`BaseSessionStateBuilder` holds [properties](#properties) that (together with [newBuilder](#newBuilder)) are used to create a [SessionState](SessionState.md).
 
 ## Contract
 
@@ -23,7 +23,7 @@ org.apache.spark.sql.internal.SessionState
 newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
 ```
 
-Produces a new `BaseSessionStateBuilder` for given SparkSession.md[SparkSession] and optional spark-sql-SessionState.md[SessionState]
+Produces a new `BaseSessionStateBuilder` for given SparkSession.md[SparkSession] and optional SessionState.md[SessionState]
 
 Used when `BaseSessionStateBuilder` is requested to <<createClone, create a SessionState>>
 
@@ -37,7 +37,7 @@ Used when `BaseSessionStateBuilder` is requested to <<createClone, create a Sess
 `BaseSessionStateBuilder` takes the following to be created:
 
 * <span id="session"> [SparkSession](SparkSession.md)
-* <span id="parentState"> Optional parent [SessionState](spark-sql-SessionState.md) (default: undefined)
+* <span id="parentState"> Optional parent [SessionState](SessionState.md) (default: undefined)
 
 `BaseSessionStateBuilder` is created when `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState).
 
@@ -147,7 +147,7 @@ The `SparkOptimizer` uses the following extension methods:
 * [customEarlyScanPushDownRules](#customEarlyScanPushDownRules) for [earlyScanPushDownRules](spark-sql-SparkOptimizer.md#earlyScanPushDownRules)
 * [customOperatorOptimizationRules](#customOperatorOptimizationRules) for [extendedOperatorOptimizationRules](spark-sql-SparkOptimizer.md#extendedOperatorOptimizationRules)
 
-`optimizer` is used when `BaseSessionStateBuilder` is requested to [build a SessionState](#build) (as the [optimizerBuilder](spark-sql-SessionState.md#optimizerBuilder) function to [build a logical query plan optimizer](spark-sql-SessionState.md#optimizer) on demand).
+`optimizer` is used when `BaseSessionStateBuilder` is requested to [build a SessionState](#build) (as the [optimizerBuilder](SessionState.md#optimizerBuilder) function to [build a logical query plan optimizer](SessionState.md#optimizer) on demand).
 
 ## <span id="planner"> SparkPlanner
 
@@ -179,7 +179,7 @@ udfRegistration: UDFRegistration
 createClone: (SparkSession, SessionState) => SessionState
 ```
 
-`createClone` creates a [SessionState](spark-sql-SessionState.md) using [newBuilder](#newBuilder) followed by [build](#build).
+`createClone` creates a [SessionState](SessionState.md) using [newBuilder](#newBuilder) followed by [build](#build).
 
 `createClone` is used when `BaseSessionStateBuilder` is requested for a [SessionState](#build).
 
@@ -189,7 +189,7 @@ createClone: (SparkSession, SessionState) => SessionState
 build(): SessionState
 ```
 
-`build` creates a [SessionState](spark-sql-SessionState.md) with the following:
+`build` creates a [SessionState](SessionState.md) with the following:
 
 * SparkSession.md#sharedState[SharedState] of the <<session, SparkSession>>
 * <<conf, SQLConf>>

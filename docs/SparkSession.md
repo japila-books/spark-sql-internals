@@ -1,8 +1,8 @@
 # SparkSession &mdash; The Entry Point to Spark SQL
 
-`SparkSession` is the entry point to Spark SQL. It is one of the very first objects created in a Spark SQL application.
+`SparkSession` is the entry point to Spark SQL. It is one of the first objects created in a Spark SQL application.
 
-`SparkSession` is [created](#creating-instance) using the [SparkSession.builder](#builder) method (that gives access to [Builder API](SparkSession-Builder.md) to configure the `SparkSession`).
+`SparkSession` is [created](#creating-instance) using the [SparkSession.builder](#builder) method.
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -22,6 +22,8 @@ val spark = SparkSession.builder
   .getOrCreate
 ```
 
+`SparkSession` is a namespace of relational entities (e.g. databases, tables). A Spark SQL application could use many `SparkSessions` to keep the relational entities separate logically in [metadata catalogs](#catalog).
+
 !!! note "SparkSession in spark-shell"
     `spark` object in `spark-shell` (the instance of `SparkSession` that is auto-created) has Hive support enabled.
 
@@ -31,28 +33,13 @@ val spark = SparkSession.builder
     $ spark-shell --conf spark.sql.catalogImplementation=in-memory
     ```
 
-There could be many `SparkSessions` in a single Spark application. The common use case is to keep relational entities separate logically in [catalogs](#catalog) per `SparkSession`.
-
-## <span id="sessionState" /> SessionState
-
-```scala
-sessionState: SessionState
-```
-
-`sessionState` is the current [SessionState](spark-sql-SessionState.md).
-
-Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
-
-* *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
-* *hive* for link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
-
 ## Creating Instance
 
 `SparkSession` takes the following to be created:
 
 * <span id="sparkContext"> `SparkContext`
-* <span id="existingSharedState"> Optional existing [SharedState](spark-sql-SharedState.md)
-* <span id="parentSessionState"> Optional parent [SessionState](spark-sql-SessionState.md)
+* <span id="existingSharedState"> Existing [SharedState](SharedState.md) (if available)
+* <span id="parentSessionState"> Parent [SessionState](SessionState.md) (if available)
 * <span id="extensions"> [SparkSessionExtensions](SparkSessionExtensions.md)
 
 `SparkSession` is created when:
@@ -60,13 +47,26 @@ Internally, `sessionState` <<spark-sql-SessionState.adoc#clone, clones>> the opt
 * `SparkSession.Builder` is requested to [getOrCreate](SparkSession-Builder.md#getOrCreate)
 * Indirectly using [newSession](#newSession) or [cloneSession](#cloneSession)
 
+## <span id="sessionState" /> SessionState
+
+```scala
+sessionState: SessionState
+```
+
+`sessionState` is the current [SessionState](SessionState.md).
+
+Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
+
+* *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
+* *hive* for link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
+
 ## <span id="newSession"> Creating New SparkSession
 
 ```scala
 newSession(): SparkSession
 ```
 
-`newSession` creates (starts) a new `SparkSession` (with the current `SparkContext` and [SharedState](spark-sql-SharedState.md)).
+`newSession` creates (starts) a new `SparkSession` (with the current `SparkContext` and [SharedState](SharedState.md)).
 
 ```text
 scala> val newSession = spark.newSession
@@ -237,9 +237,9 @@ scala> sql("SHOW TABLES").show
 +---------+-----------+
 ```
 
-Internally, `sql` requests the link:spark-sql-SessionState.adoc#sqlParser[current `ParserInterface`] to link:spark-sql-ParserInterface.adoc#parsePlan[execute a SQL query] that gives a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
+Internally, `sql` requests the link:SessionState.md#sqlParser[current `ParserInterface`] to link:spark-sql-ParserInterface.adoc#parsePlan[execute a SQL query] that gives a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
 
-NOTE: `sql` uses `SessionState` link:spark-sql-SessionState.adoc#sqlParser[to access the current `ParserInterface`].
+NOTE: `sql` uses `SessionState` link:SessionState.md#sqlParser[to access the current `ParserInterface`].
 
 `sql` then creates a [DataFrame](spark-sql-DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
 
@@ -277,7 +277,7 @@ scala> sql("SELECT *, myUpper(value) UPPER FROM strs").show
 +-----+-----+
 ```
 
-Internally, it is simply an alias for [SessionState.udfRegistration](spark-sql-SessionState.md#udfRegistration).
+Internally, it is simply an alias for [SessionState.udfRegistration](SessionState.md#udfRegistration).
 
 ## <span id="table"> Loading Data From Table
 
@@ -345,7 +345,7 @@ conf: RuntimeConfig
 
 `conf` returns the current [RuntimeConfig](spark-sql-RuntimeConfig.md).
 
-Internally, `conf` creates a <<spark-sql-RuntimeConfig.adoc#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<spark-sql-SessionState.adoc#conf, SQLConf>> of the <<sessionState, SessionState>>.
+Internally, `conf` creates a <<spark-sql-RuntimeConfig.adoc#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<SessionState.md#conf, SQLConf>> of the <<sessionState, SessionState>>.
 
 ## <span id="experimentalMethods"> ExperimentalMethods
 
@@ -397,7 +397,7 @@ sessionStateClassName(
   conf: SparkConf): String
 ```
 
-`sessionStateClassName` gives the name of the class of the [SessionState](spark-sql-SessionState.md) per [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation), i.e.
+`sessionStateClassName` gives the name of the class of the [SessionState](SessionState.md) per [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation), i.e.
 
 * [org.apache.spark.sql.hive.HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) for `hive`
 * [org.apache.spark.sql.internal.SessionStateBuilder](spark-sql-SessionStateBuilder.md) for `in-memory`
@@ -437,7 +437,7 @@ listenerManager: ExecutionListenerManager
 sharedState: SharedState
 ```
 
-`sharedState` is the [SharedState](spark-sql-SharedState.md)
+`sharedState` is the [SharedState](SharedState.md)
 
 ## <span id="time"> Measuring Duration of Executing Code Block
 

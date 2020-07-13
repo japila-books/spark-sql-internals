@@ -12,12 +12,12 @@ title: SparkOptimizer
 
 . <<User-Provided-Optimizers, User Provided Optimizers>> (as <<spark-sql-ExperimentalMethods.adoc#extraOptimizations, extraOptimizations>> of the <<experimentalMethods, ExperimentalMethods>>)
 
-`SparkOptimizer` is <<creating-instance, created>> when `SessionState` is requested for the <<spark-sql-SessionState.adoc#optimizer, Logical Optimizer>> the first time (through <<BaseSessionStateBuilder.md#optimizer, BaseSessionStateBuilder>>).
+`SparkOptimizer` is <<creating-instance, created>> when `SessionState` is requested for the <<SessionState.md#optimizer, Logical Optimizer>> the first time (through <<BaseSessionStateBuilder.md#optimizer, BaseSessionStateBuilder>>).
 
 .Creating SparkOptimizer
 image::images/spark-sql-SparkOptimizer.png[align="center"]
 
-`SparkOptimizer` is available as the <<spark-sql-SessionState.adoc#optimizer, optimizer>> property of a session-specific `SessionState`.
+`SparkOptimizer` is available as the <<SessionState.md#optimizer, optimizer>> property of a session-specific `SessionState`.
 
 [source, scala]
 ----

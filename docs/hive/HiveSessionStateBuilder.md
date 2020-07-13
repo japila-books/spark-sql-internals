@@ -1,6 +1,6 @@
 # HiveSessionStateBuilder
 
-`HiveSessionStateBuilder` is a concrete link:../BaseSessionStateBuilder.md[builder] to produce a Hive-aware link:../spark-sql-SessionState.adoc[SessionState] for...FIXME
+`HiveSessionStateBuilder` is a concrete link:../BaseSessionStateBuilder.md[builder] to produce a Hive-aware link:../SessionState.md[SessionState] for...FIXME
 
 `HiveSessionStateBuilder` comes with Hive-specific <<analyzer, Analyzer>>, <<planner, SparkPlanner>>, <<catalog, HiveSessionCatalog>>, <<externalCatalog, HiveExternalCatalog>> and <<resourceLoader, HiveSessionResourceLoader>>.
 
@@ -26,11 +26,11 @@ a| [[analyzer]] Hive-specific link:../spark-sql-Analyzer.adoc[logical query plan
 a| [[catalog]] link:HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
 
 * <<externalCatalog, HiveExternalCatalog>>
-* link:../spark-sql-SharedState.adoc#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
+* link:../SharedState.md#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
 * New link:HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * link:../BaseSessionStateBuilder.md#functionRegistry[FunctionRegistry]
 * link:../BaseSessionStateBuilder.md#conf[SQLConf]
-* New Hadoop link:../spark-sql-SessionState.adoc#newHadoopConf[Configuration]
+* New Hadoop link:../SessionState.md#newHadoopConf[Configuration]
 * link:../BaseSessionStateBuilder.md#sqlParser[ParserInterface]
 * <<resourceLoader, HiveSessionResourceLoader>>
 
@@ -151,7 +151,7 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 `HiveSessionStateBuilder` takes the following when created:
 
 * [[session]] link:../SparkSession.md[SparkSession]
-* [[parentState]] Optional link:../spark-sql-SessionState.adoc[SessionState] (default: `None`)
+* [[parentState]] Optional link:../SessionState.md[SessionState] (default: `None`)
 
 === [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- `newBuilder` Method
 

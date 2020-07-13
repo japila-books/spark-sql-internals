@@ -66,7 +66,7 @@ filterPartitions(
 
 `filterPartitions` requests the <<table, CatalogTable>> for the link:spark-sql-CatalogTable.adoc#partitionColumnNames[partition columns].
 
-For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the link:spark-sql-SessionState.adoc#catalog[SessionCatalog] for the link:spark-sql-SessionCatalog.adoc#listPartitionsByFilter[partitions by filter] and creates a link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex] (with the partition listing time).
+For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the link:SessionState.md#catalog[SessionCatalog] for the link:spark-sql-SessionCatalog.adoc#listPartitionsByFilter[partitions by filter] and creates a link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex] (with the partition listing time).
 
 For an unpartitioned table (no partition columns defined), `filterPartitions` simply returns a link:InMemoryFileIndex.adoc[InMemoryFileIndex] (with the <<rootPaths, rootPaths>> and no user-specified schema).
 

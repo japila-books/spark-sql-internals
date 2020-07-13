@@ -12,12 +12,12 @@ Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
 
 `Analyzer` uses <<catalog, SessionCatalog>> while resolving relational entities, e.g. databases, tables, columns.
 
-`Analyzer` is <<creating-instance, created>> when `SessionState` is requested for the <<spark-sql-SessionState.adoc#analyzer, analyzer>>.
+`Analyzer` is <<creating-instance, created>> when `SessionState` is requested for the <<SessionState.md#analyzer, analyzer>>.
 
 .Creating Analyzer
 image::images/spark-sql-Analyzer.png[align="center"]
 
-`Analyzer` is available as the <<spark-sql-SessionState.adoc#analyzer, analyzer>> property of a session-specific `SessionState`.
+`Analyzer` is available as the <<SessionState.md#analyzer, analyzer>> property of a session-specific `SessionState`.
 
 [source, scala]
 ----
@@ -70,7 +70,7 @@ scala> println(analyzedPlan.numberedTreeString)
 
 `Analyzer` defines <<extendedResolutionRules, extendedResolutionRules>> extension point for additional logical evaluation rules that a custom `Analyzer` can use to extend the <<Resolution, Resolution>> rule batch. The rules are added at the end of the `Resolution` batch.
 
-NOTE: link:spark-sql-SessionState.adoc[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
+NOTE: link:SessionState.md[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
 
 [[internal-registries]]
 .Analyzer's Internal Registries and Counters

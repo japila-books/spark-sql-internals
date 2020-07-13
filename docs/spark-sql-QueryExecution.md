@@ -19,7 +19,7 @@ val ds: Dataset[Long] = ...
 val queryExec = ds.queryExecution
 ----
 
-`QueryExecution` is the result of link:spark-sql-SessionState.adoc#executePlan[executing a LogicalPlan in a SparkSession] (and so you could create a `Dataset` from a link:spark-sql-LogicalPlan.adoc[logical operator] or use the `QueryExecution` after executing a logical operator).
+`QueryExecution` is the result of link:SessionState.md#executePlan[executing a LogicalPlan in a SparkSession] (and so you could create a `Dataset` from a link:spark-sql-LogicalPlan.adoc[logical operator] or use the `QueryExecution` after executing a logical operator).
 
 [source, scala]
 ----
@@ -47,7 +47,7 @@ TIP: Beside `analyzed`, you can use link:spark-sql-dataset-operators.adoc#explai
 `withCachedData` makes sure that the logical plan was <<assertAnalyzed, analyzed>> and <<assertSupported, uses supported operations only>>.
 
 | optimizedPlan
-| [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:spark-sql-SessionState.adoc#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
+| [[optimizedPlan]] Optimized link:spark-sql-LogicalPlan.adoc[logical plan] that is the result of executing the link:SessionState.md#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
 
 | sparkPlan
 a| [[sparkPlan]] link:SparkPlan.md[Physical plan] (after link:spark-sql-SparkPlanner.adoc[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
@@ -133,7 +133,7 @@ dataset.queryExecution.executedPlan
 | link:spark-sql-SparkPlanner.adoc[SparkPlanner]
 |===
 
-`QueryExecution` uses the input `SparkSession` to access the current link:spark-sql-SparkPlanner.adoc[SparkPlanner] (through link:spark-sql-SessionState.adoc[SessionState]) when <<creating-instance, it is created>>. It then computes a link:SparkPlan.md[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
+`QueryExecution` uses the input `SparkSession` to access the current link:spark-sql-SparkPlanner.adoc[SparkPlanner] (through link:SessionState.md[SessionState]) when <<creating-instance, it is created>>. It then computes a link:SparkPlan.md[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 
 [NOTE]
 ====
@@ -258,7 +258,7 @@ NOTE: `assertAnalyzed` executes <<analyzed, analyzed>> by accessing it and throw
 
 [NOTE]
 ====
-`assertAnalyzed` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access the current `SessionState`] that it then uses to link:spark-sql-SessionState.adoc#analyzer[access the `Analyzer`].
+`assertAnalyzed` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access the current `SessionState`] that it then uses to link:SessionState.md#analyzer[access the `Analyzer`].
 
 In Scala the access path looks as follows.
 

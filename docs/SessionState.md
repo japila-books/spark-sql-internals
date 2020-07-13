@@ -109,7 +109,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 `SessionState` takes the following when created:
 
-* [[sharedState]] <<spark-sql-SharedState.adoc#, SharedState>>
+* [[sharedState]] <<SharedState.md#, SharedState>>
 * [[conf]] <<spark-sql-SQLConf.adoc#, SQLConf>>
 * [[experimentalMethods]] <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
 * [[functionRegistry]] <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>>

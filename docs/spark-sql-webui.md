@@ -37,9 +37,9 @@ Internally, it uses link:spark-sql-SQLListener.adoc[SQLListener] exclusively to 
 
 === [[creating-instance]] Creating SQLTab Instance
 
-`SQLTab` is created when link:spark-sql-SharedState.adoc[SharedState] is or at the first link:spark-sql-SQLListener.adoc#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] event when link:spark-history-server.adoc[Spark History Server] is used.
+`SQLTab` is created when link:SharedState.md[SharedState] is or at the first link:spark-sql-SQLListener.adoc#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] event when link:spark-history-server.adoc[Spark History Server] is used.
 
 .Creating SQLTab Instance
 image::images/spark-SQLTab-creating-instance.png[align="center"]
 
-NOTE: link:spark-sql-SharedState.adoc[SharedState] represents the shared state across `SparkSessions`.
+NOTE: link:SharedState.md[SharedState] represents the shared state across `SparkSessions`.

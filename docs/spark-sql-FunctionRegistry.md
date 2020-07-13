@@ -69,7 +69,7 @@ Used when:
 [[implementations]]
 NOTE: The one and only `FunctionRegistry` available in Spark SQL is <<SimpleFunctionRegistry, SimpleFunctionRegistry>>.
 
-`FunctionRegistry` is available through link:spark-sql-SessionState.adoc#functionRegistry[functionRegistry] property of a `SessionState` (that is available as <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`).
+`FunctionRegistry` is available through link:SessionState.md#functionRegistry[functionRegistry] property of a `SessionState` (that is available as <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`).
 
 [source, scala]
 ----

@@ -85,7 +85,7 @@ readDataSourceTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readDataSourceTable` requests the <<sparkSession, SparkSession>> for link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+`readDataSourceTable` requests the <<sparkSession, SparkSession>> for link:SessionState.md#catalog[SessionCatalog].
 
 `readDataSourceTable` requests the `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getCachedPlan[cached logical plan] for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
 

@@ -38,7 +38,7 @@ updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 
 IMPORTANT: `updateTableStats` uses link:spark-sql-properties.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property to auto-update table statistics and can be expensive (and slow down data change commands) if the total number of files of a table is very large.
 
-NOTE: `updateTableStats` uses `SparkSession` to access the current link:SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `updateTableStats` uses `SparkSession` to access the current link:SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped link:SessionState.md#catalog[SessionCatalog].
 
 NOTE: `updateTableStats` is used when link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
 
@@ -51,7 +51,7 @@ calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigI
 
 `calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input link:spark-sql-CatalogTable.adoc[CatalogTable] (when it has no partitions defined) or all its link:spark-sql-SessionCatalog.adoc#listPartitions[partitions] (through the session-scoped link:spark-sql-SessionCatalog.adoc[SessionCatalog]).
 
-NOTE: `calculateTotalSize` uses the input `SessionState` to access the link:spark-sql-SessionState.adoc#catalog[SessionCatalog].
+NOTE: `calculateTotalSize` uses the input `SessionState` to access the link:SessionState.md#catalog[SessionCatalog].
 
 [NOTE]
 ====

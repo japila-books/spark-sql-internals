@@ -6,7 +6,7 @@ title: SparkPlanner
 
 NOTE: `SparkPlanner` is expected to plan (aka _generate_) at least one link:SparkPlan.md[physical plan] per link:spark-sql-LogicalPlan.adoc[logical plan].
 
-`SparkPlanner` is available as link:spark-sql-SessionState.adoc#planner[planner] of a `SessionState`.
+`SparkPlanner` is available as link:SessionState.md#planner[planner] of a `SessionState`.
 
 [source, scala]
 ----

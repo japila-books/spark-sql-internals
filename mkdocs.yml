@@ -74,6 +74,11 @@ google_analytics:
 nav:
   - Home:
     - index.md
+    - SparkSession:
+      - SparkSession: SparkSession.md
+      - SparkSession.Builder: SparkSession-Builder.md
+      - SparkSessionExtensions: SparkSessionExtensions.md
+      - spark-sql-SparkSession-implicits.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
       - ParserInterface: sql/ParserInterface.md
@@ -172,10 +177,10 @@ nav:
         - spark-sql-CatalogTablePartition.md
         - spark-sql-BucketSpec.md
       - SessionState:
-        - SessionState: spark-sql-SessionState.md
+        - SessionState: SessionState.md
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md
         - spark-sql-SessionStateBuilder.md
-      - spark-sql-SharedState.md
+      - SharedState.md
       - CacheManager:
         - spark-sql-CacheManager.md
         - spark-sql-CachedRDDBuilder.md
@@ -668,11 +673,6 @@ nav:
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
     - Developing Applications:
       - spark-sql-fundamentals-spark-application-development.md
-      - SparkSession:
-        - SparkSession: SparkSession.md
-        - SparkSession.Builder: SparkSession-Builder.md
-        - SparkSessionExtensions: SparkSessionExtensions.md
-        - spark-sql-SparkSession-implicits.md
       - Dataset:
         - spark-sql-Dataset.md
         - Encoder:

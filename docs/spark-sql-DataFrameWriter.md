@@ -231,7 +231,7 @@ NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing
 runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 ----
 
-`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<spark-sql-SessionState.adoc#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
+`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
 
 `runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
 
@@ -275,11 +275,11 @@ scala> q.show
 
 Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.adoc#parseTableIdentifier, parse the input table name>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#sqlParser, ParserInterface>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
 
 `saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#tableExists, check whether the table exists or not>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<spark-sql-SessionState.adoc#catalog, SessionCatalog>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
 
 In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
 
@@ -316,11 +316,11 @@ save(): Unit
 
 `save` saves the rows of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
 
-Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<spark-sql-SessionState.adoc#conf, SQLConf>>).
+Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<SessionState.md#conf, SQLConf>>).
 
 [NOTE]
 ====
-`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<spark-sql-SessionState.adoc#conf, SQLConf>>.
+`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
 
 [source, scala]
 ----

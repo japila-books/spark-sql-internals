@@ -13,7 +13,7 @@ NOTE: <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> is the one and only dir
 Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 ```
 
-`Optimizer` is available as the <<spark-sql-SessionState.adoc#optimizer, optimizer>> property of a session-specific `SessionState`.
+`Optimizer` is available as the <<SessionState.md#optimizer, optimizer>> property of a session-specific `SessionState`.
 
 [source, scala]
 ----
