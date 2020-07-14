@@ -14,6 +14,12 @@
 
 ## Visit Callbacks
 
+### visitDeleteFromTable
+
+Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md)
+
+ANTLR labeled alternative: `#deleteFromTable`
+
 ### visitExists
 
 Creates an [Exists](../spark-sql-Expression-Exists.md) expression
@@ -99,7 +105,7 @@ Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag disabled
 
-```
+```text
 INSERT INTO TABLE? tableIdentifier partitionSpec?
 ```
 

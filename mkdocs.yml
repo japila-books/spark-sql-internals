@@ -113,6 +113,7 @@ nav:
         - logical-operators/CreateTempViewUsing.md
         - logical-operators/CreateViewCommand.md
         - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
+        - DeleteFromTable: logical-operators/DeleteFromTable.md
         - logical-operators/DescribeColumnCommand.md
         - logical-operators/DescribeTableCommand.md
         - logical-operators/DeserializeToObject.md
