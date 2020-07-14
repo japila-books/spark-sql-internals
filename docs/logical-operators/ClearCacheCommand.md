@@ -6,4 +6,6 @@ title: ClearCacheCommand
 
 `ClearCacheCommand` corresponds to `CLEAR CACHE` SQL statement.
 
-NOTE: `ClearCacheCommand` is described by `clearCache` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser].
+## clearCache Labeled Alternative
+
+`ClearCacheCommand` is described by `clearCache` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../SparkSqlParser.md).

@@ -137,6 +137,7 @@ nav:
         - logical-operators/LocalRelation.md
         - logical-operators/LogicalRDD.md
         - logical-operators/LogicalRelation.md
+        - MergeIntoTable: logical-operators/MergeIntoTable.md
         - logical-operators/OneRowRelation.md
         - logical-operators/Pivot.md
         - logical-operators/Project.md

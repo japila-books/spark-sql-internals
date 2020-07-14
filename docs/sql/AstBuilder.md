@@ -4,12 +4,13 @@
 
 `AstBuilder` is the only requirement of the [AbstractSqlParser](AbstractSqlParser.md#astBuilder) abstraction (and used by [CatalystSqlParser](CatalystSqlParser.md) directly while [SparkSqlParser](SparkSqlParser.md) uses [SparkSqlAstBuilder](SparkSqlAstBuilder.md) instead).
 
-??? note "AstBuilder and ANTLR"
-    `AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
+## <span id="grammar"> SqlBase.g4 &mdash; ANTLR Grammar
 
-    `SqlBaseBaseVisitor` is a ANTLR-specific base class that is generated at build time from a ANTLR grammar in [SqlBase.g4](https://github.com/apache/spark/blob/v3.0.0/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4).
+`AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
 
-    `SqlBaseBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
+`SqlBaseBaseVisitor` is a ANTLR-specific base class that is generated at build time from the ANTLR grammar of Spark SQL is available in the Apache Spark repository at [SqlBase.g4](https://github.com/apache/spark/blob/v3.0.0/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4).
+
+`SqlBaseBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
 
 ## Visit Callbacks
 
@@ -29,7 +30,7 @@ ANTLR rule: `explain`
 
 Creates a [First](../spark-sql-Expression-First.md) aggregate function expression
 
-```
+```text
 FIRST '(' expression (IGNORE NULLS)? ')'
 ```
 
@@ -61,7 +62,7 @@ Creates one of the following:
 
 ANTLR rule: `functionCall`
 
-```
+```text
 import spark.sessionState.sqlParser
 
 scala> sqlParser.parseExpression("foo()")
@@ -78,7 +79,7 @@ res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecde
 
 Creates a [UnresolvedInlineTable](../logical-operators/UnresolvedInlineTable.md) unary logical operator (as the child of [SubqueryAlias](../logical-operators/SubqueryAlias.md) for `tableAlias`)
 
-```
+```text
 VALUES expression (',' expression)* tableAlias
 ```
 
@@ -113,7 +114,7 @@ Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly
 
 A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exists` flag
 
-```
+```text
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)?
 ```
 
@@ -124,11 +125,17 @@ ANTLR labeled alternative: `#insertOverwriteTable`
 !!! note
     `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
 
+### visitMergeIntoTable
+
+Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md)
+
+ANTLR labeled alternative: `#mergeIntoTable`
+
 ### visitMultiInsertQuery
 
 Creates a logical operator with a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (and [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) leaf operator)
 
-```
+```text
 FROM relation (',' relation)* lateralView*
 INSERT OVERWRITE TABLE ...
 

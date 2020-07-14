@@ -73,7 +73,9 @@ scala> spark.sql(descExtSQL).show
 * `info_name` with "name of the column info" comment
 * `info_value` with "value of the column info" comment
 
-NOTE: `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc#visitDescribeTable[SparkSqlParser].
+## describeTable Labeled Alternative
+
+`DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../SparkSqlParser.md#visitDescribeTable).
 
 === [[run]] Executing Logical Command (Describing Column with Optional Statistics) -- `run` Method
 

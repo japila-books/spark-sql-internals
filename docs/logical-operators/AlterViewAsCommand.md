@@ -6,7 +6,9 @@ title: AlterViewAsCommand
 
 `AlterViewAsCommand` works with a table identifier (as `TableIdentifier`), the original SQL text, and a link:spark-sql-LogicalPlan.adoc[LogicalPlan] for the SQL query.
 
-NOTE: `AlterViewAsCommand` is described by `alterViewQuery` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser].
+## alterViewQuery Labeled Alternative
+
+`AlterViewAsCommand` is described by `alterViewQuery` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../SparkSqlParser.md).
 
 When <<run, executed>>, `AlterViewAsCommand` attempts to link:spark-sql-SessionCatalog.adoc#alterTempViewDefinition[alter a temporary view in the current `SessionCatalog`] first, and if that "fails", <<alterPermanentView, alters the permanent view>>.
 

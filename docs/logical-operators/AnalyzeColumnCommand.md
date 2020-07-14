@@ -106,9 +106,11 @@ scala> spark.sql(descExtSQL).show(truncate = false)
 only showing top 20 rows
 ----
 
-NOTE: `AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in `SqlBase.g4` and parsed using link:spark-sql-SparkSqlAstBuilder.adoc#visitAnalyze[SparkSqlAstBuilder].
+`AnalyzeColumnCommand` is not supported on views.
 
-NOTE: `AnalyzeColumnCommand` is not supported on views.
+## analyze Labeled Alternative
+
+`AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../SparkSqlParser.md#visitAnalyze).
 
 === [[run]] Executing Logical Command -- `run` Method
 
