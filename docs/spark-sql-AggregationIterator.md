@@ -22,7 +22,7 @@ title: AggregationIterator
 | link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator]
 a| Used exclusively when `HashAggregateExec` physical operator is link:spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute[executed].
 
-NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operator is the preferred aggregate physical operator for link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation] execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operator is the preferred aggregate physical operator for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 |===
 
 [[internal-registries]]

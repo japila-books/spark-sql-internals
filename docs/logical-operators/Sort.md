@@ -60,7 +60,7 @@ TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-s
 
 NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, checkAnalysis>>).
 
-NOTE: `Sort` logical operator is resolved to <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> unary physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#Sort, BasicOperators>> execution planning strategy is executed.
+NOTE: `Sort` logical operator is resolved to <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> unary physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed.
 
 === [[orderBy]][[sortBy]] Catalyst DSL -- `orderBy` and `sortBy` Operators
 

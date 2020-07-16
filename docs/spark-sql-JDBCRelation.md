@@ -39,7 +39,7 @@ scala> df.explain
 `JDBCRelation` uses the <<sparkSession, SparkSession>> to return a link:SparkSession.md#sqlContext[SQLContext].
 
 [[needConversion]]
-`JDBCRelation` turns the <<spark-sql-BaseRelation.adoc#needConversion, needConversion>> flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#PrunedFilteredScan, RDD conversion>>).
+`JDBCRelation` turns the <<spark-sql-BaseRelation.adoc#needConversion, needConversion>> flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the [RDD conversion](execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan)).
 
 === [[creating-instance]] Creating JDBCRelation Instance
 

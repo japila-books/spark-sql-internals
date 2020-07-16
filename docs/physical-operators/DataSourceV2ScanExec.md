@@ -19,7 +19,7 @@
 * [[output]] Output schema (as a collection of `AttributeReferences`)
 * [[reader]] link:spark-sql-DataSourceReader.adoc[DataSourceReader]
 
-`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator.
+`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator.
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

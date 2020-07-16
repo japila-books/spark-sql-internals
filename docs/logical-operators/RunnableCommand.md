@@ -11,7 +11,8 @@
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] physical operator in link:spark-sql-SparkStrategy-BasicOperators.adoc#RunnableCommand[BasicOperators] execution planning strategy.
+!!! note
+    `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
 
 [NOTE]
 ====

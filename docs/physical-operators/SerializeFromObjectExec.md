@@ -8,7 +8,7 @@ title: SerializeFromObjectExec
 
 `SerializeFromObjectExec` is a <<spark-sql-ObjectConsumerExec.adoc#, ObjectConsumerExec>>.
 
-`SerializeFromObjectExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is requested to <<spark-sql-SparkStrategy-BasicOperators.adoc#apply, plan>> a `SerializeFromObject` logical operator.
+`SerializeFromObjectExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 [[inputRDDs]]
 [[outputPartitioning]]

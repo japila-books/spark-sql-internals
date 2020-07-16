@@ -4,7 +4,7 @@ title: CoalesceExec
 
 `CoalesceExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
 
-`CoalesceExec` represents link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#Repartition[Repartition] logical operator at execution (when shuffle was disabled -- see link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy). When executed, it executes the input `child` and calls link:spark-rdd-partitions.adoc#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
+`CoalesceExec` represents link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#Repartition[Repartition] logical operator at execution (when shuffle was disabled -- see [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy). When executed, it executes the input `child` and calls link:spark-rdd-partitions.adoc#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
 
 Please note that since physical operators present themselves without the suffix _Exec_, `CoalesceExec` is the `Coalesce` in the Physical Plan section in the following example:
 

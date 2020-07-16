@@ -105,7 +105,7 @@ pushFilters(
 
 NOTE: `pushFilters` handles <<spark-sql-DataSourceReader.adoc#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>> support only.
 
-For the given `DataSourceReaders` with `SupportsPushDownFilters` support, `pushFilters` uses the `DataSourceStrategy` object to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#translateFilter, translate every filter>> in the given `filters`.
+For the given `DataSourceReaders` with `SupportsPushDownFilters` support, `pushFilters` uses the `DataSourceStrategy` object to [translate every filter](DataSourceStrategy.md#translateFilter) in the given `filters`.
 
 `pushFilters` requests the `SupportsPushDownFilters` reader to <<spark-sql-SupportsPushDownFilters.adoc#pushFilters, pushFilters>> first and then for the <<spark-sql-SupportsPushDownFilters.adoc#pushedFilters, pushedFilters>>.
 

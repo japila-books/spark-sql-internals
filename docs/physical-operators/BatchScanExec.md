@@ -9,7 +9,7 @@
 * <span id="output"> Output schema (`Seq[AttributeReference]`)
 * <span id="scan"> [Scan](../connector/Scan.md)
 
-`BatchScanExec` is created when `DataSourceV2Strategy` execution planning strategy is [executed](../spark-sql-SparkStrategy-DataSourceV2Strategy.md#apply) (for physical operators with `DataSourceV2ScanRelation` relations).
+`BatchScanExec` is created when `DataSourceV2Strategy` execution planning strategy is [executed](../execution-planning-strategies/DataSourceV2Strategy.mdmd#apply) (for physical operators with `DataSourceV2ScanRelation` relations).
 
 ## <span id="batch"> batch
 

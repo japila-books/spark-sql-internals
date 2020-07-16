@@ -25,7 +25,7 @@ trait PrunedScan {
 
 In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data scan (i.e. scanning over data in a relation).
 
-Used exclusively when `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#TableScan[plan a LogicalRelation with a TableScan].
+Used exclusively when `DataSourceStrategy` execution planning strategy is requested to link[plan a LogicalRelation with a TableScan](execution-planning-strategies/DataSourceStrategy.md#TableScan).
 |===
 
 [[implementations]]

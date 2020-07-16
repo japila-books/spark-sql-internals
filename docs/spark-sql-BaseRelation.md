@@ -73,7 +73,7 @@ needConversion: Boolean
 
 NOTE: It is recommended to leave `needConversion` enabled for data sources outside Spark SQL.
 
-NOTE: `needConversion` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[does the RDD conversion] from `RDD[Row]` to `RDD[InternalRow]`).
+`needConversion` is used when [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed (and [does the RDD conversion](execution-planning-strategies/DataSourceStrategy.md#toCatalystRDD) from `RDD[Row]` to `RDD[InternalRow]`).
 
 === [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 
@@ -86,7 +86,7 @@ unhandledFilters(filters: Array[Filter]): Array[Filter]
 
 NOTE: `unhandledFilters` returns the input `filters` by default as it is considered safe to double evaluate filters regardless whether they could be supported or not.
 
-NOTE: `unhandledFilters` is used exclusively when `DataSourceStrategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters, selectFilters>>.
+`unhandledFilters` is used when `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters).
 
 === [[sizeInBytes]] Estimated Size Of Relation (In Bytes) -- `sizeInBytes` Method
 

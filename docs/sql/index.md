@@ -21,7 +21,7 @@ Let's take a look at `MERGE INTO` SQL statement to deep dive into how Spark SQL 
 !!! warning "MERGE INTO and UPDATE SQL Statements Not Supported"
     Partial support for `MERGE INTO` went into Apache Spark 3.0.0 (as part of [SPARK-28893](https://issues.apache.org/jira/browse/SPARK-28893)).
 
-    It is not finished yet since [BasicOperators](../spark-sql-SparkStrategy-BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException` for `MERGE INTO` and `UPDATE` SQL statements.
+    It is not finished yet since [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException` for `MERGE INTO` and `UPDATE` SQL statements.
 
 `MERGE INTO` is described in [SqlBase.g4](AstBuilder.md#grammar) grammar (in `#mergeIntoTable` labeled alternative) as follows:
 
@@ -57,7 +57,7 @@ notMatchedAction
 
 [ResolveReferences](../spark-sql-Analyzer-ResolveReferences.md) logical resolution rule is used to resolve references of `MergeIntoTables` (for a merge condition and matched and not-matched actions).
 
-In the end, [BasicOperators](../spark-sql-SparkStrategy-BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException`:
+In the end, [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException`:
 
 ```text
 MERGE INTO TABLE is not supported temporarily.

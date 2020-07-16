@@ -14,13 +14,13 @@ title: FilterExec
 
 `FilterExec` is <<creating-instance, created>> when:
 
-* `BasicOperators` execution planning strategy is <<spark-sql-SparkStrategy-BasicOperators.adoc#apply, executed>> (and plans <<spark-sql-SparkStrategy-BasicOperators.adoc#Filter, Filter>> and <<spark-sql-SparkStrategy-BasicOperators.adoc#TypedFilter, TypedFilter>> unary logical operators)
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Filter](../execution-planning-strategies/BasicOperators.md#Filter) and [TypedFilter](../execution-planning-strategies/BasicOperators.md#TypedFilter) unary logical operators
 
 * link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategy is executed (and plans link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
 
 * `InMemoryScans` execution planning strategy is <<spark-sql-SparkStrategy-InMemoryScans.adoc#apply, executed>> (and plans <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
 
-* `DataSourceStrategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw, create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)>>
+* `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
 * `FileSourceStrategy` execution planning strategy is <<spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply, executed>> (on <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
 

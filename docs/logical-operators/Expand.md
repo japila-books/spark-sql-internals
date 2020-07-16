@@ -17,7 +17,8 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ...
 ```
 
-NOTE: `Expand` logical operator is resolved to <<spark-sql-SparkPlan-ExpandExec.adoc#, ExpandExec>> physical operator in link:spark-sql-SparkStrategy-BasicOperators.adoc#Expand[BasicOperators] execution planning strategy.
+!!! note
+    `Expand` logical operator is resolved to [ExpandExec](../physical-operators/ExpandExec.md) physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
 
 [[properties]]
 .Expand's Properties

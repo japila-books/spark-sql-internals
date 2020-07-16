@@ -15,7 +15,8 @@ When requested for <<spark-sql-catalyst-QueryPlan.adoc#output, output schema att
 
 NOTE: `Window` logical operator is a subject of pruning unnecessary window expressions in <<spark-sql-Optimizer-ColumnPruning.adoc#, ColumnPruning>> logical optimization and collapsing window operators in <<spark-sql-Optimizer-CollapseWindow.adoc#, CollapseWindow>> logical optimization.
 
-NOTE: `Window` logical operator is resolved to a <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>> in <<spark-sql-SparkStrategy-BasicOperators.adoc#Window, BasicOperators>> execution planning strategy.
+!!! note
+    `Window` logical operator is resolved to a [WindowExec](../physical-operators/WindowExec.md) in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Window) execution planning strategy.
 
 === [[catalyst-dsl]] Catalyst DSL -- `window` Operator
 

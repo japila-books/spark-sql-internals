@@ -19,7 +19,8 @@ NOTE: `resolved` is part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan
 [[output]]
 The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `Generate` is...FIXME
 
-NOTE: `Generate` logical operator is resolved to link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec] unary physical operator in link:spark-sql-SparkStrategy-BasicOperators.adoc#Generate[BasicOperators] execution planning strategy.
+!!! note
+  `Generate` logical operator is resolved to link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
 
 [TIP]
 ====

@@ -16,9 +16,9 @@ title: Filter
 
 * `RowDataSourceScanExec` is link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[created] (for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)])
 
-* `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProject[pruneFilterProject] (when link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators with a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] or a link:spark-sql-PrunedScan.adoc[PrunedScan])
+* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators with a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] or a link:spark-sql-PrunedScan.adoc[PrunedScan])
 
-* `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#selectFilters[selectFilters]
+* `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 
 * `JDBCRDD` is link:spark-sql-JDBCRDD.adoc#filters[created] and requested to link:spark-sql-JDBCRDD.adoc#scanTable[scanTable]
 

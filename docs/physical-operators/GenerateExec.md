@@ -2,7 +2,7 @@ title: GenerateExec
 
 # GenerateExec Unary Physical Operator
 
-`GenerateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is <<creating-instance, created>> exclusively when `BasicOperators` execution planning strategy is requested to link:spark-sql-SparkStrategy-BasicOperators.adoc#Generate[resolve a Generate logical operator].
+`GenerateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy is executed.
 
 [source, scala]
 ----

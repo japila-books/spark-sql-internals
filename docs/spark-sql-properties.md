@@ -257,7 +257,7 @@ Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnable
 
 a| [[spark.sql.execution.useObjectHashAggregateExec]] *spark.sql.execution.useObjectHashAggregateExec*
 
-Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] when <<spark-sql-SparkStrategy-Aggregation.adoc#, Aggregation>> execution planning strategy is executed.
+Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
 Default: `true`
 

@@ -440,7 +440,7 @@ a| [[wholeStageMaxNumFields]] Used in:
 
 | useObjectHashAggregation
 | link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec]
-| [[useObjectHashAggregation]] Used exclusively when `Aggregation` execution planning strategy is <<spark-sql-SparkStrategy-Aggregation.adoc#apply, executed>> (and uses `AggUtils` to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregation physical operator>>).
+| [[useObjectHashAggregation]] Used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (and uses `AggUtils` to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregation physical operator>>).
 |===
 
 === [[getConfString]][[getConf]][[getAllConfs]][[getAllDefinedConfs]] Getting Parameters and Hints

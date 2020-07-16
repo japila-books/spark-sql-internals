@@ -4,7 +4,7 @@ title: WriteToDataSourceV2Exec
 
 `WriteToDataSourceV2Exec` is a <<SparkPlan.md#, physical operator>> that represents an <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator (and a deprecated <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> logical operator) at execution time.
 
-`WriteToDataSourceV2Exec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is requested to plan an <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-AppendData, AppendData>> logical operator (and a deprecated <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-WriteToDataSourceV2, WriteToDataSourceV2>>).
+`WriteToDataSourceV2Exec` is <<creating-instance, created>> when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan an [AppendData](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData) logical operator (and a deprecated [WriteToDataSourceV2](../execution-planning-strategies/DataSourceV2Strategy.md#apply-WriteToDataSourceV2)).
 
 NOTE: Although <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> logical operator is deprecated since Spark SQL 2.4.0 (for <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator), the `AppendData` logical operator is currently used in tests only. That makes `WriteToDataSourceV2` logical operator still relevant.
 

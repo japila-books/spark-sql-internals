@@ -34,4 +34,4 @@ The "map" function takes a Scala `Iterator` of link:spark-sql-Row.adoc[Row] obje
 
 . In the end, returns a `GenericInternalRow` for every row
 
-NOTE: `rowToRowRdd` is used exclusively when `DataSourceStrategy` execution planning strategy is link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#apply[executed] (and requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#toCatalystRDD[toCatalystRDD]).
+`rowToRowRdd` is used when [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed (and requested to [toCatalystRDD](execution-planning-strategies/DataSourceStrategy.md#toCatalystRDD)).

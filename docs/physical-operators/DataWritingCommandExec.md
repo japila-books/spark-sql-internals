@@ -4,7 +4,7 @@ title: DataWritingCommandExec
 
 `DataWritingCommandExec` is a <<SparkPlan.md#, physical operator>> that is the execution environment for a <<cmd, DataWritingCommand>> logical command at <<doExecute, execution time>>.
 
-`DataWritingCommandExec` is <<creating-instance, created>> exclusively when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is requested to plan a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> logical command.
+`DataWritingCommandExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is requested to plan a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, DataWritingCommand>> logical command.
 
 [[metrics]]
 When requested for <<SparkPlan.md#metrics, performance metrics>>, `DataWritingCommandExec` simply requests the <<cmd, DataWritingCommand>> for <<spark-sql-LogicalPlan-DataWritingCommand.adoc#metrics, them>>.

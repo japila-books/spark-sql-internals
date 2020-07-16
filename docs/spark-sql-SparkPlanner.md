@@ -28,19 +28,19 @@ org.apache.spark.sql.execution.SparkPlanner
 | <<extraPlanningStrategies, extraPlanningStrategies>>
 | Extension point for extra link:spark-sql-SparkStrategy.adoc[planning strategies]
 
-| link:spark-sql-SparkStrategy-DataSourceV2Strategy.adoc[DataSourceV2Strategy]
+| [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md)
 |
 
 | link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
 |
 
-| link:spark-sql-SparkStrategy-DataSourceStrategy.adoc[DataSourceStrategy]
+| [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md)
 |
 
 | link:spark-sql-SparkStrategy-SpecialLimits.adoc[SpecialLimits]
 |
 
-| link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation]
+| [Aggregation](execution-planning-strategies/Aggregation.md)
 |
 
 | link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
@@ -49,7 +49,7 @@ org.apache.spark.sql.execution.SparkPlanner
 | link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
 |
 
-| link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators]
+| [BasicOperators](execution-planning-strategies/BasicOperators.md)
 |
 |===
 
@@ -123,7 +123,8 @@ pruneFilterProject(
   scanBuilder: Seq[Attribute] => SparkPlan): SparkPlan
 ----
 
-NOTE: `pruneFilterProject` is almost like <<spark-sql-SparkStrategy-DataSourceStrategy.adoc#pruneFilterProjectRaw, DataSourceStrategy.pruneFilterProjectRaw>>.
+!!! note
+    `pruneFilterProject` is almost like [DataSourceStrategy.pruneFilterProjectRaw](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw).
 
 `pruneFilterProject` branches off per whether it is possible to use a column pruning only (to get the right projection) and the input `projectList` columns of this projection are enough to evaluate all input `filterPredicates` filter conditions.
 

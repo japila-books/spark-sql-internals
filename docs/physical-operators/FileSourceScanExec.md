@@ -171,7 +171,7 @@ Metadata
 NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec] contract.
 
 | pushedDownFilters
-a| [[pushedDownFilters]] link:spark-sql-Filter.adoc[Data source filters] that are <<dataFilters, dataFilters>> expressions link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#translateFilter[converted to their respective filters]
+a| [[pushedDownFilters]] link:spark-sql-Filter.adoc[Data source filters] that are <<dataFilters, dataFilters>> expressions [converted to their respective filters](../execution-planning-strategies/DataSourceStrategy.md#translateFilter)
 
 [TIP]
 ====

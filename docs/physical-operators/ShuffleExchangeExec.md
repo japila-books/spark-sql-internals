@@ -6,7 +6,7 @@ title: ShuffleExchangeExec
 
 `ShuffleExchangeExec` is created (possibly indirectly using <<apply, apply>> factory) when:
 
-* link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy is executed and plans link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] (with `shuffle` flag enabled) and link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression] logical operators
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed and plans link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] (with `shuffle` flag enabled) and link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression] logical operators
 
 * link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] physical query optimization is executed (and requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements])
 
@@ -173,14 +173,11 @@ apply(
 
 `apply` creates a new <<creating-instance, ShuffleExchangeExec>> physical operator with an empty link:spark-sql-ExchangeCoordinator.adoc[ExchangeCoordinator].
 
-[NOTE]
-====
 `apply` is used when:
 
-* link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy is executed (and plans a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] logical operator with `shuffle` flag enabled, a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression])
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition] logical operator with `shuffle` flag enabled, a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression])
 
 * link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] physical query optimization is executed (and requested to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements])
-====
 
 === [[internal-properties]] Internal Properties
 

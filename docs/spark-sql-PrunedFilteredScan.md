@@ -25,7 +25,7 @@ trait PrunedFilteredScan {
 
 In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data scan (i.e. scanning over data in a relation)
 
-Used exclusively when `DataSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-DataSourceStrategy.adoc#PrunedFilteredScan[plan a LogicalRelation with a PrunedFilteredScan].
+Used exclusively when `DataSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a PrunedFilteredScan](execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan).
 |===
 
 NOTE: `PrunedFilteredScan` is a "lighter" and stable version of the <<spark-sql-CatalystScan.adoc#, CatalystScan Contract>>.

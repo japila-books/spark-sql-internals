@@ -91,9 +91,11 @@ Exchange hashpartitioning((id#10L % 2), 2)
 * [[shuffle]] `shuffle` flag
 * [[numPartitions]] target number of partitions
 
-NOTE: link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] strategy resolves `Repartition` to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] (with link:spark-sql-SparkPlan-Partitioning.adoc#RoundRobinPartitioning[RoundRobinPartitioning] partitioning scheme) or link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec] physical operators per shuffle -- enabled or not, respectively.
+!!! note
+    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `Repartition` to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] (with link:spark-sql-SparkPlan-Partitioning.adoc#RoundRobinPartitioning[RoundRobinPartitioning] partitioning scheme) or link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec] physical operators per shuffle -- enabled or not, respectively.
 
-NOTE: link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] strategy resolves `RepartitionByExpression` to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] physical operator with link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] partitioning scheme.
+!!! note
+    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `RepartitionByExpression` to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] physical operator with link:spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning[HashPartitioning] partitioning scheme.
 
 === [[optimizations]] Repartition Operation Optimizations
 

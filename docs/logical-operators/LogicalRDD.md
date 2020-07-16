@@ -10,7 +10,8 @@ title: LogicalRDD
 
 * `SparkSession` is requested to link:SparkSession.md#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
-NOTE: `LogicalRDD` is resolved to link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#LogicalRDD[executed].
+!!! note
+    `LogicalRDD` is resolved to [RDDScanExec](../physical-operators/RDDScanExec.md) when [BasicOperators](../execution-planning-strategies/BasicOperators.md#LogicalRDD) execution planning strategy is executed.
 
 === [[newInstance]] `newInstance` Method
 

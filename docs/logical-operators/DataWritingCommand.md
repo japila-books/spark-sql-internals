@@ -2,7 +2,7 @@
 
 `DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.adoc#, Command contract>> for <<implementations, logical commands>> that write the result of executing <<query, query>> (_query data_) to a relation when <<run, executed>>.
 
-`DataWritingCommand` is resolved to a <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#, DataWritingCommandExec>> physical operator when <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
+`DataWritingCommand` is resolved to a <<spark-sql-SparkPlan-DataWritingCommandExec.adoc#, DataWritingCommandExec>> physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
 
 [[contract]]
 .DataWritingCommand Contract

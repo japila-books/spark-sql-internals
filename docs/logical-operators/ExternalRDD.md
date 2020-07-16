@@ -27,7 +27,7 @@ scala> println(logicalPlan.numberedTreeString)
 
 `ExternalRDD` is a <<newInstance, MultiInstanceRelation>> and a `ObjectProducer`.
 
-NOTE: `ExternalRDD` is resolved to link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec] when `BasicOperators` execution planning strategy is link:spark-sql-SparkStrategy-BasicOperators.adoc#ExternalRDD[executed].
+`ExternalRDD` is resolved to link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec] when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 === [[newInstance]] `newInstance` Method
 

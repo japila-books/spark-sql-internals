@@ -21,7 +21,7 @@ Filter[] pushedFilters()
 
 <<spark-sql-Filter.adoc#, Data source filters>> that were pushed down to the data source (in <<pushFilters, pushFilters>>)
 
-Used exclusively when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is executed (on a <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, DataSourceV2Relation logical operator>> with a `SupportsPushDownFilters` reader)
+Used exclusively when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
 
 | pushFilters
 a| [[pushFilters]]
@@ -33,7 +33,7 @@ Filter[] pushFilters(Filter[] filters)
 
 <<spark-sql-Filter.adoc#, Data source filters>> that need to be evaluated again after scanning (so Spark can plan an extra filter operator)
 
-Used exclusively when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is executed (on a <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, DataSourceV2Relation logical operator>> with a `SupportsPushDownFilters` reader)
+Used exclusively when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
 
 |===
 

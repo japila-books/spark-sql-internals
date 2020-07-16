@@ -45,7 +45,7 @@ Used when:
 
 * `DataSourceV2Relation` factory object is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md))
 
-* `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#pruneColumns, apply column pruning optimization>>
+* `DataSourceV2Strategy` execution planning strategy is requested to [apply column pruning optimization](execution-planning-strategies/DataSourceV2Strategy.mdadoc#pruneColumns)
 
 * Spark Structured Streaming's `MicroBatchExecution` stream execution is requested to run a single streaming batch
 

@@ -13,9 +13,9 @@
 * [[tableIdent]] Optional `TableIdentifier` (default: undefined, i.e. `None`)
 * [[userSpecifiedSchema]] User-defined <<spark-sql-StructType.adoc#, schema>> (default: undefined, i.e. `None`)
 
-When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> with a <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator (possibly under the <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> operator) when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, plan a logical plan>>.
+When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> with a <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator (possibly under the <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
 
-When used to represent a data write (with <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> physical operator (with the <<newWriter, DataSourceWriter>>) when <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-AppendData, plan a logical plan>>.
+When used to represent a data write (with <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> physical operator (with the <<newWriter, DataSourceWriter>>) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData).
 
 `DataSourceV2Relation` object defines a `SourceHelpers` implicit class that extends <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> instances with the additional <<extension-methods, extension methods>>.
 
@@ -58,16 +58,14 @@ newReader(): DataSourceReader
 
 `newReader` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createReader, create a DataSourceReader>>.
 
-NOTE: `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createReader, create a DataSourceReader>>.
+!!! note
+    `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createReader, create a DataSourceReader>>.
 
-[NOTE]
-====
 `newReader` is used when:
 
 * `DataSourceV2Relation` is requested to <<computeStats, computeStats>>
 
-* `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-DataSourceV2Relation, plan a DataSourceV2Relation logical operator>>
-====
+* `DataSourceV2Strategy` execution planning strategy is requested to [plan a DataSourceV2Relation logical operator](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation)
 
 === [[newWriter]] Creating DataSourceWriter -- `newWriter` Method
 
@@ -78,9 +76,10 @@ newWriter(): DataSourceWriter
 
 `newWriter` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createWriter, create a DataSourceWriter>>.
 
-NOTE: `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createWriter, create a DataSourceWriter>>.
+!!! note
+    `DataSourceV2Relation` object defines the <<SourceHelpers, SourceHelpers>> implicit class to "extend" the marker <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> type with the method to <<createWriter, create a DataSourceWriter>>.
 
-NOTE: `newWriter` is used exclusively when `DataSourceV2Strategy` execution planning strategy is requested to <<spark-sql-SparkStrategy-DataSourceV2Strategy.adoc#apply-AppendData, plan an AppendData logical operator>>.
+`newWriter` is used when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed.
 
 === [[SourceHelpers]] SourceHelpers Implicit Class
 

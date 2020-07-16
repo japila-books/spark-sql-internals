@@ -18,7 +18,7 @@ title: Aggregate
 
 * link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command
 
-NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] or link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec] physical operators in link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation] execution planning strategy.
+NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] or link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec] physical operators in [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 [[properties]]
 .Aggregate's Properties

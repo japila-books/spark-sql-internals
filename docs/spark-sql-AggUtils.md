@@ -1,6 +1,6 @@
 # AggUtils Helper Object
 
-`AggUtils` is a Scala object that defines the methods used exclusively when <<spark-sql-SparkStrategy-Aggregation.adoc#, Aggregation>> execution planning strategy is executed.
+`AggUtils` is a Scala object that defines the methods used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
 * <<planAggregateWithoutDistinct, planAggregateWithoutDistinct>>
 
@@ -20,7 +20,7 @@ planAggregateWithOneDistinct(
 
 `planAggregateWithOneDistinct`...FIXME
 
-NOTE: `planAggregateWithOneDistinct` is used exclusively when `Aggregation` execution planning strategy is <<spark-sql-SparkStrategy-Aggregation.adoc#apply, executed>>.
+NOTE: `planAggregateWithOneDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
 === [[planAggregateWithoutDistinct]] Creating Physical Plan with Two Aggregate Physical Operators for Partial and Final Aggregations -- `planAggregateWithoutDistinct` Method
 
@@ -43,7 +43,7 @@ In the end, `planAggregateWithoutDistinct` <<AggUtils-createAggregate, creates a
 
 NOTE: `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the link:spark-sql-Expression-Attribute.adoc[attributes] of `groupingExpressions`.
 
-NOTE: `planAggregateWithoutDistinct` is used exclusively when `Aggregation` execution planning strategy is <<spark-sql-SparkStrategy-Aggregation.adoc#apply, executed>> (with no `AggregateExpressions` being <<spark-sql-Expression-AggregateExpression.adoc#isDistinct, distinct>>).
+NOTE: `planAggregateWithoutDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (with no `AggregateExpressions` being <<spark-sql-Expression-AggregateExpression.adoc#isDistinct, distinct>>).
 
 === [[createAggregate]] Creating Aggregate Physical Operator -- `createAggregate` Internal Method
 

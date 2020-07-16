@@ -4,11 +4,12 @@ title: HashAggregateExec
 
 `HashAggregateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>>) when:
 
-* link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation] execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
+* [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
 
 * Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operators
 
-NOTE: `HashAggregateExec` is the link:spark-sql-SparkStrategy-Aggregation.adoc#aggregate-physical-operator-preference[preferred aggregate physical operator] for link:spark-sql-SparkStrategy-Aggregation.adoc[Aggregation] execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+!!! note
+    `HashAggregateExec` is the [preferred aggregate physical operator](execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 
 `HashAggregateExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 

@@ -4,7 +4,7 @@ title: SortExec
 
 `SortExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> that is <<creating-instance, created>> when:
 
-* <<spark-sql-SparkStrategy-BasicOperators.adoc#, BasicOperators>> execution planning strategy is requested to <<spark-sql-SparkStrategy-BasicOperators.adoc#Sort, plan a Sort logical operator>>
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed
 
 * <<spark-sql-FileFormatWriter.adoc#, FileFormatWriter>> helper object is requested to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>
 

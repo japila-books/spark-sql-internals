@@ -8,7 +8,7 @@ title: Except
 
 * link:spark-sql-dataset-operators.adoc#except[Dataset.except] and link:spark-sql-dataset-operators.adoc#exceptAll[Dataset.exceptAll]
 
-`Except` is supposed to be resolved (_optimized_) to <<logical-conversions, other logical commands>> at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization). link:spark-sql-SparkStrategy-BasicOperators.adoc[BasicOperators] execution planning strategy throws an `IllegalStateException` if conversions did not happen.
+`Except` is supposed to be resolved (_optimized_) to <<logical-conversions, other logical commands>> at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization). [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `IllegalStateException` if conversions did not happen.
 
 [[logical-conversions]]
 .Except's Logical Resolutions (Conversions)
