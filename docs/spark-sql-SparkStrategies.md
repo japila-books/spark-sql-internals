@@ -7,8 +7,8 @@ title: SparkStrategies
 * [Aggregation](execution-planning-strategies/Aggregation.md)
 * [BasicOperators](execution-planning-strategies/BasicOperators.md)
 * `FlatMapGroupsWithStateStrategy`
-* link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
-* link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
+* [InMemoryScans](execution-planning-strategies/InMemoryScans.md)
+* [JoinSelection](execution-planning-strategies/JoinSelection.md)
 * `SpecialLimits`
 * `StatefulAggregationStrategy`
 * `StreamingDeduplicationStrategy`

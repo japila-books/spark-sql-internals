@@ -99,7 +99,7 @@ scala> println(logicalPlan.simpleString)
 InMemoryRelation [id#40L], StorageLevel(disk, memory, deserialized, 1 replicas)
 ----
 
-`InMemoryRelation` is resolved to <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#, InMemoryTableScanExec>> leaf physical operator when <<spark-sql-SparkStrategy-InMemoryScans.adoc#, InMemoryScans>> execution planning strategy is executed.
+`InMemoryRelation` is resolved to <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#, InMemoryTableScanExec>> leaf physical operator when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed.
 
 [[internal-registries]]
 .InMemoryRelation's Internal Properties (e.g. Registries, Counters and Flags)

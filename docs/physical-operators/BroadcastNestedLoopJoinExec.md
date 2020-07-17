@@ -2,29 +2,29 @@ title: BroadcastNestedLoopJoinExec
 
 # BroadcastNestedLoopJoinExec Binary Physical Operator
 
-`BroadcastNestedLoopJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] physical plan strategy finds a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator that meets either case:
+`BroadcastNestedLoopJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when [JoinSelection](../execution-planning-strategies/JoinSelection.md) physical plan strategy finds a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator that meets either case:
 
-* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight] join type and `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
+* [canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight) join type and `right` physical operator [broadcastable](../execution-planning-strategies/JoinSelection.md#canBroadcast)
 
-* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft] join type and `left` link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[broadcastable]
+* [canBuildLeft](../execution-planning-strategies/JoinSelection.md#canBuildLeft) join type and `left` [broadcastable](../execution-planning-strategies/JoinSelection.md#canBroadcast)
 
 * non-``InnerLike`` join type
 
-NOTE: `BroadcastNestedLoopJoinExec` is the default physical operator when no other operators have matched link:spark-sql-SparkStrategy-JoinSelection.adoc#join-selection-requirements[selection requirements].
+!!! note
+    `BroadcastNestedLoopJoinExec` is the default physical operator when no other operators have matched [selection requirements](../execution-planning-strategies/JoinSelection.md#join-selection-requirements).
 
 [NOTE]
 ====
-link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[canBuildRight] join types are:
+[canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight) join types are:
 
 * CROSS, INNER, LEFT ANTI, LEFT OUTER, LEFT SEMI or Existence
 
-link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLeft[canBuildLeft] join types are:
+[canBuildLeft](../execution-planning-strategies/JoinSelection.md#canBuildLeft) join types are:
 
 * CROSS, INNER, RIGHT OUTER
 ====
 
-[source, scala]
-----
+```text
 val nums = spark.range(2)
 val letters = ('a' to 'c').map(_.toString).toDF("letter")
 val q = nums.crossJoin(letters)
@@ -35,7 +35,7 @@ BroadcastNestedLoopJoin BuildRight, Cross
 :- *Range (0, 2, step=1, splits=Some(8))
 +- BroadcastExchange IdentityBroadcastMode
    +- LocalTableScan [letter#69]
-----
+```
 
 [[metrics]]
 .BroadcastNestedLoopJoinExec's Performance Metrics

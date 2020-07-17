@@ -2,7 +2,7 @@ title: LogicalPlanStats
 
 # LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator
 
-`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
+`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
 
 [[statsCache]]
 With `LogicalPlanStats` every logical operator has <<stats, statistics>> that are computed only once when requested and are cached until <<invalidateStatsCache, invalidated>> and requested again.
@@ -163,15 +163,13 @@ With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-base
 
 In the end, `statsCache` caches the statistics for later use.
 
-[NOTE]
-====
 `stats` is used when:
 
 * `JoinSelection` execution planning strategy matches a logical plan:
-  . link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[that is small enough for broadcast join] (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
-  . link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[whose a single partition should be small enough to build a hash table] (using `ShuffledHashJoinExec` physical operator)
-  . link:spark-sql-SparkStrategy-JoinSelection.adoc#muchSmaller[that is much smaller (3X) than the other plan] (for `ShuffledHashJoinExec` physical operator)
-  . ...
+   * [that is small enough for broadcast join](execution-planning-strategies/JoinSelection.md#canBroadcast) (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
+   * [whose a single partition should be small enough to build a hash table](execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) (using `ShuffledHashJoinExec` physical operator)
+   * [that is much smaller (3X) than the other plan](execution-planning-strategies/JoinSelection.md#muchSmaller) (for `ShuffledHashJoinExec` physical operator)
+   * ...
 
 * `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
 
@@ -182,7 +180,6 @@ In the end, `statsCache` caches the statistics for later use.
 * `StarSchemaDetection`
 
 * `CostBasedJoinReorder` is link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#apply[executed] (and does link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#reorder[reordering])
-====
 
 === [[invalidateStatsCache]] Invalidating Statistics Cache (of All Operators in Logical Plan) -- `invalidateStatsCache` Method
 

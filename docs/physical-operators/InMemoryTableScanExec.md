@@ -4,7 +4,7 @@ title: InMemoryTableScanExec
 
 `InMemoryTableScanExec` is a link:SparkPlan.md#LeafExecNode[leaf physical operator] that represents an <<relation, InMemoryRelation>> logical operator at execution time.
 
-`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when `InMemoryScans` execution planning strategy is link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[executed] and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
+`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator in a logical query plan.
 
 [[creating-instance]]
 `InMemoryTableScanExec` takes the following to be created:

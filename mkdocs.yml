@@ -578,7 +578,7 @@ nav:
         - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
         - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
     - Execution Planning Strategies:
-      - execution-planning-strategies/index.md
+      - Execution Planning Strategies: execution-planning-strategies/index.md
       - Aggregation: execution-planning-strategies/Aggregation.md
       - BasicOperators: execution-planning-strategies/BasicOperators.md
       - DataSourceStrategy: execution-planning-strategies/DataSourceStrategy.md

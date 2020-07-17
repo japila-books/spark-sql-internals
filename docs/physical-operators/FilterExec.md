@@ -18,11 +18,11 @@ title: FilterExec
 
 * link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategy is executed (and plans link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
 
-* `InMemoryScans` execution planning strategy is <<spark-sql-SparkStrategy-InMemoryScans.adoc#apply, executed>> (and plans <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
-* `FileSourceStrategy` execution planning strategy is <<spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply, executed>> (on <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
 
 * `ExtractPythonUDFs` physical query optimization is requested to <<spark-sql-ExtractPythonUDFs.adoc#trySplitFilter, trySplitFilter>>
 

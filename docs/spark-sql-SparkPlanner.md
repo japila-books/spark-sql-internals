@@ -31,22 +31,22 @@ org.apache.spark.sql.execution.SparkPlanner
 | [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md)
 |
 
-| link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
+| [FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md)
 |
 
 | [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md)
 |
 
-| link:spark-sql-SparkStrategy-SpecialLimits.adoc[SpecialLimits]
+| [SpecialLimits](execution-planning-strategies/SpecialLimits.md)
 |
 
 | [Aggregation](execution-planning-strategies/Aggregation.md)
 |
 
-| link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection]
+| [JoinSelection](execution-planning-strategies/JoinSelection.md)
 |
 
-| link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
+| [InMemoryScans](execution-planning-strategies/InMemoryScans.md)
 |
 
 | [BasicOperators](execution-planning-strategies/BasicOperators.md)
@@ -146,4 +146,4 @@ If not (i.e. it is neither possible to use a column pruning only nor evaluate fi
 
 . Creates a <<spark-sql-SparkPlan-ProjectExec.adoc#creating-instance, ProjectExec>> unary physical operator with the optional `FilterExec` operator (with the scan physical operator) or simply the scan physical operator alone
 
-NOTE: `pruneFilterProject` is used when link:hive/HiveTableScans.adoc[HiveTableScans] and link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] execution planning strategies are executed.
+`pruneFilterProject` is used when [HiveTableScans](hive/HiveTableScans.md) and [InMemoryScans](execution-planning-strategies/InMemoryScans.md) execution planning strategies are executed.

@@ -90,7 +90,7 @@ res3: Int = 200
 
 | autoBroadcastJoinThreshold
 | link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold]
-| [[autoBroadcastJoinThreshold]] Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy
+| [[autoBroadcastJoinThreshold]] Used exclusively in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy
 
 | autoSizeUpdateEnabled
 | link:spark-sql-properties.adoc#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled]
@@ -281,7 +281,7 @@ a| [[numShufflePartitions]] Used in:
 
 * Dataset's link:spark-sql-dataset-operators.adoc#repartition[repartition] operator (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
 * link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[SparkSqlAstBuilder] (for a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operator)
-* link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildLocalHashMap[JoinSelection] execution planning strategy
+* [JoinSelection](execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) execution planning strategy
 * link:spark-sql-LogicalPlan-RunnableCommand.adoc#SetCommand[SetCommand] logical command
 * link:spark-sql-EnsureRequirements.adoc#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
 
@@ -346,7 +346,7 @@ a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-Inse
 
 | preferSortMergeJoin
 | link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
-| [[preferSortMergeJoin]] Used exclusively in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to prefer sort merge join over shuffle hash join.
+| [[preferSortMergeJoin]] Used exclusively in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy to prefer sort merge join over shuffle hash join.
 
 | replaceDatabricksSparkAvroEnabled
 | xref:spark-sql-properties.adoc#spark.sql.legacy.replaceDatabricksSparkAvro.enabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]

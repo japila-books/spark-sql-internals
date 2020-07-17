@@ -8,13 +8,13 @@ title: ProjectExec
 
 `ProjectExec` is <<creating-instance, created>> when:
 
-* link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans] and link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) and [HiveTableScans](../hive/HiveTableScans.md) execution planning strategies are executed (and request `SparkPlanner` to link:spark-sql-SparkPlanner.adoc#pruneFilterProject[pruneFilterProject])
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Project) execution planning strategy is executed
 
 * `DataSourceStrategy` execution planning strategy is requested to [creates a RowDataSourceScanExec](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
-* `FileSourceStrategy` execution planning strategy is requested to link:spark-sql-SparkStrategy-FileSourceStrategy.adoc#apply[plan a LogicalRelation with a HadoopFsRelation]
+* `FileSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a HadoopFsRelation](../execution-planning-strategies/FileSourceStrategy.md#apply)
 
 * `ExtractPythonUDFs` physical optimization is requested to link:spark-sql-ExtractPythonUDFs.adoc#apply[optimize a physical query plan] (and link:spark-sql-ExtractPythonUDFs.adoc#extract[extracts Python UDFs])
 
@@ -22,9 +22,9 @@ title: ProjectExec
     The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or link:hive/HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner] are requested to link:spark-sql-catalyst-QueryPlanner.adoc#plan[plan a logical query plan into one or more physical query plans]:
 
     1. [HiveTableScans](../hive/HiveTableScans.md)
-    1. link:spark-sql-SparkStrategy-FileSourceStrategy.adoc[FileSourceStrategy]
+    1. [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md)
     1. [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md)
-    1. link:spark-sql-SparkStrategy-InMemoryScans.adoc[InMemoryScans]
+    1. [InMemoryScans](../execution-planning-strategies/InMemoryScans.md)
     1. [BasicOperators](../execution-planning-strategies/BasicOperators.md)
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method

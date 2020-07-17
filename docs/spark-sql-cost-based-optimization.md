@@ -280,7 +280,7 @@ CAUTION: FIXME See link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats]
 
 === [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
 
-link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats] adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection], respectively).
+link:spark-sql-LogicalPlanStats.adoc[LogicalPlanStats] adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
 
 === [[column-histograms]] Equi-Height Histograms for Columns
 

@@ -93,19 +93,16 @@ CAUTION: FIXME 5 examples for the different cases of `EqualTo` and `EqualNullSaf
 
 In the end, `unapply` splits the pairs of join keys into collections of left and right join keys. `unapply` prints out the following DEBUG message to the logs:
 
-```
+```text
 leftKeys:[leftKeys] | rightKeys:[rightKeys]
 ```
 
-[NOTE]
-====
 `unapply` is used when:
 
 * `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin]
 
-* `JoinSelection` execution planning strategy is link:spark-sql-SparkStrategy-JoinSelection.adoc#apply[executed]
+* [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy is executed
 
 * (Spark Structured Streaming) `StreamingJoinStrategy` execution planning strategy is executed
 
 * (Spark Structured Streaming) `StreamingJoinHelper` is requested to find the watermark in the join keys
-====

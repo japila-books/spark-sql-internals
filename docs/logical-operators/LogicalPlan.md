@@ -134,20 +134,18 @@ Reset in <<invalidateStatsCache, invalidateStatsCache>>
 
 === [[stats]] Getting Cached or Calculating Estimated Statistics -- `stats` Method
 
-[source, scala]
-----
-stats(conf: CatalystConf): Statistics
-----
+```scala
+stats(
+  conf: CatalystConf): Statistics
+```
 
 `stats` returns the <<statsCache, cached plan statistics>> or <<computeStats, computes a new one>> (and caches it as <<statsCache, statsCache>>).
 
-[NOTE]
-====
 `stats` is used when:
 
 * A `LogicalPlan` <<computeStats, computes `Statistics`>>
 * `QueryExecution` link:spark-sql-QueryExecution.adoc#completeString[builds complete text representation]
-* `JoinSelection` link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[checks whether a plan can be broadcast] et al
+* `JoinSelection` [checks whether a plan can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast) et al
 * link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] attempts to reorder inner joins
 * `LimitPushDown` is link:spark-sql-Optimizer-LimitPushDown.adoc#apply[executed] (for link:spark-sql-joins.adoc#FullOuter[FullOuter] join)
 * `AggregateEstimation` estimates `Statistics`
@@ -155,7 +153,6 @@ stats(conf: CatalystConf): Statistics
 * `InnerOuterEstimation` estimates `Statistics` of the left and right sides of a join
 * `LeftSemiAntiEstimation` estimates `Statistics`
 * `ProjectEstimation` estimates `Statistics`
-====
 
 === [[invalidateStatsCache]] `invalidateStatsCache` method
 

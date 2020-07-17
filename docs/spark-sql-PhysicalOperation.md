@@ -15,7 +15,7 @@
 (Seq[NamedExpression], Seq[Expression], LogicalPlan)
 ----
 
-The following idiom is often used in `Strategy` implementations (e.g. link:hive/HiveTableScans.adoc#apply[HiveTableScans], link:spark-sql-SparkStrategy-InMemoryScans.adoc#apply[InMemoryScans], [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md#apply), <<FileSourceStrategy, FileSourceStrategy>>):
+The following idiom is often used in `Strategy` implementations (e.g. link:hive/HiveTableScans.adoc#apply[HiveTableScans], [InMemoryScans](execution-planning-strategies/InMemoryScans.md#apply), [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md#apply), <<FileSourceStrategy, FileSourceStrategy>>):
 
 [source, scala]
 ----

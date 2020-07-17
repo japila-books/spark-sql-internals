@@ -339,7 +339,7 @@ Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartiti
 
 | [[spark.sql.join.preferSortMergeJoin]] *spark.sql.join.preferSortMergeJoin*
 
-*(internal)* Controls whether link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
+*(internal)* Controls whether [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy prefers [sort merge join](physical-operators/SortMergeJoinExec.md) over [shuffled hash join](physical-operators/ShuffledHashJoinExec.md).
 
 Default: `true`
 

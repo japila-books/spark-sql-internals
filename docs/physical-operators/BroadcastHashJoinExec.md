@@ -4,7 +4,7 @@ title: BroadcastHashJoinExec
 
 `BroadcastHashJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *broadcast hash join*.
 
-`BroadcastHashJoinExec` is <<creating-instance, created>> after applying link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy to link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. link:spark-sql-SparkStrategy-JoinSelection.adoc#canBuildRight[INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI]) of which the `right` physical operator link:spark-sql-SparkStrategy-JoinSelection.adoc#canBroadcast[can be broadcast].
+`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
 
 `BroadcastHashJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 

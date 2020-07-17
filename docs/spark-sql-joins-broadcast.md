@@ -12,10 +12,9 @@ NOTE: According to the article http://dmtolpeko.com/2015/02/20/map-side-join-in-
 
 NOTE: Currently statistics are only supported for Hive Metastore tables where the command `ANALYZE TABLE [tableName] COMPUTE STATISTICS noscan` has been run.
 
-link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy uses link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] property (default: `10M`) to control the size of a dataset before broadcasting it to all worker nodes when performing a join.
+[JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy uses [spark.sql.autoBroadcastJoinThreshold](spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold) property (default: `10M`) to control the size of a dataset before broadcasting it to all worker nodes when performing a join.
 
-[source, scala]
-----
+```text
 val threshold =  spark.conf.get("spark.sql.autoBroadcastJoinThreshold").toInt
 scala> threshold / 1024 / 1024
 res0: Int = 10
@@ -88,4 +87,4 @@ scala> sql(qBroadcastRight).explain
 :- *Range (0, 100, step=1, splits=8)
 +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
    +- *Range (0, 1000, step=1, splits=8)
-----
+```

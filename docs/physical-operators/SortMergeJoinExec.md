@@ -4,7 +4,7 @@ title: SortMergeJoinExec
 
 `SortMergeJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
 
 [[orderable]]
 [NOTE]
@@ -27,7 +27,7 @@ Therefore, a join key is *not* orderable when is of the following data type:
 ====
 link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
 
-That means that link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy (and so Spark Planner) prefers sort merge join over link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[shuffled hash join].
+That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers sort merge join over [shuffled hash join](ShuffledHashJoinExec.md).
 ====
 
 [[supportCodegen]]
@@ -152,7 +152,7 @@ The link:SparkPlan.md#requiredChildDistribution[partitioning requirements] of th
 [[requiredChildOrdering]]
 The link:SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
 
-NOTE: `SortMergeJoinExec` operator is chosen in link:spark-sql-SparkStrategy-JoinSelection.adoc[JoinSelection] execution planning strategy (after link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] and link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec] physical join operators have not met the requirements).
+NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (after [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical join operators have not met the requirements).
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 

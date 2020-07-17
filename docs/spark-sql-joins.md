@@ -112,7 +112,8 @@ You can also find that Spark SQL uses the following two families of joins:
 
 TIP: Name are case-insensitive and can use the underscore (`_`) at any position, i.e. `left_anti` and `LEFT_ANTI` are equivalent.
 
-NOTE: Spark SQL offers different link:spark-sql-SparkStrategy-JoinSelection.adoc#join-selection-requirements[join strategies] with link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)] among them that are supposed to optimize your join queries over large distributed datasets.
+!!! note
+    Spark SQL offers different [join strategies](execution-planning-strategies/JoinSelection.md#join-selection-requirements) with [Broadcast Joins (aka Map-Side Joins)](spark-sql-joins-broadcast.md) among them that are supposed to optimize your join queries over large distributed datasets.
 
 === [[join]] `join` Operators
 
