@@ -399,6 +399,11 @@ nav:
       - GetArrayItem: expressions/GetArrayItem.md
       - GetMapValue: expressions/GetMapValue.md
       - GetStructField: expressions/GetStructField.md
+      - Higher-Order Functions:
+        - HigherOrderFunction: expressions/HigherOrderFunction.md
+        - ArrayBasedSimpleHigherOrderFunction: expressions/ArrayBasedSimpleHigherOrderFunction.md
+        - MapBasedSimpleHigherOrderFunction: expressions/MapBasedSimpleHigherOrderFunction.md
+        - SimpleHigherOrderFunction: expressions/SimpleHigherOrderFunction.md
       - ImperativeAggregate: expressions/ImperativeAggregate.md
       - In: expressions/In.md
       - Inline: expressions/Inline.md
