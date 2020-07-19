@@ -32,7 +32,7 @@ Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<spar
 |===
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md), <<spark-sql-Expression.adoc#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[extensions]]
 .RuleExecutors (Direct Implementations)

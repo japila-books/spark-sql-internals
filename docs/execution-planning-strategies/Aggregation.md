@@ -47,10 +47,10 @@ NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[Gene
 
 `apply` requests `PhysicalAggregation` extractor for link:spark-sql-PhysicalAggregation.adoc#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator found.
 
-Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] per whether they are distinct or not (using their link:spark-sql-Expression-AggregateExpression.adoc#isDistinct[isDistinct] flag).
+Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
 
 `apply` then creates a physical operator using the following helper methods:
 
-* <<spark-sql-AggUtils.adoc#planAggregateWithoutDistinct, AggUtils.planAggregateWithoutDistinct>> when no distinct aggregate expression is used
+* [AggUtils.planAggregateWithoutDistinct](../spark-sql-AggUtils.md#planAggregateWithoutDistinct) when no distinct aggregate expression is used
 
-* <<spark-sql-AggUtils.adoc#planAggregateWithOneDistinct, AggUtils.planAggregateWithOneDistinct>> when at least one distinct aggregate expression is used.
+* [AggUtils.planAggregateWithOneDistinct](../spark-sql-AggUtils.md#planAggregateWithOneDistinct) when at least one distinct aggregate expression is used.

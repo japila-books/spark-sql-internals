@@ -27,11 +27,11 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 `UnresolvedInlineTable` uses no <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>.
 
 [[expressionsResolved]]
-`UnresolvedInlineTable` uses `expressionsResolved` flag that is on (`true`) only when all the Catalyst expressions in the <<rows, rows>> are <<spark-sql-Expression.adoc#resolved, resolved>>.
+`UnresolvedInlineTable` uses `expressionsResolved` flag that is on (`true`) only when all the Catalyst expressions in the <<rows, rows>> are <<expressions/Expression.md#resolved, resolved>>.
 
 === [[creating-instance]] Creating UnresolvedInlineTable Instance
 
 `UnresolvedInlineTable` takes the following when created:
 
 * [[names]] Column names
-* [[rows]] Rows (as <<spark-sql-Expression.adoc#, Catalyst expressions>> for every row, i.e. `Seq[Seq[Expression]]`)
+* [[rows]] Rows (as <<expressions/Expression.md#, Catalyst expressions>> for every row, i.e. `Seq[Seq[Expression]]`)

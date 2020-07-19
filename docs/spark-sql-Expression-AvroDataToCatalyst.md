@@ -7,7 +7,7 @@ title: AvroDataToCatalyst
 [[creating-instance]]
 `AvroDataToCatalyst` takes the following when created:
 
-* [[child]] <<spark-sql-Expression.adoc#, Catalyst expression>>
+* [[child]] <<expressions/Expression.md#, Catalyst expression>>
 * [[jsonFormatSchema]] JSON-encoded Avro schema
 
 `AvroDataToCatalyst` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
@@ -19,7 +19,7 @@ title: AvroDataToCatalyst
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<spark-sql-Expression.adoc#doGenCode, Expression Contract>> to generate a Java source code (`ExprCode`) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (`ExprCode`) for code-generated expression evaluation.
 
 `doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addReferenceObj, generate code to reference this AvroDataToCatalyst instance>>.
 

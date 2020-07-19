@@ -4,7 +4,7 @@
 
 [[creating-instance]]
 [[expressions]]
-`InterpretedProjection` takes link:spark-sql-Expression.adoc[expressions] when created.
+`InterpretedProjection` takes link:expressions/Expression.md[expressions] when created.
 
 [source, scala]
 ----

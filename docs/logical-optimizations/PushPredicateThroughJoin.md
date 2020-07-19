@@ -50,7 +50,7 @@ split(
   right: LogicalPlan): (Seq[Expression], Seq[Expression], Seq[Expression])
 ----
 
-`split` splits (_partitions_) the given condition expressions into link:spark-sql-Expression.adoc#deterministic[deterministic] or not.
+`split` splits (_partitions_) the given condition expressions into link:expressions/Expression.md#deterministic[deterministic] or not.
 
 `split` further splits (_partitions_) the deterministic expressions (_pushDownCandidates_) into expressions that reference the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output expressions] of the left logical operator (_leftEvaluateCondition_) or not (_rest_).
 

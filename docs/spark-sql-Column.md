@@ -2,7 +2,7 @@
 
 [[creating-instance]]
 [[expr]]
-`Column` represents a column in a link:spark-sql-Dataset.adoc[Dataset] that holds a Catalyst link:spark-sql-Expression.adoc[Expression] that produces a value per row.
+`Column` represents a column in a link:spark-sql-Dataset.adoc[Dataset] that holds a Catalyst link:expressions/Expression.md[Expression] that produces a value per row.
 
 NOTE: A `Column` is a value generator for every row in a `Dataset`.
 
@@ -85,7 +85,7 @@ You can reference nested columns using `.` (dot).
 
 [NOTE]
 ====
-`Column` has a reference to Catalyst's link:spark-sql-Expression.adoc[Expression] it was created for using `expr` method.
+`Column` has a reference to Catalyst's link:expressions/Expression.md[Expression] it was created for using `expr` method.
 
 [source, scala]
 ----

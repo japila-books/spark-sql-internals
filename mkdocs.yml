@@ -370,83 +370,83 @@ nav:
       - QueryPlanner: spark-sql-catalyst-QueryPlanner.md
       - GenericStrategy: spark-sql-catalyst-GenericStrategy.md
     - Catalyst Expressions:
-      - spark-sql-Expression.md
-      - spark-sql-Expression-AggregateExpression.md
-      - spark-sql-Expression-AggregateFunction.md
-      - spark-sql-Expression-AggregateWindowFunction.md
-      - spark-sql-Expression-AttributeReference.md
-      - spark-sql-Expression-Alias.md
-      - spark-sql-Expression-Attribute.md
-      - spark-sql-Expression-BoundReference.md
-      - spark-sql-Expression-CallMethodViaReflection.md
-      - spark-sql-Expression-Coalesce.md
-      - spark-sql-Expression-CodegenFallback.md
-      - spark-sql-Expression-CollectionGenerator.md
-      - spark-sql-Expression-ComplexTypedAggregateExpression.md
-      - spark-sql-Expression-CreateArray.md
-      - spark-sql-Expression-CreateNamedStruct.md
-      - spark-sql-Expression-CreateNamedStructLike.md
-      - spark-sql-Expression-CreateNamedStructUnsafe.md
-      - spark-sql-Expression-CumeDist.md
-      - spark-sql-Expression-DeclarativeAggregate.md
-      - spark-sql-Expression-ExecSubqueryExpression.md
-      - spark-sql-Expression-Exists.md
-      - spark-sql-Expression-ExpectsInputTypes.md
-      - spark-sql-Expression-ExplodeBase.md
-      - spark-sql-Expression-First.md
-      - spark-sql-Expression-Generator.md
-      - spark-sql-Expression-GetArrayStructFields.md
-      - spark-sql-Expression-GetArrayItem.md
-      - spark-sql-Expression-GetMapValue.md
-      - spark-sql-Expression-GetStructField.md
-      - spark-sql-Expression-ImperativeAggregate.md
-      - spark-sql-Expression-In.md
-      - spark-sql-Expression-Inline.md
-      - spark-sql-Expression-InSet.md
-      - spark-sql-Expression-InSubquery.md
-      - spark-sql-Expression-JsonToStructs.md
-      - spark-sql-Expression-JsonTuple.md
-      - spark-sql-Expression-ListQuery.md
-      - spark-sql-Expression-Literal.md
-      - spark-sql-Expression-MonotonicallyIncreasingID.md
-      - spark-sql-Expression-Murmur3Hash.md
-      - spark-sql-Expression-NamedExpression.md
-      - spark-sql-Expression-Nondeterministic.md
-      - spark-sql-Expression-OffsetWindowFunction.md
-      - spark-sql-Expression-ParseToDate.md
-      - spark-sql-Expression-ParseToTimestamp.md
-      - spark-sql-Expression-PlanExpression.md
-      - spark-sql-Expression-PrettyAttribute.md
-      - spark-sql-Expression-RankLike.md
-      - spark-sql-Expression-ResolvedStar.md
-      - spark-sql-Expression-RowNumberLike.md
-      - spark-sql-Expression-RuntimeReplaceable.md
-      - spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
-      - spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
-      - spark-sql-Expression-ScalaUDF.md
-      - spark-sql-Expression-ScalaUDAF.md
-      - spark-sql-Expression-SimpleTypedAggregateExpression.md
-      - spark-sql-Expression-SizeBasedWindowFunction.md
-      - spark-sql-Expression-SortOrder.md
-      - spark-sql-Expression-Stack.md
-      - spark-sql-Expression-Star.md
-      - spark-sql-Expression-StaticInvoke.md
-      - spark-sql-Expression-SubqueryExpression.md
-      - spark-sql-Expression-TimeWindow.md
-      - spark-sql-Expression-TypedAggregateExpression.md
-      - spark-sql-Expression-TypedImperativeAggregate.md
-      - spark-sql-Expression-UnaryExpression.md
-      - spark-sql-Expression-UnixTimestamp.md
-      - spark-sql-Expression-UnresolvedAttribute.md
-      - spark-sql-Expression-UnresolvedFunction.md
-      - spark-sql-Expression-UnresolvedGenerator.md
-      - spark-sql-Expression-UnresolvedOrdinal.md
-      - spark-sql-Expression-UnresolvedRegex.md
-      - spark-sql-Expression-UnresolvedStar.md
-      - spark-sql-Expression-UnresolvedWindowExpression.md
-      - spark-sql-Expression-WindowExpression.md
-      - spark-sql-Expression-WindowFunction.md
-      - spark-sql-Expression-WindowSpecDefinition.md
+      - Expression: expressions/Expression.md
+      - AggregateExpression: expressions/AggregateExpression.md
+      - AggregateFunction: expressions/AggregateFunction.md
+      - AggregateWindowFunction: expressions/AggregateWindowFunction.md
+      - AttributeReference: expressions/AttributeReference.md
+      - Alias: expressions/Alias.md
+      - Attribute: expressions/Attribute.md
+      - BoundReference: expressions/BoundReference.md
+      - CallMethodViaReflection: expressions/CallMethodViaReflection.md
+      - Coalesce: expressions/Coalesce.md
+      - CodegenFallback: expressions/CodegenFallback.md
+      - CollectionGenerator: expressions/CollectionGenerator.md
+      - ComplexTypedAggregateExpression: expressions/ComplexTypedAggregateExpression.md
+      - CreateArray: expressions/CreateArray.md
+      - CreateNamedStruct: expressions/CreateNamedStruct.md
+      - CreateNamedStructLike: expressions/CreateNamedStructLike.md
+      - CreateNamedStructUnsafe: expressions/CreateNamedStructUnsafe.md
+      - CumeDist: expressions/CumeDist.md
+      - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+      - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
+      - Exists: expressions/Exists.md
+      - ExpectsInputTypes: expressions/ExpectsInputTypes.md
+      - ExplodeBase: expressions/ExplodeBase.md
+      - First: expressions/First.md
+      - Generator: expressions/Generator.md
+      - GetArrayStructFields: expressions/GetArrayStructFields.md
+      - GetArrayItem: expressions/GetArrayItem.md
+      - GetMapValue: expressions/GetMapValue.md
+      - GetStructField: expressions/GetStructField.md
+      - ImperativeAggregate: expressions/ImperativeAggregate.md
+      - In: expressions/In.md
+      - Inline: expressions/Inline.md
+      - InSet: expressions/InSet.md
+      - InSubquery: expressions/InSubquery.md
+      - JsonToStructs: expressions/JsonToStructs.md
+      - JsonTuple: expressions/JsonTuple.md
+      - ListQuery: expressions/ListQuery.md
+      - Literal: expressions/Literal.md
+      - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
+      - Murmur3Hash: expressions/Murmur3Hash.md
+      - NamedExpression: expressions/NamedExpression.md
+      - Nondeterministic: expressions/Nondeterministic.md
+      - OffsetWindowFunction: expressions/OffsetWindowFunction.md
+      - ParseToDate: expressions/ParseToDate.md
+      - ParseToTimestamp: expressions/ParseToTimestamp.md
+      - PlanExpression: expressions/PlanExpression.md
+      - PrettyAttribute: expressions/PrettyAttribute.md
+      - RankLike: expressions/RankLike.md
+      - ResolvedStar: expressions/ResolvedStar.md
+      - RowNumberLike: expressions/RowNumberLike.md
+      - RuntimeReplaceable: expressions/RuntimeReplaceable.md
+      - expressions/spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
+      - expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
+      - ScalaUDF: expressions/ScalaUDF.md
+      - ScalaUDAF: expressions/ScalaUDAF.md
+      - SimpleTypedAggregateExpression: expressions/SimpleTypedAggregateExpression.md
+      - SizeBasedWindowFunction: expressions/SizeBasedWindowFunction.md
+      - SortOrder: expressions/SortOrder.md
+      - Stack: expressions/Stack.md
+      - Star: expressions/Star.md
+      - StaticInvoke: expressions/StaticInvoke.md
+      - SubqueryExpression: expressions/SubqueryExpression.md
+      - TimeWindow: expressions/TimeWindow.md
+      - TypedAggregateExpression: expressions/TypedAggregateExpression.md
+      - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
+      - UnaryExpression: expressions/UnaryExpression.md
+      - UnixTimestamp: expressions/UnixTimestamp.md
+      - UnresolvedAttribute: expressions/UnresolvedAttribute.md
+      - UnresolvedFunction: expressions/UnresolvedFunction.md
+      - UnresolvedGenerator: expressions/UnresolvedGenerator.md
+      - UnresolvedOrdinal: expressions/UnresolvedOrdinal.md
+      - UnresolvedRegex: expressions/UnresolvedRegex.md
+      - UnresolvedStar: expressions/UnresolvedStar.md
+      - UnresolvedWindowExpression: expressions/UnresolvedWindowExpression.md
+      - WindowExpression: expressions/WindowExpression.md
+      - WindowFunction: expressions/WindowFunction.md
+      - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - SparkPlan: physical-operators/SparkPlan.md
       - CodegenSupport: physical-operators/CodegenSupport.md

@@ -4,7 +4,7 @@
 
 Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:SparkPlan.md[SparkPlan] (for logical and physical plans, respectively).
 
-A `QueryPlan` has an <<output, output>> attributes (that serves as the base for the schema), a collection of link:spark-sql-Expression.adoc[expressions] and a <<schema, schema>>.
+A `QueryPlan` has an <<output, output>> attributes (that serves as the base for the schema), a collection of link:expressions/Expression.md[expressions] and a <<schema, schema>>.
 
 `QueryPlan` has <<statePrefix, statePrefix>> that is used when displaying a plan with `!` to indicate an invalid plan, and `'` to indicate an unresolved plan.
 
@@ -13,7 +13,7 @@ A `QueryPlan` is *invalid* if there are <<missingInput, missing input attributes
 A `QueryPlan` is *unresolved* if the column names have not been verified and column types have not been looked up in the link:spark-sql-Catalog.adoc[Catalog].
 
 [[expressions]]
-A `QueryPlan` has zero, one or more link:spark-sql-Expression.adoc[Catalyst expressions].
+A `QueryPlan` has zero, one or more link:expressions/Expression.md[Catalyst expressions].
 
 NOTE: `QueryPlan` is a tree of operators that have a tree of expressions.
 

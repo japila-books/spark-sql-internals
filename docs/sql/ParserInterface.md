@@ -50,7 +50,7 @@ parseExpression(
   sqlText: String): Expression
 ```
 
-Parses a SQL text to an [Expression](../spark-sql-Expression.md)
+Parses a SQL text to an [Expression](../expressions/Expression.md)
 
 Used in the following:
 

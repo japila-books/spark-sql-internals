@@ -69,7 +69,7 @@ scala> println(plan.numberedTreeString)
 
 `GroupingSets` takes the following when created:
 
-* [[selectedGroupByExprs]] link:spark-sql-Expression.adoc[Expressions] from `GROUPING SETS` clause
-* [[groupByExprs]] Grouping link:spark-sql-Expression.adoc[expressions] from `GROUP BY` clause
+* [[selectedGroupByExprs]] link:expressions/Expression.md[Expressions] from `GROUPING SETS` clause
+* [[groupByExprs]] Grouping link:expressions/Expression.md[expressions] from `GROUP BY` clause
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 * [[aggregations]] Aggregate link:spark-sql-Expression-NamedExpression.adoc[named expressions]

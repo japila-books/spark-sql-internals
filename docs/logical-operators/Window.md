@@ -40,7 +40,7 @@ window(
 `Window` takes the following when created:
 
 * [[windowExpression]] Window link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[partitionSpec]] Window partition specification link:spark-sql-Expression.adoc[expressions]
+* [[partitionSpec]] Window partition specification link:expressions/Expression.md[expressions]
 * [[orderSpec]] Window order specification (as a collection of `SortOrder` expressions)
 * [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
 

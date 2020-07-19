@@ -8,10 +8,9 @@
 
 === [[example-count-with-nullable-expressions-only]] Example: Count Aggregate Operator with Nullable Expressions Only
 
-`NullPropagation` optimization rewrites `Count` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] that include expressions that are all nullable to `Cast(Literal(0L))`.
+`NullPropagation` optimization rewrites `Count` [aggregate expressions](../expressions/AggregateExpression.md) that include expressions that are all nullable to `Cast(Literal(0L))`.
 
-[source, scala]
-----
+```text
 val table = (0 to 9).toDF("num").as[Int]
 
 // NullPropagation applied
@@ -36,14 +35,13 @@ Aggregate [0 AS count(DISTINCT (num = NULL))#45L] // <-- HERE
 +- Exchange SinglePartition
    +- *HashAggregate(keys=[], functions=[], output=[])
       +- LocalTableScan
-----
+```
 
 === [[example-count-without-nullable-distinct-expressions]] Example: Count Aggregate Operator with Non-Nullable Non-Distinct Expressions
 
-`NullPropagation` optimization rewrites any non-``nullable`` non-distinct `Count` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions] to `Literal(1)`.
+`NullPropagation` optimization rewrites any non-``nullable`` non-distinct `Count` [aggregate expressions](../expressions/AggregateExpression.md) to `Literal(1)`.
 
-[source, scala]
-----
+```text
 val table = (0 to 9).toDF("num").as[Int]
 
 // NullPropagation applied
@@ -61,20 +59,19 @@ val query = tokens.select(count("word") as "count")
 scala> println(query.queryExecution.optimizedPlan)
 Aggregate [count(word#55) AS count#71L]
 +- LocalRelation [word#55]
-----
+```
 
 [NOTE]
 ====
 `Count` aggregate expression represents `count` function internally.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.aggregate.Count
 import org.apache.spark.sql.functions.count
 
 scala> count("*").expr.children(0).asInstanceOf[Count]
 res0: org.apache.spark.sql.catalyst.expressions.aggregate.Count = count(1)
-----
+```
 ====
 
 [NOTE]

@@ -99,7 +99,7 @@ a| [[references]] References that are used to generate classes in the following 
 ** `CodegenFallback` is requested to link:spark-sql-Expression-CodegenFallback.adoc#doGenCode[doGenCode]
 
 | `subExprEliminationExprs`
-| [[subExprEliminationExprs]] `SubExprEliminationStates` by link:spark-sql-Expression.adoc[Expression]
+| [[subExprEliminationExprs]] `SubExprEliminationStates` by link:expressions/Expression.md[Expression]
 
 Used when...FIXME
 
@@ -118,7 +118,7 @@ generateExpressions(
 
 (only with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
 
-In the end, `generateExpressions` requests every expressions to link:spark-sql-Expression.adoc#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
+In the end, `generateExpressions` requests every expressions to link:expressions/Expression.md#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
 
 [NOTE]
 ====
@@ -180,7 +180,7 @@ subexpressionElimination(expressions: Seq[Expression]): Unit
 
 For every equivalent expression set, `subexpressionElimination` does the following:
 
-. Takes the first expression and requests it to link:spark-sql-Expression.adoc#genCode[generate a Java source code] for the expression tree
+. Takes the first expression and requests it to link:expressions/Expression.md#genCode[generate a Java source code] for the expression tree
 
 . <<addNewFunction, addNewFunction>> and adds it to <<subexprFunctions, subexprFunctions>>
 

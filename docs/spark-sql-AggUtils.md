@@ -43,7 +43,7 @@ In the end, `planAggregateWithoutDistinct` <<AggUtils-createAggregate, creates a
 
 NOTE: `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the link:spark-sql-Expression-Attribute.adoc[attributes] of `groupingExpressions`.
 
-NOTE: `planAggregateWithoutDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (with no `AggregateExpressions` being <<spark-sql-Expression-AggregateExpression.adoc#isDistinct, distinct>>).
+NOTE: `planAggregateWithoutDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (with no `AggregateExpressions` being [distinct](expressions/AggregateExpression.md#isDistinct)).
 
 === [[createAggregate]] Creating Aggregate Physical Operator -- `createAggregate` Internal Method
 
@@ -59,7 +59,7 @@ createAggregate(
   child: SparkPlan): SparkPlan
 ----
 
-`createAggregate` creates a [physical operator](physical-operators/SparkPlan.md) given the input `aggregateExpressions` <<spark-sql-Expression-AggregateExpression.adoc#, aggregate expressions>>.
+`createAggregate` creates a [physical operator](physical-operators/SparkPlan.md) given the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
 [[aggregate-physical-operator-selection-criteria]]
 .createAggregate's Aggregate Physical Operator Selection Criteria (in execution order)
@@ -69,14 +69,14 @@ createAggregate(
 | Selection Criteria
 
 | link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec]
-a| `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#supportsAggregate[supports] all `aggBufferAttributes` of the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
+a| `HashAggregateExec` link:spark-sql-SparkPlan-HashAggregateExec.adoc#supportsAggregate[supports] all `aggBufferAttributes` of the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
 | link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec]
 a|
 
 . link:spark-sql-properties.adoc#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
 
-. `ObjectHashAggregateExec` link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#supportsAggregate[supports] the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
+. `ObjectHashAggregateExec` link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#supportsAggregate[supports] the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
 | link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec]
 | When all the above requirements could not be met.

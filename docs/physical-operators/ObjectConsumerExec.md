@@ -42,6 +42,6 @@ trait ObjectConsumerExec extends UnaryExecNode {
 inputObjectType: DataType
 ----
 
-`inputObjectType` simply returns the <<spark-sql-Expression.adoc#dataType, data type>> of the single <<spark-sql-catalyst-QueryPlan.adoc#output, output attribute>> of the child physical operator.
+`inputObjectType` simply returns the <<expressions/Expression.md#dataType, data type>> of the single <<spark-sql-catalyst-QueryPlan.adoc#output, output attribute>> of the child physical operator.
 
 NOTE: `inputObjectType` is used when...FIXME

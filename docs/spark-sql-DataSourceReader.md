@@ -34,10 +34,9 @@ Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested
 | readSchema
 a| [[readSchema]]
 
-[source, java]
-----
+```java
 StructType readSchema()
-----
+```
 
 <<spark-sql-StructType.adoc#, Schema>> for reading (loading) data from a data source
 
@@ -45,7 +44,7 @@ Used when:
 
 * `DataSourceV2Relation` factory object is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md))
 
-* `DataSourceV2Strategy` execution planning strategy is requested to [apply column pruning optimization](execution-planning-strategies/DataSourceV2Strategy.mdadoc#pruneColumns)
+* `DataSourceV2Strategy` execution planning strategy is requested to [apply column pruning optimization](execution-planning-strategies/DataSourceV2Strategy.md#pruneColumns)
 
 * Spark Structured Streaming's `MicroBatchExecution` stream execution is requested to run a single streaming batch
 

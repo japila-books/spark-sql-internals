@@ -85,7 +85,7 @@ Used when...FIXME
 
 * [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[inputAttributes]] Input link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
+* [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]

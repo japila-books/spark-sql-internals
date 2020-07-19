@@ -22,13 +22,13 @@ apply(children: Seq[Expression]): CreateNamedStruct
 
 NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.html#scala.Function1[scala.Function1] contract to create a function of one parameter (e.g. `Seq[Expression]`).
 
-`apply` creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> expression with the input `children` <<spark-sql-Expression.adoc#, expressions>> as follows:
+`apply` creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> expression with the input `children` <<expressions/Expression.md#, expressions>> as follows:
 
-* For <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>> expressions that are <<spark-sql-Expression.adoc#resolved, resolved>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.adoc#apply, Literal>> expression (with the <<spark-sql-Expression-NamedExpression.adoc#name, name>> of the `NamedExpression`) and the `NamedExpression` itself
+* For <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>> expressions that are <<expressions/Expression.md#resolved, resolved>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.adoc#apply, Literal>> expression (with the <<spark-sql-Expression-NamedExpression.adoc#name, name>> of the `NamedExpression`) and the `NamedExpression` itself
 
-* For <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>> expressions that are not <<spark-sql-Expression.adoc#resolved, resolved>> yet, `apply` creates a pair of a `NamePlaceholder` expression and the `NamedExpression` itself
+* For <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>> expressions that are not <<expressions/Expression.md#resolved, resolved>> yet, `apply` creates a pair of a `NamePlaceholder` expression and the `NamedExpression` itself
 
-* For all other <<spark-sql-Expression.adoc#, expressions>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.adoc#apply, Literal>> expression (with the value as `col[index]`) and the `Expression` itself
+* For all other <<expressions/Expression.md#, expressions>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.adoc#apply, Literal>> expression (with the value as `col[index]`) and the `Expression` itself
 
 [NOTE]
 ====

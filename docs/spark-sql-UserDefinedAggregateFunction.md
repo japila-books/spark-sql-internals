@@ -145,12 +145,11 @@ abstract class UserDefinedAggregateFunction {
 apply(exprs: Column*): Column
 ----
 
-`apply` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]).
+`apply` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
 NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is disabled.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction
 val myUDAF: UserDefinedAggregateFunction = ...
 val myUdafCol = myUDAF.apply($"id", $"name")
@@ -170,7 +169,7 @@ import org.apache.spark.sql.execution.aggregate.ScalaUDAF
 val scalaUdaf = myUdafCol.expr.children.head.asInstanceOf[ScalaUDAF]
 scala> println(scalaUdaf.toString)
 MyCountUDAF('id,'name)
-----
+```
 
 === [[distinct]] Creating Column for UDAF with Distinct Values -- `distinct` Method
 
@@ -179,7 +178,7 @@ MyCountUDAF('id,'name)
 distinct(exprs: Column*): Column
 ----
 
-`distinct` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]).
+`distinct` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
 NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is enabled.
 

@@ -21,11 +21,11 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 
 TIP: Read up on `<:` type operator in Scala in https://docs.scala-lang.org/tour/upper-type-bounds.html[Upper Type Bounds].
 
-Scala-specific, `TreeNode` is an abstract class that is the <<implementations, base class>> of Catalyst <<spark-sql-Expression.adoc#, Expression>> and <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>> abstract classes.
+Scala-specific, `TreeNode` is an abstract class that is the <<implementations, base class>> of Catalyst <<expressions/Expression.md#, Expression>> and <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>> abstract classes.
 
-`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and [physical](physical-operators/SparkPlan.md) operators that both use <<spark-sql-Expression.adoc#, Catalyst expressions>> (which are `TreeNodes` again).
+`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and [physical](physical-operators/SparkPlan.md) operators that both use <<expressions/Expression.md#, Catalyst expressions>> (which are `TreeNodes` again).
 
-NOTE: Spark SQL uses `TreeNode` for <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> and <<spark-sql-Expression.adoc#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.adoc#, subquery expressions>>.
+NOTE: Spark SQL uses `TreeNode` for <<spark-sql-catalyst-QueryPlan.adoc#, query plans>> and <<expressions/Expression.md#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.adoc#, subquery expressions>>.
 
 `TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. Not only does `TreeNode` come with the <<methods, methods>> that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones for more advanced tree manipulation, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>.
 
@@ -282,7 +282,7 @@ Used when `TreeNode` is requested for <<generateTreeString, generateTreeString>>
 | TreeNode
 | Description
 
-| <<spark-sql-Expression.adoc#, Expression>>
+| <<expressions/Expression.md#, Expression>>
 | [[Expression]]
 
 | <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan>>
@@ -370,7 +370,7 @@ NOTE: `p` can be used for interactive debugging.
 
 * link:SparkPlan.md[SparkPlan] for physical plan trees
 
-* link:spark-sql-Expression.adoc[Expression] for expression trees
+* link:expressions/Expression.md[Expression] for expression trees
 ====
 
 === [[toString]] Text Representation -- `toString` Method

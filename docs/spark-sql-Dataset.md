@@ -151,7 +151,7 @@ NOTE: `Dataset` makes sure that the underlying `QueryExecution` is link:spark-sq
 Used when...FIXME
 
 ! [[deserializer]] `deserializer`
-a! Deserializer link:spark-sql-Expression.adoc[expression] to convert internal rows to objects of type `T`
+a! Deserializer link:expressions/Expression.md[expression] to convert internal rows to objects of type `T`
 
 Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to link:spark-sql-ExpressionEncoder.adoc#resolveAndBind[resolveAndBind]
 
@@ -222,7 +222,7 @@ res2: String =
 
 NOTE: `rdd` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access `SessionState`].
 
-`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the link:spark-sql-Expression.adoc#dataType[data type] of the rows (using link:spark-sql-ExpressionEncoder.adoc#deserializer[deserializer] expression) and link:spark-rdd-transformations.adoc#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
+`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the link:expressions/Expression.md#dataType[data type] of the rows (using link:spark-sql-ExpressionEncoder.adoc#deserializer[deserializer] expression) and link:spark-rdd-transformations.adoc#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
 
 NOTE: `rdd` is at the "boundary" between the internal binary row format and the JVM type of the dataset. Avoid the extra deserialization step to lower JVM memory requirements of your Spark application.
 

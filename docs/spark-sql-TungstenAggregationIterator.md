@@ -147,7 +147,7 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 
 * [[partIndex]] Partition index
 * [[groupingExpressions]] Grouping <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>
-* [[aggregateExpressions]] <<spark-sql-Expression-AggregateExpression.adoc#, Aggregate expressions>>
+* [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate <<spark-sql-Expression-Attribute.adoc#, attributes>>
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Output <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>

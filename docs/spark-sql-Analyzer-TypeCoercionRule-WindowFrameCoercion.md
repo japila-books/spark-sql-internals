@@ -131,7 +131,7 @@ coerceTypes(plan: LogicalPlan): LogicalPlan
 
 NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
 
-`coerceTypes` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<spark-sql-Expression.adoc#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<spark-sql-Expression.adoc#dataType, data type>> of the order specification expression.
+`coerceTypes` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
 
 === [[createBoundaryCast]] `createBoundaryCast` Internal Method
 
@@ -140,13 +140,13 @@ NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes
 createBoundaryCast(boundary: Expression, dt: DataType): Expression
 ----
 
-`createBoundaryCast` returns a <<spark-sql-Expression.adoc#, Catalyst expression>> per the input `boundary` <<spark-sql-Expression.adoc#, Expression>> and the `dt` <<spark-sql-DataType.adoc#, DataType>> (in the order of execution):
+`createBoundaryCast` returns a <<expressions/Expression.md#, Catalyst expression>> per the input `boundary` <<expressions/Expression.md#, Expression>> and the `dt` <<spark-sql-DataType.adoc#, DataType>> (in the order of execution):
 
 * The input `boundary` expression if it is a `SpecialFrameBoundary`
 
 * The input `boundary` expression if the `dt` data type is <<spark-sql-DataType.adoc#DateType, DateType>> or <<spark-sql-DataType.adoc#TimestampType, TimestampType>>
 
-* `Cast` unary operator with the input `boundary` expression and the `dt` data type if the <<spark-sql-Expression.adoc#dataType, result type>> of the `boundary` expression is not the `dt` data type, but the result type can be cast to the `dt` data type
+* `Cast` unary operator with the input `boundary` expression and the `dt` data type if the <<expressions/Expression.md#dataType, result type>> of the `boundary` expression is not the `dt` data type, but the result type can be cast to the `dt` data type
 
 * The input `boundary` expression
 

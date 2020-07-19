@@ -8,7 +8,7 @@ When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.adoc#spark.sql.co
 
 . Enforces the <<supportCodegen, supportCodegen>> custom requirements on a physical operator, i.e.
 .. <<spark-sql-CodegenSupport.adoc#supportCodegen, supportCodegen>> flag turned on (`true`)
-.. No <<spark-sql-Expression.adoc#, Catalyst expressions>> are <<spark-sql-Expression-CodegenFallback.adoc#, CodegenFallback>>
+.. No <<expressions/Expression.md#, Catalyst expressions>> are <<spark-sql-Expression-CodegenFallback.adoc#, CodegenFallback>>
 .. <<spark-sql-catalyst-QueryPlan.adoc#schema, Output schema>> is *neither wide nor deep* and  <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, uses just enough fields (including nested fields)>>
 .. <<spark-sql-catalyst-TreeNode.adoc#children, Children>> use output schema that is also <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, neither wide nor deep>>
 
@@ -426,12 +426,12 @@ Project [_2#122 AS c0#126]
 supportCodegen(e: Expression): Boolean
 ----
 
-`supportCodegen` is positive (`true`) when the input link:spark-sql-Expression.adoc[Catalyst expression] is the following (in the order of verification):
+`supportCodegen` is positive (`true`) when the input link:expressions/Expression.md[Catalyst expression] is the following (in the order of verification):
 
-. link:spark-sql-Expression.adoc#LeafExpression[LeafExpression]
+. link:expressions/Expression.md#LeafExpression[LeafExpression]
 
-. non-<<spark-sql-Expression.adoc#CodegenFallback, CodegenFallback>>
+. non-<<expressions/Expression.md#CodegenFallback, CodegenFallback>>
 
 Otherwise, `supportCodegen` is negative (`false`).
 
-NOTE: `supportCodegen` (for <<spark-sql-Expression.adoc#, Catalyst expressions>>) is used exclusively when `CollapseCodegenStages` physical optimization is requested to <<supportCodegen, enforce whole-stage codegen requirements for a physical operator>>.
+NOTE: `supportCodegen` (for <<expressions/Expression.md#, Catalyst expressions>>) is used exclusively when `CollapseCodegenStages` physical optimization is requested to <<supportCodegen, enforce whole-stage codegen requirements for a physical operator>>.

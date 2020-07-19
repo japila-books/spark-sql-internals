@@ -44,7 +44,7 @@ a| Fails analysis with the error message:
 cannot resolve '[expr]' given input columns: [from]
 ```
 
-| link:spark-sql-Expression.adoc[Expression] with link:spark-sql-Expression.adoc#checkInputDataTypes[incorrect input data types]
+| link:expressions/Expression.md[Expression] with link:expressions/Expression.md#checkInputDataTypes[incorrect input data types]
 a| Fails analysis with the error message:
 
 ```
@@ -72,17 +72,16 @@ a| Fails analysis with the error message:
 grouping_id() can only be used with GroupingSets/Cube/Rollup
 ```
 
-| [[WindowExpression-AggregateExpression-isDistinct]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>> window function with <<spark-sql-Expression-AggregateExpression.adoc#isDistinct, isDistinct>> flag on
+| [[WindowExpression-AggregateExpression-isDistinct]] [WindowExpressions](expressions/WindowExpression.md) with a [AggregateExpression](expressions/AggregateExpression.md) window function with [isDistinct](expressions/AggregateExpression.md#isDistinct) flag on
 a| Fails analysis with the error message:
 
-```
+```text
 Distinct window functions are not supported: [w]
 ```
 
 Example:
 
-[options="wrap"]
-----
+```text
 val windowedDistinctCountExpr = "COUNT(DISTINCT 1) OVER (PARTITION BY value)"
 scala> spark.emptyDataset[Int].selectExpr(windowedDistinctCountExpr)
 org.apache.spark.sql.AnalysisException: Distinct window functions are not supported: count(distinct 1) windowspecdefinition(value#95, ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING);;
@@ -96,7 +95,7 @@ Project [COUNT(1) OVER (PARTITION BY value UnspecifiedFrame)#97L]
   at org.apache.spark.sql.catalyst.analysis.Analyzer.failAnalysis(Analyzer.scala:90)
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:108)
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
-----
+```
 
 | [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, window frame specification>>
 a| Fails analysis with the error message:
@@ -106,7 +105,7 @@ a| Fails analysis with the error message:
 An offset window function can only be evaluated in an ordered row-based window frame with a single offset: [windowExpr]
 ----
 
-| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.adoc#windowFunction, window function>> that is not one of the following expressions: <<spark-sql-Expression-AggregateExpression.adoc#, AggregateExpression>>, <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>>
+| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.adoc#windowFunction, window function>> that is not one of the following expressions: [AggregateExpression](expressions/AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>>
 a| Fails analysis with the error message:
 
 ```

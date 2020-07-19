@@ -143,11 +143,11 @@ scala> p.analyze
 === [[ImplicitOperators]] `ImplicitOperators` Implicit Conversions
 
 [[in]]
-Operators for link:spark-sql-Expression.adoc[expressions], i.e. `in`.
+Operators for link:expressions/Expression.md[expressions], i.e. `in`.
 
 === [[ExpressionConversions]] `ExpressionConversions` Implicit Conversions
 
-`ExpressionConversions` implicit conversions add <<ImplicitOperators, ImplicitOperators>> operators to link:spark-sql-Expression.adoc[Catalyst expressions].
+`ExpressionConversions` implicit conversions add <<ImplicitOperators, ImplicitOperators>> operators to link:expressions/Expression.md[Catalyst expressions].
 
 ==== Type Conversions to Literal Expressions
 
@@ -183,7 +183,7 @@ Operators for link:spark-sql-Expression.adoc[expressions], i.e. `in`.
 star(names: String*): Expression
 ----
 
-`ExpressionConversions` adds the aggregate and non-aggregate functions to link:spark-sql-Expression.adoc[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
+`ExpressionConversions` adds the aggregate and non-aggregate functions to link:expressions/Expression.md[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
 
 [source, scala]
 ----

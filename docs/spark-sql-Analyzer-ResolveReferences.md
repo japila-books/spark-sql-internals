@@ -132,7 +132,7 @@ NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested t
 expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 ----
 
-`expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:spark-sql-Expression.adoc[expression]:
+`expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:expressions/Expression.md[expression]:
 
 1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression` requests the `Star` expressions to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan and the link:spark-sql-Analyzer.adoc#resolver[resolver].
 +

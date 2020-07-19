@@ -52,7 +52,7 @@ withInputType(
 
 `TypedColumn` takes the following when created:
 
-* [[expr]] Catalyst link:spark-sql-Expression.adoc[expression]
+* [[expr]] Catalyst link:expressions/Expression.md[expression]
 * [[encoder]] link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] of the column results
 
 `TypedColumn` initializes the <<internal-registries, internal registries and counters>>.

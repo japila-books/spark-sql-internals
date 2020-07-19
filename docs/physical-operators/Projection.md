@@ -17,7 +17,7 @@ Projection: InternalRow => InternalRow
 initialize(partitionIndex: Int): Unit = {}
 ----
 
-NOTE: `initialize` is overriden by link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` projections that are used in link:spark-sql-Expression.adoc#eval[interpreted expression evaluation].
+NOTE: `initialize` is overriden by link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` projections that are used in link:expressions/Expression.md#eval[interpreted expression evaluation].
 
 [[implementations]]
 .Projections

@@ -236,7 +236,7 @@ a| [[ResolveFunctions]] Resolves functions using link:spark-sql-SessionCatalog.a
 
 * link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] to a link:spark-sql-Expression-Generator.adoc[Generator]
 
-* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] to a link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] (with link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
+* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] to a [AggregateExpression](expressions/AggregateExpression.md) (with link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
 
 If `Generator` is not found, `ResolveFunctions` reports the error:
 
@@ -246,7 +246,7 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 ----
 
 | [[ResolveAliases]] link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
-a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with concrete aliases:
+a| Replaces `UnresolvedAlias` link:expressions/Expression.md[expressions] with concrete aliases:
 
 * link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions]
 * `MultiAlias` (for `GeneratorOuter` and `Generator`)
@@ -268,7 +268,7 @@ a| Replaces `UnresolvedAlias` link:spark-sql-Expression.adoc[expressions] with c
 | [[ExtractWindowExpressions]]
 
 | GlobalAggregates
-| [[GlobalAggregates]] Resolves (aka _replaces_) `Project` operators with link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] that are not link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with `Aggregate` unary logical operators.
+| [[GlobalAggregates]] Resolves (aka _replaces_) `Project` operators with [AggregateExpression](expressions/AggregateExpression.md) that are not link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with `Aggregate` unary logical operators.
 
 | ResolveAggregateFunctions
 a| [[ResolveAggregateFunctions]] Resolves aggregate functions in `Filter` and `Sort` operators

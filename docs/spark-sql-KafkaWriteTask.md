@@ -56,7 +56,7 @@ From https://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/p
 createProjection: UnsafeProjection
 ----
 
-`createProjection` creates a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] with `topic`, `key` and `value` link:spark-sql-Expression.adoc[expressions] and the `inputSchema`.
+`createProjection` creates a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] with `topic`, `key` and `value` link:expressions/Expression.md[expressions] and the `inputSchema`.
 
 `createProjection` makes sure that the following holds (and reports an `IllegalStateException` otherwise):
 

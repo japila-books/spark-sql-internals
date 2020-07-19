@@ -10,7 +10,7 @@ title: InMemoryTableScanExec
 `InMemoryTableScanExec` takes the following to be created:
 
 * [[attributes]] link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
-* [[predicates]] Predicate link:spark-sql-Expression.adoc[expressions]
+* [[predicates]] Predicate link:expressions/Expression.md[expressions]
 * [[relation]] link:spark-sql-LogicalPlan-InMemoryRelation.adoc[InMemoryRelation] logical operator
 
 `InMemoryTableScanExec` is a link:spark-sql-ColumnarBatchScan.adoc[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled).
@@ -304,7 +304,7 @@ buildFilter: PartialFunction[Expression, Expression]
 
 NOTE: `buildFilter` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
-`buildFilter` is a Scala https://www.scala-lang.org/api/2.11.11/#scala.PartialFunction[PartialFunction] that accepts an link:spark-sql-Expression.adoc[Expression] and produces an link:spark-sql-Expression.adoc[Expression], i.e. `PartialFunction[Expression, Expression]`.
+`buildFilter` is a Scala https://www.scala-lang.org/api/2.11.11/#scala.PartialFunction[PartialFunction] that accepts an link:expressions/Expression.md[Expression] and produces an link:expressions/Expression.md[Expression], i.e. `PartialFunction[Expression, Expression]`.
 
 [[buildFilter-expressions]]
 .buildFilter's Expressions

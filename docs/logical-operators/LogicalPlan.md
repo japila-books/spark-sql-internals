@@ -2,7 +2,7 @@
 
 `LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
-NOTE: A logical query plan is a tree of <<spark-sql-catalyst-TreeNode.adoc#, nodes>> of logical operators that in turn can have (trees of) <<spark-sql-Expression.adoc#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
+NOTE: A logical query plan is a tree of <<spark-sql-catalyst-TreeNode.adoc#, nodes>> of logical operators that in turn can have (trees of) <<expressions/Expression.md#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
 
 `LogicalPlan` can be <<resolved, resolved>>.
 

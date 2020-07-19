@@ -48,12 +48,12 @@ NOTE: One of the differences between `WriteToDataSourceV2` and `AppendData` logi
 
 ## [[filter-pushdown]] Filter Pushdown Performance Optimization
 
-Data Source API V2 supports *filter pushdown* performance optimization for <<spark-sql-DataSourceReader.adoc#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>> (that is applied when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan a [DataSourceV2Relation](execution-planning-strategies/DataSourceV2Strategy.mdadoc#apply-DataSourceV2Relation) logical operator).
+Data Source API V2 supports *filter pushdown* performance optimization for <<spark-sql-DataSourceReader.adoc#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>> (that is applied when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan a [DataSourceV2Relation](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) logical operator).
 
 (From https://drill.apache.org/docs/parquet-filter-pushdown/[Parquet Filter Pushdown] in Apache Drill's documentation) Filter pushdown is a performance optimization that prunes extraneous data while reading from a data source to reduce the amount of data to scan and read for queries with [supported filter expressions](execution-planning-strategies/DataSourceStrategy.md#translateFilter). Pruning data reduces the I/O, CPU, and network overhead to optimize query performance.
 
 !!! tip
-    Enable INFO logging level for the [DataSourceV2Strategy logger](execution-planning-strategies/DataSourceV2Strategy.mdadoc#logging) to be informed [what the pushed filters are](execution-planning-strategies/DataSourceV2Strategy.mdadoc#apply-DataSourceV2Relation).
+    Enable INFO logging level for the [DataSourceV2Strategy logger](execution-planning-strategies/DataSourceV2Strategy.md#logging) to be informed [what the pushed filters are](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
 
 ## [[i-want-more]] Further Reading and Watching
 

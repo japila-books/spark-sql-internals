@@ -1000,7 +1000,7 @@ NOTE: `Bin` unary expression uses link:++https://docs.oracle.com/javase/8/docs/a
 
 [NOTE]
 ====
-`Bin` expression supports link:spark-sql-Expression.adoc#doGenCode[code generation] (aka _CodeGen_).
+`Bin` expression supports link:expressions/Expression.md#doGenCode[code generation] (aka _CodeGen_).
 
 ```
 val withBin = spark.range(5).withColumn("binary", bin('id))

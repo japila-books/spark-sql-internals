@@ -68,7 +68,7 @@ selectFilters(
   predicates: Seq[Expression]): (Seq[Expression], Seq[Filter], Set[Filter])
 ----
 
-`selectFilters` builds a map of link:spark-sql-Expression.adoc[Catalyst predicate expressions] (from the input `predicates`) that can be <<translateFilter, translated>> to a link:spark-sql-Filter.adoc[data source filter predicate].
+`selectFilters` builds a map of link:expressions/Expression.md[Catalyst predicate expressions] (from the input `predicates`) that can be <<translateFilter, translated>> to a link:spark-sql-Filter.adoc[data source filter predicate].
 
 `selectFilters` then requests the input `BaseRelation` for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filters] (out of the convertible ones that `selectFilters` built the map with).
 
@@ -89,7 +89,7 @@ NOTE: `selectFilters` is used exclusively when `DataSourceStrategy` execution pl
 translateFilter(predicate: Expression): Option[Filter]
 ----
 
-`translateFilter` translates a link:spark-sql-Expression.adoc[Catalyst expression] into a corresponding link:spark-sql-Filter.adoc[Filter predicate] if possible. If not, `translateFilter` returns `None`.
+`translateFilter` translates a link:expressions/Expression.md[Catalyst expression] into a corresponding link:spark-sql-Filter.adoc[Filter predicate] if possible. If not, `translateFilter` returns `None`.
 
 [[translateFilter-conversions]]
 .translateFilter's Conversions

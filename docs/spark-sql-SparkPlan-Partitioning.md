@@ -46,7 +46,7 @@ a| [[HashPartitioning]]
 
 * link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
 
-* link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution] with all the hashing link:spark-sql-Expression.adoc[expressions] included in `clustering` expressions
+* link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution] with all the hashing link:expressions/Expression.md[expressions] included in `clustering` expressions
 
 a| `PartitioningCollection`
 

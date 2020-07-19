@@ -260,9 +260,9 @@ selectedPartitions: Seq[PartitionDirectory]
 * [[relation]] <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>
 * [[output]] Output schema <<spark-sql-Expression-Attribute.adoc#, attributes>>
 * [[requiredSchema]] <<spark-sql-StructType.adoc#, Schema>>
-* [[partitionFilters]] `partitionFilters` <<spark-sql-Expression.adoc#, expressions>>
+* [[partitionFilters]] `partitionFilters` <<expressions/Expression.md#, expressions>>
 * [[optionalBucketSet]] Bucket IDs for bucket pruning (`Option[BitSet]`)
-* [[dataFilters]] `dataFilters` <<spark-sql-Expression.adoc#, expressions>>
+* [[dataFilters]] `dataFilters` <<expressions/Expression.md#, expressions>>
 * [[tableIdentifier]] Optional `TableIdentifier`
 
 `FileSourceScanExec` initializes the <<internal-registries, internal registries and counters>>.

@@ -32,7 +32,7 @@
 splitConjunctivePredicates(condition: Expression): Seq[Expression]
 ----
 
-`splitConjunctivePredicates` takes the input condition link:spark-sql-Expression.adoc[expression] and splits it to two expressions if they are children of a `And` binary expression.
+`splitConjunctivePredicates` takes the input condition link:expressions/Expression.md[expression] and splits it to two expressions if they are children of a `And` binary expression.
 
 `splitConjunctivePredicates` splits the child expressions recursively down the child expressions until no conjunctive `And` binary expressions exist.
 
@@ -78,9 +78,9 @@ NOTE: `canEvaluate` is used when...FIXME
 canEvaluateWithinJoin(expr: Expression): Boolean
 ----
 
-`canEvaluateWithinJoin` indicates whether a link:spark-sql-Expression.adoc[Catalyst expression] _can be evaluated within a join_, i.e. when one of the following conditions holds:
+`canEvaluateWithinJoin` indicates whether a link:expressions/Expression.md[Catalyst expression] _can be evaluated within a join_, i.e. when one of the following conditions holds:
 
-* Expression is link:spark-sql-Expression.adoc#deterministic[deterministic]
+* Expression is link:expressions/Expression.md#deterministic[deterministic]
 
 * Expression is not `Unevaluable`, `ListQuery` or `Exists`
 

@@ -72,7 +72,7 @@ When requested for <<spark-sql-LogicalPlan-LeafNode.adoc#computeStats, statistic
 * [[data]] Collection of link:spark-sql-InternalRow.adoc[internal binary rows]
 * [[isStreaming]] `isStreaming` flag that indicates whether the <<data, data>> comes from a streaming source (default: `false`)
 
-While being created, `LocalRelation` makes sure that the <<output, output attributes>> are all <<spark-sql-Expression.adoc#resolved, resolved>> or throws an `IllegalArgumentException`:
+While being created, `LocalRelation` makes sure that the <<output, output attributes>> are all <<expressions/Expression.md#resolved, resolved>> or throws an `IllegalArgumentException`:
 
 ```
 Unresolved attributes found when constructing LocalRelation.

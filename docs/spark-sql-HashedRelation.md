@@ -72,7 +72,7 @@ apply(
   taskMemoryManager: TaskMemoryManager = null): HashedRelation
 ----
 
-`apply` creates a link:spark-sql-LongHashedRelation.adoc#apply[LongHashedRelation] when the input `key` collection has a single link:spark-sql-Expression.adoc[expression] of type long or link:spark-sql-UnsafeHashedRelation.adoc#apply[UnsafeHashedRelation] otherwise.
+`apply` creates a link:spark-sql-LongHashedRelation.adoc#apply[LongHashedRelation] when the input `key` collection has a single link:expressions/Expression.md[expression] of type long or link:spark-sql-UnsafeHashedRelation.adoc#apply[UnsafeHashedRelation] otherwise.
 
 [NOTE]
 ====

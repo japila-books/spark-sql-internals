@@ -4,7 +4,7 @@
 
 . Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 
-. link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpressions]
+. [AggregateExpressions](expressions/AggregateExpression.md)
 
 . Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 

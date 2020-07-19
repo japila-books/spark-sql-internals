@@ -4,7 +4,7 @@
 
 [[creating-instance]]
 [[key]]
-`HashedRelationBroadcastMode` takes build-side join keys (as link:spark-sql-Expression.adoc[Catalyst expressions]) when created.
+`HashedRelationBroadcastMode` takes build-side join keys (as link:expressions/Expression.md[Catalyst expressions]) when created.
 
 [[canonicalized]]
 `HashedRelationBroadcastMode` gives a copy of itself with <<key, keys>> canonicalized when requested for a link:spark-sql-BroadcastMode.adoc#canonicalized[canonicalized] version.

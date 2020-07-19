@@ -4,12 +4,12 @@ title: HashAggregateExec
 
 `HashAggregateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>>) when:
 
-* [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
+* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
 
 * Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operators
 
 !!! note
-    `HashAggregateExec` is the [preferred aggregate physical operator](execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+    `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 
 `HashAggregateExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
 
@@ -181,13 +181,13 @@ NOTE: The prefix for variable names for `HashAggregateExec` operators in link:sp
 | Description
 
 | aggregateBufferAttributes
-| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes, AttributeReferences>> of the <<spark-sql-Expression-AggregateExpression.adoc#aggregateFunction, AggregateFunctions>> of the <<aggregateExpressions, AggregateExpressions>>
+| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes, AttributeReferences>> of the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>
 
 | testFallbackStartsAt
 | [[testFallbackStartsAt]] Optional pair of numbers for controlled fall-back to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
 
 | declFunctions
-| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.adoc#, DeclarativeAggregate>> expressions (from the <<spark-sql-Expression-AggregateExpression.adoc#aggregateFunction, AggregateFunctions>> of the <<aggregateExpressions, AggregateExpressions>>)
+| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.adoc#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
 
 | bufferSchema
 | [[bufferSchema]] <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
@@ -392,9 +392,9 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 
 `HashAggregateExec` takes the following when created:
 
-* [[requiredChildDistributionExpressions]] Required child distribution link:spark-sql-Expression.adoc[expressions]
+* [[requiredChildDistributionExpressions]] Required child distribution link:expressions/Expression.md[expressions]
 * [[groupingExpressions]] link:spark-sql-Expression-NamedExpression.adoc[Named expressions] for grouping keys
-* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpressions]
+* [[aggregateExpressions]] [AggregateExpressions](../expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]

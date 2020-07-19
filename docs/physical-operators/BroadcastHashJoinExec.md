@@ -182,10 +182,10 @@ NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested t
 
 `BroadcastHashJoinExec` takes the following when created:
 
-* [[leftKeys]] Left join key link:spark-sql-Expression.adoc[expressions]
-* [[rightKeys]] Right join key link:spark-sql-Expression.adoc[expressions]
+* [[leftKeys]] Left join key link:expressions/Expression.md[expressions]
+* [[rightKeys]] Right join key link:expressions/Expression.md[expressions]
 * [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
 * [[buildSide]] `BuildSide`
-* [[condition]] Optional join condition link:spark-sql-Expression.adoc[expression]
+* [[condition]] Optional join condition link:expressions/Expression.md[expression]
 * [[left]] Left link:SparkPlan.md[physical operator]
 * [[right]] Right link:SparkPlan.md[physical operator]

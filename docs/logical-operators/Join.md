@@ -18,4 +18,4 @@ NOTE: CROSS JOIN is just an INNER JOIN with no join condition.
 * [[left]] link:spark-sql-LogicalPlan.adoc[Logical plan] of the left side
 * [[right]] link:spark-sql-LogicalPlan.adoc[Logical plan] of the right side
 * [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
-* [[condition]] Join condition (if available) as a link:spark-sql-Expression.adoc[Catalyst expression]
+* [[condition]] Join condition (if available) as a link:expressions/Expression.md[Catalyst expression]

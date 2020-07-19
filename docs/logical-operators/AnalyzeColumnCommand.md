@@ -110,7 +110,7 @@ only showing top 20 rows
 
 ## analyze Labeled Alternative
 
-`AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../SparkSqlParser.md#visitAnalyze).
+`AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../sql/SparkSqlParser.md#visitAnalyze).
 
 === [[run]] Executing Logical Command -- `run` Method
 

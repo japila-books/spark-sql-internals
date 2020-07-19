@@ -16,7 +16,7 @@ abstract class Rule[TreeType <: TreeNode[_]] {
 ----
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md) or <<spark-sql-Expression.adoc#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[ruleName]]
 `Rule` has a *rule name* (that is the class name of a rule).

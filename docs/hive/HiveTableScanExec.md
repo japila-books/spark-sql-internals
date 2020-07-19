@@ -68,7 +68,7 @@ NOTE: `doExecute` is part of link:../SparkPlan.md#doExecute[SparkPlan] contract 
 | Description
 
 | boundPruningPred
-a| [[boundPruningPred]] Catalyst link:../spark-sql-Expression.adoc[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the link:HiveTableRelation.adoc#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
+a| [[boundPruningPred]] Catalyst link:../expressions/Expression.md[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the link:HiveTableRelation.adoc#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
 
 | hiveQlTable
 a| [[hiveQlTable]] Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[Table] metadata (link:HiveClientImpl.adoc#toHiveTable[converted] from the link:HiveTableRelation.adoc#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)

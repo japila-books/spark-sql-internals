@@ -50,13 +50,13 @@ Used when:
 |
 
 | [[buildKeys]] `buildKeys`
-| Build join keys (as link:spark-sql-Expression.adoc[Catalyst expressions])
+| Build join keys (as link:expressions/Expression.md[Catalyst expressions])
 
 | [[buildPlan]] `buildPlan`
 |
 
 | [[streamedKeys]] `streamedKeys`
-| Streamed join keys (as link:spark-sql-Expression.adoc[Catalyst expressions])
+| Streamed join keys (as link:expressions/Expression.md[Catalyst expressions])
 
 | [[streamedPlan]] `streamedPlan`
 |

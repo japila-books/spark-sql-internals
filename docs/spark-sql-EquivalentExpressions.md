@@ -10,7 +10,7 @@
 | Description
 
 | [[equivalenceMap]] `equivalenceMap`
-| *Equivalent sets of expressions*, i.e. semantically equal link:spark-sql-Expression.adoc[expressions] by their `Expr` "representative"
+| *Equivalent sets of expressions*, i.e. semantically equal link:expressions/Expression.md[expressions] by their `Expr` "representative"
 
 Used when...FIXME
 |===

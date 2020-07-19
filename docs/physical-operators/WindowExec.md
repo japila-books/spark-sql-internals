@@ -369,7 +369,7 @@ NOTE: `fetchNextRow` is used internally when <<doExecute, doExecute>>'s `Iterato
 createResultProjection(expressions: Seq[Expression]): UnsafeProjection
 ----
 
-`createResultProjection` creates a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] function for `expressions` window function link:spark-sql-Expression.adoc[Catalyst expressions] so that the window expressions are on the right side of child's output.
+`createResultProjection` creates a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] function for `expressions` window function link:expressions/Expression.md[Catalyst expressions] so that the window expressions are on the right side of child's output.
 
 NOTE: link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] is a Scala function that produces link:spark-sql-UnsafeRow.adoc[UnsafeRow] for an link:spark-sql-InternalRow.adoc[InternalRow].
 
@@ -391,7 +391,7 @@ NOTE: `createResultProjection` is used exclusively when `WindowExec` is <<doExec
 `WindowExec` takes the following when created:
 
 * [[windowExpression]] Window link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[partitionSpec]] Window partition specification link:spark-sql-Expression.adoc[expressions]
+* [[partitionSpec]] Window partition specification link:expressions/Expression.md[expressions]
 * [[orderSpec]] Window order specification (as a collection of `SortOrder` expressions)
 * [[child]] Child <<SparkPlan.md#, physical operator>>
 
@@ -421,7 +421,7 @@ Internally, `windowFrameExpressionFactoryPairs` first builds `framedFunctions` l
 | Name of the kind of function
 a|
 
-* *AGGREGATE* for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] (in link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]s) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
+* *AGGREGATE* for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)
 
 * *OFFSET* for `OffsetWindowFunction`
 
@@ -456,7 +456,7 @@ a|
 | Collection of window functions
 a|
 
-* link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] (in link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]s) or `AggregateWindowFunction`
+* link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or `AggregateWindowFunction`
 
 * `OffsetWindowFunction`
 |===

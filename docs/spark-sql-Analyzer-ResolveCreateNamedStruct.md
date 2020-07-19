@@ -39,7 +39,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
 
-`apply` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions which are not <<spark-sql-Expression.adoc#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.adoc#, Literal>> expressions.
+`apply` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions which are not <<expressions/Expression.md#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.adoc#, Literal>> expressions.
 
 In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.adoc#children, children>> and replaces them with the <<spark-sql-Expression-NamedExpression.adoc#name, name>> of corresponding <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>, but only if the `NamedExpression` is resolved.
 

@@ -22,7 +22,7 @@ ANTLR labeled alternative: `#deleteFromTable`
 
 ### visitExists
 
-Creates an [Exists](../spark-sql-Expression-Exists.md) expression
+Creates an [Exists](../expressions/Exists.md) expression
 
 ANTLR labeled alternative: `#exists`
 
@@ -34,7 +34,7 @@ ANTLR rule: `explain`
 
 ### visitFirst
 
-Creates a [First](../spark-sql-Expression-First.md) aggregate function expression
+Creates a [First](../expressions/First.md) aggregate function expression
 
 ```text
 FIRST '(' expression (IGNORE NULLS)? ')'
@@ -46,7 +46,7 @@ ANTLR labeled alternative: `#first`
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
-Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional [LATERAL VIEW](../spark-sql-Expression-Generator.md#lateral-view).
+Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional [LATERAL VIEW](../expressions/Generator.md#lateral-view).
 
 A relation can be one of the following or a combination thereof:
 
@@ -60,11 +60,11 @@ ANTLR rule: `fromClause`
 
 Creates one of the following:
 
-* [UnresolvedFunction](../spark-sql-Expression-UnresolvedFunction.md) for a bare function (with no window specification)
+* [UnresolvedFunction](../expressions/UnresolvedFunction.md) for a bare function (with no window specification)
 
-* [UnresolvedWindowExpression](../spark-sql-Expression-UnresolvedWindowExpression.md) for a function evaluated in a windowed context with a `WindowSpecReference`
+* [UnresolvedWindowExpression](../expressions/UnresolvedWindowExpression.md) for a function evaluated in a windowed context with a `WindowSpecReference`
 
-* [WindowExpression](../spark-sql-Expression-WindowExpression.md) for a function over a window
+* [WindowExpression](../expressions/WindowExpression.md) for a function over a window
 
 ANTLR rule: `functionCall`
 
@@ -91,9 +91,9 @@ VALUES expression (',' expression)* tableAlias
 
 `expression` can be as follows:
 
-* [CreateNamedStruct](../spark-sql-Expression-CreateNamedStruct.md) expression for multiple-column tables
+* [CreateNamedStruct](../expressions/CreateNamedStruct.md) expression for multiple-column tables
 
-* Any [Catalyst expression](../spark-sql-Expression.md) for one-column tables
+* Any [Catalyst expression](../expressions/Expression.md) for one-column tables
 
 `tableAlias` can be specified explicitly or defaults to `colN` for every column (starting from `1` for `N`).
 
@@ -155,9 +155,9 @@ ANTLR rule: `multiInsertQueryBody`
 
 Creates one of the following Catalyst expressions:
 
-* [Alias](../spark-sql-Expression-Alias.md) (for a single alias)
+* [Alias](../expressions/Alias.md) (for a single alias)
 * `MultiAlias` (for a parenthesis enclosed alias list)
-* a bare [Expression](../spark-sql-Expression.md)
+* a bare [Expression](../expressions/Expression.md)
 
 ANTLR rule: `namedExpression`
 
@@ -172,7 +172,7 @@ Creates [OneRowRelation](../logical-operators/OneRowRelation.md) or [LogicalPlan
 ??? note "OneRowRelation"
     `visitQuerySpecification` creates a `OneRowRelation` for a `SELECT` without a `FROM` clause.
 
-    ```
+    ```text
     val q = sql("select 1")
     scala> println(q.queryExecution.logical.numberedTreeString)
     00 'Project [unresolvedalias(1, None)]
@@ -183,7 +183,7 @@ ANTLR rule: `querySpecification`
 
 ### visitPredicated
 
-Creates an [Expression](../spark-sql-Expression.md)
+Creates an [Expression](../expressions/Expression.md)
 
 ANTLR rule: `predicated`
 
@@ -201,7 +201,7 @@ ANTLR rule: `singleDataType`
 
 ### visitSingleExpression
 
-Creates an [Expression](../spark-sql-Expression.md)
+Creates an [Expression](../expressions/Expression.md)
 
 Takes the named expression and relays to [visitNamedExpression](#visitNamedExpression)
 
@@ -211,7 +211,7 @@ ANTLR rule: `singleExpression`
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) with a [InsertIntoTable](../logical-operators/InsertIntoTable.md)
 
-```
+```sql
 INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
 
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
@@ -221,9 +221,9 @@ ANTLR labeled alternative: `#singleInsertQuery`
 
 ### visitSortItem
 
-Creates a [SortOrder](../spark-sql-Expression-SortOrder.md) unevaluable unary expression
+Creates a [SortOrder](../expressions/SortOrder.md) unevaluable unary expression
 
-```
+```text
 sortItem
     : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
     ;
@@ -246,21 +246,21 @@ ANTLR rule: `singleStatement`
 
 ### visitStar
 
-Creates a [UnresolvedStar](../spark-sql-Expression-UnresolvedStar.md)
+Creates a [UnresolvedStar](../expressions/UnresolvedStar.md)
 
 ANTLR labeled alternative: `#star`
 
 ### visitSubqueryExpression
 
-Creates a [ScalarSubquery](../spark-sql-Expression-SubqueryExpression-ScalarSubquery.md)
+Creates a [ScalarSubquery](../expressions/spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
 
 ANTLR labeled alternative: `#subqueryExpression`
 
 ### visitWindowDef
 
-Creates a [WindowSpecDefinition](../spark-sql-Expression-WindowSpecDefinition.md)
+Creates a [WindowSpecDefinition](../expressions/WindowSpecDefinition.md)
 
-```
+```text
 // CLUSTER BY with window frame
 '(' CLUSTER BY partition+=expression (',' partition+=expression)*) windowFrame? ')'
 
@@ -284,7 +284,7 @@ Adds one of the following logical operators:
 
 ### withGenerate
 
-Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator](../spark-sql-Expression-UnresolvedGenerator.md) and [join](../logical-operators/Generate.md#join) flag enabled for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator](../expressions/UnresolvedGenerator.md) and [join](../logical-operators/Generate.md#join) flag enabled for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
 ### withHints
 
@@ -293,10 +293,9 @@ Adds a [Hint](../logical-operators/Hint.md) for `/*+ hint */` in `SELECT` querie
 !!! note
     Note `+` (plus) between `/*` and `*/`
 
-
 `hint` is of the format `name` or `name (param1, param2, ...)`.
 
-```
+```text
 /*+ BROADCAST (table) */
 ```
 
@@ -351,9 +350,9 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 ### withPredicate
 
-* `NOT? IN '(' query ')'` adds an [In](../spark-sql-Expression-In.md) predicate expression with a [ListQuery](../spark-sql-Expression-ListQuery.md) subquery expression
+* `NOT? IN '(' query ')'` adds an [In](../expressions/In.md) predicate expression with a [ListQuery](../expressions/ListQuery.md) subquery expression
 
-* `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../spark-sql-Expression-In.md) predicate expression
+* `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../expressions/In.md) predicate expression
 
 ### withWindows
 
@@ -361,7 +360,7 @@ Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for 
 
 Used for [withQueryResultClauses](#withQueryResultClauses) and [withQuerySpecification](#withQuerySpecification) with `windows` definition.
 
-```
+```text
 WINDOW identifier AS windowSpec
   (',' identifier AS windowSpec)*
 ```

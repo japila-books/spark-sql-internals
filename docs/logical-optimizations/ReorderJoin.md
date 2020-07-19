@@ -100,7 +100,7 @@ NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <
 createOrderedJoin(input: Seq[(LogicalPlan, InnerLike)], conditions: Seq[Expression]): LogicalPlan
 ----
 
-`createOrderedJoin` takes a collection of pairs of a link:spark-sql-LogicalPlan.adoc[logical plan] and the link:spark-sql-joins.adoc#join-types[join type] with join condition link:spark-sql-Expression.adoc[expressions] and...FIXME
+`createOrderedJoin` takes a collection of pairs of a link:spark-sql-LogicalPlan.adoc[logical plan] and the link:spark-sql-joins.adoc#join-types[join type] with join condition link:expressions/Expression.md[expressions] and...FIXME
 
 NOTE: `createOrderedJoin` makes sure that the `input` has at least two pairs in the `input`.
 
@@ -159,7 +159,7 @@ scala> println(plan.numberedTreeString)
 
 For three or more link:spark-sql-LogicalPlan.adoc[logical plans] in the `input`, `createOrderedJoin` takes the first plan and tries to find another that has at least one _matching_ join condition, i.e. a logical plan with the following:
 
-. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:spark-sql-Expression.adoc#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
+. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:expressions/Expression.md#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
 
 . References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
@@ -254,7 +254,7 @@ scala> println(plan.numberedTreeString)
 
 `createOrderedJoin` partitions (aka _splits_) the input condition expressions to expressions that meet the following requirements (aka _join conditions_) or not (aka _others_):
 
-. link:spark-sql-Expression.adoc#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
+. link:expressions/Expression.md#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
 
 . link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[Can be evaluated within a join]
 

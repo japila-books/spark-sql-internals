@@ -10,7 +10,7 @@ NOTE: `None` for the required number of partitions indicates to use any number o
 `HashClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for the link:SparkPlan.md#requiredChildDistribution[required partition requirements of the child operator(s)] (e.g. link:spark-sql-SparkPlan-CoGroupExec.adoc[CoGroupExec], link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec], link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec] and Spark Structured Streaming's `StreamingSymmetricHashJoinExec`).
 
 [[creating-instance]][[expressions]]
-`HashClusteredDistribution` takes hash link:spark-sql-Expression.adoc[expressions] when created.
+`HashClusteredDistribution` takes hash link:expressions/Expression.md[expressions] when created.
 
 `HashClusteredDistribution` requires that the <<expressions, hash expressions>> should not be empty (i.e. `Nil`).
 

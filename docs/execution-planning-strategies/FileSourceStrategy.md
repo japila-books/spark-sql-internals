@@ -120,7 +120,7 @@ NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[Gene
 Pruning directories with: [partitionKeyFilters]
 ```
 
-`apply` computes `afterScanFilters` predicate link:spark-sql-Expression.adoc[expressions] that should be evaluated after the scan.
+`apply` computes `afterScanFilters` predicate link:expressions/Expression.md[expressions] that should be evaluated after the scan.
 
 `apply` prints out the following INFO message to the logs:
 

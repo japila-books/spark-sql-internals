@@ -31,7 +31,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 | `AttributeSet` from <<projections, projections>>
 
 | `validConstraints`
-| Empty set of link:spark-sql-Expression.adoc[expressions]
+| Empty set of link:expressions/Expression.md[expressions]
 |===
 
 === [[analyzer]] Analysis Phase
@@ -64,6 +64,6 @@ scala> println(plan.numberedTreeString)
 
 `Expand` takes the following when created:
 
-* [[projections]] Projection link:spark-sql-Expression.adoc[expressions]
+* [[projections]] Projection link:expressions/Expression.md[expressions]
 * [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]

@@ -26,11 +26,11 @@ pushDownRequiredColumns(plan: LogicalPlan, requiredByParent: AttributeSet): Logi
 
 `pushDownRequiredColumns` branches off per the input <<spark-sql-LogicalPlan.adoc#, logical operator>> (that is supposed to have at least one child node):
 
-. For <<spark-sql-LogicalPlan-Project.adoc#, Project>> unary logical operator, `pushDownRequiredColumns` takes the <<spark-sql-Expression.adoc#references, references>> of the <<spark-sql-LogicalPlan-Project.adoc#projectList, project expressions>> as the required columns (attributes) and executes itself recursively on the <<spark-sql-LogicalPlan-Project.adoc#child, child logical operator>>
+. For <<spark-sql-LogicalPlan-Project.adoc#, Project>> unary logical operator, `pushDownRequiredColumns` takes the <<expressions/Expression.md#references, references>> of the <<spark-sql-LogicalPlan-Project.adoc#projectList, project expressions>> as the required columns (attributes) and executes itself recursively on the <<spark-sql-LogicalPlan-Project.adoc#child, child logical operator>>
 +
 Note that the input `requiredByParent` attributes are not considered in the required columns.
 
-. For <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> unary logical operator, `pushDownRequiredColumns` adds the <<spark-sql-Expression.adoc#references, references>> of the <<spark-sql-LogicalPlan-Filter.adoc#condition, filter condition>> to the input `requiredByParent` attributes and executes itself recursively on the <<spark-sql-LogicalPlan-Filter.adoc#child, child logical operator>>
+. For <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> unary logical operator, `pushDownRequiredColumns` adds the <<expressions/Expression.md#references, references>> of the <<spark-sql-LogicalPlan-Filter.adoc#condition, filter condition>> to the input `requiredByParent` attributes and executes itself recursively on the <<spark-sql-LogicalPlan-Filter.adoc#child, child logical operator>>
 
 . For <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> unary logical operator, `pushDownRequiredColumns`...FIXME
 

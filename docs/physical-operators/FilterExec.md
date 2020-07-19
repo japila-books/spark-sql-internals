@@ -76,7 +76,7 @@ Used when...FIXME
 
 `FilterExec` takes the following when created:
 
-* [[condition]] <<spark-sql-Expression.adoc#, Catalyst expression>> for the filter condition
+* [[condition]] <<expressions/Expression.md#, Catalyst expression>> for the filter condition
 * [[child]] Child <<SparkPlan.md#, physical operator>>
 
 `FilterExec` initializes the <<internal-registries, internal registries and counters>>.

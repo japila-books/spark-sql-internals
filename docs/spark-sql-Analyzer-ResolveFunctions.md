@@ -103,7 +103,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] does not support the modifier DISTINCT
 ```
 
-* link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] are wrapped in a link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] (with `Complete` aggregate mode)
+* link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] are wrapped in a [AggregateExpression](expressions/AggregateExpression.md) (with `Complete` aggregate mode)
 
 * All other functions are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has link:spark-sql-Expression-UnresolvedFunction.adoc#isDistinct[isDistinct] flag enabled.
 +
@@ -111,4 +111,4 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] does not support the modifier DISTINCT
 ```
 
-`apply` skips link:spark-sql-Expression.adoc#childrenResolved[unresolved expressions].
+`apply` skips link:expressions/Expression.md#childrenResolved[unresolved expressions].

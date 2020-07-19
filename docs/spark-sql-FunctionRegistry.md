@@ -94,7 +94,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 |===
 
 [[expressions]]
-`FunctionRegistry` manages *function expression registry* of <<spark-sql-Expression.adoc#, Catalyst expressions>> and the corresponding built-in/native SQL functions (that can be used in SQL statements).
+`FunctionRegistry` manages *function expression registry* of <<expressions/Expression.md#, Catalyst expressions>> and the corresponding built-in/native SQL functions (that can be used in SQL statements).
 
 .(Subset of) FunctionRegistry's Catalyst Expression to SQL Function Mapping
 [cols="1,1m",options="header",width="100%"]

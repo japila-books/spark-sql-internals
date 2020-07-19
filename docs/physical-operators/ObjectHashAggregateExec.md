@@ -105,7 +105,7 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 supportsAggregate(aggregateExpressions: Seq[AggregateExpression]): Boolean
 ----
 
-`supportsAggregate` is enabled (i.e. returns `true`) if there is at least one link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate] aggregate function in the input `aggregateExpressions` link:spark-sql-Expression-AggregateExpression.adoc[aggregate expressions].
+`supportsAggregate` is enabled (i.e. returns `true`) if there is at least one link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate] aggregate function in the input `aggregateExpressions` [aggregate expressions](../expressions/AggregateExpression.md).
 
 NOTE: `supportsAggregate` is used exclusively when `AggUtils` is requested to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregate physical operator given aggregate expressions>>.
 
@@ -113,9 +113,9 @@ NOTE: `supportsAggregate` is used exclusively when `AggUtils` is requested to <<
 
 `ObjectHashAggregateExec` takes the following when created:
 
-* [[requiredChildDistributionExpressions]] Required child distribution link:spark-sql-Expression.adoc[expressions]
+* [[requiredChildDistributionExpressions]] Required child distribution link:expressions/Expression.md[expressions]
 * [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[aggregateExpressions]] link:spark-sql-Expression-AggregateExpression.adoc[Aggregate expressions]
+* [[aggregateExpressions]] [Aggregate expressions](../expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]

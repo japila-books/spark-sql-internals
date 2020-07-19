@@ -178,7 +178,7 @@ NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDat
 `RelationalGroupedDataset` takes the following when created:
 
 * [[df]] link:spark-sql-DataFrame.adoc[DataFrame]
-* [[groupingExprs]] Grouping link:spark-sql-Expression.adoc[expressions]
+* [[groupingExprs]] Grouping link:expressions/Expression.md[expressions]
 * [[groupType]] Group type (to indicate the "source" operator)
 
 ** `GroupByType` for link:spark-sql-basic-aggregation.adoc#groupBy[groupBy]

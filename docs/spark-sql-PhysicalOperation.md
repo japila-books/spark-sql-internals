@@ -4,7 +4,7 @@
 
 . link:spark-sql-Expression-NamedExpression.adoc[Named expressions] (aka _projects_)
 
-. link:spark-sql-Expression.adoc[Expressions] (aka _filters_)
+. link:expressions/Expression.md[Expressions] (aka _filters_)
 
 . link:spark-sql-LogicalPlan.adoc[Logical operator] (aka _leaf node_)
 

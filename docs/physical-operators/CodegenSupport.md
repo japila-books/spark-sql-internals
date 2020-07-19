@@ -322,7 +322,7 @@ NOTE: `consume` is a final method that cannot be changed and is the foundation o
 
 * If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the link:spark-sql-catalyst-QueryPlan.adoc#output[output] and copies them. In other words, `inputVars` is exactly `outputVars`.
 
-* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the `CodegenContext` to `null` while link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] to the `row`. For every attribute in the link:spark-sql-catalyst-QueryPlan.adoc#output[output], `consume` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:spark-sql-Expression.adoc#genCode[generate code for expression evaluation].
+* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the `CodegenContext` to `null` while link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] to the `row`. For every attribute in the link:spark-sql-catalyst-QueryPlan.adoc#output[output], `consume` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:expressions/Expression.md#genCode[generate code for expression evaluation].
 
 `consume` <<prepareRowVar, creates a row variable>>.
 

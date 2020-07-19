@@ -29,7 +29,7 @@
 
 `UnboundedWindowFunctionFrame` is a <<WindowFunctionFrame, WindowFunctionFrame>> that gives the same value for every row in a partition.
 
-`UnboundedWindowFunctionFrame` is <<UnboundedWindowFunctionFrame-creating-instance, created>> for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] (in link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression]s) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunctions] with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the link:spark-sql-SparkPlan-WindowExec.adoc#entire-partition-frame[entire partition frame].
+`UnboundedWindowFunctionFrame` is <<UnboundedWindowFunctionFrame-creating-instance, created>> for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunctions] with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the link:spark-sql-SparkPlan-WindowExec.adoc#entire-partition-frame[entire partition frame].
 
 [[UnboundedWindowFunctionFrame-creating-instance]]
 `UnboundedWindowFunctionFrame` takes the following when created:

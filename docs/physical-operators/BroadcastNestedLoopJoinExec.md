@@ -78,4 +78,4 @@ image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[
 * [[right]] Right link:SparkPlan.md[physical operator]
 * [[buildSide]] `BuildSide`
 * [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
-* [[condition]] Optional join condition link:spark-sql-Expression.adoc[expressions]
+* [[condition]] Optional join condition link:expressions/Expression.md[expressions]

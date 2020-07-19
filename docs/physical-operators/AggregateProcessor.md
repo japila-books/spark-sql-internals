@@ -2,7 +2,7 @@
 
 `AggregateProcessor` is <<apply, created>> and used exclusively when `WindowExec` physical operator is executed.
 
-`AggregateProcessor` supports link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate] and link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] aggregate <<functions, functions>> only (which link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[happen to] be link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] in link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]).
+`AggregateProcessor` supports link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate] and link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] aggregate <<functions, functions>> only (which link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[happen to] be link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] in [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)).
 
 [[properties]]
 .AggregateProcessor's Properties
@@ -58,7 +58,7 @@ apply(
   newMutableProjection: (Seq[Expression], Seq[Attribute]) => MutableProjection): AggregateProcessor
 ----
 
-NOTE: `apply` is used exclusively when `WindowExec` is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed] (and creates link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. link:spark-sql-Expression-AggregateExpression.adoc[AggregateExpression] or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction])
+NOTE: `apply` is used exclusively when `WindowExec` is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed] (and creates link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md))
 
 === [[update]] Executing update on ImperativeAggregates -- `update` Method
 

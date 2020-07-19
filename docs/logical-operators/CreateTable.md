@@ -23,7 +23,7 @@ The optional <<query, AS query>> is defined when used for the following:
 * `SparkSqlAstBuilder` is requested to xref:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or xref:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command) with an AS clause
 
 [[resolved]]
-`CreateTable` can never be <<spark-sql-Expression.adoc#resolved, resolved>> and is replaced (_resolved_) with a logical command at analysis phase in the following rules:
+`CreateTable` can never be <<expressions/Expression.md#resolved, resolved>> and is replaced (_resolved_) with a logical command at analysis phase in the following rules:
 
 * (for non-hive data source tables) <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> posthoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#, CreateDataSourceTableCommand>> or a <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command (when the <<query, query>> was defined or not, respectively)
 

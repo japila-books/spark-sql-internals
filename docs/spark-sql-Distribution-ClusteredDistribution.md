@@ -42,7 +42,7 @@ This ClusteredDistribution requires [requiredNumPartitions] partitions, but the 
 
 `ClusteredDistribution` takes the following when created:
 
-* [[clustering]] Clustering link:spark-sql-Expression.adoc[expressions]
+* [[clustering]] Clustering link:expressions/Expression.md[expressions]
 * [[requiredNumPartitions]] Required number of partitions (default: `None`)
 
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).

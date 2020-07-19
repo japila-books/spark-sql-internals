@@ -6,11 +6,11 @@
 [[creating-instance]]
 `HashPartitioning` takes the following to be created:
 
-* [[expressions]] Partitioning link:spark-sql-Expression.adoc[expressions]
+* [[expressions]] Partitioning link:expressions/Expression.md[expressions]
 * [[numPartitions]] Number of partitions
 
 [[Unevaluable]][[Expression]]
-`HashPartitioning` is an link:spark-sql-Expression.adoc[Expression] that link:spark-sql-Expression.adoc#Unevaluable[cannot be evaluated] (and produce a value given an internal row).
+`HashPartitioning` is an link:expressions/Expression.md[Expression] that link:expressions/Expression.md#Unevaluable[cannot be evaluated] (and produce a value given an internal row).
 
 `HashPartitioning` uses the link:spark-sql-Expression-Murmur3Hash.adoc[MurMur3 Hash] to compute the <<partitionIdExpression, partitionId>> for data distribution (consistent for shuffling and bucketing that is crucial for joins of bucketed and regular tables).
 
@@ -51,9 +51,9 @@ NOTE: `satisfies0` is part of the link:spark-sql-SparkPlan-Partitioning.adoc#sat
 
 * The base link:spark-sql-SparkPlan-Partitioning.adoc#satisfies0[satisfies0] holds
 
-* For an input link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution], the number of the given <<expressions, partitioning expressions>> and the link:spark-sql-Distribution-HashClusteredDistribution.adoc#expressions[HashClusteredDistribution's] are the same and link:spark-sql-Expression.adoc#semanticEquals[semantically equal] pair-wise
+* For an input link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution], the number of the given <<expressions, partitioning expressions>> and the link:spark-sql-Distribution-HashClusteredDistribution.adoc#expressions[HashClusteredDistribution's] are the same and link:expressions/Expression.md#semanticEquals[semantically equal] pair-wise
 
-* For an input link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution], the given <<expressions, partitioning expressions>> are among the link:spark-sql-Distribution-ClusteredDistribution.adoc#clustering[ClusteredDistribution's clustering expressions] and they are link:spark-sql-Expression.adoc#semanticEquals[semantically equal] pair-wise
+* For an input link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution], the given <<expressions, partitioning expressions>> are among the link:spark-sql-Distribution-ClusteredDistribution.adoc#clustering[ClusteredDistribution's clustering expressions] and they are link:expressions/Expression.md#semanticEquals[semantically equal] pair-wise
 
 Otherwise, `satisfies0` is negative (`false`).
 

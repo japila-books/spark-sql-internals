@@ -2,7 +2,7 @@
 
 `OptimizeIn` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans with In predicate expressions>> as follows:
 
-. Replaces an `In` expression that has an link:spark-sql-Expression-In.adoc#list[empty list] and the link:spark-sql-Expression-In.adoc#value[value] expression not link:spark-sql-Expression.adoc#nullable[nullable] to `false`
+. Replaces an `In` expression that has an link:spark-sql-Expression-In.adoc#list[empty list] and the link:spark-sql-Expression-In.adoc#value[value] expression not link:expressions/Expression.md#nullable[nullable] to `false`
 
 . Eliminates duplicates of link:spark-sql-Expression-Literal.adoc[Literal] expressions in an link:spark-sql-Expression-In.adoc[In] predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible]
 

@@ -4,7 +4,7 @@ title: Aggregate
 
 `Aggregate` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that holds the following:
 
-* [[groupingExpressions]] Grouping link:spark-sql-Expression.adoc[expressions]
+* [[groupingExpressions]] Grouping link:expressions/Expression.md[expressions]
 * [[aggregateExpressions]] Aggregate link:spark-sql-Expression-NamedExpression.adoc[named expressions]
 * [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
 
@@ -18,7 +18,7 @@ title: Aggregate
 
 * link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command
 
-NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] or link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec] physical operators in [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy.
+NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] or link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 [[properties]]
 .Aggregate's Properties
