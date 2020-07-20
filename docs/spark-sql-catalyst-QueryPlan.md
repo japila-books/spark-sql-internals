@@ -1,6 +1,6 @@
 # QueryPlan -- Structured Query Plan
 
-`QueryPlan` is part of link:spark-sql-catalyst.adoc[Catalyst] to build a link:spark-sql-catalyst-TreeNode.adoc[tree of relational operators] of a structured query.
+`QueryPlan` is part of [Catalyst](spark-sql-catalyst.adoc) to build a [tree of relational operators](catalyst/TreeNode.md) of a structured query.
 
 Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:SparkPlan.md[SparkPlan] (for logical and physical plans, respectively).
 
@@ -156,16 +156,15 @@ res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType
 ----
 ====
 
-=== [[simpleString]] Simple (Basic) Description with State Prefix -- `simpleString` Method
+## <span id="simpleString"> Simple (Basic) Description with State Prefix
 
-[source, scala]
-----
+```scala
 simpleString: String
-----
+```
 
-NOTE: `simpleString` is part of link:spark-sql-catalyst-TreeNode.adoc#simpleString[TreeNode Contract] for the simple text description of a tree node.
+`simpleString` adds a <<statePrefix, state prefix>> to the node's [simple text description](catalyst/TreeNode.md#simpleString).
 
-`simpleString` adds a <<statePrefix, state prefix>> to the node's link:spark-sql-catalyst-TreeNode.adoc#simpleString[simple text description].
+`simpleString` is part of the [TreeNode](catalyst/TreeNode.md#simpleString) abstraction.
 
 === [[statePrefix]] State Prefix -- `statePrefix` Method
 
@@ -174,7 +173,7 @@ NOTE: `simpleString` is part of link:spark-sql-catalyst-TreeNode.adoc#simpleStri
 statePrefix: String
 ----
 
-Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a link:spark-sql-catalyst-TreeNode.adoc#children[parent node]. Otherwise, `statePrefix` gives an empty string.
+Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a [parent node](catalyst/TreeNode.md#children). Otherwise, `statePrefix` gives an empty string.
 
 NOTE: `statePrefix` is used exclusively when `QueryPlan` is requested for the <<simpleString, simple text node description>>.
 
@@ -189,27 +188,25 @@ transformAllExpressions(rule: PartialFunction[Expression, Expression]): this.typ
 
 NOTE: `transformAllExpressions` is used when...FIXME
 
-=== [[verboseString]] Simple (Basic) Description with State Prefix -- `verboseString` Method
+## <span id="verboseString"> Simple (Basic) Description with State Prefix
 
-[source, scala]
-----
+```scala
 verboseString: String
-----
-
-NOTE: `verboseString` is part of link:spark-sql-catalyst-TreeNode.adoc#verboseString[TreeNode Contract] to...FIXME.
+```
 
 `verboseString` simply returns the <<simpleString, simple (basic) description with state prefix>>.
 
-=== [[innerChildren]] `innerChildren` Method
+`verboseString` is part of the [TreeNode](catalyst/TreeNode.md#verboseString) abstraction.
 
-[source, scala]
-----
+## <span id="innerChildren"> innerChildren
+
+```scala
 innerChildren: Seq[QueryPlan[_]]
-----
-
-NOTE: `innerChildren` is part of link:spark-sql-catalyst-TreeNode.adoc#innerChildren[TreeNode Contract] to...FIXME.
+```
 
 `innerChildren` simply returns the <<subqueries, subqueries>>.
+
+`innerChildren` is part of the [TreeNode](catalyst/TreeNode.md#innerChildren) abstraction.
 
 === [[subqueries]] `subqueries` Method
 

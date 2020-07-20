@@ -6,7 +6,7 @@
 
 `RewriteCorrelatedScalarSubquery` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`RewriteCorrelatedScalarSubquery` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`RewriteCorrelatedScalarSubquery` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -73,8 +73,6 @@ NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubq
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
-
 `apply` transforms the input link:spark-sql-LogicalPlan.adoc[logical plan] as follows:
 
 . For link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] operators, `apply`...FIXME
@@ -82,6 +80,8 @@ NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract
 . For link:spark-sql-LogicalPlan-Project.adoc[Project] operators, `apply`...FIXME
 
 . For link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators, `apply`...FIXME
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[extractCorrelatedScalarSubqueries]] Extracting ScalarSubquery Expressions with Children -- `extractCorrelatedScalarSubqueries` Internal Method
 

@@ -115,7 +115,7 @@ val rdd = WholeStageCodegenExec(rangeExec)(codegenStageId = 0).execute()
 ----
 
 [[generateTreeString]]
-`WholeStageCodegenExec` marks the <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the link:spark-sql-catalyst-TreeNode.adoc#generateTreeString[text representation of a physical plan tree].
+`WholeStageCodegenExec` marks the <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the [text representation of a physical plan tree](../catalyst/TreeNode.md#generateTreeString).
 
 [source, scala]
 ----

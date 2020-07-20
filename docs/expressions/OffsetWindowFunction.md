@@ -41,7 +41,7 @@ abstract class OffsetWindowFunction ... {
 |===
 
 [[children]]
-`OffsetWindowFunction` uses the <<input, input>>, <<offset, offset>> and <<default, default>> expressions as the <<spark-sql-catalyst-TreeNode.adoc#children, children>>.
+`OffsetWindowFunction` uses the <<input, input>>, <<offset, offset>> and <<default, default>> expressions as the [children](../catalyst/TreeNode.md#children).
 
 [[foldable]]
 `OffsetWindowFunction` is not <<expressions/Expression.md#foldable, foldable>>.

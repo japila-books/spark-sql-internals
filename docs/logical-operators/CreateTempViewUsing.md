@@ -56,13 +56,12 @@ Hive data source can only be used with tables, you can't use it with CREATE TEMP
 * [[provider]] Name of the <<spark-sql-DataSource.adoc#, data source provider>>
 * [[options]] Options (as `Map[String, String]`)
 
-=== [[argString]] `argString` Method
+## <span id="argString"> argString
 
-[source, scala]
-----
+```scala
 argString: String
-----
-
-NOTE: `argString` is part of the <<spark-sql-catalyst-TreeNode.adoc#argString, TreeNode Contract>> to...FIXME.
+```
 
 `argString`...FIXME
+
+`argString` is part of the [TreeNode](../catalyst/TreeNode.md#argString) abstraction.

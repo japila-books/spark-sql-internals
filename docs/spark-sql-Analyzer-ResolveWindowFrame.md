@@ -2,7 +2,7 @@
 
 `ResolveWindowFrame` is a logical resolution rule that the link:spark-sql-Analyzer.adoc[logical query plan analyzer] uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
 
-Technically, `ResolveWindowFrame` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveWindowFrame` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 `ResolveWindowFrame` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
@@ -55,6 +55,6 @@ scala> println(planAfter.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply`...FIXME

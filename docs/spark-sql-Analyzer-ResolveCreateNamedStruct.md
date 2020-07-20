@@ -4,7 +4,7 @@
 
 `ResolveCreateNamedStruct` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
 
-`ResolveCreateNamedStruct` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveCreateNamedStruct` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -30,17 +30,17 @@ scala> println(afterResolveCreateNamedStruct.numberedTreeString)
 02       +- Range (0, 1, step=1, splits=Some(8))
 ----
 
-=== [[apply]] Executing Rule -- `apply` Method
+=== [[apply]] Executing Rule
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
-
 `apply` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions which are not <<expressions/Expression.md#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.adoc#, Literal>> expressions.
 
 In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.adoc#children, children>> and replaces them with the <<spark-sql-Expression-NamedExpression.adoc#name, name>> of corresponding <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>, but only if the `NamedExpression` is resolved.
 
 In the end, `apply` creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> with new children.
+
+`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.

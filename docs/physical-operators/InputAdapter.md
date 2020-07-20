@@ -14,7 +14,7 @@ image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
 `InputAdapter` is <<creating-instance, created>> exclusively when `CollapseCodegenStages` is requested to link:spark-sql-CollapseCodegenStages.adoc#insertInputAdapter[insert InputAdapters] into a physical query plan with whole-stage Java code generation enabled.
 
 [[generateTreeString]]
-`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#generateTreeString[WholeStageCodegenExec] adds), e.g. for link:spark-sql-dataset-operators.adoc#explain[explain] or link:spark-sql-catalyst-TreeNode.adoc#numberedTreeString[TreeNode.numberedTreeString] operators.
+`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#generateTreeString[WholeStageCodegenExec] adds), e.g. for link:spark-sql-dataset-operators.adoc#explain[explain] or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString) operators.
 
 TIP: The number of `InputAdapters` is exactly the number of subtrees in a physical query plan that do not have stars.
 

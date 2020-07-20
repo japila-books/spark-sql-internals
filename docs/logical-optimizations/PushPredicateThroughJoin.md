@@ -1,6 +1,6 @@
 # PushPredicateThroughJoin Logical Optimization
 
-`PushPredicateThroughJoin` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`PushPredicateThroughJoin` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 When <<apply, executed>>, `PushPredicateThroughJoin`...FIXME
 
@@ -36,9 +36,9 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the link:spark-sql-catalyst-Rule.adoc#apply[Rule] contract to execute (_apply_) a rule on a link:spark-sql-catalyst-TreeNode.adoc[TreeNode] (e.g. link:spark-sql-LogicalPlan.adoc[LogicalPlan]).
-
 `apply`...FIXME
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[split]] `split` Internal Method
 

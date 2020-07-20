@@ -29,7 +29,7 @@ scala> println(analyzedPlan.numberedTreeString)
 ----
 
 [[innerChildren]]
-`InsertIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes>> (that should be shown as an inner nested tree of this node).
+`InsertIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
 
 [source, plaintext]
 ----

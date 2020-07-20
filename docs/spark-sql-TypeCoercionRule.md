@@ -26,7 +26,7 @@ trait TypeCoercionRule extends Rule[LogicalPlan] {
 Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 |===
 
-`TypeCoercionRule` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`TypeCoercionRule` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[implementations]]
 .TypeCoercionRules
@@ -72,20 +72,19 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 | [[WindowFrameCoercion]]
 |===
 
-=== [[apply]] Executing Rule -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+```
 
 `apply` <<coerceTypes, coerceTypes>> in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and returns the following:
 
-* The input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> itself if <<spark-sql-catalyst-TreeNode.adoc#fastEquals, matches>> the coerced plan
+* The input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> itself if [matches](catalyst/TreeNode.md#fastEquals) the coerced plan
 
 * The plan after <<propagateTypes, propagateTypes>> on the coerced plan
+
+`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[propagateTypes]] `propagateTypes` Internal Method
 

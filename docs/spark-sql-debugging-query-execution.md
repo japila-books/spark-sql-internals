@@ -64,7 +64,7 @@ debug(): Unit
 
 `debug` requests the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>>.
 
-`debug` <<spark-sql-catalyst-TreeNode.adoc#transform, transforms>> the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.adoc#, DebugExec>> physical operator for every physical operator.
+`debug` [transforms](catalyst/TreeNode.md#transform) the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.adoc#, DebugExec>> physical operator for every physical operator.
 
 `debug` requests the query plan to <<SparkPlan.md#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
 

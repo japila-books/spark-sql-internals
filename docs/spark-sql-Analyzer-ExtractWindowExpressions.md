@@ -4,7 +4,7 @@
 
 `ExtractWindowExpressions` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
 
-`ExtractWindowExpressions` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ExtractWindowExpressions` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 NOTE: `ExtractWindowExpressions` is a Scala object inside <<spark-sql-Analyzer.adoc#, Analyzer>> class (so you have to create an instance of the `Analyzer` class to access it or simply use <<SessionState.md#analyzer, SessionState>>).
 
@@ -28,22 +28,22 @@ val plan = q.queryExecution.logical
 val afterExtractWindowExpressions = ExtractWindowExpressions(plan)
 ----
 
-=== [[apply]] Executing Rule -- `apply` Method
+=== [[apply]] Executing Rule
 
 [source, scala]
 ----
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
-
-`apply` <<spark-sql-catalyst-TreeNode.adoc#transformDown, transforms the logical operators downwards>> in the input <<spark-sql-LogicalPlan.adoc#, logical plan>> as follows:
+`apply` [transforms the logical operators downwards](catalyst/TreeNode.md#transformDown) in the input <<spark-sql-LogicalPlan.adoc#, logical plan>> as follows:
 
 * For <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> unary operators with <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> operator (as the <<spark-sql-LogicalPlan-Filter.adoc#child, child>>) that <<hasWindowFunction, has a window function>> in the <<spark-sql-LogicalPlan-Aggregate.adoc#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
 * For <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operators that <<hasWindowFunction, have a window function>> in the <<spark-sql-LogicalPlan-Aggregate.adoc#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
 * For <<spark-sql-LogicalPlan-Project.adoc#, Project>> logical operators that <<hasWindowFunction, have a window function>> in the <<spark-sql-LogicalPlan-Project.adoc#projectList, projectList>>, `apply`...FIXME
+
+`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[hasWindowFunction]] `hasWindowFunction` Internal Method
 

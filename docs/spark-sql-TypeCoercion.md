@@ -9,7 +9,7 @@
 typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
 ----
 
-`typeCoercionRules` is a collection of <<spark-sql-catalyst-Rule.adoc#, Catalyst rules>> to transform <<spark-sql-LogicalPlan.adoc#, logical plans>> (in the order of execution):
+`typeCoercionRules` is a collection of <<spark-sql-catalyst-Rule.md#, Catalyst rules>> to transform <<spark-sql-LogicalPlan.adoc#, logical plans>> (in the order of execution):
 
 . <<spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc#, InConversion>>
 . `WidenSetOperationTypes`

@@ -4,7 +4,7 @@
 
 `COALESCE` or `REPARTITION` hints expect a partition number as the only parameter.
 
-Technically, `ResolveCoalesceHints` is a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveCoalesceHints` is a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 `ResolveCoalesceHints` is part of <<spark-sql-Analyzer.adoc#Hints, Hints>> fixed-point batch of rules (that is executed before any other rule).
 

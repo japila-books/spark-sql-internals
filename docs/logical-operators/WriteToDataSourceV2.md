@@ -19,7 +19,7 @@ NOTE: `WriteToDataSourceV2` is deprecated for <<spark-sql-LogicalPlan-AppendData
 * [[query]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
 
 [[children]]
-When requested for the <<spark-sql-catalyst-TreeNode.adoc#children, child operators>>, `WriteToDataSourceV2` gives the one <<query, child logical plan>>.
+When requested for the [child operators](../catalyst/TreeNode.md#children), `WriteToDataSourceV2` gives the one <<query, child logical plan>>.
 
 [[output]]
 When requested for the <<spark-sql-catalyst-QueryPlan.adoc#output, output attributes>>, `WriteToDataSourceV2` gives no attributes (an empty collection).

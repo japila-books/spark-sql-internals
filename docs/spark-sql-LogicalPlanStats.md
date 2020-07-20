@@ -183,9 +183,8 @@ In the end, `statsCache` caches the statistics for later use.
 
 === [[invalidateStatsCache]] Invalidating Statistics Cache (of All Operators in Logical Plan) -- `invalidateStatsCache` Method
 
-[source, scala]
-----
+```scala
 invalidateStatsCache(): Unit
-----
+```
 
-`invalidateStatsCache` clears <<statsCache, statsCache>> of the current logical operators followed by requesting the link:spark-sql-catalyst-TreeNode.adoc#children[child logical operators] for the same.
+`invalidateStatsCache` clears <<statsCache, statsCache>> of the current logical operators followed by requesting the [child logical operators](catalyst/TreeNode.md#children) for the same.

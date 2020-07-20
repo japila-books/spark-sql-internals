@@ -32,7 +32,7 @@ Exchange hashpartitioning((id#38L % 2), 2)
 ----
 
 [[nodeName]]
-When requested for <<spark-sql-catalyst-TreeNode.adoc#nodeName, nodeName>>, `ShuffleExchangeExec` gives *Exchange* prefix possibly followed by *(coordinator id: [coordinator-hash-code])* per the optional <<coordinator, ExchangeCoordinator>>.
+When requested for [nodeName](../catalyst/TreeNode.md#nodeName), `ShuffleExchangeExec` gives *Exchange* prefix possibly followed by *(coordinator id: [coordinator-hash-code])* per the optional <<coordinator, ExchangeCoordinator>>.
 
 [[outputPartitioning]]
 When requested for the <<SparkPlan.md#outputPartitioning, output data partitioning requirements>>, `ShuffleExchangeExec` simply returns the <<newPartitioning, Partitioning>>.

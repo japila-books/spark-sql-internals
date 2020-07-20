@@ -130,7 +130,7 @@ org.apache.spark.sql.AnalysisException: View `v1` already exists. If you want to
 ----
 
 [[innerChildren]]
-`CreateViewCommand` returns the <<child, child logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes>> (that should be shown as an inner nested tree of this node).
+`CreateViewCommand` returns the <<child, child logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
 
 [source, scala]
 ----

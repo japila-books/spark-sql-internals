@@ -15,8 +15,7 @@ apply(plan: LogicalPlan): Unit
 
 NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.html#scala.Function1[scala.Function1] contract to create a function of one parameter.
 
-`apply` <<spark-sql-catalyst-TreeNode.adoc#foreach, traverses>> the input <<spark-sql-LogicalPlan.adoc#, logical query plan>> and finds <<InsertIntoTable.adoc#, InsertIntoTable>> unary logical operators.
-
+`apply` [traverses](catalyst/TreeNode.md#foreach) the input <<spark-sql-LogicalPlan.adoc#, logical query plan>> and finds <<InsertIntoTable.adoc#, InsertIntoTable>> unary logical operators.
 
 * [[apply-InsertableRelation]] For an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>>...FIXME
 

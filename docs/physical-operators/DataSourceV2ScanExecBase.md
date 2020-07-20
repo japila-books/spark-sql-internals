@@ -115,7 +115,7 @@ simpleString(
 
 `simpleString`...FIXME
 
-`simpleString` is part of the [TreeNode](../spark-sql-catalyst-TreeNode.md#simpleString) abstraction.
+`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
 
 ## <span id="supportsColumnar"> supportsColumnar
 

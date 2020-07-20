@@ -722,7 +722,7 @@ scala> q.show
 
 Internally, `unionByName` creates a <<spark-sql-LogicalPlan-Union.adoc#, Union>> logical operator for this `Dataset` and <<spark-sql-LogicalPlan-Project.adoc#, Project>> logical operator with the `other` Dataset.
 
-In the end, `unionByName` applies the <<spark-sql-Optimizer-CombineUnions.adoc#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to <<spark-sql-catalyst-TreeNode.adoc#mapChildren, wrap the child operators>> with <<spark-sql-LogicalPlan-AnalysisBarrier.adoc#, AnalysisBarriers>>.
+In the end, `unionByName` applies the <<spark-sql-Optimizer-CombineUnions.adoc#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<spark-sql-LogicalPlan-AnalysisBarrier.adoc#, AnalysisBarriers>>.
 
 [source, scala]
 ----

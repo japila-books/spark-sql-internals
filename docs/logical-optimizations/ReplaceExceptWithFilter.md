@@ -1,9 +1,9 @@
 # ReplaceExceptWithFilter Logical Optimization Rule -- Rewriting Except (DISTINCT) Operators
 
-`ReplaceExceptWithFilter` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`ReplaceExceptWithFilter` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:spark-sql-catalyst-Rule.adoc#apply[executed], `ReplaceExceptWithFilter` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to...FIXME
+When link:spark-sql-catalyst-Rule.md#apply[executed], `ReplaceExceptWithFilter` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to...FIXME
 
 `ReplaceExceptWithFilter` is a part of the link:spark-sql-Optimizer.adoc#Replace-Operators[Replace Operators] fixed-point rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 

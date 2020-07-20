@@ -13,7 +13,7 @@ default(p: LogicalPlan): Statistics
 
 NOTE: `default` is part of link:spark-sql-LogicalPlanVisitor.adoc#default[LogicalPlanVisitor Contract] to compute the size statistic (in bytes) of a logical operator.
 
-`default` requests a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] for the statistics or creates a link:spark-sql-Statistics.adoc[Statistics] with the product of the `sizeInBytes` statistic of every link:spark-sql-catalyst-TreeNode.adoc#children[child operator].
+`default` requests a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] for the statistics or creates a link:spark-sql-Statistics.adoc[Statistics] with the product of the `sizeInBytes` statistic of every [child operator](catalyst/TreeNode.md#children).
 
 NOTE: `default` uses the cache of the estimated statistics of a logical operator so the statistics of an operator is link:spark-sql-LogicalPlanStats.adoc#stats[computed] once until it is link:spark-sql-LogicalPlanStats.adoc#invalidateStatsCache[invalidated].
 

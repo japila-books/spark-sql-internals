@@ -10,9 +10,9 @@
 `HiveTableScanExec` is <<creating-instance, created>> exclusively when link:HiveTableScans.adoc[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
 [[nodeName]]
-`HiveTableScanExec` uses the link:HiveTableRelation.adoc#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the link:../spark-sql-catalyst-TreeNode.adoc#nodeName[node name]:
+`HiveTableScanExec` uses the link:HiveTableRelation.adoc#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the [node name](../catalyst/TreeNode.md#nodeName):
 
-```
+```text
 Scan hive [table]
 ```
 

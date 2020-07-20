@@ -131,16 +131,17 @@ NOTE: `verboseString` is part of link:spark-sql-catalyst-QueryPlan.adoc#verboseS
 
 `verboseString` simply returns the <<redact, redacted sensitive information>> in link:spark-sql-catalyst-QueryPlan.adoc#verboseString[verboseString] (of the parent `QueryPlan`).
 
-=== [[treeString]] Text Representation of All Nodes in Tree -- `treeString` Method
+## <span id="treeString"> Text Representation of All Nodes in Tree
 
-[source, scala]
-----
-treeString(verbose: Boolean, addSuffix: Boolean): String
-----
+```scala
+treeString(
+  verbose: Boolean,
+  addSuffix: Boolean): String
+```
 
-NOTE: `treeString` is part of link:spark-sql-catalyst-TreeNode.adoc#treeString[TreeNode Contract] to...FIXME.
+`treeString` simply returns the <<redact, redacted sensitive information>> in the [text representation of all nodes (in query plan tree)](../catalyst/TreeNode.md#treeString) (of the parent `TreeNode`).
 
-`treeString` simply returns the <<redact, redacted sensitive information>> in the link:spark-sql-catalyst-TreeNode.adoc#treeString[text representation of all nodes (in query plan tree)] (of the parent `TreeNode`).
+`treeString` is part of the [TreeNode](../catalyst/TreeNode.md#treeString) abstraction.
 
 === [[redact]] Redacting Sensitive Information -- `redact` Internal Method
 

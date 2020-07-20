@@ -11,10 +11,10 @@
 ??? note "High-Level Dataset API"
     A structured query can be expressed using Spark SQL's high-level [Dataset](../spark-sql-Dataset.md) API for Scala, Java, Python, R or good ol' SQL.
 
-A `SparkPlan` physical operator is a [Catalyst tree node](../spark-sql-catalyst-TreeNode.md) that may have zero or more [child physical operators](../spark-sql-catalyst-TreeNode.md#children).
+A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.md) that may have zero or more [child physical operators](../catalyst/TreeNode.md#children).
 
 ??? note "Catalyst Framework"
-    A structured query is basically a single `SparkPlan` physical operator with [child physical operators](../spark-sql-catalyst-TreeNode.md#children).
+    A structured query is basically a single `SparkPlan` physical operator with [child physical operators](../catalyst/TreeNode.md#children).
 
     Spark SQL uses [Catalyst](../spark-sql-catalyst.md) tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
 
@@ -347,9 +347,9 @@ Executed exclusively as part of [prepare](#prepare) and is supposed to set some 
 requiredChildDistribution: Seq[Distribution]
 ```
 
-The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how [child](../spark-sql-catalyst-TreeNode.md#children) physical operators' output is split across partitions.
+The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
 
-Defaults to a [UnspecifiedDistribution](../spark-sql-Distribution-UnspecifiedDistribution.md) for all of the [child](../spark-sql-catalyst-TreeNode.md#children) operators.
+Defaults to a [UnspecifiedDistribution](../spark-sql-Distribution-UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
 
 Used exclusively when `EnsureRequirements` physical query plan optimization is [executed](../spark-sql-EnsureRequirements.md#apply) (and [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering)).
 
@@ -359,9 +359,9 @@ Used exclusively when `EnsureRequirements` physical query plan optimization is [
 requiredChildOrdering: Seq[Seq[SortOrder]]
 ```
 
-Specifies required sort ordering for each partition requirement (from [child](../spark-sql-catalyst-TreeNode.md#children) operators)
+Specifies required sort ordering for each partition requirement (from [child](../catalyst/TreeNode.md#children) operators)
 
-Defaults to no sort ordering for all of the physical operator's [child](../spark-sql-catalyst-TreeNode.md#children).
+Defaults to no sort ordering for all of the physical operator's [child](../catalyst/TreeNode.md#children).
 
 Used exclusively when `EnsureRequirements` physical query plan optimization is [executed](../spark-sql-EnsureRequirements.md#apply) (and [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering)).
 
@@ -375,7 +375,7 @@ Used exclusively when `EnsureRequirements` physical query plan optimization is [
 execute(): RDD[InternalRow]
 ```
 
-"Executes" a physical operator (and its link:spark-sql-catalyst-TreeNode.adoc#children[children]) that triggers physical query planning and in the end generates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
+"Executes" a physical operator (and its [children](../catalyst/TreeNode.md#children)) that triggers physical query planning and in the end generates an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`).
 
 Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
@@ -419,11 +419,11 @@ Prepares a physical operator for execution
 
 `prepare` is used mainly when a physical operator is requested to <<executeQuery, execute a structured query>>
 
-`prepare` is also used recursively for every link:spark-sql-catalyst-TreeNode.adoc#children[child] physical operator (down the physical plan) and when a physical operator is requested to <<prepareSubqueries, prepare subqueries>>.
+`prepare` is also used recursively for every [child](../catalyst/TreeNode.md#children) physical operator (down the physical plan) and when a physical operator is requested to <<prepareSubqueries, prepare subqueries>>.
 
 NOTE: `prepare` is idempotent, i.e. can be called multiple times with no change to the final result. It uses <<prepared, prepared>> internal flag to execute the physical operator once only.
 
-Internally, `prepare` calls <<doPrepare, doPrepare>> of its link:spark-sql-catalyst-TreeNode.adoc#children[children] before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
+Internally, `prepare` calls <<doPrepare, doPrepare>> of its [children](../catalyst/TreeNode.md#children) before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
 
 ### executeBroadcast
 

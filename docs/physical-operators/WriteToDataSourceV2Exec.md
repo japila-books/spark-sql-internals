@@ -15,7 +15,7 @@ NOTE: Although <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSou
 * [[query]] Child <<SparkPlan.md#, physical plan>>
 
 [[children]]
-When requested for the <<spark-sql-catalyst-TreeNode.adoc#children, child operators>>, `WriteToDataSourceV2Exec` gives the one <<query, child physical plan>>.
+When requested for the [child operators](../catalyst/TreeNode.md#children), `WriteToDataSourceV2Exec` gives the one <<query, child physical plan>>.
 
 [[output]]
 When requested for the <<spark-sql-catalyst-QueryPlan.adoc#output, output attributes>>, `WriteToDataSourceV2Exec` gives no attributes (an empty collection).

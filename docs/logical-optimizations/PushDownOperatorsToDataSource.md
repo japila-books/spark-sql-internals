@@ -2,7 +2,7 @@
 
 `PushDownOperatorsToDataSource` is a *logical optimization* that <<apply, pushes down operators to underlying data sources>> (i.e. <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relations>>) (before planning so that data source can report statistics more accurately).
 
-Technically, `PushDownOperatorsToDataSource` is a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+Technically, `PushDownOperatorsToDataSource` is a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 `PushDownOperatorsToDataSource` is part of the <<spark-sql-SparkOptimizer.adoc#PushDownOperatorsToDataSource, Push down operators to data source scan>> once-executed rule batch of the <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>>.
 
@@ -13,9 +13,9 @@ Technically, `PushDownOperatorsToDataSource` is a <<spark-sql-catalyst-Rule.adoc
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
-
 `apply`...FIXME
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[pushDownRequiredColumns]] `pushDownRequiredColumns` Internal Method
 
@@ -34,9 +34,9 @@ Note that the input `requiredByParent` attributes are not considered in the requ
 
 . For <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> unary logical operator, `pushDownRequiredColumns`...FIXME
 
-. For other logical operators, `pushDownRequiredColumns` simply executes itself (using <<spark-sql-catalyst-TreeNode.adoc#mapChildren, TreeNode.mapChildren>>) recursively on the <<spark-sql-catalyst-TreeNode.adoc#children, child nodes>> (logical operators)
+. For other logical operators, `pushDownRequiredColumns` simply executes itself (using [TreeNode.mapChildren](../catalyst/TreeNode.md#mapChildren)) recursively on the [child nodes](../catalyst/TreeNode.md#children) (logical operators)
 
-NOTE: `pushDownRequiredColumns` is used exclusively when `PushDownOperatorsToDataSource` logical optimization is requested to <<apply, execute>>.
+`pushDownRequiredColumns` is used when `PushDownOperatorsToDataSource` logical optimization is requested to <<apply, execute>>.
 
 === [[FilterAndProject]][[unapply]] Destructuring Logical Operator -- `FilterAndProject.unapply` Method
 

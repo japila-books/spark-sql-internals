@@ -4,10 +4,9 @@
 
 `GetCurrentDatabase` is part of the <<spark-sql-Optimizer.adoc#GetCurrentDatabase, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`GetCurrentDatabase` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`GetCurrentDatabase` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-[source, scala]
-----
+```text
 val q = sql("SELECT current_database() AS db")
 val analyzedPlan = q.queryExecution.analyzed
 
@@ -21,27 +20,24 @@ val afterGetCurrentDatabase = GetCurrentDatabase(spark.sessionState.catalog)(ana
 scala> println(afterGetCurrentDatabase.numberedTreeString)
 00 Project [default AS db#22]
 01 +- OneRowRelation
-----
-
-[NOTE]
-====
-`GetCurrentDatabase` corresponds to SQL's `current_database()` function.
-
-You can access the current database in Scala using
-
 ```
-scala> val database = spark.catalog.currentDatabase
-database: String = default
-```
-====
 
-=== [[apply]] Executing Rule -- `apply` Method
+!!! note
+    `GetCurrentDatabase` corresponds to SQL's `current_database()` function.
 
-[source, scala]
-----
+    You can access the current database in Scala using
+
+    ```text
+    scala> val database = spark.catalog.currentDatabase
+    database: String = default
+    ```
+
+## <span id="apply"> Executing Rule
+
+```scala
 apply(plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+```
 
 `apply`...FIXME
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.

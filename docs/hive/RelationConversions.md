@@ -21,7 +21,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the link:../spark-sql-catalyst-Rule.adoc#apply[Rule] contract to execute (apply) a rule on a link:../spark-sql-LogicalPlan.adoc[LogicalPlan].
+NOTE: `apply` is part of the link:../spark-sql-catalyst-Rule.md#apply[Rule] contract to execute (apply) a rule on a link:../spark-sql-LogicalPlan.adoc[LogicalPlan].
 
 `apply` traverses the input link:../spark-sql-LogicalPlan.adoc[logical plan] looking for link:../InsertIntoTable.adoc[InsertIntoTables] (over a link:HiveTableRelation.adoc[HiveTableRelation]) or link:HiveTableRelation.adoc[HiveTableRelation] logical operators:
 

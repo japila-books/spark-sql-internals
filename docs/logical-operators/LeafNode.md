@@ -2,7 +2,7 @@ title: LeafNode
 
 # LeafNode -- Base Logical Operator with No Child Operators and Optional Statistics
 
-`LeafNode` is the base of <<extensions, logical operators>> that have no <<spark-sql-catalyst-TreeNode.adoc#children, child>> operators.
+`LeafNode` is the base of <<extensions, logical operators>> that have no [child](../catalyst/TreeNode.md#children) operators.
 
 `LeafNode` that wants to survive analysis has to define <<computeStats, computeStats>> as it throws an `UnsupportedOperationException` by default.
 

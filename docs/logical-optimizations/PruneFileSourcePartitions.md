@@ -12,8 +12,6 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the link:spark-sql-catalyst-Rule.adoc#apply[Rule] contract to execute (apply) a rule on a link:spark-sql-catalyst-TreeNode.adoc[TreeNode] (e.g. link:spark-sql-LogicalPlan.adoc[LogicalPlan]).
-
 `apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
 `apply` transforms link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelations] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] and a link:CatalogFileIndex.adoc[CatalogFileIndex] (i.e. for Hive tables) when there are filter expressions defined and the Hive table is partitioned.
@@ -27,3 +25,5 @@ With predicates left for partition pruning, `apply` requests the link:CatalogFil
 `apply` replaces the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#location[FileIndex] in the link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] with the `PrunedInMemoryFileIndex` and the link:spark-sql-CatalogStatistics.adoc#sizeInBytes[total size] statistic to the link:PartitioningAwareFileIndex.adoc#sizeInBytes[PrunedInMemoryFileIndex's].
 
 In the end, `apply` creates a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator (with the "pruned" `LogicalRelation` as a child operator and all the filter predicate expressions combined together with `And` expression) and makes it a child operator of a link:spark-sql-LogicalPlan-Project.adoc[Project] operator.
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.

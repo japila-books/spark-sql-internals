@@ -110,7 +110,7 @@ The type of a table (`CatalogTableType`) can be one of the following:
 * `MANAGED` for managed tables (link:hive/HiveClientImpl.adoc#getTableOption[MANAGED_TABLE] in Hive)
 * `VIEW` for views (link:hive/HiveClientImpl.adoc#getTableOption[VIRTUAL_VIEW] in Hive)
 
-`CatalogTableType` is included when a `TreeNode` is requested for a xref:spark-sql-catalyst-TreeNode.adoc#shouldConvertToJson[JSON representation] for...FIXME
+`CatalogTableType` is included when a `TreeNode` is requested for a [JSON representation](catalyst/TreeNode.md#shouldConvertToJson) for...FIXME
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 

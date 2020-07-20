@@ -4,7 +4,7 @@
 
 `ReorderJoin` is part of the <<spark-sql-Optimizer.adoc#Join_Reorder, Join Reorder>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`ReorderJoin` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ReorderJoin` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 `CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
@@ -138,20 +138,19 @@ log4j.logger.org.apache.spark.sql.catalyst.optimizer.JoinReorderDP=DEBUG
 Refer to link:spark-logging.adoc[Logging].
 ====
 
-=== [[apply]] Executing Rule -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+```
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
 
 * link:spark-sql-LogicalPlan-Join.adoc[Join] for `CROSS` or `INNER` joins with a join condition
 
 * link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
 
 === [[reorder]] Reordering Logical Plan with Join Operators -- `reorder` Internal Method
 

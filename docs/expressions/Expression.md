@@ -1,17 +1,15 @@
-title: Expression
+# Catalyst Expression
 
-# Catalyst Expression -- Executable Node in Catalyst Tree
+`Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [FIXME](#implementations) that [method](#method) and...FIXME.
 
-`Expression` is a executable link:spark-sql-catalyst-TreeNode.adoc[node] (in a Catalyst tree) that can <<eval, evaluate>> a result value given input values, i.e. can produce a JVM object per `InternalRow`.
+`Expression` is a executable [node](../catalyst/TreeNode.md) (in a Catalyst multi-tree) that can be [evaluated](#eval) to a value for an input row (e.g. produces a JVM object for an [InternalRow](../spark-sql-InternalRow.md)).
 
-NOTE: `Expression` is often called a *Catalyst expression* even though it is _merely_ built using (not be part of) the link:spark-sql-catalyst.adoc[Catalyst -- Tree Manipulation Framework].
+`Expression` is often referred to as a **Catalyst expression**, but it is _simply_ built using the [Catalyst Tree Manipulation Framework](../spark-sql-catalyst.md).
 
-[source, scala]
-----
+```scala
 // evaluating an expression
 // Use Literal expression to create an expression from a Scala object
-import org.apache.spark.sql.catalyst.expressions.Expression
-import org.apache.spark.sql.catalyst.expressions.Literal
+import org.apache.spark.sql.catalyst.expressions.{Expression, Literal}
 val e: Expression = Literal("hello")
 
 import org.apache.spark.sql.catalyst.expressions.EmptyRow
@@ -19,31 +17,11 @@ val v: Any = e.eval(EmptyRow)
 
 // Convert to Scala's String
 import org.apache.spark.unsafe.types.UTF8String
-scala> val s = v.asInstanceOf[UTF8String].toString
-s: String = hello
-----
+val s = v.asInstanceOf[UTF8String].toString
+assert(s == "hello")
+```
 
-`Expression` can <<genCode, generate a Java source code>> that is then used in evaluation.
-
-[[deterministic]]
-`Expression` is *deterministic* when evaluates to the same result for the same input(s). An expression is deterministic if all the link:spark-sql-catalyst-TreeNode.adoc#children[child expressions] are (which for <<LeafExpression, leaf expressions>> with no child expressions is always true).
-
-NOTE: A deterministic expression is like a https://en.wikipedia.org/wiki/Pure_function[pure function] in functional programming languages.
-
-[source, scala]
-----
-val e = $"a".expr
-scala> :type e
-org.apache.spark.sql.catalyst.expressions.Expression
-
-scala> println(e.deterministic)
-true
-----
-
-NOTE: Non-deterministic expressions are not allowed in some logical operators and are excluded in some optimizations.
-
-[[verboseString]]
-`verboseString` is...FIXME
+`Expression` can [generate a Java source code](#genCode) that is then used in code-gen non-interpreted evaluation.
 
 [[specialized-expressions]]
 .Specialized Expressions
@@ -88,7 +66,7 @@ a|
 
 | [[LeafExpression]] `LeafExpression`
 | abstract class
-| Has no link:spark-sql-catalyst-TreeNode.adoc#children[child expressions] (and hence "terminates" the expression tree).
+| Has no [child expressions](../catalyst/TreeNode.md#children) (and hence "terminates" the expression tree).
 a|
 
 * link:spark-sql-Expression-Attribute.adoc[Attribute]
@@ -189,6 +167,23 @@ a|
 * [WindowSpecDefinition](WindowSpecDefinition.md)
 |===
 
+## <span id="deterministic"> deterministic Flag
+
+`Expression` is *deterministic* when evaluates to the same result for the same input(s). An expression is deterministic if all the [child expressions](../catalyst/TreeNode.md#children) are (which for <<LeafExpression, leaf expressions>> with no child expressions is always true).
+
+NOTE: A deterministic expression is like a https://en.wikipedia.org/wiki/Pure_function[pure function] in functional programming languages.
+
+```text
+val e = $"a".expr
+scala> :type e
+org.apache.spark.sql.catalyst.expressions.Expression
+
+scala> println(e.deterministic)
+true
+```
+
+NOTE: Non-deterministic expressions are not allowed in some logical operators and are excluded in some optimizations.
+
 === [[contract]] Expression Contract
 
 [source, scala]
@@ -288,7 +283,7 @@ In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the follow
 [javaType] [newValue] = [funcFullName]([INPUT_ROW]);
 ```
 
-The `funcFullName` is the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the link:spark-sql-catalyst-TreeNode.adoc#nodeName[name of the current expression node].
+The `funcFullName` is the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
 
 TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
 
@@ -314,7 +309,7 @@ sql: String
 
 `sql` gives a SQL representation.
 
-Internally, `sql` gives a text representation with <<prettyName, prettyName>> followed by `sql` of link:spark-sql-catalyst-TreeNode.adoc#children[children] in the round brackets and concatenated using the comma (`,`).
+Internally, `sql` gives a text representation with <<prettyName, prettyName>> followed by `sql` of [children](../catalyst/TreeNode.md#children) in the round brackets and concatenated using the comma (`,`).
 
 [source, scala]
 ----

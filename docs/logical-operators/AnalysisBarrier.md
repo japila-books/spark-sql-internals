@@ -21,7 +21,7 @@ title: AnalysisBarrier
 `AnalysisBarrier` takes a single `child` <<spark-sql-LogicalPlan.adoc#, logical query plan>> when created.
 
 [[innerChildren]]
-`AnalysisBarrier` returns the <<child, child logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes>> (that should be shown as an inner nested tree of this node).
+`AnalysisBarrier` returns the <<child, child logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
 
 [[output]]
 `AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>.

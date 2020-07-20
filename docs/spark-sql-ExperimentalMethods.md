@@ -10,7 +10,7 @@
 | Description
 
 | extraOptimizations
-a| [[extraOptimizations]] Collection of link:spark-sql-catalyst-Rule.adoc[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects)
+a| [[extraOptimizations]] Collection of link:spark-sql-catalyst-Rule.md[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects)
 
 [source, scala]
 ----

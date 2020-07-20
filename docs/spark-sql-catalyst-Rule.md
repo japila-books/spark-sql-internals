@@ -1,6 +1,6 @@
 # Rule -- Named Transformation of TreeNodes
 
-`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_ or _transform_) a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> to produce a new `TreeNode`.
+`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_ or _transform_) a [TreeNode](catalyst/TreeNode.md) to produce a new `TreeNode`.
 
 [[apply]]
 [[contract]]
@@ -16,7 +16,7 @@ abstract class Rule[TreeType <: TreeNode[_]] {
 ----
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the <<spark-sql-catalyst-TreeNode.adoc#implementations, TreeNode implementation>> that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the [TreeNode](catalyst/TreeNode.md#implementations) implementation that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[ruleName]]
 `Rule` has a *rule name* (that is the class name of a rule).

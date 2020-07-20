@@ -1,6 +1,6 @@
 # FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
 
-`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
+`FindDataSourceTable` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
 
 `FindDataSourceTable` is part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 
@@ -57,7 +57,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule] contract.
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule] contract.
 
 `apply` resolves link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
 

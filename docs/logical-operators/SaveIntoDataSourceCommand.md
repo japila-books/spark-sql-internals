@@ -7,7 +7,7 @@ title: SaveIntoDataSourceCommand
 `SaveIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSource` is requested to <<spark-sql-DataSource.adoc#planForWriting, create a logical command for writing>> (to a <<spark-sql-CreatableRelationProvider.adoc#implementations, CreatableRelationProvider>> data source).
 
 [[innerChildren]]
-`SaveIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the <<spark-sql-catalyst-TreeNode.adoc#innerChildren, inner nodes (that should be shown as an inner nested tree of this node)>>.
+`SaveIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the [inner nodes (that should be shown as an inner nested tree of this node)](../catalyst/TreeNode.md#innerChildren).
 
 [source, scala]
 ----

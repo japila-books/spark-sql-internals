@@ -380,7 +380,7 @@ NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStat
 simpleString: String
 ----
 
-`simpleString` requests the <<executedPlan, optimized SparkPlan>> for the link:spark-sql-catalyst-TreeNode.adoc#treeString[text representation] (of all nodes in the query tree) with `verbose` flag turned off.
+`simpleString` requests the <<executedPlan, optimized SparkPlan>> for the [text representation](catalyst/TreeNode.md#treeString) (of all nodes in the query tree) with `verbose` flag turned off.
 
 In the end, `simpleString` adds *== Physical Plan ==* header to the text representation and <<withRedaction, redacts sensitive information>>.
 

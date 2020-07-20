@@ -16,7 +16,7 @@ NOTE: `AppendData` has replaced the deprecated <<spark-sql-LogicalPlan-WriteToDa
 * [[isByName]] `isByName` flag
 
 [[children]]
-`AppendData` has a <<spark-sql-catalyst-TreeNode.adoc#children, single child logical operator>> that is exactly the <<query, logical operator>>.
+`AppendData` has a [single child logical operator](../catalyst/TreeNode.md#children) that is exactly the <<query, logical operator>>.
 
 `AppendData` is resolved using <<spark-sql-Analyzer-ResolveOutputRelation.adoc#, ResolveOutputRelation>> logical resolution rule.
 

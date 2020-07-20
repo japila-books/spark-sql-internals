@@ -80,7 +80,7 @@ NOTE: link:SessionState.md[SessionState] uses its own `Analyzer` with custom <<e
 | Description
 
 | [[extendedResolutionRules]] `extendedResolutionRules`
-| Additional link:spark-sql-catalyst-Rule.adoc[rules] for <<Resolution, Resolution>> batch.
+| Additional link:spark-sql-catalyst-Rule.md[rules] for <<Resolution, Resolution>> batch.
 
 Empty by default
 
@@ -90,7 +90,7 @@ Empty by default
 Set when `Analyzer` <<creating-instance, is created>> (and can be defined explicitly or through link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
 
 | [[postHocResolutionRules]] `postHocResolutionRules`
-| The only link:spark-sql-catalyst-Rule.adoc[rules] in <<Post-Hoc-Resolution, Post-Hoc Resolution>> batch if defined (that are executed in one pass, i.e. `Once` strategy). Empty by default
+| The only link:spark-sql-catalyst-Rule.md[rules] in <<Post-Hoc-Resolution, Post-Hoc Resolution>> batch if defined (that are executed in one pass, i.e. `Once` strategy). Empty by default
 |===
 
 `Analyzer` is used by `QueryExecution` to link:spark-sql-QueryExecution.adoc#analyzed[resolve the managed `LogicalPlan`] (and, as a sort of follow-up, link:spark-sql-QueryExecution.adoc#assertAnalyzed[assert that a structured query has already been properly analyzed], i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).

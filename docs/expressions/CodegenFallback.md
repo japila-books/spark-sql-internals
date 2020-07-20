@@ -75,7 +75,7 @@ NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression C
 
 `doGenCode` requests the input `CodegenContext` to add itself to the <<spark-sql-CodegenContext.adoc#references, references>>.
 
-`doGenCode` <<spark-sql-catalyst-TreeNode.adoc#foreach, walks down the expression tree>> to find <<spark-sql-Expression-Nondeterministic.adoc#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
+`doGenCode` [walks down the expression tree](../catalyst/TreeNode.md#foreach) to find <<spark-sql-Expression-Nondeterministic.adoc#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
 
 . Requests the input `CodegenContext` to add it to the <<spark-sql-CodegenContext.adoc#references, references>>
 

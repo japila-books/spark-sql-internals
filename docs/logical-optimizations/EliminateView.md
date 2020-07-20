@@ -4,7 +4,7 @@
 
 `EliminateView` is part of the <<spark-sql-Optimizer.adoc#Finish_Analysis, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`EliminateView` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`EliminateView` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -32,21 +32,20 @@ scala> println(afterEliminateView.numberedTreeString)
 // TIP: You may also want to use EliminateSubqueryAliases to eliminate SubqueryAliases
 ----
 
-=== [[apply]] Executing Rule -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+```
 
 `apply` simply removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator.
 
 `apply` throws an `AssertionError` when the <<spark-sql-LogicalPlan-View.adoc#output, output schema>> of the `View` operator does not match the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator.
 
-```
+```text
 assertion failed: The output of the child [output] is different from the view output [output]
 ```
 
 NOTE: The assertion should not really happen since <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>> logical analysis rule is executed earlier and takes care of not allowing for such difference in the output schema (by throwing an `AnalysisException` earlier).
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.

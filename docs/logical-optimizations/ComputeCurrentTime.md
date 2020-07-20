@@ -4,7 +4,7 @@
 
 `ComputeCurrentTime` is part of the <<spark-sql-Optimizer.adoc#ComputeCurrentTime, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`ComputeCurrentTime` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ComputeCurrentTime` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -35,13 +35,12 @@ scala> println(afterComputeCurrentTime.numberedTreeString)
 01 +- Range (0, 1, step=1, splits=Some(8))
 ----
 
-=== [[apply]] Executing Rule -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+```
 
 `apply`...FIXME
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.

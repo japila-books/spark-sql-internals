@@ -2,7 +2,7 @@ title: LocalTableScanExec
 
 # LocalTableScanExec Leaf Physical Operator
 
-`LocalTableScanExec` is a link:SparkPlan.md#LeafExecNode[leaf physical operator] (i.e. no link:spark-sql-catalyst-TreeNode.adoc#children[children]) and `producedAttributes` being `outputSet`.
+`LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) and `producedAttributes` being `outputSet`.
 
 `LocalTableScanExec` is <<creating-instance, created>> when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] and Spark Structured Streaming's `MemoryPlan` logical operators.
 

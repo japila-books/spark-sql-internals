@@ -10,7 +10,7 @@ NOTE: Prefer `EXISTS` (over `Not` with `In` with `ListQuery` subquery expression
 
 `RewritePredicateSubquery` is part of the <<spark-sql-Optimizer.adoc#RewriteSubquery, RewriteSubquery>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`RewritePredicateSubquery` is simply a <<spark-sql-catalyst-Rule.adoc#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`RewritePredicateSubquery` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -81,8 +81,6 @@ NOTE: `getValueExpression` is used when...FIXME
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<spark-sql-catalyst-Rule.adoc#apply, Rule Contract>> to execute (apply) a rule on a <<spark-sql-catalyst-TreeNode.adoc#, TreeNode>> (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
-
 `apply` transforms link:spark-sql-LogicalPlan-Filter.adoc[Filter] unary operators in the input link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` link:spark-sql-PredicateHelper.adoc#splitConjunctivePredicates[splits conjunctive predicates] in the link:spark-sql-LogicalPlan-Filter.adoc#condition[condition expression] (i.e. expressions separated by `And` expression) and then partitions them into two collections of expressions link:spark-sql-Expression-SubqueryExpression.adoc#hasInOrExistsSubquery[with and without In or Exists subquery expressions].
@@ -100,3 +98,5 @@ In the end, `apply` creates a new logical plan with link:spark-sql-LogicalPlan-J
 * For `Not` expressions with a link:spark-sql-Expression-In.adoc[In] predicate expression with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>>, <<rewriteExistentialExpr, rewriteExistentialExpr>> followed by link:spark-sql-PredicateHelper.adoc#splitConjunctivePredicates[splitting conjunctive predicates] and creates a link:spark-sql-LogicalPlan-Join.adoc#creating-instance[Join] operator with link:spark-sql-joins.adoc#LeftAnti[LeftAnti] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
 * For other predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a link:spark-sql-LogicalPlan-Project.adoc#creating-instance[Project] unary operator with a link:spark-sql-LogicalPlan-Filter.adoc#creating-instance[Filter] operator
+
+`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.

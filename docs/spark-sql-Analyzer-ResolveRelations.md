@@ -6,7 +6,7 @@
 
 * Other uses of `UnresolvedRelation`
 
-Technically, `ResolveRelations` is just a link:spark-sql-catalyst-Rule.adoc[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveRelations` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 `ResolveRelations` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
@@ -78,7 +78,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.adoc#apply[Rule Contract] to execute a rule on a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule Contract] to execute a rule on a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 For a link:InsertIntoTable.adoc[InsertIntoTable] logical operator with a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] child operator, `apply` <<lookupTableFromCatalog, lookupTableFromCatalog>> and executes the link:spark-sql-Optimizer-EliminateSubqueryAliases.adoc[EliminateSubqueryAliases] optimization rule.
 

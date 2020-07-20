@@ -2,7 +2,7 @@
 
 `LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
-NOTE: A logical query plan is a tree of <<spark-sql-catalyst-TreeNode.adoc#, nodes>> of logical operators that in turn can have (trees of) <<expressions/Expression.md#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
+NOTE: A logical query plan is a tree of [nodes](../catalyst/TreeNode.md) of logical operators that in turn can have (trees of) <<expressions/Expression.md#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
 
 `LogicalPlan` can be <<resolved, resolved>>.
 
@@ -59,7 +59,7 @@ Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is
 ====
 
 [[childrenResolved]]
-A logical operator is considered *partially resolved* when its link:spark-sql-catalyst-TreeNode.adoc#children[child operators] are resolved (aka _children resolved_).
+A logical operator is considered *partially resolved* when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
 [[resolved]]
 A logical operator is (fully) *resolved* to a specific schema when all link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] and the <<childrenResolved, children are resolved>>.
@@ -100,13 +100,13 @@ NOTE: `LogicalPlan` is in the end transformed to a link:SparkPlan.md[physical qu
 | Description
 
 | link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
-| [[LeafNode]] Logical operator with no <<spark-sql-catalyst-TreeNode.adoc#children, child>> operators
+| [[LeafNode]] Logical operator with no [child](../catalyst/TreeNode.md#children) operators
 
 | `UnaryNode`
-| [[UnaryNode]] Logical plan with a single <<spark-sql-catalyst-TreeNode.adoc#children, child>> logical operator
+| [[UnaryNode]] Logical plan with a single [child](../catalyst/TreeNode.md#children) logical operator
 
 | `BinaryNode`
-| [[BinaryNode]] Logical operator with two <<spark-sql-catalyst-TreeNode.adoc#children, child>> logical operators
+| [[BinaryNode]] Logical operator with two [child](../catalyst/TreeNode.md#children) logical operators
 
 | link:spark-sql-LogicalPlan-Command.adoc[Command]
 | [[Command]]
@@ -205,7 +205,7 @@ NOTE: Streaming Datasets are part of Structured Streaming.
 refresh(): Unit
 ----
 
-`refresh` calls itself recursively for every link:spark-sql-catalyst-TreeNode.adoc#children[child] logical operator.
+`refresh` calls itself recursively for every [child](../catalyst/TreeNode.md#children) logical operator.
 
 NOTE: `refresh` is overriden by link:spark-sql-LogicalPlan-LogicalRelation.adoc#refresh[LogicalRelation] only (that refreshes the location of `HadoopFsRelation` relations only).
 

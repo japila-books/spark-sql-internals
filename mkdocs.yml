@@ -363,7 +363,7 @@ nav:
       - spark-sql-ShuffledRowRDD.md
     - Catalyst:
       - Tree Manipulation Framework: spark-sql-catalyst.md
-      - TreeNode: spark-sql-catalyst-TreeNode.md
+      - TreeNode: catalyst/TreeNode.md
       - QueryPlan: spark-sql-catalyst-QueryPlan.md
       - RuleExecutor: spark-sql-catalyst-RuleExecutor.md
       - Rule: spark-sql-catalyst-Rule.md
