@@ -2,7 +2,7 @@ title: PlanExpression
 
 # PlanExpression -- Expressions with Query Plans
 
-`PlanExpression` is the <<contract, contract>> for link:expressions/Expression.md[Catalyst expressions] that contain a link:spark-sql-catalyst-QueryPlan.adoc[QueryPlan].
+`PlanExpression` is the <<contract, contract>> for link:expressions/Expression.md[Catalyst expressions] that contain a link:catalyst/QueryPlan.md[QueryPlan].
 
 [[contract]]
 [source, scala]

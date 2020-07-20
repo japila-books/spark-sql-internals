@@ -362,13 +362,13 @@ nav:
         - spark-sql-Distribution-UnspecifiedDistribution.md
       - spark-sql-ShuffledRowRDD.md
     - Catalyst:
-      - Tree Manipulation Framework: spark-sql-catalyst.md
+      - Tree Manipulation Framework: catalyst/index.md
       - TreeNode: catalyst/TreeNode.md
-      - QueryPlan: spark-sql-catalyst-QueryPlan.md
-      - RuleExecutor: spark-sql-catalyst-RuleExecutor.md
-      - Rule: spark-sql-catalyst-Rule.md
-      - QueryPlanner: spark-sql-catalyst-QueryPlanner.md
-      - GenericStrategy: spark-sql-catalyst-GenericStrategy.md
+      - QueryPlan: catalyst/QueryPlan.md
+      - RuleExecutor: catalyst/RuleExecutor.md
+      - Rule: catalyst/Rule.md
+      - QueryPlanner: catalyst/QueryPlanner.md
+      - GenericStrategy: catalyst/GenericStrategy.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
       - AggregateExpression: expressions/AggregateExpression.md

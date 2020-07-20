@@ -2,7 +2,7 @@
 
 `PushDownOperatorsToDataSource` is a *logical optimization* that <<apply, pushes down operators to underlying data sources>> (i.e. <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relations>>) (before planning so that data source can report statistics more accurately).
 
-Technically, `PushDownOperatorsToDataSource` is a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+Technically, `PushDownOperatorsToDataSource` is a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 `PushDownOperatorsToDataSource` is part of the <<spark-sql-SparkOptimizer.adoc#PushDownOperatorsToDataSource, Push down operators to data source scan>> once-executed rule batch of the <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>>.
 
@@ -15,7 +15,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply`...FIXME
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[pushDownRequiredColumns]] `pushDownRequiredColumns` Internal Method
 

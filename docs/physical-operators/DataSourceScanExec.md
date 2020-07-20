@@ -69,7 +69,7 @@ Scan [relation] [tableIdentifier]
 simpleString: String
 ----
 
-NOTE: `simpleString` is part of link:spark-sql-catalyst-QueryPlan.adoc#simpleString[QueryPlan Contract] to give the simple text description of a `TreeNode` in a query plan tree.
+NOTE: `simpleString` is part of link:catalyst/QueryPlan.md#simpleString[QueryPlan Contract] to give the simple text description of a `TreeNode` in a query plan tree.
 
 `simpleString` creates a text representation of every key-value entry in the <<metadata, metadata>>...FIXME
 
@@ -77,7 +77,7 @@ Internally, `simpleString` sorts the <<metadata, metadata>> and concatenate the 
 
 `simpleString` uses Spark Core's `Utils` to `truncatedString`.
 
-In the end, `simpleString` returns a text representation that is made up of the <<nodeNamePrefix, nodeNamePrefix>>, the <<nodeName, nodeName>>, the link:spark-sql-catalyst-QueryPlan.adoc#output[output] (schema attributes) and the <<metadata, metadata>> and is of the following format:
+In the end, `simpleString` returns a text representation that is made up of the <<nodeNamePrefix, nodeNamePrefix>>, the <<nodeName, nodeName>>, the link:catalyst/QueryPlan.md#output[output] (schema attributes) and the <<metadata, metadata>> and is of the following format:
 
 ```
 [nodeNamePrefix][nodeName][[output]][metadata]
@@ -127,9 +127,9 @@ def basicDataSourceScanExec = {
 verboseString: String
 ----
 
-NOTE: `verboseString` is part of link:spark-sql-catalyst-QueryPlan.adoc#verboseString[QueryPlan Contract] to...FIXME.
+NOTE: `verboseString` is part of link:catalyst/QueryPlan.md#verboseString[QueryPlan Contract] to...FIXME.
 
-`verboseString` simply returns the <<redact, redacted sensitive information>> in link:spark-sql-catalyst-QueryPlan.adoc#verboseString[verboseString] (of the parent `QueryPlan`).
+`verboseString` simply returns the <<redact, redacted sensitive information>> in link:catalyst/QueryPlan.md#verboseString[verboseString] (of the parent `QueryPlan`).
 
 ## <span id="treeString"> Text Representation of All Nodes in Tree
 

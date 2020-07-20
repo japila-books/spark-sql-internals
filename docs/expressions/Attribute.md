@@ -4,7 +4,7 @@ title: Attribute
 
 `Attribute` is the <<contract, base>> of <<extensions, leaf named expressions>>.
 
-NOTE: link:spark-sql-catalyst-QueryPlan.adoc#output[QueryPlan uses Attributes] to build the link:spark-sql-StructType.adoc[schema] of the query (it represents).
+NOTE: link:catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the link:spark-sql-StructType.adoc[schema] of the query (it represents).
 
 [[contract]]
 [source, scala]

@@ -190,7 +190,7 @@ apply(
 | [[cachedShuffleRDD]] <<spark-sql-ShuffledRowRDD.adoc#, ShuffledRowRDD>> that is created when `ShuffleExchangeExec` operator is <<doExecute, executed (to generate RDD[InternalRow])>> and reused (_cached_) if the operator is used by multiple plans
 
 | serializer
-| [[serializer]] `UnsafeRowSerializer` (of the size as the number of the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>> of the <<child, child>> physical operator and the <<dataSize, dataSize>> performance metric)
+| [[serializer]] `UnsafeRowSerializer` (of the size as the number of the <<catalyst/QueryPlan.md#output, output schema attributes>> of the <<child, child>> physical operator and the <<dataSize, dataSize>> performance metric)
 
 Used exclusively in <<prepareShuffleDependency, prepareShuffleDependency>> to create a `ShuffleDependency`
 

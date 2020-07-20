@@ -19,7 +19,7 @@ title: ProjectExec
 * `ExtractPythonUDFs` physical optimization is requested to link:spark-sql-ExtractPythonUDFs.adoc#apply[optimize a physical query plan] (and link:spark-sql-ExtractPythonUDFs.adoc#extract[extracts Python UDFs])
 
 !!! note
-    The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or link:hive/HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner] are requested to link:spark-sql-catalyst-QueryPlanner.adoc#plan[plan a logical query plan into one or more physical query plans]:
+    The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or link:hive/HiveSessionStateBuilder.adoc#planner[Hive-specific SparkPlanner] are requested to link:catalyst/QueryPlanner.md#plan[plan a logical query plan into one or more physical query plans]:
 
     1. [HiveTableScans](../hive/HiveTableScans.md)
     1. [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md)
@@ -52,7 +52,7 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 
 . <<projectList, Named expressions>>
 
-. link:spark-sql-catalyst-QueryPlan.adoc#output[Output] of the <<child, child>> physical operator as the input schema
+. link:catalyst/QueryPlan.md#output[Output] of the <<child, child>> physical operator as the input schema
 
 . link:SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
 

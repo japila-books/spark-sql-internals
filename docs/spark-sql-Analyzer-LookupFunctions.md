@@ -4,7 +4,7 @@
 
 `LookupFunctions` is similar to link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions] logical resolution rule, but it is `ResolveFunctions` to resolve `UnresolvedFunction` expressions while `LookupFunctions` is just a sanity check that a future resolution is possible if tried.
 
-Technically, `LookupFunctions` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `LookupFunctions` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 NOTE: `LookupFunctions` does not however transform a logical plan.
 
@@ -50,7 +50,7 @@ org.apache.spark.sql.AnalysisException: Undefined function: 'f1'. This function 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` finds all link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions (in every logical operator in the input link:spark-sql-LogicalPlan.adoc[logical plan]) and requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#functionExists[check if their functions exist].
 

@@ -1,6 +1,6 @@
 # ObjectConsumerExec -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema
 
-`ObjectConsumerExec` is the <<contract, contract>> of <<implementations, unary physical operators>> with the child physical operator using a one-attribute <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
+`ObjectConsumerExec` is the <<contract, contract>> of <<implementations, unary physical operators>> with the child physical operator using a one-attribute <<catalyst/QueryPlan.md#output, output schema>>.
 
 [[contract]]
 [source, scala]
@@ -13,7 +13,7 @@ trait ObjectConsumerExec extends UnaryExecNode {
 ----
 
 [[references]]
-`ObjectConsumerExec` requests the child physical operator for the <<spark-sql-catalyst-QueryPlan.adoc#outputSet, output schema attribute set>> when requested for the <<spark-sql-catalyst-QueryPlan.adoc#references, references>>.
+`ObjectConsumerExec` requests the child physical operator for the <<catalyst/QueryPlan.md#outputSet, output schema attribute set>> when requested for the <<catalyst/QueryPlan.md#references, references>>.
 
 [[implementations]]
 .ObjectConsumerExecs
@@ -42,6 +42,6 @@ trait ObjectConsumerExec extends UnaryExecNode {
 inputObjectType: DataType
 ----
 
-`inputObjectType` simply returns the <<expressions/Expression.md#dataType, data type>> of the single <<spark-sql-catalyst-QueryPlan.adoc#output, output attribute>> of the child physical operator.
+`inputObjectType` simply returns the <<expressions/Expression.md#dataType, data type>> of the single <<catalyst/QueryPlan.md#output, output attribute>> of the child physical operator.
 
 NOTE: `inputObjectType` is used when...FIXME

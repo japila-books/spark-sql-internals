@@ -50,7 +50,7 @@ scala> println(logicalPlan.numberedTreeString)
 * [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
 
 [[output]]
-The <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
+The <<catalyst/QueryPlan.md#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
 
 [[maxRows]]
 The <<spark-sql-LogicalPlan.adoc#maxRows, maxRows>> of a `Sort` operator is the `maxRows` of the <<child, child>> logical operator.

@@ -25,7 +25,7 @@ NOTE: `InsertIntoDir` is similar to link:InsertIntoTable.adoc[InsertIntoTable] l
 |===
 
 [[output]]
-`InsertIntoDir` has no link:spark-sql-catalyst-QueryPlan.adoc#output[output columns].
+`InsertIntoDir` has no link:catalyst/QueryPlan.md#output[output columns].
 
 === [[creating-instance]] Creating InsertIntoDir Instance
 

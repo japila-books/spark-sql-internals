@@ -158,7 +158,7 @@ val we = plan.asInstanceOf[WindowExec]
 image::images/spark-sql-WindowExec-webui-query-details.png[align="center"]
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of `WindowExec` are the link:spark-sql-Expression-Attribute.adoc[attributes] of the <<child, child>> physical operator and the <<windowExpression, window expressions>>.
+The link:catalyst/QueryPlan.md#output[output schema] of `WindowExec` are the link:spark-sql-Expression-Attribute.adoc[attributes] of the <<child, child>> physical operator and the <<windowExpression, window expressions>>.
 
 [source, scala]
 ----

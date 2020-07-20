@@ -36,7 +36,7 @@ When <<creating-instance, created>>, `UnresolvedCatalogRelation` asserts that th
 `UnresolvedCatalogRelation` can never be <<spark-sql-LogicalPlan.adoc#resolved, resolved>> and is converted to a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> for a data source table or a link:hive/HiveTableRelation.adoc[HiveTableRelation] for a hive table at analysis phase.
 
 [[output]]
-`UnresolvedCatalogRelation` uses an empty <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
+`UnresolvedCatalogRelation` uses an empty <<catalyst/QueryPlan.md#output, output schema>>.
 
 [[creating-instance]]
 [[tableMeta]]

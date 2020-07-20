@@ -106,7 +106,7 @@ collectProjectsAndFilters(plan: LogicalPlan):
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 

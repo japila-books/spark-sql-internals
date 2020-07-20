@@ -128,7 +128,7 @@ Generated code:
 ----
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `SortMergeJoinExec` is...FIXME
+The link:catalyst/QueryPlan.md#output[output schema] of a `SortMergeJoinExec` is...FIXME
 
 [[outputPartitioning]]
 The link:SparkPlan.md#outputPartitioning[outputPartitioning] of a `SortMergeJoinExec` is...FIXME

@@ -33,6 +33,6 @@ title: ExecutedCommandExec
 sideEffectResult: Seq[InternalRow]
 ----
 
-`sideEffectResult` requests `RunnableCommand` to link:link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[run] (that produces a `Seq[Row]`) and link:spark-sql-CatalystTypeConverters.adoc#createToCatalystConverter[converts the result to Catalyst types] using a Catalyst converter function for the link:spark-sql-catalyst-QueryPlan.adoc#schema[schema].
+`sideEffectResult` requests `RunnableCommand` to link:link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[run] (that produces a `Seq[Row]`) and link:spark-sql-CatalystTypeConverters.adoc#createToCatalystConverter[converts the result to Catalyst types] using a Catalyst converter function for the link:catalyst/QueryPlan.md#schema[schema].
 
 NOTE: `sideEffectResult` is used when `ExecutedCommandExec` is requested for <<executeCollect, executeCollect>>, <<executeToIterator, executeToIterator>>, <<executeTake, executeTake>>, <<doExecute, doExecute>>.

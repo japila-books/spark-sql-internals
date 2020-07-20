@@ -1,6 +1,6 @@
 # QueryPlan -- Structured Query Plan
 
-`QueryPlan` is part of [Catalyst](spark-sql-catalyst.adoc) to build a [tree of relational operators](catalyst/TreeNode.md) of a structured query.
+`QueryPlan` is part of [Catalyst](index.md) to build a [tree of relational operators](TreeNode.md) of a structured query.
 
 Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:SparkPlan.md[SparkPlan] (for logical and physical plans, respectively).
 
@@ -162,9 +162,9 @@ res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType
 simpleString: String
 ```
 
-`simpleString` adds a <<statePrefix, state prefix>> to the node's [simple text description](catalyst/TreeNode.md#simpleString).
+`simpleString` adds a <<statePrefix, state prefix>> to the node's [simple text description](TreeNode.md#simpleString).
 
-`simpleString` is part of the [TreeNode](catalyst/TreeNode.md#simpleString) abstraction.
+`simpleString` is part of the [TreeNode](TreeNode.md#simpleString) abstraction.
 
 === [[statePrefix]] State Prefix -- `statePrefix` Method
 
@@ -173,7 +173,7 @@ simpleString: String
 statePrefix: String
 ----
 
-Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a [parent node](catalyst/TreeNode.md#children). Otherwise, `statePrefix` gives an empty string.
+Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a [parent node](TreeNode.md#children). Otherwise, `statePrefix` gives an empty string.
 
 NOTE: `statePrefix` is used exclusively when `QueryPlan` is requested for the <<simpleString, simple text node description>>.
 
@@ -196,7 +196,7 @@ verboseString: String
 
 `verboseString` simply returns the <<simpleString, simple (basic) description with state prefix>>.
 
-`verboseString` is part of the [TreeNode](catalyst/TreeNode.md#verboseString) abstraction.
+`verboseString` is part of the [TreeNode](TreeNode.md#verboseString) abstraction.
 
 ## <span id="innerChildren"> innerChildren
 
@@ -206,7 +206,7 @@ innerChildren: Seq[QueryPlan[_]]
 
 `innerChildren` simply returns the <<subqueries, subqueries>>.
 
-`innerChildren` is part of the [TreeNode](catalyst/TreeNode.md#innerChildren) abstraction.
+`innerChildren` is part of the [TreeNode](TreeNode.md#innerChildren) abstraction.
 
 === [[subqueries]] `subqueries` Method
 

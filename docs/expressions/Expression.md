@@ -4,7 +4,7 @@
 
 `Expression` is a executable [node](../catalyst/TreeNode.md) (in a Catalyst multi-tree) that can be [evaluated](#eval) to a value for an input row (e.g. produces a JVM object for an [InternalRow](../spark-sql-InternalRow.md)).
 
-`Expression` is often referred to as a **Catalyst expression**, but it is _simply_ built using the [Catalyst Tree Manipulation Framework](../spark-sql-catalyst.md).
+`Expression` is often referred to as a **Catalyst expression**, but it is _simply_ built using the [Catalyst Tree Manipulation Framework](../catalyst/index.md).
 
 ```scala
 // evaluating an expression

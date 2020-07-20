@@ -27,7 +27,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * Structured Streaming's `FileStreamSource` creates batches of records
 
 [[simpleString]]
-The link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
+The link:catalyst/QueryPlan.md#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
 
 [source, scala]
 ----

@@ -82,7 +82,7 @@ scala> println(qn.queryExecution.logical.numberedTreeString)
 NOTE: link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by link:spark-sql-Analyzer-CheckAnalysis.adoc#deterministic[CheckAnalysis].
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `Project` is...FIXME
+The link:catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME
 
 [[maxRows]]
 `maxRows`...FIXME

@@ -26,7 +26,7 @@ trait TypeCoercionRule extends Rule[LogicalPlan] {
 Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 |===
 
-`TypeCoercionRule` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`TypeCoercionRule` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[implementations]]
 .TypeCoercionRules
@@ -84,7 +84,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 * The plan after <<propagateTypes, propagateTypes>> on the coerced plan
 
-`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
 
 === [[propagateTypes]] `propagateTypes` Internal Method
 

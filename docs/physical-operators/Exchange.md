@@ -3,7 +3,7 @@
 `Exchange` is the base of link:SparkPlan.md#UnaryExecNode[unary physical operators] that exchange data among multiple threads or processes.
 
 [[output]]
-When requested for the link:spark-sql-catalyst-QueryPlan.adoc#output[output schema], `Exchange` simply uses the child physical operator's output schema.
+When requested for the link:catalyst/QueryPlan.md#output[output schema], `Exchange` simply uses the child physical operator's output schema.
 
 [[implementations]]
 .Exchanges

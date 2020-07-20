@@ -5,7 +5,7 @@
 NOTE: `Command` is executed when a `Dataset` is requested for the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] (which is after the query has been link:spark-sql-QueryExecution.adoc#analyzed[analyzed]).
 
 [[output]]
-`Command` has no link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] by default.
+`Command` has no link:catalyst/QueryPlan.md#output[output schema] by default.
 
 [[children]]
 `Command` has no child logical operators (which makes it similar to link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operators]).

@@ -4,7 +4,7 @@
 
 `CombineUnions` is part of the <<spark-sql-Optimizer.adoc#Union, Union>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`CombineUnions` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`CombineUnions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -19,4 +19,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply`...FIXME
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

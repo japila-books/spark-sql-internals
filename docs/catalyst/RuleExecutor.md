@@ -1,6 +1,6 @@
 # RuleExecutor -- Tree Transformation Rule Executor
 
-`RuleExecutor` is the <<contract, base>> of <<extensions, rule executors>> that are responsible for <<execute, executing>> a collection of <<batches, batches (of rules)>> to transform a [TreeNode](catalyst/TreeNode.md).
+`RuleExecutor` is the <<contract, base>> of <<extensions, rule executors>> that are responsible for <<execute, executing>> a collection of <<batches, batches (of rules)>> to transform a [TreeNode](TreeNode.md).
 
 [[contract]]
 [source, scala]
@@ -28,11 +28,11 @@ a| [[batches]]
 batches: Seq[Batch]
 ----
 
-Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<spark-sql-catalyst-Rule.md#, rules>> with a name and a <<Strategy, strategy>> that `RuleExecutor` uses when <<execute, executed>>
+Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<catalyst/Rule.md#, rules>> with a name and a <<Strategy, strategy>> that `RuleExecutor` uses when <<execute, executed>>
 |===
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the [TreeNode](catalyst/TreeNode.md#implementations) implementation that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[extensions]]
 .RuleExecutors (Direct Implementations)
@@ -98,14 +98,14 @@ TRACE HiveSessionStateBuilder$$anon$1: Batch [batchName] has no effect.
 
 === [[Batch]] Rule Batch -- Collection of Rules
 
-`Batch` is a named collection of <<spark-sql-catalyst-Rule.md#, rules>> with a <<Strategy, strategy>>.
+`Batch` is a named collection of <<catalyst/Rule.md#, rules>> with a <<Strategy, strategy>>.
 
 [[Batch-creating-instance]]
 `Batch` takes the following when created:
 
 * [[name]] Batch name
 * [[strategy]] <<Strategy, Strategy>>
-* [[rules]] Collection of <<spark-sql-catalyst-Rule.md#, rules>>
+* [[rules]] Collection of <<catalyst/Rule.md#, rules>>
 
 === [[Strategy]] Batch Execution Strategy
 

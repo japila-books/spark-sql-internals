@@ -9,7 +9,7 @@ title: Join
 NOTE: CROSS JOIN is just an INNER JOIN with no join condition.
 
 [[output]]
-`Join` has link:spark-sql-catalyst-QueryPlan.adoc#output[output schema attributes]...FIXME
+`Join` has link:catalyst/QueryPlan.md#output[output schema attributes]...FIXME
 
 === [[creating-instance]] Creating Join Instance
 

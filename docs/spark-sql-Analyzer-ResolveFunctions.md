@@ -2,7 +2,7 @@
 
 `ResolveFunctions` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveFunctions[logical query plan analyzer] uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
 
-Technically, `ResolveReferences` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveReferences` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 `ResolveFunctions` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
 
@@ -79,7 +79,7 @@ val resolvedPlan = ResolveFunctions(plan)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` takes a link:spark-sql-LogicalPlan.adoc[logical plan] and transforms each expression (for every logical operator found in the query plan) as follows:
 

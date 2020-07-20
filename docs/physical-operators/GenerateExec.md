@@ -205,7 +205,7 @@ scala> println(formattedCode)
 ----
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `GenerateExec` is...FIXME
+The link:catalyst/QueryPlan.md#output[output schema] of a `GenerateExec` is...FIXME
 
 [[metrics]]
 .GenerateExec's Performance Metrics

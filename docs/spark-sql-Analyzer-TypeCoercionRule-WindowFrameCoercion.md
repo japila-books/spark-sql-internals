@@ -131,7 +131,7 @@ coerceTypes(plan: LogicalPlan): LogicalPlan
 
 NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
 
-`coerceTypes` <<spark-sql-catalyst-QueryPlan.adoc#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
+`coerceTypes` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
 
 === [[createBoundaryCast]] `createBoundaryCast` Internal Method
 

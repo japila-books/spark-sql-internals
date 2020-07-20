@@ -10,7 +10,7 @@ NOTE: Prefer `EXISTS` (over `Not` with `In` with `ListQuery` subquery expression
 
 `RewritePredicateSubquery` is part of the <<spark-sql-Optimizer.adoc#RewriteSubquery, RewriteSubquery>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`RewritePredicateSubquery` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`RewritePredicateSubquery` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -99,4 +99,4 @@ In the end, `apply` creates a new logical plan with link:spark-sql-LogicalPlan-J
 
 * For other predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a link:spark-sql-LogicalPlan-Project.adoc#creating-instance[Project] unary operator with a link:spark-sql-LogicalPlan-Filter.adoc#creating-instance[Filter] operator
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

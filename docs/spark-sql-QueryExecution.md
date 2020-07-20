@@ -54,7 +54,7 @@ a| [[sparkPlan]] link:SparkPlan.md[Physical plan] (after link:spark-sql-SparkPla
 
 NOTE: `sparkPlan` is the first physical plan from the collection of all possible physical plans.
 
-NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:spark-sql-catalyst-QueryPlanner.adoc#plan[will always generate at least one physical plan].
+NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) link:catalyst/QueryPlanner.md#plan[will always generate at least one physical plan].
 
 | executedPlan
 a| [[executedPlan]] Optimized <<SparkPlan.md#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.

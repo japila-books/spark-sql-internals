@@ -1,9 +1,9 @@
 # ReplaceExceptWithAntiJoin Logical Optimization Rule -- Rewriting Except (DISTINCT) Operators
 
-`ReplaceExceptWithAntiJoin` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`ReplaceExceptWithAntiJoin` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:spark-sql-catalyst-Rule.md#apply[executed], `ReplaceExceptWithAntiJoin` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to a `Distinct` unary logical operator with a left-anti link:spark-sql-LogicalPlan-Join.adoc[Join] operator. The output columns of the left and right child logical operators of the `Except` operator are used to build a logical `AND` join condition of `EqualNullSafe` expressions.
+When link:catalyst/Rule.md#apply[executed], `ReplaceExceptWithAntiJoin` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to a `Distinct` unary logical operator with a left-anti link:spark-sql-LogicalPlan-Join.adoc[Join] operator. The output columns of the left and right child logical operators of the `Except` operator are used to build a logical `AND` join condition of `EqualNullSafe` expressions.
 
 `ReplaceExceptWithAntiJoin` requires that the number of columns of the left- and right-side of the `Except` operator are the same or throws an `AssertionError`.
 

@@ -4,7 +4,7 @@
 
 `CombineTypedFilters` is part of the <<spark-sql-Optimizer.adoc#Object_Expressions_Optimization, Object Expressions Optimization>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`CombineTypedFilters` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`CombineTypedFilters` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -38,4 +38,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply`...FIXME
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

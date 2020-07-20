@@ -6,7 +6,7 @@
 
 `RewriteCorrelatedScalarSubquery` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`RewriteCorrelatedScalarSubquery` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`RewriteCorrelatedScalarSubquery` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -81,7 +81,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 . For link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators, `apply`...FIXME
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[extractCorrelatedScalarSubqueries]] Extracting ScalarSubquery Expressions with Children -- `extractCorrelatedScalarSubqueries` Internal Method
 

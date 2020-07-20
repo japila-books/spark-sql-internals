@@ -9,7 +9,7 @@ When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.adoc#spark.sql.co
 . Enforces the <<supportCodegen, supportCodegen>> custom requirements on a physical operator, i.e.
 .. <<spark-sql-CodegenSupport.adoc#supportCodegen, supportCodegen>> flag turned on (`true`)
 .. No <<expressions/Expression.md#, Catalyst expressions>> are <<spark-sql-Expression-CodegenFallback.adoc#, CodegenFallback>>
-.. <<spark-sql-catalyst-QueryPlan.adoc#schema, Output schema>> is *neither wide nor deep* and  <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, uses just enough fields (including nested fields)>>
+.. <<catalyst/QueryPlan.md#schema, Output schema>> is *neither wide nor deep* and  <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, uses just enough fields (including nested fields)>>
 .. [Children](catalyst/TreeNode.md#children) use output schema that is also <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#isTooManyFields, neither wide nor deep>>
 
 [NOTE]
@@ -19,7 +19,7 @@ link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.max
 The number is `100` by default.
 ====
 
-Technically, `CollapseCodegenStages` is just a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming [physical query plans](physical-operators/SparkPlan.md), i.e. `Rule[SparkPlan]`.
+Technically, `CollapseCodegenStages` is just a <<catalyst/Rule.md#, Catalyst rule>> for transforming [physical query plans](physical-operators/SparkPlan.md), i.e. `Rule[SparkPlan]`.
 
 `CollapseCodegenStages` is part of <<spark-sql-QueryExecution.adoc#preparations, preparations>> batch of physical query plan rules and is executed when `QueryExecution` is requested for the <<spark-sql-QueryExecution.adoc#executedPlan, optimized physical query plan>> (i.e. in *executedPlan* phase of a query execution).
 
@@ -271,7 +271,7 @@ apply(plan: SparkPlan): SparkPlan
 
 Otherwise, `apply` does nothing at all (i.e. passes the input physical plan through unchanged).
 
-`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
 
 === [[insertWholeStageCodegen]] Inserting WholeStageCodegenExec Physical Operator For Codegen Stages -- `insertWholeStageCodegen` Internal Method
 
@@ -282,7 +282,7 @@ insertWholeStageCodegen(plan: SparkPlan): SparkPlan
 
 Internally, `insertWholeStageCodegen` branches off per [physical operator](physical-operators/SparkPlan.md):
 
-. For physical operators with a single <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attribute>> of type `ObjectType`, `insertWholeStageCodegen` requests the operator for the [child](catalyst/TreeNode.md#children) physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
+. For physical operators with a single <<catalyst/QueryPlan.md#output, output schema attribute>> of type `ObjectType`, `insertWholeStageCodegen` requests the operator for the [child](catalyst/TreeNode.md#children) physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
 [[insertWholeStageCodegen-CodegenSupport]]
 . For physical operators that support <<spark-sql-CodegenSupport.adoc#, Java code generation>> and meets the <<supportCodegen, additional requirements for codegen>>, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.adoc#creating-instance, WholeStageCodegenExec>> physical operator.
@@ -299,7 +299,7 @@ Internally, `insertWholeStageCodegen` branches off per [physical operator](physi
 ----
 
 [[insertWholeStageCodegen-ObjectType]]
-NOTE: `insertWholeStageCodegen` explicitly skips physical operators with a single-attribute <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> with the type of the attribute being `ObjectType` type.
+NOTE: `insertWholeStageCodegen` explicitly skips physical operators with a single-attribute <<catalyst/QueryPlan.md#output, output schema>> with the type of the attribute being `ObjectType` type.
 
 [NOTE]
 ====

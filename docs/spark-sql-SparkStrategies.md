@@ -2,7 +2,7 @@ title: SparkStrategies
 
 # SparkStrategies -- Container of Execution Planning Strategies
 
-`SparkStrategies` is an abstract Catalyst link:spark-sql-catalyst-QueryPlanner.adoc[query planner] that _merely_ serves as a "container" (or a namespace) of the concrete link:spark-sql-SparkStrategy.adoc[execution planning strategies] (for link:spark-sql-SparkPlanner.adoc[SparkPlanner]):
+`SparkStrategies` is an abstract Catalyst link:catalyst/QueryPlanner.md[query planner] that _merely_ serves as a "container" (or a namespace) of the concrete link:spark-sql-SparkStrategy.adoc[execution planning strategies] (for link:spark-sql-SparkPlanner.adoc[SparkPlanner]):
 
 * [Aggregation](execution-planning-strategies/Aggregation.md)
 * [BasicOperators](execution-planning-strategies/BasicOperators.md)

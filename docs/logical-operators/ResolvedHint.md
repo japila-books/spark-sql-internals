@@ -7,10 +7,10 @@ title: ResolvedHint
 `ResolvedHint` is <<creating-instance, created>> when...FIXME
 
 [[output]]
-When requested for link:spark-sql-catalyst-QueryPlan.adoc#output[output schema], `ResolvedHint` uses the output of the child logical operator.
+When requested for link:catalyst/QueryPlan.md#output[output schema], `ResolvedHint` uses the output of the child logical operator.
 
 [[doCanonicalize]]
-`ResolvedHint` simply requests the <<child, child logical operator>> for the <<spark-sql-catalyst-QueryPlan.adoc#doCanonicalize, canonicalized version>>.
+`ResolvedHint` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.
 
 === [[creating-instance]] Creating ResolvedHint Instance
 

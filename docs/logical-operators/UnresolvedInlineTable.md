@@ -24,7 +24,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 `UnresolvedInlineTable` is never <<spark-sql-LogicalPlan.adoc#resolved, resolved>> (and is converted to a <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelation>> in <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>> logical resolution rule).
 
 [[output]]
-`UnresolvedInlineTable` uses no <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>.
+`UnresolvedInlineTable` uses no <<catalyst/QueryPlan.md#output, output schema attributes>>.
 
 [[expressionsResolved]]
 `UnresolvedInlineTable` uses `expressionsResolved` flag that is on (`true`) only when all the Catalyst expressions in the <<rows, rows>> are <<expressions/Expression.md#resolved, resolved>>.

@@ -4,7 +4,7 @@
 
 `EliminateSubqueryAliases` is part of the <<spark-sql-Optimizer.adoc#Finish_Analysis, Finish Analysis>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`EliminateSubqueryAliases` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`EliminateSubqueryAliases` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -27,4 +27,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` simply removes (eliminates) <<spark-sql-LogicalPlan-SubqueryAlias.adoc#, SubqueryAlias>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>>.
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

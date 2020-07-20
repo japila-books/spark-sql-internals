@@ -4,7 +4,7 @@
 
 `TimeWindowing` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
 
-`TimeWindowing` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`TimeWindowing` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -20,4 +20,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply`...FIXME
 
-`apply` is part of [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of [Rule](catalyst/Rule.md#apply) abstraction.

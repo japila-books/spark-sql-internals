@@ -130,7 +130,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 | Description
 
 | [[output]] `output`
-| link:spark-sql-catalyst-QueryPlan.adoc#output[Output schema] for the input <<resultExpressions, NamedExpressions>>
+| link:catalyst/QueryPlan.md#output[Output schema] for the input <<resultExpressions, NamedExpressions>>
 |===
 
 [[requiredChildDistribution]]

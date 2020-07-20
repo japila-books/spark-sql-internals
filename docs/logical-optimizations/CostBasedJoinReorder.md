@@ -4,7 +4,7 @@
 
 `ReorderJoin` is part of the <<spark-sql-Optimizer.adoc#Join_Reorder, Join Reorder>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
 
-`ReorderJoin` is simply a <<spark-sql-catalyst-Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ReorderJoin` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 `CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
@@ -150,7 +150,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 * link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[reorder]] Reordering Logical Plan with Join Operators -- `reorder` Internal Method
 

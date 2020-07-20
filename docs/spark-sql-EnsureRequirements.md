@@ -7,7 +7,7 @@
 
 . For other non-``ShuffleExchangeExec`` physical operators, <<ensureDistributionAndOrdering, ensures partition distribution and ordering>> (possibly adding new physical operators, e.g. link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] and link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] for distribution or link:spark-sql-SparkPlan-SortExec.adoc[SortExec] for sorting)
 
-Technically, `EnsureRequirements` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
+Technically, `EnsureRequirements` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
 
 `EnsureRequirements` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 

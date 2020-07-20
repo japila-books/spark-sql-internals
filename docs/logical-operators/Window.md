@@ -11,7 +11,7 @@ title: Window
 * `CleanupAliases` logical analysis rule is <<spark-sql-Analyzer-CleanupAliases.adoc#apply, executed>>
 
 [[output]]
-When requested for <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<spark-sql-Expression-NamedExpression.adoc#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
+When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<spark-sql-Expression-NamedExpression.adoc#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
 
 NOTE: `Window` logical operator is a subject of pruning unnecessary window expressions in <<spark-sql-Optimizer-ColumnPruning.adoc#, ColumnPruning>> logical optimization and collapsing window operators in <<spark-sql-Optimizer-CollapseWindow.adoc#, CollapseWindow>> logical optimization.
 

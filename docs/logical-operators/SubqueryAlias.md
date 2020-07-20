@@ -15,10 +15,10 @@ title: SubqueryAlias
 * `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc#constructLeftJoins, constructLeftJoins>> (when <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.adoc#apply, applied>> to <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>>, <<spark-sql-LogicalPlan-Project.adoc#, Project>> or <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> logical operators with correlated scalar subqueries)
 
 [[doCanonicalize]]
-`SubqueryAlias` simply requests the <<child, child logical operator>> for the <<spark-sql-catalyst-QueryPlan.adoc#doCanonicalize, canonicalized version>>.
+`SubqueryAlias` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.
 
 [[output]]
-When requested for <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>, `SubqueryAlias` requests the <<child, child>> logical operator for them and adds the <<alias, alias>> as a <<spark-sql-Expression-Attribute.adoc#withQualifier, qualifier>>.
+When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `SubqueryAlias` requests the <<child, child>> logical operator for them and adds the <<alias, alias>> as a <<spark-sql-Expression-Attribute.adoc#withQualifier, qualifier>>.
 
 NOTE: <<spark-sql-Optimizer-EliminateSubqueryAliases.adoc#, EliminateSubqueryAliases>> logical optimization eliminates (removes) `SubqueryAlias` operators from a logical query plan.
 

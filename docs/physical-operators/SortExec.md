@@ -42,7 +42,7 @@ assert(sortExec.isInstanceOf[SortExec])
 ----
 
 [[output]]
-When requested for the <<spark-sql-catalyst-QueryPlan.adoc#output, output attributes>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
+When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
 
 [[outputOrdering]]
 `SortExec` uses the <<sortOrder, sorting order expressions>> for the <<SparkPlan.md#outputOrdering, output data ordering requirements>>.

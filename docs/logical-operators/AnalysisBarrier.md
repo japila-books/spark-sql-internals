@@ -24,10 +24,10 @@ title: AnalysisBarrier
 `AnalysisBarrier` returns the <<child, child logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
 
 [[output]]
-`AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>.
+`AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<catalyst/QueryPlan.md#output, output schema attributes>>.
 
 [[isStreaming]]
 `AnalysisBarrier` simply requests the <<child, child logical query plan>> for the <<spark-sql-LogicalPlan.adoc#isStreaming, isStreaming>> flag.
 
 [[doCanonicalize]]
-`AnalysisBarrier` simply requests the <<child, child logical operator>> for the <<spark-sql-catalyst-QueryPlan.adoc#doCanonicalize, canonicalized version>>.
+`AnalysisBarrier` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.

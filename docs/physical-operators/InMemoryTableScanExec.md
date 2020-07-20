@@ -127,7 +127,7 @@ NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsB
 
 . link:spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader] configuration property is enabled (default: `true`)
 
-. The link:spark-sql-catalyst-QueryPlan.adoc#schema[output schema] of the <<relation, InMemoryRelation>> uses primitive data types only, i.e. link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#ByteType[ByteType], link:spark-sql-DataType.adoc#ShortType[ShortType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType]
+. The link:catalyst/QueryPlan.md#schema[output schema] of the <<relation, InMemoryRelation>> uses primitive data types only, i.e. link:spark-sql-DataType.adoc#BooleanType[BooleanType], link:spark-sql-DataType.adoc#ByteType[ByteType], link:spark-sql-DataType.adoc#ShortType[ShortType], link:spark-sql-DataType.adoc#IntegerType[IntegerType], link:spark-sql-DataType.adoc#LongType[LongType], link:spark-sql-DataType.adoc#FloatType[FloatType], link:spark-sql-DataType.adoc#DoubleType[DoubleType]
 
 . The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most link:spark-sql-properties.adoc#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
 
@@ -359,6 +359,6 @@ NOTE: `buildFilter` is used exclusively when `InMemoryTableScanExec` is requeste
 innerChildren: Seq[QueryPlan[_]]
 ----
 
-NOTE: `innerChildren` is part of link:spark-sql-catalyst-QueryPlan.adoc#innerChildren[QueryPlan Contract] to...FIXME.
+NOTE: `innerChildren` is part of link:catalyst/QueryPlan.md#innerChildren[QueryPlan Contract] to...FIXME.
 
 `innerChildren`...FIXME

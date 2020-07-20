@@ -51,7 +51,7 @@ scala> q.show(numRows = allRowsIncluded)
 `View` is considered <<spark-sql-LogicalPlan.adoc#resolved, resolved>> only when the <<child, child>> is.
 
 [[simpleString]]
-`View` has the following <<spark-sql-catalyst-QueryPlan.adoc#simpleString, simple description (with state prefix)>>:
+`View` has the following <<catalyst/QueryPlan.md#simpleString, simple description (with state prefix)>>:
 
 ```
 View ([identifier], [output])
@@ -95,5 +95,5 @@ NOTE: <<InsertIntoTable.adoc#inserting-into-view-not-allowed, Inserting into a v
 `View` takes the following when created:
 
 * [[desc]] <<spark-sql-CatalogTable.adoc#, CatalogTable>>
-* [[output]] <<spark-sql-catalyst-QueryPlan.adoc#output, Output schema attributes>> (as `Seq[Attribute]`)
+* [[output]] <<catalyst/QueryPlan.md#output, Output schema attributes>> (as `Seq[Attribute]`)
 * [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>

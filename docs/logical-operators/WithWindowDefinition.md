@@ -9,7 +9,7 @@ title: WithWindowDefinition
 `WithWindowDefinition` is created exclusively when `AstBuilder` link:spark-sql-AstBuilder.adoc#withWindows[parses window definitions].
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of `WithWindowDefinition` is exactly the output attributes of the <<child, child>> logical operator.
+The link:catalyst/QueryPlan.md#output[output schema] of `WithWindowDefinition` is exactly the output attributes of the <<child, child>> logical operator.
 
 [[example]]
 [source, scala]

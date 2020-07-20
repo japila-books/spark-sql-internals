@@ -6,7 +6,7 @@ NOTE: `QueryPlanner` <<plan, generates>> at least one physical plan.
 
 ``QueryPlanner``'s main method is <<plan, plan>> that defines the extension points, i.e. <<strategies, strategies>>, <<collectPlaceholders, collectPlaceholders>> and <<prunePlans, prunePlans>>.
 
-`QueryPlanner` is part of link:spark-sql-catalyst.adoc[Catalyst Framework].
+`QueryPlanner` is part of [Catalyst Framework](index.md).
 
 === [[contract]] QueryPlanner Contract
 
@@ -26,7 +26,7 @@ abstract class QueryPlanner[PhysicalPlan <: TreeNode[PhysicalPlan]] {
 | Description
 
 | [[strategies]] `strategies`
-| Collection of link:spark-sql-catalyst-GenericStrategy.adoc[GenericStrategy] planning strategies.
+| Collection of link:catalyst/GenericStrategy.md[GenericStrategy] planning strategies.
 
 Used exclusively as an extension point in <<plan, plan>>.
 

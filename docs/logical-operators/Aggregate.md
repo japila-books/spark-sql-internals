@@ -35,7 +35,7 @@ NOTE: Part of link:spark-sql-LogicalPlan.adoc#maxRows[LogicalPlan contract].
 | `output`
 a| Attributes of <<aggregateExpressions, aggregate named expressions>>
 
-NOTE: Part of link:spark-sql-catalyst-QueryPlan.adoc#output[QueryPlan contract].
+NOTE: Part of link:catalyst/QueryPlan.md#output[QueryPlan contract].
 
 | `resolved`
 a| Enabled when:
@@ -48,7 +48,7 @@ NOTE: Part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan contract].
 | `validConstraints`
 a| The (expression) constraints of <<child, child logical plan>> and non-aggregate <<aggregateExpressions, aggregate named expressions>>.
 
-NOTE: Part of link:spark-sql-catalyst-QueryPlan.adoc#validConstraints[QueryPlan contract].
+NOTE: Part of link:catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
 |===
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase

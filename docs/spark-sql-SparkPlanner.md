@@ -2,7 +2,7 @@ title: SparkPlanner
 
 # SparkPlanner -- Spark Query Planner
 
-`SparkPlanner` is a concrete link:spark-sql-catalyst-QueryPlanner.adoc[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:SparkPlan.md[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
+`SparkPlanner` is a concrete link:catalyst/QueryPlanner.md[Catalyst Query Planner] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:SparkPlan.md[physical plans] using <<strategies, execution planning strategies>> with support for <<extraStrategies, extra strategies>> (by means of <<experimentalMethods, ExperimentalMethods>>) and <<extraPlanningStrategies, extraPlanningStrategies>>.
 
 NOTE: `SparkPlanner` is expected to plan (aka _generate_) at least one link:SparkPlan.md[physical plan] per link:spark-sql-LogicalPlan.adoc[logical plan].
 
@@ -99,7 +99,7 @@ collectPlaceholders(plan: SparkPlan): Seq[(SparkPlan, LogicalPlan)]
 
 `collectPlaceholders` collects all link:spark-sql-SparkStrategy.adoc#PlanLater[PlanLater] physical operators in the `plan` link:SparkPlan.md[physical plan].
 
-NOTE: `collectPlaceholders` is part of link:spark-sql-catalyst-QueryPlanner.adoc#collectPlaceholders[QueryPlanner Contract].
+NOTE: `collectPlaceholders` is part of link:catalyst/QueryPlanner.md#collectPlaceholders[QueryPlanner Contract].
 
 === [[prunePlans]] Pruning "Bad" Physical Plans -- `prunePlans` Method
 
@@ -110,7 +110,7 @@ prunePlans(plans: Iterator[SparkPlan]): Iterator[SparkPlan]
 
 `prunePlans` gives the input `plans` link:SparkPlan.md[physical plans] back (i.e. with no changes).
 
-NOTE: `prunePlans` is part of link:spark-sql-catalyst-QueryPlanner.adoc#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
+NOTE: `prunePlans` is part of link:catalyst/QueryPlanner.md#prunePlans[QueryPlanner Contract] to remove somehow "bad" plans.
 
 === [[pruneFilterProject]] Creating Physical Operator (Possibly Under FilterExec and ProjectExec Operators) -- `pruneFilterProject` Method
 

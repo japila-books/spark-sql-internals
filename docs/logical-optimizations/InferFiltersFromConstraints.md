@@ -1,9 +1,9 @@
 # InferFiltersFromConstraints Logical Optimization Rule
 
-`InferFiltersFromConstraints` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`InferFiltersFromConstraints` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:spark-sql-catalyst-Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when link:spark-sql-properties.adoc#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
+When link:catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when link:spark-sql-properties.adoc#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
 
 `InferFiltersFromConstraints` is a part of the link:spark-sql-Optimizer.adoc#Infer-Filters[Infer Filters] once-executed rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
 

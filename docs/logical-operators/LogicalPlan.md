@@ -1,6 +1,6 @@
 # LogicalPlan -- Logical Relational Operator with Children and Expressions / Logical Query Plan
 
-`LogicalPlan` is an extension of the <<spark-sql-catalyst-QueryPlan.adoc#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
+`LogicalPlan` is an extension of the <<catalyst/QueryPlan.md#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
 NOTE: A logical query plan is a tree of [nodes](../catalyst/TreeNode.md) of logical operators that in turn can have (trees of) <<expressions/Expression.md#, Catalyst expressions>>. In other words, there are _at least_ two trees at every level (operator).
 
@@ -62,7 +62,7 @@ Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is
 A logical operator is considered *partially resolved* when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
 [[resolved]]
-A logical operator is (fully) *resolved* to a specific schema when all link:spark-sql-catalyst-QueryPlan.adoc#expressions[expressions] and the <<childrenResolved, children are resolved>>.
+A logical operator is (fully) *resolved* to a specific schema when all link:catalyst/QueryPlan.md#expressions[expressions] and the <<childrenResolved, children are resolved>>.
 
 [source, scala]
 ----

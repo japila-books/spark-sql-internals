@@ -107,7 +107,7 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 * link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
 
 [[output]]
-`InsertIntoTable` has an empty <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>>.
+`InsertIntoTable` has an empty <<catalyst/QueryPlan.md#output, output schema>>.
 
 === [[catalyst-dsl]][[insertInto]] Catalyst DSL -- `insertInto` Operator
 

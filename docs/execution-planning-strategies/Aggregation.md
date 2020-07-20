@@ -43,7 +43,7 @@ scala> println(physicalPlan.head.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-GenericStrategy.adoc#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` requests `PhysicalAggregation` extractor for link:spark-sql-PhysicalAggregation.adoc#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator found.
 

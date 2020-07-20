@@ -48,7 +48,7 @@ scala> println(optimizedPlan.numberedTreeString)
 
 `PlanSubqueries` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
-Technically, `PlanSubqueries` is just a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
+Technically, `PlanSubqueries` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
 
 ## <span id="apply"> Executing Rule
 
@@ -63,4 +63,4 @@ For every link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[Scala
 
 . Plans the scalar subquery, i.e. creates a link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery (ExecSubqueryExpression)] expression with a new link:spark-sql-SparkPlan-SubqueryExec.adoc#creating-instance[SubqueryExec] physical operator (with the name *subquery[id]* and the optimized physical plan) and the link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#exprId[ExprId].
 
-`apply` is part of the [Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.

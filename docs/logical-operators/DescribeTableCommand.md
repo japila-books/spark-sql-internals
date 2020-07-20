@@ -157,7 +157,7 @@ NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Run
 
 `run` uses the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
 
-For a <<spark-sql-SessionCatalog.adoc#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#lookupRelation, lookupRelation>> to access the <<spark-sql-catalyst-QueryPlan.adoc#schema, schema>> and <<describeSchema, describeSchema>>.
+For a <<spark-sql-SessionCatalog.adoc#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#lookupRelation, lookupRelation>> to access the <<catalyst/QueryPlan.md#schema, schema>> and <<describeSchema, describeSchema>>.
 
 For all other table types, `run` does the following:
 

@@ -6,7 +6,7 @@
 
 CAUTION: FIXME A diagram of a logical plan tree before and after the rule.
 
-Technically, `ReorderJoin` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ReorderJoin` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -83,7 +83,7 @@ spark.sessionState.conf.cboEnabled
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:spark-sql-catalyst-Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
 
 `apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and finds the following logical operators for <<flattenJoin, flattenJoin>>:
 
@@ -159,9 +159,9 @@ scala> println(plan.numberedTreeString)
 
 For three or more link:spark-sql-LogicalPlan.adoc[logical plans] in the `input`, `createOrderedJoin` takes the first plan and tries to find another that has at least one _matching_ join condition, i.e. a logical plan with the following:
 
-. link:spark-sql-catalyst-QueryPlan.adoc#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:expressions/Expression.md#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
+. link:catalyst/QueryPlan.md#outputSet[Output attributes] together with the first plan's output attributes are the superset of the link:expressions/Expression.md#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
 
-. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
+. References of the join condition link:spark-sql-PredicateHelper.adoc#canEvaluate[cannot be evaluated] using the first plan's or the current plan's link:catalyst/QueryPlan.md#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
 .createOrderedJoin with Three Joins (Before)
 image::images/ReorderJoin-createOrderedJoin-four-plans-before.png[align="center"]
@@ -254,7 +254,7 @@ scala> println(plan.numberedTreeString)
 
 `createOrderedJoin` partitions (aka _splits_) the input condition expressions to expressions that meet the following requirements (aka _join conditions_) or not (aka _others_):
 
-. link:expressions/Expression.md#references[Expression references] being a subset of the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output attributes] of the left and the right operators
+. link:expressions/Expression.md#references[Expression references] being a subset of the link:catalyst/QueryPlan.md#outputSet[output attributes] of the left and the right operators
 
 . link:spark-sql-PredicateHelper.adoc#canEvaluateWithinJoin[Can be evaluated within a join]
 

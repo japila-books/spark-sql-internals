@@ -103,9 +103,9 @@ NOTE: `expand` is part of link:spark-sql-Expression-Star.adoc#expand[Star Contra
 
 `expand` first expands to named expressions per <<target, target>>:
 
-* For unspecified <<target, target>>, `expand` gives the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
+* For unspecified <<target, target>>, `expand` gives the link:catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
 
-* For <<target, target>> with one element, `expand` gives the table (attribute) in the link:spark-sql-catalyst-QueryPlan.adoc#output[output] schema of the `input` logical query plan (using link:spark-sql-Expression-NamedExpression.adoc#qualifier[qualifiers]) if available
+* For <<target, target>> with one element, `expand` gives the table (attribute) in the link:catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (using link:spark-sql-Expression-NamedExpression.adoc#qualifier[qualifiers]) if available
 
 With no result earlier, `expand` then requests the `input` logical query plan to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>> name parts to a named expression.
 

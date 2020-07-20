@@ -206,7 +206,7 @@ val analyzedPlan = qe.analyzed
 View [name] already exists. If you want to update the view definition, please use ALTER VIEW AS or CREATE OR REPLACE VIEW AS
 ```
 
-`run` throws an `AnalysisException` if the <<userSpecifiedColumns, userSpecifiedColumns>> are defined and their numbers is different from the number of <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>> of the analyzed logical plan.
+`run` throws an `AnalysisException` if the <<userSpecifiedColumns, userSpecifiedColumns>> are defined and their numbers is different from the number of <<catalyst/QueryPlan.md#output, output schema attributes>> of the analyzed logical plan.
 
 ```
 The number of columns produced by the SELECT clause (num: `[output.length]`) does not match the number of column names specified by CREATE VIEW (num: `[userSpecifiedColumns.length]`).

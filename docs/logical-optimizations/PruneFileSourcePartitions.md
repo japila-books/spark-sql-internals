@@ -26,4 +26,4 @@ With predicates left for partition pruning, `apply` requests the link:CatalogFil
 
 In the end, `apply` creates a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator (with the "pruned" `LogicalRelation` as a child operator and all the filter predicate expressions combined together with `And` expression) and makes it a child operator of a link:spark-sql-LogicalPlan-Project.adoc[Project] operator.
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

@@ -64,7 +64,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, Runnabl
 
 `run` then <<spark-sql-Dataset.adoc#ofRows, creates a DataFrame>> for the <<query, logical query plan>> and the input `SparkSession`.
 
-`run` requests the `DataFrame` for the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> that in turn is requested for the <<spark-sql-QueryExecution.adoc#toRdd, RDD>> (of the structured query). `run` requests the <<logicalRelation, LogicalRelation>> for the <<spark-sql-catalyst-QueryPlan.adoc#schema, output schema>>.
+`run` requests the `DataFrame` for the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> that in turn is requested for the <<spark-sql-QueryExecution.adoc#toRdd, RDD>> (of the structured query). `run` requests the <<logicalRelation, LogicalRelation>> for the <<catalyst/QueryPlan.md#schema, output schema>>.
 
 With the RDD and the output schema, `run` creates <<SparkSession.md#internalCreateDataFrame, another DataFrame>> that is the `RDD[InternalRow]` with the schema applied.
 

@@ -26,7 +26,7 @@ Whichever query interface you use to describe a structured query, i.e. SQL or Qu
 
 A `Dataset` is a programming interface to the [structured query execution pipeline](spark-sql-QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
 
-Internally, a structured query is a [Catalyst tree](spark-sql-catalyst.md) of (logical and physical) [relational operators](spark-sql-catalyst-QueryPlan.md) and [expressions](expressions/Expression.md).
+Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 
 When an action is executed on a `Dataset` (directly, e.g. link:spark-sql-dataset-operators.adoc#show[show] or link:spark-sql-dataset-operators.adoc#count[count], or indirectly, e.g. link:spark-sql-DataFrameWriter.adoc#save[save] or link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the link:spark-sql-QueryExecution.adoc#execution-pipeline[execution stages]:
 

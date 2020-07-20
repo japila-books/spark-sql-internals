@@ -89,7 +89,7 @@ res1: Boolean = true
 ----
 
 [[simpleString]]
-The link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple text representation] of a `InMemoryRelation` (aka `simpleString`) is *InMemoryRelation [output], [storageLevel]* (that uses the <<output, output>> and the <<cacheBuilder, CachedRDDBuilder>>).
+The link:catalyst/QueryPlan.md#simpleString[simple text representation] of a `InMemoryRelation` (aka `simpleString`) is *InMemoryRelation [output], [storageLevel]* (that uses the <<output, output>> and the <<cacheBuilder, CachedRDDBuilder>>).
 
 [source, scala]
 ----

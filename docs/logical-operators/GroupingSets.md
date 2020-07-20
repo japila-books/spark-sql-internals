@@ -36,7 +36,7 @@ NOTE: `GroupingSets` is not supported on Structured Streaming's link:spark-sql-L
 `GroupingSets` is never resolved (as it can only be converted to an `Aggregate` logical operator).
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `GroupingSets` are exactly the attributes of <<aggregations, aggregate named expressions>>.
+The link:catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly the attributes of <<aggregations, aggregate named expressions>>.
 
 === [[analyzer]] Analysis Phase
 

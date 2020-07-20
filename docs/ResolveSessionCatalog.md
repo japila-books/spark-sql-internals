@@ -22,4 +22,4 @@ apply(
 
 apply...FIXME
 
-apply is part of the [Catalyst Rule](spark-sql-catalyst-Rule.md#apply) abstraction.
+apply is part of the [Catalyst Rule](catalyst/Rule.md#apply) abstraction.

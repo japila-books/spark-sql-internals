@@ -15,7 +15,7 @@ title: SerializeFromObjectExec
 `SerializeFromObjectExec` uses the <<child, child>> physical operator when requested for the <<spark-sql-CodegenSupport.adoc#inputRDDs, input RDDs>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
 
 [[output]]
-`SerializeFromObjectExec` uses the <<serializer, serializer>> for the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>.
+`SerializeFromObjectExec` uses the <<serializer, serializer>> for the <<catalyst/QueryPlan.md#output, output schema attributes>>.
 
 === [[creating-instance]] Creating SerializeFromObjectExec Instance
 

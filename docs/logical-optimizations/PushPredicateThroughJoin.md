@@ -1,6 +1,6 @@
 # PushPredicateThroughJoin Logical Optimization
 
-`PushPredicateThroughJoin` is a link:spark-sql-catalyst-Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`PushPredicateThroughJoin` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 When <<apply, executed>>, `PushPredicateThroughJoin`...FIXME
 
@@ -38,7 +38,7 @@ apply(
 
 `apply`...FIXME
 
-`apply` is part of the [Rule](../spark-sql-catalyst-Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[split]] `split` Internal Method
 
@@ -52,9 +52,9 @@ split(
 
 `split` splits (_partitions_) the given condition expressions into link:expressions/Expression.md#deterministic[deterministic] or not.
 
-`split` further splits (_partitions_) the deterministic expressions (_pushDownCandidates_) into expressions that reference the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output expressions] of the left logical operator (_leftEvaluateCondition_) or not (_rest_).
+`split` further splits (_partitions_) the deterministic expressions (_pushDownCandidates_) into expressions that reference the link:catalyst/QueryPlan.md#outputSet[output expressions] of the left logical operator (_leftEvaluateCondition_) or not (_rest_).
 
-`split` further splits (_partitions_) the expressions that do not reference left output expressions into expressions that reference the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[output expressions] of the right logical operator (_rightEvaluateCondition_) or not (_commonCondition_).
+`split` further splits (_partitions_) the expressions that do not reference left output expressions into expressions that reference the link:catalyst/QueryPlan.md#outputSet[output expressions] of the right logical operator (_rightEvaluateCondition_) or not (_commonCondition_).
 
 In the end, `split` returns the _leftEvaluateCondition_, _rightEvaluateCondition_, and _commonCondition_ with the non-deterministic condition expressions.
 

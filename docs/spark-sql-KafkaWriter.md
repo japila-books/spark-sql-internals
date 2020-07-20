@@ -7,7 +7,7 @@ title: KafkaWriter
 .KafkaWriter (write) in web UI
 image::images/spark-sql-KafkaWriter-write-webui.png[align="center"]
 
-`KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<spark-sql-catalyst-QueryPlan.adoc#output, output schema attributes>>):
+`KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<catalyst/QueryPlan.md#output, output schema attributes>>):
 
 * Either *topic* of type `StringType` or the <<spark-sql-kafka-options.adoc#topic, topic>> option are defined
 
@@ -61,7 +61,7 @@ write(
   topic: Option[String] = None): Unit
 ----
 
-`write` gets the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.adoc#, QueryExecution>>.
+`write` gets the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.adoc#, QueryExecution>>.
 
 `write` then <<validateQuery, validates the schema of a structured query>>.
 

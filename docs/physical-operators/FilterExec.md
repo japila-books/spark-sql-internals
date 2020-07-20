@@ -110,7 +110,7 @@ NOTE: `usedInputs` is part of <<spark-sql-CodegenSupport.adoc#usedInputs, Codege
 output: Seq[Attribute]
 ----
 
-NOTE: `output` is part of <<spark-sql-catalyst-QueryPlan.adoc#output, QueryPlan Contract>> to...FIXME.
+NOTE: `output` is part of <<catalyst/QueryPlan.md#output, QueryPlan Contract>> to...FIXME.
 
 `output`...FIXME
 
@@ -176,7 +176,7 @@ Internally, `doExecute` takes the <<numOutputRows, numOutputRows>> metric.
 
 In the end, `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 
-. Creates a partition filter as a new <<SparkPlan.md#newPredicate, GenPredicate>> (for the <<condition, filter condition>> expression and the <<spark-sql-catalyst-QueryPlan.adoc#output, output schema>> of the <<child, child>> physical operator)
+. Creates a partition filter as a new <<SparkPlan.md#newPredicate, GenPredicate>> (for the <<condition, filter condition>> expression and the <<catalyst/QueryPlan.md#output, output schema>> of the <<child, child>> physical operator)
 
 . Requests the generated partition filter `Predicate` to `initialize` (with `0` partition index)
 

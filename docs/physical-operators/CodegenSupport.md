@@ -196,7 +196,7 @@ produce(ctx: CodegenContext, parent: CodegenSupport): String
 
 Internally, `produce` link:SparkPlan.md#executeQuery[prepares a physical operator for query execution] and then generates a Java source code with the result of <<doProduce, doProduce>>.
 
-While generating the Java source code, `produce` annotates code blocks with `PRODUCE` markers that are link:spark-sql-catalyst-QueryPlan.adoc#simpleString[simple descriptions] of the physical operators in a structured query.
+While generating the Java source code, `produce` annotates code blocks with `PRODUCE` markers that are link:catalyst/QueryPlan.md#simpleString[simple descriptions] of the physical operators in a structured query.
 
 TIP: Enable `spark.sql.codegen.comments` Spark SQL property to have `PRODUCE` markers in the generated Java source code.
 
@@ -303,7 +303,7 @@ NOTE: `metricTerm` is used when...FIXME
 usedInputs: AttributeSet
 ----
 
-`usedInputs` returns the link:spark-sql-catalyst-QueryPlan.adoc#references[expression references].
+`usedInputs` returns the link:catalyst/QueryPlan.md#references[expression references].
 
 NOTE: Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the <<spark-sql-CodegenSupport.adoc#consume, generated Java source code for consume path>>).
 
@@ -320,9 +320,9 @@ NOTE: `consume` is a final method that cannot be changed and is the foundation o
 
 `consume` creates the `ExprCodes` for the input variables (aka `inputVars`).
 
-* If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the link:spark-sql-catalyst-QueryPlan.adoc#output[output] and copies them. In other words, `inputVars` is exactly `outputVars`.
+* If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the link:catalyst/QueryPlan.md#output[output] and copies them. In other words, `inputVars` is exactly `outputVars`.
 
-* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the `CodegenContext` to `null` while link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] to the `row`. For every attribute in the link:spark-sql-catalyst-QueryPlan.adoc#output[output], `consume` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:expressions/Expression.md#genCode[generate code for expression evaluation].
+* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the `CodegenContext` to `null` while link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] to the `row`. For every attribute in the link:catalyst/QueryPlan.md#output[output], `consume` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:expressions/Expression.md#genCode[generate code for expression evaluation].
 
 `consume` <<prepareRowVar, creates a row variable>>.
 
@@ -340,7 +340,7 @@ NOTE: `consume` is a final method that cannot be changed and is the foundation o
 
 . link:spark-sql-properties.adoc#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator] internal configuration property is enabled
 
-. <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>> contains all link:spark-sql-catalyst-QueryPlan.adoc#output[output attributes]
+. <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>> contains all link:catalyst/QueryPlan.md#output[output attributes]
 
 . `paramLength` is correct (FIXME)
 

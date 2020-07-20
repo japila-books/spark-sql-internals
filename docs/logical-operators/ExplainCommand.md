@@ -58,7 +58,7 @@ EXPLAIN LOGICAL show tables
 ----
 
 [[output]]
-The link:spark-sql-catalyst-QueryPlan.adoc#output[output schema] of a `ExplainCommand` is...FIXME
+The link:catalyst/QueryPlan.md#output[output schema] of a `ExplainCommand` is...FIXME
 
 === [[creating-instance]] Creating ExplainCommand Instance
 

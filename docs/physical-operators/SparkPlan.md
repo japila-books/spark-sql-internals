@@ -4,7 +4,7 @@
 
 `SparkPlan` is used to build a **physical query plan** (_query execution plan_).
 
-`SparkPlan` is a recursive data structure in Spark SQL's link:spark-sql-catalyst.adoc[Catalyst tree manipulation framework] and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
+`SparkPlan` is a recursive data structure in Spark SQL's [Catalyst tree manipulation framework](../catalyst/index.md) and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
 
 ![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/spark-sql-SparkPlan-webui-physical-plan.png)
 
@@ -16,7 +16,7 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
 ??? note "Catalyst Framework"
     A structured query is basically a single `SparkPlan` physical operator with [child physical operators](../catalyst/TreeNode.md#children).
 
-    Spark SQL uses [Catalyst](../spark-sql-catalyst.md) tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
+    Spark SQL uses [Catalyst](../catalyst/index.md) tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
 
 [[sparkContext]]
 `SparkPlan` has access to the owning `SparkContext` (from the Spark Core).
@@ -443,7 +443,7 @@ Binary physical operator with two child `left` and `right` physical operators
 
 Leaf physical operator with no children
 
-By default, the link:spark-sql-catalyst-QueryPlan.adoc#producedAttributes[set of all attributes that are produced] is exactly the link:spark-sql-catalyst-QueryPlan.adoc#outputSet[set of attributes that are output].
+By default, the link:catalyst/QueryPlan.md#producedAttributes[set of all attributes that are produced] is exactly the link:catalyst/QueryPlan.md#outputSet[set of attributes that are output].
 
 ### <span id="UnaryExecNode"> UnaryExecNode
 

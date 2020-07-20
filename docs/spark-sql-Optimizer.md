@@ -7,7 +7,7 @@ title: Optimizer
 [[extensions]]
 NOTE: <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> is the one and only direct implementation of the `Optimizer` Contract in Spark SQL.
 
-`Optimizer` is a <<spark-sql-catalyst-RuleExecutor.adoc#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`).
+`Optimizer` is a <<catalyst/RuleExecutor.md#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`).
 
 ```
 Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
@@ -421,6 +421,6 @@ NOTE: `extendedOperatorOptimizationRules` rules are executed right after <<Opera
 batches: Seq[Batch]
 ----
 
-NOTE: `batches` is part of the <<spark-sql-catalyst-RuleExecutor.adoc#batches, RuleExecutor Contract>> to define the rule batches to use when executed.
+NOTE: `batches` is part of the <<catalyst/RuleExecutor.md#batches, RuleExecutor Contract>> to define the rule batches to use when executed.
 
 `batches`...FIXME
