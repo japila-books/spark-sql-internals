@@ -1,132 +1,29 @@
-# QueryPlan -- Structured Query Plan
+# QueryPlan &mdash; Structured Query Plan
 
-`QueryPlan` is part of [Catalyst](index.md) to build a [tree of relational operators](TreeNode.md) of a structured query.
+`QueryPlan` is an [extension](#contract) of the [TreeNode](TreeNode.md) abstraction for [query plans](#implementations) in [Catalyst Framework](index.md).
 
-Scala-specific, `QueryPlan` is an abstract class that is the base class of link:spark-sql-LogicalPlan.adoc[LogicalPlan] and link:SparkPlan.md[SparkPlan] (for logical and physical plans, respectively).
+`QueryPlan` is used to build a tree of relational operators of a structured query.
+`QueryPlan` is a tree of (logical or physical) operators that have a tree of expressions.
 
-A `QueryPlan` has an <<output, output>> attributes (that serves as the base for the schema), a collection of link:expressions/Expression.md[expressions] and a <<schema, schema>>.
+`QueryPlan` has an [output attributes](#output), [expressions](../expressions/Expression.md) and a [schema](#schema).
 
-`QueryPlan` has <<statePrefix, statePrefix>> that is used when displaying a plan with `!` to indicate an invalid plan, and `'` to indicate an unresolved plan.
+`QueryPlan` has [statePrefix](#statePrefix) that is used when displaying a plan with `!` to indicate an invalid plan, and `'` to indicate an unresolved plan.
 
-A `QueryPlan` is *invalid* if there are <<missingInput, missing input attributes>> and `children` subnodes are non-empty.
+A `QueryPlan` is **invalid** if there are [missing input attributes](#missingInput) and `children` subnodes are non-empty.
 
-A `QueryPlan` is *unresolved* if the column names have not been verified and column types have not been looked up in the link:spark-sql-Catalog.adoc[Catalog].
+A `QueryPlan` is **unresolved** if the column names have not been verified and column types have not been looked up in the [Catalog](../spark-sql-Catalog.md).
 
-[[expressions]]
-A `QueryPlan` has zero, one or more link:expressions/Expression.md[Catalyst expressions].
+## Contract
 
-NOTE: `QueryPlan` is a tree of operators that have a tree of expressions.
+### <span id="output"> Output Attributes
 
-[[references]]
-`QueryPlan` has `references` property that is the attributes that appear in <<expressions, expressions>> from this operator.
-
-=== [[contract]] QueryPlan Contract
-
-[source, scala]
-----
-abstract class QueryPlan[T] extends TreeNode[T] {
-  def output: Seq[Attribute]
-  def validConstraints: Set[Expression]
-  // FIXME
-}
-----
-
-.QueryPlan Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[validConstraints]] `validConstraints`
-|
-
-| <<output, output>>
-| link:spark-sql-Expression-Attribute.adoc[Attribute] expressions
-|===
-
-=== [[transformExpressions]] Transforming Expressions -- `transformExpressions` Method
-
-[source, scala]
-----
-transformExpressions(rule: PartialFunction[Expression, Expression]): this.type
-----
-
-`transformExpressions` simply executes <<transformExpressionsDown, transformExpressionsDown>> with the input rule.
-
-NOTE: `transformExpressions` is used when...FIXME
-
-=== [[transformExpressionsDown]] Transforming Expressions -- `transformExpressionsDown` Method
-
-[source, scala]
-----
-transformExpressionsDown(rule: PartialFunction[Expression, Expression]): this.type
-----
-
-`transformExpressionsDown` <<mapExpressions, applies the rule>> to each expression in the query operator.
-
-NOTE: `transformExpressionsDown` is used when...FIXME
-
-=== [[mapExpressions]] Applying Transformation Function to Each Expression in Query Operator -- `mapExpressions` Method
-
-[source, scala]
-----
-mapExpressions(f: Expression => Expression): this.type
-----
-
-`mapExpressions`...FIXME
-
-NOTE: `mapExpressions` is used when...FIXME
-
-=== [[outputSet]] Output Schema Attribute Set -- `outputSet` Property
-
-[source, scala]
-----
-outputSet: AttributeSet
-----
-
-`outputSet` simply returns an `AttributeSet` for the <<output, output schema attributes>>.
-
-NOTE: `outputSet` is used when...FIXME
-
-=== [[producedAttributes]] `producedAttributes` Property
-
-CAUTION: FIXME
-
-=== [[missingInput]] Missing Input Attributes -- `missingInput` Property
-
-[source, scala]
-----
-def missingInput: AttributeSet
-----
-
-`missingInput` are link:spark-sql-Expression-Attribute.adoc[attributes] that are referenced in expressions but not provided by this node's children (as `inputSet`) and are not produced by this node (as `producedAttributes`).
-
-=== [[schema]] Output Schema -- `schema` Property
-
-You can request the schema of a `QueryPlan` using `schema` that builds link:spark-sql-StructType.adoc[StructType] from the <<output, output attributes>>.
-
-[source, scala]
-----
-// the query
-val dataset = spark.range(3)
-
-scala> dataset.queryExecution.analyzed.schema
-res6: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
-----
-
-=== [[output]] Output Schema Attributes -- `output` Property
-
-[source, scala]
-----
+```scala
 output: Seq[Attribute]
-----
+```
 
-`output` is a collection of link:spark-sql-Expression-Attribute.adoc[Catalyst attribute expressions] that represent the result of a projection in a query that is later used to build the output link:spark-sql-schema.adoc[schema].
+Output [attribute](../expressions/Attribute.md) expressions
 
-NOTE: `output` property is also called *output schema* or *result schema*.
-
-[source, scala]
-----
+```text
 val q = spark.range(3)
 
 scala> q.queryExecution.analyzed.output
@@ -143,18 +40,89 @@ res3: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 
 scala> q.queryExecution.executedPlan.output
 res4: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
-----
+```
 
-[TIP]
-====
-You can build a link:spark-sql-StructType.adoc[StructType] from `output` collection of attributes using `toStructType` method (that is available through the implicit class `AttributeSeq`).
+!!! tip
+    You can build a [StructType](../spark-sql-StructType.md) from `output` collection of attributes using `toStructType` method (that is available through the implicit class `AttributeSeq`).
 
-[source, scala]
-----
-scala> q.queryExecution.analyzed.output.toStructType
-res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
-----
-====
+    ```text
+    scala> q.queryExecution.analyzed.output.toStructType
+    res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
+    ```
+
+## Implementations
+
+* <span id="AnalysisHelper"> AnalysisHelper
+* <span id="LogicalPlan"> [LogicalPlan](../logical-operators/LogicalPlan.md)
+* <span id="SparkPlan"> [SparkPlan](../physical-operators/SparkPlan.md)
+
+## <span id="expressions"> Expressions
+
+```scala
+expressions: Seq[Expression]
+```
+
+`expressions` is all of the [expressions](../expressions/Expression.md) present in this query plan operator.
+
+## <span id="references"> references AttributeSet
+
+```scala
+references: AttributeSet
+```
+
+`references` is a `AttributeSet` of all attributes that appear in [expressions](#expressions) of this operator.
+
+## <span id="transformExpressions"> Transforming Expressions
+
+```scala
+transformExpressions(
+  rule: PartialFunction[Expression, Expression]): this.type
+```
+
+`transformExpressions` executes [transformExpressionsDown](#transformExpressionsDown) with the input rule.
+
+`transformExpressions` is used when...FIXME
+
+## <span id="transformExpressionsDown"> Transforming Expressions (Down The Tree)
+
+```scala
+transformExpressionsDown(
+  rule: PartialFunction[Expression, Expression]): this.type
+```
+
+`transformExpressionsDown` [applies the given rule](#mapExpressions) to each expression in the query operator.
+
+`transformExpressionsDown` is used when...FIXME
+
+## <span id="outputSet"> Output Schema Attribute Set
+
+```scala
+outputSet: AttributeSet
+```
+
+`outputSet` simply returns an `AttributeSet` for the [output attributes](#output).
+
+`outputSet` is used when...FIXME
+
+## <span id="missingInput"> Missing Input Attributes
+
+```scala
+missingInput: AttributeSet
+```
+
+`missingInput` are [attributes](../expressions/Attribute.md) that are referenced in expressions but not provided by this node's children (as `inputSet`) and are not produced by this node (as `producedAttributes`).
+
+## <span id="schema"> Output Schema
+
+You can request the schema of a `QueryPlan` using `schema` that builds [StructType](../spark-sql-StructType.md) from the [output attributes](#output).
+
+```text
+// the query
+val dataset = spark.range(3)
+
+scala> dataset.queryExecution.analyzed.schema
+res6: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType,false))
+```
 
 ## <span id="simpleString"> Simple (Basic) Description with State Prefix
 
@@ -162,31 +130,19 @@ res5: org.apache.spark.sql.types.StructType = StructType(StructField(id,LongType
 simpleString: String
 ```
 
-`simpleString` adds a <<statePrefix, state prefix>> to the node's [simple text description](TreeNode.md#simpleString).
+`simpleString` adds a [state prefix](#statePrefix) to the node's [simple text description](TreeNode.md#simpleString).
 
 `simpleString` is part of the [TreeNode](TreeNode.md#simpleString) abstraction.
 
-=== [[statePrefix]] State Prefix -- `statePrefix` Method
+## <span id="statePrefix"> State Prefix
 
-[source, scala]
-----
+```scala
 statePrefix: String
-----
+```
 
-Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. <<missingInput, missingInput>> is not empty, and the node is a [parent node](TreeNode.md#children). Otherwise, `statePrefix` gives an empty string.
+Internally, `statePrefix` gives `!` (exclamation mark) when the node is invalid, i.e. [missingInput](#missingInput) is not empty, and the node is a [parent node](TreeNode.md#children). Otherwise, `statePrefix` gives an empty string.
 
-NOTE: `statePrefix` is used exclusively when `QueryPlan` is requested for the <<simpleString, simple text node description>>.
-
-=== [[transformAllExpressions]] Transforming All Expressions -- `transformAllExpressions` Method
-
-[source, scala]
-----
-transformAllExpressions(rule: PartialFunction[Expression, Expression]): this.type
-----
-
-`transformAllExpressions`...FIXME
-
-NOTE: `transformAllExpressions` is used when...FIXME
+`statePrefix` is used when `QueryPlan` is requested for the [simple text node description](#simpleString).
 
 ## <span id="verboseString"> Simple (Basic) Description with State Prefix
 
@@ -194,7 +150,7 @@ NOTE: `transformAllExpressions` is used when...FIXME
 verboseString: String
 ```
 
-`verboseString` simply returns the <<simpleString, simple (basic) description with state prefix>>.
+`verboseString` simply returns the [simple (basic) description with state prefix](#simpleString).
 
 `verboseString` is part of the [TreeNode](TreeNode.md#verboseString) abstraction.
 
@@ -204,28 +160,16 @@ verboseString: String
 innerChildren: Seq[QueryPlan[_]]
 ```
 
-`innerChildren` simply returns the <<subqueries, subqueries>>.
+`innerChildren` simply returns the [subqueries](#subqueries).
 
 `innerChildren` is part of the [TreeNode](TreeNode.md#innerChildren) abstraction.
 
-=== [[subqueries]] `subqueries` Method
+## <span id="subqueries"> subqueries
 
-[source, scala]
-----
+```scala
 subqueries: Seq[PlanType]
-----
+```
 
 `subqueries`...FIXME
 
-NOTE: `subqueries` is used when...FIXME
-
-=== [[doCanonicalize]] Canonicalizing Query Plan -- `doCanonicalize` Method
-
-[source, scala]
-----
-doCanonicalize(): PlanType
-----
-
-`doCanonicalize`...FIXME
-
-NOTE: `doCanonicalize` is used when...FIXME
+`subqueries` is used when...FIXME
