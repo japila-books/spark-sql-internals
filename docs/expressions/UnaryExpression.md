@@ -1,43 +1,79 @@
 # UnaryExpression
 
-`UnaryExpression` is...FIXME
+`UnaryExpression` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [expressions](#implementations) with a single [child](#child).
 
-=== [[defineCodeGen]] `defineCodeGen` Method
+## Contract
 
-[source, scala]
-----
+### <span id="child"> child
+
+```scala
+child: Expression
+```
+
+The child [expression](Expression.md)
+
+## Implementations
+
+* [Alias](Alias.md)
+* ArrayDistinct
+* ArrayMax
+* ArrayMin
+* BitwiseCount
+* CsvToStructs
+* MapEntries
+* MapKeys
+* MapValues
+* MultiAlias
+* PrintToStderr
+* SchemaOfCsv
+* _others..._
+
+## <span id="eval"> Interpreted Expression Evaluation
+
+```scala
+eval(
+  input: InternalRow): Any
+```
+
+`eval`...FIXME
+
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
+
+## <span id="defineCodeGen"> defineCodeGen
+
+```scala
 defineCodeGen(
   ctx: CodegenContext,
   ev: ExprCode,
   f: String => String): ExprCode
-----
+```
 
 `defineCodeGen`...FIXME
 
-NOTE: `defineCodeGen` is used when...FIXME
+## <span id="nullSafeCodeGen"> nullSafeCodeGen
 
-=== [[nullSafeEval]] `nullSafeEval` Method
+```scala
+nullSafeCodeGen(
+  ctx: CodegenContext,
+  ev: ExprCode,
+  f: String => String): ExprCode
+```
 
-[source, scala]
-----
-nullSafeEval(input: Any): Any
-----
+`nullSafeCodeGen`...FIXME
+
+`nullSafeCodeGen` is used when...FIXME
+
+## <span id="nullSafeEval"> nullSafeEval
+
+```scala
+nullSafeEval(
+  input: Any): Any
+```
 
 `nullSafeEval` simply fails with the following error (and is expected to be overrided to save null-check code):
 
-```
+```text
 UnaryExpressions must override either eval or nullSafeEval
 ```
 
-NOTE: `nullSafeEval` is used exclusively when `UnaryExpression` is requested to <<eval, eval>>.
-
-=== [[eval]] Evaluating Expression -- `eval` Method
-
-[source, scala]
-----
-eval(input: InternalRow): Any
-----
-
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
-
-`eval`...FIXME
+`nullSafeEval` is used when `UnaryExpression` is requested to [evaluate (in interpreted mode)](#eval).
