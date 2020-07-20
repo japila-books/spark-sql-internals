@@ -613,6 +613,7 @@ nav:
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New in Spark 3.0.0:
     - since-300.md
+    - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:
       - Scan: connector/Scan.md
