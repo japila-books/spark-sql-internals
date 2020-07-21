@@ -18,6 +18,8 @@ Zero, one or more **child nodes** of the node
 simpleStringWithNodeId(): String
 ```
 
+One-line description of this node with the node identifier
+
 Used when `TreeNode` is requested to [generateTreeString](#generateTreeString)
 
 ### <span id="verboseString"> verboseString
@@ -205,6 +207,17 @@ nodeName: String
 `nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of [physical operators](../physical-operators/SparkPlan.md)).
 
 `nodeName` is used when `TreeNode` is requested for <<simpleString, simpleString>> and <<asCode, asCode>>.
+
+## <span id="getTagValue"> getTagValue
+
+```scala
+getTagValue[T](
+  tag: TreeNodeTag[T]): Option[T]
+```
+
+`getTagValue`...FIXME
+
+`getTagValue` is used when...FIXME
 
 ## Scala Definition
 

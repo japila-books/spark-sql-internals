@@ -173,3 +173,38 @@ subqueries: Seq[PlanType]
 `subqueries`...FIXME
 
 `subqueries` is used when...FIXME
+
+## <span id="simpleStringWithNodeId"> simpleStringWithNodeId
+
+```scala
+simpleStringWithNodeId(): String
+```
+
+`simpleStringWithNodeId` [finds the operatorId tag](TreeNode.md#getTagValue) or defaults to `unknown`.
+
+`simpleStringWithNodeId` uses the [nodeName](TreeNode.md#nodeName) to return the following text:
+
+```text
+[nodeName] ([operatorId])
+```
+
+`simpleStringWithNodeId` is part of the [TreeNode](TreeNode.md#simpleStringWithNodeId) abstraction.
+
+## <span id="append"> append
+
+```scala
+append[T <: QueryPlan[T]](
+  plan: => QueryPlan[T],
+  append: String => Unit,
+  verbose: Boolean,
+  addSuffix: Boolean,
+  maxFields: Int = SQLConf.get.maxToStringFields,
+  printOperatorId: Boolean = false): Unit
+```
+
+`append`...FIXME
+
+`append` is used when:
+
+* `QueryExecution` is requested to [simpleString](../spark-sql-QueryExecution.md#simpleString), [writePlans](../spark-sql-QueryExecution.md#writePlans) and [stringWithStats](../spark-sql-QueryExecution.md#stringWithStats)
+* `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`

@@ -168,16 +168,15 @@ NOTE: `QueryExecution` belongs to `org.apache.spark.sql.execution` package.
 
 NOTE: `QueryExecution` is a transient feature of a link:spark-sql-Dataset.adoc[Dataset], i.e. it is not preserved across serializations.
 
-=== [[stringWithStats]] Text Representation With Statistics -- `stringWithStats` Method
+## <span id="stringWithStats"> Text Representation With Statistics
 
-[source, scala]
-----
+```scala
 stringWithStats: String
-----
+```
 
 `stringWithStats`...FIXME
 
-NOTE: `stringWithStats` is used exclusively when `ExplainCommand` logical command is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed] (with `cost` flag enabled).
+`stringWithStats` is used when [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed (with `cost` flag enabled).
 
 === [[debug]] debug Object
 
@@ -373,19 +372,34 @@ NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
 
 NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStats>> which has `appendStats` flag enabled.
 
-=== [[simpleString]] Simple (Basic) Text Representation -- `simpleString` Method
+## <span id="explainString"> explainString
 
-[source, scala]
-----
+```scala
+explainString(
+   mode: ExplainMode): String
+```
+
+`explainString`...FIXME
+
+`explainString` is used when:
+
+* `Dataset.explain` operator is executed
+
+* [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed
+
+## <span id="simpleString"> Simple (Basic) Text Representation
+
+```scala
 simpleString: String
-----
+simpleString(
+   formatted: Boolean): String
+```
 
 `simpleString` requests the <<executedPlan, optimized SparkPlan>> for the [text representation](catalyst/TreeNode.md#treeString) (of all nodes in the query tree) with `verbose` flag turned off.
 
 In the end, `simpleString` adds *== Physical Plan ==* header to the text representation and <<withRedaction, redacts sensitive information>>.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.{functions => f}
 val q = spark.range(10).withColumn("rand", f.rand())
 val output = q.queryExecution.simpleString
@@ -394,16 +408,13 @@ scala> println(output)
 == Physical Plan ==
 *(1) Project [id#5L, rand(6017561978775952851) AS rand#7]
 +- *(1) Range (0, 10, step=1, splits=8)
-----
+```
 
-[NOTE]
-====
 `simpleString` is used when:
 
-* `ExplainCommand` is link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed]
+* `QueryExecution` is requested to [explainString](#explainString)
 
-* Spark Structured Streaming's `StreamingExplainCommand` is executed
-====
+* `StreamingExplainCommand` (Spark Structured Streaming) is executed
 
 === [[withRedaction]] Redacting Sensitive Information -- `withRedaction` Internal Method
 
@@ -417,3 +428,15 @@ withRedaction(message: String): String
 NOTE: Internally, Spark Core's `Utils.redact` uses Java's `Regex.replaceAllIn` to replace all matches of a pattern with a string.
 
 NOTE: `withRedaction` is used when `QueryExecution` is requested for the <<simpleString, simple>>, <<toString, extended>> and <<stringWithStats, with statistics>> text representations.
+
+## <span id="writePlans"> writePlans
+
+```scala
+writePlans(
+   append: String => Unit,
+   maxFields: Int): Unit
+```
+
+`writePlans`...FIXME
+
+`writePlans` is used when...FIXME
