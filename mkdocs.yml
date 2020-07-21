@@ -120,7 +120,7 @@ nav:
         - logical-operators/DropTableCommand.md
         - logical-operators/Except.md
         - logical-operators/Expand.md
-        - logical-operators/ExplainCommand.md
+        - ExplainCommand: logical-operators/ExplainCommand.md
         - logical-operators/ExternalRDD.md
         - logical-operators/Filter.md
         - logical-operators/Generate.md
@@ -612,7 +612,8 @@ nav:
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New in Spark 3.0.0:
-    - since-300.md
+    - new-in-300/index.md
+    - EXPLAIN Command Improved: new-in-300/explain-command-improved.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:

@@ -1,93 +1,38 @@
-title: ExplainCommand
-
 # ExplainCommand Logical Command
 
-`ExplainCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] with side effect that allows users to see how a structured query is structured and will eventually be executed, i.e. shows logical and physical plans with or without details about codegen and cost statistics.
+`ExplainCommand` is a [logical command](RunnableCommand.md) to display logical and physical query plans with optional details about codegen and cost statistics.
 
-When <<run, executed>>, `ExplainCommand` computes a `QueryExecution` that is then used to output a single-column `DataFrame` with the following:
+## Creating Instance
 
-* *codegen explain*, i.e. link:spark-sql-whole-stage-codegen.adoc[WholeStageCodegen] subtrees if <<codegen, codegen>> flag is enabled.
+`ExplainCommand` takes the following to be created:
 
-* *extended explain*, i.e. the parsed, analyzed, optimized logical plans with the physical plan if <<extended, extended>> flag is enabled.
+* <span id="logicalPlan"> [LogicalPlan](LogicalPlan.md)
+* <span id="mode"> `ExplainMode`
 
-* *cost explain*, i.e. link:spark-sql-QueryExecution.adoc#optimizedPlan[optimized logical plan] with stats if <<cost, cost>> flag is enabled.
+`ExplainCommand` is created for `EXPLAIN` SQL statements (when `SparkSqlAstBuilder` is requested to [visitExplain](../sql/SparkSqlAstBuilder.md#visitExplain)).
 
-* *simple explain*, i.e. the physical plan only when no `codegen` and `extended` flags are enabled.
+## <span id="output"> Output Attributes
 
-`ExplainCommand` is created by Dataset's link:spark-sql-Dataset.adoc#explain[explain] operator and link:spark-sql-AstBuilder.adoc#visitExplain[EXPLAIN] SQL statement (accepting `EXTENDED` and `CODEGEN` options).
+`ExplainCommand` uses the following [output attributes](Command.md#output):
 
-[source, scala]
-----
-// Explain in SQL
+* `plan` (type: `StringType`)
 
-scala> sql("EXPLAIN EXTENDED show tables").show(truncate = false)
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|plan                                                                                                                                                                                                                                           |
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|== Parsed Logical Plan ==
-ShowTablesCommand
+## <span id="run"> Executing Logical Command
 
-== Analyzed Logical Plan ==
-tableName: string, isTemporary: boolean
-ShowTablesCommand
+```scala
+run(
+  sparkSession: SparkSession): Seq[Row]
+```
 
-== Optimized Logical Plan ==
-ShowTablesCommand
+`run` requests the given [SparkSession](../SparkSession.md) for [SessionState](../SparkSession.md#sessionState) that is requested to [execute](../SessionState.md#executePlan) the given [LogicalPlan](#logicalPlan).
 
-== Physical Plan ==
-ExecutedCommand
-   +- ShowTablesCommand|
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-----
+The result `QueryExecution` is requested to [explainString](../spark-sql-QueryExecution.md#explainString) with the given [ExplainMode](#mode) that becomes the output.
 
-The following EXPLAIN variants in SQL queries are not supported:
+In case of a `TreeNodeException`, `run` gives the following output:
 
-* `EXPLAIN FORMATTED`
-* `EXPLAIN LOGICAL`
+```text
+Error occurred during query planning:
+[cause]
+```
 
-[source, scala]
-----
-scala> sql("EXPLAIN LOGICAL show tables")
-org.apache.spark.sql.catalyst.parser.ParseException:
-Operation not allowed: EXPLAIN LOGICAL(line 1, pos 0)
-
-== SQL ==
-EXPLAIN LOGICAL show tables
-^^^
-...
-----
-
-[[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of a `ExplainCommand` is...FIXME
-
-=== [[creating-instance]] Creating ExplainCommand Instance
-
-`ExplainCommand` takes the following when created:
-
-* [[logicalPlan]] link:spark-sql-LogicalPlan.adoc[LogicalPlan]
-* [[extended]] `extended` flag whether to include extended details in the output when `ExplainCommand` <<run, is executed>> (disabled by default)
-* [[codegen]] `codegen` flag whether to include codegen details in the output when `ExplainCommand` <<run, is executed>> (disabled by default)
-* [[cost]] `cost` flag whether to include code in the output when `ExplainCommand` <<run, is executed>> (disabled by default)
-
-`ExplainCommand` initializes <<output, output>> attribute.
-
-NOTE: `ExplainCommand` is created when...FIXME
-
-=== [[run]] Executing Logical Command (Computing Text Representation of QueryExecution) -- `run` Method
-
-[source, scala]
-----
-run(sparkSession: SparkSession): Seq[Row]
-----
-
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
-
-`run` computes link:spark-sql-QueryExecution.adoc[QueryExecution] and returns its text representation in a single link:spark-sql-Row.adoc[Row].
-
-Internally, `run` creates a `IncrementalExecution` for a streaming dataset directly or requests `SessionState` to link:SessionState.md#executePlan[execute the `LogicalPlan`].
-
-NOTE: *Streaming Dataset* is part of Spark Structured Streaming.
-
-`run` then requests link:spark-sql-QueryExecution.adoc[QueryExecution] to build the output text representation, i.e. <<codegenString, codegened>>, link:spark-sql-QueryExecution.adoc#toString[extended] (with logical and physical plans), link:spark-sql-QueryExecution.adoc#toStringWithStats[with stats], or link:spark-sql-QueryExecution.adoc#simpleString[simple].
-
-In the end, `run` link:spark-sql-Row.adoc#apply[creates] a `Row` with the text representation.
+`run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.

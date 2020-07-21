@@ -1,12 +1,27 @@
 title: Dataset API
 
-# Dataset API -- Dataset Operators
+# Dataset API &mdash; Dataset Operators
 
-Dataset API is a <<methods, set of operators>> with typed and untyped transformations, and actions to work with a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) as a whole.
+Dataset API is a [set of operators](#methods) with typed and untyped transformations, and actions to work with a structured query (as a [Dataset](spark-sql-Dataset.md)) as a whole.
 
-[[methods]]
-[[operators]]
-.Dataset Operators (Transformations and Actions)
+## <span id="methods"><span id="operators"> Dataset Operators (Transformations and Actions)
+
+### <span id="explain"> explain
+
+```scala
+// Uses simple mode
+explain(): Unit
+// Uses extended or simple mode
+explain(
+  extended: Boolean): Unit
+explain(
+  mode: String): Unit
+```
+
+[explain](spark-sql-Dataset-basic-actions.md#explain)
+
+A basic action to display the logical and physical plans of the `Dataset`, i.e. displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
+
 [cols="1,3",options="header",width="100%"]
 |===
 | Operator
@@ -284,17 +299,6 @@ exceptAll(
 ----
 
 (*New in 2.4.0*) A typed transformation
-
-| <<spark-sql-Dataset-basic-actions.adoc#explain, explain>>
-a| [[explain]]
-
-[source, scala]
-----
-explain(): Unit
-explain(extended: Boolean): Unit
-----
-
-A basic action to display the logical and physical plans of the `Dataset`, i.e. displays the logical and physical plans (with optional cost and codegen summaries) to the standard output
 
 | <<spark-sql-Dataset-typed-transformations.adoc#filter, filter>>
 a| [[filter]]

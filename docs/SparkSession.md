@@ -47,7 +47,7 @@ val spark = SparkSession.builder
 * `SparkSession.Builder` is requested to [getOrCreate](SparkSession-Builder.md#getOrCreate)
 * Indirectly using [newSession](#newSession) or [cloneSession](#cloneSession)
 
-## <span id="sessionState" /> SessionState
+## <span id="sessionState"> SessionState
 
 ```scala
 sessionState: SessionState

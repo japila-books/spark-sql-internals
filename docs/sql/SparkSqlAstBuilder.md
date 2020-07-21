@@ -6,7 +6,7 @@
 
 `SparkSqlAstBuilder` takes the following to be created:
 
-* <span id="conf" /> [SQLConf](../spark-sql-SQLConf.md)
+* <span id="conf"> [SQLConf](../spark-sql-SQLConf.md)
 
 `SparkSqlAstBuilder` is created for [SparkSqlParser](SparkSqlParser.md#astBuilder) (which happens when `SparkSession` is requested for [SessionState](../SparkSession.md#sessionState)).
 
@@ -15,7 +15,7 @@
 ??? note "expr Standard Function"
     `SparkSqlAstBuilder` can also be temporarily created for [expr](../spark-sql-functions.md#expr) standard function (to create column expressions).
 
-    ```
+    ```text
     val c = expr("from_json(value, schema)")
     scala> :type c
     org.apache.spark.sql.Column
@@ -31,7 +31,7 @@
 
 ## Accessing SparkSqlAstBuilder
 
-```
+```text
 scala> :type spark.sessionState.sqlParser
 org.apache.spark.sql.catalyst.parser.ParserInterface
 
@@ -44,14 +44,14 @@ org.apache.spark.sql.execution.SparkSqlAstBuilder
 
 ## Visit Callbacks
 
-### <span id="ANALYZE-TABLE"/> visitAnalyze
+### <span id="ANALYZE-TABLE"> visitAnalyze
 
 Creates [AnalyzeColumnCommand](#AnalyzeColumnCommand), [AnalyzePartitionCommand](#AnalyzePartitionCommand) or [AnalyzeTableCommand](#AnalyzeTableCommand) logical commands.
 
 ANTLR labeled alternative: `#analyze`
 
 ??? note "NOSCAN Identifier"
-    <span id="ANALYZE-TABLE-NOSCAN"/>
+    <span id="ANALYZE-TABLE-NOSCAN">
     `visitAnalyze` supports `NOSCAN` identifier only (and reports a `ParseException` if not used).
 
     `NOSCAN` is used for `AnalyzePartitionCommand` and `AnalyzeTableCommand` logical commands only.
@@ -151,7 +151,7 @@ Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) for
 
 ANTLR labeled alternative: `#createTempViewUsing`
 
-### <span id="DESCRIBE"/> visitDescribeTable
+### <span id="DESCRIBE"> visitDescribeTable
 
 Creates [DescribeColumnCommand](#DescribeColumnCommand) or [DescribeTableCommand](#DescribeTableCommand) logical commands.
 
@@ -175,7 +175,7 @@ DescribeColumnCommand `t1`, [p1], true
 
 [DescribeTableCommand](../logical-operators/DescribeTableCommand.md) logical command for all other variants of `DESCRIBE TABLE` (i.e. no column)
 
-```
+```text
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
 val sqlCmd = "DESC t1"
 val plan = spark.sql(sqlCmd).queryExecution.logical
@@ -185,11 +185,22 @@ scala> println(cmd)
 DescribeTableCommand `t1`, false
 ```
 
+### <span id="visitExplain"> visitExplain
+
+Creates an [ExplainCommand](../logical-operators/ExplainCommand.md) logical command for the following:
+
+```text
+EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
+  statement
+```
+
+ANTLR labeled alternative: `#explain`
+
 ### visitShowCreateTable
 
 Creates [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md) logical command for `SHOW CREATE TABLE` SQL statement.
 
-```
+```text
 SHOW CREATE TABLE tableIdentifier
 ```
 
@@ -199,7 +210,7 @@ ANTLR labeled alternative: `#showCreateTable`
 
 Creates [TruncateTableCommand](../logical-operators/TruncateTableCommand.md) logical command for `TRUNCATE TABLE` SQL statement.
 
-```
+```text
 TRUNCATE TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
