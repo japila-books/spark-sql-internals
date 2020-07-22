@@ -1,3 +1,3 @@
 # ShuffleQueryStageExec Physical Operator
 
-`ShuffleQueryStageExec` is...FIXME
+`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) that...FIXME

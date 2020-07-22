@@ -454,14 +454,15 @@ nav:
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - SparkPlan: physical-operators/SparkPlan.md
-      - CodegenSupport: physical-operators/CodegenSupport.md
-      - DataSourceScanExec: physical-operators/DataSourceScanExec.md
-      - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
-      - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
-      - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
       - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
+      - CodegenSupport: physical-operators/CodegenSupport.md
+      - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
+      - DataSourceScanExec: physical-operators/DataSourceScanExec.md
+      - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
       - Exchange: physical-operators/Exchange.md
+      - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - QueryStageExec: physical-operators/QueryStageExec.md
       - Projection:
         - physical-operators/Projection.md
         - physical-operators/UnsafeProjection.md
@@ -517,7 +518,6 @@ nav:
           - physical-operators/WindowFunctionFrame.md
         - physical-operators/WholeStageCodegenExec.md
         - physical-operators/WriteToDataSourceV2Exec.md
-        - QueryStageExec: physical-operators/QueryStageExec.md
     - Logical Analysis Rules:
       - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
       - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md
