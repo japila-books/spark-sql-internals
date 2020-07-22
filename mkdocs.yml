@@ -634,9 +634,9 @@ nav:
       - SupportsRead: connector/catalog/SupportsRead.md
       - SupportsWrite: connector/catalog/SupportsWrite.md
       - V1Table: connector/catalog/V1Table.md
-    - DataFrameWriterV2: DataFrameWriterV2.md
+    - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
-    - WriteConfigMethods: WriteConfigMethods.md
+    - WriteConfigMethods: new-in-300/WriteConfigMethods.md
   - Notable Features:
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
