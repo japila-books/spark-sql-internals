@@ -194,6 +194,9 @@ EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
   statement
 ```
 
+!!! warning "Operation not allowed: EXPLAIN LOGICAL"
+    `EXPLAIN LOGICAL` is currently not supported.
+
 ANTLR labeled alternative: `#explain`
 
 ### visitShowCreateTable

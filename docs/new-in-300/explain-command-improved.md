@@ -1,18 +1,11 @@
 # Explaining Query Plans Improved
 
-Spark 3 supports new output modes for explaining query plans (using `EXPLAIN` SQL statement or [Dataset.explain](../spark-sql-dataset-operators.md#explain) operator).
+Spark 3 supports new output modes for explaining query plans (using [EXPLAIN](../sql/SparkSqlAstBuilder.md#visitExplain) SQL statement or [Dataset.explain](../spark-sql-dataset-operators.md#explain) operator).
 
-```text
-EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
-  statement
-```
+!!! tip "EXPLAIN SQL Examples"
+    Visit [explain.sql](https://github.com/apache/spark/blob/c9748d4f00c505053c81c8aeb69f7166e92f82a6/sql/core/src/test/resources/sql-tests/inputs/explain.sql) for SQL examples of `EXPLAIN` SQL statement.
 
-!!! warning "Operation not allowed: EXPLAIN LOGICAL"
-    `EXPLAIN LOGICAL` is currently not supported.
-
-[SparkSqlAstBuilder](../sql/SparkSqlAstBuilder.md#visitExplain) converts `EXPLAIN` statements into [ExplainCommand](../logical-operators/ExplainCommand.md) logical commands (with a corresponding mode).
-
-!!! note "JIRA issue"
+??? note "SPARK-27395"
     JIRA issue: [[SPARK-27395] New format of EXPLAIN command](https://issues.apache.org/jira/browse/SPARK-27395)
 
 ## Example 1
