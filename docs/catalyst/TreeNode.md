@@ -148,23 +148,21 @@ verboseStringWithSuffix: String
 generateTreeString(
   depth: Int,
   lastChildren: Seq[Boolean],
-  builder: StringBuilder,
+  append: String => Unit,
   verbose: Boolean,
   prefix: String = "",
-  addSuffix: Boolean = false): StringBuilder
+  addSuffix: Boolean = false,
+  maxFields: Int,
+  printNodeId: Boolean): Unit
 ```
 
-Internally, `generateTreeString` appends the following node descriptions per the `verbose` and `addSuffix` flags:
+`generateTreeString`...FIXME
 
-* <<verboseStringWithSuffix, verbose description with suffix>> when both are enabled (i.e. `verbose` and `addSuffix` flags are all `true`)
+`generateTreeString` is used when:
 
-* <<verboseString, verbose description>> when `verbose` is enabled (i.e. `verbose` is `true` and `addSuffix` is `false`)
+* `TreeNode` is requested for [text representation of all nodes in the tree](#treeString)
 
-* <<simpleString, simple description>> when `verbose` is disabled (i.e. `verbose` is `false`)
-
-In the end, `generateTreeString` calls itself recursively for the <<innerChildren, innerChildren>> and the <<children, child nodes>>.
-
-`generateTreeString` is used when `TreeNode` is requested for <<treeString, text representation of all nodes in the tree>>.
+* [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md#generateTreeString), [InputAdapter](../physical-operators/InputAdapter.md#generateTreeString), [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#generateTreeString), [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#generateTreeString), [QueryStageExec](../physical-operators/QueryStageExec.md#generateTreeString) physical operators are requested to `generateTreeString`
 
 ## <span id="innerChildren"> Inner Child Nodes
 

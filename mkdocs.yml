@@ -460,6 +460,7 @@ nav:
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
+      - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
       - Exchange: physical-operators/Exchange.md
       - Projection:
         - physical-operators/Projection.md
@@ -470,6 +471,7 @@ nav:
         - physical-operators/CodeGeneratorWithInterpretedFallback.md
       - physical-operators/SQLMetric.md
       - Concrete Operators:
+        - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - BatchScanExec: physical-operators/BatchScanExec.md
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
@@ -513,6 +515,7 @@ nav:
           - physical-operators/WindowFunctionFrame.md
         - physical-operators/WholeStageCodegenExec.md
         - physical-operators/WriteToDataSourceV2Exec.md
+        - QueryStageExec: physical-operators/QueryStageExec.md
     - Logical Analysis Rules:
       - AliasViewChild: spark-sql-Analyzer-AliasViewChild.md
       - CleanupAliases: spark-sql-Analyzer-CleanupAliases.md
