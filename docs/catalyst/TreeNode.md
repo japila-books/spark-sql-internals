@@ -107,10 +107,20 @@ toString: String
 ## <span id="treeString"> Text Representation of All Nodes in Tree
 
 ```scala
-treeString: String  // <1>
-treeString(verbose: Boolean, addSuffix: Boolean = false): String
+// Turns `verbose` flag on
+treeString: String
+treeString(
+  verbose: Boolean,
+  addSuffix: Boolean = false,
+  maxFields: Int = SQLConf.get.maxToStringFields,
+  printOperatorId: Boolean = false): String
+treeString(
+  append: String => Unit,
+  verbose: Boolean,
+  addSuffix: Boolean,
+  maxFields: Int,
+  printOperatorId: Boolean): Unit
 ```
-<1> Turns verbose flag on
 
 `treeString` gives the string representation of all the nodes in the `TreeNode`.
 
@@ -125,12 +135,6 @@ scala> println(output)
 *(1) Project [id#0L, rand(6790207094253656854) AS rand#2]
 +- *(1) Range (0, 10, step=1, splits=8)
 ```
-
-`treeString` is used when:
-
-* `TreeNode` is requested for the <<numberedTreeString, numbered text representation>> and the <<toString, text representation>>
-
-* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#simpleString[simple], link:spark-sql-QueryExecution.adoc#toString[extended] and link:spark-sql-QueryExecution.adoc#stringWithStats[with statistics] text representations
 
 ## <span id="verboseStringWithSuffix"> Verbose Description with Suffix
 

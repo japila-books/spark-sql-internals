@@ -19,3 +19,13 @@ generateTreeString(
 `generateTreeString`...FIXME
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
+
+## <span id="computeStats"> computeStats
+
+```scala
+computeStats(): Option[Statistics]
+```
+
+`computeStats`...FIXME
+
+`computeStats` is used when...FIXME

@@ -1,6 +1,6 @@
-# EXPLAIN Command Improved
+# Explaining Query Plans Improved
 
-Spark 3 supports new output modes for `EXPLAIN` SQL statement and [Dataset.explain](../spark-sql-dataset-operators.md#explain) operator.
+Spark 3 supports new output modes for explaining query plans (using `EXPLAIN` SQL statement or [Dataset.explain](../spark-sql-dataset-operators.md#explain) operator).
 
 ```text
 EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
@@ -36,4 +36,13 @@ HAVING max(val) > 0
       +- Exchange hashpartitioning(key#10, 200), true, [id=#32]
          +- *(1) HashAggregate(keys=[key#10], functions=[partial_max(val#11)])
             +- *(1) LocalTableScan [key#10, val#11]
+```
+
+## Example 2
+
+```sql
+EXPLAIN FORMATTED
+SELECT (SELECT avg(a) FROM s1) + (SELECT avg(a) FROM s1)
+FROM s1
+LIMIT 1;
 ```

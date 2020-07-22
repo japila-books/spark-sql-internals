@@ -476,6 +476,7 @@ nav:
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
         - physical-operators/BroadcastNestedLoopJoinExec.md
+        - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
         - physical-operators/CartesianProductExec.md
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
@@ -501,9 +502,10 @@ nav:
         - physical-operators/ReusedExchangeExec.md
         - physical-operators/RowDataSourceScanExec.md
         - physical-operators/SampleExec.md
+        - physical-operators/SerializeFromObjectExec.md
         - physical-operators/ShuffleExchangeExec.md
         - physical-operators/ShuffledHashJoinExec.md
-        - physical-operators/SerializeFromObjectExec.md
+        - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
         - physical-operators/SortAggregateExec.md
         - physical-operators/SortMergeJoinExec.md
         - physical-operators/SortExec.md
@@ -616,7 +618,7 @@ nav:
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New in Spark 3.0.0:
     - new-in-300/index.md
-    - EXPLAIN Command Improved: new-in-300/explain-command-improved.md
+    - Explaining Query Plans Improved: new-in-300/explain-command-improved.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:
