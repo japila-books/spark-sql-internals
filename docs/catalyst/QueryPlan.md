@@ -208,3 +208,28 @@ append[T <: QueryPlan[T]](
 
 * `QueryExecution` is requested to [simpleString](../spark-sql-QueryExecution.md#simpleString), [writePlans](../spark-sql-QueryExecution.md#writePlans) and [stringWithStats](../spark-sql-QueryExecution.md#stringWithStats)
 * `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`
+
+## <span id="verboseStringWithOperatorId"> verboseStringWithOperatorId
+
+```scala
+verboseStringWithOperatorId(): String
+```
+
+`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../spark-sql-SQLConf.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
+
+```text
+[formattedNodeName]
+Arguments: [argumentString]
+```
+
+`verboseStringWithOperatorId` is used when `QueryExecution` is requested for [simpleString](../spark-sql-QueryExecution.md#simpleString) (and `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`).
+
+## <span id="formattedNodeName"> formattedNodeName
+
+```scala
+formattedNodeName: String
+```
+
+`formattedNodeName`...FIXME
+
+`formattedNodeName` is used when [QueryPlan](#verboseStringWithOperatorId) (in general) and ProjectExec, FilterExec, DataSourceScanExec, FileSourceScanExec, LeafExecNode, UnaryExecNode, BinaryExecNode, BaseAggregateExec, ReusedExchangeExec, CartesianProductExec, HashJoin, SortMergeJoinExec physical operators (in particular) are requested for `verboseStringWithOperatorId`

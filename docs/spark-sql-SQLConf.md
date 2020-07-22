@@ -500,3 +500,11 @@ redactOptions(options: Map[String, String]): Map[String, String]
 For every regular expression (in the order), `redactOptions` redacts sensitive information, i.e. finds the first match of a regular expression pattern in every option key or value and if either matches replaces the value with `*********(redacted)`.
 
 NOTE: `redactOptions` is used exclusively when `SaveIntoDataSourceCommand` logical command is requested for the <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#simpleString, simple description>>.
+
+## <span id="spark.sql.debug.maxToStringFields"><span id="MAX_TO_STRING_FIELDS"><span id="maxToStringFields"> spark.sql.debug.maxToStringFields
+
+Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
+
+Default: `25`
+
+Since: 3.0.0

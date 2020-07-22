@@ -1,6 +1,6 @@
 # DataFrameWriterV2
 
-`DataFrameWriterV2` is a [CreateTableWriter](CreateTableWriter.md).
+`DataFrameWriterV2` is a [CreateTableWriter](new-in-300/CreateTableWriter.md).
 
 ```scala
 val nums = spark.range(5)
@@ -30,7 +30,7 @@ create(): Unit
 
 create...FIXME
 
-create is part of the [CreateTableWriter](CreateTableWriter.md#create) abstraction.
+create is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#create) abstraction.
 
 ## createOrReplace
 
@@ -40,7 +40,7 @@ createOrReplace(): Unit
 
 createOrReplace...FIXME
 
-createOrReplace is part of the [CreateTableWriter](CreateTableWriter.md#createOrReplace) abstraction.
+createOrReplace is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#createOrReplace) abstraction.
 
 ## partitionedBy
 
@@ -52,7 +52,7 @@ partitionedBy(
 
 partitionedBy...FIXME
 
-partitionedBy is part of the [CreateTableWriter](CreateTableWriter.md#partitionedBy) abstraction.
+partitionedBy is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#partitionedBy) abstraction.
 
 ## replace
 
@@ -62,7 +62,7 @@ replace(): Unit
 
 replace...FIXME
 
-replace is part of the [CreateTableWriter](CreateTableWriter.md#replace) abstraction.
+replace is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#replace) abstraction.
 
 ## tableProperty
 
@@ -74,7 +74,7 @@ tableProperty(
 
 tableProperty...FIXME
 
-tableProperty is part of the [CreateTableWriter](CreateTableWriter.md#tableProperty) abstraction.
+tableProperty is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#tableProperty) abstraction.
 
 ## using
 
@@ -85,4 +85,4 @@ using(
 
 using...FIXME
 
-using is part of the [CreateTableWriter](CreateTableWriter.md#using) abstraction.
+using is part of the [CreateTableWriter](new-in-300/CreateTableWriter.md#using) abstraction.

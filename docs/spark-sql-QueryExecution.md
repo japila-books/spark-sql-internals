@@ -359,7 +359,7 @@ Internally, `hiveResultString` <<hiveResultString-transformations, transformatio
 
 NOTE: `hiveResultString` is used exclusively when `SparkSQLDriver` (of ThriftServer) runs a command.
 
-=== [[toString]] Extended Text Representation with Logical and Physical Plans -- `toString` Method
+=== [[toString]] Extended Text Representation with Logical and Physical Plans
 
 [source, scala]
 ----
@@ -390,9 +390,10 @@ explainString(
 ## <span id="simpleString"> Simple (Basic) Text Representation
 
 ```scala
+// Uses formatted `false`
 simpleString: String
 simpleString(
-   formatted: Boolean): String
+  formatted: Boolean): String
 ```
 
 `simpleString` requests the <<executedPlan, optimized SparkPlan>> for the [text representation](catalyst/TreeNode.md#treeString) (of all nodes in the query tree) with `verbose` flag turned off.
@@ -412,16 +413,16 @@ scala> println(output)
 
 `simpleString` is used when:
 
-* `QueryExecution` is requested to [explainString](#explainString)
+* `QueryExecution` is requested to [explainString](#explainString) (with `SimpleMode` and `FormattedMode` modes)
 
-* `StreamingExplainCommand` (Spark Structured Streaming) is executed
+* (Spark Structured Streaming) `StreamingExplainCommand` logical command is executed
 
-=== [[withRedaction]] Redacting Sensitive Information -- `withRedaction` Internal Method
+## <span id="withRedaction"> Redacting Sensitive Information
 
-[source, scala]
-----
-withRedaction(message: String): String
-----
+```scala
+withRedaction(
+  message: String): String
+```
 
 `withRedaction` takes the value of link:spark-sql-properties.adoc#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex] configuration property (as the regular expression to point at sensitive information) and requests Spark Core's `Utils` to redact sensitive information in the input `message`.
 

@@ -630,7 +630,7 @@ nav:
       - SupportsWrite: connector/catalog/SupportsWrite.md
       - V1Table: connector/catalog/V1Table.md
     - DataFrameWriterV2: DataFrameWriterV2.md
-    - CreateTableWriter: CreateTableWriter.md
+    - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: WriteConfigMethods.md
   - Notable Features:
     - spark-sql-hive-integration.md
