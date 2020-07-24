@@ -601,6 +601,7 @@ nav:
       - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
       - EnsureRequirements: spark-sql-EnsureRequirements.md
       - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
+      - InsertAdaptiveSparkPlan: InsertAdaptiveSparkPlan.md
       - PlanSubqueries: spark-sql-PlanSubqueries.md
       - ReuseExchange: spark-sql-ReuseExchange.md
       - ReuseSubquery: spark-sql-ReuseSubquery.md

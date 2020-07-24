@@ -36,7 +36,7 @@ newReuseInstance(
   newOutput: Seq[Attribute]): QueryStageExec
 ```
 
-Used when...FIXME
+Used when `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryStage](AdaptiveSparkPlanExec.md#reuseQueryStage)
 
 ### <span id="plan"> plan
 
