@@ -72,6 +72,8 @@ Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionStat
 catalogManager: CatalogManager
 ```
 
+[CatalogManager](connector/catalog/CatalogManager.md)
+
 ### <span id="conf"> SQLConf
 
 [SQLConf](SQLConf.md)

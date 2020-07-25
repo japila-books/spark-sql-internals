@@ -507,6 +507,12 @@ Since: 3.0.0
 
 ## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
 
-[spark.sql.adaptive.enabled](spark-sql-properties.md#spark.sql.adaptive.enabled)
+The value of [spark.sql.adaptive.enabled](spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property
 
 Used when...FIXME
+
+## <span id="DEFAULT_CATALOG"> DEFAULT_CATALOG
+
+The value of [spark.sql.defaultCatalog](spark-sql-properties.md#spark.sql.defaultCatalog) configuration property
+
+Used when `CatalogManager` is requested for the [CatalogPlugin](CatalogManager.md#currentCatalog)

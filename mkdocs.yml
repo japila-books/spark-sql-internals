@@ -80,6 +80,7 @@ nav:
       - SparkSessionExtensions: SparkSessionExtensions.md
       - spark-sql-SparkSession-implicits.md
       - SharedState: SharedState.md
+    - Configuration Properties: spark-sql-properties.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
       - ParserInterface: sql/ParserInterface.md
@@ -637,6 +638,8 @@ nav:
       - SupportsRead: connector/catalog/SupportsRead.md
       - SupportsWrite: connector/catalog/SupportsWrite.md
       - V1Table: connector/catalog/V1Table.md
+    - CatalogManager: connector/catalog/CatalogManager.md
+    - CatalogPlugin: connector/catalog/CatalogPlugin.md
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
@@ -751,7 +754,6 @@ nav:
       - spark-sql-checkpointing.md
       - spark-sql-UserDefinedAggregateFunction.md
       - spark-sql-Aggregator.md
-      - spark-sql-properties.md
     - Monitoring:
       - Web UI and SQL Tab:
         - SQLTab: spark-sql-webui.md
