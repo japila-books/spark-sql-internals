@@ -39,14 +39,6 @@ res2: String = 2.3.2
 |===
 | Configuration Property
 
-| [[spark.sql.adaptive.enabled]] *spark.sql.adaptive.enabled*
-
-Enables link:spark-sql-adaptive-query-execution.adoc[adaptive query execution]
-
-Default: `false`
-
-Use link:spark-sql-SQLConf.adoc#adaptiveExecutionEnabled[SQLConf.adaptiveExecutionEnabled] method to access the current value.
-
 | [[spark.sql.adaptive.minNumPostShufflePartitions]] *spark.sql.adaptive.minNumPostShufflePartitions*
 
 *(internal)* The advisory minimal number of post-shuffle partitions for <<spark-sql-ExchangeCoordinator.adoc#minNumPostShufflePartitions, ExchangeCoordinator>>.
@@ -719,3 +711,13 @@ Default: `4096`
 Use <<spark-sql-SQLConf.adoc#windowExecBufferSpillThreshold, windowExecBufferSpillThreshold>> method to access the current value.
 
 |===
+
+## <span id="spark.sql.adaptive.enabled"> spark.sql.adaptive.enabled
+
+Enables [Adaptive Query Execution](spark-sql-adaptive-query-execution.md) (that re-optimizes the query plan in the middle of query execution, based on accurate runtime statistics).
+
+Default: `false`
+
+Since: 1.6.0
+
+Use [SQLConf.adaptiveExecutionEnabled](spark-sql-SQLConf.md#adaptiveExecutionEnabled) method to access the current value.

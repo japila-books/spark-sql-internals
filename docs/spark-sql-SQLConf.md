@@ -84,10 +84,6 @@ res3: Int = 200
 | Parameter
 | Description
 
-| adaptiveExecutionEnabled
-| link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled]
-| [[adaptiveExecutionEnabled]] Used exclusively when `EnsureRequirements` link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[adds an ExchangeCoordinator] (for link:spark-sql-adaptive-query-execution.adoc[adaptive query execution])
-
 | autoBroadcastJoinThreshold
 | link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold]
 | [[autoBroadcastJoinThreshold]] Used exclusively in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy
@@ -508,3 +504,9 @@ Maximum number of fields of sequence-like entries can be converted to strings in
 Default: `25`
 
 Since: 3.0.0
+
+## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
+
+[spark.sql.adaptive.enabled](spark-sql-properties.md#spark.sql.adaptive.enabled)
+
+Used when...FIXME

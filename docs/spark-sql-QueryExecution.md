@@ -193,12 +193,11 @@ CAUTION: FIXME
 * [[sparkSession]] link:SparkSession.md[SparkSession]
 * [[logical]] link:spark-sql-LogicalPlan.adoc[Logical plan]
 
-=== [[preparations]] Physical Query Optimizations (Physical Plan Preparation Rules) -- `preparations` Method
+## <span id="preparations"> Physical Query Optimizations (Physical Plan Preparation Rules)
 
-[source, scala]
-----
+```scala
 preparations: Seq[Rule[SparkPlan]]
-----
+```
 
 `preparations` is the set of the physical query optimization rules that transform a <<SparkPlan.md#, physical query plan>> to be more efficient and optimized for execution (i.e. `Rule[SparkPlan]`).
 
@@ -211,14 +210,11 @@ The `preparations` physical query optimizations are applied sequentially (one by
 . <<spark-sql-ReuseExchange.adoc#, ReuseExchange>>
 . <<spark-sql-ReuseSubquery.adoc#, ReuseSubquery>>
 
-[NOTE]
-====
 `preparations` rules are used when:
 
 * `QueryExecution` is requested for the <<executedPlan, executedPlan>> physical plan (through <<prepareForExecution, prepareForExecution>>)
 
 * (Spark Structured Streaming) `IncrementalExecution` is requested for the physical optimization rules for streaming structured queries
-====
 
 === [[prepareForExecution]] Applying preparations Physical Query Optimization Rules to Physical Plan -- `prepareForExecution` Method
 
