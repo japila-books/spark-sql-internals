@@ -98,6 +98,7 @@ nav:
       - Command: logical-operators/Command.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
+      - ParsedStatement: logical-operators/ParsedStatement.md
       - Concrete Operators:
         - logical-operators/Aggregate.md
         - logical-operators/AlterViewAsCommand.md
@@ -148,6 +149,8 @@ nav:
         - logical-operators/ResolvedHint.md
         - logical-operators/SaveIntoDataSourceCommand.md
         - logical-operators/ShowCreateTableCommand.md
+        - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
+        - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
         - logical-operators/ShowTablesCommand.md
         - logical-operators/Sort.md
         - logical-operators/SubqueryAlias.md
@@ -506,6 +509,7 @@ nav:
         - physical-operators/RowDataSourceScanExec.md
         - physical-operators/SampleExec.md
         - physical-operators/SerializeFromObjectExec.md
+        - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
         - physical-operators/ShuffleExchangeExec.md
         - physical-operators/ShuffledHashJoinExec.md
         - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md

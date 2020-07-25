@@ -193,6 +193,16 @@ Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause
 
 ANTLR rule: `relation`
 
+### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
+
+Creates a [ShowCurrentNamespaceStatement](../logical-operators/ShowCurrentNamespaceStatement.md) for the following SQL statement:
+
+```text
+SHOW CURRENT NAMESPACE
+```
+
+ANTLR labeled alternative: `#showCurrentNamespace`
+
 ### visitSingleDataType
 
 Creates a [DataType](../spark-sql-DataType.md)

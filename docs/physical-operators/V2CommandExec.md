@@ -10,6 +10,8 @@
 run(): Seq[InternalRow]
 ```
 
+Executing the command (and computing the [result](#result))
+
 Used when `V2CommandExec` physical command is requested for a [result](#result).
 
 ## Implementations
@@ -28,7 +30,7 @@ Used when `V2CommandExec` physical command is requested for a [result](#result).
 * <span id="RenameTableExec"> `RenameTableExec`
 * <span id="ReplaceTableExec"> `ReplaceTableExec`
 * <span id="SetCatalogAndNamespaceExec"> `SetCatalogAndNamespaceExec`
-* <span id="ShowCurrentNamespaceExec"> `ShowCurrentNamespaceExec`
+* <span id="ShowCurrentNamespaceExec"> [ShowCurrentNamespaceExec](ShowCurrentNamespaceExec.md)
 * <span id="ShowNamespacesExec"> `ShowNamespacesExec`
 * <span id="ShowTablePropertiesExec"> `ShowTablePropertiesExec`
 * <span id="ShowTablesExec"> `ShowTablesExec`
