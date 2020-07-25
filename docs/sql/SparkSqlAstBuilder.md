@@ -6,7 +6,7 @@
 
 `SparkSqlAstBuilder` takes the following to be created:
 
-* <span id="conf"> [SQLConf](../spark-sql-SQLConf.md)
+* <span id="conf"> [SQLConf](../SQLConf.md)
 
 `SparkSqlAstBuilder` is created for [SparkSqlParser](SparkSqlParser.md#astBuilder) (which happens when `SparkSession` is requested for [SessionState](../SparkSession.md#sessionState)).
 

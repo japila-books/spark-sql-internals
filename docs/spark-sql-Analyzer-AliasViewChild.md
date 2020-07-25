@@ -8,7 +8,7 @@
 
 [[conf]]
 [[creating-instance]]
-`AliasViewChild` takes a <<spark-sql-SQLConf.adoc#, SQLConf>> when created.
+`AliasViewChild` takes a [SQLConf](SQLConf.md) when created.
 
 [source, scala]
 ----

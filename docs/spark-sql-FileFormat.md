@@ -89,7 +89,7 @@ Controls whether the format (under the given path as Hadoop https://hadoop.apach
 
 `isSplitable` is disabled (`false`) by default.
 
-Used exclusively when `FileSourceScanExec` physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>> (when requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD, inputRDD>> and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>)
+Used exclusively when `FileSourceScanExec` physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD, create an RDD for non-bucketed reads>> (when requested for the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD, inputRDD>> and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#relation, HadoopFsRelation>> is defined nor [bucketing is enabled](SQLConf.md#bucketingEnabled))
 
 | prepareWrite
 a| [[prepareWrite]]

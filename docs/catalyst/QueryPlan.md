@@ -215,7 +215,7 @@ append[T <: QueryPlan[T]](
 verboseStringWithOperatorId(): String
 ```
 
-`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../spark-sql-SQLConf.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
+`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../SQLConf.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
 
 ```text
 [formattedNodeName]

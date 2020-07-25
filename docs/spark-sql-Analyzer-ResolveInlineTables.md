@@ -8,7 +8,7 @@
 
 [[conf]]
 [[creating-instance]]
-`ResolveInlineTables` takes a <<spark-sql-SQLConf.adoc#, SQLConf>> when created.
+`ResolveInlineTables` takes a [SQLConf](SQLConf.md) when created.
 
 [source, scala]
 ----

@@ -3,7 +3,7 @@ title: DataSourceV2Utils
 # DataSourceV2Utils Helper Object
 
 [[extractSessionConfigs]]
-`DataSourceV2Utils` is a helper object that is used exclusively to <<extractSessionConfigs, extract session configuration options>> (i.e. options with *spark.datasource* prefix for the keys in <<spark-sql-SQLConf.adoc#, SQLConf>>) for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> data sources with <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
+`DataSourceV2Utils` is a helper object that is used exclusively to <<extractSessionConfigs, extract session configuration options>> (i.e. options with *spark.datasource* prefix for the keys in [SQLConf](SQLConf.md)) for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> data sources with <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
 
 [source, scala]
 ----
@@ -14,7 +14,7 @@ extractSessionConfigs(
 
 NOTE: `extractSessionConfigs` supports data sources with <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>> only.
 
-`extractSessionConfigs` requests the `SessionConfigSupport` data source for the <<spark-sql-SessionConfigSupport.adoc#keyPrefix, custom key prefix for configuration options>> that is used to find all configuration options with the keys in the format of *spark.datasource.[keyPrefix]* in the given <<spark-sql-SQLConf.adoc#getAllConfs, SQLConf>>.
+`extractSessionConfigs` requests the `SessionConfigSupport` data source for the <<spark-sql-SessionConfigSupport.adoc#keyPrefix, custom key prefix for configuration options>> that is used to find all configuration options with the keys in the format of *spark.datasource.[keyPrefix]* in the given [SQLConf](SQLConf.md#getAllConfs).
 
 `extractSessionConfigs` returns the matching keys with the *spark.datasource.[keyPrefix]* prefix removed (i.e. `spark.datasource.keyPrefix.k1` becomes `k1`).
 

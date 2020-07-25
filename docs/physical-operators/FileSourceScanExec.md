@@ -231,7 +231,7 @@ For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirec
 
 In the end, `createNonBucketedReadRDD` creates a <<spark-sql-FileScanRDD.adoc#, FileScanRDD>> (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
 
-NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
+NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
 
 === [[selectedPartitions]] `selectedPartitions` Internal Lazily-Initialized Property
 
@@ -246,7 +246,7 @@ selectedPartitions: Seq[PartitionDirectory]
 ====
 `selectedPartitions` is used when `FileSourceScanExec` is requested for the following:
 
-* <<outputPartitioning, outputPartitioning>> and <<outputOrdering, outputOrdering>> when <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>> and the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined
+* <<outputPartitioning, outputPartitioning>> and <<outputOrdering, outputOrdering>> when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined
 
 * <<metadata, metadata>>
 
@@ -278,7 +278,7 @@ NOTE: `outputPartitioning` is part of the <<SparkPlan.md#outputPartitioning, Spa
 
 `outputPartitioning` can be one of the following:
 
-* <<spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning, HashPartitioning>> (with the <<spark-sql-BucketSpec.adoc#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.adoc#numBuckets, number of buckets>> of the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>>) when <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>> and the <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> defined
+* <<spark-sql-SparkPlan-Partitioning.adoc#HashPartitioning, HashPartitioning>> (with the <<spark-sql-BucketSpec.adoc#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.adoc#numBuckets, number of buckets>> of the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>>) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> defined
 
 * <<spark-sql-SparkPlan-Partitioning.adoc#UnknownPartitioning, UnknownPartitioning>> (with `0` partitions) otherwise
 
@@ -337,7 +337,7 @@ scala> println(lineage)
 ----
 ====
 
-NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, inputRDD>> (and the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined and <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>).
+NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, inputRDD>> (and the optional <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined and [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
 
 === [[supportsBatch]] `supportsBatch` Attribute
 
@@ -454,7 +454,7 @@ NOTE: `outputOrdering` is part of the <<SparkPlan.md#outputOrdering, SparkPlan C
 
 `outputOrdering` is a `SortOrder` expression for every <<spark-sql-BucketSpec.adoc#sortColumnNames, sort column>> in `Ascending` order only when all the following hold:
 
-* <<spark-sql-SQLConf.adoc#bucketingEnabled, bucketing is enabled>>
+* [bucketing is enabled](../SQLConf.md#bucketingEnabled)
 
 * <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> defined
 

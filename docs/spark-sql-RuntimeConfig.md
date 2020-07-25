@@ -83,7 +83,7 @@ image::images/spark-sql-RuntimeConfig.png[align="center"]
 
 [[sqlConf]]
 [[creating-instance]]
-`RuntimeConfig` takes a <<spark-sql-SQLConf.adoc#, SQLConf>> when created.
+`RuntimeConfig` takes a [SQLConf](SQLConf.md) when created.
 
 === [[get]] `get` Method
 

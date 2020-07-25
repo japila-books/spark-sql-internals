@@ -27,7 +27,7 @@ lines.write.options(requiredOpts).format("jdbc").mode(Overwrite).save
 ----
 
 [[simpleString]]
-`SaveIntoDataSourceCommand` <<spark-sql-SQLConf.adoc#redactOptions, redacts>> the <<options, options>> for the <<catalyst/QueryPlan.md#simpleString, simple description with state prefix>>.
+`SaveIntoDataSourceCommand` [redacts](../SQLConf.md#redactOptions) the <<options, options>> for the <<catalyst/QueryPlan.md#simpleString, simple description with state prefix>>.
 
 ```
 SaveIntoDataSourceCommand [dataSource], [redacted], [mode]

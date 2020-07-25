@@ -40,7 +40,7 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 * [[globalTempViewManager]] link:../spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
 * [[metastoreCatalog]] Legacy link:HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
 * [[functionRegistry]] link:../spark-sql-FunctionRegistry.adoc[FunctionRegistry]
-* [[conf]] link:../spark-sql-SQLConf.adoc[SQLConf]
+* [[conf]] [SQLConf](../SQLConf.md)
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
 * [[parser]] link:../spark-sql-ParserInterface.adoc[ParserInterface]
 * [[functionResourceLoader]] `FunctionResourceLoader`

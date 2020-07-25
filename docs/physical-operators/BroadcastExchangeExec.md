@@ -60,7 +60,7 @@ def doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 `doExecuteBroadcast` waits until the <<relationFuture, rows are broadcast>>.
 
-NOTE: `doExecuteBroadcast` waits link:spark-sql-SQLConf.adoc#broadcastTimeout[spark.sql.broadcastTimeout] (defaults to 5 minutes).
+NOTE: `doExecuteBroadcast` waits [spark.sql.broadcastTimeout](../SQLConf.md#broadcastTimeout) (defaults to 5 minutes).
 
 NOTE: `doExecuteBroadcast` is part of link:SparkPlan.md#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
 

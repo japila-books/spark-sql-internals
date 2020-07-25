@@ -16,7 +16,7 @@
 
 `SparkSqlParser` takes the following to be created:
 
-* <span id="conf"> [SQLConf](../spark-sql-SQLConf.md)
+* <span id="conf"> [SQLConf](../SQLConf.md)
 
 `SparkSqlParser` is created when:
 

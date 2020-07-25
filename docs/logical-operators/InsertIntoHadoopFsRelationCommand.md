@@ -55,7 +55,7 @@ run(
 
 NOTE: `run` is part of link:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
 
-`run` uses the <<spark-sql-SQLConf.adoc#manageFilesourcePartitions, spark.sql.hive.manageFilesourcePartitions>> configuration property to...FIXME
+`run` uses the [spark.sql.hive.manageFilesourcePartitions](../SQLConf.md#manageFilesourcePartitions) configuration property to...FIXME
 
 CAUTION: FIXME When is the <<catalogTable, catalogTable>> defined?
 

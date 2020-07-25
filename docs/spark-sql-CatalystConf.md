@@ -2,7 +2,7 @@
 
 `CatalystConf` is...FIXME
 
-NOTE: The default `CatalystConf` is link:spark-sql-SQLConf.adoc[SQLConf] that is...FIXME
+NOTE: The default `CatalystConf` is [SQLConf](SQLConf.md).
 
 [[configuration-methods]]
 .CatalystConf's Internal Properties

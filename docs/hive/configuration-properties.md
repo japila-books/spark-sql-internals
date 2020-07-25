@@ -38,7 +38,7 @@ Default: `true`
 
 When enabled (`true`), datasource tables store partition metadata in the Hive metastore, and use the metastore to prune partitions during query planning.
 
-Use link:../spark-sql-SQLConf.adoc#manageFilesourcePartitions[SQLConf.manageFilesourcePartitions] method to access the current value.
+Use [SQLConf.manageFilesourcePartitions](../SQLConf.md#manageFilesourcePartitions) method to access the current value.
 
 | [[spark.sql.hive.metastore.barrierPrefixes]] *spark.sql.hive.metastore.barrierPrefixes*
 
@@ -94,7 +94,7 @@ Default: `true`
 
 This only affects Hive tables that are not converted to filesource relations (based on <<spark.sql.hive.convertMetastoreParquet, spark.sql.hive.convertMetastoreParquet>> and <<spark.sql.hive.convertMetastoreOrc, spark.sql.hive.convertMetastoreOrc>> properties).
 
-Use link:../spark-sql-SQLConf.adoc#metastorePartitionPruning[SQLConf.metastorePartitionPruning] method to access the current value.
+Use [SQLConf.metastorePartitionPruning](../SQLConf.md#metastorePartitionPruning) method to access the current value.
 
 | [[spark.sql.hive.filesourcePartitionFileCacheSize]] *spark.sql.hive.filesourcePartitionFileCacheSize*
 

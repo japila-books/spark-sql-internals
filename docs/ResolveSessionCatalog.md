@@ -7,7 +7,7 @@
 `ResolveSessionCatalog` takes the following to be created:
 
 * <span id="catalogManager" /> CatalogManager
-* <span id="conf" /> [SQLConf](spark-sql-SQLConf.md)
+* <span id="conf" /> [SQLConf](SQLConf.md)
 * <span id="isTempView" /> `isTempView` Function (`Seq[String] => Boolean`)
 * <span id="isTempFunction" /> `isTempFunction` Function (`String => Boolean`)
 

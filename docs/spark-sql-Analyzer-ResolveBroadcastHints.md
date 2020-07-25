@@ -8,7 +8,7 @@ Technically, `ResolveBroadcastHints` is a link:catalyst/Rule.md[Catalyst rule] f
 
 [[conf]]
 [[creating-instance]]
-`ResolveBroadcastHints` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
+`ResolveBroadcastHints` takes a [SQLConf](SQLConf.md) when created.
 
 [source, scala]
 ----

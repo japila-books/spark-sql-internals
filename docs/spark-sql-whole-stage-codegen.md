@@ -18,13 +18,12 @@ scala> spark.conf.get(WHOLESTAGE_CODEGEN_ENABLED)
 res0: String = true
 ----
 
-Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] method to access the current value.
+Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
 
-[source, scala]
-----
+```text
 scala> spark.sessionState.conf.wholeStageEnabled
 res1: Boolean = true
-----
+```
 ====
 
 [NOTE]

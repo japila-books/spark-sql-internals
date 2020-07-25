@@ -47,7 +47,7 @@ Default: `-1`
 
 This setting is used in Spark SQL tests to have enough parallelism to expose issues that will not be exposed with a single partition. Only positive values are used.
 
-Use link:spark-sql-SQLConf.adoc#minNumPostShufflePartitions[SQLConf.minNumPostShufflePartitions] method to access the current value.
+Use [SQLConf.minNumPostShufflePartitions](SQLConf.md#minNumPostShufflePartitions) method to access the current value.
 
 | [[spark.sql.adaptive.shuffle.targetPostShuffleInputSize]] *spark.sql.adaptive.shuffle.targetPostShuffleInputSize*
 
@@ -55,7 +55,7 @@ Recommended size of the input data of a post-shuffle partition (in bytes)
 
 Default: `64 * 1024 * 1024` bytes
 
-Use link:spark-sql-SQLConf.adoc#targetPostShuffleInputSize[SQLConf.targetPostShuffleInputSize] method to access the current value.
+Use [SQLConf.targetPostShuffleInputSize](SQLConf.md#targetPostShuffleInputSize) method to access the current value.
 
 | [[spark.sql.allowMultipleContexts]] *spark.sql.allowMultipleContexts*
 
@@ -73,7 +73,7 @@ If the size of the statistics of the logical plan of a table is at most the sett
 
 Negative values or `0` disable broadcasting.
 
-Use link:spark-sql-SQLConf.adoc#autoBroadcastJoinThreshold[SQLConf.autoBroadcastJoinThreshold] method to access the current value.
+Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) method to access the current value.
 
 | [[spark.sql.avro.compression.codec]] *spark.sql.avro.compression.codec*
 
@@ -89,7 +89,7 @@ The supported codecs are:
 * `bzip2`
 * `xz`
 
-Use <<spark-sql-SQLConf.adoc#avroCompressionCodec, SQLConf.avroCompressionCodec>> method to access the current value.
+Use [SQLConf.avroCompressionCodec](SQLConf.md#avroCompressionCodec) method to access the current value.
 
 | [[spark.sql.broadcastTimeout]] *spark.sql.broadcastTimeout*
 
@@ -99,7 +99,7 @@ Default: `5 * 60`
 
 When negative, it is assumed infinite (i.e. `Duration.Inf`)
 
-Use link:spark-sql-SQLConf.adoc#broadcastTimeout[SQLConf.broadcastTimeout] method to access the current value.
+Use [SQLConf.broadcastTimeout](SQLConf.md#broadcastTimeout) method to access the current value.
 
 | [[spark.sql.caseSensitive]] *spark.sql.caseSensitive*
 
@@ -109,15 +109,15 @@ Default: `false`
 
 It is highly discouraged to turn on case sensitive mode.
 
-Use link:spark-sql-SQLConf.adoc#caseSensitiveAnalysis[SQLConf.caseSensitiveAnalysis] method to access the current value.
+Use [SQLConf.caseSensitiveAnalysis](SQLConf.md#caseSensitiveAnalysis) method to access the current value.
 
 | [[spark.sql.cbo.enabled]] *spark.sql.cbo.enabled*
 
-Enables link:spark-sql-cost-based-optimization.adoc[cost-based optimization] (CBO) for estimation of plan statistics when `true`.
+Enables [Cost-Based Optimization](spark-sql-cost-based-optimization.md) (CBO) for estimation of plan statistics when `true`.
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] method to access the current value.
+Use [SQLConf.cboEnabled](SQLConf.md#cboEnabled) method to access the current value.
 
 | [[spark.sql.cbo.joinReorder.enabled]] *spark.sql.cbo.joinReorder.enabled*
 
@@ -125,7 +125,7 @@ Enables join reorder for cost-based optimization (CBO).
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#joinReorderEnabled[SQLConf.joinReorderEnabled] method to access the current value.
+Use [SQLConf.joinReorderEnabled](SQLConf.md#joinReorderEnabled) method to access the current value.
 
 | [[spark.sql.cbo.starSchemaDetection]] *spark.sql.cbo.starSchemaDetection*
 
@@ -133,7 +133,7 @@ Enables *join reordering* based on star schema detection for cost-based optimiza
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#starSchemaDetection[SQLConf.starSchemaDetection] method to access the current value.
+Use [SQLConf.starSchemaDetection](SQLConf.md#starSchemaDetection) method to access the current value.
 
 | [[spark.sql.codegen.comments]] *spark.sql.codegen.comments*
 
@@ -161,7 +161,7 @@ Used when `CodeGeneratorWithInterpretedFallback` is requested to <<spark-sql-Cod
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#wholeStageFallback[SQLConf.wholeStageFallback] method to access the current value.
+Use [SQLConf.wholeStageFallback](SQLConf.md#wholeStageFallback) method to access the current value.
 
 | [[spark.sql.codegen.hugeMethodLimit]] *spark.sql.codegen.hugeMethodLimit*
 
@@ -171,7 +171,7 @@ Default: `65535`
 
 The default value `65535` is the largest bytecode size possible for a valid Java method. When running on HotSpot, it may be preferable to set the value to `8000` (which is the value of `HugeMethodLimit` in the OpenJDK JVM settings)
 
-Use link:spark-sql-SQLConf.adoc#hugeMethodLimit[SQLConf.hugeMethodLimit] method to access the current value.
+Use [SQLConf.hugeMethodLimit](SQLConf.md#hugeMethodLimit) method to access the current value.
 
 | [[spark.sql.codegen.useIdInClassName]] *spark.sql.codegen.useIdInClassName*
 
@@ -179,7 +179,7 @@ Use link:spark-sql-SQLConf.adoc#hugeMethodLimit[SQLConf.hugeMethodLimit] method 
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#wholeStageUseIdInClassName[SQLConf.wholeStageUseIdInClassName] method to access the current value.
+Use [SQLConf.wholeStageUseIdInClassName](SQLConf.md#wholeStageUseIdInClassName) method to access the current value.
 
 | [[spark.sql.codegen.maxFields]] *spark.sql.codegen.maxFields*
 
@@ -187,7 +187,7 @@ Use link:spark-sql-SQLConf.adoc#wholeStageUseIdInClassName[SQLConf.wholeStageUse
 
 Default: `100`
 
-Use link:spark-sql-SQLConf.adoc#wholeStageMaxNumFields[SQLConf.wholeStageMaxNumFields] method to access the current value.
+Use [SQLConf.wholeStageMaxNumFields](SQLConf.md#wholeStageMaxNumFields) method to access the current value.
 
 | [[spark.sql.codegen.splitConsumeFuncByOperator]] *spark.sql.codegen.splitConsumeFuncByOperator*
 
@@ -195,7 +195,7 @@ Use link:spark-sql-SQLConf.adoc#wholeStageMaxNumFields[SQLConf.wholeStageMaxNumF
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#wholeStageSplitConsumeFuncByOperator[SQLConf.wholeStageSplitConsumeFuncByOperator] method to access the current value.
+Use [SQLConf.wholeStageSplitConsumeFuncByOperator](SQLConf.md#wholeStageSplitConsumeFuncByOperator) method to access the current value.
 
 | [[spark.sql.codegen.wholeStage]] *spark.sql.codegen.wholeStage*
 
@@ -203,7 +203,7 @@ Use link:spark-sql-SQLConf.adoc#wholeStageSplitConsumeFuncByOperator[SQLConf.who
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] method to access the current value.
+Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
 
 | [[spark.sql.columnVector.offheap.enabled]] *spark.sql.columnVector.offheap.enabled*
 
@@ -211,7 +211,7 @@ Use link:spark-sql-SQLConf.adoc#wholeStageEnabled[SQLConf.wholeStageEnabled] met
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumnVectorEnabled] method to access the current value.
+Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) method to access the current value.
 
 | [[spark.sql.columnNameOfCorruptRecord]] *spark.sql.columnNameOfCorruptRecord*
 
@@ -221,7 +221,7 @@ Use link:spark-sql-SQLConf.adoc#offHeapColumnVectorEnabled[SQLConf.offHeapColumn
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#constraintPropagationEnabled[SQLConf.constraintPropagationEnabled] method to access the current value.
+Use [SQLConf.constraintPropagationEnabled](SQLConf.md#constraintPropagationEnabled) method to access the current value.
 
 | [[spark.sql.defaultSizeInBytes]] *spark.sql.defaultSizeInBytes*
 
@@ -233,7 +233,7 @@ Set to Java's `Long.MaxValue` which is larger than <<spark.sql.autoBroadcastJoin
 
 Used by the planner to decide when it is safe to broadcast a relation. By default, the system will assume that tables are too large to broadcast.
 
-Use link:spark-sql-SQLConf.adoc#defaultSizeInBytes[SQLConf.defaultSizeInBytes] method to access the current value.
+Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access the current value.
 
 | [[spark.sql.dialect]] *spark.sql.dialect*
 
@@ -245,7 +245,7 @@ Default: `true`
 
 NOTE: When disabled (i.e. `false`), link:spark-sql-ReuseSubquery.adoc[ReuseSubquery] and link:spark-sql-ReuseExchange.adoc[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
 
-Use link:spark-sql-SQLConf.adoc#exchangeReuseEnabled[SQLConf.exchangeReuseEnabled] method to access the current value.
+Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
 
 a| [[spark.sql.execution.useObjectHashAggregateExec]] *spark.sql.execution.useObjectHashAggregateExec*
 
@@ -253,7 +253,7 @@ Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregat
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#useObjectHashAggregation[SQLConf.useObjectHashAggregation] method to access the current value.
+Use [SQLConf.useObjectHashAggregation](SQLConf.md#useObjectHashAggregation) method to access the current value.
 
 | [[spark.sql.files.ignoreCorruptFiles]] *spark.sql.files.ignoreCorruptFiles*
 
@@ -261,7 +261,7 @@ Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, t
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#ignoreCorruptFiles[SQLConf.ignoreCorruptFiles] method to access the current value.
+Use [SQLConf.ignoreCorruptFiles](SQLConf.md#ignoreCorruptFiles) method to access the current value.
 
 a| [[spark.sql.files.ignoreMissingFiles]] *spark.sql.files.ignoreMissingFiles*
 
@@ -269,7 +269,7 @@ Controls whether to ignore missing files (`true`) or not (`false`). If `true`, t
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#ignoreMissingFiles[SQLConf.ignoreMissingFiles] method to access the current value.
+Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access the current value.
 
 | [[spark.sql.files.maxPartitionBytes]] *spark.sql.files.maxPartitionBytes*
 
@@ -277,7 +277,7 @@ The maximum number of bytes to pack into a single partition when reading files.
 
 Default: `128 * 1024 * 1024` (which corresponds to `parquet.block.size`)
 
-Use link:spark-sql-SQLConf.adoc#filesMaxPartitionBytes[SQLConf.filesMaxPartitionBytes] method to access the current value.
+Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) method to access the current value.
 
 | [[spark.sql.files.openCostInBytes]] *spark.sql.files.openCostInBytes*
 
@@ -287,7 +287,7 @@ Default: `4 * 1024 * 1024`
 
 It's better to over estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
 
-Use link:spark-sql-SQLConf.adoc#filesOpenCostInBytes[SQLConf.filesOpenCostInBytes] method to access the current value.
+Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) method to access the current value.
 
 | [[spark.sql.files.maxRecordsPerFile]] *spark.sql.files.maxRecordsPerFile*
 
@@ -295,7 +295,7 @@ Maximum number of records to write out to a single file. If this value is `0` or
 
 Default: `0`
 
-Use <<spark-sql-SQLConf.adoc#maxRecordsPerFile, SQLConf.maxRecordsPerFile>> method to access the current value.
+Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
 
 | [[spark.sql.inMemoryColumnarStorage.batchSize]] *spark.sql.inMemoryColumnarStorage.batchSize*
 
@@ -303,7 +303,7 @@ Use <<spark-sql-SQLConf.adoc#maxRecordsPerFile, SQLConf.maxRecordsPerFile>> meth
 
 Default: `10000`
 
-Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method to access the current value.
+Use [SQLConf.columnBatchSize](SQLConf.md#columnBatchSize) method to access the current value.
 
 | [[spark.sql.inMemoryColumnarStorage.compressed]] *spark.sql.inMemoryColumnarStorage.compressed*
 
@@ -311,7 +311,7 @@ Use link:spark-sql-SQLConf.adoc#columnBatchSize[SQLConf.columnBatchSize] method 
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#useCompression[SQLConf.useCompression] method to access the current value.
+Use [SQLConf.useCompression](SQLConf.md#useCompression) method to access the current value.
 
 | [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] *spark.sql.inMemoryColumnarStorage.enableVectorizedReader*
 
@@ -319,7 +319,7 @@ Enables link:spark-sql-vectorized-query-execution.adoc[vectorized reader] for co
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVectorizedReaderEnabled] method to access the current value.
+Use [SQLConf.cacheVectorizedReaderEnabled](SQLConf.md#cacheVectorizedReaderEnabled) method to access the current value.
 
 | [[spark.sql.inMemoryColumnarStorage.partitionPruning]] *spark.sql.inMemoryColumnarStorage.partitionPruning*
 
@@ -327,7 +327,7 @@ Use link:spark-sql-SQLConf.adoc#cacheVectorizedReaderEnabled[SQLConf.cacheVector
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartitionPruning] method to access the current value.
+Use [SQLConf.inMemoryPartitionPruning](SQLConf.md#inMemoryPartitionPruning) method to access the current value.
 
 | [[spark.sql.join.preferSortMergeJoin]] *spark.sql.join.preferSortMergeJoin*
 
@@ -335,11 +335,11 @@ Use link:spark-sql-SQLConf.adoc#inMemoryPartitionPruning[SQLConf.inMemoryPartiti
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#preferSortMergeJoin[SQLConf.preferSortMergeJoin] method to access the current value.
+Use [SQLConf.preferSortMergeJoin](SQLConf.md#preferSortMergeJoin) method to access the current value.
 
 | [[spark.sql.legacy.rdd.applyConf]] *spark.sql.legacy.rdd.applyConf*
 
-*(internal)* Enables propagation of xref:spark-sql-SQLConf.adoc#getAllConfs[SQL configurations] when executing operations on the xref:spark-sql-QueryExecution.adoc#toRdd[RDD that represents a structured query]. This is the (buggy) behavior up to 2.4.4.
+*(internal)* Enables propagation of [SQL configurations](SQLConf.md#getAllConfs) when executing operations on the xref:spark-sql-QueryExecution.adoc#toRdd[RDD that represents a structured query]. This is the (buggy) behavior up to 2.4.4.
 
 Default: `true`
 
@@ -353,7 +353,7 @@ Enables resolving (_mapping_) the data source provider `com.databricks.spark.avr
 
 Default: `true`
 
-Use xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[SQLConf.replaceDatabricksSparkAvroEnabled] method to access the current value.
+Use [SQLConf.replaceDatabricksSparkAvroEnabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) method to access the current value.
 
 | [[spark.sql.limit.scaleUpFactor]] *spark.sql.limit.scaleUpFactor*
 
@@ -361,7 +361,7 @@ Use xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[SQLConf.replac
 
 Default: `4`
 
-Use link:spark-sql-SQLConf.adoc#limitScaleUpFactor[SQLConf.limitScaleUpFactor] method to access the current value.
+Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.
 
 | [[spark.sql.optimizer.excludedRules]] *spark.sql.optimizer.excludedRules*
 
@@ -371,7 +371,7 @@ Default: `(empty)`
 
 NOTE: It is not guaranteed that all the rules in this configuration will eventually be excluded, as some rules are necessary for correctness.
 
-Use <<spark-sql-SQLConf.adoc#optimizerExcludedRules, SQLConf.optimizerExcludedRules>> method to access the current value.
+Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method to access the current value.
 
 | [[spark.sql.optimizer.inSetConversionThreshold]] *spark.sql.optimizer.inSetConversionThreshold*
 
@@ -379,7 +379,7 @@ Use <<spark-sql-SQLConf.adoc#optimizerExcludedRules, SQLConf.optimizerExcludedRu
 
 Default: `10`
 
-Use link:spark-sql-SQLConf.adoc#optimizerInSetConversionThreshold[SQLConf.optimizerInSetConversionThreshold] method to access the current value.
+Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConversionThreshold) method to access the current value.
 
 | [[spark.sql.optimizer.maxIterations]] *spark.sql.optimizer.maxIterations*
 
@@ -410,7 +410,7 @@ Some other Parquet-producing systems, in particular Impala and older versions of
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#isParquetBinaryAsString[SQLConf.isParquetBinaryAsString] method to access the current value.
+Use [SQLConf.isParquetBinaryAsString](SQLConf.md#isParquetBinaryAsString) method to access the current value.
 
 | [[spark.sql.parquet.columnarReaderBatchSize]] *spark.sql.parquet.columnarReaderBatchSize*
 
@@ -420,7 +420,7 @@ Default: `4096` (4k)
 
 The number should be carefully chosen to minimize overhead and avoid OOMs while reading data.
 
-Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderBatchSize[SQLConf.parquetVectorizedReaderBatchSize] method to access the current value.
+Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) method to access the current value.
 
 | [[spark.sql.parquet.int96AsTimestamp]] *spark.sql.parquet.int96AsTimestamp*
 
@@ -428,7 +428,7 @@ Some Parquet-producing systems, in particular Impala, store Timestamp into INT96
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#isParquetINT96AsTimestamp[SQLConf.isParquetINT96AsTimestamp] method to access the current value.
+Use [SQLConf.isParquetINT96AsTimestamp](SQLConf.md#isParquetINT96AsTimestamp) method to access the current value.
 
 | [[spark.sql.parquet.enableVectorizedReader]] *spark.sql.parquet.enableVectorizedReader*
 
@@ -436,7 +436,7 @@ Enables link:spark-sql-vectorized-parquet-reader.adoc[vectorized parquet decodin
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#parquetVectorizedReaderEnabled[SQLConf.parquetVectorizedReaderEnabled] method to access the current value.
+Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderEnabled) method to access the current value.
 
 | [[spark.sql.parquet.filterPushdown]] *spark.sql.parquet.filterPushdown*
 
@@ -444,7 +444,7 @@ Controls the link:spark-sql-Optimizer-PushDownPredicate.adoc[filter predicate pu
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#parquetFilterPushDown[SQLConf.parquetFilterPushDown] method to access the current value.
+Use [SQLConf.parquetFilterPushDown](SQLConf.md#parquetFilterPushDown) method to access the current value.
 
 | [[spark.sql.parquet.filterPushdown.date]] *spark.sql.parquet.filterPushdown.date*
 
@@ -452,7 +452,7 @@ Use link:spark-sql-SQLConf.adoc#parquetFilterPushDown[SQLConf.parquetFilterPushD
 
 Default: `true`
 
-Use <<spark-sql-SQLConf.adoc#parquetFilterPushDownDate, SQLConf.parquetFilterPushDownDate>> method to access the current value.
+Use [SQLConf.parquetFilterPushDownDate](SQLConf.md#parquetFilterPushDownDate) method to access the current value.
 
 | [[spark.sql.parquet.int96TimestampConversion]] *spark.sql.parquet.int96TimestampConversion*
 
@@ -462,7 +462,7 @@ Default: `false`
 
 This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
 
-Use link:spark-sql-SQLConf.adoc#isParquetINT96TimestampConversion[SQLConf.isParquetINT96TimestampConversion] method to access the current value.
+Use [SQLConf.isParquetINT96TimestampConversion](SQLConf.md#isParquetINT96TimestampConversion) method to access the current value.
 
 | [[spark.sql.parquet.recordLevelFilter.enabled]] *spark.sql.parquet.recordLevelFilter.enabled*
 
@@ -472,7 +472,7 @@ Default: `false`
 
 NOTE: This configuration only has an effect when <<spark.sql.parquet.filterPushdown, spark.sql.parquet.filterPushdown>> is enabled (and it is by default).
 
-Use link:spark-sql-SQLConf.adoc#parquetRecordFilterEnabled[SQLConf.parquetRecordFilterEnabled] method to access the current value.
+Use [SQLConf.parquetRecordFilterEnabled](SQLConf.md#parquetRecordFilterEnabled) method to access the current value.
 
 | [[spark.sql.parser.quotedRegexColumnNames]] *spark.sql.parser.quotedRegexColumnNames*
 
@@ -480,7 +480,7 @@ Controls whether quoted identifiers (using backticks) in SELECT statements shoul
 
 Default: `false`
 
-Use link:spark-sql-SQLConf.adoc#supportQuotedRegexColumnName[SQLConf.supportQuotedRegexColumnName] method to access the current value.
+Use [SQLConf.supportQuotedRegexColumnName](SQLConf.md#supportQuotedRegexColumnName) method to access the current value.
 
 | [[spark.sql.sort.enableRadixSort]] *spark.sql.sort.enableRadixSort*
 
@@ -490,7 +490,7 @@ Default: `true`
 
 Radix sort is much faster but requires additional memory to be reserved up-front. The memory overhead may be significant when sorting very small rows (up to 50% more).
 
-Use link:spark-sql-SQLConf.adoc#enableRadixSort[SQLConf.enableRadixSort] method to access the current value.
+Use [SQLConf.enableRadixSort](SQLConf.md#enableRadixSort) method to access the current value.
 
 | [[spark.sql.sources.commitProtocolClass]] *spark.sql.sources.commitProtocolClass*
 
@@ -498,7 +498,7 @@ Use link:spark-sql-SQLConf.adoc#enableRadixSort[SQLConf.enableRadixSort] method 
 
 Default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.adoc#, SQLHadoopMapReduceCommitProtocol>>
 
-Use link:spark-sql-SQLConf.adoc#fileCommitProtocolClass[SQLConf.fileCommitProtocolClass] method to access the current value.
+Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
 
 | [[spark.sql.sources.partitionOverwriteMode]] *spark.sql.sources.partitionOverwriteMode*
 
@@ -514,7 +514,7 @@ When `INSERT OVERWRITE` a partitioned data source table with dynamic partition c
 
 The default (<<spark.sql.sources.partitionOverwriteMode-static, STATIC>>) is to keep the same behavior of Spark prior to 2.3. Note that this config doesn't affect Hive serde tables, as they are always overwritten with dynamic mode.
 
-Use <<spark-sql-SQLConf.adoc#partitionOverwriteMode, SQLConf.partitionOverwriteMode>> method to access the current value.
+Use [SQLConf.partitionOverwriteMode](SQLConf.md#partitionOverwriteMode) method to access the current value.
 
 | [[spark.sql.pivotMaxValues]] *spark.sql.pivotMaxValues*
 
@@ -522,7 +522,7 @@ Maximum number of (distinct) values that will be collected without error (when d
 
 Default: `10000`
 
-Use link:spark-sql-SQLConf.adoc#dataFramePivotMaxValues[SQLConf.dataFramePivotMaxValues] method to access the current value.
+Use [SQLConf.dataFramePivotMaxValues](SQLConf.md#dataFramePivotMaxValues) method to access the current value.
 
 | [[spark.sql.redaction.options.regex]] *spark.sql.redaction.options.regex*
 
@@ -534,7 +534,7 @@ The values of the options matched will be redacted in the explain output.
 
 This redaction is applied on top of the global redaction configuration defined by `spark.redaction.regex` configuration.
 
-Used exclusively when `SQLConf` is requested to <<spark-sql-SQLConf.adoc#redactOptions, redactOptions>>.
+Used exclusively when `SQLConf` is requested to [redactOptions](SQLConf.md#redactOptions).
 
 | [[spark.sql.redaction.string.regex]] *spark.sql.redaction.string.regex*
 
@@ -546,7 +546,7 @@ When this regex matches a string part, it is replaced by a dummy value (i.e. `**
 
 NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is used instead.
 
-Use link:spark-sql-SQLConf.adoc#stringRedactionPattern[SQLConf.stringRedactionPattern] method to access the current value.
+Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method to access the current value.
 
 | [[spark.sql.retainGroupColumns]] *spark.sql.retainGroupColumns*
 
@@ -554,7 +554,7 @@ Controls whether to retain columns used for aggregation or not (in link:spark-sq
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#dataFrameRetainGroupColumns[SQLConf.dataFrameRetainGroupColumns] method to access the current value.
+Use [SQLConf.dataFrameRetainGroupColumns](SQLConf.md#dataFrameRetainGroupColumns) method to access the current value.
 
 | [[spark.sql.runSQLOnFiles]] *spark.sql.runSQLOnFiles*
 
@@ -562,7 +562,7 @@ Use link:spark-sql-SQLConf.adoc#dataFrameRetainGroupColumns[SQLConf.dataFrameRet
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#runSQLonFile[SQLConf.runSQLonFile] method to access the current value.
+Use [SQLConf.runSQLonFile](SQLConf.md#runSQLonFile) method to access the current value.
 
 | [[spark.sql.selfJoinAutoResolveAmbiguity]] *spark.sql.selfJoinAutoResolveAmbiguity*
 
@@ -576,7 +576,7 @@ The ID of session-local timezone, e.g. "GMT", "America/Los_Angeles", etc.
 
 Default: Java's `TimeZone.getDefault.getID`
 
-Use <<spark-sql-SQLConf.adoc#sessionLocalTimeZone, SQLConf.sessionLocalTimeZone>> method to access the current value.
+Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to access the current value.
 
 | [[spark.sql.shuffle.partitions]] *spark.sql.shuffle.partitions*
 
@@ -586,7 +586,7 @@ Default: `200`
 
 Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks[mapred.reduce.tasks] property that Spark considers deprecated.
 
-Use link:spark-sql-SQLConf.adoc#numShufflePartitions[SQLConf.numShufflePartitions] method to access the current value.
+Use [SQLConf.numShufflePartitions](SQLConf.md#numShufflePartitions) method to access the current value.
 
 | [[spark.sql.sources.bucketing.enabled]] *spark.sql.sources.bucketing.enabled*
 
@@ -594,7 +594,7 @@ Enables link:spark-sql-bucketing.adoc[bucketing] support. When disabled (i.e. `f
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] method to access the current value.
+Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method to access the current value.
 
 | [[spark.sql.sources.default]] *spark.sql.sources.default*
 
@@ -618,7 +618,7 @@ Default: `false`
 
 This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
 
-Use link:spark-sql-SQLConf.adoc#fallBackToHdfsForStatsEnabled[SQLConf.fallBackToHdfsForStatsEnabled] method to access the current value.
+Use [SQLConf.fallBackToHdfsForStatsEnabled](SQLConf.md#fallBackToHdfsForStatsEnabled) method to access the current value.
 
 | [[spark.sql.statistics.histogram.enabled]] *spark.sql.statistics.histogram.enabled*
 
@@ -628,7 +628,7 @@ Default: `false`
 
 NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
 
-Use link:spark-sql-SQLConf.adoc#histogramEnabled[SQLConf.histogramEnabled] method to access the current value.
+Use [SQLConf.histogramEnabled](SQLConf.md#histogramEnabled) method to access the current value.
 
 | [[spark.sql.statistics.histogram.numBins]] *spark.sql.statistics.histogram.numBins*
 
@@ -638,7 +638,7 @@ Default: `254`
 
 NOTE: The number of bins must be greater than 1.
 
-Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] method to access the current value.
+Use [SQLConf.histogramNumBins](SQLConf.md#histogramNumBins) method to access the current value.
 
 | [[spark.sql.statistics.parallelFileListingInStatsComputation.enabled]] *spark.sql.statistics.parallelFileListingInStatsComputation.enabled*
 
@@ -646,7 +646,7 @@ Use link:spark-sql-SQLConf.adoc#histogramNumBins[SQLConf.histogramNumBins] metho
 
 Default: `true`
 
-Use <<spark-sql-SQLConf.adoc#parallelFileListingInStatsComputation, SQLConf.parallelFileListingInStatsComputation>> method to access the current value.
+Use [SQLConf.parallelFileListingInStatsComputation](SQLConf.md#parallelFileListingInStatsComputation) method to access the current value.
 
 | [[spark.sql.statistics.ndv.maxError]] *spark.sql.statistics.ndv.maxError*
 
@@ -668,7 +668,7 @@ Default: `false`
 
 IMPORTANT: If the total number of files of the table is very large this can be expensive and slow down data change commands.
 
-Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnabled] method to access the current value.
+Use [SQLConf.autoSizeUpdateEnabled](SQLConf.md#autoSizeUpdateEnabled) method to access the current value.
 
 | [[spark.sql.subexpressionElimination.enabled]] *spark.sql.subexpressionElimination.enabled*
 
@@ -676,7 +676,7 @@ Use link:spark-sql-SQLConf.adoc#autoSizeUpdateEnabled[SQLConf.autoSizeUpdateEnab
 
 Default: `true`
 
-Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEliminationEnabled] method to access the current value.
+Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminationEnabled) method to access the current value.
 
 | [[spark.sql.truncateTable.ignorePermissionAcl.enabled]] *spark.sql.truncateTable.ignorePermissionAcl.enabled*
 
@@ -684,7 +684,7 @@ Use link:spark-sql-SQLConf.adoc#subexpressionEliminationEnabled[subexpressionEli
 
 Default: `false`
 
-Use xref:spark-sql-SQLConf.adoc#truncateTableIgnorePermissionAcl[truncateTableIgnorePermissionAcl] method to access the current value.
+Use [SQLConf.truncateTableIgnorePermissionAcl](SQLConf.md#truncateTableIgnorePermissionAcl) method to access the current value.
 
 | [[spark.sql.ui.retainedExecutions]] *spark.sql.ui.retainedExecutions*
 
@@ -700,7 +700,7 @@ When a query execution finishes, the execution is removed from the internal `act
 
 Default: `4096`
 
-Use <<spark-sql-SQLConf.adoc#windowExecBufferInMemoryThreshold, windowExecBufferInMemoryThreshold>> method to access the current value.
+Use [SQLConf.windowExecBufferInMemoryThreshold](SQLConf.md#windowExecBufferInMemoryThreshold) method to access the current value.
 
 | [[spark.sql.windowExec.buffer.spill.threshold]] *spark.sql.windowExec.buffer.spill.threshold*
 
@@ -708,7 +708,7 @@ Use <<spark-sql-SQLConf.adoc#windowExecBufferInMemoryThreshold, windowExecBuffer
 
 Default: `4096`
 
-Use <<spark-sql-SQLConf.adoc#windowExecBufferSpillThreshold, windowExecBufferSpillThreshold>> method to access the current value.
+Use [SQLConf.windowExecBufferSpillThreshold](SQLConf.md#windowExecBufferSpillThreshold) method to access the current value.
 
 |===
 
@@ -720,4 +720,4 @@ Default: `false`
 
 Since: 1.6.0
 
-Use [SQLConf.adaptiveExecutionEnabled](spark-sql-SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
+Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.

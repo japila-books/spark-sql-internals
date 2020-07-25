@@ -65,7 +65,7 @@ newClientForMetadata(
 ----
 <1> Uses time configurations formatted
 
-Internally, `newClientForMetadata` creates a new link:../spark-sql-SQLConf.adoc[SQLConf] with *spark.sql* properties only (from the input `SparkConf`).
+Internally, `newClientForMetadata` creates a new [SQLConf](../SQLConf.md) with *spark.sql* properties only (from the input `SparkConf`).
 
 `newClientForMetadata` then creates an link:IsolatedClientLoader.adoc[IsolatedClientLoader] per the input parameters and the following configuration properties:
 

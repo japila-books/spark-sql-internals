@@ -10,7 +10,7 @@ CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
 
 `RelationConversions` takes the following when created:
 
-* [[conf]] link:../spark-sql-SQLConf.adoc[SQLConf]
+* [[conf]] [SQLConf](../SQLConf.md)
 * [[sessionCatalog]] link:HiveSessionCatalog.adoc[Hive-specific session catalog]
 
 === [[apply]] Executing Rule -- `apply` Method

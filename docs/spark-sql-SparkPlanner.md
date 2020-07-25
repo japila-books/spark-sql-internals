@@ -60,7 +60,7 @@ NOTE: `SparkPlanner` extends link:spark-sql-SparkStrategies.adoc[SparkStrategies
 `SparkPlanner` takes the following when created:
 
 * [[sparkContext]] link:spark-SparkContext.adoc[SparkContext]
-* [[conf]] link:spark-sql-SQLConf.adoc[SQLConf]
+* [[conf]] [SQLConf](SQLConf.md)
 * [[experimentalMethods]] link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
 
 [NOTE]

@@ -349,7 +349,7 @@ image::images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-tabl
 
 Bucketing is enabled when link:spark-sql-properties.adoc#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled] configuration property is turned on (`true`) and it is by default.
 
-TIP: Use link:spark-sql-SQLConf.adoc#bucketingEnabled[SQLConf.bucketingEnabled] to access the current value of `spark.sql.sources.bucketing.enabled` property.
+TIP: Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) to access the current value of `spark.sql.sources.bucketing.enabled` property.
 
 [source, scala]
 ----

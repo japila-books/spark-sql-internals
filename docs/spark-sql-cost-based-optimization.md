@@ -30,7 +30,7 @@ Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql
 
 NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned off, i.e. `false`, by default.
 
-TIP: Use link:spark-sql-SQLConf.adoc#cboEnabled[SQLConf.cboEnabled] to access the current value of `spark.sql.cbo.enabled` property.
+TIP: Use [SQLConf.cboEnabled](SQLConf.md#cboEnabled) to access the current value of `spark.sql.cbo.enabled` property.
 
 [source, scala]
 ----

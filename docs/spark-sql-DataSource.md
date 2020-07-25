@@ -111,13 +111,13 @@ lookupDataSource(
 
 NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parquet`) or a fully-qualified class name (e.g. `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat`).
 
-`lookupDataSource` then uses the given xref:spark-sql-SQLConf.adoc[SQLConf] to decide on the class name of the provider for ORC and Avro data sources as follows:
+`lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-* For `orc` provider and <<spark-sql-SQLConf.adoc#ORC_IMPLEMENTATION, native>>, `lookupDataSource` uses the new ORC file format xref:spark-sql-OrcFileFormat.adoc[OrcFileFormat] (based on Apache ORC)
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format xref:spark-sql-OrcFileFormat.adoc[OrcFileFormat] (based on Apache ORC)
 
-* For `orc` provider and <<spark-sql-SQLConf.adoc#ORC_IMPLEMENTATION, hive>>, `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
+* For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
-* For `com.databricks.spark.avro` and xref:spark-sql-SQLConf.adoc#replaceDatabricksSparkAvroEnabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled] configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.adoc[Avro data source] module
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.adoc[Avro data source] module
 
 [[lookupDataSource-provider2]]
 `lookupDataSource` uses `DefaultSource` as the class name (in the <<lookupDataSource-provider1, provider1>> package) as another provider name variant, i.e. `[provider1].DefaultSource`.

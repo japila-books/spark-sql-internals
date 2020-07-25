@@ -12,7 +12,7 @@ Technically, `EnsureRequirements` is just a link:catalyst/Rule.md[Catalyst rule]
 `EnsureRequirements` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
 [[conf]]
-`EnsureRequirements` takes a link:spark-sql-SQLConf.adoc[SQLConf] when created.
+`EnsureRequirements` takes a [SQLConf](SQLConf.md) when created.
 
 [source, scala]
 ----
@@ -96,7 +96,7 @@ With link:spark-sql-adaptive-query-execution.adoc[adaptive query execution] (i.e
 
 * For every `ShuffleExchangeExec`, link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc#coordinator[registers the `ExchangeCoordinator`]
 
-* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the link:spark-sql-SQLConf.adoc#numShufflePartitions[default number of partitions to use when shuffling data for joins or aggregations] (as link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchangeExec` to the final result (for the current physical operator)
+* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the [default number of partitions to use when shuffling data for joins or aggregations](SQLConf.md#numShufflePartitions) (as link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchangeExec` to the final result (for the current physical operator)
 
 Otherwise (when adaptive query execution is disabled or `children` do not support `ExchangeCoordinator`), `withExchangeCoordinator` returns the input `children` unchanged.
 

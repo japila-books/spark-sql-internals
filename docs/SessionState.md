@@ -3,7 +3,7 @@
 :hadoop-version: 2.10.0
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a link:spark-sql-SQLConf.adoc[SQLConf].
+`SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a [SQLConf](SQLConf.md).
 
 `SessionState` is available as the <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`.
 
@@ -51,7 +51,7 @@ Initialized lazily (i.e. only when requested the first time) using the <<analyze
 Used when...FIXME
 
 | conf
-| link:spark-sql-SQLConf.adoc[SQLConf]
+| [SQLConf](SQLConf.md)
 | [[conf]] FIXME
 
 Used when...FIXME
@@ -110,7 +110,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 `SessionState` takes the following when created:
 
 * [[sharedState]] <<SharedState.md#, SharedState>>
-* [[conf]] <<spark-sql-SQLConf.adoc#, SQLConf>>
+* [[conf]] [SQLConf](SQLConf.md)
 * [[experimentalMethods]] <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
 * [[functionRegistry]] <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>>
 * [[udfRegistration]] <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>

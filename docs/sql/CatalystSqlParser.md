@@ -33,7 +33,7 @@ It is also used in `HiveClientImpl` (when converting columns from Hive to Spark)
 
 CatalystSqlParser takes the following to be created:
 
-* [SQLConf](../spark-sql-SQLConf.md)
+* [SQLConf](../SQLConf.md)
 
 CatalystSqlParser is created when:
 

@@ -74,7 +74,7 @@ catalogManager: CatalogManager
 
 ### <span id="conf"> SQLConf
 
-[SQLConf](spark-sql-SQLConf.md)
+[SQLConf](SQLConf.md)
 
 ### <span id="experimentalMethods"> ExperimentalMethods
 
