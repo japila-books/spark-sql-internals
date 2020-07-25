@@ -1,6 +1,6 @@
 # InsertAdaptiveSparkPlan Physical Optimization
 
-`InsertAdaptiveSparkPlan` is a [physical query plan optimization rule](../catalyst/Rule.md) (`Rule[SparkPlan]`) that re-optimizes the physical query plan in the middle of query execution, based on accurate runtime statistics.
+`InsertAdaptiveSparkPlan` is a [physical query plan optimization rule](catalyst/Rule.md) (`Rule[SparkPlan]`) that re-optimizes the physical query plan in the middle of query execution, based on accurate runtime statistics.
 
 !!! important
     `InsertAdaptiveSparkPlan` is disabled by default based on [spark.sql.adaptive.enabled](spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property.

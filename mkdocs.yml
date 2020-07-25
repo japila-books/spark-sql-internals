@@ -464,6 +464,7 @@ nav:
       - Exchange: physical-operators/Exchange.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - QueryStageExec: physical-operators/QueryStageExec.md
+      - V2CommandExec: physical-operators/V2CommandExec.md
       - Projection:
         - physical-operators/Projection.md
         - physical-operators/UnsafeProjection.md
