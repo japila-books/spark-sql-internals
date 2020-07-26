@@ -29,7 +29,7 @@ Used when `V2CommandExec` physical command is requested for a [result](#result).
 * <span id="RefreshTableExec"> `RefreshTableExec`
 * <span id="RenameTableExec"> `RenameTableExec`
 * <span id="ReplaceTableExec"> `ReplaceTableExec`
-* <span id="SetCatalogAndNamespaceExec"> `SetCatalogAndNamespaceExec`
+* <span id="SetCatalogAndNamespaceExec"> [SetCatalogAndNamespaceExec](SetCatalogAndNamespaceExec.md)
 * <span id="ShowCurrentNamespaceExec"> [ShowCurrentNamespaceExec](ShowCurrentNamespaceExec.md)
 * <span id="ShowNamespacesExec"> `ShowNamespacesExec`
 * <span id="ShowTablePropertiesExec"> `ShowTablePropertiesExec`

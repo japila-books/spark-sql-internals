@@ -148,6 +148,7 @@ nav:
         - logical-operators/Repartition-RepartitionByExpression.md
         - logical-operators/ResolvedHint.md
         - logical-operators/SaveIntoDataSourceCommand.md
+        - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
         - logical-operators/ShowCreateTableCommand.md
         - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
         - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
@@ -162,6 +163,7 @@ nav:
         - logical-operators/UnresolvedInlineTable.md
         - logical-operators/UnresolvedRelation.md
         - logical-operators/UnresolvedTableValuedFunction.md
+        - UseStatement: logical-operators/UseStatement.md
         - logical-operators/Window.md
         - logical-operators/WithWindowDefinition.md
         - logical-operators/WriteToDataSourceV2.md
@@ -509,6 +511,7 @@ nav:
         - physical-operators/RowDataSourceScanExec.md
         - physical-operators/SampleExec.md
         - physical-operators/SerializeFromObjectExec.md
+        - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
         - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
         - physical-operators/ShuffleExchangeExec.md
         - physical-operators/ShuffledHashJoinExec.md

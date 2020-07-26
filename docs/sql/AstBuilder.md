@@ -266,6 +266,16 @@ Creates a [ScalarSubquery](../expressions/spark-sql-Expression-SubqueryExpressio
 
 ANTLR labeled alternative: `#subqueryExpression`
 
+### <span id="visitUse"> visitUse
+
+Creates a [UseStatement](../logical-operators/UseStatement.md) for the following SQL statement:
+
+```text
+USE NAMESPACE? multipartIdentifier
+```
+
+ANTLR labeled alternative: `#use`
+
 ### visitWindowDef
 
 Creates a [WindowSpecDefinition](../expressions/WindowSpecDefinition.md)
