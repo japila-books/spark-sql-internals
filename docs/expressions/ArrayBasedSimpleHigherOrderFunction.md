@@ -1,3 +1,0 @@
-# ArrayBasedSimpleHigherOrderFunction
-
-`ArrayBasedSimpleHigherOrderFunction` is...FIXME

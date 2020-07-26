@@ -1,3 +1,0 @@
-# ConsoleSinkProvider
-
-`ConsoleSinkProvider` is...FIXME

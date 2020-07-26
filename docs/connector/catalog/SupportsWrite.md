@@ -1,3 +1,0 @@
-# SupportsWrite
-
-`SupportsWrite` is...FIXME

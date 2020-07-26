@@ -1,3 +1,0 @@
-# TableReader
-
-`TableReader` is...FIXME

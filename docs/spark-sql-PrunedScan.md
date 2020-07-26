@@ -1,3 +1,0 @@
-# PrunedScan
-
-`PrunedScan` is...FIXME

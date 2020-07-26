@@ -1,3 +1,0 @@
-# MapBasedSimpleHigherOrderFunction
-
-`MapBasedSimpleHigherOrderFunction` is...FIXME

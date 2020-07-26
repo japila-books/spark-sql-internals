@@ -1,3 +1,0 @@
-# SupportsReportStatistics
-
-`SupportsReportStatistics` is...FIXME

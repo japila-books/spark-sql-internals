@@ -1,3 +1,0 @@
-# PrettyAttribute
-
-`PrettyAttribute` is...FIXME

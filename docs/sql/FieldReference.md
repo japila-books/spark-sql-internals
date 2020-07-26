@@ -1,3 +1,0 @@
-# FieldReference
-
-`FieldReference` is...FIXME

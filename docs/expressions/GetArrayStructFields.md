@@ -1,3 +1,0 @@
-# GetArrayStructFields
-
-`GetArrayStructFields` is...FIXME

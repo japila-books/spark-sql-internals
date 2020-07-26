@@ -1,3 +1,0 @@
-# RankLike
-
-`RankLike` is...FIXME

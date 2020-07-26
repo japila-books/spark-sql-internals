@@ -1,3 +1,0 @@
-# NoopTable
-
-`NoopTable` is...FIXME

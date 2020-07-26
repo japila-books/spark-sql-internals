@@ -1,3 +1,0 @@
-# SupportsReportPartitioning
-
-`SupportsReportPartitioning` is...FIXME

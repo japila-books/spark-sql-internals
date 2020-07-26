@@ -1,3 +1,0 @@
-# RowNumberLike
-
-`RowNumberLike` is...FIXME

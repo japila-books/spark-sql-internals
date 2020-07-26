@@ -1,3 +1,0 @@
-# QueryExecutionListener
-
-`QueryExecutionListener` is...FIXME

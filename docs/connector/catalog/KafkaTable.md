@@ -1,3 +1,0 @@
-# KafkaTable
-
-`KafkaTable` is...FIXME

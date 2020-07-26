@@ -1,3 +1,0 @@
-# CartesianProductExec
-
-`CartesianProductExec` is...FIXME

@@ -1,3 +1,0 @@
-# WriteConfigMethods
-
-`WriteConfigMethods` is...FIXME

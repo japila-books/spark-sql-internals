@@ -1,3 +1,0 @@
-# KafkaSourceRDDPartition
-
-`KafkaSourceRDDPartition` is...FIXME

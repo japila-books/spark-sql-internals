@@ -1,3 +1,0 @@
-# CatalogPlugin
-
-`CatalogPlugin` is...FIXME

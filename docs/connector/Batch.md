@@ -1,3 +1,0 @@
-# Batch
-
-`Batch` is...FIXME

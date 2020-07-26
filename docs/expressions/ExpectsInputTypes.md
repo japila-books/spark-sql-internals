@@ -1,3 +1,0 @@
-# ExpectsInputTypes
-
-`ExpectsInputTypes`...FIXME

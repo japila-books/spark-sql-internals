@@ -1,3 +1,0 @@
-# UnresolvedTableValuedFunction
-
-`UnresolvedTableValuedFunction` is...FIXME

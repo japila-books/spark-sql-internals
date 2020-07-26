@@ -1,3 +1,0 @@
-# SupportsPushDownRequiredColumns
-
-`SupportsPushDownRequiredColumns` is...FIXME
