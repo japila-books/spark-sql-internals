@@ -3,13 +3,12 @@
 # - https://github.com/facelessuser/pymdown-extensions/blob/master/docs/src/mkdocs.yml
 
 site_name: The Internals of Spark SQL
-# site_url: https://books.japila.pl/spark-sql-internals
-site_url: https://the-internals-of-spark-sql.readthedocs.io
+site_url: https://jaceklaskowski.github.io/mastering-spark-sql-book/
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
 # https://squidfunk.github.io/mkdocs-material/getting-started/#adding-a-source-repository
-repo_name: mastering-spark-sql-book
+repo_name: jaceklaskowski/mastering-spark-sql-book
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
 
 copyright: |

@@ -1,5 +1,7 @@
 # The Internals of Spark SQL
 
+[![CI](https://github.com/jaceklaskowski/mastering-spark-sql-book/workflows/CI/badge.svg?branch=master)](https://github.com/jaceklaskowski/mastering-spark-sql-book/actions)
+
 The project contains the sources of [The Internals of Spark SQL](https://the-internals-of-spark-sql.readthedocs.io/) online book.
 
 ## Tools
