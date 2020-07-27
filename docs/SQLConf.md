@@ -516,3 +516,15 @@ Used when...FIXME
 The value of [spark.sql.defaultCatalog](spark-sql-properties.md#spark.sql.defaultCatalog) configuration property
 
 Used when `CatalogManager` is requested for the [CatalogPlugin](connector/catalog/CatalogManager.md#currentCatalog)
+
+## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
+
+The value of [spark.sql.optimizer.dynamicPartitionPruning.enabled](spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property
+
+Used when:
+
+* `CleanupDynamicPruningFilters` logical optimization rule is executed
+
+* `PartitionPruning` logical optimization rule is executed
+
+* `PlanDynamicPruningFilters` preparation physical rule is executed

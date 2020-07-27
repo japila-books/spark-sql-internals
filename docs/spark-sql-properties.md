@@ -73,9 +73,11 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.enabled"> spark.sql.optimizer.dynamicPartitionPruning.enabled
 
-When true, we will generate predicate for partition column when it's used as join key.
+When `true` (default), Spark SQL will generate predicate for partition column when used as a join key.
 
 Default: `true`
+
+Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
 
 Since: `3.0.0`
 
