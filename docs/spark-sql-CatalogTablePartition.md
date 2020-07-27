@@ -8,7 +8,7 @@ title: CatalogTablePartition
 
 * `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#fromHivePartition[retrieve a table partition metadata]
 
-* `AlterTableAddPartitionCommand` and `AlterTableRecoverPartitionsCommand` logical commands are executed
+* `AlterTableAddPartitionCommand` and [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md) logical commands are executed
 
 `CatalogTablePartition` can hold the <<stats, table statistics>> that...FIXME
 

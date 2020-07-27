@@ -50,7 +50,7 @@ run(sparkSession: SparkSession): Seq[Row]
 | AlterTableDropPartitionCommand
 |
 
-| AlterTableRecoverPartitionsCommand
+| [AlterTableRecoverPartitionsCommand](AlterTableRecoverPartitionsCommand.md)
 |
 
 | AlterTableRenameCommand

@@ -6,10 +6,10 @@
 
 `ResolveSessionCatalog` takes the following to be created:
 
-* <span id="catalogManager" /> CatalogManager
-* <span id="conf" /> [SQLConf](SQLConf.md)
-* <span id="isTempView" /> `isTempView` Function (`Seq[String] => Boolean`)
-* <span id="isTempFunction" /> `isTempFunction` Function (`String => Boolean`)
+* <span id="catalogManager"> [CatalogManager](connector/catalog/CatalogManager.md)
+* <span id="conf"> [SQLConf](SQLConf.md)
+* <span id="isTempView"> `isTempView` Function (`Seq[String] => Boolean`)
+* <span id="isTempFunction"> `isTempFunction` Function (`String => Boolean`)
 
 `ResolveSessionCatalog` is created as an extended resolution rule when [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md#analyzer) and [BaseSessionStateBuilder](BaseSessionStateBuilder.md#analyzer) are requested for the analyzer.
 

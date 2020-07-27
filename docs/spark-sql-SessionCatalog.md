@@ -139,7 +139,7 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 `alterTable`...FIXME
 
-NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, `AlterTableRecoverPartitionsCommand`, `AlterTableSetLocationCommand`, link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run[AlterViewAsCommand] (for link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#alterPermanentView[permanent views]) logical commands are executed.
+NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run[AlterViewAsCommand] (for link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#alterPermanentView[permanent views]) logical commands are executed.
 
 === [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
 

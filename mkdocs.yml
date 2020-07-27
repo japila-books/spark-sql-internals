@@ -100,6 +100,8 @@ nav:
       - ParsedStatement: logical-operators/ParsedStatement.md
       - Concrete Operators:
         - logical-operators/Aggregate.md
+        - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
+        - AlterTableRecoverPartitionsStatement: logical-operators/AlterTableRecoverPartitionsStatement.md
         - logical-operators/AlterViewAsCommand.md
         - logical-operators/AnalysisBarrier.md
         - logical-operators/AnalyzeColumnCommand.md
@@ -144,6 +146,7 @@ nav:
         - logical-operators/Pivot.md
         - logical-operators/Project.md
         - logical-operators/Range.md
+        - RepairTableStatement: logical-operators/RepairTableStatement.md
         - logical-operators/Repartition-RepartitionByExpression.md
         - logical-operators/ResolvedHint.md
         - logical-operators/SaveIntoDataSourceCommand.md

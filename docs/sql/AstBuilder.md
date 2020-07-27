@@ -193,6 +193,16 @@ Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause
 
 ANTLR rule: `relation`
 
+### <span id="visitRepairTable"> visitRepairTable
+
+Creates a [RepairTableStatement](../logical-operators/RepairTableStatement.md) for the following SQL statement:
+
+```text
+MSCK REPAIR TABLE multipartIdentifier
+```
+
+ANTLR labeled alternative: `#repairTable`
+
 ### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
 
 Creates a [ShowCurrentNamespaceStatement](../logical-operators/ShowCurrentNamespaceStatement.md) for the following SQL statement:
