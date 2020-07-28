@@ -46,7 +46,7 @@ There are two `BaseSessionStateBuilders` available:
 | link:spark-sql-Analyzer.adoc[Analyzer]
 | [[analyzer]] <<spark-sql-Analyzer.adoc#, Spark Analyzer>>
 
-Initialized lazily (i.e. only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
+Initialized lazily (only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
 
 Used when...FIXME
 
@@ -73,12 +73,6 @@ Used when...FIXME
 | [[listenerManager]] FIXME
 
 Used when...FIXME
-
-| optimizer
-| link:spark-sql-Optimizer.adoc[Optimizer]
-| [[optimizer]] Logical query plan optimizer
-
-Used exclusively when `QueryExecution`  link:spark-sql-QueryExecution.adoc#optimizedPlan[creates an optimized logical plan].
 
 | resourceLoader
 | `SessionResourceLoader`
@@ -114,18 +108,34 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[experimentalMethods]] <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
 * [[functionRegistry]] <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>>
 * [[udfRegistration]] <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
-* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (i.e. `() => SessionCatalog`)
+* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (`() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.adoc#, ParserInterface>>
-* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.adoc#, Analyzer>> (i.e. `() => Analyzer`)
-* [[optimizerBuilder]] `optimizerBuilder` function to create an <<spark-sql-Optimizer.adoc#, Optimizer>> (i.e. `() => Optimizer`)
+* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.adoc#, Analyzer>> (`() => Analyzer`)
+* [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](spark-sql-Optimizer.md) (`() => Optimizer`)
 * [[planner]] <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
-* [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (i.e. `() => SessionResourceLoader`)
-* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `LogicalPlan => QueryExecution`)
-* [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (i.e. `(SparkSession, SessionState) => SessionState`)
+* [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (`() => SessionResourceLoader`)
+* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
+* [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (`(SparkSession, SessionState) => SessionState`)
 
-## <span id="catalog" /> SessionCatalog
+## <span id="optimizerBuilder"> optimizerBuilder Function
+
+`SessionState` is given a function to create a [logical query plan optimizer](spark-sql-Optimizer.md) (`() => Optimizer`) when [created](#creating-instance).
+
+`optimizerBuilder` function is used when `SessionState` is requested for the [Optimizer](#optimizer) (and cached for later usage).
+
+## <span id="optimizer"> Logical Query Plan Optimizer
+
+[Optimizer](spark-sql-Optimizer.md) that is created using [optimizerBuilder function](#optimizerBuilder) (and cached for later usage).
+
+Used when:
+
+* `QueryExecution` is requested to [create an optimized logical plan](spark-sql-QueryExecution.md#optimizedPlan)
+
+* (Structured Streaming) `IncrementalExecution` is requested to create an optimized logical plan
+
+## <span id="catalog"> SessionCatalog
 
 [SessionCatalog](spark-sql-SessionCatalog.md)
 

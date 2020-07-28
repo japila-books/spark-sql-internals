@@ -1,6 +1,6 @@
 # ExperimentalMethods
 
-`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in <<spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers, SparkOptimizer>> and <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>, respectively.
+`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers) and <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>, respectively.
 
 [[attributes]]
 .ExperimentalMethods' Attributes
@@ -17,7 +17,7 @@ a| [[extraOptimizations]] Collection of link:catalyst/Rule.md[rules] to optimize
 extraOptimizations: Seq[Rule[LogicalPlan]]
 ----
 
-Used when `SparkOptimizer` is requested for the <<spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers, User Provided Optimizers>>
+Used when `SparkOptimizer` is requested for the [User Provided Optimizers](SparkOptimizer.md#User-Provided-Optimizers)
 
 | extraStrategies
 a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.adoc#, SparkStrategies>>

@@ -354,7 +354,7 @@ experimental: ExperimentalMethods
 
 `experimentalMethods` is an extension point with [ExperimentalMethods](spark-sql-ExperimentalMethods.md) that is a per-session collection of extra strategies and ``Rule[LogicalPlan]``s.
 
-`experimental` is used in [SparkPlanner](spark-sql-SparkPlanner.md) and [SparkOptimizer](spark-sql-SparkOptimizer.md).
+`experimental` is used in [SparkPlanner](spark-sql-SparkPlanner.md) and [SparkOptimizer](SparkOptimizer.md).
 
 ## <span id="baseRelationToDataFrame"> Create DataFrame for BaseRelation
 

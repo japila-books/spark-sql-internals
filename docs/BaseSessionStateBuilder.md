@@ -142,12 +142,12 @@ listenerManager: ExecutionListenerManager
 optimizer: Optimizer
 ```
 
-`optimizer` creates a [SparkOptimizer](spark-sql-SparkOptimizer.md) for the [CatalogManager](#catalogManager), [SessionCatalog](#catalog) and [ExperimentalMethods](#experimentalMethods).
+`optimizer` creates a [SparkOptimizer](SparkOptimizer.md) for the [CatalogManager](#catalogManager), [SessionCatalog](#catalog) and [ExperimentalMethods](#experimentalMethods).
 
 The `SparkOptimizer` uses the following extension methods:
 
-* [customEarlyScanPushDownRules](#customEarlyScanPushDownRules) for [earlyScanPushDownRules](spark-sql-SparkOptimizer.md#earlyScanPushDownRules)
-* [customOperatorOptimizationRules](#customOperatorOptimizationRules) for [extendedOperatorOptimizationRules](spark-sql-SparkOptimizer.md#extendedOperatorOptimizationRules)
+* [customEarlyScanPushDownRules](#customEarlyScanPushDownRules) for [earlyScanPushDownRules](SparkOptimizer.md#earlyScanPushDownRules)
+* [customOperatorOptimizationRules](#customOperatorOptimizationRules) for [extendedOperatorOptimizationRules](SparkOptimizer.md#extendedOperatorOptimizationRules)
 
 `optimizer` is used when `BaseSessionStateBuilder` is requested to [build a SessionState](#build) (as the [optimizerBuilder](SessionState.md#optimizerBuilder) function to [build a logical query plan optimizer](SessionState.md#optimizer) on demand).
 
@@ -185,7 +185,7 @@ createClone: (SparkSession, SessionState) => SessionState
 
 `createClone` is used when `BaseSessionStateBuilder` is requested for a [SessionState](#build).
 
-## <span id="build"> Creating SessionState
+## <span id="build"> Building SessionState
 
 ```scala
 build(): SessionState
@@ -211,9 +211,9 @@ build(): SessionState
 
 `build` is used when:
 
-* `SparkSession` is requested for a SparkSession.md#sessionState[SessionState] (that in turn SparkSession.md#instantiateSessionState[builds one using a class name] based on spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property)
+* `SparkSession` is requested for a [SessionState](SparkSession.md#sessionState) (that in turn [builds one using a class name](SparkSession.md#instantiateSessionState) based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property)
 
-* `BaseSessionStateBuilder` is requested to <<createClone, create a clone>> of a `SessionState`
+* `BaseSessionStateBuilder` is requested to [create a clone](#createClone) of a `SessionState`
 
 ## <span id="createQueryExecution"> Getting Function to Create QueryExecution For LogicalPlan
 

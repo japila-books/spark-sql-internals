@@ -184,7 +184,7 @@ The link:spark-sql-BucketSpec.adoc#numBuckets[number of buckets] has to be betwe
 Number of buckets should be greater than 0 but less than 100000. Got `[numBuckets]`
 ```
 
-There are however requirements that have to be met before link:spark-sql-SparkOptimizer.adoc[Spark Optimizer] gives a no-Exchange query plan:
+There are however requirements that have to be met before [SparkOptimizer](SparkOptimizer.md) gives a no-Exchange query plan:
 
 . The number of partitions on both sides of a join has to be exactly the same.
 

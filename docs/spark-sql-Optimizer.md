@@ -5,7 +5,7 @@ title: Optimizer
 `Optimizer` (aka *Catalyst Optimizer*) is the base of <<extensions, logical query plan optimizers>> that defines the <<batches, rule batches of logical optimizations>> (i.e. logical optimizations that are the rules that transform the query plan of a structured query to produce the <<spark-sql-QueryExecution.adoc#optimizedPlan, optimized logical plan>>).
 
 [[extensions]]
-NOTE: <<spark-sql-SparkOptimizer.adoc#, SparkOptimizer>> is the one and only direct implementation of the `Optimizer` Contract in Spark SQL.
+NOTE: [SparkOptimizer](SparkOptimizer.md) is the one and only direct implementation of the `Optimizer` Contract in Spark SQL.
 
 `Optimizer` is a <<catalyst/RuleExecutor.md#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`).
 
@@ -400,7 +400,7 @@ NOTE: `Optimizer` is a Scala abstract class and cannot be <<creating-instance, c
 
 | [[fixedPoint]] `fixedPoint`
 | `FixedPoint` with the number of iterations as defined by link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[spark.sql.optimizer.maxIterations]
-| Used in <<Replace-Operators, Replace Operators>>, <<Aggregate, Aggregate>>, <<Operator-Optimizations, Operator Optimizations>>, <<Decimal-Optimizations, Decimal Optimizations>>, <<Typed-Filter-Optimization, Typed Filter Optimization>> and <<LocalRelation, LocalRelation>> batches (and also indirectly in the User Provided Optimizers rule batch in link:spark-sql-SparkOptimizer.adoc#User-Provided-Optimizers[SparkOptimizer]).
+| Used in <<Replace-Operators, Replace Operators>>, <<Aggregate, Aggregate>>, <<Operator-Optimizations, Operator Optimizations>>, <<Decimal-Optimizations, Decimal Optimizations>>, <<Typed-Filter-Optimization, Typed Filter Optimization>> and <<LocalRelation, LocalRelation>> batches (and also indirectly in the User Provided Optimizers rule batch in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers)).
 |===
 
 === [[extendedOperatorOptimizationRules]] Additional Operator Optimization Rules -- `extendedOperatorOptimizationRules` Extension Point

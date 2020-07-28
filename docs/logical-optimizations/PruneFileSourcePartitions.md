@@ -1,6 +1,6 @@
 # PruneFileSourcePartitions Logical Optimization
 
-`PruneFileSourcePartitions` is the only logical optimization rule in the link:spark-sql-SparkOptimizer.adoc#prune-file-source-table-partitions[Prune File Source Table Partitions] batch of the link:spark-sql-SparkOptimizer.adoc[SparkOptimizer].
+`PruneFileSourcePartitions` is the only logical optimization rule in the [Prune File Source Table Partitions](../SparkOptimizer.md#prune-file-source-table-partitions) batch of the [SparkOptimizer](../SparkOptimizer.md).
 
 `PruneFileSourcePartitions` <<apply, transforms a logical query plan>> into a link:spark-sql-LogicalPlan-Project.adoc[Project] operator with a link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operator over a "pruned" `LogicalRelation` with the link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] of a Hive partitioned table (with a link:PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex]).
 

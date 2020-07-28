@@ -32,12 +32,12 @@ When an action is executed on a `Dataset` (directly, e.g. link:spark-sql-dataset
 
 . link:spark-sql-QueryExecution.adoc#analyzed[Logical Analysis]
 . link:spark-sql-QueryExecution.adoc#withCachedData[Caching Replacement]
-. link:spark-sql-QueryExecution.adoc#optimizedPlan[Logical Query Optimization] (using link:spark-sql-SparkOptimizer.adoc[rule-based] and link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations)
+. link:spark-sql-QueryExecution.adoc#optimizedPlan[Logical Query Optimization] (using [rule-based](SparkOptimizer.md) and link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations)
 . link:spark-sql-QueryExecution.adoc#sparkPlan[Physical Planning]
 . link:spark-sql-QueryExecution.adoc#executedPlan[Physical Optimization] (e.g. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] or link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution])
 . link:spark-sql-QueryExecution.adoc#toRdd[Constructing the RDD of Internal Binary Rows] (that represents the structured query in terms of Spark Core's RDD API)
 
-As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for link:spark-sql-SparkOptimizer.adoc#batches[logical] and link:spark-sql-SparkPlanner.adoc#strategies[physical] query optimization strategies even without your consent).
+As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and link:spark-sql-SparkPlanner.adoc#strategies[physical] query optimization strategies even without your consent).
 
 NOTE: You can find out more on the core of Apache Spark (aka _Spark Core_) in https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2] gitbook.
 
