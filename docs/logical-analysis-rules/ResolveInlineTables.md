@@ -1,17 +1,18 @@
 # ResolveInlineTables Logical Resolution Rule
 
-`ResolveInlineTables` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.
+`ResolveInlineTables` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.
 
-`ResolveInlineTables` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`ResolveInlineTables` is part of the [Resolution](../Analyzer.md#Resolution) fixed-point batch in the standard batches of the [Analyzer](../Analyzer.md).
 
-`ResolveInlineTables` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveInlineTables` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
 [[conf]]
 [[creating-instance]]
 `ResolveInlineTables` takes a [SQLConf](SQLConf.md) when created.
 
-[source, scala]
-----
+## Example
+
+```text
 val q = sql("VALUES 1, 2, 3")
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)
@@ -29,7 +30,7 @@ val rule = ResolveInlineTables(spark.sessionState.conf)
 val planAfterResolveInlineTables = rule(plan)
 scala> println(planAfterResolveInlineTables.numberedTreeString)
 00 LocalRelation [col1#2]
-----
+```
 
 === [[apply]] Executing Rule -- `apply` Method
 

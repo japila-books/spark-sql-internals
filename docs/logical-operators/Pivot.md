@@ -26,10 +26,10 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 === [[analyzer]] Analysis Phase
 
-`Pivot` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
+`Pivot` operator is resolved at [analysis phase](../Analyzer.md) in the following logical evaluation rules:
 
 * [ResolveAliases](../logical-analysis-rules/ResolveAliases.md)
-* [ResolvePivot](../spark-sql-Analyzer.md#ResolvePivot)
+* [ResolvePivot](../Analyzer.md#ResolvePivot)
 
 ```text
 val spark: SparkSession = ...

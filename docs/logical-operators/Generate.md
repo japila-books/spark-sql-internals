@@ -4,7 +4,7 @@ title: Generate
 
 `Generate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):
 
-* spark-sql-Expression-Generator.md[Generator] or `GeneratorOuter` expressions (by spark-sql-Analyzer.md#ExtractGenerator[ExtractGenerator] logical evaluation rule)
+* spark-sql-Expression-Generator.md[Generator] or `GeneratorOuter` expressions (by [ExtractGenerator](../Analyzer.md#ExtractGenerator) logical evaluation rule)
 
 * SQL's spark-sql-AstBuilder.md#withGenerate[LATERAL VIEW] clause (in `SELECT` or `FROM` clauses)
 

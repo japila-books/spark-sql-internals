@@ -1,10 +1,10 @@
 # PreprocessTableCreation PostHoc Logical Resolution Rule
 
-`PreprocessTableCreation` is a <<spark-sql-Analyzer.md#postHocResolutionRules, posthoc logical resolution rule>> that <<apply, resolves a logical query plan>> with <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical operators.
+`PreprocessTableCreation` is a [posthoc logical resolution rule](../Analyzer.md#postHocResolutionRules) that <<apply, resolves a logical query plan>> with <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical operators.
 
-`PreprocessTableCreation` is part of the <<spark-sql-Analyzer.md#Post-Hoc-Resolution, Post-Hoc Resolution>> once-executed batch of the hive/HiveSessionStateBuilder.md#analyzer[Hive-specific] and the <<BaseSessionStateBuilder.md#analyzer, default>> logical analyzers.
+`PreprocessTableCreation` is part of the [Post-Hoc Resolution](../Analyzer.md#Post-Hoc-Resolution) once-executed batch of the [Hive-specific](../hive/HiveSessionStateBuilder.md#analyzer) and the [default](../BaseSessionStateBuilder.md#analyzer) logical analyzers.
 
-`PreprocessTableCreation` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`PreprocessTableCreation` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
 [[sparkSession]]
 [[creating-instance]]

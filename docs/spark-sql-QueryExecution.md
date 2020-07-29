@@ -37,7 +37,7 @@ val qe = new QueryExecution(sparkSession, plan)
 | Description
 
 | analyzed
-a| [[analyzed]] Analyzed <<logical, logical plan>> that has passed spark-sql-Analyzer.md#execute[Analyzer]'s check rules.
+a| [[analyzed]] Analyzed <<logical, logical plan>> that has passed [Logical Analyzer](Analyzer.md).
 
 TIP: Beside `analyzed`, you can use spark-sql-dataset-operators.md#explain[Dataset.explain] basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 

@@ -15,10 +15,9 @@ title: Project
 * `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#aliasPlan, aliasPlan>>)
 * SQL's spark-sql-AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
 
-`Project` can also appear in a logical plan after spark-sql-Analyzer.md[analysis] or [optimization](../Optimizer.md) phases.
+`Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../Optimizer.md) phases.
 
-[source, scala]
-----
+```text
 // FIXME Add examples for the following operators
 // Dataset.unionByName
 // KeyValueGroupedDataset.mapValues
@@ -77,7 +76,7 @@ scala> println(qn.queryExecution.logical.numberedTreeString)
 
 // Examples with Project that was added during analysis
 // Examples with Project that was added during optimization
-----
+```
 
 NOTE: spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by spark-sql-Analyzer-CheckAnalysis.md#deterministic[CheckAnalysis].
 

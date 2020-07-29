@@ -1,10 +1,10 @@
 # ResolveWindowFrame Logical Resolution Rule
 
-`ResolveWindowFrame` is a logical resolution rule that the spark-sql-Analyzer.md[logical query plan analyzer] uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
+`ResolveWindowFrame` is a logical resolution rule that the [Logical Analyzer](../Analyzer.md) uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
 
-Technically, `ResolveWindowFrame` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
+`ResolveWindowFrame` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-`ResolveWindowFrame` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
+`ResolveWindowFrame` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
 [[transformations]]
 `ResolveWindowFrame` takes a spark-sql-LogicalPlan.md[logical plan] and does the following:
@@ -13,7 +13,7 @@ Technically, `ResolveWindowFrame` is just a catalyst/Rule.md[Catalyst rule] for 
 +
 Reports a `AnalysisException` when the frames do not match:
 +
-```
+```text
 Window Frame [f] must match the required frame [frame]
 ```
 
@@ -21,11 +21,9 @@ Window Frame [f] must match the required frame [frame]
 
 . Creates a new `SpecifiedWindowFrame` for `WindowExpression` with the resolved Catalyst expression and `UnspecifiedFrame`
 
-NOTE: `ResolveWindowFrame` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
+## Example
 
-[[example]]
-[source, scala]
-----
+```text
 import import org.apache.spark.sql.expressions.Window
 // cume_dist requires ordered windows
 val q = spark.
@@ -46,7 +44,7 @@ val planAfter = ResolveWindowFrame.apply(plan)
 scala> println(planAfter.numberedTreeString)
 00 'Project [*, cume_dist() windowspecdefinition('id ASC NULLS FIRST, RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cume_dist#31]
 01 +- Range (0, 5, step=1, splits=Some(8))
-----
+```
 
 === [[apply]] Applying ResolveWindowFrame to Logical Plan -- `apply` Method
 

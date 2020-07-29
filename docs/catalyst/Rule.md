@@ -36,8 +36,8 @@ The other notable use cases of `Rule` are as follows:
 
 * When `BaseSessionStateBuilder` is requested for <<BaseSessionStateBuilder.md#customResolutionRules, customResolutionRules>>, <<BaseSessionStateBuilder.md#customPostHocResolutionRules, customPostHocResolutionRules>>, <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<BaseSessionStateBuilder.md#optimizer, Optimizer>>
 
-* When `Analyzer` is requested for <<spark-sql-Analyzer.md#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.md#postHocResolutionRules, postHocResolutionRules>> (see <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and hive/HiveSessionStateBuilder.md#analyzer[HiveSessionStateBuilder])
+* When `Analyzer` is requested for [extendedResolutionRules](../Analyzer.md#extendedResolutionRules) and [postHocResolutionRules](../Analyzer.md#postHocResolutionRules) (see [BaseSessionStateBuilder](../BaseSessionStateBuilder.md#analyzer) and [HiveSessionStateBuilder](../hive/HiveSessionStateBuilder.md#analyzer))
 
-* When `Optimizer` is requested for [extendedOperatorOptimizationRules](Optimizer.md#extendedOperatorOptimizationRules)
+* When `Optimizer` is requested for [extendedOperatorOptimizationRules](../Optimizer.md#extendedOperatorOptimizationRules)
 
-* When `QueryExecution` is requested for <<spark-sql-QueryExecution.md#preparations, preparations>>
+* When `QueryExecution` is requested for [preparations](../spark-sql-QueryExecution.md#preparations)

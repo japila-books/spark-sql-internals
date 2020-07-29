@@ -1,17 +1,16 @@
 # ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN and MAPJOIN Hint Names
 
-`ResolveBroadcastHints` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators.
+`ResolveBroadcastHints` is a logical resolution rule that the [Logical Analyzer](../Analyzer.md#ResolveBroadcastHints) uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators.
 
-Technically, `ResolveBroadcastHints` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
+`ResolveBroadcastHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-`ResolveBroadcastHints` is part of spark-sql-Analyzer.md#Hints[Hints] fixed-point batch of rules (that is executed before any other rule).
+`ResolveBroadcastHints` is part of [Hints](../Analyzer.md#Hints) fixed-point batch of rules (that is executed before any other rule).
 
 [[conf]]
 [[creating-instance]]
 `ResolveBroadcastHints` takes a [SQLConf](SQLConf.md) when created.
 
-[source, scala]
-----
+```text
 // Use Catalyst DSL to create a logical plan
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table("t1").join(table("t2")).hint(name = "broadcast", "t1", "table2")
@@ -29,7 +28,7 @@ scala> println(analyzedPlan.numberedTreeString)
 01 :- 'ResolvedHint (broadcast)
 02 :  +- 'UnresolvedRelation `t1`
 03 +- 'UnresolvedRelation `t2`
-----
+```
 
 === [[apply]] Resolving UnresolvedHint with BROADCAST, BROADCASTJOIN or MAPJOIN Hint Names (Applying ResolveBroadcastHints to Logical Plan) -- `apply` Method
 

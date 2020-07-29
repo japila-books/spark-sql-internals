@@ -1,13 +1,12 @@
 # ResolveCreateNamedStruct Logical Resolution Rule -- Resolving NamePlaceholders In CreateNamedStruct Expressions
 
-`ResolveCreateNamedStruct` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
+`ResolveCreateNamedStruct` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
 
-`ResolveCreateNamedStruct` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`ResolveCreateNamedStruct` is part of the [Resolution](../Analyzer.md#Resolution) fixed-point batch in the standard batches of the [Analyzer](../Analyzer.md).
 
-`ResolveCreateNamedStruct` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveCreateNamedStruct` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-[source, scala]
-----
+```text
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -28,7 +27,7 @@ scala> println(afterResolveCreateNamedStruct.numberedTreeString)
 00 'Project [unresolvedalias(named_struct(id, id#4L), None)]
 01 +- AnalysisBarrier
 02       +- Range (0, 1, step=1, splits=Some(8))
-----
+```
 
 === [[apply]] Executing Rule
 

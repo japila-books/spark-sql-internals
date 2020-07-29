@@ -1,20 +1,18 @@
 # ResolveAliases Logical Resolution Rule
 
-`ResolveAliases` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveAliases[logical query plan analyzer] uses to <<apply, FIXME>> in an entire logical query plan.
+`ResolveAliases` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveAliases) uses to <<apply, FIXME>> in an entire logical query plan.
 
 Technically, `ResolveAliases` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveAliases` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
+`ResolveAliases` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
-NOTE: `ResolveAliases` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
+## Example
 
-[[example]]
-[source, scala]
-----
+```text
 import spark.sessionState.analyzer.ResolveAliases
 
 // FIXME Using ResolveAliases rule
-----
+```
 
 === [[apply]] Applying ResolveAliases to Logical Plan -- `apply` Method
 

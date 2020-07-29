@@ -1,18 +1,18 @@
 # ResolveRelations Logical Resolution Rule -- Resolving UnresolvedRelations With Tables in Catalog
 
-`ResolveRelations` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveRelations[logical query plan analyzer] uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
+`ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
 * Resolves spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operators (in InsertIntoTable.md[InsertIntoTable] operators)
 
 * Other uses of `UnresolvedRelation`
 
-Technically, `ResolveRelations` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
+`ResolveRelations` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-`ResolveRelations` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
+`ResolveRelations` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
-[[example]]
-[source, scala]
-----
+## Example
+
+```text
 // Example: InsertIntoTable with UnresolvedRelation
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table("t1").insertInto(tableName = "t2", overwrite = true)
@@ -68,7 +68,7 @@ val resolvedPlan = ResolveRelations(plan)
 scala> println(resolvedPlan.numberedTreeString)
 00 'SubqueryAlias t1
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
-----
+```
 
 === [[apply]] Applying ResolveRelations to Logical Plan -- `apply` Method
 
@@ -117,7 +117,7 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 
 * The `table` is not a spark-sql-SessionCatalog.md#isTemporaryTable[temporary table]
 
-* The spark-sql-SessionCatalog.md#databaseExists[database] or the spark-sql-SessionCatalog.md#tableExists[table] do not exist (in the spark-sql-Analyzer.md#catalog[SessionCatalog])
+* The spark-sql-SessionCatalog.md#databaseExists[database] or the spark-sql-SessionCatalog.md#tableExists[table] do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
 
 NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] leaf logical operator for a table reference).
 
@@ -132,7 +132,7 @@ lookupTableFromCatalog(
 
 `lookupTableFromCatalog` simply requests `SessionCatalog` to spark-sql-SessionCatalog.md#lookupRelation[find the table in relational catalogs].
 
-NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current spark-sql-Analyzer.md#catalog[SessionCatalog].
+NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current [SessionCatalog](../Analyzer.md#catalog).
 
 NOTE: The table is described using spark-sql-LogicalPlan-UnresolvedRelation.md#tableIdentifier[TableIdentifier] of the input `UnresolvedRelation`.
 

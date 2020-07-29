@@ -996,7 +996,7 @@ Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConvers
 
 | [[spark.sql.optimizer.maxIterations]] *spark.sql.optimizer.maxIterations*
 
-Maximum number of iterations for [Analyzer](spark-sql-Analyzer.md#fixedPoint) and  [Logical Optimizer](Optimizer.md#fixedPoint).
+Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical Optimizer](Optimizer.md#fixedPoint).
 
 Default: `100`
 

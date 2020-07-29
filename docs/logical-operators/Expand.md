@@ -34,11 +34,11 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 | Empty set of expressions/Expression.md[expressions]
 |===
 
-=== [[analyzer]] Analysis Phase
+## <span id="analyzer"> Analysis Phase
 
-`Expand` logical operator is resolved to at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
+`Expand` logical operator is resolved to at [analysis phase](../Analyzer.md) in the following logical evaluation rules:
 
-* spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics] (for `Cube`, `Rollup`, spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] logical operators)
+* [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics) (for `Cube`, `Rollup`, [GroupingSets](GroupingSets.md) logical operators)
 
 * [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) (for spark-sql-Expression-TimeWindow.md[TimeWindow] logical operator)
 

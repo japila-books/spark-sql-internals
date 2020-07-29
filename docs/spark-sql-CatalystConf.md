@@ -24,7 +24,7 @@ Used in spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] logica
 
 | [[optimizerMaxIterations]] `optimizerMaxIterations`
 | spark-sql-properties.md#spark.sql.optimizer.maxIterations[spark.sql.optimizer.maxIterations]
-| Maximum number of iterations for spark-sql-Analyzer.md#fixedPoint[Analyzer] and [Optimizer](Optimizer.md#fixedPoint).
+| Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Optimizer](Optimizer.md#fixedPoint).
 
 | [[sessionLocalTimeZone]] `sessionLocalTimeZone`
 |

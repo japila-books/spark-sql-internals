@@ -338,9 +338,9 @@ nav:
       - QueryExecution:
         - spark-sql-QueryExecution.md
         - spark-sql-UnsupportedOperationChecker.md
-      - Analyzer:
-        - spark-sql-Analyzer.md
-        - spark-sql-Analyzer-CheckAnalysis.md
+      - Logical Analyzer:
+        - Analyzer: Analyzer.md
+        - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
       - SparkOptimizer:
         - SparkOptimizer: SparkOptimizer.md
         - Optimizer: Optimizer.md

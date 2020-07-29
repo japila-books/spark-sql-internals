@@ -1,8 +1,8 @@
 # WindowsSubstitution Logical Evaluation Rule
 
-`WindowsSubstitution` is a catalyst/Rule.md[logical evaluation rule] (i.e. `Rule[LogicalPlan]`) that the spark-sql-Analyzer.md[logical query plan analyzer] uses to resolve (_aka_ substitute) spark-sql-LogicalPlan-WithWindowDefinition.md[WithWindowDefinition] unary logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> to their corresponding spark-sql-Expression-WindowExpression.md[WindowExpression] with resolved spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition].
+`WindowsSubstitution` is a [logical evaluation rule](../catalyst/Rule.md) (`Rule[LogicalPlan]`) that the [Logical Analyzer](../Analyzer.md) uses to resolve (_aka_ substitute) [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) unary logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> to their corresponding spark-sql-Expression-WindowExpression.md[WindowExpression] with resolved spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition].
 
-`WindowsSubstitution` is part of spark-sql-Analyzer.md#Substitution[Substitution] fixed-point batch of rules.
+`WindowsSubstitution` is part of [Substitution](../Analyzer.md#Substitution) fixed-point batch of rules.
 
 NOTE: It _appears_ that `WindowsSubstitution` is exclusively used for pure SQL queries because spark-sql-LogicalPlan-WithWindowDefinition.md[WithWindowDefinition] unary logical operator is created exclusively when `AstBuilder` spark-sql-LogicalPlan-WithWindowDefinition.md#creating-instance[parses window definitions].
 

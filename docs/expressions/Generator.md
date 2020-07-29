@@ -63,14 +63,14 @@ a| Represents an unresolved <<Generator, generator>>.
 
 Created when `AstBuilder` spark-sql-AstBuilder.md#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
 
-```
+```text
 LATERAL VIEW (OUTER)?
 generatorFunctionName (arg1, arg2, ...)
 tblName
 AS? col1, col2, ...
 ```
 
-NOTE: `UnresolvedGenerator` is spark-sql-Analyzer.md#ResolveFunctions[resolved] to `Generator` by spark-sql-Analyzer.md#ResolveFunctions[ResolveFunctions] logical evaluation rule.
+`UnresolvedGenerator` is [resolved](../Analyzer.md#ResolveFunctions) to `Generator` by [ResolveFunctions](../Analyzer.md#ResolveFunctions) logical evaluation rule.
 
 | [[UserDefinedGenerator]] `UserDefinedGenerator`
 | Used exclusively in the deprecated `explode` operator
@@ -79,9 +79,9 @@ NOTE: `UnresolvedGenerator` is spark-sql-Analyzer.md#ResolveFunctions[resolved] 
 [[lateral-view]]
 [NOTE]
 ====
-You can only have one generator per select clause that is enforced by spark-sql-Analyzer.md#ExtractGenerator[ExtractGenerator] logical evaluation rule, e.g.
+You can only have one generator per select clause that is enforced by [ExtractGenerator](../Analyzer.md#ExtractGenerator) logical evaluation rule, e.g.
 
-```
+```text
 scala> xys.select(explode($"xs"), explode($"ys")).show
 org.apache.spark.sql.AnalysisException: Only one generator allowed per select clause but found 2: explode(xs), explode(ys);
   at org.apache.spark.sql.catalyst.analysis.Analyzer$ExtractGenerator$$anonfun$apply$20.applyOrElse(Analyzer.scala:1670)

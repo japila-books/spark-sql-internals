@@ -6,12 +6,13 @@
 
 . Unary operators with the children resolved
 
-`ResolveSubquery` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules of the spark-sql-Analyzer.md[Spark Analyzer].
+`ResolveSubquery` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules of the [Logical Analyzer](../Analyzer.md).
 
-Technically, `ResolveSubquery` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
+`ResolveSubquery` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-[source, scala]
-----
+## Example
+
+```text
 // Use Catalyst DSL
 import org.apache.spark.sql.catalyst.expressions._
 val a = 'a.int
@@ -36,7 +37,7 @@ val analyzedPlan = ResolveSubquery(plan)
 scala> println(analyzedPlan.numberedTreeString)
 00 Filter a#9 IN (1)
 01 +- LocalRelation <empty>, [a#9]
-----
+```
 
 === [[resolveSubQueries]] Resolving Subquery Expressions (ScalarSubquery, Exists and In) -- `resolveSubQueries` Internal Method
 

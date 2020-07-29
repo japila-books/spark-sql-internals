@@ -13,7 +13,7 @@ title: AggregateExpression
 
 `AggregateExpression` is created when:
 
-* `Analyzer` spark-sql-Analyzer.md#ResolveFunctions[resolves AggregateFunctions] (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
+* `Analyzer` is requested to [resolve AggregateFunctions](../Analyzer.md#ResolveFunctions) (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
 
 * `UserDefinedAggregateFunction` is created with `isDistinct` flag spark-sql-UserDefinedAggregateFunction.md#apply[disabled] or spark-sql-UserDefinedAggregateFunction.md#distinct[enabled]
 

@@ -36,11 +36,11 @@ When created `UnresolvedHint` takes:
 * [[child]] Child spark-sql-LogicalPlan.md[logical plan]
 
 [[resolved]]
-`UnresolvedHint` can never be spark-sql-LogicalPlan.md#resolved[resolved] and is supposed to be converted to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint] unary logical operator during <<spark-sql-Analyzer.md#Hints, query analysis>> (or simply removed from a logical plan).
+`UnresolvedHint` can never be spark-sql-LogicalPlan.md#resolved[resolved] and is supposed to be converted to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint] unary logical operator during [query analysis](../Analyzer.md#Hints) (or simply removed from a logical plan).
 
 [NOTE]
 ====
-There are the following logical rules that spark-sql-Analyzer.md[Spark Analyzer] uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
+There are the following logical rules that [Logical Analyzer](../Analyzer.md) uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
 * [ResolveBroadcastHints](../logical-analysis-rules/ResolveBroadcastHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 

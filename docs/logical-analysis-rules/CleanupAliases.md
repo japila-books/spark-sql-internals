@@ -1,15 +1,10 @@
 # CleanupAliases Logical Analysis Rule
 
-`CleanupAliases` is a <<spark-sql-Analyzer.md#batches, logical analysis rule>> that <<apply, transforms a logical query plan>> with...FIXME
+`CleanupAliases` is a [logical analysis rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> with...FIXME
 
-`CleanupAliases` is part of the <<spark-sql-Analyzer.md#Cleanup, Cleanup>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`CleanupAliases` is part of the [Cleanup](../Analyzer.md#Cleanup) fixed-point batch in the standard batches of the [Logical Analyzer](../Analyzer.md).
 
-`CleanupAliases` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
-
-[source, scala]
-----
-// FIXME: DEMO
-----
+`CleanupAliases` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
 === [[apply]] Executing Rule -- `apply` Method
 

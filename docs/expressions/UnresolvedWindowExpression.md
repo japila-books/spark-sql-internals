@@ -13,15 +13,14 @@ NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> canno
 [[child]]
 `UnresolvedWindowExpression` is created to represent a `child` expressions/Expression.md[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` spark-sql-AstBuilder.md#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
 
-`UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` spark-sql-Analyzer.md#WindowsSubstitution[resolves `UnresolvedWindowExpressions`].
+`UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` is requested to [resolve UnresolvedWindowExpressions](../Analyzer.md#WindowsSubstitution).
 
-[source, scala]
-----
+```scala
 import spark.sessionState.sqlParser
 
 scala> sqlParser.parseExpression("foo() OVER windowSpecRef")
 res1: org.apache.spark.sql.catalyst.expressions.Expression = unresolvedwindowexpression('foo(), WindowSpecReference(windowSpecRef))
-----
+```
 
 [[properties]]
 .UnresolvedWindowExpression's Properties

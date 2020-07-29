@@ -1,15 +1,12 @@
 # ExtractWindowExpressions Logical Resolution Rule
 
-`ExtractWindowExpressions` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, transforms a logical query plan>> and replaces (extracts) <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.md#, Window>> logical operators.
+`ExtractWindowExpressions` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> and replaces (extracts) <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.md#, Window>> logical operators.
 
-`ExtractWindowExpressions` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`ExtractWindowExpressions` is part of the [Resolution](../Analyzer.md#Resolution) fixed-point batch in the standard batches of the [Analyzer](../Analyzer.md).
 
-`ExtractWindowExpressions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ExtractWindowExpressions` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-NOTE: `ExtractWindowExpressions` is a Scala object inside <<spark-sql-Analyzer.md#, Analyzer>> class (so you have to create an instance of the `Analyzer` class to access it or simply use <<SessionState.md#analyzer, SessionState>>).
-
-[source, scala]
-----
+```text
 import spark.sessionState.analyzer.ExtractWindowExpressions
 
 // Example 1: Filter + Aggregate with WindowExpressions in aggregateExprs
@@ -26,7 +23,7 @@ val afterExtractWindowExpressions = ExtractWindowExpressions(plan)
 val q = ???
 val plan = q.queryExecution.logical
 val afterExtractWindowExpressions = ExtractWindowExpressions(plan)
-----
+```
 
 === [[apply]] Executing Rule
 

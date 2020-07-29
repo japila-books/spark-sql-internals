@@ -41,7 +41,7 @@ NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) impl
 | RuleExecutor
 | Description
 
-| [Analyzer](spark-sql-Analyzer.md)
+| [Logical Analyzer](../Analyzer.md)
 | [[Analyzer]] Logical query plan analyzer
 
 | `ExpressionCanonicalizer`

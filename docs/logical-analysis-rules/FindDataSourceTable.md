@@ -2,13 +2,12 @@
 
 `FindDataSourceTable` is a catalyst/Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
 
-`FindDataSourceTable` is part of spark-sql-Analyzer.md#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
+`FindDataSourceTable` is part of [additional rules](../Analyzer.md#extendedResolutionRules) in `Resolution` fixed-point batch of rules.
 
 [[sparkSession]][[creating-instance]]
-`FindDataSourceTable` takes a single SparkSession.md[SparkSession] to be created.
+`FindDataSourceTable` takes a single [SparkSession](../SparkSession.md) to be created.
 
-[source, scala]
-----
+```text
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -47,7 +46,7 @@ scala> println(tablesResolvedPlan.numberedTreeString)
 00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
 01 +- SubqueryAlias t1
 02    +- Relation[id#10L] parquet
-----
+```
 
 === [[apply]] Applying Rule to Logical Plan (Resolving UnresolvedCatalogRelations) -- `apply` Method
 

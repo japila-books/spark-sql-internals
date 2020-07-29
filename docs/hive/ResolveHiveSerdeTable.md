@@ -1,13 +1,8 @@
 # ResolveHiveSerdeTable Logical Resolution Rule
 
-`ResolveHiveSerdeTable` is a logical resolution rule (i.e. `Rule[LogicalPlan]`) that the HiveSessionStateBuilder.md#analyzer[Hive-specific logical query plan analyzer] uses to <<apply, resolve the metadata of a hive table for CreateTable logical operators>>.
+`ResolveHiveSerdeTable` is a logical resolution rule (i.e. `Rule[LogicalPlan]`) that the [Hive-specific logical query plan analyzer](HiveSessionStateBuilder.md#analyzer) uses to <<apply, resolve the metadata of a hive table for CreateTable logical operators>>.
 
-`ResolveHiveSerdeTable` is part of ../spark-sql-Analyzer.md#extendedResolutionRules[additional rules] in ../spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
-
-[source, scala]
-----
-// FIXME Example of ResolveHiveSerdeTable
-----
+`ResolveHiveSerdeTable` is part of [additional rules](../Analyzer.md#extendedResolutionRules) in [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
 === [[apply]] Applying ResolveHiveSerdeTable Rule to Logical Plan -- `apply` Method
 

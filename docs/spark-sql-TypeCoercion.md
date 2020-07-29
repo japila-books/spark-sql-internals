@@ -1,6 +1,6 @@
 # TypeCoercion Object
 
-`TypeCoercion` is a Scala object that defines the <<typeCoercionRules, type coercion rules>> for <<spark-sql-Analyzer.md#typeCoercionRules, Spark Analyzer>>.
+`TypeCoercion` is a Scala object that defines the <<typeCoercionRules, type coercion rules>> for [Logical Analyzer](Analyzer.md#typeCoercionRules).
 
 === [[typeCoercionRules]] Defining Type Coercion Rules (For Spark Analyzer) -- `typeCoercionRules` Method
 
@@ -27,4 +27,4 @@ typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
 * `DateTimeOperations`
 * [WindowFrameCoercion](logical-analysis-rules/WindowFrameCoercion.md)
 
-NOTE: `typeCoercionRules` is used exclusively when `Analyzer` is requested for <<spark-sql-Analyzer.md#batches, batches>>.
+`typeCoercionRules` is used when `Analyzer` is requested for [batches](Analyzer.md#batches).

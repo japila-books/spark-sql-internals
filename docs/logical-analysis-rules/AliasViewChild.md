@@ -1,8 +1,8 @@
 # AliasViewChild Logical Analysis Rule
 
-`AliasViewChild` is a <<spark-sql-Analyzer.md#batches, logical analysis rule>> that <<apply, transforms a logical query plan>> with <<spark-sql-LogicalPlan-View.md#, View>> unary logical operators and adds <<spark-sql-LogicalPlan-Project.md#, Project>> logical operator (possibly with <<spark-sql-Expression-Alias.md#, Alias>> expressions) when the outputs of a view and the underlying table do not match (and therefore require aliasing and projection).
+`AliasViewChild` is a [logical analysis rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> with <<spark-sql-LogicalPlan-View.md#, View>> unary logical operators and adds <<spark-sql-LogicalPlan-Project.md#, Project>> logical operator (possibly with <<spark-sql-Expression-Alias.md#, Alias>> expressions) when the outputs of a view and the underlying table do not match (and therefore require aliasing and projection).
 
-`AliasViewChild` is part of the <<spark-sql-Analyzer.md#View, View>> once-executed batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`AliasViewChild` is part of the [View](../Analyzer.md#View) once-executed batch in the standard batches of the [Logical Analyzer](../Analyzer.md).
 
 `AliasViewChild` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

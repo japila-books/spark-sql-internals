@@ -1,6 +1,6 @@
 # LookupFunctions Logical Rule -- Checking Whether UnresolvedFunctions Are Resolvable
 
-`LookupFunctions` is a logical rule that the spark-sql-Analyzer.md#LookupFunctions[logical query plan analyzer] uses to <<apply, make sure that UnresolvedFunction expressions can be resolved>> in an entire logical query plan.
+`LookupFunctions` is a logical rule that the [logical query plan analyzer](../Analyzer.md#LookupFunctions) uses to <<apply, make sure that UnresolvedFunction expressions can be resolved>> in an entire logical query plan.
 
 `LookupFunctions` is similar to [ResolveFunctions](ResolveFunctions.md) logical resolution rule, but it is `ResolveFunctions` to resolve `UnresolvedFunction` expressions while `LookupFunctions` is just a sanity check that a future resolution is possible if tried.
 
@@ -8,13 +8,11 @@ Technically, `LookupFunctions` is just a catalyst/Rule.md[Catalyst rule] for tra
 
 NOTE: `LookupFunctions` does not however transform a logical plan.
 
-`LookupFunctions` is part of spark-sql-Analyzer.md#Simple-Sanity-Check[Simple Sanity Check] one-off batch of rules.
+`LookupFunctions` is part of [Simple Sanity Check](../Analyzer.md#Simple-Sanity-Check) one-off batch of rules.
 
-NOTE: `LookupFunctions` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
+## Example
 
-[[example]]
-[source, scala]
-----
+```text
 // Using Catalyst DSL to create a logical plan with an unregistered function
 import org.apache.spark.sql.catalyst.dsl.plans._
 val t1 = table("t1")
@@ -41,7 +39,7 @@ org.apache.spark.sql.AnalysisException: Undefined function: 'f1'. This function 
   at org.apache.spark.sql.catalyst.analysis.package$.withPosition(package.scala:48)
   at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15.applyOrElse(Analyzer.scala:1197)
   at org.apache.spark.sql.catalyst.analysis.Analyzer$LookupFunctions$$anonfun$apply$15.applyOrElse(Analyzer.scala:1195)
-----
+```
 
 === [[apply]] Applying LookupFunctions to Logical Plan -- `apply` Method
 
@@ -50,12 +48,12 @@ org.apache.spark.sql.AnalysisException: Undefined function: 'f1'. This function 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
-
-`apply` finds all spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions (in every logical operator in the input spark-sql-LogicalPlan.md[logical plan]) and requests the spark-sql-Analyzer.md#catalog[SessionCatalog] to spark-sql-SessionCatalog.md#functionExists[check if their functions exist].
+`apply` finds all spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions (in every logical operator in the input spark-sql-LogicalPlan.md[logical plan]) and requests the [SessionCatalog](../Analyzer.md#catalog) to [check if their functions exist](../spark-sql-SessionCatalog.md#functionExists).
 
 `apply` does nothing if a function exists or reports a `NoSuchFunctionException` (that fails logical analysis).
 
-```
+```text
 Undefined function: '[func]'. This function is neither a registered temporary function nor a permanent function registered in the database '[db]'.
 ```
+
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

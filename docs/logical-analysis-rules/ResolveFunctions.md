@@ -1,12 +1,10 @@
 # ResolveFunctions Logical Resolution Rule -- Resolving grouping__id UnresolvedAttribute, UnresolvedGenerator And UnresolvedFunction Expressions
 
-`ResolveFunctions` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveFunctions[logical query plan analyzer] uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
+`ResolveFunctions` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveFunctions) uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
 
-Technically, `ResolveReferences` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveReferences` is just a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
-`ResolveFunctions` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
-
-NOTE: `ResolveFunctions` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
+`ResolveFunctions` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
 [[example]]
 [source, scala]
@@ -87,7 +85,7 @@ NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule t
 +
 That case seems mostly for compatibility with Hive as `grouping__id` attribute name is used by Hive.
 
-* For spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators], `apply` requests the spark-sql-Analyzer.md#catalog[SessionCatalog] to spark-sql-SessionCatalog.md#lookupFunction[find a Generator function by name].
+* For spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a Generator function by name](../spark-sql-SessionCatalog.md#lookupFunction).
 +
 If some other non-generator function is found for the name, `apply` fails the analysis phase by reporting an `AnalysisException`:
 +
@@ -95,7 +93,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ```
 
-* For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the spark-sql-Analyzer.md#catalog[SessionCatalog] to spark-sql-SessionCatalog.md#lookupFunction[find a function by name].
+* For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a function by name](../spark-sql-SessionCatalog.md#lookupFunction).
 
 * spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +

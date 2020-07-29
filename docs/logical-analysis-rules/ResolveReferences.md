@@ -1,12 +1,12 @@
 # ResolveReferences Logical Resolution Rule
 
-`ResolveReferences` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveReferences[logical query plan analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
+`ResolveReferences` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveReferences) uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
 
 1. Resolves...FIXME
 
 Technically, `ResolveReferences` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveReferences` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
+`ResolveReferences` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
 [[example]]
 [source, scala]
@@ -134,7 +134,7 @@ expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 
 `expandStarExpression` expands (_transforms_) the following expressions in the input `expr` expressions/Expression.md[expression]:
 
-1. For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression` requests the `Star` expressions to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan and the spark-sql-Analyzer.md#resolver[resolver].
+1. For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression` requests the `Star` expressions to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan and the [resolver](../Analyzer.md#resolver).
 +
 ```
 // Using Catalyst DSL to create a logical plan with a function with Star child expression

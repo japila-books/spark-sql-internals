@@ -2,7 +2,7 @@
 
 `PreWriteCheck` is an *extended analysis check* that verifies correctness of a <<spark-sql-LogicalPlan.md#, logical query plan>> with regard to <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator (right before analysis can be considered complete).
 
-`PreWriteCheck` is part of the <<spark-sql-Analyzer-CheckAnalysis.md#extendedCheckRules, extended analysis check rules>> of the logical <<spark-sql-Analyzer.md#, Analyzer>> in <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and hive/HiveSessionStateBuilder.md#analyzer[HiveSessionStateBuilder].
+`PreWriteCheck` is part of the <<spark-sql-Analyzer-CheckAnalysis.md#extendedCheckRules, extended analysis check rules>> of the logical [Analyzer](../Analyzer.md) in [BaseSessionStateBuilder](../BaseSessionStateBuilder.md#analyzer) and [HiveSessionStateBuilder](../hive/HiveSessionStateBuilder.md#analyzer).
 
 `PreWriteCheck` is simply a <<apply, function>> of <<spark-sql-LogicalPlan.md#, LogicalPlan>> that...FIXME
 

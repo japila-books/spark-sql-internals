@@ -20,11 +20,11 @@ NOTE: `UnresolvedFunction` is first looked up in [LookupFunctions](../logical-an
 [[Unevaluable]][[eval]][[doGenCode]]
 Given `UnresolvedFunction` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedFunction` simply reports a `UnsupportedOperationException`.
 
-```
+```text
 Cannot evaluate expression: [this]
 ```
 
-NOTE: expressions/Expression.md#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during spark-sql-Analyzer.md[analysis] or [optimization](../Optimizer.md) (or they fail analysis).
+NOTE: expressions/Expression.md#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during [analysis](../Analyzer.md) or [optimization](../Optimizer.md) (or they fail analysis).
 
 TIP: Use Catalyst DSL's spark-sql-catalyst-dsl.md#function[function] or spark-sql-catalyst-dsl.md#distinctFunction[distinctFunction] to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
 

@@ -2,7 +2,7 @@ title: CheckAnalysis
 
 # CheckAnalysis -- Analysis Validation
 
-`CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that spark-sql-Analyzer.md[Analyzer] uses to check if a spark-sql-LogicalPlan.md[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
+`CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that [Logical Analyzer](Analyzer.md) uses to check if a spark-sql-LogicalPlan.md[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
 
 NOTE: An analyzed logical plan is correct and ready for execution.
 

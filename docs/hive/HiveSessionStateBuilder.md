@@ -20,7 +20,7 @@ image::../images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="cente
 | Description
 
 | <<analyzer-indepth, analyzer>>
-a| [[analyzer]] Hive-specific ../spark-sql-Analyzer.md[logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
+a| [[analyzer]] Hive-specific [logical query plan analyzer](../Analyzer.md) with the [Hive-specific rules](#analyzer-rules).
 
 | `catalog`
 a| [[catalog]] HiveSessionCatalog.md[HiveSessionCatalog] with the following:
@@ -77,16 +77,15 @@ NOTE: `planner` is part of ../BaseSessionStateBuilder.md#planner[BaseSessionStat
 
 === [[analyzer-indepth]] Logical Query Plan Analyzer with Hive-Specific Rules -- `analyzer` Property
 
-[source, scala]
-----
+```scala
 analyzer: Analyzer
-----
+```
 
-NOTE: `analyzer` is part of ../BaseSessionStateBuilder.md#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
-
-`analyzer` is a ../spark-sql-Analyzer.md[Analyzer] with <<catalog, Hive-specific SessionCatalog>> (and ../BaseSessionStateBuilder.md#conf[SQLConf]).
+`analyzer` is a [Logical Analyzer](../Analyzer.md) with <<catalog, Hive-specific SessionCatalog>> (and ../BaseSessionStateBuilder.md#conf[SQLConf]).
 
 `analyzer` uses the Hive-specific <<extendedResolutionRules, extended resolution>>, <<postHocResolutionRules, postHoc resolution>> and <<extendedCheckRules, extended check>> rules.
+
+`analyzer` is part of the [BaseSessionStateBuilder](../BaseSessionStateBuilder.md#analyzer) abstraction.
 
 [[extendedResolutionRules]]
 .Hive-Specific Analyzer's Extended Resolution Rules (in the order of execution)

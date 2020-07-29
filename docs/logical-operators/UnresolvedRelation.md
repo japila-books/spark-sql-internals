@@ -7,7 +7,7 @@ title: UnresolvedRelation
 
 [NOTE]
 ====
-If after spark-sql-Analyzer.md[Analyzer] has finished analyzing a logical query plan the plan has still a `UnresolvedRelation` it spark-sql-Analyzer-CheckAnalysis.md#UnresolvedRelation[fails the analyze phase] with the following `AnalysisException`:
+If after [Logical Analyzer](../Analyzer.md) has finished analyzing a logical query plan the plan has still a `UnresolvedRelation` it spark-sql-Analyzer-CheckAnalysis.md#UnresolvedRelation[fails the analyze phase] with the following `AnalysisException`:
 
 ```
 Table or view not found: [tableIdentifier]

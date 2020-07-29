@@ -43,8 +43,8 @@ There are two `BaseSessionStateBuilders` available:
 | Description
 
 | analyzer
-| spark-sql-Analyzer.md[Analyzer]
-| [[analyzer]] <<spark-sql-Analyzer.md#, Spark Analyzer>>
+| [Analyzer](Analyzer.md)
+| [[analyzer]] [Logical Analyzer](Analyzer.md)
 
 Initialized lazily (only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
 
@@ -110,7 +110,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[udfRegistration]] <<spark-sql-UDFRegistration.md#, UDFRegistration>>
 * [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.md#, SessionCatalog>> (`() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
-* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.md#, Analyzer>> (`() => Analyzer`)
+* [[analyzerBuilder]] `analyzerBuilder` function to create an [Analyzer](Analyzer.md) (`() => Analyzer`)
 * [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](Optimizer.md) (`() => Optimizer`)
 * [[planner]] <<spark-sql-SparkPlanner.md#, SparkPlanner>>
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`

@@ -96,7 +96,7 @@ scala> println(plan.numberedTreeString)
 
 === [[spark-analyzer]] Spark Analyzer
 
-There are the following logical rules that spark-sql-Analyzer.md[Spark Analyzer] uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
+There are the following logical rules that [Logical Analyzer](Analyzer.md) uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
 * [ResolveBroadcastHints](logical-analysis-rules/ResolveBroadcastHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 

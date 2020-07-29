@@ -40,11 +40,11 @@ The catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly 
 
 === [[analyzer]] Analysis Phase
 
-`GroupingSets` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
+`GroupingSets` operator is resolved at [analysis phase](../Analyzer.md) in the following logical evaluation rules:
 
 * [ResolveAliases](../logical-analysis-rules/ResolveAliases.md) for unresolved aliases in <<aggregations, aggregate named expressions>>
 
-* spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics]
+* [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics)
 
 `GroupingSets` operator is resolved to an spark-sql-LogicalPlan-Aggregate.md[Aggregate] with spark-sql-LogicalPlan-Expand.md[Expand] logical operators.
 

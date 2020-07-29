@@ -1,10 +1,10 @@
 # ResolveOrdinalInOrderByAndGroupBy Logical Resolution Rule
 
-`ResolveOrdinalInOrderByAndGroupBy` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.
+`ResolveOrdinalInOrderByAndGroupBy` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.
 
-`ResolveOrdinalInOrderByAndGroupBy` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
+`ResolveOrdinalInOrderByAndGroupBy` is part of the [Resolution](../Analyzer.md#Resolution) fixed-point batch in the standard batches of the [Analyzer](../Analyzer.md).
 
-`ResolveOrdinalInOrderByAndGroupBy` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveOrdinalInOrderByAndGroupBy` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
 [[creating-instance]]
 `ResolveOrdinalInOrderByAndGroupBy` takes no arguments when created.

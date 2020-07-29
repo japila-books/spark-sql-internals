@@ -19,7 +19,7 @@ title: UnresolvedAttribute
 [[analysis-phase]]
 [NOTE]
 ====
-`UnresolvedAttribute` is resolved when `Analyzer` is spark-sql-Analyzer.md#execute[executed] by the following spark-sql-Analyzer.md#Resolution[logical resolution rules]:
+`UnresolvedAttribute` is resolved when [Logical Analyzer](../Analyzer.md) is executed by the following [logical resolution rules](../Analyzer.md#Resolution):
 
 * [ResolveReferences](../logical-analysis-rules/ResolveReferences.md#resolve)
 

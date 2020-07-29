@@ -51,7 +51,7 @@ The following SQL services are created on demand (_lazily_) once and reused.
 analyzer: Analyzer
 ```
 
-[Logical analyzer](spark-sql-Analyzer.md)
+[Logical Analyzer](Analyzer.md)
 
 ### <span id="catalog"> SessionCatalog
 

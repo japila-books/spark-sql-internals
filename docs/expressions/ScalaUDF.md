@@ -26,7 +26,7 @@ import org.apache.spark.sql.catalyst.expressions.ScalaUDF
 val scalaUDF = c.expr.asInstanceOf[ScalaUDF]
 ----
 
-NOTE: spark-sql-Analyzer.md[Spark SQL Analyzer] uses [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) logical evaluation rule to...FIXME
+NOTE: [Logical Analyzer](../Analyzer.md) uses [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) logical evaluation rule to...FIXME
 
 [source, scala]
 ----

@@ -40,7 +40,7 @@ Spark Optimizer uses spark-sql-Optimizer-NullPropagation.md[NullPropagation] log
 
 `Coalesce` is also <<creating-instance, created>> when:
 
-* `Analyzer` is requested to spark-sql-Analyzer.md#commonNaturalJoinProcessing[commonNaturalJoinProcessing] for `FullOuter` join type
+* `Analyzer` is requested to [commonNaturalJoinProcessing](../Analyzer.md#commonNaturalJoinProcessing) for `FullOuter` join type
 
 * `RewriteDistinctAggregates` logical optimization is requested to `rewrite`
 

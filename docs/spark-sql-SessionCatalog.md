@@ -2,7 +2,7 @@
 
 `SessionCatalog` is a catalog of relational entities in [SparkSession](SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).
 
-`SessionCatalog` is used to create [Analyzer](spark-sql-Analyzer.md#catalog) and [SparkOptimizer](SparkOptimizer.md#catalog) (_among other things_).
+`SessionCatalog` is used to create [Logical Analyzer](Analyzer.md#catalog) and [SparkOptimizer](SparkOptimizer.md#catalog) (_among other things_).
 
 ## Creating Instance
 
