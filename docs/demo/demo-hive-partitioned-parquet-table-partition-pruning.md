@@ -4,13 +4,13 @@ title: Hive Partitioned Parquet Table and Partition Pruning
 
 The demo shows partition pruning optimization in Spark SQL for Hive partitioned tables in parquet format.
 
-NOTE: The demo is a follow-up to link:demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]. Please finish it first before this demo.
+NOTE: The demo is a follow-up to demo-connecting-spark-sql-to-hive-metastore.md[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]. Please finish it first before this demo.
 
 The demo features the following:
 
-* link:../hive/configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
+* ../hive/configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
 
-* Hadoop DFS for link:../spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
+* Hadoop DFS for ../spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
 
 ## Create Hive Partitioned Table in Parquet Format
 
@@ -129,9 +129,9 @@ Check out the table in Hive using `beeline`.
 
 ## Explore Partition Pruning
 
-You'll be using link:../spark-sql-Expression-In.adoc[In] expression in structured queries to learn more on partition pruning.
+You'll be using ../spark-sql-Expression-In.md[In] expression in structured queries to learn more on partition pruning.
 
-TIP: Enable `INFO` logging level for link:../PrunedInMemoryFileIndex.adoc#logging[org.apache.spark.sql.execution.datasources.PrunedInMemoryFileIndex] logger.
+TIP: Enable `INFO` logging level for ../PrunedInMemoryFileIndex.md#logging[org.apache.spark.sql.execution.datasources.PrunedInMemoryFileIndex] logger.
 
 Use a fixed list of cities to filter by (which should trigger partition pruning).
 
@@ -159,7 +159,7 @@ Project [id#101L, name#102, city#103]
 *(1) FileScan parquet default.hive_partitioned_table[id#101L,name#102,city#103] Batched: true, Format: Parquet, Location: PrunedInMemoryFileIndex[hdfs://localhost:9000/user/hive/warehouse/hive_partitioned_table/city=War..., PartitionCount: 1, PartitionFilters: [isnotnull(city#103), (city#103 = Warsaw)], PushedFilters: [], ReadSchema: struct<id:bigint,name:string>
 ```
 
-Note the `PartitionFilters` field of the leaf `FileScan` node in the physical plan. It uses an link:../PrunedInMemoryFileIndex.adoc[PrunedInMemoryFileIndex] (for the partition index). Let's explore it.
+Note the `PartitionFilters` field of the leaf `FileScan` node in the physical plan. It uses an ../PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex] (for the partition index). Let's explore it.
 
 ```
 import org.apache.spark.sql.execution.FileSourceScanExec

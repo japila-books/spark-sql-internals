@@ -1,13 +1,13 @@
 # Whole-Stage Java Code Generation
 
-*Whole-Stage Java Code Generation* (aka _Whole-Stage CodeGen_) is a physical query optimization in Spark SQL that fuses multiple physical operators (as a subtree of plans that link:spark-sql-CodegenSupport.adoc[support code generation]) together into a single Java function.
+*Whole-Stage Java Code Generation* (aka _Whole-Stage CodeGen_) is a physical query optimization in Spark SQL that fuses multiple physical operators (as a subtree of plans that spark-sql-CodegenSupport.md[support code generation]) together into a single Java function.
 
 Whole-Stage Java Code Generation improves the execution performance of a query by collapsing a query tree into a single optimized function that eliminates virtual function calls and leverages CPU registers for intermediate data.
 
 [[spark.sql.codegen.wholeStage]]
 [NOTE]
 ====
-Whole-Stage Code Generation is controlled by link:spark-sql-properties.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property.
+Whole-Stage Code Generation is controlled by spark-sql-properties.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] Spark internal property.
 
 Whole-Stage Code Generation is enabled by default.
 
@@ -36,9 +36,9 @@ See http://www.vldb.org/pvldb/vol4/p539-neumann.pdf[Efficiently Compiling Effici
 NOTE: https://janino-compiler.github.io/janino/[Janino] is used to compile a Java source code into a Java class at runtime.
 
 [[CollapseCodegenStages]]
-Before a query is executed, link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] in-between for physical operators with no support for Java code generation).
+Before a query is executed, spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with spark-sql-SparkPlan-InputAdapter.md[InputAdapter] in-between for physical operators with no support for Java code generation).
 
-NOTE: `CollapseCodegenStages` is part of the sequence of physical preparation rules link:spark-sql-QueryExecution.adoc#preparations[QueryExecution.preparations] that will be applied in order to the physical plan before execution.
+NOTE: `CollapseCodegenStages` is part of the sequence of physical preparation rules spark-sql-QueryExecution.md#preparations[QueryExecution.preparations] that will be applied in order to the physical plan before execution.
 
 There are the following code generation paths (as coined in https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8[this commit]):
 

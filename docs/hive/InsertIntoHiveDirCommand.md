@@ -6,9 +6,9 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`InsertIntoHiveDirCommand` is a link:SaveAsHiveFile.adoc[logical command] that writes the result of executing a <<query, structured query>> to a Hadoop DFS location of a <<storage, Hive table>>.
+`InsertIntoHiveDirCommand` is a SaveAsHiveFile.md[logical command] that writes the result of executing a <<query, structured query>> to a Hadoop DFS location of a <<storage, Hive table>>.
 
-`InsertIntoHiveDirCommand` is <<creating-instance, created>> when link:HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed and resolves a link:../InsertIntoDir.adoc[InsertIntoDir] logical operator with a Hive table.
+`InsertIntoHiveDirCommand` is <<creating-instance, created>> when HiveAnalysis.md[HiveAnalysis] logical resolution rule is executed and resolves a ../InsertIntoDir.md[InsertIntoDir] logical operator with a Hive table.
 
 [source, scala]
 ----
@@ -54,8 +54,8 @@ Execute InsertIntoHiveDirCommand InsertIntoHiveDirCommand false, Storage(Locatio
 `InsertIntoHiveDirCommand` takes the following to be created:
 
 * [[isLocal]] `isLocal` Flag
-* [[storage]] link:../spark-sql-CatalogStorageFormat.adoc[CatalogStorageFormat]
-* [[query]] Structured query (as a link:../spark-sql-LogicalPlan.adoc[LogicalPlan])
+* [[storage]] ../spark-sql-CatalogStorageFormat.md[CatalogStorageFormat]
+* [[query]] Structured query (as a ../spark-sql-LogicalPlan.md[LogicalPlan])
 * [[overwrite]] `overwrite` Flag
 * [[outputColumnNames]] Names of the output columns
 
@@ -68,23 +68,23 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
+NOTE: `run` is part of ../spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
 
-`run` asserts that the link:../spark-sql-CatalogStorageFormat.adoc#locationUri[table location] of the <<storage, CatalogStorageFormat>> is specified (or throws an `AssertionError`).
+`run` asserts that the ../spark-sql-CatalogStorageFormat.md#locationUri[table location] of the <<storage, CatalogStorageFormat>> is specified (or throws an `AssertionError`).
 
-`run` link:../spark-sql-SchemaUtils.adoc#checkColumnNameDuplication[checkColumnNameDuplication] of the given <<outputColumnNames, output columns>>.
+`run` ../spark-sql-SchemaUtils.md#checkColumnNameDuplication[checkColumnNameDuplication] of the given <<outputColumnNames, output columns>>.
 
-`run` creates a link:../spark-sql-CatalogTable.adoc[CatalogTable] for the table location (and the `VIEW` table type) and link:HiveClientImpl.adoc#toHiveTable[converts it to a Hive Table metadata].
+`run` creates a ../spark-sql-CatalogTable.md[CatalogTable] for the table location (and the `VIEW` table type) and HiveClientImpl.md#toHiveTable[converts it to a Hive Table metadata].
 
-`run` specifies `serialization.lib` metadata to the link:../spark-sql-CatalogStorageFormat.adoc#serde[serde] of the given <<storage, CatalogStorageFormat>> or `LazySimpleSerDe` if not defined.
+`run` specifies `serialization.lib` metadata to the ../spark-sql-CatalogStorageFormat.md#serde[serde] of the given <<storage, CatalogStorageFormat>> or `LazySimpleSerDe` if not defined.
 
-`run` creates a new map-reduce job for execution (a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/mapred/JobConf.html[JobConf]) with a link:../SessionState.md#newHadoopConf[new Hadoop Configuration] (from the input link:../SparkSession.md[SparkSession]).
+`run` creates a new map-reduce job for execution (a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/mapred/JobConf.html[JobConf]) with a ../SessionState.md#newHadoopConf[new Hadoop Configuration] (from the input ../SparkSession.md[SparkSession]).
 
-`run` prepares the path to write to (based on the given <<isLocal, isLocal>> flag and creating it if necessary). `run` link:SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath].
+`run` prepares the path to write to (based on the given <<isLocal, isLocal>> flag and creating it if necessary). `run` SaveAsHiveFile.md#getExternalTmpPath[getExternalTmpPath].
 
-`run` link:SaveAsHiveFile.adoc#saveAsHiveFile[saveAsHiveFile].
+`run` SaveAsHiveFile.md#saveAsHiveFile[saveAsHiveFile].
 
-In the end, `run` link:SaveAsHiveFile.adoc#deleteExternalTmpPath[deleteExternalTmpPath].
+In the end, `run` SaveAsHiveFile.md#deleteExternalTmpPath[deleteExternalTmpPath].
 
 In case of any error (`Throwable`), `run` throws an `SparkException`:
 

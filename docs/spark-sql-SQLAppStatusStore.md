@@ -2,11 +2,11 @@
 
 `SQLAppStatusStore` is...FIXME
 
-`SQLAppStatusStore` is <<creating-instance, created>> when link:spark-sql-SQLAppStatusListener.adoc#onExecutionStart[SQLAppStatusListener] or link:spark-sql-SQLAppStatusPlugin.adoc#setupUI[SQLAppStatusPlugin] create a link:spark-sql-webui.adoc[SQLTab].
+`SQLAppStatusStore` is <<creating-instance, created>> when spark-sql-SQLAppStatusListener.md#onExecutionStart[SQLAppStatusListener] or spark-sql-SQLAppStatusPlugin.md#setupUI[SQLAppStatusPlugin] create a spark-sql-webui.md[SQLTab].
 
 === [[creating-instance]] Creating SQLAppStatusStore Instance
 
 `SQLAppStatusStore` takes the following when created:
 
 * [[store]] `KVStore`
-* [[listener]] Optional link:spark-sql-SQLAppStatusListener.adoc[SQLAppStatusListener]
+* [[listener]] Optional spark-sql-SQLAppStatusListener.md[SQLAppStatusListener]

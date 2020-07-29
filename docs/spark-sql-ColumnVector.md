@@ -152,7 +152,7 @@ a| [[hasNull]]
 boolean hasNull()
 ----
 
-Used when <<spark-sql-OffHeapColumnVector.adoc#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.adoc#, OnHeapColumnVector>> are requested to `putNotNulls`
+Used when <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are requested to `putNotNulls`
 
 | isNullAt
 a| [[isNullAt]]
@@ -189,15 +189,15 @@ Used for testing purposes only
 | `OrcColumnVector`
 | [[OrcColumnVector]]
 
-| <<spark-sql-WritableColumnVector.adoc#, WritableColumnVector>>
-| [[WritableColumnVector]] Writable column vectors with <<spark-sql-OffHeapColumnVector.adoc#, off-heap>> and <<spark-sql-OnHeapColumnVector.adoc#, on-heap>> memory variants
+| <<spark-sql-WritableColumnVector.md#, WritableColumnVector>>
+| [[WritableColumnVector]] Writable column vectors with <<spark-sql-OffHeapColumnVector.md#, off-heap>> and <<spark-sql-OnHeapColumnVector.md#, on-heap>> memory variants
 
 |===
 
 [[creating-instance]]
 [[type]]
 [[dataType]]
-`ColumnVector` takes a <<spark-sql-DataType.adoc#, DataType>> of the column to be created.
+`ColumnVector` takes a <<spark-sql-DataType.md#, DataType>> of the column to be created.
 
 NOTE: `ColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete ColumnVectors>>.
 

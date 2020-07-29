@@ -1,14 +1,14 @@
 # Command -- Eagerly-Executed Logical Operator
 
-`Command` is the *marker interface* for link:spark-sql-LogicalPlan.adoc[logical operators] that represent non-query commands that are executed early in the link:spark-sql-QueryExecution.adoc#query-plan-lifecycle[query plan lifecycle] (unlike logical plans in general).
+`Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the spark-sql-QueryExecution.md#query-plan-lifecycle[query plan lifecycle] (unlike logical plans in general).
 
-NOTE: `Command` is executed when a `Dataset` is requested for the link:spark-sql-Dataset.adoc#logicalPlan[logical plan] (which is after the query has been link:spark-sql-QueryExecution.adoc#analyzed[analyzed]).
+NOTE: `Command` is executed when a `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (which is after the query has been spark-sql-QueryExecution.md#analyzed[analyzed]).
 
 [[output]]
-`Command` has no link:catalyst/QueryPlan.md#output[output schema] by default.
+`Command` has no catalyst/QueryPlan.md#output[output schema] by default.
 
 [[children]]
-`Command` has no child logical operators (which makes it similar to link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operators]).
+`Command` has no child logical operators (which makes it similar to spark-sql-LogicalPlan-LeafNode.md[leaf logical operators]).
 
 [[implementations]]
 .Commands (Direct Implementations)
@@ -17,10 +17,10 @@ NOTE: `Command` is executed when a `Dataset` is requested for the link:spark-sql
 | Command
 | Description
 
-| xref:spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand]
+| xref:spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand]
 | [[DataWritingCommand]]
 
-| xref:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
+| xref:spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
 | [[RunnableCommand]]
 
 |===

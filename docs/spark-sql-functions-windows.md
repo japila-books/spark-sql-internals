@@ -4,9 +4,9 @@ title: Window Functions
 
 *Window aggregate functions* (aka *window functions* or *windowed aggregates*) are functions that perform a calculation over a group of records called *window* that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
-In other words, when executed, a window function computes a value for each and every row in a window (per <<spark-sql-WindowSpec.adoc#, window specification>>).
+In other words, when executed, a window function computes a value for each and every row in a window (per <<spark-sql-WindowSpec.md#, window specification>>).
 
-NOTE: Window functions are also called *over functions* due to how they are applied using link:spark-sql-Column.adoc#over[over] operator.
+NOTE: Window functions are also called *over functions* due to how they are applied using spark-sql-Column.md#over[over] operator.
 
 Spark SQL supports three kinds of window functions:
 
@@ -50,7 +50,7 @@ a|
 |
 |===
 
-For aggregate functions, you can use the existing link:spark-sql-basic-aggregation.adoc[aggregate functions] as window functions, e.g. `sum`, `avg`, `min`, `max` and `count`.
+For aggregate functions, you can use the existing spark-sql-basic-aggregation.md[aggregate functions] as window functions, e.g. `sum`, `avg`, `min`, `max` and `count`.
 
 [source, scala]
 ----
@@ -92,19 +92,19 @@ scala> empsalary.withColumn("avg", avg('salary) over byDepName).show
 +---------+-----+------+-----------------+
 ----
 
-You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<spark-sql-WindowSpec.adoc#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
+You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<spark-sql-WindowSpec.md#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
 
-After you describe a window you can apply <<functions, window aggregate functions>> like *ranking* functions (e.g. `RANK`), *analytic* functions (e.g. `LAG`), and the regular link:spark-sql-basic-aggregation.adoc[aggregate functions], e.g. `sum`, `avg`, `max`.
+After you describe a window you can apply <<functions, window aggregate functions>> like *ranking* functions (e.g. `RANK`), *analytic* functions (e.g. `LAG`), and the regular spark-sql-basic-aggregation.md[aggregate functions], e.g. `sum`, `avg`, `max`.
 
-NOTE: Window functions are supported in structured queries using <<sql, SQL>> and link:spark-sql-Column.adoc[Column]-based expressions.
+NOTE: Window functions are supported in structured queries using <<sql, SQL>> and spark-sql-Column.md[Column]-based expressions.
 
-Although similar to link:spark-sql-basic-aggregation.adoc[aggregate functions], a window function does not group rows into a single output row and retains their separate identities. A window function can access rows that are linked to the current row.
+Although similar to spark-sql-basic-aggregation.md[aggregate functions], a window function does not group rows into a single output row and retains their separate identities. A window function can access rows that are linked to the current row.
 
-NOTE: The main difference between window aggregate functions and link:spark-sql-functions.adoc#aggregate-functions[aggregate functions] with link:spark-sql-basic-aggregation.adoc[grouping operators] is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
+NOTE: The main difference between window aggregate functions and spark-sql-functions.md#aggregate-functions[aggregate functions] with spark-sql-basic-aggregation.md[grouping operators] is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
 
 TIP: See <<examples, Examples>> section in this document.
 
-You can mark a function _window_ by `OVER` clause after a function in SQL, e.g. `avg(revenue) OVER (...)` or link:spark-sql-Column.adoc#over[over method] on a function in the Dataset API, e.g. `rank().over(...)`.
+You can mark a function _window_ by `OVER` clause after a function in SQL, e.g. `avg(revenue) OVER (...)` or spark-sql-Column.md#over[over method] on a function in the Dataset API, e.g. `rank().over(...)`.
 
 NOTE: Window functions belong to http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.functions$[Window functions group] in Spark's Scala API.
 
@@ -112,7 +112,7 @@ NOTE: Window-based framework is available as an experimental feature since Spark
 
 === [[Window-object]] Window object
 
-`Window` object provides functions to define windows (as <<spark-sql-WindowSpec.adoc#, WindowSpec>> instances).
+`Window` object provides functions to define windows (as <<spark-sql-WindowSpec.md#, WindowSpec>> instances).
 
 `Window` object lives in `org.apache.spark.sql.expressions` package. Import it to use `Window` functions.
 
@@ -121,7 +121,7 @@ NOTE: Window-based framework is available as an experimental feature since Spark
 import org.apache.spark.sql.expressions.Window
 ----
 
-There are two families of the functions available in `Window` object that create <<spark-sql-WindowSpec.adoc#, WindowSpec>> instance for one or many link:spark-sql-Column.adoc[Column] instances:
+There are two families of the functions available in `Window` object that create <<spark-sql-WindowSpec.md#, WindowSpec>> instance for one or many spark-sql-Column.md[Column] instances:
 
 * <<partitionBy, partitionBy>>
 * <<orderBy, orderBy>>
@@ -200,7 +200,7 @@ scala> empsalary.select('*, rankByDepname as 'rank).show
 rangeBetween(start: Long, end: Long): WindowSpec
 ----
 
-`rangeBetween` creates a <<spark-sql-WindowSpec.adoc#, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
+`rangeBetween` creates a <<spark-sql-WindowSpec.md#, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
 
 NOTE: It is recommended to use `Window.unboundedPreceding`, `Window.unboundedFollowing` and `Window.currentRow` to describe the frame boundaries when a frame is unbounded preceding, unbounded following and at current row, respectively.
 
@@ -234,12 +234,12 @@ Types of frames:
 * `ROW` - based on _physical offsets_ from the position of the current input row
 * `RANGE` - based on _logical offsets_ from the position of the current input row
 
-In the current implementation of <<spark-sql-WindowSpec.adoc#, WindowSpec>> you can use two methods to define a frame:
+In the current implementation of <<spark-sql-WindowSpec.md#, WindowSpec>> you can use two methods to define a frame:
 
 * `rowsBetween`
 * `rangeBetween`
 
-See <<spark-sql-WindowSpec.adoc#, WindowSpec>> for their coverage.
+See <<spark-sql-WindowSpec.md#, WindowSpec>> for their coverage.
 
 === [[sql]] Window Operators in SQL Queries
 
@@ -253,7 +253,7 @@ The grammar of windows operators in SQL accepts the following:
 
 4. `UNBOUNDED PRECEDING`, `UNBOUNDED FOLLOWING`, `CURRENT ROW` for frame bounds.
 
-TIP: Consult link:spark-sql-AstBuilder.adoc#withWindows[withWindows] helper in `AstBuilder`.
+TIP: Consult spark-sql-AstBuilder.md#withWindows[withWindows] helper in `AstBuilder`.
 
 === [[examples]] Examples
 

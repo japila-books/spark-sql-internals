@@ -2,12 +2,12 @@ title: DescribeTableCommand
 
 # DescribeTableCommand Logical Command
 
-`DescribeTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.
+`DescribeTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.
 
-`DescribeTableCommand` is <<creating-instance, created>> exclusively when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.adoc#visitDescribeTable, DESCRIBE TABLE>> SQL statement (with no column specified).
+`DescribeTableCommand` is <<creating-instance, created>> exclusively when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitDescribeTable, DESCRIBE TABLE>> SQL statement (with no column specified).
 
 [[output]]
-`DescribeTableCommand` uses the following <<spark-sql-LogicalPlan-Command.adoc#output, output schema>>:
+`DescribeTableCommand` uses the following <<spark-sql-LogicalPlan-Command.md#output, output schema>>:
 
 * `col_name` as the name of the column
 * `data_type` as the data type of the column
@@ -153,15 +153,15 @@ scala> sql(s"DESCRIBE EXTENDED $tableName PARTITION ($partCol=1)").show(numRows 
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` uses the <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
+`run` uses the <<spark-sql-SessionCatalog.md#, SessionCatalog>> (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
 
-For a <<spark-sql-SessionCatalog.adoc#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#lookupRelation, lookupRelation>> to access the <<catalyst/QueryPlan.md#schema, schema>> and <<describeSchema, describeSchema>>.
+For a <<spark-sql-SessionCatalog.md#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#lookupRelation, lookupRelation>> to access the <<catalyst/QueryPlan.md#schema, schema>> and <<describeSchema, describeSchema>>.
 
 For all other table types, `run` does the following:
 
-. Requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>> (as a <<spark-sql-CatalogTable.adoc#, CatalogTable>>) and <<describeSchema, describeSchema>> (with the <<spark-sql-CatalogTable.adoc#schema, schema>>)
+. Requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>> (as a <<spark-sql-CatalogTable.md#, CatalogTable>>) and <<describeSchema, describeSchema>> (with the <<spark-sql-CatalogTable.md#schema, schema>>)
 
 . <<describePartitionInfo, describePartitionInfo>>
 
@@ -184,19 +184,19 @@ describeFormattedDetailedPartitionInfo(
 
 . *# Detailed Partition Information*
 
-. *Database* with the <<spark-sql-CatalogTable.adoc#database, database>> of the given `table`
+. *Database* with the <<spark-sql-CatalogTable.md#database, database>> of the given `table`
 
 . *Table* with the table of the given `tableIdentifier`
 
-. <<spark-sql-CatalogTablePartition.adoc#toLinkedHashMap, Partition specification>> (of the <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>>)
+. <<spark-sql-CatalogTablePartition.md#toLinkedHashMap, Partition specification>> (of the <<spark-sql-CatalogTablePartition.md#, CatalogTablePartition>>)
 
 . A new line
 
 . *# Storage Information*
 
-. <<spark-sql-BucketSpec.adoc#toLinkedHashMap, Bucketing specification>> of the <<spark-sql-CatalogTable.adoc#bucketSpec, table>> (if defined)
+. <<spark-sql-BucketSpec.md#toLinkedHashMap, Bucketing specification>> of the <<spark-sql-CatalogTable.md#bucketSpec, table>> (if defined)
 
-. <<spark-sql-CatalogStorageFormat.adoc#toLinkedHashMap, Storage specification>> of the <<spark-sql-CatalogTable.adoc#storage, table>>
+. <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> of the <<spark-sql-CatalogTable.md#storage, table>>
 
 NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with a non-empty <<partitionSpec, partitionSpec>> and the <<isExtended, isExtended>> flag on.
 
@@ -209,7 +209,7 @@ describeFormattedTableInfo(table: CatalogTable, buffer: ArrayBuffer[Row]): Unit
 
 `describeFormattedTableInfo`...FIXME
 
-NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a <<spark-sql-SessionCatalog.adoc#isTemporaryTable, non-temporary table>> and the <<isExtended, isExtended>> flag on.
+NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a <<spark-sql-SessionCatalog.md#isTemporaryTable, non-temporary table>> and the <<isExtended, isExtended>> flag on.
 
 === [[describeDetailedPartitionInfo]] `describeDetailedPartitionInfo` Internal Method
 

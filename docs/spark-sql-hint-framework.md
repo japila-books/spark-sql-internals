@@ -10,7 +10,7 @@ NOTE: Hint Framework was added in https://issues.apache.org/jira/browse/SPARK-20
 
 === [[specifying-query-hints]] Specifying Query Hints
 
-You can specify query hints using link:spark-sql-dataset-operators.adoc#hint[Dataset.hint] operator or <<sql-hints, SELECT SQL statements with hints>>.
+You can specify query hints using spark-sql-dataset-operators.md#hint[Dataset.hint] operator or <<sql-hints, SELECT SQL statements with hints>>.
 
 [source, scala]
 ----
@@ -32,7 +32,7 @@ scala> println(plan.numberedTreeString)
 
 === [[sql-hints]] SELECT SQL Statements With Hints
 
-`SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL link:spark-sql-AstBuilder.adoc#withHints[translates] into a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator in a logical plan.
+`SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL spark-sql-AstBuilder.md#withHints[translates] into a spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator in a logical plan.
 
 === [[coalesce-repartition-hints]] COALESCE and REPARTITION Hints
 
@@ -54,9 +54,9 @@ Spark SQL 2.2 supports *BROADCAST* hints using <<broadcast-function, broadcast s
 
 === [[broadcast-function]] broadcast Standard Function
 
-While `hint` operator allows for attaching any hint to a logical plan link:spark-sql-functions.adoc#broadcast[broadcast] standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
+While `hint` operator allows for attaching any hint to a logical plan spark-sql-functions.md#broadcast[broadcast] standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
 
-`broadcast` standard function is used for link:spark-sql-joins-broadcast.adoc[broadcast joins (aka map-side joins)], i.e. to hint the Spark planner to broadcast a dataset regardless of the size.
+`broadcast` standard function is used for spark-sql-joins-broadcast.md[broadcast joins (aka map-side joins)], i.e. to hint the Spark planner to broadcast a dataset regardless of the size.
 
 [source, scala]
 ----
@@ -96,11 +96,11 @@ scala> println(plan.numberedTreeString)
 
 === [[spark-analyzer]] Spark Analyzer
 
-There are the following logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with the link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator:
+There are the following logical rules that spark-sql-Analyzer.md[Spark Analyzer] uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
-. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+. spark-sql-Analyzer-ResolveBroadcastHints.md[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 
-. <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
+. <<spark-sql-Analyzer-ResolveCoalesceHints.md#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
 . `RemoveAllHints` simply removes all `UnresolvedHint` operators
 
@@ -139,7 +139,7 @@ scala> println(resolvedPlan.numberedTreeString)
 
 === [[hint-catalyst-dsl]] Hint Operator in Catalyst DSL
 
-You can use `hint` operator from link:spark-sql-catalyst-dsl.adoc#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
+You can use `hint` operator from spark-sql-catalyst-dsl.md#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

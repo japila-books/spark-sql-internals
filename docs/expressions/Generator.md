@@ -2,19 +2,19 @@ title: Generator
 
 # Generator -- Expressions to Generate Zero Or More Rows (aka Lateral Views)
 
-`Generator` is a <<contract, contract>> for link:expressions/Expression.md[Catalyst expressions] that can <<eval, produce>> zero or more rows given a single input row.
+`Generator` is a <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that can <<eval, produce>> zero or more rows given a single input row.
 
-NOTE: `Generator` corresponds to SQL's link:spark-sql-AstBuilder.adoc#withGenerate[LATERAL VIEW].
+NOTE: `Generator` corresponds to SQL's spark-sql-AstBuilder.md#withGenerate[LATERAL VIEW].
 
 [[dataType]]
-`dataType` in `Generator` is simply an link:spark-sql-DataType.adoc#ArrayType[ArrayType] of <<elementSchema, elementSchema>>.
+`dataType` in `Generator` is simply an spark-sql-DataType.md#ArrayType[ArrayType] of <<elementSchema, elementSchema>>.
 
 [[foldable]]
 [[nullable]]
-`Generator` is not link:expressions/Expression.md#foldable[foldable] and not link:expressions/Expression.md#nullable[nullable] by default.
+`Generator` is not expressions/Expression.md#foldable[foldable] and not expressions/Expression.md#nullable[nullable] by default.
 
 [[supportCodegen]]
-`Generator` supports link:spark-sql-whole-stage-codegen.adoc[Java code generation] (aka _whole-stage codegen_) conditionally, i.e. only when a physical operator is not marked as link:expressions/Expression.md#CodegenFallback[CodegenFallback].
+`Generator` supports spark-sql-whole-stage-codegen.md[Java code generation] (aka _whole-stage codegen_) conditionally, i.e. only when a physical operator is not marked as expressions/Expression.md#CodegenFallback[CodegenFallback].
 
 [[terminate]]
 `Generator` uses `terminate` to inform that there are no more rows to process, clean up code, and additional rows can be made here.
@@ -31,13 +31,13 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | Name
 | Description
 
-| [[CollectionGenerator]] link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator]
+| [[CollectionGenerator]] spark-sql-Expression-CollectionGenerator.md[CollectionGenerator]
 |
 
-| [[ExplodeBase]] link:spark-sql-Expression-ExplodeBase.adoc[ExplodeBase]
+| [[ExplodeBase]] spark-sql-Expression-ExplodeBase.md[ExplodeBase]
 |
 
-| [[Explode]] link:spark-sql-Expression-ExplodeBase.adoc#Explode[Explode]
+| [[Explode]] spark-sql-Expression-ExplodeBase.md#Explode[Explode]
 |
 
 | [[GeneratorOuter]] `GeneratorOuter`
@@ -46,22 +46,22 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | [[HiveGenericUDTF]] `HiveGenericUDTF`
 |
 
-| [[Inline]] link:spark-sql-Expression-Inline.adoc[Inline]
+| [[Inline]] spark-sql-Expression-Inline.md[Inline]
 | Corresponds to `inline` and `inline_outer` functions.
 
-| [[JsonTuple]] link:spark-sql-Expression-JsonTuple.adoc[JsonTuple]
+| [[JsonTuple]] spark-sql-Expression-JsonTuple.md[JsonTuple]
 |
 
-| [[PosExplode]] link:spark-sql-Expression-ExplodeBase.adoc#PosExplode[PosExplode]
+| [[PosExplode]] spark-sql-Expression-ExplodeBase.md#PosExplode[PosExplode]
 |
 
-| [[Stack]] link:spark-sql-Expression-Stack.adoc[Stack]
+| [[Stack]] spark-sql-Expression-Stack.md[Stack]
 |
 
-| [[UnresolvedGenerator]] link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator]
+| [[UnresolvedGenerator]] spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerator]
 a| Represents an unresolved <<Generator, generator>>.
 
-Created when `AstBuilder` link:spark-sql-AstBuilder.adoc#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
+Created when `AstBuilder` spark-sql-AstBuilder.md#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
 
 ```
 LATERAL VIEW (OUTER)?
@@ -70,7 +70,7 @@ tblName
 AS? col1, col2, ...
 ```
 
-NOTE: `UnresolvedGenerator` is link:spark-sql-Analyzer.adoc#ResolveFunctions[resolved] to `Generator` by link:spark-sql-Analyzer.adoc#ResolveFunctions[ResolveFunctions] logical evaluation rule.
+NOTE: `UnresolvedGenerator` is spark-sql-Analyzer.md#ResolveFunctions[resolved] to `Generator` by spark-sql-Analyzer.md#ResolveFunctions[ResolveFunctions] logical evaluation rule.
 
 | [[UserDefinedGenerator]] `UserDefinedGenerator`
 | Used exclusively in the deprecated `explode` operator
@@ -79,7 +79,7 @@ NOTE: `UnresolvedGenerator` is link:spark-sql-Analyzer.adoc#ResolveFunctions[res
 [[lateral-view]]
 [NOTE]
 ====
-You can only have one generator per select clause that is enforced by link:spark-sql-Analyzer.adoc#ExtractGenerator[ExtractGenerator] logical evaluation rule, e.g.
+You can only have one generator per select clause that is enforced by spark-sql-Analyzer.md#ExtractGenerator[ExtractGenerator] logical evaluation rule, e.g.
 
 ```
 scala> xys.select(explode($"xs"), explode($"ys")).show
@@ -148,7 +148,7 @@ trait Generator extends Expression {
 | Description
 
 | [[elementSchema]] `elementSchema`
-| link:spark-sql-StructType.adoc[Schema] of the elements to be generated
+| spark-sql-StructType.md[Schema] of the elements to be generated
 
 | [[eval]] `eval`
 |

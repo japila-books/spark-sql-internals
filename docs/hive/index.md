@@ -2,17 +2,17 @@
 
 Spark SQL supports Apache Hive using *Hive data source*. Spark SQL allows executing structured queries on Hive tables, a persistent Hive metastore, support for Hive serdes and user-defined functions.
 
-TIP: Consult link:../demo/demo-connecting-spark-sql-to-hive-metastore.adoc[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)] to learn in a more practical approach.
+TIP: Consult ../demo/demo-connecting-spark-sql-to-hive-metastore.md[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)] to learn in a more practical approach.
 
-In order to use Hive-related features in a Spark SQL application a link:../SparkSession.md[SparkSession] has to be created with link:../SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport].
+In order to use Hive-related features in a Spark SQL application a ../SparkSession.md[SparkSession] has to be created with ../SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport].
 
-Hive Data Source uses custom link:configuration-properties.adoc[Spark SQL configuration properties] (in addition to <<hive-configuration-properties, Hive's>>).
+Hive Data Source uses custom configuration-properties.md[Spark SQL configuration properties] (in addition to <<hive-configuration-properties, Hive's>>).
 
-Hive Data Source uses link:HiveTableRelation.adoc[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be link:RelationConversions.adoc#convert[converted to a HadoopFsRelation] based on link:configuration-properties.adoc#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and link:configuration-properties.adoc#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
+Hive Data Source uses HiveTableRelation.md[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and configuration-properties.md#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
 
-Hive Data Source uses link:HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] (to build a Hive-specific link:../SparkSession.md#sessionState[SessionState]) and link:HiveExternalCatalog.adoc[HiveExternalCatalog].
+Hive Data Source uses HiveSessionStateBuilder.md[HiveSessionStateBuilder] (to build a Hive-specific ../SparkSession.md#sessionState[SessionState]) and HiveExternalCatalog.md[HiveExternalCatalog].
 
-Hive Data Source uses link:HiveClientImpl.adoc[HiveClientImpl] for meta data/DDL operations (using calls to a Hive metastore).
+Hive Data Source uses HiveClientImpl.md[HiveClientImpl] for meta data/DDL operations (using calls to a Hive metastore).
 
 ## Hive Configuration Properties
 

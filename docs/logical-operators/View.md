@@ -3,9 +3,9 @@ title: View
 # View Unary Logical Operator
 
 [[children]]
-`View` is a <<spark-sql-LogicalPlan.adoc#, logical operator>> with a single <<child, child>> logical operator.
+`View` is a <<spark-sql-LogicalPlan.md#, logical operator>> with a single <<child, child>> logical operator.
 
-`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupRelation, find a relation in the catalogs>> (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>> and the table type is `VIEW`).
+`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupRelation, find a relation in the catalogs>> (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> and the table type is `VIEW`).
 
 [source, scala]
 ----
@@ -45,10 +45,10 @@ scala> q.show(numRows = allRowsIncluded)
 ----
 
 [[newInstance]]
-`View` is a <<spark-sql-MultiInstanceRelation.adoc#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan. When requested for a new instance, `View` <<spark-sql-Expression-Attribute.adoc#newInstance, creates new instances>> of the <<output, output attributes>>.
+`View` is a <<spark-sql-MultiInstanceRelation.md#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan. When requested for a new instance, `View` <<spark-sql-Expression-Attribute.md#newInstance, creates new instances>> of the <<output, output attributes>>.
 
 [[resolved]]
-`View` is considered <<spark-sql-LogicalPlan.adoc#resolved, resolved>> only when the <<child, child>> is.
+`View` is considered <<spark-sql-LogicalPlan.md#resolved, resolved>> only when the <<child, child>> is.
 
 [[simpleString]]
 `View` has the following <<catalyst/QueryPlan.md#simpleString, simple description (with state prefix)>>:
@@ -82,18 +82,18 @@ scala> println(analyzedPlan.children.head.simpleString)
 View (`default`.`demo_view`, [col1#33])
 ----
 
-NOTE: `View` is resolved by <<spark-sql-Analyzer-ResolveRelations.adoc#, ResolveRelations>> logical resolution.
+NOTE: `View` is resolved by <<spark-sql-Analyzer-ResolveRelations.md#, ResolveRelations>> logical resolution.
 
-NOTE: <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>> logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
+NOTE: <<spark-sql-Analyzer-AliasViewChild.md#, AliasViewChild>> logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
 
-NOTE: <<spark-sql-Optimizer-EliminateView.adoc#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
+NOTE: <<spark-sql-Optimizer-EliminateView.md#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
 
-NOTE: <<InsertIntoTable.adoc#inserting-into-view-not-allowed, Inserting into a view is not allowed>>.
+NOTE: <<InsertIntoTable.md#inserting-into-view-not-allowed, Inserting into a view is not allowed>>.
 
 === [[creating-instance]] Creating View Instance
 
 `View` takes the following when created:
 
-* [[desc]] <<spark-sql-CatalogTable.adoc#, CatalogTable>>
+* [[desc]] <<spark-sql-CatalogTable.md#, CatalogTable>>
 * [[output]] <<catalyst/QueryPlan.md#output, Output schema attributes>> (as `Seq[Attribute]`)
-* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
+* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>

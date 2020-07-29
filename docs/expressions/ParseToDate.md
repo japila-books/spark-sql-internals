@@ -2,7 +2,7 @@ title: ParseToDate
 
 # ParseToDate Expression
 
-`ParseToDate` is a link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression that <<creating-instance, represents>> the link:spark-sql-functions-datetime.adoc#to_date[to_date] function (in logical query plans).
+`ParseToDate` is a spark-sql-Expression-RuntimeReplaceable.md[RuntimeReplaceable] expression that <<creating-instance, represents>> the spark-sql-functions-datetime.md#to_date[to_date] function (in logical query plans).
 
 ```scala
 // DEMO to_date(e: Column): Column
@@ -24,6 +24,6 @@ As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by [Logical Quer
 
 `ParseToDate` takes the following when created:
 
-* [[left]] Left link:expressions/Expression.md[expression]
-* [[format]] `format` link:expressions/Expression.md[expression]
-* [[child]] Child link:expressions/Expression.md[expression]
+* [[left]] Left expressions/Expression.md[expression]
+* [[format]] `format` expressions/Expression.md[expression]
+* [[child]] Child expressions/Expression.md[expression]

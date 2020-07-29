@@ -2,7 +2,7 @@ title: Literal
 
 # Literal Leaf Expression
 
-`Literal` is a link:expressions/Expression.md#LeafExpression[leaf expression] that is <<creating-instance, created>> to represent a Scala <<value, value>> of a <<dataType, specific type>>.
+`Literal` is a expressions/Expression.md#LeafExpression[leaf expression] that is <<creating-instance, created>> to represent a Scala <<value, value>> of a <<dataType, specific type>>.
 
 `Literal` is <<creating-instance, created>> when...MEFIXME
 
@@ -27,7 +27,7 @@ title: Literal
 create(v: Any, dataType: DataType): Literal
 ----
 
-`create` uses `CatalystTypeConverters` helper object to <<spark-sql-CatalystTypeConverters.adoc#convertToCatalyst, convert>> the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input <<spark-sql-DataType.adoc#, DataType>>).
+`create` uses `CatalystTypeConverters` helper object to <<spark-sql-CatalystTypeConverters.md#convertToCatalyst, convert>> the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input <<spark-sql-DataType.md#, DataType>>).
 
 NOTE: `create` is used when...FIXME
 
@@ -36,7 +36,7 @@ NOTE: `create` is used when...FIXME
 `Literal` takes the following when created:
 
 * [[value]] Scala value (of type `Any`)
-* [[dataType]] <<spark-sql-DataType.adoc#, DataType>>
+* [[dataType]] <<spark-sql-DataType.md#, DataType>>
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 

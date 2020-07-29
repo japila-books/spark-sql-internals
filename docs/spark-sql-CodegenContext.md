@@ -13,9 +13,9 @@ val ctx = new CodegenContext
 
 `CodegenContext` is <<creating-instance, created>> when:
 
-* `WholeStageCodegenExec` physical operator is requested to link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed])
+* `WholeStageCodegenExec` physical operator is requested to spark-sql-SparkPlan-WholeStageCodegenExec.md#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed])
 
-* `CodeGenerator` is requested for a link:spark-sql-CodeGenerator.adoc#newCodeGenContext[new CodegenContext]
+* `CodeGenerator` is requested for a spark-sql-CodeGenerator.md#newCodeGenContext[new CodegenContext]
 
 * `GenerateUnsafeRowJoiner` is requested for a `UnsafeRowJoiner`
 
@@ -62,9 +62,9 @@ New entries are added when `CodegenContext` is requested to <<addClass, addClass
 Used when `CodegenContext` is requested to <<declareAddedFunctions, declareAddedFunctions>>
 
 | `equivalentExpressions`
-a| [[equivalentExpressions]] link:spark-sql-EquivalentExpressions.adoc[EquivalentExpressions]
+a| [[equivalentExpressions]] spark-sql-EquivalentExpressions.md[EquivalentExpressions]
 
-Expressions are link:spark-sql-EquivalentExpressions.adoc#addExprTree[added] and then link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
+Expressions are spark-sql-EquivalentExpressions.md#addExprTree[added] and then spark-sql-EquivalentExpressions.md#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
 | `currentVars`
 | [[currentVars]] The list of generated columns as input of current operator
@@ -82,24 +82,24 @@ Used when...FIXME
 | `references`
 a| [[references]] References that are used to generate classes in the following code generators:
 
-* link:spark-sql-GenerateMutableProjection.adoc#create[GenerateMutableProjection]
+* spark-sql-GenerateMutableProjection.md#create[GenerateMutableProjection]
 
-* link:spark-sql-GenerateOrdering.adoc#create[GenerateOrdering]
+* spark-sql-GenerateOrdering.md#create[GenerateOrdering]
 
-* link:spark-sql-GeneratePredicate.adoc#create[GeneratePredicate]
+* spark-sql-GeneratePredicate.md#create[GeneratePredicate]
 
-* link:spark-sql-GenerateSafeProjection.adoc#create[GenerateSafeProjection]
+* spark-sql-GenerateSafeProjection.md#create[GenerateSafeProjection]
 
-* link:spark-sql-GenerateUnsafeProjection.adoc#create[GenerateUnsafeProjection]
+* spark-sql-GenerateUnsafeProjection.md#create[GenerateUnsafeProjection]
 
-* link:spark-sql-WholeStageCodegenExec.adoc#doExecute[WholeStageCodegenExec]
+* spark-sql-WholeStageCodegenExec.md#doExecute[WholeStageCodegenExec]
 
 * Elements are added when:
 ** `CodegenContext` is requested to <<addReferenceObj, addReferenceObj>>
-** `CodegenFallback` is requested to link:spark-sql-Expression-CodegenFallback.adoc#doGenCode[doGenCode]
+** `CodegenFallback` is requested to spark-sql-Expression-CodegenFallback.md#doGenCode[doGenCode]
 
 | `subExprEliminationExprs`
-| [[subExprEliminationExprs]] `SubExprEliminationStates` by link:expressions/Expression.md[Expression]
+| [[subExprEliminationExprs]] `SubExprEliminationStates` by expressions/Expression.md[Expression]
 
 Used when...FIXME
 
@@ -116,19 +116,19 @@ generateExpressions(
   doSubexpressionElimination: Boolean = false): Seq[ExprCode]
 ----
 
-(only with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
+(only with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
 
-In the end, `generateExpressions` requests every expressions to link:expressions/Expression.md#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
+In the end, `generateExpressions` requests every expressions to expressions/Expression.md#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
 
 [NOTE]
 ====
 `generateExpressions` is used when:
 
-* `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
+* `GenerateMutableProjection` is requested to spark-sql-GenerateMutableProjection.md#create[create a MutableProjection]
 
-* `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#createCode[create an ExprCode for Catalyst expressions]
+* `GenerateUnsafeProjection` is requested to spark-sql-GenerateUnsafeProjection.md#createCode[create an ExprCode for Catalyst expressions]
 
-* `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
+* `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
 ====
 
 === [[addReferenceObj]] `addReferenceObj` Method
@@ -151,7 +151,7 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 
 `subexpressionEliminationForWholeStageCodegen`...FIXME
 
-NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[with grouping keys] or link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithoutKeys[not]).
+NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithoutKeys[not]).
 
 === [[addNewFunction]] Adding Function to Generated Class -- `addNewFunction` Method
 
@@ -174,19 +174,19 @@ NOTE: `addNewFunction` is used when...FIXME
 subexpressionElimination(expressions: Seq[Expression]): Unit
 ----
 
-`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to link:spark-sql-EquivalentExpressions.adoc#addExprTree[addExprTree] for every expression (in the input `expressions`).
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to spark-sql-EquivalentExpressions.md#addExprTree[addExprTree] for every expression (in the input `expressions`).
 
-`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> for the link:spark-sql-EquivalentExpressions.adoc#getAllEquivalentExprs[equivalent sets of expressions] with at least two equivalent expressions (aka _common expressions_).
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> for the spark-sql-EquivalentExpressions.md#getAllEquivalentExprs[equivalent sets of expressions] with at least two equivalent expressions (aka _common expressions_).
 
 For every equivalent expression set, `subexpressionElimination` does the following:
 
-. Takes the first expression and requests it to link:expressions/Expression.md#genCode[generate a Java source code] for the expression tree
+. Takes the first expression and requests it to expressions/Expression.md#genCode[generate a Java source code] for the expression tree
 
 . <<addNewFunction, addNewFunction>> and adds it to <<subexprFunctions, subexprFunctions>>
 
 . Creates a `SubExprEliminationState` and adds it with every common expression in the equivalent expression set to <<subExprEliminationExprs, subExprEliminationExprs>>
 
-NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with link:spark-sql-subexpression-elimination.adoc#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
+NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
 
 === [[addMutableState]] Adding Mutable State -- `addMutableState` Method
 

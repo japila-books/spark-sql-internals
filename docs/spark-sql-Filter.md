@@ -6,23 +6,23 @@ title: Filter
 
 `Filter` is used when:
 
-* (Data Source API V1) `BaseRelation` is requested for link:spark-sql-BaseRelation.adoc#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. link:spark-sql-JDBCRelation.adoc#unhandledFilters[JDBCRelation])
+* (Data Source API V1) `BaseRelation` is requested for spark-sql-BaseRelation.md#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. spark-sql-JDBCRelation.md#unhandledFilters[JDBCRelation])
 
-* (Data Source API V1) `PrunedFilteredScan` is requested for link:spark-sql-PrunedFilteredScan.adoc#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. link:spark-sql-JDBCRelation.adoc#buildScan[JDBCRelation])
+* (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. spark-sql-JDBCRelation.md#buildScan[JDBCRelation])
 
-* `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReader[buildReader] (and hence `FileFormat` implementations, i.e. link:spark-sql-OrcFileFormat.adoc#buildReader[OrcFileFormat], link:spark-sql-CSVFileFormat.adoc#buildReader[CSVFileFormat], link:spark-sql-JsonFileFormat.adoc#buildReader[JsonFileFormat], link:spark-sql-TextFileFormat.adoc#buildReader[TextFileFormat] and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to spark-sql-FileFormat.md#buildReader[buildReader] (and hence `FileFormat` implementations, i.e. spark-sql-OrcFileFormat.md#buildReader[OrcFileFormat], spark-sql-CSVFileFormat.md#buildReader[CSVFileFormat], spark-sql-JsonFileFormat.md#buildReader[JsonFileFormat], spark-sql-TextFileFormat.md#buildReader[TextFileFormat] and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a Data Reader with partition column values appended] (and hence `FileFormat` implementations, i.e. link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[OrcFileFormat], link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[ParquetFileFormat])
+* `FileFormat` is requested to spark-sql-FileFormat.md#buildReaderWithPartitionValues[build a Data Reader with partition column values appended] (and hence `FileFormat` implementations, i.e. spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues[OrcFileFormat], spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[ParquetFileFormat])
 
-* `RowDataSourceScanExec` is link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc#creating-instance[created] (for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)])
+* `RowDataSourceScanExec` is spark-sql-SparkPlan-RowDataSourceScanExec.md#creating-instance[created] (for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 
-* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] logical operators with a link:spark-sql-PrunedFilteredScan.adoc[PrunedFilteredScan] or a link:spark-sql-PrunedScan.adoc[PrunedScan])
+* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] logical operators with a spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] or a spark-sql-PrunedScan.md[PrunedScan])
 
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 
-* `JDBCRDD` is link:spark-sql-JDBCRDD.adoc#filters[created] and requested to link:spark-sql-JDBCRDD.adoc#scanTable[scanTable]
+* `JDBCRDD` is spark-sql-JDBCRDD.md#filters[created] and requested to spark-sql-JDBCRDD.md#scanTable[scanTable]
 
-* (Data Source API V2) `SupportsPushDownFilters` is requested to link:spark-sql-SupportsPushDownFilters.adoc#pushFilters[pushFilters] and for link:spark-sql-SupportsPushDownFilters.adoc#pushedFilters[pushedFilters]
+* (Data Source API V2) `SupportsPushDownFilters` is requested to spark-sql-SupportsPushDownFilters.md#pushFilters[pushFilters] and for spark-sql-SupportsPushDownFilters.md#pushedFilters[pushedFilters]
 
 [[contract]]
 [source, scala]

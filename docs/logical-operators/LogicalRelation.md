@@ -2,7 +2,7 @@ title: LogicalRelation
 
 # LogicalRelation Leaf Logical Operator -- Representing BaseRelations in Logical Plan
 
-`LogicalRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that represents a <<relation, BaseRelation>> in a link:spark-sql-LogicalPlan.adoc[logical query plan].
+`LogicalRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a <<relation, BaseRelation>> in a spark-sql-LogicalPlan.md[logical query plan].
 
 [source, scala]
 ----
@@ -17,17 +17,17 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 
 `LogicalRelation` is <<creating-instance, created>> when:
 
-* `DataFrameReader` [loads data from a data source that supports multiple paths](../DataFrameReader.md#load) (through link:SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
-* `DataFrameReader` is requested to load data from an external table using [JDBC](../DataFrameReader.md#jdbc) (through link:SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
+* `DataFrameReader` [loads data from a data source that supports multiple paths](../DataFrameReader.md#load) (through SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
+* `DataFrameReader` is requested to load data from an external table using [JDBC](../DataFrameReader.md#jdbc) (through SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
-* `FindDataSourceTable` logical evaluation rule is link:spark-sql-Analyzer-FindDataSourceTable.adoc#apply[executed]
-* link:hive/RelationConversions.adoc[RelationConversions] logical evaluation rule is executed
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
+* `FindDataSourceTable` logical evaluation rule is spark-sql-Analyzer-FindDataSourceTable.md#apply[executed]
+* hive/RelationConversions.md[RelationConversions] logical evaluation rule is executed
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 
 [[simpleString]]
-The link:catalyst/QueryPlan.md#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
+The catalyst/QueryPlan.md#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
 
 [source, scala]
 ----
@@ -41,9 +41,9 @@ Relation[value#2] text
 
 `LogicalRelation` takes the following when created:
 
-* [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
+* [[relation]] spark-sql-BaseRelation.md[BaseRelation]
 * [[output]] Output schema `AttributeReferences`
-* [[catalogTable]] Optional link:spark-sql-CatalogTable.adoc[CatalogTable]
+* [[catalogTable]] Optional spark-sql-CatalogTable.md[CatalogTable]
 
 === [[apply]] `apply` Factory Utility
 
@@ -57,19 +57,19 @@ apply(
   table: CatalogTable): LogicalRelation
 ----
 
-`apply` <<creating-instance, creates>> a `LogicalRelation` for the input link:spark-sql-BaseRelation.adoc[BaseRelation] (and link:spark-sql-CatalogTable.adoc[CatalogTable] or optional `isStreaming` flag).
+`apply` <<creating-instance, creates>> a `LogicalRelation` for the input spark-sql-BaseRelation.md[BaseRelation] (and spark-sql-CatalogTable.md[CatalogTable] or optional `isStreaming` flag).
 
 [NOTE]
 ====
 `apply` is used when:
 
-* `SparkSession` is requested for a link:SparkSession.md#baseRelationToDataFrame[DataFrame for a BaseRelation]
+* `SparkSession` is requested for a SparkSession.md#baseRelationToDataFrame[DataFrame for a BaseRelation]
 
-* link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] command is executed
+* spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] command is executed
 
-* link:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] and link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical evaluation rules are executed
+* spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] and spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical evaluation rules are executed
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 ====
 
 === [[refresh]] `refresh` Method
@@ -79,8 +79,8 @@ apply(
 refresh(): Unit
 ----
 
-NOTE: `refresh` is part of link:spark-sql-LogicalPlan.adoc#refresh[LogicalPlan Contract] to refresh itself.
+NOTE: `refresh` is part of spark-sql-LogicalPlan.md#refresh[LogicalPlan Contract] to refresh itself.
 
-`refresh` requests the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#location[FileIndex] of a `HadoopFsRelation` <<relation, relation>> to refresh.
+`refresh` requests the spark-sql-BaseRelation-HadoopFsRelation.md#location[FileIndex] of a `HadoopFsRelation` <<relation, relation>> to refresh.
 
-NOTE: `refresh` does the work for link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] relations only.
+NOTE: `refresh` does the work for spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] relations only.

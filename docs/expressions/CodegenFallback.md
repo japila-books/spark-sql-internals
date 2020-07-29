@@ -4,7 +4,7 @@ title: CodegenFallback
 
 `CodegenFallback` is the <<contract, contract>> of <<implementations, Catalyst expressions>> that do not support a Java code generation and want to <<doGenCode, fall back to interpreted mode>> (aka _fallback mode_).
 
-`CodegenFallback` is used when `CollapseCodegenStages` physical optimization is requested to <<spark-sql-CollapseCodegenStages.adoc#apply, execute>> (and <<spark-sql-CollapseCodegenStages.adoc#supportCodegen-Expression, enforce whole-stage codegen requirements for Catalyst expressions>>).
+`CodegenFallback` is used when `CollapseCodegenStages` physical optimization is requested to <<spark-sql-CollapseCodegenStages.md#apply, execute>> (and <<spark-sql-CollapseCodegenStages.md#supportCodegen-Expression, enforce whole-stage codegen requirements for Catalyst expressions>>).
 
 [[contract]]
 [source, scala]
@@ -32,7 +32,7 @@ trait CodegenFallback extends Expression {
 | `Cube`
 | [[Cube]]
 
-| <<spark-sql-Expression-JsonToStructs.adoc#, JsonToStructs>>
+| <<spark-sql-Expression-JsonToStructs.md#, JsonToStructs>>
 | [[JsonToStructs]]
 
 | `Rollup`
@@ -73,13 +73,13 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
-`doGenCode` requests the input `CodegenContext` to add itself to the <<spark-sql-CodegenContext.adoc#references, references>>.
+`doGenCode` requests the input `CodegenContext` to add itself to the <<spark-sql-CodegenContext.md#references, references>>.
 
-`doGenCode` [walks down the expression tree](../catalyst/TreeNode.md#foreach) to find <<spark-sql-Expression-Nondeterministic.adoc#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
+`doGenCode` [walks down the expression tree](../catalyst/TreeNode.md#foreach) to find <<spark-sql-Expression-Nondeterministic.md#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
 
-. Requests the input `CodegenContext` to add it to the <<spark-sql-CodegenContext.adoc#references, references>>
+. Requests the input `CodegenContext` to add it to the <<spark-sql-CodegenContext.md#references, references>>
 
-. Requests the input `CodegenContext` to <<spark-sql-CodegenContext.adoc#addPartitionInitializationStatement, addPartitionInitializationStatement>> that is a Java code block as follows:
+. Requests the input `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> that is a Java code block as follows:
 +
 [source, scala]
 ----

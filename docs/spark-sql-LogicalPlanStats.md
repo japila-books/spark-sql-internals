@@ -2,14 +2,14 @@ title: LogicalPlanStats
 
 # LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator
 
-`LogicalPlanStats` adds statistics support to link:spark-sql-LogicalPlan.adoc[logical operators] and is used for link:spark-sql-SparkPlanner.adoc[query planning] (with or without link:spark-sql-cost-based-optimization.adoc[cost-based optimization], e.g. link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
+`LogicalPlanStats` adds statistics support to spark-sql-LogicalPlan.md[logical operators] and is used for spark-sql-SparkPlanner.md[query planning] (with or without spark-sql-cost-based-optimization.md[cost-based optimization], e.g. spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
 
 [[statsCache]]
 With `LogicalPlanStats` every logical operator has <<stats, statistics>> that are computed only once when requested and are cached until <<invalidateStatsCache, invalidated>> and requested again.
 
-Depending on link:spark-sql-cost-based-optimization.adoc[cost-based optimization] being enabled or not, <<stats, stats>> computes the link:spark-sql-Statistics.adoc[statistics] with FIXME or FIXME, respectively.
+Depending on spark-sql-cost-based-optimization.md[cost-based optimization] being enabled or not, <<stats, stats>> computes the spark-sql-Statistics.md[statistics] with FIXME or FIXME, respectively.
 
-NOTE: Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+NOTE: Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
 Use `EXPLAIN COST` SQL command to explain a query with the <<stats, statistics>>.
 
@@ -24,7 +24,7 @@ Execute ShowTablesCommand
    +- ShowTablesCommand false
 ----
 
-You can also access the statistics of a logical plan directly using <<stats, stats>> method or indirectly requesting `QueryExecution` for link:spark-sql-QueryExecution.adoc#stringWithStats[text representation with statistics].
+You can also access the statistics of a logical plan directly using <<stats, stats>> method or indirectly requesting `QueryExecution` for spark-sql-QueryExecution.md#stringWithStats[text representation with statistics].
 
 [source, scala]
 ----
@@ -125,7 +125,7 @@ scala> println(namesTableStats)
 Statistics(sizeInBytes=64.0 B, rowCount=2, hints=none)
 ----
 
-NOTE: The <<stats, statistics>> of a Dataset are unaffected by link:spark-sql-CacheManager.adoc#cacheQuery[caching] it.
+NOTE: The <<stats, statistics>> of a Dataset are unaffected by spark-sql-CacheManager.md#cacheQuery[caching] it.
 
 NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of its definition. It is a very useful feature of Scala that restricts the set of classes that the trait could be used with (as well as makes the target subtype known at compile time).
 
@@ -136,11 +136,11 @@ NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of it
 stats: Statistics
 ----
 
-`stats` gets the link:spark-sql-Statistics.adoc[statistics] from <<statsCache, statsCache>> if already computed. Otherwise, `stats` branches off per whether link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled] or not.
+`stats` gets the spark-sql-Statistics.md[statistics] from <<statsCache, statsCache>> if already computed. Otherwise, `stats` branches off per whether spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization is enabled] or not.
 
 [NOTE]
 ====
-Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
 ---
 
@@ -156,10 +156,10 @@ false
 ====
 
 [[stats-cbo-disabled]]
-With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization disabled] `stats` requests `SizeInBytesOnlyStatsPlanVisitor` to compute the statistics.
+With spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization disabled] `stats` requests `SizeInBytesOnlyStatsPlanVisitor` to compute the statistics.
 
 [[stats-cbo-enabled]]
-With link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization enabled] `stats` requests `BasicStatsPlanVisitor` to compute the statistics.
+With spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization enabled] `stats` requests `BasicStatsPlanVisitor` to compute the statistics.
 
 In the end, `statsCache` caches the statistics for later use.
 
@@ -171,15 +171,15 @@ In the end, `statsCache` caches the statistics for later use.
    * [that is much smaller (3X) than the other plan](execution-planning-strategies/JoinSelection.md#muchSmaller) (for `ShuffledHashJoinExec` physical operator)
    * ...
 
-* `QueryExecution` is requested for link:spark-sql-QueryExecution.adoc#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
+* `QueryExecution` is requested for spark-sql-QueryExecution.md#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
 
-* `CacheManager` is requested to link:spark-sql-CacheManager.adoc#cacheQuery[cache a Dataset] or link:spark-sql-CacheManager.adoc#recacheByCondition[recacheByCondition]
+* `CacheManager` is requested to spark-sql-CacheManager.md#cacheQuery[cache a Dataset] or spark-sql-CacheManager.md#recacheByCondition[recacheByCondition]
 
 * `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 
 * `StarSchemaDetection`
 
-* `CostBasedJoinReorder` is link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#apply[executed] (and does link:spark-sql-Optimizer-CostBasedJoinReorder.adoc#reorder[reordering])
+* `CostBasedJoinReorder` is spark-sql-Optimizer-CostBasedJoinReorder.md#apply[executed] (and does spark-sql-Optimizer-CostBasedJoinReorder.md#reorder[reordering])
 
 === [[invalidateStatsCache]] Invalidating Statistics Cache (of All Operators in Logical Plan) -- `invalidateStatsCache` Method
 

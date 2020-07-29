@@ -2,13 +2,13 @@ title: UnresolvedStar
 
 # UnresolvedStar Expression
 
-`UnresolvedStar` is a link:spark-sql-Expression-Star.adoc[Star] expression that represents a star (i.e. all) expression in a logical query plan.
+`UnresolvedStar` is a spark-sql-Expression-Star.md[Star] expression that represents a star (i.e. all) expression in a logical query plan.
 
 `UnresolvedStar` is <<creating-instance, created>> when:
 
-* `Column` is link:spark-sql-Column.adoc#star[created] with `*`
+* `Column` is spark-sql-Column.md#star[created] with `*`
 
-* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitStar[visitStar]
+* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitStar[visitStar]
 
 [source, scala]
 ----
@@ -28,12 +28,12 @@ scala> println(namedExprs.head.numberedTreeString)
 ----
 
 [[resolved]]
-`UnresolvedStar` can never be link:expressions/Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences] logical resolution rule is executed).
+`UnresolvedStar` can never be expressions/Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when spark-sql-Analyzer-ResolveReferences.md[ResolveReferences] logical resolution rule is executed).
 
-NOTE: `UnresolvedStar` can only be used in link:spark-sql-Expression-Star.adoc#expand[Project, Aggregate or ScriptTransformation logical operators].
+NOTE: `UnresolvedStar` can only be used in spark-sql-Expression-Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it link:expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
 
 ```
 Cannot evaluate expression: [this]
@@ -55,7 +55,7 @@ ab: org.apache.spark.sql.catalyst.analysis.UnresolvedStar = List(a, b).*
 
 [TIP]
 ====
-Use `star` operator from Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#expressions[expressions] to create an `UnresolvedStar`.
+Use `star` operator from Catalyst DSL's spark-sql-catalyst-dsl.md#expressions[expressions] to create an `UnresolvedStar`.
 
 [source, scala]
 ----
@@ -77,7 +77,7 @@ You could also use `$"*"` or `'*` to create an `UnresolvedStar`, but that requir
 
 [NOTE]
 ====
-`AstBuilder` link:spark-sql-AstBuilder.adoc#visitFunctionCall[replaces] `count(*)` (with no `DISTINCT` keyword) to `count(1)`.
+`AstBuilder` spark-sql-AstBuilder.md#visitFunctionCall[replaces] `count(*)` (with no `DISTINCT` keyword) to `count(1)`.
 
 ```
 val q = sql("SELECT COUNT(*) FROM RANGE(1,2,3)")
@@ -99,17 +99,17 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 expand(input: LogicalPlan, resolver: Resolver): Seq[NamedExpression]
 ----
 
-NOTE: `expand` is part of link:spark-sql-Expression-Star.adoc#expand[Star Contract] to...FIXME.
+NOTE: `expand` is part of spark-sql-Expression-Star.md#expand[Star Contract] to...FIXME.
 
 `expand` first expands to named expressions per <<target, target>>:
 
-* For unspecified <<target, target>>, `expand` gives the link:catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
+* For unspecified <<target, target>>, `expand` gives the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
 
-* For <<target, target>> with one element, `expand` gives the table (attribute) in the link:catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (using link:spark-sql-Expression-NamedExpression.adoc#qualifier[qualifiers]) if available
+* For <<target, target>> with one element, `expand` gives the table (attribute) in the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (using spark-sql-Expression-NamedExpression.md#qualifier[qualifiers]) if available
 
-With no result earlier, `expand` then requests the `input` logical query plan to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>> name parts to a named expression.
+With no result earlier, `expand` then requests the `input` logical query plan to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>> name parts to a named expression.
 
-For a named expression of link:spark-sql-StructType.adoc[StructType] data type, `expand` creates an link:spark-sql-Expression-Alias.adoc#creating-instance[Alias] expression with a link:spark-sql-Expression-GetStructField.adoc#creating-instance[GetStructField] unary expression (with the resolved named expression and the field index).
+For a named expression of spark-sql-StructType.md[StructType] data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a spark-sql-Expression-GetStructField.md#creating-instance[GetStructField] unary expression (with the resolved named expression and the field index).
 
 [source, scala]
 ----
@@ -133,7 +133,7 @@ scala> getStructFields.foreach(println)
 
 `expand` reports a `AnalysisException` when:
 
-* The link:expressions/Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to link:spark-sql-LogicalPlan.adoc#resolve[resolve] the <<target, target>>) is not a link:spark-sql-StructType.adoc[StructType].
+* The expressions/Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>>) is not a spark-sql-StructType.md[StructType].
 +
 ```
 Can only star expand struct data types. Attribute: `[target]`

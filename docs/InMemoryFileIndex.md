@@ -3,15 +3,15 @@
 :hadoop-version: 2.10.0
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`InMemoryFileIndex` is a link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex] for a partition schema and file list.
+`InMemoryFileIndex` is a PartitioningAwareFileIndex.md[PartitioningAwareFileIndex] for a partition schema and file list.
 
 `InMemoryFileIndex` is <<creating-instance, created>> when:
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#inferIfNeeded[inferIfNeeded] (when requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation])
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#inferIfNeeded[inferIfNeeded] (when requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation])
 
-* `CatalogFileIndex` is requested for the link:CatalogFileIndex.adoc#filterPartitions[partitions by the given predicate expressions] for a non-partitioned Hive table
+* `CatalogFileIndex` is requested for the CatalogFileIndex.md#filterPartitions[partitions by the given predicate expressions] for a non-partitioned Hive table
 
-* `DataSource` is requested to link:spark-sql-DataSource.adoc#createInMemoryFileIndex[createInMemoryFileIndex]
+* `DataSource` is requested to spark-sql-DataSource.md#createInMemoryFileIndex[createInMemoryFileIndex]
 
 * Spark Structured Streaming's `FileStreamSource` is used
 
@@ -19,10 +19,10 @@
 
 `InMemoryFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:SparkSession.md[SparkSession]
+* [[sparkSession]] SparkSession.md[SparkSession]
 * [[rootPathsSpecified]] Root paths (as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths])
 * [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined link:spark-sql-StructType.adoc[schema]
+* [[userSpecifiedSchema]] Optional user-defined spark-sql-StructType.md[schema]
 * [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
 
 `InMemoryFileIndex` initializes the <<internal-properties, internal properties>>.
@@ -37,6 +37,6 @@
 | rootPaths
 a| [[rootPaths]] The <<rootPathsSpecified, root paths>> with no `_spark_metadata` streaming metadata directories (of Spark Structured Streaming's `FileStreamSink` when reading the output of a streaming query)
 
-NOTE: `rootPaths` is part of the link:FileIndex.adoc#rootPaths[FileIndex] contract.
+NOTE: `rootPaths` is part of the FileIndex.md#rootPaths[FileIndex] contract.
 
 |===

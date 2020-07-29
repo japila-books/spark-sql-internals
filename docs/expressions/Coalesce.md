@@ -2,11 +2,11 @@ title: Coalesce
 
 # Coalesce Expression
 
-`Coalesce` is a link:expressions/Expression.md[Catalyst expression] to represent link:spark-sql-functions.adoc#coalesce[coalesce] standard function or SQL's link:spark-sql-FunctionRegistry.adoc#expressions[coalesce] function in structured queries.
+`Coalesce` is a expressions/Expression.md[Catalyst expression] to represent spark-sql-functions.md#coalesce[coalesce] standard function or SQL's spark-sql-FunctionRegistry.md#expressions[coalesce] function in structured queries.
 
 [[creating-instance]]
 [[children]]
-When created, `Coalesce` takes link:expressions/Expression.md[Catalyst expressions] (as the children).
+When created, `Coalesce` takes expressions/Expression.md[Catalyst expressions] (as the children).
 
 [source, scala]
 ----
@@ -28,7 +28,7 @@ scala> println(coalesceExpr.numberedTreeString)
 
 CAUTION: FIXME Describe FunctionArgumentConversion and Coalesce
 
-Spark Optimizer uses link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagation] logical optimization to remove `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all <<children, children>> expressions are `null` literals.
+Spark Optimizer uses spark-sql-Optimizer-NullPropagation.md[NullPropagation] logical optimization to remove `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all <<children, children>> expressions are `null` literals.
 
 [source, scala]
 ----
@@ -40,13 +40,13 @@ Spark Optimizer uses link:spark-sql-Optimizer-NullPropagation.adoc[NullPropagati
 
 `Coalesce` is also <<creating-instance, created>> when:
 
-* `Analyzer` is requested to link:spark-sql-Analyzer.adoc#commonNaturalJoinProcessing[commonNaturalJoinProcessing] for `FullOuter` join type
+* `Analyzer` is requested to spark-sql-Analyzer.md#commonNaturalJoinProcessing[commonNaturalJoinProcessing] for `FullOuter` join type
 
 * `RewriteDistinctAggregates` logical optimization is requested to `rewrite`
 
-* `ExtractEquiJoinKeys` Scala extractor is requested to link:spark-sql-ExtractEquiJoinKeys.adoc#unapply[destructure a logical plan]
+* `ExtractEquiJoinKeys` Scala extractor is requested to spark-sql-ExtractEquiJoinKeys.md#unapply[destructure a logical plan]
 
-* `ColumnStat` is requested to link:spark-sql-ColumnStat.adoc#statExprs[statExprs]
+* `ColumnStat` is requested to spark-sql-ColumnStat.md#statExprs[statExprs]
 
 * `IfNull` expression is created
 

@@ -2,13 +2,13 @@ title: SubqueryExec
 
 # SubqueryExec Unary Physical Operator
 
-`SubqueryExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
+`SubqueryExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
 
 `SubqueryExec` uses <<relationFuture, relationFuture>> that is lazily and executed only once when `SubqueryExec`  is first requested to <<doPrepare, prepare execution>> that simply triggers execution of the <<child, child>> operator asynchronously (i.e. on a separate thread) and to <<executeCollect, collect the result>> soon after (that makes `SubqueryExec` waiting indefinitely for the child operator to be finished).
 
 CAUTION: FIXME When is `doPrepare` executed?
 
-`SubqueryExec` is <<creating-instance, created>> exclusively when `PlanSubqueries` preparation rule is link:spark-sql-PlanSubqueries.adoc#apply[executed] (and transforms `ScalarSubquery` expressions in a physical plan).
+`SubqueryExec` is <<creating-instance, created>> exclusively when `PlanSubqueries` preparation rule is spark-sql-PlanSubqueries.md#apply[executed] (and transforms `ScalarSubquery` expressions in a physical plan).
 
 [source, scala]
 ----
@@ -44,7 +44,7 @@ scala> q.explain
 .SubqueryExec in web UI (Details for Query)
 image::images/spark-sql-SubqueryExec-webui-details-for-query.png[align="center"]
 
-NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] physical operator.
+NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator.
 
 === [[doPrepare]] Executing Child Operator Asynchronously -- `doPrepare` Method
 
@@ -53,7 +53,7 @@ NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of link:spark-s
 doPrepare(): Unit
 ----
 
-NOTE: `doPrepare` is part of link:SparkPlan.md#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
 
 `doPrepare` simply triggers initialization of the internal lazily-once-initialized <<relationFuture, relationFuture>> asynchronous computation.
 
@@ -64,13 +64,13 @@ NOTE: `doPrepare` is part of link:SparkPlan.md#doPrepare[SparkPlan Contract] to 
 relationFuture: Future[Array[InternalRow]]
 ----
 
-When "materialized" (aka _executed_), `relationFuture` spawns a new thread of execution that requests `SQLExecution` to execute an action (with the current link:spark-sql-SQLExecution.adoc#EXECUTION_ID_KEY[execution id]) on *subquery* <<executionContext, daemon cached thread pool>>.
+When "materialized" (aka _executed_), `relationFuture` spawns a new thread of execution that requests `SQLExecution` to execute an action (with the current spark-sql-SQLExecution.md#EXECUTION_ID_KEY[execution id]) on *subquery* <<executionContext, daemon cached thread pool>>.
 
 NOTE: `relationFuture` uses Scala's https://docs.scala-lang.org/overviews/core/futures.html[scala.concurrent.Future] that spawns a new thread of execution once instantiated.
 
-The action tracks execution of the <<child, child physical operator>> to link:SparkPlan.md#executeCollect[executeCollect] and collects <<collectTime, collectTime>> and <<dataSize, dataSize>> SQL metrics.
+The action tracks execution of the <<child, child physical operator>> to SparkPlan.md#executeCollect[executeCollect] and collects <<collectTime, collectTime>> and <<dataSize, dataSize>> SQL metrics.
 
-In the end, `relationFuture` link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posts metric updates] and returns the internal rows.
+In the end, `relationFuture` spark-sql-SQLMetric.md#postDriverMetricUpdates[posts metric updates] and returns the internal rows.
 
 [[executionContext]]
 NOTE: `relationFuture` is executed on a separate thread from a custom https://www.scala-lang.org/api/2.11.8/index.html#scala.concurrent.ExecutionContext[scala.concurrent.ExecutionContext] (built from a cached https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html[java.util.concurrent.ThreadPoolExecutor] with the prefix *subquery* and up to 16 threads).
@@ -82,7 +82,7 @@ NOTE: `relationFuture` is used when `SubqueryExec` is requested to <<doPrepare, 
 `SubqueryExec` takes the following when created:
 
 * [[name]] Name of the subquery
-* [[child]] Child link:SparkPlan.md[physical plan]
+* [[child]] Child SparkPlan.md[physical plan]
 
 === [[executeCollect]] Collecting Internal Rows of Executing SubqueryExec Operator -- `executeCollect` Method
 
@@ -91,6 +91,6 @@ NOTE: `relationFuture` is used when `SubqueryExec` is requested to <<doPrepare, 
 executeCollect(): Array[InternalRow]
 ----
 
-NOTE: `executeCollect` is part of link:SparkPlan.md#executeCollect[SparkPlan Contract] to execute a physical operator and collect the results as collection of internal rows.
+NOTE: `executeCollect` is part of SparkPlan.md#executeCollect[SparkPlan Contract] to execute a physical operator and collect the results as collection of internal rows.
 
 `executeCollect` waits till <<relationFuture, relationFuture>> gives a result (as a `Array[InternalRow]`).

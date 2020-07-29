@@ -1,6 +1,6 @@
 # Adaptive Query Execution
 
-*Adaptive Query Execution* (aka *Adaptive Query Optimisation* or *Adaptive Optimisation*) is an optimisation of a [query execution plan](physical-operators/SparkPlan.md) that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses for allowing alternative execution plans at runtime that would be optimized better based on runtime statistics.
+*Adaptive Query Execution* (aka *Adaptive Query Optimisation* or *Adaptive Optimisation*) is an optimisation of a [query execution plan](physical-operators/SparkPlan.md) that spark-sql-SparkPlanner.md[Spark Planner] uses for allowing alternative execution plans at runtime that would be optimized better based on runtime statistics.
 
 Quoting the description of a <<i-want-more, talk>> by the authors of Adaptive Query Execution:
 
@@ -12,13 +12,13 @@ NOTE: Adaptive query execution is not supported for streaming Datasets and is di
 
 === [[spark.sql.adaptive.enabled]] spark.sql.adaptive.enabled Configuration Property
 
-link:spark-sql-properties.adoc#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property turns adaptive query execution on.
+link:spark-sql-properties.md#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property turns adaptive query execution on.
 
 Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
 
 === [[EnsureRequirements]] EnsureRequirements
 
-link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] is...FIXME
+link:spark-sql-EnsureRequirements.md[EnsureRequirements] is...FIXME
 
 === [[i-want-more]] Further Reading and Watching
 

@@ -2,7 +2,7 @@ title: CreateNamedStruct
 
 # CreateNamedStruct Expression
 
-`CreateNamedStruct` is a <<spark-sql-Expression-CreateNamedStructLike.adoc#, CreateNamedStructLike>> expression that...FIXME
+`CreateNamedStruct` is a <<spark-sql-Expression-CreateNamedStructLike.md#, CreateNamedStructLike>> expression that...FIXME
 
 [[prettyName]]
 `CreateNamedStruct` uses *named_struct* for the <<expressions/Expression.md#prettyName, user-facing name>>.
@@ -16,7 +16,7 @@ scala> println(s)
 named_struct(*)
 ----
 
-`CreateNamedStruct` is registered in <<spark-sql-FunctionRegistry.adoc#expressions, FunctionRegistry>> under the name of `named_struct` SQL function.
+`CreateNamedStruct` is registered in <<spark-sql-FunctionRegistry.md#expressions, FunctionRegistry>> under the name of `named_struct` SQL function.
 
 [source, scala]
 ----
@@ -40,11 +40,11 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 `CreateNamedStruct` is <<creating-instance, created>> when:
 
-* <<spark-sql-ScalaReflection.adoc#serializerFor, ScalaReflection>>, <<spark-sql-RowEncoder.adoc#serializerFor, RowEncoder>> and `JavaTypeInference` are requested for a serializer of a type
+* <<spark-sql-ScalaReflection.md#serializerFor, ScalaReflection>>, <<spark-sql-RowEncoder.md#serializerFor, RowEncoder>> and `JavaTypeInference` are requested for a serializer of a type
 
-* <<spark-sql-Analyzer-TimeWindowing.adoc#apply, TimeWindowing>> and <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#apply, ResolveCreateNamedStruct>> logical resolution rules are executed
+* <<spark-sql-Analyzer-TimeWindowing.md#apply, TimeWindowing>> and <<spark-sql-Analyzer-ResolveCreateNamedStruct.md#apply, ResolveCreateNamedStruct>> logical resolution rules are executed
 
-* `CreateStruct` is requested to <<spark-sql-CreateStruct.adoc#apply, create a CreateNamedStruct expression>>
+* `CreateStruct` is requested to <<spark-sql-CreateStruct.md#apply, create a CreateNamedStruct expression>>
 
 [[children]]
 [[creating-instance]]
@@ -86,7 +86,7 @@ values_0 = null;
 
 [TIP]
 ====
-Use `namedStruct` operator from Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#expressions[expressions] to create a `CreateNamedStruct` expression.
+Use `namedStruct` operator from Catalyst DSL's spark-sql-catalyst-dsl.md#expressions[expressions] to create a `CreateNamedStruct` expression.
 
 [source, scala]
 ----

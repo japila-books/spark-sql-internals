@@ -23,15 +23,15 @@ createRelation(
   data: DataFrame): BaseRelation
 ----
 
-Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> that represents the rows of a structured query (a DataFrame) saved to an external data source (per <<spark-sql-DataFrameWriter.adoc#SaveMode, SaveMode>>)
+Creates a <<spark-sql-BaseRelation.md#, BaseRelation>> that represents the rows of a structured query (a DataFrame) saved to an external data source (per <<spark-sql-DataFrameWriter.md#SaveMode, SaveMode>>)
 
 The save mode specifies what should happen when the target relation (destination) already exists.
 
 Used when:
 
-* `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, write data to a data source per save mode followed by reading the rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc#, CreateDataSourceTableAsSelectCommand>> logical command is executed)
+* `DataSource` is requested to <<spark-sql-DataSource.md#writeAndRead, write data to a data source per save mode followed by reading the rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> logical command is executed)
 
-* <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#, SaveIntoDataSourceCommand>> logical command is executed
+* <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#, SaveIntoDataSourceCommand>> logical command is executed
 
 |===
 
@@ -42,13 +42,13 @@ Used when:
 | CreatableRelationProvider
 | Description
 
-| <<spark-sql-ConsoleSinkProvider.adoc#, ConsoleSinkProvider>>
-| [[ConsoleSinkProvider]] Data source provider for <<spark-sql-console.adoc#, Console data source>>
+| <<spark-sql-ConsoleSinkProvider.md#, ConsoleSinkProvider>>
+| [[ConsoleSinkProvider]] Data source provider for <<spark-sql-console.md#, Console data source>>
 
-| <<spark-sql-JdbcRelationProvider.adoc#, JdbcRelationProvider>>
-| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.adoc#, JDBC data source>>
+| <<spark-sql-JdbcRelationProvider.md#, JdbcRelationProvider>>
+| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
-| <<spark-sql-KafkaSourceProvider.adoc#, KafkaSourceProvider>>
-| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.adoc#, Kafka data source>>
+| <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
+| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.md#, Kafka data source>>
 
 |===

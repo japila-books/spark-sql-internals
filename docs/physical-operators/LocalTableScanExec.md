@@ -4,7 +4,7 @@ title: LocalTableScanExec
 
 `LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) and `producedAttributes` being `outputSet`.
 
-`LocalTableScanExec` is <<creating-instance, created>> when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation] and Spark Structured Streaming's `MemoryPlan` logical operators.
+`LocalTableScanExec` is <<creating-instance, created>> when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves spark-sql-LogicalPlan-LocalRelation.md[LocalRelation] and Spark Structured Streaming's `MemoryPlan` logical operators.
 
 TIP: Read on `MemoryPlan` logical operator in the https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-MemoryPlan.html[Spark Structured Streaming] gitbook.
 
@@ -117,7 +117,7 @@ image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center
 | Description
 
 | [[unsafeRows]] `unsafeRows`
-| link:spark-sql-InternalRow.adoc[Internal binary rows] for...FIXME
+| spark-sql-InternalRow.md[Internal binary rows] for...FIXME
 
 | [[numParallelism]] `numParallelism`
 |
@@ -133,7 +133,7 @@ image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -141,5 +141,5 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 
 `LocalTableScanExec` takes the following when created:
 
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[rows]] link:spark-sql-InternalRow.adoc[Internal binary rows]
+* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
+* [[rows]] spark-sql-InternalRow.md[Internal binary rows]

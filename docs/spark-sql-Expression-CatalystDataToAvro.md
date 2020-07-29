@@ -2,7 +2,7 @@ title: CatalystDataToAvro
 
 # CatalystDataToAvro Unary Expression
 
-`CatalystDataToAvro` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that represents <<spark-sql-avro.adoc#to_avro, to_avro>> function in a structured query.
+`CatalystDataToAvro` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents <<spark-sql-avro.md#to_avro, to_avro>> function in a structured query.
 
 [[creating-instance]]
 [[child]]
@@ -81,9 +81,9 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (`ExprCode`) for code-generated expression evaluation.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addReferenceObj, generate code to reference this CatalystDataToAvro instance>>.
+`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addReferenceObj, generate code to reference this CatalystDataToAvro instance>>.
 
-In the end, `doGenCode` <<spark-sql-Expression-UnaryExpression.adoc#defineCodeGen, defineCodeGen>> with the function `f` that uses <<nullSafeEval, nullSafeEval>>.
+In the end, `doGenCode` <<spark-sql-Expression-UnaryExpression.md#defineCodeGen, defineCodeGen>> with the function `f` that uses <<nullSafeEval, nullSafeEval>>.
 
 === [[nullSafeEval]] `nullSafeEval` Method
 
@@ -92,6 +92,6 @@ In the end, `doGenCode` <<spark-sql-Expression-UnaryExpression.adoc#defineCodeGe
 nullSafeEval(input: Any): Any
 ----
 
-NOTE: `nullSafeEval` is part of the <<spark-sql-Expression-UnaryExpression.adoc#nullSafeEval, UnaryExpression Contract>> to...FIXME.
+NOTE: `nullSafeEval` is part of the <<spark-sql-Expression-UnaryExpression.md#nullSafeEval, UnaryExpression Contract>> to...FIXME.
 
 `nullSafeEval`...FIXME

@@ -16,20 +16,20 @@ scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState
 ----
 
-`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<SparkSession.md#instantiateSessionState, instantiateSessionState>> (when requested for the <<SparkSession.md#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
+`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<SparkSession.md#instantiateSessionState, instantiateSessionState>> (when requested for the <<SparkSession.md#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
 
 .Creating SessionState
 image::images/spark-sql-SessionState.png[align="center"]
 
 [NOTE]
 ====
-When requested for the <<SparkSession.md#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
+When requested for the <<SparkSession.md#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
 
 There are two `BaseSessionStateBuilders` available:
 
-* (default) <<spark-sql-SessionStateBuilder.adoc#, SessionStateBuilder>> for `in-memory` catalog
+* (default) <<spark-sql-SessionStateBuilder.md#, SessionStateBuilder>> for `in-memory` catalog
 
-* link:hive/HiveSessionStateBuilder.adoc[HiveSessionStateBuilder] for `hive` catalog
+* hive/HiveSessionStateBuilder.md[HiveSessionStateBuilder] for `hive` catalog
 
 `hive` catalog is set when the `SparkSession` was <<SparkSession-Builder.md#getOrCreate, created>> with the Hive support enabled (using <<SparkSession-Builder.md#enableHiveSupport, Builder.enableHiveSupport>>).
 ====
@@ -43,8 +43,8 @@ There are two `BaseSessionStateBuilders` available:
 | Description
 
 | analyzer
-| link:spark-sql-Analyzer.adoc[Analyzer]
-| [[analyzer]] <<spark-sql-Analyzer.adoc#, Spark Analyzer>>
+| spark-sql-Analyzer.md[Analyzer]
+| [[analyzer]] <<spark-sql-Analyzer.md#, Spark Analyzer>>
 
 Initialized lazily (only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
 
@@ -57,19 +57,19 @@ Used when...FIXME
 Used when...FIXME
 
 | experimentalMethods
-| link:spark-sql-ExperimentalMethods.adoc[ExperimentalMethods]
+| spark-sql-ExperimentalMethods.md[ExperimentalMethods]
 | [[experimentalMethods]] FIXME
 
 Used when...FIXME
 
 | functionRegistry
-| link:spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+| spark-sql-FunctionRegistry.md[FunctionRegistry]
 | [[functionRegistry]] FIXME
 
 Used when...FIXME
 
 | listenerManager
-| link:spark-sql-ExecutionListenerManager.adoc[ExecutionListenerManager]
+| spark-sql-ExecutionListenerManager.md[ExecutionListenerManager]
 | [[listenerManager]] FIXME
 
 Used when...FIXME
@@ -81,7 +81,7 @@ Used when...FIXME
 Used when...FIXME
 
 | sqlParser
-| link:spark-sql-ParserInterface.adoc[ParserInterface]
+| spark-sql-ParserInterface.md[ParserInterface]
 | [[sqlParser]] FIXME
 
 Used when...FIXME
@@ -91,7 +91,7 @@ Used when...FIXME
 | [[streamingQueryManager]] Used to manage streaming queries in *Spark Structured Streaming*
 
 | udfRegistration
-| link:spark-sql-UDFRegistration.adoc[UDFRegistration]
+| spark-sql-UDFRegistration.md[UDFRegistration]
 | [[udfRegistration]] Interface to register user-defined functions.
 
 Used when...FIXME
@@ -105,18 +105,18 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 * [[sharedState]] <<SharedState.md#, SharedState>>
 * [[conf]] [SQLConf](SQLConf.md)
-* [[experimentalMethods]] <<spark-sql-ExperimentalMethods.adoc#, ExperimentalMethods>>
-* [[functionRegistry]] <<spark-sql-FunctionRegistry.adoc#, FunctionRegistry>>
-* [[udfRegistration]] <<spark-sql-UDFRegistration.adoc#, UDFRegistration>>
-* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.adoc#, SessionCatalog>> (`() => SessionCatalog`)
-* [[sqlParser]] <<spark-sql-ParserInterface.adoc#, ParserInterface>>
-* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.adoc#, Analyzer>> (`() => Analyzer`)
+* [[experimentalMethods]] <<spark-sql-ExperimentalMethods.md#, ExperimentalMethods>>
+* [[functionRegistry]] <<spark-sql-FunctionRegistry.md#, FunctionRegistry>>
+* [[udfRegistration]] <<spark-sql-UDFRegistration.md#, UDFRegistration>>
+* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.md#, SessionCatalog>> (`() => SessionCatalog`)
+* [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
+* [[analyzerBuilder]] `analyzerBuilder` function to create an <<spark-sql-Analyzer.md#, Analyzer>> (`() => Analyzer`)
 * [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](Optimizer.md) (`() => Optimizer`)
-* [[planner]] <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>
+* [[planner]] <<spark-sql-SparkPlanner.md#, SparkPlanner>>
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
-* [[listenerManager]] <<spark-sql-ExecutionListenerManager.adoc#, ExecutionListenerManager>>
+* [[listenerManager]] <<spark-sql-ExecutionListenerManager.md#, ExecutionListenerManager>>
 * [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (`() => SessionResourceLoader`)
-* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.adoc#, QueryExecution>> given a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
+* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.md#, QueryExecution>> given a <<spark-sql-LogicalPlan.md#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
 * [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (`(SparkSession, SessionState) => SessionState`)
 
 ## <span id="optimizerBuilder"> optimizerBuilder Function
@@ -157,7 +157,7 @@ NOTE: `clone` is used when...
 executePlan(plan: LogicalPlan): QueryExecution
 ----
 
-`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.adoc#, logical plan>> (that simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>> with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
+`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.md#, logical plan>> (that simply creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>> with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
 
 === [[refreshTable]] `refreshTable` Method
 
@@ -194,11 +194,11 @@ newHadoopConfWithOptions(options: Map[String, String]): Configuration
 ====
 `newHadoopConfWithOptions` is used when:
 
-* `TextBasedFileFormat` is requested to link:spark-sql-TextBasedFileFormat.adoc#isSplitable[say whether it is splitable or not]
+* `TextBasedFileFormat` is requested to spark-sql-TextBasedFileFormat.md#isSplitable[say whether it is splitable or not]
 
-* `FileSourceScanExec` is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#inputRDD[input RDD]
+* `FileSourceScanExec` is requested for the spark-sql-SparkPlan-FileSourceScanExec.md#inputRDD[input RDD]
 
-* `InsertIntoHadoopFsRelationCommand` is requested to link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[run]
+* `InsertIntoHadoopFsRelationCommand` is requested to spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[run]
 
-* `PartitioningAwareFileIndex` is requested for the link:PartitioningAwareFileIndex.adoc#hadoopConf[Hadoop Configuration]
+* `PartitioningAwareFileIndex` is requested for the PartitioningAwareFileIndex.md#hadoopConf[Hadoop Configuration]
 ====

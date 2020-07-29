@@ -1,11 +1,11 @@
 # ColumnarBatchScan -- Physical Operators With Vectorized Reader
 
-`ColumnarBatchScan` is an <<contract, extension>> of <<spark-sql-CodegenSupport.adoc#, CodegenSupport contract>> for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
+`ColumnarBatchScan` is an <<contract, extension>> of <<spark-sql-CodegenSupport.md#, CodegenSupport contract>> for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
-`ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. link:spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch[FileSourceScanExec], link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch[InMemoryTableScanExec] and link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch[DataSourceV2ScanExec] physical operators).
+`ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch[FileSourceScanExec], spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch[InMemoryTableScanExec] and spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch[DataSourceV2ScanExec] physical operators).
 
 [[needsUnsafeRowConversion]]
-`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while link:spark-sql-CodegenSupport.adoc#consume[generating the Java source code to consume generated columns or row from a physical operator] that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
+`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while spark-sql-CodegenSupport.md#consume[generating the Java source code to consume generated columns or row from a physical operator] that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
 
 [[metrics]]
 .ColumnarBatchScan's Performance Metrics
@@ -31,20 +31,20 @@
 | ColumnarBatchScan
 | Description
 
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>>
-a| [[DataSourceV2ScanExec]] <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.adoc#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead, can read data in batch>> (default: `true`)
+| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+a| [[DataSourceV2ScanExec]] <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.md#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, can read data in batch>> (default: `true`)
 
-| <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>>
-| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, Supports vectorized decoding>> for <<spark-sql-FileFormat.adoc#, FileFormats>> that <<spark-sql-FileFormat.adoc#supportBatch, support returning columnar batches>> (default: `false`)
+| <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>>
+| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-FileFormat.md#, FileFormats>> that <<spark-sql-FileFormat.md#supportBatch, support returning columnar batches>> (default: `false`)
 
-| <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#, InMemoryTableScanExec>>
-a| [[InMemoryTableScanExec]] <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch, Supports vectorized decoding>> when all of the following hold:
+| <<spark-sql-SparkPlan-InMemoryTableScanExec.md#, InMemoryTableScanExec>>
+a| [[InMemoryTableScanExec]] <<spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch, Supports vectorized decoding>> when all of the following hold:
 
-* <<spark-sql-properties.adoc#spark.sql.inMemoryColumnarStorage.enableVectorizedReader, spark.sql.inMemoryColumnarStorage.enableVectorizedReader>> property is enabled (default: `true`)
+* <<spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader, spark.sql.inMemoryColumnarStorage.enableVectorizedReader>> property is enabled (default: `true`)
 
 * Uses primitive data types only for the output schema
 
-* Number of fields in the output schema is not more than <<spark-sql-properties.adoc#spark.sql.codegen.maxFields, spark.sql.codegen.maxFields>> property (default: `100`)
+* Number of fields in the output schema is not more than <<spark-sql-properties.md#spark.sql.codegen.maxFields, spark.sql.codegen.maxFields>> property (default: `100`)
 |===
 
 === [[genCodeColumnVector]] `genCodeColumnVector` Internal Method
@@ -148,7 +148,7 @@ NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested
 supportsBatch: Boolean = true
 ----
 
-`supportsBatch` flag controls whether a link:spark-sql-FileFormat.adoc[FileFormat] supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not. `supportsBatch` is enabled (i.e. `true`) by default.
+`supportsBatch` flag controls whether a spark-sql-FileFormat.md[FileFormat] supports spark-sql-vectorized-parquet-reader.md[vectorized decoding] or not. `supportsBatch` is enabled (i.e. `true`) by default.
 
 [NOTE]
 ====
@@ -156,11 +156,11 @@ supportsBatch: Boolean = true
 
 * `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>>
 
-* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#metadata[metadata] (for *Batched* metadata) and to link:spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute[execute]
+* `FileSourceScanExec` physical operator is requested for spark-sql-SparkPlan-FileSourceScanExec.md#metadata[metadata] (for *Batched* metadata) and to spark-sql-SparkPlan-FileSourceScanExec.md#doExecute[execute]
 
-* `InMemoryTableScanExec` physical operator is requested for link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportCodegen[supportCodegen] flag, link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#inputRDD[input RDD] and to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute[execute]
+* `InMemoryTableScanExec` physical operator is requested for spark-sql-SparkPlan-InMemoryTableScanExec.md#supportCodegen[supportCodegen] flag, spark-sql-SparkPlan-InMemoryTableScanExec.md#inputRDD[input RDD] and to spark-sql-SparkPlan-InMemoryTableScanExec.md#doExecute[execute]
 
-* `DataSourceV2ScanExec` physical operator is requested to link:spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute[execute]
+* `DataSourceV2ScanExec` physical operator is requested to spark-sql-SparkPlan-DataSourceV2ScanExec.md#doExecute[execute]
 ====
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
@@ -170,9 +170,9 @@ supportsBatch: Boolean = true
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
-`doProduce` firstly requests the input `CodegenContext` to link:spark-sql-CodegenContext.adoc#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
+`doProduce` firstly requests the input `CodegenContext` to spark-sql-CodegenContext.md#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
 
 `doProduce` <<produceBatches, produceBatches>> when <<supportsBatch, supportsBatch>> is enabled or <<produceRows, produceRows>>.
 
@@ -262,17 +262,17 @@ java.lang.UnsupportedOperationException
 produceRows(ctx: CodegenContext, input: String): String
 ----
 
-`produceRows` creates a new link:spark-sql-CodegenSupport.adoc#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
+`produceRows` creates a new spark-sql-CodegenSupport.md#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
 
-`produceRows` creates a link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for a `row` variable and assigns it as the name of the link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW].
+`produceRows` creates a spark-sql-CodegenContext.md#freshName[fresh term name] for a `row` variable and assigns it as the name of the spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW].
 
-`produceRows` resets (`nulls`) link:spark-sql-CodegenContext.adoc#currentVars[currentVars].
+`produceRows` resets (`nulls`) spark-sql-CodegenContext.md#currentVars[currentVars].
 
-For every link:catalyst/QueryPlan.md#output[output schema attribute], `produceRows` creates a link:spark-sql-Expression-BoundReference.adoc#creating-instance[BoundReference] and requests it to link:expressions/Expression.md#genCode[generate code for expression evaluation].
+For every catalyst/QueryPlan.md#output[output schema attribute], `produceRows` creates a spark-sql-Expression-BoundReference.md#creating-instance[BoundReference] and requests it to expressions/Expression.md#genCode[generate code for expression evaluation].
 
 `produceRows` selects the name of the row term per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
 
-`produceRows` link:spark-sql-CodegenSupport.adoc#consume[generates the Java source code to consume generated columns or row from the current physical operator] and uses it to generate the final Java source code for producing rows.
+`produceRows` spark-sql-CodegenSupport.md#consume[generates the Java source code to consume generated columns or row from the current physical operator] and uses it to generate the final Java source code for producing rows.
 
 [source, scala]
 ----
@@ -315,7 +315,7 @@ NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to
 vectorTypes: Option[Seq[String]] = None
 ----
 
-`vectorTypes` defines the fully-qualified class names (_types_) of the concrete <<spark-sql-ColumnVector.adoc#, ColumnVectors>> for every column used in a columnar batch.
+`vectorTypes` defines the fully-qualified class names (_types_) of the concrete <<spark-sql-ColumnVector.md#, ColumnVectors>> for every column used in a columnar batch.
 
 `vectorTypes` gives no vector types by default (`None`).
 

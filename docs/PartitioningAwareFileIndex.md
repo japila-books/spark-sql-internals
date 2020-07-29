@@ -3,7 +3,7 @@
 :hadoop-version: 2.10.0
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`PartitioningAwareFileIndex` is an <<contract, extension>> of the link:FileIndex.adoc[FileIndex] contract for <<implementations, indices>> that are aware of partitioned tables.
+`PartitioningAwareFileIndex` is an <<contract, extension>> of the FileIndex.md[FileIndex] contract for <<implementations, indices>> that are aware of partitioned tables.
 
 [[contract]]
 .PartitioningAwareFileIndex Contract (Abstract Methods Only)
@@ -54,7 +54,7 @@ Used when `PartitioningAwareFileIndex` is requested for the <<partitionSchema, p
 | PartitioningAwareFileIndex
 | Description
 
-| link:InMemoryFileIndex.adoc[InMemoryFileIndex]
+| InMemoryFileIndex.md[InMemoryFileIndex]
 | [[InMemoryFileIndex]]
 
 | `MetadataLogFileIndex`
@@ -66,9 +66,9 @@ Used when `PartitioningAwareFileIndex` is requested for the <<partitionSchema, p
 
 `PartitioningAwareFileIndex` takes the following to be created:
 
-* [[sparkSession]] link:SparkSession.md[SparkSession]
+* [[sparkSession]] SparkSession.md[SparkSession]
 * [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined link:spark-sql-StructType.adoc[schema]
+* [[userSpecifiedSchema]] Optional user-defined spark-sql-StructType.md[schema]
 * [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
 
 `PartitioningAwareFileIndex` initializes the <<internal-properties, internal properties>>.
@@ -84,7 +84,7 @@ listFiles(
   dataFilters: Seq[Expression]): Seq[PartitionDirectory]
 ----
 
-NOTE: `listFiles` is part of the link:FileIndex.adoc#listFiles[FileIndex] contract.
+NOTE: `listFiles` is part of the FileIndex.md#listFiles[FileIndex] contract.
 
 `listFiles`...FIXME
 
@@ -95,9 +95,9 @@ NOTE: `listFiles` is part of the link:FileIndex.adoc#listFiles[FileIndex] contra
 partitionSchema: StructType
 ----
 
-NOTE: `partitionSchema` is part of the link:FileIndex.adoc#partitionSchema[FileIndex] contract.
+NOTE: `partitionSchema` is part of the FileIndex.md#partitionSchema[FileIndex] contract.
 
-`partitionSchema` simply returns the partition columns (as a link:spark-sql-StructType.adoc[StructType]) of the <<partitionSpec, partition specification>>.
+`partitionSchema` simply returns the partition columns (as a spark-sql-StructType.md[StructType]) of the <<partitionSpec, partition specification>>.
 
 === [[inputFiles]] `inputFiles` Method
 
@@ -106,7 +106,7 @@ NOTE: `partitionSchema` is part of the link:FileIndex.adoc#partitionSchema[FileI
 inputFiles: Array[String]
 ----
 
-NOTE: `inputFiles` is part of the link:FileIndex.adoc#inputFiles[FileIndex] contract.
+NOTE: `inputFiles` is part of the FileIndex.md#inputFiles[FileIndex] contract.
 
 `inputFiles` simply returns the location of <<allFiles, all the files>>.
 
@@ -117,7 +117,7 @@ NOTE: `inputFiles` is part of the link:FileIndex.adoc#inputFiles[FileIndex] cont
 sizeInBytes: Long
 ----
 
-NOTE: `sizeInBytes` is part of the link:FileIndex.adoc#sizeInBytes[FileIndex] contract.
+NOTE: `sizeInBytes` is part of the FileIndex.md#sizeInBytes[FileIndex] contract.
 
 `sizeInBytes` simply sums up the length (in bytes) of <<allFiles, all the files>>.
 
@@ -134,7 +134,7 @@ allFiles(): Seq[FileStatus]
 ====
 `allFiles` is used when:
 
-* `DataSource` is requested to link:spark-sql-DataSource.adoc#getOrInferFileFormatSchema[getOrInferFileFormatSchema], link:spark-sql-DataSource.adoc#resolveRelation[resolveRelation]
+* `DataSource` is requested to spark-sql-DataSource.md#getOrInferFileFormatSchema[getOrInferFileFormatSchema], spark-sql-DataSource.md#resolveRelation[resolveRelation]
 
 * `PartitioningAwareFileIndex` is requested to <<listFiles, listFiles>>, <<inputFiles, inputFiles>>, and <<sizeInBytes, sizeInBytes>>
 
@@ -150,7 +150,7 @@ inferPartitioning(): PartitionSpec
 
 `inferPartitioning`...FIXME
 
-NOTE: `inferPartitioning` is used when link:InMemoryFileIndex.adoc#partitionSpec[InMemoryFileIndex] and Spark Structured Streaming's `MetadataLogFileIndex` are requested for the <<partitionSpec, partitionSpec>>.
+NOTE: `inferPartitioning` is used when InMemoryFileIndex.md#partitionSpec[InMemoryFileIndex] and Spark Structured Streaming's `MetadataLogFileIndex` are requested for the <<partitionSpec, partitionSpec>>.
 
 === [[basePaths]] `basePaths` Internal Method
 

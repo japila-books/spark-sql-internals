@@ -2,7 +2,7 @@ title: CheckAnalysis
 
 # CheckAnalysis -- Analysis Validation
 
-`CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that link:spark-sql-Analyzer.adoc[Analyzer] uses to check if a link:spark-sql-LogicalPlan.adoc[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
+`CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that spark-sql-Analyzer.md[Analyzer] uses to check if a spark-sql-LogicalPlan.md[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
 
 NOTE: An analyzed logical plan is correct and ready for execution.
 
@@ -15,13 +15,13 @@ NOTE: An analyzed logical plan is correct and ready for execution.
 checkAnalysis(plan: LogicalPlan): Unit
 ----
 
-`checkAnalysis` recursively checks the correctness of the analysis of the input link:spark-sql-LogicalPlan.adoc[logical plan] and link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks it as analyzed].
+`checkAnalysis` recursively checks the correctness of the analysis of the input spark-sql-LogicalPlan.md[logical plan] and spark-sql-LogicalPlan.md#setAnalyzed[marks it as analyzed].
 
 NOTE: `checkAnalysis` fails analysis when finds <<UnresolvedRelation, UnresolvedRelation>> in the input `LogicalPlan`...FIXME What else?
 
 Internally, `checkAnalysis` processes nodes in the input `plan` (starting from the leafs, i.e. nodes down the operator tree).
 
-`checkAnalysis` skips link:spark-sql-LogicalPlan.adoc#analyzed[logical plans that have already undergo analysis].
+`checkAnalysis` skips spark-sql-LogicalPlan.md#analyzed[logical plans that have already undergo analysis].
 
 [[checkAnalysis-validations]]
 .checkAnalysis's Validation Rules (in the order of execution)
@@ -30,21 +30,21 @@ Internally, `checkAnalysis` processes nodes in the input `plan` (starting from t
 | LogicalPlan/Operator
 | Behaviour
 
-| [[UnresolvedRelation]] link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
+| [[UnresolvedRelation]] spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation]
 a| Fails analysis with the error message:
 
 ```
 Table or view not found: [tableIdentifier]
 ```
 
-| Unresolved link:spark-sql-Expression-Attribute.adoc[Attribute]
+| Unresolved spark-sql-Expression-Attribute.md[Attribute]
 a| Fails analysis with the error message:
 
 ```
 cannot resolve '[expr]' given input columns: [from]
 ```
 
-| link:expressions/Expression.md[Expression] with link:expressions/Expression.md#checkInputDataTypes[incorrect input data types]
+| expressions/Expression.md[Expression] with expressions/Expression.md#checkInputDataTypes[incorrect input data types]
 a| Fails analysis with the error message:
 
 ```
@@ -97,7 +97,7 @@ Project [COUNT(1) OVER (PARTITION BY value UnspecifiedFrame)#97L]
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
 ```
 
-| [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, window frame specification>>
+| [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.md#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.md#frameSpecification, window frame specification>>
 a| Fails analysis with the error message:
 
 [options="wrap"]
@@ -105,17 +105,17 @@ a| Fails analysis with the error message:
 An offset window function can only be evaluated in an ordered row-based window frame with a single offset: [windowExpr]
 ----
 
-| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.adoc#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.adoc#windowFunction, window function>> that is not one of the following expressions: [AggregateExpression](expressions/AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>>
+| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.md#windowFunction, window function>> that is not one of the following expressions: [AggregateExpression](expressions/AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>>
 a| Fails analysis with the error message:
 
 ```
 Expression '[e]' not supported within a window function.
 ```
 
-| [[deterministic]] link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic] expressions
+| [[deterministic]] spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions
 | FIXME
 
-| [[UnresolvedHint]] link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint]
+| [[UnresolvedHint]] spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint]
 | FIXME
 
 | FIXME
@@ -130,15 +130,15 @@ After <<checkAnalysis-validations, the validations>>, `checkAnalysis` executes <
 unresolved operator [o.simpleString]
 ```
 
-In the end, `checkAnalysis` link:spark-sql-LogicalPlan.adoc#setAnalyzed[marks the entire logical plan as analyzed].
+In the end, `checkAnalysis` spark-sql-LogicalPlan.md#setAnalyzed[marks the entire logical plan as analyzed].
 
 [NOTE]
 ====
 `checkAnalysis` is used when:
 
-* `QueryExecution` link:spark-sql-QueryExecution.adoc#assertAnalyzed[creates analyzed logical plan and checks its correctness] (which happens mostly when a `Dataset` is link:spark-sql-Dataset.adoc#creating-instance[created])
+* `QueryExecution` spark-sql-QueryExecution.md#assertAnalyzed[creates analyzed logical plan and checks its correctness] (which happens mostly when a `Dataset` is spark-sql-Dataset.md#creating-instance[created])
 
-* `ExpressionEncoder` does link:spark-sql-ExpressionEncoder.adoc#resolveAndBind[resolveAndBind]
+* `ExpressionEncoder` does spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
 
 * `ResolveAggregateFunctions` is executed (for `Sort` logical plan)
 ====

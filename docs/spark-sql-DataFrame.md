@@ -6,9 +6,9 @@ Spark SQL introduces a tabular functional data abstraction called *DataFrame*. I
 
 DataFrame is a data abstraction or a domain-specific language (DSL) for working with *structured* and *semi-structured data*, i.e. datasets that you can specify a schema for.
 
-DataFrame is a collection of spark-sql-Row.adoc[rows] with a spark-sql-schema.adoc[schema] that is the result of executing a structured query (once it will have been executed).
+DataFrame is a collection of spark-sql-Row.md[rows] with a spark-sql-schema.md[schema] that is the result of executing a structured query (once it will have been executed).
 
-DataFrame uses the immutable, in-memory, resilient, distributed and parallel capabilities of spark-rdd.adoc[RDD], and applies a structure called schema to the data.
+DataFrame uses the immutable, in-memory, resilient, distributed and parallel capabilities of spark-rdd.md[RDD], and applies a structure called schema to the data.
 
 [NOTE]
 ====
@@ -33,7 +33,7 @@ Spark SQL borrowed the concept of DataFrame from http://pandas.pydata.org/pandas
 
 NOTE: Hey, big data consultants, time to help teams migrate the code from pandas' DataFrame into Spark's DataFrames (at least to PySpark's DataFrame) and offer services to set up large clusters!
 
-DataFrames in Spark SQL strongly rely on spark-rdd.adoc[the features of RDD] - it's basically a RDD exposed as structured DataFrame by appropriate operations to handle very big data from the day one. So, petabytes of data should _not_ scare you (unless you're an administrator to create such clustered Spark environment - book-intro.adoc[_contact me when you feel alone with the task_]).
+DataFrames in Spark SQL strongly rely on spark-rdd.md[the features of RDD] - it's basically a RDD exposed as structured DataFrame by appropriate operations to handle very big data from the day one. So, petabytes of data should _not_ scare you (unless you're an administrator to create such clustered Spark environment - book-intro.md[_contact me when you feel alone with the task_]).
 
 [source, scala]
 ----
@@ -75,21 +75,21 @@ You can execute queries over DataFrames using two approaches:
 
 DataFrames use the [Catalyst logical query optimizer](Optimizer.md) to produce efficient queries (and so they are supposed to be faster than corresponding RDD-based queries).
 
-NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through spark-sql-Encoder.adoc[specialized encoders] that can significantly cut serialization and deserialization times.
+NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through spark-sql-Encoder.md[specialized encoders] that can significantly cut serialization and deserialization times.
 
-You can enforce types on spark-sql-Row.adoc[generic rows] and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
+You can enforce types on spark-sql-Row.md[generic rows] and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
 
 === [[features]] Features of DataFrame
 
-A `DataFrame` is a collection of "generic" spark-sql-Row.adoc[Row] instances (as `RDD[Row]`) and a spark-sql-schema.adoc[schema].
+A `DataFrame` is a collection of "generic" spark-sql-Row.md[Row] instances (as `RDD[Row]`) and a spark-sql-schema.md[schema].
 
-NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and spark-sql-StructType.adoc[StructType].
+NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and spark-sql-StructType.md[StructType].
 
 === SQLContext, spark, and Spark shell
 
 You use https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.SQLContext[org.apache.spark.sql.SQLContext] to build DataFrames and execute SQL queries.
 
-The quickest and easiest way to work with Spark SQL is to use spark-shell.adoc[Spark shell] and `spark` object.
+The quickest and easiest way to work with Spark SQL is to use spark-shell.md[Spark shell] and `spark` object.
 
 ```
 scala> spark
@@ -102,7 +102,7 @@ As you may have noticed, `spark` in Spark shell is actually a  https://spark.apa
 
 === Creating DataFrames from Scratch
 
-Use Spark shell as described in spark-shell.adoc[Spark shell].
+Use Spark shell as described in spark-shell.md[Spark shell].
 
 ==== Using toDF
 

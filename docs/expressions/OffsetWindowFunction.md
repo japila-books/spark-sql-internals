@@ -4,7 +4,7 @@ title: OffsetWindowFunction
 
 `OffsetWindowFunction` is the <<contract, base>> of <<extensions, window function expressions>> that are <<expressions/Expression.md#Unevaluable, unevaluable>> and `ImplicitCastInputTypes`.
 
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 [[contract]]
 [source, scala]
@@ -53,7 +53,7 @@ abstract class OffsetWindowFunction ... {
 When requested for the <<expressions/Expression.md#dataType, dataType>>, `OffsetWindowFunction` simply requests the <<input, input>> expression for the data type.
 
 [[dataType]]
-When requested for the <<spark-sql-Expression-ExpectsInputTypes.adoc#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, <<spark-sql-DataType.adoc#IntegerType, IntegerType>> with the <<expressions/Expression.md#dataType, data type>> of the <<input, input>> expression and the <<spark-sql-DataType.adoc#NullType, NullType>>.
+When requested for the <<spark-sql-Expression-ExpectsInputTypes.md#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, <<spark-sql-DataType.md#IntegerType, IntegerType>> with the <<expressions/Expression.md#dataType, data type>> of the <<input, input>> expression and the <<spark-sql-DataType.md#NullType, NullType>>.
 
 [[toString]]
 `OffsetWindowFunction` uses the following *text representation* (i.e. `toString`):
@@ -83,7 +83,7 @@ When requested for the <<spark-sql-Expression-ExpectsInputTypes.adoc#inputTypes,
 frame: WindowFrame
 ----
 
-NOTE: `frame` is part of the <<spark-sql-Expression-WindowFunction.adoc#frame, WindowFunction Contract>> to define the `WindowFrame` for function expression execution.
+NOTE: `frame` is part of the <<spark-sql-Expression-WindowFunction.md#frame, WindowFunction Contract>> to define the `WindowFrame` for function expression execution.
 
 `frame`...FIXME
 

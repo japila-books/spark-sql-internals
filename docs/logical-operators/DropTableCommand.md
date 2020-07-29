@@ -2,7 +2,7 @@ title: DropTableCommand
 
 # DropTableCommand Logical Command
 
-`DropTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> for <<run, FIXME>>.
+`DropTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> for <<run, FIXME>>.
 
 === [[run]] Executing Logical Command -- `run` Method
 
@@ -11,6 +11,6 @@ title: DropTableCommand
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME

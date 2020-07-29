@@ -2,17 +2,17 @@ title: SerializeFromObjectExec
 
 # SerializeFromObjectExec Unary Physical Operator
 
-`SerializeFromObjectExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that supports <<spark-sql-CodegenSupport.adoc#, Java code generation>>.
+`SerializeFromObjectExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that supports <<spark-sql-CodegenSupport.md#, Java code generation>>.
 
 `SerializeFromObjectExec` supports Java code generation with the <<doProduce, doProduce>>, <<doConsume, doConsume>> and <<inputRDDs, inputRDDs>> methods.
 
-`SerializeFromObjectExec` is a <<spark-sql-ObjectConsumerExec.adoc#, ObjectConsumerExec>>.
+`SerializeFromObjectExec` is a <<spark-sql-ObjectConsumerExec.md#, ObjectConsumerExec>>.
 
 `SerializeFromObjectExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 [[inputRDDs]]
 [[outputPartitioning]]
-`SerializeFromObjectExec` uses the <<child, child>> physical operator when requested for the <<spark-sql-CodegenSupport.adoc#inputRDDs, input RDDs>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
+`SerializeFromObjectExec` uses the <<child, child>> physical operator when requested for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
 
 [[output]]
 `SerializeFromObjectExec` uses the <<serializer, serializer>> for the <<catalyst/QueryPlan.md#output, output schema attributes>>.
@@ -22,7 +22,7 @@ title: SerializeFromObjectExec
 `SerializeFromObjectExec` takes the following when created:
 
 * [[serializer]] Serializer (as `Seq[NamedExpression]`)
-* [[child]] Child <<SparkPlan.md#, physical operator>> (that supports <<spark-sql-CodegenSupport.adoc#, Java code generation>>)
+* [[child]] Child <<SparkPlan.md#, physical operator>> (that supports <<spark-sql-CodegenSupport.md#, Java code generation>>)
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
@@ -31,7 +31,7 @@ title: SerializeFromObjectExec
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume`...FIXME
 
@@ -42,7 +42,7 @@ NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenS
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -53,13 +53,13 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 
-. Creates an <<spark-sql-UnsafeProjection.adoc#create, UnsafeProjection>> for the <<serializer, serializer>>
+. Creates an <<spark-sql-UnsafeProjection.md#create, UnsafeProjection>> for the <<serializer, serializer>>
 
-. Requests the `UnsafeProjection` to <<spark-sql-Projection.adoc#initialize, initialize>> (for the partition index)
+. Requests the `UnsafeProjection` to <<spark-sql-Projection.md#initialize, initialize>> (for the partition index)
 
 . Executes the `UnsafeProjection` on all internal binary rows in the partition
 

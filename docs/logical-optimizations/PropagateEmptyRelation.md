@@ -4,7 +4,7 @@
 
 `PropagateEmptyRelation` is part of the [LocalRelation](../Optimizer.md#LocalRelation) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`PropagateEmptyRelation` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`PropagateEmptyRelation` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 === [[explode]] Explode
 

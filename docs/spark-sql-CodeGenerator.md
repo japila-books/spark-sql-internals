@@ -27,7 +27,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[contract]] CodeGenerator Contract
@@ -52,11 +52,11 @@ abstract class CodeGenerator[InType, OutType] {
 | Description
 
 | [[generate]] `generate`
-a| Generates an evaluator for expression(s) that may (optionally) have expression(s) bound to a schema (i.e. a collection of link:spark-sql-Expression-Attribute.adoc[Attribute]).
+a| Generates an evaluator for expression(s) that may (optionally) have expression(s) bound to a schema (i.e. a collection of spark-sql-Expression-Attribute.md[Attribute]).
 
 Used in:
 
-* `ExpressionEncoder` for link:spark-sql-ExpressionEncoder.adoc#extractProjection[UnsafeProjection] (for serialization)
+* `ExpressionEncoder` for spark-sql-ExpressionEncoder.md#extractProjection[UnsafeProjection] (for serialization)
 
 |===
 
@@ -92,21 +92,21 @@ CAUTION: FIXME
 newCodeGenContext(): CodegenContext
 ----
 
-`newCodeGenContext` simply creates a new link:spark-sql-CodegenContext.adoc#creating-instance[CodegenContext].
+`newCodeGenContext` simply creates a new spark-sql-CodegenContext.md#creating-instance[CodegenContext].
 
 [NOTE]
 ====
 `newCodeGenContext` is used when:
 
-* `GenerateMutableProjection` is requested to link:spark-sql-GenerateMutableProjection.adoc#create[create a MutableProjection]
+* `GenerateMutableProjection` is requested to spark-sql-GenerateMutableProjection.md#create[create a MutableProjection]
 
-* `GenerateOrdering` is requested to link:spark-sql-GenerateOrdering.adoc#create[create a BaseOrdering]
+* `GenerateOrdering` is requested to spark-sql-GenerateOrdering.md#create[create a BaseOrdering]
 
-* `GeneratePredicate` is requested to link:spark-sql-GeneratePredicate.adoc#create[create a Predicate]
+* `GeneratePredicate` is requested to spark-sql-GeneratePredicate.md#create[create a Predicate]
 
-* `GenerateSafeProjection` is requested to link:spark-sql-GenerateSafeProjection.adoc#create[create a Projection]
+* `GenerateSafeProjection` is requested to spark-sql-GenerateSafeProjection.md#create[create a Projection]
 
-* `GenerateUnsafeProjection` is requested to link:spark-sql-GenerateUnsafeProjection.adoc#create[create a UnsafeProjection]
+* `GenerateUnsafeProjection` is requested to spark-sql-GenerateUnsafeProjection.md#create[create a UnsafeProjection]
 
-* `GenerateColumnAccessor` is requested to link:spark-sql-GenerateColumnAccessor.adoc#create[create a ColumnarIterator]
+* `GenerateColumnAccessor` is requested to spark-sql-GenerateColumnAccessor.md#create[create a ColumnarIterator]
 ====

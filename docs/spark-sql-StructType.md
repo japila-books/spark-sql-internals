@@ -4,7 +4,7 @@ title: StructType
 
 [[fields]]
 [[creating-instance]]
-`StructType` is a built-in <<spark-sql-DataType.adoc#, data type>> that is a collection of <<spark-sql-StructField.adoc#, StructFields>>.
+`StructType` is a built-in <<spark-sql-DataType.md#, data type>> that is a collection of <<spark-sql-StructField.md#, StructFields>>.
 
 `StructType` is used to define a schema or its part.
 
@@ -121,7 +121,7 @@ catalogString: String
 sql: String
 ----
 
-`StructType` as a custom `DataType` is used in query plans or SQL. It can present itself using `simpleString`, `catalogString` or `sql` (see link:spark-sql-DataType.adoc#contract[DataType Contract]).
+`StructType` as a custom `DataType` is used in query plans or SQL. It can present itself using `simpleString`, `catalogString` or `sql` (see spark-sql-DataType.md#contract[DataType Contract]).
 
 [source, scala]
 ----

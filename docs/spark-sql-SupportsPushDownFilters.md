@@ -2,7 +2,7 @@ title: SupportsPushDownFilters
 
 # SupportsPushDownFilters -- Data Source Readers with Filter Pushdown Optimization Support
 
-`SupportsPushDownFilters` is the <<contract, extension>> of the <<spark-sql-DataSourceReader.adoc#, DataSourceReader contract>> for <<implementations, data source readers>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that support <<pushedFilters, filter pushdown>> performance optimization (and hence reduce the size of the data to be read).
+`SupportsPushDownFilters` is the <<contract, extension>> of the <<spark-sql-DataSourceReader.md#, DataSourceReader contract>> for <<implementations, data source readers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that support <<pushedFilters, filter pushdown>> performance optimization (and hence reduce the size of the data to be read).
 
 [[contract]]
 .SupportsPushDownFilters Contract
@@ -19,7 +19,7 @@ a| [[pushedFilters]]
 Filter[] pushedFilters()
 ----
 
-<<spark-sql-Filter.adoc#, Data source filters>> that were pushed down to the data source (in <<pushFilters, pushFilters>>)
+<<spark-sql-Filter.md#, Data source filters>> that were pushed down to the data source (in <<pushFilters, pushFilters>>)
 
 Used exclusively when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
 
@@ -31,7 +31,7 @@ a| [[pushFilters]]
 Filter[] pushFilters(Filter[] filters)
 ----
 
-<<spark-sql-Filter.adoc#, Data source filters>> that need to be evaluated again after scanning (so Spark can plan an extra filter operator)
+<<spark-sql-Filter.md#, Data source filters>> that need to be evaluated again after scanning (so Spark can plan an extra filter operator)
 
 Used exclusively when [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
 

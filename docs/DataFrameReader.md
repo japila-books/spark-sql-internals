@@ -160,7 +160,7 @@ textFile(paths: String*): Dataset[String]
 
 `DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom formats>>.
 
-NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using link:spark-sql-properties.adoc#spark.sql.sources.default[spark.sql.sources.default] configuration property.
+NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using spark-sql-properties.md#spark.sql.sources.default[spark.sql.sources.default] configuration property.
 
 After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually "trigger" the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>, <<jdbc, jdbc>>) operators.
 
@@ -262,13 +262,13 @@ Supported data formats:
 
 * `json`
 * `csv` (since **2.0.0**)
-* `parquet` (see link:spark-parquet.adoc[Parquet])
+* `parquet` (see spark-parquet.md[Parquet])
 * `orc`
 * `text`
 * <<jdbc, jdbc>>
 * `libsvm` -- only when used in `format("libsvm")`
 
-NOTE: Spark SQL allows for link:spark-sql-datasource-custom-formats.adoc[developing custom data source formats].
+NOTE: Spark SQL allows for spark-sql-datasource-custom-formats.md[developing custom data source formats].
 
 === [[schema]] Specifying Schema -- `schema` method
 
@@ -298,7 +298,7 @@ val r: DataFrameReader = spark.read.schema(schema)
 
 NOTE: Some formats can infer schema from datasets (e.g. <<csv, csv>> or <<json, json>>) using <<option, inferSchema>> option.
 
-TIP: Read up on link:spark-sql-schema.adoc[Schema].
+TIP: Read up on spark-sql-schema.md[Schema].
 
 === [[option]][[options]] Specifying Load Options -- `option` and `options` Methods
 
@@ -474,7 +474,7 @@ only showing top 20 rows
 table(tableName: String): DataFrame
 ----
 
-`table` loads the content of the `tableName` table into an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+`table` loads the content of the `tableName` table into an untyped spark-sql-DataFrame.md[DataFrame].
 
 
 [source, scala]
@@ -487,7 +487,7 @@ res1: Boolean = true
 val t1 = spark.read.table("t1")
 ----
 
-NOTE: `table` simply passes the call to link:SparkSession.md#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
+NOTE: `table` simply passes the call to SparkSession.md#table[SparkSession.table] after making sure that a <<schema, user-defined schema>> has not been specified.
 
 === [[jdbc]] Loading Data From External Table using JDBC Data Source -- `jdbc` Method
 
@@ -509,13 +509,13 @@ jdbc(
   connectionProperties: Properties): DataFrame
 ----
 
-`jdbc` loads data from an external table using the <<spark-sql-jdbc.adoc#, JDBC data source>>.
+`jdbc` loads data from an external table using the <<spark-sql-jdbc.md#, JDBC data source>>.
 
-Internally, `jdbc` creates a link:spark-sql-JDBCOptions.adoc#creating-instance[JDBCOptions] from the input `url`, `table` and `extraOptions` with `connectionProperties`.
+Internally, `jdbc` creates a spark-sql-JDBCOptions.md#creating-instance[JDBCOptions] from the input `url`, `table` and `extraOptions` with `connectionProperties`.
 
 `jdbc` then creates one `JDBCPartition` per `predicates`.
 
-In the end, `jdbc` requests the <<sparkSession, SparkSession>> to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame] for a link:spark-sql-JDBCRelation.adoc[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
+In the end, `jdbc` requests the <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame] for a spark-sql-JDBCRelation.md[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
 
 [NOTE]
 ====
@@ -528,7 +528,7 @@ User specified schema not supported with `[jdbc]`
 
 NOTE: `jdbc` method uses `java.util.Properties` (and appears overly Java-centric). Use <<format, format("jdbc")>> instead.
 
-TIP: Review the exercise link:exercises/spark-exercise-dataframe-jdbc-postgresql.adoc[Creating DataFrames from Tables using JDBC and PostgreSQL].
+TIP: Review the exercise exercises/spark-exercise-dataframe-jdbc-postgresql.md[Creating DataFrames from Tables using JDBC and PostgreSQL].
 
 === [[textFile]] Loading Datasets From Text Files -- `textFile` Method
 
@@ -538,7 +538,7 @@ textFile(path: String): Dataset[String]
 textFile(paths: String*): Dataset[String]
 ----
 
-`textFile` loads one or many text files into a typed link:spark-sql-Dataset.adoc[Dataset[String\]].
+`textFile` loads one or many text files into a typed spark-sql-Dataset.md[Dataset[String\]].
 
 [source, scala]
 ----
@@ -553,7 +553,7 @@ val lines: Dataset[String] = spark
 
 NOTE: `textFile` are similar to <<text, text>> family of methods in that they both read text files but `text` methods return untyped `DataFrame` while `textFile` return typed `Dataset[String]`.
 
-Internally, `textFile` passes calls on to <<text, text>> method and link:spark-sql-Dataset.adoc#select[selects] the only `value` column before it applies `Encoders.STRING` link:spark-sql-Encoder.adoc[encoder].
+Internally, `textFile` passes calls on to <<text, text>> method and spark-sql-Dataset.md#select[selects] the only `value` column before it applies `Encoders.STRING` spark-sql-Encoder.md[encoder].
 
 === [[creating-instance]] Creating DataFrameReader Instance
 
@@ -570,11 +570,11 @@ Internally, `textFile` passes calls on to <<text, text>> method and link:spark-s
 loadV1Source(paths: String*): DataFrame
 ----
 
-`loadV1Source` creates a link:spark-sql-DataSource.adoc#apply[DataSource] and requests it to link:spark-sql-DataSource.adoc#resolveRelation[resolve the underlying relation (as a BaseRelation)].
+`loadV1Source` creates a spark-sql-DataSource.md#apply[DataSource] and requests it to spark-sql-DataSource.md#resolveRelation[resolve the underlying relation (as a BaseRelation)].
 
-In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
+In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
 
-NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a link:spark-sql-DataSourceReader.adoc[DataSourceReader] could not be created).
+NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a spark-sql-DataSourceReader.md[DataSourceReader] could not be created).
 
 === [[load]] "Loading" Data As DataFrame -- `load` Method
 
@@ -585,9 +585,9 @@ load(path: String): DataFrame
 load(paths: String*): DataFrame
 ----
 
-`load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped link:spark-sql-DataFrame.adoc[DataFrame].
+`load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped spark-sql-DataFrame.md[DataFrame].
 
-Internally, `load` link:spark-sql-DataSource.adoc#lookupDataSource[lookupDataSource] for the <<source, source>>. `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
+Internally, `load` spark-sql-DataSource.md#lookupDataSource[lookupDataSource] for the <<source, source>>. `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
 
 For a "Data Source V2" data source, `load`...FIXME
 
@@ -638,7 +638,7 @@ source: String
 
 In other words, the <<methods, DataFrameReader fluent API>> is simply to describe the input data source.
 
-The default data source is <<parquet, parquet>> per <<spark-sql-properties.adoc#spark.sql.sources.default, spark.sql.sources.default>> configuration property.
+The default data source is <<parquet, parquet>> per <<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property.
 
 `source` is usually specified using <<format, format>> method.
 
@@ -651,7 +651,7 @@ Hive data source can only be used with tables, you can not read files of Hive da
 ```
 ====
 
-Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.adoc#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using <<spark-sql-DataSource.adoc#lookupDataSource, DataSource>> utility.
+Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using <<spark-sql-DataSource.md#lookupDataSource, DataSource>> utility.
 
 NOTE: `source` is used exclusively when `DataFrameReader` is requested to <<load, "load" data (as a DataFrame)>> (explicitly or using <<loadV1Source, loadV1Source>>).
 
@@ -670,7 +670,7 @@ Used when...FIXME
 | userSpecifiedSchema
 | [[userSpecifiedSchema]] Optional *used-specified schema* (default: `None`, i.e. undefined)
 
-Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a link:spark-sql-DataSource.adoc#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
+Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a spark-sql-DataSource.md#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
 
 Used when `DataFrameReader` is requested to <<assertNoSpecifiedSchema, assertNoSpecifiedSchema>> (while loading data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>)
 

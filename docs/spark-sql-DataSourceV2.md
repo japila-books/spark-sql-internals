@@ -2,7 +2,7 @@ title: DataSourceV2
 
 # DataSourceV2 -- Data Sources in Data Source API V2
 
-`DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>.
+`DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
 
 [[contract]]
 `DataSourceV2` defines no methods or values and simply acts as a *marker interface*.
@@ -16,7 +16,7 @@ public interface DataSourceV2 {}
 
 [NOTE]
 ====
-Implementations should at least use <<spark-sql-ReadSupport.adoc#, ReadSupport>> or <<spark-sql-WriteSupport.adoc#, WriteSupport>> interfaces for readable or writable data sources, respectively.
+Implementations should at least use <<spark-sql-ReadSupport.md#, ReadSupport>> or <<spark-sql-WriteSupport.md#, WriteSupport>> interfaces for readable or writable data sources, respectively.
 
 Otherwise, an `AnalysisException` is thrown:
 
@@ -68,7 +68,7 @@ In other words, using the contract is as treading on thin ice.
 | ReadSupportWithSchema
 | [[ReadSupportWithSchema]]
 
-| <<spark-sql-SessionConfigSupport.adoc#, SessionConfigSupport>>
+| <<spark-sql-SessionConfigSupport.md#, SessionConfigSupport>>
 | [[SessionConfigSupport]]
 
 | StreamWriteSupport

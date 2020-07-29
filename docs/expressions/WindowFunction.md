@@ -21,10 +21,10 @@ trait WindowFunction extends Expression {
 | WindowFunction
 | Description
 
-| <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>>
+| <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>>
 | [[AggregateWindowFunction]]
 
-| <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>>
+| <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>>
 | [[OffsetWindowFunction]]
 |===
 

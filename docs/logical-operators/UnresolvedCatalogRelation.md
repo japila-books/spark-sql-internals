@@ -2,9 +2,9 @@ title: UnresolvedCatalogRelation
 
 # UnresolvedCatalogRelation Leaf Logical Operator -- Placeholder of Catalog Tables
 
-`UnresolvedCatalogRelation` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that acts as a placeholder in a logical query plan for link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical evaluation rule to resolve it to a concrete relation logical operator (i.e. link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelations] for data source tables or link:hive/HiveTableRelation.adoc[HiveTableRelations] for hive tables).
+`UnresolvedCatalogRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that acts as a placeholder in a logical query plan for spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical evaluation rule to resolve it to a concrete relation logical operator (i.e. spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelations] for data source tables or hive/HiveTableRelation.md[HiveTableRelations] for hive tables).
 
-`UnresolvedCatalogRelation` is <<creating-instance, created>> when `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#lookupRelation[find a relation] (for link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand] logical command or link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations] logical evaluation rule).
+`UnresolvedCatalogRelation` is <<creating-instance, created>> when `SessionCatalog` is requested to spark-sql-SessionCatalog.md#lookupRelation[find a relation] (for spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand] logical command or spark-sql-Analyzer-ResolveRelations.md[ResolveRelations] logical evaluation rule).
 
 [source, scala]
 ----
@@ -33,11 +33,11 @@ scala> println(plan.numberedTreeString)
 When <<creating-instance, created>>, `UnresolvedCatalogRelation` asserts that the database is specified.
 
 [[resolved]]
-`UnresolvedCatalogRelation` can never be <<spark-sql-LogicalPlan.adoc#resolved, resolved>> and is converted to a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> for a data source table or a link:hive/HiveTableRelation.adoc[HiveTableRelation] for a hive table at analysis phase.
+`UnresolvedCatalogRelation` can never be <<spark-sql-LogicalPlan.md#resolved, resolved>> and is converted to a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> for a data source table or a hive/HiveTableRelation.md[HiveTableRelation] for a hive table at analysis phase.
 
 [[output]]
 `UnresolvedCatalogRelation` uses an empty <<catalyst/QueryPlan.md#output, output schema>>.
 
 [[creating-instance]]
 [[tableMeta]]
-`UnresolvedCatalogRelation` takes a single <<spark-sql-CatalogTable.adoc#, CatalogTable>> when created.
+`UnresolvedCatalogRelation` takes a single <<spark-sql-CatalogTable.md#, CatalogTable>> when created.

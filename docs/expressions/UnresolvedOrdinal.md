@@ -2,7 +2,7 @@ title: UnresolvedOrdinal
 
 # UnresolvedOrdinal Unevaluable Leaf Expression
 
-`UnresolvedOrdinal` is a <<expressions/Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> logical operators (in <<spark-sql-LogicalPlan-Sort.adoc#order, SortOrder>> ordering expressions) and in <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operators (in <<spark-sql-LogicalPlan-Aggregate.adoc#groupingExpressions, grouping expressions>>) in a logical plan.
+`UnresolvedOrdinal` is a <<expressions/Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operators (in <<spark-sql-LogicalPlan-Sort.md#order, SortOrder>> ordering expressions) and in <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators (in <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping expressions>>) in a logical plan.
 
 `UnresolvedOrdinal` is <<creating-instance, created>> when `SubstituteUnresolvedOrdinals` logical resolution rule is executed.
 
@@ -43,13 +43,13 @@ unresolvedordinal(1)
 
 `UnresolvedOrdinal` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> and cannot be evaluated (i.e. produce a value given an internal row).
 
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 [[resolved]]
 `UnresolvedOrdinal` can never be <<expressions/Expression.md#resolved, resolved>> (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[analysis-phase]]
-NOTE: `UnresolvedOrdinal` is resolved when <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc#, ResolveOrdinalInOrderByAndGroupBy>> logical resolution rule is executed.
+NOTE: `UnresolvedOrdinal` is resolved when <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md#, ResolveOrdinalInOrderByAndGroupBy>> logical resolution rule is executed.
 
 [[NonSQLExpression]]
 `UnresolvedOrdinal` has <<expressions/Expression.md#NonSQLExpression, no representation in SQL>>.

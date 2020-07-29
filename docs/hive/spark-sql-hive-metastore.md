@@ -8,12 +8,12 @@ By default, Spark SQL uses the embedded deployment mode of a Hive metastore with
 
 [IMPORTANT]
 ====
-The default embedded deployment mode is not recommended for production use due to limitation of only one active link:SparkSession.md[SparkSession] at a time.
+The default embedded deployment mode is not recommended for production use due to limitation of only one active SparkSession.md[SparkSession] at a time.
 
 Read Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document that explains the available deployment modes of a Hive metastore.
 ====
 
-When `SparkSession` is link:SparkSession-Builder.md#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]. `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
+When `SparkSession` is SparkSession-Builder.md#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is hive/HiveExternalCatalog.md[HiveExternalCatalog]. `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
 
 [NOTE]
 ====
@@ -97,15 +97,15 @@ NOTE: As of Spark 2.2 (see https://issues.apache.org/jira/browse/SPARK-18112[SPA
 
 CAUTION: FIXME Describe <<hive-site.xml, hive-site.xml>> vs `config` method vs `--conf` with <<spark.hadoop, spark.hadoop>> prefix.
 
-Spark SQL uses the Hive-specific configuration properties that further fine-tune the Hive integration, e.g. link:spark-sql-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] or link:spark-sql-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars].
+Spark SQL uses the Hive-specific configuration properties that further fine-tune the Hive integration, e.g. spark-sql-properties.md#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] or spark-sql-properties.md#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars].
 
 === [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir` Configuration Property
 
-link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
+link:spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
 
 [TIP]
 ====
-Refer to link:SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
+Refer to SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
 
 See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 ====
@@ -116,13 +116,13 @@ See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManu
 
 In order to use an external Hive metastore you should do the following:
 
-. Enable Hive support in link:SparkSession-Builder.md#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
+. Enable Hive support in SparkSession-Builder.md#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
 
-. link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
+. spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
 
 . Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
-. Check out link:SharedState.md#warehousePath[warehousePath]
+. Check out SharedState.md#warehousePath[warehousePath]
 
 . Execute `./bin/run-example sql.hive.SparkHiveExample` to verify Hive configuration
 
@@ -152,7 +152,7 @@ config("hive.metastore.uris", "thrift://192.168.175.160:9083")
 ```
 
 | [[hive.metastore.warehouse.dir]] `hive.metastore.warehouse.dir`
-a| `SharedState` uses link:SharedState.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+a| `SharedState` uses SharedState.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
 
 CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.warehouse.dir`? `SharedState.warehousePath`? Review https://github.com/apache/spark/pull/16996/files
 
@@ -183,7 +183,7 @@ res1: org.apache.spark.sql.internal.SharedState = org.apache.spark.sql.internal.
 
 `hive-site.xml` configures Hive clients (e.g. Spark SQL) with the Hive Metastore configuration.
 
-`hive-site.xml` is loaded when link:SharedState.md#warehousePath[SharedState] is created (which is...FIXME).
+`hive-site.xml` is loaded when SharedState.md#warehousePath[SharedState] is created (which is...FIXME).
 
 Configuration of Hive is done by placing your `hive-site.xml`, `core-site.xml` (for security configuration),
 and `hdfs-site.xml` (for HDFS configuration) file in `conf/` (that is automatically added to the CLASSPATH of a Spark application).

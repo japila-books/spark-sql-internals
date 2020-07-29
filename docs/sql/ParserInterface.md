@@ -27,13 +27,13 @@ Parses a SQL text to a [DataType](../spark-sql-DataType.md)
 
 Used when:
 
-* `DataType` utility is requested to <<spark-sql-DataType.adoc#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
+* `DataType` utility is requested to <<spark-sql-DataType.md#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
 
-* `StructType` is requested to <<spark-sql-StructType.adoc#add, add a field>>
+* `StructType` is requested to <<spark-sql-StructType.md#add, add a field>>
 
-* <<spark-sql-Column.adoc#cast, Column.cast>>
+* <<spark-sql-Column.md#cast, Column.cast>>
 
-* `HiveClientImpl` utility is requested to link:hive/HiveClientImpl.adoc#getSparkSQLDataType[getSparkSQLDataType]
+* `HiveClientImpl` utility is requested to hive/HiveClientImpl.md#getSparkSQLDataType[getSparkSQLDataType]
 
 * `OrcFileOperator` is requested to `readSchema`
 
@@ -54,9 +54,9 @@ Parses a SQL text to an [Expression](../expressions/Expression.md)
 
 Used in the following:
 
-* Dataset operators: <<spark-sql-dataset-operators.adoc#selectExpr, Dataset.selectExpr>>, <<spark-sql-dataset-operators.adoc#filter, Dataset.filter>> and <<spark-sql-dataset-operators.adoc#where, Dataset.where>>
+* Dataset operators: <<spark-sql-dataset-operators.md#selectExpr, Dataset.selectExpr>>, <<spark-sql-dataset-operators.md#filter, Dataset.filter>> and <<spark-sql-dataset-operators.md#where, Dataset.where>>
 
-* <<spark-sql-functions.adoc#expr, expr>> standard function
+* <<spark-sql-functions.md#expr, expr>> standard function
 
 ### parseFunctionIdentifier
 
@@ -69,9 +69,9 @@ Parses a SQL text to a `FunctionIdentifier`
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#listFunctions, listFunctions>>
+* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#listFunctions, listFunctions>>
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#getFunction, getFunction>> and <<spark-sql-CatalogImpl.adoc#functionExists, functionExists>>
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#getFunction, getFunction>> and <<spark-sql-CatalogImpl.md#functionExists, functionExists>>
 
 ### parseMultipartIdentifier
 
@@ -105,7 +105,7 @@ Parses a SQL text to a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupRelation, look up a relation (table or view) in catalogs>>
+* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupRelation, look up a relation (table or view) in catalogs>>
 
 * `SparkSession` is requested to <<SparkSession.md#sql, execute a SQL query (aka SQL Mode)>>
 
@@ -129,13 +129,13 @@ Parses a SQL text to a `TableIdentifier`
 
 Used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#insertInto, insertInto>> and <<spark-sql-DataFrameWriter.adoc#saveAsTable, saveAsTable>>
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#insertInto, insertInto>> and <<spark-sql-DataFrameWriter.md#saveAsTable, saveAsTable>>
 
-* `Dataset` is requested to <<spark-sql-Dataset-basic-actions.adoc#createTempViewCommand, createTempViewCommand>>
+* `Dataset` is requested to <<spark-sql-Dataset-basic-actions.md#createTempViewCommand, createTempViewCommand>>
 
 * `SparkSession` is requested to <<SparkSession.md#table, table>>
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listColumns, listColumns>>, <<spark-sql-CatalogImpl.adoc#getTable, getTable>>, <<spark-sql-CatalogImpl.adoc#tableExists, tableExists>>, <<spark-sql-CatalogImpl.adoc#createTable, createTable>>, <<spark-sql-CatalogImpl.adoc#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.adoc#uncacheTable, uncacheTable>>, and <<spark-sql-CatalogImpl.adoc#refreshTable, refreshTable>>
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listColumns, listColumns>>, <<spark-sql-CatalogImpl.md#getTable, getTable>>, <<spark-sql-CatalogImpl.md#tableExists, tableExists>>, <<spark-sql-CatalogImpl.md#createTable, createTable>>, <<spark-sql-CatalogImpl.md#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.md#uncacheTable, uncacheTable>>, and <<spark-sql-CatalogImpl.md#refreshTable, refreshTable>>
 
 * `SessionState` is requested to <<SessionState.md#refreshTable, refreshTable>>
 
@@ -150,11 +150,11 @@ Parses a SQL text to a [StructType](../spark-sql-StructType.md)
 
 Used when:
 
-* `DataType` utility is requested to <<spark-sql-DataType.adoc#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
+* `DataType` utility is requested to <<spark-sql-DataType.md#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
 
-* `StructType` utility is requested to <<spark-sql-StructType.adoc#fromDDL, create a StructType for a given DDL-formatted string (StructType.fromDDL)>>
+* `StructType` utility is requested to <<spark-sql-StructType.md#fromDDL, create a StructType for a given DDL-formatted string (StructType.fromDDL)>>
 
-* `JdbcUtils` utility is requested to <<spark-sql-JdbcUtils.adoc#parseUserSpecifiedCreateTableColumnTypes, parseUserSpecifiedCreateTableColumnTypes>> and <<spark-sql-JdbcUtils.adoc#getCustomSchema, getCustomSchema>>
+* `JdbcUtils` utility is requested to <<spark-sql-JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes, parseUserSpecifiedCreateTableColumnTypes>> and <<spark-sql-JdbcUtils.md#getCustomSchema, getCustomSchema>>
 
 ## Extensions
 

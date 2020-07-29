@@ -1,6 +1,6 @@
 # ExperimentalMethods
 
-`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers) and <<spark-sql-SparkPlanner.adoc#, SparkPlanner>>, respectively.
+`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers) and <<spark-sql-SparkPlanner.md#, SparkPlanner>>, respectively.
 
 [[attributes]]
 .ExperimentalMethods' Attributes
@@ -10,7 +10,7 @@
 | Description
 
 | extraOptimizations
-a| [[extraOptimizations]] Collection of link:catalyst/Rule.md[rules] to optimize link:spark-sql-LogicalPlan.adoc[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects)
+a| [[extraOptimizations]] Collection of catalyst/Rule.md[rules] to optimize spark-sql-LogicalPlan.md[LogicalPlans] (i.e. `Rule[LogicalPlan]` objects)
 
 [source, scala]
 ----
@@ -20,14 +20,14 @@ extraOptimizations: Seq[Rule[LogicalPlan]]
 Used when `SparkOptimizer` is requested for the [User Provided Optimizers](SparkOptimizer.md#User-Provided-Optimizers)
 
 | extraStrategies
-a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.adoc#, SparkStrategies>>
+a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.md#, SparkStrategies>>
 
 [source, scala]
 ----
 extraStrategies: Seq[Strategy]
 ----
 
-Used when `SessionState` is requested for the link:SessionState.md#planner[SparkPlanner]
+Used when `SessionState` is requested for the SessionState.md#planner[SparkPlanner]
 |===
 
 `ExperimentalMethods` is available as the <<SparkSession.md#experimental, experimental>> property of a `SparkSession`.

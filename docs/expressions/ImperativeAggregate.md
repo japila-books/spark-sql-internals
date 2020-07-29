@@ -2,9 +2,9 @@ title: ImperativeAggregate
 
 # ImperativeAggregate -- Aggregate Function Expressions with Imperative Methods
 
-`ImperativeAggregate` is the <<contract, contract>> for link:spark-sql-Expression-AggregateFunction.adoc[aggregate functions] that are expressed in terms of imperative <<initialize, initialize>>, <<update, update>>, and <<merge, merge>> methods (that operate on ``Row``-based aggregation buffers).
+`ImperativeAggregate` is the <<contract, contract>> for spark-sql-Expression-AggregateFunction.md[aggregate functions] that are expressed in terms of imperative <<initialize, initialize>>, <<update, update>>, and <<merge, merge>> methods (that operate on ``Row``-based aggregation buffers).
 
-`ImperativeAggregate` is a link:expressions/Expression.md[Catalyst expression] with link:expressions/Expression.md#CodegenFallback[CodegenFallback].
+`ImperativeAggregate` is a expressions/Expression.md[Catalyst expression] with expressions/Expression.md#CodegenFallback[CodegenFallback].
 
 [[implementations]]
 .ImperativeAggregate's Direct Implementations
@@ -19,10 +19,10 @@ title: ImperativeAggregate
 | `PivotFirst`
 |
 
-| link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
+| spark-sql-Expression-ScalaUDAF.md[ScalaUDAF]
 |
 
-| link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate]
+| spark-sql-Expression-TypedImperativeAggregate.md[TypedImperativeAggregate]
 |
 |===
 
@@ -54,9 +54,9 @@ a|
 
 Used when:
 
-* `AggregateProcessor` is link:spark-sql-AggregateProcessor.adoc[initialized] (for window aggregate functions)
+* `AggregateProcessor` is spark-sql-AggregateProcessor.md[initialized] (for window aggregate functions)
 
-* link:spark-sql-AggregationIterator.adoc[AggregationIterator], <<spark-sql-ObjectAggregationIterator.adoc#, ObjectAggregationIterator>>, link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator] (for aggregate functions)
+* spark-sql-AggregationIterator.md[AggregationIterator], <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>, spark-sql-TungstenAggregationIterator.md[TungstenAggregationIterator] (for aggregate functions)
 
 | [[inputAggBufferOffset]] `inputAggBufferOffset`
 |
@@ -66,7 +66,7 @@ a|
 
 Used when:
 
-* `AggregationIterator` does link:spark-sql-AggregationIterator.adoc#generateProcessRow[generateProcessRow] (for aggregate functions)
+* `AggregationIterator` does spark-sql-AggregationIterator.md#generateProcessRow[generateProcessRow] (for aggregate functions)
 
 | [[mutableAggBufferOffset]] `mutableAggBufferOffset`
 |
@@ -76,8 +76,8 @@ a|
 
 Used when:
 
-* `AggregateProcessor` is link:spark-sql-AggregateProcessor.adoc#update[updated] (for window aggregate functions)
-* link:spark-sql-AggregationIterator.adoc[AggregationIterator] (for aggregate functions)
+* `AggregateProcessor` is spark-sql-AggregateProcessor.md#update[updated] (for window aggregate functions)
+* spark-sql-AggregationIterator.md[AggregationIterator] (for aggregate functions)
 
 | [[withNewInputAggBufferOffset]] `withNewInputAggBufferOffset`
 |

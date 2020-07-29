@@ -2,7 +2,7 @@ title: SizeInBytesOnlyStatsPlanVisitor
 
 # SizeInBytesOnlyStatsPlanVisitor -- LogicalPlanVisitor for Total Size (in Bytes) Statistic Only
 
-`SizeInBytesOnlyStatsPlanVisitor` is a link:spark-sql-LogicalPlanVisitor.adoc[LogicalPlanVisitor] that computes a single dimension for link:spark-sql-Statistics.adoc[plan statistics], i.e. the total size (in bytes).
+`SizeInBytesOnlyStatsPlanVisitor` is a spark-sql-LogicalPlanVisitor.md[LogicalPlanVisitor] that computes a single dimension for spark-sql-Statistics.md[plan statistics], i.e. the total size (in bytes).
 
 === [[default]] `default` Method
 
@@ -11,11 +11,11 @@ title: SizeInBytesOnlyStatsPlanVisitor
 default(p: LogicalPlan): Statistics
 ----
 
-NOTE: `default` is part of link:spark-sql-LogicalPlanVisitor.adoc#default[LogicalPlanVisitor Contract] to compute the size statistic (in bytes) of a logical operator.
+NOTE: `default` is part of spark-sql-LogicalPlanVisitor.md#default[LogicalPlanVisitor Contract] to compute the size statistic (in bytes) of a logical operator.
 
-`default` requests a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] for the statistics or creates a link:spark-sql-Statistics.adoc[Statistics] with the product of the `sizeInBytes` statistic of every [child operator](catalyst/TreeNode.md#children).
+`default` requests a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] for the statistics or creates a spark-sql-Statistics.md[Statistics] with the product of the `sizeInBytes` statistic of every [child operator](catalyst/TreeNode.md#children).
 
-NOTE: `default` uses the cache of the estimated statistics of a logical operator so the statistics of an operator is link:spark-sql-LogicalPlanStats.adoc#stats[computed] once until it is link:spark-sql-LogicalPlanStats.adoc#invalidateStatsCache[invalidated].
+NOTE: `default` uses the cache of the estimated statistics of a logical operator so the statistics of an operator is spark-sql-LogicalPlanStats.md#stats[computed] once until it is spark-sql-LogicalPlanStats.md#invalidateStatsCache[invalidated].
 
 === [[visitIntersect]] `visitIntersect` Method
 
@@ -24,7 +24,7 @@ NOTE: `default` uses the cache of the estimated statistics of a logical operator
 visitIntersect(p: Intersect): Statistics
 ----
 
-NOTE: `visitIntersect` is part of link:spark-sql-LogicalPlanVisitor.adoc#visitIntersect[LogicalPlanVisitor Contract] to...FIXME.
+NOTE: `visitIntersect` is part of spark-sql-LogicalPlanVisitor.md#visitIntersect[LogicalPlanVisitor Contract] to...FIXME.
 
 `visitIntersect`...FIXME
 
@@ -35,6 +35,6 @@ NOTE: `visitIntersect` is part of link:spark-sql-LogicalPlanVisitor.adoc#visitIn
 visitJoin(p: Join): Statistics
 ----
 
-NOTE: `visitJoin` is part of link:spark-sql-LogicalPlanVisitor.adoc#visitJoin[LogicalPlanVisitor Contract] to...FIXME.
+NOTE: `visitJoin` is part of spark-sql-LogicalPlanVisitor.md#visitJoin[LogicalPlanVisitor Contract] to...FIXME.
 
 `visitJoin`...FIXME

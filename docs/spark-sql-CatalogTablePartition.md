@@ -6,7 +6,7 @@ title: CatalogTablePartition
 
 `CatalogTablePartition` is <<creating-instance, created>> when:
 
-* `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#fromHivePartition[retrieve a table partition metadata]
+* `HiveClientImpl` is requested to hive/HiveClientImpl.md#fromHivePartition[retrieve a table partition metadata]
 
 * `AlterTableAddPartitionCommand` and [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md) logical commands are executed
 
@@ -15,7 +15,7 @@ title: CatalogTablePartition
 [[simpleString]]
 The *readable text representation* of a `CatalogTablePartition` (aka `simpleString`) is...FIXME
 
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, executed>> (with a partition specification).
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, executed>> (with a partition specification).
 
 [[toString]]
 `CatalogTablePartition` uses the following *text representation* (i.e. `toString`)...FIXME
@@ -25,9 +25,9 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql
 `CatalogTablePartition` takes the following when created:
 
 * [[spec]] Partition specification
-* [[storage]] <<spark-sql-CatalogStorageFormat.adoc#, CatalogStorageFormat>>
+* [[storage]] <<spark-sql-CatalogStorageFormat.md#, CatalogStorageFormat>>
 * [[parameters]] Parameters (default: an empty collection)
-* [[stats]] <<spark-sql-CatalogStatistics.adoc#, Table statistics>> (default: `None`)
+* [[stats]] <<spark-sql-CatalogStatistics.md#, Table statistics>> (default: `None`)
 
 === [[toLinkedHashMap]] Converting Partition Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
@@ -39,7 +39,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 `toLinkedHashMap` converts the partition specification to a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
 
 * *Partition Values* with the <<spec, spec>>
-* <<spark-sql-CatalogStorageFormat.adoc#toLinkedHashMap, Storage specification>> (of the given <<storage, CatalogStorageFormat>>)
+* <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> (of the given <<storage, CatalogStorageFormat>>)
 * *Partition Parameters* with the <<parameters, parameters>> (if not empty)
 * *Partition Statistics* with the <<stats, CatalogStatistics>> (if available)
 
@@ -47,7 +47,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ====
 `toLinkedHashMap` is used when:
 
-* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>> (with the link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended[isExtended] flag on and a non-empty link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#partitionSpec[partitionSpec]).
+* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> (with the spark-sql-LogicalPlan-DescribeTableCommand.md#isExtended[isExtended] flag on and a non-empty spark-sql-LogicalPlan-DescribeTableCommand.md#partitionSpec[partitionSpec]).
 
 * `CatalogTablePartition` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====
@@ -59,7 +59,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 location: URI
 ----
 
-`location` simply returns the <<spark-sql-CatalogStorageFormat.adoc#locationUri, location URI>> of the <<storage, CatalogStorageFormat>> or throws an `AnalysisException`:
+`location` simply returns the <<spark-sql-CatalogStorageFormat.md#locationUri, location URI>> of the <<storage, CatalogStorageFormat>> or throws an `AnalysisException`:
 
 ```
 Partition [[specString]] did not specify locationUri

@@ -6,11 +6,11 @@ title: ExecutionListenerManager
 
 * Name of the action (that triggered a query execution)
 
-* link:spark-sql-QueryExecution.adoc[QueryExecution]
+* spark-sql-QueryExecution.md[QueryExecution]
 
 * Execution time of this query (in nanoseconds)
 
-`ExecutionListenerManager` is available as link:SparkSession.md#listenerManager[listenerManager] property of `SparkSession` (and link:SessionState.md#listenerManager[listenerManager] property of `SessionState`).
+`ExecutionListenerManager` is available as SparkSession.md#listenerManager[listenerManager] property of `SparkSession` (and SessionState.md#listenerManager[listenerManager] property of `SessionState`).
 
 [source, scala]
 ----
@@ -25,10 +25,10 @@ org.apache.spark.sql.util.ExecutionListenerManager
 [[creating-instance]]
 `ExecutionListenerManager` takes a single `SparkConf` when created
 
-While <<creating-instance, created>>, `ExecutionListenerManager` reads link:spark-sql-StaticSQLConf.adoc#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property with `QueryExecutionListeners` and <<register, registers>> them.
+While <<creating-instance, created>>, `ExecutionListenerManager` reads spark-sql-StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property with `QueryExecutionListeners` and <<register, registers>> them.
 
 [[spark.sql.queryExecutionListeners]]
-`ExecutionListenerManager` uses link:spark-sql-StaticSQLConf.adoc#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property as the list of `QueryExecutionListeners` that should be automatically added to newly created sessions (and registers them while <<creating-instance, being created>>).
+`ExecutionListenerManager` uses spark-sql-StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property as the list of `QueryExecutionListeners` that should be automatically added to newly created sessions (and registers them while <<creating-instance, being created>>).
 
 [[methods]]
 .ExecutionListenerManager's Public Methods
@@ -62,10 +62,10 @@ clear(): Unit
 ----
 |===
 
-`ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for link:BaseSessionStateBuilder.md#listenerManager[ExecutionListenerManager] (while `SessionState` is link:BaseSessionStateBuilder.md#build[built]).
+`ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for BaseSessionStateBuilder.md#listenerManager[ExecutionListenerManager] (while `SessionState` is BaseSessionStateBuilder.md#build[built]).
 
 [[listeners]]
-`ExecutionListenerManager` uses `listeners` internal registry for registered <<spark-sql-QueryExecutionListener.adoc#, QueryExecutionListeners>>.
+`ExecutionListenerManager` uses `listeners` internal registry for registered <<spark-sql-QueryExecutionListener.md#, QueryExecutionListeners>>.
 
 === [[onSuccess]] `onSuccess` Internal Method
 
@@ -80,9 +80,9 @@ onSuccess(funcName: String, qe: QueryExecution, duration: Long): Unit
 ====
 `onSuccess` is used when:
 
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has finished with no exceptions)
+* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has finished with no exceptions)
 
-* `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
+* `Dataset` is requested to spark-sql-Dataset.md#withAction[withAction]
 ====
 
 === [[onFailure]] `onFailure` Internal Method
@@ -98,9 +98,9 @@ onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit
 ====
 `onFailure` is used when:
 
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a logical command] (after it has reported an exception)
+* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has reported an exception)
 
-* `Dataset` is requested to link:spark-sql-Dataset.adoc#withAction[withAction]
+* `Dataset` is requested to spark-sql-Dataset.md#withAction[withAction]
 ====
 
 === [[withErrorHandling]] `withErrorHandling` Internal Method
@@ -121,4 +121,4 @@ NOTE: `withErrorHandling` is used when `ExecutionListenerManager` is requested t
 register(listener: QueryExecutionListener): Unit
 ----
 
-Internally, `register` simply registers (adds) the input <<spark-sql-QueryExecutionListener.adoc#, QueryExecutionListener>> to the <<listeners, listeners>> internal registry.
+Internally, `register` simply registers (adds) the input <<spark-sql-QueryExecutionListener.md#, QueryExecutionListener>> to the <<listeners, listeners>> internal registry.

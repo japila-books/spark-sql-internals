@@ -3,32 +3,32 @@ title: CatalogStatistics
 # CatalogStatistics -- Table Statistics From External Catalog (Metastore)
 
 [[creating-instance]][[table-statistics]]
-`CatalogStatistics` are *table statistics* that are stored in an link:spark-sql-ExternalCatalog.adoc[external catalog] (aka _metastore_):
+`CatalogStatistics` are *table statistics* that are stored in an spark-sql-ExternalCatalog.md[external catalog] (aka _metastore_):
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
 * [[rowCount]] Estimated *number of rows* (aka _row count_)
-* [[colStats]] *Column statistics* (i.e. column names and their link:spark-sql-ColumnStat.adoc[statistics])
+* [[colStats]] *Column statistics* (i.e. column names and their spark-sql-ColumnStat.md[statistics])
 
 [NOTE]
 ====
-`CatalogStatistics` is a "subset" of the statistics in link:spark-sql-Statistics.adoc[Statistics] (as there are no concepts of link:spark-sql-Statistics.adoc#attributeStats[attributes] and link:spark-sql-Statistics.adoc#hints[broadcast hint] in metastore).
+`CatalogStatistics` is a "subset" of the statistics in spark-sql-Statistics.md[Statistics] (as there are no concepts of spark-sql-Statistics.md#attributeStats[attributes] and spark-sql-Statistics.md#hints[broadcast hint] in metastore).
 
 `CatalogStatistics` are often stored in a Hive metastore and are referred as *Hive statistics* while `Statistics` are the *Spark statistics*.
 ====
 
-`CatalogStatistics` can be converted to link:spark-sql-Statistics.adoc[Spark statistics] using <<toPlanStats, toPlanStats>> method.
+`CatalogStatistics` can be converted to spark-sql-Statistics.md[Spark statistics] using <<toPlanStats, toPlanStats>> method.
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
-* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in link:spark-sql-ExternalCatalog.adoc[ExternalCatalog])
+* spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in spark-sql-ExternalCatalog.md[ExternalCatalog])
 
-* `CommandUtils` is requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics], the link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[current statistics (if changed)]
+* `CommandUtils` is requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics], the spark-sql-CommandUtils.md#compareAndGetNewStats[current statistics (if changed)]
 
-* `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
+* `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
 
-* link:hive/DetermineTableStats.adoc#apply[DetermineTableStats] and link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
+* hive/DetermineTableStats.md#apply[DetermineTableStats] and spark-sql-SparkOptimizer-PruneFileSourcePartitions.md[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
-* `HiveClientImpl` is requested for a table or partition link:hive/HiveClientImpl.adoc#readHiveStats[statistics from Hive's parameters]
+* `HiveClientImpl` is requested for a table or partition hive/HiveClientImpl.md#readHiveStats[statistics from Hive's parameters]
 
 [source, scala]
 ----
@@ -73,19 +73,19 @@ scala> stats.map(_.simpleString).foreach(println)
 toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
 ----
 
-`toPlanStats` converts the table statistics (from an external metastore) to link:spark-sql-Statistics.adoc[Spark statistics].
+`toPlanStats` converts the table statistics (from an external metastore) to spark-sql-Statistics.md[Spark statistics].
 
-With link:spark-sql-cost-based-optimization.adoc[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a link:spark-sql-Statistics.adoc[Statistics] with the link:spark-sql-EstimationUtils.adoc#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
+With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a spark-sql-Statistics.md[Statistics] with the spark-sql-EstimationUtils.md#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
 
-NOTE: Cost-based optimization is enabled when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+NOTE: Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
-Otherwise, when link:spark-sql-cost-based-optimization.adoc[cost-based optimization] is disabled, `toPlanStats` creates a link:spark-sql-Statistics.adoc[Statistics] with just the mandatory <<sizeInBytes, sizeInBytes>>.
+Otherwise, when spark-sql-cost-based-optimization.md[cost-based optimization] is disabled, `toPlanStats` creates a spark-sql-Statistics.md[Statistics] with just the mandatory <<sizeInBytes, sizeInBytes>>.
 
 CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 
 [NOTE]
 ====
-`toPlanStats` does the reverse of link:hive/HiveExternalCatalog.adoc#statsToProperties[HiveExternalCatalog.statsToProperties].
+`toPlanStats` does the reverse of hive/HiveExternalCatalog.md#statsToProperties[HiveExternalCatalog.statsToProperties].
 
 [source, scala]
 ----
@@ -93,4 +93,4 @@ FIXME Example
 ----
 ====
 
-NOTE: `toPlanStats` is used when link:hive/HiveTableRelation.adoc#computeStats[HiveTableRelation] and link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[LogicalRelation] are requested for statistics.
+NOTE: `toPlanStats` is used when hive/HiveTableRelation.md#computeStats[HiveTableRelation] and spark-sql-LogicalPlan-LogicalRelation.md#computeStats[LogicalRelation] are requested for statistics.

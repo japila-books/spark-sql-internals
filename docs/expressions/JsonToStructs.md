@@ -2,9 +2,9 @@ title: JsonToStructs
 
 # JsonToStructs Unary Expression
 
-`JsonToStructs` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> with link:expressions/Expression.md#TimeZoneAwareExpression[timezone] support and link:expressions/Expression.md#CodegenFallback[CodegenFallback].
+`JsonToStructs` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> with expressions/Expression.md#TimeZoneAwareExpression[timezone] support and expressions/Expression.md#CodegenFallback[CodegenFallback].
 
-`JsonToStructs` is <<creating-instance, created>> to represent link:spark-sql-functions.adoc#from_json[from_json] function.
+`JsonToStructs` is <<creating-instance, created>> to represent spark-sql-functions.md#from_json[from_json] function.
 
 [source, scala]
 ----
@@ -18,7 +18,7 @@ scala> println(jsonExpr.numberedTreeString)
 01 +- 'json
 ----
 
-`JsonToStructs` is a <<spark-sql-Expression-ExpectsInputTypes.adoc#, ExpectsInputTypes>> expression.
+`JsonToStructs` is a <<spark-sql-Expression-ExpectsInputTypes.md#, ExpectsInputTypes>> expression.
 
 [[FAILFAST]]
 [NOTE]
@@ -40,12 +40,12 @@ scala> println(jsonExpr.numberedTreeString)
 | Enabled (i.e. `true`)
 
 | [[parser]] `parser`
-a| `JacksonParser` with <<rowSchema, rowSchema>> and link:spark-sql-JsonFileFormat.adoc#JSONOptions[JSON options]
+a| `JacksonParser` with <<rowSchema, rowSchema>> and spark-sql-JsonFileFormat.md#JSONOptions[JSON options]
 
-NOTE: link:spark-sql-JsonFileFormat.adoc#JSONOptions[JSON options] are made up of the input <<options, options>> with link:spark-sql-JsonFileFormat.adoc#mode[mode] option as `FAILFAST` and the input <<timeZoneId, time zone>> as the default time zone.
+NOTE: spark-sql-JsonFileFormat.md#JSONOptions[JSON options] are made up of the input <<options, options>> with spark-sql-JsonFileFormat.md#mode[mode] option as `FAILFAST` and the input <<timeZoneId, time zone>> as the default time zone.
 
 | [[rowSchema]] `rowSchema`
-a| link:spark-sql-StructType.adoc[StructType] that...FIXME
+a| spark-sql-StructType.md[StructType] that...FIXME
 
 * <<schema, schema>> when of type `StructType`
 * `StructType` of the elements in <<schema, schema>> when of type `ArrayType`
@@ -55,9 +55,9 @@ a| link:spark-sql-StructType.adoc[StructType] that...FIXME
 
 `JsonToStructs` takes the following when created:
 
-* [[schema]] link:spark-sql-DataType.adoc[DataType]
+* [[schema]] spark-sql-DataType.md[DataType]
 * [[options]] Options
-* [[child]] Child link:expressions/Expression.md[expression]
+* [[child]] Child expressions/Expression.md[expression]
 * [[timeZoneId]] Optional time zone ID
 
 `JsonToStructs` initializes the <<internal-registries, internal registries and counters>>.
@@ -69,9 +69,9 @@ a| link:spark-sql-StructType.adoc[StructType] that...FIXME
 validateSchemaLiteral(exp: Expression): StructType
 ----
 
-`validateSchemaLiteral` requests link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser] to link:spark-sql-AbstractSqlParser.adoc#parseTableSchema[parseTableSchema] for link:spark-sql-Expression-Literal.adoc[Literal] of link:spark-sql-DataType.adoc#StringType[StringType].
+`validateSchemaLiteral` requests spark-sql-CatalystSqlParser.md[CatalystSqlParser] to spark-sql-AbstractSqlParser.md#parseTableSchema[parseTableSchema] for spark-sql-Expression-Literal.md[Literal] of spark-sql-DataType.md#StringType[StringType].
 
-For any other non-``StringType`` link:spark-sql-DataType.adoc[types], `validateSchemaLiteral` reports a `AnalysisException`:
+For any other non-``StringType`` spark-sql-DataType.md[types], `validateSchemaLiteral` reports a `AnalysisException`:
 
 ```
 Expected a string literal instead of [expression]

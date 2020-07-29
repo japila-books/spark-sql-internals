@@ -26,7 +26,7 @@ getPreferredLocations(
     split: Partition): Seq[String]
 ```
 
-`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](InputPartition.md#preferredLocations).
+`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](InputPartition.md#preferredLocations).
 
 `getPreferredLocations` is part of Spark Core's `RDD` abstraction.
 
@@ -36,7 +36,7 @@ getPreferredLocations(
 getPartitions: Array[Partition]
 ```
 
-`getPartitions` simply creates a <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> for every <<inputPartitions, InputPartition>>.
+`getPartitions` simply creates a <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for every <<inputPartitions, InputPartition>>.
 
 `getPartitions` is part of Spark Core's `RDD` abstraction.
 
@@ -48,10 +48,10 @@ compute(
     context: TaskContext): Iterator[T]
 ```
 
-`compute` requests the input <<spark-sql-DataSourceRDDPartition.adoc#, DataSourceRDDPartition>> (the `split` partition) for the <<spark-sql-DataSourceRDDPartition.adoc#inputPartition, InputPartition>> that in turn is requested to [create an InputPartitionReader](InputPartition.md#createPartitionReader).
+`compute` requests the input <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> (the `split` partition) for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested to [create an InputPartitionReader](InputPartition.md#createPartitionReader).
 
 `compute` registers a Spark Core `TaskCompletionListener` that requests the `InputPartitionReader` to close when a task completes.
 
-`compute` returns a Spark Core `InterruptibleIterator` that requests the `InputPartitionReader` to <<spark-sql-InputPartitionReader.adoc#next, proceed to the next record>> (when requested to `hasNext`) and <<spark-sql-InputPartitionReader.adoc#get, return the current record>> (when `next`).
+`compute` returns a Spark Core `InterruptibleIterator` that requests the `InputPartitionReader` to <<spark-sql-InputPartitionReader.md#next, proceed to the next record>> (when requested to `hasNext`) and <<spark-sql-InputPartitionReader.md#get, return the current record>> (when `next`).
 
 `compute` is part of Spark Core's `RDD` abstraction.

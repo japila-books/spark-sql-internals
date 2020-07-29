@@ -2,9 +2,9 @@ title: CoalesceExec
 
 # CoalesceExec Unary Physical Operator
 
-`CoalesceExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
+`CoalesceExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
 
-`CoalesceExec` represents link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#Repartition[Repartition] logical operator at execution (when shuffle was disabled -- see [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy). When executed, it executes the input `child` and calls link:spark-rdd-partitions.adoc#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
+`CoalesceExec` represents spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#Repartition[Repartition] logical operator at execution (when shuffle was disabled -- see [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy). When executed, it executes the input `child` and calls spark-rdd-partitions.md#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
 
 Please note that since physical operators present themselves without the suffix _Exec_, `CoalesceExec` is the `Coalesce` in the Physical Plan section in the following example:
 
@@ -35,6 +35,6 @@ Coalesce 1
 +- LocalTableScan [value#1]
 ----
 
-`output` collection of link:spark-sql-Expression-Attribute.adoc[Attribute] matches the ``child``'s (since `CoalesceExec` is about changing the number of partitions not the internal representation).
+`output` collection of spark-sql-Expression-Attribute.md[Attribute] matches the ``child``'s (since `CoalesceExec` is about changing the number of partitions not the internal representation).
 
-`outputPartitioning` returns a link:spark-sql-SparkPlan-Partitioning.adoc#SinglePartition[SinglePartition] when the input `numPartitions` is `1` while a link:spark-sql-SparkPlan-Partitioning.adoc#UnknownPartitioning[UnknownPartitioning] partitioning scheme for the other cases.
+`outputPartitioning` returns a spark-sql-SparkPlan-Partitioning.md#SinglePartition[SinglePartition] when the input `numPartitions` is `1` while a spark-sql-SparkPlan-Partitioning.md#UnknownPartitioning[UnknownPartitioning] partitioning scheme for the other cases.

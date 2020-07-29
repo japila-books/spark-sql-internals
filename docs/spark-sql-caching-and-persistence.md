@@ -1,12 +1,12 @@
 # Caching and Persistence
 
-One of the optimizations in Spark SQL is *Dataset caching* (aka *Dataset persistence*) which is available using the <<spark-sql-dataset-operators.adoc#, Dataset API>> using the following basic actions:
+One of the optimizations in Spark SQL is *Dataset caching* (aka *Dataset persistence*) which is available using the <<spark-sql-dataset-operators.md#, Dataset API>> using the following basic actions:
 
-* [[cache]] <<spark-sql-dataset-operators.adoc#cache, cache>>
+* [[cache]] <<spark-sql-dataset-operators.md#cache, cache>>
 
-* [[persist]] <<spark-sql-dataset-operators.adoc#persist, persist>>
+* [[persist]] <<spark-sql-dataset-operators.md#persist, persist>>
 
-* [[unpersist]] <<spark-sql-dataset-operators.adoc#unpersist, unpersist>>
+* [[unpersist]] <<spark-sql-dataset-operators.md#unpersist, unpersist>>
 
 `cache` is simply `persist` with `MEMORY_AND_DISK` storage level.
 
@@ -25,9 +25,9 @@ At this point you could use web UI's *Storage* tab to review the Datasets persis
 .web UI's Storage tab
 image::images/spark-webui-storage.png[align="center"]
 
-`persist` uses <<spark-sql-CacheManager.adoc#, CacheManager>> for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> logical operators), and is used to <<spark-sql-CacheManager.adoc#cacheQuery, cache structured queries>> (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators).
+`persist` uses <<spark-sql-CacheManager.md#, CacheManager>> for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> logical operators), and is used to <<spark-sql-CacheManager.md#cacheQuery, cache structured queries>> (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators).
 
-At <<spark-sql-QueryExecution.adoc#withCachedData, withCachedData>> phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to <<spark-sql-CacheManager.adoc#useCachedData, replace segments of a logical query plan with their cached data>> (including <<spark-sql-subqueries.adoc#, subqueries>>).
+At <<spark-sql-QueryExecution.md#withCachedData, withCachedData>> phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to <<spark-sql-CacheManager.md#useCachedData, replace segments of a logical query plan with their cached data>> (including <<spark-sql-subqueries.md#, subqueries>>).
 
 ```
 scala> println(data.queryExecution.withCachedData.numberedTreeString)
@@ -69,7 +69,7 @@ res1: Array[org.apache.spark.sql.Row] = Array()
 
 [NOTE]
 ====
-You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<spark-sql-dataset-operators.adoc#persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
+You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<spark-sql-dataset-operators.md#persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
 
 [source,scala]
 ----
@@ -133,6 +133,6 @@ res0: Boolean = false
 
 === [[cache-table]] SQL's CACHE TABLE
 
-SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to link:spark-sql-Catalog.adoc#cacheTable[caching the table].
+SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to spark-sql-Catalog.md#cacheTable[caching the table].
 
-Internally, `CACHE TABLE` becomes link:spark-sql-LogicalPlan-RunnableCommand.adoc#CacheTableCommand[CacheTableCommand] runnable command that...FIXME
+Internally, `CACHE TABLE` becomes spark-sql-LogicalPlan-RunnableCommand.md#CacheTableCommand[CacheTableCommand] runnable command that...FIXME

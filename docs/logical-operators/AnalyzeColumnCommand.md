@@ -2,7 +2,7 @@ title: AnalyzeColumnCommand
 
 # AnalyzeColumnCommand Logical Command
 
-`AnalyzeColumnCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
+`AnalyzeColumnCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
 
 ```
 ANALYZE TABLE tableName COMPUTE STATISTICS FOR COLUMNS columnNames
@@ -58,7 +58,7 @@ scala> sql(s"DESC EXTENDED $tableName id").show
 +--------------+----------+
 ----
 
-`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following link:spark-sql-DataType.adoc[data types]:
+`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when spark-sql-properties.md#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following spark-sql-DataType.md[data types]:
 
 * `IntegralType`
 * `DecimalType`
@@ -119,7 +119,7 @@ only showing top 20 rows
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` calculates the following statistics:
 

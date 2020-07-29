@@ -4,7 +4,7 @@ title: SchemaRelationProvider
 
 `SchemaRelationProvider` is the <<contract, contract>> of <<implementations, BaseRelation providers>> that <<createRelation, require a user-defined schema while creating a relation>>.
 
-The requirement of specifying a user-defined schema is enforced when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format. If not specified, `DataSource` throws a `AnalysisException`:
+The requirement of specifying a user-defined schema is enforced when `DataSource` is requested for a <<spark-sql-DataSource.md#resolveRelation, BaseRelation>> for a given data source format. If not specified, `DataSource` throws a `AnalysisException`:
 
 ```
 A schema needs to be specified when using [className].
@@ -30,14 +30,14 @@ trait SchemaRelationProvider {
 | Description
 
 | `createRelation`
-| [[createRelation]] Creates a link:spark-sql-BaseRelation.adoc[BaseRelation] for the user-defined schema
+| [[createRelation]] Creates a spark-sql-BaseRelation.md[BaseRelation] for the user-defined schema
 
-Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.adoc#resolveRelation, BaseRelation>> for a given data source format
+Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.md#resolveRelation, BaseRelation>> for a given data source format
 |===
 
 [[implementations]]
 NOTE: There are no known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
 
-TIP: Use link:spark-sql-RelationProvider.adoc[RelationProvider] for data source providers with schema inference.
+TIP: Use spark-sql-RelationProvider.md[RelationProvider] for data source providers with schema inference.
 
-TIP: Use both `SchemaRelationProvider` and link:spark-sql-RelationProvider.adoc[RelationProvider] if a data source should support both schema inference and user-defined schemas.
+TIP: Use both `SchemaRelationProvider` and spark-sql-RelationProvider.md[RelationProvider] if a data source should support both schema inference and user-defined schemas.

@@ -5,7 +5,7 @@
 
 `FileIndex` is the <<contract, abstraction>> of <<implementations, file indices>> that knows the <<rootPaths, root paths>> and <<partitionSchema, partition schema>> of a relation.
 
-`FileIndex` is associated with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation].
+`FileIndex` is associated with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation].
 
 [[contract]]
 .FileIndex Contract
@@ -26,9 +26,9 @@ File names to read when scanning this relation
 
 Used when:
 
-* `CatalogFileIndex` is requested for the link:CatalogFileIndex.adoc#inputFiles[input files]
+* `CatalogFileIndex` is requested for the CatalogFileIndex.md#inputFiles[input files]
 
-* `HadoopFsRelation` is requested for the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#inputFiles[input files]
+* `HadoopFsRelation` is requested for the spark-sql-BaseRelation-HadoopFsRelation.md#inputFiles[input files]
 
 | listFiles
 a| [[listFiles]]
@@ -44,13 +44,13 @@ File names (grouped into partitions when the data is partitioned)
 
 Used when:
 
-* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions[selectedPartitions]
+* `FileSourceScanExec` physical operator is requested for spark-sql-SparkPlan-FileSourceScanExec.md#selectedPartitions[selectedPartitions]
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#inferIfNeeded[inferIfNeeded]
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#inferIfNeeded[inferIfNeeded]
 
-* link:spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.adoc[OptimizeMetadataOnlyQuery] logical optimization is executed
+* spark-sql-SparkOptimizer-OptimizeMetadataOnlyQuery.md[OptimizeMetadataOnlyQuery] logical optimization is executed
 
-* `CatalogFileIndex` is requested for the link:CatalogFileIndex.adoc#listFiles[files]
+* `CatalogFileIndex` is requested for the CatalogFileIndex.md#listFiles[files]
 
 | metadataOpsTimeNs
 a| [[metadataOpsTimeNs]]
@@ -62,7 +62,7 @@ metadataOpsTimeNs: Option[Long] = None
 
 Metadata operation time for listing files (in nanoseconds)
 
-Used when `FileSourceScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions, selectedPartitions>>
+Used when `FileSourceScanExec` leaf physical operator is requested for <<spark-sql-SparkPlan-FileSourceScanExec.md#selectedPartitions, selectedPartitions>>
 
 | partitionSchema
 a| [[partitionSchema]]
@@ -74,9 +74,9 @@ partitionSchema: StructType
 
 Used when:
 
-* `CatalogFileIndex` is requested to <<CatalogFileIndex.adoc#filterPartitions, filterPartitions>>
+* `CatalogFileIndex` is requested to <<CatalogFileIndex.md#filterPartitions, filterPartitions>>
 
-* `DataSource` is requested to <<spark-sql-DataSource.adoc#getOrInferFileFormatSchema, getOrInferFileFormatSchema>> and <<spark-sql-DataSource.adoc#resolveRelation, resolve a FileFormat-based relation>>
+* `DataSource` is requested to <<spark-sql-DataSource.md#getOrInferFileFormatSchema, getOrInferFileFormatSchema>> and <<spark-sql-DataSource.md#resolveRelation, resolve a FileFormat-based relation>>
 
 | refresh
 a| [[refresh]]
@@ -90,11 +90,11 @@ Refreshes cached file listings
 
 Used when:
 
-* `CacheManager` is requested to <<spark-sql-CacheManager.adoc#lookupAndRefresh, lookupAndRefresh>>
+* `CacheManager` is requested to <<spark-sql-CacheManager.md#lookupAndRefresh, lookupAndRefresh>>
 
-* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> is executed
+* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> is executed
 
-* `LogicalRelation` leaf logical operator is requested to <<spark-sql-LogicalPlan-LogicalRelation.adoc#refresh, refresh>> (for a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
+* `LogicalRelation` leaf logical operator is requested to <<spark-sql-LogicalPlan-LogicalRelation.md#refresh, refresh>> (for a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>)
 
 | rootPaths
 a| [[rootPaths]]
@@ -108,15 +108,15 @@ Root paths from which the catalog gets the files (as Hadoop {url-hadoop-javadoc}
 
 Used when:
 
-* `HiveMetastoreCatalog` is requested for a link:hive/HiveMetastoreCatalog.adoc#getCached[LogicalRelation over a HadoopFsRelation cached] (when requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation])
+* `HiveMetastoreCatalog` is requested for a hive/HiveMetastoreCatalog.md#getCached[LogicalRelation over a HadoopFsRelation cached] (when requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation])
 
-* `CacheManager` is requested to link:spark-sql-CacheManager.adoc#lookupAndRefresh[lookupAndRefresh]
+* `CacheManager` is requested to spark-sql-CacheManager.md#lookupAndRefresh[lookupAndRefresh]
 
-* `FileSourceScanExec` physical operator is requested for the link:spark-sql-SparkPlan-FileSourceScanExec.adoc#metadata[metadata]
+* `FileSourceScanExec` physical operator is requested for the spark-sql-SparkPlan-FileSourceScanExec.md#metadata[metadata]
 
-* `DDLUtils` utility is used to link:spark-sql-DDLUtils.adoc#verifyNotReadPath[verifyNotReadPath]
+* `DDLUtils` utility is used to spark-sql-DDLUtils.md#verifyNotReadPath[verifyNotReadPath]
 
-* link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] logical resolution rule is executed (for a link:InsertIntoTable.adoc[InsertIntoTable] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation])
+* spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] logical resolution rule is executed (for a InsertIntoTable.md[InsertIntoTable] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
 
 | sizeInBytes
 a| [[sizeInBytes]]
@@ -130,9 +130,9 @@ Estimated size of the data of the relation (in bytes)
 
 Used when:
 
-* `HadoopFsRelation` is requested for the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#sizeInBytes, estimated size>>
+* `HadoopFsRelation` is requested for the <<spark-sql-BaseRelation-HadoopFsRelation.md#sizeInBytes, estimated size>>
 
-* link:spark-sql-SparkOptimizer-PruneFileSourcePartitions.adoc[PruneFileSourcePartitions] logical optimization is executed
+* spark-sql-SparkOptimizer-PruneFileSourcePartitions.md[PruneFileSourcePartitions] logical optimization is executed
 
 |===
 
@@ -143,10 +143,10 @@ Used when:
 | FileIndex
 | Description
 
-| link:CatalogFileIndex.adoc[CatalogFileIndex]
+| CatalogFileIndex.md[CatalogFileIndex]
 | [[CatalogFileIndex]]
 
-| link:PartitioningAwareFileIndex.adoc[PartitioningAwareFileIndex]
+| PartitioningAwareFileIndex.md[PartitioningAwareFileIndex]
 | [[PartitioningAwareFileIndex]]
 
 |===

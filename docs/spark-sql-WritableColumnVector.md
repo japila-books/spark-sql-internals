@@ -1,6 +1,6 @@
 # WritableColumnVector
 
-`WritableColumnVector` is the <<contract, extension>> of the <<spark-sql-ColumnVector.adoc#, ColumnVector contract>> for <<implementations, writable column vectors>> that <<FIXME, FIXME>>.
+`WritableColumnVector` is the <<contract, extension>> of the <<spark-sql-ColumnVector.md#, ColumnVector contract>> for <<implementations, writable column vectors>> that <<FIXME, FIXME>>.
 
 [[contract]]
 .WritableColumnVector Contract (Abstract Methods Only)
@@ -390,7 +390,7 @@ void reserveInternal(int capacity)
 
 Used when:
 
-* <<spark-sql-OffHeapColumnVector.adoc#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.adoc#, OnHeapColumnVector>> are created
+* <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are created
 
 * `WritableColumnVector` is requested to <<reserve, reserve memory of a given required capacity>>
 
@@ -415,10 +415,10 @@ Used when...FIXME
 | WritableColumnVector
 | Description
 
-| <<spark-sql-OffHeapColumnVector.adoc#, OffHeapColumnVector>>
+| <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>>
 | [[OffHeapColumnVector]]
 
-| <<spark-sql-OnHeapColumnVector.adoc#, OnHeapColumnVector>>
+| <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>>
 | [[OnHeapColumnVector]]
 
 |===
@@ -427,7 +427,7 @@ Used when...FIXME
 `WritableColumnVector` takes the following to be created:
 
 * [[capacity]] Number of rows to hold in a vector (aka `capacity`)
-* [[type]] link:spark-sql-DataType.adoc[Data type] of the rows stored
+* [[type]] spark-sql-DataType.md[Data type] of the rows stored
 
 NOTE: `WritableColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete WritableColumnVectors>>.
 
@@ -446,9 +446,9 @@ void reset()
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
 
-* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.adoc#nextBatch, read next rows into a columnar batch>>
+* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextBatch, read next rows into a columnar batch>>
 
-* <<spark-sql-OffHeapColumnVector.adoc#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.adoc#, OnHeapColumnVector>> are created
+* <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are created
 
 * `WritableColumnVector` is requested to <<reserveDictionaryIds, reserveDictionaryIds>>
 ====

@@ -1,14 +1,14 @@
 # Broadcast Joins
 
-Spark SQL uses **broadcast join** (_broadcast hash join_) instead of hash join to optimize join queries when the size of one side data is below link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold].
+Spark SQL uses **broadcast join** (_broadcast hash join_) instead of hash join to optimize join queries when the size of one side data is below spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold].
 
 Broadcast join can be very efficient for joins between a large table (fact) with relatively small tables (dimensions) that could then be used to perform a *star-schema join*. It can avoid sending all data of the large table over the network.
 
-You can use link:spark-sql-functions.adoc#broadcast[broadcast] function or SQL's link:spark-sql-hint-framework.adoc#broadcast-hints[broadcast hints] to mark a dataset to be broadcast when used in a join query.
+You can use spark-sql-functions.md#broadcast[broadcast] function or SQL's spark-sql-hint-framework.md#broadcast-hints[broadcast hints] to mark a dataset to be broadcast when used in a join query.
 
 NOTE: According to the article http://dmtolpeko.com/2015/02/20/map-side-join-in-spark/[Map-Side Join in Spark], *broadcast join* is also called a *replicated join* (in the distributed system community) or a *map-side join* (in the Hadoop community).
 
-`CanBroadcast` object matches a link:spark-sql-LogicalPlan.adoc[LogicalPlan] with output small enough for broadcast join.
+`CanBroadcast` object matches a spark-sql-LogicalPlan.md[LogicalPlan] with output small enough for broadcast join.
 
 NOTE: Currently statistics are only supported for Hive Metastore tables where the command `ANALYZE TABLE [tableName] COMPUTE STATISTICS noscan` has been run.
 

@@ -2,17 +2,17 @@ title: ListQuery
 
 # ListQuery Subquery Expression
 
-`ListQuery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that represents SQL's link:spark-sql-AstBuilder.adoc#withPredicate[IN predicate with a subquery], e.g. `NOT? IN '(' query ')'`.
+`ListQuery` is a spark-sql-Expression-SubqueryExpression.md[SubqueryExpression] that represents SQL's spark-sql-AstBuilder.md#withPredicate[IN predicate with a subquery], e.g. `NOT? IN '(' query ')'`.
 
 [[Unevaluable]]
-`ListQuery` link:expressions/Expression.md#Unevaluable[cannot be evaluated] and produce a value given an internal row.
+`ListQuery` expressions/Expression.md#Unevaluable[cannot be evaluated] and produce a value given an internal row.
 
 [[resolved]]
-`ListQuery` is link:spark-sql-Expression-SubqueryExpression.adoc#resolved[resolved] when:
+`ListQuery` is spark-sql-Expression-SubqueryExpression.md#resolved[resolved] when:
 
-. link:expressions/Expression.md#childrenResolved[Children are resolved]
+. expressions/Expression.md#childrenResolved[Children are resolved]
 
-. <<plan, Subquery logical plan>> is link:spark-sql-LogicalPlan.adoc#resolved[resolved]
+. <<plan, Subquery logical plan>> is spark-sql-LogicalPlan.md#resolved[resolved]
 
 . There is at least one <<childOutputs, child output attribute>>
 
@@ -20,7 +20,7 @@ title: ListQuery
 
 `ListQuery` takes the following when created:
 
-* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[children]] Child link:expressions/Expression.md[expressions]
-* [[exprId]] Expression ID (as `ExprId` and defaults to a link:spark-sql-Expression-NamedExpression.adoc#newExprId[new ExprId])
-* [[childOutputs]] Child output link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
+* [[children]] Child expressions/Expression.md[expressions]
+* [[exprId]] Expression ID (as `ExprId` and defaults to a spark-sql-Expression-NamedExpression.md#newExprId[new ExprId])
+* [[childOutputs]] Child output spark-sql-Expression-Attribute.md[attributes]

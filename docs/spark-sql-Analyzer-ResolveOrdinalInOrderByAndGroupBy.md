@@ -1,10 +1,10 @@
 # ResolveOrdinalInOrderByAndGroupBy Logical Resolution Rule
 
-`ResolveOrdinalInOrderByAndGroupBy` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.
+`ResolveOrdinalInOrderByAndGroupBy` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.
 
-`ResolveOrdinalInOrderByAndGroupBy` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
+`ResolveOrdinalInOrderByAndGroupBy` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
 
-`ResolveOrdinalInOrderByAndGroupBy` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveOrdinalInOrderByAndGroupBy` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[creating-instance]]
 `ResolveOrdinalInOrderByAndGroupBy` takes no arguments when created.
@@ -27,11 +27,11 @@ scala> println(planResolved.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` [walks the logical plan from children up the tree](catalyst/TreeNode.md#transformUp) and looks for <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> leaf expressions (in <<spark-sql-LogicalPlan-Sort.adoc#order, ordering>> and <<spark-sql-LogicalPlan-Aggregate.adoc#groupingExpressions, grouping>> expressions, respectively).
+`apply` [walks the logical plan from children up the tree](catalyst/TreeNode.md#transformUp) and looks for <<spark-sql-LogicalPlan-Sort.md#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> leaf expressions (in <<spark-sql-LogicalPlan-Sort.md#order, ordering>> and <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping>> expressions, respectively).
 
-For a <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> expressions, `apply` replaces all the <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> expressions (with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> child expressions) with `SortOrder` expressions and the expression at the `index - 1` position in the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-Sort.adoc#child, child>> logical operator.
+For a <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions, `apply` replaces all the <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions (with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> child expressions) with `SortOrder` expressions and the expression at the `index - 1` position in the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-Sort.md#child, child>> logical operator.
 
-For a <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> expressions, `apply` replaces all the expressions (with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> child expressions) with the expression at the `index - 1` position in the <<spark-sql-LogicalPlan-Aggregate.adoc#aggregateExpressions, aggregate named expressions>> of the current `Aggregate` logical operator.
+For a <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions, `apply` replaces all the expressions (with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> child expressions) with the expression at the `index - 1` position in the <<spark-sql-LogicalPlan-Aggregate.md#aggregateExpressions, aggregate named expressions>> of the current `Aggregate` logical operator.
 
 `apply` throws a `AnalysisException` (and hence fails an analysis) if the ordinal is outside the range:
 

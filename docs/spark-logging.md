@@ -21,11 +21,11 @@ You can set up the default logging for Spark shell in `conf/log4j.properties`. U
 
 ## [[setting-default-log-level]] Setting Default Log Level Programatically
 
-Refer to link:spark-SparkContext.adoc#setting-default-log-level[Setting Default Log Level Programatically] in link:spark-SparkContext.adoc[SparkContext -- Entry Point to Spark Core].
+Refer to spark-SparkContext.md#setting-default-log-level[Setting Default Log Level Programatically] in spark-SparkContext.md[SparkContext -- Entry Point to Spark Core].
 
 ## [[setting-log-levels-applications]] Setting Log Levels in Spark Applications
 
-In standalone Spark applications or while in link:spark-shell.adoc[Spark Shell] session, use the following:
+In standalone Spark applications or while in spark-shell.md[Spark Shell] session, use the following:
 
 ```scala
 import org.apache.log4j.{Level, Logger}

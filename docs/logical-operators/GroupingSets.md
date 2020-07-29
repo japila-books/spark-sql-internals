@@ -2,7 +2,7 @@ title: GroupingSets
 
 # GroupingSets Unary Logical Operator
 
-`GroupingSets` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents SQL's link:spark-sql-AstBuilder.adoc#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
+`GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's spark-sql-AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
 
 ```
 val q = sql("""
@@ -30,23 +30,23 @@ scala> println(q.queryExecution.analyzed.numberedTreeString)
 
 NOTE: `GroupingSets` can only be created using SQL.
 
-NOTE: `GroupingSets` is not supported on Structured Streaming's link:spark-sql-LogicalPlan.adoc#isStreaming[streaming Datasets].
+NOTE: `GroupingSets` is not supported on Structured Streaming's spark-sql-LogicalPlan.md#isStreaming[streaming Datasets].
 
 [[resolved]]
 `GroupingSets` is never resolved (as it can only be converted to an `Aggregate` logical operator).
 
 [[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly the attributes of <<aggregations, aggregate named expressions>>.
+The catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly the attributes of <<aggregations, aggregate named expressions>>.
 
 === [[analyzer]] Analysis Phase
 
-`GroupingSets` operator is resolved at link:spark-sql-Analyzer.adoc[analysis phase] in the following logical evaluation rules:
+`GroupingSets` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
 
-* link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases] for unresolved aliases in <<aggregations, aggregate named expressions>>
+* spark-sql-Analyzer-ResolveAliases.md[ResolveAliases] for unresolved aliases in <<aggregations, aggregate named expressions>>
 
-* link:spark-sql-Analyzer.adoc#ResolveGroupingAnalytics[ResolveGroupingAnalytics]
+* spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics]
 
-`GroupingSets` operator is resolved to an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] with link:spark-sql-LogicalPlan-Expand.adoc[Expand] logical operators.
+`GroupingSets` operator is resolved to an spark-sql-LogicalPlan-Aggregate.md[Aggregate] with spark-sql-LogicalPlan-Expand.md[Expand] logical operators.
 
 [source, scala]
 ----
@@ -69,7 +69,7 @@ scala> println(plan.numberedTreeString)
 
 `GroupingSets` takes the following when created:
 
-* [[selectedGroupByExprs]] link:expressions/Expression.md[Expressions] from `GROUPING SETS` clause
-* [[groupByExprs]] Grouping link:expressions/Expression.md[expressions] from `GROUP BY` clause
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[aggregations]] Aggregate link:spark-sql-Expression-NamedExpression.adoc[named expressions]
+* [[selectedGroupByExprs]] expressions/Expression.md[Expressions] from `GROUPING SETS` clause
+* [[groupByExprs]] Grouping expressions/Expression.md[expressions] from `GROUP BY` clause
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
+* [[aggregations]] Aggregate spark-sql-Expression-NamedExpression.md[named expressions]

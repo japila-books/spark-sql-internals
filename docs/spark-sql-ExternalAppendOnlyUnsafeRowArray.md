@@ -2,17 +2,17 @@ title: ExternalAppendOnlyUnsafeRowArray
 
 # ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)
 
-`ExternalAppendOnlyUnsafeRowArray` is an append-only array for link:spark-sql-UnsafeRow.adoc[UnsafeRows] that spills content to disk when a <<numRowsSpillThreshold, predefined spill threshold of rows>> is reached.
+`ExternalAppendOnlyUnsafeRowArray` is an append-only array for spark-sql-UnsafeRow.md[UnsafeRows] that spills content to disk when a <<numRowsSpillThreshold, predefined spill threshold of rows>> is reached.
 
 NOTE: Choosing a proper *spill threshold of rows* is a performance optimization.
 
 `ExternalAppendOnlyUnsafeRowArray` is created when:
 
-* `WindowExec` physical operator is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed] (and creates an internal buffer for window frames)
+* `WindowExec` physical operator is spark-sql-SparkPlan-WindowExec.md#doExecute[executed] (and creates an internal buffer for window frames)
 
-* `WindowFunctionFrame` is link:spark-sql-WindowFunctionFrame.adoc#prepare[prepared]
+* `WindowFunctionFrame` is spark-sql-WindowFunctionFrame.md#prepare[prepared]
 
-* `SortMergeJoinExec` physical operator is link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
+* `SortMergeJoinExec` physical operator is spark-sql-SparkPlan-SortMergeJoinExec.md#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
 
 * `SortMergeJoinScanner` creates an internal `bufferedMatches`
 
@@ -68,7 +68,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray=INFO
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[generateIterator]] `generateIterator` Method
@@ -94,7 +94,7 @@ CAUTION: FIXME
 ====
 `add` is used when:
 
-* `WindowExec` is executed (and link:spark-sql-SparkPlan-WindowExec.adoc#fetchNextPartition[fetches all rows in a partition for a group].
+* `WindowExec` is executed (and spark-sql-SparkPlan-WindowExec.md#fetchNextPartition[fetches all rows in a partition for a group].
 
 * `SortMergeJoinScanner` buffers matching rows
 
@@ -114,10 +114,10 @@ CAUTION: FIXME
 
 `ExternalAppendOnlyUnsafeRowArray` takes the following when created:
 
-* [[taskMemoryManager]] link:spark-taskscheduler-taskmemorymanager.adoc[TaskMemoryManager]
-* [[blockManager]] link:spark-blockmanager.adoc[BlockManager]
-* [[serializerManager]] link:spark-SerializerManager.adoc[SerializerManager]
-* [[taskContext]] link:spark-taskscheduler-taskcontext.adoc[TaskContext]
+* [[taskMemoryManager]] spark-taskscheduler-taskmemorymanager.md[TaskMemoryManager]
+* [[blockManager]] spark-blockmanager.md[BlockManager]
+* [[serializerManager]] spark-SerializerManager.md[SerializerManager]
+* [[taskContext]] spark-taskscheduler-taskcontext.md[TaskContext]
 * [[initialSize]] Initial size
 * [[pageSizeBytes]] Page size (in bytes)
 * [[numRowsSpillThreshold]] Number of rows to hold before spilling them to disk

@@ -2,14 +2,14 @@
 
 [[creating-instance]]
 [[expr]]
-`Column` represents a column in a link:spark-sql-Dataset.adoc[Dataset] that holds a Catalyst link:expressions/Expression.md[Expression] that produces a value per row.
+`Column` represents a column in a spark-sql-Dataset.md[Dataset] that holds a Catalyst expressions/Expression.md[Expression] that produces a value per row.
 
 NOTE: A `Column` is a value generator for every row in a `Dataset`.
 
 [[star]]
 A special column `*` references all columns in a `Dataset`.
 
-With the link:SparkSession.md#implicits[implicits] converstions imported, you can create "free" column references using Scala's symbols.
+With the SparkSession.md#implicits[implicits] converstions imported, you can create "free" column references using Scala's symbols.
 
 [source, scala]
 ----
@@ -38,7 +38,7 @@ scala> val idCol: Column = $"id"
 idCol: org.apache.spark.sql.Column = id
 ----
 
-Beside using the `implicits` conversions, you can create columns using link:spark-sql-functions.adoc#col[col] and link:spark-sql-functions.adoc#column[column] functions.
+Beside using the `implicits` conversions, you can create columns using spark-sql-functions.md#col[col] and spark-sql-functions.md#column[column] functions.
 
 [source, scala]
 ----
@@ -51,7 +51,7 @@ scala> val cityCol = column("city")
 cityCol: org.apache.spark.sql.Column = city
 ----
 
-Finally, you can create a bound `Column` using the `Dataset` the column is supposed to be part of using link:spark-sql-Dataset.adoc#apply[Dataset.apply] factory method or link:spark-sql-Dataset.adoc#col[Dataset.col] operator.
+Finally, you can create a bound `Column` using the `Dataset` the column is supposed to be part of using spark-sql-Dataset.md#apply[Dataset.apply] factory method or spark-sql-Dataset.md#col[Dataset.col] operator.
 
 NOTE: You can use bound `Column` references only with the ``Dataset``s they have been created from.
 
@@ -85,7 +85,7 @@ You can reference nested columns using `.` (dot).
 
 [NOTE]
 ====
-`Column` has a reference to Catalyst's link:expressions/Expression.md[Expression] it was created for using `expr` method.
+`Column` has a reference to Catalyst's expressions/Expression.md[Expression] it was created for using `expr` method.
 
 [source, scala]
 ----
@@ -94,7 +94,7 @@ res0: org.apache.spark.sql.catalyst.expressions.Expression = timewindow('time, 5
 ----
 ====
 
-TIP: Read about typed column references in link:spark-sql-TypedColumn.adoc[TypedColumn Expressions].
+TIP: Read about typed column references in spark-sql-TypedColumn.md[TypedColumn Expressions].
 
 === [[as]] Specifying Type Hint -- `as` Operator
 
@@ -103,7 +103,7 @@ TIP: Read about typed column references in link:spark-sql-TypedColumn.adoc[Typed
 as[U : Encoder]: TypedColumn[Any, U]
 ----
 
-`as` creates a link:spark-sql-TypedColumn.adoc[TypedColumn] (that gives a type hint about the expected return value of the column).
+`as` creates a spark-sql-TypedColumn.md[TypedColumn] (that gives a type hint about the expected return value of the column).
 
 [source, scala]
 ----
@@ -155,7 +155,7 @@ scala> df.withColumn("polish", lit(1)).show
 +------+------+
 ----
 
-You can add new columns do a `Dataset` using link:spark-sql-Dataset.adoc#withColumn[withColumn] method.
+You can add new columns do a `Dataset` using spark-sql-Dataset.md#withColumn[withColumn] method.
 
 [source, scala]
 ----
@@ -236,9 +236,9 @@ over(): Column
 over(window: WindowSpec): Column
 ----
 
-`over` creates a *windowing column* (_aka_ *analytic clause*) that allows to execute a link:spark-sql-functions.adoc[aggregate function] over a <<spark-sql-WindowSpec.adoc#, window>> (i.e. a group of records that are in _some_ relation to the current record).
+`over` creates a *windowing column* (_aka_ *analytic clause*) that allows to execute a spark-sql-functions.md[aggregate function] over a <<spark-sql-WindowSpec.md#, window>> (i.e. a group of records that are in _some_ relation to the current record).
 
-TIP: Read up on windowed aggregation in Spark SQL in link:spark-sql-functions-windows.adoc[Window Aggregate Functions].
+TIP: Read up on windowed aggregation in Spark SQL in spark-sql-functions-windows.md[Window Aggregate Functions].
 
 [source, scala]
 ----
@@ -254,7 +254,7 @@ overRange: org.apache.spark.sql.Column = someColumn OVER (RANGE BETWEEN UNBOUNDE
 
 === [[cast]] `cast` Operator
 
-`cast` method casts a column to a data type. It makes for type-safe maps with link:spark-sql-Row.adoc[Row] objects of the proper type (not `Any`).
+`cast` method casts a column to a data type. It makes for type-safe maps with spark-sql-Row.md[Row] objects of the proper type (not `Any`).
 
 [source,scala]
 ----
@@ -262,7 +262,7 @@ cast(to: String): Column
 cast(to: DataType): Column
 ----
 
-`cast` uses link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser] to parse the data type from its canonical string representation.
+`cast` uses spark-sql-CatalystSqlParser.md[CatalystSqlParser] to parse the data type from its canonical string representation.
 
 ==== [[cast-example]] cast Example
 
@@ -310,7 +310,7 @@ generateAlias(e: Expression): String
 
 * `Column` is requested to <<named, named>>
 
-* `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#alias[alias]
+* `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#alias[alias]
 ====
 
 === [[named]] `named` Method
@@ -326,7 +326,7 @@ named: NamedExpression
 ====
 `named` is used when the following operators are used:
 
-* link:spark-sql-dataset-operators.adoc#select[Dataset.select]
+* spark-sql-dataset-operators.md#select[Dataset.select]
 
-* link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
+* spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg]
 ====

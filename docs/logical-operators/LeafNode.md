@@ -13,46 +13,46 @@ title: LeafNode
 | LeafNode
 | Description
 
-| <<spark-sql-LogicalPlan-AnalysisBarrier.adoc#, AnalysisBarrier>>
+| <<spark-sql-LogicalPlan-AnalysisBarrier.md#, AnalysisBarrier>>
 | [[AnalysisBarrier]]
 
-| <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>>
+| <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>>
 | [[DataSourceV2Relation]]
 
-| <<spark-sql-LogicalPlan-ExternalRDD.adoc#, ExternalRDD>>
+| <<spark-sql-LogicalPlan-ExternalRDD.md#, ExternalRDD>>
 | [[ExternalRDD]]
 
-| link:hive/HiveTableRelation.adoc[HiveTableRelation]
+| hive/HiveTableRelation.md[HiveTableRelation]
 | [[HiveTableRelation]]
 
-| <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>>
+| <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>>
 | [[InMemoryRelation]]
 
-| <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelation>>
+| <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelation>>
 | [[LocalRelation]]
 
-| <<spark-sql-LogicalPlan-LogicalRDD.adoc#, LogicalRDD>>
+| <<spark-sql-LogicalPlan-LogicalRDD.md#, LogicalRDD>>
 | [[LogicalRDD]]
 
-| <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>>
+| <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>>
 | [[LogicalRelation]]
 
-| <<spark-sql-LogicalPlan-OneRowRelation.adoc#, OneRowRelation>>
+| <<spark-sql-LogicalPlan-OneRowRelation.md#, OneRowRelation>>
 | [[OneRowRelation]]
 
-| <<spark-sql-LogicalPlan-Range.adoc#, Range>>
+| <<spark-sql-LogicalPlan-Range.md#, Range>>
 | [[Range]]
 
-| <<spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc#, UnresolvedCatalogRelation>>
+| <<spark-sql-LogicalPlan-UnresolvedCatalogRelation.md#, UnresolvedCatalogRelation>>
 | [[UnresolvedCatalogRelation]]
 
-| <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>>
+| <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>>
 | [[UnresolvedInlineTable]]
 
-| <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>>
+| <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>>
 | [[UnresolvedRelation]]
 
-| <<spark-sql-LogicalPlan-UnresolvedTableValuedFunction.adoc#, UnresolvedTableValuedFunction>>
+| <<spark-sql-LogicalPlan-UnresolvedTableValuedFunction.md#, UnresolvedTableValuedFunction>>
 | [[UnresolvedTableValuedFunction]]
 |===
 
@@ -65,6 +65,6 @@ computeStats(): Statistics
 
 `computeStats` simply throws an `UnsupportedOperationException`.
 
-NOTE: Logical operators, e.g. link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD], link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD] and `DataSourceV2Relation`, or relations, e.g. `HadoopFsRelation` or `BaseRelation`, use link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property for the default estimated size if the statistics could not be computed.
+NOTE: Logical operators, e.g. spark-sql-LogicalPlan-ExternalRDD.md[ExternalRDD], spark-sql-LogicalPlan-LogicalRDD.md[LogicalRDD] and `DataSourceV2Relation`, or relations, e.g. `HadoopFsRelation` or `BaseRelation`, use spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property for the default estimated size if the statistics could not be computed.
 
-NOTE: `computeStats` is used exclusively when `SizeInBytesOnlyStatsPlanVisitor` uses the link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc#default[default case] to compute the size statistic (in bytes) for a link:spark-sql-LogicalPlan.adoc[logical operator].
+NOTE: `computeStats` is used exclusively when `SizeInBytesOnlyStatsPlanVisitor` uses the spark-sql-SizeInBytesOnlyStatsPlanVisitor.md#default[default case] to compute the size statistic (in bytes) for a spark-sql-LogicalPlan.md[logical operator].

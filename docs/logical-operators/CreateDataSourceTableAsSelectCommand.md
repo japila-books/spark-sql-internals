@@ -2,13 +2,13 @@ title: CreateDataSourceTableAsSelectCommand
 
 # CreateDataSourceTableAsSelectCommand Logical Command
 
-`CreateDataSourceTableAsSelectCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.adoc#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).
+`CreateDataSourceTableAsSelectCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.md#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).
 
 NOTE: A DataSource table is a Spark SQL native table that uses any data source but Hive (per `USING` clause).
 
-`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when xref:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
+`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when xref:spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
 
-NOTE: xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand] is used instead when a xref:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator is used with no <<query, AS query>>.
+NOTE: xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
 
 [source,plaintext]
 ----
@@ -44,9 +44,9 @@ org.apache.spark.sql.AnalysisException: Table default.users already exists. You 
 
 `CreateDataSourceTableAsSelectCommand` takes the following to be created:
 
-* [[table]] xref:spark-sql-CatalogTable.adoc[CatalogTable]
-* [[mode]] xref:spark-sql-DataFrameWriter.adoc#SaveMode[SaveMode]
-* [[query]] AS query (xref:spark-sql-LogicalPlan.adoc[LogicalPlan])
+* [[table]] xref:spark-sql-CatalogTable.md[CatalogTable]
+* [[mode]] xref:spark-sql-DataFrameWriter.md#SaveMode[SaveMode]
+* [[query]] AS query (xref:spark-sql-LogicalPlan.md[LogicalPlan])
 * [[outputColumnNames]] Output column names (`Seq[String]`)
 
 === [[run]] Executing Data-Writing Logical Command -- `run` Method
@@ -58,11 +58,11 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of link:spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
+NOTE: `run` is part of spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
 
 `run`...FIXME
 
-`run` throws an `AssertionError` when the xref:spark-sql-CatalogTable.adoc#tableType[tableType] of the <<table, CatalogTable>> is `VIEW` or the xref:spark-sql-CatalogTable.adoc#provider[provider] is undefined.
+`run` throws an `AssertionError` when the xref:spark-sql-CatalogTable.md#tableType[tableType] of the <<table, CatalogTable>> is `VIEW` or the xref:spark-sql-CatalogTable.md#provider[provider] is undefined.
 
 === [[saveDataIntoTable]] `saveDataIntoTable` Internal Method
 
@@ -77,7 +77,7 @@ saveDataIntoTable(
   tableExists: Boolean): BaseRelation
 ----
 
-`saveDataIntoTable` creates a xref:spark-sql-BaseRelation.adoc[BaseRelation] for...FIXME
+`saveDataIntoTable` creates a xref:spark-sql-BaseRelation.md[BaseRelation] for...FIXME
 
 `saveDataIntoTable`...FIXME
 

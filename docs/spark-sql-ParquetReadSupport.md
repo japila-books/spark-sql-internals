@@ -2,12 +2,12 @@ title: ParquetReadSupport
 
 # ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source
 
-`ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of <<spark-sql-UnsafeRow.adoc#, UnsafeRows>>.
+`ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of <<spark-sql-UnsafeRow.md#, UnsafeRows>>.
 
-`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, data reader>> (with no support for <<spark-sql-vectorized-parquet-reader.adoc#, Vectorized Parquet Decoding>> and so falling back to parquet-mr).
+`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>> (with no support for <<spark-sql-vectorized-parquet-reader.md#, Vectorized Parquet Decoding>> and so falling back to parquet-mr).
 
 [[parquet.read.support.class]]
-`ParquetReadSupport` is registered as the fully-qualified class name for <<spark-sql-ParquetFileFormat.adoc#parquet.read.support.class, parquet.read.support.class>> Hadoop configuration when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, data reader>>.
+`ParquetReadSupport` is registered as the fully-qualified class name for <<spark-sql-ParquetFileFormat.md#parquet.read.support.class, parquet.read.support.class>> Hadoop configuration when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>>.
 
 [[creating-instance]]
 [[convertTz]]
@@ -24,7 +24,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.parquet.ParquetReadSupport=ALL
 ```
 
-Refer to <<spark-logging.adoc#, Logging>>.
+Refer to <<spark-logging.md#, Logging>>.
 ====
 
 === [[init]] Initializing ReadSupport -- `init` Method

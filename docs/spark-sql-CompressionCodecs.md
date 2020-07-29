@@ -84,4 +84,4 @@ If the input `codec` is not defined (i.e. `null`), `setCodecConfiguration` sets 
 | `false`
 |===
 
-NOTE: `setCodecConfiguration` is used when link:spark-sql-CSVFileFormat.adoc#prepareWrite[CSVFileFormat], link:spark-sql-JsonFileFormat.adoc#prepareWrite[JsonFileFormat] and link:spark-sql-TextFileFormat.adoc#prepareWrite[TextFileFormat] are requested to `prepareWrite`.
+NOTE: `setCodecConfiguration` is used when spark-sql-CSVFileFormat.md#prepareWrite[CSVFileFormat], spark-sql-JsonFileFormat.md#prepareWrite[JsonFileFormat] and spark-sql-TextFileFormat.md#prepareWrite[TextFileFormat] are requested to `prepareWrite`.

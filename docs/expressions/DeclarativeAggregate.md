@@ -2,9 +2,9 @@ title: DeclarativeAggregate
 
 # DeclarativeAggregate -- Unevaluable Aggregate Function Expressions
 
-`DeclarativeAggregate` is an <<contract, extension>> of the <<spark-sql-Expression-AggregateFunction.adoc#, AggregateFunction Contract>> for <<implementations, aggregate function expressions>> that are <<expressions/Expression.md#Unevaluable, unevaluable>> and use expressions for evaluation.
+`DeclarativeAggregate` is an <<contract, extension>> of the <<spark-sql-Expression-AggregateFunction.md#, AggregateFunction Contract>> for <<implementations, aggregate function expressions>> that are <<expressions/Expression.md#Unevaluable, unevaluable>> and use expressions for evaluation.
 
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 [[contract]]
 .DeclarativeAggregate Contract
@@ -25,11 +25,11 @@ The <<expressions/Expression.md#, expression>> that returns the final value for 
 
 Used when:
 
-* `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.adoc#generateResultProjection, generateResultProjection>>
+* `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.md#generateResultProjection, generateResultProjection>>
 
-* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithoutKeys, doProduceWithoutKeys>> and <<spark-sql-SparkPlan-HashAggregateExec.adoc#generateResultFunction, generateResultFunction>>
+* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.md#doProduceWithoutKeys, doProduceWithoutKeys>> and <<spark-sql-SparkPlan-HashAggregateExec.md#generateResultFunction, generateResultFunction>>
 
-* `AggregateProcessor` is <<spark-sql-AggregateProcessor.adoc#apply, created>> (when `WindowExec` physical operator is <<spark-sql-SparkPlan-WindowExec.adoc#, executed>>)
+* `AggregateProcessor` is <<spark-sql-AggregateProcessor.md#apply, created>> (when `WindowExec` physical operator is <<spark-sql-SparkPlan-WindowExec.md#, executed>>)
 
 | initialValues
 a| [[initialValues]]
@@ -64,7 +64,7 @@ updateExpressions: Seq[Expression]
 | DeclarativeAggregate
 | Description
 
-| <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>>
+| <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>>
 | [[AggregateWindowFunction]] Contract for declarative window aggregate function expressions
 
 | Average
@@ -82,7 +82,7 @@ updateExpressions: Seq[Expression]
 | Covariance
 | [[Covariance]]
 
-| <<spark-sql-Expression-First.adoc#, First>>
+| <<spark-sql-Expression-First.md#, First>>
 | [[First]]
 
 | Last
@@ -94,7 +94,7 @@ updateExpressions: Seq[Expression]
 | Min
 | [[Min]]
 
-| <<spark-sql-Expression-SimpleTypedAggregateExpression.adoc#, SimpleTypedAggregateExpression>>
+| <<spark-sql-Expression-SimpleTypedAggregateExpression.md#, SimpleTypedAggregateExpression>>
 | [[SimpleTypedAggregateExpression]]
 
 | Sum

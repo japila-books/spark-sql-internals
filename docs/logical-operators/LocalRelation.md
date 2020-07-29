@@ -2,23 +2,23 @@ title: LocalRelation
 
 # LocalRelation Leaf Logical Operator
 
-`LocalRelation` is a <<spark-sql-LogicalPlan-LeafNode.adoc#, leaf logical operator>> that represents a scan over local collections (and allow for optimizations so functions like `collect` or `take` can be executed locally on the driver and with no executors).
+`LocalRelation` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that represents a scan over local collections (and allow for optimizations so functions like `collect` or `take` can be executed locally on the driver and with no executors).
 
 `LocalRelation` is <<creating-instance, created>> (using <<apply, apply>>, <<fromExternalRows, fromExternalRows>>, and <<fromProduct, fromProduct>> factory methods) when:
 
-* <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>> logical resolution rule is <<spark-sql-Analyzer-ResolveInlineTables.adoc#apply, executed>> (and <<spark-sql-Analyzer-ResolveInlineTables.adoc#convert, converts an UnresolvedInlineTable>>)
+* <<spark-sql-Analyzer-ResolveInlineTables.md#, ResolveInlineTables>> logical resolution rule is <<spark-sql-Analyzer-ResolveInlineTables.md#apply, executed>> (and <<spark-sql-Analyzer-ResolveInlineTables.md#convert, converts an UnresolvedInlineTable>>)
 
 * [PruneFilters](../Optimizer.md#PruneFilters), [ConvertToLocalRelation](../Optimizer.md#ConvertToLocalRelation), and [PropagateEmptyRelation](../Optimizer.md#PropagateEmptyRelation), [OptimizeMetadataOnlyQuery](../Optimizer.md#OptimizeMetadataOnlyQuery) logical optimization rules are executed (applied to an analyzed logical plan)
 
 * <<SparkSession.md#createDataset, SparkSession.createDataset>>, <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>>, <<SparkSession.md#createDataFrame, SparkSession.createDataFrame>> operators are used
 
-* `CatalogImpl` is requested for a <<spark-sql-CatalogImpl.adoc#makeDataset, Dataset from DefinedByConstructorParams data>>
+* `CatalogImpl` is requested for a <<spark-sql-CatalogImpl.md#makeDataset, Dataset from DefinedByConstructorParams data>>
 
-* `Dataset` is requested for the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.adoc#, Command>> logical operators)
+* `Dataset` is requested for the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.md#, Command>> logical operators)
 
-* `StatFunctions` is requested to <<spark-sql-StatFunctions.adoc#crossTabulate, crossTabulate>> and <<spark-sql-StatFunctions.adoc#summary, generate summary statistics of Dataset (as DataFrame)>>
+* `StatFunctions` is requested to <<spark-sql-StatFunctions.md#crossTabulate, crossTabulate>> and <<spark-sql-StatFunctions.md#summary, generate summary statistics of Dataset (as DataFrame)>>
 
-NOTE: `Dataset` is <<spark-sql-Dataset.adoc#isLocal, local>> when the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> is exactly an instance of `LocalRelation`.
+NOTE: `Dataset` is <<spark-sql-Dataset.md#isLocal, local>> when the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> is exactly an instance of `LocalRelation`.
 
 [source, scala]
 ----
@@ -44,7 +44,7 @@ scala> println(stats)
 Statistics(sizeInBytes=48.0 B, hints=none)
 ----
 
-`LocalRelation` is resolved to <<spark-sql-SparkPlan-LocalTableScanExec.adoc#, LocalTableScanExec>> leaf physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.adoc#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
+`LocalRelation` is resolved to <<spark-sql-SparkPlan-LocalTableScanExec.md#, LocalTableScanExec>> leaf physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
 
 [source, scala]
 ----
@@ -62,14 +62,14 @@ assert(localScan.isInstanceOf[LocalTableScanExec])
 ----
 
 [[computeStats]]
-When requested for <<spark-sql-LogicalPlan-LeafNode.adoc#computeStats, statistics>>, `LocalRelation` takes the size of the objects in a single row (per the <<output, output>> schema) and multiplies it by the number of rows (in the <<data, data>>).
+When requested for <<spark-sql-LogicalPlan-LeafNode.md#computeStats, statistics>>, `LocalRelation` takes the size of the objects in a single row (per the <<output, output>> schema) and multiplies it by the number of rows (in the <<data, data>>).
 
 === [[creating-instance]] Creating LocalRelation Instance
 
 `LocalRelation` takes the following to be created:
 
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[data]] Collection of link:spark-sql-InternalRow.adoc[internal binary rows]
+* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
+* [[data]] Collection of spark-sql-InternalRow.md[internal binary rows]
 * [[isStreaming]] `isStreaming` flag that indicates whether the <<data, data>> comes from a streaming source (default: `false`)
 
 While being created, `LocalRelation` makes sure that the <<output, output attributes>> are all <<expressions/Expression.md#resolved, resolved>> or throws an `IllegalArgumentException`:

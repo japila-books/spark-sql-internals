@@ -2,11 +2,11 @@
 
 `PhysicalOperation` is a Scala extractor to <<unapply, destructure a logical query plan>> into a tuple with the following elements:
 
-. link:spark-sql-Expression-NamedExpression.adoc[Named expressions] (aka _projects_)
+. spark-sql-Expression-NamedExpression.md[Named expressions] (aka _projects_)
 
-. link:expressions/Expression.md[Expressions] (aka _filters_)
+. expressions/Expression.md[Expressions] (aka _filters_)
 
-. link:spark-sql-LogicalPlan.adoc[Logical operator] (aka _leaf node_)
+. spark-sql-LogicalPlan.md[Logical operator] (aka _leaf node_)
 
 [[ReturnType]]
 .ReturnType
@@ -15,7 +15,7 @@
 (Seq[NamedExpression], Seq[Expression], LogicalPlan)
 ----
 
-The following idiom is often used in `Strategy` implementations (e.g. link:hive/HiveTableScans.adoc#apply[HiveTableScans], [InMemoryScans](execution-planning-strategies/InMemoryScans.md#apply), [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md#apply), <<FileSourceStrategy, FileSourceStrategy>>):
+The following idiom is often used in `Strategy` implementations (e.g. hive/HiveTableScans.md#apply[HiveTableScans], [InMemoryScans](execution-planning-strategies/InMemoryScans.md#apply), [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md#apply), <<FileSourceStrategy, FileSourceStrategy>>):
 
 [source, scala]
 ----

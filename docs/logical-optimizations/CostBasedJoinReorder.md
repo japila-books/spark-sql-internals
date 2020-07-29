@@ -1,12 +1,12 @@
 # CostBasedJoinReorder Logical Optimization -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a [base logical optimization](../Optimizer.md#batches) that <<apply, reorders joins>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a [base logical optimization](../Optimizer.md#batches) that <<apply, reorders joins>> in spark-sql-cost-based-optimization.md[cost-based optimization].
 
 `ReorderJoin` is part of the [Join Reorder](../Optimizer.md#Join_Reorder) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`ReorderJoin` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ReorderJoin` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and link:spark-sql-properties.adoc#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
+`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] and spark-sql-properties.md#spark.sql.cbo.joinReorder.enabled[spark.sql.cbo.joinReorder.enabled] configuration properties are both enabled.
 
 [source, scala]
 ----
@@ -18,7 +18,7 @@ scala> spark.sessionState.conf.joinReorderEnabled
 res1: Boolean = true
 ----
 
-`CostBasedJoinReorder` uses link:spark-sql-cost-based-optimization.adoc#row-count-stat[row count] statistic that is computed using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command with no `NOSCAN` option.
+`CostBasedJoinReorder` uses spark-sql-cost-based-optimization.md#row-count-stat[row count] statistic that is computed using spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command with no `NOSCAN` option.
 
 [source, scala]
 ----
@@ -135,7 +135,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.catalyst.optimizer.JoinReorderDP=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 ## <span id="apply"> Executing Rule
@@ -144,11 +144,11 @@ Refer to link:spark-logging.adoc[Logging].
 apply(plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` traverses the input link:spark-sql-LogicalPlan.adoc[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
+`apply` traverses the input spark-sql-LogicalPlan.md[logical plan] down and tries to <<reorder, reorder>> the following logical operators:
 
-* link:spark-sql-LogicalPlan-Join.adoc[Join] for `CROSS` or `INNER` joins with a join condition
+* spark-sql-LogicalPlan-Join.md[Join] for `CROSS` or `INNER` joins with a join condition
 
-* link:spark-sql-LogicalPlan-Project.adoc[Project] with the above link:spark-sql-LogicalPlan-Join.adoc[Join] child operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only
+* spark-sql-LogicalPlan-Project.md[Project] with the above spark-sql-LogicalPlan-Join.md[Join] child operator and the project list of spark-sql-Expression-Attribute.md[Attribute] leaf expressions only
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
@@ -181,7 +181,7 @@ NOTE: `replaceWithOrderedJoin` is used recursively and when `CostBasedJoinReorde
 extractInnerJoins(plan: LogicalPlan): (Seq[LogicalPlan], Set[Expression])
 ----
 
-`extractInnerJoins` finds consecutive link:spark-sql-LogicalPlan-Join.adoc[Join] logical operators (inner or cross) with join conditions or link:spark-sql-LogicalPlan-Project.adoc[Project] logical operators with `Join` logical operator and the project list of link:spark-sql-Expression-Attribute.adoc[Attribute] leaf expressions only.
+`extractInnerJoins` finds consecutive spark-sql-LogicalPlan-Join.md[Join] logical operators (inner or cross) with join conditions or spark-sql-LogicalPlan-Project.md[Project] logical operators with `Join` logical operator and the project list of spark-sql-Expression-Attribute.md[Attribute] leaf expressions only.
 
 For `Project` operators `extractInnerJoins` calls itself recursively with the `Join` operator inside.
 

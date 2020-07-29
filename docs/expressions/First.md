@@ -2,13 +2,13 @@ title: First
 
 # First Aggregate Function Expression
 
-`First` is a <<spark-sql-Expression-DeclarativeAggregate.adoc#, DeclarativeAggregate>> function expression that is <<creating-instance, created>> when:
+`First` is a <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> function expression that is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitFirst, parse a FIRST statement>>
+* `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitFirst, parse a FIRST statement>>
 
-* <<spark-sql-functions.adoc#first, first>> standard function is used
+* <<spark-sql-functions.md#first, first>> standard function is used
 
-* `first` and `first_value` <<spark-sql-FunctionRegistry.adoc#, SQL functions>> are used
+* `first` and `first_value` <<spark-sql-FunctionRegistry.md#, SQL functions>> are used
 
 [source, scala]
 ----
@@ -27,10 +27,10 @@ first('organizationName) ignore nulls
 ----
 
 [[evaluateExpression]]
-When requested to <<spark-sql-Expression-DeclarativeAggregate.adoc#evaluateExpression, evaluate>> (and return the final value), `First` simply returns a <<spark-sql-Expression-AttributeReference.adoc#, AttributeReference>> (with `first` name and the <<expressions/Expression.md#dataType, data type>> of the <<child, child>> expression).
+When requested to <<spark-sql-Expression-DeclarativeAggregate.md#evaluateExpression, evaluate>> (and return the final value), `First` simply returns a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> (with `first` name and the <<expressions/Expression.md#dataType, data type>> of the <<child, child>> expression).
 
 [[catalyst-dsl]]
-TIP: Use <<first, first>> operator from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>> to create an `First` aggregate function expression, e.g. for testing or Spark SQL internals exploration.
+TIP: Use <<first, first>> operator from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create an `First` aggregate function expression, e.g. for testing or Spark SQL internals exploration.
 
 === [[first]] Catalyst DSL -- `first` Operator
 
@@ -39,7 +39,7 @@ TIP: Use <<first, first>> operator from the <<spark-sql-catalyst-dsl.adoc#, Cata
 first(e: Expression): Expression
 ----
 
-`first` <<creating-instance, creates>> a `First` expression and requests it to <<spark-sql-Expression-AggregateFunction.adoc#toAggregateExpression, convert to a AggregateExpression>>.
+`first` <<creating-instance, creates>> a `First` expression and requests it to <<spark-sql-Expression-AggregateFunction.md#toAggregateExpression, convert to a AggregateExpression>>.
 
 [source, scala]
 ----

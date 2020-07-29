@@ -3,7 +3,7 @@ title: JsonFileFormat
 # JsonFileFormat -- Built-In Support for Files in JSON Format
 
 [[shortName]]
-`JsonFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *json* format (i.e. link:spark-sql-DataSourceRegister.adoc#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).
+`JsonFileFormat` is a spark-sql-TextBasedFileFormat.md[TextBasedFileFormat] for *json* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).
 
 [source, scala]
 ----
@@ -74,7 +74,7 @@ NOTE: Internally, `allowUnquotedFieldNames` becomes `JsonParser.Feature.ALLOW_UN
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be either one of the link:spark-sql-CompressionCodecs.adoc#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
 
 | [[dateFormat]] `dateFormat`
 | `yyyy-MM-dd`
@@ -127,7 +127,7 @@ isSplitable(
   path: Path): Boolean
 ----
 
-NOTE: `isSplitable` is part of link:spark-sql-FileFormat.adoc#isSplitable[FileFormat Contract].
+NOTE: `isSplitable` is part of spark-sql-FileFormat.md#isSplitable[FileFormat Contract].
 
 `isSplitable`...FIXME
 
@@ -141,7 +141,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of link:spark-sql-FileFormat.adoc#inferSchema[FileFormat Contract].
+NOTE: `inferSchema` is part of spark-sql-FileFormat.md#inferSchema[FileFormat Contract].
 
 `inferSchema`...FIXME
 
@@ -159,7 +159,7 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of the <<spark-sql-FileFormat.adoc#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>> reader.
+NOTE: `buildReader` is part of the <<spark-sql-FileFormat.md#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.md#, PartitionedFile>> reader.
 
 `buildReader`...FIXME
 
@@ -174,6 +174,6 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.adoc#prepareWrite, FileFormat Contract>> to prepare a write job.
+NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
 
 `prepareWrite`...FIXME

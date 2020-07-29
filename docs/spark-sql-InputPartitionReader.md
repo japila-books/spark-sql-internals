@@ -1,6 +1,6 @@
 # InputPartitionReader
 
-`InputPartitionReader` is the <<contract, abstraction>> of <<implementations, input partition readers>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<next, proceed to the next record>> and <<get, get the current record>>.
+`InputPartitionReader` is the <<contract, abstraction>> of <<implementations, input partition readers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<next, proceed to the next record>> and <<get, get the current record>>.
 
 `InputPartitionReader` is also a Java https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html[Closeable].
 
@@ -27,7 +27,7 @@ Gets the current record
 
 Used when:
 
-* `DataSourceRDD` is requested to <<spark-sql-DataSourceRDD.adoc#compute, compute a partition>>
+* `DataSourceRDD` is requested to <<spark-sql-DataSourceRDD.md#compute, compute a partition>>
 
 * `DataReaderThread` is requested to run (_start up_)
 
@@ -44,7 +44,7 @@ Proceeds to the next record if available (`true`)
 
 Used when:
 
-* `DataSourceRDD` is requested to <<spark-sql-DataSourceRDD.adoc#compute, compute a partition>>
+* `DataSourceRDD` is requested to <<spark-sql-DataSourceRDD.md#compute, compute a partition>>
 
 * `DataReaderThread` is requested to run (_start up_)
 

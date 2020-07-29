@@ -2,26 +2,26 @@ title: AggregateExpression
 
 # AggregateExpression -- Unevaluable Expression Container for AggregateFunction
 
-`AggregateExpression` is an link:expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
+`AggregateExpression` is an expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
 
 `AggregateExpression` contains the following:
 
-* [[aggregateFunction]] <<spark-sql-Expression-AggregateFunction.adoc#, AggregateFunction>>
+* [[aggregateFunction]] <<spark-sql-Expression-AggregateFunction.md#, AggregateFunction>>
 * [[mode]] `AggregateMode`
 * [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the <<aggregateFunction, aggregate function>>)
 * [[resultId]] `ExprId`
 
 `AggregateExpression` is created when:
 
-* `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves AggregateFunctions] (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
+* `Analyzer` spark-sql-Analyzer.md#ResolveFunctions[resolves AggregateFunctions] (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
 
-* `UserDefinedAggregateFunction` is created with `isDistinct` flag link:spark-sql-UserDefinedAggregateFunction.adoc#apply[disabled] or link:spark-sql-UserDefinedAggregateFunction.adoc#distinct[enabled]
+* `UserDefinedAggregateFunction` is created with `isDistinct` flag spark-sql-UserDefinedAggregateFunction.md#apply[disabled] or spark-sql-UserDefinedAggregateFunction.md#distinct[enabled]
 
-* `AggUtils` is requested to <<spark-sql-AggUtils.adoc#planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
+* `AggUtils` is requested to <<spark-sql-AggUtils.md#planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
-* `Aggregator` is requested for a link:spark-sql-TypedColumn.adoc[TypedColumn] (using `Aggregator.toColumn`)
+* `Aggregator` is requested for a spark-sql-TypedColumn.md[TypedColumn] (using `Aggregator.toColumn`)
 
-* `AggregateFunction` is link:spark-sql-Expression-AggregateFunction.adoc#toAggregateExpression[wrapped in a AggregateExpression]
+* `AggregateFunction` is spark-sql-Expression-AggregateFunction.md#toAggregateExpression[wrapped in a AggregateExpression]
 
 [[toString-prefixes]]
 .toString's Prefixes per AggregateMode
@@ -54,7 +54,7 @@ title: AggregateExpression
 | <<aggregateFunction, AggregateFunction>> expression (for which `AggregateExpression` was created).
 
 | `dataType`
-| link:spark-sql-DataType.adoc[DataType] of <<aggregateFunction, AggregateFunction>> expression
+| spark-sql-DataType.md[DataType] of <<aggregateFunction, AggregateFunction>> expression
 
 | `foldable`
 | Disabled (i.e. `false`)
@@ -67,12 +67,12 @@ a| `AttributeSet` with the following:
 
 * `references` of <<aggregateFunction, AggregateFunction>> when <<mode, AggregateMode>> is `Partial` or `Complete`
 
-* link:spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes[aggBufferAttributes] of <<aggregateFunction, AggregateFunction>> when `PartialMerge` or `Final`
+* spark-sql-Expression-AggregateFunction.md#aggBufferAttributes[aggBufferAttributes] of <<aggregateFunction, AggregateFunction>> when `PartialMerge` or `Final`
 
 | `resultAttribute`
 a|
 
-link:spark-sql-Expression-Attribute.adoc[Attribute] that is:
+link:spark-sql-Expression-Attribute.md[Attribute] that is:
 
 * `AttributeReference` when <<aggregateFunction, AggregateFunction>> is itself resolved
 

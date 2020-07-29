@@ -2,9 +2,9 @@ title: SparkStrategy
 
 # SparkStrategy -- Base for Execution Planning Strategies
 
-`SparkStrategy` is a Catalyst link:catalyst/GenericStrategy.md[GenericStrategy] that converts a link:spark-sql-LogicalPlan.adoc[logical plan] into zero or more link:SparkPlan.md[physical plans].
+`SparkStrategy` is a Catalyst catalyst/GenericStrategy.md[GenericStrategy] that converts a spark-sql-LogicalPlan.md[logical plan] into zero or more SparkPlan.md[physical plans].
 
-`SparkStrategy` marks link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `LogicalPlan`) to be planned later (by some other `SparkStrategy` or after other `SparkStrategy` strategies have finished) using <<PlanLater, PlanLater>> physical operator.
+`SparkStrategy` marks spark-sql-LogicalPlan.md[logical plans] (i.e. `LogicalPlan`) to be planned later (by some other `SparkStrategy` or after other `SparkStrategy` strategies have finished) using <<PlanLater, PlanLater>> physical operator.
 
 [[planLater]]
 [source, scala]

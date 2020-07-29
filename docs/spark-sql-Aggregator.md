@@ -20,7 +20,7 @@ abstract class Aggregator[-IN, BUF, OUT] extends Serializable {
 }
 ----
 
-After you create a custom `Aggregator`, you should use <<toColumn, toColumn>> method to convert it to a `TypedColumn` that can be used with link:spark-sql-dataset-operators.adoc#select[Dataset.select] and link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg] typed operators.
+After you create a custom `Aggregator`, you should use <<toColumn, toColumn>> method to convert it to a `TypedColumn` that can be used with spark-sql-dataset-operators.md#select[Dataset.select] and spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg] typed operators.
 
 [source, scala]
 ----
@@ -59,9 +59,9 @@ In other words, using the contract is as treading on thin ice.
 
 `Aggregator` is used when:
 
-* link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc#creating-instance[SimpleTypedAggregateExpression] and link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc#creating-instance[ComplexTypedAggregateExpression] are created
+* spark-sql-Expression-SimpleTypedAggregateExpression.md#creating-instance[SimpleTypedAggregateExpression] and spark-sql-Expression-ComplexTypedAggregateExpression.md#creating-instance[ComplexTypedAggregateExpression] are created
 
-* `TypedAggregateExpression` is requested for the link:spark-sql-Expression-TypedAggregateExpression.adoc#aggregator[aggregator]
+* `TypedAggregateExpression` is requested for the spark-sql-Expression-TypedAggregateExpression.md#aggregator[aggregator]
 
 .Aggregator Contract
 [cols="1,2",options="header",width="100%"]

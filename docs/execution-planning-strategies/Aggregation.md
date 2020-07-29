@@ -1,6 +1,6 @@
 # Aggregation Execution Planning Strategy for Aggregate Physical Operators
 
-`Aggregation` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to <<apply, select aggregate physical operator>> for <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.adoc#, logical query plan>>.
+`Aggregation` is an spark-sql-SparkStrategy.md[execution planning strategy] that spark-sql-SparkPlanner.md[SparkPlanner] uses to <<apply, select aggregate physical operator>> for <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.md#, logical query plan>>.
 
 [source, scala]
 ----
@@ -28,13 +28,13 @@ scala> println(physicalPlan.head.numberedTreeString)
 ----
 
 [[aggregate-physical-operator-preference]]
-`Aggregation` <<spark-sql-AggUtils.adoc#aggregate-physical-operator-selection-criteria, can select>> the following aggregate physical operators (in the order of preference):
+`Aggregation` <<spark-sql-AggUtils.md#aggregate-physical-operator-selection-criteria, can select>> the following aggregate physical operators (in the order of preference):
 
-. <<spark-sql-SparkPlan-HashAggregateExec.adoc#, HashAggregateExec>>
+. <<spark-sql-SparkPlan-HashAggregateExec.md#, HashAggregateExec>>
 
-. <<spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#, ObjectHashAggregateExec>>
+. <<spark-sql-SparkPlan-ObjectHashAggregateExec.md#, ObjectHashAggregateExec>>
 
-. <<spark-sql-SparkPlan-SortAggregateExec.adoc#, SortAggregateExec>>
+. <<spark-sql-SparkPlan-SortAggregateExec.md#, SortAggregateExec>>
 
 === [[apply]] Applying Aggregation Strategy to Logical Plan (Executing Aggregation) -- `apply` Method
 
@@ -43,11 +43,11 @@ scala> println(physicalPlan.head.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
 
-`apply` requests `PhysicalAggregation` extractor for link:spark-sql-PhysicalAggregation.adoc#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator found.
+`apply` requests `PhysicalAggregation` extractor for spark-sql-PhysicalAggregation.md#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator found.
 
-Internally, `apply` requests `PhysicalAggregation` to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
+Internally, `apply` requests `PhysicalAggregation` to spark-sql-PhysicalAggregation.md#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
 
 `apply` then creates a physical operator using the following helper methods:
 

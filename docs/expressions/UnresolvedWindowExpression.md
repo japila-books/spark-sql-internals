@@ -4,16 +4,16 @@ title: UnresolvedWindowExpression
 
 `UnresolvedWindowExpression` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> that represents...FIXME
 
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 `UnresolvedWindowExpression` is <<creating-instance, created>> when:
 
 * FIXME
 
 [[child]]
-`UnresolvedWindowExpression` is created to represent a `child` link:expressions/Expression.md[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` link:spark-sql-AstBuilder.adoc#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
+`UnresolvedWindowExpression` is created to represent a `child` expressions/Expression.md[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` spark-sql-AstBuilder.md#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
 
-`UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` link:spark-sql-Analyzer.adoc#WindowsSubstitution[resolves `UnresolvedWindowExpressions`].
+`UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` spark-sql-Analyzer.md#WindowsSubstitution[resolves `UnresolvedWindowExpressions`].
 
 [source, scala]
 ----

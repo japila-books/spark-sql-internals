@@ -70,7 +70,7 @@ A `Row` instance can have a schema defined.
 
 NOTE: Unless you are instantiating `Row` yourself (using <<row-object, Row Object>>), a `Row` has always a schema.
 
-NOTE: It is link:spark-sql-RowEncoder.adoc[RowEncoder] to take care of assigning a schema to a `Row` when `toDF` on a link:spark-sql-Dataset.adoc[Dataset] or when instantiating [DataFrame](spark-sql-DataFrame.md) through [DataFrameReader](DataFrameReader.md).
+NOTE: It is spark-sql-RowEncoder.md[RowEncoder] to take care of assigning a schema to a `Row` when `toDF` on a spark-sql-Dataset.md[Dataset] or when instantiating [DataFrame](spark-sql-DataFrame.md) through [DataFrameReader](DataFrameReader.md).
 
 === [[row-object]] Row Object
 

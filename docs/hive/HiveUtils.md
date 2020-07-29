@@ -1,6 +1,6 @@
 # HiveUtils
 
-`HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that link:HiveExternalCatalog.adoc#client[HiveExternalCatalog] uses to interact with a Hive metastore.
+`HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that HiveExternalCatalog.md#client[HiveExternalCatalog] uses to interact with a Hive metastore.
 
 `HiveUtils` is a Scala object with `private[spark]` access modifier. Use the following utility to access the properties.
 
@@ -30,7 +30,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.HiveUtils=ALL
 ```
 
-Refer to link:../spark-logging.adoc[Logging].
+Refer to ../spark-logging.md[Logging].
 ====
 
 === [[builtinHiveVersion]] `builtinHiveVersion` Property
@@ -44,11 +44,11 @@ builtinHiveVersion: String = "1.2.1"
 ====
 `builtinHiveVersion` is used when:
 
-* link:configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
+* configuration-properties.md#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
 
 * `HiveUtils` utility is used to <<newClientForExecution, newClientForExecution>> and <<newClientForMetadata, newClientForMetadata>>
 
-* link:spark-sql-thrift-server.adoc[Spark Thrift Server] is used
+* spark-sql-thrift-server.md[Spark Thrift Server] is used
 ====
 
 === [[newClientForMetadata]] Creating HiveClientImpl -- `newClientForMetadata` Method
@@ -67,15 +67,15 @@ newClientForMetadata(
 
 Internally, `newClientForMetadata` creates a new [SQLConf](../SQLConf.md) with *spark.sql* properties only (from the input `SparkConf`).
 
-`newClientForMetadata` then creates an link:IsolatedClientLoader.adoc[IsolatedClientLoader] per the input parameters and the following configuration properties:
+`newClientForMetadata` then creates an IsolatedClientLoader.md[IsolatedClientLoader] per the input parameters and the following configuration properties:
 
-* link:configuration-properties.adoc#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
+* configuration-properties.md#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
 
-* link:configuration-properties.adoc#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
+* configuration-properties.md#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
 
-* link:configuration-properties.adoc#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
+* configuration-properties.md#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
 
-* link:configuration-properties.adoc#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
+* configuration-properties.md#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
 
 You should see one of the following INFO messages in the logs:
 
@@ -85,9 +85,9 @@ Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using maven.
 Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
 ```
 
-In the end, `newClientForMetadata` requests the `IsolatedClientLoader` for a link:IsolatedClientLoader.adoc#createClient[HiveClient].
+In the end, `newClientForMetadata` requests the `IsolatedClientLoader` for a IsolatedClientLoader.md#createClient[HiveClient].
 
-NOTE: `newClientForMetadata` is used when `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#client[HiveClient].
+NOTE: `newClientForMetadata` is used when `HiveExternalCatalog` is requested for a HiveExternalCatalog.md#client[HiveClient].
 
 === [[newClientForExecution]] `newClientForExecution` Utility
 
@@ -100,7 +100,7 @@ newClientForExecution(
 
 `newClientForExecution`...FIXME
 
-NOTE: `newClientForExecution` is used for link:../spark-sql-thrift-server.adoc[HiveThriftServer2].
+NOTE: `newClientForExecution` is used for ../spark-sql-thrift-server.md[HiveThriftServer2].
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -112,7 +112,7 @@ inferSchema(
 
 `inferSchema`...FIXME
 
-NOTE: `inferSchema` is used when link:ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable] logical resolution rule is executed.
+NOTE: `inferSchema` is used when ResolveHiveSerdeTable.md[ResolveHiveSerdeTable] logical resolution rule is executed.
 
 === [[withHiveExternalCatalog]] `withHiveExternalCatalog` Utility
 
@@ -122,6 +122,6 @@ withHiveExternalCatalog(
   sc: SparkContext): SparkContext
 ----
 
-`withHiveExternalCatalog` simply sets the link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
+`withHiveExternalCatalog` simply sets the ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
 
 NOTE: `withHiveExternalCatalog` is used when the deprecated `HiveContext` is created.

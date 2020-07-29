@@ -1,13 +1,13 @@
 # HashedRelationBroadcastMode
 
-`HashedRelationBroadcastMode` is a link:spark-sql-BroadcastMode.adoc[BroadcastMode] that `BroadcastHashJoinExec` uses for the link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#requiredChildDistribution[required output distribution of child operators].
+`HashedRelationBroadcastMode` is a spark-sql-BroadcastMode.md[BroadcastMode] that `BroadcastHashJoinExec` uses for the spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[required output distribution of child operators].
 
 [[creating-instance]]
 [[key]]
-`HashedRelationBroadcastMode` takes build-side join keys (as link:expressions/Expression.md[Catalyst expressions]) when created.
+`HashedRelationBroadcastMode` takes build-side join keys (as expressions/Expression.md[Catalyst expressions]) when created.
 
 [[canonicalized]]
-`HashedRelationBroadcastMode` gives a copy of itself with <<key, keys>> canonicalized when requested for a link:spark-sql-BroadcastMode.adoc#canonicalized[canonicalized] version.
+`HashedRelationBroadcastMode` gives a copy of itself with <<key, keys>> canonicalized when requested for a spark-sql-BroadcastMode.md#canonicalized[canonicalized] version.
 
 === [[transform]] `transform` Method
 
@@ -20,6 +20,6 @@ transform(
 ----
 <1> Uses the other `transform` with the size of `rows` as `sizeHint`
 
-NOTE: `transform` is part of link:spark-sql-BroadcastMode.adoc#transform[BroadcastMode Contract] to...FIXME.
+NOTE: `transform` is part of spark-sql-BroadcastMode.md#transform[BroadcastMode Contract] to...FIXME.
 
 `transform`...FIXME

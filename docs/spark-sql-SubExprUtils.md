@@ -2,7 +2,7 @@
 
 `SubExprUtils` is a Scala object that is used for...FIXME
 
-`SubExprUtils` uses link:spark-sql-PredicateHelper.adoc[PredicateHelper] for...FIXME
+`SubExprUtils` uses spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
 
 `SubExprUtils` is used to <<hasNullAwarePredicateWithinNot, check whether a condition expression has any null-aware predicate subqueries inside Not expressions>>.
 
@@ -13,9 +13,9 @@
 hasNullAwarePredicateWithinNot(condition: Expression): Boolean
 ----
 
-`hasNullAwarePredicateWithinNot` link:spark-sql-PredicateHelper.adoc#splitConjunctivePredicates[splits conjunctive predicates] (i.e. expressions separated by `And` expression).
+`hasNullAwarePredicateWithinNot` spark-sql-PredicateHelper.md#splitConjunctivePredicates[splits conjunctive predicates] (i.e. expressions separated by `And` expression).
 
-`hasNullAwarePredicateWithinNot` is positive (i.e. `true`) and is considered to have a *null-aware predicate subquery inside a Not expression* when conjuctive predicate expressions include a `Not` expression with an link:spark-sql-Expression-In.adoc[In] predicate expression with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression.
+`hasNullAwarePredicateWithinNot` is positive (i.e. `true`) and is considered to have a *null-aware predicate subquery inside a Not expression* when conjuctive predicate expressions include a `Not` expression with an spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression.
 
 [source, scala]
 ----
@@ -34,13 +34,13 @@ assert(positive)
 
 `hasNullAwarePredicateWithinNot` is negative (i.e. `false`) for all the other expressions and in particular the following expressions:
 
-. link:spark-sql-Expression-Exists.adoc[Exists] predicate subquery expressions
+. spark-sql-Expression-Exists.md[Exists] predicate subquery expressions
 
-. `Not` expressions with a link:spark-sql-Expression-Exists.adoc[Exists] predicate subquery expression as the child expression
+. `Not` expressions with a spark-sql-Expression-Exists.md[Exists] predicate subquery expression as the child expression
 
-. link:spark-sql-Expression-In.adoc[In] expressions with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression as the link:spark-sql-Expression-In.adoc#list[list] expression
+. spark-sql-Expression-In.md[In] expressions with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression as the spark-sql-Expression-In.md#list[list] expression
 
-. `Not` expressions with a link:spark-sql-Expression-In.adoc[In] expression (with a link:spark-sql-Expression-ListQuery.adoc[ListQuery] subquery expression as the link:spark-sql-Expression-In.adoc#list[list] expression)
+. `Not` expressions with a spark-sql-Expression-In.md[In] expression (with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression as the spark-sql-Expression-In.md#list[list] expression)
 
 [source, scala]
 ----
@@ -73,4 +73,4 @@ val negative = SubExprUtils.hasNullAwarePredicateWithinNot(condition)
 assert(!negative)
 ----
 
-NOTE: `hasNullAwarePredicateWithinNot` is used exclusively when `CheckAnalysis` analysis validation is requested to link:spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis[validate analysis of a logical plan] (with `Filter` logical operators).
+NOTE: `hasNullAwarePredicateWithinNot` is used exclusively when `CheckAnalysis` analysis validation is requested to spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[validate analysis of a logical plan] (with `Filter` logical operators).

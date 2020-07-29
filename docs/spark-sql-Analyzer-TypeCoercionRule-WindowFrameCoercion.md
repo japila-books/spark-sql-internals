@@ -1,6 +1,6 @@
 # WindowFrameCoercion Type Coercion Logical Rule
 
-`WindowFrameCoercion` is a <<spark-sql-TypeCoercionRule.adoc#, type coercion logical rule>> that <<coerceTypes, cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition>> in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
+`WindowFrameCoercion` is a <<spark-sql-TypeCoercionRule.md#, type coercion logical rule>> that <<coerceTypes, cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition>> in a <<spark-sql-LogicalPlan.md#, logical plan>>.
 
 [source, scala]
 ----
@@ -129,9 +129,9 @@ scala> println(afterWindowFrameCoercion.numberedTreeString)
 coerceTypes(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>.
+NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.md#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.md#, logical plan>>.
 
-`coerceTypes` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.adoc#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.adoc#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
+`coerceTypes` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.md#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.md#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.md#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
 
 === [[createBoundaryCast]] `createBoundaryCast` Internal Method
 
@@ -140,11 +140,11 @@ NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.adoc#coerceTypes
 createBoundaryCast(boundary: Expression, dt: DataType): Expression
 ----
 
-`createBoundaryCast` returns a <<expressions/Expression.md#, Catalyst expression>> per the input `boundary` <<expressions/Expression.md#, Expression>> and the `dt` <<spark-sql-DataType.adoc#, DataType>> (in the order of execution):
+`createBoundaryCast` returns a <<expressions/Expression.md#, Catalyst expression>> per the input `boundary` <<expressions/Expression.md#, Expression>> and the `dt` <<spark-sql-DataType.md#, DataType>> (in the order of execution):
 
 * The input `boundary` expression if it is a `SpecialFrameBoundary`
 
-* The input `boundary` expression if the `dt` data type is <<spark-sql-DataType.adoc#DateType, DateType>> or <<spark-sql-DataType.adoc#TimestampType, TimestampType>>
+* The input `boundary` expression if the `dt` data type is <<spark-sql-DataType.md#DateType, DateType>> or <<spark-sql-DataType.md#TimestampType, TimestampType>>
 
 * `Cast` unary operator with the input `boundary` expression and the `dt` data type if the <<expressions/Expression.md#dataType, result type>> of the `boundary` expression is not the `dt` data type, but the result type can be cast to the `dt` data type
 

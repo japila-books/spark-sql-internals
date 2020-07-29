@@ -2,13 +2,13 @@ title: RowEncoder
 
 # RowEncoder -- Encoder for DataFrames
 
-`RowEncoder` is part of the link:spark-sql-Encoder.adoc[Encoder framework] and acts as the encoder for link:spark-sql-DataFrame.adoc[DataFrames], i.e. `Dataset[Row]` -- link:spark-sql-Dataset.adoc[Datasets] of link:spark-sql-Row.adoc[Rows].
+`RowEncoder` is part of the spark-sql-Encoder.md[Encoder framework] and acts as the encoder for spark-sql-DataFrame.md[DataFrames], i.e. `Dataset[Row]` -- spark-sql-Dataset.md[Datasets] of spark-sql-Row.md[Rows].
 
 NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `Encoder[Row]` available in scope which is indeed `RowEncoder` itself.
 
 `RowEncoder` is an `object` in Scala with <<apply, apply>> and other factory methods.
 
-`RowEncoder` can create `ExpressionEncoder[Row]` from a link:spark-sql-StructType.adoc[schema] (using <<apply, apply method>>).
+`RowEncoder` can create `ExpressionEncoder[Row]` from a spark-sql-StructType.md[schema] (using <<apply, apply method>>).
 
 [source, scala]
 ----
@@ -35,9 +35,9 @@ res0: Boolean = false
 apply(schema: StructType): ExpressionEncoder[Row]
 ----
 
-`apply` builds link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] of link:spark-sql-Row.adoc[Row], i.e. `ExpressionEncoder[Row]`, from the input link:spark-sql-schema.adoc[StructType] (as `schema`).
+`apply` builds spark-sql-ExpressionEncoder.md[ExpressionEncoder] of spark-sql-Row.md[Row], i.e. `ExpressionEncoder[Row]`, from the input spark-sql-schema.md[StructType] (as `schema`).
 
-Internally, `apply` creates a link:spark-sql-Expression-BoundReference.adoc[BoundReference] for the link:spark-sql-Row.adoc[Row] type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
+Internally, `apply` creates a spark-sql-Expression-BoundReference.md[BoundReference] for the spark-sql-Row.md[Row] type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
 
 === [[serializerFor]] `serializerFor` Internal Method
 
@@ -56,7 +56,7 @@ CAUTION: FIXME What does being native type mean?
 
 2. For ``UserDefinedType``s, it takes the UDT class from the `SQLUserDefinedType` annotation or `UDTRegistration` object and returns an expression with `Invoke` to call `serialize` method on a `NewInstance` of the UDT class.
 
-3. For link:spark-sql-DataType.adoc#TimestampType[TimestampType], it returns an expression with a link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke] to call `fromJavaTimestamp` on `DateTimeUtils` class.
+3. For spark-sql-DataType.md#TimestampType[TimestampType], it returns an expression with a spark-sql-Expression-StaticInvoke.md[StaticInvoke] to call `fromJavaTimestamp` on `DateTimeUtils` class.
 
 4. ...FIXME
 

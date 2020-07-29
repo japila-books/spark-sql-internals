@@ -2,15 +2,15 @@
 
 `OptimizeIn` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms logical plans with In predicate expressions>> as follows:
 
-. Replaces an `In` expression that has an link:spark-sql-Expression-In.adoc#list[empty list] and the link:spark-sql-Expression-In.adoc#value[value] expression not link:expressions/Expression.md#nullable[nullable] to `false`
+. Replaces an `In` expression that has an spark-sql-Expression-In.md#list[empty list] and the spark-sql-Expression-In.md#value[value] expression not expressions/Expression.md#nullable[nullable] to `false`
 
-. Eliminates duplicates of link:spark-sql-Expression-Literal.adoc[Literal] expressions in an link:spark-sql-Expression-In.adoc[In] predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible]
+. Eliminates duplicates of spark-sql-Expression-Literal.md[Literal] expressions in an spark-sql-Expression-In.md[In] predicate expression that is spark-sql-Expression-In.md#inSetConvertible[inSetConvertible]
 
-. Replaces an `In` predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible] with link:spark-sql-Expression-InSet.adoc[InSet] expressions when the number of link:spark-sql-Expression-Literal.adoc[literal] expressions in the link:spark-sql-Expression-In.adoc#list[list] expression is greater than link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold] internal configuration property (default: `10`)
+. Replaces an `In` predicate expression that is spark-sql-Expression-In.md#inSetConvertible[inSetConvertible] with spark-sql-Expression-InSet.md[InSet] expressions when the number of spark-sql-Expression-Literal.md[literal] expressions in the spark-sql-Expression-In.md#list[list] expression is greater than spark-sql-properties.md#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold] internal configuration property (default: `10`)
 
 `OptimizeIn` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`OptimizeIn` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`OptimizeIn` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----

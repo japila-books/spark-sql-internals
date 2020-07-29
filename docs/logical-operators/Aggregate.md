@@ -2,23 +2,23 @@ title: Aggregate
 
 # Aggregate Unary Logical Operator
 
-`Aggregate` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that holds the following:
+`Aggregate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that holds the following:
 
-* [[groupingExpressions]] Grouping link:expressions/Expression.md[expressions]
-* [[aggregateExpressions]] Aggregate link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[groupingExpressions]] Grouping expressions/Expression.md[expressions]
+* [[aggregateExpressions]] Aggregate spark-sql-Expression-NamedExpression.md[named expressions]
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
 
-`Aggregate` is created to represent the following (after a logical plan is link:spark-sql-LogicalPlan.adoc#analyzed[analyzed]):
+`Aggregate` is created to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):
 
-* SQL's link:spark-sql-AstBuilder.adoc#withAggregation[GROUP BY] clause (possibly with `WITH CUBE` or `WITH ROLLUP`)
+* SQL's spark-sql-AstBuilder.md#withAggregation[GROUP BY] clause (possibly with `WITH CUBE` or `WITH ROLLUP`)
 
-* link:spark-sql-RelationalGroupedDataset.adoc[RelationalGroupedDataset] aggregations (e.g. link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot])
+* spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] aggregations (e.g. spark-sql-RelationalGroupedDataset.md#pivot[pivot])
 
-* link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] aggregations
+* spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] aggregations
 
-* link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command
+* spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command
 
-NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc[ObjectHashAggregateExec] or link:spark-sql-SparkPlan-SortAggregateExec.adoc[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
+NOTE: `Aggregate` logical operator is translated to one of spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec], spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] or spark-sql-SparkPlan-SortAggregateExec.md[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 [[properties]]
 .Aggregate's Properties
@@ -30,30 +30,30 @@ NOTE: `Aggregate` logical operator is translated to one of link:spark-sql-SparkP
 | `maxRows`
 a| <<child, Child logical plan>>'s `maxRows`
 
-NOTE: Part of link:spark-sql-LogicalPlan.adoc#maxRows[LogicalPlan contract].
+NOTE: Part of spark-sql-LogicalPlan.md#maxRows[LogicalPlan contract].
 
 | `output`
 a| Attributes of <<aggregateExpressions, aggregate named expressions>>
 
-NOTE: Part of link:catalyst/QueryPlan.md#output[QueryPlan contract].
+NOTE: Part of catalyst/QueryPlan.md#output[QueryPlan contract].
 
 | `resolved`
 a| Enabled when:
 
 * <<expressions, expressions>> and <<child, child logical plan>> are resolved
-* No link:spark-sql-Expression-WindowExpression.adoc[WindowExpressions] exist in <<aggregateExpressions, aggregate named expressions>>
+* No spark-sql-Expression-WindowExpression.md[WindowExpressions] exist in <<aggregateExpressions, aggregate named expressions>>
 
-NOTE: Part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan contract].
+NOTE: Part of spark-sql-LogicalPlan.md#resolved[LogicalPlan contract].
 
 | `validConstraints`
 a| The (expression) constraints of <<child, child logical plan>> and non-aggregate <<aggregateExpressions, aggregate named expressions>>.
 
-NOTE: Part of link:catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
+NOTE: Part of catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
 |===
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
-link:spark-sql-Optimizer-PushDownPredicate.adoc[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] operator when under `Filter` operator and with all expressions deterministic.
+link:spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a spark-sql-LogicalPlan-Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
 
 [source, scala]
 ----

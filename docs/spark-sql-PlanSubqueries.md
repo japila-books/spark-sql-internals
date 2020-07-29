@@ -46,9 +46,9 @@ scala> println(optimizedPlan.numberedTreeString)
 07    +- LocalTableScan [_1#49, _2#50]
 ----
 
-`PlanSubqueries` is part of link:spark-sql-QueryExecution.adoc#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
+`PlanSubqueries` is part of spark-sql-QueryExecution.md#preparations[preparations] batch of physical query plan rules and is executed when `QueryExecution` is requested for the spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] (i.e. in *executedPlan* phase of a query execution).
 
-Technically, `PlanSubqueries` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
+Technically, `PlanSubqueries` is just a catalyst/Rule.md[Catalyst rule] for transforming SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
 
 ## <span id="apply"> Executing Rule
 
@@ -57,10 +57,10 @@ apply(
   plan: SparkPlan): SparkPlan
 ```
 
-For every link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery (SubqueryExpression)] expression in the input link:SparkPlan.md[physical plan], `apply` does the following:
+For every spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery (SubqueryExpression)] expression in the input SparkPlan.md[physical plan], `apply` does the following:
 
-. Builds the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical plan] (aka `executedPlan`) of the link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#plan[subquery logical plan], i.e. creates a link:spark-sql-QueryExecution.adoc#creating-instance[QueryExecution] for the subquery logical plan and requests the optimized physical plan.
+. Builds the spark-sql-QueryExecution.md#executedPlan[optimized physical plan] (aka `executedPlan`) of the spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#plan[subquery logical plan], i.e. creates a spark-sql-QueryExecution.md#creating-instance[QueryExecution] for the subquery logical plan and requests the optimized physical plan.
 
-. Plans the scalar subquery, i.e. creates a link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery (ExecSubqueryExpression)] expression with a new link:spark-sql-SparkPlan-SubqueryExec.adoc#creating-instance[SubqueryExec] physical operator (with the name *subquery[id]* and the optimized physical plan) and the link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#exprId[ExprId].
+. Plans the scalar subquery, i.e. creates a spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery (ExecSubqueryExpression)] expression with a new spark-sql-SparkPlan-SubqueryExec.md#creating-instance[SubqueryExec] physical operator (with the name *subquery[id]* and the optimized physical plan) and the spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#exprId[ExprId].
 
 `apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.

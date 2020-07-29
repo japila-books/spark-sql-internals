@@ -17,9 +17,9 @@ title: CatalogStorageFormat
 
 `CatalogStorageFormat` is <<creating-instance, created>> when:
 
-* `HiveClientImpl` is requested for metadata of a link:hive/HiveClientImpl.adoc#getTableOption[table] or link:hive/HiveClientImpl.adoc#fromHivePartition[table partition]
+* `HiveClientImpl` is requested for metadata of a hive/HiveClientImpl.md#getTableOption[table] or hive/HiveClientImpl.md#fromHivePartition[table partition]
 
-* `SparkSqlAstBuilder` is requested to parse Hive-specific link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateHiveTable[CREATE TABLE] or link:spark-sql-SparkSqlAstBuilder.adoc#visitInsertOverwriteHiveDir[INSERT OVERWRITE DIRECTORY] SQL statements
+* `SparkSqlAstBuilder` is requested to parse Hive-specific spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable[CREATE TABLE] or spark-sql-SparkSqlAstBuilder.md#visitInsertOverwriteHiveDir[INSERT OVERWRITE DIRECTORY] SQL statements
 
 [[toString]]
 `CatalogStorageFormat` uses the following *text representation* (i.e. `toString`)...FIXME
@@ -39,9 +39,9 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 * `CatalogStorageFormat` is requested for a <<toString, text representation>>
 
-* `CatalogTablePartition` is requested for link:spark-sql-CatalogTablePartition.adoc#toLinkedHashMap[toLinkedHashMap]
+* `CatalogTablePartition` is requested for spark-sql-CatalogTablePartition.md#toLinkedHashMap[toLinkedHashMap]
 
-* `CatalogTable` is requested for link:spark-sql-CatalogTable.adoc#toLinkedHashMap[toLinkedHashMap]
+* `CatalogTable` is requested for spark-sql-CatalogTable.md#toLinkedHashMap[toLinkedHashMap]
 
-* `DescribeTableCommand` is requested to link:spark-sql-LogicalPlan-DescribeTableCommand.adoc#run[run]
+* `DescribeTableCommand` is requested to spark-sql-LogicalPlan-DescribeTableCommand.md#run[run]
 ====

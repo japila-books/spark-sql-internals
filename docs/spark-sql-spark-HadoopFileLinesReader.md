@@ -8,7 +8,7 @@
 * `LibSVMFileFormat`
 * `TextInputCSVDataSource`
 * `TextInputJsonDataSource`
-* link:spark-sql-TextFileFormat.adoc[TextFileFormat]
+* spark-sql-TextFileFormat.md[TextFileFormat]
 
 `HadoopFileLinesReader` uses the internal <<iterator, iterator>> that handles accessing files using Hadoop's FileSystem API.
 
@@ -16,7 +16,7 @@
 
 `HadoopFileLinesReader` takes the following when created:
 
-* [[file]] link:spark-sql-PartitionedFile.adoc[PartitionedFile]
+* [[file]] spark-sql-PartitionedFile.md[PartitionedFile]
 * [[conf]] Hadoop's `Configuration`
 
 === [[iterator]] `iterator` Internal Property
@@ -30,6 +30,6 @@ When <<creating-instance, created>>, `HadoopFileLinesReader` creates an internal
 
 `iterator` creates Hadoop's `TaskAttemptID`, `TaskAttemptContextImpl` and `LineRecordReader`.
 
-`iterator` initializes `LineRecordReader` and passes it on to a <<spark-sql-RecordReaderIterator.adoc#, RecordReaderIterator>>.
+`iterator` initializes `LineRecordReader` and passes it on to a <<spark-sql-RecordReaderIterator.md#, RecordReaderIterator>>.
 
 NOTE: `iterator` is used for ``Iterator``-specific methods, i.e. `hasNext`, `next` and `close`.

@@ -2,12 +2,12 @@
 
 [CAUTION]
 ====
-As of Spark *2.0.0* `SQLContext` is only for backward compatibility and is a _mere_ wrapper of link:SparkSession.md[SparkSession].
+As of Spark *2.0.0* `SQLContext` is only for backward compatibility and is a _mere_ wrapper of SparkSession.md[SparkSession].
 ====
 
 In the pre-Spark 2.0's ear, *SQLContext* was the entry point for Spark SQL. Whatever you did in Spark SQL it had to start from <<creating-instance, creating an instance of SQLContext>>.
 
-A `SQLContext` object requires a `SparkContext`, a `CacheManager`, and a link:spark-sql-SQLListener.adoc[SQLListener]. They are all `transient` and do not participate in serializing a SQLContext.
+A `SQLContext` object requires a `SparkContext`, a `CacheManager`, and a spark-sql-SQLListener.md[SQLListener]. They are all `transient` and do not participate in serializing a SQLContext.
 
 You should use `SQLContext` for the following:
 
@@ -59,7 +59,7 @@ NOTE: Properties that start with *spark.sql* are reserved for Spark SQL.
 emptyDataFrame: DataFrame
 ----
 
-`emptyDataFrame` creates an empty `DataFrame`. It calls `createDataFrame` with an empty `RDD[Row]` and an empty schema link:spark-sql-schema.adoc[StructType(Nil)].
+`emptyDataFrame` creates an empty `DataFrame`. It calls `createDataFrame` with an empty `RDD[Row]` and an empty schema spark-sql-schema.md[StructType(Nil)].
 
 ==== createDataFrame for RDD and Seq
 
@@ -78,7 +78,7 @@ createDataFrame[A <: Product](data: Seq[A]): DataFrame
 createDataFrame(rowRDD: RDD[Row], schema: StructType): DataFrame
 ----
 
-This variant of `createDataFrame` creates a `DataFrame` from `RDD` of link:spark-sql-Row.adoc[Row] and explicit schema.
+This variant of `createDataFrame` creates a `DataFrame` from `RDD` of spark-sql-Row.md[Row] and explicit schema.
 
 === [[registering-udfs]] Registering User-Defined Functions (UDF)
 
@@ -89,7 +89,7 @@ udf: UDFRegistration
 
 `udf` method gives you access to `UDFRegistration` to manipulate user-defined functions. Functions registered using `udf` are available for Hive queries only.
 
-TIP: Read up on UDFs in link:spark-sql-udfs.adoc[UDFs -- User-Defined Functions] document.
+TIP: Read up on UDFs in spark-sql-udfs.md[UDFs -- User-Defined Functions] document.
 
 [source, scala]
 ----
@@ -157,7 +157,7 @@ clearCache(): Unit
 
 === [[implicits]] Implicits -- SQLContext.implicits
 
-The `implicits` object is a helper class with methods to convert  objects into link:spark-sql-Dataset.adoc[Datasets] and link:spark-sql-DataFrame.adoc[DataFrames], and also comes with many link:spark-sql-Encoder.adoc[Encoders] for "primitive" types as well as the collections thereof.
+The `implicits` object is a helper class with methods to convert  objects into spark-sql-Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many spark-sql-Encoder.md[Encoders] for "primitive" types as well as the collections thereof.
 
 [NOTE]
 ====
@@ -170,9 +170,9 @@ import spark.implicits._
 ----
 ====
 
-It holds link:spark-sql-Encoder.adoc[Encoders] for Scala "primitive" types like `Int`, `Double`, `String`, and their collections.
+It holds spark-sql-Encoder.md[Encoders] for Scala "primitive" types like `Int`, `Double`, `String`, and their collections.
 
-It offers support for creating `Dataset` from `RDD` of any types (for which an link:spark-sql-Encoder.adoc[encoder] exists in scope), or case classes or tuples, and `Seq`.
+It offers support for creating `Dataset` from `RDD` of any types (for which an spark-sql-Encoder.md[encoder] exists in scope), or case classes or tuples, and `Seq`.
 
 It also offers conversions from Scala's `Symbol` or `$` to `Column`.
 
@@ -188,11 +188,11 @@ createDataset[T: Encoder](data: Seq[T]): Dataset[T]
 createDataset[T: Encoder](data: RDD[T]): Dataset[T]
 ----
 
-`createDataset` family of methods creates a link:spark-sql-Dataset.adoc[Dataset] from a collection of elements of type `T`, be it a regular Scala `Seq` or Spark's `RDD`.
+`createDataset` family of methods creates a spark-sql-Dataset.md[Dataset] from a collection of elements of type `T`, be it a regular Scala `Seq` or Spark's `RDD`.
 
-It requires that there is an link:spark-sql-Encoder.adoc[encoder] in scope.
+It requires that there is an spark-sql-Encoder.md[encoder] in scope.
 
-NOTE: <<implicits, Importing SQLContext.implicits>> brings many link:spark-sql-Encoder.adoc[encoders] available in scope.
+NOTE: <<implicits, Importing SQLContext.implicits>> brings many spark-sql-Encoder.md[encoders] available in scope.
 
 === [[read]] Accessing DataFrameReader (read method)
 
@@ -217,7 +217,7 @@ The experimental `createExternalTable` family of methods is used to create an ex
 
 CAUTION: FIXME What is an external table?
 
-It assumes *parquet* as the default data source format that you can change using link:spark-sql-properties.adoc[spark.sql.sources.default] setting.
+It assumes *parquet* as the default data source format that you can change using spark-sql-properties.md[spark.sql.sources.default] setting.
 
 === [[dropping-temporary-tables]] Dropping Temporary Tables
 
@@ -242,7 +242,7 @@ range(start: Long, end: Long, step: Long, numPartitions: Int): Dataset[Long]
 
 The `range` family of methods creates a `Dataset[Long]` with the sole `id` column of `LongType` for given `start`, `end`, and `step`.
 
-NOTE: The three first variants use link:spark-SparkContext.adoc#defaultParallelism[SparkContext.defaultParallelism] for the number of partitions `numPartitions`.
+NOTE: The three first variants use spark-SparkContext.md#defaultParallelism[SparkContext.defaultParallelism] for the number of partitions `numPartitions`.
 
 [source, scala]
 ----
@@ -310,7 +310,7 @@ tableNames(databaseName: String): Array[String]
 streams: StreamingQueryManager
 ----
 
-The `streams` method returns a link:spark-sql-streaming-StreamingQueryManager.adoc[StreamingQueryManager] that is used to...TK
+The `streams` method returns a spark-sql-streaming-StreamingQueryManager.md[StreamingQueryManager] that is used to...TK
 
 CAUTION: FIXME
 
@@ -342,7 +342,7 @@ sql(sqlText: String): DataFrame
 
 `sql` executes the `sqlText` SQL query.
 
-NOTE: It supports Hive statements through link:spark-sql-hive-integration.adoc[HiveContext].
+NOTE: It supports Hive statements through spark-sql-hive-integration.md[HiveContext].
 
 ```
 scala> sql("set spark.sql.hive.version").show(false)
@@ -380,7 +380,7 @@ scala> spark.tables.show
 +---------+-----------+
 ```
 
-`sql` parses `sqlText` using a dialect that can be set up using link:spark-sql-properties.adoc[spark.sql.dialect] setting.
+`sql` parses `sqlText` using a dialect that can be set up using spark-sql-properties.md[spark.sql.dialect] setting.
 
 [NOTE]
 ====
@@ -393,9 +393,9 @@ scala> :imports
 ```
 ====
 
-TIP: You may also use link:spark-sql-spark-sql.adoc[spark-sql shell script] to interact with Hive.
+TIP: You may also use spark-sql-spark-sql.md[spark-sql shell script] to interact with Hive.
 
-Internally, it uses `SessionState.sqlParser.parsePlan(sql)` method to create a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
+Internally, it uses `SessionState.sqlParser.parsePlan(sql)` method to create a spark-sql-LogicalPlan.md[LogicalPlan].
 
 CAUTION: FIXME Review
 
@@ -412,7 +412,7 @@ scala> sql("show tables").show(false)
 
 [TIP]
 ====
-Enable `INFO` logging level for the loggers that correspond to the link:spark-sql-AbstractSqlParser.adoc[AbstractSqlParser] to see what happens inside `sql`.
+Enable `INFO` logging level for the loggers that correspond to the spark-sql-AbstractSqlParser.md[AbstractSqlParser] to see what happens inside `sql`.
 
 Add the following line to `conf/log4j.properties`:
 
@@ -420,7 +420,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.execution.HiveSqlParser=INFO
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[newSession]] Creating New Session
@@ -432,6 +432,6 @@ newSession(): SQLContext
 
 You can use `newSession` method to create a new session without a cost of instantiating a new SqlContext from scratch.
 
-`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, link:spark-sql-SQLListener.adoc[SQLListener], and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog].
+`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, spark-sql-SQLListener.md[SQLListener], and spark-sql-ExternalCatalog.md[ExternalCatalog].
 
 CAUTION: FIXME Why would I need that?

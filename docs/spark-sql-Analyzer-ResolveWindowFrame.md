@@ -1,15 +1,15 @@
 # ResolveWindowFrame Logical Resolution Rule
 
-`ResolveWindowFrame` is a logical resolution rule that the link:spark-sql-Analyzer.adoc[logical query plan analyzer] uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
+`ResolveWindowFrame` is a logical resolution rule that the spark-sql-Analyzer.md[logical query plan analyzer] uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.
 
-Technically, `ResolveWindowFrame` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveWindowFrame` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveWindowFrame` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveWindowFrame` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
 
 [[transformations]]
-`ResolveWindowFrame` takes a link:spark-sql-LogicalPlan.adoc[logical plan] and does the following:
+`ResolveWindowFrame` takes a spark-sql-LogicalPlan.md[logical plan] and does the following:
 
-. Makes sure that the window frame of a `WindowFunction` is unspecified or matches the `SpecifiedWindowFrame` of the link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition] expression.
+. Makes sure that the window frame of a `WindowFunction` is unspecified or matches the `SpecifiedWindowFrame` of the spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition] expression.
 +
 Reports a `AnalysisException` when the frames do not match:
 +
@@ -17,11 +17,11 @@ Reports a `AnalysisException` when the frames do not match:
 Window Frame [f] must match the required frame [frame]
 ```
 
-. Copies the frame specification of `WindowFunction` to link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition]
+. Copies the frame specification of `WindowFunction` to spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition]
 
 . Creates a new `SpecifiedWindowFrame` for `WindowExpression` with the resolved Catalyst expression and `UnspecifiedFrame`
 
-NOTE: `ResolveWindowFrame` is a Scala object inside link:spark-sql-Analyzer.adoc[Analyzer] class.
+NOTE: `ResolveWindowFrame` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
 
 [[example]]
 [source, scala]
@@ -55,6 +55,6 @@ scala> println(planAfter.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
 `apply`...FIXME

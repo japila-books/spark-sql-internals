@@ -2,7 +2,7 @@ title: SubqueryExpression
 
 # SubqueryExpression -- Expressions With Logical Query Plans
 
-`SubqueryExpression` is the <<contract, contract>> for link:spark-sql-Expression-PlanExpression.adoc[expressions with logical query plans] (i.e. `PlanExpression[LogicalPlan]`).
+`SubqueryExpression` is the <<contract, contract>> for spark-sql-Expression-PlanExpression.md[expressions with logical query plans] (i.e. `PlanExpression[LogicalPlan]`).
 
 [[contract]]
 [source, scala]
@@ -30,19 +30,19 @@ a| Used when:
 
 * `CTESubstitution` substitution analyzer rule is requested to `substituteCTE`
 
-* `ResolveReferences` logical resolution rule is requested to link:spark-sql-Analyzer-ResolveReferences.adoc#dedupRight[dedupRight] and link:spark-sql-Analyzer-ResolveReferences.adoc#dedupOuterReferencesInSubquery[dedupOuterReferencesInSubquery]
+* `ResolveReferences` logical resolution rule is requested to spark-sql-Analyzer-ResolveReferences.md#dedupRight[dedupRight] and spark-sql-Analyzer-ResolveReferences.md#dedupOuterReferencesInSubquery[dedupOuterReferencesInSubquery]
 
-* `ResolveSubquery` logical resolution rule is requested to link:spark-sql-Analyzer-ResolveSubquery.adoc#resolveSubQuery[resolveSubQuery]
+* `ResolveSubquery` logical resolution rule is requested to spark-sql-Analyzer-ResolveSubquery.md#resolveSubQuery[resolveSubQuery]
 
-* `UpdateOuterReferences` logical rule is link:spark-sql-Analyzer-UpdateOuterReferences.adoc#apply[executed]
+* `UpdateOuterReferences` logical rule is spark-sql-Analyzer-UpdateOuterReferences.md#apply[executed]
 
-* `ResolveTimeZone` logical resolution rule is link:spark-sql-ResolveTimeZone.adoc#apply[executed]
+* `ResolveTimeZone` logical resolution rule is spark-sql-ResolveTimeZone.md#apply[executed]
 
 * `SubqueryExpression` is requested for a <<canonicalize, canonicalized version>>
 
-* `OptimizeSubqueries` logical query optimization is link:spark-sql-Optimizer-OptimizeSubqueries.adoc#apply[executed]
+* `OptimizeSubqueries` logical query optimization is spark-sql-Optimizer-OptimizeSubqueries.md#apply[executed]
 
-* `CacheManager` is requested to link:spark-sql-CacheManager.adoc#useCachedData[replace logical query segments with cached query plans]
+* `CacheManager` is requested to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans]
 |===
 
 [[implementations]]
@@ -52,18 +52,18 @@ a| Used when:
 | SubqueryExpression
 | Description
 
-| [[Exists]] link:spark-sql-Expression-Exists.adoc[Exists]
+| [[Exists]] spark-sql-Expression-Exists.md[Exists]
 |
 
-| [[ListQuery]] link:spark-sql-Expression-ListQuery.adoc[ListQuery]
+| [[ListQuery]] spark-sql-Expression-ListQuery.md[ListQuery]
 |
 
-| [[ScalarSubquery]] link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
+| [[ScalarSubquery]] spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery]
 |
 |===
 
 [[resolved]]
-`SubqueryExpression` is link:expressions/Expression.md#resolved[resolved] when the link:expressions/Expression.md#childrenResolved[children are resolved] and the <<plan, subquery logical plan>> is link:spark-sql-LogicalPlan.adoc#resolved[resolved].
+`SubqueryExpression` is expressions/Expression.md#resolved[resolved] when the expressions/Expression.md#childrenResolved[children are resolved] and the <<plan, subquery logical plan>> is spark-sql-LogicalPlan.md#resolved[resolved].
 
 [[references]]
 `references`...FIXME
@@ -112,6 +112,6 @@ NOTE: `hasSubquery` is used when...FIXME
 
 `SubqueryExpression` takes the following when created:
 
-* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[children]] Child link:expressions/Expression.md[expressions]
+* [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
+* [[children]] Child expressions/Expression.md[expressions]
 * [[exprId]] Expression ID (as `ExprId`)

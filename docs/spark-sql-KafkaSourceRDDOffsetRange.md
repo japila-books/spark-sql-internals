@@ -1,12 +1,12 @@
 # KafkaSourceRDDOffsetRange
 
-`KafkaSourceRDDOffsetRange` is an <<spark-sql-KafkaSourceRDDPartition.adoc#offsetRange, offset range>> that one  `KafkaSourceRDDPartition` partition of a <<spark-sql-KafkaSourceRDD.adoc#getPartitions, KafkaSourceRDD>> has to read.
+`KafkaSourceRDDOffsetRange` is an <<spark-sql-KafkaSourceRDDPartition.md#offsetRange, offset range>> that one  `KafkaSourceRDDPartition` partition of a <<spark-sql-KafkaSourceRDD.md#getPartitions, KafkaSourceRDD>> has to read.
 
 `KafkaSourceRDDOffsetRange` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>) (and creates a <<spark-sql-KafkaSourceRDD.adoc#offsetRanges, KafkaSourceRDD>>)
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.md#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>) (and creates a <<spark-sql-KafkaSourceRDD.md#offsetRanges, KafkaSourceRDD>>)
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.adoc#resolveRange, resolveRange>>
+* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#resolveRange, resolveRange>>
 
 * (Spark Structured Streaming) `KafkaSource` is requested to `getBatch`
 

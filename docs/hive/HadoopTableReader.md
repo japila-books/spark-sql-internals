@@ -5,9 +5,9 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HadoopTableReader` is a link:TableReader.adoc[TableReader] to create an `HadoopRDD` for scanning <<makeRDDForPartitionedTable, partitioned>> or <<makeRDDForTable, unpartitioned>> tables stored in Hadoop.
+`HadoopTableReader` is a TableReader.md[TableReader] to create an `HadoopRDD` for scanning <<makeRDDForPartitionedTable, partitioned>> or <<makeRDDForTable, unpartitioned>> tables stored in Hadoop.
 
-`HadoopTableReader` is used by link:HiveTableScanExec.adoc[HiveTableScanExec] physical operator when requested to link:HiveTableScanExec.adoc#doExecute[execute].
+`HadoopTableReader` is used by HiveTableScanExec.md[HiveTableScanExec] physical operator when requested to HiveTableScanExec.md#doExecute[execute].
 
 === [[creating-instance]] Creating HadoopTableReader Instance
 
@@ -16,7 +16,7 @@
 * [[attributes]] Attributes
 * [[partitionKeys]] Partition Keys (`Seq[Attribute]`)
 * [[tableDesc]] Hive {url-hive-javadoc}/org/apache/hive/hcatalog/templeton/TableDesc.html[TableDesc]
-* [[sparkSession]] link:SparkSession.md[SparkSession]
+* [[sparkSession]] SparkSession.md[SparkSession]
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
 
 `HadoopTableReader` initializes the <<internal-properties, internal properties>>.
@@ -29,7 +29,7 @@ makeRDDForTable(
   hiveTable: HiveTable): RDD[InternalRow]
 ----
 
-NOTE: `makeRDDForTable` is part of the link:TableReader.adoc#makeRDDForTable[TableReader] contract to...FIXME.
+NOTE: `makeRDDForTable` is part of the TableReader.md#makeRDDForTable[TableReader] contract to...FIXME.
 
 `makeRDDForTable` simply calls the private <<makeRDDForTable-private, makeRDDForTable>> with...FIXME
 
@@ -55,7 +55,7 @@ makeRDDForPartitionedTable(
   partitions: Seq[HivePartition]): RDD[InternalRow]
 ----
 
-NOTE: `makeRDDForPartitionedTable` is part of the link:TableReader.adoc#makeRDDForPartitionedTable[TableReader] contract to...FIXME.
+NOTE: `makeRDDForPartitionedTable` is part of the TableReader.md#makeRDDForPartitionedTable[TableReader] contract to...FIXME.
 
 `makeRDDForPartitionedTable` simply calls the private <<makeRDDForPartitionedTable-private, makeRDDForPartitionedTable>> with...FIXME
 

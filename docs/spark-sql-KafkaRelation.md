@@ -1,11 +1,11 @@
 # KafkaRelation
 
-`KafkaRelation` is a <<spark-sql-BaseRelation.adoc#, BaseRelation>> with a <<spark-sql-TableScan.adoc#, TableScan>>.
+`KafkaRelation` is a <<spark-sql-BaseRelation.md#, BaseRelation>> with a <<spark-sql-TableScan.md#, TableScan>>.
 
-`KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
+`KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.md#createRelation, RelationProvider>>).
 
 [[schema]]
-`KafkaRelation` uses the fixed <<spark-sql-BaseRelation.adoc#schema, schema>>.
+`KafkaRelation` uses the fixed <<spark-sql-BaseRelation.md#schema, schema>>.
 
 [[schema]]
 .KafkaRelation's Schema (in the positional order)
@@ -51,7 +51,7 @@ KafkaRelation(strategy=[strategy], start=[startingOffsets], end=[endingOffsets])
 | Description
 
 | pollTimeoutMs
-a| [[pollTimeoutMs]] Timeout (in milliseconds) to poll data from Kafka (<<spark-sql-KafkaSourceRDD.adoc#pollTimeoutMs, pollTimeoutMs>> for `KafkaSourceRDD`)
+a| [[pollTimeoutMs]] Timeout (in milliseconds) to poll data from Kafka (<<spark-sql-KafkaSourceRDD.md#pollTimeoutMs, pollTimeoutMs>> for `KafkaSourceRDD`)
 
 Initialized with the value of the following configuration properties (in the order until one found):
 
@@ -61,7 +61,7 @@ Initialized with the value of the following configuration properties (in the ord
 
 If neither is set, defaults to `120s`.
 
-Used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (and creates a <<spark-sql-KafkaSourceRDD.adoc#pollTimeoutMs, KafkaSourceRDD>>).
+Used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (and creates a <<spark-sql-KafkaSourceRDD.md#pollTimeoutMs, KafkaSourceRDD>>).
 |===
 
 [[logging]]
@@ -75,7 +75,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.kafka010.KafkaRelation=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[creating-instance]] Creating KafkaRelation Instance
@@ -87,8 +87,8 @@ Refer to link:spark-logging.adoc[Logging].
 * [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of [DataFrameReader](DataFrameReader.md#option)
 * [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
 * [[failOnDataLoss]] `failOnDataLoss` flag
-* [[startingOffsets]] Starting offsets (as <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>>)
-* [[endingOffsets]] Ending offsets (as <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>>)
+* [[startingOffsets]] Starting offsets (as <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>>)
+* [[endingOffsets]] Ending offsets (as <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>>)
 
 `KafkaRelation` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -99,13 +99,13 @@ Refer to link:spark-logging.adoc[Logging].
 buildScan(): RDD[Row]
 ----
 
-NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Contract>> to build a distributed data scan with column pruning.
+NOTE: `buildScan` is part of <<spark-sql-TableScan.md#buildScan, TableScan Contract>> to build a distributed data scan with column pruning.
 
-`buildScan` <<spark-sql-KafkaSourceProvider.adoc#kafkaParamsForDriver, kafkaParamsForDriver>> from the <<specifiedKafkaParams, user-defined Kafka parameters>> and uses it to create a <<spark-sql-KafkaOffsetReader.adoc#creating-instance, KafkaOffsetReader>> (together with the <<strategy, ConsumerStrategy>>, the <<sourceOptions, source options>> and a unique group ID of the format `spark-kafka-relation-[randomUUID]-driver`).
+`buildScan` <<spark-sql-KafkaSourceProvider.md#kafkaParamsForDriver, kafkaParamsForDriver>> from the <<specifiedKafkaParams, user-defined Kafka parameters>> and uses it to create a <<spark-sql-KafkaOffsetReader.md#creating-instance, KafkaOffsetReader>> (together with the <<strategy, ConsumerStrategy>>, the <<sourceOptions, source options>> and a unique group ID of the format `spark-kafka-relation-[randomUUID]-driver`).
 
-`buildScan` then uses the `KafkaOffsetReader` to <<getPartitionOffsets, getPartitionOffsets>> for the starting and ending offsets and <<spark-sql-KafkaOffsetReader.adoc#close, closes>> it right after.
+`buildScan` then uses the `KafkaOffsetReader` to <<getPartitionOffsets, getPartitionOffsets>> for the starting and ending offsets and <<spark-sql-KafkaOffsetReader.md#close, closes>> it right after.
 
-`buildScan` creates a <<spark-sql-KafkaSourceRDDOffsetRange.adoc#creating-instance, KafkaSourceRDDOffsetRange>> for every pair of the starting and ending offsets.
+`buildScan` creates a <<spark-sql-KafkaSourceRDDOffsetRange.md#creating-instance, KafkaSourceRDDOffsetRange>> for every pair of the starting and ending offsets.
 
 `buildScan` prints out the following INFO message to the logs:
 
@@ -113,7 +113,7 @@ NOTE: `buildScan` is part of <<spark-sql-TableScan.adoc#buildScan, TableScan Con
 GetBatch generating RDD of offset range: [comma-separated offsetRanges]
 ```
 
-`buildScan` then <<spark-sql-KafkaSourceProvider.adoc#kafkaParamsForExecutors, kafkaParamsForExecutors>> and uses it to create a `KafkaSourceRDD` (with the <<pollTimeoutMs, pollTimeoutMs>>) and maps over all the elements (using `RDD.map` operator that creates a `MapPartitionsRDD`).
+`buildScan` then <<spark-sql-KafkaSourceProvider.md#kafkaParamsForExecutors, kafkaParamsForExecutors>> and uses it to create a `KafkaSourceRDD` (with the <<pollTimeoutMs, pollTimeoutMs>>) and maps over all the elements (using `RDD.map` operator that creates a `MapPartitionsRDD`).
 
 TIP: Use `RDD.toDebugString` to see the two RDDs, i.e. `KafkaSourceRDD` and `MapPartitionsRDD`, in the RDD lineage.
 
@@ -134,9 +134,9 @@ getPartitionOffsets(
   kafkaOffsets: KafkaOffsetRangeLimit): Map[TopicPartition, Long]
 ----
 
-`getPartitionOffsets` requests the input `KafkaOffsetReader` to <<spark-sql-KafkaOffsetReader.adoc#fetchTopicPartitions, fetchTopicPartitions>>.
+`getPartitionOffsets` requests the input `KafkaOffsetReader` to <<spark-sql-KafkaOffsetReader.md#fetchTopicPartitions, fetchTopicPartitions>>.
 
-`getPartitionOffsets` uses the input <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> to return the mapping of offsets per Kafka `TopicPartition` fetched:
+`getPartitionOffsets` uses the input <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> to return the mapping of offsets per Kafka `TopicPartition` fetched:
 
 . For `EarliestOffsetRangeLimit`, `getPartitionOffsets` returns a map with every `TopicPartition` and `-2L` (as the offset)
 
@@ -144,7 +144,7 @@ getPartitionOffsets(
 
 . For `SpecificOffsetRangeLimit`, `getPartitionOffsets` returns a map from <<validateTopicPartitions, validateTopicPartitions>>
 
-NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>).
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>).
 
 ==== [[getPartitionOffsets-validateTopicPartitions]] Validating TopicPartitions (Against Partition Offsets) -- `validateTopicPartitions` Inner Method
 

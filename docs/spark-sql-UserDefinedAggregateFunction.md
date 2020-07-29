@@ -69,14 +69,14 @@ scala> q.show
 +-----+-----+
 ----
 
-The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] expression container.
+The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] expression container.
 
 .UserDefinedAggregateFunction and ScalaUDAF Expression Container
 image::images/spark-sql-UserDefinedAggregateFunction.png[align="center"]
 
 [NOTE]
 ====
-Use link:spark-sql-UDFRegistration.adoc[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in link:SparkSession.md#sql[SQL mode].
+Use spark-sql-UDFRegistration.md[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in SparkSession.md#sql[SQL mode].
 
 [source, scala]
 ----
@@ -145,7 +145,7 @@ abstract class UserDefinedAggregateFunction {
 apply(exprs: Column*): Column
 ----
 
-`apply` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`apply` creates a spark-sql-Column.md[Column] with spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
 NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is disabled.
 
@@ -178,7 +178,7 @@ MyCountUDAF('id,'name)
 distinct(exprs: Column*): Column
 ----
 
-`distinct` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`distinct` creates a spark-sql-Column.md[Column] with spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
 NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is enabled.
 

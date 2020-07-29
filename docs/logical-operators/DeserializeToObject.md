@@ -10,8 +10,8 @@ case class DeserializeToObject(
   child: LogicalPlan) extends UnaryNode with ObjectProducer
 ----
 
-`DeserializeToObject` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that takes the input row from the input `child` link:spark-sql-LogicalPlan.adoc[logical plan] and turns it into the input `outputObjAttr` link:spark-sql-Expression-Attribute.adoc[attribute] using the given `deserializer` link:expressions/Expression.md[expression].
+`DeserializeToObject` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that takes the input row from the input `child` spark-sql-LogicalPlan.md[logical plan] and turns it into the input `outputObjAttr` spark-sql-Expression-Attribute.md[attribute] using the given `deserializer` expressions/Expression.md[expression].
 
 `DeserializeToObject` is a `ObjectProducer` which produces domain objects as output. ``DeserializeToObject``'s output is a single-field safe row containing the produced object.
 
-NOTE: `DeserializeToObject` is the result of link:spark-sql-CatalystSerde.adoc#deserialize[CatalystSerde.deserialize].
+NOTE: `DeserializeToObject` is the result of spark-sql-CatalystSerde.md#deserialize[CatalystSerde.deserialize].

@@ -2,9 +2,9 @@ title: BroadcastExchangeExec
 
 # BroadcastExchangeExec Unary Physical Operator for Broadcast Joins
 
-`BroadcastExchangeExec` is a link:spark-sql-SparkPlan-Exchange.adoc[Exchange] unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
+`BroadcastExchangeExec` is a spark-sql-SparkPlan-Exchange.md[Exchange] unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
 
-`BroadcastExchangeExec` is <<creating-instance, created>> exclusively when `EnsureRequirements` physical query plan optimization link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[ensures BroadcastDistribution of the input data of a physical operator] (that can really be either link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] operators).
+`BroadcastExchangeExec` is <<creating-instance, created>> exclusively when `EnsureRequirements` physical query plan optimization spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[ensures BroadcastDistribution of the input data of a physical operator] (that can really be either spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] operators).
 
 [source, scala]
 ----
@@ -49,7 +49,7 @@ scala> q.explain
 image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align="center"]
 
 [[outputPartitioning]]
-`BroadcastExchangeExec` uses link:spark-sql-SparkPlan-Partitioning.adoc#BroadcastPartitioning[BroadcastPartitioning] partitioning scheme (with the input <<mode, BroadcastMode>>).
+`BroadcastExchangeExec` uses spark-sql-SparkPlan-Partitioning.md#BroadcastPartitioning[BroadcastPartitioning] partitioning scheme (with the input <<mode, BroadcastMode>>).
 
 === [[doExecuteBroadcast]] Waiting Until Relation Has Been Broadcast -- `doExecuteBroadcast` Method
 
@@ -62,7 +62,7 @@ def doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 NOTE: `doExecuteBroadcast` waits [spark.sql.broadcastTimeout](../SQLConf.md#broadcastTimeout) (defaults to 5 minutes).
 
-NOTE: `doExecuteBroadcast` is part of link:SparkPlan.md#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
+NOTE: `doExecuteBroadcast` is part of SparkPlan.md#doExecuteBroadcast[SparkPlan Contract] to return the result of a structured query as a broadcast variable.
 
 === [[relationFuture]] Lazily-Once-Initialized Asynchronously-Broadcast `relationFuture` Internal Attribute
 
@@ -71,31 +71,31 @@ NOTE: `doExecuteBroadcast` is part of link:SparkPlan.md#doExecuteBroadcast[Spark
 relationFuture: Future[broadcast.Broadcast[Any]]
 ----
 
-When "materialized" (aka _executed_), `relationFuture` finds the current link:spark-sql-SQLExecution.adoc#spark.sql.execution.id[execution id] and sets it to the `Future` thread.
+When "materialized" (aka _executed_), `relationFuture` finds the current spark-sql-SQLExecution.md#spark.sql.execution.id[execution id] and sets it to the `Future` thread.
 
-`relationFuture` requests <<child, child physical operator>> to link:SparkPlan.md#executeCollectIterator[executeCollectIterator].
+`relationFuture` requests <<child, child physical operator>> to SparkPlan.md#executeCollectIterator[executeCollectIterator].
 
 `relationFuture` records the time for `executeCollectIterator` in <<collectTime, collectTime>> metrics.
 
 NOTE: `relationFuture` accepts a relation with up to 512 millions rows and 8GB in size, and reports a `SparkException` if the conditions are violated.
 
-`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows to create a relation, e.g. link:spark-sql-HashedRelation.adoc[HashedRelation] or a `Array[InternalRow]`.
+`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows to create a relation, e.g. spark-sql-HashedRelation.md[HashedRelation] or a `Array[InternalRow]`.
 
 `relationFuture` calculates the data size:
 
-* For a `HashedRelation`, `relationFuture` requests it to link:spark-sql-KnownSizeEstimation.adoc#estimatedSize[estimatedSize]
+* For a `HashedRelation`, `relationFuture` requests it to spark-sql-KnownSizeEstimation.md#estimatedSize[estimatedSize]
 
-* For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to link:spark-sql-UnsafeRow.adoc[UnsafeRows] and requests each to link:spark-sql-UnsafeRow.adoc#getSizeInBytes[getSizeInBytes] that it sums all up.
+* For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to spark-sql-UnsafeRow.md[UnsafeRows] and requests each to spark-sql-UnsafeRow.md#getSizeInBytes[getSizeInBytes] that it sums all up.
 
 `relationFuture` records the data size as the <<dataSize, dataSize>> metric.
 
 `relationFuture` records the <<buildTime, buildTime>> metric.
 
-`relationFuture` requests the link:SparkPlan.md#sparkContext[SparkContext] to `broadcast` the relation and records the time in <<broadcastTime, broadcastTime>> metrics.
+`relationFuture` requests the SparkPlan.md#sparkContext[SparkContext] to `broadcast` the relation and records the time in <<broadcastTime, broadcastTime>> metrics.
 
-In the end, `relationFuture` requests `SQLMetrics` to link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[post a SparkListenerDriverAccumUpdates] (with the execution id and the SQL metrics) and returns the broadcast internal rows.
+In the end, `relationFuture` requests `SQLMetrics` to spark-sql-SQLMetric.md#postDriverMetricUpdates[post a SparkListenerDriverAccumUpdates] (with the execution id and the SQL metrics) and returns the broadcast internal rows.
 
-NOTE: Since initialization of `relationFuture` happens on the driver, link:spark-sql-SQLMetric.adoc#postDriverMetricUpdates[posting a SparkListenerDriverAccumUpdates] is the only way how all the SQL metrics could be accessible to other subsystems using `SparkListener` listeners (incl. web UI).
+NOTE: Since initialization of `relationFuture` happens on the driver, spark-sql-SQLMetric.md#postDriverMetricUpdates[posting a SparkListenerDriverAccumUpdates] is the only way how all the SQL metrics could be accessible to other subsystems using `SparkListener` listeners (incl. web UI).
 
 In case of `OutOfMemoryError`, `relationFuture` reports another `OutOfMemoryError` with the following message:
 
@@ -116,7 +116,7 @@ NOTE: `relationFuture` is used when `BroadcastExchangeExec` is requested to <<do
 doPrepare(): Unit
 ----
 
-NOTE: `doPrepare` is part of link:SparkPlan.md#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
+NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepare a physical operator for execution.
 
 `doPrepare` simply "materializes" the internal lazily-once-initialized <<relationFuture, asynchronous broadcast>>.
 
@@ -124,5 +124,5 @@ NOTE: `doPrepare` is part of link:SparkPlan.md#doPrepare[SparkPlan Contract] to 
 
 `BroadcastExchangeExec` takes the following when created:
 
-* [[mode]] link:spark-sql-BroadcastMode.adoc[BroadcastMode]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[mode]] spark-sql-BroadcastMode.md[BroadcastMode]
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]

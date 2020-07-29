@@ -2,7 +2,7 @@ title: Untyped Transformations
 
 # Dataset API -- Untyped Transformations
 
-*Untyped transformations* are part of the Dataset API for transforming a `Dataset` to a <<spark-sql-DataFrame.adoc#, DataFrame>>, a <<spark-sql-Column.adoc#, Column>>, a <<spark-sql-RelationalGroupedDataset.adoc#, RelationalGroupedDataset>>, a <<spark-sql-DataFrameNaFunctions.adoc#, DataFrameNaFunctions>> or a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> (and hence _untyped_).
+*Untyped transformations* are part of the Dataset API for transforming a `Dataset` to a <<spark-sql-DataFrame.md#, DataFrame>>, a <<spark-sql-Column.md#, Column>>, a <<spark-sql-RelationalGroupedDataset.md#, RelationalGroupedDataset>>, a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> or a <<spark-sql-DataFrameStatFunctions.md#, DataFrameStatFunctions>> (and hence _untyped_).
 
 NOTE: Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.
 
@@ -188,11 +188,11 @@ col(colName: String): Column
 
 Internally, `col` branches off per the input column name.
 
-If the column name is `*` (a star), `col` simply creates a <<spark-sql-Column.adoc#apply, Column>> with <<spark-sql-Expression-ResolvedStar.adoc#, ResolvedStar>> expression (with the <<catalyst/QueryPlan.md#output, schema output attributes>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>>).
+If the column name is `*` (a star), `col` simply creates a <<spark-sql-Column.md#apply, Column>> with <<spark-sql-Expression-ResolvedStar.md#, ResolvedStar>> expression (with the <<catalyst/QueryPlan.md#output, schema output attributes>> of the <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>> of the <<spark-sql-Dataset.md#queryExecution, QueryExecution>>).
 
-Otherwise, `col` uses <<colRegex, colRegex>> untyped transformation when <<spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled.
+Otherwise, `col` uses <<colRegex, colRegex>> untyped transformation when <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled.
 
-In the case when the column name is not `*` and <<spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is disabled, `col` creates a <<spark-sql-Column.adoc#apply, Column>> with the column name <<spark-sql-Dataset.adoc#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>).
+In the case when the column name is not `*` and <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is disabled, `col` creates a <<spark-sql-Column.md#apply, Column>> with the column name <<spark-sql-Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>).
 
 === [[colRegex]] `colRegex` Untyped Transformation
 
@@ -203,15 +203,15 @@ colRegex(colName: String): Column
 
 `colRegex` selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`).
 
-NOTE: `colRegex` is used in <<col, col>> when <<spark-sql-properties.adoc#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled (and the column name is not `*`).
+NOTE: `colRegex` is used in <<col, col>> when <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled (and the column name is not `*`).
 
 Internally, `colRegex` matches the input column name to different regular expressions (in the order):
 
-. For column names with quotes without a qualifier, `colRegex` simply creates a <<spark-sql-Column.adoc#apply, Column>> with a <<spark-sql-Expression-UnresolvedRegex.adoc#, UnresolvedRegex>> (with no table)
+. For column names with quotes without a qualifier, `colRegex` simply creates a <<spark-sql-Column.md#apply, Column>> with a <<spark-sql-Expression-UnresolvedRegex.md#, UnresolvedRegex>> (with no table)
 
-. For column names with quotes with a qualifier, `colRegex` simply creates a <<spark-sql-Column.adoc#apply, Column>> with a <<spark-sql-Expression-UnresolvedRegex.adoc#, UnresolvedRegex>> (with a table specified)
+. For column names with quotes with a qualifier, `colRegex` simply creates a <<spark-sql-Column.md#apply, Column>> with a <<spark-sql-Expression-UnresolvedRegex.md#, UnresolvedRegex>> (with a table specified)
 
-. For other column names, `colRegex` (behaves like <<col, col>> and) creates a <<spark-sql-Column.adoc#apply, Column>> with the column name <<spark-sql-Dataset.adoc#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>)
+. For other column names, `colRegex` (behaves like <<col, col>> and) creates a <<spark-sql-Column.md#apply, Column>> with the column name <<spark-sql-Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>)
 
 === [[crossJoin]] `crossJoin` Untyped Transformation
 
@@ -274,7 +274,7 @@ join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
 na: DataFrameNaFunctions
 ----
 
-`na` simply creates a <<spark-sql-DataFrameNaFunctions.adoc#, DataFrameNaFunctions>> to work with missing data.
+`na` simply creates a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> to work with missing data.
 
 === [[rollup]] `rollup` Untyped Transformation
 
@@ -322,7 +322,7 @@ scala> ds.selectExpr("rand() as random").show
 +-------------------+
 ----
 
-Internally, it executes `select` with every expression in `exprs` mapped to link:spark-sql-Column.adoc[Column] (using link:spark-sql-SparkSqlParser.adoc[SparkSqlParser.parseExpression]).
+Internally, it executes `select` with every expression in `exprs` mapped to spark-sql-Column.md[Column] (using spark-sql-SparkSqlParser.md[SparkSqlParser.parseExpression]).
 
 [source, scala]
 ----
@@ -345,7 +345,7 @@ scala> ds.select(expr("rand() as random")).show
 stat: DataFrameStatFunctions
 ----
 
-`stat` simply creates a <<spark-sql-DataFrameStatFunctions.adoc#, DataFrameStatFunctions>> to work with statistic functions.
+`stat` simply creates a <<spark-sql-DataFrameStatFunctions.md#, DataFrameStatFunctions>> to work with statistic functions.
 
 === [[withColumn]] `withColumn` Untyped Transformation
 

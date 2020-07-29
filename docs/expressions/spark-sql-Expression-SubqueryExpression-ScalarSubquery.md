@@ -2,13 +2,13 @@ title: ScalarSubquery
 
 # ScalarSubquery (SubqueryExpression) Expression
 
-`ScalarSubquery` is a link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression] that returns a single row and a single column only.
+`ScalarSubquery` is a spark-sql-Expression-SubqueryExpression.md[SubqueryExpression] that returns a single row and a single column only.
 
 `ScalarSubquery` represents a structured query that can be used as a "column".
 
-IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent a `SubqueryExpression` (this page) and  an link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ExecSubqueryExpression]. You've been warned.
+IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent a `SubqueryExpression` (this page) and  an spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ExecSubqueryExpression]. You've been warned.
 
-`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitSubqueryExpression[parse a subquery expression].
+`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to spark-sql-AstBuilder.md#visitSubqueryExpression[parse a subquery expression].
 
 [source, scala]
 ----
@@ -36,6 +36,6 @@ val sql = "select g from t group by g having a > (select b from s)"
 
 `ScalarSubquery` takes the following when created:
 
-* [[plan]] Subquery link:spark-sql-LogicalPlan.adoc[logical plan]
-* [[children]] Child link:expressions/Expression.md[expressions] (default: no children)
-* [[exprId]] Expression ID (as `ExprId` and defaults to a link:spark-sql-Expression-NamedExpression.adoc#newExprId[new ExprId])
+* [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
+* [[children]] Child expressions/Expression.md[expressions] (default: no children)
+* [[exprId]] Expression ID (as `ExprId` and defaults to a spark-sql-Expression-NamedExpression.md#newExprId[new ExprId])

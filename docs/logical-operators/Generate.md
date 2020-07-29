@@ -2,29 +2,29 @@ title: Generate
 
 # Generate Unary Logical Operator for Lateral Views
 
-`Generate` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following (after a logical plan is link:spark-sql-LogicalPlan.adoc#analyzed[analyzed]):
+`Generate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):
 
-* link:spark-sql-Expression-Generator.adoc[Generator] or `GeneratorOuter` expressions (by link:spark-sql-Analyzer.adoc#ExtractGenerator[ExtractGenerator] logical evaluation rule)
+* spark-sql-Expression-Generator.md[Generator] or `GeneratorOuter` expressions (by spark-sql-Analyzer.md#ExtractGenerator[ExtractGenerator] logical evaluation rule)
 
-* SQL's link:spark-sql-AstBuilder.adoc#withGenerate[LATERAL VIEW] clause (in `SELECT` or `FROM` clauses)
+* SQL's spark-sql-AstBuilder.md#withGenerate[LATERAL VIEW] clause (in `SELECT` or `FROM` clauses)
 
 [[resolved]]
 `resolved` flag is...FIXME
 
-NOTE: `resolved` is part of link:spark-sql-LogicalPlan.adoc#resolved[LogicalPlan Contract] to...FIXME.
+NOTE: `resolved` is part of spark-sql-LogicalPlan.md#resolved[LogicalPlan Contract] to...FIXME.
 
 [[producedAttributes]]
 `producedAttributes`...FIXME
 
 [[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of a `Generate` is...FIXME
+The catalyst/QueryPlan.md#output[output schema] of a `Generate` is...FIXME
 
 !!! note
-  `Generate` logical operator is resolved to link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
+  `Generate` logical operator is resolved to spark-sql-SparkPlan-GenerateExec.md[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
 
 [TIP]
 ====
-Use `generate` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `generate` operator from spark-sql-catalyst-dsl.md[Catalyst DSL] to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----
@@ -56,11 +56,11 @@ scala> println(plan.numberedTreeString)
 
 `Generate` takes the following when created:
 
-* [[generator]] link:spark-sql-Expression-Generator.adoc[Generator] expression
+* [[generator]] spark-sql-Expression-Generator.md[Generator] expression
 * [[join]] `join` flag...FIXME
 * [[outer]] `outer` flag...FIXME
 * [[qualifier]] Optional qualifier
-* [[generatorOutput]] Output link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[generatorOutput]] Output spark-sql-Expression-Attribute.md[attributes]
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
 
 `Generate` initializes the <<internal-registries, internal registries and counters>>.

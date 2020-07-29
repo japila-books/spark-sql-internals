@@ -1,6 +1,6 @@
 # DataSourceV2Strategy Execution Planning Strategy
 
-`DataSourceV2Strategy` is an <<spark-sql-SparkStrategy.adoc#, execution planning strategy>> that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, plan logical operators>> (from the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>>).
+`DataSourceV2Strategy` is an <<spark-sql-SparkStrategy.md#, execution planning strategy>> that spark-sql-SparkPlanner.md[Spark Planner] uses to <<apply, plan logical operators>> (from the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>).
 
 [[logical-operators]]
 .DataSourceV2Strategy's Execution Planning
@@ -10,16 +10,16 @@
 | Physical Operator
 
 | <<apply-DataSourceV2Relation, DataSourceV2Relation>>
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>>
+| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
 
 | <<apply-StreamingDataSourceV2Relation, StreamingDataSourceV2Relation>>
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>>
+| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
 
 | <<apply-WriteToDataSourceV2, WriteToDataSourceV2>>
-| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>>
+| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
 
-| <<apply-AppendData, AppendData>> with <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>>
-| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>>
+| <<apply-AppendData, AppendData>> with <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>>
+| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
 
 | <<apply-WriteToContinuousDataSource, WriteToContinuousDataSource>>
 | `WriteToContinuousDataSourceExec`
@@ -39,7 +39,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy=INFO
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 ## <span id="apply"> Applying DataSourceV2Strategy Strategy to Logical Plan
@@ -49,13 +49,13 @@ apply(
   plan: LogicalPlan): Seq[SparkPlan]
 ```
 
-NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
 
-`apply` branches off per the given <<spark-sql-LogicalPlan.adoc#, logical operator>>.
+`apply` branches off per the given <<spark-sql-LogicalPlan.md#, logical operator>>.
 
 ==== [[apply-DataSourceV2Relation]] DataSourceV2Relation Logical Operator
 
-For a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator, `apply` requests the `DataSourceV2Relation` for the <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newReader, DataSourceReader>>.
+For a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply` requests the `DataSourceV2Relation` for the <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newReader, DataSourceReader>>.
 
 `apply` then <<pushFilters, pushFilters>> followed by <<pruneColumns, pruneColumns>>.
 
@@ -68,11 +68,11 @@ Post-Scan Filters: [postScanFilters]
 Output: [output]
 ```
 
-`apply` uses the `DataSourceV2Relation` to create a <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#, DataSourceV2ScanExec>> physical operator.
+`apply` uses the `DataSourceV2Relation` to create a <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator.
 
-If there are any `postScanFilters`, `apply` creates a <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>> physical operator with the `DataSourceV2ScanExec` physical operator as the child.
+If there are any `postScanFilters`, `apply` creates a <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>> physical operator with the `DataSourceV2ScanExec` physical operator as the child.
 
-In the end, `apply` creates a <<spark-sql-SparkPlan-ProjectExec.adoc#, ProjectExec>> physical operator with the `FilterExec` with the `DataSourceV2ScanExec` or directly with the `DataSourceV2ScanExec` physical operator.
+In the end, `apply` creates a <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>> physical operator with the `FilterExec` with the `DataSourceV2ScanExec` or directly with the `DataSourceV2ScanExec` physical operator.
 
 ==== [[apply-StreamingDataSourceV2Relation]] StreamingDataSourceV2Relation Logical Operator
 
@@ -80,11 +80,11 @@ For a `StreamingDataSourceV2Relation` logical operator, `apply`...FIXME
 
 ==== [[apply-WriteToDataSourceV2]] WriteToDataSourceV2 Logical Operator
 
-For a <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> logical operator, `apply` simply creates a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> physical operator.
+For a <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator, `apply` simply creates a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
 
 ==== [[apply-AppendData]] AppendData Logical Operator
 
-For a <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator with a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>>, `apply` requests the <<spark-sql-LogicalPlan-AppendData.adoc#table, DataSourceV2Relation>> to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newWriter, create a DataSourceWriter>> that is used to create a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> physical operator.
+For a <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator with a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>>, `apply` requests the <<spark-sql-LogicalPlan-AppendData.md#table, DataSourceV2Relation>> to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> that is used to create a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
 
 ==== [[apply-WriteToContinuousDataSource]] WriteToContinuousDataSource Logical Operator
 
@@ -92,7 +92,7 @@ For a `WriteToContinuousDataSource` logical operator, `apply`...FIXME
 
 ==== [[apply-Repartition]] Repartition Logical Operator
 
-For a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#, Repartition>> logical operator, `apply`...FIXME
+For a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#, Repartition>> logical operator, `apply`...FIXME
 
 === [[pushFilters]] `pushFilters` Internal Method
 
@@ -103,11 +103,11 @@ pushFilters(
   filters: Seq[Expression]): (Seq[Expression], Seq[Expression])
 ----
 
-NOTE: `pushFilters` handles <<spark-sql-DataSourceReader.adoc#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.adoc#, SupportsPushDownFilters>> support only.
+NOTE: `pushFilters` handles <<spark-sql-DataSourceReader.md#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.md#, SupportsPushDownFilters>> support only.
 
 For the given `DataSourceReaders` with `SupportsPushDownFilters` support, `pushFilters` uses the `DataSourceStrategy` object to [translate every filter](DataSourceStrategy.md#translateFilter) in the given `filters`.
 
-`pushFilters` requests the `SupportsPushDownFilters` reader to <<spark-sql-SupportsPushDownFilters.adoc#pushFilters, pushFilters>> first and then for the <<spark-sql-SupportsPushDownFilters.adoc#pushedFilters, pushedFilters>>.
+`pushFilters` requests the `SupportsPushDownFilters` reader to <<spark-sql-SupportsPushDownFilters.md#pushFilters, pushFilters>> first and then for the <<spark-sql-SupportsPushDownFilters.md#pushedFilters, pushedFilters>>.
 
 In the end, `pushFilters` returns a pair of filters pushed and not.
 

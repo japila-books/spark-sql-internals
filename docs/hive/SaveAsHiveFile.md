@@ -7,7 +7,7 @@
 :url-hadoop-docs: https://hadoop.apache.org/docs/r{hadoop-version}
 :url-hadoop-javadoc: {url-hadoop-docs}/api
 
-`SaveAsHiveFile` is an extension of the link:../spark-sql-LogicalPlan-DataWritingCommand.adoc[DataWritingCommand] contract for <<implementations, commands>> that can <<saveAsHiveFile, saveAsHiveFile>> (and <<getExternalTmpPath, getExternalTmpPath>>).
+`SaveAsHiveFile` is an extension of the ../spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand] contract for <<implementations, commands>> that can <<saveAsHiveFile, saveAsHiveFile>> (and <<getExternalTmpPath, getExternalTmpPath>>).
 
 [NOTE]
 ====
@@ -23,10 +23,10 @@ Read up on `ViewFs` in the {url-hadoop-docs}/hadoop-project-dist/hadoop-hdfs/Vie
 | SaveAsHiveFile
 | Description
 
-| link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand]
+| InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand]
 | [[InsertIntoHiveDirCommand]]
 
-| link:InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+| InsertIntoHiveTable.md[InsertIntoHiveTable]
 | [[InsertIntoHiveTable]]
 
 |===
@@ -45,15 +45,15 @@ saveAsHiveFile(
   partitionAttributes: Seq[Attribute] = Nil): Set[String]
 ----
 
-`saveAsHiveFile` sets Hadoop configuration properties when a compressed file output format is used (based on link:index.adoc#hive.exec.compress.output[hive.exec.compress.output] configuration property).
+`saveAsHiveFile` sets Hadoop configuration properties when a compressed file output format is used (based on index.md#hive.exec.compress.output[hive.exec.compress.output] configuration property).
 
-`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the link:../spark-sql-properties.adoc#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass] configuration property (default: link:../spark-sql-SQLHadoopMapReduceCommitProtocol.adoc[SQLHadoopMapReduceCommitProtocol]).
+`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the ../spark-sql-properties.md#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass] configuration property (default: ../spark-sql-SQLHadoopMapReduceCommitProtocol.md[SQLHadoopMapReduceCommitProtocol]).
 
-`saveAsHiveFile` uses `FileFormatWriter` utility to link:../spark-sql-FileFormatWriter.adoc#write[write] the result of executing the input link:../SparkPlan.md[physical query plan] (with a link:HiveFileFormat.adoc[HiveFileFormat] for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
+`saveAsHiveFile` uses `FileFormatWriter` utility to ../spark-sql-FileFormatWriter.md#write[write] the result of executing the input ../SparkPlan.md[physical query plan] (with a HiveFileFormat.md[HiveFileFormat] for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
 
-NOTE: link:../spark-sql-FileFormatWriter.adoc#write[BucketSpec] is undefined (`None`).
+NOTE: ../spark-sql-FileFormatWriter.md#write[BucketSpec] is undefined (`None`).
 
-NOTE: `saveAsHiveFile` is used when link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed.
+NOTE: `saveAsHiveFile` is used when InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed.
 
 === [[getExternalTmpPath]] `getExternalTmpPath` Method
 
@@ -65,9 +65,9 @@ getExternalTmpPath(
   path: Path): Path
 ----
 
-`getExternalTmpPath` finds the Hive version used. `getExternalTmpPath` requests the input link:../SparkSession.md[SparkSession] for the link:../SharedState.md#externalCatalog[ExternalCatalog] (that is expected to be a link:HiveExternalCatalog.adoc[HiveExternalCatalog]). `getExternalTmpPath` requests it for the underlying link:HiveExternalCatalog.adoc#client[HiveClient] that is in turn requested for the link:HiveClient.adoc#version[Hive version].
+`getExternalTmpPath` finds the Hive version used. `getExternalTmpPath` requests the input ../SparkSession.md[SparkSession] for the ../SharedState.md#externalCatalog[ExternalCatalog] (that is expected to be a HiveExternalCatalog.md[HiveExternalCatalog]). `getExternalTmpPath` requests it for the underlying HiveExternalCatalog.md#client[HiveClient] that is in turn requested for the HiveClient.md#version[Hive version].
 
-`getExternalTmpPath` divides (_splits_) the supported Hive versions into the ones (_old versions_) that use link:index.adoc#hive.exec.scratchdir[hive.exec.scratchdir] directory (`0.12.0` to `1.0.0`) and the ones (_new versions_) that use link:index.adoc#hive.exec.stagingdir[hive.exec.stagingdir] directory (`1.1.0` to `2.3.3`).
+`getExternalTmpPath` divides (_splits_) the supported Hive versions into the ones (_old versions_) that use index.md#hive.exec.scratchdir[hive.exec.scratchdir] directory (`0.12.0` to `1.0.0`) and the ones (_new versions_) that use index.md#hive.exec.stagingdir[hive.exec.stagingdir] directory (`1.1.0` to `2.3.3`).
 
 `getExternalTmpPath` <<oldVersionExternalTempPath, oldVersionExternalTempPath>> for the old Hive versions and <<newVersionExternalTempPath, newVersionExternalTempPath>> for the new Hive versions.
 
@@ -77,7 +77,7 @@ getExternalTmpPath(
 Unsupported hive version: [hiveVersion]
 ```
 
-NOTE: `getExternalTmpPath` is used when link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed.
+NOTE: `getExternalTmpPath` is used when InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed.
 
 === [[deleteExternalTmpPath]] `deleteExternalTmpPath` Method
 
@@ -183,6 +183,6 @@ createdTempDir: Option[Path] = None
 
 `createdTempDir` is initialized when `SaveAsHiveFile` is requested to <<oldVersionExternalTempPath, oldVersionExternalTempPath>> and <<getStagingDir, getStagingDir>>.
 
-`createdTempDir` is the link:index.adoc#hive.exec.stagingdir[hive.exec.stagingdir] configuration property.
+`createdTempDir` is the index.md#hive.exec.stagingdir[hive.exec.stagingdir] configuration property.
 
 `createdTempDir` is deleted when `SaveAsHiveFile` is requested to <<deleteExternalTmpPath, deleteExternalTmpPath>> and at the normal termination of VM (since `deleteOnExit` is used).

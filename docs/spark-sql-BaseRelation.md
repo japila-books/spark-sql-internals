@@ -26,17 +26,17 @@ abstract class BaseRelation {
 | Description
 
 | `schema`
-| [[schema]] link:spark-sql-StructType.adoc[StructType] that describes the schema of tuples
+| [[schema]] spark-sql-StructType.md[StructType] that describes the schema of tuples
 
 | `sqlContext`
-| [[sqlContext]] link:spark-sql-SQLContext.adoc[SQLContext]
+| [[sqlContext]] spark-sql-SQLContext.md[SQLContext]
 |===
 
-`BaseRelation` is "created" when `DataSource` is requested to link:spark-sql-DataSource.adoc#resolveRelation[resolve a relation].
+`BaseRelation` is "created" when `DataSource` is requested to spark-sql-DataSource.md#resolveRelation[resolve a relation].
 
-`BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to link:SparkSession.md#baseRelationToDataFrame[create a DataFrame].
+`BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to SparkSession.md#baseRelationToDataFrame[create a DataFrame].
 
-`BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside link:spark-sql-Row.adoc[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
+`BaseRelation` uses <<needConversion, needConversion>> flag to control type conversion of objects inside spark-sql-Row.md[Rows] to Catalyst types, e.g. `java.lang.String` to `UTF8String`.
 
 NOTE: It is recommended that custom data sources (outside Spark SQL) should leave <<needConversion, needConversion>> flag enabled, i.e. `true`.
 
@@ -52,13 +52,13 @@ NOTE: It is recommended that custom data sources (outside Spark SQL) should leav
 | `ConsoleRelation`
 | [[ConsoleRelation]] Used in Spark Structured Streaming
 
-| link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
+| spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation]
 | [[HadoopFsRelation]]
 
-| link:spark-sql-JDBCRelation.adoc[JDBCRelation]
+| spark-sql-JDBCRelation.md[JDBCRelation]
 | [[JDBCRelation]]
 
-| <<spark-sql-KafkaRelation.adoc#, KafkaRelation>>
+| <<spark-sql-KafkaRelation.md#, KafkaRelation>>
 | [[KafkaRelation]] Datasets with records from Apache Kafka
 |===
 
@@ -82,7 +82,7 @@ NOTE: It is recommended to leave `needConversion` enabled for data sources outsi
 unhandledFilters(filters: Array[Filter]): Array[Filter]
 ----
 
-`unhandledFilters` returns <<spark-sql-Filter.adoc#, Filter predicates>> that the data source does not support (handle) natively.
+`unhandledFilters` returns <<spark-sql-Filter.md#, Filter predicates>> that the data source does not support (handle) natively.
 
 NOTE: `unhandledFilters` returns the input `filters` by default as it is considered safe to double evaluate filters regardless whether they could be supported or not.
 
@@ -97,6 +97,6 @@ sizeInBytes: Long
 
 `sizeInBytes` is the estimated size of a relation (used in query planning).
 
-NOTE: `sizeInBytes` defaults to link:spark-sql-properties.adoc#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
+NOTE: `sizeInBytes` defaults to spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
 
-NOTE: `sizeInBytes` is used exclusively when `LogicalRelation` is requested to link:spark-sql-LogicalPlan-LogicalRelation.adoc#computeStats[computeStats] (and they are not available in link:spark-sql-LogicalPlan-LogicalRelation.adoc#catalogTable[CatalogTable]).
+NOTE: `sizeInBytes` is used exclusively when `LogicalRelation` is requested to spark-sql-LogicalPlan-LogicalRelation.md#computeStats[computeStats] (and they are not available in spark-sql-LogicalPlan-LogicalRelation.md#catalogTable[CatalogTable]).

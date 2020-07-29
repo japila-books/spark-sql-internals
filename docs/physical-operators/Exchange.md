@@ -1,9 +1,9 @@
 # Exchange -- Unary Physical Operators for Data Exchange
 
-`Exchange` is the base of link:SparkPlan.md#UnaryExecNode[unary physical operators] that exchange data among multiple threads or processes.
+`Exchange` is the base of SparkPlan.md#UnaryExecNode[unary physical operators] that exchange data among multiple threads or processes.
 
 [[output]]
-When requested for the link:catalyst/QueryPlan.md#output[output schema], `Exchange` simply uses the child physical operator's output schema.
+When requested for the catalyst/QueryPlan.md#output[output schema], `Exchange` simply uses the child physical operator's output schema.
 
 [[implementations]]
 .Exchanges
@@ -12,9 +12,9 @@ When requested for the link:catalyst/QueryPlan.md#output[output schema], `Exchan
 | Exchange
 | Description
 
-| [[BroadcastExchangeExec]] link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec]
+| [[BroadcastExchangeExec]] spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec]
 |
 
-| [[ShuffleExchangeExec]] link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
+| [[ShuffleExchangeExec]] spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
 |
 |===

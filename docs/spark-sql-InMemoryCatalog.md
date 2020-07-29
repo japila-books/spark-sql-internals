@@ -13,6 +13,6 @@ listPartitionsByFilter(
   defaultTimeZoneId: String): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitionsByFilter` is part of link:spark-sql-ExternalCatalog.adoc#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
+NOTE: `listPartitionsByFilter` is part of spark-sql-ExternalCatalog.md#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
 
 `listPartitionsByFilter`...FIXME

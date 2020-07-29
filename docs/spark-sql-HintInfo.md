@@ -5,13 +5,13 @@
 
 `HintInfo` is <<creating-instance, created>> when:
 
-. link:spark-sql-functions.adoc#broadcast[Dataset.broadcast] function is used
+. spark-sql-functions.md#broadcast[Dataset.broadcast] function is used
 
-. `ResolveBroadcastHints` logical resolution rule is link:spark-sql-Analyzer-ResolveBroadcastHints.adoc#apply[executed] (and resolves link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operators)
+. `ResolveBroadcastHints` logical resolution rule is spark-sql-Analyzer-ResolveBroadcastHints.md#apply[executed] (and resolves spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operators)
 
-. link:spark-sql-LogicalPlan-ResolvedHint.adoc#creating-instance[ResolvedHint] and link:spark-sql-Statistics.adoc#creating-instance[Statistics] are created
+. spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and spark-sql-Statistics.md#creating-instance[Statistics] are created
 
-. `InMemoryRelation` is requested for link:spark-sql-LogicalPlan-InMemoryRelation.adoc#computeStats[computeStats] (when link:spark-sql-LogicalPlan-InMemoryRelation.adoc#sizeInBytesStats[sizeInBytesStats] is `0`)
+. `InMemoryRelation` is requested for spark-sql-LogicalPlan-InMemoryRelation.md#computeStats[computeStats] (when spark-sql-LogicalPlan-InMemoryRelation.md#sizeInBytesStats[sizeInBytesStats] is `0`)
 
 . `HintInfo` is requested to <<resetForJoin, resetForJoin>>
 
@@ -46,4 +46,4 @@ resetForJoin(): HintInfo
 
 `resetForJoin`...FIXME
 
-NOTE: `resetForJoin` is used when `SizeInBytesOnlyStatsPlanVisitor` is requested to link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc#visitIntersect[visitIntersect] and link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc#visitJoin[visitJoin].
+NOTE: `resetForJoin` is used when `SizeInBytesOnlyStatsPlanVisitor` is requested to spark-sql-SizeInBytesOnlyStatsPlanVisitor.md#visitIntersect[visitIntersect] and spark-sql-SizeInBytesOnlyStatsPlanVisitor.md#visitJoin[visitJoin].

@@ -2,9 +2,9 @@ title: UnresolvedInlineTable
 
 # UnresolvedInlineTable Logical Operator
 
-`UnresolvedInlineTable` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents an inline table (aka _virtual table_ in Apache Hive).
+`UnresolvedInlineTable` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents an inline table (aka _virtual table_ in Apache Hive).
 
-`UnresolvedInlineTable` is <<creating-instance, created>> when `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitInlineTable, parse an inline table>> in a SQL statement.
+`UnresolvedInlineTable` is <<creating-instance, created>> when `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitInlineTable, parse an inline table>> in a SQL statement.
 
 [source, scala]
 ----
@@ -21,7 +21,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ----
 
 [[resolved]]
-`UnresolvedInlineTable` is never <<spark-sql-LogicalPlan.adoc#resolved, resolved>> (and is converted to a <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelation>> in <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>> logical resolution rule).
+`UnresolvedInlineTable` is never <<spark-sql-LogicalPlan.md#resolved, resolved>> (and is converted to a <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelation>> in <<spark-sql-Analyzer-ResolveInlineTables.md#, ResolveInlineTables>> logical resolution rule).
 
 [[output]]
 `UnresolvedInlineTable` uses no <<catalyst/QueryPlan.md#output, output schema attributes>>.

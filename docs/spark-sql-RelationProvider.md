@@ -21,21 +21,21 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-Creates a <<spark-sql-BaseRelation.adoc#, BaseRelation>> for loading data from an external data source
+Creates a <<spark-sql-BaseRelation.md#, BaseRelation>> for loading data from an external data source
 
-Used exclusively when `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a data source>> for a given data source format
+Used exclusively when `DataSource` is requested to <<spark-sql-DataSource.md#resolveRelation, resolve a data source>> for a given data source format
 
 |===
 
-When <<spark-sql-DataSource.adoc#resolveRelation, resolving a data source>>, `DataSource` makes sure that a schema is not defined or matches the <<spark-sql-BaseRelation.adoc#schema, schema>> of the data source. `DataSource` throws an `AnalysisException` for a user-specified schema that does not match the data source's schema:
+When <<spark-sql-DataSource.md#resolveRelation, resolving a data source>>, `DataSource` makes sure that a schema is not defined or matches the <<spark-sql-BaseRelation.md#schema, schema>> of the data source. `DataSource` throws an `AnalysisException` for a user-specified schema that does not match the data source's schema:
 
 ```
 [className] does not allow user-specified schemas.
 ```
 
-TIP: Use <<spark-sql-SchemaRelationProvider.adoc#, SchemaRelationProvider>> for data source providers that require a user-defined schema.
+TIP: Use <<spark-sql-SchemaRelationProvider.md#, SchemaRelationProvider>> for data source providers that require a user-defined schema.
 
-NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>> when requested for a <<spark-sql-CreatableRelationProvider.adoc#createRelation, relation>> (after writing out a structured query).
+NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>> when requested for a <<spark-sql-CreatableRelationProvider.md#createRelation, relation>> (after writing out a structured query).
 
 [[implementations]]
 .RelationProviders
@@ -44,10 +44,10 @@ NOTE: It is a common pattern while developing a custom data source to use <<crea
 | RelationProvider
 | Description
 
-| <<spark-sql-JdbcRelationProvider.adoc#, JdbcRelationProvider>>
-| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.adoc#, JDBC data source>>
+| <<spark-sql-JdbcRelationProvider.md#, JdbcRelationProvider>>
+| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
-| <<spark-sql-KafkaSourceProvider.adoc#, KafkaSourceProvider>>
-| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.adoc#, Kafka data source>>
+| <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
+| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.md#, Kafka data source>>
 
 |===

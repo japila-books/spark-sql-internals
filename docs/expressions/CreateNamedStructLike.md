@@ -25,10 +25,10 @@ trait CreateNamedStructLike extends Expression {
 | CreateNamedStructLike
 | Description
 
-| [[CreateNamedStruct]] <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>>
+| [[CreateNamedStruct]] <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>>
 |
 
-| [[CreateNamedStructUnsafe]] <<spark-sql-Expression-CreateNamedStructUnsafe.adoc#, CreateNamedStructUnsafe>>
+| [[CreateNamedStructUnsafe]] <<spark-sql-Expression-CreateNamedStructUnsafe.md#, CreateNamedStructUnsafe>>
 |
 |===
 
@@ -70,6 +70,6 @@ NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInpu
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
 `eval`...FIXME

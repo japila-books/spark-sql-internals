@@ -10,7 +10,7 @@ create(ordering: Seq[SortOrder]): BaseOrdering
 create(schema: StructType): BaseOrdering
 ----
 
-NOTE: `create` is part of link:spark-sql-CodeGenerator.adoc#create[CodeGenerator Contract] to...FIXME.
+NOTE: `create` is part of spark-sql-CodeGenerator.md#create[CodeGenerator Contract] to...FIXME.
 
 `create`...FIXME
 

@@ -1,7 +1,7 @@
 # KafkaSourceProvider
 
 [[shortName]]
-`KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and registers itself to handle *kafka* data source format.
+`KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and registers itself to handle *kafka* data source format.
 
 NOTE: `KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/v{{ book.version }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
 
@@ -55,21 +55,21 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is part of <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.adoc#, BaseRelation>> (for reading or writing).
+NOTE: `createRelation` is part of <<spark-sql-RelationProvider.md#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.md#, BaseRelation>> (for reading or writing).
 
 `createRelation` starts by <<validateBatchOptions, validating the Kafka options (for batch queries)>> in the input `parameters`.
 
 `createRelation` collects all ``kafka.``-prefixed key options (in the input `parameters`) and creates a local `specifiedKafkaParams` with the keys without the `kafka.` prefix (e.g. `kafka.whatever` is simply `whatever`).
 
-`createRelation` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> with the `startingoffsets` offset option key (in the given `parameters`) and <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default offsets.
+`createRelation` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> with the `startingoffsets` offset option key (in the given `parameters`) and <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default offsets.
 
-`createRelation` makes sure that the <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> is not <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> or throws an `AssertionError`.
+`createRelation` makes sure that the <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> is not <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> or throws an `AssertionError`.
 
-`createRelation` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>>, but this time with the `endingoffsets` offset option key (in the given `parameters`) and <<spark-sql-KafkaOffsetRangeLimit.adoc#LatestOffsetRangeLimit, LatestOffsetRangeLimit>> as the default offsets.
+`createRelation` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>>, but this time with the `endingoffsets` offset option key (in the given `parameters`) and <<spark-sql-KafkaOffsetRangeLimit.md#LatestOffsetRangeLimit, LatestOffsetRangeLimit>> as the default offsets.
 
-`createRelation` makes sure that the <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> is not <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> or throws a `AssertionError`.
+`createRelation` makes sure that the <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> is not <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> or throws a `AssertionError`.
 
-In the end, `createRelation` creates a <<spark-sql-KafkaRelation.adoc#creating-instance, KafkaRelation>> with the <<strategy, subscription strategy>> (in the given `parameters`), <<failOnDataLoss, failOnDataLoss>> option, and the starting and ending offsets.
+In the end, `createRelation` creates a <<spark-sql-KafkaRelation.md#creating-instance, KafkaRelation>> with the <<strategy, subscription strategy>> (in the given `parameters`), <<failOnDataLoss, failOnDataLoss>> option, and the starting and ending offsets.
 
 === [[validateBatchOptions]] Validating Kafka Options (for Batch Queries) -- `validateBatchOptions` Internal Method
 
@@ -78,25 +78,25 @@ In the end, `createRelation` creates a <<spark-sql-KafkaRelation.adoc#creating-i
 validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
 ----
 
-`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the <<spark-sql-kafka-options.adoc#startingoffsets, startingoffsets>> option in the input `caseInsensitiveParams` and with <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default `KafkaOffsetRangeLimit`.
+`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the <<spark-sql-kafka-options.md#startingoffsets, startingoffsets>> option in the input `caseInsensitiveParams` and with <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default `KafkaOffsetRangeLimit`.
 
-`validateBatchOptions` then matches the returned <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> as follows:
+`validateBatchOptions` then matches the returned <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> as follows:
 
-. <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> is acceptable and `validateBatchOptions` simply does nothing
+. <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> is acceptable and `validateBatchOptions` simply does nothing
 
-. <<spark-sql-KafkaOffsetRangeLimit.adoc#LatestOffsetRangeLimit, LatestOffsetRangeLimit>> is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
+. <<spark-sql-KafkaOffsetRangeLimit.md#LatestOffsetRangeLimit, LatestOffsetRangeLimit>> is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
 +
 ```
 starting offset can't be latest for batch queries on Kafka
 ```
 
-. <<spark-sql-KafkaOffsetRangeLimit.adoc#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>> is acceptable unless one of the offsets is <<spark-sql-KafkaOffsetRangeLimit.adoc#LATEST, -1L>> for which `validateBatchOptions` throws an `IllegalArgumentException`:
+. <<spark-sql-KafkaOffsetRangeLimit.md#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>> is acceptable unless one of the offsets is <<spark-sql-KafkaOffsetRangeLimit.md#LATEST, -1L>> for which `validateBatchOptions` throws an `IllegalArgumentException`:
 +
 ```
 startingOffsets for [tp] can't be latest for batch queries on Kafka
 ```
 
-NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>).
+NOTE: `validateBatchOptions` is used exclusively when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.md#createRelation, RelationProvider>>).
 
 === [[createRelation-CreatableRelationProvider]] Writing DataFrame to Kafka Topic -- `createRelation` Method (from CreatableRelationProvider)
 
@@ -109,17 +109,17 @@ createRelation(
   df: DataFrame): BaseRelation
 ----
 
-NOTE: `createRelation` is part of the <<spark-sql-CreatableRelationProvider.adoc#createRelation, CreatableRelationProvider Contract>> to write the rows of a structured query (a DataFrame) to an external data source.
+NOTE: `createRelation` is part of the <<spark-sql-CreatableRelationProvider.md#createRelation, CreatableRelationProvider Contract>> to write the rows of a structured query (a DataFrame) to an external data source.
 
-`createRelation` gets the <<spark-sql-kafka-options.adoc#topic, topic>> option from the input `parameters`.
+`createRelation` gets the <<spark-sql-kafka-options.md#topic, topic>> option from the input `parameters`.
 
 `createRelation` gets the <<kafkaParamsForProducer, Kafka-specific options for writing>> from the input `parameters`.
 
-`createRelation` then uses the `KafkaWriter` helper object to <<spark-sql-KafkaWriter.adoc#write, write the rows of the DataFrame to the Kafka topic>>.
+`createRelation` then uses the `KafkaWriter` helper object to <<spark-sql-KafkaWriter.md#write, write the rows of the DataFrame to the Kafka topic>>.
 
-In the end, `createRelation` creates a fake <<spark-sql-BaseRelation.adoc#, BaseRelation>> that simply throws an `UnsupportedOperationException` for all its methods.
+In the end, `createRelation` creates a fake <<spark-sql-BaseRelation.md#, BaseRelation>> that simply throws an `UnsupportedOperationException` for all its methods.
 
-`createRelation` supports <<spark-sql-CreatableRelationProvider.adoc#Append, Append>> and <<spark-sql-CreatableRelationProvider.adoc#ErrorIfExists, ErrorIfExists>> only. `createRelation` throws an `AnalysisException` for the other save modes:
+`createRelation` supports <<spark-sql-CreatableRelationProvider.md#Append, Append>> and <<spark-sql-CreatableRelationProvider.md#ErrorIfExists, ErrorIfExists>> only. `createRelation` throws an `AnalysisException` for the other save modes:
 
 ```
 Save mode [mode] not allowed for Kafka. Allowed save modes are [Append] and [ErrorIfExists] (default).
@@ -164,13 +164,13 @@ getKafkaOffsetRangeLimit(
   defaultOffsets: KafkaOffsetRangeLimit): KafkaOffsetRangeLimit
 ----
 
-`getKafkaOffsetRangeLimit` tries to find the given `offsetOptionKey` in the input `params` and converts the value found to a <<spark-sql-KafkaOffsetRangeLimit.adoc#, KafkaOffsetRangeLimit>> as follows:
+`getKafkaOffsetRangeLimit` tries to find the given `offsetOptionKey` in the input `params` and converts the value found to a <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> as follows:
 
-* `latest` becomes <<spark-sql-KafkaOffsetRangeLimit.adoc#LatestOffsetRangeLimit, LatestOffsetRangeLimit>>
+* `latest` becomes <<spark-sql-KafkaOffsetRangeLimit.md#LatestOffsetRangeLimit, LatestOffsetRangeLimit>>
 
-* `earliest` becomes <<spark-sql-KafkaOffsetRangeLimit.adoc#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>>
+* `earliest` becomes <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>>
 
-* For a JSON text, `getKafkaOffsetRangeLimit` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.adoc#partitionOffsets, read per-TopicPartition offsets from it>> and creates a <<spark-sql-KafkaOffsetRangeLimit.adoc#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>>
+* For a JSON text, `getKafkaOffsetRangeLimit` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.md#partitionOffsets, read per-TopicPartition offsets from it>> and creates a <<spark-sql-KafkaOffsetRangeLimit.md#SpecificOffsetRangeLimit, SpecificOffsetRangeLimit>>
 
 When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` returns the input `defaultOffsets`.
 
@@ -178,7 +178,7 @@ When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` retur
 ====
 `getKafkaOffsetRangeLimit` is used when:
 
-* `KafkaSourceProvider` is requested to <<validateBatchOptions, validate Kafka options (for batch queries)>> and <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>)
+* `KafkaSourceProvider` is requested to <<validateBatchOptions, validate Kafka options (for batch queries)>> and <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.md#createRelation, RelationProvider>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====
@@ -190,19 +190,19 @@ When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` retur
 strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
 ----
 
-`strategy` finds one of the strategy options: <<spark-sql-kafka-options.adoc#subscribe, subscribe>>, <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.adoc#assign, assign>>.
+`strategy` finds one of the strategy options: <<spark-sql-kafka-options.md#subscribe, subscribe>>, <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.md#assign, assign>>.
 
-For <<spark-sql-kafka-options.adoc#assign, assign>>, `strategy` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.adoc#partitions-String-Array, deserialize TopicPartitions from JSON>> (e.g. `{"topicA":[0,1],"topicB":[0,1]}`) and returns a new <<spark-sql-ConsumerStrategy.adoc#AssignStrategy, AssignStrategy>>.
+For <<spark-sql-kafka-options.md#assign, assign>>, `strategy` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.md#partitions-String-Array, deserialize TopicPartitions from JSON>> (e.g. `{"topicA":[0,1],"topicB":[0,1]}`) and returns a new <<spark-sql-ConsumerStrategy.md#AssignStrategy, AssignStrategy>>.
 
-For <<spark-sql-kafka-options.adoc#subscribe, subscribe>>, `strategy` splits the value by `,` (comma) and returns a new <<spark-sql-ConsumerStrategy.adoc#SubscribeStrategy, SubscribeStrategy>>.
+For <<spark-sql-kafka-options.md#subscribe, subscribe>>, `strategy` splits the value by `,` (comma) and returns a new <<spark-sql-ConsumerStrategy.md#SubscribeStrategy, SubscribeStrategy>>.
 
-For <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>>, `strategy` returns a new <<spark-sql-ConsumerStrategy.adoc#SubscribePatternStrategy, SubscribePatternStrategy>>
+For <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>>, `strategy` returns a new <<spark-sql-ConsumerStrategy.md#SubscribePatternStrategy, SubscribePatternStrategy>>
 
 [NOTE]
 ====
 `strategy` is used when:
 
-* `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.adoc#createRelation, RelationProvider>>)
+* `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.md#createRelation, RelationProvider>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====
@@ -286,14 +286,14 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 [NOTE]
 ====
 `kafkaParamsForDriver` is used when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>)
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.md#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 ====

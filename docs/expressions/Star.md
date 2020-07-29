@@ -2,7 +2,7 @@ title: Star
 
 # Star Expression Contract
 
-`Star` is a <<contract, contract>> of link:expressions/Expression.md#LeafExpression[leaf] and link:spark-sql-Expression-NamedExpression.adoc[named expressions] that...FIXME
+`Star` is a <<contract, contract>> of expressions/Expression.md#LeafExpression[leaf] and spark-sql-Expression-NamedExpression.md[named expressions] that...FIXME
 
 [[contract]]
 [source, scala]
@@ -24,9 +24,9 @@ abstract class Star extends LeafExpression with NamedExpression {
 | `expand`
 a| [[expand]] Used exclusively when `ResolveReferences` logical resolution rule is requested to expand `Star` expressions in the following logical operators:
 
-* link:spark-sql-Analyzer-ResolveReferences.adoc#apply[ScriptTransformation]
+* spark-sql-Analyzer-ResolveReferences.md#apply[ScriptTransformation]
 
-* link:spark-sql-Analyzer-ResolveReferences.adoc#buildExpandedProjectList[Project and Aggregate]
+* spark-sql-Analyzer-ResolveReferences.md#buildExpandedProjectList[Project and Aggregate]
 |===
 
 [[implementations]]
@@ -36,12 +36,12 @@ a| [[expand]] Used exclusively when `ResolveReferences` logical resolution rule 
 | Star
 | Description
 
-| [[ResolvedStar]] link:spark-sql-Expression-ResolvedStar.adoc[ResolvedStar]
+| [[ResolvedStar]] spark-sql-Expression-ResolvedStar.md[ResolvedStar]
 |
 
-| [[UnresolvedRegex]] link:spark-sql-Expression-UnresolvedRegex.adoc[UnresolvedRegex]
+| [[UnresolvedRegex]] spark-sql-Expression-UnresolvedRegex.md[UnresolvedRegex]
 |
 
-| [[UnresolvedStar]] link:spark-sql-Expression-UnresolvedStar.adoc[UnresolvedStar]
+| [[UnresolvedStar]] spark-sql-Expression-UnresolvedStar.md[UnresolvedStar]
 |
 |===

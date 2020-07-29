@@ -2,7 +2,7 @@ title: Projection
 
 # Projection -- Functions to Produce InternalRow for InternalRow
 
-`Projection` is a <<contract, contract>> of Scala functions that produce an link:spark-sql-InternalRow.adoc[internal binary row] for a given internal row.
+`Projection` is a <<contract, contract>> of Scala functions that produce an spark-sql-InternalRow.md[internal binary row] for a given internal row.
 
 [source, scala]
 ----
@@ -17,7 +17,7 @@ Projection: InternalRow => InternalRow
 initialize(partitionIndex: Int): Unit = {}
 ----
 
-NOTE: `initialize` is overriden by link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` projections that are used in link:expressions/Expression.md#eval[interpreted expression evaluation].
+NOTE: `initialize` is overriden by spark-sql-InterpretedProjection.md#initialize[InterpretedProjection] and `InterpretedMutableProjection` projections that are used in expressions/Expression.md#eval[interpreted expression evaluation].
 
 [[implementations]]
 .Projections
@@ -26,10 +26,10 @@ NOTE: `initialize` is overriden by link:spark-sql-InterpretedProjection.adoc#ini
 | Projection
 | Description
 
-| [[UnsafeProjection]] link:spark-sql-UnsafeProjection.adoc[UnsafeProjection]
+| [[UnsafeProjection]] spark-sql-UnsafeProjection.md[UnsafeProjection]
 |
 
-| [[InterpretedProjection]] link:spark-sql-InterpretedProjection.adoc[InterpretedProjection]
+| [[InterpretedProjection]] spark-sql-InterpretedProjection.md[InterpretedProjection]
 |
 
 | [[IdentityProjection]] `IdentityProjection`

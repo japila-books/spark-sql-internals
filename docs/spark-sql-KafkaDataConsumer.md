@@ -37,7 +37,7 @@ a| [[internalConsumer]] Used when:
 | release
 a| [[release]] Used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.adoc#compute, compute a partition>>
+* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>>
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `close`
 |===
@@ -69,13 +69,13 @@ get(
   failOnDataLoss: Boolean): ConsumerRecord[Array[Byte], Array[Byte]]
 ----
 
-`get` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.adoc#get, get a single Kafka ConsumerRecord>>.
+`get` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.md#get, get a single Kafka ConsumerRecord>>.
 
 [NOTE]
 ====
 `get` is used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.adoc#compute, compute a partition>>
+* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>>
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `next`
 ====
@@ -87,13 +87,13 @@ get(
 getAvailableOffsetRange(): AvailableOffsetRange
 ----
 
-`getAvailableOffsetRange` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.adoc#getAvailableOffsetRange, get a single AvailableOffsetRange>>.
+`getAvailableOffsetRange` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.md#getAvailableOffsetRange, get a single AvailableOffsetRange>>.
 
 [NOTE]
 ====
 `getAvailableOffsetRange` is used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.adoc#compute, compute a partition>> (through <<spark-sql-KafkaSourceRDD.adoc#resolveRange, resolveRange>>)
+* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>> (through <<spark-sql-KafkaSourceRDD.md#resolveRange, resolveRange>>)
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `next`
 ====

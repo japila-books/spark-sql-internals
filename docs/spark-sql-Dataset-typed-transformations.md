@@ -2,7 +2,7 @@ title: Typed Transformations
 
 # Dataset API -- Typed Transformations
 
-*Typed transformations* are part of the Dataset API for transforming a `Dataset` with an <<spark-sql-Encoder.adoc#, Encoder>> (except the <<spark-sql-RowEncoder.adoc#, RowEncoder>>).
+*Typed transformations* are part of the Dataset API for transforming a `Dataset` with an <<spark-sql-Encoder.md#, Encoder>> (except the <<spark-sql-RowEncoder.md#, RowEncoder>>).
 
 NOTE: Typed transformations are the methods in the `Dataset` Scala class that are grouped in `typedrel` group name, i.e. `@group typedrel`.
 
@@ -75,7 +75,7 @@ except(
   other: Dataset[T]): Dataset[T]
 ----
 
-Internally, `exceptAll` link:spark-sql-Dataset.adoc#withSetOperator[withSetOperator] with an link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator (with the `isAll` flag enabled).
+Internally, `exceptAll` spark-sql-Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag enabled).
 
 | exceptAll
 a| [[exceptAll]]
@@ -88,7 +88,7 @@ exceptAll(
 
 (*New in 2.4.0*)
 
-Internally, `exceptAll` link:spark-sql-Dataset.adoc#withSetOperator[withSetOperator] with an link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator (with the `isAll` flag disabled).
+Internally, `exceptAll` spark-sql-Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag disabled).
 
 | <<filter, filter>>
 a|
@@ -320,7 +320,7 @@ as(alias: Symbol): Dataset[T]
 as[U: Encoder]: Dataset[U]
 ----
 
-`as[T]` allows for converting from a weakly-typed `Dataset` of link:spark-sql-Row.adoc[Rows] to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
+`as[T]` allows for converting from a weakly-typed `Dataset` of spark-sql-Row.md[Rows] to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
 
 [source, scala]
 ----
@@ -515,7 +515,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 `repartition` operators repartition the `Dataset` to exactly `numPartitions` partitions or using `partitionExprs` expressions.
 
-Internally, `repartition` creates a link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#Repartition[Repartition] or link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression[RepartitionByExpression] logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
+Internally, `repartition` creates a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#Repartition[Repartition] or spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression[RepartitionByExpression] logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
 
 [source, scala]
 ----
@@ -538,7 +538,7 @@ Exchange RoundRobinPartitioning(1)
 +- *Range (0, 5, step=1, splits=Some(8))
 ----
 
-NOTE: `repartition` methods correspond to SQL's link:spark-sql-SparkSqlAstBuilder.adoc#withRepartitionByExpression[DISTRIBUTE BY or CLUSTER BY clauses].
+NOTE: `repartition` methods correspond to SQL's spark-sql-SparkSqlAstBuilder.md#withRepartitionByExpression[DISTRIBUTE BY or CLUSTER BY clauses].
 
 === [[repartitionByRange]] `repartitionByRange` Typed Transformation
 
@@ -547,9 +547,9 @@ NOTE: `repartition` methods correspond to SQL's link:spark-sql-SparkSqlAstBuilde
 repartitionByRange(partitionExprs: Column*): Dataset[T] // <1>
 repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
-<1> Uses <<spark-sql-properties.adoc#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
+<1> Uses <<spark-sql-properties.md#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
 
-`repartitionByRange` simply <<spark-sql-Dataset.adoc#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc#RepartitionByExpression, RepartitionByExpression>> logical operator.
+`repartitionByRange` simply <<spark-sql-Dataset.md#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression, RepartitionByExpression>> logical operator.
 
 [source, scala]
 ----
@@ -636,7 +636,7 @@ sortWithinPartitions(sortExprs: Column*): Dataset[T]
 sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
-`sortWithinPartitions` simply calls the internal <<spark-sql-Dataset.adoc#sortInternal, sortInternal>> method with the `global` flag disabled (`false`).
+`sortWithinPartitions` simply calls the internal <<spark-sql-Dataset.md#sortInternal, sortInternal>> method with the `global` flag disabled (`false`).
 
 === [[toJSON]] `toJSON` Typed Transformation
 
@@ -662,7 +662,7 @@ scala> ds.toJSON.show
 +-------------------+
 ----
 
-Internally, `toJSON` grabs the `RDD[InternalRow]` (of the link:spark-sql-QueryExecution.adoc#toRdd[QueryExecution] of the `Dataset`) and link:spark-rdd-transformations.adoc#mapPartitions[maps the records (per RDD partition)] into JSON.
+Internally, `toJSON` grabs the `RDD[InternalRow]` (of the spark-sql-QueryExecution.md#toRdd[QueryExecution] of the `Dataset`) and spark-rdd-transformations.md#mapPartitions[maps the records (per RDD partition)] into JSON.
 
 NOTE: `toJSON` uses Jackson's JSON parser -- https://github.com/FasterXML/jackson-module-scala[jackson-module-scala].
 
@@ -720,9 +720,9 @@ scala> q.show
 +---+-------------------+
 ----
 
-Internally, `unionByName` creates a <<spark-sql-LogicalPlan-Union.adoc#, Union>> logical operator for this `Dataset` and <<spark-sql-LogicalPlan-Project.adoc#, Project>> logical operator with the `other` Dataset.
+Internally, `unionByName` creates a <<spark-sql-LogicalPlan-Union.md#, Union>> logical operator for this `Dataset` and <<spark-sql-LogicalPlan-Project.md#, Project>> logical operator with the `other` Dataset.
 
-In the end, `unionByName` applies the <<spark-sql-Optimizer-CombineUnions.adoc#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<spark-sql-LogicalPlan-AnalysisBarrier.adoc#, AnalysisBarriers>>.
+In the end, `unionByName` applies the <<spark-sql-Optimizer-CombineUnions.md#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<spark-sql-LogicalPlan-AnalysisBarrier.md#, AnalysisBarriers>>.
 
 [source, scala]
 ----
@@ -767,7 +767,7 @@ where(conditionExpr: String): Dataset[T]
 withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
 ----
 
-Internally, `withWatermark` creates a `Dataset` with `EventTimeWatermark` logical plan for link:spark-sql-Dataset.adoc#isStreaming[streaming Datasets].
+Internally, `withWatermark` creates a `Dataset` with `EventTimeWatermark` logical plan for spark-sql-Dataset.md#isStreaming[streaming Datasets].
 
 NOTE: `withWatermark` uses `EliminateEventTimeWatermark` logical rule to eliminate `EventTimeWatermark` logical plan for non-streaming batch `Datasets`.
 
@@ -822,7 +822,7 @@ scala> println(events.queryExecution.logical.numberedTreeString)
 
 [NOTE]
 ====
-`delayThreshold` is parsed using `CalendarInterval.fromString` with *interval* formatted as described in link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] unary expression.
+`delayThreshold` is parsed using `CalendarInterval.fromString` with *interval* formatted as described in spark-sql-Expression-TimeWindow.md[TimeWindow] unary expression.
 
 ```
 0 years 0 months 1 week 0 days 0 hours 1 minute 20 seconds 0 milliseconds 0 microseconds

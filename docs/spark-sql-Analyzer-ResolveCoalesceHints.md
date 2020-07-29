@@ -1,12 +1,12 @@
 # ResolveCoalesceHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with COALESCE and REPARTITION Hints
 
-`ResolveCoalesceHints` is a logical resolution rule that the <<spark-sql-Analyzer.adoc#ResolveCoalesceHints, Spark Analyzer>> uses to <<apply, resolve UnresolvedHint logical operators>> with `COALESCE` or `REPARTITION` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators.
+`ResolveCoalesceHints` is a logical resolution rule that the <<spark-sql-Analyzer.md#ResolveCoalesceHints, Spark Analyzer>> uses to <<apply, resolve UnresolvedHint logical operators>> with `COALESCE` or `REPARTITION` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators.
 
 `COALESCE` or `REPARTITION` hints expect a partition number as the only parameter.
 
-Technically, `ResolveCoalesceHints` is a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveCoalesceHints` is a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-`ResolveCoalesceHints` is part of <<spark-sql-Analyzer.adoc#Hints, Hints>> fixed-point batch of rules (that is executed before any other rule).
+`ResolveCoalesceHints` is part of <<spark-sql-Analyzer.md#Hints, Hints>> fixed-point batch of rules (that is executed before any other rule).
 
 [[creating-instance]]
 `ResolveCoalesceHints` takes no input parameters when created.

@@ -2,12 +2,12 @@ title: ShowCreateTableCommand
 
 # ShowCreateTableCommand Logical Command
 
-`ShowCreateTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> that <<run, executes>> a `SHOW CREATE TABLE` SQL statement (with a data source / non-Hive or a Hive table).
+`ShowCreateTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> that <<run, executes>> a `SHOW CREATE TABLE` SQL statement (with a data source / non-Hive or a Hive table).
 
-`ShowCreateTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.adoc#visitShowCreateTable, SHOW CREATE TABLE>> SQL statement.
+`ShowCreateTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitShowCreateTable, SHOW CREATE TABLE>> SQL statement.
 
 [[output]]
-`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type <<spark-sql-DataType.adoc#StringType, StringType>>) for the <<spark-sql-LogicalPlan-Command.adoc#output, output schema>>.
+`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type <<spark-sql-DataType.md#StringType, StringType>>) for the <<spark-sql-LogicalPlan-Command.md#output, output schema>>.
 
 [source, scala]
 ----
@@ -56,13 +56,13 @@ INTO 4 BUCKETS
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is used to access the <<SessionState.md#catalog, SessionCatalog>>.
 
-`run` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>>.
+`run` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>>.
 
-`run` then <<showCreateDataSourceTable, showCreateDataSourceTable>> for a data source / non-Hive table or <<showCreateHiveTable, showCreateHiveTable>> for a Hive table (per the <<spark-sql-CatalogTable.adoc#, table metadata>>).
+`run` then <<showCreateDataSourceTable, showCreateDataSourceTable>> for a data source / non-Hive table or <<showCreateHiveTable, showCreateHiveTable>> for a Hive table (per the <<spark-sql-CatalogTable.md#, table metadata>>).
 
 In the end, `run` returns the `CREATE TABLE` statement in a single `Row`.
 

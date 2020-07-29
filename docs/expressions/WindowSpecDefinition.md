@@ -2,13 +2,13 @@ title: WindowSpecDefinition
 
 # WindowSpecDefinition Unevaluable Expression
 
-`WindowSpecDefinition` is an link:expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods).
+`WindowSpecDefinition` is an expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods).
 
 `WindowSpecDefinition` is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitWindowDef[parse a window specification] in a SQL query
+* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitWindowDef[parse a window specification] in a SQL query
 
-* link:spark-sql-Column.adoc#over[Column.over] operator is used
+* spark-sql-Column.md#over[Column.over] operator is used
 
 [source, scala]
 ----
@@ -97,7 +97,7 @@ Project [count(1) OVER (PARTITION BY token ORDER BY id ASC NULLS FIRST RANGE BET
 | Enabled (i.e. `true`)
 
 | `resolved`
-| Enabled when <<children, children>> are and the input link:spark-sql-DataType.adoc[DataType] is valid and the input <<frameSpecification, frameSpecification>> is a `SpecifiedWindowFrame`.
+| Enabled when <<children, children>> are and the input spark-sql-DataType.md[DataType] is valid and the input <<frameSpecification, frameSpecification>> is a `SpecifiedWindowFrame`.
 
 | `sql`
 a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, partitionSpec>> (if defined) with `ORDER BY` with comma-separated elements of <<orderSpec, orderSpec>> (if defined) followed by <<frameSpecification, frameSpecification>>.
@@ -123,11 +123,11 @@ a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, par
 isValidFrameType(ft: DataType): Boolean
 ----
 
-`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` <<spark-sql-DataType.adoc#, data type>> are as follows:
+`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` <<spark-sql-DataType.md#, data type>> are as follows:
 
-* <<spark-sql-DataType.adoc#DateType, DateType>> and <<spark-sql-DataType.adoc#IntegerType, IntegerType>>
+* <<spark-sql-DataType.md#DateType, DateType>> and <<spark-sql-DataType.md#IntegerType, IntegerType>>
 
-* <<spark-sql-DataType.adoc#TimestampType, TimestampType>> and <<spark-sql-DataType.adoc#CalendarIntervalType, CalendarIntervalType>>
+* <<spark-sql-DataType.md#TimestampType, TimestampType>> and <<spark-sql-DataType.md#CalendarIntervalType, CalendarIntervalType>>
 
 * Equal
 

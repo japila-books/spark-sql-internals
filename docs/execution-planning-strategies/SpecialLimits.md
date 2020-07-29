@@ -1,6 +1,6 @@
 # SpecialLimits Execution Planning Strategy
 
-`SpecialLimits` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[Spark Planner] uses to <<apply, FIXME>>.
+`SpecialLimits` is an spark-sql-SparkStrategy.md[execution planning strategy] that spark-sql-SparkPlanner.md[Spark Planner] uses to <<apply, FIXME>>.
 
 === [[apply]] Applying SpecialLimits Strategy to Logical Plan (Executing SpecialLimits) -- `apply` Method
 
@@ -9,6 +9,6 @@
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
 
 `apply`...FIXME

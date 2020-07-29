@@ -4,7 +4,7 @@
 
 `GetCurrentDatabase` is part of the [Finish Analysis](../Optimizer.md#GetCurrentDatabase) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`GetCurrentDatabase` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`GetCurrentDatabase` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 ```text
 val q = sql("SELECT current_database() AS db")

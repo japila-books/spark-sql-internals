@@ -18,4 +18,4 @@ val table = spark.read.jdbc(url, table, properties)
 val table = spark.read.format("jdbc").options(...).load(...)
 ```
 
-These one-liners create a <<spark-sql-DataFrame.adoc#, DataFrame>> that represents the distributed process of loading data from a database and a table (with additional properties).
+These one-liners create a <<spark-sql-DataFrame.md#, DataFrame>> that represents the distributed process of loading data from a database and a table (with additional properties).

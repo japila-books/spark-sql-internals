@@ -37,47 +37,47 @@ assert(s == "hello")
 |
 a|
 
-* link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
+* spark-sql-Expression-UnixTimestamp.md[UnixTimestamp]
 
-| [[CodegenFallback]] link:spark-sql-Expression-CodegenFallback.adoc[CodegenFallback]
+| [[CodegenFallback]] spark-sql-Expression-CodegenFallback.md[CodegenFallback]
 | trait
 | Does not support code generation and falls back to interpreted mode
 a|
 
-* link:spark-sql-Expression-CallMethodViaReflection.adoc[CallMethodViaReflection]
+* spark-sql-Expression-CallMethodViaReflection.md[CallMethodViaReflection]
 
-| <<spark-sql-Expression-ExpectsInputTypes.adoc#, ExpectsInputTypes>>
+| <<spark-sql-Expression-ExpectsInputTypes.md#, ExpectsInputTypes>>
 | trait
 |
 | [[ExpectsInputTypes]]
 
 | [[ExtractValue]] `ExtractValue`
 | trait
-| Marks `UnresolvedAliases` to be resolved to link:spark-sql-Expression-Alias.adoc[Aliases] with "pretty" SQLs when link:spark-sql-Analyzer-ResolveAliases.adoc#assignAliases[ResolveAliases] is executed
+| Marks `UnresolvedAliases` to be resolved to spark-sql-Expression-Alias.md[Aliases] with "pretty" SQLs when spark-sql-Analyzer-ResolveAliases.md#assignAliases[ResolveAliases] is executed
 a|
 
-* link:spark-sql-Expression-GetArrayItem.adoc[GetArrayItem]
+* spark-sql-Expression-GetArrayItem.md[GetArrayItem]
 
-* link:spark-sql-Expression-GetArrayStructFields.adoc[GetArrayStructFields]
+* spark-sql-Expression-GetArrayStructFields.md[GetArrayStructFields]
 
-* link:spark-sql-Expression-GetMapValue.adoc[GetMapValue]
+* spark-sql-Expression-GetMapValue.md[GetMapValue]
 
-* link:spark-sql-Expression-GetStructField.adoc[GetStructField]
+* spark-sql-Expression-GetStructField.md[GetStructField]
 
 | [[LeafExpression]] `LeafExpression`
 | abstract class
 | Has no [child expressions](../catalyst/TreeNode.md#children) (and hence "terminates" the expression tree).
 a|
 
-* link:spark-sql-Expression-Attribute.adoc[Attribute]
-* link:spark-sql-Expression-Literal.adoc[Literal]
+* spark-sql-Expression-Attribute.md[Attribute]
+* spark-sql-Expression-Literal.md[Literal]
 
-| [[NamedExpression]] link:spark-sql-Expression-NamedExpression.adoc[NamedExpression]
+| [[NamedExpression]] spark-sql-Expression-NamedExpression.md[NamedExpression]
 |
 | Can later be referenced in a dataflow graph.
 |
 
-| [[Nondeterministic]] link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic]
+| [[Nondeterministic]] spark-sql-Expression-Nondeterministic.md[Nondeterministic]
 | trait
 |
 |
@@ -88,22 +88,22 @@ a|
 
 Gives the only custom <<sql, sql>> method that is non-overridable (i.e. `final`).
 
-When requested <<sql, SQL representation>>, `NonSQLExpression` transforms link:spark-sql-Expression-Attribute.adoc[Attributes] to be ``PrettyAttribute``s to build text representation.
+When requested <<sql, SQL representation>>, `NonSQLExpression` transforms spark-sql-Expression-Attribute.md[Attributes] to be ``PrettyAttribute``s to build text representation.
 a|
 
-* link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF]
-* link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke]
-* link:spark-sql-Expression-TimeWindow.adoc[TimeWindow]
+* spark-sql-Expression-ScalaUDAF.md[ScalaUDAF]
+* spark-sql-Expression-StaticInvoke.md[StaticInvoke]
+* spark-sql-Expression-TimeWindow.md[TimeWindow]
 
 | [[Predicate]] `Predicate`
 | trait
-| Result link:expressions/Expression.md#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]
+| Result expressions/Expression.md#dataType[data type] is always spark-sql-DataType.md#BooleanType[boolean]
 a|
 * `And`
 * `AtLeastNNonNulls`
-* link:spark-sql-Expression-Exists.adoc[Exists]
-* link:spark-sql-Expression-In.adoc[In]
-* link:spark-sql-Expression-InSet.adoc[InSet]
+* spark-sql-Expression-Exists.md[Exists]
+* spark-sql-Expression-In.md[In]
+* spark-sql-Expression-InSet.md[InSet]
 
 | [[TernaryExpression]] `TernaryExpression`
 | abstract class
@@ -115,23 +115,23 @@ a|
 | Timezone-aware expressions
 a|
 
-* link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp]
-* link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
+* spark-sql-Expression-UnixTimestamp.md[UnixTimestamp]
+* spark-sql-Expression-JsonToStructs.md[JsonToStructs]
 
-| [[UnaryExpression]] <<spark-sql-Expression-UnaryExpression.adoc#, UnaryExpression>>
+| [[UnaryExpression]] <<spark-sql-Expression-UnaryExpression.md#, UnaryExpression>>
 | abstract class
 |
 a|
 
-* link:spark-sql-Expression-Generator.adoc#ExplodeBase[ExplodeBase]
-* link:spark-sql-Expression-Inline.adoc[Inline]
-* link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs]
+* spark-sql-Expression-Generator.md#ExplodeBase[ExplodeBase]
+* spark-sql-Expression-Inline.md[Inline]
+* spark-sql-Expression-JsonToStructs.md[JsonToStructs]
 
 | `Unevaluable`
 | trait
 a| [[Unevaluable]] Cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations), i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and simply report an `UnsupportedOperationException`.
 
-`Unevaluable` expressions have to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+`Unevaluable` expressions have to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 ```
 /**
@@ -215,7 +215,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[dataType]] `dataType`
-| link:spark-sql-DataType.adoc[Data type] of the result of evaluating an expression
+| spark-sql-DataType.md[Data type] of the result of evaluating an expression
 
 | [[doGenCode]] `doGenCode`
 | *Code-generated expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
@@ -223,7 +223,7 @@ abstract class Expression extends TreeNode[Expression] {
 Used when `Expression` is requested to <<genCode, genCode>>.
 
 | [[eval]] `eval`
-a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given link:spark-sql-InternalRow.adoc[internal binary row] (without <<genCode, generating a corresponding Java code>>.)
+a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given spark-sql-InternalRow.md[internal binary row] (without <<genCode, generating a corresponding Java code>>.)
 
 NOTE: By default accepts `EmptyRow`, i.e. `null`.
 
@@ -233,9 +233,9 @@ NOTE: By default accepts `EmptyRow`, i.e. `null`.
 |
 
 | [[genCode]] `genCode`
-| Generates the Java source code for *code-generated (non-interpreted) expression evaluation* (on an input link:spark-sql-InternalRow.adoc[internal row] in a more optimized way not directly using <<eval, eval>>).
+| Generates the Java source code for *code-generated (non-interpreted) expression evaluation* (on an input spark-sql-InternalRow.md[internal row] in a more optimized way not directly using <<eval, eval>>).
 
-Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka link:spark-sql-subexpression-elimination.adoc[subexpression elimination]).
+Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka spark-sql-subexpression-elimination.md[subexpression elimination]).
 
 `genCode` is a faster "relative" of the <<eval, interpreted (non-code-generated) expression evaluation>>.
 
@@ -269,13 +269,13 @@ reduceCodeSize(ctx: CodegenContext, eval: ExprCode): Unit
 
 . Length of the generate code is above 1024
 
-. link:spark-sql-CodegenContext.adoc#INPUT_ROW[INPUT_ROW] of the input `CodegenContext` is defined
+. spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW] of the input `CodegenContext` is defined
 
-. link:spark-sql-CodegenContext.adoc#currentVars[currentVars] of the input `CodegenContext` is not defined
+. spark-sql-CodegenContext.md#currentVars[currentVars] of the input `CodegenContext` is not defined
 
 CAUTION: FIXME When would the above not be met? What's so special about such an expression?
 
-`reduceCodeSize` sets the `value` of the input `ExprCode` to the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the `value` name.
+`reduceCodeSize` sets the `value` of the input `ExprCode` to the spark-sql-CodegenContext.md#freshName[fresh term name] for the `value` name.
 
 In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the following:
 
@@ -283,7 +283,7 @@ In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the follow
 [javaType] [newValue] = [funcFullName]([INPUT_ROW]);
 ```
 
-The `funcFullName` is the link:spark-sql-CodegenContext.adoc#freshName[fresh term name] for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
+The `funcFullName` is the spark-sql-CodegenContext.md#freshName[fresh term name] for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
 
 TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
 

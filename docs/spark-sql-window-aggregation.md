@@ -4,6 +4,6 @@
 
 === From Structured Query to Physical Plan
 
-<<spark-sql-Analyzer.adoc#, Spark Analyzer>> uses <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>> logical resolution rule to replace (extract) <<spark-sql-Expression-WindowExpression.adoc#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.adoc#, Window>> logical operators in a <<spark-sql-LogicalPlan.adoc#, logical query plan>>.
+<<spark-sql-Analyzer.md#, Spark Analyzer>> uses <<spark-sql-Analyzer-ExtractWindowExpressions.md#, ExtractWindowExpressions>> logical resolution rule to replace (extract) <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.md#, Window>> logical operators in a <<spark-sql-LogicalPlan.md#, logical query plan>>.
 
-NOTE: Window —> (BasicOperators) —> WindowExec —> WindowExec.adoc#doExecute (and windowExecBufferInMemoryThreshold + windowExecBufferSpillThreshold)
+NOTE: Window —> (BasicOperators) —> WindowExec —> WindowExec.md#doExecute (and windowExecBufferInMemoryThreshold + windowExecBufferSpillThreshold)

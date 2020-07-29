@@ -2,7 +2,7 @@
 
 `HiveClient` is the <<contract, contract>> for retrieving metadata from a Hive metastore.
 
-NOTE: link:HiveClientImpl.adoc[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
+NOTE: HiveClientImpl.md[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
 
 `HiveClient` offers _safe_ variants of many methods that do not report exceptions when a relational entity is not found in a Hive metastore, e.g. <<getTableOption, getTableOption>> for <<getTable, getTable>>.
 
@@ -59,9 +59,9 @@ getPartitions(
   partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
 ----
 
-Returns the <<spark-sql-CatalogTablePartition.adoc#, CatalogTablePartition>> of a table
+Returns the <<spark-sql-CatalogTablePartition.md#, CatalogTablePartition>> of a table
 
-Used exclusively when `HiveExternalCatalog` is requested to link:HiveExternalCatalog.adoc#listPartitions[list the partitions of a table]
+Used exclusively when `HiveExternalCatalog` is requested to HiveExternalCatalog.md#listPartitions[list the partitions of a table]
 
 | getPartitionsByFilter
 | [[getPartitionsByFilter]] Used when...FIXME
@@ -106,9 +106,9 @@ getTable(
 ====
 `getTable` is used when:
 
-* `HiveExternalCatalog` is requested for a link:HiveExternalCatalog.adoc#getRawTable[table metadata]
+* `HiveExternalCatalog` is requested for a HiveExternalCatalog.md#getRawTable[table metadata]
 
 * `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 
-* `HiveClientImpl` is requested for link:HiveClientImpl.adoc#renamePartitions[renamePartitions] or link:HiveClientImpl.adoc#alterPartitions[alterPartitions]
+* `HiveClientImpl` is requested for HiveClientImpl.md#renamePartitions[renamePartitions] or HiveClientImpl.md#alterPartitions[alterPartitions]
 ====

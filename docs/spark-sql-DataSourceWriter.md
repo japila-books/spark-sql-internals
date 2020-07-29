@@ -1,16 +1,16 @@
 # DataSourceWriter
 
-`DataSourceWriter` is the <<contract, abstraction>> of <<implementations, data source writers>> in <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<abort, abort>> or <<commit, commit>> a writing Spark job, <<createWriterFactory, create a DataWriterFactory>> to be shared among writing Spark tasks and optionally <<onDataWriterCommit, handle a commit message>> and <<useCommitCoordinator, use a CommitCoordinator>> for writing Spark tasks.
+`DataSourceWriter` is the <<contract, abstraction>> of <<implementations, data source writers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<abort, abort>> or <<commit, commit>> a writing Spark job, <<createWriterFactory, create a DataWriterFactory>> to be shared among writing Spark tasks and optionally <<onDataWriterCommit, handle a commit message>> and <<useCommitCoordinator, use a CommitCoordinator>> for writing Spark tasks.
 
 NOTE: The terms *Spark job* and *Spark task* are really about the low-level Spark jobs and tasks (that you can monitor using web UI for example).
 
-`DataSourceWriter` is used to create a logical <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> and physical <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#, WriteToDataSourceV2Exec>> operators.
+`DataSourceWriter` is used to create a logical <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> and physical <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> operators.
 
 `DataSourceWriter` is created when:
 
-* `DataSourceV2Relation` logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newWriter, create one>>
+* `DataSourceV2Relation` logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create one>>
 
-* `WriteSupport` data source is requested to <<spark-sql-WriteSupport.adoc#createWriter, create one>>
+* `WriteSupport` data source is requested to <<spark-sql-WriteSupport.md#createWriter, create one>>
 
 [[contract]]
 .DataSourceWriter Contract
@@ -29,7 +29,7 @@ void abort(WriterCommitMessage[] messages)
 
 Aborts a writing Spark job
 
-Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#doExecute, execute>> (and an exception was reported)
+Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>> (and an exception was reported)
 
 | commit
 a| [[commit]]
@@ -41,7 +41,7 @@ void commit(WriterCommitMessage[] messages)
 
 Commits a writing Spark job
 
-Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#doExecute, execute>> (and writing tasks all completed successfully)
+Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>> (and writing tasks all completed successfully)
 
 | createWriterFactory
 a| [[createWriterFactory]]
@@ -51,11 +51,11 @@ a| [[createWriterFactory]]
 DataWriterFactory<InternalRow> createWriterFactory()
 ----
 
-Creates a <<spark-sql-DataWriterFactory.adoc#, DataWriterFactory>>
+Creates a <<spark-sql-DataWriterFactory.md#, DataWriterFactory>>
 
 Used when:
 
-* `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#doExecute, execute>>
+* `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>>
 
 * Spark Structured Streaming's `WriteToContinuousDataSourceExec` physical operator is requested to execute
 
@@ -73,7 +73,7 @@ Handles `WriterCommitMessage` commit message for a single successful writing Spa
 
 Defaults to _do nothing_
 
-Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#doExecute, execute>> (and runs a Spark job with partition writing tasks)
+Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>> (and runs a Spark job with partition writing tasks)
 
 | useCommitCoordinator
 a| [[useCommitCoordinator]]
@@ -87,7 +87,7 @@ Controls whether to use a Spark Core `OutputCommitCoordinator` (`true`) or not (
 
 Default: `true`
 
-Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.adoc#doExecute, execute>>
+Used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>>
 
 |===
 

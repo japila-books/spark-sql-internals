@@ -2,13 +2,13 @@ title: HadoopFsRelation
 
 # HadoopFsRelation -- Relation Of File-Based Data Sources
 
-`HadoopFsRelation` is a <<spark-sql-BaseRelation.adoc#, BaseRelation>> and <<spark-sql-FileRelation.adoc#, FileRelation>>.
+`HadoopFsRelation` is a <<spark-sql-BaseRelation.md#, BaseRelation>> and <<spark-sql-FileRelation.md#, FileRelation>>.
 
 `HadoopFsRelation` is <<creating-instance, created>> when:
 
-* `DataSource` is requested to <<spark-sql-DataSource.adoc#resolveRelation, resolve a relation>> for <<spark-sql-FileFormat.adoc#, file-based data sources>>
+* `DataSource` is requested to <<spark-sql-DataSource.md#resolveRelation, resolve a relation>> for <<spark-sql-FileFormat.md#, file-based data sources>>
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (for link:hive/RelationConversions.adoc[RelationConversions] logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (for hive/RelationConversions.md[RelationConversions] logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
 
 [source, scala]
 ----
@@ -74,23 +74,23 @@ val bucketSpec = hadoopFsRel.bucketSpec.get
 // Exercise 3: spark.table for Hive tables (provider == hive)
 ----
 
-The optional <<bucketSpec, bucketing specification>> is defined exclusively for <<spark-sql-DataSource.adoc#, non-streaming file-based data sources>> and used for the following:
+The optional <<bucketSpec, bucketing specification>> is defined exclusively for <<spark-sql-DataSource.md#, non-streaming file-based data sources>> and used for the following:
 
-* <<spark-sql-SparkPlan-FileSourceScanExec.adoc#outputPartitioning, Output partitioning scheme>> and <<spark-sql-SparkPlan-FileSourceScanExec.adoc#outputOrdering, output data ordering>> of the corresponding <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> physical operator
+* <<spark-sql-SparkPlan-FileSourceScanExec.md#outputPartitioning, Output partitioning scheme>> and <<spark-sql-SparkPlan-FileSourceScanExec.md#outputOrdering, output data ordering>> of the corresponding <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>> physical operator
 
-* <<spark-sql-Analyzer-DataSourceAnalysis.adoc#, DataSourceAnalysis>> post-hoc logical resolution rule (when executed on a <<InsertIntoTable.adoc#, InsertIntoTable>> logical operator over a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> with `HadoopFsRelation` relation)
+* <<spark-sql-Analyzer-DataSourceAnalysis.md#, DataSourceAnalysis>> post-hoc logical resolution rule (when executed on a <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> with `HadoopFsRelation` relation)
 
 === [[creating-instance]] Creating HadoopFsRelation Instance
 
 `HadoopFsRelation` takes the following to be created:
 
-* [[location]] <<FileIndex.adoc#, FileIndex>> (for <<sizeInBytes, sizeInBytes>> and <<inputFiles, inputFiles>>)
-* [[partitionSchema]] Partition link:spark-sql-StructType.adoc[schema]
-* [[dataSchema]] Data link:spark-sql-StructType.adoc[schema]
-* [[bucketSpec]] <<spark-sql-BucketSpec.adoc#, Bucketing specification>> (optional)
-* [[fileFormat]] link:spark-sql-FileFormat.adoc[FileFormat]
+* [[location]] <<FileIndex.md#, FileIndex>> (for <<sizeInBytes, sizeInBytes>> and <<inputFiles, inputFiles>>)
+* [[partitionSchema]] Partition spark-sql-StructType.md[schema]
+* [[dataSchema]] Data spark-sql-StructType.md[schema]
+* [[bucketSpec]] <<spark-sql-BucketSpec.md#, Bucketing specification>> (optional)
+* [[fileFormat]] spark-sql-FileFormat.md[FileFormat]
 * [[options]] Options
-* [[sparkSession]] link:SparkSession.md[SparkSession]
+* [[sparkSession]] SparkSession.md[SparkSession]
 
 `HadoopFsRelation` initializes the <<internal-properties, internal properties>>.
 
@@ -101,9 +101,9 @@ The optional <<bucketSpec, bucketing specification>> is defined exclusively for 
 inputFiles: Array[String]
 ----
 
-NOTE: `inputFiles` is part of the <<spark-sql-FileRelation.adoc#inputFiles, FileRelation Contract>> for the list of files to read for scanning this relation.
+NOTE: `inputFiles` is part of the <<spark-sql-FileRelation.md#inputFiles, FileRelation Contract>> for the list of files to read for scanning this relation.
 
-`inputFiles` simply requests the <<location, FileIndex>> for the <<FileIndex.adoc#inputFiles, inputFiles>>.
+`inputFiles` simply requests the <<location, FileIndex>> for the <<FileIndex.md#inputFiles, inputFiles>>.
 
 === [[sizeInBytes]] `sizeInBytes` Method
 
@@ -112,7 +112,7 @@ NOTE: `inputFiles` is part of the <<spark-sql-FileRelation.adoc#inputFiles, File
 sizeInBytes: Long
 ----
 
-NOTE: `sizeInBytes` is part of the <<spark-sql-BaseRelation.adoc#sizeInBytes, BaseRelation Contract>> for the estimated size of a relation (in bytes).
+NOTE: `sizeInBytes` is part of the <<spark-sql-BaseRelation.md#sizeInBytes, BaseRelation Contract>> for the estimated size of a relation (in bytes).
 
 `sizeInBytes`...FIXME
 
@@ -127,7 +127,7 @@ NOTE: `toString` is part of the `java.lang.Object` contract for the string repre
 
 `toString` is the following text based on the <<fileFormat, FileFormat>>:
 
-* <<spark-sql-DataSourceRegister.adoc#shortName, shortName>> for <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> data sources
+* <<spark-sql-DataSourceRegister.md#shortName, shortName>> for <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> data sources
 
 * *HadoopFiles* otherwise
 

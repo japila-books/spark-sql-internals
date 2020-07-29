@@ -2,17 +2,17 @@ title: SortMergeJoinExec
 
 # SortMergeJoinExec Binary Physical Operator for Sort Merge Join
 
-`SortMergeJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
+`SortMergeJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a spark-sql-LogicalPlan-Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
 
 [[orderable]]
 [NOTE]
 ====
-A join key is *orderable* when is of one of the following link:spark-sql-DataType.adoc[data types]:
+A join key is *orderable* when is of one of the following spark-sql-DataType.md[data types]:
 
 * `NullType`
-* link:spark-sql-DataType.adoc#AtomicType[AtomicType] (that represents all the available types except `NullType`, `StructType`, `ArrayType`, `UserDefinedType`, `MapType`, and `ObjectType`)
+* spark-sql-DataType.md#AtomicType[AtomicType] (that represents all the available types except `NullType`, `StructType`, `ArrayType`, `UserDefinedType`, `MapType`, and `ObjectType`)
 * `StructType` with orderable fields
 * `ArrayType` of orderable type
 * `UserDefinedType` of orderable type
@@ -25,13 +25,13 @@ Therefore, a join key is *not* orderable when is of the following data type:
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+link:spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
 
 That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers sort merge join over [shuffled hash join](ShuffledHashJoinExec.md).
 ====
 
 [[supportCodegen]]
-`SortMergeJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_) for inner and cross joins.
+`SortMergeJoinExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_) for inner and cross joins.
 
 [TIP]
 ====
@@ -87,7 +87,7 @@ scala> q.explain
 .SortMergeJoinExec in web UI (Details for Query)
 image::images/spark-sql-SortMergeJoinExec-webui-query-details.png[align="center"]
 
-NOTE: The prefix for variable names for `SortMergeJoinExec` operators in link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code is *smj*.
+NOTE: The prefix for variable names for `SortMergeJoinExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *smj*.
 
 [source, scala]
 ----
@@ -128,16 +128,16 @@ Generated code:
 ----
 
 [[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of a `SortMergeJoinExec` is...FIXME
+The catalyst/QueryPlan.md#output[output schema] of a `SortMergeJoinExec` is...FIXME
 
 [[outputPartitioning]]
-The link:SparkPlan.md#outputPartitioning[outputPartitioning] of a `SortMergeJoinExec` is...FIXME
+The SparkPlan.md#outputPartitioning[outputPartitioning] of a `SortMergeJoinExec` is...FIXME
 
 [[outputOrdering]]
-The link:SparkPlan.md#outputOrdering[outputOrdering] of a `SortMergeJoinExec` is...FIXME
+The SparkPlan.md#outputOrdering[outputOrdering] of a `SortMergeJoinExec` is...FIXME
 
 [[requiredChildDistribution]]
-The link:SparkPlan.md#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistributions] of <<leftKeys, left>> and <<rightKeys, right>> join keys.
+The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistributions] of <<leftKeys, left>> and <<rightKeys, right>> join keys.
 
 .SortMergeJoinExec's Required Child Output Distributions
 [cols="1,1",options="header",width="100%"]
@@ -145,12 +145,12 @@ The link:SparkPlan.md#requiredChildDistribution[partitioning requirements] of th
 | Left Child
 | Right Child
 
-| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
-| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
+| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
+| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
 [[requiredChildOrdering]]
-The link:SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
+The SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
 
 NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (after [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical join operators have not met the requirements).
 
@@ -161,7 +161,7 @@ NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-pla
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -172,7 +172,7 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -180,9 +180,9 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 
 `SortMergeJoinExec` takes the following when created:
 
-* [[leftKeys]] Left join key link:expressions/Expression.md[expressions]
-* [[rightKeys]] Right join key link:expressions/Expression.md[expressions]
-* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
-* [[condition]] Optional join condition link:expressions/Expression.md[expression]
-* [[left]] Left link:SparkPlan.md[physical operator]
-* [[right]] Right link:SparkPlan.md[physical operator]
+* [[leftKeys]] Left join key expressions/Expression.md[expressions]
+* [[rightKeys]] Right join key expressions/Expression.md[expressions]
+* [[joinType]] spark-sql-joins.md#join-types[Join type]
+* [[condition]] Optional join condition expressions/Expression.md[expression]
+* [[left]] Left SparkPlan.md[physical operator]
+* [[right]] Right SparkPlan.md[physical operator]

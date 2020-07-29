@@ -3,11 +3,11 @@
 `LimitPushDown` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms>> the following logical plans:
 
 * `LocalLimit` with `Union`
-* `LocalLimit` with link:spark-sql-LogicalPlan-Join.adoc[Join]
+* `LocalLimit` with spark-sql-LogicalPlan-Join.md[Join]
 
 `LimitPushDown` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`LimitPushDown` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`LimitPushDown` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -67,7 +67,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `LimitPushDown` takes the following when created:
 
-* [[conf]] link:spark-sql-CatalystConf.adoc[CatalystConf]
+* [[conf]] spark-sql-CatalystConf.md[CatalystConf]
 
 `LimitPushDown` initializes the <<internal-registries, internal registries and counters>>.
 

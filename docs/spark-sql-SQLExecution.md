@@ -11,11 +11,11 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ----
 
-Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's link:spark-sparkcontext-local-properties.adoc#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's link:spark-sql-webui.adoc[SQL tab]).
+Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's spark-sql-webui.md[SQL tab]).
 
 [TIP]
 ====
-Use link:spark-SparkListener.adoc#onOtherEvent[SparkListener] to listen to link:spark-sql-SQLListener.adoc#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] events and know the execution ids of structured queries that have been executed in a Spark SQL application.
+Use spark-SparkListener.md#onOtherEvent[SparkListener] to listen to spark-sql-SQLListener.md#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] events and know the execution ids of structured queries that have been executed in a Spark SQL application.
 
 [source, scala]
 ----
@@ -58,9 +58,9 @@ spark.sparkContext.addSparkListener(sqlListener)
 NOTE: Jobs without <<spark.sql.execution.id, spark.sql.execution.id>> key are not considered to belong to SQL query executions.
 
 [[executionIdToQueryExecution]]
-`SQLExecution` keeps track of all execution ids and their link:spark-sql-QueryExecution.adoc[QueryExecutions] in `executionIdToQueryExecution` internal registry.
+`SQLExecution` keeps track of all execution ids and their spark-sql-QueryExecution.md[QueryExecutions] in `executionIdToQueryExecution` internal registry.
 
-TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the link:spark-sql-QueryExecution.adoc[QueryExecution] for an execution id.
+TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the spark-sql-QueryExecution.md[QueryExecution] for an execution id.
 
 === [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Under New Execution Id -- `withNewExecutionId` Method
 
@@ -73,11 +73,11 @@ withNewExecutionId[T](
 
 `withNewExecutionId` executes `body` query action with a new <<spark.sql.execution.id, execution id>> (given as the input `executionId` or auto-generated) so that all Spark jobs that have been scheduled by the query action could be marked as parts of the same `Dataset` action execution.
 
-`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to link:spark-sql-webui.adoc[reporting them as one single structured query in web UI].
+`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to spark-sql-webui.md[reporting them as one single structured query in web UI].
 
 NOTE: If there is another execution id already set, it is replaced for the course of the current action.
 
-In addition, the `QueryExecution` variant posts link:spark-sql-SQLListener.adoc#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] and link:spark-sql-SQLListener.adoc#SparkListenerSQLExecutionEnd[SparkListenerSQLExecutionEnd] events (to link:spark-LiveListenerBus.adoc[LiveListenerBus] event bus) before and after executing the `body` action, respectively. It is used to inform link:spark-sql-SQLListener.adoc#onOtherEvent[`SQLListener` when a SQL query execution starts and ends].
+In addition, the `QueryExecution` variant posts spark-sql-SQLListener.md#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] and spark-sql-SQLListener.md#SparkListenerSQLExecutionEnd[SparkListenerSQLExecutionEnd] events (to spark-LiveListenerBus.md[LiveListenerBus] event bus) before and after executing the `body` action, respectively. It is used to inform spark-sql-SQLListener.md#onOtherEvent[`SQLListener` when a SQL query execution starts and ends].
 
 NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 
@@ -85,9 +85,9 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 ====
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to <<spark-sql-Dataset.adoc#withNewExecutionId, Dataset.withNewExecutionId>> and <<spark-sql-Dataset.adoc#withAction, withAction>>
+* `Dataset` is requested to <<spark-sql-Dataset.md#withNewExecutionId, Dataset.withNewExecutionId>> and <<spark-sql-Dataset.md#withAction, withAction>>
 
-* `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#runCommand[run a command]
+* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a command]
 
 * Spark Structured Streaming's `StreamExecution` commits a batch to a streaming sink
 
@@ -101,7 +101,7 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 getQueryExecution(executionId: Long): QueryExecution
 ----
 
-`getQueryExecution` simply gives the link:spark-sql-QueryExecution.adoc[QueryExecution] for the `executionId` or `null` if not found.
+`getQueryExecution` simply gives the spark-sql-QueryExecution.md[QueryExecution] for the `executionId` or `null` if not found.
 
 === [[withExecutionId]] Executing Action (with Zero or More Spark Jobs) Tracked Under Given Execution Id -- `withExecutionId` Method
 
@@ -125,9 +125,9 @@ Hello World
 ====
 `withExecutionId` is used when:
 
-* `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
+* `BroadcastExchangeExec` is requested to spark-sql-SparkPlan-BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
 
-* `SubqueryExec` is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time)
+* `SubqueryExec` is requested to spark-sql-SparkPlan-SubqueryExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-SubqueryExec.md#relationFuture[relationFuture] for the first time)
 ====
 
 === [[checkSQLExecutionId]] `checkSQLExecutionId` Method
@@ -139,7 +139,7 @@ checkSQLExecutionId(sparkSession: SparkSession): Unit
 
 `checkSQLExecutionId`...FIXME
 
-NOTE: `checkSQLExecutionId` is used exclusively when `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>.
+NOTE: `checkSQLExecutionId` is used exclusively when `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.md#write, write the result of a structured query>>.
 
 === [[withSQLConfPropagated]] `withSQLConfPropagated` Method
 

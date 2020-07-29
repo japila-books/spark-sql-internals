@@ -2,7 +2,7 @@ title: Column Operators
 
 # Column API -- Column Operators
 
-Column API is a <<methods, set of operators>> to work with values in a column (of a <<spark-sql-Dataset.adoc#, Dataset>>).
+Column API is a <<methods, set of operators>> to work with values in a column (of a <<spark-sql-Dataset.md#, Dataset>>).
 
 [[methods]]
 [[operators]]
@@ -88,7 +88,7 @@ isInCollection(values: scala.collection.Iterable[_]): Column
 isin(list: Any*): Column
 ----
 
-Internally, `isin` creates a `Column` with <<spark-sql-Expression-In.adoc#, In>> predicate expression.
+Internally, `isin` creates a `Column` with <<spark-sql-Expression-In.md#, In>> predicate expression.
 
 [source, scala]
 ----

@@ -1,16 +1,16 @@
 # ExchangeCoordinator
 
-`ExchangeCoordinator` is <<creating-instance, created>> when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.adoc#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.adoc#, Adaptive Query Execution>>.
+`ExchangeCoordinator` is <<creating-instance, created>> when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.md#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>.
 
 [[creating-instance]]
 `ExchangeCoordinator` takes the following to be created:
 
-* [[numExchanges]] Number of <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#, ShuffleExchangeExec>> unary physical operators
-* [[advisoryTargetPostShuffleInputSize]] Recommended size of the input data of a post-shuffle partition (configured by <<spark-sql-properties.adoc#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>> property)
-* [[minNumPostShufflePartitions]] Optional advisory minimum number of post-shuffle partitions (default: `None`) (configured by <<spark-sql-properties.adoc#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>> property)
+* [[numExchanges]] Number of <<spark-sql-SparkPlan-ShuffleExchangeExec.md#, ShuffleExchangeExec>> unary physical operators
+* [[advisoryTargetPostShuffleInputSize]] Recommended size of the input data of a post-shuffle partition (configured by <<spark-sql-properties.md#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>> property)
+* [[minNumPostShufflePartitions]] Optional advisory minimum number of post-shuffle partitions (default: `None`) (configured by <<spark-sql-properties.md#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>> property)
 
 [[exchanges]]
-`ExchangeCoordinator` keeps track of <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#, ShuffleExchangeExec>> unary physical operators that were <<registerExchange, registered>> (when `ShuffleExchangeExec` unary physical operator was requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#doPrepare, prepare itself for execution>>).
+`ExchangeCoordinator` keeps track of <<spark-sql-SparkPlan-ShuffleExchangeExec.md#, ShuffleExchangeExec>> unary physical operators that were <<registerExchange, registered>> (when `ShuffleExchangeExec` unary physical operator was requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.md#doPrepare, prepare itself for execution>>).
 
 [[toString]]
 `ExchangeCoordinator` uses the following *text representation* (i.e. `toString`):
@@ -28,7 +28,7 @@ postShuffleRDD(exchange: ShuffleExchangeExec): ShuffledRowRDD
 
 `postShuffleRDD`...FIXME
 
-NOTE: `postShuffleRDD` is used exclusively when `ShuffleExchangeExec` unary physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#doExecute, execute>>.
+NOTE: `postShuffleRDD` is used exclusively when `ShuffleExchangeExec` unary physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.md#doExecute, execute>>.
 
 === [[doEstimationIfNecessary]] `doEstimationIfNecessary` Internal Method
 
@@ -60,6 +60,6 @@ NOTE: `estimatePartitionStartIndices` is used exclusively when `ExchangeCoordina
 registerExchange(exchange: ShuffleExchangeExec): Unit
 ----
 
-`registerExchange` simply adds the <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#, ShuffleExchangeExec>> unary physical operator to the <<exchanges, exchanges>> internal registry.
+`registerExchange` simply adds the <<spark-sql-SparkPlan-ShuffleExchangeExec.md#, ShuffleExchangeExec>> unary physical operator to the <<exchanges, exchanges>> internal registry.
 
-NOTE: `registerExchange` is used exclusively when `ShuffleExchangeExec` unary physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#doPrepare, prepare itself for execution>>.
+NOTE: `registerExchange` is used exclusively when `ShuffleExchangeExec` unary physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.md#doPrepare, prepare itself for execution>>.

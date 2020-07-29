@@ -1,20 +1,20 @@
 # InsertIntoHiveTable Logical Command
 
-`InsertIntoHiveTable` is a link:SaveAsHiveFile.adoc[logical command] that writes the result of executing a <<query, structured query>> to a <<table, Hive table>>.
+`InsertIntoHiveTable` is a SaveAsHiveFile.md[logical command] that writes the result of executing a <<query, structured query>> to a <<table, Hive table>>.
 
 `InsertIntoHiveTable` is <<creating-instance, created>> when:
 
-* link:HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed and resolves a link:../InsertIntoTable.adoc[InsertIntoTable] logical operator with a link:HiveTableRelation.adoc[Hive table]
+* HiveAnalysis.md[HiveAnalysis] logical resolution rule is executed and resolves a ../InsertIntoTable.md[InsertIntoTable] logical operator with a HiveTableRelation.md[Hive table]
 
-* link:CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
+* CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
 
 === [[creating-instance]] Creating InsertIntoHiveTable Instance
 
 `InsertIntoHiveTable` takes the following to be created:
 
-* [[table]] link:../spark-sql-CatalogTable.adoc[CatalogTable]
+* [[table]] ../spark-sql-CatalogTable.md[CatalogTable]
 * [[partition]] Partition keys with optional values (`Map[String, Option[String]]`)
-* [[query]] Structured query (as a link:../spark-sql-LogicalPlan.adoc[LogicalPlan])
+* [[query]] Structured query (as a ../spark-sql-LogicalPlan.md[LogicalPlan])
 * [[overwrite]] `overwrite` Flag
 * [[ifPartitionNotExists]] `ifPartitionNotExists` Flag
 * [[outputColumnNames]] Names of the output columns
@@ -28,23 +28,23 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of link:../spark-sql-LogicalPlan-DataWritingCommand.adoc#run[DataWritingCommand] contract.
+NOTE: `run` is part of ../spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
 
-`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sharedState[SharedState] that is then requested for the link:../SharedState.md#externalCatalog[ExternalCatalog].
+`run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#sharedState[SharedState] that is then requested for the ../SharedState.md#externalCatalog[ExternalCatalog].
 
-`run` requests the link:../SessionState.md[SessionState] for a new link:../SessionState.md#newHadoopConf[Hadoop Configuration].
+`run` requests the ../SessionState.md[SessionState] for a new ../SessionState.md#newHadoopConf[Hadoop Configuration].
 
-`run` link:HiveClientImpl.adoc#toHiveTable[converts the CatalogTable metadata to Hive's].
+`run` HiveClientImpl.md#toHiveTable[converts the CatalogTable metadata to Hive's].
 
-`run` link:SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath].
+`run` SaveAsHiveFile.md#getExternalTmpPath[getExternalTmpPath].
 
-`run` <<processInsert, processInsert>> (and link:SaveAsHiveFile.adoc#deleteExternalTmpPath[deleteExternalTmpPath]).
+`run` <<processInsert, processInsert>> (and SaveAsHiveFile.md#deleteExternalTmpPath[deleteExternalTmpPath]).
 
-`run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#catalog[Catalog] that is requested to link:../spark-sql-Catalog.adoc#uncacheTable[uncache the table].
+`run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#catalog[Catalog] that is requested to ../spark-sql-Catalog.md#uncacheTable[uncache the table].
 
-`run` un-caches the Hive table. `run` requests the input link:../SparkSession.md[SparkSession] for link:../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the link:../SessionState.md#catalog[SessionCatalog] that is requested to link:../spark-sql-SessionCatalog.adoc#refreshTable[invalidate the cache for the table].
+`run` un-caches the Hive table. `run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the ../SessionState.md#catalog[SessionCatalog] that is requested to ../spark-sql-SessionCatalog.md#refreshTable[invalidate the cache for the table].
 
-In the end, `run` link:../spark-sql-CommandUtils.adoc#updateTableStats[update the table statistics].
+In the end, `run` ../spark-sql-CommandUtils.md#updateTableStats[update the table statistics].
 
 === [[processInsert]] `processInsert` Internal Method
 

@@ -4,7 +4,7 @@ title: Attribute
 
 `Attribute` is the <<contract, base>> of <<extensions, leaf named expressions>>.
 
-NOTE: link:catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the link:spark-sql-StructType.adoc[schema] of the query (it represents).
+NOTE: catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the spark-sql-StructType.md[schema] of the query (it represents).
 
 [[contract]]
 [source, scala]
@@ -48,7 +48,7 @@ abstract class Attribute extends ... {
 When requested for <<expressions/Expression.md#references, references>>, `Attribute` gives the reference to itself only.
 
 [[toAttribute]]
-As a <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>, `Attribute` gives the reference to itself only when requested for <<spark-sql-Expression-NamedExpression.adoc#toAttribute, toAttribute>>.
+As a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>, `Attribute` gives the reference to itself only when requested for <<spark-sql-Expression-NamedExpression.md#toAttribute, toAttribute>>.
 
 [[extensions]]
 .Attributes (Direct Implementations)
@@ -57,13 +57,13 @@ As a <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>, `Attribute
 | Attribute
 | Description
 
-| <<spark-sql-Expression-AttributeReference.adoc#, AttributeReference>>
+| <<spark-sql-Expression-AttributeReference.md#, AttributeReference>>
 | [[AttributeReference]]
 
-| <<spark-sql-Expression-PrettyAttribute.adoc#, PrettyAttribute>>
+| <<spark-sql-Expression-PrettyAttribute.md#, PrettyAttribute>>
 | [[PrettyAttribute]]
 
-| <<spark-sql-Expression-UnresolvedAttribute.adoc#, UnresolvedAttribute>>
+| <<spark-sql-Expression-UnresolvedAttribute.md#, UnresolvedAttribute>>
 | [[UnresolvedAttribute]]
 |===
 

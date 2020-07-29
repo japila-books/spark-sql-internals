@@ -2,7 +2,7 @@ title: SizeBasedWindowFunction
 
 # SizeBasedWindowFunction -- Declarative Window Aggregate Functions with Window Size
 
-`SizeBasedWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
+`SizeBasedWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
 
 [[contract]]
 [source, scala]
@@ -21,7 +21,7 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | Description
 
 | n
-| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.adoc#, AttributeReference>> expression with `++window__partition__size++` name, <<spark-sql-DataType.adoc#IntegerType, IntegerType>> data type and not nullable
+| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> expression with `++window__partition__size++` name, <<spark-sql-DataType.md#IntegerType, IntegerType>> data type and not nullable
 |===
 
 [[implementations]]
@@ -31,8 +31,8 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | SizeBasedWindowFunction
 | Description
 
-| <<spark-sql-Expression-CumeDist.adoc#, CumeDist>>
-| [[CumeDist]] Window function expression for <<spark-sql-functions.adoc#cume_dist, cume_dist>> standard function (Dataset API) and <<spark-sql-FunctionRegistry.adoc#expressions, cume_dist>> SQL function
+| <<spark-sql-Expression-CumeDist.md#, CumeDist>>
+| [[CumeDist]] Window function expression for <<spark-sql-functions.md#cume_dist, cume_dist>> standard function (Dataset API) and <<spark-sql-FunctionRegistry.md#expressions, cume_dist>> SQL function
 
 | NTile
 | [[NTile]]

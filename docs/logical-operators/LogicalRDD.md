@@ -2,13 +2,13 @@ title: LogicalRDD
 
 # LogicalRDD -- Logical Scan Over RDD
 
-`LogicalRDD` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] with <<newInstance, MultiInstanceRelation>> support for a logical representation of a scan over <<rdd, RDD of internal binary rows>>.
+`LogicalRDD` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] with <<newInstance, MultiInstanceRelation>> support for a logical representation of a scan over <<rdd, RDD of internal binary rows>>.
 
 `LogicalRDD` is <<creating-instance, created>> when:
 
-* `Dataset` is requested to <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>>
+* `Dataset` is requested to <<spark-sql-Dataset-untyped-transformations.md#checkpoint, checkpoint>>
 
-* `SparkSession` is requested to link:SparkSession.md#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
+* `SparkSession` is requested to SparkSession.md#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
 
 !!! note
     `LogicalRDD` is resolved to [RDDScanExec](../physical-operators/RDDScanExec.md) when [BasicOperators](../execution-planning-strategies/BasicOperators.md#LogicalRDD) execution planning strategy is executed.
@@ -20,7 +20,7 @@ title: LogicalRDD
 newInstance(): LogicalRDD.this.type
 ----
 
-NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInstance[MultiInstanceRelation Contract] to...FIXME.
+NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[MultiInstanceRelation Contract] to...FIXME.
 
 `newInstance`...FIXME
 
@@ -31,7 +31,7 @@ NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInst
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
 
 `computeStats`...FIXME
 
@@ -39,9 +39,9 @@ NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#compute
 
 `LogicalRDD` takes the following when created:
 
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[rdd]] `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows]
-* [[outputPartitioning]] link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning]
+* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
+* [[rdd]] `RDD` of spark-sql-InternalRow.md[internal binary rows]
+* [[outputPartitioning]] spark-sql-SparkPlan-Partitioning.md[Partitioning]
 * [[outputOrdering]] Output ordering (`SortOrder`)
 * [[isStreaming]] `isStreaming` flag
-* [[session]] link:SparkSession.md[SparkSession]
+* [[session]] SparkSession.md[SparkSession]

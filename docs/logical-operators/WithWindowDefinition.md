@@ -3,13 +3,13 @@ title: WithWindowDefinition
 # WithWindowDefinition Unary Logical Operator
 
 [[windowDefinitions]][[child]]
-`WithWindowDefinition` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical plan] with a single `child` logical plan and a `windowDefinitions` lookup table of link:spark-sql-Expression-WindowSpecDefinition.adoc[WindowSpecDefinition] per name.
+`WithWindowDefinition` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical plan] with a single `child` logical plan and a `windowDefinitions` lookup table of spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition] per name.
 
 [[creating-instance]]
-`WithWindowDefinition` is created exclusively when `AstBuilder` link:spark-sql-AstBuilder.adoc#withWindows[parses window definitions].
+`WithWindowDefinition` is created exclusively when `AstBuilder` spark-sql-AstBuilder.md#withWindows[parses window definitions].
 
 [[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of `WithWindowDefinition` is exactly the output attributes of the <<child, child>> logical operator.
+The catalyst/QueryPlan.md#output[output schema] of `WithWindowDefinition` is exactly the output attributes of the <<child, child>> logical operator.
 
 [[example]]
 [source, scala]

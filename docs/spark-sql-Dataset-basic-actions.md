@@ -2,7 +2,7 @@ title: Basic Actions
 
 # Dataset API -- Basic Actions
 
-*Basic actions* are a group of operators (_methods_) of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
+*Basic actions* are a group of operators (_methods_) of the <<spark-sql-dataset-operators.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
 
 NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
@@ -21,7 +21,7 @@ a| [[cache]]
 cache(): this.type
 ----
 
-Marks the `Dataset` to be persisted (_cached_) and is actually a synonym of <<spark-sql-dataset-operators.adoc#persist, persist>> basic action
+Marks the `Dataset` to be persisted (_cached_) and is actually a synonym of <<spark-sql-dataset-operators.md#persist, persist>> basic action
 
 | <<checkpoint, checkpoint>>
 a|
@@ -148,11 +148,11 @@ persist(newLevel: StorageLevel): this.type
 ----
 <1> Assumes the default storage level `MEMORY_AND_DISK`
 
-Marks the `Dataset` to be <<spark-sql-caching-and-persistence.adoc#, persisted>> the next time an action is executed
+Marks the `Dataset` to be <<spark-sql-caching-and-persistence.md#, persisted>> the next time an action is executed
 
-Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.adoc#cacheQuery, cache the structured query>>.
+Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.md#cacheQuery, cache the structured query>>.
 
-NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> (of the Dataset).
+NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.md#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|
@@ -214,7 +214,7 @@ a|
 write: DataFrameWriter[T]
 ----
 
-Returns a <<spark-sql-DataFrameWriter.adoc#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
+Returns a <<spark-sql-DataFrameWriter.md#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
 |===
 
 === [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Basic Action
@@ -287,7 +287,7 @@ createTempViewCommand(
 
 `createTempViewCommand`...FIXME
 
-NOTE: `createTempViewCommand` is used when the following `Dataset` operators are used: <<spark-sql-dataset-operators.adoc#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.adoc#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.adoc#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.adoc#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>.
+NOTE: `createTempViewCommand` is used when the following `Dataset` operators are used: <<spark-sql-dataset-operators.md#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>.
 
 === [[explain]] Displaying Logical and Physical Plans, Their Cost and Codegen -- `explain` Basic Action
 
@@ -298,26 +298,26 @@ explain(extended: Boolean): Unit
 ----
 <1> Turns the `extended` flag on
 
-`explain` prints the link:spark-sql-LogicalPlan.adoc[logical] and (with `extended` flag enabled) link:SparkPlan.md[physical] plans, their cost and codegen to the console.
+`explain` prints the spark-sql-LogicalPlan.md[logical] and (with `extended` flag enabled) SparkPlan.md[physical] plans, their cost and codegen to the console.
 
 TIP: Use `explain` to review the structured queries and optimizations applied.
 
-Internally, `explain` creates a link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command and requests `SessionState` to link:SessionState.md#executePlan[execute it] (to get a link:spark-sql-QueryExecution.adoc[QueryExecution] back).
+Internally, `explain` creates a spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command and requests `SessionState` to SessionState.md#executePlan[execute it] (to get a spark-sql-QueryExecution.md[QueryExecution] back).
 
-NOTE: `explain` uses link:spark-sql-LogicalPlan-ExplainCommand.adoc[ExplainCommand] logical command that, when link:spark-sql-LogicalPlan-ExplainCommand.adoc#run[executed], gives different text representations of link:spark-sql-QueryExecution.adoc[QueryExecution] (for the Dataset's link:spark-sql-LogicalPlan.adoc[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
+NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command that, when spark-sql-LogicalPlan-ExplainCommand.md#run[executed], gives different text representations of spark-sql-QueryExecution.md[QueryExecution] (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 
-`explain` then requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:SparkPlan.md#executeCollect[collects the records] (as link:spark-sql-InternalRow.adoc[InternalRow] objects).
+`explain` then requests `QueryExecution` for the spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] and SparkPlan.md#executeCollect[collects the records] (as spark-sql-InternalRow.md[InternalRow] objects).
 
 [NOTE]
 ====
-`explain` uses Dataset's link:spark-sql-Dataset.adoc#sparkSession[SparkSession] to link:SparkSession.md#sessionState[access the current `SessionState`].
+`explain` uses Dataset's spark-sql-Dataset.md#sparkSession[SparkSession] to SparkSession.md#sessionState[access the current `SessionState`].
 ====
 
 In the end, `explain` goes over the `InternalRow` records and converts them to lines to display to console.
 
-NOTE: `explain` "converts" an `InternalRow` record to a line using link:spark-sql-InternalRow.adoc#getString[getString] at position `0`.
+NOTE: `explain` "converts" an `InternalRow` record to a line using spark-sql-InternalRow.md#getString[getString] at position `0`.
 
-TIP: If you are serious about query debugging you could also use the link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution facility].
+TIP: If you are serious about query debugging you could also use the spark-sql-debugging-query-execution.md[Debugging Query Execution facility].
 
 [source, scala]
 ----
@@ -343,9 +343,9 @@ Range (0, 10, step=1, splits=Some(8))
 hint(name: String, parameters: Any*): Dataset[T]
 ----
 
-`hint` operator is part of link:spark-sql-hint-framework.adoc[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
+`hint` operator is part of spark-sql-hint-framework.md[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
 
-Internally, `hint` simply attaches link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the link:spark-sql-Dataset.adoc#logicalPlan[analyzed logical plan] of a `Dataset`).
+Internally, `hint` simply attaches spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the spark-sql-Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
 
 [source, scala]
 ----
@@ -362,7 +362,7 @@ scala> println(plan.numberedTreeString)
 01 +- Range (0, 3, step=1, splits=Some(8))
 ----
 
-NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers link:spark-sql-QueryExecution.adoc#analyzed[analysis phase] that executes link:spark-sql-LogicalPlan-Command.adoc[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
+NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers spark-sql-QueryExecution.md#analyzed[analysis phase] that executes spark-sql-LogicalPlan-Command.md[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
 
 [source, scala]
 ----
@@ -387,17 +387,17 @@ localCheckpoint(eager: Boolean): Dataset[T]
 checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
 ----
 
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) to link:spark-sql-QueryExecution.adoc#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) to spark-sql-QueryExecution.md#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
 
 Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
 
 With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
 
-`checkpoint` requests link:spark-sql-Dataset.adoc#queryExecution[QueryExecution] (of the `Dataset`) for link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] (the plan is used to get the link:SparkPlan.md#outputPartitioning[outputPartitioning] and link:SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
+`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
 
-In the end, `checkpoint` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a new link:spark-sql-LogicalPlan-LogicalRDD.adoc#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+In the end, `checkpoint` spark-sql-Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
-NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.adoc#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.adoc#localCheckpoint, localCheckpoint>>.
+NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.md#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.md#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.md#localCheckpoint, localCheckpoint>>.
 
 === [[rdd]] Generating RDD of Internal Binary Rows -- `rdd` Basic Action
 
@@ -406,7 +406,7 @@ NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transfor
 rdd: RDD[T]
 ----
 
-Whenever you are in need to convert a `Dataset` into a `RDD`, executing `rdd` method gives you the RDD of the proper input object type (not link:spark-sql-DataFrame.adoc#features[Row as in DataFrames]) that sits behind the `Dataset`.
+Whenever you are in need to convert a `Dataset` into a `RDD`, executing `rdd` method gives you the RDD of the proper input object type (not spark-sql-DataFrame.md#features[Row as in DataFrames]) that sits behind the `Dataset`.
 
 [source, scala]
 ----
@@ -414,11 +414,11 @@ scala> val rdd = tokens.rdd
 rdd: org.apache.spark.rdd.RDD[Token] = MapPartitionsRDD[11] at rdd at <console>:30
 ----
 
-Internally, it looks link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the link:spark-sql-DataType.adoc[DataType] of the result of evaluating the expression.
+Internally, it looks spark-sql-ExpressionEncoder.md[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the spark-sql-DataType.md[DataType] of the result of evaluating the expression.
 
-NOTE: A deserializer expression is used to decode an link:spark-sql-InternalRow.adoc[InternalRow] to an object of type `T`. See link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder].
+NOTE: A deserializer expression is used to decode an spark-sql-InternalRow.md[InternalRow] to an object of type `T`. See spark-sql-ExpressionEncoder.md[ExpressionEncoder].
 
-It then executes a link:spark-sql-LogicalPlan-DeserializeToObject.adoc[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
+It then executes a spark-sql-LogicalPlan-DeserializeToObject.md[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
 
 NOTE: It is a lazy operation that "produces" a `RDD[T]`.
 
@@ -436,7 +436,7 @@ schema: StructType
 You may also use the following methods to learn about the schema:
 
 * `printSchema(): Unit`
-* <<spark-sql-Dataset-basic-actions.adoc#explain, explain>>
+* <<spark-sql-Dataset-basic-actions.md#explain, explain>>
 ====
 
 === [[toDF]] Converting Typed Dataset to Untyped DataFrame -- `toDF` Basic Action
@@ -447,9 +447,9 @@ toDF(): DataFrame
 toDF(colNames: String*): DataFrame
 ----
 
-`toDF` converts a link:spark-sql-Dataset.adoc[Dataset] into a link:spark-sql-DataFrame.adoc[DataFrame].
+`toDF` converts a spark-sql-Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
 
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s link:SparkSession.md[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] with the encoder being link:spark-sql-RowEncoder.adoc[RowEncoder].
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and spark-sql-QueryExecution.md[QueryExecution] with the encoder being spark-sql-RowEncoder.md[RowEncoder].
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 
@@ -463,7 +463,7 @@ unpersist(blocking: Boolean): this.type
 
 `unpersist` uncache the `Dataset` possibly by `blocking` the call.
 
-Internally, `unpersist` requests `CacheManager` link:spark-cachemanager.adoc#uncacheQuery[to uncache the query].
+Internally, `unpersist` requests `CacheManager` spark-cachemanager.md#uncacheQuery[to uncache the query].
 
 CAUTION: FIXME
 
@@ -474,7 +474,7 @@ CAUTION: FIXME
 write: DataFrameWriter[T]
 ----
 
-`write` gives link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] for records of type `T`.
+`write` gives spark-sql-DataFrameWriter.md[DataFrameWriter] for records of type `T`.
 
 [source, scala]
 ----

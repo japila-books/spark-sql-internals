@@ -2,7 +2,7 @@ title: Pivot
 
 # Pivot Unary Logical Operator
 
-`Pivot` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents link:spark-sql-RelationalGroupedDataset.adoc#pivot[pivot] operator.
+`Pivot` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents spark-sql-RelationalGroupedDataset.md#pivot[pivot] operator.
 
 [source, scala]
 ----
@@ -22,14 +22,14 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 02    +- LocalRelation [_1#3, _2#4, _3#5]
 ----
 
-`Pivot` is <<creating-instance, created>> when `RelationalGroupedDataset` link:spark-sql-RelationalGroupedDataset.adoc#toDF[creates a DataFrame for an aggregate operator].
+`Pivot` is <<creating-instance, created>> when `RelationalGroupedDataset` spark-sql-RelationalGroupedDataset.md#toDF[creates a DataFrame for an aggregate operator].
 
 === [[analyzer]] Analysis Phase
 
-`Pivot` operator is resolved at link:spark-sql-Analyzer.adoc[analysis phase] in the following logical evaluation rules:
+`Pivot` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
 
-* link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
-* link:spark-sql-Analyzer.adoc#ResolvePivot[ResolvePivot]
+* spark-sql-Analyzer-ResolveAliases.md[ResolveAliases]
+* spark-sql-Analyzer.md#ResolvePivot[ResolvePivot]
 
 [source, scala]
 ----
@@ -48,7 +48,7 @@ scala> println(plan.numberedTreeString)
 val planResolved = ResolveAliases(plan)
 ----
 
-`Pivot` operator "disappears" behind (i.e. is converted to) a link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator (possibly under `Project` operator).
+`Pivot` operator "disappears" behind (i.e. is converted to) a spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator (possibly under `Project` operator).
 
 [source, scala]
 ----
@@ -66,8 +66,8 @@ scala> println(planAfterResolvePivot.numberedTreeString)
 
 `Pivot` takes the following when created:
 
-* [[groupByExprs]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[pivotColumn]] Pivot column link:expressions/Expression.md[expression]
-* [[pivotValues]] Pivot values link:spark-sql-Expression-Literal.adoc[literals]
-* [[aggregates]] Aggregation link:expressions/Expression.md[expressions]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[groupByExprs]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
+* [[pivotColumn]] Pivot column expressions/Expression.md[expression]
+* [[pivotValues]] Pivot values spark-sql-Expression-Literal.md[literals]
+* [[aggregates]] Aggregation expressions/Expression.md[expressions]
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]

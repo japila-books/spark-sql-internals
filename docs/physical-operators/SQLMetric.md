@@ -2,17 +2,17 @@ title: SQLMetric
 
 # SQLMetric -- SQL Execution Metric of Physical Operator
 
-`SQLMetric` is a SQL metric for monitoring execution of a link:SparkPlan.md[physical operator].
+`SQLMetric` is a SQL metric for monitoring execution of a SparkPlan.md[physical operator].
 
-`SQLMetric` is an link:spark-accumulators.adoc[accumulator] (and that is the mechanism to propagate SQL metric updates on the executors to the driver, e.g. web UI).
+`SQLMetric` is an spark-accumulators.md[accumulator] (and that is the mechanism to propagate SQL metric updates on the executors to the driver, e.g. web UI).
 
-NOTE: Use *Details for Query* page in link:spark-sql-webui.adoc#ExecutionPage[SQL tab] in web UI to see the SQL execution metrics of a structured query.
+NOTE: Use *Details for Query* page in spark-sql-webui.md#ExecutionPage[SQL tab] in web UI to see the SQL execution metrics of a structured query.
 
 [NOTE]
 ====
 SQL metrics are collected using `SparkListener`. If there are no tasks, Spark SQL cannot collect any metrics. Updates to metrics on the driver-side require explicit call of <<postDriverMetricUpdates, SQLMetrics.postDriverMetricUpdates>>.
 
-This is why executing some physical operators (e.g. LocalTableScanExec) may not have SQL metrics in web UI's link:spark-sql-webui.adoc#ExecutionPage[Details for Query] in SQL tab.
+This is why executing some physical operators (e.g. LocalTableScanExec) may not have SQL metrics in web UI's spark-sql-webui.md#ExecutionPage[Details for Query] in SQL tab.
 
 Compare the following SQL queries and their execution pages.
 
@@ -75,7 +75,7 @@ postDriverMetricUpdates(
   metrics: Seq[SQLMetric]): Unit
 ----
 
-`postDriverMetricUpdates` posts a link:spark-sql-SQLListener.adoc#SparkListenerDriverAccumUpdates[SparkListenerDriverAccumUpdates] event to link:spark-LiveListenerBus.adoc[LiveListenerBus] when `executionId` is specified.
+`postDriverMetricUpdates` posts a spark-sql-SQLListener.md#SparkListenerDriverAccumUpdates[SparkListenerDriverAccumUpdates] event to spark-LiveListenerBus.md[LiveListenerBus] when `executionId` is specified.
 
 NOTE: `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
 
@@ -83,9 +83,9 @@ NOTE: `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
 ====
 `postDriverMetricUpdates` is used when:
 
-* `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time)
+* `BroadcastExchangeExec` is requested to spark-sql-SparkPlan-BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
 
-* `FileSourceScanExec` physical operator is requested for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
+* `FileSourceScanExec` physical operator is requested for spark-sql-SparkPlan-FileSourceScanExec.md#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
 
-* `SubqueryExec` physical operator is requested to link:spark-sql-SparkPlan-SubqueryExec.adoc#doPrepare[prepare for execution] (and initializes link:spark-sql-SparkPlan-SubqueryExec.adoc#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
+* `SubqueryExec` physical operator is requested to spark-sql-SparkPlan-SubqueryExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-SubqueryExec.md#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
 ====

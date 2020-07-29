@@ -2,9 +2,9 @@ title: Schema
 
 # Schema -- Structure of Data
 
-A *schema* is the description of the structure of your data (which together create a link:spark-sql-Dataset.adoc[Dataset] in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
+A *schema* is the description of the structure of your data (which together create a spark-sql-Dataset.md[Dataset] in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
 
-A schema is described using link:spark-sql-StructType.adoc[StructType] which is a collection of link:spark-sql-StructField.adoc[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
+A schema is described using spark-sql-StructType.md[StructType] which is a collection of spark-sql-StructField.md[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
 
 `StructType` and `StructField` belong to the `org.apache.spark.sql.types` package.
 
@@ -32,9 +32,9 @@ val schemaTyped = new StructType()
   .add("b", StringType)
 ----
 
-TIP: Read up on link:spark-sql-CatalystSqlParser.adoc[CatalystSqlParser] that is responsible for parsing data types.
+TIP: Read up on spark-sql-CatalystSqlParser.md[CatalystSqlParser] that is responsible for parsing data types.
 
-It is however recommended to use the singleton link:spark-sql-DataType.adoc#DataTypes[DataTypes] class with static methods to create schema types.
+It is however recommended to use the singleton spark-sql-DataType.md#DataTypes[DataTypes] class with static methods to create schema types.
 
 [source, scala]
 ----
@@ -43,7 +43,7 @@ val schemaWithMap = StructType(
   StructField("map", createMapType(LongType, StringType), false) :: Nil)
 ----
 
-link:spark-sql-StructType.adoc[StructType] offers <<printTreeString, printTreeString>> that makes presenting the schema more user-friendly.
+link:spark-sql-StructType.md[StructType] offers <<printTreeString, printTreeString>> that makes presenting the schema more user-friendly.
 
 [source, scala]
 ----
@@ -76,7 +76,7 @@ scala> println(schema1.prettyJson)
 }
 ----
 
-As of Spark 2.0, you can describe the schema of your strongly-typed datasets using link:spark-sql-Encoder.adoc[encoders].
+As of Spark 2.0, you can describe the schema of your strongly-typed datasets using spark-sql-Encoder.md[encoders].
 
 [source, scala]
 ----

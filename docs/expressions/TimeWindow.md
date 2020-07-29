@@ -2,7 +2,7 @@ title: TimeWindow
 
 # TimeWindow Unevaluable Unary Expression
 
-`TimeWindow` is an link:expressions/Expression.md#Unevaluable[unevaluable] and link:expressions/Expression.md#NonSQLExpression[non-SQL] unary expression that represents link:spark-sql-functions.adoc#window[window] function.
+`TimeWindow` is an expressions/Expression.md#Unevaluable[unevaluable] and expressions/Expression.md#NonSQLExpression[non-SQL] unary expression that represents spark-sql-functions.md#window[window] function.
 
 [source, scala]
 ----
@@ -60,7 +60,7 @@ CAUTION: FIXME
 
 === [[analyzer]] Analysis Phase
 
-`TimeWindow` is resolved to link:spark-sql-LogicalPlan-Expand.adoc[Expand] logical operator when <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>> logical evaluation rule is executed.
+`TimeWindow` is resolved to spark-sql-LogicalPlan-Expand.md[Expand] logical operator when <<spark-sql-Analyzer-TimeWindowing.md#, TimeWindowing>> logical evaluation rule is executed.
 
 ```
 // https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
@@ -116,9 +116,9 @@ apply(
   startTime: String): TimeWindow
 ----
 
-`apply` creates a <<TimeWindow, TimeWindow>> with `timeColumn` link:expressions/Expression.md[expression] and `windowDuration`, `slideDuration`, `startTime` <<getIntervalInMicroSeconds, microseconds>>.
+`apply` creates a <<TimeWindow, TimeWindow>> with `timeColumn` expressions/Expression.md[expression] and `windowDuration`, `slideDuration`, `startTime` <<getIntervalInMicroSeconds, microseconds>>.
 
-NOTE: `apply` is used exclusively in link:spark-sql-functions-datetime.adoc#window[window] function.
+NOTE: `apply` is used exclusively in spark-sql-functions-datetime.md#window[window] function.
 
 === [[getIntervalInMicroSeconds]] Parsing Time Interval to Microseconds -- `getIntervalInMicroSeconds` Internal Method
 

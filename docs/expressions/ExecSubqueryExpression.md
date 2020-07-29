@@ -2,7 +2,7 @@ title: ExecSubqueryExpression
 
 # ExecSubqueryExpression -- Catalyst Expressions with SubqueryExec Physical Operators
 
-`ExecSubqueryExpression` is the <<contract, contract>> for link:spark-sql-Expression-PlanExpression.adoc[Catalyst expressions that contain a physical plan] with link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] physical operator (i.e. `PlanExpression[SubqueryExec]`).
+`ExecSubqueryExpression` is the <<contract, contract>> for spark-sql-Expression-PlanExpression.md[Catalyst expressions that contain a physical plan] with spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] physical operator (i.e. `PlanExpression[SubqueryExec]`).
 
 [[contract]]
 [source, scala]
@@ -21,7 +21,7 @@ abstract class ExecSubqueryExpression extends PlanExpression[SubqueryExec] {
 | Description
 
 | `updateResult`
-| [[updateResult]] Used exclusively when a link:SparkPlan.md[physical operator] is requested to link:SparkPlan.md#waitForSubqueries[waitForSubqueries] (when link:SparkPlan.md#execute[executed] as part of link:SparkPlan.md#Physical-Operator-Execution-Pipeline[Physical Operator Execution Pipeline]).
+| [[updateResult]] Used exclusively when a SparkPlan.md[physical operator] is requested to SparkPlan.md#waitForSubqueries[waitForSubqueries] (when SparkPlan.md#execute[executed] as part of SparkPlan.md#Physical-Operator-Execution-Pipeline[Physical Operator Execution Pipeline]).
 |===
 
 [[implementations]]
@@ -31,9 +31,9 @@ abstract class ExecSubqueryExpression extends PlanExpression[SubqueryExec] {
 | ExecSubqueryExpression
 | Description
 
-| [[InSubquery]] link:spark-sql-Expression-InSubquery.adoc[InSubquery]
+| [[InSubquery]] spark-sql-Expression-InSubquery.md[InSubquery]
 |
 
-| [[ScalarSubquery]] link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery]
+| [[ScalarSubquery]] spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery]
 |
 |===

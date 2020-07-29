@@ -2,18 +2,18 @@ title: HashAggregateExec
 
 # HashAggregateExec Aggregate Physical Operator for Hash-Based Aggregation
 
-`HashAggregateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>>) when:
+`HashAggregateExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
 
-* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator
+* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator
 
-* Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operators
+* Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operators
 
 !!! note
     `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 
-`HashAggregateExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
+`HashAggregateExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
 
-`HashAggregateExec` uses <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>> (to iterate over `UnsafeRows` in partitions) when <<doExecute, executed>>.
+`HashAggregateExec` uses <<spark-sql-TungstenAggregationIterator.md#, TungstenAggregationIterator>> (to iterate over `UnsafeRows` in partitions) when <<doExecute, executed>>.
 
 [source, scala]
 ----
@@ -83,11 +83,11 @@ scala> println(hashAggExecRDD.toDebugString)
 | avg hash probe
 a| [[avgHashProbe]] Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
-NOTE: `numProbes` and `numKeyLookups` are used in link:spark-sql-BytesToBytesMap.adoc[BytesToBytesMap] append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
+NOTE: `numProbes` and `numKeyLookups` are used in spark-sql-BytesToBytesMap.md[BytesToBytesMap] append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
 
 | `numOutputRows`
 | number of output rows
-a| [[numOutputRows]] Number of groups (per partition) that (depending on the number of partitions and the side of link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec] operator) is the number of groups
+a| [[numOutputRows]] Number of groups (per partition) that (depending on the number of partitions and the side of spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] operator) is the number of groups
 
 * `0` for no input with a grouping expression, e.g. `spark.range(0).groupBy($"id").count.show`
 
@@ -130,7 +130,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 | Description
 
 | [[output]] `output`
-| link:catalyst/QueryPlan.md#output[Output schema] for the input <<resultExpressions, NamedExpressions>>
+| catalyst/QueryPlan.md#output[Output schema] for the input <<resultExpressions, NamedExpressions>>
 |===
 
 [[requiredChildDistribution]]
@@ -143,18 +143,18 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 | Distribution
 
 | Defined, but empty
-| link:spark-sql-Distribution-AllTuples.adoc[AllTuples]
+| spark-sql-Distribution-AllTuples.md[AllTuples]
 
 | Non-empty
-| link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution] for `exprs`
+| spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution] for `exprs`
 
 | Undefined (`None`)
-| link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 |===
 
 [NOTE]
 ====
-`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>> and is undefined by default.
+`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>> and is undefined by default.
 
 ---
 
@@ -171,7 +171,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 *FIXME* for the following two cases in aggregation with one distinct.
 ====
 
-NOTE: The prefix for variable names for `HashAggregateExec` operators in link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code is *agg*.
+NOTE: The prefix for variable names for `HashAggregateExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *agg*.
 
 [[internal-registries]]
 .HashAggregateExec's Internal Properties (e.g. Registries, Counters and Flags)
@@ -181,29 +181,29 @@ NOTE: The prefix for variable names for `HashAggregateExec` operators in link:sp
 | Description
 
 | aggregateBufferAttributes
-| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.adoc#aggBufferAttributes, AttributeReferences>> of the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>
+| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, AttributeReferences>> of the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>
 
 | testFallbackStartsAt
 | [[testFallbackStartsAt]] Optional pair of numbers for controlled fall-back to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
 
 | declFunctions
-| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.adoc#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
+| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
 
 | bufferSchema
-| [[bufferSchema]] <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
+| [[bufferSchema]] <<spark-sql-StructType.md#fromAttributes, StructType>> built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
 
 | groupingKeySchema
-| [[groupingKeySchema]] <<spark-sql-StructType.adoc#fromAttributes, StructType>> built from the <<groupingAttributes, groupingAttributes>>
+| [[groupingKeySchema]] <<spark-sql-StructType.md#fromAttributes, StructType>> built from the <<groupingAttributes, groupingAttributes>>
 
 | groupingAttributes
-| [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.adoc#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
+| [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
 |===
 
 [NOTE]
 ====
-`HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) link:spark-sql-TungstenAggregationIterator.adoc#switchToSortBasedAggregation[switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory].
+`HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) spark-sql-TungstenAggregationIterator.md#switchToSortBasedAggregation[switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory].
 
-See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and link:spark-sql-properties.adoc#spark.sql.TungstenAggregate.testFallbackStartsAt[spark.sql.TungstenAggregate.testFallbackStartsAt] Spark property.
+See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and spark-sql-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt[spark.sql.TungstenAggregate.testFallbackStartsAt] Spark property.
 
 Search logs for the following INFO message to know whether the switch has happened.
 
@@ -257,7 +257,7 @@ NOTE: `doConsumeWithoutKeys` is used exclusively when `HashAggregateExec` is req
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume` executes <<doConsumeWithoutKeys, doConsumeWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doConsumeWithKeys, doConsumeWithKeys>> otherwise.
 
@@ -301,13 +301,13 @@ NOTE: `generateResultFunction` is used exclusively when `HashAggregateExec` phys
 supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 ----
 
-`supportsAggregate` firstly <<spark-sql-StructType.adoc#fromAttributes, creates the schema>> (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses link:spark-sql-UnsafeRow.adoc#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an link:spark-sql-UnsafeRow.adoc[UnsafeRow]).
+`supportsAggregate` firstly <<spark-sql-StructType.md#fromAttributes, creates the schema>> (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses spark-sql-UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an spark-sql-UnsafeRow.md[UnsafeRow]).
 
 [NOTE]
 ====
 `supportsAggregate` is used when:
 
-* `AggUtils` is requested to <<spark-sql-AggUtils.adoc#createAggregate, creates an aggregate physical operator given aggregate expressions>>
+* `AggUtils` is requested to <<spark-sql-AggUtils.md#createAggregate, creates an aggregate physical operator given aggregate expressions>>
 
 * `HashAggregateExec` physical operator is <<creating-instance, created>> (to assert that the <<aggregateBufferAttributes, aggregateBufferAttributes>> are supported)
 ====
@@ -319,7 +319,7 @@ supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndex` that creates another RDD):
 
@@ -329,9 +329,9 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 
 .. If there is no input (an empty partition), but there are <<groupingExpressions, grouping keys>> used, `doExecute` simply returns an empty iterator
 
-.. Otherwise, `doExecute` creates a <<spark-sql-TungstenAggregationIterator.adoc#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
+.. Otherwise, `doExecute` creates a <<spark-sql-TungstenAggregationIterator.md#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
 
-For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
+For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
 
 For non-empty partitions or there are <<groupingExpressions, grouping keys>> used, `doExecute` returns the `TungstenAggregationIterator`.
 
@@ -339,11 +339,11 @@ In the end, `doExecute` calculates the <<aggTime, aggTime>> metric and returns a
 
 * Empty
 
-* A single-element `Iterator[UnsafeRow]` with the <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
+* A single-element `Iterator[UnsafeRow]` with the <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
 
-* The <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>>
+* The <<spark-sql-TungstenAggregationIterator.md#, TungstenAggregationIterator>>
 
-NOTE: The <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics are used exclusively to create the <<spark-sql-TungstenAggregationIterator.adoc#, TungstenAggregationIterator>>.
+NOTE: The <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics are used exclusively to create the <<spark-sql-TungstenAggregationIterator.md#, TungstenAggregationIterator>>.
 
 [NOTE]
 ====
@@ -384,7 +384,7 @@ scala> println(rdd.toDebugString)
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce` executes <<doProduceWithoutKeys, doProduceWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doProduceWithKeys, doProduceWithKeys>> otherwise.
 
@@ -392,13 +392,13 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 
 `HashAggregateExec` takes the following when created:
 
-* [[requiredChildDistributionExpressions]] Required child distribution link:expressions/Expression.md[expressions]
-* [[groupingExpressions]] link:spark-sql-Expression-NamedExpression.adoc[Named expressions] for grouping keys
+* [[requiredChildDistributionExpressions]] Required child distribution expressions/Expression.md[expressions]
+* [[groupingExpressions]] spark-sql-Expression-NamedExpression.md[Named expressions] for grouping keys
 * [[aggregateExpressions]] [AggregateExpressions](../expressions/AggregateExpression.md)
-* [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[child]] Child link:SparkPlan.md[physical plan]
+* [[resultExpressions]] Output spark-sql-Expression-NamedExpression.md[named expressions]
+* [[child]] Child SparkPlan.md[physical plan]
 
 `HashAggregateExec` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -409,6 +409,6 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 createHashMap(): UnsafeFixedWidthAggregationMap
 ----
 
-`createHashMap` creates a <<spark-sql-UnsafeFixedWidthAggregationMap.adoc#creating-instance, UnsafeFixedWidthAggregationMap>> (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
+`createHashMap` creates a <<spark-sql-UnsafeFixedWidthAggregationMap.md#creating-instance, UnsafeFixedWidthAggregationMap>> (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
 NOTE: `createHashMap` is used exclusively when `HashAggregateExec` physical operator is requested to <<doProduceWithKeys, generate the Java source code for "produce" path (in Whole-Stage Code Generation)>>.

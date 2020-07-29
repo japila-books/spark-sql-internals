@@ -29,13 +29,13 @@
 
 `UnboundedWindowFunctionFrame` is a <<WindowFunctionFrame, WindowFunctionFrame>> that gives the same value for every row in a partition.
 
-`UnboundedWindowFunctionFrame` is <<UnboundedWindowFunctionFrame-creating-instance, created>> for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunctions] with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the link:spark-sql-SparkPlan-WindowExec.adoc#entire-partition-frame[entire partition frame].
+`UnboundedWindowFunctionFrame` is <<UnboundedWindowFunctionFrame-creating-instance, created>> for spark-sql-Expression-AggregateFunction.md[AggregateFunctions] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunctions] with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the spark-sql-SparkPlan-WindowExec.md#entire-partition-frame[entire partition frame].
 
 [[UnboundedWindowFunctionFrame-creating-instance]]
 `UnboundedWindowFunctionFrame` takes the following when created:
 
-* [[UnboundedWindowFunctionFrame-target]] Target link:spark-sql-InternalRow.adoc[InternalRow]
-* [[UnboundedWindowFunctionFrame-processor]] link:spark-sql-AggregateProcessor.adoc[AggregateProcessor]
+* [[UnboundedWindowFunctionFrame-target]] Target spark-sql-InternalRow.md[InternalRow]
+* [[UnboundedWindowFunctionFrame-processor]] spark-sql-AggregateProcessor.md[AggregateProcessor]
 
 ==== [[UnboundedWindowFunctionFrame-prepare]] `prepare` Method
 
@@ -44,11 +44,11 @@
 prepare(rows: ExternalAppendOnlyUnsafeRowArray): Unit
 ----
 
-`prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to link:spark-sql-AggregateProcessor.adoc#initialize[initialize] passing in the number of `UnsafeRows` in the input `ExternalAppendOnlyUnsafeRowArray`.
+`prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#initialize[initialize] passing in the number of `UnsafeRows` in the input `ExternalAppendOnlyUnsafeRowArray`.
 
-`prepare` then requests `ExternalAppendOnlyUnsafeRowArray` to link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc#generateIterator[generate an interator].
+`prepare` then requests `ExternalAppendOnlyUnsafeRowArray` to spark-sql-ExternalAppendOnlyUnsafeRowArray.md#generateIterator[generate an interator].
 
-In the end, `prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to link:spark-sql-AggregateProcessor.adoc#update[update] passing in every `UnsafeRow` in the iterator one at a time.
+In the end, `prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#update[update] passing in every `UnsafeRow` in the iterator one at a time.
 
 ==== [[UnboundedWindowFunctionFrame-write]] `write` Method
 
@@ -57,7 +57,7 @@ In the end, `prepare` requests <<UnboundedWindowFunctionFrame-processor, Aggrega
 write(index: Int, current: InternalRow): Unit
 ----
 
-`write` simply requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to link:spark-sql-AggregateProcessor.adoc#evaluate[evaluate] the <<UnboundedWindowFunctionFrame-target, target InternalRow>>.
+`write` simply requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#evaluate[evaluate] the <<UnboundedWindowFunctionFrame-target, target InternalRow>>.
 
 === [[contract]] WindowFunctionFrame Contract
 
@@ -80,8 +80,8 @@ NOTE: `WindowFunctionFrame` is a `private[window]` contract.
 | Description
 
 | [[prepare]] `prepare`
-| Used exclusively when `WindowExec` operator link:spark-sql-SparkPlan-WindowExec.adoc#fetchNextPartition[fetches all UnsafeRows for a partition] (passing in link:spark-sql-ExternalAppendOnlyUnsafeRowArray.adoc[ExternalAppendOnlyUnsafeRowArray] with all `UnsafeRows`).
+| Used exclusively when `WindowExec` operator spark-sql-SparkPlan-WindowExec.md#fetchNextPartition[fetches all UnsafeRows for a partition] (passing in spark-sql-ExternalAppendOnlyUnsafeRowArray.md[ExternalAppendOnlyUnsafeRowArray] with all `UnsafeRows`).
 
 | [[write]] `write`
-| Used exclusively when the link:spark-sql-SparkPlan-WindowExec.adoc#iterator[Iterator[InternalRow\]] (from link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executing] `WindowExec`) is link:spark-sql-SparkPlan-WindowExec.adoc#next[requested a next row].
+| Used exclusively when the spark-sql-SparkPlan-WindowExec.md#iterator[Iterator[InternalRow\]] (from spark-sql-SparkPlan-WindowExec.md#doExecute[executing] `WindowExec`) is spark-sql-SparkPlan-WindowExec.md#next[requested a next row].
 |===

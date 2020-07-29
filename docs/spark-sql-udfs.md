@@ -1,16 +1,16 @@
 # User-Defined Functions
 
-*User-Defined Functions* (aka *UDF*) is a feature of Spark SQL to define new link:spark-sql-Column.adoc[Column]-based functions that extend the vocabulary of Spark SQL's DSL for transforming link:spark-sql-Dataset.adoc[Datasets].
+*User-Defined Functions* (aka *UDF*) is a feature of Spark SQL to define new spark-sql-Column.md[Column]-based functions that extend the vocabulary of Spark SQL's DSL for transforming spark-sql-Dataset.md[Datasets].
 
 [IMPORTANT]
 ====
-Use the link:spark-sql-functions.adoc[higher-level standard Column-based functions] (with link:spark-sql-Dataset.adoc[Dataset operators]) whenever possible before reverting to developing user-defined functions since link:spark-sql-udfs-blackbox.adoc[UDFs are a blackbox] for Spark SQL and it cannot (and does not even try to) optimize them.
+Use the spark-sql-functions.md[higher-level standard Column-based functions] (with spark-sql-Dataset.md[Dataset operators]) whenever possible before reverting to developing user-defined functions since spark-sql-udfs-blackbox.md[UDFs are a blackbox] for Spark SQL and it cannot (and does not even try to) optimize them.
 
 As Reynold Xin from the Apache Spark project has once said on Spark's dev mailing list:
 
 > There are simple cases in which we can analyze the UDFs byte code and infer what it is doing, but it is pretty difficult to do in general.
 
-Check out link:spark-sql-udfs-blackbox.adoc[UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice] if you want to know the internals.
+Check out spark-sql-udfs-blackbox.md[UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice] if you want to know the internals.
 ====
 
 You define a new UDF by defining a Scala function as an input parameter of <<udf-function, `udf` function>>. It accepts Scala functions of up to 10 input parameters.
@@ -37,7 +37,7 @@ scala> dataset.withColumn("upper", upperUDF('text)).show
 +---+-----+-----+
 ```
 
-You can register UDFs to use in link:SparkSession.md#sql[SQL-based query expressions] via link:spark-sql-UDFRegistration.adoc[UDFRegistration] (that is available through link:SparkSession.md#udf[`SparkSession.udf` attribute]).
+You can register UDFs to use in SparkSession.md#sql[SQL-based query expressions] via spark-sql-UDFRegistration.md[UDFRegistration] (that is available through SparkSession.md#udf[`SparkSession.udf` attribute]).
 
 [source, scala]
 ----
@@ -45,7 +45,7 @@ val spark: SparkSession = ...
 scala> spark.udf.register("myUpper", (input: String) => input.toUpperCase)
 ----
 
-You can query for available link:spark-sql-functions.adoc[standard] and user-defined functions using the link:spark-sql-Catalog.adoc[Catalog] interface (that is available through link:SparkSession.md#catalog[`SparkSession.catalog` attribute]).
+You can query for available spark-sql-functions.md[standard] and user-defined functions using the spark-sql-Catalog.md[Catalog] interface (that is available through SparkSession.md#catalog[`SparkSession.catalog` attribute]).
 
 [source, scala]
 ----
@@ -59,7 +59,7 @@ scala> spark.catalog.listFunctions.filter('name like "%upper%").show(false)
 +-------+--------+-----------+-----------------------------------------------+-----------+
 ----
 
-NOTE: UDFs play a vital role in Spark MLlib to define new link:spark-mllib/spark-mllib-transformers.adoc[Transformers] that are function objects that transform `DataFrames` into `DataFrames` by introducing new columns.
+NOTE: UDFs play a vital role in Spark MLlib to define new spark-mllib/spark-mllib-transformers.md[Transformers] that are function objects that transform `DataFrames` into `DataFrames` by introducing new columns.
 
 === [[udf-function]] udf Functions (in functions object)
 
@@ -107,4 +107,4 @@ scala> df.withColumn("upper", upperUDF('text)).show
 +---+-----+-----+
 ```
 
-TIP: Define custom UDFs based on "standalone" Scala functions (e.g. `toUpperUDF`) so you can test the Scala functions using Scala way (without Spark SQL's "noise") and once they are defined reuse the UDFs in link:spark-mllib/spark-mllib-transformers.adoc#UnaryTransformer[UnaryTransformers].
+TIP: Define custom UDFs based on "standalone" Scala functions (e.g. `toUpperUDF`) so you can test the Scala functions using Scala way (without Spark SQL's "noise") and once they are defined reuse the UDFs in spark-mllib/spark-mllib-transformers.md#UnaryTransformer[UnaryTransformers].

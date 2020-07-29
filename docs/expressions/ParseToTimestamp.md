@@ -2,7 +2,7 @@ title: ParseToTimestamp
 
 # ParseToTimestamp Expression
 
-`ParseToTimestamp` is a spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression that <<creating-instance, represents>> the spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp] function (in logical query plans).
+`ParseToTimestamp` is a spark-sql-Expression-RuntimeReplaceable.md[RuntimeReplaceable] expression that <<creating-instance, represents>> the spark-sql-functions-datetime.md#to_timestamp[to_timestamp] function (in logical query plans).
 
 [source, scala]
 ----

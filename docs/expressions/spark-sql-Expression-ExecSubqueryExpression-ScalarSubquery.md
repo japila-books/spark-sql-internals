@@ -2,11 +2,11 @@ title: ScalarSubquery
 
 # ScalarSubquery (ExecSubqueryExpression) Expression
 
-`ScalarSubquery` is an link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
+`ScalarSubquery` is an spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression] that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
 
-IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[SubqueryExpression]. It _is_ confusing and you should _not_ be anymore.
+IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[SubqueryExpression]. It _is_ confusing and you should _not_ be anymore.
 
-`ScalarSubquery` is <<creating-instance, created>> exclusively when `PlanSubqueries` physical optimization is link:spark-sql-PlanSubqueries.adoc#apply[executed] (and plans a link:spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc[ScalarSubquery] expression).
+`ScalarSubquery` is <<creating-instance, created>> exclusively when `PlanSubqueries` physical optimization is spark-sql-PlanSubqueries.md#apply[executed] (and plans a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery] expression).
 
 [source, scala]
 ----
@@ -19,7 +19,7 @@ val executedPlan = planSubqueries(plan)
 ----
 
 [[Unevaluable]]
-`ScalarSubquery` expression link:expressions/Expression.md#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
+`ScalarSubquery` expression expressions/Expression.md#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
 
 [[dataType]]
 `ScalarSubquery` uses...FIXME...for the <<expressions/Expression.md#dataType, data type>>.
@@ -42,7 +42,7 @@ val executedPlan = planSubqueries(plan)
 
 `ScalarSubquery` takes the following when created:
 
-* [[plan]] link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] plan
+* [[plan]] spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] plan
 * [[exprId]] Expression ID (as `ExprId`)
 
 === [[updateResult]] Updating ScalarSubquery With Collected Result -- `updateResult` Method
@@ -52,9 +52,9 @@ val executedPlan = planSubqueries(plan)
 updateResult(): Unit
 ----
 
-NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to fill an Catalyst expression with a collected result from executing a subquery plan.
+NOTE: `updateResult` is part of spark-sql-Expression-ExecSubqueryExpression.md#updateResult[ExecSubqueryExpression Contract] to fill an Catalyst expression with a collected result from executing a subquery plan.
 
-`updateResult` requests <<plan, SubqueryExec>> physical plan to link:spark-sql-SparkPlan-SubqueryExec.adoc#executeCollect[execute and collect internal rows].
+`updateResult` requests <<plan, SubqueryExec>> physical plan to spark-sql-SparkPlan-SubqueryExec.md#executeCollect[execute and collect internal rows].
 
 `updateResult` sets <<result, result>> to the value of the only column of the single row or `null` if no row were collected.
 
@@ -80,7 +80,7 @@ Expects 1 field, but got [numFields] something went wrong in analysis
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
 `eval` simply returns <<result, result>> value.
 
@@ -101,4 +101,4 @@ NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression C
 requirement failed: [this] has not finished
 ```
 
-`doGenCode` then creates a <<spark-sql-Expression-Literal.adoc#create, Literal>> (for the <<result, result>> and the <<dataType, dataType>>) and simply requests it to <<spark-sql-Expression-Literal.adoc#doGenCode, generate a Java source code>>.
+`doGenCode` then creates a <<spark-sql-Expression-Literal.md#create, Literal>> (for the <<result, result>> and the <<dataType, dataType>>) and simply requests it to <<spark-sql-Expression-Literal.md#doGenCode, generate a Java source code>>.

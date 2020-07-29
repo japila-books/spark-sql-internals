@@ -13,7 +13,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.FileFormatWriter=ALL
 ```
 
-Refer to <<spark-logging.adoc#, Logging>>.
+Refer to <<spark-logging.md#, Logging>>.
 ====
 
 === [[write]] Writing Result of Structured Query (Query Result) -- `write` Method
@@ -42,19 +42,19 @@ write(
 `write` sets the output directory (for the map-reduce job) to be the `outputPath` of the given `OutputSpec`.
 
 [[write-outputWriterFactory]]
-`write` requests the given `FileFormat` to <<spark-sql-FileFormat.adoc#prepareWrite, prepareWrite>>.
+`write` requests the given `FileFormat` to <<spark-sql-FileFormat.md#prepareWrite, prepareWrite>>.
 
 [[write-description]]
 `write` creates a `WriteJobDescription` with the following:
 
-* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or <<spark-sql-properties.adoc#spark.sql.files.maxRecordsPerFile, spark.sql.files.maxRecordsPerFile>>
+* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or <<spark-sql-properties.md#spark.sql.files.maxRecordsPerFile, spark.sql.files.maxRecordsPerFile>>
 
-* `timeZoneId` based on the `timeZone` option (from the given options) if available or <<spark-sql-properties.adoc#spark.sql.session.timeZone, spark.sql.session.timeZone>>
+* `timeZoneId` based on the `timeZone` option (from the given options) if available or <<spark-sql-properties.md#spark.sql.session.timeZone, spark.sql.session.timeZone>>
 
 `write` requests the given `FileCommitProtocol` committer to `setupJob`.
 
 [[write-rdd]]
-`write` executes the given <<SparkPlan.md#, SparkPlan>> (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> physical operator (with `global` flag off).
+`write` executes the given <<SparkPlan.md#, SparkPlan>> (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses <<spark-sql-SparkPlan-SortExec.md#, SortExec>> physical operator (with `global` flag off).
 
 [[write-runJob]]
 `write` runs a Spark job (action) on the <<write-rdd, RDD>> with <<executeTask, executeTask>> as the partition function. The result task handler simply requests the given `FileCommitProtocol` committer to `onTaskCommit` (with the `TaskCommitMessage` of a `WriteTaskResult`) and saves the `WriteTaskResult`.
@@ -83,9 +83,9 @@ In the end, `write` returns all the partition paths that were updated during thi
 ====
 `write` is used when:
 
-* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
-* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.adoc#saveAsHiveFile, saveAsHiveFile>> (when link:hive/InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed)
+* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>> (when hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed)
 
 * Structured Streaming's `FileStreamSink` is requested to add a streaming batch (`addBatch`)
 ====

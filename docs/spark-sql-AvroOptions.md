@@ -2,7 +2,7 @@ title: Options
 
 # AvroOptions -- Avro Data Source Options
 
-`AvroOptions` represents the <<options, options>> of the <<spark-sql-avro.adoc#, Avro data source>>.
+`AvroOptions` represents the <<options, options>> of the <<spark-sql-avro.md#, Avro data source>>.
 
 [[options]]
 .Options for Avro Data Source
@@ -20,7 +20,7 @@ title: Options
 | (undefined)
 a| [[compression]] Specifies the compression codec to use when writing Avro data to disk
 
-NOTE: If the option is not defined explicitly, Avro data source uses <<spark-sql-properties.adoc#spark.sql.avro.compression.codec, spark.sql.avro.compression.codec>> configuration property.
+NOTE: If the option is not defined explicitly, Avro data source uses <<spark-sql-properties.md#spark.sql.avro.compression.codec, spark.sql.avro.compression.codec>> configuration property.
 
 | ignoreExtension
 | `false`
@@ -45,7 +45,7 @@ Consult https://avro.apache.org/docs/1.8.2/spec.html#schema_record[Apache Avroâ„
 
 NOTE: The <<options, options>> are case-insensitive.
 
-`AvroOptions` is <<creating-instance, created>> when `AvroFileFormat` is requested to <<spark-sql-AvroFileFormat.adoc#inferSchema, inferSchema>>, <<spark-sql-AvroFileFormat.adoc#prepareWrite, prepareWrite>> and <<spark-sql-AvroFileFormat.adoc#buildReader, buildReader>>.
+`AvroOptions` is <<creating-instance, created>> when `AvroFileFormat` is requested to <<spark-sql-AvroFileFormat.md#inferSchema, inferSchema>>, <<spark-sql-AvroFileFormat.md#prepareWrite, prepareWrite>> and <<spark-sql-AvroFileFormat.md#buildReader, buildReader>>.
 
 === [[creating-instance]] Creating AvroOptions Instance
 

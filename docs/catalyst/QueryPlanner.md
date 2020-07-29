@@ -1,6 +1,6 @@
 # QueryPlanner -- Converting Logical Plan to Physical Trees
 
-`QueryPlanner` <<plan, plans a logical plan for execution>>, i.e. converts a link:spark-sql-LogicalPlan.adoc[logical plan] to one or more link:SparkPlan.md[physical plans] using <<strategies, strategies>>.
+`QueryPlanner` <<plan, plans a logical plan for execution>>, i.e. converts a spark-sql-LogicalPlan.md[logical plan] to one or more SparkPlan.md[physical plans] using <<strategies, strategies>>.
 
 NOTE: `QueryPlanner` <<plan, generates>> at least one physical plan.
 
@@ -26,16 +26,16 @@ abstract class QueryPlanner[PhysicalPlan <: TreeNode[PhysicalPlan]] {
 | Description
 
 | [[strategies]] `strategies`
-| Collection of link:catalyst/GenericStrategy.md[GenericStrategy] planning strategies.
+| Collection of catalyst/GenericStrategy.md[GenericStrategy] planning strategies.
 
 Used exclusively as an extension point in <<plan, plan>>.
 
 | [[collectPlaceholders]] `collectPlaceholders`
-| Collection of "placeholder" physical plans and the corresponding link:spark-sql-LogicalPlan.adoc[logical plans].
+| Collection of "placeholder" physical plans and the corresponding spark-sql-LogicalPlan.md[logical plans].
 
 Used exclusively as an extension point in <<plan, plan>>.
 
-Overriden in link:spark-sql-SparkPlanner.adoc#collectPlaceholders[SparkPlanner]
+Overriden in spark-sql-SparkPlanner.md#collectPlaceholders[SparkPlanner]
 
 | [[prunePlans]] `prunePlans`
 | Prunes physical plans (e.g. bad or somehow incorrect plans).
@@ -50,14 +50,14 @@ Used exclusively as an extension point in <<plan, plan>>.
 plan(plan: LogicalPlan): Iterator[PhysicalPlan]
 ----
 
-`plan` converts the input `plan` link:spark-sql-LogicalPlan.adoc[logical plan] to zero or more `PhysicalPlan` plans.
+`plan` converts the input `plan` spark-sql-LogicalPlan.md[logical plan] to zero or more `PhysicalPlan` plans.
 
 Internally, `plan` applies <<strategies, planning strategies>> to the input `plan` (one by one collecting all as the plan candidates).
 
 `plan` then walks over the plan candidates to <<collectPlaceholders, collect placeholders>>.
 
-If a plan does not contain a placeholder, the plan is returned as is. Otherwise, `plan` walks over placeholders (as pairs of `PhysicalPlan` and unplanned link:spark-sql-LogicalPlan.adoc[logical plan]) and (recursively) <<plan, plans>> the child logical plan. `plan` then replaces the placeholders with the planned child logical plan.
+If a plan does not contain a placeholder, the plan is returned as is. Otherwise, `plan` walks over placeholders (as pairs of `PhysicalPlan` and unplanned spark-sql-LogicalPlan.md[logical plan]) and (recursively) <<plan, plans>> the child logical plan. `plan` then replaces the placeholders with the planned child logical plan.
 
 In the end, `plan` <<prunePlans, prunes "bad" physical plans>>.
 
-NOTE: `plan` is used exclusively (through the concrete link:spark-sql-SparkPlanner.adoc[SparkPlanner]) when a `QueryExecution` link:spark-sql-QueryExecution.adoc#sparkPlan[is requested for a physical plan].
+NOTE: `plan` is used exclusively (through the concrete spark-sql-SparkPlanner.md[SparkPlanner]) when a `QueryExecution` spark-sql-QueryExecution.md#sparkPlan[is requested for a physical plan].

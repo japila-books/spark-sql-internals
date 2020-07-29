@@ -1,17 +1,17 @@
 # VectorizedParquetRecordReader
 
-`VectorizedParquetRecordReader` is a concrete link:spark-sql-SpecificParquetRecordReaderBase.adoc[SpecificParquetRecordReaderBase] for <<spark-sql-ParquetFileFormat.adoc#, parquet>> file format for <<spark-sql-vectorized-parquet-reader.adoc#, Vectorized Parquet Decoding>>.
+`VectorizedParquetRecordReader` is a concrete spark-sql-SpecificParquetRecordReaderBase.md[SpecificParquetRecordReaderBase] for <<spark-sql-ParquetFileFormat.md#, parquet>> file format for <<spark-sql-vectorized-parquet-reader.md#, Vectorized Parquet Decoding>>.
 
-`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[data reader] (with link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] property enabled and the read schema with link:spark-sql-DataType.adoc#AtomicType[AtomicType] data types only).
+`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[data reader] (with spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] property enabled and the read schema with spark-sql-DataType.md#AtomicType[AtomicType] data types only).
 
-NOTE: link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (`true`) by default.
+NOTE: spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (`true`) by default.
 
 [[creating-instance]]
 `VectorizedParquetRecordReader` takes the following to be created:
 
 * [[convertTz]] `TimeZone` (`null` when no timezone conversion is expected)
-* [[useOffHeap]] `useOffHeap` flag (per <<spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property)
-* [[capacity]] Capacity (per <<spark-sql-properties.adoc#spark.sql.parquet.columnarReaderBatchSize, spark.sql.parquet.columnarReaderBatchSize>> property)
+* [[useOffHeap]] `useOffHeap` flag (per <<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property)
+* [[capacity]] Capacity (per <<spark-sql-properties.md#spark.sql.parquet.columnarReaderBatchSize, spark.sql.parquet.columnarReaderBatchSize>> property)
 
 `VectorizedParquetRecordReader` uses the <<capacity, capacity>> attribute for the following:
 
@@ -19,9 +19,9 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.parquet.enableVectorizedReader[sp
 
 * Controlling <<rowsReturned, number of rows>> when <<nextBatch, nextBatch>>
 
-`VectorizedParquetRecordReader` uses <<OFF_HEAP, OFF_HEAP>> memory mode when link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property is enabled (`true`).
+`VectorizedParquetRecordReader` uses <<OFF_HEAP, OFF_HEAP>> memory mode when spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property is enabled (`true`).
 
-NOTE: link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property is disabled (`false`) by default.
+NOTE: spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property is disabled (`false`) by default.
 
 [[internal-registries]]
 .VectorizedParquetRecordReader's Internal Properties (e.g. Registries, Counters and Flags)
@@ -40,10 +40,10 @@ Increments every <<nextKeyValue, nextKeyValue>>
 Reset to `0` when <<nextBatch, reading next rows into a columnar batch>>
 
 | columnarBatch
-| [[columnarBatch]] <<spark-sql-ColumnarBatch.adoc#, ColumnarBatch>>
+| [[columnarBatch]] <<spark-sql-ColumnarBatch.md#, ColumnarBatch>>
 
 | columnReaders
-| [[columnReaders]] <<spark-sql-VectorizedColumnReader.adoc#, VectorizedColumnReaders>> (one reader per column) to <<nextBatch, read rows as batches>>
+| [[columnReaders]] <<spark-sql-VectorizedColumnReader.md#, VectorizedColumnReaders>> (one reader per column) to <<nextBatch, read rows as batches>>
 
 Intialized when <<checkEndOfRowGroup, checkEndOfRowGroup>> (when requested to <<nextBatch, read next rows into a columnar batch>>)
 
@@ -53,7 +53,7 @@ Intialized when <<checkEndOfRowGroup, checkEndOfRowGroup>> (when requested to <<
 | MEMORY_MODE
 a| [[MEMORY_MODE]] Memory mode of the <<columnarBatch, ColumnarBatch>>
 
-* [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as per link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property)
+* [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as per spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property)
 * [[ON_HEAP]] `ON_HEAP`
 
 Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatch, initBatch>>.
@@ -101,7 +101,7 @@ NOTE: `nextKeyValue` is part of Hadoop's https://hadoop.apache.org/docs/r2.7.4/a
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested to <<spark-sql-RecordReaderIterator.adoc#hasNext, check whether or not there are more internal rows>>
+* `RecordReaderIterator` is requested to <<spark-sql-RecordReaderIterator.md#hasNext, check whether or not there are more internal rows>>
 ====
 
 === [[resultBatch]] `resultBatch` Method
@@ -122,7 +122,7 @@ NOTE: `resultBatch` is used exclusively when `VectorizedParquetRecordReader` is 
 void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext)
 ----
 
-NOTE: `initialize` is part of link:spark-sql-SpecificParquetRecordReaderBase.adoc#initialize[SpecificParquetRecordReaderBase Contract] to...FIXME.
+NOTE: `initialize` is part of spark-sql-SpecificParquetRecordReaderBase.md#initialize[SpecificParquetRecordReaderBase Contract] to...FIXME.
 
 `initialize`...FIXME
 
@@ -135,7 +135,7 @@ void enableReturningBatches()
 
 `enableReturningBatches` simply turns <<returnColumnarBatch, returnColumnarBatch>> internal flag on.
 
-NOTE: `enableReturningBatches` is used exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, data reader>> (for <<spark-sql-ParquetFileFormat.adoc#supportBatch, vectorized parquet decoding in whole-stage codegen>>).
+NOTE: `enableReturningBatches` is used exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>> (for <<spark-sql-ParquetFileFormat.md#supportBatch, vectorized parquet decoding in whole-stage codegen>>).
 
 === [[initBatch]] Initializing Columnar Batch -- `initBatch` Method
 
@@ -152,18 +152,18 @@ private void initBatch(
 <1> Uses <<MEMORY_MODE, MEMORY_MODE>>
 <2> Uses <<MEMORY_MODE, MEMORY_MODE>> and no `partitionColumns` and no `partitionValues`
 
-`initBatch` creates the batch link:spark-sql-schema.adoc[schema] that is link:spark-sql-SpecificParquetRecordReaderBase.adoc#sparkSchema[sparkSchema] and the input `partitionColumns` schema.
+`initBatch` creates the batch spark-sql-schema.md[schema] that is spark-sql-SpecificParquetRecordReaderBase.md#sparkSchema[sparkSchema] and the input `partitionColumns` schema.
 
-`initBatch` requests link:spark-sql-OffHeapColumnVector.adoc#allocateColumns[OffHeapColumnVector] or link:spark-sql-OnHeapColumnVector.adoc#allocateColumns[OnHeapColumnVector] to allocate column vectors per the input `memMode`, i.e. <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, respectively. `initBatch` records the allocated column vectors as the internal <<columnVectors, WritableColumnVectors>>.
+`initBatch` requests spark-sql-OffHeapColumnVector.md#allocateColumns[OffHeapColumnVector] or spark-sql-OnHeapColumnVector.md#allocateColumns[OnHeapColumnVector] to allocate column vectors per the input `memMode`, i.e. <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, respectively. `initBatch` records the allocated column vectors as the internal <<columnVectors, WritableColumnVectors>>.
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property controls <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, i.e. `true` or `false`, respectively.
+link:spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property controls <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, i.e. `true` or `false`, respectively.
 
-`spark.sql.columnVector.offheap.enabled` is disabled by default which means that link:spark-sql-OnHeapColumnVector.adoc[OnHeapColumnVector] is used.
+`spark.sql.columnVector.offheap.enabled` is disabled by default which means that spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used.
 ====
 
-`initBatch` creates a link:spark-sql-ColumnarBatch.adoc#creating-instance[ColumnarBatch] (with the <<columnVectors, allocated WritableColumnVectors>>) and records it as the internal <<columnarBatch, ColumnarBatch>>.
+`initBatch` creates a spark-sql-ColumnarBatch.md#creating-instance[ColumnarBatch] (with the <<columnVectors, allocated WritableColumnVectors>>) and records it as the internal <<columnarBatch, ColumnarBatch>>.
 
 `initBatch` creates new slots in the <<columnVectors, allocated WritableColumnVectors>> for the input `partitionColumns` and sets the input `partitionValues` as constants.
 
@@ -175,7 +175,7 @@ link:spark-sql-properties.adoc#spark.sql.columnVector.offheap.enabled[spark.sql.
 
 * `VectorizedParquetRecordReader` is requested for <<resultBatch, resultBatch>>
 
-* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 ====
 
 === [[nextBatch]] Reading Next Rows Into Columnar Batch -- `nextBatch` Method
@@ -187,9 +187,9 @@ boolean nextBatch() throws IOException
 
 `nextBatch` reads at least <<capacity, capacity>> rows and returns `true` when there are rows available. Otherwise, `nextBatch` returns `false` (to "announce" there are no rows available).
 
-Internally, `nextBatch` firstly requests every <<spark-sql-WritableColumnVector.adoc#, WritableColumnVector>> (in the <<columnVectors, columnVectors>> internal registry) to <<spark-sql-WritableColumnVector.adoc#reset, reset itself>>.
+Internally, `nextBatch` firstly requests every <<spark-sql-WritableColumnVector.md#, WritableColumnVector>> (in the <<columnVectors, columnVectors>> internal registry) to <<spark-sql-WritableColumnVector.md#reset, reset itself>>.
 
-`nextBatch` requests the <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.adoc#setNumRows, specify the number of rows (in batch)>> as `0` (effectively resetting the batch and making it available for reuse).
+`nextBatch` requests the <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.md#setNumRows, specify the number of rows (in batch)>> as `0` (effectively resetting the batch and making it available for reuse).
 
 When the <<rowsReturned, rowsReturned>> is greater than the <<totalRowCount, totalRowCount>>, `nextBatch` finishes with (_returns_) `false` (to "announce" there are no rows available).
 
@@ -197,7 +197,7 @@ When the <<rowsReturned, rowsReturned>> is greater than the <<totalRowCount, tot
 
 `nextBatch` calculates the number of rows left to be returned as a minimum of the <<capacity, capacity>> and the <<totalCountLoadedSoFar, totalCountLoadedSoFar>> reduced by the <<rowsReturned, rowsReturned>>.
 
-`nextBatch` requests every <<columnReaders, VectorizedColumnReader>> to <<spark-sql-VectorizedColumnReader.adoc#readBatch, readBatch>> (with the number of rows left to be returned and associated <<columnVectors, WritableColumnVector>>).
+`nextBatch` requests every <<columnReaders, VectorizedColumnReader>> to <<spark-sql-VectorizedColumnReader.md#readBatch, readBatch>> (with the number of rows left to be returned and associated <<columnVectors, WritableColumnVector>>).
 
 NOTE: <<columnReaders, VectorizedColumnReaders>> use their own <<columnVectors, WritableColumnVectors>> for storing values read. The numbers of <<columnReaders, VectorizedColumnReaders>> and <<columnVectors, WritableColumnVector>> are equal.
 
@@ -207,7 +207,7 @@ In the end, `nextBatch` registers the progress as follows:
 
 * The number of rows read is added to the <<rowsReturned, rowsReturned>> counter
 
-* Requests the internal <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.adoc#setNumRows, set the number of rows (in batch)>> to be the number of rows read
+* Requests the internal <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.md#setNumRows, set the number of rows (in batch)>> to be the number of rows read
 
 * The <<numBatched, numBatched>> registry is exactly the number of rows read
 
@@ -237,7 +237,7 @@ Object getCurrentValue()
 
 NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.7.5/api/org/apache/hadoop/mapreduce/RecordReader.html[RecordReader] Contract to break the data into key/value pairs for input to a Hadoop `Mapper`.
 
-`getCurrentValue` returns the entire <<columnarBatch, ColumnarBatch>> with the <<returnColumnarBatch, returnColumnarBatch>> flag enabled (`true`) or requests it for a <<spark-sql-ColumnarBatch.adoc#getRow, single row>> instead.
+`getCurrentValue` returns the entire <<columnarBatch, ColumnarBatch>> with the <<returnColumnarBatch, returnColumnarBatch>> flag enabled (`true`) or requests it for a <<spark-sql-ColumnarBatch.md#getRow, single row>> instead.
 
 [NOTE]
 ====
@@ -245,5 +245,5 @@ NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested for the <<spark-sql-RecordReaderIterator.adoc#next, next internal row>>
+* `RecordReaderIterator` is requested for the <<spark-sql-RecordReaderIterator.md#next, next internal row>>
 ====

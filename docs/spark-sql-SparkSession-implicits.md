@@ -20,10 +20,10 @@ implicit def localSeqToDatasetHolder[T : Encoder](s: Seq[T]): DatasetHolder[T]
 ----
 
 | Encoders
-| [[Encoders]] <<spark-sql-Encoders.adoc#, Encoders>> for primitive and object types in Scala and Java (aka _boxed types_)
+| [[Encoders]] <<spark-sql-Encoders.md#, Encoders>> for primitive and object types in Scala and Java (aka _boxed types_)
 
 | `StringToColumn`
-a| [[StringToColumn]] Converts `$"name"` into a <<spark-sql-Column.adoc#, Column>>
+a| [[StringToColumn]] Converts `$"name"` into a <<spark-sql-Column.md#, Column>>
 
 [source, scala]
 ----
@@ -97,7 +97,7 @@ scala> :imports
 
 `DatasetHolder` is <<creating-instance, created>> (implicitly) when <<rddToDatasetHolder, rddToDatasetHolder>> and <<localSeqToDatasetHolder, localSeqToDatasetHolder>> implicit conversions are used.
 
-`DatasetHolder` has `toDS` and `toDF` methods that simply return the <<ds, Dataset[T]>> (it was created with) or a `DataFrame` (using <<spark-sql-dataset-operators.adoc#toDF, Dataset.toDF>> operator), respectively.
+`DatasetHolder` has `toDS` and `toDF` methods that simply return the <<ds, Dataset[T]>> (it was created with) or a `DataFrame` (using <<spark-sql-dataset-operators.md#toDF, Dataset.toDF>> operator), respectively.
 
 [source, scala]
 ----

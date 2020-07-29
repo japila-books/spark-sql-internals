@@ -13,7 +13,7 @@ title: WindowSpec
 
 * [[frame]] *Frame Specification* (`WindowFrame`) which defines the rows to be included in the frame for the current row, based on their relative position to the current row. For example, _"the three rows preceding the current row to the current row"_ describes a frame including the current input row and three rows appearing before the current row.
 
-You use <<spark-sql-WindowSpec-Window.adoc#, Window object>> to create a `WindowSpec`.
+You use <<spark-sql-WindowSpec-Window.md#, Window object>> to create a `WindowSpec`.
 
 [source, scala]
 ----
@@ -67,7 +67,7 @@ rowsBetween(start: Long, end: Long): WindowSpec
 ----
 |===
 
-With a window specification fully defined, you use <<spark-sql-Column.adoc#over, Column.over>> operator that associates the `WindowSpec` with an <<spark-sql-functions.adoc#aggregate-functions, aggregate>> or <<spark-sql-functions.adoc#window-functions, window>> function.
+With a window specification fully defined, you use <<spark-sql-Column.md#over, Column.over>> operator that associates the `WindowSpec` with an <<spark-sql-functions.md#aggregate-functions, aggregate>> or <<spark-sql-functions.md#window-functions, window>> function.
 
 [source, scala]
 ----
@@ -87,4 +87,4 @@ withAggregate(aggregate: Column): Column
 
 `withAggregate`...FIXME
 
-NOTE: `withAggregate` is used exclusively when <<spark-sql-Column.adoc#over, Column.over>> operator is used.
+NOTE: `withAggregate` is used exclusively when <<spark-sql-Column.md#over, Column.over>> operator is used.

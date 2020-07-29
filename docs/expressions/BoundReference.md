@@ -2,13 +2,13 @@ title: BoundReference
 
 # BoundReference Leaf Expression -- Reference to Value in Internal Binary Row
 
-`BoundReference` is a link:expressions/Expression.md#LeafExpression[leaf expression] that <<eval, evaluates to a value in an internal binary row>> at a specified <<ordinal, position>> and of a given <<dataType, data type>>.
+`BoundReference` is a expressions/Expression.md#LeafExpression[leaf expression] that <<eval, evaluates to a value in an internal binary row>> at a specified <<ordinal, position>> and of a given <<dataType, data type>>.
 
 [[creating-instance]]
 `BoundReference` takes the following when created:
 
 * [[ordinal]] Ordinal, i.e. the position
-* [[dataType]] link:spark-sql-DataType.adoc[Data type] of the value
+* [[dataType]] spark-sql-DataType.md[Data type] of the value
 * [[nullable]] `nullable` flag that controls whether the value can be `null` or not
 
 [source, scala]
@@ -26,7 +26,7 @@ val row = InternalRow(1L, "hello")
 val value = boundRef.eval(row).asInstanceOf[Long]
 ----
 
-You can also create a `BoundReference` using Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#at[at] method.
+You can also create a `BoundReference` using Catalyst DSL's spark-sql-catalyst-dsl.md#at[at] method.
 
 [source, scala]
 ----
@@ -43,9 +43,9 @@ input[4, string, true]
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
-`eval` gives the value at <<ordinal, position>> from the `input` link:spark-sql-InternalRow.adoc[internal binary row] that is of a correct type.
+`eval` gives the value at <<ordinal, position>> from the `input` spark-sql-InternalRow.md[internal binary row] that is of a correct type.
 
 Internally, `eval` returns `null` if the value at the <<ordinal, position>> is `null`.
 
@@ -57,46 +57,46 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 | DataType
 | InternalRow's Method
 
-| link:spark-sql-DataType.adoc#BooleanType[BooleanType]
+| spark-sql-DataType.md#BooleanType[BooleanType]
 | getBoolean
 
-| link:spark-sql-DataType.adoc#ByteType[ByteType]
+| spark-sql-DataType.md#ByteType[ByteType]
 | getByte
 
-| link:spark-sql-DataType.adoc#ShortType[ShortType]
+| spark-sql-DataType.md#ShortType[ShortType]
 | getShort
 
-| link:spark-sql-DataType.adoc#IntegerType[IntegerType] or link:spark-sql-DataType.adoc#DateType[DateType]
+| spark-sql-DataType.md#IntegerType[IntegerType] or spark-sql-DataType.md#DateType[DateType]
 | getInt
 
-| link:spark-sql-DataType.adoc#LongType[LongType] or link:spark-sql-DataType.adoc#TimestampType[TimestampType]
+| spark-sql-DataType.md#LongType[LongType] or spark-sql-DataType.md#TimestampType[TimestampType]
 | getLong
 
-| link:spark-sql-DataType.adoc#FloatType[FloatType]
+| spark-sql-DataType.md#FloatType[FloatType]
 | getFloat
 
-| link:spark-sql-DataType.adoc#DoubleType[DoubleType]
+| spark-sql-DataType.md#DoubleType[DoubleType]
 | getDouble
 
-| link:spark-sql-DataType.adoc#StringType[StringType]
+| spark-sql-DataType.md#StringType[StringType]
 | getUTF8String
 
-| link:spark-sql-DataType.adoc#BinaryType[BinaryType]
+| spark-sql-DataType.md#BinaryType[BinaryType]
 | getBinary
 
-| link:spark-sql-DataType.adoc#CalendarIntervalType[CalendarIntervalType]
+| spark-sql-DataType.md#CalendarIntervalType[CalendarIntervalType]
 | getInterval
 
-| link:spark-sql-DataType.adoc#DecimalType[DecimalType]
+| spark-sql-DataType.md#DecimalType[DecimalType]
 | getDecimal
 
-| link:spark-sql-DataType.adoc#StructType[StructType]
+| spark-sql-DataType.md#StructType[StructType]
 | getStruct
 
-| link:spark-sql-DataType.adoc#ArrayType[ArrayType]
+| spark-sql-DataType.md#ArrayType[ArrayType]
 | getArray
 
-| link:spark-sql-DataType.adoc#MapType[MapType]
+| spark-sql-DataType.md#MapType[MapType]
 | getMap
 
 | _others_

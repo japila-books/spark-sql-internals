@@ -5,12 +5,12 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveTableScanExec` is a link:../SparkPlan.md#LeafExecNode[leaf physical operator] that represents a link:HiveTableRelation.adoc[HiveTableRelation] logical operator at execution time.
+`HiveTableScanExec` is a ../SparkPlan.md#LeafExecNode[leaf physical operator] that represents a HiveTableRelation.md[HiveTableRelation] logical operator at execution time.
 
-`HiveTableScanExec` is <<creating-instance, created>> exclusively when link:HiveTableScans.adoc[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
+`HiveTableScanExec` is <<creating-instance, created>> exclusively when HiveTableScans.md[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
 [[nodeName]]
-`HiveTableScanExec` uses the link:HiveTableRelation.adoc#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the [node name](../catalyst/TreeNode.md#nodeName):
+`HiveTableScanExec` uses the HiveTableRelation.md#tableMeta[fully-qualified name of the Hive table] (of the <<relation, HiveTableRelation>>) for the [node name](../catalyst/TreeNode.md#nodeName):
 
 ```text
 Scan hive [table]
@@ -20,20 +20,20 @@ Scan hive [table]
 
 `HiveTableScanExec` takes the following when created:
 
-* [[requestedAttributes]] Requested link:../spark-sql-Expression-Attribute.adoc[attributes]
-* [[relation]] link:HiveTableRelation.adoc[HiveTableRelation]
+* [[requestedAttributes]] Requested ../spark-sql-Expression-Attribute.md[attributes]
+* [[relation]] HiveTableRelation.md[HiveTableRelation]
 * [[partitionPruningPred]] <<partition-pruning-predicates, Partition pruning predicates>>
-* [[sparkSession]] link:../SparkSession.md[SparkSession]
+* [[sparkSession]] ../SparkSession.md[SparkSession]
 
 `HiveTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[partition-pruning-predicates]] Partition Pruning Predicates
 
-`HiveTableScanExec` physical operator supports *partition pruning* for <<relation, Hive tables>> that are link:HiveTableRelation.adoc#isPartitioned[partitioned].
+`HiveTableScanExec` physical operator supports *partition pruning* for <<relation, Hive tables>> that are HiveTableRelation.md#isPartitioned[partitioned].
 
 `HiveTableScanExec` requires that either the <<partitionPruningPred, partitionPruningPred>> has no expressions or the <<relation, HiveTableRelation>> is partitioned. Otherwise, `HiveTableScanExec` throws an `IllegalArgumentException`.
 
-link:HiveTableScans.adoc[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every link:HiveTableRelation.adoc[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the link:HiveTableRelation.adoc#partitionCols[partition columns] of the `HiveTableRelation`.
+link:HiveTableScans.md[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every HiveTableRelation.md[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the HiveTableRelation.md#partitionCols[partition columns] of the `HiveTableRelation`.
 
 === [[metrics]] Performance Metrics -- `metrics` Method
 
@@ -56,7 +56,7 @@ link:HiveTableScans.adoc[HiveTableScans] execution planning strategy creates a `
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of link:../SparkPlan.md#doExecute[SparkPlan] contract to generate the runtime representation of a structured query as a distributed computation over link:../spark-sql-InternalRow.adoc[internal binary rows] on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of ../SparkPlan.md#doExecute[SparkPlan] contract to generate the runtime representation of a structured query as a distributed computation over ../spark-sql-InternalRow.md[internal binary rows] on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -68,18 +68,18 @@ NOTE: `doExecute` is part of link:../SparkPlan.md#doExecute[SparkPlan] contract 
 | Description
 
 | boundPruningPred
-a| [[boundPruningPred]] Catalyst link:../expressions/Expression.md[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the link:HiveTableRelation.adoc#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
+a| [[boundPruningPred]] Catalyst ../expressions/Expression.md[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the HiveTableRelation.md#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
 
 | hiveQlTable
-a| [[hiveQlTable]] Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[Table] metadata (link:HiveClientImpl.adoc#toHiveTable[converted] from the link:HiveTableRelation.adoc#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
+a| [[hiveQlTable]] Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[Table] metadata (link:HiveClientImpl.md#toHiveTable[converted] from the HiveTableRelation.md#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
 
 Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<rawPartitions, rawPartitions>> and is <<doExecute, executed>>
 
 | hadoopReader
-a| [[hadoopReader]] link:HadoopTableReader.adoc[HadoopTableReader]
+a| [[hadoopReader]] HadoopTableReader.md[HadoopTableReader]
 
 | rawPartitions
-a| [[rawPartitions]] link:HiveClientImpl.adoc#toHivePartition[Hive partitions] (`Seq[Partition]`)
+a| [[rawPartitions]] HiveClientImpl.md#toHivePartition[Hive partitions] (`Seq[Partition]`)
 
 Used when `HiveTableScanExec` physical operator is <<doExecute, executed>> with a partitioned table
 

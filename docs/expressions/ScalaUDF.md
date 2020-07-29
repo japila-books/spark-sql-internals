@@ -2,17 +2,17 @@ title: ScalaUDF
 
 # ScalaUDF -- Catalyst Expression to Manage Lifecycle of User-Defined Function
 
-`ScalaUDF` is a link:expressions/Expression.md[Catalyst expression] to manage the lifecycle of a <<function, user-defined function>> (and hook it in to Spark SQL's Catalyst execution path).
+`ScalaUDF` is a expressions/Expression.md[Catalyst expression] to manage the lifecycle of a <<function, user-defined function>> (and hook it in to Spark SQL's Catalyst execution path).
 
 `ScalaUDF` is a `ImplicitCastInputTypes` and `UserDefinedExpression`.
 
-`ScalaUDF` has link:expressions/Expression.md#NonSQLExpression[no representation in SQL].
+`ScalaUDF` has expressions/Expression.md#NonSQLExpression[no representation in SQL].
 
 `ScalaUDF` is <<creating-instance, created>> when:
 
-* `UserDefinedFunction` is link:spark-sql-UserDefinedFunction.adoc#apply[executed]
+* `UserDefinedFunction` is spark-sql-UserDefinedFunction.md#apply[executed]
 
-* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
+* `UDFRegistration` is requested to spark-sql-UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 
 [source, scala]
 ----
@@ -26,7 +26,7 @@ import org.apache.spark.sql.catalyst.expressions.ScalaUDF
 val scalaUDF = c.expr.asInstanceOf[ScalaUDF]
 ----
 
-NOTE: link:spark-sql-Analyzer.adoc[Spark SQL Analyzer] uses link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF] logical evaluation rule to...FIXME
+NOTE: spark-sql-Analyzer.md[Spark SQL Analyzer] uses spark-sql-Analyzer-HandleNullInputsForUDF.md[HandleNullInputsForUDF] logical evaluation rule to...FIXME
 
 [source, scala]
 ----
@@ -132,18 +132,18 @@ NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression C
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
-`eval` executes the <<function, Scala function>> on the input link:spark-sql-InternalRow.adoc[internal row].
+`eval` executes the <<function, Scala function>> on the input spark-sql-InternalRow.md[internal row].
 
 === [[creating-instance]] Creating ScalaUDF Instance
 
 `ScalaUDF` takes the following when created:
 
 * [[function]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output link:spark-sql-DataType.adoc[data type]
-* [[children]] Child link:expressions/Expression.md[Catalyst expressions]
-* [[inputTypes]] Input link:spark-sql-DataType.adoc[data types] (default: `Nil`)
+* [[dataType]] Output spark-sql-DataType.md[data type]
+* [[children]] Child expressions/Expression.md[Catalyst expressions]
+* [[inputTypes]] Input spark-sql-DataType.md[data types] (default: `Nil`)
 * [[udfName]] Optional name (default: `None`)
 * [[nullable]] `nullable` flag (default: `true`)
 * [[udfDeterministic]] `udfDeterministic` flag (default: `true`)

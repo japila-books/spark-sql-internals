@@ -75,11 +75,11 @@ listTables(db: String, pattern: String): Seq[TableIdentifier]
 ====
 `listTables` is used when:
 
-* `ShowTablesCommand` logical command is requested to <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, run>>
+* `ShowTablesCommand` logical command is requested to <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, run>>
 
 * `SessionCatalog` is requested to <<reset, reset>> (for testing)
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.adoc#listTables, listTables>> (for testing)
+* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listTables, listTables>> (for testing)
 ====
 
 === [[isTemporaryTable]] Checking Whether Table Is Temporary View -- `isTemporaryTable` Method
@@ -139,7 +139,7 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 `alterTable`...FIXME
 
-NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run[AlterViewAsCommand] (for link:spark-sql-LogicalPlan-AlterViewAsCommand.adoc#alterPermanentView[permanent views]) logical commands are executed.
+NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, spark-sql-LogicalPlan-AlterViewAsCommand.md#run[AlterViewAsCommand] (for spark-sql-LogicalPlan-AlterViewAsCommand.md#alterPermanentView[permanent views]) logical commands are executed.
 
 === [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
 
@@ -148,7 +148,7 @@ NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUns
 alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
 ----
 
-`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to link:spark-sql-ExternalCatalog.adoc#alterTableStats[alter the statistics of the table] (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
+`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to spark-sql-ExternalCatalog.md#alterTableStats[alter the statistics of the table] (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
 
 `alterTableStats` reports a `NoSuchDatabaseException` if the <<databaseExists, database does not exist>>.
 
@@ -158,9 +158,9 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 ====
 `alterTableStats` is used when the following logical commands are executed:
 
-* link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc#run[AnalyzeTableCommand], link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
+* spark-sql-LogicalPlan-AnalyzeTableCommand.md#run[AnalyzeTableCommand], spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
 
-* (*indirectly* through `CommandUtils` when requested for link:spark-sql-CommandUtils.adoc#updateTableStats[updating existing table statistics]) link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable], link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
+* (*indirectly* through `CommandUtils` when requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics]) hive/InsertIntoHiveTable.md[InsertIntoHiveTable], spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
 ====
 
 === [[tableExists]] `tableExists` Method
@@ -171,7 +171,7 @@ tableExists(
   name: TableIdentifier): Boolean
 ----
 
-`tableExists` requests the <<externalCatalog, ExternalCatalog>> to link:../spark-sql-ExternalCatalog.adoc#tableExists[check out whether the table exists or not].
+`tableExists` requests the <<externalCatalog, ExternalCatalog>> to ../spark-sql-ExternalCatalog.md#tableExists[check out whether the table exists or not].
 
 `tableExists` assumes <<currentDb, default>> database unless defined in the input `TableIdentifier`.
 
@@ -190,9 +190,9 @@ functionExists(name: FunctionIdentifier): Boolean
 ====
 `functionExists` is used in:
 
-* link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions] logical rule (to make sure that link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
+* spark-sql-Analyzer-LookupFunctions.md[LookupFunctions] logical rule (to make sure that spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
 
-* `CatalogImpl` to link:spark-sql-CatalogImpl.adoc#functionExists[check if a function exists in a database]
+* `CatalogImpl` to spark-sql-CatalogImpl.md#functionExists[check if a function exists in a database]
 
 * ...
 ====
@@ -247,7 +247,7 @@ NOTE: "Temporary table" and "temporary view" are synonyms.
 
 `alterTempViewDefinition` returns `true` when an update could be executed and finished successfully.
 
-NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<spark-sql-LogicalPlan-AlterViewAsCommand.adoc#run, executed>>.
+NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<spark-sql-LogicalPlan-AlterViewAsCommand.md#run, executed>>.
 
 === [[createTempView]] Creating (Registering) Or Replacing Local Temporary View -- `createTempView` Method
 
@@ -273,15 +273,15 @@ createGlobalTempView(
   overrideIfExists: Boolean): Unit
 ----
 
-`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to link:spark-sql-GlobalTempViewManager.adoc#create[register a global temporary view].
+`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to spark-sql-GlobalTempViewManager.md#create[register a global temporary view].
 
 [NOTE]
 ====
 `createGlobalTempView` is used when:
 
-* link:spark-sql-LogicalPlan-CreateViewCommand.adoc[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the link:spark-sql-LogicalPlan-CreateViewCommand.adoc#viewType[view type] is link:spark-sql-LogicalPlan-CreateViewCommand.adoc#GlobalTempView[GlobalTempView])
+* spark-sql-LogicalPlan-CreateViewCommand.md[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the spark-sql-LogicalPlan-CreateViewCommand.md#viewType[view type] is spark-sql-LogicalPlan-CreateViewCommand.md#GlobalTempView[GlobalTempView])
 
-* link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the link:spark-sql-LogicalPlan-CreateTempViewUsing.adoc#global[global] flag is enabled)
+* spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the spark-sql-LogicalPlan-CreateTempViewUsing.md#global[global] flag is enabled)
 ====
 
 ## Creating Table
@@ -306,19 +306,19 @@ lookupFunction(
 
 `lookupFunction` finds a function by `name`.
 
-For a function with no database defined that exists in <<functionRegistry, FunctionRegistry>>, `lookupFunction` requests `FunctionRegistry` to link:spark-sql-FunctionRegistry.adoc#lookupFunction[find the function] (by its unqualified name, i.e. with no database).
+For a function with no database defined that exists in <<functionRegistry, FunctionRegistry>>, `lookupFunction` requests `FunctionRegistry` to spark-sql-FunctionRegistry.md#lookupFunction[find the function] (by its unqualified name, i.e. with no database).
 
 If the `name` function has the database defined or does not exist in `FunctionRegistry`, `lookupFunction` uses the fully-qualified function `name` to check if the function exists in <<functionRegistry, FunctionRegistry>> (by its fully-qualified name, i.e. with a database).
 
-For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and link:spark-sql-FunctionRegistry.adoc#lookupFunction[looks up the function] again.
+For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and spark-sql-FunctionRegistry.md#lookupFunction[looks up the function] again.
 
 [NOTE]
 ====
 `lookupFunction` is used when:
 
-* `ResolveFunctions` logical resolution rule is <<spark-sql-Analyzer-ResolveFunctions.adoc#apply, executed>> (and resolves <<spark-sql-Expression-UnresolvedGenerator.adoc#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.adoc#, UnresolvedFunction>> expressions)
+* `ResolveFunctions` logical resolution rule is <<spark-sql-Analyzer-ResolveFunctions.md#apply, executed>> (and resolves <<spark-sql-Expression-UnresolvedGenerator.md#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.md#, UnresolvedFunction>> expressions)
 
-* `HiveSessionCatalog` is requested to link:hive/HiveSessionCatalog.adoc#lookupFunction0[lookupFunction0]
+* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
 ====
 
 === [[lookupRelation]] Finding Relation (Table or View) in Catalogs -- `lookupRelation` Method
@@ -393,7 +393,7 @@ scala> println(plan.numberedTreeString)
 
 Internally, `lookupRelation` looks up the `name` table using:
 
-. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager`
+. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the spark-sql-GlobalTempViewManager.md#database[name] of `GlobalTempViewManager`
 
 a. Gives `SubqueryAlias` or reports a `NoSuchTableException`
 
@@ -413,9 +413,9 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 ====
 `lookupRelation` is used when:
 
-* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>>
+* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>>
 
-* `ResolveRelations` logical evaluation rule is requested to <<spark-sql-Analyzer-ResolveRelations.adoc#lookupTableFromCatalog, lookupTableFromCatalog>>
+* `ResolveRelations` logical evaluation rule is requested to <<spark-sql-Analyzer-ResolveRelations.md#lookupTableFromCatalog, lookupTableFromCatalog>>
 ====
 
 === [[getTableMetadata]] Retrieving Table Metadata from External Catalog (Metastore) -- `getTableMetadata` Method
@@ -425,7 +425,7 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 getTableMetadata(name: TableIdentifier): CatalogTable
 ----
 
-`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the link:spark-sql-ExternalCatalog.adoc#getTable[table metadata].
+`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the spark-sql-ExternalCatalog.md#getTable[table metadata].
 
 Before requesting the external metastore, `getTableMetadata` makes sure that the <<requireDbExists, database>> and <<requireTableExists, table>> (of the input `TableIdentifier`) both exist. If either does not exist, `getTableMetadata` reports a `NoSuchDatabaseException` or `NoSuchTableException`, respectively.
 
@@ -438,9 +438,9 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 
 Internally, `getTempViewOrPermanentTableMetadata` branches off per database.
 
-When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable] (with `VIEW` link:spark-sql-CatalogTable.adoc#tableType[table type] and an undefined link:spark-sql-CatalogTable.adoc#storage[storage]) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
+When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a spark-sql-CatalogTable.md#creating-instance[CatalogTable] (with `VIEW` spark-sql-CatalogTable.md#tableType[table type] and an undefined spark-sql-CatalogTable.md#storage[storage]) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 
-With the database name of the link:spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the link:spark-sql-GlobalTempViewManager.adoc#get[global view definition] and creates a link:spark-sql-CatalogTable.adoc#creating-instance[CatalogTable] (with the link:spark-sql-GlobalTempViewManager.adoc#database[name] of `GlobalTempViewManager` in link:spark-sql-CatalogTable.adoc#identifier[table identifier], `VIEW` link:spark-sql-CatalogTable.adoc#tableType[table type] and an undefined link:spark-sql-CatalogTable.adoc#storage[storage]) or reports a `NoSuchTableException`.
+With the database name of the spark-sql-GlobalTempViewManager.md[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[global view definition] and creates a spark-sql-CatalogTable.md#creating-instance[CatalogTable] (with the spark-sql-GlobalTempViewManager.md#database[name] of `GlobalTempViewManager` in spark-sql-CatalogTable.md#identifier[table identifier], `VIEW` spark-sql-CatalogTable.md#tableType[table type] and an undefined spark-sql-CatalogTable.md#storage[storage]) or reports a `NoSuchTableException`.
 
 With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 
@@ -448,9 +448,9 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 ====
 `getTempViewOrPermanentTableMetadata` is used when:
 
-* `CatalogImpl` is requested for link:spark-sql-CatalogImpl.adoc#makeTable[converting TableIdentifier to Table], link:spark-sql-CatalogImpl.adoc#listColumns[listing the columns of a table (as Dataset)] and link:spark-sql-CatalogImpl.adoc#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
+* `CatalogImpl` is requested for spark-sql-CatalogImpl.md#makeTable[converting TableIdentifier to Table], spark-sql-CatalogImpl.md#listColumns[listing the columns of a table (as Dataset)] and spark-sql-CatalogImpl.md#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
 
-* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc#run[DescribeColumnCommand], `ShowColumnsCommand` and <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#run, ShowTablesCommand>> logical commands are requested to run (executed)
+* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, spark-sql-LogicalPlan-DescribeColumnCommand.md#run[DescribeColumnCommand], `ShowColumnsCommand` and <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, ShowTablesCommand>> logical commands are requested to run (executed)
 ====
 
 === [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method
@@ -480,7 +480,7 @@ NOTE: `reset` is used exclusively in the Spark SQL internal tests.
 dropGlobalTempView(name: String): Boolean
 ----
 
-`dropGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.adoc#remove, remove>> the `name` global temporary view.
+`dropGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.md#remove, remove>> the `name` global temporary view.
 
 NOTE: `dropGlobalTempView` is used when...FIXME
 
@@ -500,13 +500,13 @@ dropTable(
 ====
 `dropTable` is used when:
 
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>>
+* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>>
 
-* `DropTableCommand` logical command is <<spark-sql-LogicalPlan-DropTableCommand.adoc#run, executed>>
+* `DropTableCommand` logical command is <<spark-sql-LogicalPlan-DropTableCommand.md#run, executed>>
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveAsTable, save a DataFrame to a table>> (with `Overwrite` save mode)
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveAsTable, save a DataFrame to a table>> (with `Overwrite` save mode)
 
-* link:hive/CreateHiveTableAsSelectCommand.adoc[CreateHiveTableAsSelectCommand] logical command is executed
+* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
 
 * `SessionCatalog` is requested to <<reset, reset>>
 ====
@@ -519,9 +519,9 @@ getGlobalTempView(
   name: String): Option[LogicalPlan]
 ----
 
-`getGlobalTempView` requests the <<globalTempViewManager, GlobalTempViewManager>> for the link:spark-sql-GlobalTempViewManager.adoc#get[temporary view definition by the input name].
+`getGlobalTempView` requests the <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[temporary view definition by the input name].
 
-NOTE: `getGlobalTempView` is used when `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#dropGlobalTempView[dropGlobalTempView].
+NOTE: `getGlobalTempView` is used when `CatalogImpl` is requested to spark-sql-CatalogImpl.md#dropGlobalTempView[dropGlobalTempView].
 
 === [[registerFunction]] `registerFunction` Method
 
@@ -541,7 +541,7 @@ registerFunction(
 
 * `SessionCatalog` is requested to <<lookupFunction, lookupFunction>>
 
-* `HiveSessionCatalog` is requested to link:hive/HiveSessionCatalog.adoc#lookupFunction0[lookupFunction0]
+* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
 
 * `CreateFunctionCommand` logical command is executed
 ====
@@ -590,7 +590,7 @@ currentDb is...FIXME
 
 ### tableRelationCache
 
-tableRelationCache is a cache of fully-qualified table names to link:spark-sql-LogicalPlan.adoc[table relation plans] (i.e. `LogicalPlan`).
+tableRelationCache is a cache of fully-qualified table names to spark-sql-LogicalPlan.md[table relation plans] (i.e. `LogicalPlan`).
 
 Used when `SessionCatalog` <<refreshTable, refreshes a table>>
 

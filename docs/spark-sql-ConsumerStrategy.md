@@ -23,7 +23,7 @@ sealed trait ConsumerStrategy {
 | createConsumer
 | [[createConsumer]] Creates a Kafka https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/Consumer.html[Consumer] (of keys and values of type `Array[Byte]`)
 
-Used exclusively when `KafkaOffsetReader` is requested to <<spark-sql-KafkaOffsetReader.adoc#createConsumer, creating a Kafka Consumer>>
+Used exclusively when `KafkaOffsetReader` is requested to <<spark-sql-KafkaOffsetReader.md#createConsumer, creating a Kafka Consumer>>
 |===
 
 [[implementations]]
@@ -34,13 +34,13 @@ Used exclusively when `KafkaOffsetReader` is requested to <<spark-sql-KafkaOffse
 | createConsumer
 
 | `AssignStrategy`
-| [[AssignStrategy]] Uses link:++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#assign-java.util.Collection-++[KafkaConsumer.assign(Collection<TopicPartition> partitions)]
+| [[AssignStrategy]] Uses ++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#assign-java.util.Collection-++[KafkaConsumer.assign(Collection<TopicPartition> partitions)]
 
 | `SubscribeStrategy`
-| [[SubscribeStrategy]] Uses link:++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#subscribe-java.util.Collection-++[KafkaConsumer.subscribe(Collection<String> topics)]
+| [[SubscribeStrategy]] Uses ++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#subscribe-java.util.Collection-++[KafkaConsumer.subscribe(Collection<String> topics)]
 
 | `SubscribePatternStrategy`
-a| [[SubscribePatternStrategy]] Uses link:++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#subscribe-java.util.regex.Pattern-org.apache.kafka.clients.consumer.ConsumerRebalanceListener-++[KafkaConsumer.subscribe(Pattern pattern, ConsumerRebalanceListener listener)] with `NoOpConsumerRebalanceListener`.
+a| [[SubscribePatternStrategy]] Uses ++http://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#subscribe-java.util.regex.Pattern-org.apache.kafka.clients.consumer.ConsumerRebalanceListener-++[KafkaConsumer.subscribe(Pattern pattern, ConsumerRebalanceListener listener)] with `NoOpConsumerRebalanceListener`.
 
 TIP: Refer to http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[java.util.regex.Pattern] for the format of supported topic subscription regex patterns.
 |===

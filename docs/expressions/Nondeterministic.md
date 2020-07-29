@@ -2,7 +2,7 @@ title: Nondeterministic
 
 # Nondeterministic Expression Contract
 
-`Nondeterministic` is a <<contract, contract>> for link:expressions/Expression.md[Catalyst expressions] that are non-<<deterministic, deterministic>> and non-<<foldable, foldable>>.
+`Nondeterministic` is a <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that are non-<<deterministic, deterministic>> and non-<<foldable, foldable>>.
 
 `Nondeterministic` expressions require explicit <<initialize, initialization>> (with the current partition index) before <<eval, evaluating a value>>.
 
@@ -56,7 +56,7 @@ NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic`
 | `InputFileName`
 | [[InputFileName]]
 
-| link:spark-sql-Expression-MonotonicallyIncreasingID.adoc[MonotonicallyIncreasingID]
+| spark-sql-Expression-MonotonicallyIncreasingID.md[MonotonicallyIncreasingID]
 | [[MonotonicallyIncreasingID]]
 
 | `NondeterministicExpression`
@@ -82,10 +82,10 @@ NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic`
 | Name
 | Description
 
-| [[deterministic]] link:expressions/Expression.md#deterministic[deterministic]
+| [[deterministic]] expressions/Expression.md#deterministic[deterministic]
 | Always turned off (i.e. `false`)
 
-| [[foldable]] link:expressions/Expression.md#foldable[foldable]
+| [[foldable]] expressions/Expression.md#foldable[foldable]
 | Always turned off (i.e. `false`)
 
 | [[initialized]] `initialized`
@@ -103,7 +103,7 @@ initialize(partitionIndex: Int): Unit
 
 Internally, `initialize` <<initializeInternal, initializes>> itself (with the input partition index) and turns the internal <<initialized, initialized>> flag on.
 
-NOTE: `initialize` is used exclusively when link:spark-sql-InterpretedProjection.adoc#initialize[InterpretedProjection] and `InterpretedMutableProjection` are requested to `initialize` themselves.
+NOTE: `initialize` is used exclusively when spark-sql-InterpretedProjection.md#initialize[InterpretedProjection] and `InterpretedMutableProjection` are requested to `initialize` themselves.
 
 === [[eval]] Evaluating Expression -- `eval` Method
 
@@ -112,7 +112,7 @@ NOTE: `initialize` is used exclusively when link:spark-sql-InterpretedProjection
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
 `eval` is just a wrapper of <<evalInternal, evalInternal>> that makes sure that <<initialize, initialize>> has already been executed (and so the expression is initialized).
 

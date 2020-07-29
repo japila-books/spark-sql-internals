@@ -2,7 +2,7 @@ title: Alias
 
 # Alias Unary Expression
 
-`Alias` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> and a link:spark-sql-Expression-NamedExpression.adoc[named expression].
+`Alias` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and a spark-sql-Expression-NamedExpression.md[named expression].
 
 `Alias` is <<creating-instance, created>> when...FIXME
 
@@ -10,5 +10,5 @@ title: Alias
 
 `Alias` takes the following when created:
 
-* [[child]] Child link:expressions/Expression.md[expression]
+* [[child]] Child expressions/Expression.md[expression]
 * [[name]] Name

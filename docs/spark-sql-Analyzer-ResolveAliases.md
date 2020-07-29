@@ -1,12 +1,12 @@
 # ResolveAliases Logical Resolution Rule
 
-`ResolveAliases` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveAliases[logical query plan analyzer] uses to <<apply, FIXME>> in an entire logical query plan.
+`ResolveAliases` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveAliases[logical query plan analyzer] uses to <<apply, FIXME>> in an entire logical query plan.
 
-Technically, `ResolveAliases` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveAliases` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveAliases` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveAliases` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
 
-NOTE: `ResolveAliases` is a Scala object inside link:spark-sql-Analyzer.adoc[Analyzer] class.
+NOTE: `ResolveAliases` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
 
 [[example]]
 [source, scala]
@@ -23,7 +23,7 @@ import spark.sessionState.analyzer.ResolveAliases
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
 `apply`...FIXME
 

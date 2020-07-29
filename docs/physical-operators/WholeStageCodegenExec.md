@@ -2,11 +2,11 @@ title: WholeStageCodegenExec
 
 # WholeStageCodegenExec Unary Physical Operator for Java Code Generation
 
-`WholeStageCodegenExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] that is one of the two physical operators that lay the foundation for the link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] for a *Codegened Execution Pipeline* of a structured query.
+`WholeStageCodegenExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] that is one of the two physical operators that lay the foundation for the spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] for a *Codegened Execution Pipeline* of a structured query.
 
-NOTE: link:spark-sql-SparkPlan-InputAdapter.adoc[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
+NOTE: spark-sql-SparkPlan-InputAdapter.md[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
 
-`WholeStageCodegenExec` itself supports the link:spark-sql-CodegenSupport.adoc[Java code generation] and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
+`WholeStageCodegenExec` itself supports the spark-sql-CodegenSupport.md[Java code generation] and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
 
 [source, scala]
 ----
@@ -28,7 +28,7 @@ Generated code:
 
 [TIP]
 ====
-Consider using link:spark-sql-debugging-query-execution.adoc[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
+Consider using spark-sql-debugging-query-execution.md[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
 ====
 
 [source, scala]
@@ -86,22 +86,22 @@ Generated code:
 
 `WholeStageCodegenExec` is <<creating-instance, created>> when:
 
-* `CollapseCodegenStages` physical query optimization is link:spark-sql-CollapseCodegenStages.adoc#apply[executed] (with link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
+* `CollapseCodegenStages` physical query optimization is spark-sql-CollapseCodegenStages.md#apply[executed] (with spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
 
-* `FileSourceScanExec` leaf physical operator is <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
+* `FileSourceScanExec` leaf physical operator is <<spark-sql-SparkPlan-FileSourceScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
-* `InMemoryTableScanExec` leaf physical operator is <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
+* `InMemoryTableScanExec` leaf physical operator is <<spark-sql-SparkPlan-InMemoryTableScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
-* `DataSourceV2ScanExec` leaf physical operator is <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#doExecute, executed>> (with the <<spark-sql-SparkPlan-DataSourceV2ScanExec.adoc#supportsBatch, supportsBatch>> flag enabled)
+* `DataSourceV2ScanExec` leaf physical operator is <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
-NOTE: link:spark-sql-whole-stage-codegen.adoc#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
+NOTE: spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
 [[creating-instance]]
 [[child]]
 [[codegenStageId]]
-`WholeStageCodegenExec` takes a single `child` link:SparkPlan.md[physical operator] (a physical subquery tree) and *codegen stage ID* when created.
+`WholeStageCodegenExec` takes a single `child` SparkPlan.md[physical operator] (a physical subquery tree) and *codegen stage ID* when created.
 
-NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.adoc#, supports Java code generation>>.
+NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.md#, supports Java code generation>>.
 
 [source, scala]
 ----
@@ -128,7 +128,7 @@ scala> println(plan.numberedTreeString)
 05          +- LocalTableScan [ids#112]
 ----
 
-NOTE: As `WholeStageCodegenExec` is created as a result of link:spark-sql-CollapseCodegenStages.adoc[CollapseCodegenStages] physical query optimization rule, it is only executed in link:spark-sql-QueryExecution.adoc#executedPlan[executedPlan] phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
+NOTE: As `WholeStageCodegenExec` is created as a result of spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] physical query optimization rule, it is only executed in spark-sql-QueryExecution.md#executedPlan[executedPlan] phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
 
 [source, scala]
 ----
@@ -178,13 +178,13 @@ When <<doExecute, executed>>, `WholeStageCodegenExec` gives <<pipelineTime, pipe
 
 | [[pipelineTime]] `pipelineTime`
 | (empty)
-| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying link:spark-sql-BufferedRowIterator.adoc[BufferedRowIterator] had been created and the internal rows were all consumed).
+| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying spark-sql-BufferedRowIterator.md[BufferedRowIterator] had been created and the internal rows were all consumed).
 |===
 
 .WholeStageCodegenExec in web UI (Details for Query)
 image::images/spark-sql-WholeStageCodegenExec-webui.png[align="center"]
 
-TIP: Use link:spark-sql-Dataset.adoc#explain[explain] operator to know the physical plan of a query and find out whether or not `WholeStageCodegen` is in use.
+TIP: Use spark-sql-Dataset.md#explain[explain] operator to know the physical plan of a query and find out whether or not `WholeStageCodegen` is in use.
 
 [source, scala]
 ----
@@ -196,7 +196,7 @@ scala> q.explain
 +- *Range (0, 10, step=1, splits=8)
 ----
 
-NOTE: link:SparkPlan.md[Physical plans] that support code generation extend link:spark-sql-CodegenSupport.adoc[CodegenSupport].
+NOTE: SparkPlan.md[Physical plans] that support code generation extend spark-sql-CodegenSupport.md[CodegenSupport].
 
 [[logging]]
 [TIP]
@@ -209,7 +209,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.WholeStageCodegenExec=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
@@ -219,19 +219,19 @@ Refer to link:spark-logging.adoc[Logging].
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to link:spark-sql-CodeGenerator.adoc#compile[compile it] right afterwards.
+`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile it] right afterwards.
 
-If compilation goes well, `doExecute` branches off per the number of link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs].
+If compilation goes well, `doExecute` branches off per the number of spark-sql-CodegenSupport.md#inputRDDs[input RDDs].
 
-NOTE: `doExecute` only supports up to two link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs].
+NOTE: `doExecute` only supports up to two spark-sql-CodegenSupport.md#inputRDDs[input RDDs].
 
 CAUTION: FIXME Finish the "success" path
 
 
 
-If the size of the generated codes is greater than <<spark-sql-properties.adoc#spark.sql.codegen.hugeMethodLimit, spark.sql.codegen.hugeMethodLimit>> (which defaults to `65535`), `doExecute` prints out the following INFO message:
+If the size of the generated codes is greater than <<spark-sql-properties.md#spark.sql.codegen.hugeMethodLimit, spark.sql.codegen.hugeMethodLimit>> (which defaults to `65535`), `doExecute` prints out the following INFO message:
 
 ```
 Found too long generated codes and JIT optimization might not work: the bytecode size ([maxCodeSize]) is above the limit [spark.sql.codegen.hugeMethodLimit], and the whole-stage codegen was disabled for this plan (id=[codegenStageId]). To avoid this, you can raise the limit `spark.sql.codegen.hugeMethodLimit`:
@@ -240,9 +240,9 @@ Found too long generated codes and JIT optimization might not work: the bytecode
 
 In the end, `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and returns it.
 
-NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> for <<spark-sql-SparkPlan-FileSourceScanExec.adoc#, FileSourceScanExec>> leaf physical operator with <<spark-sql-SparkPlan-FileSourceScanExec.adoc#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<spark-sql-SparkPlan-FileSourceScanExec.adoc#doExecute, FileSourceScanExec>>).
+NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> for <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator with <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<spark-sql-SparkPlan-FileSourceScanExec.md#doExecute, FileSourceScanExec>>).
 
-If compilation fails and link:spark-sql-properties.adoc#spark.sql.codegen.fallback[spark.sql.codegen.fallback] configuration property is enabled, `doExecute` prints out the following WARN message to the logs, requests the <<child, child>> physical operator to link:SparkPlan.md#execute[execute] and returns it.
+If compilation fails and spark-sql-properties.md#spark.sql.codegen.fallback[spark.sql.codegen.fallback] configuration property is enabled, `doExecute` prints out the following WARN message to the logs, requests the <<child, child>> physical operator to SparkPlan.md#execute[execute] and returns it.
 
 ```
 Whole-stage codegen disabled for plan (id=[codegenStageId]):
@@ -256,9 +256,9 @@ Whole-stage codegen disabled for plan (id=[codegenStageId]):
 doCodeGen(): (CodegenContext, CodeAndComment)
 ----
 
-`doCodeGen` creates a new <<spark-sql-CodegenContext.adoc#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to <<spark-sql-CodegenSupport.adoc#produce, generate a Java source code for produce code path>> (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
+`doCodeGen` creates a new <<spark-sql-CodegenContext.md#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to <<spark-sql-CodegenSupport.md#produce, generate a Java source code for produce code path>> (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
 
-`doCodeGen` <<spark-sql-CodegenContext.adoc#addNewFunction, adds the new function>> under the name of `processNext`.
+`doCodeGen` <<spark-sql-CodegenContext.md#addNewFunction, adds the new function>> under the name of `processNext`.
 
 `doCodeGen` <<generatedClassName, generates the class name>>.
 
@@ -297,7 +297,7 @@ final class [className] extends BufferedRowIterator {
 }
 ----
 
-NOTE: `doCodeGen` requires that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.adoc#, supports Java code generation>>.
+NOTE: `doCodeGen` requires that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.md#, supports Java code generation>>.
 
 `doCodeGen` cleans up the generated code (using `CodeFormatter` to `stripExtraNewLines`, `stripOverlappingComments`).
 
@@ -308,7 +308,7 @@ DEBUG WholeStageCodegenExec:
 [cleanedSource]
 ```
 
-In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenContext>> and the Java source code (as a `CodeAndComment`).
+In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.md#, CodegenContext>> and the Java source code (as a `CodeAndComment`).
 
 [NOTE]
 ====
@@ -316,7 +316,7 @@ In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenCon
 
 * `WholeStageCodegenExec` is <<doExecute, executed>>
 
-* Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.adoc#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
+* Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.md#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
 ====
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
@@ -326,7 +326,7 @@ In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.adoc#, CodegenCon
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
 
 `doConsume` generates a Java source code that:
 
@@ -357,7 +357,7 @@ append(my_value);
 generatedClassName(): String
 ----
 
-`generatedClassName` gives a class name per link:spark-sql-properties.adoc#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName] configuration property:
+`generatedClassName` gives a class name per spark-sql-properties.md#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName] configuration property:
 
 * `GeneratedIteratorForCodegenStage` with the <<codegenStageId, codegen stage ID>> when enabled (`true`)
 

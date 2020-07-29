@@ -16,7 +16,7 @@ abstract class Rule[TreeType <: TreeNode[_]] {
 ----
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.md#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[ruleName]]
 `Rule` has a *rule name* (that is the class name of a rule).
@@ -32,12 +32,12 @@ The other notable use cases of `Rule` are as follows:
 
 * [SparkSessionExtensions](../SparkSessionExtensions.md)
 
-* When `ExperimentalMethods` is requested for <<spark-sql-ExperimentalMethods.adoc#extraOptimizations, extraOptimizations>>
+* When `ExperimentalMethods` is requested for <<spark-sql-ExperimentalMethods.md#extraOptimizations, extraOptimizations>>
 
 * When `BaseSessionStateBuilder` is requested for <<BaseSessionStateBuilder.md#customResolutionRules, customResolutionRules>>, <<BaseSessionStateBuilder.md#customPostHocResolutionRules, customPostHocResolutionRules>>, <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<BaseSessionStateBuilder.md#optimizer, Optimizer>>
 
-* When `Analyzer` is requested for <<spark-sql-Analyzer.adoc#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.adoc#postHocResolutionRules, postHocResolutionRules>> (see <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and link:hive/HiveSessionStateBuilder.adoc#analyzer[HiveSessionStateBuilder])
+* When `Analyzer` is requested for <<spark-sql-Analyzer.md#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.md#postHocResolutionRules, postHocResolutionRules>> (see <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and hive/HiveSessionStateBuilder.md#analyzer[HiveSessionStateBuilder])
 
 * When `Optimizer` is requested for [extendedOperatorOptimizationRules](Optimizer.md#extendedOperatorOptimizationRules)
 
-* When `QueryExecution` is requested for <<spark-sql-QueryExecution.adoc#preparations, preparations>>
+* When `QueryExecution` is requested for <<spark-sql-QueryExecution.md#preparations, preparations>>

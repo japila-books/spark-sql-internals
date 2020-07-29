@@ -9,7 +9,7 @@ image::images/spark-sql-KafkaWriter-write-webui.png[align="center"]
 
 `KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<catalyst/QueryPlan.md#output, output schema attributes>>):
 
-* Either *topic* of type `StringType` or the <<spark-sql-kafka-options.adoc#topic, topic>> option are defined
+* Either *topic* of type `StringType` or the <<spark-sql-kafka-options.md#topic, topic>> option are defined
 
 * Optional *key* of type `StringType` or `BinaryType`
 
@@ -61,23 +61,23 @@ write(
   topic: Option[String] = None): Unit
 ----
 
-`write` gets the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.adoc#, QueryExecution>>.
+`write` gets the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.md#, QueryExecution>>.
 
 `write` then <<validateQuery, validates the schema of a structured query>>.
 
-In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
+In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution.md#toRdd, RDD[InternalRow]>> (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
 
-. Creates a <<spark-sql-KafkaWriteTask.adoc#creating-instance, KafkaWriteTask>> (for the input `kafkaParameters`, the schema and the input `topic`)
+. Creates a <<spark-sql-KafkaWriteTask.md#creating-instance, KafkaWriteTask>> (for the input `kafkaParameters`, the schema and the input `topic`)
 
-. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.adoc#execute, write the rows (of the partition) to Kafka topic>>
+. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.md#execute, write the rows (of the partition) to Kafka topic>>
 
-. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.adoc#close, close>>
+. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.md#close, close>>
 
 [NOTE]
 ====
 `write` is used when:
 
-* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic>>
+* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic>>
 
 * (Spark Structured Streaming) `KafkaSink` is requested to `addBatch`
 ====
@@ -94,7 +94,7 @@ validateQuery(
 
 `validateQuery` makes sure that the following attributes are in the input schema (or their alternatives) and of the right data types:
 
-* Either `topic` attribute of type `StringType` or the <<spark-sql-kafka-options.adoc#topic, topic>> option are defined
+* Either `topic` attribute of type `StringType` or the <<spark-sql-kafka-options.md#topic, topic>> option are defined
 
 * If `key` attribute is defined it is of type `StringType` or `BinaryType`
 

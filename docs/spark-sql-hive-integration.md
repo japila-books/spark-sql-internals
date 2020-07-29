@@ -1,6 +1,6 @@
 # Hive Integration
 
-Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog].
+Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using hive/HiveExternalCatalog.md[HiveExternalCatalog].
 
 [NOTE]
 ====
@@ -13,7 +13,7 @@ From https://en.wikipedia.org/wiki/Apache_Hive[Wikipedia, the free encyclopedia]
 > All three execution engines can run in Hadoop YARN.
 ====
 
-xref:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable Hive support (that simply sets xref:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` only when the Hive classes are available).
+xref:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable Hive support (that simply sets xref:spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive` only when the Hive classes are available).
 
 ```
 import org.apache.spark.sql.SparkSession

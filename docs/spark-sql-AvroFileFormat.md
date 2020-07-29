@@ -2,10 +2,10 @@ title: AvroFileFormat
 
 # AvroFileFormat -- FileFormat For Avro-Encoded Files
 
-`AvroFileFormat` is a <<spark-sql-FileFormat.adoc#, FileFormat>> for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
+`AvroFileFormat` is a <<spark-sql-FileFormat.md#, FileFormat>> for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 
 [[shortName]]
-`AvroFileFormat` is a <<spark-sql-DataSourceRegister.adoc#, DataSourceRegister>> and <<spark-sql-DataSourceRegister.adoc#shortName, registers itself>> as *avro* data source.
+`AvroFileFormat` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and <<spark-sql-DataSourceRegister.md#shortName, registers itself>> as *avro* data source.
 
 [source, scala]
 ----
@@ -32,7 +32,7 @@ scala> q.show
 ----
 
 [[isSplitable]]
-`AvroFileFormat` is <<spark-sql-FileFormat.adoc#isSplitable, splitable>>, i.e. FIXME
+`AvroFileFormat` is <<spark-sql-FileFormat.md#isSplitable, splitable>>, i.e. FIXME
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -48,7 +48,7 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of the <<spark-sql-FileFormat.adoc#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.adoc#, PartitionedFile>> reader.
+NOTE: `buildReader` is part of the <<spark-sql-FileFormat.md#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.md#, PartitionedFile>> reader.
 
 `buildReader`...FIXME
 
@@ -62,7 +62,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of the <<spark-sql-FileFormat.adoc#inferSchema, FileFormat Contract>> to infer (return) the <<spark-sql-StructType.adoc#, schema>> of the given files.
+NOTE: `inferSchema` is part of the <<spark-sql-FileFormat.md#inferSchema, FileFormat Contract>> to infer (return) the <<spark-sql-StructType.md#, schema>> of the given files.
 
 `inferSchema`...FIXME
 
@@ -77,6 +77,6 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.adoc#prepareWrite, FileFormat Contract>> to prepare a write job.
+NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
 
 `prepareWrite`...FIXME

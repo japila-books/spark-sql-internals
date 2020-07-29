@@ -3,17 +3,17 @@ title: In
 # In Predicate Expression
 
 [[dataType]]
-`In` is a link:expressions/Expression.md#Predicate[predicate expression] (i.e. the result link:expressions/Expression.md#dataType[data type] is always link:spark-sql-DataType.adoc#BooleanType[boolean]).
+`In` is a expressions/Expression.md#Predicate[predicate expression] (i.e. the result expressions/Expression.md#dataType[data type] is always spark-sql-DataType.md#BooleanType[boolean]).
 
 `In` is <<creating-instance, created>> when:
 
-* <<spark-sql-column-operators.adoc#isin, Column.isin>> operator is used
+* <<spark-sql-column-operators.md#isin, Column.isin>> operator is used
 
-* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withPredicate[parse SQL's IN predicate with a subquery]
+* `AstBuilder` is requested to spark-sql-AstBuilder.md#withPredicate[parse SQL's IN predicate with a subquery]
 
 [TIP]
 ====
-Use Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#in[in] operator to create an `In` expression.
+Use Catalyst DSL's spark-sql-catalyst-dsl.md#in[in] operator to create an `In` expression.
 
 [source, scala]
 ----
@@ -99,8 +99,8 @@ assert(evaluatedValue.asInstanceOf[Boolean] == false)
 [[creating-instance]]
 `In` takes the following when created:
 
-* [[value]] Value link:expressions/Expression.md[expression]
-* [[list]] link:expressions/Expression.md[Expression] list
+* [[value]] Value expressions/Expression.md[expression]
+* [[list]] expressions/Expression.md[Expression] list
 
 NOTE: <<list, Expression list>> must not be `null` (but can have expressions that can be evaluated to `null`).
 
@@ -121,7 +121,7 @@ scala> println(in)
 ----
 
 [[sql]]
-`In` has the following link:expressions/Expression.md#sql[SQL representation]:
+`In` has the following expressions/Expression.md#sql[SQL representation]:
 
 ```
 ([valueSQL] IN ([listSQL]))
@@ -137,7 +137,7 @@ scala> println(in.sql)
 ----
 
 [[inSetConvertible]]
-`In` expression is *inSetConvertible* when the <<list, list>> contains link:spark-sql-Expression-Literal.adoc[Literal] expressions only.
+`In` expression is *inSetConvertible* when the <<list, list>> contains spark-sql-Expression-Literal.md[Literal] expressions only.
 
 [source, scala]
 ----
@@ -148,12 +148,12 @@ scala> println(in.sql)
 
 `In` expressions are analyzed using the following rules:
 
-* link:spark-sql-Analyzer-ResolveSubquery.adoc[ResolveSubquery] resolution rule
+* spark-sql-Analyzer-ResolveSubquery.md[ResolveSubquery] resolution rule
 
-* link:spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc[InConversion] type coercion rule
+* spark-sql-Analyzer-TypeCoercionRule-InConversion.md[InConversion] type coercion rule
 
 [[InMemoryTableScanExec]]
-`In` expression has a link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#buildFilter-expressions[custom support] in link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc[InMemoryTableScanExec] physical operator.
+`In` expression has a spark-sql-SparkPlan-InMemoryTableScanExec.md#buildFilter-expressions[custom support] in spark-sql-SparkPlan-InMemoryTableScanExec.md[InMemoryTableScanExec] physical operator.
 
 [source, scala]
 ----
@@ -173,7 +173,7 @@ scala> println(in.sql)
 | [[ordering]] `ordering`
 | Scala's https://www.scala-lang.org/api/2.11.12/index.html#scala.math.Ordering[Ordering] instance that represents a strategy for sorting instances of a type.
 
-Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the link:expressions/Expression.md#dataType[data type] of the <<value, value>> expression.
+Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the expressions/Expression.md#dataType[data type] of the <<value, value>> expression.
 
 Used exclusively when `In` is requested to <<eval, evaluate a value>> for a given input row.
 |===
@@ -196,13 +196,13 @@ NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInpu
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.adoc#, internal binary row>>.
+NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
 
-`eval` requests <<value, value>> expression to link:expressions/Expression.md#eval[evaluate a value] for the `input` link:spark-sql-InternalRow.adoc[internal row].
+`eval` requests <<value, value>> expression to expressions/Expression.md#eval[evaluate a value] for the `input` spark-sql-InternalRow.md[internal row].
 
 If the evaluated value is `null`, `eval` gives `null` too.
 
-`eval` takes every link:expressions/Expression.md[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
+`eval` takes every expressions/Expression.md[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
 
 `eval` records whether any of the expressions in <<list, list>> expressions gave `null` value. If no <<list, list>> expression led to `true` (per <<ordering, ordering>>), `eval` returns `null` if any <<list, list>> expression evaluated to `null` or `false`.
 

@@ -2,9 +2,9 @@
 
 `DataSourceScanExec` is the <<contract, contract>> of <<implementations, leaf physical operators>> that represent scans over <<relation, BaseRelation>>.
 
-NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] and generic link:spark-sql-BaseRelation.adoc[BaseRelation] relations, respectively.
+NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] and generic spark-sql-BaseRelation.md[BaseRelation] relations, respectively.
 
-`DataSourceScanExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_)
+`DataSourceScanExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_)
 
 [[contract]]
 [source, scala]
@@ -30,13 +30,13 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 | [[metadata]] Metadata (as a collection of key-value pairs) that describes the scan when requested for the <<simpleString, simple text representation>>.
 
 | `relation`
-| [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation] that is used in the <<nodeName, node name>> and...FIXME
+| [[relation]] spark-sql-BaseRelation.md[BaseRelation] that is used in the <<nodeName, node name>> and...FIXME
 
 | `tableIdentifier`
 | [[tableIdentifier]] Optional `TableIdentifier`
 |===
 
-NOTE: The prefix for variable names for `DataSourceScanExec` operators in a link:spark-sql-CodegenSupport.adoc#variablePrefix[generated Java source code] is *scan*.
+NOTE: The prefix for variable names for `DataSourceScanExec` operators in a spark-sql-CodegenSupport.md#variablePrefix[generated Java source code] is *scan*.
 
 [[nodeNamePrefix]]
 The default *node name prefix* is an empty string (that is used in the <<simpleString, simple node description>>).
@@ -55,10 +55,10 @@ Scan [relation] [tableIdentifier]
 | DataSourceScanExec
 | Description
 
-| link:spark-sql-SparkPlan-FileSourceScanExec.adoc[FileSourceScanExec]
+| spark-sql-SparkPlan-FileSourceScanExec.md[FileSourceScanExec]
 | [[FileSourceScanExec]]
 
-| link:spark-sql-SparkPlan-RowDataSourceScanExec.adoc[RowDataSourceScanExec]
+| spark-sql-SparkPlan-RowDataSourceScanExec.md[RowDataSourceScanExec]
 | [[RowDataSourceScanExec]]
 |===
 
@@ -69,7 +69,7 @@ Scan [relation] [tableIdentifier]
 simpleString: String
 ----
 
-NOTE: `simpleString` is part of link:catalyst/QueryPlan.md#simpleString[QueryPlan Contract] to give the simple text description of a `TreeNode` in a query plan tree.
+NOTE: `simpleString` is part of catalyst/QueryPlan.md#simpleString[QueryPlan Contract] to give the simple text description of a `TreeNode` in a query plan tree.
 
 `simpleString` creates a text representation of every key-value entry in the <<metadata, metadata>>...FIXME
 
@@ -77,7 +77,7 @@ Internally, `simpleString` sorts the <<metadata, metadata>> and concatenate the 
 
 `simpleString` uses Spark Core's `Utils` to `truncatedString`.
 
-In the end, `simpleString` returns a text representation that is made up of the <<nodeNamePrefix, nodeNamePrefix>>, the <<nodeName, nodeName>>, the link:catalyst/QueryPlan.md#output[output] (schema attributes) and the <<metadata, metadata>> and is of the following format:
+In the end, `simpleString` returns a text representation that is made up of the <<nodeNamePrefix, nodeNamePrefix>>, the <<nodeName, nodeName>>, the catalyst/QueryPlan.md#output[output] (schema attributes) and the <<metadata, metadata>> and is of the following format:
 
 ```
 [nodeNamePrefix][nodeName][[output]][metadata]
@@ -127,9 +127,9 @@ def basicDataSourceScanExec = {
 verboseString: String
 ----
 
-NOTE: `verboseString` is part of link:catalyst/QueryPlan.md#verboseString[QueryPlan Contract] to...FIXME.
+NOTE: `verboseString` is part of catalyst/QueryPlan.md#verboseString[QueryPlan Contract] to...FIXME.
 
-`verboseString` simply returns the <<redact, redacted sensitive information>> in link:catalyst/QueryPlan.md#verboseString[verboseString] (of the parent `QueryPlan`).
+`verboseString` simply returns the <<redact, redacted sensitive information>> in catalyst/QueryPlan.md#verboseString[verboseString] (of the parent `QueryPlan`).
 
 ## <span id="treeString"> Text Representation of All Nodes in Tree
 

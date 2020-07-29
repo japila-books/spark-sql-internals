@@ -1,8 +1,8 @@
 # TypedColumn
 
-`TypedColumn` is a link:spark-sql-Column.adoc[Column] with the <<encoder, ExpressionEncoder>> for the types of the input and the output.
+`TypedColumn` is a spark-sql-Column.md[Column] with the <<encoder, ExpressionEncoder>> for the types of the input and the output.
 
-`TypedColumn` is <<creating-instance, created>> using link:spark-sql-Column.adoc#as[as] operator on a `Column`.
+`TypedColumn` is <<creating-instance, created>> using spark-sql-Column.md#as[as] operator on a `Column`.
 
 [source, scala]
 ----
@@ -20,7 +20,7 @@ res1: org.apache.spark.sql.catalyst.expressions.Expression = 'id
 name(alias: String): TypedColumn[T, U]
 ----
 
-NOTE: `name` is part of link:spark-sql-Column.adoc#name[Column Contract] to...FIXME.
+NOTE: `name` is part of spark-sql-Column.md#name[Column Contract] to...FIXME.
 
 `name`...FIXME
 
@@ -41,18 +41,18 @@ withInputType(
 ====
 `withInputType` is used when the following typed operators are used:
 
-* link:spark-sql-dataset-operators.adoc#select[Dataset.select]
+* spark-sql-dataset-operators.md#select[Dataset.select]
 
-* link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg]
+* spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg]
 
-* link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg]
+* spark-sql-RelationalGroupedDataset.md#agg[RelationalGroupedDataset.agg]
 ====
 
 === [[creating-instance]] Creating TypedColumn Instance
 
 `TypedColumn` takes the following when created:
 
-* [[expr]] Catalyst link:expressions/Expression.md[expression]
-* [[encoder]] link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder] of the column results
+* [[expr]] Catalyst expressions/Expression.md[expression]
+* [[encoder]] spark-sql-ExpressionEncoder.md[ExpressionEncoder] of the column results
 
 `TypedColumn` initializes the <<internal-registries, internal registries and counters>>.

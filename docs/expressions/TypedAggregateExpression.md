@@ -2,7 +2,7 @@ title: TypedAggregateExpression
 
 # TypedAggregateExpression Expression
 
-`TypedAggregateExpression` is the <<contract, contract>> for link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] expressions that...FIXME
+`TypedAggregateExpression` is the <<contract, contract>> for spark-sql-Expression-AggregateFunction.md[AggregateFunction] expressions that...FIXME
 
 [[contract]]
 [source, scala]
@@ -21,11 +21,11 @@ trait TypedAggregateExpression extends AggregateFunction {
 
 `TypedAggregateExpression` is used when:
 
-* `TypedColumn` is requested to link:spark-sql-TypedColumn.adoc#withInputType[withInputType] (for link:spark-sql-dataset-operators.adoc#select[Dataset.select], link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg] and link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg] operators)
+* `TypedColumn` is requested to spark-sql-TypedColumn.md#withInputType[withInputType] (for spark-sql-dataset-operators.md#select[Dataset.select], spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg] and spark-sql-RelationalGroupedDataset.md#agg[RelationalGroupedDataset.agg] operators)
 
-* `Column` is requested to link:spark-sql-Column.adoc#generateAlias[generateAlias] and link:spark-sql-Column.adoc#named[named] (for link:spark-sql-dataset-operators.adoc#select[Dataset.select] and link:spark-sql-KeyValueGroupedDataset.adoc#agg[KeyValueGroupedDataset.agg] operators)
+* `Column` is requested to spark-sql-Column.md#generateAlias[generateAlias] and spark-sql-Column.md#named[named] (for spark-sql-dataset-operators.md#select[Dataset.select] and spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg] operators)
 
-* `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#alias[alias] (when `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#toDF[create a DataFrame from aggregate expressions])
+* `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#alias[alias] (when `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#toDF[create a DataFrame from aggregate expressions])
 
 .TypedAggregateExpression Contract
 [cols="1,2",options="header",width="100%"]
@@ -34,7 +34,7 @@ trait TypedAggregateExpression extends AggregateFunction {
 | Description
 
 | [[aggregator]] `aggregator`
-| link:spark-sql-Aggregator.adoc[Aggregator]
+| spark-sql-Aggregator.md[Aggregator]
 
 | [[inputClass]] `inputClass`
 | Used when...FIXME
@@ -56,10 +56,10 @@ trait TypedAggregateExpression extends AggregateFunction {
 | Aggregator
 | Description
 
-| [[ComplexTypedAggregateExpression]] link:spark-sql-Expression-ComplexTypedAggregateExpression.adoc[ComplexTypedAggregateExpression]
+| [[ComplexTypedAggregateExpression]] spark-sql-Expression-ComplexTypedAggregateExpression.md[ComplexTypedAggregateExpression]
 |
 
-| [[SimpleTypedAggregateExpression]] link:spark-sql-Expression-SimpleTypedAggregateExpression.adoc[SimpleTypedAggregateExpression]
+| [[SimpleTypedAggregateExpression]] spark-sql-Expression-SimpleTypedAggregateExpression.md[SimpleTypedAggregateExpression]
 |
 |===
 
@@ -73,4 +73,4 @@ apply[BUF : Encoder, OUT : Encoder](
 
 `apply`...FIXME
 
-NOTE: `apply` is used exclusively when `Aggregator` is requested to link:spark-sql-Aggregator.adoc#toColumn[convert itself to a TypedColumn].
+NOTE: `apply` is used exclusively when `Aggregator` is requested to spark-sql-Aggregator.md#toColumn[convert itself to a TypedColumn].

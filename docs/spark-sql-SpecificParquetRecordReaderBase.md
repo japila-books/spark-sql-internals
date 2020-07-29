@@ -6,7 +6,7 @@ title: SpecificParquetRecordReaderBase
 
 NOTE: https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/RecordReader.html[RecordReader] reads `<key, value>` pairs from an Hadoop `InputSplit`.
 
-NOTE: link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordReader] is the one and only `SpecificParquetRecordReaderBase` that directly materialize to Java `Objects`.
+NOTE: spark-sql-VectorizedParquetRecordReader.md[VectorizedParquetRecordReader] is the one and only `SpecificParquetRecordReaderBase` that directly materialize to Java `Objects`.
 
 [[internal-registries]]
 .SpecificParquetRecordReaderBase's Internal Properties (e.g. Registries, Counters and Flags)
@@ -16,9 +16,9 @@ NOTE: link:spark-sql-VectorizedParquetRecordReader.adoc[VectorizedParquetRecordR
 | Description
 
 | [[sparkSchema]] `sparkSchema`
-| Spark link:spark-sql-StructType.adoc[schema]
+| Spark spark-sql-StructType.md[schema]
 
-Initialized when `SpecificParquetRecordReaderBase` is requested to <<initialize, initialize>> (from the value of link:spark-sql-ParquetFileFormat.adoc#org.apache.spark.sql.parquet.row.requested_schema[org.apache.spark.sql.parquet.row.requested_schema] configuration as set when `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended])
+Initialized when `SpecificParquetRecordReaderBase` is requested to <<initialize, initialize>> (from the value of spark-sql-ParquetFileFormat.md#org.apache.spark.sql.parquet.row.requested_schema[org.apache.spark.sql.parquet.row.requested_schema] configuration as set when `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended])
 |===
 
 === [[initialize]] `initialize` Method
@@ -28,6 +28,6 @@ Initialized when `SpecificParquetRecordReaderBase` is requested to <<initialize,
 void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext)
 ----
 
-NOTE: `initialize` is part of link:++https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/RecordReader.html#initialize(org.apache.hadoop.mapreduce.InputSplit,%20org.apache.hadoop.mapreduce.TaskAttemptContext)++[RecordReader Contract] to initialize a `RecordReader`.
+NOTE: `initialize` is part of ++https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/RecordReader.html#initialize(org.apache.hadoop.mapreduce.InputSplit,%20org.apache.hadoop.mapreduce.TaskAttemptContext)++[RecordReader Contract] to initialize a `RecordReader`.
 
 `initialize`...FIXME

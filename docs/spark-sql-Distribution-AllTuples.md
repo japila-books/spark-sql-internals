@@ -1,7 +1,7 @@
 # AllTuples
 
 [[requiredNumPartitions]]
-`AllTuples` is a link:spark-sql-Distribution.adoc[Distribution] that indicates to use one partition only.
+`AllTuples` is a spark-sql-Distribution.md[Distribution] that indicates to use one partition only.
 
 === [[createPartitioning]] `createPartitioning` Method
 
@@ -10,6 +10,6 @@
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to create a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
+NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
 
 `createPartitioning`...FIXME

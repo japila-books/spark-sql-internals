@@ -2,7 +2,7 @@ title: TextBasedFileFormat
 
 # TextBasedFileFormat -- Base for Text Splitable FileFormats
 
-`TextBasedFileFormat` is an extension of the <<spark-sql-FileFormat.adoc#, FileFormat>> contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
+`TextBasedFileFormat` is an extension of the <<spark-sql-FileFormat.md#, FileFormat>> contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
 
 [[implementations]]
 .TextBasedFileFormats
@@ -11,16 +11,16 @@ title: TextBasedFileFormat
 | TextBasedFileFormat
 | Description
 
-| <<spark-sql-CSVFileFormat.adoc#, CSVFileFormat>>
+| <<spark-sql-CSVFileFormat.md#, CSVFileFormat>>
 | [[CSVFileFormat]]
 
-| <<spark-sql-JsonFileFormat.adoc#, JsonFileFormat>>
+| <<spark-sql-JsonFileFormat.md#, JsonFileFormat>>
 | [[JsonFileFormat]]
 
 | `LibSVMFileFormat`
 | [[LibSVMFileFormat]] Used in Spark MLlib
 
-| <<spark-sql-TextFileFormat.adoc#, TextFileFormat>>
+| <<spark-sql-TextFileFormat.md#, TextFileFormat>>
 | [[TextFileFormat]]
 |===
 
@@ -37,15 +37,15 @@ isSplitable(
   path: Path): Boolean
 ----
 
-NOTE: `isSplitable` is part of link:spark-sql-FileFormat.adoc#isSplitable[FileFormat Contract] to know whether a given file is splitable or not.
+NOTE: `isSplitable` is part of spark-sql-FileFormat.md#isSplitable[FileFormat Contract] to know whether a given file is splitable or not.
 
-`isSplitable` requests the <<codecFactory, CompressionCodecFactory>> to find the link:++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html#getCodec-org.apache.hadoop.fs.Path-++[compression codec for the given file] (as the input `path`) based on its filename suffix.
+`isSplitable` requests the <<codecFactory, CompressionCodecFactory>> to find the ++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html#getCodec-org.apache.hadoop.fs.Path-++[compression codec for the given file] (as the input `path`) based on its filename suffix.
 
 `isSplitable` returns `true` when the compression codec is not used (i.e. `null`) or is a Hadoop https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/SplittableCompressionCodec.html[SplittableCompressionCodec] (e.g. https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/BZip2Codec.html[BZip2Codec]).
 
-If the <<codecFactory, CompressionCodecFactory>> is not defined, `isSplitable` creates a https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html[CompressionCodecFactory] (with a Hadoop `Configuration` by requesting the `SessionState` for a link:SessionState.md#newHadoopConfWithOptions[new Hadoop Configuration with extra options]).
+If the <<codecFactory, CompressionCodecFactory>> is not defined, `isSplitable` creates a https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html[CompressionCodecFactory] (with a Hadoop `Configuration` by requesting the `SessionState` for a SessionState.md#newHadoopConfWithOptions[new Hadoop Configuration with extra options]).
 
-NOTE: `isSplitable` uses the input `sparkSession` to access link:SparkSession.md#sessionState[SessionState].
+NOTE: `isSplitable` uses the input `sparkSession` to access SparkSession.md#sessionState[SessionState].
 
 [NOTE]
 ====

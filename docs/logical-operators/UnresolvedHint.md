@@ -2,13 +2,13 @@ title: UnresolvedHint
 
 # UnresolvedHint Unary Logical Operator -- Attaching Hint to Logical Plan
 
-`UnresolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents a hint (by <<name, name>> and <<parameters, parameters>>) for the <<child, child>> logical plan.
+`UnresolvedHint` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents a hint (by <<name, name>> and <<parameters, parameters>>) for the <<child, child>> logical plan.
 
-`UnresolvedHint` is <<creating-instance, created>> and added to a link:spark-sql-LogicalPlan.adoc[logical plan] when:
+`UnresolvedHint` is <<creating-instance, created>> and added to a spark-sql-LogicalPlan.md[logical plan] when:
 
-* link:spark-sql-dataset-operators.adoc#hint[Dataset.hint] operator is used
+* spark-sql-dataset-operators.md#hint[Dataset.hint] operator is used
 
-* `AstBuilder` link:spark-sql-AstBuilder.adoc#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
+* `AstBuilder` spark-sql-AstBuilder.md#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
 
 [source, scala]
 ----
@@ -33,18 +33,18 @@ When created `UnresolvedHint` takes:
 
 * [[name]] Name of a hint
 * [[parameters]] Parameters of a hint
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
 
 [[resolved]]
-`UnresolvedHint` can never be link:spark-sql-LogicalPlan.adoc#resolved[resolved] and is supposed to be converted to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] unary logical operator during <<spark-sql-Analyzer.adoc#Hints, query analysis>> (or simply removed from a logical plan).
+`UnresolvedHint` can never be spark-sql-LogicalPlan.md#resolved[resolved] and is supposed to be converted to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint] unary logical operator during <<spark-sql-Analyzer.md#Hints, query analysis>> (or simply removed from a logical plan).
 
 [NOTE]
 ====
-There are the following logical rules that link:spark-sql-Analyzer.adoc[Spark Analyzer] uses to analyze logical plans with the link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator:
+There are the following logical rules that spark-sql-Analyzer.md[Spark Analyzer] uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
-. link:spark-sql-Analyzer-ResolveBroadcastHints.adoc[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+. spark-sql-Analyzer-ResolveBroadcastHints.md[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 
-. <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
+. <<spark-sql-Analyzer-ResolveCoalesceHints.md#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
 . `RemoveAllHints` simply removes all `UnresolvedHint` operators
 
@@ -87,7 +87,7 @@ scala> println(resolvedPlan.numberedTreeString)
 
 [TIP]
 ====
-Use `hint` operator from link:spark-sql-catalyst-dsl.adoc#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `hint` operator from spark-sql-catalyst-dsl.md#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

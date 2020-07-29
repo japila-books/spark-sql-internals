@@ -2,7 +2,7 @@ title: AggregationIterator
 
 # AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
 
-`AggregationIterator` is the base for <<implementations, iterators>> of <<spark-sql-UnsafeRow.adoc, UnsafeRows>> that...FIXME
+`AggregationIterator` is the base for <<implementations, iterators>> of <<spark-sql-UnsafeRow.md, UnsafeRows>> that...FIXME
 
 > Iterators are data structures that allow to iterate over a sequence of elements. They have a `hasNext` method for checking if there is a next element available, and a `next` method which returns the next element and discards it from the iterator.
 
@@ -13,16 +13,16 @@ title: AggregationIterator
 | Name
 | Description
 
-| <<spark-sql-ObjectAggregationIterator.adoc#, ObjectAggregationIterator>>
-| Used exclusively when `ObjectHashAggregateExec` physical operator is link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#doExecute[executed].
+| <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>
+| Used exclusively when `ObjectHashAggregateExec` physical operator is spark-sql-SparkPlan-ObjectHashAggregateExec.md#doExecute[executed].
 
-| <<spark-sql-SortBasedAggregationIterator.adoc#, SortBasedAggregationIterator>>
-| Used exclusively when `SortAggregateExec` physical operator is link:spark-sql-SparkPlan-SortAggregateExec.adoc#doExecute[executed].
+| <<spark-sql-SortBasedAggregationIterator.md#, SortBasedAggregationIterator>>
+| Used exclusively when `SortAggregateExec` physical operator is spark-sql-SparkPlan-SortAggregateExec.md#doExecute[executed].
 
-| link:spark-sql-TungstenAggregationIterator.adoc[TungstenAggregationIterator]
-a| Used exclusively when `HashAggregateExec` physical operator is link:spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute[executed].
+| spark-sql-TungstenAggregationIterator.md[TungstenAggregationIterator]
+a| Used exclusively when `HashAggregateExec` physical operator is spark-sql-SparkPlan-HashAggregateExec.md#doExecute[executed].
 
-NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operator is the preferred aggregate physical operator for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+NOTE: spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec] operator is the preferred aggregate physical operator for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 |===
 
 [[internal-registries]]
@@ -33,12 +33,12 @@ NOTE: link:spark-sql-SparkPlan-HashAggregateExec.adoc[HashAggregateExec] operato
 | Description
 
 | [[aggregateFunctions]] `aggregateFunctions`
-| link:spark-sql-Expression-AggregateFunction.adoc[Aggregate functions]
+| spark-sql-Expression-AggregateFunction.md[Aggregate functions]
 
 Used when...FIXME
 
 | [[allImperativeAggregateFunctions]] `allImperativeAggregateFunctions`
-| link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] functions
+| spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] functions
 
 Used when...FIXME
 
@@ -53,23 +53,23 @@ Used when...FIXME
 Used when...FIXME
 
 | `generateOutput`
-a| [[generateOutput]] Function used to generate an <<spark-sql-UnsafeRow.adoc#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
+a| [[generateOutput]] Function used to generate an <<spark-sql-UnsafeRow.md#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
 
 Used when:
 
-* `ObjectAggregationIterator` is requested for the <<spark-sql-ObjectAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-ObjectAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `ObjectAggregationIterator` is requested for the <<spark-sql-ObjectAggregationIterator.md#next, next unsafe row>> and <<spark-sql-ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
-* `SortBasedAggregationIterator` is requested for the <<spark-sql-SortBasedAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-SortBasedAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `SortBasedAggregationIterator` is requested for the <<spark-sql-SortBasedAggregationIterator.md#next, next unsafe row>> and <<spark-sql-SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
-* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.adoc#next, next unsafe row>> and <<spark-sql-TungstenAggregationIterator.adoc#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.md#next, next unsafe row>> and <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
 | [[groupingAttributes]] `groupingAttributes`
-| Grouping link:spark-sql-Expression-Attribute.adoc[attributes]
+| Grouping spark-sql-Expression-Attribute.md[attributes]
 
 Used when...FIXME
 
 | [[groupingProjection]] `groupingProjection`
-| link:spark-sql-UnsafeProjection.adoc[UnsafeProjection]
+| spark-sql-UnsafeProjection.md[UnsafeProjection]
 
 Used when...FIXME
 
@@ -83,12 +83,12 @@ Used when...FIXME
 
 `AggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[inputAttributes]] Input link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[groupingExpressions]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
+* [[inputAttributes]] Input spark-sql-Expression-Attribute.md[attributes]
 * [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
-* [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]
+* [[resultExpressions]] Result spark-sql-Expression-NamedExpression.md[named expressions]
 * [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
 
 `AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
@@ -137,5 +137,5 @@ generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 
 * `AggregationIterator` is <<generateOutput, created>>
 
-* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.adoc#generateResultProjection, generateResultProjection>>
+* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.md#generateResultProjection, generateResultProjection>>
 ====

@@ -2,16 +2,16 @@ title: WriteToDataSourceV2Exec
 
 # WriteToDataSourceV2Exec Physical Operator
 
-`WriteToDataSourceV2Exec` is a <<SparkPlan.md#, physical operator>> that represents an <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator (and a deprecated <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> logical operator) at execution time.
+`WriteToDataSourceV2Exec` is a <<SparkPlan.md#, physical operator>> that represents an <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator (and a deprecated <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator) at execution time.
 
 `WriteToDataSourceV2Exec` is <<creating-instance, created>> when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan an [AppendData](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData) logical operator (and a deprecated [WriteToDataSourceV2](../execution-planning-strategies/DataSourceV2Strategy.md#apply-WriteToDataSourceV2)).
 
-NOTE: Although <<spark-sql-LogicalPlan-WriteToDataSourceV2.adoc#, WriteToDataSourceV2>> logical operator is deprecated since Spark SQL 2.4.0 (for <<spark-sql-LogicalPlan-AppendData.adoc#, AppendData>> logical operator), the `AppendData` logical operator is currently used in tests only. That makes `WriteToDataSourceV2` logical operator still relevant.
+NOTE: Although <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator is deprecated since Spark SQL 2.4.0 (for <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator), the `AppendData` logical operator is currently used in tests only. That makes `WriteToDataSourceV2` logical operator still relevant.
 
 [[creating-instance]]
 `WriteToDataSourceV2Exec` takes the following to be created:
 
-* [[writer]] <<spark-sql-DataSourceWriter.adoc#, DataSourceWriter>>
+* [[writer]] <<spark-sql-DataSourceWriter.md#, DataSourceWriter>>
 * [[query]] Child <<SparkPlan.md#, physical plan>>
 
 [[children]]
@@ -31,7 +31,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.v2.WriteToDataSourceV2Exec=INFO
 ```
 
-Refer to <<spark-logging.adoc#, Logging>>.
+Refer to <<spark-logging.md#, Logging>>.
 ====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
@@ -41,13 +41,13 @@ Refer to <<spark-logging.adoc#, Logging>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.adoc#createWriterFactory, create a DataWriterFactory>> for the writing task.
+`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#createWriterFactory, create a DataWriterFactory>> for the writing task.
 
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.adoc#useCommitCoordinator, use a CommitCoordinator or not>>.
+`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#useCommitCoordinator, use a CommitCoordinator or not>>.
 
-`doExecute` requests the <<query, child physical plan>> to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and in the end generates an `RDD` of <<spark-sql-InternalRow.adoc#, internal binary rows>>).
+`doExecute` requests the <<query, child physical plan>> to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and in the end generates an `RDD` of <<spark-sql-InternalRow.md#, internal binary rows>>).
 
 `doExecute` prints out the following INFO message to the logs:
 
@@ -60,9 +60,9 @@ Start processing data source writer: [writer]. The input RDD has [length] partit
 
 * The `RDD[InternalRow]` of the <<query, child physical plan>>
 
-* A partition processing function that requests the `DataWritingSparkTask` object to <<spark-sql-DataWritingSparkTask.adoc#run, run>> the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
+* A partition processing function that requests the `DataWritingSparkTask` object to <<spark-sql-DataWritingSparkTask.md#run, run>> the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
 
-* A result handler function that records the result `WriterCommitMessage` from a successful data writer and requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.adoc#onDataWriterCommit, handle the commit message>> (which does nothing by default)
+* A result handler function that records the result `WriterCommitMessage` from a successful data writer and requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#onDataWriterCommit, handle the commit message>> (which does nothing by default)
 
 `doExecute` prints out the following INFO message to the logs:
 
@@ -70,7 +70,7 @@ Start processing data source writer: [writer]. The input RDD has [length] partit
 Data source writer [writer] is committing.
 ```
 
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.adoc#commit, commit>> (passing on with the commit messages).
+`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#commit, commit>> (passing on with the commit messages).
 
 In the end, `doExecute` prints out the following INFO message to the logs:
 

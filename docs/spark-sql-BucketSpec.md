@@ -3,7 +3,7 @@ title: BucketSpec
 # BucketSpec -- Bucketing Specification of Table
 
 [[creating-instance]]
-`BucketSpec` is the *bucketing specification* of a table, i.e. the metadata of the link:spark-sql-bucketing.adoc[bucketing] of a table.
+`BucketSpec` is the *bucketing specification* of a table, i.e. the metadata of the spark-sql-bucketing.md[bucketing] of a table.
 
 `BucketSpec` includes the following:
 
@@ -15,13 +15,13 @@ The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusi
 
 `BucketSpec` is <<creating-instance, created>> when:
 
-. `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable] (and does link:spark-sql-DataFrameWriter.adoc#getBucketSpec[getBucketSpec])
+. `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable] (and does spark-sql-DataFrameWriter.md#getBucketSpec[getBucketSpec])
 
-. `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and link:hive/HiveExternalCatalog.adoc#tableMetaToTableProps[tableMetaToTableProps]
+. `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties[getBucketSpecFromTableProperties] and hive/HiveExternalCatalog.md#tableMetaToTableProps[tableMetaToTableProps]
 
-. `HiveClientImpl` is requested to link:hive/HiveClientImpl.adoc#getTableOption[retrieve a table metadata]
+. `HiveClientImpl` is requested to hive/HiveClientImpl.md#getTableOption[retrieve a table metadata]
 
-. `SparkSqlAstBuilder` is requested to link:spark-sql-SparkSqlAstBuilder.adoc#visitBucketSpec[visitBucketSpec] (for `CREATE TABLE` SQL statement with `CLUSTERED BY` and `INTO n BUCKETS` with optional `SORTED BY` clauses)
+. `SparkSqlAstBuilder` is requested to spark-sql-SparkSqlAstBuilder.md#visitBucketSpec[visitBucketSpec] (for `CREATE TABLE` SQL statement with `CLUSTERED BY` and `INTO n BUCKETS` with optional `SORTED BY` clauses)
 
 [[toString]]
 `BucketSpec` uses the following *text representation* (i.e. `toString`):
@@ -66,7 +66,7 @@ Map(Num Buckets -> 8, Bucket Columns -> [`col1`], Sort Columns -> [`col2`])
 ====
 `toLinkedHashMap` is used when:
 
-* `CatalogTable` is requested for <<spark-sql-CatalogTable.adoc#toLinkedHashMap, toLinkedHashMap>>
+* `CatalogTable` is requested for <<spark-sql-CatalogTable.md#toLinkedHashMap, toLinkedHashMap>>
 
-* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#run, executed>> with a non-empty <<partitionSpec, partitionSpec>> and the <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#isExtended, isExtended>> flag on (that uses <<spark-sql-LogicalPlan-DescribeTableCommand.adoc#describeFormattedDetailedPartitionInfo, describeFormattedDetailedPartitionInfo>>).
+* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> with a non-empty <<partitionSpec, partitionSpec>> and the <<spark-sql-LogicalPlan-DescribeTableCommand.md#isExtended, isExtended>> flag on (that uses <<spark-sql-LogicalPlan-DescribeTableCommand.md#describeFormattedDetailedPartitionInfo, describeFormattedDetailedPartitionInfo>>).
 ====

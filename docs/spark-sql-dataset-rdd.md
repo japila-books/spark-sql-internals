@@ -8,7 +8,7 @@ This document collects advantages of `Dataset` vs `RDD[CaseClass]` to answer htt
 
 ## Saving to or Writing from Data Sources
 
-With Dataset API, loading data from a data source or saving it to one is as simple as using <<SparkSession.md#read, SparkSession.read>> or <<spark-sql-dataset-operators.adoc#write, Dataset.write>> methods, appropriately.
+With Dataset API, loading data from a data source or saving it to one is as simple as using <<SparkSession.md#read, SparkSession.read>> or <<spark-sql-dataset-operators.md#write, Dataset.write>> methods, appropriately.
 
 ## Accessing Fields / Columns
 

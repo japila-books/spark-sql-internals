@@ -12,17 +12,17 @@ title: StaticSQLConf
 
 | [[spark.sql.catalogImplementation]][[CATALOG_IMPLEMENTATION]] *spark.sql.catalogImplementation*
 
-(internal) Configures `in-memory` (default) or ``hive``-related link:BaseSessionStateBuilder.md[BaseSessionStateBuilder] and link:spark-sql-ExternalCatalog.adoc[ExternalCatalog]
+(internal) Configures `in-memory` (default) or ``hive``-related BaseSessionStateBuilder.md[BaseSessionStateBuilder] and spark-sql-ExternalCatalog.md[ExternalCatalog]
 
-link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable link:hive/index.adoc[Hive support] for a link:SparkSession.md[SparkSession].
+link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable hive/index.md[Hive support] for a SparkSession.md[SparkSession].
 
 Used when:
 
-* `SparkSession` utility is requested for the link:SparkSession.md#sessionStateClassName[name of the BaseSessionStateBuilder implementation] (when `SparkSession` is requested for a link:SparkSession.md#sessionState[SessionState])
+* `SparkSession` utility is requested for the SparkSession.md#sessionStateClassName[name of the BaseSessionStateBuilder implementation] (when `SparkSession` is requested for a SparkSession.md#sessionState[SessionState])
 
-* `SharedState` utility is requested for the link:SharedState.md#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an link:SharedState.md#externalCatalog[ExternalCatalog])
+* `SharedState` utility is requested for the SharedState.md#externalCatalogClassName[name of the ExternalCatalog implementation] (when `SharedState` is requested for an SharedState.md#externalCatalog[ExternalCatalog])
 
-* `SparkSession.Builder` is requested to link:SparkSession-Builder.md#enableHiveSupport[enable Hive support]
+* `SparkSession.Builder` is requested to SparkSession-Builder.md#enableHiveSupport[enable Hive support]
 
 * `spark-shell` is executed
 
@@ -30,7 +30,7 @@ Used when:
 
 | [[spark.sql.debug]][[DEBUG_MODE]] *spark.sql.debug*
 
-(internal) Only used for internal debugging when `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#restoreTableMetadata[restoreTableMetadata].
+(internal) Only used for internal debugging when `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#restoreTableMetadata[restoreTableMetadata].
 
 Default: `false`
 
@@ -54,7 +54,7 @@ Default: `1000`
 
 Default: `global_temp`
 
-Used exclusively to create a <<spark-sql-GlobalTempViewManager.adoc#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<SharedState.md#globalTempViewManager, GlobalTempViewManager>>.
+Used exclusively to create a <<spark-sql-GlobalTempViewManager.md#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<SharedState.md#globalTempViewManager, GlobalTempViewManager>>.
 
 NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<SharedState.md#externalCatalog, ExternalCatalog>>.
 
@@ -66,7 +66,7 @@ Default: `false`
 
 | [[spark.sql.queryExecutionListeners]][[QUERY_EXECUTION_LISTENERS]] *spark.sql.queryExecutionListeners*
 
-List of class names that implement <<spark-sql-QueryExecutionListener.adoc#, QueryExecutionListener>> that will be automatically <<spark-sql-ExecutionListenerManager.adoc#register, registered>> to new `SparkSessions`.
+List of class names that implement <<spark-sql-QueryExecutionListener.md#, QueryExecutionListener>> that will be automatically <<spark-sql-ExecutionListenerManager.md#register, registered>> to new `SparkSessions`.
 
 Default: (empty)
 

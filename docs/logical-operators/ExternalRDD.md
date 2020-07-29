@@ -1,10 +1,10 @@
 # ExternalRDD Leaf Logical Operator
 
-`ExternalRDD` is a link:spark-sql-LogicalPlan-LeafNode.adoc[leaf logical operator] that is a logical representation of (the data from) an RDD in a logical query plan.
+`ExternalRDD` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that is a logical representation of (the data from) an RDD in a logical query plan.
 
 `ExternalRDD` is <<creating-instance, created>> when:
 
-* `SparkSession` is requested to create a link:SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:SparkSession.md#createDataset[Dataset from RDD of a given type]
+* `SparkSession` is requested to create a SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or SparkSession.md#createDataset[Dataset from RDD of a given type]
 
 * `ExternalRDD` is requested to <<newInstance, create a new instance>>
 
@@ -27,7 +27,7 @@ scala> println(logicalPlan.numberedTreeString)
 
 `ExternalRDD` is a <<newInstance, MultiInstanceRelation>> and a `ObjectProducer`.
 
-`ExternalRDD` is resolved to link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec] when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
+`ExternalRDD` is resolved to spark-sql-SparkPlan-ExternalRDDScanExec.md[ExternalRDDScanExec] when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 === [[newInstance]] `newInstance` Method
 
@@ -36,7 +36,7 @@ scala> println(logicalPlan.numberedTreeString)
 newInstance(): LogicalRDD.this.type
 ----
 
-NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInstance[MultiInstanceRelation Contract] to...FIXME.
+NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[MultiInstanceRelation Contract] to...FIXME.
 
 `newInstance`...FIXME
 
@@ -47,7 +47,7 @@ NOTE: `newInstance` is part of link:spark-sql-MultiInstanceRelation.adoc#newInst
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#computeStats[LeafNode Contract] to compute statistics for link:spark-sql-cost-based-optimization.adoc[cost-based optimizer].
+NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
 
 `computeStats`...FIXME
 
@@ -55,9 +55,9 @@ NOTE: `computeStats` is part of link:spark-sql-LogicalPlan-LeafNode.adoc#compute
 
 `ExternalRDD` takes the following when created:
 
-* [[outputObjAttr]] Output schema link:spark-sql-Expression-Attribute.adoc[attribute]
+* [[outputObjAttr]] Output schema spark-sql-Expression-Attribute.md[attribute]
 * [[rdd]] `RDD` of `T`
-* [[session]] link:SparkSession.md[SparkSession]
+* [[session]] SparkSession.md[SparkSession]
 
 === [[apply]] Creating ExternalRDD -- `apply` Factory Method
 
@@ -68,4 +68,4 @@ apply[T: Encoder](rdd: RDD[T], session: SparkSession): LogicalPlan
 
 `apply`...FIXME
 
-NOTE: `apply` is used when `SparkSession` is requested to create a link:SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or link:SparkSession.md#createDataset[Dataset from RDD of a given type].
+NOTE: `apply` is used when `SparkSession` is requested to create a SparkSession.md#createDataFrame[DataFrame from RDD of product types] (e.g. Scala case classes, tuples) or SparkSession.md#createDataset[Dataset from RDD of a given type].

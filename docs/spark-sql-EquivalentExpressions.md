@@ -10,7 +10,7 @@
 | Description
 
 | [[equivalenceMap]] `equivalenceMap`
-| *Equivalent sets of expressions*, i.e. semantically equal link:expressions/Expression.md[expressions] by their `Expr` "representative"
+| *Equivalent sets of expressions*, i.e. semantically equal expressions/Expression.md[expressions] by their `Expr` "representative"
 
 Used when...FIXME
 |===
@@ -24,7 +24,7 @@ addExprTree(expr: Expression): Unit
 
 `addExprTree`...FIXME
 
-NOTE: `addExprTree` is used when `CodegenContext` is requested to link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] or link:spark-sql-CodegenContext.adoc#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
+NOTE: `addExprTree` is used when `CodegenContext` is requested to spark-sql-CodegenContext.md#subexpressionElimination[subexpressionElimination] or spark-sql-CodegenContext.md#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
 
 === [[addExpr]] `addExpr` Method
 
@@ -41,7 +41,7 @@ addExpr(expr: Expression): Boolean
 
 * `EquivalentExpressions` is requested to <<addExprTree, addExprTree>>
 
-* `PhysicalAggregation` is requested to link:spark-sql-PhysicalAggregation.adoc#unapply[destructure an Aggregate logical operator]
+* `PhysicalAggregation` is requested to spark-sql-PhysicalAggregation.md#unapply[destructure an Aggregate logical operator]
 ====
 
 === [[getAllEquivalentExprs]] Getting Equivalent Sets Of Expressions -- `getAllEquivalentExprs` Method
@@ -53,4 +53,4 @@ getAllEquivalentExprs: Seq[Seq[Expression]]
 
 `getAllEquivalentExprs` takes the values of all the <<equivalenceMap, equivalent sets of expressions>>.
 
-NOTE: `getAllEquivalentExprs` is used when `CodegenContext` is requested to link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] or link:spark-sql-CodegenContext.adoc#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
+NOTE: `getAllEquivalentExprs` is used when `CodegenContext` is requested to spark-sql-CodegenContext.md#subexpressionElimination[subexpressionElimination] or spark-sql-CodegenContext.md#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].

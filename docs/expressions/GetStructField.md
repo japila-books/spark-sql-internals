@@ -2,7 +2,7 @@ title: GetStructField
 
 # GetStructField Unary Expression
 
-`GetStructField` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> that...FIXME
+`GetStructField` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that...FIXME
 
 `GetStructField` is <<creating-instance, created>> when...FIXME
 
@@ -10,6 +10,6 @@ title: GetStructField
 
 `GetStructField` takes the following when created:
 
-* [[child]] Child link:expressions/Expression.md[expression]
+* [[child]] Child expressions/Expression.md[expression]
 * [[ordinal]] Ordinal
 * [[name]] Optional name

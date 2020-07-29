@@ -2,15 +2,15 @@ title: RelationalGroupedDataset
 
 # RelationalGroupedDataset -- Untyped Row-based Grouping
 
-`RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a link:spark-sql-DataFrame.adoc[DataFrame].
+`RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a spark-sql-DataFrame.md[DataFrame].
 
-NOTE: link:spark-sql-KeyValueGroupedDataset.adoc[KeyValueGroupedDataset] is used for typed aggregates over groups of custom Scala objects (not link:spark-sql-Row.adoc[Rows]).
+NOTE: spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] is used for typed aggregates over groups of custom Scala objects (not spark-sql-Row.md[Rows]).
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
-* link:spark-sql-basic-aggregation.adoc#groupBy[groupBy]
-* link:spark-sql-multi-dimensional-aggregation.adoc#rollup[rollup]
-* link:spark-sql-multi-dimensional-aggregation.adoc#cube[cube]
+* spark-sql-basic-aggregation.md#groupBy[groupBy]
+* spark-sql-multi-dimensional-aggregation.md#rollup[rollup]
+* spark-sql-multi-dimensional-aggregation.md#cube[cube]
 * <<pivot, pivot>>
 
 [[operators]]
@@ -58,7 +58,7 @@ a| [[sum]]
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
+link:spark-sql-properties.md#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
 
 `spark.sql.retainGroupColumns` is enabled by default.
 
@@ -83,9 +83,9 @@ agg(exprs: Map[String, String]): DataFrame
 agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
 ----
 
-`agg` creates a link:spark-sql-DataFrame.adoc[DataFrame] with the rows being the result of executing grouping expressions (specified using link:spark-sql-Column.adoc[columns] or names) over row groups.
+`agg` creates a spark-sql-DataFrame.md[DataFrame] with the rows being the result of executing grouping expressions (specified using spark-sql-Column.md[columns] or names) over row groups.
 
-NOTE: You can use link:spark-sql-Column.adoc[untyped] or link:spark-sql-TypedColumn.adoc[typed] column expressions.
+NOTE: You can use spark-sql-Column.md[untyped] or spark-sql-TypedColumn.md[typed] column expressions.
 
 [source, scala]
 ----
@@ -151,7 +151,7 @@ Internally, `toDF` branches off per group type.
 
 CAUTION: FIXME
 
-[[toDF-PivotType]] For `PivotType`, `toDF` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] unary logical operator.
+[[toDF-PivotType]] For `PivotType`, `toDF` spark-sql-Dataset.md#ofRows[creates a DataFrame] with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
 
 [NOTE]
 ====
@@ -177,11 +177,11 @@ NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDat
 
 `RelationalGroupedDataset` takes the following when created:
 
-* [[df]] link:spark-sql-DataFrame.adoc[DataFrame]
-* [[groupingExprs]] Grouping link:expressions/Expression.md[expressions]
+* [[df]] spark-sql-DataFrame.md[DataFrame]
+* [[groupingExprs]] Grouping expressions/Expression.md[expressions]
 * [[groupType]] Group type (to indicate the "source" operator)
 
-** `GroupByType` for link:spark-sql-basic-aggregation.adoc#groupBy[groupBy]
+** `GroupByType` for spark-sql-basic-aggregation.md#groupBy[groupBy]
 
 ** `CubeType`
 
@@ -204,7 +204,7 @@ pivot(pivotColumn: Column, values: Seq[Any]): RelationalGroupedDataset // <3>
 
 `pivot` pivots on a `pivotColumn` column, i.e. adds new columns per distinct values in `pivotColumn`.
 
-NOTE: `pivot` is only supported after link:spark-sql-basic-aggregation.adoc#groupBy[groupBy] operation.
+NOTE: `pivot` is only supported after spark-sql-basic-aggregation.md#groupBy[groupBy] operation.
 
 NOTE: Only one `pivot` operation is supported on a `RelationalGroupedDataset`.
 
@@ -259,13 +259,13 @@ image::images/spark-sql-pivot-webui.png[align="center"]
 .pivot in web UI -- Three Extra Scanning Jobs Due to Unspecified Distinct Values
 image::images/spark-sql-pivot-webui-scanning-jobs.png[align="center"]
 
-NOTE: link:spark-sql-properties.adoc#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues] (default: `10000`) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
+NOTE: spark-sql-properties.md#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues] (default: `10000`) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
 
 Internally, `pivot` creates a `RelationalGroupedDataset` with `PivotType` group type and `pivotColumn` resolved using the DataFrame's columns with `values` as `Literal` expressions.
 
 [NOTE]
 ====
-<<toDF, toDF>> internal method maps `PivotType` group type to a `DataFrame` with link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] unary logical operator.
+<<toDF, toDF>> internal method maps `PivotType` group type to a `DataFrame` with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
 
 ```
 scala> q.queryExecution.logical

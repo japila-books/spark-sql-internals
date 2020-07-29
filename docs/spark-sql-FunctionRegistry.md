@@ -32,7 +32,7 @@ trait FunctionRegistry {
 | Description
 
 | clear
-| [[clear]] Used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#reset, reset>>
+| [[clear]] Used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#reset, reset>>
 
 | dropFunction
 | [[dropFunction]] Used when...FIXME
@@ -47,9 +47,9 @@ Used when:
 
 * `FunctionRegistry` is requested to <<functionExists, functionExists>>
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#lookupFunction, find a function by name>>, <<spark-sql-SessionCatalog.adoc#lookupFunctionInfo, lookupFunctionInfo>> or <<spark-sql-SessionCatalog.adoc#reset, reset>>
+* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupFunction, find a function by name>>, <<spark-sql-SessionCatalog.md#lookupFunctionInfo, lookupFunctionInfo>> or <<spark-sql-SessionCatalog.md#reset, reset>>
 
-* `HiveSessionCatalog` is requested to link:hive/HiveSessionCatalog.adoc#lookupFunction0[lookupFunction0]
+* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
 
 | lookupFunctionBuilder
 | [[lookupFunctionBuilder]] Used when...FIXME
@@ -59,7 +59,7 @@ a| [[registerFunction]]
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#registerFunction, registerFunction>> or <<spark-sql-SessionCatalog.adoc#reset, reset>>
+* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#registerFunction, registerFunction>> or <<spark-sql-SessionCatalog.md#reset, reset>>
 
 * `FunctionRegistry` is requested for a <<builtin, SimpleFunctionRegistry with the built-in functions registered>> or <<createOrReplaceTempFunction, createOrReplaceTempFunction>>
 
@@ -69,7 +69,7 @@ Used when:
 [[implementations]]
 NOTE: The one and only `FunctionRegistry` available in Spark SQL is <<SimpleFunctionRegistry, SimpleFunctionRegistry>>.
 
-`FunctionRegistry` is available through link:SessionState.md#functionRegistry[functionRegistry] property of a `SessionState` (that is available as <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`).
+`FunctionRegistry` is available through SessionState.md#functionRegistry[functionRegistry] property of a `SessionState` (that is available as <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`).
 
 [source, scala]
 ----
@@ -80,7 +80,7 @@ scala> :type spark.sessionState.functionRegistry
 org.apache.spark.sql.catalyst.analysis.FunctionRegistry
 ----
 
-NOTE: You can register a new user-defined function using link:spark-sql-UDFRegistration.adoc[UDFRegistration].
+NOTE: You can register a new user-defined function using spark-sql-UDFRegistration.md[UDFRegistration].
 
 [[attributes]]
 .FunctionRegistry's Attributes
@@ -102,7 +102,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 | Catalyst Expression
 | SQL Function
 
-| <<spark-sql-Expression-CumeDist.adoc#, CumeDist>>
+| <<spark-sql-Expression-CumeDist.md#, CumeDist>>
 | [[cume_dist]] cume_dist
 
 | `IfNull`
@@ -111,7 +111,7 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 | `Left`
 | [[left]] left
 
-| <<spark-sql-Expression-MonotonicallyIncreasingID.adoc#, MonotonicallyIncreasingID>>
+| <<spark-sql-Expression-MonotonicallyIncreasingID.md#, MonotonicallyIncreasingID>>
 | [[monotonically_increasing_id]] monotonically_increasing_id
 
 | `NullIf`
@@ -123,16 +123,16 @@ NOTE: You can register a new user-defined function using link:spark-sql-UDFRegis
 | `Nvl2`
 | [[nvl2]] nvl2
 
-| <<spark-sql-Expression-ParseToDate.adoc#, ParseToDate>>
+| <<spark-sql-Expression-ParseToDate.md#, ParseToDate>>
 | [[to_date]] to_date
 
-| <<spark-sql-Expression-ParseToTimestamp.adoc#, ParseToTimestamp>>
+| <<spark-sql-Expression-ParseToTimestamp.md#, ParseToTimestamp>>
 | [[to_timestamp]] to_timestamp
 
 | `Right`
 | [[right]] right
 
-| <<spark-sql-CreateStruct.adoc#registryEntry, CreateNamedStruct>>
+| <<spark-sql-CreateStruct.md#registryEntry, CreateNamedStruct>>
 | [[struct]] struct
 |===
 
@@ -161,7 +161,7 @@ createOrReplaceTempFunction(name: String, builder: FunctionBuilder): Unit
 
 `createOrReplaceTempFunction`...FIXME
 
-NOTE: `createOrReplaceTempFunction` is used exclusively when `UDFRegistration` is requested to register an <<spark-sql-UDFRegistration.adoc#register, user-defined function>>, <<spark-sql-UDFRegistration.adoc#register-UserDefinedAggregateFunction, user-defined aggregate function>>, <<spark-sql-UDFRegistration.adoc#register-UserDefinedFunction, user-defined function (as UserDefinedFunction)>> or `registerPython`.
+NOTE: `createOrReplaceTempFunction` is used exclusively when `UDFRegistration` is requested to register an <<spark-sql-UDFRegistration.md#register, user-defined function>>, <<spark-sql-UDFRegistration.md#register-UserDefinedAggregateFunction, user-defined aggregate function>>, <<spark-sql-UDFRegistration.md#register-UserDefinedFunction, user-defined function (as UserDefinedFunction)>> or `registerPython`.
 
 === [[functionExists]] `functionExists` Method
 

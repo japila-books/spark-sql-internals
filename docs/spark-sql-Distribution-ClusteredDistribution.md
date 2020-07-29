@@ -1,12 +1,12 @@
 # ClusteredDistribution
 
-`ClusteredDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
+`ClusteredDistribution` is a spark-sql-Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
 
 `ClusteredDistribution` requires that the <<clustering, clustering expressions>> should not be empty (i.e. `Nil`).
 
 `ClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for a required child distribution:
 
-* `MapGroupsExec`, link:spark-sql-SparkPlan-HashAggregateExec.adoc#requiredChildDistribution[HashAggregateExec], link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#requiredChildDistribution[ObjectHashAggregateExec], link:spark-sql-SparkPlan-SortAggregateExec.adoc#requiredChildDistribution[SortAggregateExec], link:spark-sql-SparkPlan-WindowExec.adoc#requiredChildDistribution[WindowExec]
+* `MapGroupsExec`, spark-sql-SparkPlan-HashAggregateExec.md#requiredChildDistribution[HashAggregateExec], spark-sql-SparkPlan-ObjectHashAggregateExec.md#requiredChildDistribution[ObjectHashAggregateExec], spark-sql-SparkPlan-SortAggregateExec.md#requiredChildDistribution[SortAggregateExec], spark-sql-SparkPlan-WindowExec.md#requiredChildDistribution[WindowExec]
 
 * Spark Structured Streaming's `FlatMapGroupsWithStateExec`, `StateStoreRestoreExec`, `StateStoreSaveExec`, `StreamingDeduplicateExec`, `StreamingSymmetricHashJoinExec`, `StreamingSymmetricHashJoinExec`
 
@@ -18,7 +18,7 @@
 
 * `DataSourcePartitioning`, `SinglePartition`, `HashPartitioning`, and `RangePartitioning` are requested to `satisfies`
 
-* `EnsureRequirements` is requested to link:spark-sql-EnsureRequirements.adoc#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
+* `EnsureRequirements` is requested to spark-sql-EnsureRequirements.md#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
 
 === [[createPartitioning]] `createPartitioning` Method
 
@@ -27,7 +27,7 @@
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to create a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
+NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
 
 `createPartitioning` creates a `HashPartitioning` for the <<clustering, clustering expressions>> and the input `numPartitions`.
 
@@ -42,7 +42,7 @@ This ClusteredDistribution requires [requiredNumPartitions] partitions, but the 
 
 `ClusteredDistribution` takes the following when created:
 
-* [[clustering]] Clustering link:expressions/Expression.md[expressions]
+* [[clustering]] Clustering expressions/Expression.md[expressions]
 * [[requiredNumPartitions]] Required number of partitions (default: `None`)
 
-NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
+NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).

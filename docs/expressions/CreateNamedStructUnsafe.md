@@ -2,7 +2,7 @@ title: CreateNamedStructUnsafe
 
 # CreateNamedStructUnsafe Expression
 
-`CreateNamedStructUnsafe` is a <<spark-sql-Expression-CreateNamedStructLike.adoc#, CreateNamedStructLike>> expression that...FIXME
+`CreateNamedStructUnsafe` is a <<spark-sql-Expression-CreateNamedStructLike.md#, CreateNamedStructLike>> expression that...FIXME
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 

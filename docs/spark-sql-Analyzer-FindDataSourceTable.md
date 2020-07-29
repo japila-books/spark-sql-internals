@@ -1,11 +1,11 @@
 # FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
 
-`FindDataSourceTable` is a link:catalyst/Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
+`FindDataSourceTable` is a catalyst/Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
 
-`FindDataSourceTable` is part of link:spark-sql-Analyzer.adoc#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
+`FindDataSourceTable` is part of spark-sql-Analyzer.md#extendedResolutionRules[additional rules] in `Resolution` fixed-point batch of rules.
 
 [[sparkSession]][[creating-instance]]
-`FindDataSourceTable` takes a single link:SparkSession.md[SparkSession] to be created.
+`FindDataSourceTable` takes a single SparkSession.md[SparkSession] to be created.
 
 [source, scala]
 ----
@@ -57,13 +57,13 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule] contract.
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule] contract.
 
-`apply` resolves link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
+`apply` resolves spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
 
-* `apply` <<readDataSourceTable, creates HiveTableRelation logical operators>> for link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of link:spark-sql-DDLUtils.adoc#isDatasourceTable[Spark tables] (incl. link:InsertIntoTable.adoc[InsertIntoTable] operators)
+* `apply` <<readDataSourceTable, creates HiveTableRelation logical operators>> for spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of spark-sql-DDLUtils.md#isDatasourceTable[Spark tables] (incl. InsertIntoTable.md[InsertIntoTable] operators)
 
-* `apply` <<readHiveTable, creates LogicalRelation logical operators>> for link:InsertIntoTable.adoc[InsertIntoTable] operators with link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelation] of a Hive table or link:spark-sql-LogicalPlan-UnresolvedCatalogRelation.adoc[UnresolvedCatalogRelations] of a Hive table
+* `apply` <<readHiveTable, creates LogicalRelation logical operators>> for InsertIntoTable.md[InsertIntoTable] operators with spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelation] of a Hive table or spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of a Hive table
 
 === [[readHiveTable]] Creating HiveTableRelation Logical Operator -- `readHiveTable` Internal Method
 
@@ -73,7 +73,7 @@ readHiveTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readHiveTable` creates a link:hive/HiveTableRelation.adoc[HiveTableRelation] for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+`readHiveTable` creates a hive/HiveTableRelation.md[HiveTableRelation] for the input spark-sql-CatalogTable.md[CatalogTable].
 
 NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>> (for hive tables).
 
@@ -85,10 +85,10 @@ readDataSourceTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readDataSourceTable` requests the <<sparkSession, SparkSession>> for link:SessionState.md#catalog[SessionCatalog].
+`readDataSourceTable` requests the <<sparkSession, SparkSession>> for SessionState.md#catalog[SessionCatalog].
 
-`readDataSourceTable` requests the `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getCachedPlan[cached logical plan] for the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+`readDataSourceTable` requests the `SessionCatalog` for the spark-sql-SessionCatalog.md#getCachedPlan[cached logical plan] for the input spark-sql-CatalogTable.md[CatalogTable].
 
-If not available, `readDataSourceTable` creates a new link:spark-sql-DataSource.adoc[DataSource] for the link:spark-sql-CatalogTable.adoc#provider[provider] (of the input `CatalogTable`) with the extra `path` option (based on the `locationUri` of the link:spark-sql-CatalogTable.adoc#storage[storage] of the input `CatalogTable`). `readDataSourceTable` requests the `DataSource` to link:spark-sql-DataSource.adoc#resolveRelation[resolve the relation and create a corresponding BaseRelation] that is then used to create a link:spark-sql-LogicalPlan-LogicalRelation.adoc#apply[LogicalRelation] with the input link:spark-sql-CatalogTable.adoc[CatalogTable].
+If not available, `readDataSourceTable` creates a new spark-sql-DataSource.md[DataSource] for the spark-sql-CatalogTable.md#provider[provider] (of the input `CatalogTable`) with the extra `path` option (based on the `locationUri` of the spark-sql-CatalogTable.md#storage[storage] of the input `CatalogTable`). `readDataSourceTable` requests the `DataSource` to spark-sql-DataSource.md#resolveRelation[resolve the relation and create a corresponding BaseRelation] that is then used to create a spark-sql-LogicalPlan-LogicalRelation.md#apply[LogicalRelation] with the input spark-sql-CatalogTable.md[CatalogTable].
 
 NOTE: `readDataSourceTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>> (for data source tables).

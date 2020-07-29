@@ -3,7 +3,7 @@
 `DDLUtils` is a helper object that...FIXME
 
 [[HIVE_PROVIDER]]
-`DDLUtils` uses `hive` value to denote link:hive/index.adoc[Hive data source] (_Hive provider_).
+`DDLUtils` uses `hive` value to denote hive/index.md[Hive data source] (_Hive provider_).
 
 === [[verifyPartitionProviderIsHive]] `verifyPartitionProviderIsHive` Utility
 
@@ -15,21 +15,21 @@ verifyPartitionProviderIsHive(
   action: String): Unit
 ----
 
-`verifyPartitionProviderIsHive` requests the given link:spark-sql-CatalogTable.adoc[CatalogTable] for the link:spark-sql-CatalogTable.adoc#identifier[TableIdentifier] that is in turn requested for the table name.
+`verifyPartitionProviderIsHive` requests the given spark-sql-CatalogTable.md[CatalogTable] for the spark-sql-CatalogTable.md#identifier[TableIdentifier] that is in turn requested for the table name.
 
-`verifyPartitionProviderIsHive` throws an `AnalysisException` when link:hive/configuration-properties.adoc#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
+`verifyPartitionProviderIsHive` throws an `AnalysisException` when hive/configuration-properties.md#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
 
 ```
 [action] is not allowed on [tableName] since filesource partition management is disabled (spark.sql.hive.manageFilesourcePartitions = false).
 ```
 
-`verifyPartitionProviderIsHive` throws an `AnalysisException` when the link:spark-sql-CatalogTable.adoc#tracksPartitionsInCatalog[tracksPartitionsInCatalog] of the given `CatalogTable` is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
+`verifyPartitionProviderIsHive` throws an `AnalysisException` when the spark-sql-CatalogTable.md#tracksPartitionsInCatalog[tracksPartitionsInCatalog] of the given `CatalogTable` is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
 
 ```
 [action] is not allowed on [tableName] since its partition metadata is not stored in the Hive metastore. To import this information into the metastore, run `msck repair table [tableName]`
 ```
 
-NOTE: `verifyPartitionProviderIsHive` is used when `AlterTableAddPartitionCommand`, `AlterTableRenamePartitionCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand`, link:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand], link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand], and `ShowPartitionsCommand` commands are executed.
+NOTE: `verifyPartitionProviderIsHive` is used when `AlterTableAddPartitionCommand`, `AlterTableRenamePartitionCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand`, spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand], spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand], and `ShowPartitionsCommand` commands are executed.
 
 === [[isDatasourceTable]] `isDatasourceTable` Utility
 
@@ -39,21 +39,21 @@ isDatasourceTable(
   table: CatalogTable): Boolean
 ----
 
-`isDatasourceTable` is positive (`true`) when the link:spark-sql-CatalogTable.adoc#provider[provider] of the input link:spark-sql-CatalogTable.adoc[CatalogTable] is not <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isDatasourceTable` is negative (`false`).
+`isDatasourceTable` is positive (`true`) when the spark-sql-CatalogTable.md#provider[provider] of the input spark-sql-CatalogTable.md[CatalogTable] is not <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isDatasourceTable` is negative (`false`).
 
 [NOTE]
 ====
 `isDatasourceTable` is used when:
 
-* `HiveExternalCatalog` is requested to link:hive/HiveExternalCatalog.adoc#createTable[createTable] (and link:hive/HiveExternalCatalog.adoc#saveTableIntoHive[saveTableIntoHive])
+* `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#createTable[createTable] (and hive/HiveExternalCatalog.md#saveTableIntoHive[saveTableIntoHive])
 
-* `HiveUtils` utility is used to link:hive/HiveUtils.adoc#inferSchema[inferSchema]
+* `HiveUtils` utility is used to hive/HiveUtils.md#inferSchema[inferSchema]
 
-* `AlterTableSerDePropertiesCommand`, `AlterTableAddColumnsCommand`, `LoadDataCommand`, link:spark-sql-LogicalPlan-ShowCreateTableCommand.adoc[ShowCreateTableCommand] commands are executed
+* `AlterTableSerDePropertiesCommand`, `AlterTableAddColumnsCommand`, `LoadDataCommand`, spark-sql-LogicalPlan-ShowCreateTableCommand.md[ShowCreateTableCommand] commands are executed
 
 * `DDLUtils` utility is used to <<verifyPartitionProviderIsHive, verifyPartitionProviderIsHive>>
 
-* link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] and link:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] logical rules are executed
+* spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] and spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical rules are executed
 ====
 
 === [[isHiveTable]] `isHiveTable` Utility
@@ -64,13 +64,13 @@ isHiveTable(
   provider: Option[String]): Boolean
 ----
 
-`isHiveTable` is positive (`true`) when the link:spark-sql-CatalogTable.adoc#provider[provider] is <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isHiveTable` is negative (`false`).
+`isHiveTable` is positive (`true`) when the spark-sql-CatalogTable.md#provider[provider] is <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isHiveTable` is negative (`false`).
 
 [NOTE]
 ====
 `isHiveTable` is used when:
 
-* link:hive/HiveAnalysis.adoc[HiveAnalysis] logical resolution rule is executed
+* hive/HiveAnalysis.md[HiveAnalysis] logical resolution rule is executed
 
 * `DDLUtils` utility is used to <<isHiveTable, isHiveTable>>
 

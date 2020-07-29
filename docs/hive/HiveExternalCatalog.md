@@ -5,14 +5,14 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveExternalCatalog` is an link:../spark-sql-ExternalCatalog.adoc[external catalog of permanent relational entities] (_metastore_).
+`HiveExternalCatalog` is an ../spark-sql-ExternalCatalog.md[external catalog of permanent relational entities] (_metastore_).
 
-`HiveExternalCatalog` is used for `SparkSession` with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
+`HiveExternalCatalog` is used for `SparkSession` with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
 .HiveExternalCatalog and SharedState
 image::../images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the link:../SharedState.md#externalCatalog[ExternalCatalog] (and link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
+`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the ../SharedState.md#externalCatalog[ExternalCatalog] (and ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog` is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix.
 
@@ -44,9 +44,9 @@ org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
 
 [TIP]
 ====
-Use link:../spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
+Use ../spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
 
-Refer to link:../SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
+Refer to ../SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
 
 See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin[Hive Metastore Administration] document.
 ====
@@ -62,7 +62,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.HiveExternalCatalog=ALL
 ```
 
-Refer to link:../spark-logging.adoc[Logging].
+Refer to ../spark-logging.md[Logging].
 ====
 
 === [[creating-instance]] Creating HiveExternalCatalog Instance
@@ -79,19 +79,19 @@ Refer to link:../spark-logging.adoc[Logging].
 client: HiveClient
 ----
 
-`client` is a link:HiveClient.adoc[HiveClient] to access a Hive metastore.
+`client` is a HiveClient.md[HiveClient] to access a Hive metastore.
 
-`client` is created lazily (when first requested) using link:HiveUtils.adoc#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
+`client` is created lazily (when first requested) using HiveUtils.md#newClientForMetadata[HiveUtils] utility (with the <<conf, SparkConf>> and <<hadoopConf, Hadoop Configuration>>).
 
 [NOTE]
 ====
 `client` is also used when:
 
-* `HiveSessionStateBuilder` is requested for a link:HiveSessionStateBuilder.adoc#resourceLoader[HiveSessionResourceLoader]
+* `HiveSessionStateBuilder` is requested for a HiveSessionStateBuilder.md#resourceLoader[HiveSessionResourceLoader]
 
-* link:../spark-sql-thrift-server.adoc[Spark Thrift Server] is used
+* ../spark-sql-thrift-server.md[Spark Thrift Server] is used
 
-* `SaveAsHiveFile` is used to link:../hive/SaveAsHiveFile.adoc#getExternalTmpPath[getExternalTmpPath]
+* `SaveAsHiveFile` is used to ../hive/SaveAsHiveFile.md#getExternalTmpPath[getExternalTmpPath]
 ====
 
 === [[getRawTable]] `getRawTable` Method
@@ -103,9 +103,9 @@ getRawTable(
   table: String): CatalogTable
 ----
 
-`getRawTable` returns the link:../spark-sql-CatalogTable.adoc[CatalogTable] metadata of the input table.
+`getRawTable` returns the ../spark-sql-CatalogTable.md[CatalogTable] metadata of the input table.
 
-Internally, `getRawTable` requests the <<client, HiveClient>> for the link:HiveClient.adoc#getTable[table metadata from a Hive metastore].
+Internally, `getRawTable` requests the <<client, HiveClient>> for the HiveClient.md#getTable[table metadata from a Hive metastore].
 
 NOTE: `getRawTable` is used when `HiveExternalCatalog` is requested to <<renameTable, renameTable>>, <<alterTable, alterTable>>, <<alterTableStats, alterTableStats>>, <<getTable, getTable>>, <<alterPartitions, alterPartitions>> and <<listPartitionsByFilter, listPartitionsByFilter>>.
 
@@ -119,7 +119,7 @@ doAlterTableStats(
   stats: Option[CatalogStatistics]): Unit
 ----
 
-NOTE: `doAlterTableStats` is part of link:../spark-sql-ExternalCatalog.adoc#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
+NOTE: `doAlterTableStats` is part of ../spark-sql-ExternalCatalog.md#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
 
 `doAlterTableStats`...FIXME
 
@@ -134,7 +134,7 @@ listPartitionsByFilter(
   defaultTimeZoneId: String): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitionsByFilter` is part of link:../spark-sql-ExternalCatalog.adoc#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
+NOTE: `listPartitionsByFilter` is part of ../spark-sql-ExternalCatalog.md#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
 
 `listPartitionsByFilter`...FIXME
 
@@ -148,7 +148,7 @@ alterPartitions(
   newParts: Seq[CatalogTablePartition]): Unit
 ----
 
-NOTE: `alterPartitions` is part of link:../spark-sql-ExternalCatalog.adoc#alterPartitions[ExternalCatalog Contract] to...FIXME.
+NOTE: `alterPartitions` is part of ../spark-sql-ExternalCatalog.md#alterPartitions[ExternalCatalog Contract] to...FIXME.
 
 `alterPartitions`...FIXME
 
@@ -161,7 +161,7 @@ getTable(
   table: String): CatalogTable
 ----
 
-NOTE: `getTable` is part of link:../spark-sql-ExternalCatalog.adoc#getTable[ExternalCatalog Contract] to...FIXME.
+NOTE: `getTable` is part of ../spark-sql-ExternalCatalog.md#getTable[ExternalCatalog Contract] to...FIXME.
 
 `getTable`...FIXME
 
@@ -173,7 +173,7 @@ doAlterTable(
   tableDefinition: CatalogTable): Unit
 ----
 
-NOTE: `doAlterTable` is part of link:../spark-sql-ExternalCatalog.adoc#doAlterTable[ExternalCatalog Contract] to alter a table.
+NOTE: `doAlterTable` is part of ../spark-sql-ExternalCatalog.md#doAlterTable[ExternalCatalog Contract] to alter a table.
 
 `doAlterTable`...FIXME
 
@@ -187,7 +187,7 @@ getPartition(
   spec: TablePartitionSpec): CatalogTablePartition
 ----
 
-NOTE: `getPartition` is part of link:../spark-sql-ExternalCatalog.adoc#getPartition[ExternalCatalog Contract] to...FIXME.
+NOTE: `getPartition` is part of ../spark-sql-ExternalCatalog.md#getPartition[ExternalCatalog Contract] to...FIXME.
 
 `getPartition`...FIXME
 
@@ -201,7 +201,7 @@ getPartitionOption(
   spec: TablePartitionSpec): Option[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionOption` is part of link:../spark-sql-ExternalCatalog.adoc#getPartitionOption[ExternalCatalog Contract] to...FIXME.
+NOTE: `getPartitionOption` is part of ../spark-sql-ExternalCatalog.md#getPartitionOption[ExternalCatalog Contract] to...FIXME.
 
 `getPartitionOption`...FIXME
 
@@ -215,7 +215,7 @@ listPartitions(
   partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitions` is part of the <<spark-sql-ExternalCatalog.adoc#listPartitions, ExternalCatalog Contract>> to list partitions of a table.
+NOTE: `listPartitions` is part of the <<spark-sql-ExternalCatalog.md#listPartitions, ExternalCatalog Contract>> to list partitions of a table.
 
 `listPartitions`...FIXME
 
@@ -228,7 +228,7 @@ doCreateTable(
   ignoreIfExists: Boolean): Unit
 ----
 
-NOTE: `doCreateTable` is part of the <<spark-sql-ExternalCatalog.adoc#doCreateTable, ExternalCatalog Contract>> to...FIXME.
+NOTE: `doCreateTable` is part of the <<spark-sql-ExternalCatalog.md#doCreateTable, ExternalCatalog Contract>> to...FIXME.
 
 `doCreateTable`...FIXME
 
@@ -242,7 +242,7 @@ doAlterTableDataSchema(
   newDataSchema: StructType): Unit
 ----
 
-NOTE: `doAlterTableDataSchema` is part of the <<spark-sql-ExternalCatalog.adoc#doAlterTableDataSchema, ExternalCatalog Contract>> to...FIXME.
+NOTE: `doAlterTableDataSchema` is part of the <<spark-sql-ExternalCatalog.md#doAlterTableDataSchema, ExternalCatalog Contract>> to...FIXME.
 
 `doAlterTableDataSchema`...FIXME
 
@@ -255,7 +255,7 @@ createTable(
   ignoreIfExists: Boolean): Unit
 ----
 
-NOTE: `createTable` is part of the link:../spark-sql-ExternalCatalog.adoc#createTable[ExternalCatalog] to...FIXME.
+NOTE: `createTable` is part of the ../spark-sql-ExternalCatalog.md#createTable[ExternalCatalog] to...FIXME.
 
 `createTable`...FIXME
 
@@ -382,14 +382,14 @@ statsToProperties(
   schema: StructType): Map[String, String]
 ----
 
-`statsToProperties` converts the link:../spark-sql-CatalogStatistics.adoc[table statistics] to properties (i.e. key-value pairs that will be persisted as properties in the table metadata to a Hive metastore using the <<client, Hive client>>).
+`statsToProperties` converts the ../spark-sql-CatalogStatistics.md[table statistics] to properties (i.e. key-value pairs that will be persisted as properties in the table metadata to a Hive metastore using the <<client, Hive client>>).
 
 `statsToProperties` adds the following properties to the properties:
 
-* *spark.sql.statistics.totalSize* with link:../spark-sql-CatalogStatistics.adoc#sizeInBytes[total size (in bytes)]
-* (if defined) *spark.sql.statistics.numRows* with link:../spark-sql-CatalogStatistics.adoc#rowCount[number of rows]
+* *spark.sql.statistics.totalSize* with ../spark-sql-CatalogStatistics.md#sizeInBytes[total size (in bytes)]
+* (if defined) *spark.sql.statistics.numRows* with ../spark-sql-CatalogStatistics.md#rowCount[number of rows]
 
-`statsToProperties` takes the link:../spark-sql-CatalogStatistics.adoc#colStats[column statistics] and for every column (field) in `schema` link:../spark-sql-ColumnStat.adoc#toMap[converts the column statistics to properties] and adds the properties (as <<columnStatKeyPropName, column statistic property>>) to the properties.
+`statsToProperties` takes the ../spark-sql-CatalogStatistics.md#colStats[column statistics] and for every column (field) in `schema` ../spark-sql-ColumnStat.md#toMap[converts the column statistics to properties] and adds the properties (as <<columnStatKeyPropName, column statistic property>>) to the properties.
 
 [NOTE]
 ====
@@ -414,15 +414,15 @@ statsFromProperties(
 
 `statsFromProperties` returns `None` if there are no keys with the `spark.sql.statistics` prefix in `properties`.
 
-If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` link:../spark-sql-ColumnStat.adoc#creating-instance[creates] a `ColumnStat` that is the column statistics for every column in `schema`.
+If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` ../spark-sql-ColumnStat.md#creating-instance[creates] a `ColumnStat` that is the column statistics for every column in `schema`.
 
-For every column name in `schema` `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and link:../spark-sql-ColumnStat.adoc#fromMap[converts] them to a `ColumnStat` (for the column name).
+For every column name in `schema` `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and ../spark-sql-ColumnStat.md#fromMap[converts] them to a `ColumnStat` (for the column name).
 
-In the end, `statsFromProperties` creates a link:../spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] with the following properties:
+In the end, `statsFromProperties` creates a ../spark-sql-CatalogStatistics.md#creating-instance[CatalogStatistics] with the following properties:
 
-* link:../spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize* property
-* link:../spark-sql-CatalogStatistics.adoc#rowCount[rowCount] as *spark.sql.statistics.numRows* property
-* link:../spark-sql-CatalogStatistics.adoc#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
+* ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize* property
+* ../spark-sql-CatalogStatistics.md#rowCount[rowCount] as *spark.sql.statistics.numRows* property
+* ../spark-sql-CatalogStatistics.md#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
 
 NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
 

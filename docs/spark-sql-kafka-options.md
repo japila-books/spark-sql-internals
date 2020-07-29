@@ -12,9 +12,9 @@ title: Options
 
 | assign
 |
-| [[assign]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribe, subscribe>> and <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>>)
+| [[assign]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribe, subscribe>> and <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>>)
 
-See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
 
 | endingoffsets
 |
@@ -26,7 +26,7 @@ See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>
 
 | kafkaConsumer.pollTimeoutMs
 |
-| [[kafkaConsumer.pollTimeoutMs]] See <<spark-sql-KafkaRelation.adoc#pollTimeoutMs, kafkaConsumer.pollTimeoutMs>>
+| [[kafkaConsumer.pollTimeoutMs]] See <<spark-sql-KafkaRelation.md#pollTimeoutMs, kafkaConsumer.pollTimeoutMs>>
 
 | startingoffsets
 |
@@ -34,15 +34,15 @@ See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>
 
 | subscribe
 |
-| [[subscribe]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.adoc#assign, assign>>)
+| [[subscribe]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.md#assign, assign>>)
 
-See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
 
 | subscribepattern
 |
-| [[subscribepattern]] One of the three subscription strategy options (with <<spark-sql-kafka-options.adoc#subscribe, subscribe>> and <<spark-sql-kafka-options.adoc#assign, assign>>)
+| [[subscribepattern]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribe, subscribe>> and <<spark-sql-kafka-options.md#assign, assign>>)
 
-See <<spark-sql-KafkaSourceProvider.adoc#strategy, KafkaSourceProvider.strategy>>
+See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
 
 | topic
 |
@@ -50,7 +50,7 @@ a| [[topic]] *Required* for writing a DataFrame to Kafka
 
 Used when:
 
-* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic and create a BaseRelation afterwards>>
+* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic and create a BaseRelation afterwards>>
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createStreamWriter` and `createSink`
 |===

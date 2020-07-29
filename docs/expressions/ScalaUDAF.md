@@ -2,15 +2,15 @@ title: ScalaUDAF
 
 # ScalaUDAF -- Catalyst Expression Adapter for UserDefinedAggregateFunction
 
-`ScalaUDAF` is a link:expressions/Expression.md[Catalyst expression] adapter to manage the lifecycle of <<udaf, UserDefinedAggregateFunction>> and hook it in Spark SQL's Catalyst execution path.
+`ScalaUDAF` is a expressions/Expression.md[Catalyst expression] adapter to manage the lifecycle of <<udaf, UserDefinedAggregateFunction>> and hook it in Spark SQL's Catalyst execution path.
 
 `ScalaUDAF` is <<creating-instance, created>> when:
 
-* `UserDefinedAggregateFunction` creates a `Column` for a user-defined aggregate function using link:spark-sql-UserDefinedAggregateFunction.adoc#apply[all] and link:spark-sql-UserDefinedAggregateFunction.adoc#distinct[distinct] values (to use the UDAF in link:spark-sql-dataset-operators.adoc[Dataset operators])
+* `UserDefinedAggregateFunction` creates a `Column` for a user-defined aggregate function using spark-sql-UserDefinedAggregateFunction.md#apply[all] and spark-sql-UserDefinedAggregateFunction.md#distinct[distinct] values (to use the UDAF in spark-sql-dataset-operators.md[Dataset operators])
 
-* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a user-defined aggregate function] (to use the UDAF in link:SparkSession.md#sql[SQL mode])
+* `UDFRegistration` is requested to spark-sql-UDFRegistration.md#register[register a user-defined aggregate function] (to use the UDAF in SparkSession.md#sql[SQL mode])
 
-`ScalaUDAF` is a link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate].
+`ScalaUDAF` is a spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate].
 
 [[ImperativeAggregate-methods]]
 .ScalaUDAF's ImperativeAggregate Methods
@@ -20,19 +20,19 @@ title: ScalaUDAF
 | Behaviour
 
 | <<initialize, initialize>>
-| Requests <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#initialize[initialize]
+| Requests <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#initialize[initialize]
 
 | <<merge, merge>>
-| Requests <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#merge[merge]
+| Requests <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#merge[merge]
 
 | <<update, update>>
-| Requests <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#update[update]
+| Requests <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#update[update]
 |===
 
 [[eval]]
 When evaluated, `ScalaUDAF`...FIXME
 
-`ScalaUDAF` has link:expressions/Expression.md#NonSQLExpression[no representation in SQL].
+`ScalaUDAF` has expressions/Expression.md#NonSQLExpression[no representation in SQL].
 
 [[properties]]
 .ScalaUDAF's Properties
@@ -42,13 +42,13 @@ When evaluated, `ScalaUDAF`...FIXME
 | Description
 
 | `aggBufferAttributes`
-| link:spark-sql-StructType.adoc#toAttributes[AttributeReferences] of <<aggBufferSchema, aggBufferSchema>>
+| spark-sql-StructType.md#toAttributes[AttributeReferences] of <<aggBufferSchema, aggBufferSchema>>
 
 | `aggBufferSchema`
-| link:spark-sql-UserDefinedAggregateFunction.adoc#bufferSchema[bufferSchema] of <<udaf, UserDefinedAggregateFunction>>
+| spark-sql-UserDefinedAggregateFunction.md#bufferSchema[bufferSchema] of <<udaf, UserDefinedAggregateFunction>>
 
 | `dataType`
-| link:spark-sql-DataType.adoc[DataType] of <<udaf, UserDefinedAggregateFunction>>
+| spark-sql-DataType.md[DataType] of <<udaf, UserDefinedAggregateFunction>>
 
 | `deterministic`
 | `deterministic` of <<udaf, UserDefinedAggregateFunction>>
@@ -57,7 +57,7 @@ When evaluated, `ScalaUDAF`...FIXME
 | Copy of <<aggBufferAttributes, aggBufferAttributes>>
 
 | `inputTypes`
-| link:spark-sql-DataType.adoc[Data types] from link:spark-sql-UserDefinedAggregateFunction.adoc#inputSchema[inputSchema] of <<udaf, UserDefinedAggregateFunction>>
+| spark-sql-DataType.md[Data types] from spark-sql-UserDefinedAggregateFunction.md#inputSchema[inputSchema] of <<udaf, UserDefinedAggregateFunction>>
 
 | `nullable`
 | Always enabled (i.e. `true`)
@@ -87,8 +87,8 @@ When evaluated, `ScalaUDAF`...FIXME
 
 `ScalaUDAF` takes the following when created:
 
-* [[children]] Children link:expressions/Expression.md[Catalyst expressions]
-* [[udaf]] link:spark-sql-UserDefinedAggregateFunction.adoc[UserDefinedAggregateFunction]
+* [[children]] Children expressions/Expression.md[Catalyst expressions]
+* [[udaf]] spark-sql-UserDefinedAggregateFunction.md[UserDefinedAggregateFunction]
 * [[mutableAggBufferOffset]] `mutableAggBufferOffset` (starting with `0`)
 * [[inputAggBufferOffset]] `inputAggBufferOffset` (starting with `0`)
 
@@ -101,12 +101,12 @@ When evaluated, `ScalaUDAF`...FIXME
 initialize(buffer: InternalRow): Unit
 ----
 
-`initialize` sets the input `buffer` link:spark-sql-InternalRow.adoc[internal binary row] as `underlyingBuffer` of <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and requests the <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#initialize[initialize] (with the <<mutableAggregateBuffer, MutableAggregationBufferImpl>>).
+`initialize` sets the input `buffer` spark-sql-InternalRow.md[internal binary row] as `underlyingBuffer` of <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and requests the <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#initialize[initialize] (with the <<mutableAggregateBuffer, MutableAggregationBufferImpl>>).
 
 .ScalaUDAF initializes UserDefinedAggregateFunction
 image::images/spark-sql-ScalaUDAF-initialize.png[align="center"]
 
-NOTE: `initialize` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#initialize[ImperativeAggregate Contract].
+NOTE: `initialize` is part of spark-sql-Expression-ImperativeAggregate.md#initialize[ImperativeAggregate Contract].
 
 === [[update]] `update` Method
 
@@ -115,14 +115,14 @@ NOTE: `initialize` is part of link:spark-sql-Expression-ImperativeAggregate.adoc
 update(mutableAggBuffer: InternalRow, inputRow: InternalRow): Unit
 ----
 
-`update` sets the input `buffer` link:spark-sql-InternalRow.adoc[internal binary row] as `underlyingBuffer` of <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and requests the <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#update[update].
+`update` sets the input `buffer` spark-sql-InternalRow.md[internal binary row] as `underlyingBuffer` of <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and requests the <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#update[update].
 
 NOTE: `update` uses <<inputProjection, inputProjection>> on the input `input` and converts it using <<inputToScalaConverters, inputToScalaConverters>>.
 
 .ScalaUDAF updates UserDefinedAggregateFunction
 image::images/spark-sql-ScalaUDAF-update.png[align="center"]
 
-NOTE: `update` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#update[ImperativeAggregate Contract].
+NOTE: `update` is part of spark-sql-Expression-ImperativeAggregate.md#update[ImperativeAggregate Contract].
 
 === [[merge]] `merge` Method
 
@@ -136,9 +136,9 @@ merge(buffer1: InternalRow, buffer2: InternalRow): Unit
 * `underlyingBuffer` of <<mutableAggregateBuffer, MutableAggregationBufferImpl>> to the input `buffer1`
 * `underlyingInputBuffer` of <<inputAggregateBuffer, InputAggregationBuffer>> to the input `buffer2`
 
-`merge` then requests the <<udaf, UserDefinedAggregateFunction>> to link:spark-sql-UserDefinedAggregateFunction.adoc#merge[merge] (passing in the <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and <<inputAggregateBuffer, InputAggregationBuffer>>).
+`merge` then requests the <<udaf, UserDefinedAggregateFunction>> to spark-sql-UserDefinedAggregateFunction.md#merge[merge] (passing in the <<mutableAggregateBuffer, MutableAggregationBufferImpl>> and <<inputAggregateBuffer, InputAggregationBuffer>>).
 
 .ScalaUDAF requests UserDefinedAggregateFunction to merge
 image::images/spark-sql-ScalaUDAF-merge.png[align="center"]
 
-NOTE: `merge` is part of link:spark-sql-Expression-ImperativeAggregate.adoc#merge[ImperativeAggregate Contract].
+NOTE: `merge` is part of spark-sql-Expression-ImperativeAggregate.md#merge[ImperativeAggregate Contract].

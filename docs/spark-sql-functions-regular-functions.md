@@ -19,7 +19,7 @@ title: Regular Functions
 | Gives the first non-``null`` value among the given columns or `null`.
 
 | <<col, col>> and <<column, column>>
-| Creating link:spark-sql-Column.adoc[Columns]
+| Creating spark-sql-Column.md[Columns]
 
 | <<expr, expr>>
 |
@@ -50,9 +50,9 @@ title: Regular Functions
 broadcast[T](df: Dataset[T]): Dataset[T]
 ----
 
-`broadcast` function marks the input link:spark-sql-Dataset.adoc[Dataset] as small enough to be used in broadcast join.
+`broadcast` function marks the input spark-sql-Dataset.md[Dataset] as small enough to be used in broadcast join.
 
-TIP: Read up on link:spark-sql-joins-broadcast.adoc[Broadcast Joins (aka Map-Side Joins)].
+TIP: Read up on spark-sql-joins-broadcast.md[Broadcast Joins (aka Map-Side Joins)].
 
 [source, scala]
 ----
@@ -101,7 +101,7 @@ Project [token#127, id#126, prob#140]
             +- LocalTableScan [_1#136, _2#137]
 ----
 
-NOTE: `broadcast` standard function is a special case of link:spark-sql-dataset-operators.adoc[Dataset.hint] operator that allows for attaching any hint to a logical plan.
+NOTE: `broadcast` standard function is a special case of spark-sql-dataset-operators.md[Dataset.hint] operator that allows for attaching any hint to a logical plan.
 
 === [[coalesce]] `coalesce` Function
 
@@ -114,7 +114,7 @@ coalesce(e: Column*): Column
 
 `coalesce` requires at least one column and all columns have to be of the same or compatible types.
 
-Internally, `coalesce` creates a link:spark-sql-Column.adoc#apply[Column] with a link:spark-sql-Expression-Coalesce.adoc#creating-instance[Coalesce] expression (with the children being the link:spark-sql-Column.adoc#expr[expressions] of the input `Column`).
+Internally, `coalesce` creates a spark-sql-Column.md#apply[Column] with a spark-sql-Expression-Coalesce.md#creating-instance[Coalesce] expression (with the children being the spark-sql-Column.md#expr[expressions] of the input `Column`).
 
 ==== [[coalesce-example]] Example: `coalesce` Function
 
@@ -144,7 +144,7 @@ col(colName: String): Column
 column(colName: String): Column
 ----
 
-`col` and `column` methods create a link:spark-sql-Column.adoc[Column] that you can later use to reference a column in a dataset.
+`col` and `column` methods create a spark-sql-Column.md[Column] that you can later use to reference a column in a dataset.
 
 [source, scala]
 ----
@@ -190,7 +190,7 @@ scala> ds.filter(filterExpr).show
 +---+-----+
 ----
 
-Internally, `expr` uses the active session's link:SessionState.md[sqlParser] or creates a new  link:spark-sql-SparkSqlParser.adoc[SparkSqlParser] to call link:spark-sql-ParserInterface.adoc#parseExpression[parseExpression] method.
+Internally, `expr` uses the active session's SessionState.md[sqlParser] or creates a new  spark-sql-SparkSqlParser.md[SparkSqlParser] to call spark-sql-ParserInterface.md#parseExpression[parseExpression] method.
 
 === [[lit]] `lit` Function
 
@@ -282,7 +282,7 @@ scala> q.show
 +-----------------------------+
 ----
 
-The <<spark-sql-Expression-MonotonicallyIncreasingID.adoc#, current implementation>> uses the partition ID in the upper 31 bits, and the lower 33 bits represent the record number within each partition. That assumes that the data set has less than 1 billion partitions, and each partition has less than 8 billion records.
+The <<spark-sql-Expression-MonotonicallyIncreasingID.md#, current implementation>> uses the partition ID in the upper 31 bits, and the lower 33 bits represent the record number within each partition. That assumes that the data set has less than 1 billion partitions, and each partition has less than 8 billion records.
 
 [source, scala]
 ----
@@ -328,4 +328,4 @@ scala> demo.orderBy("id").show
 +---+-------------+-----+-----------------------------+
 ----
 
-Internally, `monotonically_increasing_id` creates a <<spark-sql-Column.adoc#apply, Column>> with a <<spark-sql-Expression-MonotonicallyIncreasingID.adoc#creating-instance, MonotonicallyIncreasingID>> non-deterministic leaf expression.
+Internally, `monotonically_increasing_id` creates a <<spark-sql-Column.md#apply, Column>> with a <<spark-sql-Expression-MonotonicallyIncreasingID.md#creating-instance, MonotonicallyIncreasingID>> non-deterministic leaf expression.

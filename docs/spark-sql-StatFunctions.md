@@ -111,4 +111,4 @@ summary(
 
 `summary`...FIXME
 
-NOTE: `summary` is used exclusively when <<spark-sql-dataset-operators.adoc#summary, Dataset.summary>> action is used.
+NOTE: `summary` is used exclusively when <<spark-sql-dataset-operators.md#summary, Dataset.summary>> action is used.

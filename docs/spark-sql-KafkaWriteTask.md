@@ -2,9 +2,9 @@
 
 `KafkaWriteTask` is used to <<execute, write rows>> (from a structured query) to Apache Kafka.
 
-`KafkaWriteTask` is <<creating-instance, created>> exclusively when `KafkaWriter` is requested to <<spark-sql-KafkaWriter.adoc#write, write the rows of a structured query to a Kafka topic>>.
+`KafkaWriteTask` is <<creating-instance, created>> exclusively when `KafkaWriter` is requested to <<spark-sql-KafkaWriter.md#write, write the rows of a structured query to a Kafka topic>>.
 
-`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the link:spark-sql-UnsafeRow.adoc[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
+`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the spark-sql-UnsafeRow.md[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
 
 [[internal-properties]]
 .KafkaWriteTask's Internal Properties
@@ -20,7 +20,7 @@
 | [[failedWrite]]
 
 | projection
-| [[projection]] <<spark-sql-UnsafeProjection.adoc#, UnsafeProjection>>
+| [[projection]] <<spark-sql-UnsafeProjection.md#, UnsafeProjection>>
 
 <<createProjection, Created>> once when `KafkaWriteTask` is created.
 |===
@@ -38,7 +38,7 @@ Internally, `execute` creates a `KafkaProducer` using `Array[Byte]` for the keys
 
 NOTE: `execute` creates a single `KafkaProducer` for all rows.
 
-For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) link:spark-sql-InternalRow.adoc[binary internal row format] to a link:spark-sql-UnsafeRow.adoc[UnsafeRow] object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
+For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) spark-sql-InternalRow.md[binary internal row format] to a spark-sql-UnsafeRow.md[UnsafeRow] object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
 
 `execute` then creates a `ProducerRecord` and sends it to Kafka (using the `KafkaProducer`). `execute` registers a asynchronous `Callback` to monitor the writing.
 
@@ -56,7 +56,7 @@ From https://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/p
 createProjection: UnsafeProjection
 ----
 
-`createProjection` creates a link:spark-sql-UnsafeProjection.adoc[UnsafeProjection] with `topic`, `key` and `value` link:expressions/Expression.md[expressions] and the `inputSchema`.
+`createProjection` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] with `topic`, `key` and `value` expressions/Expression.md[expressions] and the `inputSchema`.
 
 `createProjection` makes sure that the following holds (and reports an `IllegalStateException` otherwise):
 
@@ -64,7 +64,7 @@ createProjection: UnsafeProjection
 * Optional `key` is of type `StringType` or `BinaryType` if defined
 * `value` was defined (in `inputSchema`) and is of type `StringType` or `BinaryType`
 
-`createProjection` casts `key` and `value` expressions to `BinaryType` in link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
+`createProjection` casts `key` and `value` expressions to `BinaryType` in spark-sql-UnsafeProjection.md[UnsafeProjection].
 
 NOTE: `createProjection` is used exclusively when `KafkaWriteTask` is created (as <<projection, projection>>).
 

@@ -2,11 +2,11 @@ title: Except
 
 # Except Logical Operator
 
-`Except` is a link:spark-sql-LogicalPlan.adoc#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:
+`Except` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:
 
-* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. link:spark-sql-AstBuilder.adoc#visitSetOperation[AstBuilder])
+* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. spark-sql-AstBuilder.md#visitSetOperation[AstBuilder])
 
-* link:spark-sql-dataset-operators.adoc#except[Dataset.except] and link:spark-sql-dataset-operators.adoc#exceptAll[Dataset.exceptAll]
+* spark-sql-dataset-operators.md#except[Dataset.except] and spark-sql-dataset-operators.md#exceptAll[Dataset.exceptAll]
 
 `Except` is supposed to be resolved (_optimized_) to <<logical-conversions, other logical commands>> at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization). [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `IllegalStateException` if conversions did not happen.
 
@@ -17,31 +17,31 @@ title: Except
 | Target Logical Operators
 | Optimization Rules and Demos
 
-| Left-Anti link:spark-sql-LogicalPlan-Join.adoc[Join]
-| `Except` (DISTINCT) in link:spark-sql-Optimizer-ReplaceExceptWithAntiJoin.adoc[ReplaceExceptWithAntiJoin] logical optimization rule
+| Left-Anti spark-sql-LogicalPlan-Join.md[Join]
+| `Except` (DISTINCT) in spark-sql-Optimizer-ReplaceExceptWithAntiJoin.md[ReplaceExceptWithAntiJoin] logical optimization rule
 
 Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
 
-| link:spark-sql-LogicalPlan-Filter.adoc[Filter]
-| `Except` (DISTINCT) in link:spark-sql-Optimizer-ReplaceExceptWithFilter.adoc[ReplaceExceptWithFilter] logical optimization rule
+| spark-sql-LogicalPlan-Filter.md[Filter]
+| `Except` (DISTINCT) in spark-sql-Optimizer-ReplaceExceptWithFilter.md[ReplaceExceptWithFilter] logical optimization rule
 
 Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
 
-| link:spark-sql-LogicalPlan-Union.adoc[Union], link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] and link:spark-sql-LogicalPlan-Generate.adoc[Generate]
-| `Except` (ALL) in link:spark-sql-Optimizer-RewriteExceptAll.adoc[RewriteExceptAll] logical optimization rule
+| spark-sql-LogicalPlan-Union.md[Union], spark-sql-LogicalPlan-Aggregate.md[Aggregate] and spark-sql-LogicalPlan-Generate.md[Generate]
+| `Except` (ALL) in spark-sql-Optimizer-RewriteExceptAll.md[RewriteExceptAll] logical optimization rule
 
 Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators>>
 
 |===
 
-The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in link:spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.adoc[WidenSetOperationTypes] logical analysis type-coercion rule.
+The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes.md[WidenSetOperationTypes] logical analysis type-coercion rule.
 
 === [[creating-instance]] Creating Except Instance
 
 `Except` takes the following to be created:
 
-* [[left]] Left link:spark-sql-LogicalPlan.adoc[logical operator]
-* [[right]] Right link:spark-sql-LogicalPlan.adoc[logical operator]
+* [[left]] Left spark-sql-LogicalPlan.md[logical operator]
+* [[right]] Right spark-sql-LogicalPlan.md[logical operator]
 * [[isAll]] `isAll` flag for `DISTINCT` (`false`) or `ALL` (`true`)
 
 === [[catalyst-dsl]] Catalyst DSL -- `except` Operator
@@ -53,7 +53,7 @@ except(
   isAll: Boolean): LogicalPlan
 ----
 
-link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] defines link:spark-sql-catalyst-dsl.adoc#except[except] extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
+link:spark-sql-catalyst-dsl.md[Catalyst DSL] defines spark-sql-catalyst-dsl.md#except[except] extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, plaintext]
 ----
@@ -71,7 +71,7 @@ assert(op.isInstanceOf[Except])
 
 === [[CheckAnalysis]] Except Only on Relations with Same Number of Columns
 
-`Except` logical operator can only be performed on link:spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis[tables with the same number of columns].
+`Except` logical operator can only be performed on spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[tables with the same number of columns].
 
 ```
 scala> left.except(right)

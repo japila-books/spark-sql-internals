@@ -8,12 +8,12 @@ title: PartitionedFile
 
 NOTE: *Partition column values* are values of the columns that are column partitions and therefore part of the directory structure not the partitioned files themselves (that together are the partitioned dataset).
 
-`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create the input RDD for link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createBucketedReadRDD[bucketed] or link:spark-sql-SparkPlan-FileSourceScanExec.adoc#createNonBucketedReadRDD[non-bucketed] reads.
+`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create the input RDD for spark-sql-SparkPlan-FileSourceScanExec.md#createBucketedReadRDD[bucketed] or spark-sql-SparkPlan-FileSourceScanExec.md#createNonBucketedReadRDD[non-bucketed] reads.
 
 [[creating-instance]]
 `PartitionedFile` takes the following to be created:
 
-* [[partitionValues]] Partition column values to be appended to each row (as an link:spark-sql-InternalRow.adoc[internal row])
+* [[partitionValues]] Partition column values to be appended to each row (as an spark-sql-InternalRow.md[internal row])
 * [[filePath]] Path of the file to read
 * [[start]] Beginning offset (in bytes)
 * [[length]] Number of bytes to read (aka `length`)

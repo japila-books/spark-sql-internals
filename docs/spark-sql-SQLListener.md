@@ -1,6 +1,6 @@
 # SQLListener Spark Listener
 
-`SQLListener` is a custom link:spark-SparkListener.adoc[SparkListener] that collects information about SQL query executions for web UI (to display in link:spark-sql-webui.adoc[SQL tab]). It relies on link:spark-sql-SQLExecution.adoc#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
+`SQLListener` is a custom spark-SparkListener.md[SparkListener] that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on spark-sql-SQLExecution.md#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
 
 Internally, it uses <<SQLExecutionUIData, SQLExecutionUIData>> data structure exclusively to record all the necessary data for a single SQL query execution. `SQLExecutionUIData` is tracked in the internal registries, i.e. `activeExecutions`, `failedExecutions`, and `completedExecutions` as well as lookup tables, i.e. `_executionIdToData`, `_jobIdToExecutionId`, and `_stageIdToStageMetrics`.
 
@@ -8,7 +8,7 @@ Internally, it uses <<SQLExecutionUIData, SQLExecutionUIData>> data structure ex
 
 `SQLListener` stops recording information about a SQL query execution when <<SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionEnd>> event arrives.
 
-It defines the other callbacks (from link:spark-SparkListener.adoc[SparkListener] interface):
+It defines the other callbacks (from spark-SparkListener.md[SparkListener] interface):
 
 * <<onJobStart, onJobStart>>
 * <<onJobEnd, onJobEnd>>
@@ -23,7 +23,7 @@ It defines the other callbacks (from link:spark-SparkListener.adoc[SparkListener
 onJobStart(jobStart: SparkListenerJobStart): Unit
 ----
 
-`onJobStart` reads the link:spark-sql-SQLExecution.adoc#spark.sql.execution.id[`spark.sql.execution.id` key], the identifiers of the job and the stages and then updates the <<SQLExecutionUIData, SQLExecutionUIData>> for the execution id in `activeExecutions` internal registry.
+`onJobStart` reads the spark-sql-SQLExecution.md#spark.sql.execution.id[`spark.sql.execution.id` key], the identifiers of the job and the stages and then updates the <<SQLExecutionUIData, SQLExecutionUIData>> for the execution id in `activeExecutions` internal registry.
 
 NOTE: When `onJobStart` is executed, it is assumed that <<SQLExecutionUIData, SQLExecutionUIData>> has already been created and available in the internal `activeExecutions` registry.
 
@@ -31,7 +31,7 @@ The job in <<SQLExecutionUIData, SQLExecutionUIData>> is marked as running with 
 
 === [[onOtherEvent]] `onOtherEvent` Callback
 
-In `onOtherEvent`, `SQLListener` listens to the following link:spark-SparkListener.adoc#SparkListenerEvent[SparkListenerEvent] events:
+In `onOtherEvent`, `SQLListener` listens to the following spark-SparkListener.md#SparkListenerEvent[SparkListenerEvent] events:
 
 * <<SparkListenerSQLExecutionStart, SparkListenerSQLExecutionStart>>
 * <<SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionEnd>>
@@ -69,7 +69,7 @@ extends SparkListenerEvent
 
 If there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-properties.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond spark-sql-properties.md#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
 
 ==== [[SparkListenerDriverAccumUpdates]] `SparkListenerDriverAccumUpdates` Event
 
@@ -96,7 +96,7 @@ If it is the last job of the query execution (tracked as <<SQLExecutionUIData, S
 
 If the query execution has already been marked as completed (using `completionTime`) and there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond link:spark-sql-properties.adoc#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond spark-sql-properties.md#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
 
 === [[getExecution]] Getting SQL Execution Data -- `getExecution` Method
 
@@ -114,7 +114,7 @@ getExecutionMetrics(executionId: Long): Map[Long, String]
 
 `getExecutionMetrics` gets the metrics (aka _accumulator updates_) for `executionId` (by which it collects all the tasks that were used for an execution).
 
-It is exclusively used to render the link:spark-sql-webui.adoc#ExecutionPage[ExecutionPage] page in web UI.
+It is exclusively used to render the spark-sql-webui.md#ExecutionPage[ExecutionPage] page in web UI.
 
 === [[mergeAccumulatorUpdates]] `mergeAccumulatorUpdates` Method
 

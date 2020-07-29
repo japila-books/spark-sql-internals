@@ -5,12 +5,12 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveSessionCatalog` is a link:../spark-sql-SessionCatalog.adoc[session-scoped catalog of relational entities] that is used when `SparkSession` was created with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
+`HiveSessionCatalog` is a ../spark-sql-SessionCatalog.md[session-scoped catalog of relational entities] that is used when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
 .HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveSessionCatalog.png[align="center"]
 
-`HiveSessionCatalog` is available as link:../SessionState.md#catalog[catalog] property of `SessionState` when `SparkSession` was created with link:../SparkSession-Builder.md#enableHiveSupport[Hive support enabled] (that in the end sets link:../spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
+`HiveSessionCatalog` is available as ../SessionState.md#catalog[catalog] property of `SessionState` when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled] (that in the end sets ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
 
 [source, scala]
 ----
@@ -28,21 +28,21 @@ scala> spark.sessionState.catalog
 res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sql.hive.HiveSessionCatalog@1ae3d0a8
 ----
 
-`HiveSessionCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for the link:HiveSessionStateBuilder.adoc#catalog[SessionCatalog].
+`HiveSessionCatalog` is <<creating-instance, created>> exclusively when `HiveSessionStateBuilder` is requested for the HiveSessionStateBuilder.md#catalog[SessionCatalog].
 
-`HiveSessionCatalog` uses the legacy <<metastoreCatalog, HiveMetastoreCatalog>> (which is another session-scoped catalog of relational entities) exclusively to allow `RelationConversions` logical evaluation rule to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>> when link:RelationConversions.adoc#apply[executed].
+`HiveSessionCatalog` uses the legacy <<metastoreCatalog, HiveMetastoreCatalog>> (which is another session-scoped catalog of relational entities) exclusively to allow `RelationConversions` logical evaluation rule to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>> when RelationConversions.md#apply[executed].
 
 === [[creating-instance]] Creating HiveSessionCatalog Instance
 
 `HiveSessionCatalog` takes the following to be created:
 
-* [[externalCatalog]] HiveExternalCatalog.adoc[HiveExternalCatalog]
-* [[globalTempViewManager]] link:../spark-sql-GlobalTempViewManager.adoc[GlobalTempViewManager]
-* [[metastoreCatalog]] Legacy link:HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
-* [[functionRegistry]] link:../spark-sql-FunctionRegistry.adoc[FunctionRegistry]
+* [[externalCatalog]] HiveExternalCatalog.md[HiveExternalCatalog]
+* [[globalTempViewManager]] ../spark-sql-GlobalTempViewManager.md[GlobalTempViewManager]
+* [[metastoreCatalog]] Legacy HiveMetastoreCatalog.md[HiveMetastoreCatalog]
+* [[functionRegistry]] ../spark-sql-FunctionRegistry.md[FunctionRegistry]
 * [[conf]] [SQLConf](../SQLConf.md)
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
-* [[parser]] link:../spark-sql-ParserInterface.adoc[ParserInterface]
+* [[parser]] ../spark-sql-ParserInterface.md[ParserInterface]
 * [[functionResourceLoader]] `FunctionResourceLoader`
 
 === [[lookupFunction0]] `lookupFunction0` Internal Method

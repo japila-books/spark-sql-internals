@@ -2,9 +2,9 @@ title: UnresolvedGenerator
 
 # UnresolvedGenerator Expression
 
-`UnresolvedGenerator` is a link:spark-sql-Expression-Generator.adoc[Generator] that represents an unresolved generator in a logical query plan.
+`UnresolvedGenerator` is a spark-sql-Expression-Generator.md[Generator] that represents an unresolved generator in a logical query plan.
 
-`UnresolvedGenerator` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#withGenerate[withGenerate] (as part of link:spark-sql-LogicalPlan-Generate.adoc#generator[Generate] logical operator) for SQL's `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+`UnresolvedGenerator` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to spark-sql-AstBuilder.md#withGenerate[withGenerate] (as part of spark-sql-LogicalPlan-Generate.md#generator[Generate] logical operator) for SQL's `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
 [source, scala]
 ----
@@ -38,10 +38,10 @@ res1: Boolean = true
 ----
 
 [[resolved]]
-`UnresolvedGenerator` can never be link:expressions/Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
+`UnresolvedGenerator` can never be expressions/Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedGenerator` can never be resolved it should not come as a surprise that it link:expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedGenerator` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedGenerator` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedGenerator` simply reports a `UnsupportedOperationException`.
 
 ```
 Cannot evaluate expression: [this]
@@ -50,14 +50,14 @@ Cannot evaluate expression: [this]
 [[analysis-phase]]
 [NOTE]
 ====
-`UnresolvedGenerator` is resolved to a concrete link:spark-sql-Expression-Generator.adoc[Generator] expression when link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions] logical resolution rule is executed.
+`UnresolvedGenerator` is resolved to a concrete spark-sql-Expression-Generator.md[Generator] expression when spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions] logical resolution rule is executed.
 ====
 
-NOTE: `UnresolvedGenerator` is similar to link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] and differs mostly by the type (to make Spark development with Scala easier?)
+NOTE: `UnresolvedGenerator` is similar to spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] and differs mostly by the type (to make Spark development with Scala easier?)
 
 === [[creating-instance]] Creating UnresolvedGenerator Instance
 
 `UnresolvedGenerator` takes the following when created:
 
 * [[name]] `FunctionIdentifier`
-* [[children]] Child link:expressions/Expression.md[expressions]
+* [[children]] Child expressions/Expression.md[expressions]

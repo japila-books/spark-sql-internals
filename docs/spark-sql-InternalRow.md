@@ -2,7 +2,7 @@
 
 NOTE: `InternalRow` is also called *Catalyst row* or *Spark SQL row*.
 
-NOTE: link:spark-sql-UnsafeRow.adoc[UnsafeRow] is a concrete `InternalRow`.
+NOTE: spark-sql-UnsafeRow.md[UnsafeRow] is a concrete `InternalRow`.
 
 [source, scala]
 ----

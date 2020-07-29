@@ -10,16 +10,16 @@
 `DataSourceV2ScanExec` is also a [DataSourceV2StringFormat](../spark-sql-DataSourceV2StringFormat.md), i.e....FIXME
 
 [[inputRDDs]]
-`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the link:spark-sql-CodegenSupport.adoc#inputRDDs[only input RDD of internal rows] (when `WholeStageCodegenExec` physical operator is link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#doExecute[executed]).
+`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the spark-sql-CodegenSupport.md#inputRDDs[only input RDD of internal rows] (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
 
 ## Creating Instance
 
 `DataSourceV2ScanExec` takes the following to be created:
 
 * [[output]] Output schema (as a collection of `AttributeReferences`)
-* [[reader]] link:spark-sql-DataSourceReader.adoc[DataSourceReader]
+* [[reader]] spark-sql-DataSourceReader.md[DataSourceReader]
 
-`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#, DataSourceV2Relation>> logical operator.
+`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator.
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -28,7 +28,7 @@
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -39,11 +39,11 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 supportsBatch: Boolean
 ----
 
-NOTE: `supportsBatch` is part of link:spark-sql-ColumnarBatchScan.adoc#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports link:spark-sql-vectorized-parquet-reader.adoc[vectorized decoding] or not.
+NOTE: `supportsBatch` is part of spark-sql-ColumnarBatchScan.md#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports spark-sql-vectorized-parquet-reader.md[vectorized decoding] or not.
 
-`supportsBatch` is enabled (`true`) only when the <<reader, DataSourceReader>> is a link:spark-sql-SupportsScanColumnarBatch.adoc[SupportsScanColumnarBatch] with the link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag enabled.
+`supportsBatch` is enabled (`true`) only when the <<reader, DataSourceReader>> is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled.
 
-NOTE: link:spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead[enableBatchRead] flag is enabled by default.
+NOTE: spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag is enabled by default.
 
 `supportsBatch` is disabled (i.e. `false`) otherwise.
 
@@ -60,9 +60,9 @@ NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and 
 
 . For a `ContinuousReader` in Spark Structured Streaming, `inputRDD` is a `ContinuousDataSourceRDD` that...FIXME
 
-. For a <<spark-sql-SupportsScanColumnarBatch.adoc#, SupportsScanColumnarBatch>> with the <<spark-sql-SupportsScanColumnarBatch.adoc#enableBatchRead, enableBatchRead>> flag enabled, `inputRDD` is a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> with the <<batchPartitions, batchPartitions>>
+. For a <<spark-sql-SupportsScanColumnarBatch.md#, SupportsScanColumnarBatch>> with the <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, enableBatchRead>> flag enabled, `inputRDD` is a <<spark-sql-DataSourceRDD.md#, DataSourceRDD>> with the <<batchPartitions, batchPartitions>>
 
-. For all other types of the <<reader, DataSourceReader>>, `inputRDD` is a <<spark-sql-DataSourceRDD.adoc#, DataSourceRDD>> with the <<partitions, partitions>>.
+. For all other types of the <<reader, DataSourceReader>>, `inputRDD` is a <<spark-sql-DataSourceRDD.md#, DataSourceRDD>> with the <<partitions, partitions>>.
 
 NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is requested for the <<inputRDDs, input RDDs>> and to <<doExecute, execute>>.
 
@@ -74,9 +74,9 @@ NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is reques
 | Description
 
 | batchPartitions
-a| [[batchPartitions]] Input partitions of <<spark-sql-ColumnarBatch.adoc#, ColumnarBatches>> (`Seq[InputPartition[ColumnarBatch]]`)
+a| [[batchPartitions]] Input partitions of <<spark-sql-ColumnarBatch.md#, ColumnarBatches>> (`Seq[InputPartition[ColumnarBatch]]`)
 
 | partitions
-a| [[partitions]] Input partitions of <<spark-sql-InternalRow.adoc#, InternalRows>> (`Seq[InputPartition[InternalRow]]`)
+a| [[partitions]] Input partitions of <<spark-sql-InternalRow.md#, InternalRows>> (`Seq[InputPartition[InternalRow]]`)
 
 |===

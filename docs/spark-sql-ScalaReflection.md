@@ -19,9 +19,9 @@ serializerFor[T : TypeTag](inputObject: Expression): CreateNamedStruct
 
 In the end, `serializerFor` returns one of the following:
 
-* The <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expression from the false value of the `If` expression returned only if the type `T` is <<definedByConstructorParams, definedByConstructorParams>>
+* The <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expression from the false value of the `If` expression returned only if the type `T` is <<definedByConstructorParams, definedByConstructorParams>>
 
-* Creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> expression with the <<spark-sql-Expression-Literal.adoc#, Literal>> with the <<spark-sql-Expression-Literal.adoc#apply, value>> as `"value"` and the expression returned
+* Creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> expression with the <<spark-sql-Expression-Literal.md#, Literal>> with the <<spark-sql-Expression-Literal.md#apply, value>> as `"value"` and the expression returned
 
 [source, scala]
 ----

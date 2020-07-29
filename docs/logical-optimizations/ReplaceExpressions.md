@@ -4,7 +4,7 @@
 
 `ReplaceExpressions` is part of the [Finish Analysis](../Optimizer.md#Finish_Analysis) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`ReplaceExpressions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ReplaceExpressions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -28,6 +28,6 @@ scala> println(optimizedPlan.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) and replaces a link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression into its single child.
+`apply` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>>) and replaces a spark-sql-Expression-RuntimeReplaceable.md[RuntimeReplaceable] expression into its single child.
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

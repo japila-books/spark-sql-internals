@@ -1,19 +1,19 @@
 # HiveFileFormat
 
-`HiveFileFormat` is a link:../spark-sql-FileFormat.adoc[FileFormat] for <<prepareWrite, writing Hive tables>>.
+`HiveFileFormat` is a ../spark-sql-FileFormat.md[FileFormat] for <<prepareWrite, writing Hive tables>>.
 
 [[shortName]]
-`HiveFileFormat` is a link:../spark-sql-DataSourceRegister.adoc[DataSourceRegister] and link:../spark-sql-DataSourceRegister.adoc#shortName[registers] itself as *hive* data source.
+`HiveFileFormat` is a ../spark-sql-DataSourceRegister.md[DataSourceRegister] and ../spark-sql-DataSourceRegister.md#shortName[registers] itself as *hive* data source.
 
-NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use [DataFrameReader.table](../DataFrameReader.md#table) to load from or link:../spark-sql-DataFrameWriter.adoc#saveAsTable[DataFrameWriter.saveAsTable] to write data to a Hive table.
+NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use [DataFrameReader.table](../DataFrameReader.md#table) to load from or ../spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWriter.saveAsTable] to write data to a Hive table.
 
-`HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to link:../hive/SaveAsHiveFile.adoc#saveAsHiveFile[saveAsHiveFile] (when link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed).
+`HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to ../hive/SaveAsHiveFile.md#saveAsHiveFile[saveAsHiveFile] (when InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed).
 
 [[fileSinkConf]][[creating-instance]]
 `HiveFileFormat` takes a `FileSinkDesc` when created.
 
 [[inferSchema]]
-`HiveFileFormat` throws a `UnsupportedOperationException` when requested to link:../spark-sql-FileFormat.adoc#inferSchema[inferSchema].
+`HiveFileFormat` throws a `UnsupportedOperationException` when requested to ../spark-sql-FileFormat.md#inferSchema[inferSchema].
 
 ```
 inferSchema is not supported for hive data source.
@@ -30,7 +30,7 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the link:../spark-sql-FileFormat.adoc#prepareWrite[FileFormat] contract.
+NOTE: `prepareWrite` is part of the ../spark-sql-FileFormat.md#prepareWrite[FileFormat] contract.
 
 `prepareWrite` sets the *mapred.output.format.class* property to be the `getOutputFileFormatClassName` of the Hive `TableDesc` of the <<fileSinkConf, FileSinkDesc>>.
 

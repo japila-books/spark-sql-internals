@@ -1,8 +1,8 @@
 # FileSourceStrategy Execution Planning Strategy for LogicalRelations with HadoopFsRelation
 
-`FileSourceStrategy` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
+`FileSourceStrategy` is an spark-sql-SparkStrategy.md[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
 
-`FileSourceStrategy` is part of link:spark-sql-SparkPlanner.adoc#strategies[predefined strategies] of the link:spark-sql-SparkPlanner.adoc[Spark Planner].
+`FileSourceStrategy` is part of spark-sql-SparkPlanner.md#strategies[predefined strategies] of the spark-sql-SparkPlanner.md[Spark Planner].
 
 [source, scala]
 ----
@@ -38,7 +38,7 @@ org.apache.spark.sql.execution.FileSourceScanExec
 ----
 
 [[shouldPruneBuckets]]
-`FileSourceScanExec` supports <<spark-sql-bucketing.adoc#bucket-pruning, Bucket Pruning>> for <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.adoc#bucketSpec, bucketing specification>> with the following:
+`FileSourceScanExec` supports <<spark-sql-bucketing.md#bucket-pruning, Bucket Pruning>> for <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> with the following:
 
 . There is exactly one bucketing column
 . The number of buckets is greater than 1
@@ -86,7 +86,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.FileSourceStrategy=INFO
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[collectProjectsAndFilters]] `collectProjectsAndFilters` Method
@@ -97,7 +97,7 @@ collectProjectsAndFilters(plan: LogicalPlan):
   (Option[Seq[NamedExpression]], Seq[Expression], LogicalPlan, Map[Attribute, Expression])
 ----
 
-`collectProjectsAndFilters` is a pattern used to destructure a link:spark-sql-LogicalPlan.adoc[LogicalPlan] that can be `Project` or `Filter`. Any other `LogicalPlan` give an _all-empty_ response.
+`collectProjectsAndFilters` is a pattern used to destructure a spark-sql-LogicalPlan.md[LogicalPlan] that can be `Project` or `Filter`. Any other `LogicalPlan` give an _all-empty_ response.
 
 === [[apply]] Applying FileSourceStrategy Strategy to Logical Plan (Executing FileSourceStrategy) -- `apply` Method
 
@@ -106,13 +106,13 @@ collectProjectsAndFilters(plan: LogicalPlan):
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
 
-`apply` link:spark-sql-PhysicalOperation.adoc#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
+`apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only works with link:spark-sql-LogicalPlan.adoc[logical plans] that are actually a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with a link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation] (possibly as a child of link:spark-sql-LogicalPlan-Project.adoc[Project] and link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operators).
+`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] (possibly as a child of spark-sql-LogicalPlan-Project.md[Project] and spark-sql-LogicalPlan-Filter.md[Filter] logical operators).
 
-`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the link:spark-sql-BaseRelation-HadoopFsRelation.adoc#partitionSchema[partitionSchema] of the `HadoopFsRelation`.
+`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the spark-sql-BaseRelation-HadoopFsRelation.md#partitionSchema[partitionSchema] of the `HadoopFsRelation`.
 
 `apply` prints out the following INFO message to the logs:
 
@@ -120,7 +120,7 @@ NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy 
 Pruning directories with: [partitionKeyFilters]
 ```
 
-`apply` computes `afterScanFilters` predicate link:expressions/Expression.md[expressions] that should be evaluated after the scan.
+`apply` computes `afterScanFilters` predicate expressions/Expression.md[expressions] that should be evaluated after the scan.
 
 `apply` prints out the following INFO message to the logs:
 
@@ -128,7 +128,7 @@ Pruning directories with: [partitionKeyFilters]
 Post-Scan Filters: [afterScanFilters]
 ```
 
-`apply` computes `readDataColumns` link:spark-sql-Expression-Attribute.adoc[attributes] that are the required attributes except the partition columns.
+`apply` computes `readDataColumns` spark-sql-Expression-Attribute.md[attributes] that are the required attributes except the partition columns.
 
 `apply` prints out the following INFO message to the logs:
 
@@ -136,8 +136,8 @@ Post-Scan Filters: [afterScanFilters]
 Output Data Schema: [outputSchema]
 ```
 
-`apply` creates a link:spark-sql-SparkPlan-FileSourceScanExec.adoc#creating-instance[FileSourceScanExec] physical operator.
+`apply` creates a spark-sql-SparkPlan-FileSourceScanExec.md#creating-instance[FileSourceScanExec] physical operator.
 
-If there are any `afterScanFilter` predicate expressions, `apply` creates a <<spark-sql-SparkPlan-FilterExec.adoc#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
+If there are any `afterScanFilter` predicate expressions, `apply` creates a <<spark-sql-SparkPlan-FilterExec.md#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
 
-If the <<spark-sql-SparkPlan-FilterExec.adoc#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a link:spark-sql-SparkPlan-ProjectExec.adoc#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
+If the <<spark-sql-SparkPlan-FilterExec.md#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a spark-sql-SparkPlan-ProjectExec.md#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.

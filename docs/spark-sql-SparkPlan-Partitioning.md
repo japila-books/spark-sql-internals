@@ -13,9 +13,9 @@ numPartitions: Int
 
 `numPartitions` is used in:
 
-* `EnsureRequirements` physical preparation rule to link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforce partition requirements of a physical operator]
+* `EnsureRequirements` physical preparation rule to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements of a physical operator]
 
-* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec] for `outputPartitioning` for `FullOuter` join type
+* spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] for `outputPartitioning` for `FullOuter` join type
 * `Partitioning.allCompatible`
 
 [[implementations]]
@@ -32,7 +32,7 @@ m| BroadcastPartitioning
 | `BroadcastPartitioning` with the same `BroadcastMode`
 | Exactly the same `BroadcastPartitioning`
 ^| 1
-| [[BroadcastPartitioning]] link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] with the same `BroadcastMode`
+| [[BroadcastPartitioning]] spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] with the same `BroadcastMode`
 
 a| `HashPartitioning`
 
@@ -44,9 +44,9 @@ a| `HashPartitioning`
 | Input `numPartitions`
 a| [[HashPartitioning]]
 
-* link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+* spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 
-* link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution] with all the hashing link:expressions/Expression.md[expressions] included in `clustering` expressions
+* spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution] with all the hashing expressions/Expression.md[expressions] included in `clustering` expressions
 
 a| `PartitioningCollection`
 
@@ -67,9 +67,9 @@ a| `RangePartitioning`
 | Input `numPartitions`
 a| [[RangePartitioning]]
 
-* link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
-* link:spark-sql-Distribution-OrderedDistribution.adoc[OrderedDistribution] with `requiredOrdering` that matches the input `ordering`
-* link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution] with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
+* spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
+* spark-sql-Distribution-OrderedDistribution.md[OrderedDistribution] with `requiredOrdering` that matches the input `ordering`
+* spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution] with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
 
 a| `RoundRobinPartitioning`
 
@@ -78,13 +78,13 @@ a| `RoundRobinPartitioning`
 | Always negative
 | Always negative
 | Input `numPartitions`
-| [[RoundRobinPartitioning]] link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| [[RoundRobinPartitioning]] spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 
 | `SinglePartition`
 | Any `Partitioning` with exactly one partition
 | Any `Partitioning` with exactly one partition
 ^| 1
-| [[SinglePartition]] Any `Distribution` except link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution]
+| [[SinglePartition]] Any `Distribution` except spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution]
 
 a| `UnknownPartitioning`
 
@@ -92,5 +92,5 @@ a| `UnknownPartitioning`
 | Always negative
 | Always negative
 | Input `numPartitions`
-| [[UnknownPartitioning]] link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| [[UnknownPartitioning]] spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 |===

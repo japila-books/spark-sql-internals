@@ -3,10 +3,10 @@ title: StructField
 # StructField -- Single Field in StructType
 
 [[creating-instance]]
-`StructField` describes a single field in a <<spark-sql-StructType.adoc#, StructType>> with the following:
+`StructField` describes a single field in a <<spark-sql-StructType.md#, StructType>> with the following:
 
 * [[name]] Name
-* [[dataType]] <<spark-sql-DataType.adoc#, DataType>>
+* [[dataType]] <<spark-sql-DataType.md#, DataType>>
 * [[nullable]] `nullable` flag (enabled by default)
 * [[metadata]] `Metadata` (empty by default)
 
@@ -53,7 +53,7 @@ toDDL: String
 ====
 `toDDL` is used when:
 
-* `StructType` is requested to <<spark-sql-StructType.adoc#toDDL, convert itself to DDL format>>
+* `StructType` is requested to <<spark-sql-StructType.md#toDDL, convert itself to DDL format>>
 
-* <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>> logical command is executed (and <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#showHiveTableHeader, showHiveTableHeader>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#showHiveTableNonDataColumns, showHiveTableNonDataColumns>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#showDataSourceTableDataColumns, showDataSourceTableDataColumns>>)
+* <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#, ShowCreateTableCommand>> logical command is executed (and <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showHiveTableHeader, showHiveTableHeader>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showHiveTableNonDataColumns, showHiveTableNonDataColumns>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showDataSourceTableDataColumns, showDataSourceTableDataColumns>>)
 ====

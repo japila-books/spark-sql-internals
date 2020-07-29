@@ -2,9 +2,9 @@ title: InsertIntoDataSourceCommand
 
 # InsertIntoDataSourceCommand Logical Command
 
-`InsertIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
+`InsertIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
 
-`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSourceAnalysis` logical resolution is <<spark-sql-Analyzer-DataSourceAnalysis.adoc#apply, executed>> (and <<spark-sql-Analyzer-DataSourceAnalysis.adoc#InsertIntoTable-InsertableRelation, resolves>> an <<InsertIntoTable.adoc#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> on an <<spark-sql-InsertableRelation.adoc#, InsertableRelation>>).
+`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSourceAnalysis` logical resolution is <<spark-sql-Analyzer-DataSourceAnalysis.md#apply, executed>> (and <<spark-sql-Analyzer-DataSourceAnalysis.md#InsertIntoTable-InsertableRelation, resolves>> an <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> on an <<spark-sql-InsertableRelation.md#, InsertableRelation>>).
 
 [source, plaintext]
 ----
@@ -46,8 +46,8 @@ scala> println(plan.numberedTreeString)
 
 `InsertIntoDataSourceCommand` takes the following to be created:
 
-* [[logicalRelation]] <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelation>> leaf logical operator
-* [[query]] <<spark-sql-LogicalPlan.adoc#, Logical query plan>>
+* [[logicalRelation]] <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> leaf logical operator
+* [[query]] <<spark-sql-LogicalPlan.md#, Logical query plan>>
 * [[overwrite]] `overwrite` flag
 
 === [[run]] Executing Logical Command (Inserting or Overwriting Data in InsertableRelation) -- `run` Method
@@ -58,18 +58,18 @@ run(
   session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` takes the <<spark-sql-InsertableRelation.adoc#, InsertableRelation>> (that is the <<spark-sql-LogicalPlan-LogicalRelation.adoc#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
+`run` takes the <<spark-sql-InsertableRelation.md#, InsertableRelation>> (that is the <<spark-sql-LogicalPlan-LogicalRelation.md#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
 
-`run` then <<spark-sql-Dataset.adoc#ofRows, creates a DataFrame>> for the <<query, logical query plan>> and the input `SparkSession`.
+`run` then <<spark-sql-Dataset.md#ofRows, creates a DataFrame>> for the <<query, logical query plan>> and the input `SparkSession`.
 
-`run` requests the `DataFrame` for the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>> that in turn is requested for the <<spark-sql-QueryExecution.adoc#toRdd, RDD>> (of the structured query). `run` requests the <<logicalRelation, LogicalRelation>> for the <<catalyst/QueryPlan.md#schema, output schema>>.
+`run` requests the `DataFrame` for the <<spark-sql-Dataset.md#queryExecution, QueryExecution>> that in turn is requested for the <<spark-sql-QueryExecution.md#toRdd, RDD>> (of the structured query). `run` requests the <<logicalRelation, LogicalRelation>> for the <<catalyst/QueryPlan.md#schema, output schema>>.
 
 With the RDD and the output schema, `run` creates <<SparkSession.md#internalCreateDataFrame, another DataFrame>> that is the `RDD[InternalRow]` with the schema applied.
 
-`run` requests the `InsertableRelation` to <<spark-sql-InsertableRelation.adoc#insert, insert or overwrite data>>.
+`run` requests the `InsertableRelation` to <<spark-sql-InsertableRelation.md#insert, insert or overwrite data>>.
 
-In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to <<spark-sql-CacheManager.adoc#recacheByPlan, recacheByPlan>> with the <<logicalRelation, LogicalRelation>>.
+In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to <<spark-sql-CacheManager.md#recacheByPlan, recacheByPlan>> with the <<logicalRelation, LogicalRelation>>.
 
 NOTE: `run` requests the `SparkSession` for <<SparkSession.md#sharedState, SharedState>> that is in turn requested for the <<SharedState.md#cacheManager, CacheManager>>.

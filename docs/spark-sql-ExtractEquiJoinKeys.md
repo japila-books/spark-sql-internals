@@ -2,13 +2,13 @@
 
 `ExtractEquiJoinKeys` is a Scala extractor to <<unapply, destructure a Join logical operator>> into a tuple with the following elements:
 
-. link:spark-sql-joins.adoc#join-types[Join type]
+. spark-sql-joins.md#join-types[Join type]
 
-. Left and right keys (for non-empty join keys in the link:spark-sql-LogicalPlan-Join.adoc#condition[condition] of the `Join` operator)
+. Left and right keys (for non-empty join keys in the spark-sql-LogicalPlan-Join.md#condition[condition] of the `Join` operator)
 
 . Join condition (i.e. a Catalyst expression that could be used as a new join condition)
 
-. The link:spark-sql-LogicalPlan-Join.adoc#left[left] and the link:spark-sql-LogicalPlan-Join.adoc#right[right] logical operators
+. The spark-sql-LogicalPlan-Join.md#left[left] and the spark-sql-LogicalPlan-Join.md#right[right] logical operators
 
 [[ReturnType]]
 .ReturnType
@@ -62,7 +62,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[unapply]] Destructuring Logical Plan -- `unapply` Method
@@ -99,7 +99,7 @@ leftKeys:[leftKeys] | rightKeys:[rightKeys]
 
 `unapply` is used when:
 
-* `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin]
+* `JoinEstimation` is requested to spark-sql-JoinEstimation.md#estimateInnerOuterJoin[estimateInnerOuterJoin]
 
 * [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy is executed
 

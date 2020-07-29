@@ -2,7 +2,7 @@ title: ObjectHashAggregateExec
 
 # ObjectHashAggregateExec Aggregate Physical Operator
 
-`ObjectHashAggregateExec` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.adoc#createAggregate, AggUtils.createAggregate>>) when:
+`ObjectHashAggregateExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
 
 * ...FIXME
 
@@ -94,7 +94,7 @@ image::images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png[alig
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -105,18 +105,18 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 supportsAggregate(aggregateExpressions: Seq[AggregateExpression]): Boolean
 ----
 
-`supportsAggregate` is enabled (i.e. returns `true`) if there is at least one link:spark-sql-Expression-TypedImperativeAggregate.adoc[TypedImperativeAggregate] aggregate function in the input `aggregateExpressions` [aggregate expressions](../expressions/AggregateExpression.md).
+`supportsAggregate` is enabled (i.e. returns `true`) if there is at least one spark-sql-Expression-TypedImperativeAggregate.md[TypedImperativeAggregate] aggregate function in the input `aggregateExpressions` [aggregate expressions](../expressions/AggregateExpression.md).
 
-NOTE: `supportsAggregate` is used exclusively when `AggUtils` is requested to <<spark-sql-AggUtils.adoc#createAggregate, create an aggregate physical operator given aggregate expressions>>.
+NOTE: `supportsAggregate` is used exclusively when `AggUtils` is requested to <<spark-sql-AggUtils.md#createAggregate, create an aggregate physical operator given aggregate expressions>>.
 
 === [[creating-instance]] Creating ObjectHashAggregateExec Instance
 
 `ObjectHashAggregateExec` takes the following when created:
 
-* [[requiredChildDistributionExpressions]] Required child distribution link:expressions/Expression.md[expressions]
-* [[groupingExpressions]] Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
+* [[requiredChildDistributionExpressions]] Required child distribution expressions/Expression.md[expressions]
+* [[groupingExpressions]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
 * [[aggregateExpressions]] [Aggregate expressions](../expressions/AggregateExpression.md)
-* [[aggregateAttributes]] Aggregate link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output link:spark-sql-Expression-NamedExpression.adoc[named expressions]
-* [[child]] Child link:SparkPlan.md[physical plan]
+* [[resultExpressions]] Output spark-sql-Expression-NamedExpression.md[named expressions]
+* [[child]] Child SparkPlan.md[physical plan]

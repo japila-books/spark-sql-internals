@@ -1,4 +1,4 @@
-# LogicalPlan -- Logical Relational Operator with Children and Expressions / Logical Query Plan
+# LogicalPlan &mdash; Logical Relational Operator
 
 `LogicalPlan` is an extension of the <<catalyst/QueryPlan.md#, QueryPlan contract>> for <<implementations, logical operators>> to build a *logical query plan* (i.e. a tree of logical operators).
 
@@ -6,7 +6,7 @@ NOTE: A logical query plan is a tree of [nodes](../catalyst/TreeNode.md) of logi
 
 `LogicalPlan` can be <<resolved, resolved>>.
 
-In order to get the <<spark-sql-QueryExecution.adoc#logical, logical plan>> of a structured query you should use the <<spark-sql-Dataset.adoc#queryExecution, QueryExecution>>.
+In order to get the <<spark-sql-QueryExecution.md#logical, logical plan>> of a structured query you should use the <<spark-sql-Dataset.md#queryExecution, QueryExecution>>.
 
 [source, scala]
 ----
@@ -18,7 +18,7 @@ scala> :type plan
 org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 ----
 
-`LogicalPlan` goes through <<spark-sql-QueryExecution.adoc#execution-pipeline, execution stages>> (as a <<spark-sql-QueryExecution.adoc#, QueryExecution>>). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to <<SessionState.md#executePlan, "execute" the plan>>.
+`LogicalPlan` goes through <<spark-sql-QueryExecution.md#execution-pipeline, execution stages>> (as a <<spark-sql-QueryExecution.md#, QueryExecution>>). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to <<SessionState.md#executePlan, "execute" the plan>>.
 
 [source, scala]
 ----
@@ -37,7 +37,7 @@ org.apache.spark.sql.execution.QueryExecution
 [[logical-plan-to-be-analyzed-idiom]]
 [NOTE]
 ====
-A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the logical plan (which simply creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>>).
 
 [source, scala]
 ----
@@ -55,14 +55,14 @@ val analyzedPlan = qe.analyzed
 [[converting-logical-plan-to-dataset]]
 [NOTE]
 ====
-Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use <<spark-sql-Dataset.adoc#ofRows, Dataset.ofRows>> internal method that <<SessionState.md#executePlan, "executes">> the logical plan followed by creating a <<spark-sql-Dataset.adoc#creating-instance, Dataset>> with the <<spark-sql-QueryExecution.adoc#, QueryExecution>> and a <<spark-sql-RowEncoder.adoc#, RowEncoder>>.
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use <<spark-sql-Dataset.md#ofRows, Dataset.ofRows>> internal method that <<SessionState.md#executePlan, "executes">> the logical plan followed by creating a <<spark-sql-Dataset.md#creating-instance, Dataset>> with the <<spark-sql-QueryExecution.md#, QueryExecution>> and a <<spark-sql-RowEncoder.md#, RowEncoder>>.
 ====
 
 [[childrenResolved]]
 A logical operator is considered *partially resolved* when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
 [[resolved]]
-A logical operator is (fully) *resolved* to a specific schema when all link:catalyst/QueryPlan.md#expressions[expressions] and the <<childrenResolved, children are resolved>>.
+A logical operator is (fully) *resolved* to a specific schema when all catalyst/QueryPlan.md#expressions[expressions] and the <<childrenResolved, children are resolved>>.
 
 [source, scala]
 ----
@@ -87,9 +87,9 @@ scala> val maxRows = plan.maxRows
 maxRows: Option[Long] = None
 ----
 
-`LogicalPlan` can be <<isStreaming, streaming>> if it contains one or more link:spark-sql-streaming-source.adoc[structured streaming sources].
+`LogicalPlan` can be <<isStreaming, streaming>> if it contains one or more spark-sql-streaming-source.md[structured streaming sources].
 
-NOTE: `LogicalPlan` is in the end transformed to a link:SparkPlan.md[physical query plan].
+NOTE: `LogicalPlan` is in the end transformed to a SparkPlan.md[physical query plan].
 
 [[implementations]]
 [[specialized-logical-plans]]
@@ -99,7 +99,7 @@ NOTE: `LogicalPlan` is in the end transformed to a link:SparkPlan.md[physical qu
 | LogicalPlan
 | Description
 
-| link:spark-sql-LogicalPlan-LeafNode.adoc[LeafNode]
+| spark-sql-LogicalPlan-LeafNode.md[LeafNode]
 | [[LeafNode]] Logical operator with no [child](../catalyst/TreeNode.md#children) operators
 
 | `UnaryNode`
@@ -108,10 +108,10 @@ NOTE: `LogicalPlan` is in the end transformed to a link:SparkPlan.md[physical qu
 | `BinaryNode`
 | [[BinaryNode]] Logical operator with two [child](../catalyst/TreeNode.md#children) logical operators
 
-| link:spark-sql-LogicalPlan-Command.adoc[Command]
+| spark-sql-LogicalPlan-Command.md[Command]
 | [[Command]]
 
-| link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
+| spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
 | [[RunnableCommand]]
 |===
 
@@ -144,10 +144,10 @@ stats(
 `stats` is used when:
 
 * A `LogicalPlan` <<computeStats, computes `Statistics`>>
-* `QueryExecution` link:spark-sql-QueryExecution.adoc#completeString[builds complete text representation]
+* `QueryExecution` spark-sql-QueryExecution.md#completeString[builds complete text representation]
 * `JoinSelection` [checks whether a plan can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast) et al
-* link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] attempts to reorder inner joins
-* `LimitPushDown` is link:spark-sql-Optimizer-LimitPushDown.adoc#apply[executed] (for link:spark-sql-joins.adoc#FullOuter[FullOuter] join)
+* spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] attempts to reorder inner joins
+* `LimitPushDown` is spark-sql-Optimizer-LimitPushDown.md#apply[executed] (for spark-sql-joins.md#FullOuter[FullOuter] join)
 * `AggregateEstimation` estimates `Statistics`
 * `FilterEstimation` estimates child `Statistics`
 * `InnerOuterEstimation` estimates `Statistics` of the left and right sides of a join
@@ -173,7 +173,7 @@ CAUTION: FIXME
 isStreaming: Boolean
 ----
 
-`isStreaming` is part of the public API of `LogicalPlan` and is enabled (i.e. `true`) when a logical plan is a link:spark-sql-streaming-source.adoc[streaming source].
+`isStreaming` is part of the public API of `LogicalPlan` and is enabled (i.e. `true`) when a logical plan is a spark-sql-streaming-source.md[streaming source].
 
 By default, it walks over subtrees and calls itself, i.e. `isStreaming`, on every child node to find a streaming source.
 
@@ -207,15 +207,15 @@ refresh(): Unit
 
 `refresh` calls itself recursively for every [child](../catalyst/TreeNode.md#children) logical operator.
 
-NOTE: `refresh` is overriden by link:spark-sql-LogicalPlan-LogicalRelation.adoc#refresh[LogicalRelation] only (that refreshes the location of `HadoopFsRelation` relations only).
+NOTE: `refresh` is overriden by spark-sql-LogicalPlan-LogicalRelation.md#refresh[LogicalRelation] only (that refreshes the location of `HadoopFsRelation` relations only).
 
 [NOTE]
 ====
 `refresh` is used when:
 
-* `SessionCatalog` is requested to link:spark-sql-SessionCatalog.adoc#refreshTable[refresh a table]
+* `SessionCatalog` is requested to spark-sql-SessionCatalog.md#refreshTable[refresh a table]
 
-* `CatalogImpl` is requested to link:spark-sql-CatalogImpl.adoc#refreshTable[refresh a table]
+* `CatalogImpl` is requested to spark-sql-CatalogImpl.md#refreshTable[refresh a table]
 ====
 
 === [[resolveQuoted]] `resolveQuoted` Method

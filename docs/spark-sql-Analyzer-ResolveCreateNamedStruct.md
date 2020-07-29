@@ -1,10 +1,10 @@
 # ResolveCreateNamedStruct Logical Resolution Rule -- Resolving NamePlaceholders In CreateNamedStruct Expressions
 
-`ResolveCreateNamedStruct` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
+`ResolveCreateNamedStruct` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
 
-`ResolveCreateNamedStruct` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
+`ResolveCreateNamedStruct` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
 
-`ResolveCreateNamedStruct` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveCreateNamedStruct` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -37,10 +37,10 @@ scala> println(afterResolveCreateNamedStruct.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions which are not <<expressions/Expression.md#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.adoc#, Literal>> expressions.
+`apply` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions which are not <<expressions/Expression.md#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.md#, Literal>> expressions.
 
-In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.adoc#children, children>> and replaces them with the <<spark-sql-Expression-NamedExpression.adoc#name, name>> of corresponding <<spark-sql-Expression-NamedExpression.adoc#, NamedExpression>>, but only if the `NamedExpression` is resolved.
+In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.md#children, children>> and replaces them with the <<spark-sql-Expression-NamedExpression.md#name, name>> of corresponding <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>, but only if the `NamedExpression` is resolved.
 
-In the end, `apply` creates a <<spark-sql-Expression-CreateNamedStruct.adoc#creating-instance, CreateNamedStruct>> with new children.
+In the end, `apply` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> with new children.
 
 `apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.

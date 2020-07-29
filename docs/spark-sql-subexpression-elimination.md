@@ -2,27 +2,27 @@ title: Subexpression Elimination
 
 # Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
 
-*Subexpression Elimination* (aka *Common Expression Reuse*) is an optimisation of a link:spark-sql-LogicalPlan.adoc[logical query plan] that link:spark-sql-CodegenContext.adoc#subexpressionElimination[eliminates expressions in code-generated (non-interpreted) expression evaluation].
+*Subexpression Elimination* (aka *Common Expression Reuse*) is an optimisation of a spark-sql-LogicalPlan.md[logical query plan] that spark-sql-CodegenContext.md#subexpressionElimination[eliminates expressions in code-generated (non-interpreted) expression evaluation].
 
 Subexpression Elimination is enabled by default. Use the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property control whether the feature is enabled (`true`) or not (`false`).
 
-Subexpression Elimination is used (by means of link:SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
+Subexpression Elimination is used (by means of SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
 
-* link:spark-sql-SparkPlan-ProjectExec.adoc#doExecute[ProjectExec]
+* spark-sql-SparkPlan-ProjectExec.md#doExecute[ProjectExec]
 
-* link:spark-sql-SparkPlan-HashAggregateExec.adoc#doExecute[HashAggregateExec] (and for link:spark-sql-SparkPlan-HashAggregateExec.adoc#finishAggregate[finishAggregate])
+* spark-sql-SparkPlan-HashAggregateExec.md#doExecute[HashAggregateExec] (and for spark-sql-SparkPlan-HashAggregateExec.md#finishAggregate[finishAggregate])
 
-* link:spark-sql-SparkPlan-ObjectHashAggregateExec.adoc#doExecute[ObjectHashAggregateExec]
+* spark-sql-SparkPlan-ObjectHashAggregateExec.md#doExecute[ObjectHashAggregateExec]
 
-* link:spark-sql-SparkPlan-SortAggregateExec.adoc#doExecute[SortAggregateExec]
+* spark-sql-SparkPlan-SortAggregateExec.md#doExecute[SortAggregateExec]
 
-* link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[WindowExec] (and creates a link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
+* spark-sql-SparkPlan-WindowExec.md#doExecute[WindowExec] (and creates a spark-sql-SparkPlan-WindowExec.md#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
 
-Internally, subexpression elimination happens when `CodegenContext` is requested for link:spark-sql-CodegenContext.adoc#subexpressionElimination[subexpressionElimination] (when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> with <<spark.sql.subexpressionElimination.enabled, subexpression elimination>> enabled).
+Internally, subexpression elimination happens when `CodegenContext` is requested for spark-sql-CodegenContext.md#subexpressionElimination[subexpressionElimination] (when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> with <<spark.sql.subexpressionElimination.enabled, subexpression elimination>> enabled).
 
 === [[spark.sql.subexpressionElimination.enabled]] spark.sql.subexpressionElimination.enabled Configuration Property
 
-link:spark-sql-properties.adoc#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled] internal configuration property controls whether the subexpression elimination optimization is enabled or not.
+link:spark-sql-properties.md#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled] internal configuration property controls whether the subexpression elimination optimization is enabled or not.
 
 Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminationEnabled) method to access the current value.
 

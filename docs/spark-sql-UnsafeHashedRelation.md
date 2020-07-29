@@ -9,7 +9,7 @@
 get(key: InternalRow): Iterator[InternalRow]
 ----
 
-NOTE: `get` is part of link:spark-sql-HashedRelation.adoc#get[HashedRelation Contract] to give the internal rows for the given key or `null`.
+NOTE: `get` is part of spark-sql-HashedRelation.md#get[HashedRelation Contract] to give the internal rows for the given key or `null`.
 
 `get`...FIXME
 
@@ -20,7 +20,7 @@ NOTE: `get` is part of link:spark-sql-HashedRelation.adoc#get[HashedRelation Con
 getValue(key: InternalRow): InternalRow
 ----
 
-NOTE: `getValue` is part of link:spark-sql-HashedRelation.adoc#getValue[HashedRelation Contract] to give the value internal row for a given key.
+NOTE: `getValue` is part of spark-sql-HashedRelation.md#getValue[HashedRelation Contract] to give the value internal row for a given key.
 
 `getValue`...FIXME
 

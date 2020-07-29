@@ -4,7 +4,7 @@
 
 `ColumnPruning` is part of the [RewriteSubquery](../Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`ColumnPruning` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ColumnPruning` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 === [[example1]] Example 1
 

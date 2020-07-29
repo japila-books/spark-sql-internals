@@ -13,16 +13,16 @@ Together with the <<providers, provider interfaces>>, `DataSource` allows Spark 
 | Interface
 | Description
 
-| xref:spark-sql-CreatableRelationProvider.adoc[CreatableRelationProvider]
+| xref:spark-sql-CreatableRelationProvider.md[CreatableRelationProvider]
 | [[CreatableRelationProvider]] Saves the result of a structured query per save mode and returns the schema
 
-| xref:spark-sql-FileFormat.adoc[FileFormat]
+| xref:spark-sql-FileFormat.md[FileFormat]
 a| [[FileFormat]]
 
-| xref:spark-sql-RelationProvider.adoc[RelationProvider]
+| xref:spark-sql-RelationProvider.md[RelationProvider]
 | [[RelationProvider]] Supports schema inference and can be referenced in SQL's `USING` clause
 
-| xref:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
+| xref:spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
 | [[SchemaRelationProvider]] Requires a user-defined schema
 
 | StreamSinkProvider
@@ -35,33 +35,33 @@ a| [[FileFormat]]
 
 NOTE: Data source is also called a *table provider*.
 
-`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the xref:spark-sql-BaseRelation.adoc[BaseRelation]) to represent the data source in logical plans (using xref:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] leaf logical operator).
+`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the xref:spark-sql-BaseRelation.md[BaseRelation]) to represent the data source in logical plans (using xref:spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] leaf logical operator).
 
 `DataSource` also requires a <<sparkSession, SparkSession>> for the configuration properties to <<lookupDataSource, resolve the data source provider>>.
 
 `DataSource` is <<creating-instance, created>> when:
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * `DataFrameReader` is requested to [load data from a data source (Data Source V1)](DataFrameReader.md#loadV1Source)
 
-* `DataFrameWriter` is requested to xref:spark-sql-DataFrameWriter.adoc#saveToV1Source[save to a data source (Data Source V1)]
+* `DataFrameWriter` is requested to xref:spark-sql-DataFrameWriter.md#saveToV1Source[save to a data source (Data Source V1)]
 
-* xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand], xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand], xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand], xref:spark-sql-LogicalPlan-CreateTempViewUsing.adoc[CreateTempViewUsing] commands are executed
+* xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand], xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand], xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand], xref:spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] commands are executed
 
-* xref:spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable] and xref:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] logical evaluation rules are executed
+* xref:spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] and xref:spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] logical evaluation rules are executed
 
 * For Spark Structured Streaming's `FileStreamSource`, `DataStreamReader` and `DataStreamWriter`
 
 `DataSource` takes a list of <<paths, file system paths that hold data>>. The list is empty by default, but can be different per data source:
 
-* The <<spark-sql-CatalogTable.adoc#location, location URI>> of a link:hive/HiveTableRelation.adoc[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation])
+* The <<spark-sql-CatalogTable.md#location, location URI>> of a hive/HiveTableRelation.md[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation])
 
-* The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.adoc#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.adoc#, ResolveSQLOnFile>> logical evaluation rule is executed)
+* The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.md#, ResolveSQLOnFile>> logical evaluation rule is executed)
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
 
-As a Spark SQL developer (_user_), you interact with `DataSource` by [DataFrameReader](DataFrameReader.md) (when you execute link:SparkSession.md#read[spark.read] or link:SparkSession.md#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
+As a Spark SQL developer (_user_), you interact with `DataSource` by [DataFrameReader](DataFrameReader.md) (when you execute SparkSession.md#read[spark.read] or SparkSession.md#readStream[spark.readStream]) or SQL's `CREATE TABLE USING`.
 
 [source, scala]
 ----
@@ -78,7 +78,7 @@ val messages: DataFrame = spark.readStream
   .load
 ----
 
-When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>> with the optional <<bucketSpec, bucketing specification>>.
+When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the optional <<bucketSpec, bucketing specification>>.
 
 === [[creating-instance]][[apply]] Creating DataSource Instance
 
@@ -87,11 +87,11 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 * [[sparkSession]] xref:SparkSession.md[SparkSession]
 * [[className]] Fully-qualified class name or an alias of the data source provider (aka _data source format_)
 * [[paths]] Data paths (default: empty)
-* [[userSpecifiedSchema]] (optional) User-specified xref:spark-sql-StructType.adoc[schema] (default: undefined)
+* [[userSpecifiedSchema]] (optional) User-specified xref:spark-sql-StructType.md[schema] (default: undefined)
 * [[partitionColumns]] (optional) Names of the partition columns (default: empty)
-* [[bucketSpec]] (optional) xref:spark-sql-BucketSpec.adoc[Bucketing specification] (default: undefined)
+* [[bucketSpec]] (optional) xref:spark-sql-BucketSpec.md[Bucketing specification] (default: undefined)
 * [[options]] (optional) Options (default: empty)
-* [[catalogTable]] (optional) xref:spark-sql-CatalogTable.adoc[CatalogTable] (default: undefined)
+* [[catalogTable]] (optional) xref:spark-sql-CatalogTable.md[CatalogTable] (default: undefined)
 
 `DataSource` initializes the <<internal-properties, internal properties>>.
 
@@ -113,27 +113,27 @@ NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parqu
 
 `lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format xref:spark-sql-OrcFileFormat.adoc[OrcFileFormat] (based on Apache ORC)
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format xref:spark-sql-OrcFileFormat.md[OrcFileFormat] (based on Apache ORC)
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
-* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.adoc[Avro data source] module
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) xref:spark-sql-AvroFileFormat.md[Avro data source] module
 
 [[lookupDataSource-provider2]]
 `lookupDataSource` uses `DefaultSource` as the class name (in the <<lookupDataSource-provider1, provider1>> package) as another provider name variant, i.e. `[provider1].DefaultSource`.
 
 [[lookupDataSource-serviceLoader]]
-`lookupDataSource` uses Java's https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html[ServiceLoader] service-provider loading facility to find all data source providers of type xref:spark-sql-DataSourceRegister.adoc[DataSourceRegister] on the Spark CLASSPATH.
+`lookupDataSource` uses Java's https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html[ServiceLoader] service-provider loading facility to find all data source providers of type xref:spark-sql-DataSourceRegister.md[DataSourceRegister] on the Spark CLASSPATH.
 
-NOTE: xref:spark-sql-DataSourceRegister.adoc[DataSourceRegister] is used to register a data source provider by a short name (_alias_).
+NOTE: xref:spark-sql-DataSourceRegister.md[DataSourceRegister] is used to register a data source provider by a short name (_alias_).
 
-`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their xref:spark-sql-DataSourceRegister.adoc#shortName[alias]) that match the <<lookupDataSource-provider1, provider1>> name (case-insensitive, e.g. `parquet` or `kafka`).
+`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their xref:spark-sql-DataSourceRegister.md#shortName[alias]) that match the <<lookupDataSource-provider1, provider1>> name (case-insensitive, e.g. `parquet` or `kafka`).
 
 If a single `DataSourceRegister` provider class is found, `lookupDataSource` simply returns the instance of the data source provider.
 
 If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the <<lookupDataSource-provider1, provider1>> name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the <<lookupDataSource-provider2, provider2>> name (aka _DefaultSource_) instead.
 
-NOTE: xref:spark-sql-DataFrameWriter.adoc#format[DataFrameWriter.format] and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
+NOTE: xref:spark-sql-DataFrameWriter.md#format[DataFrameWriter.format] and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
 
 .Demo: Resolving Data Source by Name
 [source, scala]
@@ -149,7 +149,7 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
 * [DataFrameReader.load](DataFrameReader.md#load) operator is used (to create a source node)
 
-* xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator is used (to create a sink node)
+* xref:spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator is used (to create a sink node)
 
 * (Structured Streaming) `DataStreamReader.load` operator is used
 
@@ -159,7 +159,7 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
 * `DataSource` is requested (_lazily_) for the <<providingClass, providingClass>> internal registry
 
-* xref:spark-sql-Analyzer-PreprocessTableCreation.adoc[PreprocessTableCreation] posthoc logical resolution rule is executed
+* xref:spark-sql-Analyzer-PreprocessTableCreation.md[PreprocessTableCreation] posthoc logical resolution rule is executed
 
 === [[createSource]] `createSource` Method
 
@@ -192,11 +192,11 @@ NOTE: `createSink` is used when...FIXME
 sourceSchema(): SourceInfo
 ----
 
-`sourceSchema` returns the name and link:spark-sql-schema.adoc[schema] of the data source for streamed reading.
+`sourceSchema` returns the name and spark-sql-schema.md[schema] of the data source for streamed reading.
 
 CAUTION: FIXME Why is the method called? Why does this bother with streamed reading and data sources?!
 
-It supports two class hierarchies, i.e. link:spark-sql-FileFormat.adoc[FileFormat] and Structured Streaming's `StreamSourceProvider` data sources.
+It supports two class hierarchies, i.e. spark-sql-FileFormat.md[FileFormat] and Structured Streaming's `StreamSourceProvider` data sources.
 
 Internally, `sourceSchema` first creates an instance of the data source and...
 
@@ -204,7 +204,7 @@ CAUTION: FIXME Finish...
 
 For Structured Streaming's `StreamSourceProvider` data sources, `sourceSchema` relays calls to `StreamSourceProvider.sourceSchema`.
 
-For link:spark-sql-FileFormat.adoc[FileFormat] data sources, `sourceSchema` makes sure that `path` option was specified.
+For spark-sql-FileFormat.md[FileFormat] data sources, `sourceSchema` makes sure that `path` option was specified.
 
 TIP: `path` is looked up in a case-insensitive way so `paTh` and `PATH` and `pAtH` are all acceptable. Use the lower-case version of `path`, though.
 
@@ -228,7 +228,7 @@ org.apache.spark.sql.AnalysisException: Path does not exist: file:/Users/jacek/d
   ... 48 elided
 ```
 
-If link:spark-sql-properties.adoc#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than link:spark-sql-TextFileFormat.adoc[TextFileFormat], and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
+If spark-sql-properties.md#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than spark-sql-TextFileFormat.md[TextFileFormat], and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
 
 [options="wrap"]
 ----
@@ -255,7 +255,7 @@ resolveRelation(
   checkFilesExist: Boolean = true): BaseRelation
 ----
 
-`resolveRelation` resolves (i.e. creates) a link:spark-sql-BaseRelation.adoc[BaseRelation].
+`resolveRelation` resolves (i.e. creates) a spark-sql-BaseRelation.md[BaseRelation].
 
 Internally, `resolveRelation` tries to create an instance of the <<providingClass, providingClass>> and branches off per its type and whether the optional <<userSpecifiedSchema, user-specified schema>> was specified or not.
 
@@ -265,33 +265,33 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 | Provider
 | Behaviour
 
-| link:spark-sql-SchemaRelationProvider.adoc[SchemaRelationProvider]
-| Executes link:spark-sql-SchemaRelationProvider.adoc#createRelation[SchemaRelationProvider.createRelation] with the provided schema
+| spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
+| Executes spark-sql-SchemaRelationProvider.md#createRelation[SchemaRelationProvider.createRelation] with the provided schema
 
-| link:spark-sql-RelationProvider.adoc[RelationProvider]
-| Executes link:spark-sql-RelationProvider.adoc#createRelation[RelationProvider.createRelation]
+| spark-sql-RelationProvider.md[RelationProvider]
+| Executes spark-sql-RelationProvider.md#createRelation[RelationProvider.createRelation]
 
-| link:spark-sql-FileFormat.adoc[FileFormat]
-| Creates a link:spark-sql-BaseRelation.adoc#HadoopFsRelation[HadoopFsRelation]
+| spark-sql-FileFormat.md[FileFormat]
+| Creates a spark-sql-BaseRelation.md#HadoopFsRelation[HadoopFsRelation]
 |===
 
 `resolveRelation` is used when:
 
-* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
+* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a spark-sql-FileFormat.md[FileFormat])
 
 * `DataFrameReader` is requested to [load data from a data source that supports multiple paths](DataFrameReader.md#load)
 
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 
-* `CreateDataSourceTableCommand` runnable command is link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc#run[executed]
+* `CreateDataSourceTableCommand` runnable command is spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#run[executed]
 
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, run>>
+* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
 
-* `FindDataSourceTable` is requested to link:spark-sql-Analyzer-FindDataSourceTable.adoc#readDataSourceTable[readDataSourceTable]
+* `FindDataSourceTable` is requested to spark-sql-Analyzer-FindDataSourceTable.md#readDataSourceTable[readDataSourceTable]
 
-* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a link:spark-sql-FileFormat.adoc[FileFormat])
+* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a spark-sql-FileFormat.md[FileFormat])
 
-* `HiveMetastoreCatalog` is requested to link:hive/HiveMetastoreCatalog.adoc#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
+* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
 * Structured Streaming's `FileStreamSource` creates batches of records
 
@@ -318,9 +318,9 @@ planForWriting(
 
 `planForWriting` creates an instance of the <<providingClass, providingClass>> and branches off per its type as follows:
 
-* For a <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>>, `planForWriting` creates a <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
+* For a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>, `planForWriting` creates a <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
 
-* For a <<spark-sql-FileFormat.adoc#, FileFormat>>, `planForWriting` <<planForWritingFileFormat, planForWritingFileFormat>> (with the `FileFormat` format and the input `mode` and `data`)
+* For a <<spark-sql-FileFormat.md#, FileFormat>>, `planForWriting` <<planForWritingFileFormat, planForWritingFileFormat>> (with the `FileFormat` format and the input `mode` and `data`)
 
 * For other types, `planForWriting` simply throws a `RuntimeException`:
 +
@@ -332,9 +332,9 @@ planForWriting(
 ====
 `planForWriting` is used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#saveToV1Source, saveToV1Source>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#save, save the result of a structured query (a DataFrame) to a data source>> for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers)
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveToV1Source, saveToV1Source>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save the result of a structured query (a DataFrame) to a data source>> for <<spark-sql-DataSourceV2.md#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers)
 
-* <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc#, InsertIntoDataSourceDirCommand>> logical command is executed
+* <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>> logical command is executed
 ====
 
 === [[writeAndRead]] Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
@@ -352,7 +352,7 @@ writeAndRead(
 
 NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
 
-NOTE: `writeAndRead` is used when xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command is executed.
+NOTE: `writeAndRead` is used when xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand] logical command is executed.
 
 === [[planForWritingFileFormat]] Planning for Writing (to FileFormat-Based Data Source) -- `planForWritingFileFormat` Internal Method
 
@@ -368,9 +368,9 @@ planForWritingFileFormat(
 
 NOTE: `planForWritingFileFormat` uses Hadoop HDFS's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/Path.html[Path] to requests for the https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileSystem.html[FileSystem] that owns it (using <<SessionState.md#newHadoopConf, Hadoop Configuration>>).
 
-`planForWritingFileFormat` uses the <<spark-sql-PartitioningUtils.adoc#, PartitioningUtils>> helper object to <<spark-sql-PartitioningUtils.adoc#validatePartitionColumn, validate partition columns>> in the <<partitionColumns, partitionColumns>>.
+`planForWritingFileFormat` uses the <<spark-sql-PartitioningUtils.md#, PartitioningUtils>> helper object to <<spark-sql-PartitioningUtils.md#validatePartitionColumn, validate partition columns>> in the <<partitionColumns, partitionColumns>>.
 
-In the end, `planForWritingFileFormat` returns a new <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>>.
+In the end, `planForWritingFileFormat` returns a new <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>.
 
 When the number of the <<paths, paths>> is different than `1`, `planForWritingFileFormat` throws an `IllegalArgumentException`:
 
@@ -382,9 +382,9 @@ Expected exactly one path to be specified, but got: [allPaths]
 ====
 `planForWritingFileFormat` is used when `DataSource` is requested for the following:
 
-* <<writeAndRead, Writing data to a data source followed by "reading" rows back>> (for xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand] logical command)
+* <<writeAndRead, Writing data to a data source followed by "reading" rows back>> (for xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand] logical command)
 
-* <<planForWriting, Creating a logical command for writing>> (for xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-DataFrameWriter.adoc#save[DataFrameWriter.save] operator with DataSource V1 data sources)
+* <<planForWriting, Creating a logical command for writing>> (for xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator with DataSource V1 data sources)
 ====
 
 === [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
@@ -439,7 +439,7 @@ Used when:
 
 * `DataSource` is requested to <<sourceSchema, sourceSchema>>, <<createSource, createSource>>, <<createSink, createSink>>, <<resolveRelation, resolveRelation>>, <<writeAndRead, writeAndRead>>, and <<planForWriting, planForWriting>>
 
-* xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.adoc[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile] logical evaluation rule are executed (to ensure that only xref:spark-sql-FileFormat.adoc[FileFormat]-based data sources are used)
+* xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] logical evaluation rule are executed (to ensure that only xref:spark-sql-FileFormat.md[FileFormat]-based data sources are used)
 
 | sourceInfo
 | [[sourceInfo]] `SourceInfo`

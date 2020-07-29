@@ -2,11 +2,11 @@ title: WriteSupport
 
 # WriteSupport -- "Writable" Data Sources
 
-`WriteSupport` is the <<contract, abstraction>> of <<implementations, "writable" data sources>> in the <<spark-sql-data-source-api-v2.adoc#, Data Source API V2>> that can <<createWriter, create a DataSourceWriter>> for writing data out.
+`WriteSupport` is the <<contract, abstraction>> of <<implementations, "writable" data sources>> in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<createWriter, create a DataSourceWriter>> for writing data out.
 
 [[contract]]
 [[createWriter]]
-`WriteSupport` defines a single `createWriter` method that creates an optional <<spark-sql-DataSourceWriter.adoc#, DataSourceWriter>> per <<spark-sql-DataFrameWriter.adoc#SaveMode, SaveMode>> (and can create no `DataSourceWriter` when not needed per mode)
+`WriteSupport` defines a single `createWriter` method that creates an optional <<spark-sql-DataSourceWriter.md#, DataSourceWriter>> per <<spark-sql-DataFrameWriter.md#SaveMode, SaveMode>> (and can create no `DataSourceWriter` when not needed per mode)
 
 [source, java]
 ----
@@ -19,9 +19,9 @@ Optional<DataSourceWriter> createWriter(
 
 `createWriter` is used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.adoc#save, save a DataFrame to a data source>> (for <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> data sources with <<WriteSupport, WriteSupport>>)
+* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save a DataFrame to a data source>> (for <<spark-sql-DataSourceV2.md#, DataSourceV2>> data sources with <<WriteSupport, WriteSupport>>)
 
-* `DataSourceV2Relation` leaf logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#newWriter, create a DataSourceWriter>> (indirectly via <<spark-sql-LogicalPlan-DataSourceV2Relation.adoc#createWriter, createWriter>> implicit method)
+* `DataSourceV2Relation` leaf logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> (indirectly via <<spark-sql-LogicalPlan-DataSourceV2Relation.md#createWriter, createWriter>> implicit method)
 
 [source, scala]
 ----

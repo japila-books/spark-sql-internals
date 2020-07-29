@@ -1,6 +1,6 @@
 # KnownSizeEstimation
 
-`KnownSizeEstimation` is the <<contract, contract>> that allows a class to give link:spark-sql-SizeEstimator.adoc[SizeEstimator] a more accurate <<estimatedSize, size estimation>>.
+`KnownSizeEstimation` is the <<contract, contract>> that allows a class to give spark-sql-SizeEstimator.md[SizeEstimator] a more accurate <<estimatedSize, size estimation>>.
 
 [[contract]]
 `KnownSizeEstimation` defines the single `estimatedSize` method.
@@ -16,14 +16,14 @@ trait KnownSizeEstimation {
 
 `estimatedSize` is used when:
 
-* `SizeEstimator` is requested to link:spark-sql-SizeEstimator.adoc#visitSingleObject[visitSingleObject]
+* `SizeEstimator` is requested to spark-sql-SizeEstimator.md#visitSingleObject[visitSingleObject]
 
-* `BroadcastExchangeExec` is requested for link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture]
+* `BroadcastExchangeExec` is requested for spark-sql-SparkPlan-BroadcastExchangeExec.md#relationFuture[relationFuture]
 
-* `BroadcastHashJoinExec` is requested to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#doExecute[execute]
+* `BroadcastHashJoinExec` is requested to spark-sql-SparkPlan-BroadcastHashJoinExec.md#doExecute[execute]
 
-* `ShuffledHashJoinExec` is requested to link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc#buildHashedRelation[buildHashedRelation]
+* `ShuffledHashJoinExec` is requested to spark-sql-SparkPlan-ShuffledHashJoinExec.md#buildHashedRelation[buildHashedRelation]
 
 NOTE: `KnownSizeEstimation` is a `private[spark]` contract.
 
-NOTE: link:spark-sql-HashedRelation.adoc[HashedRelation] is the only `KnownSizeEstimation` available.
+NOTE: spark-sql-HashedRelation.md[HashedRelation] is the only `KnownSizeEstimation` available.

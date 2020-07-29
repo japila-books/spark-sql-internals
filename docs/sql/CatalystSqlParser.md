@@ -10,7 +10,7 @@ scala> :type catalystSqlParser.astBuilder
 org.apache.spark.sql.catalyst.parser.AstBuilder
 ```
 
-`CatalystSqlParser` is used to translate link:spark-sql-DataType.adoc[DataTypes] from their canonical string representation (e.g. when link:spark-sql-schema.adoc#add[adding fields to a schema] or link:spark-sql-Column.adoc#cast[casting column to a different data type]) or link:spark-sql-StructType.adoc[StructTypes].
+`CatalystSqlParser` is used to translate spark-sql-DataType.md[DataTypes] from their canonical string representation (e.g. when spark-sql-schema.md#add[adding fields to a schema] or spark-sql-Column.md#cast[casting column to a different data type]) or spark-sql-StructType.md[StructTypes].
 
 ```
 import org.apache.spark.sql.types.StructType

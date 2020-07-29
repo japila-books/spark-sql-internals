@@ -49,7 +49,7 @@ from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
 
-Extract data from arbitrary JSON-encoded values into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema
+Extract data from arbitrary JSON-encoded values into a spark-sql-StructType.md[StructType] or spark-sql-DataType.md#ArrayType[ArrayType] of `StructType` elements with the specified schema
 
 | <<map_keys, map_keys>>
 a|
@@ -169,7 +169,7 @@ scala> Seq(Array(0,1,2)).toDF("array").withColumn("num", explode('array)).show
 +---------+---+
 ----
 
-NOTE: `explode` function is an equivalent of link:spark-sql-dataset-operators.adoc#flatMap[`flatMap` operator] for `Dataset`.
+NOTE: `explode` function is an equivalent of spark-sql-dataset-operators.md#flatMap[`flatMap` operator] for `Dataset`.
 
 === [[explode_outer]] `explode_outer` Collection Function
 
@@ -198,7 +198,7 @@ scala> arrays.select(explode_outer($"array")).show
 +----+
 ----
 
-Internally, `explode_outer` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-Generator.adoc#GeneratorOuter[GeneratorOuter] and link:spark-sql-Expression-Generator.adoc#Explode[Explode] Catalyst expressions.
+Internally, `explode_outer` creates a spark-sql-Column.md[Column] with spark-sql-Expression-Generator.md#GeneratorOuter[GeneratorOuter] and spark-sql-Expression-Generator.md#Explode[Explode] Catalyst expressions.
 
 [source, scala]
 ----
@@ -225,7 +225,7 @@ from_json(e: Column, schema: String, options: Map[String, String]): Column // <5
 <4> Relays to the other `from_json` with empty `options`
 <5> Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
 
-`from_json` parses a column with a JSON-encoded value into a link:spark-sql-StructType.adoc[StructType] or link:spark-sql-DataType.adoc#ArrayType[ArrayType] of `StructType` elements with the specified schema.
+`from_json` parses a column with a JSON-encoded value into a spark-sql-StructType.md[StructType] or spark-sql-DataType.md#ArrayType[ArrayType] of `StructType` elements with the specified schema.
 
 [source, scala]
 ----
@@ -248,9 +248,9 @@ scala> jsons.select(from_json($"json", schema) as "ids").show
 ====
 A schema can be one of the following:
 
-. link:spark-sql-DataType.adoc[DataType] as a Scala object or in the JSON format
+. spark-sql-DataType.md[DataType] as a Scala object or in the JSON format
 
-. link:spark-sql-StructType.adoc[StructType] in the DDL format
+. spark-sql-StructType.md[StructType] in the DDL format
 ====
 
 [source, scala]
@@ -368,11 +368,11 @@ scala> people.show
 +---------+---------+---------------+------+-----+------+
 ----
 
-NOTE: `options` controls how a JSON is parsed and contains the same options as the link:spark-sql-JsonDataSource.adoc[json] format.
+NOTE: `options` controls how a JSON is parsed and contains the same options as the spark-sql-JsonDataSource.md[json] format.
 
-Internally, `from_json` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs] unary expression.
+Internally, `from_json` creates a spark-sql-Column.md[Column] with spark-sql-Expression-JsonToStructs.md[JsonToStructs] unary expression.
 
-NOTE: `from_json` (creates a link:spark-sql-Expression-JsonToStructs.adoc[JsonToStructs] that) uses a JSON parser in link:spark-sql-Expression-JsonToStructs.adoc#FAILFAST[FAILFAST] parsing mode that simply fails early when a corrupted/malformed record is found (and hence does not support `columnNameOfCorruptRecord` JSON option).
+NOTE: `from_json` (creates a spark-sql-Expression-JsonToStructs.md[JsonToStructs] that) uses a JSON parser in spark-sql-Expression-JsonToStructs.md#FAILFAST[FAILFAST] parsing mode that simply fails early when a corrupted/malformed record is found (and hence does not support `columnNameOfCorruptRecord` JSON option).
 
 [source, scala]
 ----
@@ -400,9 +400,9 @@ NOTE: `from_json` corresponds to SQL's `from_json`.
 array_contains(column: Column, value: Any): Column
 ----
 
-`array_contains` creates a `Column` for a `column` argument as an link:spark-sql-DataType.adoc#ArrayType[array] and the `value` of same type as the type of the elements of the array.
+`array_contains` creates a `Column` for a `column` argument as an spark-sql-DataType.md#ArrayType[array] and the `value` of same type as the type of the elements of the array.
 
-Internally, `array_contains` creates a link:spark-sql-Column.adoc#apply[Column] with a `ArrayContains` expression.
+Internally, `array_contains` creates a spark-sql-Column.md#apply[Column] with a `ArrayContains` expression.
 
 [source, scala]
 ----

@@ -19,7 +19,7 @@ Spark Thrift Server can work in <<transport-mode, HTTP or binary transport modes
 
 Use <<beeline, beeline command-line tool>> or <<SQuirreL-SQL-Client, SQuirreL SQL Client>> or Spark SQL's <<dataframereader, DataSource API>> to connect to Spark Thrift Server through the JDBC interface.
 
-Spark Thrift Server extends link:spark-submit.adoc[spark-submit]'s command-line options with `--hiveconf [prop=value]`.
+Spark Thrift Server extends spark-submit.md[spark-submit]'s command-line options with `--hiveconf [prop=value]`.
 
 [IMPORTANT]
 ====
@@ -29,7 +29,7 @@ You have to enable `hive-thriftserver` build profile to include Spark Thrift Ser
 ./build/mvn -Phadoop-2.7,yarn,mesos,hive,hive-thriftserver -DskipTests clean install
 ```
 
-Refer to link:varia/spark-building-from-sources.adoc#hive-thriftserver[Building Apache Spark from Sources].
+Refer to varia/spark-building-from-sources.md#hive-thriftserver[Building Apache Spark from Sources].
 ====
 
 [TIP]
@@ -43,7 +43,7 @@ log4j.logger.org.apache.spark.sql.hive.thriftserver=DEBUG
 log4j.logger.org.apache.hive.service.server=INFO
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[start-thriftserver]] Starting Thrift JDBC/ODBC Server -- `start-thriftserver.sh`
@@ -59,7 +59,7 @@ INFO HiveThriftServer2: Starting SparkContext
 INFO HiveThriftServer2: HiveThriftServer2 started
 ```
 
-Internally, `start-thriftserver.sh` script submits `org.apache.spark.sql.hive.thriftserver.HiveThriftServer2` standalone application for execution (using link:spark-submit.adoc[spark-submit]).
+Internally, `start-thriftserver.sh` script submits `org.apache.spark.sql.hive.thriftserver.HiveThriftServer2` standalone application for execution (using spark-submit.md[spark-submit]).
 
 ```
 $ ./bin/spark-submit --class org.apache.spark.sql.hive.thriftserver.HiveThriftServer2
@@ -155,13 +155,13 @@ image::images/spark-thriftserver-squirrel-show-tables.png[align="center"]
 
 === [[dataframereader]] Using Spark SQL's DataSource API to Connect to Spark Thrift Server
 
-What might seem a quite artificial setup at first is accessing Spark Thrift Server using Spark SQL's link:spark-sql-datasource-api.adoc[DataSource API], i.e. [DataFrameReader.jdbc](../DataFrameReader.md#jdbc).
+What might seem a quite artificial setup at first is accessing Spark Thrift Server using Spark SQL's spark-sql-datasource-api.md[DataSource API], i.e. [DataFrameReader.jdbc](../DataFrameReader.md#jdbc).
 
 [TIP]
 ====
 When executed in `local` mode, Spark Thrift Server and `spark-shell` will try to access the same Hive Warehouse's directory that will inevitably lead to an error.
 
-Use link:spark-sql-StaticSQLConf.adoc#spark.sql.warehouse.dir[spark.sql.warehouse.dir] to point to another directory for `spark-shell`.
+Use spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] to point to another directory for `spark-shell`.
 
 ```
 ./bin/spark-shell --conf spark.sql.warehouse.dir=/tmp/spark-warehouse

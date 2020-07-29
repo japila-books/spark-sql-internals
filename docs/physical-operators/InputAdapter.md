@@ -2,19 +2,19 @@ title: InputAdapter
 
 # InputAdapter Unary Physical Operator
 
-`InputAdapter` is a link:SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of link:spark-sql-CodegenSupport.adoc[whole-stage Java code generation] (possibly due to link:spark-sql-CodegenSupport.adoc#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
+`InputAdapter` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of spark-sql-CodegenSupport.md[whole-stage Java code generation] (possibly due to spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
 
 .InputAdapter's doProduce
 image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
 
 [[child]]
 [[creating-instance]]
-`InputAdapter` takes a single `child` link:SparkPlan.md[physical plan] when created.
+`InputAdapter` takes a single `child` SparkPlan.md[physical plan] when created.
 
-`InputAdapter` is <<creating-instance, created>> exclusively when `CollapseCodegenStages` is requested to link:spark-sql-CollapseCodegenStages.adoc#insertInputAdapter[insert InputAdapters] into a physical query plan with whole-stage Java code generation enabled.
+`InputAdapter` is <<creating-instance, created>> exclusively when `CollapseCodegenStages` is requested to spark-sql-CollapseCodegenStages.md#insertInputAdapter[insert InputAdapters] into a physical query plan with whole-stage Java code generation enabled.
 
 [[generateTreeString]]
-`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that link:spark-sql-SparkPlan-WholeStageCodegenExec.adoc#generateTreeString[WholeStageCodegenExec] adds), e.g. for link:spark-sql-dataset-operators.adoc#explain[explain] or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString) operators.
+`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that spark-sql-SparkPlan-WholeStageCodegenExec.md#generateTreeString[WholeStageCodegenExec] adds), e.g. for spark-sql-dataset-operators.md#explain[explain] or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString) operators.
 
 TIP: The number of `InputAdapters` is exactly the number of subtrees in a physical query plan that do not have stars.
 
@@ -33,7 +33,7 @@ scala> println(plan.numberedTreeString)
 `InputAdapter` requires that...FIXME, i.e. `needCopyResult` flag is turned off.
 
 [[inputRDDs]]
-`InputAdapter` link:SparkPlan.md#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own link:spark-sql-CodegenSupport.adoc#inputRDDs[input RDDs] for <<doProduce, whole-stage produce path code generation>>.
+`InputAdapter` SparkPlan.md#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own spark-sql-CodegenSupport.md#inputRDDs[input RDDs] for <<doProduce, whole-stage produce path code generation>>.
 
 [source, scala]
 ----
@@ -66,15 +66,15 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
-`doProduce` generates a Java source code that consumes link:spark-sql-InternalRow.adoc[internal row] of a single input `RDD` one at a time (in a `while` loop).
+`doProduce` generates a Java source code that consumes spark-sql-InternalRow.md[internal row] of a single input `RDD` one at a time (in a `while` loop).
 
-NOTE: `doProduce` supports one input RDD only (that the single <<child, child>> physical operator creates when link:SparkPlan.md#execute[executed]).
+NOTE: `doProduce` supports one input RDD only (that the single <<child, child>> physical operator creates when SparkPlan.md#execute[executed]).
 
 Internally, `doProduce` generates two `input` and `row` "fresh" terms and registers `input` as a mutable state (in the generated class).
 
-`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from link:spark-sql-CodegenSupport.adoc#consume[consume] code generator to iterate over the link:spark-sql-InternalRow.adoc[internal binary rows] from the first <<inputRDDs, input RDD>> only.
+`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from spark-sql-CodegenSupport.md#consume[consume] code generator to iterate over the spark-sql-InternalRow.md[internal binary rows] from the first <<inputRDDs, input RDD>> only.
 
 [source, scala]
 ----

@@ -4,7 +4,7 @@
 
 `ComputeCurrentTime` is part of the [Finish Analysis](../Optimizer.md#ComputeCurrentTime) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`ComputeCurrentTime` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ComputeCurrentTime` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----

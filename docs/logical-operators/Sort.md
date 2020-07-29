@@ -2,11 +2,11 @@ title: Sort
 
 # Sort Unary Logical Operator
 
-`Sort` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that represents the following in a logical plan:
+`Sort` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents the following in a logical plan:
 
-* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#withQueryResultClauses, parse a query>>)
+* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<spark-sql-AstBuilder.md#withQueryResultClauses, parse a query>>)
 
-* <<spark-sql-dataset-operators.adoc#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.adoc#sort, Dataset.sort>> and <<spark-sql-dataset-operators.adoc#randomSplit, Dataset.randomSplit>> operators
+* <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<spark-sql-dataset-operators.md#randomSplit, Dataset.randomSplit>> operators
 
 [source, scala]
 ----
@@ -45,22 +45,22 @@ scala> println(logicalPlan.numberedTreeString)
 [[creating-instance]]
 `Sort` takes the following when created:
 
-* [[order]] <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> ordering expressions
+* [[order]] <<spark-sql-Expression-SortOrder.md#, SortOrder>> ordering expressions
 * [[global]] `global` flag for global (`true`) or partition-only (`false`) sorting
-* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
+* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
 
 [[output]]
 The <<catalyst/QueryPlan.md#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
 
 [[maxRows]]
-The <<spark-sql-LogicalPlan.adoc#maxRows, maxRows>> of a `Sort` operator is the `maxRows` of the <<child, child>> logical operator.
+The <<spark-sql-LogicalPlan.md#maxRows, maxRows>> of a `Sort` operator is the `maxRows` of the <<child, child>> logical operator.
 
 [[catalyst-dsl]]
-TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-sql-catalyst-dsl.adoc#, Catalyst DSL>> to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
+TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
 
-NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis, checkAnalysis>>).
+NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis, checkAnalysis>>).
 
-NOTE: `Sort` logical operator is resolved to <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>> unary physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed.
+NOTE: `Sort` logical operator is resolved to <<spark-sql-SparkPlan-SortExec.md#, SortExec>> unary physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed.
 
 === [[orderBy]][[sortBy]] Catalyst DSL -- `orderBy` and `sortBy` Operators
 

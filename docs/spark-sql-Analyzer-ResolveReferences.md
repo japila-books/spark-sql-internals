@@ -1,12 +1,12 @@
 # ResolveReferences Logical Resolution Rule
 
-`ResolveReferences` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveReferences[logical query plan analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
+`ResolveReferences` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveReferences[logical query plan analyzer] uses to <<apply, resolve FIXME>> in a logical query plan, i.e.
 
 1. Resolves...FIXME
 
-Technically, `ResolveReferences` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveReferences` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveReferences` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveReferences` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
 
 [[example]]
 [source, scala]
@@ -74,29 +74,29 @@ NOTE: `resolve` is used exclusively when `ResolveReferences` is requested to <<a
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
 `apply` resolves the following logical operators:
 
-* link:spark-sql-LogicalPlan-Project.adoc[Project] logical operator with a `Star` expression to...FIXME
+* spark-sql-LogicalPlan-Project.md[Project] logical operator with a `Star` expression to...FIXME
 
-* link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator with a `Star` expression to...FIXME
+* spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator with a `Star` expression to...FIXME
 
 * `ScriptTransformation` logical operator with a `Star` expression to...FIXME
 
-* link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator with a `Star` expression to...FIXME
+* spark-sql-LogicalPlan-Generate.md[Generate] logical operator with a `Star` expression to...FIXME
 
-* link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator with `duplicateResolved`...FIXME
+* spark-sql-LogicalPlan-Join.md[Join] logical operator with `duplicateResolved`...FIXME
 
-* link:spark-sql-LogicalPlan-Intersect.adoc[Intersect] logical operator with `duplicateResolved`...FIXME
+* spark-sql-LogicalPlan-Intersect.md[Intersect] logical operator with `duplicateResolved`...FIXME
 
-* link:spark-sql-LogicalPlan-Except.adoc[Except] logical operator with `duplicateResolved`...FIXME
+* spark-sql-LogicalPlan-Except.md[Except] logical operator with `duplicateResolved`...FIXME
 
-* link:spark-sql-LogicalPlan-Sort.adoc[Sort] logical operator unresolved with child operators resolved...FIXME
+* spark-sql-LogicalPlan-Sort.md[Sort] logical operator unresolved with child operators resolved...FIXME
 
-* link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator resolved...FIXME
+* spark-sql-LogicalPlan-Generate.md[Generate] logical operator resolved...FIXME
 
-* link:spark-sql-LogicalPlan-Generate.adoc[Generate] logical operator unresolved...FIXME
+* spark-sql-LogicalPlan-Generate.md[Generate] logical operator unresolved...FIXME
 
 In the end, `apply` <<resolve, resolves>> the expressions of the input logical operator.
 
@@ -104,7 +104,7 @@ In the end, `apply` <<resolve, resolves>> the expressions of the input logical o
 
 * Use `UnresolvedDeserializer` expressions
 
-* Have child operators link:spark-sql-LogicalPlan.adoc#childrenResolved[unresolved]
+* Have child operators spark-sql-LogicalPlan.md#childrenResolved[unresolved]
 
 === [[buildExpandedProjectList]] Expanding Star Expressions -- `buildExpandedProjectList` Internal Method
 
@@ -115,11 +115,11 @@ buildExpandedProjectList(
   child: LogicalPlan): Seq[NamedExpression]
 ----
 
-`buildExpandedProjectList` expands (_converts_) link:spark-sql-Expression-Star.adoc[Star] expressions in the input link:spark-sql-Expression-NamedExpression.adoc[named expressions] recursively (down the expression tree) per expression:
+`buildExpandedProjectList` expands (_converts_) spark-sql-Expression-Star.md[Star] expressions in the input spark-sql-Expression-NamedExpression.md[named expressions] recursively (down the expression tree) per expression:
 
-* For a `Star` expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan
+* For a `Star` expression, `buildExpandedProjectList` requests it to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan
 
-* For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
+* For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
 
 * For `exprs` with `Star` expressions down the expression tree, `buildExpandedProjectList` <<expandStarExpression, expandStarExpression>> passing the input `exprs` and `child`
 
@@ -132,9 +132,9 @@ NOTE: `buildExpandedProjectList` is used when `ResolveReferences` is requested t
 expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 ----
 
-`expandStarExpression` expands (_transforms_) the following expressions in the input `expr` link:expressions/Expression.md[expression]:
+`expandStarExpression` expands (_transforms_) the following expressions in the input `expr` expressions/Expression.md[expression]:
 
-1. For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression` requests the `Star` expressions to link:spark-sql-Expression-Star.adoc#expand[expand] given the input `child` logical plan and the link:spark-sql-Analyzer.adoc#resolver[resolver].
+1. For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression` requests the `Star` expressions to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan and the spark-sql-Analyzer.md#resolver[resolver].
 +
 ```
 // Using Catalyst DSL to create a logical plan with a function with Star child expression
@@ -152,13 +152,13 @@ scala> println(plan.numberedTreeString)
 // CAUTION: FIXME How to demo that the plan gets resolved using ResolveReferences.expandStarExpression?
 ```
 
-* For <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions among the values, `expandStarExpression`...FIXME
+* For <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with spark-sql-Expression-Star.md[Star] child expressions among the values, `expandStarExpression`...FIXME
 
-* For link:spark-sql-Expression-CreateArray.adoc[CreateArray] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+* For spark-sql-Expression-CreateArray.md[CreateArray] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression`...FIXME
 
-* For link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash] expressions with link:spark-sql-Expression-Star.adoc[Star] child expressions, `expandStarExpression`...FIXME
+* For spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression`...FIXME
 
-For any other uses of link:spark-sql-Expression-Star.adoc[Star] expressions, `expandStarExpression` fails analysis with a `AnalysisException`:
+For any other uses of spark-sql-Expression-Star.md[Star] expressions, `expandStarExpression` fails analysis with a `AnalysisException`:
 
 ```
 Invalid usage of '*' in expression '[exprName]'

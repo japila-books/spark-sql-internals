@@ -1,6 +1,6 @@
 # Configuration Properties
 
-This page contains the link:../spark-sql-properties.adoc[configuration properties] of the link:index.adoc[Hive data source].
+This page contains the ../spark-sql-properties.md[configuration properties] of the index.md[Hive data source].
 
 [[properties]]
 .Hive-Specific Spark SQL Configuration Properties
@@ -20,7 +20,7 @@ Controls whether to use the built-in Parquet reader and writer for Hive tables w
 
 Default: `true`
 
-Internally, this property enables link:RelationConversions.adoc[RelationConversions] logical rule to link:RelationConversions.adoc#convert[convert HiveTableRelations to HadoopFsRelation]
+Internally, this property enables RelationConversions.md[RelationConversions] logical rule to RelationConversions.md#convert[convert HiveTableRelations to HadoopFsRelation]
 
 | [[spark.sql.hive.convertMetastoreParquet.mergeSchema]] *spark.sql.hive.convertMetastoreParquet.mergeSchema*
 
@@ -48,7 +48,7 @@ Default: `(empty)`
 
 | [[spark.sql.hive.metastore.jars]] *spark.sql.hive.metastore.jars*
 
-Location of the jars that should be used to link:HiveUtils.adoc#newClientForMetadata[create a HiveClientImpl].
+Location of the jars that should be used to HiveUtils.md#newClientForMetadata[create a HiveClientImpl].
 
 Default: `builtin`
 
@@ -74,11 +74,11 @@ An example of classes that should be shared are:
 
 | [[spark.sql.hive.metastore.version]] *spark.sql.hive.metastore.version*
 
-Version of the Hive metastore (and the link:HiveUtils.adoc#newClientForMetadata[client classes and jars]).
+Version of the Hive metastore (and the HiveUtils.md#newClientForMetadata[client classes and jars]).
 
-Default: link:HiveUtils.adoc#builtinHiveVersion[1.2.1]
+Default: HiveUtils.md#builtinHiveVersion[1.2.1]
 
-Supported versions link:IsolatedClientLoader.adoc#hiveVersion[range from 0.12.0 up to and including 2.3.3]
+Supported versions IsolatedClientLoader.md#hiveVersion[range from 0.12.0 up to and including 2.3.3]
 
 | [[spark.sql.hive.verifyPartitionPath]] *spark.sql.hive.verifyPartitionPath*
 

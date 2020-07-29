@@ -239,9 +239,9 @@ abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
 
 Scala-specific, `TreeNode` is an abstract class that is the <<implementations, base class>> of Catalyst <<expressions/Expression.md#, Expression>> and <<catalyst/QueryPlan.md#, QueryPlan>> abstract classes.
 
-`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<catalyst/QueryPlan.md#, query plans>> with concrete <<spark-sql-LogicalPlan.adoc#, logical>> and [physical](../physical-operators/SparkPlan.md) operators that both use <<expressions/Expression.md#, Catalyst expressions>> (which are `TreeNodes` again).
+`TreeNode` therefore allows for building entire trees of `TreeNodes`, e.g. generic <<catalyst/QueryPlan.md#, query plans>> with concrete <<spark-sql-LogicalPlan.md#, logical>> and [physical](../physical-operators/SparkPlan.md) operators that both use <<expressions/Expression.md#, Catalyst expressions>> (which are `TreeNodes` again).
 
-NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and <<expressions/Expression.md#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.adoc#, subquery expressions>>.
+NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and <<expressions/Expression.md#, Catalyst expressions>> that can further be used together to build more advanced trees, e.g. Catalyst expressions can have query plans as <<spark-sql-subqueries.md#, subquery expressions>>.
 
 `TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. Not only does `TreeNode` come with the <<methods, methods>> that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones for more advanced tree manipulation, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>.
 

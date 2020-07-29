@@ -1,6 +1,6 @@
 # GenerateUnsafeProjection
 
-`GenerateUnsafeProjection` is a link:spark-sql-CodeGenerator.adoc[CodeGenerator] that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
+`GenerateUnsafeProjection` is a spark-sql-CodeGenerator.md[CodeGenerator] that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 
 [source, scala]
 ----
@@ -17,7 +17,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[generate]] Generating UnsafeProjection -- `generate` Method
@@ -35,15 +35,15 @@ generate(
 ====
 `generate` is used when:
 
-* `UnsafeProjection` factory object is requested for a link:spark-sql-UnsafeProjection.adoc#create[UnsafeProjection]
+* `UnsafeProjection` factory object is requested for a spark-sql-UnsafeProjection.md#create[UnsafeProjection]
 
-* `ExpressionEncoder` is requested to link:spark-sql-ExpressionEncoder.adoc#extractProjection[initialize the internal UnsafeProjection]
+* `ExpressionEncoder` is requested to spark-sql-ExpressionEncoder.md#extractProjection[initialize the internal UnsafeProjection]
 
-* `FileFormat` is requested to link:spark-sql-FileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `FileFormat` is requested to spark-sql-FileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-* `OrcFileFormat` is requested to link:spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `OrcFileFormat` is requested to spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-* `ParquetFileFormat` is requested to link:spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues[build a data reader with partition column values appended]
+* `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
 * `GroupedIterator` is requested for `keyProjection`
 
@@ -76,7 +76,7 @@ create(references: Seq[Expression]): UnsafeProjection // <1>
 ----
 <1> Calls the former `create` with `subexpressionEliminationEnabled` flag off
 
-`create` first creates a link:spark-sql-CodeGenerator.adoc#newCodeGenContext[CodegenContext] and an <<createCode, Java source code>> for the input `expressions`.
+`create` first creates a spark-sql-CodeGenerator.md#newCodeGenContext[CodegenContext] and an <<createCode, Java source code>> for the input `expressions`.
 
 `create` creates a code body with `public java.lang.Object generate(Object[] references)` method that creates a `SpecificUnsafeProjection`.
 
@@ -91,7 +91,7 @@ class SpecificUnsafeProjection extends UnsafeProjection {
 }
 ----
 
-`create` creates a `CodeAndComment` with the code body and link:spark-sql-CodegenContext.adoc#placeHolderToComments[comment placeholders].
+`create` creates a `CodeAndComment` with the code body and spark-sql-CodegenContext.md#placeHolderToComments[comment placeholders].
 
 You should see the following DEBUG message in the logs:
 
@@ -108,14 +108,14 @@ Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.expressions.code
 log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator=DEBUG
 ```
 
-See link:spark-sql-CodeGenerator.adoc#logging[CodeGenerator].
+See spark-sql-CodeGenerator.md#logging[CodeGenerator].
 ====
 
-`create` requests `CodeGenerator` to link:spark-sql-CodeGenerator.adoc#compile[compile the Java source code to JVM bytecode (using Janino)].
+`create` requests `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile the Java source code to JVM bytecode (using Janino)].
 
-`create` requests `CodegenContext` for link:spark-sql-CodegenContext.adoc#references[references] and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final link:spark-sql-UnsafeProjection.adoc[UnsafeProjection].
+`create` requests `CodegenContext` for spark-sql-CodegenContext.md#references[references] and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final spark-sql-UnsafeProjection.md[UnsafeProjection].
 
-NOTE: (Single-argument) `create` is part of link:spark-sql-CodeGenerator.adoc#create[CodeGenerator Contract].
+NOTE: (Single-argument) `create` is part of spark-sql-CodeGenerator.md#create[CodeGenerator Contract].
 
 === [[createCode]] Creating ExprCode for Expressions (With Optional Subexpression Elimination) -- `createCode` Method
 
@@ -127,7 +127,7 @@ createCode(
   useSubexprElimination: Boolean = false): ExprCode
 ----
 
-`createCode` requests the input `CodegenContext` to link:spark-sql-CodegenContext.adoc#generateExpressions[generate a Java source code for code-generated evaluation] of every expression in the input `expressions`.
+`createCode` requests the input `CodegenContext` to spark-sql-CodegenContext.md#generateExpressions[generate a Java source code for code-generated evaluation] of every expression in the input `expressions`.
 
 `createCode`...FIXME
 
@@ -162,13 +162,13 @@ mutableStateArray[0]
 ====
 `createCode` is used when:
 
-* `CreateNamedStructUnsafe` is requested to link:spark-sql-Expression-CreateNamedStructUnsafe.adoc#doGenCode[generate a Java source code]
+* `CreateNamedStructUnsafe` is requested to spark-sql-Expression-CreateNamedStructUnsafe.md#doGenCode[generate a Java source code]
 
 * `GenerateUnsafeProjection` is requested to <<create, create a UnsafeProjection>>
 
-* `CodegenSupport` is requested to link:spark-sql-CodegenSupport.adoc#prepareRowVar[prepareRowVar] (to link:spark-sql-CodegenSupport.adoc#consume[generate a Java source code to consume generated columns or row from a physical operator])
+* `CodegenSupport` is requested to spark-sql-CodegenSupport.md#prepareRowVar[prepareRowVar] (to spark-sql-CodegenSupport.md#consume[generate a Java source code to consume generated columns or row from a physical operator])
 
-* `HashAggregateExec` is requested to link:spark-sql-SparkPlan-HashAggregateExec.adoc#doProduceWithKeys[doProduceWithKeys] and link:spark-sql-SparkPlan-HashAggregateExec.adoc#doConsumeWithKeys[doConsumeWithKeys]
+* `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doProduceWithKeys[doProduceWithKeys] and spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[doConsumeWithKeys]
 
-* `BroadcastHashJoinExec` is requested to link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
+* `BroadcastHashJoinExec` is requested to spark-sql-SparkPlan-BroadcastHashJoinExec.md#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
 ====

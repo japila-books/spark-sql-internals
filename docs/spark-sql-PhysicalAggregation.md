@@ -2,13 +2,13 @@
 
 `PhysicalAggregation` is a Scala extractor to <<unapply, destructure an Aggregate logical operator>> into a four-element tuple with the following elements:
 
-. Grouping link:spark-sql-Expression-NamedExpression.adoc[named expressions]
+. Grouping spark-sql-Expression-NamedExpression.md[named expressions]
 
 . [AggregateExpressions](expressions/AggregateExpression.md)
 
-. Result link:spark-sql-Expression-NamedExpression.adoc[named expressions]
+. Result spark-sql-Expression-NamedExpression.md[named expressions]
 
-. Child link:spark-sql-LogicalPlan.adoc[logical operator]
+. Child spark-sql-LogicalPlan.md[logical operator]
 
 [[ReturnType]]
 .ReturnType
@@ -29,7 +29,7 @@ type ReturnType =
 unapply(a: Any): Option[ReturnType]
 ----
 
-`unapply` destructures the input `a` link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] logical operator into a four-element <<ReturnType, ReturnType>>.
+`unapply` destructures the input `a` spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator into a four-element <<ReturnType, ReturnType>>.
 
 [NOTE]
 ====

@@ -1,10 +1,10 @@
 # ResolveInlineTables Logical Resolution Rule
 
-`ResolveInlineTables` is a <<spark-sql-Analyzer.adoc#batches, logical resolution rule>> that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.
+`ResolveInlineTables` is a <<spark-sql-Analyzer.md#batches, logical resolution rule>> that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.
 
-`ResolveInlineTables` is part of the <<spark-sql-Analyzer.adoc#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.adoc#, Analyzer>>.
+`ResolveInlineTables` is part of the <<spark-sql-Analyzer.md#Resolution, Resolution>> fixed-point batch in the standard batches of the <<spark-sql-Analyzer.md#, Analyzer>>.
 
-`ResolveInlineTables` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ResolveInlineTables` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[conf]]
 [[creating-instance]]
@@ -38,9 +38,9 @@ scala> println(planAfterResolveInlineTables.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` simply [searches the input plan upwards](catalyst/TreeNode.md#transformUp) to find <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> logical operators with <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#expressionsResolved, rows expressions resolved>>.
+`apply` simply [searches the input plan upwards](catalyst/TreeNode.md#transformUp) to find <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
 
-For such a <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
+For such a <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
 
 In the end, `apply` <<convert, converts the UnresolvedInlineTable to a LocalRelation>>.
 

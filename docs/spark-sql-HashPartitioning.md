@@ -1,18 +1,18 @@
 # HashPartitioning
 
 [[Partitioning]]
-`HashPartitioning` is a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).
+`HashPartitioning` is a spark-sql-SparkPlan-Partitioning.md[Partitioning] in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).
 
 [[creating-instance]]
 `HashPartitioning` takes the following to be created:
 
-* [[expressions]] Partitioning link:expressions/Expression.md[expressions]
+* [[expressions]] Partitioning expressions/Expression.md[expressions]
 * [[numPartitions]] Number of partitions
 
 [[Unevaluable]][[Expression]]
-`HashPartitioning` is an link:expressions/Expression.md[Expression] that link:expressions/Expression.md#Unevaluable[cannot be evaluated] (and produce a value given an internal row).
+`HashPartitioning` is an expressions/Expression.md[Expression] that expressions/Expression.md#Unevaluable[cannot be evaluated] (and produce a value given an internal row).
 
-`HashPartitioning` uses the link:spark-sql-Expression-Murmur3Hash.adoc[MurMur3 Hash] to compute the <<partitionIdExpression, partitionId>> for data distribution (consistent for shuffling and bucketing that is crucial for joins of bucketed and regular tables).
+`HashPartitioning` uses the spark-sql-Expression-Murmur3Hash.md[MurMur3 Hash] to compute the <<partitionIdExpression, partitionId>> for data distribution (consistent for shuffling and bucketing that is crucial for joins of bucketed and regular tables).
 
 [source, scala]
 ----
@@ -45,15 +45,15 @@ satisfies0(
   required: Distribution): Boolean
 ----
 
-NOTE: `satisfies0` is part of the link:spark-sql-SparkPlan-Partitioning.adoc#satisfies0[Partitioning] contract.
+NOTE: `satisfies0` is part of the spark-sql-SparkPlan-Partitioning.md#satisfies0[Partitioning] contract.
 
 `satisfies0` is positive (`true`) when the following conditions all hold:
 
-* The base link:spark-sql-SparkPlan-Partitioning.adoc#satisfies0[satisfies0] holds
+* The base spark-sql-SparkPlan-Partitioning.md#satisfies0[satisfies0] holds
 
-* For an input link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution], the number of the given <<expressions, partitioning expressions>> and the link:spark-sql-Distribution-HashClusteredDistribution.adoc#expressions[HashClusteredDistribution's] are the same and link:expressions/Expression.md#semanticEquals[semantically equal] pair-wise
+* For an input spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution], the number of the given <<expressions, partitioning expressions>> and the spark-sql-Distribution-HashClusteredDistribution.md#expressions[HashClusteredDistribution's] are the same and expressions/Expression.md#semanticEquals[semantically equal] pair-wise
 
-* For an input link:spark-sql-Distribution-ClusteredDistribution.adoc[ClusteredDistribution], the given <<expressions, partitioning expressions>> are among the link:spark-sql-Distribution-ClusteredDistribution.adoc#clustering[ClusteredDistribution's clustering expressions] and they are link:expressions/Expression.md#semanticEquals[semantically equal] pair-wise
+* For an input spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution], the given <<expressions, partitioning expressions>> are among the spark-sql-Distribution-ClusteredDistribution.md#clustering[ClusteredDistribution's clustering expressions] and they are expressions/Expression.md#semanticEquals[semantically equal] pair-wise
 
 Otherwise, `satisfies0` is negative (`false`).
 
@@ -64,7 +64,7 @@ Otherwise, `satisfies0` is negative (`false`).
 partitionIdExpression: Expression
 ----
 
-`partitionIdExpression` creates (_returns_) a `Pmod` expression of a link:spark-sql-Expression-Murmur3Hash.adoc[Murmur3Hash] (with the <<expressions, partitioning expressions>>) and a link:spark-sql-Expression-Literal.adoc[Literal] (with the <<numPartitions, number of partitions>>).
+`partitionIdExpression` creates (_returns_) a `Pmod` expression of a spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] (with the <<expressions, partitioning expressions>>) and a spark-sql-Expression-Literal.md[Literal] (with the <<numPartitions, number of partitions>>).
 
 [NOTE]
 ====
@@ -72,7 +72,7 @@ partitionIdExpression: Expression
 
 * `BucketingUtils` utility is used for `getBucketIdFromValue` (for bucketing support)
 
-* `FileFormatWriter` utility is used for link:spark-sql-FileFormatWriter.adoc#write[writing the result of a structured query out] (for bucketing support)
+* `FileFormatWriter` utility is used for spark-sql-FileFormatWriter.md#write[writing the result of a structured query out] (for bucketing support)
 
-* `ShuffleExchangeExec` utility is used to link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc#prepareShuffleDependency[prepare a ShuffleDependency]
+* `ShuffleExchangeExec` utility is used to spark-sql-SparkPlan-ShuffleExchangeExec.md#prepareShuffleDependency[prepare a ShuffleDependency]
 ====

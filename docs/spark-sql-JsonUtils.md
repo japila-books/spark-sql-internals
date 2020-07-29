@@ -59,7 +59,7 @@ partitionOffsets(str: String): Map[TopicPartition, Long]
 ====
 `partitionOffsets` is used when:
 
-* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.adoc#getKafkaOffsetRangeLimit, get the desired KafkaOffsetRangeLimit (for offset option)>>
+* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#getKafkaOffsetRangeLimit, get the desired KafkaOffsetRangeLimit (for offset option)>>
 
 * (Spark Structured Streaming) `KafkaContinuousReader` is requested to `deserializeOffset`
 
@@ -105,4 +105,4 @@ In case of any parsing issues, `partitions` throws a new `IllegalArgumentExcepti
 Expected e.g. {"topicA":[0,1],"topicB":[0,1]}, got [str]
 ```
 
-NOTE: `partitions` is used exclusively when `KafkaSourceProvider` is requested for a <<spark-sql-KafkaSourceProvider.adoc#strategy, ConsumerStrategy>> (given <<spark-sql-kafka-options.adoc#assign, assign>> option).
+NOTE: `partitions` is used exclusively when `KafkaSourceProvider` is requested for a <<spark-sql-KafkaSourceProvider.md#strategy, ConsumerStrategy>> (given <<spark-sql-kafka-options.md#assign, assign>> option).

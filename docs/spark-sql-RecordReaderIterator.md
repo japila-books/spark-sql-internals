@@ -8,11 +8,11 @@ title: RecordReaderIterator
 
 `RecordReaderIterator` is <<creating-instance, created>> when:
 
-* New <<spark-sql-OrcFileFormat.adoc#buildReaderWithPartitionValues, OrcFileFormat>> and <<spark-sql-ParquetFileFormat.adoc#buildReaderWithPartitionValues, ParquetFileFormat>> are requested to build a data reader
+* New <<spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues, OrcFileFormat>> and <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, ParquetFileFormat>> are requested to build a data reader
 
-* <<spark-sql-spark-HadoopFileLinesReader.adoc#iterator, HadoopFileLinesReader>> and `HadoopFileWholeTextReader` are requested for an value iterator
+* <<spark-sql-spark-HadoopFileLinesReader.md#iterator, HadoopFileLinesReader>> and `HadoopFileWholeTextReader` are requested for an value iterator
 
-* Legacy `OrcFileFormat` is requested to <<spark-sql-OrcFileFormat.adoc#buildReader, build a data reader>>
+* Legacy `OrcFileFormat` is requested to <<spark-sql-OrcFileFormat.md#buildReader, build a data reader>>
 
 [[close]]
 When requested to close, `RecordReaderIterator` simply requests the underlying <<rowReader, RecordReader>> to close.

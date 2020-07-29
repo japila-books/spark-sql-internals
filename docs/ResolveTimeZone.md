@@ -1,10 +1,10 @@
 # ResolveTimeZone Logical Resolution Rule
 
-`ResolveTimeZone` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveRelations[logical query plan analyzer] uses to <<apply, FIXME>>.
+`ResolveTimeZone` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveRelations[logical query plan analyzer] uses to <<apply, FIXME>>.
 
-Technically, `ResolveTimeZone` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveTimeZone` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveTimeZone` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveTimeZone` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
 
 === [[apply]] Applying ResolveTimeZone to Logical Plan -- `apply` Method
 
@@ -13,6 +13,6 @@ Technically, `ResolveTimeZone` is just a link:catalyst/Rule.md[Catalyst rule] fo
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
 `apply`...FIXME

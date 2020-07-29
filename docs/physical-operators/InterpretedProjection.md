@@ -1,10 +1,10 @@
 # InterpretedProjection
 
-`InterpretedProjection` is a link:spark-sql-Projection.adoc[Projection] that...FIXME
+`InterpretedProjection` is a spark-sql-Projection.md[Projection] that...FIXME
 
 [[creating-instance]]
 [[expressions]]
-`InterpretedProjection` takes link:expressions/Expression.md[expressions] when created.
+`InterpretedProjection` takes expressions/Expression.md[expressions] when created.
 
 [source, scala]
 ----
@@ -43,6 +43,6 @@ Row => [1,input[4, string, true]]
 initialize(partitionIndex: Int): Unit
 ----
 
-NOTE: `initialize` is part of link:spark-sql-Projection.adoc#initialize[Projection Contract] to...FIXME.
+NOTE: `initialize` is part of spark-sql-Projection.md#initialize[Projection Contract] to...FIXME.
 
-`initialize` requests `Nondeterministic` expressions (in <<expressions, expressions>>) to link:spark-sql-Expression-Nondeterministic.adoc#initialize[initialize] with the `partitionIndex`.
+`initialize` requests `Nondeterministic` expressions (in <<expressions, expressions>>) to spark-sql-Expression-Nondeterministic.md#initialize[initialize] with the `partitionIndex`.

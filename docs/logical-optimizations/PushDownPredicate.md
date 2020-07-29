@@ -4,9 +4,9 @@
 
 `PushDownPredicate` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`PushDownPredicate` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`PushDownPredicate` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-When you execute link:spark-sql-Dataset.adoc#where[where] or link:spark-sql-Dataset.adoc#filter[filter] operators right after [loading a dataset](../DataFrameReader.md#load), Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
+When you execute spark-sql-Dataset.md#where[where] or spark-sql-Dataset.md#filter[filter] operators right after [loading a dataset](../DataFrameReader.md#load), Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
 
 This optimization is called *filter pushdown* or *predicate pushdown* and aims at pushing down the filtering to the "bare metal", i.e. a data source engine. That is to increase the performance of queries since the filtering is performed at the very low level rather than dealing with the entire dataset after it has been loaded to Spark's memory and perhaps causing memory issues.
 
@@ -93,7 +93,7 @@ Window [rank(id#32L) windowspecdefinition(group#35L, id#32L ASC, ROWS BETWEEN UN
 
 === [[jdbc]] JDBC Data Source
 
-TIP: Follow the instructions on how to set up PostgreSQL in link:exercises/spark-exercise-dataframe-jdbc-postgresql.adoc[Creating DataFrames from Tables using JDBC and PostgreSQL].
+TIP: Follow the instructions on how to set up PostgreSQL in exercises/spark-exercise-dataframe-jdbc-postgresql.md[Creating DataFrames from Tables using JDBC and PostgreSQL].
 
 Given the following code:
 

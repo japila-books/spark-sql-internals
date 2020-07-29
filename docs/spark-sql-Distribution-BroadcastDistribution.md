@@ -1,19 +1,19 @@
 # BroadcastDistribution
 
 [[requiredNumPartitions]]
-`BroadcastDistribution` is a link:spark-sql-Distribution.adoc[Distribution] that indicates to use one partition only and...FIXME.
+`BroadcastDistribution` is a spark-sql-Distribution.md[Distribution] that indicates to use one partition only and...FIXME.
 
 `BroadcastDistribution` is <<creating-instance, created>> when:
 
-. `BroadcastHashJoinExec` is requested for link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#requiredChildDistribution[required child output distributions] (with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] of the link:spark-sql-HashJoin.adoc#buildKeys[build join keys])
+. `BroadcastHashJoinExec` is requested for spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[required child output distributions] (with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] of the spark-sql-HashJoin.md#buildKeys[build join keys])
 
-. `BroadcastNestedLoopJoinExec` is requested for link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc#requiredChildDistribution[required child output distributions] (with link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode])
+. `BroadcastNestedLoopJoinExec` is requested for spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md#requiredChildDistribution[required child output distributions] (with spark-sql-IdentityBroadcastMode.md[IdentityBroadcastMode])
 
 [[creating-instance]]
 [[mode]]
-`BroadcastDistribution` takes a link:spark-sql-BroadcastMode.adoc[BroadcastMode] when created.
+`BroadcastDistribution` takes a spark-sql-BroadcastMode.md[BroadcastMode] when created.
 
-NOTE: `BroadcastDistribution` is converted to a link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc[BroadcastExchangeExec] physical operator when link:spark-sql-EnsureRequirements.adoc[EnsureRequirements] physical query plan optimization is executed (and link:spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
+NOTE: `BroadcastDistribution` is converted to a spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator when spark-sql-EnsureRequirements.md[EnsureRequirements] physical query plan optimization is executed (and spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
 
 === [[createPartitioning]] `createPartitioning` Method
 
@@ -22,6 +22,6 @@ NOTE: `BroadcastDistribution` is converted to a link:spark-sql-SparkPlan-Broadca
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of link:spark-sql-Distribution.adoc#createPartitioning[Distribution Contract] to create a link:spark-sql-SparkPlan-Partitioning.adoc[Partitioning] for a given number of partitions.
+NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
 
 `createPartitioning`...FIXME

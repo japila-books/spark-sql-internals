@@ -4,17 +4,17 @@ title: WindowExpression
 
 `WindowExpression` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> that represents a <<windowFunction, window function>> (over some <<windowSpec, WindowSpecDefinition>>).
 
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.adoc#analyzed, analysis>> or <<spark-sql-QueryExecution.adoc#optimizedPlan, optimization>> phases or they fail analysis.
+NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
 
 `WindowExpression` is <<creating-instance, created>> when:
 
-* `WindowSpec` is requested to <<spark-sql-WindowSpec.adoc#withAggregate, withAggregate>> (when <<spark-sql-Column.adoc#over, Column.over>> operator is used)
+* `WindowSpec` is requested to <<spark-sql-WindowSpec.md#withAggregate, withAggregate>> (when <<spark-sql-Column.md#over, Column.over>> operator is used)
 
-* `WindowsSubstitution` logical evaluation rule is <<spark-sql-Analyzer-WindowsSubstitution.adoc#apply, executed>> (with <<spark-sql-LogicalPlan-WithWindowDefinition.adoc#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> expressions)
+* `WindowsSubstitution` logical evaluation rule is <<spark-sql-Analyzer-WindowsSubstitution.md#apply, executed>> (with <<spark-sql-LogicalPlan-WithWindowDefinition.md#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> expressions)
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.adoc#visitFunctionCall, parse a function call>> in a SQL statement
+* `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitFunctionCall, parse a function call>> in a SQL statement
 
-NOTE: `WindowExpression` can only be <<creating-instance, created>> with [AggregateExpression](AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.adoc#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.adoc#, OffsetWindowFunction>> expressions which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression, analysis>>.
+NOTE: `WindowExpression` can only be <<creating-instance, created>> with [AggregateExpression](AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>> expressions which is enforced at <<spark-sql-Analyzer-CheckAnalysis.md#WindowExpression, analysis>>.
 
 ```scala
 // Using Catalyst DSL
@@ -22,7 +22,7 @@ val wf = 'count.function(star())
 val windowSpec = ???
 ```
 
-NOTE: `WindowExpression` is resolved in <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>>, <<spark-sql-Analyzer-ResolveWindowFrame.adoc#, ResolveWindowFrame>> and <<spark-sql-Analyzer-ResolveWindowOrder.adoc#, ResolveWindowOrder>> logical rules.
+NOTE: `WindowExpression` is resolved in <<spark-sql-Analyzer-ExtractWindowExpressions.md#, ExtractWindowExpressions>>, <<spark-sql-Analyzer-ResolveWindowFrame.md#, ResolveWindowFrame>> and <<spark-sql-Analyzer-ResolveWindowOrder.md#, ResolveWindowOrder>> logical rules.
 
 ```text
 import org.apache.spark.sql.catalyst.expressions.WindowExpression
@@ -42,7 +42,7 @@ windowExpr: org.apache.spark.sql.catalyst.expressions.WindowExpression = 'count(
 scala> windowExpr.sql
 res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 ```
-<1> Use `sqlParser` directly as in link:spark-sql-LogicalPlan-WithWindowDefinition.adoc#example[WithWindowDefinition Example]
+<1> Use `sqlParser` directly as in spark-sql-LogicalPlan-WithWindowDefinition.md#example[WithWindowDefinition Example]
 
 [[properties]]
 .WindowExpression's Properties
@@ -52,10 +52,10 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 | Description
 
 | `children`
-| Collection of two link:expressions/Expression.md[expressions], i.e. <<windowFunction, windowFunction>> and <<windowSpec, WindowSpecDefinition>>, for which `WindowExpression` was created.
+| Collection of two expressions/Expression.md[expressions], i.e. <<windowFunction, windowFunction>> and <<windowSpec, WindowSpecDefinition>>, for which `WindowExpression` was created.
 
 | `dataType`
-| link:spark-sql-DataType.adoc[DataType] of <<windowFunction, windowFunction>>
+| spark-sql-DataType.md[DataType] of <<windowFunction, windowFunction>>
 
 | `foldable`
 | Whether or not <<windowFunction, windowFunction>> is foldable.
@@ -70,11 +70,11 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 | `"[windowFunction] [windowSpec]"`
 |===
 
-NOTE: `WindowExpression` is subject to <<spark-sql-Optimizer-NullPropagation.adoc#, NullPropagation>> and <<spark-sql-Optimizer-DecimalAggregates.adoc#, DecimalAggregates>> logical optimizations.
+NOTE: `WindowExpression` is subject to <<spark-sql-Optimizer-NullPropagation.md#, NullPropagation>> and <<spark-sql-Optimizer-DecimalAggregates.md#, DecimalAggregates>> logical optimizations.
 
-NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression-AggregateExpression-isDistinct, analysis>>.
+NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.md#WindowExpression-AggregateExpression-isDistinct, analysis>>.
 
-NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.adoc#WindowExpression-OffsetWindowFunction, analysis>>.
+NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<spark-sql-Analyzer-CheckAnalysis.md#WindowExpression-OffsetWindowFunction, analysis>>.
 
 === [[catalyst-dsl]][[windowExpr]] Catalyst DSL -- `windowExpr` Operator
 
@@ -85,7 +85,7 @@ windowExpr(
   windowSpec: WindowSpecDefinition): WindowExpression
 ----
 
-<<spark-sql-catalyst-dsl.adoc#windowExpr, windowExpr>> operator in Catalyst DSL creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.
+<<spark-sql-catalyst-dsl.md#windowExpr, windowExpr>> operator in Catalyst DSL creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----
@@ -97,4 +97,4 @@ windowExpr(
 `WindowExpression` takes the following when created:
 
 * [[windowFunction]] Window function <<expressions/Expression.md#, expression>>
-* [[windowSpec]] <<spark-sql-Expression-WindowSpecDefinition.adoc#, WindowSpecDefinition>> expression
+* [[windowSpec]] <<spark-sql-Expression-WindowSpecDefinition.md#, WindowSpecDefinition>> expression

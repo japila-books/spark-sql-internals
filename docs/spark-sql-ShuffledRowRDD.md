@@ -1,8 +1,8 @@
 # ShuffledRowRDD
 
-`ShuffledRowRDD` is an `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> when:
+`ShuffledRowRDD` is an `RDD` of spark-sql-InternalRow.md[internal binary rows] (i.e. `RDD[InternalRow]`) that is <<creating-instance, created>> when:
 
-* `ShuffleExchangeExec` physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.adoc#preparePostShuffleRDD, create one>>
+* `ShuffleExchangeExec` physical operator is requested to <<spark-sql-SparkPlan-ShuffleExchangeExec.md#preparePostShuffleRDD, create one>>
 
 * `CollectLimitExec` and `TakeOrderedAndProjectExec` physical operators are executed
 
@@ -14,11 +14,11 @@
 
 NOTE: The <<dependency, dependency>> property is mutable so it can be <<clearDependencies, cleared>>.
 
-`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the link:spark-rdd-Partitioner.adoc[Partitioner] of the input `ShuffleDependency`. Otherwise, when specified (when `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.adoc#doEstimationIfNecessary, doEstimationIfNecessary>>), `ShuffledRowRDD`...FIXME
+`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the spark-rdd-Partitioner.md[Partitioner] of the input `ShuffleDependency`. Otherwise, when specified (when `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.md#doEstimationIfNecessary, doEstimationIfNecessary>>), `ShuffledRowRDD`...FIXME
 
 NOTE: *Post-shuffle partition* is...FIXME
 
-NOTE: `ShuffledRowRDD` is similar to Spark Core's `ShuffledRDD`, with the difference being the type of the values to process, i.e. link:spark-sql-InternalRow.adoc[InternalRow] and `(K, C)` key-value pairs, respectively.
+NOTE: `ShuffledRowRDD` is similar to Spark Core's `ShuffledRDD`, with the difference being the type of the values to process, i.e. spark-sql-InternalRow.md[InternalRow] and `(K, C)` key-value pairs, respectively.
 
 .ShuffledRowRDD and RDD Contract
 [cols="1,3",options="header",width="100%"]
@@ -30,7 +30,7 @@ NOTE: `ShuffledRowRDD` is similar to Spark Core's `ShuffledRDD`, with the differ
 | A single-element collection with `ShuffleDependency[Int, InternalRow, InternalRow]`.
 
 | `partitioner`
-| <<CoalescedPartitioner, CoalescedPartitioner>> (with the link:spark-rdd-Partitioner.adoc[Partitioner] of the `dependency`)
+| <<CoalescedPartitioner, CoalescedPartitioner>> (with the spark-rdd-Partitioner.md[Partitioner] of the `dependency`)
 
 | <<getPreferredLocations, getPreferredLocations>>
 |

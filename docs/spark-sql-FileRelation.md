@@ -22,7 +22,7 @@ trait FileRelation {
 |
 The list of files that will be read when scanning the relation.
 
-Used exclusively when `Dataset` is requested to link:spark-sql-Dataset.adoc#inputFiles[inputFiles]
+Used exclusively when `Dataset` is requested to spark-sql-Dataset.md#inputFiles[inputFiles]
 |===
 
 [[implementations]]
@@ -32,6 +32,6 @@ Used exclusively when `Dataset` is requested to link:spark-sql-Dataset.adoc#inpu
 | FileRelation
 | Description
 
-| [[HadoopFsRelation]] link:spark-sql-BaseRelation-HadoopFsRelation.adoc[HadoopFsRelation]
+| [[HadoopFsRelation]] spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation]
 |
 |===

@@ -17,7 +17,7 @@ a| [[newTaskInstance]]
 newTaskInstance(): WriteTaskStatsTracker
 ----
 
-Creates a new <<spark-sql-WriteTaskStatsTracker.adoc#, WriteTaskStatsTracker>>
+Creates a new <<spark-sql-WriteTaskStatsTracker.md#, WriteTaskStatsTracker>>
 
 Used when `EmptyDirectoryWriteTask`, `SingleDirectoryWriteTask` and `DynamicPartitionWriteTask` are requested for the `statsTrackers`
 
@@ -33,4 +33,4 @@ Used when...FIXME
 |===
 
 [[implementations]]
-NOTE: <<spark-sql-BasicWriteJobStatsTracker.adoc#, BasicWriteJobStatsTracker>> is the one and only known implementation of the <<contract, WriteJobStatsTracker Contract>> in Apache Spark.
+NOTE: <<spark-sql-BasicWriteJobStatsTracker.md#, BasicWriteJobStatsTracker>> is the one and only known implementation of the <<contract, WriteJobStatsTracker Contract>> in Apache Spark.

@@ -33,9 +33,9 @@ assert(batch.getRow(0).numFields == 4)
 
 `ColumnarBatch` is <<creating-instance, created>> when:
 
-* `InMemoryTableScanExec` physical operator is requested to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
+* `InMemoryTableScanExec` physical operator is requested to spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
 
-* `VectorizedParquetRecordReader` is requested to link:spark-sql-VectorizedParquetRecordReader.adoc#initBatch[initBatch]
+* `VectorizedParquetRecordReader` is requested to spark-sql-VectorizedParquetRecordReader.md#initBatch[initBatch]
 
 * `OrcColumnarBatchReader` is requested to `initBatch`
 
@@ -47,7 +47,7 @@ assert(batch.getRow(0).numFields == 4)
 
 [[creating-instance]]
 [[columns]]
-`ColumnarBatch` takes an array of <<spark-sql-ColumnVector.adoc#, ColumnVectors>> to be created. `ColumnarBatch` immediately initializes the internal <<row, MutableColumnarRow>>.
+`ColumnarBatch` takes an array of <<spark-sql-ColumnVector.md#, ColumnVectors>> to be created. `ColumnarBatch` immediately initializes the internal <<row, MutableColumnarRow>>.
 
 [[numCols]]
 The number of columns in a `ColumnarBatch` is the number of <<columns, ColumnVectors>> (this batch was created with).
@@ -110,13 +110,13 @@ Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numR
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
 
-* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.adoc#nextBatch, nextBatch>> (when `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.adoc#nextKeyValue, nextKeyValue>>)
+* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextBatch, nextBatch>> (when `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextKeyValue, nextKeyValue>>)
 
 * `ColumnVectorUtils` is requested to `toBatch` (for testing only)
 
 * `ArrowConverters` is requested to `fromBatchIterator`
 
-* `InMemoryTableScanExec` physical operator is requested to <<spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn, createAndDecompressColumn>>
+* `InMemoryTableScanExec` physical operator is requested to <<spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn, createAndDecompressColumn>>
 
 * `ArrowPythonRunner` is requested for a `ReaderIterator` (`newReaderIterator`)
 ====

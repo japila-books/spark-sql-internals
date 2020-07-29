@@ -4,7 +4,7 @@ title: Catalog
 
 `Catalog` is the <<contract, interface>> for managing a *metastore* (aka _metadata catalog_) of relational entities (e.g. database(s), tables, functions, table columns and temporary views).
 
-`Catalog` is available using link:SparkSession.md#catalog[SparkSession.catalog] property.
+`Catalog` is available using SparkSession.md#catalog[SparkSession.catalog] property.
 
 [source, scala]
 ----
@@ -33,7 +33,7 @@ cacheTable(tableName: String, storageLevel: StorageLevel): Unit
 
 Caches the specified table in memory
 
-Used for SQL's link:spark-sql-caching-and-persistence.adoc#cache-table[CACHE TABLE] and `AlterTableRenameCommand` command.
+Used for SQL's spark-sql-caching-and-persistence.md#cache-table[CACHE TABLE] and `AlterTableRenameCommand` command.
 
 | clearCache
 a| [[clearCache]]
@@ -232,4 +232,4 @@ uncacheTable(
 
 |===
 
-NOTE: <<spark-sql-CatalogImpl.adoc#, CatalogImpl>> is the one and only known implementation of the <<contract, Catalog Contract>> in Apache Spark.
+NOTE: <<spark-sql-CatalogImpl.md#, CatalogImpl>> is the one and only known implementation of the <<contract, Catalog Contract>> in Apache Spark.

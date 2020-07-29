@@ -2,7 +2,7 @@ title: ExecutedCommandExec
 
 # ExecutedCommandExec Leaf Physical Operator for Command Execution
 
-`ExecutedCommandExec` is a link:SparkPlan.md#LeafExecNode[leaf physical operator] for executing link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical commands with side effects].
+`ExecutedCommandExec` is a SparkPlan.md#LeafExecNode[leaf physical operator] for executing spark-sql-LogicalPlan-RunnableCommand.md[logical commands with side effects].
 
 `ExecutedCommandExec` runs a command and caches the result in <<sideEffectResult, sideEffectResult>> internal attribute.
 
@@ -14,7 +14,7 @@ title: ExecutedCommandExec
 | Description
 
 | [[doExecute]] `doExecute`
-| Executes `ExecutedCommandExec` physical operator (and produces a result as an RDD of link:spark-sql-InternalRow.adoc[internal binary rows]
+| Executes `ExecutedCommandExec` physical operator (and produces a result as an RDD of spark-sql-InternalRow.md[internal binary rows]
 
 | [[executeCollect]] `executeCollect`
 |
@@ -33,6 +33,6 @@ title: ExecutedCommandExec
 sideEffectResult: Seq[InternalRow]
 ----
 
-`sideEffectResult` requests `RunnableCommand` to link:link:spark-sql-LogicalPlan-RunnableCommand.adoc#run[run] (that produces a `Seq[Row]`) and link:spark-sql-CatalystTypeConverters.adoc#createToCatalystConverter[converts the result to Catalyst types] using a Catalyst converter function for the link:catalyst/QueryPlan.md#schema[schema].
+`sideEffectResult` requests `RunnableCommand` to link:spark-sql-LogicalPlan-RunnableCommand.md#run[run] (that produces a `Seq[Row]`) and spark-sql-CatalystTypeConverters.md#createToCatalystConverter[converts the result to Catalyst types] using a Catalyst converter function for the catalyst/QueryPlan.md#schema[schema].
 
 NOTE: `sideEffectResult` is used when `ExecutedCommandExec` is requested for <<executeCollect, executeCollect>>, <<executeToIterator, executeToIterator>>, <<executeTake, executeTake>>, <<doExecute, doExecute>>.

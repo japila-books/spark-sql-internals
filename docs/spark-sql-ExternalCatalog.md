@@ -411,7 +411,7 @@ tableExists(db: String, table: String): Boolean
 ----
 |===
 
-`ExternalCatalog` is available as link:SharedState.md#externalCatalog[externalCatalog] of link:SparkSession.md#sharedState[SharedState] (in `SparkSession`).
+`ExternalCatalog` is available as SharedState.md#externalCatalog[externalCatalog] of SparkSession.md#sharedState[SharedState] (in `SparkSession`).
 
 [source, scala]
 ----
@@ -432,18 +432,18 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 | Alias
 | Description
 
-| link:hive/HiveExternalCatalog.adoc[HiveExternalCatalog]
+| hive/HiveExternalCatalog.md[HiveExternalCatalog]
 | [[hive]] `hive`
 | A persistent system catalog using a Hive metastore.
 
-| link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog]
+| spark-sql-InMemoryCatalog.md[InMemoryCatalog]
 | [[in-memory]] `in-memory`
 | An in-memory (ephemeral) system catalog that does not require setting up external systems (like a Hive metastore).
 
 It is intended for testing or exploration purposes only and therefore should not be used in production.
 |===
 
-The <<implementations, concrete>> `ExternalCatalog` is chosen using link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
+The <<implementations, concrete>> `ExternalCatalog` is chosen using SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
 
 [source, scala]
 ----
@@ -458,7 +458,7 @@ res1: String = hive
 
 [TIP]
 ====
-Set `spark.sql.catalogImplementation` to `in-memory` when starting `spark-shell` to use link:spark-sql-InMemoryCatalog.adoc[InMemoryCatalog] external catalog.
+Set `spark.sql.catalogImplementation` to `in-memory` when starting `spark-shell` to use spark-sql-InMemoryCatalog.md[InMemoryCatalog] external catalog.
 
 [source, scala]
 ----
@@ -472,7 +472,7 @@ res0: String = in-memory
 
 [IMPORTANT]
 ====
-You cannot change `ExternalCatalog` after `SparkSession` has been created using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
+You cannot change `ExternalCatalog` after `SparkSession` has been created using spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
 
 [source, scala]
 ----
@@ -504,7 +504,7 @@ alterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Un
 
 `alterTableStats`...FIXME
 
-NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTableStats[altering the statistics of a table in a metastore] (that can happen when any logical command is executed that could change the table statistics).
+NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for spark-sql-SessionCatalog.md#alterTableStats[altering the statistics of a table in a metastore] (that can happen when any logical command is executed that could change the table statistics).
 
 === [[alterTable]] Altering Table -- `alterTable` Method
 
@@ -515,7 +515,7 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 `alterTable`...FIXME
 
-NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for link:spark-sql-SessionCatalog.adoc#alterTable[altering the statistics of a table in a metastore].
+NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for spark-sql-SessionCatalog.md#alterTable[altering the statistics of a table in a metastore].
 
 === [[createTable]] `createTable` Method
 
@@ -537,4 +537,4 @@ alterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
 
 `alterTableDataSchema`...FIXME
 
-NOTE: `alterTableDataSchema` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.adoc#alterTableDataSchema, alterTableDataSchema>>.
+NOTE: `alterTableDataSchema` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#alterTableDataSchema, alterTableDataSchema>>.

@@ -2,9 +2,9 @@ title: CallMethodViaReflection
 
 # CallMethodViaReflection Expression
 
-`CallMethodViaReflection` is an link:expressions/Expression.md[expression] that represents a static method call in Scala or Java using `reflect` and `java_method` functions.
+`CallMethodViaReflection` is an expressions/Expression.md[expression] that represents a static method call in Scala or Java using `reflect` and `java_method` functions.
 
-NOTE: `reflect` and `java_method` functions are only supported in link:SparkSession.md#sql[SQL] and link:spark-sql-dataset-operators.adoc#selectExpr[expression] modes.
+NOTE: `reflect` and `java_method` functions are only supported in SparkSession.md#sql[SQL] and spark-sql-dataset-operators.md#selectExpr[expression] modes.
 
 .CallMethodViaReflection's DataType to JVM Types Mapping
 [cols="1,2",options="header",width="100%"]
@@ -61,7 +61,7 @@ scala> println(plan.numberedTreeString)
 01 +- OneRowRelation$
 ----
 
-`CallMethodViaReflection` supports a link:expressions/Expression.md#CodegenFallback[fallback mode for expression code generation].
+`CallMethodViaReflection` supports a expressions/Expression.md#CodegenFallback[fallback mode for expression code generation].
 
 [[properties]]
 .CallMethodViaReflection's Properties
@@ -83,4 +83,4 @@ scala> println(plan.numberedTreeString)
 | `reflect`
 |===
 
-NOTE: `CallMethodViaReflection` is very similar to link:spark-sql-Expression-StaticInvoke.adoc[StaticInvoke] expression.
+NOTE: `CallMethodViaReflection` is very similar to spark-sql-Expression-StaticInvoke.md[StaticInvoke] expression.

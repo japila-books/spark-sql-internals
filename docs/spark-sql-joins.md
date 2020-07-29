@@ -17,19 +17,19 @@ You can join two datasets using the <<join-operators, join operators>> with an o
 | Description
 
 | <<crossJoin, crossJoin>>
-| link:spark-sql-DataFrame.adoc[DataFrame]
+| spark-sql-DataFrame.md[DataFrame]
 | Untyped ``Row``-based cross join
 
 | <<join, join>>
-| link:spark-sql-DataFrame.adoc[DataFrame]
+| spark-sql-DataFrame.md[DataFrame]
 | Untyped ``Row``-based join
 
 | <<joinWith, joinWith>>
-| link:spark-sql-Dataset.adoc[Dataset]
+| spark-sql-Dataset.md[Dataset]
 | Used for a type-preserving join with two output columns for records for which a join condition holds
 |===
 
-You can also use link:SparkSession.md#sql[SQL mode] to join datasets using _good ol'_ SQL.
+You can also use SparkSession.md#sql[SQL mode] to join datasets using _good ol'_ SQL.
 
 [source, scala]
 ----
@@ -38,7 +38,7 @@ spark.sql("select * from t1, t2 where t1.id = t2.id")
 ----
 
 [[join-condition]]
-You can specify a *join condition* (aka _join expression_) as part of join operators or using link:spark-sql-dataset-operators.adoc#where[where] or link:spark-sql-dataset-operators.adoc#filter[filter] operators.
+You can specify a *join condition* (aka _join expression_) as part of join operators or using spark-sql-dataset-operators.md#where[where] or spark-sql-dataset-operators.md#filter[filter] operators.
 
 [source, scala]
 ----
@@ -194,11 +194,11 @@ scala> left.join(right, Seq("id"), "leftanti").explain
    +- LocalTableScan [id#60]
 ----
 
-Internally, `join(right: Dataset[_])` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator (in the current link:SparkSession.md[SparkSession]).
+Internally, `join(right: Dataset[_])` spark-sql-Dataset.md#ofRows[creates a DataFrame] with a condition-less spark-sql-LogicalPlan-Join.md[Join] logical operator (in the current SparkSession.md[SparkSession]).
 
-NOTE: `join(right: Dataset[_])` creates a link:spark-sql-LogicalPlan.adoc[logical plan] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] operator with two child logical plans of the both sides of the join.
+NOTE: `join(right: Dataset[_])` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less spark-sql-LogicalPlan-Join.md[Join] operator with two child logical plans of the both sides of the join.
 
-NOTE: `join(right: Dataset[_], usingColumns: Seq[String], joinType: String)` creates a link:spark-sql-LogicalPlan.adoc[logical plan] with a condition-less link:spark-sql-LogicalPlan-Join.adoc[Join] operator with <<UsingJoin, UsingJoin>> join type.
+NOTE: `join(right: Dataset[_], usingColumns: Seq[String], joinType: String)` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less spark-sql-LogicalPlan-Join.md[Join] operator with <<UsingJoin, UsingJoin>> join type.
 
 [NOTE]
 ====
@@ -210,7 +210,7 @@ df("key") === df("key")
 
 That is usually considered a trivially true condition and refused as acceptable.
 
-With link:spark-sql-properties.adoc#spark.sql.selfJoinAutoResolveAmbiguity[spark.sql.selfJoinAutoResolveAmbiguity] option enabled (which it is by default), `join` will automatically resolve ambiguous join conditions into ones that might make sense.
+With spark-sql-properties.md#spark.sql.selfJoinAutoResolveAmbiguity[spark.sql.selfJoinAutoResolveAmbiguity] option enabled (which it is by default), `join` will automatically resolve ambiguous join conditions into ones that might make sense.
 
 See https://issues.apache.org/jira/browse/SPARK-6231[[SPARK-6231\] Join on two tables (generated from same one) is broken].
 ====
@@ -222,7 +222,7 @@ See https://issues.apache.org/jira/browse/SPARK-6231[[SPARK-6231\] Join on two t
 crossJoin(right: Dataset[_]): DataFrame
 ----
 
-`crossJoin` joins two link:spark-sql-Dataset.adoc[Datasets] using <<cross, Cross>> join type with no condition.
+`crossJoin` joins two spark-sql-Dataset.md[Datasets] using <<cross, Cross>> join type with no condition.
 
 NOTE: `crossJoin` creates an explicit cartesian join that can be very expensive without an extra filter (that can be pushed down).
 
@@ -235,7 +235,7 @@ joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T,
 ----
 <1> inner equi-join
 
-`joinWith` creates a link:spark-sql-Dataset.adoc[Dataset] with two columns `_1` and `_2` that each contain records for which `condition` holds.
+`joinWith` creates a spark-sql-Dataset.md[Dataset] with two columns `_1` and `_2` that each contain records for which `condition` holds.
 
 [source, scala]
 ----
@@ -274,4 +274,4 @@ scala> joined.show
 
 NOTE: `joinWith` preserves type-safety with the original object types.
 
-NOTE: `joinWith` creates a `Dataset` with link:spark-sql-LogicalPlan-Join.adoc[Join] logical plan.
+NOTE: `joinWith` creates a `Dataset` with spark-sql-LogicalPlan-Join.md[Join] logical plan.

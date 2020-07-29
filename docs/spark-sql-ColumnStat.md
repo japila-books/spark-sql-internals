@@ -1,7 +1,7 @@
 # ColumnStat
 
 [[creating-instance]]
-`ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the link:spark-sql-CatalogStatistics.adoc[table statistics] in a metastore).
+`ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the spark-sql-CatalogStatistics.md[table statistics] in a metastore).
 
 [[statistics]]
 .Column Statistics
@@ -32,7 +32,7 @@
 | Histogram of values (as `Histogram` which is empty by default)
 |===
 
-`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` link:spark-sql-SparkSqlAstBuilder.adoc#ANALYZE-TABLE[translates] to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
 
 [source, scala]
 ----
@@ -41,11 +41,11 @@ val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
 spark.sql(analyzeTableSQL)
 ----
 
-`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With link:spark-sql-properties.adoc#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
+`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With spark-sql-properties.md#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
 
 NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 
-You can inspect the column statistics using link:spark-sql-cost-based-optimization.adoc#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command.
+You can inspect the column statistics using spark-sql-cost-based-optimization.md#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command.
 
 ```
 scala> sql("DESC EXTENDED t1 id").show
@@ -65,7 +65,7 @@ scala> sql("DESC EXTENDED t1 id").show
 +--------------+----------+
 ```
 
-`ColumnStat` is part of the link:spark-sql-CatalogStatistics.adoc#colStats[statistics of a table].
+`ColumnStat` is part of the spark-sql-CatalogStatistics.md#colStats[statistics of a table].
 
 [source, scala]
 ----
@@ -102,7 +102,7 @@ scala> println(props)
 Map(distinctCount -> 2, min -> 0.0, version -> 1, max -> 1.4, maxLen -> 8, avgLen -> 8, nullCount -> 0)
 ----
 
-`ColumnStat` is <<fromMap, re-created from properties>> (deserialized) when `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+`ColumnStat` is <<fromMap, re-created from properties>> (deserialized) when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
 
 [source, scala]
 ----
@@ -122,7 +122,7 @@ scala> :type colStatsOpt
 Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to link:spark-sql-JoinEstimation.adoc#estimateInnerOuterJoin[estimateInnerOuterJoin] for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
+`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to spark-sql-JoinEstimation.md#estimateInnerOuterJoin[estimateInnerOuterJoin] for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
 [source, scala]
 ----
@@ -238,7 +238,7 @@ NOTE: `toMap` adds `min`, `max`, `histogram` entries only if they are available.
 
 NOTE: Interestingly, `colName` and `dataType` input parameters bring no value to `toMap` itself, but merely allow for a more user-friendly error reporting when <<toExternalString, converting>> `min` and `max` column statistics.
 
-NOTE: `toMap` is used exclusively when `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsToProperties[converting table statistics to properties] (before persisting them as part of table metadata in a Hive metastore).
+NOTE: `toMap` is used exclusively when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsToProperties[converting table statistics to properties] (before persisting them as part of table metadata in a Hive metastore).
 
 === [[fromMap]] Re-Creating Column Statistics from Properties (ColumnStat Deserialization) -- `fromMap` Method
 
@@ -257,7 +257,7 @@ WARN Failed to parse column statistics for column [fieldName] in table [table]
 
 NOTE: Interestingly, `table` input parameter brings no value to `fromMap` itself, but merely allows for a more user-friendly error reporting when parsing column statistics fails.
 
-NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for link:hive/HiveExternalCatalog.adoc#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
 
 === [[rowToColumnStat]] Creating Column Statistics from InternalRow (Result of Computing Column Statistics) -- `rowToColumnStat` Method
 
@@ -282,7 +282,7 @@ rowToColumnStat(
 
 If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
 
-NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#run[executed] (to link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc#computeColumnStats[compute the statistics for specified columns]).
+NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[executed] (to spark-sql-LogicalPlan-AnalyzeColumnCommand.md#computeColumnStats[compute the statistics for specified columns]).
 
 === [[statExprs]] `statExprs` Method
 

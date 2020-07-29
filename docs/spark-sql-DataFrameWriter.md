@@ -149,7 +149,7 @@ text(path: String): Unit
 ----
 |===
 
-`DataFrameWriter` is available using <<spark-sql-DataFrame.adoc#write, Dataset.write>> operator.
+`DataFrameWriter` is available using <<spark-sql-DataFrame.md#write, Dataset.write>> operator.
 
 [source, scala]
 ----
@@ -164,7 +164,7 @@ org.apache.spark.sql.DataFrameWriter[org.apache.spark.sql.Row]
 
 `DataFrameWriter` supports many <<writing-dataframes-to-files, file formats>> and <<jdbc, JDBC databases>>. It also allows for plugging in <<format, new formats>>.
 
-`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using link:spark-sql-properties.adoc[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
+`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using spark-sql-properties.md[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
 
 [source, scala]
 ----
@@ -231,17 +231,17 @@ NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing
 runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 ----
 
-`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.adoc#, QueryExecution>>).
+`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.md#, QueryExecution>>).
 
-`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.adoc#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
+`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.md#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.md#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
 
 TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
 
 `runCommand` records the current time (end time).
 
-In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSession.md#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.adoc#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
+In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSession.md#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.md#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
 
-In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.adoc#onFailure, onFailure>> (with the exception) and (re)throws it.
+In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.md#onFailure, onFailure>> (with the exception) and (re)throws it.
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 
@@ -273,13 +273,13 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ----
 
-Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.adoc#parseTableIdentifier, parse the input table name>>.
+Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.md#parseTableIdentifier, parse the input table name>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
 
-`saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#tableExists, check whether the table exists or not>>.
+`saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#tableExists, check whether the table exists or not>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
 
 In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
 
@@ -314,13 +314,13 @@ In the end, `saveAsTable` branches off per whether the table exists or not and t
 save(): Unit
 ----
 
-`save` saves the rows of a structured query (a <<spark-sql-Dataset.adoc#, Dataset>>) to a data source.
+`save` saves the rows of a structured query (a <<spark-sql-Dataset.md#, Dataset>>) to a data source.
 
-Internally, `save` uses `DataSource` to <<spark-sql-DataSource.adoc#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<SessionState.md#conf, SQLConf>>).
+Internally, `save` uses `DataSource` to <<spark-sql-DataSource.md#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<SessionState.md#conf, SQLConf>>).
 
 [NOTE]
 ====
-`save` uses <<spark-sql-Dataset.adoc#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
+`save` uses <<spark-sql-Dataset.md#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
 
 [source, scala]
 ----
@@ -329,9 +329,9 @@ df.sparkSession.sessionState.conf
 ----
 ====
 
-If the class is a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>>...FIXME
+If the class is a <<spark-sql-DataSourceV2.md#, DataSourceV2>>...FIXME
 
-Otherwise, if not a <<spark-sql-DataSourceV2.adoc#, DataSourceV2>>, `save` simply <<saveToV1Source, saveToV1Source>>.
+Otherwise, if not a <<spark-sql-DataSourceV2.md#, DataSourceV2>>, `save` simply <<saveToV1Source, saveToV1Source>>.
 
 `save` does not support saving to Hive (i.e. the <<source, source>> is `hive`) and throws an `AnalysisException` when requested so.
 
@@ -494,7 +494,7 @@ insertInto(tableIdent: TableIdentifier): Unit
 
 NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order (not the names!) of the columns in (the output of) the Dataset matters.
 
-Internally, `insertInto` creates an link:InsertIntoTable.adoc#creating-instance[InsertIntoTable] logical operator (with link:spark-sql-LogicalPlan-UnresolvedRelation.adoc#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
+Internally, `insertInto` creates an InsertIntoTable.md#creating-instance[InsertIntoTable] logical operator (with spark-sql-LogicalPlan-UnresolvedRelation.md#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
 
 .DataFrameWrite.insertInto Executes SQL Command (as a Spark job)
 image::images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png[align="center"]
@@ -544,7 +544,7 @@ org.apache.spark.sql.AnalysisException: insertInto() can't be used together with
 getBucketSpec: Option[BucketSpec]
 ----
 
-`getBucketSpec` returns a new <<spark-sql-BucketSpec.adoc#, BucketSpec>> if <<numBuckets, numBuckets>> was defined (with <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>).
+`getBucketSpec` returns a new <<spark-sql-BucketSpec.md#, BucketSpec>> if <<numBuckets, numBuckets>> was defined (with <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>).
 
 `getBucketSpec` throws an `IllegalArgumentException` when <<numBuckets, numBuckets>> are not defined when <<sortColumnNames, sortColumnNames>> are.
 
@@ -561,13 +561,13 @@ NOTE: `getBucketSpec` is used exclusively when `DataFrameWriter` is requested to
 createTable(tableIdent: TableIdentifier): Unit
 ----
 
-`createTable` <<spark-sql-DataSource.adoc#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
+`createTable` <<spark-sql-DataSource.md#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
 
-`createTable` assumes the table being xref:spark-sql-CatalogTable.adoc#CatalogTableType[external] when link:spark-sql-CatalogStorageFormat.adoc#locationUri[location URI] of `CatalogStorageFormat` is defined, and xref:spark-sql-CatalogTable.adoc#CatalogTableType[managed] otherwise.
+`createTable` assumes the table being xref:spark-sql-CatalogTable.md#CatalogTableType[external] when spark-sql-CatalogStorageFormat.md#locationUri[location URI] of `CatalogStorageFormat` is defined, and xref:spark-sql-CatalogTable.md#CatalogTableType[managed] otherwise.
 
-`createTable` creates a <<spark-sql-CatalogTable.adoc#, CatalogTable>> (with the <<spark-sql-CatalogTable.adoc#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
+`createTable` creates a <<spark-sql-CatalogTable.md#, CatalogTable>> (with the <<spark-sql-CatalogTable.md#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
 
-In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.adoc#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<spark-sql-Dataset.adoc#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
+In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<spark-sql-Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
 
 NOTE: `createTable` is used when `DataFrameWriter` is requested to <<saveAsTable, saveAsTable>>.
 
@@ -593,22 +593,22 @@ NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save,
 saveToV1Source(): Unit
 ----
 
-`saveToV1Source` creates a <<spark-sql-DataSource.adoc#apply, DataSource>> (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the <<spark-sql-DataSource.adoc#planForWriting, logical command for writing>> (with the <<mode, mode>> and the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> of the structured query).
+`saveToV1Source` creates a <<spark-sql-DataSource.md#apply, DataSource>> (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the <<spark-sql-DataSource.md#planForWriting, logical command for writing>> (with the <<mode, mode>> and the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> of the structured query).
 
-NOTE: While requesting the <<spark-sql-Dataset.adoc#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
+NOTE: While requesting the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
 
 In the end, `saveToV1Source` <<runCommand, runs the logical command for writing>>.
 
 [NOTE]
 ====
-The <<spark-sql-DataSource.adoc#planForWriting, logical command for writing>> can be one of the following:
+The <<spark-sql-DataSource.md#planForWriting, logical command for writing>> can be one of the following:
 
-* A <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.adoc#, SaveIntoDataSourceCommand>> for <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProviders>>
+* A <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#, SaveIntoDataSourceCommand>> for <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProviders>>
 
-* An <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#, InsertIntoHadoopFsRelationCommand>> for <<spark-sql-FileFormat.adoc#, FileFormats>>
+* An <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> for <<spark-sql-FileFormat.md#, FileFormats>>
 ====
 
-NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.adoc#, DataSourceV2>> writers with `WriteSupport`).
+NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.md#, DataSourceV2>> writers with `WriteSupport`).
 
 === [[assertNotPartitioned]] `assertNotPartitioned` Internal Method
 

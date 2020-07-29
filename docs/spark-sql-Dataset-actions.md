@@ -2,7 +2,7 @@ title: Actions
 
 # Dataset API -- Actions
 
-*Actions* are part of the <<spark-sql-dataset-operators.adoc#, Dataset API>> for...FIXME
+*Actions* are part of the <<spark-sql-dataset-operators.md#, Dataset API>> for...FIXME
 
 NOTE: Actions are the methods in the `Dataset` Scala class that are grouped in `action` group name, i.e. `@group action`.
 
@@ -219,7 +219,7 @@ The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `
 
 NOTE: `summary` accepts arbitrary approximate percentiles specified as a percentage (e.g. `10%`).
 
-Internally, `summary` uses the `StatFunctions` to <<spark-sql-StatFunctions.adoc#summary, calculate the requested summaries for the Dataset>>.
+Internally, `summary` uses the `StatFunctions` to <<spark-sql-StatFunctions.md#summary, calculate the requested summaries for the Dataset>>.
 
 === [[take]] Taking First Records -- `take` Action
 
@@ -232,7 +232,7 @@ take(n: Int): Array[T]
 
 WARNING: `take` loads all the data into the memory of the Spark application's driver process and for a large `n` could result in `OutOfMemoryError`.
 
-Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the link:SparkPlan.md[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded link:spark-sql-Encoder.adoc[encoder].
+Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the SparkPlan.md[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded spark-sql-Encoder.md[encoder].
 
 === [[toLocalIterator]] `toLocalIterator` Action
 

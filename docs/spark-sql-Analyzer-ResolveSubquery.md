@@ -1,14 +1,14 @@
 # ResolveSubquery Logical Resolution Rule
 
-`ResolveSubquery` is a *logical resolution* that <<resolveSubQueries, resolves subquery expressions>> (<<spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#, ScalarSubquery>>, <<spark-sql-Expression-Exists.adoc#, Exists>> and <<spark-sql-Expression-In.adoc#, In>>) when <<apply, transforming a logical plan>> with the following logical operators:
+`ResolveSubquery` is a *logical resolution* that <<resolveSubQueries, resolves subquery expressions>> (<<spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#, ScalarSubquery>>, <<spark-sql-Expression-Exists.md#, Exists>> and <<spark-sql-Expression-In.md#, In>>) when <<apply, transforming a logical plan>> with the following logical operators:
 
 . `Filter` operators with an `Aggregate` child operator
 
 . Unary operators with the children resolved
 
-`ResolveSubquery` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules of the link:spark-sql-Analyzer.adoc[Spark Analyzer].
+`ResolveSubquery` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules of the spark-sql-Analyzer.md[Spark Analyzer].
 
-Technically, `ResolveSubquery` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveSubquery` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -45,13 +45,13 @@ scala> println(analyzedPlan.numberedTreeString)
 resolveSubQueries(plan: LogicalPlan, plans: Seq[LogicalPlan]): LogicalPlan
 ----
 
-`resolveSubQueries` requests the input link:spark-sql-LogicalPlan.adoc[logical plan] to link:catalyst/QueryPlan.md#transformExpressions[transform expressions] (down the operator tree) as follows:
+`resolveSubQueries` requests the input spark-sql-LogicalPlan.md[logical plan] to catalyst/QueryPlan.md#transformExpressions[transform expressions] (down the operator tree) as follows:
 
-. For link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc[ScalarSubquery] expressions with link:spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `ScalarSubquery` expressions
+. For spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery] expressions with spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md#plan[subquery plan] not spark-sql-LogicalPlan.md#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `ScalarSubquery` expressions
 
-. For link:spark-sql-Expression-Exists.adoc[Exists] expressions with link:spark-sql-Expression-Exists.adoc#plan[subquery plan] not link:spark-sql-LogicalPlan.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `Exists` expressions
+. For spark-sql-Expression-Exists.md[Exists] expressions with spark-sql-Expression-Exists.md#plan[subquery plan] not spark-sql-LogicalPlan.md#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `Exists` expressions
 
-. For link:spark-sql-Expression-In.adoc[In] expressions with link:spark-sql-Expression-ListQuery.adoc[ListQuery] not link:spark-sql-Expression-ListQuery.adoc#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `In` expressions
+. For spark-sql-Expression-In.md[In] expressions with spark-sql-Expression-ListQuery.md[ListQuery] not spark-sql-Expression-ListQuery.md#resolved[resolved] and <<resolveSubQuery, resolveSubQuery>> to create resolved `In` expressions
 
 NOTE: `resolveSubQueries` is used exclusively when `ResolveSubquery` is <<apply, executed>>.
 
@@ -76,10 +76,10 @@ NOTE: `resolveSubQuery` is used exclusively when `ResolveSubquery` is requested 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` transforms the input link:spark-sql-LogicalPlan.adoc[logical plan] as follows:
+`apply` transforms the input spark-sql-LogicalPlan.md[logical plan] as follows:
 
-. For link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] operator (as the link:spark-sql-LogicalPlan-Filter.adoc#child[child] operator) and the link:spark-sql-LogicalPlan.adoc#childrenResolved[children resolved], `apply` <<resolveSubQueries, resolves subquery expressions (ScalarSubquery, Exists and In)>> with the `Filter` operator and the plans with the `Aggregate` operator and its single link:spark-sql-LogicalPlan-Aggregate.adoc#child[child]
+. For spark-sql-LogicalPlan-Filter.md[Filter] operators with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] operator (as the spark-sql-LogicalPlan-Filter.md#child[child] operator) and the spark-sql-LogicalPlan.md#childrenResolved[children resolved], `apply` <<resolveSubQueries, resolves subquery expressions (ScalarSubquery, Exists and In)>> with the `Filter` operator and the plans with the `Aggregate` operator and its single spark-sql-LogicalPlan-Aggregate.md#child[child]
 
-. For link:spark-sql-LogicalPlan.adoc#UnaryNode[unary operators] with the link:spark-sql-LogicalPlan.adoc#childrenResolved[children resolved], `apply` <<resolveSubQueries, resolves subquery expressions (ScalarSubquery, Exists and In)>> with the unary operator and its single child
+. For spark-sql-LogicalPlan.md#UnaryNode[unary operators] with the spark-sql-LogicalPlan.md#childrenResolved[children resolved], `apply` <<resolveSubQueries, resolves subquery expressions (ScalarSubquery, Exists and In)>> with the unary operator and its single child
 
 `apply` is part of [Rule](catalyst/Rule.md#apply) abstraction.

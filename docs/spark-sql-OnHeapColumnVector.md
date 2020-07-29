@@ -1,6 +1,6 @@
 # OnHeapColumnVector
 
-`OnHeapColumnVector` is a concrete link:spark-sql-WritableColumnVector.adoc[WritableColumnVector] that...FIXME
+`OnHeapColumnVector` is a concrete spark-sql-WritableColumnVector.md[WritableColumnVector] that...FIXME
 
 `OnHeapColumnVector` is <<creating-instance, created>> when:
 
@@ -17,7 +17,7 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 ----
 <1> Simply converts `StructType` to `StructField[]` and calls the other `allocateColumns`
 
-`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the link:spark-sql-DataType.adoc[data type] per field).
+`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the spark-sql-DataType.md[data type] per field).
 
 [NOTE]
 ====
@@ -25,9 +25,9 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 
 * `AggregateHashMap` is created
 
-* `InMemoryTableScanExec` is requested to link:spark-sql-SparkPlan-InMemoryTableScanExec.adoc#createAndDecompressColumn[createAndDecompressColumn]
+* `InMemoryTableScanExec` is requested to spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
 
-* `VectorizedParquetRecordReader` is requested to link:spark-sql-VectorizedParquetRecordReader.adoc#initBatch[initBatch] (with `ON_HEAP` memory mode)
+* `VectorizedParquetRecordReader` is requested to spark-sql-VectorizedParquetRecordReader.md#initBatch[initBatch] (with `ON_HEAP` memory mode)
 
 * `OrcColumnarBatchReader` is requested to `initBatch` (with `ON_HEAP` memory mode)
 
@@ -39,9 +39,9 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 `OnHeapColumnVector` takes the following when created:
 
 * [[capacity]] Number of elements to hold in a vector (aka `capacity`)
-* [[type]] link:spark-sql-DataType.adoc[Data type] of the elements stored
+* [[type]] spark-sql-DataType.md[Data type] of the elements stored
 
-When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and link:spark-sql-WritableColumnVector.adoc#reset[reset].
+When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and spark-sql-WritableColumnVector.md#reset[reset].
 
 === [[reserveInternal]] `reserveInternal` Method
 
@@ -50,7 +50,7 @@ When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the
 void reserveInternal(int newCapacity)
 ----
 
-NOTE: `reserveInternal` is part of link:spark-sql-WritableColumnVector.adoc#reserveInternal[WritableColumnVector Contract] to...FIXME.
+NOTE: `reserveInternal` is part of spark-sql-WritableColumnVector.md#reserveInternal[WritableColumnVector Contract] to...FIXME.
 
 `reserveInternal`...FIXME
 
@@ -61,6 +61,6 @@ NOTE: `reserveInternal` is part of link:spark-sql-WritableColumnVector.adoc#rese
 OnHeapColumnVector reserveNewColumn(int capacity, DataType type)
 ----
 
-NOTE: `reserveNewColumn` is part of link:spark-sql-WritableColumnVector.adoc#reserveNewColumn[WritableColumnVector Contract] to...FIXME.
+NOTE: `reserveNewColumn` is part of spark-sql-WritableColumnVector.md#reserveNewColumn[WritableColumnVector Contract] to...FIXME.
 
 `reserveNewColumn`...FIXME

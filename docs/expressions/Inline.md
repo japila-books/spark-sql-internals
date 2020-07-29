@@ -2,7 +2,7 @@ title: Inline
 
 # Inline Generator Expression
 
-`Inline` is a <<spark-sql-Expression-UnaryExpression.adoc#, unary expression>> and link:spark-sql-Expression-CollectionGenerator.adoc[CollectionGenerator].
+`Inline` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and spark-sql-Expression-CollectionGenerator.md[CollectionGenerator].
 
 `Inline` is created by `inline` and `inline_outer` standard functions.
 

@@ -4,7 +4,7 @@
 
 `CollapseWindow` is part of the [Operator Optimization](../Optimizer.md#Operator_Optimization) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`CollapseWindow` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`CollapseWindow` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----

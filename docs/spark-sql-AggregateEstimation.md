@@ -11,4 +11,4 @@ estimate(agg: Aggregate): Option[Statistics]
 
 `estimate`...FIXME
 
-NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitAggregate[estimate statistics and query hints of a Aggregate logical operator].
+NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to spark-sql-BasicStatsPlanVisitor.md#visitAggregate[estimate statistics and query hints of a Aggregate logical operator].

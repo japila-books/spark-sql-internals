@@ -28,9 +28,9 @@ a|
 
 Used when:
 
-* `BroadcastExchangeExec` is requested for link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#relationFuture[relationFuture] for the first time (when `BroadcastExchangeExec` is requested to link:spark-sql-SparkPlan-BroadcastExchangeExec.adoc#doPrepare[prepare for execution] as part of link:SparkPlan.md#executeQuery[executing a physical operator])
+* `BroadcastExchangeExec` is requested for spark-sql-SparkPlan-BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time (when `BroadcastExchangeExec` is requested to spark-sql-SparkPlan-BroadcastExchangeExec.md#doPrepare[prepare for execution] as part of SparkPlan.md#executeQuery[executing a physical operator])
 
-* `HashedRelationBroadcastMode` is requested to link:spark-sql-HashedRelationBroadcastMode.adoc#transform[transform] internal rows (and build a link:spark-sql-HashedRelation.adoc#apply[HashedRelation])
+* `HashedRelationBroadcastMode` is requested to spark-sql-HashedRelationBroadcastMode.md#transform[transform] internal rows (and build a spark-sql-HashedRelation.md#apply[HashedRelation])
 
 NOTE: The `rows`-only variant does not seem to be used at all.
 |===
@@ -42,9 +42,9 @@ NOTE: The `rows`-only variant does not seem to be used at all.
 | BroadcastMode
 | Description
 
-| [[HashedRelationBroadcastMode]] link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]
+| [[HashedRelationBroadcastMode]] spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode]
 |
 
-| [[IdentityBroadcastMode]] link:spark-sql-IdentityBroadcastMode.adoc[IdentityBroadcastMode]
+| [[IdentityBroadcastMode]] spark-sql-IdentityBroadcastMode.md[IdentityBroadcastMode]
 |
 |===

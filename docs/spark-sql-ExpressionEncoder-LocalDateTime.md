@@ -39,9 +39,9 @@ java.lang.UnsupportedOperationException: No Encoder found for java.time.LocalDat
   ... 50 elided
 ```
 
-As it is clearly said in the exception, the root cause is no <<spark-sql-Encoder.adoc#, Encoder>> found for `java.time.LocalDateTime` (as there is not one available in Spark SQL).
+As it is clearly said in the exception, the root cause is no <<spark-sql-Encoder.md#, Encoder>> found for `java.time.LocalDateTime` (as there is not one available in Spark SQL).
 
-You could define one using <<spark-sql-ExpressionEncoder.adoc#, ExpressionEncoder>>, but that does not seem to work either.
+You could define one using <<spark-sql-ExpressionEncoder.md#, ExpressionEncoder>>, but that does not seem to work either.
 
 ```
 import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder
@@ -63,7 +63,7 @@ The simplest solution is to transform the `Dataset` with `java.time.LocalDateTim
 
 A much better solution would be to provide a custom `Encoder` that would expand the types supported in Spark SQL.
 
-`LocalDateTimeEncoder` is an _attempt_ to develop a custom <<spark-sql-ExpressionEncoder.adoc#, ExpressionEncoder>> for Java's https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html[java.time.LocalDateTime] so you don't have to map values to another supported type.
+`LocalDateTimeEncoder` is an _attempt_ to develop a custom <<spark-sql-ExpressionEncoder.md#, ExpressionEncoder>> for Java's https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html[java.time.LocalDateTime] so you don't have to map values to another supported type.
 
 ====
 public final class *LocalDateTime*

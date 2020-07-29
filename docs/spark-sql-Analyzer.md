@@ -4,7 +4,7 @@ title: Analyzer
 
 `Analyzer` (aka _Spark Analyzer_ or _Query Analyzer_) is the *logical query plan analyzer* that <<execute, semantically validates and transforms an unresolved logical plan>> to an *analyzed logical plan*.
 
-`Analyzer` is a concrete <<catalyst/RuleExecutor.md#, RuleExecutor>> of <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`) with the <<batches, logical evaluation rules>>.
+`Analyzer` is a concrete <<catalyst/RuleExecutor.md#, RuleExecutor>> of <<spark-sql-LogicalPlan.md#, LogicalPlan>> (i.e. `RuleExecutor[LogicalPlan]`) with the <<batches, logical evaluation rules>>.
 
 ```
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
@@ -28,7 +28,7 @@ scala> :type spark.sessionState.analyzer
 org.apache.spark.sql.catalyst.analysis.Analyzer
 ----
 
-You can access the analyzed logical plan of a structured query (as a <<spark-sql-Dataset.adoc#, Dataset>>) using <<spark-sql-dataset-operators.adoc#explain, Dataset.explain>> basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+You can access the analyzed logical plan of a structured query (as a <<spark-sql-Dataset.md#, Dataset>>) using <<spark-sql-dataset-operators.md#explain, Dataset.explain>> basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 [source, scala]
 ----
@@ -58,7 +58,7 @@ Project [id#0L, (id#0L + 5) AS new_column#3L]
 +- *(1) Range (0, 5, step=1, splits=8)
 ----
 
-Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.adoc#analyzed, analyzed>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.md#analyzed, analyzed>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 [source, scala]
 ----
@@ -70,7 +70,7 @@ scala> println(analyzedPlan.numberedTreeString)
 
 `Analyzer` defines <<extendedResolutionRules, extendedResolutionRules>> extension point for additional logical evaluation rules that a custom `Analyzer` can use to extend the <<Resolution, Resolution>> rule batch. The rules are added at the end of the `Resolution` batch.
 
-NOTE: link:SessionState.md[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
+NOTE: SessionState.md[SessionState] uses its own `Analyzer` with custom <<extendedResolutionRules, extendedResolutionRules>>, <<postHocResolutionRules, postHocResolutionRules>>, and <<extendedCheckRules, extendedCheckRules>> extension methods.
 
 [[internal-registries]]
 .Analyzer's Internal Registries and Counters
@@ -80,20 +80,20 @@ NOTE: link:SessionState.md[SessionState] uses its own `Analyzer` with custom <<e
 | Description
 
 | [[extendedResolutionRules]] `extendedResolutionRules`
-| Additional link:catalyst/Rule.md[rules] for <<Resolution, Resolution>> batch.
+| Additional catalyst/Rule.md[rules] for <<Resolution, Resolution>> batch.
 
 Empty by default
 
 | [[fixedPoint]] `fixedPoint`
 | `FixedPoint` with <<maxIterations, maxIterations>> for <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>> batches.
 
-Set when `Analyzer` <<creating-instance, is created>> (and can be defined explicitly or through link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
+Set when `Analyzer` <<creating-instance, is created>> (and can be defined explicitly or through spark-sql-CatalystConf.md#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
 
 | [[postHocResolutionRules]] `postHocResolutionRules`
-| The only link:catalyst/Rule.md[rules] in <<Post-Hoc-Resolution, Post-Hoc Resolution>> batch if defined (that are executed in one pass, i.e. `Once` strategy). Empty by default
+| The only catalyst/Rule.md[rules] in <<Post-Hoc-Resolution, Post-Hoc Resolution>> batch if defined (that are executed in one pass, i.e. `Once` strategy). Empty by default
 |===
 
-`Analyzer` is used by `QueryExecution` to link:spark-sql-QueryExecution.adoc#analyzed[resolve the managed `LogicalPlan`] (and, as a sort of follow-up, link:spark-sql-QueryExecution.adoc#assertAnalyzed[assert that a structured query has already been properly analyzed], i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).
+`Analyzer` is used by `QueryExecution` to spark-sql-QueryExecution.md#analyzed[resolve the managed `LogicalPlan`] (and, as a sort of follow-up, spark-sql-QueryExecution.md#assertAnalyzed[assert that a structured query has already been properly analyzed], i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).
 
 [[logging]]
 [TIP]
@@ -102,7 +102,7 @@ Enable `TRACE` or `DEBUG` logging levels for the respective session-specific log
 
 * `pass:[org.apache.spark.sql.internal.SessionState$$anon$1]`
 
-* `pass:[org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1]` when link:SparkSession.md#enableHiveSupport[Hive support is enabled]
+* `pass:[org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1]` when SparkSession.md#enableHiveSupport[Hive support is enabled]
 
 Add the following line to `conf/log4j.properties`:
 
@@ -114,7 +114,7 @@ log4j.logger.org.apache.spark.sql.internal.SessionState$$anon$1=TRACE
 log4j.logger.org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 
 ---
 
@@ -123,9 +123,9 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 
 === [[execute]] Executing Logical Evaluation Rules -- `execute` Method
 
-`Analyzer` is a link:catalyst/RuleExecutor.md[RuleExecutor] that defines the <<batches, logical rules>> (i.e. resolving, removing, and in general modifying it), e.g.
+`Analyzer` is a catalyst/RuleExecutor.md[RuleExecutor] that defines the <<batches, logical rules>> (i.e. resolving, removing, and in general modifying it), e.g.
 
-* Resolves unresolved <<ResolveRelations, relations>> and <<ResolveFunctions, functions>> (including link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators]) using provided <<catalog, SessionCatalog>>
+* Resolves unresolved <<ResolveRelations, relations>> and <<ResolveFunctions, functions>> (including spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators]) using provided <<catalog, SessionCatalog>>
 * ...
 
 [[batches]]
@@ -140,50 +140,50 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 .3+^.^| [[Hints]] Hints
 .3+^.^| <<fixedPoint, FixedPoint>>
 
-| <<spark-sql-Analyzer-ResolveBroadcastHints.adoc#, ResolveBroadcastHints>>
-| [[ResolveBroadcastHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators
+| <<spark-sql-Analyzer-ResolveBroadcastHints.md#, ResolveBroadcastHints>>
+| [[ResolveBroadcastHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators
 
-| <<spark-sql-Analyzer-ResolveCoalesceHints.adoc#, ResolveCoalesceHints>>
-| [[ResolveCoalesceHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators
+| <<spark-sql-Analyzer-ResolveCoalesceHints.md#, ResolveCoalesceHints>>
+| [[ResolveCoalesceHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators
 
 | RemoveAllHints
-| [[RemoveAllHints]] Removes all <<spark-sql-LogicalPlan-UnresolvedHint.adoc#, UnresolvedHint>> logical operators
+| [[RemoveAllHints]] Removes all <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators
 
 ^.^| [[Simple-Sanity-Check]] Simple Sanity Check
 ^.^| `Once`
-| link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions]
-| [[LookupFunctions]] Checks whether a function identifier (referenced by an link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction]) link:spark-sql-SessionCatalog.adoc#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
+| spark-sql-Analyzer-LookupFunctions.md[LookupFunctions]
+| [[LookupFunctions]] Checks whether a function identifier (referenced by an spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction]) spark-sql-SessionCatalog.md#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
 
 .4+^.^| [[Substitution]] Substitution
 .4+^.^| <<fixedPoint, FixedPoint>>
 | CTESubstitution
 | Resolves `With` operators (and substitutes named common table expressions -- CTEs)
 
-| [[WindowsSubstitution]] link:spark-sql-Analyzer-WindowsSubstitution.adoc[WindowsSubstitution]
-| Substitutes an <<spark-sql-Expression-UnresolvedWindowExpression.adoc#, UnresolvedWindowExpression>> with a <<spark-sql-Expression-WindowExpression.adoc#, WindowExpression>> for link:spark-sql-LogicalPlan-WithWindowDefinition.adoc[WithWindowDefinition] logical operators.
+| [[WindowsSubstitution]] spark-sql-Analyzer-WindowsSubstitution.md[WindowsSubstitution]
+| Substitutes an <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> with a <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> for spark-sql-LogicalPlan-WithWindowDefinition.md[WithWindowDefinition] logical operators.
 
 | EliminateUnions
 | Eliminates `Union` of one child into that child
 
 | SubstituteUnresolvedOrdinals
-| Replaces ordinals in <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.adoc#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.adoc#, UnresolvedOrdinal>> expressions
+| Replaces ordinals in <<spark-sql-LogicalPlan-Sort.md#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions
 
 .26+^.^| [[Resolution]] Resolution
 .26+^.^| <<fixedPoint, FixedPoint>>
 | ResolveTableValuedFunctions
 | Replaces `UnresolvedTableValuedFunction` with table-valued function.
 
-| [[ResolveRelations]] link:spark-sql-Analyzer-ResolveRelations.adoc[ResolveRelations]
+| [[ResolveRelations]] spark-sql-Analyzer-ResolveRelations.md[ResolveRelations]
 a| Resolves:
 
-* link:InsertIntoTable.adoc[InsertIntoTable]
-* link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation]
+* InsertIntoTable.md[InsertIntoTable]
+* spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation]
 
-| [[ResolveReferences]] link:spark-sql-Analyzer-ResolveReferences.adoc[ResolveReferences]
+| [[ResolveReferences]] spark-sql-Analyzer-ResolveReferences.md[ResolveReferences]
 |
 
-| [[ResolveCreateNamedStruct]] <<spark-sql-Analyzer-ResolveCreateNamedStruct.adoc#, ResolveCreateNamedStruct>>
-| Resolves <<spark-sql-Expression-CreateNamedStruct.adoc#, CreateNamedStruct>> expressions (with `NamePlaceholders`) to use <<spark-sql-Expression-Literal.adoc#, Literal>> expressions
+| [[ResolveCreateNamedStruct]] <<spark-sql-Analyzer-ResolveCreateNamedStruct.md#, ResolveCreateNamedStruct>>
+| Resolves <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions (with `NamePlaceholders`) to use <<spark-sql-Expression-Literal.md#, Literal>> expressions
 
 | ResolveDeserializer
 |
@@ -199,7 +199,7 @@ a|
 
 Resolves grouping expressions up in a logical plan tree:
 
-* `Cube`, `Rollup` and link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets] expressions
+* `Cube`, `Rollup` and spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] expressions
 * `Filter` with `Grouping` or `GroupingID` expressions
 * `Sort` with `Grouping` or `GroupingID` expressions
 
@@ -219,9 +219,9 @@ org.apache.spark.sql.AnalysisException: grouping__id is deprecated; use grouping
 NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while <<ResolveAggregateFunctions, ResolveAggregateFunctions>> is responsible for resolving the other aggregates.
 
 | [[ResolvePivot]] ResolvePivot
-| Resolves link:spark-sql-LogicalPlan-Pivot.adoc[Pivot] logical operator to `Project` with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] unary logical operator (for supported data types in aggregates) or just a single `Aggregate`.
+| Resolves spark-sql-LogicalPlan-Pivot.md[Pivot] logical operator to `Project` with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] unary logical operator (for supported data types in aggregates) or just a single `Aggregate`.
 
-| <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.adoc#, ResolveOrdinalInOrderByAndGroupBy>>
+| <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md#, ResolveOrdinalInOrderByAndGroupBy>>
 | [[ResolveOrdinalInOrderByAndGroupBy]]
 
 | ResolveMissingReferences
@@ -231,12 +231,12 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 |
 | ResolveGenerate
 |
-| link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions]
-a| [[ResolveFunctions]] Resolves functions using link:spark-sql-SessionCatalog.adoc#lookupFunction[SessionCatalog]:
+| spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions]
+a| [[ResolveFunctions]] Resolves functions using spark-sql-SessionCatalog.md#lookupFunction[SessionCatalog]:
 
-* link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerator] to a link:spark-sql-Expression-Generator.adoc[Generator]
+* spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerator] to a spark-sql-Expression-Generator.md[Generator]
 
-* link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] to a [AggregateExpression](expressions/AggregateExpression.md) (with link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction]) or link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunction]
+* spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] to a [AggregateExpression](expressions/AggregateExpression.md) (with spark-sql-Expression-AggregateFunction.md[AggregateFunction]) or spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunction]
 
 If `Generator` is not found, `ResolveFunctions` reports the error:
 
@@ -245,43 +245,43 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ----
 
-| [[ResolveAliases]] link:spark-sql-Analyzer-ResolveAliases.adoc[ResolveAliases]
-a| Replaces `UnresolvedAlias` link:expressions/Expression.md[expressions] with concrete aliases:
+| [[ResolveAliases]] spark-sql-Analyzer-ResolveAliases.md[ResolveAliases]
+a| Replaces `UnresolvedAlias` expressions/Expression.md[expressions] with concrete aliases:
 
-* link:spark-sql-Expression-NamedExpression.adoc[NamedExpressions]
+* spark-sql-Expression-NamedExpression.md[NamedExpressions]
 * `MultiAlias` (for `GeneratorOuter` and `Generator`)
 * `Alias` (for `Cast` and `ExtractValue`)
 
-| <<spark-sql-Analyzer-ResolveSubquery.adoc#, ResolveSubquery>>
-| [[ResolveSubquery]] Resolves subquery expressions (i.e. <<spark-sql-Expression-SubqueryExpression-ScalarSubquery.adoc#, ScalarSubquery>>, <<spark-sql-Expression-Exists.adoc#, Exists>> and <<spark-sql-Expression-In.adoc#, In>>)
+| <<spark-sql-Analyzer-ResolveSubquery.md#, ResolveSubquery>>
+| [[ResolveSubquery]] Resolves subquery expressions (i.e. <<spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#, ScalarSubquery>>, <<spark-sql-Expression-Exists.md#, Exists>> and <<spark-sql-Expression-In.md#, In>>)
 
-| <<spark-sql-Analyzer-ResolveWindowOrder.adoc#, ResolveWindowOrder>>
+| <<spark-sql-Analyzer-ResolveWindowOrder.md#, ResolveWindowOrder>>
 | [[ResolveWindowOrder]]
 
-| link:spark-sql-Analyzer-ResolveWindowFrame.adoc[ResolveWindowFrame]
-| [[ResolveWindowFrame]] Resolves link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] expressions
+| spark-sql-Analyzer-ResolveWindowFrame.md[ResolveWindowFrame]
+| [[ResolveWindowFrame]] Resolves spark-sql-Expression-WindowExpression.md[WindowExpression] expressions
 
 | ResolveNaturalAndUsingJoin
 | [[ResolveNaturalAndUsingJoin]]
 
-| <<spark-sql-Analyzer-ExtractWindowExpressions.adoc#, ExtractWindowExpressions>>
+| <<spark-sql-Analyzer-ExtractWindowExpressions.md#, ExtractWindowExpressions>>
 | [[ExtractWindowExpressions]]
 
 | GlobalAggregates
-| [[GlobalAggregates]] Resolves (aka _replaces_) `Project` operators with [AggregateExpression](expressions/AggregateExpression.md) that are not link:spark-sql-Expression-WindowExpression.adoc[WindowExpression] with `Aggregate` unary logical operators.
+| [[GlobalAggregates]] Resolves (aka _replaces_) `Project` operators with [AggregateExpression](expressions/AggregateExpression.md) that are not spark-sql-Expression-WindowExpression.md[WindowExpression] with `Aggregate` unary logical operators.
 
 | ResolveAggregateFunctions
 a| [[ResolveAggregateFunctions]] Resolves aggregate functions in `Filter` and `Sort` operators
 
 NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functions that are resolved by <<ResolveGroupingAnalytics, ResolveGroupingAnalytics>> rule.
 
-| <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>>
-| [[TimeWindowing]] Resolves <<spark-sql-Expression-TimeWindow.adoc#, TimeWindow>> expressions to `Filter` with <<spark-sql-LogicalPlan-Expand.adoc#, Expand>> logical operators.
+| <<spark-sql-Analyzer-TimeWindowing.md#, TimeWindowing>>
+| [[TimeWindowing]] Resolves <<spark-sql-Expression-TimeWindow.md#, TimeWindow>> expressions to `Filter` with <<spark-sql-LogicalPlan-Expand.md#, Expand>> logical operators.
 
-| <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>>
-| [[ResolveInlineTables]] Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.adoc#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.adoc#, LocalRelations>>
+| <<spark-sql-Analyzer-ResolveInlineTables.md#, ResolveInlineTables>>
+| [[ResolveInlineTables]] Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelations>>
 
-| <<spark-sql-TypeCoercion.adoc#typeCoercionRules, TypeCoercion.typeCoercionRules>>
+| <<spark-sql-TypeCoercion.md#typeCoercionRules, TypeCoercion.typeCoercionRules>>
 | [[typeCoercionRules]] Type coercion rules
 
 | <<extendedResolutionRules, extendedResolutionRules>>
@@ -294,7 +294,7 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| [[View]] View
 ^.^| `Once`
-| [[AliasViewChild]] <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>>
+| [[AliasViewChild]] <<spark-sql-Analyzer-AliasViewChild.md#, AliasViewChild>>
 |
 
 ^.^| Nondeterministic
@@ -304,7 +304,7 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| UDF
 ^.^| `Once`
-| [[HandleNullInputsForUDF]] link:spark-sql-Analyzer-HandleNullInputsForUDF.adoc[HandleNullInputsForUDF]
+| [[HandleNullInputsForUDF]] spark-sql-Analyzer-HandleNullInputsForUDF.md[HandleNullInputsForUDF]
 |
 
 ^.^| FixNullability
@@ -315,11 +315,11 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 ^.^| ResolveTimeZone
 ^.^| `Once`
 | ResolveTimeZone
-| Replaces `TimeZoneAwareExpression` with no timezone with one with link:spark-sql-CatalystConf.adoc#sessionLocalTimeZone[session-local time zone].
+| Replaces `TimeZoneAwareExpression` with no timezone with one with spark-sql-CatalystConf.md#sessionLocalTimeZone[session-local time zone].
 
 ^.^| [[Cleanup]] Cleanup
 ^.^| <<fixedPoint, FixedPoint>>
-| <<spark-sql-Analyzer-CleanupAliases.adoc#, CleanupAliases>>
+| <<spark-sql-Analyzer-CleanupAliases.md#, CleanupAliases>>
 | [[CleanupAliases]]
 |===
 
@@ -329,13 +329,13 @@ TIP: Consult the https://github.com/apache/spark/blob/master/sql/catalyst/src/ma
 
 `Analyzer` takes the following when created:
 
-* [[catalog]] link:spark-sql-SessionCatalog.adoc[SessionCatalog]
-* [[conf]] link:spark-sql-CatalystConf.adoc[CatalystConf]
+* [[catalog]] spark-sql-SessionCatalog.md[SessionCatalog]
+* [[conf]] spark-sql-CatalystConf.md[CatalystConf]
 * [[maxIterations]] Maximum number of iterations (of the <<fixedPoint, FixedPoint>> rule batches, i.e. <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>>)
 
 `Analyzer` initializes the <<internal-registries, internal registries and counters>>.
 
-NOTE: `Analyzer` can also be created without specifying the <<maxIterations, maxIterations>> argument which is then configured using link:spark-sql-CatalystConf.adoc#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
+NOTE: `Analyzer` can also be created without specifying the <<maxIterations, maxIterations>> argument which is then configured using spark-sql-CatalystConf.md#optimizerMaxIterations[optimizerMaxIterations] configuration setting.
 
 === [[resolver]] `resolver` Method
 
@@ -344,7 +344,7 @@ NOTE: `Analyzer` can also be created without specifying the <<maxIterations, max
 resolver: Resolver
 ----
 
-`resolver` requests <<conf, CatalystConf>> for link:spark-sql-CatalystConf.adoc#resolver[Resolver].
+`resolver` requests <<conf, CatalystConf>> for spark-sql-CatalystConf.md#resolver[Resolver].
 
 NOTE: `Resolver` is a mere function of two `String` parameters that returns `true` if both refer to the same entity (i.e. for case insensitive equality).
 
@@ -389,4 +389,4 @@ executeAndCheck(plan: LogicalPlan): LogicalPlan
 
 `executeAndCheck`...FIXME
 
-NOTE: `executeAndCheck` is used exclusively when `QueryExecution` is requested for the <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>.
+NOTE: `executeAndCheck` is used exclusively when `QueryExecution` is requested for the <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>>.

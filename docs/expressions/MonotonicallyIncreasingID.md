@@ -2,7 +2,7 @@ title: MonotonicallyIncreasingID
 
 # MonotonicallyIncreasingID Nondeterministic Leaf Expression
 
-`MonotonicallyIncreasingID` is a <<spark-sql-Expression-Nondeterministic.adoc#, non-deterministic>> <<expressions/Expression.md#LeafExpression, leaf expression>> that is the internal representation of the `monotonically_increasing_id` <<spark-sql-functions.adoc#monotonically_increasing_id, standard>> and <<spark-sql-FunctionRegistry.adoc#monotonically_increasing_id, SQL>> functions.
+`MonotonicallyIncreasingID` is a <<spark-sql-Expression-Nondeterministic.md#, non-deterministic>> <<expressions/Expression.md#LeafExpression, leaf expression>> that is the internal representation of the `monotonically_increasing_id` <<spark-sql-functions.md#monotonically_increasing_id, standard>> and <<spark-sql-FunctionRegistry.md#monotonically_increasing_id, SQL>> functions.
 
 As a `Nondeterministic` expression, `MonotonicallyIncreasingID` requires explicit <<initializeInternal, initialization>> (with the current partition index) before <<evalInternal, evaluating a value>>.
 
@@ -31,7 +31,7 @@ count_0++;
 ----
 
 [[dataType]]
-`MonotonicallyIncreasingID` uses <<spark-sql-DataType.adoc#LongType, LongType>> as the <<expressions/Expression.md#dataType, data type>> of the result of evaluating itself.
+`MonotonicallyIncreasingID` uses <<spark-sql-DataType.md#LongType, LongType>> as the <<expressions/Expression.md#dataType, data type>> of the result of evaluating itself.
 
 [[nullable]]
 `MonotonicallyIncreasingID` is never <<expressions/Expression.md#nullable, nullable>>.
@@ -42,9 +42,9 @@ count_0++;
 [[sql]]
 `MonotonicallyIncreasingID` uses *monotonically_increasing_id()* for the <<expressions/Expression.md#sql, SQL representation>>.
 
-`MonotonicallyIncreasingID` is <<creating-instance, created>> when <<spark-sql-functions.adoc#monotonically_increasing_id, monotonically_increasing_id>> standard function is used in a structured query.
+`MonotonicallyIncreasingID` is <<creating-instance, created>> when <<spark-sql-functions.md#monotonically_increasing_id, monotonically_increasing_id>> standard function is used in a structured query.
 
-`MonotonicallyIncreasingID` is <<spark-sql-FunctionRegistry.adoc#expressions, registered>> as `monotonically_increasing_id` SQL function.
+`MonotonicallyIncreasingID` is <<spark-sql-FunctionRegistry.md#expressions, registered>> as `monotonically_increasing_id` SQL function.
 
 [[creating-instance]]
 `MonotonicallyIncreasingID` takes no input parameters when created.
@@ -76,13 +76,13 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addMutableState, add a mutable state>> as `count` name and `long` Java type.
+`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addMutableState, add a mutable state>> as `count` name and `long` Java type.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addImmutableStateIfNotExists, add an immutable state (unless exists already)>> as `partitionMask` name and `long` Java type.
+`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addImmutableStateIfNotExists, add an immutable state (unless exists already)>> as `partitionMask` name and `long` Java type.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[countTerm] = 0L;` statement.
+`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[countTerm] = 0L;` statement.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.adoc#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[partitionMaskTerm] = ((long) partitionIndex) << 33;` statement.
+`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[partitionMaskTerm] = ((long) partitionIndex) << 33;` statement.
 
 In the end, `doGenCode` returns the input `ExprCode` with the `code` as follows and `isNull` property disabled (`false`):
 
@@ -98,7 +98,7 @@ final [dataType] [value] = [partitionMaskTerm] + [countTerm];
 initializeInternal(input: InternalRow): Long
 ----
 
-NOTE: `initializeInternal` is part of <<spark-sql-Expression-Nondeterministic.adoc#initializeInternal, Nondeterministic Contract>> to initialize a `Nondeterministic` expression.
+NOTE: `initializeInternal` is part of <<spark-sql-Expression-Nondeterministic.md#initializeInternal, Nondeterministic Contract>> to initialize a `Nondeterministic` expression.
 
 `initializeInternal` simply sets the <<count, count>> to `0` and the <<partitionMask, partitionMask>> to `partitionIndex.toLong << 33`.
 
@@ -117,7 +117,7 @@ scala> println(partitionMask.toBinaryString)
 evalInternal(input: InternalRow): Long
 ----
 
-NOTE: `evalInternal` is part of <<spark-sql-Expression-Nondeterministic.adoc#evalInternal, Nondeterministic Contract>> to evaluate the value of a `Nondeterministic` expression.
+NOTE: `evalInternal` is part of <<spark-sql-Expression-Nondeterministic.md#evalInternal, Nondeterministic Contract>> to evaluate the value of a `Nondeterministic` expression.
 
 `evalInternal` remembers the current value of the <<count, count>> and increments it.
 

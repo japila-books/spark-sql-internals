@@ -2,17 +2,17 @@ title: ShuffledHashJoinExec
 
 # ShuffledHashJoinExec Binary Physical Operator for Shuffled Hash Join
 
-`ShuffledHashJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *shuffled hash join*.
+`ShuffledHashJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *shuffled hash join*.
 
 `ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed and link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off.
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a spark-sql-LogicalPlan-Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed and spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off.
 
 [NOTE]
 ====
-link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+link:spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
 
-That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[sort merge join] over shuffled hash join.
+That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers spark-sql-SparkPlan-SortMergeJoinExec.md[sort merge join] over shuffled hash join.
 
 In other words, you will _hardly_ see shuffled hash joins in your structured queries unless you turn `spark.sql.join.preferSortMergeJoin` on.
 ====
@@ -21,7 +21,7 @@ Beside the `spark.sql.join.preferSortMergeJoin` configuration property one of th
 
 * (For a right build side, i.e. `BuildRight`) [canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight), [canBuildLocalHashMap](../execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) for the right join side and finally the right join side is [at least three times smaller](../execution-planning-strategies/JoinSelection.md#muchSmaller) than the left side
 
-* (For a right build side, i.e. `BuildRight`) Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable], i.e. cannot be sorted
+* (For a right build side, i.e. `BuildRight`) Left join keys are *not* spark-sql-SparkPlan-SortMergeJoinExec.md#orderable[orderable], i.e. cannot be sorted
 
 * (For a left build side, i.e. `BuildLeft`) [canBuildLeft](../execution-planning-strategies/JoinSelection.md#canBuildLeft), [canBuildLocalHashMap](../execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) for left join side and finally left join side is [at least three times smaller](../execution-planning-strategies/JoinSelection.md#muchSmaller) than right
 
@@ -122,8 +122,8 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 | Left Child
 | Right Child
 
-| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
-| link:spark-sql-Distribution-HashClusteredDistribution.adoc[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
+| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
+| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
@@ -133,13 +133,13 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` requests link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] physical operator to link:SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
+`doExecute` requests spark-sql-HashJoin.md#streamedPlan[streamedPlan] physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
 
-`doExecute` requests link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operator to link:SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
+`doExecute` requests spark-sql-HashJoin.md#buildPlan[buildPlan] physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
 
-`doExecute` requests link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] physical operator's `RDD[InternalRow]` to zip partition-wise with link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operator's `RDD[InternalRow]` (using `RDD.zipPartitions` method with `preservesPartitioning` flag disabled).
+`doExecute` requests spark-sql-HashJoin.md#streamedPlan[streamedPlan] physical operator's `RDD[InternalRow]` to zip partition-wise with spark-sql-HashJoin.md#buildPlan[buildPlan] physical operator's `RDD[InternalRow]` (using `RDD.zipPartitions` method with `preservesPartitioning` flag disabled).
 
 [NOTE]
 ====
@@ -162,7 +162,7 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 
 `doExecute` uses `RDD.zipPartitions` with a function applied to zipped partitions that takes two iterators of rows from the partitions of `streamedPlan` and `buildPlan`.
 
-For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and link:spark-sql-HashJoin.adoc#join[join] the `streamedPlan` partition iterator, the link:spark-sql-HashedRelation.adoc[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
+For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and spark-sql-HashJoin.md#join[join] the `streamedPlan` partition iterator, the spark-sql-HashedRelation.md[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
 
 === [[buildHashedRelation]] Building HashedRelation for Internal Rows -- `buildHashedRelation` Internal Method
 
@@ -171,24 +171,24 @@ For every partition (and pairs of rows from the RDD), the function <<buildHashed
 buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
 ----
 
-`buildHashedRelation` creates a link:spark-sql-HashedRelation.adoc#apply[HashedRelation] (for the input `iter` iterator of `InternalRows`, link:spark-sql-HashJoin.adoc#buildKeys[buildKeys] and the current `TaskMemoryManager`).
+`buildHashedRelation` creates a spark-sql-HashedRelation.md#apply[HashedRelation] (for the input `iter` iterator of `InternalRows`, spark-sql-HashJoin.md#buildKeys[buildKeys] and the current `TaskMemoryManager`).
 
 NOTE: `buildHashedRelation` uses `TaskContext.get()` to access the current `TaskContext` that in turn is used to access the `TaskMemoryManager`.
 
 `buildHashedRelation` records the time to create the `HashedRelation` as <<buildTime, buildTime>>.
 
-`buildHashedRelation` requests the `HashedRelation` for link:spark-sql-KnownSizeEstimation.adoc#estimatedSize[estimatedSize] that is recorded as <<buildDataSize, buildDataSize>>.
+`buildHashedRelation` requests the `HashedRelation` for spark-sql-KnownSizeEstimation.md#estimatedSize[estimatedSize] that is recorded as <<buildDataSize, buildDataSize>>.
 
-NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when link:spark-sql-HashJoin.adoc#streamedPlan[streamedPlan] and link:spark-sql-HashJoin.adoc#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
+NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when spark-sql-HashJoin.md#streamedPlan[streamedPlan] and spark-sql-HashJoin.md#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
 
 === [[creating-instance]] Creating ShuffledHashJoinExec Instance
 
 `ShuffledHashJoinExec` takes the following when created:
 
-* [[leftKeys]] Left join key link:expressions/Expression.md[expressions]
-* [[rightKeys]] Right join key link:expressions/Expression.md[expressions]
-* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
+* [[leftKeys]] Left join key expressions/Expression.md[expressions]
+* [[rightKeys]] Right join key expressions/Expression.md[expressions]
+* [[joinType]] spark-sql-joins.md#join-types[Join type]
 * [[buildSide]] `BuildSide`
-* [[condition]] Optional join condition link:expressions/Expression.md[expression]
-* [[left]] Left link:SparkPlan.md[physical operator]
-* [[right]] Right link:SparkPlan.md[physical operator]
+* [[condition]] Optional join condition expressions/Expression.md[expression]
+* [[left]] Left SparkPlan.md[physical operator]
+* [[right]] Right SparkPlan.md[physical operator]

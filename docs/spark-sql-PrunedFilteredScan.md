@@ -28,10 +28,10 @@ In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data
 Used exclusively when `DataSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a PrunedFilteredScan](execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan).
 |===
 
-NOTE: `PrunedFilteredScan` is a "lighter" and stable version of the <<spark-sql-CatalystScan.adoc#, CatalystScan Contract>>.
+NOTE: `PrunedFilteredScan` is a "lighter" and stable version of the <<spark-sql-CatalystScan.md#, CatalystScan Contract>>.
 
 [[implementations]]
-NOTE: <<spark-sql-JDBCRelation.adoc#, JDBCRelation>> is the one and only known implementation of the <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+NOTE: <<spark-sql-JDBCRelation.md#, JDBCRelation>> is the one and only known implementation of the <<contract, PrunedFilteredScan Contract>> in Spark SQL.
 
 [[example]]
 [source, scala]

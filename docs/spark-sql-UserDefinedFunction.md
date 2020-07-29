@@ -4,9 +4,9 @@
 
 `UserDefinedFunction` is <<creating-instance, created>> when:
 
-* link:spark-sql-functions.adoc#udf[udf] function is executed
+* spark-sql-functions.md#udf[udf] function is executed
 
-* `UDFRegistration` is requested to link:spark-sql-UDFRegistration.adoc#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
+* `UDFRegistration` is requested to spark-sql-UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 
 [source, scala]
 ----
@@ -74,7 +74,7 @@ Used when `UserDefinedFunction` is requested to <<apply, execute>>
 apply(exprs: Column*): Column
 ----
 
-`apply` creates a link:spark-sql-Column.adoc#creating-instance[Column] with link:spark-sql-Expression-ScalaUDF.adoc#creating-instance[ScalaUDF] expression.
+`apply` creates a spark-sql-Column.md#creating-instance[Column] with spark-sql-Expression-ScalaUDF.md#creating-instance[ScalaUDF] expression.
 
 [source, scala]
 ----
@@ -115,7 +115,7 @@ NOTE: `withName` is used when...FIXME
 `UserDefinedFunction` takes the following when created:
 
 * [[f]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output link:spark-sql-DataType.adoc[data type]
-* [[inputTypes]] Input link:spark-sql-DataType.adoc[data types] (if available)
+* [[dataType]] Output spark-sql-DataType.md[data type]
+* [[inputTypes]] Input spark-sql-DataType.md[data types] (if available)
 
 `UserDefinedFunction` initializes the <<internal-registries, internal registries and counters>>.

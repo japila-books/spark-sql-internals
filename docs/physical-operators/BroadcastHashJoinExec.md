@@ -2,11 +2,11 @@ title: BroadcastHashJoinExec
 
 # BroadcastHashJoinExec Binary Physical Operator for Broadcast Hash Join
 
-`BroadcastHashJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *broadcast hash join*.
+`BroadcastHashJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *broadcast hash join*.
 
-`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
+`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
 
-`BroadcastHashJoinExec` supports link:spark-sql-CodegenSupport.adoc[Java code generation] (aka _codegen_).
+`BroadcastHashJoinExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
 
 [source, scala]
 ----
@@ -29,7 +29,7 @@ scala> q.explain
       +- LocalTableScan [id#20, token#21]
 ----
 
-`BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] (with a link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode]) and link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution] (for <<left, left>> and <<right, right>> sides of a join or vice versa).
+`BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] (with a spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode]) and spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution] (for <<left, left>> and <<right, right>> sides of a join or vice versa).
 
 [[metrics]]
 .BroadcastHashJoinExec's Performance Metrics
@@ -51,7 +51,7 @@ scala> q.explain
 .BroadcastHashJoinExec in web UI (Details for Query)
 image::images/spark-sql-BroadcastHashJoinExec-webui-query-details.png[align="center"]
 
-NOTE: The prefix for variable names for `BroadcastHashJoinExec` operators in link:spark-sql-CodegenSupport.adoc[CodegenSupport]-generated code is *bhj*.
+NOTE: The prefix for variable names for `BroadcastHashJoinExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *bhj*.
 
 [source, scala]
 ----
@@ -91,12 +91,12 @@ Generated code:
 | Right Child
 
 | BuildLeft
-| link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] broadcast mode of link:spark-sql-HashJoin.adoc#buildKeys[build join keys]
-| link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] broadcast mode of spark-sql-HashJoin.md#buildKeys[build join keys]
+| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 
 | BuildRight
-| link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
-| link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] with link:spark-sql-HashedRelationBroadcastMode.adoc[HashedRelationBroadcastMode] broadcast mode of link:spark-sql-HashJoin.adoc#buildKeys[build join keys]
+| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
+| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] broadcast mode of spark-sql-HashJoin.md#buildKeys[build join keys]
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
@@ -106,7 +106,7 @@ Generated code:
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute`...FIXME
 
@@ -182,10 +182,10 @@ NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested t
 
 `BroadcastHashJoinExec` takes the following when created:
 
-* [[leftKeys]] Left join key link:expressions/Expression.md[expressions]
-* [[rightKeys]] Right join key link:expressions/Expression.md[expressions]
-* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
+* [[leftKeys]] Left join key expressions/Expression.md[expressions]
+* [[rightKeys]] Right join key expressions/Expression.md[expressions]
+* [[joinType]] spark-sql-joins.md#join-types[Join type]
 * [[buildSide]] `BuildSide`
-* [[condition]] Optional join condition link:expressions/Expression.md[expression]
-* [[left]] Left link:SparkPlan.md[physical operator]
-* [[right]] Right link:SparkPlan.md[physical operator]
+* [[condition]] Optional join condition expressions/Expression.md[expression]
+* [[left]] Left SparkPlan.md[physical operator]
+* [[right]] Right SparkPlan.md[physical operator]

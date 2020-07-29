@@ -2,9 +2,9 @@ title: AnalyzeTableCommand
 
 # AnalyzeTableCommand Logical Command -- Computing Table-Level Statistics
 
-`AnalyzeTableCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
+`AnalyzeTableCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
 
-`AnalyzeTableCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzeTableCommand[ANALYZE TABLE] with no `PARTITION` specification and `FOR COLUMNS` clause.
+`AnalyzeTableCommand` is <<creating-instance, created>> exclusively for spark-sql-SparkSqlAstBuilder.md#AnalyzeTableCommand[ANALYZE TABLE] with no `PARTITION` specification and `FOR COLUMNS` clause.
 
 [source, scala]
 ----
@@ -24,18 +24,18 @@ AnalyzeTableCommand `t1`, false
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
+`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 
-NOTE: `run` uses the input `SparkSession` to access the session-specific link:SparkSession.md#sessionState[SessionState] that in turn gives access to the current link:SessionState.md#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSession.md#sessionState[SessionState] that in turn gives access to the current SessionState.md#catalog[SessionCatalog].
 
 [[total-size-stat]][[row-count-stat]]
-`run` computes the link:spark-sql-CommandUtils.adoc#calculateTotalSize[total size] and, without <<noscan, NOSCAN>> flag, the link:spark-sql-dataset-operators.adoc#count[row count] statistics of the table.
+`run` computes the spark-sql-CommandUtils.md#calculateTotalSize[total size] and, without <<noscan, NOSCAN>> flag, the spark-sql-dataset-operators.md#count[row count] statistics of the table.
 
-NOTE: `run` uses `SparkSession` to link:SparkSession.md#table[find the table] in a metastore.
+NOTE: `run` uses `SparkSession` to SparkSession.md#table[find the table] in a metastore.
 
-In the end, `run` link:spark-sql-SessionCatalog.adoc#alterTableStats[alters table statistics] if link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[different from the existing table statistics in metastore].
+In the end, `run` spark-sql-SessionCatalog.md#alterTableStats[alters table statistics] if spark-sql-CommandUtils.md#compareAndGetNewStats[different from the existing table statistics in metastore].
 
 `run` throws a `AnalysisException` when executed on a view.
 
@@ -69,4 +69,4 @@ spark.sql(sqlText).show
 `AnalyzeTableCommand` takes the following when created:
 
 * [[tableIdent]] `TableIdentifier`
-* [[noscan]] `noscan` flag (enabled by default) that indicates whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not
+* [[noscan]] `noscan` flag (enabled by default) that indicates whether spark-sql-cost-based-optimization.md#NOSCAN[NOSCAN] option was used or not

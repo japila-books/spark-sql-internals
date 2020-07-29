@@ -4,7 +4,7 @@
 
 `EliminateView` is part of the [Finish Analysis](../Optimizer.md#Finish_Analysis) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`EliminateView` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`EliminateView` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -38,14 +38,14 @@ scala> println(afterEliminateView.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` simply removes (eliminates) <<spark-sql-LogicalPlan-View.adoc#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.adoc#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator.
+`apply` simply removes (eliminates) <<spark-sql-LogicalPlan-View.md#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.md#child, child>> logical operator.
 
-`apply` throws an `AssertionError` when the <<spark-sql-LogicalPlan-View.adoc#output, output schema>> of the `View` operator does not match the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-View.adoc#child, child>> logical operator.
+`apply` throws an `AssertionError` when the <<spark-sql-LogicalPlan-View.md#output, output schema>> of the `View` operator does not match the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-View.md#child, child>> logical operator.
 
 ```text
 assertion failed: The output of the child [output] is different from the view output [output]
 ```
 
-NOTE: The assertion should not really happen since <<spark-sql-Analyzer-AliasViewChild.adoc#, AliasViewChild>> logical analysis rule is executed earlier and takes care of not allowing for such difference in the output schema (by throwing an `AnalysisException` earlier).
+NOTE: The assertion should not really happen since <<spark-sql-Analyzer-AliasViewChild.md#, AliasViewChild>> logical analysis rule is executed earlier and takes care of not allowing for such difference in the output schema (by throwing an `AnalysisException` earlier).
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

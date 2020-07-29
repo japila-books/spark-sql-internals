@@ -1,6 +1,6 @@
 # HiveSessionStateBuilder
 
-`HiveSessionStateBuilder` is a concrete link:../BaseSessionStateBuilder.md[builder] to produce a Hive-aware link:../SessionState.md[SessionState] for...FIXME
+`HiveSessionStateBuilder` is a concrete ../BaseSessionStateBuilder.md[builder] to produce a Hive-aware ../SessionState.md[SessionState] for...FIXME
 
 `HiveSessionStateBuilder` comes with Hive-specific <<analyzer, Analyzer>>, <<planner, SparkPlanner>>, <<catalog, HiveSessionCatalog>>, <<externalCatalog, HiveExternalCatalog>> and <<resourceLoader, HiveSessionResourceLoader>>.
 
@@ -20,29 +20,29 @@ image::../images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="cente
 | Description
 
 | <<analyzer-indepth, analyzer>>
-a| [[analyzer]] Hive-specific link:../spark-sql-Analyzer.adoc[logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
+a| [[analyzer]] Hive-specific ../spark-sql-Analyzer.md[logical query plan analyzer] with the <<analyzer-rules, Hive-specific rules>>.
 
 | `catalog`
-a| [[catalog]] link:HiveSessionCatalog.adoc[HiveSessionCatalog] with the following:
+a| [[catalog]] HiveSessionCatalog.md[HiveSessionCatalog] with the following:
 
 * <<externalCatalog, HiveExternalCatalog>>
-* link:../SharedState.md#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
-* New link:HiveMetastoreCatalog.adoc[HiveMetastoreCatalog]
-* link:../BaseSessionStateBuilder.md#functionRegistry[FunctionRegistry]
-* link:../BaseSessionStateBuilder.md#conf[SQLConf]
-* New Hadoop link:../SessionState.md#newHadoopConf[Configuration]
-* link:../BaseSessionStateBuilder.md#sqlParser[ParserInterface]
+* ../SharedState.md#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
+* New HiveMetastoreCatalog.md[HiveMetastoreCatalog]
+* ../BaseSessionStateBuilder.md#functionRegistry[FunctionRegistry]
+* ../BaseSessionStateBuilder.md#conf[SQLConf]
+* New Hadoop ../SessionState.md#newHadoopConf[Configuration]
+* ../BaseSessionStateBuilder.md#sqlParser[ParserInterface]
 * <<resourceLoader, HiveSessionResourceLoader>>
 
 NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalog`
 
-Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:RelationConversions.adoc#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
+Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a RelationConversions.md#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
 | `externalCatalog`
-| [[externalCatalog]] link:HiveExternalCatalog.adoc[HiveExternalCatalog]
+| [[externalCatalog]] HiveExternalCatalog.md[HiveExternalCatalog]
 
 | <<planner-indepth, planner>>
-| [[planner]] link:../spark-sql-SparkPlanner.adoc[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
+| [[planner]] ../spark-sql-SparkPlanner.md[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
 
 | `resourceLoader`
 | [[resourceLoader]] `HiveSessionResourceLoader`
@@ -55,9 +55,9 @@ Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a link:RelationC
 planner: SparkPlanner
 ----
 
-NOTE: `planner` is part of link:../BaseSessionStateBuilder.md#planner[BaseSessionStateBuilder Contract] to create a query planner.
+NOTE: `planner` is part of ../BaseSessionStateBuilder.md#planner[BaseSessionStateBuilder Contract] to create a query planner.
 
-`planner` is a link:../spark-sql-SparkPlanner.adoc[SparkPlanner] with...FIXME
+`planner` is a ../spark-sql-SparkPlanner.md[SparkPlanner] with...FIXME
 
 `planner` uses the <<planner-strategies, Hive-specific strategies>>.
 
@@ -68,8 +68,8 @@ NOTE: `planner` is part of link:../BaseSessionStateBuilder.md#planner[BaseSessio
 | Strategy
 | Description
 
-| link:HiveTableScans.adoc[HiveTableScans]
-| [[HiveTableScans]] Replaces link:HiveTableRelation.adoc[HiveTableRelation] logical operators with link:HiveTableScanExec.adoc[HiveTableScanExec] physical operators
+| HiveTableScans.md[HiveTableScans]
+| [[HiveTableScans]] Replaces HiveTableRelation.md[HiveTableRelation] logical operators with HiveTableScanExec.md[HiveTableScanExec] physical operators
 
 | `Scripts`
 | [[Scripts]]
@@ -82,9 +82,9 @@ NOTE: `planner` is part of link:../BaseSessionStateBuilder.md#planner[BaseSessio
 analyzer: Analyzer
 ----
 
-NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
+NOTE: `analyzer` is part of ../BaseSessionStateBuilder.md#analyzer[BaseSessionStateBuilder Contract] to create a logical query plan analyzer.
 
-`analyzer` is a link:../spark-sql-Analyzer.adoc[Analyzer] with <<catalog, Hive-specific SessionCatalog>> (and link:../BaseSessionStateBuilder.md#conf[SQLConf]).
+`analyzer` is a ../spark-sql-Analyzer.md[Analyzer] with <<catalog, Hive-specific SessionCatalog>> (and ../BaseSessionStateBuilder.md#conf[SQLConf]).
 
 `analyzer` uses the Hive-specific <<extendedResolutionRules, extended resolution>>, <<postHocResolutionRules, postHoc resolution>> and <<extendedCheckRules, extended check>> rules.
 
@@ -95,13 +95,13 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 | Logical Rule
 | Description
 
-| link:ResolveHiveSerdeTable.adoc[ResolveHiveSerdeTable]
+| ResolveHiveSerdeTable.md[ResolveHiveSerdeTable]
 | [[ResolveHiveSerdeTable]]
 
-| link:../spark-sql-Analyzer-FindDataSourceTable.adoc[FindDataSourceTable]
+| ../spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable]
 | [[FindDataSourceTable]]
 
-| link:../spark-sql-Analyzer-ResolveSQLOnFile.adoc[ResolveSQLOnFile]
+| ../spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile]
 | [[ResolveSQLOnFile]]
 
 |===
@@ -113,22 +113,22 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 | Logical Rule
 | Description
 
-| [[DetermineTableStats]] link:DetermineTableStats.adoc[DetermineTableStats]
+| [[DetermineTableStats]] DetermineTableStats.md[DetermineTableStats]
 |
 
-| [[RelationConversions]] link:RelationConversions.adoc[RelationConversions]
+| [[RelationConversions]] RelationConversions.md[RelationConversions]
 |
 
-| [[PreprocessTableCreation]] <<spark-sql-Analyzer-PreprocessTableCreation.adoc#, PreprocessTableCreation>>
+| [[PreprocessTableCreation]] <<spark-sql-Analyzer-PreprocessTableCreation.md#, PreprocessTableCreation>>
 |
 
 | [[PreprocessTableInsertion]] `PreprocessTableInsertion`
 |
 
-| [[DataSourceAnalysis]] link:../spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis]
+| [[DataSourceAnalysis]] ../spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis]
 |
 
-| [[HiveAnalysis]] link:HiveAnalysis.adoc[HiveAnalysis]
+| [[HiveAnalysis]] HiveAnalysis.md[HiveAnalysis]
 |
 |===
 
@@ -150,8 +150,8 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 
 `HiveSessionStateBuilder` takes the following when created:
 
-* [[session]] link:../SparkSession.md[SparkSession]
-* [[parentState]] Optional link:../SessionState.md[SessionState] (default: `None`)
+* [[session]] ../SparkSession.md[SparkSession]
+* [[parentState]] Optional ../SessionState.md[SessionState] (default: `None`)
 
 === [[newBuilder]] Builder Function to Create HiveSessionStateBuilder -- `newBuilder` Method
 
@@ -160,6 +160,6 @@ NOTE: `analyzer` is part of link:../BaseSessionStateBuilder.md#analyzer[BaseSess
 newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
 ----
 
-NOTE: `newBuilder` is part of link:../BaseSessionStateBuilder.md#newBuilder[BaseSessionStateBuilder] contract to...FIXME.
+NOTE: `newBuilder` is part of ../BaseSessionStateBuilder.md#newBuilder[BaseSessionStateBuilder] contract to...FIXME.
 
 `newBuilder`...FIXME

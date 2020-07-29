@@ -1,6 +1,6 @@
 # JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] that link:spark-sql-SparkPlanner.adoc[SparkPlanner] uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
+`JoinSelection` is an spark-sql-SparkStrategy.md[execution planning strategy] that spark-sql-SparkPlanner.md[SparkPlanner] uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
 
 `JoinSelection` firstly <<apply, considers>> join physical operators per whether join keys are used or not. When join keys are used, `JoinSelection` considers <<BroadcastHashJoinExec, BroadcastHashJoinExec>>, <<ShuffledHashJoinExec, ShuffledHashJoinExec>> or <<SortMergeJoinExec, SortMergeJoinExec>> operators. Without join keys, `JoinSelection` considers <<BroadcastNestedLoopJoinExec, BroadcastNestedLoopJoinExec>> or <<CartesianProductExec, CartesianProductExec>>.
 
@@ -11,40 +11,40 @@
 | Physical Join Operator
 | Selection Requirements
 
-| link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec]
+| spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec]
 a| [[BroadcastHashJoinExec]] There are join keys and one of the following holds:
 
-* Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and right join side <<canBroadcast, can be broadcast>>
+* Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and right join side <<canBroadcast, can be broadcast>>
 
-* Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and left join side <<canBroadcast, can be broadcast>>
+* Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and left join side <<canBroadcast, can be broadcast>>
 
-| link:spark-sql-SparkPlan-ShuffledHashJoinExec.adoc[ShuffledHashJoinExec]
+| spark-sql-SparkPlan-ShuffledHashJoinExec.md[ShuffledHashJoinExec]
 a| [[ShuffledHashJoinExec]] There are join keys and one of the following holds:
 
-* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive), <<canBuildLocalHashMap, canBuildLocalHashMap>> for right join side and finally right join side is <<muchSmaller, much smaller>> than left side
+* spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive), <<canBuildLocalHashMap, canBuildLocalHashMap>> for right join side and finally right join side is <<muchSmaller, much smaller>> than left side
 
-* link:spark-sql-properties.adoc#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive), <<canBuildLocalHashMap, canBuildLocalHashMap>> for left join side and finally left join side is <<muchSmaller, much smaller>> than right
+* spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is disabled, the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive), <<canBuildLocalHashMap, canBuildLocalHashMap>> for left join side and finally left join side is <<muchSmaller, much smaller>> than right
 
-* Left join keys are *not* link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
+* Left join keys are *not* spark-sql-SparkPlan-SortMergeJoinExec.md#orderable[orderable]
 
-| link:spark-sql-SparkPlan-SortMergeJoinExec.adoc[SortMergeJoinExec]
-| [[SortMergeJoinExec]] Left join keys are link:spark-sql-SparkPlan-SortMergeJoinExec.adoc#orderable[orderable]
+| spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec]
+| [[SortMergeJoinExec]] Left join keys are spark-sql-SparkPlan-SortMergeJoinExec.md#orderable[orderable]
 
-| link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
+| spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec]
 a| [[BroadcastNestedLoopJoinExec]] There are no join keys and one of the following holds:
 
-* Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and right join side <<canBroadcast, can be broadcast>>
+* Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and right join side <<canBroadcast, can be broadcast>>
 
-* Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and left join side <<canBroadcast, can be broadcast>>
+* Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and left join side <<canBroadcast, can be broadcast>>
 
-| link:spark-sql-SparkPlan-CartesianProductExec.adoc[CartesianProductExec]
-| [[CartesianProductExec]] There are no join keys and link:spark-sql-joins.adoc#join-types[join type] is link:spark-sql-joins.adoc#CROSS[CROSS] or link:spark-sql-joins.adoc#INNER[INNER]
+| spark-sql-SparkPlan-CartesianProductExec.md[CartesianProductExec]
+| [[CartesianProductExec]] There are no join keys and spark-sql-joins.md#join-types[join type] is spark-sql-joins.md#CROSS[CROSS] or spark-sql-joins.md#INNER[INNER]
 
-| link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec]
+| spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec]
 | No other join operator has matched already
 |===
 
-NOTE: `JoinSelection` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure a `Join` logical operator.
+NOTE: `JoinSelection` uses spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure a `Join` logical operator.
 
 === [[muchSmaller]] Is Left-Side Plan At Least 3 Times Smaller Than Right-Side Plan? -- `muchSmaller` Internal Condition
 
@@ -55,7 +55,7 @@ muchSmaller(a: LogicalPlan, b: LogicalPlan): Boolean
 
 `muchSmaller` condition holds when plan `a` is at least 3 times smaller than plan `b`.
 
-Internally, `muchSmaller` link:spark-sql-LogicalPlan.adoc#stats[calculates the estimated statistics for the input logical plans] and compares their physical size in bytes (`sizeInBytes`).
+Internally, `muchSmaller` spark-sql-LogicalPlan.md#stats[calculates the estimated statistics for the input logical plans] and compares their physical size in bytes (`sizeInBytes`).
 
 NOTE: `muchSmaller` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
 
@@ -66,9 +66,9 @@ NOTE: `muchSmaller` is used when `JoinSelection` checks <<join-selection-require
 canBuildLocalHashMap(plan: LogicalPlan): Boolean
 ----
 
-`canBuildLocalHashMap` condition holds for the logical `plan` whose single partition is small enough to build a hash table (i.e. link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] multiplied by link:spark-sql-properties.adoc#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]).
+`canBuildLocalHashMap` condition holds for the logical `plan` whose single partition is small enough to build a hash table (i.e. spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] multiplied by spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]).
 
-Internally, `canBuildLocalHashMap` link:spark-sql-LogicalPlan.adoc#stats[calculates the estimated statistics for the input logical plans] and takes the size in bytes (`sizeInBytes`).
+Internally, `canBuildLocalHashMap` spark-sql-LogicalPlan.md#stats[calculates the estimated statistics for the input logical plans] and takes the size in bytes (`sizeInBytes`).
 
 NOTE: `canBuildLocalHashMap` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
 
@@ -79,11 +79,11 @@ NOTE: `canBuildLocalHashMap` is used when `JoinSelection` checks <<join-selectio
 canBroadcast(plan: LogicalPlan): Boolean
 ----
 
-`canBroadcast` is enabled, i.e. `true`, when the size of the output of the input logical plan (aka _sizeInBytes_) is less than link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] configuration property.
+`canBroadcast` is enabled, i.e. `true`, when the size of the output of the input logical plan (aka _sizeInBytes_) is less than spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] configuration property.
 
-NOTE: link:spark-sql-properties.adoc#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
+NOTE: spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
 
-NOTE: `canBroadcast` uses the total size statistic from link:spark-sql-LogicalPlanStats.adoc#stats[Statistics] of a logical operator.
+NOTE: `canBroadcast` uses the total size statistic from spark-sql-LogicalPlanStats.md#stats[Statistics] of a logical operator.
 
 NOTE: `canBroadcast` is used when `JoinSelection` is requested to <<canBroadcastBySizes, canBroadcastBySizes>> and <<broadcastSideBySizes, selects the build side per join type and total size statistic of join sides>>.
 
@@ -96,13 +96,13 @@ canBroadcastByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): 
 
 `canBroadcastByHints` is positive (i.e. `true`) when either condition holds:
 
-. Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is on
 
-. Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is on
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is on
 
 Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
 
-NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 
 === [[broadcastSideByHints]] Selecting Build Side Per Join Type and Broadcast Hints -- `broadcastSideByHints` Internal Method
 
@@ -113,13 +113,13 @@ broadcastSideByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan):
 
 `broadcastSideByHints` computes `buildLeft` and `buildRight` flags:
 
-* `buildLeft` flag is positive (i.e. `true`) when the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and the `left` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is positive
+* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and the `left` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is positive
 
-* `buildRight` flag is positive (i.e. `true`) when the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and the `right` operator's link:spark-sql-HintInfo.adoc#broadcast[broadcast] hint flag is positive
+* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and the `right` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is positive
 
 In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
 
-NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 
 === [[broadcastSide]] Choosing Join Side to Broadcast -- `broadcastSide` Internal Method
 
@@ -132,15 +132,15 @@ broadcastSide(
   right: LogicalPlan): BuildSide
 ----
 
-`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per link:spark-sql-Statistics.adoc#sizeInBytes[total size] when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
+`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per spark-sql-Statistics.md#sizeInBytes[total size] when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
 
 `broadcastSide` gives `BuildRight` when `canBuildRight` is positive.
 
 `broadcastSide` gives `BuildLeft` when `canBuildLeft` is positive.
 
-When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per link:spark-sql-Statistics.adoc#sizeInBytes[total size] (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
+When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per spark-sql-Statistics.md#sizeInBytes[total size] (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
 
-NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSideByHints, broadcastSideByHints>>, <<broadcastSideBySizes, select the build side per join type and total size statistic of join sides>>, and <<apply, execute>> (and considers a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSideByHints, broadcastSideByHints>>, <<broadcastSideBySizes, select the build side per join type and total size statistic of join sides>>, and <<apply, execute>> (and considers a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 
 === [[canBuildLeft]] Checking If Join Type Allows For Left Join Side As Build Side -- `canBuildLeft` Internal Condition
 
@@ -149,7 +149,7 @@ NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSi
 canBuildLeft(joinType: JoinType): Boolean
 ----
 
-`canBuildLeft` is positive (i.e. `true`) for link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] and link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] join types. Otherwise, `canBuildLeft` is negative (i.e. `false`).
+`canBuildLeft` is positive (i.e. `true`) for spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] and spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] join types. Otherwise, `canBuildLeft` is negative (i.e. `false`).
 
 NOTE: `canBuildLeft` is used when `JoinSelection` is requested to <<canBroadcastByHints, canBroadcastByHints>>, <<broadcastSideByHints, broadcastSideByHints>>, <<canBroadcastBySizes, canBroadcastBySizes>>, <<broadcastSideBySizes, broadcastSideBySizes>> and <<apply, execute>> (when selecting a <<ShuffledHashJoinExec>> physical operator).
 
@@ -162,7 +162,7 @@ canBuildRight(joinType: JoinType): Boolean
 
 `canBuildRight` is positive (i.e. `true`) if the input join type is one of the following:
 
-* link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin]
+* spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin]
 
 Otherwise, `canBuildRight` is negative (i.e. `false`).
 
@@ -177,13 +177,13 @@ canBroadcastBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): 
 
 `canBroadcastBySizes` is positive (i.e. `true`) when either condition holds:
 
-. Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
 
-. Join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
 
 Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
 
-NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 
 === [[broadcastSideBySizes]] Selecting Build Side Per Join Type and Total Size Statistic of Join Sides -- `broadcastSideBySizes` Internal Method
 
@@ -194,13 +194,13 @@ broadcastSideBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan):
 
 `broadcastSideBySizes` computes `buildLeft` and `buildRight` flags:
 
-* `buildLeft` flag is positive (i.e. `true`) when the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER] or link:spark-sql-joins.adoc#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
+* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
 
-* `buildRight` flag is positive (i.e. `true`) when the join type is link:spark-sql-joins.adoc#CROSS[CROSS], link:spark-sql-joins.adoc#INNER[INNER], link:spark-sql-joins.adoc#LEFT_ANTI[LEFT ANTI], link:spark-sql-joins.adoc#LEFT_OUTER[LEFT OUTER], link:spark-sql-joins.adoc#LEFT_SEMI[LEFT SEMI] or link:spark-sql-joins.adoc#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
+* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
 
 In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
 
-NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc[BroadcastHashJoinExec] or a link:spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.adoc[BroadcastNestedLoopJoinExec] physical operator).
+NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 
 === [[apply]] Applying JoinSelection Strategy to Logical Plan (Executing JoinSelection) -- `apply` Method
 
@@ -209,15 +209,15 @@ NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<appl
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of link:catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of link:SparkPlan.md[SparkPlans] for a given link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
 
-`apply` uses link:spark-sql-ExtractEquiJoinKeys.adoc[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
+`apply` uses spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
 
 ==== [[apply-BroadcastHashJoinExec]] Considering BroadcastHashJoinExec Physical Operator
 
-`apply` gives a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastByHints, should be broadcast per join type and broadcast hints used>> (for the join type and left or right side of the join). `apply` <<broadcastSideByHints, selects the build side per join type and broadcast hints>>.
+`apply` gives a spark-sql-SparkPlan-BroadcastHashJoinExec.md#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastByHints, should be broadcast per join type and broadcast hints used>> (for the join type and left or right side of the join). `apply` <<broadcastSideByHints, selects the build side per join type and broadcast hints>>.
 
-`apply` gives a link:spark-sql-SparkPlan-BroadcastHashJoinExec.adoc#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastBySizes, should be broadcast per join type and size of join sides>> (for the join type and left or right side of the join). `apply` <<broadcastSideBySizes, selects the build side per join type and total size statistic of join sides>>.
+`apply` gives a spark-sql-SparkPlan-BroadcastHashJoinExec.md#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastBySizes, should be broadcast per join type and size of join sides>> (for the join type and left or right side of the join). `apply` <<broadcastSideBySizes, selects the build side per join type and total size statistic of join sides>>.
 
 ==== [[apply-ShuffledHashJoinExec]] Considering ShuffledHashJoinExec Physical Operator
 

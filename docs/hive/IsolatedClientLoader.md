@@ -5,7 +5,7 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`IsolatedClientLoader` is <<creating-instance, created>> for `HiveUtils` utility for link:HiveUtils.adoc#newClientForExecution[newClientForExecution] and link:HiveUtils.adoc#newClientForMetadata[newClientForMetadata].
+`IsolatedClientLoader` is <<creating-instance, created>> for `HiveUtils` utility for HiveUtils.md#newClientForExecution[newClientForExecution] and HiveUtils.md#newClientForMetadata[newClientForMetadata].
 
 [[logging]]
 [TIP]
@@ -18,7 +18,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.client.IsolatedClientLoader=ALL
 ```
 
-Refer to link:../spark-logging.adoc[Logging].
+Refer to ../spark-logging.md[Logging].
 ====
 
 === [[creating-instance]] Creating IsolatedClientLoader Instance
@@ -66,7 +66,7 @@ Acceptable versions and synonyms:
 ====
 `hiveVersion` is used when:
 
-* `HiveUtils` utility is used to link:HiveUtils.adoc#newClientForExecution[newClientForExecution] and link:HiveUtils.adoc#newClientForMetadata[newClientForMetadata]
+* `HiveUtils` utility is used to HiveUtils.md#newClientForExecution[newClientForExecution] and HiveUtils.md#newClientForMetadata[newClientForMetadata]
 
 * `IsolatedClientLoader` utility is used for an <<forVersion, IsolatedClientLoader for a given Hive metastore version>>
 ====
@@ -89,7 +89,7 @@ forVersion(
 
 `forVersion`...FIXME
 
-NOTE: `forVersion` is used when `HiveUtils` utility is used to link:HiveUtils.adoc#newClientForMetadata[newClientForMetadata].
+NOTE: `forVersion` is used when `HiveUtils` utility is used to HiveUtils.md#newClientForMetadata[newClientForMetadata].
 
 === [[createClient]] Creating HiveClient -- `createClient` Method
 
@@ -104,7 +104,7 @@ createClient(): HiveClient
 ====
 `createClient` is used when:
 
-* `HiveUtils` utility is used to link:HiveUtils.adoc#newClientForExecution[newClientForExecution] and link:HiveUtils.adoc#newClientForMetadata[newClientForMetadata]
+* `HiveUtils` utility is used to HiveUtils.md#newClientForExecution[newClientForExecution] and HiveUtils.md#newClientForMetadata[newClientForMetadata]
 
-* `HiveClientImpl` is requested for a link:HiveClientImpl.adoc#newSession[new HiveClientImpl]
+* `HiveClientImpl` is requested for a HiveClientImpl.md#newSession[new HiveClientImpl]
 ====

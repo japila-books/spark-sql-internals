@@ -1,7 +1,7 @@
 # TextFileFormat
 
 [[shortName]]
-`TextFileFormat` is a link:spark-sql-TextBasedFileFormat.adoc[TextBasedFileFormat] for *text* format.
+`TextFileFormat` is a spark-sql-TextBasedFileFormat.md[TextBasedFileFormat] for *text* format.
 
 [source, scala]
 ----
@@ -24,7 +24,7 @@ spark.read.text("text-datasets")
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be either one of the link:spark-sql-CompressionCodecs.adoc#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
 
 | [[wholetext]] `wholetext`
 | `false`
@@ -42,7 +42,7 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of link:spark-sql-FileFormat.adoc#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to link:spark-sql-FileFormatWriter.adoc#write[write the result of a structured query].
+NOTE: `prepareWrite` is part of spark-sql-FileFormat.md#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to spark-sql-FileFormatWriter.md#write[write the result of a structured query].
 
 `prepareWrite`...FIXME
 
@@ -60,7 +60,7 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of link:spark-sql-FileFormat.adoc#buildReader[FileFormat Contract] to...FIXME
+NOTE: `buildReader` is part of spark-sql-FileFormat.md#buildReader[FileFormat Contract] to...FIXME
 
 `buildReader`...FIXME
 

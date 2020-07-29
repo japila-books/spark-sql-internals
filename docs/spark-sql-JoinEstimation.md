@@ -2,17 +2,17 @@
 
 `JoinEstimation` is a utility that <<estimate, computes statistics estimates and query hints of a Join logical operator>>.
 
-`JoinEstimation` is <<creating-instance, created>> exclusively for `BasicStatsPlanVisitor` to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics of a Join logical operator].
+`JoinEstimation` is <<creating-instance, created>> exclusively for `BasicStatsPlanVisitor` to spark-sql-BasicStatsPlanVisitor.md#visitJoin[estimate statistics of a Join logical operator].
 
-NOTE: `BasicStatsPlanVisitor` is used only when link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[cost-based optimization is enabled].
+NOTE: `BasicStatsPlanVisitor` is used only when spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization is enabled].
 
 [[creating-instance]]
 [[join]]
-`JoinEstimation` takes a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator when created.
+`JoinEstimation` takes a spark-sql-LogicalPlan-Join.md[Join] logical operator when created.
 
 [[leftStats]]
 [[rightStats]]
-When <<creating-instance, created>>, `JoinEstimation` immediately takes the link:spark-sql-LogicalPlanStats.adoc#stats[estimated statistics and query hints] of the link:spark-sql-LogicalPlan-Join.adoc#left[left] and link:spark-sql-LogicalPlan-Join.adoc#right[right] sides of the <<join, Join>> logical operator.
+When <<creating-instance, created>>, `JoinEstimation` immediately takes the spark-sql-LogicalPlanStats.md#stats[estimated statistics and query hints] of the spark-sql-LogicalPlan-Join.md#left[left] and spark-sql-LogicalPlan-Join.md#right[right] sides of the <<join, Join>> logical operator.
 
 [source, scala]
 ----
@@ -115,7 +115,7 @@ scala> println(stats.get.simpleString)
 Some(sizeInBytes=1200.0 B, rowCount=50, hints=none)
 ----
 
-`JoinEstimation` can <<estimate, estimate statistics and query hints of a Join logical operator>> with the following link:spark-sql-LogicalPlan-Join.adoc#joinType[join types]:
+`JoinEstimation` can <<estimate, estimate statistics and query hints of a Join logical operator>> with the following spark-sql-LogicalPlan-Join.md#joinType[join types]:
 
 * `Inner`, `Cross`, `LeftOuter`, `RightOuter`, `FullOuter`, `LeftSemi` and `LeftAnti`
 
@@ -197,7 +197,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation=DEBUG
 ```
 
-Refer to link:spark-logging.adoc[Logging].
+Refer to spark-logging.md[Logging].
 ====
 
 === [[estimateInnerOuterJoin]] `estimateInnerOuterJoin` Internal Method
@@ -209,7 +209,7 @@ estimateInnerOuterJoin(): Option[Statistics]
 
 `estimateInnerOuterJoin` destructures <<join, Join logical operator>> into a join type with the left and right keys.
 
-`estimateInnerOuterJoin` simply returns `None` (i.e. _nothing_) when either side of the <<join, Join logical operator>> have no link:spark-sql-EstimationUtils.adoc#rowCountsExist[row count statistic].
+`estimateInnerOuterJoin` simply returns `None` (i.e. _nothing_) when either side of the <<join, Join logical operator>> have no spark-sql-EstimationUtils.md#rowCountsExist[row count statistic].
 
 NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of a Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
@@ -264,23 +264,23 @@ NOTE: `computeByHistogram` is used exclusively when `JoinEstimation` is requeste
 estimateLeftSemiAntiJoin(): Option[Statistics]
 ----
 
-`estimateLeftSemiAntiJoin` estimates statistics of the <<join, Join>> logical operator only when link:spark-sql-EstimationUtils.adoc#rowCountsExist[estimated row count statistic is available]. Otherwise, `estimateLeftSemiAntiJoin` simply returns `None` (i.e. no statistics estimated).
+`estimateLeftSemiAntiJoin` estimates statistics of the <<join, Join>> logical operator only when spark-sql-EstimationUtils.md#rowCountsExist[estimated row count statistic is available]. Otherwise, `estimateLeftSemiAntiJoin` simply returns `None` (i.e. no statistics estimated).
 
-NOTE: link:spark-sql-cost-based-optimization.adoc#rowCount[row count] statistic of a table is available only after link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
+NOTE: spark-sql-cost-based-optimization.md#rowCount[row count] statistic of a table is available only after spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
 
-If available, `estimateLeftSemiAntiJoin` takes the link:spark-sql-Statistics.adoc#rowCount[estimated row count statistic] of the link:spark-sql-LogicalPlan-Join.adoc#left[left side] of the <<join, Join>> operator.
+If available, `estimateLeftSemiAntiJoin` takes the spark-sql-Statistics.md#rowCount[estimated row count statistic] of the spark-sql-LogicalPlan-Join.md#left[left side] of the <<join, Join>> operator.
 
-NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute link:spark-sql-cost-based-optimization.adoc#rowCount[row count] statistics.
+NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute spark-sql-cost-based-optimization.md#rowCount[row count] statistics.
 
-NOTE: Use link:spark-sql-cost-based-optimization.adoc#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate link:spark-sql-Statistics.adoc#attributeStats[column (equi-height) histograms] for more accurate estimations.
+NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate spark-sql-Statistics.md#attributeStats[column (equi-height) histograms] for more accurate estimations.
 
-In the end, `estimateLeftSemiAntiJoin` creates a new link:spark-sql-Statistics.adoc#creating-instance[Statistics] with the following estimates:
+In the end, `estimateLeftSemiAntiJoin` creates a new spark-sql-Statistics.md#creating-instance[Statistics] with the following estimates:
 
-. link:spark-sql-Statistics.adoc#sizeInBytes[Total size (in bytes)] is the link:spark-sql-EstimationUtils.adoc#getOutputSize[output size] for the link:spark-sql-LogicalPlan-Join.adoc#output[output schema] of the join, the row count statistic (aka _output rows_) and link:spark-sql-Statistics.adoc#attributeStats[column histograms].
+. spark-sql-Statistics.md#sizeInBytes[Total size (in bytes)] is the spark-sql-EstimationUtils.md#getOutputSize[output size] for the spark-sql-LogicalPlan-Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and spark-sql-Statistics.md#attributeStats[column histograms].
 
-. link:spark-sql-Statistics.adoc#rowCount[Row count] is exactly the row count of the left side
+. spark-sql-Statistics.md#rowCount[Row count] is exactly the row count of the left side
 
-. link:spark-sql-Statistics.adoc#attributeStats[Column histograms] is exactly the column histograms of the left side
+. spark-sql-Statistics.md#attributeStats[Column histograms] is exactly the column histograms of the left side
 
 NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints>> for `LeftSemi` and `LeftAnti` joins.
 
@@ -291,7 +291,7 @@ NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is re
 estimate: Option[Statistics]
 ----
 
-`estimate` estimates statistics and query hints of the <<join, Join>> logical operator per link:spark-sql-LogicalPlan-Join.adoc#joinType[join type]:
+`estimate` estimates statistics and query hints of the <<join, Join>> logical operator per spark-sql-LogicalPlan-Join.md#joinType[join type]:
 
 * For `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` join types, `estimate` <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
 
@@ -303,4 +303,4 @@ For other join types, `estimate` prints out the following DEBUG message to the l
 [CBO] Unsupported join type: [joinType]
 ```
 
-NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to link:spark-sql-BasicStatsPlanVisitor.adoc#visitJoin[estimate statistics and query hints of a Join logical operator].
+NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to spark-sql-BasicStatsPlanVisitor.md#visitJoin[estimate statistics and query hints of a Join logical operator].

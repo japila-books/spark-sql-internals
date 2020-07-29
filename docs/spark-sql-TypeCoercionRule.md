@@ -1,6 +1,6 @@
 # TypeCoercionRule -- Type Coercion Rules
 
-`TypeCoercionRule` is the <<contract, contract>> of <<implementations, logical rules>> to <<coerceTypes, coerce>> and <<propagateTypes, propagate>> types in <<spark-sql-LogicalPlan.adoc#, logical plans>>.
+`TypeCoercionRule` is the <<contract, contract>> of <<implementations, logical rules>> to <<coerceTypes, coerce>> and <<propagateTypes, propagate>> types in <<spark-sql-LogicalPlan.md#, logical plans>>.
 
 [[contract]]
 [source, scala]
@@ -21,12 +21,12 @@ trait TypeCoercionRule extends Rule[LogicalPlan] {
 | Description
 
 | coerceTypes
-| [[coerceTypes]] Coerce types in a <<spark-sql-LogicalPlan.adoc#, logical plan>>
+| [[coerceTypes]] Coerce types in a <<spark-sql-LogicalPlan.md#, logical plan>>
 
 Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 |===
 
-`TypeCoercionRule` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`TypeCoercionRule` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [[implementations]]
 .TypeCoercionRules
@@ -59,7 +59,7 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 | ImplicitTypeCasts
 | [[ImplicitTypeCasts]]
 
-| <<spark-sql-Analyzer-TypeCoercionRule-InConversion.adoc#, InConversion>>
+| <<spark-sql-Analyzer-TypeCoercionRule-InConversion.md#, InConversion>>
 | [[InConversion]]
 
 | PromoteStrings
@@ -68,7 +68,7 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 | StackCoercion
 | [[StackCoercion]]
 
-| <<spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.adoc#, WindowFrameCoercion>>
+| <<spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md#, WindowFrameCoercion>>
 | [[WindowFrameCoercion]]
 |===
 
@@ -78,9 +78,9 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 apply(plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` <<coerceTypes, coerceTypes>> in the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and returns the following:
+`apply` <<coerceTypes, coerceTypes>> in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>> and returns the following:
 
-* The input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> itself if [matches](catalyst/TreeNode.md#fastEquals) the coerced plan
+* The input <<spark-sql-LogicalPlan.md#, LogicalPlan>> itself if [matches](catalyst/TreeNode.md#fastEquals) the coerced plan
 
 * The plan after <<propagateTypes, propagateTypes>> on the coerced plan
 

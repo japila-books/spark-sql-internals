@@ -6,7 +6,7 @@ title: AggregateFunction
 
 `AggregateFunction` is used wrapped inside a [AggregateExpression](AggregateExpression.md) (using <<toAggregateExpression, toAggregateExpression>> method) when:
 
-* `Analyzer` link:spark-sql-Analyzer.adoc#ResolveFunctions[resolves functions] (for link:SparkSession.md#sql[SQL mode])
+* `Analyzer` spark-sql-Analyzer.md#ResolveFunctions[resolves functions] (for SparkSession.md#sql[SQL mode])
 
 * ...FIXME: Anywhere else?
 
@@ -35,15 +35,15 @@ NOTE: Aggregate functions are not [foldable](Expression.md#foldable), i.e. FIXME
 | Behaviour
 | Examples
 
-| [[DeclarativeAggregate]] link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate]
+| [[DeclarativeAggregate]] spark-sql-Expression-DeclarativeAggregate.md[DeclarativeAggregate]
 |
 |
 
-| [[ImperativeAggregate]] link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate]
+| [[ImperativeAggregate]] spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate]
 |
 |
 
-| [[TypedAggregateExpression]] link:spark-sql-Expression-TypedAggregateExpression.adoc[TypedAggregateExpression]
+| [[TypedAggregateExpression]] spark-sql-Expression-TypedAggregateExpression.md[TypedAggregateExpression]
 |
 |
 |===
@@ -67,17 +67,17 @@ abstract class AggregateFunction extends Expression {
 | Description
 
 | [[aggBufferSchema]] `aggBufferSchema`
-| link:spark-sql-StructType.adoc[Schema] of an aggregation buffer to hold partial aggregate results.
+| spark-sql-StructType.md[Schema] of an aggregation buffer to hold partial aggregate results.
 
-Used mostly in link:spark-sql-Expression-ScalaUDAF.adoc[ScalaUDAF] and link:spark-sql-AggregationIterator.adoc#initializeAggregateFunctions[AggregationIterator]
+Used mostly in spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] and spark-sql-AggregationIterator.md#initializeAggregateFunctions[AggregationIterator]
 
 | [[aggBufferAttributes]] `aggBufferAttributes`
-a| <<spark-sql-Expression-AttributeReference.adoc#, AttributeReferences>> of an aggregation buffer to hold partial aggregate results.
+a| <<spark-sql-Expression-AttributeReference.md#, AttributeReferences>> of an aggregation buffer to hold partial aggregate results.
 
 Used in:
 
 * `AggregateExpression` for [references](AggregateExpression.md#references)
-* ``Expression``-based aggregate's `bufferSchema` in link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate]
+* ``Expression``-based aggregate's `bufferSchema` in spark-sql-Expression-DeclarativeAggregate.md[DeclarativeAggregate]
 * ...
 
 | [[inputAggBufferAttributes]] `inputAggBufferAttributes`
@@ -100,5 +100,5 @@ toAggregateExpression(isDistinct: Boolean): AggregateExpression
 
 `toAggregateExpression` is used in:
 
-* `functions` object's `withAggregateFunction` block to create a link:spark-sql-Column.adoc[Column] with [AggregateExpression](AggregateExpression.md) for a `AggregateFunction`
+* `functions` object's `withAggregateFunction` block to create a spark-sql-Column.md[Column] with [AggregateExpression](AggregateExpression.md) for a `AggregateFunction`
 * FIXME

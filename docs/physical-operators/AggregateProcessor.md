@@ -2,7 +2,7 @@
 
 `AggregateProcessor` is <<apply, created>> and used exclusively when `WindowExec` physical operator is executed.
 
-`AggregateProcessor` supports link:spark-sql-Expression-DeclarativeAggregate.adoc[DeclarativeAggregate] and link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] aggregate <<functions, functions>> only (which link:spark-sql-SparkPlan-WindowExec.adoc#windowFrameExpressionFactoryPairs[happen to] be link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunction] in [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)).
+`AggregateProcessor` supports spark-sql-Expression-DeclarativeAggregate.md[DeclarativeAggregate] and spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] aggregate <<functions, functions>> only (which spark-sql-SparkPlan-WindowExec.md#windowFrameExpressionFactoryPairs[happen to] be spark-sql-Expression-AggregateFunction.md[AggregateFunction] in [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)).
 
 [[properties]]
 .AggregateProcessor's Properties
@@ -58,7 +58,7 @@ apply(
   newMutableProjection: (Seq[Expression], Seq[Attribute]) => MutableProjection): AggregateProcessor
 ----
 
-NOTE: `apply` is used exclusively when `WindowExec` is link:spark-sql-SparkPlan-WindowExec.adoc#doExecute[executed] (and creates link:spark-sql-WindowFunctionFrame.adoc[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md))
+NOTE: `apply` is used exclusively when `WindowExec` is spark-sql-SparkPlan-WindowExec.md#doExecute[executed] (and creates spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md))
 
 === [[update]] Executing update on ImperativeAggregates -- `update` Method
 
@@ -67,15 +67,15 @@ NOTE: `apply` is used exclusively when `WindowExec` is link:spark-sql-SparkPlan-
 update(input: InternalRow): Unit
 ----
 
-`update` executes the link:spark-sql-Expression-ImperativeAggregate.adoc#update[update] method on every input <<imperatives, ImperativeAggregate>> sequentially (one by one).
+`update` executes the spark-sql-Expression-ImperativeAggregate.md#update[update] method on every input <<imperatives, ImperativeAggregate>> sequentially (one by one).
 
-Internally, `update` joins <<buffer, buffer>> with `input` link:spark-sql-InternalRow.adoc[internal binary row] and converts the joined `InternalRow` using the <<updateProjection, MutableProjection>> function.
+Internally, `update` joins <<buffer, buffer>> with `input` spark-sql-InternalRow.md[internal binary row] and converts the joined `InternalRow` using the <<updateProjection, MutableProjection>> function.
 
-`update` then requests every <<imperatives, ImperativeAggregate>> to  link:spark-sql-Expression-ImperativeAggregate.adoc#update[update] passing in the <<buffer, buffer>> and the input `input` rows.
+`update` then requests every <<imperatives, ImperativeAggregate>> to  spark-sql-Expression-ImperativeAggregate.md#update[update] passing in the <<buffer, buffer>> and the input `input` rows.
 
 NOTE: `MutableProjection` mutates the same underlying binary row object each time it is executed.
 
-NOTE: `update` is used when `WindowFunctionFrame` link:spark-sql-WindowFunctionFrame.adoc#prepare[prepares] or link:spark-sql-WindowFunctionFrame.adoc#write[writes].
+NOTE: `update` is used when `WindowFunctionFrame` spark-sql-WindowFunctionFrame.md#prepare[prepares] or spark-sql-WindowFunctionFrame.md#write[writes].
 
 === [[creating-instance]] Creating AggregateProcessor Instance
 
@@ -85,5 +85,5 @@ NOTE: `update` is used when `WindowFunctionFrame` link:spark-sql-WindowFunctionF
 * [[initialProjection]] Initial `MutableProjection`
 * [[updateProjection]] Update `MutableProjection`
 * [[evaluateProjection]] Evaluate `MutableProjection`
-* [[imperatives]] link:spark-sql-Expression-ImperativeAggregate.adoc[ImperativeAggregate] expressions for aggregate functions
+* [[imperatives]] spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] expressions for aggregate functions
 * [[trackPartitionSize]] Flag whether to track partition size

@@ -1,10 +1,10 @@
 # RunnableCommand -- Generic Logical Command with Side Effects
 
-`RunnableCommand` is the generic link:spark-sql-LogicalPlan-Command.adoc[logical command] that is <<run, executed>> eagerly for its side effects.
+`RunnableCommand` is the generic spark-sql-LogicalPlan-Command.md[logical command] that is <<run, executed>> eagerly for its side effects.
 
 [[contract]]
 [[run]]
-`RunnableCommand` defines one abstract method `run` that computes a collection of link:spark-sql-Row.adoc[Row] records with the side effect, i.e. the result of executing a command.
+`RunnableCommand` defines one abstract method `run` that computes a collection of spark-sql-Row.md[Row] records with the side effect, i.e. the result of executing a command.
 
 [source, scala]
 ----
@@ -12,17 +12,17 @@ run(sparkSession: SparkSession): Seq[Row]
 ----
 
 !!! note
-    `RunnableCommand` logical operator is resolved to link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
+    `RunnableCommand` logical operator is resolved to spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
 
 [NOTE]
 ====
 `run` is executed when:
 
-* `ExecutedCommandExec` link:spark-sql-SparkPlan-ExecutedCommandExec.adoc#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
+* `ExecutedCommandExec` spark-sql-SparkPlan-ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
 
-* `InsertIntoHadoopFsRelationCommand` is link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc#run[executed]
+* `InsertIntoHadoopFsRelationCommand` is spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[executed]
 
-* `QueryExecution` is requested to link:spark-sql-QueryExecution.adoc#hiveResultString[transform the result of executing DescribeTableCommand to a Hive-compatible output format]
+* `QueryExecution` is requested to spark-sql-QueryExecution.md#hiveResultString[transform the result of executing DescribeTableCommand to a Hive-compatible output format]
 ====
 
 [[available-commands]]
@@ -74,28 +74,28 @@ run(sparkSession: SparkSession): Seq[Row]
 | AlterViewAsCommand
 |
 
-| link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[AnalyzeColumnCommand]
+| spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand]
 | [[AnalyzeColumnCommand]]
 
-| link:spark-sql-LogicalPlan-AnalyzePartitionCommand.adoc[AnalyzePartitionCommand]
+| spark-sql-LogicalPlan-AnalyzePartitionCommand.md[AnalyzePartitionCommand]
 | [[AnalyzePartitionCommand]]
 
-| link:spark-sql-LogicalPlan-AnalyzeTableCommand.adoc[AnalyzeTableCommand]
+| spark-sql-LogicalPlan-AnalyzeTableCommand.md[AnalyzeTableCommand]
 | [[AnalyzeTableCommand]]
 
 | CacheTableCommand
-a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` link:spark-sql-Dataset.adoc#ofRows[creates a DataFrame] followed by link:spark-sql-dataset-operators.adoc#createTempView[registering a temporary view] for the optional `query`.
+a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` spark-sql-Dataset.md#ofRows[creates a DataFrame] followed by spark-sql-dataset-operators.md#createTempView[registering a temporary view] for the optional `query`.
 
 [source, scala]
 ----
 CACHE LAZY? TABLE [table] (AS? [query])?
 ----
 
-`CacheTableCommand` requests the session-specific `Catalog` to link:spark-sql-Catalog.adoc#cacheTable[cache the table].
+`CacheTableCommand` requests the session-specific `Catalog` to spark-sql-Catalog.md#cacheTable[cache the table].
 
-NOTE: `CacheTableCommand` uses `SparkSession` link:SparkSession.md#catalog[to access the `Catalog`].
+NOTE: `CacheTableCommand` uses `SparkSession` SparkSession.md#catalog[to access the `Catalog`].
 
-If the caching is not `LAZY` (which is not by default), `CacheTableCommand` link:SparkSession.md#table[creates a DataFrame for the table] and link:spark-sql-dataset-operators.adoc#count[counts the rows] (that will trigger the caching).
+If the caching is not `LAZY` (which is not by default), `CacheTableCommand` SparkSession.md#table[creates a DataFrame for the table] and spark-sql-dataset-operators.md#count[counts the rows] (that will trigger the caching).
 
 NOTE: `CacheTableCommand` uses a Spark SQL pattern to trigger DataFrame caching by executing `count` operation.
 
@@ -120,30 +120,30 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | CreateDatabaseCommand
 |
 
-| link:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.adoc[CreateDataSourceTableAsSelectCommand]
+| spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
 
-Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSourceAnalysis] posthoc logical resolution rule resolves a link:spark-sql-LogicalPlan-CreateTable.adoc[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` link:spark-sql-DataFrameWriter.adoc#saveAsTable[saves a DataFrame to a non-Hive table] or for link:spark-sql-SparkSqlAstBuilder.adoc#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` spark-sql-DataFrameWriter.md#saveAsTable[saves a DataFrame to a non-Hive table] or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
 
-| link:spark-sql-LogicalPlan-CreateDataSourceTableCommand.adoc[CreateDataSourceTableCommand]
+| spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
 | [[CreateDataSourceTableCommand]]
 
 | CreateFunctionCommand
 |
 
-| <<spark-sql-LogicalPlan-CreateTableCommand.adoc#, CreateTableCommand>>
+| <<spark-sql-LogicalPlan-CreateTableCommand.md#, CreateTableCommand>>
 | [[CreateTableCommand]]
 
 | CreateTableLikeCommand
 |
 
-| <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#, CreateTempViewUsing>>
+| <<spark-sql-LogicalPlan-CreateTempViewUsing.md#, CreateTempViewUsing>>
 | [[CreateTempViewUsing]]
 
-| <<spark-sql-LogicalPlan-CreateViewCommand.adoc#, CreateViewCommand>>
+| <<spark-sql-LogicalPlan-CreateViewCommand.md#, CreateViewCommand>>
 | [[CreateViewCommand]]
 
-| link:spark-sql-LogicalPlan-DescribeColumnCommand.adoc[DescribeColumnCommand]
+| spark-sql-LogicalPlan-DescribeColumnCommand.md[DescribeColumnCommand]
 | [[DescribeColumnCommand]]
 
 | DescribeDatabaseCommand
@@ -152,7 +152,7 @@ Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSource
 | DescribeFunctionCommand
 |
 
-| link:spark-sql-LogicalPlan-DescribeTableCommand.adoc[DescribeTableCommand]
+| spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand]
 | [[DescribeTableCommand]]
 
 | DropDatabaseCommand
@@ -167,13 +167,13 @@ Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSource
 | ExplainCommand
 |
 
-| <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#, InsertIntoDataSourceCommand>>
+| <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]]
 
-| link:link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.adoc[InsertIntoHadoopFsRelationCommand]
+| link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
-| link:hive/InsertIntoHiveTable.adoc[InsertIntoHiveTable]
+| hive/InsertIntoHiveTable.md[InsertIntoHiveTable]
 | [[InsertIntoHiveTable]]
 
 | ListFilesCommand
@@ -195,9 +195,9 @@ Used exclusively when link:spark-sql-Analyzer-DataSourceAnalysis.adoc[DataSource
 |
 
 | SaveIntoDataSourceCommand
-| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to link:spark-sql-DataSource.adoc#write[write a DataFrame to a data source per save mode].
+| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to spark-sql-DataSource.md#write[write a DataFrame to a data source per save mode].
 
-Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrameWriter.adoc#save[save a DataFrame to a data source].
+Used exclusively when `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#save[save a DataFrame to a data source].
 
 | SetCommand
 | [[SetCommand]]
@@ -208,7 +208,7 @@ Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrame
 | ShowColumnsCommand
 |
 
-| <<spark-sql-LogicalPlan-ShowCreateTableCommand.adoc#, ShowCreateTableCommand>>
+| <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#, ShowCreateTableCommand>>
 | [[ShowCreateTableCommand]]
 
 | ShowDatabasesCommand
@@ -223,13 +223,13 @@ Used exclusively when `DataFrameWriter` is requested to link:spark-sql-DataFrame
 | ShowTablePropertiesCommand
 |
 
-| <<spark-sql-LogicalPlan-ShowTablesCommand.adoc#, ShowTablesCommand>>
+| <<spark-sql-LogicalPlan-ShowTablesCommand.md#, ShowTablesCommand>>
 | [[ShowTablesCommand]]
 
 | StreamingExplainCommand
 |
 
-| xref:spark-sql-LogicalPlan-TruncateTableCommand.adoc[TruncateTableCommand]
+| xref:spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand]
 | [[TruncateTableCommand]]
 
 | UncacheTableCommand

@@ -2,7 +2,7 @@ title: BroadcastNestedLoopJoinExec
 
 # BroadcastNestedLoopJoinExec Binary Physical Operator
 
-`BroadcastNestedLoopJoinExec` is a link:SparkPlan.md#BinaryExecNode[binary physical operator] (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when [JoinSelection](../execution-planning-strategies/JoinSelection.md) physical plan strategy finds a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator that meets either case:
+`BroadcastNestedLoopJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when [JoinSelection](../execution-planning-strategies/JoinSelection.md) physical plan strategy finds a spark-sql-LogicalPlan-Join.md[Join] logical operator that meets either case:
 
 * [canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight) join type and `right` physical operator [broadcastable](../execution-planning-strategies/JoinSelection.md#canBroadcast)
 
@@ -62,20 +62,20 @@ image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[
 | Right Child
 
 | BuildLeft
-| link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
-| link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
+| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
+| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
 
 | BuildRight
-| link:spark-sql-Distribution-UnspecifiedDistribution.adoc[UnspecifiedDistribution]
-| link:spark-sql-Distribution-BroadcastDistribution.adoc[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
+| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
+| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
 |===
 
 === [[creating-instance]] Creating BroadcastNestedLoopJoinExec Instance
 
 `BroadcastNestedLoopJoinExec` takes the following when created:
 
-* [[left]] Left link:SparkPlan.md[physical operator]
-* [[right]] Right link:SparkPlan.md[physical operator]
+* [[left]] Left SparkPlan.md[physical operator]
+* [[right]] Right SparkPlan.md[physical operator]
 * [[buildSide]] `BuildSide`
-* [[joinType]] link:spark-sql-joins.adoc#join-types[Join type]
-* [[condition]] Optional join condition link:expressions/Expression.md[expressions]
+* [[joinType]] spark-sql-joins.md#join-types[Join type]
+* [[condition]] Optional join condition expressions/Expression.md[expressions]

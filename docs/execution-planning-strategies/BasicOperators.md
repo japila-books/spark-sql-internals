@@ -1,6 +1,6 @@
 # BasicOperators Execution Planning Strategy
 
-`BasicOperators` is an link:spark-sql-SparkStrategy.adoc[execution planning strategy] (of link:spark-sql-SparkPlanner.adoc[SparkPlanner]) that in general does simple <<conversions, conversions>> from link:spark-sql-LogicalPlan.adoc[logical operators] to their link:SparkPlan.md[physical counterparts].
+`BasicOperators` is an spark-sql-SparkStrategy.md[execution planning strategy] (of spark-sql-SparkPlanner.md[SparkPlanner]) that in general does simple <<conversions, conversions>> from spark-sql-LogicalPlan.md[logical operators] to their SparkPlan.md[physical counterparts].
 
 [[apply]]
 [[conversions]]
@@ -10,13 +10,13 @@
 | Logical Operator
 | Physical Operator
 
-| [[RunnableCommand]] link:spark-sql-LogicalPlan-RunnableCommand.adoc[RunnableCommand]
-| link:spark-sql-SparkPlan-ExecutedCommandExec.adoc[ExecutedCommandExec]
+| [[RunnableCommand]] spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
+| spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec]
 
-| link:spark-sql-streaming-MemoryPlan.adoc[MemoryPlan]
-| link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
+| spark-sql-streaming-MemoryPlan.md[MemoryPlan]
+| spark-sql-SparkPlan-LocalTableScanExec.md[LocalTableScanExec]
 
-| link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject]
+| spark-sql-LogicalPlan-DeserializeToObject.md[DeserializeToObject]
 | `DeserializeToObjectExec`
 
 | `SerializeFromObject` | `SerializeFromObjectExec`
@@ -28,60 +28,60 @@
 | `CoGroup` | `CoGroupExec`
 
 | `Repartition` (with shuffle enabled)
-| link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
+| spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
 
 | `Repartition`
-| link:spark-sql-SparkPlan-CoalesceExec.adoc[CoalesceExec]
+| spark-sql-SparkPlan-CoalesceExec.md[CoalesceExec]
 
-| `SortPartitions` | link:spark-sql-SparkPlan-SortExec.adoc[SortExec]
+| `SortPartitions` | spark-sql-SparkPlan-SortExec.md[SortExec]
 
-| [[Sort]] <<spark-sql-LogicalPlan-Sort.adoc#, Sort>>
-| [[SortExec]] <<spark-sql-SparkPlan-SortExec.adoc#, SortExec>>
+| [[Sort]] <<spark-sql-LogicalPlan-Sort.md#, Sort>>
+| [[SortExec]] <<spark-sql-SparkPlan-SortExec.md#, SortExec>>
 
 | [[Project]] `Project`
 | [[ProjectExec]] `ProjectExec`
 
 | [[Filter]] `Filter`
-| <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>>
+| <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>>
 
 | [[TypedFilter]] `TypedFilter`
-| <<spark-sql-SparkPlan-FilterExec.adoc#, FilterExec>>
+| <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>>
 
-| [[Expand]] link:spark-sql-LogicalPlan-Expand.adoc[Expand]
+| [[Expand]] spark-sql-LogicalPlan-Expand.md[Expand]
 | `ExpandExec`
 
-| [[Window]] <<spark-sql-LogicalPlan-Window.adoc#, Window>>
-| [[WindowExec]] <<spark-sql-SparkPlan-WindowExec.adoc#, WindowExec>>
+| [[Window]] <<spark-sql-LogicalPlan-Window.md#, Window>>
+| [[WindowExec]] <<spark-sql-SparkPlan-WindowExec.md#, WindowExec>>
 
 | `Sample`
 | `SampleExec`
 
-| link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation]
-| link:spark-sql-SparkPlan-LocalTableScanExec.adoc[LocalTableScanExec]
+| spark-sql-LogicalPlan-LocalRelation.md[LocalRelation]
+| spark-sql-SparkPlan-LocalTableScanExec.md[LocalTableScanExec]
 
 | `LocalLimit` | `LocalLimitExec`
 | `GlobalLimit` | `GlobalLimitExec`
 | `Union` | `UnionExec`
 
-| [[Generate]] link:spark-sql-LogicalPlan-Generate.adoc[Generate]
-| [[GenerateExec]] link:spark-sql-SparkPlan-GenerateExec.adoc[GenerateExec]
+| [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]
+| [[GenerateExec]] spark-sql-SparkPlan-GenerateExec.md[GenerateExec]
 
 | [[OneRowRelation]] `OneRowRelation`
-| link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
+| spark-sql-SparkPlan-RDDScanExec.md[RDDScanExec]
 
 | `Range`
-| link:spark-sql-SparkPlan-RangeExec.adoc[RangeExec]
+| spark-sql-SparkPlan-RangeExec.md[RangeExec]
 
 | `RepartitionByExpression`
-| link:spark-sql-SparkPlan-ShuffleExchangeExec.adoc[ShuffleExchangeExec]
+| spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
 
-| [[ExternalRDD]] link:spark-sql-LogicalPlan-ExternalRDD.adoc[ExternalRDD]
-| [[ExternalRDDScanExec]] link:spark-sql-SparkPlan-ExternalRDDScanExec.adoc[ExternalRDDScanExec]
+| [[ExternalRDD]] spark-sql-LogicalPlan-ExternalRDD.md[ExternalRDD]
+| [[ExternalRDDScanExec]] spark-sql-SparkPlan-ExternalRDDScanExec.md[ExternalRDDScanExec]
 
-| [[LogicalRDD]] link:spark-sql-LogicalPlan-LogicalRDD.adoc[LogicalRDD]
-| link:spark-sql-SparkPlan-RDDScanExec.adoc[RDDScanExec]
+| [[LogicalRDD]] spark-sql-LogicalPlan-LogicalRDD.md[LogicalRDD]
+| spark-sql-SparkPlan-RDDScanExec.md[RDDScanExec]
 |===
 
-TIP: Confirm the operator mapping in the link:++https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L321++[source code of `BasicOperators`].
+TIP: Confirm the operator mapping in the ++https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L321++[source code of `BasicOperators`].
 
-NOTE: `BasicOperators` expects that `Distinct`, `Intersect`, and `Except` logical operators are not used in a link:spark-sql-LogicalPlan.adoc[logical plan] and throws a `IllegalStateException` if not.
+NOTE: `BasicOperators` expects that `Distinct`, `Intersect`, and `Except` logical operators are not used in a spark-sql-LogicalPlan.md[logical plan] and throws a `IllegalStateException` if not.

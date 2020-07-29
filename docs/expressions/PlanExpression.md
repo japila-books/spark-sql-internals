@@ -2,7 +2,7 @@ title: PlanExpression
 
 # PlanExpression -- Expressions with Query Plans
 
-`PlanExpression` is the <<contract, contract>> for link:expressions/Expression.md[Catalyst expressions] that contain a link:catalyst/QueryPlan.md[QueryPlan].
+`PlanExpression` is the <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that contain a catalyst/QueryPlan.md[QueryPlan].
 
 [[contract]]
 [source, scala]
@@ -41,9 +41,9 @@ abstract class PlanExpression[T <: QueryPlan[_]] extends Expression {
 | PlanExpression
 | Description
 
-| [[ExecSubqueryExpression]] link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression]
+| [[ExecSubqueryExpression]] spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression]
 |
 
-| [[SubqueryExpression]] link:spark-sql-Expression-SubqueryExpression.adoc[SubqueryExpression]
+| [[SubqueryExpression]] spark-sql-Expression-SubqueryExpression.md[SubqueryExpression]
 |
 |===

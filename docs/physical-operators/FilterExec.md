@@ -2,13 +2,13 @@ title: FilterExec
 
 # FilterExec Unary Physical Operator
 
-`FilterExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that represents <<spark-sql-LogicalPlan-Filter.adoc#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.adoc#, TypedFilter>> unary logical operators at execution.
+`FilterExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that represents <<spark-sql-LogicalPlan-Filter.md#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.md#, TypedFilter>> unary logical operators at execution.
 
-`FilterExec` supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> (aka _codegen_) as follows:
+`FilterExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_) as follows:
 
-* <<usedInputs, usedInputs>> is an empty `AttributeSet` (to defer evaluation of attribute expressions until they are actually used, i.e. in the <<spark-sql-CodegenSupport.adoc#consume, generated Java source code for consume path>>)
+* <<usedInputs, usedInputs>> is an empty `AttributeSet` (to defer evaluation of attribute expressions until they are actually used, i.e. in the <<spark-sql-CodegenSupport.md#consume, generated Java source code for consume path>>)
 
-* Uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.adoc#inputRDDs, input RDDs>>
+* Uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>>
 
 * Generates a Java source code for the <<doProduce, produce>> and <<doConsume, consume>> paths in whole-stage code generation
 
@@ -16,15 +16,15 @@ title: FilterExec
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Filter](../execution-planning-strategies/BasicOperators.md#Filter) and [TypedFilter](../execution-planning-strategies/BasicOperators.md#TypedFilter) unary logical operators
 
-* link:hive/HiveTableScans.adoc[HiveTableScans] execution planning strategy is executed (and plans link:hive/HiveTableRelation.adoc[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
+* hive/HiveTableScans.md[HiveTableScans] execution planning strategy is executed (and plans hive/HiveTableRelation.md[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.md#pruneFilterProject, pruneFilterProject>>)
 
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.adoc#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.adoc#pruneFilterProject, pruneFilterProject>>)
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.md#pruneFilterProject, pruneFilterProject>>)
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.adoc#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.adoc#, HadoopFsRelation>>)
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>)
 
-* `ExtractPythonUDFs` physical query optimization is requested to <<spark-sql-ExtractPythonUDFs.adoc#trySplitFilter, trySplitFilter>>
+* `ExtractPythonUDFs` physical query optimization is requested to <<spark-sql-ExtractPythonUDFs.md#trySplitFilter, trySplitFilter>>
 
 [[metrics]]
 .FilterExec's Performance Metrics
@@ -45,9 +45,9 @@ image::images/spark-sql-FilterExec-webui-details-for-query.png[align="center"]
 [[inputRDDs]]
 [[outputOrdering]]
 [[outputPartitioning]]
-`FilterExec` uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.adoc#inputRDDs, input RDDs>>, the <<SparkPlan.md#outputOrdering, outputOrdering>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
+`FilterExec` uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>>, the <<SparkPlan.md#outputOrdering, outputOrdering>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
 
-`FilterExec` uses the link:spark-sql-PredicateHelper.adoc[PredicateHelper] for...FIXME
+`FilterExec` uses the spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
 
 [[internal-registries]]
 .FilterExec's Internal Properties (e.g. Registries, Counters and Flags)
@@ -99,7 +99,7 @@ NOTE: `isNullIntolerant` is used when...FIXME
 usedInputs: AttributeSet
 ----
 
-NOTE: `usedInputs` is part of <<spark-sql-CodegenSupport.adoc#usedInputs, CodegenSupport Contract>> to...FIXME.
+NOTE: `usedInputs` is part of <<spark-sql-CodegenSupport.md#usedInputs, CodegenSupport Contract>> to...FIXME.
 
 `usedInputs`...FIXME
 
@@ -121,7 +121,7 @@ NOTE: `output` is part of <<catalyst/QueryPlan.md#output, QueryPlan Contract>> t
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -132,13 +132,13 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.adoc#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#consume-path, consume path>> in Whole-Stage Code Generation.
+NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
 
-`doConsume` creates a new <<spark-sql-CodegenSupport.adoc#metricTerm, metric term>> for the <<numOutputRows, numOutputRows>> metric.
+`doConsume` creates a new <<spark-sql-CodegenSupport.md#metricTerm, metric term>> for the <<numOutputRows, numOutputRows>> metric.
 
 `doConsume`...FIXME
 
-In the end, `doConsume` uses <<spark-sql-CodegenSupport.adoc#consume, consume>> and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
+In the end, `doConsume` uses <<spark-sql-CodegenSupport.md#consume, consume>> and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
 
 [source, scala]
 ----
@@ -163,7 +163,7 @@ NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.adoc#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
 `doExecute` executes the <<child, child>> physical operator and creates a new `MapPartitionsRDD` that does the filtering.
 

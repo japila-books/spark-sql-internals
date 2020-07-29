@@ -143,15 +143,15 @@ scala> p.analyze
 === [[ImplicitOperators]] `ImplicitOperators` Implicit Conversions
 
 [[in]]
-Operators for link:expressions/Expression.md[expressions], i.e. `in`.
+Operators for expressions/Expression.md[expressions], i.e. `in`.
 
 === [[ExpressionConversions]] `ExpressionConversions` Implicit Conversions
 
-`ExpressionConversions` implicit conversions add <<ImplicitOperators, ImplicitOperators>> operators to link:expressions/Expression.md[Catalyst expressions].
+`ExpressionConversions` implicit conversions add <<ImplicitOperators, ImplicitOperators>> operators to expressions/Expression.md[Catalyst expressions].
 
 ==== Type Conversions to Literal Expressions
 
-`ExpressionConversions` adds conversions of Scala native types (e.g. `Boolean`, `Long`, `String`, `Date`, `Timestamp`) and Spark SQL types (i.e. `Decimal`) to link:spark-sql-Expression-Literal.adoc[Literal] expressions.
+`ExpressionConversions` adds conversions of Scala native types (e.g. `Boolean`, `Long`, `String`, `Date`, `Timestamp`) and Spark SQL types (i.e. `Decimal`) to spark-sql-Expression-Literal.md[Literal] expressions.
 
 [source, scala]
 ----
@@ -160,7 +160,7 @@ Operators for link:expressions/Expression.md[expressions], i.e. `in`.
 
 ==== Converting Symbols to UnresolvedAttribute and AttributeReference Expressions
 
-`ExpressionConversions` adds conversions of Scala's `Symbol` to link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute] and `AttributeReference` expressions.
+`ExpressionConversions` adds conversions of Scala's `Symbol` to spark-sql-Expression-UnresolvedAttribute.md[UnresolvedAttribute] and `AttributeReference` expressions.
 
 [source, scala]
 ----
@@ -169,7 +169,7 @@ Operators for link:expressions/Expression.md[expressions], i.e. `in`.
 
 ==== Converting $-Prefixed String Literals to UnresolvedAttribute Expressions
 
-`ExpressionConversions` adds conversions of `$"col name"` to an link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttribute] expression.
+`ExpressionConversions` adds conversions of `$"col name"` to an spark-sql-Expression-UnresolvedAttribute.md[UnresolvedAttribute] expression.
 
 [source, scala]
 ----
@@ -183,7 +183,7 @@ Operators for link:expressions/Expression.md[expressions], i.e. `in`.
 star(names: String*): Expression
 ----
 
-`ExpressionConversions` adds the aggregate and non-aggregate functions to link:expressions/Expression.md[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
+`ExpressionConversions` adds the aggregate and non-aggregate functions to expressions/Expression.md[Catalyst expressions] (e.g. `sum`, `count`, `upper`, `star`, `callFunction`, `windowSpec`, `windowExpr`)
 
 [source, scala]
 ----
@@ -200,7 +200,7 @@ WrappedArray(a, b).*
 
 ==== [[function]][[distinctFunction]] Creating UnresolvedFunction Expressions -- `function` and `distinctFunction` Methods
 
-`ExpressionConversions` allows creating link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunction] expressions with `function` and `distinctFunction` operators.
+`ExpressionConversions` allows creating spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with `function` and `distinctFunction` operators.
 
 [source, scala]
 ----
@@ -247,7 +247,7 @@ canBeNull: AttributeReference
 at(ordinal: Int): BoundReference
 ----
 
-`ExpressionConversions` adds `at` method to `AttributeReferences` to create link:spark-sql-Expression-BoundReference.adoc[BoundReference] expressions.
+`ExpressionConversions` adds `at` method to `AttributeReferences` to create spark-sql-Expression-BoundReference.md[BoundReference] expressions.
 
 [source, scala]
 ----
@@ -261,7 +261,7 @@ input[4, string, true]
 
 ==== [[hint]] Creating UnresolvedHint Logical Operator -- `hint` Method
 
-`plans` adds `hint` method to create a link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] logical operator.
+`plans` adds `hint` method to create a spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator.
 
 [source, scala]
 ----
@@ -270,7 +270,7 @@ hint(name: String, parameters: Any*): LogicalPlan
 
 ==== [[join]] Creating Join Logical Operator -- `join` Method
 
-`join` creates a link:spark-sql-LogicalPlan-Join.adoc[Join] logical operator.
+`join` creates a spark-sql-LogicalPlan-Join.md[Join] logical operator.
 
 [source, scala]
 ----
@@ -282,7 +282,7 @@ join(
 
 ==== [[table]] Creating UnresolvedRelation Logical Operator -- `table` Method
 
-`table` creates a link:spark-sql-LogicalPlan-UnresolvedRelation.adoc[UnresolvedRelation] logical operator.
+`table` creates a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operator.
 
 [source, scala]
 ----
@@ -307,7 +307,7 @@ implicit class DslLogicalPlan(
   logicalPlan: LogicalPlan)
 ----
 
-`DslLogicalPlan` implicit class is part of <<plans, plans>> implicit conversions with extension methods (of link:spark-sql-LogicalPlan.adoc[logical operators]) to build entire logical plans.
+`DslLogicalPlan` implicit class is part of <<plans, plans>> implicit conversions with extension methods (of spark-sql-LogicalPlan.md[logical operators]) to build entire logical plans.
 
 .DslLogicalPlan's Extension Methods
 [cols="30m,70",options="header",width="100%"]
@@ -323,7 +323,7 @@ a| [[analyze]]
 analyze: LogicalPlan
 ----
 
-Resolves attribute references (using link:spark-sql-Optimizer-EliminateSubqueryAliases.adoc[EliminateSubqueryAliases] logical optimization and `SimpleAnalyzer` logical analyzer)
+Resolves attribute references (using spark-sql-Optimizer-EliminateSubqueryAliases.md[EliminateSubqueryAliases] logical optimization and `SimpleAnalyzer` logical analyzer)
 
 | as
 a| [[as]]

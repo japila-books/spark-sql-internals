@@ -2,7 +2,7 @@ title: CollectionGenerator
 
 # CollectionGenerator Generator Expression Contract
 
-`CollectionGenerator` is the <<contract, contract>> in Spark SQL for link:spark-sql-Expression-Generator.adoc[Generator expressions] that <<collectionType, generate a collection object>> (i.e. an array or map) and (at execution time) link:spark-sql-SparkPlan-GenerateExec.adoc#doConsume[use a different path for whole-stage Java code generation] (while executing `GenerateExec` physical operator with link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] enabled).
+`CollectionGenerator` is the <<contract, contract>> in Spark SQL for spark-sql-Expression-Generator.md[Generator expressions] that <<collectionType, generate a collection object>> (i.e. an array or map) and (at execution time) spark-sql-SparkPlan-GenerateExec.md#doConsume[use a different path for whole-stage Java code generation] (while executing `GenerateExec` physical operator with spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] enabled).
 
 [[contract]]
 [source, scala]
@@ -45,15 +45,15 @@ Used when...
 | CollectionGenerator
 | Description
 
-| link:spark-sql-Expression-Inline.adoc[Inline]
+| spark-sql-Expression-Inline.md[Inline]
 |
 
-| link:spark-sql-Expression-ExplodeBase.adoc[ExplodeBase]
+| spark-sql-Expression-ExplodeBase.md[ExplodeBase]
 |
 
-| link:spark-sql-Expression-ExplodeBase.adoc#Explode[Explode]
+| spark-sql-Expression-ExplodeBase.md#Explode[Explode]
 |
 
-| link:spark-sql-Expression-ExplodeBase.adoc#PosExplode[PosExplode]
+| spark-sql-Expression-ExplodeBase.md#PosExplode[PosExplode]
 |
 |===

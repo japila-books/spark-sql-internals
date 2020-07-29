@@ -2,7 +2,7 @@ title: InSubquery
 
 # InSubquery Expression
 
-`InSubquery` is a link:spark-sql-Expression-ExecSubqueryExpression.adoc[ExecSubqueryExpression] that...FIXME
+`InSubquery` is a spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression] that...FIXME
 
 `InSubquery` is <<creating-instance, created>> when...FIXME
 
@@ -13,7 +13,7 @@ title: InSubquery
 updateResult(): Unit
 ----
 
-NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression.adoc#updateResult[ExecSubqueryExpression Contract] to...FIXME.
+NOTE: `updateResult` is part of spark-sql-Expression-ExecSubqueryExpression.md#updateResult[ExecSubqueryExpression Contract] to...FIXME.
 
 `updateResult`...FIXME
 
@@ -21,8 +21,8 @@ NOTE: `updateResult` is part of link:spark-sql-Expression-ExecSubqueryExpression
 
 `InSubquery` takes the following when created:
 
-* [[child]] Child link:expressions/Expression.md[expression]
-* [[plan]] link:spark-sql-SparkPlan-SubqueryExec.adoc[SubqueryExec] physical operator
+* [[child]] Child expressions/Expression.md[expression]
+* [[plan]] spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] physical operator
 * [[exprId]] Expression ID (as `ExprId`)
 * [[result]] `result` array (default: `null`)
 * [[updated]] `updated` flag (default: `false`)

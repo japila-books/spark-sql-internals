@@ -1,10 +1,10 @@
 # ResolveBroadcastHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with BROADCAST, BROADCASTJOIN and MAPJOIN Hint Names
 
-`ResolveBroadcastHints` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.adoc#, ResolvedHint>> operators.
+`ResolveBroadcastHints` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveBroadcastHints[Spark Analyzer] uses to <<apply, resolve UnresolvedHint logical operators>> with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators.
 
-Technically, `ResolveBroadcastHints` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveBroadcastHints` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveBroadcastHints` is part of link:spark-sql-Analyzer.adoc#Hints[Hints] fixed-point batch of rules (that is executed before any other rule).
+`ResolveBroadcastHints` is part of spark-sql-Analyzer.md#Hints[Hints] fixed-point batch of rules (that is executed before any other rule).
 
 [[conf]]
 [[creating-instance]]
@@ -38,11 +38,11 @@ scala> println(analyzedPlan.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
-`apply` transforms link:spark-sql-LogicalPlan-UnresolvedHint.adoc[UnresolvedHint] operators into link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint] for the hint names as `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` (case-insensitive).
+`apply` transforms spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] operators into spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint] for the hint names as `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` (case-insensitive).
 
-For `UnresolvedHints` with no link:spark-sql-LogicalPlan-UnresolvedHint.adoc#parameters[parameters], `apply` marks the entire child logical plan as eligible for broadcast, i.e.  link:spark-sql-LogicalPlan-ResolvedHint.adoc#creating-instance[creates] a `ResolvedHint` with the child operator and `HintInfo` with link:spark-sql-HintInfo.adoc#broadcast[broadcast] flag on.
+For `UnresolvedHints` with no spark-sql-LogicalPlan-UnresolvedHint.md#parameters[parameters], `apply` marks the entire child logical plan as eligible for broadcast, i.e.  spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[creates] a `ResolvedHint` with the child operator and `HintInfo` with spark-sql-HintInfo.md#broadcast[broadcast] flag on.
 
 For `UnresolvedHints` with parameters defined, `apply` considers the parameters the names of the tables to <<applyBroadcastHint, apply broadcast hint>> to.
 

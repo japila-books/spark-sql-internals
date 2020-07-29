@@ -2,13 +2,13 @@
 
 `PullupCorrelatedPredicates` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms logical plans>> with the following operators:
 
-. link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] child operator
+. spark-sql-LogicalPlan-Filter.md[Filter] operators with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] child operator
 
-. link:spark-sql-LogicalPlan.adoc#UnaryNode[UnaryNode] operators
+. spark-sql-LogicalPlan.md#UnaryNode[UnaryNode] operators
 
 `PullupCorrelatedPredicates` is part of the [Pullup Correlated Expressions](../Optimizer.md#Pullup-Correlated-Expressions) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
-`PullupCorrelatedPredicates` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`PullupCorrelatedPredicates` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
 [source, scala]
 ----
@@ -22,7 +22,7 @@ val plan = ???
 val optimizedPlan = PullupCorrelatedPredicates(plan)
 ----
 
-`PullupCorrelatedPredicates` uses link:spark-sql-PredicateHelper.adoc[PredicateHelper] for...FIXME
+`PullupCorrelatedPredicates` uses spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
 
 === [[pullOutCorrelatedPredicates]] `pullOutCorrelatedPredicates` Internal Method
 
@@ -46,7 +46,7 @@ rewriteSubQueries(plan: LogicalPlan, outerPlans: Seq[LogicalPlan]): LogicalPlan
 
 `rewriteSubQueries`...FIXME
 
-NOTE: `rewriteSubQueries` is used exclusively when `PullupCorrelatedPredicates` is <<apply, executed>> (i.e. applied to a link:spark-sql-LogicalPlan.adoc[logical plan]).
+NOTE: `rewriteSubQueries` is used exclusively when `PullupCorrelatedPredicates` is <<apply, executed>> (i.e. applied to a spark-sql-LogicalPlan.md[logical plan]).
 
 === [[apply]] Executing Rule -- `apply` Method
 
@@ -55,10 +55,10 @@ NOTE: `rewriteSubQueries` is used exclusively when `PullupCorrelatedPredicates` 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of the <<catalyst/Rule.md#apply, Rule Contract>> to execute (apply) a rule on a [TreeNode](../catalyst/TreeNode.md) (e.g. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>).
+NOTE: `apply` is part of the <<catalyst/Rule.md#apply, Rule Contract>> to execute (apply) a rule on a [TreeNode](../catalyst/TreeNode.md) (e.g. <<spark-sql-LogicalPlan.md#, LogicalPlan>>).
 
-`apply` transforms the input link:spark-sql-LogicalPlan.adoc[logical plan] as follows:
+`apply` transforms the input spark-sql-LogicalPlan.md[logical plan] as follows:
 
-. For link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] child operator, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the `Filter` and the `Aggregate` and its link:spark-sql-LogicalPlan-Aggregate.adoc#child[child] as the outer plans
+. For spark-sql-LogicalPlan-Filter.md[Filter] operators with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] child operator, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the `Filter` and the `Aggregate` and its spark-sql-LogicalPlan-Aggregate.md#child[child] as the outer plans
 
-. For link:spark-sql-LogicalPlan.adoc#UnaryNode[UnaryNode] operators, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the operator and its children as the outer plans
+. For spark-sql-LogicalPlan.md#UnaryNode[UnaryNode] operators, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the operator and its children as the outer plans

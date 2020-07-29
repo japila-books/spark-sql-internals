@@ -1,12 +1,12 @@
 # ResolveFunctions Logical Resolution Rule -- Resolving grouping__id UnresolvedAttribute, UnresolvedGenerator And UnresolvedFunction Expressions
 
-`ResolveFunctions` is a logical resolution rule that the link:spark-sql-Analyzer.adoc#ResolveFunctions[logical query plan analyzer] uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
+`ResolveFunctions` is a logical resolution rule that the spark-sql-Analyzer.md#ResolveFunctions[logical query plan analyzer] uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
 
-Technically, `ResolveReferences` is just a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans], i.e. `Rule[LogicalPlan]`.
+Technically, `ResolveReferences` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 
-`ResolveFunctions` is part of link:spark-sql-Analyzer.adoc#Resolution[Resolution] fixed-point batch of rules.
+`ResolveFunctions` is part of spark-sql-Analyzer.md#Resolution[Resolution] fixed-point batch of rules.
 
-NOTE: `ResolveFunctions` is a Scala object inside link:spark-sql-Analyzer.adoc[Analyzer] class.
+NOTE: `ResolveFunctions` is a Scala object inside spark-sql-Analyzer.md[Analyzer] class.
 
 [[example]]
 [source, scala]
@@ -79,15 +79,15 @@ val resolvedPlan = ResolveFunctions(plan)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `apply` is part of link:catalyst/Rule.md#apply[Rule Contract] to apply a rule to a link:spark-sql-LogicalPlan.adoc[logical plan].
+NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
 
-`apply` takes a link:spark-sql-LogicalPlan.adoc[logical plan] and transforms each expression (for every logical operator found in the query plan) as follows:
+`apply` takes a spark-sql-LogicalPlan.md[logical plan] and transforms each expression (for every logical operator found in the query plan) as follows:
 
-* For link:spark-sql-Expression-UnresolvedAttribute.adoc[UnresolvedAttributes] with link:spark-sql-Expression-UnresolvedAttribute.adoc#name[names] as `grouping__id`, `apply` creates a link:spark-sql-Expression-Alias.adoc#creating-instance[Alias] (with a `GroupingID` child expression and `grouping__id` name).
+* For spark-sql-Expression-UnresolvedAttribute.md[UnresolvedAttributes] with spark-sql-Expression-UnresolvedAttribute.md#name[names] as `grouping__id`, `apply` creates a spark-sql-Expression-Alias.md#creating-instance[Alias] (with a `GroupingID` child expression and `grouping__id` name).
 +
 That case seems mostly for compatibility with Hive as `grouping__id` attribute name is used by Hive.
 
-* For link:spark-sql-Expression-UnresolvedGenerator.adoc[UnresolvedGenerators], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a Generator function by name].
+* For spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators], `apply` requests the spark-sql-Analyzer.md#catalog[SessionCatalog] to spark-sql-SessionCatalog.md#lookupFunction[find a Generator function by name].
 +
 If some other non-generator function is found for the name, `apply` fails the analysis phase by reporting an `AnalysisException`:
 +
@@ -95,20 +95,20 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ```
 
-* For link:spark-sql-Expression-UnresolvedFunction.adoc[UnresolvedFunctions], `apply` requests the link:spark-sql-Analyzer.adoc#catalog[SessionCatalog] to link:spark-sql-SessionCatalog.adoc#lookupFunction[find a function by name].
+* For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the spark-sql-Analyzer.md#catalog[SessionCatalog] to spark-sql-SessionCatalog.md#lookupFunction[find a function by name].
 
-* link:spark-sql-Expression-AggregateWindowFunction.adoc[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has link:spark-sql-Expression-UnresolvedFunction.adoc#isDistinct[isDistinct] flag enabled.
+* spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +
 ```
 [name] does not support the modifier DISTINCT
 ```
 
-* link:spark-sql-Expression-AggregateFunction.adoc[AggregateFunctions] are wrapped in a [AggregateExpression](expressions/AggregateExpression.md) (with `Complete` aggregate mode)
+* spark-sql-Expression-AggregateFunction.md[AggregateFunctions] are wrapped in a [AggregateExpression](expressions/AggregateExpression.md) (with `Complete` aggregate mode)
 
-* All other functions are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has link:spark-sql-Expression-UnresolvedFunction.adoc#isDistinct[isDistinct] flag enabled.
+* All other functions are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +
 ```
 [name] does not support the modifier DISTINCT
 ```
 
-`apply` skips link:expressions/Expression.md#childrenResolved[unresolved expressions].
+`apply` skips expressions/Expression.md#childrenResolved[unresolved expressions].

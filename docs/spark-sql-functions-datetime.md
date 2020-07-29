@@ -36,7 +36,7 @@
 current_date(): Column
 ----
 
-`current_date` function gives the current date as a link:spark-sql-DataType.adoc#DateType[date] column.
+`current_date` function gives the current date as a spark-sql-DataType.md#DateType[date] column.
 
 [source, scala]
 ----
@@ -53,7 +53,7 @@ root
  |-- current_date(): date (nullable = false)
 ----
 
-Internally, `current_date` creates a link:spark-sql-Column.adoc[Column] with `CurrentDate` Catalyst leaf expression.
+Internally, `current_date` creates a spark-sql-Column.md[Column] with `CurrentDate` Catalyst leaf expression.
 
 [source, scala]
 ----
@@ -74,7 +74,7 @@ scala> println(cd.numberedTreeString)
 date_format(dateExpr: Column, format: String): Column
 ----
 
-Internally, `date_format` creates a link:spark-sql-Column.adoc[Column] with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
+Internally, `date_format` creates a spark-sql-Column.md[Column] with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
 
 [source, scala]
 ----
@@ -156,7 +156,7 @@ scala> Seq("2017/01/01 00:00:00").toDF("time").withColumn("unix_timestamp", unix
 
 [NOTE]
 ====
-`unix_timestamp` is also supported in link:SparkSession.md#sql[SQL mode].
+`unix_timestamp` is also supported in SparkSession.md#sql[SQL mode].
 
 ```
 scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show
@@ -168,7 +168,7 @@ scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show
 ```
 ====
 
-Internally, `unix_timestamp` creates a link:spark-sql-Column.adoc[Column] with link:spark-sql-Expression-UnixTimestamp.adoc[UnixTimestamp] binary expression (possibly with `CurrentTimestamp`).
+Internally, `unix_timestamp` creates a spark-sql-Column.md[Column] with spark-sql-Expression-UnixTimestamp.md[UnixTimestamp] binary expression (possibly with `CurrentTimestamp`).
 
 === [[window]] Generating Time Windows -- `window` Function
 
@@ -215,9 +215,9 @@ scala> val timeColumn = window('time, "5 seconds")
 timeColumn: org.apache.spark.sql.Column = timewindow(time, 5000000, 5000000, 0) AS `window`
 ----
 
-`timeColumn` should be of link:spark-sql-DataType.adoc#TimestampType[TimestampType], i.e. with https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html[java.sql.Timestamp] values.
+`timeColumn` should be of spark-sql-DataType.md#TimestampType[TimestampType], i.e. with https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html[java.sql.Timestamp] values.
 
-TIP: Use link:++https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html#from-java.time.Instant-++[java.sql.Timestamp.from] or link:++https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html#valueOf-java.time.LocalDateTime-++[java.sql.Timestamp.valueOf] factory methods to create `Timestamp` instances.
+TIP: Use ++https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html#from-java.time.Instant-++[java.sql.Timestamp.from] or ++https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html#valueOf-java.time.LocalDateTime-++[java.sql.Timestamp.valueOf] factory methods to create `Timestamp` instances.
 
 [source, scala]
 ----
@@ -287,7 +287,7 @@ TIP: Use `CalendarInterval` for valid window identifiers.
 
 NOTE: `window` is available as of Spark *2.0.0*.
 
-Internally, `window` creates a link:spark-sql-Column.adoc[Column] (with link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] expression) available as `window` alias.
+Internally, `window` creates a spark-sql-Column.md[Column] (with spark-sql-Expression-TimeWindow.md[TimeWindow] expression) available as `window` alias.
 
 ```
 // q is the query defined earlier
@@ -322,13 +322,13 @@ to_date(e: Column): Column
 to_date(e: Column, fmt: String): Column
 ----
 
-`to_date` converts the column into link:spark-sql-DataType.adoc#DateType[DateType] (by casting to `DateType`).
+`to_date` converts the column into spark-sql-DataType.md#DateType[DateType] (by casting to `DateType`).
 
 NOTE: `fmt` follows http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html[the formatting styles].
 
-Internally, `to_date` creates a link:spark-sql-Column.adoc#creating-instance[Column] with link:spark-sql-Expression-ParseToDate.adoc[ParseToDate] expression (and `Literal` expression for `fmt`).
+Internally, `to_date` creates a spark-sql-Column.md#creating-instance[Column] with spark-sql-Expression-ParseToDate.md[ParseToDate] expression (and `Literal` expression for `fmt`).
 
-TIP: Use link:spark-sql-Expression-ParseToDate.adoc[ParseToDate] expression to use a column for the values of `fmt`.
+TIP: Use spark-sql-Expression-ParseToDate.md[ParseToDate] expression to use a column for the values of `fmt`.
 
 === [[to_timestamp]] Converting Column To TimestampType -- `to_timestamp` Function
 
@@ -338,10 +338,10 @@ to_timestamp(s: Column): Column
 to_timestamp(s: Column, fmt: String): Column
 ----
 
-`to_timestamp` converts the column into link:spark-sql-DataType.adoc#TimestampType[TimestampType] (by casting to `TimestampType`).
+`to_timestamp` converts the column into spark-sql-DataType.md#TimestampType[TimestampType] (by casting to `TimestampType`).
 
 NOTE: `fmt` follows http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html[the formatting styles].
 
-Internally, `to_timestamp` creates a link:spark-sql-Column.adoc#creating-instance[Column] with link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp] expression (and `Literal` expression for `fmt`).
+Internally, `to_timestamp` creates a spark-sql-Column.md#creating-instance[Column] with spark-sql-Expression-ParseToTimestamp.md[ParseToTimestamp] expression (and `Literal` expression for `fmt`).
 
-TIP: Use link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp] expression to use a column for the values of `fmt`.
+TIP: Use spark-sql-Expression-ParseToTimestamp.md[ParseToTimestamp] expression to use a column for the values of `fmt`.

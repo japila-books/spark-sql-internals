@@ -8,7 +8,7 @@ Function: <>
 Usage: a <> b - Returns TRUE if a is not equal to b
 ```
 
-TIP: Functions are registered in link:spark-sql-FunctionRegistry.adoc[FunctionRegistry].
+TIP: Functions are registered in spark-sql-FunctionRegistry.md[FunctionRegistry].
 
 ```
 spark-sql> show functions;

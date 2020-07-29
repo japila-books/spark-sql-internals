@@ -1,10 +1,10 @@
 # JDBCRDD
 
-`JDBCRDD` is a `RDD` of link:spark-sql-InternalRow.adoc[internal binary rows] that represents a structured query over a table in a database accessed via JDBC.
+`JDBCRDD` is a `RDD` of spark-sql-InternalRow.md[internal binary rows] that represents a structured query over a table in a database accessed via JDBC.
 
 NOTE: `JDBCRDD` represents a "SELECT requiredColumns FROM table" query.
 
-`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to link:spark-sql-JDBCRelation.adoc#buildScan[build a scan]).
+`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to spark-sql-JDBCRelation.md#buildScan[build a scan]).
 
 [[internal-registries]]
 .JDBCRDD's Internal Properties (e.g. Registries, Counters and Flags)
@@ -44,7 +44,7 @@ resolveTable(options: JDBCOptions): StructType
 
 `resolveTable`...FIXME
 
-NOTE: `resolveTable` is used exclusively when `JDBCRelation` is requested for the <<spark-sql-JDBCOptions.adoc#schema, schema>>.
+NOTE: `resolveTable` is used exclusively when `JDBCRelation` is requested for the <<spark-sql-JDBCOptions.md#schema, schema>>.
 
 === [[scanTable]] Creating RDD for Distributed Data Scan -- `scanTable` Object Method
 
@@ -59,15 +59,15 @@ scanTable(
   options: JDBCOptions): RDD[InternalRow]
 ----
 
-`scanTable` takes the <<spark-sql-JDBCOptions.adoc#url, url>> option.
+`scanTable` takes the <<spark-sql-JDBCOptions.md#url, url>> option.
 
 `scanTable` finds the corresponding JDBC dialect (per the `url` option) and requests it to quote the column identifiers in the input `requiredColumns`.
 
-`scanTable` uses the `JdbcUtils` object to <<spark-sql-JdbcUtils.adoc#createConnectionFactory, createConnectionFactory>> and <<pruneSchema, prune columns>> from the input `schema` to include the input `requiredColumns` only.
+`scanTable` uses the `JdbcUtils` object to <<spark-sql-JdbcUtils.md#createConnectionFactory, createConnectionFactory>> and <<pruneSchema, prune columns>> from the input `schema` to include the input `requiredColumns` only.
 
 In the end, `scanTable` creates a new <<creating-instance, JDBCRDD>>.
 
-NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<spark-sql-JDBCRelation.adoc#buildScan, build a distributed data scan with column pruning and filter pushdown>>.
+NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<spark-sql-JDBCRelation.md#buildScan, build a distributed data scan with column pruning and filter pushdown>>.
 
 === [[creating-instance]] Creating JDBCRDD Instance
 
@@ -75,12 +75,12 @@ NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<spar
 
 * [[sc]] `SparkContext`
 * [[getConnection]] Function to create a `Connection` (`() => Connection`)
-* [[schema]] Schema (link:spark-sql-StructType.adoc[StructType])
+* [[schema]] Schema (link:spark-sql-StructType.md[StructType])
 * [[columns]] Array of column names
-* [[filters]] Array of link:spark-sql-Filter.adoc[Filter predicates]
+* [[filters]] Array of spark-sql-Filter.md[Filter predicates]
 * [[partitions]] Array of Spark Core's `Partitions`
 * [[url]] Connection URL
-* [[options]] link:spark-sql-JDBCOptions.adoc[JDBCOptions]
+* [[options]] spark-sql-JDBCOptions.md[JDBCOptions]
 
 `JDBCRDD` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -119,7 +119,7 @@ compileFilter(f: Filter, dialect: JdbcDialect): Option[String]
 ====
 `compileFilter` is used when:
 
-* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.adoc#unhandledFilters, find unhandled Filter predicates>>
+* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.md#unhandledFilters, find unhandled Filter predicates>>
 
 * `JDBCRDD` is <<filterWhereClause, created>>
 ====

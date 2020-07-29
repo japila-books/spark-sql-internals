@@ -4,7 +4,7 @@
 
 Spark SQL can read data from external storage systems like files, Hive tables and JDBC databases through [DataFrameReader](DataFrameReader.md) interface.
 
-You use link:SparkSession.md[SparkSession] to access `DataFrameReader` using link:SparkSession.md#read[read] operation.
+You use SparkSession.md[SparkSession] to access `DataFrameReader` using SparkSession.md#read[read] operation.
 
 [source, scala]
 ----
@@ -14,7 +14,7 @@ val spark = SparkSession.builder.getOrCreate
 val reader = spark.read
 ----
 
-`DataFrameReader` is an interface to create link:spark-sql-DataFrame.adoc[DataFrames] (aka `Dataset[Row]`) from [files](DataFrameReader.md#creating-dataframes-from-files), [Hive tables](DataFrameReader.md#creating-dataframes-from-tables) or [tables using JDBC](DataFrameReader.md#jdbc).
+`DataFrameReader` is an interface to create spark-sql-DataFrame.md[DataFrames] (aka `Dataset[Row]`) from [files](DataFrameReader.md#creating-dataframes-from-files), [Hive tables](DataFrameReader.md#creating-dataframes-from-tables) or [tables using JDBC](DataFrameReader.md#jdbc).
 
 [source, scala]
 ----
@@ -29,16 +29,16 @@ As of Spark 2.0, `DataFrameReader` can read text files using [textFile](DataFram
 spark.read.textFile("README.md")
 ----
 
-You can also link:spark-sql-datasource-custom-formats.adoc[define your own custom file formats].
+You can also spark-sql-datasource-custom-formats.md[define your own custom file formats].
 
 [source, scala]
 ----
 val countries = reader.format("customFormat").load("countries.cf")
 ----
 
-There are two operation modes in Spark SQL, i.e. batch and link:spark-structured-streaming.adoc[streaming] (part of Spark Structured Streaming).
+There are two operation modes in Spark SQL, i.e. batch and spark-structured-streaming.md[streaming] (part of Spark Structured Streaming).
 
-You can access link:spark-sql-streaming-DataStreamReader.adoc[DataStreamReader] for reading streaming datasets through link:SparkSession.md#readStream[SparkSession.readStream] method.
+You can access spark-sql-streaming-DataStreamReader.md[DataStreamReader] for reading streaming datasets through SparkSession.md#readStream[SparkSession.readStream] method.
 
 [source, scala]
 ----
@@ -50,9 +50,9 @@ The available methods in `DataStreamReader` are similar to `DataFrameReader`.
 
 === [[saving-datasets]] Saving Datasets
 
-Spark SQL can save data to external storage systems like files, Hive tables and JDBC databases through link:spark-sql-DataFrameWriter.adoc[DataFrameWriter] interface.
+Spark SQL can save data to external storage systems like files, Hive tables and JDBC databases through spark-sql-DataFrameWriter.md[DataFrameWriter] interface.
 
-You use link:spark-sql-Dataset.adoc#write[write] method on a `Dataset` to access `DataFrameWriter`.
+You use spark-sql-Dataset.md#write[write] method on a `Dataset` to access `DataFrameWriter`.
 
 [source, scala]
 ----
@@ -62,9 +62,9 @@ val ints: Dataset[Int] = (0 to 5).toDS
 val writer: DataFrameWriter[Int] = ints.write
 ----
 
-`DataFrameWriter` is an interface to persist a link:spark-sql-Dataset.adoc[Datasets] to an external storage system in a batch fashion.
+`DataFrameWriter` is an interface to persist a spark-sql-Dataset.md[Datasets] to an external storage system in a batch fashion.
 
-You can access link:spark-sql-streaming-DataStreamWriter.adoc[DataStreamWriter] for writing streaming datasets through link:spark-sql-Dataset.adoc#writeStream[Dataset.writeStream] method.
+You can access spark-sql-streaming-DataStreamWriter.md[DataStreamWriter] for writing streaming datasets through spark-sql-Dataset.md#writeStream[Dataset.writeStream] method.
 
 [source, scala]
 ----

@@ -2,7 +2,7 @@ title: LogicalPlanVisitor
 
 # LogicalPlanVisitor -- Contract for Computing Statistic Estimates and Query Hints of Logical Plan
 
-`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute link:spark-sql-Statistics.adoc[estimates of plan statistics and query hints].
+`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute spark-sql-Statistics.md[estimates of plan statistics and query hints].
 
 TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Visitor_pattern[Wikipedia].
 
@@ -14,11 +14,11 @@ TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Vi
 visit(p: LogicalPlan): T
 ----
 
-NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always link:spark-sql-Statistics.adoc[Statistics] only.
+NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always spark-sql-Statistics.md[Statistics] only.
 
-The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per link:spark-sql-cost-based-optimization.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` link:spark-sql-LogicalPlanStats.adoc#stats[uses] <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
+The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` spark-sql-LogicalPlanStats.md#stats[uses] <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
 
-NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
+NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
 
 [[implementations]]
 .LogicalPlanVisitors
@@ -27,10 +27,10 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | LogicalPlanVisitor
 | Description
 
-| [[BasicStatsPlanVisitor]] link:spark-sql-BasicStatsPlanVisitor.adoc[BasicStatsPlanVisitor]
+| [[BasicStatsPlanVisitor]] spark-sql-BasicStatsPlanVisitor.md[BasicStatsPlanVisitor]
 |
 
-| [[SizeInBytesOnlyStatsPlanVisitor]] link:spark-sql-SizeInBytesOnlyStatsPlanVisitor.adoc[SizeInBytesOnlyStatsPlanVisitor]
+| [[SizeInBytesOnlyStatsPlanVisitor]] spark-sql-SizeInBytesOnlyStatsPlanVisitor.md[SizeInBytesOnlyStatsPlanVisitor]
 |
 |===
 
@@ -42,7 +42,7 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | Logical Operator
 | Handler
 
-| [[Aggregate]] link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate]
+| [[Aggregate]] spark-sql-LogicalPlan-Aggregate.md[Aggregate]
 | [[visitAggregate]] `visitAggregate`
 
 | [[Distinct]] `Distinct`
@@ -51,13 +51,13 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | [[Except]] `Except`
 | `visitExcept`
 
-| [[Expand]] link:spark-sql-LogicalPlan-Expand.adoc[Expand]
+| [[Expand]] spark-sql-LogicalPlan-Expand.md[Expand]
 | `visitExpand`
 
 | [[Filter]] `Filter`
 | [[visitFilter]] `visitFilter`
 
-| [[Generate]] link:spark-sql-LogicalPlan-Generate.adoc[Generate]
+| [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]
 | `visitGenerate`
 
 | [[GlobalLimit]] `GlobalLimit`
@@ -66,25 +66,25 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | [[Intersect]] `Intersect`
 | [[visitIntersect]] `visitIntersect`
 
-| [[Join]] link:spark-sql-LogicalPlan-Join.adoc[Join]
+| [[Join]] spark-sql-LogicalPlan-Join.md[Join]
 | [[visitJoin]] `visitJoin`
 
 | [[LocalLimit]] `LocalLimit`
 | `visitLocalLimit`
 
-| [[Pivot]] link:spark-sql-LogicalPlan-Pivot.adoc[Pivot]
+| [[Pivot]] spark-sql-LogicalPlan-Pivot.md[Pivot]
 | `visitPivot`
 
-| [[Project]] link:spark-sql-LogicalPlan-Project.adoc[Project]
+| [[Project]] spark-sql-LogicalPlan-Project.md[Project]
 | [[visitProject]] `visitProject`
 
-| [[Repartition]] link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[Repartition]
+| [[Repartition]] spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[Repartition]
 | `visitRepartition`
 
-| [[RepartitionByExpression]] link:spark-sql-LogicalPlan-Repartition-RepartitionByExpression.adoc[RepartitionByExpression]
+| [[RepartitionByExpression]] spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[RepartitionByExpression]
 | `visitRepartitionByExpr`
 
-| [[ResolvedHint]] link:spark-sql-LogicalPlan-ResolvedHint.adoc[ResolvedHint]
+| [[ResolvedHint]] spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 | `visitHint`
 
 | [[Sample]] `Sample`
@@ -96,9 +96,9 @@ NOTE: link:spark-sql-properties.adoc#spark.sql.cbo.enabled[spark.sql.cbo.enabled
 | [[Union]] `Union`
 | `visitUnion`
 
-| [[Window]] link:spark-sql-LogicalPlan-Window.adoc[Window]
+| [[Window]] spark-sql-LogicalPlan-Window.md[Window]
 | `visitWindow`
 
-| [[LogicalPlan]] Other link:spark-sql-LogicalPlan.adoc[logical operators]
+| [[LogicalPlan]] Other spark-sql-LogicalPlan.md[logical operators]
 | `default`
 |===

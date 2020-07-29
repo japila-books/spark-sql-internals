@@ -2,9 +2,9 @@ title: AnalyzePartitionCommand
 
 # AnalyzePartitionCommand Logical Command -- Computing Partition-Level Statistics
 
-`AnalyzePartitionCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
+`AnalyzePartitionCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
 
-`AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for link:spark-sql-SparkSqlAstBuilder.adoc#AnalyzePartitionCommand[ANALYZE TABLE] with `PARTITION` specification only (i.e. no `FOR COLUMNS` clause).
+`AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for spark-sql-SparkSqlAstBuilder.md#AnalyzePartitionCommand[ANALYZE TABLE] with `PARTITION` specification only (i.e. no `FOR COLUMNS` clause).
 
 [source, scala]
 ----
@@ -24,15 +24,15 @@ AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view.
+`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view.
 
-NOTE: `run` uses the input `SparkSession` to access the session-specific link:SparkSession.md#sessionState[SessionState] that in turn is used to access the current link:SessionState.md#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSession.md#sessionState[SessionState] that in turn is used to access the current SessionState.md#catalog[SessionCatalog].
 
 `run` <<getPartitionSpec, getPartitionSpec>>.
 
-`run` requests the session-specific `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#listPartitions[partitions] per the partition specification.
+`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#listPartitions[partitions] per the partition specification.
 
 `run` finishes when the table has no partitions defined in a metastore.
 
@@ -40,9 +40,9 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific link:Sp
 `run` <<calculateRowCountsPerPartition, computes row count statistics per partition>> unless <<noscan, noscan>> flag was enabled.
 
 [[total-size-stat]]
-`run` link:spark-sql-CommandUtils.adoc#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and link:spark-sql-CommandUtils.adoc#compareAndGetNewStats[creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
+`run` spark-sql-CommandUtils.md#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and spark-sql-CommandUtils.md#compareAndGetNewStats[creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
 
-In the end, `run` link:spark-sql-SessionCatalog.adoc#alterPartitions[alters table partition metadata] for partitions with the statistics changed.
+In the end, `run` spark-sql-SessionCatalog.md#alterPartitions[alters table partition metadata] for partitions with the statistics changed.
 
 `run` reports a `NoSuchPartitionException` when partitions do not match the metastore.
 
@@ -83,4 +83,4 @@ NOTE: `getPartitionSpec` is used exclusively when `AnalyzePartitionCommand` is <
 
 * [[tableIdent]] `TableIdentifier`
 * [[partitionSpec]] Partition specification
-* [[noscan]] `noscan` flag (enabled by default) that indicates whether link:spark-sql-cost-based-optimization.adoc#NOSCAN[NOSCAN] option was used or not
+* [[noscan]] `noscan` flag (enabled by default) that indicates whether spark-sql-cost-based-optimization.md#NOSCAN[NOSCAN] option was used or not

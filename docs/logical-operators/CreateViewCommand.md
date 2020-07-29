@@ -2,13 +2,13 @@ title: CreateViewCommand
 
 # CreateViewCommand Logical Command
 
-`CreateViewCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.adoc#, logical command>> for <<run, creating or replacing a view or a table>>.
+`CreateViewCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> for <<run, creating or replacing a view or a table>>.
 
 `CreateViewCommand` is <<creating-instance, created>> to represent the following:
 
-* <<spark-sql-SparkSqlAstBuilder.adoc#visitCreateView, CREATE VIEW AS>> SQL statements
+* <<spark-sql-SparkSqlAstBuilder.md#visitCreateView, CREATE VIEW AS>> SQL statements
 
-* `Dataset` operators: <<spark-sql-dataset-operators.adoc#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.adoc#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.adoc#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.adoc#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
+* `Dataset` operators: <<spark-sql-dataset-operators.md#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
 
 CAUTION: FIXME What's the difference between `CreateTempViewUsing`?
 
@@ -24,17 +24,17 @@ CAUTION: FIXME What's the difference between `CreateTempViewUsing`?
 | LocalTempView
 | [[LocalTempView]] A session-scoped *local temporary view* that is available until the session, that has created it, is stopped.
 
-When executed, `CreateViewCommand` requests the link:spark-sql-SessionCatalog.adoc#createTempView[current `SessionCatalog` to create a temporary view].
+When executed, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createTempView[current `SessionCatalog` to create a temporary view].
 
 | GlobalTempView
 | [[GlobalTempView]] A cross-session *global temporary view* that is available until the Spark application stops.
 
-When executed, `CreateViewCommand` requests the link:spark-sql-SessionCatalog.adoc#createGlobalTempView[current `SessionCatalog` to create a global view].
+When executed, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createGlobalTempView[current `SessionCatalog` to create a global view].
 
 | PersistedView
 | [[PersistedView]] A cross-session *persisted view* that is available until dropped.
 
-When executed, `CreateViewCommand` checks if the table exists. If it does and replace is enabled `CreateViewCommand` requests the link:spark-sql-SessionCatalog.adoc#alterTable[current `SessionCatalog` to alter a table]. Otherwise, when the table does not exist, `CreateViewCommand` requests the link:spark-sql-SessionCatalog.adoc#createTable[current `SessionCatalog` to create it].
+When executed, `CreateViewCommand` checks if the table exists. If it does and replace is enabled `CreateViewCommand` requests the spark-sql-SessionCatalog.md#alterTable[current `SessionCatalog` to alter a table]. Otherwise, when the table does not exist, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createTable[current `SessionCatalog` to create it].
 |===
 
 [source, scala]
@@ -160,13 +160,13 @@ NOTE: `prepareTable` is used exclusively when `CreateViewCommand` logical comman
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the <<child, child logical plan>> (which simply creates a <<spark-sql-QueryExecution.adoc#creating-instance, QueryExecution>>).
+`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the <<child, child logical plan>> (which simply creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>>).
 
 [NOTE]
 ====
-`run` uses a <<spark-sql-LogicalPlan.adoc#logical-plan-to-be-analyzed-idiom, common idiom>> in Spark SQL to make sure that a logical plan can be analyzed, i.e.
+`run` uses a <<spark-sql-LogicalPlan.md#logical-plan-to-be-analyzed-idiom, common idiom>> in Spark SQL to make sure that a logical plan can be analyzed, i.e.
 
 [source, scala]
 ----
@@ -182,17 +182,17 @@ val analyzedPlan = qe.analyzed
 
 `run` then branches off per the <<viewType, ViewType>>:
 
-* For <<LocalTempView, local temporary views>>, `run` <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#createTempView, create or replace a local temporary view>>
+* For <<LocalTempView, local temporary views>>, `run` <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createTempView, create or replace a local temporary view>>
 
-* For <<GlobalTempView, global temporary views>>, `run` also <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#createGlobalTempView, create or replace a global temporary view>>
+* For <<GlobalTempView, global temporary views>>, `run` also <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createGlobalTempView, create or replace a global temporary view>>
 
-* For <<PersistedView, persisted views>>, `run` asks the `SessionCatalog` whether the <<spark-sql-SessionCatalog.adoc#tableExists, table exists or not>> (given <<name, TableIdentifier>>).
+* For <<PersistedView, persisted views>>, `run` asks the `SessionCatalog` whether the <<spark-sql-SessionCatalog.md#tableExists, table exists or not>> (given <<name, TableIdentifier>>).
 
 ** If the <<name, table>> exists and the <<allowExisting, allowExisting>> flag is on, `run` simply does nothing (and exits)
 
-** If the <<name, table>> exists and the <<replace, replace>> flag is on, `run` requests the `SessionCatalog` for the <<spark-sql-SessionCatalog.adoc#getTableMetadata, table metadata>> and replaces the table, i.e. `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#dropTable, drop the table>> followed by <<spark-sql-SessionCatalog.adoc#createTable, re-creating it>> (with a <<prepareTable, new CatalogTable>>)
+** If the <<name, table>> exists and the <<replace, replace>> flag is on, `run` requests the `SessionCatalog` for the <<spark-sql-SessionCatalog.md#getTableMetadata, table metadata>> and replaces the table, i.e. `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#dropTable, drop the table>> followed by <<spark-sql-SessionCatalog.md#createTable, re-creating it>> (with a <<prepareTable, new CatalogTable>>)
 
-** If however the <<name, table>> does not exist, `run` simply requests the `SessionCatalog` to <<spark-sql-SessionCatalog.adoc#createTable, create it>> (with a <<prepareTable, new CatalogTable>>)
+** If however the <<name, table>> does not exist, `run` simply requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createTable, create it>> (with a <<prepareTable, new CatalogTable>>)
 
 `run` throws an `AnalysisException` for <<PersistedView, persisted views>> when they already exist, the <<allowExisting, allowExisting>> flag is off and the table type is not a view.
 
@@ -221,7 +221,7 @@ The number of columns produced by the SELECT clause (num: `[output.length]`) doe
 * [[comment]] Optional comment
 * [[properties]] Properties (as `Map[String, String]`)
 * [[originalText]] Optional DDL statement
-* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical plan>>
+* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
 * [[allowExisting]] `allowExisting` flag
 * [[replace]] `replace` flag
 * <<viewType, ViewType>>

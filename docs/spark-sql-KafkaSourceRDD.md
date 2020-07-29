@@ -2,7 +2,7 @@
 
 `KafkaSourceRDD` is an `RDD` of Kafka's https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/ConsumerRecords.html[ConsumerRecords] (with keys and values being collections of bytes, i.e. `Array[Byte]`).
 
-`KafkaSourceRDD` uses <<spark-sql-KafkaSourceRDDPartition.adoc#, KafkaSourceRDDPartition>> for the <<getPartitions, partitions>>.
+`KafkaSourceRDD` uses <<spark-sql-KafkaSourceRDDPartition.md#, KafkaSourceRDDPartition>> for the <<getPartitions, partitions>>.
 
 `KafkaSourceRDD` has a specialized API for the following RDD operators:
 
@@ -18,7 +18,7 @@
 
 `KafkaSourceRDD` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>)
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.md#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>)
 
 * (Spark Structured Streaming) `KafkaSource` is requested to `getBatch`
 
@@ -28,7 +28,7 @@
 
 * [[sc]] `SparkContext`
 * [[executorKafkaParams]] Collection of key-value settings for executors reading records from Kafka topics
-* [[offsetRanges]] Collection of <<spark-sql-KafkaSourceRDDOffsetRange.adoc#, KafkaSourceRDDOffsetRanges>>
+* [[offsetRanges]] Collection of <<spark-sql-KafkaSourceRDDOffsetRange.md#, KafkaSourceRDDOffsetRanges>>
 * [[pollTimeoutMs]] Timeout (in milliseconds) to poll data from Kafka
 +
 Used exclusively when `KafkaSourceRDD` is requested to <<compute, compute a RDD partition>> (and requests a `KafkaDataConsumer` for a `ConsumerRecord`)

@@ -2,7 +2,7 @@ title: DescribeColumnCommand
 
 # DescribeColumnCommand Logical Command for DESCRIBE TABLE SQL Command with Column
 
-`DescribeColumnCommand` is a link:spark-sql-LogicalPlan-RunnableCommand.adoc[logical command] for link:spark-sql-SparkSqlAstBuilder.adoc#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
+`DescribeColumnCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
 
 ```
 [DESC|DESCRIBE] TABLE? [EXTENDED|FORMATTED] table_name column_name
@@ -68,7 +68,7 @@ scala> spark.sql(descExtSQL).show
 ----
 
 [[output]]
-`DescribeColumnCommand` defines the link:spark-sql-LogicalPlan-Command.adoc#output[output schema] with the following columns:
+`DescribeColumnCommand` defines the spark-sql-LogicalPlan-Command.md#output[output schema] with the following columns:
 
 * `info_name` with "name of the column info" comment
 * `info_value` with "value of the column info" comment
@@ -84,17 +84,17 @@ scala> spark.sql(descExtSQL).show
 run(session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.adoc#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
 
-`run` requests the `SessionCatalog` for the link:spark-sql-SessionCatalog.adoc#getTempViewOrPermanentTableMetadata[table metadata].
+`run` requests the `SessionCatalog` for the spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata].
 
-NOTE: `run` uses the input `SparkSession` to access link:SparkSession.md#sessionState[SessionState] that in turn is used to access the link:SessionState.md#catalog[SessionCatalog].
+NOTE: `run` uses the input `SparkSession` to access SparkSession.md#sessionState[SessionState] that in turn is used to access the SessionState.md#catalog[SessionCatalog].
 
-`run` takes the link:spark-sql-CatalogStatistics.adoc#colStats[column statistics] from the  link:spark-sql-CatalogTable.adoc#stats[table statistics] if available.
+`run` takes the spark-sql-CatalogStatistics.md#colStats[column statistics] from the  spark-sql-CatalogTable.md#stats[table statistics] if available.
 
-NOTE: link:spark-sql-CatalogStatistics.adoc#colStats[Column statistics] are available (in the link:spark-sql-CatalogTable.adoc#stats[table statistics]) only after link:spark-sql-LogicalPlan-AnalyzeColumnCommand.adoc[ANALYZE TABLE FOR COLUMNS] SQL command was run.
+NOTE: spark-sql-CatalogStatistics.md#colStats[Column statistics] are available (in the spark-sql-CatalogTable.md#stats[table statistics]) only after spark-sql-LogicalPlan-AnalyzeColumnCommand.md[ANALYZE TABLE FOR COLUMNS] SQL command was run.
 
 `run` adds `comment` metadata if available for the <<colNameParts, column>>.
 
@@ -133,4 +133,4 @@ NOTE: `histogramDescription` is used exclusively when `DescribeColumnCommand` is
 
 * [[table]] `TableIdentifier`
 * [[colNameParts]] Column name
-* [[isExtended]] `isExtended` flag that indicates whether link:spark-sql-SparkSqlAstBuilder.adoc#DescribeColumnCommand[EXTENDED or FORMATTED option] was used or not
+* [[isExtended]] `isExtended` flag that indicates whether spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[EXTENDED or FORMATTED option] was used or not

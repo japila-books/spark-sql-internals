@@ -16,17 +16,17 @@ trait Encoder[T] extends Serializable {
 }
 ----
 
-The type `T` stands for the type of records a `Encoder[T]` can deal with. An encoder of type `T`, i.e. `Encoder[T]`, is used to convert (_encode_ and _decode_) any JVM object or primitive of type `T` (that could be your domain object) to and from Spark SQL's link:spark-sql-InternalRow.adoc[InternalRow] which is the internal binary row format representation (using Catalyst expressions and code generation).
+The type `T` stands for the type of records a `Encoder[T]` can deal with. An encoder of type `T`, i.e. `Encoder[T]`, is used to convert (_encode_ and _decode_) any JVM object or primitive of type `T` (that could be your domain object) to and from Spark SQL's spark-sql-InternalRow.md[InternalRow] which is the internal binary row format representation (using Catalyst expressions and code generation).
 
 NOTE: `Encoder` is also called _"a container of serde expressions in Dataset"_.
 
-NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder].
+NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is spark-sql-ExpressionEncoder.md[ExpressionEncoder].
 
-Encoders are integral (and internal) part of any link:spark-sql-Dataset.adoc[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
+Encoders are integral (and internal) part of any spark-sql-Dataset.md[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
 
 NOTE: `Dataset[T]` type is a Scala type constructor with the type parameter `T`. So is `Encoder[T]` that handles serialization and deserialization of `T` to the internal representation.
 
-Encoders know the link:spark-sql-schema.adoc[schema] of the records. This is how they offer significantly faster serialization and deserialization (comparing to the default Java or Kryo serializers).
+Encoders know the spark-sql-schema.md[schema] of the records. This is how they offer significantly faster serialization and deserialization (comparing to the default Java or Kryo serializers).
 
 [source, scala]
 ----
@@ -90,7 +90,7 @@ scala> jacek == jacekReborn
 res6: Boolean = true
 ----
 
-You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in link:SparkSession.md#implicits[`implicits` object].
+You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in SparkSession.md#implicits[`implicits` object].
 
 [source, scala]
 ----
@@ -98,11 +98,11 @@ val spark = SparkSession.builder.getOrCreate()
 import spark.implicits._
 ----
 
-TIP: The default encoders are already imported in link:spark-shell.adoc[spark-shell].
+TIP: The default encoders are already imported in spark-shell.md[spark-shell].
 
 Encoders map columns (of your dataset) to fields (of your JVM object) by name. It is by Encoders that you can bridge JVM objects to data sources (CSV, JDBC, Parquet, Avro, JSON, Cassandra, Elasticsearch, memsql) and vice versa.
 
-NOTE: In Spark SQL 2.0 `DataFrame` type is a mere type alias for `Dataset[Row]` with link:spark-sql-RowEncoder.adoc[RowEncoder] being the encoder.
+NOTE: In Spark SQL 2.0 `DataFrame` type is a mere type alias for `Dataset[Row]` with spark-sql-RowEncoder.md[RowEncoder] being the encoder.
 
 === [[creating-encoders]][[encoders]] Creating Custom Encoders (Encoders object)
 

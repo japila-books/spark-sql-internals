@@ -2,9 +2,9 @@ title: RowDataSourceScanExec
 
 # RowDataSourceScanExec Leaf Physical Operator
 
-`RowDataSourceScanExec` is a link:spark-sql-SparkPlan-DataSourceScanExec.adoc[DataSourceScanExec] (and so indirectly a link:SparkPlan.md#LeafExecNode[leaf physical operator]) for scanning data from a <<relation, BaseRelation>>.
+`RowDataSourceScanExec` is a spark-sql-SparkPlan-DataSourceScanExec.md[DataSourceScanExec] (and so indirectly a SparkPlan.md#LeafExecNode[leaf physical operator]) for scanning data from a <<relation, BaseRelation>>.
 
-`RowDataSourceScanExec` is <<creating-instance, created>> to represent a link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
+`RowDataSourceScanExec` is <<creating-instance, created>> to represent a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
 
 * `CatalystScan`, `PrunedFilteredScan`, `PrunedScan` (indirectly when `DataSourceStrategy` is requested to [pruneFilterProjectRaw](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw))
 
@@ -24,7 +24,7 @@ title: RowDataSourceScanExec
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -32,15 +32,15 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 
 `RowDataSourceScanExec` takes the following when created:
 
-* [[fullOutput]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
+* [[fullOutput]] Output schema spark-sql-Expression-Attribute.md[attributes]
 * [[requiredColumnsIndex]] Indices of required columns
-* [[filters]] link:spark-sql-Filter.adoc[Filter predicates]
-* [[handledFilters]] Handled link:spark-sql-Filter.adoc[filter predicates]
-* [[rdd]] RDD of link:spark-sql-InternalRow.adoc[internal binary rows]
-* [[relation]] link:spark-sql-BaseRelation.adoc[BaseRelation]
+* [[filters]] spark-sql-Filter.md[Filter predicates]
+* [[handledFilters]] Handled spark-sql-Filter.md[filter predicates]
+* [[rdd]] RDD of spark-sql-InternalRow.md[internal binary rows]
+* [[relation]] spark-sql-BaseRelation.md[BaseRelation]
 * [[tableIdentifier]] `TableIdentifier`
 
-NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)].
+NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of spark-sql-SparkPlan-DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
 
 === [[metadata]] `metadata` Property
 
@@ -49,7 +49,7 @@ NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled fil
 metadata: Map[String, String]
 ----
 
-NOTE: `metadata` is part of link:spark-sql-SparkPlan-DataSourceScanExec.adoc#metadata[DataSourceScanExec Contract] to describe a scan for a link:spark-sql-SparkPlan-DataSourceScanExec.adoc#simpleString[simple text representation (in a query plan tree)].
+NOTE: `metadata` is part of spark-sql-SparkPlan-DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
 
 `metadata` marks the <<filters, filter predicates>> that are included in the <<handledFilters, handled filters predicates>> with `*` (star).
 
@@ -57,6 +57,6 @@ NOTE: Filter predicates with `*` (star) are to denote filters that are pushed do
 
 In the end, `metadata` creates the following mapping:
 
-. *ReadSchema* with the <<output, output>> converted to link:spark-sql-StructType.adoc#catalogString[catalog representation]
+. *ReadSchema* with the <<output, output>> converted to spark-sql-StructType.md#catalogString[catalog representation]
 
 . *PushedFilters* with the marked and unmarked <<filters, filter predicates>>

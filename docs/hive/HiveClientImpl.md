@@ -5,13 +5,13 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveClientImpl` is a link:HiveClient.adoc[HiveClient] that uses a <<client, Hive metastore client>> (for meta data/DDL operations using calls to a Hive metastore).
+`HiveClientImpl` is a HiveClient.md[HiveClient] that uses a <<client, Hive metastore client>> (for meta data/DDL operations using calls to a Hive metastore).
 
-`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to link:HiveUtils.adoc#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of link:../spark-sql-hive-metastore.adoc#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
+`HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to HiveUtils.md#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of ../spark-sql-hive-metastore.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
 NOTE: The location of the default database for the Hive metastore warehouse is `/user/hive/warehouse` by default.
 
-NOTE: The Hadoop configuration is what link:HiveExternalCatalog.adoc#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
+NOTE: The Hadoop configuration is what HiveExternalCatalog.md#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
 
 [[logging]]
 [TIP]
@@ -24,7 +24,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=ALL
 ```
 
-Refer to link:../spark-logging.adoc[Logging].
+Refer to ../spark-logging.md[Logging].
 ====
 
 === [[creating-instance]] Creating HiveClientImpl Instance
@@ -37,7 +37,7 @@ Refer to link:../spark-logging.adoc[Logging].
 * [[hadoopConf]] Hadoop configuration
 * [[extraConfig]] Extra configuration
 * [[initClassLoader]] Initial `ClassLoader`
-* [[clientLoader]] link:IsolatedClientLoader.adoc[IsolatedClientLoader]
+* [[clientLoader]] IsolatedClientLoader.md[IsolatedClientLoader]
 
 `HiveClientImpl` initializes the <<internal-properties, internal properties>>.
 
@@ -59,7 +59,7 @@ getTableOption(
   tableName: String): Option[CatalogTable]
 ----
 
-NOTE: `getTableOption` is part of link:HiveClient.adoc#getTableOption[HiveClient] contract.
+NOTE: `getTableOption` is part of HiveClient.md#getTableOption[HiveClient] contract.
 
 `getTableOption` prints out the following DEBUG message to the logs:
 
@@ -67,7 +67,7 @@ NOTE: `getTableOption` is part of link:HiveClient.adoc#getTableOption[HiveClient
 Looking up [dbName].[tableName]
 ```
 
-`getTableOption` <<getRawTableOption, getRawTableOption>> and converts the Hive table metadata to Spark's link:../spark-sql-CatalogTable.adoc[CatalogTable]
+`getTableOption` <<getRawTableOption, getRawTableOption>> and converts the Hive table metadata to Spark's ../spark-sql-CatalogTable.md[CatalogTable]
 
 === [[renamePartitions]] `renamePartitions` Method
 
@@ -80,7 +80,7 @@ renamePartitions(
   newSpecs: Seq[TablePartitionSpec]): Unit
 ----
 
-NOTE: `renamePartitions` is part of link:HiveClient.adoc#renamePartitions[HiveClient Contract] to...FIXME.
+NOTE: `renamePartitions` is part of HiveClient.md#renamePartitions[HiveClient Contract] to...FIXME.
 
 `renamePartitions`...FIXME
 
@@ -94,7 +94,7 @@ alterPartitions(
   newParts: Seq[CatalogTablePartition]): Unit
 ----
 
-NOTE: `alterPartitions` is part of link:HiveClient.adoc#alterPartitions[HiveClient Contract] to...FIXME.
+NOTE: `alterPartitions` is part of HiveClient.md#alterPartitions[HiveClient Contract] to...FIXME.
 
 `alterPartitions`...FIXME
 
@@ -107,7 +107,7 @@ getPartitions(
   spec: Option[TablePartitionSpec]): Seq[CatalogTablePartition]
 ----
 
-NOTE: `getPartitions` is part of link:HiveClient.adoc#getPartitions[HiveClient Contract] to...FIXME.
+NOTE: `getPartitions` is part of HiveClient.md#getPartitions[HiveClient Contract] to...FIXME.
 
 `getPartitions`...FIXME
 
@@ -120,7 +120,7 @@ getPartitionsByFilter(
   predicates: Seq[Expression]): Seq[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionsByFilter` is part of link:HiveClient.adoc#getPartitionsByFilter[HiveClient Contract] to...FIXME.
+NOTE: `getPartitionsByFilter` is part of HiveClient.md#getPartitionsByFilter[HiveClient Contract] to...FIXME.
 
 `getPartitionsByFilter`...FIXME
 
@@ -133,7 +133,7 @@ getPartitionOption(
   spec: TablePartitionSpec): Option[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionOption` is part of link:HiveClient.adoc#getPartitionOption[HiveClient Contract] to...FIXME.
+NOTE: `getPartitionOption` is part of HiveClient.md#getPartitionOption[HiveClient Contract] to...FIXME.
 
 `getPartitionOption`...FIXME
 
@@ -144,7 +144,7 @@ NOTE: `getPartitionOption` is part of link:HiveClient.adoc#getPartitionOption[Hi
 readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
 ----
 
-`readHiveStats` creates a link:../spark-sql-CatalogStatistics.adoc#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
+`readHiveStats` creates a ../spark-sql-CatalogStatistics.md#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
 
 .Table Statistics and Hive Parameters
 [cols="1,2",options="header",width="100%"]
@@ -153,16 +153,16 @@ readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
 | Table Statistics
 
 | `totalSize`
-| link:../spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes]
+| ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes]
 
 | `rawDataSize`
-| link:../spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes]
+| ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes]
 
 | `numRows`
-| link:../spark-sql-CatalogStatistics.adoc#rowCount[rowCount]
+| ../spark-sql-CatalogStatistics.md#rowCount[rowCount]
 |===
 
-NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for link:../spark-sql-CatalogStatistics.adoc#sizeInBytes[sizeInBytes] table statistic.
+NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes] table statistic.
 
 NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadata of a <<getTableOption, table>> or <<fromHivePartition, table partition>>.
 
@@ -173,15 +173,15 @@ NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadat
 fromHivePartition(hp: HivePartition): CatalogTablePartition
 ----
 
-`fromHivePartition` simply creates a link:../spark-sql-CatalogTablePartition.adoc#creating-instance[CatalogTablePartition] with the following:
+`fromHivePartition` simply creates a ../spark-sql-CatalogTablePartition.md#creating-instance[CatalogTablePartition] with the following:
 
-* link:../spark-sql-CatalogTablePartition.adoc#spec[spec] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
+* ../spark-sql-CatalogTablePartition.md#spec[spec] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
 
-* link:../spark-sql-CatalogTablePartition.adoc#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
+* ../spark-sql-CatalogTablePartition.md#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
 
-* link:../spark-sql-CatalogTablePartition.adoc#parameters[parameters] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
+* ../spark-sql-CatalogTablePartition.md#parameters[parameters] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
 
-* link:../spark-sql-CatalogTablePartition.adoc#stats[stats] from Hive's link:++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
+* ../spark-sql-CatalogTablePartition.md#stats[stats] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
 
 NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.
 
@@ -192,19 +192,19 @@ NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPa
 toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
 ----
 
-`toHiveTable` simply creates a new Hive `Table` and copies the properties from the input <<spark-sql-CatalogTable.adoc#, CatalogTable>>.
+`toHiveTable` simply creates a new Hive `Table` and copies the properties from the input <<spark-sql-CatalogTable.md#, CatalogTable>>.
 
 [NOTE]
 ====
 `toHiveTable` is used when:
 
-* `HiveUtils` is requested to link:HiveUtils.adoc#inferSchema[inferSchema]
+* `HiveUtils` is requested to HiveUtils.md#inferSchema[inferSchema]
 
 * `HiveClientImpl` is requested to <<createTable, createTable>>, <<alterTable, alterTable>>, <<renamePartitions, renamePartitions>>, <<alterPartitions, alterPartitions>>, <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>
 
 * `HiveTableScanExec` physical operator is requested for the <<hiveQlTable, hiveQlTable>>
 
-* link:InsertIntoHiveDirCommand.adoc[InsertIntoHiveDirCommand] and link:InsertIntoHiveTable.adoc[InsertIntoHiveTable] logical commands are executed
+* InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed
 ====
 
 === [[getSparkSQLDataType]] `getSparkSQLDataType` Internal Utility
@@ -227,7 +227,7 @@ toHivePartition(
   ht: Table): Partition
 ----
 
-`toHivePartition` creates a Hive `org.apache.hadoop.hive.ql.metadata.Partition` for the input link:../spark-sql-CatalogTablePartition.adoc[CatalogTablePartition] and the Hive `org.apache.hadoop.hive.ql.metadata.Table`.
+`toHivePartition` creates a Hive `org.apache.hadoop.hive.ql.metadata.Partition` for the input ../spark-sql-CatalogTablePartition.md[CatalogTablePartition] and the Hive `org.apache.hadoop.hive.ql.metadata.Table`.
 
 [NOTE]
 ====
@@ -235,7 +235,7 @@ toHivePartition(
 
 * `HiveClientImpl` is requested to <<renamePartitions, renamePartitions>> or <<alterPartitions, alterPartitions>>
 
-* `HiveTableScanExec` physical operator is requested for the link:HiveTableScanExec.adoc#rawPartitions[raw Hive partitions]
+* `HiveTableScanExec` physical operator is requested for the HiveTableScanExec.md#rawPartitions[raw Hive partitions]
 ====
 
 === [[newSession]] Creating New HiveClientImpl -- `newSession` Method
@@ -245,7 +245,7 @@ toHivePartition(
 newSession(): HiveClientImpl
 ----
 
-NOTE: `newSession` is part of the link:HiveClient.adoc#newSession[HiveClient] contract to...FIXME.
+NOTE: `newSession` is part of the HiveClient.md#newSession[HiveClient] contract to...FIXME.
 
 `newSession`...FIXME
 

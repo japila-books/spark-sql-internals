@@ -55,10 +55,10 @@ sessionState: SessionState
 
 `sessionState` is the current [SessionState](SessionState.md).
 
-Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
+Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
 
-* *in-memory* (default) for link:spark-sql-SessionStateBuilder.adoc[org.apache.spark.sql.internal.SessionStateBuilder]
-* *hive* for link:hive/HiveSessionStateBuilder.adoc[org.apache.spark.sql.hive.HiveSessionStateBuilder]
+* *in-memory* (default) for spark-sql-SessionStateBuilder.md[org.apache.spark.sql.internal.SessionStateBuilder]
+* *hive* for hive/HiveSessionStateBuilder.md[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
 ## <span id="newSession"> Creating New SparkSession
 
@@ -174,7 +174,7 @@ scala> one.show
 
 Internally, `createDataset` first looks up the implicit [ExpressionEncoder](spark-sql-ExpressionEncoder.md) in scope to access the ``AttributeReference``s (of the [schema](spark-sql-schema.md)).
 
-The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of link:spark-sql-InternalRow.adoc[InternalRows]. With the references and rows, `createDataset` returns a link:spark-sql-Dataset.adoc[Dataset] with a link:spark-sql-LogicalPlan-LocalRelation.adoc[`LocalRelation` logical query plan].
+The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of spark-sql-InternalRow.md[InternalRows]. With the references and rows, `createDataset` returns a spark-sql-Dataset.md[Dataset] with a spark-sql-LogicalPlan-LocalRelation.md[`LocalRelation` logical query plan].
 
 ## <span id="range"> Creating Dataset With Single Long Column
 
@@ -236,9 +236,9 @@ scala> sql("SHOW TABLES").show
 +---------+-----------+
 ```
 
-Internally, `sql` requests the link:SessionState.md#sqlParser[current `ParserInterface`] to link:spark-sql-ParserInterface.adoc#parsePlan[execute a SQL query] that gives a link:spark-sql-LogicalPlan.adoc[LogicalPlan].
+Internally, `sql` requests the SessionState.md#sqlParser[current `ParserInterface`] to spark-sql-ParserInterface.md#parsePlan[execute a SQL query] that gives a spark-sql-LogicalPlan.md[LogicalPlan].
 
-NOTE: `sql` uses `SessionState` link:SessionState.md#sqlParser[to access the current `ParserInterface`].
+NOTE: `sql` uses `SessionState` SessionState.md#sqlParser[to access the current `ParserInterface`].
 
 `sql` then creates a [DataFrame](spark-sql-DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
 
@@ -292,7 +292,7 @@ table(
 `table` creates a [DataFrame](spark-sql-DataFrame.md) for the input `tableName` table.
 
 !!! note
-    [baseRelationToDataFrame](#baseRelationToDataFrame) acts as a mechanism to plug `BaseRelation` object hierarchy in into link:adoc[LogicalPlan](logical-operators/LogicalPlan.md) object hierarchy that `SparkSession` uses to bridge them.
+    [baseRelationToDataFrame](#baseRelationToDataFrame) acts as a mechanism to plug `BaseRelation` object hierarchy in into adoc[LogicalPlan](logical-operators/LogicalPlan.md) object hierarchy that `SparkSession` uses to bridge them.
 
 ```text
 scala> spark.catalog.tableExists("t1")
@@ -344,7 +344,7 @@ conf: RuntimeConfig
 
 `conf` returns the current [RuntimeConfig](spark-sql-RuntimeConfig.md).
 
-Internally, `conf` creates a <<spark-sql-RuntimeConfig.adoc#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<SessionState.md#conf, SQLConf>> of the <<sessionState, SessionState>>.
+Internally, `conf` creates a <<spark-sql-RuntimeConfig.md#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<SessionState.md#conf, SQLConf>> of the <<sessionState, SessionState>>.
 
 ## <span id="experimentalMethods"> ExperimentalMethods
 

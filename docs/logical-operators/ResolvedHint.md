@@ -2,12 +2,12 @@ title: ResolvedHint
 
 # ResolvedHint Unary Logical Operator
 
-`ResolvedHint` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that...FIXME
+`ResolvedHint` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that...FIXME
 
 `ResolvedHint` is <<creating-instance, created>> when...FIXME
 
 [[output]]
-When requested for link:catalyst/QueryPlan.md#output[output schema], `ResolvedHint` uses the output of the child logical operator.
+When requested for catalyst/QueryPlan.md#output[output schema], `ResolvedHint` uses the output of the child logical operator.
 
 [[doCanonicalize]]
 `ResolvedHint` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.
@@ -16,5 +16,5 @@ When requested for link:catalyst/QueryPlan.md#output[output schema], `ResolvedHi
 
 `ResolvedHint` takes the following when created:
 
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical operator]
-* [[hints]] link:spark-sql-HintInfo.adoc[Query hints]
+* [[child]] Child spark-sql-LogicalPlan.md[logical operator]
+* [[hints]] spark-sql-HintInfo.md[Query hints]

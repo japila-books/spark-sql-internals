@@ -6,11 +6,11 @@ title: SortExec
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed
 
-* <<spark-sql-FileFormatWriter.adoc#, FileFormatWriter>> helper object is requested to <<spark-sql-FileFormatWriter.adoc#write, write the result of a structured query>>
+* <<spark-sql-FileFormatWriter.md#, FileFormatWriter>> helper object is requested to <<spark-sql-FileFormatWriter.md#write, write the result of a structured query>>
 
-* <<spark-sql-EnsureRequirements.adoc#, EnsureRequirements>> physical query optimization is executed (and <<spark-sql-EnsureRequirements.adoc#ensureDistributionAndOrdering, enforces partition requirements for data distribution and ordering of a physical operator>>)
+* <<spark-sql-EnsureRequirements.md#, EnsureRequirements>> physical query optimization is executed (and <<spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering, enforces partition requirements for data distribution and ordering of a physical operator>>)
 
-`SortExec` supports <<spark-sql-CodegenSupport.adoc#, Java code generation>> (aka _codegen_).
+`SortExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_).
 
 [source, scala]
 ----
@@ -51,7 +51,7 @@ When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `Sor
 When requested for the <<SparkPlan.md#outputPartitioning, output data partitioning requirements>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
 
 [[requiredChildDistribution]]
-When requested for the <<SparkPlan.md#requiredChildDistribution, required partition requirements>>, `SortExec` gives the <<spark-sql-Distribution-OrderedDistribution.adoc#, OrderedDistribution>> (with the <<sortOrder, sorting order expressions>> for the <<spark-sql-Distribution-OrderedDistribution.adoc#ordering, ordering>>) when the <<global, global>> flag is enabled (`true`) or the <<spark-sql-Distribution-UnspecifiedDistribution.adoc#, UnspecifiedDistribution>>.
+When requested for the <<SparkPlan.md#requiredChildDistribution, required partition requirements>>, `SortExec` gives the <<spark-sql-Distribution-OrderedDistribution.md#, OrderedDistribution>> (with the <<sortOrder, sorting order expressions>> for the <<spark-sql-Distribution-OrderedDistribution.md#ordering, ordering>>) when the <<global, global>> flag is enabled (`true`) or the <<spark-sql-Distribution-UnspecifiedDistribution.md#, UnspecifiedDistribution>>.
 
 `SortExec` operator uses the [spark.sql.sort.enableRadixSort](../SQLConf.md#spark.sql.sort.enableRadixSort) internal configuration property (enabled by default) to control...FIXME
 
@@ -83,7 +83,7 @@ When requested for the <<SparkPlan.md#requiredChildDistribution, required partit
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.adoc#produce-path, produce path>> in Whole-Stage Code Generation.
+NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
 
 `doProduce`...FIXME
 
@@ -91,7 +91,7 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.adoc#doProduce, CodegenS
 
 `SortExec` takes the following when created:
 
-* [[sortOrder]] <<spark-sql-Expression-SortOrder.adoc#, Sorting order expressions>> (`Seq[SortOrder]`)
+* [[sortOrder]] <<spark-sql-Expression-SortOrder.md#, Sorting order expressions>> (`Seq[SortOrder]`)
 * [[global]] `global` flag
 * [[child]] Child <<SparkPlan.md#, physical plan>>
 * [[testSpillFrequency]] `testSpillFrequency` (default: `0`)

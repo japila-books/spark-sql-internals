@@ -4,7 +4,7 @@ title: Dataset
 
 *Dataset* is a strongly-typed data structure in Spark SQL that represents a structured query.
 
-NOTE: A structured query can be written using SQL or <<spark-sql-dataset-operators.adoc#, Dataset API>>.
+NOTE: A structured query can be written using SQL or <<spark-sql-dataset-operators.md#, Dataset API>>.
 
 The following figure shows the relationship between different entities of Spark SQL that all together give the `Dataset` data structure.
 
@@ -13,9 +13,9 @@ image::images/spark-sql-Dataset.png[align="center"]
 
 It is therefore fair to say that `Dataset` consists of the following three elements:
 
-. <<spark-sql-QueryExecution.adoc#, QueryExecution>> (with the parsed unanalyzed <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> of a structured query)
+. <<spark-sql-QueryExecution.md#, QueryExecution>> (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
 
-. <<spark-sql-Encoder.adoc#, Encoder>> (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.adoc#, InternalRow>>)
+. <<spark-sql-Encoder.md#, Encoder>> (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.md#, InternalRow>>)
 
 . <<SparkSession.md#, SparkSession>>
 
@@ -23,20 +23,20 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 `Dataset` is <<creating-instance, created>> when:
 
-* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the <<spark-sql-Encoder.adoc#, Encoder>> in a Scala implicit scope)
+* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the <<spark-sql-Encoder.md#, Encoder>> in a Scala implicit scope)
 
-* <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
+* <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
 
-* <<spark-sql-Dataset-untyped-transformations.adoc#toDF, Dataset.toDF>> untyped transformation is used
+* <<spark-sql-Dataset-untyped-transformations.md#toDF, Dataset.toDF>> untyped transformation is used
 
-* <<spark-sql-Dataset-typed-transformations.adoc#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.adoc#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.adoc#mapPartitions, Dataset.mapPartitions>> typed transformations are used
+* <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.md#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.md#mapPartitions, Dataset.mapPartitions>> typed transformations are used
 
-* <<spark-sql-KeyValueGroupedDataset.adoc#agg, KeyValueGroupedDataset.agg>> operator is used (that requests `KeyValueGroupedDataset` to <<spark-sql-KeyValueGroupedDataset.adoc#aggUntyped, aggUntyped>>)
+* <<spark-sql-KeyValueGroupedDataset.md#agg, KeyValueGroupedDataset.agg>> operator is used (that requests `KeyValueGroupedDataset` to <<spark-sql-KeyValueGroupedDataset.md#aggUntyped, aggUntyped>>)
 
 * <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>> and <<SparkSession.md#range, SparkSession.range>> operators are used
 
 * `CatalogImpl` is requested to
-<<spark-sql-CatalogImpl.adoc#makeDataset, makeDataset>> (when requested to <<spark-sql-CatalogImpl.adoc#listDatabases, list databases>>, <<spark-sql-CatalogImpl.adoc#listTables, tables>>, <<spark-sql-CatalogImpl.adoc#listFunctions, functions>> and <<spark-sql-CatalogImpl.adoc#listColumns, columns>>)
+<<spark-sql-CatalogImpl.md#makeDataset, makeDataset>> (when requested to <<spark-sql-CatalogImpl.md#listDatabases, list databases>>, <<spark-sql-CatalogImpl.md#listTables, tables>>, <<spark-sql-CatalogImpl.md#listFunctions, functions>> and <<spark-sql-CatalogImpl.md#listColumns, columns>>)
 
 * Spark Structured Streaming's `MicroBatchExecution` is requested to `runBatch`
 
@@ -60,13 +60,13 @@ dataset.filter('value % 2 === 0).count
 dataset.filter("value % 2 = 0").count
 ----
 
-The <<spark-sql-dataset-operators.adoc#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to link:spark-sql-DataFrame.adoc[DataFrames] that were a set of index- or column name-based link:spark-sql-Row.adoc[Rows]).
+The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to spark-sql-DataFrame.md[DataFrames] that were a set of index- or column name-based spark-sql-Row.md[Rows]).
 
 [NOTE]
 ====
 `Dataset` was first introduced in Apache Spark *1.6.0* as an experimental feature, and has since turned itself into a fully supported API.
 
-As of Spark *2.0.0*, link:spark-sql-DataFrame.adoc[DataFrame] - the flagship data abstraction of previous versions of Spark SQL - is currently a _mere_ type alias for `Dataset[Row]`:
+As of Spark *2.0.0*, spark-sql-DataFrame.md[DataFrame] - the flagship data abstraction of previous versions of Spark SQL - is currently a _mere_ type alias for `Dataset[Row]`:
 
 [source, scala]
 ----
@@ -76,7 +76,7 @@ type DataFrame = Dataset[Row]
 See https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/package.scala#L45[package object sql].
 ====
 
-`Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to link:spark-sql-DataFrame.adoc[DataFrame] makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
+`Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to spark-sql-DataFrame.md[DataFrame] makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
 [source, scala]
 ----
@@ -117,25 +117,25 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 +- *Range (0, 1, splits=8)
 ----
 
-It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using link:spark-sql-DataFrame.adoc[DataFrame], regular SQL queries or even RDDs).
+It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using spark-sql-DataFrame.md[DataFrame], regular SQL queries or even RDDs).
 
-Using `Dataset` objects turns `DataFrames` of link:spark-sql-Row.adoc[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
+Using `Dataset` objects turns `DataFrames` of spark-sql-Row.md[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
-If however a link:spark-sql-LogicalPlan.adoc[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first link:SessionState.md#executePlan[executed] (using the current link:SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the link:spark-sql-QueryExecution.adoc[QueryExecution] plan.
+If however a spark-sql-LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the spark-sql-QueryExecution.md[QueryExecution] plan.
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
-NOTE: link:SparkSession.md[SparkSession] and link:spark-sql-QueryExecution.adoc[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the link:spark-sql-Encoder.adoc[Encoder].
+NOTE: SparkSession.md[SparkSession] and spark-sql-QueryExecution.md[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the spark-sql-Encoder.md[Encoder].
 
-You can request the <<spark-sql-dataset-operators.adoc#toDF, "untyped" view>> of a Dataset or access the link:spark-sql-dataset-operators.adoc#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
+You can request the <<spark-sql-dataset-operators.md#toDF, "untyped" view>> of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
-The default storage level for `Datasets` is link:spark-rdd-caching.adoc[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however link:spark-sql-caching-and-persistence.adoc#persist[persist a `Dataset`].
+The default storage level for `Datasets` is spark-rdd-caching.md[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however spark-sql-caching-and-persistence.md#persist[persist a `Dataset`].
 
-NOTE: Spark 2.0 has introduced a new query model called link:spark-structured-streaming.adoc[Structured Streaming] for continuous incremental execution of structured queries. That made possible to consider Datasets a static and bounded as well as streaming and unbounded data sets with a single unified API for different execution models.
+NOTE: Spark 2.0 has introduced a new query model called spark-structured-streaming.md[Structured Streaming] for continuous incremental execution of structured queries. That made possible to consider Datasets a static and bounded as well as streaming and unbounded data sets with a single unified API for different execution models.
 
-A `Dataset` is link:spark-sql-dataset-operators.adoc#isLocal[local] if it was created from local collections using link:SparkSession.md#emptyDataset[SparkSession.emptyDataset] or link:SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
+A `Dataset` is spark-sql-dataset-operators.md#isLocal[local] if it was created from local collections using SparkSession.md#emptyDataset[SparkSession.emptyDataset] or SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
 
-NOTE: `Dataset` makes sure that the underlying `QueryExecution` is link:spark-sql-QueryExecution.adoc#analyzed[analyzed] and link:spark-sql-Analyzer-CheckAnalysis.adoc#checkAnalysis[checked].
+NOTE: `Dataset` makes sure that the underlying `QueryExecution` is spark-sql-QueryExecution.md#analyzed[analyzed] and spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[checked].
 
 [[properties]]
 [[attributes]]
@@ -146,37 +146,37 @@ NOTE: `Dataset` makes sure that the underlying `QueryExecution` is link:spark-sq
 ! Description
 
 ! [[boundEnc]] `boundEnc`
-! link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder]
+! spark-sql-ExpressionEncoder.md[ExpressionEncoder]
 
 Used when...FIXME
 
 ! [[deserializer]] `deserializer`
-a! Deserializer link:expressions/Expression.md[expression] to convert internal rows to objects of type `T`
+a! Deserializer expressions/Expression.md[expression] to convert internal rows to objects of type `T`
 
-Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to link:spark-sql-ExpressionEncoder.adoc#resolveAndBind[resolveAndBind]
+Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
 
 Used when:
 
 * `Dataset` is <<apply, created>> (for a logical plan in a given `SparkSession`)
 
-* link:spark-sql-dataset-operators.adoc#spark-sql-dataset-operators.adoc[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
+* spark-sql-dataset-operators.md#spark-sql-dataset-operators.md[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
 
 * `Dataset` is requested to <<collectFromPlan, collect all rows from a spark plan>>
 
 ! [[exprEnc]] `exprEnc`
-! Implicit link:spark-sql-ExpressionEncoder.adoc[ExpressionEncoder]
+! Implicit spark-sql-ExpressionEncoder.md[ExpressionEncoder]
 
 Used when...FIXME
 
 ! `logicalPlan`
-a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.adoc#, logical plan>> with all <<spark-sql-LogicalPlan-Command.adoc#, logical commands>> executed and turned into a <<spark-sql-LogicalPlan-LocalRelation.adoc#creating-instance, LocalRelation>>.
+a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.md#, logical plan>> with all <<spark-sql-LogicalPlan-Command.md#, logical commands>> executed and turned into a <<spark-sql-LogicalPlan-LocalRelation.md#creating-instance, LocalRelation>>.
 
 [source, scala]
 ----
 logicalPlan: LogicalPlan
 ----
 
-When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.adoc#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.adoc#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
+When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.md#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
 
 ! `planWithBarrier`
 a! [[planWithBarrier]]
@@ -187,7 +187,7 @@ planWithBarrier: AnalysisBarrier
 ----
 
 ! [[rdd]] `rdd`
-a! (lazily-created) link:spark-rdd.adoc[RDD] of JVM objects of type `T` (as converted from rows in `Dataset` in the link:spark-sql-InternalRow.adoc[internal binary row format]).
+a! (lazily-created) spark-rdd.md[RDD] of JVM objects of type `T` (as converted from rows in `Dataset` in the spark-sql-InternalRow.md[internal binary row format]).
 
 [source, scala]
 ----
@@ -196,7 +196,7 @@ rdd: RDD[T]
 
 NOTE: `rdd` gives `RDD` with the extra execution step to convert rows from their internal binary row format to JVM objects that will impact the JVM memory as the objects are inside JVM (while were outside before). You should not use `rdd` directly.
 
-Internally, `rdd` first link:spark-sql-CatalystSerde.adoc#deserialize[creates a new logical plan that deserializes] the Dataset's <<logicalPlan, logical plan>>.
+Internally, `rdd` first spark-sql-CatalystSerde.md#deserialize[creates a new logical plan that deserializes] the Dataset's <<logicalPlan, logical plan>>.
 
 [source, scala]
 ----
@@ -218,16 +218,16 @@ res2: String =
  |  ParallelCollectionRDD[9] at toRdd at <console>:26 []
 ----
 
-`rdd` then requests `SessionState` to link:SessionState.md#executePlan[execute the logical plan] to get the corresponding link:spark-sql-QueryExecution.adoc#toRdd[RDD of binary rows].
+`rdd` then requests `SessionState` to SessionState.md#executePlan[execute the logical plan] to get the corresponding spark-sql-QueryExecution.md#toRdd[RDD of binary rows].
 
-NOTE: `rdd` uses <<sparkSession, SparkSession>> to link:SparkSession.md#sessionState[access `SessionState`].
+NOTE: `rdd` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[access `SessionState`].
 
-`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the link:expressions/Expression.md#dataType[data type] of the rows (using link:spark-sql-ExpressionEncoder.adoc#deserializer[deserializer] expression) and link:spark-rdd-transformations.adoc#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
+`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the expressions/Expression.md#dataType[data type] of the rows (using spark-sql-ExpressionEncoder.md#deserializer[deserializer] expression) and spark-rdd-transformations.md#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
 
 NOTE: `rdd` is at the "boundary" between the internal binary row format and the JVM type of the dataset. Avoid the extra deserialization step to lower JVM memory requirements of your Spark application.
 
 ! [[sqlContext]] `sqlContext`
-! Lazily-created link:spark-sql-SQLContext.adoc[SQLContext]
+! Lazily-created spark-sql-SQLContext.md[SQLContext]
 
 Used when...FIXME
 !===
@@ -239,19 +239,19 @@ Used when...FIXME
 inputFiles: Array[String]
 ----
 
-`inputFiles` requests <<queryExecution, QueryExecution>> for link:spark-sql-QueryExecution.adoc#optimizedPlan[optimized logical plan] and collects the following logical operators:
+`inputFiles` requests <<queryExecution, QueryExecution>> for spark-sql-QueryExecution.md#optimizedPlan[optimized logical plan] and collects the following logical operators:
 
-* link:spark-sql-LogicalPlan-LogicalRelation.adoc[LogicalRelation] with link:spark-sql-FileRelation.adoc[FileRelation] (as the link:spark-sql-LogicalPlan-LogicalRelation.adoc#relation[BaseRelation])
+* spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with spark-sql-FileRelation.md[FileRelation] (as the spark-sql-LogicalPlan-LogicalRelation.md#relation[BaseRelation])
 
-* link:spark-sql-FileRelation.adoc[FileRelation]
+* spark-sql-FileRelation.md[FileRelation]
 
-* link:hive/HiveTableRelation.adoc[HiveTableRelation]
+* hive/HiveTableRelation.md[HiveTableRelation]
 
 `inputFiles` then requests the logical operators for their underlying files:
 
-* link:spark-sql-FileRelation.adoc#inputFiles[inputFiles] of the `FileRelations`
+* spark-sql-FileRelation.md#inputFiles[inputFiles] of the `FileRelations`
 
-* link:spark-sql-CatalogStorageFormat.adoc#locationUri[locationUri] of the `HiveTableRelation`
+* spark-sql-CatalogStorageFormat.md#locationUri[locationUri] of the `HiveTableRelation`
 
 === [[resolve]] `resolve` Internal Method
 
@@ -266,13 +266,13 @@ CAUTION: FIXME
 
 `Dataset` takes the following when created:
 
-* [[sparkSession]] link:SparkSession.md[SparkSession]
-* [[queryExecution]] link:spark-sql-QueryExecution.adoc[QueryExecution]
-* [[encoder]] link:spark-sql-Encoder.adoc[Encoder] for the type `T` of the records
+* [[sparkSession]] SparkSession.md[SparkSession]
+* [[queryExecution]] spark-sql-QueryExecution.md[QueryExecution]
+* [[encoder]] spark-sql-Encoder.md[Encoder] for the type `T` of the records
 
-NOTE: You can also create a `Dataset` using link:spark-sql-LogicalPlan.adoc[LogicalPlan] that is immediately link:SessionState.md#executePlan[executed using `SessionState`].
+NOTE: You can also create a `Dataset` using spark-sql-LogicalPlan.md[LogicalPlan] that is immediately SessionState.md#executePlan[executed using `SessionState`].
 
-Internally, `Dataset` requests <<queryExecution, QueryExecution>> to link:spark-sql-QueryExecution.adoc#assertAnalyzed[analyze itself].
+Internally, `Dataset` requests <<queryExecution, QueryExecution>> to spark-sql-QueryExecution.md#assertAnalyzed[analyze itself].
 
 `Dataset` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -285,7 +285,7 @@ isLocal: Boolean
 
 `isLocal` flag is enabled (i.e. `true`) when operators like `collect` or `take` could be run locally, i.e. without using executors.
 
-Internally, `isLocal` checks whether the logical query plan of a `Dataset` is link:spark-sql-LogicalPlan-LocalRelation.adoc[LocalRelation].
+Internally, `isLocal` checks whether the logical query plan of a `Dataset` is spark-sql-LogicalPlan-LocalRelation.md[LocalRelation].
 
 === [[isStreaming]] Is Dataset Streaming? -- `isStreaming` method
 
@@ -294,9 +294,9 @@ Internally, `isLocal` checks whether the logical query plan of a `Dataset` is li
 isStreaming: Boolean
 ----
 
-`isStreaming` is enabled (i.e. `true`) when the logical plan link:spark-sql-LogicalPlan.adoc#isStreaming[is streaming].
+`isStreaming` is enabled (i.e. `true`) when the logical plan spark-sql-LogicalPlan.md#isStreaming[is streaming].
 
-Internally, `isStreaming` takes the Dataset's link:spark-sql-LogicalPlan.adoc[logical plan] and gives link:spark-sql-LogicalPlan.adoc#isStreaming[whether the plan is streaming or not].
+Internally, `isStreaming` takes the Dataset's spark-sql-LogicalPlan.md[logical plan] and gives spark-sql-LogicalPlan.md#isStreaming[whether the plan is streaming or not].
 
 === [[Queryable]] Queryable
 
@@ -309,11 +309,11 @@ CAUTION: FIXME
 withNewRDDExecutionId[U](body: => U): U
 ----
 
-`withNewRDDExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.adoc#withNewExecutionId, new execution id>>.
+`withNewRDDExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.md#withNewExecutionId, new execution id>>.
 
 CAUTION: FIXME What's the difference between `withNewRDDExecutionId` and <<withNewExecutionId, withNewExecutionId>>?
 
-NOTE: `withNewRDDExecutionId` is used when <<spark-sql-dataset-operators.adoc#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.adoc#foreachPartition, Dataset.foreachPartition>> actions are used.
+NOTE: `withNewRDDExecutionId` is used when <<spark-sql-dataset-operators.md#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.md#foreachPartition, Dataset.foreachPartition>> actions are used.
 
 === [[ofRows]] Creating DataFrame (For Logical Query Plan and SparkSession) -- `ofRows` Internal Factory Method
 
@@ -324,9 +324,9 @@ ofRows(sparkSession: SparkSession, logicalPlan: LogicalPlan): DataFrame
 
 NOTE: `ofRows` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
 
-`ofRows` returns link:spark-sql-DataFrame.adoc[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses link:spark-sql-RowEncoder.adoc[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
+`ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses spark-sql-RowEncoder.md[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 
-Internally, `ofRows` link:SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current link:SparkSession.md[SparkSession], the link:spark-sql-QueryExecution.adoc[QueryExecution] and link:spark-sql-RowEncoder.adoc[RowEncoder].
+Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the spark-sql-QueryExecution.md[QueryExecution] and spark-sql-RowEncoder.md[RowEncoder].
 
 [NOTE]
 ====
@@ -336,13 +336,13 @@ Internally, `ofRows` link:SessionState.md#executePlan[prepares the input `logica
 
 * `Dataset` is requested to execute <<checkpoint, checkpoint>>, `mapPartitionsInR`, <<withPlan, untyped transformations>> and <<withSetOperator, set-based typed transformations>>
 
-* `RelationalGroupedDataset` is requested to <<spark-sql-RelationalGroupedDataset.adoc#toDF, create a DataFrame from aggregate expressions>>, `flatMapGroupsInR` and `flatMapGroupsInPandas`
+* `RelationalGroupedDataset` is requested to <<spark-sql-RelationalGroupedDataset.md#toDF, create a DataFrame from aggregate expressions>>, `flatMapGroupsInR` and `flatMapGroupsInPandas`
 
 * `SparkSession` is requested to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<SparkSession.md#createDataFrame, createDataFrame>>, <<SparkSession.md#internalCreateDataFrame, internalCreateDataFrame>>, <<SparkSession.md#sql, sql>> and <<SparkSession.md#table, table>>
 
-* `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.adoc#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.adoc#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
+* `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
 
-* `DataSource` is requested to <<spark-sql-DataSource.adoc#writeAndRead, writeAndRead>> (for a <<spark-sql-CreatableRelationProvider.adoc#, CreatableRelationProvider>>)
+* `DataSource` is requested to <<spark-sql-DataSource.md#writeAndRead, writeAndRead>> (for a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>)
 
 * `FrequentItems` is requested to `singlePassFreqItems`
 
@@ -364,7 +364,7 @@ Internally, `ofRows` link:SessionState.md#executePlan[prepares the input `logica
 withNewExecutionId[U](body: => U): U
 ----
 
-`withNewExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.adoc#withNewExecutionId, new execution id>>.
+`withNewExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.md#withNewExecutionId, new execution id>>.
 
 NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs belong to the `Dataset` action execution.
 
@@ -382,21 +382,21 @@ Feel free to contact me at jacek@japila.pl if you think I should re-consider my 
 withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 ----
 
-`withAction` requests `QueryExecution` for the link:spark-sql-QueryExecution.adoc#executedPlan[optimized physical query plan] and link:SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
+`withAction` requests `QueryExecution` for the spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] and SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
 
-`withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.adoc#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
+`withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.md#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
 
-In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished link:spark-sql-ExecutionListenerManager.adoc#onSuccess[successfully] or link:spark-sql-ExecutionListenerManager.adoc#onFailure[with an exception].
+In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished spark-sql-ExecutionListenerManager.md#onSuccess[successfully] or spark-sql-ExecutionListenerManager.md#onFailure[with an exception].
 
-NOTE: `withAction` uses <<sparkSession, SparkSession>> to access link:SparkSession.md#listenerManager[ExecutionListenerManager].
+NOTE: `withAction` uses <<sparkSession, SparkSession>> to access SparkSession.md#listenerManager[ExecutionListenerManager].
 
 [NOTE]
 ====
 `withAction` is used when `Dataset` is requested for the following:
 
-* <<logicalPlan, Computing the logical plan>> (and executing a link:spark-sql-LogicalPlan-Command.adoc[logical command] or their `Union`)
+* <<logicalPlan, Computing the logical plan>> (and executing a spark-sql-LogicalPlan-Command.md[logical command] or their `Union`)
 
-* Dataset operators: <<spark-sql-dataset-operators.adoc#collect, collect>>, <<spark-sql-dataset-operators.adoc#count, count>>, <<spark-sql-dataset-operators.adoc#head, head>> and <<spark-sql-dataset-operators.adoc#toLocalIterator, toLocalIterator>>
+* Dataset operators: <<spark-sql-dataset-operators.md#collect, collect>>, <<spark-sql-dataset-operators.md#count, count>>, <<spark-sql-dataset-operators.md#head, head>> and <<spark-sql-dataset-operators.md#toLocalIterator, toLocalIterator>>
 ====
 
 === [[apply]] Creating Dataset Instance (For LogicalPlan and SparkSession) -- `apply` Internal Factory Method
@@ -428,7 +428,7 @@ collectFromPlan(plan: SparkPlan): Array[T]
 
 `collectFromPlan`...FIXME
 
-NOTE: `collectFromPlan` is used for link:spark-sql-dataset-operators.adoc#head[Dataset.head], link:spark-sql-dataset-operators.adoc#collect[Dataset.collect] and link:spark-sql-dataset-operators.adoc#collectAsList[Dataset.collectAsList] operators.
+NOTE: `collectFromPlan` is used for spark-sql-dataset-operators.md#head[Dataset.head], spark-sql-dataset-operators.md#collect[Dataset.collect] and spark-sql-dataset-operators.md#collectAsList[Dataset.collectAsList] operators.
 
 === [[selectUntyped]] `selectUntyped` Internal Method
 
@@ -439,7 +439,7 @@ selectUntyped(columns: TypedColumn[_, _]*): Dataset[_]
 
 `selectUntyped`...FIXME
 
-NOTE: `selectUntyped` is used exclusively when <<spark-sql-Dataset-typed-transformations.adoc#select, Dataset.select>> typed transformation is used.
+NOTE: `selectUntyped` is used exclusively when <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>> typed transformation is used.
 
 === [[withTypedPlan]] Helper Method for Typed Transformations -- `withTypedPlan` Internal Method
 
@@ -452,7 +452,7 @@ withTypedPlan[U: Encoder](logicalPlan: LogicalPlan): Dataset[U]
 
 NOTE: `withTypedPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withTypedPlan` is used in the `Dataset` <<spark-sql-Dataset-typed-transformations.adoc#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.adoc#withWatermark, withWatermark>>, <<spark-sql-Dataset-typed-transformations.adoc#joinWith, joinWith>>, <<spark-sql-Dataset-typed-transformations.adoc#hint, hint>>, <<spark-sql-Dataset-typed-transformations.adoc#as, as>>, <<spark-sql-Dataset-typed-transformations.adoc#filter, filter>>, <<spark-sql-Dataset-typed-transformations.adoc#limit, limit>>, <<spark-sql-Dataset-typed-transformations.adoc#sample, sample>>, <<spark-sql-Dataset-typed-transformations.adoc#dropDuplicates, dropDuplicates>>, <<spark-sql-Dataset-typed-transformations.adoc#filter, filter>>, <<spark-sql-Dataset-typed-transformations.adoc#map, map>>, <<spark-sql-Dataset-typed-transformations.adoc#repartition, repartition>>, <<spark-sql-Dataset-typed-transformations.adoc#repartitionByRange, repartitionByRange>>, <<spark-sql-Dataset-typed-transformations.adoc#coalesce, coalesce>> and <<spark-sql-Dataset-typed-transformations.adoc#sort, sort>> with <<spark-sql-Dataset-typed-transformations.adoc#sortWithinPartitions, sortWithinPartitions>> (through the <<sortInternal, sortInternal>> internal method).
+NOTE: `withTypedPlan` is used in the `Dataset` <<spark-sql-Dataset-typed-transformations.md#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.md#withWatermark, withWatermark>>, <<spark-sql-Dataset-typed-transformations.md#joinWith, joinWith>>, <<spark-sql-Dataset-typed-transformations.md#hint, hint>>, <<spark-sql-Dataset-typed-transformations.md#as, as>>, <<spark-sql-Dataset-typed-transformations.md#filter, filter>>, <<spark-sql-Dataset-typed-transformations.md#limit, limit>>, <<spark-sql-Dataset-typed-transformations.md#sample, sample>>, <<spark-sql-Dataset-typed-transformations.md#dropDuplicates, dropDuplicates>>, <<spark-sql-Dataset-typed-transformations.md#filter, filter>>, <<spark-sql-Dataset-typed-transformations.md#map, map>>, <<spark-sql-Dataset-typed-transformations.md#repartition, repartition>>, <<spark-sql-Dataset-typed-transformations.md#repartitionByRange, repartitionByRange>>, <<spark-sql-Dataset-typed-transformations.md#coalesce, coalesce>> and <<spark-sql-Dataset-typed-transformations.md#sort, sort>> with <<spark-sql-Dataset-typed-transformations.md#sortWithinPartitions, sortWithinPartitions>> (through the <<sortInternal, sortInternal>> internal method).
 
 === [[withSetOperator]] Helper Method for Set-Based Typed Transformations -- `withSetOperator` Internal Method
 
@@ -466,7 +466,7 @@ withSetOperator[U: Encoder](
 
 NOTE: `withSetOperator` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withSetOperator` is used for the link:spark-sql-Dataset-typed-transformations.adoc[Dataset's typed transformations] (i.e. link:spark-sql-Dataset-typed-transformations.adoc#union[union], link:spark-sql-Dataset-typed-transformations.adoc#unionByName[unionByName], link:spark-sql-Dataset-typed-transformations.adoc#intersect[intersect], link:spark-sql-Dataset-typed-transformations.adoc#intersectAll[intersectAll], link:spark-sql-Dataset-typed-transformations.adoc#except[except] and link:spark-sql-Dataset-typed-transformations.adoc#exceptAll[exceptAll]).
+NOTE: `withSetOperator` is used for the spark-sql-Dataset-typed-transformations.md[Dataset's typed transformations] (i.e. spark-sql-Dataset-typed-transformations.md#union[union], spark-sql-Dataset-typed-transformations.md#unionByName[unionByName], spark-sql-Dataset-typed-transformations.md#intersect[intersect], spark-sql-Dataset-typed-transformations.md#intersectAll[intersectAll], spark-sql-Dataset-typed-transformations.md#except[except] and spark-sql-Dataset-typed-transformations.md#exceptAll[exceptAll]).
 
 === [[sortInternal]] `sortInternal` Internal Method
 
@@ -475,7 +475,7 @@ NOTE: `withSetOperator` is used for the link:spark-sql-Dataset-typed-transformat
 sortInternal(global: Boolean, sortExprs: Seq[Column]): Dataset[T]
 ----
 
-`sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> unary logical operator (and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.adoc#child, child logical plan>>).
+`sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.md#, Sort>> unary logical operator (and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.md#child, child logical plan>>).
 
 [source, scala]
 ----
@@ -491,11 +491,11 @@ scala> println(logicalPlan.numberedTreeString)
 02    +- LocalRelation [_1#11, _2#12]
 ----
 
-Internally, `sortInternal` firstly builds ordering expressions for the given `sortExprs` columns, i.e. takes the `sortExprs` columns and makes sure that they are <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> expressions already (and leaves them untouched) or wraps them into <<spark-sql-Expression-SortOrder.adoc#, SortOrder>> expressions with <<spark-sql-Expression-SortOrder.adoc#Ascending, Ascending>> sort direction.
+Internally, `sortInternal` firstly builds ordering expressions for the given `sortExprs` columns, i.e. takes the `sortExprs` columns and makes sure that they are <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions already (and leaves them untouched) or wraps them into <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions with <<spark-sql-Expression-SortOrder.md#Ascending, Ascending>> sort direction.
 
-In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.adoc#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.adoc#child, child logical plan>>).
+In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.md#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.md#child, child logical plan>>).
 
-NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.adoc#sort, sort>> and <<spark-sql-dataset-operators.adoc#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
+NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.md#sort, sort>> and <<spark-sql-dataset-operators.md#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
 
 === [[withPlan]] Helper Method for Untyped Transformations and Basic Actions -- `withPlan` Internal Method
 
@@ -504,11 +504,11 @@ NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.adoc#sort, so
 withPlan(logicalPlan: LogicalPlan): DataFrame
 ----
 
-`withPlan` simply uses <<ofRows, ofRows>> internal factory method to create a `DataFrame` for the input <<spark-sql-LogicalPlan.adoc#, LogicalPlan>> and the current <<sparkSession, SparkSession>>.
+`withPlan` simply uses <<ofRows, ofRows>> internal factory method to create a `DataFrame` for the input <<spark-sql-LogicalPlan.md#, LogicalPlan>> and the current <<sparkSession, SparkSession>>.
 
 NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withPlan` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.adoc#, untyped transformations>> (i.e. <<spark-sql-Dataset-untyped-transformations.adoc#join, join>>, <<spark-sql-Dataset-untyped-transformations.adoc#crossJoin, crossJoin>> and <<spark-sql-Dataset-untyped-transformations.adoc#select, select>>) and <<spark-sql-Dataset-basic-actions.adoc#, basic actions>> (i.e. <<spark-sql-Dataset-basic-actions.adoc#createTempView, createTempView>>, <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceTempView, createOrReplaceTempView>>, <<spark-sql-Dataset-basic-actions.adoc#createGlobalTempView, createGlobalTempView>> and <<spark-sql-Dataset-basic-actions.adoc#createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>).
+NOTE: `withPlan` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.md#, untyped transformations>> (i.e. <<spark-sql-Dataset-untyped-transformations.md#join, join>>, <<spark-sql-Dataset-untyped-transformations.md#crossJoin, crossJoin>> and <<spark-sql-Dataset-untyped-transformations.md#select, select>>) and <<spark-sql-Dataset-basic-actions.md#, basic actions>> (i.e. <<spark-sql-Dataset-basic-actions.md#createTempView, createTempView>>, <<spark-sql-Dataset-basic-actions.md#createOrReplaceTempView, createOrReplaceTempView>>, <<spark-sql-Dataset-basic-actions.md#createGlobalTempView, createGlobalTempView>> and <<spark-sql-Dataset-basic-actions.md#createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>).
 
 === [[i-want-more]] Further Reading and Watching
 

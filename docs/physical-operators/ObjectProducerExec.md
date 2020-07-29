@@ -33,10 +33,10 @@ Used when...FIXME
 | CoGroupExec
 | [[CoGroupExec]]
 
-| <<spark-sql-SparkPlan-DeserializeToObjectExec.adoc#, DeserializeToObjectExec>>
+| <<spark-sql-SparkPlan-DeserializeToObjectExec.md#, DeserializeToObjectExec>>
 | [[DeserializeToObjectExec]]
 
-| <<spark-sql-SparkPlan-ExternalRDDScanExec.adoc#, ExternalRDDScanExec>>
+| <<spark-sql-SparkPlan-ExternalRDDScanExec.md#, ExternalRDDScanExec>>
 | [[ExternalRDDScanExec]]
 
 | FlatMapGroupsInRExec
@@ -45,7 +45,7 @@ Used when...FIXME
 | FlatMapGroupsWithStateExec
 | [[FlatMapGroupsWithStateExec]]
 
-| <<spark-sql-SparkPlan-MapElementsExec.adoc#, MapElementsExec>>
+| <<spark-sql-SparkPlan-MapElementsExec.md#, MapElementsExec>>
 | [[MapElementsExec]]
 
 | MapGroupsExec

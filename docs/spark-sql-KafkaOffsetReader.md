@@ -4,7 +4,7 @@
 
 `KafkaOffsetReader` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.adoc#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>) (to <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, get the initial partition offsets>>)
+* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.md#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>) (to <<spark-sql-KafkaRelation.md#getPartitionOffsets, get the initial partition offsets>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 
@@ -77,7 +77,7 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.kafka010.KafkaOffsetReader=DEBUG
 ```
 
-Refer to link:spark-sql-streaming-logging.adoc[Logging].
+Refer to spark-sql-streaming-logging.md[Logging].
 ====
 
 === [[createConsumer]] Creating Kafka Consumer -- `createConsumer` Internal Method
@@ -87,7 +87,7 @@ Refer to link:spark-sql-streaming-logging.adoc[Logging].
 createConsumer(): Consumer[Array[Byte], Array[Byte]]
 ----
 
-`createConsumer` requests the <<consumerStrategy, ConsumerStrategy>> to <<spark-sql-ConsumerStrategy.adoc#createConsumer, create a Kafka Consumer>> with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
+`createConsumer` requests the <<consumerStrategy, ConsumerStrategy>> to <<spark-sql-ConsumerStrategy.md#createConsumer, create a Kafka Consumer>> with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
 
 NOTE: `createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, created>> (and initializes <<consumer, consumer>>) and <<resetConsumer, resetConsumer>>
 
@@ -95,7 +95,7 @@ NOTE: `createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, 
 
 `KafkaOffsetReader` takes the following when created:
 
-* [[consumerStrategy]] <<spark-sql-ConsumerStrategy.adoc#, ConsumerStrategy>>
+* [[consumerStrategy]] <<spark-sql-ConsumerStrategy.md#, ConsumerStrategy>>
 * [[driverKafkaParams]] Kafka parameters (as `Map[String, Object]`)
 * [[readerOptions]] Reader options (as `Map[String, String]`)
 * [[driverGroupIdPrefix]] Prefix for the group id
@@ -155,15 +155,15 @@ fetchTopicPartitions(): Set[TopicPartition]
 
 `fetchTopicPartitions` <<runUninterruptibly, uses an UninterruptibleThread thread>> to do the following:
 
-. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/Consumer.html#poll-long-++[poll] (fetch data) for the topics and partitions (with `0` timeout)
+. Requests the <<consumer, Kafka Consumer>> to ++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/Consumer.html#poll-long-++[poll] (fetch data) for the topics and partitions (with `0` timeout)
 
-. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#assignment--++[get the set of partitions currently assigned]
+. Requests the <<consumer, Kafka Consumer>> to ++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#assignment--++[get the set of partitions currently assigned]
 
-. Requests the <<consumer, Kafka Consumer>> to link:++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#pause-java.util.Collection-++[suspend fetching from the partitions assigned]
+. Requests the <<consumer, Kafka Consumer>> to ++https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/KafkaConsumer.html#pause-java.util.Collection-++[suspend fetching from the partitions assigned]
 
 In the end, `fetchTopicPartitions` returns the `TopicPartitions` assigned (and paused).
 
-NOTE: `fetchTopicPartitions` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.adoc#, TableScan>>) through <<spark-sql-KafkaRelation.adoc#getPartitionOffsets, getPartitionOffsets>>.
+NOTE: `fetchTopicPartitions` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>) through <<spark-sql-KafkaRelation.md#getPartitionOffsets, getPartitionOffsets>>.
 
 === [[nextGroupId]] `nextGroupId` Internal Method
 

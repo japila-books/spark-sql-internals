@@ -1,6 +1,6 @@
 # SQLAppStatusListener Spark Listener
 
-`SQLAppStatusListener` is a link:spark-SparkListener.adoc[SparkListener] that...FIXME
+`SQLAppStatusListener` is a spark-SparkListener.md[SparkListener] that...FIXME
 
 [[internal-registries]]
 .SQLAppStatusListener's Internal Properties (e.g. Registries, Counters and Flags)
@@ -40,7 +40,7 @@ NOTE: `onExecutionStart` is used exclusively when `SQLAppStatusListener` <<onOth
 onJobStart(event: SparkListenerJobStart): Unit
 ----
 
-NOTE: `onJobStart` is part of link:spark-SparkListener.adoc#onJobStart[SparkListener Contract] to...FIXME
+NOTE: `onJobStart` is part of spark-SparkListener.md#onJobStart[SparkListener Contract] to...FIXME
 
 `onJobStart`...FIXME
 
@@ -51,7 +51,7 @@ NOTE: `onJobStart` is part of link:spark-SparkListener.adoc#onJobStart[SparkList
 onStageSubmitted(event: SparkListenerStageSubmitted): Unit
 ----
 
-NOTE: `onStageSubmitted` is part of link:spark-SparkListener.adoc#onStageSubmitted[SparkListener Contract] to...FIXME
+NOTE: `onStageSubmitted` is part of spark-SparkListener.md#onStageSubmitted[SparkListener Contract] to...FIXME
 
 `onStageSubmitted`...FIXME
 
@@ -62,7 +62,7 @@ NOTE: `onStageSubmitted` is part of link:spark-SparkListener.adoc#onStageSubmitt
 onJobEnd(event: SparkListenerJobEnd): Unit
 ----
 
-NOTE: `onJobEnd` is part of link:spark-SparkListener.adoc#onJobEnd[SparkListener Contract] to...FIXME
+NOTE: `onJobEnd` is part of spark-SparkListener.md#onJobEnd[SparkListener Contract] to...FIXME
 
 `onJobEnd`...FIXME
 
@@ -73,7 +73,7 @@ NOTE: `onJobEnd` is part of link:spark-SparkListener.adoc#onJobEnd[SparkListener
 onExecutorMetricsUpdate(event: SparkListenerExecutorMetricsUpdate): Unit
 ----
 
-NOTE: `onExecutorMetricsUpdate` is part of link:spark-SparkListener.adoc#onExecutorMetricsUpdate[SparkListener Contract] to...FIXME
+NOTE: `onExecutorMetricsUpdate` is part of spark-SparkListener.md#onExecutorMetricsUpdate[SparkListener Contract] to...FIXME
 
 `onExecutorMetricsUpdate`...FIXME
 
@@ -84,7 +84,7 @@ NOTE: `onExecutorMetricsUpdate` is part of link:spark-SparkListener.adoc#onExecu
 onTaskEnd(event: SparkListenerTaskEnd): Unit
 ----
 
-NOTE: `onTaskEnd` is part of link:spark-SparkListener.adoc#onTaskEnd[SparkListener Contract] to...FIXME
+NOTE: `onTaskEnd` is part of spark-SparkListener.md#onTaskEnd[SparkListener Contract] to...FIXME
 
 `onTaskEnd`...FIXME
 
@@ -95,6 +95,6 @@ NOTE: `onTaskEnd` is part of link:spark-SparkListener.adoc#onTaskEnd[SparkListen
 onOtherEvent(event: SparkListenerEvent): Unit
 ----
 
-NOTE: `onOtherEvent` is part of link:spark-SparkListener.adoc#onOtherEvent[SparkListener Contract] to...FIXME
+NOTE: `onOtherEvent` is part of spark-SparkListener.md#onOtherEvent[SparkListener Contract] to...FIXME
 
 `onOtherEvent`...FIXME
