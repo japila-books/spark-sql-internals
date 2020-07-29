@@ -2,7 +2,7 @@
 
 `HiveTableRelation` is a ../spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a Hive table in a ../spark-sql-LogicalPlan.md[logical query plan].
 
-`HiveTableRelation` is <<creating-instance, created>> when `FindDataSourceTable` logical evaluation rule is requested to ../spark-sql-Analyzer-FindDataSourceTable.md#apply[resolve UnresolvedCatalogRelations in a logical plan] (for ../spark-sql-Analyzer-FindDataSourceTable.md#readHiveTable[Hive tables]).
+`HiveTableRelation` is <<creating-instance, created>> when `FindDataSourceTable` logical evaluation rule is requested to [resolve UnresolvedCatalogRelations in a logical plan](../logical-analysis-rules/FindDataSourceTable.md#apply) (for [Hive tables](../logical-analysis-rules/FindDataSourceTable.md#readHiveTable)).
 
 NOTE: `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and configuration-properties.md#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
 
@@ -107,7 +107,7 @@ table stats must be specified.
 
 When created, `HiveTableRelation` is given the <<partitionCols, partition columns>>.
 
-link:../spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical evaluation rule creates a `HiveTableRelation` based on a ../spark-sql-CatalogTable.md[table specification] (from a catalog).
+FindDataSourceTable.md[FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule creates a `HiveTableRelation` based on a ../spark-sql-CatalogTable.md[table specification] (from a catalog).
 
 The <<partitionCols, partition columns>> are exactly ../spark-sql-CatalogTable.md#partitionSchema[partitions] of the ../spark-sql-CatalogTable.md[table specification].
 

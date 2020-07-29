@@ -42,7 +42,7 @@ The catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly 
 
 `GroupingSets` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
 
-* spark-sql-Analyzer-ResolveAliases.md[ResolveAliases] for unresolved aliases in <<aggregations, aggregate named expressions>>
+* [ResolveAliases](../logical-analysis-rules/ResolveAliases.md) for unresolved aliases in <<aggregations, aggregate named expressions>>
 
 * spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics]
 

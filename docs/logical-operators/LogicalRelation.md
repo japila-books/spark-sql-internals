@@ -21,7 +21,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `DataFrameReader` is requested to load data from an external table using [JDBC](../DataFrameReader.md#jdbc) (through SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 * `ResolveSQLOnFile` converts a logical plan
-* `FindDataSourceTable` logical evaluation rule is spark-sql-Analyzer-FindDataSourceTable.md#apply[executed]
+* [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule is executed
 * hive/RelationConversions.md[RelationConversions] logical evaluation rule is executed
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
@@ -59,18 +59,15 @@ apply(
 
 `apply` <<creating-instance, creates>> a `LogicalRelation` for the input spark-sql-BaseRelation.md[BaseRelation] (and spark-sql-CatalogTable.md[CatalogTable] or optional `isStreaming` flag).
 
-[NOTE]
-====
 `apply` is used when:
 
 * `SparkSession` is requested for a SparkSession.md#baseRelationToDataFrame[DataFrame for a BaseRelation]
 
 * spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] command is executed
 
-* spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] and spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical evaluation rules are executed
+* [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
 
 * `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
-====
 
 === [[refresh]] `refresh` Method
 

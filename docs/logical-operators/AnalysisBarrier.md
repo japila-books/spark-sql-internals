@@ -6,9 +6,9 @@ title: AnalysisBarrier
 
 `AnalysisBarrier` is <<creating-instance, created>> when:
 
-* `ResolveReferences` logical resolution rule is requested to <<spark-sql-Analyzer-ResolveReferences.md#dedupRight, dedupRight>>
+* `ResolveReferences` logical resolution rule is requested to [dedupRight](../logical-analysis-rules/ResolveReferences.md#dedupRight)
 
-* `ResolveMissingReferences` logical resolution rule is requested to <<spark-sql-Analyzer-ResolveMissingReferences.md#resolveExprsAndAddMissingAttrs, resolveExprsAndAddMissingAttrs>>
+* `ResolveMissingReferences` logical resolution rule is requested to [resolveExprsAndAddMissingAttrs](../logical-analysis-rules/ResolveMissingReferences.md#resolveExprsAndAddMissingAttrs)
 
 * `Dataset` is <<spark-sql-Dataset.md#planWithBarrier, created>>
 

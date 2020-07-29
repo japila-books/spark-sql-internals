@@ -39,7 +39,7 @@ NOTE: `INSERT OVERWRITE TABLE` SQL statement is translated into <<InsertIntoTabl
 
 Dynamic Partition Inserts is only supported in SQL mode (for <<spark-sql-AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements).
 
-Dynamic Partition Inserts <<spark-sql-Analyzer-PreWriteCheck.md#apply-InsertableRelation, is not supported>> for non-file-based data sources, i.e. <<spark-sql-InsertableRelation.md#, InsertableRelations>>.
+Dynamic Partition Inserts [is not supported](logical-analysis-rules/PreWriteCheck.md#apply-InsertableRelation) for non-file-based data sources ([InsertableRelations](spark-sql-InsertableRelation.md)s).
 
 With Dynamic Partition Inserts, the behaviour of `OVERWRITE` keyword is controlled by <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>> configuration property (default: <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode-static, static>>). The property controls whether Spark should delete *all* the partitions that match the partition specification regardless of whether there is data to be written to or not (<<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode-static, static>>) or delete only those partitions that will have data written into (<<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode-dynamic, dynamic>>).
 

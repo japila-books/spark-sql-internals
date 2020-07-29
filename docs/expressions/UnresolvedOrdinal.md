@@ -49,7 +49,7 @@ NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> canno
 `UnresolvedOrdinal` can never be <<expressions/Expression.md#resolved, resolved>> (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[analysis-phase]]
-NOTE: `UnresolvedOrdinal` is resolved when <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md#, ResolveOrdinalInOrderByAndGroupBy>> logical resolution rule is executed.
+NOTE: `UnresolvedOrdinal` is resolved when [ResolveOrdinalInOrderByAndGroupBy](../logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md) logical resolution rule is executed.
 
 [[NonSQLExpression]]
 `UnresolvedOrdinal` has <<expressions/Expression.md#NonSQLExpression, no representation in SQL>>.

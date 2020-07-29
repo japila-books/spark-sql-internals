@@ -116,7 +116,7 @@ Used when:
 
 * `DDLUtils` utility is used to spark-sql-DDLUtils.md#verifyNotReadPath[verifyNotReadPath]
 
-* spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] logical resolution rule is executed (for a InsertIntoTable.md[InsertIntoTable] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
+* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a InsertIntoTable.md[InsertIntoTable] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
 
 | sizeInBytes
 a| [[sizeInBytes]]

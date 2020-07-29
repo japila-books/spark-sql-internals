@@ -59,7 +59,7 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 | ImplicitTypeCasts
 | [[ImplicitTypeCasts]]
 
-| <<spark-sql-Analyzer-TypeCoercionRule-InConversion.md#, InConversion>>
+| [InConversion](logical-analysis-rules/InConversion.md)
 | [[InConversion]]
 
 | PromoteStrings
@@ -68,7 +68,7 @@ Used exclusively when `TypeCoercionRule` is <<apply, executed>>
 | StackCoercion
 | [[StackCoercion]]
 
-| <<spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md#, WindowFrameCoercion>>
+| [WindowFrameCoercion](logical-analysis-rules/WindowFrameCoercion.md)
 | [[WindowFrameCoercion]]
 |===
 

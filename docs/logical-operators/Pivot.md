@@ -28,11 +28,10 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 `Pivot` operator is resolved at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
 
-* spark-sql-Analyzer-ResolveAliases.md[ResolveAliases]
-* spark-sql-Analyzer.md#ResolvePivot[ResolvePivot]
+* [ResolveAliases](../logical-analysis-rules/ResolveAliases.md)
+* [ResolvePivot](../spark-sql-Analyzer.md#ResolvePivot)
 
-[source, scala]
-----
+```text
 val spark: SparkSession = ...
 
 import spark.sessionState.analyzer.ResolveAliases
@@ -46,7 +45,7 @@ scala> println(plan.numberedTreeString)
 
 // FIXME Find a plan to show the effect of ResolveAliases
 val planResolved = ResolveAliases(plan)
-----
+```
 
 `Pivot` operator "disappears" behind (i.e. is converted to) a spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator (possibly under `Project` operator).
 

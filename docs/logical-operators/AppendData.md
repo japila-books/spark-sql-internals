@@ -18,7 +18,7 @@ NOTE: `AppendData` has replaced the deprecated <<spark-sql-LogicalPlan-WriteToDa
 [[children]]
 `AppendData` has a [single child logical operator](../catalyst/TreeNode.md#children) that is exactly the <<query, logical operator>>.
 
-`AppendData` is resolved using <<spark-sql-Analyzer-ResolveOutputRelation.md#, ResolveOutputRelation>> logical resolution rule.
+`AppendData` is resolved by [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical resolution rule.
 
 `AppendData` is planned (_replaced_) to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when the <<table, table>> is a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator).
 

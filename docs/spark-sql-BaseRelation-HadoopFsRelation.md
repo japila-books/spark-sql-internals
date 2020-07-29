@@ -78,7 +78,7 @@ The optional <<bucketSpec, bucketing specification>> is defined exclusively for 
 
 * <<spark-sql-SparkPlan-FileSourceScanExec.md#outputPartitioning, Output partitioning scheme>> and <<spark-sql-SparkPlan-FileSourceScanExec.md#outputOrdering, output data ordering>> of the corresponding <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>> physical operator
 
-* <<spark-sql-Analyzer-DataSourceAnalysis.md#, DataSourceAnalysis>> post-hoc logical resolution rule (when executed on a <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> with `HadoopFsRelation` relation)
+* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule (when executed on a <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> with `HadoopFsRelation` relation)
 
 === [[creating-instance]] Creating HadoopFsRelation Instance
 

@@ -148,9 +148,9 @@ scala> println(in.sql)
 
 `In` expressions are analyzed using the following rules:
 
-* spark-sql-Analyzer-ResolveSubquery.md[ResolveSubquery] resolution rule
+* [ResolveSubquery](../logical-analysis-rules/ResolveSubquery.md) resolution rule
 
-* spark-sql-Analyzer-TypeCoercionRule-InConversion.md[InConversion] type coercion rule
+* [InConversion](../logical-analysis-rules/InConversion.md) type coercion rule
 
 [[InMemoryTableScanExec]]
 `In` expression has a spark-sql-SparkPlan-InMemoryTableScanExec.md#buildFilter-expressions[custom support] in spark-sql-SparkPlan-InMemoryTableScanExec.md[InMemoryTableScanExec] physical operator.

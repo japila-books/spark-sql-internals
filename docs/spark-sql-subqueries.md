@@ -30,7 +30,7 @@ A `ScalarSubquery` expression appears as *scalar-subquery#[exprId] [conditionStr
 
 It is said that scalar subqueries should be used very rarely if at all and you should join instead.
 
-Spark Analyzer uses spark-sql-Analyzer-ResolveSubquery.md[ResolveSubquery] resolution rule to spark-sql-Analyzer-ResolveSubquery.md#resolveSubQueries[resolve subqueries] and at the end spark-sql-Analyzer-CheckAnalysis.md#checkSubqueryExpression[makes sure that they are valid].
+Spark Analyzer uses [ResolveSubquery](logical-analysis-rules/ResolveSubquery.md) resolution rule to [resolve subqueries](logical-analysis-rules/ResolveSubquery.md#resolveSubQueries) and at the end spark-sql-Analyzer-CheckAnalysis.md#checkSubqueryExpression[makes sure that they are valid].
 
 Catalyst Optimizer uses the following optimizations for subqueries:
 

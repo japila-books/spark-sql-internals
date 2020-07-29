@@ -140,10 +140,10 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 .3+^.^| [[Hints]] Hints
 .3+^.^| <<fixedPoint, FixedPoint>>
 
-| <<spark-sql-Analyzer-ResolveBroadcastHints.md#, ResolveBroadcastHints>>
+| [ResolveBroadcastHints](logical-analysis-rules/ResolveBroadcastHints.md)
 | [[ResolveBroadcastHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators
 
-| <<spark-sql-Analyzer-ResolveCoalesceHints.md#, ResolveCoalesceHints>>
+| [ResolveCoalesceHints](logical-analysis-rules/ResolveCoalesceHints.md)
 | [[ResolveCoalesceHints]] Resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators
 
 | RemoveAllHints
@@ -151,7 +151,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 
 ^.^| [[Simple-Sanity-Check]] Simple Sanity Check
 ^.^| `Once`
-| spark-sql-Analyzer-LookupFunctions.md[LookupFunctions]
+| [LookupFunctions](logical-analysis-rules/LookupFunctions.md)
 | [[LookupFunctions]] Checks whether a function identifier (referenced by an spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction]) spark-sql-SessionCatalog.md#functionExists[exists in the function registry]. Throws a `NoSuchFunctionException` if not.
 
 .4+^.^| [[Substitution]] Substitution
@@ -159,7 +159,7 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | CTESubstitution
 | Resolves `With` operators (and substitutes named common table expressions -- CTEs)
 
-| [[WindowsSubstitution]] spark-sql-Analyzer-WindowsSubstitution.md[WindowsSubstitution]
+| [[WindowsSubstitution]] [WindowsSubstitution](logical-analysis-rules/WindowsSubstitution.md)
 | Substitutes an <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> with a <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> for spark-sql-LogicalPlan-WithWindowDefinition.md[WithWindowDefinition] logical operators.
 
 | EliminateUnions
@@ -173,16 +173,16 @@ The reason for such weird-looking logger names is that `analyzer` attribute is c
 | ResolveTableValuedFunctions
 | Replaces `UnresolvedTableValuedFunction` with table-valued function.
 
-| [[ResolveRelations]] spark-sql-Analyzer-ResolveRelations.md[ResolveRelations]
+| [[ResolveRelations]] [ResolveRelations](logical-analysis-rules/ResolveRelations.md)
 a| Resolves:
 
 * InsertIntoTable.md[InsertIntoTable]
 * spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation]
 
-| [[ResolveReferences]] spark-sql-Analyzer-ResolveReferences.md[ResolveReferences]
+| [[ResolveReferences]] [ResolveReferences](logical-analysis-rules/ResolveReferences.md)
 |
 
-| [[ResolveCreateNamedStruct]] <<spark-sql-Analyzer-ResolveCreateNamedStruct.md#, ResolveCreateNamedStruct>>
+| [[ResolveCreateNamedStruct]] [ResolveCreateNamedStruct](logical-analysis-rules/ResolveCreateNamedStruct.md)
 | Resolves <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions (with `NamePlaceholders`) to use <<spark-sql-Expression-Literal.md#, Literal>> expressions
 
 | ResolveDeserializer
@@ -221,7 +221,7 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 | [[ResolvePivot]] ResolvePivot
 | Resolves spark-sql-LogicalPlan-Pivot.md[Pivot] logical operator to `Project` with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] unary logical operator (for supported data types in aggregates) or just a single `Aggregate`.
 
-| <<spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy.md#, ResolveOrdinalInOrderByAndGroupBy>>
+| [ResolveOrdinalInOrderByAndGroupBy](logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md)
 | [[ResolveOrdinalInOrderByAndGroupBy]]
 
 | ResolveMissingReferences
@@ -231,7 +231,7 @@ NOTE: `ResolveGroupingAnalytics` is only for grouping functions resolution while
 |
 | ResolveGenerate
 |
-| spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions]
+| [ResolveFunctions](logical-analysis-rules/ResolveFunctions.md)
 a| [[ResolveFunctions]] Resolves functions using spark-sql-SessionCatalog.md#lookupFunction[SessionCatalog]:
 
 * spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerator] to a spark-sql-Expression-Generator.md[Generator]
@@ -245,26 +245,26 @@ If `Generator` is not found, `ResolveFunctions` reports the error:
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ----
 
-| [[ResolveAliases]] spark-sql-Analyzer-ResolveAliases.md[ResolveAliases]
+| [[ResolveAliases]] [ResolveAliases](logical-analysis-rules/ResolveAliases.md)
 a| Replaces `UnresolvedAlias` expressions/Expression.md[expressions] with concrete aliases:
 
 * spark-sql-Expression-NamedExpression.md[NamedExpressions]
 * `MultiAlias` (for `GeneratorOuter` and `Generator`)
 * `Alias` (for `Cast` and `ExtractValue`)
 
-| <<spark-sql-Analyzer-ResolveSubquery.md#, ResolveSubquery>>
+| [ResolveSubquery](logical-analysis-rules/ResolveSubquery.md)
 | [[ResolveSubquery]] Resolves subquery expressions (i.e. <<spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#, ScalarSubquery>>, <<spark-sql-Expression-Exists.md#, Exists>> and <<spark-sql-Expression-In.md#, In>>)
 
-| <<spark-sql-Analyzer-ResolveWindowOrder.md#, ResolveWindowOrder>>
+| [ResolveWindowOrder](logical-analysis-rules/ResolveWindowOrder.md)
 | [[ResolveWindowOrder]]
 
-| spark-sql-Analyzer-ResolveWindowFrame.md[ResolveWindowFrame]
+| [ResolveWindowFrame](logical-analysis-rules/ResolveWindowFrame.md)
 | [[ResolveWindowFrame]] Resolves spark-sql-Expression-WindowExpression.md[WindowExpression] expressions
 
 | ResolveNaturalAndUsingJoin
 | [[ResolveNaturalAndUsingJoin]]
 
-| <<spark-sql-Analyzer-ExtractWindowExpressions.md#, ExtractWindowExpressions>>
+| [ExtractWindowExpressions](logical-analysis-rules/ExtractWindowExpressions.md)
 | [[ExtractWindowExpressions]]
 
 | GlobalAggregates
@@ -275,10 +275,10 @@ a| [[ResolveAggregateFunctions]] Resolves aggregate functions in `Filter` and `S
 
 NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functions that are resolved by <<ResolveGroupingAnalytics, ResolveGroupingAnalytics>> rule.
 
-| <<spark-sql-Analyzer-TimeWindowing.md#, TimeWindowing>>
+| [TimeWindowing](logical-analysis-rules/TimeWindowing.md)
 | [[TimeWindowing]] Resolves <<spark-sql-Expression-TimeWindow.md#, TimeWindow>> expressions to `Filter` with <<spark-sql-LogicalPlan-Expand.md#, Expand>> logical operators.
 
-| <<spark-sql-Analyzer-ResolveInlineTables.md#, ResolveInlineTables>>
+| [ResolveInlineTables](logical-analysis-rules/ResolveInlineTables.md)
 | [[ResolveInlineTables]] Resolves <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> operators to <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelations>>
 
 | <<spark-sql-TypeCoercion.md#typeCoercionRules, TypeCoercion.typeCoercionRules>>
@@ -294,7 +294,7 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| [[View]] View
 ^.^| `Once`
-| [[AliasViewChild]] <<spark-sql-Analyzer-AliasViewChild.md#, AliasViewChild>>
+| [[AliasViewChild]] [AliasViewChild](logical-analysis-rules/AliasViewChild.md)
 |
 
 ^.^| Nondeterministic
@@ -304,7 +304,7 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| UDF
 ^.^| `Once`
-| [[HandleNullInputsForUDF]] spark-sql-Analyzer-HandleNullInputsForUDF.md[HandleNullInputsForUDF]
+| [[HandleNullInputsForUDF]] [HandleNullInputsForUDF](logical-analysis-rules/HandleNullInputsForUDF.md)
 |
 
 ^.^| FixNullability
@@ -319,7 +319,7 @@ NOTE: `ResolveAggregateFunctions` skips (i.e. does not resolve) grouping functio
 
 ^.^| [[Cleanup]] Cleanup
 ^.^| <<fixedPoint, FixedPoint>>
-| <<spark-sql-Analyzer-CleanupAliases.md#, CleanupAliases>>
+| [CleanupAliases](logical-analysis-rules/CleanupAliases.md)
 | [[CleanupAliases]]
 |===
 

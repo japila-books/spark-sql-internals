@@ -56,7 +56,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listColumns-internal, list the columns of a table>>
 
-* `FindDataSourceTable` logical evaluation rule is requested to <<spark-sql-Analyzer-FindDataSourceTable.md#readDataSourceTable, readDataSourceTable>> (when <<spark-sql-Analyzer-FindDataSourceTable.md#apply, executed>> for data source tables)
+* `FindDataSourceTable` logical evaluation rule is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable) (when [executed](logical-analysis-rules/FindDataSourceTable.md) for data source tables)
 
 * `CreateTableLikeCommand` logical command is executed
 

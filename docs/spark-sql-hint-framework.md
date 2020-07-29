@@ -98,11 +98,11 @@ scala> println(plan.numberedTreeString)
 
 There are the following logical rules that spark-sql-Analyzer.md[Spark Analyzer] uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
-. spark-sql-Analyzer-ResolveBroadcastHints.md[ResolveBroadcastHints] resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
+* [ResolveBroadcastHints](logical-analysis-rules/ResolveBroadcastHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 
-. <<spark-sql-Analyzer-ResolveCoalesceHints.md#, ResolveCoalesceHints>> resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
+* [ResolveCoalesceHints](logical-analysis-rules/ResolveCoalesceHints.md) resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
-. `RemoveAllHints` simply removes all `UnresolvedHint` operators
+* `RemoveAllHints` simply removes all `UnresolvedHint` operators
 
 The order of executing the above rules matters.
 

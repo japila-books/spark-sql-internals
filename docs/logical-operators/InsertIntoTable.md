@@ -85,10 +85,10 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 | [[InsertIntoHiveTable]] When hive/HiveAnalysis.md#apply[HiveAnalysis] resolution rule transforms `InsertIntoTable` with a hive/HiveTableRelation.md[HiveTableRelation]
 
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
-| [[InsertIntoDataSourceCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.md#, DataSourceAnalysis>> posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over an <<spark-sql-InsertableRelation.md#, InsertableRelation>> (with no partitions defined)
+| [[InsertIntoDataSourceCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over an <<spark-sql-InsertableRelation.md#, InsertableRelation>> (with no partitions defined)
 
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>
-| [[InsertIntoHadoopFsRelationCommand]] When <<spark-sql-Analyzer-DataSourceAnalysis.md#, DataSourceAnalysis>> posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>
+| [[InsertIntoHadoopFsRelationCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>
 
 |===
 
@@ -145,7 +145,7 @@ assert(op.isInstanceOf[InsertIntoTable])
 
 === [[inserting-into-view-not-allowed]] Inserting Into View Not Allowed
 
-Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> leaf operator that is resolved to a <<spark-sql-LogicalPlan-View.md#, View>> unary operator fails at analysis (when <<spark-sql-Analyzer-ResolveRelations.md#, ResolveRelations>> logical resolution is executed).
+Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> leaf operator that is resolved to a <<spark-sql-LogicalPlan-View.md#, View>> unary operator fails at analysis (when [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution is executed).
 
 ```
 Inserting into a view is not allowed. View: [name].
@@ -203,15 +203,15 @@ org.apache.spark.sql.AnalysisException: Inserting into a view is not allowed. Vi
 
 === [[inserting-into-rdd-based-table-not-allowed]] Inserting Into RDD-Based Table Not Allowed
 
-Inserting into an RDD-based table is not allowed, i.e. a query plan with an `InsertIntoTable` operator with one of the following logical operators (as the <<table, logical plan representing the table>>) fails at analysis (when <<spark-sql-Analyzer-PreWriteCheck.md#, PreWriteCheck>> extended logical check is executed):
+Inserting into an RDD-based table is not allowed, i.e. a query plan with an `InsertIntoTable` operator with one of the following logical operators (as the <<table, logical plan representing the table>>) fails at analysis (when [PreWriteCheck]((../logical-analysis-rules/PreWriteCheck.md) extended logical check is executed):
 
 * Logical operator is not a <<spark-sql-LogicalPlan-LeafNode.md#, leaf node>>
 
-* <<spark-sql-LogicalPlan-Range.md#, Range>> leaf operator
+* [Range](Range.md) leaf operator
 
-* <<spark-sql-LogicalPlan-OneRowRelation.md#, OneRowRelation>> leaf operator
+* [OneRowRelation](OneRowRelation.md) leaf operator
 
-* <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelation>> leaf operator
+* [LocalRelation](LocalRelation.md) leaf operator
 
 [source, scala]
 ----

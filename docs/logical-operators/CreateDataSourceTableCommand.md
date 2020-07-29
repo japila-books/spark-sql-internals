@@ -4,7 +4,7 @@ title: CreateDataSourceTableCommand
 
 `CreateDataSourceTableCommand` is a xref:spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, creates a new table>> (in a xref:spark-sql-SessionCatalog.md[SessionCatalog]).
 
-`CreateDataSourceTableCommand` is created when xref:spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] posthoc logical resolution rule resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a non-Hive table provider with no query.
+`CreateDataSourceTableCommand` is created when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a non-Hive table provider with no query.
 
 === [[creating-instance]] Creating CreateDataSourceTableCommand Instance
 

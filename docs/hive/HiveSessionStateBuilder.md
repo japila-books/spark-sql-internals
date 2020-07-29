@@ -95,13 +95,13 @@ NOTE: `analyzer` is part of ../BaseSessionStateBuilder.md#analyzer[BaseSessionSt
 | Logical Rule
 | Description
 
-| ResolveHiveSerdeTable.md[ResolveHiveSerdeTable]
+| [ResolveHiveSerdeTable](ResolveHiveSerdeTable.md)
 | [[ResolveHiveSerdeTable]]
 
-| ../spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable]
+| [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md)
 | [[FindDataSourceTable]]
 
-| ../spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile]
+| [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md)
 | [[ResolveSQLOnFile]]
 
 |===
@@ -119,13 +119,13 @@ NOTE: `analyzer` is part of ../BaseSessionStateBuilder.md#analyzer[BaseSessionSt
 | [[RelationConversions]] RelationConversions.md[RelationConversions]
 |
 
-| [[PreprocessTableCreation]] <<spark-sql-Analyzer-PreprocessTableCreation.md#, PreprocessTableCreation>>
+| [[PreprocessTableCreation]] [PreprocessTableCreation](../logical-analysis-rules/PreprocessTableCreation.md)
 |
 
 | [[PreprocessTableInsertion]] `PreprocessTableInsertion`
 |
 
-| [[DataSourceAnalysis]] ../spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis]
+| [[DataSourceAnalysis]] .[DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md)
 |
 
 | [[HiveAnalysis]] HiveAnalysis.md[HiveAnalysis]

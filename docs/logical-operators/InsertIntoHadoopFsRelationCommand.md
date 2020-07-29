@@ -11,7 +11,7 @@ title: InsertIntoHadoopFsRelationCommand
 ** xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command
 ** xref:spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator with DataSource V1 data sources
 
-* xref:spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:InsertIntoTable.md[InsertIntoTable] logical operator with a xref:spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a xref:InsertIntoTable.md[InsertIntoTable] logical operator with a xref:spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
 
 [[partitionOverwriteMode]][[PartitionOverwriteMode]]
 `InsertIntoHadoopFsRelationCommand` uses *partitionOverwriteMode* option that overrides <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>> property for <<spark-sql-dynamic-partition-inserts.md#, dynamic partition inserts>>.
@@ -39,7 +39,7 @@ title: InsertIntoHadoopFsRelationCommand
 
 * Always empty when <<creating-instance, created>> when `DataSource` is requested to <<spark-sql-DataSource.md#planForWritingFileFormat, planForWritingFileFormat>>
 
-* Possibly with partitions when <<creating-instance, created>> when `DataSourceAnalysis` posthoc logical resolution rule is <<spark-sql-Analyzer-DataSourceAnalysis.md#apply, applied>> to an <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> relation
+* Possibly with partitions when <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule is applied to an <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> relation
 
 With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<InsertIntoTable.md#, InsertIntoTable>> logical operator.
 ====

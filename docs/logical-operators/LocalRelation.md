@@ -6,7 +6,7 @@ title: LocalRelation
 
 `LocalRelation` is <<creating-instance, created>> (using <<apply, apply>>, <<fromExternalRows, fromExternalRows>>, and <<fromProduct, fromProduct>> factory methods) when:
 
-* <<spark-sql-Analyzer-ResolveInlineTables.md#, ResolveInlineTables>> logical resolution rule is <<spark-sql-Analyzer-ResolveInlineTables.md#apply, executed>> (and <<spark-sql-Analyzer-ResolveInlineTables.md#convert, converts an UnresolvedInlineTable>>)
+* [ResolveInlineTables](../logical-analysis-rules/ResolveInlineTables.md) logical resolution rule is executed (and [converts an UnresolvedInlineTable](../logical-analysis-rules/ResolveInlineTables.md#convert))
 
 * [PruneFilters](../Optimizer.md#PruneFilters), [ConvertToLocalRelation](../Optimizer.md#ConvertToLocalRelation), and [PropagateEmptyRelation](../Optimizer.md#PropagateEmptyRelation), [OptimizeMetadataOnlyQuery](../Optimizer.md#OptimizeMetadataOnlyQuery) logical optimization rules are executed (applied to an analyzed logical plan)
 

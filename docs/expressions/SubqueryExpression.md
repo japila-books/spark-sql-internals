@@ -30,13 +30,13 @@ a| Used when:
 
 * `CTESubstitution` substitution analyzer rule is requested to `substituteCTE`
 
-* `ResolveReferences` logical resolution rule is requested to spark-sql-Analyzer-ResolveReferences.md#dedupRight[dedupRight] and spark-sql-Analyzer-ResolveReferences.md#dedupOuterReferencesInSubquery[dedupOuterReferencesInSubquery]
+* `ResolveReferences` logical resolution rule is requested to [dedupRight](../logical-analysis-rules/ResolveReferences.md#dedupRight) and [dedupOuterReferencesInSubquery](../logical-analysis-rules/ResolveReferences.md#dedupOuterReferencesInSubquery)
 
-* `ResolveSubquery` logical resolution rule is requested to spark-sql-Analyzer-ResolveSubquery.md#resolveSubQuery[resolveSubQuery]
+* `ResolveSubquery` logical resolution rule is requested to [resolveSubQuery](../logical-analysis-rules/ResolveSubquery.md#resolveSubQuery)
 
-* `UpdateOuterReferences` logical rule is spark-sql-Analyzer-UpdateOuterReferences.md#apply[executed]
+* [UpdateOuterReferences](../logical-analysis-rules/UpdateOuterReferences.md) logical rule is executed
 
-* `ResolveTimeZone` logical resolution rule is spark-sql-ResolveTimeZone.md#apply[executed]
+* [ResolveTimeZone](../logical-analysis-rules/ResolveTimeZone.md) logical resolution rule is executed
 
 * `SubqueryExpression` is requested for a <<canonicalize, canonicalized version>>
 

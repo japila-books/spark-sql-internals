@@ -123,7 +123,7 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
 
-Used exclusively when spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` spark-sql-DataFrameWriter.md#saveAsTable[saves a DataFrame to a non-Hive table] or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` spark-sql-DataFrameWriter.md#saveAsTable[saves a DataFrame to a non-Hive table] or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
 
 | spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
 | [[CreateDataSourceTableCommand]]

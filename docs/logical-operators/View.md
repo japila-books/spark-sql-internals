@@ -82,9 +82,9 @@ scala> println(analyzedPlan.children.head.simpleString)
 View (`default`.`demo_view`, [col1#33])
 ----
 
-NOTE: `View` is resolved by <<spark-sql-Analyzer-ResolveRelations.md#, ResolveRelations>> logical resolution.
+NOTE: `View` is resolved by [ResolveRelations](../logical-analysis-rules/ResolveRelations.md)logical resolution.
 
-NOTE: <<spark-sql-Analyzer-AliasViewChild.md#, AliasViewChild>> logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
+NOTE: [AliasViewChild](../logical-analysis-rules/AliasViewChild.md) logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
 
 NOTE: <<spark-sql-Optimizer-EliminateView.md#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
 

@@ -1,6 +1,6 @@
 # CatalogUtils Helper Object
 
-`CatalogUtils` is a Scala object with the <<methods, methods>> to support <<spark-sql-Analyzer-PreprocessTableCreation.md#, PreprocessTableCreation>> post-hoc logical resolution rule (among others).
+`CatalogUtils` is a Scala object with the <<methods, methods>> to support [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) post-hoc logical resolution rule (among others).
 
 [[methods]]
 .CatalogUtils API
@@ -35,7 +35,7 @@ normalizeBucketSpec(
   resolver: Resolver): BucketSpec
 ----
 
-Used exclusively when <<spark-sql-Analyzer-PreprocessTableCreation.md#, PreprocessTableCreation>> post-hoc logical resolution rule is executed.
+Used exclusively when [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) post-hoc logical resolution rule is executed.
 
 | normalizePartCols
 a| [[normalizePartCols]]
@@ -49,7 +49,7 @@ normalizePartCols(
   resolver: Resolver): Seq[String]
 ----
 
-Used exclusively when <<spark-sql-Analyzer-PreprocessTableCreation.md#, PreprocessTableCreation>> post-hoc logical resolution rule is executed.
+Used exclusively when [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) post-hoc logical resolution rule is executed.
 
 |===
 

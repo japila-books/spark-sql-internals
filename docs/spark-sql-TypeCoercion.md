@@ -11,20 +11,20 @@ typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
 
 `typeCoercionRules` is a collection of <<catalyst/Rule.md#, Catalyst rules>> to transform <<spark-sql-LogicalPlan.md#, logical plans>> (in the order of execution):
 
-. <<spark-sql-Analyzer-TypeCoercionRule-InConversion.md#, InConversion>>
-. `WidenSetOperationTypes`
-. `PromoteStrings`
-. `DecimalPrecision`
-. `BooleanEquality`
-. `FunctionArgumentConversion`
-. `ConcatCoercion`
-. `EltCoercion`
-. `CaseWhenCoercion`
-. `IfCoercion`
-. `StackCoercion`
-. `Division`
-. `ImplicitTypeCasts`
-. `DateTimeOperations`
-. <<spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion.md#, WindowFrameCoercion>>
+* [InConversion](logical-analysis-rules/InConversion.md)
+* `WidenSetOperationTypes`
+* `PromoteStrings`
+* `DecimalPrecision`
+* `BooleanEquality`
+* `FunctionArgumentConversion`
+* `ConcatCoercion`
+* `EltCoercion`
+* `CaseWhenCoercion`
+* `IfCoercion`
+* `StackCoercion`
+* `Division`
+* `ImplicitTypeCasts`
+* `DateTimeOperations`
+* [WindowFrameCoercion](logical-analysis-rules/WindowFrameCoercion.md)
 
 NOTE: `typeCoercionRules` is used exclusively when `Analyzer` is requested for <<spark-sql-Analyzer.md#batches, batches>>.

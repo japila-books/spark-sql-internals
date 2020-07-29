@@ -11,7 +11,7 @@
 
 `AlterTableRecoverPartitionsCommand` is created when:
 
-* [ResolveSessionCatalog](../ResolveSessionCatalog.md) logical analysis rule is executed (and resolves [RepairTableStatement](RepairTableStatement.md) and [AlterTableRecoverPartitionsStatement](AlterTableRecoverPartitionsStatement.md) parsed statements)
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (and resolves [RepairTableStatement](RepairTableStatement.md) and [AlterTableRecoverPartitionsStatement](AlterTableRecoverPartitionsStatement.md) parsed statements)
 
 * [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed (for a partitioned [HadoopFsRelation](../spark-sql-BaseRelation-HadoopFsRelation.md))
 

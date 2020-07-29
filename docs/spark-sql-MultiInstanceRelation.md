@@ -13,7 +13,7 @@ trait MultiInstanceRelation {
 }
 ----
 
-When `ResolveReferences` logical evaluation is spark-sql-Analyzer-ResolveReferences.md#apply[executed], every `MultiInstanceRelation` in a logical query plan is requested to <<newInstance, produce a new version of itself with globally unique expression ids>>.
+When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical evaluation is executed, every `MultiInstanceRelation` in a logical query plan is requested to <<newInstance, produce a new version of itself with globally unique expression ids>>.
 
 [[implementations]]
 .MultiInstanceRelations

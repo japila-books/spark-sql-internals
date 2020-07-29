@@ -41,8 +41,6 @@ isDatasourceTable(
 
 `isDatasourceTable` is positive (`true`) when the spark-sql-CatalogTable.md#provider[provider] of the input spark-sql-CatalogTable.md[CatalogTable] is not <<HIVE_PROVIDER, hive>> when defined. Otherwise, `isDatasourceTable` is negative (`false`).
 
-[NOTE]
-====
 `isDatasourceTable` is used when:
 
 * `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#createTable[createTable] (and hive/HiveExternalCatalog.md#saveTableIntoHive[saveTableIntoHive])
@@ -53,8 +51,7 @@ isDatasourceTable(
 
 * `DDLUtils` utility is used to <<verifyPartitionProviderIsHive, verifyPartitionProviderIsHive>>
 
-* spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] and spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] logical rules are executed
-====
+* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) and [FindDataSourceTable](logical-analysis-rules/FindDataSourceTable.md) logical rules are executed
 
 === [[isHiveTable]] `isHiveTable` Utility
 

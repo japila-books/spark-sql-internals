@@ -356,9 +356,9 @@ a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-Inse
 | spark-sql-properties.md#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles]
 a| [[runSQLonFile]] Used when:
 
-* `ResolveRelations` does spark-sql-Analyzer-ResolveRelations.md#isRunningDirectlyOnFiles[isRunningDirectlyOnFiles]
+* `ResolveRelations` is requested to [isRunningDirectlyOnFiles](logical-analysis-rules/ResolveRelations.md#isRunningDirectlyOnFiles)
 
-* `ResolveSQLOnFile` does spark-sql-Analyzer-ResolveSQLOnFile.md#maybeSQLFile[maybeSQLFile]
+* `ResolveSQLOnFile` is requested to [maybeSQLFile](logical-analysis-rules/ResolveSQLOnFile.md#maybeSQLFile)
 
 | sessionLocalTimeZone
 | <<spark-sql-properties.md#spark.sql.session.timeZone, spark.sql.session.timeZone>>

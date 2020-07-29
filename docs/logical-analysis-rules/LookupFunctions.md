@@ -2,7 +2,7 @@
 
 `LookupFunctions` is a logical rule that the spark-sql-Analyzer.md#LookupFunctions[logical query plan analyzer] uses to <<apply, make sure that UnresolvedFunction expressions can be resolved>> in an entire logical query plan.
 
-`LookupFunctions` is similar to spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions] logical resolution rule, but it is `ResolveFunctions` to resolve `UnresolvedFunction` expressions while `LookupFunctions` is just a sanity check that a future resolution is possible if tried.
+`LookupFunctions` is similar to [ResolveFunctions](ResolveFunctions.md) logical resolution rule, but it is `ResolveFunctions` to resolve `UnresolvedFunction` expressions while `LookupFunctions` is just a sanity check that a future resolution is possible if tried.
 
 Technically, `LookupFunctions` is just a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans], i.e. `Rule[LogicalPlan]`.
 

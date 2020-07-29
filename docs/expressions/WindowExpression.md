@@ -10,7 +10,7 @@ NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> canno
 
 * `WindowSpec` is requested to <<spark-sql-WindowSpec.md#withAggregate, withAggregate>> (when <<spark-sql-Column.md#over, Column.over>> operator is used)
 
-* `WindowsSubstitution` logical evaluation rule is <<spark-sql-Analyzer-WindowsSubstitution.md#apply, executed>> (with <<spark-sql-LogicalPlan-WithWindowDefinition.md#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> expressions)
+* [WindowsSubstitution](../logical-analysis-rules/WindowsSubstitution.md) logical evaluation rule is executed (with <<spark-sql-LogicalPlan-WithWindowDefinition.md#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> expressions)
 
 * `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitFunctionCall, parse a function call>> in a SQL statement
 
@@ -22,7 +22,7 @@ val wf = 'count.function(star())
 val windowSpec = ???
 ```
 
-NOTE: `WindowExpression` is resolved in <<spark-sql-Analyzer-ExtractWindowExpressions.md#, ExtractWindowExpressions>>, <<spark-sql-Analyzer-ResolveWindowFrame.md#, ResolveWindowFrame>> and <<spark-sql-Analyzer-ResolveWindowOrder.md#, ResolveWindowOrder>> logical rules.
+NOTE: `WindowExpression` is resolved in [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md), [ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md) and [ResolveWindowOrder](../logical-analysis-rules/ResolveWindowOrder.md) logical rules.
 
 ```text
 import org.apache.spark.sql.catalyst.expressions.WindowExpression

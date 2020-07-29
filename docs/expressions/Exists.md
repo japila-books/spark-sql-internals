@@ -6,11 +6,11 @@ title: Exists
 
 `Exists` is <<creating-instance, created>> when:
 
-. `ResolveSubquery` is requested to spark-sql-Analyzer-ResolveSubquery.md#resolveSubQueries[resolveSubQueries]
+* `ResolveSubquery` is requested to [resolveSubQueries](../logical-analysis-rules/ResolveSubquery.md#resolveSubQueries)
 
-. `PullupCorrelatedPredicates` is requested to spark-sql-PullupCorrelatedPredicates.md#rewriteSubQueries[rewriteSubQueries]
+* `PullupCorrelatedPredicates` is requested to spark-sql-PullupCorrelatedPredicates.md#rewriteSubQueries[rewriteSubQueries]
 
-. `AstBuilder` is requested to spark-sql-AstBuilder.md#visitExists[visitExists] (in SQL statements)
+* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitExists[visitExists] (in SQL statements)
 
 [[Unevaluable]]
 `Exists` expressions/Expression.md#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.

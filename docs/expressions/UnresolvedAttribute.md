@@ -21,7 +21,7 @@ title: UnresolvedAttribute
 ====
 `UnresolvedAttribute` is resolved when `Analyzer` is spark-sql-Analyzer.md#execute[executed] by the following spark-sql-Analyzer.md#Resolution[logical resolution rules]:
 
-* spark-sql-Analyzer-ResolveReferences.md#resolve[ResolveReferences]
+* [ResolveReferences](../logical-analysis-rules/ResolveReferences.md#resolve)
 
 * `ResolveMissingReferences`
 

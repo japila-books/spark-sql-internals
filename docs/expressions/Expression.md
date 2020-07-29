@@ -53,7 +53,7 @@ a|
 
 | [[ExtractValue]] `ExtractValue`
 | trait
-| Marks `UnresolvedAliases` to be resolved to spark-sql-Expression-Alias.md[Aliases] with "pretty" SQLs when spark-sql-Analyzer-ResolveAliases.md#assignAliases[ResolveAliases] is executed
+| Marks `UnresolvedAliases` to be resolved to spark-sql-Expression-Alias.md[Aliases] with "pretty" SQLs when [ResolveAliases](../logical-analysis-rules/ResolveAliases.md#assignAliases) is executed
 a|
 
 * spark-sql-Expression-GetArrayItem.md[GetArrayItem]

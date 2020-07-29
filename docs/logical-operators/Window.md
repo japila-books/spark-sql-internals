@@ -6,9 +6,9 @@ title: Window
 
 `Window` is <<creating-instance, created>> when:
 
-* `ExtractWindowExpressions` logical resolution rule is <<spark-sql-Analyzer-ExtractWindowExpressions.md#apply, executed>>
+* [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md) logical resolution rule is executed
 
-* `CleanupAliases` logical analysis rule is <<spark-sql-Analyzer-CleanupAliases.md#apply, executed>>
+* [CleanupAliases](../logical-analysis-rules/CleanupAliases.md) logical analysis rule is executed
 
 [[output]]
 When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.

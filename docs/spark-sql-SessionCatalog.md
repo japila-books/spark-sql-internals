@@ -186,16 +186,13 @@ functionExists(name: FunctionIdentifier): Boolean
 
 `functionExists`...FIXME
 
-[NOTE]
-====
 `functionExists` is used in:
 
-* spark-sql-Analyzer-LookupFunctions.md[LookupFunctions] logical rule (to make sure that spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
+* [LookupFunctions](logical-analysis-rules/LookupFunctions.md) logical rule (to make sure that spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
 
 * `CatalogImpl` to spark-sql-CatalogImpl.md#functionExists[check if a function exists in a database]
 
 * ...
-====
 
 === [[listFunctions]] `listFunctions` Method
 
@@ -312,14 +309,11 @@ If the `name` function has the database defined or does not exist in `FunctionRe
 
 For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and spark-sql-FunctionRegistry.md#lookupFunction[looks up the function] again.
 
-[NOTE]
-====
 `lookupFunction` is used when:
 
-* `ResolveFunctions` logical resolution rule is <<spark-sql-Analyzer-ResolveFunctions.md#apply, executed>> (and resolves <<spark-sql-Expression-UnresolvedGenerator.md#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.md#, UnresolvedFunction>> expressions)
+* [ResolveFunctions](logical-analysis-rules/ResolveFunctions.md) logical resolution rule executed (and resolves <<spark-sql-Expression-UnresolvedGenerator.md#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.md#, UnresolvedFunction>> expressions)
 
 * `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
-====
 
 === [[lookupRelation]] Finding Relation (Table or View) in Catalogs -- `lookupRelation` Method
 
@@ -409,14 +403,11 @@ a. Gives `SubqueryAlias` with the logical plan per the table as registered in th
 
 NOTE: `lookupRelation` considers *default* to be the name of the database if the `name` table does not specify the database explicitly.
 
-[NOTE]
-====
 `lookupRelation` is used when:
 
 * `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>>
 
-* `ResolveRelations` logical evaluation rule is requested to <<spark-sql-Analyzer-ResolveRelations.md#lookupTableFromCatalog, lookupTableFromCatalog>>
-====
+* `ResolveRelations` logical evaluation rule is requested to [lookupTableFromCatalog](logical-analysis-rules/ResolveRelations.md#lookupTableFromCatalog)
 
 === [[getTableMetadata]] Retrieving Table Metadata from External Catalog (Metastore) -- `getTableMetadata` Method
 

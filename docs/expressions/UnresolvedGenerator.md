@@ -50,7 +50,7 @@ Cannot evaluate expression: [this]
 [[analysis-phase]]
 [NOTE]
 ====
-`UnresolvedGenerator` is resolved to a concrete spark-sql-Expression-Generator.md[Generator] expression when spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions] logical resolution rule is executed.
+`UnresolvedGenerator` is resolved to a concrete spark-sql-Expression-Generator.md[Generator] expression when [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical resolution rule is executed.
 ====
 
 NOTE: `UnresolvedGenerator` is similar to spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] and differs mostly by the type (to make Spark development with Scala easier?)

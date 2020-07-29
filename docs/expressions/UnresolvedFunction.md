@@ -15,7 +15,7 @@ title: UnresolvedFunction
 [[resolved]]
 `UnresolvedFunction` can never be expressions/Expression.md#resolved[resolved] (and is replaced at analysis phase).
 
-NOTE: `UnresolvedFunction` is first looked up in spark-sql-Analyzer-LookupFunctions.md[LookupFunctions] logical rule and then resolved in spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions] logical resolution rule.
+NOTE: `UnresolvedFunction` is first looked up in [LookupFunctions](../logical-analysis-rules/LookupFunctions.md) logical rule and then resolved in [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical resolution rule.
 
 [[Unevaluable]][[eval]][[doGenCode]]
 Given `UnresolvedFunction` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedFunction` simply reports a `UnsupportedOperationException`.

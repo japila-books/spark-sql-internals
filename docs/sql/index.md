@@ -55,7 +55,7 @@ notMatchedAction
 
 `AstBuilder` [translates a `MERGE INTO` SQL query into a MergeIntoTable logical command](AstBuilder.md#visitMergeIntoTable).
 
-[ResolveReferences](../spark-sql-Analyzer-ResolveReferences.md) logical resolution rule is used to resolve references of `MergeIntoTables` (for a merge condition and matched and not-matched actions).
+[ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical resolution rule is used to resolve references of `MergeIntoTables` (for a merge condition and matched and not-matched actions).
 
 In the end, [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException`:
 

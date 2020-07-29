@@ -40,19 +40,18 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 * spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics] (for `Cube`, `Rollup`, spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] logical operators)
 
-* <<spark-sql-Analyzer-TimeWindowing.md#, TimeWindowing>> (for spark-sql-Expression-TimeWindow.md[TimeWindow] logical operator)
+* [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) (for spark-sql-Expression-TimeWindow.md[TimeWindow] logical operator)
 
 NOTE: Aggregate -> (Cube|Rollup|GroupingSets) -> constructAggregate -> constructExpand
 
-[source, scala]
-----
+```text
 val spark: SparkSession = ...
 // using q from the example above
 val plan = q.queryExecution.logical
 
 scala> println(plan.numberedTreeString)
 ...FIXME
-----
+```
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 

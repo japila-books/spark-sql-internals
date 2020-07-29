@@ -49,7 +49,7 @@ NOTE: Data source is also called a *table provider*.
 
 * xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand], xref:spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand], xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand], xref:spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] commands are executed
 
-* xref:spark-sql-Analyzer-FindDataSourceTable.md[FindDataSourceTable] and xref:spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] logical evaluation rules are executed
+* [FindDataSourceTable](logical-analysis-rules/FindDataSourceTable.md) and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rules are executed
 
 * For Spark Structured Streaming's `FileStreamSource`, `DataStreamReader` and `DataStreamWriter`
 
@@ -57,7 +57,7 @@ NOTE: Data source is also called a *table provider*.
 
 * The <<spark-sql-CatalogTable.md#location, location URI>> of a hive/HiveTableRelation.md[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation])
 
-* The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> (when <<spark-sql-Analyzer-ResolveSQLOnFile.md#, ResolveSQLOnFile>> logical evaluation rule is executed)
+* The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> (when [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed)
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
 
@@ -159,7 +159,7 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
 * `DataSource` is requested (_lazily_) for the <<providingClass, providingClass>> internal registry
 
-* xref:spark-sql-Analyzer-PreprocessTableCreation.md[PreprocessTableCreation] posthoc logical resolution rule is executed
+* [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) posthoc logical resolution rule is executed
 
 === [[createSource]] `createSource` Method
 
@@ -287,7 +287,7 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 
 * `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
 
-* `FindDataSourceTable` is requested to spark-sql-Analyzer-FindDataSourceTable.md#readDataSourceTable[readDataSourceTable]
+* `FindDataSourceTable` is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable)
 
 * `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a spark-sql-FileFormat.md[FileFormat])
 
@@ -439,7 +439,7 @@ Used when:
 
 * `DataSource` is requested to <<sourceSchema, sourceSchema>>, <<createSource, createSource>>, <<createSink, createSink>>, <<resolveRelation, resolveRelation>>, <<writeAndRead, writeAndRead>>, and <<planForWriting, planForWriting>>
 
-* xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and xref:spark-sql-Analyzer-ResolveSQLOnFile.md[ResolveSQLOnFile] logical evaluation rule are executed (to ensure that only xref:spark-sql-FileFormat.md[FileFormat]-based data sources are used)
+* xref:spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule are executed (to ensure that only xref:spark-sql-FileFormat.md[FileFormat]-based data sources are used)
 
 | sourceInfo
 | [[sourceInfo]] `SourceInfo`

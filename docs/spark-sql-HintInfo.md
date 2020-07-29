@@ -5,15 +5,15 @@
 
 `HintInfo` is <<creating-instance, created>> when:
 
-. spark-sql-functions.md#broadcast[Dataset.broadcast] function is used
+* [Dataset.broadcast](spark-sql-functions.md#broadcast) function is used
 
-. `ResolveBroadcastHints` logical resolution rule is spark-sql-Analyzer-ResolveBroadcastHints.md#apply[executed] (and resolves spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operators)
+* [ResolveBroadcastHints](logical-analysis-rules/ResolveBroadcastHints.md) logical resolution rule is executed (and resolves spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operators)
 
-. spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and spark-sql-Statistics.md#creating-instance[Statistics] are created
+* spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and spark-sql-Statistics.md#creating-instance[Statistics] are created
 
-. `InMemoryRelation` is requested for spark-sql-LogicalPlan-InMemoryRelation.md#computeStats[computeStats] (when spark-sql-LogicalPlan-InMemoryRelation.md#sizeInBytesStats[sizeInBytesStats] is `0`)
+* `InMemoryRelation` is requested for spark-sql-LogicalPlan-InMemoryRelation.md#computeStats[computeStats] (when spark-sql-LogicalPlan-InMemoryRelation.md#sizeInBytesStats[sizeInBytesStats] is `0`)
 
-. `HintInfo` is requested to <<resetForJoin, resetForJoin>>
+* `HintInfo` is requested to <<resetForJoin, resetForJoin>>
 
 [[broadcast]]
 `broadcast` is used to...FIXME

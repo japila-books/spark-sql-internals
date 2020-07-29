@@ -30,13 +30,11 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * For all other <<expressions/Expression.md#, expressions>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.md#apply, Literal>> expression (with the value as `col[index]`) and the `Expression` itself
 
-[NOTE]
-====
 `apply` is used when:
 
-* `ResolveReferences` logical resolution rule is requested to <<spark-sql-Analyzer-ResolveReferences.md#expandStarExpression, expandStarExpression>>
+* `ResolveReferences` logical resolution rule is requested to [expandStarExpression](logical-analysis-rules/ResolveReferences.md#expandStarExpression)
 
-* `InConversion` type coercion rule is requested to <<spark-sql-Analyzer-TypeCoercionRule-InConversion.md#coerceTypes, coerceTypes>>
+* `InConversion` type coercion rule is requested to [coerceTypes](logical-analysis-rules/InConversion.md#coerceTypes)
 
 * `ExpressionEncoder` is requested to <<spark-sql-ExpressionEncoder.md#tuple, create an ExpressionEncoder for a tuple>>
 
@@ -53,4 +51,3 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 * <<spark-sql-functions.md#struct, struct>> standard function is used
 
 * `SimpleTypedAggregateExpression` expression is requested for the <<spark-sql-Expression-SimpleTypedAggregateExpression.md#evaluateExpression, evaluateExpression>> and <<spark-sql-Expression-SimpleTypedAggregateExpression.md#resultObjToRow, resultObjToRow>>
-====

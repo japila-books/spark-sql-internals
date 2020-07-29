@@ -6,7 +6,7 @@ title: CreateDataSourceTableAsSelectCommand
 
 NOTE: A DataSource table is a Spark SQL native table that uses any data source but Hive (per `USING` clause).
 
-`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when xref:spark-sql-Analyzer-DataSourceAnalysis.md[DataSourceAnalysis] post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
+`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
 
 NOTE: xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
 
