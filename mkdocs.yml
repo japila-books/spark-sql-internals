@@ -98,6 +98,8 @@ nav:
       - RunnableCommand: logical-operators/RunnableCommand.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
       - ParsedStatement: logical-operators/ParsedStatement.md
+      - SupportsSubquery: logical-operators/SupportsSubquery.md
+      - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
       - Concrete Operators:
         - logical-operators/Aggregate.md
         - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md

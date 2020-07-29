@@ -1,4 +1,4 @@
-# SparkPlan &mdash; Physical Operators in Physical Query Plan of Structured Query
+# SparkPlan &mdash; Physical Operators of Structured Query
 
 `SparkPlan` is an [abstraction](#contract) of [physical operators](#implementations) that can be [executed](#doExecute) (and generate `RDD[InternalRow]` that Spark can execute).
 
