@@ -116,6 +116,7 @@ nav:
         - logical-operators/CreateTable.md
         - logical-operators/CreateTableCommand.md
         - logical-operators/CreateTempViewUsing.md
+        - CreateV2Table: logical-operators/CreateV2Table.md
         - logical-operators/CreateViewCommand.md
         - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
         - DeleteFromTable: logical-operators/DeleteFromTable.md

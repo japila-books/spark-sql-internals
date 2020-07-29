@@ -40,6 +40,6 @@ Used when...FIXME
 ## Implementations
 
 * CreateTableAsSelect
-* CreateV2Table
+* [CreateV2Table](CreateV2Table.md)
 * ReplaceTable
 * ReplaceTableAsSelect
