@@ -1636,131 +1636,131 @@
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-AliasViewChild/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/AliasViewChild/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-CleanupAliases/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/CleanupAliases/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-DataSourceAnalysis/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/DataSourceAnalysis/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ExtractWindowExpressions/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ExtractWindowExpressions/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-FindDataSourceTable/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/FindDataSourceTable/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-HandleNullInputsForUDF/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/HandleNullInputsForUDF/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-TypeCoercionRule-InConversion/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/InConversion/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-LookupFunctions/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/LookupFunctions/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-PreprocessTableCreation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/PreprocessTableCreation/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-PreWriteCheck/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/PreWriteCheck/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveAliases/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveAliases/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveBroadcastHints/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveBroadcastHints/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveCoalesceHints/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveCoalesceHints/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveCreateNamedStruct/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveCreateNamedStruct/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveFunctions/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveFunctions/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveInlineTables/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveInlineTables/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveMissingReferences/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveMissingReferences/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveOrdinalInOrderByAndGroupBy/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveOutputRelation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveOutputRelation/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveReferences/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveReferences/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveRelations/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveRelations/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ResolveSessionCatalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveSessionCatalog/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveSQLOnFile/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveSQLOnFile/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveSubquery/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveSubquery/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ResolveTimeZone/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveTimeZone/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveWindowFrame/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveWindowFrame/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-ResolveWindowOrder/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveWindowOrder/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-TimeWindowing/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/TimeWindowing/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-UpdateOuterReferences/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/UpdateOuterReferences/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-TypeCoercionRule-WindowFrameCoercion/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/WindowFrameCoercion/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-TypeCoercionRule-WidenSetOperationTypes/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/WidenSetOperationTypes/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-WindowsSubstitution/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/WindowsSubstitution/</loc>
      <lastmod>2020-07-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
