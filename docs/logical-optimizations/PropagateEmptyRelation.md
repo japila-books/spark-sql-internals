@@ -1,8 +1,8 @@
 # PropagateEmptyRelation Logical Optimization
 
-`PropagateEmptyRelation` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, collapses plans with empty LocalRelation logical operators>>, e.g. <<explode, explode>> or <<join, join>>.
+`PropagateEmptyRelation` is a [base logical optimization](../Optimizer.md#batches) that <<apply, collapses plans with empty LocalRelation logical operators>>, e.g. <<explode, explode>> or <<join, join>>.
 
-`PropagateEmptyRelation` is part of the <<spark-sql-Optimizer.adoc#LocalRelation, LocalRelation>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`PropagateEmptyRelation` is part of the [LocalRelation](../Optimizer.md#LocalRelation) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `PropagateEmptyRelation` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

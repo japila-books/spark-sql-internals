@@ -1,13 +1,13 @@
 # RewriteExceptAll Logical Optimization Rule -- Rewriting Except (ALL) Operators
 
-`RewriteExceptAll` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`RewriteExceptAll` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:catalyst/Rule.md#apply[executed], `RewriteExceptAll` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (ALL)] logical operator to...FIXME
+When catalyst/Rule.md#apply[executed], `RewriteExceptAll` transforms an spark-sql-LogicalPlan-Except.md[Except (ALL)] logical operator to...FIXME
 
 `RewriteExceptAll` requires that the number of columns of the left- and right-side of the `Except` operator are the same or throws an `AssertionError`.
 
-`RewriteExceptAll` is a part of the link:spark-sql-Optimizer.adoc#Replace-Operators[Replace Operators] fixed-point rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`RewriteExceptAll` is a part of the [Replace Operators](../Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../Optimizer.md).
 
 [[demo]]
 .Demo: RewriteExceptAll

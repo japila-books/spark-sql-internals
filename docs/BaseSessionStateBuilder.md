@@ -114,7 +114,7 @@ v2SessionCatalog: V2SessionCatalog
 customOperatorOptimizationRules: Seq[Rule[LogicalPlan]]
 ```
 
-Custom operator optimization rules to add to the [base Operator Optimization batch](spark-sql-Optimizer.md#extendedOperatorOptimizationRules).
+Custom operator optimization rules to add to the [base Operator Optimization batch](Optimizer.md#extendedOperatorOptimizationRules).
 
 When requested for the custom rules, `customOperatorOptimizationRules` simply requests the [SparkSessionExtensions](#extensions) to [buildOptimizerRules](SparkSessionExtensions.md#buildOptimizerRules).
 

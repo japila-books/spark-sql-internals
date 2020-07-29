@@ -2,31 +2,31 @@ title: UnresolvedFunction
 
 # UnresolvedFunction Unevaluable Expression -- Logical Representation of Functions in Queries
 
-`UnresolvedFunction` is an link:expressions/Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
+`UnresolvedFunction` is an expressions/Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
-* link:spark-sql-functions.adoc#callUDF[callUDF] standard function
+* spark-sql-functions.md#callUDF[callUDF] standard function
 
-* link:spark-sql-RelationalGroupedDataset.adoc#agg[RelationalGroupedDataset.agg] operator with aggregation functions specified by name (that link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
+* spark-sql-RelationalGroupedDataset.md#agg[RelationalGroupedDataset.agg] operator with aggregation functions specified by name (that spark-sql-RelationalGroupedDataset.md#strToExpr[converts function names to UnresolvedFunction expressions])
 
-* `AstBuilder` is requested to link:spark-sql-AstBuilder.adoc#visitFunctionCall[visitFunctionCall] (in SQL queries)
+* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
 [[resolved]]
-`UnresolvedFunction` can never be link:expressions/Expression.md#resolved[resolved] (and is replaced at analysis phase).
+`UnresolvedFunction` can never be expressions/Expression.md#resolved[resolved] (and is replaced at analysis phase).
 
-NOTE: `UnresolvedFunction` is first looked up in link:spark-sql-Analyzer-LookupFunctions.adoc[LookupFunctions] logical rule and then resolved in link:spark-sql-Analyzer-ResolveFunctions.adoc[ResolveFunctions] logical resolution rule.
+NOTE: `UnresolvedFunction` is first looked up in spark-sql-Analyzer-LookupFunctions.md[LookupFunctions] logical rule and then resolved in spark-sql-Analyzer-ResolveFunctions.md[ResolveFunctions] logical resolution rule.
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedFunction` can never be resolved it should not come as a surprise that it link:expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedFunction` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedFunction` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedFunction` simply reports a `UnsupportedOperationException`.
 
 ```
 Cannot evaluate expression: [this]
 ```
 
-NOTE: link:expressions/Expression.md#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] (or they fail analysis).
+NOTE: expressions/Expression.md#Unevaluable[Unevaluable expressions] are expressions that have to be replaced by some other expressions during spark-sql-Analyzer.md[analysis] or [optimization](../Optimizer.md) (or they fail analysis).
 
-TIP: Use Catalyst DSL's link:spark-sql-catalyst-dsl.adoc#function[function] or link:spark-sql-catalyst-dsl.adoc#distinctFunction[distinctFunction] to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
+TIP: Use Catalyst DSL's spark-sql-catalyst-dsl.md#function[function] or spark-sql-catalyst-dsl.md#distinctFunction[distinctFunction] to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
 
 [source, scala]
 ----
@@ -59,9 +59,9 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 ====
 `apply` is used when:
 
-* link:spark-sql-functions.adoc#callUDF[callUDF] standard function is used
+* spark-sql-functions.md#callUDF[callUDF] standard function is used
 
-* `RelationalGroupedDataset` is requested to link:spark-sql-RelationalGroupedDataset.adoc#agg[agg] with aggregation functions specified by name (and link:spark-sql-RelationalGroupedDataset.adoc#strToExpr[converts function names to UnresolvedFunction expressions])
+* `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#agg[agg] with aggregation functions specified by name (and spark-sql-RelationalGroupedDataset.md#strToExpr[converts function names to UnresolvedFunction expressions])
 ====
 
 === [[creating-instance]] Creating UnresolvedFunction Instance
@@ -69,5 +69,5 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 `UnresolvedFunction` takes the following when created:
 
 * [[name]] `FunctionIdentifier`
-* [[children]] Child link:expressions/Expression.md[expressions]
+* [[children]] Child expressions/Expression.md[expressions]
 * [[isDistinct]] `isDistinct` flag

@@ -8,13 +8,13 @@
 
 SessionCatalog takes the following to be created:
 
-* <span id="externalCatalogBuilder" /> Function to create an [ExternalCatalog](spark-sql-ExternalCatalog.md)
-* <span id="globalTempViewManagerBuilder" /> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
-* <span id="functionRegistry" /> [FunctionRegistry](spark-sql-FunctionRegistry.md)
-* <span id="conf" /> [SQLConf](SQLConf.md)
-* <span id="hadoopConf" /> Hadoop Configuration
-* <span id="parser" /> [ParserInterface](sql/ParserInterface.md)
-* <span id="functionResourceLoader" /> `FunctionResourceLoader`
+* <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](spark-sql-ExternalCatalog.md)
+* <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
+* <span id="functionRegistry"> [FunctionRegistry](spark-sql-FunctionRegistry.md)
+* <span id="conf"> [SQLConf](SQLConf.md)
+* <span id="hadoopConf"> Hadoop Configuration
+* <span id="parser"> [ParserInterface](sql/ParserInterface.md)
+* <span id="functionResourceLoader"> `FunctionResourceLoader`
 
 ![SessionCatalog and Spark SQL Services](images/spark-sql-SessionCatalog.png)
 

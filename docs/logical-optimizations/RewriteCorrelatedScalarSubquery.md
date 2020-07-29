@@ -1,10 +1,10 @@
 # RewriteCorrelatedScalarSubquery Logical Optimization
 
-`RewriteCorrelatedScalarSubquery` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans>> with the following operators:
+`RewriteCorrelatedScalarSubquery` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms logical plans>> with the following operators:
 
 . FIXME
 
-`RewriteCorrelatedScalarSubquery` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`RewriteCorrelatedScalarSubquery` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `RewriteCorrelatedScalarSubquery` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

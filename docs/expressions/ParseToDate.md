@@ -4,23 +4,21 @@ title: ParseToDate
 
 `ParseToDate` is a link:spark-sql-Expression-RuntimeReplaceable.adoc[RuntimeReplaceable] expression that <<creating-instance, represents>> the link:spark-sql-functions-datetime.adoc#to_date[to_date] function (in logical query plans).
 
-[source, scala]
-----
+```scala
 // DEMO to_date(e: Column): Column
 // DEMO to_date(e: Column, fmt: String): Column
-----
+```
 
-As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with the <<child, child>> expression:
+As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by [Logical Query Optimizer](../Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
 
 * `Cast(left, DateType)` for `to_date(e: Column): Column` function
 
 * `Cast(Cast(UnixTimestamp(left, format), TimestampType), DateType)` for `to_date(e: Column, fmt: String): Column` function
 
-[source, scala]
-----
+```scala
 // FIXME DEMO Conversion to `Cast(left, DateType)`
 // FIXME DEMO Conversion to `Cast(Cast(UnixTimestamp(left, format), TimestampType), DateType)`
-----
+```
 
 === [[creating-instance]] Creating ParseToDate Instance
 

@@ -1,11 +1,11 @@
 # SimplifyCasts Logical Optimization
 
-`SimplifyCasts` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, eliminates redundant casts>> in the following cases:
+`SimplifyCasts` is a [base logical optimization](../Optimizer.md#batches) that <<apply, eliminates redundant casts>> in the following cases:
 
 . The input is already the type to cast to.
 . The input is of `ArrayType` or `MapType` type and contains no `null` elements.
 
-`SimplifyCasts` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`SimplifyCasts` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `SimplifyCasts` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

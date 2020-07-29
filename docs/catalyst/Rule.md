@@ -38,6 +38,6 @@ The other notable use cases of `Rule` are as follows:
 
 * When `Analyzer` is requested for <<spark-sql-Analyzer.adoc#extendedResolutionRules, extendedResolutionRules>> and <<spark-sql-Analyzer.adoc#postHocResolutionRules, postHocResolutionRules>> (see <<BaseSessionStateBuilder.md#analyzer, BaseSessionStateBuilder>> and link:hive/HiveSessionStateBuilder.adoc#analyzer[HiveSessionStateBuilder])
 
-* When `Optimizer` is requested for <<spark-sql-Optimizer.adoc#extendedOperatorOptimizationRules, extendedOperatorOptimizationRules>>
+* When `Optimizer` is requested for [extendedOperatorOptimizationRules](Optimizer.md#extendedOperatorOptimizationRules)
 
 * When `QueryExecution` is requested for <<spark-sql-QueryExecution.adoc#preparations, preparations>>

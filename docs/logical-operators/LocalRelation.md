@@ -8,7 +8,7 @@ title: LocalRelation
 
 * <<spark-sql-Analyzer-ResolveInlineTables.adoc#, ResolveInlineTables>> logical resolution rule is <<spark-sql-Analyzer-ResolveInlineTables.adoc#apply, executed>> (and <<spark-sql-Analyzer-ResolveInlineTables.adoc#convert, converts an UnresolvedInlineTable>>)
 
-* <<spark-sql-Optimizer.adoc#PruneFilters, PruneFilters>>, <<spark-sql-Optimizer.adoc#ConvertToLocalRelation, ConvertToLocalRelation>>, and <<spark-sql-Optimizer.adoc#PropagateEmptyRelation, PropagateEmptyRelation>>, <<spark-sql-Optimizer.adoc#OptimizeMetadataOnlyQuery, OptimizeMetadataOnlyQuery>> logical optimization rules are executed (applied to an analyzed logical plan)
+* [PruneFilters](../Optimizer.md#PruneFilters), [ConvertToLocalRelation](../Optimizer.md#ConvertToLocalRelation), and [PropagateEmptyRelation](../Optimizer.md#PropagateEmptyRelation), [OptimizeMetadataOnlyQuery](../Optimizer.md#OptimizeMetadataOnlyQuery) logical optimization rules are executed (applied to an analyzed logical plan)
 
 * <<SparkSession.md#createDataset, SparkSession.createDataset>>, <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>>, <<SparkSession.md#createDataFrame, SparkSession.createDataFrame>> operators are used
 

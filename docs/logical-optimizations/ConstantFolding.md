@@ -1,8 +1,8 @@
 # ConstantFolding Logical Optimization
 
-`ConstantFolding` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, replaces expressions that can be statically evaluated with their equivalent literal values>>.
+`ConstantFolding` is a [base logical optimization](../Optimizer.md#batches) that <<apply, replaces expressions that can be statically evaluated with their equivalent literal values>>.
 
-`ConstantFolding` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`ConstantFolding` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `ConstantFolding` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

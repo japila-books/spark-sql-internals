@@ -32,7 +32,7 @@ Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<cata
 |===
 
 [[TreeType]]
-NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.adoc#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
+NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.md#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
 
 [[extensions]]
 .RuleExecutors (Direct Implementations)
@@ -41,13 +41,13 @@ NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) impl
 | RuleExecutor
 | Description
 
-| <<spark-sql-Analyzer.adoc#, Analyzer>>
+| [Analyzer](spark-sql-Analyzer.md)
 | [[Analyzer]] Logical query plan analyzer
 
 | `ExpressionCanonicalizer`
 | [[ExpressionCanonicalizer]]
 
-| <<spark-sql-Optimizer.adoc#, Optimizer>>
+| [Optimizer](Optimizer.md)
 | [[Optimizer]] Generic logical query plan optimizer
 |===
 

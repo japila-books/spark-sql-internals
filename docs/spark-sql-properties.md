@@ -820,7 +820,7 @@ Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access t
 
 | [[spark.sql.columnVector.offheap.enabled]] *spark.sql.columnVector.offheap.enabled*
 
-*(internal)* Enables link:spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in link:spark-sql-ColumnarBatch.md[ColumnarBatch] (`true`) or not (`false`). When `false`, link:spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
+*(internal)* Enables spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in spark-sql-ColumnarBatch.md[ColumnarBatch] (`true`) or not (`false`). When `false`, spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
 
 Default: `false`
 
@@ -852,17 +852,17 @@ Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access
 
 | [[spark.sql.exchange.reuse]] *spark.sql.exchange.reuse*
 
-*(internal)* When enabled (i.e. `true`), the link:spark-sql-SparkPlanner.md[Spark planner] will find duplicated exchanges and subqueries and re-use them.
+*(internal)* When enabled (i.e. `true`), the spark-sql-SparkPlanner.md[Spark planner] will find duplicated exchanges and subqueries and re-use them.
 
 Default: `true`
 
-NOTE: When disabled (i.e. `false`), link:spark-sql-ReuseSubquery.md[ReuseSubquery] and link:spark-sql-ReuseExchange.md[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
+NOTE: When disabled (i.e. `false`), spark-sql-ReuseSubquery.md[ReuseSubquery] and spark-sql-ReuseExchange.md[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
 
 Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
 
 a| [[spark.sql.execution.useObjectHashAggregateExec]] *spark.sql.execution.useObjectHashAggregateExec*
 
-Enables link:spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
+Enables spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
 Default: `true`
 
@@ -928,7 +928,7 @@ Use [SQLConf.useCompression](SQLConf.md#useCompression) method to access the cur
 
 | [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] *spark.sql.inMemoryColumnarStorage.enableVectorizedReader*
 
-Enables link:spark-sql-vectorized-query-execution.md[vectorized reader] for columnar caching.
+Enables spark-sql-vectorized-query-execution.md[vectorized reader] for columnar caching.
 
 Default: `true`
 
@@ -978,7 +978,7 @@ Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access
 
 | [[spark.sql.optimizer.excludedRules]] *spark.sql.optimizer.excludedRules*
 
-Comma-separated list of optimization rule names that should be disabled (excluded) in the <<spark-sql-Optimizer.md#spark.sql.optimizer.excludedRules, optimizer>>. The optimizer will log the rules that have indeed been excluded.
+Comma-separated list of optimization rule names that should be disabled (excluded) in the [logical query optimizer](Optimizer.md#spark.sql.optimizer.excludedRules). The optimizer will log the rules that have indeed been excluded.
 
 Default: `(empty)`
 
@@ -996,7 +996,7 @@ Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConvers
 
 | [[spark.sql.optimizer.maxIterations]] *spark.sql.optimizer.maxIterations*
 
-Maximum number of iterations for link:spark-sql-Analyzer.md#fixedPoint[Analyzer] and  link:spark-sql-Optimizer.md#fixedPoint[Optimizer].
+Maximum number of iterations for [Analyzer](spark-sql-Analyzer.md#fixedPoint) and  [Logical Optimizer](Optimizer.md#fixedPoint).
 
 Default: `100`
 
@@ -1045,7 +1045,7 @@ Use [SQLConf.isParquetINT96AsTimestamp](SQLConf.md#isParquetINT96AsTimestamp) me
 
 | [[spark.sql.parquet.enableVectorizedReader]] *spark.sql.parquet.enableVectorizedReader*
 
-Enables link:spark-sql-vectorized-parquet-reader.md[vectorized parquet decoding].
+Enables [vectorized parquet decoding](spark-sql-vectorized-parquet-reader.md).
 
 Default: `true`
 
@@ -1053,7 +1053,7 @@ Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderE
 
 | [[spark.sql.parquet.filterPushdown]] *spark.sql.parquet.filterPushdown*
 
-Controls the link:spark-sql-Optimizer-PushDownPredicate.md[filter predicate push-down optimization] for data sources using link:spark-sql-ParquetFileFormat.md[parquet] file format
+Controls the spark-sql-Optimizer-PushDownPredicate.md[filter predicate push-down optimization] for data sources using spark-sql-ParquetFileFormat.md[parquet] file format
 
 Default: `true`
 
@@ -1131,7 +1131,7 @@ Use [SQLConf.partitionOverwriteMode](SQLConf.md#partitionOverwriteMode) method t
 
 | [[spark.sql.pivotMaxValues]] *spark.sql.pivotMaxValues*
 
-Maximum number of (distinct) values that will be collected without error (when doing a link:spark-sql-RelationalGroupedDataset.md#pivot[pivot] without specifying the values for the pivot column)
+Maximum number of (distinct) values that will be collected without error (when doing a spark-sql-RelationalGroupedDataset.md#pivot[pivot] without specifying the values for the pivot column)
 
 Default: `10000`
 
@@ -1163,7 +1163,7 @@ Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method t
 
 | [[spark.sql.retainGroupColumns]] *spark.sql.retainGroupColumns*
 
-Controls whether to retain columns used for aggregation or not (in link:spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] operators).
+Controls whether to retain columns used for aggregation or not (in spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] operators).
 
 Default: `true`
 
@@ -1179,7 +1179,7 @@ Use [SQLConf.runSQLonFile](SQLConf.md#runSQLonFile) method to access the current
 
 | [[spark.sql.selfJoinAutoResolveAmbiguity]] *spark.sql.selfJoinAutoResolveAmbiguity*
 
-Controls whether to resolve ambiguity in join conditions for link:spark-sql-joins.md#join[self-joins] automatically (`true`) or not (`false`)
+Controls whether to resolve ambiguity in join conditions for spark-sql-joins.md#join[self-joins] automatically (`true`) or not (`false`)
 
 Default: `true`
 
@@ -1203,7 +1203,7 @@ Use [SQLConf.numShufflePartitions](SQLConf.md#numShufflePartitions) method to ac
 
 | [[spark.sql.sources.bucketing.enabled]] *spark.sql.sources.bucketing.enabled*
 
-Enables link:spark-sql-bucketing.md[bucketing] support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
+Enables spark-sql-bucketing.md[bucketing] support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
 
 Default: `true`
 
@@ -1217,9 +1217,9 @@ Default: `parquet`
 
 Used when:
 
-* Reading (link:spark-sql-DataFrameWriter.md[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
+* Reading (spark-sql-DataFrameWriter.md[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
 
-* link:spark-sql-Catalog.md#createExternalTable[Creating external table from a path] (in `Catalog.createExternalTable`)
+* spark-sql-Catalog.md#createExternalTable[Creating external table from a path] (in `Catalog.createExternalTable`)
 
 * Reading (`DataStreamReader`) or writing (`DataStreamWriter`) in Structured Streaming
 
@@ -1235,7 +1235,7 @@ Use [SQLConf.fallBackToHdfsForStatsEnabled](SQLConf.md#fallBackToHdfsForStatsEna
 
 | [[spark.sql.statistics.histogram.enabled]] *spark.sql.statistics.histogram.enabled*
 
-Enables generating histograms when link:spark-sql-LogicalPlan-AnalyzeColumnCommand.md#computeColumnStats[computing column statistics]
+Enables generating histograms when spark-sql-LogicalPlan-AnalyzeColumnCommand.md#computeColumnStats[computing column statistics]
 
 Default: `false`
 
@@ -1285,7 +1285,7 @@ Use [SQLConf.autoSizeUpdateEnabled](SQLConf.md#autoSizeUpdateEnabled) method to 
 
 | [[spark.sql.subexpressionElimination.enabled]] *spark.sql.subexpressionElimination.enabled*
 
-*(internal)* Enables link:spark-sql-subexpression-elimination.md[subexpression elimination]
+*(internal)* Enables spark-sql-subexpression-elimination.md[subexpression elimination]
 
 Default: `true`
 
@@ -1301,7 +1301,7 @@ Use [SQLConf.truncateTableIgnorePermissionAcl](SQLConf.md#truncateTableIgnorePer
 
 | [[spark.sql.ui.retainedExecutions]] *spark.sql.ui.retainedExecutions*
 
-The number of link:spark-sql-SQLListener.md#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
+The number of spark-sql-SQLListener.md#SQLExecutionUIData[SQLExecutionUIData] entries to keep in `failedExecutions` and `completedExecutions` internal registries.
 
 Default: `1000`
 

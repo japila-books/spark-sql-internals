@@ -340,7 +340,7 @@ nav:
         - spark-sql-Analyzer-CheckAnalysis.md
       - SparkOptimizer:
         - SparkOptimizer: SparkOptimizer.md
-        - spark-sql-Optimizer.md
+        - Optimizer: Optimizer.md
       - SparkPlanner:
         - spark-sql-SparkPlanner.md
         - spark-sql-SparkStrategy.md

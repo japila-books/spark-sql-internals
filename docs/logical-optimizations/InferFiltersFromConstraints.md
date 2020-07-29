@@ -1,11 +1,11 @@
 # InferFiltersFromConstraints Logical Optimization Rule
 
-`InferFiltersFromConstraints` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`InferFiltersFromConstraints` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when link:spark-sql-properties.adoc#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
+When catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when spark-sql-properties.md#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
 
-`InferFiltersFromConstraints` is a part of the link:spark-sql-Optimizer.adoc#Infer-Filters[Infer Filters] once-executed rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`InferFiltersFromConstraints` is a part of the [Infer Filters](../Optimizer.md#Infer-Filters) once-executed rule batch of the base [Logical Optimizer](../Optimizer.md).
 
 === [[inferFilters]] `inferFilters` Internal Method
 
@@ -18,10 +18,10 @@ inferFilters(
 `inferFilters` supports <<inferFilters-Filter, Filter>> and <<inferFilters-Join, Join>> logical operators.
 
 [[inferFilters-Filter]]
-For link:spark-sql-LogicalPlan-Filter.adoc[Filter] logical operators, `inferFilters`...FIXME
+For spark-sql-LogicalPlan-Filter.md[Filter] logical operators, `inferFilters`...FIXME
 
 [[inferFilters-Join]]
-For link:spark-sql-LogicalPlan-Join.adoc[Join] logical operators, `inferFilters` branches off per the join type:
+For spark-sql-LogicalPlan-Join.md[Join] logical operators, `inferFilters` branches off per the join type:
 
 * For InnerLike and LeftSemi...FIXME
 

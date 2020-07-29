@@ -1,13 +1,13 @@
 # ReplaceExceptWithFilter Logical Optimization Rule -- Rewriting Except (DISTINCT) Operators
 
-`ReplaceExceptWithFilter` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`ReplaceExceptWithFilter` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When link:catalyst/Rule.md#apply[executed], `ReplaceExceptWithFilter` transforms an link:spark-sql-LogicalPlan-Except.adoc[Except (distinct)] logical operator to...FIXME
+When catalyst/Rule.md#apply[executed], `ReplaceExceptWithFilter` transforms an spark-sql-LogicalPlan-Except.md[Except (distinct)] logical operator to...FIXME
 
-`ReplaceExceptWithFilter` is a part of the link:spark-sql-Optimizer.adoc#Replace-Operators[Replace Operators] fixed-point rule batch of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`ReplaceExceptWithFilter` is a part of the [Replace Operators](../Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../Optimizer.md).
 
-`ReplaceExceptWithFilter` can be turned off and on based on link:spark-sql-properties.adoc#spark.sql.optimizer.replaceExceptWithFilter[spark.sql.optimizer.replaceExceptWithFilter] configuration property.
+`ReplaceExceptWithFilter` can be turned off and on based on spark-sql-properties.md#spark.sql.optimizer.replaceExceptWithFilter[spark.sql.optimizer.replaceExceptWithFilter] configuration property.
 
 [[demo]]
 .Demo: ReplaceExceptWithFilter
@@ -42,7 +42,7 @@ isEligible(
   right: LogicalPlan): Boolean
 ----
 
-`isEligible` is positive (`true`) when the right logical operator is a link:spark-sql-LogicalPlan-Project.adoc[Project] with a link:spark-sql-LogicalPlan-Filter.adoc[Filter] child operator or simply a link:spark-sql-LogicalPlan-Filter.adoc[Filter] operator itself and <<verifyConditions, verifyConditions>>.
+`isEligible` is positive (`true`) when the right logical operator is a spark-sql-LogicalPlan-Project.md[Project] with a spark-sql-LogicalPlan-Filter.md[Filter] child operator or simply a spark-sql-LogicalPlan-Filter.md[Filter] operator itself and <<verifyConditions, verifyConditions>>.
 
 Otherwise, `isEligible` is negative (`false`).
 

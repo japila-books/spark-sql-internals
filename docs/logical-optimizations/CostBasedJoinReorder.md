@@ -1,8 +1,8 @@
 # CostBasedJoinReorder Logical Optimization -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, reorders joins>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
+`CostBasedJoinReorder` is a [base logical optimization](../Optimizer.md#batches) that <<apply, reorders joins>> in link:spark-sql-cost-based-optimization.adoc[cost-based optimization].
 
-`ReorderJoin` is part of the <<spark-sql-Optimizer.adoc#Join_Reorder, Join Reorder>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`ReorderJoin` is part of the [Join Reorder](../Optimizer.md#Join_Reorder) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `ReorderJoin` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

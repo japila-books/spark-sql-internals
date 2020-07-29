@@ -1,8 +1,8 @@
 # EliminateSerialization Logical Optimization
 
-`EliminateSerialization` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, optimizes>> logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
+`EliminateSerialization` is a [base logical optimization](../Optimizer.md#batches) that <<apply, optimizes>> logical plans with link:spark-sql-LogicalPlan-DeserializeToObject.adoc[DeserializeToObject] (after `SerializeFromObject` or `TypedFilter`), `AppendColumns` (after `SerializeFromObject`), `TypedFilter` (after `SerializeFromObject`) logical operators.
 
-`EliminateSerialization` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`EliminateSerialization` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `EliminateSerialization` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

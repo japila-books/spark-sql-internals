@@ -1,14 +1,14 @@
 # PushPredicateThroughJoin Logical Optimization
 
-`PushPredicateThroughJoin` is a link:catalyst/Rule.md[Catalyst rule] for transforming link:spark-sql-LogicalPlan.adoc[logical plans] (i.e. `Rule[LogicalPlan]`).
+`PushPredicateThroughJoin` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 When <<apply, executed>>, `PushPredicateThroughJoin`...FIXME
 
-`PushPredicateThroughJoin` is a part of the link:spark-sql-Optimizer.adoc#Operator-Optimization-before-Inferring-Filters[Operator Optimization before Inferring Filters] and link:spark-sql-Optimizer.adoc#Operator-Optimization-after-Inferring-Filters[Operator Optimization after Inferring Filters] fixed-point rule batches of the base link:spark-sql-Optimizer.adoc[Catalyst Optimizer].
+`PushPredicateThroughJoin` is a part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator-Optimization-before-Inferring-Filters) and [Operator Optimization after Inferring Filters](../Optimizer.md#Operator-Optimization-after-Inferring-Filters) fixed-point rule batches of the base [Logical Optimizer](../Optimizer.md).
 
 [[demo]]
 .Demo: PushPredicateThroughJoin
-```
+```text
 import org.apache.spark.sql.catalyst.dsl.expressions._
 import org.apache.spark.sql.catalyst.dsl.plans._
 
@@ -50,11 +50,11 @@ split(
   right: LogicalPlan): (Seq[Expression], Seq[Expression], Seq[Expression])
 ----
 
-`split` splits (_partitions_) the given condition expressions into link:expressions/Expression.md#deterministic[deterministic] or not.
+`split` splits (_partitions_) the given condition expressions into expressions/Expression.md#deterministic[deterministic] or not.
 
-`split` further splits (_partitions_) the deterministic expressions (_pushDownCandidates_) into expressions that reference the link:catalyst/QueryPlan.md#outputSet[output expressions] of the left logical operator (_leftEvaluateCondition_) or not (_rest_).
+`split` further splits (_partitions_) the deterministic expressions (_pushDownCandidates_) into expressions that reference the catalyst/QueryPlan.md#outputSet[output expressions] of the left logical operator (_leftEvaluateCondition_) or not (_rest_).
 
-`split` further splits (_partitions_) the expressions that do not reference left output expressions into expressions that reference the link:catalyst/QueryPlan.md#outputSet[output expressions] of the right logical operator (_rightEvaluateCondition_) or not (_commonCondition_).
+`split` further splits (_partitions_) the expressions that do not reference left output expressions into expressions that reference the catalyst/QueryPlan.md#outputSet[output expressions] of the right logical operator (_rightEvaluateCondition_) or not (_commonCondition_).
 
 In the end, `split` returns the _leftEvaluateCondition_, _rightEvaluateCondition_, and _commonCondition_ with the non-deterministic condition expressions.
 

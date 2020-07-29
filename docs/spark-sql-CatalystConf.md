@@ -20,11 +20,11 @@ NOTE: The default `CatalystConf` is [SQLConf](SQLConf.md).
 |
 | Enables cost-based optimizations (CBO) for estimation of plan statistics when enabled.
 
-Used in link:spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization and `Project`, `Filter`, `Join` and `Aggregate` logical operators.
+Used in spark-sql-Optimizer-CostBasedJoinReorder.adoc[CostBasedJoinReorder] logical plan optimization and `Project`, `Filter`, `Join` and `Aggregate` logical operators.
 
 | [[optimizerMaxIterations]] `optimizerMaxIterations`
-| link:spark-sql-properties.adoc#spark.sql.optimizer.maxIterations[spark.sql.optimizer.maxIterations]
-| Maximum number of iterations for link:spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and link:spark-sql-Optimizer.adoc#fixedPoint[Optimizer].
+| spark-sql-properties.adoc#spark.sql.optimizer.maxIterations[spark.sql.optimizer.maxIterations]
+| Maximum number of iterations for spark-sql-Analyzer.adoc#fixedPoint[Analyzer] and [Optimizer](Optimizer.md#fixedPoint).
 
 | [[sessionLocalTimeZone]] `sessionLocalTimeZone`
 |

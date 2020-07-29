@@ -3,19 +3,19 @@ title: Project
 # Project Unary Logical Operator
 
 [[creating-instance]]
-`Project` is a <<spark-sql-LogicalPlan.adoc#UnaryNode, unary logical operator>> that takes the following when created:
+`Project` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that takes the following when created:
 
-* [[projectList]] Project <<spark-sql-Expression-NamedExpression.adoc#, named expressions>>
-* [[child]] Child <<spark-sql-LogicalPlan.adoc#, logical operator>>
+* [[projectList]] Project <<spark-sql-Expression-NamedExpression.md#, named expressions>>
+* [[child]] Child <<spark-sql-LogicalPlan.md#, logical operator>>
 
 `Project` is <<creating-instance, created>> to represent the following:
 
-* Dataset operators, i.e. link:spark-sql-joins.adoc#joinWith[joinWith], link:spark-sql-dataset-operators.adoc#select[select] (incl. `selectUntyped`), `unionByName`
+* Dataset operators, i.e. spark-sql-joins.md#joinWith[joinWith], spark-sql-dataset-operators.md#select[select] (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.adoc#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.adoc#aliasPlan, aliasPlan>>)
-* SQL's link:spark-sql-AstBuilder.adoc#withQuerySpecification[SELECT] queries with named expressions
+* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#aliasPlan, aliasPlan>>)
+* SQL's spark-sql-AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
 
-`Project` can also appear in a logical plan after link:spark-sql-Analyzer.adoc[analysis] or link:spark-sql-Optimizer.adoc[optimization] phases.
+`Project` can also appear in a logical plan after spark-sql-Analyzer.md[analysis] or [optimization](../Optimizer.md) phases.
 
 [source, scala]
 ----
@@ -79,10 +79,10 @@ scala> println(qn.queryExecution.logical.numberedTreeString)
 // Examples with Project that was added during optimization
 ----
 
-NOTE: link:spark-sql-Expression-Nondeterministic.adoc[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by link:spark-sql-Analyzer-CheckAnalysis.adoc#deterministic[CheckAnalysis].
+NOTE: spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by spark-sql-Analyzer-CheckAnalysis.md#deterministic[CheckAnalysis].
 
 [[output]]
-The link:catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME
+The catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME
 
 [[maxRows]]
 `maxRows`...FIXME
@@ -95,7 +95,7 @@ The link:catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME
 
 [TIP]
 ====
-Use `select` operator from link:spark-sql-catalyst-dsl.adoc[Catalyst DSL] to create a `Project` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `select` operator from spark-sql-catalyst-dsl.md[Catalyst DSL] to create a `Project` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

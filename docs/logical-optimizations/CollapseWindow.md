@@ -1,8 +1,8 @@
 # CollapseWindow Logical Optimization
 
-`CollapseWindow` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, FIXME>>.
+`CollapseWindow` is a [base logical optimization](../Optimizer.md#batches) that <<apply, FIXME>>.
 
-`CollapseWindow` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization, Operator Optimization>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`CollapseWindow` is part of the [Operator Optimization](../Optimizer.md#Operator_Optimization) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `CollapseWindow` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

@@ -1,8 +1,8 @@
 # DecimalAggregates Logical Optimization
 
-`DecimalAggregates` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms>> `Sum` and `Average` aggregate functions on fixed-precision `DecimalType` values to use `UnscaledValue` (unscaled Long) values in link:spark-sql-Expression-WindowExpression.md[WindowExpression] and [AggregateExpression](../expressions/AggregateExpression.md) expressions.
+`DecimalAggregates` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms>> `Sum` and `Average` aggregate functions on fixed-precision `DecimalType` values to use `UnscaledValue` (unscaled Long) values in link:spark-sql-Expression-WindowExpression.md[WindowExpression] and [AggregateExpression](../expressions/AggregateExpression.md) expressions.
 
-`DecimalAggregates` is part of the <<spark-sql-Optimizer.md#Decimal_Optimizations, Decimal Optimizations>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.md#, Catalyst Optimizer>>.
+`DecimalAggregates` is part of the [Decimal Optimizations](../Optimizer.md#Decimal_Optimizations) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `DecimalAggregates` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

@@ -1,6 +1,6 @@
 # OptimizeIn Logical Optimization
 
-`OptimizeIn` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans with In predicate expressions>> as follows:
+`OptimizeIn` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms logical plans with In predicate expressions>> as follows:
 
 . Replaces an `In` expression that has an link:spark-sql-Expression-In.adoc#list[empty list] and the link:spark-sql-Expression-In.adoc#value[value] expression not link:expressions/Expression.md#nullable[nullable] to `false`
 
@@ -8,7 +8,7 @@
 
 . Replaces an `In` predicate expression that is link:spark-sql-Expression-In.adoc#inSetConvertible[inSetConvertible] with link:spark-sql-Expression-InSet.adoc[InSet] expressions when the number of link:spark-sql-Expression-Literal.adoc[literal] expressions in the link:spark-sql-Expression-In.adoc#list[list] expression is greater than link:spark-sql-properties.adoc#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold] internal configuration property (default: `10`)
 
-`OptimizeIn` is part of the <<spark-sql-Optimizer.adoc#Operator_Optimization_before_Inferring_Filters, Operator Optimization before Inferring Filters>> fixed-point batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`OptimizeIn` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `OptimizeIn` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

@@ -2,7 +2,7 @@ title: Expand
 
 # Expand Unary Logical Operator
 
-`Expand` is a link:spark-sql-LogicalPlan.adoc#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets] and link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
+`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] and spark-sql-Expression-TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
 
 ```
 FIXME Examples for
@@ -31,16 +31,16 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 | `AttributeSet` from <<projections, projections>>
 
 | `validConstraints`
-| Empty set of link:expressions/Expression.md[expressions]
+| Empty set of expressions/Expression.md[expressions]
 |===
 
 === [[analyzer]] Analysis Phase
 
-`Expand` logical operator is resolved to at link:spark-sql-Analyzer.adoc[analysis phase] in the following logical evaluation rules:
+`Expand` logical operator is resolved to at spark-sql-Analyzer.md[analysis phase] in the following logical evaluation rules:
 
-* link:spark-sql-Analyzer.adoc#ResolveGroupingAnalytics[ResolveGroupingAnalytics] (for `Cube`, `Rollup`, link:spark-sql-LogicalPlan-GroupingSets.adoc[GroupingSets] logical operators)
+* spark-sql-Analyzer.md#ResolveGroupingAnalytics[ResolveGroupingAnalytics] (for `Cube`, `Rollup`, spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] logical operators)
 
-* <<spark-sql-Analyzer-TimeWindowing.adoc#, TimeWindowing>> (for link:spark-sql-Expression-TimeWindow.adoc[TimeWindow] logical operator)
+* <<spark-sql-Analyzer-TimeWindowing.md#, TimeWindowing>> (for spark-sql-Expression-TimeWindow.md[TimeWindow] logical operator)
 
 NOTE: Aggregate -> (Cube|Rollup|GroupingSets) -> constructAggregate -> constructExpand
 
@@ -56,14 +56,14 @@ scala> println(plan.numberedTreeString)
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
-* link:spark-sql-Optimizer-ColumnPruning.adoc[ColumnPruning]
-* link:spark-sql-Optimizer.adoc#FoldablePropagation[FoldablePropagation]
-* link:spark-sql-Optimizer.adoc#RewriteDistinctAggregates[RewriteDistinctAggregates]
+* [ColumnPruning](spark-sql-Optimizer-ColumnPruning.md)
+* [FoldablePropagation](../Optimizer.md#FoldablePropagation)
+* [RewriteDistinctAggregates](../Optimizer.md#RewriteDistinctAggregates)
 
 === [[creating-instance]] Creating Expand Instance
 
 `Expand` takes the following when created:
 
-* [[projections]] Projection link:expressions/Expression.md[expressions]
-* [[output]] Output schema link:spark-sql-Expression-Attribute.adoc[attributes]
-* [[child]] Child link:spark-sql-LogicalPlan.adoc[logical plan]
+* [[projections]] Projection [expressions](../expressions/Expression.md)
+* [[output]] Output schema [attributes](../expressions/Attribute.md)
+* [[child]] Child [logical plan](../logical-operators/LogicalPlan.md)

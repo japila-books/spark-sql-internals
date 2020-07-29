@@ -1,12 +1,12 @@
 # PullupCorrelatedPredicates Logical Optimization
 
-`PullupCorrelatedPredicates` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, transforms logical plans>> with the following operators:
+`PullupCorrelatedPredicates` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms logical plans>> with the following operators:
 
 . link:spark-sql-LogicalPlan-Filter.adoc[Filter] operators with an link:spark-sql-LogicalPlan-Aggregate.adoc[Aggregate] child operator
 
 . link:spark-sql-LogicalPlan.adoc#UnaryNode[UnaryNode] operators
 
-`PullupCorrelatedPredicates` is part of the <<spark-sql-Optimizer.adoc#Pullup-Correlated-Expressions, Pullup Correlated Expressions>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`PullupCorrelatedPredicates` is part of the [Pullup Correlated Expressions](../Optimizer.md#Pullup-Correlated-Expressions) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `PullupCorrelatedPredicates` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

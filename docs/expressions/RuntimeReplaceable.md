@@ -2,16 +2,16 @@ title: RuntimeReplaceable
 
 # RuntimeReplaceable -- Replaceable SQL Expressions
 
-`RuntimeReplaceable` is the <<contract, marker contract>> for <<spark-sql-Expression-UnaryExpression.adoc#, unary expressions>> that are replaced by link:spark-sql-Optimizer.adoc#ReplaceExpressions[Catalyst Optimizer] with their child expression (that can then be evaluated).
+`RuntimeReplaceable` is the <<contract, marker contract>> for <<UnaryExpression.md#, unary expressions>> that are replaced by [Logical Optimizer](../Optimizer.md#ReplaceExpressions) with their child expression (that can then be evaluated).
 
-NOTE: Catalyst Optimizer uses link:spark-sql-Optimizer-ReplaceExpressions.adoc[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
+NOTE: Catalyst Optimizer uses spark-sql-Optimizer-ReplaceExpressions.md[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
 
 `RuntimeReplaceable` contract allows for *expression aliases*, i.e. expressions that are fairly complex in the inside than on the outside, and is used to provide compatibility with other SQL databases by supporting SQL functions with their more complex Catalyst expressions (that are already supported by Spark SQL).
 
-NOTE: <<implementations, RuntimeReplaceables>> are tied up to their SQL functions in link:spark-sql-FunctionRegistry.adoc#expressions[FunctionRegistry].
+NOTE: <<implementations, RuntimeReplaceables>> are tied up to their SQL functions in spark-sql-FunctionRegistry.md#expressions[FunctionRegistry].
 
 [[Unevaluable]]
-`RuntimeReplaceable` expressions link:expressions/Expression.md#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row) and therefore have to be replaced in the link:spark-sql-QueryExecution.adoc[query execution pipeline].
+`RuntimeReplaceable` expressions expressions/Expression.md#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row) and therefore have to be replaced in the spark-sql-QueryExecution.md[query execution pipeline].
 
 [[contract]]
 [source, scala]
@@ -24,7 +24,7 @@ trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
 }
 ----
 
-NOTE: To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override link:expressions/Expression.md#flatArguments[flatArguments] and link:expressions/Expression.md#sql[sql] methods.
+NOTE: To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override expressions/Expression.md#flatArguments[flatArguments] and expressions/Expression.md#sql[sql] methods.
 
 [[implementations]]
 .RuntimeReplaceables
@@ -36,33 +36,33 @@ NOTE: To make sure the `explain` plan and expression SQL works correctly, a `Run
 
 | [[IfNull]] `IfNull`
 |
-| link:spark-sql-FunctionRegistry.adoc#ifnull[ifnull]
+| spark-sql-FunctionRegistry.md#ifnull[ifnull]
 
 | [[Left]] `Left`
 |
-| link:spark-sql-FunctionRegistry.adoc#left[left]
+| spark-sql-FunctionRegistry.md#left[left]
 
 | [[NullIf]] `NullIf`
 |
-| link:spark-sql-FunctionRegistry.adoc#nullif[nullif]
+| spark-sql-FunctionRegistry.md#nullif[nullif]
 
 | [[Nvl]] `Nvl`
 |
-| link:spark-sql-FunctionRegistry.adoc#nvl[nvl]
+| spark-sql-FunctionRegistry.md#nvl[nvl]
 
 | [[Nvl2]] `Nvl2`
 |
-| link:spark-sql-FunctionRegistry.adoc#nvl2[nvl2]
+| spark-sql-FunctionRegistry.md#nvl2[nvl2]
 
-| [[ParseToDate]] link:spark-sql-Expression-ParseToDate.adoc[ParseToDate]
-| link:spark-sql-functions-datetime.adoc#to_date[to_date]
-| link:spark-sql-FunctionRegistry.adoc#to_date[to_date]
+| [[ParseToDate]] spark-sql-Expression-ParseToDate.md[ParseToDate]
+| spark-sql-functions-datetime.md#to_date[to_date]
+| spark-sql-FunctionRegistry.md#to_date[to_date]
 
-| [[ParseToTimestamp]] link:spark-sql-Expression-ParseToTimestamp.adoc[ParseToTimestamp]
-| link:spark-sql-functions-datetime.adoc#to_timestamp[to_timestamp]
-| link:spark-sql-FunctionRegistry.adoc#to_timestamp[to_timestamp]
+| [[ParseToTimestamp]] spark-sql-Expression-ParseToTimestamp.md[ParseToTimestamp]
+| spark-sql-functions-datetime.md#to_timestamp[to_timestamp]
+| spark-sql-FunctionRegistry.md#to_timestamp[to_timestamp]
 
 | [[Right]] `Right`
 |
-| link:spark-sql-FunctionRegistry.adoc#right[right]
+| spark-sql-FunctionRegistry.md#right[right]
 |===

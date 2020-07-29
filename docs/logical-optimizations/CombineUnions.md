@@ -1,8 +1,8 @@
 # CombineUnions Logical Optimization
 
-`CombineUnions` is a <<spark-sql-Optimizer.adoc#batches, base logical optimization>> that <<apply, FIXME>>.
+`CombineUnions` is a [base logical optimization](../Optimizer.md#batches) that <<apply, FIXME>>.
 
-`CombineUnions` is part of the <<spark-sql-Optimizer.adoc#Union, Union>> once-executed batch in the standard batches of the <<spark-sql-Optimizer.adoc#, Catalyst Optimizer>>.
+`CombineUnions` is part of the [Union](../Optimizer.md#Union) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
 
 `CombineUnions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.adoc#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

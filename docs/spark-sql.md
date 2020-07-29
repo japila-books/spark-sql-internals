@@ -28,20 +28,20 @@ A `Dataset` is a programming interface to the [structured query execution pipeli
 
 Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 
-When an action is executed on a `Dataset` (directly, e.g. link:spark-sql-dataset-operators.adoc#show[show] or link:spark-sql-dataset-operators.adoc#count[count], or indirectly, e.g. link:spark-sql-DataFrameWriter.adoc#save[save] or link:spark-sql-DataFrameWriter.adoc#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the link:spark-sql-QueryExecution.adoc#execution-pipeline[execution stages]:
+When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-operators.md#show[show] or spark-sql-dataset-operators.md#count[count], or indirectly, e.g. spark-sql-DataFrameWriter.md#save[save] or spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the spark-sql-QueryExecution.md#execution-pipeline[execution stages]:
 
-. link:spark-sql-QueryExecution.adoc#analyzed[Logical Analysis]
-. link:spark-sql-QueryExecution.adoc#withCachedData[Caching Replacement]
-. link:spark-sql-QueryExecution.adoc#optimizedPlan[Logical Query Optimization] (using [rule-based](SparkOptimizer.md) and link:spark-sql-cost-based-optimization.adoc[cost-based] optimizations)
-. link:spark-sql-QueryExecution.adoc#sparkPlan[Physical Planning]
-. link:spark-sql-QueryExecution.adoc#executedPlan[Physical Optimization] (e.g. link:spark-sql-whole-stage-codegen.adoc[Whole-Stage Java Code Generation] or link:spark-sql-adaptive-query-execution.adoc[Adaptive Query Execution])
-. link:spark-sql-QueryExecution.adoc#toRdd[Constructing the RDD of Internal Binary Rows] (that represents the structured query in terms of Spark Core's RDD API)
+. spark-sql-QueryExecution.md#analyzed[Logical Analysis]
+. spark-sql-QueryExecution.md#withCachedData[Caching Replacement]
+. spark-sql-QueryExecution.md#optimizedPlan[Logical Query Optimization] (using [rule-based](SparkOptimizer.md) and spark-sql-cost-based-optimization.md[cost-based] optimizations)
+. spark-sql-QueryExecution.md#sparkPlan[Physical Planning]
+. spark-sql-QueryExecution.md#executedPlan[Physical Optimization] (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or spark-sql-adaptive-query-execution.md[Adaptive Query Execution])
+. spark-sql-QueryExecution.md#toRdd[Constructing the RDD of Internal Binary Rows] (that represents the structured query in terms of Spark Core's RDD API)
 
-As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and link:spark-sql-SparkPlanner.adoc#strategies[physical] query optimization strategies even without your consent).
+As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and spark-sql-SparkPlanner.md#strategies[physical] query optimization strategies even without your consent).
 
 NOTE: You can find out more on the core of Apache Spark (aka _Spark Core_) in https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2] gitbook.
 
-In other words, Spark SQL's `Dataset` API describes a distributed computation that will eventually be converted to a link:spark-sql-QueryExecution.adoc#toRdd[DAG of RDDs] for execution.
+In other words, Spark SQL's `Dataset` API describes a distributed computation that will eventually be converted to a spark-sql-QueryExecution.md#toRdd[DAG of RDDs] for execution.
 
 NOTE: Under the covers, structured queries are automatically compiled into corresponding RDD operations.
 
@@ -109,11 +109,11 @@ scala> sql("desc EXTENDED v1").show(false)
 +----------+---------+-------+
 ```
 
-Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using link:spark-sql-Optimizer.adoc[rule-based query optimizer] (aka *Catalyst Optimizer*), link:spark-sql-whole-stage-codegen.adoc[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and link:spark-sql-tungsten.adoc[Tungsten execution engine] with its own link:spark-sql-InternalRow.adoc[internal binary row format].
+Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own spark-sql-InternalRow.md[internal binary row format].
 
-As of Spark SQL 2.2, structured queries can be further optimized using link:spark-sql-hint-framework.adoc[Hint Framework].
+As of Spark SQL 2.2, structured queries can be further optimized using spark-sql-hint-framework.md[Hint Framework].
 
-Spark SQL introduces a tabular data abstraction called link:spark-sql-Dataset.adoc[Dataset] (that was previously link:spark-sql-DataFrame.adoc[DataFrame]). ``Dataset`` data abstraction is designed to make processing large amount of structured tabular data on Spark infrastructure simpler and faster.
+Spark SQL introduces a tabular data abstraction called spark-sql-Dataset.md[Dataset] (that was previously spark-sql-DataFrame.md[DataFrame]). ``Dataset`` data abstraction is designed to make processing large amount of structured tabular data on Spark infrastructure simpler and faster.
 
 [NOTE]
 ====
@@ -137,16 +137,16 @@ spark.read
 
 With Structured Streaming feature however, the above static batch query becomes dynamic and continuous paving the way for **continuous applications**.
 
-As of Spark 2.0, the main data abstraction of Spark SQL is link:spark-sql-Dataset.adoc[Dataset]. It represents a *structured data* which are records with a known schema. This structured data representation `Dataset` enables link:spark-sql-tungsten.adoc[compact binary representation] using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
+As of Spark 2.0, the main data abstraction of Spark SQL is spark-sql-Dataset.md[Dataset]. It represents a *structured data* which are records with a known schema. This structured data representation `Dataset` enables spark-sql-tungsten.md[compact binary representation] using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
-Spark SQL supports link:spark-sql-Optimizer-PushDownPredicate.adoc[predicate pushdown] to optimize performance of Dataset queries and can also link:spark-sql-Optimizer.adoc[generate optimized code at runtime].
+Spark SQL supports spark-sql-Optimizer-PushDownPredicate.md[predicate pushdown] to optimize performance of Dataset queries and can also [generate optimized code at runtime](Optimizer.md).
 
 Spark SQL comes with the different APIs to work with:
 
-1. link:spark-sql-Dataset.adoc[Dataset API] (formerly link:spark-sql-DataFrame.adoc[DataFrame API]) with a strongly-typed LINQ-like Query DSL that Scala programmers will likely find very appealing to use.
-2. link:spark-structured-streaming.adoc[Structured Streaming API (aka Streaming Datasets)] for continuous incremental execution of structured queries.
+1. spark-sql-Dataset.md[Dataset API] (formerly spark-sql-DataFrame.md[DataFrame API]) with a strongly-typed LINQ-like Query DSL that Scala programmers will likely find very appealing to use.
+2. spark-structured-streaming.md[Structured Streaming API (aka Streaming Datasets)] for continuous incremental execution of structured queries.
 3. Non-programmers will likely use SQL as their query language through direct integration with Hive
-4. JDBC/ODBC fans can use JDBC interface (through link:spark-sql-thrift-server.adoc[Thrift JDBC/ODBC Server]) and connect their tools to Spark's distributed query engine.
+4. JDBC/ODBC fans can use JDBC interface (through spark-sql-thrift-server.md[Thrift JDBC/ODBC Server]) and connect their tools to Spark's distributed query engine.
 
 Spark SQL comes with a uniform interface for data access in distributed storage systems like Cassandra or HDFS (Hive, Parquet, JSON) using specialized [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](spark-sql-DataFrameWriter.md) objects.
 
@@ -154,11 +154,11 @@ Spark SQL allows you to execute SQL-like queries on large volume of data that ca
 
 Spark SQL defines the following types of functions:
 
-* link:spark-sql-functions.adoc[standard functions] or link:spark-sql-udfs.adoc[User-Defined Functions (UDFs)] that take values from a single row as input to generate a single return value for every input row.
-* link:spark-sql-basic-aggregation.adoc[basic aggregate functions] that operate on a group of rows and calculate a single return value per group.
-* link:spark-sql-functions-windows.adoc[window aggregate functions] that operate on a group of rows and calculate a single return value for each row in a group.
+* spark-sql-functions.md[standard functions] or spark-sql-udfs.md[User-Defined Functions (UDFs)] that take values from a single row as input to generate a single return value for every input row.
+* spark-sql-basic-aggregation.md[basic aggregate functions] that operate on a group of rows and calculate a single return value per group.
+* spark-sql-functions-windows.md[window aggregate functions] that operate on a group of rows and calculate a single return value for each row in a group.
 
-There are two supported *catalog* implementations -- `in-memory` (default) and `hive` -- that you can set using link:spark-sql-StaticSQLConf.adoc#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property.
+There are two supported *catalog* implementations -- `in-memory` (default) and `hive` -- that you can set using spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] property.
 
 From user@spark:
 
