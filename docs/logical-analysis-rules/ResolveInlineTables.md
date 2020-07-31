@@ -8,7 +8,7 @@
 
 [[conf]]
 [[creating-instance]]
-`ResolveInlineTables` takes a [SQLConf](SQLConf.md) when created.
+`ResolveInlineTables` takes a [SQLConf](../SQLConf.md) when created.
 
 ## Example
 
@@ -39,13 +39,13 @@ scala> println(planAfterResolveInlineTables.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` simply [searches the input plan upwards](catalyst/TreeNode.md#transformUp) to find <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
+`apply` simply [searches the input plan upwards](../catalyst/TreeNode.md#transformUp) to find <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
 
 For such a <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
 
 In the end, `apply` <<convert, converts the UnresolvedInlineTable to a LocalRelation>>.
 
-`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[validateInputDimension]] `validateInputDimension` Internal Method
 

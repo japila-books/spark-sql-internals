@@ -101,7 +101,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] does not support the modifier DISTINCT
 ```
 
-* spark-sql-Expression-AggregateFunction.md[AggregateFunctions] are wrapped in a [AggregateExpression](expressions/AggregateExpression.md) (with `Complete` aggregate mode)
+* spark-sql-Expression-AggregateFunction.md[AggregateFunctions] are wrapped in a [AggregateExpression](../expressions/AggregateExpression.md) (with `Complete` aggregate mode)
 
 * All other functions are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +

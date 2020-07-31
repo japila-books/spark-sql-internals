@@ -8,7 +8,7 @@
 
 [[conf]]
 [[creating-instance]]
-`ResolveBroadcastHints` takes a [SQLConf](SQLConf.md) when created.
+`ResolveBroadcastHints` takes a [SQLConf](../SQLConf.md) when created.
 
 ```text
 // Use Catalyst DSL to create a logical plan

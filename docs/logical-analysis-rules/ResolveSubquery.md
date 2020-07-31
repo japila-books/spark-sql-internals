@@ -83,4 +83,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 . For spark-sql-LogicalPlan.md#UnaryNode[unary operators] with the spark-sql-LogicalPlan.md#childrenResolved[children resolved], `apply` <<resolveSubQueries, resolves subquery expressions (ScalarSubquery, Exists and In)>> with the unary operator and its single child
 
-`apply` is part of [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of [Rule](../catalyst/Rule.md#apply) abstraction.

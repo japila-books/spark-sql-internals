@@ -27,9 +27,9 @@ scala> println(planResolved.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` [walks the logical plan from children up the tree](catalyst/TreeNode.md#transformUp) and looks for <<spark-sql-LogicalPlan-Sort.md#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> leaf expressions (in <<spark-sql-LogicalPlan-Sort.md#order, ordering>> and <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping>> expressions, respectively).
+`apply` [walks the logical plan from children up the tree](../catalyst/TreeNode.md#transformUp) and looks for <<spark-sql-LogicalPlan-Sort.md#, Sort>> and <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> leaf expressions (in <<spark-sql-LogicalPlan-Sort.md#order, ordering>> and <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping>> expressions, respectively).
 
-For a <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions, `apply` replaces all the <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions (with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> child expressions) with `SortOrder` expressions and the expression at the `index - 1` position in the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-Sort.md#child, child>> logical operator.
+For a <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions, `apply` replaces all the <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions (with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> child expressions) with `SortOrder` expressions and the expression at the `index - 1` position in the [output schema](../catalyst/QueryPlan.md#output) of the <<spark-sql-LogicalPlan-Sort.md#child, child>> logical operator.
 
 For a <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operator with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> expressions, `apply` replaces all the expressions (with <<spark-sql-Expression-UnresolvedOrdinal.md#, UnresolvedOrdinal>> child expressions) with the expression at the `index - 1` position in the <<spark-sql-LogicalPlan-Aggregate.md#aggregateExpressions, aggregate named expressions>> of the current `Aggregate` logical operator.
 
@@ -40,4 +40,4 @@ ORDER BY position [index] is not in select list (valid range is [1, [output.size
 GROUP BY position [index] is not in select list (valid range is [1, [aggs.size]])
 ```
 
-`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

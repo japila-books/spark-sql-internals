@@ -55,7 +55,7 @@ scala> println(plan.numberedTreeString)
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
-* [ColumnPruning](spark-sql-Optimizer-ColumnPruning.md)
+* [ColumnPruning](../logical-optimizations/ColumnPruning.md)
 * [FoldablePropagation](../Optimizer.md#FoldablePropagation)
 * [RewriteDistinctAggregates](../Optimizer.md#RewriteDistinctAggregates)
 

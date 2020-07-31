@@ -203,7 +203,7 @@ org.apache.spark.sql.AnalysisException: Inserting into a view is not allowed. Vi
 
 === [[inserting-into-rdd-based-table-not-allowed]] Inserting Into RDD-Based Table Not Allowed
 
-Inserting into an RDD-based table is not allowed, i.e. a query plan with an `InsertIntoTable` operator with one of the following logical operators (as the <<table, logical plan representing the table>>) fails at analysis (when [PreWriteCheck]((../logical-analysis-rules/PreWriteCheck.md) extended logical check is executed):
+Inserting into an RDD-based table is not allowed, i.e. a query plan with an `InsertIntoTable` operator with one of the following logical operators (as the <<table, logical plan representing the table>>) fails at analysis (when [PreWriteCheck](../logical-analysis-rules/PreWriteCheck.md) extended logical check is executed):
 
 * Logical operator is not a <<spark-sql-LogicalPlan-LeafNode.md#, leaf node>>
 

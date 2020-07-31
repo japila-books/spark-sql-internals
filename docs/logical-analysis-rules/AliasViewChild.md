@@ -4,11 +4,11 @@
 
 `AliasViewChild` is part of the [View](../Analyzer.md#View) once-executed batch in the standard batches of the [Logical Analyzer](../Analyzer.md).
 
-`AliasViewChild` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`AliasViewChild` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
 
 [[conf]]
 [[creating-instance]]
-`AliasViewChild` takes a [SQLConf](SQLConf.md) when created.
+`AliasViewChild` takes a [SQLConf](../SQLConf.md) when created.
 
 [source, scala]
 ----
@@ -65,4 +65,4 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply`...FIXME
 
-`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

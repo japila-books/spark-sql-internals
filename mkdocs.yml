@@ -597,10 +597,14 @@ nav:
         - RewritePredicateSubquery: logical-optimizations/RewritePredicateSubquery.md
         - SimplifyCasts: logical-optimizations/SimplifyCasts.md
       - Extended (SparkOptimizer):
+        - CleanupDynamicPruningFilters: logical-optimizations/CleanupDynamicPruningFilters.md
         - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
         - OptimizeMetadataOnlyQuery: logical-optimizations/OptimizeMetadataOnlyQuery.md
+        - PartitionPruning: logical-optimizations/PartitionPruning.md
         - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
+        - PruneFilters: logical-optimizations/PruneFilters.md
         - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
+        - PushDownPredicates: logical-optimizations/PushDownPredicates.md
     - Execution Planning Strategies:
       - Execution Planning Strategies: execution-planning-strategies/index.md
       - Aggregation: execution-planning-strategies/Aggregation.md

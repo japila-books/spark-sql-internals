@@ -20,7 +20,7 @@
 
 `SparkOptimizer` is created when `SessionState` is requested for a [logical query plan optimizer](SessionState.md#optimizer) (indirectly using `BaseSessionStateBuilder` is requested for an [Optimizer](BaseSessionStateBuilder.md#optimizer)).
 
-![Creating SparkOptimizer](../images/spark-sql-SparkOptimizer.png)
+![Creating SparkOptimizer](images/spark-sql-SparkOptimizer.png)
 
 ## <span id="earlyScanPushDownRules"> earlyScanPushDownRules
 
@@ -111,7 +111,7 @@ Strategy: `Once`
 
 ### <span id="User-Provided-Optimizers"> User Provided Optimizers (Extension Point)
 
-Extension point for [Extra Optimization Rules](docs/spark-sql-ExperimentalMethods.md#extraOptimizations) using the given [ExperimentalMethods](#experimentalMethods)
+Extension point for [Extra Optimization Rules](spark-sql-ExperimentalMethods.md#extraOptimizations) using the given [ExperimentalMethods](#experimentalMethods)
 
 Strategy: [fixedPoint](Optimizer.md#fixedPoint)
 

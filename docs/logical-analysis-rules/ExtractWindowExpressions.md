@@ -32,7 +32,7 @@ val afterExtractWindowExpressions = ExtractWindowExpressions(plan)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` [transforms the logical operators downwards](catalyst/TreeNode.md#transformDown) in the input <<spark-sql-LogicalPlan.md#, logical plan>> as follows:
+`apply` [transforms the logical operators downwards](../catalyst/TreeNode.md#transformDown) in the input <<spark-sql-LogicalPlan.md#, logical plan>> as follows:
 
 * For <<spark-sql-LogicalPlan-Filter.md#, Filter>> unary operators with <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> operator (as the <<spark-sql-LogicalPlan-Filter.md#child, child>>) that <<hasWindowFunction, has a window function>> in the <<spark-sql-LogicalPlan-Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
@@ -40,7 +40,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 * For <<spark-sql-LogicalPlan-Project.md#, Project>> logical operators that <<hasWindowFunction, have a window function>> in the <<spark-sql-LogicalPlan-Project.md#projectList, projectList>>, `apply`...FIXME
 
-`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 === [[hasWindowFunction]] `hasWindowFunction` Internal Method
 

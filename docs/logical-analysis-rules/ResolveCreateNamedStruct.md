@@ -42,4 +42,4 @@ In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruc
 
 In the end, `apply` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> with new children.
 
-`apply` is part of the [Rule](catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

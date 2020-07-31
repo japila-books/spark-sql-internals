@@ -47,7 +47,7 @@ NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) impl
 | `ExpressionCanonicalizer`
 | [[ExpressionCanonicalizer]]
 
-| [Optimizer](Optimizer.md)
+| [Optimizer](../Optimizer.md)
 | [[Optimizer]] Generic logical query plan optimizer
 |===
 
