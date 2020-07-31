@@ -1140,6 +1140,10 @@
      <lastmod>2020-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/DynamicPruningSubquery/</loc>
+     <lastmod>2020-07-31</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ExecSubqueryExpression/</loc>
      <lastmod>2020-07-31</lastmod>
      <changefreq>daily</changefreq>
@@ -2037,6 +2041,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-in-300/explain-command-improved/</loc>
+     <lastmod>2020-07-31</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-in-300/dynamic-partition-pruning/</loc>
      <lastmod>2020-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
