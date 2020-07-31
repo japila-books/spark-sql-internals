@@ -525,6 +525,6 @@ Used when:
 
 * `CleanupDynamicPruningFilters` logical optimization rule is executed
 
-* `PartitionPruning` logical optimization rule is executed
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
 
 * `PlanDynamicPruningFilters` preparation physical rule is executed

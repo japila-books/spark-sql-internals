@@ -400,6 +400,7 @@ nav:
       - CreateNamedStructUnsafe: expressions/CreateNamedStructUnsafe.md
       - CumeDist: expressions/CumeDist.md
       - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+      - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
       - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
       - Exists: expressions/Exists.md
       - ExpectsInputTypes: expressions/ExpectsInputTypes.md
@@ -640,6 +641,7 @@ nav:
   - New in Spark 3.0.0:
     - new-in-300/index.md
     - Explaining Query Plans Improved: new-in-300/explain-command-improved.md
+    - Dynamic Partition Pruning: new-in-300/dynamic-partition-pruning.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:

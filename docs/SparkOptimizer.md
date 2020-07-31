@@ -60,7 +60,7 @@ Rules:
 
 Strategy: `Once`
 
-### PartitionPruning
+### <span id="PartitionPruning"> PartitionPruning
 
 Rules:
 
