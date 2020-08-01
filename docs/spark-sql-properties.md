@@ -89,6 +89,8 @@ Default: `true`
 
 Since: `3.0.0`
 
+Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruningUseStats) method to access the current value.
+
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio"> spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio
 
 **(internal)** When statistics are not available or configured not to be used, this config will be used as the fallback filter ratio for computing the data size of the partitioned table after dynamic partition pruning, in order to evaluate if it is worth adding an extra subquery as the pruning filter if broadcast reuse is not applicable.
@@ -97,6 +99,8 @@ Default: `0.5`
 
 Since: `3.0.0`
 
+Use [SQLConf.dynamicPartitionPruningFallbackFilterRatio](SQLConf.md#dynamicPartitionPruningFallbackFilterRatio) method to access the current value.
+
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly"> spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly
 
 **(internal)** When true, dynamic partition pruning will only apply when the broadcast exchange of a broadcast hash join operation can be reused as the dynamic pruning filter.
@@ -104,6 +108,8 @@ Since: `3.0.0`
 Default: `true`
 
 Since: `3.0.0`
+
+Use [SQLConf.dynamicPartitionPruningReuseBroadcastOnly](SQLConf.md#dynamicPartitionPruningReuseBroadcastOnly) method to access the current value.
 
 ## <span id="spark.sql.inMemoryTableScanStatistics.enable"> spark.sql.inMemoryTableScanStatistics.enable
 
@@ -850,16 +856,6 @@ Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access
 
 | [[spark.sql.dialect]] *spark.sql.dialect*
 
-| [[spark.sql.exchange.reuse]] *spark.sql.exchange.reuse*
-
-*(internal)* When enabled (i.e. `true`), the spark-sql-SparkPlanner.md[Spark planner] will find duplicated exchanges and subqueries and re-use them.
-
-Default: `true`
-
-NOTE: When disabled (i.e. `false`), spark-sql-ReuseSubquery.md[ReuseSubquery] and spark-sql-ReuseExchange.md[ReuseExchange] physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
-
-Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
-
 a| [[spark.sql.execution.useObjectHashAggregateExec]] *spark.sql.execution.useObjectHashAggregateExec*
 
 Enables spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
@@ -1334,3 +1330,13 @@ Default: `false`
 Since: 1.6.0
 
 Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
+
+## <span id="spark.sql.exchange.reuse"> spark.sql.exchange.reuse
+
+**(internal)** When enabled (`true`), the [Spark planner](spark-sql-SparkPlanner.md) will find duplicated exchanges and subqueries and re-use them.
+
+When disabled (`false`), [ReuseSubquery](spark-sql-ReuseSubquery.md) and [ReuseExchange](spark-sql-ReuseExchange.md) physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
+
+Default: `true`
+
+Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.

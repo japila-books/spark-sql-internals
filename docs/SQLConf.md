@@ -169,12 +169,6 @@ a| [[defaultSizeInBytes]] Used when:
 | <<spark-sql-properties.md#spark.sql.sort.enableRadixSort, spark.sql.sort.enableRadixSort>>
 a| [[enableRadixSort]] Used exclusively when `SortExec` physical operator is requested for a <<spark-sql-SparkPlan-SortExec.md#createSorter, UnsafeExternalRowSorter>>.
 
-| exchangeReuseEnabled
-| spark-sql-properties.md#spark.sql.exchange.reuse[spark.sql.exchange.reuse]
-a| [[exchangeReuseEnabled]] Used when spark-sql-ReuseSubquery.md#apply[ReuseSubquery] and spark-sql-ReuseExchange.md#apply[ReuseExchange] physical optimizations are executed
-
-NOTE: When disabled (i.e. `false`), `ReuseSubquery` and `ReuseExchange` physical optimizations do no optimizations.
-
 | fallBackToHdfsForStatsEnabled
 | spark-sql-properties.md#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs]
 | [[fallBackToHdfsForStatsEnabled]] Used exclusively when `DetermineTableStats` logical resolution rule is executed.
@@ -528,3 +522,33 @@ Used when:
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
 
 * `PlanDynamicPruningFilters` preparation physical rule is executed
+
+## <span id="DYNAMIC_PARTITION_PRUNING_FALLBACK_FILTER_RATIO"><span id="dynamicPartitionPruningFallbackFilterRatio"> dynamicPartitionPruningFallbackFilterRatio
+
+The value of [spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio](spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio) configuration property
+
+Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+
+## <span id="DYNAMIC_PARTITION_PRUNING_USE_STATS"><span id="dynamicPartitionPruningUseStats"> dynamicPartitionPruningUseStats
+
+The value of [spark.sql.optimizer.dynamicPartitionPruning.useStats](spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) configuration property
+
+Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+
+## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
+
+The value of [spark.sql.exchange.reuse](spark-sql-properties.md#spark.sql.exchange.reuse) configuration property
+
+Used when:
+
+* [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](physical-operators/AdaptiveSparkPlanExec.md#createQueryStages)
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+
+* `PlanDynamicPruningFilters` and [ReuseExchange](spark-sql-ReuseExchange.md) physical optimizations are executed
+
+## <span id="DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY"><span id="dynamicPartitionPruningReuseBroadcastOnly"> dynamicPartitionPruningReuseBroadcastOnly
+
+The value of [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly) configuration property
+
+Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed
