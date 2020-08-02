@@ -1972,19 +1972,19 @@
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CollapseCodegenStages/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/CollapseCodegenStages/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-EnsureRequirements/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/EnsureRequirements/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExtractPythonUDFs/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ExtractPythonUDFs/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InsertAdaptiveSparkPlan/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/InsertAdaptiveSparkPlan/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1996,15 +1996,15 @@
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-PlanSubqueries/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/PlanSubqueries/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ReuseExchange/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ReuseExchange/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ReuseSubquery/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ReuseSubquery/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
