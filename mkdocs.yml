@@ -7,8 +7,8 @@ site_url: https://jaceklaskowski.github.io/mastering-spark-sql-book/
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
-# https://squidfunk.github.io/mkdocs-material/getting-started/#adding-a-source-repository
-repo_name: jaceklaskowski/mastering-spark-sql-book
+# https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
+repo_name: mastering-spark-sql-book
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
 
 copyright: |
@@ -19,6 +19,7 @@ theme:
   language: en
   icon:
     logo: material/book-open-page-variant
+    repo: fontawesome/brands/github
   features:
     - tabs
     - instant
@@ -641,7 +642,6 @@ nav:
   - New in Spark 3.0.0:
     - new-in-300/index.md
     - Explaining Query Plans Improved: new-in-300/explain-command-improved.md
-    - Dynamic Partition Pruning: new-in-300/dynamic-partition-pruning.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:
@@ -662,7 +662,8 @@ nav:
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
-  - Notable Features:
+  - New &amp; Noteworthy:
+    - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md

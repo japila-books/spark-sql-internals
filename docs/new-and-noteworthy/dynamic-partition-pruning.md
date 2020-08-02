@@ -3,7 +3,7 @@
 **New in 3.0.0**
 
 **Dynamic Partition Pruning** (**DPP**) is an optimization of JOIN queries of partitioned tables using partition columns in a join condition.
-The idea is to push filter condition down to the large fact table and reduce the number of rows to scan.
+The idea is to push filter conditions down to the large fact table and reduce the number of rows to scan.
 
 The best results are expected in JOIN queries between a large fact table and a much smaller dimension table (_star-schema queries_).
 
