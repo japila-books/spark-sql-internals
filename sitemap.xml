@@ -1140,6 +1140,10 @@
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/DynamicPruningExpression/</loc>
+     <lastmod>2020-08-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/DynamicPruningSubquery/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
@@ -1964,6 +1968,10 @@
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ApplyColumnarRulesAndInsertTransitions/</loc>
+     <lastmod>2020-08-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CollapseCodegenStages/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
@@ -1981,6 +1989,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/AdaptiveExecutionContext/</loc>
+     <lastmod>2020-08-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/PlanDynamicPruningFilters/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
