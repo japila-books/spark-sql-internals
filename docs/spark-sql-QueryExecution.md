@@ -199,9 +199,9 @@ CAUTION: FIXME
 preparations: Seq[Rule[SparkPlan]]
 ```
 
-`preparations` is the set of the physical query optimization rules that transform a <<SparkPlan.md#, physical query plan>> to be more efficient and optimized for execution (i.e. `Rule[SparkPlan]`).
+`preparations` is the set of the physical query optimization rules that transform a [physical query plan](physical-operators/SparkPlan.md) to be more efficient and optimized for execution.
 
-The `preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
+`preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
 
 . <<spark-sql-ExtractPythonUDFs.md#, ExtractPythonUDFs>>
 . <<spark-sql-PlanSubqueries.md#, PlanSubqueries>>
@@ -215,6 +215,59 @@ The `preparations` physical query optimizations are applied sequentially (one by
 * `QueryExecution` is requested for the <<executedPlan, executedPlan>> physical plan (through <<prepareForExecution, prepareForExecution>>)
 
 * (Spark Structured Streaming) `IncrementalExecution` is requested for the physical optimization rules for streaming structured queries
+
+### preparations Internal Utility
+
+```scala
+preparations(
+  sparkSession: SparkSession,
+  adaptiveExecutionRule: Option[InsertAdaptiveSparkPlan] = None): Seq[Rule[SparkPlan]]
+```
+
+`preparations` is the set of [Catalyst Rules](catalyst/Rule.md) (for transforming [physical operators](physical-operators/SparkPlan.md)) in the following order:
+
+1. [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md) (if defined)
+1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
+1. [PlanSubqueries](spark-sql-PlanSubqueries.md)
+1. [EnsureRequirements](spark-sql-EnsureRequirements.md)
+1. [ApplyColumnarRulesAndInsertTransitions](physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
+1. [CollapseCodegenStages](spark-sql-CollapseCodegenStages.md)
+1. [ReuseExchange](spark-sql-ReuseExchange.md)
+1. [ReuseSubquery](spark-sql-ReuseSubquery.md)
+
+`preparations` is used when:
+
+* `QueryExecution` is requested for [physical optimization rules (preparations)](#preparations)
+
+* `QueryExecution` utility is requested to [prepareExecutedPlan](#prepareExecutedPlan)
+
+## <span id="prepareExecutedPlan"><span id="prepareExecutedPlan-SparkPlan"> prepareExecutedPlan for Physical Operators
+
+```scala
+prepareExecutedPlan(
+  spark: SparkSession,
+  plan: SparkPlan): SparkPlan
+```
+
+`prepareExecutedPlan` is...FIXME
+
+`prepareExecutedPlan` is used when:
+
+* `QueryExecution` utility is requested to [prepareExecutedPlan for a logical operator](#prepareExecutedPlan-LogicalPlan)
+
+* [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed
+
+## <span id="prepareExecutedPlan-LogicalPlan"> prepareExecutedPlan for Logical Operators
+
+```scala
+prepareExecutedPlan(
+  spark: SparkSession,
+  plan: LogicalPlan): SparkPlan
+```
+
+`prepareExecutedPlan` is...FIXME
+
+`prepareExecutedPlan` is used when [PlanSubqueries](spark-sql-PlanSubqueries.md) physical optimization is executed.
 
 === [[prepareForExecution]] Applying preparations Physical Query Optimization Rules to Physical Plan -- `prepareForExecution` Method
 

@@ -401,6 +401,7 @@ nav:
       - CreateNamedStructUnsafe: expressions/CreateNamedStructUnsafe.md
       - CumeDist: expressions/CumeDist.md
       - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+      - DynamicPruningExpression: expressions/DynamicPruningExpression.md
       - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
       - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
       - Exists: expressions/Exists.md
@@ -618,12 +619,14 @@ nav:
       - JoinSelection: execution-planning-strategies/JoinSelection.md
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
     - Physical Optimizations:
+      - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
       - EnsureRequirements: spark-sql-EnsureRequirements.md
       - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
       - InsertAdaptiveSparkPlan:
           - InsertAdaptiveSparkPlan: InsertAdaptiveSparkPlan.md
           - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
+      - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: spark-sql-PlanSubqueries.md
       - ReuseExchange: spark-sql-ReuseExchange.md
       - ReuseSubquery: spark-sql-ReuseSubquery.md

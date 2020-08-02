@@ -1,4 +1,4 @@
-# ReuseExchange Physical Query Optimization
+# ReuseExchange Physical Optimization
 
 `ReuseExchange` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` spark-sql-QueryExecution.md#preparations[uses] to optimize the physical plan of a structured query by <<apply, FIXME>>.
 

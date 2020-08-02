@@ -1,4 +1,4 @@
-# PlanSubqueries Physical Query Optimization
+# PlanSubqueries Physical Optimization
 
 `PlanSubqueries` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, plans ScalarSubquery (SubqueryExpression) expressions>> (as `ScalarSubquery ExecSubqueryExpression` expressions).
 
