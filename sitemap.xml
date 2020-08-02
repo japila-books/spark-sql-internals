@@ -1000,10 +1000,6 @@
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-HashPartitioning/</loc>
-     <lastmod>2020-08-02</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
@@ -1065,6 +1061,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Expression/</loc>
+     <lastmod>2020-08-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Unevaluable/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1185,6 +1185,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/GetStructField/</loc>
+     <lastmod>2020-08-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/HashPartitioning/</loc>
      <lastmod>2020-08-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
