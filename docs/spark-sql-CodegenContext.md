@@ -151,7 +151,7 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 
 `subexpressionEliminationForWholeStageCodegen`...FIXME
 
-NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (link:spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithoutKeys[not]).
+NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithoutKeys[not]).
 
 === [[addNewFunction]] Adding Function to Generated Class -- `addNewFunction` Method
 

@@ -33,7 +33,7 @@ Scan hive [table]
 
 `HiveTableScanExec` requires that either the <<partitionPruningPred, partitionPruningPred>> has no expressions or the <<relation, HiveTableRelation>> is partitioned. Otherwise, `HiveTableScanExec` throws an `IllegalArgumentException`.
 
-link:HiveTableScans.md[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every HiveTableRelation.md[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the HiveTableRelation.md#partitionCols[partition columns] of the `HiveTableRelation`.
+HiveTableScans.md[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every HiveTableRelation.md[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the HiveTableRelation.md#partitionCols[partition columns] of the `HiveTableRelation`.
 
 === [[metrics]] Performance Metrics -- `metrics` Method
 
@@ -71,7 +71,7 @@ NOTE: `doExecute` is part of ../SparkPlan.md#doExecute[SparkPlan] contract to ge
 a| [[boundPruningPred]] Catalyst ../expressions/Expression.md[expression] for the <<partitionPruningPred, partitionPruningPred>> bound to (the HiveTableRelation.md#partitionCols[partitionCols] of) the <<relation, HiveTableRelation>>
 
 | hiveQlTable
-a| [[hiveQlTable]] Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[Table] metadata (link:HiveClientImpl.md#toHiveTable[converted] from the HiveTableRelation.md#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
+a| [[hiveQlTable]] Hive {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[Table] metadata (HiveClientImpl.md#toHiveTable[converted] from the HiveTableRelation.md#tableMeta[CatalogTable] of the <<relation, HiveTableRelation>>)
 
 Used when `HiveTableScanExec` is requested for the <<tableDesc, tableDesc>>, <<rawPartitions, rawPartitions>> and is <<doExecute, executed>>
 

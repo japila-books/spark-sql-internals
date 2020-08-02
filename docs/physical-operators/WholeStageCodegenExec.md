@@ -86,7 +86,7 @@ Generated code:
 
 `WholeStageCodegenExec` is <<creating-instance, created>> when:
 
-* `CollapseCodegenStages` physical query optimization is spark-sql-CollapseCodegenStages.md#apply[executed] (with spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
+* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (with spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
 
 * `FileSourceScanExec` leaf physical operator is <<spark-sql-SparkPlan-FileSourceScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
@@ -128,7 +128,7 @@ scala> println(plan.numberedTreeString)
 05          +- LocalTableScan [ids#112]
 ----
 
-NOTE: As `WholeStageCodegenExec` is created as a result of spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] physical query optimization rule, it is only executed in spark-sql-QueryExecution.md#executedPlan[executedPlan] phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
+NOTE: As `WholeStageCodegenExec` is created as a result of [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization, it is only executed in spark-sql-QueryExecution.md#executedPlan[executedPlan] phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
 
 [source, scala]
 ----

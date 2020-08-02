@@ -287,7 +287,7 @@ outputPartitioning: Partitioning
 
 `outputPartitioning` is used when:
 
-* [EnsureRequirements](../spark-sql-EnsureRequirements.md) physical query optimization is executed (and in particular [adds an ExchangeCoordinator for adaptive query execution](../spark-sql-EnsureRequirements.md#withExchangeCoordinator), [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering) and [reorderJoinPredicates](../spark-sql-EnsureRequirements.md#reorderJoinPredicates))
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
 
@@ -303,7 +303,7 @@ outputOrdering: Seq[SortOrder]
 
 `outputOrdering` is used when:
 
-* [EnsureRequirements](../spark-sql-EnsureRequirements.md) physical query optimization is executed (and [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering))
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
 
@@ -351,7 +351,7 @@ The *required partition requirements* (_aka_ *child output distributions*) of th
 
 Defaults to a [UnspecifiedDistribution](../spark-sql-Distribution-UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
 
-Used exclusively when `EnsureRequirements` physical query plan optimization is [executed](../spark-sql-EnsureRequirements.md#apply) (and [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering)).
+Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 ### requiredChildOrdering
 
@@ -363,7 +363,7 @@ Specifies required sort ordering for each partition requirement (from [child](..
 
 Defaults to no sort ordering for all of the physical operator's [child](../catalyst/TreeNode.md#children).
 
-Used exclusively when `EnsureRequirements` physical query plan optimization is [executed](../spark-sql-EnsureRequirements.md#apply) (and [enforces partition requirements](../spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering)).
+Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 ## Final Methods
 

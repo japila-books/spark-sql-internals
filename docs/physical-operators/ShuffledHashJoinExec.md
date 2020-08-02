@@ -10,7 +10,7 @@ title: ShuffledHashJoinExec
 
 [NOTE]
 ====
-link:spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
 
 That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers spark-sql-SparkPlan-SortMergeJoinExec.md[sort merge join] over shuffled hash join.
 

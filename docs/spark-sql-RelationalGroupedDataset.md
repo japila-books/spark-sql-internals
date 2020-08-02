@@ -58,7 +58,7 @@ a| [[sum]]
 
 [NOTE]
 ====
-link:spark-sql-properties.md#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
+spark-sql-properties.md#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
 
 `spark.sql.retainGroupColumns` is enabled by default.
 

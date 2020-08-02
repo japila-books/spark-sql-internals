@@ -6,7 +6,7 @@ title: ScalarSubquery
 
 IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[SubqueryExpression]. It _is_ confusing and you should _not_ be anymore.
 
-`ScalarSubquery` is <<creating-instance, created>> exclusively when `PlanSubqueries` physical optimization is spark-sql-PlanSubqueries.md#apply[executed] (and plans a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery] expression).
+`ScalarSubquery` is <<creating-instance, created>> when [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery] expression).
 
 [source, scala]
 ----

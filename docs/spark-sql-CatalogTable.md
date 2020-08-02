@@ -106,9 +106,9 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 The type of a table (`CatalogTableType`) can be one of the following:
 
-* `EXTERNAL` for external tables (link:hive/HiveClientImpl.md#getTableOption[EXTERNAL_TABLE] in Hive)
-* `MANAGED` for managed tables (link:hive/HiveClientImpl.md#getTableOption[MANAGED_TABLE] in Hive)
-* `VIEW` for views (link:hive/HiveClientImpl.md#getTableOption[VIRTUAL_VIEW] in Hive)
+* `EXTERNAL` for external tables (hive/HiveClientImpl.md#getTableOption[EXTERNAL_TABLE] in Hive)
+* `MANAGED` for managed tables (hive/HiveClientImpl.md#getTableOption[MANAGED_TABLE] in Hive)
+* `VIEW` for views (hive/HiveClientImpl.md#getTableOption[VIRTUAL_VIEW] in Hive)
 
 `CatalogTableType` is included when a `TreeNode` is requested for a [JSON representation](catalyst/TreeNode.md#shouldConvertToJson) for...FIXME
 

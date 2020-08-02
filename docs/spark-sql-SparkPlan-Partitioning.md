@@ -11,9 +11,9 @@ title: Partitioning
 numPartitions: Int
 ----
 
-`numPartitions` is used in:
+`numPartitions` is used when:
 
-* `EnsureRequirements` physical preparation rule to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements of a physical operator]
+* [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 * spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] for `outputPartitioning` for `FullOuter` join type
 * `Partitioning.allCompatible`

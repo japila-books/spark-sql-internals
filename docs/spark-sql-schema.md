@@ -43,7 +43,7 @@ val schemaWithMap = StructType(
   StructField("map", createMapType(LongType, StringType), false) :: Nil)
 ----
 
-link:spark-sql-StructType.md[StructType] offers <<printTreeString, printTreeString>> that makes presenting the schema more user-friendly.
+spark-sql-StructType.md[StructType] offers <<printTreeString, printTreeString>> that makes presenting the schema more user-friendly.
 
 [source, scala]
 ----

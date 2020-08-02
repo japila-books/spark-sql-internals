@@ -263,7 +263,7 @@ a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when h
 
 | minNumPostShufflePartitions
 | <<spark-sql-properties.md#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>
-a| [[minNumPostShufflePartitions]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.md#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>.
+a| [[minNumPostShufflePartitions]] Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>).
 
 | numShufflePartitions
 | spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
@@ -273,7 +273,7 @@ a| [[numShufflePartitions]] Used in:
 * spark-sql-SparkSqlAstBuilder.md#withRepartitionByExpression[SparkSqlAstBuilder] (for a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression[RepartitionByExpression] logical operator)
 * [JoinSelection](execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) execution planning strategy
 * spark-sql-LogicalPlan-RunnableCommand.md#SetCommand[SetCommand] logical command
-* spark-sql-EnsureRequirements.md#defaultNumPreShufflePartitions[EnsureRequirements] physical plan optimization
+* [EnsureRequirements](physical-optimizations/EnsureRequirements.md#defaultNumPreShufflePartitions) physical plan optimization
 
 | offHeapColumnVectorEnabled
 | spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
@@ -384,7 +384,7 @@ a| [[supportQuotedRegexColumnName]] Used when:
 
 | targetPostShuffleInputSize
 | <<spark-sql-properties.md#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>>
-| [[targetPostShuffleInputSize]] Used exclusively when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.md#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>.
+| [[targetPostShuffleInputSize]] Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>)
 
 | truncateTableIgnorePermissionAcl
 | xref:spark-sql-properties.md#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]
@@ -398,7 +398,7 @@ a| [[supportQuotedRegexColumnName]] Used when:
 | spark-sql-properties.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage]
 a| [[wholeStageEnabled]] Used in:
 
-* spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] to control codegen
+* [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
 * spark-sql-ParquetFileFormat.md[ParquetFileFormat] to control row batch reading
 
 | wholeStageFallback
@@ -409,7 +409,7 @@ a| [[wholeStageEnabled]] Used in:
 | spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields]
 a| [[wholeStageMaxNumFields]] Used in:
 
-* spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] to control codegen
+* [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
 * spark-sql-ParquetFileFormat.md[ParquetFileFormat] to control row batch reading
 
 | wholeStageSplitConsumeFuncByOperator
@@ -545,7 +545,7 @@ Used when:
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
 
-* `PlanDynamicPruningFilters` and [ReuseExchange](spark-sql-ReuseExchange.md) physical optimizations are executed
+* `PlanDynamicPruningFilters` and [ReuseExchange](physical-optimizations/ReuseExchange.md) physical optimizations are executed
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY"><span id="dynamicPartitionPruningReuseBroadcastOnly"> dynamicPartitionPruningReuseBroadcastOnly
 

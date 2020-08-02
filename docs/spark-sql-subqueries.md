@@ -38,6 +38,6 @@ Catalyst Optimizer uses the following optimizations for subqueries:
 
 * spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md[RewriteCorrelatedScalarSubquery] optimization to spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#constructLeftJoins[constructLeftJoins]
 
-Spark Physical Optimizer uses spark-sql-PlanSubqueries.md[PlanSubqueries] physical optimization to spark-sql-PlanSubqueries.md#apply[plan queries with scalar subqueries].
+Spark Physical Optimizer uses [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization to plan queries with scalar subqueries.
 
 CAUTION: FIXME Describe how a physical spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery] is executed (cf. `updateResult`, `eval` and `doGenCode`).

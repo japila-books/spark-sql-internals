@@ -620,16 +620,16 @@ nav:
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
-      - CollapseCodegenStages: spark-sql-CollapseCodegenStages.md
-      - EnsureRequirements: spark-sql-EnsureRequirements.md
-      - ExtractPythonUDFs: spark-sql-ExtractPythonUDFs.md
+      - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
+      - EnsureRequirements: physical-optimizations/EnsureRequirements.md
+      - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
       - InsertAdaptiveSparkPlan:
-          - InsertAdaptiveSparkPlan: InsertAdaptiveSparkPlan.md
+          - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
           - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
-      - PlanSubqueries: spark-sql-PlanSubqueries.md
-      - ReuseExchange: spark-sql-ReuseExchange.md
-      - ReuseSubquery: spark-sql-ReuseSubquery.md
+      - PlanSubqueries: physical-optimizations/PlanSubqueries.md
+      - ReuseExchange: physical-optimizations/ReuseExchange.md
+      - ReuseSubquery: physical-optimizations/ReuseSubquery.md
     - Project Tungsten:
       - Tungsten Execution Backend: spark-sql-tungsten.md
       - InternalRow: spark-sql-InternalRow.md

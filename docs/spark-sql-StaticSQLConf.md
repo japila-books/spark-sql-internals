@@ -14,7 +14,7 @@ title: StaticSQLConf
 
 (internal) Configures `in-memory` (default) or ``hive``-related BaseSessionStateBuilder.md[BaseSessionStateBuilder] and spark-sql-ExternalCatalog.md[ExternalCatalog]
 
-link:SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable hive/index.md[Hive support] for a SparkSession.md[SparkSession].
+SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable hive/index.md[Hive support] for a SparkSession.md[SparkSession].
 
 Used when:
 

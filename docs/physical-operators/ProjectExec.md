@@ -16,7 +16,7 @@ title: ProjectExec
 
 * `FileSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a HadoopFsRelation](../execution-planning-strategies/FileSourceStrategy.md#apply)
 
-* `ExtractPythonUDFs` physical optimization is requested to spark-sql-ExtractPythonUDFs.md#apply[optimize a physical query plan] (and spark-sql-ExtractPythonUDFs.md#extract[extracts Python UDFs])
+* [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 
 !!! note
     The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or hive/HiveSessionStateBuilder.md#planner[Hive-specific SparkPlanner] are requested to catalyst/QueryPlanner.md#plan[plan a logical query plan into one or more physical query plans]:

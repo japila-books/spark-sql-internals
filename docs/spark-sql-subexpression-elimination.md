@@ -22,7 +22,7 @@ Internally, subexpression elimination happens when `CodegenContext` is requested
 
 === [[spark.sql.subexpressionElimination.enabled]] spark.sql.subexpressionElimination.enabled Configuration Property
 
-link:spark-sql-properties.md#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled] internal configuration property controls whether the subexpression elimination optimization is enabled or not.
+spark-sql-properties.md#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled] internal configuration property controls whether the subexpression elimination optimization is enabled or not.
 
 Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminationEnabled) method to access the current value.
 

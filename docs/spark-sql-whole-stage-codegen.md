@@ -36,7 +36,7 @@ See http://www.vldb.org/pvldb/vol4/p539-neumann.pdf[Efficiently Compiling Effici
 NOTE: https://janino-compiler.github.io/janino/[Janino] is used to compile a Java source code into a Java class at runtime.
 
 [[CollapseCodegenStages]]
-Before a query is executed, spark-sql-CollapseCodegenStages.md[CollapseCodegenStages] physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with spark-sql-SparkPlan-InputAdapter.md[InputAdapter] in-between for physical operators with no support for Java code generation).
+Before a query is executed, [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with spark-sql-SparkPlan-InputAdapter.md[InputAdapter] in-between for physical operators with no support for Java code generation).
 
 NOTE: `CollapseCodegenStages` is part of the sequence of physical preparation rules spark-sql-QueryExecution.md#preparations[QueryExecution.preparations] that will be applied in order to the physical plan before execution.
 

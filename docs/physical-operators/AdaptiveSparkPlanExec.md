@@ -11,7 +11,7 @@
 * <span id="preprocessingRules"> Preprocessing [physical rules](../catalyst/Rule.md) (`Seq[Rule[SparkPlan]]`)
 * <span id="isSubquery"> `isSubquery` flag
 
-`AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../InsertAdaptiveSparkPlan.md) physical optimisation is executed.
+`AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
 
 ## <span id="doExecute"> doExecute
 

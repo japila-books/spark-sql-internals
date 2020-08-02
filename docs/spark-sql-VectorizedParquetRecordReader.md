@@ -158,7 +158,7 @@ private void initBatch(
 
 [NOTE]
 ====
-link:spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property controls <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, i.e. `true` or `false`, respectively.
+spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property controls <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, i.e. `true` or `false`, respectively.
 
 `spark.sql.columnVector.offheap.enabled` is disabled by default which means that spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used.
 ====

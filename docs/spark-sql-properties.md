@@ -1335,7 +1335,7 @@ Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) meth
 
 **(internal)** When enabled (`true`), the [Spark planner](spark-sql-SparkPlanner.md) will find duplicated exchanges and subqueries and re-use them.
 
-When disabled (`false`), [ReuseSubquery](spark-sql-ReuseSubquery.md) and [ReuseExchange](spark-sql-ReuseExchange.md) physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
+When disabled (`false`), [ReuseExchange](physical-optimizations/ReuseExchange.md) and [ReuseSubquery](physical-optimizations/ReuseSubquery.md) physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
 
 Default: `true`
 

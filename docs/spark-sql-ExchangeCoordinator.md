@@ -1,6 +1,6 @@
 # ExchangeCoordinator
 
-`ExchangeCoordinator` is <<creating-instance, created>> when `EnsureRequirements` physical query optimization is requested to <<spark-sql-EnsureRequirements.md#withExchangeCoordinator, add an ExchangeCoordinator>> for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>.
+`ExchangeCoordinator` is <<creating-instance, created>> when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>).
 
 [[creating-instance]]
 `ExchangeCoordinator` takes the following to be created:

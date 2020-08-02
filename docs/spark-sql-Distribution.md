@@ -26,14 +26,14 @@ NOTE: `Distribution` is a Scala `sealed` contract which means that all possible 
 | [[requiredNumPartitions]] `requiredNumPartitions`
 a| Gives the required number of partitions for a distribution.
 
-Used exclusively when `EnsureRequirements` physical optimization is requested to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements of a physical operator] (and a child operator's output partitioning does not satisfy a required child distribution that leads to inserting a `ShuffleExchangeExec` operator to a physical plan).
+Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (and a child operator's output partitioning does not satisfy a required child distribution that leads to inserting a `ShuffleExchangeExec` operator to a physical plan).
 
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
 | [[createPartitioning]] `createPartitioning`
 | Creates a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
 
-Used exclusively when `EnsureRequirements` physical optimization is requested to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements of a physical operator] (and creates a spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operator with a required `Partitioning`).
+Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (and creates a spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operator with a required `Partitioning`).
 |===
 
 [[implementations]]

@@ -4,8 +4,8 @@ From time to time I'm lucky enough to find ways to optimize structured queries i
 
 . spark-sql-performance-tuning-groupBy-aggregation.md[Number of Partitions for groupBy Aggegration]
 
-=== Others
+## Others
 
-. Avoid `ObjectType` as spark-sql-CollapseCodegenStages.md#insertWholeStageCodegen-ObjectType[it turns whole-stage Java code generation off].
+. Avoid `ObjectType` [it turns whole-stage Java code generation off](physical-optimizations/CollapseCodegenStages.md#insertWholeStageCodegen-ObjectType).
 
-. Keep spark-sql-CollapseCodegenStages.md#supportCodegen[whole-stage codegen requirements] in mind, in particular avoid physical operators with spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag off.
+. Keep [whole-stage codegen requirements](physical-optimizations/CollapseCodegenStages.md#supportCodegen) in mind, in particular avoid physical operators with [supportCodegen](physical-operators/CodegenSupport.md#supportCodegen) flag off.

@@ -24,7 +24,7 @@ title: FilterExec
 
 * [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>)
 
-* `ExtractPythonUDFs` physical query optimization is requested to <<spark-sql-ExtractPythonUDFs.md#trySplitFilter, trySplitFilter>>
+* [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 
 [[metrics]]
 .FilterExec's Performance Metrics

@@ -18,7 +18,7 @@
 
 * `DataSourcePartitioning`, `SinglePartition`, `HashPartitioning`, and `RangePartitioning` are requested to `satisfies`
 
-* `EnsureRequirements` is requested to spark-sql-EnsureRequirements.md#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
+* [EnsureRequirements](physical-optimizations/EnsureRequirements.md) is executed for Adaptive Query Execution
 
 === [[createPartitioning]] `createPartitioning` Method
 

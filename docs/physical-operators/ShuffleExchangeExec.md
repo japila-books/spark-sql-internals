@@ -8,7 +8,7 @@ title: ShuffleExchangeExec
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed and plans spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[Repartition] (with `shuffle` flag enabled) and spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[RepartitionByExpression] logical operators
 
-* spark-sql-EnsureRequirements.md[EnsureRequirements] physical query optimization is executed (and requested to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements])
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 NOTE: `ShuffleExchangeExec` <<nodeName, presents itself>> as *Exchange* in physical query plans.
 
@@ -48,7 +48,7 @@ When requested to <<SparkPlan.md#doPrepare, prepare for execution>>, `ShuffleExc
 * [[child]] Child SparkPlan.md[[physical operator]]
 * [[coordinator]] Optional spark-sql-ExchangeCoordinator.md[[ExchangeCoordinator]]
 
-The optional <<coordinator, ExchangeCoordinator>> is defined only for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>> (when <<spark-sql-EnsureRequirements.md#, EnsureRequirements>> physical query optimization is <<apply, executed>>).
+The optional <<coordinator, ExchangeCoordinator>> is defined only for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>> (when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed).
 
 === [[metrics]] Performance Metrics -- `metrics` Method
 
@@ -177,7 +177,7 @@ apply(
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[Repartition] logical operator with `shuffle` flag enabled, a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[RepartitionByExpression])
 
-* spark-sql-EnsureRequirements.md[EnsureRequirements] physical query optimization is executed (and requested to spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforce partition requirements])
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical query optimization is executed
 
 === [[internal-properties]] Internal Properties
 

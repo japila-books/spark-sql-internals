@@ -72,7 +72,7 @@ a| `AttributeSet` with the following:
 | `resultAttribute`
 a|
 
-link:spark-sql-Expression-Attribute.md[Attribute] that is:
+spark-sql-Expression-Attribute.md[Attribute] that is:
 
 * `AttributeReference` when <<aggregateFunction, AggregateFunction>> is itself resolved
 

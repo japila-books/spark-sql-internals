@@ -59,7 +59,7 @@ NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` exte
 | executedPlan
 a| [[executedPlan]] Optimized <<SparkPlan.md#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
 
-NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers is the <<spark-sql-CollapseCodegenStages.md#, CollapseCodegenStages>> physical preparation rule that collapses physical operators that support code generation together as a spark-sql-SparkPlan-WholeStageCodegenExec.md[WholeStageCodegenExec] operator.
+NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers is the [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule that collapses physical operators that support code generation together as a spark-sql-SparkPlan-WholeStageCodegenExec.md[WholeStageCodegenExec] operator.
 
 [NOTE]
 ====
@@ -79,7 +79,7 @@ NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers
 
 * `SQLExecution` is requested to <<spark-sql-SQLExecution.md#withNewExecutionId, execute a Dataset action under a new execution id>>
 
-* `PlanSubqueries` physical query optimization is <<spark-sql-PlanSubqueries.md#apply, executed>>
+* [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization is executed
 
 * <<spark-sql-LogicalPlan-AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-ExplainCommand.md#, ExplainCommand>> logical commands are executed
 
@@ -203,12 +203,12 @@ preparations: Seq[Rule[SparkPlan]]
 
 `preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
 
-. <<spark-sql-ExtractPythonUDFs.md#, ExtractPythonUDFs>>
-. <<spark-sql-PlanSubqueries.md#, PlanSubqueries>>
-. <<spark-sql-EnsureRequirements.md#, EnsureRequirements>>
-. <<spark-sql-CollapseCodegenStages.md#, CollapseCodegenStages>>
-. <<spark-sql-ReuseExchange.md#, ReuseExchange>>
-. <<spark-sql-ReuseSubquery.md#, ReuseSubquery>>
+1. [ExtractPythonUDFs](physical-optimizations/ExtractPythonUDFs.md)
+1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
+1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)
+1. [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md)
+1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
+1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
 
 `preparations` rules are used when:
 
@@ -226,14 +226,14 @@ preparations(
 
 `preparations` is the set of [Catalyst Rules](catalyst/Rule.md) (for transforming [physical operators](physical-operators/SparkPlan.md)) in the following order:
 
-1. [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md) (if defined)
+1. [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) (if defined)
 1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
-1. [PlanSubqueries](spark-sql-PlanSubqueries.md)
-1. [EnsureRequirements](spark-sql-EnsureRequirements.md)
+1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
+1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)
 1. [ApplyColumnarRulesAndInsertTransitions](physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
-1. [CollapseCodegenStages](spark-sql-CollapseCodegenStages.md)
-1. [ReuseExchange](spark-sql-ReuseExchange.md)
-1. [ReuseSubquery](spark-sql-ReuseSubquery.md)
+1. [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md)
+1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
+1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
 
 `preparations` is used when:
 
@@ -267,7 +267,7 @@ prepareExecutedPlan(
 
 `prepareExecutedPlan` is...FIXME
 
-`prepareExecutedPlan` is used when [PlanSubqueries](spark-sql-PlanSubqueries.md) physical optimization is executed.
+`prepareExecutedPlan` is used when [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization is executed.
 
 === [[prepareForExecution]] Applying preparations Physical Query Optimization Rules to Physical Plan -- `prepareForExecution` Method
 

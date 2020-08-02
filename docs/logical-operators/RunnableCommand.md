@@ -170,7 +170,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]]
 
-| link:spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
+| spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | hive/InsertIntoHiveTable.md[InsertIntoHiveTable]

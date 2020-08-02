@@ -13,7 +13,7 @@
 [[mode]]
 `BroadcastDistribution` takes a spark-sql-BroadcastMode.md[BroadcastMode] when created.
 
-NOTE: `BroadcastDistribution` is converted to a spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator when spark-sql-EnsureRequirements.md[EnsureRequirements] physical query plan optimization is executed (and spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering[enforces partition requirements for data distribution and ordering]).
+NOTE: `BroadcastDistribution` is converted to a spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed.
 
 === [[createPartitioning]] `createPartitioning` Method
 

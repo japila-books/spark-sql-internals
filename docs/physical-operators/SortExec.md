@@ -8,7 +8,7 @@ title: SortExec
 
 * <<spark-sql-FileFormatWriter.md#, FileFormatWriter>> helper object is requested to <<spark-sql-FileFormatWriter.md#write, write the result of a structured query>>
 
-* <<spark-sql-EnsureRequirements.md#, EnsureRequirements>> physical query optimization is executed (and <<spark-sql-EnsureRequirements.md#ensureDistributionAndOrdering, enforces partition requirements for data distribution and ordering of a physical operator>>)
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 `SortExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_).
 

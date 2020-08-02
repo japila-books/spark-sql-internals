@@ -16,7 +16,7 @@ NOTE: `None` for the required number of partitions indicates to use any number o
 
 `HashClusteredDistribution` is used when:
 
-* `EnsureRequirements` is requested to spark-sql-EnsureRequirements.md#withExchangeCoordinator[add an ExchangeCoordinator] for Adaptive Query Execution
+* [EnsureRequirements](physical-optimizations/EnsureRequirements.md) is executed (for Adaptive Query Execution)
 
 * `HashPartitioning` is requested to `satisfies`
 

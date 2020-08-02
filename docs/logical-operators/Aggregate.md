@@ -53,7 +53,7 @@ NOTE: Part of catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
-link:spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a spark-sql-LogicalPlan-Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
+spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a spark-sql-LogicalPlan-Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
 
 [source, scala]
 ----

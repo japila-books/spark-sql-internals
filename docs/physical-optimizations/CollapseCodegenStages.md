@@ -14,7 +14,7 @@ When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.md#spark.sql.code
 
 [NOTE]
 ====
-link:spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property controls the total number of fields in a schema that is acceptable for whole-stage code generation.
+spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] Spark internal property controls the total number of fields in a schema that is acceptable for whole-stage code generation.
 
 The number is `100` by default.
 ====

@@ -4,7 +4,7 @@ title: CodegenFallback
 
 `CodegenFallback` is the <<contract, contract>> of <<implementations, Catalyst expressions>> that do not support a Java code generation and want to <<doGenCode, fall back to interpreted mode>> (aka _fallback mode_).
 
-`CodegenFallback` is used when `CollapseCodegenStages` physical optimization is requested to <<spark-sql-CollapseCodegenStages.md#apply, execute>> (and <<spark-sql-CollapseCodegenStages.md#supportCodegen-Expression, enforce whole-stage codegen requirements for Catalyst expressions>>).
+`CodegenFallback` is used when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [enforce whole-stage codegen requirements for Catalyst expressions](../physical-optimizations/CollapseCodegenStages.md#supportCodegen-Expression)).
 
 [[contract]]
 [source, scala]

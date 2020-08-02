@@ -12,7 +12,7 @@ Vectorized Parquet Decoding uses <<spark-sql-VectorizedParquetRecordReader.md#, 
 
 === [[spark.sql.parquet.enableVectorizedReader]] spark.sql.parquet.enableVectorizedReader Configuration Property
 
-link:spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
+spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
 
 [source, scala]
 ----

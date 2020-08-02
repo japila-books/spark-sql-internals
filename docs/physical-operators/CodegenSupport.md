@@ -172,7 +172,7 @@ Generated code:
 supportCodegen: Boolean = true
 ----
 
-`supportCodegen` flag is to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when `CollapseCodegenStages` is spark-sql-CollapseCodegenStages.md#apply[executed] (and spark-sql-CollapseCodegenStages.md#supportCodegen[checks whether a physical operator meets the requirements of whole-stage Java code generation or not]).
+`supportCodegen` flag is to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
 
 `supportCodegen` flag is turned on by default.
 

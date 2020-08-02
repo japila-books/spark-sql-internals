@@ -101,7 +101,7 @@ Spark SQL uses the Hive-specific configuration properties that further fine-tune
 
 === [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir` Configuration Property
 
-link:spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
+spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
 
 [TIP]
 ====

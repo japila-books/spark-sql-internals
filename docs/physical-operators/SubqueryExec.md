@@ -8,7 +8,7 @@ title: SubqueryExec
 
 CAUTION: FIXME When is `doPrepare` executed?
 
-`SubqueryExec` is <<creating-instance, created>> exclusively when `PlanSubqueries` preparation rule is spark-sql-PlanSubqueries.md#apply[executed] (and transforms `ScalarSubquery` expressions in a physical plan).
+`SubqueryExec` is <<creating-instance, created>> when [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and transforms `ScalarSubquery` expressions in a physical plan).
 
 [source, scala]
 ----
