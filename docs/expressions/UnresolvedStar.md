@@ -33,9 +33,9 @@ scala> println(namedExprs.head.numberedTreeString)
 NOTE: `UnresolvedStar` can only be used in spark-sql-Expression-Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it [cannot be evaluated](Unevaluable.md) either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
 
-```
+```text
 Cannot evaluate expression: [this]
 ```
 

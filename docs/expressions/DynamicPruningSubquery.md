@@ -2,7 +2,7 @@
 
 `DynamicPruningSubquery` is a [SubqueryExpression](SubqueryExpression.md) and a `DynamicPruning` predicate expression.
 
-`DynamicPruningSubquery` is an `Unevaluable` expression.
+`DynamicPruningSubquery` is an [unevaluable expression](Unevaluable.md).
 
 `DynamicPruningSubquery` is used by `PlanDynamicPruningFilters` physical optimization.
 

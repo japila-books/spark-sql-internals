@@ -241,7 +241,7 @@ ANTLR labeled alternative: `#singleInsertQuery`
 
 ### visitSortItem
 
-Creates a [SortOrder](../expressions/SortOrder.md) unevaluable unary expression
+Creates a [SortOrder](../expressions/SortOrder.md) unary expression
 
 ```text
 sortItem

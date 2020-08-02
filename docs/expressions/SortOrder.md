@@ -10,9 +10,7 @@ title: SortOrder
 
 `SortOrder` is used to specify the <<SparkPlan.md#, output data ordering requirements>> of a physical operator.
 
-`SortOrder` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> and cannot be evaluated (i.e. produce a value given an internal row).
-
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
+`SortOrder` is an [unevaluable expression](Unevaluable.md).
 
 [[foldable]]
 `SortOrder` is never <<expressions/Expression.md#foldable, foldable>> (as an unevaluable expression with no evaluation).

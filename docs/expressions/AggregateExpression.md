@@ -2,7 +2,7 @@ title: AggregateExpression
 
 # AggregateExpression -- Unevaluable Expression Container for AggregateFunction
 
-`AggregateExpression` is an expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
+`AggregateExpression` is an [unevaluable expression](Unevaluable.md) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
 
 `AggregateExpression` contains the following:
 

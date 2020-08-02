@@ -127,7 +127,7 @@ a|
 * spark-sql-Expression-Inline.md[Inline]
 * spark-sql-Expression-JsonToStructs.md[JsonToStructs]
 
-| `Unevaluable`
+| [Unevaluable](Unevaluable.md)
 | trait
 a| [[Unevaluable]] Cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations), i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and simply report an `UnsupportedOperationException`.
 

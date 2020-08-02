@@ -19,7 +19,7 @@ val executedPlan = planSubqueries(plan)
 ----
 
 [[Unevaluable]]
-`ScalarSubquery` expression expressions/Expression.md#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
+`ScalarSubquery` is an [unevaluable expression](Unevaluable.md).
 
 [[dataType]]
 `ScalarSubquery` uses...FIXME...for the <<expressions/Expression.md#dataType, data type>>.

@@ -82,7 +82,7 @@ canEvaluateWithinJoin(expr: Expression): Boolean
 
 * Expression is expressions/Expression.md#deterministic[deterministic]
 
-* Expression is not `Unevaluable`, `ListQuery` or `Exists`
+* Expression is not [Unevaluable](expressions/Unevaluable.md), `ListQuery` or `Exists`
 
 * Expression is a `SubqueryExpression` with no child expressions
 

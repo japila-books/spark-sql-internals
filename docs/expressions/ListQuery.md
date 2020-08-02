@@ -5,7 +5,7 @@ title: ListQuery
 `ListQuery` is a spark-sql-Expression-SubqueryExpression.md[SubqueryExpression] that represents SQL's spark-sql-AstBuilder.md#withPredicate[IN predicate with a subquery], e.g. `NOT? IN '(' query ')'`.
 
 [[Unevaluable]]
-`ListQuery` expressions/Expression.md#Unevaluable[cannot be evaluated] and produce a value given an internal row.
+`ListQuery` are [unevaluable](Unevaluable.md).
 
 [[resolved]]
 `ListQuery` is spark-sql-Expression-SubqueryExpression.md#resolved[resolved] when:

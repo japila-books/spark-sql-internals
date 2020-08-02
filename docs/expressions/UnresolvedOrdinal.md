@@ -41,9 +41,7 @@ unresolvedordinal(1)
 [[ordinal]]
 `UnresolvedOrdinal` takes a single `ordinal` integer when created.
 
-`UnresolvedOrdinal` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> and cannot be evaluated (i.e. produce a value given an internal row).
-
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
+`UnresolvedOrdinal` is an [unevaluable expression](Unevaluable.md).
 
 [[resolved]]
 `UnresolvedOrdinal` can never be <<expressions/Expression.md#resolved, resolved>> (and is replaced at <<analysis-phase, analysis phase>>).

@@ -2,7 +2,7 @@ title: WindowSpecDefinition
 
 # WindowSpecDefinition Unevaluable Expression
 
-`WindowSpecDefinition` is an expressions/Expression.md#Unevaluable[unevaluable expression] (i.e. with no support for `eval` and `doGenCode` methods).
+`WindowSpecDefinition` is an [unevaluable expression](Unevaluable.md).
 
 `WindowSpecDefinition` is <<creating-instance, created>> when:
 

@@ -444,8 +444,6 @@ From https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2
 
 Internally, `grouping_id()` creates a spark-sql-Column.md[Column] with `GroupingID` unevaluable expression.
 
-NOTE: expressions/Expression.md#Unevaluable[Unevaluable expressions] are expressions replaced by some other expressions during [analysis](Analyzer.md) or [optimization](Optimizer.md).
-
 ```text
 // workshops dataset was defined earlier
 val q = workshops

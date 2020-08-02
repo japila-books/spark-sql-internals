@@ -2,9 +2,7 @@ title: UnresolvedWindowExpression
 
 # UnresolvedWindowExpression Unevaluable Expression -- WindowExpression With Unresolved Window Specification Reference
 
-`UnresolvedWindowExpression` is an <<expressions/Expression.md#Unevaluable, unevaluable expression>> that represents...FIXME
-
-NOTE: An <<expressions/Expression.md#Unevaluable, unevaluable expression>> cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
+`UnresolvedWindowExpression` is an [unevaluable expression](Unevaluable.md) that represents...FIXME
 
 `UnresolvedWindowExpression` is <<creating-instance, created>> when:
 

@@ -116,8 +116,7 @@ For two joins exactly (i.e. the `input` has two logical plans and their join typ
 
 If there are condition expressions that spark-sql-PredicateHelper.md#canEvaluateWithinJoin[could not be evaluated within a join], `createOrderedJoin` creates a spark-sql-LogicalPlan-Filter.md#creating-instance[Filter] logical operator with the join conditions combined together using `And` expression and the result join operator as the spark-sql-LogicalPlan-Filter.md#child[child] operator.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.Literal
 val a: Expression = Literal("a")
@@ -153,7 +152,7 @@ scala> println(plan.numberedTreeString)
 01 +- 'Join Cross, ((a = b) && true)
 02    :- 'UnresolvedRelation `t1`
 03    +- 'UnresolvedRelation `t2`
-----
+```
 
 ==== [[createOrderedJoin-three-or-more-joins]] "Three Or More Logical Plans" Case
 
@@ -277,8 +276,7 @@ scala> println(plan.numberedTreeString)
 .createOrderedJoin with Three Joins
 image::images/ReorderJoin-createOrderedJoin-four-plans.png[align="center"]
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.Expression
 import org.apache.spark.sql.catalyst.expressions.AttributeReference
 import org.apache.spark.sql.types.LongType
@@ -331,7 +329,7 @@ scala> println(plan.numberedTreeString)
 05    :  :  +- 'UnresolvedRelation `t2`
 06    :  +- 'UnresolvedRelation `t3`
 07    +- 'UnresolvedRelation `t4`
-----
+```
 
 === [[ExtractFiltersAndInnerJoins]][[ExtractFiltersAndInnerJoins-unapply]][[unapply]] Extracting Filter and Join Operators from Logical Plan -- `unapply` Method (of ExtractFiltersAndInnerJoins)
 

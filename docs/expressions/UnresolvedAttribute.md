@@ -31,7 +31,7 @@ title: UnresolvedAttribute
 ====
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedAttribute` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedAttribute` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedAttribute` can never be resolved it should not come as a surprise that it [cannot be evaluated](Unevaluable.md) either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedAttribute` simply reports a `UnsupportedOperationException`.
 
 ```
 Cannot evaluate expression: [this]

@@ -11,7 +11,7 @@ NOTE: Catalyst Optimizer uses spark-sql-Optimizer-ReplaceExpressions.md[ReplaceE
 NOTE: <<implementations, RuntimeReplaceables>> are tied up to their SQL functions in spark-sql-FunctionRegistry.md#expressions[FunctionRegistry].
 
 [[Unevaluable]]
-`RuntimeReplaceable` expressions expressions/Expression.md#Unevaluable[cannot be evaluated] (i.e. produce a value given an internal row) and therefore have to be replaced in the spark-sql-QueryExecution.md[query execution pipeline].
+`RuntimeReplaceable` expressions are [unevaluable](Unevaluable.md)
 
 [[contract]]
 [source, scala]

@@ -13,7 +13,7 @@ title: Exists
 * `AstBuilder` is requested to spark-sql-AstBuilder.md#visitExists[visitExists] (in SQL statements)
 
 [[Unevaluable]]
-`Exists` expressions/Expression.md#Unevaluable[cannot be evaluated], i.e. produce a value given an internal row.
+`Exists` is [unevaluable expression](Unevaluable.md).
 
 [[eval]][[doGenCode]]
 When requested to evaluate or `doGenCode`, `Exists` simply reports a `UnsupportedOperationException`.
