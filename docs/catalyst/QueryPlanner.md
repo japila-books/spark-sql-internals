@@ -60,4 +60,4 @@ If a plan does not contain a placeholder, the plan is returned as is. Otherwise,
 
 In the end, `plan` <<prunePlans, prunes "bad" physical plans>>.
 
-NOTE: `plan` is used exclusively (through the concrete spark-sql-SparkPlanner.md[SparkPlanner]) when a `QueryExecution` spark-sql-QueryExecution.md#sparkPlan[is requested for a physical plan].
+NOTE: `plan` is used exclusively (through the concrete spark-sql-SparkPlanner.md[SparkPlanner]) when a `QueryExecution` [is requested for a physical plan](../QueryExecution.md#sparkPlan).

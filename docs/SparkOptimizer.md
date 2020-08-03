@@ -138,7 +138,7 @@ scala> spark.sessionState.optimizer.isInstanceOf[SparkOptimizer]
 res1: Boolean = true
 ```
 
-The optimized logical plan of a structured query is available as [QueryExecution.optimizedPlan](spark-sql-QueryExecution.md#optimizedPlan).
+The optimized logical plan of a structured query is available as [QueryExecution.optimizedPlan](QueryExecution.md#optimizedPlan).
 
 ```text
 // Applying two filter in sequence on purpose

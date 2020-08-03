@@ -2,7 +2,7 @@
 
 `Unevaluable` is an extension of the [Expression](Expression.md) abstraction for [unevaluable expression](#implementations) that cannot be evaluated to produce a value (neither [Interpreted](Expression.md#eval) nor [Code-Generated](Expression.md#doGenCode)).
 
-`Unevaluable` expressions are expected to be resolved (replaced) to "evaluable" expressions or logical operators at [analysis](../spark-sql-QueryExecution.md#analyzed) or [optimization](../spark-sql-QueryExecution.md#optimizedPlan) phases or they fail analysis.
+`Unevaluable` expressions are expected to be resolved (replaced) to "evaluable" expressions or logical operators at [analysis](../QueryExecution.md#analyzed) or [optimization](../QueryExecution.md#optimizedPlan) phases or they fail analysis.
 
 Unevaluable expressions cannot be evaluated (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be  
 

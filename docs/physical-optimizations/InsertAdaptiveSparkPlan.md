@@ -11,7 +11,7 @@
 
 * <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](physical-optimizations/AdaptiveExecutionContext.md)
 
-`InsertAdaptiveSparkPlan` is created when `QueryExecution` is requested for [physical preparations rules](spark-sql-QueryExecution.md#preparations).
+`InsertAdaptiveSparkPlan` is created when `QueryExecution` is requested for [physical preparations rules](QueryExecution.md#preparations).
 
 ## <span id="apply"> apply
 

@@ -662,7 +662,7 @@ scala> ds.toJSON.show
 +-------------------+
 ----
 
-Internally, `toJSON` grabs the `RDD[InternalRow]` (of the spark-sql-QueryExecution.md#toRdd[QueryExecution] of the `Dataset`) and spark-rdd-transformations.md#mapPartitions[maps the records (per RDD partition)] into JSON.
+Internally, `toJSON` grabs the `RDD[InternalRow]` (of the QueryExecution.md#toRdd[QueryExecution] of the `Dataset`) and spark-rdd-transformations.md#mapPartitions[maps the records (per RDD partition)] into JSON.
 
 NOTE: `toJSON` uses Jackson's JSON parser -- https://github.com/FasterXML/jackson-module-scala[jackson-module-scala].
 

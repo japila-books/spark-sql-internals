@@ -691,7 +691,7 @@ window(
 | [[col]][[column]] spark-sql-functions-regular-functions.md#col[col] and spark-sql-functions-regular-functions.md#column[column]
 | Creating spark-sql-Column.md[Columns]
 
-| xref:spark-sql-functions-regular-functions.md#expr[expr]
+| spark-sql-functions-regular-functions.md#expr[expr]
 | [[expr]]
 
 | [[lit]] spark-sql-functions-regular-functions.md#lit[lit]

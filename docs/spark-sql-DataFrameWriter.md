@@ -231,9 +231,9 @@ NOTE: Spark Structured Streaming's `DataStreamWriter` is responsible for writing
 runCommand(session: SparkSession, name: String)(command: LogicalPlan): Unit
 ----
 
-`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, execute the logical command>> (that simply creates a <<spark-sql-QueryExecution.md#, QueryExecution>>).
+`runCommand` uses the input `SparkSession` to access the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, execute the logical command>> (that simply creates a [QueryExecution](QueryExecution.md)).
 
-`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.md#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the <<spark-sql-QueryExecution.md#toRdd, RDD[InternalRow]>> (and triggers execution of logical commands).
+`runCommand` records the current time (start time) and uses the `SQLExecution` helper object to <<spark-sql-SQLExecution.md#withNewExecutionId, execute the action (under a new execution id)>> that simply requests the `QueryExecution` for the [RDD[InternalRow]](QueryExecution.md#toRdd) (and triggers execution of logical commands).
 
 TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notified when the execution is started and finished. The `SparkListener` should intercept `SparkListenerSQLExecutionStart` and `SparkListenerSQLExecutionEnd` events.
 
@@ -563,7 +563,7 @@ createTable(tableIdent: TableIdentifier): Unit
 
 `createTable` <<spark-sql-DataSource.md#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
 
-`createTable` assumes the table being xref:spark-sql-CatalogTable.md#CatalogTableType[external] when spark-sql-CatalogStorageFormat.md#locationUri[location URI] of `CatalogStorageFormat` is defined, and xref:spark-sql-CatalogTable.md#CatalogTableType[managed] otherwise.
+`createTable` assumes the table being spark-sql-CatalogTable.md#CatalogTableType[external] when spark-sql-CatalogStorageFormat.md#locationUri[location URI] of `CatalogStorageFormat` is defined, and spark-sql-CatalogTable.md#CatalogTableType[managed] otherwise.
 
 `createTable` creates a <<spark-sql-CatalogTable.md#, CatalogTable>> (with the <<spark-sql-CatalogTable.md#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
 

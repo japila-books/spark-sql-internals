@@ -1,6 +1,6 @@
 # PlanDynamicPruningFilters Physical Optimization
 
-`PlanDynamicPruningFilters` is a physical optimization and part of the default [physical optimizations (preparations)](../spark-sql-QueryExecution.md#preparations).
+`PlanDynamicPruningFilters` is a physical optimization and part of the default [physical optimizations (preparations)](../QueryExecution.md#preparations).
 
 `PlanDynamicPruningFilters` transforms [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expressions into [DynamicPruningExpression](../expressions/DynamicPruningExpression.md) expressions.
 
@@ -14,7 +14,7 @@
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
 
-`PlanDynamicPruningFilters` is created when `QueryExecution` utility is requested for [physical query optimizations](../spark-sql-QueryExecution.md#preparations).
+`PlanDynamicPruningFilters` is created when `QueryExecution` utility is requested for [physical query optimizations](../QueryExecution.md#preparations).
 
 ## <span id="apply"> Executing Rule
 

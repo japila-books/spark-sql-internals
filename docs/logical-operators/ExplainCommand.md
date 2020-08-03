@@ -26,7 +26,7 @@ run(
 
 `run` requests the given [SparkSession](../SparkSession.md) for [SessionState](../SparkSession.md#sessionState) that is requested to [execute](../SessionState.md#executePlan) the given [LogicalPlan](#logicalPlan).
 
-The result `QueryExecution` is requested to [explainString](../spark-sql-QueryExecution.md#explainString) with the given [ExplainMode](#mode) that becomes the output.
+The result `QueryExecution` is requested to [explainString](../QueryExecution.md#explainString) with the given [ExplainMode](#mode) that becomes the output.
 
 In case of a `TreeNodeException`, `run` gives the following output:
 

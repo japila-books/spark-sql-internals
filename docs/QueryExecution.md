@@ -11,7 +11,7 @@ image::images/QueryExecution-execution-pipeline.png[align="center"]
 
 NOTE: When you execute an operator on a `Dataset` it triggers <<toRdd, query execution>> that gives the good ol' `RDD` of spark-sql-InternalRow.md[internal binary rows], i.e. `RDD[InternalRow]`, that is Spark's execution plan followed by executing an RDD action and so the result of the structured query.
 
-`QueryExecution` is part of any `Dataset` using xref:spark-sql-Dataset.md#queryExecution[queryExecution] attribute.
+`QueryExecution` is part of any `Dataset` using spark-sql-Dataset.md#queryExecution[queryExecution] attribute.
 
 [source, scala]
 ----
@@ -94,7 +94,7 @@ a| [[toRdd]]
 toRdd: RDD[InternalRow]
 ----
 
-Spark Core's execution graph of a distributed computation (`RDD` of xref:spark-sql-InternalRow.md[internal binary rows]) from the <<executedPlan, executedPlan>> after xref:SparkPlan.md#execute[execution].
+Spark Core's execution graph of a distributed computation (`RDD` of spark-sql-InternalRow.md[internal binary rows]) from the <<executedPlan, executedPlan>> after SparkPlan.md#execute[execution].
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 

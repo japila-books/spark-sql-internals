@@ -162,7 +162,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to <<SessionState.md#executePlan, "execute">> the <<child, child logical plan>> (which simply creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>>).
+`run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to ["execute"](../SessionState.md#executePlan) the <<child, child logical plan>> (which simply creates a [QueryExecution](../QueryExecution.md)).
 
 [NOTE]
 ====

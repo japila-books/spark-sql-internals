@@ -138,7 +138,7 @@ Internally, `cacheQuery` requests the `Dataset` for the spark-sql-Dataset.md#log
 
 * Input `storageLevel` storage level (default: `MEMORY_AND_DISK`)
 
-* spark-sql-QueryExecution.md#executedPlan[Optimized physical query plan] (after requesting `SessionState` to SessionState.md#executePlan[execute] the analyzed logical plan)
+* [Optimized physical query plan](QueryExecution.md#executedPlan) (after requesting `SessionState` to [execute](SessionState.md#executePlan) the analyzed logical plan)
 
 * Input `tableName`
 
@@ -216,7 +216,7 @@ useCachedData(plan: LogicalPlan): LogicalPlan
 
 `useCachedData`...FIXME
 
-NOTE: `useCachedData` is used exclusively when `QueryExecution` is requested for a spark-sql-QueryExecution.md#withCachedData[cached logical query plan].
+`useCachedData` is used when `QueryExecution` is requested for a [cached logical query plan](QueryExecution.md#withCachedData).
 
 === [[lookupAndRefresh]] `lookupAndRefresh` Internal Method
 

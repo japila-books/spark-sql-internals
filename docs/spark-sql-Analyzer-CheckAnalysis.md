@@ -132,16 +132,13 @@ unresolved operator [o.simpleString]
 
 In the end, `checkAnalysis` spark-sql-LogicalPlan.md#setAnalyzed[marks the entire logical plan as analyzed].
 
-[NOTE]
-====
 `checkAnalysis` is used when:
 
-* `QueryExecution` spark-sql-QueryExecution.md#assertAnalyzed[creates analyzed logical plan and checks its correctness] (which happens mostly when a `Dataset` is spark-sql-Dataset.md#creating-instance[created])
+* `QueryExecution` is requested to [create an analyzed logical plan and checks its correctness](QueryExecution.md#assertAnalyzed) (which happens mostly when a `Dataset` is spark-sql-Dataset.md#creating-instance[created])
 
 * `ExpressionEncoder` does spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
 
 * `ResolveAggregateFunctions` is executed (for `Sort` logical plan)
-====
 
 === [[extendedCheckRules]] Extended Analysis Check Rules -- `extendedCheckRules` Extension Point
 

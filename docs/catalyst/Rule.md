@@ -40,4 +40,4 @@ The other notable use cases of `Rule` are as follows:
 
 * When `Optimizer` is requested for [extendedOperatorOptimizationRules](../Optimizer.md#extendedOperatorOptimizationRules)
 
-* When `QueryExecution` is requested for [preparations](../spark-sql-QueryExecution.md#preparations)
+* When `QueryExecution` is requested for [preparations](../QueryExecution.md#preparations)

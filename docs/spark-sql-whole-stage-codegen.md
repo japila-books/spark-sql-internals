@@ -38,7 +38,7 @@ NOTE: https://janino-compiler.github.io/janino/[Janino] is used to compile a Jav
 [[CollapseCodegenStages]]
 Before a query is executed, [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with spark-sql-SparkPlan-InputAdapter.md[InputAdapter] in-between for physical operators with no support for Java code generation).
 
-NOTE: `CollapseCodegenStages` is part of the sequence of physical preparation rules spark-sql-QueryExecution.md#preparations[QueryExecution.preparations] that will be applied in order to the physical plan before execution.
+`CollapseCodegenStages` is part of the sequence of physical preparation rules [QueryExecution.preparations](QueryExecution.md#preparations) that will be applied in order to the physical plan before execution.
 
 There are the following code generation paths (as coined in https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8[this commit]):
 

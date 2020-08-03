@@ -206,7 +206,7 @@ append[T <: QueryPlan[T]](
 
 `append` is used when:
 
-* `QueryExecution` is requested to [simpleString](../spark-sql-QueryExecution.md#simpleString), [writePlans](../spark-sql-QueryExecution.md#writePlans) and [stringWithStats](../spark-sql-QueryExecution.md#stringWithStats)
+* `QueryExecution` is requested to [simpleString](../QueryExecution.md#simpleString), [writePlans](../QueryExecution.md#writePlans) and [stringWithStats](../QueryExecution.md#stringWithStats)
 * `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`
 
 ## <span id="verboseStringWithOperatorId"> verboseStringWithOperatorId
@@ -222,7 +222,7 @@ verboseStringWithOperatorId(): String
 Arguments: [argumentString]
 ```
 
-`verboseStringWithOperatorId` is used when `QueryExecution` is requested for [simpleString](../spark-sql-QueryExecution.md#simpleString) (and `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`).
+`verboseStringWithOperatorId` is used when `QueryExecution` is requested for [simpleString](../QueryExecution.md#simpleString) (and `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`).
 
 ## <span id="formattedNodeName"> formattedNodeName
 

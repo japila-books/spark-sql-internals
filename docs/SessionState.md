@@ -116,7 +116,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.md#, ExecutionListenerManager>>
 * [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (`() => SessionResourceLoader`)
-* [[createQueryExecution]] `createQueryExecution` function to create a <<spark-sql-QueryExecution.md#, QueryExecution>> given a <<spark-sql-LogicalPlan.md#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
+* [[createQueryExecution]] `createQueryExecution` function to create a [QueryExecution](QueryExecution.md) given a <<spark-sql-LogicalPlan.md#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
 * [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (`(SparkSession, SessionState) => SessionState`)
 
 ## <span id="optimizerBuilder"> optimizerBuilder Function
@@ -131,7 +131,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 Used when:
 
-* `QueryExecution` is requested to [create an optimized logical plan](spark-sql-QueryExecution.md#optimizedPlan)
+* `QueryExecution` is requested to [create an optimized logical plan](QueryExecution.md#optimizedPlan)
 
 * (Structured Streaming) `IncrementalExecution` is requested to create an optimized logical plan
 
@@ -157,7 +157,7 @@ NOTE: `clone` is used when...
 executePlan(plan: LogicalPlan): QueryExecution
 ----
 
-`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.md#, logical plan>> (that simply creates a <<spark-sql-QueryExecution.md#creating-instance, QueryExecution>> with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
+`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.md#, logical plan>> (that simply creates a [QueryExecution](QueryExecution.md) with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
 
 === [[refreshTable]] `refreshTable` Method
 

@@ -14,16 +14,13 @@ run(sparkSession: SparkSession): Seq[Row]
 !!! note
     `RunnableCommand` logical operator is resolved to spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
 
-[NOTE]
-====
 `run` is executed when:
 
 * `ExecutedCommandExec` spark-sql-SparkPlan-ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
 
 * `InsertIntoHadoopFsRelationCommand` is spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[executed]
 
-* `QueryExecution` is requested to spark-sql-QueryExecution.md#hiveResultString[transform the result of executing DescribeTableCommand to a Hive-compatible output format]
-====
+* `QueryExecution` is requested to [transform the result of executing DescribeTableCommand to a Hive-compatible output format](../QueryExecution.md#hiveResultString)
 
 [[available-commands]]
 .Available RunnableCommands
@@ -229,7 +226,7 @@ Used exclusively when `DataFrameWriter` is requested to spark-sql-DataFrameWrite
 | StreamingExplainCommand
 |
 
-| xref:spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand]
+| spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand]
 | [[TruncateTableCommand]]
 
 | UncacheTableCommand

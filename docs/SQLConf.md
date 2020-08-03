@@ -299,7 +299,7 @@ a| [[ORC_IMPLEMENTATION]]
 
 Supported values:
 
-* `native` for xref:spark-sql-OrcFileFormat.md[OrcFileFormat]
+* `native` for spark-sql-OrcFileFormat.md[OrcFileFormat]
 * `hive` for `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
 | parallelFileListingInStatsComputation
@@ -339,7 +339,7 @@ a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-Inse
 | [[preferSortMergeJoin]] Used exclusively in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy to prefer sort merge join over shuffle hash join.
 
 | replaceDatabricksSparkAvroEnabled
-| xref:spark-sql-properties.md#spark.sql.legacy.replaceDatabricksSparkAvro.enabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]
+| spark-sql-properties.md#spark.sql.legacy.replaceDatabricksSparkAvro.enabled[spark.sql.legacy.replaceDatabricksSparkAvro.enabled]
 | [[replaceDatabricksSparkAvroEnabled]][[LEGACY_REPLACE_DATABRICKS_SPARK_AVRO_ENABLED]]
 
 | replaceExceptWithFilter
@@ -368,7 +368,7 @@ a| [[stringRedactionPattern]] Used when:
 
 * `DataSourceScanExec` is requested to spark-sql-SparkPlan-DataSourceScanExec.md#redact[redact sensitive information] (in text representations)
 
-* `QueryExecution` is requested to spark-sql-QueryExecution.md#withRedaction[redact sensitive information] (in text representations)
+* `QueryExecution` is requested to [redact sensitive information](QueryExecution.md#withRedaction) (in text representations)
 
 | subexpressionEliminationEnabled
 | spark-sql-properties.md#spark.sql.subexpressionElimination.enabled[spark.sql.subexpressionElimination.enabled]
@@ -387,8 +387,8 @@ a| [[supportQuotedRegexColumnName]] Used when:
 | [[targetPostShuffleInputSize]] Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>)
 
 | truncateTableIgnorePermissionAcl
-| xref:spark-sql-properties.md#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]
-| [[truncateTableIgnorePermissionAcl]][[TRUNCATE_TABLE_IGNORE_PERMISSION_ACL]] Used when xref:spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand] is executed
+| spark-sql-properties.md#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]
+| [[truncateTableIgnorePermissionAcl]][[TRUNCATE_TABLE_IGNORE_PERMISSION_ACL]] Used when spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand] is executed
 
 | useCompression
 | spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]

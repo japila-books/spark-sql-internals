@@ -6,9 +6,9 @@ title: CreateDataSourceTableAsSelectCommand
 
 NOTE: A DataSource table is a Spark SQL native table that uses any data source but Hive (per `USING` clause).
 
-`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
+`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
 
-NOTE: xref:spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a xref:spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
+NOTE: spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
 
 [source,plaintext]
 ----
@@ -44,9 +44,9 @@ org.apache.spark.sql.AnalysisException: Table default.users already exists. You 
 
 `CreateDataSourceTableAsSelectCommand` takes the following to be created:
 
-* [[table]] xref:spark-sql-CatalogTable.md[CatalogTable]
-* [[mode]] xref:spark-sql-DataFrameWriter.md#SaveMode[SaveMode]
-* [[query]] AS query (xref:spark-sql-LogicalPlan.md[LogicalPlan])
+* [[table]] spark-sql-CatalogTable.md[CatalogTable]
+* [[mode]] spark-sql-DataFrameWriter.md#SaveMode[SaveMode]
+* [[query]] AS query (spark-sql-LogicalPlan.md[LogicalPlan])
 * [[outputColumnNames]] Output column names (`Seq[String]`)
 
 === [[run]] Executing Data-Writing Logical Command -- `run` Method
@@ -62,7 +62,7 @@ NOTE: `run` is part of spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWriti
 
 `run`...FIXME
 
-`run` throws an `AssertionError` when the xref:spark-sql-CatalogTable.md#tableType[tableType] of the <<table, CatalogTable>> is `VIEW` or the xref:spark-sql-CatalogTable.md#provider[provider] is undefined.
+`run` throws an `AssertionError` when the spark-sql-CatalogTable.md#tableType[tableType] of the <<table, CatalogTable>> is `VIEW` or the spark-sql-CatalogTable.md#provider[provider] is undefined.
 
 === [[saveDataIntoTable]] `saveDataIntoTable` Internal Method
 
@@ -77,7 +77,7 @@ saveDataIntoTable(
   tableExists: Boolean): BaseRelation
 ----
 
-`saveDataIntoTable` creates a xref:spark-sql-BaseRelation.md[BaseRelation] for...FIXME
+`saveDataIntoTable` creates a spark-sql-BaseRelation.md[BaseRelation] for...FIXME
 
 `saveDataIntoTable`...FIXME
 

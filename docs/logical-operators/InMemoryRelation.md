@@ -24,7 +24,7 @@ NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory metho
 
 * `CatalogImpl` is requested to spark-sql-CatalogImpl.md#refreshByPath[refreshByPath] (and in turn requests `CacheManager` to spark-sql-CacheManager.md#recacheByPath[recacheByPath])
 
-* `QueryExecution` is requested for a spark-sql-QueryExecution.md#withCachedData[cached logical query plan] (and in turn requests `CacheManager` to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans])
+* `QueryExecution` is requested for a [cached logical query plan](../QueryExecution.md#withCachedData) (and in turn requests `CacheManager` to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans])
 
 [source, scala]
 ----

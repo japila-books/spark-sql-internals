@@ -302,11 +302,11 @@ explain(extended: Boolean): Unit
 
 TIP: Use `explain` to review the structured queries and optimizations applied.
 
-Internally, `explain` creates a spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command and requests `SessionState` to SessionState.md#executePlan[execute it] (to get a spark-sql-QueryExecution.md[QueryExecution] back).
+Internally, `explain` creates a spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command and requests `SessionState` to SessionState.md#executePlan[execute it] (to get a [QueryExecution](QueryExecution.md) back).
 
-NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command that, when spark-sql-LogicalPlan-ExplainCommand.md#run[executed], gives different text representations of spark-sql-QueryExecution.md[QueryExecution] (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
+NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command that, when spark-sql-LogicalPlan-ExplainCommand.md#run[executed], gives different text representations of [QueryExecution](QueryExecution.md) (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 
-`explain` then requests `QueryExecution` for the spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] and SparkPlan.md#executeCollect[collects the records] (as spark-sql-InternalRow.md[InternalRow] objects).
+`explain` then requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and [collects the records](physical-operators/SparkPlan.md#executeCollect) (as [InternalRow](spark-sql-InternalRow.md) objects).
 
 [NOTE]
 ====
@@ -362,7 +362,7 @@ scala> println(plan.numberedTreeString)
 01 +- Range (0, 3, step=1, splits=Some(8))
 ----
 
-NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers spark-sql-QueryExecution.md#analyzed[analysis phase] that executes spark-sql-LogicalPlan-Command.md[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
+NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers [analysis phase](QueryExecution.md#analyzed) that executes spark-sql-LogicalPlan-Command.md[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
 
 [source, scala]
 ----
@@ -387,13 +387,13 @@ localCheckpoint(eager: Boolean): Dataset[T]
 checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
 ----
 
-`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) to spark-sql-QueryExecution.md#toRdd[generate an RDD of internal binary rows] (aka `internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) to [generate an RDD of internal binary rows](QueryExecution.md#toRdd) (`internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
 
 Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
 
 With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
 
-`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
+`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for [optimized physical query plan](QueryExecution.md#executedPlan) (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
 
 In the end, `checkpoint` spark-sql-Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
@@ -449,7 +449,7 @@ toDF(colNames: String*): DataFrame
 
 `toDF` converts a spark-sql-Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
 
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and spark-sql-QueryExecution.md[QueryExecution] with the encoder being spark-sql-RowEncoder.md[RowEncoder].
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) with the encoder being spark-sql-RowEncoder.md[RowEncoder].
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 

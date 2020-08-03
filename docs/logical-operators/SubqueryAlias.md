@@ -32,7 +32,7 @@ as(alias: String): LogicalPlan
 subquery(alias: Symbol): LogicalPlan
 ----
 
-<<spark-sql-catalyst-dsl.md#subquery, subquery>> and <<spark-sql-catalyst-dsl.md#as, as>> operators in xref:spark-sql-catalyst-dsl.md[Catalyst DSL] create a <<creating-instance, SubqueryAlias>> logical operator, e.g. for testing or Spark SQL internals exploration.
+<<spark-sql-catalyst-dsl.md#subquery, subquery>> and <<spark-sql-catalyst-dsl.md#as, as>> operators in spark-sql-catalyst-dsl.md[Catalyst DSL] create a <<creating-instance, SubqueryAlias>> logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

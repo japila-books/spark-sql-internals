@@ -1,8 +1,8 @@
 # Command -- Eagerly-Executed Logical Operator
 
-`Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the spark-sql-QueryExecution.md#query-plan-lifecycle[query plan lifecycle] (unlike logical plans in general).
+`Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical plans in general).
 
-NOTE: `Command` is executed when a `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (which is after the query has been spark-sql-QueryExecution.md#analyzed[analyzed]).
+NOTE: `Command` is executed when a `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
 
 [[output]]
 `Command` has no catalyst/QueryPlan.md#output[output schema] by default.
@@ -17,10 +17,10 @@ NOTE: `Command` is executed when a `Dataset` is requested for the spark-sql-Data
 | Command
 | Description
 
-| xref:spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand]
+| spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand]
 | [[DataWritingCommand]]
 
-| xref:spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
+| spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
 | [[RunnableCommand]]
 
 |===

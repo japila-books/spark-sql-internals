@@ -20,7 +20,7 @@ Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 
 ## <span id="defaultBatches"> Default Rule Batches
 
-`Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](spark-sql-QueryExecution.md#optimizedPlan).
+`Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](QueryExecution.md#optimizedPlan).
 
 The base rule batches can be further refined (extended or [excluded](#excludedRules)).
 
@@ -319,7 +319,7 @@ Project [id#0L, (id#0L + 5) AS new_column#3L]
 +- *(1) Range (0, 5, step=1, splits=8)
 ```
 
-Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.md#optimizedPlan, optimizedPlan>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its [optimizedPlan](QueryExecution.md#optimizedPlan) property  (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 ```text
 val optimizedPlan = inventory.queryExecution.optimizedPlan

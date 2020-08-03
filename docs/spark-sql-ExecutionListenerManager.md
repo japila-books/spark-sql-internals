@@ -6,7 +6,7 @@ title: ExecutionListenerManager
 
 * Name of the action (that triggered a query execution)
 
-* spark-sql-QueryExecution.md[QueryExecution]
+* [QueryExecution](QueryExecution.md)
 
 * Execution time of this query (in nanoseconds)
 

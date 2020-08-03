@@ -131,8 +131,6 @@ a|
 | trait
 a| [[Unevaluable]] Cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations), i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and simply report an `UnsupportedOperationException`.
 
-`Unevaluable` expressions have to be resolved (replaced) to some other expressions or logical operators at <<spark-sql-QueryExecution.md#analyzed, analysis>> or <<spark-sql-QueryExecution.md#optimizedPlan, optimization>> phases or they fail analysis.
-
 ```
 /**
 Example: Analysis failure due to an Unevaluable expression

@@ -13,11 +13,11 @@ image::images/spark-sql-Dataset.png[align="center"]
 
 It is therefore fair to say that `Dataset` consists of the following three elements:
 
-. <<spark-sql-QueryExecution.md#, QueryExecution>> (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
+* [QueryExecution](QueryExecution.md) (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
 
-. <<spark-sql-Encoder.md#, Encoder>> (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.md#, InternalRow>>)
+* [Encoder](spark-sql-Encoder.md) (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.md#, InternalRow>>)
 
-. <<SparkSession.md#, SparkSession>>
+* [SparkSession](SparkSession.md)
 
 When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with a `SparkSession`, a `QueryExecution` and an `Encoder`.
 
@@ -121,13 +121,13 @@ It is only with Datasets to have syntax and analysis checks at compile time (tha
 
 Using `Dataset` objects turns `DataFrames` of spark-sql-Row.md[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
-If however a spark-sql-LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the spark-sql-QueryExecution.md[QueryExecution] plan.
+If however a spark-sql-LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the [QueryExecution](QueryExecution.md) plan.
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
-NOTE: SparkSession.md[SparkSession] and spark-sql-QueryExecution.md[QueryExecution] are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the spark-sql-Encoder.md[Encoder].
+NOTE: SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the spark-sql-Encoder.md[Encoder].
 
-You can request the <<spark-sql-dataset-operators.md#toDF, "untyped" view>> of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
+You can request the ["untyped" view](spark-sql-dataset-operators.md#toDF) of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
 The default storage level for `Datasets` is spark-rdd-caching.md[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however spark-sql-caching-and-persistence.md#persist[persist a `Dataset`].
 
@@ -135,7 +135,7 @@ NOTE: Spark 2.0 has introduced a new query model called spark-structured-streami
 
 A `Dataset` is spark-sql-dataset-operators.md#isLocal[local] if it was created from local collections using SparkSession.md#emptyDataset[SparkSession.emptyDataset] or SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
 
-NOTE: `Dataset` makes sure that the underlying `QueryExecution` is spark-sql-QueryExecution.md#analyzed[analyzed] and spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[checked].
+NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](QueryExecution.md#analyzed) and spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[checked].
 
 [[properties]]
 [[attributes]]
@@ -176,7 +176,7 @@ a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.md#, logical plan>> with all
 logicalPlan: LogicalPlan
 ----
 
-When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>>. If the plan is a <<spark-sql-LogicalPlan-Command.md#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
+When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for [analyzed logical plan](QueryExecution.md#analyzed). If the plan is a <<spark-sql-LogicalPlan-Command.md#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
 
 ! `planWithBarrier`
 a! [[planWithBarrier]]
@@ -218,7 +218,7 @@ res2: String =
  |  ParallelCollectionRDD[9] at toRdd at <console>:26 []
 ----
 
-`rdd` then requests `SessionState` to SessionState.md#executePlan[execute the logical plan] to get the corresponding spark-sql-QueryExecution.md#toRdd[RDD of binary rows].
+`rdd` then requests `SessionState` to SessionState.md#executePlan[execute the logical plan] to get the corresponding [RDD of binary rows](QueryExecution.md#toRdd).
 
 NOTE: `rdd` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[access `SessionState`].
 
@@ -239,7 +239,7 @@ Used when...FIXME
 inputFiles: Array[String]
 ----
 
-`inputFiles` requests <<queryExecution, QueryExecution>> for spark-sql-QueryExecution.md#optimizedPlan[optimized logical plan] and collects the following logical operators:
+`inputFiles` requests <<queryExecution, QueryExecution>> for [optimized logical plan](QueryExecution.md#optimizedPlan) and collects the following logical operators:
 
 * spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with spark-sql-FileRelation.md[FileRelation] (as the spark-sql-LogicalPlan-LogicalRelation.md#relation[BaseRelation])
 
@@ -266,13 +266,13 @@ CAUTION: FIXME
 
 `Dataset` takes the following when created:
 
-* [[sparkSession]] SparkSession.md[SparkSession]
-* [[queryExecution]] spark-sql-QueryExecution.md[QueryExecution]
-* [[encoder]] spark-sql-Encoder.md[Encoder] for the type `T` of the records
+* [[sparkSession]] [SparkSession](SparkSession.md)
+* [[queryExecution]] [QueryExecution](QueryExecution.md)
+* [[encoder]] [Encoder](spark-sql-Encoder.md) for the type `T` of the records
 
 NOTE: You can also create a `Dataset` using spark-sql-LogicalPlan.md[LogicalPlan] that is immediately SessionState.md#executePlan[executed using `SessionState`].
 
-Internally, `Dataset` requests <<queryExecution, QueryExecution>> to spark-sql-QueryExecution.md#assertAnalyzed[analyze itself].
+Internally, `Dataset` requests <<queryExecution, QueryExecution>> to [analyze itself](QueryExecution.md#assertAnalyzed).
 
 `Dataset` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -326,10 +326,8 @@ NOTE: `ofRows` is part of `Dataset` Scala object that is marked as a `private[sq
 
 `ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses spark-sql-RowEncoder.md[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 
-Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the spark-sql-QueryExecution.md[QueryExecution] and spark-sql-RowEncoder.md[RowEncoder].
+Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the [QueryExecution](QueryExecution.md) and [RowEncoder](spark-sql-RowEncoder.md).
 
-[NOTE]
-====
 `ofRows` is used when:
 
 * `DataFrameReader` is requested to [load data from a data source](DataFrameReader.md#load)
@@ -355,7 +353,6 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 * Spark Structured Streaming's `FileStreamSource` is requested to `getBatch`
 
 * Spark Structured Streaming's `MemoryStream` is requested to `toDF`
-====
 
 === [[withNewExecutionId]] Tracking Multi-Job Structured Query Execution (PySpark) -- `withNewExecutionId` Internal Method
 
@@ -382,7 +379,7 @@ Feel free to contact me at jacek@japila.pl if you think I should re-consider my 
 withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 ----
 
-`withAction` requests `QueryExecution` for the spark-sql-QueryExecution.md#executedPlan[optimized physical query plan] and SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
+`withAction` requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
 
 `withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.md#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
 

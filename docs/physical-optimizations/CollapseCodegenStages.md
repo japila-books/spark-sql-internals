@@ -21,7 +21,7 @@ The number is `100` by default.
 
 Technically, `CollapseCodegenStages` is just a <<catalyst/Rule.md#, Catalyst rule>> for transforming [physical query plans](physical-operators/SparkPlan.md), i.e. `Rule[SparkPlan]`.
 
-`CollapseCodegenStages` is part of <<spark-sql-QueryExecution.md#preparations, preparations>> batch of physical query plan rules and is executed when `QueryExecution` is requested for the <<spark-sql-QueryExecution.md#executedPlan, optimized physical query plan>> (i.e. in *executedPlan* phase of a query execution).
+`CollapseCodegenStages` is part of [preparations](../QueryExecution.md#preparations) batch of physical query plan rules and is executed when `QueryExecution` is requested for the [optimized physical query plan](../QueryExecution.md#executedPlan) (i.e. in *executedPlan* phase of a query execution).
 
 [source, scala]
 ----

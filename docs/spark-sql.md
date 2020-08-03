@@ -24,24 +24,24 @@ Whichever query interface you use to describe a structured query, i.e. SQL or Qu
 
     For **open source hackers**, Spark SQL proposes a novel, elegant way of building query planners. It is incredibly easy to add new optimizations under this framework.
 
-A `Dataset` is a programming interface to the [structured query execution pipeline](spark-sql-QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
+A `Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
 
 Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 
-When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-operators.md#show[show] or spark-sql-dataset-operators.md#count[count], or indirectly, e.g. spark-sql-DataFrameWriter.md#save[save] or spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the spark-sql-QueryExecution.md#execution-pipeline[execution stages]:
+When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-operators.md#show[show] or spark-sql-dataset-operators.md#count[count], or indirectly, e.g. spark-sql-DataFrameWriter.md#save[save] or spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the [execution stages](QueryExecution.md#execution-pipeline):
 
-. spark-sql-QueryExecution.md#analyzed[Logical Analysis]
-. spark-sql-QueryExecution.md#withCachedData[Caching Replacement]
-. spark-sql-QueryExecution.md#optimizedPlan[Logical Query Optimization] (using [rule-based](SparkOptimizer.md) and spark-sql-cost-based-optimization.md[cost-based] optimizations)
-. spark-sql-QueryExecution.md#sparkPlan[Physical Planning]
-. spark-sql-QueryExecution.md#executedPlan[Physical Optimization] (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or spark-sql-adaptive-query-execution.md[Adaptive Query Execution])
-. spark-sql-QueryExecution.md#toRdd[Constructing the RDD of Internal Binary Rows] (that represents the structured query in terms of Spark Core's RDD API)
+1. [Logical Analysis](QueryExecution.md#analyzed)
+1. [Caching Replacement](QueryExecution.md#withCachedData)
+1. [Logical Query Optimization](QueryExecution.md#optimizedPlan) (using [rule-based](SparkOptimizer.md) and spark-sql-cost-based-optimization.md[cost-based] optimizations)
+1. [Physical Planning](QueryExecution.md#sparkPlan)
+1. [Physical Optimization](QueryExecution.md#executedPlan) (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or spark-sql-adaptive-query-execution.md[Adaptive Query Execution])
+1. [Constructing the RDD of Internal Binary Rows](QueryExecution.md#toRdd) (that represents the structured query in terms of Spark Core's RDD API)
 
-As of Spark 2.0, Spark SQL is now _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and spark-sql-SparkPlanner.md#strategies[physical] query optimization strategies even without your consent).
+Spark SQL is _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and spark-sql-SparkPlanner.md#strategies[physical] query optimization strategies even without your consent).
 
 NOTE: You can find out more on the core of Apache Spark (aka _Spark Core_) in https://bit.ly/mastering-apache-spark[Mastering Apache Spark 2] gitbook.
 
-In other words, Spark SQL's `Dataset` API describes a distributed computation that will eventually be converted to a spark-sql-QueryExecution.md#toRdd[DAG of RDDs] for execution.
+In other words, Spark SQL's `Dataset` API describes a distributed computation that will eventually be converted to an [RDD](QueryExecution.md#toRdd) for execution.
 
 NOTE: Under the covers, structured queries are automatically compiled into corresponding RDD operations.
 

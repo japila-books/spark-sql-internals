@@ -6,7 +6,7 @@ title: InsertIntoTable
 
 * <<INSERT_INTO_TABLE, INSERT INTO>> and <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> SQL statements
 
-* xref:spark-sql-DataFrameWriter.md#insertInto[DataFrameWriter.insertInto] high-level operator
+* spark-sql-DataFrameWriter.md#insertInto[DataFrameWriter.insertInto] high-level operator
 
 [source, scala]
 ----
@@ -118,7 +118,7 @@ insertInto(
   overwrite: Boolean = false): LogicalPlan
 ----
 
-xref:spark-sql-catalyst-dsl.md#insertInto[insertInto] operator in xref:spark-sql-catalyst-dsl.md[Catalyst DSL] creates an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
+spark-sql-catalyst-dsl.md#insertInto[insertInto] operator in spark-sql-catalyst-dsl.md[Catalyst DSL] creates an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source,plaintext]
 ----

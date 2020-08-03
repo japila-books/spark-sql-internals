@@ -136,7 +136,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a spark-sql-CatalogTable.md[CatalogTable] and then SessionState.md#executePlan[executes] (by spark-sql-QueryExecution.md#toRdd[toRDD]) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the spark-sql-QueryExecution.md[QueryExecution] after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and spark-sql-RowEncoder.md[RowEncoder].
+`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a spark-sql-CatalogTable.md[CatalogTable] and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](spark-sql-RowEncoder.md).
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
@@ -218,7 +218,7 @@ NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSess
 
 `refreshTable` then SparkSession.md#table[creates a DataFrame for the table name].
 
-For a temporary or persistent `VIEW` table, `refreshTable` requests the spark-sql-QueryExecution.md#analyzed[analyzed] logical plan of the DataFrame (for the table) to spark-sql-LogicalPlan.md#refresh[refresh] itself.
+For a temporary or persistent `VIEW` table, `refreshTable` requests the [analyzed](QueryExecution.md#analyzed) logical plan of the DataFrame (for the table) to spark-sql-LogicalPlan.md#refresh[refresh] itself.
 
 For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatalog>> for spark-sql-SessionCatalog.md#refreshTable[refreshing the table metadata] (i.e. invalidating the table).
 

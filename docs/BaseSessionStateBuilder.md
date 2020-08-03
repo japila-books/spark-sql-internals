@@ -221,6 +221,6 @@ build(): SessionState
 createQueryExecution: LogicalPlan => QueryExecution
 ```
 
-`createQueryExecution` simply returns a function that takes a [LogicalPlan](logical-operators/LogicalPlan.md) and creates a [QueryExecution](spark-sql-QueryExecution.md) with the [SparkSession](#session) and the logical plan.
+`createQueryExecution` simply returns a function that takes a [LogicalPlan](logical-operators/LogicalPlan.md) and creates a [QueryExecution](QueryExecution.md) with the [SparkSession](#session) and the logical plan.
 
 `createQueryExecution` is used when `BaseSessionStateBuilder` is requested to [create a SessionState instance](#build).

@@ -948,11 +948,11 @@ Use [SQLConf.preferSortMergeJoin](SQLConf.md#preferSortMergeJoin) method to acce
 
 | [[spark.sql.legacy.rdd.applyConf]] *spark.sql.legacy.rdd.applyConf*
 
-*(internal)* Enables propagation of [SQL configurations](SQLConf.md#getAllConfs) when executing operations on the xref:spark-sql-QueryExecution.md#toRdd[RDD that represents a structured query]. This is the (buggy) behavior up to 2.4.4.
+*(internal)* Enables propagation of [SQL configurations](SQLConf.md#getAllConfs) when executing operations on the [RDD that represents a structured query](QueryExecution.md#toRdd). This is the (buggy) behavior up to 2.4.4.
 
 Default: `true`
 
-This is for cases not tracked by xref:spark-sql-SQLExecution.md[SQL execution], when a `Dataset` is converted to an RDD either using xref:spark-sql-Dataset.md#rdd[rdd] operation or xref:spark-sql-QueryExecution.md#toRdd[QueryExecution], and then the returned RDD is used to invoke actions on it.
+This is for cases not tracked by spark-sql-SQLExecution.md[SQL execution], when a `Dataset` is converted to an RDD either using spark-sql-Dataset.md#rdd[rdd] operation or [QueryExecution](QueryExecution.md#toRdd), and then the returned RDD is used to invoke actions on it.
 
 This config is deprecated and will be removed in 3.0.0.
 
@@ -1289,7 +1289,7 @@ Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminatio
 
 | [[spark.sql.truncateTable.ignorePermissionAcl.enabled]] *spark.sql.truncateTable.ignorePermissionAcl.enabled*
 
-*(internal)* Disables setting back original permission and ACLs when re-creating the table/partition paths for xref:spark-sql-LogicalPlan-TruncateTableCommand.md[TRUNCATE TABLE] command.
+*(internal)* Disables setting back original permission and ACLs when re-creating the table/partition paths for spark-sql-LogicalPlan-TruncateTableCommand.md[TRUNCATE TABLE] command.
 
 Default: `false`
 

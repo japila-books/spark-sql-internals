@@ -74,6 +74,7 @@ google_analytics:
 nav:
   - Home:
     - index.md
+    - QueryExecution: QueryExecution.md
     - SparkSession:
       - SparkSession: SparkSession.md
       - SparkSession.Builder: SparkSession-Builder.md
@@ -336,9 +337,6 @@ nav:
           - spark-sql-TableScan.md
         - spark-sql-Filter.md
     - Structured Query Execution:
-      - QueryExecution:
-        - spark-sql-QueryExecution.md
-        - spark-sql-UnsupportedOperationChecker.md
       - Logical Analyzer:
         - Analyzer: Analyzer.md
         - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
@@ -372,6 +370,7 @@ nav:
         - spark-sql-Distribution-OrderedDistribution.md
         - spark-sql-Distribution-UnspecifiedDistribution.md
       - spark-sql-ShuffledRowRDD.md
+      - spark-sql-UnsupportedOperationChecker.md
     - Catalyst:
       - Tree Manipulation Framework: catalyst/index.md
       - TreeNode: catalyst/TreeNode.md

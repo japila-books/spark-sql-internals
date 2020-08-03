@@ -58,9 +58,9 @@ spark.sparkContext.addSparkListener(sqlListener)
 NOTE: Jobs without <<spark.sql.execution.id, spark.sql.execution.id>> key are not considered to belong to SQL query executions.
 
 [[executionIdToQueryExecution]]
-`SQLExecution` keeps track of all execution ids and their spark-sql-QueryExecution.md[QueryExecutions] in `executionIdToQueryExecution` internal registry.
+`SQLExecution` keeps track of all execution ids and their [QueryExecutions](QueryExecution.md) in `executionIdToQueryExecution` internal registry.
 
-TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the spark-sql-QueryExecution.md[QueryExecution] for an execution id.
+TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the [QueryExecution](QueryExecution.md) for an execution id.
 
 === [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Under New Execution Id -- `withNewExecutionId` Method
 
@@ -101,7 +101,7 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 getQueryExecution(executionId: Long): QueryExecution
 ----
 
-`getQueryExecution` simply gives the spark-sql-QueryExecution.md[QueryExecution] for the `executionId` or `null` if not found.
+`getQueryExecution` simply gives the [QueryExecution](QueryExecution.md) for the `executionId` or `null` if not found.
 
 === [[withExecutionId]] Executing Action (with Zero or More Spark Jobs) Tracked Under Given Execution Id -- `withExecutionId` Method
 

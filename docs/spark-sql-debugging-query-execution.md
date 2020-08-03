@@ -62,13 +62,13 @@ TIP: Read up on https://docs.scala-lang.org/overviews/core/implicit-classes.html
 debug(): Unit
 ----
 
-`debug` requests the <<spark-sql-Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the <<spark-sql-QueryExecution.md#executedPlan, optimized physical query plan>>.
+`debug` requests the <<spark-sql-Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
 `debug` [transforms](catalyst/TreeNode.md#transform) the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.md#, DebugExec>> physical operator for every physical operator.
 
 `debug` requests the query plan to <<SparkPlan.md#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
 
-```
+```text
 Results returned: [count]
 ```
 
@@ -104,12 +104,11 @@ Tuples output: 0
 debugCodegen(): Unit
 ----
 
-`debugCodegen` requests the <<spark-sql-Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the <<spark-sql-QueryExecution.md#executedPlan, optimized physical query plan>>.
+`debugCodegen` requests the [QueryExecution](spark-sql-Dataset.md#queryExecution) (of the [structured query](#query)) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
 In the end, `debugCodegen` simply <<codegenString, codegenString>> the query plan and prints it out to the standard output.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.execution.debug._
 
 scala> spark.range(10).where('id === 4).debugCodegen
@@ -126,7 +125,7 @@ Generated code:
 /* 005 */ final class GeneratedIterator extends org.apache.spark.sql.execution.BufferedRowIterator {
 /* 006 */   private Object[] references;
 ...
-----
+```
 
 [NOTE]
 ====

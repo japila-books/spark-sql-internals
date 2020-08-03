@@ -24,10 +24,9 @@ Execute ShowTablesCommand
    +- ShowTablesCommand false
 ----
 
-You can also access the statistics of a logical plan directly using <<stats, stats>> method or indirectly requesting `QueryExecution` for spark-sql-QueryExecution.md#stringWithStats[text representation with statistics].
+You can also access the statistics of a logical plan directly using <<stats, stats>> method or indirectly requesting `QueryExecution` for [text representation with statistics](QueryExecution.md#stringWithStats).
 
-[source, scala]
-----
+```text
 val q = sql("SHOW TABLES")
 scala> println(q.queryExecution.analyzed.stats)
 Statistics(sizeInBytes=1.0 B, hints=none)
@@ -39,10 +38,9 @@ ShowTablesCommand false, Statistics(sizeInBytes=1.0 B, hints=none)
 == Physical Plan ==
 Execute ShowTablesCommand
    +- ShowTablesCommand false
-----
+```
 
-[source, scala]
-----
+```text
 val names = Seq((1, "one"), (2, "two")).toDF("id", "name")
 
 // CBO is turned off by default
@@ -123,7 +121,7 @@ Statistics(sizeInBytes=1064.0 B, hints=none)
 val namesTableStats = spark.table("names").queryExecution.optimizedPlan.stats
 scala> println(namesTableStats)
 Statistics(sizeInBytes=64.0 B, rowCount=2, hints=none)
-----
+```
 
 NOTE: The <<stats, statistics>> of a Dataset are unaffected by spark-sql-CacheManager.md#cacheQuery[caching] it.
 
@@ -171,7 +169,7 @@ In the end, `statsCache` caches the statistics for later use.
    * [that is much smaller (3X) than the other plan](execution-planning-strategies/JoinSelection.md#muchSmaller) (for `ShuffledHashJoinExec` physical operator)
    * ...
 
-* `QueryExecution` is requested for spark-sql-QueryExecution.md#stringWithStats[stringWithStats] for `EXPLAIN COST` SQL command
+* `QueryExecution` is requested for [stringWithStats](QueryExecution.md#stringWithStats) for `EXPLAIN COST` SQL command
 
 * `CacheManager` is requested to spark-sql-CacheManager.md#cacheQuery[cache a Dataset] or spark-sql-CacheManager.md#recacheByCondition[recacheByCondition]
 

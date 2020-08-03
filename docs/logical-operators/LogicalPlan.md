@@ -59,7 +59,7 @@ stats(
 `stats` is used when:
 
 * A `LogicalPlan` <<computeStats, computes `Statistics`>>
-* `QueryExecution` spark-sql-QueryExecution.md#completeString[builds complete text representation]
+* `QueryExecution` is requested to [build a complete text representation](../QueryExecution.md#completeString)
 * `JoinSelection` [checks whether a plan can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast) et al
 * spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] attempts to reorder inner joins
 * `LimitPushDown` is spark-sql-Optimizer-LimitPushDown.md#apply[executed] (for spark-sql-joins.md#FullOuter[FullOuter] join)
@@ -120,7 +120,7 @@ resolve(
 
 ## Accessing Logical Query Plan of Structured Query
 
-In order to get the <<spark-sql-QueryExecution.md#logical, logical plan>> of a structured query you should use the <<spark-sql-Dataset.md#queryExecution, QueryExecution>>.
+In order to get the [logical plan](../QueryExecution.md#logical) of a structured query you should use the <<spark-sql-Dataset.md#queryExecution, QueryExecution>>.
 
 ```text
 scala> :type q
@@ -131,7 +131,7 @@ scala> :type plan
 org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 ```
 
-`LogicalPlan` goes through [execution stages](../spark-sql-QueryExecution.md#execution-pipeline) (as a [QueryExecution](../spark-sql-QueryExecution.md)). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to ["execute" the plan](../SessionState.md#executePlan).
+`LogicalPlan` goes through [execution stages](../QueryExecution.md#execution-pipeline) (as a [QueryExecution](../QueryExecution.md)). In order to convert a `LogicalPlan` to a `QueryExecution` you should use `SessionState` and request it to ["execute" the plan](../SessionState.md#executePlan).
 
 ```text
 scala> :type spark
@@ -157,7 +157,7 @@ maxRows: Option[Long] = None
 
 ## Executing Logical Plan
 
-A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the [SessionState](../SparkSession.md#sessionState) that is in turn requested to ["execute"](../SessionState.md#executePlan) the logical plan (which simply creates a [QueryExecution](../spark-sql-QueryExecution.md)).
+A common idiom in Spark SQL to make sure that a logical plan can be analyzed is to request a `SparkSession` for the [SessionState](../SparkSession.md#sessionState) that is in turn requested to ["execute"](../SessionState.md#executePlan) the logical plan (which simply creates a [QueryExecution](../QueryExecution.md)).
 
 ```text
 scala> :type plan
@@ -172,7 +172,7 @@ val analyzedPlan = qe.analyzed
 
 ## Converting Logical Plan to Dataset
 
-Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../spark-sql-Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../spark-sql-Dataset.md) with the [QueryExecution](../spark-sql-QueryExecution.md) and [RowEncoder](../spark-sql-RowEncoder.md).
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../spark-sql-Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../spark-sql-Dataset.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../spark-sql-RowEncoder.md).
 
 ## <span id="childrenResolved"> childrenResolved
 

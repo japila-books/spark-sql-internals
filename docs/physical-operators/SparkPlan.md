@@ -379,7 +379,7 @@ execute(): RDD[InternalRow]
 
 Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
-[execute](#execute) is called when `QueryExecution` is requested for the spark-sql-QueryExecution.md#toRdd[RDD] that is Spark Core's physical execution plan (as a RDD lineage) that triggers query execution (i.e. physical planning, but not execution of the plan) and _could_ be considered execution of a structured query.
+[execute](#execute) is called when `QueryExecution` is requested for the [RDD](../QueryExecution.md#toRdd) that is Spark Core's physical execution plan (as a RDD lineage) that triggers query execution (i.e. physical planning, but not execution of the plan) and _could_ be considered execution of a structured query.
 
 The _could_ part above refers to the fact that the final execution of a structured query happens only when a RDD action is executed on the RDD of a structured query. And hence the need for Spark SQL's high-level Dataset API in which the Dataset operators simply execute a RDD action on the corresponding RDD. _Easy, isn't it?_
 

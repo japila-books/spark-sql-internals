@@ -27,7 +27,7 @@ image::images/spark-webui-storage.png[align="center"]
 
 `persist` uses <<spark-sql-CacheManager.md#, CacheManager>> for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> logical operators), and is used to <<spark-sql-CacheManager.md#cacheQuery, cache structured queries>> (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators).
 
-At <<spark-sql-QueryExecution.md#withCachedData, withCachedData>> phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to <<spark-sql-CacheManager.md#useCachedData, replace segments of a logical query plan with their cached data>> (including <<spark-sql-subqueries.md#, subqueries>>).
+At [withCachedData](QueryExecution.md#withCachedData) phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to <<spark-sql-CacheManager.md#useCachedData, replace segments of a logical query plan with their cached data>> (including <<spark-sql-subqueries.md#, subqueries>>).
 
 ```
 scala> println(data.queryExecution.withCachedData.numberedTreeString)

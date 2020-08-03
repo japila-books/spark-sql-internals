@@ -61,11 +61,11 @@ write(
   topic: Option[String] = None): Unit
 ----
 
-`write` gets the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>> of the input <<spark-sql-QueryExecution.md#, QueryExecution>>.
+`write` gets the [output schema](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the input [QueryExecution](QueryExecution.md).
 
 `write` then <<validateQuery, validates the schema of a structured query>>.
 
-In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution.md#toRdd, RDD[InternalRow]>> (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
+In the end, `write` requests the `QueryExecution` for [RDD[InternalRow]](QueryExecution.md#toRdd) (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
 
 . Creates a <<spark-sql-KafkaWriteTask.md#creating-instance, KafkaWriteTask>> (for the input `kafkaParameters`, the schema and the input `topic`)
 
@@ -73,14 +73,11 @@ In the end, `write` requests the `QueryExecution` for <<spark-sql-QueryExecution
 
 . Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.md#close, close>>
 
-[NOTE]
-====
 `write` is used when:
 
 * `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic>>
 
 * (Spark Structured Streaming) `KafkaSink` is requested to `addBatch`
-====
 
 === [[validateQuery]] Validating Schema (Attributes) of Structured Query and Topic Option Availability -- `validateQuery` Method
 

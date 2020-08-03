@@ -4,7 +4,7 @@ title: CatalogTable
 
 `CatalogTable` is the *specification* (_metadata_) of a table.
 
-`CatalogTable` is stored in a xref:spark-sql-SessionCatalog.md[SessionCatalog] (session-scoped catalog of relational entities).
+`CatalogTable` is stored in a spark-sql-SessionCatalog.md[SessionCatalog] (session-scoped catalog of relational entities).
 
 [source, scala]
 ----

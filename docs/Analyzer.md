@@ -58,7 +58,7 @@ Project [id#0L, (id#0L + 5) AS new_column#3L]
 +- *(1) Range (0, 5, step=1, splits=8)
 ----
 
-Alternatively, you can access the analyzed logical plan using `QueryExecution` and its <<spark-sql-QueryExecution.md#analyzed, analyzed>> property  (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its [analyzed](QueryExecution.md#analyzed) property  (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 [source, scala]
 ----
@@ -93,7 +93,7 @@ Set when `Analyzer` <<creating-instance, is created>> (and can be defined explic
 | The only catalyst/Rule.md[rules] in <<Post-Hoc-Resolution, Post-Hoc Resolution>> batch if defined (that are executed in one pass, i.e. `Once` strategy). Empty by default
 |===
 
-`Analyzer` is used by `QueryExecution` to spark-sql-QueryExecution.md#analyzed[resolve the managed `LogicalPlan`] (and, as a sort of follow-up, spark-sql-QueryExecution.md#assertAnalyzed[assert that a structured query has already been properly analyzed], i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).
+`Analyzer` is used by `QueryExecution` to [resolve the managed `LogicalPlan`](QueryExecution.md#analyzed) (and, as a sort of follow-up, [assert that a structured query has already been properly analyzed](QueryExecution.md#assertAnalyzed), i.e. no failed or unresolved or somehow broken logical plan operators and expressions exist).
 
 [[logging]]
 [TIP]
@@ -389,4 +389,4 @@ executeAndCheck(plan: LogicalPlan): LogicalPlan
 
 `executeAndCheck`...FIXME
 
-NOTE: `executeAndCheck` is used exclusively when `QueryExecution` is requested for the <<spark-sql-QueryExecution.md#analyzed, analyzed logical plan>>.
+`executeAndCheck` is used when `QueryExecution` is requested for the [analyzed logical plan](QueryExecution.md#analyzed).
