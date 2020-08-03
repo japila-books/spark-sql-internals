@@ -1,172 +1,101 @@
-title: QueryExecution
+# QueryExecution &mdash; Structured Query Execution Pipeline
 
-# QueryExecution -- Structured Query Execution Pipeline
+`QueryExecution` is the [execution pipeline](#execution-pipeline) (_workflow_) of a [structured query](#logical).
 
-`QueryExecution` is the <<execution-pipeline, execution pipeline>> (_workflow_) of a <<logical, structured query>>.
+`QueryExecution` is made up of **execution stages** (phases).
 
-`QueryExecution` is made up of *execution stages* (phases).
+![Query Execution &mdash; From SQL through Dataset to RDD](images/QueryExecution-execution-pipeline.png)
 
-.Query Execution &mdash; From SQL through Dataset to RDD
-image::images/QueryExecution-execution-pipeline.png[align="center"]
+`QueryExecution` is the result of [executing a LogicalPlan in a SparkSession](SessionState.md#executePlan) (and so you could create a `Dataset` from a [logical operator](../logical-operators/LogicalPlan.md) or use the `QueryExecution` after executing a logical operator).
 
-NOTE: When you execute an operator on a `Dataset` it triggers <<toRdd, query execution>> that gives the good ol' `RDD` of spark-sql-InternalRow.md[internal binary rows], i.e. `RDD[InternalRow]`, that is Spark's execution plan followed by executing an RDD action and so the result of the structured query.
-
-`QueryExecution` is part of any `Dataset` using spark-sql-Dataset.md#queryExecution[queryExecution] attribute.
-
-[source, scala]
-----
-val ds: Dataset[Long] = ...
-val queryExec = ds.queryExecution
-----
-
-`QueryExecution` is the result of SessionState.md#executePlan[executing a LogicalPlan in a SparkSession] (and so you could create a `Dataset` from a spark-sql-LogicalPlan.md[logical operator] or use the `QueryExecution` after executing a logical operator).
-
-[source, scala]
-----
+```text
 val plan: LogicalPlan = ...
 val qe = new QueryExecution(sparkSession, plan)
-----
+```
 
-[[attributes]]
-[[execution-pipeline]]
-[[query-plan-lifecycle]]
-.QueryExecution's Properties (aka QueryExecution Phases / Structured Query Execution Pipeline)
-[cols="1m,3",options="header",width="100%"]
-|===
-| Attribute / Phase
-| Description
+## Accessing QueryExecution
 
-| analyzed
-a| [[analyzed]] Analyzed <<logical, logical plan>> that has passed [Logical Analyzer](Analyzer.md).
+`QueryExecution` is part of `Dataset` using [queryExecution](spark-sql-Dataset.md#queryExecution) attribute.
 
-TIP: Beside `analyzed`, you can use spark-sql-dataset-operators.md#explain[Dataset.explain] basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
+```text
+val ds: Dataset[Long] = ...
+ds.queryExecution
+```
 
-| withCachedData
-| [[withCachedData]] <<analyzed, analyzed>> logical plan after `CacheManager` was requested to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans].
+## <span id="attributes"><span id="execution-pipeline"><span id="query-plan-lifecycle"> Execution Pipeline Phases
 
-`withCachedData` makes sure that the logical plan was <<assertAnalyzed, analyzed>> and <<assertSupported, uses supported operations only>>.
+### <span id="analyzed"> Analyzed Logical Plan
 
-| optimizedPlan
-| [[optimizedPlan]] Optimized spark-sql-LogicalPlan.md[logical plan] that is the result of executing the SessionState.md#optimizer[logical query plan optimizer] on the <<withCachedData, withCachedData>> logical plan.
+Analyzed [logical plan](#logical) that has passed [Logical Analyzer](Analyzer.md).
 
-| sparkPlan
-a| [[sparkPlan]] SparkPlan.md[Physical plan] (after spark-sql-SparkPlanner.md[SparkPlanner] has planned the <<optimizedPlan, optimized logical plan>>).
+!!! tip
+    Beside `analyzed`, you can use [Dataset.explain](spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
-NOTE: `sparkPlan` is the first physical plan from the collection of all possible physical plans.
+### <span id="withCachedData"> Analyzed Logical Plan with Cached Data
 
-NOTE: It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) catalyst/QueryPlanner.md#plan[will always generate at least one physical plan].
+[Analyzed](#analyzed) logical plan after `CacheManager` was requested to [replace logical query segments with cached query plans](spark-sql-CacheManager.md#useCachedData).
 
-| executedPlan
-a| [[executedPlan]] Optimized <<SparkPlan.md#, physical query plan>> that is in the final optimized "shape" and therefore ready for execution, i.e. the <<sparkPlan, physical sparkPlan>> with <<prepareForExecution, physical preparation rules applied>>.
+`withCachedData` makes sure that the logical plan was [analyzed](#assertAnalyzed) and [uses supported operations only](#assertSupported).
 
-NOTE: Amongst the physical optimization rules that `executedPlan` phase triggers is the [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule that collapses physical operators that support code generation together as a spark-sql-SparkPlan-WholeStageCodegenExec.md[WholeStageCodegenExec] operator.
+### <span id="optimizedPlan"> Optimized Logical Plan
 
-[NOTE]
-====
-`executedPlan` physical plan is used when:
+Logical plan after executing the [logical query plan optimizer](SessionState.md#optimizer) on the [withCachedData](#withCachedData) logical plan.
 
-* <<spark-sql-dataset-operators.md#explain, Dataset.explain>> operator is used to show the logical and physical query plans of a structured query
+### <span id="sparkPlan"> Physical Plan
 
-* <<spark-sql-dataset-operators.md#localCheckpoint, Dataset.localCheckpoint>> and <<spark-sql-dataset-operators.md#checkpoint, Dataset.checkpoint>> operators are used (through <<spark-sql-Dataset-basic-actions.md#checkpoint-internal, checkpoint>>)
+[Physical plan](physical-operators/SparkPlan.md) (after [SparkPlanner](spark-sql-SparkPlanner.md) has planned the [optimized logical plan](#optimizedPlan)).
 
-* <<spark-sql-dataset-operators.md#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.md#foreachPartition, Dataset.foreachPartition>> actions are used (through <<spark-sql-Dataset.md#withNewRDDExecutionId, withNewRDDExecutionId>>)
+`sparkPlan` is the first physical plan from the collection of all possible physical plans.
 
-* `Dataset` is requested to <<spark-sql-Dataset.md#withAction, execute an action under a new execution ID>> (e.g. for the Dataset operators: <<spark-sql-dataset-operators.md#collect, collect>>, <<spark-sql-dataset-operators.md#count, count>>, <<spark-sql-dataset-operators.md#head, head>> and <<spark-sql-dataset-operators.md#toLocalIterator, toLocalIterator>>)
+!!! note
+    It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) [will always generate at least one physical plan](catalyst/QueryPlanner.md#plan).
 
-* `CacheManager` is requested to <<spark-sql-CacheManager.md#cacheQuery, cacheQuery>> (e.g. for <<spark-sql-dataset-operators.md#persist, Dataset.persist>> basic action) or <<spark-sql-CacheManager.md#recacheByCondition, recacheByCondition>>
+### <span id="executedPlan"> Optimized Physical Plan
 
-* `QueryExecution` is requested for the `RDD[InternalRow]` of a structured query (in the <<toRdd, toRdd>> query execution phase), <<simpleString, simpleString>>, <<toString, toString>>, <<stringWithStats, stringWithStats>>, <<spark-sql-debugging-query-execution.md#codegenToSeq, codegenToSeq>>, and the <<hiveResultString, Hive-compatible output format>>
+Optimized physical plan that is in the final optimized "shape" and therefore ready for execution, i.e. the [physical sparkPlan](#sparkPlan) with [physical preparation rules applied](#prepareForExecution).
 
-* `SQLExecution` is requested to <<spark-sql-SQLExecution.md#withNewExecutionId, execute a Dataset action under a new execution id>>
+### <span id="toRdd"> RDD
 
-* [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization is executed
-
-* <<spark-sql-LogicalPlan-AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-ExplainCommand.md#, ExplainCommand>> logical commands are executed
-
-* `DebugQuery` is requested for `debug` and `debugCodegen`
-====
-
-| toRdd
-a| [[toRdd]]
-
-[source, scala]
-----
+```scala
 toRdd: RDD[InternalRow]
-----
+```
 
-Spark Core's execution graph of a distributed computation (`RDD` of spark-sql-InternalRow.md[internal binary rows]) from the <<executedPlan, executedPlan>> after SparkPlan.md#execute[execution].
+Spark Core's execution graph of a distributed computation (`RDD` of [internal binary rows](spark-sql-InternalRow.md)) from the [executedPlan](#executedPlan) after [execution](SparkPlan.md#execute).
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 
-[NOTE]
-====
-`toRdd` is a "boundary" between two Spark modules: Spark SQL and Spark Core.
+!!! note
+    `toRdd` is a "boundary" between two Spark modules: Spark SQL and Spark Core.
 
-After you have executed `toRdd` (directly or not), you basically "leave" Spark SQL's Dataset world and "enter" Spark Core's RDD space.
-====
+    After you have executed `toRdd` (directly or not), you basically "leave" Spark SQL's Dataset world and "enter" Spark Core's RDD space.
 
-`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using SparkPlan.md#execute[SparkPlan.execute] that recursively triggers execution of every child physical operator in the physical plan tree.
+`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using [SparkPlan.execute](SparkPlan.md#execute) that recursively triggers execution of every child physical operator in the physical plan tree.
 
-NOTE: You can use SparkSession.md#internalCreateDataFrame[SparkSession.internalCreateDataFrame] to apply a spark-sql-StructType.md[schema] to an `RDD[InternalRow]`.
+!!! note
+    [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](spark-sql-StructType.md) to an `RDD[InternalRow]`.
 
-NOTE: Use spark-sql-dataset-operators.md#rdd[Dataset.rdd] to access the `RDD[InternalRow]` with internal binary rows deserialized to a Scala type.
-|===
+!!! note
+    [Dataset.rdd](spark-sql-dataset-operators.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.
 
 You can access the lazy attributes as follows:
 
-[source, scala]
-----
+```text
 val dataset: Dataset[Long] = ...
 dataset.queryExecution.executedPlan
-----
+```
 
 `QueryExecution` uses the [Logical Query Optimizer](Optimizer.md) and [Tungsten](spark-sql-tungsten.md) for better structured query performance.
 
-[[properties]]
-.QueryExecution's Properties
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[planner]] `planner`
-| [SparkPlanner](spark-sql-SparkPlanner.md)
-|===
-
 `QueryExecution` uses the input `SparkSession` to access the current spark-sql-SparkPlanner.md[SparkPlanner] (through SessionState.md[SessionState]) when <<creating-instance, it is created>>. It then computes a SparkPlan.md[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 
-[NOTE]
-====
-A variant of `QueryExecution` that Spark Structured Streaming uses for query planning is `IncrementalExecution`.
+!!! note
+    A variant of `QueryExecution` that Spark Structured Streaming uses for query planning is `IncrementalExecution`.
 
-Refer to https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-IncrementalExecution.html[IncrementalExecution — QueryExecution of Streaming Datasets] in the Spark Structured Streaming gitbook.
-====
+    Refer to [IncrementalExecution — QueryExecution of Streaming Datasets](https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-IncrementalExecution.html) in the Spark Structured Streaming online gitbook.
 
-TIP: Use spark-sql-dataset-operators.md#explain[explain] operator to know about the logical and physical plans of a `Dataset`.
+## <span id="planner"> SparkPlanner
 
-[source, scala]
-----
-val ds = spark.range(5)
-scala> ds.queryExecution
-res17: org.apache.spark.sql.execution.QueryExecution =
-== Parsed Logical Plan ==
-Range 0, 5, 1, 8, [id#39L]
-
-== Analyzed Logical Plan ==
-id: bigint
-Range 0, 5, 1, 8, [id#39L]
-
-== Optimized Logical Plan ==
-Range 0, 5, 1, 8, [id#39L]
-
-== Physical Plan ==
-WholeStageCodegen
-:  +- Range 0, 1, 8, 5, [id#39L]
-----
-
-NOTE: `QueryExecution` belongs to `org.apache.spark.sql.execution` package.
-
-NOTE: `QueryExecution` is a transient feature of a spark-sql-Dataset.md[Dataset], i.e. it is not preserved across serializations.
+[SparkPlanner](spark-sql-SparkPlanner.md)
 
 ## <span id="stringWithStats"> Text Representation With Statistics
 
@@ -269,78 +198,61 @@ prepareExecutedPlan(
 
 `prepareExecutedPlan` is used when [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization is executed.
 
-=== [[prepareForExecution]] Applying preparations Physical Query Optimization Rules to Physical Plan -- `prepareForExecution` Method
+## <span id="prepareForExecution"> Applying preparations Physical Query Optimization Rules to Physical Plan
 
-[source, scala]
-----
-prepareForExecution(plan: SparkPlan): SparkPlan
-----
+```scala
+prepareForExecution(
+  plan: SparkPlan): SparkPlan
+```
 
 `prepareForExecution` takes <<preparations, physical preparation rules>> and applies them one by one to the input physical `plan`.
 
-NOTE: `prepareForExecution` is used exclusively when `QueryExecution` is requested to <<executedPlan, prepare the physical plan for execution>>.
+`prepareForExecution` is used when `QueryExecution` is requested to <<executedPlan, prepare the physical plan for execution>>.
 
-=== [[assertSupported]] `assertSupported` Method
+## <span id="assertSupported"> assertSupported Method
 
-[source, scala]
-----
+```scala
 assertSupported(): Unit
-----
+```
 
-`assertSupported` requests `UnsupportedOperationChecker` to spark-sql-UnsupportedOperationChecker.md#checkForBatch[checkForBatch] when...FIXME
+`assertSupported` requests `UnsupportedOperationChecker` to [checkForBatch](spark-sql-UnsupportedOperationChecker.md#checkForBatch) when...FIXME
 
-NOTE: `assertSupported` is used exclusively when `QueryExecution` is requested for <<withCachedData, withCachedData>> logical plan.
+`assertSupported` is used when `QueryExecution` is requested for [withCachedData](#withCachedData) logical plan.
 
-=== [[assertAnalyzed]] Creating Analyzed Logical Plan and Checking Correctness -- `assertAnalyzed` Method
+## <span id="assertAnalyzed"> Creating Analyzed Logical Plan and Checking Correctness
 
-[source, scala]
-----
+```scala
 assertAnalyzed(): Unit
-----
+```
 
-`assertAnalyzed` triggers initialization of <<analyzed, analyzed>> (which is almost like executing it).
+`assertAnalyzed` triggers initialization of [analyzed](#analyzed) (which is almost like executing it).
 
-NOTE: `assertAnalyzed` executes <<analyzed, analyzed>> by accessing it and throwing the result away. Since `analyzed` is a lazy value in Scala, it will then get initialized for the first time and stays so forever.
+`assertAnalyzed` executes [analyzed](#analyzed) by accessing it and throwing the result away. Since `analyzed` is a lazy value in Scala, it will then get initialized for the first time and stays so forever.
 
-`assertAnalyzed` then requests `Analyzer` to spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[validate analysis of the logical plan] (i.e. `analyzed`).
+`assertAnalyzed` then requests `Analyzer` to [validate analysis of the logical plan](spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis) (i.e. `analyzed`).
 
-[NOTE]
-====
-`assertAnalyzed` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[access the current `SessionState`] that it then uses to SessionState.md#analyzer[access the `Analyzer`].
+!!! note
+    `assertAnalyzed` uses [SparkSession](#sparkSession) to access the current [SessionState](SparkSession.md#sessionState) that it then uses to access the [Analyzer](SessionState.md#analyzer).
 
-In Scala the access path looks as follows.
+In case of any `AnalysisException`, `assertAnalyzed` creates a new `AnalysisException` to make sure that it holds [analyzed](#analyzed) and reports it.
 
-[source, scala]
-----
-sparkSession.sessionState.analyzer
-----
-====
-
-In case of any `AnalysisException`, `assertAnalyzed` creates a new `AnalysisException` to make sure that it holds <<analyzed, analyzed>> and reports it.
-
-[NOTE]
-====
 `assertAnalyzed` is used when:
 
-* `Dataset` spark-sql-Dataset.md#creating-instance[is created]
-* `QueryExecution` <<withCachedData, is requested for `LogicalPlan` with cached data>>
-* spark-sql-LogicalPlan-CreateViewCommand.md#run[CreateViewCommand] and spark-sql-LogicalPlan-AlterViewAsCommand.md#run[AlterViewAsCommand] are executed
-====
+* [Dataset](spark-sql-Dataset.md) is created
+* `QueryExecution` is requested for a [logical plan with cached data](#withCachedData)
+* [CreateViewCommand](CreateViewCommand.md) and [AlterViewAsCommand](logical-operators/AlterViewAsCommand.md) logical commands are executed
 
-=== [[toStringWithStats]] Building Text Representation with Cost Stats -- `toStringWithStats` Method
+## <span id="toStringWithStats"> Building Text Representation with Cost Stats
 
-[source, scala]
-----
+```scala
 toStringWithStats: String
-----
+```
 
-`toStringWithStats` is a mere alias for <<completeString, completeString>> with `appendStats` flag enabled.
+`toStringWithStats` is a mere alias for [completeString](#completeString) with `appendStats` flag enabled.
 
-NOTE: `toStringWithStats` is a custom <<toString, toString>> with spark-sql-Statistics.md[cost statistics].
+`toStringWithStats` is a custom [toString](#toString) with [cost statistics](spark-sql-Statistics.md).
 
-[source, scala]
-----
-// test dataset
+```text
 val dataset = spark.range(20).limit(2)
 
 // toStringWithStats in action - note Optimized Logical Plan section with Statistics
@@ -365,76 +277,22 @@ GlobalLimit 2, Statistics(sizeInBytes=32.0 B, rowCount=2, isBroadcastable=false)
 == Physical Plan ==
 CollectLimit 2
 +- *Range (0, 20, step=1, splits=Some(8))
-----
-
-NOTE: `toStringWithStats` is used exclusively when `ExplainCommand` spark-sql-LogicalPlan-ExplainCommand.md#run[is executed] (only when `cost` attribute is enabled).
-
-=== [[hiveResultString]] Transforming SparkPlan Execution Result to Hive-Compatible Output Format -- `hiveResultString` Method
-
-[source, scala]
-----
-hiveResultString(): Seq[String]
-----
-
-`hiveResultString` returns the result as a Hive-compatible output format.
-
-[source, scala]
-----
-scala> spark.range(5).queryExecution.hiveResultString
-res0: Seq[String] = ArrayBuffer(0, 1, 2, 3, 4)
-
-scala> spark.read.csv("people.csv").queryExecution.hiveResultString
-res4: Seq[String] = ArrayBuffer(id	name	age, 0	Jacek	42)
-----
-
-Internally, `hiveResultString` <<hiveResultString-transformations, transformation>> the <<executedPlan, SparkPlan>>.
-
-[[hiveResultString-transformations]]
-.hiveResultString's SparkPlan Transformations (in execution order)
-[width="100%",cols="1,2",options="header"]
-|===
-| SparkPlan
-| Description
-
-| spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec] for spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand]
-| Executes `DescribeTableCommand` and transforms every spark-sql-Row.md[Row] to a Hive-compatible output format.
-
-| spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec] for <<spark-sql-LogicalPlan-ShowTablesCommand.md#, ShowTablesCommand>>
-| Executes `ExecutedCommandExec` and transforms the result to a collection of table names.
-
-| Any other SparkPlan.md[SparkPlan]
-| Executes `SparkPlan` and transforms the result to a Hive-compatible output format.
-|===
-
-NOTE: `hiveResultString` is used exclusively when `SparkSQLDriver` (of ThriftServer) runs a command.
-
-=== [[toString]] Extended Text Representation with Logical and Physical Plans
-
-[source, scala]
-----
-toString: String
-----
-
-NOTE: `toString` is part of Java's `Object` Contract to...FIXME.
-
-`toString` is a mere alias for <<completeString, completeString>> with `appendStats` flag disabled.
-
-NOTE: `toString` is on the "other" side of <<toStringWithStats, toStringWithStats>> which has `appendStats` flag enabled.
-
-## <span id="explainString"> explainString
-
-```scala
-explainString(
-   mode: ExplainMode): String
 ```
 
-`explainString`...FIXME
+`toStringWithStats` is used when [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed (with `cost` attribute enabled).
 
-`explainString` is used when:
+## <span id="toString"> Extended Text Representation with Logical and Physical Plans
 
-* `Dataset.explain` operator is executed
+```scala
+toString: String
+```
 
-* [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed
+`toString` is a mere alias for [completeString](#completeString) with `appendStats` flag disabled.
+
+!!! note
+    `toString` is on the "other" side of [toStringWithStats](#toStringWithStats) which has `appendStats` flag enabled.
+
+`toString` is part of Java's `Object` abstraction.
 
 ## <span id="simpleString"> Simple (Basic) Text Representation
 
@@ -459,12 +317,6 @@ scala> println(output)
 *(1) Project [id#5L, rand(6017561978775952851) AS rand#7]
 +- *(1) Range (0, 10, step=1, splits=8)
 ```
-
-`simpleString` is used when:
-
-* `QueryExecution` is requested to [explainString](#explainString) (with `SimpleMode` and `FormattedMode` modes)
-
-* (Spark Structured Streaming) `StreamingExplainCommand` logical command is executed
 
 ## <span id="withRedaction"> Redacting Sensitive Information
 
