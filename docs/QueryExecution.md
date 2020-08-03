@@ -6,7 +6,7 @@
 
 ![Query Execution &mdash; From SQL through Dataset to RDD](images/QueryExecution-execution-pipeline.png)
 
-`QueryExecution` is the result of [executing a LogicalPlan in a SparkSession](SessionState.md#executePlan) (and so you could create a `Dataset` from a [logical operator](../logical-operators/LogicalPlan.md) or use the `QueryExecution` after executing a logical operator).
+`QueryExecution` is the result of [executing a LogicalPlan in a SparkSession](SessionState.md#executePlan) (and so you could create a `Dataset` from a [logical operator](logical-operators/LogicalPlan.md) or use the `QueryExecution` after executing a logical operator).
 
 ```text
 val plan: LogicalPlan = ...
@@ -60,7 +60,7 @@ Optimized physical plan that is in the final optimized "shape" and therefore rea
 toRdd: RDD[InternalRow]
 ```
 
-Spark Core's execution graph of a distributed computation (`RDD` of [internal binary rows](spark-sql-InternalRow.md)) from the [executedPlan](#executedPlan) after [execution](SparkPlan.md#execute).
+Spark Core's execution graph of a distributed computation (`RDD` of [internal binary rows](spark-sql-InternalRow.md)) from the [executedPlan](#executedPlan) after [execution](physical-operators/SparkPlan.md#execute).
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 
@@ -69,7 +69,7 @@ The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical opera
 
     After you have executed `toRdd` (directly or not), you basically "leave" Spark SQL's Dataset world and "enter" Spark Core's RDD space.
 
-`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using [SparkPlan.execute](SparkPlan.md#execute) that recursively triggers execution of every child physical operator in the physical plan tree.
+`toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using [SparkPlan.execute](physical-operators/SparkPlan.md#execute) that recursively triggers execution of every child physical operator in the physical plan tree.
 
 !!! note
     [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](spark-sql-StructType.md) to an `RDD[InternalRow]`.
@@ -86,7 +86,7 @@ dataset.queryExecution.executedPlan
 
 `QueryExecution` uses the [Logical Query Optimizer](Optimizer.md) and [Tungsten](spark-sql-tungsten.md) for better structured query performance.
 
-`QueryExecution` uses the input `SparkSession` to access the current spark-sql-SparkPlanner.md[SparkPlanner] (through SessionState.md[SessionState]) when <<creating-instance, it is created>>. It then computes a SparkPlan.md[SparkPlan] (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
+`QueryExecution` uses the input `SparkSession` to access the current spark-sql-SparkPlanner.md[SparkPlanner] (through SessionState.md[SessionState]) when <<creating-instance, it is created>>. It then computes a [SparkPlan](physical-operators/SparkPlan.md) (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 
 !!! note
     A variant of `QueryExecution` that Spark Structured Streaming uses for query planning is `IncrementalExecution`.
@@ -119,8 +119,8 @@ CAUTION: FIXME
 
 `QueryExecution` takes the following when created:
 
-* [[sparkSession]] SparkSession.md[SparkSession]
-* [[logical]] spark-sql-LogicalPlan.md[Logical plan]
+* [[sparkSession]] [SparkSession](SparkSession.md)
+* [[logical]] [Logical plan](logical-operators/LogicalPlan.md)
 
 ## <span id="preparations"> Physical Query Optimizations (Physical Plan Preparation Rules)
 
@@ -235,12 +235,6 @@ assertAnalyzed(): Unit
     `assertAnalyzed` uses [SparkSession](#sparkSession) to access the current [SessionState](SparkSession.md#sessionState) that it then uses to access the [Analyzer](SessionState.md#analyzer).
 
 In case of any `AnalysisException`, `assertAnalyzed` creates a new `AnalysisException` to make sure that it holds [analyzed](#analyzed) and reports it.
-
-`assertAnalyzed` is used when:
-
-* [Dataset](spark-sql-Dataset.md) is created
-* `QueryExecution` is requested for a [logical plan with cached data](#withCachedData)
-* [CreateViewCommand](CreateViewCommand.md) and [AlterViewAsCommand](logical-operators/AlterViewAsCommand.md) logical commands are executed
 
 ## <span id="toStringWithStats"> Building Text Representation with Cost Stats
 

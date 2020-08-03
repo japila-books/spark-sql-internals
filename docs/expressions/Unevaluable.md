@@ -26,7 +26,7 @@ Unevaluable expressions cannot be evaluated (neither in <<expressions/Expression
 * NamePlaceholder
 * NoOp
 * [OffsetWindowFunction](OffsetWindowFunction.md)
-* [OuterReference](OuterReference.md)
+* OuterReference
 * PartitioningCollection
 * PartitionTransformExpression
 * [PrettyAttribute](PrettyAttribute.md)

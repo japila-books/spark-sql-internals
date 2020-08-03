@@ -70,7 +70,7 @@ produce(ctx: CodegenContext, parent: CodegenSupport): String
 
 `CodegenSupport` allows physical operators to <<supportCodegen, disable Java code generation>>.
 
-TIP: Use spark-sql-debugging-query-execution.md#debugCodegen[debugCodegen] or [QueryExecution.debug.codegen](QueryExecution.md#debug) methods to access the generated Java source code for a structured query.
+TIP: Use spark-sql-debugging-query-execution.md#debugCodegen[debugCodegen] or [QueryExecution.debug.codegen](../QueryExecution.md#debug) methods to access the generated Java source code for a structured query.
 
 [[variablePrefix]]
 `variablePrefix` is...FIXME

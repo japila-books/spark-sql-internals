@@ -12,7 +12,7 @@ Technically, `EnsureRequirements` is just a catalyst/Rule.md[Catalyst rule] for 
 `EnsureRequirements` is part of [preparations](../QueryExecution.md#preparations) batch of physical query plan rules and is executed when `QueryExecution` is requested for the [optimized physical query plan](../QueryExecution.md#executedPlan) (i.e. in *executedPlan* phase of a query execution).
 
 [[conf]]
-`EnsureRequirements` takes a [SQLConf](SQLConf.md) when created.
+`EnsureRequirements` takes a [SQLConf](../SQLConf.md) when created.
 
 [source, scala]
 ----
@@ -68,7 +68,7 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 
 `ensureDistributionAndOrdering` matches the operator's required sort ordering of children (`requiredChildOrderings`) to the children's SparkPlan.md#outputPartitioning[output partitioning] and if the orderings do not match, spark-sql-SparkPlan-SortExec.md#creating-instance[SortExec] unary physical operator is created as a new child.
 
-In the end, `ensureDistributionAndOrdering` [sets the new children](catalyst/TreeNode.md#withNewChildren) for the input `operator`.
+In the end, `ensureDistributionAndOrdering` [sets the new children](../catalyst/TreeNode.md#withNewChildren) for the input `operator`.
 
 NOTE: `ensureDistributionAndOrdering` is used exclusively when `EnsureRequirements` is <<apply, executed>> (i.e. applied to a physical plan).
 
@@ -96,7 +96,7 @@ With spark-sql-adaptive-query-execution.md[adaptive query execution] (i.e. when 
 
 * For every `ShuffleExchangeExec`, spark-sql-SparkPlan-ShuffleExchangeExec.md#coordinator[registers the `ExchangeCoordinator`]
 
-* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the [default number of partitions to use when shuffling data for joins or aggregations](SQLConf.md#numShufflePartitions) (as spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchangeExec` to the final result (for the current physical operator)
+* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the [default number of partitions to use when shuffling data for joins or aggregations](../SQLConf.md#numShufflePartitions) (as spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchangeExec` to the final result (for the current physical operator)
 
 Otherwise (when adaptive query execution is disabled or `children` do not support `ExchangeCoordinator`), `withExchangeCoordinator` returns the input `children` unchanged.
 
