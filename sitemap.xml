@@ -4,6 +4,10 @@
      <lastmod>2020-08-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/QueryExecution/</loc>
+     <lastmod>2020-08-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSession/</loc>
      <lastmod>2020-08-03</lastmod>
      <changefreq>daily</changefreq>
@@ -920,14 +924,6 @@
      <lastmod>2020-08-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-QueryExecution/</loc>
-     <lastmod>2020-08-03</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-UnsupportedOperationChecker/</loc>
-     <lastmod>2020-08-03</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Analyzer/</loc>
      <lastmod>2020-08-03</lastmod>
      <changefreq>daily</changefreq>
@@ -1029,6 +1025,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ShuffledRowRDD/</loc>
+     <lastmod>2020-08-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-UnsupportedOperationChecker/</loc>
      <lastmod>2020-08-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
