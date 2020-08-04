@@ -2,12 +2,12 @@
 
 `TypeCoercion` is a Scala object that defines the <<typeCoercionRules, type coercion rules>> for [Logical Analyzer](Analyzer.md#typeCoercionRules).
 
-=== [[typeCoercionRules]] Defining Type Coercion Rules (For Spark Analyzer) -- `typeCoercionRules` Method
+## <span id="typeCoercionRules"> Defining Type Coercion Analysis Rules
 
-[source, scala]
-----
-typeCoercionRules(conf: SQLConf): List[Rule[LogicalPlan]]
-----
+```scala
+typeCoercionRules(
+  conf: SQLConf): List[Rule[LogicalPlan]]
+```
 
 `typeCoercionRules` is a collection of <<catalyst/Rule.md#, Catalyst rules>> to transform <<spark-sql-LogicalPlan.md#, logical plans>> (in the order of execution):
 
