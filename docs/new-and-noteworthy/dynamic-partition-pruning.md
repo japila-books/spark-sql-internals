@@ -7,7 +7,9 @@ The idea is to push filter conditions down to the large fact table and reduce th
 
 The best results are expected in JOIN queries between a large fact table and a much smaller dimension table (_star-schema queries_).
 
-Dynamic Partition Pruning is applied to a query at logical optimization phase using [PartitionPruning](../logical-optimizations/PartitionPruning.md) optimization rule.
+Dynamic Partition Pruning is applied to a query at logical optimization phase using [PartitionPruning](../logical-optimizations/PartitionPruning.md) and [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md) optimization rules.
+
+Dynamic Partition Pruning optimization is controlled by [spark.sql.optimizer.dynamicPartitionPruning.enabled](../spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property.
 
 ## References
 

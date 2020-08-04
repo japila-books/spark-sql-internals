@@ -2,7 +2,7 @@
 
 `PartitionPruning` is a logical optimization for [Dynamic Partition Pruning](../new-and-noteworthy/dynamic-partition-pruning.md).
 
-`PartitionPruning` is a `Rule[LogicalPlan]` (a [rule](../catalyst/Rule.md) for [logical plans](../logical-operators/LogicalPlan.md)).
+`PartitionPruning` is a `Rule[LogicalPlan]` (a [rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
 
 `PartitionPruning` is part of the [PartitionPruning](../SparkOptimizer.md#PartitionPruning) batch of the [SparkOptimizer](../SparkOptimizer.md#defaultBatches).
 

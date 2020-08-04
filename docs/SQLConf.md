@@ -517,11 +517,11 @@ The value of [spark.sql.optimizer.dynamicPartitionPruning.enabled](spark-sql-pro
 
 Used when:
 
-* `CleanupDynamicPruningFilters` logical optimization rule is executed
+* [CleanupDynamicPruningFilters](logical-optimizations/CleanupDynamicPruningFilters.md) logical optimization rule is executed
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
 
-* `PlanDynamicPruningFilters` preparation physical rule is executed
+* [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) preparation physical rule is executed
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_FALLBACK_FILTER_RATIO"><span id="dynamicPartitionPruningFallbackFilterRatio"> dynamicPartitionPruningFallbackFilterRatio
 
