@@ -13,4 +13,4 @@
 * <span id="catalogName"> Optional Catalog Name
 * <span id="namespace"> Optional Namespace
 
-`SetCatalogAndNamespace` is created when `ResolveCatalogs` logical analyzer rule is executed (and resolves a [UseStatement](UseStatement.md) parsed statement).
+`SetCatalogAndNamespace` is created when [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical analyzer rule is executed (and resolves a [UseStatement](UseStatement.md) parsed statement).

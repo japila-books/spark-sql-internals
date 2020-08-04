@@ -518,6 +518,7 @@ nav:
       - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
       - ResolveAliases: logical-analysis-rules/ResolveAliases.md
       - ResolveBroadcastHints: logical-analysis-rules/ResolveBroadcastHints.md
+      - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
       - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
       - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
       - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md

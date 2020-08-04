@@ -17,7 +17,7 @@
 
 `CreateV2Table` is created when:
 
-* `ResolveCatalogs` logical resolution rule is executed (and resolves a `CreateTableStatement` parsed statement)
+* [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical resolution rule is executed (and resolves a `CreateTableStatement` parsed statement)
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed
 

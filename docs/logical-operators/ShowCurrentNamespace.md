@@ -8,7 +8,7 @@
 
 * <span id="catalogManager"> [CatalogManager](../connector/catalog/CatalogManager.md)
 
-`ShowCurrentNamespace` is created when `ResolveCatalogs` logical analyzer rule is executed (and resolves a [ShowCurrentNamespaceStatement](ShowCurrentNamespaceStatement.md) parsed statement).
+`ShowCurrentNamespace` is created when [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical analyzer rule is executed (and resolves a [ShowCurrentNamespaceStatement](ShowCurrentNamespaceStatement.md) parsed statement).
 
 ## <span id="output"> Output Attributes
 
