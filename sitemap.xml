@@ -1612,6 +1612,10 @@
      <lastmod>2020-08-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveCatalogs/</loc>
+     <lastmod>2020-08-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveCoalesceHints/</loc>
      <lastmod>2020-08-04</lastmod>
      <changefreq>daily</changefreq>
