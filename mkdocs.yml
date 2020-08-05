@@ -615,6 +615,7 @@ nav:
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
   - New &amp; Noteworthy:
+    - Catalog API and Multi-Catalog Support: new-and-noteworthy/catalog-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
