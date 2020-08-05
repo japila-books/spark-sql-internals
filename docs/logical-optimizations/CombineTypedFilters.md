@@ -1,8 +1,8 @@
 # CombineTypedFilters Logical Optimization
 
-`CombineTypedFilters` is a [base logical optimization](../Optimizer.md#batches) that <<apply, combines two back to back (typed) filters into one>> that ultimately ends up as a single method call.
+`CombineTypedFilters` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, combines two back to back (typed) filters into one>> that ultimately ends up as a single method call.
 
-`CombineTypedFilters` is part of the [Object Expressions Optimization](../Optimizer.md#Object_Expressions_Optimization) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`CombineTypedFilters` is part of the [Object Expressions Optimization](../catalyst/Optimizer.md#Object_Expressions_Optimization) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `CombineTypedFilters` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

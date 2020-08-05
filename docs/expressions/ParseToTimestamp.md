@@ -36,7 +36,7 @@ scala> println(ptt.numberedTreeString)
 // FIXME DEMO to_timestamp(s: Column, fmt: String): Column
 ----
 
-As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical Optimizer](../Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
+As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
 
 * `Cast(left, TimestampType)` for `to_timestamp(s: Column): Column` function
 

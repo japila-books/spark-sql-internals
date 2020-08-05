@@ -1,8 +1,8 @@
 # GetCurrentDatabase Logical Optimization
 
-`GetCurrentDatabase` is a [base logical optimization](../Optimizer.md#batches) that <<apply, gives the current database>> for `current_database` SQL function.
+`GetCurrentDatabase` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, gives the current database>> for `current_database` SQL function.
 
-`GetCurrentDatabase` is part of the [Finish Analysis](../Optimizer.md#GetCurrentDatabase) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`GetCurrentDatabase` is part of the [Finish Analysis](../catalyst/Optimizer.md#GetCurrentDatabase) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `GetCurrentDatabase` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

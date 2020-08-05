@@ -4,7 +4,7 @@
 
 When <<apply, executed>>, `PushPredicateThroughJoin`...FIXME
 
-`PushPredicateThroughJoin` is a part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator-Optimization-before-Inferring-Filters) and [Operator Optimization after Inferring Filters](../Optimizer.md#Operator-Optimization-after-Inferring-Filters) fixed-point rule batches of the base [Logical Optimizer](../Optimizer.md).
+`PushPredicateThroughJoin` is a part of the [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#Operator-Optimization-before-Inferring-Filters) and [Operator Optimization after Inferring Filters](../catalyst/Optimizer.md#Operator-Optimization-after-Inferring-Filters) fixed-point rule batches of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
 [[demo]]
 .Demo: PushPredicateThroughJoin

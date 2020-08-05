@@ -246,7 +246,7 @@ scala> sql("DESC EXTENDED t1 p2").show
 
 ## <span id="optimizations"> Cost-Based Optimizations
 
-The [Catalyst Optimizer](Optimizer.md) uses heuristics (rules) that are applied to a logical query plan for cost-based optimization.
+The [Catalyst Optimizer](catalyst/Optimizer.md) uses heuristics (rules) that are applied to a logical query plan for cost-based optimization.
 
 Among the optimization rules are the following:
 

@@ -5,7 +5,7 @@
 [[apply]]
 When catalyst/Rule.md#apply[executed], `ReplaceExceptWithFilter` transforms an spark-sql-LogicalPlan-Except.md[Except (distinct)] logical operator to...FIXME
 
-`ReplaceExceptWithFilter` is a part of the [Replace Operators](../Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../Optimizer.md).
+`ReplaceExceptWithFilter` is a part of the [Replace Operators](../catalyst/Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
 `ReplaceExceptWithFilter` can be turned off and on based on spark-sql-properties.md#spark.sql.optimizer.replaceExceptWithFilter[spark.sql.optimizer.replaceExceptWithFilter] configuration property.
 

@@ -1,8 +1,8 @@
 # ReplaceExpressions Logical Optimization
 
-`ReplaceExpressions` is a [base logical optimization](../Optimizer.md#batches) that <<apply, replaces RuntimeReplaceable expressions with their single child expression>>.
+`ReplaceExpressions` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, replaces RuntimeReplaceable expressions with their single child expression>>.
 
-`ReplaceExpressions` is part of the [Finish Analysis](../Optimizer.md#Finish_Analysis) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`ReplaceExpressions` is part of the [Finish Analysis](../catalyst/Optimizer.md#Finish_Analysis) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `ReplaceExpressions` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

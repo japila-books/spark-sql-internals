@@ -1,8 +1,8 @@
 # ColumnPruning Logical Optimization
 
-`ColumnPruning` is a [base logical optimization](../Optimizer.md#batches) that <<apply, FIXME>>.
+`ColumnPruning` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, FIXME>>.
 
-`ColumnPruning` is part of the [RewriteSubquery](../Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`ColumnPruning` is part of the [RewriteSubquery](../catalyst/Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `ColumnPruning` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

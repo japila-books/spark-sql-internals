@@ -1,6 +1,6 @@
-# Catalyst Optimizer &mdash; Generic Logical Query Plan Optimizer
+# Optimizer &mdash; Generic Logical Query Plan Optimizer
 
-`Optimizer` (**Catalyst Optimizer**) is an extension of the [RuleExecutor](catalyst/RuleExecutor.md) abstraction for [logical query plan optimizers](#implementations).
+`Optimizer` (**Catalyst Optimizer**) is an extension of the [RuleExecutor](RuleExecutor.md) abstraction for [logical query plan optimizers](#implementations).
 
 ```text
 Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
@@ -8,19 +8,19 @@ Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 
 ## Implementations
 
-* [SparkOptimizer](SparkOptimizer.md)
+* [SparkOptimizer](../SparkOptimizer.md)
 
 ## Creating Instance
 
 `Optimizer` takes the following to be created:
 
-* <span id="catalogManager"> [CatalogManager](connector/catalog/CatalogManager.md)
+* <span id="catalogManager"> [CatalogManager](../connector/catalog/CatalogManager.md)
 
 `Optimizer` is an abstract class and cannot be created directly. It is created indirectly for the [concrete Optimizers](#implementations).
 
 ## <span id="defaultBatches"> Default Rule Batches
 
-`Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](QueryExecution.md#optimizedPlan).
+`Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](../QueryExecution.md#optimizedPlan).
 
 The base rule batches can be further refined (extended or [excluded](#excludedRules)).
 
@@ -42,7 +42,7 @@ Rules:
 * ReplaceExpressions
 * RewriteNonCorrelatedExists
 * ComputeCurrentTime
-* GetCurrentDatabase(catalogManager)
+* GetCurrentDatabase
 * RewriteDistinctAggregates
 * ReplaceDeduplicateWithAggregate
 
@@ -52,7 +52,7 @@ Strategy: `Once`
 
 Rules:
 
-* CombineUnions
+* [CombineUnions](../logical-optimizations/CombineUnions.md)
 
 Strategy: `Once`
 
@@ -69,7 +69,7 @@ Strategy: `Once`
 Rules:
 
 * ConvertToLocalRelation
-* PropagateEmptyRelation
+* [PropagateEmptyRelation](../logical-optimizations/PropagateEmptyRelation.md)
 
 Strategy: fixedPoint
 
@@ -77,7 +77,7 @@ Strategy: fixedPoint
 
 Rules:
 
-* PullupCorrelatedPredicates
+* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md)
 
 Strategy: `Once`
 
@@ -85,7 +85,7 @@ Strategy: `Once`
 
 Rules:
 
-* OptimizeSubqueries
+* [OptimizeSubqueries](../logical-optimizations/OptimizeSubqueries.md)
 
 Strategy: `FixedPoint(1)`
 
@@ -159,7 +159,7 @@ Strategy: `fixedPoint`
 
 Rules:
 
-* InferFiltersFromConstraints
+* [InferFiltersFromConstraints](../logical-optimizations/InferFiltersFromConstraints.md)
 
 Strategy: `Once`
 
@@ -183,7 +183,7 @@ Strategy: `Once`
 
 Rules:
 
-* CostBasedJoinReorder
+* [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md)
 
 Strategy: `FixedPoint(1)`
 
@@ -199,7 +199,7 @@ Strategy: `Once`
 
 Rules:
 
-* DecimalAggregates
+* [DecimalAggregates](../logical-optimizations/DecimalAggregates.md)
 
 Strategy: `fixedPoint`
 
@@ -219,7 +219,7 @@ Strategy: `fixedPoint`
 Rules:
 
 * ConvertToLocalRelation
-* PropagateEmptyRelation
+* [PropagateEmptyRelation](../logical-optimizations/PropagateEmptyRelation.md)
 
 Strategy: `fixedPoint`
 
@@ -235,8 +235,8 @@ Strategy: `Once`
 
 Rules:
 
-* RewritePredicateSubquery
-* ColumnPruning
+* [RewritePredicateSubquery](../logical-optimizations/RewritePredicateSubquery.md)
+* [ColumnPruning](../logical-optimizations/ColumnPruning.md)
 * CollapseProject
 * RemoveNoopOperators
 
@@ -252,7 +252,7 @@ Strategy: `Once`
 
 ## <span id="excludedRules"><span id="spark.sql.optimizer.excludedRules"> Excluded Rules
 
-`Optimizer` uses [spark.sql.optimizer.excludedRules](spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property to control what rules in the [defaultBatches](#defaultBatches) to exclude (default: none).
+`Optimizer` uses [spark.sql.optimizer.excludedRules](../spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property to control what rules in the [defaultBatches](#defaultBatches) to exclude.
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
@@ -280,7 +280,7 @@ Strategy: `Once`
 
 ## Accessing Optimizer
 
-`Optimizer` is available as the [optimizer](SessionState.md#optimizer) property of a session-specific `SessionState`.
+`Optimizer` is available as the [optimizer](../SessionState.md#optimizer) property of a session-specific `SessionState`.
 
 ```text
 scala> :type spark
@@ -290,7 +290,7 @@ scala> :type spark.sessionState.optimizer
 org.apache.spark.sql.catalyst.optimizer.Optimizer
 ```
 
-You can access the optimized logical plan of a structured query (as a <<spark-sql-Dataset.md#, Dataset>>) using <<spark-sql-dataset-operators.md#explain, Dataset.explain>> basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+You can access the optimized logical plan of a structured query (as a [Dataset](../spark-sql-Dataset.md)) using [Dataset.explain](../spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 ```text
 // sample structured query
@@ -319,7 +319,7 @@ Project [id#0L, (id#0L + 5) AS new_column#3L]
 +- *(1) Range (0, 5, step=1, splits=8)
 ```
 
-Alternatively, you can access the analyzed logical plan using `QueryExecution` and its [optimizedPlan](QueryExecution.md#optimizedPlan) property  (that together with `numberedTreeString` method is a very good "debugging" tool).
+Alternatively, you can access the analyzed logical plan using `QueryExecution` and its [optimizedPlan](../QueryExecution.md#optimizedPlan) property  (that together with `numberedTreeString` method is a very good "debugging" tool).
 
 ```text
 val optimizedPlan = inventory.queryExecution.optimizedPlan
@@ -330,7 +330,7 @@ scala> println(optimizedPlan.numberedTreeString)
 
 ## <span id="fixedPoint"> FixedPoint Strategy
 
-`FixedPoint` strategy with the number of iterations as defined by [spark.sql.optimizer.maxIterations](spark-sql-CatalystConf.md#optimizerMaxIterations)
+`FixedPoint` strategy with the number of iterations as defined by [spark.sql.optimizer.maxIterations](../spark-sql-CatalystConf.md#optimizerMaxIterations)
 
 ## <span id="extendedOperatorOptimizationRules"> Extended Operator Optimization Rules (Extension Point)
 
@@ -372,4 +372,4 @@ batches: Seq[Batch]
 
 `batches`...FIXME
 
-`batches` is part of the [RuleExecutor](catalyst/RuleExecutor.md#batches) abstraction.
+`batches` is part of the [RuleExecutor](RuleExecutor.md#batches) abstraction.

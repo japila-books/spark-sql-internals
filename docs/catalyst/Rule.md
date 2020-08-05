@@ -38,6 +38,6 @@ The other notable use cases of `Rule` are as follows:
 
 * When `Analyzer` is requested for [extendedResolutionRules](../Analyzer.md#extendedResolutionRules) and [postHocResolutionRules](../Analyzer.md#postHocResolutionRules) (see [BaseSessionStateBuilder](../BaseSessionStateBuilder.md#analyzer) and [HiveSessionStateBuilder](../hive/HiveSessionStateBuilder.md#analyzer))
 
-* When `Optimizer` is requested for [extendedOperatorOptimizationRules](../Optimizer.md#extendedOperatorOptimizationRules)
+* When `Optimizer` is requested for [extendedOperatorOptimizationRules](Optimizer.md#extendedOperatorOptimizationRules)
 
 * When `QueryExecution` is requested for [preparations](../QueryExecution.md#preparations)

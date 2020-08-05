@@ -287,7 +287,7 @@ a| [[offHeapColumnVectorEnabled]] Used when:
 
 | optimizerExcludedRules
 | <<spark-sql-properties.md#spark.sql.optimizer.excludedRules, spark.sql.optimizer.excludedRules>>
-a| [[optimizerExcludedRules]] Used exclusively when `Optimizer` is requested for the [logical optimization batches](Optimizer.md#batches)
+a| [[optimizerExcludedRules]] Used exclusively when `Optimizer` is requested for the [logical optimization batches](catalyst/Optimizer.md#batches)
 
 | optimizerInSetConversionThreshold
 | spark-sql-properties.md#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]

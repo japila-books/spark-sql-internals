@@ -99,8 +99,8 @@ Exchange hashpartitioning((id#10L % 2), 2)
 
 === [[optimizations]] Repartition Operation Optimizations
 
-* [CollapseRepartition](../Optimizer.md#CollapseRepartition) logical optimization collapses adjacent repartition operations.
+* [CollapseRepartition](../catalyst/Optimizer.md#CollapseRepartition) logical optimization collapses adjacent repartition operations.
 
-* Repartition operations allow [FoldablePropagation](../Optimizer.md#FoldablePropagation) and spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical optimizations to "push through".
+* Repartition operations allow [FoldablePropagation](../catalyst/Optimizer.md#FoldablePropagation) and spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical optimizations to "push through".
 
 * spark-sql-Optimizer-PropagateEmptyRelation.md[PropagateEmptyRelation] logical optimization may result in an empty spark-sql-LogicalPlan-LocalRelation.md[LocalRelation] for repartition operations.

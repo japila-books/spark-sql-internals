@@ -1,8 +1,8 @@
 # NullPropagation Logical Optimization -- Nullability (NULL Value) Propagation
 
-`NullPropagation` is a [base logical optimization](../Optimizer.md#batches) that <<apply, FIXME>>.
+`NullPropagation` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, FIXME>>.
 
-`NullPropagation` is part of the [Operator Optimization before Inferring Filters](../Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`NullPropagation` is part of the [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `NullPropagation` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 

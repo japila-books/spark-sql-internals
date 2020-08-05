@@ -74,7 +74,7 @@ spark.sessionState.conf.starSchemaDetection
 spark.sessionState.conf.cboEnabled
 ----
 
-`ReorderJoin` is part of the [Operator Optimizations](../Optimizer.md#Operator-Optimizations) fixed-point batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`ReorderJoin` is part of the [Operator Optimizations](../catalyst/Optimizer.md#Operator-Optimizations) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 === [[apply]] Applying ReorderJoin Rule To Logical Plan (Executing ReorderJoin) -- `apply` Method
 

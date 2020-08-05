@@ -974,7 +974,7 @@ Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access
 
 | [[spark.sql.optimizer.excludedRules]] *spark.sql.optimizer.excludedRules*
 
-Comma-separated list of optimization rule names that should be disabled (excluded) in the [logical query optimizer](Optimizer.md#spark.sql.optimizer.excludedRules). The optimizer will log the rules that have indeed been excluded.
+Comma-separated list of optimization rule names that should be disabled (excluded) in the [logical query optimizer](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules). The optimizer will log the rules that have indeed been excluded.
 
 Default: `(empty)`
 
@@ -992,7 +992,7 @@ Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConvers
 
 | [[spark.sql.optimizer.maxIterations]] *spark.sql.optimizer.maxIterations*
 
-Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical Optimizer](Optimizer.md#fixedPoint).
+Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical Optimizer](catalyst/Optimizer.md#fixedPoint).
 
 Default: `100`
 

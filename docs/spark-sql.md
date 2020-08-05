@@ -109,7 +109,7 @@ scala> sql("desc EXTENDED v1").show(false)
 +----------+---------+-------+
 ```
 
-Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own spark-sql-InternalRow.md[internal binary row format].
+Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](catalyst/Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own spark-sql-InternalRow.md[internal binary row format].
 
 As of Spark SQL 2.2, structured queries can be further optimized using spark-sql-hint-framework.md[Hint Framework].
 
@@ -139,7 +139,7 @@ With Structured Streaming feature however, the above static batch query becomes 
 
 As of Spark 2.0, the main data abstraction of Spark SQL is spark-sql-Dataset.md[Dataset]. It represents a *structured data* which are records with a known schema. This structured data representation `Dataset` enables spark-sql-tungsten.md[compact binary representation] using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
-Spark SQL supports spark-sql-Optimizer-PushDownPredicate.md[predicate pushdown] to optimize performance of Dataset queries and can also [generate optimized code at runtime](Optimizer.md).
+Spark SQL supports spark-sql-Optimizer-PushDownPredicate.md[predicate pushdown] to optimize performance of Dataset queries and can also [generate optimized code at runtime](catalyst/Optimizer.md).
 
 Spark SQL comes with the different APIs to work with:
 

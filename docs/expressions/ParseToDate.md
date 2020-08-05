@@ -9,7 +9,7 @@ title: ParseToDate
 // DEMO to_date(e: Column, fmt: String): Column
 ```
 
-As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by [Logical Query Optimizer](../Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
+As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by [Logical Query Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
 
 * `Cast(left, DateType)` for `to_date(e: Column): Column` function
 

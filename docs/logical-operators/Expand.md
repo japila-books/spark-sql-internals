@@ -56,8 +56,8 @@ scala> println(plan.numberedTreeString)
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
 * [ColumnPruning](../logical-optimizations/ColumnPruning.md)
-* [FoldablePropagation](../Optimizer.md#FoldablePropagation)
-* [RewriteDistinctAggregates](../Optimizer.md#RewriteDistinctAggregates)
+* [FoldablePropagation](../catalyst/Optimizer.md#FoldablePropagation)
+* [RewriteDistinctAggregates](../catalyst/Optimizer.md#RewriteDistinctAggregates)
 
 === [[creating-instance]] Creating Expand Instance
 

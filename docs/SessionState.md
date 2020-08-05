@@ -111,7 +111,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.md#, SessionCatalog>> (`() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
 * [[analyzerBuilder]] `analyzerBuilder` function to create an [Analyzer](Analyzer.md) (`() => Analyzer`)
-* [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](Optimizer.md) (`() => Optimizer`)
+* [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](catalyst/Optimizer.md) (`() => Optimizer`)
 * [[planner]] <<spark-sql-SparkPlanner.md#, SparkPlanner>>
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.md#, ExecutionListenerManager>>
@@ -121,13 +121,13 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 ## <span id="optimizerBuilder"> optimizerBuilder Function
 
-`SessionState` is given a function to create a [logical query plan optimizer](Optimizer.md) (`() => Optimizer`) when [created](#creating-instance).
+`SessionState` is given a function to create a [logical query plan optimizer](catalyst/Optimizer.md) (`() => Optimizer`) when [created](#creating-instance).
 
 `optimizerBuilder` function is used when `SessionState` is requested for the [Optimizer](#optimizer) (and cached for later usage).
 
 ## <span id="optimizer"> Logical Query Plan Optimizer
 
-[Optimizer](Optimizer.md) that is created using [optimizerBuilder function](#optimizerBuilder) (and cached for later usage).
+[Optimizer](catalyst/Optimizer.md) that is created using [optimizerBuilder function](#optimizerBuilder) (and cached for later usage).
 
 Used when:
 

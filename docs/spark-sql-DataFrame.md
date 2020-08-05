@@ -73,7 +73,7 @@ You can execute queries over DataFrames using two approaches:
 
 * <<filter, Filtering>>
 
-DataFrames use the [Catalyst logical query optimizer](Optimizer.md) to produce efficient queries (and so they are supposed to be faster than corresponding RDD-based queries).
+DataFrames use the [Catalyst logical query optimizer](catalyst/Optimizer.md) to produce efficient queries (and so they are supposed to be faster than corresponding RDD-based queries).
 
 NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through spark-sql-Encoder.md[specialized encoders] that can significantly cut serialization and deserialization times.
 

@@ -15,7 +15,7 @@ title: Project
 * `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#aliasPlan, aliasPlan>>)
 * SQL's spark-sql-AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
 
-`Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../Optimizer.md) phases.
+`Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../catalyst/Optimizer.md) phases.
 
 ```text
 // FIXME Add examples for the following operators

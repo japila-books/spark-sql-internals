@@ -1,6 +1,6 @@
 # RewritePredicateSubquery Logical Optimization
 
-`RewritePredicateSubquery` is a [base logical optimization](../Optimizer.md#batches) that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>> as follows:
+`RewritePredicateSubquery` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, transforms Filter operators with Exists and In (with ListQuery) expressions to Join operators>> as follows:
 
 * `Filter` operators with `Exists` and `In` with `ListQuery` expressions give *left-semi joins*
 
@@ -8,7 +8,7 @@
 
 NOTE: Prefer `EXISTS` (over `Not` with `In` with `ListQuery` subquery expression) if performance matters since https://github.com/apache/spark/blob/master/sql/catalyst/src/main/scala/org/apache/spark/sql/catalyst/optimizer/subquery.scala?utf8=%E2%9C%93#L110[they say] "that will almost certainly be planned as a Broadcast Nested Loop join".
 
-`RewritePredicateSubquery` is part of the [RewriteSubquery](../Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`RewritePredicateSubquery` is part of the [RewriteSubquery](../catalyst/Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 `RewritePredicateSubquery` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
@@ -37,7 +37,7 @@ val q = ...
 val optimized = Optimize.execute(q.analyze)
 ----
 
-`RewritePredicateSubquery` is part of the [RewriteSubquery](../Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../Optimizer.md).
+`RewritePredicateSubquery` is part of the [RewriteSubquery](../catalyst/Optimizer.md#RewriteSubquery) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
 === [[rewriteExistentialExpr]] `rewriteExistentialExpr` Internal Method
 

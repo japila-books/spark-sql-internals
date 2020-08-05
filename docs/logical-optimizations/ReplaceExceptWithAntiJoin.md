@@ -7,7 +7,7 @@ When catalyst/Rule.md#apply[executed], `ReplaceExceptWithAntiJoin` transforms an
 
 `ReplaceExceptWithAntiJoin` requires that the number of columns of the left- and right-side of the `Except` operator are the same or throws an `AssertionError`.
 
-`ReplaceExceptWithAntiJoin` is a part of the [Replace Operators](../Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../Optimizer.md).
+`ReplaceExceptWithAntiJoin` is a part of the [Replace Operators](../catalyst/Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
 [[demo]]
 .Demo: ReplaceExceptWithAntiJoin

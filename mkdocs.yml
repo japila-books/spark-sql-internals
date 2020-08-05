@@ -347,6 +347,7 @@ nav:
       - RuleExecutor: catalyst/RuleExecutor.md
       - Rule: catalyst/Rule.md
       - QueryPlanner: catalyst/QueryPlanner.md
+      - Optimizer: catalyst/Optimizer.md
       - GenericStrategy: catalyst/GenericStrategy.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
@@ -801,7 +802,6 @@ nav:
     - spark-sql-ShuffledRowRDD.md
     - spark-sql-UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
-    - Optimizer: Optimizer.md
     - spark-sql-SparkStrategy.md
     - spark-sql-SparkStrategies.md
     - CatalystTypeConverters: spark-sql-CatalystTypeConverters.md

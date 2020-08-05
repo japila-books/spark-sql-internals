@@ -7,7 +7,7 @@ When catalyst/Rule.md#apply[executed], `RewriteExceptAll` transforms an spark-sq
 
 `RewriteExceptAll` requires that the number of columns of the left- and right-side of the `Except` operator are the same or throws an `AssertionError`.
 
-`RewriteExceptAll` is a part of the [Replace Operators](../Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../Optimizer.md).
+`RewriteExceptAll` is a part of the [Replace Operators](../catalyst/Optimizer.md#Replace-Operators) fixed-point rule batch of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
 [[demo]]
 .Demo: RewriteExceptAll

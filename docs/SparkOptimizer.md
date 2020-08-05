@@ -1,6 +1,6 @@
 # SparkOptimizer &mdash; Logical Query Plan Optimizer
 
-`SparkOptimizer` is a concrete [logical query plan optimizer](Optimizer.md).
+`SparkOptimizer` is a concrete [logical query plan optimizer](catalyst/Optimizer.md).
 
 `SparkOptimizer` offers the following extension points for additional user-defined optimization rules:
 
@@ -34,11 +34,11 @@ earlyScanPushDownRules: Seq[Rule[LogicalPlan]]
 * `V2ScanRelationPushDown`
 * [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md)
 
-`earlyScanPushDownRules` is part of the [Optimizer](Optimizer.md) abstraction.
+`earlyScanPushDownRules` is part of the [Optimizer](catalyst/Optimizer.md) abstraction.
 
 ## <span id="defaultBatches"><span id="batches"> Default Rule Batches
 
-`SparkOptimizer` overrides the [optimization rules](Optimizer.md#defaultBatches).
+`SparkOptimizer` overrides the [optimization rules](catalyst/Optimizer.md#defaultBatches).
 
 ### <span id="preOptimizationBatches"> Pre-Optimization Batches (Extension Point)
 
@@ -46,11 +46,11 @@ earlyScanPushDownRules: Seq[Rule[LogicalPlan]]
 preOptimizationBatches: Seq[Batch]
 ```
 
-Extension point for **Pre-Optimization Batches** that are executed first (before the regular optimization batches and the [defaultBatches](Optimizer.md#defaultBatches)).
+Extension point for **Pre-Optimization Batches** that are executed first (before the regular optimization batches and the [defaultBatches](catalyst/Optimizer.md#defaultBatches)).
 
 ### Base Logical Optimization Batches
 
-[Optimization rules](Optimizer.md#defaultBatches) of the base [Logical Optimizer](Optimizer.md)
+[Optimization rules](catalyst/Optimizer.md#defaultBatches) of the base [Logical Optimizer](catalyst/Optimizer.md)
 
 ### Optimize Metadata Only Query
 
@@ -75,7 +75,7 @@ Rules:
 
 * [PushDownPredicates](logical-optimizations/PushDownPredicates.md)
 
-Strategy: [fixedPoint](Optimizer.md#fixedPoint)
+Strategy: [fixedPoint](catalyst/Optimizer.md#fixedPoint)
 
 ### Cleanup filters that cannot be pushed down
 
@@ -113,11 +113,11 @@ Strategy: `Once`
 
 Extension point for [Extra Optimization Rules](spark-sql-ExperimentalMethods.md#extraOptimizations) using the given [ExperimentalMethods](#experimentalMethods)
 
-Strategy: [fixedPoint](Optimizer.md#fixedPoint)
+Strategy: [fixedPoint](catalyst/Optimizer.md#fixedPoint)
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
-`SparkOptimizer` considers `ExtractPythonUDFFromAggregate` optimization rule as [non-excludable](Optimizer.md#nonExcludableRules).
+`SparkOptimizer` considers `ExtractPythonUDFFromAggregate` optimization rule as [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
 
 ## Accessing SparkOptimizer
 

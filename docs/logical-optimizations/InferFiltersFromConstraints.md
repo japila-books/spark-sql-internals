@@ -5,7 +5,7 @@
 [[apply]]
 When catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when spark-sql-properties.md#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
 
-`InferFiltersFromConstraints` is a part of the [Infer Filters](../Optimizer.md#Infer-Filters) once-executed rule batch of the base [Logical Optimizer](../Optimizer.md).
+`InferFiltersFromConstraints` is a part of the [Infer Filters](../catalyst/Optimizer.md#Infer-Filters) once-executed rule batch of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
 === [[inferFilters]] `inferFilters` Internal Method
 
