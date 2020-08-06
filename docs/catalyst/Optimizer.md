@@ -18,7 +18,7 @@ Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 
 `Optimizer` is an abstract class and cannot be created directly. It is created indirectly for the [concrete Optimizers](#implementations).
 
-## <span id="defaultBatches"> Default Rule Batches
+## <span id="defaultBatches"> Default Batches
 
 `Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](../QueryExecution.md#optimizedPlan).
 
@@ -256,7 +256,7 @@ Strategy: `Once`
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
-`Optimizer` considers some optimization rules as **non-excludable**. They are considered critical for query optimization and must not be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
+`Optimizer` considers some optimization rules as **non-excludable** and necessary for correctness. They are considered so critical for query optimization that can never be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
 
 * EliminateDistinct
 * EliminateResolvedHint
@@ -364,12 +364,24 @@ blacklistedOnceBatches: Set[String]
 
 `blacklistedOnceBatches` is used when...FIXME
 
-## <span id="batches"> Rule Batches
+## Batches
 
 ```scala
 batches: Seq[Batch]
 ```
 
-`batches`...FIXME
+`batches` uses [spark.sql.optimizer.excludedRules](../spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property for the rules to be excluded.
+
+`batches` filters out [non-excludable rules](#nonExcludableRules) from the rules to be excluded. For any filtered-out rule, `batches` prints out the following WARN message to the logs:
+
+```text
+Optimization rule '[ruleName]' was not excluded from the optimizer because this rule is a non-excludable rule.
+```
+
+`batches` filters out the excluded rules from all [defaultBatches](#defaultBatches). In case a batch is left with no rules, `batches` prints out the following INFO message to the logs:
+
+```text
+Optimization batch '[name]' is excluded from the optimizer as all enclosed rules have been excluded.
+```
 
 `batches` is part of the [RuleExecutor](RuleExecutor.md#batches) abstraction.

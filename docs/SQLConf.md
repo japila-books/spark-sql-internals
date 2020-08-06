@@ -285,10 +285,6 @@ a| [[offHeapColumnVectorEnabled]] Used when:
 
 * `ParquetFileFormat` is requested for spark-sql-SparkPlan-ParquetFileFormat.md#vectorTypes[vectorTypes] and spark-sql-SparkPlan-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
 
-| optimizerExcludedRules
-| <<spark-sql-properties.md#spark.sql.optimizer.excludedRules, spark.sql.optimizer.excludedRules>>
-a| [[optimizerExcludedRules]] Used exclusively when `Optimizer` is requested for the [logical optimization batches](catalyst/Optimizer.md#batches)
-
 | optimizerInSetConversionThreshold
 | spark-sql-properties.md#spark.sql.optimizer.inSetConversionThreshold[spark.sql.optimizer.inSetConversionThreshold]
 | [[optimizerInSetConversionThreshold]] Used exclusively when `OptimizeIn` logical query optimization is spark-sql-Optimizer-OptimizeIn.md#apply[applied to a logical plan] (and replaces an spark-sql-Expression-In.md[In] predicate expression with an spark-sql-Expression-InSet.md[InSet])
@@ -552,3 +548,9 @@ Used when:
 The value of [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly) configuration property
 
 Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed
+
+## <span id="OPTIMIZER_EXCLUDED_RULES"><span id="optimizerExcludedRules"> optimizerExcludedRules
+
+The value of [spark.sql.optimizer.excludedRules](spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property
+
+Used when when `Optimizer` is requested for the [batches](catalyst/Optimizer.md#batches)

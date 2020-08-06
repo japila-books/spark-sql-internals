@@ -972,16 +972,6 @@ Default: `4`
 
 Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.
 
-| [[spark.sql.optimizer.excludedRules]] *spark.sql.optimizer.excludedRules*
-
-Comma-separated list of optimization rule names that should be disabled (excluded) in the [logical query optimizer](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules). The optimizer will log the rules that have indeed been excluded.
-
-Default: `(empty)`
-
-NOTE: It is not guaranteed that all the rules in this configuration will eventually be excluded, as some rules are necessary for correctness.
-
-Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method to access the current value.
-
 | [[spark.sql.optimizer.inSetConversionThreshold]] *spark.sql.optimizer.inSetConversionThreshold*
 
 *(internal)* The threshold of set size for `InSet` conversion.
@@ -1340,3 +1330,14 @@ When disabled (`false`), [ReuseExchange](physical-optimizations/ReuseExchange.md
 Default: `true`
 
 Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
+
+## <span id="spark.sql.optimizer.excludedRules"> spark.sql.optimizer.excludedRules
+
+Comma-separated list of fully-qualified class names of the optimization rules that should be disabled (excluded) from [logical query optimization](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules).
+
+Default: `(empty)`
+
+Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method to access the current value.
+
+!!! important
+    It is not guaranteed that all the rules to be excluded will eventually be excluded, as some rules are [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
