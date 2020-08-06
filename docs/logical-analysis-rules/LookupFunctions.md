@@ -48,7 +48,7 @@ org.apache.spark.sql.AnalysisException: Undefined function: 'f1'. This function 
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` finds all spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions (in every logical operator in the input spark-sql-LogicalPlan.md[logical plan]) and requests the [SessionCatalog](../Analyzer.md#catalog) to [check if their functions exist](../spark-sql-SessionCatalog.md#functionExists).
+`apply` finds all spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions (in every logical operator in the input spark-sql-LogicalPlan.md[logical plan]) and requests the [SessionCatalog](../Analyzer.md#catalog) to [check if their functions exist](../SessionCatalog.md#functionExists).
 
 `apply` does nothing if a function exists or reports a `NoSuchFunctionException` (that fails logical analysis).
 

@@ -26,13 +26,13 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view.
+`run` requests the session-specific `SessionCatalog` for the [metadata](../SessionCatalog.md#getTableMetadata) of the <<tableIdent, table>> and makes sure that it is not a view.
 
 NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSession.md#sessionState[SessionState] that in turn is used to access the current SessionState.md#catalog[SessionCatalog].
 
 `run` <<getPartitionSpec, getPartitionSpec>>.
 
-`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#listPartitions[partitions] per the partition specification.
+`run` requests the session-specific `SessionCatalog` for the [partitions](../SessionCatalog.md#listPartitions) per the partition specification.
 
 `run` finishes when the table has no partitions defined in a metastore.
 
@@ -42,13 +42,13 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSe
 [[total-size-stat]]
 `run` spark-sql-CommandUtils.md#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and spark-sql-CommandUtils.md#compareAndGetNewStats[creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
 
-In the end, `run` spark-sql-SessionCatalog.md#alterPartitions[alters table partition metadata] for partitions with the statistics changed.
+In the end, `run` [alters table partition metadata](../SessionCatalog.md#alterPartitions) for partitions with the statistics changed.
 
 `run` reports a `NoSuchPartitionException` when partitions do not match the metastore.
 
 `run` reports an `AnalysisException` when executed on a view.
 
-```
+```text
 ANALYZE TABLE is not supported on views.
 ```
 

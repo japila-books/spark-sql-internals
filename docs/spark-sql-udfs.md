@@ -45,7 +45,7 @@ val spark: SparkSession = ...
 scala> spark.udf.register("myUpper", (input: String) => input.toUpperCase)
 ----
 
-You can query for available spark-sql-functions.md[standard] and user-defined functions using the spark-sql-Catalog.md[Catalog] interface (that is available through SparkSession.md#catalog[`SparkSession.catalog` attribute]).
+You can query for available spark-sql-functions.md[standard] and user-defined functions using the [Catalog](Catalog.md) interface (that is available through SparkSession.md#catalog[`SparkSession.catalog` attribute]).
 
 [source, scala]
 ----

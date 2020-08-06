@@ -70,16 +70,13 @@ lookupCachedData(plan: LogicalPlan): Option[CachedData]
 
 `lookupCachedData`...FIXME
 
-[NOTE]
-====
 `lookupCachedData` is used when:
 
 * <<spark-sql-dataset-operators.md#storageLevel, Dataset.storageLevel>> basic action is used
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#isCached, isCached>>
+* `CatalogImpl` is requested to [isCached](CatalogImpl.md#isCached)
 
 * `CacheManager` is requested to <<cacheQuery, cacheQuery>> and <<useCachedData, useCachedData>>
-====
 
 === [[uncacheQuery]] Un-caching Dataset -- `uncacheQuery` Method
 
@@ -98,16 +95,13 @@ uncacheQuery(
 
 `uncacheQuery`...FIXME
 
-[NOTE]
-====
 `uncacheQuery` is used when:
 
 * <<spark-sql-dataset-operators.md#unpersist, Dataset.unpersist>> basic action is used
 
 * <<spark-sql-LogicalPlan-DropTableCommand.md#, DropTableCommand>> and `TruncateTableCommand` logical commands are executed
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#uncacheTable, uncache>> and <<spark-sql-CatalogImpl.md#refreshTable, refresh>> a table or view, <<spark-sql-CatalogImpl.md#dropTempView, dropTempView>> and <<spark-sql-CatalogImpl.md#dropGlobalTempView, dropGlobalTempView>>
-====
+* `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
 === [[isEmpty]] `isEmpty` Method
 
@@ -148,18 +142,15 @@ Internally, `cacheQuery` requests the `Dataset` for the spark-sql-Dataset.md#log
 
 If the input `query` <<lookupCachedData, has already been cached>>, `cacheQuery` simply prints the following WARN message to the logs and exits (i.e. does nothing but prints out the WARN message):
 
-```
+```text
 Asked to cache already cached data.
 ```
 
-[NOTE]
-====
 `cacheQuery` is used when:
 
 * <<spark-sql-dataset-operators.md#persist, Dataset.persist>> basic action is used
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#cacheTable, cache>> and <<spark-sql-CatalogImpl.md#refreshTable, refresh>> a table or view in-memory
-====
+* `CatalogImpl` is requested to [cache](CatalogImpl.md#cacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view in-memory
 
 === [[clearCache]] Removing All Cached Logical Plans -- `clearCache` Method
 
@@ -172,7 +163,7 @@ clearCache(): Unit
 
 In the end, `clearCache` removes all `CachedData` entries from the <<cachedData, cachedData>> internal registry.
 
-NOTE: `clearCache` is used exclusively when `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#clearCache, clear the cache>>.
+`clearCache` is used when `CatalogImpl` is requested to [clear the cache](CatalogImpl.md#clearCache).
 
 === [[recacheByCondition]] Re-Caching Structured Query -- `recacheByCondition` Internal Method
 
@@ -205,7 +196,7 @@ recacheByPath(spark: SparkSession, resourcePath: String): Unit
 
 `recacheByPath`...FIXME
 
-NOTE: `recacheByPath` is used exclusively when `CatalogImpl` is requested to spark-sql-CatalogImpl.md#refreshByPath[refreshByPath].
+`recacheByPath` is used when `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath).
 
 === [[useCachedData]] Replacing Segments of Logical Query Plan With Cached Data -- `useCachedData` Method
 

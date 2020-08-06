@@ -88,7 +88,7 @@ a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` spark-sql-D
 CACHE LAZY? TABLE [table] (AS? [query])?
 ----
 
-`CacheTableCommand` requests the session-specific `Catalog` to spark-sql-Catalog.md#cacheTable[cache the table].
+`CacheTableCommand` requests the session-specific `Catalog` to [cache the table](../Catalog.md#cacheTable).
 
 NOTE: `CacheTableCommand` uses `SparkSession` SparkSession.md#catalog[to access the `Catalog`].
 

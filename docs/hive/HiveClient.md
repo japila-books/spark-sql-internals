@@ -61,7 +61,7 @@ getPartitions(
 
 Returns the <<spark-sql-CatalogTablePartition.md#, CatalogTablePartition>> of a table
 
-Used exclusively when `HiveExternalCatalog` is requested to HiveExternalCatalog.md#listPartitions[list the partitions of a table]
+Used exclusively when `HiveExternalCatalog` is requested to [list the partitions of a table](HiveExternalCatalog.md#listPartitions)
 
 | getPartitionsByFilter
 | [[getPartitionsByFilter]] Used when...FIXME
@@ -102,13 +102,10 @@ getTable(
 
 `getTable` <<getTableOption, retrieves the table metadata from a Hive metastore>> if available or throws a `NoSuchTableException`.
 
-[NOTE]
-====
 `getTable` is used when:
 
-* `HiveExternalCatalog` is requested for a HiveExternalCatalog.md#getRawTable[table metadata]
+* `HiveExternalCatalog` is requested for a [table metadata](HiveExternalCatalog.md#getRawTable)
 
 * `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 
 * `HiveClientImpl` is requested for HiveClientImpl.md#renamePartitions[renamePartitions] or HiveClientImpl.md#alterPartitions[alterPartitions]
-====

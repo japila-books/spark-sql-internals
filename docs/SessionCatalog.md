@@ -8,7 +8,7 @@
 
 SessionCatalog takes the following to be created:
 
-* <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](spark-sql-ExternalCatalog.md)
+* <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](ExternalCatalog.md)
 * <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
 * <span id="functionRegistry"> [FunctionRegistry](spark-sql-FunctionRegistry.md)
 * <span id="conf"> [SQLConf](SQLConf.md)
@@ -34,7 +34,7 @@ org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
 ## ExternalCatalog
 
-`SessionCatalog` uses an [ExternalCatalog](spark-sql-ExternalCatalog.md) for the metadata of permanent entities (i.e. [tables](#getTableMetadata)).
+`SessionCatalog` uses an [ExternalCatalog](ExternalCatalog.md) for the metadata of permanent entities (i.e. [tables](#getTableMetadata)).
 
 `SessionCatalog` is in fact a layer over ExternalCatalog in a [SparkSession](SparkSession.md#sessionState) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)) to be used.
 
@@ -79,7 +79,7 @@ listTables(db: String, pattern: String): Seq[TableIdentifier]
 
 * `SessionCatalog` is requested to <<reset, reset>> (for testing)
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listTables, listTables>> (for testing)
+* `CatalogImpl` is requested to [listTables](CatalogImpl.md#listTables) (for testing)
 ====
 
 === [[isTemporaryTable]] Checking Whether Table Is Temporary View -- `isTemporaryTable` Method
@@ -148,7 +148,7 @@ NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUns
 alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
 ----
 
-`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to spark-sql-ExternalCatalog.md#alterTableStats[alter the statistics of the table] (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
+`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to [alter the statistics of the table](ExternalCatalog.md#alterTableStats) (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
 
 `alterTableStats` reports a `NoSuchDatabaseException` if the <<databaseExists, database does not exist>>.
 
@@ -171,7 +171,7 @@ tableExists(
   name: TableIdentifier): Boolean
 ----
 
-`tableExists` requests the <<externalCatalog, ExternalCatalog>> to ../spark-sql-ExternalCatalog.md#tableExists[check out whether the table exists or not].
+`tableExists` requests the <<externalCatalog, ExternalCatalog>> to [check out whether the table exists or not](ExternalCatalog.md#tableExists).
 
 `tableExists` assumes <<currentDb, default>> database unless defined in the input `TableIdentifier`.
 
@@ -190,7 +190,7 @@ functionExists(name: FunctionIdentifier): Boolean
 
 * [LookupFunctions](logical-analysis-rules/LookupFunctions.md) logical rule (to make sure that spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
 
-* `CatalogImpl` to spark-sql-CatalogImpl.md#functionExists[check if a function exists in a database]
+* `CatalogImpl` to [check if a function exists in a database](CatalogImpl.md#functionExists)
 
 * ...
 
@@ -416,7 +416,7 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 getTableMetadata(name: TableIdentifier): CatalogTable
 ----
 
-`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the spark-sql-ExternalCatalog.md#getTable[table metadata].
+`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the [table metadata](ExternalCatalog.md#getTable).
 
 Before requesting the external metastore, `getTableMetadata` makes sure that the <<requireDbExists, database>> and <<requireTableExists, table>> (of the input `TableIdentifier`) both exist. If either does not exist, `getTableMetadata` reports a `NoSuchDatabaseException` or `NoSuchTableException`, respectively.
 
@@ -439,7 +439,7 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 ====
 `getTempViewOrPermanentTableMetadata` is used when:
 
-* `CatalogImpl` is requested for spark-sql-CatalogImpl.md#makeTable[converting TableIdentifier to Table], spark-sql-CatalogImpl.md#listColumns[listing the columns of a table (as Dataset)] and spark-sql-CatalogImpl.md#refreshTable[refreshing a table] (i.e. the analyzed logical plan of the table query and re-caching it)
+* `CatalogImpl` is requested for [converting TableIdentifier to Table](CatalogImpl.md#makeTable), [listing the columns of a table (as Dataset)](CatalogImpl.md#listColumns) and [refreshing a table](CatalogImpl.md#refreshTable) (i.e. the analyzed logical plan of the table query and re-caching it)
 
 * `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, spark-sql-LogicalPlan-DescribeColumnCommand.md#run[DescribeColumnCommand], `ShowColumnsCommand` and <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, ShowTablesCommand>> logical commands are requested to run (executed)
 ====
@@ -512,7 +512,7 @@ getGlobalTempView(
 
 `getGlobalTempView` requests the <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[temporary view definition by the input name].
 
-NOTE: `getGlobalTempView` is used when `CatalogImpl` is requested to spark-sql-CatalogImpl.md#dropGlobalTempView[dropGlobalTempView].
+`getGlobalTempView` is used when `CatalogImpl` is requested to [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView).
 
 === [[registerFunction]] `registerFunction` Method
 

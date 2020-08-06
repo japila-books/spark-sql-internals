@@ -85,7 +85,7 @@ NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule t
 +
 That case seems mostly for compatibility with Hive as `grouping__id` attribute name is used by Hive.
 
-* For spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a Generator function by name](../spark-sql-SessionCatalog.md#lookupFunction).
+* For spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerators], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a Generator function by name](../SessionCatalog.md#lookupFunction).
 +
 If some other non-generator function is found for the name, `apply` fails the analysis phase by reporting an `AnalysisException`:
 +
@@ -93,7 +93,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 [name] is expected to be a generator. However, its class is [className], which is not a generator.
 ```
 
-* For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a function by name](../spark-sql-SessionCatalog.md#lookupFunction).
+* For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a function by name](../SessionCatalog.md#lookupFunction).
 
 * spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +

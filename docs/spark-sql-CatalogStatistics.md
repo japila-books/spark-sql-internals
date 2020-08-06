@@ -3,7 +3,7 @@ title: CatalogStatistics
 # CatalogStatistics -- Table Statistics From External Catalog (Metastore)
 
 [[creating-instance]][[table-statistics]]
-`CatalogStatistics` are *table statistics* that are stored in an spark-sql-ExternalCatalog.md[external catalog] (aka _metastore_):
+`CatalogStatistics` are *table statistics* that are stored in an [external catalog](ExternalCatalog.md):
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
 * [[rowCount]] Estimated *number of rows* (aka _row count_)
@@ -20,11 +20,11 @@ title: CatalogStatistics
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
-* spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in spark-sql-ExternalCatalog.md[ExternalCatalog])
+* spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in [ExternalCatalog](ExternalCatalog.md))
 
 * `CommandUtils` is requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics], the spark-sql-CommandUtils.md#compareAndGetNewStats[current statistics (if changed)]
 
-* `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring Spark statistics from properties] (from a Hive Metastore)
+* `HiveExternalCatalog` is requested for [restoring Spark statistics from properties](hive/HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore)
 
 * hive/DetermineTableStats.md#apply[DetermineTableStats] and spark-sql-SparkOptimizer-PruneFileSourcePartitions.md[PruneFileSourcePartitions] logical optimizations are executed (i.e. applied to a logical plan)
 
@@ -85,12 +85,7 @@ CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 
 [NOTE]
 ====
-`toPlanStats` does the reverse of hive/HiveExternalCatalog.md#statsToProperties[HiveExternalCatalog.statsToProperties].
-
-[source, scala]
-----
-FIXME Example
-----
+`toPlanStats` does the reverse of [HiveExternalCatalog.statsToProperties](hive/HiveExternalCatalog.md#statsToProperties).
 ====
 
-NOTE: `toPlanStats` is used when hive/HiveTableRelation.md#computeStats[HiveTableRelation] and spark-sql-LogicalPlan-LogicalRelation.md#computeStats[LogicalRelation] are requested for statistics.
+NOTE: `toPlanStats` is used when [HiveTableRelation](hive/HiveTableRelation.md#computeStats) and [LogicalRelation](logical-operators/LogicalRelation.md#computeStats) are requested for statistics.

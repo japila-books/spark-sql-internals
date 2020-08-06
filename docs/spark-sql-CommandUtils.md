@@ -18,7 +18,7 @@ Enable `INFO` logging level for `org.apache.spark.sql.execution.command.CommandU
 
 Add the following line to `conf/log4j.properties`:
 
-```
+```text
 log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=INFO
 ```
 
@@ -34,7 +34,7 @@ updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 
 `updateTableStats` updates the table statistics of the input spark-sql-CatalogTable.md[CatalogTable] (only if the spark-sql-CatalogTable.md#stats[statistics are available] in the metastore already).
 
-`updateTableStats` requests `SessionCatalog` to spark-sql-SessionCatalog.md#alterTableStats[alterTableStats] with the <<calculateTotalSize, current total size>> (when spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on) or empty statistics (that effectively removes the recorded statistics completely).
+`updateTableStats` requests `SessionCatalog` to [alterTableStats](SessionCatalog.md#alterTableStats) with the <<calculateTotalSize, current total size>> (when spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on) or empty statistics (that effectively removes the recorded statistics completely).
 
 IMPORTANT: `updateTableStats` uses spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property to auto-update table statistics and can be expensive (and slow down data change commands) if the total number of files of a table is very large.
 
@@ -49,18 +49,15 @@ NOTE: `updateTableStats` is used when hive/InsertIntoHiveTable.md[InsertIntoHive
 calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigInt
 ----
 
-`calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input spark-sql-CatalogTable.md[CatalogTable] (when it has no partitions defined) or all its spark-sql-SessionCatalog.md#listPartitions[partitions] (through the session-scoped spark-sql-SessionCatalog.md[SessionCatalog]).
+`calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input spark-sql-CatalogTable.md[CatalogTable] (when it has no partitions defined) or all its [partitions](SessionCatalog.md#listPartitions) (through the session-scoped [SessionCatalog](SessionCatalog.md)).
 
 NOTE: `calculateTotalSize` uses the input `SessionState` to access the SessionState.md#catalog[SessionCatalog].
 
-[NOTE]
-====
 `calculateTotalSize` is used when:
 
 * <<spark-sql-LogicalPlan-AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.md#, AnalyzeTableCommand>> commands are executed
 
 * `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
-====
 
 === [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
 

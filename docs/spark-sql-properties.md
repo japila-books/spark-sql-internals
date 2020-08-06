@@ -1205,7 +1205,7 @@ Used when:
 
 * Reading (spark-sql-DataFrameWriter.md[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
 
-* spark-sql-Catalog.md#createExternalTable[Creating external table from a path] (in `Catalog.createExternalTable`)
+* [Catalog.createExternalTable](Catalog.md#createExternalTable)
 
 * Reading (`DataStreamReader`) or writing (`DataStreamWriter`) in Structured Streaming
 

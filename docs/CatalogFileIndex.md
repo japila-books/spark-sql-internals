@@ -66,7 +66,7 @@ filterPartitions(
 
 `filterPartitions` requests the <<table, CatalogTable>> for the spark-sql-CatalogTable.md#partitionColumnNames[partition columns].
 
-For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the SessionState.md#catalog[SessionCatalog] for the spark-sql-SessionCatalog.md#listPartitionsByFilter[partitions by filter] and creates a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex] (with the partition listing time).
+For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the SessionState.md#catalog[SessionCatalog] for the [partitions by filter](SessionCatalog.md#listPartitionsByFilter) and creates a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex] (with the partition listing time).
 
 For an unpartitioned table (no partition columns defined), `filterPartitions` simply returns a InMemoryFileIndex.md[InMemoryFileIndex] (with the <<rootPaths, rootPaths>> and no user-specified schema).
 

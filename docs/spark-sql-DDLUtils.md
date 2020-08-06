@@ -43,7 +43,7 @@ isDatasourceTable(
 
 `isDatasourceTable` is used when:
 
-* `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#createTable[createTable] (and hive/HiveExternalCatalog.md#saveTableIntoHive[saveTableIntoHive])
+* `HiveExternalCatalog` is requested to [createTable](hive/HiveExternalCatalog.md#createTable) (and [saveTableIntoHive](hive/HiveExternalCatalog.md#saveTableIntoHive))
 
 * `HiveUtils` utility is used to hive/HiveUtils.md#inferSchema[inferSchema]
 

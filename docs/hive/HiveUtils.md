@@ -1,6 +1,6 @@
 # HiveUtils
 
-`HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that HiveExternalCatalog.md#client[HiveExternalCatalog] uses to interact with a Hive metastore.
+`HiveUtils` is an utility that is used to create a <<newClientForMetadata, HiveClientImpl>> that [HiveExternalCatalog](HiveExternalCatalog.md#client) uses to interact with a Hive metastore.
 
 `HiveUtils` is a Scala object with `private[spark]` access modifier. Use the following utility to access the properties.
 
@@ -79,7 +79,7 @@ Internally, `newClientForMetadata` creates a new [SQLConf](../SQLConf.md) with *
 
 You should see one of the following INFO messages in the logs:
 
-```
+```text
 Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using Spark classes.
 Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using maven.
 Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
@@ -87,7 +87,7 @@ Initializing HiveMetastoreConnection version [hiveMetastoreVersion] using [jars]
 
 In the end, `newClientForMetadata` requests the `IsolatedClientLoader` for a IsolatedClientLoader.md#createClient[HiveClient].
 
-NOTE: `newClientForMetadata` is used when `HiveExternalCatalog` is requested for a HiveExternalCatalog.md#client[HiveClient].
+`newClientForMetadata` is used when `HiveExternalCatalog` is requested for a [HiveClient](HiveExternalCatalog.md#client).
 
 === [[newClientForExecution]] `newClientForExecution` Utility
 

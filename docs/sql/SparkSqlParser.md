@@ -10,7 +10,7 @@
 
 * `table` methods in [DataFrameReader](../DataFrameReader.md#table) and [SparkSession](../SparkSession.md#table)
 * [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
-* `createExternalTable` and `refreshTable` methods of [Catalog](../spark-sql-Catalog.md) (and [SessionState](../SessionState.md#refreshTable))
+* `createExternalTable` and `refreshTable` methods of [Catalog](../Catalog.md) (and [SessionState](../SessionState.md#refreshTable))
 
 ## Creating Instance
 

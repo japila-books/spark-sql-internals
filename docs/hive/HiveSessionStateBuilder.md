@@ -23,7 +23,7 @@ image::../images/spark-sql-HiveSessionStateBuilder-SessionState.png[align="cente
 a| [[analyzer]] Hive-specific [logical query plan analyzer](../Analyzer.md) with the [Hive-specific rules](#analyzer-rules).
 
 | `catalog`
-a| [[catalog]] HiveSessionCatalog.md[HiveSessionCatalog] with the following:
+a| [[catalog]] [HiveSessionCatalog](HiveSessionCatalog.md) with the following:
 
 * <<externalCatalog, HiveExternalCatalog>>
 * ../SharedState.md#globalTempViewManager[GlobalTempViewManager] from the session-specific `SharedState`
@@ -39,7 +39,7 @@ NOTE: If <<parentState, parentState>> is defined, the state is copied to `catalo
 Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a RelationConversions.md#creating-instance[RelationConversions] logical evaluation rule (as part of <<postHocResolutionRules, Hive-Specific Analyzer's PostHoc Resolution Rules>>)
 
 | `externalCatalog`
-| [[externalCatalog]] HiveExternalCatalog.md[HiveExternalCatalog]
+| [[externalCatalog]] [HiveExternalCatalog](HiveExternalCatalog.md)
 
 | <<planner-indepth, planner>>
 | [[planner]] ../spark-sql-SparkPlanner.md[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.

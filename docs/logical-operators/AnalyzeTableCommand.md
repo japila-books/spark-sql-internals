@@ -26,7 +26,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` requests the session-specific `SessionCatalog` for the spark-sql-SessionCatalog.md#getTableMetadata[metadata] of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
+`run` requests the session-specific `SessionCatalog` for the [metadata](../SessionCatalog.md#getTableMetadata) of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 
 NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSession.md#sessionState[SessionState] that in turn gives access to the current SessionState.md#catalog[SessionCatalog].
 
@@ -35,11 +35,11 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSe
 
 NOTE: `run` uses `SparkSession` to SparkSession.md#table[find the table] in a metastore.
 
-In the end, `run` spark-sql-SessionCatalog.md#alterTableStats[alters table statistics] if spark-sql-CommandUtils.md#compareAndGetNewStats[different from the existing table statistics in metastore].
+In the end, `run` [alters table statistics](../SessionCatalog.md#alterTableStats) if spark-sql-CommandUtils.md#compareAndGetNewStats[different from the existing table statistics in metastore].
 
 `run` throws a `AnalysisException` when executed on a view.
 
-```
+```text
 ANALYZE TABLE is not supported on views.
 ```
 

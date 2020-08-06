@@ -11,7 +11,7 @@
 
 NOTE: The location of the default database for the Hive metastore warehouse is `/user/hive/warehouse` by default.
 
-NOTE: The Hadoop configuration is what HiveExternalCatalog.md#creating-instance[HiveExternalCatalog] was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
+NOTE: The Hadoop configuration is what [HiveExternalCatalog](HiveExternalCatalog.md) was given when created (which is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix).
 
 [[logging]]
 [TIP]

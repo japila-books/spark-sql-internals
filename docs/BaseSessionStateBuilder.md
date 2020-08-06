@@ -59,7 +59,7 @@ analyzer: Analyzer
 catalog: SessionCatalog
 ```
 
-`BaseSessionStateBuilder` creates a [SessionCatalog](spark-sql-SessionCatalog.md) on demand (and caches it for later usage).
+`BaseSessionStateBuilder` creates a [SessionCatalog](SessionCatalog.md) on demand (and caches it for later usage).
 
 Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionState](#build) itself
 

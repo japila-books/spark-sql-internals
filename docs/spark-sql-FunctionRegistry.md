@@ -32,7 +32,7 @@ trait FunctionRegistry {
 | Description
 
 | clear
-| [[clear]] Used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#reset, reset>>
+| [[clear]] Used exclusively when `SessionCatalog` is requested to [reset](SessionCatalog.md#reset)
 
 | dropFunction
 | [[dropFunction]] Used when...FIXME
@@ -47,9 +47,9 @@ Used when:
 
 * `FunctionRegistry` is requested to <<functionExists, functionExists>>
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupFunction, find a function by name>>, <<spark-sql-SessionCatalog.md#lookupFunctionInfo, lookupFunctionInfo>> or <<spark-sql-SessionCatalog.md#reset, reset>>
+* `SessionCatalog` is requested to [find a function by name](SessionCatalog.md#lookupFunction), [lookupFunctionInfo](SessionCatalog.md#lookupFunctionInfo) or [reset](SessionCatalog.md#reset)
 
-* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
+* `HiveSessionCatalog` is requested to [lookupFunction0](hive/HiveSessionCatalog.md#lookupFunction0)
 
 | lookupFunctionBuilder
 | [[lookupFunctionBuilder]] Used when...FIXME
@@ -59,7 +59,7 @@ a| [[registerFunction]]
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#registerFunction, registerFunction>> or <<spark-sql-SessionCatalog.md#reset, reset>>
+* `SessionCatalog` is requested to [registerFunction](SessionCatalog.md#registerFunction) or [reset](SessionCatalog.md#reset)
 
 * `FunctionRegistry` is requested for a <<builtin, SimpleFunctionRegistry with the built-in functions registered>> or <<createOrReplaceTempFunction, createOrReplaceTempFunction>>
 

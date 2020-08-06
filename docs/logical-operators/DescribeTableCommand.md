@@ -155,13 +155,13 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` uses the <<spark-sql-SessionCatalog.md#, SessionCatalog>> (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
+`run` uses the [SessionCatalog](../SessionCatalog.md) (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
 
-For a <<spark-sql-SessionCatalog.md#isTemporaryTable, temporary view>>, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#lookupRelation, lookupRelation>> to access the <<catalyst/QueryPlan.md#schema, schema>> and <<describeSchema, describeSchema>>.
+For a [temporary view](../SessionCatalog.md#isTemporaryTable), `run` requests the `SessionCatalog` to [lookupRelation](../SessionCatalog.md#lookupRelation) to access the <<catalyst/QueryPlan.md#schema, schema>> and <<describeSchema, describeSchema>>.
 
 For all other table types, `run` does the following:
 
-. Requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>> (as a <<spark-sql-CatalogTable.md#, CatalogTable>>) and <<describeSchema, describeSchema>> (with the <<spark-sql-CatalogTable.md#schema, schema>>)
+. Requests the `SessionCatalog` to [retrieve the table metadata from the external catalog (metastore)](../SessionCatalog.md#getTableMetadata) (as a <<spark-sql-CatalogTable.md#, CatalogTable>>) and <<describeSchema, describeSchema>> (with the <<spark-sql-CatalogTable.md#schema, schema>>)
 
 . <<describePartitionInfo, describePartitionInfo>>
 
@@ -209,7 +209,7 @@ describeFormattedTableInfo(table: CatalogTable, buffer: ArrayBuffer[Row]): Unit
 
 `describeFormattedTableInfo`...FIXME
 
-NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a <<spark-sql-SessionCatalog.md#isTemporaryTable, non-temporary table>> and the <<isExtended, isExtended>> flag on.
+NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a [non-temporary table](../SessionCatalog.md#isTemporaryTable) and the <<isExtended, isExtended>> flag on.
 
 === [[describeDetailedPartitionInfo]] `describeDetailedPartitionInfo` Internal Method
 

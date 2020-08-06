@@ -18,11 +18,11 @@ NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory metho
 
 * spark-sql-caching-and-persistence.md#persist[Dataset.persist] operator is used (that in turn requests `CacheManager` to spark-sql-CacheManager.md#cacheQuery[cache a structured query])
 
-* `CatalogImpl` is requested to spark-sql-CatalogImpl.md#cacheTable[cache] or spark-sql-CatalogImpl.md#refreshTable[refresh] a table or view in-memory
+* `CatalogImpl` is requested to [cache](../CatalogImpl.md#cacheTable) or [refresh](../CatalogImpl.md#refreshTable) a table or view in-memory
 
 * `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>> (and in turn requests `CacheManager` to <<spark-sql-CacheManager.md#recacheByPlan, recacheByPlan>>)
 
-* `CatalogImpl` is requested to spark-sql-CatalogImpl.md#refreshByPath[refreshByPath] (and in turn requests `CacheManager` to spark-sql-CacheManager.md#recacheByPath[recacheByPath])
+* `CatalogImpl` is requested to [refreshByPath](../CatalogImpl.md#refreshByPath) (and in turn requests `CacheManager` to spark-sql-CacheManager.md#recacheByPath[recacheByPath])
 
 * `QueryExecution` is requested for a [cached logical query plan](../QueryExecution.md#withCachedData) (and in turn requests `CacheManager` to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans])
 

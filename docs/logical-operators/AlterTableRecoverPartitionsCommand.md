@@ -15,7 +15,7 @@
 
 * [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed (for a partitioned [HadoopFsRelation](../spark-sql-BaseRelation-HadoopFsRelation.md))
 
-* `CatalogImpl` is requested to [recoverPartitions](../spark-sql-CatalogImpl.md#recoverPartitions)
+* `CatalogImpl` is requested to [recoverPartitions](../CatalogImpl.md#recoverPartitions)
 
 ## <span id="run"> Executing Command
 

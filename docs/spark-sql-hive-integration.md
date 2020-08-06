@@ -1,6 +1,6 @@
 # Hive Integration
 
-Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using hive/HiveExternalCatalog.md[HiveExternalCatalog].
+Spark SQL can read and write data stored in http://hive.apache.org/[Apache Hive] using [HiveExternalCatalog](hive/HiveExternalCatalog.md).
 
 [NOTE]
 ====

@@ -36,7 +36,7 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 * <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>> and <<SparkSession.md#range, SparkSession.range>> operators are used
 
 * `CatalogImpl` is requested to
-<<spark-sql-CatalogImpl.md#makeDataset, makeDataset>> (when requested to <<spark-sql-CatalogImpl.md#listDatabases, list databases>>, <<spark-sql-CatalogImpl.md#listTables, tables>>, <<spark-sql-CatalogImpl.md#listFunctions, functions>> and <<spark-sql-CatalogImpl.md#listColumns, columns>>)
+[makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
 * Spark Structured Streaming's `MicroBatchExecution` is requested to `runBatch`
 

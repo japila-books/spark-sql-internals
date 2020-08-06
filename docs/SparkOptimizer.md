@@ -15,7 +15,7 @@
 `SparkOptimizer` takes the following to be created:
 
 * <span id="catalogManager"> [CatalogManager](connector/catalog/CatalogManager.md)
-* <span id="catalog"> [SessionCatalog](spark-sql-SessionCatalog.md)
+* <span id="catalog"> [SessionCatalog](SessionCatalog.md)
 * <span id="experimentalMethods"> [ExperimentalMethods](spark-sql-ExperimentalMethods.md)
 
 `SparkOptimizer` is created when `SessionState` is requested for a [logical query plan optimizer](SessionState.md#optimizer) (indirectly using `BaseSessionStateBuilder` is requested for an [Optimizer](BaseSessionStateBuilder.md#optimizer)).

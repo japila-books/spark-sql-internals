@@ -254,7 +254,7 @@ Among the optimization rules are the following:
 
 === [[commands]] Logical Commands for Altering Table Statistics
 
-The following are the logical commands that spark-sql-SessionCatalog.md#alterTableStats[alter table statistics in a metastore] (aka _external catalog_):
+The following are the logical commands that [alter table statistics in a metastore](SessionCatalog.md#alterTableStats) (aka _external catalog_):
 
 . spark-sql-LogicalPlan-AnalyzeTableCommand.md[AnalyzeTableCommand]
 

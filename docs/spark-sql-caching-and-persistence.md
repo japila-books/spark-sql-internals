@@ -133,6 +133,6 @@ res0: Boolean = false
 
 === [[cache-table]] SQL's CACHE TABLE
 
-SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to spark-sql-Catalog.md#cacheTable[caching the table].
+SQL's `CACHE TABLE` corresponds to requesting the session-specific `Catalog` to [caching the table](Catalog.md#cacheTable).
 
 Internally, `CACHE TABLE` becomes spark-sql-LogicalPlan-RunnableCommand.md#CacheTableCommand[CacheTableCommand] runnable command that...FIXME

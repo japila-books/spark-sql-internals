@@ -15,4 +15,4 @@ prunePartitionsByFilter(
 
 `prunePartitionsByFilter`...FIXME
 
-NOTE: `prunePartitionsByFilter` is used when spark-sql-InMemoryCatalog.md#listPartitionsByFilter[InMemoryCatalog] and hive/HiveExternalCatalog.md#listPartitionsByFilter[HiveExternalCatalog] are requested to list partitions by a filter.
+`prunePartitionsByFilter` is used when [InMemoryCatalog](InMemoryCatalog.md#listPartitionsByFilter) and [HiveExternalCatalog](hive/HiveExternalCatalog.md#listPartitionsByFilter) are requested to list partitions by a filter.

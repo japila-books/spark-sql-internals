@@ -47,16 +47,16 @@ org.apache.spark.sql.internal.SharedState
 externalCatalog: ExternalCatalog
 ```
 
-[ExternalCatalog](spark-sql-ExternalCatalog.md) that is created reflectively based on [spark.sql.catalogImplementation](#externalCatalogClassName) internal configuration property:
+[ExternalCatalog](ExternalCatalog.md) that is created reflectively based on [spark.sql.catalogImplementation](#externalCatalogClassName) internal configuration property:
 
 * [HiveExternalCatalog](hive/HiveExternalCatalog.md) for `hive`
-* [InMemoryCatalog](spark-sql-InMemoryCatalog.md) for `in-memory`
+* [InMemoryCatalog](InMemoryCatalog.md) for `in-memory`
 
 While initialized:
 
-1. [Creates](spark-sql-ExternalCatalog.md#createDatabase) the *default* database (with `default database` description and [warehousePath](#warehousePath) location) unless [available already](spark-sql-ExternalCatalog.md#databaseExists).
+1. [Creates](ExternalCatalog.md#createDatabase) the *default* database (with `default database` description and [warehousePath](#warehousePath) location) unless [available already](ExternalCatalog.md#databaseExists).
 
-1. [Registers](spark-sql-ExternalCatalog.md#addListener) a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
+1. [Registers](ExternalCatalog.md#addListener) a `ExternalCatalogEventListener` that propagates external catalog events to the Spark listener bus.
 
 ### <span id="globalTempViewManager"> GlobalTempViewManager
 
@@ -70,13 +70,13 @@ When accessed for the very first time, `globalTempViewManager` gets the name of 
 
 In the end, `globalTempViewManager` creates a new [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md) (with the configured database name).
 
-`globalTempViewManager` throws a `SparkException` when the global temporary view database [exist](spark-sql-ExternalCatalog.md#databaseExists) in the [ExternalCatalog](#externalCatalog):
+`globalTempViewManager` throws a `SparkException` when the global temporary view database [exist](ExternalCatalog.md#databaseExists) in the [ExternalCatalog](#externalCatalog):
 
 ```text
 [globalTempDB] is a system preserved database, please rename your existing database to resolve the name conflict, or set a different value for spark.sql.globalTempDatabase, and launch your Spark application again.
 ```
 
-`globalTempViewManager` is used when [BaseSessionStateBuilder](BaseSessionStateBuilder.md#catalog) and [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md#catalog) are requested for a [SessionCatalog](spark-sql-SessionCatalog.md).
+`globalTempViewManager` is used when [BaseSessionStateBuilder](BaseSessionStateBuilder.md#catalog) and [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md#catalog) are requested for a [SessionCatalog](SessionCatalog.md).
 
 ## <span id="externalCatalogClassName"> externalCatalogClassName Internal Method
 
@@ -85,10 +85,10 @@ externalCatalogClassName(
   conf: SparkConf): String
 ```
 
-`externalCatalogClassName` gives the name of the class of the [ExternalCatalog](spark-sql-ExternalCatalog.md) implementation based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property:
+`externalCatalogClassName` gives the name of the class of the [ExternalCatalog](ExternalCatalog.md) implementation based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property:
 
 * [org.apache.spark.sql.hive.HiveExternalCatalog](hive/HiveExternalCatalog.md) for `hive`
-* [org.apache.spark.sql.catalyst.catalog.InMemoryCatalog](spark-sql-InMemoryCatalog.md) for `in-memory`
+* [org.apache.spark.sql.catalyst.catalog.InMemoryCatalog](InMemoryCatalog.md) for `in-memory`
 
 `externalCatalogClassName` is used when `SharedState` is requested for the [ExternalCatalog](#externalCatalog).
 

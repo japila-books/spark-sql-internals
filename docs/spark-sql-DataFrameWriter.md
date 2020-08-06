@@ -277,7 +277,7 @@ Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-
 
 NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
 
-`saveAsTable` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#tableExists, check whether the table exists or not>>.
+`saveAsTable` then requests the `SessionCatalog` to [check whether the table exists or not](SessionCatalog.md#tableExists).
 
 NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
 

@@ -181,17 +181,17 @@ nav:
         - logical-operators/View.md
     - SparkSession Registries:
       - Catalog:
-        - spark-sql-Catalog.md
-        - spark-sql-CatalogImpl.md
+        - Catalog: Catalog.md
+        - CatalogImpl: CatalogImpl.md
       - spark-sql-ExecutionListenerManager.md
       - spark-sql-ExperimentalMethods.md
       - ExternalCatalog:
-        - spark-sql-ExternalCatalog.md
-        - spark-sql-InMemoryCatalog.md
+        - ExternalCatalog: ExternalCatalog.md
+        - InMemoryCatalog: InMemoryCatalog.md
       - spark-sql-FunctionRegistry.md
       - spark-sql-GlobalTempViewManager.md
       - SessionCatalog:
-        - SessionCatalog: spark-sql-SessionCatalog.md
+        - SessionCatalog: SessionCatalog.md
         - spark-sql-CatalogTable.md
         - spark-sql-CatalogStorageFormat.md
         - spark-sql-CatalogTablePartition.md

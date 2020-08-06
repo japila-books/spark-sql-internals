@@ -1,6 +1,6 @@
 # CatalogImpl
 
-`CatalogImpl` is the spark-sql-Catalog.md[Catalog] in Spark SQL that...FIXME
+`CatalogImpl` is the [Catalog](Catalog.md) in Spark SQL that...FIXME
 
 .CatalogImpl uses SessionCatalog (through SparkSession)
 image::images/spark-sql-CatalogImpl.png[align="center"]
@@ -18,9 +18,9 @@ createTable(
   options: Map[String, String]): DataFrame
 ----
 
-NOTE: `createTable` is part of spark-sql-Catalog.md#createTable[Catalog Contract] to...FIXME.
-
 `createTable`...FIXME
+
+`createTable` is part of [Catalog Contract](Catalog.md#createTable) to...FIXME.
 
 === [[getTable]] `getTable` Method
 
@@ -30,7 +30,7 @@ getTable(tableName: String): Table
 getTable(dbName: String, tableName: String): Table
 ----
 
-NOTE: `getTable` is part of spark-sql-Catalog.md#getTable[Catalog Contract] to...FIXME.
+NOTE: `getTable` is part of [Catalog Contract](Catalog.md#getTable) to...FIXME.
 
 `getTable`...FIXME
 
@@ -45,7 +45,7 @@ getFunction(
   functionName: String): Function
 ----
 
-NOTE: `getFunction` is part of spark-sql-Catalog.md#getFunction[Catalog Contract] to...FIXME.
+NOTE: `getFunction` is part of [Catalog Contract](Catalog.md#getFunction) to...FIXME.
 
 `getFunction`...FIXME
 
@@ -60,7 +60,7 @@ functionExists(
   functionName: String): Boolean
 ----
 
-NOTE: `functionExists` is part of spark-sql-Catalog.md#functionExists[Catalog Contract] to...FIXME.
+NOTE: `functionExists` is part of [Catalog Contract](Catalog.md#functionExists) to...FIXME.
 
 `functionExists`...FIXME
 
@@ -75,7 +75,7 @@ Internally, `cacheTable` first SparkSession.md#table[creates a DataFrame for the
 
 NOTE: `cacheTable` uses the SparkSession.md#sharedState[session-scoped SharedState] to access the `CacheManager`.
 
-NOTE: `cacheTable` is part of spark-sql-Catalog.md#contract[Catalog contract].
+NOTE: `cacheTable` is part of [Catalog contract](Catalog.md#cacheTable).
 
 === [[clearCache]] Removing All Cached Tables From In-Memory Cache -- `clearCache` Method
 
@@ -86,7 +86,7 @@ clearCache(): Unit
 
 `clearCache` requests `CacheManager` to spark-sql-CacheManager.md#clearCache[remove all cached tables from in-memory cache].
 
-NOTE: `clearCache` is part of spark-sql-Catalog.md#contract[Catalog contract].
+NOTE: `clearCache` is part of [Catalog contract](Catalog.md#clearCache).
 
 === [[createExternalTable]] Creating External Table From Path -- `createExternalTable` Method
 
@@ -141,7 +141,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
 
-NOTE: `createExternalTable` is part of spark-sql-Catalog.md#contract[Catalog contract].
+NOTE: `createExternalTable` is part of [Catalog contract](Catalog.md#createExternalTable).
 
 === [[listTables]] Listing Tables in Database (as Dataset) -- `listTables` Method
 
@@ -151,9 +151,9 @@ listTables(): Dataset[Table]
 listTables(dbName: String): Dataset[Table]
 ----
 
-NOTE: `listTables` is part of spark-sql-Catalog.md#listTables[Catalog Contract] to get a list of tables in the specified database.
+NOTE: `listTables` is part of [Catalog Contract](Catalog.md#listTables).
 
-Internally, `listTables` requests <<sessionCatalog, SessionCatalog>> to spark-sql-SessionCatalog.md#listTables[list all tables] in the specified `dbName` database and <<makeTable, converts them to Tables>>.
+Internally, `listTables` requests <<sessionCatalog, SessionCatalog>> to [list all tables](SessionCatalog.md#listTables) in the specified `dbName` database and <<makeTable, converts them to Tables>>.
 
 In the end, `listTables` <<makeDataset, creates a Dataset>> with the tables.
 
@@ -165,9 +165,9 @@ listColumns(tableName: String): Dataset[Column]
 listColumns(dbName: String, tableName: String): Dataset[Column]
 ----
 
-NOTE: `listColumns` is part of spark-sql-Catalog.md#listColumns[Catalog Contract] to...FIXME.
+NOTE: `listColumns` is part of [Catalog Contract](Catalog.md#listColumns).
 
-`listColumns` requests <<sessionCatalog, SessionCatalog>> for the spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata].
+`listColumns` requests <<sessionCatalog, SessionCatalog>> for the [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata).
 
 `listColumns` takes the spark-sql-CatalogTable.md#schema[schema] from the table metadata and creates a `Column` for every field (with the optional comment as the description).
 
@@ -180,7 +180,7 @@ In the end, `listColumns` <<makeDataset, creates a Dataset>> with the columns.
 makeTable(tableIdent: TableIdentifier): Table
 ----
 
-`makeTable` creates a `Table` using the input `TableIdentifier` and the spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata] (from the current spark-sql-SessionCatalog.md[SessionCatalog]) if available.
+`makeTable` creates a `Table` using the input `TableIdentifier` and the [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata) (from the current [SessionCatalog](SessionCatalog.md)) if available.
 
 NOTE: `makeTable` uses <<sparkSession, SparkSession>> to access SessionState.md#sessionState[SessionState] that is then used to access SessionState.md#catalog[SessionCatalog].
 
@@ -208,23 +208,23 @@ NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, 
 refreshTable(tableName: String): Unit
 ----
 
-NOTE: `refreshTable` is part of spark-sql-Catalog.md#refreshTable[Catalog Contract] to...FIXME.
-
 `refreshTable` requests `SessionState` for the SessionState.md#sqlParser[SQL parser] to spark-sql-ParserInterface.md#parseTableIdentifier[parse a TableIdentifier given the table name].
 
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sessionState[SessionState].
 
-`refreshTable` requests <<sessionCatalog, SessionCatalog>> for the spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata].
+`refreshTable` requests <<sessionCatalog, SessionCatalog>> for the [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata).
 
 `refreshTable` then SparkSession.md#table[creates a DataFrame for the table name].
 
 For a temporary or persistent `VIEW` table, `refreshTable` requests the [analyzed](QueryExecution.md#analyzed) logical plan of the DataFrame (for the table) to spark-sql-LogicalPlan.md#refresh[refresh] itself.
 
-For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatalog>> for spark-sql-SessionCatalog.md#refreshTable[refreshing the table metadata] (i.e. invalidating the table).
+For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatalog>> for [refreshing the table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata) (i.e. invalidating the table).
 
 If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to spark-sql-CacheManager.md#uncacheQuery[uncache] and spark-sql-CacheManager.md#cacheQuery[cache] the table `DataFrame` again.
 
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sharedState[SharedState] that is used to access SharedState.md#cacheManager[CacheManager].
+
+`refreshTable` is part of the [Catalog](Catalog.md#refreshTable) abstraction.
 
 === [[refreshByPath]] `refreshByPath` Method
 
@@ -233,9 +233,9 @@ NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSess
 refreshByPath(resourcePath: String): Unit
 ----
 
-NOTE: `refreshByPath` is part of spark-sql-Catalog.md#refreshByPath[Catalog Contract] to...FIXME.
-
 `refreshByPath`...FIXME
+
+`refreshByPath` is part of the [Catalog](Catalog.md#refreshByPath) abstraction.
 
 === [[dropGlobalTempView]] `dropGlobalTempView` Method
 
@@ -245,9 +245,9 @@ dropGlobalTempView(
   viewName: String): Boolean
 ----
 
-NOTE: `dropGlobalTempView` is part of spark-sql-Catalog.md#dropGlobalTempView[Catalog] contract].
-
 `dropGlobalTempView`...FIXME
+
+`dropGlobalTempView` is part of the [Catalog](Catalog.md#dropGlobalTempView) abstraction.
 
 === [[listColumns-internal]] `listColumns` Internal Method
 

@@ -24,21 +24,20 @@ CAUTION: FIXME What's the difference between `CreateTempViewUsing`?
 | LocalTempView
 | [[LocalTempView]] A session-scoped *local temporary view* that is available until the session, that has created it, is stopped.
 
-When executed, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createTempView[current `SessionCatalog` to create a temporary view].
+When executed, `CreateViewCommand` requests the [current `SessionCatalog` to create a temporary view](../SessionCatalog.md#createTempView).
 
 | GlobalTempView
 | [[GlobalTempView]] A cross-session *global temporary view* that is available until the Spark application stops.
 
-When executed, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createGlobalTempView[current `SessionCatalog` to create a global view].
+When executed, `CreateViewCommand` requests the [current `SessionCatalog` to create a global view](../SessionCatalog.md#createGlobalTempView).
 
 | PersistedView
 | [[PersistedView]] A cross-session *persisted view* that is available until dropped.
 
-When executed, `CreateViewCommand` checks if the table exists. If it does and replace is enabled `CreateViewCommand` requests the spark-sql-SessionCatalog.md#alterTable[current `SessionCatalog` to alter a table]. Otherwise, when the table does not exist, `CreateViewCommand` requests the spark-sql-SessionCatalog.md#createTable[current `SessionCatalog` to create it].
+When executed, `CreateViewCommand` checks if the table exists. If it does and replace is enabled `CreateViewCommand` requests the [current `SessionCatalog` to alter a table](../SessionCatalog.md#alterTable). Otherwise, when the table does not exist, `CreateViewCommand` requests the [current `SessionCatalog` to create it](../SessionCatalog.md#createTable).
 |===
 
-[source, scala]
-----
+```text
 /* CREATE [OR REPLACE] [[GLOBAL] TEMPORARY]
 VIEW [IF NOT EXISTS] tableIdentifier
 [identifierCommentList] [COMMENT STRING]
@@ -127,7 +126,7 @@ org.apache.spark.sql.AnalysisException: View `v1` already exists. If you want to
   at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:75)
   at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:641)
   ... 49 elided
-----
+```
 
 [[innerChildren]]
 `CreateViewCommand` returns the <<child, child logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
@@ -182,17 +181,17 @@ val analyzedPlan = qe.analyzed
 
 `run` then branches off per the <<viewType, ViewType>>:
 
-* For <<LocalTempView, local temporary views>>, `run` <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createTempView, create or replace a local temporary view>>
+* For <<LocalTempView, local temporary views>>, `run` <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to [create or replace a local temporary view](../SessionCatalog.md#createTempView)
 
-* For <<GlobalTempView, global temporary views>>, `run` also <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createGlobalTempView, create or replace a global temporary view>>
+* For <<GlobalTempView, global temporary views>>, `run` also <<aliasPlan, alias>> the analyzed plan and requests the `SessionCatalog` to [create or replace a global temporary view](../SessionCatalog.md#createGlobalTempView)
 
-* For <<PersistedView, persisted views>>, `run` asks the `SessionCatalog` whether the <<spark-sql-SessionCatalog.md#tableExists, table exists or not>> (given <<name, TableIdentifier>>).
+* For <<PersistedView, persisted views>>, `run` asks the `SessionCatalog` whether the [table exists or not](../SessionCatalog.md#tableExists) (given <<name, TableIdentifier>>).
 
 ** If the <<name, table>> exists and the <<allowExisting, allowExisting>> flag is on, `run` simply does nothing (and exits)
 
-** If the <<name, table>> exists and the <<replace, replace>> flag is on, `run` requests the `SessionCatalog` for the <<spark-sql-SessionCatalog.md#getTableMetadata, table metadata>> and replaces the table, i.e. `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#dropTable, drop the table>> followed by <<spark-sql-SessionCatalog.md#createTable, re-creating it>> (with a <<prepareTable, new CatalogTable>>)
+** If the <<name, table>> exists and the <<replace, replace>> flag is on, `run` requests the `SessionCatalog` for the [table metadata](../SessionCatalog.md#getTableMetadata) and replaces the table, i.e. `run` requests the `SessionCatalog` to [drop the table](../SessionCatalog.md#dropTable) followed by [re-creating it](../SessionCatalog.md#createTable) (with a <<prepareTable, new CatalogTable>>)
 
-** If however the <<name, table>> does not exist, `run` simply requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createTable, create it>> (with a <<prepareTable, new CatalogTable>>)
+** If however the <<name, table>> does not exist, `run` simply requests the `SessionCatalog` to [create it](../SessionCatalog.md#createTable) (with a <<prepareTable, new CatalogTable>>)
 
 `run` throws an `AnalysisException` for <<PersistedView, persisted views>> when they already exist, the <<allowExisting, allowExisting>> flag is off and the table type is not a view.
 

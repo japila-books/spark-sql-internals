@@ -37,7 +37,7 @@ CatalystSqlParser takes the following to be created:
 
 CatalystSqlParser is created when:
 
-* [SessionCatalog](../spark-sql-SessionCatalog.md) is created (as the [default ParserInterface](../spark-sql-SessionCatalog.md#parser))
+* [SessionCatalog](../SessionCatalog.md) is created (as the [default ParserInterface](../SessionCatalog.md#parser))
 
 * CatalogV2Implicits utility is requested for a [SQL parser](CatalogV2Implicits.md#catalystSqlParser)
 

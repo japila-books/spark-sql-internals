@@ -1,10 +1,10 @@
-# HiveMetastoreCatalog -- Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
+# HiveMetastoreCatalog &mdash; Legacy SessionCatalog for Converting Hive Metastore Relations to Data Source Relations
 
-`HiveMetastoreCatalog` is a ../spark-sql-SessionCatalog.md[session-scoped catalog of relational entities] that knows how to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>>.
+`HiveMetastoreCatalog` is a [session-scoped catalog of relational entities](../SessionCatalog.md) that knows how to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>>.
 
-`HiveMetastoreCatalog` is used by HiveSessionCatalog.md#metastoreCatalog[HiveSessionCatalog] for RelationConversions.md[RelationConversions] logical evaluation rule.
+`HiveMetastoreCatalog` is used by [HiveSessionCatalog](HiveSessionCatalog.md#metastoreCatalog) for [RelationConversions](RelationConversions.md) logical evaluation rule.
 
-`HiveMetastoreCatalog` is <<creating-instance, created>> when `HiveSessionStateBuilder` is requested for a HiveSessionStateBuilder.md#catalog[SessionCatalog] (and creates a HiveSessionCatalog.md#metastoreCatalog[HiveSessionCatalog]).
+`HiveMetastoreCatalog` is <<creating-instance, created>> when `HiveSessionStateBuilder` is requested for a HiveSessionStateBuilder.md#catalog[SessionCatalog] (and creates a [HiveSessionCatalog](HiveSessionCatalog.md#metastoreCatalog)).
 
 .HiveMetastoreCatalog, HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveMetastoreCatalog.png[align="center"]
@@ -31,7 +31,7 @@ convertToLogicalRelation(
 `convertToLogicalRelation` branches based on whether the input HiveTableRelation.md[HiveTableRelation] is <<convertToLogicalRelation-partitioned, partitioned>> or <<convertToLogicalRelation-not-partitioned, not>>.
 
 [[convertToLogicalRelation-partitioned]]
-When the `HiveTableRelation` is HiveTableRelation.md#isPartitioned[partitioned], `convertToLogicalRelation` uses configuration-properties.md#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property to compute the root paths. With the property enabled, the root path is simply the ../spark-sql-CatalogTable.md#location[table location] (aka _locationUri_). Otherwise, the root paths are the `locationUri` of the ../spark-sql-ExternalCatalog.md#listPartitions[partitions] (using the ../SharedState.md#externalCatalog[shared ExternalCatalog]).
+When the `HiveTableRelation` is HiveTableRelation.md#isPartitioned[partitioned], `convertToLogicalRelation` uses configuration-properties.md#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property to compute the root paths. With the property enabled, the root path is simply the ../spark-sql-CatalogTable.md#location[table location] (aka _locationUri_). Otherwise, the root paths are the `locationUri` of the [partitions](../ExternalCatalog.md#listPartitions) (using the [shared ExternalCatalog](../SharedState.md#externalCatalog)).
 
 `convertToLogicalRelation` creates a new ../spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a ../spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] (with no bucketing specification among things) unless a `LogicalRelation` for the table is already in a <<getCached, cache>>.
 
@@ -81,7 +81,7 @@ NOTE: `getCached` is used when `HiveMetastoreCatalog` is requested to <<convertT
 | Description
 
 | catalogProxy
-a| [[catalogProxy]] ../spark-sql-SessionCatalog.md[SessionCatalog] (of the <<sparkSession, SparkSession>>).
+a| [[catalogProxy]] [SessionCatalog](../SessionCatalog.md) (of the <<sparkSession, SparkSession>>).
 
 Used when `HiveMetastoreCatalog` is requested to <<getCached, getCached>>, <<convertToLogicalRelation, convertToLogicalRelation>>
 

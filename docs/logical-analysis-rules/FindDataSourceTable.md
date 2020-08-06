@@ -86,7 +86,7 @@ readDataSourceTable(
 
 `readDataSourceTable` requests the <<sparkSession, SparkSession>> for SessionState.md#catalog[SessionCatalog].
 
-`readDataSourceTable` requests the `SessionCatalog` for the spark-sql-SessionCatalog.md#getCachedPlan[cached logical plan] for the input spark-sql-CatalogTable.md[CatalogTable].
+`readDataSourceTable` requests the `SessionCatalog` for the [cached logical plan](../SessionCatalog.md#getCachedPlan) for the input [CatalogTable](../spark-sql-CatalogTable.md).
 
 If not available, `readDataSourceTable` creates a new spark-sql-DataSource.md[DataSource] for the spark-sql-CatalogTable.md#provider[provider] (of the input `CatalogTable`) with the extra `path` option (based on the `locationUri` of the spark-sql-CatalogTable.md#storage[storage] of the input `CatalogTable`). `readDataSourceTable` requests the `DataSource` to spark-sql-DataSource.md#resolveRelation[resolve the relation and create a corresponding BaseRelation] that is then used to create a spark-sql-LogicalPlan-LogicalRelation.md#apply[LogicalRelation] with the input spark-sql-CatalogTable.md[CatalogTable].
 

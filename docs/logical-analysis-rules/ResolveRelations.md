@@ -115,9 +115,9 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 
 * spark-sql-properties.md#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
 
-* The `table` is not a spark-sql-SessionCatalog.md#isTemporaryTable[temporary table]
+* The `table` is not a [temporary table](../SessionCatalog.md#isTemporaryTable)
 
-* The spark-sql-SessionCatalog.md#databaseExists[database] or the spark-sql-SessionCatalog.md#tableExists[table] do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
+* The [database](../SessionCatalog.md#databaseExists) or the [table](../SessionCatalog.md#tableExists) do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
 
 NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] leaf logical operator for a table reference).
 
@@ -130,7 +130,7 @@ lookupTableFromCatalog(
   defaultDatabase: Option[String] = None): LogicalPlan
 ----
 
-`lookupTableFromCatalog` simply requests `SessionCatalog` to spark-sql-SessionCatalog.md#lookupRelation[find the table in relational catalogs].
+`lookupTableFromCatalog` simply requests `SessionCatalog` to [find the table in relational catalogs](../SessionCatalog.md#lookupRelation).
 
 NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current [SessionCatalog](../Analyzer.md#catalog).
 

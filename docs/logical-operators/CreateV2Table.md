@@ -19,7 +19,7 @@
 
 * [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical resolution rule is executed (and resolves a `CreateTableStatement` parsed statement)
 
-* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed
+* [ResolveSessionCatalog](../logical-analysis-rules/Resolve) logical resolution rule is executed
 
 ## <span id="withPartitioning"> withPartitioning
 

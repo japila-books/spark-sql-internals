@@ -11,7 +11,7 @@ CAUTION: FIXME Show example of a hive table, e.g. `spark.table(...)`
 `RelationConversions` takes the following when created:
 
 * [[conf]] [SQLConf](../SQLConf.md)
-* [[sessionCatalog]] HiveSessionCatalog.md[Hive-specific session catalog]
+* [[sessionCatalog]] [Hive-specific session catalog](HiveSessionCatalog.md)
 
 === [[apply]] Executing Rule -- `apply` Method
 
@@ -61,7 +61,7 @@ convert(
 
 `convert` branches based on the SerDe of (the storage format of) the input HiveTableRelation.md[HiveTableRelation] logical operator.
 
-For Hive tables in parquet format, `convert` creates options with one extra `mergeSchema` per configuration-properties.md#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property and requests the HiveSessionCatalog.md#metastoreCatalog[HiveMetastoreCatalog] to HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation] (with ../spark-sql-ParquetFileFormat.md[ParquetFileFormat]).
+For Hive tables in parquet format, `convert` creates options with one extra `mergeSchema` per configuration-properties.md#spark.sql.hive.convertMetastoreParquet.mergeSchema[spark.sql.hive.convertMetastoreParquet.mergeSchema] configuration property and requests the [HiveMetastoreCatalog](HiveSessionCatalog.md#metastoreCatalog) to [convert a HiveTableRelation to a LogicalRelation](HiveMetastoreCatalog.md#convertToLogicalRelation) (with [ParquetFileFormat](../spark-sql-ParquetFileFormat.md)).
 
 For non-`parquet` Hive tables, `convert` assumes ORC format:
 
@@ -69,7 +69,7 @@ For non-`parquet` Hive tables, `convert` assumes ORC format:
 
 * Otherwise, `convert` requests `HiveMetastoreCatalog` to HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation] (with `org.apache.spark.sql.hive.orc.OrcFileFormat` as `fileFormatClass`).
 
-NOTE: `convert` uses the <<sessionCatalog, HiveSessionCatalog>> to access the HiveSessionCatalog.md#metastoreCatalog[HiveMetastoreCatalog].
+NOTE: `convert` uses the <<sessionCatalog, HiveSessionCatalog>> to access the [HiveMetastoreCatalog](HiveSessionCatalog.md#metastoreCatalog).
 
 [NOTE]
 ====

@@ -108,7 +108,7 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 * [[experimentalMethods]] <<spark-sql-ExperimentalMethods.md#, ExperimentalMethods>>
 * [[functionRegistry]] <<spark-sql-FunctionRegistry.md#, FunctionRegistry>>
 * [[udfRegistration]] <<spark-sql-UDFRegistration.md#, UDFRegistration>>
-* [[catalogBuilder]] `catalogBuilder` function to create a <<spark-sql-SessionCatalog.md#, SessionCatalog>> (`() => SessionCatalog`)
+* [[catalogBuilder]] `catalogBuilder` function to create a [SessionCatalog](SessionCatalog.md) (`() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
 * [[analyzerBuilder]] `analyzerBuilder` function to create an [Analyzer](Analyzer.md) (`() => Analyzer`)
 * [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](catalyst/Optimizer.md) (`() => Optimizer`)
@@ -137,7 +137,7 @@ Used when:
 
 ## <span id="catalog"> SessionCatalog
 
-[SessionCatalog](spark-sql-SessionCatalog.md)
+[SessionCatalog](SessionCatalog.md)
 
 === [[clone]] `clone` Method
 

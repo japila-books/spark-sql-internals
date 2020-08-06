@@ -2,7 +2,7 @@ title: CreateDataSourceTableCommand
 
 # CreateDataSourceTableCommand Logical Command
 
-`CreateDataSourceTableCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, creates a new table>> (in a spark-sql-SessionCatalog.md[SessionCatalog]).
+`CreateDataSourceTableCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, creates a new table>> (in a [SessionCatalog](../SessionCatalog.md)).
 
 `CreateDataSourceTableCommand` is created when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a non-Hive table provider with no query.
 
@@ -24,7 +24,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` spark-sql-SessionCatalog.md#createTable[creates a new table] in a session-scoped `SessionCatalog`.
+`run` requests a session-scoped `SessionCatalog` to [create a table](../SessionCatalog.md#createTable).
 
 NOTE: `run` uses the input `SparkSession` to SparkSession.md#sessionState[access SessionState] that in turn is used to SessionState.md#catalog[access the current SessionCatalog].
 

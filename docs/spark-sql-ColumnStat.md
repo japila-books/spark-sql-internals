@@ -102,7 +102,7 @@ scala> println(props)
 Map(distinctCount -> 2, min -> 0.0, version -> 1, max -> 1.4, maxLen -> 8, avgLen -> 8, nullCount -> 0)
 ----
 
-`ColumnStat` is <<fromMap, re-created from properties>> (deserialized) when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+`ColumnStat` is <<fromMap, re-created from properties>> (deserialized) when `HiveExternalCatalog` is requested for [restoring table statistics from properties](hive/HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore).
 
 [source, scala]
 ----
@@ -238,7 +238,7 @@ NOTE: `toMap` adds `min`, `max`, `histogram` entries only if they are available.
 
 NOTE: Interestingly, `colName` and `dataType` input parameters bring no value to `toMap` itself, but merely allow for a more user-friendly error reporting when <<toExternalString, converting>> `min` and `max` column statistics.
 
-NOTE: `toMap` is used exclusively when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsToProperties[converting table statistics to properties] (before persisting them as part of table metadata in a Hive metastore).
+`toMap` is used when `HiveExternalCatalog` is requested for hive/[converting table statistics to properties](HiveExternalCatalog.md#statsToProperties) (before persisting them as part of table metadata in a Hive metastore).
 
 === [[fromMap]] Re-Creating Column Statistics from Properties (ColumnStat Deserialization) -- `fromMap` Method
 
@@ -251,13 +251,13 @@ fromMap(table: String, field: StructField, map: Map[String, String]): Option[Col
 
 `fromMap` returns `None` when recovering column statistics fails for whatever reason.
 
-```
+```text
 WARN Failed to parse column statistics for column [fieldName] in table [table]
 ```
 
 NOTE: Interestingly, `table` input parameter brings no value to `fromMap` itself, but merely allows for a more user-friendly error reporting when parsing column statistics fails.
 
-NOTE: `fromMap` is used exclusively when `HiveExternalCatalog` is requested for hive/HiveExternalCatalog.md#statsFromProperties[restoring table statistics from properties] (from a Hive Metastore).
+`fromMap` is used when `HiveExternalCatalog` is requested for hive/[restoring table statistics from properties](HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore).
 
 === [[rowToColumnStat]] Creating Column Statistics from InternalRow (Result of Computing Column Statistics) -- `rowToColumnStat` Method
 

@@ -69,9 +69,9 @@ Parses a SQL text to a `FunctionIdentifier`
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#listFunctions, listFunctions>>
+* `SessionCatalog` is requested to [listFunctions](../SessionCatalog.md#listFunctions)
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#getFunction, getFunction>> and <<spark-sql-CatalogImpl.md#functionExists, functionExists>>
+* `CatalogImpl` is requested to [getFunction](../CatalogImpl.md#getFunction) and [functionExists](../CatalogImpl.md#functionExists)
 
 ### parseMultipartIdentifier
 
@@ -105,7 +105,7 @@ Parses a SQL text to a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
 Used when:
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupRelation, look up a relation (table or view) in catalogs>>
+* `SessionCatalog` is requested to [look up a relation (table or view) in catalogs](../SessionCatalog.md#lookupRelation)
 
 * `SparkSession` is requested to <<SparkSession.md#sql, execute a SQL query (aka SQL Mode)>>
 
@@ -135,7 +135,7 @@ Used when:
 
 * `SparkSession` is requested to <<SparkSession.md#table, table>>
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listColumns, listColumns>>, <<spark-sql-CatalogImpl.md#getTable, getTable>>, <<spark-sql-CatalogImpl.md#tableExists, tableExists>>, <<spark-sql-CatalogImpl.md#createTable, createTable>>, <<spark-sql-CatalogImpl.md#recoverPartitions, recoverPartitions>>, <<spark-sql-CatalogImpl.md#uncacheTable, uncacheTable>>, and <<spark-sql-CatalogImpl.md#refreshTable, refreshTable>>
+* `CatalogImpl` is requested to [listColumns](../CatalogImpl.md#listColumns), [getTable](../CatalogImpl.md#getTable), [tableExists](../CatalogImpl.md#tableExists), [createTable](../CatalogImpl.md#createTable), [recoverPartitions](../CatalogImpl.md#recoverPartitions), [uncacheTable](../CatalogImpl.md#uncacheTable), and [refreshTable](../CatalogImpl.md#refreshTable)
 
 * `SessionState` is requested to <<SessionState.md#refreshTable, refreshTable>>
 

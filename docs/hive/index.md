@@ -10,7 +10,7 @@ Hive Data Source uses custom configuration-properties.md[Spark SQL configuration
 
 Hive Data Source uses HiveTableRelation.md[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and configuration-properties.md#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
 
-Hive Data Source uses HiveSessionStateBuilder.md[HiveSessionStateBuilder] (to build a Hive-specific ../SparkSession.md#sessionState[SessionState]) and HiveExternalCatalog.md[HiveExternalCatalog].
+Hive Data Source uses HiveSessionStateBuilder.md[HiveSessionStateBuilder] (to build a Hive-specific ../SparkSession.md#sessionState[SessionState]) and [HiveExternalCatalog](HiveExternalCatalog.md).
 
 Hive Data Source uses HiveClientImpl.md[HiveClientImpl] for meta data/DDL operations (using calls to a Hive metastore).
 

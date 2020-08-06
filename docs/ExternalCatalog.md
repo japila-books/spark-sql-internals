@@ -432,11 +432,11 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 | Alias
 | Description
 
-| hive/HiveExternalCatalog.md[HiveExternalCatalog]
+| [HiveExternalCatalog](hive/HiveExternalCatalog.md)
 | [[hive]] `hive`
 | A persistent system catalog using a Hive metastore.
 
-| spark-sql-InMemoryCatalog.md[InMemoryCatalog]
+| [InMemoryCatalog](InMemoryCatalog.md)
 | [[in-memory]] `in-memory`
 | An in-memory (ephemeral) system catalog that does not require setting up external systems (like a Hive metastore).
 
@@ -458,7 +458,7 @@ res1: String = hive
 
 [TIP]
 ====
-Set `spark.sql.catalogImplementation` to `in-memory` when starting `spark-shell` to use spark-sql-InMemoryCatalog.md[InMemoryCatalog] external catalog.
+Set `spark.sql.catalogImplementation` to `in-memory` when starting `spark-shell` to use [InMemoryCatalog](InMemoryCatalog.md) external catalog.
 
 [source, scala]
 ----
@@ -504,7 +504,7 @@ alterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Un
 
 `alterTableStats`...FIXME
 
-NOTE: `alterTableStats` is used exclusively when `SessionCatalog` is requested for spark-sql-SessionCatalog.md#alterTableStats[altering the statistics of a table in a metastore] (that can happen when any logical command is executed that could change the table statistics).
+`alterTableStats` is used when `SessionCatalog` is requested for [altering the statistics of a table in a metastore](SessionCatalog.md#alterTableStats) (that can happen when any logical command is executed that could change the table statistics).
 
 === [[alterTable]] Altering Table -- `alterTable` Method
 
@@ -515,7 +515,7 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 `alterTable`...FIXME
 
-NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for spark-sql-SessionCatalog.md#alterTable[altering the statistics of a table in a metastore].
+NOTE: `alterTable` is used exclusively when `SessionCatalog` is requested for [altering the statistics of a table in a metastore](SessionCatalog.md#alterTable).
 
 === [[createTable]] `createTable` Method
 
@@ -537,4 +537,4 @@ alterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
 
 `alterTableDataSchema`...FIXME
 
-NOTE: `alterTableDataSchema` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#alterTableDataSchema, alterTableDataSchema>>.
+`alterTableDataSchema` is used when `SessionCatalog` is requested to [alterTableDataSchema](SessionCatalog.md#alterTableDataSchema).

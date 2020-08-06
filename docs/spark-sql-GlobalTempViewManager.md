@@ -2,7 +2,7 @@ title: GlobalTempViewManager
 
 # GlobalTempViewManager -- Management Interface of Global Temporary Views
 
-`GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views (that `SessionCatalog` uses when requested to <<spark-sql-SessionCatalog.md#createGlobalTempView, create>>, <<spark-sql-SessionCatalog.md#alterTempViewDefinition, alter>> or <<spark-sql-SessionCatalog.md#dropGlobalTempView, drop>> global temporary views).
+`GlobalTempViewManager` is the <<methods, interface>> to manage global temporary views (that `SessionCatalog` uses when requested to [create](SessionCatalog.md#createGlobalTempView), [alter](SessionCatalog.md#alterTempViewDefinition) or [drop](SessionCatalog.md#dropGlobalTempView) global temporary views).
 
 Strictly speaking, `GlobalTempViewManager` simply <<viewDefinitions, manages>> the names of the global temporary views registered (and the corresponding <<spark-sql-LogicalPlan.md#, logical plans>>) and has no interaction with other services in Spark SQL.
 
@@ -48,7 +48,7 @@ create(
 
 Registers (_creates_) a global temporary view (as a spark-sql-LogicalPlan.md[LogicalPlan]) by name
 
-Used when `SessionCatalog` is requested to spark-sql-SessionCatalog.md#createGlobalTempView[createGlobalTempView]
+Used when `SessionCatalog` is requested to [createGlobalTempView](SessionCatalog.md#createGlobalTempView)
 
 | <<get, get>>
 a|
@@ -61,7 +61,7 @@ get(
 
 Finds the global view definition (as a spark-sql-LogicalPlan.md[LogicalPlan]) for the given name if available
 
-Used when `SessionCatalog` is requested to spark-sql-SessionCatalog.md#getGlobalTempView[getGlobalTempView], spark-sql-SessionCatalog.md##getTempViewOrPermanentTableMetadata[getTempViewOrPermanentTableMetadata], spark-sql-SessionCatalog.md##lookupRelation[lookupRelation], spark-sql-SessionCatalog.md##isTemporaryTable[isTemporaryTable], spark-sql-SessionCatalog.md##refreshTable[refreshTable]
+Used when `SessionCatalog` is requested to [getGlobalTempView](SessionCatalog.md#getGlobalTempView), [getTempViewOrPermanentTableMetadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata), [lookupRelation](SessionCatalog.md#lookupRelation), [isTemporaryTable](SessionCatalog.md#isTemporaryTable), [refreshTable](SessionCatalog.md#refreshTable)
 
 | <<listViewNames, listViewNames>>
 a|
@@ -125,7 +125,7 @@ clear(): Unit
 
 `clear` simply removes all the entries in the <<viewDefinitions, viewDefinitions>> internal registry.
 
-NOTE: `clear` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#reset, reset>> (that happens to be exclusively in the Spark SQL internal tests).
+NOTE: `clear` is used when `SessionCatalog` is requested to [reset](SessionCatalog.md#reset) (that happens to be exclusively in the Spark SQL internal tests).
 
 === [[create]] Creating (Registering) Global Temporary View (Definition) -- `create` Method
 
@@ -145,7 +145,7 @@ create(
 Temporary view '[table]' already exists
 ```
 
-NOTE: `create` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#createGlobalTempView, createGlobalTempView>> (when <<spark-sql-LogicalPlan-CreateViewCommand.md#run, CreateViewCommand>> and <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>> logical commands are executed).
+NOTE: `create` is used when `SessionCatalog` is requested to [createGlobalTempView](SessionCatalog.md#createGlobalTempView) (when <<spark-sql-LogicalPlan-CreateViewCommand.md#run, CreateViewCommand>> and <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>> logical commands are executed).
 
 === [[get]] Retrieving Global View Definition Per Name -- `get` Method
 
@@ -156,7 +156,7 @@ get(name: String): Option[LogicalPlan]
 
 `get` simply returns the <<spark-sql-LogicalPlan.md#, LogicalPlan>> that was registered under the `name` if it defined.
 
-NOTE: `get` is used when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#getGlobalTempView, getGlobalTempView>>, <<spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata, getTempViewOrPermanentTableMetadata>>, <<spark-sql-SessionCatalog.md#lookupRelation, lookupRelation>>, <<spark-sql-SessionCatalog.md#isTemporaryTable, isTemporaryTable>> or <<spark-sql-SessionCatalog.md#refreshTable, refreshTable>>.
+NOTE: `get` is used when `SessionCatalog` is requested to [getGlobalTempView](SessionCatalog.md#getGlobalTempView), [getTempViewOrPermanentTableMetadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata), [lookupRelation](SessionCatalog.md#lookupRelation), [isTemporaryTable](SessionCatalog.md#isTemporaryTable) or [refreshTable](SessionCatalog.md#refreshTable).
 
 === [[listViewNames]] Listing Global Temporary Views For Pattern -- `listViewNames` Method
 
@@ -167,7 +167,7 @@ listViewNames(pattern: String): Seq[String]
 
 `listViewNames` simply gives a list of the global temporary views with names matching the input `pattern`.
 
-NOTE: `listViewNames` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#listTables, listTables>>
+`listViewNames` is used when `SessionCatalog` is requested to [listTables](SessionCatalog.md#listTables)
 
 === [[remove]] Removing (De-Registering) Global Temporary View -- `remove` Method
 
@@ -178,7 +178,7 @@ remove(name: String): Boolean
 
 `remove` simply tries to remove the `name` from the <<viewDefinitions, viewDefinitions>> internal registry and returns `true` when removed or `false` otherwise.
 
-NOTE: `remove` is used when `SessionCatalog` is requested to drop a <<spark-sql-SessionCatalog.md#dropGlobalTempView, global temporary view>> or <<spark-sql-SessionCatalog.md#dropTable, table>>.
+`remove` is used when `SessionCatalog` is requested to drop a [global temporary view](SessionCatalog.md#dropGlobalTempView) or [table](SessionCatalog.md#dropTable).
 
 === [[rename]] `rename` Method
 
@@ -200,4 +200,4 @@ update(name: String, viewDefinition: LogicalPlan): Boolean
 
 `update`...FIXME
 
-NOTE: `update` is used exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#alterTempViewDefinition, alter a global temporary view>>.
+`update` is used when `SessionCatalog` is requested to [alter a global temporary view](SessionCatalog.md#alterTempViewDefinition).

@@ -4,7 +4,7 @@ title: CatalogTable
 
 `CatalogTable` is the *specification* (_metadata_) of a table.
 
-`CatalogTable` is stored in a spark-sql-SessionCatalog.md[SessionCatalog] (session-scoped catalog of relational entities).
+`CatalogTable` is stored in a [SessionCatalog](SessionCatalog.md) (session-scoped catalog of relational entities).
 
 [source, scala]
 ----
@@ -28,7 +28,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 `CatalogTable` is <<creating-instance, created>> when:
 
-* `SessionCatalog` is requested for a spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata]
+* `SessionCatalog` is requested for a [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata)
 
 * `HiveClientImpl` is requested for hive/HiveClientImpl.md#getTableOption[looking up a table in a metastore]
 
@@ -42,7 +42,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#prepareTable, prepareTable>>)
 
-* `CatalogImpl` is requested to spark-sql-CatalogImpl.md#createTable[createTable]
+* `CatalogImpl` is requested to [createTable](CatalogImpl.md#createTable)
 
 [[simpleString]]
 The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME
@@ -54,7 +54,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 `CatalogTable` is <<creating-instance, created>> with the optional <<bucketSpec, bucketing specification>> that is used for the following:
 
-* `CatalogImpl` is requested to <<spark-sql-CatalogImpl.md#listColumns-internal, list the columns of a table>>
+* `CatalogImpl` is requested to [list the columns of a table](CatalogImpl.md#listColumns-internal)
 
 * `FindDataSourceTable` logical evaluation rule is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable) (when [executed](logical-analysis-rules/FindDataSourceTable.md) for data source tables)
 
@@ -68,7 +68,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `CatalogTable` is requested to <<toLinkedHashMap, convert itself to LinkedHashMap>>
 
-* `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#doCreateTable[doCreateTable], hive/HiveExternalCatalog.md#tableMetaToTableProps[tableMetaToTableProps], hive/HiveExternalCatalog.md#doAlterTable[doAlterTable], hive/HiveExternalCatalog.md#restoreHiveSerdeTable[restoreHiveSerdeTable] and hive/HiveExternalCatalog.md#restoreDataSourceTable[restoreDataSourceTable]
+* `HiveExternalCatalog` is requested to [doCreateTable](hive/HiveExternalCatalog.md#doCreateTable), [tableMetaToTableProps](hive/HiveExternalCatalog.md#tableMetaToTableProps), [doAlterTable](hive/HiveExternalCatalog.md#doAlterTable), [restoreHiveSerdeTable](hive/HiveExternalCatalog.md#restoreHiveSerdeTable) and [restoreDataSourceTable](hive/HiveExternalCatalog.md#restoreDataSourceTable)
 
 * `HiveClientImpl` is requested to hive/HiveClientImpl.md#getTableOption[retrieve a table metadata if available]>> and hive/HiveClientImpl.md#toHiveTable[toHiveTable]
 
@@ -114,7 +114,7 @@ The type of a table (`CatalogTableType`) can be one of the following:
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
-You manage a table metadata using the spark-sql-Catalog.md[catalog] interface (aka _metastore_). Among the management tasks is to get the <<stats, statistics>> of a table (that are used for spark-sql-cost-based-optimization.md[cost-based query optimization]).
+You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for spark-sql-cost-based-optimization.md[cost-based query optimization]).
 
 [source, scala]
 ----
@@ -131,7 +131,7 @@ CAUTION: FIXME When are stats specified? What if there are not?
 
 Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming spark-sql-FileFormat.md[file data source table], `DataSource` spark-sql-DataSource.md#resolveRelation[creates] a `HadoopFsRelation` with the table size specified by spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
 
-Internally, Spark alters table statistics using spark-sql-ExternalCatalog.md#doAlterTableStats[ExternalCatalog.doAlterTableStats].
+Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
 
 Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if spark-sql-properties.md#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs] property is turned on) or assume spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] (that effectively disables table broadcasting).
 

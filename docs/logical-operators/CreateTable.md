@@ -8,7 +8,7 @@ title: CreateTable
 
 * `SparkSqlAstBuilder` is requested to spark-sql-SparkSqlAstBuilder.md#visitCreateTable[visitCreateTable] (for `CREATE TABLE` SQL command) or spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable[visitCreateHiveTable] (for `CREATE EXTERNAL TABLE` SQL command)
 
-* `CatalogImpl` is requested to spark-sql-CatalogImpl.md#createTable[create a table] (for spark-sql-Catalog.md#createTable[Catalog.createTable] operator)
+* `CatalogImpl` is requested to [create a table](../CatalogImpl.md#createTable) (for [Catalog.createTable](../Catalog.md#createTable) operator)
 
 `CreateTable` requires that the <<spark-sql-CatalogTable.md#provider, table provider>> of the <<tableDesc, CatalogTable>> is defined or throws an `AssertionError`:
 

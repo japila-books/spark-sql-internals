@@ -38,7 +38,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 `run` then requests the input `SparkSession` to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<spark-sql-Dataset.md#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
 
-Depending on the <<global, global>> flag, `run` requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#createGlobalTempView, createGlobalTempView>> (`global` flag is on) or <<spark-sql-SessionCatalog.md#createTempView, createTempView>> (`global` flag is off).
+Depending on the <<global, global>> flag, `run` requests the `SessionCatalog` to [createGlobalTempView](../SessionCatalog.md#createGlobalTempView) (`global` flag is on) or [createTempView](../SessionCatalog.md#createTempView) (`global` flag is off).
 
 `run` throws an `AnalysisException` when executed with `hive` <<provider, provider>>.
 

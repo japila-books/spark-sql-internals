@@ -10,7 +10,7 @@ title: SubqueryAlias
 
 * <<spark-sql-dataset-operators.md#as, Dataset.as>> operator is used
 
-* `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupRelation, find a table or view in catalogs>>
+* `SessionCatalog` is requested to [find a table or view in catalogs](../SessionCatalog.md#lookupRelation)
 
 * `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#constructLeftJoins, constructLeftJoins>> (when <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#apply, applied>> to <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>>, <<spark-sql-LogicalPlan-Project.md#, Project>> or <<spark-sql-LogicalPlan-Filter.md#, Filter>> logical operators with correlated scalar subqueries)
 

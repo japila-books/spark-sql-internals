@@ -6,7 +6,7 @@
 
 * <span id="conf"> [SQLConf](../../SQLConf.md)
 * <span id="defaultSessionCatalog"> [CatalogPlugin](CatalogPlugin.md)
-* <span id="v1SessionCatalog"> [SessionCatalog](../../spark-sql-SessionCatalog.md)
+* <span id="v1SessionCatalog"> [SessionCatalog](../../SessionCatalog.md)
 
 `CatalogManager` is created when `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager).
 

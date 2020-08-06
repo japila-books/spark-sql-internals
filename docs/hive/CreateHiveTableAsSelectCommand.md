@@ -67,8 +67,8 @@ In summary, `run` runs a InsertIntoHiveTable.md[InsertIntoHiveTable] logical com
 
 `run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#sessionState[SessionState] that is then requested for the ../SessionState.md#catalog[SessionCatalog].
 
-`run` requests the `SessionCatalog` to ../spark-sql-SessionCatalog.md#tableExists[check out whether the table exists or not].
+`run` requests the `SessionCatalog` to ../SessionCatalog.md#tableExists[check out whether the table exists or not].
 
 With the Hive table available, `run` validates the <<mode, save mode>> and runs a InsertIntoHiveTable.md[InsertIntoHiveTable] logical command (with `overwrite` and `ifPartitionNotExists` flags disabled).
 
-When the Hive table is not available, `run` asserts that the ../spark-sql-CatalogTable.md#schema[schema] (of the <<tableDesc, CatalogTable>>) is not defined and requests the `SessionCatalog` to ../spark-sql-SessionCatalog.md#createTable[create the table] (with the `ignoreIfExists` flag disabled). In the end, `run` runs a InsertIntoHiveTable.md[InsertIntoHiveTable] logical command (with `overwrite` flag enabled and `ifPartitionNotExists` flag disabled).
+When the Hive table is not available, `run` asserts that the ../spark-sql-CatalogTable.md#schema[schema] (of the <<tableDesc, CatalogTable>>) is not defined and requests the `SessionCatalog` to ../SessionCatalog.md#createTable[create the table] (with the `ignoreIfExists` flag disabled). In the end, `run` runs a InsertIntoHiveTable.md[InsertIntoHiveTable] logical command (with `overwrite` flag enabled and `ifPartitionNotExists` flag disabled).

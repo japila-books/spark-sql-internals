@@ -60,7 +60,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 `run` requests the `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is used to access the <<SessionState.md#catalog, SessionCatalog>>.
 
-`run` then requests the `SessionCatalog` to <<spark-sql-SessionCatalog.md#getTableMetadata, retrieve the table metadata from the external catalog (metastore)>>.
+`run` then requests the `SessionCatalog` to [retrieve the table metadata from the external catalog (metastore)](../SessionCatalog.md#getTableMetadata).
 
 `run` then <<showCreateDataSourceTable, showCreateDataSourceTable>> for a data source / non-Hive table or <<showCreateHiveTable, showCreateHiveTable>> for a Hive table (per the <<spark-sql-CatalogTable.md#, table metadata>>).
 

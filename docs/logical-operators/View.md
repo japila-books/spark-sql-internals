@@ -5,7 +5,7 @@ title: View
 [[children]]
 `View` is a <<spark-sql-LogicalPlan.md#, logical operator>> with a single <<child, child>> logical operator.
 
-`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to <<spark-sql-SessionCatalog.md#lookupRelation, find a relation in the catalogs>> (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> and the table type is `VIEW`).
+`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to [find a relation in the catalogs](../SessionCatalog.md#lookupRelation) (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> and the table type is `VIEW`).
 
 [source, scala]
 ----

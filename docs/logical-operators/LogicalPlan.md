@@ -82,9 +82,9 @@ refresh(): Unit
 
 `refresh` is used when:
 
-* `SessionCatalog` is requested to [refresh a table](../spark-sql-SessionCatalog.md#refreshTable)
+* `SessionCatalog` is requested to [refresh a table](../SessionCatalog.md#refreshTable)
 
-* `CatalogImpl` is requested to [refresh a table](../spark-sql-CatalogImpl.md#refreshTable)
+* `CatalogImpl` is requested to [refresh a table](../CatalogImpl.md#refreshTable)
 
 ## <span id="resolveQuoted"> resolveQuoted
 

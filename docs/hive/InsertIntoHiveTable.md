@@ -40,9 +40,9 @@ NOTE: `run` is part of ../spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWr
 
 `run` <<processInsert, processInsert>> (and SaveAsHiveFile.md#deleteExternalTmpPath[deleteExternalTmpPath]).
 
-`run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#catalog[Catalog] that is requested to ../spark-sql-Catalog.md#uncacheTable[uncache the table].
+`run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#catalog[Catalog] that is requested to [uncache the table](../Catalog.md#uncacheTable).
 
-`run` un-caches the Hive table. `run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the ../SessionState.md#catalog[SessionCatalog] that is requested to ../spark-sql-SessionCatalog.md#refreshTable[invalidate the cache for the table].
+`run` un-caches the Hive table. `run` requests the input ../SparkSession.md[SparkSession] for ../SparkSession.md#sessionState[SessionState]. `run` requests the `SessionState` for the ../SessionState.md#catalog[SessionCatalog] that is requested to [invalidate the cache for the table](../SessionCatalog.md#refreshTable).
 
 In the end, `run` ../spark-sql-CommandUtils.md#updateTableStats[update the table statistics].
 

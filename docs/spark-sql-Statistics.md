@@ -43,7 +43,7 @@ NOTE: <<rowCount, row count>> estimate is used in spark-sql-Optimizer-CostBasedJ
 
 [NOTE]
 ====
-spark-sql-CatalogStatistics.md[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, query hints>> in spark-sql-ExternalCatalog.md[metastore]).
+spark-sql-CatalogStatistics.md[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, query hints>> in [metastore](ExternalCatalog.md)).
 
 `CatalogStatistics` are statistics stored in an external catalog (usually a Hive metastore) and are often referred as *Hive statistics* while `Statistics` represents the *Spark statistics*.
 ====

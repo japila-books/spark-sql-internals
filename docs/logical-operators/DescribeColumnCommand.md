@@ -88,7 +88,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 `run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
 
-`run` requests the `SessionCatalog` for the spark-sql-SessionCatalog.md#getTempViewOrPermanentTableMetadata[table metadata].
+`run` requests the `SessionCatalog` for the [table metadata](../SessionCatalog.md#getTempViewOrPermanentTableMetadata).
 
 NOTE: `run` uses the input `SparkSession` to access SparkSession.md#sessionState[SessionState] that in turn is used to access the SessionState.md#catalog[SessionCatalog].
 

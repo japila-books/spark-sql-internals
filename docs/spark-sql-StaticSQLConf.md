@@ -12,7 +12,7 @@ title: StaticSQLConf
 
 | [[spark.sql.catalogImplementation]][[CATALOG_IMPLEMENTATION]] *spark.sql.catalogImplementation*
 
-(internal) Configures `in-memory` (default) or ``hive``-related BaseSessionStateBuilder.md[BaseSessionStateBuilder] and spark-sql-ExternalCatalog.md[ExternalCatalog]
+(internal) Configures `in-memory` (default) or ``hive``-related BaseSessionStateBuilder.md[BaseSessionStateBuilder] and [ExternalCatalog](ExternalCatalog.md)
 
 SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] is used to enable hive/index.md[Hive support] for a SparkSession.md[SparkSession].
 
@@ -30,7 +30,7 @@ Used when:
 
 | [[spark.sql.debug]][[DEBUG_MODE]] *spark.sql.debug*
 
-(internal) Only used for internal debugging when `HiveExternalCatalog` is requested to hive/HiveExternalCatalog.md#restoreTableMetadata[restoreTableMetadata].
+(internal) Only used for internal debugging when `HiveExternalCatalog` is requested to [restoreTableMetadata](hive/HiveExternalCatalog.md#restoreTableMetadata).
 
 Default: `false`
 

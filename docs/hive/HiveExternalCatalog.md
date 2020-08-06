@@ -5,7 +5,7 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveExternalCatalog` is an ../spark-sql-ExternalCatalog.md[external catalog of permanent relational entities] (_metastore_).
+`HiveExternalCatalog` is an [external catalog of permanent relational entities](../ExternalCatalog.md).
 
 `HiveExternalCatalog` is used for `SparkSession` with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
@@ -119,9 +119,9 @@ doAlterTableStats(
   stats: Option[CatalogStatistics]): Unit
 ----
 
-NOTE: `doAlterTableStats` is part of ../spark-sql-ExternalCatalog.md#doAlterTableStats[ExternalCatalog Contract] to alter the statistics of a table.
-
 `doAlterTableStats`...FIXME
+
+`doAlterTableStats` is part of the [ExternalCatalog](../ExternalCatalog.md#doAlterTableStats) abstraction.
 
 === [[listPartitionsByFilter]] `listPartitionsByFilter` Method
 
@@ -134,9 +134,9 @@ listPartitionsByFilter(
   defaultTimeZoneId: String): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitionsByFilter` is part of ../spark-sql-ExternalCatalog.md#listPartitionsByFilter[ExternalCatalog Contract] to...FIXME.
-
 `listPartitionsByFilter`...FIXME
+
+`listPartitionsByFilter` is part of the [ExternalCatalog](../ExternalCatalog.md#listPartitionsByFilter) abstraction.
 
 === [[alterPartitions]] `alterPartitions` Method
 
@@ -148,9 +148,9 @@ alterPartitions(
   newParts: Seq[CatalogTablePartition]): Unit
 ----
 
-NOTE: `alterPartitions` is part of ../spark-sql-ExternalCatalog.md#alterPartitions[ExternalCatalog Contract] to...FIXME.
-
 `alterPartitions`...FIXME
+
+`alterPartitions` is part of the [ExternalCatalog](../ExternalCatalog.md#alterPartitions) abstraction.
 
 === [[getTable]] `getTable` Method
 
@@ -161,9 +161,9 @@ getTable(
   table: String): CatalogTable
 ----
 
-NOTE: `getTable` is part of ../spark-sql-ExternalCatalog.md#getTable[ExternalCatalog Contract] to...FIXME.
-
 `getTable`...FIXME
+
+`getTable` is part of the [ExternalCatalog](../ExternalCatalog.md#getTable) abstraction.
 
 === [[doAlterTable]] `doAlterTable` Method
 
@@ -173,9 +173,9 @@ doAlterTable(
   tableDefinition: CatalogTable): Unit
 ----
 
-NOTE: `doAlterTable` is part of ../spark-sql-ExternalCatalog.md#doAlterTable[ExternalCatalog Contract] to alter a table.
-
 `doAlterTable`...FIXME
+
+`doAlterTable` is part of the [ExternalCatalog](../ExternalCatalog.md#doAlterTable) abstraction.
 
 === [[getPartition]] `getPartition` Method
 
@@ -187,9 +187,9 @@ getPartition(
   spec: TablePartitionSpec): CatalogTablePartition
 ----
 
-NOTE: `getPartition` is part of ../spark-sql-ExternalCatalog.md#getPartition[ExternalCatalog Contract] to...FIXME.
-
 `getPartition`...FIXME
+
+`getPartition` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartition) abstraction.
 
 === [[getPartitionOption]] `getPartitionOption` Method
 
@@ -201,9 +201,9 @@ getPartitionOption(
   spec: TablePartitionSpec): Option[CatalogTablePartition]
 ----
 
-NOTE: `getPartitionOption` is part of ../spark-sql-ExternalCatalog.md#getPartitionOption[ExternalCatalog Contract] to...FIXME.
-
 `getPartitionOption`...FIXME
+
+`getPartitionOption` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartitionOption) abstraction.
 
 === [[listPartitions]] Retrieving CatalogTablePartition of Table -- `listPartitions` Method
 
@@ -215,9 +215,9 @@ listPartitions(
   partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
 ----
 
-NOTE: `listPartitions` is part of the <<spark-sql-ExternalCatalog.md#listPartitions, ExternalCatalog Contract>> to list partitions of a table.
-
 `listPartitions`...FIXME
+
+`listPartitions` is part of the [ExternalCatalog](../ExternalCatalog.md#listPartitions) abstraction.
 
 === [[doCreateTable]] `doCreateTable` Method
 
@@ -228,9 +228,9 @@ doCreateTable(
   ignoreIfExists: Boolean): Unit
 ----
 
-NOTE: `doCreateTable` is part of the <<spark-sql-ExternalCatalog.md#doCreateTable, ExternalCatalog Contract>> to...FIXME.
-
 `doCreateTable`...FIXME
+
+`doCreateTable` is part of the [ExternalCatalog](../ExternalCatalog.md#doCreateTable) abstraction.
 
 === [[doAlterTableDataSchema]] `doAlterTableDataSchema` Method
 
@@ -242,9 +242,9 @@ doAlterTableDataSchema(
   newDataSchema: StructType): Unit
 ----
 
-NOTE: `doAlterTableDataSchema` is part of the <<spark-sql-ExternalCatalog.md#doAlterTableDataSchema, ExternalCatalog Contract>> to...FIXME.
-
 `doAlterTableDataSchema`...FIXME
+
+`doAlterTableDataSchema` is part of the [ExternalCatalog](../ExternalCatalog.md#doAlterTableDataSchema) abstraction.
 
 === [[createTable]] `createTable` Method
 
@@ -255,9 +255,9 @@ createTable(
   ignoreIfExists: Boolean): Unit
 ----
 
-NOTE: `createTable` is part of the ../spark-sql-ExternalCatalog.md#createTable[ExternalCatalog] to...FIXME.
-
 `createTable`...FIXME
+
+`createTable` is part of the [ExternalCatalog](../ExternalCatalog.md#createTable) abstraction.
 
 === [[createDataSourceTable]] `createDataSourceTable` Internal Method
 
@@ -270,7 +270,7 @@ createDataSourceTable(
 
 `createDataSourceTable`...FIXME
 
-NOTE: `createDataSourceTable` is used when `HiveExternalCatalog` is requested to <<createTable, createTable>>.
+`createDataSourceTable` is used when `HiveExternalCatalog` is requested to [createTable](#createTable).
 
 === [[saveTableIntoHive]] `saveTableIntoHive` Internal Method
 

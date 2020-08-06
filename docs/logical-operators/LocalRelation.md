@@ -12,7 +12,7 @@ title: LocalRelation
 
 * <<SparkSession.md#createDataset, SparkSession.createDataset>>, <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>>, <<SparkSession.md#createDataFrame, SparkSession.createDataFrame>> operators are used
 
-* `CatalogImpl` is requested for a <<spark-sql-CatalogImpl.md#makeDataset, Dataset from DefinedByConstructorParams data>>
+* `CatalogImpl` is requested for a [Dataset from DefinedByConstructorParams data](../CatalogImpl.md#makeDataset)
 
 * `Dataset` is requested for the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.md#, Command>> logical operators)
 

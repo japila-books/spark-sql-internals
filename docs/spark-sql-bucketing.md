@@ -49,7 +49,7 @@ The above join query is a fine example of a spark-sql-SparkPlan-SortMergeJoinExe
 .SortMergeJoin of FileScans (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-filescans.png[align="center"]
 
-One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a spark-sql-Catalog.md[catalog] by SparkSession.md#table[SparkSession.table].
+One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a [catalog](Catalog.md) by SparkSession.md#table[SparkSession.table].
 
 NOTE: Bucketing spark-sql-DataFrameWriter.md#assertNotBucketed[is not supported] for spark-sql-DataFrameWriter.md#save[DataFrameWriter.save], spark-sql-DataFrameWriter.md#insertInto[DataFrameWriter.insertInto] and spark-sql-DataFrameWriter.md#jdbc[DataFrameWriter.jdbc] methods.
 
@@ -128,7 +128,7 @@ val numPartitions = bucketed_4_10e4.queryExecution.toRdd.getNumPartitions
 assert(numPartitions == 4)
 ----
 
-Use spark-sql-SessionCatalog.md#getTableMetadata[SessionCatalog] or `DESCRIBE EXTENDED` SQL command to find the bucketing information.
+Use [SessionCatalog](SessionCatalog.md#getTableMetadata) or `DESCRIBE EXTENDED` SQL command to find the bucketing information.
 
 [source, scala]
 ----

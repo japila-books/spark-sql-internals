@@ -432,6 +432,6 @@ newSession(): SQLContext
 
 You can use `newSession` method to create a new session without a cost of instantiating a new SqlContext from scratch.
 
-`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, spark-sql-SQLListener.md[SQLListener], and spark-sql-ExternalCatalog.md[ExternalCatalog].
+`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, spark-sql-SQLListener.md[SQLListener], and [ExternalCatalog](ExternalCatalog.md).
 
 CAUTION: FIXME Why would I need that?

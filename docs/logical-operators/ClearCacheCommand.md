@@ -2,7 +2,7 @@ title: ClearCacheCommand
 
 # ClearCacheCommand Logical Command
 
-`ClearCacheCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] to spark-sql-Catalog.md#clearCache[remove all cached tables from the in-memory cache].
+`ClearCacheCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] to [remove all cached tables from the in-memory cache](../Catalog.md#clearCache).
 
 `ClearCacheCommand` corresponds to `CLEAR CACHE` SQL statement.
 

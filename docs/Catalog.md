@@ -1,19 +1,8 @@
 title: Catalog
 
-# Catalog -- Metastore Management Interface
+# Catalog &mdash; Metastore Management Interface
 
 `Catalog` is the <<contract, interface>> for managing a *metastore* (aka _metadata catalog_) of relational entities (e.g. database(s), tables, functions, table columns and temporary views).
-
-`Catalog` is available using SparkSession.md#catalog[SparkSession.catalog] property.
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.catalog
-org.apache.spark.sql.catalog.Catalog
-----
 
 [[contract]]
 .Catalog Contract
@@ -232,4 +221,16 @@ uncacheTable(
 
 |===
 
-NOTE: <<spark-sql-CatalogImpl.md#, CatalogImpl>> is the one and only known implementation of the <<contract, Catalog Contract>> in Apache Spark.
+NOTE: [CatalogImpl](CatalogImpl.md) is the one and only known implementation of the <<contract, Catalog Contract>> in Apache Spark.
+
+## Accessing Catalog
+
+`Catalog` is available using SparkSession.md#catalog[SparkSession.catalog] property.
+
+```text
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.catalog
+org.apache.spark.sql.catalog.Catalog
+```

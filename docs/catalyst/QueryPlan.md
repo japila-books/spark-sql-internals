@@ -11,7 +11,7 @@
 
 A `QueryPlan` is **invalid** if there are [missing input attributes](#missingInput) and `children` subnodes are non-empty.
 
-A `QueryPlan` is **unresolved** if the column names have not been verified and column types have not been looked up in the [Catalog](../spark-sql-Catalog.md).
+A `QueryPlan` is **unresolved** if the column names have not been verified and column types have not been looked up in the [Catalog](../Catalog.md).
 
 ## Contract
 

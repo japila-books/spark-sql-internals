@@ -27,7 +27,7 @@ val spark = SparkSession.builder
 !!! note "SparkSession in spark-shell"
     `spark` object in `spark-shell` (the instance of `SparkSession` that is auto-created) has Hive support enabled.
 
-    In order to disable the pre-configured Hive support in the `spark` object, use [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property with `in-memory` value (that uses [InMemoryCatalog](spark-sql-InMemoryCatalog.md) external catalog instead).
+    In order to disable the pre-configured Hive support in the `spark` object, use [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property with `in-memory` value (that uses [InMemoryCatalog](InMemoryCatalog.md) external catalog instead).
 
     ```text
     $ spark-shell --conf spark.sql.catalogImplementation=in-memory
@@ -303,25 +303,16 @@ res1: Boolean = true
 val t1 = spark.table("t1")
 ```
 
-## <span id="catalog"> Metadata Catalog
+## Catalog
 
 ```scala
 catalog: Catalog
 ```
 
-`catalog` attribute is a (lazy) interface to the [metadata catalog](spark-sql-Catalog.md) (of relational entities like databases, tables, functions, table columns, and views).
+`catalog` creates a [CatalogImpl](CatalogImpl.md) when first accessed.
 
-```text
-scala> spark.catalog.listTables.show
-+------------------+--------+-----------+---------+-----------+
-|              name|database|description|tableType|isTemporary|
-+------------------+--------+-----------+---------+-----------+
-|my_permanent_table| default|       null|  MANAGED|      false|
-|              strs|    null|       null|TEMPORARY|       true|
-+------------------+--------+-----------+---------+-----------+
-```
-
-Internally, `catalog` creates a [CatalogImpl](spark-sql-CatalogImpl.md) (that uses the current `SparkSession`).
+??? note
+    `catalog` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 ## <span id="read"> DataFrameReader
 

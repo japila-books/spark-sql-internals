@@ -5,7 +5,7 @@
 :url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
 :url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
 
-`HiveSessionCatalog` is a ../spark-sql-SessionCatalog.md[session-scoped catalog of relational entities] that is used when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
+`HiveSessionCatalog` is a [session-scoped catalog of relational entities](../SessionCatalog.md) that is used when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled].
 
 .HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveSessionCatalog.png[align="center"]
@@ -36,13 +36,13 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 
 `HiveSessionCatalog` takes the following to be created:
 
-* [[externalCatalog]] HiveExternalCatalog.md[HiveExternalCatalog]
-* [[globalTempViewManager]] ../spark-sql-GlobalTempViewManager.md[GlobalTempViewManager]
-* [[metastoreCatalog]] Legacy HiveMetastoreCatalog.md[HiveMetastoreCatalog]
-* [[functionRegistry]] ../spark-sql-FunctionRegistry.md[FunctionRegistry]
+* [[externalCatalog]] [HiveExternalCatalog](HiveExternalCatalog.md)
+* [[globalTempViewManager]] [GlobalTempViewManager](../spark-sql-GlobalTempViewManager.md)
+* [[metastoreCatalog]] Legacy [HiveMetastoreCatalog](HiveMetastoreCatalog.md)
+* [[functionRegistry]] [FunctionRegistry](../spark-sql-FunctionRegistry.md)
 * [[conf]] [SQLConf](../SQLConf.md)
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
-* [[parser]] ../spark-sql-ParserInterface.md[ParserInterface]
+* [[parser]] [ParserInterface](../sql/ParserInterface.md)
 * [[functionResourceLoader]] `FunctionResourceLoader`
 
 === [[lookupFunction0]] `lookupFunction0` Internal Method

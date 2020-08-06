@@ -5,7 +5,7 @@ As you may have noticed, web UI's Storage tab displays some spark-sql-caching-an
 .Cached Queries in web UI (Storage Tab)
 image::images/spark-sql-caching-webui-storage.png[align="center"]
 
-"In-memory table [name]" RDD names are the result of SQL's spark-sql-caching-and-persistence.md#cache-table[CACHE TABLE] or when `Catalog` is requested to spark-sql-Catalog.md#cacheTable[cache a table].
+"In-memory table [name]" RDD names are the result of SQL's spark-sql-caching-and-persistence.md#cache-table[CACHE TABLE] or when `Catalog` is requested to [cache a table](Catalog.md#cacheTable).
 
 [source, scala]
 ----
