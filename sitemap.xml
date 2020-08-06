@@ -404,11 +404,11 @@
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Catalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Catalog/</loc>
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalogImpl/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalogImpl/</loc>
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -420,11 +420,11 @@
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExternalCatalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExternalCatalog/</loc>
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-InMemoryCatalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InMemoryCatalog/</loc>
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -436,7 +436,7 @@
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SessionCatalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SessionCatalog/</loc>
      <lastmod>2020-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
