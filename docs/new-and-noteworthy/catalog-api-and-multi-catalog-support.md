@@ -2,6 +2,25 @@
 
 **New in 3.0.0**
 
+Main abstractions:
+
+* [CatalogManager](../connector/catalog/CatalogManager.md)
+* [USE NAMESPACE](../sql/AstBuilder.md#visitUse) SQL statement
+
+## Example
+
+```sql
+SHOW NAMESPACES;
+
+SHOW CURRENT NAMESPACE;
+
+CREATE NAMESPACE IF NOT EXISTS my_ns;
+
+USE NAMESPACE my_ns;
+
+SHOW CURRENT NAMESPACE;
+```
+
 ## References
 
 ### Articles

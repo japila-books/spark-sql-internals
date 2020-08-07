@@ -41,9 +41,9 @@ Used when `BaseSessionStateBuilder` is requested to <<createClone, create a Sess
 
 `BaseSessionStateBuilder` is created when `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState).
 
-## SQL Services
+## Session-Specific Registries
 
-The following SQL services are created on demand (_lazily_) once and reused.
+The following registries are Scala lazy values which are created once and on demand (when accessed for the first time).
 
 ### <span id="analyzer"> Analyzer
 
@@ -59,9 +59,7 @@ analyzer: Analyzer
 catalog: SessionCatalog
 ```
 
-`BaseSessionStateBuilder` creates a [SessionCatalog](SessionCatalog.md) on demand (and caches it for later usage).
-
-Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionState](#build) itself
+[SessionCatalog](SessionCatalog.md)
 
 !!! note HiveSessionStateBuilder
     [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) manages its own Hive-aware [HiveSessionCatalog](hive/HiveSessionStateBuilder.md#catalog).
@@ -72,7 +70,13 @@ Used to create [Analyzer](#analyzer), [Optimizer](#optimizer) and a [SessionStat
 catalogManager: CatalogManager
 ```
 
-[CatalogManager](connector/catalog/CatalogManager.md)
+[CatalogManager](connector/catalog/CatalogManager.md) that is created for the session-specific [SQLConf](#conf), [V2SessionCatalog](#v2SessionCatalog) and [SessionCatalog](#catalog).
+
+`catalogManager` is used when:
+
+* `BaseSessionStateBuilder` is requested for [Analyzer](#analyzer) and [Optimizer](#optimizer)
+
+* `HiveSessionStateBuilder` is requested for [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)
 
 ### <span id="conf"> SQLConf
 
@@ -107,6 +111,8 @@ sqlParser: ParserInterface
 ```scala
 v2SessionCatalog: V2SessionCatalog
 ```
+
+[V2SessionCatalog](V2SessionCatalog.md) that is created for the session-specific [SessionCatalog](#catalog) and  [SQLConf](#conf).
 
 ## <span id="customOperatorOptimizationRules"> Custom Operator Optimization Rules
 

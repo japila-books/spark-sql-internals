@@ -10,13 +10,27 @@
 
 `CatalogManager` is created when `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager).
 
-## <span id="currentCatalog"> CatalogPlugin
+## <span id="SESSION_CATALOG_NAME"> Default Catalog Name
+
+`CatalogManager` defines `spark_catalog` as the name of [V2SessionCatalog](../../V2SessionCatalog.md) (default catalog) and is used as the default of [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
+
+## <span id="_currentCatalogName"> Current Catalog Name
+
+```scala
+_currentCatalogName: Option[String]
+```
+
+`_currentCatalogName` is the name of the [current catalog](#currentCatalog) and is undefined by default (`None`).
+
+`_currentCatalogName` can be changed using [setCurrentCatalog](#setCurrentCatalog).
+
+## <span id="currentCatalog"> Current CatalogPlugin
 
 ```scala
 currentCatalog: CatalogPlugin
 ```
 
-`currentCatalog`...FIXME
+`currentCatalog` uses the [current CatalogPlugin](#_currentCatalogName) if defined or falls back on [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
 
 `currentCatalog` is used when:
 
@@ -59,16 +73,18 @@ setCurrentNamespace(
 
 `setCurrentNamespace` is used when `SetCatalogAndNamespaceExec` physical command is executed.
 
-## <span id="setCurrentCatalog"> Setting Current Catalog
+## <span id="setCurrentCatalog"> Changing Current Catalog Name
 
 ```scala
 setCurrentCatalog(
   catalogName: String): Unit
 ```
 
-`setCurrentCatalog`...FIXME
+`setCurrentCatalog` checks out whether the given catalog name is different from the [currentCatalog](#currentCatalog)'s.
 
-`setCurrentCatalog` is used when `SetCatalogAndNamespaceExec` physical command is executed.
+Only if the names are different, `setCurrentCatalog` makes it [_currentCatalogName](#_currentCatalogName) and "resets" [_currentNamespace](#_currentNamespace) (`None`). In the end, `setCurrentCatalog` requests the [SessionCatalog](#v1SessionCatalog) to [setCurrentDatabase](../../SessionCatalog.md#setCurrentDatabase) as [default](../../SessionCatalog.md#DEFAULT_DATABASE).
+
+`setCurrentCatalog` is used when [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed.
 
 ## <span id="catalog"> catalog
 

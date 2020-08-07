@@ -516,9 +516,9 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.defaultCatalog"> spark.sql.defaultCatalog
 
-Name of the default catalog (unless users change it)
+Name of the default catalog
 
-Default: `spark_catalog`
+Default: [spark_catalog](connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME)
 
 Use [SQLConf.DEFAULT_CATALOG](SQLConf.md#DEFAULT_CATALOG) to access the current value.
 

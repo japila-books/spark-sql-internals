@@ -75,8 +75,8 @@ nav:
   - Home:
     - index.md
     - Catalog Plugin API:
-      - CatalogPlugin: connector/catalog/CatalogPlugin.md
       - CatalogManager: connector/catalog/CatalogManager.md
+      - CatalogPlugin: connector/catalog/CatalogPlugin.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
       - TableCatalog: connector/catalog/TableCatalog.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
@@ -203,6 +203,7 @@ nav:
         - spark-sql-CatalogStorageFormat.md
         - spark-sql-CatalogTablePartition.md
         - spark-sql-BucketSpec.md
+      - V2SessionCatalog: V2SessionCatalog.md
       - SessionState:
         - SessionState: SessionState.md
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md

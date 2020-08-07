@@ -311,7 +311,7 @@ catalog: Catalog
 
 `catalog` creates a [CatalogImpl](CatalogImpl.md) when first accessed.
 
-??? note
+??? "lazy value"
     `catalog` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 ## <span id="read"> DataFrameReader

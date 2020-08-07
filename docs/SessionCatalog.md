@@ -24,13 +24,17 @@ SessionCatalog takes the following to be created:
 
 `SessionCatalog` is available through [SessionState](SessionState.md#catalog) (of a [SparkSession](SparkSession.md#sessionState)).
 
-```
+```text
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 ```
+
+## <span id="DEFAULT_DATABASE"> Default Database Name
+
+`SessionCatalog` defines `default` as the name of the default database.
 
 ## ExternalCatalog
 

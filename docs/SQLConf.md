@@ -505,7 +505,7 @@ Used when...FIXME
 
 The value of [spark.sql.defaultCatalog](spark-sql-properties.md#spark.sql.defaultCatalog) configuration property
 
-Used when `CatalogManager` is requested for the [CatalogPlugin](connector/catalog/CatalogManager.md#currentCatalog)
+Used when `CatalogManager` is requested for the [current CatalogPlugin](connector/catalog/CatalogManager.md#currentCatalog)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
 
