@@ -24,7 +24,19 @@
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/SupportsCatalogOptions/</loc>
+     <lastmod>2020-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/DelegatingCatalogExtension/</loc>
+     <lastmod>2020-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/Catalogs/</loc>
+     <lastmod>2020-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogV2Util/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2004,6 +2016,10 @@
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/explain-command-improved/</loc>
+     <lastmod>2020-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-hive-integration/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
@@ -2137,14 +2153,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-catalyst-dsl/</loc>
-     <lastmod>2020-08-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-in-300/</loc>
-     <lastmod>2020-08-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-in-300/explain-command-improved/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
