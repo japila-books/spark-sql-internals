@@ -4,11 +4,11 @@
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogPlugin/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogManager/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogManager/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogPlugin/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -477,6 +477,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BucketSpec/</loc>
+     <lastmod>2020-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/V2SessionCatalog/</loc>
      <lastmod>2020-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
