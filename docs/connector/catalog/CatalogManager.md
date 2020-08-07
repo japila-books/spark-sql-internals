@@ -12,7 +12,9 @@
 
 ## <span id="SESSION_CATALOG_NAME"> Default Catalog Name
 
-`CatalogManager` defines `spark_catalog` as the name of [V2SessionCatalog](../../V2SessionCatalog.md) (default catalog) and is used as the default of [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
+`CatalogManager` defines `spark_catalog` as the name of the default catalog ([V2SessionCatalog](../../V2SessionCatalog.md)).
+
+`spark_catalog` is used as the default value of [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
 
 ## <span id="_currentCatalogName"> Current Catalog Name
 
@@ -86,22 +88,24 @@ Only if the names are different, `setCurrentCatalog` makes it [_currentCatalogNa
 
 `setCurrentCatalog` is used when [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed.
 
-## <span id="catalog"> catalog
+## <span id="catalog"> Looking Up CatalogPlugin by Name
 
 ```scala
 catalog(
   name: String): CatalogPlugin
 ```
 
-`catalog`...FIXME
+`catalog` returns the [v2 session catalog](#v2SessionCatalog) when the given name is [spark_catalog](#SESSION_CATALOG_NAME).
+
+Otherwise, `catalog` looks up the name in [catalogs](#catalogs) internal registry. When not found, `catalog` tries to [load a CatalogPlugin by name](Catalogs.md#load) (and registers it in [catalogs](#catalogs) internal registry).
 
 `catalog` is used when:
 
 * `CatalogManager` is requested to [isCatalogRegistered](#isCatalogRegistered) and [currentCatalog](#currentCatalog)
 
-* `CatalogV2Util` is requested to `getTableProviderCatalog`
+* `CatalogV2Util` utility is requested to [getTableProviderCatalog](CatalogV2Util.md#getTableProviderCatalog)
 
-* `CatalogAndMultipartIdentifier`, `CatalogAndNamespace` and `CatalogAndIdentifier` utilities are requested to extract a CatalogPlugin (`unapply`)
+* `CatalogAndMultipartIdentifier`, `CatalogAndNamespace` and `CatalogAndIdentifier` utilities are requested to extract a [CatalogPlugin](CatalogPlugin.md) (`unapply`)
 
 ## <span id="isCatalogRegistered"> isCatalogRegistered
 

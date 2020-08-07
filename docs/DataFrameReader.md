@@ -576,14 +576,15 @@ In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to SparkSessi
 
 NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a spark-sql-DataSourceReader.md[DataSourceReader] could not be created).
 
-=== [[load]] "Loading" Data As DataFrame -- `load` Method
+## <span id="load"> Loading Data
 
-[source, scala]
-----
+```scala
 load(): DataFrame
-load(path: String): DataFrame
-load(paths: String*): DataFrame
-----
+load(
+  path: String): DataFrame
+load(
+  paths: String*): DataFrame
+```
 
 `load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped spark-sql-DataFrame.md[DataFrame].
 
@@ -595,7 +596,7 @@ Otherwise, if the <<source, source>> is not a "Data Source V2" data source, `loa
 
 `load` throws a `AnalysisException` when the <<source, source format>> is `hive`.
 
-```
+```text
 Hive data source can only be used with tables, you can not read files of Hive data source directly.
 ```
 

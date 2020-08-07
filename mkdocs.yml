@@ -80,7 +80,10 @@ nav:
       - CatalogExtension: connector/catalog/CatalogExtension.md
       - TableCatalog: connector/catalog/TableCatalog.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
+      - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
+      - Catalogs Utility: connector/catalog/Catalogs.md
+      - CatalogV2Util Utility: connector/catalog/CatalogV2Util.md
     - Structured Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md
@@ -626,6 +629,7 @@ nav:
   - New &amp; Noteworthy:
     - Catalog API and Multi-Catalog Support: new-and-noteworthy/catalog-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
+    - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md
@@ -668,8 +672,6 @@ nav:
       - spark-sql-CommandUtils.md
     - spark-sql-catalyst-dsl.md
   - New in Spark 3.0.0:
-    - new-in-300/index.md
-    - Explaining Query Plans Improved: new-in-300/explain-command-improved.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:

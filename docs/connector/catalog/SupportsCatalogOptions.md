@@ -1,0 +1,3 @@
+# SupportsCatalogOptions
+
+`SupportsCatalogOptions` is...FIXME
