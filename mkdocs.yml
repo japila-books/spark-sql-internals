@@ -74,6 +74,13 @@ google_analytics:
 nav:
   - Home:
     - index.md
+    - Catalog Plugin API:
+      - CatalogPlugin: connector/catalog/CatalogPlugin.md
+      - CatalogManager: connector/catalog/CatalogManager.md
+      - CatalogExtension: connector/catalog/CatalogExtension.md
+      - TableCatalog: connector/catalog/TableCatalog.md
+      - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
+      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
     - Structured Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md
@@ -532,6 +539,7 @@ nav:
       - ResolveSessionCatalog: logical-analysis-rules/ResolveSessionCatalog.md
       - ResolveSQLOnFile: logical-analysis-rules/ResolveSQLOnFile.md
       - ResolveSubquery: logical-analysis-rules/ResolveSubquery.md
+      - ResolveTables: logical-analysis-rules/ResolveTables.md
       - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
       - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
@@ -676,8 +684,6 @@ nav:
       - SupportsRead: connector/catalog/SupportsRead.md
       - SupportsWrite: connector/catalog/SupportsWrite.md
       - V1Table: connector/catalog/V1Table.md
-    - CatalogManager: connector/catalog/CatalogManager.md
-    - CatalogPlugin: connector/catalog/CatalogPlugin.md
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md

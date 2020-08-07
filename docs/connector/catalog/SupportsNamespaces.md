@@ -1,0 +1,3 @@
+# SupportsNamespaces
+
+`SupportsNamespaces` is...FIXME

@@ -72,7 +72,7 @@ Rules:
 * [ResolveCatalogs](logical-analysis-rules/ResolveCatalogs.md)
 * ResolveInsertInto
 * ResolveRelations
-* ResolveTables
+* [ResolveTables](logical-analysis-rules/ResolveTables.md)
 * ResolveReferences
 * ResolveCreateNamedStruct
 * ResolveDeserializer
@@ -242,6 +242,17 @@ scala> println(analyzedPlan.numberedTreeString)
 `FixedPoint` with [maxIterations](#maxIterations) for <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>> batches.
 
 Set when `Analyzer` is [created](#creating-instance) (and can be defined explicitly or through [optimizerMaxIterations](spark-sql-CatalystConf.md#optimizerMaxIterations) configuration setting).
+
+## <span id="expandRelationName"> expandRelationName
+
+```scala
+expandRelationName(
+  nameParts: Seq[String]): Seq[String]
+```
+
+`expandRelationName`...FIXME
+
+`expandRelationName` is used when `ResolveTables` and [ResolveRelations](logical-analysis-rules/ResolveRelations.md) logical analysis rules are executed.
 
 ## Logging
 

@@ -1,0 +1,3 @@
+# DelegatingCatalogExtension
+
+`DelegatingCatalogExtension` is...FIXME
