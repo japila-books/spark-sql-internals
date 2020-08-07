@@ -5,7 +5,7 @@
 `CatalogManager` takes the following to be created:
 
 * <span id="conf"> [SQLConf](../../SQLConf.md)
-* <span id="defaultSessionCatalog"> [CatalogPlugin](CatalogPlugin.md)
+* <span id="defaultSessionCatalog"> Default Session [CatalogPlugin](CatalogPlugin.md)
 * <span id="v1SessionCatalog"> [SessionCatalog](../../SessionCatalog.md)
 
 `CatalogManager` is created when `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager).
@@ -140,6 +140,8 @@ v2SessionCatalog: CatalogPlugin
 loadV2SessionCatalog(): CatalogPlugin
 ```
 
-`loadV2SessionCatalog`...FIXME
+`loadV2SessionCatalog` [loads](Catalogs.md#load) the default [spark_catalog](#SESSION_CATALOG_NAME).
+
+If it is of type [CatalogExtension](CatalogExtension.md), `loadV2SessionCatalog` requests it to [setDelegateCatalog](CatalogExtension.md#setDelegateCatalog) with the [defaultSessionCatalog](#defaultSessionCatalog).
 
 `loadV2SessionCatalog` is used when `CatalogManager` is requested for a [CatalogPlugin](#v2SessionCatalog).
