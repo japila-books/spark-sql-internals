@@ -1,4 +1,4 @@
-# Catalog API and Multi-Catalog Support
+# Catalog Plugin API and Multi-Catalog Support
 
 **New in 3.0.0**
 

@@ -13,7 +13,7 @@ The default embedded deployment mode is not recommended for production use due t
 Read Cloudera's https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hive_metastore_configure.html[Configuring the Hive Metastore for CDH] document that explains the available deployment modes of a Hive metastore.
 ====
 
-When `SparkSession` is SparkSession-Builder.md#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is [HiveExternalCatalog](hive/HiveExternalCatalog.md). `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
+When `SparkSession` is SparkSession-Builder.md#enableHiveSupport[created with Hive support] the external catalog (aka _metastore_) is [HiveExternalCatalog](HiveExternalCatalog.md). `HiveExternalCatalog` uses <<spark.sql.warehouse.dir, spark.sql.warehouse.dir>> directory for the location of the databases and <<javax.jdo.option, javax.jdo.option properties>> for the connection to the Hive metastore database.
 
 [NOTE]
 ====

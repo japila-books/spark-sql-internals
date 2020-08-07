@@ -238,7 +238,7 @@ NOTE: `toMap` adds `min`, `max`, `histogram` entries only if they are available.
 
 NOTE: Interestingly, `colName` and `dataType` input parameters bring no value to `toMap` itself, but merely allow for a more user-friendly error reporting when <<toExternalString, converting>> `min` and `max` column statistics.
 
-`toMap` is used when `HiveExternalCatalog` is requested for hive/[converting table statistics to properties](HiveExternalCatalog.md#statsToProperties) (before persisting them as part of table metadata in a Hive metastore).
+`toMap` is used when `HiveExternalCatalog` is requested for hive/[converting table statistics to properties](hive/HiveExternalCatalog.md#statsToProperties) (before persisting them as part of table metadata in a Hive metastore).
 
 === [[fromMap]] Re-Creating Column Statistics from Properties (ColumnStat Deserialization) -- `fromMap` Method
 
@@ -257,7 +257,7 @@ WARN Failed to parse column statistics for column [fieldName] in table [table]
 
 NOTE: Interestingly, `table` input parameter brings no value to `fromMap` itself, but merely allows for a more user-friendly error reporting when parsing column statistics fails.
 
-`fromMap` is used when `HiveExternalCatalog` is requested for hive/[restoring table statistics from properties](HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore).
+`fromMap` is used when `HiveExternalCatalog` is requested for hive/[restoring table statistics from properties](hive/HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore).
 
 === [[rowToColumnStat]] Creating Column Statistics from InternalRow (Result of Computing Column Statistics) -- `rowToColumnStat` Method
 
