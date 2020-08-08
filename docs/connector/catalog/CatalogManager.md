@@ -5,10 +5,22 @@
 `CatalogManager` takes the following to be created:
 
 * <span id="conf"> [SQLConf](../../SQLConf.md)
-* <span id="defaultSessionCatalog"> Default Session [CatalogPlugin](CatalogPlugin.md)
+* [Default Session Catalog](#defaultSessionCatalog)
 * <span id="v1SessionCatalog"> [SessionCatalog](../../SessionCatalog.md)
 
 `CatalogManager` is created when `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager).
+
+## <span id="defaultSessionCatalog"> Default Session Catalog
+
+```scala
+defaultSessionCatalog: CatalogPlugin
+```
+
+`CatalogManager` is given a [CatalogPlugin](CatalogPlugin.md) when [created](#creating-instance) for the **default session catalog**.
+
+`defaultSessionCatalog` is used as the [delegate catalog](CatalogExtension.md#setDelegateCatalog) when `CatalogManager` is requested to [load a V2SessionCatalog](#loadV2SessionCatalog).
+
+`defaultSessionCatalog` is used as the fall-back catalog when `CatalogManager` is requested to [load a custom V2CatalogPlugin](#v2SessionCatalog).
 
 ## <span id="SESSION_CATALOG_NAME"> Default Catalog Name
 

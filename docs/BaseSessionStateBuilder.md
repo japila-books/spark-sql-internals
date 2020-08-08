@@ -114,6 +114,8 @@ v2SessionCatalog: V2SessionCatalog
 
 [V2SessionCatalog](V2SessionCatalog.md) that is created for the session-specific [SessionCatalog](#catalog) and  [SQLConf](#conf).
 
+`v2SessionCatalog` is used when `BaseSessionStateBuilder` is requested for the [CatalogManager](#catalogManager).
+
 ## <span id="customOperatorOptimizationRules"> Custom Operator Optimization Rules
 
 ```scala
