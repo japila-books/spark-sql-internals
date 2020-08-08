@@ -20,6 +20,10 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/StagingTableCatalog/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/SupportsNamespaces/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
@@ -1424,6 +1428,22 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AlterTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicCreateTableAsSelectExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicReplaceTableAsSelectExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicReplaceTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BatchScanExec/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
@@ -1456,6 +1476,14 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CreateTableAsSelectExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CreateTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DataSourceV2ScanExec/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
@@ -1469,6 +1497,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DeserializeToObjectExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DropNamespaceExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DropTableExec/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1532,6 +1568,22 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RefreshTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RenameTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReplaceTableAsSelectExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReplaceTableExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReusedExchangeExec/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
@@ -1553,6 +1605,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ShowCurrentNamespaceExec/</loc>
+     <lastmod>2020-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ShowTablesExec/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
