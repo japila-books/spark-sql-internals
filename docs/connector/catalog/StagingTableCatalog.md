@@ -1,0 +1,3 @@
+# StagingTableCatalog
+
+`StagingTableCatalog` is...FIXME

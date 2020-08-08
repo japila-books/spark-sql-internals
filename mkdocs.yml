@@ -79,6 +79,7 @@ nav:
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
+      - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
       - TableCatalog: connector/catalog/TableCatalog.md
@@ -471,6 +472,10 @@ nav:
       - physical-operators/SQLMetric.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
+        - AlterTableExec: physical-operators/AlterTableExec.md
+        - AtomicCreateTableAsSelectExec: physical-operators/AtomicCreateTableAsSelectExec.md
+        - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
+        - AtomicReplaceTableExec: physical-operators/AtomicReplaceTableExec.md
         - BatchScanExec: physical-operators/BatchScanExec.md
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
@@ -479,10 +484,14 @@ nav:
         - physical-operators/CartesianProductExec.md
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
+        - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
+        - CreateTableExec: physical-operators/CreateTableExec.md
         - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
         - physical-operators/DataWritingCommandExec.md
         - physical-operators/DebugExec.md
         - physical-operators/DeserializeToObjectExec.md
+        - DropNamespaceExec: physical-operators/DropNamespaceExec.md
+        - DropTableExec: physical-operators/DropTableExec.md
         - physical-operators/ExecutedCommandExec.md
         - physical-operators/ExpandExec.md
         - physical-operators/ExternalRDDScanExec.md
@@ -498,12 +507,17 @@ nav:
         - physical-operators/ProjectExec.md
         - physical-operators/RangeExec.md
         - physical-operators/RDDScanExec.md
+        - RefreshTableExec: physical-operators/RefreshTableExec.md
+        - RenameTableExec: physical-operators/RenameTableExec.md
+        - ReplaceTableAsSelectExec: physical-operators/ReplaceTableAsSelectExec.md
+        - ReplaceTableExec: physical-operators/ReplaceTableExec.md
         - physical-operators/ReusedExchangeExec.md
         - physical-operators/RowDataSourceScanExec.md
         - physical-operators/SampleExec.md
         - physical-operators/SerializeFromObjectExec.md
         - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
         - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
+        - ShowTablesExec: physical-operators/ShowTablesExec.md
         - physical-operators/ShuffleExchangeExec.md
         - physical-operators/ShuffledHashJoinExec.md
         - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
