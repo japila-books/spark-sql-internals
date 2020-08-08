@@ -213,6 +213,17 @@ SHOW CURRENT NAMESPACE
 
 ANTLR labeled alternative: `#showCurrentNamespace`
 
+### <span id="visitShowTables"> visitShowTables
+
+Creates a [ShowTables](../logical-operators/ShowTables.md) for the following SQL statement:
+
+```text
+SHOW TABLES ((FROM | IN) multipartIdentifier)?
+  (LIKE? pattern=STRING)?
+```
+
+ANTLR labeled alternative: `#showTables`
+
 ### visitSingleDataType
 
 Creates a [DataType](../spark-sql-DataType.md)

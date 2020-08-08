@@ -175,6 +175,7 @@ nav:
         - logical-operators/ShowCreateTableCommand.md
         - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
         - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
+        - ShowTables: logical-operators/ShowTables.md
         - logical-operators/ShowTablesCommand.md
         - logical-operators/Sort.md
         - logical-operators/SubqueryAlias.md

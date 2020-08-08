@@ -1,4 +1,4 @@
-# Command -- Eagerly-Executed Logical Operator
+# Command &mdash; Eagerly-Executed Logical Operator
 
 `Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical plans in general).
 

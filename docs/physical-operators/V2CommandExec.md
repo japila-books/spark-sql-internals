@@ -33,7 +33,7 @@ Used when `V2CommandExec` physical command is requested for a [result](#result).
 * <span id="ShowCurrentNamespaceExec"> [ShowCurrentNamespaceExec](ShowCurrentNamespaceExec.md)
 * <span id="ShowNamespacesExec"> `ShowNamespacesExec`
 * <span id="ShowTablePropertiesExec"> `ShowTablePropertiesExec`
-* <span id="ShowTablesExec"> `ShowTablesExec`
+* <span id="ShowTablesExec"> [ShowTablesExec](ShowTablesExec.md)
 * <span id="V1FallbackWriters"> `V1FallbackWriters`
 * <span id="V2TableWriteExec"> `V2TableWriteExec`
 
