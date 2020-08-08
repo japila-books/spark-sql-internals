@@ -78,12 +78,13 @@ nav:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
-      - TableCatalog: connector/catalog/TableCatalog.md
+      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
-      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
-      - Catalogs Utility: connector/catalog/Catalogs.md
-      - CatalogV2Util Utility: connector/catalog/CatalogV2Util.md
+      - TableCatalog: connector/catalog/TableCatalog.md
+      - Utilities:
+        - Catalogs: connector/catalog/Catalogs.md
+        - CatalogV2Util: connector/catalog/CatalogV2Util.md
     - Structured Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md

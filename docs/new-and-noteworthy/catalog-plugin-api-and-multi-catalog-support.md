@@ -5,7 +5,9 @@
 Main abstractions:
 
 * [CatalogManager](../connector/catalog/CatalogManager.md)
+* [CatalogPlugin](../connector/catalog/CatalogPlugin.md)
 * [USE NAMESPACE](../sql/AstBuilder.md#visitUse) SQL statement
+* [SHOW CURRENT NAMESPACE](../sql/AstBuilder.md#visitShowCurrentNamespace) SQL statement
 
 ## Example
 
