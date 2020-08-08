@@ -16,7 +16,7 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/TableCatalog/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/DelegatingCatalogExtension/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -28,7 +28,7 @@
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/DelegatingCatalogExtension/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/TableCatalog/</loc>
      <lastmod>2020-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
