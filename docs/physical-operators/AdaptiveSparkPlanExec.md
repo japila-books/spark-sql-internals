@@ -22,7 +22,7 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 `AdaptiveSparkPlanExec` defines the following physical optimization rules:
 
 * ReuseAdaptiveSubquery
-* CoalesceShufflePartitions
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
 * OptimizeSkewedJoin
 * OptimizeLocalShuffleReader
 * [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
@@ -145,3 +145,15 @@ reuseQueryStage(
 `reuseQueryStage`...FIXME
 
 `reuseQueryStage` is used when `AdaptiveSparkPlanExec` physical operator is requested to [createQueryStages](#createQueryStages).
+
+## <span id="cleanUpAndThrowException"> cleanUpAndThrowException
+
+```scala
+cleanUpAndThrowException(
+  errors: Seq[Throwable],
+  earlyFailedStage: Option[Int]): Unit
+```
+
+`cleanUpAndThrowException`...FIXME
+
+`cleanUpAndThrowException` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).

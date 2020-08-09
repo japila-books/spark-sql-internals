@@ -620,6 +620,7 @@ nav:
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
+      - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md

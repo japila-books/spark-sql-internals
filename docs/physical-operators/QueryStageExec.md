@@ -10,7 +10,9 @@
 cancel(): Unit
 ```
 
-Used when...FIXME
+Cancels the stage materialization if in progress; otherwise does nothing.
+
+Used when `AdaptiveSparkPlanExec` physical operator is requested to [cleanUpAndThrowException](AdaptiveSparkPlanExec.md#cleanUpAndThrowException)
 
 ### <span id="doMaterialize"> doMaterialize
 
@@ -18,15 +20,17 @@ Used when...FIXME
 doMaterialize(): Future[Any]
 ```
 
-Used when...FIXME
+Used when `QueryStageExec` is requested to [materialize](#materialize)
 
-### <span id="id"> id
+### id
 
 ```scala
 id: Int
 ```
 
-Used when...FIXME
+Unique ID
+
+Used when [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
 
 ### <span id="newReuseInstance"> newReuseInstance
 
@@ -43,6 +47,8 @@ Used when `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryS
 ```scala
 plan: SparkPlan
 ```
+
+"Child" [physical operator](SparkPlan.md) (but `QueryStageExec` is a [LeafExecNode](SparkPlan.md#LeafExecNode) and has got no children)
 
 Used when...FIXME
 
@@ -78,3 +84,13 @@ computeStats(): Option[Statistics]
 `computeStats`...FIXME
 
 `computeStats` is used when...FIXME
+
+## materialize
+
+```scala
+materialize(): Future[Any]
+```
+
+`materialize`...FIXME
+
+`materialize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
