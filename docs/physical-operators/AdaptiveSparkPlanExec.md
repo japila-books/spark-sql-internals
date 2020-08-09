@@ -13,6 +13,23 @@
 
 `AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
 
+## <span id="queryStageOptimizerRules"> QueryStage Optimizer Rules
+
+```scala
+queryStageOptimizerRules: Seq[Rule[SparkPlan]]
+```
+
+`AdaptiveSparkPlanExec` defines the following physical optimization rules:
+
+* ReuseAdaptiveSubquery
+* CoalesceShufflePartitions
+* OptimizeSkewedJoin
+* OptimizeLocalShuffleReader
+* [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
+* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md)
+
+`queryStageOptimizerRules` is used when `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage).
+
 ## <span id="doExecute"> doExecute
 
 ```scala
@@ -101,9 +118,21 @@ newQueryStage(
   e: Exchange): QueryStageExec
 ```
 
-`newQueryStage`...FIXME
+`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
 
-`newQueryStage` is used when...FIXME
+`newQueryStage` creates a [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` with the child physical plan as the optimized physical query plan:
+
+* For [ShuffleExchangeExec](ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
+
+* For [BroadcastExchangeExec](BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
+
+`newQueryStage` increments the [currentStageId](#currentStageId) counter.
+
+`newQueryStage` [setLogicalLinkForNewQueryStage](#setLogicalLinkForNewQueryStage) for the `QueryStageExec` physical operator.
+
+In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
+
+`newQueryStage` is used when `AdaptiveSparkPlanExec` is requested to [createQueryStages](#createQueryStages).
 
 ## <span id="reuseQueryStage"> reuseQueryStage
 

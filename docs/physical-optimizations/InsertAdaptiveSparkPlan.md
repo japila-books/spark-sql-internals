@@ -13,7 +13,7 @@
 
 `InsertAdaptiveSparkPlan` is created when `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations).
 
-## <span id="apply"> apply
+## <span id="apply"> Executing Rule
 
 ```scala
 apply(
