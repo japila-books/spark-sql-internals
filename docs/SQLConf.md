@@ -553,4 +553,10 @@ Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical 
 
 The value of [spark.sql.optimizer.excludedRules](spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property
 
-Used when when `Optimizer` is requested for the [batches](catalyst/Optimizer.md#batches)
+Used when `Optimizer` is requested for the [batches](catalyst/Optimizer.md#batches)
+
+## <span id="FETCH_SHUFFLE_BLOCKS_IN_BATCH"><span id="fetchShuffleBlocksInBatch"> fetchShuffleBlocksInBatch
+
+The value of [spark.sql.adaptive.fetchShuffleBlocksInBatch](spark-sql-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property
+
+Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created

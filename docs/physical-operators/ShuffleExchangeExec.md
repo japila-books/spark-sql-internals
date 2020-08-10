@@ -1,5 +1,3 @@
-title: ShuffleExchangeExec
-
 # ShuffleExchangeExec Unary Physical Operator
 
 `ShuffleExchangeExec` is an spark-sql-SparkPlan-Exchange.md[Exchange] unary physical operator that is used to <<doExecute, perform a shuffle>>.
@@ -75,7 +73,7 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` creates a new spark-sql-ShuffledRowRDD.md[ShuffledRowRDD] or (re)uses the <<cachedShuffleRDD, cached one>> if `doExecute` was executed before.
+`doExecute` creates a new [ShuffledRowRDD](../ShuffledRowRDD.md) or (re)uses the <<cachedShuffleRDD, cached one>> if `doExecute` was executed before.
 
 NOTE: `ShuffleExchangeExec` caches a `ShuffledRowRDD` for later reuse.
 
@@ -174,7 +172,7 @@ apply(
 | Description
 
 | cachedShuffleRDD
-| [[cachedShuffleRDD]] <<spark-sql-ShuffledRowRDD.md#, ShuffledRowRDD>> that is created when `ShuffleExchangeExec` operator is <<doExecute, executed (to generate RDD[InternalRow])>> and reused (_cached_) if the operator is used by multiple plans
+| [[cachedShuffleRDD]] [ShuffledRowRDD](../ShuffledRowRDD.md) that is created when `ShuffleExchangeExec` operator is <<doExecute, executed (to generate RDD[InternalRow])>> and reused (_cached_) if the operator is used by multiple plans
 
 | serializer
 | [[serializer]] `UnsafeRowSerializer` (of the size as the number of the <<catalyst/QueryPlan.md#output, output schema attributes>> of the <<child, child>> physical operator and the <<dataSize, dataSize>> performance metric)

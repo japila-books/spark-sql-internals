@@ -171,6 +171,8 @@ Default: `true`
 
 Since: `3.0.0`
 
+Use [SQLConf.fetchShuffleBlocksInBatch](SQLConf.md#fetchShuffleBlocksInBatch) method to access the current value.
+
 ## <span id="spark.sql.adaptive.localShuffleReader.enabled"> spark.sql.adaptive.localShuffleReader.enabled
 
 When true and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark tries to use local shuffle reader to read the shuffle data when the shuffle partitioning is not needed, for example, after converting sort-merge join to broadcast-hash join.
