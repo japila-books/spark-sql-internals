@@ -1964,7 +1964,7 @@
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/execution-planning-strategies/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/execution-planning-strategies/SparkStrategy/</loc>
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1996,7 +1996,15 @@
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/execution-planning-strategies/LogicalQueryStageStrategy/</loc>
+     <lastmod>2020-08-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/execution-planning-strategies/SpecialLimits/</loc>
+     <lastmod>2020-08-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/execution-planning-strategies/SparkStrategies/</loc>
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2672,23 +2680,11 @@
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SortShuffleManager/</loc>
-     <lastmod>2020-08-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-UnsupportedOperationChecker/</loc>
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Analyzer-CheckAnalysis/</loc>
-     <lastmod>2020-08-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SparkStrategy/</loc>
-     <lastmod>2020-08-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SparkStrategies/</loc>
      <lastmod>2020-08-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
