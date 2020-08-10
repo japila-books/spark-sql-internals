@@ -1,6 +1,6 @@
 # ExperimentalMethods
 
-`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers) and <<spark-sql-SparkPlanner.md#, SparkPlanner>>, respectively.
+`ExperimentalMethods` holds extra <<extraOptimizations, optimizations>> and <<extraStrategies, strategies>> that are used in [SparkOptimizer](SparkOptimizer.md#User-Provided-Optimizers) and [SparkPlanner](SparkPlanner.md), respectively.
 
 [[attributes]]
 .ExperimentalMethods' Attributes

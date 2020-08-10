@@ -8,7 +8,7 @@ title: ProjectExec
 
 `ProjectExec` is <<creating-instance, created>> when:
 
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) and [HiveTableScans](../hive/HiveTableScans.md) execution planning strategies are executed (and request `SparkPlanner` to spark-sql-SparkPlanner.md#pruneFilterProject[pruneFilterProject])
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) and [HiveTableScans](../hive/HiveTableScans.md) execution planning strategies are executed (and request `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Project) execution planning strategy is executed
 

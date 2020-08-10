@@ -21,7 +21,7 @@ scala> println(physicalPlan.numberedTreeString)
 02          +- *Range (0, 5, step=1, splits=8)
 ----
 
-`InMemoryScans` is part of the spark-sql-SparkPlanner.md#strategies[standard execution planning strategies] of spark-sql-SparkPlanner.md[SparkPlanner].
+`InMemoryScans` is part of the [standard execution planning strategies](../SparkPlanner.md#strategies) of [SparkPlanner](../SparkPlanner.md).
 
 === [[apply]] Applying InMemoryScans Strategy to Logical Plan (Executing InMemoryScans) -- `apply` Method
 
@@ -34,4 +34,4 @@ NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contr
 
 `apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] to a spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] logical operator.
 
-In the end, `apply` spark-sql-SparkPlanner.md#pruneFilterProject[pruneFilterProject] with a new spark-sql-SparkPlan-InMemoryTableScanExec.md#creating-instance[InMemoryTableScanExec] physical operator.
+In the end, `apply` [pruneFilterProject](../SparkPlanner.md#pruneFilterProject) with a new spark-sql-SparkPlan-InMemoryTableScanExec.md#creating-instance[InMemoryTableScanExec] physical operator.

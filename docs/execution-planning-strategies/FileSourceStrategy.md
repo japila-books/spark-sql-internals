@@ -2,10 +2,9 @@
 
 `FileSourceStrategy` is an spark-sql-SparkStrategy.md[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
 
-`FileSourceStrategy` is part of spark-sql-SparkPlanner.md#strategies[predefined strategies] of the spark-sql-SparkPlanner.md[Spark Planner].
+`FileSourceStrategy` is part of [predefined strategies](../SparkPlanner.md#strategies) of the [Spark Planner](../SparkPlanner.md).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.execution.datasources.FileSourceStrategy
 
 // Enable INFO logging level to see the details of the strategy
@@ -35,7 +34,7 @@ val scan = executionPlan.collectFirst { case fsse: FileSourceScanExec => fsse }.
 
 scala> :type scan
 org.apache.spark.sql.execution.FileSourceScanExec
-----
+```
 
 [[shouldPruneBuckets]]
 `FileSourceScanExec` supports <<spark-sql-bucketing.md#bucket-pruning, Bucket Pruning>> for <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> with the following:

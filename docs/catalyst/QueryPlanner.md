@@ -35,7 +35,7 @@ Used exclusively as an extension point in <<plan, plan>>.
 
 Used exclusively as an extension point in <<plan, plan>>.
 
-Overriden in spark-sql-SparkPlanner.md#collectPlaceholders[SparkPlanner]
+Overriden in [SparkPlanner](../SparkPlanner.md#collectPlaceholders)
 
 | [[prunePlans]] `prunePlans`
 | Prunes physical plans (e.g. bad or somehow incorrect plans).
@@ -60,4 +60,4 @@ If a plan does not contain a placeholder, the plan is returned as is. Otherwise,
 
 In the end, `plan` <<prunePlans, prunes "bad" physical plans>>.
 
-NOTE: `plan` is used exclusively (through the concrete spark-sql-SparkPlanner.md[SparkPlanner]) when a `QueryExecution` [is requested for a physical plan](../QueryExecution.md#sparkPlan).
+NOTE: `plan` is used exclusively (through the concrete [SparkPlanner](../SparkPlanner.md)) when a `QueryExecution` [is requested for a physical plan](../QueryExecution.md#sparkPlan).

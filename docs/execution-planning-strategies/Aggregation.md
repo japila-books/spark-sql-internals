@@ -1,6 +1,6 @@
 # Aggregation Execution Planning Strategy for Aggregate Physical Operators
 
-`Aggregation` is an spark-sql-SparkStrategy.md[execution planning strategy] that spark-sql-SparkPlanner.md[SparkPlanner] uses to <<apply, select aggregate physical operator>> for <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.md#, logical query plan>>.
+`Aggregation` is an spark-sql-SparkStrategy.md[execution planning strategy] that [SparkPlanner](../SparkPlanner.md) uses to <<apply, select aggregate physical operator>> for <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.md#, logical query plan>>.
 
 [source, scala]
 ----

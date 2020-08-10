@@ -43,7 +43,7 @@ Logical plan after executing the [logical query plan optimizer](SessionState.md#
 
 ### <span id="sparkPlan"> Physical Plan
 
-[Physical plan](physical-operators/SparkPlan.md) (after [SparkPlanner](spark-sql-SparkPlanner.md) has planned the [optimized logical plan](#optimizedPlan)).
+[Physical plan](physical-operators/SparkPlan.md) (after [SparkPlanner](SparkPlanner.md) has planned the [optimized logical plan](#optimizedPlan)).
 
 `sparkPlan` is the first physical plan from the collection of all possible physical plans.
 
@@ -86,7 +86,7 @@ dataset.queryExecution.executedPlan
 
 `QueryExecution` uses the [Logical Query Optimizer](catalyst/Optimizer.md) and [Tungsten](spark-sql-tungsten.md) for better structured query performance.
 
-`QueryExecution` uses the input `SparkSession` to access the current spark-sql-SparkPlanner.md[SparkPlanner] (through SessionState.md[SessionState]) when <<creating-instance, it is created>>. It then computes a [SparkPlan](physical-operators/SparkPlan.md) (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
+`QueryExecution` uses the input `SparkSession` to access the current [SparkPlanner](SparkPlanner.md) (through [SessionState](SessionState.md)) when <<creating-instance, it is created>>. It then computes a [SparkPlan](physical-operators/SparkPlan.md) (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 
 !!! note
     A variant of `QueryExecution` that Spark Structured Streaming uses for query planning is `IncrementalExecution`.
@@ -95,7 +95,7 @@ dataset.queryExecution.executedPlan
 
 ## <span id="planner"> SparkPlanner
 
-[SparkPlanner](spark-sql-SparkPlanner.md)
+[SparkPlanner](SparkPlanner.md)
 
 ## <span id="stringWithStats"> Text Representation With Statistics
 

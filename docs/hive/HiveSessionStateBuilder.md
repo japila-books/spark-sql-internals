@@ -42,7 +42,7 @@ Used to create <<analyzer-indepth, Hive-specific Analyzer>> and a RelationConver
 | [[externalCatalog]] [HiveExternalCatalog](HiveExternalCatalog.md)
 
 | <<planner-indepth, planner>>
-| [[planner]] ../spark-sql-SparkPlanner.md[SparkPlanner] with <<planner-strategies, Hive-specific strategies>>.
+| [[planner]] [SparkPlanner](../SparkPlanner.md) with <<planner-strategies, Hive-specific strategies>>.
 
 | `resourceLoader`
 | [[resourceLoader]] `HiveSessionResourceLoader`
@@ -57,7 +57,7 @@ planner: SparkPlanner
 
 NOTE: `planner` is part of ../BaseSessionStateBuilder.md#planner[BaseSessionStateBuilder Contract] to create a query planner.
 
-`planner` is a ../spark-sql-SparkPlanner.md[SparkPlanner] with...FIXME
+`planner` is a [SparkPlanner](../SparkPlanner.md) with...FIXME
 
 `planner` uses the <<planner-strategies, Hive-specific strategies>>.
 

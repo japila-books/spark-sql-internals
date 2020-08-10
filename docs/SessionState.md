@@ -57,7 +57,7 @@ Used when...FIXME
 Used when...FIXME
 
 | experimentalMethods
-| spark-sql-ExperimentalMethods.md[ExperimentalMethods]
+| [ExperimentalMethods](ExperimentalMethods.md)
 | [[experimentalMethods]] FIXME
 
 Used when...FIXME
@@ -105,14 +105,14 @@ NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apach
 
 * [[sharedState]] <<SharedState.md#, SharedState>>
 * [[conf]] [SQLConf](SQLConf.md)
-* [[experimentalMethods]] <<spark-sql-ExperimentalMethods.md#, ExperimentalMethods>>
+* [[experimentalMethods]] [ExperimentalMethods](ExperimentalMethods.md)
 * [[functionRegistry]] <<spark-sql-FunctionRegistry.md#, FunctionRegistry>>
 * [[udfRegistration]] <<spark-sql-UDFRegistration.md#, UDFRegistration>>
 * [[catalogBuilder]] `catalogBuilder` function to create a [SessionCatalog](SessionCatalog.md) (`() => SessionCatalog`)
 * [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
 * [[analyzerBuilder]] `analyzerBuilder` function to create an [Analyzer](Analyzer.md) (`() => Analyzer`)
 * [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](catalyst/Optimizer.md) (`() => Optimizer`)
-* [[planner]] <<spark-sql-SparkPlanner.md#, SparkPlanner>>
+* [[planner]] [SparkPlanner](SparkPlanner.md)
 * [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
 * [[listenerManager]] <<spark-sql-ExecutionListenerManager.md#, ExecutionListenerManager>>
 * [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (`() => SessionResourceLoader`)

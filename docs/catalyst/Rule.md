@@ -32,7 +32,7 @@ The other notable use cases of `Rule` are as follows:
 
 * [SparkSessionExtensions](../SparkSessionExtensions.md)
 
-* When `ExperimentalMethods` is requested for <<spark-sql-ExperimentalMethods.md#extraOptimizations, extraOptimizations>>
+* When `ExperimentalMethods` is requested for [extraOptimizations](../ExperimentalMethods.md#extraOptimizations)
 
 * When `BaseSessionStateBuilder` is requested for <<BaseSessionStateBuilder.md#customResolutionRules, customResolutionRules>>, <<BaseSessionStateBuilder.md#customPostHocResolutionRules, customPostHocResolutionRules>>, <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<BaseSessionStateBuilder.md#optimizer, Optimizer>>
 

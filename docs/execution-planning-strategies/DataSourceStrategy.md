@@ -1,6 +1,6 @@
 # DataSourceStrategy Execution Planning Strategy
 
-`DataSourceStrategy` is an spark-sql-SparkStrategy.md[execution planning strategy] (of spark-sql-SparkPlanner.md[SparkPlanner]) that <<apply, plans LogicalRelation logical operators as RowDataSourceScanExec physical operators>> (possibly under `FilterExec` and `ProjectExec` operators).
+`DataSourceStrategy` is an spark-sql-SparkStrategy.md[execution planning strategy] (of [SparkPlanner](../SparkPlanner.md)) that <<apply, plans LogicalRelation logical operators as RowDataSourceScanExec physical operators>> (possibly under `FilterExec` and `ProjectExec` operators).
 
 [[apply]]
 [[selection-requirements]]
@@ -197,7 +197,7 @@ pruneFilterProjectRaw(
 
 In other words, `pruneFilterProjectRaw` simply converts a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> leaf logical operator into a <<spark-sql-SparkPlan-RowDataSourceScanExec.md#, RowDataSourceScanExec>> leaf physical operator (possibly under a <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>> and a <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>> unary physical operators).
 
-NOTE: `pruneFilterProjectRaw` is almost like <<spark-sql-SparkPlanner.md#pruneFilterProject, SparkPlanner.pruneFilterProject>>.
+NOTE: `pruneFilterProjectRaw` is almost like [SparkPlanner.pruneFilterProject](../SparkPlanner.md#pruneFilterProject).
 
 Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressions to <<selectFilters, select the Catalyst expressions that can be converted to data source filter predicates>> (and handled by the <<spark-sql-LogicalPlan-LogicalRelation.md#relation, BaseRelation>> of the `LogicalRelation`).
 

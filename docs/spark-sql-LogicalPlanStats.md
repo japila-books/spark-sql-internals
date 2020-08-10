@@ -2,7 +2,7 @@ title: LogicalPlanStats
 
 # LogicalPlanStats -- Statistics Estimates and Query Hints of Logical Operator
 
-`LogicalPlanStats` adds statistics support to spark-sql-LogicalPlan.md[logical operators] and is used for spark-sql-SparkPlanner.md[query planning] (with or without spark-sql-cost-based-optimization.md[cost-based optimization], e.g. spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
+`LogicalPlanStats` adds statistics support to spark-sql-LogicalPlan.md[logical operators] and is used for [query planning](SparkPlanner.md) (with or without spark-sql-cost-based-optimization.md[cost-based optimization], e.g. spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
 
 [[statsCache]]
 With `LogicalPlanStats` every logical operator has <<stats, statistics>> that are computed only once when requested and are cached until <<invalidateStatsCache, invalidated>> and requested again.

@@ -84,7 +84,7 @@ catalogManager: CatalogManager
 
 ### <span id="experimentalMethods"> ExperimentalMethods
 
-[ExperimentalMethods](spark-sql-ExperimentalMethods.md)
+[ExperimentalMethods](ExperimentalMethods.md)
 
 ### <span id="functionRegistry"> FunctionRegistry
 
@@ -165,7 +165,7 @@ The `SparkOptimizer` uses the following extension methods:
 planner: SparkPlanner
 ```
 
-[SparkPlanner](spark-sql-SparkPlanner.md)
+[SparkPlanner](SparkPlanner.md)
 
 ## <span id="streamingQueryManager"> StreamingQueryManager
 

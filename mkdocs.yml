@@ -89,7 +89,7 @@ nav:
     - Structured Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md
-      - SparkPlanner: spark-sql-SparkPlanner.md
+      - SparkPlanner: SparkPlanner.md
       - SparkOptimizer: SparkOptimizer.md
     - SparkSession:
       - SparkSession: SparkSession.md
@@ -197,7 +197,7 @@ nav:
         - Catalog: Catalog.md
         - CatalogImpl: CatalogImpl.md
       - spark-sql-ExecutionListenerManager.md
-      - spark-sql-ExperimentalMethods.md
+      - ExperimentalMethods: ExperimentalMethods.md
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md
         - InMemoryCatalog: InMemoryCatalog.md

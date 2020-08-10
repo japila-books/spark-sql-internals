@@ -1,6 +1,6 @@
 # JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an spark-sql-SparkStrategy.md[execution planning strategy] that spark-sql-SparkPlanner.md[SparkPlanner] uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
+`JoinSelection` is an spark-sql-SparkStrategy.md[execution planning strategy] that [SparkPlanner](../SparkPlanner.md) uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
 
 `JoinSelection` firstly <<apply, considers>> join physical operators per whether join keys are used or not. When join keys are used, `JoinSelection` considers <<BroadcastHashJoinExec, BroadcastHashJoinExec>>, <<ShuffledHashJoinExec, ShuffledHashJoinExec>> or <<SortMergeJoinExec, SortMergeJoinExec>> operators. Without join keys, `JoinSelection` considers <<BroadcastNestedLoopJoinExec, BroadcastNestedLoopJoinExec>> or <<CartesianProductExec, CartesianProductExec>>.
 

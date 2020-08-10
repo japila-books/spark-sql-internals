@@ -8,7 +8,7 @@
 
 * [Post-Hoc Optimization Batches](#postHocOptimizationBatches)
 
-* [User Provided Optimizers](#User-Provided-Optimizers) (as [extraOptimizations](spark-sql-ExperimentalMethods.md#extraOptimizations) of the [ExperimentalMethods](#experimentalMethods))
+* [User Provided Optimizers](#User-Provided-Optimizers) (as [extraOptimizations](ExperimentalMethods.md#extraOptimizations) of the [ExperimentalMethods](#experimentalMethods))
 
 ## Creating Instance
 
@@ -16,7 +16,7 @@
 
 * <span id="catalogManager"> [CatalogManager](connector/catalog/CatalogManager.md)
 * <span id="catalog"> [SessionCatalog](SessionCatalog.md)
-* <span id="experimentalMethods"> [ExperimentalMethods](spark-sql-ExperimentalMethods.md)
+* <span id="experimentalMethods"> [ExperimentalMethods](ExperimentalMethods.md)
 
 `SparkOptimizer` is created when `SessionState` is requested for a [logical query plan optimizer](SessionState.md#optimizer) (indirectly using `BaseSessionStateBuilder` is requested for an [Optimizer](BaseSessionStateBuilder.md#optimizer)).
 
@@ -111,7 +111,7 @@ Strategy: `Once`
 
 ### <span id="User-Provided-Optimizers"> User Provided Optimizers (Extension Point)
 
-Extension point for [Extra Optimization Rules](spark-sql-ExperimentalMethods.md#extraOptimizations) using the given [ExperimentalMethods](#experimentalMethods)
+Extension point for [Extra Optimization Rules](ExperimentalMethods.md#extraOptimizations) using the given [ExperimentalMethods](#experimentalMethods)
 
 Strategy: [fixedPoint](catalyst/Optimizer.md#fixedPoint)
 

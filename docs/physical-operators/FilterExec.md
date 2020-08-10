@@ -16,9 +16,9 @@ title: FilterExec
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Filter](../execution-planning-strategies/BasicOperators.md#Filter) and [TypedFilter](../execution-planning-strategies/BasicOperators.md#TypedFilter) unary logical operators
 
-* hive/HiveTableScans.md[HiveTableScans] execution planning strategy is executed (and plans hive/HiveTableRelation.md[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.md#pruneFilterProject, pruneFilterProject>>)
+* hive/HiveTableScans.md[HiveTableScans] execution planning strategy is executed (and plans hive/HiveTableRelation.md[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
 
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to <<spark-sql-SparkPlanner.md#pruneFilterProject, pruneFilterProject>>)
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
