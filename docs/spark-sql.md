@@ -34,7 +34,7 @@ When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-oper
 1. [Caching Replacement](QueryExecution.md#withCachedData)
 1. [Logical Query Optimization](QueryExecution.md#optimizedPlan) (using [rule-based](SparkOptimizer.md) and spark-sql-cost-based-optimization.md[cost-based] optimizations)
 1. [Physical Planning](QueryExecution.md#sparkPlan)
-1. [Physical Optimization](QueryExecution.md#executedPlan) (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or spark-sql-adaptive-query-execution.md[Adaptive Query Execution])
+1. [Physical Optimization](QueryExecution.md#executedPlan) (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md))
 1. [Constructing the RDD of Internal Binary Rows](QueryExecution.md#toRdd) (that represents the structured query in terms of Spark Core's RDD API)
 
 Spark SQL is _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and spark-sql-SparkPlanner.md#strategies[physical] query optimization strategies even without your consent).

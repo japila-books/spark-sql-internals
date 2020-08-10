@@ -263,7 +263,7 @@ a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when h
 
 | minNumPostShufflePartitions
 | <<spark-sql-properties.md#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>
-a| [[minNumPostShufflePartitions]] Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>).
+a| [[minNumPostShufflePartitions]] Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)).
 
 | numShufflePartitions
 | spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
@@ -380,7 +380,7 @@ a| [[supportQuotedRegexColumnName]] Used when:
 
 | targetPostShuffleInputSize
 | <<spark-sql-properties.md#spark.sql.adaptive.shuffle.targetPostShuffleInputSize, spark.sql.adaptive.shuffle.targetPostShuffleInputSize>>
-| [[targetPostShuffleInputSize]] Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for <<spark-sql-adaptive-query-execution.md#, Adaptive Query Execution>>)
+| [[targetPostShuffleInputSize]] Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md))
 
 | truncateTableIgnorePermissionAcl
 | spark-sql-properties.md#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]

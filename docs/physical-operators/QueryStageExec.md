@@ -1,6 +1,6 @@
 # QueryStageExec Leaf Physical Operators
 
-`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations).
+`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [query stage operators](#implementations).
 
 ## Contract
 
@@ -85,12 +85,15 @@ computeStats(): Option[Statistics]
 
 `computeStats` is used when...FIXME
 
-## materialize
+## <span id="materialize"> Materializing Query Stage
 
 ```scala
 materialize(): Future[Any]
 ```
 
-`materialize`...FIXME
+`materialize` [prepares the query stage operator for execution](SparkPlan.md#executeQuery) followed by [doMaterialize](#doMaterialize).
+
+!!! note
+    `materialize` is a final method and cannot be overriden.
 
 `materialize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).

@@ -14,7 +14,7 @@
 
 NOTE: The <<dependency, dependency>> property is mutable so it can be <<clearDependencies, cleared>>.
 
-`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the spark-rdd-Partitioner.md[Partitioner] of the input `ShuffleDependency`. Otherwise, when specified (when `ExchangeCoordinator` is requested to <<spark-sql-ExchangeCoordinator.md#doEstimationIfNecessary, doEstimationIfNecessary>>), `ShuffledRowRDD`...FIXME
+`ShuffledRowRDD` takes an optional <<specifiedPartitionStartIndices, partition start indices>> that is the number of post-shuffle partitions. When not specified, the number of post-shuffle partitions is managed by the spark-rdd-Partitioner.md[Partitioner] of the input `ShuffleDependency`.
 
 NOTE: *Post-shuffle partition* is...FIXME
 

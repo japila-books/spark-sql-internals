@@ -62,7 +62,7 @@ If the input `operator` has multiple children and specifies child output distrib
 
 If the children's output partitionings are not all compatible, then...FIXME
 
-`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when spark-sql-adaptive-query-execution.md[adaptive query execution] is enabled which is not by default).
+`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md) is enabled which is not by default).
 
 NOTE: At this point in `ensureDistributionAndOrdering` the required child distributions are already handled.
 
@@ -71,36 +71,6 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 In the end, `ensureDistributionAndOrdering` [sets the new children](../catalyst/TreeNode.md#withNewChildren) for the input `operator`.
 
 NOTE: `ensureDistributionAndOrdering` is used exclusively when `EnsureRequirements` is <<apply, executed>> (i.e. applied to a physical plan).
-
-=== [[withExchangeCoordinator]] Adding ExchangeCoordinator (Adaptive Query Execution) -- `withExchangeCoordinator` Internal Method
-
-[source, scala]
-----
-withExchangeCoordinator(
-  children: Seq[SparkPlan],
-  requiredChildDistributions: Seq[Distribution]): Seq[SparkPlan]
-----
-
-`withExchangeCoordinator` adds spark-sql-ExchangeCoordinator.md[ExchangeCoordinator] to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] operators if adaptive query execution is enabled (per spark-sql-properties.md#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property) and partitioning scheme of the `ShuffleExchangeExec` operators support `ExchangeCoordinator`.
-
-NOTE: spark-sql-properties.md#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] property is disabled by default.
-
-[[supportsCoordinator]]
-Internally, `withExchangeCoordinator` checks if the input `children` operators support `ExchangeCoordinator` which is that either holds:
-
-* If there is at least one spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] operator, all children are either `ShuffleExchangeExec` with spark-sql-SparkPlan-Partitioning.md#HashPartitioning[HashPartitioning] or their SparkPlan.md#outputPartitioning[output partitioning] is spark-sql-SparkPlan-Partitioning.md#HashPartitioning[HashPartitioning] (even inside spark-sql-SparkPlan-Partitioning.md#PartitioningCollection[PartitioningCollection])
-
-* There are at least two `children` operators and the input `requiredChildDistributions` are all spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution]
-
-With spark-sql-adaptive-query-execution.md[adaptive query execution] (i.e. when spark-sql-adaptive-query-execution.md#spark.sql.adaptive.enabled[spark.sql.adaptive.enabled] configuration property is `true`) and the <<supportsCoordinator, operator supports ExchangeCoordinator>>, `withExchangeCoordinator` creates a `ExchangeCoordinator` and:
-
-* For every `ShuffleExchangeExec`, spark-sql-SparkPlan-ShuffleExchangeExec.md#coordinator[registers the `ExchangeCoordinator`]
-
-* <<createPartitioning, Creates HashPartitioning partitioning scheme>> with the [default number of partitions to use when shuffling data for joins or aggregations](../SQLConf.md#numShufflePartitions) (as spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] which is `200` by default) and adds `ShuffleExchangeExec` to the final result (for the current physical operator)
-
-Otherwise (when adaptive query execution is disabled or `children` do not support `ExchangeCoordinator`), `withExchangeCoordinator` returns the input `children` unchanged.
-
-NOTE: `withExchangeCoordinator` is used exclusively for <<ensureDistributionAndOrdering, enforcing partition requirements of a physical operator>>.
 
 === [[reorderJoinPredicates]] `reorderJoinPredicates` Internal Method
 

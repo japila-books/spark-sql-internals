@@ -90,7 +90,7 @@ generateTreeString(
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
 
-## <span id="getFinalPhysicalPlan"> getFinalPhysicalPlan
+## getFinalPhysicalPlan
 
 ```scala
 getFinalPhysicalPlan(): SparkPlan
@@ -100,7 +100,7 @@ getFinalPhysicalPlan(): SparkPlan
 
 `getFinalPhysicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute).
 
-## <span id="createQueryStages"> createQueryStages
+## createQueryStages
 
 ```scala
 createQueryStages(

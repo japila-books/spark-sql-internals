@@ -1313,7 +1313,7 @@ Use [SQLConf.windowExecBufferSpillThreshold](SQLConf.md#windowExecBufferSpillThr
 
 ## <span id="spark.sql.adaptive.enabled"> spark.sql.adaptive.enabled
 
-Enables [Adaptive Query Execution](spark-sql-adaptive-query-execution.md) (that re-optimizes the query plan in the middle of query execution, based on accurate runtime statistics).
+Enables [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)
 
 Default: `false`
 
