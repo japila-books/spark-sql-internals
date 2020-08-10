@@ -1,6 +1,6 @@
 # HiveTableScans Execution Planning Strategy
 
-`HiveTableScans` is an ../spark-sql-SparkStrategy.md[execution planning strategy] (of HiveSessionStateBuilder.md#planner[Hive-specific SparkPlanner]) that <<apply, replaces HiveTableRelation logical operators with HiveTableScanExec physical operators>>.
+`HiveTableScans` is an [execution planning strategy](../execution-planning-strategies/SparkStrategy.md) (of [Hive-specific SparkPlanner](HiveSessionStateBuilder.md#planner)) that <<apply, replaces HiveTableRelation logical operators with HiveTableScanExec physical operators>>.
 
 === [[apply]] Planning Logical Plan for Execution -- `apply` Method
 

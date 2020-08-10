@@ -1,6 +1,6 @@
 # InMemoryScans Execution Planning Strategy
 
-`InMemoryScans` is an spark-sql-SparkStrategy.md[execution planning strategy] that <<apply, plans InMemoryRelation logical operators to InMemoryTableScanExec physical operators>>.
+`InMemoryScans` is an [execution planning strategy](SparkStrategy.md) that <<apply, plans InMemoryRelation logical operators to InMemoryTableScanExec physical operators>>.
 
 [source, scala]
 ----

@@ -1,6 +1,6 @@
 # FileSourceStrategy Execution Planning Strategy for LogicalRelations with HadoopFsRelation
 
-`FileSourceStrategy` is an spark-sql-SparkStrategy.md[execution planning strategy] that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
+`FileSourceStrategy` is an [execution planning strategy](SparkStrategy.md) that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
 
 `FileSourceStrategy` is part of [predefined strategies](../SparkPlanner.md#strategies) of the [Spark Planner](../SparkPlanner.md).
 

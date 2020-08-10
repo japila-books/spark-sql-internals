@@ -7,13 +7,13 @@
 
 `SparkPlanner` is expected to plan (_generate_) at least one [physical plan](physical-operators/SparkPlan.md) for a given [logical plan](logical-operators/LogicalPlan.md).
 
-`SparkPlanner` extends [SparkStrategies](spark-sql-SparkStrategies.md) abstract class.
+`SparkPlanner` extends [SparkStrategies](execution-planning-strategies/SparkStrategies.md) abstract class.
 
 ## <span id="strategies"> Execution Planning Strategies
 
 1. [extraStrategies](ExperimentalMethods.md#extraStrategies) of the [ExperimentalMethods](#experimentalMethods)
 1. [extraPlanningStrategies](#extraPlanningStrategies)
-1. LogicalQueryStageStrategy
+1. [LogicalQueryStageStrategy](execution-planning-strategies/LogicalQueryStageStrategy.md)
 1. PythonEvals
 1. [DataSourceV2Strategy](execution-planning-strategies/DataSourceV2Strategy.md)
 1. [FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md)
@@ -55,7 +55,7 @@ org.apache.spark.sql.execution.SparkPlanner
 extraPlanningStrategies: Seq[Strategy] = Nil
 ```
 
-`extraPlanningStrategies` is an extension point to register extra [planning strategies](spark-sql-SparkStrategy.md).
+`extraPlanningStrategies` is an extension point to register extra [planning strategies](execution-planning-strategies/SparkStrategy.md).
 
 `extraPlanningStrategies` is used when `SparkPlanner` is requested for [planning strategies](#strategies).
 
@@ -68,7 +68,7 @@ collectPlaceholders(
   plan: SparkPlan): Seq[(SparkPlan, LogicalPlan)]
 ```
 
-`collectPlaceholders` collects all [PlanLater](spark-sql-SparkStrategy.md#PlanLater) physical operators in the given [physical plan](physical-operators/SparkPlan.md).
+`collectPlaceholders` collects all [PlanLater](execution-planning-strategies/SparkStrategy.md#PlanLater) physical operators in the given [physical plan](physical-operators/SparkPlan.md).
 
 `collectPlaceholders` is part of [QueryPlanner](catalyst/QueryPlanner.md#collectPlaceholders) abstraction.
 

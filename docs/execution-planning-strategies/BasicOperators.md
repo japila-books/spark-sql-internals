@@ -1,6 +1,6 @@
 # BasicOperators Execution Planning Strategy
 
-`BasicOperators` is an spark-sql-SparkStrategy.md[execution planning strategy] (of [SparkPlanner](../SparkPlanner.md)) that in general does simple <<conversions, conversions>> from spark-sql-LogicalPlan.md[logical operators] to their SparkPlan.md[physical counterparts].
+`BasicOperators` is an [execution planning strategy](SparkStrategy.md) (of [SparkPlanner](../SparkPlanner.md)) that in general does simple <<conversions, conversions>> from spark-sql-LogicalPlan.md[logical operators] to their SparkPlan.md[physical counterparts].
 
 [[apply]]
 [[conversions]]

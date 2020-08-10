@@ -20,7 +20,7 @@ extraOptimizations: Seq[Rule[LogicalPlan]]
 Used when `SparkOptimizer` is requested for the [User Provided Optimizers](SparkOptimizer.md#User-Provided-Optimizers)
 
 | extraStrategies
-a| [[extraStrategies]] Collection of <<spark-sql-SparkStrategy.md#, SparkStrategies>>
+a| [[extraStrategies]] Collection of [SparkStrategies](execution-planning-strategies/SparkStrategy.md)
 
 [source, scala]
 ----

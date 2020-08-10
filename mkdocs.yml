@@ -612,7 +612,7 @@ nav:
         - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
         - PushDownPredicates: logical-optimizations/PushDownPredicates.md
     - Execution Planning Strategies:
-      - Execution Planning Strategies: execution-planning-strategies/index.md
+      - SparkStrategy: execution-planning-strategies/SparkStrategy.md
       - Aggregation: execution-planning-strategies/Aggregation.md
       - BasicOperators: execution-planning-strategies/BasicOperators.md
       - DataSourceStrategy: execution-planning-strategies/DataSourceStrategy.md
@@ -620,7 +620,9 @@ nav:
       - FileSourceStrategy: execution-planning-strategies/FileSourceStrategy.md
       - InMemoryScans: execution-planning-strategies/InMemoryScans.md
       - JoinSelection: execution-planning-strategies/JoinSelection.md
+      - LogicalQueryStageStrategy: execution-planning-strategies/LogicalQueryStageStrategy.md
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
+      - SparkStrategies: execution-planning-strategies/SparkStrategies.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
@@ -828,11 +830,8 @@ nav:
       - spark-sql-Distribution-OrderedDistribution.md
       - spark-sql-Distribution-UnspecifiedDistribution.md
     - ShuffledRowRDD: ShuffledRowRDD.md
-    - SortShuffleManager: SortShuffleManager.md
     - spark-sql-UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
-    - spark-sql-SparkStrategy.md
-    - spark-sql-SparkStrategies.md
     - CatalystTypeConverters: spark-sql-CatalystTypeConverters.md
     - StatFunctions: spark-sql-StatFunctions.md
     - SubExprUtils: spark-sql-SubExprUtils.md
