@@ -1,80 +1,11 @@
 # SQLConf &mdash; Internal Configuration Store
 
-`SQLConf` is an *internal key-value configuration store* for <<parameters, parameters and hints>> used in Spark SQL.
+`SQLConf` is an internal **configuration store** for [parameters and hints](#parameters) used in Spark SQL.
 
-[NOTE]
-====
-`SQLConf` is an internal part of Spark SQL and is not supposed to be used directly.
-
-Spark SQL configuration is available through <<spark-sql-RuntimeConfig.md#, RuntimeConfig>> (the user-facing configuration management interface) that you can access using SparkSession.md#conf[SparkSession].
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.conf
-org.apache.spark.sql.RuntimeConfig
-----
-====
-
-You can access a `SQLConf` using:
-
-. <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
-
-. <<SparkSession.md#sessionState, SessionState>> - direct access through <<SparkSession.md#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
-
-[source, scala]
-----
-import org.apache.spark.sql.internal.SQLConf
-
-// Use type-safe access to configuration properties
-// using SQLConf.get.getConf
-val parallelFileListingInStatsComputation = SQLConf.get.getConf(SQLConf.PARALLEL_FILE_LISTING_IN_STATS_COMPUTATION)
-
-// or even simpler
-SQLConf.get.parallelFileListingInStatsComputation
-----
+!!! important
+    `SQLConf` is an internal part of Spark SQL and is not supposed to be used directly. Spark SQL configuration is available through the user-facing [RuntimeConfig](spark-sql-RuntimeConfig.md).
 
 `SQLConf` offers methods to <<get, get>>, <<set, set>>, <<unset, unset>> or <<clear, clear>> values of configuration properties, but has also the <<accessor-methods, accessor methods>> to read the current value of a configuration property or hint.
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-// Direct access to the session SQLConf
-val sqlConf = spark.sessionState.conf
-scala> :type sqlConf
-org.apache.spark.sql.internal.SQLConf
-
-scala> println(sqlConf.offHeapColumnVectorEnabled)
-false
-
-// Or simply import the conf value
-import spark.sessionState.conf
-
-// accessing properties through accessor methods
-scala> conf.numShufflePartitions
-res1: Int = 200
-
-// Prefer SQLConf.get (over direct access)
-import org.apache.spark.sql.internal.SQLConf
-val cc = SQLConf.get
-scala> cc == conf
-res4: Boolean = true
-
-// setting properties using aliases
-import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
-conf.setConf(SHUFFLE_PARTITIONS, 2)
-scala> conf.numShufflePartitions
-res2: Int = 2
-
-// unset aka reset properties to the default value
-conf.unsetConf(SHUFFLE_PARTITIONS)
-scala> conf.numShufflePartitions
-res3: Int = 200
-----
 
 [[accessor-methods]]
 .SQLConf's Accessor Methods
@@ -499,7 +430,11 @@ Since: 3.0.0
 
 The value of [spark.sql.adaptive.enabled](spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property
 
-Used when...FIXME
+Used when:
+
+* `AdaptiveSparkPlanHelper` is requested to `getOrCloneSessionWithAqeOff`
+
+* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
 
 ## <span id="DEFAULT_CATALOG"> DEFAULT_CATALOG
 
@@ -560,3 +495,59 @@ Used when `Optimizer` is requested for the [batches](catalyst/Optimizer.md#batch
 The value of [spark.sql.adaptive.fetchShuffleBlocksInBatch](spark-sql-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property
 
 Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
+
+## Accessing SQLConf
+
+You can access a `SQLConf` using:
+
+. <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
+
+. <<SparkSession.md#sessionState, SessionState>> - direct access through <<SparkSession.md#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
+
+```text
+import org.apache.spark.sql.internal.SQLConf
+
+// Use type-safe access to configuration properties
+// using SQLConf.get.getConf
+val parallelFileListingInStatsComputation = SQLConf.get.getConf(SQLConf.PARALLEL_FILE_LISTING_IN_STATS_COMPUTATION)
+
+// or even simpler
+SQLConf.get.parallelFileListingInStatsComputation
+```
+
+```text
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+// Direct access to the session SQLConf
+val sqlConf = spark.sessionState.conf
+scala> :type sqlConf
+org.apache.spark.sql.internal.SQLConf
+
+scala> println(sqlConf.offHeapColumnVectorEnabled)
+false
+
+// Or simply import the conf value
+import spark.sessionState.conf
+
+// accessing properties through accessor methods
+scala> conf.numShufflePartitions
+res1: Int = 200
+
+// Prefer SQLConf.get (over direct access)
+import org.apache.spark.sql.internal.SQLConf
+val cc = SQLConf.get
+scala> cc == conf
+res4: Boolean = true
+
+// setting properties using aliases
+import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
+conf.setConf(SHUFFLE_PARTITIONS, 2)
+scala> conf.numShufflePartitions
+res2: Int = 2
+
+// unset aka reset properties to the default value
+conf.unsetConf(SHUFFLE_PARTITIONS)
+scala> conf.numShufflePartitions
+res3: Int = 200
+```

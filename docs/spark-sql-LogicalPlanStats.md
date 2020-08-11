@@ -123,7 +123,7 @@ scala> println(namesTableStats)
 Statistics(sizeInBytes=64.0 B, rowCount=2, hints=none)
 ```
 
-NOTE: The <<stats, statistics>> of a Dataset are unaffected by spark-sql-CacheManager.md#cacheQuery[caching] it.
+NOTE: The <<stats, statistics>> of a Dataset are unaffected by [caching](CacheManager.md#cacheQuery) it.
 
 NOTE: `LogicalPlanStats` is a Scala trait with `self: LogicalPlan` as part of its definition. It is a very useful feature of Scala that restricts the set of classes that the trait could be used with (as well as makes the target subtype known at compile time).
 
@@ -171,7 +171,7 @@ In the end, `statsCache` caches the statistics for later use.
 
 * `QueryExecution` is requested for [stringWithStats](QueryExecution.md#stringWithStats) for `EXPLAIN COST` SQL command
 
-* `CacheManager` is requested to spark-sql-CacheManager.md#cacheQuery[cache a Dataset] or spark-sql-CacheManager.md#recacheByCondition[recacheByCondition]
+* `CacheManager` is requested to [cache a Dataset](CacheManager.md#cacheQuery) or [recacheByCondition](CacheManager.md#recacheByCondition)
 
 * `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 

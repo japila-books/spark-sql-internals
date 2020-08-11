@@ -13,7 +13,7 @@
 * [[stats]] Statistics (<<spark-sql-InternalRow.md#, InternalRow>>)
 
 [[isCachedColumnBuffersLoaded]]
-`CachedRDDBuilder` uses `isCachedColumnBuffersLoaded` flag that is enabled (`true`) when the <<_cachedColumnBuffers, _cachedColumnBuffers>> is defined (not `null`). `isCachedColumnBuffersLoaded` is used exclusively when `CacheManager` is requested to <<spark-sql-CacheManager.md#recacheByCondition, recacheByCondition>>.
+`CachedRDDBuilder` uses `isCachedColumnBuffersLoaded` flag that is enabled (`true`) when the <<_cachedColumnBuffers, _cachedColumnBuffers>> is defined (not `null`). `isCachedColumnBuffersLoaded` is used exclusively when `CacheManager` is requested to [recacheByCondition](CacheManager.md#recacheByCondition).
 
 [[sizeInBytesStats]]
 `CachedRDDBuilder` uses `sizeInBytesStats` metric (`LongAccumulator`) to <<buildBuffers, buildBuffers>> and when `InMemoryRelation` is requested to <<spark-sql-LogicalPlan-InMemoryRelation.md#computeStats, computeStats>>.
@@ -42,13 +42,13 @@ buildBuffers(): RDD[CachedBatch]
 
 NOTE: `buildBuffers` is used exclusively when `CachedRDDBuilder` is requested to <<cachedColumnBuffers, cachedColumnBuffers>>.
 
-=== [[clearCache]] `clearCache` Method
+## clearCache
 
-[source, scala]
-----
-clearCache(blocking: Boolean = true): Unit
-----
+```scala
+clearCache(
+  blocking: Boolean = true): Unit
+```
 
 `clearCache`...FIXME
 
-NOTE: `clearCache` is used exclusively when `CacheManager` is requested to <<spark-sql-CacheManager.md#clearCache, clearCache>>, <<spark-sql-CacheManager.md#uncacheQuery, uncacheQuery>>, and <<spark-sql-CacheManager.md#recacheByCondition, recacheByCondition>>.
+`clearCache` is used exclusively when `CacheManager` is requested to [clearCache](CacheManager.md#clearCache), [uncacheQuery](CacheManager.md#uncacheQuery), and [recacheByCondition](CacheManager.md#recacheByCondition).

@@ -70,6 +70,6 @@ With the RDD and the output schema, `run` creates <<SparkSession.md#internalCrea
 
 `run` requests the `InsertableRelation` to <<spark-sql-InsertableRelation.md#insert, insert or overwrite data>>.
 
-In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to <<spark-sql-CacheManager.md#recacheByPlan, recacheByPlan>> with the <<logicalRelation, LogicalRelation>>.
+In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to [recacheByPlan](../CacheManager.md#recacheByPlan) with the <<logicalRelation, LogicalRelation>>.
 
 NOTE: `run` requests the `SparkSession` for <<SparkSession.md#sharedState, SharedState>> that is in turn requested for the <<SharedState.md#cacheManager, CacheManager>>.

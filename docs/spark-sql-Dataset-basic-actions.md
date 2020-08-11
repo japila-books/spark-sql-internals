@@ -150,7 +150,7 @@ persist(newLevel: StorageLevel): this.type
 
 Marks the `Dataset` to be <<spark-sql-caching-and-persistence.md#, persisted>> the next time an action is executed
 
-Internally, `persist` simply request the `CacheManager` to <<spark-sql-CacheManager.md#cacheQuery, cache the structured query>>.
+Internally, `persist` simply request the `CacheManager` to [cache the structured query](CacheManager.md#cacheQuery).
 
 NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.md#sparkSession, SparkSession>> (of the Dataset).
 
@@ -463,7 +463,7 @@ unpersist(blocking: Boolean): this.type
 
 `unpersist` uncache the `Dataset` possibly by `blocking` the call.
 
-Internally, `unpersist` requests `CacheManager` spark-cachemanager.md#uncacheQuery[to uncache the query].
+Internally, `unpersist` requests `CacheManager` to [uncache the query](CacheManager.md#uncacheQuery).
 
 CAUTION: FIXME
 

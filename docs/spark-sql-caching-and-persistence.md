@@ -25,17 +25,17 @@ At this point you could use web UI's *Storage* tab to review the Datasets persis
 .web UI's Storage tab
 image::images/spark-webui-storage.png[align="center"]
 
-`persist` uses <<spark-sql-CacheManager.md#, CacheManager>> for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> logical operators), and is used to <<spark-sql-CacheManager.md#cacheQuery, cache structured queries>> (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators).
+`persist` uses [CacheManager](CacheManager.md) for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> logical operators), and is used to [cache structured queries](CacheManager.md#cacheQuery) (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators).
 
-At [withCachedData](QueryExecution.md#withCachedData) phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to <<spark-sql-CacheManager.md#useCachedData, replace segments of a logical query plan with their cached data>> (including <<spark-sql-subqueries.md#, subqueries>>).
+At [withCachedData](QueryExecution.md#withCachedData) phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to [replace segments of a logical query plan with their cached data](CacheManager.md#useCachedData) (including <<spark-sql-subqueries.md#, subqueries>>).
 
-```
+```text
 scala> println(data.queryExecution.withCachedData.numberedTreeString)
 00 InMemoryRelation [id#9L], StorageLevel(disk, memory, deserialized, 1 replicas)
 01    +- *(1) Range (0, 1, step=1, splits=8)
 ```
 
-```
+```text
 // Use the cached Dataset in another query
 // Notice InMemoryRelation in use for cached queries
 scala> df.withColumn("newId", 'id).explain(extended = true)

@@ -42,7 +42,7 @@ a| Used when:
 
 * `OptimizeSubqueries` logical query optimization is spark-sql-Optimizer-OptimizeSubqueries.md#apply[executed]
 
-* `CacheManager` is requested to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans]
+* `CacheManager` is requested to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData)
 |===
 
 [[implementations]]

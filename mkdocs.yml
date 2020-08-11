@@ -215,7 +215,7 @@ nav:
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md
         - spark-sql-SessionStateBuilder.md
       - CacheManager:
-        - spark-sql-CacheManager.md
+        - CacheManager: CacheManager.md
         - spark-sql-CachedRDDBuilder.md
       - spark-sql-RuntimeConfig.md
       - SQLConf:

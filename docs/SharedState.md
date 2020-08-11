@@ -2,7 +2,7 @@
 
 `SharedState` holds the state that can be shared across [SparkSessions](SparkSession.md):
 
-* <span id="cacheManager"> [CacheManager](spark-sql-CacheManager.md)
+* <span id="cacheManager"> [CacheManager](CacheManager.md)
 * [ExternalCatalogWithListener](#externalCatalog)
 * [GlobalTempViewManager](#globalTempViewManager)
 * [Hadoop Configuration](#hadoopConf)

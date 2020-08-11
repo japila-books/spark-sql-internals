@@ -71,7 +71,7 @@ NOTE: `functionExists` is part of [Catalog Contract](Catalog.md#functionExists) 
 cacheTable(tableName: String): Unit
 ----
 
-Internally, `cacheTable` first SparkSession.md#table[creates a DataFrame for the table] followed by requesting `CacheManager` to spark-sql-CacheManager.md#cacheQuery[cache it].
+Internally, `cacheTable` first SparkSession.md#table[creates a DataFrame for the table] followed by requesting `CacheManager` to [cache it](CacheManager.md#cacheQuery).
 
 NOTE: `cacheTable` uses the SparkSession.md#sharedState[session-scoped SharedState] to access the `CacheManager`.
 
@@ -84,7 +84,7 @@ NOTE: `cacheTable` is part of [Catalog contract](Catalog.md#cacheTable).
 clearCache(): Unit
 ----
 
-`clearCache` requests `CacheManager` to spark-sql-CacheManager.md#clearCache[remove all cached tables from in-memory cache].
+`clearCache` requests `CacheManager` to [remove all cached tables from in-memory cache](CacheManager.md#clearCache).
 
 NOTE: `clearCache` is part of [Catalog contract](Catalog.md#clearCache).
 
@@ -220,7 +220,7 @@ For a temporary or persistent `VIEW` table, `refreshTable` requests the [analyze
 
 For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatalog>> for [refreshing the table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata) (i.e. invalidating the table).
 
-If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to spark-sql-CacheManager.md#uncacheQuery[uncache] and spark-sql-CacheManager.md#cacheQuery[cache] the table `DataFrame` again.
+If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to [uncache](CacheManager.md#uncacheQuery) and [cache](CacheManager.md#cacheQuery) the table `DataFrame` again.
 
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sharedState[SharedState] that is used to access SharedState.md#cacheManager[CacheManager].
 

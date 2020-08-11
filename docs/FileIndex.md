@@ -90,7 +90,7 @@ Refreshes cached file listings
 
 Used when:
 
-* `CacheManager` is requested to <<spark-sql-CacheManager.md#lookupAndRefresh, lookupAndRefresh>>
+* `CacheManager` is requested to [lookupAndRefresh](CacheManager.md#lookupAndRefresh)
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> is executed
 
@@ -110,7 +110,7 @@ Used when:
 
 * `HiveMetastoreCatalog` is requested for a hive/HiveMetastoreCatalog.md#getCached[LogicalRelation over a HadoopFsRelation cached] (when requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation])
 
-* `CacheManager` is requested to spark-sql-CacheManager.md#lookupAndRefresh[lookupAndRefresh]
+* `CacheManager` is requested to [lookupAndRefresh](CacheManager.md#lookupAndRefresh)
 
 * `FileSourceScanExec` physical operator is requested for the spark-sql-SparkPlan-FileSourceScanExec.md#metadata[metadata]
 

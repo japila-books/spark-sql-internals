@@ -16,18 +16,17 @@ NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory metho
 
 `InMemoryRelation` is <<apply, created>> when:
 
-* spark-sql-caching-and-persistence.md#persist[Dataset.persist] operator is used (that in turn requests `CacheManager` to spark-sql-CacheManager.md#cacheQuery[cache a structured query])
+* spark-sql-caching-and-persistence.md#persist[Dataset.persist] operator is used (that in turn requests `CacheManager` to [cache a structured query](../CacheManager.md#cacheQuery))
 
 * `CatalogImpl` is requested to [cache](../CatalogImpl.md#cacheTable) or [refresh](../CatalogImpl.md#refreshTable) a table or view in-memory
 
-* `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>> (and in turn requests `CacheManager` to <<spark-sql-CacheManager.md#recacheByPlan, recacheByPlan>>)
+* `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>> (and in turn requests `CacheManager` to [recacheByPlan](../CacheManager.md#recacheByPlan))
 
-* `CatalogImpl` is requested to [refreshByPath](../CatalogImpl.md#refreshByPath) (and in turn requests `CacheManager` to spark-sql-CacheManager.md#recacheByPath[recacheByPath])
+* `CatalogImpl` is requested to [refreshByPath](../CatalogImpl.md#refreshByPath) (and in turn requests `CacheManager` to [recacheByPath](../CacheManager.md#recacheByPath))
 
-* `QueryExecution` is requested for a [cached logical query plan](../QueryExecution.md#withCachedData) (and in turn requests `CacheManager` to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans])
+* `QueryExecution` is requested for a [cached logical query plan](../QueryExecution.md#withCachedData) (and in turn requests `CacheManager` to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData))
 
-[source, scala]
-----
+```text
 // Cache sample table range5 using pure SQL
 // That registers range5 to contain the output of range(5) function
 spark.sql("CACHE TABLE range5 AS SELECT * FROM range(5)")
@@ -51,7 +50,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 02       +- Exchange hashpartitioning((id#77L % 5)#88L, 200)
 03          +- *HashAggregate(keys=[(id#77L % 5) AS (id#77L % 5)#88L], functions=[partial_count(1)], output=[(id#77L % 5)#88L, count#90L])
 04             +- *Range (0, 10, step=1, splits=8)
-----
+```
 
 `InMemoryRelation` is a <<spark-sql-MultiInstanceRelation.md#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan.
 
@@ -134,7 +133,7 @@ withOutput(newOutput: Seq[Attribute]): InMemoryRelation
 
 `withOutput`...FIXME
 
-NOTE: `withOutput` is used exclusively when `CacheManager` is requested to spark-sql-CacheManager.md#useCachedData[replace logical query segments with cached query plans].
+`withOutput` is used exclusively when `CacheManager` is requested to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData).
 
 === [[newInstance]] `newInstance` Method
 
@@ -189,4 +188,4 @@ apply(
 
 `apply` creates an <<InMemoryRelation, InMemoryRelation>> logical operator.
 
-NOTE: `apply` is used when `CacheManager` is requested to <<spark-sql-CacheManager.md#cacheQuery, cache>> and <<spark-sql-CacheManager.md#recacheByCondition, re-cache>> a structured query.
+`apply` is used when `CacheManager` is requested to [cache](../CacheManager.md#cacheQuery) and [re-cache](../CacheManager.md#recacheByCondition) a structured query.

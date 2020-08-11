@@ -33,7 +33,7 @@ Analyzed [logical plan](#logical) that has passed [Logical Analyzer](Analyzer.md
 
 ### <span id="withCachedData"> Analyzed Logical Plan with Cached Data
 
-[Analyzed](#analyzed) logical plan after `CacheManager` was requested to [replace logical query segments with cached query plans](spark-sql-CacheManager.md#useCachedData).
+[Analyzed](#analyzed) logical plan after `CacheManager` was requested to [replace logical query segments with cached query plans](CacheManager.md#useCachedData).
 
 `withCachedData` makes sure that the logical plan was [analyzed](#assertAnalyzed) and [uses supported operations only](#assertSupported).
 
