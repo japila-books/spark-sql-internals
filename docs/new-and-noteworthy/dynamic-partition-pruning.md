@@ -21,3 +21,4 @@ Dynamic Partition Pruning optimization is controlled by [spark.sql.optimizer.dyn
 
 * [Dynamic Partition Pruning in Apache Spark](https://databricks.com/session_eu19/dynamic-partition-pruning-in-apache-spark)
 * [Apache Spark 3 | New Feature | Performance Optimization | Dynamic Partition Pruning](https://youtu.be/OyO13d3Nm14)
+* [Dynamic Partition Pruning | Spark Performance Tuning](https://youtu.be/rwUgZP-EBZw) by Harjeet (aka Data Savvy)
