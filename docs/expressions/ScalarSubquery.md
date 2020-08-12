@@ -1,6 +1,4 @@
-title: ScalarSubquery
-
-# ScalarSubquery (SubqueryExpression) Expression
+# ScalarSubquery Expression
 
 `ScalarSubquery` is a spark-sql-Expression-SubqueryExpression.md[SubqueryExpression] that returns a single row and a single column only.
 

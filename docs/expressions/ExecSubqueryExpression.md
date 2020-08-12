@@ -31,9 +31,9 @@ abstract class ExecSubqueryExpression extends PlanExpression[SubqueryExec] {
 | ExecSubqueryExpression
 | Description
 
-| [[InSubquery]] spark-sql-Expression-InSubquery.md[InSubquery]
+| [[InSubquery]] [InSubquery](InSubquery.md)
 |
 
-| [[ScalarSubquery]] spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery]
+| [[ScalarSubquery]] [ScalarSubquery](spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md)
 |
 |===

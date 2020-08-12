@@ -4,9 +4,9 @@ title: ScalarSubquery
 
 `ScalarSubquery` is an spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression] that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
 
-IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[SubqueryExpression]. It _is_ confusing and you should _not_ be anymore.
+IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a [SubqueryExpression](ScalarSubquery.md). It _is_ confusing and you should _not_ be anymore.
 
-`ScalarSubquery` is <<creating-instance, created>> when [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans a spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery] expression).
+`ScalarSubquery` is <<creating-instance, created>> when [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans a [ScalarSubquery](ScalarSubquery.md) expression).
 
 [source, scala]
 ----

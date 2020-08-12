@@ -14,7 +14,7 @@ There are the following kinds of subqueries:
 Every subquery can also be *correlated* or *uncorrelated*.
 
 [[scalar-subquery]]
-A *scalar subquery* is a structured query that returns a single row and a single column only. Spark SQL uses spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery (SubqueryExpression)] expression to represent scalar subqueries (while spark-sql-AstBuilder.md#visitSubqueryExpression[parsing a SQL statement]).
+A *scalar subquery* is a structured query that returns a single row and a single column only. Spark SQL uses [ScalarSubquery (SubqueryExpression)](expressions/ScalarSubquery.md) expression to represent scalar subqueries (while spark-sql-AstBuilder.md#visitSubqueryExpression[parsing a SQL statement]).
 
 [source, scala]
 ----
@@ -36,8 +36,6 @@ Catalyst Optimizer uses the following optimizations for subqueries:
 
 * spark-sql-Optimizer-PullupCorrelatedPredicates.md[PullupCorrelatedPredicates] optimization to spark-sql-Optimizer-PullupCorrelatedPredicates.md#rewriteSubQueries[rewrite subqueries] and pull up correlated predicates
 
-* spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md[RewriteCorrelatedScalarSubquery] optimization to spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#constructLeftJoins[constructLeftJoins]
+* [RewriteCorrelatedScalarSubquery](logical-optimizations/RewriteCorrelatedScalarSubquery.md) optimization (to [constructLeftJoins](logical-optimizations/RewriteCorrelatedScalarSubquery.md#constructLeftJoins))
 
 Spark Physical Optimizer uses [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization to plan queries with scalar subqueries.
-
-CAUTION: FIXME Describe how a physical spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery] is executed (cf. `updateResult`, `eval` and `doGenCode`).

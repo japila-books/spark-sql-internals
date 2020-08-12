@@ -315,14 +315,16 @@ CAUTION: FIXME What's the difference between `withNewRDDExecutionId` and <<withN
 
 NOTE: `withNewRDDExecutionId` is used when <<spark-sql-dataset-operators.md#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.md#foreachPartition, Dataset.foreachPartition>> actions are used.
 
-=== [[ofRows]] Creating DataFrame (For Logical Query Plan and SparkSession) -- `ofRows` Internal Factory Method
+## <span id="ofRows"> Creating DataFrame (For Logical Query Plan and SparkSession)
 
-[source, scala]
-----
-ofRows(sparkSession: SparkSession, logicalPlan: LogicalPlan): DataFrame
-----
+```scala
+ofRows(
+  sparkSession: SparkSession,
+  logicalPlan: LogicalPlan): DataFrame
+```
 
-NOTE: `ofRows` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
+!!! note
+    `ofRows` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
 
 `ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses spark-sql-RowEncoder.md[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
 

@@ -425,7 +425,7 @@ nav:
         - ResolvedStar: expressions/ResolvedStar.md
         - RowNumberLike: expressions/RowNumberLike.md
         - RuntimeReplaceable: expressions/RuntimeReplaceable.md
-        - expressions/spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
+        - ScalarSubquery: expressions/ScalarSubquery.md
         - expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
         - ScalaUDF: expressions/ScalaUDF.md
         - ScalaUDAF: expressions/ScalaUDAF.md
@@ -629,9 +629,8 @@ nav:
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
-      - InsertAdaptiveSparkPlan:
-          - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
-          - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
+      - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
+      - PlanAdaptiveSubqueries: physical-optimizations/PlanAdaptiveSubqueries.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
@@ -864,4 +863,5 @@ nav:
     - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
     - BufferedRowIterator: spark-sql-BufferedRowIterator.md
     - CompressionCodecs: spark-sql-CompressionCodecs.md
+    - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
     - SQLContext: spark-sql-SQLContext.md

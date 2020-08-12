@@ -193,7 +193,7 @@ Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause
 
 ANTLR rule: `relation`
 
-### <span id="visitRepairTable"> visitRepairTable
+### visitRepairTable
 
 Creates a [RepairTableStatement](../logical-operators/RepairTableStatement.md) for the following SQL statement:
 
@@ -203,7 +203,7 @@ MSCK REPAIR TABLE multipartIdentifier
 
 ANTLR labeled alternative: `#repairTable`
 
-### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
+### visitShowCurrentNamespace
 
 Creates a [ShowCurrentNamespaceStatement](../logical-operators/ShowCurrentNamespaceStatement.md) for the following SQL statement:
 
@@ -213,7 +213,7 @@ SHOW CURRENT NAMESPACE
 
 ANTLR labeled alternative: `#showCurrentNamespace`
 
-### <span id="visitShowTables"> visitShowTables
+### visitShowTables
 
 Creates a [ShowTables](../logical-operators/ShowTables.md) for the following SQL statement:
 
@@ -283,11 +283,11 @@ ANTLR labeled alternative: `#star`
 
 ### visitSubqueryExpression
 
-Creates a [ScalarSubquery](../expressions/spark-sql-Expression-SubqueryExpression-ScalarSubquery.md
+Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)
 
 ANTLR labeled alternative: `#subqueryExpression`
 
-### <span id="visitUse"> visitUse
+### visitUse
 
 Creates a [UseStatement](../logical-operators/UseStatement.md) for the following SQL statement:
 

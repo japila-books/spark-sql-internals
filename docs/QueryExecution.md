@@ -13,6 +13,21 @@ val plan: LogicalPlan = ...
 val qe = new QueryExecution(sparkSession, plan)
 ```
 
+## Creating Instance
+
+`QueryExecution` takes the following to be created:
+
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="logical"> [Logical Query Plan](logical-operators/LogicalPlan.md)
+* <span id="tracker"> `QueryPlanningTracker`
+
+`QueryExecution` is created when:
+
+* [Dataset.ofRows](spark-sql-Dataset.md#ofRows) and [Dataset.selectUntyped](spark-sql-Dataset.md#selectUntyped) are executed
+* `KeyValueGroupedDataset` is requested to [aggUntyped](spark-sql-KeyValueGroupedDataset.md#aggUntyped)
+* `CommandUtils` utility is requested to [computeColumnStats](spark-sql-CommandUtils.md#computeColumnStats) and [computePercentiles](spark-sql-CommandUtils.md#computePercentiles)
+* `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
+
 ## Accessing QueryExecution
 
 `QueryExecution` is part of `Dataset` using [queryExecution](spark-sql-Dataset.md#queryExecution) attribute.
@@ -107,43 +122,15 @@ stringWithStats: String
 
 `stringWithStats` is used when [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed (with `cost` flag enabled).
 
-=== [[debug]] debug Object
-
-CAUTION: FIXME
-
-=== [[completeString]] Building Complete Text Representation -- `completeString` Internal Method
-
-CAUTION: FIXME
-
-=== [[creating-instance]] Creating QueryExecution Instance
-
-`QueryExecution` takes the following when created:
-
-* [[sparkSession]] [SparkSession](SparkSession.md)
-* [[logical]] [Logical plan](logical-operators/LogicalPlan.md)
-
 ## <span id="preparations"> Physical Query Optimizations (Physical Plan Preparation Rules)
 
 ```scala
 preparations: Seq[Rule[SparkPlan]]
 ```
 
-`preparations` is the set of the physical query optimization rules that transform a [physical query plan](physical-operators/SparkPlan.md) to be more efficient and optimized for execution.
+`preparations` creates an [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) (with a new [AdaptiveExecutionContext](physical-optimizations/AdaptiveExecutionContext.md)) that is added to the [preparations rules](#preparations-internal-utility).
 
-`preparations` physical query optimizations are applied sequentially (one by one) to a physical plan in the following order:
-
-1. [ExtractPythonUDFs](physical-optimizations/ExtractPythonUDFs.md)
-1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
-1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)
-1. [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md)
-1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
-1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
-
-`preparations` rules are used when:
-
-* `QueryExecution` is requested for the <<executedPlan, executedPlan>> physical plan (through <<prepareForExecution, prepareForExecution>>)
-
-* (Spark Structured Streaming) `IncrementalExecution` is requested for the physical optimization rules for streaming structured queries
+`preparations` is used when `QueryExecution` is requested for an [optimized physical query plan](#executedPlan).
 
 ### preparations Internal Utility
 
@@ -153,7 +140,7 @@ preparations(
   adaptiveExecutionRule: Option[InsertAdaptiveSparkPlan] = None): Seq[Rule[SparkPlan]]
 ```
 
-`preparations` is the set of [Catalyst Rules](catalyst/Rule.md) (for transforming [physical operators](physical-operators/SparkPlan.md)) in the following order:
+`preparations` is the set of [Catalyst Rules](catalyst/Rule.md) for transforming [physical operators](physical-operators/SparkPlan.md) (to be more efficient and optimized for execution) in the following order:
 
 1. [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) (if defined)
 1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)

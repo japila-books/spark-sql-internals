@@ -57,10 +57,10 @@ apply(
   plan: SparkPlan): SparkPlan
 ```
 
-For every spark-sql-Expression-SubqueryExpression-ScalarSubquery.md[ScalarSubquery (SubqueryExpression)] expression in the input SparkPlan.md[physical plan], `apply` does the following:
+For every [ScalarSubquery](../expressions/ScalarSubquery.md) expression in the input SparkPlan.md[physical plan], `apply` does the following:
 
-. Builds the [optimized physical plan](../QueryExecution.md#executedPlan) (aka `executedPlan`) of the spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#plan[subquery logical plan], i.e. creates a [QueryExecution](../QueryExecution.md) for the subquery logical plan and requests the optimized physical plan.
+. Builds the [optimized physical plan](../QueryExecution.md#executedPlan) (aka `executedPlan`) of the [subquery logical plan](../expressions/ScalarSubquery.md#plan), i.e. creates a [QueryExecution](../QueryExecution.md) for the subquery logical plan and requests the optimized physical plan.
 
-. Plans the scalar subquery, i.e. creates a spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery (ExecSubqueryExpression)] expression with a new spark-sql-SparkPlan-SubqueryExec.md#creating-instance[SubqueryExec] physical operator (with the name *subquery[id]* and the optimized physical plan) and the spark-sql-Expression-SubqueryExpression-ScalarSubquery.md#exprId[ExprId].
+. Plans the scalar subquery, i.e. creates a spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery (ExecSubqueryExpression)] expression with a new spark-sql-SparkPlan-SubqueryExec.md#creating-instance[SubqueryExec] physical operator (with the name *subquery[id]* and the optimized physical plan) and the ScalarSubquery.md#exprId[ExprId].
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

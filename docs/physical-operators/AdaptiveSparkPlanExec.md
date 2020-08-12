@@ -13,6 +13,14 @@
 
 `AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
 
+## <span id="currentPhysicalPlan"> Current Physical Query Plan
+
+```scala
+currentPhysicalPlan: SparkPlan
+```
+
+`currentPhysicalPlan` is a [physical operator](SparkPlan.md) that...FIXME
+
 ## <span id="queryStageOptimizerRules"> QueryStage Optimizer Rules
 
 ```scala
@@ -111,7 +119,7 @@ createQueryStages(
 
 `createQueryStages` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan).
 
-## <span id="newQueryStage"> newQueryStage
+## newQueryStage
 
 ```scala
 newQueryStage(
@@ -134,7 +142,7 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
 `newQueryStage` is used when `AdaptiveSparkPlanExec` is requested to [createQueryStages](#createQueryStages).
 
-## <span id="reuseQueryStage"> reuseQueryStage
+## reuseQueryStage
 
 ```scala
 reuseQueryStage(
@@ -146,7 +154,7 @@ reuseQueryStage(
 
 `reuseQueryStage` is used when `AdaptiveSparkPlanExec` physical operator is requested to [createQueryStages](#createQueryStages).
 
-## <span id="cleanUpAndThrowException"> cleanUpAndThrowException
+## cleanUpAndThrowException
 
 ```scala
 cleanUpAndThrowException(
@@ -157,3 +165,30 @@ cleanUpAndThrowException(
 `cleanUpAndThrowException`...FIXME
 
 `cleanUpAndThrowException` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
+
+## reOptimize
+
+```scala
+reOptimize(
+  logicalPlan: LogicalPlan): (SparkPlan, LogicalPlan)
+```
+
+`reOptimize`...FIXME
+
+`reOptimize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
+
+## <span id="applyPhysicalRules"> Executing Physical Rules
+
+```scala
+applyPhysicalRules(
+  plan: SparkPlan,
+  rules: Seq[Rule[SparkPlan]]): SparkPlan
+```
+
+`applyPhysicalRules`...FIXME
+
+`applyPhysicalRules` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is created (and initializes [currentPhysicalPlan](#currentPhysicalPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
+
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
