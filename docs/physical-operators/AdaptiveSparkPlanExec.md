@@ -7,8 +7,8 @@
 `AdaptiveSparkPlanExec` takes the following to be created:
 
 * <span id="initialPlan"> Initial [SparkPlan](SparkPlan.md)
-* <span id="context"> `AdaptiveExecutionContext`
-* <span id="preprocessingRules"> Preprocessing [physical rules](../catalyst/Rule.md) (`Seq[Rule[SparkPlan]]`)
+* <span id="context"> [AdaptiveExecutionContext](../physical-optimizations/AdaptiveExecutionContext.md)
+* <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
 * <span id="isSubquery"> `isSubquery` flag
 
 `AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
@@ -185,10 +185,22 @@ applyPhysicalRules(
   rules: Seq[Rule[SparkPlan]]): SparkPlan
 ```
 
-`applyPhysicalRules`...FIXME
+`applyPhysicalRules` simply applies (_executes_) the given rules to the given [physical query plan](SparkPlan.md).
 
 `applyPhysicalRules` is used when:
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes [currentPhysicalPlan](#currentPhysicalPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
 
 * [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+
+## <span id="executionContext"> QueryStageCreator Thread Pool
+
+```scala
+executionContext: ExecutionContext
+```
+
+`executionContext` is an `ExecutionContext` that is used when:
+
+* `AdaptiveSparkPlanExec` operator is requested for a [getFinalPhysicalPlan](#getFinalPhysicalPlan) (to [materialize QueryStageExec operators](QueryStageExec.md#materialize) asynchronously)
+
+* [BroadcastQueryStageExec](BroadcastQueryStageExec.md) operator is requested for [materializeWithTimeout](BroadcastQueryStageExec.md#materializeWithTimeout)

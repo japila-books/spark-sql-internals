@@ -15,6 +15,14 @@
 
 * `BroadcastQueryStageExec` physical operator is requested to [newReuseInstance](#newReuseInstance)
 
+## <span id="materializeWithTimeout"> materializeWithTimeout
+
+```scala
+materializeWithTimeout: Future[Any]
+```
+
+`materializeWithTimeout` is...FIXME
+
 ## <span id="broadcast"> BroadcastExchangeExec Physical Operator
 
 ```scala
