@@ -91,6 +91,7 @@ nav:
       - Logical Analyzer: Analyzer.md
       - SparkPlanner: SparkPlanner.md
       - SparkOptimizer: SparkOptimizer.md
+      - QueryPlanningTracker: QueryPlanningTracker.md
     - SparkSession:
       - SparkSession: SparkSession.md
       - SparkSession.Builder: SparkSession-Builder.md

@@ -19,7 +19,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 * <span id="sparkSession"> [SparkSession](SparkSession.md)
 * <span id="logical"> [Logical Query Plan](logical-operators/LogicalPlan.md)
-* <span id="tracker"> `QueryPlanningTracker`
+* [QueryPlanningTracker](#tracker)
 
 `QueryExecution` is created when:
 
@@ -27,6 +27,10 @@ val qe = new QueryExecution(sparkSession, plan)
 * `KeyValueGroupedDataset` is requested to [aggUntyped](spark-sql-KeyValueGroupedDataset.md#aggUntyped)
 * `CommandUtils` utility is requested to [computeColumnStats](spark-sql-CommandUtils.md#computeColumnStats) and [computePercentiles](spark-sql-CommandUtils.md#computePercentiles)
 * `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
+
+## <span id="tracker"> QueryPlanningTracker
+
+`QueryExecution` can be given a [QueryPlanningTracker](QueryPlanningTracker.md) when [created](#creating-instance).
 
 ## Accessing QueryExecution
 
