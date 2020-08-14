@@ -129,11 +129,13 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
 
-**(internal)** Configures the log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
+**(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
 
 Default: `DEBUG`
 
 Since: `3.0.0`
+
+Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) method to access the current value.
 
 ## <span id="spark.sql.adaptive.coalescePartitions.enabled"> spark.sql.adaptive.coalescePartitions.enabled
 

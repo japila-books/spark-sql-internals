@@ -1,6 +1,6 @@
 # AdaptiveSparkPlanExec Physical Operator
 
-`AdaptiveSparkPlanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode).
+`AdaptiveSparkPlanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
 
 ## Creating Instance
 
@@ -13,7 +13,7 @@
 
 `AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
 
-## <span id="currentPhysicalPlan"> Current Physical Query Plan
+## <span id="currentPhysicalPlan"> Current Optimized Physical Query Plan
 
 ```scala
 currentPhysicalPlan: SparkPlan
@@ -38,15 +38,19 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 
 `queryStageOptimizerRules` is used when `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage).
 
-## <span id="doExecute"> doExecute
+## <span id="doExecute"> Executing Physical Operator
 
 ```scala
 doExecute(): RDD[InternalRow]
 ```
 
-doExecute...FIXME
+`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
 
-doExecute is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+`doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
+
+`doExecute` returns the `RDD[InternalRow]`.
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 ## <span id="executeCollect"> executeCollect
 
@@ -54,9 +58,9 @@ doExecute is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 executeCollect(): Array[InternalRow]
 ```
 
-executeCollect...FIXME
+`executeCollect`...FIXME
 
-executeCollect is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
+`executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
 
 ## <span id="executeTail"> executeTail
 
@@ -65,9 +69,9 @@ executeTail(
   n: Int): Array[InternalRow]
 ```
 
-executeTail...FIXME
+`executeTail`...FIXME
 
-executeTail is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
+`executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
 
 ## <span id="executeTake"> executeTake
 
@@ -76,9 +80,19 @@ executeTake(
   n: Int): Array[InternalRow]
 ```
 
-executeTake...FIXME
+`executeTake`...FIXME
 
-executeTake is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
+`executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
+
+## <span id="getFinalPhysicalPlan"> getFinalPhysicalPlan
+
+```scala
+getFinalPhysicalPlan(): SparkPlan
+```
+
+`getFinalPhysicalPlan`...FIXME
+
+`getFinalPhysicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [execute](#doExecute).
 
 ## <span id="generateTreeString"> generateTreeString
 
@@ -98,17 +112,7 @@ generateTreeString(
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
 
-## getFinalPhysicalPlan
-
-```scala
-getFinalPhysicalPlan(): SparkPlan
-```
-
-`getFinalPhysicalPlan`...FIXME
-
-`getFinalPhysicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute).
-
-## createQueryStages
+## <span id="createQueryStages"> createQueryStages
 
 ```scala
 createQueryStages(
@@ -119,7 +123,7 @@ createQueryStages(
 
 `createQueryStages` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan).
 
-## newQueryStage
+## <span id="newQueryStage"> newQueryStage
 
 ```scala
 newQueryStage(
@@ -142,7 +146,7 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
 `newQueryStage` is used when `AdaptiveSparkPlanExec` is requested to [createQueryStages](#createQueryStages).
 
-## reuseQueryStage
+## <span id="reuseQueryStage"> reuseQueryStage
 
 ```scala
 reuseQueryStage(
@@ -154,7 +158,7 @@ reuseQueryStage(
 
 `reuseQueryStage` is used when `AdaptiveSparkPlanExec` physical operator is requested to [createQueryStages](#createQueryStages).
 
-## cleanUpAndThrowException
+## <span id="cleanUpAndThrowException"> cleanUpAndThrowException
 
 ```scala
 cleanUpAndThrowException(
@@ -166,7 +170,7 @@ cleanUpAndThrowException(
 
 `cleanUpAndThrowException` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
 
-## reOptimize
+## <span id="reOptimize"> reOptimize
 
 ```scala
 reOptimize(
@@ -204,3 +208,44 @@ executionContext: ExecutionContext
 * `AdaptiveSparkPlanExec` operator is requested for a [getFinalPhysicalPlan](#getFinalPhysicalPlan) (to [materialize QueryStageExec operators](QueryStageExec.md#materialize) asynchronously)
 
 * [BroadcastQueryStageExec](BroadcastQueryStageExec.md) operator is requested for [materializeWithTimeout](BroadcastQueryStageExec.md#materializeWithTimeout)
+
+## <span id="finalPlanUpdate"> finalPlanUpdate Lazy Value
+
+```scala
+finalPlanUpdate: Unit
+```
+
+??? note "lazy value"
+    `finalPlanUpdate` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`finalPlanUpdate`...FIXME
+
+In the end, `finalPlanUpdate` [prints out](#logOnLevel) the following message to the logs:
+
+```text
+Final plan: [currentPhysicalPlan]
+```
+
+`finalPlanUpdate` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute).
+
+## <span id="logOnLevel"> logOnLevel Internal Method
+
+```scala
+logOnLevel: ( => String) => Unit
+```
+
+`logOnLevel` uses [spark.sql.adaptive.logLevel](../spark-sql-properties.md#spark.sql.adaptive.logLevel) configuration property for the logging level and prints out the given message to the logs.
+
+`logOnLevel` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [finalPlanUpdate](#finalPlanUpdate).
+
+## <span id="isFinalPlan"> isFinalPlan Internal Flag
+
+```scala
+isFinalPlan: Boolean = false
+```
+
+`isFinalPlan` is an internal flag to avoid expensive [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and return the [current optimized physical query plan](#currentPhysicalPlan) immediately)
+
+`isFinalPlan` is disabled by default and turned on at the end of [getFinalPhysicalPlan](#getFinalPhysicalPlan).
+
+`isFinalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested for [stringArgs](#stringArgs).

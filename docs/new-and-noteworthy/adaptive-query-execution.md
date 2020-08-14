@@ -12,6 +12,8 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 Adaptive Query Execution is disabled by default and can be enabled using [spark.sql.adaptive.enabled](../spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property.
 
+Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator.
+
 !!! note
     Adaptive Query Execution is disabled for `CacheManager` to [cacheQuery](../CacheManager.md#cacheQuery) and [recacheByCondition](../CacheManager.md#recacheByCondition)
 

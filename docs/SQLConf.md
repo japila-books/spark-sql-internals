@@ -418,6 +418,62 @@ For every regular expression (in the order), `redactOptions` redacts sensitive i
 
 NOTE: `redactOptions` is used exclusively when `SaveIntoDataSourceCommand` logical command is requested for the <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#simpleString, simple description>>.
 
+## Accessing SQLConf
+
+You can access a `SQLConf` using:
+
+. <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
+
+. <<SparkSession.md#sessionState, SessionState>> - direct access through <<SparkSession.md#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
+
+```text
+import org.apache.spark.sql.internal.SQLConf
+
+// Use type-safe access to configuration properties
+// using SQLConf.get.getConf
+val parallelFileListingInStatsComputation = SQLConf.get.getConf(SQLConf.PARALLEL_FILE_LISTING_IN_STATS_COMPUTATION)
+
+// or even simpler
+SQLConf.get.parallelFileListingInStatsComputation
+```
+
+```text
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+// Direct access to the session SQLConf
+val sqlConf = spark.sessionState.conf
+scala> :type sqlConf
+org.apache.spark.sql.internal.SQLConf
+
+scala> println(sqlConf.offHeapColumnVectorEnabled)
+false
+
+// Or simply import the conf value
+import spark.sessionState.conf
+
+// accessing properties through accessor methods
+scala> conf.numShufflePartitions
+res1: Int = 200
+
+// Prefer SQLConf.get (over direct access)
+import org.apache.spark.sql.internal.SQLConf
+val cc = SQLConf.get
+scala> cc == conf
+res4: Boolean = true
+
+// setting properties using aliases
+import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
+conf.setConf(SHUFFLE_PARTITIONS, 2)
+scala> conf.numShufflePartitions
+res2: Int = 2
+
+// unset aka reset properties to the default value
+conf.unsetConf(SHUFFLE_PARTITIONS)
+scala> conf.numShufflePartitions
+res3: Int = 200
+```
+
 ## <span id="spark.sql.debug.maxToStringFields"><span id="MAX_TO_STRING_FIELDS"><span id="maxToStringFields"> spark.sql.debug.maxToStringFields
 
 Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
@@ -496,58 +552,8 @@ The value of [spark.sql.adaptive.fetchShuffleBlocksInBatch](spark-sql-properties
 
 Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
-## Accessing SQLConf
+## <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel
 
-You can access a `SQLConf` using:
+The value of [spark.sql.adaptive.logLevel](spark-sql-properties.md#spark.sql.adaptive.logLevel) configuration property
 
-. <<get, SQLConf.get>> (preferred) - the `SQLConf` of the current active `SparkSession`
-
-. <<SparkSession.md#sessionState, SessionState>> - direct access through <<SparkSession.md#sessionState, SessionState>> of the `SparkSession` of your choice (that gives more flexibility on what `SparkSession` is used that can be different from the current active `SparkSession`)
-
-```text
-import org.apache.spark.sql.internal.SQLConf
-
-// Use type-safe access to configuration properties
-// using SQLConf.get.getConf
-val parallelFileListingInStatsComputation = SQLConf.get.getConf(SQLConf.PARALLEL_FILE_LISTING_IN_STATS_COMPUTATION)
-
-// or even simpler
-SQLConf.get.parallelFileListingInStatsComputation
-```
-
-```text
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-// Direct access to the session SQLConf
-val sqlConf = spark.sessionState.conf
-scala> :type sqlConf
-org.apache.spark.sql.internal.SQLConf
-
-scala> println(sqlConf.offHeapColumnVectorEnabled)
-false
-
-// Or simply import the conf value
-import spark.sessionState.conf
-
-// accessing properties through accessor methods
-scala> conf.numShufflePartitions
-res1: Int = 200
-
-// Prefer SQLConf.get (over direct access)
-import org.apache.spark.sql.internal.SQLConf
-val cc = SQLConf.get
-scala> cc == conf
-res4: Boolean = true
-
-// setting properties using aliases
-import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
-conf.setConf(SHUFFLE_PARTITIONS, 2)
-scala> conf.numShufflePartitions
-res2: Int = 2
-
-// unset aka reset properties to the default value
-conf.unsetConf(SHUFFLE_PARTITIONS)
-scala> conf.numShufflePartitions
-res3: Int = 200
-```
+Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed.

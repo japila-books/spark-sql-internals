@@ -313,7 +313,7 @@ outputOrdering: Seq[SortOrder]
 
 The `SparkPlan` abstraction assumes that concrete physical operators define [doExecute](#doExecute) method (with optiona [hooks](#hooks) like [doPrepare](#doPrepare)) which is executed when the physical operator is [executed](#execute).
 
-### doExecute
+### <span id="doExecute"> doExecute
 
 ```scala
 doExecute(): RDD[InternalRow]
