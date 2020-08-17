@@ -1,6 +1,6 @@
-# Catalyst Expression
+# Catalyst Expressions
 
-`Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [FIXME](#implementations) that [method](#method) and...FIXME.
+`Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable nodes](#implementations).
 
 `Expression` is a executable [node](../catalyst/TreeNode.md) (in a Catalyst multi-tree) that can be [evaluated](#eval) to a value for an input row (e.g. produces a JVM object for an [InternalRow](../spark-sql-InternalRow.md)).
 

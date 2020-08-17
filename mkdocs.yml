@@ -366,6 +366,7 @@ nav:
       - GenericStrategy: catalyst/GenericStrategy.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
+      - PlanExpression: expressions/PlanExpression.md
       - Unevaluable: expressions/Unevaluable.md
       - Concrete Expressions:
         - AggregateExpression: expressions/AggregateExpression.md
@@ -420,7 +421,6 @@ nav:
         - OffsetWindowFunction: expressions/OffsetWindowFunction.md
         - ParseToDate: expressions/ParseToDate.md
         - ParseToTimestamp: expressions/ParseToTimestamp.md
-        - PlanExpression: expressions/PlanExpression.md
         - PrettyAttribute: expressions/PrettyAttribute.md
         - RankLike: expressions/RankLike.md
         - ResolvedStar: expressions/ResolvedStar.md

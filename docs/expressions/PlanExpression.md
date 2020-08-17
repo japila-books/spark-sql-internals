@@ -1,49 +1,49 @@
-title: PlanExpression
+# PlanExpression Expressions
 
-# PlanExpression -- Expressions with Query Plans
+`PlanExpression` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [subquery expressions](#implementations) (that are expressions with [query plans](#plan)).
 
-`PlanExpression` is the <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that contain a catalyst/QueryPlan.md[QueryPlan].
+## Contract
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
+### exprId
 
-abstract class PlanExpression[T <: QueryPlan[_]] extends Expression {
-  // only required methods that have no implementation
-  // the others follow
-  def exprId: ExprId
-  def plan: T
-  def withNewPlan(plan: T): PlanExpression[T]
-}
-----
+ <span id="exprId">
+```scala
+exprId: ExprId
+```
 
-.PlanExpression Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+Expression ID
 
-| `exprId`
-| [[exprId]] Used when...FIXME
+### plan
 
-| `plan`
-| [[plan]] Used when...FIXME
+ <span id="plan">
+```scala
+plan: T
+```
 
-| `withNewPlan`
-| [[withNewPlan]] Used when...FIXME
-|===
+[Query plan](../catalyst/QueryPlan.md) of a subquery
 
-[[implementations]]
-.PlanExpressions
-[cols="1,2",options="header",width="100%"]
-|===
-| PlanExpression
-| Description
+### withNewPlan
 
-| [[ExecSubqueryExpression]] spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression]
-|
+ <span id="withNewPlan">
+```scala
+withNewPlan(
+  plan: T): PlanExpression[T]
+```
 
-| [[SubqueryExpression]] spark-sql-Expression-SubqueryExpression.md[SubqueryExpression]
-|
-|===
+Updates the expression with a new plan
+
+## Implementations
+
+* [ExecSubqueryExpression](ExecSubqueryExpression.md)
+* [SubqueryExpression](SubqueryExpression.md)
+
+## conditionString
+
+<span id="conditionString">
+```scala
+conditionString: String
+```
+
+`conditionString` simply concatenates all children's text representation between `[` and `]` characters, separated by `&&`.
+
+`conditionString` is used when [DynamicPruningSubquery](DynamicPruningSubquery.md#toString), [ScalarSubquery](ScalarSubquery.md#toString), [ListQuery](ListQuery.md#toString) and [Exists](Exists.md#toString) expressions are requested for a text representation.

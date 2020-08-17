@@ -25,7 +25,7 @@
 toString: String
 ```
 
-`toString` uses the [exprId](#exprId) and [conditionString](#conditionString) to build a textual representation:
+`toString` uses the [exprId](#exprId) and [conditionString](PlanExpression.md#conditionString) to build a textual representation:
 
 ```text
 dynamicpruning#[exprId] [conditionString]
