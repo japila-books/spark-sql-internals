@@ -556,4 +556,10 @@ Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
 The value of [spark.sql.adaptive.logLevel](spark-sql-properties.md#spark.sql.adaptive.logLevel) configuration property
 
-Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed.
+Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed
+
+## <span id="ADAPTIVE_EXECUTION_FORCE_APPLY"> ADAPTIVE_EXECUTION_FORCE_APPLY
+
+[spark.sql.adaptive.forceApply](spark-sql-properties.md#spark.sql.adaptive.forceApply) configuration property
+
+Used when [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed

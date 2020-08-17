@@ -4,6 +4,8 @@
 
 **Adaptive Query Execution** (aka **Adaptive Query Optimisation**, **Adaptive Optimisation**, or **AQE** in short) is an optimisation of a [physical query execution plan](../physical-operators/SparkPlan.md) in the middle of query execution for alternative execution plans at runtime.
 
+Adaptive Query Execution is only useful when a query has exchanges or sub-queries.
+
 Adaptive Query Execution re-optimizes the query plan based on runtime statistics.
 
 Quoting the description of a [talk](#references) by the authors of Adaptive Query Execution:

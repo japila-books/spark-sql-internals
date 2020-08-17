@@ -13,6 +13,62 @@
 
 `AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
 
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
+
+`doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
+
+`doExecute` returns the `RDD[InternalRow]`.
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+## <span id="executeCollect"> Executing for Collect Operator
+
+```scala
+executeCollect(): Array[InternalRow]
+```
+
+`executeCollect`...FIXME
+
+`executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
+
+## <span id="executeTail"> Executing for Tail Operator
+
+```scala
+executeTail(
+  n: Int): Array[InternalRow]
+```
+
+`executeTail`...FIXME
+
+`executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
+
+## <span id="executeTake"> Executing for Take Operator
+
+```scala
+executeTake(
+  n: Int): Array[InternalRow]
+```
+
+`executeTake`...FIXME
+
+`executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
+
+## <span id="getFinalPhysicalPlan"> getFinalPhysicalPlan
+
+```scala
+getFinalPhysicalPlan(): SparkPlan
+```
+
+`getFinalPhysicalPlan`...FIXME
+
+`getFinalPhysicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [execute](#doExecute).
+
 ## <span id="currentPhysicalPlan"> Current Optimized Physical Query Plan
 
 ```scala
@@ -49,62 +105,6 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 * [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md)
 
 `queryStageOptimizerRules` is used when `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage).
-
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
-
-`doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
-
-`doExecute` returns the `RDD[InternalRow]`.
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-## <span id="executeCollect"> executeCollect
-
-```scala
-executeCollect(): Array[InternalRow]
-```
-
-`executeCollect`...FIXME
-
-`executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
-
-## <span id="executeTail"> executeTail
-
-```scala
-executeTail(
-  n: Int): Array[InternalRow]
-```
-
-`executeTail`...FIXME
-
-`executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
-
-## <span id="executeTake"> executeTake
-
-```scala
-executeTake(
-  n: Int): Array[InternalRow]
-```
-
-`executeTake`...FIXME
-
-`executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
-
-## <span id="getFinalPhysicalPlan"> getFinalPhysicalPlan
-
-```scala
-getFinalPhysicalPlan(): SparkPlan
-```
-
-`getFinalPhysicalPlan`...FIXME
-
-`getFinalPhysicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [execute](#doExecute).
 
 ## <span id="generateTreeString"> generateTreeString
 

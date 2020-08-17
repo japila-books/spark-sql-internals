@@ -119,13 +119,16 @@ Default: `false`
 
 Since: `3.0.0`
 
-## <span id="spark.sql.adaptive.forceApply"> spark.sql.adaptive.forceApply
+## spark.sql.adaptive.forceApply
 
-**(internal)** Adaptive query execution is skipped when the query does not have exchanges or sub-queries. By setting this config to true (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will force apply adaptive query execution for all supported queries.
+<span id="spark.sql.adaptive.forceApply">
+**(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](physical-optimizations/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
 
 Default: `false`
 
 Since: `3.0.0`
+
+Use [SQLConf.ADAPTIVE_EXECUTION_FORCE_APPLY](SQLConf.md#ADAPTIVE_EXECUTION_FORCE_APPLY) method to access the property (in a type-safe way).
 
 ## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
 
@@ -1315,9 +1318,9 @@ Use [SQLConf.windowExecBufferSpillThreshold](SQLConf.md#windowExecBufferSpillThr
 
 |===
 
-## <span id="spark.sql.adaptive.enabled"> spark.sql.adaptive.enabled
+## spark.sql.adaptive.enabled
 
-Enables [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)
+<span id="spark.sql.adaptive.enabled">Enables [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)
 
 Default: `false`
 
