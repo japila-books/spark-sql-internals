@@ -265,8 +265,9 @@ newPredicate(
 
 `newPredicate` is used when...FIXME
 
-## <span id="waitForSubqueries"> Waiting for Subqueries to Finish
+## Waiting for Subqueries to Finish
 
+<span id="waitForSubqueries">
 ```scala
 waitForSubqueries(): Unit
 ```

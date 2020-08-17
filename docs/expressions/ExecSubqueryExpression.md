@@ -1,39 +1,36 @@
-title: ExecSubqueryExpression
+# ExecSubqueryExpression Expressions
 
-# ExecSubqueryExpression -- Catalyst Expressions with SubqueryExec Physical Operators
+`SubqueryExpression` is an [extension](#contract) of the [PlanExpression](PlanExpression.md) abstraction for [subquery expressions](#implementations) with [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md) physical operators (for a subquery).
 
-`ExecSubqueryExpression` is the <<contract, contract>> for spark-sql-Expression-PlanExpression.md[Catalyst expressions that contain a physical plan] with spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] physical operator (i.e. `PlanExpression[SubqueryExec]`).
+## Contract
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.execution
+### updateResult
 
-abstract class ExecSubqueryExpression extends PlanExpression[SubqueryExec] {
-  def updateResult(): Unit
-}
-----
+ <span id="updateResult">
+```scala
+updateResult(): Unit
+```
 
-.ExecSubqueryExpression Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+`updateResult` is used when `SparkPlan` is requested to [waitForSubqueries](../physical-operators/SparkPlan.md#waitForSubqueries)
 
-| `updateResult`
-| [[updateResult]] Used exclusively when a SparkPlan.md[physical operator] is requested to SparkPlan.md#waitForSubqueries[waitForSubqueries] (when SparkPlan.md#execute[executed] as part of SparkPlan.md#Physical-Operator-Execution-Pipeline[Physical Operator Execution Pipeline]).
-|===
+### withNewPlan
 
-[[implementations]]
-.ExecSubqueryExpressions
-[cols="1,2",options="header",width="100%"]
-|===
-| ExecSubqueryExpression
-| Description
+ <span id="withNewPlan">
+```scala
+withNewPlan(
+  plan: BaseSubqueryExec): ExecSubqueryExpression
+```
 
-| [[InSubquery]] [InSubquery](InSubquery.md)
-|
+!!! note
+    `withNewPlan` is part of the [PlanExpression](PlanExpression.md) abstraction and is defined as follows:
+    
+    ```scala
+    withNewPlan(plan: T): PlanExpression[T]
+    ```
 
-| [[ScalarSubquery]] [ScalarSubquery](spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md)
-|
-|===
+    The purpose of this override method is to change the input and output generic types to the concrete [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md) and `ExecSubqueryExpression`, respectively.
+
+## Implementations
+
+* [InSubqueryExec](InSubqueryExec.md)
+* [ScalarSubquery](ScalarSubquery.md)

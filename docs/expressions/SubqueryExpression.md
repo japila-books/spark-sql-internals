@@ -1,6 +1,6 @@
 # SubqueryExpression Expressions
 
-`SubqueryExpression` is an [extension](#contract) of the [PlanExpression](PlanExpression.md) abstraction for [subquery expressions](#implementations) (that are [expressions](Expression.md) with a [logical plan](#plan) for a subquery).
+`SubqueryExpression` is an [extension](#contract) of the [PlanExpression](PlanExpression.md) abstraction for [subquery expressions](#implementations) with [logical plans](#plan) (for a subquery).
 
 ## Contract
 

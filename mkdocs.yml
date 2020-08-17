@@ -366,6 +366,7 @@ nav:
       - GenericStrategy: catalyst/GenericStrategy.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
+      - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
       - PlanExpression: expressions/PlanExpression.md
       - Unevaluable: expressions/Unevaluable.md
       - Concrete Expressions:
@@ -389,7 +390,6 @@ nav:
         - DeclarativeAggregate: expressions/DeclarativeAggregate.md
         - DynamicPruningExpression: expressions/DynamicPruningExpression.md
         - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
-        - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
         - Exists: expressions/Exists.md
         - ExpectsInputTypes: expressions/ExpectsInputTypes.md
         - ExplodeBase: expressions/ExplodeBase.md
@@ -410,6 +410,7 @@ nav:
         - Inline: expressions/Inline.md
         - InSet: expressions/InSet.md
         - InSubquery: expressions/InSubquery.md
+        - InSubqueryExec: expressions/InSubqueryExec.md
         - JsonToStructs: expressions/JsonToStructs.md
         - JsonTuple: expressions/JsonTuple.md
         - ListQuery: expressions/ListQuery.md
