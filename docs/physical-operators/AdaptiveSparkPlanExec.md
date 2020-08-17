@@ -6,7 +6,7 @@
 
 `AdaptiveSparkPlanExec` takes the following to be created:
 
-* <span id="initialPlan"> Initial [SparkPlan](SparkPlan.md)
+* <span id="initialPlan"> Initial [physical query plan](SparkPlan.md)
 * <span id="context"> [AdaptiveExecutionContext](../physical-optimizations/AdaptiveExecutionContext.md)
 * <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
 * <span id="isSubquery"> `isSubquery` flag
@@ -19,7 +19,19 @@
 currentPhysicalPlan: SparkPlan
 ```
 
-`currentPhysicalPlan` is a [physical operator](SparkPlan.md) that...FIXME
+`currentPhysicalPlan` is a [physical query plan](SparkPlan.md) that `AdaptiveSparkPlanExec` operator creates right when [created](#creating-instance).
+
+`currentPhysicalPlan` is the [initial physical query plan](#initialPlan) after [applying](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules).
+
+## <span id="queryStagePreparationRules"> QueryStage Preparation Rules
+
+```scala
+queryStagePreparationRules: Seq[Rule[SparkPlan]]
+```
+
+`queryStagePreparationRules` is a single-rule collection of [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization.
+
+`queryStagePreparationRules` is used when `AdaptiveSparkPlanExec` operator is requested for the [current physical plan](#currentPhysicalPlan) and [reOptimize](#reOptimize).
 
 ## <span id="queryStageOptimizerRules"> QueryStage Optimizer Rules
 
@@ -170,16 +182,34 @@ cleanUpAndThrowException(
 
 `cleanUpAndThrowException` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
 
-## <span id="reOptimize"> reOptimize
+## <span id="reOptimize"> Re-Optimizing Logical Query Plan
 
 ```scala
 reOptimize(
   logicalPlan: LogicalPlan): (SparkPlan, LogicalPlan)
 ```
 
-`reOptimize`...FIXME
+`reOptimize` gives optimized physical and logical query plans for the given [logical query plan](../logical-operators/LogicalPlan.md).
+
+Internally, `reOptimize` requests the given [logical query plan](../logical-operators/LogicalPlan.md) to [invalidateStatsCache](../spark-sql-LogicalPlanStats.md#invalidateStatsCache) and requests the [local logical optimizer](#optimizer) to generate an optimized logical query plan.
+
+`reOptimize` requests the [query planner](../SparkPlanner.md) (bound to the [AdaptiveExecutionContext](#context)) to [plan the optimized logical query plan](../execution-planning-strategies/SparkStrategies.md#plan) (and generate a physical query plan).
+
+`reOptimize` [creates an optimized physical query plan](#applyPhysicalRules) using [preprocessing](#preprocessingRules) and [preparation](#queryStagePreparationRules) rules.
 
 `reOptimize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
+
+## <span id="optimizer"> Local Logical Optimizer
+
+```scala
+optimizer: RuleExecutor[LogicalPlan]
+```
+
+`optimizer` is a [RuleExecutor](../catalyst/RuleExecutor.md) of rules to transform [logical query plans](../logical-operators/LogicalPlan.md).
+
+`optimizer` has got **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization only.
+
+`optimizer` is used when `AdaptiveSparkPlanExec` physical operator is requested to [re-optimize a logical query plan](#reOptimize).
 
 ## <span id="applyPhysicalRules"> Executing Physical Rules
 
