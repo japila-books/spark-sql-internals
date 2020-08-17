@@ -1,20 +1,33 @@
-# Exchange -- Unary Physical Operators for Data Exchange
+# Exchange Unary Physical Operators
 
-`Exchange` is the base of SparkPlan.md#UnaryExecNode[unary physical operators] that exchange data among multiple threads or processes.
+`Exchange` is an [extension](#contract) of the [UnaryExecNode](SparkPlan.md#UnaryExecNode) abstraction for [unary physical operators](#implementations) to exchange data (among tasks).
 
-[[output]]
-When requested for the catalyst/QueryPlan.md#output[output schema], `Exchange` simply uses the child physical operator's output schema.
+!!! note "Adaptive Query Execution"
+    `Exchange` operators are target of [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
 
-[[implementations]]
-.Exchanges
-[cols="1,2",options="header",width="100%"]
-|===
-| Exchange
-| Description
+## Implementations
 
-| [[BroadcastExchangeExec]] spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec]
-|
+* [BroadcastExchangeExec](BroadcastExchangeExec.md)
+* [ShuffleExchangeExec](ShuffleExchangeExec.md)
 
-| [[ShuffleExchangeExec]] spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
-|
-|===
+## Output Attributes
+
+<span id="output">
+```scala
+output: Seq[Attribute]
+```
+
+`output` simply requests the child operator for the [output attributes](../catalyst/QueryPlan.md#output).
+
+`output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
+
+## Arguments
+
+<span id="stringArgs">
+```scala
+stringArgs: Iterator[Any]
+```
+
+`stringArgs` adds **[id=#[id]]** to the default [stringArgs](../catalyst/TreeNode.md#stringArgs).
+
+`stringArgs` is part of the [TreeNode](../catalyst/TreeNode.md#stringArgs) abstraction.

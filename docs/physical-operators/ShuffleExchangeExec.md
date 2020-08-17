@@ -1,6 +1,6 @@
 # ShuffleExchangeExec Unary Physical Operator
 
-`ShuffleExchangeExec` is an spark-sql-SparkPlan-Exchange.md[Exchange] unary physical operator that is used to <<doExecute, perform a shuffle>>.
+`ShuffleExchangeExec` is an [Exchange](Exchange.md) unary physical operator that is used to <<doExecute, perform a shuffle>>.
 
 `ShuffleExchangeExec` is created (possibly indirectly using <<apply, apply>> factory) when:
 
