@@ -11,6 +11,8 @@
 updateResult(): Unit
 ```
 
+Updates the expression with [collected result](../physical-operators/SparkPlan.md#executeCollect) from an executed plan
+
 `updateResult` is used when `SparkPlan` is requested to [waitForSubqueries](../physical-operators/SparkPlan.md#waitForSubqueries)
 
 ### withNewPlan
