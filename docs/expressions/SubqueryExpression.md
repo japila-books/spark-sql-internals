@@ -1,117 +1,105 @@
-title: SubqueryExpression
+# SubqueryExpression Expressions
 
-# SubqueryExpression -- Expressions With Logical Query Plans
+`SubqueryExpression` is an [extension](#contract) of the [PlanExpression](PlanExpression.md) abstraction for [subquery expressions](#implementations) (that are [expressions](Expression.md) with a [logical plan](#plan) for a subquery).
 
-`SubqueryExpression` is the <<contract, contract>> for spark-sql-Expression-PlanExpression.md[expressions with logical query plans] (i.e. `PlanExpression[LogicalPlan]`).
+## Contract
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
+### withNewPlan
 
-abstract class SubqueryExpression(
-    plan: LogicalPlan,
-    children: Seq[Expression],
-    exprId: ExprId) extends PlanExpression[LogicalPlan] {
-  // only required methods that have no implementation
-  // the others follow
-  override def withNewPlan(plan: LogicalPlan): SubqueryExpression
-}
-----
+ <span id="withNewPlan">
+```scala
+withNewPlan(
+  plan: LogicalPlan): SubqueryExpression
+```
 
-.(Subset of) SubqueryExpression Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+!!! note
+    `withNewPlan` is part of the [PlanExpression](PlanExpression.md) abstraction and is defined as follows:
+    
+    ```scala
+    withNewPlan(plan: T): PlanExpression[T]
+    ```
 
-| [[withNewPlan]] `withNewPlan`
-a| Used when:
+    The purpose of this override method is to change the input and output generic types to the concrete [LogicalPlan](../logical-operators/LogicalPlan.md) and `SubqueryExpression`, respectively.
 
-* `CTESubstitution` substitution analyzer rule is requested to `substituteCTE`
+## Implementations
 
-* `ResolveReferences` logical resolution rule is requested to [dedupRight](../logical-analysis-rules/ResolveReferences.md#dedupRight) and [dedupOuterReferencesInSubquery](../logical-analysis-rules/ResolveReferences.md#dedupOuterReferencesInSubquery)
+* [DynamicPruningSubquery](DynamicPruningSubquery.md)
+* [Exists](Exists.md)
+* [ListQuery](ListQuery.md)
+* [ScalarSubquery](ScalarSubquery.md)
 
-* `ResolveSubquery` logical resolution rule is requested to [resolveSubQuery](../logical-analysis-rules/ResolveSubquery.md#resolveSubQuery)
+## Creating Instance
 
-* [UpdateOuterReferences](../logical-analysis-rules/UpdateOuterReferences.md) logical rule is executed
+`SubqueryExpression` takes the following to be created:
 
-* [ResolveTimeZone](../logical-analysis-rules/ResolveTimeZone.md) logical resolution rule is executed
+* <span id="plan"> [Subquery logical plan](../logical-operators/LogicalPlan.md)
+* <span id="children"> Child [Expressions](Expression.md)
+* <span id="exprId"> Expression ID
 
-* `SubqueryExpression` is requested for a <<canonicalize, canonicalized version>>
+!!! note "Abstract Class"
+    `SubqueryExpression` is an abstract class and cannot be created directly. It is created indirectly for the [concrete SubqueryExpressions](#implementations).
 
-* `OptimizeSubqueries` logical query optimization is spark-sql-Optimizer-OptimizeSubqueries.md#apply[executed]
+## References
 
-* `CacheManager` is requested to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData)
-|===
+<span id="references">
+```scala
+references: AttributeSet
+```
 
-[[implementations]]
-.SubqueryExpressions
-[cols="1,2",options="header",width="100%"]
-|===
-| SubqueryExpression
-| Description
+`references` is...FIXME
 
-| [[Exists]] spark-sql-Expression-Exists.md[Exists]
-|
+`references` is part of the [Expression](Expression.md#references) abstraction.
 
-| [[ListQuery]] spark-sql-Expression-ListQuery.md[ListQuery]
-|
+## resolved Predicate
 
-| [[ScalarSubquery]] spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery]
-|
-|===
+<span id="resolved">
+```scala
+resolved: Boolean
+```
 
-[[resolved]]
-`SubqueryExpression` is expressions/Expression.md#resolved[resolved] when the expressions/Expression.md#childrenResolved[children are resolved] and the <<plan, subquery logical plan>> is spark-sql-LogicalPlan.md#resolved[resolved].
+`resolved` is `true` when all of the following hold:
 
-[[references]]
-`references`...FIXME
+* [children are all resolved](Expression.md#childrenResolved)
+* [subquery logical plan](#plan) is [resolved](../logical-operators/LogicalPlan.md#resolved)
 
-[[semanticEquals]]
-`semanticEquals`...FIXME
+`resolved` is part of the [Expression](Expression.md#resolved) abstraction.
 
-[[canonicalize]]
-`canonicalize`...FIXME
+## hasInOrCorrelatedExistsSubquery Utility
 
-=== [[hasInOrExistsSubquery]] `hasInOrExistsSubquery` Object Method
+<span id="hasInOrCorrelatedExistsSubquery">
+```scala
+hasInOrCorrelatedExistsSubquery(
+  e: Expression): Boolean
+```
 
-[source, scala]
-----
-hasInOrExistsSubquery(e: Expression): Boolean
-----
+`hasInOrCorrelatedExistsSubquery`...FIXME
 
-`hasInOrExistsSubquery`...FIXME
+`hasInOrCorrelatedExistsSubquery` is used when [RewritePredicateSubquery](../logical-optimizations/RewritePredicateSubquery.md) logical optimization is executed.
 
-NOTE: `hasInOrExistsSubquery` is used when...FIXME
+## hasCorrelatedSubquery Utility
 
-=== [[hasCorrelatedSubquery]] `hasCorrelatedSubquery` Object Method
-
-[source, scala]
-----
-hasCorrelatedSubquery(e: Expression): Boolean
-----
+<span id="hasCorrelatedSubquery">
+```scala
+hasCorrelatedSubquery(
+  e: Expression): Boolean
+```
 
 `hasCorrelatedSubquery`...FIXME
 
-NOTE: `hasCorrelatedSubquery` is used when...FIXME
+`hasCorrelatedSubquery` is used when:
 
-=== [[hasSubquery]] `hasSubquery` Utility
+* `EliminateOuterJoin` logical optimization is executed
+* `Subquery` is created (from an expression)
+* [Filter](../logical-operators/Filter.md) logical operator is requested for `validConstraints`
 
-[source, scala]
-----
+## hasSubquery Utility
+
+<span id="hasSubquery">
+```scala
 hasSubquery(
   e: Expression): Boolean
-----
+```
 
 `hasSubquery`...FIXME
 
-NOTE: `hasSubquery` is used when...FIXME
-
-=== [[creating-instance]] Creating SubqueryExpression Instance
-
-`SubqueryExpression` takes the following when created:
-
-* [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
-* [[children]] Child expressions/Expression.md[expressions]
-* [[exprId]] Expression ID (as `ExprId`)
+`hasSubquery` is used when...FIXME
