@@ -1,8 +1,8 @@
 # SparkPlan &mdash; Physical Operators of Structured Query
 
-`SparkPlan` is an [abstraction](#contract) of [physical operators](#implementations) that can be [executed](#doExecute) (and generate `RDD[InternalRow]` that Spark can execute).
+`SparkPlan` is an [extension](#contract) of the [QueryPlan](../catalyst/QueryPlan.md) abstraction for [physical operators](#implementations) that can be [executed](#doExecute) (to generate `RDD[InternalRow]` that Spark can execute).
 
-`SparkPlan` is used to build a **physical query plan** (_query execution plan_).
+`SparkPlan` can build a **physical query plan** (_query execution plan_).
 
 `SparkPlan` is a recursive data structure in Spark SQL's [Catalyst tree manipulation framework](../catalyst/index.md) and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
 
@@ -36,6 +36,201 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
     q.queryExecution.sparkPlan
     ```
 
+`SparkPlan` assumes that concrete physical operators define [doExecute](#doExecute) (with optional [hooks](#hooks)).
+
+## Contract
+
+### <span id="doExecute"> doExecute
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of [internal binary rows](../spark-sql-InternalRow.md) (`RDD[InternalRow]`) and thus _execute_.
+
+Part of [execute](#execute)
+
+## Final Methods
+
+`SparkPlan` has the following `final` methods that prepare execution environment and pass calls to corresponding methods (that constitute [SparkPlan](#contract) abstraction).
+
+### <span id="execute"> execute
+
+```scala
+execute(): RDD[InternalRow]
+```
+
+"Executes" a physical operator (and its [children](../catalyst/TreeNode.md#children)) that triggers physical query planning and in the end generates an `RDD` of spark-sql-InternalRow.md[internal binary rows] (i.e. `RDD[InternalRow]`).
+
+Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
+
+[execute](#execute) is called when `QueryExecution` is requested for the [RDD](../QueryExecution.md#toRdd) that is Spark Core's physical execution plan (as a RDD lineage) that triggers query execution (i.e. physical planning, but not execution of the plan) and _could_ be considered execution of a structured query.
+
+The _could_ part above refers to the fact that the final execution of a structured query happens only when a RDD action is executed on the RDD of a structured query. And hence the need for Spark SQL's high-level Dataset API in which the Dataset operators simply execute a RDD action on the corresponding RDD. _Easy, isn't it?_
+
+Internally, `execute` first <<executeQuery, prepares the physical operator for execution>> and eventually requests it to <<doExecute, doExecute>>.
+
+!!! note
+    Executing `doExecute` in a named scope happens only after the operator is <<prepare, prepared for execution>> followed by <<waitForSubqueries, waiting for any subqueries to finish>>.
+
+### <span id="executeBroadcast"> executeBroadcast
+
+```scala
+executeBroadcast[T](): broadcast.Broadcast[T]
+```
+
+Calls [doExecuteBroadcast](#doExecuteBroadcast).
+
+### <span id="executeColumnar"> executeColumnar
+
+```scala
+executeColumnar(): RDD[ColumnarBatch]
+```
+
+`executeColumnar` [executeQuery](#executeQuery) with [doExecuteColumnar](#doExecuteColumnar).
+
+### <span id="executeQuery"> executeQuery
+
+```scala
+executeQuery[T](
+  query: => T): T
+```
+
+Executes the physical operator in a single RDD scope (all RDDs created during execution of the physical operator have the same scope).
+
+`executeQuery` executes the input `query` block after the following (in order):
+
+1. [Preparing for Execution](#prepare)
+1. [Waiting for Subqueries to Finish](#waitForSubqueries)
+
+`executeQuery` is used when:
+
+* `SparkPlan` is requested for the following:
+  * [execute](#execute) (the input `query` is [doExecute](#doExecute))
+  * [executeBroadcast](#executeBroadcast) (the input `query` is [doExecuteBroadcast](#doExecuteBroadcast))
+  * [executeColumnar](#executeColumnar) (the input `query` is [doExecuteColumnar()](#doExecuteColumnar()))
+* `CodegenSupport` is requested to [produce a Java source code](CodegenSupport.md#produce) of a physical operator (with the input `query` being [doProduce](#doProduce))
+* `QueryStageExec` is requested to [materialize](QueryStageExec.md#materialize) (with the input `query` being [doMaterialize](QueryStageExec.md##doMaterialize))
+
+### <span id="prepare"> prepare
+
+```scala
+prepare(): Unit
+```
+
+Prepares a physical operator for execution
+
+`prepare` is used mainly when a physical operator is requested to <<executeQuery, execute a structured query>>
+
+`prepare` is also used recursively for every [child](../catalyst/TreeNode.md#children) physical operator (down the physical plan) and when a physical operator is requested to <<prepareSubqueries, prepare subqueries>>.
+
+!!! note
+    `prepare` is idempotent, i.e. can be called multiple times with no change to the final result. It uses <<prepared, prepared>> internal flag to execute the physical operator once only.
+
+Internally, `prepare` calls <<doPrepare, doPrepare>> of its [children](../catalyst/TreeNode.md#children) before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
+
+## Extension Hooks
+
+### doExecuteBroadcast
+
+```scala
+doExecuteBroadcast[T](): broadcast.Broadcast[T]
+```
+
+`doExecuteBroadcast` reports an `UnsupportedOperationException` by default:
+
+```text
+[nodeName] does not implement doExecuteBroadcast
+```
+
+Part of [executeBroadcast](#executeBroadcast)
+
+`doExecuteBroadcast` is used when `RowToColumnarExec` and [InputAdapter](InputAdapter.md#doExecuteBroadcast) physical operators are requested to `doExecuteBroadcast`
+
+### <span id="doExecuteColumnar"> doExecuteColumnar
+
+```scala
+doExecuteColumnar(): RDD[ColumnarBatch]
+```
+
+`doExecuteColumnar` reports an `IllegalStateException` by default:
+
+```text
+Internal Error [class] has column support mismatch:
+[this]
+```
+
+Part of [executeColumnar](#executeColumnar)
+
+### <span id="doPrepare"> doPrepare
+
+```scala
+doPrepare(): Unit
+```
+
+`doPrepare` prepares the physical operator for execution
+
+Part of [prepare](#prepare)
+
+### <span id="requiredChildDistribution"> requiredChildDistribution
+
+```scala
+requiredChildDistribution: Seq[Distribution]
+```
+
+The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
+
+Defaults to a [UnspecifiedDistribution](../spark-sql-Distribution-UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
+
+Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
+
+### <span id="requiredChildOrdering"> requiredChildOrdering
+
+```scala
+requiredChildOrdering: Seq[Seq[SortOrder]]
+```
+
+Specifies required sort ordering for each partition requirement (from [child](../catalyst/TreeNode.md#children) operators)
+
+Defaults to no sort ordering for all of the physical operator's [child](../catalyst/TreeNode.md#children).
+
+Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
+
+## <span id="prepareSubqueries"> Preparing Subqueries
+
+```scala
+prepareSubqueries(): Unit
+```
+
+`prepareSubqueries`...FIXME
+
+Part of [prepare](#prepare)
+
+## <span id="waitForSubqueries"> Waiting for Subqueries to Finish
+
+```scala
+waitForSubqueries(): Unit
+```
+
+`waitForSubqueries` requests every [subquery expression](../expressions/ExecSubqueryExpression.md) (in [runningSubqueries](#runningSubqueries) registry) to [update](../expressions/ExecSubqueryExpression.md#updateResult).
+
+In the end, `waitForSubqueries` clears up the [runningSubqueries](#runningSubqueries) registry.
+
+`waitForSubqueries` is used when a physical operator is requested to [executeQuery](#executeQuery).
+
+## Implementations
+
+* [BaseSubqueryExec](BaseSubqueryExec.md)
+* [BinaryExecNode](BinaryExecNode.md)
+* [CodegenSupport](CodegenSupport.md)
+* [LeafExecNode](LeafExecNode.md)
+* [ObjectProducerExec](ObjectProducerExec.md)
+* SupportsV1Write
+* [UnaryExecNode](UnaryExecNode.md)
+* UnionExec
+* [V2CommandExec](V2CommandExec.md)
+* _others_
+
 ## Naming Convention (Exec Suffix)
 
 The naming convention of physical operators in Spark's source code is to have their names end with the **Exec** prefix, e.g. `DebugExec` or [LocalTableScanExec](LocalTableScanExec.md) that is however removed when the operator is displayed, e.g. in [web UI](../spark-sql-webui.md).
@@ -52,7 +247,8 @@ When <<execute, executed>>, `SparkPlan` <<executeQuery, executes the internal qu
 
 The result of <<execute, executing>> a `SparkPlan` is an `RDD` of [internal binary rows](../spark-sql-InternalRow.md) (`RDD[InternalRow]`).
 
-NOTE: Executing a structured query is simply a translation of the higher-level Dataset-based description to an RDD-based runtime representation that Spark will in the end execute (once an Dataset action is used).
+!!! note
+    Executing a structured query is simply a translation of the higher-level Dataset-based description to an RDD-based runtime representation that Spark will in the end execute (once an Dataset action is used).
 
 CAUTION: FIXME Picture between Spark SQL's Dataset => Spark Core's RDD
 
@@ -79,10 +275,6 @@ resetMetrics(): Unit
 `resetMetrics` takes <<metrics, metrics>> and request them to [reset](SQLMetric.md#reset).
 
 `resetMetrics` is used when...FIXME
-
-## prepareSubqueries
-
-CAUTION: FIXME
 
 ## executeToIterator
 
@@ -118,9 +310,16 @@ executeBroadcast[T](): broadcast.Broadcast[T]
 
 `executeBroadcast` returns the result of a structured query as a broadcast variable.
 
-Internally, `executeBroadcast` calls <<doExecuteBroadcast, doExecuteBroadcast>> inside <<executeQuery, executeQuery>>.
+Internally, `executeBroadcast` calls [doExecuteBroadcast](#doExecuteBroadcast) inside [executeQuery](#executeQuery).
 
-`executeBroadcast` is called in spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec], spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] and spark-sql-SparkPlan-ReusedExchangeExec.md[ReusedExchangeExec] physical operators.
+`executeBroadcast` is used when:
+
+* [SubqueryBroadcastExec](SubqueryBroadcastExec.md) physical operator is requested for [relationFuture](SubqueryBroadcastExec.md#relationFuture)
+* [QueryStageExec](QueryStageExec.md) physical operator is requested for [doExecuteBroadcast](QueryStageExec.md#doExecuteBroadcast)
+* [DebugExec](DebugExec.md) physical operator is requested for [doExecuteBroadcast](DebugExec.md#doExecuteBroadcast)
+* [ReusedExchangeExec](ReusedExchangeExec.md) physical operator is requested for [doExecuteBroadcast](ReusedExchangeExec.md#doExecuteBroadcast)
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is requested to [doExecute](BroadcastHashJoinExec.md#doExecute), [multipleOutputForOneInput](BroadcastHashJoinExec.md#multipleOutputForOneInput), [prepareBroadcast](BroadcastHashJoinExec.md#prepareBroadcast) and for [doExecuteBroadcast](BroadcastHashJoinExec.md#doExecuteBroadcast)
+* [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) physical operator is requested for [doExecuteBroadcast](BroadcastNestedLoopJoinExec.md#doExecuteBroadcast)
 
 ## <span id="metrics"> Performance Metrics
 
@@ -137,24 +336,30 @@ By default, `metrics` contains no `SQLMetrics` (i.e. `Map.empty`).
 ## <span id="executeTake"> Taking First N UnsafeRows
 
 ```scala
-executeTake(n: Int): Array[InternalRow]
+executeTake(
+  n: Int): Array[InternalRow]
 ```
 
-`executeTake` gives an array of up to `n` first spark-sql-InternalRow.md[internal rows].
+`executeTake` gives an array of up to `n` first [internal rows](../spark-sql-InternalRow.md).
 
 ![SparkPlan's executeTake takes 5 elements](../images/spark-sql-SparkPlan-executeTake.png)
 
-`executeTake` <<getByteArrayRdd, gets an RDD of byte array of `n` unsafe rows>> and scans the RDD partitions one by one until `n` is reached or all partitions were processed.
+`executeTake` [gets an RDD of byte array of `n` unsafe rows](#getByteArrayRdd) and scans the RDD partitions one by one until `n` is reached or all partitions were processed.
 
-`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by spark-sql-properties.md#spark.sql.limit.scaleUpFactor[spark.sql.limit.scaleUpFactor] property (but minimum twice as many).
+`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by [spark.sql.limit.scaleUpFactor](../spark-sql-properties.md#spark.sql.limit.scaleUpFactor) property (but minimum twice as many).
 
-NOTE: `executeTake` uses `SparkContext.runJob` to run a Spark job.
+!!! note
+    `executeTake` uses `SparkContext.runJob` to run a Spark job.
 
-In the end, `executeTake` <<decodeUnsafeRows, decodes the unsafe rows>>.
+In the end, `executeTake` [decodes the unsafe rows](#decodeUnsafeRows).
 
-NOTE: `executeTake` gives an empty collection when `n` is 0 (and no Spark job is executed).
+!!! note
+    `executeTake` gives an empty collection when `n` is 0 (and no Spark job is executed).
 
-NOTE: `executeTake` may take and decode more unsafe rows than really needed since all unsafe rows from a partition are read (if the partition is included in the scan).
+!!! note
+    `executeTake` may take and decode more unsafe rows than really needed since all unsafe rows from a partition are read (if the partition is included in the scan).
+
+### Example
 
 ```text
 import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
@@ -209,8 +414,8 @@ res38: Array[Long] = Array(4, 12, 7)
 
 `executeTake` is used when:
 
-* `CollectLimitExec` is requested to <<executeCollect, executeCollect>>
-* `AnalyzeColumnCommand` is spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[executed]
+* [CollectLimitExec](CollectLimitExec.md) physical operator is requested to [executeCollect](CollectLimitExec.md#executeCollect)
+* [AnalyzeColumnCommand](../logical-operators/AnalyzeColumnCommand.md) logical command is executed
 
 ## <span id="executeCollect"> Executing Physical Operator and Collecting Results
 
@@ -218,16 +423,16 @@ res38: Array[Long] = Array(4, 12, 7)
 executeCollect(): Array[InternalRow]
 ```
 
-`executeCollect` <<getByteArrayRdd, executes the physical operator and compresses partitions of UnsafeRows as byte arrays>> (that yields a `RDD[(Long, Array[Byte])]` and so no real Spark jobs may have been submitted).
+`executeCollect` [executes the physical operator and compresses partitions of UnsafeRows as byte arrays](#getByteArrayRdd) (that gives a `RDD[(Long, Array[Byte])]` and so no real Spark jobs may have been submitted).
 
-`executeCollect` runs a Spark job to `collect` the elements of the RDD and for every pair in the result (of a count and bytes per partition) <<decodeUnsafeRows, decodes the byte arrays back to UnsafeRows>> and stores the decoded arrays together as the final `Array[InternalRow]`.
+`executeCollect` runs a Spark job to `collect` the elements of the RDD and for every pair in the result (of a count and bytes per partition) [decodes the byte arrays back to UnsafeRows](#decodeUnsafeRows) and stores the decoded arrays together as the final `Array[InternalRow]`.
 
-NOTE: `executeCollect` runs a Spark job using Spark Core's `RDD.collect` operator.
+!!! note
+    `executeCollect` runs a Spark job using Spark Core's `RDD.collect` operator.
 
-NOTE: `executeCollect` returns `Array[InternalRow]`, i.e. keeps the internal representation of rows unchanged and does not convert rows to JVM types.
+!!! note "Array[InternalRow]"
+    `executeCollect` returns `Array[InternalRow]`, i.e. keeps the internal representation of rows unchanged and does not convert rows to JVM types.
 
-[NOTE]
-====
 `executeCollect` is used when:
 
 * `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (being a single spark-sql-LogicalPlan-Command.md[Command] or their `Union`)
@@ -241,7 +446,6 @@ NOTE: `executeCollect` returns `Array[InternalRow]`, i.e. keeps the internal rep
 * `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
 
 * `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
-====
 
 ## executeCollectPublic
 
@@ -264,17 +468,6 @@ newPredicate(
 `newPredicate`...FIXME
 
 `newPredicate` is used when...FIXME
-
-## Waiting for Subqueries to Finish
-
-<span id="waitForSubqueries">
-```scala
-waitForSubqueries(): Unit
-```
-
-`waitForSubqueries` requests every spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression] in <<runningSubqueries, runningSubqueries>> to spark-sql-Expression-ExecSubqueryExpression.md#updateResult[updateResult].
-
-`waitForSubqueries` is used exclusively when a physical operator is requested to <<executeQuery, prepare itself for query execution>> (when it is <<execute, executed>> or requested to <<executeBroadcast, executeBroadcast>>).
 
 ## <span id="outputPartitioning"> Output Data Partitioning Requirements
 
@@ -309,146 +502,6 @@ outputOrdering: Seq[SortOrder]
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
 
 * `FileFormatWriter` is requested to [write a query result](../spark-sql-FileFormatWriter.md#write)
-
-## Contract
-
-The `SparkPlan` abstraction assumes that concrete physical operators define [doExecute](#doExecute) method (with optiona [hooks](#hooks) like [doPrepare](#doPrepare)) which is executed when the physical operator is [executed](#execute).
-
-### <span id="doExecute"> doExecute
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of spark-sql-InternalRow.md[internal binary rows], i.e. `RDD[InternalRow]`, and thus _execute_.
-
-Used when...FIXME
-
-## Extension Hooks
-
-### doExecuteBroadcast
-
-By default reports a `UnsupportedOperationException`.
-
-```text
-[nodeName] does not implement doExecuteBroadcast
-```
-
-Executed exclusively as part of <<executeBroadcast, executeBroadcast>> to return the result of a structured query as a broadcast variable.
-
-### doPrepare
-
-Prepares a physical operator for execution
-
-Executed exclusively as part of [prepare](#prepare) and is supposed to set some state up before executing a query (e.g. [BroadcastExchangeExec](BroadcastExchangeExec.md#doPrepare) to broadcast a relation asynchronously or [SubqueryExec](SubqueryExec.md#doPrepare) to execute a child operator)
-
-### requiredChildDistribution
-
-```scala
-requiredChildDistribution: Seq[Distribution]
-```
-
-The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
-
-Defaults to a [UnspecifiedDistribution](../spark-sql-Distribution-UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
-
-Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
-
-### requiredChildOrdering
-
-```scala
-requiredChildOrdering: Seq[Seq[SortOrder]]
-```
-
-Specifies required sort ordering for each partition requirement (from [child](../catalyst/TreeNode.md#children) operators)
-
-Defaults to no sort ordering for all of the physical operator's [child](../catalyst/TreeNode.md#children).
-
-Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
-
-## Final Methods
-
-`SparkPlan` has the following `final` methods that prepare execution environment and pass calls to corresponding methods (that constitute [SparkPlan](#contract) abstraction).
-
-### execute
-
-```scala
-execute(): RDD[InternalRow]
-```
-
-"Executes" a physical operator (and its [children](../catalyst/TreeNode.md#children)) that triggers physical query planning and in the end generates an `RDD` of spark-sql-InternalRow.md[internal binary rows] (i.e. `RDD[InternalRow]`).
-
-Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
-
-[execute](#execute) is called when `QueryExecution` is requested for the [RDD](../QueryExecution.md#toRdd) that is Spark Core's physical execution plan (as a RDD lineage) that triggers query execution (i.e. physical planning, but not execution of the plan) and _could_ be considered execution of a structured query.
-
-The _could_ part above refers to the fact that the final execution of a structured query happens only when a RDD action is executed on the RDD of a structured query. And hence the need for Spark SQL's high-level Dataset API in which the Dataset operators simply execute a RDD action on the corresponding RDD. _Easy, isn't it?_
-
-Internally, `execute` first <<executeQuery, prepares the physical operator for execution>> and eventually requests it to <<doExecute, doExecute>>.
-
-NOTE: Executing `doExecute` in a named scope happens only after the operator is <<prepare, prepared for execution>> followed by <<waitForSubqueries, waiting for any subqueries to finish>>.
-
-### executeQuery
-
-```scala
-executeQuery[T](query: => T): T
-```
-
-Executes a physical operator in a single RDD scope, i.e. all RDDs created during execution of the physical operator have the same scope.
-
-`executeQuery` executes the input `query` after the following methods (in order):
-
-1. <<prepare, prepare>>
-2. <<waitForSubqueries, waitForSubqueries>>
-
-[NOTE]
-====
-`executeQuery` is used when:
-
-* `SparkPlan` is <<execute, executed>> (in which the input `query` is just <<doExecute, doExecute>>)
-* `SparkPlan` is requested to <<executeBroadcast, executeBroadcast>> (in which the input `query` is just <<doExecuteBroadcast, doExecuteBroadcast>>)
-* `CodegenSupport` is requested for the spark-sql-CodegenSupport.md#produce[Java source code] of a physical operator (in which the input `query` is <<doProduce, doProduce>>)
-====
-
-### prepare
-
-```scala
-prepare(): Unit
-```
-
-Prepares a physical operator for execution
-
-`prepare` is used mainly when a physical operator is requested to <<executeQuery, execute a structured query>>
-
-`prepare` is also used recursively for every [child](../catalyst/TreeNode.md#children) physical operator (down the physical plan) and when a physical operator is requested to <<prepareSubqueries, prepare subqueries>>.
-
-NOTE: `prepare` is idempotent, i.e. can be called multiple times with no change to the final result. It uses <<prepared, prepared>> internal flag to execute the physical operator once only.
-
-Internally, `prepare` calls <<doPrepare, doPrepare>> of its [children](../catalyst/TreeNode.md#children) before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
-
-### executeBroadcast
-
-```scala
-executeBroadcast[T](): broadcast.Broadcast[T]
-```
-
-Calls <<doExecuteBroadcast, doExecuteBroadcast>>
-
-## <span id="specialized-spark-plans"> Physical Query Operators
-
-### <span id="BinaryExecNode"> BinaryExecNode
-
-Binary physical operator with two child `left` and `right` physical operators
-
-### <span id="LeafExecNode"> LeafExecNode
-
-Leaf physical operator with no children
-
-By default, the catalyst/QueryPlan.md#producedAttributes[set of all attributes that are produced] is exactly the catalyst/QueryPlan.md#outputSet[set of attributes that are output].
-
-### <span id="UnaryExecNode"> UnaryExecNode
-
-Unary physical operator with one `child` physical operator
 
 ## Internal Properties
 

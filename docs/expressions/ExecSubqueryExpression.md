@@ -6,7 +6,7 @@
 
 ### updateResult
 
- <span id="updateResult">
+<span id="updateResult">
 ```scala
 updateResult(): Unit
 ```

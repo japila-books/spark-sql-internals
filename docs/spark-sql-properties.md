@@ -971,14 +971,6 @@ Default: `true`
 
 Use [SQLConf.replaceDatabricksSparkAvroEnabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) method to access the current value.
 
-| [[spark.sql.limit.scaleUpFactor]] *spark.sql.limit.scaleUpFactor*
-
-*(internal)* Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
-
-Default: `4`
-
-Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.
-
 | [[spark.sql.optimizer.inSetConversionThreshold]] *spark.sql.optimizer.inSetConversionThreshold*
 
 *(internal)* The threshold of set size for `InSet` conversion.
@@ -1348,3 +1340,11 @@ Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method t
 
 !!! important
     It is not guaranteed that all the rules to be excluded will eventually be excluded, as some rules are [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
+
+## <span id="spark.sql.limit.scaleUpFactor"> spark.sql.limit.scaleUpFactor
+
+**(internal)** Minimal increase rate in the number of partitions between attempts when executing `take` operator on a structured query. Higher values lead to more partitions read. Lower values might lead to longer execution times as more jobs will be run.
+
+Default: `4`
+
+Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.

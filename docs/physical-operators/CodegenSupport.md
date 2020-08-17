@@ -1,4 +1,4 @@
-# CodegenSupport -- Physical Operators with Java Code Generation
+# CodegenSupport Physical Operators
 
 `CodegenSupport` is the <<contract, contract>> of <<implementations, physical operators>> that want to support *Java code generation* and participate in the <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation (Whole-Stage CodeGen)>>.
 

@@ -457,13 +457,16 @@ nav:
       - SparkPlan: physical-operators/SparkPlan.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
       - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
+      - BinaryExecNode: physical-operators/BinaryExecNode.md
       - CodegenSupport: physical-operators/CodegenSupport.md
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
       - Exchange: physical-operators/Exchange.md
+      - LeafExecNode: physical-operators/LeafExecNode.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - QueryStageExec: physical-operators/QueryStageExec.md
+      - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - Projection:
         - physical-operators/Projection.md
@@ -531,6 +534,7 @@ nav:
         - physical-operators/SortMergeJoinExec.md
         - physical-operators/SortExec.md
         - physical-operators/SubqueryExec.md
+        - SubqueryBroadcastExec: physical-operators/SubqueryBroadcastExec.md
         - TakeOrderedAndProjectExec: physical-operators/TakeOrderedAndProjectExec.md
         - WindowExec:
           - physical-operators/WindowExec.md
