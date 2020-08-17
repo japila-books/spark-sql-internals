@@ -1376,6 +1376,10 @@
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BinaryExecNode/</loc>
+     <lastmod>2020-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CodegenSupport/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
@@ -1396,11 +1400,19 @@
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/LeafExecNode/</loc>
+     <lastmod>2020-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ObjectConsumerExec/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/QueryStageExec/</loc>
+     <lastmod>2020-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/UnaryExecNode/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1661,6 +1673,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryExec/</loc>
+     <lastmod>2020-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryBroadcastExec/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
