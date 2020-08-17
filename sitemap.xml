@@ -1024,6 +1024,10 @@
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/PlanExpression/</loc>
+     <lastmod>2020-08-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Unevaluable/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
@@ -1229,10 +1233,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ParseToTimestamp/</loc>
-     <lastmod>2020-08-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/PlanExpression/</loc>
      <lastmod>2020-08-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
