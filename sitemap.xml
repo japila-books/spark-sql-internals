@@ -140,15 +140,19 @@
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/RunnableCommand/</loc>
-     <lastmod>2020-08-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/DataWritingCommand/</loc>
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LeafNode/</loc>
+     <lastmod>2020-08-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ParsedStatement/</loc>
+     <lastmod>2020-08-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/RunnableCommand/</loc>
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -316,11 +320,11 @@
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LeafNode/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LocalRelation/</loc>
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LocalRelation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LogicalQueryStage/</loc>
      <lastmod>2020-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
