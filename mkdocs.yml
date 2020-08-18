@@ -617,6 +617,7 @@ nav:
         - PruneFilters: logical-optimizations/PruneFilters.md
         - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
         - PushDownPredicates: logical-optimizations/PushDownPredicates.md
+      - DemoteBroadcastHashJoin: logical-optimizations/DemoteBroadcastHashJoin.md
     - Execution Planning Strategies:
       - SparkStrategy: execution-planning-strategies/SparkStrategy.md
       - Aggregation: execution-planning-strategies/Aggregation.md

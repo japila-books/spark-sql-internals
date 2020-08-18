@@ -205,9 +205,9 @@ Internally, `reOptimize` requests the given [logical query plan](../logical-oper
 optimizer: RuleExecutor[LogicalPlan]
 ```
 
-`optimizer` is a [RuleExecutor](../catalyst/RuleExecutor.md) of rules to transform [logical query plans](../logical-operators/LogicalPlan.md).
+`optimizer` is a [RuleExecutor](../catalyst/RuleExecutor.md) to transform [logical query plans](../logical-operators/LogicalPlan.md).
 
-`optimizer` has got **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization only.
+`optimizer` has a single **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization only.
 
 `optimizer` is used when `AdaptiveSparkPlanExec` physical operator is requested to [re-optimize a logical query plan](#reOptimize).
 

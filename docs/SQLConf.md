@@ -563,3 +563,9 @@ Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) p
 [spark.sql.adaptive.forceApply](spark-sql-properties.md#spark.sql.adaptive.forceApply) configuration property
 
 Used when [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+
+## <span id="NON_EMPTY_PARTITION_RATIO_FOR_BROADCAST_JOIN"><span id="nonEmptyPartitionRatioForBroadcastJoin"> nonEmptyPartitionRatioForBroadcastJoin
+
+The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](spark-sql-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property
+
+Used when [DemoteBroadcastHashJoin](logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed

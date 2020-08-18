@@ -213,11 +213,14 @@ Since: `3.0.0`
 ## <span id="spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin"> spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin
 
 **(internal)** The relation with a non-empty partition ratio lower than this config will not be considered as the build side of a broadcast-hash join in adaptive execution regardless of its size.
+
 This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`.
 
 Default: `0.2`
 
 Since: `3.0.0`
+
+Use [SQLConf.nonEmptyPartitionRatioForBroadcastJoin](SQLConf.md#nonEmptyPartitionRatioForBroadcastJoin) method to access the current value.
 
 ## <span id="spark.sql.orc.mergeSchema"> spark.sql.orc.mergeSchema
 
