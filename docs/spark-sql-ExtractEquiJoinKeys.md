@@ -1,4 +1,4 @@
-# ExtractEquiJoinKeys -- Scala Extractor for Destructuring Join Logical Operators
+# ExtractEquiJoinKeys &mdash; Scala Extractor for Destructuring Join Logical Operators
 
 `ExtractEquiJoinKeys` is a Scala extractor to <<unapply, destructure a Join logical operator>> into a tuple with the following elements:
 
