@@ -1,6 +1,4 @@
-title: LeafNode
-
-# LeafNode -- Base Logical Operator with No Child Operators and Optional Statistics
+# LeafNode &mdash; Base Logical Operator with No Child Operators and Optional Statistics
 
 `LeafNode` is the base of <<extensions, logical operators>> that have no [child](../catalyst/TreeNode.md#children) operators.
 

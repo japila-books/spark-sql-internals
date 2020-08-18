@@ -114,9 +114,10 @@ nav:
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - Command: logical-operators/Command.md
-      - RunnableCommand: logical-operators/RunnableCommand.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
+      - LeafNode: logical-operators/LeafNode.md
       - ParsedStatement: logical-operators/ParsedStatement.md
+      - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
       - Concrete Operators:
@@ -159,8 +160,8 @@ nav:
         - logical-operators/InsertIntoTable.md
         - logical-operators/Intersect.md
         - logical-operators/Join.md
-        - logical-operators/LeafNode.md
         - logical-operators/LocalRelation.md
+        - LogicalQueryStage: logical-operators/LogicalQueryStage.md
         - logical-operators/LogicalRDD.md
         - logical-operators/LogicalRelation.md
         - MergeIntoTable: logical-operators/MergeIntoTable.md

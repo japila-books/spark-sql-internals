@@ -75,15 +75,27 @@ generateTreeString(
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
 
-## <span id="computeStats"> computeStats
+## <span id="resultOption"> resultOption Internal Registry
+
+```scala
+resultOption: Option[Any] = None
+```
+
+`resultOption`...FIXME
+
+## <span id="computeStats"> Computing Statistics
 
 ```scala
 computeStats(): Option[Statistics]
 ```
 
-`computeStats`...FIXME
+`computeStats` uses the [resultOption](#resultOption) to access the underlying [ReusedExchangeExec](ReusedExchangeExec.md) or [Exchange](Exchange.md) physical operators.
 
-`computeStats` is used when...FIXME
+If available, `computeStats` creates [Statistics](../spark-sql-Statistics.md) with the [sizeInBytes](../spark-sql-Statistics.md#sizeInBytes) as the **dataSize** [performance metric](SparkPlan.md#metrics) of the physical operator.
+
+Otherwise, `computeStats` returns no statistics.
+
+`computeStats` is used when [LogicalQueryStage](../logical-operators/LogicalQueryStage.md) logical operator is requested for the [stats](../logical-operators/LogicalQueryStage.md#computeStats).
 
 ## <span id="materialize"> Materializing Query Stage
 

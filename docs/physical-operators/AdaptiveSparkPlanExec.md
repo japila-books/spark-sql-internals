@@ -279,3 +279,15 @@ isFinalPlan: Boolean = false
 `isFinalPlan` is disabled by default and turned on at the end of [getFinalPhysicalPlan](#getFinalPhysicalPlan).
 
 `isFinalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested for [stringArgs](#stringArgs).
+
+## <span id="replaceWithQueryStagesInLogicalPlan"> replaceWithQueryStagesInLogicalPlan Internal Method
+
+```scala
+replaceWithQueryStagesInLogicalPlan(
+  plan: LogicalPlan,
+  stagesToReplace: Seq[QueryStageExec]): LogicalPlan
+```
+
+`replaceWithQueryStagesInLogicalPlan`...FIXME
+
+`replaceWithQueryStagesInLogicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested for a [final physical plan](#getFinalPhysicalPlan).
