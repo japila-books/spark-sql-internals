@@ -555,12 +555,12 @@ nav:
       - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
       - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
       - ResolveAliases: logical-analysis-rules/ResolveAliases.md
-      - ResolveBroadcastHints: logical-analysis-rules/ResolveBroadcastHints.md
       - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
       - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
       - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
       - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
       - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md
+      - ResolveJoinStrategyHints: logical-analysis-rules/ResolveJoinStrategyHints.md
       - ResolveMissingReferences: logical-analysis-rules/ResolveMissingReferences.md
       - ResolveOrdinalInOrderByAndGroupBy: logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md
       - ResolveOutputRelation: logical-analysis-rules/ResolveOutputRelation.md
@@ -660,6 +660,7 @@ nav:
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
+    - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md
@@ -872,4 +873,5 @@ nav:
     - BufferedRowIterator: spark-sql-BufferedRowIterator.md
     - CompressionCodecs: spark-sql-CompressionCodecs.md
     - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
+    - JoinStrategyHint: JoinStrategyHint.md
     - SQLContext: spark-sql-SQLContext.md

@@ -35,11 +35,11 @@ Default: empty
 
 ## Batches
 
-### Hints
+### <span id="Hints"> Hints
 
 Rules:
 
-* ResolveJoinStrategyHints
+* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md)
 * [ResolveCoalesceHints](logical-analysis-rules/ResolveCoalesceHints.md)
 
 Strategy: [fixedPoint](#fixedPoint)

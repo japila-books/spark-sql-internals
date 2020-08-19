@@ -7,7 +7,7 @@
 
 * [Dataset.broadcast](spark-sql-functions.md#broadcast) function is used
 
-* [ResolveBroadcastHints](logical-analysis-rules/ResolveBroadcastHints.md) logical resolution rule is executed (and resolves spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operators)
+* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is executed
 
 * spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and spark-sql-Statistics.md#creating-instance[Statistics] are created
 

@@ -42,7 +42,7 @@ When created `UnresolvedHint` takes:
 ====
 There are the following logical rules that [Logical Analyzer](../Analyzer.md) uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
 
-* [ResolveBroadcastHints](../logical-analysis-rules/ResolveBroadcastHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
 
 * [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
@@ -51,8 +51,7 @@ There are the following logical rules that [Logical Analyzer](../Analyzer.md) us
 The order of executing the above rules matters.
 ====
 
-[source, scala]
-----
+```text
 // Let's hint the query twice
 // The order of hints matters as every hint operator executes Spark analyzer
 // That will resolve all but the last hint
@@ -73,14 +72,14 @@ import org.apache.spark.sql.internal.SQLConf
 object HintResolver extends RuleExecutor[LogicalPlan] {
   lazy val batches =
     Batch("Hints", FixedPoint(maxIterations = 100),
-      new ResolveHints.ResolveBroadcastHints(SQLConf.get),
+      new ResolveHints.ResolveJoinStrategyHints(SQLConf.get),
       ResolveHints.RemoveAllHints) :: Nil
 }
 val resolvedPlan = HintResolver.execute(plan)
 scala> println(resolvedPlan.numberedTreeString)
 00 ResolvedHint (broadcast)
 01 +- Range (0, 100, step=1, splits=Some(8))
-----
+```
 
 [[output]]
 `UnresolvedHint` uses the <<child, child>> operator's output schema for yours.
