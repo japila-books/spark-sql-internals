@@ -1,6 +1,6 @@
 # CollectLimitExec Physical Operator
 
-`CollectLimitExec` is a [unary physical operator](LimitExec.md) that represents `GlobalLimit` unary logical operator at execution time.
+`CollectLimitExec` is a [unary physical operator](LimitExec.md) that represents [GlobalLimit](../logical-operators/GlobalLimit.md) unary logical operator at execution time.
 
 ## Creating Instance
 
@@ -9,7 +9,7 @@
 * <span id="limit"> Number of rows (to collect from the [child](#child) operator)
 * <span id="child"> [Physical operator](SparkPlan.md)
 
-`CollectLimitExec` is created when [SpecialLimits](../execution-planning-strategies/SpecialLimits.md) execution planning strategy is executed (and plans a `GlobalLimit` unary logical operator).
+`CollectLimitExec` is created when [SpecialLimits](../execution-planning-strategies/SpecialLimits.md) execution planning strategy is executed (and plans a [GlobalLimit](../logical-operators/GlobalLimit.md) unary logical operator).
 
 ## <span id="doExecute"> Executing Operator
 

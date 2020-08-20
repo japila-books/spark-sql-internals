@@ -395,6 +395,16 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 * `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../expressions/In.md) predicate expression
 
+### <span id="withQueryResultClauses"> withQueryResultClauses
+
+!!! important FIXME
+    This section needs your help
+
+### <span id="withSample"> withSample
+
+!!! important FIXME
+    This section needs your help
+
 ### withWindows
 
 Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../spark-sql-functions-windows.md) (given `WINDOW` definitions).

@@ -60,7 +60,7 @@
 | spark-sql-SparkPlan-LocalTableScanExec.md[LocalTableScanExec]
 
 | `LocalLimit` | `LocalLimitExec`
-| `GlobalLimit` | `GlobalLimitExec`
+| [GlobalLimit](../logical-operators/GlobalLimit.md) | `GlobalLimitExec`
 | `Union` | `UnionExec`
 
 | [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]

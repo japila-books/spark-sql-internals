@@ -60,7 +60,7 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]
 | `visitGenerate`
 
-| [[GlobalLimit]] `GlobalLimit`
+| [[GlobalLimit]] [GlobalLimit](logical-operators/GlobalLimit.md)
 | `visitGlobalLimit`
 
 | [[Intersect]] `Intersect`
