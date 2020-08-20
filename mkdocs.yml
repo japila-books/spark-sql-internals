@@ -465,6 +465,7 @@ nav:
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
       - Exchange: physical-operators/Exchange.md
       - LeafExecNode: physical-operators/LeafExecNode.md
+      - LimitExec: physical-operators/LimitExec.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - QueryStageExec: physical-operators/QueryStageExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md

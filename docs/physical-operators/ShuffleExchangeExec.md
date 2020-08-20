@@ -119,7 +119,7 @@ Internally, `prepareShuffleDependency`...FIXME
 
 `prepareShuffleDependency` is used when:
 
-* `CollectLimitExec`, <<doExecute, ShuffleExchangeExec>> and TakeOrderedAndProjectExec physical operators are executed
+* [CollectLimitExec](CollectLimitExec.md), <<doExecute, ShuffleExchangeExec>> and TakeOrderedAndProjectExec physical operators are executed
 
 === [[prepareShuffleDependency-helper]] `prepareShuffleDependency` Helper Method
 
@@ -134,7 +134,7 @@ prepareShuffleDependency(
 
 `prepareShuffleDependency` creates a spark-rdd-ShuffleDependency.md[ShuffleDependency] dependency.
 
-NOTE: `prepareShuffleDependency` is used when `ShuffleExchangeExec` <<prepareShuffleDependency, prepares a `ShuffleDependency`>> (as part of...FIXME), `CollectLimitExec` and `TakeOrderedAndProjectExec` physical operators are executed.
+NOTE: `prepareShuffleDependency` is used when `ShuffleExchangeExec` <<prepareShuffleDependency, prepares a `ShuffleDependency`>> (as part of...FIXME), [CollectLimitExec](CollectLimitExec.md) and `TakeOrderedAndProjectExec` physical operators are executed.
 
 === [[doPrepare]] Preparing Physical Operator for Execution -- `doPrepare` Method
 
