@@ -209,7 +209,7 @@ NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<appl
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
+`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
 
 `apply` uses spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
 

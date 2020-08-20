@@ -30,8 +30,8 @@ scala> println(physicalPlan.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
-
 `apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] to a spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] logical operator.
 
 In the end, `apply` [pruneFilterProject](../SparkPlanner.md#pruneFilterProject) with a new spark-sql-SparkPlan-InMemoryTableScanExec.md#creating-instance[InMemoryTableScanExec] physical operator.
+
+`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.

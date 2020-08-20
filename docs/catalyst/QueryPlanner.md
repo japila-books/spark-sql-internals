@@ -1,4 +1,4 @@
-# QueryPlanner -- Converting Logical Plan to Physical Trees
+# QueryPlanner
 
 `QueryPlanner` <<plan, plans a logical plan for execution>>, i.e. converts a spark-sql-LogicalPlan.md[logical plan] to one or more SparkPlan.md[physical plans] using <<strategies, strategies>>.
 
@@ -26,7 +26,7 @@ abstract class QueryPlanner[PhysicalPlan <: TreeNode[PhysicalPlan]] {
 | Description
 
 | [[strategies]] `strategies`
-| Collection of catalyst/GenericStrategy.md[GenericStrategy] planning strategies.
+| [GenericStrategy](GenericStrategy.md) planning strategies
 
 Used exclusively as an extension point in <<plan, plan>>.
 

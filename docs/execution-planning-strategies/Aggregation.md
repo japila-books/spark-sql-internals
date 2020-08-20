@@ -43,8 +43,6 @@ scala> println(physicalPlan.head.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
-
 `apply` requests `PhysicalAggregation` extractor for spark-sql-PhysicalAggregation.md#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator found.
 
 Internally, `apply` requests `PhysicalAggregation` to spark-sql-PhysicalAggregation.md#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
@@ -54,3 +52,5 @@ Internally, `apply` requests `PhysicalAggregation` to spark-sql-PhysicalAggregat
 * [AggUtils.planAggregateWithoutDistinct](../spark-sql-AggUtils.md#planAggregateWithoutDistinct) when no distinct aggregate expression is used
 
 * [AggUtils.planAggregateWithOneDistinct](../spark-sql-AggUtils.md#planAggregateWithOneDistinct) when at least one distinct aggregate expression is used.
+
+`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.

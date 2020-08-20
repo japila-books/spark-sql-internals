@@ -49,9 +49,9 @@ apply(
   plan: LogicalPlan): Seq[SparkPlan]
 ```
 
-NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
-
 `apply` branches off per the given <<spark-sql-LogicalPlan.md#, logical operator>>.
+
+`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
 
 ==== [[apply-DataSourceV2Relation]] DataSourceV2Relation Logical Operator
 

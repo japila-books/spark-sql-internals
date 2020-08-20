@@ -105,8 +105,6 @@ collectProjectsAndFilters(plan: LogicalPlan):
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-NOTE: `apply` is part of catalyst/GenericStrategy.md#apply[GenericStrategy Contract] to generate a collection of SparkPlan.md[SparkPlans] for a given spark-sql-LogicalPlan.md[logical plan].
-
 `apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
 `apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] (possibly as a child of spark-sql-LogicalPlan-Project.md[Project] and spark-sql-LogicalPlan-Filter.md[Filter] logical operators).
@@ -140,3 +138,5 @@ Output Data Schema: [outputSchema]
 If there are any `afterScanFilter` predicate expressions, `apply` creates a <<spark-sql-SparkPlan-FilterExec.md#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
 
 If the <<spark-sql-SparkPlan-FilterExec.md#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a spark-sql-SparkPlan-ProjectExec.md#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
+
+`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
