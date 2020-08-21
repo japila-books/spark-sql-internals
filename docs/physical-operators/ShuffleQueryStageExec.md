@@ -26,3 +26,22 @@ newReuseInstance(
 `newReuseInstance` is...FIXME
 
 `newReuseInstance` is part of the [QueryStageExec](QueryStageExec.md) abstraction.
+
+## <span id="mapStats"> MapOutputStatistics
+
+```scala
+mapStats: Option[MapOutputStatistics]
+```
+
+`mapStats` takes a `MapOutputStatistics` from the [resultOption](QueryStageExec.md#resultOption).
+
+`mapStats` throws an `AssertionError` when the [resultOption](QueryStageExec.md#resultOption) is not available:
+
+```text
+assertion failed: ShuffleQueryStageExec should already be ready
+```
+
+`mapStats` is used when:
+
+* [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) adaptive physical optimizations are executed

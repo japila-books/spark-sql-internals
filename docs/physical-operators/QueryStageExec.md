@@ -81,7 +81,21 @@ generateTreeString(
 resultOption: Option[Any] = None
 ```
 
-`resultOption`...FIXME
+`resultOption` is the result of [materializing](#materialize) the `QueryStageExec` operator:
+
+* [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) for [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
+* [Broadcast variable](BroadcastQueryStageExec.md#materializeWithTimeout) for [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
+
+`resultOption` is `None` by default.
+
+`resultOption` is set a value when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical query plan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
+
+`resultOption` is used when:
+
+* `AdaptiveSparkPlanExec` operator is requested to [createQueryStages](AdaptiveSparkPlanExec.md#createQueryStages) (for a `QueryStageExec`)
+* `QueryStageExec` operator is requested to [compute statistics](#computeStats)
+* `ShuffleQueryStageExec` operator is requested for [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats)
+* [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed
 
 ## <span id="computeStats"> Computing Statistics
 

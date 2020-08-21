@@ -59,7 +59,7 @@ executeTake(
 
 `executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
 
-## <span id="getFinalPhysicalPlan"> getFinalPhysicalPlan
+## <span id="getFinalPhysicalPlan"> Final Physical Query Plan
 
 ```scala
 getFinalPhysicalPlan(): SparkPlan
