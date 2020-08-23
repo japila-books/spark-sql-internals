@@ -466,19 +466,10 @@ nav:
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
-      - Distribution Specifications:
-        - Distribution: Distribution.md
-        - AllTuples: AllTuples.md
-        - BroadcastDistribution: BroadcastDistribution.md
-        - ClusteredDistribution: ClusteredDistribution.md
-        - HashClusteredDistribution: HashClusteredDistribution.md
-        - OrderedDistribution: OrderedDistribution.md
-        - UnspecifiedDistribution: UnspecifiedDistribution.md
       - Exchange: physical-operators/Exchange.md
       - LeafExecNode: physical-operators/LeafExecNode.md
       - LimitExec: physical-operators/LimitExec.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
-      - Partitioning: Partitioning.md
       - QueryStageExec: physical-operators/QueryStageExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
@@ -489,7 +480,17 @@ nav:
         - physical-operators/GenerateMutableProjection.md
         - physical-operators/InterpretedProjection.md
         - physical-operators/CodeGeneratorWithInterpretedFallback.md
-      - physical-operators/SQLMetric.md
+      - SQLMetric: physical-operators/SQLMetric.md
+      - Distribution and Partitioning:
+        - Distribution: physical-operators/Distribution.md
+        - Partitioning: physical-operators/Partitioning.md
+        - Distribution Specifications:
+          - AllTuples: physical-operators/AllTuples.md
+          - BroadcastDistribution: physical-operators/BroadcastDistribution.md
+          - ClusteredDistribution: physical-operators/ClusteredDistribution.md
+          - HashClusteredDistribution: physical-operators/HashClusteredDistribution.md
+          - OrderedDistribution: physical-operators/OrderedDistribution.md
+          - UnspecifiedDistribution: physical-operators/UnspecifiedDistribution.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AlterTableExec: physical-operators/AlterTableExec.md
