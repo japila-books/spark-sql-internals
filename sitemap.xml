@@ -1256,6 +1256,10 @@
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RangePartitioning/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RankLike/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
@@ -1408,6 +1412,34 @@
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Distribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/AllTuples/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/BroadcastDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ClusteredDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/HashClusteredDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/OrderedDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/UnspecifiedDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Exchange/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
@@ -1421,6 +1453,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ObjectConsumerExec/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Partitioning/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2701,38 +2737,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ProjectEstimation/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SparkPlan-Partitioning/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-AllTuples/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-BroadcastDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-ClusteredDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-HashClusteredDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-OrderedDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Distribution-UnspecifiedDistribution/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
