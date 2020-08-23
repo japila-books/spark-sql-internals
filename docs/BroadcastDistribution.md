@@ -1,7 +1,7 @@
 # BroadcastDistribution
 
 [[requiredNumPartitions]]
-`BroadcastDistribution` is a spark-sql-Distribution.md[Distribution] that indicates to use one partition only and...FIXME.
+`BroadcastDistribution` is a Distribution.md[Distribution] that indicates to use one partition only and...FIXME.
 
 `BroadcastDistribution` is <<creating-instance, created>> when:
 
@@ -22,6 +22,6 @@ NOTE: `BroadcastDistribution` is converted to a spark-sql-SparkPlan-BroadcastExc
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
-
 `createPartitioning`...FIXME
+
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

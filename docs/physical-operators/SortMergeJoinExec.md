@@ -137,7 +137,7 @@ The SparkPlan.md#outputPartitioning[outputPartitioning] of a `SortMergeJoinExec`
 The SparkPlan.md#outputOrdering[outputOrdering] of a `SortMergeJoinExec` is...FIXME
 
 [[requiredChildDistribution]]
-The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistributions] of <<leftKeys, left>> and <<rightKeys, right>> join keys.
+The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are [HashClusteredDistributions](../HashClusteredDistribution.md) of <<leftKeys, left>> and <<rightKeys, right>> join keys.
 
 .SortMergeJoinExec's Required Child Output Distributions
 [cols="1,1",options="header",width="100%"]
@@ -145,8 +145,8 @@ The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the inp
 | Left Child
 | Right Child
 
-| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
-| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
+| [HashClusteredDistribution](../HashClusteredDistribution.md) (per <<leftKeys, left join key expressions>>)
+| [HashClusteredDistribution](../HashClusteredDistribution.md) (per <<rightKeys, right join key expressions>>)
 |===
 
 [[requiredChildOrdering]]

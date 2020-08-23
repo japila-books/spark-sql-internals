@@ -47,7 +47,7 @@ scala> q.explain
 image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align="center"]
 
 [[outputPartitioning]]
-`BroadcastExchangeExec` uses spark-sql-SparkPlan-Partitioning.md#BroadcastPartitioning[BroadcastPartitioning] partitioning scheme (with the input <<mode, BroadcastMode>>).
+`BroadcastExchangeExec` uses [BroadcastPartitioning](../Partitioning.md#BroadcastPartitioning) partitioning scheme (with the input <<mode, BroadcastMode>>).
 
 === [[doExecuteBroadcast]] Waiting Until Relation Has Been Broadcast -- `doExecuteBroadcast` Method
 

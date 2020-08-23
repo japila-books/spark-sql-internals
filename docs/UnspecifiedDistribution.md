@@ -1,9 +1,9 @@
 # UnspecifiedDistribution
 
-`UnspecifiedDistribution` is a spark-sql-Distribution.md[Distribution] that...FIXME
+`UnspecifiedDistribution` is a Distribution.md[Distribution] that...FIXME
 
 [[requiredNumPartitions]]
-`UnspecifiedDistribution` specifies `None` for the spark-sql-Distribution.md#requiredNumPartitions[required number of partitions].
+`UnspecifiedDistribution` specifies `None` for the Distribution.md#requiredNumPartitions[required number of partitions].
 
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
@@ -14,6 +14,6 @@ NOTE: `None` for the required number of partitions indicates to use any number o
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
-
 `createPartitioning`...FIXME
+
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

@@ -1,9 +1,9 @@
 # HashClusteredDistribution
 
-`HashClusteredDistribution` is a spark-sql-Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<expressions, hash expressions>> and a requested number of partitions.
+`HashClusteredDistribution` is a Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<expressions, hash expressions>> and a requested number of partitions.
 
 [[requiredNumPartitions]]
-`HashClusteredDistribution` specifies `None` for the spark-sql-Distribution.md#requiredNumPartitions[required number of partitions].
+`HashClusteredDistribution` specifies `None` for the Distribution.md#requiredNumPartitions[required number of partitions].
 
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
@@ -28,6 +28,6 @@ createPartitioning(
   numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
-
 `createPartitioning` creates a `HashPartitioning` for the <<expressions, hash expressions>> and the input `numPartitions`.
+
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

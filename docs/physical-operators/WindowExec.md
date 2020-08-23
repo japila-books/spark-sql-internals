@@ -191,9 +191,9 @@ root
 [[requiredChildDistribution]]
 The <<SparkPlan.md#requiredChildDistribution, required child output distribution>> of a `WindowExec` operator is one of the following:
 
-* <<spark-sql-Distribution-AllTuples.md#, AllTuples>> when the <<partitionSpec, window partition specification expressions>> is empty
+* [AllTuples](../AllTuples.md) when the <<partitionSpec, window partition specification expressions>> is empty
 
-* <<spark-sql-Distribution-ClusteredDistribution.md#, ClusteredDistribution>> (with the <<partitionSpec, window partition specification expressions>>) with the <<partitionSpec, partition specification>> specified
+* [ClusteredDistribution](../ClusteredDistribution.md) (with the <<partitionSpec, window partition specification expressions>>) with the <<partitionSpec, partition specification>> specified
 
 If no window partition specification is specified, `WindowExec` prints out the following WARN message to the logs:
 

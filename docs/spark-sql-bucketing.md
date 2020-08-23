@@ -188,7 +188,7 @@ There are however requirements that have to be met before [SparkOptimizer](Spark
 
 . The number of partitions on both sides of a join has to be exactly the same.
 
-. Both join operators have to use spark-sql-SparkPlan-Partitioning.md#HashPartitioning[HashPartitioning] partitioning scheme.
+. Both join operators have to use [HashPartitioning](Partitioning.md#HashPartitioning) partitioning scheme.
 
 It is acceptable to use bucketing for one side of a join.
 

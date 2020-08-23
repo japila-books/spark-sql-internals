@@ -92,10 +92,10 @@ Exchange hashpartitioning((id#10L % 2), 2)
 * [[numPartitions]] target number of partitions
 
 !!! note
-    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `Repartition` to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] (with spark-sql-SparkPlan-Partitioning.md#RoundRobinPartitioning[RoundRobinPartitioning] partitioning scheme) or spark-sql-SparkPlan-CoalesceExec.md[CoalesceExec] physical operators per shuffle -- enabled or not, respectively.
+    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `Repartition` to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] (with [RoundRobinPartitioning](../Partitioning.md#RoundRobinPartitioning) partitioning scheme) or spark-sql-SparkPlan-CoalesceExec.md[CoalesceExec] physical operators per shuffle -- enabled or not, respectively.
 
 !!! note
-    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `RepartitionByExpression` to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operator with spark-sql-SparkPlan-Partitioning.md#HashPartitioning[HashPartitioning] partitioning scheme.
+    [BasicOperators](../execution-planning-strategies/BasicOperators.md) strategy resolves `RepartitionByExpression` to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operator with [HashPartitioning](../Partitioning.md#HashPartitioning) partitioning scheme.
 
 === [[optimizations]] Repartition Operation Optimizations
 

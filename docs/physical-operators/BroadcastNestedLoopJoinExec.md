@@ -62,12 +62,12 @@ image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[
 | Right Child
 
 | BuildLeft
-| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
-| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
+| [BroadcastDistribution](../BroadcastDistribution.md) (uses `IdentityBroadcastMode` broadcast mode)
+| [UnspecifiedDistribution](../UnspecifiedDistribution.md)
 
 | BuildRight
-| spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
-| spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution] (uses `IdentityBroadcastMode` broadcast mode)
+| [UnspecifiedDistribution](../UnspecifiedDistribution.md)
+| [BroadcastDistribution](../BroadcastDistribution.md) (uses `IdentityBroadcastMode` broadcast mode)
 |===
 
 === [[creating-instance]] Creating BroadcastNestedLoopJoinExec Instance

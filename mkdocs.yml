@@ -426,6 +426,7 @@ nav:
         - ParseToDate: expressions/ParseToDate.md
         - ParseToTimestamp: expressions/ParseToTimestamp.md
         - PrettyAttribute: expressions/PrettyAttribute.md
+        - RangePartitioning: expressions/RangePartitioning.md
         - RankLike: expressions/RankLike.md
         - ResolvedStar: expressions/ResolvedStar.md
         - RowNumberLike: expressions/RowNumberLike.md
@@ -465,10 +466,19 @@ nav:
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
+      - Distribution Specifications:
+        - Distribution: Distribution.md
+        - AllTuples: AllTuples.md
+        - BroadcastDistribution: BroadcastDistribution.md
+        - ClusteredDistribution: ClusteredDistribution.md
+        - HashClusteredDistribution: HashClusteredDistribution.md
+        - OrderedDistribution: OrderedDistribution.md
+        - UnspecifiedDistribution: UnspecifiedDistribution.md
       - Exchange: physical-operators/Exchange.md
       - LeafExecNode: physical-operators/LeafExecNode.md
       - LimitExec: physical-operators/LimitExec.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - Partitioning: Partitioning.md
       - QueryStageExec: physical-operators/QueryStageExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
@@ -833,16 +843,6 @@ nav:
         - spark-sql-FilterEstimation.md
         - spark-sql-JoinEstimation.md
         - spark-sql-ProjectEstimation.md
-    - Partitioning:
-      - spark-sql-SparkPlan-Partitioning.md
-    - Distribution:
-      - spark-sql-Distribution.md
-      - spark-sql-Distribution-AllTuples.md
-      - spark-sql-Distribution-BroadcastDistribution.md
-      - spark-sql-Distribution-ClusteredDistribution.md
-      - spark-sql-Distribution-HashClusteredDistribution.md
-      - spark-sql-Distribution-OrderedDistribution.md
-      - spark-sql-Distribution-UnspecifiedDistribution.md
     - ShuffledRowRDD: ShuffledRowRDD.md
     - spark-sql-UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md

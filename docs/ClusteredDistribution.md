@@ -1,6 +1,6 @@
 # ClusteredDistribution
 
-`ClusteredDistribution` is a spark-sql-Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
+`ClusteredDistribution` is a Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
 
 `ClusteredDistribution` requires that the <<clustering, clustering expressions>> should not be empty (i.e. `Nil`).
 
@@ -27,8 +27,6 @@
 createPartitioning(numPartitions: Int): Partitioning
 ----
 
-NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioning[Distribution Contract] to create a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
-
 `createPartitioning` creates a `HashPartitioning` for the <<clustering, clustering expressions>> and the input `numPartitions`.
 
 `createPartitioning` reports an `AssertionError` when the <<requiredNumPartitions, number of partitions>> is not the input `numPartitions`.
@@ -37,6 +35,8 @@ NOTE: `createPartitioning` is part of spark-sql-Distribution.md#createPartitioni
 ```
 This ClusteredDistribution requires [requiredNumPartitions] partitions, but the actual number of partitions is [numPartitions].
 ```
+
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.
 
 === [[creating-instance]] Creating ClusteredDistribution Instance
 

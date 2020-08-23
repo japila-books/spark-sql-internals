@@ -1,6 +1,4 @@
-title: Distribution
-
-# Distribution -- Data Distribution Across Partitions
+# Distribution &mdash; Data Distribution Across Partitions
 
 `Distribution` is the <<contract, contract>> of...FIXME
 
@@ -31,33 +29,7 @@ Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirem
 NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
 
 | [[createPartitioning]] `createPartitioning`
-| Creates a spark-sql-SparkPlan-Partitioning.md[Partitioning] for a given number of partitions.
+| Creates a [Partitioning](Partitioning.md) for a given number of partitions.
 
 Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (and creates a spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operator with a required `Partitioning`).
-|===
-
-[[implementations]]
-.Distributions
-[cols="1,2",options="header",width="100%"]
-|===
-| Distribution
-| Description
-
-| [[AllTuples]] spark-sql-Distribution-AllTuples.md[AllTuples]
-|
-
-| [[BroadcastDistribution]] spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution]
-|
-
-| [[ClusteredDistribution]] spark-sql-Distribution-ClusteredDistribution.md[ClusteredDistribution]
-|
-
-| [[HashClusteredDistribution]] spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution]
-|
-
-| [[OrderedDistribution]] spark-sql-Distribution-OrderedDistribution.md[OrderedDistribution]
-|
-
-| [[UnspecifiedDistribution]] spark-sql-Distribution-UnspecifiedDistribution.md[UnspecifiedDistribution]
-|
 |===

@@ -85,7 +85,7 @@ Consult https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-
 | <<spark-sql-SupportsPushDownRequiredColumns.md#, SupportsPushDownRequiredColumns>>
 | [[SupportsPushDownRequiredColumns]] `DataSourceReaders` that can push down required columns to the data source and only read these columns during scan to reduce the size of the data to be read
 
-| <<spark-sql-SupportsReportPartitioning.md#, SupportsReportPartitioning>>
+| [SupportsReportPartitioning](spark-sql-SupportsReportPartitioning.md)
 | [[SupportsReportPartitioning]] `DataSourceReaders` that can report data partitioning and try to avoid shuffle at Spark side
 
 | <<spark-sql-SupportsReportStatistics.md#, SupportsReportStatistics>>

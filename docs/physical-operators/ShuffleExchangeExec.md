@@ -8,7 +8,7 @@
 
 `ShuffleExchangeExec` takes the following to be created:
 
-* <span id="outputPartitioning"> Output [Partitioning](../spark-sql-SparkPlan-Partitioning.md)
+* <span id="outputPartitioning"> Output [Partitioning](../Partitioning.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 * <span id="canChangeNumPartitions"> `canChangeNumPartitions` flag (default: `true`)
 

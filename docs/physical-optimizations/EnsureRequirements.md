@@ -52,7 +52,7 @@ NOTE: The number of requirements for partitions and their sort ordering has to m
 
 . If the child satisfies the requested distribution, the child is left unchanged
 
-. For spark-sql-Distribution-BroadcastDistribution.md[BroadcastDistribution], the child becomes the child of spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] unary operator for spark-sql-SparkPlan-BroadcastHashJoinExec.md[broadcast hash joins]
+. For [BroadcastDistribution](../BroadcastDistribution.md), the child becomes the child of spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] unary operator for spark-sql-SparkPlan-BroadcastHashJoinExec.md[broadcast hash joins]
 
 . Any other pair of child and distribution leads to spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] unary physical operator (with proper <<createPartitioning, partitioning>> for distribution and with spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions, i.e. `200` by default)
 

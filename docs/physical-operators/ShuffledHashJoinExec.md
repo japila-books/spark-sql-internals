@@ -122,8 +122,8 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 | Left Child
 | Right Child
 
-| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<leftKeys, left join key expressions>>)
-| spark-sql-Distribution-HashClusteredDistribution.md[HashClusteredDistribution] (per <<rightKeys, right join key expressions>>)
+| [HashClusteredDistribution](../HashClusteredDistribution.md) (per <<leftKeys, left join key expressions>>)
+| [HashClusteredDistribution](../HashClusteredDistribution.md) (per <<rightKeys, right join key expressions>>)
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
