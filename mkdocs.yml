@@ -491,6 +491,10 @@ nav:
           - HashClusteredDistribution: physical-operators/HashClusteredDistribution.md
           - OrderedDistribution: physical-operators/OrderedDistribution.md
           - UnspecifiedDistribution: physical-operators/UnspecifiedDistribution.md
+        - Broadcast Modes:
+          - BroadcastMode: physical-operators/BroadcastMode.md
+          - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
+          - IdentityBroadcastMode: physical-operators/IdentityBroadcastMode.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AlterTableExec: physical-operators/AlterTableExec.md
@@ -869,10 +873,6 @@ nav:
       - UnsafeHashedRelation: spark-sql-UnsafeHashedRelation.md
     - KnownSizeEstimation: spark-sql-KnownSizeEstimation.md
     - SizeEstimator: spark-sql-SizeEstimator.md
-    - BroadcastMode:
-      - BroadcastMode: spark-sql-BroadcastMode.md
-      - HashedRelationBroadcastMode: spark-sql-HashedRelationBroadcastMode.md
-      - IdentityBroadcastMode: spark-sql-IdentityBroadcastMode.md
     - PartitioningUtils: spark-sql-PartitioningUtils.md
     - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
     - CatalogUtils: spark-sql-CatalogUtils.md

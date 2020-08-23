@@ -29,7 +29,7 @@ scala> q.explain
       +- LocalTableScan [id#20, token#21]
 ----
 
-`BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match [BroadcastDistribution](../BroadcastDistribution.md) (with a spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode]) and [UnspecifiedDistribution](../UnspecifiedDistribution.md) (for <<left, left>> and <<right, right>> sides of a join or vice versa).
+`BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match [BroadcastDistribution](../BroadcastDistribution.md) (with a [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md)) and [UnspecifiedDistribution](UnspecifiedDistribution.md) (for <<left, left>> and <<right, right>> sides of a join or vice versa).
 
 [[metrics]]
 .BroadcastHashJoinExec's Performance Metrics
@@ -91,12 +91,12 @@ Generated code:
 | Right Child
 
 | BuildLeft
-| [BroadcastDistribution](../BroadcastDistribution.md) with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] broadcast mode of spark-sql-HashJoin.md#buildKeys[build join keys]
+| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](../spark-sql-HashJoin.md#buildKeys)
 | [UnspecifiedDistribution](../UnspecifiedDistribution.md)
 
 | BuildRight
 | [UnspecifiedDistribution](../UnspecifiedDistribution.md)
-| [BroadcastDistribution](../BroadcastDistribution.md) with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] broadcast mode of spark-sql-HashJoin.md#buildKeys[build join keys]
+| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](../spark-sql-HashJoin.md#buildKeys)
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method

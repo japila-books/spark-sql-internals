@@ -6,7 +6,7 @@
 
 `BroadcastDistribution` takes the following to be created:
 
-* <span id="mode"> [BroadcastMode](../spark-sql-BroadcastMode.md)
+* <span id="mode"> [BroadcastMode](BroadcastMode.md)
 
 `BroadcastDistribution` is created when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) physical operators are requested for the [required child distribution](SparkPlan.md#requiredChildDistribution).
 

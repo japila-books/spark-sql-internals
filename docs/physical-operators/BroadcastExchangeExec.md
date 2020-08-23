@@ -122,5 +122,5 @@ NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepa
 
 `BroadcastExchangeExec` takes the following when created:
 
-* [[mode]] spark-sql-BroadcastMode.md[BroadcastMode]
-* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
+* [[mode]] [BroadcastMode](../BroadcastMode.md)
+* [[child]] Child [logical plan](../logical-operators/LogicalPlan.md)

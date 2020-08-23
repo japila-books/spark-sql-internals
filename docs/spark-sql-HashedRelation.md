@@ -80,14 +80,11 @@ The input `key` expressions are:
 
 * spark-sql-HashJoin.md#buildKeys[Build join keys] of `ShuffledHashJoinExec` physical operator
 
-* spark-sql-HashedRelationBroadcastMode.md#canonicalized[Canonicalized build-side join keys] of `HashedRelationBroadcastMode` (of spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[BroadcastHashJoinExec] physical operator)
+* [Canonicalized build-side join keys](physical-operators/HashedRelationBroadcastMode.md#canonicalized) of `HashedRelationBroadcastMode` (of spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[BroadcastHashJoinExec] physical operator)
 ====
 
-[NOTE]
-====
 `apply` is used when:
 
 * `ShuffledHashJoinExec` is requested to spark-sql-SparkPlan-ShuffledHashJoinExec.md#buildHashedRelation[build a HashedRelation for given internal rows]
 
-* `HashedRelationBroadcastMode` is requested to spark-sql-HashedRelationBroadcastMode.md#transform[transform]
-====
+* `HashedRelationBroadcastMode` is requested to [transform](physical-operators/HashedRelationBroadcastMode.md#transform)

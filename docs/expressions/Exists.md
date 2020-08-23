@@ -33,7 +33,7 @@ exists#[exprId] [conditionString]
 ```
 
 [[canonicalized]]
-When requested for a spark-sql-BroadcastMode.md#canonicalized[canonicalized] version, `Exists` <<creating-instance, creates>> a new instance with...FIXME
+When requested for a [canonicalized](../physical-operators/BroadcastMode.md#canonicalized) version, `Exists` <<creating-instance, creates>> a new instance with...FIXME
 
 === [[creating-instance]] Creating Exists Instance
 
