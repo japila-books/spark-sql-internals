@@ -1500,6 +1500,18 @@
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BroadcastMode/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/HashedRelationBroadcastMode/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/IdentityBroadcastMode/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AdaptiveSparkPlanExec/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
@@ -2833,18 +2845,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SizeEstimator/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BroadcastMode/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-HashedRelationBroadcastMode/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-IdentityBroadcastMode/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
