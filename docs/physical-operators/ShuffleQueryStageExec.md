@@ -1,4 +1,4 @@
-# ShuffleQueryStageExec Physical Operator
+# ShuffleQueryStageExec Leaf Physical Operator
 
 `ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with [ShuffleExchangeExec](ShuffleExchangeExec.md) or [ReusedExchangeExec](ReusedExchangeExec.md) child operators.
 

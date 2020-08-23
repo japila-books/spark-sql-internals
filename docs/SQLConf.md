@@ -569,3 +569,9 @@ Used when [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPl
 The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](spark-sql-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property
 
 Used when [DemoteBroadcastHashJoin](logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed
+
+## <span id="COALESCE_PARTITIONS_ENABLED"><span id="coalesceShufflePartitionsEnabled"> coalesceShufflePartitionsEnabled
+
+The value of [spark.sql.adaptive.coalescePartitions.enabled](spark-sql-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property
+
+Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed

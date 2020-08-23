@@ -142,11 +142,15 @@ Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) me
 
 ## <span id="spark.sql.adaptive.coalescePartitions.enabled"> spark.sql.adaptive.coalescePartitions.enabled
 
-When true and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark will coalesce contiguous shuffle partitions according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid too many small tasks.
+Controls coalescing shuffle partitions
+
+When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark will coalesce contiguous shuffle partitions according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid too many small tasks.
 
 Default: `true`
 
 Since: `3.0.0`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
 
 ## <span id="spark.sql.adaptive.coalescePartitions.minPartitionNum"> spark.sql.adaptive.coalescePartitions.minPartitionNum
 
