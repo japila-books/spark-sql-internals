@@ -1,27 +1,38 @@
 # BroadcastDistribution
 
-[[requiredNumPartitions]]
-`BroadcastDistribution` is a Distribution.md[Distribution] that indicates to use one partition only and...FIXME.
+`BroadcastDistribution` is a [data distribution requirement](Distribution.md) of the children of [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) physical operators.
 
-`BroadcastDistribution` is <<creating-instance, created>> when:
+## Creating Instance
 
-. `BroadcastHashJoinExec` is requested for spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[required child output distributions] (with spark-sql-HashedRelationBroadcastMode.md[HashedRelationBroadcastMode] of the spark-sql-HashJoin.md#buildKeys[build join keys])
+`BroadcastDistribution` takes the following to be created:
 
-. `BroadcastNestedLoopJoinExec` is requested for spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md#requiredChildDistribution[required child output distributions] (with spark-sql-IdentityBroadcastMode.md[IdentityBroadcastMode])
+* <span id="mode"> [BroadcastMode](../spark-sql-BroadcastMode.md)
 
-[[creating-instance]]
-[[mode]]
-`BroadcastDistribution` takes a spark-sql-BroadcastMode.md[BroadcastMode] when created.
+`BroadcastDistribution` is created when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) physical operators are requested for the [required child distribution](SparkPlan.md#requiredChildDistribution).
 
-NOTE: `BroadcastDistribution` is converted to a spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed.
+## <span id="requiredNumPartitions"> Required Number of Partitions
 
-=== [[createPartitioning]] `createPartitioning` Method
+```scala
+requiredNumPartitions: Option[Int]
+```
 
-[source, scala]
-----
-createPartitioning(numPartitions: Int): Partitioning
-----
+`requiredNumPartitions` is always `1`.
 
-`createPartitioning`...FIXME
+`requiredNumPartitions` is part of the [Distribution](Distribution.md#requiredNumPartitions) abstraction.
+
+## <span id="createPartitioning"> Creating BroadcastPartitioning
+
+```scala
+createPartitioning(
+  numPartitions: Int): Partitioning
+```
+
+`createPartitioning` creates a [BroadcastPartitioning](Partitioning.md#BroadcastPartitioning).
+
+`createPartitioning` throws an `AssertionError` when the given `numPartitions` is not `1`:
+
+```text
+The default partitioning of BroadcastDistribution can only have 1 partition.
+```
 
 `createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.
