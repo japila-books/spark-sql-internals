@@ -641,10 +641,12 @@ nav:
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
       - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
+      - OptimizeLocalShuffleReader: physical-optimizations/OptimizeLocalShuffleReader.md
       - OptimizeSkewedJoin: physical-optimizations/OptimizeSkewedJoin.md
       - PlanAdaptiveSubqueries: physical-optimizations/PlanAdaptiveSubqueries.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
+      - ReuseAdaptiveSubquery: physical-optimizations/ReuseAdaptiveSubquery.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
     - Project Tungsten:
