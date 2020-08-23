@@ -1412,34 +1412,6 @@
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Distribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/AllTuples/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/BroadcastDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ClusteredDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/HashClusteredDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/OrderedDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/UnspecifiedDistribution/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Exchange/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
@@ -1453,10 +1425,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ObjectConsumerExec/</loc>
-     <lastmod>2020-08-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Partitioning/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1497,6 +1465,38 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SQLMetric/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Distribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Partitioning/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AllTuples/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BroadcastDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ClusteredDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/HashClusteredDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OrderedDistribution/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/UnspecifiedDistribution/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
