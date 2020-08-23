@@ -2076,6 +2076,10 @@
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/OptimizeLocalShuffleReader/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/OptimizeSkewedJoin/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
@@ -2089,6 +2093,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/PlanSubqueries/</loc>
+     <lastmod>2020-08-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ReuseAdaptiveSubquery/</loc>
      <lastmod>2020-08-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
