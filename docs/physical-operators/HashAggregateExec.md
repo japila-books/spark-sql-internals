@@ -143,13 +143,13 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 | Distribution
 
 | Defined, but empty
-| [AllTuples](../AllTuples.md)
+| [AllTuples](AllTuples.md)
 
 | Non-empty
-| [ClusteredDistribution](../ClusteredDistribution.md) for `exprs`
+| [ClusteredDistribution](ClusteredDistribution.md) for `exprs`
 
 | Undefined (`None`)
-| [UnspecifiedDistribution](../UnspecifiedDistribution.md)
+| [UnspecifiedDistribution](UnspecifiedDistribution.md)
 |===
 
 [NOTE]

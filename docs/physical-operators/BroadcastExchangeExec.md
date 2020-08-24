@@ -47,7 +47,7 @@ scala> q.explain
 image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align="center"]
 
 [[outputPartitioning]]
-`BroadcastExchangeExec` uses [BroadcastPartitioning](../Partitioning.md#BroadcastPartitioning) partitioning scheme (with the input <<mode, BroadcastMode>>).
+`BroadcastExchangeExec` uses [BroadcastPartitioning](Partitioning.md#BroadcastPartitioning) partitioning scheme (with the input <<mode, BroadcastMode>>).
 
 === [[doExecuteBroadcast]] Waiting Until Relation Has Been Broadcast -- `doExecuteBroadcast` Method
 
@@ -122,5 +122,5 @@ NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepa
 
 `BroadcastExchangeExec` takes the following when created:
 
-* [[mode]] [BroadcastMode](../BroadcastMode.md)
+* [[mode]] [BroadcastMode](BroadcastMode.md)
 * [[child]] Child [logical plan](../logical-operators/LogicalPlan.md)

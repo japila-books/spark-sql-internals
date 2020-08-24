@@ -1,6 +1,6 @@
 # Partitioning &mdash; Specification of Physical Operator's Output Partitions
 
-`Partitioning` is an [abstraction](#contract) of [partitioning schemes](#implementations) that hint the Spark Physical Optimizer about the [number of partitions](#numPartitions) and data distribution of the output of a [physical operator](physical-operators/SparkPlan.md).
+`Partitioning` is an [abstraction](#contract) of [partitioning schemes](#implementations) that hint the Spark Physical Optimizer about the [number of partitions](#numPartitions) and data distribution of the output of a [physical operator](SparkPlan.md).
 
 ## Contract
 
@@ -12,8 +12,8 @@ numPartitions: Int
 
 Used when:
 
-* [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed
-* [SortMergeJoinExec](physical-operators/SortMergeJoinExec.md) for `outputPartitioning` for `FullOuter` join type
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
+* [SortMergeJoinExec](SortMergeJoinExec.md) for `outputPartitioning` for `FullOuter` join type
 * `Partitioning.allCompatible`
 
 ## Implementations
@@ -43,14 +43,14 @@ DataSourcePartitioning(
 
 ### HashPartitioning
 
-[HashPartitioning](expressions/HashPartitioning.md)
+[HashPartitioning](../expressions/HashPartitioning.md)
 
-numPartitions: the given [numPartitions](expressions/HashPartitioning.md#numPartitions)
+numPartitions: the given [numPartitions](../expressions/HashPartitioning.md#numPartitions)
 
 satisfies:
 
 * [UnspecifiedDistribution](UnspecifiedDistribution.md)
-* [ClusteredDistribution](ClusteredDistribution.md) with all the hashing [expressions](expressions/Expression.md) included in `clustering` expressions
+* [ClusteredDistribution](ClusteredDistribution.md) with all the hashing [expressions](../expressions/Expression.md) included in `clustering` expressions
 
 ### PartitioningCollection
 
@@ -69,13 +69,13 @@ satisfies: Any `Distribution` that is satisfied by any of the input `partitionin
 
 ### RangePartitioning
 
-[RangePartitioning](expressions/RangePartitioning.md)
+[RangePartitioning](../expressions/RangePartitioning.md)
 
 compatibleWith: `RangePartitioning` when semantically equal (i.e. underlying expressions are deterministic and canonically equal)
 
 guarantees: `RangePartitioning` when semantically equal (i.e. underlying expressions are deterministic and canonically equal)
 
-numPartitions: the given [numPartitions](expressions/RangePartitioning.md#numPartitions)
+numPartitions: the given [numPartitions](../expressions/RangePartitioning.md#numPartitions)
 
 satisfies:
 

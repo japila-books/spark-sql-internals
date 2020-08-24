@@ -509,7 +509,7 @@ nav:
         - BatchScanExec: physical-operators/BatchScanExec.md
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
-        - physical-operators/BroadcastNestedLoopJoinExec.md
+        - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
         - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
         - physical-operators/CartesianProductExec.md
         - physical-operators/CoalesceExec.md

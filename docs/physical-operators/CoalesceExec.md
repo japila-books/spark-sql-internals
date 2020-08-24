@@ -37,4 +37,4 @@ Coalesce 1
 
 `output` collection of spark-sql-Expression-Attribute.md[Attribute] matches the ``child``'s (since `CoalesceExec` is about changing the number of partitions not the internal representation).
 
-`outputPartitioning` returns a [SinglePartition](../Partitioning.md#SinglePartition) when the input `numPartitions` is `1` while a [UnknownPartitioning](../Partitioning.md#UnknownPartitioning) partitioning scheme for the other cases.
+`outputPartitioning` returns a [SinglePartition](Partitioning.md#SinglePartition) when the input `numPartitions` is `1` while a [UnknownPartitioning](Partitioning.md#UnknownPartitioning) partitioning scheme for the other cases.

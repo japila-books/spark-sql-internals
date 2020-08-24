@@ -41,7 +41,7 @@ NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[L
 
 * [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
 * [[rdd]] `RDD` of spark-sql-InternalRow.md[internal binary rows]
-* [[outputPartitioning]] Output [Partitioning](../Partitioning.md)
+* [[outputPartitioning]] Output [Partitioning](../physical-operators/Partitioning.md)
 * [[outputOrdering]] Output ordering (`SortOrder`)
 * [[isStreaming]] `isStreaming` flag
 * [[session]] SparkSession.md[SparkSession]

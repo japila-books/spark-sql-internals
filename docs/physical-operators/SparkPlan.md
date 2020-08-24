@@ -180,7 +180,7 @@ requiredChildDistribution: Seq[Distribution]
 
 The *required partition requirements* (_aka_ *child output distributions*) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
 
-Defaults to a [UnspecifiedDistribution](../UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
+Defaults to a [UnspecifiedDistribution](UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
 
 Used when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 

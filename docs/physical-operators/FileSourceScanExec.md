@@ -278,9 +278,9 @@ NOTE: `outputPartitioning` is part of the <<SparkPlan.md#outputPartitioning, Spa
 
 `outputPartitioning` can be one of the following:
 
-* [HashPartitioning](../Partitioning.md#HashPartitioning) (with the <<spark-sql-BucketSpec.md#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.md#numBuckets, number of buckets>> of the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>>) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> defined
+* [HashPartitioning](Partitioning.md#HashPartitioning) (with the <<spark-sql-BucketSpec.md#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.md#numBuckets, number of buckets>> of the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>>) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the <<relation, HadoopFsRelation>> has a <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> defined
 
-* [UnknownPartitioning](../Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
+* [UnknownPartitioning](Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
 
 === [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing Support -- `createBucketedReadRDD` Internal Method
 

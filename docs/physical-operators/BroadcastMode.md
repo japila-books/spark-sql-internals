@@ -24,7 +24,7 @@ transform(
   sizeHint: Option[Long]): Any
 ```
 
-Used when [BroadcastExchangeExec](physical-operators/BroadcastExchangeExec.md) physical operator is requested for [relationFuture](physical-operators/BroadcastExchangeExec.md#relationFuture)
+Used when [BroadcastExchangeExec](BroadcastExchangeExec.md) physical operator is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
 
 ### <span id="transform-rows"> Transform Rows
 

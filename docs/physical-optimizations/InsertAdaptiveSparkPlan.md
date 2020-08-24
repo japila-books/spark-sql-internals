@@ -125,7 +125,7 @@ shouldApplyAQE(
 1. The given [physical operator](../physical-operators/SparkPlan.md):
 
     1. Is an [Exchange](../physical-operators/Exchange.md)
-    1. No [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) of the operator is [UnspecifiedDistribution](../Distribution.md#UnspecifiedDistribution)
+    1. No [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) of the operator is [UnspecifiedDistribution](../physical-operators/Distribution.md#UnspecifiedDistribution)
     1. Contains [SubqueryExpression](../expressions/SubqueryExpression.md)
 
 `shouldApplyAQE` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal).

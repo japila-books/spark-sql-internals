@@ -1,7 +1,7 @@
 # HashPartitioning
 
 [[Partitioning]]
-`HashPartitioning` is a [Partitioning](../Partitioning.md) in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).
+`HashPartitioning` is a [Partitioning](../physical-operators/Partitioning.md) in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).
 
 [[creating-instance]]
 `HashPartitioning` takes the following to be created:
@@ -47,15 +47,15 @@ satisfies0(
 
 `satisfies0` is positive (`true`) when the following conditions all hold:
 
-* The base [satisfies0](../Partitioning.md#satisfies0) holds
+* The base [satisfies0](../physical-operators/Partitioning.md#satisfies0) holds
 
-* For an input [HashClusteredDistribution](../HashClusteredDistribution.md), the number of the given <<expressions, partitioning expressions>> and the [HashClusteredDistribution's](../HashClusteredDistribution.md#expressions) are the same and [semantically equal](Expression.md#semanticEquals) pair-wise
+* For an input [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md), the number of the given <<expressions, partitioning expressions>> and the [HashClusteredDistribution's](../physical-operators/HashClusteredDistribution.md#expressions) are the same and [semantically equal](Expression.md#semanticEquals) pair-wise
 
-* For an input [ClusteredDistribution](../ClusteredDistribution.md), the given <<expressions, partitioning expressions>> are among the [ClusteredDistribution's clustering expressions](../ClusteredDistribution.md#clustering) and they are [semantically equal](Expression.md#semanticEquals) pair-wise
+* For an input [ClusteredDistribution](../physical-operators/ClusteredDistribution.md), the given <<expressions, partitioning expressions>> are among the [ClusteredDistribution's clustering expressions](../physical-operators/ClusteredDistribution.md#clustering) and they are [semantically equal](Expression.md#semanticEquals) pair-wise
 
 Otherwise, `satisfies0` is negative (`false`).
 
-`satisfies0` is part of the [Partitioning](../Partitioning.md#satisfies0) abstraction.
+`satisfies0` is part of the [Partitioning](../physical-operators/Partitioning.md#satisfies0) abstraction.
 
 === [[partitionIdExpression]] `partitionIdExpression` Method
 
