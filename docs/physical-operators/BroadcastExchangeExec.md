@@ -77,11 +77,11 @@ When "materialized" (aka _executed_), `relationFuture` finds the current spark-s
 
 NOTE: `relationFuture` accepts a relation with up to 512 millions rows and 8GB in size, and reports a `SparkException` if the conditions are violated.
 
-`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows to create a relation, e.g. spark-sql-HashedRelation.md[HashedRelation] or a `Array[InternalRow]`.
+`relationFuture` requests the input <<mode, BroadcastMode>> to `transform` the internal rows to create a relation, e.g. [HashedRelation](HashedRelation.md) or a `Array[InternalRow]`.
 
 `relationFuture` calculates the data size:
 
-* For a `HashedRelation`, `relationFuture` requests it to spark-sql-KnownSizeEstimation.md#estimatedSize[estimatedSize]
+* For a `HashedRelation`, `relationFuture` requests it to [estimatedSize](../KnownSizeEstimation.md#estimatedSize)
 
 * For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to spark-sql-UnsafeRow.md[UnsafeRows] and requests each to spark-sql-UnsafeRow.md#getSizeInBytes[getSizeInBytes] that it sums all up.
 

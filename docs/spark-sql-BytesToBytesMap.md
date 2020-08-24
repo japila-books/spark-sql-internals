@@ -26,4 +26,4 @@ void safeLookup(Object keyBase, long keyOffset, int keyLength, Location loc, int
 
 `safeLookup`...FIXME
 
-NOTE: `safeLookup` is used when `BytesToBytesMap` does <<lookup, lookup>> and `UnsafeHashedRelation` for looking up a single spark-sql-UnsafeHashedRelation.md#getValue[value] or spark-sql-UnsafeHashedRelation.md#get[values] by key.
+`safeLookup` is used when `BytesToBytesMap` does <<lookup, lookup>> and `UnsafeHashedRelation` for looking up a single [value](physical-operators/UnsafeHashedRelation.md#getValue) or [values](physical-operators/UnsafeHashedRelation.md#get) by key.

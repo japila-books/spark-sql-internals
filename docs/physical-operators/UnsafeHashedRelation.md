@@ -9,9 +9,9 @@
 get(key: InternalRow): Iterator[InternalRow]
 ----
 
-NOTE: `get` is part of spark-sql-HashedRelation.md#get[HashedRelation Contract] to give the internal rows for the given key or `null`.
-
 `get`...FIXME
+
+`get` is part of the [HashedRelation](HashedRelation.md#get) abstraction.
 
 === [[getValue]] Getting Value Row for Given Key -- `getValue` Method
 
@@ -20,9 +20,9 @@ NOTE: `get` is part of spark-sql-HashedRelation.md#get[HashedRelation Contract] 
 getValue(key: InternalRow): InternalRow
 ----
 
-NOTE: `getValue` is part of spark-sql-HashedRelation.md#getValue[HashedRelation Contract] to give the value internal row for a given key.
-
 `getValue`...FIXME
+
+`getValue` is part of the [HashedRelation](HashedRelation.md#getValue) abstraction.
 
 === [[apply]] Creating UnsafeHashedRelation Instance -- `apply` Factory Method
 

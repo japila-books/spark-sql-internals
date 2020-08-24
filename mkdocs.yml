@@ -495,6 +495,11 @@ nav:
           - BroadcastMode: physical-operators/BroadcastMode.md
           - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
           - IdentityBroadcastMode: physical-operators/IdentityBroadcastMode.md
+      - HashedRelation:
+        - HashedRelation: physical-operators/HashedRelation.md
+        - LongHashedRelation: physical-operators/LongHashedRelation.md
+        - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
+      - HashJoin: physical-operators/HashJoin.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AlterTableExec: physical-operators/AlterTableExec.md
@@ -866,12 +871,7 @@ nav:
     - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md
     - PhysicalAggregation: spark-sql-PhysicalAggregation.md
     - PhysicalOperation: spark-sql-PhysicalOperation.md
-    - HashJoin: spark-sql-HashJoin.md
-    - HashedRelation:
-      - HashedRelation: spark-sql-HashedRelation.md
-      - LongHashedRelation: spark-sql-LongHashedRelation.md
-      - UnsafeHashedRelation: spark-sql-UnsafeHashedRelation.md
-    - KnownSizeEstimation: spark-sql-KnownSizeEstimation.md
+    - KnownSizeEstimation: KnownSizeEstimation.md
     - SizeEstimator: spark-sql-SizeEstimator.md
     - PartitioningUtils: spark-sql-PartitioningUtils.md
     - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md

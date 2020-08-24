@@ -91,12 +91,12 @@ Generated code:
 | Right Child
 
 | BuildLeft
-| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](../spark-sql-HashJoin.md#buildKeys)
+| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys)
 | [UnspecifiedDistribution](../UnspecifiedDistribution.md)
 
 | BuildRight
 | [UnspecifiedDistribution](../UnspecifiedDistribution.md)
-| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](../spark-sql-HashJoin.md#buildKeys)
+| [BroadcastDistribution](../BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys)
 |===
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method

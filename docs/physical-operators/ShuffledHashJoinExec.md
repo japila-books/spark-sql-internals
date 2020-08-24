@@ -135,11 +135,11 @@ doExecute(): RDD[InternalRow]
 
 NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
 
-`doExecute` requests spark-sql-HashJoin.md#streamedPlan[streamedPlan] physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
+`doExecute` requests [streamedPlan](HashJoin.md#streamedPlan) physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
 
-`doExecute` requests spark-sql-HashJoin.md#buildPlan[buildPlan] physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
+`doExecute` requests [buildPlan](HashJoin.md#buildPlan) physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
 
-`doExecute` requests spark-sql-HashJoin.md#streamedPlan[streamedPlan] physical operator's `RDD[InternalRow]` to zip partition-wise with spark-sql-HashJoin.md#buildPlan[buildPlan] physical operator's `RDD[InternalRow]` (using `RDD.zipPartitions` method with `preservesPartitioning` flag disabled).
+`doExecute` requests [streamedPlan](HashJoin.md#streamedPlan) physical operator's `RDD[InternalRow]` to zip partition-wise with [buildPlan](HashJoin.md#buildPlan) physical operator's `RDD[InternalRow]` (using `RDD.zipPartitions` method with `preservesPartitioning` flag disabled).
 
 [NOTE]
 ====
@@ -162,7 +162,7 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 
 `doExecute` uses `RDD.zipPartitions` with a function applied to zipped partitions that takes two iterators of rows from the partitions of `streamedPlan` and `buildPlan`.
 
-For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and spark-sql-HashJoin.md#join[join] the `streamedPlan` partition iterator, the spark-sql-HashedRelation.md[HashedRelation], <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
+For every partition (and pairs of rows from the RDD), the function <<buildHashedRelation, buildHashedRelation>> on the partition of `buildPlan` and [join](HashJoin.md#join) the `streamedPlan` partition iterator, the [HashedRelation](HashedRelation.md), <<numOutputRows, numOutputRows>> and <<avgHashProbe, avgHashProbe>> SQL metrics.
 
 === [[buildHashedRelation]] Building HashedRelation for Internal Rows -- `buildHashedRelation` Internal Method
 
@@ -171,15 +171,15 @@ For every partition (and pairs of rows from the RDD), the function <<buildHashed
 buildHashedRelation(iter: Iterator[InternalRow]): HashedRelation
 ----
 
-`buildHashedRelation` creates a spark-sql-HashedRelation.md#apply[HashedRelation] (for the input `iter` iterator of `InternalRows`, spark-sql-HashJoin.md#buildKeys[buildKeys] and the current `TaskMemoryManager`).
+`buildHashedRelation` creates a [HashedRelation](HashedRelation.md#apply) (for the input `iter` iterator of `InternalRows`, [buildKeys](HashJoin.md#buildKeys) and the current `TaskMemoryManager`).
 
 NOTE: `buildHashedRelation` uses `TaskContext.get()` to access the current `TaskContext` that in turn is used to access the `TaskMemoryManager`.
 
 `buildHashedRelation` records the time to create the `HashedRelation` as <<buildTime, buildTime>>.
 
-`buildHashedRelation` requests the `HashedRelation` for spark-sql-KnownSizeEstimation.md#estimatedSize[estimatedSize] that is recorded as <<buildDataSize, buildDataSize>>.
+`buildHashedRelation` requests the `HashedRelation` for [estimatedSize](../KnownSizeEstimation.md#estimatedSize) that is recorded as <<buildDataSize, buildDataSize>>.
 
-NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when spark-sql-HashJoin.md#streamedPlan[streamedPlan] and spark-sql-HashJoin.md#buildPlan[buildPlan] physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
+NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is requested to <<doExecute, execute>> (when [streamedPlan](HashJoin.md#streamedPlan) and [buildPlan](HashJoin.md#buildPlan) physical operators are executed and their RDDs zipped partition-wise using `RDD.zipPartitions` method).
 
 === [[creating-instance]] Creating ShuffledHashJoinExec Instance
 
