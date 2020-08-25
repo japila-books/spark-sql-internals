@@ -32,7 +32,17 @@ nodeName: String
 
 Key | Name (in web UI) | Description
 ---------|----------|---------
-dataSize | data size | C1
+dataSize | data size |
+fetchWaitTime | fetch wait time |
+localBlocksFetched | local blocks read |
+localBytesRead | local bytes read |
+recordsRead | records read |
+remoteBlocksFetched | remote blocks read |
+remoteBytesRead | remote bytes read |
+remoteBytesReadToDisk | remote bytes read to disk |
+shuffleBytesWritten | shuffle bytes written |
+shuffleRecordsWritten | shuffle records written |
+shuffleWriteTime | shuffle write time |
 
 ![ShuffleExchangeExec in web UI (Details for Query)](../images/ShuffleExchangeExec-webui.png)
 

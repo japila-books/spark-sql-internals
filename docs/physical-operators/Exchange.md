@@ -17,7 +17,7 @@
 output: Seq[Attribute]
 ```
 
-`output` simply requests the child operator for the [output attributes](../catalyst/QueryPlan.md#output).
+`output` requests the [child](UnaryExecNode.md#child) operator for the [output attributes](../catalyst/QueryPlan.md#output).
 
 `output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
 
