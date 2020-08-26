@@ -71,7 +71,14 @@ prepareShuffleDependency(
 
 `prepareShuffleDependency` creates a Spark Core `ShuffleDependency` with a `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the <<serializer, Serializer>> of the `ShuffleExchangeExec` physical operator).
 
-Internally, `prepareShuffleDependency`...FIXME
+Internally, `prepareShuffleDependency` determines a `Partitioner` based on the given `newPartitioning` [Partitioning](Partitioning.md):
+
+* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning), `prepareShuffleDependency` creates a `HashPartitioner` for the same number of partitions
+* For [HashPartitioning](Partitioning.md#HashPartitioning), `prepareShuffleDependency` creates a `Partitioner` for the same number of partitions and `getPartition` that is an "identity"
+* For [RangePartitioning](Partitioning.md#RangePartitioning), `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](spark-sql-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
+* For [SinglePartition](Partitioning.md#SinglePartition), `prepareShuffleDependency` creates a `Partitioner` with `1` for the number of partitions and `getPartition` that always gives `0`
+
+`prepareShuffleDependency`...FIXME
 
 `prepareShuffleDependency` is used when:
 
@@ -128,6 +135,17 @@ shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow]
 * [OptimizeLocalShuffleReader](../physical-optimizations/OptimizeLocalShuffleReader.md) is requested to `getPartitionSpecs`
 * [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 * `ShuffleExchangeExec` physical operator is [executed](#doExecute) and requested for [MapOutputStatistics](#mapOutputStatisticsFuture)
+
+## <span id="createShuffleWriteProcessor"> createShuffleWriteProcessor
+
+```scala
+createShuffleWriteProcessor(
+  metrics: Map[String, SQLMetric]): ShuffleWriteProcessor
+```
+
+`createShuffleWriteProcessor` creates a Spark Core `ShuffleWriteProcessor` for the only reason to plug in a custom `ShuffleWriteMetricsReporter` (`SQLShuffleWriteMetricsReporter`).
+
+`createShuffleWriteProcessor` is used when `ShuffleExchangeExec` operator is [executed](#doExecute) (and requested to [prepareShuffleDependency](#prepareShuffleDependency)).
 
 ## Demo
 

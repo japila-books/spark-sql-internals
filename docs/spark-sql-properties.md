@@ -1355,3 +1355,23 @@ Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method t
 Default: `4`
 
 Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.
+
+## <span id="spark.sql.execution.sortBeforeRepartition"> spark.sql.execution.sortBeforeRepartition
+
+**(internal)** When perform a repartition following a shuffle, the output row ordering would be nondeterministic. If some downstream stages fail and some tasks of the repartition stage retry, these tasks may generate different data, and that can lead to correctness issues. Turn on this config to insert a local sort before actually doing repartition to generate consistent repartition results. The performance of `repartition()` may go down since we insert extra local sort before it.
+
+Default: `true`
+
+Since: `2.1.4`
+
+Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to access the current value.
+
+## <span id="spark.sql.execution.rangeExchange.sampleSizePerPartition"> spark.sql.execution.rangeExchange.sampleSizePerPartition
+
+**(internal)** Number of points to sample per partition in order to determine the range boundaries for range partitioning, typically used in global sorting (without limit).
+
+Default: `100`
+
+Since: `2.3.0`
+
+Use [SQLConf.rangeExchangeSampleSizePerPartition](SQLConf.md#rangeExchangeSampleSizePerPartition) method to access the current value.

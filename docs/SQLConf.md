@@ -575,3 +575,15 @@ Used when [DemoteBroadcastHashJoin](logical-optimizations/DemoteBroadcastHashJoi
 The value of [spark.sql.adaptive.coalescePartitions.enabled](spark-sql-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property
 
 Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
+
+## <span id="SORT_BEFORE_REPARTITION"><span id="sortBeforeRepartition"> sortBeforeRepartition
+
+The value of [spark.sql.execution.sortBeforeRepartition](spark-sql-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property
+
+Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operator is executed
+
+## <span id="RANGE_EXCHANGE_SAMPLE_SIZE_PER_PARTITION"><span id="rangeExchangeSampleSizePerPartition"> rangeExchangeSampleSizePerPartition
+
+The value of [spark.sql.execution.rangeExchange.sampleSizePerPartition](spark-sql-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
+
+Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operator is executed
