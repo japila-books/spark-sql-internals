@@ -71,6 +71,8 @@ prepareShuffleDependency(
 
 `prepareShuffleDependency` creates a Spark Core `ShuffleDependency` with a `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the <<serializer, Serializer>> of the `ShuffleExchangeExec` physical operator).
 
+### <span id="prepareShuffleDependency-part"> Partitioner
+
 `prepareShuffleDependency` determines a `Partitioner` based on the given `newPartitioning` [Partitioning](Partitioning.md):
 
 * For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning), `prepareShuffleDependency` creates a `HashPartitioner` for the same number of partitions
@@ -78,9 +80,31 @@ prepareShuffleDependency(
 * For [RangePartitioning](Partitioning.md#RangePartitioning), `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](spark-sql-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
 * For [SinglePartition](Partitioning.md#SinglePartition), `prepareShuffleDependency` creates a `Partitioner` with `1` for the number of partitions and `getPartition` that always gives `0`
 
+### <span id="prepareShuffleDependency-getPartitionKeyExtractor"> getPartitionKeyExtractor Internal Method
+
+`prepareShuffleDependency` defines a `getPartitionKeyExtractor` method.
+
+```scala
+getPartitionKeyExtractor(): InternalRow => Any
+```
+
+`getPartitionKeyExtractor` uses the given `newPartitioning` [Partitioning](Partitioning.md):
+
+* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning),...FIXME
+* For [HashPartitioning](Partitioning.md#HashPartitioning),...FIXME
+* For [RangePartitioning](Partitioning.md#RangePartitioning),...FIXME
+* For [SinglePartition](Partitioning.md#SinglePartition),...FIXME
+
+### <span id="prepareShuffleDependency-isRoundRobin"> isRoundRobin Internal Flag
+
 `prepareShuffleDependency` determines whether "this" is `isRoundRobin` or not based on the given `newPartitioning` partitioning. It is `isRoundRobin` when the partitioning is a `RoundRobinPartitioning` with more than one partition.
 
-`prepareShuffleDependency` determines a `newRdd` based on `isRoundRobin` flag and [spark.sql.execution.sortBeforeRepartition](spark-sql-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property. When both are enabled (`true`), `prepareShuffleDependency` sorts partitions (using a `UnsafeExternalRowSorter`) Otherwise, `prepareShuffleDependency` returns the given `RDD[InternalRow]` (unchanged).
+### <span id="prepareShuffleDependency-rddWithPartitionIds"> rddWithPartitionIds RDD
+
+`prepareShuffleDependency` creates a `rddWithPartitionIds`:
+
+1. Firstly, `prepareShuffleDependency` determines a `newRdd` based on `isRoundRobin` flag and [spark.sql.execution.sortBeforeRepartition](spark-sql-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property. When both are enabled (`true`), `prepareShuffleDependency` sorts partitions (using a `UnsafeExternalRowSorter`) Otherwise, `prepareShuffleDependency` returns the given `RDD[InternalRow]` (unchanged).
+1. Secondly, `prepareShuffleDependency` determines whether this is `isOrderSensitive` or not. This is `isOrderSensitive` when `isRoundRobin` flag is enabled (`true`) while [spark.sql.execution.sortBeforeRepartition](spark-sql-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property is not (`false`).
 
 `prepareShuffleDependency`...FIXME
 
