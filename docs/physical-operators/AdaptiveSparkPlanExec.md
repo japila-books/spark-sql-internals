@@ -199,7 +199,7 @@ Internally, `reOptimize` requests the given [logical query plan](../logical-oper
 
 `reOptimize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
 
-## <span id="optimizer"> Local Logical Optimizer
+## <span id="optimizer"> Logical Adaptive Optimizer
 
 ```scala
 optimizer: RuleExecutor[LogicalPlan]

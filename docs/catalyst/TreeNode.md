@@ -226,9 +226,7 @@ getTagValue[T](
 ```scala
 abstract class TreeNode[BaseType <: TreeNode[BaseType]] extends Product {
   self: BaseType =>
-
   // ...
-
 }
 ```
 

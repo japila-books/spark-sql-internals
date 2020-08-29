@@ -1,143 +1,174 @@
-# RuleExecutor -- Tree Transformation Rule Executor
+# RuleExecutors
 
-`RuleExecutor` is the <<contract, base>> of <<extensions, rule executors>> that are responsible for <<execute, executing>> a collection of <<batches, batches (of rules)>> to transform a [TreeNode](TreeNode.md).
+`RuleExecutor` is an [abstraction](#contract) of [rule executors](#implementations) that can [execute batches of rules](#execute) (that transform [TreeNodes](TreeNode.md)).
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.rules
+## Contract
 
-abstract class RuleExecutor[TreeType <: TreeNode[_]] {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  protected def batches: Seq[Batch]
-}
-----
+### <span id="batches"> Batches of Rules
 
-.RuleExecutor Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Property
-| Description
-
-| batches
-a| [[batches]]
-
-[source, scala]
-----
+```scala
 batches: Seq[Batch]
-----
+```
 
-Collection of <<Batch, rule batches>>, i.e. a sequence of a collection of <<catalyst/Rule.md#, rules>> with a name and a <<Strategy, strategy>> that `RuleExecutor` uses when <<execute, executed>>
-|===
+A sequence of [batches of rules](#Batch)
 
-[[TreeType]]
-NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `RuleExecutor` can be <<execute, executed>> on, i.e. <<spark-sql-LogicalPlan.md#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md), <<expressions/Expression.md#, Expression>> or a combination thereof.
+Used when `RuleExecutor` is [executed](#execute)
 
-[[extensions]]
-.RuleExecutors (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| RuleExecutor
-| Description
+## Implementations
 
-| [Logical Analyzer](../Analyzer.md)
-| [[Analyzer]] Logical query plan analyzer
+* [Logical Adaptive Optimizer](../physical-operators/AdaptiveSparkPlanExec.md#optimizer)
+* [Logical Analyzer](../Analyzer.md)
+* `ExpressionCanonicalizer`
+* [Logical Optimizers](Optimizer.md)
 
-| `ExpressionCanonicalizer`
-| [[ExpressionCanonicalizer]]
+## <span id="execute"> Executing Batches of Rules
 
-| [Optimizer](Optimizer.md)
-| [[Optimizer]] Generic logical query plan optimizer
-|===
+```scala
+execute(
+  plan: TreeType): TreeType
+```
 
-=== [[execute]] Applying Rule Batches to TreeNode -- `execute` Method
-
-[source, scala]
-----
-execute(plan: TreeType): TreeType
-----
-
-`execute` iterates over <<batches, rule batches>> and applies rules sequentially to the input `plan`.
+`execute` iterates over [rule batches](#batches) and applies rules sequentially to the input `plan`.
 
 `execute` tracks the number of iterations and the time of executing each rule (with a plan).
 
 When a rule changes a plan, you should see the following TRACE message in the logs:
 
-```
-TRACE HiveSessionStateBuilder$$anon$1:
+```text
 === Applying Rule [ruleName] ===
 [currentAndModifiedPlansSideBySide]
 ```
 
 After the number of iterations has reached the number of iterations for the batch's `Strategy` it stops execution and prints out the following WARN message to the logs:
 
-```
-WARN HiveSessionStateBuilder$$anon$1: Max iterations ([iteration]) reached for batch [batchName]
+```text
+Max iterations ([iteration]) reached for batch [batchName]
 ```
 
 When the plan has not changed (after applying rules), you should see the following TRACE message in the logs and `execute` moves on to applying the rules in the next batch. The moment is called *fixed point* (i.e. when the execution *converges*).
 
-```
-TRACE HiveSessionStateBuilder$$anon$1: Fixed point reached for batch [batchName] after [iteration] iterations.
+```text
+Fixed point reached for batch [batchName] after [iteration] iterations.
 ```
 
 After the batch finishes, if the plan has been changed by the rules, you should see the following DEBUG message in the logs:
 
-```
-DEBUG HiveSessionStateBuilder$$anon$1:
+```text
 === Result of Batch [batchName] ===
 [currentAndModifiedPlansSideBySide]
 ```
 
 Otherwise, when the rules had no changes to a plan, you should see the following TRACE message in the logs:
 
+```text
+Batch [batchName] has no effect.
 ```
-TRACE HiveSessionStateBuilder$$anon$1: Batch [batchName] has no effect.
+
+## <span id="executeAndTrack"> Tracking Time of Executing Batches of Rules
+
+```scala
+executeAndTrack(
+  plan: TreeType,
+  tracker: QueryPlanningTracker): TreeType
 ```
 
-=== [[Batch]] Rule Batch -- Collection of Rules
+`executeAndTrack`...FIXME
 
-`Batch` is a named collection of <<catalyst/Rule.md#, rules>> with a <<Strategy, strategy>>.
+`executeAndTrack` is used when:
 
-[[Batch-creating-instance]]
-`Batch` takes the following when created:
+* `Analyzer` is requested to [executeAndCheck](../Analyzer.md#executeAndCheck)
+* `QueryExecution` is requested for the [optimized logical plan](../QueryExecution.md#optimizedPlan)
 
-* [[name]] Batch name
-* [[strategy]] <<Strategy, Strategy>>
-* [[rules]] Collection of <<catalyst/Rule.md#, rules>>
+## <span id="blacklistedOnceBatches"> blacklistedOnceBatches
 
-=== [[Strategy]] Batch Execution Strategy
+```scala
+blacklistedOnceBatches: Set[String]
+```
 
-`Strategy` is the base of the batch execution strategies that indicate the maximum number of executions (aka _maxIterations_).
+`blacklistedOnceBatches` is empty by default (`Set.empty`).
 
-[source, scala]
-----
-abstract class Strategy {
-  def maxIterations: Int
+`blacklistedOnceBatches` is used when `RuleExecutor` is [executed](#execute).
+
+## <span id="checkBatchIdempotence"> checkBatchIdempotence Internal Method
+
+```scala
+checkBatchIdempotence(
+  batch: Batch,
+  plan: TreeType): Unit
+```
+
+`checkBatchIdempotence`...FIXME
+
+`checkBatchIdempotence` is used when `RuleExecutor` is [executed](#execute).
+
+## <span id="isPlanIntegral"> isPlanIntegral
+
+```scala
+isPlanIntegral(
+  plan: TreeType): Boolean
+```
+
+`isPlanIntegral` is `true` by default.
+
+`isPlanIntegral` is used when `RuleExecutor` is [executed](#execute).
+
+## Scala Definition
+
+```scala
+abstract class RuleExecutor[TreeType <: TreeNode[_]] {
+  // body omitted
 }
-----
+```
 
-.Strategies
-[cols="1,2",options="header",width="100%"]
-|===
-| Strategy
-| Description
+The definition of the `RuleExecutor` abstract class uses `TreeType` type parameter that is constrained by a upper type bound (`TreeNode[_]`). It says that `TreeType` type variable can only be a subtype of type [TreeNode](TreeNode.md).
 
-| `Once`
-| [[Once]] A strategy that runs only once (with `maxIterations` as `1`)
+!!! tip
+    Read up on `<:` type operator in Scala in [Upper Type Bounds](https://docs.scala-lang.org/tour/upper-type-bounds.html).
 
-| `FixedPoint`
-| [[FixedPoint]] A strategy that runs until fix point (i.e. converge) or `maxIterations` times, whichever comes first
-|===
+## <span id="Batch"> Rule Batch &mdash; Collection of Rules
 
-=== [[isPlanIntegral]] `isPlanIntegral` Method
+`Batch` is a named collection of [rules](Rule.md) with an [execution strategy](#Strategy).
 
-[source, scala]
-----
-isPlanIntegral(plan: TreeType): Boolean
-----
+`Batch` is defined by the following:
 
-`isPlanIntegral` simply returns `true`.
+* <span id="name"> Batch Name
+* <span id="strategy"> [Execution Strategy](#Strategy)
+* <span id="rules"> Collection of [rules](Rule.md)
 
-NOTE: `isPlanIntegral` is used exclusively when `RuleExecutor` is requested to <<execute, execute>>.
+## <span id="Strategy"> Execution Strategy
+
+`Strategy` is an abstraction of [execution strategies](#strategy-implementations).
+
+### <span id="strategy-maxIterations"> maxIterations
+
+```scala
+maxIterations: Int
+```
+
+Used when...FIXME
+
+### <span id="strategy-errorOnExceed"> errorOnExceed
+
+```scala
+errorOnExceed: Boolean = false
+```
+
+Used when...FIXME
+
+### <span id="strategy-maxIterationsSetting"> maxIterationsSetting
+
+```scala
+maxIterationsSetting: String = null
+```
+
+Used when...FIXME
+
+### <span id="strategy-implementations"> Implementations
+
+#### FixedPoint
+
+An [execution strategy](#Strategy) that runs until fix point (and converge) or `maxIterations` times, whichever comes first
+
+#### Once
+
+An [execution strategy](#Strategy) that runs only once (with `maxIterations` as `1`)
