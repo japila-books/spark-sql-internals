@@ -400,6 +400,23 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 !!! important FIXME
     This section needs your help
 
+### <span id="withRepartitionByExpression"> withRepartitionByExpression
+
+```scala
+withRepartitionByExpression(
+  ctx: QueryOrganizationContext,
+  expressions: Seq[Expression],
+  query: LogicalPlan): LogicalPlan
+```
+
+`withRepartitionByExpression` simply throws a `ParseException`:
+
+```text
+DISTRIBUTE BY is not supported
+```
+
+`withRepartitionByExpression` is used when `AstBuilder` is requested to [withQueryResultClauses](#withQueryResultClauses) (for `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses).
+
 ### <span id="withSample"> withSample
 
 !!! important FIXME

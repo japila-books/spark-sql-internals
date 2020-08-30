@@ -1,5 +1,3 @@
-title: Repartition and RepartitionByExpression
-
 # Repartition Logical Operators -- Repartition and RepartitionByExpression
 
 <<Repartition, Repartition>> and <<RepartitionByExpression, RepartitionByExpression>> (*repartition operations* in short) are spark-sql-LogicalPlan.md#UnaryNode[unary logical operators] that create a new `RDD` that has exactly <<numPartitions, numPartitions>> partitions.

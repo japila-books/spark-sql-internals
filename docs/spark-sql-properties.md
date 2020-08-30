@@ -1183,16 +1183,6 @@ Default: Java's `TimeZone.getDefault.getID`
 
 Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to access the current value.
 
-| [[spark.sql.shuffle.partitions]] *spark.sql.shuffle.partitions*
-
-Number of partitions to use by default when shuffling data for joins or aggregations
-
-Default: `200`
-
-Corresponds to Apache Hive's https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks[mapred.reduce.tasks] property that Spark considers deprecated.
-
-Use [SQLConf.numShufflePartitions](SQLConf.md#numShufflePartitions) method to access the current value.
-
 | [[spark.sql.sources.bucketing.enabled]] *spark.sql.sources.bucketing.enabled*
 
 Enables spark-sql-bucketing.md[bucketing] support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
@@ -1375,3 +1365,17 @@ Default: `100`
 Since: `2.3.0`
 
 Use [SQLConf.rangeExchangeSampleSizePerPartition](SQLConf.md#rangeExchangeSampleSizePerPartition) method to access the current value.
+
+## <span id="spark.sql.shuffle.partitions"> spark.sql.shuffle.partitions
+
+The default number of partitions to use when shuffling data for joins or aggregations.
+
+Default: `200`
+
+!!! note
+    Corresponds to Apache Hive's [mapred.reduce.tasks](https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-mapred.reduce.tasks) property that Spark SQL considers deprecated.
+
+!!! note "Spark Structured Streaming"
+    `spark.sql.shuffle.partitions` cannot be changed in Spark Structured Streaming between query restarts from the same checkpoint location.
+
+Use [SQLConf.numShufflePartitions](SQLConf.md#numShufflePartitions) method to access the current value.

@@ -196,16 +196,6 @@ a| [[metastorePartitionPruning]][[HIVE_METASTORE_PARTITION_PRUNING]] Used when h
 | <<spark-sql-properties.md#spark.sql.adaptive.minNumPostShufflePartitions, spark.sql.adaptive.minNumPostShufflePartitions>>
 a| [[minNumPostShufflePartitions]] Used exclusively when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)).
 
-| numShufflePartitions
-| spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions]
-a| [[numShufflePartitions]] Used in:
-
-* Dataset's spark-sql-dataset-operators.md#repartition[repartition] operator (for a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression[RepartitionByExpression] logical operator)
-* spark-sql-SparkSqlAstBuilder.md#withRepartitionByExpression[SparkSqlAstBuilder] (for a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression[RepartitionByExpression] logical operator)
-* [JoinSelection](execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) execution planning strategy
-* spark-sql-LogicalPlan-RunnableCommand.md#SetCommand[SetCommand] logical command
-* [EnsureRequirements](physical-optimizations/EnsureRequirements.md#defaultNumPreShufflePartitions) physical plan optimization
-
 | offHeapColumnVectorEnabled
 | spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled]
 a| [[offHeapColumnVectorEnabled]] Used when:
@@ -587,3 +577,7 @@ Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physi
 The value of [spark.sql.execution.rangeExchange.sampleSizePerPartition](spark-sql-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
 
 Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operator is executed
+
+## <span id="SHUFFLE_PARTITIONS"><span id="numShufflePartitions"> numShufflePartitions
+
+The value of [spark.sql.shuffle.partitions](spark-sql-properties.md#spark.sql.shuffle.partitions) configuration property

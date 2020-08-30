@@ -2,8 +2,6 @@
 
 `ShuffleExchangeExec` is an [Exchange](Exchange.md) unary physical operator that is used to [perform a shuffle](#doExecute).
 
-`ShuffleExchangeExec` [presents itself](#nodeName) as **Exchange** in physical query plans.
-
 ## Creating Instance
 
 `ShuffleExchangeExec` takes the following to be created:

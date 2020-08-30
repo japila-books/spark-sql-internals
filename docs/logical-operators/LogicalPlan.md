@@ -148,12 +148,23 @@ org.apache.spark.sql.execution.QueryExecution
 
 ## <span id="maxRows"> Maximum Number of Records
 
-A logical plan knows the maximum number of records it can compute.
-
-```text
-scala> val maxRows = plan.maxRows
-maxRows: Option[Long] = None
+```scala
+maxRows: Option[Long]
 ```
+
+`maxRows` is undefined by default (`None`).
+
+`maxRows` is used when `LogicalPlan` is requested for [maxRowsPerPartition](#maxRowsPerPartition).
+
+## <span id="maxRowsPerPartition"> Maximum Number of Records per Partition
+
+```scala
+maxRowsPerPartition: Option[Long]
+```
+
+`maxRowsPerPartition` is exactly the [maximum number of records](#maxRows) by default.
+
+`maxRowsPerPartition` is used when [LimitPushDown](../logical-optimizations/LimitPushDown.md) logical optimization is executed.
 
 ## Executing Logical Plan
 
