@@ -31,14 +31,14 @@ CAUTION: FIXME
 
 CAUTION: FIXME
 
-=== [[ensureDistributionAndOrdering]] Enforcing Partition Requirements (Distribution and Ordering) of Physical Operator -- `ensureDistributionAndOrdering` Internal Method
+## <span id="ensureDistributionAndOrdering"> Enforcing Partition Requirements (Distribution and Ordering) of Physical Operator
 
-[source, scala]
-----
-ensureDistributionAndOrdering(operator: SparkPlan): SparkPlan
-----
+```scala
+ensureDistributionAndOrdering(
+  operator: SparkPlan): SparkPlan
+```
 
-Internally, `ensureDistributionAndOrdering` takes the following from the input physical `operator`:
+`ensureDistributionAndOrdering` takes the following from the input physical `operator`:
 
 * SparkPlan.md#requiredChildDistribution[required partition requirements] for the children
 
@@ -70,7 +70,7 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 
 In the end, `ensureDistributionAndOrdering` [sets the new children](../catalyst/TreeNode.md#withNewChildren) for the input `operator`.
 
-NOTE: `ensureDistributionAndOrdering` is used exclusively when `EnsureRequirements` is <<apply, executed>> (i.e. applied to a physical plan).
+`ensureDistributionAndOrdering` is used when `EnsureRequirements` physical optimization is [executed](#apply).
 
 === [[reorderJoinPredicates]] `reorderJoinPredicates` Internal Method
 

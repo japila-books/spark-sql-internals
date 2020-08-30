@@ -78,10 +78,10 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[Project]] spark-sql-LogicalPlan-Project.md[Project]
 | [[visitProject]] `visitProject`
 
-| [[Repartition]] spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[Repartition]
+| [[Repartition]] [Repartition](logical-operators/RepartitionOperation.md#Repartition)
 | `visitRepartition`
 
-| [[RepartitionByExpression]] spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md[RepartitionByExpression]
+| [[RepartitionByExpression]] [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression)
 | `visitRepartitionByExpr`
 
 | [[ResolvedHint]] spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]

@@ -92,7 +92,7 @@ For a `WriteToContinuousDataSource` logical operator, `apply`...FIXME
 
 ==== [[apply-Repartition]] Repartition Logical Operator
 
-For a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#, Repartition>> logical operator, `apply`...FIXME
+For a [Repartition](../logical-operators/RepartitionOperation.md#Repartition) logical operator, `apply`...FIXME
 
 === [[pushFilters]] `pushFilters` Internal Method
 

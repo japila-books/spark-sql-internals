@@ -118,9 +118,7 @@ nav:
       - LeafNode: logical-operators/LeafNode.md
       - OrderPreservingUnaryNode: logical-operators/OrderPreservingUnaryNode.md
       - ParsedStatement: logical-operators/ParsedStatement.md
-      - Repartition Operations:
-        - RepartitionOperation: logical-operators/RepartitionOperation.md
-        - Repartition and RepartitionByExpression: logical-operators/Repartition-RepartitionByExpression.md
+      - RepartitionOperation: logical-operators/RepartitionOperation.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
@@ -175,6 +173,8 @@ nav:
         - logical-operators/Project.md
         - logical-operators/Range.md
         - RepairTableStatement: logical-operators/RepairTableStatement.md
+        - Repartition: logical-operators/RepartitionOperation/#Repartition
+        - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
         - logical-operators/ResolvedHint.md
         - logical-operators/SaveIntoDataSourceCommand.md
         - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md

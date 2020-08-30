@@ -21,6 +21,14 @@ numPartitions: Int
 * [Repartition](#Repartition)
 * [RepartitionByExpression](#RepartitionByExpression)
 
+## Logical Optimizations
+
+* [CollapseRepartition](../catalyst/Optimizer.md#CollapseRepartition) logical optimization collapses adjacent repartition operations
+
+* Repartition operations allow [FoldablePropagation](../catalyst/Optimizer.md#FoldablePropagation) and [PushDownPredicate](../logical-optimizations/PushDownPredicate.md) logical optimizations to "push through"
+
+* [PropagateEmptyRelation](../logical-optimizations/PropagateEmptyRelation.md) logical optimization may result in an empty [LocalRelation](LocalRelation.md) for repartition operations
+
 ## <span id="output"> Output Attributes
 
 ```scala
@@ -31,7 +39,7 @@ output: Seq[Attribute]
 
 `output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
 
-## Repartition Logical Operator
+## <span id="Repartition"> Repartition Logical Operator
 
 `Repartition` is a concrete [RepartitionOperation](RepartitionOperation.md) that takes the following to be created:
 
@@ -46,20 +54,22 @@ output: Seq[Attribute]
 
 `Repartition` is planned to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) or [CoalesceExec](../physical-operators/CoalesceExec.md) physical operators (based on [shuffle](#shuffle) flag).
 
-### <span id="Repartition-catalyst-dsl> Catalyst DSL
+### <span id="Repartition-catalyst-dsl"> Catalyst DSL
 
 [Catalyst DSL](../spark-sql-catalyst-dsl.md) defines the following operators to create `Repartition` logical operators:
 
 * [coalesce](../spark-sql-catalyst-dsl.md#coalesce) (with [shuffle](#shuffle) disabled)
 * [repartition](../spark-sql-catalyst-dsl.md#repartition) (with [shuffle](#shuffle) enabled)
 
-## RepartitionByExpression Logical Operator
+## <span id="RepartitionByExpression"> RepartitionByExpression Logical Operator
 
 `RepartitionByExpression` is a concrete [RepartitionOperation](RepartitionOperation.md) that takes the following to be created:
 
 * <span id="RepartitionByExpression-partitionExpressions"> [Partition Expressions](../expressions/Expression.md)
 * <span id="RepartitionByExpression-child"> [Child Logical Plan](LogicalPlan.md)
 * <span id="RepartitionByExpression-numPartitions"> Number of Partitions (must be positive)
+
+`RepartitionByExpression` is also called **distribute** operator.
 
 `RepartitionByExpression` is created for the following:
 
@@ -69,7 +79,7 @@ output: Seq[Attribute]
 
 `RepartitionByExpression` is planned to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operator.
 
-### <span id="RepartitionByExpression-catalyst-dsl> Catalyst DSL
+### <span id="RepartitionByExpression-catalyst-dsl"> Catalyst DSL
 
 [Catalyst DSL](../spark-sql-catalyst-dsl.md) defines [distribute](../spark-sql-catalyst-dsl.md#distribute) operator to create `RepartitionByExpression` logical operators.
 
@@ -96,3 +106,136 @@ shuffle: Boolean
 `shuffle` is always `true`.
 
 `shuffle` is part of the [RepartitionOperation](RepartitionOperation.md#shuffle) abstraction.
+
+## Demo
+
+```text
+val nums = spark.range(5)
+
+scala> nums.rdd.getNumPartitions
+res1: Int = 16
+```
+
+### Repartition Operator
+
+```text
+val numsRepartitioned = nums.repartition(numPartitions = 4)
+
+assert(numsRepartitioned.rdd.getNumPartitions == 4, "Number of partitions should be 4")
+
+scala> numsRepartitioned.explain(extended = true)
+== Parsed Logical Plan ==
+Repartition 4, true
++- Range (0, 5, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+Repartition 4, true
++- Range (0, 5, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+Repartition 4, true
++- Range (0, 5, step=1, splits=Some(16))
+
+== Physical Plan ==
+Exchange RoundRobinPartitioning(4), false, [id=#31]
++- *(1) Range (0, 5, step=1, splits=16)
+```
+
+### Repartition Operator (Twice)
+
+```text
+val numsRepartitionedTwice = numsRepartitioned.repartition(numPartitions = 8)
+assert(numsRepartitionedTwice.rdd.getNumPartitions == 8, "Number of partitions should be 4")
+
+scala> numsRepartitionedTwice.explain(extended = true)
+== Parsed Logical Plan ==
+Repartition 8, true
++- Repartition 4, true
+   +- Range (0, 5, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+Repartition 8, true
++- Repartition 4, true
+   +- Range (0, 5, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+Repartition 8, true
++- Range (0, 5, step=1, splits=Some(16))
+
+== Physical Plan ==
+Exchange RoundRobinPartitioning(8), false, [id=#77]
++- *(1) Range (0, 5, step=1, splits=16)
+```
+
+### Coalesce Operator
+
+```text
+val numsCoalesced = nums.coalesce(numPartitions = 4)
+assert(numsCoalesced.rdd.getNumPartitions == 4, "Number of partitions should be 4")
+
+scala> numsCoalesced.explain(extended = true)
+== Parsed Logical Plan ==
+Repartition 4, false
++- Range (0, 5, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+Repartition 4, false
++- Range (0, 5, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+Repartition 4, false
++- Range (0, 5, step=1, splits=Some(16))
+
+== Physical Plan ==
+Coalesce 4
++- *(1) Range (0, 5, step=1, splits=16)
+```
+
+### RepartitionByExpression (Partition Expressions Only)
+
+```text
+val q = nums.repartition(partitionExprs = 'id % 2)
+scala> q.explain(extended = true)
+== Parsed Logical Plan ==
+'RepartitionByExpression [('id % 2)], 200
++- Range (0, 5, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+RepartitionByExpression [(id#2L % cast(2 as bigint))], 200
++- Range (0, 5, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+RepartitionByExpression [(id#2L % 2)], 200
++- Range (0, 5, step=1, splits=Some(16))
+
+== Physical Plan ==
+Exchange hashpartitioning((id#2L % 2), 200), false, [id=#86]
++- *(1) Range (0, 5, step=1, splits=16)
+```
+
+### RepartitionByExpression (Number of Partitions and Partition Expressions )
+
+```text
+val q = nums.repartition(numPartitions = 2, partitionExprs = 'id % 2)
+scala> q.explain(extended = true)
+== Parsed Logical Plan ==
+'RepartitionByExpression [('id % 2)], 2
++- Range (0, 5, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+RepartitionByExpression [(id#2L % cast(2 as bigint))], 2
++- Range (0, 5, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+RepartitionByExpression [(id#2L % 2)], 2
++- Range (0, 5, step=1, splits=Some(16))
+
+== Physical Plan ==
+Exchange hashpartitioning((id#2L % 2), 2), false, [id=#95]
++- *(1) Range (0, 5, step=1, splits=16)
+```

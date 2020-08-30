@@ -515,7 +515,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 `repartition` operators repartition the `Dataset` to exactly `numPartitions` partitions or using `partitionExprs` expressions.
 
-Internally, `repartition` creates a spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#Repartition[Repartition] or spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression[RepartitionByExpression] logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
+`repartition` creates a [Repartition](logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
 
 [source, scala]
 ----
@@ -549,13 +549,9 @@ repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 <1> Uses <<spark-sql-properties.md#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
 
-`repartitionByRange` simply <<spark-sql-Dataset.md#withTypedPlan, creates a Dataset>> with a <<spark-sql-LogicalPlan-Repartition-RepartitionByExpression.md#RepartitionByExpression, RepartitionByExpression>> logical operator.
+`repartitionByRange` simply <<spark-sql-Dataset.md#withTypedPlan, creates a Dataset>> with a [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
 
-[source, scala]
-----
-scala> spark.version
-res1: String = 2.3.1
-
+```text
 val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
 scala> println(q.queryExecution.logical.numberedTreeString)
 00 'RepartitionByExpression ['id ASC NULLS FIRST], 5
@@ -571,7 +567,7 @@ scala> println(q.queryExecution.toRdd.toDebugString)
     |  MapPartitionsRDD[13] at toRdd at <console>:26 []
     |  MapPartitionsRDD[12] at toRdd at <console>:26 []
     |  ParallelCollectionRDD[11] at toRdd at <console>:26 []
-----
+```
 
 `repartitionByRange` uses a `SortOrder` with the `Ascending` sort order, i.e. _ascending nulls first_, when no explicit sort order is specified.
 
