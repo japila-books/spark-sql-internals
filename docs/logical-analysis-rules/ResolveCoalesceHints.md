@@ -10,7 +10,7 @@ Hint Name | Arguments | Logical Operator
 
 `ResolveCoalesceHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
-`ResolveCoalesceHints` is part of [Hints](../Analyzer.md#Hints) fixed-point batch of rules.
+`ResolveCoalesceHints` is part of [Hints](../Analyzer.md#Hints) batch of rules of [Logical Analyzer](../Analyzer.md).
 
 ## Creating Instance
 
@@ -18,7 +18,7 @@ Hint Name | Arguments | Logical Operator
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`ResolveCoalesceHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches](../Analyzer.md#batches).
+`ResolveCoalesceHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches of rules](../Analyzer.md#batches).
 
 ## <span id="apply"> Executing Rule
 

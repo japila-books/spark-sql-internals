@@ -31,7 +31,8 @@ NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPU
 
 NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
 
-NOTE: Use `Dataset.hint` or `SELECT` SQL statement with hints to spark-sql-hint-framework.md#specifying-query-hints[specify query hints].
+!!! note
+    Use `Dataset.hint` or `SELECT` SQL statement with hints for [query hints](new-and-noteworthy/hint-framework.md#specifying-query-hints).
 
 `Statistics` is <<creating-instance, created>> when:
 

@@ -1,50 +1,53 @@
 # Hint Framework
 
-Structured queries can be optimized using *Hint Framework* that allows for <<specifying-query-hints, specifying query hints>>.
+Structured queries can be optimized using **Hint Framework** that allows for [specifying query hints](#specifying-query-hints).
 
-*Query hints* allow for annotating a query and give a hint to the query optimizer how to optimize logical plans. This can be very useful when the query optimizer cannot make optimal decision, e.g. with respect to join methods due to conservativeness or the lack of proper statistics.
+**Query hints** allow for annotating a query and give a hint to the query optimizer how to optimize logical plans. This can be very useful when the query optimizer cannot make optimal decision, e.g. with respect to join methods due to conservativeness or the lack of proper statistics.
 
-Spark SQL supports <<coalesce-repartition-hints, COALESCE and REPARTITION>> and <<broadcast-hints, BROADCAST>> hints. All remaining unresolved hints are silently removed from a query plan at <<spark-analyzer, analysis>>.
+Spark SQL supports [COALESCE and REPARTITION](#coalesce-repartition-hints) and [BROADCAST](#broadcast-hints) hints. All remaining unresolved hints are silently removed from a query plan at [analysis](#spark-analyzer).
 
-NOTE: Hint Framework was added in https://issues.apache.org/jira/browse/SPARK-20857[Spark SQL 2.2].
+Hint Framework was added in [Apache Spark 2.2](https://issues.apache.org/jira/browse/SPARK-20857).
 
-=== [[specifying-query-hints]] Specifying Query Hints
+## Specifying Query Hints
 
-You can specify query hints using spark-sql-dataset-operators.md#hint[Dataset.hint] operator or <<sql-hints, SELECT SQL statements with hints>>.
+Hints are defined using [Dataset.hint](../spark-sql-dataset-operators.md#hint) operator or [SQL hints](#sql-hints).
 
-[source, scala]
-----
-// Dataset API
+### Dataset API
+
+```text
 val q = spark.range(1).hint(name = "myHint", 100, true)
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)
 00 'UnresolvedHint myHint, [100, true]
 01 +- Range (0, 1, step=1, splits=Some(8))
+```
 
-// SQL
+### SQL
+
+```text
 val q = sql("SELECT /*+ myHint (100, true) */ 1")
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)
 00 'UnresolvedHint myHint, [100, true]
 01 +- 'Project [unresolvedalias(1, None)]
 02    +- OneRowRelation
-----
+```
 
-=== [[sql-hints]] SELECT SQL Statements With Hints
+## <span id="sql-hints"> SELECT SQL Statements With Hints
 
-`SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL spark-sql-AstBuilder.md#withHints[translates] into a spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator in a logical plan.
+`SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL [translates](../sql/AstBuilder.md#withHints) into a [UnresolvedHint](../logical-operators/UnresolvedHint.md) unary logical operator.
 
-=== [[coalesce-repartition-hints]] COALESCE and REPARTITION Hints
+### <span id="coalesce-repartition-hints"> COALESCE and REPARTITION Hints
 
-Spark SQL 2.4 added support for *COALESCE* and *REPARTITION* hints (using <<sql-hints, SQL comments>>):
+Spark SQL 2.4 added support for **COALESCE** and **REPARTITION** hints (using [SQL comments](#sql-hints)):
 
 * `SELECT /*+ COALESCE(5) */ ...`
 
 * `SELECT /*+ REPARTITION(3) */ ...`
 
-=== [[broadcast-hints]] Broadcast Hints
+### <span id="broadcast-hints"> Broadcast Hints
 
-Spark SQL 2.2 supports *BROADCAST* hints using <<broadcast-function, broadcast standard function>> or <<sql-hints, SQL comments>>:
+Spark SQL 2.2 supports **BROADCAST** hints using [broadcast](#broadcast-function) standard function or [SQL comments](#sql-hints):
 
 * `SELECT /*+ MAPJOIN(b) */ ...`
 
@@ -52,14 +55,13 @@ Spark SQL 2.2 supports *BROADCAST* hints using <<broadcast-function, broadcast s
 
 * `SELECT /*+ BROADCAST(b) */ ...`
 
-=== [[broadcast-function]] broadcast Standard Function
+### <span id="broadcast-function"> broadcast Standard Function
 
-While `hint` operator allows for attaching any hint to a logical plan spark-sql-functions.md#broadcast[broadcast] standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
+While `hint` operator allows for attaching any hint to a logical plan [broadcast](../spark-sql-functions.md#broadcast) standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
 
-`broadcast` standard function is used for spark-sql-joins-broadcast.md[broadcast joins (aka map-side joins)], i.e. to hint the Spark planner to broadcast a dataset regardless of the size.
+`broadcast` standard function is used for [broadcast joins (aka map-side joins)](../spark-sql-joins-broadcast.md) (and to hint the Spark planner to broadcast a dataset regardless of the size).
 
-[source, scala]
-----
+```text
 val small = spark.range(1)
 val large = spark.range(100)
 
@@ -92,22 +94,21 @@ scala> println(plan.numberedTreeString)
 01 :- Range (0, 100, step=1, splits=Some(8))
 02 +- ResolvedHint (broadcast)
 03    +- Range (0, 1, step=1, splits=Some(8))
-----
+```
 
-=== [[spark-analyzer]] Spark Analyzer
+### Spark Analyzer
 
-There are the following logical rules that [Logical Analyzer](Analyzer.md) uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
+[Logical Analyzer](../Analyzer.md) uses the following logical rules to resolve [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operators:
 
-* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md)
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md)
 
-* [ResolveCoalesceHints](logical-analysis-rules/ResolveCoalesceHints.md)
+* [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md)
 
-* `RemoveAllHints` simply removes all `UnresolvedHint` operators
+* `RemoveAllHints` (to remove all `UnresolvedHint` operators left unresolved)
 
 The order of executing the above rules matters.
 
-[source, scala]
-----
+```text
 // Let's hint the query twice
 // The order of hints matters as every hint operator executes Spark analyzer
 // That will resolve all but the last hint
@@ -135,14 +136,13 @@ val resolvedPlan = HintResolver.execute(plan)
 scala> println(resolvedPlan.numberedTreeString)
 00 ResolvedHint (broadcast)
 01 +- Range (0, 100, step=1, splits=Some(8))
-----
+```
 
-=== [[hint-catalyst-dsl]] Hint Operator in Catalyst DSL
+## <span id="hint-catalyst-dsl"> Hint Operator in Catalyst DSL
 
-You can use `hint` operator from spark-sql-catalyst-dsl.md#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
+[hint](../spark-sql-catalyst-dsl.md#hint) operator in [Catalyst DSL](../spark-sql-catalyst-dsl.md) allows to create a [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operator.
 
-[source, scala]
-----
+```text
 // Create a logical plan to add hint to
 import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
 val r1 = LocalRelation('a.int, 'b.timestamp, 'c.boolean)
@@ -155,4 +155,4 @@ val plan = r1.hint(name = "myHint", 100, true)
 scala> println(plan.numberedTreeString)
 00 'UnresolvedHint myHint, [100, true]
 01 +- LocalRelation <empty>, [a#0, b#1, c#2]
-----
+```

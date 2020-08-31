@@ -1,8 +1,10 @@
 # ResolveJoinStrategyHints Logical Resolution Rule
 
-`ResolveJoinStrategyHints` is a [logical resolution rule](../catalyst/Rule.md) (`Rule[LogicalPlan]`) to [resolve UnresolvedHints with JoinStrategyHints](#apply).
+`ResolveJoinStrategyHints` is a logical resolution rule to [resolve UnresolvedHints logical operators](#apply) with [JoinStrategyHint](../JoinStrategyHint.md)s.
 
-`ResolveJoinStrategyHints` is part of the [Hints](../Analyzer.md#Hints) batch of [Logical Analyzer](../Analyzer.md).
+`ResolveJoinStrategyHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
+
+`ResolveJoinStrategyHints` is part of [Hints](../Analyzer.md#Hints) batch of rules of [Logical Analyzer](../Analyzer.md).
 
 ## Creating Instance
 
@@ -10,7 +12,7 @@
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`ResolveJoinStrategyHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [rule batches](../Analyzer.md#batches).
+`ResolveJoinStrategyHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches of rules](../Analyzer.md#batches).
 
 ## <span id="apply"> Executing Rule
 

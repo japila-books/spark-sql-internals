@@ -688,6 +688,7 @@ nav:
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
+    - Hint Framework: new-and-noteworthy/hint-framework.md
     - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
@@ -719,7 +720,6 @@ nav:
       - spark-sql-ColumnarBatch.md
     - spark-sql-data-source-api-v2.md
     - spark-sql-subqueries.md
-    - spark-sql-hint-framework.md
     - Cost-Based Optimization:
       - spark-sql-cost-based-optimization.md
       - spark-sql-CatalogStatistics.md

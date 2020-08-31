@@ -336,19 +336,19 @@ Range (0, 10, step=1, splits=Some(8))
 *Range (0, 10, step=1, splits=Some(8))
 ----
 
-=== [[hint]] Specifying Hint -- `hint` Basic Action
+### <span id="hint"> Specifying Hint
 
-[source, scala]
-----
-hint(name: String, parameters: Any*): Dataset[T]
-----
+```scala
+hint(
+  name: String,
+  parameters: Any*): Dataset[T]
+```
 
-`hint` operator is part of spark-sql-hint-framework.md[Hint Framework] to specify a *hint* (by `name` and `parameters`) for a `Dataset`.
+`hint` operator is part of [Hint Framework](new-and-noteworthy/hint-framework.md) to specify a **hint** (by `name` and `parameters`) for a `Dataset`.
 
 Internally, `hint` simply attaches spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the spark-sql-Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
 
-[source, scala]
-----
+```text
 val ds = spark.range(3)
 val plan = ds.queryExecution.logical
 scala> println(plan.numberedTreeString)
@@ -360,14 +360,10 @@ val plan = dsHinted.queryExecution.logical
 scala> println(plan.numberedTreeString)
 00 'UnresolvedHint myHint, [100, true]
 01 +- Range (0, 3, step=1, splits=Some(8))
-----
+```
 
-NOTE: `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers [analysis phase](QueryExecution.md#analyzed) that executes spark-sql-LogicalPlan-Command.md[logical commands] and their unions as well as resolves all hints that have already been added to a logical plan.
-
-[source, scala]
-----
-// FIXME Demo with UnresolvedHint
-----
+!!! note
+    `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers [analysis phase](QueryExecution.md#analyzed) that executes [logical commands](logical-operators/Command.md) and their unions as well as resolves all hints that have already been added to a logical plan.
 
 === [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Basic Action
 
