@@ -2228,6 +2228,10 @@
      <lastmod>2020-08-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/hint-framework/</loc>
+     <lastmod>2020-08-31</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/join-strategy-hints/</loc>
      <lastmod>2020-08-31</lastmod>
      <changefreq>daily</changefreq>
@@ -2329,10 +2333,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-subqueries/</loc>
-     <lastmod>2020-08-31</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-hint-framework/</loc>
      <lastmod>2020-08-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
