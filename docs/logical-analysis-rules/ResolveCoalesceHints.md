@@ -1,17 +1,64 @@
-# ResolveCoalesceHints Logical Resolution Rule -- Resolving UnresolvedHint Operators with COALESCE and REPARTITION Hints
+# ResolveCoalesceHints Logical Resolution Rule
 
-`ResolveCoalesceHints` is a logical resolution rule that the [Logical Analyzer](../Analyzer.md#ResolveCoalesceHints) uses to <<apply, resolve UnresolvedHint logical operators>> with `COALESCE` or `REPARTITION` hints (case-insensitive) to <<spark-sql-LogicalPlan-ResolvedHint.md#, ResolvedHint>> operators.
+`ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with `COALESCE`, `REPARTITION` or `REPARTITION_BY_RANGE` names.
 
-`COALESCE` or `REPARTITION` hints expect a partition number as the only parameter.
+Hint Name | Arguments | Logical Operator
+----------|-----------|-----------------
+ `COALESCE` | Number of partitions | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` off / `false`)
+ `REPARTITION` | Number of partitions alone or like `REPARTITION_BY_RANGE` | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` on / `true`)
+ `REPARTITION_BY_RANGE` | Column names with an optional number of partitions (default: [spark.sql.shuffle.partitions](../spark-sql-properties.md#spark.sql.shuffle.partitions) configuration property) | [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression)
 
-`ResolveCoalesceHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
+`ResolveCoalesceHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
-`ResolveCoalesceHints` is part of [Hints](../Analyzer.md#Hints) fixed-point batch of rules (that is executed before any other rule).
+`ResolveCoalesceHints` is part of [Hints](../Analyzer.md#Hints) fixed-point batch of rules.
 
-[[creating-instance]]
-`ResolveCoalesceHints` takes no input parameters when created.
+## Creating Instance
 
-## Example: Using COALESCE Hint
+`ResolveCoalesceHints` takes the following to be created:
+
+* <span id="conf"> [SQLConf](../SQLConf.md)
+
+`ResolveCoalesceHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches](../Analyzer.md#batches).
+
+## <span id="apply"> Executing Rule
+
+```scala
+apply(
+  plan: LogicalPlan): LogicalPlan
+```
+
+`apply` resolves [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operators with the following hint names (case-insensitive).
+
+Hint Name | Trigger
+----------|----------
+ `COALESCE` | [createRepartition](#createRepartition) (with `shuffle` off)
+ `REPARTITION` | [createRepartition](#createRepartition) (with `shuffle` on)
+ `REPARTITION_BY_RANGE` | [createRepartitionByRange](#createRepartitionByRange)
+
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+## <span id="createRepartition"> createRepartition Internal Method
+
+```scala
+createRepartition(
+  shuffle: Boolean,
+  hint: UnresolvedHint): LogicalPlan
+```
+
+`createRepartition` handles `COALESCE` and `REPARTITION` hints (and creates [Repartition](../logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators).
+
+## <span id="createRepartitionByRange"> createRepartitionByRange Internal Method
+
+```scala
+createRepartitionByRange(
+  hint: UnresolvedHint): RepartitionByExpression
+```
+
+`createRepartitionByRange` creates a [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
+
+## Examples
+
+### Using COALESCE Hint
 
 ```text
 // Use Catalyst DSL to create a logical plan
@@ -28,7 +75,7 @@ scala> println(analyzedPlan.numberedTreeString)
 01 +- 'UnresolvedRelation `t1`
 ```
 
-## Example: Using REPARTITION Hint
+### Using REPARTITION Hint
 
 ```text
 // Use Catalyst DSL to create a logical plan
@@ -45,7 +92,7 @@ scala> println(analyzedPlan.numberedTreeString)
 01 +- 'UnresolvedRelation `t1`
 ```
 
-## Example: Using COALESCE Hint in SQL
+### Using COALESCE Hint in SQL
 
 ```text
 val q = sql("SELECT /*+ COALESCE(10) */ * FROM VALUES 1 t(id)")
