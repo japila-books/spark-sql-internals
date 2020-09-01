@@ -152,6 +152,18 @@ Since: `3.0.0`
 
 Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
 
+## <span id="spark.sql.adaptive.advisoryPartitionSizeInBytes"> spark.sql.adaptive.advisoryPartitionSizeInBytes
+
+The advisory size in bytes of the shuffle partition during adaptive optimization (when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled). It takes effect when Spark coalesces small shuffle partitions or splits skewed shuffle partition.
+
+Default: `64MB`
+
+Since: `3.0.0`
+
+Fallback Property: `spark.sql.adaptive.shuffle.targetPostShuffleInputSize`
+
+Use [SQLConf.ADVISORY_PARTITION_SIZE_IN_BYTES](SQLConf.md#ADVISORY_PARTITION_SIZE_IN_BYTES) to reference the name.
+
 ## <span id="spark.sql.adaptive.coalescePartitions.minPartitionNum"> spark.sql.adaptive.coalescePartitions.minPartitionNum
 
 The minimum number of shuffle partitions after coalescing. If not set, the default value is the default parallelism of the Spark cluster. This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled.
@@ -192,15 +204,17 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.skewJoin.enabled"> spark.sql.adaptive.skewJoin.enabled
 
-When true and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark dynamically handles skew in sort-merge join by splitting (and replicating if needed) skewed partitions.
+When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark dynamically handles skew in sort-merge join by splitting (and replicating if needed) skewed partitions.
 
 Default: `true`
 
 Since: `3.0.0`
 
+Use [SQLConf.SKEW_JOIN_ENABLED](SQLConf.md#SKEW_JOIN_ENABLED) to reference the property.
+
 ## <span id="spark.sql.adaptive.skewJoin.skewedPartitionFactor"> spark.sql.adaptive.skewJoin.skewedPartitionFactor
 
-A partition is considered as skewed if its size is larger than this factor multiplying the median partition size and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes).
+A partition is considered skewed if its size is larger than this factor multiplying the median partition size and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes).
 
 Default: `5`
 
@@ -208,7 +222,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes"> spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes
 
-A partition is considered as skewed if its size in bytes is larger than this threshold and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionFactor](#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplying the median partition size. Ideally this config should be set larger than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes).
+A partition is considered skewed if its size in bytes is larger than this threshold and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionFactor](#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplying the median partition size. Ideally this config should be set larger than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes).
 
 Default: `256MB`
 

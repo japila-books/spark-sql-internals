@@ -89,18 +89,18 @@ queryStagePreparationRules: Seq[Rule[SparkPlan]]
 
 `queryStagePreparationRules` is used when `AdaptiveSparkPlanExec` operator is requested for the [current physical plan](#currentPhysicalPlan) and [reOptimize](#reOptimize).
 
-## <span id="queryStageOptimizerRules"> QueryStage Optimizer Rules
+## <span id="queryStageOptimizerRules"> Adaptive Optimizations
 
 ```scala
 queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 ```
 
-`AdaptiveSparkPlanExec` defines the following physical optimization rules:
+`AdaptiveSparkPlanExec` uses the following adaptive optimizations (physical optimization rules):
 
-* ReuseAdaptiveSubquery
+* [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
 * [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
-* OptimizeSkewedJoin
-* OptimizeLocalShuffleReader
+* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md)
+* [OptimizeLocalShuffleReader](../physical-optimizations/OptimizeLocalShuffleReader.md)
 * [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
 * [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md)
 

@@ -1,8 +1,10 @@
 # CoalesceShufflePartitions Physical Optimization
 
-`CoalesceShufflePartitions` is a physical optimization rule (`Rule[SparkPlan]`) for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
+`CoalesceShufflePartitions` is a physical query plan optimization for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
 
 `CoalesceShufflePartitions` uses [spark.sql.adaptive.coalescePartitions.enabled](../spark-sql-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
+
+`CoalesceShufflePartitions` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
 ## Creating Instance
 

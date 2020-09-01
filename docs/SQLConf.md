@@ -581,3 +581,27 @@ Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physi
 ## <span id="SHUFFLE_PARTITIONS"><span id="numShufflePartitions"> numShufflePartitions
 
 The value of [spark.sql.shuffle.partitions](spark-sql-properties.md#spark.sql.shuffle.partitions) configuration property
+
+## <span id="SKEW_JOIN_SKEWED_PARTITION_FACTOR"> SKEW_JOIN_SKEWED_PARTITION_FACTOR
+
+[spark.sql.adaptive.skewJoin.skewedPartitionFactor](spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property
+
+Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+
+## <span id="SKEW_JOIN_SKEWED_PARTITION_THRESHOLD"> SKEW_JOIN_SKEWED_PARTITION_THRESHOLD
+
+[spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes) configuration property
+
+Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+
+## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
+
+[spark.sql.adaptive.advisoryPartitionSizeInBytes](spark-sql-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
+
+Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimizations are executed
+
+## <span id="SKEW_JOIN_ENABLED"> SKEW_JOIN_ENABLED
+
+[spark.sql.adaptive.skewJoin.enabled](spark-sql-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property
+
+Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
