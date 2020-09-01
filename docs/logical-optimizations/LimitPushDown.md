@@ -1,16 +1,34 @@
 # LimitPushDown Logical Optimization
 
-`LimitPushDown` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, transforms>> the following logical plans:
+`LimitPushDown` is a logical optimization to [transform](#apply) the following logical operators:
 
-* `LocalLimit` with `Union`
-* `LocalLimit` with spark-sql-LogicalPlan-Join.md[Join]
+* `LocalLimit` with [Union](../logical-operators/Union.md)
+* `LocalLimit` with [Join](../logical-operators/Join.md)
 
-`LimitPushDown` is part of the [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
+`LimitPushDown` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
-`LimitPushDown` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`LimitPushDown` is part of [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#operator-optimization-before-inferring-filters) and [Operator Optimization after Inferring Filters](../catalyst/Optimizer.md#operator-optimization-after-inferring-filters) batch of rules of [Logical Optimizer](../catalyst/Optimizer.md).
 
-[source, scala]
-----
+## Creating Instance
+
+`LimitPushDown` takes no arguments to be created.
+
+`LimitPushDown` is created when [Logical Optimizer](../catalyst/Optimizer.md) is requested for the [default batches of rules](../catalyst/Optimizer.md#defaultBatches).
+
+## <span id="apply"> Executing Rule
+
+```scala
+apply(
+   plan: LogicalPlan): LogicalPlan
+```
+
+`apply`...FIXME
+
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+## Demo
+
+```text
 // test datasets
 scala> val ds1 = spark.range(4)
 ds1: org.apache.spark.sql.Dataset[Long] = [value: bigint]
@@ -51,24 +69,4 @@ CollectLimit 2
    :  +- *Range (0, 4, step=1, splits=Some(8))
    +- *LocalLimit 2
       +- *Range (0, 2, step=1, splits=Some(8))
-----
-
-## <span id="apply"> Executing Rule
-
-```scala
-apply(plan: LogicalPlan): LogicalPlan
 ```
-
-`apply`...FIXME
-
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
-
-=== [[creating-instance]] Creating LimitPushDown Instance
-
-`LimitPushDown` takes the following when created:
-
-* [[conf]] spark-sql-CatalystConf.md[CatalystConf]
-
-`LimitPushDown` initializes the <<internal-registries, internal registries and counters>>.
-
-NOTE: `LimitPushDown` is created when

@@ -121,7 +121,7 @@ Rules:
 * PushDownPredicates
 * PushDownLeftSemiAntiJoin
 * PushLeftSemiLeftAntiThroughJoin
-* LimitPushDown
+* [LimitPushDown](../logical-optimizations/LimitPushDown.md)
 * ColumnPruning
 * CollapseRepartition
 * CollapseProject
