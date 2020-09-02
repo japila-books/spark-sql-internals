@@ -89,6 +89,8 @@ executeColumnar(): RDD[ColumnarBatch]
 
 `executeColumnar` [executeQuery](#executeQuery) with [doExecuteColumnar](#doExecuteColumnar).
 
+`executeColumnar` is used when [ColumnarToRowExec](ColumnarToRowExec.md) unary physical operator is executed and requested for the [inputRDDs](ColumnarToRowExec.md#inputRDDs).
+
 ### <span id="executeQuery"> executeQuery
 
 ```scala
@@ -153,7 +155,7 @@ Part of [executeBroadcast](#executeBroadcast)
 doExecuteColumnar(): RDD[ColumnarBatch]
 ```
 
-`doExecuteColumnar` reports an `IllegalStateException` by default:
+`doExecuteColumnar` throws an `IllegalStateException` by default:
 
 ```text
 Internal Error [class] has column support mismatch:
@@ -502,6 +504,24 @@ outputOrdering: Seq[SortOrder]
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
 
 * `FileFormatWriter` is requested to [write a query result](../spark-sql-FileFormatWriter.md#write)
+
+## <span id="supportsColumnar"> supportsColumnar
+
+```scala
+supportsColumnar: Boolean
+```
+
+`supportsColumnar` specifies whether the physical operator supports columnar (vectorized) execution.
+
+`supportsColumnar` is on (`true`) by default.
+
+`supportsColumnar` is used when:
+
+* [BatchScanExec](BatchScanExec.md) physical operator is requested for an [inputRDD](BatchScanExec.md#inputRDD)
+* [ColumnarToRowExec](ColumnarToRowExec.md) physical operator is created and executed
+* [FileSourceScanExec](FileSourceScanExec.md) physical operator is requested for [metadata](FileSourceScanExec.md#metadata) and [metrics](FileSourceScanExec.md#metrics)
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) is executed
+* [ReusedExchangeExec](ReusedExchangeExec.md) physical operator is executed
 
 ## Internal Properties
 

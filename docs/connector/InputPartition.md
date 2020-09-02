@@ -1,6 +1,6 @@
 # InputPartition
 
-`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [Data Source API V2](spark-sql-data-source-api-v2.md) with optional [location preferences](#preferredLocations).
+`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [Data Source API V2](../spark-sql-data-source-api-v2.md) with optional [location preferences](#preferredLocations).
 
 `InputPartition` is a Java [Serializable](https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html).
 
@@ -18,9 +18,9 @@ By default, `preferredLocations` defines no location preferences (is simply empt
 
 Used when:
 
-* `FileScanRDD` is requested for [preferred locations](spark-sql-FileScanRDD.md#getPreferredLocations)
+* `FileScanRDD` is requested for [preferred locations](../spark-sql-FileScanRDD.md#getPreferredLocations)
 
-* `DataSourceRDD` is requested for [preferred locations](DataSourceRDD.md#getPreferredLocations)
+* `DataSourceRDD` is requested for [preferred locations](../DataSourceRDD.md#getPreferredLocations)
 
 * `ContinuousDataSourceRDD` (Spark Structured Streaming) is requested for preferred locations
 

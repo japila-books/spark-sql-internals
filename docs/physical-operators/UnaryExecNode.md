@@ -25,7 +25,7 @@ Used when:
 * BaseAggregateExec
 * [CoalesceExec](CoalesceExec.md)
 * CollectMetricsExec
-* ColumnarToRowExec
+* [ColumnarToRowExec](ColumnarToRowExec.md)
 * [CustomShuffleReaderExec](CustomShuffleReaderExec.md)
 * [DataWritingCommandExec](DataWritingCommandExec.md)
 * [DebugExec](DebugExec.md)

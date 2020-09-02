@@ -74,7 +74,7 @@ NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is reques
 | Description
 
 | batchPartitions
-a| [[batchPartitions]] Input partitions of <<spark-sql-ColumnarBatch.md#, ColumnarBatches>> (`Seq[InputPartition[ColumnarBatch]]`)
+a| [[batchPartitions]] Input partitions of [ColumnarBatches](../ColumnarBatch.md) (`Seq[InputPartition[ColumnarBatch]]`)
 
 | partitions
 a| [[partitions]] Input partitions of <<spark-sql-InternalRow.md#, InternalRows>> (`Seq[InputPartition[InternalRow]]`)

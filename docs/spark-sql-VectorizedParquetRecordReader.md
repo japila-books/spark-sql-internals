@@ -40,7 +40,7 @@ Increments every <<nextKeyValue, nextKeyValue>>
 Reset to `0` when <<nextBatch, reading next rows into a columnar batch>>
 
 | columnarBatch
-| [[columnarBatch]] <<spark-sql-ColumnarBatch.md#, ColumnarBatch>>
+| [[columnarBatch]] [ColumnarBatch](ColumnarBatch.md)
 
 | columnReaders
 | [[columnReaders]] <<spark-sql-VectorizedColumnReader.md#, VectorizedColumnReaders>> (one reader per column) to <<nextBatch, read rows as batches>>
@@ -163,7 +163,7 @@ spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnV
 `spark.sql.columnVector.offheap.enabled` is disabled by default which means that spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used.
 ====
 
-`initBatch` creates a spark-sql-ColumnarBatch.md#creating-instance[ColumnarBatch] (with the <<columnVectors, allocated WritableColumnVectors>>) and records it as the internal <<columnarBatch, ColumnarBatch>>.
+`initBatch` creates a [ColumnarBatch](ColumnarBatch.md) (with the <<columnVectors, allocated WritableColumnVectors>>) and records it as the internal <<columnarBatch, ColumnarBatch>>.
 
 `initBatch` creates new slots in the <<columnVectors, allocated WritableColumnVectors>> for the input `partitionColumns` and sets the input `partitionValues` as constants.
 
@@ -189,7 +189,7 @@ boolean nextBatch() throws IOException
 
 Internally, `nextBatch` firstly requests every <<spark-sql-WritableColumnVector.md#, WritableColumnVector>> (in the <<columnVectors, columnVectors>> internal registry) to <<spark-sql-WritableColumnVector.md#reset, reset itself>>.
 
-`nextBatch` requests the <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.md#setNumRows, specify the number of rows (in batch)>> as `0` (effectively resetting the batch and making it available for reuse).
+`nextBatch` requests the <<columnarBatch, ColumnarBatch>> to [specify the number of rows (in batch)](ColumnarBatch.md#setNumRows) as `0` (effectively resetting the batch and making it available for reuse).
 
 When the <<rowsReturned, rowsReturned>> is greater than the <<totalRowCount, totalRowCount>>, `nextBatch` finishes with (_returns_) `false` (to "announce" there are no rows available).
 
@@ -207,7 +207,7 @@ In the end, `nextBatch` registers the progress as follows:
 
 * The number of rows read is added to the <<rowsReturned, rowsReturned>> counter
 
-* Requests the internal <<columnarBatch, ColumnarBatch>> to <<spark-sql-ColumnarBatch.md#setNumRows, set the number of rows (in batch)>> to be the number of rows read
+* Requests the internal <<columnarBatch, ColumnarBatch>> to [set the number of rows (in batch)](ColumnarBatch.md#setNumRows) to be the number of rows read
 
 * The <<numBatched, numBatched>> registry is exactly the number of rows read
 
@@ -237,7 +237,7 @@ Object getCurrentValue()
 
 NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.7.5/api/org/apache/hadoop/mapreduce/RecordReader.html[RecordReader] Contract to break the data into key/value pairs for input to a Hadoop `Mapper`.
 
-`getCurrentValue` returns the entire <<columnarBatch, ColumnarBatch>> with the <<returnColumnarBatch, returnColumnarBatch>> flag enabled (`true`) or requests it for a <<spark-sql-ColumnarBatch.md#getRow, single row>> instead.
+`getCurrentValue` returns the entire <<columnarBatch, ColumnarBatch>> with the <<returnColumnarBatch, returnColumnarBatch>> flag enabled (`true`) or requests it for a [single row](ColumnarBatch.md#getRow) instead.
 
 [NOTE]
 ====

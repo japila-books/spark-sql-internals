@@ -516,6 +516,7 @@ nav:
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
         - CollectLimitExec: physical-operators/CollectLimitExec.md
+        - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
         - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
         - CreateTableExec: physical-operators/CreateTableExec.md
         - CustomShuffleReaderExec: physical-operators/CustomShuffleReaderExec.md
@@ -716,7 +717,7 @@ nav:
         - spark-sql-EquivalentExpressions.md
     - Vectorized Query Execution:
       - spark-sql-vectorized-query-execution.md
-      - spark-sql-ColumnarBatch.md
+      - ColumnarBatch: ColumnarBatch.md
     - spark-sql-data-source-api-v2.md
     - spark-sql-subqueries.md
     - Cost-Based Optimization:

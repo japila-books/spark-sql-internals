@@ -1,9 +1,10 @@
 # ColumnarBatch
 
-`ColumnarBatch` allows to work with multiple <<columns, ColumnVectors>> as a row-wise table.
+`ColumnarBatch` allows to work with multiple [ColumnVectors](#columns) as a row-wise table.
 
-[source, scala]
-----
+## Example
+
+```text
 import org.apache.spark.sql.types._
 val schema = new StructType()
   .add("intCol", IntegerType)
@@ -29,49 +30,25 @@ columns(3).putByteArray(0, "Hello".getBytes(java.nio.charset.StandardCharsets.UT
 batch.setNumRows(1)
 
 assert(batch.getRow(0).numFields == 4)
-----
+```
 
-`ColumnarBatch` is <<creating-instance, created>> when:
+## Creating Instance
 
-* `InMemoryTableScanExec` physical operator is requested to spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
+`ColumnarBatch` takes the following to be created:
 
-* `VectorizedParquetRecordReader` is requested to spark-sql-VectorizedParquetRecordReader.md#initBatch[initBatch]
+* <span id="columns"> [ColumnVectors](spark-sql-ColumnVector.md)
+* <span id="numRows"> Number of Rows
 
-* `OrcColumnarBatchReader` is requested to `initBatch`
+`ColumnarBatch` immediately creates the internal `MutableColumnarRow`.
 
-* `ColumnVectorUtils` is requested to `toBatch`
+`ColumnarBatch` is created when:
 
-* `ArrowPythonRunner` is requested for a `Iterator[ColumnarBatch]` (i.e. `newReaderIterator`)
-
-* `ArrowConverters` is requested for a `ArrowRowIterator` (i.e. `fromPayloadIterator`)
-
-[[creating-instance]]
-[[columns]]
-`ColumnarBatch` takes an array of <<spark-sql-ColumnVector.md#, ColumnVectors>> to be created. `ColumnarBatch` immediately initializes the internal <<row, MutableColumnarRow>>.
-
-[[numCols]]
-The number of columns in a `ColumnarBatch` is the number of <<columns, ColumnVectors>> (this batch was created with).
-
-[NOTE]
-====
-`ColumnarBatch` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
-
-In other words, using the contract is as treading on thin ice.
-====
-
-[[internal-registries]]
-.ColumnarBatch's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,3",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| numRows
-| [[numRows]] Number of rows
-
-| row
-| [[row]] `MutableColumnarRow` over the <<columns, ColumnVectors>>
-|===
+* `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
+* [InMemoryTableScanExec](physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
+* `MapInPandasExec` unary physical operator is requested to `doExecute`
+* `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
+* `PandasGroupUtils` utility is requested to `executePython`
+* `ArrowConverters` utility is requested to `fromBatchIterator`
 
 === [[rowIterator]] Iterator Over InternalRows (in Batch) -- `rowIterator` Method
 

@@ -191,9 +191,9 @@ createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
 
 NOTE: spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag is disabled by default which means that spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used.
 
-`createAndDecompressColumn` creates a spark-sql-ColumnarBatch.md#creating-instance[ColumnarBatch] for the allocated column vectors (as an array of `ColumnVector`).
+`createAndDecompressColumn` creates a [ColumnarBatch](../ColumnarBatch.md) for the allocated column vectors (as an array of `ColumnVector`).
 
-`createAndDecompressColumn` spark-sql-ColumnarBatch.md#numRows[sets the number of rows in the columnar batch].
+`createAndDecompressColumn` [sets the number of rows in the columnar batch](../ColumnarBatch.md#numRows).
 
 For every <<attributes, Attribute>> `createAndDecompressColumn` requests `ColumnAccessor` to `decompress` the column.
 

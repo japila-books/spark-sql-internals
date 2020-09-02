@@ -123,7 +123,7 @@ NOTE: `next` is part of the <<https://www.scala-lang.org/api/2.12.x/scala/collec
 
 `next` takes the next element of the current iterator over elements of a file block (<<spark-sql-PartitionedFile.md#, PartitionedFile>>).
 
-`next` increments the metrics of bytes and number of rows read (that could be the number of rows in a <<spark-sql-ColumnarBatch.md#, ColumnarBatch>> for vectorized reads).
+`next` increments the metrics of bytes and number of rows read (that could be the number of rows in a [ColumnarBatch](ColumnarBatch.md) for vectorized reads).
 
 ==== [[compute-nextIterator]] Getting Next Iterator -- `nextIterator` Internal Method
 

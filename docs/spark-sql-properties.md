@@ -846,7 +846,7 @@ Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access t
 
 | [[spark.sql.columnVector.offheap.enabled]] *spark.sql.columnVector.offheap.enabled*
 
-*(internal)* Enables spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in spark-sql-ColumnarBatch.md[ColumnarBatch] (`true`) or not (`false`). When `false`, spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
+*(internal)* Enables spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in [ColumnarBatch](ColumnarBatch.md) (`true`) or not (`false`). When `false`, spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
 
 Default: `false`
 

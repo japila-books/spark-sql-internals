@@ -92,6 +92,6 @@ Consult https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-
 | [[SupportsReportStatistics]] `DataSourceReaders` that can report statistics to Spark
 
 | <<spark-sql-SupportsScanColumnarBatch.md#, SupportsScanColumnarBatch>>
-| [[SupportsScanColumnarBatch]] `DataSourceReaders` that can output <<spark-sql-ColumnarBatch.md#, ColumnarBatch>> and make the scan faster
+| [[SupportsScanColumnarBatch]] `DataSourceReaders` that can output [ColumnarBatch](ColumnarBatch.md) and make the scan faster
 
 |===
