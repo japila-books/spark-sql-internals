@@ -492,14 +492,6 @@ Default: `false`
 
 Since: `3.0.0`
 
-## <span id="spark.sql.debug.maxToStringFields"> spark.sql.debug.maxToStringFields
-
-Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
-
-Default: `25`
-
-Since: `3.0.0`
-
 ## <span id="spark.sql.maxPlanStringLength"> spark.sql.maxPlanStringLength
 
 Maximum number of characters to output for a plan string.  If the plan is longer, further output will be truncated.
@@ -1393,3 +1385,13 @@ Default: `200`
     `spark.sql.shuffle.partitions` cannot be changed in Spark Structured Streaming between query restarts from the same checkpoint location.
 
 Use [SQLConf.numShufflePartitions](SQLConf.md#numShufflePartitions) method to access the current value.
+
+## <span id="spark.sql.debug.maxToStringFields"> spark.sql.debug.maxToStringFields
+
+Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
+
+Default: `25`
+
+Since: `3.0.0`
+
+Use [SQLConf.maxToStringFields](SQLConf.md#maxToStringFields) method to access the current value.

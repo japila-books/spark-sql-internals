@@ -2,7 +2,7 @@ title: FilterExec
 
 # FilterExec Unary Physical Operator
 
-`FilterExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that represents <<spark-sql-LogicalPlan-Filter.md#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.md#, TypedFilter>> unary logical operators at execution.
+`FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents <<spark-sql-LogicalPlan-Filter.md#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.md#, TypedFilter>> unary logical operators at execution.
 
 `FilterExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_) as follows:
 

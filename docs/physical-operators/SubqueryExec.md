@@ -2,7 +2,7 @@ title: SubqueryExec
 
 # SubqueryExec Unary Physical Operator
 
-`SubqueryExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
+`SubqueryExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
 
 `SubqueryExec` uses <<relationFuture, relationFuture>> that is lazily and executed only once when `SubqueryExec`  is first requested to <<doPrepare, prepare execution>> that simply triggers execution of the <<child, child>> operator asynchronously (i.e. on a separate thread) and to <<executeCollect, collect the result>> soon after (that makes `SubqueryExec` waiting indefinitely for the child operator to be finished).
 

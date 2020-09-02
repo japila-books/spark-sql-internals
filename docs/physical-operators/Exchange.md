@@ -1,6 +1,6 @@
 # Exchange Unary Physical Operators
 
-`Exchange` is an [extension](#contract) of the [UnaryExecNode](SparkPlan.md#UnaryExecNode) abstraction for [unary physical operators](#implementations) to exchange data (among tasks).
+`Exchange` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [unary physical operators](#implementations) to exchange data (among tasks).
 
 !!! note "Adaptive Query Execution"
     `Exchange` operators are target of [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).

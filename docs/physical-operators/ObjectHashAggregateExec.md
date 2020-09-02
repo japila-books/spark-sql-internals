@@ -2,7 +2,7 @@ title: ObjectHashAggregateExec
 
 # ObjectHashAggregateExec Aggregate Physical Operator
 
-`ObjectHashAggregateExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
+`ObjectHashAggregateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
 
 * ...FIXME
 

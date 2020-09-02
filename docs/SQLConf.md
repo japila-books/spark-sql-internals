@@ -464,13 +464,9 @@ scala> conf.numShufflePartitions
 res3: Int = 200
 ```
 
-## <span id="spark.sql.debug.maxToStringFields"><span id="MAX_TO_STRING_FIELDS"><span id="maxToStringFields"> spark.sql.debug.maxToStringFields
+## <span id="MAX_TO_STRING_FIELDS"><span id="maxToStringFields"> maxToStringFields
 
-Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
-
-Default: `25`
-
-Since: 3.0.0
+The value of [spark.sql.debug.maxToStringFields](spark-sql-properties.md#spark.sql.debug.maxToStringFields) configuration property
 
 ## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
 

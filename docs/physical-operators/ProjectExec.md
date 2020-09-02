@@ -2,7 +2,7 @@ title: ProjectExec
 
 # ProjectExec Unary Physical Operator
 
-`ProjectExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that...FIXME
+`ProjectExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
 
 `ProjectExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
 

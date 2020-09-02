@@ -1,6 +1,6 @@
 # InputAdapter Unary Physical Operator
 
-`InputAdapter` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of spark-sql-CodegenSupport.md[whole-stage Java code generation] (possibly due to spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
+`InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of spark-sql-CodegenSupport.md[whole-stage Java code generation] (possibly due to spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
 
 .InputAdapter's doProduce
 image::images/spark-sql-InputAdapter-doProduce.png[align="center"]

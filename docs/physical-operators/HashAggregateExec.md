@@ -2,7 +2,7 @@ title: HashAggregateExec
 
 # HashAggregateExec Aggregate Physical Operator for Hash-Based Aggregation
 
-`HashAggregateExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
+`HashAggregateExec` is a [unary physical operator](UnaryExecNode.md) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator
 

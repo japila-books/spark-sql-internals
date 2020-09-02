@@ -2,7 +2,7 @@ title: SerializeFromObjectExec
 
 # SerializeFromObjectExec Unary Physical Operator
 
-`SerializeFromObjectExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) that supports <<spark-sql-CodegenSupport.md#, Java code generation>>.
+`SerializeFromObjectExec` is a [unary physical operator](UnaryExecNode.md) that supports <<spark-sql-CodegenSupport.md#, Java code generation>>.
 
 `SerializeFromObjectExec` supports Java code generation with the <<doProduce, doProduce>>, <<doConsume, doConsume>> and <<inputRDDs, inputRDDs>> methods.
 

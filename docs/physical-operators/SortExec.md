@@ -2,7 +2,7 @@ title: SortExec
 
 # SortExec Unary Physical Operator
 
-`SortExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> that is <<creating-instance, created>> when:
+`SortExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> when:
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed
 

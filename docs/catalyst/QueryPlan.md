@@ -215,7 +215,7 @@ append[T <: QueryPlan[T]](
 verboseStringWithOperatorId(): String
 ```
 
-`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../SQLConf.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
+`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../spark-sql-properties.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
 
 ```text
 [formattedNodeName]
@@ -232,4 +232,4 @@ formattedNodeName: String
 
 `formattedNodeName`...FIXME
 
-`formattedNodeName` is used when [QueryPlan](#verboseStringWithOperatorId) (in general) and ProjectExec, FilterExec, DataSourceScanExec, FileSourceScanExec, LeafExecNode, UnaryExecNode, BinaryExecNode, BaseAggregateExec, ReusedExchangeExec, CartesianProductExec, HashJoin, SortMergeJoinExec physical operators (in particular) are requested for `verboseStringWithOperatorId`
+`formattedNodeName` is used when [QueryPlan](#verboseStringWithOperatorId) (in general) and ProjectExec, FilterExec, DataSourceScanExec, FileSourceScanExec, LeafExecNode, [UnaryExecNode](../physical-operators/UnaryExecNode.md), BinaryExecNode, BaseAggregateExec, ReusedExchangeExec, CartesianProductExec, HashJoin, SortMergeJoinExec physical operators (in particular) are requested for `verboseStringWithOperatorId`

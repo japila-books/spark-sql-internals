@@ -2,7 +2,7 @@ title: WindowExec
 
 # WindowExec Unary Physical Operator
 
-`WindowExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> (i.e. with one <<child, child>> physical operator) for *window aggregation execution* (i.e. represents <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator at execution time).
+`WindowExec` is a [unary physical operator](UnaryExecNode.md) for **window aggregation execution** (i.e. represents <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator at execution time).
 
 `WindowExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves a <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator.
 

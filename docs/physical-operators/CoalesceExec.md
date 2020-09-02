@@ -2,7 +2,7 @@ title: CoalesceExec
 
 # CoalesceExec Unary Physical Operator
 
-`CoalesceExec` is a SparkPlan.md#UnaryExecNode[unary physical operator] (i.e. with one <<child, child>> physical operator) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
+`CoalesceExec` is a [unary physical operator](UnaryExecNode.md) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
 
 `CoalesceExec` represents [Repartition](../logical-operators/RepartitionOperation.md#Repartition) logical operator at execution (when `shuffle` was disabled -- see [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy). When executed, it executes the input `child` and calls spark-rdd-partitions.md#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
 

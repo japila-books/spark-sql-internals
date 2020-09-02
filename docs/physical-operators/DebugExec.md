@@ -2,7 +2,7 @@ title: DebugExec
 
 # DebugExec Unary Physical Operator
 
-`DebugExec` is a <<SparkPlan.md#UnaryExecNode, unary physical operator>> that...FIXME
+`DebugExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
 
 === [[dumpStats]] `dumpStats` Method
 
