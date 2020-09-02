@@ -904,10 +904,6 @@
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InputPartition/</loc>
-     <lastmod>2020-09-02</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataWriter/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
@@ -1581,6 +1577,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CollectLimitExec/</loc>
+     <lastmod>2020-09-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ColumnarToRowExec/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2324,7 +2324,7 @@
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ColumnarBatch/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ColumnarBatch/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2385,6 +2385,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReader/</loc>
+     <lastmod>2020-09-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/InputPartition/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
