@@ -1412,6 +1412,10 @@
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/EvalPythonExec/</loc>
+     <lastmod>2020-09-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Exchange/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
