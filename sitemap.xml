@@ -908,10 +908,6 @@
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-InputPartitionReader/</loc>
-     <lastmod>2020-09-02</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataWriter/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
@@ -2385,6 +2381,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReaderFactory/</loc>
+     <lastmod>2020-09-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReader/</loc>
      <lastmod>2020-09-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
