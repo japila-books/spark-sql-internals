@@ -14,4 +14,4 @@
 `DataSourceRDDPartition` takes the following when created:
 
 * [[index]] Partition index
-* [[inputPartition]] [InputPartition](InputPartition.md)
+* [[inputPartition]] [InputPartition](connector/InputPartition.md)

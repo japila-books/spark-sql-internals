@@ -27,7 +27,7 @@ a| [[planInputPartitions]]
 List<InputPartition<InternalRow>> planInputPartitions()
 ----
 
-[InputPartitions](InputPartition.md)
+[InputPartitions](connector/InputPartition.md)
 
 Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for the <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#partitions, input partitions>> (and simply delegates to the underlying <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
 

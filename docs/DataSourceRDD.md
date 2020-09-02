@@ -9,7 +9,7 @@
 `DataSourceRDD` takes the following to be created:
 
 * <span id="sc"> `SparkContext`
-* <span id="inputPartitions"> [InputPartition](InputPartition.md)s
+* <span id="inputPartitions"> [InputPartition](connector/InputPartition.md)s
 * <span id="partitionReaderFactory"> [PartitionReaderFactory](connector/PartitionReaderFactory.md)
 * <span id="columnarReads"> `columnarReads` flag
 
@@ -26,7 +26,7 @@ getPreferredLocations(
     split: Partition): Seq[String]
 ```
 
-`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](InputPartition.md#preferredLocations).
+`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](connector/InputPartition.md#preferredLocations).
 
 `getPreferredLocations` is part of Spark Core's `RDD` abstraction.
 
