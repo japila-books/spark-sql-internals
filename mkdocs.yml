@@ -468,6 +468,7 @@ nav:
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
+      - EvalPythonExec: physical-operators/EvalPythonExec.md
       - Exchange: physical-operators/Exchange.md
       - LeafExecNode: physical-operators/LeafExecNode.md
       - LimitExec: physical-operators/LimitExec.md
