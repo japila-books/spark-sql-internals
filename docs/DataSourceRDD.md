@@ -48,10 +48,6 @@ compute(
     context: TaskContext): Iterator[T]
 ```
 
-`compute` requests the input <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> (the `split` partition) for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested to [create an InputPartitionReader](InputPartition.md#createPartitionReader).
-
-`compute` registers a Spark Core `TaskCompletionListener` that requests the `InputPartitionReader` to close when a task completes.
-
-`compute` returns a Spark Core `InterruptibleIterator` that requests the `InputPartitionReader` to <<spark-sql-InputPartitionReader.md#next, proceed to the next record>> (when requested to `hasNext`) and <<spark-sql-InputPartitionReader.md#get, return the current record>> (when `next`).
+`compute`...FIXME
 
 `compute` is part of Spark Core's `RDD` abstraction.

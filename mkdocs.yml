@@ -332,7 +332,6 @@ nav:
         - spark-sql-DataSourceWriter.md
         - spark-sql-SessionConfigSupport.md
         - InputPartition: InputPartition.md
-        - spark-sql-InputPartitionReader.md
         - spark-sql-DataWriter.md
         - DataWriterFactory:
           - spark-sql-DataWriterFactory.md
@@ -736,6 +735,7 @@ nav:
       - Batch: connector/Batch.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
+      - PartitionReader: connector/PartitionReader.md
       - Table: connector/catalog/Table.md
       - FileTable: connector/catalog/FileTable.md
       - KafkaTable: connector/catalog/KafkaTable.md

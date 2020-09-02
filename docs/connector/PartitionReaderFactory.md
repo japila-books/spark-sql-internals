@@ -11,7 +11,7 @@ PartitionReader<ColumnarBatch> createColumnarReader(
     InputPartition partition)
 ```
 
-Creates a columnar partition reader to read data from the given [InputPartition](../InputPartition.md).
+Creates a columnar [partition reader](PartitionReader.md) to read data from the given [InputPartition](../InputPartition.md).
 
 By default, `createColumnarReader` throws an `UnsupportedOperationException`:
 
@@ -28,7 +28,7 @@ PartitionReader<InternalRow> createReader(
     InputPartition partition)
 ```
 
-Creates a row-based partition reader to read data from the given [InputPartition](../InputPartition.md).
+Creates a row-based [partition reader](PartitionReader.md) to read data from the given [InputPartition](../InputPartition.md).
 
 Used when...FIXME
 
