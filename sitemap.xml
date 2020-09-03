@@ -628,10 +628,6 @@
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-FileScanRDD/</loc>
-     <lastmod>2020-09-03</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ParquetReadSupport/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
@@ -2433,6 +2429,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-in-300/WriteConfigMethods/</loc>
+     <lastmod>2020-09-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/rdds/FileScanRDD/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
