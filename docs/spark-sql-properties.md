@@ -884,22 +884,6 @@ Default: `true`
 
 Use [SQLConf.useObjectHashAggregation](SQLConf.md#useObjectHashAggregation) method to access the current value.
 
-| [[spark.sql.files.ignoreCorruptFiles]] *spark.sql.files.ignoreCorruptFiles*
-
-Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering corrupted files and the contents that have been read will still be returned.
-
-Default: `false`
-
-Use [SQLConf.ignoreCorruptFiles](SQLConf.md#ignoreCorruptFiles) method to access the current value.
-
-a| [[spark.sql.files.ignoreMissingFiles]] *spark.sql.files.ignoreMissingFiles*
-
-Controls whether to ignore missing files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering missing files and the contents that have been read will still be returned.
-
-Default: `false`
-
-Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access the current value.
-
 | [[spark.sql.files.maxPartitionBytes]] *spark.sql.files.maxPartitionBytes*
 
 The maximum number of bytes to pack into a single partition when reading files.
@@ -1395,3 +1379,19 @@ Default: `25`
 Since: `3.0.0`
 
 Use [SQLConf.maxToStringFields](SQLConf.md#maxToStringFields) method to access the current value.
+
+## <span id="spark.sql.files.ignoreCorruptFiles"> spark.sql.files.ignoreCorruptFiles
+
+Controls whether to ignore corrupt files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering corrupted files and the contents that have been read will still be returned.
+
+Default: `false`
+
+Use [SQLConf.ignoreCorruptFiles](SQLConf.md#ignoreCorruptFiles) method to access the current value.
+
+## <span id="spark.sql.files.ignoreMissingFiles"> spark.sql.files.ignoreMissingFiles
+
+Controls whether to ignore missing files (`true`) or not (`false`). If `true`, the Spark jobs will continue to run when encountering missing files and the contents that have been read will still be returned.
+
+Default: `false`
+
+Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access the current value.

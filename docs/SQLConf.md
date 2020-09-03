@@ -132,20 +132,6 @@ a| [[filesOpenCostInBytes]] Used exclusively when <<spark-sql-SparkPlan-FileSour
 | spark-sql-properties.md#spark.sql.codegen.hugeMethodLimit[spark.sql.codegen.hugeMethodLimit]
 | [[hugeMethodLimit]] Used exclusively when `WholeStageCodegenExec` unary physical operator is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute, execute>> (and generate a `RDD[InternalRow]`), i.e. when the compiled function exceeds this threshold, the whole-stage codegen is deactivated for this subtree of the query plan.
 
-| ignoreCorruptFiles
-| spark-sql-properties.md#spark.sql.files.ignoreCorruptFiles[spark.sql.files.ignoreCorruptFiles]
-a| [[ignoreCorruptFiles]] Used when:
-
-* `FileScanRDD` is spark-sql-FileScanRDD.md#ignoreCorruptFiles[created] (and then to spark-sql-FileScanRDD.md#compute[compute a partition])
-
-* `OrcFileFormat` is requested to spark-sql-OrcFileFormat.md#inferSchema[inferSchema] and spark-sql-OrcFileFormat.md#buildReader[buildReader]
-
-* `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#mergeSchemasInParallel[mergeSchemasInParallel]
-
-| ignoreMissingFiles
-| spark-sql-properties.md#spark.sql.files.ignoreMissingFiles[spark.sql.files.ignoreMissingFiles]
-| [[ignoreMissingFiles]] Used exclusively when `FileScanRDD` is spark-sql-FileScanRDD.md#ignoreMissingFiles[created] (and then to spark-sql-FileScanRDD.md#compute[compute a partition])
-
 | inMemoryPartitionPruning
 | spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning]
 | [[inMemoryPartitionPruning]] Used exclusively when `InMemoryTableScanExec` physical operator is requested for spark-sql-SparkPlan-InMemoryTableScanExec.md#filteredCachedBatches[filtered cached column batches] (as a `RDD[CachedBatch]`).
@@ -601,3 +587,26 @@ Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePart
 [spark.sql.adaptive.skewJoin.enabled](spark-sql-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property
 
 Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+
+## <span id="IGNORE_CORRUPT_FILES"><span id="ignoreCorruptFiles"> ignoreCorruptFiles
+
+The value of [spark.sql.files.ignoreCorruptFiles](spark-sql-properties.md#spark.sql.files.ignoreCorruptFiles) configuration property
+
+Used when:
+
+* `AvroUtils` utility is requested to `inferSchema`
+* `OrcFileFormat` is requested to [inferSchema](spark-sql-OrcFileFormat.md#inferSchema) and [buildReader](spark-sql-OrcFileFormat.md#buildReader)
+* `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreCorruptFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
+* `SchemaMergeUtils` utility is requested to `mergeSchemasInParallel`
+* `OrcUtils` utility is requested to `readSchema`
+* `FilePartitionReader` is requested to `ignoreCorruptFiles`
+
+## <span id="IGNORE_MISSING_FILES"><span id="ignoreMissingFiles"> ignoreMissingFiles
+
+The value of [spark.sql.files.ignoreMissingFiles](spark-sql-properties.md#spark.sql.files.ignoreMissingFiles) configuration property
+
+Used when:
+
+* `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreMissingFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
+* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](InMemoryFileIndex.md#bulkListLeafFiles)
+* `FilePartitionReader` is requested to `ignoreMissingFiles`

@@ -1,8 +1,6 @@
-title: FileSourceScanExec
-
 # FileSourceScanExec Leaf Physical Operator
 
-`FileSourceScanExec` is a <<SparkPlan.md#LeafExecNode, leaf physical operator>> (being a <<spark-sql-SparkPlan-DataSourceScanExec.md#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
+`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (being a <<spark-sql-SparkPlan-DataSourceScanExec.md#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
 
 `FileSourceScanExec` is <<creating-instance, created>> exclusively for a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] logical operator with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
 
@@ -49,7 +47,7 @@ SelectedBucketsCount -> 4 out of 4
 [[inputRDDs]]
 `FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the spark-sql-CodegenSupport.md#inputRDDs[input RDDs] (in <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation>>).
 
-When <<doExecute, executed>>, `FileSourceScanExec` operator creates a <<spark-sql-FileScanRDD.md#, FileScanRDD>> (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
+When <<doExecute, executed>>, `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
 
 [source, scala]
 ----
@@ -227,9 +225,9 @@ Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is co
 
 For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create <<spark-sql-PartitionedFile.md#, PartitionedFiles>> (possibly split per the maximum size of partitions if the <<spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat, FileFormat>> of the <<fsRelation, HadoopFsRelation>> is <<spark-sql-FileFormat.md#isSplitable, splittable>>). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
 
-`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as <<spark-sql-FileScanRDD.md#FilePartition, FilePartitions>>).
+`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
 
-In the end, `createNonBucketedReadRDD` creates a <<spark-sql-FileScanRDD.md#, FileScanRDD>> (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
+In the end, `createNonBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
 
 NOTE: `createNonBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (and neither the optional <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> of the <<relation, HadoopFsRelation>> is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
 
@@ -307,9 +305,9 @@ NOTE: Bucket ID is of the format *_0000n*, i.e. the bucket ID prefixed with up t
 
 `createBucketedReadRDD` prunes (filters out) the bucket files for the bucket IDs that are not listed in the <<optionalBucketSet, bucket IDs for bucket pruning>>.
 
-`createBucketedReadRDD` creates a <<spark-sql-FileScanRDD.md#FilePartition, FilePartition>> (_file block_) for every bucket ID and the (pruned) bucket `PartitionedFiles`.
+`createBucketedReadRDD` creates a [FilePartition](../rdds/FileScanRDD.md#FilePartition) (_file block_) for every bucket ID and the (pruned) bucket `PartitionedFiles`.
 
-In the end, `createBucketedReadRDD` creates a spark-sql-FileScanRDD.md#creating-instance[FileScanRDD] (with the input `readFile` for the spark-sql-FileScanRDD.md#readFunction[read function] and the file blocks (`FilePartitions`) for every bucket ID for spark-sql-FileScanRDD.md#filePartitions[partitions])
+In the end, `createBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the input `readFile` for the [read function](../rdds/FileScanRDD.md#readFunction) and the file blocks (`FilePartitions`) for every bucket ID for [partitions](../rdds/FileScanRDD.md#filePartitions))
 
 [TIP]
 ====

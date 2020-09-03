@@ -2,7 +2,7 @@ title: WholeStageCodegenExec
 
 # WholeStageCodegenExec Unary Physical Operator for Java Code Generation
 
-`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] for a *Codegened Execution Pipeline* of a structured query.
+`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) for a *Codegened Execution Pipeline* of a structured query.
 
 NOTE: spark-sql-SparkPlan-InputAdapter.md[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
 

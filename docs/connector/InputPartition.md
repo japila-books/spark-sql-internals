@@ -18,7 +18,7 @@ By default, `preferredLocations` defines no location preferences (is simply empt
 
 Used when:
 
-* `FileScanRDD` is requested for [preferred locations](../spark-sql-FileScanRDD.md#getPreferredLocations)
+* `FileScanRDD` is requested for [preferred locations](../rdds/FileScanRDD.md#getPreferredLocations)
 
 * `DataSourceRDD` is requested for [preferred locations](../DataSourceRDD.md#getPreferredLocations)
 

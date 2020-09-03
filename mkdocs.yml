@@ -251,7 +251,6 @@ nav:
         - spark-sql-FileFormatWriter.md
         - spark-sql-SQLHadoopMapReduceCommitProtocol.md
         - spark-sql-PartitionedFile.md
-        - spark-sql-FileScanRDD.md
         - spark-sql-ParquetReadSupport.md
         - spark-sql-RecordReaderIterator.md
       - Kafka:
@@ -529,7 +528,7 @@ nav:
         - physical-operators/ExecutedCommandExec.md
         - physical-operators/ExpandExec.md
         - physical-operators/ExternalRDDScanExec.md
-        - physical-operators/FileSourceScanExec.md
+        - FileSourceScanExec: physical-operators/FileSourceScanExec.md
         - physical-operators/FilterExec.md
         - physical-operators/GenerateExec.md
         - physical-operators/HashAggregateExec.md
@@ -748,6 +747,8 @@ nav:
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
+  - RDDs:
+    - FileScanRDD: rdds/FileScanRDD.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
