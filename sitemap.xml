@@ -212,6 +212,10 @@
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CollectMetrics/</loc>
+     <lastmod>2020-09-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CreateDataSourceTableAsSelectCommand/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
@@ -1576,6 +1580,10 @@
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CollectMetricsExec/</loc>
+     <lastmod>2020-09-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ColumnarToRowExec/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
@@ -2229,6 +2237,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/join-strategy-hints/</loc>
+     <lastmod>2020-09-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/observable-metrics/</loc>
      <lastmod>2020-09-03</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
