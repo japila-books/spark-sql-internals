@@ -47,7 +47,7 @@ result: Seq[InternalRow]
 
 `result` is used when `V2CommandExec` physical command is requested to [doExecute](#doExecute), [executeCollect](#executeCollect), [executeToIterator](#executeToIterator), [executeTake](#executeTake) or [executeTail](#executeTail).
 
-## <span id="doExecute"> doExecute
+## <span id="doExecute"> Executing Physical Operator
 
 ```scala
 doExecute(): RDD[InternalRow]

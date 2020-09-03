@@ -11,7 +11,7 @@
 
 `CollectLimitExec` is created when [SpecialLimits](../execution-planning-strategies/SpecialLimits.md) execution planning strategy is executed (and plans a [GlobalLimit](../logical-operators/GlobalLimit.md) unary logical operator).
 
-## <span id="doExecute"> Executing Operator
+## <span id="doExecute"> Executing Physical Operator
 
 ```scala
 doExecute(): RDD[InternalRow]

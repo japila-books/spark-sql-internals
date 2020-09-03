@@ -133,6 +133,7 @@ nav:
         - logical-operators/AnalyzeTableCommand.md
         - logical-operators/AppendData.md
         - logical-operators/ClearCacheCommand.md
+        - CollectMetrics: logical-operators/CollectMetrics.md
         - logical-operators/CreateDataSourceTableAsSelectCommand.md
         - logical-operators/CreateDataSourceTableCommand.md
         - logical-operators/CreateTable.md
@@ -515,6 +516,7 @@ nav:
         - physical-operators/CoalesceExec.md
         - physical-operators/CoGroupExec.md
         - CollectLimitExec: physical-operators/CollectLimitExec.md
+        - CollectMetricsExec: physical-operators/CollectMetricsExec.md
         - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
         - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
         - CreateTableExec: physical-operators/CreateTableExec.md
@@ -689,6 +691,7 @@ nav:
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
     - Hint Framework: new-and-noteworthy/hint-framework.md
     - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
+    - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md

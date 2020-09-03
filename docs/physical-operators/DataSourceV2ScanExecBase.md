@@ -53,10 +53,9 @@ Used when...FIXME
 ## Implementations
 
 * [BatchScanExec](BatchScanExec.md)
-* ContinuousScanExec
-* MicroBatchScanExec
+* _others_
 
-## <span id="doExecute"> doExecute
+## <span id="doExecute"> Executing Physical Operator
 
 ```scala
 doExecute(): RDD[InternalRow]
