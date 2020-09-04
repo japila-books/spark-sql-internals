@@ -50,6 +50,12 @@ Initialized lazily (only when requested the first time) using the <<analyzerBuil
 
 Used when...FIXME
 
+| columnarRules
+| [ColumnarRule](ColumnarRule.md)s
+| [[columnarRules]] FIXME
+
+Used when...FIXME
+
 | conf
 | [SQLConf](SQLConf.md)
 | [[conf]] FIXME

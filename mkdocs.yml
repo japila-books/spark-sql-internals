@@ -694,6 +694,7 @@ nav:
     - Hint Framework: new-and-noteworthy/hint-framework.md
     - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
+    - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md
