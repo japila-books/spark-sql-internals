@@ -1,0 +1,3 @@
+# ColumnarRule
+
+`ColumnarRule` is...FIXME

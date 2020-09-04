@@ -98,6 +98,7 @@ nav:
       - SparkSessionExtensions: SparkSessionExtensions.md
       - spark-sql-SparkSession-implicits.md
       - SharedState: SharedState.md
+      - ColumnarRule: ColumnarRule.md
     - Configuration Properties: spark-sql-properties.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
@@ -549,6 +550,7 @@ nav:
         - ReplaceTableExec: physical-operators/ReplaceTableExec.md
         - physical-operators/ReusedExchangeExec.md
         - physical-operators/RowDataSourceScanExec.md
+        - RowToColumnarExec: physical-operators/RowToColumnarExec.md
         - physical-operators/SampleExec.md
         - physical-operators/SerializeFromObjectExec.md
         - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
