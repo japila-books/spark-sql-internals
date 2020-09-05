@@ -1552,6 +1552,10 @@
      <lastmod>2020-09-05</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BlockingOperatorWithCodegen/</loc>
+     <lastmod>2020-09-05</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BroadcastExchangeExec/</loc>
      <lastmod>2020-09-05</lastmod>
      <changefreq>daily</changefreq>
@@ -1661,6 +1665,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/InputAdapter/</loc>
+     <lastmod>2020-09-05</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/InputRDDCodegen/</loc>
      <lastmod>2020-09-05</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
