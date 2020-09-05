@@ -35,6 +35,6 @@ doExecute(): RDD[InternalRow]
 canCheckLimitNotReached: Boolean
 ```
 
-`canCheckLimitNotReached` is always on (`true`).
+`canCheckLimitNotReached` is always `true`.
 
 `canCheckLimitNotReached` is part of the [CodegenSupport](CodegenSupport.md#canCheckLimitNotReached) abstraction.

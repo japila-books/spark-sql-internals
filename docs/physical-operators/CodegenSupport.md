@@ -27,9 +27,9 @@ doProduce(
   ctx: CodegenContext): String
 ```
 
-Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the ["produce" path](../spark-sql-whole-stage-codegen.md#produce-path) in [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
+Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the [whole-stage-codegen "produce" path](../spark-sql-whole-stage-codegen.md#produce-path).
 
-Used when the physical operator is requested to [generate the Java source code for produce code path](#produce) (a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators)
+Used when the physical operator is requested to [generate the Java source code for "produce" code path](#produce)
 
 ### <span id="inputRDDs"> inputRDDs
 
@@ -163,13 +163,17 @@ Found 2 WholeStageCodegen subtrees.
 
 * spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], spark-sql-SparkPlan-HashAggregateExec.md#doProduce[HashAggregateExec], spark-sql-SparkPlan-InputAdapter.md#doProduce[InputAdapter], spark-sql-SparkPlan-RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], spark-sql-SparkPlan-RangeExec.md#doProduce[RangeExec], spark-sql-SparkPlan-SortExec.md#doProduce[SortExec], spark-sql-SparkPlan-SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage code generation
 
-### <span id="limitNotReachedCond"> limitNotReachedCond
+### <span id="limitNotReachedCond"> Data-Producing Loop Condition
 
 ```scala
 limitNotReachedCond: String
 ```
 
-`limitNotReachedCond` is used when [ColumnarToRowExec](ColumnarToRowExec.md), [SortExec](SortExec.md), [InputRDDCodegen](InputRDDCodegen.md), [HashAggregateExec](HashAggregateExec.md) physical operators are requested to `doProduce`.
+`limitNotReachedCond` is used as a loop condition by [ColumnarToRowExec](ColumnarToRowExec.md), [SortExec](SortExec.md), [InputRDDCodegen](InputRDDCodegen.md) and [HashAggregateExec](HashAggregateExec.md) physical operators (when requested to [doProduce](#doProduce)).
+
+`limitNotReachedCond` requests the [parent](#parent) physical operator for the [limit-not-reached checks](#limitNotReachedChecks).
+
+`limitNotReachedCond` returns an empty string for no [limit-not-reached checks](#limitNotReachedChecks) or concatenates them with `&&`.
 
 ### <span id="produce"> Generating Java Source Code for Produce Code Path
 
@@ -179,14 +183,26 @@ produce(
   parent: CodegenSupport): String
 ```
 
-Generates Java source code for [whole-stage-codegen "produce" code path](../spark-sql-whole-stage-codegen.md#produce-path) for processing the rows from the [input RDDs](#inputRDDs) (a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators).
+`produce` generates Java source code for [whole-stage-codegen "produce" code path](../spark-sql-whole-stage-codegen.md#produce-path).
 
 `produce` [prepares a physical operator for query execution](SparkPlan.md#executeQuery) and then generates a Java source code with the result of [doProduce](#doProduce).
 
-While generating the Java source code, `produce` annotates code blocks with `PRODUCE` markers that are [simple descriptions](../catalyst/QueryPlan.md#simpleString) of the physical operators in a structured query.
+`produce` annotates the code block with `PRODUCE` markers (that are [simple descriptions](../catalyst/QueryPlan.md#simpleString) of the physical operators in a structured query).
+
+`produce` is used when:
+
+* (most importantly) `WholeStageCodegenExec` physical operator is requested to [generate the Java source code for a subtree](WholeStageCodegenExec.md#doCodeGen)
+
+* A physical operator (with `CodegenSupport`) is requested to [generate a Java source code for the produce path in whole-stage Java code generation](#doProduce) that usually looks as follows:
+
+    ```scala
+    protected override def doProduce(ctx: CodegenContext): String = {
+      child.asInstanceOf[CodegenSupport].produce(ctx, this)
+    }
+    ```
 
 !!! tip "spark.sql.codegen.comments Property"
-    Enable `spark.sql.codegen.comments` Spark SQL property to have `PRODUCE` markers in the generated Java source code.
+    Enable `spark.sql.codegen.comments` Spark SQL property for `PRODUCE` markers in the generated Java source code.
 
 ```text
 // ./bin/spark-shell --conf spark.sql.codegen.comments=true
@@ -217,42 +233,6 @@ Found 2 WholeStageCodegen subtrees.
 /* 064 */     // PRODUCE: BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
 /* 065 */     // PRODUCE: InputAdapter
 /* 066 */     while (inputadapter_input.hasNext() && !stopEarly()) {
-...
-```
-
-`produce` is used when:
-
-* (most importantly) `WholeStageCodegenExec` is requested to [generate the Java source code for a child physical plan subtree](WholeStageCodegenExec.md#doCodeGen) (i.e. a physical operator and its children)
-
-* A physical operator (with `CodegenSupport`) is requested to [generate a Java source code for the produce path in whole-stage Java code generation](#doProduce) that usually looks as follows:
-
-  ```scala
-  protected override def doProduce(ctx: CodegenContext): String = {
-    child.asInstanceOf[CodegenSupport].produce(ctx, this)
-  }
-  ```
-
-## Demo
-
-```text
-val q = spark.range(1)
-
-import org.apache.spark.sql.execution.debug._
-scala> q.debugCodegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Range (0, 1, step=1, splits=8)
-
-Generated code:
-...
-
-// The above is equivalent to the following method chain
-scala> q.queryExecution.debug.codegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Range (0, 1, step=1, splits=8)
-
-Generated code:
 ...
 ```
 
@@ -310,7 +290,7 @@ usedInputs: AttributeSet
 `usedInputs` returns the [expression references](../catalyst/QueryPlan.md#references).
 
 !!! note
-    Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the [generated Java source code for consume path](CodegenSupport.md#consume)).
+    Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the [generated Java source code for consume path](#consume)).
 
 `usedInputs` is used when `CodegenSupport` is requested to [generate a Java source code for consume path](#consume).
 
@@ -349,3 +329,27 @@ canCheckLimitNotReached: Boolean
 `canCheckLimitNotReached`...FIXME
 
 `canCheckLimitNotReached` is used when `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).
+
+## Demo
+
+```text
+val q = spark.range(1)
+
+import org.apache.spark.sql.execution.debug._
+scala> q.debugCodegen
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*Range (0, 1, step=1, splits=8)
+
+Generated code:
+...
+
+// The above is equivalent to the following method chain
+scala> q.queryExecution.debug.codegen
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*Range (0, 1, step=1, splits=8)
+
+Generated code:
+...
+```

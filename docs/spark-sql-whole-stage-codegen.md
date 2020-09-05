@@ -42,6 +42,8 @@ TIP: Review https://issues.apache.org/jira/browse/SPARK-12795[SPARK-12795 Whole 
 
 Whole-stage-codegen "produce" path
 
+A [physical operator](physical-operators/SparkPlan.md) with [CodegenSupport](CodegenSupport.md) can [generate Java source code to process the rows from input RDDs](physical-operators/CodegenSupport.md#doProduce).
+
 ### Consume Path
 
 Whole-stage-codegen "consume" path
