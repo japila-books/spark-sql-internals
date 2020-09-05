@@ -24,9 +24,9 @@ title: RowDataSourceScanExec
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce`...FIXME
+
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
 === [[creating-instance]] Creating RowDataSourceScanExec Instance
 

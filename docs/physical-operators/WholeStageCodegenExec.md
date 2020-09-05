@@ -6,7 +6,7 @@ title: WholeStageCodegenExec
 
 NOTE: spark-sql-SparkPlan-InputAdapter.md[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
 
-`WholeStageCodegenExec` itself supports the spark-sql-CodegenSupport.md[Java code generation] and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
+`WholeStageCodegenExec` itself supports the [Java code generation](CodegenSupport.md) and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
 
 [source, scala]
 ----
@@ -101,10 +101,9 @@ NOTE: spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.co
 [[codegenStageId]]
 `WholeStageCodegenExec` takes a single `child` SparkPlan.md[physical operator] (a physical subquery tree) and *codegen stage ID* when created.
 
-NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.md#, supports Java code generation>>.
+NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator [supports Java code generation](CodegenSupport.md).
 
-[source, scala]
-----
+```text
 // RangeExec physical operator does support codegen
 import org.apache.spark.sql.execution.RangeExec
 import org.apache.spark.sql.catalyst.plans.logical.Range
@@ -112,13 +111,12 @@ val rangeExec = RangeExec(Range(start = 0, end = 1, step = 1, numSlices = 1))
 
 import org.apache.spark.sql.execution.WholeStageCodegenExec
 val rdd = WholeStageCodegenExec(rangeExec)(codegenStageId = 0).execute()
-----
+```
 
 [[generateTreeString]]
 `WholeStageCodegenExec` marks the <<child, child>> physical operator with `*` (star) prefix and <<codegenStageId, per-query codegen stage ID>> (in round brackets) in the [text representation of a physical plan tree](../catalyst/TreeNode.md#generateTreeString).
 
-[source, scala]
-----
+```text
 scala> println(plan.numberedTreeString)
 00 *(1) Project [id#117L]
 01 +- *(1) BroadcastHashJoin [id#117L], [cast(id#115 as bigint)], Inner, BuildRight
@@ -126,7 +124,7 @@ scala> println(plan.numberedTreeString)
 03    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
 04       +- Generate explode(ids#112), false, [id#115]
 05          +- LocalTableScan [ids#112]
-----
+```
 
 NOTE: As `WholeStageCodegenExec` is created as a result of [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization, it is only executed in [executedPlan](../QueryExecution.md#executedPlan) phase of a query execution (that you can only notice by the `*` star prefix in a plan output).
 
@@ -196,7 +194,7 @@ scala> q.explain
 +- *Range (0, 10, step=1, splits=8)
 ----
 
-NOTE: SparkPlan.md[Physical plans] that support code generation extend spark-sql-CodegenSupport.md[CodegenSupport].
+NOTE: SparkPlan.md[Physical plans] that support code generation extend [CodegenSupport](CodegenSupport.md).
 
 [[logging]]
 [TIP]
@@ -223,9 +221,9 @@ NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to g
 
 `doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile it] right afterwards.
 
-If compilation goes well, `doExecute` branches off per the number of spark-sql-CodegenSupport.md#inputRDDs[input RDDs].
+If compilation goes well, `doExecute` branches off per the number of [input RDDs](CodegenSupport.md#inputRDDs).
 
-NOTE: `doExecute` only supports up to two spark-sql-CodegenSupport.md#inputRDDs[input RDDs].
+NOTE: `doExecute` only supports up to two [input RDDs](CodegenSupport.md#inputRDDs).
 
 CAUTION: FIXME Finish the "success" path
 
@@ -256,7 +254,7 @@ Whole-stage codegen disabled for plan (id=[codegenStageId]):
 doCodeGen(): (CodegenContext, CodeAndComment)
 ----
 
-`doCodeGen` creates a new <<spark-sql-CodegenContext.md#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to <<spark-sql-CodegenSupport.md#produce, generate a Java source code for produce code path>> (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
+`doCodeGen` creates a new <<spark-sql-CodegenContext.md#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to [generate a Java source code for produce code path](CodegenSupport.md#produce) (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
 
 `doCodeGen` <<spark-sql-CodegenContext.md#addNewFunction, adds the new function>> under the name of `processNext`.
 
@@ -297,27 +295,24 @@ final class [className] extends BufferedRowIterator {
 }
 ----
 
-NOTE: `doCodeGen` requires that the single <<child, child>> physical operator <<spark-sql-CodegenSupport.md#, supports Java code generation>>.
+`doCodeGen` requires that the single [child](#child) physical operator [supports Java code generation](CodegenSupport.md).
 
 `doCodeGen` cleans up the generated code (using `CodeFormatter` to `stripExtraNewLines`, `stripOverlappingComments`).
 
 `doCodeGen` prints out the following DEBUG message to the logs:
 
-```
+```text
 DEBUG WholeStageCodegenExec:
 [cleanedSource]
 ```
 
 In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.md#, CodegenContext>> and the Java source code (as a `CodeAndComment`).
 
-[NOTE]
-====
 `doCodeGen` is used when:
 
 * `WholeStageCodegenExec` is <<doExecute, executed>>
 
 * Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.md#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
-====
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
@@ -326,8 +321,6 @@ In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.md#, CodegenConte
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
 `doConsume` generates a Java source code that:
 
 . Takes (from the input `row`) the code to evaluate a Catalyst expression on an input `InternalRow`
@@ -335,8 +328,9 @@ NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSup
   a. Adds `.copy()` to the term if <<needCopyResult, needCopyResult>> is turned on
 . Wraps the term inside `append()` code block
 
-[source, scala]
-----
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
+
+```text
 import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
 val ctx = new CodegenContext()
 
@@ -348,7 +342,7 @@ val consumeCode = wsce.doConsume(ctx, input = Seq(), row = exprCode)
 scala> println(consumeCode)
 my_code
 append(my_value);
-----
+```
 
 === [[generatedClassName]] Generating Class Name -- `generatedClassName` Method
 

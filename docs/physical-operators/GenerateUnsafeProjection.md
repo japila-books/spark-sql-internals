@@ -166,7 +166,7 @@ mutableStateArray[0]
 
 * `GenerateUnsafeProjection` is requested to <<create, create a UnsafeProjection>>
 
-* `CodegenSupport` is requested to spark-sql-CodegenSupport.md#prepareRowVar[prepareRowVar] (to spark-sql-CodegenSupport.md#consume[generate a Java source code to consume generated columns or row from a physical operator])
+* `CodegenSupport` is requested to [prepareRowVar](CodegenSupport.md#prepareRowVar) (to [generate a Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume))
 
 * `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doProduceWithKeys[doProduceWithKeys] and spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[doConsumeWithKeys]
 

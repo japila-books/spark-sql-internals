@@ -31,7 +31,7 @@ That means that [JoinSelection](../execution-planning-strategies/JoinSelection.m
 ====
 
 [[supportCodegen]]
-`SortMergeJoinExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_) for inner and cross joins.
+`SortMergeJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) for inner and cross joins.
 
 [TIP]
 ====
@@ -87,10 +87,9 @@ scala> q.explain
 .SortMergeJoinExec in web UI (Details for Query)
 image::images/spark-sql-SortMergeJoinExec-webui-query-details.png[align="center"]
 
-NOTE: The prefix for variable names for `SortMergeJoinExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *smj*.
+NOTE: The prefix for variable names for `SortMergeJoinExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **smj**.
 
-[source, scala]
-----
+```text
 scala> q.queryExecution.debug.codegen
 Found 3 WholeStageCodegen subtrees.
 == Subtree 1 / 3 ==
@@ -125,7 +124,7 @@ Generated code:
 /* 020 */   private org.apache.spark.sql.catalyst.expressions.codegen.BufferHolder smj_holder;
 /* 021 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter smj_rowWriter;
 ...
-----
+```
 
 [[output]]
 The catalyst/QueryPlan.md#output[output schema] of a `SortMergeJoinExec` is...FIXME
@@ -153,28 +152,6 @@ The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the inp
 The SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
 
 NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (after [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical join operators have not met the requirements).
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
-`doProduce`...FIXME
-
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
-`doExecute`...FIXME
 
 === [[creating-instance]] Creating SortMergeJoinExec Instance
 

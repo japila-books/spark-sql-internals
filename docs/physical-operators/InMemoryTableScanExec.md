@@ -74,10 +74,10 @@ assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
 image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="center"]
 
 [[supportCodegen]]
-`InMemoryTableScanExec` spark-sql-CodegenSupport.md#supportCodegen[supports Java code generation] only if <<supportsBatch, batch decoding>> is enabled.
+`InMemoryTableScanExec` [supports Java code generation](CodegenSupport.md#supportCodegen) only if <<supportsBatch, batch decoding>> is enabled.
 
 [[inputRDDs]]
-`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the spark-sql-CodegenSupport.md#inputRDDs[only RDD of internal rows] (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the [only RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
 
 [[enableAccumulatorsForTest]]
 [[spark.sql.inMemoryTableScanStatistics.enable]]

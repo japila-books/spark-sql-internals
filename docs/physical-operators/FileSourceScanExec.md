@@ -45,7 +45,7 @@ SelectedBucketsCount -> 4 out of 4
 ----
 
 [[inputRDDs]]
-`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the spark-sql-CodegenSupport.md#inputRDDs[input RDDs] (in <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation>>).
+`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the [input RDDs](CodegenSupport.md#inputRDDs) (in <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation>>).
 
 When <<doExecute, executed>>, `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
 
@@ -365,8 +365,6 @@ NOTE: <<spark-sql-FileFormat.md#, FileFormat>> does not support vectorized decod
 needsUnsafeRowConversion: Boolean
 ----
 
-NOTE: `needsUnsafeRowConversion` is part of spark-sql-ColumnarBatchScan.md#needsUnsafeRowConversion[ColumnarBatchScan Contract] to control the name of the variable for an input row while spark-sql-CodegenSupport.md#consume[generating the Java source code to consume generated columns or row from a physical operator].
-
 `needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
 
 . spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> is spark-sql-ParquetFileFormat.md[ParquetFileFormat]
@@ -376,6 +374,8 @@ NOTE: `needsUnsafeRowConversion` is part of spark-sql-ColumnarBatchScan.md#needs
 Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
 
 NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecute, executed>> (and <<supportsBatch, supportsBatch>> flag is off).
+
+`needsUnsafeRowConversion` is part of the [ColumnarBatchScan](spark-sql-ColumnarBatchScan.md#needsUnsafeRowConversion) abstraction.
 
 ==== [[vectorTypes]] Fully-Qualified Class Names (Types) of Concrete ColumnVectors -- `vectorTypes` Method
 

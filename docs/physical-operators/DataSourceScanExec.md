@@ -4,7 +4,7 @@
 
 NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] and generic spark-sql-BaseRelation.md[BaseRelation] relations, respectively.
 
-`DataSourceScanExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_)
+`DataSourceScanExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_)
 
 [[contract]]
 [source, scala]
@@ -36,7 +36,7 @@ trait DataSourceScanExec extends LeafExecNode with CodegenSupport {
 | [[tableIdentifier]] Optional `TableIdentifier`
 |===
 
-NOTE: The prefix for variable names for `DataSourceScanExec` operators in a spark-sql-CodegenSupport.md#variablePrefix[generated Java source code] is *scan*.
+NOTE: The prefix for variable names for `DataSourceScanExec` operators in a [generated Java source code](CodegenSupport.md#variablePrefix) is **scan**.
 
 [[nodeNamePrefix]]
 The default *node name prefix* is an empty string (that is used in the <<simpleString, simple node description>>).

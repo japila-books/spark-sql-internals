@@ -4,7 +4,7 @@ title: ProjectExec
 
 `ProjectExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
 
-`ProjectExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
+`ProjectExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
 `ProjectExec` is <<creating-instance, created>> when:
 
@@ -72,6 +72,6 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
 `doConsume`...FIXME
+
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.

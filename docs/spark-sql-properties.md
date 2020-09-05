@@ -836,14 +836,6 @@ Default: `true`
 
 Use [SQLConf.wholeStageSplitConsumeFuncByOperator](SQLConf.md#wholeStageSplitConsumeFuncByOperator) method to access the current value.
 
-| [[spark.sql.codegen.wholeStage]] *spark.sql.codegen.wholeStage*
-
-*(internal)* Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
-
-Default: `true`
-
-Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
-
 | [[spark.sql.columnVector.offheap.enabled]] *spark.sql.columnVector.offheap.enabled*
 
 *(internal)* Enables spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in [ColumnarBatch](ColumnarBatch.md) (`true`) or not (`false`). When `false`, spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
@@ -1395,3 +1387,11 @@ Controls whether to ignore missing files (`true`) or not (`false`). If `true`, t
 Default: `false`
 
 Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access the current value.
+
+## <span id="spark.sql.codegen.wholeStage"> spark.sql.codegen.wholeStage
+
+**(internal)** Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
+
+Default: `true`
+
+Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.

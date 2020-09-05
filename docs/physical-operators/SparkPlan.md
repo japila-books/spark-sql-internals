@@ -302,7 +302,7 @@ executeQuery[T](query: => T): T
 
 Internally, `executeQuery` calls <<prepare, prepare>> and <<waitForSubqueries, waitForSubqueries>> followed by executing `query`.
 
-`executeQuery` is executed as part of <<execute, execute>>, <<executeBroadcast, executeBroadcast>> and when ``CodegenSupport``-enabled physical operator spark-sql-CodegenSupport.md#produce[produces a Java source code].
+`executeQuery` is executed as part of <<execute, execute>>, <<executeBroadcast, executeBroadcast>> and when ``CodegenSupport``-enabled physical operator [produces a Java source code](CodegenSupport.md#produce).
 
 ## <span id="executeBroadcast"> Broadcasting Result of Structured Query
 

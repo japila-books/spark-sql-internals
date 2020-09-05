@@ -1,11 +1,11 @@
 # ColumnarBatchScan -- Physical Operators With Vectorized Reader
 
-`ColumnarBatchScan` is an <<contract, extension>> of <<spark-sql-CodegenSupport.md#, CodegenSupport contract>> for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
+`ColumnarBatchScan` is an <<contract, extension>> of [CodegenSupport](CodegenSupport.md) abstraction for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
 `ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch[FileSourceScanExec], spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch[InMemoryTableScanExec] and spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch[DataSourceV2ScanExec] physical operators).
 
 [[needsUnsafeRowConversion]]
-`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while spark-sql-CodegenSupport.md#consume[generating the Java source code to consume generated columns or row from a physical operator] that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
+`ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while [generating the Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume) that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
 
 [[metrics]]
 .ColumnarBatchScan's Performance Metrics
@@ -170,13 +170,13 @@ supportsBatch: Boolean = true
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce` firstly requests the input `CodegenContext` to spark-sql-CodegenContext.md#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
 
 `doProduce` <<produceBatches, produceBatches>> when <<supportsBatch, supportsBatch>> is enabled or <<produceRows, produceRows>>.
 
 NOTE: <<supportsBatch, supportsBatch>> is enabled by default unless overriden by a physical operator.
+
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
 [source, scala]
 ----
@@ -262,7 +262,7 @@ java.lang.UnsupportedOperationException
 produceRows(ctx: CodegenContext, input: String): String
 ----
 
-`produceRows` creates a new spark-sql-CodegenSupport.md#metricTerm[metric term] for the <<numOutputRows, numOutputRows>> metric.
+`produceRows` creates a new [metric term](CodegenSupport.md#metricTerm) for the <<numOutputRows, numOutputRows>> metric.
 
 `produceRows` creates a spark-sql-CodegenContext.md#freshName[fresh term name] for a `row` variable and assigns it as the name of the spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW].
 
@@ -272,7 +272,7 @@ For every catalyst/QueryPlan.md#output[output schema attribute], `produceRows` c
 
 `produceRows` selects the name of the row term per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
 
-`produceRows` spark-sql-CodegenSupport.md#consume[generates the Java source code to consume generated columns or row from the current physical operator] and uses it to generate the final Java source code for producing rows.
+`produceRows` [generates the Java source code to consume generated columns or row from the current physical operator](CodegenSupport.md#consume) and uses it to generate the final Java source code for producing rows.
 
 [source, scala]
 ----

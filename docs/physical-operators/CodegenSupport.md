@@ -1,344 +1,105 @@
 # CodegenSupport Physical Operators
 
-`CodegenSupport` is the <<contract, contract>> of <<implementations, physical operators>> that want to support *Java code generation* and participate in the <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation (Whole-Stage CodeGen)>>.
+`CodegenSupport` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [physical operators](#implementations) that support [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.execution
+## Contract
 
-trait CodegenSupport extends SparkPlan {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def doProduce(ctx: CodegenContext): String
-  def inputRDDs(): Seq[RDD[InternalRow]]
+### <span id="doConsume"> doConsume
 
-  // ...except the following that throws an UnsupportedOperationException by default
-  def doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-}
-----
-
-.(Subset of) CodegenSupport Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| `doConsume`
-| [[doConsume]] Generating a plain Java source code for spark-sql-whole-stage-codegen.md#consume-path[whole-stage "consume" path code generation]
-
-Used exclusively when `CodegenSupport` is requested for the Java source code to <<consume, consume>> the generated columns or a row from a physical operator.
-
-| `doProduce`
-| [[doProduce]] Generating a plain Java source code (as a text) for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage Java code generation.
-
-Used exclusively when a physical operator is requested to <<produce, generate the Java source code for produce code path>>, i.e. a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators.
-
-| `inputRDDs`
-a| [[inputRDDs]] Input RDDs of a physical operator
-
-NOTE: Up to two input RDDs are supported only.
-
-Used when `WholeStageCodegenExec` unary physical operator is <<spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute, executed>>.
-|===
-
-`CodegenSupport` has the <<final-methods, final methods>> that are used to generate the Java source code in different phases of Whole-Stage Java Code Generation.
-
-[[final-methods]]
-.SparkPlan's Final Methods
-[cols="1,3",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| <<consume, consume>>
-a| Code for consuming generated columns or a row from a physical operator
-
-[source, scala]
-----
-consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): String
-----
-
-| <<produce, produce>>
-a| Code for "produce" code path
-
-[source, scala]
-----
-produce(ctx: CodegenContext, parent: CodegenSupport): String
-----
-|===
-
-`CodegenSupport` allows physical operators to <<supportCodegen, disable Java code generation>>.
-
-TIP: Use spark-sql-debugging-query-execution.md#debugCodegen[debugCodegen] or [QueryExecution.debug.codegen](../QueryExecution.md#debug) methods to access the generated Java source code for a structured query.
-
-[[variablePrefix]]
-`variablePrefix` is...FIXME
-
-`CodegenSupport` uses a <<parent, parent>> physical operator (with `CodegenSupport`) for...FIXME
-
-[source, scala]
-----
-val q = spark.range(1)
-
-import org.apache.spark.sql.execution.debug._
-scala> q.debugCodegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Range (0, 1, step=1, splits=8)
-
-Generated code:
-...
-
-// The above is equivalent to the following method chain
-scala> q.queryExecution.debug.codegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Range (0, 1, step=1, splits=8)
-
-Generated code:
-...
-----
-
-[[implementations]]
-.CodegenSupports
-[cols="1m,2",options="header",width="100%"]
-|===
-| CodegenSupport
-| Description
-
-| <<spark-sql-SparkPlan-BaseLimitExec.md#, BaseLimitExec>>
-| [[BaseLimitExec]]
-
-| <<spark-sql-SparkPlan-BroadcastHashJoinExec.md#, BroadcastHashJoinExec>>
-| [[BroadcastHashJoinExec]]
-
-| <<spark-sql-ColumnarBatchScan.md#, ColumnarBatchScan>>
-| [[ColumnarBatchScan]]
-
-| <<spark-sql-SparkPlan-DataSourceScanExec.md#, DataSourceScanExec>>
-| [[DataSourceScanExec]]
-
-| <<spark-sql-SparkPlan-DebugExec.md#, DebugExec>>
-| [[DebugExec]]
-
-| <<spark-sql-SparkPlan-DeserializeToObjectExec.md#, DeserializeToObjectExec>>
-| [[DeserializeToObjectExec]]
-
-| <<spark-sql-SparkPlan-ExpandExec.md#, ExpandExec>>
-| [[ExpandExec]]
-
-| <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>>
-| [[FilterExec]]
-
-| <<spark-sql-SparkPlan-GenerateExec.md#, GenerateExec>>
-| [[GenerateExec]]
-
-| <<spark-sql-SparkPlan-HashAggregateExec.md#, HashAggregateExec>>
-| [[HashAggregateExec]]
-
-| <<spark-sql-SparkPlan-InputAdapter.md#, InputAdapter>>
-| [[InputAdapter]]
-
-| <<spark-sql-SparkPlan-MapElementsExec.md#, MapElementsExec>>
-| [[MapElementsExec]]
-
-| <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>>
-| [[ProjectExec]]
-
-| <<spark-sql-SparkPlan-RangeExec.md#, RangeExec>>
-| [[RangeExec]]
-
-| <<spark-sql-SparkPlan-SampleExec.md#, SampleExec>>
-| [[SampleExec]]
-
-| <<spark-sql-SparkPlan-SerializeFromObjectExec.md#, SerializeFromObjectExec>>
-| [[SerializeFromObjectExec]]
-
-| <<spark-sql-SparkPlan-SortExec.md#, SortExec>>
-| [[SortExec]]
-
-| <<spark-sql-SparkPlan-SortMergeJoinExec.md#, SortMergeJoinExec>>
-| [[SortMergeJoinExec]]
-
-| <<spark-sql-SparkPlan-WholeStageCodegenExec.md#, WholeStageCodegenExec>>
-| [[WholeStageCodegenExec]]
-|===
-
-=== [[supportCodegen]] `supportCodegen` Flag
-
-[source, scala]
-----
-supportCodegen: Boolean = true
-----
-
-`supportCodegen` flag is to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
-
-`supportCodegen` flag is turned on by default.
-
-[NOTE]
-====
-`supportCodegen` is turned off in the following physical operators:
-
-* spark-sql-SparkPlan-GenerateExec.md[GenerateExec]
-* spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec] with spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregates]
-* spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] for all spark-sql-joins.md#join-types[join types] except `INNER` and `CROSS`
-====
-
-=== [[produce]] Generating Java Source Code for Produce Code Path -- `produce` Final Method
-
-[source, scala]
-----
-produce(ctx: CodegenContext, parent: CodegenSupport): String
-----
-
-`produce` generates the Java source code for spark-sql-whole-stage-codegen.md#produce-path[whole-stage-codegen produce code path] for processing the rows from the <<inputRDDs, input RDDs>>, i.e. a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators.
-
-Internally, `produce` SparkPlan.md#executeQuery[prepares a physical operator for query execution] and then generates a Java source code with the result of <<doProduce, doProduce>>.
-
-While generating the Java source code, `produce` annotates code blocks with `PRODUCE` markers that are catalyst/QueryPlan.md#simpleString[simple descriptions] of the physical operators in a structured query.
-
-TIP: Enable `spark.sql.codegen.comments` Spark SQL property to have `PRODUCE` markers in the generated Java source code.
-
-[source, scala]
-----
-// ./bin/spark-shell --conf spark.sql.codegen.comments=true
-import org.apache.spark.sql.execution.debug._
-val q = Seq((0 to 4).toList).toDF.
-  select(explode('value) as "id").
-  join(spark.range(1), "id")
-scala> q.debugCodegen
-Found 2 WholeStageCodegen subtrees.
-== Subtree 1 / 2 ==
-*Range (0, 1, step=1, splits=8)
-...
-/* 080 */   protected void processNext() throws java.io.IOException {
-/* 081 */     // PRODUCE: Range (0, 1, step=1, splits=8)
-/* 082 */     // initialize Range
-/* 083 */     if (!range_initRange) {
-...
-== Subtree 2 / 2 ==
-*Project [id#6]
-+- *BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
-   :- Generate explode(value#1), false, false, [id#6]
-   :  +- LocalTableScan [value#1]
-   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
-      +- *Range (0, 1, step=1, splits=8)
-...
-/* 062 */   protected void processNext() throws java.io.IOException {
-/* 063 */     // PRODUCE: Project [id#6]
-/* 064 */     // PRODUCE: BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
-/* 065 */     // PRODUCE: InputAdapter
-/* 066 */     while (inputadapter_input.hasNext() && !stopEarly()) {
-...
-----
-
-[NOTE]
-====
-`produce` is used when:
-
-* (most importantly) `WholeStageCodegenExec` is requested to <<spark-sql-SparkPlan-WholeStageCodegenExec.md#doCodeGen, generate the Java source code for a child physical plan subtree>> (i.e. a physical operator and its children)
-
-* A physical operator (with `CodegenSupport`) is requested to <<doProduce, generate a Java source code for the produce path in whole-stage Java code generation>> that usually looks as follows:
-+
-[source, scala]
-----
-protected override def doProduce(ctx: CodegenContext): String = {
-  child.asInstanceOf[CodegenSupport].produce(ctx, this)
-}
-----
-====
-
-=== [[prepareRowVar]] `prepareRowVar` Internal Method
-
-[source, scala]
-----
-prepareRowVar(ctx: CodegenContext, row: String, colVars: Seq[ExprCode]): ExprCode
-----
-
-`prepareRowVar`...FIXME
-
-NOTE: `prepareRowVar` is used exclusively when `CodegenSupport` is requested to <<consume, consume>> (and <<constructDoConsumeFunction, constructDoConsumeFunction>> with spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator] enabled).
-
-=== [[constructDoConsumeFunction]] `constructDoConsumeFunction` Internal Method
-
-[source, scala]
-----
-constructDoConsumeFunction(
+```scala
+doConsume(
   ctx: CodegenContext,
-  inputVars: Seq[ExprCode],
-  row: String): String
-----
+  input: Seq[ExprCode],
+  row: ExprCode): String
+```
 
-`constructDoConsumeFunction`...FIXME
+Generates a Java source code (as a text) for the physical operator for the ["consume" path](../spark-sql-whole-stage-codegen.md#consume-path) in [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md)
 
-NOTE: `constructDoConsumeFunction` is used exclusively when `CodegenSupport` is requested to <<consume, consume>>.
+!!! note "UnsupportedOperationException"
+    `doConsume` throws an `UnsupportedOperationException` by default.
 
-=== [[registerComment]] `registerComment` Method
+Used when the physical operator is requested to [generate the Java source code for consume code path](#consume) (a Java code that consumers the generated columns or a row from a physical operator)
 
-[source, scala]
-----
-registerComment(text: => String): String
-----
+### <span id="doProduce"> doProduce
 
-`registerComment`...FIXME
+```scala
+doProduce(
+  ctx: CodegenContext): String
+```
 
-NOTE: `registerComment` is used when...FIXME
+Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the ["produce" path](../spark-sql-whole-stage-codegen.md#produce-path) in [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
 
-=== [[metricTerm]] `metricTerm` Method
+Used when the physical operator is requested to [generate the Java source code for produce code path](#produce) (a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators)
 
-[source, scala]
-----
-metricTerm(ctx: CodegenContext, name: String): String
-----
+### <span id="inputRDDs"> inputRDDs
 
-`metricTerm`...FIXME
+```scala
+inputRDDs(): Seq[RDD[InternalRow]]
+```
 
-NOTE: `metricTerm` is used when...FIXME
+Input RDDs of the physical operator
 
-=== [[usedInputs]] `usedInputs` Method
+!!! important
+    [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) supports up to two input RDDs.
 
-[source, scala]
-----
-usedInputs: AttributeSet
-----
+Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical operator is executed
 
-`usedInputs` returns the catalyst/QueryPlan.md#references[expression references].
+## Implementations
 
-NOTE: Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the <<spark-sql-CodegenSupport.md#consume, generated Java source code for consume path>>).
+* [BaseLimitExec](BaseLimitExec.md)
+* [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md)
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md)
+* [ColumnarToRowExec](ColumnarToRowExec.md)
+* [DebugExec](DebugExec.md)
+* [DeserializeToObjectExec](DeserializeToObjectExec.md)
+* [ExpandExec](ExpandExec.md)
+* [FilterExec](FilterExec.md)
+* [GenerateExec](GenerateExec.md)
+* [InputRDDCodegen](InputRDDCodegen.md)
+* [MapElementsExec](MapElementsExec.md)
+* [ProjectExec](ProjectExec.md)
+* [RangeExec](RangeExec.md)
+* [SampleExec](SampleExec.md)
+* [SerializeFromObjectExec](SerializeFromObjectExec.md)
+* [SortMergeJoinExec](SortMergeJoinExec.md)
+* [WholeStageCodegenExec](WholeStageCodegenExec.md)
 
-NOTE: `usedInputs` is used exclusively when `CodegenSupport` is requested to <<consume, generate a Java source code for consume path>>.
+## Final Methods
 
-=== [[consume]] Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator -- `consume` Final Method
+Final methods are used to generate the Java source code in different phases of [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
 
-[source, scala]
-----
-consume(ctx: CodegenContext, outputVars: Seq[ExprCode], row: String = null): String
-----
+### <span id="consume"> Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator
 
-NOTE: `consume` is a final method that cannot be changed and is the foundation of codegen support.
+```scala
+consume(
+  ctx: CodegenContext,
+  outputVars: Seq[ExprCode],
+  row: String = null): String
+```
 
-`consume` creates the `ExprCodes` for the input variables (aka `inputVars`).
+`consume` generates Java source code for consuming generated columns or a row from the physical operator
 
-* If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the catalyst/QueryPlan.md#output[output] and copies them. In other words, `inputVars` is exactly `outputVars`.
+`consume` creates the `ExprCodes` for the input variables (`inputVars`).
 
-* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets spark-sql-CodegenContext.md#currentVars[currentVars] of the `CodegenContext` to `null` while spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW] to the `row`. For every attribute in the catalyst/QueryPlan.md#output[output], `consume` creates a spark-sql-Expression-BoundReference.md#creating-instance[BoundReference] and requests it to expressions/Expression.md#genCode[generate code for expression evaluation].
+* If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the [output attributes](../catalyst/QueryPlan.md#output) and copies them. In other words, `inputVars` is exactly `outputVars`.
 
-`consume` <<prepareRowVar, creates a row variable>>.
+* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets [currentVars](../spark-sql-CodegenContext.md#currentVars) of the `CodegenContext` to `null` while [INPUT_ROW](../spark-sql-CodegenContext.md#INPUT_ROW) to the `row`. For every [output attribute](../catalyst/QueryPlan.md#output), `consume` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
+
+`consume` [creates a row variable](#prepareRowVar).
 
 `consume` sets the following in the `CodegenContext`:
 
-* spark-sql-CodegenContext.md#currentVars[currentVars] as the `inputVars`
+* [currentVars](../spark-sql-CodegenContext.md#currentVars) as the `inputVars`
 
-* spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW] as `null`
+* [INPUT_ROW](../spark-sql-CodegenContext.md#INPUT_ROW) as `null`
 
-* spark-sql-CodegenContext.md#freshNamePrefix[freshNamePrefix] as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
+* [freshNamePrefix](../spark-sql-CodegenContext.md#freshNamePrefix) as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
 
 `consume` <<evaluateRequiredVariables, evaluateRequiredVariables>> (with the `output`, `inputVars` and <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>>) and creates so-called `evaluated`.
 
 `consume` creates a so-called `consumeFunc` by <<constructDoConsumeFunction, constructDoConsumeFunction>> when the following are all met:
 
-. spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator] internal configuration property is enabled
+. [spark.sql.codegen.splitConsumeFuncByOperator](../spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) internal configuration property is enabled
 
 . <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>> contains all catalyst/QueryPlan.md#output[output attributes]
 
@@ -348,15 +109,15 @@ Otherwise, `consume` requests the <<parent, parent CodegenSupport operator>> to 
 
 In the end, `consume` gives the plain Java source code with the comment `CONSUME: [parent]`:
 
-```
+```text
 [evaluated]
 [consumeFunc]
 ```
 
-TIP: Enable spark-sql-properties.md#spark.sql.codegen.comments[spark.sql.codegen.comments] Spark SQL property to have `CONSUME` markers in the generated Java source code.
+!!! tip
+    Enable [spark.sql.codegen.comments](../spark-sql-properties.md#spark.sql.codegen.comments) Spark SQL property to have `CONSUME` markers in the generated Java source code.
 
-[source, scala]
-----
+```text
 // ./bin/spark-shell --conf spark.sql.codegen.comments=true
 import org.apache.spark.sql.execution.debug._
 val q = Seq((0 to 4).toList).toDF.
@@ -394,26 +155,197 @@ Found 2 WholeStageCodegen subtrees.
 /* 091 */       }
 /* 092 */       if (shouldStop()) return;
 ...
-----
+```
 
-[NOTE]
-====
 `consume` is used when:
 
-* spark-sql-SparkPlan-BroadcastHashJoinExec.md#doConsume[BroadcastHashJoinExec], `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<spark-sql-SparkPlan-FilterExec.md#doConsume, FilterExec>>, spark-sql-SparkPlan-GenerateExec.md#doConsume[GenerateExec], spark-sql-SparkPlan-ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for spark-sql-whole-stage-codegen.md#consume-path["consume" path] in whole-stage code generation
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<spark-sql-SparkPlan-FilterExec.md#doConsume, FilterExec>>, spark-sql-SparkPlan-GenerateExec.md#doConsume[GenerateExec], spark-sql-SparkPlan-ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for spark-sql-whole-stage-codegen.md#consume-path["consume" path] in whole-stage code generation
 
 * spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], spark-sql-SparkPlan-HashAggregateExec.md#doProduce[HashAggregateExec], spark-sql-SparkPlan-InputAdapter.md#doProduce[InputAdapter], spark-sql-SparkPlan-RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], spark-sql-SparkPlan-RangeExec.md#doProduce[RangeExec], spark-sql-SparkPlan-SortExec.md#doProduce[SortExec], spark-sql-SparkPlan-SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage code generation
-====
 
-=== [[parent]] `parent` Internal Variable Property
+### <span id="limitNotReachedCond"> limitNotReachedCond
 
-[source, scala]
-----
+```scala
+limitNotReachedCond: String
+```
+
+`limitNotReachedCond` is used when [ColumnarToRowExec](ColumnarToRowExec.md), [SortExec](SortExec.md), [InputRDDCodegen](InputRDDCodegen.md), [HashAggregateExec](HashAggregateExec.md) physical operators are requested to `doProduce`.
+
+### <span id="produce"> Generating Java Source Code for Produce Code Path
+
+```scala
+produce(
+  ctx: CodegenContext,
+  parent: CodegenSupport): String
+```
+
+Generates Java source code for [whole-stage-codegen "produce" code path](../spark-sql-whole-stage-codegen.md#produce-path) for processing the rows from the [input RDDs](#inputRDDs) (a Java code that reads the rows from the input RDDs, processes them to produce output rows that are then the input rows to downstream physical operators).
+
+`produce` [prepares a physical operator for query execution](SparkPlan.md#executeQuery) and then generates a Java source code with the result of [doProduce](#doProduce).
+
+While generating the Java source code, `produce` annotates code blocks with `PRODUCE` markers that are [simple descriptions](../catalyst/QueryPlan.md#simpleString) of the physical operators in a structured query.
+
+!!! tip "spark.sql.codegen.comments Property"
+    Enable `spark.sql.codegen.comments` Spark SQL property to have `PRODUCE` markers in the generated Java source code.
+
+```text
+// ./bin/spark-shell --conf spark.sql.codegen.comments=true
+import org.apache.spark.sql.execution.debug._
+val q = Seq((0 to 4).toList).toDF.
+  select(explode('value) as "id").
+  join(spark.range(1), "id")
+scala> q.debugCodegen
+Found 2 WholeStageCodegen subtrees.
+== Subtree 1 / 2 ==
+*Range (0, 1, step=1, splits=8)
+...
+/* 080 */   protected void processNext() throws java.io.IOException {
+/* 081 */     // PRODUCE: Range (0, 1, step=1, splits=8)
+/* 082 */     // initialize Range
+/* 083 */     if (!range_initRange) {
+...
+== Subtree 2 / 2 ==
+*Project [id#6]
++- *BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
+   :- Generate explode(value#1), false, false, [id#6]
+   :  +- LocalTableScan [value#1]
+   +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
+      +- *Range (0, 1, step=1, splits=8)
+...
+/* 062 */   protected void processNext() throws java.io.IOException {
+/* 063 */     // PRODUCE: Project [id#6]
+/* 064 */     // PRODUCE: BroadcastHashJoin [cast(id#6 as bigint)], [id#9L], Inner, BuildRight
+/* 065 */     // PRODUCE: InputAdapter
+/* 066 */     while (inputadapter_input.hasNext() && !stopEarly()) {
+...
+```
+
+`produce` is used when:
+
+* (most importantly) `WholeStageCodegenExec` is requested to [generate the Java source code for a child physical plan subtree](WholeStageCodegenExec.md#doCodeGen) (i.e. a physical operator and its children)
+
+* A physical operator (with `CodegenSupport`) is requested to [generate a Java source code for the produce path in whole-stage Java code generation](#doProduce) that usually looks as follows:
+
+  ```scala
+  protected override def doProduce(ctx: CodegenContext): String = {
+    child.asInstanceOf[CodegenSupport].produce(ctx, this)
+  }
+  ```
+
+## Demo
+
+```text
+val q = spark.range(1)
+
+import org.apache.spark.sql.execution.debug._
+scala> q.debugCodegen
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*Range (0, 1, step=1, splits=8)
+
+Generated code:
+...
+
+// The above is equivalent to the following method chain
+scala> q.queryExecution.debug.codegen
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*Range (0, 1, step=1, splits=8)
+
+Generated code:
+...
+```
+
+## <span id="supportCodegen"> supportCodegen Flag
+
+```scala
+supportCodegen: Boolean
+```
+
+`supportCodegen` allows physical operators to disable Java code generation.
+
+`supportCodegen` flag is to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
+
+`supportCodegen` flag is turned on by default.
+
+!!! note
+    `supportCodegen` is turned off in the following physical operators:
+
+    * spark-sql-SparkPlan-GenerateExec.md[GenerateExec]
+    * spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec] with spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregates]
+    * spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] for all spark-sql-joins.md#join-types[join types] except `INNER` and `CROSS`
+
+## <span id="prepareRowVar"> prepareRowVar Internal Method
+
+```scala
+prepareRowVar(
+  ctx: CodegenContext,
+  row: String,
+  colVars: Seq[ExprCode]): ExprCode
+```
+
+`prepareRowVar`...FIXME
+
+`prepareRowVar` is used when `CodegenSupport` is requested to [consume](#consume) (and [constructDoConsumeFunction](#constructDoConsumeFunction) with [spark.sql.codegen.splitConsumeFuncByOperator](../spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) enabled).
+
+## <span id="constructDoConsumeFunction"> constructDoConsumeFunction Internal Method
+
+```scala
+constructDoConsumeFunction(
+  ctx: CodegenContext,
+  inputVars: Seq[ExprCode],
+  row: String): String
+```
+
+`constructDoConsumeFunction`...FIXME
+
+`constructDoConsumeFunction` is used when `CodegenSupport` is requested to [consume](#consume).
+
+## <span id="usedInputs"> usedInputs Method
+
+```scala
+usedInputs: AttributeSet
+```
+
+`usedInputs` returns the [expression references](../catalyst/QueryPlan.md#references).
+
+!!! note
+    Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the [generated Java source code for consume path](CodegenSupport.md#consume)).
+
+`usedInputs` is used when `CodegenSupport` is requested to [generate a Java source code for consume path](#consume).
+
+## <span id="parent"> parent Internal Variable Property
+
+```scala
 parent: CodegenSupport
-----
+```
 
-`parent` is a <<CodegenSupport, physical operator that supports whole-stage Java code generation>>.
+`parent` is a physical operator that supports whole-stage Java code generation.
 
-`parent` starts empty, (i.e. defaults to `null` value) and is assigned a physical operator (with `CodegenContext`) only when `CodegenContext` is requested to <<produce, generate a Java source code for produce code path>>. The physical operator is passed in as an input argument for the <<produce, produce>> code path.
+`parent` starts empty, (defaults to `null` value) and is assigned a physical operator (with `CodegenContext`) only when `CodegenContext` is requested to [generate a Java source code for produce code path](#produce). The physical operator is passed in as an input argument for the [produce](#produce) code path.
 
-NOTE: `parent` is used when...FIXME
+## <span id="limitNotReachedChecks"> limitNotReachedChecks Method
+
+```scala
+limitNotReachedChecks: Seq[String]
+```
+
+`limitNotReachedChecks` is a sequence of checks which evaluate to true if the downstream Limit operators have not received enough records and reached the limit.
+
+`limitNotReachedChecks` requests the [parent](#parent) physical operator for `limitNotReachedChecks`.
+
+`limitNotReachedChecks` is used when:
+
+* `RangeExec` physical operator is requested to [doProduce](RangeExec.md#doProduce)
+* `BaseLimitExec` physical operator is requested to [limitNotReachedChecks](BaseLimitExec.md#limitNotReachedChecks)
+* `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond)
+
+## <span id="canCheckLimitNotReached"> canCheckLimitNotReached Method
+
+```scala
+canCheckLimitNotReached: Boolean
+```
+
+`canCheckLimitNotReached`...FIXME
+
+`canCheckLimitNotReached` is used when `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).

@@ -4,10 +4,10 @@
 
 When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage, whole-stage code generation enabled>>), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a [physical operator](../physical-operators/SparkPlan.md) supports the <<spark-sql-whole-stage-codegen.md#, whole-stage Java code generation>> or not (and what physical operator to insert):
 
-. Factors in physical operators with <<spark-sql-CodegenSupport.md#, CodegenSupport>> only
+. Factors in physical operators with [CodegenSupport](CodegenSupport.md) only
 
 . Enforces the <<supportCodegen, supportCodegen>> custom requirements on a physical operator, i.e.
-.. <<spark-sql-CodegenSupport.md#supportCodegen, supportCodegen>> flag turned on (`true`)
+.. [supportCodegen](CodegenSupport.md#supportCodegen) flag turned on (`true`)
 .. No <<expressions/Expression.md#, Catalyst expressions>> are <<spark-sql-Expression-CodegenFallback.md#, CodegenFallback>>
 .. <<catalyst/QueryPlan.md#schema, Output schema>> is *neither wide nor deep* and  <<spark-sql-SparkPlan-WholeStageCodegenExec.md#isTooManyFields, uses just enough fields (including nested fields)>>
 .. [Children](../catalyst/TreeNode.md#children) use output schema that is also <<spark-sql-SparkPlan-WholeStageCodegenExec.md#isTooManyFields, neither wide nor deep>>
@@ -285,7 +285,7 @@ Internally, `insertWholeStageCodegen` branches off per [physical operator](../ph
 . For physical operators with a single <<catalyst/QueryPlan.md#output, output schema attribute>> of type `ObjectType`, `insertWholeStageCodegen` requests the operator for the [child](../catalyst/TreeNode.md#children) physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
 [[insertWholeStageCodegen-CodegenSupport]]
-. For physical operators that support <<spark-sql-CodegenSupport.md#, Java code generation>> and meets the <<supportCodegen, additional requirements for codegen>>, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.md#creating-instance, WholeStageCodegenExec>> physical operator.
+. For physical operators that support [Java code generation](CodegenSupport.md) and meets the <<supportCodegen, additional requirements for codegen>>, `insertWholeStageCodegen` <<insertInputAdapter, insertInputAdapter>> (with the operator), requests `WholeStageCodegenId` for the `getNextStageId` and then uses both to return a new <<spark-sql-SparkPlan-WholeStageCodegenExec.md#creating-instance, WholeStageCodegenExec>> physical operator.
 
 . For any other physical operators, `insertWholeStageCodegen` requests the operator for the [child](../catalyst/TreeNode.md#children) physical operators and tries to <<insertWholeStageCodegen, insertWholeStageCodegen>> on them only.
 
@@ -338,9 +338,7 @@ supportCodegen(plan: SparkPlan): Boolean
 
 `supportCodegen` is positive (`true`) when the input [physical operator](../physical-operators/SparkPlan.md) is as follows:
 
-. spark-sql-CodegenSupport.md[CodegenSupport] and the <<spark-sql-CodegenSupport.md#supportCodegen, supportCodegen>> flag is turned on
-+
-NOTE: spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag is turned on by default.
+. [CodegenSupport](CodegenSupport.md) and the [supportCodegen](CodegenSupport.md#supportCodegen) flag is turned on ([supportCodegen](CodegenSupport.md#supportCodegen) flag is turned on by default)
 
 . No <<supportCodegen-Expression, Catalyst expressions are CodegenFallback (except LeafExpressions)>>
 

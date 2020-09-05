@@ -1,6 +1,6 @@
 # InputAdapter Unary Physical Operator
 
-`InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of spark-sql-CodegenSupport.md[whole-stage Java code generation] (possibly due to spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
+`InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of [whole-stage Java code generation](CodegenSupport.md) (possibly due to [supportCodegen](CodegenSupport.md#supportCodegen) flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
 
 .InputAdapter's doProduce
 image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
@@ -31,10 +31,9 @@ scala> println(plan.numberedTreeString)
 `InputAdapter` requires that...FIXME, i.e. `needCopyResult` flag is turned off.
 
 [[inputRDDs]]
-`InputAdapter` SparkPlan.md#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own spark-sql-CodegenSupport.md#inputRDDs[input RDDs] for <<doProduce, whole-stage produce path code generation>>.
+`InputAdapter` SparkPlan.md#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own [input RDDs](CodegenSupport.md#inputRDDs) for <<doProduce, whole-stage produce path code generation>>.
 
-[source, scala]
-----
+```text
 // explode expression (that uses Generate operator) does not support codegen
 val ids = Seq(Seq(0,1,2,3)).toDF("ids").select(explode($"ids") as "id")
 val q = spark.range(1).join(ids, "id")
@@ -55,7 +54,7 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
 0) BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
 +- Generate explode(ids#112), false, [id#115]
    +- LocalTableScan [ids#112]
-----
+```
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
@@ -64,18 +63,17 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce` generates a Java source code that consumes spark-sql-InternalRow.md[internal row] of a single input `RDD` one at a time (in a `while` loop).
 
 NOTE: `doProduce` supports one input RDD only (that the single <<child, child>> physical operator creates when SparkPlan.md#execute[executed]).
 
 Internally, `doProduce` generates two `input` and `row` "fresh" terms and registers `input` as a mutable state (in the generated class).
 
-`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from spark-sql-CodegenSupport.md#consume[consume] code generator to iterate over the spark-sql-InternalRow.md[internal binary rows] from the first <<inputRDDs, input RDD>> only.
+`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from [consume](CodegenSupport.md#consume) code generator to iterate over the spark-sql-InternalRow.md[internal binary rows] from the first <<inputRDDs, input RDD>> only.
 
-[source, scala]
-----
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
+
+```text
 val q = spark.range(1)
   .select(explode(lit((0 to 1).toArray)) as "n")  // <-- explode expression does not support codegen
   .join(spark.range(2))
@@ -111,10 +109,9 @@ scala> println(code)
 append(inputadapter_row2);
    if (shouldStop()) return;
  }
-----
+```
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.plans.logical.Range
 val r = Range(start = 0, end = 1, step = 1, numSlices = 1)
 import org.apache.spark.sql.execution.RangeExec
@@ -149,4 +146,4 @@ ia.produce(ctx, parent = ia.asInstanceOf[CodegenSupport])
 //       i.e. BooleanType, ByteType, ShortType, IntegerType, LongType, FloatType, DoubleType
 
 FIXME Make the code working
-----
+```

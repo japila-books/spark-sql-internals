@@ -4,11 +4,11 @@ title: FilterExec
 
 `FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents <<spark-sql-LogicalPlan-Filter.md#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.md#, TypedFilter>> unary logical operators at execution.
 
-`FilterExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_) as follows:
+`FilterExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) as follows:
 
-* <<usedInputs, usedInputs>> is an empty `AttributeSet` (to defer evaluation of attribute expressions until they are actually used, i.e. in the <<spark-sql-CodegenSupport.md#consume, generated Java source code for consume path>>)
+* <<usedInputs, usedInputs>> is an empty `AttributeSet` (to defer evaluation of attribute expressions until they are actually used, i.e. in the [generated Java source code for consume path](CodegenSupport.md#consume))
 
-* Uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>>
+* Uses whatever the <<child, child>> physical operator uses for the [input RDDs](CodegenSupport.md#inputRDDs)
 
 * Generates a Java source code for the <<doProduce, produce>> and <<doConsume, consume>> paths in whole-stage code generation
 
@@ -45,7 +45,7 @@ image::images/spark-sql-FilterExec-webui-details-for-query.png[align="center"]
 [[inputRDDs]]
 [[outputOrdering]]
 [[outputPartitioning]]
-`FilterExec` uses whatever the <<child, child>> physical operator uses for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>>, the <<SparkPlan.md#outputOrdering, outputOrdering>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
+`FilterExec` uses whatever the <<child, child>> physical operator uses for the [input RDDs](CodegenSupport.md#inputRDDs), the [outputOrdering](SparkPlan.md#outputOrdering) and the [outputPartitioning](SparkPlan.md#outputPartitioning).
 
 `FilterExec` uses the spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
 
@@ -92,39 +92,6 @@ isNullIntolerant(expr: Expression): Boolean
 
 NOTE: `isNullIntolerant` is used when...FIXME
 
-=== [[usedInputs]] `usedInputs` Method
-
-[source, scala]
-----
-usedInputs: AttributeSet
-----
-
-NOTE: `usedInputs` is part of <<spark-sql-CodegenSupport.md#usedInputs, CodegenSupport Contract>> to...FIXME.
-
-`usedInputs`...FIXME
-
-=== [[output]] `output` Method
-
-[source, scala]
-----
-output: Seq[Attribute]
-----
-
-NOTE: `output` is part of <<catalyst/QueryPlan.md#output, QueryPlan Contract>> to...FIXME.
-
-`output`...FIXME
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
-`doProduce`...FIXME
-
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
 [source, scala]
@@ -132,18 +99,13 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSup
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
-`doConsume` creates a new <<spark-sql-CodegenSupport.md#metricTerm, metric term>> for the <<numOutputRows, numOutputRows>> metric.
+`doConsume` creates a new [metric term](CodegenSupport.md#metricTerm) for the <<numOutputRows, numOutputRows>> metric.
 
 `doConsume`...FIXME
 
-In the end, `doConsume` uses <<spark-sql-CodegenSupport.md#consume, consume>> and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
+In the end, `doConsume` uses [consume](CodegenSupport.md#consume) and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
 
-[source, scala]
-----
-// DEMO Write one
-----
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 ==== [[doConsume-genPredicate]] `genPredicate` Internal Method
 

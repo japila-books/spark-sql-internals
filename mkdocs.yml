@@ -509,6 +509,7 @@ nav:
         - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
         - AtomicReplaceTableExec: physical-operators/AtomicReplaceTableExec.md
         - BatchScanExec: physical-operators/BatchScanExec.md
+        - BlockingOperatorWithCodegen: physical-operators/BlockingOperatorWithCodegen.md
         - physical-operators/BroadcastExchangeExec.md
         - physical-operators/BroadcastHashJoinExec.md
         - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
@@ -537,6 +538,7 @@ nav:
         - physical-operators/HashAggregateExec.md
         - physical-operators/InMemoryTableScanExec.md
         - InputAdapter: physical-operators/InputAdapter.md
+        - InputRDDCodegen: physical-operators/InputRDDCodegen.md
         - physical-operators/LocalTableScanExec.md
         - physical-operators/MapElementsExec.md
         - physical-operators/ObjectHashAggregateExec.md

@@ -10,10 +10,9 @@ title: SortExec
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
-`SortExec` supports <<spark-sql-CodegenSupport.md#, Java code generation>> (aka _codegen_).
+`SortExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
-[source, scala]
-----
+```text
 val q = Seq((0, "zero"), (1, "one")).toDF("id", "name").sort('id)
 val qe = q.queryExecution
 
@@ -39,7 +38,7 @@ scala> println(executedPlan.numberedTreeString)
 import org.apache.spark.sql.execution.SortExec
 val sortExec = executedPlan.collect { case se: SortExec => se }.head
 assert(sortExec.isInstanceOf[SortExec])
-----
+```
 
 [[output]]
 When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
@@ -76,17 +75,6 @@ When requested for the <<SparkPlan.md#requiredChildDistribution, required partit
 | [[spillSize]]
 |===
 
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
-`doProduce`...FIXME
-
 === [[creating-instance]] Creating SortExec Instance
 
 `SortExec` takes the following when created:
@@ -95,14 +83,3 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSup
 * [[global]] `global` flag
 * [[child]] Child <<SparkPlan.md#, physical plan>>
 * [[testSpillFrequency]] `testSpillFrequency` (default: `0`)
-
-=== [[createSorter]] `createSorter` Method
-
-[source, scala]
-----
-createSorter(): UnsafeExternalRowSorter
-----
-
-`createSorter`...FIXME
-
-NOTE: `createSorter` is used when...FIXME

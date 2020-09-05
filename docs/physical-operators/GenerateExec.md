@@ -35,24 +35,22 @@ When <<doExecute, executed>>, `GenerateExec` spark-sql-Expression-Generator.md#e
 .GenerateExec's Execution -- `doExecute` Method
 image::images/spark-sql-GenerateExec-doExecute.png[align="center"]
 
-NOTE: <<child, child>> physical operator has to support spark-sql-CodegenSupport.md[CodegenSupport].
+NOTE: <<child, child>> physical operator has to support [CodegenSupport](CodegenSupport.md).
 
-`GenerateExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
+`GenerateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
 [[supportCodegen]]
-`GenerateExec` does not support spark-sql-whole-stage-codegen.md[Java code generation] (aka _whole-stage codegen_), i.e. spark-sql-CodegenSupport.md#supportCodegen[supportCodegen] flag is turned off.
+`GenerateExec` does not support spark-sql-whole-stage-codegen.md[Java code generation] (aka _whole-stage codegen_), i.e. [supportCodegen](CodegenSupport.md#supportCodegen) flag is turned off.
 
-[source, scala]
-----
+```text
 scala> :type ge
 org.apache.spark.sql.execution.GenerateExec
 
 scala> ge.supportCodegen
 res2: Boolean = false
-----
+```
 
-[source, scala]
-----
+```text
 // Turn spark.sql.codegen.comments on to see comments in the code
 // ./bin/spark-shell --conf spark.sql.codegen.comments=true
 // inline function gives Inline expression
@@ -202,7 +200,7 @@ scala> println(formattedCode)
 /* 121 */   }
 /* 122 */
 /* 123 */ }
-----
+```
 
 [[output]]
 The catalyst/QueryPlan.md#output[output schema] of a `GenerateExec` is...FIXME
@@ -233,7 +231,7 @@ image::images/spark-sql-GenerateExec-webui-details-for-query.png[align="center"]
 `boundGenerator`...FIXME
 
 [[inputRDDs]]
-`GenerateExec` gives <<child, child>>'s spark-sql-CodegenSupport.md#inputRDDs[input RDDs] (when `WholeStageCodegenExec` is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`GenerateExec` gives <<child, child>>'s [input RDDs](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
 
 [[needCopyResult]]
 `GenerateExec` requires that...FIXME
@@ -245,9 +243,9 @@ image::images/spark-sql-GenerateExec-webui-details-for-query.png[align="center"]
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce`...FIXME
+
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
@@ -256,9 +254,9 @@ NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSup
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
 `doConsume`...FIXME
+
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 === [[codeGenCollection]] `codeGenCollection` Internal Method
 

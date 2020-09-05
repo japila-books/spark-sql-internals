@@ -2,7 +2,7 @@ title: SerializeFromObjectExec
 
 # SerializeFromObjectExec Unary Physical Operator
 
-`SerializeFromObjectExec` is a [unary physical operator](UnaryExecNode.md) that supports <<spark-sql-CodegenSupport.md#, Java code generation>>.
+`SerializeFromObjectExec` is a [unary physical operator](UnaryExecNode.md) that supports [Java code generation](CodegenSupport.md).
 
 `SerializeFromObjectExec` supports Java code generation with the <<doProduce, doProduce>>, <<doConsume, doConsume>> and <<inputRDDs, inputRDDs>> methods.
 
@@ -12,7 +12,7 @@ title: SerializeFromObjectExec
 
 [[inputRDDs]]
 [[outputPartitioning]]
-`SerializeFromObjectExec` uses the <<child, child>> physical operator when requested for the <<spark-sql-CodegenSupport.md#inputRDDs, input RDDs>> and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
+`SerializeFromObjectExec` uses the <<child, child>> physical operator when requested for the [input RDDs](CodegenSupport.md#inputRDDs) and the <<SparkPlan.md#outputPartitioning, outputPartitioning>>.
 
 [[output]]
 `SerializeFromObjectExec` uses the <<serializer, serializer>> for the <<catalyst/QueryPlan.md#output, output schema attributes>>.
@@ -22,7 +22,7 @@ title: SerializeFromObjectExec
 `SerializeFromObjectExec` takes the following when created:
 
 * [[serializer]] Serializer (as `Seq[NamedExpression]`)
-* [[child]] Child <<SparkPlan.md#, physical operator>> (that supports <<spark-sql-CodegenSupport.md#, Java code generation>>)
+* [[child]] Child <<SparkPlan.md#, physical operator>> (that supports [Java code generation](CodegenSupport.md))
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
 
@@ -31,9 +31,9 @@ title: SerializeFromObjectExec
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
 `doConsume`...FIXME
+
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
@@ -42,9 +42,9 @@ NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSup
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce`...FIXME
+
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

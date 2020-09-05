@@ -10,7 +10,7 @@
 `DataSourceV2ScanExec` is also a [DataSourceV2StringFormat](../spark-sql-DataSourceV2StringFormat.md), i.e....FIXME
 
 [[inputRDDs]]
-`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the spark-sql-CodegenSupport.md#inputRDDs[only input RDD of internal rows] (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the [only input RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
 
 ## Creating Instance
 

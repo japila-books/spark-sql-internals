@@ -11,7 +11,7 @@ title: HashAggregateExec
 !!! note
     `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 
-`HashAggregateExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
+`HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
 `HashAggregateExec` uses <<spark-sql-TungstenAggregationIterator.md#, TungstenAggregationIterator>> (to iterate over `UnsafeRows` in partitions) when <<doExecute, executed>>.
 
@@ -171,7 +171,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 *FIXME* for the following two cases in aggregation with one distinct.
 ====
 
-NOTE: The prefix for variable names for `HashAggregateExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *agg*.
+NOTE: The prefix for variable names for `HashAggregateExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **agg**.
 
 [[internal-registries]]
 .HashAggregateExec's Internal Properties (e.g. Registries, Counters and Flags)
@@ -257,9 +257,9 @@ NOTE: `doConsumeWithoutKeys` is used exclusively when `HashAggregateExec` is req
 doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
 ----
 
-NOTE: `doConsume` is part of <<spark-sql-CodegenSupport.md#doConsume, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#consume-path, consume path>> in Whole-Stage Code Generation.
-
 `doConsume` executes <<doConsumeWithoutKeys, doConsumeWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doConsumeWithKeys, doConsumeWithKeys>> otherwise.
+
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 === [[doProduceWithKeys]] Generating Java Source Code For "produce" Path (In Whole-Stage Code Generation) -- `doProduceWithKeys` Internal Method
 
@@ -384,9 +384,9 @@ scala> println(rdd.toDebugString)
 doProduce(ctx: CodegenContext): String
 ----
 
-NOTE: `doProduce` is part of <<spark-sql-CodegenSupport.md#doProduce, CodegenSupport Contract>> to generate the Java source code for <<spark-sql-whole-stage-codegen.md#produce-path, produce path>> in Whole-Stage Code Generation.
-
 `doProduce` executes <<doProduceWithoutKeys, doProduceWithoutKeys>> when no <<groupingExpressions, named expressions for the grouping keys>> were specified for the `HashAggregateExec` or <<doProduceWithKeys, doProduceWithKeys>> otherwise.
+
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
 === [[creating-instance]] Creating HashAggregateExec Instance
 

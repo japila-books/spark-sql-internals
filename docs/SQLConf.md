@@ -317,7 +317,7 @@ a| [[wholeStageMaxNumFields]] Used in:
 
 | wholeStageSplitConsumeFuncByOperator
 | spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator[spark.sql.codegen.splitConsumeFuncByOperator]
-| [[wholeStageSplitConsumeFuncByOperator]] Used exclusively when `CodegenSupport` is requested to spark-sql-CodegenSupport.md#consume[consume]
+| [[wholeStageSplitConsumeFuncByOperator]] Used exclusively when `CodegenSupport` is requested to [consume](physical-operators/CodegenSupport.md#consume)
 
 | wholeStageUseIdInClassName
 | spark-sql-properties.md#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName]

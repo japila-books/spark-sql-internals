@@ -6,10 +6,9 @@ title: BroadcastHashJoinExec
 
 `BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
 
-`BroadcastHashJoinExec` supports spark-sql-CodegenSupport.md[Java code generation] (aka _codegen_).
+`BroadcastHashJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
-[source, scala]
-----
+```text
 val tokens = Seq(
   (0, "playing"),
   (1, "with"),
@@ -27,7 +26,7 @@ scala> q.explain
    :- LocalTableScan [id#15, token#16]
    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
       +- LocalTableScan [id#20, token#21]
-----
+```
 
 `BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match [BroadcastDistribution](BroadcastDistribution.md) (with a [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md)) and [UnspecifiedDistribution](UnspecifiedDistribution.md) (for <<left, left>> and <<right, right>> sides of a join or vice versa).
 
@@ -51,7 +50,7 @@ scala> q.explain
 .BroadcastHashJoinExec in web UI (Details for Query)
 image::images/spark-sql-BroadcastHashJoinExec-webui-query-details.png[align="center"]
 
-NOTE: The prefix for variable names for `BroadcastHashJoinExec` operators in spark-sql-CodegenSupport.md[CodegenSupport]-generated code is *bhj*.
+NOTE: The prefix for variable names for `BroadcastHashJoinExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is *bhj*.
 
 [source, scala]
 ----
