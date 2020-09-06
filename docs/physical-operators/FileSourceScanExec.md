@@ -344,15 +344,15 @@ NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` phys
 supportsBatch: Boolean
 ----
 
-NOTE: `supportsBatch` is part of the spark-sql-ColumnarBatchScan.md#supportsBatch[ColumnarBatchScan Contract] to enable spark-sql-vectorized-parquet-reader.md[vectorized decoding].
-
 `supportsBatch` is enabled (`true`) only when the spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) spark-sql-FileFormat.md#supportBatch[supports vectorized decoding]. Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
 NOTE: <<spark-sql-FileFormat.md#, FileFormat>> does not support vectorized decoding by default (i.e. <<spark-sql-FileFormat.md#supportBatch, supportBatch>> flag is disabled). Only <<spark-sql-ParquetFileFormat.md#, ParquetFileFormat>> and <<spark-sql-OrcFileFormat.md#, OrcFileFormat>> have support for it under certain conditions.
 
+`supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
+
 === [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
 
-`FileSourceScanExec` is a spark-sql-ColumnarBatchScan.md[ColumnarBatchScan] and <<supportsBatch, supports batch decoding>> only when the spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) spark-sql-FileFormat.md#supportBatch[supports it].
+`FileSourceScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) and <<supportsBatch, supports batch decoding>> only when the spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] (of the <<relation, HadoopFsRelation>>) spark-sql-FileFormat.md#supportBatch[supports it].
 
 `FileSourceScanExec` has <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag enabled for `ParquetFileFormat` data sources exclusively.
 
@@ -375,7 +375,7 @@ Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
 
 NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecute, executed>> (and <<supportsBatch, supportsBatch>> flag is off).
 
-`needsUnsafeRowConversion` is part of the [ColumnarBatchScan](spark-sql-ColumnarBatchScan.md#needsUnsafeRowConversion) abstraction.
+`needsUnsafeRowConversion` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#needsUnsafeRowConversion) abstraction.
 
 ==== [[vectorTypes]] Fully-Qualified Class Names (Types) of Concrete ColumnVectors -- `vectorTypes` Method
 
@@ -384,9 +384,9 @@ NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecut
 vectorTypes: Option[Seq[String]]
 ----
 
-NOTE: `vectorTypes` is part of spark-sql-ColumnarBatchScan.md#vectorTypes[ColumnarBatchScan Contract] to..FIXME.
+`vectorTypes` simply requests the spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> for [vectorTypes](../spark-sql-FileFormat.md#vectorTypes).
 
-`vectorTypes` simply requests the spark-sql-BaseRelation-HadoopFsRelation.md#fileFormat[FileFormat] of the <<relation, HadoopFsRelation>> for spark-sql-FileFormat.md#vectorTypes[vectorTypes].
+`vectorTypes` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#vectorTypes) abstraction.
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -415,7 +415,7 @@ If <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag is on, `doExecute
 
 Otherwise, `doExecute` simply takes the <<inputRDD, inputRDD>> as the `unsafeRows` RDD (with no changes).
 
-`doExecute` takes the spark-sql-ColumnarBatchScan.md#numOutputRows[numOutputRows] metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
+`doExecute` takes the [numOutputRows](ColumnarBatchScan.md#numOutputRows) metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
 
 [TIP]
 ====

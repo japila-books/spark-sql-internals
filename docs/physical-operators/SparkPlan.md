@@ -511,17 +511,27 @@ outputOrdering: Seq[SortOrder]
 supportsColumnar: Boolean
 ```
 
-`supportsColumnar` specifies whether the physical operator supports columnar (vectorized) execution.
+`supportsColumnar` specifies whether the physical operator supports [Columnar Processing](../new-and-noteworthy/columnar-processing.md).
 
-`supportsColumnar` is on (`true`) by default.
+`supportsColumnar` is `false` by default.
+
+!!! note
+    `supportsColumnar` is or could possibly be `true` for the following physical operators (that override `supportsColumnar`):
+
+    * [RowToColumnarExec](RowToColumnarExec.md)
+    * [FileSourceScanExec](FileSourceScanExec.md)
+    * [InMemoryTableScanExec](InMemoryTableScanExec.md)
+    * [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md)
+
+    There are a few other physical operators that simply delegate to their child physical operators.
 
 `supportsColumnar` is used when:
 
 * [BatchScanExec](BatchScanExec.md) physical operator is requested for an [inputRDD](BatchScanExec.md#inputRDD)
 * [ColumnarToRowExec](ColumnarToRowExec.md) physical operator is created and executed
+* [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md) physical optimization is executed
 * [FileSourceScanExec](FileSourceScanExec.md) physical operator is requested for [metadata](FileSourceScanExec.md#metadata) and [metrics](FileSourceScanExec.md#metrics)
-* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) is executed
-* [ReusedExchangeExec](ReusedExchangeExec.md) physical operator is executed
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
 
 ## Internal Properties
 
