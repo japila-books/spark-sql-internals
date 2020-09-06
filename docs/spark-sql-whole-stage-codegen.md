@@ -12,13 +12,27 @@ Whole-Stage Java Code Generation improves the execution performance of a query b
 !!! note
     [Janino](https://janino-compiler.github.io/janino/) is used to compile a Java source code into a Java class at runtime.
 
-[[CollapseCodegenStages]]
-Before a query is executed, [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with spark-sql-SparkPlan-InputAdapter.md[InputAdapter] in-between for physical operators with no support for Java code generation).
+## CollapseCodegenStages Physical Preparation Rule
+
+Before a query is executed, [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with [InputAdapter](physical-operators/InputAdapter.md) in-between for physical operators with no support for Java code generation).
 
 `CollapseCodegenStages` is part of the sequence of physical preparation rules [QueryExecution.preparations](QueryExecution.md#preparations) that will be applied in order to the physical plan before execution.
 
-!!! tip
-    [debugCodegen](spark-sql-debugging-query-execution.md#debugCodegen) or [QueryExecution.debug.codegen](QueryExecution.md#debug) methods allow to access the generated Java source code for a structured query.
+## debugCodegen
+
+[debugCodegen](spark-sql-debugging-query-execution.md#debugCodegen) or [QueryExecution.debug.codegen](QueryExecution.md#debug) methods allow to access the generated Java source code for a structured query.
+
+As of [Spark 3.0.0](https://issues.apache.org/jira/browse/SPARK-29061), `debugCodegen` prints Java bytecode statistics of generated classes (and compiled by Janino).
+
+```text
+import org.apache.spark.sql.execution.debug._
+val q = "SELECT sum(v) FROM VALUES(1) t(v)"
+scala> sql(q).debugCodegen
+Found 2 WholeStageCodegen subtrees.
+== Subtree 1 / 2 (maxMethodCodeSize:124; maxConstantPoolSize:130(0.20% used); numInnerClasses:0) ==
+...
+== Subtree 2 / 2 (maxMethodCodeSize:139; maxConstantPoolSize:137(0.21% used); numInnerClasses:0) ==
+```
 
 ## spark.sql.codegen.wholeStage
 
