@@ -176,6 +176,46 @@
      <lastmod>2020-09-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LogicalPlanStats/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Statistics/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-HintInfo/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-LogicalPlanVisitor/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SizeInBytesOnlyStatsPlanVisitor/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BasicStatsPlanVisitor/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-AggregateEstimation/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-FilterEstimation/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JoinEstimation/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ProjectEstimation/</loc>
+     <lastmod>2020-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Aggregate/</loc>
      <lastmod>2020-09-07</lastmod>
      <changefreq>daily</changefreq>
@@ -2765,46 +2805,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-RDDConversions/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-LogicalPlanStats/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Statistics/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-HintInfo/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-LogicalPlanVisitor/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SizeInBytesOnlyStatsPlanVisitor/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BasicStatsPlanVisitor/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-AggregateEstimation/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-FilterEstimation/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JoinEstimation/</loc>
-     <lastmod>2020-09-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ProjectEstimation/</loc>
      <lastmod>2020-09-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
