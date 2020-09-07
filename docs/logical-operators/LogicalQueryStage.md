@@ -37,6 +37,6 @@ Physical stats available as [physicalStats] for plan: [physicalPlan]
 Physical stats not available for plan: [physicalPlan]
 ```
 
-In the end, `computeStats` gives the statistics of the physical operator or requests the [logical plan](#logicalPlan) for [them](../spark-sql-LogicalPlanStats.md#stats).
+In the end, `computeStats` gives the statistics of the physical operator or requests the [logical plan](#logicalPlan) for [them](LogicalPlanStats.md#stats).
 
 `computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.

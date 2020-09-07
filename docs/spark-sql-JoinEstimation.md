@@ -12,7 +12,7 @@ NOTE: `BasicStatsPlanVisitor` is used only when spark-sql-cost-based-optimizatio
 
 [[leftStats]]
 [[rightStats]]
-When <<creating-instance, created>>, `JoinEstimation` immediately takes the spark-sql-LogicalPlanStats.md#stats[estimated statistics and query hints] of the spark-sql-LogicalPlan-Join.md#left[left] and spark-sql-LogicalPlan-Join.md#right[right] sides of the <<join, Join>> logical operator.
+When <<creating-instance, created>>, `JoinEstimation` immediately takes the [estimated statistics and query hints](logical-operators/LogicalPlanStats.md#stats) of the spark-sql-LogicalPlan-Join.md#left[left] and spark-sql-LogicalPlan-Join.md#right[right] sides of the <<join, Join>> logical operator.
 
 [source, scala]
 ----
@@ -268,21 +268,21 @@ estimateLeftSemiAntiJoin(): Option[Statistics]
 
 NOTE: spark-sql-cost-based-optimization.md#rowCount[row count] statistic of a table is available only after spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
 
-If available, `estimateLeftSemiAntiJoin` takes the spark-sql-Statistics.md#rowCount[estimated row count statistic] of the spark-sql-LogicalPlan-Join.md#left[left side] of the <<join, Join>> operator.
+If available, `estimateLeftSemiAntiJoin` takes the [estimated row count statistic](logical-operators/Statistics.md#rowCount) of the spark-sql-LogicalPlan-Join.md#left[left side] of the <<join, Join>> operator.
 
 NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute spark-sql-cost-based-optimization.md#rowCount[row count] statistics.
 
-NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate spark-sql-Statistics.md#attributeStats[column (equi-height) histograms] for more accurate estimations.
+NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate [column (equi-height) histograms](logical-operators/Statistics.md#attributeStats) for more accurate estimations.
 
-In the end, `estimateLeftSemiAntiJoin` creates a new spark-sql-Statistics.md#creating-instance[Statistics] with the following estimates:
+In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](logical-operators/Statistics.md) with the following estimates:
 
-. spark-sql-Statistics.md#sizeInBytes[Total size (in bytes)] is the spark-sql-EstimationUtils.md#getOutputSize[output size] for the spark-sql-LogicalPlan-Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and spark-sql-Statistics.md#attributeStats[column histograms].
+. [Total size (in bytes)](logical-operators/Statistics.md#sizeInBytes) is the spark-sql-EstimationUtils.md#getOutputSize[output size] for the spark-sql-LogicalPlan-Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and [column histograms](logical-operators/Statistics.md#attributeStats).
 
-. spark-sql-Statistics.md#rowCount[Row count] is exactly the row count of the left side
+. [Row count](logical-operators/Statistics.md#rowCount) is exactly the row count of the left side
 
-. spark-sql-Statistics.md#attributeStats[Column histograms] is exactly the column histograms of the left side
+. [Column histograms](logical-operators/Statistics.md#attributeStats) is exactly the column histograms of the left side
 
-NOTE: `estimateLeftSemiAntiJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints>> for `LeftSemi` and `LeftAnti` joins.
+`estimateLeftSemiAntiJoin` is used when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints>> for `LeftSemi` and `LeftAnti` joins.
 
 === [[estimate]] Estimating Statistics and Query Hints of Join Logical Operator -- `estimate` Method
 

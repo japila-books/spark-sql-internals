@@ -123,6 +123,18 @@ nav:
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
+      - LogicalPlanStats:
+        - LogicalPlanStats: logical-operators/LogicalPlanStats.md
+        - Statistics: logical-operators/Statistics.md
+        - spark-sql-HintInfo.md
+        - spark-sql-LogicalPlanVisitor.md
+        - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
+        - BasicStatsPlanVisitor:
+          - spark-sql-BasicStatsPlanVisitor.md
+          - spark-sql-AggregateEstimation.md
+          - spark-sql-FilterEstimation.md
+          - spark-sql-JoinEstimation.md
+          - spark-sql-ProjectEstimation.md
       - Concrete Operators:
         - logical-operators/Aggregate.md
         - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
@@ -854,18 +866,6 @@ nav:
       - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
     - SQLExecution: spark-sql-SQLExecution.md
     - RDDConversions: spark-sql-RDDConversions.md
-    - LogicalPlanStats:
-      - spark-sql-LogicalPlanStats.md
-      - spark-sql-Statistics.md
-      - spark-sql-HintInfo.md
-      - spark-sql-LogicalPlanVisitor.md
-      - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
-      - BasicStatsPlanVisitor:
-        - spark-sql-BasicStatsPlanVisitor.md
-        - spark-sql-AggregateEstimation.md
-        - spark-sql-FilterEstimation.md
-        - spark-sql-JoinEstimation.md
-        - spark-sql-ProjectEstimation.md
     - ShuffledRowRDD: ShuffledRowRDD.md
     - spark-sql-UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md

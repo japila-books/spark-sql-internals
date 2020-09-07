@@ -83,7 +83,7 @@ canBroadcast(plan: LogicalPlan): Boolean
 
 NOTE: spark-sql-properties.md#spark.sql.autoBroadcastJoinThreshold[spark.sql.autoBroadcastJoinThreshold] is 10M by default.
 
-NOTE: `canBroadcast` uses the total size statistic from spark-sql-LogicalPlanStats.md#stats[Statistics] of a logical operator.
+NOTE: `canBroadcast` uses the total size statistic from [Statistics](../logical-operators/LogicalPlanStats.md#stats) of a logical operator.
 
 NOTE: `canBroadcast` is used when `JoinSelection` is requested to <<canBroadcastBySizes, canBroadcastBySizes>> and <<broadcastSideBySizes, selects the build side per join type and total size statistic of join sides>>.
 
@@ -132,13 +132,13 @@ broadcastSide(
   right: LogicalPlan): BuildSide
 ----
 
-`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per spark-sql-Statistics.md#sizeInBytes[total size] when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
+`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per [total size](../logical-operators/Statistics.md#sizeInBytes) when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
 
 `broadcastSide` gives `BuildRight` when `canBuildRight` is positive.
 
 `broadcastSide` gives `BuildLeft` when `canBuildLeft` is positive.
 
-When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per spark-sql-Statistics.md#sizeInBytes[total size] (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
+When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per [total size](../logical-operators/Statistics.md#sizeInBytes) (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
 
 NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSideByHints, broadcastSideByHints>>, <<broadcastSideBySizes, select the build side per join type and total size statistic of join sides>>, and <<apply, execute>> (and considers a spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
 

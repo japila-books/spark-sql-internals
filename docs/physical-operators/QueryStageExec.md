@@ -105,7 +105,7 @@ computeStats(): Option[Statistics]
 
 `computeStats` uses the [resultOption](#resultOption) to access the underlying [ReusedExchangeExec](ReusedExchangeExec.md) or [Exchange](Exchange.md) physical operators.
 
-If available, `computeStats` creates [Statistics](../spark-sql-Statistics.md) with the [sizeInBytes](../spark-sql-Statistics.md#sizeInBytes) as the **dataSize** [performance metric](SparkPlan.md#metrics) of the physical operator.
+If available, `computeStats` creates [Statistics](../logical-operators/Statistics.md) with the [sizeInBytes](../logical-operators/Statistics.md#sizeInBytes) as the **dataSize** [performance metric](SparkPlan.md#metrics) of the physical operator.
 
 Otherwise, `computeStats` returns no statistics.
 

@@ -34,11 +34,11 @@ NOTE: `nullColumnStat` is used exclusively when `JoinEstimation` is requested to
 rowCountsExist(plans: LogicalPlan*): Boolean
 ----
 
-`rowCountsExist` is positive (i.e. `true`) when every logical plan (in the input `plans`) has spark-sql-Statistics.md#rowCount[estimated number of rows] (aka _row count_) statistic computed.
+`rowCountsExist` is positive (i.e. `true`) when every logical plan (in the input `plans`) has [estimated number of rows](logical-operators/Statistics.md#rowCount) (aka _row count_) statistic computed.
 
 Otherwise, `rowCountsExist` is negative (i.e. `false`).
 
-NOTE: `rowCountsExist` uses `LogicalPlanStats` to access the spark-sql-LogicalPlanStats.md#stats[estimated statistics and query hints] of a logical plan.
+NOTE: `rowCountsExist` uses `LogicalPlanStats` to access the [estimated statistics and query hints](logical-operators/LogicalPlanStats.md#stats) of a logical plan.
 
 [NOTE]
 ====

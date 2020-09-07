@@ -9,7 +9,7 @@ title: InMemoryRelation
 
 * [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
 * [[cacheBuilder]] <<spark-sql-CachedRDDBuilder.md#, CachedRDDBuilder>>
-* [[statsOfPlanToCache]] spark-sql-Statistics.md[Statistics] of the <<child, child>> query plan
+* [[statsOfPlanToCache]] [Statistics](Statistics.md) of the <<child, child>> query plan
 * [[outputOrdering]] Output <<spark-sql-Expression-SortOrder.md#, orderings>> (`Seq[SortOrder]`)
 
 NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory methods.

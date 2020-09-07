@@ -11,12 +11,12 @@ title: CatalogStatistics
 
 [NOTE]
 ====
-`CatalogStatistics` is a "subset" of the statistics in spark-sql-Statistics.md[Statistics] (as there are no concepts of spark-sql-Statistics.md#attributeStats[attributes] and spark-sql-Statistics.md#hints[broadcast hint] in metastore).
+`CatalogStatistics` is a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hint](logical-operators/Statistics.md#hints) in metastore).
 
 `CatalogStatistics` are often stored in a Hive metastore and are referred as *Hive statistics* while `Statistics` are the *Spark statistics*.
 ====
 
-`CatalogStatistics` can be converted to spark-sql-Statistics.md[Spark statistics] using <<toPlanStats, toPlanStats>> method.
+`CatalogStatistics` can be converted to [Spark statistics](logical-operators/Statistics.md) using <<toPlanStats, toPlanStats>> method.
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
@@ -73,13 +73,13 @@ scala> stats.map(_.simpleString).foreach(println)
 toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
 ----
 
-`toPlanStats` converts the table statistics (from an external metastore) to spark-sql-Statistics.md[Spark statistics].
+`toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
 
-With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a spark-sql-Statistics.md[Statistics] with the spark-sql-EstimationUtils.md#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
+With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the spark-sql-EstimationUtils.md#getOutputSize[estimated total (output) size], <<rowCount, row count>> and column statistics.
 
 NOTE: Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
 
-Otherwise, when spark-sql-cost-based-optimization.md[cost-based optimization] is disabled, `toPlanStats` creates a spark-sql-Statistics.md[Statistics] with just the mandatory <<sizeInBytes, sizeInBytes>>.
+Otherwise, when spark-sql-cost-based-optimization.md[cost-based optimization] is disabled, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory <<sizeInBytes, sizeInBytes>>.
 
 CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 

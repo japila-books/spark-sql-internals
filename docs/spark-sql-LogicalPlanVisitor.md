@@ -2,7 +2,7 @@ title: LogicalPlanVisitor
 
 # LogicalPlanVisitor -- Contract for Computing Statistic Estimates and Query Hints of Logical Plan
 
-`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute spark-sql-Statistics.md[estimates of plan statistics and query hints].
+`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute [estimates of plan statistics and query hints](logical-operators/Statistics.md).
 
 TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Visitor_pattern[Wikipedia].
 
@@ -14,9 +14,9 @@ TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Vi
 visit(p: LogicalPlan): T
 ----
 
-NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always spark-sql-Statistics.md[Statistics] only.
+NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always [Statistics](logical-operators/Statistics.md) only.
 
-The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` spark-sql-LogicalPlanStats.md#stats[uses] <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
+The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` [uses](logical-operators/LogicalPlanStats.md#stats) <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
 
 NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
 

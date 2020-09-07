@@ -191,7 +191,7 @@ reOptimize(
 
 `reOptimize` gives optimized physical and logical query plans for the given [logical query plan](../logical-operators/LogicalPlan.md).
 
-Internally, `reOptimize` requests the given [logical query plan](../logical-operators/LogicalPlan.md) to [invalidateStatsCache](../spark-sql-LogicalPlanStats.md#invalidateStatsCache) and requests the [local logical optimizer](#optimizer) to generate an optimized logical query plan.
+Internally, `reOptimize` requests the given [logical query plan](../logical-operators/LogicalPlan.md) to [invalidateStatsCache](../logical-operators/LogicalPlanStats.md#invalidateStatsCache) and requests the [local logical optimizer](#optimizer) to generate an optimized logical query plan.
 
 `reOptimize` requests the [query planner](../SparkPlanner.md) (bound to the [AdaptiveExecutionContext](#context)) to [plan the optimized logical query plan](../execution-planning-strategies/SparkStrategies.md#plan) (and generate a physical query plan).
 

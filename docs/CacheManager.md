@@ -136,7 +136,7 @@ Internally, `cacheQuery` requests the `Dataset` for the spark-sql-Dataset.md#log
 
 * Input `tableName`
 
-* spark-sql-LogicalPlanStats.md#stats[Statistics] of the analyzed query plan
+* [Statistics](logical-operators/LogicalPlanStats.md#stats) of the analyzed query plan
 
 `cacheQuery` then creates a <<CachedData, CachedData>> (for the analyzed query plan and the `InMemoryRelation`) and adds it to the <<cachedData, cachedData>> internal registry.
 

@@ -45,7 +45,7 @@ NOTE: `create` is used exclusively when `DataFrameReader` is requested to ["load
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of the <<spark-sql-LogicalPlan-LeafNode.md#computeStats, LeafNode Contract>> to compute a <<spark-sql-Statistics.md#, Statistics>>.
+NOTE: `computeStats` is part of the <<spark-sql-LogicalPlan-LeafNode.md#computeStats, LeafNode Contract>> to compute a [Statistics](Statistics.md).
 
 `computeStats`...FIXME
 

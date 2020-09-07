@@ -1,6 +1,4 @@
-title: Statistics
-
-# Statistics -- Estimates of Plan Statistics and Query Hints
+# Statistics &mdash; Size Estimates and Query Hints
 
 [[creating-instance]]
 `Statistics` holds the statistics estimates and query hints of a logical operator:
@@ -12,7 +10,7 @@ title: Statistics
 
 NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
 
-You can access statistics and query hints of a logical plan using spark-sql-LogicalPlanStats.md#stats[stats] property.
+You can access statistics and query hints of a logical plan using [stats](logical-operators/LogicalPlanStats.md#stats) property.
 
 [source, scala]
 ----
@@ -36,7 +34,7 @@ NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPU
 
 `Statistics` is <<creating-instance, created>> when:
 
-* spark-sql-LogicalPlan-LeafNode.md#computeStats[Leaf logical operators] (specifically) and spark-sql-LogicalPlanStats.md#stats[logical operators] (in general) are requested for statistics estimates
+* spark-sql-LogicalPlan-LeafNode.md#computeStats[Leaf logical operators] (specifically) and [logical operators](logical-operators/LogicalPlanStats.md#stats) (in general) are requested for statistics estimates
 
 * hive/HiveTableRelation.md#computeStats[HiveTableRelation] and spark-sql-LogicalPlan-LogicalRelation.md#computeStats[LogicalRelation] are requested for statistics estimates (through spark-sql-CatalogStatistics.md#toPlanStats[CatalogStatistics])
 

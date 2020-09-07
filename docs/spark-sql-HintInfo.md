@@ -9,7 +9,7 @@
 
 * [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is executed
 
-* spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and spark-sql-Statistics.md#creating-instance[Statistics] are created
+* spark-sql-LogicalPlan-ResolvedHint.md#creating-instance[ResolvedHint] and [Statistics](logical-operators/Statistics.md) are created
 
 * `InMemoryRelation` is requested for spark-sql-LogicalPlan-InMemoryRelation.md#computeStats[computeStats] (when spark-sql-LogicalPlan-InMemoryRelation.md#sizeInBytesStats[sizeInBytesStats] is `0`)
 

@@ -26,7 +26,7 @@ The table statistics can be computed for tables, partitions and columns and are 
 
 === [[spark.sql.cbo.enabled]] spark.sql.cbo.enabled Spark SQL Configuration Property
 
-Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`.
+Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is on (`true`).
 
 NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned off, i.e. `false`, by default.
 
@@ -276,11 +276,11 @@ The following are the logical commands that [alter table statistics in a metasto
 
 === [[EXPLAIN-COST]] EXPLAIN COST SQL Command
 
-CAUTION: FIXME See spark-sql-LogicalPlanStats.md[LogicalPlanStats]
+CAUTION: FIXME See [LogicalPlanStats](logical-operators/LogicalPlanStats.md)
 
 === [[LogicalPlanStats]] LogicalPlanStats -- Statistics Estimates of Logical Operator
 
-spark-sql-LogicalPlanStats.md[LogicalPlanStats] adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
+[LogicalPlanStats](logical-operators/LogicalPlanStats.md) adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
 
 === [[column-histograms]] Equi-Height Histograms for Columns
 
