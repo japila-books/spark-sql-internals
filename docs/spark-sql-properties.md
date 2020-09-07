@@ -230,7 +230,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin"> spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin
 
-**(internal)** The relation with a non-empty partition ratio lower than this config will not be considered as the build side of a broadcast-hash join in adaptive execution regardless of its size.
+**(internal)** A relation with a non-empty partition ratio (the number of non-empty partitions to all partitions) lower than this config will not be considered as the build side of a broadcast-hash join in [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md) regardless of the size.
 
 This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`.
 

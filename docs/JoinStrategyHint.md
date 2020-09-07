@@ -4,11 +4,11 @@
 
 JoinStrategyHint     | displayName          | hintAliases
 ---------------------|----------------------|---------
-BROADCAST            | broadcast            | BROADCAST, BROADCASTJOIN, MAPJOIN
-NO_BROADCAST_HASH    | no_broadcast_hash    |
-SHUFFLE_HASH         | shuffle_hash         | SHUFFLE_HASH
-SHUFFLE_MERGE        | merge                | SHUFFLE_MERGE, MERGE, MERGEJOIN
-SHUFFLE_REPLICATE_NL | shuffle_replicate_nl | SHUFFLE_REPLICATE_NL
+<span id="BROADCAST"> BROADCAST                       | broadcast            | BROADCAST, BROADCASTJOIN, MAPJOIN
+<span id="NO_BROADCAST_HASH"> NO_BROADCAST_HASH       | no_broadcast_hash    |
+<span id="SHUFFLE_HASH"> SHUFFLE_HASH                 | shuffle_hash         | SHUFFLE_HASH
+<span id="SHUFFLE_MERGE"> SHUFFLE_MERGE               | merge                | SHUFFLE_MERGE, MERGE, MERGEJOIN
+<span id="SHUFFLE_REPLICATE_NL"> SHUFFLE_REPLICATE_NL | shuffle_replicate_nl | SHUFFLE_REPLICATE_NL
 
 `JoinStrategyHint` is resolved using [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule.
 
