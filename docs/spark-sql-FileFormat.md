@@ -160,7 +160,7 @@ Used exclusively when `FileSourceScanExec` leaf physical operator is requested f
 | <<spark-sql-ParquetFileFormat.md#, ParquetFileFormat>>
 | [[ParquetFileFormat]] Parquet data source
 
-| <<spark-sql-TextBasedFileFormat.md#, TextBasedFileFormat>>
+| <<TextBasedFileFormat.md#, TextBasedFileFormat>>
 | [[TextBasedFileFormat]] Base for text splitable `FileFormats`
 |===
 

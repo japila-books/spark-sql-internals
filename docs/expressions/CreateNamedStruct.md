@@ -16,7 +16,7 @@ scala> println(s)
 named_struct(*)
 ----
 
-`CreateNamedStruct` is registered in <<spark-sql-FunctionRegistry.md#expressions, FunctionRegistry>> under the name of `named_struct` SQL function.
+`CreateNamedStruct` is registered in <<FunctionRegistry.md#expressions, FunctionRegistry>> under the name of `named_struct` SQL function.
 
 [source, scala]
 ----

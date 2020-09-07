@@ -6,7 +6,7 @@ title: CumeDist
 
 * <<spark-sql-functions.md#cume_dist, cume_dist>> standard function (Dataset API)
 
-* <<spark-sql-FunctionRegistry.md#expressions, cume_dist>> SQL function
+* <<FunctionRegistry.md#expressions, cume_dist>> SQL function
 
 [[creating-instance]]
 `CumeDist` takes no input parameters when created.

@@ -10,7 +10,7 @@ SessionCatalog takes the following to be created:
 
 * <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](ExternalCatalog.md)
 * <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
-* <span id="functionRegistry"> [FunctionRegistry](spark-sql-FunctionRegistry.md)
+* <span id="functionRegistry"> [FunctionRegistry](FunctionRegistry.md)
 * <span id="conf"> [SQLConf](SQLConf.md)
 * <span id="hadoopConf"> Hadoop Configuration
 * <span id="parser"> [ParserInterface](sql/ParserInterface.md)
@@ -307,11 +307,11 @@ lookupFunction(
 
 `lookupFunction` finds a function by `name`.
 
-For a function with no database defined that exists in <<functionRegistry, FunctionRegistry>>, `lookupFunction` requests `FunctionRegistry` to spark-sql-FunctionRegistry.md#lookupFunction[find the function] (by its unqualified name, i.e. with no database).
+For a function with no database defined that exists in <<functionRegistry, FunctionRegistry>>, `lookupFunction` requests `FunctionRegistry` to FunctionRegistry.md#lookupFunction[find the function] (by its unqualified name, i.e. with no database).
 
 If the `name` function has the database defined or does not exist in `FunctionRegistry`, `lookupFunction` uses the fully-qualified function `name` to check if the function exists in <<functionRegistry, FunctionRegistry>> (by its fully-qualified name, i.e. with a database).
 
-For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and spark-sql-FunctionRegistry.md#lookupFunction[looks up the function] again.
+For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and FunctionRegistry.md#lookupFunction[looks up the function] again.
 
 `lookupFunction` is used when:
 

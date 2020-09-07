@@ -239,9 +239,9 @@ TIP: Use web UI's SQL tab to see the execution or a `SparkListener` to be notifi
 
 `runCommand` records the current time (end time).
 
-In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSession.md#listenerManager, ExecutionListenerManager>> and requests it to <<spark-sql-ExecutionListenerManager.md#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
+In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSession.md#listenerManager, ExecutionListenerManager>> and requests it to <<ExecutionListenerManager.md#onSuccess, onSuccess>> (with the input `name`, the `QueryExecution` and the duration).
 
-In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<spark-sql-ExecutionListenerManager.md#onFailure, onFailure>> (with the exception) and (re)throws it.
+In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<ExecutionListenerManager.md#onFailure, onFailure>> (with the exception) and (re)throws it.
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
 

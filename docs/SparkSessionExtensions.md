@@ -2,7 +2,7 @@
 
 `SparkSessionExtensions` is an [interface](#contract) for Spark SQL developers to extend the features of a [SparkSession](SparkSession.md).
 
-Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withExtensions) method or register extensions using [spark.sql.extensions](spark-sql-StaticSQLConf.md#spark.sql.extensions) configuration property.
+Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withExtensions) method or register extensions using [spark.sql.extensions](StaticSQLConf.md#spark.sql.extensions) configuration property.
 
 `SparkSessionExtensions` is an integral part of [SparkSession](SparkSession.md#extensions).
 

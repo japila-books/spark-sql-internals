@@ -8,7 +8,7 @@ title: First
 
 * <<spark-sql-functions.md#first, first>> standard function is used
 
-* `first` and `first_value` <<spark-sql-FunctionRegistry.md#, SQL functions>> are used
+* `first` and `first_value` <<FunctionRegistry.md#, SQL functions>> are used
 
 [source, scala]
 ----

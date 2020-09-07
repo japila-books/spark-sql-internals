@@ -12,7 +12,7 @@ val spark: SparkSession = SparkSession.builder
   .config("spark.sql.warehouse.dir", "c:/Temp") // <1>
   .getOrCreate
 ```
-<1> Sets [spark.sql.warehouse.dir](spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir) for the Spark SQL session
+<1> Sets [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir) for the Spark SQL session
 
 You can also set a property using SQL `SET` command.
 

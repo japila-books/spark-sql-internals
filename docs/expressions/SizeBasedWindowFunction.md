@@ -32,7 +32,7 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | Description
 
 | <<spark-sql-Expression-CumeDist.md#, CumeDist>>
-| [[CumeDist]] Window function expression for <<spark-sql-functions.md#cume_dist, cume_dist>> standard function (Dataset API) and <<spark-sql-FunctionRegistry.md#expressions, cume_dist>> SQL function
+| [[CumeDist]] Window function expression for <<spark-sql-functions.md#cume_dist, cume_dist>> standard function (Dataset API) and <<FunctionRegistry.md#expressions, cume_dist>> SQL function
 
 | NTile
 | [[NTile]]

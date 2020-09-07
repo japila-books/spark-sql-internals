@@ -443,7 +443,7 @@ org.apache.spark.sql.catalyst.catalog.ExternalCatalog
 It is intended for testing or exploration purposes only and therefore should not be used in production.
 |===
 
-The <<implementations, concrete>> `ExternalCatalog` is chosen using SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
+The <<implementations, concrete>> `ExternalCatalog` is chosen using SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport] that enables the Hive support (and sets StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to <<hive, hive>> when the Hive classes are available).
 
 [source, scala]
 ----
@@ -472,7 +472,7 @@ res0: String = in-memory
 
 [IMPORTANT]
 ====
-You cannot change `ExternalCatalog` after `SparkSession` has been created using spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
+You cannot change `ExternalCatalog` after `SparkSession` has been created using StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property as it is a static configuration.
 
 [source, scala]
 ----

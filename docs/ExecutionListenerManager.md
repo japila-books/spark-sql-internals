@@ -25,10 +25,10 @@ org.apache.spark.sql.util.ExecutionListenerManager
 [[creating-instance]]
 `ExecutionListenerManager` takes a single `SparkConf` when created
 
-While <<creating-instance, created>>, `ExecutionListenerManager` reads spark-sql-StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property with `QueryExecutionListeners` and <<register, registers>> them.
+While <<creating-instance, created>>, `ExecutionListenerManager` reads StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property with `QueryExecutionListeners` and <<register, registers>> them.
 
 [[spark.sql.queryExecutionListeners]]
-`ExecutionListenerManager` uses spark-sql-StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property as the list of `QueryExecutionListeners` that should be automatically added to newly created sessions (and registers them while <<creating-instance, being created>>).
+`ExecutionListenerManager` uses StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property as the list of `QueryExecutionListeners` that should be automatically added to newly created sessions (and registers them while <<creating-instance, being created>>).
 
 [[methods]]
 .ExecutionListenerManager's Public Methods

@@ -2,7 +2,7 @@ title: MonotonicallyIncreasingID
 
 # MonotonicallyIncreasingID Nondeterministic Leaf Expression
 
-`MonotonicallyIncreasingID` is a <<spark-sql-Expression-Nondeterministic.md#, non-deterministic>> <<expressions/Expression.md#LeafExpression, leaf expression>> that is the internal representation of the `monotonically_increasing_id` <<spark-sql-functions.md#monotonically_increasing_id, standard>> and <<spark-sql-FunctionRegistry.md#monotonically_increasing_id, SQL>> functions.
+`MonotonicallyIncreasingID` is a <<spark-sql-Expression-Nondeterministic.md#, non-deterministic>> <<expressions/Expression.md#LeafExpression, leaf expression>> that is the internal representation of the `monotonically_increasing_id` <<spark-sql-functions.md#monotonically_increasing_id, standard>> and <<FunctionRegistry.md#monotonically_increasing_id, SQL>> functions.
 
 As a `Nondeterministic` expression, `MonotonicallyIncreasingID` requires explicit <<initializeInternal, initialization>> (with the current partition index) before <<evalInternal, evaluating a value>>.
 
@@ -44,7 +44,7 @@ count_0++;
 
 `MonotonicallyIncreasingID` is <<creating-instance, created>> when <<spark-sql-functions.md#monotonically_increasing_id, monotonically_increasing_id>> standard function is used in a structured query.
 
-`MonotonicallyIncreasingID` is <<spark-sql-FunctionRegistry.md#expressions, registered>> as `monotonically_increasing_id` SQL function.
+`MonotonicallyIncreasingID` is <<FunctionRegistry.md#expressions, registered>> as `monotonically_increasing_id` SQL function.
 
 [[creating-instance]]
 `MonotonicallyIncreasingID` takes no input parameters when created.

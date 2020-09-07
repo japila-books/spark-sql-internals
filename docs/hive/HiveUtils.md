@@ -122,6 +122,6 @@ withHiveExternalCatalog(
   sc: SparkContext): SparkContext
 ----
 
-`withHiveExternalCatalog` simply sets the ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
+`withHiveExternalCatalog` simply sets the ../StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] configuration property to `hive` for the input `SparkContext`.
 
 NOTE: `withHiveExternalCatalog` is used when the deprecated `HiveContext` is created.

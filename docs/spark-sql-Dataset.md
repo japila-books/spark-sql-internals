@@ -385,7 +385,7 @@ withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 
 `withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.md#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
 
-In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished spark-sql-ExecutionListenerManager.md#onSuccess[successfully] or spark-sql-ExecutionListenerManager.md#onFailure[with an exception].
+In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished ExecutionListenerManager.md#onSuccess[successfully] or ExecutionListenerManager.md#onFailure[with an exception].
 
 NOTE: `withAction` uses <<sparkSession, SparkSession>> to access SparkSession.md#listenerManager[ExecutionListenerManager].
 

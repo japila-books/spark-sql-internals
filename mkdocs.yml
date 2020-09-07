@@ -204,12 +204,12 @@ nav:
       - Catalog:
         - Catalog: Catalog.md
         - CatalogImpl: CatalogImpl.md
-      - spark-sql-ExecutionListenerManager.md
+      - ExecutionListenerManager.md
       - ExperimentalMethods: ExperimentalMethods.md
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md
         - InMemoryCatalog: InMemoryCatalog.md
-      - spark-sql-FunctionRegistry.md
+      - FunctionRegistry.md
       - spark-sql-GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
@@ -221,16 +221,16 @@ nav:
       - SessionState:
         - SessionState: SessionState.md
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md
-        - spark-sql-SessionStateBuilder.md
+        - SessionStateBuilder.md
       - CacheManager:
         - CacheManager: CacheManager.md
         - spark-sql-CachedRDDBuilder.md
       - spark-sql-RuntimeConfig.md
       - SQLConf:
         - SQLConf: SQLConf.md
-        - spark-sql-StaticSQLConf.md
+        - StaticSQLConf.md
         - spark-sql-CatalystConf.md
-      - spark-sql-UDFRegistration.md
+      - UDFRegistration.md
     - Data Sources:
       - File-Based Data Sources:
         - FileFormat:
@@ -238,7 +238,7 @@ nav:
           - spark-sql-OrcFileFormat.md
           - spark-sql-ParquetFileFormat.md
         - TextBasedFileFormat:
-          - spark-sql-TextBasedFileFormat.md
+          - TextBasedFileFormat.md
           - spark-sql-CSVFileFormat.md
           - spark-sql-JsonFileFormat.md
           - spark-sql-TextFileFormat.md

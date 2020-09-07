@@ -27,7 +27,7 @@ val spark = SparkSession.builder
 !!! note "SparkSession in spark-shell"
     `spark` object in `spark-shell` (the instance of `SparkSession` that is auto-created) has Hive support enabled.
 
-    In order to disable the pre-configured Hive support in the `spark` object, use [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property with `in-memory` value (that uses [InMemoryCatalog](InMemoryCatalog.md) external catalog instead).
+    In order to disable the pre-configured Hive support in the `spark` object, use [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property with `in-memory` value (that uses [InMemoryCatalog](InMemoryCatalog.md) external catalog instead).
 
     ```text
     $ spark-shell --conf spark.sql.catalogImplementation=in-memory
@@ -55,9 +55,9 @@ sessionState: SessionState
 
 `sessionState` is the current [SessionState](SessionState.md).
 
-Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
+Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<parentSessionState, parent SessionState>> (if given when <<creating-instance, creating the SparkSession>>) or <<instantiateSessionState, creates a new SessionState>> using <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> as defined by <<StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property:
 
-* *in-memory* (default) for spark-sql-SessionStateBuilder.md[org.apache.spark.sql.internal.SessionStateBuilder]
+* *in-memory* (default) for SessionStateBuilder.md[org.apache.spark.sql.internal.SessionStateBuilder]
 * *hive* for hive/HiveSessionStateBuilder.md[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
 ## <span id="newSession"> Creating New SparkSession
@@ -257,7 +257,7 @@ NOTE: `sql` uses `SessionState` SessionState.md#sqlParser[to access the current 
 udf: UDFRegistration
 ```
 
-`udf` attribute is [UDFRegistration](spark-sql-UDFRegistration.md) (for registering [user-defined functions](spark-sql-udfs.md) for SQL-based queries).
+`udf` attribute is [UDFRegistration](UDFRegistration.md) (for registering [user-defined functions](spark-sql-udfs.md) for SQL-based queries).
 
 ```text
 val spark: SparkSession = ...
@@ -378,7 +378,7 @@ instantiateSessionState(
 Error while instantiating '[className]'
 ```
 
-`instantiateSessionState` is used when `SparkSession` is requested for [SessionState](#sessionState) (based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
+`instantiateSessionState` is used when `SparkSession` is requested for [SessionState](#sessionState) (based on [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
 
 ## <span id="sessionStateClassName"> sessionStateClassName
 
@@ -387,10 +387,10 @@ sessionStateClassName(
   conf: SparkConf): String
 ```
 
-`sessionStateClassName` gives the name of the class of the [SessionState](SessionState.md) per [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation), i.e.
+`sessionStateClassName` gives the name of the class of the [SessionState](SessionState.md) per [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation), i.e.
 
 * [org.apache.spark.sql.hive.HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) for `hive`
-* [org.apache.spark.sql.internal.SessionStateBuilder](spark-sql-SessionStateBuilder.md) for `in-memory`
+* [org.apache.spark.sql.internal.SessionStateBuilder](SessionStateBuilder.md) for `in-memory`
 
 `sessionStateClassName` is used when `SparkSession` is requested for the [SessionState](#sessionState) (and one is not available yet).
 
@@ -419,7 +419,7 @@ internalCreateDataFrame(
 listenerManager: ExecutionListenerManager
 ```
 
-`listenerManager` is the [ExecutionListenerManager](spark-sql-ExecutionListenerManager.md)
+`listenerManager` is the [ExecutionListenerManager](ExecutionListenerManager.md)
 
 ## <span id="sharedState"> SharedState
 

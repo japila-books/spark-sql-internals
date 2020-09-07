@@ -12,7 +12,7 @@ title: ScalaUDF
 
 * `UserDefinedFunction` is spark-sql-UserDefinedFunction.md#apply[executed]
 
-* `UDFRegistration` is requested to spark-sql-UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
+* `UDFRegistration` is requested to UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 
 [source, scala]
 ----

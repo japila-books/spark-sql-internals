@@ -1,7 +1,7 @@
 # TextFileFormat
 
 [[shortName]]
-`TextFileFormat` is a spark-sql-TextBasedFileFormat.md[TextBasedFileFormat] for *text* format.
+`TextFileFormat` is a TextBasedFileFormat.md[TextBasedFileFormat] for *text* format.
 
 [source, scala]
 ----

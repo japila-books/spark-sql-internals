@@ -1,6 +1,6 @@
 # CreateStruct Function Builder
 
-`CreateStruct` is a <<spark-sql-FunctionRegistry.md#expressions, function builder>> (e.g. `Seq[Expression] => Expression`) that can <<apply, create CreateNamedStruct expressions>> and is the <<registryEntry, metadata>> of the <<spark-sql-FunctionRegistry.md#struct, struct>> function.
+`CreateStruct` is a <<FunctionRegistry.md#expressions, function builder>> (e.g. `Seq[Expression] => Expression`) that can <<apply, create CreateNamedStruct expressions>> and is the <<registryEntry, metadata>> of the <<FunctionRegistry.md#struct, struct>> function.
 
 === [[registryEntry]] Metadata of struct Function -- `registryEntry` Property
 
@@ -11,7 +11,7 @@ registryEntry: (String, (ExpressionInfo, FunctionBuilder))
 
 `registryEntry`...FIXME
 
-NOTE: `registryEntry` is used exclusively when `FunctionRegistry` is requested for the <<spark-sql-FunctionRegistry.md#expressions, function expression registry>>.
+NOTE: `registryEntry` is used exclusively when `FunctionRegistry` is requested for the <<FunctionRegistry.md#expressions, function expression registry>>.
 
 === [[apply]] Creating CreateNamedStruct Expression -- `apply` Method
 

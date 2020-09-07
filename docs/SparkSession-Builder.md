@@ -33,11 +33,11 @@ enableHiveSupport(): Builder
 `enableHiveSupport` enables [Hive support](hive/index.md).
 
 !!! note
-    You do *not* need any existing Hive installation to use Spark's Hive support. `SparkSession` context will automatically create `metastore_db` in the current directory of a Spark application and the directory configured by [spark.sql.warehouse.dir](spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir) configuration property.
+    You do *not* need any existing Hive installation to use Spark's Hive support. `SparkSession` context will automatically create `metastore_db` in the current directory of a Spark application and the directory configured by [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir) configuration property.
 
     Consult [SharedState](SharedState.md).
 
-Internally, `enableHiveSupport` checks whether [Hive classes are available or not](#hiveClassesArePresent). If so, `enableHiveSupport` sets [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property to `hive`. Otherwise, `enableHiveSupport` throws an `IllegalArgumentException`:
+Internally, `enableHiveSupport` checks whether [Hive classes are available or not](#hiveClassesArePresent). If so, `enableHiveSupport` sets [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) internal configuration property to `hive`. Otherwise, `enableHiveSupport` throws an `IllegalArgumentException`:
 
 ```text
 Unable to instantiate SparkSession with Hive support because Hive classes are not found.
@@ -51,7 +51,7 @@ getOrCreate(): SparkSession
 
 `getOrCreate` gives the active [SparkSession](SparkSession.md) or creates a new one.
 
-While creating a new one, `getOrCreate` finds the SparkSession extensions (based on [spark.sql.extensions](spark-sql-StaticSQLConf.md#spark.sql.extensions) configuration property) and [applies them](SparkSession.md#applyExtensions) to the [SparkSessionExtensions](#extensions).
+While creating a new one, `getOrCreate` finds the SparkSession extensions (based on [spark.sql.extensions](StaticSQLConf.md#spark.sql.extensions) configuration property) and [applies them](SparkSession.md#applyExtensions) to the [SparkSessionExtensions](#extensions).
 
 ## <span id="extensions"> SparkSessionExtensions
 
@@ -61,7 +61,7 @@ extensions: SparkSessionExtensions
 
 `Builder` creates a new [SparkSessionExtensions](SparkSessionExtensions.md) when [created](#creating-instance).
 
-The `SparkSessionExtensions` is used to [apply SparkSession extensions](SparkSession.md#applyExtensions) registered using [spark.sql.extensions](spark-sql-StaticSQLConf.md#SPARK_SESSION_EXTENSIONS) configuration property or [Builder.withExtensions](#withExtensions) method.
+The `SparkSessionExtensions` is used to [apply SparkSession extensions](SparkSession.md#applyExtensions) registered using [spark.sql.extensions](StaticSQLConf.md#SPARK_SESSION_EXTENSIONS) configuration property or [Builder.withExtensions](#withExtensions) method.
 
 In the end, `Builder` uses the `SparkSessionExtensions` to [create a new SparkSession](#getOrCreate).
 

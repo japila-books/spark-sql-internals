@@ -12,7 +12,7 @@
 .HiveExternalCatalog and SharedState
 image::../images/spark-sql-HiveExternalCatalog.png[align="center"]
 
-`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the ../SharedState.md#externalCatalog[ExternalCatalog] (and ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
+`HiveExternalCatalog` is <<creating-instance, created>> when `SharedState` is requested for the ../SharedState.md#externalCatalog[ExternalCatalog] (and ../StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property is `hive`).
 
 NOTE: The <<hadoopConf, Hadoop configuration>> to create a `HiveExternalCatalog` is the default Hadoop configuration from Spark Core's `SparkContext.hadoopConfiguration` with the Spark properties with `spark.hadoop` prefix.
 
@@ -44,7 +44,7 @@ org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
 
 [TIP]
 ====
-Use ../spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
+Use ../StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] Spark property to change the location of Hive's `hive.metastore.warehouse.dir` property, i.e. the location of the Hive local/embedded metastore database (using Derby).
 
 Refer to ../SharedState.md[SharedState] to learn about (the low-level details of) Spark SQL support for Apache Hive.
 

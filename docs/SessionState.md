@@ -1,210 +1,193 @@
 # SessionState &mdash; State Separation Layer Between SparkSessions
 
-:hadoop-version: 2.10.0
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+`SessionState` is a [state separation layer](#attributes) between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a [SQLConf](SQLConf.md).
 
-`SessionState` is the <<attributes, state separation layer>> between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a [SQLConf](SQLConf.md).
+## Attributes
 
-`SessionState` is available as the <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`.
+### <span id="columnarRules"> ColumnarRules
 
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
+```scala
+columnarRules: Seq[ColumnarRule]
+```
 
-scala> :type spark.sessionState
-org.apache.spark.sql.internal.SessionState
-----
+[ColumnarRule](ColumnarRule.md)s
 
-`SessionState` is <<creating-instance, created>> when `SparkSession` is requested to <<SparkSession.md#instantiateSessionState, instantiateSessionState>> (when requested for the <<SparkSession.md#sessionState, SessionState>> per <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property).
+### <span id="listenerManager"> ExecutionListenerManager
 
-.Creating SessionState
-image::images/spark-sql-SessionState.png[align="center"]
+```scala
+listenerManager: ExecutionListenerManager
+```
 
-[NOTE]
-====
-When requested for the <<SparkSession.md#sessionState, SessionState>>, `SparkSession` uses <<spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation, spark.sql.catalogImplementation>> configuration property to load and create a <<BaseSessionStateBuilder.md#, BaseSessionStateBuilder>> that is then requested to <<BaseSessionStateBuilder.md#build, create a SessionState instance>>.
+[ExecutionListenerManager](ExecutionListenerManager.md)
 
-There are two `BaseSessionStateBuilders` available:
+### <span id="experimentalMethods"> ExperimentalMethods
 
-* (default) <<spark-sql-SessionStateBuilder.md#, SessionStateBuilder>> for `in-memory` catalog
+```scala
+experimentalMethods: ExperimentalMethods
+```
 
-* hive/HiveSessionStateBuilder.md[HiveSessionStateBuilder] for `hive` catalog
+[ExperimentalMethods](ExperimentalMethods.md)
 
-`hive` catalog is set when the `SparkSession` was <<SparkSession-Builder.md#getOrCreate, created>> with the Hive support enabled (using <<SparkSession-Builder.md#enableHiveSupport, Builder.enableHiveSupport>>).
-====
+### <span id="functionRegistry"> FunctionRegistry
 
-[[attributes]]
-.SessionState's (Lazily-Initialized) Attributes
-[cols="1m,1,2",options="header",width="100%"]
-|===
-| Name
-| Type
-| Description
+```scala
+functionRegistry: FunctionRegistry
+```
 
-| analyzer
-| [Analyzer](Analyzer.md)
-| [[analyzer]] [Logical Analyzer](Analyzer.md)
+[FunctionRegistry](FunctionRegistry.md)
 
-Initialized lazily (only when requested the first time) using the <<analyzerBuilder, analyzerBuilder>> factory function.
+### <span id="analyzer"> Logical Analyzer
 
-Used when...FIXME
+```scala
+analyzer: Analyzer
+```
 
-| columnarRules
-| [ColumnarRule](ColumnarRule.md)s
-| [[columnarRules]] FIXME
+[Analyzer](Analyzer.md)
 
-Used when...FIXME
+Initialized lazily (only when requested the first time) using the [analyzerBuilder](#analyzerBuilder) factory function.
 
-| conf
-| [SQLConf](SQLConf.md)
-| [[conf]] FIXME
+### <span id="optimizer"> Logical Optimizer
 
-Used when...FIXME
+```scala
+optimizer: Optimizer
+```
 
-| experimentalMethods
-| [ExperimentalMethods](ExperimentalMethods.md)
-| [[experimentalMethods]] FIXME
-
-Used when...FIXME
-
-| functionRegistry
-| spark-sql-FunctionRegistry.md[FunctionRegistry]
-| [[functionRegistry]] FIXME
-
-Used when...FIXME
-
-| listenerManager
-| spark-sql-ExecutionListenerManager.md[ExecutionListenerManager]
-| [[listenerManager]] FIXME
-
-Used when...FIXME
-
-| resourceLoader
-| `SessionResourceLoader`
-| [[resourceLoader]] FIXME
-
-Used when...FIXME
-
-| sqlParser
-| spark-sql-ParserInterface.md[ParserInterface]
-| [[sqlParser]] FIXME
-
-Used when...FIXME
-
-| streamingQueryManager
-| `StreamingQueryManager`
-| [[streamingQueryManager]] Used to manage streaming queries in *Spark Structured Streaming*
-
-| udfRegistration
-| spark-sql-UDFRegistration.md[UDFRegistration]
-| [[udfRegistration]] Interface to register user-defined functions.
-
-Used when...FIXME
-|===
-
-NOTE: `SessionState` is a `private[sql]` class and, given the package `org.apache.spark.sql.internal`, `SessionState` should be considered _internal_.
-
-=== [[creating-instance]] Creating SessionState Instance
-
-`SessionState` takes the following when created:
-
-* [[sharedState]] <<SharedState.md#, SharedState>>
-* [[conf]] [SQLConf](SQLConf.md)
-* [[experimentalMethods]] [ExperimentalMethods](ExperimentalMethods.md)
-* [[functionRegistry]] <<spark-sql-FunctionRegistry.md#, FunctionRegistry>>
-* [[udfRegistration]] <<spark-sql-UDFRegistration.md#, UDFRegistration>>
-* [[catalogBuilder]] `catalogBuilder` function to create a [SessionCatalog](SessionCatalog.md) (`() => SessionCatalog`)
-* [[sqlParser]] <<spark-sql-ParserInterface.md#, ParserInterface>>
-* [[analyzerBuilder]] `analyzerBuilder` function to create an [Analyzer](Analyzer.md) (`() => Analyzer`)
-* [optimizerBuilder](#optimizerBuilder) function to create an [Optimizer](catalyst/Optimizer.md) (`() => Optimizer`)
-* [[planner]] [SparkPlanner](SparkPlanner.md)
-* [[streamingQueryManager]] Spark Structured Streaming's `StreamingQueryManager`
-* [[listenerManager]] <<spark-sql-ExecutionListenerManager.md#, ExecutionListenerManager>>
-* [[resourceLoaderBuilder]] `resourceLoaderBuilder` function to create a `SessionResourceLoader` (`() => SessionResourceLoader`)
-* [[createQueryExecution]] `createQueryExecution` function to create a [QueryExecution](QueryExecution.md) given a <<spark-sql-LogicalPlan.md#, LogicalPlan>> (`LogicalPlan => QueryExecution`)
-* [[createClone]] `createClone` function to clone the `SessionState` given a <<SparkSession.md#, SparkSession>> (`(SparkSession, SessionState) => SessionState`)
-
-## <span id="optimizerBuilder"> optimizerBuilder Function
-
-`SessionState` is given a function to create a [logical query plan optimizer](catalyst/Optimizer.md) (`() => Optimizer`) when [created](#creating-instance).
-
-`optimizerBuilder` function is used when `SessionState` is requested for the [Optimizer](#optimizer) (and cached for later usage).
-
-## <span id="optimizer"> Logical Query Plan Optimizer
-
-[Optimizer](catalyst/Optimizer.md) that is created using [optimizerBuilder function](#optimizerBuilder) (and cached for later usage).
+[Logical Optimizer](catalyst/Optimizer.md) that is created using the [optimizerBuilder function](#optimizerBuilder) (and cached for later usage)
 
 Used when:
 
 * `QueryExecution` is requested to [create an optimized logical plan](QueryExecution.md#optimizedPlan)
-
 * (Structured Streaming) `IncrementalExecution` is requested to create an optimized logical plan
 
-## <span id="catalog"> SessionCatalog
+### <span id="sqlParser"> ParserInterface
 
-[SessionCatalog](SessionCatalog.md)
+```scala
+sqlParser: ParserInterface
+```
 
-=== [[clone]] `clone` Method
+[ParserInterface](sql/ParserInterface.md)
 
-[source, scala]
-----
-clone(newSparkSession: SparkSession): SessionState
-----
+### <span id="catalog"> SessionCatalog
 
-`clone`...FIXME
+```scala
+catalog: SessionCatalog
+```
 
-NOTE: `clone` is used when...
+[SessionCatalog](SessionCatalog.md) that is created using the [catalogBuilder function](#catalogBuilder) (and cached for later usage).
 
-=== [[executePlan]] "Executing" Logical Plan (Creating QueryExecution For LogicalPlan) -- `executePlan` Method
+### <span id="resourceLoader"> SessionResourceLoader
 
-[source, scala]
-----
-executePlan(plan: LogicalPlan): QueryExecution
-----
+```scala
+resourceLoader: SessionResourceLoader
+```
 
-`executePlan` simply executes the <<createQueryExecution, createQueryExecution>> function on the input <<spark-sql-LogicalPlan.md#, logical plan>> (that simply creates a [QueryExecution](QueryExecution.md) with the current <<BaseSessionStateBuilder.md#session, SparkSession>> and the input logical plan).
+### <span id="planner"> Spark Query Planner
 
-=== [[refreshTable]] `refreshTable` Method
+```scala
+planner: SparkPlanner
+```
 
-[source, scala]
-----
-refreshTable(tableName: String): Unit
-----
+[SparkPlanner](SparkPlanner.md)
 
-`refreshTable`...FIXME
+### <span id="conf"> SQLConf
 
-NOTE: `refreshTable` is used...FIXME
+```scala
+conf: SQLConf
+```
 
-=== [[newHadoopConf]] Creating New Hadoop Configuration -- `newHadoopConf` Method
+[SQLConf](SQLConf.md)
 
-[source, scala]
-----
+### <span id="streamingQueryManager"> StreamingQueryManager
+
+```scala
+streamingQueryManager: StreamingQueryManager
+```
+
+### <span id="udfRegistration"> UDFRegistration
+
+```scala
+udfRegistration: UDFRegistration
+```
+
+[UDFRegistration](UDFRegistration.md)
+
+## Creating Instance
+
+`SessionState` takes the following to be created:
+
+* <span id="sharedState"> [SharedState](SharedState.md)
+* [SQLConf](#conf)
+* [ExperimentalMethods](#experimentalMethods)
+* [FunctionRegistry](#functionRegistry)
+* [UDFRegistration](#udfRegistration)
+* <span id="catalogBuilder"> Function to build a [SessionCatalog](SessionCatalog.md) (`() => SessionCatalog`)
+* [ParserInterface](#sqlParser)
+* <span id="analyzerBuilder"> Function to build a [Analyzer](Analyzer.md) (`() => Analyzer`)
+* <span id="optimizerBuilder"> Function to build a [Logical Optimizer](catalyst/Optimizer.md) (`() => Optimizer`)
+* [SparkPlanner](#planner)
+* <span id="streamingQueryManagerBuilder"> Function to build a `StreamingQueryManager` (`() => StreamingQueryManager`)
+* [ExecutionListenerManager](#listenerManager)
+* <span id="resourceLoaderBuilder"> Function to build a `SessionResourceLoader` (`() => SessionResourceLoader`)
+* <span id="createQueryExecution"> Function to build a [QueryExecution](QueryExecution.md) (`LogicalPlan => QueryExecution`)
+* <span id="createClone"> `SessionState` Clone Function (`(SparkSession, SessionState) => SessionState`)
+* [ColumnarRules](#columnarRules)
+
+`SessionState` is created when `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState) (when requested for the [SessionState](SparkSession.md#sessionState) per [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
+
+![Creating SessionState](images/spark-sql-SessionState.png)
+
+!!! note
+    When requested for the [SessionState](SparkSession.md#sessionState), `SparkSession` uses [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property to load and create a [BaseSessionStateBuilder](BaseSessionStateBuilder.md) that is then requested to [create a SessionState instance](BaseSessionStateBuilder.md#build).
+
+    There are two `BaseSessionStateBuilders` available:
+
+    * (default) [SessionStateBuilder](SessionStateBuilder.md) for `in-memory` catalog
+    * [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) for `hive` catalog
+
+    `hive` catalog is set when the `SparkSession` was [created](SparkSession-Builder.md#getOrCreate) with the Hive support enabled (using [Builder.enableHiveSupport](SparkSession-Builder.md#enableHiveSupport)).
+
+## <span id="executePlan"> Creating QueryExecution For LogicalPlan
+
+```scala
+executePlan(
+  plan: LogicalPlan): QueryExecution
+```
+
+`executePlan` uses the [createQueryExecution](#createQueryExecution) function to create a [QueryExecution](QueryExecution.md) for the given [LogicalPlan](logical-operators/LogicalPlan.md).
+
+## <span id="newHadoopConf"> Creating New Hadoop Configuration
+
+```scala
 newHadoopConf(): Configuration
-----
+```
 
-`newHadoopConf` returns a new Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration] (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the <<conf, SQLConf>>).
+`newHadoopConf` returns a new Hadoop [Configuration](https://hadoop.apache.org/docs/r2.10.0/api/org/apache/hadoop/conf/Configuration.html) (with the `SparkContext.hadoopConfiguration` and all the configuration properties of the [SQLConf](#conf)).
 
-NOTE: `newHadoopConf` is used by `ScriptTransformation`, `ParquetRelation`, `StateStoreRDD`, and `SessionState` itself, and few other places.
+## <span id="newHadoopConfWithOptions"> Creating New Hadoop Configuration With Extra Options
 
-=== [[newHadoopConfWithOptions]] Creating New Hadoop Configuration With Extra Options -- `newHadoopConfWithOptions` Method
+```scala
+newHadoopConfWithOptions(
+  options: Map[String, String]): Configuration
+```
 
-[source, scala]
-----
-newHadoopConfWithOptions(options: Map[String, String]): Configuration
-----
+`newHadoopConfWithOptions` [creates a new Hadoop Configuration](#newHadoopConf) with the input `options` set (except `path` and `paths` options that are skipped).
 
-`newHadoopConfWithOptions` <<newHadoopConf, creates a new Hadoop Configuration>> with the input `options` set (except `path` and `paths` options that are skipped).
-
-[NOTE]
-====
 `newHadoopConfWithOptions` is used when:
 
-* `TextBasedFileFormat` is requested to spark-sql-TextBasedFileFormat.md#isSplitable[say whether it is splitable or not]
+* `TextBasedFileFormat` is requested to [say whether it is splitable or not](TextBasedFileFormat.md#isSplitable)
+* `FileSourceScanExec` physical operator is requested for the [input RDD](physical-operators/FileSourceScanExec.md#inputRDD)
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* `PartitioningAwareFileIndex` is requested for the [Hadoop Configuration](PartitioningAwareFileIndex.md#hadoopConf)
 
-* `FileSourceScanExec` is requested for the spark-sql-SparkPlan-FileSourceScanExec.md#inputRDD[input RDD]
+## Accessing SessionState
 
-* `InsertIntoHadoopFsRelationCommand` is requested to spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[run]
+`SessionState` is available as the [SparkSession.sessionState](SparkSession.md#sessionState).
 
-* `PartitioningAwareFileIndex` is requested for the PartitioningAwareFileIndex.md#hadoopConf[Hadoop Configuration]
-====
+```text
+import org.apache.spark.sql.SparkSession
+assert(spark.isInstanceOf[SparkSession])
+
+// object SessionState in package org.apache.spark.sql.internal cannot be accessed directly
+scala> :type spark.sessionState
+org.apache.spark.sql.internal.SessionState
+```

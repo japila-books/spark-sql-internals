@@ -161,7 +161,7 @@ What might seem a quite artificial setup at first is accessing Spark Thrift Serv
 ====
 When executed in `local` mode, Spark Thrift Server and `spark-shell` will try to access the same Hive Warehouse's directory that will inevitably lead to an error.
 
-Use spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] to point to another directory for `spark-shell`.
+Use StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] to point to another directory for `spark-shell`.
 
 ```
 ./bin/spark-shell --conf spark.sql.warehouse.dir=/tmp/spark-warehouse

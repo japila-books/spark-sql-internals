@@ -2,7 +2,7 @@ title: Coalesce
 
 # Coalesce Expression
 
-`Coalesce` is a expressions/Expression.md[Catalyst expression] to represent spark-sql-functions.md#coalesce[coalesce] standard function or SQL's spark-sql-FunctionRegistry.md#expressions[coalesce] function in structured queries.
+`Coalesce` is a expressions/Expression.md[Catalyst expression] to represent spark-sql-functions.md#coalesce[coalesce] standard function or SQL's FunctionRegistry.md#expressions[coalesce] function in structured queries.
 
 [[creating-instance]]
 [[children]]

@@ -15,7 +15,7 @@ spark.udf
 
 [[functionRegistry]]
 [[creating-instance]]
-`UDFRegistration` takes a <<spark-sql-FunctionRegistry.md#, FunctionRegistry>> when created.
+`UDFRegistration` takes a <<FunctionRegistry.md#, FunctionRegistry>> when created.
 
 `UDFRegistration` is <<creating-instance, created>> exclusively for SessionState.md#creating-instance[SessionState].
 
@@ -53,7 +53,7 @@ register(
   udaf: UserDefinedAggregateFunction): UserDefinedAggregateFunction
 ----
 
-`register` spark-sql-FunctionRegistry.md#registerFunction[registers a UserDefinedAggregateFunction] under `name` with <<functionRegistry, FunctionRegistry>>.
+`register` FunctionRegistry.md#registerFunction[registers a UserDefinedAggregateFunction] under `name` with <<functionRegistry, FunctionRegistry>>.
 
 `register` creates a spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] internally to register a UDAF.
 

@@ -3,7 +3,7 @@
 `BaseSessionStateBuilder` is an [abstraction](#contract) of [builders](#extensions) that can [produce a new BaseSessionStateBuilder](#newBuilder) to [create a SessionState](#createClone).
 
 !!! note "spark.sql.catalogImplementation Configuration Property"
-    `BaseSessionStateBuilder` and [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property allow for Hive and non-Hive Spark deployments.
+    `BaseSessionStateBuilder` and [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property allow for Hive and non-Hive Spark deployments.
 
 ```text
 scala> :type spark
@@ -30,7 +30,7 @@ Used when `BaseSessionStateBuilder` is requested to <<createClone, create a Sess
 ## Implementations
 
 * [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md)
-* [SessionStateBuilder](spark-sql-SessionStateBuilder.md)
+* [SessionStateBuilder](SessionStateBuilder.md)
 
 ## Creating Instance
 
@@ -88,7 +88,7 @@ catalogManager: CatalogManager
 
 ### <span id="functionRegistry"> FunctionRegistry
 
-[FunctionRegistry](spark-sql-FunctionRegistry.md)
+[FunctionRegistry](FunctionRegistry.md)
 
 ### <span id="resourceLoader"> SessionResourceLoader
 
@@ -142,7 +142,7 @@ extensions: SparkSessionExtensions
 listenerManager: ExecutionListenerManager
 ```
 
-[ExecutionListenerManager](spark-sql-ExecutionListenerManager.md)
+[ExecutionListenerManager](ExecutionListenerManager.md)
 
 ## <span id="optimizer"> Optimizer
 
@@ -181,7 +181,7 @@ Spark Structured Streaming's `StreamingQueryManager`
 udfRegistration: UDFRegistration
 ```
 
-[UDFRegistration](spark-sql-UDFRegistration.md)
+[UDFRegistration](UDFRegistration.md)
 
 ## <span id="createClone"> Creating Clone of SessionState
 
@@ -219,7 +219,7 @@ build(): SessionState
 
 `build` is used when:
 
-* `SparkSession` is requested for a [SessionState](SparkSession.md#sessionState) (that in turn [builds one using a class name](SparkSession.md#instantiateSessionState) based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property)
+* `SparkSession` is requested for a [SessionState](SparkSession.md#sessionState) (that in turn [builds one using a class name](SparkSession.md#instantiateSessionState) based on [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property)
 
 * `BaseSessionStateBuilder` is requested to [create a clone](#createClone) of a `SessionState`
 

@@ -37,7 +37,7 @@ scala> dataset.withColumn("upper", upperUDF('text)).show
 +---+-----+-----+
 ```
 
-You can register UDFs to use in SparkSession.md#sql[SQL-based query expressions] via spark-sql-UDFRegistration.md[UDFRegistration] (that is available through SparkSession.md#udf[`SparkSession.udf` attribute]).
+You can register UDFs to use in SparkSession.md#sql[SQL-based query expressions] via UDFRegistration.md[UDFRegistration] (that is available through SparkSession.md#udf[`SparkSession.udf` attribute]).
 
 [source, scala]
 ----

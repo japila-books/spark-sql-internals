@@ -101,7 +101,7 @@ Spark SQL uses the Hive-specific configuration properties that further fine-tune
 
 === [[spark.sql.warehouse.dir]] `spark.sql.warehouse.dir` Configuration Property
 
-spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
+StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] is a static configuration property that sets Hive's `hive.metastore.warehouse.dir` property, i.e. the location of default database for the Hive warehouse.
 
 [TIP]
 ====
@@ -116,9 +116,9 @@ See also the official https://cwiki.apache.org/confluence/display/Hive/AdminManu
 
 In order to use an external Hive metastore you should do the following:
 
-. Enable Hive support in SparkSession-Builder.md#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
+. Enable Hive support in SparkSession-Builder.md#enableHiveSupport[SparkSession] (that makes sure that the Hive classes are on CLASSPATH and sets StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`)
 
-. spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
+. StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] required?
 
 . Define <<hive.metastore.warehouse.dir, hive.metastore.warehouse.dir>> in <<hive-site.xml, hive-site.xml>> configuration resource
 
@@ -152,7 +152,7 @@ config("hive.metastore.uris", "thrift://192.168.175.160:9083")
 ```
 
 | [[hive.metastore.warehouse.dir]] `hive.metastore.warehouse.dir`
-a| `SharedState` uses SharedState.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
+a| `SharedState` uses SharedState.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] to set StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir] if the latter is undefined.
 
 CAUTION: FIXME How is `hive.metastore.warehouse.dir` related to `spark.sql.warehouse.dir`? `SharedState.warehousePath`? Review https://github.com/apache/spark/pull/16996/files
 

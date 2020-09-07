@@ -10,7 +10,7 @@
 .HiveSessionCatalog and HiveSessionStateBuilder
 image::../images/spark-sql-HiveSessionCatalog.png[align="center"]
 
-`HiveSessionCatalog` is available as ../SessionState.md#catalog[catalog] property of `SessionState` when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled] (that in the end sets ../spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
+`HiveSessionCatalog` is available as ../SessionState.md#catalog[catalog] property of `SessionState` when `SparkSession` was created with ../SparkSession-Builder.md#enableHiveSupport[Hive support enabled] (that in the end sets ../StaticSQLConf.md#spark.sql.catalogImplementation[spark.sql.catalogImplementation] internal configuration property to `hive`).
 
 [source, scala]
 ----
@@ -39,7 +39,7 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 * [[externalCatalog]] [HiveExternalCatalog](HiveExternalCatalog.md)
 * [[globalTempViewManager]] [GlobalTempViewManager](../spark-sql-GlobalTempViewManager.md)
 * [[metastoreCatalog]] Legacy [HiveMetastoreCatalog](HiveMetastoreCatalog.md)
-* [[functionRegistry]] [FunctionRegistry](../spark-sql-FunctionRegistry.md)
+* [[functionRegistry]] [FunctionRegistry](../FunctionRegistry.md)
 * [[conf]] [SQLConf](../SQLConf.md)
 * [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
 * [[parser]] [ParserInterface](../sql/ParserInterface.md)

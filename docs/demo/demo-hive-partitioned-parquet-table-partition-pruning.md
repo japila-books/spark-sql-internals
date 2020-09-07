@@ -10,7 +10,7 @@ The demo features the following:
 
 * ../hive/configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
 
-* Hadoop DFS for ../spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
+* Hadoop DFS for ../StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
 
 ## Create Hive Partitioned Table in Parquet Format
 

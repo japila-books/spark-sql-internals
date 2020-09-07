@@ -80,7 +80,7 @@ scala> :type spark.sessionState.functionRegistry
 org.apache.spark.sql.catalyst.analysis.FunctionRegistry
 ----
 
-NOTE: You can register a new user-defined function using spark-sql-UDFRegistration.md[UDFRegistration].
+NOTE: You can register a new user-defined function using UDFRegistration.md[UDFRegistration].
 
 [[attributes]]
 .FunctionRegistry's Attributes
@@ -161,7 +161,7 @@ createOrReplaceTempFunction(name: String, builder: FunctionBuilder): Unit
 
 `createOrReplaceTempFunction`...FIXME
 
-NOTE: `createOrReplaceTempFunction` is used exclusively when `UDFRegistration` is requested to register an <<spark-sql-UDFRegistration.md#register, user-defined function>>, <<spark-sql-UDFRegistration.md#register-UserDefinedAggregateFunction, user-defined aggregate function>>, <<spark-sql-UDFRegistration.md#register-UserDefinedFunction, user-defined function (as UserDefinedFunction)>> or `registerPython`.
+NOTE: `createOrReplaceTempFunction` is used exclusively when `UDFRegistration` is requested to register an <<UDFRegistration.md#register, user-defined function>>, <<UDFRegistration.md#register-UserDefinedAggregateFunction, user-defined aggregate function>>, <<UDFRegistration.md#register-UserDefinedFunction, user-defined function (as UserDefinedFunction)>> or `registerPython`.
 
 === [[functionExists]] `functionExists` Method
 

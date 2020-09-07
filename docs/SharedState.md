@@ -66,7 +66,7 @@ globalTempViewManager: GlobalTempViewManager
 
 [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
 
-When accessed for the very first time, `globalTempViewManager` gets the name of the global temporary view database based on [spark.sql.globalTempDatabase](spark-sql-StaticSQLConf.md#spark.sql.globalTempDatabase) internal static configuration property.
+When accessed for the very first time, `globalTempViewManager` gets the name of the global temporary view database based on [spark.sql.globalTempDatabase](StaticSQLConf.md#spark.sql.globalTempDatabase) internal static configuration property.
 
 In the end, `globalTempViewManager` creates a new [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md) (with the configured database name).
 
@@ -85,7 +85,7 @@ externalCatalogClassName(
   conf: SparkConf): String
 ```
 
-`externalCatalogClassName` gives the name of the class of the [ExternalCatalog](ExternalCatalog.md) implementation based on [spark.sql.catalogImplementation](spark-sql-StaticSQLConf.md#spark.sql.catalogImplementation) configuration property:
+`externalCatalogClassName` gives the name of the class of the [ExternalCatalog](ExternalCatalog.md) implementation based on [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property:
 
 * [org.apache.spark.sql.hive.HiveExternalCatalog](hive/HiveExternalCatalog.md) for `hive`
 * [org.apache.spark.sql.catalyst.catalog.InMemoryCatalog](InMemoryCatalog.md) for `in-memory`
@@ -103,7 +103,7 @@ warehousePath: String
 
 `warehousePath` is the location of the warehouse.
 
-`warehousePath` is [hive.metastore.warehouse.dir](hive/spark-sql-hive-metastore.md#hive.metastore.warehouse.dir) (if defined) or [spark.sql.warehouse.dir](spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir).
+`warehousePath` is [hive.metastore.warehouse.dir](hive/spark-sql-hive-metastore.md#hive.metastore.warehouse.dir) (if defined) or [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir).
 
 `warehousePath` prints out the following INFO message to the logs when `SharedState` is [created](#creating-instance):
 
@@ -119,9 +119,9 @@ While initialized, `warehousePath` does the following:
 
 1. Removes `hive.metastore.warehouse.dir` from `SparkConf` (of `SparkContext`) and leaves it off if defined using any of the Hadoop configuration resources.
 
-1. Sets [spark.sql.warehouse.dir](spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir) or [hive.metastore.warehouse.dir](hive/spark-sql-hive-metastore.md#hive.metastore.warehouse.dir) in the Hadoop configuration (of `SparkContext`)
+1. Sets [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir) or [hive.metastore.warehouse.dir](hive/spark-sql-hive-metastore.md#hive.metastore.warehouse.dir) in the Hadoop configuration (of `SparkContext`)
 
-    * If `hive.metastore.warehouse.dir` has been defined in any of the Hadoop configuration resources but [spark.sql.warehouse.dir](spark-sql-StaticSQLConf.md#spark.sql.warehouse.dir) has not, `spark.sql.warehouse.dir` becomes the value of `hive.metastore.warehouse.dir`.
+    * If `hive.metastore.warehouse.dir` has been defined in any of the Hadoop configuration resources but [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir) has not, `spark.sql.warehouse.dir` becomes the value of `hive.metastore.warehouse.dir`.
 
       `warehousePath` prints out the following INFO message to the logs:
 
