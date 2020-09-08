@@ -1395,3 +1395,11 @@ Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access
 Default: `true`
 
 Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
+
+## <span id="spark.sql.optimizer.nestedSchemaPruning.enabled"> spark.sql.optimizer.nestedSchemaPruning.enabled
+
+**(internal)** Prune nested fields from the output of a logical relation that are not necessary in satisfying a query. This optimization allows columnar file format readers to avoid reading unnecessary nested column data.
+
+Default: `true`
+
+Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) method to access the current value.

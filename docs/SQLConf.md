@@ -610,3 +610,9 @@ Used when:
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreMissingFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
 * `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](InMemoryFileIndex.md#bulkListLeafFiles)
 * `FilePartitionReader` is requested to `ignoreMissingFiles`
+
+## <span id="NESTED_SCHEMA_PRUNING_ENABLED"><span id="nestedSchemaPruningEnabled"> nestedSchemaPruningEnabled
+
+The value of [spark.sql.optimizer.nestedSchemaPruning.enabled](spark-sql-properties.md#spark.sql.optimizer.nestedSchemaPruning.enabled) configuration property
+
+Used when [SchemaPruning](logical-optimizations/SchemaPruning.md), [ColumnPruning](logical-optimizations/ColumnPruning.md) and [V2ScanRelationPushDown](logical-optimizations/V2ScanRelationPushDown.md) logical optimizations are executed
