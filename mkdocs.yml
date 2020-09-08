@@ -770,6 +770,8 @@ nav:
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
+  - PySpark:
+    - BasePythonRunner: pyspark/BasePythonRunner.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
