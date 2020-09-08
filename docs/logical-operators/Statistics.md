@@ -1,19 +1,38 @@
-# Statistics &mdash; Size Estimates and Query Hints
+# Statistics
 
-[[creating-instance]]
-`Statistics` holds the statistics estimates and query hints of a logical operator:
+`Statistics` holds the following estimates of a logical operator:
 
-* [[sizeInBytes]] Total (output) size (in bytes)
-* [[rowCount]] Estimated number of rows (aka _row count_)
-* [[attributeStats]] Column attribute statistics (aka _column (equi-height) histograms_)
-* [[hints]] [Hints](HintInfo.md)
+* <span id="sizeInBytes"> Total (output) size (in bytes)
+* [Estimated number of rows](#rowCount)
+* <span id="attributeStats"> [Column Statistics](../spark-sql-ColumnStat.md) (_column (equi-height) histograms_)
 
-NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
+!!! note
+    **Cost statistics**, **plan statistics** or **query statistics** are synonyms and used interchangeably.
 
-You can access statistics and query hints of a logical plan using [stats](LogicalPlanStats.md#stats) property.
+`Statistics` is created when:
 
-[source, scala]
-----
+* `CatalogStatistics` is requested to [convert metastore statistics](../spark-sql-CatalogStatistics.md#toPlanStats)
+* [DataSourceV2Relation](DataSourceV2Relation.md), [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md), [ExternalRDD](ExternalRDD.md), [LocalRelation](LocalRelation.md), [LogicalRDD](LogicalRDD.md), [LogicalRelation](LogicalRelation.md), [Range](Range.md), [OneRowRelation](OneRowRelation.md) logical operators are requested to `computeStats`
+* [AggregateEstimation](AggregateEstimation.md) and [JoinEstimation](JoinEstimation.md) utilities are requested to `estimate`
+* [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) is executed
+* [QueryStageExec](../physical-operators/QueryStageExec.md) physical operator is requested to `computeStats`
+* [DetermineTableStats](../hive/DetermineTableStats.md) logical resolution rule is executed
+
+## <span id="rowCount"> Row Count
+
+**Row Count** estimate is used in [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization for [Cost-Based Optimization](../spark-sql-cost-based-optimization.md).
+
+## Statistics and CatalogStatistics
+
+[CatalogStatistics](../spark-sql-CatalogStatistics.md) is a "subset" of all possible `Statistics` (as there are no concepts of [attributes](#attributeStats) in [metastore](../ExternalCatalog.md)).
+
+`CatalogStatistics` are statistics stored in an external catalog (usually a Hive metastore) and are often referred as **Hive statistics** while `Statistics` represents the **Spark statistics**.
+
+## Accessing Statistics of Logical Operator
+
+Statistics of a logical plan are available using [stats](LogicalPlanStats.md#stats) property.
+
+```text
 val q = spark.range(5).hint("broadcast").join(spark.range(1), "id")
 val plan = q.queryExecution.optimizedPlan
 val stats = plan.stats
@@ -23,42 +42,27 @@ org.apache.spark.sql.catalyst.plans.logical.Statistics
 
 scala> println(stats.simpleString)
 sizeInBytes=213.0 B, hints=none
-----
-
-NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command to compute <<sizeInBytes, total size>> and <<rowCount, row count>> statistics of a table.
-
-NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
+```
 
 !!! note
-    Use `Dataset.hint` or `SELECT` SQL statement with hints for [query hints](../new-and-noteworthy/hint-framework.md#specifying-query-hints).
+    Use [ANALYZE TABLE COMPUTE STATISTICS](../spark-sql-cost-based-optimization.md#ANALYZE-TABLE) SQL command to compute [total size](#sizeInBytes) and [row count](#rowCount) statistics of a table.
 
-`Statistics` is <<creating-instance, created>> when:
+!!! note
+    Use [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](../spark-sql-cost-based-optimization.md#ANALYZE-TABLE) SQL Command to generate [column (equi-height) histograms](#attributeStats) of a table.
 
-* spark-sql-LogicalPlan-LeafNode.md#computeStats[Leaf logical operators] (specifically) and [logical operators](LogicalPlanStats.md#stats) (in general) are requested for statistics estimates
+## <span id="simpleString"><span id="toString"> Textual Representation
 
-* hive/HiveTableRelation.md#computeStats[HiveTableRelation] and spark-sql-LogicalPlan-LogicalRelation.md#computeStats[LogicalRelation] are requested for statistics estimates (through spark-sql-CatalogStatistics.md#toPlanStats[CatalogStatistics])
+```scala
+toString: String
+```
 
-NOTE: <<rowCount, row count>> estimate is used in spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] logical optimization when spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization is enabled].
+`toString` gives **textual representation** of the `Statistics`.
 
-[NOTE]
-====
-spark-sql-CatalogStatistics.md[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, query hints>> in [metastore](../ExternalCatalog.md)).
-
-`CatalogStatistics` are statistics stored in an external catalog (usually a Hive metastore) and are often referred as *Hive statistics* while `Statistics` represents the *Spark statistics*.
-====
-
-[[simpleString]][[toString]]
-`Statistics` comes with `simpleString` method that is used for the readable *text representation* (that is `toString` with *Statistics* prefix).
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.plans.logical.Statistics
 import org.apache.spark.sql.catalyst.plans.logical.HintInfo
-val stats = Statistics(sizeInBytes = 10, rowCount = Some(20), hints = HintInfo(broadcast = true))
+val stats = Statistics(sizeInBytes = 10, rowCount = Some(20))
 
 scala> println(stats)
-Statistics(sizeInBytes=10.0 B, rowCount=20, hints=(broadcast))
-
-scala> println(stats.simpleString)
-sizeInBytes=10.0 B, rowCount=20, hints=(broadcast)
-----
+Statistics(sizeInBytes=10.0 B, rowCount=20)
+```

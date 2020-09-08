@@ -156,6 +156,7 @@ nav:
         - CreateV2Table: logical-operators/CreateV2Table.md
         - logical-operators/CreateViewCommand.md
         - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
+        - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
         - DeleteFromTable: logical-operators/DeleteFromTable.md
         - logical-operators/DescribeColumnCommand.md
         - logical-operators/DescribeTableCommand.md

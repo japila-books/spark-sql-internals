@@ -66,12 +66,13 @@ scala> stats.map(_.simpleString).foreach(println)
 714 bytes, 2 rows
 ----
 
-=== [[toPlanStats]] Converting Metastore Statistics to Spark Statistics -- `toPlanStats` Method
+## <span id="toPlanStats"> Converting Metastore Statistics to Spark Statistics
 
-[source, scala]
-----
-toPlanStats(planOutput: Seq[Attribute], cboEnabled: Boolean): Statistics
-----
+```scala
+toPlanStats(
+  planOutput: Seq[Attribute],
+  cboEnabled: Boolean): Statistics
+```
 
 `toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
 
@@ -88,4 +89,4 @@ CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 `toPlanStats` does the reverse of [HiveExternalCatalog.statsToProperties](hive/HiveExternalCatalog.md#statsToProperties).
 ====
 
-NOTE: `toPlanStats` is used when [HiveTableRelation](hive/HiveTableRelation.md#computeStats) and [LogicalRelation](logical-operators/LogicalRelation.md#computeStats) are requested for statistics.
+`toPlanStats` is used when [HiveTableRelation](hive/HiveTableRelation.md#computeStats) and [LogicalRelation](logical-operators/LogicalRelation.md#computeStats) are requested for statistics.
