@@ -65,4 +65,4 @@ computeStats(): Statistics
 
 NOTE: Logical operators, e.g. spark-sql-LogicalPlan-ExternalRDD.md[ExternalRDD], spark-sql-LogicalPlan-LogicalRDD.md[LogicalRDD] and `DataSourceV2Relation`, or relations, e.g. `HadoopFsRelation` or `BaseRelation`, use spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property for the default estimated size if the statistics could not be computed.
 
-NOTE: `computeStats` is used exclusively when `SizeInBytesOnlyStatsPlanVisitor` uses the spark-sql-SizeInBytesOnlyStatsPlanVisitor.md#default[default case] to compute the size statistic (in bytes) for a spark-sql-LogicalPlan.md[logical operator].
+`computeStats` is used when `SizeInBytesOnlyStatsPlanVisitor` uses the [default case](SizeInBytesOnlyStatsPlanVisitor.md#default) to compute the size statistic (in bytes) for a spark-sql-LogicalPlan.md[logical operator].

@@ -6,11 +6,11 @@
 * [[sizeInBytes]] Total (output) size (in bytes)
 * [[rowCount]] Estimated number of rows (aka _row count_)
 * [[attributeStats]] Column attribute statistics (aka _column (equi-height) histograms_)
-* [[hints]] spark-sql-HintInfo.md[Query hints]
+* [[hints]] [Hints](HintInfo.md)
 
 NOTE: *Cost statistics*, *plan statistics* or *query statistics* are all synonyms and used interchangeably.
 
-You can access statistics and query hints of a logical plan using [stats](logical-operators/LogicalPlanStats.md#stats) property.
+You can access statistics and query hints of a logical plan using [stats](LogicalPlanStats.md#stats) property.
 
 [source, scala]
 ----
@@ -30,11 +30,11 @@ NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPU
 NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL Command to generate <<attributeStats, column (equi-height) histograms>> of a table.
 
 !!! note
-    Use `Dataset.hint` or `SELECT` SQL statement with hints for [query hints](new-and-noteworthy/hint-framework.md#specifying-query-hints).
+    Use `Dataset.hint` or `SELECT` SQL statement with hints for [query hints](../new-and-noteworthy/hint-framework.md#specifying-query-hints).
 
 `Statistics` is <<creating-instance, created>> when:
 
-* spark-sql-LogicalPlan-LeafNode.md#computeStats[Leaf logical operators] (specifically) and [logical operators](logical-operators/LogicalPlanStats.md#stats) (in general) are requested for statistics estimates
+* spark-sql-LogicalPlan-LeafNode.md#computeStats[Leaf logical operators] (specifically) and [logical operators](LogicalPlanStats.md#stats) (in general) are requested for statistics estimates
 
 * hive/HiveTableRelation.md#computeStats[HiveTableRelation] and spark-sql-LogicalPlan-LogicalRelation.md#computeStats[LogicalRelation] are requested for statistics estimates (through spark-sql-CatalogStatistics.md#toPlanStats[CatalogStatistics])
 
@@ -42,7 +42,7 @@ NOTE: <<rowCount, row count>> estimate is used in spark-sql-Optimizer-CostBasedJ
 
 [NOTE]
 ====
-spark-sql-CatalogStatistics.md[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, query hints>> in [metastore](ExternalCatalog.md)).
+spark-sql-CatalogStatistics.md[CatalogStatistics] is a "subset" of all possible `Statistics` (as there are no concepts of <<attributeStats, attributes>> and <<hints, query hints>> in [metastore](../ExternalCatalog.md)).
 
 `CatalogStatistics` are statistics stored in an external catalog (usually a Hive metastore) and are often referred as *Hive statistics* while `Statistics` represents the *Spark statistics*.
 ====

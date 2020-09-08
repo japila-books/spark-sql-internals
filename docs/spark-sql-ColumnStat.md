@@ -122,7 +122,7 @@ scala> :type colStatsOpt
 Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to spark-sql-JoinEstimation.md#estimateInnerOuterJoin[estimateInnerOuterJoin] for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
+`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to [estimateInnerOuterJoin](logical-operators/JoinEstimation.md#estimateInnerOuterJoin) for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
 [source, scala]
 ----

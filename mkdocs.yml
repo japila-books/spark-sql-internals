@@ -123,18 +123,19 @@ nav:
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
-      - LogicalPlanStats:
-        - LogicalPlanStats: logical-operators/LogicalPlanStats.md
+      - Statistics and Hints:
         - Statistics: logical-operators/Statistics.md
-        - spark-sql-HintInfo.md
-        - spark-sql-LogicalPlanVisitor.md
-        - spark-sql-SizeInBytesOnlyStatsPlanVisitor.md
-        - BasicStatsPlanVisitor:
-          - spark-sql-BasicStatsPlanVisitor.md
-          - spark-sql-AggregateEstimation.md
-          - spark-sql-FilterEstimation.md
-          - spark-sql-JoinEstimation.md
-          - spark-sql-ProjectEstimation.md
+        - HintInfo: logical-operators/HintInfo.md
+        - LogicalPlanStats: logical-operators/LogicalPlanStats.md
+        - LogicalPlanVisitor: logical-operators/LogicalPlanVisitor.md
+        - SizeInBytesOnlyStatsPlanVisitor: logical-operators/SizeInBytesOnlyStatsPlanVisitor.md
+        - BasicStatsPlanVisitor: logical-operators/BasicStatsPlanVisitor.md
+        - Estimation Utilities:
+          - AggregateEstimation: logical-operators/AggregateEstimation.md
+          - EstimationUtils: logical-operators/EstimationUtils.md
+          - FilterEstimation: logical-operators/FilterEstimation.md
+          - JoinEstimation: logical-operators/JoinEstimation.md
+          - ProjectEstimation: logical-operators/ProjectEstimation.md
       - Concrete Operators:
         - logical-operators/Aggregate.md
         - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
@@ -743,7 +744,6 @@ nav:
       - spark-sql-cost-based-optimization.md
       - spark-sql-CatalogStatistics.md
       - spark-sql-ColumnStat.md
-      - spark-sql-EstimationUtils.md
       - spark-sql-CommandUtils.md
     - spark-sql-catalyst-dsl.md
   - New in Spark 3.0.0:

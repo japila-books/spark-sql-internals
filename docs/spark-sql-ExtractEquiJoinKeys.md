@@ -99,7 +99,7 @@ leftKeys:[leftKeys] | rightKeys:[rightKeys]
 
 `unapply` is used when:
 
-* `JoinEstimation` is requested to spark-sql-JoinEstimation.md#estimateInnerOuterJoin[estimateInnerOuterJoin]
+* `JoinEstimation` is requested to [estimateInnerOuterJoin](logical-operators/JoinEstimation.md#estimateInnerOuterJoin)
 
 * [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy is executed
 

@@ -11,4 +11,4 @@ estimate(project: Project): Option[Statistics]
 
 `estimate`...FIXME
 
-NOTE: `estimate` is used exclusively when `BasicStatsPlanVisitor` is requested to spark-sql-BasicStatsPlanVisitor.md#visitProject[estimate statistics and query hints of a Project logical operator].
+`estimate` is used when `BasicStatsPlanVisitor` is requested to [estimate statistics and query hints of a Project logical operator](BasicStatsPlanVisitor.md#visitProject).

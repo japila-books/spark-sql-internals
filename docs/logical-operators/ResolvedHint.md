@@ -16,5 +16,5 @@ When requested for catalyst/QueryPlan.md#output[output schema], `ResolvedHint` u
 
 `ResolvedHint` takes the following when created:
 
-* [[child]] Child spark-sql-LogicalPlan.md[logical operator]
-* [[hints]] spark-sql-HintInfo.md[Query hints]
+* [[child]] Child [logical operator](LogicalPlan.md)
+* [[hints]] [Query hints](HintInfo.md)

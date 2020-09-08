@@ -96,9 +96,9 @@ canBroadcastByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): 
 
 `canBroadcastByHints` is positive (i.e. `true`) when either condition holds:
 
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is on
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is on
 
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is on
+. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is on
 
 Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
 
@@ -113,9 +113,9 @@ broadcastSideByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan):
 
 `broadcastSideByHints` computes `buildLeft` and `buildRight` flags:
 
-* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and the `left` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is positive
+* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and the `left` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is positive
 
-* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and the `right` operator's spark-sql-HintInfo.md#broadcast[broadcast] hint flag is positive
+* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and the `right` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is positive
 
 In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
 

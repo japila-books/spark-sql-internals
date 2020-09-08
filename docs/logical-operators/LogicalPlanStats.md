@@ -1,6 +1,6 @@
 # LogicalPlanStats &mdash; Statistics Estimates and Query Hints of Logical Operators
 
-`LogicalPlanStats` is an extension of the [LogicalPlan](logical-operators/LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](SparkPlanner.md) (with or without [cost-based optimization](spark-sql-cost-based-optimization.md), e.g. [CostBasedJoinReorder](logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
+`LogicalPlanStats` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](../SparkPlanner.md) (with or without [cost-based optimization](../spark-sql-cost-based-optimization.md), e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
 
 ## Scala Definition
 
@@ -21,22 +21,22 @@ trait LogicalPlanStats { self: LogicalPlan =>
 stats: Statistics
 ```
 
-`stats` gets the [statistics](Statistics.md) from [cache](#statsCache) if computed already. If not, `stats` branches off per whether [cost-based optimization](spark-sql-cost-based-optimization.md) is enabled or not and requests [BasicStatsPlanVisitor](spark-sql-BasicStatsPlanVisitor.md) or [SizeInBytesOnlyStatsPlanVisitor](spark-sql-SizeInBytesOnlyStatsPlanVisitor.md) for the statistics, respectively.
+`stats` gets the [statistics](Statistics.md) from [cache](#statsCache) if computed already. If not, `stats` branches off per whether [cost-based optimization](../spark-sql-cost-based-optimization.md) is enabled or not and requests [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md) or [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) for the statistics, respectively.
 
 `statsCache` caches the statistics for later use.
 
 `stats` is used when:
 
 * `JoinSelection` execution planning strategy matches a logical plan:
-   * [that is small enough for broadcast join](execution-planning-strategies/JoinSelection.md#canBroadcast) (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
-   * [whose a single partition should be small enough to build a hash table](execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) (using `ShuffledHashJoinExec` physical operator)
-   * [that is much smaller (3X) than the other plan](execution-planning-strategies/JoinSelection.md#muchSmaller) (for `ShuffledHashJoinExec` physical operator)
+   * [that is small enough for broadcast join](../execution-planning-strategies/JoinSelection.md#canBroadcast) (using `BroadcastHashJoinExec` or `BroadcastNestedLoopJoinExec` physical operators)
+   * [whose a single partition should be small enough to build a hash table](../execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) (using `ShuffledHashJoinExec` physical operator)
+   * [that is much smaller (3X) than the other plan](../execution-planning-strategies/JoinSelection.md#muchSmaller) (for `ShuffledHashJoinExec` physical operator)
    * ...
-* `QueryExecution` is requested for [stringWithStats](QueryExecution.md#stringWithStats) for `EXPLAIN COST` SQL command
-* `CacheManager` is requested to [cache a Dataset](CacheManager.md#cacheQuery) or [recacheByCondition](CacheManager.md#recacheByCondition)
+* `QueryExecution` is requested for [stringWithStats](../QueryExecution.md#stringWithStats) for `EXPLAIN COST` SQL command
+* `CacheManager` is requested to [cache a Dataset](../CacheManager.md#cacheQuery) or [recacheByCondition](../CacheManager.md#recacheByCondition)
 * `HiveMetastoreCatalog` is requested for `convertToLogicalRelation`
 * `StarSchemaDetection`
-* [CostBasedJoinReorder](logical-optimizations/CostBasedJoinReorder.md) logical optimization is executed
+* [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization is executed
 
 ## <span id="invalidateStatsCache"> Invalidating Statistics Cache
 
@@ -44,9 +44,9 @@ stats: Statistics
 invalidateStatsCache(): Unit
 ```
 
-`invalidateStatsCache` clears the [cache](#statsCache) of the current logical operator and all of the [children](catalyst/TreeNode.md#children).
+`invalidateStatsCache` clears the [cache](#statsCache) of the current logical operator and all of the [children](../catalyst/TreeNode.md#children).
 
-`invalidateStatsCache` is used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [reOptimize](physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
+`invalidateStatsCache` is used when [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [reOptimize](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
 
 ## <span id="statsCache"> Statistics Cache
 
@@ -70,7 +70,7 @@ Execute ShowTablesCommand
    +- ShowTablesCommand false
 ```
 
-The statistics of a logical plan directly using [stats](#stats) method or indirectly requesting `QueryExecution` for [text representation with statistics](QueryExecution.md#stringWithStats).
+The statistics of a logical plan directly using [stats](#stats) method or indirectly requesting `QueryExecution` for [text representation with statistics](../QueryExecution.md#stringWithStats).
 
 ```text
 val q = sql("SHOW TABLES")

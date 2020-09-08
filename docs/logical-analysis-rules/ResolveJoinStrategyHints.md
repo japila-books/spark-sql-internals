@@ -23,7 +23,7 @@ apply(
 
 `apply` traverses the given [logical query plan](../logical-operators/LogicalPlan.md) to find [UnresolvedHint](../logical-operators/UnresolvedHint.md) operators with names that are the [hintAliases](../JoinStrategyHint.md#hintAliases) of the supported [JoinStrategyHint](../JoinStrategyHint.md)s.
 
-For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with [HintInfo](../spark-sql-HintInfo.md) with just the name).
+For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with [HintInfo](../logical-operators/HintInfo.md) with just the name).
 
 For `UnresolvedHint`s with parameters, `apply` accepts two types of parameters:
 
