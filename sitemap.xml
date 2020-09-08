@@ -296,6 +296,10 @@
      <lastmod>2020-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/DataSourceV2ScanRelation/</loc>
+     <lastmod>2020-09-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/DeleteFromTable/</loc>
      <lastmod>2020-09-08</lastmod>
      <changefreq>daily</changefreq>
