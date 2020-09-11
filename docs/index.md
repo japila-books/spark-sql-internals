@@ -1,8 +1,8 @@
-# The Internals of Spark SQL (Apache Spark 3.0.0)
+# The Internals of Spark SQL (Apache Spark 3.0.1)
 
 Welcome to **The Internals of Spark SQL** online book!
 
-I'm [Jacek Laskowski](https://pl.linkedin.com/in/jaceklaskowski), a freelance IT consultant specializing in [Apache Spark](https://spark.apache.org/), [Apache Kafka](https://kafka.apache.org/), [Delta Lake](https://delta.io/) and [Kafka Streams](https://kafka.apache.org/documentation/streams/).
+I'm [Jacek Laskowski](https://pl.linkedin.com/in/jaceklaskowski), a Seasoned IT Professional specializing in [Apache Spark](https://spark.apache.org/), [Delta Lake](https://delta.io/), [Apache Kafka](https://kafka.apache.org/) and [Kafka Streams](https://kafka.apache.org/documentation/streams/).
 
 I'm very excited to have you here and hope you will enjoy exploring the internals of Spark SQL as much as I have.
 
