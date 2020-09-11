@@ -68,7 +68,7 @@ extra:
       link: https://linkedin.com/in/jaceklaskowski
 
 google_analytics:
-  - UA-86782445-6
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
   - auto
 
 nav:
