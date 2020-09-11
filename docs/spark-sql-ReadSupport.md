@@ -2,7 +2,7 @@ title: ReadSupport
 
 # ReadSupport -- "Readable" Data Sources
 
-`ReadSupport` is the <<contract, abstraction>> of <<implementations, "readable" data sources>> in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<createReader, create a DataSourceReader>> for reading data (_data scan_).
+`ReadSupport` is the <<contract, abstraction>> of <<implementations, "readable" data sources>> in the [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<createReader, create a DataSourceReader>> for reading data (_data scan_).
 
 [[contract]]
 [[createReader]]

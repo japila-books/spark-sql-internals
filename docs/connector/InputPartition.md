@@ -1,6 +1,6 @@
 # InputPartition
 
-`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [Data Source API V2](../spark-sql-data-source-api-v2.md) with optional [location preferences](#preferredLocations).
+`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [DataSource V2](../new-and-noteworthy/datasource-v2.md) with optional [location preferences](#preferredLocations).
 
 `InputPartition` is a Java [Serializable](https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html).
 

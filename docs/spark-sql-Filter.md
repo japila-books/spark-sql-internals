@@ -22,7 +22,7 @@ title: Filter
 
 * `JDBCRDD` is spark-sql-JDBCRDD.md#filters[created] and requested to spark-sql-JDBCRDD.md#scanTable[scanTable]
 
-* (Data Source API V2) `SupportsPushDownFilters` is requested to spark-sql-SupportsPushDownFilters.md#pushFilters[pushFilters] and for spark-sql-SupportsPushDownFilters.md#pushedFilters[pushedFilters]
+* (DataSource V2) `SupportsPushDownFilters` is requested to spark-sql-SupportsPushDownFilters.md#pushFilters[pushFilters] and for spark-sql-SupportsPushDownFilters.md#pushedFilters[pushedFilters]
 
 [[contract]]
 [source, scala]

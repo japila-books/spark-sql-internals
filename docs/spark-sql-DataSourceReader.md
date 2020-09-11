@@ -1,6 +1,6 @@
 # DataSourceReader
 
-`DataSourceReader` is the <<contract, abstraction>> of <<implementations, data source readers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<planInputPartitions, plan InputPartitions>> and know the <<readSchema, schema for reading>>.
+`DataSourceReader` is the <<contract, abstraction>> of <<implementations, data source readers>> in [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<planInputPartitions, plan InputPartitions>> and know the <<readSchema, schema for reading>>.
 
 `DataSourceReader` is created to scan the data from a data source when:
 

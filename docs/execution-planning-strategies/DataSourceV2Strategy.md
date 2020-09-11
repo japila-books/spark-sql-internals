@@ -1,6 +1,6 @@
 # DataSourceV2Strategy Execution Planning Strategy
 
-`DataSourceV2Strategy` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to <<apply, plan logical operators>> (from the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>).
+`DataSourceV2Strategy` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to <<apply, plan logical operators>> (from the [DataSource V2](../new-and-noteworthy/datasource-v2.md)).
 
 [[logical-operators]]
 .DataSourceV2Strategy's Execution Planning

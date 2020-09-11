@@ -2,7 +2,7 @@ title: AppendData
 
 # AppendData Logical Operator -- Appending Data to DataSourceV2
 
-`AppendData` is a <<spark-sql-LogicalPlan.md#, logical operator>> that represents appending data (the result of executing a <<query, structured query>>) to a <<table, table>> (with the <<isByName, columns matching>> by <<byName, name>> or <<byPosition, position>>) in <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
+`AppendData` is a <<spark-sql-LogicalPlan.md#, logical operator>> that represents appending data (the result of executing a <<query, structured query>>) to a <<table, table>> (with the <<isByName, columns matching>> by <<byName, name>> or <<byPosition, position>>) in [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
 `AppendData` is <<creating-instance, created>> (indirectly via <<byName, byName>> or <<byPosition, byPosition>> factory methods) only for tests.
 

@@ -2,7 +2,7 @@ title: WriteToDataSourceV2
 
 # WriteToDataSourceV2 Logical Operator -- Writing Data to DataSourceV2
 
-`WriteToDataSourceV2` is a <<spark-sql-LogicalPlan.md#, logical operator>> that represents writing data to a <<spark-sql-DataSourceV2.md#, DataSourceV2>> data source in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
+`WriteToDataSourceV2` is a <<spark-sql-LogicalPlan.md#, logical operator>> that represents writing data to a <<spark-sql-DataSourceV2.md#, DataSourceV2>> data source in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
 NOTE: `WriteToDataSourceV2` is deprecated for <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator since Spark SQL 2.4.0.
 

@@ -3,7 +3,7 @@ title: DataSourceV2Utils
 # DataSourceV2Utils Helper Object
 
 [[extractSessionConfigs]]
-`DataSourceV2Utils` is a helper object that is used exclusively to <<extractSessionConfigs, extract session configuration options>> (i.e. options with *spark.datasource* prefix for the keys in [SQLConf](SQLConf.md)) for <<spark-sql-DataSourceV2.md#, DataSourceV2>> data sources with <<spark-sql-SessionConfigSupport.md#, SessionConfigSupport>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
+`DataSourceV2Utils` is a helper object that is used exclusively to <<extractSessionConfigs, extract session configuration options>> (i.e. options with *spark.datasource* prefix for the keys in [SQLConf](SQLConf.md)) for <<spark-sql-DataSourceV2.md#, DataSourceV2>> data sources with <<spark-sql-SessionConfigSupport.md#, SessionConfigSupport>> in [DataSource V2](new-and-noteworthy/datasource-v2.md).
 
 [source, scala]
 ----

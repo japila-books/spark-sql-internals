@@ -1,6 +1,6 @@
 # DataSourceWriter
 
-`DataSourceWriter` is the <<contract, abstraction>> of <<implementations, data source writers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<abort, abort>> or <<commit, commit>> a writing Spark job, <<createWriterFactory, create a DataWriterFactory>> to be shared among writing Spark tasks and optionally <<onDataWriterCommit, handle a commit message>> and <<useCommitCoordinator, use a CommitCoordinator>> for writing Spark tasks.
+`DataSourceWriter` is the <<contract, abstraction>> of <<implementations, data source writers>> in [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<abort, abort>> or <<commit, commit>> a writing Spark job, <<createWriterFactory, create a DataWriterFactory>> to be shared among writing Spark tasks and optionally <<onDataWriterCommit, handle a commit message>> and <<useCommitCoordinator, use a CommitCoordinator>> for writing Spark tasks.
 
 NOTE: The terms *Spark job* and *Spark task* are really about the low-level Spark jobs and tasks (that you can monitor using web UI for example).
 

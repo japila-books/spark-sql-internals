@@ -333,7 +333,7 @@ nav:
       - DetermineTableStats: hive/DetermineTableStats.md
       - HiveAnalysis: hive/HiveAnalysis.md
     - Extending Spark SQL:
-      - Data Source API V2:
+      - DataSource V2:
         - spark-sql-DataSourceV2.md
         - spark-sql-ReadSupport.md
         - spark-sql-WriteSupport.md
@@ -711,6 +711,7 @@ nav:
     - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md
+    - DataSource V2: new-and-noteworthy/datasource-v2.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - spark-sql-vectorized-parquet-reader.md
@@ -739,7 +740,6 @@ nav:
     - Vectorized Query Execution:
       - spark-sql-vectorized-query-execution.md
       - ColumnarBatch: ColumnarBatch.md
-    - spark-sql-data-source-api-v2.md
     - spark-sql-subqueries.md
     - Cost-Based Optimization:
       - spark-sql-cost-based-optimization.md

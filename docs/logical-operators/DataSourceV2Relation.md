@@ -1,6 +1,6 @@
 # DataSourceV2Relation Leaf Logical Operator
 
-`DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
+`DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
 `DataSourceV2Relation` is <<creating-instance, created>> (indirectly via <<create, create>> helper method) exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](../DataFrameReader.md#load) (from a data source with <<spark-sql-ReadSupport.md#, ReadSupport>>).
 

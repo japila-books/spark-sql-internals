@@ -1,6 +1,6 @@
 # DataSourceRDD
 
-`DataSourceRDD` is a `RDD[InternalRow]` that acts as a thin adapter between Spark SQL's [Data Source API V2](spark-sql-data-source-api-v2.md) and Spark Core's RDD API.
+`DataSourceRDD` is a `RDD[InternalRow]` that acts as a thin adapter between Spark SQL's [DataSource V2](new-and-noteworthy/datasource-v2.md) and Spark Core's RDD API.
 
 `DataSourceRDD` uses [DataSourceRDDPartition](spark-sql-DataSourceRDDPartition.md) for the [partitions](#getPartitions) (that is a mere wrapper of the [InputPartitions](#inputPartitions)).
 

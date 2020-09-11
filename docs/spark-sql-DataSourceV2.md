@@ -1,8 +1,8 @@
 title: DataSourceV2
 
-# DataSourceV2 -- Data Sources in Data Source API V2
+# DataSourceV2 -- Data Sources in DataSource V2
 
-`DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>>.
+`DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the [DataSource V2](new-and-noteworthy/datasource-v2.md).
 
 [[contract]]
 `DataSourceV2` defines no methods or values and simply acts as a *marker interface*.

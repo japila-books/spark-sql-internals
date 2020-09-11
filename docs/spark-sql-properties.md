@@ -385,7 +385,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.sources.useV1SourceList"> spark.sql.sources.useV1SourceList
 
-**(internal)** A comma-separated list of data source short names or fully qualified data source implementation class names for which Data Source V2 code path is disabled. These data sources will fallback to Data Source V1 code path.
+**(internal)** A comma-separated list of data source short names or fully qualified data source implementation class names for which DataSource V2 code path is disabled. These data sources will fallback to Data Source V1 code path.
 
 Default: `avro,csv,json,kafka,orc,parquet,text`
 

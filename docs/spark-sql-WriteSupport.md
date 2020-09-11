@@ -2,7 +2,7 @@ title: WriteSupport
 
 # WriteSupport -- "Writable" Data Sources
 
-`WriteSupport` is the <<contract, abstraction>> of <<implementations, "writable" data sources>> in the <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that can <<createWriter, create a DataSourceWriter>> for writing data out.
+`WriteSupport` is the <<contract, abstraction>> of <<implementations, "writable" data sources>> in the [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<createWriter, create a DataSourceWriter>> for writing data out.
 
 [[contract]]
 [[createWriter]]

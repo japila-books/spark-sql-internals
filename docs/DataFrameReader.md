@@ -590,9 +590,9 @@ load(
 
 Internally, `load` spark-sql-DataSource.md#lookupDataSource[lookupDataSource] for the <<source, source>>. `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
 
-For a "Data Source V2" data source, `load`...FIXME
+For a "DataSource V2" data source, `load`...FIXME
 
-Otherwise, if the <<source, source>> is not a "Data Source V2" data source, `load` simply <<loadV1Source, loadV1Source>>.
+Otherwise, if the <<source, source>> is not a "DataSource V2" data source, `load` simply <<loadV1Source, loadV1Source>>.
 
 `load` throws a `AnalysisException` when the <<source, source format>> is `hive`.
 

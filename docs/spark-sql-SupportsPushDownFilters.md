@@ -2,7 +2,7 @@ title: SupportsPushDownFilters
 
 # SupportsPushDownFilters -- Data Source Readers with Filter Pushdown Optimization Support
 
-`SupportsPushDownFilters` is the <<contract, extension>> of the <<spark-sql-DataSourceReader.md#, DataSourceReader contract>> for <<implementations, data source readers>> in <<spark-sql-data-source-api-v2.md#, Data Source API V2>> that support <<pushedFilters, filter pushdown>> performance optimization (and hence reduce the size of the data to be read).
+`SupportsPushDownFilters` is the <<contract, extension>> of the <<spark-sql-DataSourceReader.md#, DataSourceReader contract>> for <<implementations, data source readers>> in [DataSource V2](new-and-noteworthy/datasource-v2.md). that support <<pushedFilters, filter pushdown>> performance optimization (and hence reduce the size of the data to be read).
 
 [[contract]]
 .SupportsPushDownFilters Contract
