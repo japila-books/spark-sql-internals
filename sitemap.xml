@@ -2320,6 +2320,10 @@
      <lastmod>2020-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/datasource-v2/</loc>
+     <lastmod>2020-09-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-hive-integration/</loc>
      <lastmod>2020-09-11</lastmod>
      <changefreq>daily</changefreq>
@@ -2409,10 +2413,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ColumnarBatch/</loc>
-     <lastmod>2020-09-11</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-data-source-api-v2/</loc>
      <lastmod>2020-09-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
