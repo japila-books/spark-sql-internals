@@ -32,6 +32,6 @@ Used exclusively when `Dataset` is requested to spark-sql-Dataset.md#inputFiles[
 | FileRelation
 | Description
 
-| [[HadoopFsRelation]] spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation]
+| [[HadoopFsRelation]] [HadoopFsRelation](HadoopFsRelation.md)
 |
 |===

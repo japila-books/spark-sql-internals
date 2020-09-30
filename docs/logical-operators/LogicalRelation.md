@@ -78,6 +78,7 @@ refresh(): Unit
 
 NOTE: `refresh` is part of spark-sql-LogicalPlan.md#refresh[LogicalPlan Contract] to refresh itself.
 
-`refresh` requests the spark-sql-BaseRelation-HadoopFsRelation.md#location[FileIndex] of a `HadoopFsRelation` <<relation, relation>> to refresh.
+`refresh` requests the [FileIndex](../HadoopFsRelation.md#location) of a `HadoopFsRelation` <<relation, relation>> to refresh.
 
-NOTE: `refresh` does the work for spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] relations only.
+!!! note
+    `refresh` does the work for [HadoopFsRelation](../HadoopFsRelation.md) relations only.

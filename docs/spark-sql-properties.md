@@ -1403,3 +1403,11 @@ Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access t
 Default: `true`
 
 Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) method to access the current value.
+
+## <span id="spark.sql.sources.fileCompressionFactor"> spark.sql.sources.fileCompressionFactor
+
+**(internal)** When estimating the output data size of a table scan, multiply the file size with this factor as the estimated data size, in case the data is compressed in the file and lead to a heavily underestimated result.
+
+Default: `1.0`
+
+Use [SQLConf.fileCompressionFactor](SQLConf.md#fileCompressionFactor) method to access the current value.

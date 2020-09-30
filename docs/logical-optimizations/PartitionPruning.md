@@ -36,7 +36,7 @@ prune(
 
 1. The join condition is defined and of type `EqualTo` (`=`)
 
-1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../spark-sql-BaseRelation-HadoopFsRelation.md)
+1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../HadoopFsRelation.md)
 
 1. The join type is one of `Inner`, `LeftSemi`, `RightOuter`, `LeftOuter`
 

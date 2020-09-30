@@ -17,7 +17,7 @@ spark.range(10)
   .saveAsTable("partitioned_table")
 ----
 
-*Dynamic Partition Inserts* is a feature of Spark SQL that allows for executing `INSERT OVERWRITE TABLE` SQL statements over partitioned <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelations>> that limits what partitions are deleted to overwrite the partitioned table (and its partitions) with new data.
+**Dynamic Partition Inserts** is a feature of Spark SQL that allows for executing `INSERT OVERWRITE TABLE` SQL statements over partitioned [HadoopFsRelations](HadoopFsRelation.md) that limits what partitions are deleted to overwrite the partitioned table (and its partitions) with new data.
 
 [[dynamic-partitions]]
 *Dynamic partitions* are the partition columns that have no values defined explicitly in the PARTITION clause of <<spark-sql-AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).

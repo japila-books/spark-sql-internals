@@ -22,12 +22,12 @@ title: FilterExec
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> with a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>)
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> with a [HadoopFsRelation](../HadoopFsRelation.md))
 
 * [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 
-[[metrics]]
-.FilterExec's Performance Metrics
+## <span id="metrics"> Performance Metrics
+
 [cols="1,2,2",options="header",width="100%"]
 |===
 | Key

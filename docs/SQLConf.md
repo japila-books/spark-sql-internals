@@ -616,3 +616,12 @@ Used when:
 The value of [spark.sql.optimizer.nestedSchemaPruning.enabled](spark-sql-properties.md#spark.sql.optimizer.nestedSchemaPruning.enabled) configuration property
 
 Used when [SchemaPruning](logical-optimizations/SchemaPruning.md), [ColumnPruning](logical-optimizations/ColumnPruning.md) and [V2ScanRelationPushDown](logical-optimizations/V2ScanRelationPushDown.md) logical optimizations are executed
+
+## <span id="FILE_COMPRESSION_FACTOR"><span id="fileCompressionFactor"> fileCompressionFactor
+
+The value of [spark.sql.sources.fileCompressionFactor](spark-sql-properties.md#spark.sql.sources.fileCompressionFactor) configuration property
+
+Used when:
+
+* `HadoopFsRelation` is requested for a [size](HadoopFsRelation.md#sizeInBytes)
+* `FileScan` is requested to [estimate statistics](FileScan.md#estimateStatistics)

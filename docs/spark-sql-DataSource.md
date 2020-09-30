@@ -78,7 +78,7 @@ val messages: DataFrame = spark.readStream
   .load
 ----
 
-When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the optional <<bucketSpec, bucketing specification>>.
+When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>>, `DataSource` creates a [HadoopFsRelation](HadoopFsRelation.md) with the optional [bucketing specification](#bucketSpec).
 
 === [[creating-instance]][[apply]] Creating DataSource Instance
 

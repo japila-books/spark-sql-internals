@@ -1,11 +1,8 @@
 # FileIndex
 
-:hadoop-version: 2.10.0
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+`FileIndex` is the <<contract, abstraction>> of <<implementations, file indices>> with the <<rootPaths, root paths>> and <<partitionSchema, partition schema>> that comprise a relation.
 
-`FileIndex` is the <<contract, abstraction>> of <<implementations, file indices>> that knows the <<rootPaths, root paths>> and <<partitionSchema, partition schema>> of a relation.
-
-`FileIndex` is associated with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation].
+`FileIndex` is associated with a [HadoopFsRelation](HadoopFsRelation.md).
 
 [[contract]]
 .FileIndex Contract
@@ -28,7 +25,7 @@ Used when:
 
 * `CatalogFileIndex` is requested for the CatalogFileIndex.md#inputFiles[input files]
 
-* `HadoopFsRelation` is requested for the spark-sql-BaseRelation-HadoopFsRelation.md#inputFiles[input files]
+* `HadoopFsRelation` is requested for the [input files](HadoopFsRelation.md#inputFiles)
 
 | listFiles
 a| [[listFiles]]
@@ -94,7 +91,7 @@ Used when:
 
 * <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> is executed
 
-* `LogicalRelation` leaf logical operator is requested to <<spark-sql-LogicalPlan-LogicalRelation.md#refresh, refresh>> (for a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>)
+* `LogicalRelation` leaf logical operator is requested to <<spark-sql-LogicalPlan-LogicalRelation.md#refresh, refresh>> (for a [HadoopFsRelation](HadoopFsRelation.md))
 
 | rootPaths
 a| [[rootPaths]]
@@ -116,25 +113,20 @@ Used when:
 
 * `DDLUtils` utility is used to spark-sql-DDLUtils.md#verifyNotReadPath[verifyNotReadPath]
 
-* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a InsertIntoTable.md[InsertIntoTable] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation])
+* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a InsertIntoTable.md[InsertIntoTable] with a [HadoopFsRelation](HadoopFsRelation.md))
 
-| sizeInBytes
-a| [[sizeInBytes]]
+### <span id="sizeInBytes"> Estimated Size
 
-[source, scala]
-----
+```scala
 sizeInBytes: Long
-----
+```
 
 Estimated size of the data of the relation (in bytes)
 
 Used when:
 
-* `HadoopFsRelation` is requested for the <<spark-sql-BaseRelation-HadoopFsRelation.md#sizeInBytes, estimated size>>
-
-* spark-sql-SparkOptimizer-PruneFileSourcePartitions.md[PruneFileSourcePartitions] logical optimization is executed
-
-|===
+* `HadoopFsRelation` is requested for the [estimated size](HadoopFsRelation.md#sizeInBytes)
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
 [[implementations]]
 .FileIndexes (Direct Implementations and Extensions Only)

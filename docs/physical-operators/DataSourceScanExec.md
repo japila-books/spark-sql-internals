@@ -2,7 +2,7 @@
 
 `DataSourceScanExec` is the <<contract, contract>> of <<implementations, leaf physical operators>> that represent scans over <<relation, BaseRelation>>.
 
-NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] and generic spark-sql-BaseRelation.md[BaseRelation] relations, respectively.
+NOTE: There are two <<implementations, DataSourceScanExecs>>, i.e. <<FileSourceScanExec, FileSourceScanExec>> and <<RowDataSourceScanExec, RowDataSourceScanExec>>, with a scan over data in [HadoopFsRelation](../HadoopFsRelation.md) and generic [BaseRelation](../spark-sql-BaseRelation.md) relations, respectively.
 
 `DataSourceScanExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_)
 

@@ -37,13 +37,12 @@ org.apache.spark.sql.execution.FileSourceScanExec
 ```
 
 [[shouldPruneBuckets]]
-`FileSourceScanExec` supports <<spark-sql-bucketing.md#bucket-pruning, Bucket Pruning>> for <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> with the following:
+`FileSourceScanExec` supports [Bucket Pruning](../spark-sql-bucketing.md#bucket-pruning) for [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../HadoopFsRelation.md) with the [bucketing specification](../HadoopFsRelation.md#bucketSpec) with the following:
 
-. There is exactly one bucketing column
-. The number of buckets is greater than 1
+1. There is exactly one bucketing column
+1. The number of buckets is greater than 1
 
-[source, scala]
-----
+```text
 // Using the table created above
 // There is exactly one bucketing column, i.e. id
 // The number of buckets is greater than 1, i.e. 4
@@ -73,7 +72,7 @@ executionPlan: org.apache.spark.sql.execution.SparkPlan = ...
 scala> println(executionPlan.numberedTreeString)
 00 Filter id#7L IN (50,90)
 01 +- FileScan parquet default.bucketed_4_id[id#7L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [In(id, [50,90])], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 2 out of 4
-----
+```
 
 [TIP]
 ====
@@ -107,13 +106,13 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 `apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation] (possibly as a child of spark-sql-LogicalPlan-Project.md[Project] and spark-sql-LogicalPlan-Filter.md[Filter] logical operators).
+`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and [Filter](../logical-operators/Filter.md) logical operators).
 
-`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the spark-sql-BaseRelation-HadoopFsRelation.md#partitionSchema[partitionSchema] of the `HadoopFsRelation`.
+`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the [partitionSchema](../HadoopFsRelation.md#partitionSchema) of the `HadoopFsRelation`.
 
 `apply` prints out the following INFO message to the logs:
 
-```
+```text
 Pruning directories with: [partitionKeyFilters]
 ```
 

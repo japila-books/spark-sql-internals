@@ -26,7 +26,7 @@
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>>
 | [[InsertIntoDir]]
 
-| <<InsertIntoTable.md#, InsertIntoTable>> with <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>
+| [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../HadoopFsRelation.md)
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>
 | [[InsertIntoTable-HadoopFsRelation]]
 |===

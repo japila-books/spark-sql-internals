@@ -19,7 +19,7 @@ apply(
 
 `apply` transforms the given [logical plan](../logical-operators/LogicalPlan.md) as follows:
 
-* [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators with [HadoopFsRelation](../spark-sql-BaseRelation-HadoopFsRelation.md) are left unmodified (_pass through_)
+* [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators with [HadoopFsRelation](../HadoopFsRelation.md) are left unmodified (_pass through_)
 
 * `DynamicPruning` predicate expressions in [Filter](../logical-operators/Filter.md) logical operators are replaced with `true` literals (_cleaned up_)
 

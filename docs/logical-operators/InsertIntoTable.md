@@ -88,7 +88,7 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 | [[InsertIntoDataSourceCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution resolves an `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over an <<spark-sql-InsertableRelation.md#, InsertableRelation>> (with no partitions defined)
 
 | <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>
-| [[InsertIntoHadoopFsRelationCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over a <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>>
+| [[InsertIntoHadoopFsRelationCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution transforms `InsertIntoTable` with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> over a [HadoopFsRelation](../HadoopFsRelation.md)
 
 |===
 

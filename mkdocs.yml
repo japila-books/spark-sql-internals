@@ -258,7 +258,7 @@ nav:
           - spark-sql-JsonFileFormat.md
           - spark-sql-TextFileFormat.md
         - spark-sql-JsonDataSource.md
-        - spark-sql-BaseRelation-HadoopFsRelation.md
+        - HadoopFsRelation: HadoopFsRelation.md
         - FileIndex:
           - FileIndex.md
           - CatalogFileIndex.md

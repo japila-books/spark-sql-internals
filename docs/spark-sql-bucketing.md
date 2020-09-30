@@ -243,14 +243,14 @@ Bucket pruning supports the following predicate expressions:
 * <<spark-sql-Expression-InSet.md#, InSet>>
 * `And` and `Or` of the above
 
-[FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over <<spark-sql-BaseRelation-HadoopFsRelation.md#, HadoopFsRelation>> with the <<spark-sql-BaseRelation-HadoopFsRelation.md#bucketSpec, bucketing specification>> with the following:
+[FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over [HadoopFsRelation](HadoopFsRelation.md) with the [bucketing specification](HadoopFsRelation.md#bucketSpec) with the following:
 
-. There is exactly one bucketing column
-. The number of buckets is greater than 1
+1. There is exactly one bucketing column
+1. The number of buckets is greater than 1
 
-.Example: Bucket Pruning
-[source, scala]
-----
+## Example: Bucket Pruning
+
+```text
 // Enable INFO logging level of FileSourceStrategy logger to see the details of the strategy
 import org.apache.spark.sql.execution.datasources.FileSourceStrategy
 val logger = FileSourceStrategy.getClass.getName.replace("$", "")
@@ -284,12 +284,11 @@ val bucketFiles57 = for {
 
 scala> println(bucketFiles57.size)
 24
-----
+```
 
-=== Sorting
+## Sorting
 
-[source, scala]
-----
+```text
 // Make sure that you don't end up with a BroadcastHashJoin and a BroadcastExchange
 // Disable auto broadcasting
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
@@ -338,12 +337,11 @@ scala> q.explain
             +- *(4) FileScan parquet default.bucketed_4_id[id#203L] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [IsNotNull(id)], ReadSchema: struct<id:bigint>
 
 q.foreach(_ => ())
-----
+```
 
 WARNING: There are two exchanges and sorts which makes the above use case almost unusable. I filed an issue at https://issues.apache.org/jira/browse/SPARK-24025[SPARK-24025 Join of bucketed and non-bucketed tables can give two exchanges and sorts for non-bucketed side].
 
-.SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)
-image::images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png[align="center"]
+![SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)](images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png)
 
 === [[spark.sql.sources.bucketing.enabled]] spark.sql.sources.bucketing.enabled Spark SQL Configuration Property
 

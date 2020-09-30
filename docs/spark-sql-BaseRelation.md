@@ -52,7 +52,7 @@ NOTE: It is recommended that custom data sources (outside Spark SQL) should leav
 | `ConsoleRelation`
 | [[ConsoleRelation]] Used in Spark Structured Streaming
 
-| spark-sql-BaseRelation-HadoopFsRelation.md[HadoopFsRelation]
+| [HadoopFsRelation](HadoopFsRelation.md)
 | [[HadoopFsRelation]]
 
 | spark-sql-JDBCRelation.md[JDBCRelation]
