@@ -11,6 +11,9 @@ on:
     branches:
       - master
 
+env:
+  CI: true
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
@@ -25,7 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Build documentation
@@ -34,3 +36,4 @@ jobs:
         run: |
           mkdocs gh-deploy --force
           mkdocs --version
+          pip show mkdocs-material
