@@ -12,7 +12,7 @@ on:
       - master
 
 env:
-  CI: true
+  CI: 1
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,5 +35,3 @@ jobs:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
           mkdocs gh-deploy --force
-          mkdocs --version
-          pip show mkdocs-material

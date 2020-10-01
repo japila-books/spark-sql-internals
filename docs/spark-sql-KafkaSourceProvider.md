@@ -3,21 +3,18 @@
 [[shortName]]
 `KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and registers itself to handle *kafka* data source format.
 
-NOTE: `KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/v{{ book.version }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
+`KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code](https://github.com/apache/spark/blob/v3.0.1/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
 
 `KafkaSourceProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 
-[source, scala]
-----
-// start Spark application like spark-shell with the following package
-// --packages org.apache.spark:spark-sql-kafka-0-10_2.12:{{ book.version }}
+```scala
 scala> val fromKafkaTopic1 = spark.
   read.
   format("kafka").
   option("subscribe", "topic1").  // subscribe, subscribepattern, or assign
   option("kafka.bootstrap.servers", "localhost:9092").
   load("gauge_one")
-----
+```
 
 `KafkaSourceProvider` <<sourceSchema, uses a fixed schema>> (and makes sure that a user did not set a custom one).
 
