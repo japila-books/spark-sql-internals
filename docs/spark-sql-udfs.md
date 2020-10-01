@@ -1,10 +1,10 @@
 # User-Defined Functions
 
-*User-Defined Functions* (aka *UDF*) is a feature of Spark SQL to define new spark-sql-Column.md[Column]-based functions that extend the vocabulary of Spark SQL's DSL for transforming spark-sql-Dataset.md[Datasets].
+*User-Defined Functions* (aka *UDF*) is a feature of Spark SQL to define new spark-sql-Column.md[Column]-based functions that extend the vocabulary of Spark SQL's DSL for transforming Dataset.md[Datasets].
 
 [IMPORTANT]
 ====
-Use the spark-sql-functions.md[higher-level standard Column-based functions] (with spark-sql-Dataset.md[Dataset operators]) whenever possible before reverting to developing user-defined functions since spark-sql-udfs-blackbox.md[UDFs are a blackbox] for Spark SQL and it cannot (and does not even try to) optimize them.
+Use the spark-sql-functions.md[higher-level standard Column-based functions] (with Dataset.md[Dataset operators]) whenever possible before reverting to developing user-defined functions since spark-sql-udfs-blackbox.md[UDFs are a blackbox] for Spark SQL and it cannot (and does not even try to) optimize them.
 
 As Reynold Xin from the Apache Spark project has once said on Spark's dev mailing list:
 

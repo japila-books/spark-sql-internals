@@ -2,7 +2,7 @@ title: Basic Aggregation
 
 # Basic Aggregation -- Typed and Untyped Grouping Operators
 
-You can calculate aggregates over a group of rows in a spark-sql-Dataset.md[Dataset] using <<aggregate-operators, aggregate operators>> (possibly with spark-sql-functions.md#aggregate-functions[aggregate functions]).
+You can calculate aggregates over a group of rows in a Dataset.md[Dataset] using <<aggregate-operators, aggregate operators>> (possibly with spark-sql-functions.md#aggregate-functions[aggregate functions]).
 
 [[aggregate-operators]]
 .Aggregate Operators
@@ -98,7 +98,7 @@ scala> q.show
 +---+------+
 ----
 
-Internally, `groupBy` spark-sql-Dataset.md#resolve[resolves column names] (possibly quoted) and spark-sql-RelationalGroupedDataset.md#creating-instance[creates] a `RelationalGroupedDataset` (with spark-sql-RelationalGroupedDataset.md#groupType[groupType] being `GroupByType`).
+Internally, `groupBy` Dataset.md#resolve[resolves column names] (possibly quoted) and spark-sql-RelationalGroupedDataset.md#creating-instance[creates] a `RelationalGroupedDataset` (with spark-sql-RelationalGroupedDataset.md#groupType[groupType] being `GroupByType`).
 
 NOTE: The following uses the data setup as described in <<test-setup, Test Setup>> section below.
 

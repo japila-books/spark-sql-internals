@@ -6,7 +6,7 @@ title: ExpressionEncoder
 
 `ExpressionEncoder[T]` uses expressions/Expression.md[expressions] for a <<serializer, serializer>> and a <<deserializer, deserializer>>.
 
-NOTE: `ExpressionEncoder` is the only supported implementation of `Encoder` which is explicitly enforced when `Dataset` spark-sql-Dataset.md#exprEnc[is created] (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
+NOTE: `ExpressionEncoder` is the only supported implementation of `Encoder` which is explicitly enforced when `Dataset` Dataset.md#exprEnc[is created] (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
 
 [source, scala]
 ----
@@ -362,7 +362,7 @@ val code = deserializer.genCode(ctx).code
 
 * `InternalRowDataWriterFactory` is requested to spark-sql-InternalRowDataWriterFactory.md#createDataWriter[create a DataWriter]
 
-* `Dataset` is requested for the spark-sql-Dataset.md#deserializer[deserializer expression] (to convert internal rows to objects of type `T`)
+* `Dataset` is requested for the Dataset.md#deserializer[deserializer expression] (to convert internal rows to objects of type `T`)
 
 * `TypedAggregateExpression` is spark-sql-Expression-TypedAggregateExpression.md#apply[created]
 

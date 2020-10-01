@@ -6,27 +6,37 @@
 
 `HiveMetastoreCatalog` is <<creating-instance, created>> when `HiveSessionStateBuilder` is requested for a HiveSessionStateBuilder.md#catalog[SessionCatalog] (and creates a [HiveSessionCatalog](HiveSessionCatalog.md#metastoreCatalog)).
 
-.HiveMetastoreCatalog, HiveSessionCatalog and HiveSessionStateBuilder
-image::../images/spark-sql-HiveMetastoreCatalog.png[align="center"]
+![HiveMetastoreCatalog, HiveSessionCatalog and HiveSessionStateBuilder](../images/spark-sql-HiveMetastoreCatalog.png)
 
-=== [[creating-instance]] Creating HiveMetastoreCatalog Instance
+## Creating Instance
 
 `HiveMetastoreCatalog` takes the following to be created:
 
-* [[sparkSession]] ../SparkSession.md[SparkSession]
+* [[sparkSession]] [SparkSession](../SparkSession.md)
 
-`HiveMetastoreCatalog` initializes the <<internal-properties, internal properties>>.
+## <span id="convert"> Converting HiveTableRelation to LogicalRelation
 
-=== [[convertToLogicalRelation]] Converting HiveTableRelation to LogicalRelation -- `convertToLogicalRelation` Method
+```scala
+convert(
+  relation: HiveTableRelation): LogicalRelation
+```
 
-[source, scala]
-----
+`convert`...FIXME
+
+`convert` is used when:
+
+* [RelationConversions](RelationConversions.md) logical rule is executed (for a `InsertIntoStatement` over a [HiveTableRelation](HiveTableRelation.md) or a [HiveTableRelation](HiveTableRelation.md))
+* `OptimizedCreateHiveTableAsSelectCommand` logical command is executed
+
+### <span id="convertToLogicalRelation"> convertToLogicalRelation
+
+```scala
 convertToLogicalRelation(
   relation: HiveTableRelation,
   options: Map[String, String],
   fileFormatClass: Class[_ <: FileFormat],
   fileType: String): LogicalRelation
-----
+```
 
 `convertToLogicalRelation` branches based on whether the input HiveTableRelation.md[HiveTableRelation] is <<convertToLogicalRelation-partitioned, partitioned>> or <<convertToLogicalRelation-not-partitioned, not>>.
 
@@ -42,20 +52,17 @@ In the end, `convertToLogicalRelation` replaces `exprIds` in the ../spark-sql-Lo
 
 NOTE: `convertToLogicalRelation` is used when RelationConversions.md[RelationConversions] logical evaluation rule is executed (with Hive tables in `parquet` as well as `native` and `hive` ORC storage formats).
 
-=== [[inferIfNeeded]] `inferIfNeeded` Internal Method
+### <span id="inferIfNeeded"> inferIfNeeded
 
-[source, scala]
-----
+```scala
 inferIfNeeded(
   relation: HiveTableRelation,
   options: Map[String, String],
   fileFormat: FileFormat,
   fileIndexOpt: Option[FileIndex] = None): CatalogTable
-----
+```
 
 `inferIfNeeded`...FIXME
-
-NOTE: `inferIfNeeded` is used when `HiveMetastoreCatalog` is requested to <<convertToLogicalRelation, convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation>>.
 
 === [[getCached]] `getCached` Internal Method
 

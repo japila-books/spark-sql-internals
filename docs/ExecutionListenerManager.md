@@ -82,7 +82,7 @@ onSuccess(funcName: String, qe: QueryExecution, duration: Long): Unit
 
 * `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has finished with no exceptions)
 
-* `Dataset` is requested to spark-sql-Dataset.md#withAction[withAction]
+* `Dataset` is requested to Dataset.md#withAction[withAction]
 ====
 
 === [[onFailure]] `onFailure` Internal Method
@@ -100,7 +100,7 @@ onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit
 
 * `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has reported an exception)
 
-* `Dataset` is requested to spark-sql-Dataset.md#withAction[withAction]
+* `Dataset` is requested to Dataset.md#withAction[withAction]
 ====
 
 === [[withErrorHandling]] `withErrorHandling` Internal Method

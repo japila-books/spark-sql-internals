@@ -11,7 +11,7 @@
 
 * `CatalogFileIndex` is requested for the CatalogFileIndex.md#filterPartitions[partitions by the given predicate expressions] for a non-partitioned Hive table
 
-* `DataSource` is requested to spark-sql-DataSource.md#createInMemoryFileIndex[createInMemoryFileIndex]
+* `DataSource` is requested to [createInMemoryFileIndex](DataSource.md#createInMemoryFileIndex)
 
 * Spark Structured Streaming's `FileStreamSource` is used
 

@@ -2,7 +2,7 @@
 
 `Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical plans in general).
 
-NOTE: `Command` is executed when a `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
+NOTE: `Command` is executed when a `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
 
 [[output]]
 `Command` has no catalyst/QueryPlan.md#output[output schema] by default.

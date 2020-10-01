@@ -27,13 +27,7 @@ Creates a <<spark-sql-BaseRelation.md#, BaseRelation>> that represents the rows 
 
 The save mode specifies what should happen when the target relation (destination) already exists.
 
-Used when:
-
-* `DataSource` is requested to <<spark-sql-DataSource.md#writeAndRead, write data to a data source per save mode followed by reading the rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> logical command is executed)
-
-* <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#, SaveIntoDataSourceCommand>> logical command is executed
-
-|===
+Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) logical commands are executed
 
 [[implementations]]
 .CreatableRelationProviders

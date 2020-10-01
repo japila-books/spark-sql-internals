@@ -198,9 +198,9 @@ saveTable(
 
 `saveTable` <<getInsertStatement, getInsertStatement>>.
 
-`saveTable` takes the <<spark-sql-JDBCOptions.md#numPartitions, numPartitions>> option and applies <<spark-sql-dataset-operators.md#coalesce, coalesce>> operator to the input `DataFrame` if the number of partitions of its <<spark-sql-Dataset.md#rdd, RDD>> is less than the `numPartitions` option.
+`saveTable` takes the <<spark-sql-JDBCOptions.md#numPartitions, numPartitions>> option and applies <<spark-sql-dataset-operators.md#coalesce, coalesce>> operator to the input `DataFrame` if the number of partitions of its <<Dataset.md#rdd, RDD>> is less than the `numPartitions` option.
 
-In the end, `saveTable` requests the possibly-repartitioned `DataFrame` for its <<spark-sql-Dataset.md#rdd, RDD>> (it may have changed after the <<spark-sql-dataset-operators.md#coalesce, coalesce>> operator) and executes <<savePartition, savePartition>> for every partition (using `RDD.foreachPartition`).
+In the end, `saveTable` requests the possibly-repartitioned `DataFrame` for its <<Dataset.md#rdd, RDD>> (it may have changed after the <<spark-sql-dataset-operators.md#coalesce, coalesce>> operator) and executes <<savePartition, savePartition>> for every partition (using `RDD.foreachPartition`).
 
 NOTE: `saveTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
 

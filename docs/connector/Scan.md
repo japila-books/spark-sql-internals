@@ -4,13 +4,13 @@
 
 ## Contract
 
-### <span id="description"> description
+### <span id="description"> Description
 
 ```java
 String description()
 ```
 
-Used when...FIXME
+Used when `DataSourceV2ScanExecBase` physical operator is requested for a [simpleString](../physical-operators/DataSourceV2ScanExecBase.md#simpleString)
 
 ### <span id="readSchema"> readSchema
 

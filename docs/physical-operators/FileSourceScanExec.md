@@ -1,6 +1,6 @@
 # FileSourceScanExec Leaf Physical Operator
 
-`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (being a <<spark-sql-SparkPlan-DataSourceScanExec.md#, DataSourceScanExec>>) that represents a scan over collections of files (incl. Hive tables).
+`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over collections of files (incl. Hive tables).
 
 `FileSourceScanExec` is <<creating-instance, created>> exclusively for a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md) when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
 
@@ -194,6 +194,18 @@ log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=ALL
 Refer to spark-logging.md[Logging].
 ====
 
+## Creating Instance
+
+`FileSourceScanExec` takes the following when created:
+
+* [[relation]] [HadoopFsRelation](../HadoopFsRelation.md)
+* [[output]] Output schema [attributes](../expressions/Attribute.md)
+* [[requiredSchema]] [Schema](../StructType.md)
+* [[partitionFilters]] `partitionFilters` [expressions](../expressions/Expression.md)
+* [[optionalBucketSet]] Bucket IDs for bucket pruning (`Option[BitSet]`)
+* [[dataFilters]] `dataFilters` [expressions](../expressions/Expression.md)
+* [[tableIdentifier]] Optional `TableIdentifier`
+
 === [[createNonBucketedReadRDD]] Creating RDD for Non-Bucketed Reads -- `createNonBucketedReadRDD` Internal Method
 
 [source, scala]
@@ -228,34 +240,44 @@ In the end, `createNonBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanR
 
 `createNonBucketedReadRDD` is used when `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and neither the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
 
-=== [[selectedPartitions]] `selectedPartitions` Internal Lazily-Initialized Property
+## <span id="inputRDD"> Input RDD
 
-[source, scala]
-----
+```scala
+inputRDD: RDD[InternalRow]
+```
+
+!!! note "lazy value"
+    `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`inputRDD` is an input `RDD` that is used when `FileSourceScanExec` physical operator is requested for [inputRDDs](#inputRDDs) and to [execute](#doExecute).
+
+When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../spark-sql-FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
+
+In case the `HadoopFsRelation` has [bucketing specification](../HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../spark-sql-bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
+
+### <span id="dynamicallySelectedPartitions"> Dynamically Selected Partitions
+
+```scala
+dynamicallySelectedPartitions: Array[PartitionDirectory]
+```
+
+!!! note "lazy value"
+    `dynamicallySelectedPartitions` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`dynamicallySelectedPartitions`...FIXME
+
+`dynamicallySelectedPartitions` is used when `FileSourceScanExec` is requested for [inputRDD](#inputRDD).
+
+### <span id="selectedPartitions"> Selected Partitions
+
+```scala
 selectedPartitions: Seq[PartitionDirectory]
-----
+```
+
+!!! note "lazy value"
+    `selectedPartitions` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 `selectedPartitions`...FIXME
-
-`selectedPartitions` is used when `FileSourceScanExec` is requested for the following:
-
-* [outputPartitioning](#outputPartitioning) and [outputOrdering](#outputOrdering) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) (of the [HadoopFsRelation](#relation)) is defined
-* [metadata](#metadata)
-* [inputRDD](#inputRDD)
-
-## Creating Instance
-
-`FileSourceScanExec` takes the following when created:
-
-* [[relation]] [HadoopFsRelation](../HadoopFsRelation.md)
-* [[output]] Output schema <<spark-sql-Expression-Attribute.md#, attributes>>
-* [[requiredSchema]] [Schema](../StructType.md)
-* [[partitionFilters]] `partitionFilters` <<expressions/Expression.md#, expressions>>
-* [[optionalBucketSet]] Bucket IDs for bucket pruning (`Option[BitSet]`)
-* [[dataFilters]] `dataFilters` <<expressions/Expression.md#, expressions>>
-* [[tableIdentifier]] Optional `TableIdentifier`
-
-`FileSourceScanExec` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[outputPartitioning]] Output Partitioning Scheme -- `outputPartitioning` Attribute
 
@@ -415,23 +437,6 @@ Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the val
 
 With <<supportsBatch, supportsBatch>> off and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> on you should see two more RDDs in the RDD lineage.
 ====
-
-=== [[inputRDD]] Creating Input RDD of Internal Rows -- `inputRDD` Internal Property
-
-[source, scala]
-----
-inputRDD: RDD[InternalRow]
-----
-
-NOTE: `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
-
-`inputRDD` is an input `RDD` of spark-sql-InternalRow.md[internal binary rows] (i.e. `InternalRow`) that is used when `FileSourceScanExec` physical operator is requested for <<inputRDDs, inputRDDs>> and <<doExecute, execution>>.
-
-When created, `inputRDD` requests <<relation, HadoopFsRelation>> to get the underlying [FileFormat](../HadoopFsRelation.md#fileFormat) that is in turn requested to spark-sql-FileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended] (with the input parameters from the properties of <<relation, HadoopFsRelation>> and <<pushedDownFilters, pushedDownFilters>>).
-
-In case <<relation, HadoopFsRelation>> has [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined and [bucketing support is enabled](../spark-sql-bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` <<createBucketedReadRDD, creates a FileScanRDD with bucketing>> (with the bucketing specification, the reader, <<selectedPartitions, selectedPartitions>> and the <<relation, HadoopFsRelation>> itself). Otherwise, `inputRDD` <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
-
-NOTE: <<createBucketedReadRDD, createBucketedReadRDD>> accepts a bucketing specification while <<createNonBucketedReadRDD, createNonBucketedReadRDD>> does not.
 
 === [[outputOrdering]] Output Data Ordering -- `outputOrdering` Attribute
 

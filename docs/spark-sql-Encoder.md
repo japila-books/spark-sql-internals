@@ -22,7 +22,7 @@ NOTE: `Encoder` is also called _"a container of serde expressions in Dataset"_.
 
 NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is spark-sql-ExpressionEncoder.md[ExpressionEncoder].
 
-Encoders are integral (and internal) part of any spark-sql-Dataset.md[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
+Encoders are integral (and internal) part of any Dataset.md[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
 
 NOTE: `Dataset[T]` type is a Scala type constructor with the type parameter `T`. So is `Encoder[T]` that handles serialization and deserialization of `T` to the internal representation.
 

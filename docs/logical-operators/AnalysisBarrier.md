@@ -10,7 +10,7 @@ title: AnalysisBarrier
 
 * `ResolveMissingReferences` logical resolution rule is requested to [resolveExprsAndAddMissingAttrs](../logical-analysis-rules/ResolveMissingReferences.md#resolveExprsAndAddMissingAttrs)
 
-* `Dataset` is <<spark-sql-Dataset.md#planWithBarrier, created>>
+* `Dataset` is <<Dataset.md#planWithBarrier, created>>
 
 * `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveToV1Source, execute a logical command for writing to a data source V1>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save the rows of a structured query (a DataFrame) to a data source>>)
 

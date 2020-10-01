@@ -1,9 +1,7 @@
-title: DataSourceRegister
-
-# DataSourceRegister -- Registering Data Source Format
+# DataSourceRegister &mdash; Registering Data Source Format
 
 [[shortName]]
-`DataSourceRegister` is a <<contract, contract>> to register a spark-sql-DataSource.md[DataSource] provider under `shortName` alias (so it can be spark-sql-DataSource.md#lookupDataSource[looked up] by the alias not its fully-qualified class name).
+`DataSourceRegister` is a <<contract, contract>> to register a [DataSource](DataSource.md) provider under `shortName` alias (so it can be [looked up](DataSource.md#lookupDataSource) by the alias not its fully-qualified class name).
 
 [[contract]]
 [source, scala]

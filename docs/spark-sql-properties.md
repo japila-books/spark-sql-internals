@@ -948,7 +948,7 @@ Use [SQLConf.preferSortMergeJoin](SQLConf.md#preferSortMergeJoin) method to acce
 
 Default: `true`
 
-This is for cases not tracked by spark-sql-SQLExecution.md[SQL execution], when a `Dataset` is converted to an RDD either using spark-sql-Dataset.md#rdd[rdd] operation or [QueryExecution](QueryExecution.md#toRdd), and then the returned RDD is used to invoke actions on it.
+This is for cases not tracked by spark-sql-SQLExecution.md[SQL execution], when a `Dataset` is converted to an RDD either using Dataset.md#rdd[rdd] operation or [QueryExecution](QueryExecution.md#toRdd), and then the returned RDD is used to invoke actions on it.
 
 This config is deprecated and will be removed in 3.0.0.
 

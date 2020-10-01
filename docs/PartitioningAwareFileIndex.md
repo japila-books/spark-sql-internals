@@ -121,25 +121,18 @@ NOTE: `sizeInBytes` is part of the FileIndex.md#sizeInBytes[FileIndex] contract.
 
 `sizeInBytes` simply sums up the length (in bytes) of <<allFiles, all the files>>.
 
-=== [[allFiles]] `allFiles` Method
+## <span id="allFiles"> allFiles
 
-[source, scala]
-----
+```scala
 allFiles(): Seq[FileStatus]
-----
+```
 
 `allFiles`...FIXME
 
-[NOTE]
-====
 `allFiles` is used when:
 
-* `DataSource` is requested to spark-sql-DataSource.md#getOrInferFileFormatSchema[getOrInferFileFormatSchema], spark-sql-DataSource.md#resolveRelation[resolveRelation]
-
-* `PartitioningAwareFileIndex` is requested to <<listFiles, listFiles>>, <<inputFiles, inputFiles>>, and <<sizeInBytes, sizeInBytes>>
-
-* Spark Structured Streaming's `FileStreamSource` is used
-====
+* `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](DataSource.md#resolveRelation)
+* `PartitioningAwareFileIndex` is requested to [listFiles](#listFiles), [inputFiles](#inputFiles), and [sizeInBytes](#sizeInBytes)
 
 === [[inferPartitioning]] `inferPartitioning` Method
 

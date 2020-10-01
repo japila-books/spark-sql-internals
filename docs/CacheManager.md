@@ -39,7 +39,37 @@ A `CachedData` is removed when `CacheManager` is requested to:
 
 All `CachedData` removed (cleared) when `CacheManager` is requested to [clearCache](#clearCache)
 
-## <span id="refreshFileIndexIfNecessary"> refreshFileIndexIfNecessary
+## <span id="recacheByPath"> Recaching By Path
+
+```scala
+recacheByPath(
+  spark: SparkSession,
+  resourcePath: String): Unit
+recacheByPath(
+  spark: SparkSession,
+  resourcePath: Path,
+  fs: FileSystem): Unit
+```
+
+`recacheByPath`...FIXME
+
+`recacheByPath` is used when:
+
+* `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath)
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) command is executed
+
+### <span id="lookupAndRefresh"> lookupAndRefresh
+
+```scala
+lookupAndRefresh(
+  plan: LogicalPlan,
+  fs: FileSystem,
+  qualifiedPath: Path): Boolean
+```
+
+`lookupAndRefresh`...FIXME
+
+### <span id="refreshFileIndexIfNecessary"> refreshFileIndexIfNecessary
 
 ```scala
 refreshFileIndexIfNecessary(
@@ -114,9 +144,9 @@ cacheQuery(
   storageLevel: StorageLevel = MEMORY_AND_DISK): Unit
 ----
 
-`cacheQuery` adds the spark-sql-Dataset.md#logicalPlan[analyzed logical plan] of the input <<spark-sql-Dataset.md#, Dataset>> to the <<cachedData, cachedData>> internal registry of cached queries.
+`cacheQuery` adds the [analyzed logical plan](Dataset.md#logicalPlan) of the input [Dataset](Dataset.md) to the <<cachedData, cachedData>> internal registry of cached queries.
 
-Internally, `cacheQuery` requests the `Dataset` for the spark-sql-Dataset.md#logicalPlan[analyzed logical plan] and creates a spark-sql-LogicalPlan-InMemoryRelation.md#apply[InMemoryRelation] with the following properties:
+Internally, `cacheQuery` requests the `Dataset` for the [analyzed logical plan](Dataset.md#logicalPlan) and creates a spark-sql-LogicalPlan-InMemoryRelation.md#apply[InMemoryRelation] with the following properties:
 
 * spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed] (enabled by default)
 
@@ -179,25 +209,6 @@ recacheByPlan(spark: SparkSession, plan: LogicalPlan): Unit
 
 NOTE: `recacheByPlan` is used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>>.
 
-## <span id="recacheByPath"> recacheByPath Method
-
-```scala
-recacheByPath(
-  spark: SparkSession,
-  resourcePath: String): Unit
-recacheByPath(
-  spark: SparkSession,
-  resourcePath: Path,
-  fs: FileSystem): Unit
-```
-
-`recacheByPath`...FIXME
-
-`recacheByPath` is used when:
-
-* `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath).
-* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) command is executed
-
 === [[useCachedData]] Replacing Segments of Logical Query Plan With Cached Data -- `useCachedData` Method
 
 [source, scala]
@@ -208,19 +219,6 @@ useCachedData(plan: LogicalPlan): LogicalPlan
 `useCachedData`...FIXME
 
 `useCachedData` is used when `QueryExecution` is requested for a [cached logical query plan](QueryExecution.md#withCachedData).
-
-## <span id="lookupAndRefresh"> lookupAndRefresh Internal Method
-
-```scala
-lookupAndRefresh(
-  plan: LogicalPlan,
-  fs: FileSystem,
-  qualifiedPath: Path): Boolean
-```
-
-`lookupAndRefresh`...FIXME
-
-`lookupAndRefresh` is used when `CacheManager` is requested to [recacheByPath](#recacheByPath).
 
 ## Logging
 

@@ -134,7 +134,7 @@ In the end, `checkAnalysis` spark-sql-LogicalPlan.md#setAnalyzed[marks the entir
 
 `checkAnalysis` is used when:
 
-* `QueryExecution` is requested to [create an analyzed logical plan and checks its correctness](QueryExecution.md#assertAnalyzed) (which happens mostly when a `Dataset` is spark-sql-Dataset.md#creating-instance[created])
+* `QueryExecution` is requested to [create an analyzed logical plan and checks its correctness](QueryExecution.md#assertAnalyzed) (which happens mostly when a `Dataset` is Dataset.md#creating-instance[created])
 
 * `ExpressionEncoder` does spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
 

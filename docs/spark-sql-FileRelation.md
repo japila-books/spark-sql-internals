@@ -22,7 +22,7 @@ trait FileRelation {
 |
 The list of files that will be read when scanning the relation.
 
-Used exclusively when `Dataset` is requested to spark-sql-Dataset.md#inputFiles[inputFiles]
+Used exclusively when `Dataset` is requested to Dataset.md#inputFiles[inputFiles]
 |===
 
 [[implementations]]

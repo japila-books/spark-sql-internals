@@ -290,7 +290,7 @@ scala> :type spark.sessionState.optimizer
 org.apache.spark.sql.catalyst.optimizer.Optimizer
 ```
 
-You can access the optimized logical plan of a structured query (as a [Dataset](../spark-sql-Dataset.md)) using [Dataset.explain](../spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+You can access the optimized logical plan of a structured query (as a [Dataset](../Dataset.md)) using [Dataset.explain](../spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 ```text
 // sample structured query

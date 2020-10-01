@@ -1,8 +1,6 @@
-title: Dataset
+# Dataset &mdash; Structured Query with Data Encoder
 
-# Dataset -- Structured Query with Data Encoder
-
-*Dataset* is a strongly-typed data structure in Spark SQL that represents a structured query.
+**Dataset** is a strongly-typed data structure in Spark SQL that represents a structured query.
 
 NOTE: A structured query can be written using SQL or <<spark-sql-dataset-operators.md#, Dataset API>>.
 
@@ -342,7 +340,7 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 
 * `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
 
-* `DataSource` is requested to <<spark-sql-DataSource.md#writeAndRead, writeAndRead>> (for a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>)
+* `DataSource` is requested to [writeAndRead](DataSource.md#writeAndRead) (for a [CreatableRelationProvider](spark-sql-CreatableRelationProvider.md))
 
 * `FrequentItems` is requested to `singlePassFreqItems`
 

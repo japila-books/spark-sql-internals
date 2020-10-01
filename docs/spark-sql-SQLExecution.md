@@ -85,7 +85,7 @@ NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 ====
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to <<spark-sql-Dataset.md#withNewExecutionId, Dataset.withNewExecutionId>> and <<spark-sql-Dataset.md#withAction, withAction>>
+* `Dataset` is requested to <<Dataset.md#withNewExecutionId, Dataset.withNewExecutionId>> and <<Dataset.md#withAction, withAction>>
 
 * `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a command]
 

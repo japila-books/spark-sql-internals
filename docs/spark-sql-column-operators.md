@@ -2,7 +2,7 @@ title: Column Operators
 
 # Column API -- Column Operators
 
-Column API is a <<methods, set of operators>> to work with values in a column (of a <<spark-sql-Dataset.md#, Dataset>>).
+Column API is a <<methods, set of operators>> to work with values in a column (of a <<Dataset.md#, Dataset>>).
 
 [[methods]]
 [[operators]]

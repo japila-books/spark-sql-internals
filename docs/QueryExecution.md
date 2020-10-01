@@ -23,7 +23,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 `QueryExecution` is created when:
 
-* [Dataset.ofRows](spark-sql-Dataset.md#ofRows) and [Dataset.selectUntyped](spark-sql-Dataset.md#selectUntyped) are executed
+* [Dataset.ofRows](Dataset.md#ofRows) and [Dataset.selectUntyped](Dataset.md#selectUntyped) are executed
 * `KeyValueGroupedDataset` is requested to [aggUntyped](spark-sql-KeyValueGroupedDataset.md#aggUntyped)
 * `CommandUtils` utility is requested to [computeColumnStats](spark-sql-CommandUtils.md#computeColumnStats) and [computePercentiles](spark-sql-CommandUtils.md#computePercentiles)
 * `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
@@ -34,7 +34,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 ## Accessing QueryExecution
 
-`QueryExecution` is part of `Dataset` using [queryExecution](spark-sql-Dataset.md#queryExecution) attribute.
+`QueryExecution` is part of `Dataset` using [queryExecution](Dataset.md#queryExecution) attribute.
 
 ```text
 val ds: Dataset[Long] = ...

@@ -2,7 +2,7 @@ title: KeyValueGroupedDataset
 
 # KeyValueGroupedDataset -- Typed Grouping
 
-`KeyValueGroupedDataset` is an experimental interface to <<operators, calculate aggregates over groups of objects>> in a typed spark-sql-Dataset.md[Dataset].
+`KeyValueGroupedDataset` is an experimental interface to <<operators, calculate aggregates over groups of objects>> in a typed Dataset.md[Dataset].
 
 NOTE: spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] is used for untyped ``Row``-based aggregates.
 

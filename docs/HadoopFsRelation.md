@@ -16,14 +16,14 @@
 
 `HadoopFsRelation` is created when:
 
-* `DataSource` is requested to [resolve a relation](spark-sql-DataSource.md#resolveRelation) for [file-based data sources](spark-sql-FileFormat.md)
+* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) for [file-based data sources](spark-sql-FileFormat.md)
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation) (for [RelationConversions](hive/RelationConversions.md) logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
 
 ## <span id="bucketSpec"> Bucketing Specification
 
 `HadoopFsRelation` can be given a [bucketing specification](spark-sql-BucketSpec.md) when [created](#creating-instance).
 
-The bucketing specification is defined for [non-streaming file-based data sources](spark-sql-DataSource.md) and used for the following:
+The bucketing specification is defined for [non-streaming file-based data sources](DataSource.md) and used for the following:
 
 * [Output partitioning scheme](physical-operators/FileSourceScanExec.md#outputPartitioning) and [output data ordering](physical-operators/FileSourceScanExec.md#outputOrdering) of the corresponding [FileSourceScanExec](physical-operators/FileSourceScanExec.md) physical operator
 

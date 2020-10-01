@@ -188,11 +188,11 @@ col(colName: String): Column
 
 Internally, `col` branches off per the input column name.
 
-If the column name is `*` (a star), `col` simply creates a <<spark-sql-Column.md#apply, Column>> with <<spark-sql-Expression-ResolvedStar.md#, ResolvedStar>> expression (with the <<catalyst/QueryPlan.md#output, schema output attributes>> of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](spark-sql-Dataset.md#queryExecution)).
+If the column name is `*` (a star), `col` simply creates a <<spark-sql-Column.md#apply, Column>> with <<spark-sql-Expression-ResolvedStar.md#, ResolvedStar>> expression (with the <<catalyst/QueryPlan.md#output, schema output attributes>> of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](Dataset.md#queryExecution)).
 
 Otherwise, `col` uses <<colRegex, colRegex>> untyped transformation when <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled.
 
-In the case when the column name is not `*` and <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is disabled, `col` creates a <<spark-sql-Column.md#apply, Column>> with the column name <<spark-sql-Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>).
+In the case when the column name is not `*` and <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is disabled, `col` creates a <<spark-sql-Column.md#apply, Column>> with the column name <<Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>).
 
 === [[colRegex]] `colRegex` Untyped Transformation
 
@@ -211,7 +211,7 @@ Internally, `colRegex` matches the input column name to different regular expres
 
 . For column names with quotes with a qualifier, `colRegex` simply creates a <<spark-sql-Column.md#apply, Column>> with a <<spark-sql-Expression-UnresolvedRegex.md#, UnresolvedRegex>> (with a table specified)
 
-. For other column names, `colRegex` (behaves like <<col, col>> and) creates a <<spark-sql-Column.md#apply, Column>> with the column name <<spark-sql-Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>)
+. For other column names, `colRegex` (behaves like <<col, col>> and) creates a <<spark-sql-Column.md#apply, Column>> with the column name <<Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>)
 
 === [[crossJoin]] `crossJoin` Untyped Transformation
 

@@ -116,7 +116,7 @@ partitions: Seq[FilePartition]
 
 `partitions`...FIXME
 
-`partitions` is used when...FIXME
+`partitions` is used when `FileScan` is requested to [planInputPartitions](#planInputPartitions).
 
 ## <span id="planInputPartitions"> planInputPartitions
 

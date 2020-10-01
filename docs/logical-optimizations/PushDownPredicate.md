@@ -6,7 +6,7 @@
 
 `PushDownPredicate` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
 
-When you execute spark-sql-Dataset.md#where[where] or spark-sql-Dataset.md#filter[filter] operators right after [loading a dataset](../DataFrameReader.md#load), Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
+When you execute Dataset.md#where[where] or Dataset.md#filter[filter] operators right after [loading a dataset](../DataFrameReader.md#load), Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
 
 This optimization is called *filter pushdown* or *predicate pushdown* and aims at pushing down the filtering to the "bare metal", i.e. a data source engine. That is to increase the performance of queries since the filtering is performed at the very low level rather than dealing with the entire dataset after it has been loaded to Spark's memory and perhaps causing memory issues.
 

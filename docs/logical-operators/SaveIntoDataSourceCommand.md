@@ -1,10 +1,8 @@
-title: SaveIntoDataSourceCommand
-
 # SaveIntoDataSourceCommand Logical Command
 
-`SaveIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> that, when <<run, executed>>, FIXME.
+`SaveIntoDataSourceCommand` is a [logical command](RunnableCommand.md) that, when <<run, executed>>, FIXME.
 
-`SaveIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSource` is requested to <<spark-sql-DataSource.md#planForWriting, create a logical command for writing>> (to a <<spark-sql-CreatableRelationProvider.md#implementations, CreatableRelationProvider>> data source).
+`SaveIntoDataSourceCommand` is <<creating-instance, created>> exclusively when `DataSource` is requested to [create a logical command for writing](../DataSource.md#planForWriting) (to a <<spark-sql-CreatableRelationProvider.md#implementations, CreatableRelationProvider>> data source).
 
 [[innerChildren]]
 `SaveIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the [inner nodes (that should be shown as an inner nested tree of this node)](../catalyst/TreeNode.md#innerChildren).

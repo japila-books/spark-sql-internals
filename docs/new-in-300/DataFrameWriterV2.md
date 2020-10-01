@@ -18,9 +18,9 @@ org.apache.spark.sql.DataFrameWriterV2[Long]
 DataFrameWriterV2 takes the following to be created:
 
 * Table Name
-* [Dataset](../spark-sql-Dataset.md)
+* [Dataset](../Dataset.md)
 
-DataFrameWriterV2 is created when `Dataset` is requested to [writeTo](../spark-sql-Dataset.md#writeTo).
+DataFrameWriterV2 is created when `Dataset` is requested to [writeTo](../Dataset.md#writeTo).
 
 ## create
 

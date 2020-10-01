@@ -120,7 +120,7 @@ resolve(
 
 ## Accessing Logical Query Plan of Structured Query
 
-In order to get the [logical plan](../QueryExecution.md#logical) of a structured query you should use the <<spark-sql-Dataset.md#queryExecution, QueryExecution>>.
+In order to get the [logical plan](../QueryExecution.md#logical) of a structured query you should use the <<Dataset.md#queryExecution, QueryExecution>>.
 
 ```text
 scala> :type q
@@ -183,7 +183,7 @@ val analyzedPlan = qe.analyzed
 
 ## Converting Logical Plan to Dataset
 
-Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../spark-sql-Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../spark-sql-Dataset.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../spark-sql-RowEncoder.md).
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../Dataset.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../spark-sql-RowEncoder.md).
 
 ## <span id="childrenResolved"> childrenResolved
 

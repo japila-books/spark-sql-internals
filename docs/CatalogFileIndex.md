@@ -9,7 +9,7 @@
 
 * `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
 
-* `DataSource` is requested to spark-sql-DataSource.md#resolveRelation[create a BaseRelation for a FileFormat]
+* `DataSource` is requested to [create a BaseRelation for a FileFormat](DataSource.md#resolveRelation)
 
 === [[creating-instance]] Creating CatalogFileIndex Instance
 

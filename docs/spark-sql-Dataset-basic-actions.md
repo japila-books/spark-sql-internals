@@ -152,7 +152,7 @@ Marks the `Dataset` to be <<spark-sql-caching-and-persistence.md#, persisted>> t
 
 Internally, `persist` simply request the `CacheManager` to [cache the structured query](CacheManager.md#cacheQuery).
 
-NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<spark-sql-Dataset.md#sparkSession, SparkSession>> (of the Dataset).
+NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<Dataset.md#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|
@@ -310,7 +310,7 @@ NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] log
 
 [NOTE]
 ====
-`explain` uses Dataset's spark-sql-Dataset.md#sparkSession[SparkSession] to SparkSession.md#sessionState[access the current `SessionState`].
+`explain` uses Dataset's Dataset.md#sparkSession[SparkSession] to SparkSession.md#sessionState[access the current `SessionState`].
 ====
 
 In the end, `explain` goes over the `InternalRow` records and converts them to lines to display to console.
@@ -346,7 +346,7 @@ hint(
 
 `hint` operator is part of [Hint Framework](new-and-noteworthy/hint-framework.md) to specify a **hint** (by `name` and `parameters`) for a `Dataset`.
 
-Internally, `hint` simply attaches spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the spark-sql-Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
+Internally, `hint` simply attaches spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
 
 ```text
 val ds = spark.range(3)
@@ -383,15 +383,15 @@ localCheckpoint(eager: Boolean): Dataset[T]
 checkpoint(eager: Boolean, reliableCheckpoint: Boolean): Dataset[T]
 ----
 
-`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) to [generate an RDD of internal binary rows](QueryExecution.md#toRdd) (`internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
+`checkpoint` requests Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) to [generate an RDD of internal binary rows](QueryExecution.md#toRdd) (`internalRdd`) and then requests the RDD to make a copy of all the rows (by adding a `MapPartitionsRDD`).
 
 Depending on `reliableCheckpoint` flag, `checkpoint` marks the RDD for (reliable) checkpointing (`true`) or local checkpointing (`false`).
 
 With `eager` flag on, `checkpoint` counts the number of records in the RDD (by executing `RDD.count`) that gives the effect of immediate eager checkpointing.
 
-`checkpoint` requests spark-sql-Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for [optimized physical query plan](QueryExecution.md#executedPlan) (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
+`checkpoint` requests Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for [optimized physical query plan](QueryExecution.md#executedPlan) (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
 
-In the end, `checkpoint` spark-sql-Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+In the end, `checkpoint` Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
 NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.md#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.md#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.md#localCheckpoint, localCheckpoint>>.
 
@@ -443,7 +443,7 @@ toDF(): DataFrame
 toDF(colNames: String*): DataFrame
 ----
 
-`toDF` converts a spark-sql-Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
+`toDF` converts a Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
 
 Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) with the encoder being spark-sql-RowEncoder.md[RowEncoder].
 

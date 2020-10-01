@@ -52,7 +52,7 @@ The available methods in `DataStreamReader` are similar to `DataFrameReader`.
 
 Spark SQL can save data to external storage systems like files, Hive tables and JDBC databases through spark-sql-DataFrameWriter.md[DataFrameWriter] interface.
 
-You use spark-sql-Dataset.md#write[write] method on a `Dataset` to access `DataFrameWriter`.
+You use Dataset.md#write[write] method on a `Dataset` to access `DataFrameWriter`.
 
 [source, scala]
 ----
@@ -62,9 +62,9 @@ val ints: Dataset[Int] = (0 to 5).toDS
 val writer: DataFrameWriter[Int] = ints.write
 ----
 
-`DataFrameWriter` is an interface to persist a spark-sql-Dataset.md[Datasets] to an external storage system in a batch fashion.
+`DataFrameWriter` is an interface to persist a Dataset.md[Datasets] to an external storage system in a batch fashion.
 
-You can access spark-sql-streaming-DataStreamWriter.md[DataStreamWriter] for writing streaming datasets through spark-sql-Dataset.md#writeStream[Dataset.writeStream] method.
+You can access spark-sql-streaming-DataStreamWriter.md[DataStreamWriter] for writing streaming datasets through Dataset.md#writeStream[Dataset.writeStream] method.
 
 [source, scala]
 ----

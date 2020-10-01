@@ -32,9 +32,9 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` creates a <<spark-sql-DataSource.md#apply, DataSource>> and requests it to <<spark-sql-DataSource.md#resolveRelation, resolve itself>> (i.e. create a <<spark-sql-BaseRelation.md#, BaseRelation>>).
+`run` [creates a DataSource](../DataSource.md#apply) and requests it to [resolve itself](../DataSource.md#resolveRelation) (and create a [BaseRelation](../spark-sql-BaseRelation.md)).
 
-`run` then requests the input `SparkSession` to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<spark-sql-Dataset.md#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
+`run` then requests the input `SparkSession` to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<Dataset.md#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
 
 Depending on the <<global, global>> flag, `run` requests the `SessionCatalog` to [createGlobalTempView](../SessionCatalog.md#createGlobalTempView) (`global` flag is on) or [createTempView](../SessionCatalog.md#createTempView) (`global` flag is off).
 
@@ -51,7 +51,7 @@ Hive data source can only be used with tables, you can't use it with CREATE TEMP
 * [[userSpecifiedSchema]] Optional user-defined schema ([StructType](../StructType.md))
 * [[replace]] `replace` flag
 * [[global]] `global` flag
-* [[provider]] Name of the [data source provider](../spark-sql-DataSource.md)
+* [[provider]] Name of the [data source provider](../DataSource.md)
 * [[options]] Options (as `Map[String, String]`)
 
 ## <span id="argString"> argString

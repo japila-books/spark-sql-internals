@@ -2,7 +2,7 @@ title: Dataset API
 
 # Dataset API &mdash; Dataset Operators
 
-Dataset API is a [set of operators](#methods) with typed and untyped transformations, and actions to work with a structured query (as a [Dataset](spark-sql-Dataset.md)) as a whole.
+Dataset API is a [set of operators](#methods) with typed and untyped transformations, and actions to work with a structured query (as a [Dataset](Dataset.md)) as a whole.
 
 ## <span id="methods"><span id="operators"> Dataset Operators (Transformations and Actions)
 

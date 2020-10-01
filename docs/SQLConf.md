@@ -92,7 +92,7 @@ a| [[defaultSizeInBytes]] Used when:
 
 *  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
 
-* `DataSource` spark-sql-DataSource.md#resolveRelation[creates a HadoopFsRelation for FileFormat data source] (and builds a CatalogFileIndex when no table statistics are available)
+* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a CatalogFileIndex when no table statistics are available)
 
 * `BaseRelation` is requested for spark-sql-BaseRelation.md#sizeInBytes[an estimated size of this relation] (in bytes)
 
@@ -166,7 +166,7 @@ a| [[manageFilesourcePartitions]][[HIVE_MANAGE_FILESOURCE_PARTITIONS]] Used when
 
 * `DDLUtils` utility is used to spark-sql-DDLUtils.md#verifyPartitionProviderIsHive[verifyPartitionProviderIsHive]
 
-* `DataSource` is requested to <<spark-sql-DataSource.md#resolveRelation, resolve a relation>> (for file-based data source tables and creates a `HadoopFsRelation`)
+* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
 
 * `FileStatusCache` is requested to `getOrCreate`
 

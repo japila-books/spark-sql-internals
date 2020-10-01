@@ -49,7 +49,7 @@ output: Seq[Attribute]
 
 `Repartition` is created for the following:
 
-* [Dataset.coalesce](../spark-sql-Dataset.md#coalesce) and [Dataset.repartition](../spark-sql-Dataset.md#repartition) operators (with [shuffle](#shuffle) disabled and enabled, respectively)
+* [Dataset.coalesce](../Dataset.md#coalesce) and [Dataset.repartition](../Dataset.md#repartition) operators (with [shuffle](#shuffle) disabled and enabled, respectively)
 * `COALESCE` and `REPARTITION` hints (via [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical analysis rule, with [shuffle](#shuffle) disabled and enabled, respectively)
 
 `Repartition` is planned to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) or [CoalesceExec](../physical-operators/CoalesceExec.md) physical operators (based on [shuffle](#shuffle) flag).
@@ -73,7 +73,7 @@ output: Seq[Attribute]
 
 `RepartitionByExpression` is created for the following:
 
-* [Dataset.repartition](../spark-sql-Dataset.md#repartition) and [Dataset.repartitionByRange](../spark-sql-Dataset.md#repartitionByRange) operators
+* [Dataset.repartition](../Dataset.md#repartition) and [Dataset.repartitionByRange](../Dataset.md#repartitionByRange) operators
 * `COALESCE`, `REPARTITION` and `REPARTITION_BY_RANGE` hints (via [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical analysis rule)
 * `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses (via [SparkSqlAstBuilder](../sql/SparkSqlAstBuilder.md#withRepartitionByExpression))
 

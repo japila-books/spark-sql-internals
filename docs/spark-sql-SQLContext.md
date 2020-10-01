@@ -157,7 +157,7 @@ clearCache(): Unit
 
 === [[implicits]] Implicits -- SQLContext.implicits
 
-The `implicits` object is a helper class with methods to convert  objects into spark-sql-Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many spark-sql-Encoder.md[Encoders] for "primitive" types as well as the collections thereof.
+The `implicits` object is a helper class with methods to convert  objects into Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many spark-sql-Encoder.md[Encoders] for "primitive" types as well as the collections thereof.
 
 [NOTE]
 ====
@@ -188,7 +188,7 @@ createDataset[T: Encoder](data: Seq[T]): Dataset[T]
 createDataset[T: Encoder](data: RDD[T]): Dataset[T]
 ----
 
-`createDataset` family of methods creates a spark-sql-Dataset.md[Dataset] from a collection of elements of type `T`, be it a regular Scala `Seq` or Spark's `RDD`.
+`createDataset` family of methods creates a Dataset.md[Dataset] from a collection of elements of type `T`, be it a regular Scala `Seq` or Spark's `RDD`.
 
 It requires that there is an spark-sql-Encoder.md[encoder] in scope.
 

@@ -151,7 +151,7 @@ Internally, `toDF` branches off per group type.
 
 CAUTION: FIXME
 
-[[toDF-PivotType]] For `PivotType`, `toDF` spark-sql-Dataset.md#ofRows[creates a DataFrame] with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
+[[toDF-PivotType]] For `PivotType`, `toDF` Dataset.md#ofRows[creates a DataFrame] with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
 
 [NOTE]
 ====

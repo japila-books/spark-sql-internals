@@ -81,7 +81,7 @@ run(sparkSession: SparkSession): Seq[Row]
 | [[AnalyzeTableCommand]]
 
 | CacheTableCommand
-a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` spark-sql-Dataset.md#ofRows[creates a DataFrame] followed by spark-sql-dataset-operators.md#createTempView[registering a temporary view] for the optional `query`.
+a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` Dataset.md#ofRows[creates a DataFrame] followed by spark-sql-dataset-operators.md#createTempView[registering a temporary view] for the optional `query`.
 
 [source, scala]
 ----
@@ -192,7 +192,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 |
 
 | SaveIntoDataSourceCommand
-| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to spark-sql-DataSource.md#write[write a DataFrame to a data source per save mode].
+| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to [write a DataFrame to a data source per save mode](../DataSource.md#write).
 
 Used exclusively when `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#save[save a DataFrame to a data source].
 

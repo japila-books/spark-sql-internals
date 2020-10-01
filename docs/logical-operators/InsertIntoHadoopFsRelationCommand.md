@@ -1,17 +1,15 @@
-title: InsertIntoHadoopFsRelationCommand
-
 # InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.md#, logical command>> that writes the result of executing a <<query, query>> to an <<outputPath, output path>> in the given <<fileFormat, FileFormat>> (and <<creating-instance, other properties>>).
+`InsertIntoHadoopFsRelationCommand` is a [logical command](DataWritingCommand.md) that writes the result of executing a <<query, query>> to an <<outputPath, output path>> in the given <<fileFormat, FileFormat>> (and <<creating-instance, other properties>>).
 
 `InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
 
-* `DataSource` is requested to spark-sql-DataSource.md#planForWritingFileFormat[plan for writing to a FileFormat-based data source] for the following:
-** spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand] logical command
-** spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command
-** spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator with DataSource V1 data sources
+* `DataSource` is requested to [plan for writing to a FileFormat-based data source](../DataSource.md#planForWritingFileFormat) for the following:
+    * [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command
+    * [InsertIntoDataSourceDirCommand](InsertIntoDataSourceDirCommand.md) logical command
+    * [DataFrameWriter.save](../spark-sql-DataFrameWriter.md#save) operator with DataSource V1 data sources
 
-* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a InsertIntoTable.md[InsertIntoTable] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves an [InsertIntoTable](InsertIntoTable.md) logical operator with a [HadoopFsRelation](../HadoopFsRelation.md))
 
 [[partitionOverwriteMode]][[PartitionOverwriteMode]]
 `InsertIntoHadoopFsRelationCommand` uses *partitionOverwriteMode* option that overrides <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>> property for <<spark-sql-dynamic-partition-inserts.md#, dynamic partition inserts>>.
@@ -37,7 +35,7 @@ title: InsertIntoHadoopFsRelationCommand
 ====
 <<staticPartitions, staticPartitions>> may hold zero or more partitions as follows:
 
-* Always empty when <<creating-instance, created>> when `DataSource` is requested to <<spark-sql-DataSource.md#planForWritingFileFormat, planForWritingFileFormat>>
+* Always empty when <<creating-instance, created>> when `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
 
 * Possibly with partitions when <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule is applied to an <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a [HadoopFsRelation](../HadoopFsRelation.md) relation
 

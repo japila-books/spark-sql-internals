@@ -2,7 +2,7 @@
 
 [[creating-instance]]
 [[expr]]
-`Column` represents a column in a spark-sql-Dataset.md[Dataset] that holds a Catalyst expressions/Expression.md[Expression] that produces a value per row.
+`Column` represents a column in a Dataset.md[Dataset] that holds a Catalyst expressions/Expression.md[Expression] that produces a value per row.
 
 NOTE: A `Column` is a value generator for every row in a `Dataset`.
 
@@ -51,7 +51,7 @@ scala> val cityCol = column("city")
 cityCol: org.apache.spark.sql.Column = city
 ----
 
-Finally, you can create a bound `Column` using the `Dataset` the column is supposed to be part of using spark-sql-Dataset.md#apply[Dataset.apply] factory method or spark-sql-Dataset.md#col[Dataset.col] operator.
+Finally, you can create a bound `Column` using the `Dataset` the column is supposed to be part of using Dataset.md#apply[Dataset.apply] factory method or Dataset.md#col[Dataset.col] operator.
 
 NOTE: You can use bound `Column` references only with the ``Dataset``s they have been created from.
 
@@ -155,7 +155,7 @@ scala> df.withColumn("polish", lit(1)).show
 +------+------+
 ----
 
-You can add new columns do a `Dataset` using spark-sql-Dataset.md#withColumn[withColumn] method.
+You can add new columns do a `Dataset` using Dataset.md#withColumn[withColumn] method.
 
 [source, scala]
 ----

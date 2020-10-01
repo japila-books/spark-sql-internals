@@ -17,7 +17,7 @@ Project Tungsten aims at substantially reducing the usage of JVM objects (and th
 
 Tungsten uses the compact storage format called [UnsafeRow](spark-sql-UnsafeRow.md) for data representation that further reduces memory footprint.
 
-Since [Datasets](spark-sql-Dataset.md) have known [schema](spark-sql-schema.md), Tungsten properly and in a more compact and efficient way lays out the objects on its own. That brings benefits similar to using extensions written in low-level and hardware-aware languages like C or assembler.
+Since [Datasets](Dataset.md) have known [schema](spark-sql-schema.md), Tungsten properly and in a more compact and efficient way lays out the objects on its own. That brings benefits similar to using extensions written in low-level and hardware-aware languages like C or assembler.
 
 It is possible immediately with the data being already serialized (that further reduces or completely avoids serialization between JVM object representation and Spark's internal one).
 

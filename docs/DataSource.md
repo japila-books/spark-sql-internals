@@ -1,6 +1,4 @@
-title: DataSource
-
-# DataSource -- Pluggable Data Provider Framework
+# DataSource &mdash; Pluggable Data Provider Framework
 
 `DataSource` paves the way for *Pluggable Data Provider Framework* (_Data Source API_) in Spark SQL.
 
@@ -387,18 +385,17 @@ Expected exactly one path to be specified, but got: [allPaths]
 * <<planForWriting, Creating a logical command for writing>> (for spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator with DataSource V1 data sources)
 ====
 
-=== [[getOrInferFileFormatSchema]] `getOrInferFileFormatSchema` Internal Method
+## <span id="getOrInferFileFormatSchema"> getOrInferFileFormatSchema
 
-[source, scala]
-----
+```scala
 getOrInferFileFormatSchema(
   format: FileFormat,
   fileIndex: Option[InMemoryFileIndex] = None): (StructType, StructType)
-----
+```
 
 `getOrInferFileFormatSchema`...FIXME
 
-NOTE: `getOrInferFileFormatSchema` is used when `DataSource` is requested for the <<sourceSchema, sourceSchema>> and to <<resolveRelation, resolve a non-streaming FileFormat-based relation>>.
+`getOrInferFileFormatSchema` is used when `DataSource` is requested for the [sourceSchema](#sourceSchema) and to [resolve a non-streaming FileFormat-based relation](#resolveRelation).
 
 === [[checkAndGlobPathIfNecessary]] `checkAndGlobPathIfNecessary` Internal Method
 

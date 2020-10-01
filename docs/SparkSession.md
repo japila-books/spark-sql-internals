@@ -119,7 +119,7 @@ Internally, `version` uses `spark.SPARK_VERSION` value that is the `version` pro
 emptyDataset[T: Encoder]: Dataset[T]
 ```
 
-`emptyDataset` creates an empty [Dataset](spark-sql-Dataset.md) (assuming that future records being of type `T`).
+`emptyDataset` creates an empty [Dataset](Dataset.md) (assuming that future records being of type `T`).
 
 ```text
 scala> val strings = spark.emptyDataset[String]
@@ -141,7 +141,7 @@ createDataset[T : Encoder](
   data: Seq[T]): Dataset[T]
 ```
 
-`createDataset` creates a [Dataset](spark-sql-Dataset.md) from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
+`createDataset` creates a [Dataset](Dataset.md) from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
 
 ```text
 scala> val one = spark.createDataset(Seq(1))
@@ -174,7 +174,7 @@ scala> one.show
 
 Internally, `createDataset` first looks up the implicit [ExpressionEncoder](spark-sql-ExpressionEncoder.md) in scope to access the ``AttributeReference``s (of the [schema](spark-sql-schema.md)).
 
-The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of spark-sql-InternalRow.md[InternalRows]. With the references and rows, `createDataset` returns a spark-sql-Dataset.md[Dataset] with a spark-sql-LogicalPlan-LocalRelation.md[`LocalRelation` logical query plan].
+The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of spark-sql-InternalRow.md[InternalRows]. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a spark-sql-LogicalPlan-LocalRelation.md[`LocalRelation` logical query plan].
 
 ## <span id="range"> Creating Dataset With Single Long Column
 
@@ -185,7 +185,7 @@ range(start: Long, end: Long, step: Long): Dataset[java.lang.Long]
 range(start: Long, end: Long, step: Long, numPartitions: Int): Dataset[java.lang.Long]
 ```
 
-`range` method family create a [Dataset](spark-sql-Dataset.md) of `Long` numbers.
+`range` method family create a [Dataset](Dataset.md) of `Long` numbers.
 
 ```text
 scala> spark.range(start = 0, end = 4, step = 2, numPartitions = 5).show
@@ -403,7 +403,7 @@ internalCreateDataFrame(
   isStreaming: Boolean = false): DataFrame
 ```
 
-`internalCreateDataFrame` creates a [DataFrame](spark-sql-Dataset.md#ofRows) with [LogicalRDD](logical-operators/LogicalRDD.md).
+`internalCreateDataFrame` creates a [DataFrame](Dataset.md#ofRows) with [LogicalRDD](logical-operators/LogicalRDD.md).
 
 `internalCreateDataFrame` is used when:
 

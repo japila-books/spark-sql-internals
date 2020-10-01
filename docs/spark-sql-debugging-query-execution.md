@@ -1,6 +1,6 @@
 # Debugging Query Execution
 
-`debug` package object contains <<methods, tools>> for *debugging query execution*, i.e. a full analysis of structured queries (as <<spark-sql-Dataset.md#, Datasets>>).
+`debug` package object contains <<methods, tools>> for *debugging query execution*, i.e. a full analysis of structured queries (as <<Dataset.md#, Datasets>>).
 
 [[methods]]
 .Debugging Query Execution Tools (debug Methods)
@@ -62,7 +62,7 @@ TIP: Read up on https://docs.scala-lang.org/overviews/core/implicit-classes.html
 debug(): Unit
 ----
 
-`debug` requests the <<spark-sql-Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the [optimized physical query plan](QueryExecution.md#executedPlan).
+`debug` requests the <<Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
 `debug` [transforms](catalyst/TreeNode.md#transform) the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.md#, DebugExec>> physical operator for every physical operator.
 
@@ -104,7 +104,7 @@ Tuples output: 0
 debugCodegen(): Unit
 ----
 
-`debugCodegen` requests the [QueryExecution](spark-sql-Dataset.md#queryExecution) (of the [structured query](#query)) for the [optimized physical query plan](QueryExecution.md#executedPlan).
+`debugCodegen` requests the [QueryExecution](Dataset.md#queryExecution) (of the [structured query](#query)) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
 In the end, `debugCodegen` simply <<codegenString, codegenString>> the query plan and prints it out to the standard output.
 
@@ -129,7 +129,7 @@ Generated code:
 
 [NOTE]
 ====
-`debugCodegen` is equivalent to using `debug` interface of the spark-sql-Dataset.md#queryExecution[QueryExecution].
+`debugCodegen` is equivalent to using `debug` interface of the Dataset.md#queryExecution[QueryExecution].
 
 [source, scala]
 ----

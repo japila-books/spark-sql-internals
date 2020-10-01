@@ -70,9 +70,8 @@ Infers (returns) the [schema](StructType.md) of the given files (as Hadoop's htt
 
 Used when:
 
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#inferIfNeeded[inferIfNeeded] (when `RelationConversions` logical evaluation rule is requested to hive/RelationConversions.md#convert[convert a HiveTableRelation to a LogicalRelation] for `parquet`, `native` and `hive` ORC storage formats)
-
-* `DataSource` is requested to <<spark-sql-DataSource.md#getOrInferFileFormatSchema, getOrInferFileFormatSchema>> and <<spark-sql-DataSource.md#resolveRelation, resolveRelation>>
+* `HiveMetastoreCatalog` is requested to [inferIfNeeded](hive/HiveMetastoreCatalog.md#inferIfNeeded)
+* `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](DataSource.md#resolveRelation)
 
 | isSplitable
 a| [[isSplitable]]

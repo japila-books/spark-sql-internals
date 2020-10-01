@@ -257,7 +257,7 @@ nav:
           - spark-sql-CSVFileFormat.md
           - spark-sql-JsonFileFormat.md
           - spark-sql-TextFileFormat.md
-        - spark-sql-JsonDataSource.md
+        - JsonDataSource: spark-sql-JsonDataSource.md
         - HadoopFsRelation: HadoopFsRelation.md
         - FileIndex:
           - FileIndex.md
@@ -358,7 +358,7 @@ nav:
         - spark-sql-DataWritingSparkTask.md
         - spark-sql-DataSourceV2Utils.md
       - Data Source API V1:
-        - spark-sql-DataSource.md
+        - DataSource: DataSource.md
         - spark-sql-datasource-custom-formats.md
         - Relation Providers:
           - spark-sql-CreatableRelationProvider.md
@@ -749,6 +749,7 @@ nav:
       - spark-sql-CommandUtils.md
     - spark-sql-catalyst-dsl.md
   - New in Spark 3.0.0:
+    - FileScanBuilder: FileScanBuilder.md
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:
@@ -783,7 +784,7 @@ nav:
     - Developing Applications:
       - spark-sql-fundamentals-spark-application-development.md
       - Dataset:
-        - spark-sql-Dataset.md
+        - Dataset: Dataset.md
         - Encoder:
           - spark-sql-Encoder.md
           - spark-sql-Encoders.md

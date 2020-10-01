@@ -25,7 +25,7 @@ You can join two datasets using the <<join-operators, join operators>> with an o
 | Untyped ``Row``-based join
 
 | <<joinWith, joinWith>>
-| spark-sql-Dataset.md[Dataset]
+| Dataset.md[Dataset]
 | Used for a type-preserving join with two output columns for records for which a join condition holds
 |===
 
@@ -194,7 +194,7 @@ scala> left.join(right, Seq("id"), "leftanti").explain
    +- LocalTableScan [id#60]
 ----
 
-Internally, `join(right: Dataset[_])` spark-sql-Dataset.md#ofRows[creates a DataFrame] with a condition-less spark-sql-LogicalPlan-Join.md[Join] logical operator (in the current SparkSession.md[SparkSession]).
+Internally, `join(right: Dataset[_])` Dataset.md#ofRows[creates a DataFrame] with a condition-less spark-sql-LogicalPlan-Join.md[Join] logical operator (in the current SparkSession.md[SparkSession]).
 
 NOTE: `join(right: Dataset[_])` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less spark-sql-LogicalPlan-Join.md[Join] operator with two child logical plans of the both sides of the join.
 
@@ -222,7 +222,7 @@ See https://issues.apache.org/jira/browse/SPARK-6231[[SPARK-6231\] Join on two t
 crossJoin(right: Dataset[_]): DataFrame
 ----
 
-`crossJoin` joins two spark-sql-Dataset.md[Datasets] using <<cross, Cross>> join type with no condition.
+`crossJoin` joins two Dataset.md[Datasets] using <<cross, Cross>> join type with no condition.
 
 NOTE: `crossJoin` creates an explicit cartesian join that can be very expensive without an extra filter (that can be pushed down).
 
@@ -235,7 +235,7 @@ joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T,
 ----
 <1> inner equi-join
 
-`joinWith` creates a spark-sql-Dataset.md[Dataset] with two columns `_1` and `_2` that each contain records for which `condition` holds.
+`joinWith` creates a Dataset.md[Dataset] with two columns `_1` and `_2` that each contain records for which `condition` holds.
 
 [source, scala]
 ----

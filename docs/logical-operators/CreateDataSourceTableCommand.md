@@ -28,7 +28,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 NOTE: `run` uses the input `SparkSession` to SparkSession.md#sessionState[access SessionState] that in turn is used to SessionState.md#catalog[access the current SessionCatalog].
 
-Internally, `run` spark-sql-DataSource.md#resolveRelation[creates a BaseRelation] to access the table's schema.
+Internally, `run` [creates a BaseRelation](../DataSource.md#resolveRelation) to access the table's schema.
 
 CAUTION: FIXME
 

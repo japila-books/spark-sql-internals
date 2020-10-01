@@ -53,7 +53,7 @@ assert(spark.sessionState.sqlParser.isInstanceOf[SparkSqlParser])
 `SparkSqlParser` is used to translate an expression to the corresponding [Column](../spark-sql-Column.md) in the following:
 
 * [expr](../spark-sql-functions.md#expr) standard function
-* Dataset operators: [selectExpr](../spark-sql-Dataset.md#selectExpr), [filter](../spark-sql-Dataset.md#filter), [where](../spark-sql-Dataset.md#where)
+* Dataset operators: [selectExpr](../Dataset.md#selectExpr), [filter](../Dataset.md#filter), [where](../Dataset.md#where)
 
 ```text
 scala> expr("token = 'hello'")

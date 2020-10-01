@@ -14,11 +14,11 @@ title: LocalRelation
 
 * `CatalogImpl` is requested for a [Dataset from DefinedByConstructorParams data](../CatalogImpl.md#makeDataset)
 
-* `Dataset` is requested for the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.md#, Command>> logical operators)
+* `Dataset` is requested for the <<Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.md#, Command>> logical operators)
 
 * `StatFunctions` is requested to <<spark-sql-StatFunctions.md#crossTabulate, crossTabulate>> and <<spark-sql-StatFunctions.md#summary, generate summary statistics of Dataset (as DataFrame)>>
 
-NOTE: `Dataset` is <<spark-sql-Dataset.md#isLocal, local>> when the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> is exactly an instance of `LocalRelation`.
+NOTE: `Dataset` is <<Dataset.md#isLocal, local>> when the <<Dataset.md#logicalPlan, analyzed logical plan>> is exactly an instance of `LocalRelation`.
 
 [source, scala]
 ----

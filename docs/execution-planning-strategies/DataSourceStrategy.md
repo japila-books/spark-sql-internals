@@ -149,16 +149,11 @@ translateFilter(predicate: Expression): Option[Filter]
 
 NOTE: The Catalyst expressions and their corresponding data source filter predicates have the same names _in most cases_ but belong to different Scala packages, i.e. `org.apache.spark.sql.catalyst.expressions` and `org.apache.spark.sql.sources`, respectively.
 
-[NOTE]
-====
 `translateFilter` is used when:
 
-* `FileSourceScanExec` is spark-sql-SparkPlan-FileSourceScanExec.md#creating-instance[created] (and initializes spark-sql-SparkPlan-FileSourceScanExec.md#pushedDownFilters[pushedDownFilters])
-
-* `DataSourceStrategy` is requested to <<selectFilters, selectFilters>>
-
-* `PushDownOperatorsToDataSource` logical optimization is spark-sql-SparkOptimizer-PushDownOperatorsToDataSource.md#apply[executed] (for spark-sql-LogicalPlan-DataSourceV2Relation.md[DataSourceV2Relation] leaf operators with a spark-sql-SupportsPushDownFilters.md[SupportsPushDownFilters] data source reader)
-====
+* [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) is created (and initializes [pushedDownFilters](../physical-operators/FileSourceScanExec.md#pushedDownFilters))
+* `DataSourceStrategy` is requested to [selectFilters](#selectFilters)
+* [PushDownOperatorsToDataSource](../logical-optimizations/PushDownOperatorsToDataSource.md) logical optimization is executed (for [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) leaf operators with a [SupportsPushDownFilters](../spark-sql-SupportsPushDownFilters.md) data source reader)
 
 === [[toCatalystRDD]] RDD Conversion (Converting RDD of Rows to Catalyst RDD of InternalRows) -- `toCatalystRDD` Internal Method
 

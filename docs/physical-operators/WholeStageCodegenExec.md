@@ -182,7 +182,7 @@ When <<doExecute, executed>>, `WholeStageCodegenExec` gives <<pipelineTime, pipe
 .WholeStageCodegenExec in web UI (Details for Query)
 image::images/spark-sql-WholeStageCodegenExec-webui.png[align="center"]
 
-TIP: Use spark-sql-Dataset.md#explain[explain] operator to know the physical plan of a query and find out whether or not `WholeStageCodegen` is in use.
+TIP: Use Dataset.md#explain[explain] operator to know the physical plan of a query and find out whether or not `WholeStageCodegen` is in use.
 
 [source, scala]
 ----

@@ -50,7 +50,7 @@ title: Regular Functions
 broadcast[T](df: Dataset[T]): Dataset[T]
 ----
 
-`broadcast` function marks the input spark-sql-Dataset.md[Dataset] as small enough to be used in broadcast join.
+`broadcast` function marks the input Dataset.md[Dataset] as small enough to be used in broadcast join.
 
 TIP: Read up on spark-sql-joins-broadcast.md[Broadcast Joins (aka Map-Side Joins)].
 

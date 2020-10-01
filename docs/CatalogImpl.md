@@ -197,7 +197,7 @@ makeDataset[T <: DefinedByConstructorParams](
 
 `makeDataset` creates an spark-sql-ExpressionEncoder.md#apply[ExpressionEncoder] (from spark-sql-ExpressionEncoder.md#DefinedByConstructorParams[DefinedByConstructorParams]) and spark-sql-ExpressionEncoder.md#toRow[encodes] elements of the input `data` to <<spark-sql-InternalRow.md#, internal binary rows>>.
 
-`makeDataset` then creates a spark-sql-LogicalPlan-LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and spark-sql-Dataset.md#creating-instance[creates] the result `Dataset`.
+`makeDataset` then creates a spark-sql-LogicalPlan-LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and Dataset.md#creating-instance[creates] the result `Dataset`.
 
 NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, list databases>>, <<listTables, tables>>, <<listFunctions, functions>> and <<listColumns, columns>>
 

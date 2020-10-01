@@ -538,7 +538,7 @@ textFile(path: String): Dataset[String]
 textFile(paths: String*): Dataset[String]
 ----
 
-`textFile` loads one or many text files into a typed spark-sql-Dataset.md[Dataset[String\]].
+`textFile` loads one or many text files into a typed Dataset.md[Dataset[String\]].
 
 [source, scala]
 ----
@@ -553,7 +553,7 @@ val lines: Dataset[String] = spark
 
 NOTE: `textFile` are similar to <<text, text>> family of methods in that they both read text files but `text` methods return untyped `DataFrame` while `textFile` return typed `Dataset[String]`.
 
-Internally, `textFile` passes calls on to <<text, text>> method and spark-sql-Dataset.md#select[selects] the only `value` column before it applies `Encoders.STRING` spark-sql-Encoder.md[encoder].
+Internally, `textFile` passes calls on to <<text, text>> method and Dataset.md#select[selects] the only `value` column before it applies `Encoders.STRING` spark-sql-Encoder.md[encoder].
 
 === [[creating-instance]] Creating DataFrameReader Instance
 
@@ -570,7 +570,7 @@ Internally, `textFile` passes calls on to <<text, text>> method and spark-sql-Da
 loadV1Source(paths: String*): DataFrame
 ----
 
-`loadV1Source` creates a spark-sql-DataSource.md#apply[DataSource] and requests it to spark-sql-DataSource.md#resolveRelation[resolve the underlying relation (as a BaseRelation)].
+`loadV1Source` [creates a DataSource](DataSource.md#apply) and requests it to [resolve the underlying relation (as a BaseRelation)](DataSource.md#resolveRelation).
 
 In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
 
@@ -588,7 +588,7 @@ load(
 
 `load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped spark-sql-DataFrame.md[DataFrame].
 
-Internally, `load` spark-sql-DataSource.md#lookupDataSource[lookupDataSource] for the <<source, source>>. `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
+Internally, `load` [lookupDataSource](DataSource.md#lookupDataSource) for the <<source, source>>. `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
 
 For a "DataSource V2" data source, `load`...FIXME
 
@@ -652,7 +652,7 @@ Hive data source can only be used with tables, you can not read files of Hive da
 ```
 ====
 
-Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using <<spark-sql-DataSource.md#lookupDataSource, DataSource>> utility.
+Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using [DataSource](DataSource.md#lookupDataSource) utility.
 
 NOTE: `source` is used exclusively when `DataFrameReader` is requested to <<load, "load" data (as a DataFrame)>> (explicitly or using <<loadV1Source, loadV1Source>>).
 
@@ -671,7 +671,7 @@ Used when...FIXME
 | userSpecifiedSchema
 | [[userSpecifiedSchema]] Optional *used-specified schema* (default: `None`, i.e. undefined)
 
-Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a spark-sql-DataSource.md#userSpecifiedSchema[DataSource]), and load a data using <<json, json>> and <<csv, csv>> file formats
+Set when `DataFrameReader` is requested to <<schema, set a schema>>, <<load, load a data from an external data source>>, <<loadV1Source, loadV1Source>> (when creating a [DataSource](DataSource.md#userSpecifiedSchema)), and load a data using <<json, json>> and <<csv, csv>> file formats
 
 Used when `DataFrameReader` is requested to <<assertNoSpecifiedSchema, assertNoSpecifiedSchema>> (while loading data using <<jdbc, jdbc>>, <<table, table>> and <<textFile, textFile>>)
 

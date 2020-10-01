@@ -275,11 +275,11 @@ scala> q.show
 
 Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.md#parseTableIdentifier, parse the input table name>>.
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
 
 `saveAsTable` then requests the `SessionCatalog` to [check whether the table exists or not](SessionCatalog.md#tableExists).
 
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<spark-sql-Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
+NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
 
 In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
 
@@ -314,13 +314,13 @@ In the end, `saveAsTable` branches off per whether the table exists or not and t
 save(): Unit
 ----
 
-`save` saves the rows of a structured query (a <<spark-sql-Dataset.md#, Dataset>>) to a data source.
+`save` saves the rows of a structured query (a <<Dataset.md#, Dataset>>) to a data source.
 
-Internally, `save` uses `DataSource` to <<spark-sql-DataSource.md#lookupDataSource, look up the class of the requested data source>> (for the <<source, source>> option and the <<SessionState.md#conf, SQLConf>>).
+Internally, `save` uses `DataSource` to [look up the class of the requested data source](DataSource.md#lookupDataSource) (for the [source](#source) option and the [SQLConf](SessionState.md#conf)).
 
 [NOTE]
 ====
-`save` uses <<spark-sql-Dataset.md#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
+`save` uses <<Dataset.md#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
 
 [source, scala]
 ----
@@ -561,13 +561,13 @@ NOTE: `getBucketSpec` is used exclusively when `DataFrameWriter` is requested to
 createTable(tableIdent: TableIdentifier): Unit
 ----
 
-`createTable` <<spark-sql-DataSource.md#buildStorageFormatFromOptions, builds a CatalogStorageFormat>> per <<extraOptions, extraOptions>>.
+`createTable` [builds a CatalogStorageFormat](DataSource.md#buildStorageFormatFromOptions) per [extraOptions](#extraOptions).
 
 `createTable` assumes the table being spark-sql-CatalogTable.md#CatalogTableType[external] when spark-sql-CatalogStorageFormat.md#locationUri[location URI] of `CatalogStorageFormat` is defined, and spark-sql-CatalogTable.md#CatalogTableType[managed] otherwise.
 
 `createTable` creates a <<spark-sql-CatalogTable.md#, CatalogTable>> (with the <<spark-sql-CatalogTable.md#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
 
-In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<spark-sql-Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
+In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
 
 NOTE: `createTable` is used when `DataFrameWriter` is requested to <<saveAsTable, saveAsTable>>.
 
@@ -593,20 +593,18 @@ NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save,
 saveToV1Source(): Unit
 ----
 
-`saveToV1Source` creates a <<spark-sql-DataSource.md#apply, DataSource>> (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the <<spark-sql-DataSource.md#planForWriting, logical command for writing>> (with the <<mode, mode>> and the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> of the structured query).
+`saveToV1Source` creates a [DataSource](DataSource.md#apply) (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the [logical command for writing](DataSource.md#planForWriting) (with the <<mode, mode>> and the <<Dataset.md#logicalPlan, analyzed logical plan>> of the structured query).
 
-NOTE: While requesting the <<spark-sql-Dataset.md#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
+NOTE: While requesting the <<Dataset.md#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
 
 In the end, `saveToV1Source` <<runCommand, runs the logical command for writing>>.
 
-[NOTE]
-====
-The <<spark-sql-DataSource.md#planForWriting, logical command for writing>> can be one of the following:
+!!! note
+    The [logical command for writing](DataSource.md#planForWriting) can be one of the following:
 
-* A <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#, SaveIntoDataSourceCommand>> for <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProviders>>
+  * A [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) for [CreatableRelationProviders](spark-sql-CreatableRelationProvider.md)
 
-* An <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> for <<spark-sql-FileFormat.md#, FileFormats>>
-====
+    * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](spark-sql-FileFormat.md)
 
 NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.md#, DataSourceV2>> writers with `WriteSupport`).
 

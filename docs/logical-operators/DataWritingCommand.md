@@ -49,9 +49,8 @@ Executes the command to write query data (the result of executing SparkPlan.md[s
 
 Used when:
 
-* `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.md#sideEffectResult, sideEffectResult>>
-
-* `DataSource` is requested to <<spark-sql-DataSource.md#writeAndRead, write data to a data source per save mode followed by reading rows back>> (when <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#run, CreateDataSourceTableAsSelectCommand>> logical command is executed)
+* `DataWritingCommandExec` physical operator is requested for the [sideEffectResult](../physical-operators/DataWritingCommandExec.md#sideEffectResult)
+* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed
 |===
 
 [[children]]

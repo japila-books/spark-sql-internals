@@ -32,7 +32,7 @@ abstract class BaseRelation {
 | [[sqlContext]] [SQLContext](spark-sql-SQLContext.md)
 |===
 
-`BaseRelation` is "created" when `DataSource` is requested to spark-sql-DataSource.md#resolveRelation[resolve a relation].
+`BaseRelation` is "created" when `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation).
 
 `BaseRelation` is transformed into a `DataFrame` when `SparkSession` is requested to SparkSession.md#baseRelationToDataFrame[create a DataFrame].
 

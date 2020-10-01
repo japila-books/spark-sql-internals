@@ -1,12 +1,10 @@
-title: SchemaRelationProvider
-
-# SchemaRelationProvider -- Relation Providers With Mandatory User-Defined Schema
+# SchemaRelationProvider &mdash; Relation Providers With Mandatory User-Defined Schema
 
 `SchemaRelationProvider` is the <<contract, contract>> of <<implementations, BaseRelation providers>> that <<createRelation, require a user-defined schema while creating a relation>>.
 
-The requirement of specifying a user-defined schema is enforced when `DataSource` is requested for a <<spark-sql-DataSource.md#resolveRelation, BaseRelation>> for a given data source format. If not specified, `DataSource` throws a `AnalysisException`:
+The requirement of specifying a user-defined schema is enforced when `DataSource` is requested for a [BaseRelation](DataSource.md#resolveRelation) for a given data source format. If not specified, `DataSource` throws a `AnalysisException`:
 
-```
+```text
 A schema needs to be specified when using [className].
 ```
 
@@ -32,7 +30,7 @@ trait SchemaRelationProvider {
 | `createRelation`
 | [[createRelation]] Creates a spark-sql-BaseRelation.md[BaseRelation] for the user-defined schema
 
-Used exclusively when `DataSource` is requested for a <<spark-sql-DataSource.md#resolveRelation, BaseRelation>> for a given data source format
+Used exclusively when `DataSource` is requested for a [BaseRelation](DataSource.md#resolveRelation) for a given data source format
 |===
 
 [[implementations]]

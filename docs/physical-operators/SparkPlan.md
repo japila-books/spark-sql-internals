@@ -9,7 +9,7 @@
 ![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/spark-sql-SparkPlan-webui-physical-plan.png)
 
 ??? note "High-Level Dataset API"
-    A structured query can be expressed using Spark SQL's high-level [Dataset](../spark-sql-Dataset.md) API for Scala, Java, Python, R or good ol' SQL.
+    A structured query can be expressed using Spark SQL's high-level [Dataset](../Dataset.md) API for Scala, Java, Python, R or good ol' SQL.
 
 A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.md) that may have zero or more [child physical operators](../catalyst/TreeNode.md#children).
 
@@ -29,7 +29,7 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
     q.explain
     ```
 
-    You may also access the execution plan of a `Dataset` using its [queryExecution](../spark-sql-Dataset.md#queryExecution) property.
+    You may also access the execution plan of a `Dataset` using its [queryExecution](../Dataset.md#queryExecution) property.
 
     ```scala
     val q = // your query here
@@ -437,7 +437,7 @@ executeCollect(): Array[InternalRow]
 
 `executeCollect` is used when:
 
-* `Dataset` is requested for the spark-sql-Dataset.md#logicalPlan[logical plan] (being a single spark-sql-LogicalPlan-Command.md[Command] or their `Union`)
+* `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (being a single spark-sql-LogicalPlan-Command.md[Command] or their `Union`)
 
 * spark-sql-dataset-operators.md#explain[explain] and spark-sql-dataset-operators.md#count[count] operators are executed
 

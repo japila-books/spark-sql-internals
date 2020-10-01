@@ -75,7 +75,7 @@ except(
   other: Dataset[T]): Dataset[T]
 ----
 
-Internally, `exceptAll` spark-sql-Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag enabled).
+Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag enabled).
 
 | exceptAll
 a| [[exceptAll]]
@@ -88,7 +88,7 @@ exceptAll(
 
 (*New in 2.4.0*)
 
-Internally, `exceptAll` spark-sql-Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag disabled).
+Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag disabled).
 
 | <<filter, filter>>
 a|
@@ -549,7 +549,7 @@ repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
 <1> Uses <<spark-sql-properties.md#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
 
-`repartitionByRange` simply <<spark-sql-Dataset.md#withTypedPlan, creates a Dataset>> with a [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
+`repartitionByRange` simply <<Dataset.md#withTypedPlan, creates a Dataset>> with a [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
 
 ```text
 val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
@@ -632,7 +632,7 @@ sortWithinPartitions(sortExprs: Column*): Dataset[T]
 sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 ----
 
-`sortWithinPartitions` simply calls the internal <<spark-sql-Dataset.md#sortInternal, sortInternal>> method with the `global` flag disabled (`false`).
+`sortWithinPartitions` simply calls the internal <<Dataset.md#sortInternal, sortInternal>> method with the `global` flag disabled (`false`).
 
 === [[toJSON]] `toJSON` Typed Transformation
 
@@ -763,7 +763,7 @@ where(conditionExpr: String): Dataset[T]
 withWatermark(eventTime: String, delayThreshold: String): Dataset[T]
 ----
 
-Internally, `withWatermark` creates a `Dataset` with `EventTimeWatermark` logical plan for spark-sql-Dataset.md#isStreaming[streaming Datasets].
+Internally, `withWatermark` creates a `Dataset` with `EventTimeWatermark` logical plan for Dataset.md#isStreaming[streaming Datasets].
 
 NOTE: `withWatermark` uses `EliminateEventTimeWatermark` logical rule to eliminate `EventTimeWatermark` logical plan for non-streaming batch `Datasets`.
 
