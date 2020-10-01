@@ -988,7 +988,7 @@
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSource/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSource/</loc>
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2440,6 +2440,10 @@
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileScanBuilder/</loc>
+     <lastmod>2020-10-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Block/</loc>
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
@@ -2548,7 +2552,7 @@
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Dataset/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Dataset/</loc>
      <lastmod>2020-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
