@@ -1,6 +1,4 @@
-title: DataFrame
-
-# DataFrame -- Dataset of Rows with RowEncoder
+# DataFrame &mdash; Dataset of Rows with RowEncoder
 
 Spark SQL introduces a tabular functional data abstraction called *DataFrame*. It is designed to ease developing Spark applications for processing large amount of structured tabular data on Spark infrastructure.
 
@@ -79,13 +77,13 @@ NOTE: Your DataFrames can also be type-safe and moreover further improve their p
 
 You can enforce types on spark-sql-Row.md[generic rows] and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
 
-=== [[features]] Features of DataFrame
+## Features of DataFrame
 
 A `DataFrame` is a collection of "generic" spark-sql-Row.md[Row] instances (as `RDD[Row]`) and a spark-sql-schema.md[schema].
 
-NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and spark-sql-StructType.md[StructType].
+NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and [StructType](StructType.md).
 
-=== SQLContext, spark, and Spark shell
+## SQLContext, spark, and Spark shell
 
 You use https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.SQLContext[org.apache.spark.sql.SQLContext] to build DataFrames and execute SQL queries.
 

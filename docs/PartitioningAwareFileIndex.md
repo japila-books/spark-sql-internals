@@ -68,7 +68,7 @@ Used when `PartitioningAwareFileIndex` is requested for the <<partitionSchema, p
 
 * [[sparkSession]] SparkSession.md[SparkSession]
 * [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined spark-sql-StructType.md[schema]
+* [[userSpecifiedSchema]] Optional user-defined [schema](StructType.md)
 * [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
 
 `PartitioningAwareFileIndex` initializes the <<internal-properties, internal properties>>.
@@ -97,7 +97,7 @@ partitionSchema: StructType
 
 NOTE: `partitionSchema` is part of the FileIndex.md#partitionSchema[FileIndex] contract.
 
-`partitionSchema` simply returns the partition columns (as a spark-sql-StructType.md[StructType]) of the <<partitionSpec, partition specification>>.
+`partitionSchema` simply returns the partition columns (as a [StructType](StructType.md)) of the <<partitionSpec, partition specification>>.
 
 === [[inputFiles]] `inputFiles` Method
 

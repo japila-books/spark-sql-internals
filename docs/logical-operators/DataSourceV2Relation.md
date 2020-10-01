@@ -11,7 +11,7 @@
 * [[output]] Output <<spark-sql-Expression-AttributeReference.md#, attributes>> (`Seq[AttributeReference]`)
 * [[options]] Options (`Map[String, String]`)
 * [[tableIdent]] Optional `TableIdentifier` (default: undefined, i.e. `None`)
-* [[userSpecifiedSchema]] User-defined <<spark-sql-StructType.md#, schema>> (default: undefined, i.e. `None`)
+* [[userSpecifiedSchema]] User-defined [schema](../StructType.md) (default: undefined, i.e. `None`)
 
 When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>> with a <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator (possibly under the <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>> operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
 

@@ -57,7 +57,7 @@ Used when...FIXME
 * <span id="sparkSession"> [SparkSession](../../SparkSession.md)
 * <span id="options"> Case-Insensitive Map
 * <span id="paths"> Paths
-* <span id="userSpecifiedSchema"> Optional user-defined [schema](../../spark-sql-StructType.md) (`Option[StructType]`)
+* <span id="userSpecifiedSchema"> Optional user-defined [schema](../../StructType.md) (`Option[StructType]`)
 
 `FileTable` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileTables](#implementations).
 

@@ -38,7 +38,7 @@ a| [[readSchema]]
 StructType readSchema()
 ```
 
-<<spark-sql-StructType.md#, Schema>> for reading (loading) data from a data source
+[Schema](StructType.md) for reading (loading) data from a data source
 
 Used when:
 

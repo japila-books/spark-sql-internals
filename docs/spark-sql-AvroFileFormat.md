@@ -62,7 +62,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of the <<spark-sql-FileFormat.md#inferSchema, FileFormat Contract>> to infer (return) the <<spark-sql-StructType.md#, schema>> of the given files.
+NOTE: `inferSchema` is part of the <<spark-sql-FileFormat.md#inferSchema, FileFormat Contract>> to infer (return) the [schema](StructType.md) of the given files.
 
 `inferSchema`...FIXME
 

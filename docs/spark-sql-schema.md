@@ -1,10 +1,8 @@
-title: Schema
-
-# Schema -- Structure of Data
+# Schema &mdash; Structure of Data
 
 A *schema* is the description of the structure of your data (which together create a spark-sql-Dataset.md[Dataset] in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
 
-A schema is described using spark-sql-StructType.md[StructType] which is a collection of spark-sql-StructField.md[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
+A schema is described using [StructType](StructType.md) which is a collection of spark-sql-StructField.md[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
 
 `StructType` and `StructField` belong to the `org.apache.spark.sql.types` package.
 
@@ -43,10 +41,9 @@ val schemaWithMap = StructType(
   StructField("map", createMapType(LongType, StringType), false) :: Nil)
 ----
 
-spark-sql-StructType.md[StructType] offers <<printTreeString, printTreeString>> that makes presenting the schema more user-friendly.
+[StructType](StructType.md) offers [printTreeString](#printTreeString) that makes presenting the schema more user-friendly.
 
-[source, scala]
-----
+```text
 scala> schemaTyped.printTreeString
 root
  |-- a: integer (nullable = true)
@@ -74,7 +71,7 @@ scala> println(schema1.prettyJson)
    "metadata" : { }
  } ]
 }
-----
+```
 
 As of Spark 2.0, you can describe the schema of your strongly-typed datasets using spark-sql-Encoder.md[encoders].
 

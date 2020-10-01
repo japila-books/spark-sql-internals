@@ -2,7 +2,7 @@
 
 `CatalystSqlParser` is an [AbstractSqlParser](AbstractSqlParser.md) that uses [AstBuilder](AstBuilder.md) for parsing SQL statements.
 
-```
+```text
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
 import org.apache.spark.sql.internal.SQLConf
 val catalystSqlParser = new CatalystSqlParser(SQLConf.get)
@@ -10,9 +10,9 @@ scala> :type catalystSqlParser.astBuilder
 org.apache.spark.sql.catalyst.parser.AstBuilder
 ```
 
-`CatalystSqlParser` is used to translate spark-sql-DataType.md[DataTypes] from their canonical string representation (e.g. when spark-sql-schema.md#add[adding fields to a schema] or spark-sql-Column.md#cast[casting column to a different data type]) or spark-sql-StructType.md[StructTypes].
+`CatalystSqlParser` is used to translate spark-sql-DataType.md[DataTypes] from their canonical string representation (e.g. when spark-sql-schema.md#add[adding fields to a schema] or spark-sql-Column.md#cast[casting column to a different data type]) or [StructTypes](../StructType.md).
 
-```
+```text
 import org.apache.spark.sql.types.StructType
 scala> val struct = new StructType().add("a", "int")
 struct: org.apache.spark.sql.types.StructType = StructType(StructField(a,IntegerType,true))
@@ -23,7 +23,7 @@ asInt: org.apache.spark.sql.Column = CAST((token = hello) AS INT)
 
 When parsing, you should see INFO messages in the logs:
 
-```
+```text
 Parsing command: int
 ```
 

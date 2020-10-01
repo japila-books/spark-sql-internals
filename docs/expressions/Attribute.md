@@ -1,10 +1,8 @@
-title: Attribute
-
-# Attribute -- Base of Leaf Named Expressions
+# Attribute &mdash; Base of Leaf Named Expressions
 
 `Attribute` is the <<contract, base>> of <<extensions, leaf named expressions>>.
 
-NOTE: catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the spark-sql-StructType.md[schema] of the query (it represents).
+NOTE: catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the [schema](../StructType.md) of the query (it represents).
 
 [[contract]]
 [source, scala]

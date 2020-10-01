@@ -87,7 +87,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 * [[sparkSession]] SparkSession.md[SparkSession]
 * [[className]] Fully-qualified class name or an alias of the data source provider (aka _data source format_)
 * [[paths]] Data paths (default: empty)
-* [[userSpecifiedSchema]] (optional) User-specified spark-sql-StructType.md[schema] (default: undefined)
+* [[userSpecifiedSchema]] (optional) User-specified [schema](StructType.md) (default: undefined)
 * [[partitionColumns]] (optional) Names of the partition columns (default: empty)
 * [[bucketSpec]] (optional) spark-sql-BucketSpec.md[Bucketing specification] (default: undefined)
 * [[options]] (optional) Options (default: empty)

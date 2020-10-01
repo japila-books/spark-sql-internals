@@ -8,7 +8,7 @@ NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `E
 
 `RowEncoder` is an `object` in Scala with <<apply, apply>> and other factory methods.
 
-`RowEncoder` can create `ExpressionEncoder[Row]` from a spark-sql-StructType.md[schema] (using <<apply, apply method>>).
+`RowEncoder` can create `ExpressionEncoder[Row]` from a [schema](StructType.md) (using <<apply, apply method>>).
 
 [source, scala]
 ----

@@ -148,7 +148,7 @@ trait Generator extends Expression {
 | Description
 
 | [[elementSchema]] `elementSchema`
-| spark-sql-StructType.md[Schema] of the elements to be generated
+| [Schema](../StructType.md) of the elements to be generated
 
 | [[eval]] `eval`
 |

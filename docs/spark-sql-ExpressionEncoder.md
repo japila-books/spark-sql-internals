@@ -68,7 +68,7 @@ CAUTION: FIXME
 
 `ExpressionEncoder` takes the following when created:
 
-* [[schema]] spark-sql-StructType.md[Schema]
+* [[schema]] [Schema](StructType.md)
 * [[flat]] Flag whether `ExpressionEncoder` is flat or not
 * [[serializer]] Serializer expressions/Expression.md[expressions] (to convert objects of type `T` to internal rows)
 * [[deserializer]] Deserializer expressions/Expression.md[expression] (to convert internal rows to objects of type `T`)

@@ -190,10 +190,10 @@ NOTE: The prefix for variable names for `HashAggregateExec` operators in [Codege
 | [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
 
 | bufferSchema
-| [[bufferSchema]] <<spark-sql-StructType.md#fromAttributes, StructType>> built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
+| [[bufferSchema]] [StructType](../StructType.md#fromAttributes) built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
 
 | groupingKeySchema
-| [[groupingKeySchema]] <<spark-sql-StructType.md#fromAttributes, StructType>> built from the <<groupingAttributes, groupingAttributes>>
+| [[groupingKeySchema]] [StructType](../StructType.md#fromAttributes) built from the <<groupingAttributes, groupingAttributes>>
 
 | groupingAttributes
 | [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
@@ -301,7 +301,7 @@ NOTE: `generateResultFunction` is used exclusively when `HashAggregateExec` phys
 supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 ----
 
-`supportsAggregate` firstly <<spark-sql-StructType.md#fromAttributes, creates the schema>> (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses spark-sql-UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an spark-sql-UnsafeRow.md[UnsafeRow]).
+`supportsAggregate` firstly [creates the schema](../StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses spark-sql-UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an spark-sql-UnsafeRow.md[UnsafeRow]).
 
 [NOTE]
 ====

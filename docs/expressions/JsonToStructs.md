@@ -45,7 +45,7 @@ a| `JacksonParser` with <<rowSchema, rowSchema>> and spark-sql-JsonFileFormat.md
 NOTE: spark-sql-JsonFileFormat.md#JSONOptions[JSON options] are made up of the input <<options, options>> with spark-sql-JsonFileFormat.md#mode[mode] option as `FAILFAST` and the input <<timeZoneId, time zone>> as the default time zone.
 
 | [[rowSchema]] `rowSchema`
-a| spark-sql-StructType.md[StructType] that...FIXME
+a| [StructType](../StructType.md) that...FIXME
 
 * <<schema, schema>> when of type `StructType`
 * `StructType` of the elements in <<schema, schema>> when of type `ArrayType`

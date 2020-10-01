@@ -69,9 +69,9 @@ a| [[hashMap]] <<spark-sql-UnsafeFixedWidthAggregationMap.md#, UnsafeFixedWidthA
 
 * <<initialAggregationBuffer, initialAggregationBuffer>>
 
-* <<spark-sql-StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, aggBufferAttributes>> of) the <<spark-sql-AggregationIterator.md#aggregateFunctions, aggregate function expressions>>
+* <<StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, aggBufferAttributes>> of) the <<spark-sql-AggregationIterator.md#aggregateFunctions, aggregate function expressions>>
 
-* <<spark-sql-StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of) the <<groupingExpressions, groupingExpressions>>
+* <<StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of) the <<groupingExpressions, groupingExpressions>>
 
 * `1024 * 16` initial capacity
 

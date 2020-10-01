@@ -67,11 +67,11 @@ NOTE: `unhandledFilters` is part of <<spark-sql-BaseRelation.md#unhandledFilters
 schema: StructType
 ----
 
-NOTE: `schema` is part of spark-sql-BaseRelation.md#schema[BaseRelation Contract] to return the spark-sql-StructType.md[schema] of the tuples in a relation.
+`schema` uses `JDBCRDD` to [resolveTable](spark-sql-JDBCRDD.md#resolveTable) given the [JDBCOptions](#jdbcOptions) (that simply returns the [schema](StructType.md) of the table, also known as the default table schema).
 
-`schema` uses `JDBCRDD` to spark-sql-JDBCRDD.md#resolveTable[resolveTable] given the <<jdbcOptions, JDBCOptions>> (that simply returns the spark-sql-StructType.md[Catalyst schema] of the table, also known as the default table schema).
+If [customSchema](spark-sql-JDBCOptions.md#customSchema) JDBC option was defined, `schema` uses `JdbcUtils` to [replace the data types in the default table schema](spark-sql-JdbcUtils.md#getCustomSchema).
 
-If spark-sql-JDBCOptions.md#customSchema[customSchema] JDBC option was defined, `schema` uses `JdbcUtils` to spark-sql-JdbcUtils.md#getCustomSchema[replace the data types in the default table schema].
+`schema` is part of [BaseRelation](spark-sql-BaseRelation.md#schema) abstraction.
 
 === [[insert]] Inserting or Overwriting Data to JDBC Table -- `insert` Method
 

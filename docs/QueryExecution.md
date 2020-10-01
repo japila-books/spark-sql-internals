@@ -91,7 +91,7 @@ The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical opera
 `toRdd` triggers a structured query execution (i.e. physical planning, but not execution of the plan) using [SparkPlan.execute](physical-operators/SparkPlan.md#execute) that recursively triggers execution of every child physical operator in the physical plan tree.
 
 !!! note
-    [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](spark-sql-StructType.md) to an `RDD[InternalRow]`.
+    [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](StructType.md) to an `RDD[InternalRow]`.
 
 !!! note
     [Dataset.rdd](spark-sql-dataset-operators.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.

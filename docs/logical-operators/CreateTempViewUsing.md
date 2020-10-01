@@ -1,5 +1,3 @@
-title: CreateTempViewUsing
-
 # CreateTempViewUsing Logical Command
 
 `CreateTempViewUsing` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> for <<run, creating or replacing a temporary view>> (global or not) using a <<provider, data source>>.
@@ -50,10 +48,10 @@ Hive data source can only be used with tables, you can't use it with CREATE TEMP
 `CreateTempViewUsing` takes the following when created:
 
 * [[tableIdent]] `TableIdentifier`
-* [[userSpecifiedSchema]] Optional user-defined schema (as <<spark-sql-StructType.md#, StructType>>)
+* [[userSpecifiedSchema]] Optional user-defined schema ([StructType](../StructType.md))
 * [[replace]] `replace` flag
 * [[global]] `global` flag
-* [[provider]] Name of the <<spark-sql-DataSource.md#, data source provider>>
+* [[provider]] Name of the [data source provider](../spark-sql-DataSource.md)
 * [[options]] Options (as `Map[String, String]`)
 
 ## <span id="argString"> argString

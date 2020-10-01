@@ -249,7 +249,7 @@ selectedPartitions: Seq[PartitionDirectory]
 
 * [[relation]] [HadoopFsRelation](../HadoopFsRelation.md)
 * [[output]] Output schema <<spark-sql-Expression-Attribute.md#, attributes>>
-* [[requiredSchema]] <<spark-sql-StructType.md#, Schema>>
+* [[requiredSchema]] [Schema](../StructType.md)
 * [[partitionFilters]] `partitionFilters` <<expressions/Expression.md#, expressions>>
 * [[optionalBucketSet]] Bucket IDs for bucket pruning (`Option[BitSet]`)
 * [[dataFilters]] `dataFilters` <<expressions/Expression.md#, expressions>>

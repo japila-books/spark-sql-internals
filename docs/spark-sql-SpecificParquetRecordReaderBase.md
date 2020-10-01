@@ -16,7 +16,7 @@ NOTE: spark-sql-VectorizedParquetRecordReader.md[VectorizedParquetRecordReader] 
 | Description
 
 | [[sparkSchema]] `sparkSchema`
-| Spark spark-sql-StructType.md[schema]
+| Spark [schema](StructType.md)
 
 Initialized when `SpecificParquetRecordReaderBase` is requested to <<initialize, initialize>> (from the value of spark-sql-ParquetFileFormat.md#org.apache.spark.sql.parquet.row.requested_schema[org.apache.spark.sql.parquet.row.requested_schema] configuration as set when `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended])
 |===

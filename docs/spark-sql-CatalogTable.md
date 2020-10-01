@@ -1,6 +1,4 @@
-title: CatalogTable
-
-# CatalogTable -- Table Specification (Metadata)
+# CatalogTable &mdash; Table Specification (Metadata)
 
 `CatalogTable` is the *specification* (_metadata_) of a table.
 
@@ -78,14 +76,14 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `SparkSqlAstBuilder` is requested to <<spark-sql-SparkSqlAstBuilder.md#visitCreateTable, visitCreateTable>> and <<spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable, visitCreateHiveTable>>
 
-=== [[creating-instance]] Creating CatalogTable Instance
+## Creating Instance
 
 `CatalogTable` takes the following to be created:
 
 * [[identifier]] `TableIdentifier`
 * [[tableType]] <<CatalogTableType, Table type>>
 * [[storage]] spark-sql-CatalogStorageFormat.md[CatalogStorageFormat]
-* [[schema]] spark-sql-StructType.md[Schema]
+* [[schema]] [Schema](StructType.md)
 * [[provider]] Name of the table provider (optional)
 * [[partitionColumnNames]] Partition column names
 * [[bucketSpec]] Optional <<spark-sql-BucketSpec.md#, Bucketing specification>> (default: `None`)

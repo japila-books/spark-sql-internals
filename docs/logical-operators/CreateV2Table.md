@@ -10,7 +10,7 @@
 
 * <span id="catalog"> TableCatalog
 * <span id="tableName"> Table Identifier
-* <span id="tableSchema"> Table [Schema](../spark-sql-StructType.md)
+* <span id="tableSchema"> Table [Schema](../StructType.md)
 * <span id="partitioning"> Partitioning (`Seq[Transform]`)
 * <span id="properties"> Properties (`Map[String, String]`)
 * <span id="ignoreIfExists"> `ignoreIfExists` flag

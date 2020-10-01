@@ -67,7 +67,7 @@ abstract class AggregateFunction extends Expression {
 | Description
 
 | [[aggBufferSchema]] `aggBufferSchema`
-| spark-sql-StructType.md[Schema] of an aggregation buffer to hold partial aggregate results.
+| [Schema](../StructType.md) of an aggregation buffer to hold partial aggregate results.
 
 Used mostly in spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] and spark-sql-AggregationIterator.md#initializeAggregateFunctions[AggregationIterator]
 

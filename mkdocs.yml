@@ -832,7 +832,7 @@ nav:
         - spark-sql-UserDefinedFunction.md
       - Schema:
         - spark-sql-schema.md
-        - spark-sql-StructType.md
+        - StructType: StructType.md
         - spark-sql-StructField.md
         - spark-sql-DataType.md
       - spark-sql-multi-dimensional-aggregation.md

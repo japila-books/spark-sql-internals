@@ -1,9 +1,7 @@
-title: StructField
-
-# StructField -- Single Field in StructType
+# StructField &mdash; Single Field in StructType
 
 [[creating-instance]]
-`StructField` describes a single field in a <<spark-sql-StructType.md#, StructType>> with the following:
+`StructField` describes a single field in a [StructType](StructType.md) with the following:
 
 * [[name]] Name
 * [[dataType]] <<spark-sql-DataType.md#, DataType>>
@@ -45,15 +43,11 @@ toDDL: String
 
 `toDDL` gives a text in the format:
 
-```
+```text
 [quoted name] [dataType][optional comment]
 ```
 
-[NOTE]
-====
 `toDDL` is used when:
 
-* `StructType` is requested to <<spark-sql-StructType.md#toDDL, convert itself to DDL format>>
-
-* <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#, ShowCreateTableCommand>> logical command is executed (and <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showHiveTableHeader, showHiveTableHeader>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showHiveTableNonDataColumns, showHiveTableNonDataColumns>>, <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#showDataSourceTableDataColumns, showDataSourceTableDataColumns>>)
-====
+* `StructType` is requested to [convert itself to DDL format](StructType.md#toDDL)
+* [ShowCreateTableCommand](logical-operators/ShowCreateTableCommand.md) logical command is executed

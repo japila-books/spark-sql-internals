@@ -7,8 +7,8 @@
 `HadoopFsRelation` takes the following to be created:
 
 * <span id="location"> [FileIndex](FileIndex.md)
-* <span id="partitionSchema"> Partition Schema ([StructType](spark-sql-StructType.md))
-* <span id="dataSchema"> Data Schema ([StructType](spark-sql-StructType.md))
+* <span id="partitionSchema"> Partition Schema ([StructType](StructType.md))
+* <span id="dataSchema"> Data Schema ([StructType](StructType.md))
 * Optional [bucketing specification](#bucketSpec)
 * <span id="fileFormat"> [FileFormat](spark-sql-FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
@@ -25,7 +25,7 @@
 
 The bucketing specification is defined for [non-streaming file-based data sources](spark-sql-DataSource.md) and used for the following:
 
-* [Output partitioning scheme](spark-sql-SparkPlan-FileSourceScanExec.md#outputPartitioning) and [output data ordering](spark-sql-SparkPlan-FileSourceScanExec.md#outputOrdering) of the corresponding [FileSourceScanExec](spark-sql-SparkPlan-FileSourceScanExec.md) physical operator
+* [Output partitioning scheme](physical-operators/FileSourceScanExec.md#outputPartitioning) and [output data ordering](physical-operators/FileSourceScanExec.md#outputOrdering) of the corresponding [FileSourceScanExec](physical-operators/FileSourceScanExec.md) physical operator
 
 * [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule (when executed on a [InsertIntoTable](logical-operators/InsertIntoTable.md) logical operator over a [LogicalRelation](logical-operators/LogicalRelation.md) with `HadoopFsRelation` relation)
 

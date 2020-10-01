@@ -26,10 +26,10 @@ abstract class BaseRelation {
 | Description
 
 | `schema`
-| [[schema]] spark-sql-StructType.md[StructType] that describes the schema of tuples
+| [[schema]] [StructType](StructType.md) that describes the schema of tuples
 
 | `sqlContext`
-| [[sqlContext]] spark-sql-SQLContext.md[SQLContext]
+| [[sqlContext]] [SQLContext](spark-sql-SQLContext.md)
 |===
 
 `BaseRelation` is "created" when `DataSource` is requested to spark-sql-DataSource.md#resolveRelation[resolve a relation].

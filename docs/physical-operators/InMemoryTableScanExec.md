@@ -91,7 +91,7 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 | Description
 
 | [[columnarBatchSchema]] `columnarBatchSchema`
-| spark-sql-StructType.md[Schema] of a columnar batch
+| [Schema](../StructType.md) of a columnar batch
 
 Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompressColumn, createAndDecompressColumn>>.
 

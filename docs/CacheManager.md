@@ -1,64 +1,56 @@
-title: CacheManager
+# CacheManager &mdash; In-Memory Cache for Tables and Views
 
-# CacheManager -- In-Memory Cache for Tables and Views
+`CacheManager` is an in-memory cache (_registry_) for structured queries (and their [logical plans](logical-operators/LogicalPlan.md)).
 
-`CacheManager` is an in-memory cache (_registry_) for structured queries (by their spark-sql-LogicalPlan.md[logical plans]).
+`CacheManager` is shared across `SparkSessions` through [SharedState](SparkSession.md#sharedState).
 
-`CacheManager` is shared across `SparkSessions` through SparkSession.md#sharedState[SharedState].
-
-[source, scala]
-----
+```text
 val spark: SparkSession = ...
 spark.sharedState.cacheManager
-----
+```
 
-NOTE: A Spark developer can use `CacheManager` to cache ``Dataset``s using spark-sql-caching-and-persistence.md#cache[cache] or spark-sql-caching-and-persistence.md#persist[persist] operators.
-
-`CacheManager` uses the <<cachedData, cachedData>> internal registry to manage cached structured queries and their spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] cached representation.
-
-`CacheManager` <<isEmpty, can be empty>>.
+!!! note
+    A Spark developer uses `CacheManager` using [Dataset.cache](spark-sql-caching-and-persistence.md#cache) or [Dataset.persist](spark-sql-caching-and-persistence.md#persist) operators.
 
 [[CachedData]]
 [[plan]]
 [[cachedRepresentation]]
 `CacheManager` uses `CachedData` data structure for managing <<cachedData, cached structured queries>> with the <<spark-sql-LogicalPlan.md#, LogicalPlan>> (of a structured query) and a corresponding <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operator.
 
-[[logging]]
-[TIP]
-====
-Enable `ALL` logging level for `org.apache.spark.sql.execution.CacheManager` logger to see what happens inside.
+## <span id="cachedData"> Cached Structured Queries
 
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.execution.CacheManager=ALL
-```
-
-Refer to <<spark-logging.md#, Logging>>.
-====
-
-=== [[cachedData]] Cached Structured Queries -- `cachedData` Internal Registry
-
-[source, scala]
-----
+```scala
 cachedData: LinkedList[CachedData]
-----
+```
 
-`cachedData` is a collection of <<CachedData, CachedData>>.
+`CacheManager` uses the `cachedData` internal registry to manage cached structured queries and their [InMemoryRelation](logical-operators/InMemoryRelation.md) cached representation.
+
+`cachedData` is a collection of [CachedData](#CachedData).
 
 A new `CachedData` added when `CacheManager` is requested to:
 
-* <<cacheQuery, cacheQuery>>
+* [cacheQuery](#cacheQuery)
+* [recacheByCondition](#recacheByCondition)
 
-* <<recacheByCondition, recacheByCondition>>
+A `CachedData` is removed when `CacheManager` is requested to:
 
-A `CachedData` removed when `CacheManager` is requested to:
+* [uncacheQuery](#uncacheQuery)
+* [recacheByCondition](#recacheByCondition)
 
-* <<uncacheQuery, uncacheQuery>>
+All `CachedData` removed (cleared) when `CacheManager` is requested to [clearCache](#clearCache)
 
-* <<recacheByCondition, recacheByCondition>>
+## <span id="refreshFileIndexIfNecessary"> refreshFileIndexIfNecessary
 
-All `CachedData` removed (cleared) when `CacheManager` is requested to <<clearCache, clearCache>>
+```scala
+refreshFileIndexIfNecessary(
+  fileIndex: FileIndex,
+  fs: FileSystem,
+  qualifiedPath: Path): Boolean
+```
+
+`refreshFileIndexIfNecessary`...FIXME
+
+`refreshFileIndexIfNecessary` is used when `CacheManager` is requested to [lookupAndRefresh](#lookupAndRefresh).
 
 === [[lookupCachedData]] `lookupCachedData` Method
 
@@ -187,16 +179,24 @@ recacheByPlan(spark: SparkSession, plan: LogicalPlan): Unit
 
 NOTE: `recacheByPlan` is used exclusively when `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>>.
 
-=== [[recacheByPath]] `recacheByPath` Method
+## <span id="recacheByPath"> recacheByPath Method
 
-[source, scala]
-----
-recacheByPath(spark: SparkSession, resourcePath: String): Unit
-----
+```scala
+recacheByPath(
+  spark: SparkSession,
+  resourcePath: String): Unit
+recacheByPath(
+  spark: SparkSession,
+  resourcePath: Path,
+  fs: FileSystem): Unit
+```
 
 `recacheByPath`...FIXME
 
-`recacheByPath` is used when `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath).
+`recacheByPath` is used when:
+
+* `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath).
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) command is executed
 
 === [[useCachedData]] Replacing Segments of Logical Query Plan With Cached Data -- `useCachedData` Method
 
@@ -209,16 +209,27 @@ useCachedData(plan: LogicalPlan): LogicalPlan
 
 `useCachedData` is used when `QueryExecution` is requested for a [cached logical query plan](QueryExecution.md#withCachedData).
 
-=== [[lookupAndRefresh]] `lookupAndRefresh` Internal Method
+## <span id="lookupAndRefresh"> lookupAndRefresh Internal Method
 
-[source, scala]
-----
+```scala
 lookupAndRefresh(
   plan: LogicalPlan,
   fs: FileSystem,
   qualifiedPath: Path): Boolean
-----
+```
 
 `lookupAndRefresh`...FIXME
 
-NOTE: `lookupAndRefresh` is used exclusively when `CacheManager` is requested to <<recacheByPath, recacheByPath>>.
+`lookupAndRefresh` is used when `CacheManager` is requested to [recacheByPath](#recacheByPath).
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.CacheManager` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.CacheManager=ALL
+```
+
+Refer to [Logging](spark-logging.md).

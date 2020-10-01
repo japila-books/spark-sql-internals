@@ -66,7 +66,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-Infers (returns) the <<spark-sql-StructType.md#, schema>> of the given files (as Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileStatus.html[FileStatuses]) if supported. Otherwise, `None` should be returned.
+Infers (returns) the [schema](StructType.md) of the given files (as Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileStatus.html[FileStatuses]) if supported. Otherwise, `None` should be returned.
 
 Used when:
 

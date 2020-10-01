@@ -27,13 +27,13 @@ Parses a SQL text to a [DataType](../spark-sql-DataType.md)
 
 Used when:
 
-* `DataType` utility is requested to <<spark-sql-DataType.md#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
+* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../spark-sql-DataType.md#fromDDL)
 
-* `StructType` is requested to <<spark-sql-StructType.md#add, add a field>>
+* `StructType` is requested to [add a field](../StructType.md#add)
 
-* <<spark-sql-Column.md#cast, Column.cast>>
+* [Column.cast](../spark-sql-Column.md#cast)
 
-* `HiveClientImpl` utility is requested to hive/HiveClientImpl.md#getSparkSQLDataType[getSparkSQLDataType]
+* `HiveClientImpl` utility is requested to [getSparkSQLDataType](../hive/HiveClientImpl.md#getSparkSQLDataType)
 
 * `OrcFileOperator` is requested to `readSchema`
 
@@ -146,15 +146,15 @@ parseTableSchema(
   sqlText: String): StructType
 ```
 
-Parses a SQL text to a [StructType](../spark-sql-StructType.md)
+Parses a SQL text to a [StructType](../StructType.md)
 
 Used when:
 
-* `DataType` utility is requested to <<spark-sql-DataType.md#fromDDL, convert a DDL into a DataType (DataType.fromDDL)>>
+* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../spark-sql-DataType.md#fromDDL)
 
-* `StructType` utility is requested to <<spark-sql-StructType.md#fromDDL, create a StructType for a given DDL-formatted string (StructType.fromDDL)>>
+* `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../StructType.md#fromDDL)
 
-* `JdbcUtils` utility is requested to <<spark-sql-JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes, parseUserSpecifiedCreateTableColumnTypes>> and <<spark-sql-JdbcUtils.md#getCustomSchema, getCustomSchema>>
+* `JdbcUtils` utility is requested to [parseUserSpecifiedCreateTableColumnTypes](../spark-sql-JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes) and [getCustomSchema](../spark-sql-JdbcUtils.md#getCustomSchema)
 
 ## Extensions
 

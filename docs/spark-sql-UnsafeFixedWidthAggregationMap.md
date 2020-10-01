@@ -39,7 +39,7 @@ a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemo
 boolean supportsAggregationBufferSchema(StructType schema)
 ----
 
-`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a <<spark-sql-StructField.md#, field>> (in the <<spark-sql-StructType.md#fields, fields>> of the input <<spark-sql-StructType.md#, schema>>) whose <<spark-sql-StructField.md#dataType, data type>> is not <<spark-sql-UnsafeRow.md#isMutable, mutable>>.
+`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a <<spark-sql-StructField.md#, field>> (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose <<spark-sql-StructField.md#dataType, data type>> is not <<spark-sql-UnsafeRow.md#isMutable, mutable>>.
 
 [NOTE]
 ====
@@ -68,8 +68,8 @@ NOTE: `supportsAggregationBufferSchema` is used exclusively when `HashAggregateE
 `UnsafeFixedWidthAggregationMap` takes the following when created:
 
 * [[emptyAggregationBuffer]] Empty aggregation buffer (as an <<spark-sql-InternalRow.md#, InternalRow>>)
-* [[aggregationBufferSchema]] Aggregation buffer <<spark-sql-StructType.md#, schema>>
-* [[groupingKeySchema]] Grouping key <<spark-sql-StructType.md#, schema>>
+* [[aggregationBufferSchema]] Aggregation buffer [schema](StructType.md)
+* [[groupingKeySchema]] Grouping key [schema](StructType.md)
 * [[taskMemoryManager]] Spark Core's `TaskMemoryManager`
 * [[initialCapacity]] Initial capacity
 * [[pageSizeBytes]] Page size (in bytes)

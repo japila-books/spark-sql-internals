@@ -42,7 +42,7 @@ When evaluated, `ScalaUDAF`...FIXME
 | Description
 
 | `aggBufferAttributes`
-| spark-sql-StructType.md#toAttributes[AttributeReferences] of <<aggBufferSchema, aggBufferSchema>>
+| [AttributeReferences](../StructType.md#toAttributes) of <<aggBufferSchema, aggBufferSchema>>
 
 | `aggBufferSchema`
 | spark-sql-UserDefinedAggregateFunction.md#bufferSchema[bufferSchema] of <<udaf, UserDefinedAggregateFunction>>

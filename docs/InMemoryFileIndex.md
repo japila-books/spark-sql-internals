@@ -22,7 +22,7 @@
 * [[sparkSession]] SparkSession.md[SparkSession]
 * [[rootPathsSpecified]] Root paths (as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths])
 * [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined spark-sql-StructType.md[schema]
+* [[userSpecifiedSchema]] Optional user-defined [schema](StructType.md)
 * [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
 
 `InMemoryFileIndex` initializes the <<internal-properties, internal properties>>.

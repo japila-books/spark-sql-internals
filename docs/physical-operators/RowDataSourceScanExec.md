@@ -57,6 +57,6 @@ NOTE: Filter predicates with `*` (star) are to denote filters that are pushed do
 
 In the end, `metadata` creates the following mapping:
 
-. *ReadSchema* with the <<output, output>> converted to spark-sql-StructType.md#catalogString[catalog representation]
+. *ReadSchema* with the <<output, output>> converted to [catalog representation](../StructType.md#catalogString)
 
 . *PushedFilters* with the marked and unmarked <<filters, filter predicates>>

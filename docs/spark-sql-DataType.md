@@ -77,7 +77,7 @@
 | [[ObjectType]] `ObjectType`
 |
 
-| [[StructType]] spark-sql-StructType.md[StructType]
+| [[StructType]] [StructType](StructType.md)
 |
 
 | [[UserDefinedType]] `UserDefinedType`
