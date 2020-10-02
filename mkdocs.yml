@@ -773,12 +773,19 @@ nav:
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
   - PySpark:
+    - Configuration Properties: pyspark/configuration-properties.md
     - PythonWorkerFactory: pyspark/PythonWorkerFactory.md
     - MonitorThread: pyspark/MonitorThread.md
-    - BasePythonRunner: pyspark/BasePythonRunner.md
-    - ArrowPythonRunner: pyspark/ArrowPythonRunner.md
     - PythonUDF: pyspark/PythonUDF.md
+    - PythonFunction: pyspark/PythonFunction.md
     - AggregateInPandasExec: pyspark/AggregateInPandasExec.md
+    - PythonRDD: pyspark/PythonRDD.md
+    - PythonForeachWriter: pyspark/PythonForeachWriter.md
+    - Python Runners:
+      - BasePythonRunner: pyspark/BasePythonRunner.md
+      - PythonRunner: pyspark/PythonRunner.md
+      - ArrowPythonRunner: pyspark/ArrowPythonRunner.md
+      - PythonUDFRunner: pyspark/PythonUDFRunner.md
   - Demos:
     - demo/demo-connecting-spark-sql-to-hive-metastore.md
     - demo/demo-hive-partitioned-parquet-table-partition-pruning.md

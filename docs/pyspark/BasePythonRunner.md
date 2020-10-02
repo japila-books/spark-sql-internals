@@ -36,8 +36,8 @@ Used when `BasePythonRunner` is requested to [compute](#compute)
 
 * [ArrowPythonRunner](ArrowPythonRunner.md)
 * CoGroupedArrowPythonRunner
-* PythonRunner
-* PythonUDFRunner
+* [PythonRunner](PythonRunner.md)
+* [PythonUDFRunner](PythonUDFRunner.md)
 
 ## Scala Definition
 
