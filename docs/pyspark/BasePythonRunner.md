@@ -34,7 +34,7 @@ Used when `BasePythonRunner` is requested to [compute](#compute)
 
 ## Implementations
 
-* ArrowPythonRunner
+* [ArrowPythonRunner](ArrowPythonRunner.md)
 * CoGroupedArrowPythonRunner
 * PythonRunner
 * PythonUDFRunner
@@ -73,9 +73,30 @@ compute(
   context: TaskContext): Iterator[OUT]
 ```
 
-`compute`...FIXME
+`compute` makes sure that `spark.executorEnv.OMP_NUM_THREADS` configuration option is set or defaults to `spark.executor.cores` property.
+
+`compute` defines the following environment variables:
+
+* `SPARK_LOCAL_DIRS` to be the local directories of the local `DiskBlockManager`
+* `SPARK_BUFFER_SIZE` to be the value of `spark.buffer.size` configuration property (default: `65536`)
+
+`compute` can optionally define environment variables:
+
+* `SPARK_REUSE_WORKER` to be `1` based on `spark.python.worker.reuse` configuration property (default: `true`)
+* `PYSPARK_EXECUTOR_MEMORY_MB` to be the value of `spark.executor.pyspark.memory` configuration property if defined
+
+`compute` requests the executor's `SparkEnv` to `createPythonWorker` (for a `pythonExec` and the environment variables) that requests [PythonWorkerFactory](PythonWorkerFactory.md) to [create a Python worker](#create) (and give a `java.net.Socket`).
+
+!!! important "FIXME"
+    Describe `pythonExec`.
+
+`compute` [newWriterThread] with the Python worker and the input arguments.
+
+`compute` creates and starts a [MonitorThread](MonitorThread.md) to watch the Python worker.
+
+`compute` [creates a new reader iterator](#newReaderIterator) to read lines from the Python worker's stdout.
 
 `compute` is used when:
 
 * `PythonRDD` is requested to `compute`
-* `AggregateInPandasExec`, `ArrowEvalPythonExec`, `BatchEvalPythonExec`, `FlatMapCoGroupsInPandasExec`, `FlatMapGroupsInPandasExec` `MapInPandasExec`, `WindowInPandasExec` physical operators are executed
+* [AggregateInPandasExec](AggregateInPandasExec.md), `ArrowEvalPythonExec`, `BatchEvalPythonExec`, `FlatMapCoGroupsInPandasExec`, `FlatMapGroupsInPandasExec` `MapInPandasExec`, `WindowInPandasExec` physical operators are executed

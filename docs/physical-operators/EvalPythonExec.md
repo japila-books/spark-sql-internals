@@ -28,7 +28,7 @@ Used when `EvalPythonExec` physical operator is [executed](#doExecute)
 
 `EvalPythonExec` takes the following to be created:
 
-* <span id="udfs"> `PythonUDF`s
+* <span id="udfs"> [PythonUDF](../pyspark/PythonUDF.md)s
 * <span id="resultAttrs"> Result [Attributes](../expressions/Attribute.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 

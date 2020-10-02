@@ -81,8 +81,6 @@ In essence, `setNumRows` resets the batch and makes it available for reuse.
 
 Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numRows`.
 
-[NOTE]
-====
 `setNumRows` is used when:
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
@@ -95,5 +93,4 @@ Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numR
 
 * `InMemoryTableScanExec` physical operator is requested to <<spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn, createAndDecompressColumn>>
 
-* `ArrowPythonRunner` is requested for a `ReaderIterator` (`newReaderIterator`)
-====
+* [ArrowPythonRunner](pyspark/ArrowPythonRunner.md) is requested for a `ReaderIterator` (`newReaderIterator`)
