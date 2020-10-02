@@ -2524,6 +2524,10 @@
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/configuration-properties/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonWorkerFactory/</loc>
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
@@ -2532,7 +2536,31 @@
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonUDF/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonFunction/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/AggregateInPandasExec/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonRDD/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonForeachWriter/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/BasePythonRunner/</loc>
+     <lastmod>2020-10-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonRunner/</loc>
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2540,11 +2568,7 @@
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonUDF/</loc>
-     <lastmod>2020-10-02</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/AggregateInPandasExec/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonUDFRunner/</loc>
      <lastmod>2020-10-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
