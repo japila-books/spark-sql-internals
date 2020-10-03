@@ -773,6 +773,7 @@ nav:
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
   - PySpark:
+    - Setup: pyspark/Setup.md
     - Configuration Properties: pyspark/configuration-properties.md
     - PythonWorkerFactory: pyspark/PythonWorkerFactory.md
     - MonitorThread: pyspark/MonitorThread.md
