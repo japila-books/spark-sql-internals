@@ -71,6 +71,10 @@ extra:
   version:
     spark: 3.0.1
     hadoop: 2.7.4
+  hadoop:
+    javadoc: https://hadoop.apache.org/docs/r{{ version.hadoop }}/api
+  java:
+    javadoc: https://docs.oracle.com/javase/8/docs/api
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]

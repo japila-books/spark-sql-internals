@@ -1,101 +1,81 @@
 # CatalogFileIndex
 
-:hadoop-version: 2.10.0
-:java-version: 8
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
-:java-api: https://docs.oracle.com/javase/{java-version}/docs/api
+`CatalogFileIndex` is a [FileIndex](FileIndex.md).
 
-`CatalogFileIndex` is a FileIndex.md[FileIndex] that is <<creating-instance, created>> when:
-
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
-
-* `DataSource` is requested to [create a BaseRelation for a FileFormat](DataSource.md#resolveRelation)
-
-=== [[creating-instance]] Creating CatalogFileIndex Instance
+## Creating Instance
 
 `CatalogFileIndex` takes the following to be created:
 
-* [[sparkSession]] SparkSession.md[SparkSession]
-* [[table]] spark-sql-CatalogTable.md[CatalogTable]
-* [[sizeInBytes]] Size (in bytes)
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="table"> [CatalogTable](CatalogTable.md)
+* <span id="sizeInBytes"> Estimated Size
 
-`CatalogFileIndex` initializes the <<internal-properties, internal properties>>.
+`CatalogFileIndex` is created when:
 
-=== [[listFiles]] Partition Files -- `listFiles` Method
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* `DataSource` is requested to [create a BaseRelation for a FileFormat](DataSource.md#resolveRelation)
 
-[source, scala]
-----
+## <span id="listFiles"> Listing Files
+
+```scala
 listFiles(
   partitionFilters: Seq[Expression],
   dataFilters: Seq[Expression]): Seq[PartitionDirectory]
-----
+```
 
-NOTE: `listFiles` is part of the FileIndex.md#listFiles[FileIndex] contract.
+`listFiles` [lists the partitions](#filterPartitions) for the input partition filters and then requests them for the [underlying partition files](PartitioningAwareFileIndex.md#listFiles).
 
-`listFiles` <<filterPartitions, lists the partitions>> for the input partition filters and then requests them for the PartitioningAwareFileIndex.md#listFiles[underlying partition files].
+`listFiles` is part of the [FileIndex](FileIndex.md#listFiles) abstraction.
 
-=== [[inputFiles]] `inputFiles` Method
+## <span id="inputFiles"> Input Files
 
-[source, scala]
-----
+```scala
 inputFiles: Array[String]
-----
+```
 
-NOTE: `inputFiles` is part of the FileIndex.md#inputFiles[FileIndex] contract.
+`inputFiles` [lists all the partitions](#filterPartitions) and then requests them for the [input files](PartitioningAwareFileIndex.md#inputFiles).
 
-`inputFiles` <<filterPartitions, lists all the partitions>> and then requests them for the PartitioningAwareFileIndex.md#inputFiles[input files].
+`inputFiles` is part of the [FileIndex](FileIndex.md#inputFiles) abstraction.
 
-=== [[rootPaths]] `rootPaths` Method
+## <span id="rootPaths"> Root Paths
 
-[source, scala]
-----
+```scala
 rootPaths: Seq[Path]
-----
+```
 
-NOTE: `rootPaths` is part of the FileIndex.md#rootPaths[FileIndex] contract.
+`rootPaths` returns the [base location](#baseLocation) converted to a Hadoop [Path]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html).
 
-`rootPaths` simply returns the <<baseLocation, baseLocation>> converted to a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Path].
+`rootPaths` is part of the [FileIndex](FileIndex.md#rootPaths) abstraction.
 
-=== [[filterPartitions]] Listing Partitions By Given Predicate Expressions -- `filterPartitions` Method
+## <span id="filterPartitions"> Listing Partitions By Given Predicate Expressions
 
-[source, scala]
-----
+```scala
 filterPartitions(
   filters: Seq[Expression]): InMemoryFileIndex
-----
+```
 
-`filterPartitions` requests the <<table, CatalogTable>> for the spark-sql-CatalogTable.md#partitionColumnNames[partition columns].
+`filterPartitions` requests the [CatalogTable](#table) for the [partition columns](CatalogTable.md#partitionColumnNames).
 
-For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the SessionState.md#catalog[SessionCatalog] for the [partitions by filter](SessionCatalog.md#listPartitionsByFilter) and creates a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex] (with the partition listing time).
+For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the [SessionCatalog](SessionState.md#catalog) for the [partitions by filter](SessionCatalog.md#listPartitionsByFilter) and creates a [PrunedInMemoryFileIndex](PrunedInMemoryFileIndex.md) (with the partition listing time).
 
-For an unpartitioned table (no partition columns defined), `filterPartitions` simply returns a InMemoryFileIndex.md[InMemoryFileIndex] (with the <<rootPaths, rootPaths>> and no user-specified schema).
+For an unpartitioned table (no partition columns defined), `filterPartitions` simply returns a [InMemoryFileIndex](InMemoryFileIndex.md) (with the [base location](#rootPaths) and no user-specified schema).
 
-[NOTE]
-====
 `filterPartitions` is used when:
 
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation]
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* `CatalogFileIndex` is requested to [listFiles](#listFiles) and [inputFiles](#inputFiles)
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
-* `CatalogFileIndex` is requested to <<listFiles, listFiles>> and <<inputFiles, inputFiles>>
+## Internal Properties
 
-* spark-sql-SparkOptimizer-PruneFileSourcePartitions.md[PruneFileSourcePartitions] logical optimization is executed
-====
+### <span id="baseLocation"> Base Location
 
-=== [[internal-properties]] Internal Properties
+Base location (as a Java [URI]({{ java.javadoc }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the [storage](spark-sql-CatalogTable.md#storage))
 
-[cols="30m,70",options="header",width="100%"]
-|===
-| Name
-| Description
+Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions) and for the [root paths](#rootPaths)
 
-| baseLocation
-a| [[baseLocation]] Base location (as a Java {java-api}/java/net/URI.html[URI]) as defined in the <<table, CatalogTable>> metadata (under the spark-sql-CatalogStorageFormat.md#locationUri[locationUri] of the spark-sql-CatalogTable.md#storage[storage])
+### <span id="hadoopConf"> Hadoop Configuration
 
-Used when `CatalogFileIndex` is requested to <<filterPartitions, filter the partitions>> and for the <<rootPaths, root paths>>
+Hadoop [Configuration]({{ hadoop.javadoc }}/org/apache/hadoop/conf/Configuration.html)
 
-| hadoopConf
-a| [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
-
-Used when `CatalogFileIndex` is requested to <<filterPartitions, filter the partitions>>
-
-|===
+Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions)
