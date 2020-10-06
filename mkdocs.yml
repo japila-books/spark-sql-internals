@@ -58,6 +58,7 @@ plugins:
   - git-revision-date:
       enabled_if_env: CI
   - awesome-pages
+  - macros
 
 extra:
   social:
@@ -67,6 +68,9 @@ extra:
       link: https://twitter.com/jaceklaskowski
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
+  version:
+    spark: 3.0.1
+    hadoop: 2.7.4
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
@@ -74,7 +78,7 @@ google_analytics:
 
 nav:
   - Home:
-    - index.md
+    - Welcome: index.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md

@@ -16,7 +16,7 @@
 
 ## <span id="Strategy"> Strategy Type Alias
 
-`SparkStrategy` is used for `Strategy` type alias (_type synonym_) in Spark's code base that is defined in [org.apache.spark.sql](https://github.com/apache/spark/blob/v3.0.0/sql/core/src/main/scala/org/apache/spark/sql/package.scala#L44) package object.
+`SparkStrategy` is used for `Strategy` type alias (_type synonym_) in Spark's code base that is defined in [org.apache.spark.sql](https://github.com/apache/spark/blob/v{{ version.spark }}/sql/core/src/main/scala/org/apache/spark/sql/package.scala#L44) package object.
 
 ```scala
 type Strategy = SparkStrategy
