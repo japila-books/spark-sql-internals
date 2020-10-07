@@ -270,7 +270,7 @@ The following are the logical commands that [alter table statistics in a metasto
 
 . hive/InsertIntoHiveTable.md[InsertIntoHiveTable]
 
-. spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
+. [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md)
 
 . `LoadDataCommand`
 

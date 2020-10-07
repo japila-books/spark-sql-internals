@@ -1,74 +1,90 @@
 # InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is a [logical command](DataWritingCommand.md) that writes the result of executing a <<query, query>> to an <<outputPath, output path>> in the given <<fileFormat, FileFormat>> (and <<creating-instance, other properties>>).
+`InsertIntoHadoopFsRelationCommand` is a [logical command](DataWritingCommand.md) that writes the result of executing a [query](#query) to an [output path](#outputPath) in the given [format](#fileFormat).
 
-`InsertIntoHadoopFsRelationCommand` is <<creating-instance, created>> when:
-
-* `DataSource` is requested to [plan for writing to a FileFormat-based data source](../DataSource.md#planForWritingFileFormat) for the following:
-    * [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command
-    * [InsertIntoDataSourceDirCommand](InsertIntoDataSourceDirCommand.md) logical command
-    * [DataFrameWriter.save](../spark-sql-DataFrameWriter.md#save) operator with DataSource V1 data sources
-
-* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves an [InsertIntoTable](InsertIntoTable.md) logical operator with a [HadoopFsRelation](../HadoopFsRelation.md))
-
-[[partitionOverwriteMode]][[PartitionOverwriteMode]]
-`InsertIntoHadoopFsRelationCommand` uses *partitionOverwriteMode* option that overrides <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>> property for <<spark-sql-dynamic-partition-inserts.md#, dynamic partition inserts>>.
-
-=== [[creating-instance]] Creating InsertIntoHadoopFsRelationCommand Instance
+## Creating Instance
 
 `InsertIntoHadoopFsRelationCommand` takes the following to be created:
 
-* [[outputPath]] Output Hadoop's [Path]({{ hadoop.javadoc }}/index.html?org/apache/hadoop/fs/Path.html)
-* [[staticPartitions]] Static table partitions (`Map[String, String]`)
-* [[ifPartitionNotExists]] `ifPartitionNotExists` flag
-* [[partitionColumns]] Partition columns (`Seq[Attribute]`)
-* [[bucketSpec]] [BucketSpec](../spark-sql-BucketSpec.md)
-* [[fileFormat]] [FileFormat](../spark-sql-FileFormat.md)
-* [[options]] Options (`Map[String, String]`)
-* [[query]] [Query](../logical-operators/LogicalPlan.md)
-* [[mode]] `SaveMode`
-* [[catalogTable]] [CatalogTable](../CatalogTable.md)
-* [[fileIndex]] `FileIndex`
-* [[outputColumnNames]] Output column names
+* <span id="outputPath"> Output Path (as a Hadoop [Path]({{ hadoop.javadoc }}/index.html?org/apache/hadoop/fs/Path.html))
+* [Static Partitions](#staticPartitions)
+* <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
+* <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
+* <span id="bucketSpec"> [BucketSpec](../spark-sql-BucketSpec.md) if defined
+* <span id="fileFormat"> [FileFormat](../spark-sql-FileFormat.md)
+* <span id="options"> Options (`Map[String, String]`)
+* <span id="query"> [Query](../logical-operators/LogicalPlan.md)
+* <span id="mode"> [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* <span id="catalogTable"> [CatalogTable](../CatalogTable.md) if available
+* <span id="fileIndex"> [FileIndex](../FileIndex.md) if defined
+* <span id="outputColumnNames"> Names of the output columns
 
-[NOTE]
-====
-<<staticPartitions, staticPartitions>> may hold zero or more partitions as follows:
+`InsertIntoHadoopFsRelationCommand` is created when:
 
-* Always empty when <<creating-instance, created>> when `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
+* `OptimizedCreateHiveTableAsSelectCommand` logical command is executed
+* `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../HadoopFsRelation.md))
 
-* Possibly with partitions when <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule is applied to an <<InsertIntoTable.md#, InsertIntoTable>> logical operator over a [HadoopFsRelation](../HadoopFsRelation.md) relation
+## <span id="staticPartitions"> Static Partitions
 
-With that, <<staticPartitions, staticPartitions>> are simply the partitions of an <<InsertIntoTable.md#, InsertIntoTable>> logical operator.
-====
+```scala
+type TablePartitionSpec = Map[String, String]
+staticPartitions: TablePartitionSpec
+```
 
-=== [[run]] Executing Data-Writing Logical Command -- `run` Method
+`InsertIntoHadoopFsRelationCommand` is given a specification of a table partition (as a mapping of column names to column values) when [created](#creating-instance).
 
-[source, scala]
-----
+Partitions can only be given when created for [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule when executed for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../HadoopFsRelation.md)
+
+There will be no partitions when created for the following:
+
+* `OptimizedCreateHiveTableAsSelectCommand` logical command
+* `DataSource` when requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
+
+## <span id="dynamicPartitionOverwrite"> Dynamic Partition Inserts and dynamicPartitionOverwrite Flag
+
+```scala
+dynamicPartitionOverwrite: Boolean
+```
+
+`InsertIntoHadoopFsRelationCommand` defines a `dynamicPartitionOverwrite` flag to indicate whether [dynamic partition inserts](../spark-sql-dynamic-partition-inserts.md) is enabled or not.
+
+`dynamicPartitionOverwrite` is based on the following (in the order of precedence):
+
+* **partitionOverwriteMode** option (`STATIC` or `DYNAMIC`) in the [parameters](#parameters) if available
+* [spark.sql.sources.partitionOverwriteMode](spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode)
+
+`dynamicPartitionOverwrite` is used when:
+
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for dynamic partition overwrite)
+* `InsertIntoHadoopFsRelationCommand` is [executed](#run)
+
+## <span id="run"> Executing Command
+
+```scala
 run(
   sparkSession: SparkSession,
   child: SparkPlan): Seq[Row]
-----
-
-NOTE: `run` is part of spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
+```
 
 `run` uses the [spark.sql.hive.manageFilesourcePartitions](../SQLConf.md#manageFilesourcePartitions) configuration property to...FIXME
 
-CAUTION: FIXME When is the <<catalogTable, catalogTable>> defined?
+CAUTION: FIXME When is the `catalogTable` defined?
 
 CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
 
-`run` gets the <<partitionOverwriteMode, partitionOverwriteMode>> option...FIXME
+`run` gets the [partitionOverwriteMode](#partitionOverwriteMode) option...FIXME
 
-`run` uses `FileCommitProtocol` utility to instantiate a committer based on the <<spark-sql-properties.md#spark.sql.sources.commitProtocolClass, spark.sql.sources.commitProtocolClass>> (default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.md#, SQLHadoopMapReduceCommitProtocol>>) and the <<outputPath, outputPath>>, the <<dynamicPartitionOverwrite, dynamicPartitionOverwrite>>, and random `jobId`.
+`run` uses `FileCommitProtocol` utility to instantiate a committer based on the [spark.sql.sources.commitProtocolClass](../spark-sql-properties.md#spark.sql.sources.commitProtocolClass) and the [outputPath](#outputPath), the [dynamicPartitionOverwrite](#dynamicPartitionOverwrite), and random `jobId`.
 
 For insertion, `run` simply uses the `FileFormatWriter` utility to `write` and then...FIXME (does some table-specific "tasks").
 
 Otherwise (for non-insertion case), `run` simply prints out the following INFO message to the logs and finishes.
 
-```
+```text
 Skipping insertion into a relation that already exists.
 ```
 
-`run` uses `SchemaUtils` to <<spark-sql-SchemaUtils.md#checkColumnNameDuplication, make sure that there are no duplicates>> in the <<outputColumnNames, outputColumnNames>>.
+`run` [makes sure that there are no duplicates](../spark-sql-SchemaUtils.md#checkColumnNameDuplication) in the [outputColumnNames](#outputColumnNames).
+
+`run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.

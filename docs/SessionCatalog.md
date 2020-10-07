@@ -164,7 +164,7 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 
 * spark-sql-LogicalPlan-AnalyzeTableCommand.md#run[AnalyzeTableCommand], spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
 
-* (*indirectly* through `CommandUtils` when requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics]) hive/InsertIntoHiveTable.md[InsertIntoHiveTable], spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[InsertIntoHadoopFsRelationCommand], `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
+* (*indirectly* through `CommandUtils` when requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics]) hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
 ====
 
 === [[tableExists]] `tableExists` Method

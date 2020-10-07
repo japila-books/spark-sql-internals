@@ -59,7 +59,7 @@ NOTE: `createRelation` uses a database-specific `JdbcDialect` to spark-sql-JdbcD
 
 If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with <<spark-sql-JDBCOptions.md#createTableColumnTypes, createTableColumnTypes>> and <<spark-sql-JDBCOptions.md#createTableOptions, createTableOptions>> options from the input `parameters`) and writes the rows to the database in a single transaction.
 
-If however the table *does* exist, `createRelation` branches off per spark-sql-DataFrameWriter.md#SaveMode[SaveMode] (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
+If however the table *does* exist, `createRelation` branches off per [SaveMode](spark-sql-DataFrameWriter.md#SaveMode) (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
 
 [[createRelation-CreatableRelationProvider-SaveMode]]
 .createRelation and SaveMode

@@ -1087,22 +1087,6 @@ Default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.md#, SQLHadoopMapReduceCom
 
 Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
 
-| [[spark.sql.sources.partitionOverwriteMode]] *spark.sql.sources.partitionOverwriteMode*
-
-Enables <<spark-sql-dynamic-partition-inserts.md#, dynamic partition inserts>> when <<spark.sql.sources.partitionOverwriteMode-dynamic, dynamic>>
-
-Default: `static`
-
-When `INSERT OVERWRITE` a partitioned data source table with dynamic partition columns, Spark SQL supports two modes (case-insensitive):
-
-* [[spark.sql.sources.partitionOverwriteMode-static]] *static* - Spark deletes all the partitions that match the partition specification (e.g. `PARTITION(a=1,b)`) in the INSERT statement, before overwriting
-
-* [[spark.sql.sources.partitionOverwriteMode-dynamic]] *dynamic* - Spark doesn't delete partitions ahead, and only overwrites those partitions that have data written into it
-
-The default (<<spark.sql.sources.partitionOverwriteMode-static, STATIC>>) is to keep the same behavior of Spark prior to 2.3. Note that this config doesn't affect Hive serde tables, as they are always overwritten with dynamic mode.
-
-Use [SQLConf.partitionOverwriteMode](SQLConf.md#partitionOverwriteMode) method to access the current value.
-
 | [[spark.sql.pivotMaxValues]] *spark.sql.pivotMaxValues*
 
 Maximum number of (distinct) values that will be collected without error (when doing a spark-sql-RelationalGroupedDataset.md#pivot[pivot] without specifying the values for the pivot column)
@@ -1411,3 +1395,19 @@ Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) 
 Default: `1.0`
 
 Use [SQLConf.fileCompressionFactor](SQLConf.md#fileCompressionFactor) method to access the current value.
+
+## <span id="spark.sql.sources.partitionOverwriteMode"> spark.sql.sources.partitionOverwriteMode
+
+Enables [dynamic partition inserts](spark-sql-dynamic-partition-inserts.md) when `dynamic`
+
+Default: `static`
+
+When `INSERT OVERWRITE` a partitioned data source table with dynamic partition columns, Spark SQL supports two modes (case-insensitive):
+
+* **static** - Spark deletes all the partitions that match the partition specification (e.g. `PARTITION(a=1,b)`) in the INSERT statement, before overwriting
+
+* **dynamic** - Spark doesn't delete partitions ahead, and only overwrites those partitions that have data written into it
+
+The default `STATIC` overwrite mode is to keep the same behavior of Spark prior to 2.3. Note that this config doesn't affect Hive serde tables, as they are always overwritten with dynamic mode.
+
+Use [SQLConf.partitionOverwriteMode](SQLConf.md#partitionOverwriteMode) method to access the current value.

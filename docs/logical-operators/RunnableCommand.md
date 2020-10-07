@@ -18,7 +18,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 * `ExecutedCommandExec` spark-sql-SparkPlan-ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
 
-* `InsertIntoHadoopFsRelationCommand` is spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#run[executed]
+* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) is executed
 
 * `QueryExecution` is requested to [transform the result of executing DescribeTableCommand to a Hive-compatible output format](../QueryExecution.md#hiveResultString)
 
@@ -167,7 +167,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 | <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]]
 
-| spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
+| [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | hive/InsertIntoHiveTable.md[InsertIntoHiveTable]

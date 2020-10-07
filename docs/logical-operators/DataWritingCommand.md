@@ -102,7 +102,7 @@ The <<metrics, performance metrics>> are used when:
 | hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand]
 | [[CreateHiveTableAsSelectCommand]]
 
-| spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md[InsertIntoHadoopFsRelationCommand]
+| [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 | [[InsertIntoHadoopFsRelationCommand]]
 
 | hive/SaveAsHiveFile.md[SaveAsHiveFile]
@@ -125,7 +125,7 @@ basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 
 * `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>> (when hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed)
 
-* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical command is executed
 ====
 
 === [[outputColumns]] Output Columns -- `outputColumns` Method
@@ -141,7 +141,7 @@ outputColumns: Seq[Attribute]
 ====
 `outputColumns` is used when:
 
-* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand], hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
+* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand], hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical commands are executed
 
 * `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>>
 ====

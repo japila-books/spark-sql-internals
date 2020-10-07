@@ -40,7 +40,7 @@ IMPORTANT: `updateTableStats` uses spark-sql-properties.md#spark.sql.statistics.
 
 NOTE: `updateTableStats` uses `SparkSession` to access the current SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped SessionState.md#catalog[SessionCatalog].
 
-NOTE: `updateTableStats` is used when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
+NOTE: `updateTableStats` is used when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
 
 === [[calculateTotalSize]] Calculating Total Size of Table (with Partitions) -- `calculateTotalSize` Method
 
@@ -57,7 +57,7 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the SessionSt
 
 * <<spark-sql-LogicalPlan-AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.md#, AnalyzeTableCommand>> commands are executed
 
-* `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
+* `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
 
 === [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
 

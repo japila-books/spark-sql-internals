@@ -110,7 +110,7 @@ a| [[fileCommitProtocolClass]] Used (to instantiate a `FileCommitProtocol`) when
 
 * `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>>
 
-* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 
 | filesMaxPartitionBytes
 | <<spark-sql-properties.md#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>>
@@ -162,7 +162,7 @@ a| [[manageFilesourcePartitions]][[HIVE_MANAGE_FILESOURCE_PARTITIONS]] Used when
 
 * `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
-* <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>>, <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> and <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical commands are executed
+* <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>>, <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
 
 * `DDLUtils` utility is used to spark-sql-DDLUtils.md#verifyPartitionProviderIsHive[verifyPartitionProviderIsHive]
 
@@ -232,10 +232,6 @@ a| [[parquetVectorizedReaderEnabled]] Used when:
 * `FileSourceScanExec` is requested for spark-sql-SparkPlan-FileSourceScanExec.md#needsUnsafeRowConversion[needsUnsafeRowConversion] flag
 
 * `ParquetFileFormat` is requested for spark-sql-ParquetFileFormat.md#supportBatch[supportBatch] flag and spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
-
-| partitionOverwriteMode
-| <<spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode, spark.sql.sources.partitionOverwriteMode>>
-a| [[partitionOverwriteMode]] Used exclusively when <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical command is executed
 
 | preferSortMergeJoin
 | spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin]
@@ -625,3 +621,9 @@ Used when:
 
 * `HadoopFsRelation` is requested for a [size](HadoopFsRelation.md#sizeInBytes)
 * `FileScan` is requested to [estimate statistics](FileScan.md#estimateStatistics)
+
+## <span id="PARTITION_OVERWRITE_MODE"><span id="partitionOverwriteMode"> partitionOverwriteMode
+
+The value of [spark.sql.sources.partitionOverwriteMode](spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode) configuration property
+
+Used when [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed

@@ -305,85 +305,77 @@ buildStorageFormatFromOptions(
 
 NOTE: `buildStorageFormatFromOptions` is used when...FIXME
 
-=== [[planForWriting]] Creating Logical Command for Writing (for CreatableRelationProvider and FileFormat Data Sources) -- `planForWriting` Method
+## <span id="planForWriting"> Creating Logical Command for Writing (for CreatableRelationProvider and FileFormat Data Sources)
 
-[source, scala]
-----
+```scala
 planForWriting(
   mode: SaveMode,
   data: LogicalPlan): LogicalPlan
-----
+```
 
-`planForWriting` creates an instance of the <<providingClass, providingClass>> and branches off per its type as follows:
+`planForWriting` creates an instance of the [providingClass](#providingClass) and branches off per type as follows:
 
 * For a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>, `planForWriting` creates a <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
 
-* For a <<spark-sql-FileFormat.md#, FileFormat>>, `planForWriting` <<planForWritingFileFormat, planForWritingFileFormat>> (with the `FileFormat` format and the input `mode` and `data`)
+* For a [FileFormat](spark-sql-FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 
 * For other types, `planForWriting` simply throws a `RuntimeException`:
-+
-```
-[providingClass] does not allow create table as select.
-```
 
-[NOTE]
-====
+    ```text
+    [providingClass] does not allow create table as select.
+    ```
+
 `planForWriting` is used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveToV1Source, saveToV1Source>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save the result of a structured query (a DataFrame) to a data source>> for <<spark-sql-DataSourceV2.md#, DataSourceV2>> with no `WriteSupport` and non-``DataSourceV2`` writers)
+* `DataFrameWriter` is requested to [save (to a data source V1](spark-sql-DataFrameWriter.md#saveToV1Source)
+* [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed
 
-* <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>> logical command is executed
-====
+## <span id="writeAndRead"> Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation)
 
-=== [[writeAndRead]] Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation) -- `writeAndRead` Method
-
-[source, scala]
-----
+```scala
 writeAndRead(
   mode: SaveMode,
   data: LogicalPlan,
   outputColumnNames: Seq[String],
   physicalPlan: SparkPlan): BaseRelation
-----
+```
 
 `writeAndRead`...FIXME
 
-NOTE: `writeAndRead` is also knows as *Create Table As Select* (CTAS) query.
+!!! note
+    `writeAndRead` is also known as **Create Table As Select** (CTAS) query.
 
-NOTE: `writeAndRead` is used when spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand] logical command is executed.
+`writeAndRead` is used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) logical command is executed.
 
-=== [[planForWritingFileFormat]] Planning for Writing (to FileFormat-Based Data Source) -- `planForWritingFileFormat` Internal Method
+## <span id="planForWritingFileFormat"> Planning for Writing (to FileFormat-Based Data Source)
 
-[source, scala]
-----
+```scala
 planForWritingFileFormat(
   format: FileFormat,
   mode: SaveMode,
   data: LogicalPlan): InsertIntoHadoopFsRelationCommand
-----
-
-`planForWritingFileFormat` takes the <<paths, paths>> and the `path` option (from the <<caseInsensitiveOptions, caseInsensitiveOptions>>) together and (assuming that there is only one path available among the paths combined) creates a fully-qualified HDFS-compatible output path for writing.
-
-NOTE: `planForWritingFileFormat` uses Hadoop HDFS's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/Path.html[Path] to requests for the https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/fs/FileSystem.html[FileSystem] that owns it (using <<SessionState.md#newHadoopConf, Hadoop Configuration>>).
-
-`planForWritingFileFormat` uses the <<spark-sql-PartitioningUtils.md#, PartitioningUtils>> helper object to <<spark-sql-PartitioningUtils.md#validatePartitionColumn, validate partition columns>> in the <<partitionColumns, partitionColumns>>.
-
-In the end, `planForWritingFileFormat` returns a new <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>>.
-
-When the number of the <<paths, paths>> is different than `1`, `planForWritingFileFormat` throws an `IllegalArgumentException`:
-
 ```
+
+`planForWritingFileFormat` takes the [paths](#paths) and the `path` option (from the [caseInsensitiveOptions](#caseInsensitiveOptions)) together and (assuming that there is only one path available among the paths combined) creates a fully-qualified HDFS-compatible output path for writing.
+
+!!! note
+    `planForWritingFileFormat` uses Hadoop HDFS's Hadoop [Path]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html) to requests for the [FileSystem]({{ hadoop.javadoc }}/org/apache/hadoop/fs/FileSystem.html) that owns it (using a [Hadoop Configuration](SessionState.md#newHadoopConf)).
+
+`planForWritingFileFormat` [validates partition columns](spark-sql-PartitioningUtils.md#validatePartitionColumn) in the given [partitionColumns](#partitionColumns).
+
+In the end, `planForWritingFileFormat` returns a new [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md).
+
+`planForWritingFileFormat` throws an `IllegalArgumentException` when there are more than one [path](#paths) specified:
+
+```text
 Expected exactly one path to be specified, but got: [allPaths]
 ```
 
-[NOTE]
-====
 `planForWritingFileFormat` is used when `DataSource` is requested for the following:
 
-* <<writeAndRead, Writing data to a data source followed by "reading" rows back>> (for spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand] logical command)
+* [Writing data to a data source followed by "reading" rows back](#writeAndRead) (for [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) logical command)
 
-* <<planForWriting, Creating a logical command for writing>> (for spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator with DataSource V1 data sources)
-====
+* [Creating a logical command for writing](#planForWriting) (for [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command and [DataFrameWriter.save](spark-sql-DataFrameWriter.md#save) operator with DataSource V1 data sources)
 
 ## <span id="getOrInferFileFormatSchema"> getOrInferFileFormatSchema
 

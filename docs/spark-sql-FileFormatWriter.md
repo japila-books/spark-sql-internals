@@ -83,7 +83,7 @@ In the end, `write` returns all the partition paths that were updated during thi
 ====
 `write` is used when:
 
-* <<spark-sql-LogicalPlan-InsertIntoHadoopFsRelationCommand.md#, InsertIntoHadoopFsRelationCommand>> logical command is executed
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 
 * `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>> (when hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed)
 

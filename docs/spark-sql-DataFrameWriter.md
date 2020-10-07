@@ -408,8 +408,8 @@ mode(saveMode: SaveMode): DataFrameWriter[T]
 
 `mode` defines the behaviour of <<save, save>> when an external file or table (Spark writes to) already exists, i.e. `SaveMode`.
 
-[[SaveMode]]
-.Types of SaveMode
+## <span id="SaveMode"> SaveMode
+
 [cols="1,2",options="header",width="100%"]
 |===
 | Name
@@ -586,18 +586,18 @@ assertNotBucketed(operation: String): Unit
 
 NOTE: `assertNotBucketed` is used when `DataFrameWriter` is requested to <<save, save>>, <<insertInto, insertInto>> and <<jdbc, jdbc>>.
 
-=== [[saveToV1Source]] Executing Logical Command for Writing to Data Source V1 -- `saveToV1Source` Internal Method
+## <span id="saveToV1Source"> Executing Logical Command for Writing to Data Source V1
 
-[source, scala]
-----
+```scala
 saveToV1Source(): Unit
-----
+```
 
-`saveToV1Source` creates a [DataSource](DataSource.md#apply) (for the <<source, source>> class name, the <<partitioningColumns, partitioningColumns>> and the <<extraOptions, extraOptions>>) and requests it for the [logical command for writing](DataSource.md#planForWriting) (with the <<mode, mode>> and the <<Dataset.md#logicalPlan, analyzed logical plan>> of the structured query).
+`saveToV1Source` creates a [DataSource](DataSource.md#apply) (for the [source](#source) class name, the [partitioningColumns](#partitioningColumns) and the [extraOptions](#extraOptions)) and requests it for the [logical command for writing](DataSource.md#planForWriting) (with the [mode](#mode) and the [analyzed logical plan](Dataset.md#logicalPlan) of the structured query).
 
-NOTE: While requesting the <<Dataset.md#logicalPlan, analyzed logical plan>> of the structured query, `saveToV1Source` triggers execution of logical commands.
+!!! note
+    While requesting the [analyzed logical plan](Dataset.md#logicalPlan) of the structured query, `saveToV1Source` triggers execution of logical commands.
 
-In the end, `saveToV1Source` <<runCommand, runs the logical command for writing>>.
+In the end, `saveToV1Source` [runs the logical command for writing](#runCommand).
 
 !!! note
     The [logical command for writing](DataSource.md#planForWriting) can be one of the following:
@@ -606,7 +606,7 @@ In the end, `saveToV1Source` <<runCommand, runs the logical command for writing>
 
     * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](spark-sql-FileFormat.md)
 
-NOTE: `saveToV1Source` is used exclusively when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (for all but <<spark-sql-DataSourceV2.md#, DataSourceV2>> writers with `WriteSupport`).
+`saveToV1Source` is used when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save).
 
 === [[assertNotPartitioned]] `assertNotPartitioned` Internal Method
 

@@ -2,7 +2,7 @@
 
 `PartitioningUtils` is...FIXME
 
-=== [[validatePartitionColumn]] `validatePartitionColumn` Method
+## <span id="validatePartitionColumn"> Validating Partition Column
 
 [source, scala]
 ----
