@@ -1,28 +1,18 @@
-# InMemoryRelation Leaf Logical Operator &mdash; Cached Representation of Dataset
+# InMemoryRelation Leaf Logical Operator
 
-`InMemoryRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a cached `Dataset` by the <<child, physical query plan>>.
+`InMemoryRelation` is a [leaf logical operator](LeafNode.md) that represents a structured query that is cached in memory (when `CacheManager` is requested to [cache it](../CacheManager.md#cacheQuery)).
 
-[[creating-instance]]
+## Creating Instance
+
 `InMemoryRelation` takes the following to be created:
 
-* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
-* [[cacheBuilder]] <<spark-sql-CachedRDDBuilder.md#, CachedRDDBuilder>>
-* [[statsOfPlanToCache]] [Statistics](Statistics.md) of the <<child, child>> query plan
-* [[outputOrdering]] Output <<spark-sql-Expression-SortOrder.md#, orderings>> (`Seq[SortOrder]`)
+* <span id="output"> Output Schema [Attributes](../expressions/Attribute.md) (`Seq[Attribute]`)
+* <span id="cacheBuilder"> [CachedRDDBuilder](../CachedRDDBuilder.md)
+* <span id="outputOrdering"> Output [Ordering](../expressions/SortOrder.md) (`Seq[SortOrder]`)
 
-NOTE: `InMemoryRelation` is usually created using <<apply, apply>> factory methods.
+`InMemoryRelation` is created using [apply](#apply) factory methods.
 
-`InMemoryRelation` is <<apply, created>> when:
-
-* spark-sql-caching-and-persistence.md#persist[Dataset.persist] operator is used (that in turn requests `CacheManager` to [cache a structured query](../CacheManager.md#cacheQuery))
-
-* `CatalogImpl` is requested to [cache](../CatalogImpl.md#cacheTable) or [refresh](../CatalogImpl.md#refreshTable) a table or view in-memory
-
-* `InsertIntoDataSourceCommand` logical command is <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, executed>> (and in turn requests `CacheManager` to [recacheByPlan](../CacheManager.md#recacheByPlan))
-
-* `CatalogImpl` is requested to [refreshByPath](../CatalogImpl.md#refreshByPath) (and in turn requests `CacheManager` to [recacheByPath](../CacheManager.md#recacheByPath))
-
-* `QueryExecution` is requested for a [cached logical query plan](../QueryExecution.md#withCachedData) (and in turn requests `CacheManager` to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData))
+## Demo
 
 ```text
 // Cache sample table range5 using pure SQL
@@ -50,11 +40,11 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 04             +- *Range (0, 10, step=1, splits=8)
 ```
 
-`InMemoryRelation` is a <<spark-sql-MultiInstanceRelation.md#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan.
+## MultiInstanceRelation
 
-[source, scala]
-----
-// Cache a Dataset
+`InMemoryRelation` is a [MultiInstanceRelation](../spark-sql-MultiInstanceRelation.md) so a [new instance will be created](#newInstance) to appear multiple times in a physical query plan.
+
+```text
 val q = spark.range(10).cache
 
 // Make sure that q Dataset is cached
@@ -83,107 +73,53 @@ import org.apache.spark.sql.execution.columnar.InMemoryRelation
 val optimizedPlan = qCrossJoined.queryExecution.optimizedPlan
 scala> optimizedPlan.children(0).sameResult(optimizedPlan.children(1))
 res1: Boolean = true
-----
+```
 
-[[simpleString]]
-The catalyst/QueryPlan.md#simpleString[simple text representation] of a `InMemoryRelation` (aka `simpleString`) is *InMemoryRelation [output], [storageLevel]* (that uses the <<output, output>> and the <<cacheBuilder, CachedRDDBuilder>>).
+## <span id="simpleString"> Simple Text Representation
 
-[source, scala]
-----
+The [simple text representation](../catalyst/QueryPlan.md#simpleString) of an `InMemoryRelation` (aka `simpleString`) uses the [output](#output) and the [CachedRDDBuilder](#cacheBuilder)):
+
+```text
+InMemoryRelation [output], [storageLevel]
+```
+
+```text
 val q = spark.range(1).cache
 val logicalPlan = q.queryExecution.withCachedData
 scala> println(logicalPlan.simpleString)
 InMemoryRelation [id#40L], StorageLevel(disk, memory, deserialized, 1 replicas)
-----
+```
 
-`InMemoryRelation` is resolved to <<spark-sql-SparkPlan-InMemoryTableScanExec.md#, InMemoryTableScanExec>> leaf physical operator when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed.
+## Query Planning and InMemoryTableScanExec Physical Operator
 
-[[internal-registries]]
-.InMemoryRelation's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,3",options="header",width="100%"]
-|===
-| Name
-| Description
+`InMemoryRelation` is resolved to [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) leaf physical operator when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed.
 
-| partitionStatistics
-| [[partitionStatistics]] <<PartitionStatistics, PartitionStatistics>> for the <<output, output>> schema
+## <span id="apply"> Creating InMemoryRelation
 
-Used exclusively when `InMemoryTableScanExec` is <<creating-instance, created>> (and initializes spark-sql-SparkPlan-InMemoryTableScanExec.md#stats[stats] internal property).
-|===
-
-=== [[computeStats]] Computing Statistics -- `computeStats` Method
-
-[source, scala]
-----
-computeStats(): Statistics
-----
-
-NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
-
-`computeStats`...FIXME
-
-=== [[withOutput]] `withOutput` Method
-
-[source, scala]
-----
-withOutput(newOutput: Seq[Attribute]): InMemoryRelation
-----
-
-`withOutput`...FIXME
-
-`withOutput` is used exclusively when `CacheManager` is requested to [replace logical query segments with cached query plans](../CacheManager.md#useCachedData).
-
-=== [[newInstance]] `newInstance` Method
-
-[source, scala]
-----
-newInstance(): this.type
-----
-
-NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[MultiInstanceRelation Contract] to...FIXME.
-
-`newInstance`...FIXME
-
-=== [[cachedColumnBuffers]] `cachedColumnBuffers` Method
-
-[source, scala]
-----
-cachedColumnBuffers: RDD[CachedBatch]
-----
-
-`cachedColumnBuffers`...FIXME
-
-NOTE: `cachedColumnBuffers` is used when...FIXME
-
-=== [[PartitionStatistics]] `PartitionStatistics`
-
-[source, scala]
-----
-PartitionStatistics(tableSchema: Seq[Attribute])
-----
-
-NOTE: `PartitionStatistics` is a `private[columnar]` class.
-
-`PartitionStatistics`...FIXME
-
-NOTE: `PartitionStatistics` is used exclusively when `InMemoryRelation` is <<creating-instance, created>> (and initializes <<partitionStatistics, partitionStatistics>>).
-
-=== [[apply]] Creating InMemoryRelation Instance -- `apply` Factory Methods
-
-[source, scala]
-----
+```scala
 apply(
   useCompression: Boolean,
   batchSize: Int,
   storageLevel: StorageLevel,
   child: SparkPlan,
   tableName: Option[String],
-  logicalPlan: LogicalPlan): InMemoryRelation
+  optimizedPlan: LogicalPlan): InMemoryRelation
 apply(
   cacheBuilder: CachedRDDBuilder,
-  logicalPlan: LogicalPlan): InMemoryRelation
-----
+  optimizedPlan: LogicalPlan): InMemoryRelation
+apply(
+  output: Seq[Attribute],
+  cacheBuilder: CachedRDDBuilder,
+  outputOrdering: Seq[SortOrder],
+  statsOfPlanToCache: Statistics): InMemoryRelation
+```
 
-`apply` creates an <<InMemoryRelation, InMemoryRelation>> logical operator.
+`apply` creates an `InMemoryRelation` logical operator.
 
-`apply` is used when `CacheManager` is requested to [cache](../CacheManager.md#cacheQuery) and [re-cache](../CacheManager.md#recacheByCondition) a structured query.
+`apply` is used when `CacheManager` is requested to [cache](../CacheManager.md#cacheQuery) and [re-cache](../CacheManager.md#recacheByCondition) a structured query, and [useCachedData](../CacheManager.md#useCachedData).
+
+## <span id="partitionStatistics"> PartitionStatistics
+
+`PartitionStatistics` for the [output](#output) schema
+
+Used when [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) physical operator is created (and initializes [stats](../physical-operators/InMemoryTableScanExec.md#stats) internal property).

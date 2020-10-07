@@ -1,6 +1,6 @@
 # CachedRDDBuilder
 
-`CachedRDDBuilder` is <<creating-instance, created>> exclusively when <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operator is created.
+`CachedRDDBuilder` is <<creating-instance, created>> exclusively when [InMemoryRelation](logical-operators/InMemoryRelation.md) leaf logical operator is created.
 
 [[cachedColumnBuffers]]
 `CachedRDDBuilder` uses a `RDD` of <<CachedBatch, CachedBatches>> that is either <<_cachedColumnBuffers, given>> or <<buildBuffers, built internally>>.
@@ -16,7 +16,7 @@
 `CachedRDDBuilder` uses `isCachedColumnBuffersLoaded` flag that is enabled (`true`) when the <<_cachedColumnBuffers, _cachedColumnBuffers>> is defined (not `null`). `isCachedColumnBuffersLoaded` is used exclusively when `CacheManager` is requested to [recacheByCondition](CacheManager.md#recacheByCondition).
 
 [[sizeInBytesStats]]
-`CachedRDDBuilder` uses `sizeInBytesStats` metric (`LongAccumulator`) to <<buildBuffers, buildBuffers>> and when `InMemoryRelation` is requested to <<spark-sql-LogicalPlan-InMemoryRelation.md#computeStats, computeStats>>.
+`CachedRDDBuilder` uses `sizeInBytesStats` metric (`LongAccumulator`) to <<buildBuffers, buildBuffers>> and when `InMemoryRelation` is requested to [computeStats](logical-operators/InMemoryRelation.md#computeStats).
 
 === [[creating-instance]] Creating CachedRDDBuilder Instance
 

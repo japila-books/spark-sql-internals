@@ -181,7 +181,7 @@ nav:
         - GlobalLimit: logical-operators/GlobalLimit.md
         - logical-operators/GroupingSets.md
         - logical-operators/Hint.md
-        - logical-operators/InMemoryRelation.md
+        - InMemoryRelation: logical-operators/InMemoryRelation.md
         - logical-operators/InsertIntoDataSourceCommand.md
         - logical-operators/InsertIntoDataSourceDirCommand.md
         - logical-operators/InsertIntoDir.md
@@ -248,7 +248,7 @@ nav:
         - SessionStateBuilder.md
       - CacheManager:
         - CacheManager: CacheManager.md
-        - spark-sql-CachedRDDBuilder.md
+        - CachedRDDBuilder: CachedRDDBuilder.md
       - spark-sql-RuntimeConfig.md
       - SQLConf:
         - SQLConf: SQLConf.md

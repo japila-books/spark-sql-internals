@@ -23,7 +23,7 @@
 | hive/HiveTableRelation.md[HiveTableRelation]
 | [[HiveTableRelation]]
 
-| <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>>
+| [InMemoryRelation](InMemoryRelation.md)
 | [[InMemoryRelation]]
 
 | <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelation>>

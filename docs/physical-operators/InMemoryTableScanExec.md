@@ -11,7 +11,7 @@ title: InMemoryTableScanExec
 
 * [[attributes]] spark-sql-Expression-Attribute.md[Attribute] expressions
 * [[predicates]] Predicate expressions/Expression.md[expressions]
-* [[relation]] spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] logical operator
+* [[relation]] [InMemoryRelation](../logical-operators/InMemoryRelation.md) logical operator
 
 `InMemoryTableScanExec` is a spark-sql-ColumnarBatchScan.md[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled).
 
@@ -96,7 +96,7 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompressColumn, createAndDecompressColumn>>.
 
 | [[stats]] `stats`
-| spark-sql-LogicalPlan-InMemoryRelation.md#partitionStatistics[PartitionStatistics] of the <<relation, InMemoryRelation>>
+| [PartitionStatistics](../logical-operators/InMemoryRelation.md#partitionStatistics) of the <<relation, InMemoryRelation>>
 
 Used when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>, <<filteredCachedBatches, partition batch pruning>> and <<statsFor, statsFor>>.
 |===
@@ -151,7 +151,7 @@ NOTE: `partitionFilters` is used when...FIXME
 filteredCachedBatches(): RDD[CachedBatch]
 ----
 
-`filteredCachedBatches` requests <<stats, PartitionStatistics>> for the output schema and <<relation, InMemoryRelation>> for spark-sql-LogicalPlan-InMemoryRelation.md#cachedColumnBuffers[cached column buffers] (as a `RDD[CachedBatch]`).
+`filteredCachedBatches` requests <<stats, PartitionStatistics>> for the output schema and <<relation, InMemoryRelation>> for [cached column buffers](../logical-operators/InMemoryRelation.md#cachedColumnBuffers) (as a `RDD[CachedBatch]`).
 
 `filteredCachedBatches` takes the cached column buffers (as a `RDD[CachedBatch]`) and transforms the RDD per partition with index (i.e. `RDD.mapPartitionsWithIndexInternal`) as follows:
 

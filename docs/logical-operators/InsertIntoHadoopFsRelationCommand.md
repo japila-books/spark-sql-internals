@@ -52,7 +52,7 @@ dynamicPartitionOverwrite: Boolean
 `dynamicPartitionOverwrite` is based on the following (in the order of precedence):
 
 * **partitionOverwriteMode** option (`STATIC` or `DYNAMIC`) in the [parameters](#parameters) if available
-* [spark.sql.sources.partitionOverwriteMode](spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode)
+* [spark.sql.sources.partitionOverwriteMode](../spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode)
 
 `dynamicPartitionOverwrite` is used when:
 

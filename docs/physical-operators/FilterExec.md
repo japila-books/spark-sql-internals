@@ -18,7 +18,7 @@ title: FilterExec
 
 * hive/HiveTableScans.md[HiveTableScans] execution planning strategy is executed (and plans hive/HiveTableRelation.md[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
 
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
+* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans [InMemoryRelation](../logical-operators/InMemoryRelation.md) leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 

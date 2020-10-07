@@ -34,7 +34,7 @@ When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical ev
 | hive/HiveTableRelation.md[HiveTableRelation]
 | [[HiveTableRelation]]
 
-| spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation]
+| [InMemoryRelation](logical-operators/InMemoryRelation.md)
 | [[InMemoryRelation]]
 
 | spark-sql-LogicalPlan-LocalRelation.md[LocalRelation]

@@ -25,7 +25,7 @@ At this point you could use web UI's *Storage* tab to review the Datasets persis
 .web UI's Storage tab
 image::images/spark-webui-storage.png[align="center"]
 
-`persist` uses [CacheManager](CacheManager.md) for an in-memory cache of structured queries (and <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> logical operators), and is used to [cache structured queries](CacheManager.md#cacheQuery) (which simply registers the structured queries as <<spark-sql-LogicalPlan-InMemoryRelation.md#, InMemoryRelation>> leaf logical operators).
+`persist` uses [CacheManager](CacheManager.md) for an in-memory cache of structured queries (and [InMemoryRelation](logical-operators/InMemoryRelation.md) logical operators), and is used to [cache structured queries](CacheManager.md#cacheQuery).
 
 At [withCachedData](QueryExecution.md#withCachedData) phase (of execution of a structured query), `QueryExecution` requests the `CacheManager` to [replace segments of a logical query plan with their cached data](CacheManager.md#useCachedData) (including <<spark-sql-subqueries.md#, subqueries>>).
 

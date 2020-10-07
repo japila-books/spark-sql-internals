@@ -15,7 +15,7 @@ spark.sharedState.cacheManager
 
 A structured query (as [Dataset](Dataset.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](spark-sql-caching-and-persistence.md#cache) or [Dataset.persist](spark-sql-caching-and-persistence.md#persist) high-level operators.
 
-## <span id="cachedData"><span id="CachedData"> Cached Structured Queries
+## <span id="cachedData"><span id="CachedData"> Cached Queries
 
 ```scala
 cachedData: LinkedList[CachedData]
@@ -35,7 +35,7 @@ A `CachedData` is removed when `CacheManager` is requested to:
 
 All `CachedData` are removed (cleared) when `CacheManager` is requested to [clearCache](#clearCache)
 
-## <span id="recacheByPath"> Recaching By Path
+## <span id="recacheByPath"> Re-Caching By Path
 
 ```scala
 recacheByPath(
@@ -78,7 +78,7 @@ refreshFileIndexIfNecessary(
 
 `refreshFileIndexIfNecessary` is used when `CacheManager` is requested to [lookupAndRefresh](#lookupAndRefresh).
 
-## <span id="lookupCachedData"> lookupCachedData
+## <span id="lookupCachedData"> Looking Up CachedData
 
 ```scala
 lookupCachedData(
@@ -117,7 +117,7 @@ uncacheQuery(
 * [DropTableCommand](logical-operators/DropTableCommand.md) and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
 * `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
-## <span id="cacheQuery"> Caching Dataset
+## <span id="cacheQuery"> Caching Query
 
 ```scala
 cacheQuery(
@@ -156,13 +156,13 @@ Asked to cache already cached data.
 clearCache(): Unit
 ```
 
-`clearCache` takes every `CachedData` from the [cachedData](#cachedData) internal registry and requests it for the [InMemoryRelation](#cachedRepresentation) to access the [CachedRDDBuilder](logical-operators/InMemoryRelation.md#cacheBuilder). `clearCache` requests the `CachedRDDBuilder` to [clearCache](spark-sql-CachedRDDBuilder.md#clearCache).
+`clearCache` takes every `CachedData` from the [cachedData](#cachedData) internal registry and requests it for the [InMemoryRelation](#cachedRepresentation) to access the [CachedRDDBuilder](logical-operators/InMemoryRelation.md#cacheBuilder). `clearCache` requests the `CachedRDDBuilder` to [clearCache](CachedRDDBuilder.md#clearCache).
 
 In the end, `clearCache` removes all `CachedData` entries from the [cachedData](#cachedData) internal registry.
 
 `clearCache` is used when `CatalogImpl` is requested to [clear the cache](CatalogImpl.md#clearCache).
 
-## <span id="recacheByCondition"> Re-Caching Structured Query
+## <span id="recacheByCondition"> Re-Caching Query
 
 ```scala
 recacheByCondition(
@@ -174,7 +174,7 @@ recacheByCondition(
 
 `recacheByCondition` is used when `CacheManager` is requested to [uncache a structured query](#uncacheQuery), [recacheByPlan](#recacheByPlan), and [recacheByPath](#recacheByPath).
 
-## <span id="recacheByPlan"> recacheByPlan
+## <span id="recacheByPlan"> Re-Caching By Logical Plan
 
 ```scala
 recacheByPlan(
