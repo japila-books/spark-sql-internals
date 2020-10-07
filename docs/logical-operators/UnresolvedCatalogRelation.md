@@ -40,4 +40,4 @@ When <<creating-instance, created>>, `UnresolvedCatalogRelation` asserts that th
 
 [[creating-instance]]
 [[tableMeta]]
-`UnresolvedCatalogRelation` takes a single <<spark-sql-CatalogTable.md#, CatalogTable>> when created.
+`UnresolvedCatalogRelation` takes a single [CatalogTable](../CatalogTable.md) when created.

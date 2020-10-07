@@ -161,7 +161,7 @@ For a [temporary view](../SessionCatalog.md#isTemporaryTable), `run` requests th
 
 For all other table types, `run` does the following:
 
-. Requests the `SessionCatalog` to [retrieve the table metadata from the external catalog (metastore)](../SessionCatalog.md#getTableMetadata) (as a <<spark-sql-CatalogTable.md#, CatalogTable>>) and <<describeSchema, describeSchema>> (with the <<spark-sql-CatalogTable.md#schema, schema>>)
+. Requests the `SessionCatalog` to [retrieve the table metadata from the external catalog (metastore)](../SessionCatalog.md#getTableMetadata) (as a [CatalogTable](../CatalogTable.md)) and <<describeSchema, describeSchema>> (with the [schema](../CatalogTable.md#schema))
 
 . <<describePartitionInfo, describePartitionInfo>>
 
@@ -184,7 +184,7 @@ describeFormattedDetailedPartitionInfo(
 
 . *# Detailed Partition Information*
 
-. *Database* with the <<spark-sql-CatalogTable.md#database, database>> of the given `table`
+. *Database* with the [database](../CatalogTable.md#database) of the given `table`
 
 . *Table* with the table of the given `tableIdentifier`
 
@@ -194,9 +194,9 @@ describeFormattedDetailedPartitionInfo(
 
 . *# Storage Information*
 
-. <<spark-sql-BucketSpec.md#toLinkedHashMap, Bucketing specification>> of the <<spark-sql-CatalogTable.md#bucketSpec, table>> (if defined)
+. <<spark-sql-BucketSpec.md#toLinkedHashMap, Bucketing specification>> of the [table](../CatalogTable.md#bucketSpec) (if defined)
 
-. <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> of the <<spark-sql-CatalogTable.md#storage, table>>
+. <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> of the [table](../CatalogTable.md#storage)
 
 NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with a non-empty <<partitionSpec, partitionSpec>> and the <<isExtended, isExtended>> flag on.
 

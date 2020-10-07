@@ -62,7 +62,7 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 `run` then requests the `SessionCatalog` to [retrieve the table metadata from the external catalog (metastore)](../SessionCatalog.md#getTableMetadata).
 
-`run` then <<showCreateDataSourceTable, showCreateDataSourceTable>> for a data source / non-Hive table or <<showCreateHiveTable, showCreateHiveTable>> for a Hive table (per the <<spark-sql-CatalogTable.md#, table metadata>>).
+`run` then <<showCreateDataSourceTable, showCreateDataSourceTable>> for a data source / non-Hive table or <<showCreateHiveTable, showCreateHiveTable>> for a Hive table (per the [table metadata](../CatalogTable.md)).
 
 In the end, `run` returns the `CREATE TABLE` statement in a single `Row`.
 

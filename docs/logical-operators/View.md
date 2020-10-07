@@ -90,10 +90,10 @@ NOTE: <<spark-sql-Optimizer-EliminateView.md#, EliminateView>> logical optimizat
 
 NOTE: <<InsertIntoTable.md#inserting-into-view-not-allowed, Inserting into a view is not allowed>>.
 
-=== [[creating-instance]] Creating View Instance
+## Creating Instance
 
 `View` takes the following when created:
 
-* [[desc]] <<spark-sql-CatalogTable.md#, CatalogTable>>
-* [[output]] <<catalyst/QueryPlan.md#output, Output schema attributes>> (as `Seq[Attribute]`)
-* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
+* [[desc]] [CatalogTable](../CatalogTable.md)
+* [[output]] [Output schema attributes](../catalyst/QueryPlan.md#output) (as `Seq[Attribute]`)
+* [[child]] Child [logical operator](../logical-operators/LogicalPlan.md)

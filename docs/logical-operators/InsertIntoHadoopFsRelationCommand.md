@@ -18,16 +18,16 @@
 
 `InsertIntoHadoopFsRelationCommand` takes the following to be created:
 
-* [[outputPath]] Output Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/Path.html[Path]
+* [[outputPath]] Output Hadoop's [Path]({{ hadoop.javadoc }}/index.html?org/apache/hadoop/fs/Path.html)
 * [[staticPartitions]] Static table partitions (`Map[String, String]`)
 * [[ifPartitionNotExists]] `ifPartitionNotExists` flag
 * [[partitionColumns]] Partition columns (`Seq[Attribute]`)
-* [[bucketSpec]] <<spark-sql-BucketSpec.md#, BucketSpec>>
-* [[fileFormat]] <<spark-sql-FileFormat.md#, FileFormat>>
+* [[bucketSpec]] [BucketSpec](../spark-sql-BucketSpec.md)
+* [[fileFormat]] [FileFormat](../spark-sql-FileFormat.md)
 * [[options]] Options (`Map[String, String]`)
-* [[query]] <<spark-sql-LogicalPlan.md#, Logical plan>>
+* [[query]] [Query](../logical-operators/LogicalPlan.md)
 * [[mode]] `SaveMode`
-* [[catalogTable]] <<spark-sql-CatalogTable.md#, CatalogTable>>
+* [[catalogTable]] [CatalogTable](../CatalogTable.md)
 * [[fileIndex]] `FileIndex`
 * [[outputColumnNames]] Output column names
 

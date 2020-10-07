@@ -40,13 +40,13 @@ org.apache.spark.sql.AnalysisException: Table default.users already exists. You 
   ... 49 elided
 ----
 
-=== [[creating-instance]] Creating CreateDataSourceTableAsSelectCommand Instance
+## Creating Instance
 
 `CreateDataSourceTableAsSelectCommand` takes the following to be created:
 
-* [[table]] spark-sql-CatalogTable.md[CatalogTable]
-* [[mode]] spark-sql-DataFrameWriter.md#SaveMode[SaveMode]
-* [[query]] AS query (spark-sql-LogicalPlan.md[LogicalPlan])
+* [[table]] [CatalogTable](../CatalogTable.md)
+* [[mode]] [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* [[query]] AS query ([LogicalPlan](../logical-operators/LogicalPlan.md))
 * [[outputColumnNames]] Output column names (`Seq[String]`)
 
 === [[run]] Executing Data-Writing Logical Command -- `run` Method
@@ -62,7 +62,7 @@ NOTE: `run` is part of spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWriti
 
 `run`...FIXME
 
-`run` throws an `AssertionError` when the spark-sql-CatalogTable.md#tableType[tableType] of the <<table, CatalogTable>> is `VIEW` or the spark-sql-CatalogTable.md#provider[provider] is undefined.
+`run` throws an `AssertionError` when the [tableType](../CatalogTable.md#tableType) of the [CatalogTable](#table) is `VIEW` or the [provider](../CatalogTable.md#provider) is undefined.
 
 === [[saveDataIntoTable]] `saveDataIntoTable` Internal Method
 

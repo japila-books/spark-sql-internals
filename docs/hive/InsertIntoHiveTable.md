@@ -8,13 +8,13 @@
 
 * CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
 
-=== [[creating-instance]] Creating InsertIntoHiveTable Instance
+## Creating Instance
 
 `InsertIntoHiveTable` takes the following to be created:
 
-* [[table]] ../spark-sql-CatalogTable.md[CatalogTable]
+* [[table]] [CatalogTable](../CatalogTable.md)
 * [[partition]] Partition keys with optional values (`Map[String, Option[String]]`)
-* [[query]] Structured query (as a ../spark-sql-LogicalPlan.md[LogicalPlan])
+* [[query]] Structured query (as a [LogicalPlan](../logical-operators/LogicalPlan.md))
 * [[overwrite]] `overwrite` Flag
 * [[ifPartitionNotExists]] `ifPartitionNotExists` Flag
 * [[outputColumnNames]] Names of the output columns

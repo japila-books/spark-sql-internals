@@ -72,7 +72,7 @@ readHiveTable(
   table: CatalogTable): LogicalPlan
 ----
 
-`readHiveTable` creates a hive/HiveTableRelation.md[HiveTableRelation] for the input spark-sql-CatalogTable.md[CatalogTable].
+`readHiveTable` creates a hive/HiveTableRelation.md[HiveTableRelation] for the input [CatalogTable](../CatalogTable.md).
 
 NOTE: `readHiveTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>> (for hive tables).
 
@@ -86,8 +86,8 @@ readDataSourceTable(
 
 `readDataSourceTable` requests the <<sparkSession, SparkSession>> for SessionState.md#catalog[SessionCatalog].
 
-`readDataSourceTable` requests the `SessionCatalog` for the [cached logical plan](../SessionCatalog.md#getCachedPlan) for the input [CatalogTable](../spark-sql-CatalogTable.md).
+`readDataSourceTable` requests the `SessionCatalog` for the [cached logical plan](../SessionCatalog.md#getCachedPlan) for the input [CatalogTable](../CatalogTable.md).
 
-If not available, `readDataSourceTable` [creates a new DataSource](../DataSource.md) for the [provider](../spark-sql-CatalogTable.md#provider) (of the input `CatalogTable`) with the extra `path` option (based on the `locationUri` of the spark-sql-CatalogTable.md#storage[storage] of the input `CatalogTable`). `readDataSourceTable` requests the `DataSource` to [resolve the relation and create a corresponding BaseRelation](../DataSource.md#resolveRelation) that is then used to create a [LogicalRelation](../logical-operators/LogicalRelation.md) with the input [CatalogTable](../spark-sql-CatalogTable.md).
+If not available, `readDataSourceTable` [creates a new DataSource](../DataSource.md) for the [provider](../CatalogTable.md#provider) (of the input `CatalogTable`) with the extra `path` option (based on the `locationUri` of the [storage](../CatalogTable.md#storage) of the input `CatalogTable`). `readDataSourceTable` requests the `DataSource` to [resolve the relation and create a corresponding BaseRelation](../DataSource.md#resolveRelation) that is then used to create a [LogicalRelation](../logical-operators/LogicalRelation.md) with the input [CatalogTable](../CatalogTable.md).
 
 NOTE: `readDataSourceTable` is used when `FindDataSourceTable` is requested to <<apply, resolve an UnresolvedCatalogRelation in a logical plan>> (for data source tables).

@@ -53,7 +53,7 @@ NOTE: Data source is also called a *table provider*.
 
 `DataSource` takes a list of <<paths, file system paths that hold data>>. The list is empty by default, but can be different per data source:
 
-* The <<spark-sql-CatalogTable.md#location, location URI>> of a hive/HiveTableRelation.md[HiveTableRelation] (when `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation])
+* The [location URI](CatalogTable.md#location) of a [HiveTableRelation](hive/HiveTableRelation.md) (when `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation))
 
 * The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> (when [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed)
 
@@ -89,7 +89,7 @@ When requested to <<resolveRelation, resolve a batch (non-streaming) FileFormat>
 * [[partitionColumns]] (optional) Names of the partition columns (default: empty)
 * [[bucketSpec]] (optional) spark-sql-BucketSpec.md[Bucketing specification] (default: undefined)
 * [[options]] (optional) Options (default: empty)
-* [[catalogTable]] (optional) spark-sql-CatalogTable.md[CatalogTable] (default: undefined)
+* [[catalogTable]] (optional) [CatalogTable](CatalogTable.md) (default: undefined)
 
 `DataSource` initializes the <<internal-properties, internal properties>>.
 

@@ -136,7 +136,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a spark-sql-CatalogTable.md[CatalogTable] and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](spark-sql-RowEncoder.md).
+`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](spark-sql-RowEncoder.md).
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
@@ -169,7 +169,7 @@ NOTE: `listColumns` is part of [Catalog Contract](Catalog.md#listColumns).
 
 `listColumns` requests <<sessionCatalog, SessionCatalog>> for the [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata).
 
-`listColumns` takes the spark-sql-CatalogTable.md#schema[schema] from the table metadata and creates a `Column` for every field (with the optional comment as the description).
+`listColumns` takes the [schema](CatalogTable.md#schema) from the table metadata and creates a `Column` for every field (with the optional comment as the description).
 
 In the end, `listColumns` <<makeDataset, creates a Dataset>> with the columns.
 

@@ -62,11 +62,8 @@ scala> println(bucketSpec.toLinkedHashMap)
 Map(Num Buckets -> 8, Bucket Columns -> [`col1`], Sort Columns -> [`col2`])
 ----
 
-[NOTE]
-====
 `toLinkedHashMap` is used when:
 
-* `CatalogTable` is requested for <<spark-sql-CatalogTable.md#toLinkedHashMap, toLinkedHashMap>>
+* `CatalogTable` is requested for [toLinkedHashMap](CatalogTable.md#toLinkedHashMap)
 
 * `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> with a non-empty <<partitionSpec, partitionSpec>> and the <<spark-sql-LogicalPlan-DescribeTableCommand.md#isExtended, isExtended>> flag on (that uses <<spark-sql-LogicalPlan-DescribeTableCommand.md#describeFormattedDetailedPartitionInfo, describeFormattedDetailedPartitionInfo>>).
-====

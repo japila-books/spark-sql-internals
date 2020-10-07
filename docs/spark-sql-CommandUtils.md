@@ -32,7 +32,7 @@ Refer to spark-logging.md[Logging].
 updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 ----
 
-`updateTableStats` updates the table statistics of the input spark-sql-CatalogTable.md[CatalogTable] (only if the spark-sql-CatalogTable.md#stats[statistics are available] in the metastore already).
+`updateTableStats` updates the table statistics of the input [CatalogTable](CatalogTable.md) (only if the [statistics are available](CatalogTable.md#stats) in the metastore already).
 
 `updateTableStats` requests `SessionCatalog` to [alterTableStats](SessionCatalog.md#alterTableStats) with the <<calculateTotalSize, current total size>> (when spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on) or empty statistics (that effectively removes the recorded statistics completely).
 
@@ -49,7 +49,7 @@ NOTE: `updateTableStats` is used when hive/InsertIntoHiveTable.md[InsertIntoHive
 calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigInt
 ----
 
-`calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input spark-sql-CatalogTable.md[CatalogTable] (when it has no partitions defined) or all its [partitions](SessionCatalog.md#listPartitions) (through the session-scoped [SessionCatalog](SessionCatalog.md)).
+`calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input [CatalogTable](CatalogTable.md) (when it has no partitions defined) or all its [partitions](SessionCatalog.md#listPartitions) (through the session-scoped [SessionCatalog](SessionCatalog.md)).
 
 NOTE: `calculateTotalSize` uses the input `SessionState` to access the SessionState.md#catalog[SessionCatalog].
 

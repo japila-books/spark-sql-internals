@@ -554,18 +554,18 @@ sortBy must be used together with bucketBy
 
 NOTE: `getBucketSpec` is used exclusively when `DataFrameWriter` is requested to <<createTable, create a table>>.
 
-=== [[createTable]] Creating Table -- `createTable` Internal Method
+## <span id="createTable"> Creating Table
 
-[source, scala]
-----
-createTable(tableIdent: TableIdentifier): Unit
-----
+```scala
+createTable(
+  tableIdent: TableIdentifier): Unit
+```
 
 `createTable` [builds a CatalogStorageFormat](DataSource.md#buildStorageFormatFromOptions) per [extraOptions](#extraOptions).
 
-`createTable` assumes the table being spark-sql-CatalogTable.md#CatalogTableType[external] when spark-sql-CatalogStorageFormat.md#locationUri[location URI] of `CatalogStorageFormat` is defined, and spark-sql-CatalogTable.md#CatalogTableType[managed] otherwise.
+`createTable` assumes the table being [external](CatalogTable.md#CatalogTableType) when [location URI](spark-sql-CatalogStorageFormat.md#locationUri) of `CatalogStorageFormat` is defined, and [managed](CatalogTable.md#CatalogTableType) otherwise.
 
-`createTable` creates a <<spark-sql-CatalogTable.md#, CatalogTable>> (with the <<spark-sql-CatalogTable.md#bucketSpec, bucketSpec>> per <<getBucketSpec, getBucketSpec>>).
+`createTable` creates a [CatalogTable](CatalogTable.md) (with the [bucketSpec](CatalogTable.md#bucketSpec) per [getBucketSpec](#getBucketSpec)).
 
 In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
 

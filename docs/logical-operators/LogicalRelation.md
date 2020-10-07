@@ -37,13 +37,13 @@ scala> println(logicalPlan.simpleString)
 Relation[value#2] text
 ----
 
-=== [[creating-instance]] Creating LogicalRelation Instance
+## Creating Instance
 
 `LogicalRelation` takes the following when created:
 
-* [[relation]] spark-sql-BaseRelation.md[BaseRelation]
+* [[relation]] [BaseRelation](../spark-sql-BaseRelation.md)
 * [[output]] Output schema `AttributeReferences`
-* [[catalogTable]] Optional spark-sql-CatalogTable.md[CatalogTable]
+* [[catalogTable]] Optional [CatalogTable](../CatalogTable.md)
 
 === [[apply]] `apply` Factory Utility
 
@@ -57,7 +57,7 @@ apply(
   table: CatalogTable): LogicalRelation
 ----
 
-`apply` <<creating-instance, creates>> a `LogicalRelation` for the input spark-sql-BaseRelation.md[BaseRelation] (and spark-sql-CatalogTable.md[CatalogTable] or optional `isStreaming` flag).
+`apply` <<creating-instance, creates>> a `LogicalRelation` for the input spark-sql-BaseRelation.md[BaseRelation] (and [CatalogTable](../CatalogTable.md) or optional `isStreaming` flag).
 
 `apply` is used when:
 

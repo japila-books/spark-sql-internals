@@ -68,11 +68,12 @@ extra:
       link: https://twitter.com/jaceklaskowski
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
-  version:
-    spark: 3.0.1
-    hadoop: 2.7.4
+  spark:
+    version: 3.0.1
+    github: https://github.com/apache/spark/blob/v{{ spark.version }}
   hadoop:
-    javadoc: https://hadoop.apache.org/docs/r{{ version.hadoop }}/api
+    javadoc: https://hadoop.apache.org/docs/r{{ hadoop.version }}/api
+    version: 2.7.4
   java:
     javadoc: https://docs.oracle.com/javase/8/docs/api
 
@@ -236,7 +237,7 @@ nav:
       - spark-sql-GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
-        - spark-sql-CatalogTable.md
+        - CatalogTable: CatalogTable.md
         - spark-sql-CatalogStorageFormat.md
         - spark-sql-CatalogTablePartition.md
         - spark-sql-BucketSpec.md

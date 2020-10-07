@@ -433,9 +433,9 @@ getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
 
 Internally, `getTempViewOrPermanentTableMetadata` branches off per database.
 
-When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a spark-sql-CatalogTable.md#creating-instance[CatalogTable] (with `VIEW` spark-sql-CatalogTable.md#tableType[table type] and an undefined spark-sql-CatalogTable.md#storage[storage]) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
+When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a [CatalogTable](CatalogTable.md) (with `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 
-With the database name of the spark-sql-GlobalTempViewManager.md[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[global view definition] and creates a spark-sql-CatalogTable.md#creating-instance[CatalogTable] (with the spark-sql-GlobalTempViewManager.md#database[name] of `GlobalTempViewManager` in spark-sql-CatalogTable.md#identifier[table identifier], `VIEW` spark-sql-CatalogTable.md#tableType[table type] and an undefined spark-sql-CatalogTable.md#storage[storage]) or reports a `NoSuchTableException`.
+With the database name of the spark-sql-GlobalTempViewManager.md[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[global view definition] and creates a [CatalogTable](CatalogTable.md) (with the [name](spark-sql-GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
 
 With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 

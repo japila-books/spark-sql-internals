@@ -74,7 +74,7 @@ NOTE: `run` is part of ../spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWr
 
 `run` ../spark-sql-SchemaUtils.md#checkColumnNameDuplication[checkColumnNameDuplication] of the given <<outputColumnNames, output columns>>.
 
-`run` creates a ../spark-sql-CatalogTable.md[CatalogTable] for the table location (and the `VIEW` table type) and HiveClientImpl.md#toHiveTable[converts it to a Hive Table metadata].
+`run` creates a [CatalogTable](../CatalogTable.md) for the table location (and the `VIEW` table type) and HiveClientImpl.md#toHiveTable[converts it to a Hive Table metadata].
 
 `run` specifies `serialization.lib` metadata to the ../spark-sql-CatalogStorageFormat.md#serde[serde] of the given <<storage, CatalogStorageFormat>> or `LazySimpleSerDe` if not defined.
 

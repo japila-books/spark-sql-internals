@@ -22,21 +22,21 @@ NOTE: `run` is part of spark-sql-LogicalPlan-RunnableCommand.md#run[RunnableComm
 
 `run`...FIXME
 
-`run` throws an `AnalysisException` when executed on spark-sql-CatalogTable.md#tableType[external tables]:
+`run` throws an `AnalysisException` when executed on [external tables](../CatalogTable.md#tableType):
 
-```
+```text
 Operation not allowed: TRUNCATE TABLE on external tables: [tableIdentWithDB]
 ```
 
-`run` throws an `AnalysisException` when executed on spark-sql-CatalogTable.md#tableType[views]:
+`run` throws an `AnalysisException` when executed on [views](../CatalogTable.md#tableType):
 
-```
+```text
 Operation not allowed: TRUNCATE TABLE on views: [tableIdentWithDB]
 ```
 
-`run` throws an `AnalysisException` when executed with <<partitionSpec, TablePartitionSpec>> on spark-sql-CatalogTable.md#partitionColumnNames[non-partitioned tables]:
+`run` throws an `AnalysisException` when executed with <<partitionSpec, TablePartitionSpec>> on [non-partitioned tables](../CatalogTable.md#partitionColumnNames):
 
-```
+```text
 Operation not allowed: TRUNCATE TABLE ... PARTITION is not supported for tables that are not partitioned: [tableIdentWithDB]
 ```
 

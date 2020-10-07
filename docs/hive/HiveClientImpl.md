@@ -63,11 +63,11 @@ NOTE: `getTableOption` is part of HiveClient.md#getTableOption[HiveClient] contr
 
 `getTableOption` prints out the following DEBUG message to the logs:
 
-```
+```text
 Looking up [dbName].[tableName]
 ```
 
-`getTableOption` <<getRawTableOption, getRawTableOption>> and converts the Hive table metadata to Spark's ../spark-sql-CatalogTable.md[CatalogTable]
+`getTableOption` <<getRawTableOption, getRawTableOption>> and converts the Hive table metadata to Spark's [CatalogTable](../CatalogTable.md)
 
 === [[renamePartitions]] `renamePartitions` Method
 
@@ -185,27 +185,25 @@ fromHivePartition(hp: HivePartition): CatalogTablePartition
 
 NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.
 
-=== [[toHiveTable]] Converting Native Table Metadata to Hive's Table -- `toHiveTable` Method
+## <span id="toHiveTable"> Converting Native Table Metadata to Hive's Table
 
-[source, scala]
-----
-toHiveTable(table: CatalogTable, userName: Option[String] = None): HiveTable
-----
+```scala
+toHiveTable(
+  table: CatalogTable,
+  userName: Option[String] = None): HiveTable
+```
 
-`toHiveTable` simply creates a new Hive `Table` and copies the properties from the input <<spark-sql-CatalogTable.md#, CatalogTable>>.
+`toHiveTable` simply creates a new Hive `Table` and copies the properties from the input [CatalogTable](../CatalogTable.md).
 
-[NOTE]
-====
 `toHiveTable` is used when:
 
-* `HiveUtils` is requested to HiveUtils.md#inferSchema[inferSchema]
+* `HiveUtils` is requested to [inferSchema](HiveUtils.md#inferSchema)
 
 * `HiveClientImpl` is requested to <<createTable, createTable>>, <<alterTable, alterTable>>, <<renamePartitions, renamePartitions>>, <<alterPartitions, alterPartitions>>, <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>
 
 * `HiveTableScanExec` physical operator is requested for the <<hiveQlTable, hiveQlTable>>
 
 * InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed
-====
 
 === [[getSparkSQLDataType]] `getSparkSQLDataType` Internal Utility
 

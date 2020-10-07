@@ -1,4 +1,4 @@
-# The Internals of Spark SQL (Apache Spark {{ version.spark }})
+# The Internals of Spark SQL (Apache Spark {{ spark.version }})
 
 Welcome to **The Internals of Spark SQL** online book!
 

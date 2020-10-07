@@ -10,9 +10,9 @@ title: CreateTable
 
 * `CatalogImpl` is requested to [create a table](../CatalogImpl.md#createTable) (for [Catalog.createTable](../Catalog.md#createTable) operator)
 
-`CreateTable` requires that the <<spark-sql-CatalogTable.md#provider, table provider>> of the <<tableDesc, CatalogTable>> is defined or throws an `AssertionError`:
+`CreateTable` requires that the [table provider](../CatalogTable.md#provider) of the [CatalogTable](#tableDesc) is defined or throws an `AssertionError`:
 
-```
+```text
 assertion failed: The table to be created must have a provider.
 ```
 
@@ -33,9 +33,9 @@ The optional <<query, AS query>> is defined when used for the following:
 
 `CreateTable` takes the following to be created:
 
-* [[tableDesc]] spark-sql-CatalogTable.md[Table metadata]
-* [[mode]] spark-sql-DataFrameWriter.md#SaveMode[SaveMode]
-* [[query]] Optional AS query (spark-sql-LogicalPlan.md[Logical query plan])
+* [[tableDesc]] [Table metadata](../CatalogTable.md)
+* [[mode]] [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* [[query]] Optional AS query ([Logical query plan](../logical-operators/LogicalPlan.md))
 
 When created, `CreateTable` makes sure that the optional <<query, logical query plan>> is undefined only when the <<mode, mode>> is `ErrorIfExists` or `Ignore`. `CreateTable` throws an `AssertionError` otherwise:
 

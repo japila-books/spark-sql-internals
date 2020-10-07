@@ -3,7 +3,7 @@
 [[shortName]]
 `KafkaSourceProvider` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and registers itself to handle *kafka* data source format.
 
-`KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code](https://github.com/apache/spark/blob/v{{ version.spark }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
+`KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code]({{ spark.github }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
 
 `KafkaSourceProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 

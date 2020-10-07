@@ -17,8 +17,7 @@ NOTE: `HiveTableRelation` can be RelationConversions.md#convert[converted to a H
 
 * InsertIntoHiveTable.md[InsertIntoHiveTable] command in HiveAnalysis.md[HiveAnalysis] logical resolution rule
 
-[source, scala]
-----
+```text
 val tableName = "h1"
 
 // Make the example reproducible
@@ -67,13 +66,13 @@ scala> println(planWithTables.numberedTreeString)
 00 'InsertIntoTable 'UnresolvedRelation `t2`, true, false
 01 +- SubqueryAlias h1
 02    +- HiveTableRelation `default`.`h1`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, [id#13L]
-----
+```
 
-The ../spark-sql-CatalogTable.md[metadata] of a `HiveTableRelation` (in a catalog) has to meet the requirements:
+The [metadata](../CatalogTable.md) of a `HiveTableRelation` (in a catalog) has to meet the requirements:
 
-* The ../spark-sql-CatalogTable.md#identifier[database] is defined
-* The ../spark-sql-CatalogTable.md#partitionSchema[partition schema] is of the same type as <<partitionCols, partitionCols>>
-* The ../spark-sql-CatalogTable.md#dataSchema[data schema] is of the same type as <<dataCols, dataCols>>
+* The [database](../CatalogTable.md#identifier) is defined
+* The [partition schema](../CatalogTable.md#partitionSchema) is of the same type as <<partitionCols, partitionCols>>
+* The [data schema](../CatalogTable.md#dataSchema) is of the same type as <<dataCols, dataCols>>
 
 [[output]]
 `HiveTableRelation` has the output attributes made up of <<dataCols, data>> followed by <<partitionCols, partition>> columns.
@@ -87,29 +86,29 @@ computeStats(): Statistics
 
 NOTE: `computeStats` is part of ../spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for ../spark-sql-cost-based-optimization.md[cost-based optimizer].
 
-`computeStats` takes the ../spark-sql-CatalogTable.md#stats[table statistics] from the <<tableMeta, table metadata>> if defined and ../spark-sql-CatalogStatistics.md#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
+`computeStats` takes the [table statistics](../CatalogTable.md#stats) from the <<tableMeta, table metadata>> if defined and ../spark-sql-CatalogStatistics.md#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
 
 If the table statistics are not available, `computeStats` reports an `IllegalStateException`.
 
-```
+```text
 table stats must be specified.
 ```
 
-=== [[creating-instance]] Creating HiveTableRelation Instance
+## Creating Instance
 
 `HiveTableRelation` takes the following when created:
 
-* [[tableMeta]] ../spark-sql-CatalogTable.md[Table metadata]
+* [[tableMeta]] [Table metadata](../CatalogTable.md)
 * [[dataCols]] Columns (as a collection of `AttributeReferences`)
-* [[partitionCols]] <<partition-columns, Partition columns>> (as a collection of `AttributeReferences`)
+* [[partitionCols]] [Partition columns](#partition-columns) (as a collection of `AttributeReferences`)
 
 === [[partition-columns]] Partition Columns
 
 When created, `HiveTableRelation` is given the <<partitionCols, partition columns>>.
 
-FindDataSourceTable.md[FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule creates a `HiveTableRelation` based on a ../spark-sql-CatalogTable.md[table specification] (from a catalog).
+FindDataSourceTable.md[FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule creates a `HiveTableRelation` based on a [table specification](../CatalogTable.md) (from a catalog).
 
-The <<partitionCols, partition columns>> are exactly ../spark-sql-CatalogTable.md#partitionSchema[partitions] of the ../spark-sql-CatalogTable.md[table specification].
+The <<partitionCols, partition columns>> are exactly [partitions](../CatalogTable.md#partitionSchema) of the [table specification](../CatalogTable.md).
 
 === [[isPartitioned]] `isPartitioned` Method
 

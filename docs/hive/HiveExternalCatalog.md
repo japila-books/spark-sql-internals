@@ -103,7 +103,7 @@ getRawTable(
   table: String): CatalogTable
 ----
 
-`getRawTable` returns the ../spark-sql-CatalogTable.md[CatalogTable] metadata of the input table.
+`getRawTable` returns the [CatalogTable](../CatalogTable.md) metadata of the input table.
 
 Internally, `getRawTable` requests the <<client, HiveClient>> for the HiveClient.md#getTable[table metadata from a Hive metastore].
 

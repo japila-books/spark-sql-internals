@@ -33,15 +33,12 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 `toLinkedHashMap`...FIXME
 
-[NOTE]
-====
 `toLinkedHashMap` is used when:
 
 * `CatalogStorageFormat` is requested for a <<toString, text representation>>
 
 * `CatalogTablePartition` is requested for spark-sql-CatalogTablePartition.md#toLinkedHashMap[toLinkedHashMap]
 
-* `CatalogTable` is requested for spark-sql-CatalogTable.md#toLinkedHashMap[toLinkedHashMap]
+* `CatalogTable` is requested for [toLinkedHashMap](CatalogTable.md#toLinkedHashMap)
 
 * `DescribeTableCommand` is requested to spark-sql-LogicalPlan-DescribeTableCommand.md#run[run]
-====
