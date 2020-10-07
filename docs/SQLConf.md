@@ -54,10 +54,6 @@ a| [[cboEnabled]] Used in:
 * spark-sql-Optimizer-ReorderJoin.md[ReorderJoin] logical plan optimization (and indirectly in `StarSchemaDetection` for `reorderStarJoins`)
 * spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] logical plan optimization
 
-| columnBatchSize
-| spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.batchSize[spark.sql.inMemoryColumnarStorage.batchSize]
-| [[columnBatchSize]] Used when...FIXME
-
 | constraintPropagationEnabled
 | spark-sql-properties.md#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled]
 a| [[constraintPropagationEnabled]][[CONSTRAINT_PROPAGATION_ENABLED]] Used when:
@@ -288,10 +284,6 @@ a| [[supportQuotedRegexColumnName]] Used when:
 | truncateTableIgnorePermissionAcl
 | spark-sql-properties.md#spark.sql.truncateTable.ignorePermissionAcl.enabled[spark.sql.truncateTable.ignorePermissionAcl.enabled]
 | [[truncateTableIgnorePermissionAcl]][[TRUNCATE_TABLE_IGNORE_PERMISSION_ACL]] Used when spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand] is executed
-
-| useCompression
-| spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.compressed[spark.sql.inMemoryColumnarStorage.compressed]
-| [[useCompression]] Used when...FIXME
 
 | wholeStageEnabled
 | spark-sql-properties.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage]
@@ -627,3 +619,18 @@ Used when:
 The value of [spark.sql.sources.partitionOverwriteMode](spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode) configuration property
 
 Used when [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+
+## <span id="COMPRESS_CACHED"><span id="useCompression"> useCompression
+
+The value of [spark.sql.inMemoryColumnarStorage.compressed](spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.compressed) configuration property
+
+Used when `CacheManager` is requested to [cache a structured query](CacheManager.md#cacheQuery)
+
+## <span id="COLUMN_BATCH_SIZE"><span id="columnBatchSize"> columnBatchSize
+
+The value of [spark.sql.inMemoryColumnarStorage.batchSize](spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.batchSize) configuration property
+
+Used when:
+
+* `CacheManager` is requested to [cache a structured query](CacheManager.md#cacheQuery)
+* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](physical-operators/RowToColumnarExec.md#doExecuteColumnar)

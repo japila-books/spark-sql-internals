@@ -1,5 +1,3 @@
-title: Dataset API
-
 # Dataset API &mdash; Dataset Operators
 
 Dataset API is a [set of operators](#methods) with typed and untyped transformations, and actions to work with a structured query (as a [Dataset](Dataset.md)) as a whole.

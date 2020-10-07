@@ -222,7 +222,7 @@ For other types of table, `refreshTable` requests <<sessionCatalog, SessionCatal
 
 If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManager` to [uncache](CacheManager.md#uncacheQuery) and [cache](CacheManager.md#cacheQuery) the table `DataFrame` again.
 
-NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sharedState[SharedState] that is used to access SharedState.md#cacheManager[CacheManager].
+NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sharedState[SharedState] that is used to access [CacheManager](SharedState.md#cacheManager).
 
 `refreshTable` is part of the [Catalog](Catalog.md#refreshTable) abstraction.
 

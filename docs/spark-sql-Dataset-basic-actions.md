@@ -152,7 +152,7 @@ Marks the `Dataset` to be <<spark-sql-caching-and-persistence.md#, persisted>> t
 
 Internally, `persist` simply request the `CacheManager` to [cache the structured query](CacheManager.md#cacheQuery).
 
-NOTE: `persist` uses the <<SharedState.md#cacheManager, CacheManager>> from the <<SparkSession.md#sharedState, SharedState>> associated with the <<Dataset.md#sparkSession, SparkSession>> (of the Dataset).
+NOTE: `persist` uses the [CacheManager](SharedState.md#cacheManager) from the <<SparkSession.md#sharedState, SharedState>> associated with the <<Dataset.md#sparkSession, SparkSession>> (of the Dataset).
 
 | <<printSchema, printSchema>>
 a|

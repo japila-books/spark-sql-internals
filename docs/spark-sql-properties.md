@@ -902,22 +902,6 @@ Default: `0`
 
 Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
 
-| [[spark.sql.inMemoryColumnarStorage.batchSize]] *spark.sql.inMemoryColumnarStorage.batchSize*
-
-*(internal)* Controls...FIXME
-
-Default: `10000`
-
-Use [SQLConf.columnBatchSize](SQLConf.md#columnBatchSize) method to access the current value.
-
-| [[spark.sql.inMemoryColumnarStorage.compressed]] *spark.sql.inMemoryColumnarStorage.compressed*
-
-*(internal)* Controls...FIXME
-
-Default: `true`
-
-Use [SQLConf.useCompression](SQLConf.md#useCompression) method to access the current value.
-
 | [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] *spark.sql.inMemoryColumnarStorage.enableVectorizedReader*
 
 Enables spark-sql-vectorized-query-execution.md[vectorized reader] for columnar caching.
@@ -1411,3 +1395,19 @@ When `INSERT OVERWRITE` a partitioned data source table with dynamic partition c
 The default `STATIC` overwrite mode is to keep the same behavior of Spark prior to 2.3. Note that this config doesn't affect Hive serde tables, as they are always overwritten with dynamic mode.
 
 Use [SQLConf.partitionOverwriteMode](SQLConf.md#partitionOverwriteMode) method to access the current value.
+
+## <span id="spark.sql.inMemoryColumnarStorage.compressed"> spark.sql.inMemoryColumnarStorage.compressed
+
+When enabled, Spark SQL will automatically select a compression codec for each column based on statistics of the data.
+
+Default: `true`
+
+Use [SQLConf.useCompression](SQLConf.md#useCompression) method to access the current value.
+
+## <span id="spark.sql.inMemoryColumnarStorage.batchSize"> spark.sql.inMemoryColumnarStorage.batchSize
+
+Controls the size of batches for columnar caching. Larger batch sizes can improve memory utilization and compression, but risk OOMs when caching data.
+
+Default: `10000`
+
+Use [SQLConf.columnBatchSize](SQLConf.md#columnBatchSize) method to access the current value.

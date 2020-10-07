@@ -1,6 +1,4 @@
-title: InMemoryRelation
-
-# InMemoryRelation Leaf Logical Operator -- Cached Representation of Dataset
+# InMemoryRelation Leaf Logical Operator &mdash; Cached Representation of Dataset
 
 `InMemoryRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a cached `Dataset` by the <<child, physical query plan>>.
 

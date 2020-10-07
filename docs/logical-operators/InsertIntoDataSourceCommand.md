@@ -72,4 +72,4 @@ With the RDD and the output schema, `run` creates <<SparkSession.md#internalCrea
 
 In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to [recacheByPlan](../CacheManager.md#recacheByPlan) with the <<logicalRelation, LogicalRelation>>.
 
-NOTE: `run` requests the `SparkSession` for <<SparkSession.md#sharedState, SharedState>> that is in turn requested for the <<SharedState.md#cacheManager, CacheManager>>.
+NOTE: `run` requests the `SparkSession` for <<SparkSession.md#sharedState, SharedState>> that is in turn requested for the [CacheManager](../SharedState.md#cacheManager).
