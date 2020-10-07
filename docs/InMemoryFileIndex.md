@@ -1,42 +1,54 @@
 # InMemoryFileIndex
 
-:hadoop-version: 2.10.0
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+`InMemoryFileIndex` is a [PartitioningAwareFileIndex](PartitioningAwareFileIndex.md).
 
-`InMemoryFileIndex` is a PartitioningAwareFileIndex.md[PartitioningAwareFileIndex] for a partition schema and file list.
-
-`InMemoryFileIndex` is <<creating-instance, created>> when:
-
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#inferIfNeeded[inferIfNeeded] (when requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation])
-
-* `CatalogFileIndex` is requested for the CatalogFileIndex.md#filterPartitions[partitions by the given predicate expressions] for a non-partitioned Hive table
-
-* `DataSource` is requested to [createInMemoryFileIndex](DataSource.md#createInMemoryFileIndex)
-
-* Spark Structured Streaming's `FileStreamSource` is used
-
-=== [[creating-instance]] Creating InMemoryFileIndex Instance
+## Creating Instance
 
 `InMemoryFileIndex` takes the following to be created:
 
-* [[sparkSession]] SparkSession.md[SparkSession]
-* [[rootPathsSpecified]] Root paths (as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths])
-* [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined [schema](StructType.md)
-* [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="rootPathsSpecified"> Root Paths (as Hadoop [Paths]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html))
+* <span id="parameters"> Parameters (`Map[String, String]`)
+* <span id="userSpecifiedSchema"> User-Defined Schema (`Option[StructType]`)
+* <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
+* <span id="userSpecifiedPartitionSpec"> User-Defined Partition Spec (default: `undefined`)
+* <span id="metadataOpsTimeNs"> `metadataOpsTimeNs` (`Option[Long]`, default: `undefined`)
 
-`InMemoryFileIndex` initializes the <<internal-properties, internal properties>>.
+While being created, `InMemoryFileIndex` [refresh0](#refresh0).
 
-=== [[internal-properties]] Internal Properties
+`InMemoryFileIndex` is created when:
 
-[cols="30m,70",options="header",width="100%"]
-|===
-| Name
-| Description
+* `HiveMetastoreCatalog` is requested to [inferIfNeeded](hive/HiveMetastoreCatalog.md#inferIfNeeded)
+* `CatalogFileIndex` is requested for the [partitions by the given predicate expressions](CatalogFileIndex.md#filterPartitions) for a non-partitioned Hive table
+* `DataSource` is requested to [createInMemoryFileIndex](DataSource.md#createInMemoryFileIndex)
+* `FileTable` is requested for a [PartitioningAwareFileIndex](connector/catalog/FileTable.md#fileIndex)
 
-| rootPaths
-a| [[rootPaths]] The <<rootPathsSpecified, root paths>> with no `_spark_metadata` streaming metadata directories (of Spark Structured Streaming's `FileStreamSink` when reading the output of a streaming query)
+## <span id="refresh"> Refreshing Cached File Listings
 
-NOTE: `rootPaths` is part of the FileIndex.md#rootPaths[FileIndex] contract.
+```scala
+refresh(): Unit
+```
 
-|===
+`refresh` requests the [FileStatusCache](#fileStatusCache) to `invalidateAll` and then [refresh0](#refresh0).
+
+`refresh` is part of the [FileIndex](FileIndex.md#refresh) abstraction.
+
+## <span id="refresh0"> Refreshing Cached File Listings (Internal)
+
+```scala
+refresh0(): Unit
+```
+
+`refresh0`...FIXME
+
+`refresh0` is used when `InMemoryFileIndex` is [created](#creating-instance) and requested to [refresh](#refresh).
+
+## <span id="rootPaths"> Root Paths
+
+```scala
+rootPaths: Seq[Path]
+```
+
+The [root paths](#rootPathsSpecified) with streaming metadata directories and files filtered out (e.g. `_spark_metadata` streaming metadata directories).
+
+`rootPaths` is part of the [FileIndex](FileIndex.md#rootPaths) abstraction.
