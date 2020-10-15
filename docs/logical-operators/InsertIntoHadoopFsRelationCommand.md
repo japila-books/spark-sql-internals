@@ -6,7 +6,7 @@
 
 `InsertIntoHadoopFsRelationCommand` takes the following to be created:
 
-* <span id="outputPath"> Output Path (as a Hadoop [Path]({{ hadoop.javadoc }}/index.html?org/apache/hadoop/fs/Path.html))
+* <span id="outputPath"> Output Path (as a Hadoop [Path]({{ hadoop.api }}/index.html?org/apache/hadoop/fs/Path.html))
 * [Static Partitions](#staticPartitions)
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)

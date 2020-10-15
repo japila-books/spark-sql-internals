@@ -359,7 +359,7 @@ planForWritingFileFormat(
 `planForWritingFileFormat` takes the [paths](#paths) and the `path` option (from the [caseInsensitiveOptions](#caseInsensitiveOptions)) together and (assuming that there is only one path available among the paths combined) creates a fully-qualified HDFS-compatible output path for writing.
 
 !!! note
-    `planForWritingFileFormat` uses Hadoop HDFS's Hadoop [Path]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html) to requests for the [FileSystem]({{ hadoop.javadoc }}/org/apache/hadoop/fs/FileSystem.html) that owns it (using a [Hadoop Configuration](SessionState.md#newHadoopConf)).
+    `planForWritingFileFormat` uses Hadoop HDFS's Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html) to requests for the [FileSystem]({{ hadoop.api }}/org/apache/hadoop/fs/FileSystem.html) that owns it (using a [Hadoop Configuration](SessionState.md#newHadoopConf)).
 
 `planForWritingFileFormat` [validates partition columns](spark-sql-PartitioningUtils.md#validatePartitionColumn) in the given [partitionColumns](#partitionColumns).
 

@@ -1,127 +1,53 @@
 # PartitioningAwareFileIndex
 
-:hadoop-version: 2.10.0
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+`PartitioningAwareFileIndex` is an [extension](#contract) of the [FileIndex](FileIndex.md) abstraction for [indices](#implementations) that are aware of partitioned tables.
 
-`PartitioningAwareFileIndex` is an <<contract, extension>> of the FileIndex.md[FileIndex] contract for <<implementations, indices>> that are aware of partitioned tables.
+## Contract
 
-[[contract]]
-.PartitioningAwareFileIndex Contract (Abstract Methods Only)
-[cols="30m,70",options="header",width="100%"]
-|===
-| Method
-| Description
+### <span id="leafDirToChildrenFiles"> leafDirToChildrenFiles
 
-| leafDirToChildrenFiles
-a| [[leafDirToChildrenFiles]]
-
-[source, scala]
-----
+```scala
 leafDirToChildrenFiles: Map[Path, Array[FileStatus]]
-----
+```
 
-Used when `PartitioningAwareFileIndex` is requested to <<listFiles, listFiles>>, <<allFiles, allFiles>>, and <<inferPartitioning, inferPartitioning>>
+Used for [files matching filters](#listFiles), [all files](#allFiles) and [infer partitioning](#inferPartitioning)
 
-| leafFiles
-a| [[leafFiles]]
+### <span id="leafFiles"> Leaf Files
 
-[source, scala]
-----
-leafFiles: LinkedHashMap[Path, FileStatus]
-----
+```scala
+leafFiles: mutable.LinkedHashMap[Path, FileStatus]
+```
 
-Used when `PartitioningAwareFileIndex` is requested for <<allFiles, all files>> and <<basePaths, base paths>>
+Used for [all files](#allFiles) and [base locations](#basePaths)
 
-| partitionSpec
-a| [[partitionSpec]]
+### <span id="partitionSpec"> PartitionSpec
 
-[source, scala]
-----
+```scala
 partitionSpec(): PartitionSpec
-----
+```
 
-Partition specification (partition columns, their directories as Hadoop {url-hadoop-javadoc}/org/apache/hadoop/fs/Path.html[Paths] and partition values)
+Partition specification with partition columns and values, and directories (as Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html)s)
 
-Used when `PartitioningAwareFileIndex` is requested for the <<partitionSchema, partition schema>>, <<listFiles, files>>, and <<allFiles, all files>>
+Used for a [partition schema](#partitionSchema), to [list the files matching filters](#listFiles) and [all files](#allFiles)
 
-|===
+## Implementations
 
-[[implementations]]
-[[extensions]]
-.PartitioningAwareFileIndexes (Direct Implementations and Extensions Only)
-[cols="30,70",options="header",width="100%"]
-|===
-| PartitioningAwareFileIndex
-| Description
+* [InMemoryFileIndex](InMemoryFileIndex.md)
+* `MetadataLogFileIndex` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/MetadataLogFileIndex))
 
-| InMemoryFileIndex.md[InMemoryFileIndex]
-| [[InMemoryFileIndex]]
-
-| `MetadataLogFileIndex`
-| [[MetadataLogFileIndex]] Spark Structured Streaming
-
-|===
-
-=== [[creating-instance]] Creating PartitioningAwareFileIndex Instance
+## Creating Instance
 
 `PartitioningAwareFileIndex` takes the following to be created:
 
-* [[sparkSession]] SparkSession.md[SparkSession]
-* [[parameters]] Options for partition discovery
-* [[userSpecifiedSchema]] Optional user-defined [schema](StructType.md)
-* [[fileStatusCache]] `FileStatusCache` (default: `NoopCache`)
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="parameters"> Options for partition discovery (`Map[String, String]`)
+* <span id="userSpecifiedSchema"> Optional User-Defined [Schema](StructType.md)
+* <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
 
-`PartitioningAwareFileIndex` initializes the <<internal-properties, internal properties>>.
+??? note "Abstract Class"
+    `PartitioningAwareFileIndex` is an abstract class and cannot be created directly. It is created indirectly for the [concrete PartitioningAwareFileIndexes](#implementations).
 
-NOTE: `PartitioningAwareFileIndex` is an abstract class and cannot be created directly. It is created indirectly for the <<implementations, concrete PartitioningAwareFileIndices>>.
-
-=== [[listFiles]] `listFiles` Method
-
-[source, scala]
-----
-listFiles(
-  partitionFilters: Seq[Expression],
-  dataFilters: Seq[Expression]): Seq[PartitionDirectory]
-----
-
-NOTE: `listFiles` is part of the FileIndex.md#listFiles[FileIndex] contract.
-
-`listFiles`...FIXME
-
-=== [[partitionSchema]] `partitionSchema` Method
-
-[source, scala]
-----
-partitionSchema: StructType
-----
-
-NOTE: `partitionSchema` is part of the FileIndex.md#partitionSchema[FileIndex] contract.
-
-`partitionSchema` simply returns the partition columns (as a [StructType](StructType.md)) of the <<partitionSpec, partition specification>>.
-
-=== [[inputFiles]] `inputFiles` Method
-
-[source, scala]
-----
-inputFiles: Array[String]
-----
-
-NOTE: `inputFiles` is part of the FileIndex.md#inputFiles[FileIndex] contract.
-
-`inputFiles` simply returns the location of <<allFiles, all the files>>.
-
-=== [[sizeInBytes]] `sizeInBytes` Method
-
-[source, scala]
-----
-sizeInBytes: Long
-----
-
-NOTE: `sizeInBytes` is part of the FileIndex.md#sizeInBytes[FileIndex] contract.
-
-`sizeInBytes` simply sums up the length (in bytes) of <<allFiles, all the files>>.
-
-## <span id="allFiles"> allFiles
+## <span id="allFiles"> All Files
 
 ```scala
 allFiles(): Seq[FileStatus]
@@ -132,38 +58,67 @@ allFiles(): Seq[FileStatus]
 `allFiles` is used when:
 
 * `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](DataSource.md#resolveRelation)
-* `PartitioningAwareFileIndex` is requested to [listFiles](#listFiles), [inputFiles](#inputFiles), and [sizeInBytes](#sizeInBytes)
+* `PartitioningAwareFileIndex` is requested for [files matching filters](#listFiles), [input files](#inputFiles), and [size](#sizeInBytes)
+* `FileTable` is requested for a [data schema](connector/catalog/FileTable.md#dataSchema)
 
-=== [[inferPartitioning]] `inferPartitioning` Method
+## <span id="listFiles"> Files Matching Filters
 
-[source, scala]
-----
+```scala
+listFiles(
+  partitionFilters: Seq[Expression],
+  dataFilters: Seq[Expression]): Seq[PartitionDirectory]
+```
+
+`listFiles`...FIXME
+
+`listFiles` is part of the [FileIndex](FileIndex.md#listFiles) abstraction.
+
+## <span id="partitionSchema"> Partition Schema
+
+```scala
+partitionSchema: StructType
+```
+
+`partitionSchema` gives the `partitionColumns` of the [partition specification](#partitionSpec).
+
+`partitionSchema` is part of the [FileIndex](FileIndex.md#partitionSchema) abstraction.
+
+## <span id="inputFiles"> Input Files
+
+```scala
+inputFiles: Array[String]
+```
+
+`inputFiles` requests [all the files](#allFiles) for their location (as Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html)s converted to `String`s).
+
+`inputFiles` is part of the [FileIndex](FileIndex.md#inputFiles) abstraction.
+
+## <span id="sizeInBytes"> Size
+
+```scala
+sizeInBytes: Long
+```
+
+`sizeInBytes` sums up the length (in bytes) of [all the files](#allFiles).
+
+`sizeInBytes` is part of the [FileIndex](FileIndex.md#sizeInBytes) abstraction.
+
+## <span id="inferPartitioning"> Inferring Partitioning
+
+```scala
 inferPartitioning(): PartitionSpec
-----
+```
 
 `inferPartitioning`...FIXME
 
-NOTE: `inferPartitioning` is used when InMemoryFileIndex.md#partitionSpec[InMemoryFileIndex] and Spark Structured Streaming's `MetadataLogFileIndex` are requested for the <<partitionSpec, partitionSpec>>.
+`inferPartitioning` is used by the [PartitioningAwareFileIndexes](#implementations).
 
-=== [[basePaths]] `basePaths` Internal Method
+## <span id="basePaths"> Base Locations
 
-[source, scala]
-----
+```scala
 basePaths: Set[Path]
-----
+```
 
 `basePaths`...FIXME
 
-NOTE: `basePaths` is used when `PartitioningAwareFileIndex` is requested to <<inferPartitioning, inferPartitioning>>.
-
-=== [[internal-properties]] Internal Properties
-
-[cols="30m,70",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| hadoopConf
-a| [[hadoopConf]] Hadoop {url-hadoop-javadoc}/org/apache/hadoop/conf/Configuration.html[Configuration]
-
-|===
+`basePaths` is used to [infer partitioning](#inferPartitioning).

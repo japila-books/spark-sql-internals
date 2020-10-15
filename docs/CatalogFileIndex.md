@@ -43,7 +43,7 @@ inputFiles: Array[String]
 rootPaths: Seq[Path]
 ```
 
-`rootPaths` returns the [base location](#baseLocation) converted to a Hadoop [Path]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html).
+`rootPaths` returns the [base location](#baseLocation) converted to a Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html).
 
 `rootPaths` is part of the [FileIndex](FileIndex.md#rootPaths) abstraction.
 
@@ -70,12 +70,12 @@ For an unpartitioned table (no partition columns defined), `filterPartitions` si
 
 ### <span id="baseLocation"> Base Location
 
-Base location (as a Java [URI]({{ java.javadoc }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the [storage](CatalogTable.md#storage))
+Base location (as a Java [URI]({{ java.api }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the [storage](CatalogTable.md#storage))
 
 Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions) and for the [root paths](#rootPaths)
 
 ### <span id="hadoopConf"> Hadoop Configuration
 
-Hadoop [Configuration]({{ hadoop.javadoc }}/org/apache/hadoop/conf/Configuration.html)
+Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)
 
 Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions)

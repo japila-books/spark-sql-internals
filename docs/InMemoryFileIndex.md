@@ -7,7 +7,7 @@
 `InMemoryFileIndex` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](SparkSession.md)
-* <span id="rootPathsSpecified"> Root Paths (as Hadoop [Paths]({{ hadoop.javadoc }}/org/apache/hadoop/fs/Path.html))
+* <span id="rootPathsSpecified"> Root Paths (as Hadoop [Paths]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html))
 * <span id="parameters"> Parameters (`Map[String, String]`)
 * <span id="userSpecifiedSchema"> User-Defined Schema (`Option[StructType]`)
 * <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
