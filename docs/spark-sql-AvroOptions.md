@@ -45,11 +45,11 @@ Consult https://avro.apache.org/docs/1.8.2/spec.html#schema_record[Apache Avroâ„
 
 NOTE: The <<options, options>> are case-insensitive.
 
-`AvroOptions` is <<creating-instance, created>> when `AvroFileFormat` is requested to <<spark-sql-AvroFileFormat.md#inferSchema, inferSchema>>, <<spark-sql-AvroFileFormat.md#prepareWrite, prepareWrite>> and <<spark-sql-AvroFileFormat.md#buildReader, buildReader>>.
-
-=== [[creating-instance]] Creating AvroOptions Instance
+## Creating Instance
 
 `AvroOptions` takes the following when created:
 
 * [[parameters]] Case-insensitive configuration parameters (i.e. `Map[String, String]`)
 * [[conf]] Hadoop https://hadoop.apache.org/docs/r3.1.1/api/org/apache/hadoop/conf/Configuration.html[Configuration]
+
+`AvroOptions` is created when `AvroFileFormat` is requested to [inferSchema](spark-sql-AvroFileFormat.md#inferSchema), [prepareWrite](spark-sql-AvroFileFormat.md#prepareWrite) and [buildReader](spark-sql-AvroFileFormat.md#buildReader).

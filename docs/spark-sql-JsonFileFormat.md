@@ -1,17 +1,14 @@
-title: JsonFileFormat
-
 # JsonFileFormat -- Built-In Support for Files in JSON Format
 
 [[shortName]]
-`JsonFileFormat` is a TextBasedFileFormat.md[TextBasedFileFormat] for *json* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).
+`JsonFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *json* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).
 
-[source, scala]
-----
+```text
 spark.read.format("json").load("json-datasets")
 
 // or the same as above using a shortcut
 spark.read.json("json-datasets")
-----
+```
 
 `JsonFileFormat` comes with <<options, options>> to further customize JSON parsing.
 
@@ -127,9 +124,9 @@ isSplitable(
   path: Path): Boolean
 ----
 
-NOTE: `isSplitable` is part of spark-sql-FileFormat.md#isSplitable[FileFormat Contract].
-
 `isSplitable`...FIXME
+
+`isSplitable` is part of [FileFormat](FileFormat.md#isSplitable) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -141,9 +138,9 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of spark-sql-FileFormat.md#inferSchema[FileFormat Contract].
-
 `inferSchema`...FIXME
+
+`inferSchema` is part of [FileFormat](FileFormat.md#inferSchema) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -159,9 +156,9 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of the <<spark-sql-FileFormat.md#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.md#, PartitionedFile>> reader.
-
 `buildReader`...FIXME
+
+`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.
 
 === [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
@@ -174,6 +171,6 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
-
 `prepareWrite`...FIXME
+
+`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.

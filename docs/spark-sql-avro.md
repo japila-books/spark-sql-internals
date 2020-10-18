@@ -1,6 +1,6 @@
 # Avro Data Source
 
-Spark SQL supports structured queries over <<spark-sql-AvroFileFormat.md#, Avro files>> as well as in <<functions, columns>> (in a `DataFrame`).
+Spark SQL supports structured queries over [Avro files](spark-sql-AvroFileFormat.md) as well as in <<functions, columns>> (in a `DataFrame`).
 
 [NOTE]
 ====

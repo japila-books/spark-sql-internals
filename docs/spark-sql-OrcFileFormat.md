@@ -1,6 +1,6 @@
 # OrcFileFormat
 
-`OrcFileFormat` is a <<spark-sql-FileFormat.md#, FileFormat>> that...FIXME
+`OrcFileFormat` is a [FileFormat](FileFormat.md).
 
 === [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
 
@@ -16,9 +16,9 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReaderWithPartitionValues` is part of spark-sql-FileFormat.md#buildReaderWithPartitionValues[FileFormat Contract] to build a data reader with partition column values appended.
-
 `buildReaderWithPartitionValues`...FIXME
+
+`buildReaderWithPartitionValues` is part of [FileFormat](FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -30,9 +30,9 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of spark-sql-FileFormat.md#inferSchema[FileFormat Contract] to...FIXME.
-
 `inferSchema`...FIXME
+
+`inferSchema` is part of [FileFormat](FileFormat.md#inferSchema) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -48,6 +48,6 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of spark-sql-FileFormat.md#buildReader[FileFormat Contract] to...FIXME
-
 `buildReader`...FIXME
+
+`buildReader` is part of [FileFormat](FileFormat.md#buildReader) abstraction.

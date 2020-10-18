@@ -10,13 +10,13 @@
 * <span id="partitionSchema"> Partition Schema ([StructType](StructType.md))
 * <span id="dataSchema"> Data Schema ([StructType](StructType.md))
 * Optional [bucketing specification](#bucketSpec)
-* <span id="fileFormat"> [FileFormat](spark-sql-FileFormat.md)
+* <span id="fileFormat"> [FileFormat](FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="sparkSession"> [SparkSession](SparkSession.md)
 
 `HadoopFsRelation` is created when:
 
-* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) for [file-based data sources](spark-sql-FileFormat.md)
+* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) for [file-based data sources](FileFormat.md)
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation) (for [RelationConversions](hive/RelationConversions.md) logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
 
 ## <span id="bucketSpec"> Bucketing Specification

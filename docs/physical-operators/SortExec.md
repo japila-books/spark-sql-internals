@@ -1,12 +1,10 @@
-title: SortExec
-
 # SortExec Unary Physical Operator
 
 `SortExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> when:
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed
 
-* <<spark-sql-FileFormatWriter.md#, FileFormatWriter>> helper object is requested to <<spark-sql-FileFormatWriter.md#write, write the result of a structured query>>
+* `FileFormatWriter` helper object is used to [write out a query result](../FileFormatWriter.md#write)
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 

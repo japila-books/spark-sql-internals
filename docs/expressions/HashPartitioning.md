@@ -72,7 +72,7 @@ partitionIdExpression: Expression
 
 * `BucketingUtils` utility is used for `getBucketIdFromValue` (for bucketing support)
 
-* `FileFormatWriter` utility is used for spark-sql-FileFormatWriter.md#write[writing the result of a structured query out] (for bucketing support)
+* `FileFormatWriter` utility is used for [write out a query result](../FileFormatWriter.md#write) (for bucketing support)
 
 * `ShuffleExchangeExec` utility is used to spark-sql-SparkPlan-ShuffleExchangeExec.md#prepareShuffleDependency[prepare a ShuffleDependency]
 ====

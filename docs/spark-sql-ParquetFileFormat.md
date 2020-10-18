@@ -1,14 +1,13 @@
 # ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is the spark-sql-FileFormat.md[FileFormat] for *parquet* data source (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in parquet format] and converts them to Spark SQL rows).
+`ParquetFileFormat` is the [FileFormat](FileFormat.md) for **parquet** data source (i.e. [registers itself to handle files in parquet format](spark-sql-DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
 
 NOTE: `parquet` is the [default data source format](DataFrameReader.md#source) in Spark SQL.
 
 NOTE: http://parquet.apache.org/[Apache Parquet] is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 
-[source, scala]
-----
+```text
 // All the following queries are equivalent
 // schema has to be specified manually
 import org.apache.spark.sql.types.StructType
@@ -22,21 +21,21 @@ spark.read.schema(schema).parquet("parquet-datasets")
 
 // parquet is the default data source format
 spark.read.schema(schema).load("parquet-datasets")
-----
+```
 
 [[isSplitable]]
-`ParquetFileFormat` is <<spark-sql-FileFormat.md#isSplitable, splitable>>, i.e. FIXME
+`ParquetFileFormat` is [splitable](FileFormat.md#isSplitable), i.e. FIXME
 
 [[supportBatch]]
-`ParquetFileFormat` spark-sql-FileFormat.md#supportBatch[supports vectorized parquet decoding in whole-stage code generation] when all of the following hold:
+`ParquetFileFormat` [supports vectorized parquet decoding in whole-stage code generation](FileFormat.md#supportBatch) when all of the following hold:
 
-. spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled
+* [spark.sql.parquet.enableVectorizedReader](spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
-. spark-sql-properties.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] internal configuration property is enabled
+* [spark.sql.codegen.wholeStage](spark-sql-properties.md#spark.sql.codegen.wholeStage) internal configuration property is enabled
 
-. The number of fields in the schema is at most spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
+* The number of fields in the schema is at most [spark.sql.codegen.maxFields](spark-sql-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
-. All the fields in the output schema are of spark-sql-DataType.md#AtomicType[AtomicType]
+* All the fields in the output schema are of [AtomicType](spark-sql-DataType.md#AtomicType)
 
 `ParquetFileFormat` supports *filter predicate push-down optimization* (via <<createFilter, createFilter>>) as per the following <<ParquetFilters, table>>.
 
@@ -112,9 +111,9 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
-
 `prepareWrite`...FIXME
+
+`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -126,9 +125,9 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of spark-sql-FileFormat.md#inferSchema[FileFormat Contract] to...FIXME.
-
 `inferSchema`...FIXME
+
+`inferSchema` is part of the [FileFormat](FileFormat.md#inferSchema) abstraction.
 
 === [[vectorTypes]] `vectorTypes` Method
 
@@ -140,13 +139,13 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-NOTE: `vectorTypes` is part of spark-sql-FileFormat.md#vectorTypes[FileFormat Contract] to define the concrete column vector class names for each column used in a columnar batch when <<supportBatch, enabled>>.
-
 `vectorTypes` creates a collection of the names of <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> or <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> when <<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is enabled or disabled, respectively.
 
-NOTE: <<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is disabled (`false`) by default.
+<<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is disabled (`false`) by default.
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
+
+`vectorTypes` is part of the [FileFormat](FileFormat.md#vectorTypes) abstraction.
 
 === [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
@@ -162,7 +161,7 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReaderWithPartitionValues` is part of spark-sql-FileFormat.md#buildReaderWithPartitionValues[FileFormat Contract] to build a data reader with the partition column values appended.
+`buildReaderWithPartitionValues` is part of the [FileFormat](FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 `buildReaderWithPartitionValues` sets the <<options, configuration options>> in the input `hadoopConf`.
 

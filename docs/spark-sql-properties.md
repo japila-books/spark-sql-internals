@@ -2,7 +2,7 @@
 
 **Configuration properties** (aka **settings**) allow you to fine-tune a Spark SQL application.
 
-Configuration properties are configured in a [SparkSession](SparkSession.md) while creating a new instance using [config](SparkSession-Builder.md#config) method.
+Configuration properties are configured in a [SparkSession](SparkSession.md) while creating a new instance using [config](SparkSession-Builder.md#config) method (e.g. [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir)).
 
 ```scala
 import org.apache.spark.sql.SparkSession
@@ -12,7 +12,6 @@ val spark: SparkSession = SparkSession.builder
   .config("spark.sql.warehouse.dir", "c:/Temp") // <1>
   .getOrCreate
 ```
-<1> Sets [spark.sql.warehouse.dir](StaticSQLConf.md#spark.sql.warehouse.dir) for the Spark SQL session
 
 You can also set a property using SQL `SET` command.
 
@@ -28,6 +27,22 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
+
+## <span id="spark.sql.session.timeZone"> spark.sql.session.timeZone
+
+The ID of session-local timezone (e.g. "GMT", "America/Los_Angeles")
+
+Default: Java's `TimeZone.getDefault.getID`
+
+Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to access the current value.
+
+## <span id="spark.sql.files.maxRecordsPerFile"> spark.sql.files.maxRecordsPerFile
+
+Maximum number of records to write out to a single file. If this value is `0` or negative, there is no limit.
+
+Default: `0`
+
+Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
 
 ## <span id="spark.sql.analyzer.maxIterations"> spark.sql.analyzer.maxIterations
 
@@ -894,14 +909,6 @@ It's better to over estimate it, then the partitions with small files will be fa
 
 Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) method to access the current value.
 
-| [[spark.sql.files.maxRecordsPerFile]] *spark.sql.files.maxRecordsPerFile*
-
-Maximum number of records to write out to a single file. If this value is `0` or negative, there is no limit.
-
-Default: `0`
-
-Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
-
 | [[spark.sql.inMemoryColumnarStorage.enableVectorizedReader]] *spark.sql.inMemoryColumnarStorage.enableVectorizedReader*
 
 Enables spark-sql-vectorized-query-execution.md[vectorized reader] for columnar caching.
@@ -1011,7 +1018,7 @@ Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderE
 
 | [[spark.sql.parquet.filterPushdown]] *spark.sql.parquet.filterPushdown*
 
-Controls the spark-sql-Optimizer-PushDownPredicate.md[filter predicate push-down optimization] for data sources using spark-sql-ParquetFileFormat.md[parquet] file format
+Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](spark-sql-ParquetFileFormat.md) file format
 
 Default: `true`
 
@@ -1124,14 +1131,6 @@ Use [SQLConf.runSQLonFile](SQLConf.md#runSQLonFile) method to access the current
 Controls whether to resolve ambiguity in join conditions for spark-sql-joins.md#join[self-joins] automatically (`true`) or not (`false`)
 
 Default: `true`
-
-| [[spark.sql.session.timeZone]] *spark.sql.session.timeZone*
-
-The ID of session-local timezone, e.g. "GMT", "America/Los_Angeles", etc.
-
-Default: Java's `TimeZone.getDefault.getID`
-
-Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to access the current value.
 
 | [[spark.sql.sources.bucketing.enabled]] *spark.sql.sources.bucketing.enabled*
 

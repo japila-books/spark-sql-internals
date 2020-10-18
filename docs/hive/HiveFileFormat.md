@@ -1,9 +1,9 @@
 # HiveFileFormat
 
-`HiveFileFormat` is a ../spark-sql-FileFormat.md[FileFormat] for <<prepareWrite, writing Hive tables>>.
+`HiveFileFormat` is a [FileFormat](../FileFormat.md) for [writing Hive tables](#prepareWrite).
 
 [[shortName]]
-`HiveFileFormat` is a ../spark-sql-DataSourceRegister.md[DataSourceRegister] and ../spark-sql-DataSourceRegister.md#shortName[registers] itself as *hive* data source.
+`HiveFileFormat` is a [DataSourceRegister](../spark-sql-DataSourceRegister.md) and [registers](../spark-sql-DataSourceRegister.md#shortName) itself as **hive** data source.
 
 NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use [DataFrameReader.table](../DataFrameReader.md#table) to load from or ../spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWriter.saveAsTable] to write data to a Hive table.
 
@@ -13,9 +13,9 @@ NOTE: Hive data source can only be used with tables and you cannot read or write
 `HiveFileFormat` takes a `FileSinkDesc` when created.
 
 [[inferSchema]]
-`HiveFileFormat` throws a `UnsupportedOperationException` when requested to ../spark-sql-FileFormat.md#inferSchema[inferSchema].
+`HiveFileFormat` throws a `UnsupportedOperationException` when requested to [inferSchema](../FileFormat.md#inferSchema).
 
-```
+```text
 inferSchema is not supported for hive data source.
 ```
 
@@ -30,8 +30,6 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the ../spark-sql-FileFormat.md#prepareWrite[FileFormat] contract.
-
 `prepareWrite` sets the *mapred.output.format.class* property to be the `getOutputFileFormatClassName` of the Hive `TableDesc` of the <<fileSinkConf, FileSinkDesc>>.
 
 `prepareWrite` requests the `HiveTableUtil` helper object to `configureJobPropertiesForStorageHandler`.
@@ -39,3 +37,5 @@ NOTE: `prepareWrite` is part of the ../spark-sql-FileFormat.md#prepareWrite[File
 `prepareWrite` requests the Hive `Utilities` helper object to `copyTableJobPropertiesToConf`.
 
 In the end, `prepareWrite` creates a new `OutputWriterFactory` that creates a new `HiveOutputWriter` when requested for a new `OutputWriter` instance.
+
+`prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.

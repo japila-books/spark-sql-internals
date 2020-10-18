@@ -1,6 +1,4 @@
-title: FileFormat
-
-# FileFormat -- Data Sources to Read and Write Data In Files
+# FileFormat &mdash; Data Sources to Read and Write Data In Files
 
 `FileFormat` is the <<contract, contract>> for <<implementations, data sources>> that <<buildReader, read>> and <<prepareWrite, write>> data stored in files.
 
@@ -104,7 +102,7 @@ prepareWrite(
 
 Prepares a write job and returns an `OutputWriterFactory`
 
-Used exclusively when `FileFormatWriter` is requested to <<spark-sql-FileFormatWriter.md#write, write query result>>
+Used when `FileFormatWriter` is used to [write out a query result](FileFormatWriter.md#write)
 
 | supportBatch
 a| [[supportBatch]]
@@ -147,19 +145,19 @@ Used exclusively when `FileSourceScanExec` leaf physical operator is requested f
 | FileFormat
 | Description
 
-| <<spark-sql-AvroFileFormat.md#, AvroFileFormat>>
+| [AvroFileFormat](spark-sql-AvroFileFormat.md)
 | [[AvroFileFormat]] Avro data source
 
-| hive/HiveFileFormat.md[HiveFileFormat]
+| [HiveFileFormat](hive/HiveFileFormat.md)
 | [[HiveFileFormat]] Writes hive tables
 
-| <<spark-sql-OrcFileFormat.md#, OrcFileFormat>>
+| [OrcFileFormat](spark-sql-OrcFileFormat.md)
 | [[OrcFileFormat]] ORC data source
 
-| <<spark-sql-ParquetFileFormat.md#, ParquetFileFormat>>
+| [ParquetFileFormat](spark-sql-ParquetFileFormat.md)
 | [[ParquetFileFormat]] Parquet data source
 
-| <<TextBasedFileFormat.md#, TextBasedFileFormat>>
+| [TextBasedFileFormat](TextBasedFileFormat.md)
 | [[TextBasedFileFormat]] Base for text splitable `FileFormats`
 |===
 

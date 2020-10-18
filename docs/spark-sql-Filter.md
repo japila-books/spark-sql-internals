@@ -1,5 +1,3 @@
-title: Filter
-
 # Data Source Filter Predicate (For Filter Pushdown)
 
 `Filter` is the <<contract, contract>> for <<implementations, filter predicates>> that can be pushed down to a relation (aka _data source_).
@@ -10,9 +8,9 @@ title: Filter
 
 * (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. spark-sql-JDBCRelation.md#buildScan[JDBCRelation])
 
-* `FileFormat` is requested to spark-sql-FileFormat.md#buildReader[buildReader] (and hence `FileFormat` implementations, i.e. spark-sql-OrcFileFormat.md#buildReader[OrcFileFormat], spark-sql-CSVFileFormat.md#buildReader[CSVFileFormat], spark-sql-JsonFileFormat.md#buildReader[JsonFileFormat], spark-sql-TextFileFormat.md#buildReader[TextFileFormat] and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to [buildReader](FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](spark-sql-OrcFileFormat.md#buildReader), [CSVFileFormat](spark-sql-CSVFileFormat.md#buildReader), [JsonFileFormat](spark-sql-JsonFileFormat.md#buildReader), [TextFileFormat](spark-sql-TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to spark-sql-FileFormat.md#buildReaderWithPartitionValues[build a Data Reader with partition column values appended] (and hence `FileFormat` implementations, i.e. spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues[OrcFileFormat], spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[ParquetFileFormat])
+* `FileFormat` is requested to [build a Data Reader with partition column values appended](FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues))
 
 * `RowDataSourceScanExec` is spark-sql-SparkPlan-RowDataSourceScanExec.md#creating-instance[created] (for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 

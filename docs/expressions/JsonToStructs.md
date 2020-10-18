@@ -40,9 +40,7 @@ scala> println(jsonExpr.numberedTreeString)
 | Enabled (i.e. `true`)
 
 | [[parser]] `parser`
-a| `JacksonParser` with <<rowSchema, rowSchema>> and spark-sql-JsonFileFormat.md#JSONOptions[JSON options]
-
-NOTE: spark-sql-JsonFileFormat.md#JSONOptions[JSON options] are made up of the input <<options, options>> with spark-sql-JsonFileFormat.md#mode[mode] option as `FAILFAST` and the input <<timeZoneId, time zone>> as the default time zone.
+a| `JacksonParser` with <<rowSchema, rowSchema>> and [JSON options](../spark-sql-JsonFileFormat.md#JSONOptions)
 
 | [[rowSchema]] `rowSchema`
 a| [StructType](../StructType.md) that...FIXME

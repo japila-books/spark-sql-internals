@@ -1,4 +1,4 @@
-# SaveAsHiveFile -- DataWritingCommands That Write Query Result As Hive Files
+# SaveAsHiveFile
 
 :spark-version: 2.4.5
 :hive-version: 2.3.6
@@ -31,10 +31,9 @@ Read up on `ViewFs` in the {url-hadoop-docs}/hadoop-project-dist/hadoop-hdfs/Vie
 
 |===
 
-=== [[saveAsHiveFile]] `saveAsHiveFile` Method
+## <span id="saveAsHiveFile"> saveAsHiveFile
 
-[source, scala]
-----
+```scala
 saveAsHiveFile(
   sparkSession: SparkSession,
   plan: SparkPlan,
@@ -43,17 +42,15 @@ saveAsHiveFile(
   outputLocation: String,
   customPartitionLocations: Map[TablePartitionSpec, String] = Map.empty,
   partitionAttributes: Seq[Attribute] = Nil): Set[String]
-----
+```
 
-`saveAsHiveFile` sets Hadoop configuration properties when a compressed file output format is used (based on index.md#hive.exec.compress.output[hive.exec.compress.output] configuration property).
+`saveAsHiveFile` sets Hadoop configuration properties when a compressed file output format is used (based on [hive.exec.compress.output](index.md#hive.exec.compress.output) configuration property).
 
-`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the ../spark-sql-properties.md#spark.sql.sources.commitProtocolClass[spark.sql.sources.commitProtocolClass] configuration property (default: ../spark-sql-SQLHadoopMapReduceCommitProtocol.md[SQLHadoopMapReduceCommitProtocol]).
+`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the [spark.sql.sources.commitProtocolClass](../spark-sql-properties.md#spark.sql.sources.commitProtocolClass) configuration property.
 
-`saveAsHiveFile` uses `FileFormatWriter` utility to ../spark-sql-FileFormatWriter.md#write[write] the result of executing the input ../SparkPlan.md[physical query plan] (with a HiveFileFormat.md[HiveFileFormat] for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
+`saveAsHiveFile` uses `FileFormatWriter` utility to [write out](../FileFormatWriter.md#write) the result of executing the input [physical operator](../physical-operators/SparkPlan.md) (with a [HiveFileFormat](HiveFileFormat.md) for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
 
-NOTE: ../spark-sql-FileFormatWriter.md#write[BucketSpec] is undefined (`None`).
-
-NOTE: `saveAsHiveFile` is used when InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed.
+`saveAsHiveFile` is used when [InsertIntoHiveDirCommand](InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](InsertIntoHiveTable.md) logical commands are executed.
 
 === [[getExternalTmpPath]] `getExternalTmpPath` Method
 

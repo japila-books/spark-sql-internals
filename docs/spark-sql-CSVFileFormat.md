@@ -1,15 +1,14 @@
 # CSVFileFormat
 
 [[shortName]]
-`CSVFileFormat` is a TextBasedFileFormat.md[TextBasedFileFormat] for *csv* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).
+`CSVFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *csv* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).
 
-[source, scala]
-----
+```text
 spark.read.format("csv").load("csv-datasets")
 
 // or the same as above using a shortcut
 spark.read.csv("csv-datasets")
-----
+```
 
 `CSVFileFormat` uses <<CSVOptions, CSV options>> (that in turn are used to configure the underlying CSV parser from https://github.com/uniVocity/univocity-parsers[uniVocity-parsers] project).
 
@@ -168,9 +167,9 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
-
 `prepareWrite`...FIXME
+
+`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -186,6 +185,6 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of the <<spark-sql-FileFormat.md#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.md#, PartitionedFile>> reader.
-
 `buildReader`...FIXME
+
+`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.

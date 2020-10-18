@@ -1,13 +1,11 @@
-title: ParquetReadSupport
+# ParquetReadSupport
 
-# ParquetReadSupport -- Non-Vectorized ReadSupport in Parquet Data Source
+`ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of [UnsafeRows](spark-sql-UnsafeRow.md).
 
-`ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of <<spark-sql-UnsafeRow.md#, UnsafeRows>>.
-
-`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>> (with no support for <<spark-sql-vectorized-parquet-reader.md#, Vectorized Parquet Decoding>> and so falling back to parquet-mr).
+`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues) (with no support for [Vectorized Parquet Decoding](spark-sql-vectorized-parquet-reader.md) and so falling back to parquet-mr).
 
 [[parquet.read.support.class]]
-`ParquetReadSupport` is registered as the fully-qualified class name for <<spark-sql-ParquetFileFormat.md#parquet.read.support.class, parquet.read.support.class>> Hadoop configuration when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>>.
+`ParquetReadSupport` is registered as the fully-qualified class name for [parquet.read.support.class](spark-sql-ParquetFileFormat.md#parquet.read.support.class) Hadoop configuration when `ParquetFileFormat` is requested for a [data reader](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 [[creating-instance]]
 [[convertTz]]

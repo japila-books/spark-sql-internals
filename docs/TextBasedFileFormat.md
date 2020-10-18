@@ -1,8 +1,6 @@
-title: TextBasedFileFormat
+# TextBasedFileFormat &mdash; Base for Text Splitable FileFormats
 
-# TextBasedFileFormat -- Base for Text Splitable FileFormats
-
-`TextBasedFileFormat` is an extension of the <<spark-sql-FileFormat.md#, FileFormat>> contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
+`TextBasedFileFormat` is an extension of the [FileFormat](FileFormat.md) contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
 
 [[implementations]]
 .TextBasedFileFormats
@@ -11,16 +9,16 @@ title: TextBasedFileFormat
 | TextBasedFileFormat
 | Description
 
-| <<spark-sql-CSVFileFormat.md#, CSVFileFormat>>
+| [CSVFileFormat](spark-sql-CSVFileFormat.md)
 | [[CSVFileFormat]]
 
-| <<spark-sql-JsonFileFormat.md#, JsonFileFormat>>
+| [JsonFileFormat](spark-sql-JsonFileFormat.md)
 | [[JsonFileFormat]]
 
 | `LibSVMFileFormat`
 | [[LibSVMFileFormat]] Used in Spark MLlib
 
-| <<spark-sql-TextFileFormat.md#, TextFileFormat>>
+| [TextFileFormat](spark-sql-TextFileFormat.md)
 | [[TextFileFormat]]
 |===
 
@@ -37,7 +35,7 @@ isSplitable(
   path: Path): Boolean
 ----
 
-NOTE: `isSplitable` is part of spark-sql-FileFormat.md#isSplitable[FileFormat Contract] to know whether a given file is splitable or not.
+`isSplitable` is part of [FileFormat](FileFormat.md#isSplitable) abstraction.
 
 `isSplitable` requests the <<codecFactory, CompressionCodecFactory>> to find the ++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html#getCodec-org.apache.hadoop.fs.Path-++[compression codec for the given file] (as the input `path`) based on its filename suffix.
 

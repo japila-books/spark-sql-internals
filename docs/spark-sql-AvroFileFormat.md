@@ -1,14 +1,11 @@
-title: AvroFileFormat
-
 # AvroFileFormat -- FileFormat For Avro-Encoded Files
 
-`AvroFileFormat` is a <<spark-sql-FileFormat.md#, FileFormat>> for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
+`AvroFileFormat` is a [FileFormat](FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 
 [[shortName]]
 `AvroFileFormat` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and <<spark-sql-DataSourceRegister.md#shortName, registers itself>> as *avro* data source.
 
-[source, scala]
-----
+```text
 // ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
 
 // Writing data to Avro file(s)
@@ -29,10 +26,10 @@ scala> q.show
 +---+
 |  0|
 +---+
-----
+```
 
 [[isSplitable]]
-`AvroFileFormat` is <<spark-sql-FileFormat.md#isSplitable, splitable>>, i.e. FIXME
+`AvroFileFormat` is [splitable](FileFormat.md#isSplitable), i.e. FIXME
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -48,9 +45,9 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of the <<spark-sql-FileFormat.md#buildReader, FileFormat Contract>> to build a <<spark-sql-PartitionedFile.md#, PartitionedFile>> reader.
-
 `buildReader`...FIXME
+
+`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.
 
 === [[inferSchema]] Inferring Schema -- `inferSchema` Method
 
@@ -62,9 +59,9 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ----
 
-NOTE: `inferSchema` is part of the <<spark-sql-FileFormat.md#inferSchema, FileFormat Contract>> to infer (return) the [schema](StructType.md) of the given files.
-
 `inferSchema`...FIXME
+
+`inferSchema` is part of the [FileFormat](FileFormat.md#inferSchema) abstraction.
 
 === [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
@@ -77,6 +74,6 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of the <<spark-sql-FileFormat.md#prepareWrite, FileFormat Contract>> to prepare a write job.
-
 `prepareWrite`...FIXME
+
+`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.

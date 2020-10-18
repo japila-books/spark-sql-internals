@@ -604,7 +604,7 @@ In the end, `saveToV1Source` [runs the logical command for writing](#runCommand)
 
   * A [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) for [CreatableRelationProviders](spark-sql-CreatableRelationProvider.md)
 
-    * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](spark-sql-FileFormat.md)
+    * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](FileFormat.md)
 
 `saveToV1Source` is used when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save).
 

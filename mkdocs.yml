@@ -75,8 +75,11 @@ extra:
     version: 2.7.4
     api: https://hadoop.apache.org/docs/r2.7.4/api
   java:
-    version: 8
-    api: https://docs.oracle.com/javase/8/docs/api
+    version: 11
+    api: https://docs.oracle.com/en/java/javase/11/docs/api
+  scala:
+    version: 2.12.2
+    doc: https://www.scala-lang.org/api/2.12.2
   book:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
 
@@ -261,7 +264,7 @@ nav:
     - Data Sources:
       - File-Based Data Sources:
         - FileFormat:
-          - spark-sql-FileFormat.md
+          - FileFormat.md
           - spark-sql-OrcFileFormat.md
           - spark-sql-ParquetFileFormat.md
         - TextBasedFileFormat:
@@ -277,7 +280,7 @@ nav:
           - InMemoryFileIndex.md
           - PartitioningAwareFileIndex.md
           - PrunedInMemoryFileIndex.md
-        - spark-sql-FileFormatWriter.md
+        - FileFormatWriter: FileFormatWriter.md
         - spark-sql-SQLHadoopMapReduceCommitProtocol.md
         - spark-sql-PartitionedFile.md
         - spark-sql-ParquetReadSupport.md

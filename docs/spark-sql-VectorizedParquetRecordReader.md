@@ -1,10 +1,8 @@
 # VectorizedParquetRecordReader
 
-`VectorizedParquetRecordReader` is a concrete spark-sql-SpecificParquetRecordReaderBase.md[SpecificParquetRecordReaderBase] for <<spark-sql-ParquetFileFormat.md#, parquet>> file format for <<spark-sql-vectorized-parquet-reader.md#, Vectorized Parquet Decoding>>.
+`VectorizedParquetRecordReader` is a concrete [SpecificParquetRecordReaderBase](spark-sql-SpecificParquetRecordReaderBase.md) for [parquet](spark-sql-ParquetFileFormat.md) file format for [Vectorized Parquet Decoding](spark-sql-vectorized-parquet-reader.md).
 
-`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[data reader] (with spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] property enabled and the read schema with spark-sql-DataType.md#AtomicType[AtomicType] data types only).
-
-NOTE: spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is enabled (`true`) by default.
+`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues) (with [spark.sql.parquet.enableVectorizedReader](spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) property enabled and the read schema with [AtomicType](spark-sql-DataType.md#AtomicType) data types only).
 
 [[creating-instance]]
 `VectorizedParquetRecordReader` takes the following to be created:
@@ -135,7 +133,7 @@ void enableReturningBatches()
 
 `enableReturningBatches` simply turns <<returnColumnarBatch, returnColumnarBatch>> internal flag on.
 
-NOTE: `enableReturningBatches` is used exclusively when `ParquetFileFormat` is requested for a <<spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues, data reader>> (for <<spark-sql-ParquetFileFormat.md#supportBatch, vectorized parquet decoding in whole-stage codegen>>).
+`enableReturningBatches` is used when `ParquetFileFormat` is requested for a [data reader](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues) (for [vectorized parquet decoding in whole-stage codegen](spark-sql-ParquetFileFormat.md#supportBatch)).
 
 === [[initBatch]] Initializing Columnar Batch -- `initBatch` Method
 
@@ -169,14 +167,10 @@ spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnV
 
 `initBatch` initializes <<missingColumns, missing columns>> with `nulls`.
 
-[NOTE]
-====
 `initBatch` is used when:
 
-* `VectorizedParquetRecordReader` is requested for <<resultBatch, resultBatch>>
-
-* `ParquetFileFormat` is requested to spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues[build a data reader with partition column values appended]
-====
+* `VectorizedParquetRecordReader` is requested for [resultBatch](#resultBatch)
+* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 === [[nextBatch]] Reading Next Rows Into Columnar Batch -- `nextBatch` Method
 

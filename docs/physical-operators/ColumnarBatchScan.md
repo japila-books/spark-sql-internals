@@ -35,7 +35,7 @@
 a| [[DataSourceV2ScanExec]] <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.md#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, can read data in batch>> (default: `true`)
 
 | <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>>
-| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-FileFormat.md#, FileFormats>> that <<spark-sql-FileFormat.md#supportBatch, support returning columnar batches>> (default: `false`)
+| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../FileFormat.md) that [support returning columnar batches](../FileFormat.md#supportBatch) (default: `false`)
 
 | <<spark-sql-SparkPlan-InMemoryTableScanExec.md#, InMemoryTableScanExec>>
 a| [[InMemoryTableScanExec]] <<spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch, Supports vectorized decoding>> when all of the following hold:
@@ -148,10 +148,8 @@ NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested
 supportsBatch: Boolean = true
 ----
 
-`supportsBatch` flag controls whether a spark-sql-FileFormat.md[FileFormat] supports spark-sql-vectorized-parquet-reader.md[vectorized decoding] or not. `supportsBatch` is enabled (i.e. `true`) by default.
+`supportsBatch` flag controls whether a [FileFormat](../FileFormat.md) supports [vectorized decoding](../spark-sql-vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
 
-[NOTE]
-====
 `supportsBatch` is used when:
 
 * `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>>
@@ -161,7 +159,6 @@ supportsBatch: Boolean = true
 * `InMemoryTableScanExec` physical operator is requested for spark-sql-SparkPlan-InMemoryTableScanExec.md#supportCodegen[supportCodegen] flag, spark-sql-SparkPlan-InMemoryTableScanExec.md#inputRDD[input RDD] and to spark-sql-SparkPlan-InMemoryTableScanExec.md#doExecute[execute]
 
 * `DataSourceV2ScanExec` physical operator is requested to spark-sql-SparkPlan-DataSourceV2ScanExec.md#doExecute[execute]
-====
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 

@@ -1,15 +1,14 @@
 # TextFileFormat
 
 [[shortName]]
-`TextFileFormat` is a TextBasedFileFormat.md[TextBasedFileFormat] for *text* format.
+`TextFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for **text** format.
 
-[source, scala]
-----
+```text
 spark.read.format("text").load("text-datasets")
 
 // or the same as above using a shortcut
 spark.read.text("text-datasets")
-----
+```
 
 `TextFileFormat` uses <<TextOptions, text options>> while loading a dataset.
 
@@ -42,9 +41,9 @@ prepareWrite(
   dataSchema: StructType): OutputWriterFactory
 ----
 
-NOTE: `prepareWrite` is part of spark-sql-FileFormat.md#prepareWrite[FileFormat Contract] that is used when `FileFormatWriter` is requested to spark-sql-FileFormatWriter.md#write[write the result of a structured query].
-
 `prepareWrite`...FIXME
+
+`prepareWrite` is part of [FileFormat](FileFormat.md#prepareWrite) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -60,9 +59,9 @@ buildReader(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-NOTE: `buildReader` is part of spark-sql-FileFormat.md#buildReader[FileFormat Contract] to...FIXME
-
 `buildReader`...FIXME
+
+`buildReader` is part of [FileFormat](FileFormat.md#buildReader) abstraction.
 
 === [[readToUnsafeMem]] `readToUnsafeMem` Internal Method
 
@@ -76,4 +75,4 @@ readToUnsafeMem(
 
 `readToUnsafeMem`...FIXME
 
-NOTE: `readToUnsafeMem` is used exclusively when `TextFileFormat` is requested to buildReader
+`readToUnsafeMem` is used when `TextFileFormat` is requested to `buildReader`
