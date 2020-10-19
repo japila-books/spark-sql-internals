@@ -242,3 +242,16 @@ columnarRules: Seq[ColumnarRule]
 `columnarRules` requests the [SparkSessionExtensions](#extensions) to [buildColumnarRules](SparkSessionExtensions.md#buildColumnarRules).
 
 `columnarRules` is used when `BaseSessionStateBuilder` is requested to [build a SessionState instance](#build).
+
+## <span id="customCheckRules"> customCheckRules
+
+```scala
+customCheckRules: Seq[LogicalPlan => Unit]
+```
+
+`customCheckRules` requests the [SparkSessionExtensions](#extensions) to [buildCheckRules](SparkSessionExtensions.md#buildCheckRules) on the [SparkSession](#session).
+
+`customCheckRules` is used when:
+
+* `BaseSessionStateBuilder` is requested for an [Analyzer](#analyzer)
+* `HiveSessionStateBuilder` is requested for an [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)

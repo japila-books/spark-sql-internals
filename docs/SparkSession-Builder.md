@@ -72,7 +72,7 @@ withExtensions(
   f: SparkSessionExtensions => Unit): Builder
 ```
 
-Allows registering SparkSession extensions using [SparkSessionExtensions](SparkSessionExtensions.md)
+Allows registering SparkSession extensions using [SparkSessionExtensions](SparkSessionExtensions.md).
 
 `withExtensions` simply executes the input `f` function with a `SparkSessionExtensions`.
 
