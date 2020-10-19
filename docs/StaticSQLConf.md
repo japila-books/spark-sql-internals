@@ -1,8 +1,71 @@
-title: StaticSQLConf
+# StaticSQLConf
 
-# StaticSQLConf -- Cross-Session, Immutable and Static SQL Configuration
+`StaticSQLConf` holds cross-session, immutable and static SQL configuration properties.
 
-`StaticSQLConf` holds <<properties, cross-session, immutable and static SQL configuration properties>>.
+```text
+assert(sc.isInstanceOf[org.apache.spark.SparkContext])
+
+import org.apache.spark.sql.internal.StaticSQLConf
+sc.getConf.get(StaticSQLConf.SPARK_SESSION_EXTENSIONS.key)
+```
+
+## <span id="spark.sql.extensions"><span id="SPARK_SESSION_EXTENSIONS"> spark.sql.extensions
+
+A comma-separated list of **SQL extension configuration classes** that implement `Function1[SparkSessionExtensions, Unit]` used to configure Spark Session extensions. The classes must have a no-args constructor. If multiple extensions are specified, they are applied in the specified order. For the case of rules and planner strategies, they are applied in the specified order. For the case of parsers, the last parser is used and each parser can delegate to its predecessor. For the case of function name conflicts, the last registered function name is used.
+
+Default: `(empty)`
+
+Used when:
+
+* `SparkSession` utility is used to [apply SparkSessionExtensions](SparkSession.md#applyExtensions)
+
+## <span id="spark.sql.broadcastExchange.maxThreadThreshold"><span id="BROADCAST_EXCHANGE_MAX_THREAD_THRESHOLD"> spark.sql.broadcastExchange.maxThreadThreshold
+
+**(internal)** The maximum degree of parallelism to fetch and broadcast the table. If we encounter memory issue like frequently full GC or OOM when broadcast table we can decrease this number in order to reduce memory usage. Notice the number should be carefully chosen since decreasing parallelism might cause longer waiting for other broadcasting. Also, increasing parallelism may cause memory problem.
+
+The threshold must be in (0,128]
+
+Default: `128`
+
+## <span id="spark.sql.event.truncate.length"><span id="SQL_EVENT_TRUNCATE_LENGTH"> spark.sql.event.truncate.length
+
+Threshold of SQL length beyond which it will be truncated before adding to event. Defaults to no truncation. If set to 0, callsite will be logged instead.
+
+Must be set greater or equal to zero.
+
+Default: `Int.MaxValue`
+
+## <span id="spark.sql.legacy.sessionInitWithConfigDefaults"><span id="SQL_LEGACY_SESSION_INIT_WITH_DEFAULTS"> spark.sql.legacy.sessionInitWithConfigDefaults
+
+Flag to revert to legacy behavior where a cloned SparkSession receives SparkConf defaults, dropping any overrides in its parent SparkSession.
+
+Default: `false`
+
+## <span id="spark.sql.defaultUrlStreamHandlerFactory.enabled"><span id="DEFAULT_URL_STREAM_HANDLER_FACTORY_ENABLED"> spark.sql.defaultUrlStreamHandlerFactory.enabled
+
+**(internal)** When true, register Hadoop's FsUrlStreamHandlerFactory to support ADD JAR against HDFS locations. It should be disabled when a different stream protocol handler should be registered to support a particular protocol type, or if Hadoop's FsUrlStreamHandlerFactory conflicts with other protocol types such as `http` or `https`. See also SPARK-25694 and HADOOP-14598.
+
+Default: `true`
+
+## <span id="spark.sql.streaming.ui.enabled"><span id="STREAMING_UI_ENABLED"> spark.sql.streaming.ui.enabled
+
+Whether to run the Structured Streaming Web UI for the Spark application when the Spark Web UI is enabled.
+
+Default: `true`
+
+## <span id="spark.sql.streaming.ui.retainedProgressUpdates"><span id="STREAMING_UI_RETAINED_PROGRESS_UPDATES"> spark.sql.streaming.ui.retainedProgressUpdates
+
+The number of progress updates to retain for a streaming query for Structured Streaming UI.
+
+Default: `100`
+
+## <span id="spark.sql.streaming.ui.retainedQueries"><span id="STREAMING_UI_RETAINED_QUERIES"> spark.sql.streaming.ui.retainedQueries
+
+The number of inactive queries to retain for Structured Streaming UI.
+
+Default: `100`
+
+## To Be Reviewed
 
 [[properties]]
 .StaticSQLConf's Configuration Properties
@@ -35,12 +98,6 @@ Used when:
 Default: `false`
 
 Not all functions are supported when enabled.
-
-| [[spark.sql.extensions]][[SPARK_SESSION_EXTENSIONS]] *spark.sql.extensions*
-
-Name of the *SQL extension configuration class* that is used to configure `SparkSession` extensions (when `Builder` is requested to <<SparkSession-Builder.md#getOrCreate, get or create a SparkSession>>). The class should implement `Function1[SparkSessionExtensions, Unit]`, and must have a no-args constructor.
-
-Default: (empty)
 
 | [[spark.sql.filesourceTableRelationCacheSize]][[FILESOURCE_TABLE_RELATION_CACHE_SIZE]] *spark.sql.filesourceTableRelationCacheSize*
 

@@ -437,7 +437,7 @@ time[T](f: => T): T
 
 `time` executes a code block and prints out (to standard output) the time taken to execute it
 
-## <span id="applyExtensions"> applyExtensions Internal Method
+## <span id="applyExtensions"> Applying SparkSessionExtensions
 
 ```scala
 applyExtensions(
@@ -456,4 +456,7 @@ In case of `ClassCastException`, `ClassNotFoundException` or `NoClassDefFoundErr
 Cannot use [extensionConfClassName] to configure session extensions.
 ```
 
-`applyExtensions` is used when `SparkSession.Builder` is requested to [get active or create a new SparkSession instance](SparkSession-Builder.md#getOrCreate).
+`applyExtensions` is used when:
+
+* `SparkSession.Builder` is requested to [get active or create a new SparkSession instance](SparkSession-Builder.md#getOrCreate)
+* `SparkSession` is [created](#creating-instance) (from a `SparkContext`)
