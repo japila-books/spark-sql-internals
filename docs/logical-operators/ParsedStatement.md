@@ -21,7 +21,7 @@
 * AlterViewAsStatement
 * AlterViewSetPropertiesStatement
 * AlterViewUnsetPropertiesStatement
-* AnalyzeColumnStatement
+* [AnalyzeColumnStatement](AnalyzeColumnStatement.md)
 * AnalyzeTableStatement
 * CacheTableStatement
 * CreateFunctionStatement

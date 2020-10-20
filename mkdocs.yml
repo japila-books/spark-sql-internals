@@ -158,7 +158,8 @@ nav:
         - AlterTableRecoverPartitionsStatement: logical-operators/AlterTableRecoverPartitionsStatement.md
         - logical-operators/AlterViewAsCommand.md
         - logical-operators/AnalysisBarrier.md
-        - logical-operators/AnalyzeColumnCommand.md
+        - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
+        - AnalyzeColumnStatement: logical-operators/AnalyzeColumnStatement.md
         - logical-operators/AnalyzePartitionCommand.md
         - logical-operators/AnalyzeTableCommand.md
         - logical-operators/AppendData.md

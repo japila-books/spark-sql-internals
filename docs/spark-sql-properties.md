@@ -28,6 +28,17 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.statistics.histogram.enabled"> spark.sql.statistics.histogram.enabled
+
+Enables generating histograms for [ANALYZE TABLE](sql/AstBuilder.md#visitAnalyze) SQL statement
+
+Default: `false`
+
+!!! note "Equi-Height Histogram"
+    Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
+
+Use [SQLConf.histogramEnabled](SQLConf.md#histogramEnabled) method to access the current value.
+
 ## <span id="spark.sql.session.timeZone"> spark.sql.session.timeZone
 
 The ID of session-local timezone (e.g. "GMT", "America/Los_Angeles")
@@ -1163,16 +1174,6 @@ Default: `false`
 This can be useful in determining if a table is small enough for auto broadcast joins in query planning.
 
 Use [SQLConf.fallBackToHdfsForStatsEnabled](SQLConf.md#fallBackToHdfsForStatsEnabled) method to access the current value.
-
-| [[spark.sql.statistics.histogram.enabled]] *spark.sql.statistics.histogram.enabled*
-
-Enables generating histograms when spark-sql-LogicalPlan-AnalyzeColumnCommand.md#computeColumnStats[computing column statistics]
-
-Default: `false`
-
-NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
-
-Use [SQLConf.histogramEnabled](SQLConf.md#histogramEnabled) method to access the current value.
 
 | [[spark.sql.statistics.histogram.numBins]] *spark.sql.statistics.histogram.numBins*
 

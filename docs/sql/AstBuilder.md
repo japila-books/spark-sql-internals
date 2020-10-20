@@ -14,6 +14,17 @@
 
 ## Visit Callbacks
 
+### <span id="visitAnalyze"> visitAnalyze
+
+Creates an [AnalyzeColumnStatement](../logical-operators/AnalyzeColumnStatement.md) or an `AnalyzeTableStatement` logical operator
+
+```text
+ANALYZE TABLE multipartIdentifier partitionSpec? COMPUTE STATISTICS
+  (identifier | FOR COLUMNS identifierSeq | FOR ALL COLUMNS)?
+```
+
+ANTLR labeled alternative: `#analyze`
+
 ### visitDeleteFromTable
 
 Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md)

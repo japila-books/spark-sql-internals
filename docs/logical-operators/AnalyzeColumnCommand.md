@@ -1,15 +1,105 @@
-title: AnalyzeColumnCommand
-
 # AnalyzeColumnCommand Logical Command
 
-`AnalyzeColumnCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#AnalyzeColumnCommand[ANALYZE TABLE] with `FOR COLUMNS` clause (and no `PARTITION` specification).
+`AnalyzeColumnCommand` is a [logical command](RunnableCommand.md) for [ANALYZE TABLE](../sql/AstBuilder.md#visitAnalyze) SQL statement.
 
-```
-ANALYZE TABLE tableName COMPUTE STATISTICS FOR COLUMNS columnNames
+`AnalyzeColumnCommand` is not supported on views.
+
+## Creating Instance
+
+`AnalyzeColumnCommand` takes the following to be created:
+
+* <span id="tableIdent"> `TableIdentifier`
+* <span id="columnNames"> Column Names (optional)
+* <span id="allColumns"> `allColumns` Flag
+
+`AnalyzeColumnCommand` is created when [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to resolve an [AnalyzeColumnStatement](AnalyzeColumnStatement.md)).
+
+## <span id="run"> Executing Logical Command
+
+```scala
+run(
+  sparkSession: SparkSession): Seq[Row]
 ```
 
-[source, scala]
-----
+`run` calculates the following statistics:
+
+* sizeInBytes
+* stats for each column
+
+`run` is part of [RunnableCommand](RunnableCommand.md#run) abstraction.
+
+### <span id="computeColumnStats"> Computing Statistics for Specified Columns
+
+```scala
+computeColumnStats(
+  sparkSession: SparkSession,
+  tableIdent: TableIdentifier,
+  columnNames: Seq[String]): (Long, Map[String, ColumnStat])
+```
+
+`computeColumnStats`...FIXME
+
+### <span id="computePercentiles"> Computing Percentiles
+
+```scala
+computePercentiles(
+  attributesToAnalyze: Seq[Attribute],
+  sparkSession: SparkSession,
+  relation: LogicalPlan): AttributeMap[ArrayData]
+```
+
+`computePercentiles`...FIXME
+
+## Demo
+
+`AnalyzeColumnCommand` can [generate column histograms](#computeColumnStats) when [spark.sql.statistics.histogram.enabled](../spark-sql-properties.md#spark.sql.statistics.histogram.enabled) configuration property is enabled. `AnalyzeColumnCommand` supports column histograms for the following [data types](../spark-sql-DataType.md):
+
+* `IntegralType`
+* `DecimalType`
+* `DoubleType`
+* `FloatType`
+* `DateType`
+* `TimestampType`
+
+```text
+// ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
+// Use the above example to set up the environment
+// Make sure that ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS was run with histogram enabled
+
+// There are 254 bins by default
+// Use spark.sql.statistics.histogram.numBins to control the bins
+val descExtSQL = s"DESC EXTENDED $tableName p1"
+scala> spark.sql(descExtSQL).show(truncate = false)
++--------------+-----------------------------------------------------+
+|info_name     |info_value                                           |
++--------------+-----------------------------------------------------+
+|col_name      |p1                                                   |
+|data_type     |double                                               |
+|comment       |NULL                                                 |
+|min           |0.0                                                  |
+|max           |1.4                                                  |
+|num_nulls     |0                                                    |
+|distinct_count|2                                                    |
+|avg_col_len   |8                                                    |
+|max_col_len   |8                                                    |
+|histogram     |height: 0.007874015748031496, num_of_bins: 254       |
+|bin_0         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_1         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_2         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_3         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_4         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_5         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_6         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_7         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_8         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
+|bin_9         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
++--------------+-----------------------------------------------------+
+only showing top 20 rows
+```
+
+## Demo
+
+```text
 // Make the example reproducible
 val tableName = "t1"
 import org.apache.spark.sql.catalyst.TableIdentifier
@@ -56,109 +146,4 @@ scala> sql(s"DESC EXTENDED $tableName id").show
 |   max_col_len|         4|
 |     histogram|      NULL|
 +--------------+----------+
-----
-
-`AnalyzeColumnCommand` can <<computeColumnStats, generate column histograms>> when spark-sql-properties.md#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property is turned on (which is disabled by default). `AnalyzeColumnCommand` supports column histograms for the following spark-sql-DataType.md[data types]:
-
-* `IntegralType`
-* `DecimalType`
-* `DoubleType`
-* `FloatType`
-* `DateType`
-* `TimestampType`
-
-NOTE: Histograms can provide better estimation accuracy. Currently, Spark only supports equi-height histogram. Note that collecting histograms takes extra cost. For example, collecting column statistics usually takes only one table scan, but generating equi-height histogram will cause an extra table scan.
-
-[source, scala]
-----
-// ./bin/spark-shell --conf spark.sql.statistics.histogram.enabled=true
-// Use the above example to set up the environment
-// Make sure that ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS was run with histogram enabled
-
-// There are 254 bins by default
-// Use spark.sql.statistics.histogram.numBins to control the bins
-val descExtSQL = s"DESC EXTENDED $tableName p1"
-scala> spark.sql(descExtSQL).show(truncate = false)
-+--------------+-----------------------------------------------------+
-|info_name     |info_value                                           |
-+--------------+-----------------------------------------------------+
-|col_name      |p1                                                   |
-|data_type     |double                                               |
-|comment       |NULL                                                 |
-|min           |0.0                                                  |
-|max           |1.4                                                  |
-|num_nulls     |0                                                    |
-|distinct_count|2                                                    |
-|avg_col_len   |8                                                    |
-|max_col_len   |8                                                    |
-|histogram     |height: 0.007874015748031496, num_of_bins: 254       |
-|bin_0         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_1         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_2         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_3         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_4         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_5         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_6         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_7         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_8         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-|bin_9         |lower_bound: 0.0, upper_bound: 0.0, distinct_count: 1|
-+--------------+-----------------------------------------------------+
-only showing top 20 rows
-----
-
-`AnalyzeColumnCommand` is not supported on views.
-
-## analyze Labeled Alternative
-
-`AnalyzeColumnCommand` is described by `analyze` labeled alternative in `statement` expression in [SqlBase.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../sql/SparkSqlParser.md#visitAnalyze).
-
-=== [[run]] Executing Logical Command -- `run` Method
-
-[source, scala]
-----
-run(sparkSession: SparkSession): Seq[Row]
-----
-
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
-
-`run` calculates the following statistics:
-
-* sizeInBytes
-* stats for each column
-
-CAUTION: FIXME
-
-=== [[computeColumnStats]] Computing Statistics for Specified Columns -- `computeColumnStats` Internal Method
-
-[source, scala]
-----
-computeColumnStats(
-  sparkSession: SparkSession,
-  tableIdent: TableIdentifier,
-  columnNames: Seq[String]): (Long, Map[String, ColumnStat])
-----
-
-`computeColumnStats`...FIXME
-
-NOTE: `computeColumnStats` is used exclusively when `AnalyzeColumnCommand` is <<run, executed>>.
-
-=== [[computePercentiles]] `computePercentiles` Internal Method
-
-[source, scala]
-----
-computePercentiles(
-  attributesToAnalyze: Seq[Attribute],
-  sparkSession: SparkSession,
-  relation: LogicalPlan): AttributeMap[ArrayData]
-----
-
-`computePercentiles`...FIXME
-
-NOTE: `computePercentiles` is used exclusively when `AnalyzeColumnCommand` is <<run, executed>> (and <<computeColumnStats, computes column statistics>>).
-
-=== [[creating-instance]] Creating AnalyzeColumnCommand Instance
-
-`AnalyzeColumnCommand` takes the following when created:
-
-* [[tableIdent]] `TableIdentifier`
-* [[columnNames]] Column names
+```

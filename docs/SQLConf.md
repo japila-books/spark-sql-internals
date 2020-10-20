@@ -7,6 +7,12 @@
 
 `SQLConf` offers methods to <<get, get>>, <<set, set>>, <<unset, unset>> or <<clear, clear>> values of configuration properties, but has also the <<accessor-methods, accessor methods>> to read the current value of a configuration property or hint.
 
+## <span id="MAX_TO_STRING_FIELDS"><span id="histogramEnabled"> histogramEnabled
+
+The value of [spark.sql.statistics.histogram.enabled](spark-sql-properties.md#spark.sql.statistics.histogram.enabled) configuration property
+
+Used when [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md) logical command is executed.
+
 ## <span id="MAX_TO_STRING_FIELDS"><span id="maxToStringFields"> maxToStringFields
 
 The value of [spark.sql.debug.maxToStringFields](spark-sql-properties.md#spark.sql.debug.maxToStringFields) configuration property
@@ -326,10 +332,6 @@ a| [[filesMaxPartitionBytes]] Used exclusively when <<spark-sql-SparkPlan-FileSo
 | filesOpenCostInBytes
 | <<spark-sql-properties.md#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>>
 a| [[filesOpenCostInBytes]] Used exclusively when <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator is requested to <<spark-sql-SparkPlan-FileSourceScanExec.md#createNonBucketedReadRDD, create an RDD for non-bucketed reads>>
-
-| histogramEnabled
-| spark-sql-properties.md#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled]
-| [[histogramEnabled]] Used exclusively when `AnalyzeColumnCommand` logical command is spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[executed].
 
 | histogramNumBins
 | spark-sql-properties.md#spark.sql.statistics.histogram.numBins[spark.sql.statistics.histogram.numBins]
