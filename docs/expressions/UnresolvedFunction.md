@@ -1,6 +1,4 @@
-title: UnresolvedFunction
-
-# UnresolvedFunction Unevaluable Expression -- Logical Representation of Functions in Queries
+# UnresolvedFunction Unevaluable Expression
 
 `UnresolvedFunction` is an expressions/Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
 

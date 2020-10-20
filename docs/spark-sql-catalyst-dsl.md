@@ -1,8 +1,6 @@
-title: Catalyst DSL
+# Catalyst DSL
 
-# Catalyst DSL &mdash; Implicit Conversions for Catalyst Data Structures
-
-*Catalyst DSL* is a collection of <<implicit-conversions, Scala implicit conversions>> for constructing Catalyst data structures, i.e. <<ExpressionConversions, expressions>> and <<plans, logical plans>>, more easily.
+**Catalyst DSL** is a collection of <<implicit-conversions, Scala implicit conversions>> for constructing Catalyst data structures, i.e. <<ExpressionConversions, expressions>> and <<plans, logical plans>>, more easily.
 
 The goal of Catalyst DSL is to make working with Spark SQL's building blocks easier (e.g. for testing or Spark SQL internals exploration).
 

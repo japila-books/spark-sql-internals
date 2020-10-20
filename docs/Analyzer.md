@@ -1,6 +1,6 @@
-# Analyzer &mdash; Logical Query Plan Analyzer
+# Logical Query Plan Analyzer
 
-`Analyzer` (aka _Spark Analyzer_ or _Query Analyzer_) is the **logical query plan analyzer** that [validates and transforms an unresolved logical plan](#execute) to an **analyzed logical plan**.
+`Analyzer` (_Spark Analyzer_ or _Query Analyzer_) is the **logical query plan analyzer** that [validates and transforms an unresolved logical plan](#execute) to an **analyzed logical plan**.
 
 `Analyzer` is a [RuleExecutor](catalyst/RuleExecutor.md) of rules that transform [logical operators](logical-operators/LogicalPlan.md) (`RuleExecutor[LogicalPlan]`).
 
