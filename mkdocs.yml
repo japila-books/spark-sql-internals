@@ -263,17 +263,10 @@ nav:
         - spark-sql-CatalystConf.md
       - UDFRegistration.md
     - Data Sources:
-      - File-Based Data Sources:
-        - FileFormat:
-          - FileFormat.md
-          - spark-sql-OrcFileFormat.md
-          - spark-sql-ParquetFileFormat.md
-        - TextBasedFileFormat:
-          - TextBasedFileFormat.md
-          - spark-sql-CSVFileFormat.md
-          - spark-sql-JsonFileFormat.md
-          - spark-sql-TextFileFormat.md
-        - JsonDataSource: spark-sql-JsonDataSource.md
+      - Files:
+        - FileFormat: FileFormat.md
+        - TextFileFormat: spark-sql-TextFileFormat.md
+        - TextBasedFileFormat: TextBasedFileFormat.md
         - HadoopFsRelation: HadoopFsRelation.md
         - FileIndex:
           - FileIndex.md
@@ -284,7 +277,6 @@ nav:
         - FileFormatWriter: FileFormatWriter.md
         - spark-sql-SQLHadoopMapReduceCommitProtocol.md
         - spark-sql-PartitionedFile.md
-        - spark-sql-ParquetReadSupport.md
         - spark-sql-RecordReaderIterator.md
       - Kafka:
         - spark-sql-kafka.md
@@ -321,6 +313,14 @@ nav:
       - Console:
         - spark-sql-console.md
         - spark-sql-ConsoleSinkProvider.md
+      - CSV: spark-sql-CSVFileFormat.md
+      - JSON:
+        - JsonFileFormat: spark-sql-JsonFileFormat.md
+        - JsonDataSource: spark-sql-JsonDataSource.md
+      - ORC: spark-sql-OrcFileFormat.md
+      - Parquet:
+        - ParquetFileFormat: spark-sql-ParquetFileFormat.md
+        - ParquetReadSupport: spark-sql-ParquetReadSupport.md
     - Hive Integration:
       - hive/index.md
       - hive/configuration-properties.md

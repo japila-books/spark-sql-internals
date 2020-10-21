@@ -1,4 +1,4 @@
-# TextBasedFileFormat &mdash; Base for Text Splitable FileFormats
+# TextBasedFileFormat
 
 `TextBasedFileFormat` is an extension of the [FileFormat](FileFormat.md) contract for <<implementations, formats>> that can be <<isSplitable, splitable>>.
 
