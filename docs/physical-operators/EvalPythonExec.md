@@ -15,7 +15,7 @@ evaluate(
   context: TaskContext): Iterator[InternalRow]
 ```
 
-Evaluates [PythonUDFs](#udfs) (and produces [internal binary rows](../spark-sql-InternalRow.md))
+Evaluates [PythonUDFs](#udfs) (and produces [internal binary rows](../InternalRow.md))
 
 Used when `EvalPythonExec` physical operator is [executed](#doExecute)
 

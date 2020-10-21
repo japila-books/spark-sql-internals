@@ -1,8 +1,6 @@
-title: BroadcastHashJoinExec
+# BroadcastHashJoinExec Binary Physical Operator
 
-# BroadcastHashJoinExec Binary Physical Operator for Broadcast Hash Join
-
-`BroadcastHashJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, perform>> a *broadcast hash join*.
+`BroadcastHashJoinExec` is a [binary physical operator](BinaryExecNode.md) to [perform](#doExecute) a **broadcast hash join**.
 
 `BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
 
@@ -105,9 +103,9 @@ Generated code:
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute`...FIXME
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 === [[codegenInner]] Generating Java Source Code for Inner Join -- `codegenInner` Internal Method
 

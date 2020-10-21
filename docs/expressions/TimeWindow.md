@@ -2,7 +2,7 @@ title: TimeWindow
 
 # TimeWindow Unevaluable Unary Expression
 
-`TimeWindow` is an [unevaluable](Unevaluable.md) and expressions/Expression.md#NonSQLExpression[non-SQL] unary expression that represents spark-sql-functions.md#window[window] function.
+`TimeWindow` is an [unevaluable](Unevaluable.md) and Expression.md#NonSQLExpression[non-SQL] unary expression that represents spark-sql-functions.md#window[window] function.
 
 [source, scala]
 ----
@@ -116,7 +116,7 @@ apply(
   startTime: String): TimeWindow
 ----
 
-`apply` creates a <<TimeWindow, TimeWindow>> with `timeColumn` expressions/Expression.md[expression] and `windowDuration`, `slideDuration`, `startTime` <<getIntervalInMicroSeconds, microseconds>>.
+`apply` creates a <<TimeWindow, TimeWindow>> with `timeColumn` Expression.md[expression] and `windowDuration`, `slideDuration`, `startTime` <<getIntervalInMicroSeconds, microseconds>>.
 
 NOTE: `apply` is used exclusively in spark-sql-functions-datetime.md#window[window] function.
 

@@ -265,7 +265,7 @@ nav:
     - Data Sources:
       - Files:
         - FileFormat: FileFormat.md
-        - TextFileFormat: spark-sql-TextFileFormat.md
+        - TextFileFormat: TextFileFormat.md
         - TextBasedFileFormat: TextBasedFileFormat.md
         - HadoopFsRelation: HadoopFsRelation.md
         - FileIndex:
@@ -275,9 +275,9 @@ nav:
           - PartitioningAwareFileIndex.md
           - PrunedInMemoryFileIndex.md
         - FileFormatWriter: FileFormatWriter.md
-        - spark-sql-SQLHadoopMapReduceCommitProtocol.md
-        - spark-sql-PartitionedFile.md
-        - spark-sql-RecordReaderIterator.md
+        - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
+        - PartitionedFile: PartitionedFile.md
+        - RecordReaderIterator: RecordReaderIterator.md
       - Kafka:
         - spark-sql-kafka.md
         - spark-sql-kafka-options.md
@@ -299,7 +299,7 @@ nav:
       - Avro:
         - spark-sql-avro.md
         - spark-sql-AvroOptions.md
-        - spark-sql-AvroFileFormat.md
+        - AvroFileFormat: AvroFileFormat.md
         - spark-sql-Expression-CatalystDataToAvro.md
         - spark-sql-Expression-AvroDataToCatalyst.md
       - JDBC:
@@ -317,10 +317,10 @@ nav:
       - JSON:
         - JsonFileFormat: spark-sql-JsonFileFormat.md
         - JsonDataSource: spark-sql-JsonDataSource.md
-      - ORC: spark-sql-OrcFileFormat.md
+      - ORC: OrcFileFormat.md
       - Parquet:
-        - ParquetFileFormat: spark-sql-ParquetFileFormat.md
-        - ParquetReadSupport: spark-sql-ParquetReadSupport.md
+        - ParquetFileFormat: ParquetFileFormat.md
+        - ParquetReadSupport: ParquetReadSupport.md
     - Hive Integration:
       - hive/index.md
       - hive/configuration-properties.md
@@ -709,8 +709,8 @@ nav:
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
     - Project Tungsten:
       - Tungsten Execution Backend: spark-sql-tungsten.md
-      - InternalRow: spark-sql-InternalRow.md
-      - UnsafeRow: spark-sql-UnsafeRow.md
+      - InternalRow: InternalRow.md
+      - UnsafeRow: UnsafeRow.md
       - AggregationIterator:
         - spark-sql-AggregationIterator.md
         - spark-sql-ObjectAggregationIterator.md
@@ -735,11 +735,11 @@ nav:
       - spark-sql-VectorizedParquetRecordReader.md
       - spark-sql-VectorizedColumnReader.md
       - spark-sql-SpecificParquetRecordReaderBase.md
-      - ColumnVector:
-        - spark-sql-ColumnVector.md
-        - spark-sql-WritableColumnVector.md
-        - spark-sql-OnHeapColumnVector.md
-        - spark-sql-OffHeapColumnVector.md
+      - ColumnVectors:
+        - ColumnVector: ColumnVector.md
+        - WritableColumnVector: WritableColumnVector.md
+        - OnHeapColumnVector: OnHeapColumnVector.md
+        - OffHeapColumnVector: OffHeapColumnVector.md
     - spark-sql-dynamic-partition-inserts.md
     - spark-sql-bucketing.md
     - Whole-Stage CodeGen:
@@ -818,7 +818,7 @@ nav:
           - spark-sql-Encoder.md
           - spark-sql-Encoders.md
           - spark-sql-ExpressionEncoder.md
-          - spark-sql-RowEncoder.md
+          - RowEncoder: RowEncoder.md
           - spark-sql-ExpressionEncoder-LocalDateTime.md
         - spark-sql-DataFrame.md
         - spark-sql-Row.md
@@ -829,7 +829,7 @@ nav:
       - Dataset API:
         - spark-sql-dataset-operators.md
         - spark-sql-Dataset-typed-transformations.md
-        - spark-sql-Dataset-untyped-transformations.md
+        - Untyped Transformations: Dataset-untyped-transformations.md
         - spark-sql-Dataset-basic-actions.md
         - spark-sql-Dataset-actions.md
         - spark-sql-DataFrameNaFunctions.md
@@ -864,14 +864,14 @@ nav:
         - spark-sql-schema.md
         - StructType: StructType.md
         - spark-sql-StructField.md
-        - spark-sql-DataType.md
+        - DataType: DataType.md
       - spark-sql-multi-dimensional-aggregation.md
       - Caching and Persistence:
         - spark-sql-caching-and-persistence.md
         - spark-sql-caching-webui-storage.md
       - spark-sql-checkpointing.md
-      - spark-sql-UserDefinedAggregateFunction.md
-      - spark-sql-Aggregator.md
+      - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
+      - Aggregator: Aggregator.md
     - Monitoring:
       - Web UI and SQL Tab:
         - SQLTab: spark-sql-webui.md
@@ -903,7 +903,7 @@ nav:
     - ShuffledRowRDD: ShuffledRowRDD.md
     - spark-sql-UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
-    - CatalystTypeConverters: spark-sql-CatalystTypeConverters.md
+    - CatalystTypeConverters: CatalystTypeConverters.md
     - StatFunctions: spark-sql-StatFunctions.md
     - SubExprUtils: spark-sql-SubExprUtils.md
     - PredicateHelper: spark-sql-PredicateHelper.md
@@ -914,7 +914,7 @@ nav:
     - CreateStruct: spark-sql-CreateStruct.md
     - MultiInstanceRelation: spark-sql-MultiInstanceRelation.md
     - TypeCoercion: spark-sql-TypeCoercion.md
-    - TypeCoercionRule: spark-sql-TypeCoercionRule.md
+    - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md
     - PhysicalAggregation: spark-sql-PhysicalAggregation.md
     - PhysicalOperation: spark-sql-PhysicalOperation.md

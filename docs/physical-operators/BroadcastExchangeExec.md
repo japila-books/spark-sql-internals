@@ -83,7 +83,7 @@ NOTE: `relationFuture` accepts a relation with up to 512 millions rows and 8GB i
 
 * For a `HashedRelation`, `relationFuture` requests it to [estimatedSize](../KnownSizeEstimation.md#estimatedSize)
 
-* For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to spark-sql-UnsafeRow.md[UnsafeRows] and requests each to spark-sql-UnsafeRow.md#getSizeInBytes[getSizeInBytes] that it sums all up.
+* For a `Array[InternalRow]`, `relationFuture` transforms the `InternalRows` to UnsafeRow.md[UnsafeRows] and requests each to UnsafeRow.md#getSizeInBytes[getSizeInBytes] that it sums all up.
 
 `relationFuture` records the data size as the <<dataSize, dataSize>> metric.
 

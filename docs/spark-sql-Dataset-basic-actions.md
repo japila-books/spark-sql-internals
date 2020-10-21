@@ -1,8 +1,6 @@
-title: Basic Actions
+# Dataset API &mdash; Basic Actions
 
-# Dataset API -- Basic Actions
-
-*Basic actions* are a group of operators (_methods_) of the <<spark-sql-dataset-operators.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
+**Basic actions** are a set of operators (_methods_) of the <<spark-sql-dataset-operators.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
 
 NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
@@ -306,7 +304,7 @@ Internally, `explain` creates a spark-sql-LogicalPlan-ExplainCommand.md[ExplainC
 
 NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command that, when spark-sql-LogicalPlan-ExplainCommand.md#run[executed], gives different text representations of [QueryExecution](QueryExecution.md) (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 
-`explain` then requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and [collects the records](physical-operators/SparkPlan.md#executeCollect) (as [InternalRow](spark-sql-InternalRow.md) objects).
+`explain` then requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and [collects the records](physical-operators/SparkPlan.md#executeCollect) (as [InternalRow](InternalRow.md) objects).
 
 [NOTE]
 ====
@@ -315,7 +313,8 @@ NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] log
 
 In the end, `explain` goes over the `InternalRow` records and converts them to lines to display to console.
 
-NOTE: `explain` "converts" an `InternalRow` record to a line using spark-sql-InternalRow.md#getString[getString] at position `0`.
+!!! note
+    `explain` "converts" an `InternalRow` record to a line using [getString](InternalRow.md#getString) at position `0`.
 
 TIP: If you are serious about query debugging you could also use the spark-sql-debugging-query-execution.md[Debugging Query Execution facility].
 
@@ -393,7 +392,7 @@ With `eager` flag on, `checkpoint` counts the number of records in the RDD (by e
 
 In the end, `checkpoint` Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
-NOTE: `checkpoint` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.md#, untyped transformations>>, i.e. <<spark-sql-Dataset-untyped-transformations.md#checkpoint, checkpoint>> and <<spark-sql-Dataset-untyped-transformations.md#localCheckpoint, localCheckpoint>>.
+NOTE: `checkpoint` is used in the `Dataset` [untyped transformations](Dataset-untyped-transformations.md), i.e. [checkpoint](Dataset-untyped-transformations.md#checkpoint) and [localCheckpoint](Dataset-untyped-transformations.md#localCheckpoint).
 
 === [[rdd]] Generating RDD of Internal Binary Rows -- `rdd` Basic Action
 
@@ -410,9 +409,9 @@ scala> val rdd = tokens.rdd
 rdd: org.apache.spark.rdd.RDD[Token] = MapPartitionsRDD[11] at rdd at <console>:30
 ----
 
-Internally, it looks spark-sql-ExpressionEncoder.md[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the spark-sql-DataType.md[DataType] of the result of evaluating the expression.
+Internally, it looks spark-sql-ExpressionEncoder.md[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the [DataType](DataType.md) of the result of evaluating the expression.
 
-NOTE: A deserializer expression is used to decode an spark-sql-InternalRow.md[InternalRow] to an object of type `T`. See spark-sql-ExpressionEncoder.md[ExpressionEncoder].
+NOTE: A deserializer expression is used to decode an [InternalRow](InternalRow.md) to an object of type `T`. See spark-sql-ExpressionEncoder.md[ExpressionEncoder].
 
 It then executes a spark-sql-LogicalPlan-DeserializeToObject.md[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
 
@@ -445,7 +444,7 @@ toDF(colNames: String*): DataFrame
 
 `toDF` converts a Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
 
-Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) with the encoder being spark-sql-RowEncoder.md[RowEncoder].
+Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) with the encoder being [RowEncoder](RowEncoder.md).
 
 CAUTION: FIXME Describe `toDF(colNames: String*)`
 

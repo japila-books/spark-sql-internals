@@ -34,7 +34,7 @@ trait TypedAggregateExpression extends AggregateFunction {
 | Description
 
 | [[aggregator]] `aggregator`
-| spark-sql-Aggregator.md[Aggregator]
+| [Aggregator](../Aggregator.md)
 
 | [[inputClass]] `inputClass`
 | Used when...FIXME
@@ -73,4 +73,4 @@ apply[BUF : Encoder, OUT : Encoder](
 
 `apply`...FIXME
 
-NOTE: `apply` is used exclusively when `Aggregator` is requested to spark-sql-Aggregator.md#toColumn[convert itself to a TypedColumn].
+`apply` is used when `Aggregator` is requested to [convert itself to a TypedColumn](../Aggregator.md#toColumn).

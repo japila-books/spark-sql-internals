@@ -1,6 +1,4 @@
-title: DataFrameNaFunctions
-
-# DataFrameNaFunctions -- Working With Missing Data
+# DataFrameNaFunctions &mdash; Working With Missing Data
 
 `DataFrameNaFunctions` is used to work with <<methods, missing data>> in a structured query (a <<spark-sql-DataFrame.md#, DataFrame>>).
 
@@ -58,7 +56,7 @@ replace[T](col: String, replacement: Map[T, T]): DataFrame
 |===
 
 [[creating-instance]]
-`DataFrameNaFunctions` is available using <<spark-sql-Dataset-untyped-transformations.md#na, na>> untyped transformation.
+`DataFrameNaFunctions` is available using [na](Dataset-untyped-transformations.md#na) untyped transformation.
 
 [source, scala]
 ----

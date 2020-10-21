@@ -1,6 +1,4 @@
-title: SizeBasedWindowFunction
-
-# SizeBasedWindowFunction -- Declarative Window Aggregate Functions with Window Size
+# SizeBasedWindowFunction &mdash; Declarative Window Aggregate Functions with Window Size
 
 `SizeBasedWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
 
@@ -21,7 +19,7 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | Description
 
 | n
-| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> expression with `++window__partition__size++` name, <<spark-sql-DataType.md#IntegerType, IntegerType>> data type and not nullable
+| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> expression with `++window__partition__size++` name, [IntegerType](../DataType.md#IntegerType) data type and not nullable
 |===
 
 [[implementations]]

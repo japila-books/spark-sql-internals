@@ -1,16 +1,13 @@
-title: ShowCreateTableCommand
-
 # ShowCreateTableCommand Logical Command
 
-`ShowCreateTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> that <<run, executes>> a `SHOW CREATE TABLE` SQL statement (with a data source / non-Hive or a Hive table).
+`ShowCreateTableCommand` is a [logical command](RunnableCommand.md) that <<run, executes>> a `SHOW CREATE TABLE` SQL statement (with a data source / non-Hive or a Hive table).
 
 `ShowCreateTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitShowCreateTable, SHOW CREATE TABLE>> SQL statement.
 
 [[output]]
-`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type <<spark-sql-DataType.md#StringType, StringType>>) for the <<spark-sql-LogicalPlan-Command.md#output, output schema>>.
+`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type [StringType](../DataType.md#StringType)) for the [output schema](Command.md#output).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.SaveMode
 spark.range(10e4.toLong)
   .write
@@ -43,7 +40,7 @@ CLUSTERED BY (id)
 SORTED BY (id)
 INTO 4 BUCKETS
 
-----
+```
 
 [[table]]
 [[creating-instance]]

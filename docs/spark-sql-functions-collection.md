@@ -47,7 +47,7 @@ from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
 
-Extract data from arbitrary JSON-encoded values into a [StructType](StructType.md) or [ArrayType](spark-sql-DataType.md#ArrayType) of `StructType` elements with the specified schema
+Extract data from arbitrary JSON-encoded values into a [StructType](StructType.md) or [ArrayType](DataType.md#ArrayType) of `StructType` elements with the specified schema
 
 | <<map_keys, map_keys>>
 a|
@@ -223,7 +223,7 @@ from_json(e: Column, schema: String, options: Map[String, String]): Column // <5
 <4> Relays to the other `from_json` with empty `options`
 <5> Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
 
-`from_json` parses a column with a JSON-encoded value into a [StructType](StructType.md) or [ArrayType](spark-sql-DataType.md#ArrayType) of `StructType` elements with the specified schema.
+`from_json` parses a column with a JSON-encoded value into a [StructType](StructType.md) or [ArrayType](DataType.md#ArrayType) of `StructType` elements with the specified schema.
 
 ```text
 val jsons = Seq("""{ "id": 0 }""").toDF("json")
@@ -245,13 +245,12 @@ scala> jsons.select(from_json($"json", schema) as "ids").show
 ====
 A schema can be one of the following:
 
-. spark-sql-DataType.md[DataType] as a Scala object or in the JSON format
+* [DataType](DataType.md) as a Scala object or in the JSON format
 
-. StructType.md[StructType] in the DDL format
+* [StructType](StructType.md) in the DDL format
 ====
 
-[source, scala]
-----
+```text
 // Define the schema for JSON-encoded messages
 // Note that the schema is nested (on the addresses field)
 import org.apache.spark.sql.types._
@@ -363,7 +362,7 @@ scala> people.show
 +---------+---------+---------------+------+-----+------+
 |    Jacek|Laskowski|jacek@japila.pl|Warsaw|  N/A|02-791|
 +---------+---------+---------------+------+-----+------+
-----
+```
 
 !!! note
     `options` controls how a JSON is parsed and contains the same options as the [json](spark-sql-JsonDataSource.md) format.
@@ -398,12 +397,11 @@ NOTE: `from_json` corresponds to SQL's `from_json`.
 array_contains(column: Column, value: Any): Column
 ----
 
-`array_contains` creates a `Column` for a `column` argument as an spark-sql-DataType.md#ArrayType[array] and the `value` of same type as the type of the elements of the array.
+`array_contains` creates a `Column` for a `column` argument as an [array](DataType.md#ArrayType) and the `value` of same type as the type of the elements of the array.
 
 Internally, `array_contains` creates a spark-sql-Column.md#apply[Column] with a `ArrayContains` expression.
 
-[source, scala]
-----
+```text
 // Arguments must be an array followed by a value of same type as the array elements
 import org.apache.spark.sql.functions.array_contains
 val c = array_contains(column = $"ids", value = 1)
@@ -417,24 +415,22 @@ scala> q.show
 |[1, 2, 3]|
 |      [1]|
 +---------+
-----
+```
 
 [[prettyName]]
 `array_contains` corresponds to SQL's `array_contains`.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions.array_contains
 val c = array_contains(column = $"ids", value = Array(1, 2))
 val e = c.expr
 scala> println(e.sql)
 array_contains(`ids`, [1,2])
-----
+```
 
 TIP: Use SQL's `array_contains` to use values from columns for the `column` and `value` arguments.
 
-[source, scala]
-----
+```text
 val codes = Seq(
   (Seq(1, 2, 3), 2),
   (Seq(1), 1),
@@ -480,7 +476,7 @@ scala> q.show
 |[1, 2, 3]|  2|
 |      [1]|  1|
 +---------+---+
-----
+```
 
 === [[map_keys]] `map_keys` Collection Function
 

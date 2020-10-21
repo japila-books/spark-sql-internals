@@ -63,13 +63,13 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
 doProduce(ctx: CodegenContext): String
 ----
 
-`doProduce` generates a Java source code that consumes spark-sql-InternalRow.md[internal row] of a single input `RDD` one at a time (in a `while` loop).
+`doProduce` generates a Java source code that consumes [InternalRow](../InternalRow.md) of a single input `RDD` one at a time (in a `while` loop).
 
 NOTE: `doProduce` supports one input RDD only (that the single <<child, child>> physical operator creates when SparkPlan.md#execute[executed]).
 
 Internally, `doProduce` generates two `input` and `row` "fresh" terms and registers `input` as a mutable state (in the generated class).
 
-`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from [consume](CodegenSupport.md#consume) code generator to iterate over the spark-sql-InternalRow.md[internal binary rows] from the first <<inputRDDs, input RDD>> only.
+`doProduce` gives a plain Java source code that uses `input` and `row` terms as well as the code from [consume](CodegenSupport.md#consume) code generator to iterate over the [InternalRow](../InternalRow.md)s from the first <<inputRDDs, input RDD>> only.
 
 `doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 

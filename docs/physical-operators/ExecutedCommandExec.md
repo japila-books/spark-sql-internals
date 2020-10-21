@@ -1,8 +1,6 @@
-title: ExecutedCommandExec
+# ExecutedCommandExec Leaf Physical Operator
 
-# ExecutedCommandExec Leaf Physical Operator for Command Execution
-
-`ExecutedCommandExec` is a SparkPlan.md#LeafExecNode[leaf physical operator] for executing spark-sql-LogicalPlan-RunnableCommand.md[logical commands with side effects].
+`ExecutedCommandExec` is a [leaf physical operator](LeafExecNode.md) for executing [logical commands with side effects](../logical-operators/RunnableCommand.md).
 
 `ExecutedCommandExec` runs a command and caches the result in <<sideEffectResult, sideEffectResult>> internal attribute.
 
@@ -14,7 +12,7 @@ title: ExecutedCommandExec
 | Description
 
 | [[doExecute]] `doExecute`
-| Executes `ExecutedCommandExec` physical operator (and produces a result as an RDD of spark-sql-InternalRow.md[internal binary rows]
+| Executes `ExecutedCommandExec` physical operator (and produces a result as an RDD of [InternalRow](../InternalRow.md)s
 
 | [[executeCollect]] `executeCollect`
 |
@@ -33,6 +31,6 @@ title: ExecutedCommandExec
 sideEffectResult: Seq[InternalRow]
 ----
 
-`sideEffectResult` requests `RunnableCommand` to spark-sql-LogicalPlan-RunnableCommand.md#run[run] (that produces a `Seq[Row]`) and spark-sql-CatalystTypeConverters.md#createToCatalystConverter[converts the result to Catalyst types] using a Catalyst converter function for the catalyst/QueryPlan.md#schema[schema].
+`sideEffectResult` requests `RunnableCommand` to spark-sql-LogicalPlan-RunnableCommand.md#run[run] (that produces a `Seq[Row]`) and [converts the result to Catalyst types](../CatalystTypeConverters.md#createToCatalystConverter) using a Catalyst converter function for the [schema](../catalyst/QueryPlan.md#schema).
 
-NOTE: `sideEffectResult` is used when `ExecutedCommandExec` is requested for <<executeCollect, executeCollect>>, <<executeToIterator, executeToIterator>>, <<executeTake, executeTake>>, <<doExecute, doExecute>>.
+`sideEffectResult` is used when `ExecutedCommandExec` is requested to [executeCollect](#executeCollect), [executeToIterator](#executeToIterator), [executeTake](#executeTake), [doExecute](#doExecute).

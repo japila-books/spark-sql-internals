@@ -1,5 +1,3 @@
-title: DataWritingCommandExec
-
 # DataWritingCommandExec Physical Operator
 
 `DataWritingCommandExec` is a <<SparkPlan.md#, physical operator>> that is the execution environment for a <<cmd, DataWritingCommand>> logical command at <<doExecute, execution time>>.
@@ -17,7 +15,7 @@ When requested for <<SparkPlan.md#metrics, performance metrics>>, `DataWritingCo
 | Description
 
 | sideEffectResult
-| [[sideEffectResult]] Collection of <<spark-sql-InternalRow.md#, InternalRows>> (`Seq[InternalRow]`) that is the result of executing the <<cmd, DataWritingCommand>> (with the <<child, SparkPlan>>)
+| [[sideEffectResult]] [InternalRow](../InternalRow.md)s (`Seq[InternalRow]`) that is the result of executing the [DataWritingCommand](#cmd) (with the [SparkPlan](#child))
 
 Used when `DataWritingCommandExec` is requested to <<executeCollect, executeCollect>>, <<executeToIterator, executeToIterator>>, <<executeTake, executeTake>> and <<doExecute, doExecute>>
 |===
@@ -69,6 +67,6 @@ NOTE: `executeTake` is part of the <<SparkPlan.md#executeTake, SparkPlan Contrac
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of the <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` simply requests the <<SparkPlan.md#sqlContext, SQLContext>> for the <<spark-sql-SQLContext.md#sparkContext, SparkContext>> that is then requested to distribute (`parallelize`) the <<sideEffectResult, sideEffectResult>> (over 1 partition).

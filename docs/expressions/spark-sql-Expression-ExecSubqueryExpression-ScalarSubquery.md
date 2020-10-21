@@ -1,8 +1,6 @@
-title: ScalarSubquery
-
 # ScalarSubquery (ExecSubqueryExpression) Expression
 
-`ScalarSubquery` is an spark-sql-Expression-ExecSubqueryExpression.md[ExecSubqueryExpression] that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
+`ScalarSubquery` is an [ExecSubqueryExpression](ExecSubqueryExpression.md) that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
 
 IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent an `ExecSubqueryExpression` (this page) and a [SubqueryExpression](ScalarSubquery.md). It _is_ confusing and you should _not_ be anymore.
 
@@ -22,7 +20,7 @@ val executedPlan = planSubqueries(plan)
 `ScalarSubquery` is an [unevaluable expression](Unevaluable.md).
 
 [[dataType]]
-`ScalarSubquery` uses...FIXME...for the <<expressions/Expression.md#dataType, data type>>.
+`ScalarSubquery` uses...FIXME...for the <<Expression.md#dataType, data type>>.
 
 [[internal-registries]]
 .ScalarSubquery's Internal Properties (e.g. Registries, Counters and Flags)
@@ -80,7 +78,7 @@ Expects 1 field, but got [numFields] something went wrong in analysis
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
 `eval` simply returns <<result, result>> value.
 
@@ -93,7 +91,7 @@ NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> 
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode` first makes sure that the <<updated, updated>> flag is on (`true`). If not, `doGenCode` throws an `IllegalArgumentException` exception with the following message:
 

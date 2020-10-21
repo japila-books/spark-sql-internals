@@ -18,7 +18,7 @@
 | `LibSVMFileFormat`
 | [[LibSVMFileFormat]] Used in Spark MLlib
 
-| [TextFileFormat](spark-sql-TextFileFormat.md)
+| [TextFileFormat](TextFileFormat.md)
 | [[TextFileFormat]]
 |===
 

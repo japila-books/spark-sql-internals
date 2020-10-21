@@ -109,7 +109,7 @@ scala> sql("desc EXTENDED v1").show(false)
 +----------+---------+-------+
 ```
 
-Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](catalyst/Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own spark-sql-InternalRow.md[internal binary row format].
+Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](catalyst/Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own [InternalRow](InternalRow.md).
 
 As of Spark SQL 2.2, structured queries can be further optimized using [Hint Framework](new-and-noteworthy/hint-framework.md).
 

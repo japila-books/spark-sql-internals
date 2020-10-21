@@ -136,7 +136,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](spark-sql-RowEncoder.md).
+`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](RowEncoder.md).
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
@@ -195,7 +195,7 @@ makeDataset[T <: DefinedByConstructorParams](
   sparkSession: SparkSession): Dataset[T]
 ----
 
-`makeDataset` creates an spark-sql-ExpressionEncoder.md#apply[ExpressionEncoder] (from spark-sql-ExpressionEncoder.md#DefinedByConstructorParams[DefinedByConstructorParams]) and spark-sql-ExpressionEncoder.md#toRow[encodes] elements of the input `data` to <<spark-sql-InternalRow.md#, internal binary rows>>.
+`makeDataset` creates an spark-sql-ExpressionEncoder.md#apply[ExpressionEncoder] (from spark-sql-ExpressionEncoder.md#DefinedByConstructorParams[DefinedByConstructorParams]) and spark-sql-ExpressionEncoder.md#toRow[encodes] elements of the input `data` to [internal binary rows](InternalRow.md).
 
 `makeDataset` then creates a spark-sql-LogicalPlan-LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and Dataset.md#creating-instance[creates] the result `Dataset`.
 

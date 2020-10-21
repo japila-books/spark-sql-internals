@@ -383,7 +383,7 @@ scala> inventory.rollup(expr("(item, color)") as "(item, color)").sum().show
 +-------------+-------------+
 ----
 
-Internally, `rollup` spark-sql-dataset-operators.md#toDF[converts the `Dataset` into a `DataFrame`] (i.e. uses spark-sql-RowEncoder.md[RowEncoder] as the encoder) and then creates a spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] (with `RollupType` group type).
+Internally, `rollup` spark-sql-dataset-operators.md#toDF[converts the `Dataset` into a `DataFrame`] (i.e. uses [RowEncoder](RowEncoder.md) as the encoder) and then creates a spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] (with `RollupType` group type).
 
 NOTE: <<Rollup, Rollup>> expression represents `GROUP BY \... WITH ROLLUP` in SQL in Spark's Catalyst Expression tree (after `AstBuilder` spark-sql-AstBuilder.md#withAggregation[parses a structured query with aggregation]).
 

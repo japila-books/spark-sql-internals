@@ -4,7 +4,7 @@
 
 `KafkaWriteTask` is <<creating-instance, created>> exclusively when `KafkaWriter` is requested to <<spark-sql-KafkaWriter.md#write, write the rows of a structured query to a Kafka topic>>.
 
-`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the spark-sql-UnsafeRow.md[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
+`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the UnsafeRow.md[raw-memory unsafe row format] only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
 
 [[internal-properties]]
 .KafkaWriteTask's Internal Properties
@@ -38,7 +38,7 @@ Internally, `execute` creates a `KafkaProducer` using `Array[Byte]` for the keys
 
 NOTE: `execute` creates a single `KafkaProducer` for all rows.
 
-For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) spark-sql-InternalRow.md[binary internal row format] to a spark-sql-UnsafeRow.md[UnsafeRow] object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
+For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) [InternalRow](InternalRow.md) to a UnsafeRow.md[UnsafeRow] object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
 
 `execute` then creates a `ProducerRecord` and sends it to Kafka (using the `KafkaProducer`). `execute` registers a asynchronous `Callback` to monitor the writing.
 

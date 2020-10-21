@@ -1,8 +1,6 @@
-title: RowDataSourceScanExec
-
 # RowDataSourceScanExec Leaf Physical Operator
 
-`RowDataSourceScanExec` is a spark-sql-SparkPlan-DataSourceScanExec.md[DataSourceScanExec] (and so indirectly a SparkPlan.md#LeafExecNode[leaf physical operator]) for scanning data from a <<relation, BaseRelation>>.
+`RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a [leaf physical operator](LeafExecNode.md)) for scanning data from a [BaseRelation](#relation).
 
 `RowDataSourceScanExec` is <<creating-instance, created>> to represent a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
 
@@ -36,7 +34,7 @@ doProduce(ctx: CodegenContext): String
 * [[requiredColumnsIndex]] Indices of required columns
 * [[filters]] spark-sql-Filter.md[Filter predicates]
 * [[handledFilters]] Handled spark-sql-Filter.md[filter predicates]
-* [[rdd]] RDD of spark-sql-InternalRow.md[internal binary rows]
+* [[rdd]] RDD of [InternalRow](../InternalRow.md)s
 * [[relation]] spark-sql-BaseRelation.md[BaseRelation]
 * [[tableIdentifier]] `TableIdentifier`
 

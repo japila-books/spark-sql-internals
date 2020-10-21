@@ -5,7 +5,8 @@
 
 NOTE: `parquet` is the [default data source format](DataFrameReader.md#source) in Spark SQL.
 
-NOTE: http://parquet.apache.org/[Apache Parquet] is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
+!!! note
+    [Apache Parquet](http://parquet.apache.org/) is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 
 ```text
 // All the following queries are equivalent
@@ -35,7 +36,7 @@ spark.read.schema(schema).load("parquet-datasets")
 
 * The number of fields in the schema is at most [spark.sql.codegen.maxFields](spark-sql-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
-* All the fields in the output schema are of [AtomicType](spark-sql-DataType.md#AtomicType)
+* All the fields in the output schema are of [AtomicType](DataType.md#AtomicType)
 
 `ParquetFileFormat` supports *filter predicate push-down optimization* (via <<createFilter, createFilter>>) as per the following <<ParquetFilters, table>>.
 
@@ -139,9 +140,7 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-`vectorTypes` creates a collection of the names of <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> or <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> when <<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is enabled or disabled, respectively.
-
-<<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property is disabled (`false`) by default.
+`vectorTypes` creates a collection of the names of [OffHeapColumnVector](OffHeapColumnVector.md) or [OnHeapColumnVector](OnHeapColumnVector.md) when [spark.sql.columnVector.offheap.enabled](spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) property is enabled or disabled, respectively.
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
@@ -173,13 +172,13 @@ buildReaderWithPartitionValues(
 | Value
 
 | parquet.read.support.class
-| [[parquet.read.support.class]] <<spark-sql-ParquetReadSupport.md#, ParquetReadSupport>>
+| [[parquet.read.support.class]] [ParquetReadSupport](ParquetReadSupport.md)
 
 | org.apache.spark.sql.parquet.row.requested_schema
-| [[org.apache.spark.sql.parquet.row.requested_schema]] spark-sql-DataType.md#json[JSON] representation of `requiredSchema`
+| [[org.apache.spark.sql.parquet.row.requested_schema]] [JSON](DataType.md#json) representation of `requiredSchema`
 
 | org.apache.spark.sql.parquet.row.attributes
-| [[org.apache.spark.sql.parquet.row.attributes]] spark-sql-DataType.md#json[JSON] representation of `requiredSchema`
+| [[org.apache.spark.sql.parquet.row.attributes]] [JSON](DataType.md#json) representation of `requiredSchema`
 
 | spark.sql.session.timeZone
 | [[spark.sql.session.timeZone]] <<spark-sql-properties.md#spark.sql.session.timeZone, spark.sql.session.timeZone>>
@@ -200,11 +199,12 @@ NOTE: Filter predicate push-down optimization for parquet data sources uses spar
 
 With spark-sql-properties.md#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the <<ParquetFilters, table>>). Otherwise, the Parquet filter predicate is not specified.
 
-NOTE: `buildReaderWithPartitionValues` creates filter predicates for the following types: spark-sql-DataType.md#BooleanType[BooleanType], spark-sql-DataType.md#IntegerType[IntegerType], spark-sql-DataType.md#LongType[LongType], spark-sql-DataType.md#FloatType[FloatType], spark-sql-DataType.md#DoubleType[DoubleType], spark-sql-DataType.md#StringType[StringType], spark-sql-DataType.md#BinaryType[BinaryType].
+!!! note
+    `buildReaderWithPartitionValues` creates filter predicates for the following types: [BooleanType](DataType.md#BooleanType), [IntegerType](DataType.md#IntegerType), ([LongType](DataType.md#LongType), [FloatType](DataType.md#FloatType), [DoubleType](DataType.md#DoubleType), [StringType](DataType.md#StringType), [BinaryType](DataType.md#BinaryType).
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
 
-In the end, `buildReaderWithPartitionValues` gives a function that takes a spark-sql-PartitionedFile.md[PartitionedFile] and does the following:
+In the end, `buildReaderWithPartitionValues` gives a function that takes a [PartitionedFile](PartitionedFile.md) and does the following:
 
 . Creates a Hadoop `FileSplit` for the input `PartitionedFile`
 
@@ -224,7 +224,7 @@ NOTE: spark-sql-VectorizedParquetRecordReader.md[Parquet vectorized reader] is e
 
 With spark-sql-VectorizedParquetRecordReader.md[Parquet vectorized reader] enabled, the function does the following:
 
-. Creates a spark-sql-VectorizedParquetRecordReader.md#creating-instance[VectorizedParquetRecordReader] and a <<spark-sql-RecordReaderIterator.md#, RecordReaderIterator>>
+. Creates a spark-sql-VectorizedParquetRecordReader.md#creating-instance[VectorizedParquetRecordReader] and a [RecordReaderIterator](RecordReaderIterator.md)
 
 . Requests `VectorizedParquetRecordReader` to spark-sql-VectorizedParquetRecordReader.md#initialize[initialize] (with the Parquet `ParquetInputSplit` and the Hadoop `TaskAttemptContextImpl`)
 
@@ -238,7 +238,7 @@ Appending [partitionSchema] [partitionValues]
 
 . (only with <<supportBatch, supportBatch>> enabled) Requests `VectorizedParquetRecordReader` to spark-sql-VectorizedParquetRecordReader.md#enableReturningBatches[enableReturningBatches]
 
-. In the end, the function gives the <<spark-sql-RecordReaderIterator.md#, RecordReaderIterator>> (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
+. In the end, the function gives the [RecordReaderIterator](RecordReaderIterator.md) (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
 
 With spark-sql-VectorizedParquetRecordReader.md[Parquet vectorized reader] disabled, the function does the following:
 

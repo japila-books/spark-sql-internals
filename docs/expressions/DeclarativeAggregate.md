@@ -19,7 +19,7 @@ a| [[evaluateExpression]]
 evaluateExpression: Expression
 ----
 
-The <<expressions/Expression.md#, expression>> that returns the final value for the aggregate function
+The <<Expression.md#, expression>> that returns the final value for the aggregate function
 
 Used when:
 

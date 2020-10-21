@@ -1,11 +1,6 @@
-== [[HiveTableScanExec]] HiveTableScanExec Leaf Physical Operator
+# HiveTableScanExec Leaf Physical Operator
 
-:hive-version: 2.3.6
-:hadoop-version: 2.10.0
-:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
-
-`HiveTableScanExec` is a ../SparkPlan.md#LeafExecNode[leaf physical operator] that represents a HiveTableRelation.md[HiveTableRelation] logical operator at execution time.
+`HiveTableScanExec` is a [leaf physical operator](../physical-operators/LeafExecNode.md) that represents a [HiveTableRelation](#relation) logical operator at execution time.
 
 `HiveTableScanExec` is <<creating-instance, created>> exclusively when HiveTableScans.md[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 
@@ -16,14 +11,14 @@
 Scan hive [table]
 ```
 
-=== [[creating-instance]] Creating HiveTableScanExec Instance
+## Creating Instance
 
 `HiveTableScanExec` takes the following when created:
 
-* [[requestedAttributes]] Requested ../spark-sql-Expression-Attribute.md[attributes]
-* [[relation]] HiveTableRelation.md[HiveTableRelation]
-* [[partitionPruningPred]] <<partition-pruning-predicates, Partition pruning predicates>>
-* [[sparkSession]] ../SparkSession.md[SparkSession]
+* [[requestedAttributes]] Requested [attributes](../expressions/Attribute.md)
+* [[relation]] [HiveTableRelation](HiveTableRelation.md)
+* [[partitionPruningPred]] [Partition pruning predicates](#partition-pruning-predicates)
+* [[sparkSession]] [SparkSession](../SparkSession.md)
 
 `HiveTableScanExec` initializes the <<internal-registries, internal registries and counters>>.
 
@@ -56,7 +51,7 @@ HiveTableScans.md[HiveTableScans] execution planning strategy creates a `HiveTab
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of ../SparkPlan.md#doExecute[SparkPlan] contract to generate the runtime representation of a structured query as a distributed computation over ../spark-sql-InternalRow.md[internal binary rows] on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecute) abstraction.
 
 `doExecute`...FIXME
 

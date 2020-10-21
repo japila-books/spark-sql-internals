@@ -1,6 +1,6 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's <<map, BytesToBytesMap>> to allow for <<spark-sql-UnsafeRow.md#, UnsafeRow>> keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's <<map, BytesToBytesMap>> to allow for <<UnsafeRow.md#, UnsafeRow>> keys and values.
 
 Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
 
@@ -18,7 +18,7 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 | Description
 
 | currentAggregationBuffer
-| [[currentAggregationBuffer]] Re-used pointer (as an <<spark-sql-UnsafeRow.md#, UnsafeRow>> with the number of fields to match the <<aggregationBufferSchema, aggregationBufferSchema>>) to the current aggregation buffer
+| [[currentAggregationBuffer]] Re-used pointer (as an <<UnsafeRow.md#, UnsafeRow>> with the number of fields to match the <<aggregationBufferSchema, aggregationBufferSchema>>) to the current aggregation buffer
 
 Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggregationBufferFromUnsafeRow, getAggregationBufferFromUnsafeRow>>.
 
@@ -34,18 +34,18 @@ a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemo
 
 === [[supportsAggregationBufferSchema]] `supportsAggregationBufferSchema` Static Method
 
-[source, java]
-----
-boolean supportsAggregationBufferSchema(StructType schema)
-----
+```java
+boolean supportsAggregationBufferSchema(
+  StructType schema)
+```
 
-`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a <<spark-sql-StructField.md#, field>> (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose <<spark-sql-StructField.md#dataType, data type>> is not <<spark-sql-UnsafeRow.md#isMutable, mutable>>.
+`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a <<spark-sql-StructField.md#, field>> (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose <<spark-sql-StructField.md#dataType, data type>> is not <<UnsafeRow.md#isMutable, mutable>>.
 
 [NOTE]
 ====
-The <<spark-sql-UnsafeRow.md#isMutable, mutable>> data types: <<spark-sql-DataType.md#BooleanType, BooleanType>>, <<spark-sql-DataType.md#ByteType, ByteType>>, <<spark-sql-DataType.md#DateType, DateType>>, <<spark-sql-DataType.md#DecimalType, DecimalType>>, <<spark-sql-DataType.md#DoubleType, DoubleType>>, <<spark-sql-DataType.md#FloatType, FloatType>>, <<spark-sql-DataType.md#IntegerType, IntegerType>>, <<spark-sql-DataType.md#LongType, LongType>>, <<spark-sql-DataType.md#NullType, NullType>>, <<spark-sql-DataType.md#ShortType, ShortType>> and <<spark-sql-DataType.md#TimestampType, TimestampType>>.
+The [mutable](UnsafeRow.md#isMutable) data types: [BooleanType](DataType.md#BooleanType), [ByteType](DataType.md#ByteType), [DateType](DataType.md#DateType), [DecimalType](DataType.md#DecimalType), [DoubleType](DataType.md#DoubleType), [FloatType](DataType.md#FloatType), [IntegerType](DataType.md#IntegerType), [LongType](DataType.md#LongType), [NullType](DataType.md#NullType), [ShortType](DataType.md#ShortType) and [TimestampType](DataType.md#TimestampType).
 
-Examples (possibly all) of data types that are not <<spark-sql-UnsafeRow.md#isMutable, mutable>>: <<spark-sql-DataType.md#ArrayType, ArrayType>>, <<spark-sql-DataType.md#BinaryType, BinaryType>>, <<spark-sql-DataType.md#StringType, StringType>>, <<spark-sql-DataType.md#CalendarIntervalType, CalendarIntervalType>>, <<spark-sql-DataType.md#MapType, MapType>>, <<spark-sql-DataType.md#ObjectType, ObjectType>> and <<spark-sql-DataType.md#StructType, StructType>>.
+Examples (possibly all) of data types that are not [mutable](UnsafeRow.md#isMutable): [ArrayType](DataType.md#ArrayType), [BinaryType](DataType.md#BinaryType), [StringType](DataType.md#StringType), [CalendarIntervalType](DataType.md#CalendarIntervalType), [MapType](DataType.md#MapType), [ObjectType](DataType.md#ObjectType) and [StructType](DataType.md#StructType).
 ====
 
 [source, scala]
@@ -63,11 +63,11 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 
 NOTE: `supportsAggregationBufferSchema` is used exclusively when `HashAggregateExec` is requested to <<spark-sql-SparkPlan-HashAggregateExec.md#supportsAggregate, supportsAggregate>>.
 
-=== [[creating-instance]] Creating UnsafeFixedWidthAggregationMap Instance
+## Creating Instance
 
 `UnsafeFixedWidthAggregationMap` takes the following when created:
 
-* [[emptyAggregationBuffer]] Empty aggregation buffer (as an <<spark-sql-InternalRow.md#, InternalRow>>)
+* [[emptyAggregationBuffer]] Empty aggregation buffer (as an [InternalRow](InternalRow.md))
 * [[aggregationBufferSchema]] Aggregation buffer [schema](StructType.md)
 * [[groupingKeySchema]] Grouping key [schema](StructType.md)
 * [[taskMemoryManager]] Spark Core's `TaskMemoryManager`

@@ -1,8 +1,6 @@
-title: Typed Transformations
+# Dataset API &mdash; Typed Transformations
 
-# Dataset API -- Typed Transformations
-
-*Typed transformations* are part of the Dataset API for transforming a `Dataset` with an <<spark-sql-Encoder.md#, Encoder>> (except the <<spark-sql-RowEncoder.md#, RowEncoder>>).
+**Typed transformations** are part of the Dataset API for transforming a `Dataset` with an [Encoder](spark-sql-Encoder.md) (except the [RowEncoder](RowEncoder.md)).
 
 NOTE: Typed transformations are the methods in the `Dataset` Scala class that are grouped in `typedrel` group name, i.e. `@group typedrel`.
 

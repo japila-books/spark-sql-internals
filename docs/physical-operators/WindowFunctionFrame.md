@@ -34,7 +34,7 @@
 [[UnboundedWindowFunctionFrame-creating-instance]]
 `UnboundedWindowFunctionFrame` takes the following when created:
 
-* [[UnboundedWindowFunctionFrame-target]] Target spark-sql-InternalRow.md[InternalRow]
+* [[UnboundedWindowFunctionFrame-target]] Target [InternalRow](../InternalRow.md)
 * [[UnboundedWindowFunctionFrame-processor]] spark-sql-AggregateProcessor.md[AggregateProcessor]
 
 ==== [[UnboundedWindowFunctionFrame-prepare]] `prepare` Method

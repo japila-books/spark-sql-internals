@@ -1,13 +1,10 @@
-title: TungstenAggregationIterator
+# TungstenAggregationIterator
 
-# TungstenAggregationIterator -- Iterator of UnsafeRows for HashAggregateExec Physical Operator
-
-`TungstenAggregationIterator` is a <<spark-sql-AggregationIterator.md#, AggregationIterator>> that the `HashAggregateExec` aggregate physical operator uses when <<spark-sql-SparkPlan-HashAggregateExec.md#doExecute, executed>> (to process <<spark-sql-UnsafeRow.md#, UnsafeRows>> per partition and calculate aggregations).
+`TungstenAggregationIterator` is a [AggregationIterator](spark-sql-AggregationIterator.md) that is used when the [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator is executed (to process [UnsafeRow](UnsafeRow.md)s per partition and calculate aggregations).
 
 `TungstenAggregationIterator` prefers hash-based aggregation (before <<switchToSortBasedAggregation, switching to sort-based aggregation>>).
 
-[source, scala]
-----
+```text
 val q = spark.range(10).
   groupBy('id % 2 as "group").
   agg(sum("id") as "sum")
@@ -39,7 +36,7 @@ val f = mpRDD.iterator(_, _)
 
 import org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
 // FIXME How to show that TungstenAggregationIterator is used?
-----
+```
 
 When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metrics from the <<spark-sql-SparkPlan-HashAggregateExec.md#metrics, HashAggregateExec>> aggregate physical operator being executed, i.e. <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics.
 
@@ -80,7 +77,7 @@ a| [[hashMap]] <<spark-sql-UnsafeFixedWidthAggregationMap.md#, UnsafeFixedWidthA
 Used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>>, to <<outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>, <<processInputs, processInputs>>, to initialize the <<aggregationBufferMapIterator, aggregationBufferMapIterator>> and <<TaskCompletionListener, every time a partition has been processed>>.
 
 | initialAggregationBuffer
-| [[initialAggregationBuffer]] <<spark-sql-UnsafeRow.md#, UnsafeRow>> that is the aggregation buffer containing initial buffer values.
+| [[initialAggregationBuffer]] <<UnsafeRow.md#, UnsafeRow>> that is the aggregation buffer containing initial buffer values.
 
 Used when...FIXME
 
@@ -153,7 +150,7 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 * [[resultExpressions]] Output <<spark-sql-Expression-NamedExpression.md#, named expressions>>
 * [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes (i.e. `(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 * [[originalInputAttributes]] Output attributes (of the <<spark-sql-SparkPlan-HashAggregateExec.md#child, child>> of the <<spark-sql-SparkPlan-HashAggregateExec.md#, HashAggregateExec>> physical operator)
-* [[inputIter]] Iterator of <<spark-sql-InternalRow.md#, InternalRows>> (from a single partition of the <<spark-sql-SparkPlan-HashAggregateExec.md#child, child>> of the <<spark-sql-SparkPlan-HashAggregateExec.md#, HashAggregateExec>> physical operator)
+* [[inputIter]] Iterator of [InternalRow](InternalRow.md)s (from a single partition of the <<spark-sql-SparkPlan-HashAggregateExec.md#child, child>> of the <<spark-sql-SparkPlan-HashAggregateExec.md#, HashAggregateExec>> physical operator)
 * [[testFallbackStartsAt]] (used for testing) Optional ``HashAggregateExec``'s spark-sql-SparkPlan-HashAggregateExec.md#testFallbackStartsAt[testFallbackStartsAt]
 * [[numOutputRows]] `numOutputRows` <<spark-sql-SQLMetric.md#, SQLMetric>>
 * [[peakMemory]] `peakMemory` <<spark-sql-SQLMetric.md#, SQLMetric>>

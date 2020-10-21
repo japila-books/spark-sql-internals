@@ -4,7 +4,7 @@ title: ExplodeBase
 
 `ExplodeBase` is the base class for <<Explode, Explode>> and <<PosExplode, PosExplode>> generator expressions.
 
-`ExplodeBase` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and <<Generator, Generator>> with expressions/Expression.md#CodegenFallback[CodegenFallback].
+`ExplodeBase` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and <<Generator, Generator>> with Expression.md#CodegenFallback[CodegenFallback].
 
 === [[Explode]] Explode Generator Unary Expression
 

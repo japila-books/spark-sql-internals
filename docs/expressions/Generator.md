@@ -1,20 +1,18 @@
-title: Generator
+# Generator &mdash; Expressions to Generate Zero Or More Rows (aka Lateral Views)
 
-# Generator -- Expressions to Generate Zero Or More Rows (aka Lateral Views)
-
-`Generator` is a <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that can <<eval, produce>> zero or more rows given a single input row.
+`Generator` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that can <<eval, produce>> zero or more rows given a single input row.
 
 NOTE: `Generator` corresponds to SQL's spark-sql-AstBuilder.md#withGenerate[LATERAL VIEW].
 
 [[dataType]]
-`dataType` in `Generator` is simply an spark-sql-DataType.md#ArrayType[ArrayType] of <<elementSchema, elementSchema>>.
+`dataType` in `Generator` is simply an [ArrayType](../DataType.md#ArrayType) of <<elementSchema, elementSchema>>.
 
 [[foldable]]
 [[nullable]]
-`Generator` is not expressions/Expression.md#foldable[foldable] and not expressions/Expression.md#nullable[nullable] by default.
+`Generator` is not Expression.md#foldable[foldable] and not Expression.md#nullable[nullable] by default.
 
 [[supportCodegen]]
-`Generator` supports spark-sql-whole-stage-codegen.md[Java code generation] (aka _whole-stage codegen_) conditionally, i.e. only when a physical operator is not marked as expressions/Expression.md#CodegenFallback[CodegenFallback].
+`Generator` supports [Java code generation](../spark-sql-whole-stage-codegen.md) conditionally, i.e. only when a physical operator is not marked as [CodegenFallback](Expression.md#CodegenFallback).
 
 [[terminate]]
 `Generator` uses `terminate` to inform that there are no more rows to process, clean up code, and additional rows can be made here.

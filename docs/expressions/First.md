@@ -27,7 +27,7 @@ first('organizationName) ignore nulls
 ----
 
 [[evaluateExpression]]
-When requested to <<spark-sql-Expression-DeclarativeAggregate.md#evaluateExpression, evaluate>> (and return the final value), `First` simply returns a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> (with `first` name and the <<expressions/Expression.md#dataType, data type>> of the <<child, child>> expression).
+When requested to <<spark-sql-Expression-DeclarativeAggregate.md#evaluateExpression, evaluate>> (and return the final value), `First` simply returns a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> (with `first` name and the <<Expression.md#dataType, data type>> of the <<child, child>> expression).
 
 [[catalyst-dsl]]
 TIP: Use <<first, first>> operator from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create an `First` aggregate function expression, e.g. for testing or Spark SQL internals exploration.
@@ -65,5 +65,5 @@ first('orgName)()
 
 `First` takes the following when created:
 
-* [[child]] Child <<expressions/Expression.md#, expression>>
-* [[ignoreNullsExpr]] `ignoreNullsExpr` flag <<expressions/Expression.md#, expression>>
+* [[child]] Child <<Expression.md#, expression>>
+* [[ignoreNullsExpr]] `ignoreNullsExpr` flag <<Expression.md#, expression>>

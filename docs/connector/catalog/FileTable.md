@@ -36,7 +36,7 @@ supportsDataType(
     dataType: DataType): Boolean = true
 ```
 
-`supportsDataType` indicates whether a given [DataType](../../spark-sql-DataType.md) is supported in read/write path or not.
+`supportsDataType` indicates whether a given [DataType](../../DataType.md) is supported in read/write path or not.
 All data types are supported by default.
 
 Used when...FIXME

@@ -28,6 +28,22 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.columnVector.offheap.enabled"> spark.sql.columnVector.offheap.enabled
+
+**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) in [ColumnarBatch](ColumnarBatch.md) (`true`) or not (`false`). When `false`, [OnHeapColumnVector](OnHeapColumnVector.md) is used instead.
+
+Default: `false`
+
+Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) method to access the current value.
+
+## <span id="spark.sql.sources.commitProtocolClass"> spark.sql.sources.commitProtocolClass
+
+**(internal)** Fully-qualified class name of the `FileCommitProtocol`
+
+Default: [SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md)
+
+Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
+
 ## <span id="spark.sql.statistics.histogram.enabled"> spark.sql.statistics.histogram.enabled
 
 Enables generating histograms for [ANALYZE TABLE](sql/AstBuilder.md#visitAnalyze) SQL statement
@@ -862,14 +878,6 @@ Default: `true`
 
 Use [SQLConf.wholeStageSplitConsumeFuncByOperator](SQLConf.md#wholeStageSplitConsumeFuncByOperator) method to access the current value.
 
-| [[spark.sql.columnVector.offheap.enabled]] *spark.sql.columnVector.offheap.enabled*
-
-*(internal)* Enables spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] in [ColumnarBatch](ColumnarBatch.md) (`true`) or not (`false`). When `false`, spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used instead.
-
-Default: `false`
-
-Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) method to access the current value.
-
 | [[spark.sql.columnNameOfCorruptRecord]] *spark.sql.columnNameOfCorruptRecord*
 
 | [[spark.sql.constraintPropagation.enabled]] *spark.sql.constraintPropagation.enabled*
@@ -1029,7 +1037,7 @@ Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderE
 
 | [[spark.sql.parquet.filterPushdown]] *spark.sql.parquet.filterPushdown*
 
-Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](spark-sql-ParquetFileFormat.md) file format
+Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](ParquetFileFormat.md) file format
 
 Default: `true`
 
@@ -1080,14 +1088,6 @@ Default: `true`
 Radix sort is much faster but requires additional memory to be reserved up-front. The memory overhead may be significant when sorting very small rows (up to 50% more).
 
 Use [SQLConf.enableRadixSort](SQLConf.md#enableRadixSort) method to access the current value.
-
-| [[spark.sql.sources.commitProtocolClass]] *spark.sql.sources.commitProtocolClass*
-
-*(internal)* Fully-qualified class name of the `FileCommitProtocol` to use for...FIXME
-
-Default: <<spark-sql-SQLHadoopMapReduceCommitProtocol.md#, SQLHadoopMapReduceCommitProtocol>>
-
-Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
 
 | [[spark.sql.pivotMaxValues]] *spark.sql.pivotMaxValues*
 

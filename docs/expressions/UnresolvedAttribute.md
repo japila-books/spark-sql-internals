@@ -14,7 +14,7 @@ title: UnresolvedAttribute
 * `DescribeColumnCommand` is spark-sql-LogicalPlan-DescribeColumnCommand.md#run[executed]
 
 [[resolved]]
-`UnresolvedAttribute` can never be expressions/Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
+`UnresolvedAttribute` can never be Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[analysis-phase]]
 [NOTE]

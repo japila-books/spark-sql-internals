@@ -1,8 +1,6 @@
-title: Projection
+# Projection
 
-# Projection -- Functions to Produce InternalRow for InternalRow
-
-`Projection` is a <<contract, contract>> of Scala functions that produce an spark-sql-InternalRow.md[internal binary row] for a given internal row.
+`Projection` is a <<contract, contract>> of Scala functions that produce an [InternalRow](../InternalRow.md) for a given internal row.
 
 [source, scala]
 ----

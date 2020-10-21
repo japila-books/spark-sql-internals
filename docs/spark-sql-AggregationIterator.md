@@ -2,7 +2,7 @@ title: AggregationIterator
 
 # AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
 
-`AggregationIterator` is the base for <<implementations, iterators>> of <<spark-sql-UnsafeRow.md, UnsafeRows>> that...FIXME
+`AggregationIterator` is the base for <<implementations, iterators>> of <<UnsafeRow.md, UnsafeRows>> that...FIXME
 
 > Iterators are data structures that allow to iterate over a sequence of elements. They have a `hasNext` method for checking if there is a next element available, and a `next` method which returns the next element and discards it from the iterator.
 
@@ -53,7 +53,7 @@ Used when...FIXME
 Used when...FIXME
 
 | `generateOutput`
-a| [[generateOutput]] Function used to generate an <<spark-sql-UnsafeRow.md#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
+a| [[generateOutput]] Function used to generate an <<UnsafeRow.md#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
 
 Used when:
 

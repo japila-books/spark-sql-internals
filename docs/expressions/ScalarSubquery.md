@@ -35,5 +35,5 @@ val sql = "select g from t group by g having a > (select b from s)"
 `ScalarSubquery` takes the following when created:
 
 * [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
-* [[children]] Child expressions/Expression.md[expressions] (default: no children)
+* [[children]] Child Expression.md[expressions] (default: no children)
 * [[exprId]] Expression ID (as `ExprId` and defaults to a spark-sql-Expression-NamedExpression.md#newExprId[new ExprId])

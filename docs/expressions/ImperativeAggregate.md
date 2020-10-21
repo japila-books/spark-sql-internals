@@ -1,10 +1,8 @@
-title: ImperativeAggregate
+# ImperativeAggregate &mdash; Aggregate Function Expressions with Imperative Methods
 
-# ImperativeAggregate -- Aggregate Function Expressions with Imperative Methods
+`ImperativeAggregate` is the <<contract, contract>> for [aggregate functions](AggregateFunction.md) that are expressed in terms of imperative <<initialize, initialize>>, <<update, update>>, and <<merge, merge>> methods (that operate on ``Row``-based aggregation buffers).
 
-`ImperativeAggregate` is the <<contract, contract>> for spark-sql-Expression-AggregateFunction.md[aggregate functions] that are expressed in terms of imperative <<initialize, initialize>>, <<update, update>>, and <<merge, merge>> methods (that operate on ``Row``-based aggregation buffers).
-
-`ImperativeAggregate` is a expressions/Expression.md[Catalyst expression] with expressions/Expression.md#CodegenFallback[CodegenFallback].
+`ImperativeAggregate` is a [Catalyst expression](Expression.md) with [CodegenFallback](Expression.md#CodegenFallback).
 
 [[implementations]]
 .ImperativeAggregate's Direct Implementations

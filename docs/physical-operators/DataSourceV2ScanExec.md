@@ -28,9 +28,9 @@
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute`...FIXME
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 === [[supportsBatch]] `supportsBatch` Property
 
@@ -77,6 +77,6 @@ NOTE: `inputRDD` is used when `DataSourceV2ScanExec` physical operator is reques
 a| [[batchPartitions]] Input partitions of [ColumnarBatches](../ColumnarBatch.md) (`Seq[InputPartition[ColumnarBatch]]`)
 
 | partitions
-a| [[partitions]] Input partitions of <<spark-sql-InternalRow.md#, InternalRows>> (`Seq[InputPartition[InternalRow]]`)
+a| [[partitions]] Input partitions of [InternalRow](../InternalRow.md)s (`Seq[InputPartition[InternalRow]]`)
 
 |===

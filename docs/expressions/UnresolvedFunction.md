@@ -1,6 +1,6 @@
 # UnresolvedFunction Unevaluable Expression
 
-`UnresolvedFunction` is an expressions/Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
+`UnresolvedFunction` is an Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
@@ -11,7 +11,7 @@
 * `AstBuilder` is requested to spark-sql-AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
 [[resolved]]
-`UnresolvedFunction` can never be expressions/Expression.md#resolved[resolved] (and is replaced at analysis phase).
+`UnresolvedFunction` can never be Expression.md#resolved[resolved] (and is replaced at analysis phase).
 
 NOTE: `UnresolvedFunction` is first looked up in [LookupFunctions](../logical-analysis-rules/LookupFunctions.md) logical rule and then resolved in [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical resolution rule.
 
@@ -65,5 +65,5 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 `UnresolvedFunction` takes the following when created:
 
 * [[name]] `FunctionIdentifier`
-* [[children]] Child expressions/Expression.md[expressions]
+* [[children]] Child Expression.md[expressions]
 * [[isDistinct]] `isDistinct` flag

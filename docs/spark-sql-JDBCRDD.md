@@ -1,8 +1,9 @@
 # JDBCRDD
 
-`JDBCRDD` is a `RDD` of spark-sql-InternalRow.md[internal binary rows] that represents a structured query over a table in a database accessed via JDBC.
+`JDBCRDD` is a `RDD` of [InternalRow](InternalRow.md)s that represents a structured query over a table in a database accessed via JDBC.
 
-NOTE: `JDBCRDD` represents a "SELECT requiredColumns FROM table" query.
+!!! note
+    `JDBCRDD` represents a `SELECT requiredColumns FROM table` query.
 
 `JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to spark-sql-JDBCRelation.md#buildScan[build a scan]).
 

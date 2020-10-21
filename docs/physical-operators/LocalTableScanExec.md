@@ -1,5 +1,3 @@
-title: LocalTableScanExec
-
 # LocalTableScanExec Leaf Physical Operator
 
 `LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) and `producedAttributes` being `outputSet`.
@@ -117,7 +115,7 @@ image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center
 | Description
 
 | [[unsafeRows]] `unsafeRows`
-| spark-sql-InternalRow.md[Internal binary rows] for...FIXME
+| [InternalRow](../InternalRow.md)s
 
 | [[numParallelism]] `numParallelism`
 |
@@ -133,13 +131,13 @@ image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute`...FIXME
 
-=== [[creating-instance]] Creating LocalTableScanExec Instance
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+## Creating Instance
 
 `LocalTableScanExec` takes the following when created:
 
-* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
-* [[rows]] spark-sql-InternalRow.md[Internal binary rows]
+* [[output]] Output schema [attributes](../expressions/Attribute.md)
+* [[rows]] [InternalRow](../InternalRow.md)s

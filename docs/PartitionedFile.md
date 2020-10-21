@@ -1,6 +1,4 @@
-title: PartitionedFile
-
-# PartitionedFile -- File Block in FileFormat Data Source
+# PartitionedFile
 
 `PartitionedFile` is a part (_block_) of a file that is in a sense similar to a Pqruet block or a HDFS split.
 
@@ -13,7 +11,7 @@ NOTE: *Partition column values* are values of the columns that are column partit
 [[creating-instance]]
 `PartitionedFile` takes the following to be created:
 
-* [[partitionValues]] Partition column values to be appended to each row (as an spark-sql-InternalRow.md[internal row])
+* [[partitionValues]] Partition column values to be appended to each row (as an [internal row](InternalRow.md))
 * [[filePath]] Path of the file to read
 * [[start]] Beginning offset (in bytes)
 * [[length]] Number of bytes to read (aka `length`)

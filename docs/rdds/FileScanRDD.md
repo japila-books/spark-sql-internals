@@ -10,7 +10,7 @@
 `FileScanRDD` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
-* <span id="readFunction"> Read Function that takes a [PartitionedFile](../spark-sql-PartitionedFile.md) and gives [internal binary rows](../spark-sql-InternalRow.md) back (`(PartitionedFile) => Iterator[InternalRow]`)
+* <span id="readFunction"> Read Function that takes a [PartitionedFile](../PartitionedFile.md) and gives [internal binary rows](../InternalRow.md) back (`(PartitionedFile) => Iterator[InternalRow]`)
 * <span id="filePartitions"> File Blocks as `FilePartition`s (`Seq[FilePartition]`)
 
 `FileScanRDD` is created when [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator is requested to [createBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createBucketedReadRDD) and [createNonBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when `FileSourceScanExec` operator is requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) when [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md) physical operator is executed).
@@ -24,7 +24,7 @@
 
 ## <span id="FilePartition"><span id="files"><span id="index"> FilePartition
 
-`FileScanRDD` is given [FilePartitions](#filePartitions) when [created](#creating-instance) that are custom RDD partitions with [PartitionedFiles](../spark-sql-PartitionedFile.md) (_file blocks_).
+`FileScanRDD` is given [FilePartitions](#filePartitions) when [created](#creating-instance) that are custom RDD partitions with [PartitionedFiles](../PartitionedFile.md) (_file blocks_).
 
 ## <span id="getPreferredLocations"> Placement Preferences of Partition (Preferred Locations)
 
@@ -56,7 +56,7 @@ compute(
 ```
 
 !!! note
-    The `RDDPartition` given is actually a [FilePartition](#FilePartition) with one or more [PartitionedFiles](../spark-sql-PartitionedFile.md) (that [getPartitions](#getPartitions) returned).
+    The `RDDPartition` given is actually a [FilePartition](#FilePartition) with one or more [PartitionedFiles](../PartitionedFile.md) (that [getPartitions](#getPartitions) returned).
 
 `compute` is part of Spark Core's `RDD` abstraction.
 
@@ -66,7 +66,7 @@ compute(
 next(): Object
 ```
 
-`next` takes the next element of the current iterator over elements of a file block ([PartitionedFile](../spark-sql-PartitionedFile.md)).
+`next` takes the next element of the current iterator over elements of a file block ([PartitionedFile](../PartitionedFile.md)).
 
 `next` increments the metrics of bytes and number of rows read (that could be the number of rows in a [ColumnarBatch](../ColumnarBatch.md) for vectorized reads).
 

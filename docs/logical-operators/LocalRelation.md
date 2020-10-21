@@ -1,8 +1,6 @@
-title: LocalRelation
-
 # LocalRelation Leaf Logical Operator
 
-`LocalRelation` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that represents a scan over local collections (and allow for optimizations so functions like `collect` or `take` can be executed locally on the driver and with no executors).
+`LocalRelation` is a [leaf logical operator](LeafNode.md) that represents a scan over local collections (and allow for optimizations so functions like `collect` or `take` can be executed locally on the driver and with no executors).
 
 `LocalRelation` is <<creating-instance, created>> (using <<apply, apply>>, <<fromExternalRows, fromExternalRows>>, and <<fromProduct, fromProduct>> factory methods) when:
 
@@ -69,7 +67,7 @@ When requested for <<spark-sql-LogicalPlan-LeafNode.md#computeStats, statistics>
 `LocalRelation` takes the following to be created:
 
 * [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
-* [[data]] Collection of spark-sql-InternalRow.md[internal binary rows]
+* [[data]] [InternalRow](../InternalRow.md)s
 * [[isStreaming]] `isStreaming` flag that indicates whether the <<data, data>> comes from a streaming source (default: `false`)
 
 While being created, `LocalRelation` makes sure that the <<output, output attributes>> are all <<expressions/Expression.md#resolved, resolved>> or throws an `IllegalArgumentException`:

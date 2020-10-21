@@ -69,7 +69,7 @@ update(input: InternalRow): Unit
 
 `update` executes the spark-sql-Expression-ImperativeAggregate.md#update[update] method on every input <<imperatives, ImperativeAggregate>> sequentially (one by one).
 
-Internally, `update` joins <<buffer, buffer>> with `input` spark-sql-InternalRow.md[internal binary row] and converts the joined `InternalRow` using the <<updateProjection, MutableProjection>> function.
+Internally, `update` joins <<buffer, buffer>> with the given [InternalRow](../InternalRow.md) and converts the joined `InternalRow` using the [MutableProjection](#updateProjection) function.
 
 `update` then requests every <<imperatives, ImperativeAggregate>> to  spark-sql-Expression-ImperativeAggregate.md#update[update] passing in the <<buffer, buffer>> and the input `input` rows.
 

@@ -52,4 +52,4 @@ NOTE: The <<options, options>> are case-insensitive.
 * [[parameters]] Case-insensitive configuration parameters (i.e. `Map[String, String]`)
 * [[conf]] Hadoop https://hadoop.apache.org/docs/r3.1.1/api/org/apache/hadoop/conf/Configuration.html[Configuration]
 
-`AvroOptions` is created when `AvroFileFormat` is requested to [inferSchema](spark-sql-AvroFileFormat.md#inferSchema), [prepareWrite](spark-sql-AvroFileFormat.md#prepareWrite) and [buildReader](spark-sql-AvroFileFormat.md#buildReader).
+`AvroOptions` is created when `AvroFileFormat` is requested to [inferSchema](AvroFileFormat.md#inferSchema), [prepareWrite](AvroFileFormat.md#prepareWrite) and [buildReader](AvroFileFormat.md#buildReader).

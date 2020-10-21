@@ -1,6 +1,4 @@
-title: Untyped Transformations
-
-# Dataset API -- Untyped Transformations
+# Dataset API &mdash; Untyped Transformations
 
 *Untyped transformations* are part of the Dataset API for transforming a `Dataset` to a <<spark-sql-DataFrame.md#, DataFrame>>, a <<spark-sql-Column.md#, Column>>, a <<spark-sql-RelationalGroupedDataset.md#, RelationalGroupedDataset>>, a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> or a <<spark-sql-DataFrameStatFunctions.md#, DataFrameStatFunctions>> (and hence _untyped_).
 

@@ -1,6 +1,4 @@
-title: DataFrameStatFunctions
-
-# DataFrameStatFunctions -- Working With Statistic Functions
+# DataFrameStatFunctions
 
 `DataFrameStatFunctions` is used to work with <<methods, statistic functions>> in a structured query (a <<spark-sql-DataFrame.md#, DataFrame>>).
 
@@ -94,7 +92,7 @@ sampleBy[T](col: String, fractions: Map[T, Double], seed: Long): DataFrame
 |===
 
 [[creating-instance]]
-`DataFrameStatFunctions` is available using <<spark-sql-Dataset-untyped-transformations.md#stat, stat>> untyped transformation.
+`DataFrameStatFunctions` is available using [stat](Dataset-untyped-transformations.md#stat) untyped transformation.
 
 [source, scala]
 ----

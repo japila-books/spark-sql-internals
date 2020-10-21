@@ -5,7 +5,7 @@ title: CreateNamedStruct
 `CreateNamedStruct` is a <<spark-sql-Expression-CreateNamedStructLike.md#, CreateNamedStructLike>> expression that...FIXME
 
 [[prettyName]]
-`CreateNamedStruct` uses *named_struct* for the <<expressions/Expression.md#prettyName, user-facing name>>.
+`CreateNamedStruct` uses *named_struct* for the <<Expression.md#prettyName, user-facing name>>.
 
 [source, scala]
 ----
@@ -40,7 +40,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 `CreateNamedStruct` is <<creating-instance, created>> when:
 
-* <<spark-sql-ScalaReflection.md#serializerFor, ScalaReflection>>, <<spark-sql-RowEncoder.md#serializerFor, RowEncoder>> and `JavaTypeInference` are requested for a serializer of a type
+* <<spark-sql-ScalaReflection.md#serializerFor, ScalaReflection>>, [RowEncoder](../RowEncoder.md#serializerFor) and `JavaTypeInference` are requested for a serializer of a type
 
 * [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) and [ResolveCreateNamedStruct](../logical-analysis-rules/ResolveCreateNamedStruct.md) logical resolution rules are executed
 
@@ -48,7 +48,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 [[children]]
 [[creating-instance]]
-`CreateNamedStruct` takes a collection of <<expressions/Expression.md#, Catalyst expressions>> when created.
+`CreateNamedStruct` takes a collection of <<Expression.md#, Catalyst expressions>> when created.
 
 `CreateNamedStruct` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
 
@@ -111,6 +111,6 @@ named_struct(*)
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME

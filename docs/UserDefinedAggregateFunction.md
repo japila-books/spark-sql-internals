@@ -1,11 +1,8 @@
-title: UserDefinedAggregateFunction
+# UserDefinedAggregateFunction &mdash; User-Defined Untyped Aggregate Functions (UDAFs)
 
-# UserDefinedAggregateFunction -- User-Defined Untyped Aggregate Functions (UDAFs)
+`UserDefinedAggregateFunction` is the <<contract, contract>> to define **user-defined aggregate functions (UDAFs)**.
 
-`UserDefinedAggregateFunction` is the <<contract, contract>> to define *user-defined aggregate functions (UDAFs)*.
-
-[source, scala]
-----
+```text
 // Custom UDAF to count rows
 
 import org.apache.spark.sql.Row
@@ -46,12 +43,11 @@ class MyCountUDAF extends UserDefinedAggregateFunction {
     buffer.getLong(0)
   }
 }
-----
+```
 
 `UserDefinedAggregateFunction` is created using <<apply, apply>> or <<distinct, distinct>> factory methods.
 
-[source, scala]
-----
+```text
 val dataset = spark.range(start = 0, end = 4, step = 1, numPartitions = 2)
 
 // Use the UDAF
@@ -67,12 +63,11 @@ scala> q.show
 |    0|    2|
 |    1|    2|
 +-----+-----+
-----
+```
 
 The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] expression container.
 
-.UserDefinedAggregateFunction and ScalaUDAF Expression Container
-image::images/spark-sql-UserDefinedAggregateFunction.png[align="center"]
+![UserDefinedAggregateFunction and ScalaUDAF Expression Container](images/spark-sql-UserDefinedAggregateFunction.png)
 
 [NOTE]
 ====

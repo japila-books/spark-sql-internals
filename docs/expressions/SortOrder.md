@@ -13,7 +13,7 @@ title: SortOrder
 `SortOrder` is an [unevaluable expression](Unevaluable.md).
 
 [[foldable]]
-`SortOrder` is never <<expressions/Expression.md#foldable, foldable>> (as an unevaluable expression with no evaluation).
+`SortOrder` is never <<Expression.md#foldable, foldable>> (as an unevaluable expression with no evaluation).
 
 [[catalyst-dsl]]
 TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
@@ -58,10 +58,10 @@ scala> println(sortNullsLast.sql)
 
 `SortOrder` takes the following when created:
 
-* [[child]] Child <<expressions/Expression.md#, expression>>
+* [[child]] Child <<Expression.md#, expression>>
 * [[direction]] <<SortDirection, SortDirection>>
 * [[nullOrdering]] `NullOrdering`
-* [[sameOrderExpressions]] "Same Order" <<expressions/Expression.md#, expressions>>
+* [[sameOrderExpressions]] "Same Order" <<Expression.md#, expressions>>
 
 === [[SortDirection]] SortDirection Contract
 

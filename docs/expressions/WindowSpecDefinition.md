@@ -1,17 +1,14 @@
-title: WindowSpecDefinition
-
 # WindowSpecDefinition Unevaluable Expression
 
 `WindowSpecDefinition` is an [unevaluable expression](Unevaluable.md).
 
 `WindowSpecDefinition` is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitWindowDef[parse a window specification] in a SQL query
+* `AstBuilder` is requested to [parse a window specification](../sql/AstBuilder.md#visitWindowDef) in a SQL query
 
-* spark-sql-Column.md#over[Column.over] operator is used
+* [Column.over](../spark-sql-Column.md#over) operator is used
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.expressions.Window
 val byValueDesc = Window.partitionBy("value").orderBy($"value".desc)
 
@@ -26,10 +23,9 @@ val windowExpr = q.queryExecution
 
 scala> windowExpr.windowSpec
 res0: org.apache.spark.sql.catalyst.expressions.WindowSpecDefinition = windowspecdefinition('value, 'value DESC NULLS LAST, UnspecifiedFrame)
-----
+```
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.WindowSpecDefinition
 
 Seq((0, "hello"), (1, "windows"))
@@ -75,7 +71,7 @@ Project [count(1) OVER (PARTITION BY token ORDER BY id ASC NULLS FIRST RANGE BET
          +- SubqueryAlias mytable
             +- Project [_1#9 AS id#12, _2#10 AS token#13]
                +- LocalRelation [_1#9, _2#10]
-----
+```
 
 [[properties]]
 .WindowSpecDefinition's Properties
@@ -97,7 +93,7 @@ Project [count(1) OVER (PARTITION BY token ORDER BY id ASC NULLS FIRST RANGE BET
 | Enabled (i.e. `true`)
 
 | `resolved`
-| Enabled when <<children, children>> are and the input spark-sql-DataType.md[DataType] is valid and the input <<frameSpecification, frameSpecification>> is a `SpecifiedWindowFrame`.
+| Enabled when <<children, children>> are and the input [DataType](../DataType.md) is valid and the input [frameSpecification](#frameSpecification) is a `SpecifiedWindowFrame`.
 
 | `sql`
 a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, partitionSpec>> (if defined) with `ORDER BY` with comma-separated elements of <<orderSpec, orderSpec>> (if defined) followed by <<frameSpecification, frameSpecification>>.
@@ -108,11 +104,11 @@ a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, par
 ----
 |===
 
-=== [[creating-instance]] Creating WindowSpecDefinition Instance
+## Creating Instance
 
 `WindowSpecDefinition` takes the following when created:
 
-* [[partitionSpec]] <<expressions/Expression.md#, Expressions>> for window partition specification
+* [[partitionSpec]] <<Expression.md#, Expressions>> for window partition specification
 * [[orderSpec]] Window order specifications (as `SortOrder` unary expressions)
 * [[frameSpecification]] Window frame specification (as `WindowFrame`)
 
@@ -123,11 +119,11 @@ a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, par
 isValidFrameType(ft: DataType): Boolean
 ----
 
-`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` <<spark-sql-DataType.md#, data type>> are as follows:
+`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` [data type](../DataType.md) are as follows:
 
-* <<spark-sql-DataType.md#DateType, DateType>> and <<spark-sql-DataType.md#IntegerType, IntegerType>>
+* [DateType](../DataType.md#DateType) and [IntegerType](../DataType.md#IntegerType)
 
-* <<spark-sql-DataType.md#TimestampType, TimestampType>> and <<spark-sql-DataType.md#CalendarIntervalType, CalendarIntervalType>>
+* [TimestampType](../DataType.md#TimestampType) and [CalendarIntervalType](../DataType.md#CalendarIntervalType)
 
 * Equal
 
@@ -142,6 +138,6 @@ NOTE: `isValidFrameType` is used exclusively when `WindowSpecDefinition` is requ
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInputDataTypes, Expression Contract>> to checks the input data types.
+`checkInputDataTypes` is part of the [Expression](Expression.md#checkInputDataTypes) abstraction.
 
 `checkInputDataTypes`...FIXME

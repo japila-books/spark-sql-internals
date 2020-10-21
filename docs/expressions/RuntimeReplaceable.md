@@ -24,7 +24,7 @@ trait RuntimeReplaceable extends UnaryExpression with Unevaluable {
 }
 ----
 
-NOTE: To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override expressions/Expression.md#flatArguments[flatArguments] and expressions/Expression.md#sql[sql] methods.
+NOTE: To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override Expression.md#flatArguments[flatArguments] and Expression.md#sql[sql] methods.
 
 [[implementations]]
 .RuntimeReplaceables

@@ -312,8 +312,8 @@ NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to
 vectorTypes: Option[Seq[String]] = None
 ----
 
-`vectorTypes` defines the fully-qualified class names (_types_) of the concrete <<spark-sql-ColumnVector.md#, ColumnVectors>> for every column used in a columnar batch.
+`vectorTypes` defines the fully-qualified class names (_types_) of the concrete [ColumnVector](../ColumnVector.md)s for every column used in a columnar batch.
 
 `vectorTypes` gives no vector types by default (`None`).
 
-NOTE: `vectorTypes` is used exclusively when `ColumnarBatchScan` is requested to <<produceBatches, produceBatches>>.
+`vectorTypes` is used when `ColumnarBatchScan` is requested to [produceBatches](#produceBatches).

@@ -2,7 +2,7 @@ title: NamedExpression
 
 # NamedExpression -- Catalyst Expressions with Name, ID and Qualifier
 
-`NamedExpression` is a <<contract, contract>> of expressions/Expression.md[Catalyst expressions] that have a <<name, name>>, <<exprId, exprId>>, and optional <<qualifier, qualifier>>.
+`NamedExpression` is a <<contract, contract>> of Expression.md[Catalyst expressions] that have a <<name, name>>, <<exprId, exprId>>, and optional <<qualifier, qualifier>>.
 
 [[contract]]
 [source, scala]

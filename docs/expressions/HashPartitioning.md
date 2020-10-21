@@ -6,11 +6,11 @@
 [[creating-instance]]
 `HashPartitioning` takes the following to be created:
 
-* [[expressions]] Partitioning expressions/Expression.md[expressions]
+* [[expressions]] Partitioning Expression.md[expressions]
 * [[numPartitions]] Number of partitions
 
 [[Unevaluable]][[Expression]]
-`HashPartitioning` is an [Unevaluable Expression](Unevaluable.md) that expressions/Expression.md#[cannot be evaluated] (and produce a value given an internal row).
+`HashPartitioning` is an [Unevaluable Expression](Unevaluable.md) that Expression.md#[cannot be evaluated] (and produce a value given an internal row).
 
 `HashPartitioning` uses the spark-sql-Expression-Murmur3Hash.md[MurMur3 Hash] to compute the <<partitionIdExpression, partitionId>> for data distribution (consistent for shuffling and bucketing that is crucial for joins of bucketed and regular tables).
 

@@ -38,10 +38,10 @@ res1: Boolean = true
 ----
 
 [[resolved]]
-`UnresolvedGenerator` can never be expressions/Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
+`UnresolvedGenerator` can never be Expression.md#resolved[resolved] (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[Unevaluable]][[eval]][[doGenCode]]
-Given `UnresolvedGenerator` can never be resolved it should not come as a surprise that it expressions/Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedGenerator` simply reports a `UnsupportedOperationException`.
+Given `UnresolvedGenerator` can never be resolved it should not come as a surprise that it Expression.md#Unevaluable[cannot be evaluated] either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedGenerator` simply reports a `UnsupportedOperationException`.
 
 ```
 Cannot evaluate expression: [this]
@@ -60,4 +60,4 @@ NOTE: `UnresolvedGenerator` is similar to spark-sql-Expression-UnresolvedFunctio
 `UnresolvedGenerator` takes the following when created:
 
 * [[name]] `FunctionIdentifier`
-* [[children]] Child expressions/Expression.md[expressions]
+* [[children]] Child Expression.md[expressions]

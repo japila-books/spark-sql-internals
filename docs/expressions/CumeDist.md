@@ -18,7 +18,7 @@ val cume_dist = CumeDist()
 ----
 
 [[prettyName]]
-`CumeDist` uses *cume_dist* for the <<expressions/Expression.md#prettyName, user-facing name>>.
+`CumeDist` uses *cume_dist* for the <<Expression.md#prettyName, user-facing name>>.
 
 [source, scala]
 ----

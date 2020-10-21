@@ -41,9 +41,9 @@ generate(
 
 * `FileFormat` is requested to [build a data reader with partition column values appended](../FileFormat.md#buildReaderWithPartitionValues)
 
-* `OrcFileFormat` is requested to [build a data reader with partition column values appended](../spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to [build a data reader with partition column values appended](../OrcFileFormat.md#buildReaderWithPartitionValues)
 
-* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 * `GroupedIterator` is requested for `keyProjection`
 

@@ -1,8 +1,6 @@
-title: Aggregator
+# Aggregator &mdash; User-Defined Typed Aggregate Functions (UDAFs)
 
-# Aggregator -- User-Defined Typed Aggregate Functions (UDAFs)
-
-`Aggregator` is the <<contract, contract>> for *user-defined typed aggregate functions* (aka _user-defined typed aggregations_ or _UDAFs_ in short).
+`Aggregator` is the <<contract, contract>> for **user-defined typed aggregate functions** (_user-defined typed aggregations_ or _UDAFs_).
 
 [[contract]]
 [source, scala]

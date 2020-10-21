@@ -26,12 +26,12 @@ TIP: Use `RDD.toDebugString` to see the additional `MapPartitionsRDD` in an RDD 
 
 The "map" function takes a Scala `Iterator` of spark-sql-Row.md[Row] objects and does the following:
 
-. Creates a `GenericInternalRow` (of the size that is the number of columns per the input `Seq[DataType]`)
+1. Creates a `GenericInternalRow` (of the size that is the number of columns per the input `Seq[DataType]`)
 
-. spark-sql-CatalystTypeConverters.md#createToCatalystConverter[Creates a converter function] for every `DataType` in `Seq[DataType]`
+1. [Creates a converter function](CatalystTypeConverters.md#createToCatalystConverter) for every `DataType` in `Seq[DataType]`
 
-. For every spark-sql-Row.md[Row] object in the partition (iterator), applies the converter function per position and adds the result value to the `GenericInternalRow`
+1. For every [Row](spark-sql-Row.md) object in the partition (iterator), applies the converter function per position and adds the result value to the `GenericInternalRow`
 
-. In the end, returns a `GenericInternalRow` for every row
+1. In the end, returns a `GenericInternalRow` for every row
 
 `rowToRowRdd` is used when [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed (and requested to [toCatalystRDD](execution-planning-strategies/DataSourceStrategy.md#toCatalystRDD)).

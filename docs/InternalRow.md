@@ -1,8 +1,9 @@
-# InternalRow -- Abstract Binary Row Format
+# InternalRow &mdash; Abstract Binary Row Format
 
 NOTE: `InternalRow` is also called *Catalyst row* or *Spark SQL row*.
 
-NOTE: spark-sql-UnsafeRow.md[UnsafeRow] is a concrete `InternalRow`.
+!!! note
+    [UnsafeRow](UnsafeRow.md) is a concrete `InternalRow`.
 
 [source, scala]
 ----

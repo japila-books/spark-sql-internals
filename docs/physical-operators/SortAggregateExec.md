@@ -1,8 +1,4 @@
-title: SortAggregateExec
-
-# SortAggregateExec Aggregate Physical Operator for Sort-Based Aggregation
-
-CAUTION: FIXME
+# SortAggregateExec Aggregate Physical Operator
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -11,6 +7,6 @@ CAUTION: FIXME
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute`...FIXME

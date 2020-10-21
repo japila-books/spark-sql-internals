@@ -1,8 +1,6 @@
-title: HashAggregateExec
+# HashAggregateExec Aggregate Physical Operator
 
-# HashAggregateExec Aggregate Physical Operator for Hash-Based Aggregation
-
-`HashAggregateExec` is a [unary physical operator](UnaryExecNode.md) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
+`HashAggregateExec` is a [unary physical operator](UnaryExecNode.md) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through [AggUtils.createAggregate](../spark-sql-AggUtils.md#createAggregate)) when:
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator
 
@@ -15,8 +13,7 @@ title: HashAggregateExec
 
 `HashAggregateExec` uses <<spark-sql-TungstenAggregationIterator.md#, TungstenAggregationIterator>> (to iterate over `UnsafeRows` in partitions) when <<doExecute, executed>>.
 
-[source, scala]
-----
+```text
 val q = spark.range(10).
   groupBy('id % 2 as "group").
   agg(sum("id") as "sum")
@@ -65,7 +62,7 @@ scala> println(hashAggExecRDD.toDebugString)
  |  MapPartitionsRDD[2] at execute at <console>:30 []
  |  MapPartitionsRDD[1] at execute at <console>:30 []
  |  ParallelCollectionRDD[0] at execute at <console>:30 []
-----
+```
 
 [[metrics]]
 .HashAggregateExec's Performance Metrics
@@ -301,7 +298,7 @@ NOTE: `generateResultFunction` is used exclusively when `HashAggregateExec` phys
 supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 ----
 
-`supportsAggregate` firstly [creates the schema](../StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses spark-sql-UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an spark-sql-UnsafeRow.md[UnsafeRow]).
+`supportsAggregate` firstly [creates the schema](../StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an UnsafeRow.md[UnsafeRow]).
 
 [NOTE]
 ====
@@ -319,7 +316,7 @@ supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndex` that creates another RDD):
 

@@ -4,7 +4,7 @@
 
 `Unevaluable` expressions are expected to be resolved (replaced) to "evaluable" expressions or logical operators at [analysis](../QueryExecution.md#analyzed) or [optimization](../QueryExecution.md#optimizedPlan) phases or they fail analysis.
 
-Unevaluable expressions cannot be evaluated (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations) and has to be  
+Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, interpreted>> nor <<Expression.md#doGenCode, code-generated>> expression evaluations) and has to be  
 
 ## Implementations
 

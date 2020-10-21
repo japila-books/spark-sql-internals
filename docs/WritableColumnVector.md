@@ -1,6 +1,6 @@
 # WritableColumnVector
 
-`WritableColumnVector` is the <<contract, extension>> of the <<spark-sql-ColumnVector.md#, ColumnVector contract>> for <<implementations, writable column vectors>> that <<FIXME, FIXME>>.
+`WritableColumnVector` is the <<contract, extension>> of the [ColumnVector](ColumnVector.md) contract for <<implementations, writable column vectors>>.
 
 [[contract]]
 .WritableColumnVector Contract (Abstract Methods Only)
@@ -390,7 +390,7 @@ void reserveInternal(int capacity)
 
 Used when:
 
-* <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are created
+* [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
 
 * `WritableColumnVector` is requested to <<reserve, reserve memory of a given required capacity>>
 
@@ -415,10 +415,10 @@ Used when...FIXME
 | WritableColumnVector
 | Description
 
-| <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>>
+| [OffHeapColumnVector](OffHeapColumnVector.md)
 | [[OffHeapColumnVector]]
 
-| <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>>
+| [OnHeapColumnVector](OnHeapColumnVector.md)
 | [[OnHeapColumnVector]]
 
 |===
@@ -427,7 +427,7 @@ Used when...FIXME
 `WritableColumnVector` takes the following to be created:
 
 * [[capacity]] Number of rows to hold in a vector (aka `capacity`)
-* [[type]] spark-sql-DataType.md[Data type] of the rows stored
+* [[type]] [Data type](DataType.md) of the rows stored
 
 NOTE: `WritableColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete WritableColumnVectors>>.
 
@@ -448,7 +448,7 @@ void reset()
 
 * `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextBatch, read next rows into a columnar batch>>
 
-* <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are created
+* [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
 
 * `WritableColumnVector` is requested to <<reserveDictionaryIds, reserveDictionaryIds>>
 ====

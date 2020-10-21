@@ -1,5 +1,3 @@
-title: ObjectHashAggregateExec
-
 # ObjectHashAggregateExec Aggregate Physical Operator
 
 `ObjectHashAggregateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
@@ -94,9 +92,9 @@ image::images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png[alig
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute`...FIXME
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 === [[supportsAggregate]] `supportsAggregate` Method
 

@@ -10,5 +10,5 @@ title: Alias
 
 `Alias` takes the following when created:
 
-* [[child]] Child expressions/Expression.md[expression]
+* [[child]] Child Expression.md[expression]
 * [[name]] Name

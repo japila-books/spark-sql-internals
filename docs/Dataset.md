@@ -1,19 +1,19 @@
 # Dataset &mdash; Structured Query with Data Encoder
 
-**Dataset** is a strongly-typed data structure in Spark SQL that represents a structured query.
+`Dataset[T]` is a strongly-typed data structure that represents a structured query.
 
-NOTE: A structured query can be written using SQL or <<spark-sql-dataset-operators.md#, Dataset API>>.
+!!! note
+    A structured query can be written using SQL or [Dataset API](spark-sql-dataset-operators.md).
 
 The following figure shows the relationship between different entities of Spark SQL that all together give the `Dataset` data structure.
 
-.Dataset's Internals
-image::images/spark-sql-Dataset.png[align="center"]
+![Dataset's Internals](images/spark-sql-Dataset.png)
 
 It is therefore fair to say that `Dataset` consists of the following three elements:
 
 * [QueryExecution](QueryExecution.md) (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
 
-* [Encoder](spark-sql-Encoder.md) (of the type of the records for fast serialization and deserialization to and from <<spark-sql-InternalRow.md#, InternalRow>>)
+* [Encoder](spark-sql-Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
 
 * [SparkSession](SparkSession.md)
 
@@ -25,7 +25,7 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 * <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
 
-* <<spark-sql-Dataset-untyped-transformations.md#toDF, Dataset.toDF>> untyped transformation is used
+* [Dataset.toDF](Dataset-untyped-transformations.md#toDF) untyped transformation is used
 
 * <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.md#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.md#mapPartitions, Dataset.mapPartitions>> typed transformations are used
 
@@ -185,7 +185,7 @@ planWithBarrier: AnalysisBarrier
 ----
 
 ! [[rdd]] `rdd`
-a! (lazily-created) spark-rdd.md[RDD] of JVM objects of type `T` (as converted from rows in `Dataset` in the spark-sql-InternalRow.md[internal binary row format]).
+a! (lazily-created) spark-rdd.md[RDD] of JVM objects of type `T` (as converted from rows in `Dataset` in the [internal binary row format](InternalRow.md)).
 
 [source, scala]
 ----
@@ -324,9 +324,9 @@ ofRows(
 !!! note
     `ofRows` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
 
-`ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses spark-sql-RowEncoder.md[RowEncoder] to convert the schema (based on the input `logicalPlan` logical plan).
+`ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses [RowEncoder](RowEncoder.md) to convert the schema (based on the input `logicalPlan` logical plan).
 
-Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the [QueryExecution](QueryExecution.md) and [RowEncoder](spark-sql-RowEncoder.md).
+Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the [QueryExecution](QueryExecution.md) and [RowEncoder](RowEncoder.md).
 
 `ofRows` is used when:
 
@@ -505,7 +505,7 @@ withPlan(logicalPlan: LogicalPlan): DataFrame
 
 NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-NOTE: `withPlan` is used in the `Dataset` <<spark-sql-Dataset-untyped-transformations.md#, untyped transformations>> (i.e. <<spark-sql-Dataset-untyped-transformations.md#join, join>>, <<spark-sql-Dataset-untyped-transformations.md#crossJoin, crossJoin>> and <<spark-sql-Dataset-untyped-transformations.md#select, select>>) and <<spark-sql-Dataset-basic-actions.md#, basic actions>> (i.e. <<spark-sql-Dataset-basic-actions.md#createTempView, createTempView>>, <<spark-sql-Dataset-basic-actions.md#createOrReplaceTempView, createOrReplaceTempView>>, <<spark-sql-Dataset-basic-actions.md#createGlobalTempView, createGlobalTempView>> and <<spark-sql-Dataset-basic-actions.md#createOrReplaceGlobalTempView, createOrReplaceGlobalTempView>>).
+`withPlan` is used in [untyped transformations](Dataset-untyped-transformations.md)
 
 === [[i-want-more]] Further Reading and Watching
 

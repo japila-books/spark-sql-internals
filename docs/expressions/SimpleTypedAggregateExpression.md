@@ -1,7 +1,5 @@
 # SimpleTypedAggregateExpression
 
-`SimpleTypedAggregateExpression` is...FIXME
-
 `SimpleTypedAggregateExpression` is <<creating-instance, created>> when...FIXME
 
 [[internal-registries]]
@@ -12,22 +10,22 @@
 | Description
 
 | evaluateExpression
-| [[evaluateExpression]] <<expressions/Expression.md#, Expression>>
+| [[evaluateExpression]] <<Expression.md#, Expression>>
 
 | resultObjToRow
 | [[resultObjToRow]] <<spark-sql-UnsafeProjection.md#, UnsafeProjection>>
 |===
 
-=== [[creating-instance]] Creating SimpleTypedAggregateExpression Instance
+## Creating Instance
 
 `SimpleTypedAggregateExpression` takes the following when created:
 
-* [[aggregator]] spark-sql-Aggregator.md[Aggregator]
+* [[aggregator]] [Aggregator](../Aggregator.md)
 * [[inputDeserializer]] Optional input deserializer [expression](Expression.md)
 * [[inputClass]] Optional Java class for the input
 * [[inputSchema]] Optional [schema](../StructType.md) for the input
 * [[bufferSerializer]] Buffer serializer (as a collection of spark-sql-Expression-NamedExpression.md[named expressions])
-* [[bufferDeserializer]] Buffer deserializer expressions/Expression.md[expression]
-* [[outputSerializer]] Output serializer (as a collection of expressions/Expression.md[expressions])
-* [[dataType]] spark-sql-DataType.md[DataType]
+* [[bufferDeserializer]] Buffer deserializer Expression.md[expression]
+* [[outputSerializer]] Output serializer (as a collection of Expression.md[expressions])
+* [[dataType]] [DataType](../DataType.md)
 * [[nullable]] `nullable` flag

@@ -25,7 +25,7 @@ A basic action to display the logical and physical plans of the `Dataset`, i.e. 
 | Operator
 | Description
 
-| <<spark-sql-Dataset-untyped-transformations.md#agg, agg>>
+| [agg](Dataset-untyped-transformations.md#agg)
 a| [[agg]]
 
 [source, scala]
@@ -48,7 +48,7 @@ alias(alias: Symbol): Dataset[T]
 
 A typed transformation that is a mere synonym of <<as-alias, as>>.
 
-| <<spark-sql-Dataset-untyped-transformations.md#apply, apply>>
+| [apply](Dataset-untyped-transformations.md#apply)
 a| [[apply]]
 
 [source, scala]
@@ -110,7 +110,7 @@ coalesce(numPartitions: Int): Dataset[T]
 
 A typed transformation to repartition a Dataset
 
-| <<spark-sql-Dataset-untyped-transformations.md#col, col>>
+| [col](Dataset-untyped-transformations.md#col)
 a| [[col]]
 
 [source, scala]
@@ -130,7 +130,7 @@ collect(): Array[T]
 
 An action
 
-| <<spark-sql-Dataset-untyped-transformations.md#colRegex, colRegex>>
+| [colRegex](Dataset-untyped-transformations.md#colRegex)
 a| [[colRegex]]
 
 [source, scala]
@@ -200,7 +200,7 @@ createTempView(viewName: String): Unit
 
 A basic action
 
-| <<spark-sql-Dataset-untyped-transformations.md#crossJoin, crossJoin>>
+| [crossJoin](Dataset-untyped-transformations.md#crossJoin)
 a| [[crossJoin]]
 
 [source, scala]
@@ -210,7 +210,7 @@ crossJoin(right: Dataset[_]): DataFrame
 
 An untyped transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#cube, cube>>
+| [cube](Dataset-untyped-transformations.md#cube)
 a| [[cube]]
 
 [source, scala]
@@ -241,7 +241,7 @@ distinct(): Dataset[T]
 
 A typed transformation that is a mere synonym of <<dropDuplicates, dropDuplicates>> (with all the columns of the `Dataset`)
 
-| <<spark-sql-Dataset-untyped-transformations.md#drop, drop>>
+| [drop](Dataset-untyped-transformations.md#drop)
 a| [[drop]]
 
 [source, scala]
@@ -350,7 +350,7 @@ foreachPartition(f: Iterator[T] => Unit): Unit
 
 An action
 
-| <<spark-sql-Dataset-untyped-transformations.md#groupBy, groupBy>>
+| [groupBy](Dataset-untyped-transformations.md#groupBy)
 a| [[groupBy]]
 
 [source, scala]
@@ -451,7 +451,7 @@ a| [[isStreaming]]
 isStreaming: Boolean
 ----
 
-| <<spark-sql-Dataset-untyped-transformations.md#join, join>>
+| [join](Dataset-untyped-transformations.md#join)
 a| [[join]]
 
 [source, scala]
@@ -518,7 +518,7 @@ mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
 
 A typed transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#na, na>>
+| [na](Dataset-untyped-transformations.md#na)
 a| [[na]]
 
 [source, scala]
@@ -616,7 +616,7 @@ repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 A typed transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#rollup, rollup>>
+| [rollup](Dataset-untyped-transformations.md#rollup)
 a| [[rollup]]
 
 [source, scala]
@@ -650,7 +650,7 @@ schema: StructType
 
 A basic action
 
-| <<spark-sql-Dataset-untyped-transformations.md#select, select>>
+| [select](Dataset-untyped-transformations.md#select)
 a| [[select]]
 
 [source, scala]
@@ -681,7 +681,7 @@ select[U1, U2, U3, U4, U5](
 
 An (untyped and typed) transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#selectExpr, selectExpr>>
+| [selectExpr](Dataset-untyped-transformations.md#selectExpr)
 a| [[selectExpr]]
 
 [source, scala]
@@ -728,7 +728,7 @@ sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
 
 A typed transformation to sort elements within partitions (aka _local sort_). Use <<sort, sort>> transformation for global sort (across partitions)
 
-| <<spark-sql-Dataset-untyped-transformations.md#stat, stat>>
+| [stat](Dataset-untyped-transformations.md#stat)
 a| [[stat]]
 
 [source, scala]
@@ -852,7 +852,7 @@ where(conditionExpr: String): Dataset[T]
 
 A typed transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#withColumn, withColumn>>
+| [withColumn](Dataset-untyped-transformations.md#withColumn)
 a| [[withColumn]]
 
 [source, scala]
@@ -862,7 +862,7 @@ withColumn(colName: String, col: Column): DataFrame
 
 An untyped transformation
 
-| <<spark-sql-Dataset-untyped-transformations.md#withColumnRenamed, withColumnRenamed>>
+| [withColumnRenamed](Dataset-untyped-transformations.md#withColumnRenamed)
 a| [[withColumnRenamed]]
 
 [source, scala]

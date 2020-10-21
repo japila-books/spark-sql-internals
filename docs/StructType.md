@@ -1,17 +1,14 @@
-title: StructType
-
-# StructType -- Data Type for Schema Definition
+# StructType &mdash; Data Type for Schema Definition
 
 [[fields]]
 [[creating-instance]]
-`StructType` is a built-in <<spark-sql-DataType.md#, data type>> that is a collection of <<spark-sql-StructField.md#, StructFields>>.
+`StructType` is a built-in [data type](DataType.md) that is a collection of [StructFields](spark-sql-StructField.md).
 
 `StructType` is used to define a schema or its part.
 
 You can compare two `StructType` instances to see whether they are equal.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.types.StructType
 
 val schemaUntyped = new StructType()
@@ -25,7 +22,7 @@ val schemaTyped = new StructType()
 
 scala> schemaUntyped == schemaTyped
 res0: Boolean = true
-----
+```
 
 `StructType` <<sql, presents itself>> as `<struct>` or `STRUCT` in query plans or SQL.
 
@@ -121,10 +118,9 @@ catalogString: String
 sql: String
 ----
 
-`StructType` as a custom `DataType` is used in query plans or SQL. It can present itself using `simpleString`, `catalogString` or `sql` (see spark-sql-DataType.md#contract[DataType Contract]).
+`StructType` as a custom `DataType` is used in query plans or SQL. It can present itself using `simpleString`, `catalogString` or `sql`.
 
-[source, scala]
-----
+```text
 scala> schemaTyped.simpleString
 res0: String = struct<a:int,b:string>
 
@@ -133,7 +129,7 @@ res1: String = struct<a:int,b:string>
 
 scala> schemaTyped.sql
 res2: String = STRUCT<`a`: INT, `b`: STRING>
-----
+```
 
 === [[apply]] Accessing StructField -- `apply` Method
 

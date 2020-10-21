@@ -1,10 +1,9 @@
-title: Encoder
+# Encoder
 
-# Encoder -- InternalRow Converter
+`Encoder` is the fundamental concept in the **serialization and deserialization (SerDe) framework**. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
 
-*Encoder* is the fundamental concept in the *serialization and deserialization (SerDe) framework* in Spark SQL 2.0. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
-
-TIP: Spark has borrowed the idea from the https://cwiki.apache.org/confluence/display/Hive/SerDe[Hive SerDe library] so it might be worthwhile to get familiar with Hive a little bit, too.
+!!! note
+    Spark has borrowed the idea from the [Hive SerDe library](https://cwiki.apache.org/confluence/display/Hive/SerDe) so it might be worthwhile to get familiar with Hive a little bit, too.
 
 Encoders are modelled in Spark SQL 2.0 as `Encoder[T]` trait.
 
@@ -16,7 +15,7 @@ trait Encoder[T] extends Serializable {
 }
 ----
 
-The type `T` stands for the type of records a `Encoder[T]` can deal with. An encoder of type `T`, i.e. `Encoder[T]`, is used to convert (_encode_ and _decode_) any JVM object or primitive of type `T` (that could be your domain object) to and from Spark SQL's spark-sql-InternalRow.md[InternalRow] which is the internal binary row format representation (using Catalyst expressions and code generation).
+The type `T` stands for the type of records a `Encoder[T]` can deal with. An encoder of type `T`, i.e. `Encoder[T]`, is used to convert (_encode_ and _decode_) any JVM object or primitive of type `T` (that could be your domain object) to and from Spark SQL's [InternalRow](InternalRow.md) which is the internal binary row format representation (using Catalyst expressions and code generation).
 
 NOTE: `Encoder` is also called _"a container of serde expressions in Dataset"_.
 
@@ -102,7 +101,7 @@ TIP: The default encoders are already imported in spark-shell.md[spark-shell].
 
 Encoders map columns (of your dataset) to fields (of your JVM object) by name. It is by Encoders that you can bridge JVM objects to data sources (CSV, JDBC, Parquet, Avro, JSON, Cassandra, Elasticsearch, memsql) and vice versa.
 
-NOTE: In Spark SQL 2.0 `DataFrame` type is a mere type alias for `Dataset[Row]` with spark-sql-RowEncoder.md[RowEncoder] being the encoder.
+NOTE: In Spark SQL 2.0 `DataFrame` type is a mere type alias for `Dataset[Row]` with [RowEncoder](RowEncoder.md) being the encoder.
 
 === [[creating-encoders]][[encoders]] Creating Custom Encoders (Encoders object)
 

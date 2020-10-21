@@ -10,7 +10,7 @@ title: ListQuery
 [[resolved]]
 `ListQuery` is spark-sql-Expression-SubqueryExpression.md#resolved[resolved] when:
 
-. expressions/Expression.md#childrenResolved[Children are resolved]
+. Expression.md#childrenResolved[Children are resolved]
 
 . <<plan, Subquery logical plan>> is spark-sql-LogicalPlan.md#resolved[resolved]
 
@@ -21,6 +21,6 @@ title: ListQuery
 `ListQuery` takes the following when created:
 
 * [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
-* [[children]] Child expressions/Expression.md[expressions]
+* [[children]] Child Expression.md[expressions]
 * [[exprId]] Expression ID (as `ExprId` and defaults to a spark-sql-Expression-NamedExpression.md#newExprId[new ExprId])
 * [[childOutputs]] Child output spark-sql-Expression-Attribute.md[attributes]

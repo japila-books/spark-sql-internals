@@ -1,18 +1,8 @@
-title: BoundReference
-
 # BoundReference Leaf Expression -- Reference to Value in Internal Binary Row
 
-`BoundReference` is a expressions/Expression.md#LeafExpression[leaf expression] that <<eval, evaluates to a value in an internal binary row>> at a specified <<ordinal, position>> and of a given <<dataType, data type>>.
+`BoundReference` is a [leaf expression](Expression.md#LeafExpression) that <<eval, evaluates to a value in an internal binary row>> at a specified <<ordinal, position>> and of a given <<dataType, data type>>.
 
-[[creating-instance]]
-`BoundReference` takes the following when created:
-
-* [[ordinal]] Ordinal, i.e. the position
-* [[dataType]] spark-sql-DataType.md[Data type] of the value
-* [[nullable]] `nullable` flag that controls whether the value can be `null` or not
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.BoundReference
 import org.apache.spark.sql.types.LongType
 val boundRef = BoundReference(ordinal = 0, dataType = LongType, nullable = true)
@@ -24,17 +14,16 @@ import org.apache.spark.sql.catalyst.InternalRow
 val row = InternalRow(1L, "hello")
 
 val value = boundRef.eval(row).asInstanceOf[Long]
-----
+```
 
-You can also create a `BoundReference` using Catalyst DSL's spark-sql-catalyst-dsl.md#at[at] method.
+You can also create a `BoundReference` using Catalyst DSL's [at](../spark-sql-catalyst-dsl.md#at) method.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.dsl.expressions._
 val boundRef = 'hello.string.at(4)
 scala> println(boundRef)
 input[4, string, true]
-----
+```
 
 === [[eval]] Evaluating Expression -- `eval` Method
 
@@ -43,9 +32,9 @@ input[4, string, true]
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
-`eval` gives the value at <<ordinal, position>> from the `input` spark-sql-InternalRow.md[internal binary row] that is of a correct type.
+`eval` gives the value at <<ordinal, position>> from the given [InternalRow](../InternalRow.md) that is of a correct type.
 
 Internally, `eval` returns `null` if the value at the <<ordinal, position>> is `null`.
 
@@ -57,51 +46,59 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 | DataType
 | InternalRow's Method
 
-| spark-sql-DataType.md#BooleanType[BooleanType]
+| [BooleanType](../DataType.md#BooleanType)
 | getBoolean
 
-| spark-sql-DataType.md#ByteType[ByteType]
+| [ByteType](../DataType.md#ByteType)
 | getByte
 
-| spark-sql-DataType.md#ShortType[ShortType]
+| [ShortType](../DataType.md#ShortType)
 | getShort
 
-| spark-sql-DataType.md#IntegerType[IntegerType] or spark-sql-DataType.md#DateType[DateType]
+| [IntegerType](../DataType.md#IntegerType) or [DateType](../DataType.md#DateType)
 | getInt
 
-| spark-sql-DataType.md#LongType[LongType] or spark-sql-DataType.md#TimestampType[TimestampType]
+| [LongType](../DataType.md#LongType) or [TimestampType](../DataType.md#TimestampType)
 | getLong
 
-| spark-sql-DataType.md#FloatType[FloatType]
+| [FloatType](../DataType.md#FloatType)
 | getFloat
 
-| spark-sql-DataType.md#DoubleType[DoubleType]
+| [DoubleType](../DataType.md#DoubleType)
 | getDouble
 
-| spark-sql-DataType.md#StringType[StringType]
+| [StringType](../DataType.md#StringType)
 | getUTF8String
 
-| spark-sql-DataType.md#BinaryType[BinaryType]
+| [BinaryType](../DataType.md#BinaryType)
 | getBinary
 
-| spark-sql-DataType.md#CalendarIntervalType[CalendarIntervalType]
+| [CalendarIntervalType](../DataType.md#CalendarIntervalType)
 | getInterval
 
-| spark-sql-DataType.md#DecimalType[DecimalType]
+| [DecimalType](../DataType.md#DecimalType)
 | getDecimal
 
-| spark-sql-DataType.md#StructType[StructType]
+| [StructType](../DataType.md#StructType)
 | getStruct
 
-| spark-sql-DataType.md#ArrayType[ArrayType]
+| [ArrayType](../DataType.md#ArrayType)
 | getArray
 
-| spark-sql-DataType.md#MapType[MapType]
+| [MapType](../DataType.md#MapType)
 | getMap
 
 | _others_
 | get(ordinal, dataType)
 |===
+
+## Creating Instance
+
+`BoundReference` takes the following to be created:
+
+* [[ordinal]] Ordinal, i.e. the position
+* [[dataType]] [Data type](../DataType.md) of the value
+* [[nullable]] `nullable` flag that controls whether the value can be `null` or not
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 
@@ -110,7 +107,7 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME
 

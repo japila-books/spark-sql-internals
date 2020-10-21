@@ -46,7 +46,7 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
 doExecute(): RDD[InternalRow]
 ```
 
-Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of [internal binary rows](../spark-sql-InternalRow.md) (`RDD[InternalRow]`) and thus _execute_.
+Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`) and thus _execute_.
 
 Part of [execute](#execute)
 
@@ -60,7 +60,7 @@ Part of [execute](#execute)
 execute(): RDD[InternalRow]
 ```
 
-"Executes" a physical operator (and its [children](../catalyst/TreeNode.md#children)) that triggers physical query planning and in the end generates an `RDD` of spark-sql-InternalRow.md[internal binary rows] (i.e. `RDD[InternalRow]`).
+"Executes" a physical operator (and its [children](../catalyst/TreeNode.md#children)) that triggers physical query planning and in the end generates an `RDD` of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`).
 
 Used _mostly_ when `QueryExecution` is requested for the <<toRdd, RDD-based runtime representation of a structured query>> (that describes a distributed computation using Spark Core's RDD).
 
@@ -247,7 +247,7 @@ When <<execute, executed>>, `SparkPlan` <<executeQuery, executes the internal qu
 
 ![SparkPlan's Execution (execute Method)](../images/spark-sql-SparkPlan-execute.png)
 
-The result of <<execute, executing>> a `SparkPlan` is an `RDD` of [internal binary rows](../spark-sql-InternalRow.md) (`RDD[InternalRow]`).
+The result of <<execute, executing>> a `SparkPlan` is an `RDD` of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`).
 
 !!! note
     Executing a structured query is simply a translation of the higher-level Dataset-based description to an RDD-based runtime representation that Spark will in the end execute (once an Dataset action is used).
@@ -342,7 +342,7 @@ executeTake(
   n: Int): Array[InternalRow]
 ```
 
-`executeTake` gives an array of up to `n` first [internal rows](../spark-sql-InternalRow.md).
+`executeTake` gives an array of up to `n` first [internal rows](../InternalRow.md).
 
 ![SparkPlan's executeTake takes 5 elements](../images/spark-sql-SparkPlan-executeTake.png)
 

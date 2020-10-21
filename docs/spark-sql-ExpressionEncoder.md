@@ -1,8 +1,6 @@
-title: ExpressionEncoder
+# ExpressionEncoder
 
-# ExpressionEncoder -- Expression-Based Encoder
-
-`ExpressionEncoder[T]` is a generic spark-sql-Encoder.md[Encoder] of JVM objects of the type `T` to and from spark-sql-InternalRow.md[internal binary rows].
+`ExpressionEncoder[T]` is a generic spark-sql-Encoder.md[Encoder] of JVM objects of the type `T` to and from [internal binary rows](InternalRow.md).
 
 `ExpressionEncoder[T]` uses expressions/Expression.md[expressions] for a <<serializer, serializer>> and a <<deserializer, deserializer>>.
 
@@ -20,15 +18,15 @@ scala> val unsafeRow = row match { case ur: UnsafeRow => ur }
 unsafeRow: org.apache.spark.sql.catalyst.expressions.UnsafeRow = [0,100000000b,6f77206f6c6c6568,646c72]
 ----
 
-`ExpressionEncoder` uses <<serializer, serializer expressions>> to encode (aka _serialize_) a JVM object of type `T` to an spark-sql-InternalRow.md[internal binary row format] (i.e. `InternalRow`).
+`ExpressionEncoder` uses <<serializer, serializer expressions>> to encode (aka _serialize_) a JVM object of type `T` to an [InternalRow](InternalRow.md).
 
 NOTE: It is assumed that all serializer expressions contain at least one and the same spark-sql-Expression-BoundReference.md[BoundReference].
 
-`ExpressionEncoder` uses a <<deserializer, deserializer expression>> to decode (aka _deserialize_) a JVM object of type `T` from spark-sql-InternalRow.md[internal binary row format].
+`ExpressionEncoder` uses a <<deserializer, deserializer expression>> to decode (aka _deserialize_) a JVM object of type `T` from [InternalRow](InternalRow.md).
 
 `ExpressionEncoder` is <<flat, flat>> when <<serializer, serializer>> uses a single expression (which also means that the objects of a type `T` are not created using constructor parameters only like `Product` or `DefinedByConstructorParams` types).
 
-Internally, a `ExpressionEncoder` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] (for the input serializer), a spark-sql-InternalRow.md[InternalRow] (of size `1`), and a safe `Projection` (for the input deserializer). They are all internal lazy attributes of the encoder.
+Internally, a `ExpressionEncoder` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] (for the input serializer), a [InternalRow](InternalRow.md) (of size `1`), and a safe `Projection` (for the input deserializer). They are all internal lazy attributes of the encoder.
 
 [[properties]]
 .ExpressionEncoder's (Lazily-Initialized) Internal Properties
@@ -81,10 +79,9 @@ CAUTION: FIXME
 deserializerFor[T: TypeTag]: Expression
 ----
 
-`deserializerFor` creates an expressions/Expression.md[expression] to deserialize from spark-sql-InternalRow.md[internal binary row format] to a Scala object of type `T`.
+`deserializerFor` creates an expressions/Expression.md[expression] to deserialize from [InternalRow](InternalRow.md) to a Scala object of type `T`.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.ScalaReflection.deserializerFor
 val timestampDeExpr = deserializerFor[java.sql.Timestamp]
 scala> println(timestampDeExpr.numberedTreeString)
@@ -100,11 +97,12 @@ scala> println(tuple2DeExpr.numberedTreeString)
 03 :     +- getcolumnbyordinal(0, TimestampType)
 04 +- upcast(getcolumnbyordinal(1, DoubleType), DoubleType, - field (class: "scala.Double", name: "_2"), - root class: "scala.Tuple2")
 05    +- getcolumnbyordinal(1, DoubleType)
-----
+```
 
 Internally, `deserializerFor` calls the recursive internal variant of <<deserializerFor-recursive, deserializerFor>> with a single-element walked type path with `- root class: "[clsName]"`
 
-TIP: Read up on Scala's `TypeTags` in http://docs.scala-lang.org/overviews/reflection/typetags-manifests.html[TypeTags and Manifests].
+!!! tip
+    Read up on Scala's `TypeTags` in [TypeTags and Manifests](http://docs.scala-lang.org/overviews/reflection/typetags-manifests.html).
 
 NOTE: `deserializerFor` is used exclusively when `ExpressionEncoder` <<creating-instance, is created>> for a Scala type `T`.
 
@@ -195,10 +193,9 @@ deserializerFor(
 serializerFor[T: TypeTag](inputObject: Expression): CreateNamedStruct
 ----
 
-`serializerFor` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> expression to serialize a Scala object of type `T` to spark-sql-InternalRow.md[internal binary row format].
+`serializerFor` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> expression to serialize a Scala object of type `T` to [InternalRow](InternalRow.md).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.ScalaReflection.serializerFor
 
 import org.apache.spark.sql.catalyst.expressions.BoundReference
@@ -210,7 +207,7 @@ scala> println(timestampSerExpr.numberedTreeString)
 00 named_struct(value, input[0, timestamp, true])
 01 :- value
 02 +- input[0, timestamp, true]
-----
+```
 
 Internally, `serializerFor` calls the recursive internal variant of <<serializerFor-recursive, serializerFor>> with a single-element walked type path with `- root class: "[clsName]"` and _pattern match_ on the result expressions/Expression.md[expression].
 
@@ -242,9 +239,9 @@ CAUTION: FIXME
 toRow(t: T): InternalRow
 ----
 
-`toRow` encodes (aka _serializes_) a JVM object `t` as an spark-sql-InternalRow.md[internal binary row].
+`toRow` encodes (aka _serializes_) a JVM object `t` as an [InternalRow](InternalRow.md).
 
-Internally, `toRow` sets the only JVM object to be `t` in  <<inputRow, inputRow>> and converts the `inputRow` to a spark-sql-UnsafeRow.md[unsafe binary row] (using <<extractProjection, extractProjection>>).
+Internally, `toRow` sets the only JVM object to be `t` in  <<inputRow, inputRow>> and converts the `inputRow` to a UnsafeRow.md[unsafe binary row] (using <<extractProjection, extractProjection>>).
 
 In case of any exception while serializing, `toRow` reports a `RuntimeException`:
 
@@ -269,7 +266,7 @@ Error while encoding: [initial exception]
 fromRow(row: InternalRow): T
 ----
 
-`fromRow` decodes (aka _deserializes_) a JVM object from a `row` spark-sql-InternalRow.md[InternalRow] (with the required values only).
+`fromRow` decodes (aka _deserializes_) a JVM object from a `row` [InternalRow](InternalRow.md) (with the required values only).
 
 Internally, `fromRow` uses <<constructProjection, constructProjection>> with `row` and gets the 0th element of type `ObjectType` that is then cast to the output type `T`.
 

@@ -237,7 +237,7 @@ ANTLR labeled alternative: `#showTables`
 
 ### visitSingleDataType
 
-Creates a [DataType](../spark-sql-DataType.md)
+Creates a [DataType](../DataType.md)
 
 ANTLR rule: `singleDataType`
 

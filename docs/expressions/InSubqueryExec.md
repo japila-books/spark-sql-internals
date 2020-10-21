@@ -38,7 +38,7 @@ eval(
 
 `eval` [prepareResult](#prepareResult).
 
-`eval` requests the [child](#child) expression to [evaluate](Expression.md#eval) for the given [InternalRow](../spark-sql-InternalRow.md).
+`eval` requests the [child](#child) expression to [evaluate](Expression.md#eval) for the given [InternalRow](../InternalRow.md).
 
 `eval` returns:
 

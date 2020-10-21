@@ -1,10 +1,6 @@
-title: Literal
-
 # Literal Leaf Expression
 
-`Literal` is a expressions/Expression.md#LeafExpression[leaf expression] that is <<creating-instance, created>> to represent a Scala <<value, value>> of a <<dataType, specific type>>.
-
-`Literal` is <<creating-instance, created>> when...MEFIXME
+`Literal` is a [leaf expression](Expression.md#LeafExpression) that is <<creating-instance, created>> to represent a Scala <<value, value>> of a <<dataType, specific type>>.
 
 [[properties]]
 .Literal's Properties
@@ -27,16 +23,14 @@ title: Literal
 create(v: Any, dataType: DataType): Literal
 ----
 
-`create` uses `CatalystTypeConverters` helper object to <<spark-sql-CatalystTypeConverters.md#convertToCatalyst, convert>> the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input <<spark-sql-DataType.md#, DataType>>).
+`create` uses `CatalystTypeConverters` helper object to [convert](../CatalystTypeConverters.md#convertToCatalyst) the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input [DataType](../DataType.md)).
 
-NOTE: `create` is used when...FIXME
-
-=== [[creating-instance]] Creating Literal Instance
+## Creating Instance
 
 `Literal` takes the following when created:
 
 * [[value]] Scala value (of type `Any`)
-* [[dataType]] <<spark-sql-DataType.md#, DataType>>
+* [[dataType]] [DataType](../DataType.md)
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 
@@ -45,6 +39,6 @@ NOTE: `create` is used when...FIXME
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME

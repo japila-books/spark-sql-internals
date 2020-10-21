@@ -52,6 +52,6 @@ As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical
 
 `ParseToTimestamp` takes the following when created:
 
-* [[left]] Left expressions/Expression.md[expression]
-* [[format]] `format` expressions/Expression.md[expression]
-* [[child]] Child expressions/Expression.md[expression]
+* [[left]] Left Expression.md[expression]
+* [[format]] `format` Expression.md[expression]
+* [[child]] Child Expression.md[expression]

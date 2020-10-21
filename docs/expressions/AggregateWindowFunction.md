@@ -1,8 +1,6 @@
-title: AggregateWindowFunction
+# AggregateWindowFunction &mdash; Declarative Window Aggregate Function Expressions
 
-# AggregateWindowFunction -- Declarative Window Aggregate Function Expressions
-
-`AggregateWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate Contract>> for <<extensions, declarative aggregate function expressions>> that are also <<spark-sql-Expression-WindowFunction.md#, WindowFunction>> expressions.
+`AggregateWindowFunction` is the <<contract, extension>> of the [DeclarativeAggregate](DeclarativeAggregate.md) contract for <<extensions, declarative aggregate function expressions>> that are also [WindowFunction](WindowFunction.md) expressions.
 
 [[contract]]
 [source, scala]
@@ -16,10 +14,10 @@ abstract class AggregateWindowFunction extends DeclarativeAggregate with WindowF
 ----
 
 [[dataType]]
-`AggregateWindowFunction` uses <<spark-sql-DataType.md#IntegerType, IntegerType>> as the <<expressions/Expression.md#dataType, data type>> of the result of evaluating itself.
+`AggregateWindowFunction` uses [IntegerType](../DataType.md#IntegerType) as the [data type](Expression.md#dataType) of the result of evaluating itself.
 
 [[nullable]]
-`AggregateWindowFunction` is <<expressions/Expression.md#nullable, nullable>> by default.
+`AggregateWindowFunction` is [nullable](Expression.md#nullable) by default.
 
 [[frame]]
 As a <<spark-sql-Expression-WindowFunction.md#, WindowFunction>> expression, `AggregateWindowFunction` uses a `SpecifiedWindowFrame` (with the `RowFrame` frame type, the `UnboundedPreceding` lower and the `CurrentRow` upper frame boundaries) as the <<spark-sql-Expression-WindowFunction.md#frame, frame>>.
@@ -27,7 +25,7 @@ As a <<spark-sql-Expression-WindowFunction.md#, WindowFunction>> expression, `Ag
 [[mergeExpressions]]
 `AggregateWindowFunction` is a <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> expression that does not support <<spark-sql-Expression-DeclarativeAggregate.md#mergeExpressions, merging>> (two aggregation buffers together) and throws an `UnsupportedOperationException` whenever requested for it.
 
-```
+```text
 Window Functions do not support merging.
 ```
 

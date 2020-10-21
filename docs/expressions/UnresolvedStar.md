@@ -28,7 +28,7 @@ scala> println(namedExprs.head.numberedTreeString)
 ----
 
 [[resolved]]
-`UnresolvedStar` can never be expressions/Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical resolution rule is executed).
+`UnresolvedStar` can never be Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical resolution rule is executed).
 
 NOTE: `UnresolvedStar` can only be used in spark-sql-Expression-Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
 
@@ -133,7 +133,7 @@ scala> getStructFields.foreach(println)
 
 `expand` reports a `AnalysisException` when:
 
-* The expressions/Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>>) is not a [StructType](../StructType.md).
+* The Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>>) is not a [StructType](../StructType.md).
 +
 ```
 Can only star expand struct data types. Attribute: `[target]`

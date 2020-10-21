@@ -1,10 +1,8 @@
-title: UnsafeProjection
+# UnsafeProjection
 
-# UnsafeProjection -- Generic Function to Encode InternalRows to UnsafeRows
+`UnsafeProjection` is a `Projection` function that encodes [InternalRow](../InternalRow.md)s as [UnsafeRow](../UnsafeRow.md)s.
 
-`UnsafeProjection` is a `Projection` function that encodes <<spark-sql-InternalRow.md#, InternalRows>> as <<spark-sql-UnsafeRow.md#, UnsafeRows>>.
-
-```
+```text
 UnsafeProjection: InternalRow =[apply]=> UnsafeRow
 ```
 
@@ -29,7 +27,7 @@ create(
   inputSchema: Seq[Attribute],
   subexpressionEliminationEnabled: Boolean): UnsafeProjection
 ----
-<1> `create` takes the spark-sql-DataType.md[DataTypes] from `schema` and calls the 2nd `create`
+<1> `create` takes the [DataTypes](../DataType.md) from `schema` and calls the 2nd `create`
 <2> `create` creates a spark-sql-Expression-BoundReference.md[BoundReference] per field in `fields` and calls the 5th `create`
 <3> `create` calls the 5th `create`
 <4> `create` calls the 5th `create`

@@ -34,7 +34,7 @@ get(
   key: Long): Iterator[InternalRow]
 ```
 
-Gets [internal rows](../spark-sql-InternalRow.md) for the given key or `null`
+Gets [internal rows](../InternalRow.md) for the given key or `null`
 
 Used when:
 
@@ -50,7 +50,7 @@ getValue(
   key: Long): InternalRow
 ```
 
-Gives the value [internal row](../spark-sql-InternalRow.md) for the given key
+Gives the value [internal row](../InternalRow.md) for the given key
 
 Used when `LongHashedRelation` is requested to [get a value for a key](LongHashedRelation.md#getValue)
 

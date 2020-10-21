@@ -13,10 +13,10 @@ trait CreateNamedStructLike extends Expression {
 ----
 
 [[nullable]]
-`CreateNamedStructLike` is not <<expressions/Expression.md#nullable, nullable>>.
+`CreateNamedStructLike` is not <<Expression.md#nullable, nullable>>.
 
 [[foldable]]
-`CreateNamedStructLike` is <<expressions/Expression.md#foldable, foldable>> only if all <<valExprs, value expressions>> are.
+`CreateNamedStructLike` is <<Expression.md#foldable, foldable>> only if all <<valExprs, value expressions>> are.
 
 [[implementations]]
 .CreateNamedStructLikes (Direct Implementations)
@@ -43,13 +43,13 @@ trait CreateNamedStructLike extends Expression {
 | [[dataType]]
 
 | nameExprs
-| [[nameExprs]] <<expressions/Expression.md#, Catalyst expressions>> for names
+| [[nameExprs]] <<Expression.md#, Catalyst expressions>> for names
 
 | names
 | [[names]]
 
 | valExprs
-| [[valExprs]] <<expressions/Expression.md#, Catalyst expressions>> for values
+| [[valExprs]] <<Expression.md#, Catalyst expressions>> for values
 |===
 
 === [[checkInputDataTypes]] Checking Input Data Types -- `checkInputDataTypes` Method
@@ -59,7 +59,7 @@ trait CreateNamedStructLike extends Expression {
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInputDataTypes, Expression Contract>> to verify (check the correctness of) the input data types.
+NOTE: `checkInputDataTypes` is part of the <<Expression.md#checkInputDataTypes, Expression Contract>> to verify (check the correctness of) the input data types.
 
 `checkInputDataTypes`...FIXME
 
@@ -70,6 +70,6 @@ NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInpu
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
 `eval`...FIXME

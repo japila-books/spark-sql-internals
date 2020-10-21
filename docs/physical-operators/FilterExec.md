@@ -1,8 +1,6 @@
-title: FilterExec
-
 # FilterExec Unary Physical Operator
 
-`FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents <<spark-sql-LogicalPlan-Filter.md#, Filter>> and <<spark-sql-LogicalPlan-TypedFilter.md#, TypedFilter>> unary logical operators at execution.
+`FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents [Filter](../logical-operators/Filter.md) and [TypedFilter](../logical-operators/TypedFilter.md) unary logical operators at execution time.
 
 `FilterExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) as follows:
 
@@ -125,7 +123,7 @@ NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` executes the <<child, child>> physical operator and creates a new `MapPartitionsRDD` that does the filtering.
 

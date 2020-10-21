@@ -1,8 +1,6 @@
-title: Exists
+# Exists &mdash; Correlated Predicate Subquery Expression
 
-# Exists -- Correlated Predicate Subquery Expression
-
-`Exists` is a spark-sql-Expression-SubqueryExpression.md[SubqueryExpression] and a expressions/Expression.md#Predicate[predicate expression] (i.e. the result expressions/Expression.md#dataType[data type] is always spark-sql-DataType.md#BooleanType[boolean]).
+`Exists` is a [SubqueryExpression](SubqueryExpression.md) and a [predicate expression](Expression.md#Predicate).
 
 `Exists` is <<creating-instance, created>> when:
 
@@ -23,7 +21,7 @@ Cannot evaluate expression: [this]
 ```
 
 [[nullable]]
-`Exists` is never expressions/Expression.md#nullable[nullable].
+`Exists` is never Expression.md#nullable[nullable].
 
 [[toString]]
 `Exists` uses the following *text representation*:
@@ -35,10 +33,10 @@ exists#[exprId] [conditionString]
 [[canonicalized]]
 When requested for a [canonicalized](../physical-operators/BroadcastMode.md#canonicalized) version, `Exists` <<creating-instance, creates>> a new instance with...FIXME
 
-=== [[creating-instance]] Creating Exists Instance
+## Creating Instance
 
-`Exists` takes the following when created:
+`Exists` takes the following to be created:
 
-* [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
-* [[children]] Child expressions/Expression.md[expressions]
+* [[plan]] Subquery [LogicalPlan](../logical-operators/LogicalPlan.md)
+* [[children]] Child [Expression](Expression.md)s
 * [[exprId]] `ExprId`

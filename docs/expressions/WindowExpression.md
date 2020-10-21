@@ -1,8 +1,6 @@
-title: WindowExpression
-
 # WindowExpression Unevaluable Expression
 
-`WindowExpression` is an [unevaluable expression](Unevaluable.md) that represents a <<windowFunction, window function>> (over some <<windowSpec, WindowSpecDefinition>>).
+`WindowExpression` is an [unevaluable expression](Unevaluable.md) that represents a [window function](#windowFunction) (over some [WindowSpecDefinition](#windowSpec)).
 
 `WindowExpression` is <<creating-instance, created>> when:
 
@@ -50,10 +48,10 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 | Description
 
 | `children`
-| Collection of two expressions/Expression.md[expressions], i.e. <<windowFunction, windowFunction>> and <<windowSpec, WindowSpecDefinition>>, for which `WindowExpression` was created.
+| Collection of two Expression.md[expressions], i.e. <<windowFunction, windowFunction>> and <<windowSpec, WindowSpecDefinition>>, for which `WindowExpression` was created.
 
 | `dataType`
-| spark-sql-DataType.md[DataType] of <<windowFunction, windowFunction>>
+| [DataType](../DataType.md) of [windowFunction](#windowFunction)
 
 | `foldable`
 | Whether or not <<windowFunction, windowFunction>> is foldable.
@@ -90,9 +88,9 @@ windowExpr(
 // FIXME: DEMO
 ----
 
-=== [[creating-instance]] Creating WindowExpression Instance
+## Creating Instance
 
 `WindowExpression` takes the following when created:
 
-* [[windowFunction]] Window function <<expressions/Expression.md#, expression>>
-* [[windowSpec]] <<spark-sql-Expression-WindowSpecDefinition.md#, WindowSpecDefinition>> expression
+* [[windowFunction]] Window function [expression](Expression.md)
+* [[windowSpec]] [WindowSpecDefinition](WindowSpecDefinition.md) expression

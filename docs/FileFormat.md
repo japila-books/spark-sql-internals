@@ -17,7 +17,7 @@ buildReader(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ```
 
-Builds a Catalyst data reader (a function that reads a single [PartitionedFile](spark-sql-PartitionedFile.md) file in to produce [InternalRow](spark-sql-InternalRow.md)s).
+Builds a Catalyst data reader (a function that reads a single [PartitionedFile](PartitionedFile.md) file in to produce [InternalRow](InternalRow.md)s).
 
 `buildReader` throws an `UnsupportedOperationException` by default (and should therefore be overriden to work):
 
@@ -87,8 +87,8 @@ Default: `false`
 Used when:
 
 * `FileSourceScanExec` physical operator is requested for the [supportsBatch](physical-operators/FileSourceScanExec.md#supportsBatch) flag
-* `OrcFileFormat` is requested to [buildReaderWithPartitionValues](spark-sql-OrcFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](spark-sql-ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to [buildReaderWithPartitionValues](OrcFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ### <span id="supportDataType"> supportDataType
 
@@ -97,7 +97,7 @@ supportDataType(
   dataType: DataType): Boolean
 ```
 
-Controls whether this format supports the given [DataType](spark-sql-DataType.md) in read or write paths
+Controls whether this format supports the given [DataType](DataType.md) in read or write paths
 
 Default: `true` (all data types are supported)
 
@@ -112,7 +112,7 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ```
 
-Defines the fully-qualified class names (_types_) of the concrete [ColumnVector](spark-sql-ColumnVector.md)s for every column in the input `requiredSchema` and `partitionSchema` schemas (to use in columnar processing mode)
+Defines the fully-qualified class names (_types_) of the concrete [ColumnVector](ColumnVector.md)s for every column in the input `requiredSchema` and `partitionSchema` schemas (to use in columnar processing mode)
 
 Default: `None` (undefined)
 
@@ -120,12 +120,12 @@ Used when `FileSourceScanExec` physical operator is requested for the [vectorTyp
 
 ## Implementations
 
-* [AvroFileFormat](spark-sql-AvroFileFormat.md)
+* [AvroFileFormat](AvroFileFormat.md)
 * BinaryFileFormat
 * [HiveFileFormat](hive/HiveFileFormat.md)
 * ImageFileFormat
-* [OrcFileFormat](spark-sql-OrcFileFormat.md)
-* [ParquetFileFormat](spark-sql-ParquetFileFormat.md)
+* [OrcFileFormat](OrcFileFormat.md)
+* [ParquetFileFormat](ParquetFileFormat.md)
 * [TextBasedFileFormat](TextBasedFileFormat.md)
 
 ## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values
@@ -144,12 +144,12 @@ buildReaderWithPartitionValues(
 `buildReaderWithPartitionValues` builds a data reader with partition column values appended.
 
 !!! note
-    `buildReaderWithPartitionValues` is simply an enhanced [buildReader](#buildReader) that appends [partition column values](spark-sql-PartitionedFile.md#partitionValues) to the internal rows produced by the reader function.
+    `buildReaderWithPartitionValues` is simply an enhanced [buildReader](#buildReader) that appends [partition column values](PartitionedFile.md#partitionValues) to the internal rows produced by the reader function.
 
-`buildReaderWithPartitionValues` [builds a data reader](#buildReader) with the input parameters and gives a **data reader function** (of a [PartitionedFile](spark-sql-PartitionedFile.md) to an `Iterator[InternalRow]`) that does the following:
+`buildReaderWithPartitionValues` [builds a data reader](#buildReader) with the input parameters and gives a **data reader function** (of a [PartitionedFile](PartitionedFile.md) to an `Iterator[InternalRow]`) that does the following:
 
 1. Creates a converter by requesting `GenerateUnsafeProjection` to [generate an UnsafeProjection](physical-operators/GenerateUnsafeProjection.md#generate) for the attributes of the input `requiredSchema` and `partitionSchema`
 
-1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](spark-sql-PartitionedFile.md#partitionValues) appended.
+1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](PartitionedFile.md#partitionValues) appended.
 
 `buildReaderWithPartitionValues` is used when `FileSourceScanExec` physical operator is requested for the [inputRDD](physical-operators/FileSourceScanExec.md#inputRDD).

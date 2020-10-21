@@ -1,5 +1,3 @@
-title: SerializeFromObjectExec
-
 # SerializeFromObjectExec Unary Physical Operator
 
 `SerializeFromObjectExec` is a [unary physical operator](UnaryExecNode.md) that supports [Java code generation](CodegenSupport.md).
@@ -53,7 +51,7 @@ doProduce(ctx: CodegenContext): String
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 

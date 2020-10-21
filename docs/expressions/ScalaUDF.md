@@ -1,12 +1,10 @@
-title: ScalaUDF
+# ScalaUDF &mdash; Catalyst Expression to Manage Lifecycle of User-Defined Function
 
-# ScalaUDF -- Catalyst Expression to Manage Lifecycle of User-Defined Function
-
-`ScalaUDF` is a expressions/Expression.md[Catalyst expression] to manage the lifecycle of a <<function, user-defined function>> (and hook it in to Spark SQL's Catalyst execution path).
+`ScalaUDF` is a [Catalyst expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) and hook it to Catalyst execution path.
 
 `ScalaUDF` is a `ImplicitCastInputTypes` and `UserDefinedExpression`.
 
-`ScalaUDF` has expressions/Expression.md#NonSQLExpression[no representation in SQL].
+`ScalaUDF` has [no representation in SQL](Expression.md#NonSQLExpression).
 
 `ScalaUDF` is <<creating-instance, created>> when:
 
@@ -112,7 +110,7 @@ scala> q.show
 ----
 
 [[deterministic]]
-`ScalaUDF` is <<expressions/Expression.md#deterministic, deterministic>> when the given <<udfDeterministic, udfDeterministic>> flag is enabled (`true`) and all the <<children, children expressions>> are deterministic.
+`ScalaUDF` is <<Expression.md#deterministic, deterministic>> when the given <<udfDeterministic, udfDeterministic>> flag is enabled (`true`) and all the <<children, children expressions>> are deterministic.
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 
@@ -121,7 +119,7 @@ scala> q.show
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME
 
@@ -129,21 +127,22 @@ NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression C
 
 [source, scala]
 ----
-eval(input: InternalRow): Any
+eval(
+  input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
-`eval` executes the <<function, Scala function>> on the input spark-sql-InternalRow.md[internal row].
+`eval` executes the <<function, Scala function>> on the input [InternalRow](../InternalRow.md).
 
-=== [[creating-instance]] Creating ScalaUDF Instance
+## Creating Instance
 
 `ScalaUDF` takes the following when created:
 
 * [[function]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output spark-sql-DataType.md[data type]
-* [[children]] Child expressions/Expression.md[Catalyst expressions]
-* [[inputTypes]] Input spark-sql-DataType.md[data types] (default: `Nil`)
+* [[dataType]] Output [data type](../DataType.md)
+* [[children]] Child Expression.md[Catalyst expressions]
+* [[inputTypes]] Input [data types](../DataType.md) (default: `Nil`)
 * [[udfName]] Optional name (default: `None`)
 * [[nullable]] `nullable` flag (default: `true`)
 * [[udfDeterministic]] `udfDeterministic` flag (default: `true`)

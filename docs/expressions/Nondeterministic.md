@@ -1,8 +1,6 @@
-title: Nondeterministic
-
 # Nondeterministic Expression Contract
 
-`Nondeterministic` is a <<contract, contract>> for expressions/Expression.md[Catalyst expressions] that are non-<<deterministic, deterministic>> and non-<<foldable, foldable>>.
+`Nondeterministic` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that are non-[deterministic](#deterministic) and non-[foldable](#foldable).
 
 `Nondeterministic` expressions require explicit <<initialize, initialization>> (with the current partition index) before <<eval, evaluating a value>>.
 
@@ -82,10 +80,10 @@ NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic`
 | Name
 | Description
 
-| [[deterministic]] expressions/Expression.md#deterministic[deterministic]
+| [[deterministic]] Expression.md#deterministic[deterministic]
 | Always turned off (i.e. `false`)
 
-| [[foldable]] expressions/Expression.md#foldable[foldable]
+| [[foldable]] Expression.md#foldable[foldable]
 | Always turned off (i.e. `false`)
 
 | [[initialized]] `initialized`
@@ -112,7 +110,7 @@ NOTE: `initialize` is used exclusively when spark-sql-InterpretedProjection.md#i
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
 `eval` is just a wrapper of <<evalInternal, evalInternal>> that makes sure that <<initialize, initialize>> has already been executed (and so the expression is initialized).
 
@@ -120,6 +118,6 @@ Internally, `eval` makes sure that the expression was <<initialized, initialized
 
 `eval` reports a `IllegalArgumentException` exception when the internal <<initialized, initialized>> flag is off, i.e. <<initialize, initialize>> has not yet been executed.
 
-```
+```text
 requirement failed: Nondeterministic expression [name] should be initialized before eval.
 ```

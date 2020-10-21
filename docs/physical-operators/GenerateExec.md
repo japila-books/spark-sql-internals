@@ -1,11 +1,8 @@
-title: GenerateExec
-
 # GenerateExec Unary Physical Operator
 
 `GenerateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy is executed.
 
-[source, scala]
-----
+```text
 val nums = Seq((0 to 4).toArray).toDF("nums")
 val q = nums.withColumn("explode", explode($"nums"))
 
@@ -28,12 +25,11 @@ res1: String =
 (1) MapPartitionsRDD[2] at execute at <console>:26 []
  |  MapPartitionsRDD[1] at execute at <console>:26 []
  |  ParallelCollectionRDD[0] at execute at <console>:26 []
-----
+```
 
 When <<doExecute, executed>>, `GenerateExec` spark-sql-Expression-Generator.md#eval[executes] (aka _evaluates_) the <<boundGenerator, Generator>> expression on every row in a RDD partition.
 
-.GenerateExec's Execution -- `doExecute` Method
-image::images/spark-sql-GenerateExec-doExecute.png[align="center"]
+![GenerateExec's Execution -- `doExecute` Method](../images/spark-sql-GenerateExec-doExecute.png)
 
 NOTE: <<child, child>> physical operator has to support [CodegenSupport](CodegenSupport.md).
 
@@ -323,6 +319,6 @@ NOTE: `codeGenAccessor` is used...FIXME
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute`...FIXME
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.

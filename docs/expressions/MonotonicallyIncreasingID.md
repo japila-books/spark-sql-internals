@@ -1,15 +1,12 @@
-title: MonotonicallyIncreasingID
-
 # MonotonicallyIncreasingID Nondeterministic Leaf Expression
 
-`MonotonicallyIncreasingID` is a <<spark-sql-Expression-Nondeterministic.md#, non-deterministic>> <<expressions/Expression.md#LeafExpression, leaf expression>> that is the internal representation of the `monotonically_increasing_id` <<spark-sql-functions.md#monotonically_increasing_id, standard>> and <<FunctionRegistry.md#monotonically_increasing_id, SQL>> functions.
+`MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that is the internal representation of the `monotonically_increasing_id` [standard](../spark-sql-functions.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions.
 
 As a `Nondeterministic` expression, `MonotonicallyIncreasingID` requires explicit <<initializeInternal, initialization>> (with the current partition index) before <<evalInternal, evaluating a value>>.
 
 `MonotonicallyIncreasingID` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.expressions.MonotonicallyIncreasingID
 val monotonicallyIncreasingID = MonotonicallyIncreasingID()
 
@@ -28,19 +25,19 @@ def prettyPrint(code: String) = println(trim(code))
 scala> println(trim(code))
 final long value_0 = partitionMask + count_0;
 count_0++;
-----
+```
 
 [[dataType]]
-`MonotonicallyIncreasingID` uses <<spark-sql-DataType.md#LongType, LongType>> as the <<expressions/Expression.md#dataType, data type>> of the result of evaluating itself.
+`MonotonicallyIncreasingID` uses [LongType](../DataType.md#LongType) as the <<Expression.md#dataType, data type>> of the result of evaluating itself.
 
 [[nullable]]
-`MonotonicallyIncreasingID` is never <<expressions/Expression.md#nullable, nullable>>.
+`MonotonicallyIncreasingID` is never [nullable](Expression.md#nullable).
 
 [[prettyName]]
-`MonotonicallyIncreasingID` uses *monotonically_increasing_id* for the <<expressions/Expression.md#prettyName, user-facing name>>.
+`MonotonicallyIncreasingID` uses *monotonically_increasing_id* for the <<Expression.md#prettyName, user-facing name>>.
 
 [[sql]]
-`MonotonicallyIncreasingID` uses *monotonically_increasing_id()* for the <<expressions/Expression.md#sql, SQL representation>>.
+`MonotonicallyIncreasingID` uses *monotonically_increasing_id()* for the <<Expression.md#sql, SQL representation>>.
 
 `MonotonicallyIncreasingID` is <<creating-instance, created>> when <<spark-sql-functions.md#monotonically_increasing_id, monotonically_increasing_id>> standard function is used in a structured query.
 
@@ -74,7 +71,7 @@ Initialized when `MonotonicallyIncreasingID` is requested to <<initializeInterna
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addMutableState, add a mutable state>> as `count` name and `long` Java type.
 
@@ -98,7 +95,7 @@ final [dataType] [value] = [partitionMaskTerm] + [countTerm];
 initializeInternal(input: InternalRow): Long
 ----
 
-NOTE: `initializeInternal` is part of <<spark-sql-Expression-Nondeterministic.md#initializeInternal, Nondeterministic Contract>> to initialize a `Nondeterministic` expression.
+NOTE: `initializeInternal` is part of <<Nondeterministic.md#initializeInternal, Nondeterministic Contract>> to initialize a `Nondeterministic` expression.
 
 `initializeInternal` simply sets the <<count, count>> to `0` and the <<partitionMask, partitionMask>> to `partitionIndex.toLong << 33`.
 
@@ -117,7 +114,7 @@ scala> println(partitionMask.toBinaryString)
 evalInternal(input: InternalRow): Long
 ----
 
-NOTE: `evalInternal` is part of <<spark-sql-Expression-Nondeterministic.md#evalInternal, Nondeterministic Contract>> to evaluate the value of a `Nondeterministic` expression.
+NOTE: `evalInternal` is part of <<Nondeterministic.md#evalInternal, Nondeterministic Contract>> to evaluate the value of a `Nondeterministic` expression.
 
 `evalInternal` remembers the current value of the <<count, count>> and increments it.
 

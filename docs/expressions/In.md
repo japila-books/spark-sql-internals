@@ -1,9 +1,6 @@
-title: In
-
 # In Predicate Expression
 
-[[dataType]]
-`In` is a expressions/Expression.md#Predicate[predicate expression] (i.e. the result expressions/Expression.md#dataType[data type] is always spark-sql-DataType.md#BooleanType[boolean]).
+`In` is a [predicate expression](Expression.md#Predicate).
 
 `In` is <<creating-instance, created>> when:
 
@@ -99,8 +96,8 @@ assert(evaluatedValue.asInstanceOf[Boolean] == false)
 [[creating-instance]]
 `In` takes the following when created:
 
-* [[value]] Value expressions/Expression.md[expression]
-* [[list]] expressions/Expression.md[Expression] list
+* [[value]] Value Expression.md[expression]
+* [[list]] Expression.md[Expression] list
 
 NOTE: <<list, Expression list>> must not be `null` (but can have expressions that can be evaluated to `null`).
 
@@ -121,7 +118,7 @@ scala> println(in)
 ----
 
 [[sql]]
-`In` has the following expressions/Expression.md#sql[SQL representation]:
+`In` has the following Expression.md#sql[SQL representation]:
 
 ```
 ([valueSQL] IN ([listSQL]))
@@ -173,7 +170,7 @@ scala> println(in.sql)
 | [[ordering]] `ordering`
 | Scala's https://www.scala-lang.org/api/2.11.12/index.html#scala.math.Ordering[Ordering] instance that represents a strategy for sorting instances of a type.
 
-Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the expressions/Expression.md#dataType[data type] of the <<value, value>> expression.
+Lazily-instantiated using `TypeUtils.getInterpretedOrdering` for the Expression.md#dataType[data type] of the <<value, value>> expression.
 
 Used exclusively when `In` is requested to <<eval, evaluate a value>> for a given input row.
 |===
@@ -185,7 +182,7 @@ Used exclusively when `In` is requested to <<eval, evaluate a value>> for a give
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInputDataTypes, Expression Contract>> to checks the input data types.
+NOTE: `checkInputDataTypes` is part of the <<Expression.md#checkInputDataTypes, Expression Contract>> to checks the input data types.
 
 `checkInputDataTypes`...FIXME
 
@@ -196,13 +193,13 @@ NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInpu
 eval(input: InternalRow): Any
 ----
 
-NOTE: `eval` is part of <<expressions/Expression.md#eval, Expression Contract>> for the *interpreted (non-code-generated) expression evaluation*, i.e. evaluating a Catalyst expression to a JVM object for a given <<spark-sql-InternalRow.md#, internal binary row>>.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
-`eval` requests <<value, value>> expression to expressions/Expression.md#eval[evaluate a value] for the `input` spark-sql-InternalRow.md[internal row].
+`eval` requests <<value, value>> expression to Expression.md#eval[evaluate a value] for the given [InternalRow](../InternalRow.md).
 
 If the evaluated value is `null`, `eval` gives `null` too.
 
-`eval` takes every expressions/Expression.md[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
+`eval` takes every Expression.md[expression] in <<list, list>> expressions and requests them to evaluate a value for the `input` internal row. If any of the evaluated value is not `null` and equivalent in the <<ordering, ordering>>, `eval` returns `true`.
 
 `eval` records whether any of the expressions in <<list, list>> expressions gave `null` value. If no <<list, list>> expression led to `true` (per <<ordering, ordering>>), `eval` returns `null` if any <<list, list>> expression evaluated to `null` or `false`.
 
@@ -213,7 +210,7 @@ If the evaluated value is `null`, `eval` gives `null` too.
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode`...FIXME
 

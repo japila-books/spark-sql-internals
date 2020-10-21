@@ -10,7 +10,7 @@
 
 * [[numRows]] Number of rows
 * [[buffers]] Buffers (`Array[Array[Byte]]`)
-* [[stats]] Statistics (<<spark-sql-InternalRow.md#, InternalRow>>)
+* [[stats]] Statistics ([InternalRow](InternalRow.md))
 
 [[isCachedColumnBuffersLoaded]]
 `CachedRDDBuilder` uses `isCachedColumnBuffersLoaded` flag that is enabled (`true`) when the <<_cachedColumnBuffers, _cachedColumnBuffers>> is defined (not `null`). `isCachedColumnBuffersLoaded` is used exclusively when `CacheManager` is requested to [recacheByCondition](CacheManager.md#recacheByCondition).

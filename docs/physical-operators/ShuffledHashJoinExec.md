@@ -1,5 +1,3 @@
-title: ShuffledHashJoinExec
-
 # ShuffledHashJoinExec Binary Physical Operator for Shuffled Hash Join
 
 `ShuffledHashJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *shuffled hash join*.
@@ -133,7 +131,7 @@ image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="cent
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests [streamedPlan](HashJoin.md#streamedPlan) physical operator to SparkPlan.md#execute[execute] (and generate a `RDD[InternalRow]`).
 

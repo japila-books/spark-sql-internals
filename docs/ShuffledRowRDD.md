@@ -1,9 +1,9 @@
 # ShuffledRowRDD
 
-`ShuffledRowRDD` is an `RDD` of [internal binary rows](spark-sql-InternalRow.md) (`RDD[InternalRow]`) for execution of [CollectLimitExec](physical-operators/CollectLimitExec.md), [CustomShuffleReaderExec](physical-operators/CustomShuffleReaderExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators.
+`ShuffledRowRDD` is an `RDD` of [internal binary rows](InternalRow.md) (`RDD[InternalRow]`) for execution of [CollectLimitExec](physical-operators/CollectLimitExec.md), [CustomShuffleReaderExec](physical-operators/CustomShuffleReaderExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators.
 
 !!! note
-    `ShuffledRowRDD` is similar to Spark Core's `ShuffledRDD`, with the difference of the type of the values to process, i.e. [InternalRow](spark-sql-InternalRow.md) and `(K, C)` key-value pairs, respectively.
+    `ShuffledRowRDD` is similar to Spark Core's `ShuffledRDD`, with the difference of the type of the values to process, i.e. [InternalRow](InternalRow.md) and `(K, C)` key-value pairs, respectively.
 
 ## Creating Instance
 

@@ -1,6 +1,4 @@
-title: OffsetWindowFunction
-
-# OffsetWindowFunction -- Unevaluable Window Function Expressions
+# OffsetWindowFunction &mdash; Unevaluable Window Function Expressions
 
 `OffsetWindowFunction` is the <<contract, base>> of <<extensions, window function expressions>> that are [unevaluable](Unevaluable.md) and `ImplicitCastInputTypes`.
 
@@ -42,21 +40,21 @@ abstract class OffsetWindowFunction ... {
 `OffsetWindowFunction` uses the <<input, input>>, <<offset, offset>> and <<default, default>> expressions as the [children](../catalyst/TreeNode.md#children).
 
 [[foldable]]
-`OffsetWindowFunction` is not <<expressions/Expression.md#foldable, foldable>>.
+`OffsetWindowFunction` is not <<Expression.md#foldable, foldable>>.
 
 [[nullable]]
-`OffsetWindowFunction` is <<expressions/Expression.md#nullable, nullable>> when the <<default, default>> is not defined or the <<default, default>> or the <<input, input>> expressions are.
+`OffsetWindowFunction` is <<Expression.md#nullable, nullable>> when the <<default, default>> is not defined or the <<default, default>> or the <<input, input>> expressions are.
 
 [[dataType]]
-When requested for the <<expressions/Expression.md#dataType, dataType>>, `OffsetWindowFunction` simply requests the <<input, input>> expression for the data type.
+When requested for the <<Expression.md#dataType, dataType>>, `OffsetWindowFunction` simply requests the <<input, input>> expression for the data type.
 
 [[dataType]]
-When requested for the <<spark-sql-Expression-ExpectsInputTypes.md#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, <<spark-sql-DataType.md#IntegerType, IntegerType>> with the <<expressions/Expression.md#dataType, data type>> of the <<input, input>> expression and the <<spark-sql-DataType.md#NullType, NullType>>.
+When requested for the <<spark-sql-Expression-ExpectsInputTypes.md#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, [IntegerType](../DataType.md#IntegerType) with the [data type](Expression.md#dataType) of the <<input, input>> expression and the [NullType](../DataType.md#NullType).
 
 [[toString]]
 `OffsetWindowFunction` uses the following *text representation* (i.e. `toString`):
 
-```
+```text
 [prettyName]([input], [offset], [default])
 ```
 
@@ -92,6 +90,6 @@ NOTE: `frame` is part of the <<spark-sql-Expression-WindowFunction.md#frame, Win
 checkInputDataTypes(): TypeCheckResult
 ----
 
-NOTE: `checkInputDataTypes` is part of the <<expressions/Expression.md#checkInputDataTypes, Expression Contract>> to verify (check the correctness of) the input data types.
+NOTE: `checkInputDataTypes` is part of the <<Expression.md#checkInputDataTypes, Expression Contract>> to verify (check the correctness of) the input data types.
 
 `checkInputDataTypes`...FIXME

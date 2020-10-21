@@ -1,8 +1,8 @@
-title: Options
+# JDBCOptions &mdash; JDBC Data Source Options
 
-# JDBCOptions -- JDBC Data Source Options
+`JDBCOptions` is the options of the [JDBC data source](spark-sql-jdbc.md).
 
-`JDBCOptions` represents the <<options, options>> of the <<spark-sql-jdbc.md#, JDBC data source>>.
+## Options
 
 [[options]]
 .Options for JDBC Data Source
@@ -36,11 +36,11 @@ Used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRel
 ! (undefined)
 a! [[customSchema]] Specifies the custom data types of the read schema (that is used at [load time](DataFrameReader.md#jdbc))
 
-`customSchema` is a comma-separated list of field definitions with column names and their spark-sql-DataType.md[data types] in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
+`customSchema` is a comma-separated list of field definitions with column names and their [DataType](DataType.md)s in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
 
 `customSchema` defines the data types of the columns that will override the data types inferred from the table schema and follows the following pattern:
 
-```
+```text
 colTypeList
     : colType (',' colType)*
     ;

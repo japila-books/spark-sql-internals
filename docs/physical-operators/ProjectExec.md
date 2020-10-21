@@ -1,5 +1,3 @@
-title: ProjectExec
-
 # ProjectExec Unary Physical Operator
 
 `ProjectExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
@@ -34,7 +32,7 @@ title: ProjectExec
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the input <<child, child physical plan>> to SparkPlan.md#execute[produce an RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
 

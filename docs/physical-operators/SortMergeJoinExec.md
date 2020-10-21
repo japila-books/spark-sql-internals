@@ -9,10 +9,10 @@ title: SortMergeJoinExec
 [[orderable]]
 [NOTE]
 ====
-A join key is *orderable* when is of one of the following spark-sql-DataType.md[data types]:
+A join key is *orderable* when is of one of the following [data types](../DataType.md):
 
 * `NullType`
-* spark-sql-DataType.md#AtomicType[AtomicType] (that represents all the available types except `NullType`, `StructType`, `ArrayType`, `UserDefinedType`, `MapType`, and `ObjectType`)
+* [AtomicType](../DataType.md#AtomicType) (that represents all the available types except `NullType`, `StructType`, `ArrayType`, `UserDefinedType`, `MapType`, and `ObjectType`)
 * `StructType` with orderable fields
 * `ArrayType` of orderable type
 * `UserDefinedType` of orderable type

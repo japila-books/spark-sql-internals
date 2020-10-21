@@ -1,12 +1,10 @@
-title: AggregateExpression
+# AggregateExpression &mdash; Unevaluable Expression Container for AggregateFunction
 
-# AggregateExpression -- Unevaluable Expression Container for AggregateFunction
-
-`AggregateExpression` is an [unevaluable expression](Unevaluable.md) that acts as a container for an <<aggregateFunction, AggregateFunction>>.
+`AggregateExpression` is an [unevaluable expression](Unevaluable.md) that acts as a container for an [AggregateFunction](#aggregateFunction).
 
 `AggregateExpression` contains the following:
 
-* [[aggregateFunction]] <<spark-sql-Expression-AggregateFunction.md#, AggregateFunction>>
+* [[aggregateFunction]] [AggregateFunction](AggregateFunction.md)
 * [[mode]] `AggregateMode`
 * [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the <<aggregateFunction, aggregate function>>)
 * [[resultId]] `ExprId`
@@ -15,7 +13,7 @@ title: AggregateExpression
 
 * `Analyzer` is requested to [resolve AggregateFunctions](../Analyzer.md#ResolveFunctions) (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
 
-* `UserDefinedAggregateFunction` is created with `isDistinct` flag spark-sql-UserDefinedAggregateFunction.md#apply[disabled] or spark-sql-UserDefinedAggregateFunction.md#distinct[enabled]
+* `UserDefinedAggregateFunction` is created with `isDistinct` flag [disabled](../UserDefinedAggregateFunction.md#apply) or [enabled](../UserDefinedAggregateFunction.md#distinct)
 
 * `AggUtils` is requested to <<spark-sql-AggUtils.md#planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
@@ -54,7 +52,7 @@ title: AggregateExpression
 | <<aggregateFunction, AggregateFunction>> expression (for which `AggregateExpression` was created).
 
 | `dataType`
-| spark-sql-DataType.md[DataType] of <<aggregateFunction, AggregateFunction>> expression
+| [DataType](../DataType.md) of [AggregateFunction](#aggregateFunction) expression
 
 | `foldable`
 | Disabled (i.e. `false`)

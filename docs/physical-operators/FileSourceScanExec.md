@@ -232,7 +232,7 @@ The maximum size of partitions is then the minimum of <<spark-sql-properties.md#
 Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
 ```
 
-For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create <<spark-sql-PartitionedFile.md#, PartitionedFiles>> (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create [PartitionedFiles](../PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
 
 `createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
 
@@ -311,7 +311,7 @@ createBucketedReadRDD(
 Planning with [numBuckets] buckets
 ```
 
-`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into spark-sql-PartitionedFile.md[PartitionedFiles]. For every file, `createBucketedReadRDD` <<getBlockLocations, getBlockLocations>> and <<getBlockHosts, getBlockHosts>>.
+`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into [PartitionedFiles](../PartitionedFile.md). For every file, `createBucketedReadRDD` <<getBlockLocations, getBlockLocations>> and <<getBlockHosts, getBlockHosts>>.
 
 `createBucketedReadRDD` then groups the `PartitionedFiles` by bucket ID.
 
@@ -361,7 +361,7 @@ supportsBatch: Boolean
 `supportsBatch` is enabled (`true`) only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports vectorized decoding](../FileFormat.md#supportBatch). Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
 !!! note
-    [FileFormat](../FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../spark-sql-ParquetFileFormat.md) and [OrcFileFormat](../spark-sql-OrcFileFormat.md) have support for it under certain conditions.
+    [FileFormat](../FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) have support for it under certain conditions.
 
 `supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
 
@@ -382,7 +382,7 @@ needsUnsafeRowConversion: Boolean
 
 `needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
 
-1. [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../spark-sql-ParquetFileFormat.md)
+1. [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../ParquetFileFormat.md)
 
 1. [spark.sql.parquet.enableVectorizedReader](../spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
@@ -410,12 +410,12 @@ vectorTypes: Option[Seq[String]]
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of the <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
 !!! note
-    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../spark-sql-ParquetFileFormat.md) and [OrcFileFormat](../spark-sql-OrcFileFormat.md) built-in file formats (under certain conditions).
+    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) built-in file formats (under certain conditions).
 
 With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<spark-sql-SparkPlan-WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<spark-sql-SparkPlan-WholeStageCodegenExec.md#child, child physical operator>> and spark-sql-SparkPlan-WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
 

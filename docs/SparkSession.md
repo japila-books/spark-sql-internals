@@ -174,7 +174,7 @@ scala> one.show
 
 Internally, `createDataset` first looks up the implicit [ExpressionEncoder](spark-sql-ExpressionEncoder.md) in scope to access the ``AttributeReference``s (of the [schema](spark-sql-schema.md)).
 
-The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of spark-sql-InternalRow.md[InternalRows]. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a spark-sql-LogicalPlan-LocalRelation.md[`LocalRelation` logical query plan].
+The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of [InternalRow](InternalRow.md)s. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a spark-sql-LogicalPlan-LocalRelation.md[`LocalRelation` logical query plan].
 
 ## <span id="range"> Creating Dataset With Single Long Column
 

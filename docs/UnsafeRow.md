@@ -1,11 +1,10 @@
-# UnsafeRow -- Mutable Raw-Memory Unsafe Binary Row Format
+# UnsafeRow
 
-`UnsafeRow` is a concrete spark-sql-InternalRow.md[InternalRow] that represents a mutable internal raw-memory (and hence unsafe) binary row format.
+`UnsafeRow` is a [InternalRow](InternalRow.md) that represents a mutable internal raw-memory (and hence unsafe) binary row format.
 
 In other words, `UnsafeRow` is an `InternalRow` that is backed by raw memory instead of Java objects.
 
-[source, scala]
-----
+```text
 // Use ExpressionEncoder for simplicity
 import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder
 val stringEncoder = ExpressionEncoder[String]
@@ -19,16 +18,15 @@ res0: Array[Byte] = Array(0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 16, 0, 0, 0, 104,
 
 scala> unsafeRow.getUTF8String(0)
 res1: org.apache.spark.unsafe.types.UTF8String = hello world
-----
+```
 
 [[sizeInBytes]]
 `UnsafeRow` knows its *size in bytes*.
 
-[source, scala]
-----
+```text
 scala> println(unsafeRow.getSizeInBytes)
 32
-----
+```
 
 `UnsafeRow` supports Java's <<Externalizable, Externalizable>> and Kryo's <<KryoSerializable, KryoSerializable>> serialization/deserialization protocols.
 
@@ -36,19 +34,19 @@ The fields of a data row are placed using *field offsets*.
 
 [[mutableFieldTypes]]
 [[mutable-types]]
-`UnsafeRow` considers a <<spark-sql-DataType.md#, data type>> mutable if it is one of the following:
+`UnsafeRow` considers a [data type](DataType.md) mutable if it is one of the following:
 
-* <<spark-sql-DataType.md#BooleanType, BooleanType>>
-* <<spark-sql-DataType.md#ByteType, ByteType>>
-* <<spark-sql-DataType.md#DateType, DateType>>
-* <<spark-sql-DataType.md#DecimalType, DecimalType>> (see <<isMutable, isMutable>>)
-* <<spark-sql-DataType.md#DoubleType, DoubleType>>
-* <<spark-sql-DataType.md#FloatType, FloatType>>
-* <<spark-sql-DataType.md#IntegerType, IntegerType>>
-* <<spark-sql-DataType.md#LongType, LongType>>
-* <<spark-sql-DataType.md#NullType, NullType>>
-* <<spark-sql-DataType.md#ShortType, ShortType>>
-* <<spark-sql-DataType.md#TimestampType, TimestampType>>
+* [BooleanType](DataType.md#BooleanType)
+* [ByteType](DataType.md#ByteType)
+* [DateType](DataType.md#DateType)
+* [DecimalType](DataType.md#DecimalType) (see [isMutable](#isMutable))
+* [DoubleType](DataType.md#DoubleType)
+* [FloatType](DataType.md#FloatType)
+* [IntegerType](DataType.md#IntegerType)
+* [LongType](DataType.md#LongType)
+* [NullType](DataType.md#NullType)
+* [ShortType](DataType.md#ShortType)
+* [TimestampType](DataType.md#TimestampType)
 
 `UnsafeRow` is composed of three regions:
 
@@ -67,7 +65,7 @@ Equality comparision and hashing of rows can be performed on raw bytes since if 
 static boolean isMutable(DataType dt)
 ----
 
-`isMutable` is enabled (`true`) when the input <<spark-sql-DataType.md#, DataType>> is among the <<mutableFieldTypes, mutable field types>> or a <<spark-sql-DataType.md#DecimalType, DecimalType>>.
+`isMutable` is enabled (`true`) when the input [DataType](DataType.md) is among the [mutable field types](#mutableFieldTypes) or a [DecimalType](DataType.md#DecimalType).
 
 Otherwise, `isMutable` is disabled (`false`).
 

@@ -1,6 +1,6 @@
 # Schema &mdash; Structure of Data
 
-A *schema* is the description of the structure of your data (which together create a Dataset.md[Dataset] in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
+A **schema** is the description of the structure of your data (which together create a [Dataset](Dataset.md) in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
 
 A schema is described using [StructType](StructType.md) which is a collection of spark-sql-StructField.md[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
 
@@ -32,14 +32,13 @@ val schemaTyped = new StructType()
 
 TIP: Read up on spark-sql-CatalystSqlParser.md[CatalystSqlParser] that is responsible for parsing data types.
 
-It is however recommended to use the singleton spark-sql-DataType.md#DataTypes[DataTypes] class with static methods to create schema types.
+It is however recommended to use the singleton [DataTypes](DataType.md#DataTypes) class with static methods to create schema types.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.types.DataTypes._
 val schemaWithMap = StructType(
   StructField("map", createMapType(LongType, StringType), false) :: Nil)
-----
+```
 
 [StructType](StructType.md) offers [printTreeString](#printTreeString) that makes presenting the schema more user-friendly.
 

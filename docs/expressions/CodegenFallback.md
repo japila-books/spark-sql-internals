@@ -71,7 +71,7 @@ Object obj_0 = ((Expression) references[0]).eval(null);
 doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 ----
 
-NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
 `doGenCode` requests the input `CodegenContext` to add itself to the <<spark-sql-CodegenContext.md#references, references>>.
 
@@ -87,7 +87,7 @@ NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression C
   .initialize(partitionIndex);
 ----
 
-In the end, `doGenCode` generates a plain Java source code block that is one of the following code blocks per the <<expressions/Expression.md#nullable, nullable>> flag. `doGenCode` copies the input `ExprCode` with the code block added (as the `code` property).
+In the end, `doGenCode` generates a plain Java source code block that is one of the following code blocks per the <<Expression.md#nullable, nullable>> flag. `doGenCode` copies the input `ExprCode` with the code block added (as the `code` property).
 
 .`doGenCode` Code Block for `nullable` flag enabled
 [source, scala]

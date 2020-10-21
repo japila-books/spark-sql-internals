@@ -1,6 +1,6 @@
 # InConversion Type Coercion Logical Rule
 
-`InConversion` is a <<spark-sql-TypeCoercionRule.md#, type coercion logical rule>> that <<coerceTypes, coerceTypes>> in a <<spark-sql-LogicalPlan.md#, logical plan>>.
+`InConversion` is a [type coercion logical rule](../TypeCoercionRule.md) that <<coerceTypes, coerceTypes>> in a [logical plan](../logical-operators/LogicalPlan.md).
 
 === [[coerceTypes]] Coercing Types in Logical Plan -- `coerceTypes` Method
 
@@ -9,6 +9,6 @@
 coerceTypes(plan: LogicalPlan): LogicalPlan
 ----
 
-NOTE: `coerceTypes` is part of the <<spark-sql-TypeCoercionRule.md#coerceTypes, TypeCoercionRule Contract>> to coerce types in a <<spark-sql-LogicalPlan.md#, logical plan>>.
+`coerceTypes` is part of the [TypeCoercionRule](../TypeCoercionRule.md#coerceTypes) abstraction.
 
 `coerceTypes`...FIXME

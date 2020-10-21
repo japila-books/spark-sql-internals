@@ -2,7 +2,7 @@
 
 `Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable nodes](#implementations).
 
-`Expression` is a executable [node](../catalyst/TreeNode.md) (in a Catalyst multi-tree) that can be [evaluated](#eval) to a value for an input row (e.g. produces a JVM object for an [InternalRow](../spark-sql-InternalRow.md)).
+`Expression` is a executable [node](../catalyst/TreeNode.md) (in a Catalyst multi-tree) that can be [evaluated](#eval) to a value for an input row (e.g. produces a JVM object for an [InternalRow](../InternalRow.md)).
 
 `Expression` is often referred to as a **Catalyst expression**, but it is _simply_ built using the [Catalyst Tree Manipulation Framework](../catalyst/index.md).
 
@@ -97,7 +97,7 @@ a|
 
 | [[Predicate]] `Predicate`
 | trait
-| Result expressions/Expression.md#dataType[data type] is always spark-sql-DataType.md#BooleanType[boolean]
+| Result [data type](Expression.md#dataType) is always [boolean](../DataType.md#BooleanType)
 a|
 * `And`
 * `AtLeastNNonNulls`
@@ -129,7 +129,7 @@ a|
 
 | [Unevaluable](Unevaluable.md)
 | trait
-a| [[Unevaluable]] Cannot be evaluated to produce a value (neither in <<expressions/Expression.md#eval, interpreted>> nor <<expressions/Expression.md#doGenCode, code-generated>> expression evaluations), i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and simply report an `UnsupportedOperationException`.
+a| [[Unevaluable]] Cannot be evaluated to produce a value (neither in <<Expression.md#eval, interpreted>> nor <<Expression.md#doGenCode, code-generated>> expression evaluations), i.e. <<eval, eval>> and <<doGenCode, doGenCode>> are not supported and simply report an `UnsupportedOperationException`.
 
 ```
 /**
@@ -213,7 +213,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[dataType]] `dataType`
-| spark-sql-DataType.md[Data type] of the result of evaluating an expression
+| [Data type](../DataType.md) of the result of evaluating an expression
 
 | [[doGenCode]] `doGenCode`
 | *Code-generated expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).
@@ -221,7 +221,7 @@ abstract class Expression extends TreeNode[Expression] {
 Used when `Expression` is requested to <<genCode, genCode>>.
 
 | [[eval]] `eval`
-a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given spark-sql-InternalRow.md[internal binary row] (without <<genCode, generating a corresponding Java code>>.)
+a| *Interpreted (non-code-generated) expression evaluation* that evaluates an expression to a JVM object for a given [InternalRow](../InternalRow.md) (without <<genCode, generating a corresponding Java code>>.)
 
 NOTE: By default accepts `EmptyRow`, i.e. `null`.
 
@@ -231,7 +231,7 @@ NOTE: By default accepts `EmptyRow`, i.e. `null`.
 |
 
 | [[genCode]] `genCode`
-| Generates the Java source code for *code-generated (non-interpreted) expression evaluation* (on an input spark-sql-InternalRow.md[internal row] in a more optimized way not directly using <<eval, eval>>).
+| Generates the Java source code for *code-generated (non-interpreted) expression evaluation* (on an input [InternalRow](../InternalRow.md) (in a more optimized way not directly using <<eval, eval>>).
 
 Similar to <<doGenCode, doGenCode>> but supports expression reuse (aka spark-sql-subexpression-elimination.md[subexpression elimination]).
 

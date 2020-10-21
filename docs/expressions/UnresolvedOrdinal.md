@@ -2,7 +2,7 @@ title: UnresolvedOrdinal
 
 # UnresolvedOrdinal Unevaluable Leaf Expression
 
-`UnresolvedOrdinal` is a <<expressions/Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operators (in <<spark-sql-LogicalPlan-Sort.md#order, SortOrder>> ordering expressions) and in <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators (in <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping expressions>>) in a logical plan.
+`UnresolvedOrdinal` is a <<Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<spark-sql-LogicalPlan-Sort.md#, Sort>> logical operators (in <<spark-sql-LogicalPlan-Sort.md#order, SortOrder>> ordering expressions) and in <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators (in <<spark-sql-LogicalPlan-Aggregate.md#groupingExpressions, grouping expressions>>) in a logical plan.
 
 `UnresolvedOrdinal` is <<creating-instance, created>> when `SubstituteUnresolvedOrdinals` logical resolution rule is executed.
 
@@ -44,12 +44,12 @@ unresolvedordinal(1)
 `UnresolvedOrdinal` is an [unevaluable expression](Unevaluable.md).
 
 [[resolved]]
-`UnresolvedOrdinal` can never be <<expressions/Expression.md#resolved, resolved>> (and is replaced at <<analysis-phase, analysis phase>>).
+`UnresolvedOrdinal` can never be <<Expression.md#resolved, resolved>> (and is replaced at <<analysis-phase, analysis phase>>).
 
 [[analysis-phase]]
 NOTE: `UnresolvedOrdinal` is resolved when [ResolveOrdinalInOrderByAndGroupBy](../logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md) logical resolution rule is executed.
 
 [[NonSQLExpression]]
-`UnresolvedOrdinal` has <<expressions/Expression.md#NonSQLExpression, no representation in SQL>>.
+`UnresolvedOrdinal` has <<Expression.md#NonSQLExpression, no representation in SQL>>.
 
 NOTE: `UnresolvedOrdinal` in GROUP BY ordinal position is not allowed for a select list with a star (`*`).

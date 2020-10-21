@@ -1,15 +1,13 @@
-title: WholeStageCodegenExec
+# WholeStageCodegenExec Unary Physical Operator
 
-# WholeStageCodegenExec Unary Physical Operator for Java Code Generation
+`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) for a **Codegened Execution Pipeline** of a structured query.
 
-`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) for a *Codegened Execution Pipeline* of a structured query.
-
-NOTE: spark-sql-SparkPlan-InputAdapter.md[InputAdapter] is the other physical operator for Codegened Execution Pipeline of a structured query.
+!!! note
+    [InputAdapter](InputAdapter.md) is the other physical operator for Codegened Execution Pipeline of a structured query.
 
 `WholeStageCodegenExec` itself supports the [Java code generation](CodegenSupport.md) and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
 
-[source, scala]
-----
+```text
 val q = spark.range(10).where('id === 4)
 scala> q.queryExecution.debug.codegen
 Found 1 WholeStageCodegen subtrees.
@@ -24,7 +22,7 @@ Generated code:
 /* 004 */
 /* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
 ...
-----
+```
 
 [TIP]
 ====
@@ -217,7 +215,7 @@ Refer to spark-logging.md[Logging].
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile it] right afterwards.
 
@@ -227,11 +225,9 @@ NOTE: `doExecute` only supports up to two [input RDDs](CodegenSupport.md#inputRD
 
 CAUTION: FIXME Finish the "success" path
 
-
-
 If the size of the generated codes is greater than <<spark-sql-properties.md#spark.sql.codegen.hugeMethodLimit, spark.sql.codegen.hugeMethodLimit>> (which defaults to `65535`), `doExecute` prints out the following INFO message:
 
-```
+```text
 Found too long generated codes and JIT optimization might not work: the bytecode size ([maxCodeSize]) is above the limit [spark.sql.codegen.hugeMethodLimit], and the whole-stage codegen was disabled for this plan (id=[codegenStageId]). To avoid this, you can raise the limit `spark.sql.codegen.hugeMethodLimit`:
 [treeString]
 ```

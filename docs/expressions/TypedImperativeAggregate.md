@@ -1,8 +1,6 @@
-title: TypedImperativeAggregate
+# TypedImperativeAggregate &mdash; Imperative Aggregate Functions with Custom Aggregation Buffer
 
-# TypedImperativeAggregate -- Imperative Aggregate Functions with Custom Aggregation Buffer
-
-`TypedImperativeAggregate` is the <<contract, contract>> for spark-sql-Expression-ImperativeAggregate.md[imperative aggregation functions] that allows for an arbitrary user-defined java object to be used as <<createAggregationBuffer, internal aggregation buffer>>.
+`TypedImperativeAggregate` is the <<contract, contract>> for [imperative aggregation functions](ImperativeAggregate.md) that allows for an arbitrary user-defined java object to be used as <<createAggregationBuffer, internal aggregation buffer>>.
 
 [[ImperativeAggregate]]
 .TypedImperativeAggregate as ImperativeAggregate
@@ -18,7 +16,7 @@ title: TypedImperativeAggregate
 |
 
 | [[initialize]] spark-sql-Expression-ImperativeAggregate.md#initialize[initialize]
-| <<createAggregationBuffer, Creates an aggregation buffer>> and puts it at spark-sql-Expression-ImperativeAggregate.md#mutableAggBufferOffset[mutableAggBufferOffset] position in the input `buffer` spark-sql-InternalRow.md[InternalRow].
+| <<createAggregationBuffer, Creates an aggregation buffer>> and puts it at spark-sql-Expression-ImperativeAggregate.md#mutableAggBufferOffset[mutableAggBufferOffset] position in the input [InternalRow](../InternalRow.md).
 
 | [[inputAggBufferAttributes]] `inputAggBufferAttributes`
 |

@@ -1,21 +1,17 @@
 # ComplexTypedAggregateExpression
 
-`ComplexTypedAggregateExpression` is...FIXME
+## Creating Instance
 
-`ComplexTypedAggregateExpression` is <<creating-instance, created>> when...FIXME
+`ComplexTypedAggregateExpression` takes the following to be created:
 
-=== [[creating-instance]] Creating ComplexTypedAggregateExpression Instance
-
-`ComplexTypedAggregateExpression` takes the following when created:
-
-* [[aggregator]] spark-sql-Aggregator.md[Aggregator]
+* [[aggregator]] [Aggregator](../Aggregator.md)
 * [[inputDeserializer]] Optional input deserializer [expression](Expression.md)
 * [[inputClass]] Optional Java class for the input
 * [[inputSchema]] Optional [schema](../StructType.md) for the input
-* [[bufferSerializer]] Buffer serializer (as a collection of spark-sql-Expression-NamedExpression.md[named expressions])
-* [[bufferDeserializer]] Buffer deserializer expressions/Expression.md[expression]
-* [[outputSerializer]] Output serializer (as a collection of expressions/Expression.md[expressions])
-* [[dataType]] spark-sql-DataType.md[DataType]
+* [[bufferSerializer]] Buffer serializer ([NamedExpression](NamedExpression.md)s)
+* [[bufferDeserializer]] Buffer deserializer Expression.md[expression]
+* [[outputSerializer]] Output serializer ([Expression](Expression.md)s)
+* [[dataType]] [DataType](../DataType.md)
 * [[nullable]] `nullable` flag
 * [[mutableAggBufferOffset]] `mutableAggBufferOffset` (default: `0`)
 * [[inputAggBufferOffset]] `inputAggBufferOffset` (default: `0`)

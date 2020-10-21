@@ -1,13 +1,10 @@
-title: JsonToStructs
-
 # JsonToStructs Unary Expression
 
-`JsonToStructs` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> with expressions/Expression.md#TimeZoneAwareExpression[timezone] support and expressions/Expression.md#CodegenFallback[CodegenFallback].
+`JsonToStructs` is a [unary expression](UnaryExpression.md) with [timezone](Expression.md#TimeZoneAwareExpression) support and [CodegenFallback](Expression.md#CodegenFallback).
 
 `JsonToStructs` is <<creating-instance, created>> to represent spark-sql-functions.md#from_json[from_json] function.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions.from_json
 val jsonCol = from_json($"json", new StructType())
 
@@ -16,9 +13,9 @@ val jsonExpr = jsonCol.expr.asInstanceOf[JsonToStructs]
 scala> println(jsonExpr.numberedTreeString)
 00 jsontostructs('json, None)
 01 +- 'json
-----
+```
 
-`JsonToStructs` is a <<spark-sql-Expression-ExpectsInputTypes.md#, ExpectsInputTypes>> expression.
+`JsonToStructs` is a <<ExpectsInputTypes.md#, ExpectsInputTypes>> expression.
 
 [[FAILFAST]]
 [NOTE]
@@ -53,9 +50,9 @@ a| [StructType](../StructType.md) that...FIXME
 
 `JsonToStructs` takes the following when created:
 
-* [[schema]] spark-sql-DataType.md[DataType]
+* [[schema]] [DataType](../DataType.md)
 * [[options]] Options
-* [[child]] Child expressions/Expression.md[expression]
+* [[child]] Child [expression](Expression.md)
 * [[timeZoneId]] Optional time zone ID
 
 `JsonToStructs` initializes the <<internal-registries, internal registries and counters>>.
@@ -67,10 +64,10 @@ a| [StructType](../StructType.md) that...FIXME
 validateSchemaLiteral(exp: Expression): StructType
 ----
 
-`validateSchemaLiteral` requests spark-sql-CatalystSqlParser.md[CatalystSqlParser] to spark-sql-AbstractSqlParser.md#parseTableSchema[parseTableSchema] for spark-sql-Expression-Literal.md[Literal] of spark-sql-DataType.md#StringType[StringType].
+`validateSchemaLiteral` requests [CatalystSqlParser](../sql/CatalystSqlParser.md) to [parseTableSchema](../sql/AbstractSqlParser.md#parseTableSchema) for [Literal](Literal.md) of [StringType](../DataType.md#StringType).
 
-For any other non-``StringType`` spark-sql-DataType.md[types], `validateSchemaLiteral` reports a `AnalysisException`:
+For any other non-``StringType`` [types](../DataType.md), `validateSchemaLiteral` reports a `AnalysisException`:
 
-```
+```text
 Expected a string literal instead of [expression]
 ```

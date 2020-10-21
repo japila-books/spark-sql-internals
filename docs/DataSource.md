@@ -111,11 +111,11 @@ NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parqu
 
 `lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](spark-sql-OrcFileFormat.md) (based on Apache ORC)
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](OrcFileFormat.md) (based on Apache ORC)
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
-* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](spark-sql-AvroFileFormat.md) module
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](AvroFileFormat.md) module
 
 [[lookupDataSource-provider2]]
 `lookupDataSource` uses `DefaultSource` as the class name (in the <<lookupDataSource-provider1, provider1>> package) as another provider name variant, i.e. `[provider1].DefaultSource`.
@@ -226,7 +226,7 @@ org.apache.spark.sql.AnalysisException: Path does not exist: file:/Users/jacek/d
   ... 48 elided
 ```
 
-If spark-sql-properties.md#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than [TextFileFormat](spark-sql-TextFileFormat.md), and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
+If spark-sql-properties.md#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than [TextFileFormat](TextFileFormat.md), and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
 
 ```text
 Schema must be specified when creating a streaming source DataFrame. If some files already exist in the directory, then depending on the file format you may be able to create a static DataFrame on that directory with 'spark.read.load(directory)' and infer schema from it.

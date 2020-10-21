@@ -1,14 +1,12 @@
-title: LogicalRDD
+# LogicalRDD
 
-# LogicalRDD -- Logical Scan Over RDD
-
-`LogicalRDD` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] with <<newInstance, MultiInstanceRelation>> support for a logical representation of a scan over <<rdd, RDD of internal binary rows>>.
+`LogicalRDD` is a [leaf logical operator](LeafNode.md) with <<newInstance, MultiInstanceRelation>> support for a logical representation of a scan over <<rdd, RDD of internal binary rows>>.
 
 `LogicalRDD` is <<creating-instance, created>> when:
 
-* `Dataset` is requested to <<spark-sql-Dataset-untyped-transformations.md#checkpoint, checkpoint>>
+* `Dataset` is requested to [checkpoint](../Dataset-untyped-transformations.md#checkpoint)
 
-* `SparkSession` is requested to SparkSession.md#internalCreateDataFrame[create a DataFrame from an RDD of internal binary rows]
+* `SparkSession` is requested to [create a DataFrame from an RDD of internal binary rows](../SparkSession.md#internalCreateDataFrame)
 
 !!! note
     `LogicalRDD` is resolved to [RDDScanExec](../physical-operators/RDDScanExec.md) when [BasicOperators](../execution-planning-strategies/BasicOperators.md#LogicalRDD) execution planning strategy is executed.
@@ -31,17 +29,17 @@ NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[Mu
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
-
 `computeStats`...FIXME
 
-=== [[creating-instance]] Creating LogicalRDD Instance
+`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
 
-`LogicalRDD` takes the following when created:
+## Creating Instance
 
-* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
-* [[rdd]] `RDD` of spark-sql-InternalRow.md[internal binary rows]
+`LogicalRDD` takes the following to be created:
+
+* [[output]] Output schema [attributes](../expressions/Attribute.md)
+* [[rdd]] `RDD` of [InternalRow](../InternalRow.md)s
 * [[outputPartitioning]] Output [Partitioning](../physical-operators/Partitioning.md)
 * [[outputOrdering]] Output ordering (`SortOrder`)
 * [[isStreaming]] `isStreaming` flag
-* [[session]] SparkSession.md[SparkSession]
+* [[session]] [SparkSession](../SparkSession.md)

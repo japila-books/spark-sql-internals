@@ -1,15 +1,14 @@
 # UserDefinedFunction
 
-`UserDefinedFunction` represents a *user-defined function*.
+`UserDefinedFunction` represents a **user-defined function**.
 
 `UserDefinedFunction` is <<creating-instance, created>> when:
 
-* spark-sql-functions.md#udf[udf] function is executed
+* [udf](spark-sql-functions.md#udf) function is executed
 
-* `UDFRegistration` is requested to UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
+* `UDFRegistration` is requested to [register a Scala function as a user-defined function](UDFRegistration.md#register) (in `FunctionRegistry`)
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions.udf
 val lengthUDF = udf { s: String => s.length }
 
@@ -20,16 +19,15 @@ val r = lengthUDF($"name")
 
 scala> :type r
 org.apache.spark.sql.Column
-----
+```
 
 `UserDefinedFunction` can have an optional <<withName, name>>.
 
-[source, scala]
-----
+```text
 val namedLengthUDF = lengthUDF.withName("lengthUDF")
 scala> namedLengthUDF($"name")
 res2: org.apache.spark.sql.Column = UDF:lengthUDF(name)
-----
+```
 
 `UserDefinedFunction` is *nullable* by default, but can be changed as <<asNonNullable, non-nullable>>.
 
@@ -110,12 +108,12 @@ withName(name: String): UserDefinedFunction
 
 NOTE: `withName` is used when...FIXME
 
-=== [[creating-instance]] Creating UserDefinedFunction Instance
+## Creating Instance
 
 `UserDefinedFunction` takes the following when created:
 
 * [[f]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output spark-sql-DataType.md[data type]
-* [[inputTypes]] Input spark-sql-DataType.md[data types] (if available)
+* [[dataType]] Output [data type](DataType.md)
+* [[inputTypes]] Input [data types](DataType.md) (if available)
 
 `UserDefinedFunction` initializes the <<internal-registries, internal registries and counters>>.

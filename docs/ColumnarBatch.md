@@ -36,7 +36,7 @@ assert(batch.getRow(0).numFields == 4)
 
 `ColumnarBatch` takes the following to be created:
 
-* <span id="columns"> [ColumnVectors](spark-sql-ColumnVector.md)
+* <span id="columns"> [ColumnVectors](ColumnVector.md)
 * <span id="numRows"> Number of Rows
 
 `ColumnarBatch` immediately creates the internal `MutableColumnarRow`.

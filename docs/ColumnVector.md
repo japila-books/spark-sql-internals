@@ -1,6 +1,4 @@
-title: ColumnVector
-
-# ColumnVector -- In-Memory Columnar Data
+# ColumnVector &mdash; In-Memory Columnar Data
 
 `ColumnVector` is the <<contract, contract>> of <<implementations, in-memory columnar data>> (of a <<type, DataType>>).
 
@@ -152,7 +150,7 @@ a| [[hasNull]]
 boolean hasNull()
 ----
 
-Used when <<spark-sql-OffHeapColumnVector.md#, OffHeapColumnVector>> and <<spark-sql-OnHeapColumnVector.md#, OnHeapColumnVector>> are requested to `putNotNulls`
+Used when [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are requested to `putNotNulls`
 
 | isNullAt
 a| [[isNullAt]]
@@ -189,15 +187,15 @@ Used for testing purposes only
 | `OrcColumnVector`
 | [[OrcColumnVector]]
 
-| <<spark-sql-WritableColumnVector.md#, WritableColumnVector>>
-| [[WritableColumnVector]] Writable column vectors with <<spark-sql-OffHeapColumnVector.md#, off-heap>> and <<spark-sql-OnHeapColumnVector.md#, on-heap>> memory variants
+| [WritableColumnVector](WritableColumnVector.md)
+| [[WritableColumnVector]] Writable column vectors with [off-heap](OffHeapColumnVector.md) and [on-heap](OnHeapColumnVector.md) memory variants
 
 |===
 
 [[creating-instance]]
 [[type]]
 [[dataType]]
-`ColumnVector` takes a <<spark-sql-DataType.md#, DataType>> of the column to be created.
+`ColumnVector` takes a [DataType](DataType.md) of the column to be created.
 
 NOTE: `ColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete ColumnVectors>>.
 

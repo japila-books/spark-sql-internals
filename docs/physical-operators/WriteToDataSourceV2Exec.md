@@ -1,8 +1,6 @@
-title: WriteToDataSourceV2Exec
-
 # WriteToDataSourceV2Exec Physical Operator
 
-`WriteToDataSourceV2Exec` is a <<SparkPlan.md#, physical operator>> that represents an <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator (and a deprecated <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator) at execution time.
+`WriteToDataSourceV2Exec` is a [physical operator](SparkPlan.md) that represents an [AppendData](../logical-operators/AppendData.md) logical operator (and a deprecated [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) logical operator) at execution time.
 
 `WriteToDataSourceV2Exec` is <<creating-instance, created>> when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan an [AppendData](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData) logical operator (and a deprecated [WriteToDataSourceV2](../execution-planning-strategies/DataSourceV2Strategy.md#apply-WriteToDataSourceV2)).
 
@@ -41,17 +39,17 @@ Refer to <<spark-logging.md#, Logging>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#createWriterFactory, create a DataWriterFactory>> for the writing task.
 
 `doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#useCommitCoordinator, use a CommitCoordinator or not>>.
 
-`doExecute` requests the <<query, child physical plan>> to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and in the end generates an `RDD` of <<spark-sql-InternalRow.md#, internal binary rows>>).
+`doExecute` requests the <<query, child physical plan>> to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and in the end generates an `RDD` of [InternalRow](../InternalRow.md)s).
 
 `doExecute` prints out the following INFO message to the logs:
 
-```
+```text
 Start processing data source writer: [writer]. The input RDD has [length] partitions.
 ```
 

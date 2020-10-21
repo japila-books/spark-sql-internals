@@ -1,6 +1,6 @@
 # OnHeapColumnVector
 
-`OnHeapColumnVector` is a concrete spark-sql-WritableColumnVector.md[WritableColumnVector] that...FIXME
+`OnHeapColumnVector` is a concrete [WritableColumnVector](WritableColumnVector.md).
 
 `OnHeapColumnVector` is <<creating-instance, created>> when:
 
@@ -17,10 +17,8 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 ----
 <1> Simply converts `StructType` to `StructField[]` and calls the other `allocateColumns`
 
-`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the spark-sql-DataType.md[data type] per field).
+`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the [data type](DataType.md) per field).
 
-[NOTE]
-====
 `allocateColumns` is used when:
 
 * `AggregateHashMap` is created
@@ -32,16 +30,15 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 * `OrcColumnarBatchReader` is requested to `initBatch` (with `ON_HEAP` memory mode)
 
 * `ColumnVectorUtils` is requested to convert an iterator of rows into a single `ColumnBatch` (aka `toBatch`)
-====
 
-=== [[creating-instance]] Creating OnHeapColumnVector Instance
+## Creating Instance
 
 `OnHeapColumnVector` takes the following when created:
 
 * [[capacity]] Number of elements to hold in a vector (aka `capacity`)
-* [[type]] spark-sql-DataType.md[Data type] of the elements stored
+* [[type]] [Data type](DataType.md) of the elements stored
 
-When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and spark-sql-WritableColumnVector.md#reset[reset].
+When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and [reset](WritableColumnVector.md#reset).
 
 === [[reserveInternal]] `reserveInternal` Method
 
@@ -50,7 +47,7 @@ When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the
 void reserveInternal(int newCapacity)
 ----
 
-NOTE: `reserveInternal` is part of spark-sql-WritableColumnVector.md#reserveInternal[WritableColumnVector Contract] to...FIXME.
+`reserveInternal` is part of the [WritableColumnVector](WritableColumnVector.md#reserveInternal) abstraction.
 
 `reserveInternal`...FIXME
 
@@ -58,9 +55,11 @@ NOTE: `reserveInternal` is part of spark-sql-WritableColumnVector.md#reserveInte
 
 [source, java]
 ----
-OnHeapColumnVector reserveNewColumn(int capacity, DataType type)
+OnHeapColumnVector reserveNewColumn(
+    int capacity,
+    DataType type)
 ----
 
-NOTE: `reserveNewColumn` is part of spark-sql-WritableColumnVector.md#reserveNewColumn[WritableColumnVector Contract] to...FIXME.
+`reserveNewColumn` is part of the [WritableColumnVector](WritableColumnVector.md#reserveNewColumn) abstraction.
 
 `reserveNewColumn`...FIXME

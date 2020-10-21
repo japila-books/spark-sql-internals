@@ -2,7 +2,7 @@ title: Star
 
 # Star Expression Contract
 
-`Star` is a <<contract, contract>> of expressions/Expression.md#LeafExpression[leaf] and spark-sql-Expression-NamedExpression.md[named expressions] that...FIXME
+`Star` is a <<contract, contract>> of Expression.md#LeafExpression[leaf] and spark-sql-Expression-NamedExpression.md[named expressions] that...FIXME
 
 [[contract]]
 [source, scala]

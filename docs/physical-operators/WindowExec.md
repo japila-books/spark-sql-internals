@@ -1,8 +1,6 @@
-title: WindowExec
-
 # WindowExec Unary Physical Operator
 
-`WindowExec` is a [unary physical operator](UnaryExecNode.md) for **window aggregation execution** (i.e. represents <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator at execution time).
+`WindowExec` is a [unary physical operator](UnaryExecNode.md) for **window aggregation execution** (and represents [Window](../logical-operators/Window.md) unary logical operator at execution time).
 
 `WindowExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves a <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator.
 
@@ -222,13 +220,13 @@ Refer to <<spark-logging.md#, Logging>>.
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` SparkPlan.md#execute[executes] the single <<child, child>> physical operator and spark-rdd-transformations.md#mapPartitions[maps over partitions] using a custom `Iterator[InternalRow]`.
 
 NOTE: When executed, `doExecute` creates a `MapPartitionsRDD` with the `child` physical operator's `RDD[InternalRow]`.
 
-```
+```text
 scala> :type we
 org.apache.spark.sql.execution.window.WindowExec
 
@@ -247,7 +245,7 @@ scala> println(windowRDD.toDebugString)
 
 Internally, `doExecute` first takes spark-sql-Expression-WindowExpression.md[WindowExpressions] and their spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] factory functions (from <<windowFrameExpressionFactoryPairs, window frame factories>>) followed by SparkPlan.md#execute[executing] the single `child` physical operator and mapping over partitions (using `RDD.mapPartitions` operator).
 
-`doExecute` creates an `Iterator[InternalRow]` (of spark-sql-UnsafeRow.md[UnsafeRow] exactly).
+`doExecute` creates an `Iterator[InternalRow]` (of UnsafeRow.md[UnsafeRow] exactly).
 
 ==== [[iterator]] Mapping Over UnsafeRows per Partition -- `Iterator[InternalRow]`
 
@@ -269,7 +267,7 @@ log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator=DEB
 Refer to spark-logging.md[Logging].
 ====
 
-`Iterator[InternalRow]` then <<fetchNextRow, fetches the first row>> from the upstream RDD and initializes `nextRow` and `nextGroup` spark-sql-UnsafeRow.md[UnsafeRows].
+`Iterator[InternalRow]` then <<fetchNextRow, fetches the first row>> from the upstream RDD and initializes `nextRow` and `nextGroup` UnsafeRow.md[UnsafeRows].
 
 [[nextGroup]]
 NOTE: `nextGroup` is the result of converting `nextRow` using <<grouping, grouping>> conversion function.
@@ -306,7 +304,7 @@ NOTE: `next` loads all the rows in `nextGroup`.
 
 CAUTION: FIXME What's `nextGroup`?
 
-`next` takes one spark-sql-UnsafeRow.md[UnsafeRow] from `bufferIterator`.
+`next` takes one UnsafeRow.md[UnsafeRow] from `bufferIterator`.
 
 CAUTION: FIXME `bufferIterator` seems important for the iteration.
 
@@ -346,9 +344,9 @@ fetchNextRow(): Unit
 
 `fetchNextRow` checks whether there is the next row available (using the upstream `Iterator.hasNext`) and sets `nextRowAvailable` mutable internal flag.
 
-If there is a row available, `fetchNextRow` sets `nextRow` internal variable to the next spark-sql-UnsafeRow.md[UnsafeRow] from the upstream's RDD.
+If there is a row available, `fetchNextRow` sets `nextRow` internal variable to the next UnsafeRow.md[UnsafeRow] from the upstream's RDD.
 
-`fetchNextRow` also sets `nextGroup` internal variable as an spark-sql-UnsafeRow.md[UnsafeRow] for `nextRow` using `grouping` function.
+`fetchNextRow` also sets `nextGroup` internal variable as an UnsafeRow.md[UnsafeRow] for `nextRow` using `grouping` function.
 
 [[grouping]]
 [NOTE]
@@ -369,13 +367,9 @@ NOTE: `fetchNextRow` is used internally when <<doExecute, doExecute>>'s `Iterato
 createResultProjection(expressions: Seq[Expression]): UnsafeProjection
 ----
 
-`createResultProjection` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] function for `expressions` window function expressions/Expression.md[Catalyst expressions] so that the window expressions are on the right side of child's output.
+`createResultProjection` creates a [UnsafeProjection](UnsafeProjection.md) function for `expressions` window function [Catalyst expression](../expressions/Expression.md)s so that the window expressions are on the right side of child's output.
 
-NOTE: spark-sql-UnsafeProjection.md[UnsafeProjection] is a Scala function that produces spark-sql-UnsafeRow.md[UnsafeRow] for an spark-sql-InternalRow.md[InternalRow].
-
-Internally, `createResultProjection` first creates a translation table with a spark-sql-Expression-BoundReference.md[BoundReference] per expression (in the input `expressions`).
-
-NOTE: `BoundReference` is a Catalyst expression that is a reference to a value in spark-sql-InternalRow.md[internal binary row] at a specified position and of specified data type.
+Internally, `createResultProjection` first creates a translation table with a [BoundReference](../expressions/BoundReference.md) per expression (in the input `expressions`).
 
 `createResultProjection` then creates a window function bound references for <<windowExpression, window expressions>> so unbound expressions are transformed to the `BoundReferences`.
 
@@ -405,7 +399,7 @@ windowFrameExpressionFactoryPairs:
 
 `windowFrameExpressionFactoryPairs` is a lookup table with <<windowFrameExpressionFactoryPairs-two-element-expression-list-value, window expressions>> and <<windowFrameExpressionFactoryPairs-factory-functions, factory functions>> for spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] (per key-value pair in `framedFunctions` lookup table).
 
-A factory function is a function that takes an spark-sql-InternalRow.md[InternalRow] and produces a spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] (described in the table below)
+A factory function is a function that takes an [InternalRow](../InternalRow.md) and produces a spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] (described in the table below)
 
 Internally, `windowFrameExpressionFactoryPairs` first builds `framedFunctions` lookup table with <<windowFrameExpressionFactoryPairs-four-element-tuple-key, 4-element tuple keys>> and <<windowFrameExpressionFactoryPairs-two-element-expression-list-value, 2-element expression list values>> (described in the table below).
 

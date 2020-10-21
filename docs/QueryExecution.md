@@ -79,7 +79,7 @@ Optimized physical plan that is in the final optimized "shape" and therefore rea
 toRdd: RDD[InternalRow]
 ```
 
-Spark Core's execution graph of a distributed computation (`RDD` of [internal binary rows](spark-sql-InternalRow.md)) from the [executedPlan](#executedPlan) after [execution](physical-operators/SparkPlan.md#execute).
+Spark Core's execution graph of a distributed computation (`RDD` of [internal binary rows](InternalRow.md)) from the [executedPlan](#executedPlan) after [execution](physical-operators/SparkPlan.md#execute).
 
 The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical operators).
 

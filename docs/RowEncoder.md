@@ -1,8 +1,6 @@
-title: RowEncoder
+# RowEncoder &mdash; Encoder for DataFrames
 
-# RowEncoder -- Encoder for DataFrames
-
-`RowEncoder` is part of the spark-sql-Encoder.md[Encoder framework] and acts as the encoder for spark-sql-DataFrame.md[DataFrames], i.e. `Dataset[Row]` -- Dataset.md[Datasets] of spark-sql-Row.md[Rows].
+`RowEncoder` is part of the [Encoder framework](spark-sql-Encoder.md) and acts as the encoder for [DataFrame](spark-sql-DataFrame.md)s ([Dataset](Dataset.md)s of [Row](spark-sql-Row.md)s).
 
 NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `Encoder[Row]` available in scope which is indeed `RowEncoder` itself.
 
@@ -10,8 +8,7 @@ NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `E
 
 `RowEncoder` can create `ExpressionEncoder[Row]` from a [schema](StructType.md) (using <<apply, apply method>>).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.types._
 val schema = StructType(
   StructField("id", LongType, nullable = false) ::
@@ -24,9 +21,7 @@ encoder: org.apache.spark.sql.catalyst.encoders.ExpressionEncoder[org.apache.spa
 // RowEncoder is never flat
 scala> encoder.flat
 res0: Boolean = false
-----
-
-`RowEncoder` object belongs to `org.apache.spark.sql.catalyst.encoders` package.
+```
 
 === [[apply]] Creating ExpressionEncoder For Row Type -- `apply` method
 
@@ -56,7 +51,7 @@ CAUTION: FIXME What does being native type mean?
 
 2. For ``UserDefinedType``s, it takes the UDT class from the `SQLUserDefinedType` annotation or `UDTRegistration` object and returns an expression with `Invoke` to call `serialize` method on a `NewInstance` of the UDT class.
 
-3. For spark-sql-DataType.md#TimestampType[TimestampType], it returns an expression with a spark-sql-Expression-StaticInvoke.md[StaticInvoke] to call `fromJavaTimestamp` on `DateTimeUtils` class.
+3. For [TimestampType](DataType.md#TimestampType), it returns an expression with a [StaticInvoke](expressions/StaticInvoke.md) to call `fromJavaTimestamp` on `DateTimeUtils` class.
 
 4. ...FIXME
 

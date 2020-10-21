@@ -1,8 +1,6 @@
-title: InMemoryTableScanExec
-
 # InMemoryTableScanExec Leaf Physical Operator
 
-`InMemoryTableScanExec` is a SparkPlan.md#LeafExecNode[leaf physical operator] that represents an <<relation, InMemoryRelation>> logical operator at execution time.
+`InMemoryTableScanExec` is a [leaf physical operator](LeafExecNode.md) that represents an [InMemoryRelation](#relation) logical operator at execution time.
 
 `InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] logical operator in a logical query plan.
 
@@ -110,9 +108,9 @@ vectorTypes: Option[Seq[String]]
 
 NOTE: `vectorTypes` is part of spark-sql-ColumnarBatchScan.md#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
 
-`vectorTypes` uses spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property to select the name of the concrete column vector, i.e. spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] or spark-sql-OffHeapColumnVector.md[OffHeapColumnVector] when the property is off or on, respectively.
+`vectorTypes` uses [spark.sql.columnVector.offheap.enabled](../spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration property to select the name of the concrete column vector ([OnHeapColumnVector](../OnHeapColumnVector.md) or [OffHeapColumnVector](../OffHeapColumnVector.md)).
 
-`vectorTypes` gives as many column vectors as the <<attributes, attribute expressions>>.
+`vectorTypes` gives as many column vectors as the [attribute expressions](#attributes).
 
 === [[supportsBatch]] `supportsBatch` Property
 
@@ -125,11 +123,11 @@ NOTE: `supportsBatch` is part of spark-sql-ColumnarBatchScan.md#supportsBatch[Co
 
 `supportsBatch` is enabled when all of the following holds:
 
-. spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader] configuration property is enabled (default: `true`)
+1. *spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader] configuration property is enabled (default: `true`)
 
-. The catalyst/QueryPlan.md#schema[output schema] of the <<relation, InMemoryRelation>> uses primitive data types only, i.e. spark-sql-DataType.md#BooleanType[BooleanType], spark-sql-DataType.md#ByteType[ByteType], spark-sql-DataType.md#ShortType[ShortType], spark-sql-DataType.md#IntegerType[IntegerType], spark-sql-DataType.md#LongType[LongType], spark-sql-DataType.md#FloatType[FloatType], spark-sql-DataType.md#DoubleType[DoubleType]
+1. The [output schema](../catalyst/QueryPlan.md#schema) of the <<relation, InMemoryRelation>> uses primitive data types only [BooleanType](../DataType.md#BooleanType), [ByteType](../DataType.md#ByteType), [ShortType](../DataType.md#ShortType), [IntegerType](../DataType.md#IntegerType), [LongType](../DataType.md#LongType), [FloatType](../DataType.md#FloatType), [DoubleType](../DataType.md#DoubleType)
 
-. The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
+1. The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
 
 === [[partitionFilters]] `partitionFilters` Property
 
@@ -180,16 +178,14 @@ NOTE: `statsFor` is used when...FIXME
 
 === [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
 
-[source, scala]
-----
-createAndDecompressColumn(cachedColumnarBatch: CachedBatch): ColumnarBatch
-----
+```scala
+createAndDecompressColumn(
+   cachedColumnarBatch: CachedBatch): ColumnarBatch
+```
 
 `createAndDecompressColumn` takes the number of rows in the input `CachedBatch`.
 
-`createAndDecompressColumn` requests spark-sql-OffHeapColumnVector.md#allocateColumns[OffHeapColumnVector] or spark-sql-OnHeapColumnVector.md#allocateColumns[OnHeapColumnVector] to allocate column vectors (with the number of rows and <<columnarBatchSchema, columnarBatchSchema>>) per the spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag, i.e. `true` or `false`, respectively.
-
-NOTE: spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration flag is disabled by default which means that spark-sql-OnHeapColumnVector.md[OnHeapColumnVector] is used.
+`createAndDecompressColumn` requests [OffHeapColumnVector](../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../OnHeapColumnVector.md#allocateColumns) to allocate column vectors (with the number of rows and [columnarBatchSchema](#columnarBatchSchema)) per the [spark.sql.columnVector.offheap.enabled](../spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration flag.
 
 `createAndDecompressColumn` creates a [ColumnarBatch](../ColumnarBatch.md) for the allocated column vectors (as an array of `ColumnVector`).
 
@@ -287,13 +283,13 @@ NOTE: `inputRDD` is used when `InMemoryTableScanExec` is requested for the <<inp
 doExecute(): RDD[InternalRow]
 ----
 
-NOTE: `doExecute` is part of <<SparkPlan.md#doExecute, SparkPlan Contract>> to generate the runtime representation of a structured query as a distributed computation over <<spark-sql-InternalRow.md#, internal binary rows>> on Apache Spark (i.e. `RDD[InternalRow]`).
-
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
 With <<supportsBatch, supportsBatch>> flag on, `doExecute` creates a spark-sql-SparkPlan-WholeStageCodegenExec.md#creating-instance[WholeStageCodegenExec] (with the `InMemoryTableScanExec` physical operator as the spark-sql-SparkPlan-WholeStageCodegenExec.md#child[child] and spark-sql-SparkPlan-WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and requests it to SparkPlan.md#execute[execute].
 
 Otherwise, when <<supportsBatch, supportsBatch>> flag is off, `doExecute` simply gives the <<inputRDD, input RDD of internal rows>>.
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 === [[buildFilter]] `buildFilter` Property
 
