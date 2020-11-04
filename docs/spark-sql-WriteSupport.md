@@ -1,25 +1,22 @@
-title: WriteSupport
+# WriteSupport
 
-# WriteSupport -- "Writable" Data Sources
-
-`WriteSupport` is the <<contract, abstraction>> of <<implementations, "writable" data sources>> in the [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<createWriter, create a DataSourceWriter>> for writing data out.
+`WriteSupport` is the <<contract, abstraction>> of ["writable" data sources](#implementations) in the [DataSource V2](new-and-noteworthy/datasource-v2.md) that can <<createWriter, create a DataSourceWriter>> for writing data out.
 
 [[contract]]
 [[createWriter]]
-`WriteSupport` defines a single `createWriter` method that creates an optional <<spark-sql-DataSourceWriter.md#, DataSourceWriter>> per <<spark-sql-DataFrameWriter.md#SaveMode, SaveMode>> (and can create no `DataSourceWriter` when not needed per mode)
+`WriteSupport` defines a single `createWriter` method that creates an optional <<spark-sql-DataSourceWriter.md#, DataSourceWriter>> per [SaveMode](DataFrameWriter.md#SaveMode) (and can create no `DataSourceWriter` when not needed per mode)
 
-[source, java]
-----
+```java
 Optional<DataSourceWriter> createWriter(
   String writeUUID,
   StructType schema,
   SaveMode mode,
   DataSourceOptions options)
-----
+```
 
 `createWriter` is used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save a DataFrame to a data source>> (for <<spark-sql-DataSourceV2.md#, DataSourceV2>> data sources with <<WriteSupport, WriteSupport>>)
+* `DataFrameWriter` is requested to [save a DataFrame to a data source](DataFrameWriter.md#save) (for [DataSourceV2](spark-sql-DataSourceV2.md) data sources with [WriteSupport](#WriteSupport))
 
 * `DataSourceV2Relation` leaf logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> (indirectly via <<spark-sql-LogicalPlan-DataSourceV2Relation.md#createWriter, createWriter>> implicit method)
 

@@ -45,7 +45,7 @@ org.apache.spark.sql.AnalysisException: Table default.users already exists. You 
 `CreateDataSourceTableAsSelectCommand` takes the following to be created:
 
 * [[table]] [CatalogTable](../CatalogTable.md)
-* [[mode]] [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* [[mode]] [SaveMode](../DataFrameWriter.md#SaveMode)
 * [[query]] AS query ([LogicalPlan](../logical-operators/LogicalPlan.md))
 * [[outputColumnNames]] Output column names (`Seq[String]`)
 

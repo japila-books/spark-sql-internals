@@ -162,7 +162,7 @@ nav:
         - AnalyzeColumnStatement: logical-operators/AnalyzeColumnStatement.md
         - logical-operators/AnalyzePartitionCommand.md
         - logical-operators/AnalyzeTableCommand.md
-        - logical-operators/AppendData.md
+        - AppendData: logical-operators/AppendData.md
         - logical-operators/ClearCacheCommand.md
         - CollectMetrics: logical-operators/CollectMetrics.md
         - logical-operators/CreateDataSourceTableAsSelectCommand.md
@@ -202,6 +202,7 @@ nav:
         - logical-operators/LogicalRelation.md
         - MergeIntoTable: logical-operators/MergeIntoTable.md
         - logical-operators/OneRowRelation.md
+        - OverwriteByExpression: logical-operators/OverwriteByExpression.md
         - logical-operators/Pivot.md
         - logical-operators/Project.md
         - logical-operators/Range.md
@@ -634,6 +635,7 @@ nav:
       - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
       - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
+      - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
       - TimeWindowing: logical-analysis-rules/TimeWindowing.md
       - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
       - WindowFrameCoercion: logical-analysis-rules/WindowFrameCoercion.md
@@ -769,13 +771,14 @@ nav:
     - Block: Block.md
     - FileScan: FileScan.md
     - Connector API:
+      - Table: connector/catalog/Table.md
+      - TableCapability: connector/catalog/TableCapability.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionReader: connector/PartitionReader.md
       - InputPartition: connector/InputPartition.md
-      - Table: connector/catalog/Table.md
       - FileTable: connector/catalog/FileTable.md
       - KafkaTable: connector/catalog/KafkaTable.md
       - NoopTable: connector/catalog/NoopTable.md
@@ -783,6 +786,7 @@ nav:
       - SupportsRead: connector/catalog/SupportsRead.md
       - SupportsWrite: connector/catalog/SupportsWrite.md
       - V1Table: connector/catalog/V1Table.md
+      - TableHelper: connector/catalog/TableHelper.md
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
@@ -825,7 +829,7 @@ nav:
       - Data Source API:
         - DataSource API: spark-sql-datasource-api.md
         - DataFrameReader: DataFrameReader.md
-        - spark-sql-DataFrameWriter.md
+        - DataFrameWriter: DataFrameWriter.md
       - Dataset API:
         - spark-sql-dataset-operators.md
         - spark-sql-Dataset-typed-transformations.md

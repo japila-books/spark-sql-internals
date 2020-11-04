@@ -1,9 +1,10 @@
 # JdbcRelationProvider
 
 [[shortName]]
-`JdbcRelationProvider` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and registers itself to handle *jdbc* data source format.
+`JdbcRelationProvider` is a [DataSourceRegister](spark-sql-DataSourceRegister.md) and registers itself to handle *jdbc* data source format.
 
-NOTE: `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister[source code] of Apache Spark.
+!!! note
+    `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the [source code](https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark.
 
 `JdbcRelationProvider` is a <<createRelation-RelationProvider, RelationProvider>> and a <<createRelation-CreatableRelationProvider, CreatableRelationProvider>>.
 
@@ -59,7 +60,7 @@ NOTE: `createRelation` uses a database-specific `JdbcDialect` to spark-sql-JdbcD
 
 If the table *does not* exist, `createRelation` creates the table (by executing `CREATE TABLE` with <<spark-sql-JDBCOptions.md#createTableColumnTypes, createTableColumnTypes>> and <<spark-sql-JDBCOptions.md#createTableOptions, createTableOptions>> options from the input `parameters`) and writes the rows to the database in a single transaction.
 
-If however the table *does* exist, `createRelation` branches off per [SaveMode](spark-sql-DataFrameWriter.md#SaveMode) (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
+If however the table *does* exist, `createRelation` branches off per [SaveMode](DataFrameWriter.md#SaveMode) (see the following <<createRelation-CreatableRelationProvider-SaveMode, createRelation and SaveMode>>).
 
 [[createRelation-CreatableRelationProvider-SaveMode]]
 .createRelation and SaveMode
@@ -68,20 +69,20 @@ If however the table *does* exist, `createRelation` branches off per [SaveMode](
 | Name
 | Description
 
-| <<spark-sql-DataFrameWriter.md#Append, Append>>
+| [Append](DataFrameWriter.md#Append)
 | Saves the records to the table.
 
-| <<spark-sql-DataFrameWriter.md#ErrorIfExists, ErrorIfExists>>
+| [ErrorIfExists](DataFrameWriter.md#ErrorIfExists)
 a| Throws a `AnalysisException` with the message:
 
-```
+```text
 Table or view '[table]' already exists. SaveMode: ErrorIfExists.
 ```
 
-| <<spark-sql-DataFrameWriter.md#Ignore, Ignore>>
+| [Ignore](DataFrameWriter.md#Ignore)
 | Does nothing.
 
-| <<spark-sql-DataFrameWriter.md#Overwrite, Overwrite>>
+| [Overwrite](DataFrameWriter.md#Overwrite)
 a| Truncates or drops the table
 
 NOTE: `createRelation` truncates the table only when spark-sql-JDBCOptions.md#truncate[truncate] JDBC option is enabled and spark-sql-JdbcDialect.md#isCascadingTruncateTable[isCascadingTruncateTable] is disabled.

@@ -88,7 +88,7 @@ Used when:
 
 * `LogicalExpressions` utility is requested to [parseReference](LogicalExpressions.md#parseReference)
 
-* `DataFrameWriter` is requested to [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable)
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable)
 
 * [DataFrameWriterV2](../new-in-300/DataFrameWriterV2.md) is created (and requested for [tableName](../new-in-300/DataFrameWriterV2.md#tableName))
 
@@ -129,11 +129,11 @@ Parses a SQL text to a `TableIdentifier`
 
 Used when:
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#insertInto, insertInto>> and <<spark-sql-DataFrameWriter.md#saveAsTable, saveAsTable>>
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable)
 
-* `Dataset` is requested to <<spark-sql-Dataset-basic-actions.md#createTempViewCommand, createTempViewCommand>>
+* `Dataset` is requested to [createTempViewCommand](../spark-sql-Dataset-basic-actions.md#createTempViewCommand)
 
-* `SparkSession` is requested to <<SparkSession.md#table, table>>
+* `SparkSession` is requested to [table](../SparkSession.md#table)
 
 * `CatalogImpl` is requested to [listColumns](../CatalogImpl.md#listColumns), [getTable](../CatalogImpl.md#getTable), [tableExists](../CatalogImpl.md#tableExists), [createTable](../CatalogImpl.md#createTable), [recoverPartitions](../CatalogImpl.md#recoverPartitions), [uncacheTable](../CatalogImpl.md#uncacheTable), and [refreshTable](../CatalogImpl.md#refreshTable)
 

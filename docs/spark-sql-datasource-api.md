@@ -1,6 +1,6 @@
-# DataSource API -- Managing Datasets in External Data Sources
+# DataSource API
 
-=== [[reading-datasets]] Reading Datasets
+## Reading Datasets
 
 Spark SQL can read data from external storage systems like files, Hive tables and JDBC databases through [DataFrameReader](DataFrameReader.md) interface.
 
@@ -48,19 +48,18 @@ val stream: DataStreamReader = spark.readStream
 
 The available methods in `DataStreamReader` are similar to `DataFrameReader`.
 
-=== [[saving-datasets]] Saving Datasets
+## Saving Datasets
 
-Spark SQL can save data to external storage systems like files, Hive tables and JDBC databases through spark-sql-DataFrameWriter.md[DataFrameWriter] interface.
+Spark SQL can save data to external storage systems like files, Hive tables and JDBC databases through [DataFrameWriter](DataFrameWriter.md) interface.
 
 You use Dataset.md#write[write] method on a `Dataset` to access `DataFrameWriter`.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.{DataFrameWriter, Dataset}
 val ints: Dataset[Int] = (0 to 5).toDS
 
 val writer: DataFrameWriter[Int] = ints.write
-----
+```
 
 `DataFrameWriter` is an interface to persist a Dataset.md[Datasets] to an external storage system in a batch fashion.
 

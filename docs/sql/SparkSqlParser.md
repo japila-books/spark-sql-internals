@@ -9,7 +9,7 @@
 `SparkSqlParser` is used to parse table strings into their corresponding table identifiers in the following:
 
 * `table` methods in [DataFrameReader](../DataFrameReader.md#table) and [SparkSession](../SparkSession.md#table)
-* [insertInto](../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../spark-sql-DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
+* [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable) methods of `DataFrameWriter`
 * `createExternalTable` and `refreshTable` methods of [Catalog](../Catalog.md) (and [SessionState](../SessionState.md#refreshTable))
 
 ## Creating Instance

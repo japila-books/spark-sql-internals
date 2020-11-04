@@ -1159,7 +1159,7 @@ Default: `parquet`
 
 Used when:
 
-* Reading (spark-sql-DataFrameWriter.md[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
+* Reading (DataFrameWriter.md[DataFrameWriter]) or writing ([DataFrameReader](DataFrameReader.md)) datasets
 
 * [Catalog.createExternalTable](Catalog.md#createExternalTable)
 

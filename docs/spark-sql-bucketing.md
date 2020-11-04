@@ -1,6 +1,6 @@
 # Bucketing
 
-*Bucketing* is an optimization technique that uses *buckets* (and *bucketing columns*) to determine data partitioning and avoid data shuffle.
+**Bucketing** is an optimization technique that uses **buckets** (and **bucketing columns**) to determine data partitioning and avoid data shuffle.
 
 The motivation is to optimize performance of a join query by avoiding shuffles (aka _exchanges_) of tables participating in the join. Bucketing results in fewer exchanges (and so stages).
 
@@ -46,16 +46,16 @@ t4.join(t6, "id").foreach(_ => ())
 
 The above join query is a fine example of a spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] (aka _SortMergeJoin_) of two spark-sql-SparkPlan-FileSourceScanExec.md[FileSourceScanExecs] (aka _Scan_). The join query uses spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators (aka _Exchange_) to shuffle the table datasets for the SortMergeJoin.
 
-.SortMergeJoin of FileScans (Details for Query)
-image::images/spark-sql-bucketing-sortmergejoin-filescans.png[align="center"]
+![SortMergeJoin of FileScans (Details for Query)](images/spark-sql-bucketing-sortmergejoin-filescans.png)
 
-One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWrite.saveAsTable] or simply available in a [catalog](Catalog.md) by SparkSession.md#table[SparkSession.table].
+One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources, e.g. Parquet, ORC, JSON, CSV, that are saved as a table using [DataFrameWrite.saveAsTable](DataFrameWriter.md#saveAsTable) or simply available in a [catalog](Catalog.md) by [SparkSession.table](SparkSession.md#table).
 
-NOTE: Bucketing spark-sql-DataFrameWriter.md#assertNotBucketed[is not supported] for spark-sql-DataFrameWriter.md#save[DataFrameWriter.save], spark-sql-DataFrameWriter.md#insertInto[DataFrameWriter.insertInto] and spark-sql-DataFrameWriter.md#jdbc[DataFrameWriter.jdbc] methods.
+!!! note
+    [Bucketing is not supported](DataFrameWriter.md#assertNotBucketed) for [DataFrameWriter.save](DataFrameWriter.md#save), [DataFrameWriter.insertInto](DataFrameWriter.md#insertInto) and [DataFrameWriter.jdbc](DataFrameWriter.md#jdbc) methods.
 
-You use spark-sql-DataFrameWriter.md#bucketBy[DataFrameWriter.bucketBy] method to specify the number of buckets and the bucketing columns.
+[DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) method is used to specify the number of buckets and the bucketing columns.
 
-You can optionally sort the output rows in buckets using spark-sql-DataFrameWriter.md#sortBy[DataFrameWriter.sortBy] method.
+You can optionally sort the output rows in buckets using [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) method.
 
 [source, scala]
 ----
@@ -65,7 +65,8 @@ people.write
   .saveAsTable("people_bucketed")
 ----
 
-NOTE: spark-sql-DataFrameWriter.md#bucketBy[DataFrameWriter.bucketBy] and spark-sql-DataFrameWriter.md#sortBy[DataFrameWriter.sortBy] simply set respective internal properties that eventually become a spark-sql-BucketSpec.md[bucketing specification].
+!!! note
+    [DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) and [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) simply set respective internal properties that eventually become a [bucketing specification](spark-sql-BucketSpec.md).
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 

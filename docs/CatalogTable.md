@@ -30,7 +30,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `HiveClientImpl` is requested for hive/HiveClientImpl.md#getTableOption[looking up a table in a metastore]
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#createTable[create a table]
+* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable)
 
 * hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] logical command is executed
 
@@ -72,7 +72,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical command is executed
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#createTable, create a table>> (via <<spark-sql-DataFrameWriter.md#saveAsTable, saveAsTable>>)
+* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable) (via [saveAsTable](DataFrameWriter.md#saveAsTable))
 
 * `SparkSqlAstBuilder` is requested to <<spark-sql-SparkSqlAstBuilder.md#visitCreateTable, visitCreateTable>> and <<spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable, visitCreateHiveTable>>
 

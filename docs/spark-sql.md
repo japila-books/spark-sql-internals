@@ -28,7 +28,7 @@ A `Dataset` is a programming interface to the [structured query execution pipeli
 
 Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 
-When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-operators.md#show[show] or spark-sql-dataset-operators.md#count[count], or indirectly, e.g. spark-sql-DataFrameWriter.md#save[save] or spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable]) the structured query (behind `Dataset`) goes through the [execution stages](QueryExecution.md#execution-pipeline):
+When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-operators.md#show[show] or spark-sql-dataset-operators.md#count[count], or indirectly, e.g. [save](DataFrameWriter.md#save) or [saveAsTable](DataFrameWriter.md#saveAsTable)) the structured query (behind `Dataset`) goes through the [execution stages](QueryExecution.md#execution-pipeline):
 
 1. [Logical Analysis](QueryExecution.md#analyzed)
 1. [Caching Replacement](QueryExecution.md#withCachedData)
@@ -148,7 +148,7 @@ Spark SQL comes with the different APIs to work with:
 3. Non-programmers will likely use SQL as their query language through direct integration with Hive
 4. JDBC/ODBC fans can use JDBC interface (through spark-sql-thrift-server.md[Thrift JDBC/ODBC Server]) and connect their tools to Spark's distributed query engine.
 
-Spark SQL comes with a uniform interface for data access in distributed storage systems like Cassandra or HDFS (Hive, Parquet, JSON) using specialized [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](spark-sql-DataFrameWriter.md) objects.
+Spark SQL comes with a uniform interface for data access in distributed storage systems like Cassandra or HDFS (Hive, Parquet, JSON) using specialized [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) objects.
 
 Spark SQL allows you to execute SQL-like queries on large volume of data that can live in Hadoop HDFS or Hadoop-compatible file systems like S3. It can access data from different data sources - files or tables.
 

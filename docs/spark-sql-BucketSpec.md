@@ -1,9 +1,7 @@
-title: BucketSpec
-
-# BucketSpec -- Bucketing Specification of Table
+# BucketSpec
 
 [[creating-instance]]
-`BucketSpec` is the *bucketing specification* of a table, i.e. the metadata of the spark-sql-bucketing.md[bucketing] of a table.
+`BucketSpec` is the **bucketing specification** of a table, i.e. the metadata of the spark-sql-bucketing.md[bucketing] of a table.
 
 `BucketSpec` includes the following:
 
@@ -15,7 +13,7 @@ The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusi
 
 `BucketSpec` is <<creating-instance, created>> when:
 
-. `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#saveAsTable[saveAsTable] (and does spark-sql-DataFrameWriter.md#getBucketSpec[getBucketSpec])
+. `DataFrameWriter` is requested to [saveAsTable](DataFrameWriter.md#saveAsTable) (and does [getBucketSpec](DataFrameWriter.md#getBucketSpec))
 
 . `HiveExternalCatalog` is requested to [getBucketSpecFromTableProperties](hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties) and [tableMetaToTableProps](hive/HiveExternalCatalog.md#tableMetaToTableProps)
 

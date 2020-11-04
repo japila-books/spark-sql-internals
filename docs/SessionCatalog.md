@@ -491,20 +491,17 @@ dropTable(
 
 `dropTable`...FIXME
 
-[NOTE]
-====
 `dropTable` is used when:
 
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>>
+* [CreateViewCommand](logical-operators/CreateViewCommand.md) logical command is executed
 
-* `DropTableCommand` logical command is <<spark-sql-LogicalPlan-DropTableCommand.md#run, executed>>
+* [DropTableCommand](logical-operators/DropTableCommand.md) logical command is executed
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveAsTable, save a DataFrame to a table>> (with `Overwrite` save mode)
+* `DataFrameWriter` is requested to [save a DataFrame to a table](DataFrameWriter.md#saveAsTable) (with `Overwrite` save mode)
 
-* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
+* [CreateHiveTableAsSelectCommand](hive/CreateHiveTableAsSelectCommand.md) logical command is executed
 
-* `SessionCatalog` is requested to <<reset, reset>>
-====
+* `SessionCatalog` is requested to [reset](#reset)
 
 === [[getGlobalTempView]] Looking Up Global Temporary View by Name -- `getGlobalTempView` Method
 

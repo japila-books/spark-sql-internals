@@ -1,6 +1,6 @@
 # DataSource &mdash; Pluggable Data Provider Framework
 
-`DataSource` paves the way for *Pluggable Data Provider Framework* (_Data Source API_) in Spark SQL.
+`DataSource` paves the way for **Pluggable Data Provider Framework** (_Data Source API_) in Spark SQL.
 
 Together with the <<providers, provider interfaces>>, `DataSource` allows Spark SQL integrators to use external data systems as data sources and sinks in structured queries in Spark SQL (incl. Spark Structured Streaming).
 
@@ -43,9 +43,9 @@ NOTE: Data source is also called a *table provider*.
 
 * `DataFrameReader` is requested to [load data from a data source (Data Source V1)](DataFrameReader.md#loadV1Source)
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#saveToV1Source[save to a data source (Data Source V1)]
+* `DataFrameWriter` is requested to [save to a data source (Data Source V1)](DataFrameWriter.md#saveToV1Source)
 
-* spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand], spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand], spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand], spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] commands are executed
+* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md), [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md), [CreateTempViewUsing](logical-operators/CreateTempViewUsing.md) commands are executed
 
 * [FindDataSourceTable](logical-analysis-rules/FindDataSourceTable.md) and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rules are executed
 
@@ -131,15 +131,14 @@ If a single `DataSourceRegister` provider class is found, `lookupDataSource` sim
 
 If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the <<lookupDataSource-provider1, provider1>> name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the <<lookupDataSource-provider2, provider2>> name (aka _DefaultSource_) instead.
 
-NOTE: spark-sql-DataFrameWriter.md#format[DataFrameWriter.format] and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
+!!! note
+    [DataFrameWriter.format](DataFrameWriter.md#format) and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
 
-.Demo: Resolving Data Source by Name
-[source, scala]
-----
+```text
 import org.apache.spark.sql.execution.datasources.DataSource
 val source = "parquet"
 val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
-----
+```
 
 CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
@@ -147,7 +146,7 @@ CAUTION: FIXME Describe error paths (`case Failure(error)` and `case sources`).
 
 * [DataFrameReader.load](DataFrameReader.md#load) operator is used (to create a source node)
 
-* spark-sql-DataFrameWriter.md#save[DataFrameWriter.save] operator is used (to create a sink node)
+* [DataFrameWriter.save](DataFrameWriter.md#save) operator is used (to create a sink node)
 
 * (Structured Streaming) `DataStreamReader.load` operator is used
 
@@ -326,7 +325,7 @@ planForWriting(
 
 `planForWriting` is used when:
 
-* `DataFrameWriter` is requested to [save (to a data source V1](spark-sql-DataFrameWriter.md#saveToV1Source)
+* `DataFrameWriter` is requested to [save (to a data source V1](DataFrameWriter.md#saveToV1Source)
 * [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed
 
 ## <span id="writeAndRead"> Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation)
@@ -374,7 +373,7 @@ Expected exactly one path to be specified, but got: [allPaths]
 
 * [Writing data to a data source followed by "reading" rows back](#writeAndRead) (for [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) logical command)
 
-* [Creating a logical command for writing](#planForWriting) (for [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command and [DataFrameWriter.save](spark-sql-DataFrameWriter.md#save) operator with DataSource V1 data sources)
+* [Creating a logical command for writing](#planForWriting) (for [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command and [DataFrameWriter.save](DataFrameWriter.md#save) operator with DataSource V1 data sources)
 
 ## <span id="getOrInferFileFormatSchema"> getOrInferFileFormatSchema
 

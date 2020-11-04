@@ -45,11 +45,11 @@ NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableC
 
 In the end, `run` returns an empty `Seq[Row]` (just to follow the signature and please the Scala compiler).
 
-=== [[creating-instance]] Creating SaveIntoDataSourceCommand Instance
+## Creating Instance
 
 `SaveIntoDataSourceCommand` takes the following when created:
 
-* [[query]] <<spark-sql-LogicalPlan.md#, Logical query plan>>
-* [[dataSource]] <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>> data source
+* [[query]] [Logical query plan](LogicalPlan.md)
+* [[dataSource]] [CreatableRelationProvider](../spark-sql-CreatableRelationProvider.md) data source
 * [[options]] Options (as `Map[String, String]`)
-* [[mode]] <<spark-sql-DataFrameWriter.md#SaveMode, SaveMode>>
+* [[mode]] [SaveMode](../DataFrameWriter.md#SaveMode)

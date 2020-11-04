@@ -1,6 +1,4 @@
-title: DataFrameWriter
-
-# DataFrameWriter -- Saving Data To External Data Sources
+# DataFrameWriter
 
 `DataFrameWriter` is the <<methods, interface>> to describe how data (as the result of executing a structured query) should be <<save, saved to an external data source>>.
 
@@ -112,17 +110,6 @@ a| [[partitionBy]]
 ----
 partitionBy(colNames: String*): DataFrameWriter[T]
 ----
-
-| <<save-internals, save>>
-a| [[save]]
-
-[source, scala]
-----
-save(): Unit
-save(path: String): Unit
-----
-
-Saves a `DataFrame` (i.e. writes the result of executing a structured query) to the <<source, data source>>
 
 | <<saveAsTable-internals, saveAsTable>>
 a| [[saveAsTable]]
@@ -307,14 +294,15 @@ In the end, `saveAsTable` branches off per whether the table exists or not and t
 | <<createTable, createTable>>
 |===
 
-=== [[save-internals]] Saving Rows of Structured Query (DataFrame) to Data Source -- `save` Method
+## <span id="save"> Saving Rows of Structured Query (DataFrame) to Data Source
 
-[source, scala]
-----
+```scala
 save(): Unit
-----
+save(
+  path: String): Unit
+```
 
-`save` saves the rows of a structured query (a <<Dataset.md#, Dataset>>) to a data source.
+Saves a `DataFrame` (the result of executing a structured query) to a data source.
 
 Internally, `save` uses `DataSource` to [look up the class of the requested data source](DataSource.md#lookupDataSource) (for the [source](#source) option and the [SQLConf](SessionState.md#conf)).
 

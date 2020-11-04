@@ -5,7 +5,7 @@
 [[shortName]]
 `HiveFileFormat` is a [DataSourceRegister](../spark-sql-DataSourceRegister.md) and [registers](../spark-sql-DataSourceRegister.md#shortName) itself as **hive** data source.
 
-NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use [DataFrameReader.table](../DataFrameReader.md#table) to load from or ../spark-sql-DataFrameWriter.md#saveAsTable[DataFrameWriter.saveAsTable] to write data to a Hive table.
+NOTE: Hive data source can only be used with tables and you cannot read or write files of Hive data source directly. Use [DataFrameReader.table](../DataFrameReader.md#table) to load from or [DataFrameWriter.saveAsTable](../DataFrameWriter.md#saveAsTable) to write data to a Hive table.
 
 `HiveFileFormat` is <<creating-instance, created>> exclusively when `SaveAsHiveFile` is requested to ../hive/SaveAsHiveFile.md#saveAsHiveFile[saveAsHiveFile] (when InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed).
 

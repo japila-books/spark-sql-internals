@@ -82,7 +82,7 @@ Used when:
 
 * `DataFrameReader` is requested to [load](../../DataFrameReader.md#load) (for [SupportsCatalogOptions](SupportsCatalogOptions.md) providers)
 
-* `DataFrameWriter` is requested to [save](../../spark-sql-DataFrameWriter.md#save), [insertInto](../../spark-sql-DataFrameWriter.md#insertInto) and [saveAsTable](../../spark-sql-DataFrameWriter.md#saveAsTable)
+* `DataFrameWriter` is requested to [save](../../DataFrameWriter.md#save), [insertInto](../../DataFrameWriter.md#insertInto) and [saveAsTable](../../DataFrameWriter.md#saveAsTable)
 
 * `V2SessionCatalog` is requested to [createTable](../../V2SessionCatalog.md#createTable), [alterTable](../../V2SessionCatalog.md#alterTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
 

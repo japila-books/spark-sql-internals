@@ -47,7 +47,7 @@ scala> spark.table(tableName).show
 * [[tableDesc]] [CatalogTable](../CatalogTable.md)
 * [[query]] Structured query (as a [LogicalPlan](../logical-operators/LogicalPlan.md))
 * [[outputColumnNames]] Names of the output columns
-* [[mode]] [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* [[mode]] [SaveMode](../DataFrameWriter.md#SaveMode)
 
 === [[run]] Executing Data-Writing Logical Command -- `run` Method
 

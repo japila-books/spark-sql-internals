@@ -1,5 +1,3 @@
-title: DataSourceV2Utils
-
 # DataSourceV2Utils Helper Object
 
 [[extractSessionConfigs]]
@@ -18,15 +16,12 @@ NOTE: `extractSessionConfigs` supports data sources with <<spark-sql-SessionConf
 
 `extractSessionConfigs` returns the matching keys with the *spark.datasource.[keyPrefix]* prefix removed (i.e. `spark.datasource.keyPrefix.k1` becomes `k1`).
 
-[NOTE]
-====
 `extractSessionConfigs` is used when:
 
 * `DataFrameReader` is requested to ["load" data as a DataFrame](DataFrameReader.md#load) (for a [DataSourceV2](spark-sql-DataSourceV2.md) with [ReadSupport](spark-sql-ReadSupport.md))
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, saves a DataFrame to a data source>> (for a <<spark-sql-DataSourceV2.md#, DataSourceV2>> with <<spark-sql-WriteSupport.md#, WriteSupport>>)
+* `DataFrameWriter` is requested to [saves a DataFrame to a data source](DataFrameWriter.md#save) (for a [DataSourceV2](spark-sql-DataSourceV2.md) with [WriteSupport](spark-sql-WriteSupport.md))
 
-* Spark Structured Streaming's `DataStreamReader` is requested to load input data stream (for data sources with `MicroBatchReadSupport` or `ContinuousReadSupport`)
+* (Spark Structured Streaming) `DataStreamReader` is requested to load input data stream (for data sources with `MicroBatchReadSupport` or `ContinuousReadSupport`)
 
-* Spark Structured Streaming's `DataStreamWriter` is requested to start a streaming query (with data sources with `StreamWriteSupport`)
-====
+* (Spark Structured Streaming) `DataStreamWriter` is requested to start a streaming query (with data sources with `StreamWriteSupport`)

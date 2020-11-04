@@ -120,7 +120,7 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
 
-Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` spark-sql-DataFrameWriter.md#saveAsTable[saves a DataFrame to a non-Hive table] or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` is requested to [save a DataFrame to a non-Hive table](../DataFrameWriter.md#saveAsTable) or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
 
 | spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
 | [[CreateDataSourceTableCommand]]
@@ -194,7 +194,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 | SaveIntoDataSourceCommand
 | [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to [write a DataFrame to a data source per save mode](../DataSource.md#write).
 
-Used exclusively when `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#save[save a DataFrame to a data source].
+Used when `DataFrameWriter` is requested to [save a DataFrame to a data source](../DataFrameWriter.md#save).
 
 | SetCommand
 | [[SetCommand]]

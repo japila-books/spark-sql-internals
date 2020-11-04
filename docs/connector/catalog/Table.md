@@ -15,6 +15,10 @@
 Set<TableCapability> capabilities()
 ```
 
+[TableCapabilities](TableCapability.md) of the table
+
+Used when `Table` is asked whether or not it [supports a given capability](TableHelper.md#supports)
+
 ### name
 
 ```java

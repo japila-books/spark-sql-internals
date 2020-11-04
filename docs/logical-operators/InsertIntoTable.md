@@ -1,63 +1,10 @@
-title: InsertIntoTable
-
 # InsertIntoTable Unary Logical Operator
 
-`InsertIntoTable` is an <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents the following high-level operators in a logical plan:
+`InsertIntoTable` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in a logical plan:
 
-* <<INSERT_INTO_TABLE, INSERT INTO>> and <<INSERT_OVERWRITE_TABLE, INSERT OVERWRITE TABLE>> SQL statements
+* [INSERT INTO](#INSERT_INTO_TABLE) and [INSERT OVERWRITE TABLE](#INSERT_OVERWRITE_TABLE) SQL statements
 
-* spark-sql-DataFrameWriter.md#insertInto[DataFrameWriter.insertInto] high-level operator
-
-[source, scala]
-----
-// make sure that the tables are available in a catalog
-sql("CREATE TABLE IF NOT EXISTS t1(id long)")
-sql("CREATE TABLE IF NOT EXISTS t2(id long)")
-
-val q = sql("INSERT INTO TABLE t2 SELECT * from t1 LIMIT 100")
-val plan = q.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 'InsertIntoTable 'UnresolvedRelation `t2`, false, false
-01 +- 'GlobalLimit 100
-02    +- 'LocalLimit 100
-03       +- 'Project [*]
-04          +- 'UnresolvedRelation `t1`
-
-// Dataset API's version of "INSERT OVERWRITE TABLE" in SQL
-spark.range(10).write.mode("overwrite").insertInto("t2")
-----
-
-.INSERT INTO partitioned_table
-[source, scala]
-----
-spark.range(10)
-  .withColumn("p1", 'id % 2)
-  .write
-  .mode("overwrite")
-  .partitionBy("p1")
-  .saveAsTable("partitioned_table")
-
-val insertIntoQ = sql("INSERT INTO TABLE partitioned_table PARTITION (p1 = 4) VALUES 41, 42")
-scala> println(insertIntoQ.queryExecution.logical.numberedTreeString)
-00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), false, false
-01 +- 'UnresolvedInlineTable [col1], [List(41), List(42)]
-----
-
-.INSERT OVERWRITE TABLE partitioned_table
-[source, scala]
-----
-spark.range(10)
-  .withColumn("p1", 'id % 2)
-  .write
-  .mode("overwrite")
-  .partitionBy("p1")
-  .saveAsTable("partitioned_table")
-
-val insertOverwriteQ = sql("INSERT OVERWRITE TABLE partitioned_table PARTITION (p1 = 4) VALUES 40")
-scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
-00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), true, false
-01 +- 'UnresolvedInlineTable [col1], [List(40)]
-----
+* [DataFrameWriter.insertInto](../DataFrameWriter.md#insertInto) high-level operator
 
 `InsertIntoTable` is <<creating-instance, created>> with <<partition, partition keys>> that correspond to the `partitionSpec` part of the following SQL statements:
 
@@ -69,7 +16,7 @@ scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
 
 * <<insertInto, insertInto>> operator from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>>
 
-* <<spark-sql-DataFrameWriter.md#insertInto, DataFrameWriter.insertInto>> operator
+* [DataFrameWriter.insertInto](../DataFrameWriter.md#insertInto) operator
 
 [[resolved]]
 `InsertIntoTable` can never be spark-sql-LogicalPlan.md#resolved[resolved] (i.e. `InsertIntoTable` should not be part of a logical plan after analysis and is supposed to be <<logical-conversions, converted to logical commands>> at analysis phase).
@@ -100,14 +47,14 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 
 * [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO` or `INSERT OVERWRITE TABLE` SQL statements are executed (as a spark-sql-AstBuilder.md#visitSingleInsertQuery[single insert] or a spark-sql-AstBuilder.md#visitMultiInsertQuery[multi-insert] query)
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#insertInto[insert a DataFrame into a table]
+* `DataFrameWriter` is requested to [insert a DataFrame into a table](../DataFrameWriter.md#insertInto)
 
 * `RelationConversions` logical evaluation rule is hive/RelationConversions.md#apply[executed] (and transforms `InsertIntoTable` operators)
 
 * hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
 
 [[output]]
-`InsertIntoTable` has an empty <<catalyst/QueryPlan.md#output, output schema>>.
+`InsertIntoTable` has an empty [output schema](../catalyst/QueryPlan.md#output).
 
 === [[catalyst-dsl]][[insertInto]] Catalyst DSL -- `insertInto` Operator
 
@@ -254,3 +201,55 @@ org.apache.spark.sql.AnalysisException: Inserting into an RDD-based table is not
   at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:308)
   ... 49 elided
 ----
+
+## Demo
+
+```text
+// make sure that the tables are available in a catalog
+sql("CREATE TABLE IF NOT EXISTS t1(id long)")
+sql("CREATE TABLE IF NOT EXISTS t2(id long)")
+
+val q = sql("INSERT INTO TABLE t2 SELECT * from t1 LIMIT 100")
+val plan = q.queryExecution.logical
+scala> println(plan.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `t2`, false, false
+01 +- 'GlobalLimit 100
+02    +- 'LocalLimit 100
+03       +- 'Project [*]
+04          +- 'UnresolvedRelation `t1`
+
+// Dataset API's version of "INSERT OVERWRITE TABLE" in SQL
+spark.range(10).write.mode("overwrite").insertInto("t2")
+```
+
+## Demo: INSERT INTO partitioned_table
+
+```text
+spark.range(10)
+  .withColumn("p1", 'id % 2)
+  .write
+  .mode("overwrite")
+  .partitionBy("p1")
+  .saveAsTable("partitioned_table")
+
+val insertIntoQ = sql("INSERT INTO TABLE partitioned_table PARTITION (p1 = 4) VALUES 41, 42")
+scala> println(insertIntoQ.queryExecution.logical.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), false, false
+01 +- 'UnresolvedInlineTable [col1], [List(41), List(42)]
+```
+
+## Demo: INSERT OVERWRITE TABLE partitioned_table
+
+```text
+spark.range(10)
+  .withColumn("p1", 'id % 2)
+  .write
+  .mode("overwrite")
+  .partitionBy("p1")
+  .saveAsTable("partitioned_table")
+
+val insertOverwriteQ = sql("INSERT OVERWRITE TABLE partitioned_table PARTITION (p1 = 4) VALUES 40")
+scala> println(insertOverwriteQ.queryExecution.logical.numberedTreeString)
+00 'InsertIntoTable 'UnresolvedRelation `partitioned_table`, Map(p1 -> Some(4)), true, false
+01 +- 'UnresolvedInlineTable [col1], [List(40)]
+```

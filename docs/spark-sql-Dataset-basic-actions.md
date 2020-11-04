@@ -212,7 +212,7 @@ a|
 write: DataFrameWriter[T]
 ----
 
-Returns a <<spark-sql-DataFrameWriter.md#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
+Returns a [DataFrameWriter](DataFrameWriter.md) for saving the content of the (non-streaming) `Dataset` out to an external storage
 |===
 
 === [[checkpoint]] Reliably Checkpointing Dataset -- `checkpoint` Basic Action
@@ -462,21 +462,20 @@ Internally, `unpersist` requests `CacheManager` to [uncache the query](CacheMana
 
 CAUTION: FIXME
 
-=== [[write]] Accessing DataFrameWriter (to Describe Writing Dataset) -- `write` Basic Action
+## <span id="write"> Accessing DataFrameWriter (to Describe Writing Dataset)
 
 [source, scala]
 ----
 write: DataFrameWriter[T]
 ----
 
-`write` gives spark-sql-DataFrameWriter.md[DataFrameWriter] for records of type `T`.
+`write` gives [DataFrameWriter](DataFrameWriter.md) for records of type `T`.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.{DataFrameWriter, Dataset}
 val ints: Dataset[Int] = (0 to 5).toDS
 val writer: DataFrameWriter[Int] = ints.write
-----
+```
 
 === [[isEmpty]] `isEmpty` Typed Transformation
 

@@ -81,18 +81,15 @@ In addition, the `QueryExecution` variant posts spark-sql-SQLListener.md#SparkLi
 
 NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 
-[NOTE]
-====
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to <<Dataset.md#withNewExecutionId, Dataset.withNewExecutionId>> and <<Dataset.md#withAction, withAction>>
+* `Dataset` is requested to [Dataset.withNewExecutionId](Dataset.md#withNewExecutionId) and [Dataset.withAction](Dataset.md#withAction)
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a command]
+* `DataFrameWriter` is requested to [run a command](DataFrameWriter.md#runCommand)
 
-* Spark Structured Streaming's `StreamExecution` commits a batch to a streaming sink
+* (Spark Structured Streaming) `StreamExecution` commits a batch to a streaming sink
 
-* Spark Thrift Server's `SparkSQLDriver` runs a command
-====
+* (Spark Thrift Server) `SparkSQLDriver` runs a command
 
 === [[getQueryExecution]] Finding QueryExecution for Execution ID -- `getQueryExecution` Method
 

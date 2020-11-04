@@ -14,7 +14,7 @@
 * <span id="fileFormat"> [FileFormat](../FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
-* <span id="mode"> [SaveMode](../spark-sql-DataFrameWriter.md#SaveMode)
+* <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)
 * <span id="catalogTable"> [CatalogTable](../CatalogTable.md) if available
 * <span id="fileIndex"> [FileIndex](../FileIndex.md) if defined
 * <span id="outputColumnNames"> Names of the output columns

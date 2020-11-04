@@ -1,6 +1,4 @@
-title: JDBCRelation
-
-# JDBCRelation -- Relation with Inserting or Overwriting Data, Column Pruning and Filter Pushdown
+# JDBCRelation
 
 `JDBCRelation` is a <<BaseRelation, BaseRelation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
 
@@ -82,11 +80,12 @@ insert(data: DataFrame, overwrite: Boolean): Unit
 
 NOTE: `insert` is part of <<spark-sql-InsertableRelation.md#insert, InsertableRelation Contract>> that inserts or overwrites data in a <<spark-sql-BaseRelation.md#, relation>>.
 
-`insert` simply requests the input `DataFrame` for a <<spark-sql-dataset-operators.md#write, DataFrameWriter>> that in turn is requested to <<spark-sql-DataFrameWriter.md#jdbc, save the data to a table using the JDBC data source>> (itself!) with the <<spark-sql-JDBCOptions.md#url, url>>, <<spark-sql-JDBCOptions.md#table, table>> and <<spark-sql-JDBCOptions.md#asProperties, all options>>.
+`insert` simply requests the input `DataFrame` for a <<spark-sql-dataset-operators.md#write, DataFrameWriter>> that in turn is requested to [save the data to a table using the JDBC data source](DataFrameWriter.md#jdbc) (itself!) with the [url](spark-sql-JDBCOptions.md#url), [table](spark-sql-JDBCOptions.md#table) and [all options](spark-sql-JDBCOptions.md#asProperties).
 
-`insert` also requests the `DataFrameWriter` to <<spark-sql-DataFrameWriter.md#mode, set the save mode>> as <<spark-sql-DataFrameWriter.md#Overwrite, Overwrite>> or <<spark-sql-DataFrameWriter.md#Append, Append>> per the input `overwrite` flag.
+`insert` also requests the `DataFrameWriter` to [set the save mode](DataFrameWriter.md#mode) as [Overwrite](DataFrameWriter.md#Overwrite) or [Append](DataFrameWriter.md#Append) per the input `overwrite` flag.
 
-NOTE: `insert` uses a "trick" to reuse a code that is responsible for <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, saving data to a JDBC table>>.
+!!! note
+    `insert` uses a "trick" to reuse a code that is responsible for [saving data to a JDBC table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider).
 
 === [[buildScan]] Building Distributed Data Scan with Column Pruning and Filter Pushdown -- `buildScan` Method
 

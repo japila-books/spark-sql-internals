@@ -1,6 +1,4 @@
-title: CreatableRelationProvider
-
-# CreatableRelationProvider -- Data Sources That Write Rows Differently Per Save Mode
+# CreatableRelationProvider
 
 `CreatableRelationProvider` is the <<contract, abstraction>> of <<implementations, data source providers>> that can <<createRelation, write the rows of a structured query (a DataFrame) differently per save mode>>.
 
@@ -23,7 +21,7 @@ createRelation(
   data: DataFrame): BaseRelation
 ----
 
-Creates a <<spark-sql-BaseRelation.md#, BaseRelation>> that represents the rows of a structured query (a DataFrame) saved to an external data source (per <<spark-sql-DataFrameWriter.md#SaveMode, SaveMode>>)
+Creates a [BaseRelation](spark-sql-BaseRelation.md) that represents the rows of a structured query (a DataFrame) saved to an external data source (per [SaveMode](DataFrameWriter.md#SaveMode))
 
 The save mode specifies what should happen when the target relation (destination) already exists.
 

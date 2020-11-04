@@ -18,11 +18,11 @@ Table or view not found: [tableIdentifier]
 
 * `SparkSession` is requested to SparkSession.md#table[create a DataFrame from a table]
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#insertInto[insert a DataFrame into a table]
+* `DataFrameWriter` is requested to [insert a DataFrame into a table](../DataFrameWriter.md#insertInto)
 
-* `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are InsertIntoTable.md#INSERT_INTO_TABLE[executed]
+* `INSERT INTO (TABLE)` or `INSERT OVERWRITE TABLE` SQL commands are [executed](InsertIntoTable.md#INSERT_INTO_TABLE)
 
-* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command is executed
+* [CreateHiveTableAsSelectCommand](../hive/CreateHiveTableAsSelectCommand.md) logical command is executed
 
 [TIP]
 ====

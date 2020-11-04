@@ -67,41 +67,39 @@ clear(): Unit
 [[listeners]]
 `ExecutionListenerManager` uses `listeners` internal registry for registered <<spark-sql-QueryExecutionListener.md#, QueryExecutionListeners>>.
 
-=== [[onSuccess]] `onSuccess` Internal Method
+## <span id="onSuccess"> onSuccess Internal Method
 
-[source, scala]
-----
-onSuccess(funcName: String, qe: QueryExecution, duration: Long): Unit
-----
+```scala
+onSuccess(
+  funcName: String,
+  qe: QueryExecution,
+  duration: Long): Unit
+```
 
 `onSuccess`...FIXME
 
-[NOTE]
-====
 `onSuccess` is used when:
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has finished with no exceptions)
+* `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has finished with no exceptions)
 
-* `Dataset` is requested to Dataset.md#withAction[withAction]
-====
+* `Dataset` is requested to [withAction](Dataset.md#withAction)
 
-=== [[onFailure]] `onFailure` Internal Method
+## <span id="onFailure"> onFailure Internal Method
 
-[source, scala]
-----
-onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit
-----
+```scala
+onFailure(
+  funcName: String,
+  qe: QueryExecution,
+  exception: Exception): Unit
+```
 
 `onFailure`...FIXME
 
-[NOTE]
-====
 `onFailure` is used when:
 
-* `DataFrameWriter` is requested to spark-sql-DataFrameWriter.md#runCommand[run a logical command] (after it has reported an exception)
+* `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has reported an exception)
 
-* `Dataset` is requested to Dataset.md#withAction[withAction]
-====
+* `Dataset` is requested to [withAction](Dataset.md#withAction)
 
 === [[withErrorHandling]] `withErrorHandling` Internal Method
 

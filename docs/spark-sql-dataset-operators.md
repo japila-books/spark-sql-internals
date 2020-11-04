@@ -880,5 +880,5 @@ a| [[write]]
 write: DataFrameWriter[T]
 ----
 
-A basic action that returns a <<spark-sql-DataFrameWriter.md#, DataFrameWriter>> for saving the content of the (non-streaming) `Dataset` out to an external storage
+A basic action that returns a [DataFrameWriter](DataFrameWriter.md) for saving the content of the (non-streaming) `Dataset` out to an external storage
 |===

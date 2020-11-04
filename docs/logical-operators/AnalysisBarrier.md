@@ -1,8 +1,6 @@
-title: AnalysisBarrier
+# AnalysisBarrier Leaf Logical Operator
 
-# AnalysisBarrier Leaf Logical Operator -- Hiding Child Query Plan in Analysis
-
-`AnalysisBarrier` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that is a wrapper of an <<child, analyzed logical plan>> to hide it from the Spark Analyzer. The purpose of `AnalysisBarrier` is to prevent the child logical plan from being analyzed again (and increasing the time spent on query analysis).
+`AnalysisBarrier` is a [leaf logical operator](LeafNode.md) that is a wrapper of an <<child, analyzed logical plan>> to hide it from the Spark Analyzer. The purpose of `AnalysisBarrier` is to prevent the child logical plan from being analyzed again (and increasing the time spent on query analysis).
 
 `AnalysisBarrier` is <<creating-instance, created>> when:
 
@@ -10,11 +8,11 @@ title: AnalysisBarrier
 
 * `ResolveMissingReferences` logical resolution rule is requested to [resolveExprsAndAddMissingAttrs](../logical-analysis-rules/ResolveMissingReferences.md#resolveExprsAndAddMissingAttrs)
 
-* `Dataset` is <<Dataset.md#planWithBarrier, created>>
+* `Dataset` is [created](../Dataset.md#planWithBarrier)
 
-* `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#saveToV1Source, execute a logical command for writing to a data source V1>> (when `DataFrameWriter` is requested to <<spark-sql-DataFrameWriter.md#save, save the rows of a structured query (a DataFrame) to a data source>>)
+* `DataFrameWriter` is requested to [execute a logical command for writing to a data source V1](../DataFrameWriter.md#saveToV1Source) (when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](../DataFrameWriter.md#save))
 
-* `KeyValueGroupedDataset` is requested for the <<spark-sql-KeyValueGroupedDataset.md#logicalPlan, logical query plan>>
+* `KeyValueGroupedDataset` is requested for the [logical query plan](../spark-sql-KeyValueGroupedDataset.md#logicalPlan)
 
 [[child]]
 [[creating-instance]]
