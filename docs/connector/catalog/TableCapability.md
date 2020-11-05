@@ -12,6 +12,13 @@
 
 ## <span id="MICRO_BATCH_READ"> MICRO_BATCH_READ
 
+Marks the table to support reads / scans in micro-batch streaming execution mode
+
+Used when:
+
+* `MicroBatchExecution` stream execution engine is requested for a logical query plan
+* `DataStreamReader` is requested to load data
+
 ## <span id="OVERWRITE_BY_FILTER"> OVERWRITE_BY_FILTER
 
 ## <span id="OVERWRITE_DYNAMIC"> OVERWRITE_DYNAMIC
