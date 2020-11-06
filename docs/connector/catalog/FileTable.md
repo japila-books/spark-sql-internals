@@ -1,6 +1,6 @@
 # FileTable
 
-`FileTable` is an [extension](#contract) of the [Table](Table.md) abstraction for [file-backed tables](#implementations) with support for [read](SupportsRead.md) and [write](SupportsWrite.md).
+`FileTable` is an [extension](#contract) of the [Table](../Table.md) abstraction for [file-backed tables](#implementations) with support for [read](SupportsRead.md) and [write](SupportsWrite.md).
 
 ## Contract
 
@@ -69,7 +69,7 @@ capabilities: java.util.Set[TableCapability]
 
 `capabilities` is `BATCH_READ`, `BATCH_WRITE` and `TRUNCATE`.
 
-`capabilities` is part of the [Table](Table.md#capabilities) abstraction.
+`capabilities` is part of the [Table](../Table.md#capabilities) abstraction.
 
 ## dataSchema
 
@@ -99,7 +99,7 @@ partitioning: Array[Transform]
 
 `partitioning`...FIXME
 
-`partitioning` is part of the [Table](Table.md#partitioning) abstraction.
+`partitioning` is part of the [Table](../Table.md#partitioning) abstraction.
 
 ## properties
 
@@ -109,7 +109,7 @@ properties: util.Map[String, String]
 
 `properties` is simply the [options](#options).
 
-`properties` is part of the [Table](Table.md#properties) abstraction.
+`properties` is part of the [Table](../Table.md#properties) abstraction.
 
 ## schema
 
@@ -119,4 +119,4 @@ schema: StructType
 
 `schema`...FIXME
 
-`schema` is part of the [Table](Table.md#schema) abstraction.
+`schema` is part of the [Table](../Table.md#schema) abstraction.

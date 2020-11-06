@@ -1,6 +1,4 @@
-title: DataSourceV2
-
-# DataSourceV2 -- Data Sources in DataSource V2
+# DataSourceV2 &mdash; Data Sources in DataSource V2
 
 `DataSourceV2` is the fundamental abstraction of the <<implementations, data sources>> in the [DataSource V2](new-and-noteworthy/datasource-v2.md).
 
@@ -68,7 +66,7 @@ In other words, using the contract is as treading on thin ice.
 | ReadSupportWithSchema
 | [[ReadSupportWithSchema]]
 
-| <<spark-sql-SessionConfigSupport.md#, SessionConfigSupport>>
+| [SessionConfigSupport](connector/SessionConfigSupport.md)
 | [[SessionConfigSupport]]
 
 | StreamWriteSupport

@@ -90,6 +90,27 @@ google_analytics:
 nav:
   - Home:
     - Welcome: index.md
+    - Connector API:
+      - Table: connector/Table.md
+      - TableCapability: connector/TableCapability.md
+      - TableProvider: connector/TableProvider.md
+      - Scan: connector/Scan.md
+      - Batch: connector/Batch.md
+      - SupportsReportStatistics: connector/SupportsReportStatistics.md
+      - PartitionReaderFactory: connector/PartitionReaderFactory.md
+      - PartitionReader: connector/PartitionReader.md
+      - InputPartition: connector/InputPartition.md
+      - FileTable: connector/catalog/FileTable.md
+      - KafkaTable: connector/catalog/KafkaTable.md
+      - NoopTable: connector/catalog/NoopTable.md
+      - StagedTable: connector/catalog/StagedTable.md
+      - SupportsRead: connector/catalog/SupportsRead.md
+      - SupportsWrite: connector/catalog/SupportsWrite.md
+      - V1Table: connector/catalog/V1Table.md
+      - TableHelper: connector/TableHelper.md
+      - SessionConfigSupport: connector/SessionConfigSupport.md
+      - SimpleTableProvider: connector/SimpleTableProvider.md
+      - Transform: connector/Transform.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
@@ -193,7 +214,7 @@ nav:
         - logical-operators/InsertIntoDataSourceDirCommand.md
         - logical-operators/InsertIntoDir.md
         - logical-operators/InsertIntoHadoopFsRelationCommand.md
-        - logical-operators/InsertIntoTable.md
+        - InsertIntoTable: logical-operators/InsertIntoTable.md
         - logical-operators/Intersect.md
         - logical-operators/Join.md
         - logical-operators/LocalRelation.md
@@ -224,7 +245,7 @@ nav:
         - logical-operators/Union.md
         - logical-operators/UnresolvedCatalogRelation.md
         - logical-operators/UnresolvedHint.md
-        - logical-operators/UnresolvedInlineTable.md
+        - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
         - logical-operators/UnresolvedRelation.md
         - logical-operators/UnresolvedTableValuedFunction.md
         - UseStatement: logical-operators/UseStatement.md
@@ -363,7 +384,6 @@ nav:
           - spark-sql-SupportsReportStatistics.md
           - spark-sql-SupportsScanColumnarBatch.md
         - spark-sql-DataSourceWriter.md
-        - spark-sql-SessionConfigSupport.md
         - spark-sql-DataWriter.md
         - DataWriterFactory:
           - spark-sql-DataWriterFactory.md
@@ -373,7 +393,6 @@ nav:
           - DataSourceRDD: DataSourceRDD.md
           - spark-sql-DataSourceRDDPartition.md
         - spark-sql-DataWritingSparkTask.md
-        - spark-sql-DataSourceV2Utils.md
       - Data Source API V1:
         - DataSource: DataSource.md
         - spark-sql-datasource-custom-formats.md
@@ -768,25 +787,9 @@ nav:
     - spark-sql-catalyst-dsl.md
   - New in Spark 3.0.0:
     - FileScanBuilder: FileScanBuilder.md
+    - FileDataSourceV2: FileDataSourceV2.md
     - Block: Block.md
     - FileScan: FileScan.md
-    - Connector API:
-      - Table: connector/catalog/Table.md
-      - TableCapability: connector/catalog/TableCapability.md
-      - Scan: connector/Scan.md
-      - Batch: connector/Batch.md
-      - SupportsReportStatistics: connector/SupportsReportStatistics.md
-      - PartitionReaderFactory: connector/PartitionReaderFactory.md
-      - PartitionReader: connector/PartitionReader.md
-      - InputPartition: connector/InputPartition.md
-      - FileTable: connector/catalog/FileTable.md
-      - KafkaTable: connector/catalog/KafkaTable.md
-      - NoopTable: connector/catalog/NoopTable.md
-      - StagedTable: connector/catalog/StagedTable.md
-      - SupportsRead: connector/catalog/SupportsRead.md
-      - SupportsWrite: connector/catalog/SupportsWrite.md
-      - V1Table: connector/catalog/V1Table.md
-      - TableHelper: connector/catalog/TableHelper.md
     - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
     - CreateTableWriter: new-in-300/CreateTableWriter.md
     - WriteConfigMethods: new-in-300/WriteConfigMethods.md
@@ -814,6 +817,7 @@ nav:
     - Spark SQL: spark-sql.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
+    - DataSourceV2Utils: DataSourceV2Utils.md
     - Developing Applications:
       - spark-sql-fundamentals-spark-application-development.md
       - Dataset:

@@ -12,7 +12,7 @@
 
 * [DataSourceWriter](../spark-sql-DataSourceWriter.md)
 
-* [SessionConfigSupport](../spark-sql-SessionConfigSupport.md)
+* [SessionConfigSupport](../connector/SessionConfigSupport.md)
 
 * [DataSourceV2StringFormat](../spark-sql-DataSourceV2StringFormat.md)
 

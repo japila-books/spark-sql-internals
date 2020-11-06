@@ -32,7 +32,7 @@ By default, `toBatch` throws an `UnsupportedOperationException` (with [descripti
 [description]: Batch scan are not supported
 ```
 
-Must be implemented (_overriden_), if the [Table](catalog/Table.md) that created this `Scan` has `BATCH_READ` capability (among the [capabilities](catalog/Table.md#capabilities)).
+Must be implemented (_overriden_), if the [Table](Table.md) that created this `Scan` has `BATCH_READ` capability (among the [capabilities](Table.md#capabilities)).
 
 Used when `BatchScanExec` physical operator is requested for [batch](../physical-operators/BatchScanExec.md#batch).
 

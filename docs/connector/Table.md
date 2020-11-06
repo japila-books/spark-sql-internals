@@ -2,7 +2,7 @@
 
 `Table` is an [abstraction](#contract) of [logical structured data set](#implementations) of data sources:
 
-* a directory or files on a file system (e.g. [FileTable](FileTable.md))
+* a directory or files on a file system
 * a topic of Apache Kafka
 * a table in a catalog
 * _others_
@@ -45,10 +45,10 @@ StructType schema()
 
 ## Implementations
 
-* [FileTable](FileTable.md)
-* [KafkaTable](KafkaTable.md)
-* [NoopTable](NoopTable.md)
-* [StagedTable](StagedTable.md)
-* [SupportsRead](SupportsRead.md)
-* [SupportsWrite](SupportsWrite.md)
-* [V1Table](V1Table.md)
+* [FileTable](catalog/FileTable.md)
+* [KafkaTable](catalog/KafkaTable.md)
+* [NoopTable](catalog/NoopTable.md)
+* [StagedTable](catalog/StagedTable.md)
+* [SupportsRead](catalog/SupportsRead.md)
+* [SupportsWrite](catalog/SupportsWrite.md)
+* [V1Table](catalog/V1Table.md)

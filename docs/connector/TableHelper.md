@@ -45,11 +45,11 @@ supports(
 `supports` is used when:
 
 * `Table` is requested to [supportsAny](#supportsAny)
-* `DataSourceV2Relation` is requested to [skipSchemaResolution](../../logical-operators/DataSourceV2Relation.md#skipSchemaResolution)
-* `DataFrameReader` is requested to [load data](../../DataFrameReader.md#load)
-* `DataFrameWriter` is requested to [save data](../../DataFrameWriter.md#save)
-* [DataSourceV2Strategy](../../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (for [AppendData](../../logical-operators/AppendData.md) and [OverwriteByExpression](../../logical-operators/OverwriteByExpression.md) logical operators)
-* [TableCapabilityCheck](../../logical-analysis-rules/TableCapabilityCheck.md) extended analysis check rule is executed
+* `DataSourceV2Relation` is requested to [skipSchemaResolution](../logical-operators/DataSourceV2Relation.md#skipSchemaResolution)
+* `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
+* `DataFrameWriter` is requested to [save data](../DataFrameWriter.md#save)
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (for [AppendData](../logical-operators/AppendData.md) and [OverwriteByExpression](../logical-operators/OverwriteByExpression.md) logical operators)
+* [TableCapabilityCheck](../logical-analysis-rules/TableCapabilityCheck.md) extended analysis check rule is executed
 * `MicroBatchExecution` (Spark Structured Streaming) is requested for a `LogicalPlan`
 * `ContinuousExecution` (Spark Structured Streaming) is created
 * `DataStreamWriter` (Spark Structured Streaming) is requested to start a streaming query
