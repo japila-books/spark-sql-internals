@@ -1,0 +1,3 @@
+# TextSocketTable
+
+`TextSocketTable` is...FIXME

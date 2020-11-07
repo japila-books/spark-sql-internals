@@ -45,10 +45,10 @@ StructType schema()
 
 ## Implementations
 
-* [FileTable](catalog/FileTable.md)
-* [KafkaTable](catalog/KafkaTable.md)
-* [NoopTable](catalog/NoopTable.md)
-* [StagedTable](catalog/StagedTable.md)
-* [SupportsRead](catalog/SupportsRead.md)
-* [SupportsWrite](catalog/SupportsWrite.md)
-* [V1Table](catalog/V1Table.md)
+* [FileTable](FileTable.md)
+* [KafkaTable](KafkaTable.md)
+* [NoopTable](NoopTable.md)
+* [StagedTable](StagedTable.md)
+* [SupportsRead](SupportsRead.md)
+* [SupportsWrite](SupportsWrite.md)
+* [V1Table](V1Table.md)

@@ -1,0 +1,3 @@
+# RateStreamTable
+
+`RateStreamTable` is...FIXME

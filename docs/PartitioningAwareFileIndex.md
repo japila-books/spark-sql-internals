@@ -59,7 +59,7 @@ allFiles(): Seq[FileStatus]
 
 * `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](DataSource.md#resolveRelation)
 * `PartitioningAwareFileIndex` is requested for [files matching filters](#listFiles), [input files](#inputFiles), and [size](#sizeInBytes)
-* `FileTable` is requested for a [data schema](connector/catalog/FileTable.md#dataSchema)
+* `FileTable` is requested for a [data schema](connector/FileTable.md#dataSchema)
 
 ## <span id="listFiles"> Files Matching Filters
 

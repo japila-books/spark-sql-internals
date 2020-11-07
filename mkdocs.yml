@@ -100,17 +100,21 @@ nav:
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionReader: connector/PartitionReader.md
       - InputPartition: connector/InputPartition.md
-      - FileTable: connector/catalog/FileTable.md
-      - KafkaTable: connector/catalog/KafkaTable.md
-      - NoopTable: connector/catalog/NoopTable.md
-      - StagedTable: connector/catalog/StagedTable.md
-      - SupportsRead: connector/catalog/SupportsRead.md
-      - SupportsWrite: connector/catalog/SupportsWrite.md
-      - V1Table: connector/catalog/V1Table.md
+      - FileTable: connector/FileTable.md
+      - KafkaTable: connector/KafkaTable.md
+      - NoopTable: connector/NoopTable.md
+      - StagedTable: connector/StagedTable.md
+      - SupportsRead: connector/SupportsRead.md
+      - ScanBuilder: connector/ScanBuilder.md
+      - SupportsWrite: connector/SupportsWrite.md
+      - V1Table: connector/V1Table.md
       - TableHelper: connector/TableHelper.md
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
       - Transform: connector/Transform.md
+      - MemoryStreamTable: connector/MemoryStreamTable.md
+      - RateStreamTable: connector/RateStreamTable.md
+      - TextSocketTable: connector/TextSocketTable.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md

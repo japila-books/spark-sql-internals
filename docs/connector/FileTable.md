@@ -1,6 +1,6 @@
 # FileTable
 
-`FileTable` is an [extension](#contract) of the [Table](../Table.md) abstraction for [file-backed tables](#implementations) with support for [read](SupportsRead.md) and [write](SupportsWrite.md).
+`FileTable` is an [extension](#contract) of the [Table](Table.md) abstraction for [file-backed tables](#implementations) with support for [read](SupportsRead.md) and [write](SupportsWrite.md).
 
 ## Contract
 
@@ -36,7 +36,7 @@ supportsDataType(
     dataType: DataType): Boolean = true
 ```
 
-`supportsDataType` indicates whether a given [DataType](../../DataType.md) is supported in read/write path or not.
+`supportsDataType` indicates whether a given [DataType](../DataType.md) is supported in read/write path or not.
 All data types are supported by default.
 
 Used when...FIXME
@@ -54,10 +54,10 @@ Used when...FIXME
 
 `FileTable` takes the following to be created:
 
-* <span id="sparkSession"> [SparkSession](../../SparkSession.md)
+* <span id="sparkSession"> [SparkSession](../SparkSession.md)
 * <span id="options"> Case-Insensitive Map
 * <span id="paths"> Paths
-* <span id="userSpecifiedSchema"> Optional user-defined [schema](../../StructType.md) (`Option[StructType]`)
+* <span id="userSpecifiedSchema"> Optional user-defined [schema](../StructType.md) (`Option[StructType]`)
 
 `FileTable` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileTables](#implementations).
 
@@ -69,7 +69,7 @@ capabilities: java.util.Set[TableCapability]
 
 `capabilities` is `BATCH_READ`, `BATCH_WRITE` and `TRUNCATE`.
 
-`capabilities` is part of the [Table](../Table.md#capabilities) abstraction.
+`capabilities` is part of the [Table](Table.md#capabilities) abstraction.
 
 ## dataSchema
 
@@ -99,7 +99,7 @@ partitioning: Array[Transform]
 
 `partitioning`...FIXME
 
-`partitioning` is part of the [Table](../Table.md#partitioning) abstraction.
+`partitioning` is part of the [Table](Table.md#partitioning) abstraction.
 
 ## properties
 
@@ -109,7 +109,7 @@ properties: util.Map[String, String]
 
 `properties` is simply the [options](#options).
 
-`properties` is part of the [Table](../Table.md#properties) abstraction.
+`properties` is part of the [Table](Table.md#properties) abstraction.
 
 ## schema
 
@@ -119,4 +119,4 @@ schema: StructType
 
 `schema`...FIXME
 
-`schema` is part of the [Table](../Table.md#schema) abstraction.
+`schema` is part of the [Table](Table.md#schema) abstraction.
