@@ -17,18 +17,18 @@ title: Except
 | Target Logical Operators
 | Optimization Rules and Demos
 
-| Left-Anti spark-sql-LogicalPlan-Join.md[Join]
-| `Except` (DISTINCT) in spark-sql-Optimizer-ReplaceExceptWithAntiJoin.md[ReplaceExceptWithAntiJoin] logical optimization rule
+| Left-Anti Join.md[Join]
+| `Except` (DISTINCT) in ReplaceExceptWithAntiJoin.md[ReplaceExceptWithAntiJoin] logical optimization rule
 
 Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
 
-| spark-sql-LogicalPlan-Filter.md[Filter]
-| `Except` (DISTINCT) in spark-sql-Optimizer-ReplaceExceptWithFilter.md[ReplaceExceptWithFilter] logical optimization rule
+| Filter.md[Filter]
+| `Except` (DISTINCT) in ReplaceExceptWithFilter.md[ReplaceExceptWithFilter] logical optimization rule
 
 Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
 
-| spark-sql-LogicalPlan-Union.md[Union], spark-sql-LogicalPlan-Aggregate.md[Aggregate] and spark-sql-LogicalPlan-Generate.md[Generate]
-| `Except` (ALL) in spark-sql-Optimizer-RewriteExceptAll.md[RewriteExceptAll] logical optimization rule
+| Union.md[Union], Aggregate.md[Aggregate] and Generate.md[Generate]
+| `Except` (ALL) in RewriteExceptAll.md[RewriteExceptAll] logical optimization rule
 
 Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators>>
 

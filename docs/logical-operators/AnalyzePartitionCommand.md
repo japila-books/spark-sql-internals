@@ -2,7 +2,7 @@ title: AnalyzePartitionCommand
 
 # AnalyzePartitionCommand Logical Command -- Computing Partition-Level Statistics
 
-`AnalyzePartitionCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
+`AnalyzePartitionCommand` is a RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
 
 `AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for spark-sql-SparkSqlAstBuilder.md#AnalyzePartitionCommand[ANALYZE TABLE] with `PARTITION` specification only (i.e. no `FOR COLUMNS` clause).
 
@@ -24,7 +24,7 @@ AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the session-specific `SessionCatalog` for the [metadata](../SessionCatalog.md#getTableMetadata) of the <<tableIdent, table>> and makes sure that it is not a view.
 
@@ -40,7 +40,7 @@ NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSe
 `run` <<calculateRowCountsPerPartition, computes row count statistics per partition>> unless <<noscan, noscan>> flag was enabled.
 
 [[total-size-stat]]
-`run` spark-sql-CommandUtils.md#calculateLocationSize[calculates total size (in bytes)] (aka _partition location size_) for every table partition and spark-sql-CommandUtils.md#compareAndGetNewStats[creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore] (with a new row count statistic computed earlier).
+`run` [calculates total size (in bytes)](../CommandUtils.md#calculateLocationSize) (aka _partition location size_) for every table partition and [creates a CatalogStatistics with the current statistics if different from the statistics recorded in the metastore](../CommandUtils.md#compareAndGetNewStats) (with a new row count statistic computed earlier).
 
 In the end, `run` [alters table partition metadata](../SessionCatalog.md#alterPartitions) for partitions with the statistics changed.
 

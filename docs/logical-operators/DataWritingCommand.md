@@ -1,8 +1,8 @@
 # DataWritingCommand -- Logical Commands That Write Query Data
 
-`DataWritingCommand` is an <<contract, extension>> of the <<spark-sql-LogicalPlan-Command.md#, Command contract>> for <<implementations, logical commands>> that write the result of executing <<query, query>> (_query data_) to a relation when <<run, executed>>.
+`DataWritingCommand` is an <<contract, extension>> of the <<Command.md#, Command contract>> for <<implementations, logical commands>> that write the result of executing <<query, query>> (_query data_) to a relation when <<run, executed>>.
 
-`DataWritingCommand` is resolved to a <<spark-sql-SparkPlan-DataWritingCommandExec.md#, DataWritingCommandExec>> physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
+`DataWritingCommand` is resolved to a <<DataWritingCommandExec.md#, DataWritingCommandExec>> physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
 
 [[contract]]
 .DataWritingCommand Contract
@@ -54,7 +54,7 @@ Used when:
 |===
 
 [[children]]
-When requested for the <<spark-sql-LogicalPlan-Command.md#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
+When requested for the <<Command.md#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
 
 `DataWritingCommand` defines custom <<metrics, performance metrics>>.
 
@@ -87,7 +87,7 @@ The <<metrics, performance metrics>> are used when:
 
 * `DataWritingCommand` is requested for the <<basicWriteJobStatsTracker, BasicWriteJobStatsTracker>>
 
-* `DataWritingCommandExec` physical operator is requested for the <<spark-sql-SparkPlan-DataWritingCommandExec.md#metrics, metrics>>
+* `DataWritingCommandExec` physical operator is requested for the <<DataWritingCommandExec.md#metrics, metrics>>
 
 [[extensions]]
 .DataWritingCommands (Direct Implementations and Extensions Only)
@@ -96,7 +96,7 @@ The <<metrics, performance metrics>> are used when:
 | DataWritingCommand
 | Description
 
-| spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
+| CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]]
 
 | hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand]

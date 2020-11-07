@@ -1,37 +1,29 @@
-# AggUtils Helper Object
+# AggUtils Utility
 
 `AggUtils` is a Scala object that defines the methods used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
-* <<planAggregateWithoutDistinct, planAggregateWithoutDistinct>>
+## <span id="planAggregateWithOneDistinct"> planAggregateWithOneDistinct
 
-* <<planAggregateWithOneDistinct, planAggregateWithOneDistinct>>
-
-=== [[planAggregateWithOneDistinct]] `planAggregateWithOneDistinct` Method
-
-[source, scala]
-----
+```scala
 planAggregateWithOneDistinct(
   groupingExpressions: Seq[NamedExpression],
   functionsWithDistinct: Seq[AggregateExpression],
   functionsWithoutDistinct: Seq[AggregateExpression],
   resultExpressions: Seq[NamedExpression],
   child: SparkPlan): Seq[SparkPlan]
-----
+```
 
 `planAggregateWithOneDistinct`...FIXME
 
-NOTE: `planAggregateWithOneDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
+## <span id="planAggregateWithoutDistinct"> planAggregateWithoutDistinct
 
-=== [[planAggregateWithoutDistinct]] Creating Physical Plan with Two Aggregate Physical Operators for Partial and Final Aggregations -- `planAggregateWithoutDistinct` Method
-
-[source, scala]
-----
+```scala
 planAggregateWithoutDistinct(
   groupingExpressions: Seq[NamedExpression],
   aggregateExpressions: Seq[AggregateExpression],
   resultExpressions: Seq[NamedExpression],
   child: SparkPlan): Seq[SparkPlan]
-----
+```
 
 `planAggregateWithoutDistinct` is a two-step physical operator generator.
 
@@ -43,12 +35,9 @@ In the end, `planAggregateWithoutDistinct` <<AggUtils-createAggregate, creates a
 
 NOTE: `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the spark-sql-Expression-Attribute.md[attributes] of `groupingExpressions`.
 
-NOTE: `planAggregateWithoutDistinct` is used exclusively when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (with no `AggregateExpressions` being [distinct](expressions/AggregateExpression.md#isDistinct)).
+## <span id="createAggregate"> createAggregate
 
-=== [[createAggregate]] Creating Aggregate Physical Operator -- `createAggregate` Internal Method
-
-[source, scala]
-----
+```scala
 createAggregate(
   requiredChildDistributionExpressions: Option[Seq[Expression]] = None,
   groupingExpressions: Seq[NamedExpression] = Nil,
@@ -57,7 +46,7 @@ createAggregate(
   initialInputBufferOffset: Int = 0,
   resultExpressions: Seq[NamedExpression] = Nil,
   child: SparkPlan): SparkPlan
-----
+```
 
 `createAggregate` creates a [physical operator](physical-operators/SparkPlan.md) given the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
@@ -68,18 +57,16 @@ createAggregate(
 | Aggregate Physical Operator
 | Selection Criteria
 
-| spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec]
-a| `HashAggregateExec` spark-sql-SparkPlan-HashAggregateExec.md#supportsAggregate[supports] all `aggBufferAttributes` of the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
+| HashAggregateExec.md[HashAggregateExec]
+a| `HashAggregateExec` HashAggregateExec.md#supportsAggregate[supports] all `aggBufferAttributes` of the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
-| spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec]
+| ObjectHashAggregateExec.md[ObjectHashAggregateExec]
 a|
 
-. spark-sql-properties.md#spark.sql.execution.useObjectHashAggregateExec[spark.sql.execution.useObjectHashAggregateExec] internal flag enabled (it is by default)
+* [spark.sql.execution.useObjectHashAggregateExec](configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) internal flag enabled (it is by default)
 
-. `ObjectHashAggregateExec` spark-sql-SparkPlan-ObjectHashAggregateExec.md#supportsAggregate[supports] the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
+* `ObjectHashAggregateExec` [supports](physical-operators/ObjectHashAggregateExec.md#supportsAggregate) the input `aggregateExpressions` [aggregate expressions](expressions/AggregateExpression.md).
 
-| spark-sql-SparkPlan-SortAggregateExec.md[SortAggregateExec]
+| SortAggregateExec.md[SortAggregateExec]
 | When all the above requirements could not be met.
 |===
-
-NOTE: `createAggregate` is used when `AggUtils` is requested to <<planAggregateWithoutDistinct, planAggregateWithoutDistinct>>, <<planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and `planStreamingAggregation` for Spark Structured Streaming)

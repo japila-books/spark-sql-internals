@@ -16,8 +16,6 @@ NOTE: `T` stands for the type of a result to be computed (while visiting the que
 
 The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` [uses](LogicalPlanStats.md#stats) <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
 
-NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is off, i.e. `false` by default.
-
 [[implementations]]
 .LogicalPlanVisitors
 [cols="1,2",options="header",width="100%"]
@@ -40,7 +38,7 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | Logical Operator
 | Handler
 
-| [[Aggregate]] spark-sql-LogicalPlan-Aggregate.md[Aggregate]
+| [[Aggregate]] Aggregate.md[Aggregate]
 | [[visitAggregate]] `visitAggregate`
 
 | [[Distinct]] `Distinct`
@@ -49,13 +47,13 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[Except]] `Except`
 | `visitExcept`
 
-| [[Expand]] spark-sql-LogicalPlan-Expand.md[Expand]
+| [[Expand]] Expand.md[Expand]
 | `visitExpand`
 
 | [[Filter]] `Filter`
 | [[visitFilter]] `visitFilter`
 
-| [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]
+| [[Generate]] Generate.md[Generate]
 | `visitGenerate`
 
 | [[GlobalLimit]] [GlobalLimit](GlobalLimit.md)
@@ -64,16 +62,16 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[Intersect]] `Intersect`
 | [[visitIntersect]] `visitIntersect`
 
-| [[Join]] spark-sql-LogicalPlan-Join.md[Join]
+| [[Join]] Join.md[Join]
 | [[visitJoin]] `visitJoin`
 
 | [[LocalLimit]] `LocalLimit`
 | `visitLocalLimit`
 
-| [[Pivot]] spark-sql-LogicalPlan-Pivot.md[Pivot]
+| [[Pivot]] Pivot.md[Pivot]
 | `visitPivot`
 
-| [[Project]] spark-sql-LogicalPlan-Project.md[Project]
+| [[Project]] Project.md[Project]
 | [[visitProject]] `visitProject`
 
 | [[Repartition]] [Repartition](RepartitionOperation.md#Repartition)
@@ -82,7 +80,7 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[RepartitionByExpression]] [RepartitionByExpression](RepartitionOperation.md#RepartitionByExpression)
 | `visitRepartitionByExpr`
 
-| [[ResolvedHint]] spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
+| [[ResolvedHint]] ResolvedHint.md[ResolvedHint]
 | `visitHint`
 
 | [[Sample]] `Sample`
@@ -94,7 +92,7 @@ NOTE: spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] confi
 | [[Union]] `Union`
 | `visitUnion`
 
-| [[Window]] spark-sql-LogicalPlan-Window.md[Window]
+| [[Window]] Window.md[Window]
 | `visitWindow`
 
 | [[LogicalPlan]] Other spark-sql-LogicalPlan.md[logical operators]

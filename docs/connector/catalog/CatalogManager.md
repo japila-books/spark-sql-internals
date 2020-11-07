@@ -26,7 +26,7 @@ defaultSessionCatalog: CatalogPlugin
 
 `CatalogManager` defines `spark_catalog` as the name of the default catalog ([V2SessionCatalog](../../V2SessionCatalog.md)).
 
-`spark_catalog` is used as the default value of [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
+`spark_catalog` is used as the default value of [spark.sql.defaultCatalog](../../configuration-properties.md#spark.sql.defaultCatalog) configuration property.
 
 ## <span id="_currentCatalogName"> Current Catalog Name
 
@@ -44,7 +44,7 @@ _currentCatalogName: Option[String]
 currentCatalog: CatalogPlugin
 ```
 
-`currentCatalog` uses the [current CatalogPlugin](#_currentCatalogName) if defined or falls back on [spark.sql.defaultCatalog](../../spark-sql-properties.md#spark.sql.defaultCatalog) configuration property.
+`currentCatalog` uses the [current CatalogPlugin](#_currentCatalogName) if defined or falls back on [spark.sql.defaultCatalog](../../configuration-properties.md#spark.sql.defaultCatalog) configuration property.
 
 `currentCatalog` is used when:
 

@@ -8,7 +8,7 @@
 
 . `HashedRelation` is requested for a [concrete HashedRelation](HashedRelation.md#apply) (and <<apply, apply>> factory method is used)
 
-. `LongHashedRelation` is requested for a <<asReadOnlyCopy, read-only copy>> (when `BroadcastHashJoinExec` is requested to spark-sql-SparkPlan-BroadcastHashJoinExec.md#doExecute[execute])
+. `LongHashedRelation` is requested for a <<asReadOnlyCopy, read-only copy>> (when `BroadcastHashJoinExec` is requested to BroadcastHashJoinExec.md#doExecute[execute])
 
 === [[writeExternal]] `writeExternal` Method
 

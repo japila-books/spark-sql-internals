@@ -4,9 +4,9 @@
 
 `In` is <<creating-instance, created>> when:
 
-* <<spark-sql-column-operators.md#isin, Column.isin>> operator is used
+* [Column.isin](../spark-sql-column-operators.md#isin) operator is used
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#withPredicate[parse SQL's IN predicate with a subquery]
+* `AstBuilder` is requested to [parse SQL's IN predicate with a subquery](../sql/AstBuilder.md#withPredicate)
 
 [TIP]
 ====
@@ -150,7 +150,7 @@ scala> println(in.sql)
 * [InConversion](../logical-analysis-rules/InConversion.md) type coercion rule
 
 [[InMemoryTableScanExec]]
-`In` expression has a spark-sql-SparkPlan-InMemoryTableScanExec.md#buildFilter-expressions[custom support] in spark-sql-SparkPlan-InMemoryTableScanExec.md[InMemoryTableScanExec] physical operator.
+`In` expression has a InMemoryTableScanExec.md#buildFilter-expressions[custom support] in InMemoryTableScanExec.md[InMemoryTableScanExec] physical operator.
 
 [source, scala]
 ----

@@ -28,7 +28,7 @@ scala> println(coalesceExpr.numberedTreeString)
 
 CAUTION: FIXME Describe FunctionArgumentConversion and Coalesce
 
-Spark Optimizer uses spark-sql-Optimizer-NullPropagation.md[NullPropagation] logical optimization to remove `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all <<children, children>> expressions are `null` literals.
+Spark Optimizer uses NullPropagation.md[NullPropagation] logical optimization to remove `null` literals (in the <<children, children>> expressions). That could result in a static evaluation that gives `null` value if all <<children, children>> expressions are `null` literals.
 
 [source, scala]
 ----

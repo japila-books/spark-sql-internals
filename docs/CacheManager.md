@@ -130,8 +130,8 @@ cacheQuery(
 
 Internally, `cacheQuery` requests the `Dataset` for the [analyzed logical plan](Dataset.md#logicalPlan) and creates a [InMemoryRelation](logical-operators/InMemoryRelation.md) with the following:
 
-* [spark.sql.inMemoryColumnarStorage.compressed](spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.compressed) configuration property
-* [spark.sql.inMemoryColumnarStorage.batchSize](spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.batchSize) configuration property
+* [spark.sql.inMemoryColumnarStorage.compressed](configuration-properties.md#spark.sql.inMemoryColumnarStorage.compressed) configuration property
+* [spark.sql.inMemoryColumnarStorage.batchSize](configuration-properties.md#spark.sql.inMemoryColumnarStorage.batchSize) configuration property
 * Input `storageLevel` storage level
 * [Optimized physical query plan](QueryExecution.md#executedPlan) (after requesting `SessionState` to [execute](SessionState.md#executePlan) the analyzed logical plan)
 * Input `tableName`

@@ -13,7 +13,7 @@ title: Window
 [[output]]
 When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
 
-NOTE: `Window` logical operator is a subject of pruning unnecessary window expressions in <<spark-sql-Optimizer-ColumnPruning.md#, ColumnPruning>> logical optimization and collapsing window operators in <<spark-sql-Optimizer-CollapseWindow.md#, CollapseWindow>> logical optimization.
+NOTE: `Window` logical operator is a subject of pruning unnecessary window expressions in <<ColumnPruning.md#, ColumnPruning>> logical optimization and collapsing window operators in <<CollapseWindow.md#, CollapseWindow>> logical optimization.
 
 !!! note
     `Window` logical operator is resolved to a [WindowExec](../physical-operators/WindowExec.md) in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Window) execution planning strategy.
@@ -57,7 +57,7 @@ windowOutputSet: AttributeSet
 ====
 `windowOutputSet` is used when:
 
-* `ColumnPruning` logical optimization is <<spark-sql-Optimizer-ColumnPruning.md#apply, executed>> (on a <<spark-sql-LogicalPlan-Project.md#, Project>> operator with a `Window` as the <<spark-sql-LogicalPlan-Project.md#child, child operator>>)
+* `ColumnPruning` logical optimization is <<ColumnPruning.md#apply, executed>> (on a <<Project.md#, Project>> operator with a `Window` as the <<Project.md#child, child operator>>)
 
-* `CollapseWindow` logical optimization is <<spark-sql-Optimizer-CollapseWindow.md#apply, executed>> (on a `Window` operator with another `Window` operator as the <<child, child>>)
+* `CollapseWindow` logical optimization is <<CollapseWindow.md#apply, executed>> (on a `Window` operator with another `Window` operator as the <<child, child>>)
 ====

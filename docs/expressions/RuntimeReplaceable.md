@@ -4,7 +4,7 @@ title: RuntimeReplaceable
 
 `RuntimeReplaceable` is the <<contract, marker contract>> for <<UnaryExpression.md#, unary expressions>> that are replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with their child expression (that can then be evaluated).
 
-NOTE: Catalyst Optimizer uses spark-sql-Optimizer-ReplaceExpressions.md[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
+NOTE: Catalyst Optimizer uses ReplaceExpressions.md[ReplaceExpressions] logical optimization to replace `RuntimeReplaceable` expressions.
 
 `RuntimeReplaceable` contract allows for *expression aliases*, i.e. expressions that are fairly complex in the inside than on the outside, and is used to provide compatibility with other SQL databases by supporting SQL functions with their more complex Catalyst expressions (that are already supported by Spark SQL).
 

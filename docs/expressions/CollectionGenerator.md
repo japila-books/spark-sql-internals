@@ -2,7 +2,7 @@ title: CollectionGenerator
 
 # CollectionGenerator Generator Expression Contract
 
-`CollectionGenerator` is the <<contract, contract>> in Spark SQL for spark-sql-Expression-Generator.md[Generator expressions] that <<collectionType, generate a collection object>> (i.e. an array or map) and (at execution time) spark-sql-SparkPlan-GenerateExec.md#doConsume[use a different path for whole-stage Java code generation] (while executing `GenerateExec` physical operator with spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] enabled).
+`CollectionGenerator` is the <<contract, contract>> in Spark SQL for spark-sql-Expression-Generator.md[Generator expressions] that <<collectionType, generate a collection object>> (i.e. an array or map) and (at execution time) GenerateExec.md#doConsume[use a different path for whole-stage Java code generation] (while executing `GenerateExec` physical operator with spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] enabled).
 
 [[contract]]
 [source, scala]

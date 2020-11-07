@@ -144,7 +144,7 @@ Alias of <<delimiter, delimiter>>
 | Uses <<timeZone, timeZone>> and `en_US` locale
 
 | [[timeZone]] `timeZone`
-| spark-sql-properties.md#spark.sql.session.timeZone[spark.sql.session.timeZone]
+| [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
 |
 
 | [[quote]] `quote`

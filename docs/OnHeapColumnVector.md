@@ -23,7 +23,7 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 
 * `AggregateHashMap` is created
 
-* `InMemoryTableScanExec` is requested to spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
+* `InMemoryTableScanExec` is requested to InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
 
 * `VectorizedParquetRecordReader` is requested to spark-sql-VectorizedParquetRecordReader.md#initBatch[initBatch] (with `ON_HEAP` memory mode)
 

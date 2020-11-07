@@ -6,7 +6,7 @@
 
 `SparkPlan` is a recursive data structure in Spark SQL's [Catalyst tree manipulation framework](../catalyst/index.md) and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
 
-![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/spark-sql-SparkPlan-webui-physical-plan.png)
+![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/webui-physical-plan.png)
 
 ??? note "High-Level Dataset API"
     A structured query can be expressed using Spark SQL's high-level [Dataset](../Dataset.md) API for Scala, Java, Python, R or good ol' SQL.
@@ -241,11 +241,11 @@ The naming convention of physical operators in Spark's source code is to have th
 
 The entry point to **Physical Operator Execution Pipeline** is [execute](#execute).
 
-![SparkPlan.execute -- Physical Operator Execution Pipeline](../images/spark-sql-SparkPlan-execute-pipeline.png)
+![SparkPlan.execute -- Physical Operator Execution Pipeline](../images/execute-pipeline.png)
 
 When <<execute, executed>>, `SparkPlan` <<executeQuery, executes the internal query implementation>> in a named scope (for visualization purposes, e.g. web UI) that triggers <<prepare, prepare>> of the children physical operators first followed by <<prepareSubqueries, prepareSubqueries>> and finally <<doPrepare, doPrepare>> methods. After <<waitForSubqueries, subqueries have finished>>, <<doExecute, doExecute>> method is eventually triggered.
 
-![SparkPlan's Execution (execute Method)](../images/spark-sql-SparkPlan-execute.png)
+![SparkPlan's Execution (execute Method)](../images/SparkPlan-execute.png)
 
 The result of <<execute, executing>> a `SparkPlan` is an `RDD` of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`).
 
@@ -344,11 +344,11 @@ executeTake(
 
 `executeTake` gives an array of up to `n` first [internal rows](../InternalRow.md).
 
-![SparkPlan's executeTake takes 5 elements](../images/spark-sql-SparkPlan-executeTake.png)
+![SparkPlan's executeTake takes 5 elements](../images/SparkPlan-executeTake.png)
 
 `executeTake` [gets an RDD of byte array of `n` unsafe rows](#getByteArrayRdd) and scans the RDD partitions one by one until `n` is reached or all partitions were processed.
 
-`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by [spark.sql.limit.scaleUpFactor](../spark-sql-properties.md#spark.sql.limit.scaleUpFactor) property (but minimum twice as many).
+`executeTake` runs Spark jobs that take all the elements from requested number of partitions, starting from the 0th partition and increasing their number by [spark.sql.limit.scaleUpFactor](../configuration-properties.md#spark.sql.limit.scaleUpFactor) property (but minimum twice as many).
 
 !!! note
     `executeTake` uses `SparkContext.runJob` to run a Spark job.
@@ -437,13 +437,13 @@ executeCollect(): Array[InternalRow]
 
 `executeCollect` is used when:
 
-* `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (being a single spark-sql-LogicalPlan-Command.md[Command] or their `Union`)
+* `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (being a single Command.md[Command] or their `Union`)
 
 * spark-sql-dataset-operators.md#explain[explain] and spark-sql-dataset-operators.md#count[count] operators are executed
 
 * `Dataset` is requested to `collectFromPlan`
 
-* `SubqueryExec` is requested to spark-sql-SparkPlan-SubqueryExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-SubqueryExec.md#relationFuture[relationFuture] for the first time)
+* `SubqueryExec` is requested to SubqueryExec.md#doPrepare[prepare for execution] (and initializes SubqueryExec.md#relationFuture[relationFuture] for the first time)
 
 * `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
 

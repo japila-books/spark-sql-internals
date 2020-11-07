@@ -4,22 +4,18 @@
 
 `ShuffledHashJoinExec` performs a hash join of two child relations by first shuffling the data using the join keys.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a spark-sql-LogicalPlan-Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed and spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] configuration property is off.
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed and [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) configuration property is off.
 
-[NOTE]
-====
-spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
+!!! note
+   [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers [sort merge join](SortMergeJoinExec.md) over shuffled hash join based on [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) configuration property.
 
-That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers spark-sql-SparkPlan-SortMergeJoinExec.md[sort merge join] over shuffled hash join.
-
-In other words, you will _hardly_ see shuffled hash joins in your structured queries unless you turn `spark.sql.join.preferSortMergeJoin` on.
-====
+   In other words, you will _hardly_ see shuffled hash joins in your structured queries unless you turn `spark.sql.join.preferSortMergeJoin` on.
 
 Beside the `spark.sql.join.preferSortMergeJoin` configuration property one of the following requirements has to hold:
 
 * (For a right build side, i.e. `BuildRight`) [canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight), [canBuildLocalHashMap](../execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) for the right join side and finally the right join side is [at least three times smaller](../execution-planning-strategies/JoinSelection.md#muchSmaller) than the left side
 
-* (For a right build side, i.e. `BuildRight`) Left join keys are *not* spark-sql-SparkPlan-SortMergeJoinExec.md#orderable[orderable], i.e. cannot be sorted
+* (For a right build side, i.e. `BuildRight`) Left join keys are *not* SortMergeJoinExec.md#orderable[orderable], i.e. cannot be sorted
 
 * (For a left build side, i.e. `BuildLeft`) [canBuildLeft](../execution-planning-strategies/JoinSelection.md#canBuildLeft), [canBuildLocalHashMap](../execution-planning-strategies/JoinSelection.md#canBuildLocalHashMap) for left join side and finally left join side is [at least three times smaller](../execution-planning-strategies/JoinSelection.md#muchSmaller) than right
 

@@ -1,6 +1,6 @@
 # RunnableCommand -- Generic Logical Command with Side Effects
 
-`RunnableCommand` is the generic spark-sql-LogicalPlan-Command.md[logical command] that is <<run, executed>> eagerly for its side effects.
+`RunnableCommand` is the generic Command.md[logical command] that is <<run, executed>> eagerly for its side effects.
 
 [[contract]]
 [[run]]
@@ -12,11 +12,11 @@ run(sparkSession: SparkSession): Seq[Row]
 ----
 
 !!! note
-    `RunnableCommand` logical operator is resolved to spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
+    `RunnableCommand` logical operator is resolved to ExecutedCommandExec.md[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
 
 `run` is executed when:
 
-* `ExecutedCommandExec` spark-sql-SparkPlan-ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
+* `ExecutedCommandExec` ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
 
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) is executed
 
@@ -71,13 +71,13 @@ run(sparkSession: SparkSession): Seq[Row]
 | AlterViewAsCommand
 |
 
-| spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand]
+| AnalyzeColumnCommand.md[AnalyzeColumnCommand]
 | [[AnalyzeColumnCommand]]
 
-| spark-sql-LogicalPlan-AnalyzePartitionCommand.md[AnalyzePartitionCommand]
+| AnalyzePartitionCommand.md[AnalyzePartitionCommand]
 | [[AnalyzePartitionCommand]]
 
-| spark-sql-LogicalPlan-AnalyzeTableCommand.md[AnalyzeTableCommand]
+| AnalyzeTableCommand.md[AnalyzeTableCommand]
 | [[AnalyzeTableCommand]]
 
 | CacheTableCommand
@@ -117,30 +117,30 @@ scala> println(sql(q2).queryExecution.logical.numberedTreeString)
 | CreateDatabaseCommand
 |
 
-| spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
+| CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
 | [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
 
-Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` is requested to [save a DataFrame to a non-Hive table](../DataFrameWriter.md#saveAsTable) or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
+Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` is requested to [save a DataFrame to a non-Hive table](../DataFrameWriter.md#saveAsTable) or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
 
-| spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
+| CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
 | [[CreateDataSourceTableCommand]]
 
 | CreateFunctionCommand
 |
 
-| <<spark-sql-LogicalPlan-CreateTableCommand.md#, CreateTableCommand>>
+| <<CreateTableCommand.md#, CreateTableCommand>>
 | [[CreateTableCommand]]
 
 | CreateTableLikeCommand
 |
 
-| <<spark-sql-LogicalPlan-CreateTempViewUsing.md#, CreateTempViewUsing>>
+| <<CreateTempViewUsing.md#, CreateTempViewUsing>>
 | [[CreateTempViewUsing]]
 
-| <<spark-sql-LogicalPlan-CreateViewCommand.md#, CreateViewCommand>>
+| <<CreateViewCommand.md#, CreateViewCommand>>
 | [[CreateViewCommand]]
 
-| spark-sql-LogicalPlan-DescribeColumnCommand.md[DescribeColumnCommand]
+| DescribeColumnCommand.md[DescribeColumnCommand]
 | [[DescribeColumnCommand]]
 
 | DescribeDatabaseCommand
@@ -149,7 +149,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 | DescribeFunctionCommand
 |
 
-| spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand]
+| DescribeTableCommand.md[DescribeTableCommand]
 | [[DescribeTableCommand]]
 
 | DropDatabaseCommand
@@ -164,7 +164,7 @@ Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceA
 | ExplainCommand
 |
 
-| <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
+| <<InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoDataSourceCommand]]
 
 | [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
@@ -205,7 +205,7 @@ Used when `DataFrameWriter` is requested to [save a DataFrame to a data source](
 | ShowColumnsCommand
 |
 
-| <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#, ShowCreateTableCommand>>
+| <<ShowCreateTableCommand.md#, ShowCreateTableCommand>>
 | [[ShowCreateTableCommand]]
 
 | ShowDatabasesCommand
@@ -220,13 +220,13 @@ Used when `DataFrameWriter` is requested to [save a DataFrame to a data source](
 | ShowTablePropertiesCommand
 |
 
-| <<spark-sql-LogicalPlan-ShowTablesCommand.md#, ShowTablesCommand>>
+| <<ShowTablesCommand.md#, ShowTablesCommand>>
 | [[ShowTablesCommand]]
 
 | StreamingExplainCommand
 |
 
-| spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand]
+| TruncateTableCommand.md[TruncateTableCommand]
 | [[TruncateTableCommand]]
 
 | UncacheTableCommand

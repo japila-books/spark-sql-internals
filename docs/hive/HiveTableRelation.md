@@ -1,10 +1,10 @@
 # HiveTableRelation Leaf Logical Operator -- Representing Hive Tables in Logical Plan
 
-`HiveTableRelation` is a ../spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a Hive table in a ../spark-sql-LogicalPlan.md[logical query plan].
+`HiveTableRelation` is a ../LeafNode.md[leaf logical operator] that represents a Hive table in a ../spark-sql-LogicalPlan.md[logical query plan].
 
 `HiveTableRelation` is <<creating-instance, created>> when `FindDataSourceTable` logical evaluation rule is requested to [resolve UnresolvedCatalogRelations in a logical plan](../logical-analysis-rules/FindDataSourceTable.md#apply) (for [Hive tables](../logical-analysis-rules/FindDataSourceTable.md#readHiveTable)).
 
-NOTE: `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and configuration-properties.md#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
+NOTE: `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on [spark.sql.hive.convertMetastoreParquet](configuration-properties.md#spark.sql.hive.convertMetastoreParquet) and [spark.sql.hive.convertMetastoreOrc](configuration-properties.md#spark.sql.hive.convertMetastoreOrc) properties (and "disappears" from a logical plan when enabled).
 
 `HiveTableRelation` is <<isPartitioned, partitioned>> when it has at least one <<partitionCols, partition column>>.
 
@@ -84,7 +84,7 @@ The [metadata](../CatalogTable.md) of a `HiveTableRelation` (in a catalog) has t
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of ../spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for ../spark-sql-cost-based-optimization.md[cost-based optimizer].
+NOTE: `computeStats` is part of ../LeafNode.md#computeStats[LeafNode Contract] to compute statistics for ../spark-sql-cost-based-optimization.md[cost-based optimizer].
 
 `computeStats` takes the [table statistics](../CatalogTable.md#stats) from the <<tableMeta, table metadata>> if defined and ../spark-sql-CatalogStatistics.md#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
 

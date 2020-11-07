@@ -21,7 +21,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ----
 
 [[resolved]]
-`UnresolvedInlineTable` is never <<spark-sql-LogicalPlan.md#resolved, resolved>> (and is converted to a <<spark-sql-LogicalPlan-LocalRelation.md#, LocalRelation>> in [ResolveInlineTables](../logical-analysis-rules/ResolveInlineTables.md) logical resolution rule).
+`UnresolvedInlineTable` is never <<spark-sql-LogicalPlan.md#resolved, resolved>> (and is converted to a <<LocalRelation.md#, LocalRelation>> in [ResolveInlineTables](../logical-analysis-rules/ResolveInlineTables.md) logical resolution rule).
 
 [[output]]
 `UnresolvedInlineTable` uses no <<catalyst/QueryPlan.md#output, output schema attributes>>.

@@ -14,7 +14,7 @@ DataSourceReader createReader(DataSourceOptions options)
 DataSourceReader createReader(StructType schema, DataSourceOptions options)
 ----
 
-`createReader` is used when `DataSourceV2Relation` leaf logical operator is <<spark-sql-LogicalPlan-DataSourceV2Relation.md#create, created>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md)).
+`createReader` is used when `DataSourceV2Relation` leaf logical operator is <<DataSourceV2Relation.md#create, created>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md)).
 
 [source, scala]
 ----
@@ -23,7 +23,7 @@ DataSourceReader createReader(StructType schema, DataSourceOptions options)
 // DataFrameReader.load() creates a DataFrame with a DataSourceV2Relation operator
 ----
 
-Internally, `ReadSupport` is accessed implicitly when `DataSourceV2Relation` logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newReader, create a DataSourceReader>>.
+Internally, `ReadSupport` is accessed implicitly when `DataSourceV2Relation` logical operator is requested to <<DataSourceV2Relation.md#newReader, create a DataSourceReader>>.
 
 [[implementations]]
 NOTE: There are no production implementations of the <<contract, ReadSupport Contract>> in Spark SQL yet.

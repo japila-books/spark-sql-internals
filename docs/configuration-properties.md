@@ -904,7 +904,7 @@ Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access
 
 a| [[spark.sql.execution.useObjectHashAggregateExec]] *spark.sql.execution.useObjectHashAggregateExec*
 
-Enables spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
+Enables ObjectHashAggregateExec.md[ObjectHashAggregateExec] when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
 
 Default: `true`
 
@@ -1081,7 +1081,7 @@ Use [SQLConf.supportQuotedRegexColumnName](SQLConf.md#supportQuotedRegexColumnNa
 
 | [[spark.sql.sort.enableRadixSort]] *spark.sql.sort.enableRadixSort*
 
-*(internal)* Controls whether to use radix sort (`true`) or not (`false`) in <<spark-sql-SparkPlan-ShuffleExchangeExec.md#, ShuffleExchangeExec>> and <<spark-sql-SparkPlan-SortExec.md#, SortExec>> physical operators
+*(internal)* Controls whether to use radix sort (`true`) or not (`false`) in <<ShuffleExchangeExec.md#, ShuffleExchangeExec>> and <<SortExec.md#, SortExec>> physical operators
 
 Default: `true`
 
@@ -1225,7 +1225,7 @@ Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminatio
 
 | [[spark.sql.truncateTable.ignorePermissionAcl.enabled]] *spark.sql.truncateTable.ignorePermissionAcl.enabled*
 
-*(internal)* Disables setting back original permission and ACLs when re-creating the table/partition paths for spark-sql-LogicalPlan-TruncateTableCommand.md[TRUNCATE TABLE] command.
+*(internal)* Disables setting back original permission and ACLs when re-creating the table/partition paths for TruncateTableCommand.md[TRUNCATE TABLE] command.
 
 Default: `false`
 
@@ -1241,7 +1241,7 @@ When a query execution finishes, the execution is removed from the internal `act
 
 | [[spark.sql.windowExec.buffer.in.memory.threshold]] *spark.sql.windowExec.buffer.in.memory.threshold*
 
-*(internal)* Threshold for number of rows guaranteed to be held in memory by <<spark-sql-SparkPlan-WindowExec.md#, WindowExec>> physical operator.
+*(internal)* Threshold for number of rows guaranteed to be held in memory by <<WindowExec.md#, WindowExec>> physical operator.
 
 Default: `4096`
 
@@ -1249,7 +1249,7 @@ Use [SQLConf.windowExecBufferInMemoryThreshold](SQLConf.md#windowExecBufferInMem
 
 | [[spark.sql.windowExec.buffer.spill.threshold]] *spark.sql.windowExec.buffer.spill.threshold*
 
-*(internal)* Threshold for number of rows buffered in a <<spark-sql-SparkPlan-WindowExec.md#, WindowExec>> physical operator.
+*(internal)* Threshold for number of rows buffered in a <<WindowExec.md#, WindowExec>> physical operator.
 
 Default: `4096`
 

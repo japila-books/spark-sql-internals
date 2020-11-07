@@ -9,7 +9,7 @@
 default(p: LogicalPlan): Statistics
 ----
 
-`default` requests a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] for the statistics or creates a [Statistics](Statistics.md) with the product of the `sizeInBytes` statistic of every [child operator](../catalyst/TreeNode.md#children).
+`default` requests a LeafNode.md[leaf logical operator] for the statistics or creates a [Statistics](Statistics.md) with the product of the `sizeInBytes` statistic of every [child operator](../catalyst/TreeNode.md#children).
 
 NOTE: `default` uses the cache of the estimated statistics of a logical operator so the statistics of an operator is [computed](LogicalPlanStats.md#stats) once until it is [invalidated](LogicalPlanStats.md#invalidateStatsCache).
 

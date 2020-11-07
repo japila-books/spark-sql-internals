@@ -1,11 +1,10 @@
 # ObjectHashAggregateExec Aggregate Physical Operator
 
-`ObjectHashAggregateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> (indirectly through <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>>) when:
+`ObjectHashAggregateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
 
 * ...FIXME
 
-[source, scala]
-----
+```text
 // ObjectHashAggregateExec selected due to:
 // 1. spark.sql.execution.useObjectHashAggregateExec internal flag is enabled
 scala> val objectHashEnabled = spark.conf.get("spark.sql.execution.useObjectHashAggregateExec")
@@ -67,10 +66,10 @@ scala> println(aggExec.aggregateExpressions.head.numberedTreeString)
 00 partial_collect_list(id#112, 0, 0)
 01 +- collect_list(id#112, 0, 0)
 02    +- id#112: int
-----
+```
 
-[[metrics]]
-.ObjectHashAggregateExec's Performance Metrics
+## Performance Metrics
+
 [cols="1,2,2",options="header",width="100%"]
 |===
 | Key
@@ -82,8 +81,7 @@ scala> println(aggExec.aggregateExpressions.head.numberedTreeString)
 |
 |===
 
-.ObjectHashAggregateExec in web UI (Details for Query)
-image::images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png[align="center"]
+![ObjectHashAggregateExec in web UI (Details for Query)](../images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png)
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -105,7 +103,7 @@ supportsAggregate(aggregateExpressions: Seq[AggregateExpression]): Boolean
 
 `supportsAggregate` is enabled (i.e. returns `true`) if there is at least one spark-sql-Expression-TypedImperativeAggregate.md[TypedImperativeAggregate] aggregate function in the input `aggregateExpressions` [aggregate expressions](../expressions/AggregateExpression.md).
 
-NOTE: `supportsAggregate` is used exclusively when `AggUtils` is requested to <<spark-sql-AggUtils.md#createAggregate, create an aggregate physical operator given aggregate expressions>>.
+`supportsAggregate` is used when `AggUtils` is requested to [create an aggregate physical operator given aggregate expressions](../AggUtils.md#createAggregate).
 
 === [[creating-instance]] Creating ObjectHashAggregateExec Instance
 

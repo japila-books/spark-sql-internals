@@ -122,9 +122,9 @@ Hello World
 ====
 `withExecutionId` is used when:
 
-* `BroadcastExchangeExec` is requested to spark-sql-SparkPlan-BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
+* `BroadcastExchangeExec` is requested to BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
 
-* `SubqueryExec` is requested to spark-sql-SparkPlan-SubqueryExec.md#doPrepare[prepare for execution] (and initializes spark-sql-SparkPlan-SubqueryExec.md#relationFuture[relationFuture] for the first time)
+* `SubqueryExec` is requested to SubqueryExec.md#doPrepare[prepare for execution] (and initializes SubqueryExec.md#relationFuture[relationFuture] for the first time)
 ====
 
 === [[checkSQLExecutionId]] `checkSQLExecutionId` Method

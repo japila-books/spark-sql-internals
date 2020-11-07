@@ -74,5 +74,5 @@ partitionIdExpression: Expression
 
 * `FileFormatWriter` utility is used for [write out a query result](../FileFormatWriter.md#write) (for bucketing support)
 
-* `ShuffleExchangeExec` utility is used to spark-sql-SparkPlan-ShuffleExchangeExec.md#prepareShuffleDependency[prepare a ShuffleDependency]
+* `ShuffleExchangeExec` utility is used to ShuffleExchangeExec.md#prepareShuffleDependency[prepare a ShuffleDependency]
 ====

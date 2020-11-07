@@ -38,9 +38,9 @@ scala> println(afterEliminateView.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` simply removes (eliminates) <<spark-sql-LogicalPlan-View.md#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>> and replaces them with their <<spark-sql-LogicalPlan-View.md#child, child>> logical operator.
+`apply` simply removes (eliminates) <<View.md#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>> and replaces them with their <<View.md#child, child>> logical operator.
 
-`apply` throws an `AssertionError` when the <<spark-sql-LogicalPlan-View.md#output, output schema>> of the `View` operator does not match the <<catalyst/QueryPlan.md#output, output schema>> of the <<spark-sql-LogicalPlan-View.md#child, child>> logical operator.
+`apply` throws an `AssertionError` when the <<View.md#output, output schema>> of the `View` operator does not match the <<catalyst/QueryPlan.md#output, output schema>> of the <<View.md#child, child>> logical operator.
 
 ```text
 assertion failed: The output of the child [output] is different from the view output [output]

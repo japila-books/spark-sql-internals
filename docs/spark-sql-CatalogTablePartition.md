@@ -15,7 +15,7 @@ title: CatalogTablePartition
 [[simpleString]]
 The *readable text representation* of a `CatalogTablePartition` (aka `simpleString`) is...FIXME
 
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, executed>> (with a partition specification).
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<ShowTablesCommand.md#run, executed>> (with a partition specification).
 
 [[toString]]
 `CatalogTablePartition` uses the following *text representation* (i.e. `toString`)...FIXME
@@ -47,7 +47,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ====
 `toLinkedHashMap` is used when:
 
-* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> (with the spark-sql-LogicalPlan-DescribeTableCommand.md#isExtended[isExtended] flag on and a non-empty spark-sql-LogicalPlan-DescribeTableCommand.md#partitionSpec[partitionSpec]).
+* `DescribeTableCommand` logical command is <<DescribeTableCommand.md#run, executed>> (with the DescribeTableCommand.md#isExtended[isExtended] flag on and a non-empty DescribeTableCommand.md#partitionSpec[partitionSpec]).
 
 * `CatalogTablePartition` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====

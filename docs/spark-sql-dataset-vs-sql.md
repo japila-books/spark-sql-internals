@@ -8,7 +8,7 @@ Some structured queries can be expressed much easier using Dataset API, but ther
 
 What is important, and one of the reasons why Spark SQL has been so successful, is that there is no performance difference between the modes. Whatever mode you use to write your structured queries, they all end up as a tree of [Catalyst relational data structures](catalyst/index.md). And, yes, you could consider writing structured queries using Catalyst directly, but that could quickly become unwieldy for maintenance (i.e. finding Spark SQL developers who could be comfortable with it as well as being fairly low-level and therefore possibly too dependent on a specific Spark SQL version).
 
-The takeaway is that SQL queries in Spark SQL are translated to spark-sql-LogicalPlan-Command.md[Catalyst logical commands].
+The takeaway is that SQL queries in Spark SQL are translated to Command.md[Catalyst logical commands].
 
 This section describes the differences between Spark SQL features to develop Spark applications using Dataset API and SQL mode.
 

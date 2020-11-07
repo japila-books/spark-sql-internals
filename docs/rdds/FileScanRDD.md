@@ -19,8 +19,8 @@
 
 `FileScanRDD` uses the following properties (when requested to [compute a partition](#compute)):
 
-* <span id="ignoreCorruptFiles"> [spark.sql.files.ignoreCorruptFiles](../spark-sql-properties.md#spark.sql.files.ignoreCorruptFiles)
-* <span id="ignoreMissingFiles"> [spark.sql.files.ignoreMissingFiles](../spark-sql-properties.md#spark.sql.files.ignoreMissingFiles)
+* <span id="ignoreCorruptFiles"> [spark.sql.files.ignoreCorruptFiles](../configuration-properties.md#spark.sql.files.ignoreCorruptFiles)
+* <span id="ignoreMissingFiles"> [spark.sql.files.ignoreMissingFiles](../configuration-properties.md#spark.sql.files.ignoreMissingFiles)
 
 ## <span id="FilePartition"><span id="files"><span id="index"> FilePartition
 

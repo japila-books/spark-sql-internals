@@ -1,6 +1,6 @@
 # SQLListener Spark Listener
 
-`SQLListener` is a custom spark-SparkListener.md[SparkListener] that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on spark-sql-SQLExecution.md#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
+`SQLListener` is a `SparkListener` that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on spark-sql-SQLExecution.md#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
 
 Internally, it uses <<SQLExecutionUIData, SQLExecutionUIData>> data structure exclusively to record all the necessary data for a single SQL query execution. `SQLExecutionUIData` is tracked in the internal registries, i.e. `activeExecutions`, `failedExecutions`, and `completedExecutions` as well as lookup tables, i.e. `_executionIdToData`, `_jobIdToExecutionId`, and `_stageIdToStageMetrics`.
 
@@ -69,7 +69,7 @@ extends SparkListenerEvent
 
 If there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond spark-sql-properties.md#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond [spark.sql.ui.retainedExecutions](configuration-properties.md#spark.sql.ui.retainedExecutions) configuration property.
 
 ==== [[SparkListenerDriverAccumUpdates]] `SparkListenerDriverAccumUpdates` Event
 
@@ -96,7 +96,7 @@ If it is the last job of the query execution (tracked as <<SQLExecutionUIData, S
 
 If the query execution has already been marked as completed (using `completionTime`) and there are no other running jobs (registered in <<SQLExecutionUIData, SQLExecutionUIData>>), the query execution is removed from the `activeExecutions` internal registry and moved to either `completedExecutions` or `failedExecutions` registry.
 
-This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond spark-sql-properties.md#spark.sql.ui.retainedExecutions[spark.sql.ui.retainedExecutions] Spark property.
+This is when `SQLListener` checks the number of `SQLExecutionUIData` entires in either registry -- `failedExecutions` or `completedExecutions` -- and removes the excess of the old entries beyond [spark.sql.ui.retainedExecutions](configuration-properties.md#spark.sql.ui.retainedExecutions) Spark property.
 
 === [[getExecution]] Getting SQL Execution Data -- `getExecution` Method
 

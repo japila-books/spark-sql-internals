@@ -2,7 +2,7 @@ title: DataWritingSparkTask
 
 # DataWritingSparkTask Partition Processing Function
 
-`DataWritingSparkTask` is the *partition processing function* that `WriteToDataSourceV2Exec` physical operator uses to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute-runJob, schedule a Spark job>> when requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>>.
+`DataWritingSparkTask` is the *partition processing function* that `WriteToDataSourceV2Exec` physical operator uses to <<WriteToDataSourceV2Exec.md#doExecute-runJob, schedule a Spark job>> when requested to <<WriteToDataSourceV2Exec.md#doExecute, execute>>.
 
 NOTE: The `DataWritingSparkTask` partition processing function is executed on executors.
 
@@ -63,7 +63,7 @@ In the end, `run` prints out the following ERROR message to the logs:
 Aborted commit for partition [partId] (task [taskId], attempt [attemptId]stage [stageId].[stageAttempt])
 ```
 
-NOTE: `run` is used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute, execute>> (and <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#doExecute-runJob, schedules a Spark job>>).
+NOTE: `run` is used exclusively when `WriteToDataSourceV2Exec` physical operator is requested to <<WriteToDataSourceV2Exec.md#doExecute, execute>> (and <<WriteToDataSourceV2Exec.md#doExecute-runJob, schedules a Spark job>>).
 
 ==== [[run-useCommitCoordinator-enabled]] `useCommitCoordinator` Flag Enabled
 

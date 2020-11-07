@@ -40,7 +40,7 @@ val executedPlan = planSubqueries(plan)
 
 `ScalarSubquery` takes the following when created:
 
-* [[plan]] spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] plan
+* [[plan]] SubqueryExec.md[SubqueryExec] plan
 * [[exprId]] Expression ID (as `ExprId`)
 
 === [[updateResult]] Updating ScalarSubquery With Collected Result -- `updateResult` Method
@@ -52,7 +52,7 @@ updateResult(): Unit
 
 NOTE: `updateResult` is part of spark-sql-Expression-ExecSubqueryExpression.md#updateResult[ExecSubqueryExpression Contract] to fill an Catalyst expression with a collected result from executing a subquery plan.
 
-`updateResult` requests <<plan, SubqueryExec>> physical plan to spark-sql-SparkPlan-SubqueryExec.md#executeCollect[execute and collect internal rows].
+`updateResult` requests <<plan, SubqueryExec>> physical plan to SubqueryExec.md#executeCollect[execute and collect internal rows].
 
 `updateResult` sets <<result, result>> to the value of the only column of the single row or `null` if no row were collected.
 

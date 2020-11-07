@@ -15,7 +15,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` does nothing when the [spark.sql.optimizer.dynamicPartitionPruning.enabled](../spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
+`apply` does nothing when the [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
 
 `apply` transforms the given [logical plan](../logical-operators/LogicalPlan.md) as follows:
 

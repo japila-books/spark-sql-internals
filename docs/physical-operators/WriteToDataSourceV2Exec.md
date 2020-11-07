@@ -4,7 +4,7 @@
 
 `WriteToDataSourceV2Exec` is <<creating-instance, created>> when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan an [AppendData](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData) logical operator (and a deprecated [WriteToDataSourceV2](../execution-planning-strategies/DataSourceV2Strategy.md#apply-WriteToDataSourceV2)).
 
-NOTE: Although <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator is deprecated since Spark SQL 2.4.0 (for <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator), the `AppendData` logical operator is currently used in tests only. That makes `WriteToDataSourceV2` logical operator still relevant.
+NOTE: Although <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator is deprecated since Spark SQL 2.4.0 (for <<AppendData.md#, AppendData>> logical operator), the `AppendData` logical operator is currently used in tests only. That makes `WriteToDataSourceV2` logical operator still relevant.
 
 [[creating-instance]]
 `WriteToDataSourceV2Exec` takes the following to be created:

@@ -2,7 +2,7 @@
 
 `BroadcastExchangeExec` is an [Exchange](Exchange.md) unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
 
-`BroadcastExchangeExec` is <<creating-instance, created>> when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed (that can really be either spark-sql-SparkPlan-BroadcastHashJoinExec.md[BroadcastHashJoinExec] or spark-sql-SparkPlan-BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] operators).
+`BroadcastExchangeExec` is <<creating-instance, created>> when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed (that can really be either BroadcastHashJoinExec.md[BroadcastHashJoinExec] or BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] operators).
 
 [source, scala]
 ----

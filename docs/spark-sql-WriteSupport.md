@@ -18,7 +18,7 @@ Optional<DataSourceWriter> createWriter(
 
 * `DataFrameWriter` is requested to [save a DataFrame to a data source](DataFrameWriter.md#save) (for [DataSourceV2](spark-sql-DataSourceV2.md) data sources with [WriteSupport](#WriteSupport))
 
-* `DataSourceV2Relation` leaf logical operator is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> (indirectly via <<spark-sql-LogicalPlan-DataSourceV2Relation.md#createWriter, createWriter>> implicit method)
+* `DataSourceV2Relation` leaf logical operator is requested to <<DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> (indirectly via <<DataSourceV2Relation.md#createWriter, createWriter>> implicit method)
 
 [source, scala]
 ----

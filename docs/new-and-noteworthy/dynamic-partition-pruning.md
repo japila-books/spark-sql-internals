@@ -9,7 +9,7 @@ The best results are expected in JOIN queries between a large fact table and a m
 
 Dynamic Partition Pruning is applied to a query at logical optimization phase using [PartitionPruning](../logical-optimizations/PartitionPruning.md) and [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md) optimization rules.
 
-Dynamic Partition Pruning optimization is controlled by [spark.sql.optimizer.dynamicPartitionPruning.enabled](../spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property.
+Dynamic Partition Pruning optimization is controlled by [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property.
 
 ## References
 

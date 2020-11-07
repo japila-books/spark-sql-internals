@@ -20,7 +20,7 @@ NOTE: `resolved` is part of spark-sql-LogicalPlan.md#resolved[LogicalPlan Contra
 The catalyst/QueryPlan.md#output[output schema] of a `Generate` is...FIXME
 
 !!! note
-  `Generate` logical operator is resolved to spark-sql-SparkPlan-GenerateExec.md[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
+  `Generate` logical operator is resolved to GenerateExec.md[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
 
 [TIP]
 ====

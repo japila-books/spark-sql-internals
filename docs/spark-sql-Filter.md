@@ -12,9 +12,9 @@
 
 * `FileFormat` is requested to [build a Data Reader with partition column values appended](FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](ParquetFileFormat.md#buildReaderWithPartitionValues))
 
-* `RowDataSourceScanExec` is spark-sql-SparkPlan-RowDataSourceScanExec.md#creating-instance[created] (for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
+* `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 
-* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] logical operators with a spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] or a spark-sql-PrunedScan.md[PrunedScan])
+* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for LogicalRelation.md[LogicalRelation] logical operators with a spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] or a spark-sql-PrunedScan.md[PrunedScan])
 
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 

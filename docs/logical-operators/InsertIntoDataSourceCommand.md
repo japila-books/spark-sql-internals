@@ -2,9 +2,9 @@ title: InsertIntoDataSourceCommand
 
 # InsertIntoDataSourceCommand Logical Command
 
-`InsertIntoDataSourceCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
+`InsertIntoDataSourceCommand` is a <<RunnableCommand.md#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
 
-`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution is executed (and [resolves](../logical-analysis-rules/DataSourceAnalysis.md#InsertIntoTable-InsertableRelation) an <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator with a <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> on an <<spark-sql-InsertableRelation.md#, InsertableRelation>>).
+`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution is executed (and [resolves](../logical-analysis-rules/DataSourceAnalysis.md#InsertIntoTable-InsertableRelation) an <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator with a <<LogicalRelation.md#, LogicalRelation>> on an <<spark-sql-InsertableRelation.md#, InsertableRelation>>).
 
 [source, plaintext]
 ----
@@ -46,7 +46,7 @@ scala> println(plan.numberedTreeString)
 
 `InsertIntoDataSourceCommand` takes the following to be created:
 
-* [[logicalRelation]] <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelation>> leaf logical operator
+* [[logicalRelation]] <<LogicalRelation.md#, LogicalRelation>> leaf logical operator
 * [[query]] <<spark-sql-LogicalPlan.md#, Logical query plan>>
 * [[overwrite]] `overwrite` flag
 
@@ -58,9 +58,9 @@ run(
   session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` takes the <<spark-sql-InsertableRelation.md#, InsertableRelation>> (that is the <<spark-sql-LogicalPlan-LogicalRelation.md#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
+`run` takes the <<spark-sql-InsertableRelation.md#, InsertableRelation>> (that is the <<LogicalRelation.md#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
 
 `run` then <<Dataset.md#ofRows, creates a DataFrame>> for the <<query, logical query plan>> and the input `SparkSession`.
 

@@ -139,7 +139,7 @@ With Structured Streaming feature however, the above static batch query becomes 
 
 As of Spark 2.0, the main data abstraction of Spark SQL is Dataset.md[Dataset]. It represents a *structured data* which are records with a known schema. This structured data representation `Dataset` enables spark-sql-tungsten.md[compact binary representation] using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
-Spark SQL supports spark-sql-Optimizer-PushDownPredicate.md[predicate pushdown] to optimize performance of Dataset queries and can also [generate optimized code at runtime](catalyst/Optimizer.md).
+Spark SQL supports PushDownPredicate.md[predicate pushdown] to optimize performance of Dataset queries and can also [generate optimized code at runtime](catalyst/Optimizer.md).
 
 Spark SQL comes with the different APIs to work with:
 

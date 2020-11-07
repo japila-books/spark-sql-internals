@@ -36,9 +36,9 @@ write(
 <span id="write-description">
 `write` creates a `WriteJobDescription` with the following:
 
-* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or [spark.sql.files.maxRecordsPerFile](spark-sql-properties.md#spark.sql.files.maxRecordsPerFile)
+* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or [spark.sql.files.maxRecordsPerFile](configuration-properties.md#spark.sql.files.maxRecordsPerFile)
 
-* `timeZoneId` based on the `timeZone` option (from the given options) if available or [spark.sql.session.timeZone](spark-sql-properties.md#spark.sql.session.timeZone)
+* `timeZoneId` based on the `timeZone` option (from the given options) if available or [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
 
 `write` requests the given `FileCommitProtocol` committer to `setupJob`.
 

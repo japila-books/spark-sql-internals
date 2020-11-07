@@ -259,7 +259,7 @@ input[4, string, true]
 
 ==== [[hint]] Creating UnresolvedHint Logical Operator -- `hint` Method
 
-`plans` adds `hint` method to create a spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator.
+`plans` adds `hint` method to create a UnresolvedHint.md[UnresolvedHint] logical operator.
 
 [source, scala]
 ----
@@ -268,7 +268,7 @@ hint(name: String, parameters: Any*): LogicalPlan
 
 ==== [[join]] Creating Join Logical Operator -- `join` Method
 
-`join` creates a spark-sql-LogicalPlan-Join.md[Join] logical operator.
+`join` creates a Join.md[Join] logical operator.
 
 [source, scala]
 ----
@@ -280,7 +280,7 @@ join(
 
 ==== [[table]] Creating UnresolvedRelation Logical Operator -- `table` Method
 
-`table` creates a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operator.
+`table` creates a UnresolvedRelation.md[UnresolvedRelation] logical operator.
 
 [source, scala]
 ----
@@ -321,7 +321,7 @@ a| [[analyze]]
 analyze: LogicalPlan
 ----
 
-Resolves attribute references (using spark-sql-Optimizer-EliminateSubqueryAliases.md[EliminateSubqueryAliases] logical optimization and `SimpleAnalyzer` logical analyzer)
+Resolves attribute references (using EliminateSubqueryAliases.md[EliminateSubqueryAliases] logical optimization and `SimpleAnalyzer` logical analyzer)
 
 | as
 a| [[as]]

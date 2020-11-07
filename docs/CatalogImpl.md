@@ -130,13 +130,13 @@ scala> sql("select count(*) as count from readme").show(false)
 +-----+
 ----
 
-The `source` input parameter is the name of the data source provider for the table, e.g. parquet, json, text. If not specified, `createExternalTable` uses spark-sql-properties.md#spark.sql.sources.default[spark.sql.sources.default] setting to know the data source format.
+The `source` input parameter is the name of the data source provider for the table, e.g. parquet, json, text. If not specified, `createExternalTable` uses [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) setting to know the data source format.
 
 NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisException`.
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing spark-sql-LogicalPlan-SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](RowEncoder.md).
+`createExternalTable` parses `tableName` into `TableIdentifier` (using spark-sql-SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](RowEncoder.md).
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]
@@ -197,7 +197,7 @@ makeDataset[T <: DefinedByConstructorParams](
 
 `makeDataset` creates an spark-sql-ExpressionEncoder.md#apply[ExpressionEncoder] (from spark-sql-ExpressionEncoder.md#DefinedByConstructorParams[DefinedByConstructorParams]) and spark-sql-ExpressionEncoder.md#toRow[encodes] elements of the input `data` to [internal binary rows](InternalRow.md).
 
-`makeDataset` then creates a spark-sql-LogicalPlan-LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and Dataset.md#creating-instance[creates] the result `Dataset`.
+`makeDataset` then creates a LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and Dataset.md#creating-instance[creates] the result `Dataset`.
 
 NOTE: `makeDataset` is used when `CatalogImpl` is requested to <<listDatabases, list databases>>, <<listTables, tables>>, <<listFunctions, functions>> and <<listColumns, columns>>
 

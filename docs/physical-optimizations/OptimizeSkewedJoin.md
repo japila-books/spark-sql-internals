@@ -21,10 +21,10 @@
 
 `OptimizeSkewedJoin` uses the following configuration properties:
 
-* [spark.sql.adaptive.skewJoin.enabled](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.enabled)
-* [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor)
-* [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes)
-* [spark.sql.adaptive.advisoryPartitionSizeInBytes](../spark-sql-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) 
+* [spark.sql.adaptive.skewJoin.enabled](../configuration-properties.md#spark.sql.adaptive.skewJoin.enabled)
+* [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor)
+* [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes)
+* [spark.sql.adaptive.advisoryPartitionSizeInBytes](../configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) 
 
 ## Creating Instance
 
@@ -41,7 +41,7 @@ apply(
   plan: SparkPlan): SparkPlan
 ```
 
-`apply` uses [spark.sql.adaptive.skewJoin.enabled](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property to determine whether to apply any optimizations or not.
+`apply` uses [spark.sql.adaptive.skewJoin.enabled](../configuration-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property to determine whether to apply any optimizations or not.
 
 `apply` collects [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) physical operators.
 
@@ -95,8 +95,8 @@ isSkewed(
 
 `isSkewed` is on (`true`) when the given `size` is greater than all of the following:
 
-* [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property multiplied by the given `medianSize`
-* [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../spark-sql-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes) configuration property
+* [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property multiplied by the given `medianSize`
+* [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes) configuration property
 
 ## <span id="targetSize"> Target Partition Size
 
@@ -108,7 +108,7 @@ targetSize(
 
 `targetSize` determines the **target partition size** (to [optimize skewed join](#optimizeSkewJoin)) and is the greatest value among the following:
 
-* [spark.sql.adaptive.advisoryPartitionSizeInBytes](../spark-sql-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
+* [spark.sql.adaptive.advisoryPartitionSizeInBytes](../configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
 * Average size of [non-skewed partitions](#isSkewed) (based on the given `medianSize`)
 
 `targetSize` throws an `AssertionError` when all partitions are skewed (no non-skewed partitions).

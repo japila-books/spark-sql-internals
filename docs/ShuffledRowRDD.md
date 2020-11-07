@@ -13,7 +13,7 @@
 * <span id="metrics"> [SQLMetric](physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
 * [Optional Partition Specs](#partitionSpecs) (`Array[ShufflePartitionSpec]`)
 
-When created, `ShuffledRowRDD` reads the [spark.sql.adaptive.fetchShuffleBlocksInBatch](spark-sql-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property, and when enabled, sets the **__fetch_continuous_blocks_in_batch_enabled** local property to `true`.
+When created, `ShuffledRowRDD` reads the [spark.sql.adaptive.fetchShuffleBlocksInBatch](configuration-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property, and when enabled, sets the **__fetch_continuous_blocks_in_batch_enabled** local property to `true`.
 
 `ShuffledRowRDD` is created when [CollectLimitExec](physical-operators/CollectLimitExec.md), [CustomShuffleReaderExec](physical-operators/CustomShuffleReaderExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators are executed.
 

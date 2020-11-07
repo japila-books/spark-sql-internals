@@ -36,7 +36,7 @@ Found 2 WholeStageCodegen subtrees.
 
 ## spark.sql.codegen.wholeStage
 
-Whole-Stage Code Generation is controlled by [spark.sql.codegen.wholeStage](spark-sql-properties.md#spark.sql.codegen.wholeStage) Spark internal property.
+Whole-Stage Code Generation is controlled by [spark.sql.codegen.wholeStage](configuration-properties.md#spark.sql.codegen.wholeStage) Spark internal property.
 
 Whole-Stage Code Generation is on by default.
 

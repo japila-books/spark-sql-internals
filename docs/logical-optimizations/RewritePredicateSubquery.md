@@ -81,22 +81,22 @@ NOTE: `getValueExpression` is used when...FIXME
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` transforms spark-sql-LogicalPlan-Filter.md[Filter] unary operators in the input spark-sql-LogicalPlan.md[logical plan].
+`apply` transforms Filter.md[Filter] unary operators in the input spark-sql-LogicalPlan.md[logical plan].
 
-`apply` spark-sql-PredicateHelper.md#splitConjunctivePredicates[splits conjunctive predicates] in the spark-sql-LogicalPlan-Filter.md#condition[condition expression] (i.e. expressions separated by `And` expression) and then partitions them into two collections of expressions spark-sql-Expression-SubqueryExpression.md#hasInOrExistsSubquery[with and without In or Exists subquery expressions].
+`apply` spark-sql-PredicateHelper.md#splitConjunctivePredicates[splits conjunctive predicates] in the Filter.md#condition[condition expression] (i.e. expressions separated by `And` expression) and then partitions them into two collections of expressions spark-sql-Expression-SubqueryExpression.md#hasInOrExistsSubquery[with and without In or Exists subquery expressions].
 
-`apply` creates a spark-sql-LogicalPlan-Filter.md#creating-instance[Filter] operator for condition (sub)expressions without subqueries (combined with `And` expression) if available or takes the spark-sql-LogicalPlan-Filter.md#child[child] operator (of the input `Filter` unary operator).
+`apply` creates a Filter.md#creating-instance[Filter] operator for condition (sub)expressions without subqueries (combined with `And` expression) if available or takes the Filter.md#child[child] operator (of the input `Filter` unary operator).
 
-In the end, `apply` creates a new logical plan with spark-sql-LogicalPlan-Join.md[Join] operators for spark-sql-Expression-Exists.md[Exists] and spark-sql-Expression-In.md[In] expressions (and their negations) as follows:
+In the end, `apply` creates a new logical plan with Join.md[Join] operators for spark-sql-Expression-Exists.md[Exists] and spark-sql-Expression-In.md[In] expressions (and their negations) as follows:
 
-* For spark-sql-Expression-Exists.md[Exists] predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a spark-sql-LogicalPlan-Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftSemi[LeftSemi] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
+* For spark-sql-Expression-Exists.md[Exists] predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftSemi[LeftSemi] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
-* For `Not` expressions with a spark-sql-Expression-Exists.md[Exists] predicate expression, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a spark-sql-LogicalPlan-Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftAnti[LeftAnti] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
+* For `Not` expressions with a spark-sql-Expression-Exists.md[Exists] predicate expression, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftAnti[LeftAnti] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
-* For spark-sql-Expression-In.md[In] predicate expressions with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>> followed by <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a spark-sql-LogicalPlan-Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftSemi[LeftSemi] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
+* For spark-sql-Expression-In.md[In] predicate expressions with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>> followed by <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftSemi[LeftSemi] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
-* For `Not` expressions with a spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>>, <<rewriteExistentialExpr, rewriteExistentialExpr>> followed by spark-sql-PredicateHelper.md#splitConjunctivePredicates[splitting conjunctive predicates] and creates a spark-sql-LogicalPlan-Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftAnti[LeftAnti] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
+* For `Not` expressions with a spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>>, <<rewriteExistentialExpr, rewriteExistentialExpr>> followed by spark-sql-PredicateHelper.md#splitConjunctivePredicates[splitting conjunctive predicates] and creates a Join.md#creating-instance[Join] operator with spark-sql-joins.md#LeftAnti[LeftAnti] join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
-* For other predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a spark-sql-LogicalPlan-Project.md#creating-instance[Project] unary operator with a spark-sql-LogicalPlan-Filter.md#creating-instance[Filter] operator
+* For other predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Project.md#creating-instance[Project] unary operator with a Filter.md#creating-instance[Filter] operator
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

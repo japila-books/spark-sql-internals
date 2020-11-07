@@ -2,7 +2,7 @@
 
 `AggregateProcessor` is <<apply, created>> and used exclusively when `WindowExec` physical operator is executed.
 
-`AggregateProcessor` supports spark-sql-Expression-DeclarativeAggregate.md[DeclarativeAggregate] and spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] aggregate <<functions, functions>> only (which spark-sql-SparkPlan-WindowExec.md#windowFrameExpressionFactoryPairs[happen to] be spark-sql-Expression-AggregateFunction.md[AggregateFunction] in [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)).
+`AggregateProcessor` supports spark-sql-Expression-DeclarativeAggregate.md[DeclarativeAggregate] and spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] aggregate <<functions, functions>> only (which WindowExec.md#windowFrameExpressionFactoryPairs[happen to] be spark-sql-Expression-AggregateFunction.md[AggregateFunction] in [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)).
 
 [[properties]]
 .AggregateProcessor's Properties
@@ -58,7 +58,7 @@ apply(
   newMutableProjection: (Seq[Expression], Seq[Attribute]) => MutableProjection): AggregateProcessor
 ----
 
-NOTE: `apply` is used exclusively when `WindowExec` is spark-sql-SparkPlan-WindowExec.md#doExecute[executed] (and creates spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md))
+NOTE: `apply` is used exclusively when `WindowExec` is WindowExec.md#doExecute[executed] (and creates spark-sql-WindowFunctionFrame.md[WindowFunctionFrame] per `AGGREGATE` window aggregate functions, i.e. [AggregateExpression](../expressions/AggregateExpression.md) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md))
 
 === [[update]] Executing update on ImperativeAggregates -- `update` Method
 

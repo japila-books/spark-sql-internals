@@ -6,7 +6,7 @@
 
 * `WindowSpec` is requested to <<spark-sql-WindowSpec.md#withAggregate, withAggregate>> (when <<spark-sql-Column.md#over, Column.over>> operator is used)
 
-* [WindowsSubstitution](../logical-analysis-rules/WindowsSubstitution.md) logical evaluation rule is executed (with <<spark-sql-LogicalPlan-WithWindowDefinition.md#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> expressions)
+* [WindowsSubstitution](../logical-analysis-rules/WindowsSubstitution.md) logical evaluation rule is executed (with <<WithWindowDefinition.md#, WithWindowDefinition>> logical operators with <<spark-sql-Expression-UnresolvedWindowExpression.md#, UnresolvedWindowExpression>> expressions)
 
 * `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitFunctionCall, parse a function call>> in a SQL statement
 
@@ -38,7 +38,7 @@ windowExpr: org.apache.spark.sql.catalyst.expressions.WindowExpression = 'count(
 scala> windowExpr.sql
 res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 ```
-<1> Use `sqlParser` directly as in spark-sql-LogicalPlan-WithWindowDefinition.md#example[WithWindowDefinition Example]
+<1> Use `sqlParser` directly as in WithWindowDefinition.md#example[WithWindowDefinition Example]
 
 [[properties]]
 .WindowExpression's Properties
@@ -66,7 +66,7 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 | `"[windowFunction] [windowSpec]"`
 |===
 
-NOTE: `WindowExpression` is subject to <<spark-sql-Optimizer-NullPropagation.md#, NullPropagation>> and <<spark-sql-Optimizer-DecimalAggregates.md#, DecimalAggregates>> logical optimizations.
+NOTE: `WindowExpression` is subject to <<NullPropagation.md#, NullPropagation>> and <<DecimalAggregates.md#, DecimalAggregates>> logical optimizations.
 
 NOTE: Distinct window functions are not supported which is enforced at <<spark-sql-Analyzer-CheckAnalysis.md#WindowExpression-AggregateExpression-isDistinct, analysis>>.
 

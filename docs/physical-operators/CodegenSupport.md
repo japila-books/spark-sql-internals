@@ -99,7 +99,7 @@ consume(
 
 `consume` creates a so-called `consumeFunc` by <<constructDoConsumeFunction, constructDoConsumeFunction>> when the following are all met:
 
-. [spark.sql.codegen.splitConsumeFuncByOperator](../spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) internal configuration property is enabled
+. [spark.sql.codegen.splitConsumeFuncByOperator](../configuration-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) internal configuration property is enabled
 
 . <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>> contains all catalyst/QueryPlan.md#output[output attributes]
 
@@ -115,7 +115,7 @@ In the end, `consume` gives the plain Java source code with the comment `CONSUME
 ```
 
 !!! tip
-    Enable [spark.sql.codegen.comments](../spark-sql-properties.md#spark.sql.codegen.comments) Spark SQL property to have `CONSUME` markers in the generated Java source code.
+    Enable [spark.sql.codegen.comments](../configuration-properties.md#spark.sql.codegen.comments) Spark SQL property to have `CONSUME` markers in the generated Java source code.
 
 ```text
 // ./bin/spark-shell --conf spark.sql.codegen.comments=true
@@ -159,9 +159,9 @@ Found 2 WholeStageCodegen subtrees.
 
 `consume` is used when:
 
-* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<spark-sql-SparkPlan-FilterExec.md#doConsume, FilterExec>>, spark-sql-SparkPlan-GenerateExec.md#doConsume[GenerateExec], spark-sql-SparkPlan-ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for spark-sql-whole-stage-codegen.md#consume-path["consume" path] in whole-stage code generation
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<FilterExec.md#doConsume, FilterExec>>, GenerateExec.md#doConsume[GenerateExec], ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for spark-sql-whole-stage-codegen.md#consume-path["consume" path] in whole-stage code generation
 
-* spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], spark-sql-SparkPlan-HashAggregateExec.md#doProduce[HashAggregateExec], spark-sql-SparkPlan-InputAdapter.md#doProduce[InputAdapter], spark-sql-SparkPlan-RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], spark-sql-SparkPlan-RangeExec.md#doProduce[RangeExec], spark-sql-SparkPlan-SortExec.md#doProduce[SortExec], spark-sql-SparkPlan-SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage code generation
+* spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], HashAggregateExec.md#doProduce[HashAggregateExec], InputAdapter.md#doProduce[InputAdapter], RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], RangeExec.md#doProduce[RangeExec], SortExec.md#doProduce[SortExec], SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage code generation
 
 ### <span id="limitNotReachedCond"> Data-Producing Loop Condition
 
@@ -251,9 +251,9 @@ supportCodegen: Boolean
 !!! note
     `supportCodegen` is turned off in the following physical operators:
 
-    * spark-sql-SparkPlan-GenerateExec.md[GenerateExec]
-    * spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec] with spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregates]
-    * spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] for all spark-sql-joins.md#join-types[join types] except `INNER` and `CROSS`
+    * GenerateExec.md[GenerateExec]
+    * HashAggregateExec.md[HashAggregateExec] with spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregates]
+    * SortMergeJoinExec.md[SortMergeJoinExec] for all spark-sql-joins.md#join-types[join types] except `INNER` and `CROSS`
 
 ## <span id="prepareRowVar"> prepareRowVar Internal Method
 
@@ -266,7 +266,7 @@ prepareRowVar(
 
 `prepareRowVar`...FIXME
 
-`prepareRowVar` is used when `CodegenSupport` is requested to [consume](#consume) (and [constructDoConsumeFunction](#constructDoConsumeFunction) with [spark.sql.codegen.splitConsumeFuncByOperator](../spark-sql-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) enabled).
+`prepareRowVar` is used when `CodegenSupport` is requested to [consume](#consume) (and [constructDoConsumeFunction](#constructDoConsumeFunction) with [spark.sql.codegen.splitConsumeFuncByOperator](../configuration-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) enabled).
 
 ## <span id="constructDoConsumeFunction"> constructDoConsumeFunction Internal Method
 

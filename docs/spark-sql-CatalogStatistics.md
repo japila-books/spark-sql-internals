@@ -20,9 +20,9 @@ title: CatalogStatistics
 
 `CatalogStatistics` is <<creating-instance, created>> when:
 
-* spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in [ExternalCatalog](ExternalCatalog.md))
+* AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand` and `TruncateTableCommand` commands are executed (and store statistics in [ExternalCatalog](ExternalCatalog.md))
 
-* `CommandUtils` is requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics], the spark-sql-CommandUtils.md#compareAndGetNewStats[current statistics (if changed)]
+* `CommandUtils` is requested for [updating existing table statistics](CommandUtils.md#updateTableStats), the [current statistics (if changed)](CommandUtils.md#compareAndGetNewStats)
 
 * `HiveExternalCatalog` is requested for [restoring Spark statistics from properties](hive/HiveExternalCatalog.md#statsFromProperties) (from a Hive Metastore)
 
@@ -78,7 +78,7 @@ toPlanStats(
 
 With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the [estimated total (output) size](logical-operators/EstimationUtils.md#getOutputSize), <<rowCount, row count>> and column statistics.
 
-NOTE: Cost-based optimization is enabled when spark-sql-properties.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property is turned on, i.e. `true`, and is disabled by default.
+NOTE: Cost-based optimization is enabled when [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) configuration property is turned on, i.e. `true`, and is disabled by default.
 
 Otherwise, when spark-sql-cost-based-optimization.md[cost-based optimization] is disabled, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory <<sizeInBytes, sizeInBytes>>.
 

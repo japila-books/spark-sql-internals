@@ -46,7 +46,7 @@ The catalyst/QueryPlan.md#output[output schema] of a `GroupingSets` are exactly 
 
 * [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics)
 
-`GroupingSets` operator is resolved to an spark-sql-LogicalPlan-Aggregate.md[Aggregate] with spark-sql-LogicalPlan-Expand.md[Expand] logical operators.
+`GroupingSets` operator is resolved to an Aggregate.md[Aggregate] with Expand.md[Expand] logical operators.
 
 [source, scala]
 ----

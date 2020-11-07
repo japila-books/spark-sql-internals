@@ -1,11 +1,10 @@
-# CatalogTable &mdash; Table Specification (Metadata)
+# CatalogTable
 
-`CatalogTable` is the *specification* (_metadata_) of a table.
+`CatalogTable` is the **specification** (_metadata_) of a table.
 
 `CatalogTable` is stored in a [SessionCatalog](SessionCatalog.md) (session-scoped catalog of relational entities).
 
-[source, scala]
-----
+```text
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
@@ -22,7 +21,7 @@ val t1Tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
 val t1Metadata = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(t1Tid)
 scala> :type t1Metadata
 org.apache.spark.sql.catalyst.catalog.CatalogTable
-----
+```
 
 `CatalogTable` is <<creating-instance, created>> when:
 
@@ -38,14 +37,14 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 
 * `CreateTableLikeCommand` logical command is executed
 
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#prepareTable, prepareTable>>)
+* `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#prepareTable, prepareTable>>)
 
 * `CatalogImpl` is requested to [createTable](CatalogImpl.md#createTable)
 
 [[simpleString]]
 The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME
 
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical command is <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, executed>> (with a partition specification).
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical command is <<ShowTablesCommand.md#run, executed>> (with a partition specification).
 
 [[toString]]
 `CatalogTable` uses the following *text representation* (i.e. `toString`)...FIXME
@@ -58,11 +57,11 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `CreateTableLikeCommand` logical command is executed
 
-* `DescribeTableCommand` logical command is requested to <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, describe detailed partition and storage information>> (when <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>>)
+* `DescribeTableCommand` logical command is requested to <<DescribeTableCommand.md#run, describe detailed partition and storage information>> (when <<DescribeTableCommand.md#run, executed>>)
 
-* <<spark-sql-LogicalPlan-ShowCreateTableCommand.md#, ShowCreateTableCommand>> logical command is executed
+* <<ShowCreateTableCommand.md#, ShowCreateTableCommand>> logical command is executed
 
-* <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#run, CreateDataSourceTableCommand>> and <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#run, CreateDataSourceTableAsSelectCommand>> logical commands are executed
+* <<CreateDataSourceTableCommand.md#run, CreateDataSourceTableCommand>> and <<CreateDataSourceTableAsSelectCommand.md#run, CreateDataSourceTableAsSelectCommand>> logical commands are executed
 
 * `CatalogTable` is requested to <<toLinkedHashMap, convert itself to LinkedHashMap>>
 
@@ -127,17 +126,17 @@ NOTE: The <<stats, CatalogStatistics>> are optional when `CatalogTable` is <<cre
 
 CAUTION: FIXME When are stats specified? What if there are not?
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
 
 Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if spark-sql-properties.md#spark.sql.statistics.fallBackToHdfs[spark.sql.statistics.fallBackToHdfs] property is turned on) or assume spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] (that effectively disables table broadcasting).
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if [spark.sql.statistics.fallBackToHdfs](configuration-properties.md#spark.sql.statistics.fallBackToHdfs) property is turned on) or assume [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) (that effectively disables table broadcasting).
 
 When requested to hive/HiveClientImpl.md#getTableOption[look up a table in a metastore], `HiveClientImpl` hive/HiveClientImpl.md#readHiveStats[reads table or partition statistics directly from a Hive metastore].
 
-You can use spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand], spark-sql-LogicalPlan-AnalyzePartitionCommand.md[AnalyzePartitionCommand], spark-sql-LogicalPlan-AnalyzeTableCommand.md[AnalyzeTableCommand] commands to record statistics in a catalog.
+You can use AnalyzeColumnCommand.md[AnalyzeColumnCommand], AnalyzePartitionCommand.md[AnalyzePartitionCommand], AnalyzeTableCommand.md[AnalyzeTableCommand] commands to record statistics in a catalog.
 
-The table statistics can be spark-sql-CommandUtils.md#updateTableStats[automatically updated] (after executing commands like `AlterTableAddPartitionCommand`) when spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on.
+The table statistics can be [automatically updated](CommandUtils.md#updateTableStats) (after executing commands like `AlterTableAddPartitionCommand`) when [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) property is turned on.
 
 You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
 
@@ -208,7 +207,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 ====
 `toLinkedHashMap` is used when:
 
-* `DescribeTableCommand` is requested to spark-sql-LogicalPlan-DescribeTableCommand.md#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to spark-sql-LogicalPlan-DescribeTableCommand.md#run[run] for a non-temporary table and the spark-sql-LogicalPlan-DescribeTableCommand.md#isExtended[isExtended] flag on)
+* `DescribeTableCommand` is requested to DescribeTableCommand.md#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to DescribeTableCommand.md#run[run] for a non-temporary table and the DescribeTableCommand.md#isExtended[isExtended] flag on)
 
 * `CatalogTable` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
 ====

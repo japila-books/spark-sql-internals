@@ -30,7 +30,7 @@ Internally, `checkAnalysis` processes nodes in the input `plan` (starting from t
 | LogicalPlan/Operator
 | Behaviour
 
-| [[UnresolvedRelation]] spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation]
+| [[UnresolvedRelation]] UnresolvedRelation.md[UnresolvedRelation]
 a| Fails analysis with the error message:
 
 ```
@@ -115,7 +115,7 @@ Expression '[e]' not supported within a window function.
 | [[deterministic]] spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions
 | FIXME
 
-| [[UnresolvedHint]] spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint]
+| [[UnresolvedHint]] UnresolvedHint.md[UnresolvedHint]
 | FIXME
 
 | FIXME

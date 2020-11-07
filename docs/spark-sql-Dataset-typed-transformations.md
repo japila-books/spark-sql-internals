@@ -73,7 +73,7 @@ except(
   other: Dataset[T]): Dataset[T]
 ----
 
-Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag enabled).
+Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an Except.md[Except] logical operator (with the `isAll` flag enabled).
 
 | exceptAll
 a| [[exceptAll]]
@@ -86,7 +86,7 @@ exceptAll(
 
 (*New in 2.4.0*)
 
-Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an spark-sql-LogicalPlan-Except.md[Except] logical operator (with the `isAll` flag disabled).
+Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an Except.md[Except] logical operator (with the `isAll` flag disabled).
 
 | <<filter, filter>>
 a|
@@ -545,7 +545,7 @@ NOTE: `repartition` methods correspond to SQL's spark-sql-SparkSqlAstBuilder.md#
 repartitionByRange(partitionExprs: Column*): Dataset[T] // <1>
 repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 ----
-<1> Uses <<spark-sql-properties.md#spark.sql.shuffle.partitions, spark.sql.shuffle.partitions>> configuration property for the number of partitions to use
+<1> Uses [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property for the number of partitions to use
 
 `repartitionByRange` simply <<Dataset.md#withTypedPlan, creates a Dataset>> with a [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
 
@@ -714,9 +714,9 @@ scala> q.show
 +---+-------------------+
 ----
 
-Internally, `unionByName` creates a <<spark-sql-LogicalPlan-Union.md#, Union>> logical operator for this `Dataset` and <<spark-sql-LogicalPlan-Project.md#, Project>> logical operator with the `other` Dataset.
+Internally, `unionByName` creates a <<Union.md#, Union>> logical operator for this `Dataset` and <<Project.md#, Project>> logical operator with the `other` Dataset.
 
-In the end, `unionByName` applies the <<spark-sql-Optimizer-CombineUnions.md#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<spark-sql-LogicalPlan-AnalysisBarrier.md#, AnalysisBarriers>>.
+In the end, `unionByName` applies the <<CombineUnions.md#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<AnalysisBarrier.md#, AnalysisBarriers>>.
 
 [source, scala]
 ----

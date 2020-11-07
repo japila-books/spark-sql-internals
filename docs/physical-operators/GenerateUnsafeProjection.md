@@ -168,7 +168,7 @@ mutableStateArray[0]
 
 * `CodegenSupport` is requested to [prepareRowVar](CodegenSupport.md#prepareRowVar) (to [generate a Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume))
 
-* `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doProduceWithKeys[doProduceWithKeys] and spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[doConsumeWithKeys]
+* `HashAggregateExec` is requested to HashAggregateExec.md#doProduceWithKeys[doProduceWithKeys] and HashAggregateExec.md#doConsumeWithKeys[doConsumeWithKeys]
 
-* `BroadcastHashJoinExec` is requested to spark-sql-SparkPlan-BroadcastHashJoinExec.md#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
+* `BroadcastHashJoinExec` is requested to BroadcastHashJoinExec.md#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
 ====

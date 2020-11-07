@@ -4,11 +4,11 @@
 
 `DataSourceReader` is created to scan the data from a data source when:
 
-* `DataSourceV2Relation` is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newReader, create a new reader>>
+* `DataSourceV2Relation` is requested to <<DataSourceV2Relation.md#newReader, create a new reader>>
 
 * `ReadSupport` is requested to <<spark-sql-ReadSupport.md#createReader, create a reader>>
 
-`DataSourceReader` is used to create `StreamingDataSourceV2Relation` and <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator
+`DataSourceReader` is used to create `StreamingDataSourceV2Relation` and <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator
 
 NOTE: It _appears_ that all concrete <<implementations, data source readers>> are used in Spark Structured Streaming only.
 
@@ -29,7 +29,7 @@ List<InputPartition<InternalRow>> planInputPartitions()
 
 [InputPartitions](connector/InputPartition.md)
 
-Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for the <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#partitions, input partitions>> (and simply delegates to the underlying <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
+Used exclusively when `DataSourceV2ScanExec` leaf physical operator is requested for the <<DataSourceV2ScanExec.md#partitions, input partitions>> (and simply delegates to the underlying <<DataSourceV2ScanExec.md#reader, DataSourceReader>>) to create the input `RDD[InternalRow]` (`inputRDD`)
 
 | readSchema
 a| [[readSchema]]
@@ -42,7 +42,7 @@ StructType readSchema()
 
 Used when:
 
-* `DataSourceV2Relation` factory object is requested to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md))
+* `DataSourceV2Relation` factory object is requested to <<DataSourceV2Relation.md#create, create a DataSourceV2Relation>> (when `DataFrameReader` is requested to ["load" data (as a DataFrame)](DataFrameReader.md#load) from a data source with [ReadSupport](spark-sql-ReadSupport.md))
 
 * `DataSourceV2Strategy` execution planning strategy is requested to [apply column pruning optimization](execution-planning-strategies/DataSourceV2Strategy.md#pruneColumns)
 

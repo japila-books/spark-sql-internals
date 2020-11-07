@@ -2,7 +2,7 @@
 
 `ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
-* Resolves spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operators (in InsertIntoTable.md[InsertIntoTable] operators)
+* Resolves UnresolvedRelation.md[UnresolvedRelation] logical operators (in InsertIntoTable.md[InsertIntoTable] operators)
 
 * Other uses of `UnresolvedRelation`
 
@@ -80,15 +80,15 @@ apply(
 
 NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to execute a rule on a spark-sql-LogicalPlan.md[logical plan].
 
-For a InsertIntoTable.md[InsertIntoTable] logical operator with a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] child operator, `apply` <<lookupTableFromCatalog, lookupTableFromCatalog>> and executes the spark-sql-Optimizer-EliminateSubqueryAliases.md[EliminateSubqueryAliases] optimization rule.
+For a InsertIntoTable.md[InsertIntoTable] logical operator with a UnresolvedRelation.md[UnresolvedRelation] child operator, `apply` <<lookupTableFromCatalog, lookupTableFromCatalog>> and executes the EliminateSubqueryAliases.md[EliminateSubqueryAliases] optimization rule.
 
-For a spark-sql-LogicalPlan-View.md[View] operator, `apply` substitutes the resolved table for the InsertIntoTable.md[InsertIntoTable] operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For spark-sql-LogicalPlan-View.md[View] operator, `apply` fail analysis with the exception:
+For a View.md[View] operator, `apply` substitutes the resolved table for the InsertIntoTable.md[InsertIntoTable] operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For View.md[View] operator, `apply` fail analysis with the exception:
 
 ```
 Inserting into a view is not allowed. View: [identifier].
 ```
 
-For spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operators, `apply` simply <<resolveRelation, resolveRelation>>.
+For UnresolvedRelation.md[UnresolvedRelation] logical operators, `apply` simply <<resolveRelation, resolveRelation>>.
 
 === [[resolveRelation]] Resolving Relation -- `resolveRelation` Method
 
@@ -100,7 +100,7 @@ resolveRelation(
 
 `resolveRelation`...FIXME
 
-NOTE: `resolveRelation` is used when `ResolveRelations` rule is <<apply, executed>> (for a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] logical operator).
+NOTE: `resolveRelation` is used when `ResolveRelations` rule is <<apply, executed>> (for a UnresolvedRelation.md[UnresolvedRelation] logical operator).
 
 === [[isRunningDirectlyOnFiles]] `isRunningDirectlyOnFiles` Internal Method
 
@@ -113,13 +113,13 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 
 * The database of the input `table` is defined
 
-* spark-sql-properties.md#spark.sql.runSQLOnFiles[spark.sql.runSQLOnFiles] internal configuration property is enabled
+* [spark.sql.runSQLOnFiles](../configuration-properties.md#spark.sql.runSQLOnFiles) internal configuration property is enabled
 
 * The `table` is not a [temporary table](../SessionCatalog.md#isTemporaryTable)
 
 * The [database](../SessionCatalog.md#databaseExists) or the [table](../SessionCatalog.md#tableExists) do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
 
-NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelation] leaf logical operator for a table reference).
+NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a UnresolvedRelation.md[UnresolvedRelation] leaf logical operator for a table reference).
 
 === [[lookupTableFromCatalog]] Finding Table in Session-Scoped Catalog of Relational Entities -- `lookupTableFromCatalog` Internal Method
 
@@ -134,8 +134,8 @@ lookupTableFromCatalog(
 
 NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current [SessionCatalog](../Analyzer.md#catalog).
 
-NOTE: The table is described using spark-sql-LogicalPlan-UnresolvedRelation.md#tableIdentifier[TableIdentifier] of the input `UnresolvedRelation`.
+NOTE: The table is described using UnresolvedRelation.md#tableIdentifier[TableIdentifier] of the input `UnresolvedRelation`.
 
 `lookupTableFromCatalog` fails the analysis phase (by reporting a `AnalysisException`) when the table or the table's database cannot be found.
 
-NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for InsertIntoTable.md[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" spark-sql-LogicalPlan-UnresolvedRelation.md[UnresolvedRelations]).
+NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for InsertIntoTable.md[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" UnresolvedRelation.md[UnresolvedRelations]).

@@ -6,7 +6,7 @@ Quoting [What's new in Apache Spark 3.0 - demote broadcast hash join](https://ww
 
 > This rule checks whether the nodes involved in the join have a lot of empty partitions. If it's the case, the rule adds a no broadcast hash join hint to prevent the broadcast strategy to be applied.
 
-`DemoteBroadcastHashJoin` uses [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../spark-sql-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property for the threshold to [demote a broadcast hash join](#shouldDemote).
+`DemoteBroadcastHashJoin` uses [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property for the threshold to [demote a broadcast hash join](#shouldDemote).
 
 `DemoteBroadcastHashJoin` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -42,6 +42,6 @@ shouldDemote(
 
 `shouldDemote` makes sure that the [result](../physical-operators/QueryStageExec.md#resultOption) and [MapOutputStatistics](../physical-operators/ShuffleQueryStageExec.md#mapStats) of the `ShuffleQueryStageExec` operator are available. Otherwise, `shouldDemote` is `false`.
 
-`shouldDemote` is `true` when the ratio of the non-empty partitions to all the partitions (based on the `MapOutputStatistics`) is below [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../spark-sql-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property.
+`shouldDemote` is `true` when the ratio of the non-empty partitions to all the partitions (based on the `MapOutputStatistics`) is below [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property.
 
 `shouldDemote` is used when `DemoteBroadcastHashJoin` optimization is [executed](#apply).

@@ -2,7 +2,7 @@ title: LogicalRelation
 
 # LogicalRelation Leaf Logical Operator -- Representing BaseRelations in Logical Plan
 
-`LogicalRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that represents a <<relation, BaseRelation>> in a spark-sql-LogicalPlan.md[logical query plan].
+`LogicalRelation` is a LeafNode.md[leaf logical operator] that represents a <<relation, BaseRelation>> in a spark-sql-LogicalPlan.md[logical query plan].
 
 [source, scala]
 ----
@@ -23,7 +23,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 * `ResolveSQLOnFile` converts a logical plan
 * [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule is executed
 * hive/RelationConversions.md[RelationConversions] logical evaluation rule is executed
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
+* `CreateTempViewUsing` logical command is requested to <<CreateTempViewUsing.md#run, run>>
 * Structured Streaming's `FileStreamSource` creates batches of records
 
 [[simpleString]]
@@ -63,7 +63,7 @@ apply(
 
 * `SparkSession` is requested for a SparkSession.md#baseRelationToDataFrame[DataFrame for a BaseRelation]
 
-* spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] command is executed
+* CreateTempViewUsing.md[CreateTempViewUsing] command is executed
 
 * [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
 

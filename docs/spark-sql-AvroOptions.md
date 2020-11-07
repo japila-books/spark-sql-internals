@@ -20,7 +20,8 @@ title: Options
 | (undefined)
 a| [[compression]] Specifies the compression codec to use when writing Avro data to disk
 
-NOTE: If the option is not defined explicitly, Avro data source uses <<spark-sql-properties.md#spark.sql.avro.compression.codec, spark.sql.avro.compression.codec>> configuration property.
+!!! note
+    If the option is not defined explicitly, Avro data source uses [spark.sql.avro.compression.codec](configuration-properties.md#spark.sql.avro.compression.codec) configuration property.
 
 | ignoreExtension
 | `false`

@@ -2,7 +2,7 @@ title: CreateViewCommand
 
 # CreateViewCommand Logical Command
 
-`CreateViewCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> for <<run, creating or replacing a view or a table>>.
+`CreateViewCommand` is a <<RunnableCommand.md#, logical command>> for <<run, creating or replacing a view or a table>>.
 
 `CreateViewCommand` is <<creating-instance, created>> to represent the following:
 
@@ -159,7 +159,7 @@ NOTE: `prepareTable` is used exclusively when `CreateViewCommand` logical comman
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to ["execute"](../SessionState.md#executePlan) the <<child, child logical plan>> (which simply creates a [QueryExecution](../QueryExecution.md)).
 

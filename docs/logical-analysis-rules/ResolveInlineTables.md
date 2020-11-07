@@ -39,9 +39,9 @@ scala> println(planAfterResolveInlineTables.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` simply [searches the input plan upwards](../catalyst/TreeNode.md#transformUp) to find <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
+`apply` simply [searches the input plan upwards](../catalyst/TreeNode.md#transformUp) to find <<UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
 
-For such a <<spark-sql-LogicalPlan-UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
+For such a <<UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
 
 In the end, `apply` <<convert, converts the UnresolvedInlineTable to a LocalRelation>>.
 

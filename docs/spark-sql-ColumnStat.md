@@ -32,7 +32,7 @@
 | Histogram of values (as `Histogram` which is empty by default)
 |===
 
-`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
 
 [source, scala]
 ----
@@ -41,7 +41,7 @@ val analyzeTableSQL = s"ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS $cols"
 spark.sql(analyzeTableSQL)
 ----
 
-`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With spark-sql-properties.md#spark.sql.statistics.histogram.enabled[spark.sql.statistics.histogram.enabled] configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
+`ColumnStat` may optionally hold the <<histogram, histogram of values>> which is empty by default. With [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property turned on `ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS` SQL command generates column (equi-height) histograms.
 
 NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 
@@ -282,7 +282,7 @@ rowToColumnStat(
 
 If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
 
-NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[executed] (to spark-sql-LogicalPlan-AnalyzeColumnCommand.md#computeColumnStats[compute the statistics for specified columns]).
+NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is AnalyzeColumnCommand.md#run[executed] (to AnalyzeColumnCommand.md#computeColumnStats[compute the statistics for specified columns]).
 
 === [[statExprs]] `statExprs` Method
 

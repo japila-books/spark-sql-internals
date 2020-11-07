@@ -10,7 +10,7 @@
 `DataSourceV2ScanExec` is also a [DataSourceV2StringFormat](../spark-sql-DataSourceV2StringFormat.md), i.e....FIXME
 
 [[inputRDDs]]
-`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the [only input RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`DataSourceV2ScanExec` gives the single <<inputRDD, input RDD>> as the [only input RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is WholeStageCodegenExec.md#doExecute[executed]).
 
 ## Creating Instance
 
@@ -19,7 +19,7 @@
 * [[output]] Output schema (as a collection of `AttributeReferences`)
 * [[reader]] spark-sql-DataSourceReader.md[DataSourceReader]
 
-`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator.
+`DataSourceV2ScanExec` is <<creating-instance, created>> exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (i.e. applied to a logical plan) and finds a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator.
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

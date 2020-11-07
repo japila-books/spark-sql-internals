@@ -10,12 +10,11 @@ Vectorized Parquet Decoding is used exclusively when `ParquetFileFormat` is requ
 
 Vectorized Parquet Decoding uses [VectorizedParquetRecordReader](spark-sql-VectorizedParquetRecordReader.md) for vectorized decoding.
 
-=== [[spark.sql.parquet.enableVectorizedReader]] spark.sql.parquet.enableVectorizedReader Configuration Property
+## <span id="spark.sql.parquet.enableVectorizedReader"> spark.sql.parquet.enableVectorizedReader Configuration Property
 
-spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader[spark.sql.parquet.enableVectorizedReader] configuration property is on by default.
+[spark.sql.parquet.enableVectorizedReader](configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is on by default.
 
-[source, scala]
-----
+```scala
 val isParquetVectorizedReaderEnabled = spark.conf.get("spark.sql.parquet.enableVectorizedReader").toBoolean
 assert(isParquetVectorizedReaderEnabled, "spark.sql.parquet.enableVectorizedReader should be enabled by default")
-----
+```

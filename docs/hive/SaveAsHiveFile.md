@@ -7,7 +7,7 @@
 :url-hadoop-docs: https://hadoop.apache.org/docs/r{hadoop-version}
 :url-hadoop-javadoc: {url-hadoop-docs}/api
 
-`SaveAsHiveFile` is an extension of the ../spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand] contract for <<implementations, commands>> that can <<saveAsHiveFile, saveAsHiveFile>> (and <<getExternalTmpPath, getExternalTmpPath>>).
+`SaveAsHiveFile` is an extension of the ../DataWritingCommand.md[DataWritingCommand] contract for <<implementations, commands>> that can <<saveAsHiveFile, saveAsHiveFile>> (and <<getExternalTmpPath, getExternalTmpPath>>).
 
 [NOTE]
 ====
@@ -46,7 +46,7 @@ saveAsHiveFile(
 
 `saveAsHiveFile` sets Hadoop configuration properties when a compressed file output format is used (based on [hive.exec.compress.output](index.md#hive.exec.compress.output) configuration property).
 
-`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the [spark.sql.sources.commitProtocolClass](../spark-sql-properties.md#spark.sql.sources.commitProtocolClass) configuration property.
+`saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) configuration property.
 
 `saveAsHiveFile` uses `FileFormatWriter` utility to [write out](../FileFormatWriter.md#write) the result of executing the input [physical operator](../physical-operators/SparkPlan.md) (with a [HiveFileFormat](HiveFileFormat.md) for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
 

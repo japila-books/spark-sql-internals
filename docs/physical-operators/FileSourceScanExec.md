@@ -2,7 +2,7 @@
 
 `FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over collections of files (incl. Hive tables).
 
-`FileSourceScanExec` is <<creating-instance, created>> exclusively for a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md) when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
+`FileSourceScanExec` is <<creating-instance, created>> exclusively for a LogicalRelation.md[LogicalRelation] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md) when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
 
 ```text
 // Create a bucketed data source table
@@ -123,7 +123,7 @@ Pushed Filters: [pushedDownFilters]
 | [[scanTime]]
 |===
 
-As a spark-sql-SparkPlan-DataSourceScanExec.md[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the spark-sql-SparkPlan-DataSourceScanExec.md#nodeName[node name].
+As a DataSourceScanExec.md[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the DataSourceScanExec.md#nodeName[node name].
 
 [source, scala]
 ----
@@ -135,7 +135,7 @@ assert(fileScanExec.nodeName startsWith "Scan")
 image::images/spark-sql-FileSourceScanExec-webui-query-details.png[align="center"]
 
 [[nodeNamePrefix]]
-`FileSourceScanExec` uses *File* for spark-sql-SparkPlan-DataSourceScanExec.md#nodeNamePrefix[nodeNamePrefix] (that is used for the spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple node description] in query plans).
+`FileSourceScanExec` uses *File* for DataSourceScanExec.md#nodeNamePrefix[nodeNamePrefix] (that is used for the DataSourceScanExec.md#simpleString[simple node description] in query plans).
 
 [source, scala]
 ----
@@ -163,7 +163,7 @@ metadata: Map[String, String]
 
 Metadata
 
-NOTE: `metadata` is part of spark-sql-SparkPlan-DataSourceScanExec.md#metadata[DataSourceScanExec] contract.
+NOTE: `metadata` is part of DataSourceScanExec.md#metadata[DataSourceScanExec] contract.
 
 | pushedDownFilters
 a| [[pushedDownFilters]] spark-sql-Filter.md[Data source filters] that are <<dataFilters, dataFilters>> expressions [converted to their respective filters](../execution-planning-strategies/DataSourceStrategy.md#translateFilter)
@@ -218,17 +218,17 @@ createNonBucketedReadRDD(
 
 `createNonBucketedReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
 
-* <<spark-sql-properties.md#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>> (default: `128m`)
+* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
 
-* <<spark-sql-properties.md#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>> (default: `4m`)
+* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
 
-`createNonBucketedReadRDD` sums up the size of all the files (with the extra <<spark-sql-properties.md#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>>) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
+`createNonBucketedReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
 
-The maximum size of partitions is then the minimum of <<spark-sql-properties.md#spark.sql.files.maxPartitionBytes, spark.sql.files.maxPartitionBytes>> and the bigger of <<spark-sql-properties.md#spark.sql.files.openCostInBytes, spark.sql.files.openCostInBytes>> and the `bytesPerCore`.
+The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
 
 `createNonBucketedReadRDD` prints out the following INFO message to the logs:
 
-```
+```text
 Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
 ```
 
@@ -384,7 +384,7 @@ needsUnsafeRowConversion: Boolean
 
 1. [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../ParquetFileFormat.md)
 
-1. [spark.sql.parquet.enableVectorizedReader](../spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
+1. [spark.sql.parquet.enableVectorizedReader](../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
 Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
 
@@ -417,7 +417,7 @@ doExecute(): RDD[InternalRow]
 !!! note
     [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) built-in file formats (under certain conditions).
 
-With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<spark-sql-SparkPlan-WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<spark-sql-SparkPlan-WholeStageCodegenExec.md#child, child physical operator>> and spark-sql-SparkPlan-WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
+With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<WholeStageCodegenExec.md#child, child physical operator>> and WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
 
 With <<supportsBatch, supportsBatch>> flag disabled, `doExecute` creates an `unsafeRows` RDD to scan over which is different per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
 

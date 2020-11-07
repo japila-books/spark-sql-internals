@@ -1,12 +1,12 @@
 # ClusteredDistribution
 
-`ClusteredDistribution` is a Distribution.md[Distribution] that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
+`ClusteredDistribution` is a [Distribution](Distribution.md) that <<createPartitioning, creates a HashPartitioning>> for the <<clustering, clustering expressions>> and a requested number of partitions.
 
 `ClusteredDistribution` requires that the <<clustering, clustering expressions>> should not be empty (i.e. `Nil`).
 
 `ClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for a required child distribution:
 
-* `MapGroupsExec`, spark-sql-SparkPlan-HashAggregateExec.md#requiredChildDistribution[HashAggregateExec], spark-sql-SparkPlan-ObjectHashAggregateExec.md#requiredChildDistribution[ObjectHashAggregateExec], spark-sql-SparkPlan-SortAggregateExec.md#requiredChildDistribution[SortAggregateExec], spark-sql-SparkPlan-WindowExec.md#requiredChildDistribution[WindowExec]
+* `MapGroupsExec`, HashAggregateExec.md#requiredChildDistribution[HashAggregateExec], ObjectHashAggregateExec.md#requiredChildDistribution[ObjectHashAggregateExec], SortAggregateExec.md#requiredChildDistribution[SortAggregateExec], WindowExec.md#requiredChildDistribution[WindowExec]
 
 * Spark Structured Streaming's `FlatMapGroupsWithStateExec`, `StateStoreRestoreExec`, `StateStoreSaveExec`, `StreamingDeduplicateExec`, `StreamingSymmetricHashJoinExec`, `StreamingSymmetricHashJoinExec`
 
@@ -38,11 +38,12 @@ This ClusteredDistribution requires [requiredNumPartitions] partitions, but the 
 
 `createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.
 
-=== [[creating-instance]] Creating ClusteredDistribution Instance
+## Creating Instance
 
-`ClusteredDistribution` takes the following when created:
+`ClusteredDistribution` takes the following to be created:
 
-* [[clustering]] Clustering expressions/Expression.md[expressions]
+* [[clustering]] Clustering [expressions](../expressions/Expression.md)
 * [[requiredNumPartitions]] Required number of partitions (default: `None`)
 
-NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
+!!! note
+    `None` for the required number of partitions indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property).

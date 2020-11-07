@@ -10,7 +10,7 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 > At runtime, the adaptive execution mode can change shuffle join to broadcast join if it finds the size of one table is less than the broadcast threshold. It can also handle skewed input data for join and change the partition number of the next stage to better fit the data scale. In general, adaptive execution decreases the effort involved in tuning SQL query parameters and improves the execution performance by choosing a better execution plan and parallelism at runtime.
 
-Adaptive Query Execution is disabled by default and can be enabled using [spark.sql.adaptive.enabled](../spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property.
+Adaptive Query Execution is disabled by default and can be enabled using [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
 
 Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator (and the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)).
 

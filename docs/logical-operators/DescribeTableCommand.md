@@ -2,12 +2,12 @@ title: DescribeTableCommand
 
 # DescribeTableCommand Logical Command
 
-`DescribeTableCommand` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.
+`DescribeTableCommand` is a <<RunnableCommand.md#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.
 
 `DescribeTableCommand` is <<creating-instance, created>> exclusively when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitDescribeTable, DESCRIBE TABLE>> SQL statement (with no column specified).
 
 [[output]]
-`DescribeTableCommand` uses the following <<spark-sql-LogicalPlan-Command.md#output, output schema>>:
+`DescribeTableCommand` uses the following <<Command.md#output, output schema>>:
 
 * `col_name` as the name of the column
 * `data_type` as the data type of the column
@@ -153,7 +153,7 @@ scala> sql(s"DESCRIBE EXTENDED $tableName PARTITION ($partCol=1)").show(numRows 
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of the <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of the <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` uses the [SessionCatalog](../SessionCatalog.md) (of the <<SparkSession.md#sessionState, SessionState>> of the input <<SparkSession.md#, SparkSession>>) and branches off per the type of the table to display.
 

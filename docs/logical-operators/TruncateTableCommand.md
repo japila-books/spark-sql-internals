@@ -2,7 +2,7 @@ title: TruncateTableCommand
 
 # TruncateTableCommand Logical Command
 
-`TruncateTableCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that represents spark-sql-SparkSqlAstBuilder.md#visitTruncateTable[TRUNCATE TABLE] SQL statement.
+`TruncateTableCommand` is a RunnableCommand.md[logical command] that represents spark-sql-SparkSqlAstBuilder.md#visitTruncateTable[TRUNCATE TABLE] SQL statement.
 
 === [[creating-instance]] Creating TruncateTableCommand Instance
 
@@ -18,7 +18,7 @@ title: TruncateTableCommand
 run(spark: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of spark-sql-LogicalPlan-RunnableCommand.md#run[RunnableCommand Contract] to execute (_run_) a logical command.
+NOTE: `run` is part of RunnableCommand.md#run[RunnableCommand Contract] to execute (_run_) a logical command.
 
 `run`...FIXME
 

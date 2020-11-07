@@ -97,6 +97,7 @@ sizeInBytes: Long
 
 `sizeInBytes` is the estimated size of a relation (used in query planning).
 
-NOTE: `sizeInBytes` defaults to spark-sql-properties.md#spark.sql.defaultSizeInBytes[spark.sql.defaultSizeInBytes] internal property (i.e. infinite).
+!!! note
+    `sizeInBytes` defaults to the value of [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal configuration property.
 
-NOTE: `sizeInBytes` is used exclusively when `LogicalRelation` is requested to spark-sql-LogicalPlan-LogicalRelation.md#computeStats[computeStats] (and they are not available in spark-sql-LogicalPlan-LogicalRelation.md#catalogTable[CatalogTable]).
+`sizeInBytes` is used when `LogicalRelation` is requested to [computeStats](logical-operators/LogicalRelation.md#computeStats) (and they are not available in [CatalogTable](logical-operators/LogicalRelation.md#catalogTable)).

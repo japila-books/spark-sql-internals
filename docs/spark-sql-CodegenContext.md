@@ -13,7 +13,7 @@ val ctx = new CodegenContext
 
 `CodegenContext` is <<creating-instance, created>> when:
 
-* `WholeStageCodegenExec` physical operator is requested to spark-sql-SparkPlan-WholeStageCodegenExec.md#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed])
+* `WholeStageCodegenExec` physical operator is requested to WholeStageCodegenExec.md#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is WholeStageCodegenExec.md#doExecute[executed])
 
 * `CodeGenerator` is requested for a spark-sql-CodeGenerator.md#newCodeGenContext[new CodegenContext]
 
@@ -128,7 +128,7 @@ In the end, `generateExpressions` requests every expressions to expressions/Expr
 
 * `GenerateUnsafeProjection` is requested to spark-sql-GenerateUnsafeProjection.md#createCode[create an ExprCode for Catalyst expressions]
 
-* `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
+* `HashAggregateExec` is requested to HashAggregateExec.md#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
 ====
 
 === [[addReferenceObj]] `addReferenceObj` Method
@@ -151,7 +151,7 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 
 `subexpressionEliminationForWholeStageCodegen`...FIXME
 
-NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to spark-sql-SparkPlan-HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or spark-sql-SparkPlan-HashAggregateExec.md#doConsumeWithoutKeys[not]).
+NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or HashAggregateExec.md#doConsumeWithoutKeys[not]).
 
 === [[addNewFunction]] Adding Function to Generated Class -- `addNewFunction` Method
 

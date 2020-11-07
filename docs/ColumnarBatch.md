@@ -91,6 +91,6 @@ Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numR
 
 * `ArrowConverters` is requested to `fromBatchIterator`
 
-* `InMemoryTableScanExec` physical operator is requested to <<spark-sql-SparkPlan-InMemoryTableScanExec.md#createAndDecompressColumn, createAndDecompressColumn>>
+* `InMemoryTableScanExec` physical operator is requested to <<InMemoryTableScanExec.md#createAndDecompressColumn, createAndDecompressColumn>>
 
 * [ArrowPythonRunner](pyspark/ArrowPythonRunner.md) is requested for a `ReaderIterator` (`newReaderIterator`)

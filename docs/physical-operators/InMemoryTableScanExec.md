@@ -2,21 +2,20 @@
 
 `InMemoryTableScanExec` is a [leaf physical operator](LeafExecNode.md) that represents an [InMemoryRelation](#relation) logical operator at execution time.
 
-`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an spark-sql-LogicalPlan-InMemoryRelation.md[InMemoryRelation] logical operator in a logical query plan.
+`InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an InMemoryRelation.md[InMemoryRelation] logical operator in a logical query plan.
 
 [[creating-instance]]
 `InMemoryTableScanExec` takes the following to be created:
 
-* [[attributes]] spark-sql-Expression-Attribute.md[Attribute] expressions
-* [[predicates]] Predicate expressions/Expression.md[expressions]
+* [[attributes]] [Attribute](../expressions/Attribute.md) expressions
+* [[predicates]] Predicate [expressions](../expressions/Expression.md)
 * [[relation]] [InMemoryRelation](../logical-operators/InMemoryRelation.md) logical operator
 
-`InMemoryTableScanExec` is a spark-sql-ColumnarBatchScan.md[ColumnarBatchScan] that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled).
+`InMemoryTableScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled).
 
-`InMemoryTableScanExec` supports <<filteredCachedBatches, partition batch pruning>> (only when spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is enabled which is so by default).
+`InMemoryTableScanExec` supports <<filteredCachedBatches, partition batch pruning>> (only when [spark.sql.inMemoryColumnarStorage.partitionPruning](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning) internal configuration property is enabled).
 
-[source, scala]
-----
+```text
 // Sample DataFrames
 val tokens = Seq(
   (0, "playing"),
@@ -44,16 +43,15 @@ scala> q.explain
          +- InMemoryTableScan [id#10L]
                +- InMemoryRelation [id#10L], true, 10000, StorageLevel(disk, memory, deserialized, 1 replicas)
                      +- *Range (0, 10, step=1, splits=8)
-----
+```
 
-[source, scala]
-----
+```scala
 val q = spark.range(4).cache
 val plan = q.queryExecution.executedPlan
 import org.apache.spark.sql.execution.columnar.InMemoryTableScanExec
 val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec }.get
 assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
-----
+```
 
 [[metrics]]
 .InMemoryTableScanExec's Performance Metrics
@@ -75,7 +73,7 @@ image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="cen
 `InMemoryTableScanExec` [supports Java code generation](CodegenSupport.md#supportCodegen) only if <<supportsBatch, batch decoding>> is enabled.
 
 [[inputRDDs]]
-`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the [only RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`InMemoryTableScanExec` gives the single <<inputRDD, inputRDD>> as the [only RDD of internal rows](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` physical operator is WholeStageCodegenExec.md#doExecute[executed]).
 
 [[enableAccumulatorsForTest]]
 [[spark.sql.inMemoryTableScanStatistics.enable]]
@@ -108,26 +106,25 @@ vectorTypes: Option[Seq[String]]
 
 NOTE: `vectorTypes` is part of spark-sql-ColumnarBatchScan.md#vectorTypes[ColumnarBatchScan Contract] to...FIXME.
 
-`vectorTypes` uses [spark.sql.columnVector.offheap.enabled](../spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration property to select the name of the concrete column vector ([OnHeapColumnVector](../OnHeapColumnVector.md) or [OffHeapColumnVector](../OffHeapColumnVector.md)).
+`vectorTypes` uses [spark.sql.columnVector.offheap.enabled](../configuration-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration property to select the name of the concrete column vector ([OnHeapColumnVector](../OnHeapColumnVector.md) or [OffHeapColumnVector](../OffHeapColumnVector.md)).
 
 `vectorTypes` gives as many column vectors as the [attribute expressions](#attributes).
 
-=== [[supportsBatch]] `supportsBatch` Property
+## <span id="supportsBatch"> supportsBatch Flag
 
-[source, scala]
-----
+```scala
 supportsBatch: Boolean
-----
+```
 
-NOTE: `supportsBatch` is part of spark-sql-ColumnarBatchScan.md#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports spark-sql-vectorized-parquet-reader.md[vectorized decoding] or not.
+`supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
 
 `supportsBatch` is enabled when all of the following holds:
 
-1. *spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader[spark.sql.inMemoryColumnarStorage.enableVectorizedReader] configuration property is enabled (default: `true`)
+1. [spark.sql.inMemoryColumnarStorage.enableVectorizedReader](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader) configuration property is enabled
 
-1. The [output schema](../catalyst/QueryPlan.md#schema) of the <<relation, InMemoryRelation>> uses primitive data types only [BooleanType](../DataType.md#BooleanType), [ByteType](../DataType.md#ByteType), [ShortType](../DataType.md#ShortType), [IntegerType](../DataType.md#IntegerType), [LongType](../DataType.md#LongType), [FloatType](../DataType.md#FloatType), [DoubleType](../DataType.md#DoubleType)
+1. The [output schema](../catalyst/QueryPlan.md#schema) of the [InMemoryRelation](#relation) uses primitive data types only [BooleanType](../DataType.md#BooleanType), [ByteType](../DataType.md#ByteType), [ShortType](../DataType.md#ShortType), [IntegerType](../DataType.md#IntegerType), [LongType](../DataType.md#LongType), [FloatType](../DataType.md#FloatType), [DoubleType](../DataType.md#DoubleType)
 
-1. The number of nested fields in the output schema of the <<relation, InMemoryRelation>> is at most spark-sql-properties.md#spark.sql.codegen.maxFields[spark.sql.codegen.maxFields] internal configuration property
+1. The number of nested fields in the output schema of the [InMemoryRelation](#relation) is at most [spark.sql.codegen.maxFields](../configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
 === [[partitionFilters]] `partitionFilters` Property
 
@@ -153,17 +150,16 @@ filteredCachedBatches(): RDD[CachedBatch]
 
 `filteredCachedBatches` takes the cached column buffers (as a `RDD[CachedBatch]`) and transforms the RDD per partition with index (i.e. `RDD.mapPartitionsWithIndexInternal`) as follows:
 
-. Creates a partition filter as a new SparkPlan.md#newPredicate[GenPredicate] for the <<partitionFilters, partitionFilters>> expressions (concatenated together using `And` binary operator and the schema)
+1. Creates a partition filter as a new [GenPredicate](SparkPlan.md#newPredicate) for the <<partitionFilters, partitionFilters>> expressions (concatenated together using `And` binary operator and the schema)
 
-. Requests the generated partition filter `Predicate` to `initialize`
+1. Requests the generated partition filter `Predicate` to `initialize`
 
-. Uses spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property to enable *partition batch pruning* and filtering out (skipping) `CachedBatches` in a partition based on column stats and the generated partition filter `Predicate`
+1. Uses [spark.sql.inMemoryColumnarStorage.partitionPruning](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning) internal configuration property to enable **partition batch pruning** and filtering out (skipping) `CachedBatches` in a partition based on column stats and the generated partition filter `Predicate`
 
-NOTE: If spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is disabled (i.e. `false`), `filteredCachedBatches` does nothing and simply passes all CachedBatch elements along.
+!!! note
+    When [spark.sql.inMemoryColumnarStorage.partitionPruning](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning) internal configuration property is disabled, `filteredCachedBatches` does nothing and simply passes all `CachedBatch` elements along.
 
-NOTE: spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning[spark.sql.inMemoryColumnarStorage.partitionPruning] internal configuration property is enabled by default.
-
-NOTE: `filteredCachedBatches` is used exclusively when `InMemoryTableScanExec` is requested for the <<inputRDD, inputRDD>> internal property.
+`filteredCachedBatches` is used when `InMemoryTableScanExec` is requested for the [inputRDD](#inputRDD) internal property.
 
 === [[statsFor]] `statsFor` Internal Method
 
@@ -185,7 +181,7 @@ createAndDecompressColumn(
 
 `createAndDecompressColumn` takes the number of rows in the input `CachedBatch`.
 
-`createAndDecompressColumn` requests [OffHeapColumnVector](../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../OnHeapColumnVector.md#allocateColumns) to allocate column vectors (with the number of rows and [columnarBatchSchema](#columnarBatchSchema)) per the [spark.sql.columnVector.offheap.enabled](../spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration flag.
+`createAndDecompressColumn` requests [OffHeapColumnVector](../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../OnHeapColumnVector.md#allocateColumns) to allocate column vectors (with the number of rows and [columnarBatchSchema](#columnarBatchSchema)) per the [spark.sql.columnVector.offheap.enabled](../configuration-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration flag.
 
 `createAndDecompressColumn` creates a [ColumnarBatch](../ColumnarBatch.md) for the allocated column vectors (as an array of `ColumnVector`).
 
@@ -285,7 +281,7 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
-With <<supportsBatch, supportsBatch>> flag on, `doExecute` creates a spark-sql-SparkPlan-WholeStageCodegenExec.md#creating-instance[WholeStageCodegenExec] (with the `InMemoryTableScanExec` physical operator as the spark-sql-SparkPlan-WholeStageCodegenExec.md#child[child] and spark-sql-SparkPlan-WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and requests it to SparkPlan.md#execute[execute].
+With <<supportsBatch, supportsBatch>> flag on, `doExecute` creates a WholeStageCodegenExec.md#creating-instance[WholeStageCodegenExec] (with the `InMemoryTableScanExec` physical operator as the WholeStageCodegenExec.md#child[child] and WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and requests it to SparkPlan.md#execute[execute].
 
 Otherwise, when <<supportsBatch, supportsBatch>> flag is off, `doExecute` simply gives the <<inputRDD, input RDD of internal rows>>.
 

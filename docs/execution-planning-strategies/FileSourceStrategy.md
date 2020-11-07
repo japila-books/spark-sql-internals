@@ -106,7 +106,7 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 `apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and [Filter](../logical-operators/Filter.md) logical operators).
+`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and [Filter](../logical-operators/Filter.md) logical operators).
 
 `apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the [partitionSchema](../HadoopFsRelation.md#partitionSchema) of the `HadoopFsRelation`.
 
@@ -132,10 +132,10 @@ Post-Scan Filters: [afterScanFilters]
 Output Data Schema: [outputSchema]
 ```
 
-`apply` creates a spark-sql-SparkPlan-FileSourceScanExec.md#creating-instance[FileSourceScanExec] physical operator.
+`apply` creates a FileSourceScanExec.md#creating-instance[FileSourceScanExec] physical operator.
 
-If there are any `afterScanFilter` predicate expressions, `apply` creates a <<spark-sql-SparkPlan-FilterExec.md#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
+If there are any `afterScanFilter` predicate expressions, `apply` creates a <<FilterExec.md#creating-instance, FilterExec>> physical operator with them and the `FileSourceScanExec` operator.
 
-If the <<spark-sql-SparkPlan-FilterExec.md#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a spark-sql-SparkPlan-ProjectExec.md#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
+If the <<FilterExec.md#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a ProjectExec.md#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
 
 `apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.

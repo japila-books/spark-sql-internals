@@ -227,7 +227,7 @@ image::images/spark-sql-GenerateExec-webui-details-for-query.png[align="center"]
 `boundGenerator`...FIXME
 
 [[inputRDDs]]
-`GenerateExec` gives <<child, child>>'s [input RDDs](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` is spark-sql-SparkPlan-WholeStageCodegenExec.md#doExecute[executed]).
+`GenerateExec` gives <<child, child>>'s [input RDDs](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` is WholeStageCodegenExec.md#doExecute[executed]).
 
 [[needCopyResult]]
 `GenerateExec` requires that...FIXME

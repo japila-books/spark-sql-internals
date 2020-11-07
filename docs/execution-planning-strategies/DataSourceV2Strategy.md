@@ -10,16 +10,16 @@
 | Physical Operator
 
 | <<apply-DataSourceV2Relation, DataSourceV2Relation>>
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
 
 | <<apply-StreamingDataSourceV2Relation, StreamingDataSourceV2Relation>>
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
 
 | <<apply-WriteToDataSourceV2, WriteToDataSourceV2>>
-| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
+| <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
 
-| <<apply-AppendData, AppendData>> with <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>>
-| <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
+| <<apply-AppendData, AppendData>> with <<DataSourceV2Relation.md#, DataSourceV2Relation>>
+| <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
 
 | <<apply-WriteToContinuousDataSource, WriteToContinuousDataSource>>
 | `WriteToContinuousDataSourceExec`
@@ -55,7 +55,7 @@ apply(
 
 ==== [[apply-DataSourceV2Relation]] DataSourceV2Relation Logical Operator
 
-For a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply` requests the `DataSourceV2Relation` for the <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newReader, DataSourceReader>>.
+For a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply` requests the `DataSourceV2Relation` for the <<DataSourceV2Relation.md#newReader, DataSourceReader>>.
 
 `apply` then <<pushFilters, pushFilters>> followed by <<pruneColumns, pruneColumns>>.
 
@@ -68,11 +68,11 @@ Post-Scan Filters: [postScanFilters]
 Output: [output]
 ```
 
-`apply` uses the `DataSourceV2Relation` to create a <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator.
+`apply` uses the `DataSourceV2Relation` to create a <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator.
 
-If there are any `postScanFilters`, `apply` creates a <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>> physical operator with the `DataSourceV2ScanExec` physical operator as the child.
+If there are any `postScanFilters`, `apply` creates a <<FilterExec.md#, FilterExec>> physical operator with the `DataSourceV2ScanExec` physical operator as the child.
 
-In the end, `apply` creates a <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>> physical operator with the `FilterExec` with the `DataSourceV2ScanExec` or directly with the `DataSourceV2ScanExec` physical operator.
+In the end, `apply` creates a <<ProjectExec.md#, ProjectExec>> physical operator with the `FilterExec` with the `DataSourceV2ScanExec` or directly with the `DataSourceV2ScanExec` physical operator.
 
 ==== [[apply-StreamingDataSourceV2Relation]] StreamingDataSourceV2Relation Logical Operator
 
@@ -80,11 +80,11 @@ For a `StreamingDataSourceV2Relation` logical operator, `apply`...FIXME
 
 ==== [[apply-WriteToDataSourceV2]] WriteToDataSourceV2 Logical Operator
 
-For a <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator, `apply` simply creates a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
+For a <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator, `apply` simply creates a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
 
 ==== [[apply-AppendData]] AppendData Logical Operator
 
-For a <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator with a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>>, `apply` requests the <<spark-sql-LogicalPlan-AppendData.md#table, DataSourceV2Relation>> to <<spark-sql-LogicalPlan-DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> that is used to create a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
+For a <<AppendData.md#, AppendData>> logical operator with a <<DataSourceV2Relation.md#, DataSourceV2Relation>>, `apply` requests the <<AppendData.md#table, DataSourceV2Relation>> to <<DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> that is used to create a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
 
 ==== [[apply-WriteToContinuousDataSource]] WriteToContinuousDataSource Logical Operator
 

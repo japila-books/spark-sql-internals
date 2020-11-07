@@ -25,13 +25,13 @@ trait ObjectConsumerExec extends UnaryExecNode {
 | `AppendColumnsWithObjectExec`
 | [[AppendColumnsWithObjectExec]]
 
-| <<spark-sql-SparkPlan-MapElementsExec.md#, MapElementsExec>>
+| <<MapElementsExec.md#, MapElementsExec>>
 | [[MapElementsExec]]
 
 | `MapPartitionsExec`
 | [[MapPartitionsExec]]
 
-| <<spark-sql-SparkPlan-SerializeFromObjectExec.md#, SerializeFromObjectExec>>
+| <<SerializeFromObjectExec.md#, SerializeFromObjectExec>>
 | [[SerializeFromObjectExec]]
 |===
 

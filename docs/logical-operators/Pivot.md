@@ -47,7 +47,7 @@ scala> println(plan.numberedTreeString)
 val planResolved = ResolveAliases(plan)
 ```
 
-`Pivot` operator "disappears" behind (i.e. is converted to) a spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator (possibly under `Project` operator).
+`Pivot` operator "disappears" behind (i.e. is converted to) a Aggregate.md[Aggregate] logical operator (possibly under `Project` operator).
 
 [source, scala]
 ----

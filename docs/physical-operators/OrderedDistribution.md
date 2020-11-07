@@ -1,11 +1,12 @@
 # OrderedDistribution
 
-`OrderedDistribution` is a Distribution.md[Distribution] that...FIXME
+`OrderedDistribution` is a [Distribution](Distribution.md).
 
 [[requiredNumPartitions]]
 `OrderedDistribution` specifies `None` for the Distribution.md#requiredNumPartitions[required number of partitions].
 
-NOTE: `None` for the required number of partitions indicates to use any number of partitions (possibly spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] configuration property with the default of `200` partitions).
+!!! note
+    `None` for the required number of partitions indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property).
 
 `OrderedDistribution` is <<creating-instance, created>> when...FIXME
 

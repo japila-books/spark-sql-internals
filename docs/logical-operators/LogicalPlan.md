@@ -61,8 +61,8 @@ stats(
 * A `LogicalPlan` <<computeStats, computes `Statistics`>>
 * `QueryExecution` is requested to [build a complete text representation](../QueryExecution.md#completeString)
 * `JoinSelection` [checks whether a plan can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast) et al
-* spark-sql-Optimizer-CostBasedJoinReorder.md[CostBasedJoinReorder] attempts to reorder inner joins
-* `LimitPushDown` is spark-sql-Optimizer-LimitPushDown.md#apply[executed] (for spark-sql-joins.md#FullOuter[FullOuter] join)
+* CostBasedJoinReorder.md[CostBasedJoinReorder] attempts to reorder inner joins
+* `LimitPushDown` is LimitPushDown.md#apply[executed] (for spark-sql-joins.md#FullOuter[FullOuter] join)
 * `AggregateEstimation` estimates `Statistics`
 * `FilterEstimation` estimates child `Statistics`
 * `InnerOuterEstimation` estimates `Statistics` of the left and right sides of a join

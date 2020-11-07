@@ -12,7 +12,7 @@
 
 * `CatalogImpl` is requested for a [Dataset from DefinedByConstructorParams data](../CatalogImpl.md#makeDataset)
 
-* `Dataset` is requested for the <<Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<spark-sql-LogicalPlan-Command.md#, Command>> logical operators)
+* `Dataset` is requested for the <<Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<Command.md#, Command>> logical operators)
 
 * `StatFunctions` is requested to <<spark-sql-StatFunctions.md#crossTabulate, crossTabulate>> and <<spark-sql-StatFunctions.md#summary, generate summary statistics of Dataset (as DataFrame)>>
 
@@ -42,7 +42,7 @@ scala> println(stats)
 Statistics(sizeInBytes=48.0 B, hints=none)
 ----
 
-`LocalRelation` is resolved to <<spark-sql-SparkPlan-LocalTableScanExec.md#, LocalTableScanExec>> leaf physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
+`LocalRelation` is resolved to <<LocalTableScanExec.md#, LocalTableScanExec>> leaf physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
 
 [source, scala]
 ----
@@ -60,7 +60,7 @@ assert(localScan.isInstanceOf[LocalTableScanExec])
 ----
 
 [[computeStats]]
-When requested for <<spark-sql-LogicalPlan-LeafNode.md#computeStats, statistics>>, `LocalRelation` takes the size of the objects in a single row (per the <<output, output>> schema) and multiplies it by the number of rows (in the <<data, data>>).
+When requested for <<LeafNode.md#computeStats, statistics>>, `LocalRelation` takes the size of the objects in a single row (per the <<output, output>> schema) and multiplies it by the number of rows (in the <<data, data>>).
 
 === [[creating-instance]] Creating LocalRelation Instance
 

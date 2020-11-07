@@ -94,7 +94,7 @@ canEvaluateWithinJoin(expr: Expression): Boolean
 ====
 `canEvaluateWithinJoin` is used when:
 
-* `PushPredicateThroughJoin` logical optimization rule is spark-sql-Optimizer-PushPredicateThroughJoin.md#apply[executed]
+* `PushPredicateThroughJoin` logical optimization rule is PushPredicateThroughJoin.md#apply[executed]
 
-* `ReorderJoin` logical optimization rule does spark-sql-Optimizer-ReorderJoin.md#createOrderedJoin[createOrderedJoin]
+* `ReorderJoin` logical optimization rule does ReorderJoin.md#createOrderedJoin[createOrderedJoin]
 ====

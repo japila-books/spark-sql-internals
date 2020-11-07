@@ -151,10 +151,9 @@ org.apache.spark.sql.DataFrameWriter[org.apache.spark.sql.Row]
 
 `DataFrameWriter` supports many <<writing-dataframes-to-files, file formats>> and <<jdbc, JDBC databases>>. It also allows for plugging in <<format, new formats>>.
 
-`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using spark-sql-properties.md[spark.sql.sources.default] configuration property or <<format, format>> or the format-specific methods.
+`DataFrameWriter` defaults to <<parquet, parquet>> data source format. You can change the default format using [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property or <<format, format>> or the format-specific methods.
 
-[source, scala]
-----
+```text
 // see above for writer definition
 
 // Save dataset in Parquet format
@@ -165,7 +164,7 @@ writer.format("json").save(path = "nums-json")
 
 // Alternatively, use format-specific method
 write.json(path = "nums-json")
-----
+```
 
 In the end, you trigger the actual saving of the content of a `Dataset` (i.e. the result of executing a structured query) using <<save, save>> method.
 
@@ -482,7 +481,7 @@ insertInto(tableIdent: TableIdentifier): Unit
 
 NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order (not the names!) of the columns in (the output of) the Dataset matters.
 
-Internally, `insertInto` creates an InsertIntoTable.md#creating-instance[InsertIntoTable] logical operator (with spark-sql-LogicalPlan-UnresolvedRelation.md#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
+Internally, `insertInto` creates an InsertIntoTable.md#creating-instance[InsertIntoTable] logical operator (with UnresolvedRelation.md#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
 
 .DataFrameWrite.insertInto Executes SQL Command (as a Spark job)
 image::images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png[align="center"]
@@ -555,7 +554,7 @@ createTable(
 
 `createTable` creates a [CatalogTable](CatalogTable.md) (with the [bucketSpec](CatalogTable.md#bucketSpec) per [getBucketSpec](#getBucketSpec)).
 
-In the end, `createTable` creates a <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
+In the end, `createTable` creates a <<CreateTable.md#, CreateTable>> logical command (with the `CatalogTable`, <<mode, mode>> and the <<Dataset.md#planWithBarrier, logical query plan>> of the <<df, dataset>>) and <<runCommand, runs>> it.
 
 NOTE: `createTable` is used when `DataFrameWriter` is requested to <<saveAsTable, saveAsTable>>.
 

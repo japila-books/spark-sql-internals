@@ -10,13 +10,13 @@
 | Logical Operator
 | Physical Operator
 
-| [[RunnableCommand]] spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
-| spark-sql-SparkPlan-ExecutedCommandExec.md[ExecutedCommandExec]
+| [[RunnableCommand]] RunnableCommand.md[RunnableCommand]
+| ExecutedCommandExec.md[ExecutedCommandExec]
 
 | spark-sql-streaming-MemoryPlan.md[MemoryPlan]
-| spark-sql-SparkPlan-LocalTableScanExec.md[LocalTableScanExec]
+| LocalTableScanExec.md[LocalTableScanExec]
 
-| spark-sql-LogicalPlan-DeserializeToObject.md[DeserializeToObject]
+| DeserializeToObject.md[DeserializeToObject]
 | `DeserializeToObjectExec`
 
 | `SerializeFromObject` | `SerializeFromObjectExec`
@@ -28,58 +28,58 @@
 | `CoGroup` | `CoGroupExec`
 
 | `Repartition` (with shuffle enabled)
-| spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
+| ShuffleExchangeExec.md[ShuffleExchangeExec]
 
 | `Repartition`
-| spark-sql-SparkPlan-CoalesceExec.md[CoalesceExec]
+| CoalesceExec.md[CoalesceExec]
 
-| `SortPartitions` | spark-sql-SparkPlan-SortExec.md[SortExec]
+| `SortPartitions` | SortExec.md[SortExec]
 
-| [[Sort]] <<spark-sql-LogicalPlan-Sort.md#, Sort>>
-| [[SortExec]] <<spark-sql-SparkPlan-SortExec.md#, SortExec>>
+| [[Sort]] <<Sort.md#, Sort>>
+| [[SortExec]] <<SortExec.md#, SortExec>>
 
 | [[Project]] `Project`
 | [[ProjectExec]] `ProjectExec`
 
 | [[Filter]] `Filter`
-| <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>>
+| <<FilterExec.md#, FilterExec>>
 
 | [[TypedFilter]] `TypedFilter`
-| <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>>
+| <<FilterExec.md#, FilterExec>>
 
-| [[Expand]] spark-sql-LogicalPlan-Expand.md[Expand]
+| [[Expand]] Expand.md[Expand]
 | `ExpandExec`
 
-| [[Window]] <<spark-sql-LogicalPlan-Window.md#, Window>>
-| [[WindowExec]] <<spark-sql-SparkPlan-WindowExec.md#, WindowExec>>
+| [[Window]] <<Window.md#, Window>>
+| [[WindowExec]] <<WindowExec.md#, WindowExec>>
 
 | `Sample`
 | `SampleExec`
 
-| spark-sql-LogicalPlan-LocalRelation.md[LocalRelation]
-| spark-sql-SparkPlan-LocalTableScanExec.md[LocalTableScanExec]
+| LocalRelation.md[LocalRelation]
+| LocalTableScanExec.md[LocalTableScanExec]
 
 | `LocalLimit` | `LocalLimitExec`
 | [GlobalLimit](../logical-operators/GlobalLimit.md) | `GlobalLimitExec`
 | `Union` | `UnionExec`
 
-| [[Generate]] spark-sql-LogicalPlan-Generate.md[Generate]
-| [[GenerateExec]] spark-sql-SparkPlan-GenerateExec.md[GenerateExec]
+| [[Generate]] Generate.md[Generate]
+| [[GenerateExec]] GenerateExec.md[GenerateExec]
 
 | [[OneRowRelation]] `OneRowRelation`
-| spark-sql-SparkPlan-RDDScanExec.md[RDDScanExec]
+| RDDScanExec.md[RDDScanExec]
 
 | `Range`
-| spark-sql-SparkPlan-RangeExec.md[RangeExec]
+| RangeExec.md[RangeExec]
 
 | `RepartitionByExpression`
-| spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec]
+| ShuffleExchangeExec.md[ShuffleExchangeExec]
 
-| [[ExternalRDD]] spark-sql-LogicalPlan-ExternalRDD.md[ExternalRDD]
-| [[ExternalRDDScanExec]] spark-sql-SparkPlan-ExternalRDDScanExec.md[ExternalRDDScanExec]
+| [[ExternalRDD]] ExternalRDD.md[ExternalRDD]
+| [[ExternalRDDScanExec]] ExternalRDDScanExec.md[ExternalRDDScanExec]
 
-| [[LogicalRDD]] spark-sql-LogicalPlan-LogicalRDD.md[LogicalRDD]
-| spark-sql-SparkPlan-RDDScanExec.md[RDDScanExec]
+| [[LogicalRDD]] LogicalRDD.md[LogicalRDD]
+| RDDScanExec.md[RDDScanExec]
 |===
 
 TIP: Confirm the operator mapping in the ++https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L321++[source code of `BasicOperators`].

@@ -78,25 +78,25 @@ NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule t
 
 `apply` resolves the following logical operators:
 
-* spark-sql-LogicalPlan-Project.md[Project] logical operator with a `Star` expression to...FIXME
+* Project.md[Project] logical operator with a `Star` expression to...FIXME
 
-* spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator with a `Star` expression to...FIXME
+* Aggregate.md[Aggregate] logical operator with a `Star` expression to...FIXME
 
 * `ScriptTransformation` logical operator with a `Star` expression to...FIXME
 
-* spark-sql-LogicalPlan-Generate.md[Generate] logical operator with a `Star` expression to...FIXME
+* Generate.md[Generate] logical operator with a `Star` expression to...FIXME
 
-* spark-sql-LogicalPlan-Join.md[Join] logical operator with `duplicateResolved`...FIXME
+* Join.md[Join] logical operator with `duplicateResolved`...FIXME
 
-* spark-sql-LogicalPlan-Intersect.md[Intersect] logical operator with `duplicateResolved`...FIXME
+* Intersect.md[Intersect] logical operator with `duplicateResolved`...FIXME
 
-* spark-sql-LogicalPlan-Except.md[Except] logical operator with `duplicateResolved`...FIXME
+* Except.md[Except] logical operator with `duplicateResolved`...FIXME
 
-* spark-sql-LogicalPlan-Sort.md[Sort] logical operator unresolved with child operators resolved...FIXME
+* Sort.md[Sort] logical operator unresolved with child operators resolved...FIXME
 
-* spark-sql-LogicalPlan-Generate.md[Generate] logical operator resolved...FIXME
+* Generate.md[Generate] logical operator resolved...FIXME
 
-* spark-sql-LogicalPlan-Generate.md[Generate] logical operator unresolved...FIXME
+* Generate.md[Generate] logical operator unresolved...FIXME
 
 In the end, `apply` <<resolve, resolves>> the expressions of the input logical operator.
 

@@ -58,11 +58,11 @@ apply(
 
 NOTE: `apply` is part of catalyst/Rule.md#apply[Rule] contract.
 
-`apply` resolves spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
+`apply` resolves UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
 
-* `apply` <<readDataSourceTable, creates HiveTableRelation logical operators>> for spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of spark-sql-DDLUtils.md#isDatasourceTable[Spark tables] (incl. InsertIntoTable.md[InsertIntoTable] operators)
+* `apply` <<readDataSourceTable, creates HiveTableRelation logical operators>> for UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of spark-sql-DDLUtils.md#isDatasourceTable[Spark tables] (incl. InsertIntoTable.md[InsertIntoTable] operators)
 
-* `apply` <<readHiveTable, creates LogicalRelation logical operators>> for InsertIntoTable.md[InsertIntoTable] operators with spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelation] of a Hive table or spark-sql-LogicalPlan-UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of a Hive table
+* `apply` <<readHiveTable, creates LogicalRelation logical operators>> for InsertIntoTable.md[InsertIntoTable] operators with UnresolvedCatalogRelation.md[UnresolvedCatalogRelation] of a Hive table or UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of a Hive table
 
 === [[readHiveTable]] Creating HiveTableRelation Logical Operator -- `readHiveTable` Internal Method
 

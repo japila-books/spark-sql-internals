@@ -2,7 +2,7 @@
 
 `PullupCorrelatedPredicates` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, transforms logical plans>> with the following operators:
 
-. spark-sql-LogicalPlan-Filter.md[Filter] operators with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] child operator
+. Filter.md[Filter] operators with an Aggregate.md[Aggregate] child operator
 
 . spark-sql-LogicalPlan.md#UnaryNode[UnaryNode] operators
 
@@ -59,6 +59,6 @@ NOTE: `apply` is part of the <<catalyst/Rule.md#apply, Rule Contract>> to execut
 
 `apply` transforms the input spark-sql-LogicalPlan.md[logical plan] as follows:
 
-. For spark-sql-LogicalPlan-Filter.md[Filter] operators with an spark-sql-LogicalPlan-Aggregate.md[Aggregate] child operator, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the `Filter` and the `Aggregate` and its spark-sql-LogicalPlan-Aggregate.md#child[child] as the outer plans
+. For Filter.md[Filter] operators with an Aggregate.md[Aggregate] child operator, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the `Filter` and the `Aggregate` and its Aggregate.md#child[child] as the outer plans
 
 . For spark-sql-LogicalPlan.md#UnaryNode[UnaryNode] operators, `apply` <<rewriteSubQueries, rewriteSubQueries>> with the operator and its children as the outer plans

@@ -8,11 +8,11 @@ NOTE: `BasicStatsPlanVisitor` is used only when spark-sql-cost-based-optimizatio
 
 [[creating-instance]]
 [[join]]
-`JoinEstimation` takes a spark-sql-LogicalPlan-Join.md[Join] logical operator when created.
+`JoinEstimation` takes a Join.md[Join] logical operator when created.
 
 [[leftStats]]
 [[rightStats]]
-When <<creating-instance, created>>, `JoinEstimation` immediately takes the [estimated statistics and query hints](LogicalPlanStats.md#stats) of the spark-sql-LogicalPlan-Join.md#left[left] and spark-sql-LogicalPlan-Join.md#right[right] sides of the <<join, Join>> logical operator.
+When <<creating-instance, created>>, `JoinEstimation` immediately takes the [estimated statistics and query hints](LogicalPlanStats.md#stats) of the Join.md#left[left] and Join.md#right[right] sides of the <<join, Join>> logical operator.
 
 [source, scala]
 ----
@@ -115,7 +115,7 @@ scala> println(stats.get.simpleString)
 Some(sizeInBytes=1200.0 B, rowCount=50, hints=none)
 ----
 
-`JoinEstimation` can <<estimate, estimate statistics and query hints of a Join logical operator>> with the following spark-sql-LogicalPlan-Join.md#joinType[join types]:
+`JoinEstimation` can <<estimate, estimate statistics and query hints of a Join logical operator>> with the following Join.md#joinType[join types]:
 
 * `Inner`, `Cross`, `LeftOuter`, `RightOuter`, `FullOuter`, `LeftSemi` and `LeftAnti`
 
@@ -268,7 +268,7 @@ estimateLeftSemiAntiJoin(): Option[Statistics]
 
 NOTE: spark-sql-cost-based-optimization.md#rowCount[row count] statistic of a table is available only after spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
 
-If available, `estimateLeftSemiAntiJoin` takes the [estimated row count statistic](Statistics.md#rowCount) of the spark-sql-LogicalPlan-Join.md#left[left side] of the <<join, Join>> operator.
+If available, `estimateLeftSemiAntiJoin` takes the [estimated row count statistic](Statistics.md#rowCount) of the Join.md#left[left side] of the <<join, Join>> operator.
 
 NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute spark-sql-cost-based-optimization.md#rowCount[row count] statistics.
 
@@ -276,7 +276,7 @@ NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPU
 
 In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](Statistics.md) with the following estimates:
 
-. [Total size (in bytes)](Statistics.md#sizeInBytes) is the [output size](EstimationUtils.md#getOutputSize) for the spark-sql-LogicalPlan-Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
+. [Total size (in bytes)](Statistics.md#sizeInBytes) is the [output size](EstimationUtils.md#getOutputSize) for the Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
 
 . [Row count](Statistics.md#rowCount) is exactly the row count of the left side
 
@@ -291,7 +291,7 @@ In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](Statistics.md)
 estimate: Option[Statistics]
 ----
 
-`estimate` estimates statistics and query hints of the <<join, Join>> logical operator per spark-sql-LogicalPlan-Join.md#joinType[join type]:
+`estimate` estimates statistics and query hints of the <<join, Join>> logical operator per Join.md#joinType[join type]:
 
 * For `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` join types, `estimate` <<estimateInnerOuterJoin, estimateInnerOuterJoin>>
 

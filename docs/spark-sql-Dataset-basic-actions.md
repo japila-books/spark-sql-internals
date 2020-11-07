@@ -300,9 +300,9 @@ explain(extended: Boolean): Unit
 
 TIP: Use `explain` to review the structured queries and optimizations applied.
 
-Internally, `explain` creates a spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command and requests `SessionState` to SessionState.md#executePlan[execute it] (to get a [QueryExecution](QueryExecution.md) back).
+Internally, `explain` creates a ExplainCommand.md[ExplainCommand] logical command and requests `SessionState` to SessionState.md#executePlan[execute it] (to get a [QueryExecution](QueryExecution.md) back).
 
-NOTE: `explain` uses spark-sql-LogicalPlan-ExplainCommand.md[ExplainCommand] logical command that, when spark-sql-LogicalPlan-ExplainCommand.md#run[executed], gives different text representations of [QueryExecution](QueryExecution.md) (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
+NOTE: `explain` uses ExplainCommand.md[ExplainCommand] logical command that, when ExplainCommand.md#run[executed], gives different text representations of [QueryExecution](QueryExecution.md) (for the Dataset's spark-sql-LogicalPlan.md[LogicalPlan]) depending on the flags (e.g. extended, codegen, and cost which are disabled by default).
 
 `explain` then requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and [collects the records](physical-operators/SparkPlan.md#executeCollect) (as [InternalRow](InternalRow.md) objects).
 
@@ -345,7 +345,7 @@ hint(
 
 `hint` operator is part of [Hint Framework](new-and-noteworthy/hint-framework.md) to specify a **hint** (by `name` and `parameters`) for a `Dataset`.
 
-Internally, `hint` simply attaches spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
+Internally, `hint` simply attaches UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
 
 ```text
 val ds = spark.range(3)
@@ -362,7 +362,7 @@ scala> println(plan.numberedTreeString)
 ```
 
 !!! note
-    `hint` adds an <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers [analysis phase](QueryExecution.md#analyzed) that executes [logical commands](logical-operators/Command.md) and their unions as well as resolves all hints that have already been added to a logical plan.
+    `hint` adds an <<UnresolvedHint.md#, UnresolvedHint>> unary logical operator to an analyzed logical plan that indirectly triggers [analysis phase](QueryExecution.md#analyzed) that executes [logical commands](logical-operators/Command.md) and their unions as well as resolves all hints that have already been added to a logical plan.
 
 === [[localCheckpoint]] Locally Checkpointing Dataset -- `localCheckpoint` Basic Action
 
@@ -390,7 +390,7 @@ With `eager` flag on, `checkpoint` counts the number of records in the RDD (by e
 
 `checkpoint` requests Dataset.md#queryExecution[QueryExecution] (of the `Dataset`) for [optimized physical query plan](QueryExecution.md#executedPlan) (the plan is used to get the SparkPlan.md#outputPartitioning[outputPartitioning] and SparkPlan.md#outputOrdering[outputOrdering] for the result `Dataset`).
 
-In the end, `checkpoint` Dataset.md#ofRows[creates a DataFrame] with a new spark-sql-LogicalPlan-LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
+In the end, `checkpoint` Dataset.md#ofRows[creates a DataFrame] with a new LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
 NOTE: `checkpoint` is used in the `Dataset` [untyped transformations](Dataset-untyped-transformations.md), i.e. [checkpoint](Dataset-untyped-transformations.md#checkpoint) and [localCheckpoint](Dataset-untyped-transformations.md#localCheckpoint).
 
@@ -413,7 +413,7 @@ Internally, it looks spark-sql-ExpressionEncoder.md[ExpressionEncoder] (for the 
 
 NOTE: A deserializer expression is used to decode an [InternalRow](InternalRow.md) to an object of type `T`. See spark-sql-ExpressionEncoder.md[ExpressionEncoder].
 
-It then executes a spark-sql-LogicalPlan-DeserializeToObject.md[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
+It then executes a DeserializeToObject.md[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
 
 NOTE: It is a lazy operation that "produces" a `RDD[T]`.
 

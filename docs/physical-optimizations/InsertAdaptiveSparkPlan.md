@@ -3,7 +3,7 @@
 `InsertAdaptiveSparkPlan` is a [physical query plan optimization](../catalyst/Rule.md) (`Rule[SparkPlan]`) that [re-optimizes a physical query plan](#apply) in the middle of query execution, based on accurate runtime statistics.
 
 !!! important
-    `InsertAdaptiveSparkPlan` is disabled by default based on [spark.sql.adaptive.enabled](../spark-sql-properties.md#spark.sql.adaptive.enabled) configuration property.
+    `InsertAdaptiveSparkPlan` is disabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
 
 ## Creating Instance
 
@@ -33,7 +33,7 @@ applyInternal(
   isSubquery: Boolean): SparkPlan
 ```
 
-`applyInternal` does nothing (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched") when [spark.sql.adaptive.enabled](../spark-sql-properties.md#spark.sql.adaptive.enabled) is disabled.
+`applyInternal` does nothing (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched") when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled.
 
 `applyInternal` skips [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf operators (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched").
 
@@ -120,7 +120,7 @@ shouldApplyAQE(
 
 `shouldApplyAQE` is `true` when one of the following conditions holds:
 
-1. [spark.sql.adaptive.forceApply](../spark-sql-properties.md#spark.sql.adaptive.forceApply) configuration property is enabled
+1. [spark.sql.adaptive.forceApply](../configuration-properties.md#spark.sql.adaptive.forceApply) configuration property is enabled
 1. The given `isSubquery` flag is enabled
 1. The given [physical operator](../physical-operators/SparkPlan.md):
 

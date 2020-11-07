@@ -2,7 +2,7 @@
 
 `CoalesceShufflePartitions` is a physical query plan optimization for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
 
-`CoalesceShufflePartitions` uses [spark.sql.adaptive.coalescePartitions.enabled](../spark-sql-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
+`CoalesceShufflePartitions` uses [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
 
 `CoalesceShufflePartitions` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
@@ -22,7 +22,7 @@ apply(
 ```
 
 !!! note "spark.sql.adaptive.coalescePartitions.enabled Configuration Property"
-    With [spark.sql.adaptive.coalescePartitions.enabled](../spark-sql-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property disabled (`false`), `apply` does nothing and simply gives the input [SparkPlan](../physical-operators/SparkPlan.md) back unmodified.
+    With [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property disabled (`false`), `apply` does nothing and simply gives the input [SparkPlan](../physical-operators/SparkPlan.md) back unmodified.
 
 `apply` makes sure that one of the following holds or does nothing (and simply gives the input [SparkPlan](../physical-operators/SparkPlan.md) back unmodified):
 

@@ -53,7 +53,7 @@ INTO 4 BUCKETS
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is used to access the <<SessionState.md#catalog, SessionCatalog>>.
 

@@ -15,7 +15,7 @@ apply(
 
 For `Subquery` operators that are `correlated`, `apply` simply does nothing and gives it back unmodified.
 
-`apply` does nothing when the [spark.sql.optimizer.dynamicPartitionPruning.enabled](../spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
+`apply` does nothing when the [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
 
 For all other cases, `apply` applies [prune](#prune) optimization.
 

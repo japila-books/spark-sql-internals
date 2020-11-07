@@ -1,6 +1,6 @@
 # PreprocessTableCreation PostHoc Logical Resolution Rule
 
-`PreprocessTableCreation` is a [posthoc logical resolution rule](../Analyzer.md#postHocResolutionRules) that <<apply, resolves a logical query plan>> with <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> logical operators.
+`PreprocessTableCreation` is a [posthoc logical resolution rule](../Analyzer.md#postHocResolutionRules) that <<apply, resolves a logical query plan>> with <<CreateTable.md#, CreateTable>> logical operators.
 
 `PreprocessTableCreation` is part of the [Post-Hoc Resolution](../Analyzer.md#Post-Hoc-Resolution) once-executed batch of the [Hive-specific](../hive/HiveSessionStateBuilder.md#analyzer) and the [default](../BaseSessionStateBuilder.md#analyzer) logical analyzers.
 

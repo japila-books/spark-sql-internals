@@ -14,15 +14,15 @@ title: AggregationIterator
 | Description
 
 | <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>
-| Used exclusively when `ObjectHashAggregateExec` physical operator is spark-sql-SparkPlan-ObjectHashAggregateExec.md#doExecute[executed].
+| Used exclusively when `ObjectHashAggregateExec` physical operator is ObjectHashAggregateExec.md#doExecute[executed].
 
 | <<spark-sql-SortBasedAggregationIterator.md#, SortBasedAggregationIterator>>
-| Used exclusively when `SortAggregateExec` physical operator is spark-sql-SparkPlan-SortAggregateExec.md#doExecute[executed].
+| Used exclusively when `SortAggregateExec` physical operator is SortAggregateExec.md#doExecute[executed].
 
 | spark-sql-TungstenAggregationIterator.md[TungstenAggregationIterator]
-a| Used exclusively when `HashAggregateExec` physical operator is spark-sql-SparkPlan-HashAggregateExec.md#doExecute[executed].
+a| Used exclusively when `HashAggregateExec` physical operator is HashAggregateExec.md#doExecute[executed].
 
-NOTE: spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec] operator is the preferred aggregate physical operator for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+NOTE: HashAggregateExec.md[HashAggregateExec] operator is the preferred aggregate physical operator for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
 |===
 
 [[internal-registries]]

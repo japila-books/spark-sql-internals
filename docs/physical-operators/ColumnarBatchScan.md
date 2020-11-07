@@ -2,7 +2,7 @@
 
 `ColumnarBatchScan` is an <<contract, extension>> of [CodegenSupport](CodegenSupport.md) abstraction for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
-`ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch[FileSourceScanExec], spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch[InMemoryTableScanExec] and spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch[DataSourceV2ScanExec] physical operators).
+`ColumnarBatchScan` uses the <<supportsBatch, supportsBatch>> flag that is enabled (i.e. `true`) by default. It is expected that physical operators would override it to support vectorized decoding only when specific conditions are met (i.e. FileSourceScanExec.md#supportsBatch[FileSourceScanExec], InMemoryTableScanExec.md#supportsBatch[InMemoryTableScanExec] and DataSourceV2ScanExec.md#supportsBatch[DataSourceV2ScanExec] physical operators).
 
 [[needsUnsafeRowConversion]]
 `ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while [generating the Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume) that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
@@ -31,20 +31,20 @@
 | ColumnarBatchScan
 | Description
 
-| <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
-a| [[DataSourceV2ScanExec]] <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.md#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, can read data in batch>> (default: `true`)
+| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+a| [[DataSourceV2ScanExec]] <<DataSourceV2ScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.md#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, can read data in batch>> (default: `true`)
 
-| <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>>
-| [[FileSourceScanExec]] <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../FileFormat.md) that [support returning columnar batches](../FileFormat.md#supportBatch) (default: `false`)
+| <<FileSourceScanExec.md#, FileSourceScanExec>>
+| [[FileSourceScanExec]] <<FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../FileFormat.md) that [support returning columnar batches](../FileFormat.md#supportBatch) (default: `false`)
 
-| <<spark-sql-SparkPlan-InMemoryTableScanExec.md#, InMemoryTableScanExec>>
-a| [[InMemoryTableScanExec]] <<spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch, Supports vectorized decoding>> when all of the following hold:
+| <<InMemoryTableScanExec.md#, InMemoryTableScanExec>>
+a| [[InMemoryTableScanExec]] <<InMemoryTableScanExec.md#supportsBatch, Supports vectorized decoding>> when all of the following hold:
 
-* <<spark-sql-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader, spark.sql.inMemoryColumnarStorage.enableVectorizedReader>> property is enabled (default: `true`)
+* [spark.sql.inMemoryColumnarStorage.enableVectorizedReader](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader) configuration property is enabled
 
 * Uses primitive data types only for the output schema
 
-* Number of fields in the output schema is not more than <<spark-sql-properties.md#spark.sql.codegen.maxFields, spark.sql.codegen.maxFields>> property (default: `100`)
+* Number of fields in the output schema is not more than [spark.sql.codegen.maxFields](../configuration-properties.md#spark.sql.codegen.maxFields) configuration property
 |===
 
 === [[genCodeColumnVector]] `genCodeColumnVector` Internal Method
@@ -154,11 +154,11 @@ supportsBatch: Boolean = true
 
 * `ColumnarBatchScan` is requested to <<doProduce, generate the Java source code for produce path in whole-stage code generation>>
 
-* `FileSourceScanExec` physical operator is requested for spark-sql-SparkPlan-FileSourceScanExec.md#metadata[metadata] (for *Batched* metadata) and to spark-sql-SparkPlan-FileSourceScanExec.md#doExecute[execute]
+* `FileSourceScanExec` physical operator is requested for FileSourceScanExec.md#metadata[metadata] (for *Batched* metadata) and to FileSourceScanExec.md#doExecute[execute]
 
-* `InMemoryTableScanExec` physical operator is requested for spark-sql-SparkPlan-InMemoryTableScanExec.md#supportCodegen[supportCodegen] flag, spark-sql-SparkPlan-InMemoryTableScanExec.md#inputRDD[input RDD] and to spark-sql-SparkPlan-InMemoryTableScanExec.md#doExecute[execute]
+* `InMemoryTableScanExec` physical operator is requested for InMemoryTableScanExec.md#supportCodegen[supportCodegen] flag, InMemoryTableScanExec.md#inputRDD[input RDD] and to InMemoryTableScanExec.md#doExecute[execute]
 
-* `DataSourceV2ScanExec` physical operator is requested to spark-sql-SparkPlan-DataSourceV2ScanExec.md#doExecute[execute]
+* `DataSourceV2ScanExec` physical operator is requested to DataSourceV2ScanExec.md#doExecute[execute]
 
 === [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 

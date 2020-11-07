@@ -8,7 +8,7 @@ NOTE: Bucketing can show the biggest benefit when *pre-shuffled bucketed tables*
 
 Bucketing is enabled by default. Spark SQL uses <<spark.sql.sources.bucketing.enabled, spark.sql.sources.bucketing.enabled>> configuration property to control whether bucketing should be enabled and used for query optimization or not.
 
-Bucketing is used exclusively in spark-sql-SparkPlan-FileSourceScanExec.md[FileSourceScanExec] physical operator (when it is requested for the spark-sql-SparkPlan-FileSourceScanExec.md#inputRDD[input RDD] and to determine the spark-sql-SparkPlan-FileSourceScanExec.md#outputPartitioning[partitioning] and spark-sql-SparkPlan-FileSourceScanExec.md#outputOrdering[ordering] of the output).
+Bucketing is used exclusively in FileSourceScanExec.md[FileSourceScanExec] physical operator (when it is requested for the FileSourceScanExec.md#inputRDD[input RDD] and to determine the FileSourceScanExec.md#outputPartitioning[partitioning] and FileSourceScanExec.md#outputOrdering[ordering] of the output).
 
 .Example: SortMergeJoin of two FileScans
 [source, scala]
@@ -44,7 +44,7 @@ assert(t6.count == 10e6)
 t4.join(t6, "id").foreach(_ => ())
 ----
 
-The above join query is a fine example of a spark-sql-SparkPlan-SortMergeJoinExec.md[SortMergeJoinExec] (aka _SortMergeJoin_) of two spark-sql-SparkPlan-FileSourceScanExec.md[FileSourceScanExecs] (aka _Scan_). The join query uses spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators (aka _Exchange_) to shuffle the table datasets for the SortMergeJoin.
+The above join query is a fine example of a SortMergeJoinExec.md[SortMergeJoinExec] (aka _SortMergeJoin_) of two FileSourceScanExec.md[FileSourceScanExecs] (aka _Scan_). The join query uses ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators (aka _Exchange_) to shuffle the table datasets for the SortMergeJoin.
 
 ![SortMergeJoin of FileScans (Details for Query)](images/spark-sql-bucketing-sortmergejoin-filescans.png)
 
@@ -115,7 +115,7 @@ val bucketed_4_10e6 = spark.table("bucketed_4_10e6")
 bucketed_4_10e4.join(bucketed_4_10e6, "id").foreach(_ => ())
 ----
 
-The above join query of the bucketed tables shows no spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators (aka _Exchange_) as the shuffling has already been executed (before the query was run).
+The above join query of the bucketed tables shows no ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators (aka _Exchange_) as the shuffling has already been executed (before the query was run).
 
 .SortMergeJoin of Bucketed Tables (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-bucketed-tables-no-exchanges.png[align="center"]
@@ -244,7 +244,7 @@ Bucket pruning supports the following predicate expressions:
 * <<spark-sql-Expression-InSet.md#, InSet>>
 * `And` and `Or` of the above
 
-[FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only <<spark-sql-LogicalPlan-LogicalRelation.md#, LogicalRelations>> over [HadoopFsRelation](HadoopFsRelation.md) with the [bucketing specification](HadoopFsRelation.md#bucketSpec) with the following:
+[FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only <<LogicalRelation.md#, LogicalRelations>> over [HadoopFsRelation](HadoopFsRelation.md) with the [bucketing specification](HadoopFsRelation.md#bucketSpec) with the following:
 
 1. There is exactly one bucketing column
 1. The number of buckets is greater than 1
@@ -346,7 +346,7 @@ WARNING: There are two exchanges and sorts which makes the above use case almost
 
 === [[spark.sql.sources.bucketing.enabled]] spark.sql.sources.bucketing.enabled Spark SQL Configuration Property
 
-Bucketing is enabled when spark-sql-properties.md#spark.sql.sources.bucketing.enabled[spark.sql.sources.bucketing.enabled] configuration property is turned on (`true`) and it is by default.
+Bucketing is enabled when [spark.sql.sources.bucketing.enabled](configuration-properties.md#spark.sql.sources.bucketing.enabled) configuration property is turned on (`true`) and it is by default.
 
 TIP: Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) to access the current value of `spark.sql.sources.bucketing.enabled` property.
 

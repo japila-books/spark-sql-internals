@@ -33,7 +33,7 @@ a| [[FileFormat]]
 
 NOTE: Data source is also called a *table provider*.
 
-`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the spark-sql-BaseRelation.md[BaseRelation]) to represent the data source in logical plans (using spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] leaf logical operator).
+`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the spark-sql-BaseRelation.md[BaseRelation]) to represent the data source in logical plans (using LogicalRelation.md[LogicalRelation] leaf logical operator).
 
 `DataSource` also requires a <<sparkSession, SparkSession>> for the configuration properties to <<lookupDataSource, resolve the data source provider>>.
 
@@ -55,7 +55,7 @@ NOTE: Data source is also called a *table provider*.
 
 * The [location URI](CatalogTable.md#location) of a [HiveTableRelation](hive/HiveTableRelation.md) (when `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation))
 
-* The table name of a <<spark-sql-LogicalPlan-UnresolvedRelation.md#, UnresolvedRelation>> (when [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed)
+* The table name of a <<UnresolvedRelation.md#, UnresolvedRelation>> (when [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed)
 
 * The files in a directory when Spark Structured Streaming's `FileStreamSource` is requested for batches
 
@@ -225,7 +225,7 @@ org.apache.spark.sql.AnalysisException: Path does not exist: file:/Users/jacek/d
   ... 48 elided
 ```
 
-If spark-sql-properties.md#spark.sql.streaming.schemaInference[spark.sql.streaming.schemaInference] is disabled and the data source is different than [TextFileFormat](TextFileFormat.md), and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
+If [spark.sql.streaming.schemaInference](configuration-properties.md#spark.sql.streaming.schemaInference) is disabled and the data source is different than [TextFileFormat](TextFileFormat.md), and the input `userSpecifiedSchema` is not specified, the following `IllegalArgumentException` exception is thrown:
 
 ```text
 Schema must be specified when creating a streaming source DataFrame. If some files already exist in the directory, then depending on the file format you may be able to create a static DataFrame on that directory with 'spark.read.load(directory)' and infer schema from it.
@@ -279,9 +279,9 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 
-* `CreateDataSourceTableCommand` runnable command is spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#run[executed]
+* `CreateDataSourceTableCommand` runnable command is CreateDataSourceTableCommand.md#run[executed]
 
-* `CreateTempViewUsing` logical command is requested to <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, run>>
+* `CreateTempViewUsing` logical command is requested to <<CreateTempViewUsing.md#run, run>>
 
 * `FindDataSourceTable` is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable)
 
@@ -313,7 +313,7 @@ planForWriting(
 
 `planForWriting` creates an instance of the [providingClass](#providingClass) and branches off per type as follows:
 
-* For a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>, `planForWriting` creates a <<spark-sql-LogicalPlan-SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
+* For a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>, `planForWriting` creates a <<SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
 
 * For a [FileFormat](FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 
@@ -426,7 +426,7 @@ Used when:
 
 * `DataSource` is requested to <<sourceSchema, sourceSchema>>, <<createSource, createSource>>, <<createSink, createSink>>, <<resolveRelation, resolveRelation>>, <<writeAndRead, writeAndRead>>, and <<planForWriting, planForWriting>>
 
-* spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule are executed (to ensure that only [FileFormat](FileFormat.md)-based data sources are used)
+* InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand] logical command and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule are executed (to ensure that only [FileFormat](FileFormat.md)-based data sources are used)
 
 | sourceInfo
 | [[sourceInfo]] `SourceInfo`

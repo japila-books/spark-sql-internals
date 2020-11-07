@@ -21,7 +21,7 @@ Used when:
 
 * `CatalogStorageFormat` is requested to <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, convert the storage specification to a LinkedHashMap>>
 
-* `CreateTempViewUsing` logical command is requested for the <<spark-sql-LogicalPlan-CreateTempViewUsing.md#argString, argString>>
+* `CreateTempViewUsing` logical command is requested for the <<CreateTempViewUsing.md#argString, argString>>
 
 | normalizeBucketSpec
 a| [[normalizeBucketSpec]]

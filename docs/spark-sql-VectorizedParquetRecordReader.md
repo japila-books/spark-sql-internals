@@ -2,14 +2,14 @@
 
 `VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](spark-sql-SpecificParquetRecordReaderBase.md) for [parquet](ParquetFileFormat.md) file format for [Vectorized Parquet Decoding](spark-sql-vectorized-parquet-reader.md).
 
-`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with [spark.sql.parquet.enableVectorizedReader](spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) property enabled and the read schema with [AtomicType](DataType.md#AtomicType) data types only).
+`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with [spark.sql.parquet.enableVectorizedReader](configuration-properties.md#spark.sql.parquet.enableVectorizedReader) property enabled and the read schema with [AtomicType](DataType.md#AtomicType) data types only).
 
 [[creating-instance]]
 `VectorizedParquetRecordReader` takes the following to be created:
 
 * [[convertTz]] `TimeZone` (`null` when no timezone conversion is expected)
-* [[useOffHeap]] `useOffHeap` flag (per <<spark-sql-properties.md#spark.sql.columnVector.offheap.enabled, spark.sql.columnVector.offheap.enabled>> property)
-* [[capacity]] Capacity (per <<spark-sql-properties.md#spark.sql.parquet.columnarReaderBatchSize, spark.sql.parquet.columnarReaderBatchSize>> property)
+* [[useOffHeap]] `useOffHeap` flag (based on [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property)
+* [[capacity]] Capacity (based on [spark.sql.parquet.columnarReaderBatchSize](configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize) configuration property)
 
 `VectorizedParquetRecordReader` uses the <<capacity, capacity>> attribute for the following:
 
@@ -17,9 +17,7 @@
 
 * Controlling <<rowsReturned, number of rows>> when <<nextBatch, nextBatch>>
 
-`VectorizedParquetRecordReader` uses <<OFF_HEAP, OFF_HEAP>> memory mode when spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] internal configuration property is enabled (`true`).
-
-NOTE: spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property is disabled (`false`) by default.
+`VectorizedParquetRecordReader` uses <<OFF_HEAP, OFF_HEAP>> memory mode when [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration property is enabled (`true`).
 
 [[internal-registries]]
 .VectorizedParquetRecordReader's Internal Properties (e.g. Registries, Counters and Flags)
@@ -51,7 +49,7 @@ Intialized when <<checkEndOfRowGroup, checkEndOfRowGroup>> (when requested to <<
 | MEMORY_MODE
 a| [[MEMORY_MODE]] Memory mode of the <<columnarBatch, ColumnarBatch>>
 
-* [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as per spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property)
+* [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as based on [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property)
 * [[ON_HEAP]] `ON_HEAP`
 
 Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatch, initBatch>>.
@@ -151,12 +149,8 @@ private void initBatch(
 
 `initBatch` requests [OffHeapColumnVector](OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](OnHeapColumnVector.md#allocateColumns) to allocate column vectors per the input `memMode`, i.e. [OFF_HEAP](#OFF_HEAP) or [ON_HEAP](#ON_HEAP) memory modes, respectively. `initBatch` records the allocated column vectors as the internal <<columnVectors, WritableColumnVectors>>.
 
-[NOTE]
-====
-spark-sql-properties.md#spark.sql.columnVector.offheap.enabled[spark.sql.columnVector.offheap.enabled] configuration property controls <<OFF_HEAP, OFF_HEAP>> or <<ON_HEAP, ON_HEAP>> memory modes, i.e. `true` or `false`, respectively.
-
-`spark.sql.columnVector.offheap.enabled` is disabled by default which means that [OnHeapColumnVector](OnHeapColumnVector.md) is used.
-====
+!!! note
+    [OnHeapColumnVector](OnHeapColumnVector.md) is used based on [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property.
 
 `initBatch` creates a [ColumnarBatch](ColumnarBatch.md) (with the <<columnVectors, allocated WritableColumnVectors>>) and records it as the internal <<columnarBatch, ColumnarBatch>>.
 

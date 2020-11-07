@@ -25,9 +25,9 @@ Used when:
 
 * `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.md#generateResultProjection, generateResultProjection>>
 
-* `HashAggregateExec` physical operator is requested to <<spark-sql-SparkPlan-HashAggregateExec.md#doProduceWithoutKeys, doProduceWithoutKeys>> and <<spark-sql-SparkPlan-HashAggregateExec.md#generateResultFunction, generateResultFunction>>
+* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#doProduceWithoutKeys, doProduceWithoutKeys>> and <<HashAggregateExec.md#generateResultFunction, generateResultFunction>>
 
-* `AggregateProcessor` is <<spark-sql-AggregateProcessor.md#apply, created>> (when `WindowExec` physical operator is <<spark-sql-SparkPlan-WindowExec.md#, executed>>)
+* `AggregateProcessor` is <<spark-sql-AggregateProcessor.md#apply, created>> (when `WindowExec` physical operator is <<WindowExec.md#, executed>>)
 
 | initialValues
 a| [[initialValues]]

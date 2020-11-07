@@ -29,7 +29,7 @@ type ReturnType =
 unapply(a: Any): Option[ReturnType]
 ----
 
-`unapply` destructures the input `a` spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator into a four-element <<ReturnType, ReturnType>>.
+`unapply` destructures the input `a` Aggregate.md[Aggregate] logical operator into a four-element <<ReturnType, ReturnType>>.
 
 [NOTE]
 ====

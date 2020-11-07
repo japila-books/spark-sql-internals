@@ -194,26 +194,24 @@ scala> left.join(right, Seq("id"), "leftanti").explain
    +- LocalTableScan [id#60]
 ----
 
-Internally, `join(right: Dataset[_])` Dataset.md#ofRows[creates a DataFrame] with a condition-less spark-sql-LogicalPlan-Join.md[Join] logical operator (in the current SparkSession.md[SparkSession]).
+Internally, `join(right: Dataset[_])` Dataset.md#ofRows[creates a DataFrame] with a condition-less Join.md[Join] logical operator (in the current SparkSession.md[SparkSession]).
 
-NOTE: `join(right: Dataset[_])` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less spark-sql-LogicalPlan-Join.md[Join] operator with two child logical plans of the both sides of the join.
+NOTE: `join(right: Dataset[_])` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less Join.md[Join] operator with two child logical plans of the both sides of the join.
 
-NOTE: `join(right: Dataset[_], usingColumns: Seq[String], joinType: String)` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less spark-sql-LogicalPlan-Join.md[Join] operator with <<UsingJoin, UsingJoin>> join type.
+NOTE: `join(right: Dataset[_], usingColumns: Seq[String], joinType: String)` creates a spark-sql-LogicalPlan.md[logical plan] with a condition-less Join.md[Join] operator with <<UsingJoin, UsingJoin>> join type.
 
-[NOTE]
-====
-`join(right: Dataset[_], joinExprs: Column, joinType: String)` accepts self-joins where `joinExprs` is of the form:
+!!! note
+   `join(right: Dataset[_], joinExprs: Column, joinType: String)` accepts self-joins where `joinExprs` is of the form:
 
-```
-df("key") === df("key")
-```
+   ```
+   df("key") === df("key")
+   ```
 
-That is usually considered a trivially true condition and refused as acceptable.
+   That is usually considered a trivially true condition and refused as acceptable.
 
-With spark-sql-properties.md#spark.sql.selfJoinAutoResolveAmbiguity[spark.sql.selfJoinAutoResolveAmbiguity] option enabled (which it is by default), `join` will automatically resolve ambiguous join conditions into ones that might make sense.
+   With [spark.sql.selfJoinAutoResolveAmbiguity](configuration-properties.md#spark.sql.selfJoinAutoResolveAmbiguity) option enabled, `join` will automatically resolve ambiguous join conditions into ones that might make sense.
 
-See https://issues.apache.org/jira/browse/SPARK-6231[[SPARK-6231\] Join on two tables (generated from same one) is broken].
-====
+   See [[SPARK-6231] Join on two tables (generated from same one) is broken](https://issues.apache.org/jira/browse/SPARK-6231).
 
 === [[crossJoin]] `crossJoin` Method
 
@@ -274,4 +272,4 @@ scala> joined.show
 
 NOTE: `joinWith` preserves type-safety with the original object types.
 
-NOTE: `joinWith` creates a `Dataset` with spark-sql-LogicalPlan-Join.md[Join] logical plan.
+NOTE: `joinWith` creates a `Dataset` with Join.md[Join] logical plan.

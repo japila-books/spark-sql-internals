@@ -44,7 +44,7 @@ scala> q.explain
 .SubqueryExec in web UI (Details for Query)
 image::images/spark-sql-SubqueryExec-webui-details-for-query.png[align="center"]
 
-NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of spark-sql-SparkPlan-BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator.
+NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator.
 
 === [[doPrepare]] Executing Child Operator Asynchronously -- `doPrepare` Method
 

@@ -1,6 +1,6 @@
 # CreateTempViewUsing Logical Command
 
-`CreateTempViewUsing` is a <<spark-sql-LogicalPlan-RunnableCommand.md#, logical command>> for <<run, creating or replacing a temporary view>> (global or not) using a <<provider, data source>>.
+`CreateTempViewUsing` is a <<RunnableCommand.md#, logical command>> for <<run, creating or replacing a temporary view>> (global or not) using a <<provider, data source>>.
 
 `CreateTempViewUsing` is <<creating-instance, created>> to represent <<spark-sql-SparkSqlAstBuilder.md#visitCreateTempViewUsing, CREATE TEMPORARY VIEW &hellip; USING>> SQL statements.
 
@@ -30,7 +30,7 @@ scala> spark.catalog.listTables(spark.sharedState.globalTempViewManager.database
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` [creates a DataSource](../DataSource.md#apply) and requests it to [resolve itself](../DataSource.md#resolveRelation) (and create a [BaseRelation](../spark-sql-BaseRelation.md)).
 

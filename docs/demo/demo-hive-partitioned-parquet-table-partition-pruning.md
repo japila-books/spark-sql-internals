@@ -1,22 +1,20 @@
-title: Hive Partitioned Parquet Table and Partition Pruning
-
 # Demo: Hive Partitioned Parquet Table and Partition Pruning
 
 The demo shows partition pruning optimization in Spark SQL for Hive partitioned tables in parquet format.
 
-NOTE: The demo is a follow-up to demo-connecting-spark-sql-to-hive-metastore.md[Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)]. Please finish it first before this demo.
+NOTE: The demo is a follow-up to [Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)](demo-connecting-spark-sql-to-hive-metastore.md). Please finish it first before this demo.
 
 The demo features the following:
 
-* ../hive/configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] configuration property is enabled (which is the default)
+* [spark.sql.hive.convertMetastoreParquet](../hive/configuration-properties.md#spark.sql.hive.convertMetastoreParquet) configuration property is enabled (which is the default)
 
-* Hadoop DFS for ../StaticSQLConf.md#spark.sql.warehouse.dir[spark.sql.warehouse.dir]
+* Hadoop DFS for [spark.sql.warehouse.dir](../StaticSQLConf.md#spark.sql.warehouse.dir)
 
 ## Create Hive Partitioned Table in Parquet Format
 
 Create a Hive partitioned table in parquet format with some data.
 
-```
+```text
 CREATE TABLE hive_partitioned_table
 (id BIGINT, name STRING)
 COMMENT 'Demo: Hive Partitioned Parquet Table and Partition Pruning'

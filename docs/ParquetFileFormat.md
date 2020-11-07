@@ -30,11 +30,11 @@ spark.read.schema(schema).load("parquet-datasets")
 [[supportBatch]]
 `ParquetFileFormat` [supports vectorized parquet decoding in whole-stage code generation](FileFormat.md#supportBatch) when all of the following hold:
 
-* [spark.sql.parquet.enableVectorizedReader](spark-sql-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
+* [spark.sql.parquet.enableVectorizedReader](configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
-* [spark.sql.codegen.wholeStage](spark-sql-properties.md#spark.sql.codegen.wholeStage) internal configuration property is enabled
+* [spark.sql.codegen.wholeStage](configuration-properties.md#spark.sql.codegen.wholeStage) internal configuration property is enabled
 
-* The number of fields in the schema is at most [spark.sql.codegen.maxFields](spark-sql-properties.md#spark.sql.codegen.maxFields) internal configuration property
+* The number of fields in the schema is at most [spark.sql.codegen.maxFields](configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
 * All the fields in the output schema are of [AtomicType](DataType.md#AtomicType)
 
@@ -140,7 +140,7 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ----
 
-`vectorTypes` creates a collection of the names of [OffHeapColumnVector](OffHeapColumnVector.md) or [OnHeapColumnVector](OnHeapColumnVector.md) when [spark.sql.columnVector.offheap.enabled](spark-sql-properties.md#spark.sql.columnVector.offheap.enabled) property is enabled or disabled, respectively.
+`vectorTypes` creates a collection of the names of [OffHeapColumnVector](OffHeapColumnVector.md) or [OnHeapColumnVector](OnHeapColumnVector.md) when [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled) property is enabled or disabled, respectively.
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
@@ -181,13 +181,13 @@ buildReaderWithPartitionValues(
 | [[org.apache.spark.sql.parquet.row.attributes]] [JSON](DataType.md#json) representation of `requiredSchema`
 
 | spark.sql.session.timeZone
-| [[spark.sql.session.timeZone]] <<spark-sql-properties.md#spark.sql.session.timeZone, spark.sql.session.timeZone>>
+| [[spark.sql.session.timeZone]] [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
 
 | spark.sql.parquet.binaryAsString
-| [[spark.sql.parquet.binaryAsString]] <<spark-sql-properties.md#spark.sql.parquet.binaryAsString, spark.sql.parquet.binaryAsString>>
+| [[spark.sql.parquet.binaryAsString]] [spark.sql.parquet.binaryAsString](configuration-properties.md#spark.sql.parquet.binaryAsString)
 
 | spark.sql.parquet.int96AsTimestamp
-| [[spark.sql.parquet.int96AsTimestamp]] <<spark-sql-properties.md#spark.sql.parquet.int96AsTimestamp, spark.sql.parquet.int96AsTimestamp>>
+| [[spark.sql.parquet.int96AsTimestamp]] [spark.sql.parquet.int96AsTimestamp](configuration-properties.md#spark.sql.parquet.int96AsTimestamp)
 
 |===
 
@@ -195,9 +195,10 @@ buildReaderWithPartitionValues(
 
 `buildReaderWithPartitionValues` tries to push filters down to create a Parquet `FilterPredicate` (aka `pushed`).
 
-NOTE: Filter predicate push-down optimization for parquet data sources uses spark-sql-properties.md#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property (default: enabled).
+!!! note
+    Filter predicate push-down optimization for parquet data sources uses [spark.sql.parquet.filterPushdown](configuration-properties.md#spark.sql.parquet.filterPushdown) configuration property (default: enabled).
 
-With spark-sql-properties.md#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the <<ParquetFilters, table>>). Otherwise, the Parquet filter predicate is not specified.
+With [spark.sql.parquet.filterPushdown](configuration-properties.md#spark.sql.parquet.filterPushdown) configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the <<ParquetFilters, table>>). Otherwise, the Parquet filter predicate is not specified.
 
 !!! note
     `buildReaderWithPartitionValues` creates filter predicates for the following types: [BooleanType](DataType.md#BooleanType), [IntegerType](DataType.md#IntegerType), ([LongType](DataType.md#LongType), [FloatType](DataType.md#FloatType), [DoubleType](DataType.md#DoubleType), [StringType](DataType.md#StringType), [BinaryType](DataType.md#BinaryType).
@@ -216,7 +217,7 @@ In the end, `buildReaderWithPartitionValues` gives a function that takes a [Part
 
 . Creates a Hadoop `TaskAttemptContextImpl` (with the broadcast Hadoop `Configuration` and a Hadoop `TaskAttemptID` for a map task)
 
-. Sets the Parquet `FilterPredicate` (only when spark-sql-properties.md#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property is enabled and it is by default)
+. Sets the Parquet `FilterPredicate` (only when configuration-properties.md#spark.sql.parquet.filterPushdown[spark.sql.parquet.filterPushdown] configuration property is enabled and it is by default)
 
 The function then branches off on whether spark-sql-VectorizedParquetRecordReader.md[Parquet vectorized reader] is enabled or not.
 

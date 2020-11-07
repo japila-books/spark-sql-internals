@@ -25,7 +25,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 * [Dataset.ofRows](Dataset.md#ofRows) and [Dataset.selectUntyped](Dataset.md#selectUntyped) are executed
 * `KeyValueGroupedDataset` is requested to [aggUntyped](spark-sql-KeyValueGroupedDataset.md#aggUntyped)
-* `CommandUtils` utility is requested to [computeColumnStats](spark-sql-CommandUtils.md#computeColumnStats) and [computePercentiles](spark-sql-CommandUtils.md#computePercentiles)
+* `CommandUtils` utility is requested to [computeColumnStats](CommandUtils.md#computeColumnStats) and [computePercentiles](CommandUtils.md#computePercentiles)
 * `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
 
 ## <span id="tracker"> QueryPlanningTracker
@@ -310,7 +310,7 @@ withRedaction(
   message: String): String
 ```
 
-`withRedaction` takes the value of spark-sql-properties.md#spark.sql.redaction.string.regex[spark.sql.redaction.string.regex] configuration property (as the regular expression to point at sensitive information) and requests Spark Core's `Utils` to redact sensitive information in the input `message`.
+`withRedaction` takes the value of [spark.sql.redaction.string.regex](configuration-properties.md#spark.sql.redaction.string.regex) configuration property (as the regular expression to point at sensitive information) and requests Spark Core's `Utils` to redact sensitive information in the input `message`.
 
 NOTE: Internally, Spark Core's `Utils.redact` uses Java's `Regex.replaceAllIn` to replace all matches of a pattern with a string.
 

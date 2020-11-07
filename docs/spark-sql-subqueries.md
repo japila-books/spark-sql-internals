@@ -34,7 +34,7 @@ Spark Analyzer uses [ResolveSubquery](logical-analysis-rules/ResolveSubquery.md)
 
 Catalyst Optimizer uses the following optimizations for subqueries:
 
-* spark-sql-Optimizer-PullupCorrelatedPredicates.md[PullupCorrelatedPredicates] optimization to spark-sql-Optimizer-PullupCorrelatedPredicates.md#rewriteSubQueries[rewrite subqueries] and pull up correlated predicates
+* PullupCorrelatedPredicates.md[PullupCorrelatedPredicates] optimization to PullupCorrelatedPredicates.md#rewriteSubQueries[rewrite subqueries] and pull up correlated predicates
 
 * [RewriteCorrelatedScalarSubquery](logical-optimizations/RewriteCorrelatedScalarSubquery.md) optimization (to [constructLeftJoins](logical-optimizations/RewriteCorrelatedScalarSubquery.md#constructLeftJoins))
 

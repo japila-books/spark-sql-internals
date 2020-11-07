@@ -79,7 +79,7 @@ listTables(db: String, pattern: String): Seq[TableIdentifier]
 ====
 `listTables` is used when:
 
-* `ShowTablesCommand` logical command is requested to <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, run>>
+* `ShowTablesCommand` logical command is requested to <<ShowTablesCommand.md#run, run>>
 
 * `SessionCatalog` is requested to <<reset, reset>> (for testing)
 
@@ -143,7 +143,7 @@ alterTable(tableDefinition: CatalogTable): Unit
 
 `alterTable`...FIXME
 
-NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, spark-sql-LogicalPlan-AlterViewAsCommand.md#run[AlterViewAsCommand] (for spark-sql-LogicalPlan-AlterViewAsCommand.md#alterPermanentView[permanent views]) logical commands are executed.
+NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, AlterViewAsCommand.md#run[AlterViewAsCommand] (for AlterViewAsCommand.md#alterPermanentView[permanent views]) logical commands are executed.
 
 === [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
 
@@ -158,14 +158,11 @@ alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]
 
 `alterTableStats` reports a `NoSuchTableException` if the <<tableExists, table does not exist>>.
 
-[NOTE]
-====
 `alterTableStats` is used when the following logical commands are executed:
 
-* spark-sql-LogicalPlan-AnalyzeTableCommand.md#run[AnalyzeTableCommand], spark-sql-LogicalPlan-AnalyzeColumnCommand.md#run[AnalyzeColumnCommand], `AlterTableAddPartitionCommand`, `TruncateTableCommand`
+* [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md), [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md), `AlterTableAddPartitionCommand`, [TruncateTableCommand](logical-operators/TruncateTableCommand.md)
 
-* (*indirectly* through `CommandUtils` when requested for spark-sql-CommandUtils.md#updateTableStats[updating existing table statistics]) hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
-====
+* (*indirectly* through `CommandUtils` when requested for [updating existing table statistics](CommandUtils.md#updateTableStats)) [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
 
 === [[tableExists]] `tableExists` Method
 
@@ -248,7 +245,7 @@ NOTE: "Temporary table" and "temporary view" are synonyms.
 
 `alterTempViewDefinition` returns `true` when an update could be executed and finished successfully.
 
-NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<spark-sql-LogicalPlan-AlterViewAsCommand.md#run, executed>>.
+NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<AlterViewAsCommand.md#run, executed>>.
 
 === [[createTempView]] Creating (Registering) Or Replacing Local Temporary View -- `createTempView` Method
 
@@ -280,9 +277,9 @@ createGlobalTempView(
 ====
 `createGlobalTempView` is used when:
 
-* spark-sql-LogicalPlan-CreateViewCommand.md[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the spark-sql-LogicalPlan-CreateViewCommand.md#viewType[view type] is spark-sql-LogicalPlan-CreateViewCommand.md#GlobalTempView[GlobalTempView])
+* CreateViewCommand.md[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the CreateViewCommand.md#viewType[view type] is CreateViewCommand.md#GlobalTempView[GlobalTempView])
 
-* spark-sql-LogicalPlan-CreateTempViewUsing.md[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the spark-sql-LogicalPlan-CreateTempViewUsing.md#global[global] flag is enabled)
+* CreateTempViewUsing.md[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the CreateTempViewUsing.md#global[global] flag is enabled)
 ====
 
 ## Creating Table
@@ -409,7 +406,7 @@ NOTE: `lookupRelation` considers *default* to be the name of the database if the
 
 `lookupRelation` is used when:
 
-* `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>>
+* `DescribeTableCommand` logical command is <<DescribeTableCommand.md#run, executed>>
 
 * `ResolveRelations` logical evaluation rule is requested to [lookupTableFromCatalog](logical-analysis-rules/ResolveRelations.md#lookupTableFromCatalog)
 
@@ -445,7 +442,7 @@ With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTa
 
 * `CatalogImpl` is requested for [converting TableIdentifier to Table](CatalogImpl.md#makeTable), [listing the columns of a table (as Dataset)](CatalogImpl.md#listColumns) and [refreshing a table](CatalogImpl.md#refreshTable) (i.e. the analyzed logical plan of the table query and re-caching it)
 
-* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, spark-sql-LogicalPlan-DescribeColumnCommand.md#run[DescribeColumnCommand], `ShowColumnsCommand` and <<spark-sql-LogicalPlan-ShowTablesCommand.md#run, ShowTablesCommand>> logical commands are requested to run (executed)
+* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, DescribeColumnCommand.md#run[DescribeColumnCommand], `ShowColumnsCommand` and <<ShowTablesCommand.md#run, ShowTablesCommand>> logical commands are requested to run (executed)
 ====
 
 === [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method

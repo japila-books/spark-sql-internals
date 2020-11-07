@@ -25,7 +25,7 @@ insert(
 
 Inserts or overwrites data (from the given <<spark-sql-DataFrame.md#, DataFrame>>) into a <<spark-sql-BaseRelation.md#, relation>> per `overwrite` flag
 
-Used when spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md[InsertIntoDataSourceCommand] logical command is executed
+Used when InsertIntoDataSourceCommand.md[InsertIntoDataSourceCommand] logical command is executed
 
 |===
 

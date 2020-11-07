@@ -2,7 +2,7 @@ title: AlterViewAsCommand
 
 # AlterViewAsCommand Logical Command
 
-`AlterViewAsCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] for `ALTER VIEW` SQL statement to alter a view.
+`AlterViewAsCommand` is a RunnableCommand.md[logical command] for `ALTER VIEW` SQL statement to alter a view.
 
 `AlterViewAsCommand` works with a table identifier (as `TableIdentifier`), the original SQL text, and a spark-sql-LogicalPlan.md[LogicalPlan] for the SQL query.
 
@@ -19,7 +19,7 @@ When <<run, executed>>, `AlterViewAsCommand` attempts to [alter a temporary view
 run(session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run`...FIXME
 

@@ -4,7 +4,7 @@ title: CatalystSerde
 
 `CatalystSerde` is a Scala object that consists of three utility methods:
 
-. <<deserialize, deserialize>> to create a new logical plan with the input logical plan wrapped inside spark-sql-LogicalPlan-DeserializeToObject.md[DeserializeToObject] logical operator.
+. <<deserialize, deserialize>> to create a new logical plan with the input logical plan wrapped inside DeserializeToObject.md[DeserializeToObject] logical operator.
 . <<serialize, serialize>>
 . <<generateObjAttr, generateObjAttr>>
 
@@ -17,7 +17,7 @@ title: CatalystSerde
 deserialize[T : Encoder](child: LogicalPlan): DeserializeToObject
 ----
 
-`deserialize` creates a spark-sql-LogicalPlan-DeserializeToObject.md[`DeserializeToObject` logical operator] for the input `child` spark-sql-LogicalPlan.md[logical plan].
+`deserialize` creates a DeserializeToObject.md[`DeserializeToObject` logical operator] for the input `child` spark-sql-LogicalPlan.md[logical plan].
 
 Internally, `deserialize` creates a `UnresolvedDeserializer` for the deserializer for the type `T` first and passes it on to a `DeserializeToObject` with a `AttributeReference` (being the result of <<generateObjAttr, generateObjAttr>>).
 

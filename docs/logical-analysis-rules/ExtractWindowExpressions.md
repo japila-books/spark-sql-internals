@@ -1,6 +1,6 @@
 # ExtractWindowExpressions Logical Resolution Rule
 
-`ExtractWindowExpressions` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> and replaces (extracts) <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expressions with <<spark-sql-LogicalPlan-Window.md#, Window>> logical operators.
+`ExtractWindowExpressions` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> and replaces (extracts) <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expressions with <<Window.md#, Window>> logical operators.
 
 `ExtractWindowExpressions` is part of the [Resolution](../Analyzer.md#Resolution) fixed-point batch in the standard batches of the [Analyzer](../Analyzer.md).
 
@@ -34,11 +34,11 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` [transforms the logical operators downwards](../catalyst/TreeNode.md#transformDown) in the input <<spark-sql-LogicalPlan.md#, logical plan>> as follows:
 
-* For <<spark-sql-LogicalPlan-Filter.md#, Filter>> unary operators with <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> operator (as the <<spark-sql-LogicalPlan-Filter.md#child, child>>) that <<hasWindowFunction, has a window function>> in the <<spark-sql-LogicalPlan-Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
+* For <<Filter.md#, Filter>> unary operators with <<Aggregate.md#, Aggregate>> operator (as the <<Filter.md#child, child>>) that <<hasWindowFunction, has a window function>> in the <<Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
-* For <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>> logical operators that <<hasWindowFunction, have a window function>> in the <<spark-sql-LogicalPlan-Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
+* For <<Aggregate.md#, Aggregate>> logical operators that <<hasWindowFunction, have a window function>> in the <<Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
-* For <<spark-sql-LogicalPlan-Project.md#, Project>> logical operators that <<hasWindowFunction, have a window function>> in the <<spark-sql-LogicalPlan-Project.md#projectList, projectList>>, `apply`...FIXME
+* For <<Project.md#, Project>> logical operators that <<hasWindowFunction, have a window function>> in the <<Project.md#projectList, projectList>>, `apply`...FIXME
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
@@ -75,7 +75,7 @@ addWindow(
   child: LogicalPlan): LogicalPlan
 ----
 
-`addWindow` adds a <<spark-sql-LogicalPlan-Project.md#, Project>> logical operator with one or more <<spark-sql-LogicalPlan-Window.md#, Window>> logical operators (for every <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> in the input <<spark-sql-Expression-NamedExpression.md#, named expressions>>) to the input <<spark-sql-LogicalPlan.md#, logical plan>>.
+`addWindow` adds a <<Project.md#, Project>> logical operator with one or more <<Window.md#, Window>> logical operators (for every <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> in the input <<spark-sql-Expression-NamedExpression.md#, named expressions>>) to the input <<spark-sql-LogicalPlan.md#, logical plan>>.
 
 Internally, `addWindow`...FIXME
 

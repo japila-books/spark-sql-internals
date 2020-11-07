@@ -252,7 +252,7 @@ Strategy: `Once`
 
 ## <span id="excludedRules"><span id="spark.sql.optimizer.excludedRules"> Excluded Rules
 
-`Optimizer` uses [spark.sql.optimizer.excludedRules](../spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property to control what rules in the [defaultBatches](#defaultBatches) to exclude.
+`Optimizer` uses [spark.sql.optimizer.excludedRules](../configuration-properties.md#spark.sql.optimizer.excludedRules) configuration property to control what rules in the [defaultBatches](#defaultBatches) to exclude.
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
@@ -370,7 +370,7 @@ blacklistedOnceBatches: Set[String]
 batches: Seq[Batch]
 ```
 
-`batches` uses [spark.sql.optimizer.excludedRules](../spark-sql-properties.md#spark.sql.optimizer.excludedRules) configuration property for the rules to be excluded.
+`batches` uses [spark.sql.optimizer.excludedRules](../configuration-properties.md#spark.sql.optimizer.excludedRules) configuration property for the rules to be excluded.
 
 `batches` filters out [non-excludable rules](#nonExcludableRules) from the rules to be excluded. For any filtered-out rule, `batches` prints out the following WARN message to the logs:
 

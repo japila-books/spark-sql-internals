@@ -25,6 +25,6 @@ scala> println(afterEliminateSubqueryAliases.numberedTreeString)
 apply(plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` simply removes (eliminates) <<spark-sql-LogicalPlan-SubqueryAlias.md#, SubqueryAlias>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>>.
+`apply` simply removes (eliminates) <<SubqueryAlias.md#, SubqueryAlias>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>>.
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

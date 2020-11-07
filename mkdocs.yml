@@ -140,7 +140,7 @@ nav:
       - spark-sql-SparkSession-implicits.md
       - SharedState: SharedState.md
       - ColumnarRule: ColumnarRule.md
-    - Configuration Properties: spark-sql-properties.md
+    - Configuration Properties: configuration-properties.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
       - ParserInterface: sql/ParserInterface.md
@@ -349,7 +349,7 @@ nav:
         - ParquetReadSupport: ParquetReadSupport.md
     - Hive Integration:
       - hive/index.md
-      - hive/configuration-properties.md
+      - Configuration Properties: hive/configuration-properties.md
       - hive/spark-sql-hive-metastore.md
       - DataSinks: hive/spark-sql-DataSinks.md
       - HiveFileFormat: hive/HiveFileFormat.md
@@ -787,7 +787,7 @@ nav:
       - spark-sql-cost-based-optimization.md
       - spark-sql-CatalogStatistics.md
       - spark-sql-ColumnStat.md
-      - spark-sql-CommandUtils.md
+      - CommandUtils: CommandUtils.md
     - spark-sql-catalyst-dsl.md
   - New in Spark 3.0.0:
     - FileScanBuilder: FileScanBuilder.md
@@ -921,7 +921,7 @@ nav:
     - PredicateHelper: spark-sql-PredicateHelper.md
     - DDLUtils: spark-sql-DDLUtils.md
     - SchemaUtils: spark-sql-SchemaUtils.md
-    - AggUtils: spark-sql-AggUtils.md
+    - AggUtils: AggUtils.md
     - ScalaReflection: spark-sql-ScalaReflection.md
     - CreateStruct: spark-sql-CreateStruct.md
     - MultiInstanceRelation: spark-sql-MultiInstanceRelation.md

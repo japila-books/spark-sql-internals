@@ -22,7 +22,7 @@ NOTE: `updateResult` is part of spark-sql-Expression-ExecSubqueryExpression.md#u
 `InSubquery` takes the following when created:
 
 * [[child]] Child Expression.md[expression]
-* [[plan]] spark-sql-SparkPlan-SubqueryExec.md[SubqueryExec] physical operator
+* [[plan]] SubqueryExec.md[SubqueryExec] physical operator
 * [[exprId]] Expression ID (as `ExprId`)
 * [[result]] `result` array (default: `null`)
 * [[updated]] `updated` flag (default: `false`)

@@ -52,7 +52,7 @@ dynamicPartitionOverwrite: Boolean
 `dynamicPartitionOverwrite` is based on the following (in the order of precedence):
 
 * **partitionOverwriteMode** option (`STATIC` or `DYNAMIC`) in the [parameters](#parameters) if available
-* [spark.sql.sources.partitionOverwriteMode](../spark-sql-properties.md#spark.sql.sources.partitionOverwriteMode)
+* [spark.sql.sources.partitionOverwriteMode](../configuration-properties.md#spark.sql.sources.partitionOverwriteMode)
 
 `dynamicPartitionOverwrite` is used when:
 
@@ -75,7 +75,7 @@ CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
 
 `run` gets the [partitionOverwriteMode](#partitionOverwriteMode) option...FIXME
 
-`run` uses `FileCommitProtocol` utility to instantiate a committer based on the [spark.sql.sources.commitProtocolClass](../spark-sql-properties.md#spark.sql.sources.commitProtocolClass) and the [outputPath](#outputPath), the [dynamicPartitionOverwrite](#dynamicPartitionOverwrite), and random `jobId`.
+`run` uses `FileCommitProtocol` utility to instantiate a committer based on the [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) and the [outputPath](#outputPath), the [dynamicPartitionOverwrite](#dynamicPartitionOverwrite), and random `jobId`.
 
 For insertion, `run` simply uses the `FileFormatWriter` utility to `write` and then...FIXME (does some table-specific "tasks").
 

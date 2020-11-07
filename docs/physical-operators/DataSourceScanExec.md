@@ -55,10 +55,10 @@ Scan [relation] [tableIdentifier]
 | DataSourceScanExec
 | Description
 
-| spark-sql-SparkPlan-FileSourceScanExec.md[FileSourceScanExec]
+| FileSourceScanExec.md[FileSourceScanExec]
 | [[FileSourceScanExec]]
 
-| spark-sql-SparkPlan-RowDataSourceScanExec.md[RowDataSourceScanExec]
+| RowDataSourceScanExec.md[RowDataSourceScanExec]
 | [[RowDataSourceScanExec]]
 |===
 

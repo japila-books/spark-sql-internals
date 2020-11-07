@@ -1,6 +1,6 @@
 # HashedRelationBroadcastMode
 
-`HashedRelationBroadcastMode` is a [BroadcastMode](BroadcastMode.md) that `BroadcastHashJoinExec` uses for the spark-sql-SparkPlan-BroadcastHashJoinExec.md#requiredChildDistribution[required output distribution of child operators].
+`HashedRelationBroadcastMode` is a [BroadcastMode](BroadcastMode.md) that `BroadcastHashJoinExec` uses for the BroadcastHashJoinExec.md#requiredChildDistribution[required output distribution of child operators].
 
 [[creating-instance]]
 [[key]]

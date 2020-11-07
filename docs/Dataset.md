@@ -167,14 +167,14 @@ Used when:
 Used when...FIXME
 
 ! `logicalPlan`
-a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.md#, logical plan>> with all <<spark-sql-LogicalPlan-Command.md#, logical commands>> executed and turned into a <<spark-sql-LogicalPlan-LocalRelation.md#creating-instance, LocalRelation>>.
+a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.md#, logical plan>> with all <<Command.md#, logical commands>> executed and turned into a <<LocalRelation.md#creating-instance, LocalRelation>>.
 
 [source, scala]
 ----
 logicalPlan: LogicalPlan
 ----
 
-When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for [analyzed logical plan](QueryExecution.md#analyzed). If the plan is a <<spark-sql-LogicalPlan-Command.md#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
+When initialized, `logicalPlan` requests the <<queryExecution, QueryExecution>> for [analyzed logical plan](QueryExecution.md#analyzed). If the plan is a <<Command.md#, logical command>> or a union thereof, `logicalPlan` <<withAction, executes the QueryExecution>> (using <<SparkPlan.md#executeCollect, executeCollect>>).
 
 ! `planWithBarrier`
 a! [[planWithBarrier]]
@@ -239,7 +239,7 @@ inputFiles: Array[String]
 
 `inputFiles` requests <<queryExecution, QueryExecution>> for [optimized logical plan](QueryExecution.md#optimizedPlan) and collects the following logical operators:
 
-* spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with spark-sql-FileRelation.md[FileRelation] (as the spark-sql-LogicalPlan-LogicalRelation.md#relation[BaseRelation])
+* LogicalRelation.md[LogicalRelation] with spark-sql-FileRelation.md[FileRelation] (as the LogicalRelation.md#relation[BaseRelation])
 
 * spark-sql-FileRelation.md[FileRelation]
 
@@ -283,7 +283,7 @@ isLocal: Boolean
 
 `isLocal` flag is enabled (i.e. `true`) when operators like `collect` or `take` could be run locally, i.e. without using executors.
 
-Internally, `isLocal` checks whether the logical query plan of a `Dataset` is spark-sql-LogicalPlan-LocalRelation.md[LocalRelation].
+Internally, `isLocal` checks whether the logical query plan of a `Dataset` is LocalRelation.md[LocalRelation].
 
 === [[isStreaming]] Is Dataset Streaming? -- `isStreaming` method
 
@@ -338,7 +338,7 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 
 * `SparkSession` is requested to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<SparkSession.md#createDataFrame, createDataFrame>>, <<SparkSession.md#internalCreateDataFrame, internalCreateDataFrame>>, <<SparkSession.md#sql, sql>> and <<SparkSession.md#table, table>>
 
-* `CacheTableCommand`, <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>>, <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
+* `CacheTableCommand`, <<CreateTempViewUsing.md#run, CreateTempViewUsing>>, <<InsertIntoDataSourceCommand.md#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
 
 * `DataSource` is requested to [writeAndRead](DataSource.md#writeAndRead) (for a [CreatableRelationProvider](spark-sql-CreatableRelationProvider.md))
 
@@ -391,7 +391,7 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access SparkSession.md
 ====
 `withAction` is used when `Dataset` is requested for the following:
 
-* <<logicalPlan, Computing the logical plan>> (and executing a spark-sql-LogicalPlan-Command.md[logical command] or their `Union`)
+* <<logicalPlan, Computing the logical plan>> (and executing a Command.md[logical command] or their `Union`)
 
 * Dataset operators: <<spark-sql-dataset-operators.md#collect, collect>>, <<spark-sql-dataset-operators.md#count, count>>, <<spark-sql-dataset-operators.md#head, head>> and <<spark-sql-dataset-operators.md#toLocalIterator, toLocalIterator>>
 ====
@@ -472,7 +472,7 @@ NOTE: `withSetOperator` is used for the spark-sql-Dataset-typed-transformations.
 sortInternal(global: Boolean, sortExprs: Seq[Column]): Dataset[T]
 ----
 
-`sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.md#, Sort>> unary logical operator (and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.md#child, child logical plan>>).
+`sortInternal` <<withTypedPlan, creates a Dataset>> with <<Sort.md#, Sort>> unary logical operator (and the <<logicalPlan, logicalPlan>> as the <<Sort.md#child, child logical plan>>).
 
 [source, scala]
 ----
@@ -490,7 +490,7 @@ scala> println(logicalPlan.numberedTreeString)
 
 Internally, `sortInternal` firstly builds ordering expressions for the given `sortExprs` columns, i.e. takes the `sortExprs` columns and makes sure that they are <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions already (and leaves them untouched) or wraps them into <<spark-sql-Expression-SortOrder.md#, SortOrder>> expressions with <<spark-sql-Expression-SortOrder.md#Ascending, Ascending>> sort direction.
 
-In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<spark-sql-LogicalPlan-Sort.md#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<spark-sql-LogicalPlan-Sort.md#child, child logical plan>>).
+In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<Sort.md#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<Sort.md#child, child logical plan>>).
 
 NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.md#sort, sort>> and <<spark-sql-dataset-operators.md#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
 

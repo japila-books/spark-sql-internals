@@ -217,7 +217,7 @@ The experimental `createExternalTable` family of methods is used to create an ex
 
 CAUTION: FIXME What is an external table?
 
-It assumes *parquet* as the default data source format that you can change using spark-sql-properties.md[spark.sql.sources.default] setting.
+It assumes *parquet* as the default data source format that you can change using [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property.
 
 === [[dropping-temporary-tables]] Dropping Temporary Tables
 
@@ -380,7 +380,7 @@ scala> spark.tables.show
 +---------+-----------+
 ```
 
-`sql` parses `sqlText` using a dialect that can be set up using spark-sql-properties.md[spark.sql.dialect] setting.
+`sql` parses `sqlText` using a dialect that can be set up using [spark.sql.dialect](configuration-properties.md#spark.sql.dialect) setting.
 
 [NOTE]
 ====

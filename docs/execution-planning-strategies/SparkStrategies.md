@@ -13,6 +13,6 @@
 * `StreamingRelationStrategy`
 
 [[singleRowRdd]]
-`SparkStrategies` has a single lazily-instantiated `singleRowRdd` value that is an `RDD` of [InternalRow](../InternalRow.md)s that [BasicOperators](BasicOperators.md) execution planning strategy uses when resolving [OneRowRelation](BasicOperators.md#OneRowRelation) (to spark-sql-SparkPlan-RDDScanExec.md[RDDScanExec] leaf physical operator).
+`SparkStrategies` has a single lazily-instantiated `singleRowRdd` value that is an `RDD` of [InternalRow](../InternalRow.md)s that [BasicOperators](BasicOperators.md) execution planning strategy uses when resolving [OneRowRelation](BasicOperators.md#OneRowRelation) (to RDDScanExec.md[RDDScanExec] leaf physical operator).
 
 NOTE: `OneRowRelation` logical operator represents SQL's [SELECT clause without FROM clause](../sql/AstBuilder.md#visitQuerySpecification) or [EXPLAIN DESCRIBE TABLE](../sql/AstBuilder.md#visitExplain).

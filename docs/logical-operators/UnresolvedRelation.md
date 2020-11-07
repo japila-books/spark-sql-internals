@@ -3,7 +3,7 @@ title: UnresolvedRelation
 # UnresolvedRelation Leaf Logical Operator for Table Reference
 
 [[tableIdentifier]][[creating-instance]]
-`UnresolvedRelation` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] to represent a *table reference* in a logical query plan that has yet to be resolved (i.e. looked up in a catalog).
+`UnresolvedRelation` is a LeafNode.md[leaf logical operator] to represent a *table reference* in a logical query plan that has yet to be resolved (i.e. looked up in a catalog).
 
 [NOTE]
 ====

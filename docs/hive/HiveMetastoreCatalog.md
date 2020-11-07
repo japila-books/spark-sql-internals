@@ -41,14 +41,14 @@ convertToLogicalRelation(
 `convertToLogicalRelation` branches based on whether the input HiveTableRelation.md[HiveTableRelation] is <<convertToLogicalRelation-partitioned, partitioned>> or <<convertToLogicalRelation-not-partitioned, not>>.
 
 [[convertToLogicalRelation-partitioned]]
-When the `HiveTableRelation` is HiveTableRelation.md#isPartitioned[partitioned], `convertToLogicalRelation` uses configuration-properties.md#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property to compute the root paths. With the property enabled, the root path is simply the [table location](../CatalogTable.md#location) (aka _locationUri_). Otherwise, the root paths are the `locationUri` of the [partitions](../ExternalCatalog.md#listPartitions) (using the [shared ExternalCatalog](../SharedState.md#externalCatalog)).
+When the `HiveTableRelation` is HiveTableRelation.md#isPartitioned[partitioned], `convertToLogicalRelation` uses [spark.sql.hive.manageFilesourcePartitions](configuration-properties.md#spark.sql.hive.manageFilesourcePartitions) configuration property to compute the root paths. With the property enabled, the root path is simply the [table location](../CatalogTable.md#location) (aka _locationUri_). Otherwise, the root paths are the `locationUri` of the [partitions](../ExternalCatalog.md#listPartitions) (using the [shared ExternalCatalog](../SharedState.md#externalCatalog)).
 
-`convertToLogicalRelation` creates a new ../spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (with no bucketing specification among things) unless a `LogicalRelation` for the table is already in a <<getCached, cache>>.
+`convertToLogicalRelation` creates a new ../LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (with no bucketing specification among things) unless a `LogicalRelation` for the table is already in a <<getCached, cache>>.
 
 [[convertToLogicalRelation-not-partitioned]]
 When the `HiveTableRelation` is not partitioned, `convertToLogicalRelation`...FIXME
 
-In the end, `convertToLogicalRelation` replaces `exprIds` in the ../spark-sql-LogicalPlan-LogicalRelation.md#output[table relation output (schema)].
+In the end, `convertToLogicalRelation` replaces `exprIds` in the ../LogicalRelation.md#output[table relation output (schema)].
 
 NOTE: `convertToLogicalRelation` is used when RelationConversions.md[RelationConversions] logical evaluation rule is executed (with Hive tables in `parquet` as well as `native` and `hive` ORC storage formats).
 

@@ -86,11 +86,11 @@ Generated code:
 
 * [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (with spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
 
-* `FileSourceScanExec` leaf physical operator is <<spark-sql-SparkPlan-FileSourceScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
+* `FileSourceScanExec` leaf physical operator is <<FileSourceScanExec.md#doExecute, executed>> (with the <<FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
-* `InMemoryTableScanExec` leaf physical operator is <<spark-sql-SparkPlan-InMemoryTableScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-InMemoryTableScanExec.md#supportsBatch, supportsBatch>> flag enabled)
+* `InMemoryTableScanExec` leaf physical operator is <<InMemoryTableScanExec.md#doExecute, executed>> (with the <<InMemoryTableScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
-* `DataSourceV2ScanExec` leaf physical operator is <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#doExecute, executed>> (with the <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#supportsBatch, supportsBatch>> flag enabled)
+* `DataSourceV2ScanExec` leaf physical operator is <<DataSourceV2ScanExec.md#doExecute, executed>> (with the <<DataSourceV2ScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
 NOTE: spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
@@ -225,7 +225,7 @@ NOTE: `doExecute` only supports up to two [input RDDs](CodegenSupport.md#inputRD
 
 CAUTION: FIXME Finish the "success" path
 
-If the size of the generated codes is greater than <<spark-sql-properties.md#spark.sql.codegen.hugeMethodLimit, spark.sql.codegen.hugeMethodLimit>> (which defaults to `65535`), `doExecute` prints out the following INFO message:
+If the size of the generated codes is greater than [spark.sql.codegen.hugeMethodLimit](../configuration-properties.md#spark.sql.codegen.hugeMethodLimit), `doExecute` prints out the following INFO message:
 
 ```text
 Found too long generated codes and JIT optimization might not work: the bytecode size ([maxCodeSize]) is above the limit [spark.sql.codegen.hugeMethodLimit], and the whole-stage codegen was disabled for this plan (id=[codegenStageId]). To avoid this, you can raise the limit `spark.sql.codegen.hugeMethodLimit`:
@@ -234,11 +234,11 @@ Found too long generated codes and JIT optimization might not work: the bytecode
 
 In the end, `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and returns it.
 
-NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> for <<spark-sql-SparkPlan-FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator with <<spark-sql-SparkPlan-FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<spark-sql-SparkPlan-FileSourceScanExec.md#doExecute, FileSourceScanExec>>).
+NOTE: `doExecute` skips requesting the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> for <<FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator with <<FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled (as `FileSourceScanExec` operator uses `WholeStageCodegenExec` operator when <<FileSourceScanExec.md#doExecute, FileSourceScanExec>>).
 
-If compilation fails and spark-sql-properties.md#spark.sql.codegen.fallback[spark.sql.codegen.fallback] configuration property is enabled, `doExecute` prints out the following WARN message to the logs, requests the <<child, child>> physical operator to SparkPlan.md#execute[execute] and returns it.
+If compilation fails and [spark.sql.codegen.fallback](../configuration-properties.md#spark.sql.codegen.fallback) configuration property is enabled, `doExecute` prints out the following WARN message to the logs, requests the <<child, child>> physical operator to SparkPlan.md#execute[execute] and returns it.
 
-```
+```text
 Whole-stage codegen disabled for plan (id=[codegenStageId]):
  [treeString]
 ```
@@ -340,20 +340,19 @@ my_code
 append(my_value);
 ```
 
-=== [[generatedClassName]] Generating Class Name -- `generatedClassName` Method
+## <span id="generatedClassName"> Generating Class Name
 
-[source, scala]
-----
+```scala
 generatedClassName(): String
-----
+```
 
-`generatedClassName` gives a class name per spark-sql-properties.md#spark.sql.codegen.useIdInClassName[spark.sql.codegen.useIdInClassName] configuration property:
+`generatedClassName` gives a class name per [spark.sql.codegen.useIdInClassName](../configuration-properties.md#spark.sql.codegen.useIdInClassName) configuration property:
 
 * `GeneratedIteratorForCodegenStage` with the <<codegenStageId, codegen stage ID>> when enabled (`true`)
 
 * `GeneratedIterator` when disabled (`false`)
 
-NOTE: `generatedClassName` is used exclusively when `WholeStageCodegenExec` unary physical operator is requested to <<doCodeGen, generate the Java source code for the child physical plan subtree>>.
+`generatedClassName` is used when `WholeStageCodegenExec` unary physical operator is requested to [generate the Java source code for the child physical plan subtree](#doCodeGen).
 
 === [[isTooManyFields]] `isTooManyFields` Object Method
 

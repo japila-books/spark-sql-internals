@@ -1,6 +1,6 @@
 # DataSourceV2Relation Leaf Logical Operator
 
-`DataSourceV2Relation` is a <<spark-sql-LogicalPlan-LeafNode.md#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
+`DataSourceV2Relation` is a <<LeafNode.md#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
 `DataSourceV2Relation` is <<creating-instance, created>> (indirectly via <<create, create>> helper method) exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](../DataFrameReader.md#load) (from a data source with <<spark-sql-ReadSupport.md#, ReadSupport>>).
 
@@ -13,9 +13,9 @@
 * [[tableIdent]] Optional `TableIdentifier` (default: undefined, i.e. `None`)
 * [[userSpecifiedSchema]] User-defined [schema](../StructType.md) (default: undefined, i.e. `None`)
 
-When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-ProjectExec.md#, ProjectExec>> with a <<spark-sql-SparkPlan-DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator (possibly under the <<spark-sql-SparkPlan-FilterExec.md#, FilterExec>> operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
+When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<ProjectExec.md#, ProjectExec>> with a <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator (possibly under the <<FilterExec.md#, FilterExec>> operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
 
-When used to represent a data write (with <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator), `DataSourceV2Relation` is planned (_translated_) to a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (with the <<newWriter, DataSourceWriter>>) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData).
+When used to represent a data write (with <<AppendData.md#, AppendData>> logical operator), `DataSourceV2Relation` is planned (_translated_) to a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (with the <<newWriter, DataSourceWriter>>) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData).
 
 `DataSourceV2Relation` object defines a `SourceHelpers` implicit class that extends <<spark-sql-DataSourceV2.md#, DataSourceV2>> instances with the additional <<extension-methods, extension methods>>.
 
@@ -45,7 +45,7 @@ NOTE: `create` is used exclusively when `DataFrameReader` is requested to ["load
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of the <<spark-sql-LogicalPlan-LeafNode.md#computeStats, LeafNode Contract>> to compute a [Statistics](Statistics.md).
+NOTE: `computeStats` is part of the <<LeafNode.md#computeStats, LeafNode Contract>> to compute a [Statistics](Statistics.md).
 
 `computeStats`...FIXME
 

@@ -36,15 +36,15 @@ When created `UnresolvedHint` takes:
 * [[child]] Child spark-sql-LogicalPlan.md[logical plan]
 
 [[resolved]]
-`UnresolvedHint` can never be spark-sql-LogicalPlan.md#resolved[resolved] and is supposed to be converted to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint] unary logical operator during [query analysis](../Analyzer.md#Hints) (or simply removed from a logical plan).
+`UnresolvedHint` can never be spark-sql-LogicalPlan.md#resolved[resolved] and is supposed to be converted to a ResolvedHint.md[ResolvedHint] unary logical operator during [query analysis](../Analyzer.md#Hints) (or simply removed from a logical plan).
 
 [NOTE]
 ====
-There are the following logical rules that [Logical Analyzer](../Analyzer.md) uses to analyze logical plans with the spark-sql-LogicalPlan-UnresolvedHint.md[UnresolvedHint] logical operator:
+There are the following logical rules that [Logical Analyzer](../Analyzer.md) uses to analyze logical plans with the UnresolvedHint.md[UnresolvedHint] logical operator:
 
-* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a spark-sql-LogicalPlan-ResolvedHint.md[ResolvedHint]
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) resolves `UnresolvedHint` operators with `BROADCAST`, `BROADCASTJOIN`, `MAPJOIN` hints to a ResolvedHint.md[ResolvedHint]
 
-* [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) resolves <<spark-sql-LogicalPlan-UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
+* [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) resolves <<UnresolvedHint.md#, UnresolvedHint>> logical operators with `COALESCE` or `REPARTITION` hints
 
 * `RemoveAllHints` simply removes all `UnresolvedHint` operators
 

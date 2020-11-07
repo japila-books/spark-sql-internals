@@ -1,10 +1,10 @@
 # HashAggregateExec Aggregate Physical Operator
 
-`HashAggregateExec` is a [unary physical operator](UnaryExecNode.md) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through [AggUtils.createAggregate](../spark-sql-AggUtils.md#createAggregate)) when:
+`HashAggregateExec` is a [unary physical operator](UnaryExecNode.md) for **hash-based aggregation** that is <<creating-instance, created>> (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
 
-* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operator
+* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy selects the aggregate physical operator for an Aggregate.md[Aggregate] logical operator
 
-* Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or spark-sql-LogicalPlan-Aggregate.md[Aggregate] logical operators
+* Structured Streaming's `StatefulAggregationStrategy` strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
 
 !!! note
     `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
@@ -84,7 +84,7 @@ NOTE: `numProbes` and `numKeyLookups` are used in spark-sql-BytesToBytesMap.md[B
 
 | `numOutputRows`
 | number of output rows
-a| [[numOutputRows]] Number of groups (per partition) that (depending on the number of partitions and the side of spark-sql-SparkPlan-ShuffleExchangeExec.md[ShuffleExchangeExec] operator) is the number of groups
+a| [[numOutputRows]] Number of groups (per partition) that (depending on the number of partitions and the side of ShuffleExchangeExec.md[ShuffleExchangeExec] operator) is the number of groups
 
 * `0` for no input with a grouping expression, e.g. `spark.range(0).groupBy($"id").count.show`
 
@@ -151,7 +151,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 
 [NOTE]
 ====
-`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from <<spark-sql-AggUtils.md#createAggregate, AggUtils.createAggregate>> and is undefined by default.
+`requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from [AggUtils.createAggregate](../AggUtils.md#createAggregate) and is undefined by default.
 
 ---
 
@@ -196,18 +196,16 @@ NOTE: The prefix for variable names for `HashAggregateExec` operators in [Codege
 | [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
 |===
 
-[NOTE]
-====
-`HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) spark-sql-TungstenAggregationIterator.md#switchToSortBasedAggregation[switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory].
+!!! note
+    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) spark-sql-TungstenAggregationIterator.md#switchToSortBasedAggregation[switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory].
 
-See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and spark-sql-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt[spark.sql.TungstenAggregate.testFallbackStartsAt] Spark property.
+    See <<testFallbackStartsAt, testFallbackStartsAt>> internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
 
-Search logs for the following INFO message to know whether the switch has happened.
+    Search logs for the following INFO message to know whether the switch has happened.
 
-```
-INFO TungstenAggregationIterator: falling back to sort based aggregation.
-```
-====
+    ```text
+    falling back to sort based aggregation.
+    ```
 
 === [[finishAggregate]] `finishAggregate` Method
 
@@ -300,14 +298,10 @@ supportsAggregate(aggregateBufferAttributes: Seq[Attribute]): Boolean
 
 `supportsAggregate` firstly [creates the schema](../StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>> (i.e. the schema uses UnsafeRow.md#mutableFieldTypes[mutable field data types] only that have fixed length and can be mutated in place in an UnsafeRow.md[UnsafeRow]).
 
-[NOTE]
-====
 `supportsAggregate` is used when:
 
-* `AggUtils` is requested to <<spark-sql-AggUtils.md#createAggregate, creates an aggregate physical operator given aggregate expressions>>
-
-* `HashAggregateExec` physical operator is <<creating-instance, created>> (to assert that the <<aggregateBufferAttributes, aggregateBufferAttributes>> are supported)
-====
+* `AggUtils` is requested to [creates an aggregate physical operator given aggregate expressions](../AggUtils.md#createAggregate)
+* `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](#aggregateBufferAttributes) are supported)
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

@@ -10,20 +10,20 @@
 | Target Operator
 | Description
 
-| <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> [small]#(isDatasourceTable + no query)#
-| <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>>
+| <<CreateTable.md#, CreateTable>> [small]#(isDatasourceTable + no query)#
+| <<CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>>
 | [[CreateTable-no-query]]
 
-| <<spark-sql-LogicalPlan-CreateTable.md#, CreateTable>> [small]#(isDatasourceTable + a resolved query)#
-| <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>>
+| <<CreateTable.md#, CreateTable>> [small]#(isDatasourceTable + a resolved query)#
+| <<CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>>
 | [[CreateTable-query]]
 
 | <<InsertIntoTable.md#, InsertIntoTable>> with <<spark-sql-InsertableRelation.md#, InsertableRelation>>
-| <<spark-sql-LogicalPlan-InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
+| <<InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoTable-InsertableRelation]]
 
 | InsertIntoDir.md[InsertIntoDir] [small]#(non-hive provider)#
-| <<spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>>
+| <<InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>>
 | [[InsertIntoDir]]
 
 | [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../HadoopFsRelation.md)

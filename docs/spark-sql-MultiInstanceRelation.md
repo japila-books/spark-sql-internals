@@ -25,10 +25,10 @@ When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical ev
 | `ContinuousExecutionRelation`
 | [[ContinuousExecutionRelation]] Used in Spark Structured Streaming
 
-| spark-sql-LogicalPlan-DataSourceV2Relation.md[DataSourceV2Relation]
+| DataSourceV2Relation.md[DataSourceV2Relation]
 | [[DataSourceV2Relation]]
 
-| spark-sql-LogicalPlan-ExternalRDD.md[ExternalRDD]
+| ExternalRDD.md[ExternalRDD]
 | [[ExternalRDD]]
 
 | hive/HiveTableRelation.md[HiveTableRelation]
@@ -37,19 +37,19 @@ When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical ev
 | [InMemoryRelation](logical-operators/InMemoryRelation.md)
 | [[InMemoryRelation]]
 
-| spark-sql-LogicalPlan-LocalRelation.md[LocalRelation]
+| LocalRelation.md[LocalRelation]
 | [[LocalRelation]]
 
-| spark-sql-LogicalPlan-LogicalRDD.md[LogicalRDD]
+| LogicalRDD.md[LogicalRDD]
 | [[LogicalRDD]]
 
-| spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation]
+| LogicalRelation.md[LogicalRelation]
 | [[LogicalRelation]]
 
-| spark-sql-LogicalPlan-Range.md[Range]
+| Range.md[Range]
 | [[Range]]
 
-| spark-sql-LogicalPlan-View.md[View]
+| View.md[View]
 | [[View]]
 
 | `StreamingExecutionRelation`

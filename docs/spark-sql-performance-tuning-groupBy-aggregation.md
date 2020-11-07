@@ -36,14 +36,10 @@ res1: String =
  |  ParallelCollectionRDD[4] at rdd at <console>:26 []
 ----
 
-[NOTE]
-====
-By default Spark SQL uses spark-sql-properties.md#spark.sql.shuffle.partitions[spark.sql.shuffle.partitions] number of partitions for aggregations and joins, i.e. `200` by default.
+!!! note
+    By default Spark SQL uses [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) number of partitions for aggregations and joins.
 
-That often leads to explosion of partitions for nothing that does impact the performance of a query since these 200 tasks (per partition) have all to start and finish before you get the result.
-
-_Less is more_ remember?
-====
+    That often leads to explosion of partitions for nothing that does impact the  performance of a query since these 200 tasks (per partition) have all to start and finish before you get the result.
 
 === [[case_1]] Case 1: Default Number of Partitions -- spark.sql.shuffle.partitions Property
 

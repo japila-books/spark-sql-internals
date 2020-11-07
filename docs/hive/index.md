@@ -6,9 +6,9 @@ TIP: Consult ../demo/demo-connecting-spark-sql-to-hive-metastore.md[Demo: Connec
 
 In order to use Hive-related features in a Spark SQL application a ../SparkSession.md[SparkSession] has to be created with ../SparkSession-Builder.md#enableHiveSupport[Builder.enableHiveSupport].
 
-Hive Data Source uses custom configuration-properties.md[Spark SQL configuration properties] (in addition to <<hive-configuration-properties, Hive's>>).
+Hive Data Source uses custom [Spark SQL configuration properties](../configuration-properties.md) (in addition to [Hive](#hive-configuration-properties)'s).
 
-Hive Data Source uses HiveTableRelation.md[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on configuration-properties.md#spark.sql.hive.convertMetastoreParquet[spark.sql.hive.convertMetastoreParquet] and configuration-properties.md#spark.sql.hive.convertMetastoreOrc[spark.sql.hive.convertMetastoreOrc] properties (and "disappears" from a logical plan when enabled).
+Hive Data Source uses HiveTableRelation.md[HiveTableRelation] to represent Hive tables. `HiveTableRelation` can be RelationConversions.md#convert[converted to a HadoopFsRelation] based on [spark.sql.hive.convertMetastoreParquet](configuration-properties.md#spark.sql.hive.convertMetastoreParquet) and [spark.sql.hive.convertMetastoreOrc](configuration-properties.md#spark.sql.hive.convertMetastoreOrc) configuration properties (and "disappears" from a logical plan when enabled).
 
 Hive Data Source uses HiveSessionStateBuilder.md[HiveSessionStateBuilder] (to build a Hive-specific ../SparkSession.md#sessionState[SessionState]) and [HiveExternalCatalog](HiveExternalCatalog.md).
 

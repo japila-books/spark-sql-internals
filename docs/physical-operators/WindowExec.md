@@ -2,7 +2,7 @@
 
 `WindowExec` is a [unary physical operator](UnaryExecNode.md) for **window aggregation execution** (and represents [Window](../logical-operators/Window.md) unary logical operator at execution time).
 
-`WindowExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves a <<spark-sql-LogicalPlan-Window.md#, Window>> unary logical operator.
+`WindowExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves a <<Window.md#, Window>> unary logical operator.
 
 [source, scala]
 ----
@@ -273,7 +273,7 @@ Refer to spark-logging.md[Logging].
 NOTE: `nextGroup` is the result of converting `nextRow` using <<grouping, grouping>> conversion function.
 
 [[buffer]]
-`doExecute` creates a spark-sql-ExternalAppendOnlyUnsafeRowArray.md[ExternalAppendOnlyUnsafeRowArray] buffer using spark-sql-properties.md#spark.sql.windowExec.buffer.spill.threshold[spark.sql.windowExec.buffer.spill.threshold] property (default: `4096`) as the threshold for the number of rows buffered.
+`doExecute` creates a [ExternalAppendOnlyUnsafeRowArray](../spark-sql-ExternalAppendOnlyUnsafeRowArray.md) buffer using [spark.sql.windowExec.buffer.spill.threshold](../configuration-properties.md#spark.sql.windowExec.buffer.spill.threshold) configuration property as the threshold for the number of rows buffered.
 
 [[windowFunctionResult]]
 `doExecute` creates a `SpecificInternalRow` for the window function result (as `windowFunctionResult`).

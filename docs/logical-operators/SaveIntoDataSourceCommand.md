@@ -39,7 +39,7 @@ run(
   sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` simply requests the <<dataSource, CreatableRelationProvider data source>> to <<spark-sql-CreatableRelationProvider.md#createRelation, save the rows of a structured query (a DataFrame)>>.
 

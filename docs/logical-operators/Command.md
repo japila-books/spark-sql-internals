@@ -8,7 +8,7 @@ NOTE: `Command` is executed when a `Dataset` is requested for the Dataset.md#log
 `Command` has no catalyst/QueryPlan.md#output[output schema] by default.
 
 [[children]]
-`Command` has no child logical operators (which makes it similar to spark-sql-LogicalPlan-LeafNode.md[leaf logical operators]).
+`Command` has no child logical operators (which makes it similar to LeafNode.md[leaf logical operators]).
 
 [[implementations]]
 .Commands (Direct Implementations)
@@ -17,10 +17,10 @@ NOTE: `Command` is executed when a `Dataset` is requested for the Dataset.md#log
 | Command
 | Description
 
-| spark-sql-LogicalPlan-DataWritingCommand.md[DataWritingCommand]
+| DataWritingCommand.md[DataWritingCommand]
 | [[DataWritingCommand]]
 
-| spark-sql-LogicalPlan-RunnableCommand.md[RunnableCommand]
+| RunnableCommand.md[RunnableCommand]
 | [[RunnableCommand]]
 
 |===

@@ -1,17 +1,16 @@
-title: RelationalGroupedDataset
-
-# RelationalGroupedDataset -- Untyped Row-based Grouping
+# RelationalGroupedDataset &mdash; Untyped Row-based Grouping
 
 `RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a spark-sql-DataFrame.md[DataFrame].
 
-NOTE: spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] is used for typed aggregates over groups of custom Scala objects (not spark-sql-Row.md[Rows]).
+!!! note
+    [KeyValueGroupedDataset](spark-sql-KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Rows](spark-sql-Row.md)).
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
-* spark-sql-basic-aggregation.md#groupBy[groupBy]
-* spark-sql-multi-dimensional-aggregation.md#rollup[rollup]
-* spark-sql-multi-dimensional-aggregation.md#cube[cube]
-* <<pivot, pivot>>
+* [groupBy](spark-sql-basic-aggregation.md#groupBy)
+* [rollup](spark-sql-multi-dimensional-aggregation.md#rollup)
+* [cube](spark-sql-multi-dimensional-aggregation.md#cube)
+* [pivot](#pivot)
 
 [[operators]]
 .RelationalGroupedDataset's Aggregate Operators
@@ -56,23 +55,8 @@ Pivots on a column (with new columns per distinct value)
 a| [[sum]]
 |===
 
-[NOTE]
-====
-spark-sql-properties.md#spark.sql.retainGroupColumns[spark.sql.retainGroupColumns] configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
-
-`spark.sql.retainGroupColumns` is enabled by default.
-
-[source, scala]
-----
-scala> spark.conf.get("spark.sql.retainGroupColumns")
-res1: String = true
-
-// Use dataFrameRetainGroupColumns method for type-safe access to the current value
-import spark.sessionState.conf
-scala> conf.dataFrameRetainGroupColumns
-res2: Boolean = true
-----
-====
+!!! note
+    [spark.sql.retainGroupColumns](configuration-properties.md#spark.sql.retainGroupColumns) configuration property controls whether to retain columns used for aggregation or not (in `RelationalGroupedDataset` operators).
 
 === [[agg]] Computing Aggregates Using Aggregate Column Expressions or Function Names -- `agg` Operator
 
@@ -151,7 +135,7 @@ Internally, `toDF` branches off per group type.
 
 CAUTION: FIXME
 
-[[toDF-PivotType]] For `PivotType`, `toDF` Dataset.md#ofRows[creates a DataFrame] with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
+[[toDF-PivotType]] For `PivotType`, `toDF` Dataset.md#ofRows[creates a DataFrame] with Pivot.md[Pivot] unary logical operator.
 
 [NOTE]
 ====
@@ -253,19 +237,18 @@ scala> visits
 
 IMPORTANT: Use `pivot` with a list of distinct values to pivot on so Spark does not have to compute the list itself (and run three extra "scanning" jobs).
 
-.pivot in web UI (Distinct Values Defined Explicitly)
-image::images/spark-sql-pivot-webui.png[align="center"]
+![pivot in web UI (Distinct Values Defined Explicitly)](images/spark-sql-pivot-webui.png)
 
-.pivot in web UI -- Three Extra Scanning Jobs Due to Unspecified Distinct Values
-image::images/spark-sql-pivot-webui-scanning-jobs.png[align="center"]
+![pivot in web UI -- Three Extra Scanning Jobs Due to Unspecified Distinct Values](images/spark-sql-pivot-webui-scanning-jobs.png)
 
-NOTE: spark-sql-properties.md#spark.sql.pivotMaxValues[spark.sql.pivotMaxValues] (default: `10000`) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
+!!! note
+    [spark.sql.pivotMaxValues](configuration-properties.md#spark.sql.pivotMaxValues) controls the maximum number of (distinct) values that will be collected without error (when doing `pivot` without specifying the values for the pivot column).
 
 Internally, `pivot` creates a `RelationalGroupedDataset` with `PivotType` group type and `pivotColumn` resolved using the DataFrame's columns with `values` as `Literal` expressions.
 
 [NOTE]
 ====
-<<toDF, toDF>> internal method maps `PivotType` group type to a `DataFrame` with spark-sql-LogicalPlan-Pivot.md[Pivot] unary logical operator.
+<<toDF, toDF>> internal method maps `PivotType` group type to a `DataFrame` with Pivot.md[Pivot] unary logical operator.
 
 ```
 scala> q.queryExecution.logical

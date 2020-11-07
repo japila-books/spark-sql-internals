@@ -17,6 +17,4 @@ NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule t
 
 `apply` finds all [Exchange](../physical-operators/Exchange.md) unary operators and...FIXME
 
-`apply` does nothing and simply returns the input physical `plan` if spark-sql-properties.md#spark.sql.exchange.reuse[spark.sql.exchange.reuse] internal configuration property is off (i.e. `false`).
-
-NOTE: spark-sql-properties.md#spark.sql.exchange.reuse[spark.sql.exchange.reuse] internal configuration property is on (i.e. `true`) by default.
+`apply` does nothing and simply returns the input physical `plan` if [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse) internal configuration property is disabled.

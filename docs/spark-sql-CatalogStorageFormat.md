@@ -41,4 +41,4 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 * `CatalogTable` is requested for [toLinkedHashMap](CatalogTable.md#toLinkedHashMap)
 
-* `DescribeTableCommand` is requested to spark-sql-LogicalPlan-DescribeTableCommand.md#run[run]
+* `DescribeTableCommand` is requested to DescribeTableCommand.md#run[run]

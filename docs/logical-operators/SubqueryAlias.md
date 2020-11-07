@@ -12,7 +12,7 @@ title: SubqueryAlias
 
 * `SessionCatalog` is requested to [find a table or view in catalogs](../SessionCatalog.md#lookupRelation)
 
-* `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#constructLeftJoins, constructLeftJoins>> (when <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#apply, applied>> to <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>>, <<spark-sql-LogicalPlan-Project.md#, Project>> or <<spark-sql-LogicalPlan-Filter.md#, Filter>> logical operators with correlated scalar subqueries)
+* `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<RewriteCorrelatedScalarSubquery.md#constructLeftJoins, constructLeftJoins>> (when <<RewriteCorrelatedScalarSubquery.md#apply, applied>> to <<Aggregate.md#, Aggregate>>, <<Project.md#, Project>> or <<Filter.md#, Filter>> logical operators with correlated scalar subqueries)
 
 [[doCanonicalize]]
 `SubqueryAlias` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.
@@ -20,9 +20,9 @@ title: SubqueryAlias
 [[output]]
 When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `SubqueryAlias` requests the <<child, child>> logical operator for them and adds the <<alias, alias>> as a <<spark-sql-Expression-Attribute.md#withQualifier, qualifier>>.
 
-NOTE: <<spark-sql-Optimizer-EliminateSubqueryAliases.md#, EliminateSubqueryAliases>> logical optimization eliminates (removes) `SubqueryAlias` operators from a logical query plan.
+NOTE: <<EliminateSubqueryAliases.md#, EliminateSubqueryAliases>> logical optimization eliminates (removes) `SubqueryAlias` operators from a logical query plan.
 
-NOTE: <<spark-sql-Optimizer-RewriteCorrelatedScalarSubquery.md#, RewriteCorrelatedScalarSubquery>> logical optimization rewrites correlated scalar subqueries with `SubqueryAlias` operators.
+NOTE: <<RewriteCorrelatedScalarSubquery.md#, RewriteCorrelatedScalarSubquery>> logical optimization rewrites correlated scalar subqueries with `SubqueryAlias` operators.
 
 === [[catalyst-dsl]][[subquery]][[as]] Catalyst DSL -- `subquery` And `as` Operators
 

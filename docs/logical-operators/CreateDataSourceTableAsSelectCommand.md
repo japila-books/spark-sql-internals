@@ -2,13 +2,13 @@ title: CreateDataSourceTableAsSelectCommand
 
 # CreateDataSourceTableAsSelectCommand Logical Command
 
-`CreateDataSourceTableAsSelectCommand` is a <<spark-sql-LogicalPlan-DataWritingCommand.md#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).
+`CreateDataSourceTableAsSelectCommand` is a <<DataWritingCommand.md#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).
 
 NOTE: A DataSource table is a Spark SQL native table that uses any data source but Hive (per `USING` clause).
 
-`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
+`CreateDataSourceTableAsSelectCommand` is <<creating-instance, created>> when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule is executed (and resolves a CreateTable.md[CreateTable] logical operator for a Spark table with a <<query, AS query>>).
 
-NOTE: spark-sql-LogicalPlan-CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a spark-sql-LogicalPlan-CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
+NOTE: CreateDataSourceTableCommand.md[CreateDataSourceTableCommand] is used instead when a CreateTable.md[CreateTable] logical operator is used with no <<query, AS query>>.
 
 [source,plaintext]
 ----
@@ -58,7 +58,7 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
+NOTE: `run` is part of DataWritingCommand.md#run[DataWritingCommand] contract.
 
 `run`...FIXME
 

@@ -64,7 +64,7 @@ constructLeftJoins(
 
 `constructLeftJoins`...FIXME
 
-NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubquery` logical optimization is <<apply, executed>> (i.e. applied to <<spark-sql-LogicalPlan-Aggregate.md#, Aggregate>>, <<spark-sql-LogicalPlan-Project.md#, Project>> or <<spark-sql-LogicalPlan-Filter.md#, Filter>> logical operators with correlated scalar subqueries)
+NOTE: `constructLeftJoins` is used exclusively when `RewriteCorrelatedScalarSubquery` logical optimization is <<apply, executed>> (i.e. applied to <<Aggregate.md#, Aggregate>>, <<Project.md#, Project>> or <<Filter.md#, Filter>> logical operators with correlated scalar subqueries)
 
 === [[apply]] Executing Rule -- `apply` Method
 
@@ -75,11 +75,11 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` transforms the input spark-sql-LogicalPlan.md[logical plan] as follows:
 
-. For spark-sql-LogicalPlan-Aggregate.md[Aggregate] operators, `apply`...FIXME
+. For Aggregate.md[Aggregate] operators, `apply`...FIXME
 
-. For spark-sql-LogicalPlan-Project.md[Project] operators, `apply`...FIXME
+. For Project.md[Project] operators, `apply`...FIXME
 
-. For spark-sql-LogicalPlan-Filter.md[Filter] operators, `apply`...FIXME
+. For Filter.md[Filter] operators, `apply`...FIXME
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 

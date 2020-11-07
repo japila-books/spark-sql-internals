@@ -160,7 +160,8 @@ textFile(paths: String*): Dataset[String]
 
 `DataFrameReader` supports many <<creating-dataframes-from-files, file formats>> natively and offers the <<format, interface to define custom formats>>.
 
-NOTE: `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using spark-sql-properties.md#spark.sql.sources.default[spark.sql.sources.default] configuration property.
+!!! note
+    `DataFrameReader` assumes <<parquet, parquet>> data source file format by default that you can change using [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property.
 
 After you have described the *loading pipeline* (i.e. the "Extract" part of ETL in Spark SQL), you eventually "trigger" the loading using format-agnostic <<load, load>> or format-specific (e.g. <<json, json>>, <<csv, csv>>, <<jdbc, jdbc>>) operators.
 
@@ -639,7 +640,7 @@ source: String
 
 In other words, the <<methods, DataFrameReader fluent API>> is simply to describe the input data source.
 
-The default data source is <<parquet, parquet>> per <<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property.
+The default data source is <<parquet, parquet>> per [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property.
 
 `source` is usually specified using <<format, format>> method.
 
@@ -652,7 +653,7 @@ Hive data source can only be used with tables, you can not read files of Hive da
 ```
 ====
 
-Once defined explicitly (using <<format, format>> method) or implicitly (<<spark-sql-properties.md#spark.sql.sources.default, spark.sql.sources.default>> configuration property), `source` is resolved using [DataSource](DataSource.md#lookupDataSource) utility.
+Once defined explicitly (using <<format, format>> method) or implicitly ([spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property), `source` is resolved using [DataSource](DataSource.md#lookupDataSource) utility.
 
 NOTE: `source` is used exclusively when `DataFrameReader` is requested to <<load, "load" data (as a DataFrame)>> (explicitly or using <<loadV1Source, loadV1Source>>).
 

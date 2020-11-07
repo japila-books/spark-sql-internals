@@ -18,7 +18,7 @@ debug(): Unit
 ----
 
 | <<debugCodegen, debugCodegen>>
-a| Displays the Java source code generated for a structured query in <<spark-sql-whole-stage-codegen.md#, whole-stage code generation>> (i.e. the output of each <<spark-sql-SparkPlan-WholeStageCodegenExec.md#, WholeStageCodegen subtree>> in a query plan).
+a| Displays the Java source code generated for a structured query in <<spark-sql-whole-stage-codegen.md#, whole-stage code generation>> (i.e. the output of each <<WholeStageCodegenExec.md#, WholeStageCodegen subtree>> in a query plan).
 
 [source, scala]
 ----
@@ -64,7 +64,7 @@ debug(): Unit
 
 `debug` requests the <<Dataset.md#queryExecution, QueryExecution>> (of the <<query, structured query>>) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
-`debug` [transforms](catalyst/TreeNode.md#transform) the optimized physical query plan to add a new <<spark-sql-SparkPlan-DebugExec.md#, DebugExec>> physical operator for every physical operator.
+`debug` [transforms](catalyst/TreeNode.md#transform) the optimized physical query plan to add a new <<DebugExec.md#, DebugExec>> physical operator for every physical operator.
 
 `debug` requests the query plan to <<SparkPlan.md#execute, execute>> and then counts the number of rows in the result. It prints out the following message:
 
@@ -72,7 +72,7 @@ debug(): Unit
 Results returned: [count]
 ```
 
-In the end, `debug` requests every `DebugExec` physical operator (in the query plan) to <<spark-sql-SparkPlan-DebugExec.md#dumpStats, dumpStats>>.
+In the end, `debug` requests every `DebugExec` physical operator (in the query plan) to <<DebugExec.md#dumpStats, dumpStats>>.
 
 [source, scala]
 ----

@@ -2,7 +2,7 @@
 
 `RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a [leaf physical operator](LeafExecNode.md)) for scanning data from a [BaseRelation](#relation).
 
-`RowDataSourceScanExec` is <<creating-instance, created>> to represent a spark-sql-LogicalPlan-LogicalRelation.md[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
+`RowDataSourceScanExec` is <<creating-instance, created>> to represent a LogicalRelation.md[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
 
 * `CatalystScan`, `PrunedFilteredScan`, `PrunedScan` (indirectly when `DataSourceStrategy` is requested to [pruneFilterProjectRaw](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw))
 
@@ -38,7 +38,7 @@ doProduce(ctx: CodegenContext): String
 * [[relation]] spark-sql-BaseRelation.md[BaseRelation]
 * [[tableIdentifier]] `TableIdentifier`
 
-NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of spark-sql-SparkPlan-DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
+NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
 
 === [[metadata]] `metadata` Property
 
@@ -47,7 +47,7 @@ NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled fil
 metadata: Map[String, String]
 ----
 
-NOTE: `metadata` is part of spark-sql-SparkPlan-DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a spark-sql-SparkPlan-DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
+NOTE: `metadata` is part of DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
 
 `metadata` marks the <<filters, filter predicates>> that are included in the <<handledFilters, handled filters predicates>> with `*` (star).
 

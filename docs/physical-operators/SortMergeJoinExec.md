@@ -4,7 +4,7 @@ title: SortMergeJoinExec
 
 `SortMergeJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a spark-sql-LogicalPlan-Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
+`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
 
 [[orderable]]
 [NOTE]
@@ -23,12 +23,8 @@ Therefore, a join key is *not* orderable when is of the following data type:
 * `ObjectType`
 ====
 
-[NOTE]
-====
-spark-sql-properties.md#spark.sql.join.preferSortMergeJoin[spark.sql.join.preferSortMergeJoin] is an internal configuration property and is enabled by default.
-
-That means that [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers sort merge join over [shuffled hash join](ShuffledHashJoinExec.md).
-====
+!!! note
+   [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers sort merge join over [shuffled hash join](ShuffledHashJoinExec.md) based on [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) configuration property.
 
 [[supportCodegen]]
 `SortMergeJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) for inner and cross joins.

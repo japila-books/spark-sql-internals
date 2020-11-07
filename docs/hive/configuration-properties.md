@@ -1,6 +1,6 @@
 # Configuration Properties
 
-This page contains the ../spark-sql-properties.md[configuration properties] of the index.md[Hive data source].
+This page contains the [configuration properties](../configuration-properties.md) of the [Hive data source](index.md) only.
 
 [[properties]]
 .Hive-Specific Spark SQL Configuration Properties

@@ -504,7 +504,7 @@ scala> q.show
 +-------+----+------+
 ```
 
-Internally, `GROUPING SETS` clause is parsed in spark-sql-AstBuilder.md#withAggregation[withAggregation] parsing handler (in `AstBuilder`) and becomes a spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] logical operator internally.
+Internally, `GROUPING SETS` clause is parsed in spark-sql-AstBuilder.md#withAggregation[withAggregation] parsing handler (in `AstBuilder`) and becomes a GroupingSets.md[GroupingSets] logical operator internally.
 
 === [[Rollup]] `Rollup` GroupingSet with CodegenFallback Expression (for `rollup` Operator)
 

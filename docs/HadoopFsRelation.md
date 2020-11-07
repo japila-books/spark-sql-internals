@@ -45,7 +45,7 @@ inputFiles: Array[String]
 sizeInBytes: Long
 ```
 
-`sizeInBytes` requests the [FileIndex](#location) for the [size](FileIndex.md#sizeInBytes) and multiplies it by the value of [spark.sql.sources.fileCompressionFactor](spark-sql-properties.md#spark.sql.sources.fileCompressionFactor) configuration property.
+`sizeInBytes` requests the [FileIndex](#location) for the [size](FileIndex.md#sizeInBytes) and multiplies it by the value of [spark.sql.sources.fileCompressionFactor](configuration-properties.md#spark.sql.sources.fileCompressionFactor) configuration property.
 
 `sizeInBytes` is part of the [BaseRelation](spark-sql-BaseRelation.md#sizeInBytes) abstraction.
 

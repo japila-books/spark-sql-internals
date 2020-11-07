@@ -4,11 +4,11 @@
 
 . spark-sql-joins.md#join-types[Join type]
 
-. Left and right keys (for non-empty join keys in the spark-sql-LogicalPlan-Join.md#condition[condition] of the `Join` operator)
+. Left and right keys (for non-empty join keys in the Join.md#condition[condition] of the `Join` operator)
 
 . Join condition (i.e. a Catalyst expression that could be used as a new join condition)
 
-. The spark-sql-LogicalPlan-Join.md#left[left] and the spark-sql-LogicalPlan-Join.md#right[right] logical operators
+. The Join.md#left[left] and the Join.md#right[right] logical operators
 
 [[ReturnType]]
 .ReturnType

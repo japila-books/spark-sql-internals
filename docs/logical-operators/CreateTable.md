@@ -23,9 +23,9 @@ The optional <<query, AS query>> is defined when used for the following:
 [[resolved]]
 `CreateTable` can never be [resolved](../expressions/Expression.md#resolved) and is replaced (_resolved_) with a logical command at analysis phase in the following rules:
 
-* (for non-hive data source tables) [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>> or a <<spark-sql-LogicalPlan-CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> logical command (when the <<query, query>> was defined or not, respectively)
+* (for non-hive data source tables) [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule to a <<CreateDataSourceTableCommand.md#, CreateDataSourceTableCommand>> or a <<CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>> logical command (when the <<query, query>> was defined or not, respectively)
 
-* (for hive tables) hive/HiveAnalysis.md[HiveAnalysis] post-hoc logical resolution rule to a <<spark-sql-LogicalPlan-CreateTableCommand.md#, CreateTableCommand>> or a hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command (when <<query, query>> was defined or not, respectively)
+* (for hive tables) hive/HiveAnalysis.md[HiveAnalysis] post-hoc logical resolution rule to a <<CreateTableCommand.md#, CreateTableCommand>> or a hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand] logical command (when <<query, query>> was defined or not, respectively)
 
 === [[creating-instance]] Creating CreateTable Instance
 

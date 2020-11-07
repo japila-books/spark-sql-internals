@@ -4,7 +4,7 @@
 
 `PlanDynamicPruningFilters` transforms [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expressions into [DynamicPruningExpression](../expressions/DynamicPruningExpression.md) expressions.
 
-`PlanDynamicPruningFilters` is a noop when [spark.sql.optimizer.dynamicPartitionPruning.enabled](../spark-sql-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
+`PlanDynamicPruningFilters` is a noop when [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
 
 `PlanDynamicPruningFilters` is a [Catalyst Rule](../catalyst/Rule.md) for transforming [physical operators](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
@@ -27,7 +27,7 @@ apply(
 
 1. Uses `QueryExecution.createSparkPlan` utility to plan the [Build Logical Query](../expressions/DynamicPruningSubquery.md#buildQuery) (of the `DynamicPruningSubquery`)
 
-1. Finds whether to reuse an Exchange (based on [spark.sql.exchange.reuse](../spark-sql-properties.md#spark.sql.exchange.reuse) configuration property _and other checks_)
+1. Finds whether to reuse an Exchange (based on [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse) configuration property _and other checks_)
 
 1. Creates a [DynamicPruningExpression](../expressions/DynamicPruningExpression.md) expression
 

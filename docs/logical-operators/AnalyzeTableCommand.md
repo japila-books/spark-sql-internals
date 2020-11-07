@@ -2,7 +2,7 @@ title: AnalyzeTableCommand
 
 # AnalyzeTableCommand Logical Command -- Computing Table-Level Statistics
 
-`AnalyzeTableCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
+`AnalyzeTableCommand` is a RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
 
 `AnalyzeTableCommand` is <<creating-instance, created>> exclusively for spark-sql-SparkSqlAstBuilder.md#AnalyzeTableCommand[ANALYZE TABLE] with no `PARTITION` specification and `FOR COLUMNS` clause.
 
@@ -24,18 +24,18 @@ AnalyzeTableCommand `t1`, false
 run(sparkSession: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the session-specific `SessionCatalog` for the [metadata](../SessionCatalog.md#getTableMetadata) of the <<tableIdent, table>> and makes sure that it is not a view (aka _temporary table_).
 
 NOTE: `run` uses the input `SparkSession` to access the session-specific SparkSession.md#sessionState[SessionState] that in turn gives access to the current SessionState.md#catalog[SessionCatalog].
 
 [[total-size-stat]][[row-count-stat]]
-`run` computes the spark-sql-CommandUtils.md#calculateTotalSize[total size] and, without <<noscan, NOSCAN>> flag, the spark-sql-dataset-operators.md#count[row count] statistics of the table.
+`run` computes the [total size](../CommandUtils.md#calculateTotalSize) and, without <<noscan, NOSCAN>> flag, the [row count](../spark-sql-dataset-operators.md#count) statistics of the table.
 
 NOTE: `run` uses `SparkSession` to SparkSession.md#table[find the table] in a metastore.
 
-In the end, `run` [alters table statistics](../SessionCatalog.md#alterTableStats) if spark-sql-CommandUtils.md#compareAndGetNewStats[different from the existing table statistics in metastore].
+In the end, `run` [alters table statistics](../SessionCatalog.md#alterTableStats) if [different from the existing table statistics in metastore](../CommandUtils.md#compareAndGetNewStats).
 
 `run` throws a `AnalysisException` when executed on a view.
 

@@ -188,9 +188,9 @@ Internally, `col` branches off per the input column name.
 
 If the column name is `*` (a star), `col` simply creates a <<spark-sql-Column.md#apply, Column>> with <<spark-sql-Expression-ResolvedStar.md#, ResolvedStar>> expression (with the <<catalyst/QueryPlan.md#output, schema output attributes>> of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](Dataset.md#queryExecution)).
 
-Otherwise, `col` uses <<colRegex, colRegex>> untyped transformation when <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled.
+Otherwise, `col` uses <<colRegex, colRegex>> untyped transformation when [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is enabled.
 
-In the case when the column name is not `*` and <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is disabled, `col` creates a <<spark-sql-Column.md#apply, Column>> with the column name <<Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>).
+In the case when the column name is not `*` and [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is disabled, `col` creates a <<spark-sql-Column.md#apply, Column>> with the column name <<Dataset.md#resolve, resolved>> (as a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>).
 
 === [[colRegex]] `colRegex` Untyped Transformation
 
@@ -201,7 +201,7 @@ colRegex(colName: String): Column
 
 `colRegex` selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`).
 
-NOTE: `colRegex` is used in <<col, col>> when <<spark-sql-properties.md#spark.sql.parser.quotedRegexColumnNames, spark.sql.parser.quotedRegexColumnNames>> configuration property is enabled (and the column name is not `*`).
+NOTE: `colRegex` is used in <<col, col>> when [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is enabled (and the column name is not `*`).
 
 Internally, `colRegex` matches the input column name to different regular expressions (in the order):
 

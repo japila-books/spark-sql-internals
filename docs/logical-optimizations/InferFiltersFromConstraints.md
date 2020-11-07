@@ -3,7 +3,7 @@
 `InferFiltersFromConstraints` is a catalyst/Rule.md[Catalyst rule] for transforming spark-sql-LogicalPlan.md[logical plans] (i.e. `Rule[LogicalPlan]`).
 
 [[apply]]
-When catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when spark-sql-properties.md#spark.sql.constraintPropagation.enabled[spark.sql.constraintPropagation.enabled] configuration property is enabled (`true`).
+When catalyst/Rule.md#apply[executed], `InferFiltersFromConstraints` simply <<inferFilters, inferFilters>> when [spark.sql.constraintPropagation.enabled](../configuration-properties.md#spark.sql.constraintPropagation.enabled) configuration property is enabled.
 
 `InferFiltersFromConstraints` is a part of the [Infer Filters](../catalyst/Optimizer.md#Infer-Filters) once-executed rule batch of the base [Logical Optimizer](../catalyst/Optimizer.md).
 
@@ -18,10 +18,10 @@ inferFilters(
 `inferFilters` supports <<inferFilters-Filter, Filter>> and <<inferFilters-Join, Join>> logical operators.
 
 [[inferFilters-Filter]]
-For spark-sql-LogicalPlan-Filter.md[Filter] logical operators, `inferFilters`...FIXME
+For Filter.md[Filter] logical operators, `inferFilters`...FIXME
 
 [[inferFilters-Join]]
-For spark-sql-LogicalPlan-Join.md[Join] logical operators, `inferFilters` branches off per the join type:
+For Join.md[Join] logical operators, `inferFilters` branches off per the join type:
 
 * For InnerLike and LeftSemi...FIXME
 

@@ -4,7 +4,7 @@
 
 `WindowsSubstitution` is part of [Substitution](../Analyzer.md#Substitution) fixed-point batch of rules.
 
-NOTE: It _appears_ that `WindowsSubstitution` is exclusively used for pure SQL queries because spark-sql-LogicalPlan-WithWindowDefinition.md[WithWindowDefinition] unary logical operator is created exclusively when `AstBuilder` spark-sql-LogicalPlan-WithWindowDefinition.md#creating-instance[parses window definitions].
+NOTE: It _appears_ that `WindowsSubstitution` is exclusively used for pure SQL queries because WithWindowDefinition.md[WithWindowDefinition] unary logical operator is created exclusively when `AstBuilder` WithWindowDefinition.md#creating-instance[parses window definitions].
 
 If a window specification is not found, `WindowsSubstitution` fails analysis with the following error:
 

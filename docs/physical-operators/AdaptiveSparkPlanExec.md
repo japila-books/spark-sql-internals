@@ -264,7 +264,7 @@ Final plan: [currentPhysicalPlan]
 logOnLevel: ( => String) => Unit
 ```
 
-`logOnLevel` uses [spark.sql.adaptive.logLevel](../spark-sql-properties.md#spark.sql.adaptive.logLevel) configuration property for the logging level and prints out the given message to the logs.
+`logOnLevel` uses [spark.sql.adaptive.logLevel](../configuration-properties.md#spark.sql.adaptive.logLevel) configuration property for the logging level and prints out the given message to the logs.
 
 `logOnLevel` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [finalPlanUpdate](#finalPlanUpdate).
 

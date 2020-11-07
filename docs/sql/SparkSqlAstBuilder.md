@@ -228,6 +228,6 @@ withRepartitionByExpression(
   query: LogicalPlan): LogicalPlan
 ```
 
-`withRepartitionByExpression` creates a [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator (with the [number of partitions](../logical-operators/RepartitionOperation.md#RepartitionByExpression-numPartitions) based on [spark.sql.shuffle.partitions](../spark-sql-properties.md#spark.sql.shuffle.partitions) configuration property)
+`withRepartitionByExpression` creates a [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator (with the [number of partitions](../logical-operators/RepartitionOperation.md#RepartitionByExpression-numPartitions) based on [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property)
 
 `withRepartitionByExpression` is part of [AstBuilder](AstBuilder.md#withRepartitionByExpression) abstraction.

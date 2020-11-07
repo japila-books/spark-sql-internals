@@ -15,7 +15,7 @@
 
 * `UserDefinedAggregateFunction` is created with `isDistinct` flag [disabled](../UserDefinedAggregateFunction.md#apply) or [enabled](../UserDefinedAggregateFunction.md#distinct)
 
-* `AggUtils` is requested to <<spark-sql-AggUtils.md#planAggregateWithOneDistinct, planAggregateWithOneDistinct>> (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
+* `AggUtils` is requested to [planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct) (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
 * `Aggregator` is requested for a spark-sql-TypedColumn.md[TypedColumn] (using `Aggregator.toColumn`)
 

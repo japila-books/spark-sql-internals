@@ -16,9 +16,9 @@ title: Aggregate
 
 * spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] aggregations
 
-* spark-sql-LogicalPlan-AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command
+* AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command
 
-NOTE: `Aggregate` logical operator is translated to one of spark-sql-SparkPlan-HashAggregateExec.md[HashAggregateExec], spark-sql-SparkPlan-ObjectHashAggregateExec.md[ObjectHashAggregateExec] or spark-sql-SparkPlan-SortAggregateExec.md[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
+NOTE: `Aggregate` logical operator is translated to one of HashAggregateExec.md[HashAggregateExec], ObjectHashAggregateExec.md[ObjectHashAggregateExec] or SortAggregateExec.md[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 [[properties]]
 .Aggregate's Properties
@@ -53,7 +53,7 @@ NOTE: Part of catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
 
 === [[optimizer]] Rule-Based Logical Query Optimization Phase
 
-spark-sql-Optimizer-PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a spark-sql-LogicalPlan-Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
+PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
 
 [source, scala]
 ----

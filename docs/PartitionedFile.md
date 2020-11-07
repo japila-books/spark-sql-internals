@@ -6,7 +6,7 @@
 
 NOTE: *Partition column values* are values of the columns that are column partitions and therefore part of the directory structure not the partitioned files themselves (that together are the partitioned dataset).
 
-`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create the input RDD for spark-sql-SparkPlan-FileSourceScanExec.md#createBucketedReadRDD[bucketed] or spark-sql-SparkPlan-FileSourceScanExec.md#createNonBucketedReadRDD[non-bucketed] reads.
+`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create the input RDD for FileSourceScanExec.md#createBucketedReadRDD[bucketed] or FileSourceScanExec.md#createNonBucketedReadRDD[non-bucketed] reads.
 
 [[creating-instance]]
 `PartitionedFile` takes the following to be created:

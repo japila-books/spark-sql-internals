@@ -2,7 +2,7 @@ title: DescribeColumnCommand
 
 # DescribeColumnCommand Logical Command for DESCRIBE TABLE SQL Command with Column
 
-`DescribeColumnCommand` is a spark-sql-LogicalPlan-RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
+`DescribeColumnCommand` is a RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
 
 ```
 [DESC|DESCRIBE] TABLE? [EXTENDED|FORMATTED] table_name column_name
@@ -68,7 +68,7 @@ scala> spark.sql(descExtSQL).show
 ----
 
 [[output]]
-`DescribeColumnCommand` defines the spark-sql-LogicalPlan-Command.md#output[output schema] with the following columns:
+`DescribeColumnCommand` defines the Command.md#output[output schema] with the following columns:
 
 * `info_name` with "name of the column info" comment
 * `info_value` with "value of the column info" comment
@@ -84,7 +84,7 @@ scala> spark.sql(descExtSQL).show
 run(session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<spark-sql-LogicalPlan-RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` resolves the <<colNameParts, column name>> in <<table, table>> and makes sure that it is a "flat" field (i.e. not of a nested data type).
 
@@ -94,7 +94,7 @@ NOTE: `run` uses the input `SparkSession` to access SparkSession.md#sessionState
 
 `run` takes the spark-sql-CatalogStatistics.md#colStats[column statistics] from the  [table statistics](../CatalogTable.md#stats) if available.
 
-NOTE: spark-sql-CatalogStatistics.md#colStats[Column statistics] are available (in the [table statistics](../CatalogTable.md#stats)) only after spark-sql-LogicalPlan-AnalyzeColumnCommand.md[ANALYZE TABLE FOR COLUMNS] SQL command was run.
+NOTE: spark-sql-CatalogStatistics.md#colStats[Column statistics] are available (in the [table statistics](../CatalogTable.md#stats)) only after AnalyzeColumnCommand.md[ANALYZE TABLE FOR COLUMNS] SQL command was run.
 
 `run` adds `comment` metadata if available for the <<colNameParts, column>>.
 

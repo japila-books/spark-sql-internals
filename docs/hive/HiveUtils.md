@@ -40,16 +40,11 @@ Refer to ../spark-logging.md[Logging].
 builtinHiveVersion: String = "1.2.1"
 ----
 
-[NOTE]
-====
 `builtinHiveVersion` is used when:
 
-* configuration-properties.md#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version] configuration property is used
-
-* `HiveUtils` utility is used to <<newClientForExecution, newClientForExecution>> and <<newClientForMetadata, newClientForMetadata>>
-
-* spark-sql-thrift-server.md[Spark Thrift Server] is used
-====
+* [spark.sql.hive.metastore.version](configuration-properties.md#spark.sql.hive.metastore.version) configuration property is used
+* `HiveUtils` utility is used to [newClientForExecution](#newClientForExecution) and [newClientForMetadata](#newClientForMetadata)
+* [Spark Thrift Server](../thrift-server/spark-sql-thrift-server.md) is used
 
 === [[newClientForMetadata]] Creating HiveClientImpl -- `newClientForMetadata` Method
 
@@ -65,17 +60,17 @@ newClientForMetadata(
 ----
 <1> Uses time configurations formatted
 
-Internally, `newClientForMetadata` creates a new [SQLConf](../SQLConf.md) with *spark.sql* properties only (from the input `SparkConf`).
+Internally, `newClientForMetadata` creates a new [SQLConf](../SQLConf.md) with **spark.sql** properties only (from the input `SparkConf`).
 
-`newClientForMetadata` then creates an IsolatedClientLoader.md[IsolatedClientLoader] per the input parameters and the following configuration properties:
+`newClientForMetadata` then creates an [IsolatedClientLoader](IsolatedClientLoader.md) per the input parameters and the following configuration properties:
 
-* configuration-properties.md#spark.sql.hive.metastore.version[spark.sql.hive.metastore.version]
+* [spark.sql.hive.metastore.version](configuration-properties.md#spark.sql.hive.metastore.version)
 
-* configuration-properties.md#spark.sql.hive.metastore.jars[spark.sql.hive.metastore.jars]
+* [spark.sql.hive.metastore.jars](configuration-properties.md#spark.sql.hive.metastore.jars)
 
-* configuration-properties.md#spark.sql.hive.metastore.sharedPrefixes[spark.sql.hive.metastore.sharedPrefixes]
+* [spark.sql.hive.metastore.sharedPrefixes](configuration-properties.md#spark.sql.hive.metastore.sharedPrefixes)
 
-* configuration-properties.md#spark.sql.hive.metastore.barrierPrefixes[spark.sql.hive.metastore.barrierPrefixes]
+* [spark.sql.hive.metastore.barrierPrefixes](configuration-properties.md#spark.sql.hive.metastore.barrierPrefixes)
 
 You should see one of the following INFO messages in the logs:
 
@@ -100,7 +95,7 @@ newClientForExecution(
 
 `newClientForExecution`...FIXME
 
-NOTE: `newClientForExecution` is used for ../spark-sql-thrift-server.md[HiveThriftServer2].
+`newClientForExecution` is used for [HiveThriftServer2](../thrift-server/spark-sql-thrift-server.md).
 
 === [[inferSchema]] `inferSchema` Method
 

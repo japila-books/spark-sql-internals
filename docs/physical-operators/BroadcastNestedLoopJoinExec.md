@@ -1,6 +1,6 @@
 # BroadcastNestedLoopJoinExec Binary Physical Operator
 
-`BroadcastNestedLoopJoinExec` is a [binary physical operator](BinaryExecNode.md) (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when [JoinSelection](../execution-planning-strategies/JoinSelection.md) physical plan strategy finds a spark-sql-LogicalPlan-Join.md[Join] logical operator that meets either case:
+`BroadcastNestedLoopJoinExec` is a [binary physical operator](BinaryExecNode.md) (with two child <<left, left>> and <<right, right>> physical operators) that is <<creating-instance, created>> (and converted to) when [JoinSelection](../execution-planning-strategies/JoinSelection.md) physical plan strategy finds a Join.md[Join] logical operator that meets either case:
 
 * [canBuildRight](../execution-planning-strategies/JoinSelection.md#canBuildRight) join type and `right` physical operator [broadcastable](../execution-planning-strategies/JoinSelection.md#canBroadcast)
 

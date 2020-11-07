@@ -12,7 +12,7 @@ title: Project
 
 * Dataset operators, i.e. spark-sql-joins.md#joinWith[joinWith], spark-sql-dataset-operators.md#select[select] (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
-* `CreateViewCommand` logical command is <<spark-sql-LogicalPlan-CreateViewCommand.md#run, executed>> (and <<spark-sql-LogicalPlan-CreateViewCommand.md#aliasPlan, aliasPlan>>)
+* `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#aliasPlan, aliasPlan>>)
 * SQL's spark-sql-AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
 
 `Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../catalyst/Optimizer.md) phases.

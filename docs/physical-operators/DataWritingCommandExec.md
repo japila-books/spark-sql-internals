@@ -2,10 +2,10 @@
 
 `DataWritingCommandExec` is a <<SparkPlan.md#, physical operator>> that is the execution environment for a <<cmd, DataWritingCommand>> logical command at <<doExecute, execution time>>.
 
-`DataWritingCommandExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is requested to plan a <<spark-sql-LogicalPlan-DataWritingCommand.md#, DataWritingCommand>> logical command.
+`DataWritingCommandExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is requested to plan a <<DataWritingCommand.md#, DataWritingCommand>> logical command.
 
 [[metrics]]
-When requested for <<SparkPlan.md#metrics, performance metrics>>, `DataWritingCommandExec` simply requests the <<cmd, DataWritingCommand>> for <<spark-sql-LogicalPlan-DataWritingCommand.md#metrics, them>>.
+When requested for <<SparkPlan.md#metrics, performance metrics>>, `DataWritingCommandExec` simply requests the <<cmd, DataWritingCommand>> for <<DataWritingCommand.md#metrics, them>>.
 
 [[internal-registries]]
 .DataWritingCommandExec's Internal Properties (e.g. Registries, Counters and Flags)
@@ -24,7 +24,7 @@ Used when `DataWritingCommandExec` is requested to <<executeCollect, executeColl
 
 `DataWritingCommandExec` takes the following when created:
 
-* [[cmd]] <<spark-sql-LogicalPlan-DataWritingCommand.md#, DataWritingCommand>>
+* [[cmd]] <<DataWritingCommand.md#, DataWritingCommand>>
 * [[child]] Child <<SparkPlan.md#, physical plan>>
 
 === [[executeCollect]] Executing Physical Operator and Collecting Results -- `executeCollect` Method

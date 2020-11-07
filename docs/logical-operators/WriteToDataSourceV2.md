@@ -2,7 +2,7 @@
 
 `WriteToDataSourceV2` is a [logical operator](LogicalPlan.md) that represents writing data to a [DataSourceV2](../spark-sql-DataSourceV2.md) data source in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
-NOTE: `WriteToDataSourceV2` is deprecated for <<spark-sql-LogicalPlan-AppendData.md#, AppendData>> logical operator since Spark SQL 2.4.0.
+NOTE: `WriteToDataSourceV2` is deprecated for <<AppendData.md#, AppendData>> logical operator since Spark SQL 2.4.0.
 
 `WriteToDataSourceV2` is <<creating-instance, created>> when:
 
@@ -22,4 +22,4 @@ When requested for the [child operators](../catalyst/TreeNode.md#children), `Wri
 [[output]]
 When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `WriteToDataSourceV2` gives no attributes (an empty collection).
 
-`WriteToDataSourceV2` is planned (_translated_) to a <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#apply-WriteToDataSourceV2, plan a logical query>>).
+`WriteToDataSourceV2` is planned (_translated_) to a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#apply-WriteToDataSourceV2, plan a logical query>>).

@@ -17,9 +17,9 @@ verifyPartitionProviderIsHive(
 
 `verifyPartitionProviderIsHive` requests the given [CatalogTable](CatalogTable.md) for the [TableIdentifier](CatalogTable.md#identifier) that is in turn requested for the table name.
 
-`verifyPartitionProviderIsHive` throws an `AnalysisException` when hive/configuration-properties.md#spark.sql.hive.manageFilesourcePartitions[spark.sql.hive.manageFilesourcePartitions] configuration property is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
+`verifyPartitionProviderIsHive` throws an `AnalysisException` when [spark.sql.hive.manageFilesourcePartitions](hive/configuration-properties.md#spark.sql.hive.manageFilesourcePartitions) configuration property is disabled (`false`) and the input `CatalogTable` is a <<isDatasourceTable, data source table>>:
 
-```
+```text
 [action] is not allowed on [tableName] since filesource partition management is disabled (spark.sql.hive.manageFilesourcePartitions = false).
 ```
 
@@ -29,7 +29,7 @@ verifyPartitionProviderIsHive(
 [action] is not allowed on [tableName] since its partition metadata is not stored in the Hive metastore. To import this information into the metastore, run `msck repair table [tableName]`
 ```
 
-NOTE: `verifyPartitionProviderIsHive` is used when `AlterTableAddPartitionCommand`, `AlterTableRenamePartitionCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand`, spark-sql-LogicalPlan-TruncateTableCommand.md[TruncateTableCommand], spark-sql-LogicalPlan-DescribeTableCommand.md[DescribeTableCommand], and `ShowPartitionsCommand` commands are executed.
+NOTE: `verifyPartitionProviderIsHive` is used when `AlterTableAddPartitionCommand`, `AlterTableRenamePartitionCommand`, `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand`, TruncateTableCommand.md[TruncateTableCommand], DescribeTableCommand.md[DescribeTableCommand], and `ShowPartitionsCommand` commands are executed.
 
 ## <span id="isDatasourceTable"> isDatasourceTable Utility
 
@@ -46,7 +46,7 @@ isDatasourceTable(
 
 * `HiveUtils` utility is used to hive/HiveUtils.md#inferSchema[inferSchema]
 
-* `AlterTableSerDePropertiesCommand`, `AlterTableAddColumnsCommand`, `LoadDataCommand`, spark-sql-LogicalPlan-ShowCreateTableCommand.md[ShowCreateTableCommand] commands are executed
+* `AlterTableSerDePropertiesCommand`, `AlterTableAddColumnsCommand`, `LoadDataCommand`, ShowCreateTableCommand.md[ShowCreateTableCommand] commands are executed
 
 * `DDLUtils` utility is used to <<verifyPartitionProviderIsHive, verifyPartitionProviderIsHive>>
 

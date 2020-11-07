@@ -5,7 +5,7 @@ title: View
 [[children]]
 `View` is a <<spark-sql-LogicalPlan.md#, logical operator>> with a single <<child, child>> logical operator.
 
-`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to [find a relation in the catalogs](../SessionCatalog.md#lookupRelation) (e.g. when `DescribeTableCommand` logical command is <<spark-sql-LogicalPlan-DescribeTableCommand.md#run, executed>> and the table type is `VIEW`).
+`View` is <<creating-instance, created>> exclusively when `SessionCatalog` is requested to [find a relation in the catalogs](../SessionCatalog.md#lookupRelation) (e.g. when `DescribeTableCommand` logical command is <<DescribeTableCommand.md#run, executed>> and the table type is `VIEW`).
 
 [source, scala]
 ----
@@ -86,7 +86,7 @@ NOTE: `View` is resolved by [ResolveRelations](../logical-analysis-rules/Resolve
 
 NOTE: [AliasViewChild](../logical-analysis-rules/AliasViewChild.md) logical analysis rule makes sure that the <<output, output>> of a `View` matches the output of the <<child, child>> logical operator.
 
-NOTE: <<spark-sql-Optimizer-EliminateView.md#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
+NOTE: <<EliminateView.md#, EliminateView>> logical optimization removes (eliminates) `View` operators from a logical query plan.
 
 NOTE: <<InsertIntoTable.md#inserting-into-view-not-allowed, Inserting into a view is not allowed>>.
 

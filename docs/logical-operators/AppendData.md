@@ -4,7 +4,7 @@
 
 `AppendData` is <<creating-instance, created>> (indirectly via <<byName, byName>> or <<byPosition, byPosition>> factory methods) only for tests.
 
-NOTE: `AppendData` has replaced the deprecated <<spark-sql-LogicalPlan-WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator.
+NOTE: `AppendData` has replaced the deprecated <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator.
 
 [[creating-instance]]
 `AppendData` takes the following to be created:
@@ -18,7 +18,7 @@ NOTE: `AppendData` has replaced the deprecated <<spark-sql-LogicalPlan-WriteToDa
 
 `AppendData` is resolved by [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical resolution rule.
 
-`AppendData` is planned (_replaced_) to <<spark-sql-SparkPlan-WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when the <<table, table>> is a <<spark-sql-LogicalPlan-DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator).
+`AppendData` is planned (_replaced_) to <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when the <<table, table>> is a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator).
 
 === [[byName]] `byName` Factory Method
 

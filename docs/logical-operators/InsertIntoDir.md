@@ -19,7 +19,7 @@ NOTE: `InsertIntoDir` is similar to InsertIntoTable.md[InsertIntoTable] logical 
 | hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand]
 | [[InsertIntoHiveDirCommand]] When hive/HiveAnalysis.md[HiveAnalysis] logical resolution rule transforms `InsertIntoDir` with a spark-sql-DDLUtils.md#isHiveTable[Hive table]
 
-| spark-sql-LogicalPlan-InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand]
+| InsertIntoDataSourceDirCommand.md[InsertIntoDataSourceDirCommand]
 | [[InsertIntoDataSourceDirCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule transforms `InsertIntoDir` with a Spark table
 
 |===

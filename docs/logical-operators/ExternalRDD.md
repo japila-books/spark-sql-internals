@@ -1,6 +1,6 @@
 # ExternalRDD Leaf Logical Operator
 
-`ExternalRDD` is a spark-sql-LogicalPlan-LeafNode.md[leaf logical operator] that is a logical representation of (the data from) an RDD in a logical query plan.
+`ExternalRDD` is a LeafNode.md[leaf logical operator] that is a logical representation of (the data from) an RDD in a logical query plan.
 
 `ExternalRDD` is <<creating-instance, created>> when:
 
@@ -27,7 +27,7 @@ scala> println(logicalPlan.numberedTreeString)
 
 `ExternalRDD` is a <<newInstance, MultiInstanceRelation>> and a `ObjectProducer`.
 
-`ExternalRDD` is resolved to spark-sql-SparkPlan-ExternalRDDScanExec.md[ExternalRDDScanExec] when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
+`ExternalRDD` is resolved to ExternalRDDScanExec.md[ExternalRDDScanExec] when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 === [[newInstance]] `newInstance` Method
 
@@ -47,7 +47,7 @@ NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[Mu
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of spark-sql-LogicalPlan-LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
+NOTE: `computeStats` is part of LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
 
 `computeStats`...FIXME
 

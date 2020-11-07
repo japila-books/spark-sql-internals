@@ -68,7 +68,7 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of ../spark-sql-LogicalPlan-DataWritingCommand.md#run[DataWritingCommand] contract.
+NOTE: `run` is part of ../DataWritingCommand.md#run[DataWritingCommand] contract.
 
 `run` asserts that the ../spark-sql-CatalogStorageFormat.md#locationUri[table location] of the <<storage, CatalogStorageFormat>> is specified (or throws an `AssertionError`).
 

@@ -1,6 +1,4 @@
-title: CommandUtils
-
-# CommandUtils -- Utilities for Table Statistics
+# CommandUtils &mdash; Utilities for Table Statistics
 
 `CommandUtils` is a helper class that logical commands, e.g. `InsertInto*`, `AlterTable*Command`, `LoadDataCommand`, and CBO's `Analyze*`, use to manage table statistics.
 
@@ -34,13 +32,15 @@ updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 
 `updateTableStats` updates the table statistics of the input [CatalogTable](CatalogTable.md) (only if the [statistics are available](CatalogTable.md#stats) in the metastore already).
 
-`updateTableStats` requests `SessionCatalog` to [alterTableStats](SessionCatalog.md#alterTableStats) with the <<calculateTotalSize, current total size>> (when spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property is turned on) or empty statistics (that effectively removes the recorded statistics completely).
+`updateTableStats` requests `SessionCatalog` to [alterTableStats](SessionCatalog.md#alterTableStats) with the <<calculateTotalSize, current total size>> (when [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) property is turned on) or empty statistics (that effectively removes the recorded statistics completely).
 
-IMPORTANT: `updateTableStats` uses spark-sql-properties.md#spark.sql.statistics.size.autoUpdate.enabled[spark.sql.statistics.size.autoUpdate.enabled] property to auto-update table statistics and can be expensive (and slow down data change commands) if the total number of files of a table is very large.
+!!! important
+    `updateTableStats` uses [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) property to auto-update table statistics and can be expensive (and slow down data change commands) if the total number of files of a table is very large.
 
-NOTE: `updateTableStats` uses `SparkSession` to access the current SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped SessionState.md#catalog[SessionCatalog].
+!!! note
+    `updateTableStats` uses `SparkSession` to access the current SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped SessionState.md#catalog[SessionCatalog].
 
-NOTE: `updateTableStats` is used when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
+`updateTableStats` is used when [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
 
 === [[calculateTotalSize]] Calculating Total Size of Table (with Partitions) -- `calculateTotalSize` Method
 
@@ -55,7 +55,7 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the SessionSt
 
 `calculateTotalSize` is used when:
 
-* <<spark-sql-LogicalPlan-AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<spark-sql-LogicalPlan-AnalyzeTableCommand.md#, AnalyzeTableCommand>> commands are executed
+* <<AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<AnalyzeTableCommand.md#, AnalyzeTableCommand>> commands are executed
 
 * `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
 
@@ -91,7 +91,7 @@ INFO CommandUtils: It took [durationInMs] ms to calculate the total file size un
 ====
 `calculateLocationSize` is used when:
 
-* spark-sql-LogicalPlan-AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and spark-sql-LogicalPlan-RunnableCommand.md#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] commands are executed
+* AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and RunnableCommand.md#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] commands are executed
 
 * `CommandUtils` is requested for <<calculateTotalSize, total size of a table or its partitions>>
 ====
@@ -108,4 +108,4 @@ compareAndGetNewStats(
 
 `compareAndGetNewStats` spark-sql-CatalogStatistics.md#creating-instance[creates] a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
 
-NOTE: `compareAndGetNewStats` is used when spark-sql-LogicalPlan-AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and spark-sql-LogicalPlan-AnalyzeTableCommand.md#run[AnalyzeTableCommand] are executed.
+NOTE: `compareAndGetNewStats` is used when AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and AnalyzeTableCommand.md#run[AnalyzeTableCommand] are executed.

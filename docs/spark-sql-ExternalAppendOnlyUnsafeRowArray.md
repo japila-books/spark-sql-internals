@@ -8,11 +8,11 @@ NOTE: Choosing a proper *spill threshold of rows* is a performance optimization.
 
 `ExternalAppendOnlyUnsafeRowArray` is created when:
 
-* `WindowExec` physical operator is spark-sql-SparkPlan-WindowExec.md#doExecute[executed] (and creates an internal buffer for window frames)
+* `WindowExec` physical operator is WindowExec.md#doExecute[executed] (and creates an internal buffer for window frames)
 
 * `WindowFunctionFrame` is spark-sql-WindowFunctionFrame.md#prepare[prepared]
 
-* `SortMergeJoinExec` physical operator is spark-sql-SparkPlan-SortMergeJoinExec.md#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
+* `SortMergeJoinExec` physical operator is SortMergeJoinExec.md#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
 
 * `SortMergeJoinScanner` creates an internal `bufferedMatches`
 
@@ -94,7 +94,7 @@ CAUTION: FIXME
 ====
 `add` is used when:
 
-* `WindowExec` is executed (and spark-sql-SparkPlan-WindowExec.md#fetchNextPartition[fetches all rows in a partition for a group].
+* `WindowExec` is executed (and WindowExec.md#fetchNextPartition[fetches all rows in a partition for a group].
 
 * `SortMergeJoinScanner` buffers matching rows
 

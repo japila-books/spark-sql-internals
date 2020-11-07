@@ -2,7 +2,7 @@ title: Expand
 
 # Expand Unary Logical Operator
 
-`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, spark-sql-LogicalPlan-GroupingSets.md[GroupingSets] and spark-sql-Expression-TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
+`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, GroupingSets.md[GroupingSets] and spark-sql-Expression-TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
 
 ```
 FIXME Examples for

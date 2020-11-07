@@ -145,7 +145,7 @@ create(
 Temporary view '[table]' already exists
 ```
 
-NOTE: `create` is used when `SessionCatalog` is requested to [createGlobalTempView](SessionCatalog.md#createGlobalTempView) (when <<spark-sql-LogicalPlan-CreateViewCommand.md#run, CreateViewCommand>> and <<spark-sql-LogicalPlan-CreateTempViewUsing.md#run, CreateTempViewUsing>> logical commands are executed).
+NOTE: `create` is used when `SessionCatalog` is requested to [createGlobalTempView](SessionCatalog.md#createGlobalTempView) (when <<CreateViewCommand.md#run, CreateViewCommand>> and <<CreateTempViewUsing.md#run, CreateTempViewUsing>> logical commands are executed).
 
 === [[get]] Retrieving Global View Definition Per Name -- `get` Method
 
