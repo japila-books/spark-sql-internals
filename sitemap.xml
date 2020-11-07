@@ -44,10 +44,6 @@
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/KafkaTable/</loc>
-     <lastmod>2020-11-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/NoopTable/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
@@ -772,11 +768,15 @@
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-kafka/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasource/kafka/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-kafka-options/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasource/kafka/KafkaTable/</loc>
+     <lastmod>2020-11-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasource/kafka/options/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
