@@ -82,6 +82,7 @@ extra:
     doc: https://www.scala-lang.org/api/2.12.2
   book:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
+    kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
@@ -101,7 +102,6 @@ nav:
       - PartitionReader: connector/PartitionReader.md
       - InputPartition: connector/InputPartition.md
       - FileTable: connector/FileTable.md
-      - KafkaTable: connector/KafkaTable.md
       - NoopTable: connector/NoopTable.md
       - StagedTable: connector/StagedTable.md
       - SupportsRead: connector/SupportsRead.md
@@ -305,8 +305,9 @@ nav:
         - PartitionedFile: PartitionedFile.md
         - RecordReaderIterator: RecordReaderIterator.md
       - Kafka:
-        - spark-sql-kafka.md
-        - spark-sql-kafka-options.md
+        - datasource/kafka/index.md
+        - KafkaTable: datasource/kafka/KafkaTable.md
+        - Options: datasource/kafka/options.md
         - spark-sql-KafkaSourceProvider.md
         - spark-sql-KafkaRelation.md
         - KafkaSourceRDD:

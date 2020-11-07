@@ -23,7 +23,7 @@ Used when:
 ## Implementations
 
 * [FileTable](FileTable.md)
-* [KafkaTable](KafkaTable.md)
+* [KafkaTable](../datasource/kafka/KafkaTable.md)
 * [MemoryStreamTable](MemoryStreamTable.md)
 * [RateStreamTable](RateStreamTable.md)
 * [TextSocketTable](TextSocketTable.md)

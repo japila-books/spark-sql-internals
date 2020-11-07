@@ -1,5 +1,3 @@
-title: Options
-
 # Kafka Data Source Options
 
 [[options]]
@@ -12,9 +10,9 @@ title: Options
 
 | assign
 |
-| [[assign]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribe, subscribe>> and <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>>)
+| [[assign]] One of the three subscription strategy options (with [subscribe](options.md#subscribe) and [subscribepattern](options.md#subscribepattern))
 
-See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
+See [KafkaSourceProvider.strategy](../../spark-sql-KafkaSourceProvider.md#strategy)
 
 | endingoffsets
 |
@@ -34,15 +32,15 @@ See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
 
 | subscribe
 |
-| [[subscribe]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.md#assign, assign>>)
+| [[subscribe]] One of the three subscription strategy options (with [subscribepattern](options.md#subscribepattern) and [assign](options.md#assign))
 
 See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
 
 | subscribepattern
 |
-| [[subscribepattern]] One of the three subscription strategy options (with <<spark-sql-kafka-options.md#subscribe, subscribe>> and <<spark-sql-kafka-options.md#assign, assign>>)
+| [[subscribepattern]] One of the three subscription strategy options (with [subscribe](options.md#subscribe) and [assign](options.md#assign))
 
-See <<spark-sql-KafkaSourceProvider.md#strategy, KafkaSourceProvider.strategy>>
+See [KafkaSourceProvider.strategy](../../spark-sql-KafkaSourceProvider.md#strategy)
 
 | topic
 |

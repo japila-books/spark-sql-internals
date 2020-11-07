@@ -25,11 +25,23 @@ Used when `Table` is asked whether or not it [supports a given capability](Table
 String name()
 ```
 
+Name of the table
+
 ### partitioning
 
 ```java
 Transform[] partitioning()
 ```
+
+Partitions of the table (as [Transform](Transform.md)s)
+
+Default: (empty)
+
+Used when:
+
+* `ResolveInsertInto` logical analysis rule is executed
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [save](../DataFrameWriter.md#save)
+* `DescribeTableExec` physical operator is executed
 
 ### properties
 
@@ -37,16 +49,36 @@ Transform[] partitioning()
 Map<String, String> properties()
 ```
 
+Table properties
+
+Default: (empty)
+
+Used when:
+
+* `DescribeTableExec` and `ShowTablePropertiesExec` physical operators are executed
+
 ### schema
 
 ```java
 StructType schema()
 ```
 
+[StructType](../StructType.md) of the table
+
+Used when:
+
+* `DataSourceV2Relation` utility is used to [create a DataSourceV2Relation logical operator](../logical-operators/DataSourceV2Relation.md#create)
+* `SimpleTableProvider` is requested to [inferSchema](SimpleTableProvider.md#inferSchema)
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
+* `DescribeTableExec` physical operator is executed
+* `FileDataSourceV2` is requested to [inferSchema](../FileDataSourceV2.md#inferSchema)
+* (Spark Structured Streaming) `TextSocketTable` is requested for a `ScanBuilder` with a read schema
+* (Spark Structured Streaming) `DataStreamReader` is requested to load data
+
 ## Implementations
 
 * [FileTable](FileTable.md)
-* [KafkaTable](KafkaTable.md)
+* [KafkaTable](../datasource/kafka/KafkaTable.md)
 * [NoopTable](NoopTable.md)
 * [StagedTable](StagedTable.md)
 * [SupportsRead](SupportsRead.md)

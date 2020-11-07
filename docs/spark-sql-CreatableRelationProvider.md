@@ -41,6 +41,6 @@ Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSou
 | [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
 | <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
-| [[KafkaSourceProvider]] Data source provider for <<spark-sql-kafka.md#, Kafka data source>>
+| [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasource/kafka/index.md)
 
 |===

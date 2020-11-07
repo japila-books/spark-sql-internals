@@ -75,7 +75,7 @@ In the end, `createRelation` creates a <<spark-sql-KafkaRelation.md#creating-ins
 validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
 ----
 
-`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the <<spark-sql-kafka-options.md#startingoffsets, startingoffsets>> option in the input `caseInsensitiveParams` and with <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default `KafkaOffsetRangeLimit`.
+`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the [startingoffsets](datasource/kafka/options.md#startingoffsets) option in the input `caseInsensitiveParams` and with <<spark-sql-KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit, EarliestOffsetRangeLimit>> as the default `KafkaOffsetRangeLimit`.
 
 `validateBatchOptions` then matches the returned <<spark-sql-KafkaOffsetRangeLimit.md#, KafkaOffsetRangeLimit>> as follows:
 
@@ -108,7 +108,7 @@ createRelation(
 
 NOTE: `createRelation` is part of the <<spark-sql-CreatableRelationProvider.md#createRelation, CreatableRelationProvider Contract>> to write the rows of a structured query (a DataFrame) to an external data source.
 
-`createRelation` gets the <<spark-sql-kafka-options.md#topic, topic>> option from the input `parameters`.
+`createRelation` gets the [topic](datasource/kafka/options.md#topic) option from the input `parameters`.
 
 `createRelation` gets the <<kafkaParamsForProducer, Kafka-specific options for writing>> from the input `parameters`.
 
@@ -187,22 +187,19 @@ When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` retur
 strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
 ----
 
-`strategy` finds one of the strategy options: <<spark-sql-kafka-options.md#subscribe, subscribe>>, <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>> and <<spark-sql-kafka-options.md#assign, assign>>.
+`strategy` finds one of the strategy options: [subscribe](datasource/kafka/options.md#subscribe), [subscribepattern](datasource/kafka/options.md#subscribepattern) and [assign](datasource/kafka/options.md#assign).
 
-For <<spark-sql-kafka-options.md#assign, assign>>, `strategy` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.md#partitions-String-Array, deserialize TopicPartitions from JSON>> (e.g. `{"topicA":[0,1],"topicB":[0,1]}`) and returns a new <<spark-sql-ConsumerStrategy.md#AssignStrategy, AssignStrategy>>.
+For [assign](datasource/kafka/options.md#assign), `strategy` uses the `JsonUtils` helper object to <<spark-sql-JsonUtils.md#partitions-String-Array, deserialize TopicPartitions from JSON>> (e.g. `{"topicA":[0,1],"topicB":[0,1]}`) and returns a new <<spark-sql-ConsumerStrategy.md#AssignStrategy, AssignStrategy>>.
 
-For <<spark-sql-kafka-options.md#subscribe, subscribe>>, `strategy` splits the value by `,` (comma) and returns a new <<spark-sql-ConsumerStrategy.md#SubscribeStrategy, SubscribeStrategy>>.
+For [subscribe](datasource/kafka/options.md#subscribe), `strategy` splits the value by `,` (comma) and returns a new <<spark-sql-ConsumerStrategy.md#SubscribeStrategy, SubscribeStrategy>>.
 
-For <<spark-sql-kafka-options.md#subscribepattern, subscribepattern>>, `strategy` returns a new <<spark-sql-ConsumerStrategy.md#SubscribePatternStrategy, SubscribePatternStrategy>>
+For [subscribepattern](datasource/kafka/options.md#subscribepattern), `strategy` returns a new <<spark-sql-ConsumerStrategy.md#SubscribePatternStrategy, SubscribePatternStrategy>>
 
-[NOTE]
-====
 `strategy` is used when:
 
 * `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (as a <<spark-sql-RelationProvider.md#createRelation, RelationProvider>>)
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
-====
 
 === [[failOnDataLoss]] `failOnDataLoss` Internal Method
 
