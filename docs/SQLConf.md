@@ -197,6 +197,10 @@ The value of [spark.sql.defaultCatalog](configuration-properties.md#spark.sql.de
 
 Used when `CatalogManager` is requested for the [current CatalogPlugin](connector/catalog/CatalogManager.md#currentCatalog)
 
+## <span id="defaultDataSourceName"><span id="DEFAULT_DATA_SOURCE_NAME"> defaultDataSourceName
+
+[spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default)
+
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
 
 The value of [spark.sql.optimizer.dynamicPartitionPruning.enabled](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property
