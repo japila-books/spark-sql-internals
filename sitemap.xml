@@ -184,7 +184,7 @@
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-properties/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/configuration-properties/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2532,7 +2532,7 @@
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CommandUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CommandUtils/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2964,7 +2964,7 @@
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-AggUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/AggUtils/</loc>
      <lastmod>2020-11-07</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
