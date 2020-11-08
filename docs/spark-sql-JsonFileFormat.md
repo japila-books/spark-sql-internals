@@ -1,7 +1,7 @@
 # JsonFileFormat -- Built-In Support for Files in JSON Format
 
 [[shortName]]
-`JsonFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *json* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in json format] and convert them to Spark SQL rows).
+`JsonFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *json* format (i.e. [registers itself to handle files in json format](DataSourceRegister.md#shortName) and convert them to Spark SQL rows).
 
 ```text
 spark.read.format("json").load("json-datasets")

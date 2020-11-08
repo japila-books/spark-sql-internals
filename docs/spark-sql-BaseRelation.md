@@ -55,10 +55,10 @@ NOTE: It is recommended that custom data sources (outside Spark SQL) should leav
 | [HadoopFsRelation](HadoopFsRelation.md)
 | [[HadoopFsRelation]]
 
-| spark-sql-JDBCRelation.md[JDBCRelation]
+| [JDBCRelation](spark-sql-JDBCRelation.md)
 | [[JDBCRelation]]
 
-| <<spark-sql-KafkaRelation.md#, KafkaRelation>>
+| [KafkaRelation](datasources/kafka/KafkaRelation.md)
 | [[KafkaRelation]] Datasets with records from Apache Kafka
 |===
 

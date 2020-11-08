@@ -4,7 +4,7 @@
 
 `KafkaOffsetReader` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to <<spark-sql-KafkaRelation.md#buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>) (to <<spark-sql-KafkaRelation.md#getPartitionOffsets, get the initial partition offsets>>)
+* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../../spark-sql-TableScan.md)) (to [get the initial partition offsets](KafkaRelation.md#getPartitionOffsets))
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 
@@ -87,20 +87,18 @@ Refer to spark-sql-streaming-logging.md[Logging].
 createConsumer(): Consumer[Array[Byte], Array[Byte]]
 ----
 
-`createConsumer` requests the <<consumerStrategy, ConsumerStrategy>> to <<spark-sql-ConsumerStrategy.md#createConsumer, create a Kafka Consumer>> with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
+`createConsumer` requests the <<consumerStrategy, ConsumerStrategy>> to [create a Kafka Consumer](ConsumerStrategy.md#createConsumer) with <<driverKafkaParams, driverKafkaParams>> and <<nextGroupId, new generated group.id Kafka property>>.
 
-NOTE: `createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, created>> (and initializes <<consumer, consumer>>) and <<resetConsumer, resetConsumer>>
+`createConsumer` is used when `KafkaOffsetReader` is <<creating-instance, created>> (and initializes <<consumer, consumer>>) and <<resetConsumer, resetConsumer>>
 
-=== [[creating-instance]] Creating KafkaOffsetReader Instance
+## Creating Instance
 
-`KafkaOffsetReader` takes the following when created:
+`KafkaOffsetReader` takes the following to be created:
 
-* [[consumerStrategy]] <<spark-sql-ConsumerStrategy.md#, ConsumerStrategy>>
+* [[consumerStrategy]] [ConsumerStrategy](ConsumerStrategy.md)
 * [[driverKafkaParams]] Kafka parameters (as `Map[String, Object]`)
 * [[readerOptions]] Reader options (as `Map[String, String]`)
 * [[driverGroupIdPrefix]] Prefix for the group id
-
-`KafkaOffsetReader` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[close]] `close` Method
 
@@ -163,7 +161,7 @@ fetchTopicPartitions(): Set[TopicPartition]
 
 In the end, `fetchTopicPartitions` returns the `TopicPartitions` assigned (and paused).
 
-NOTE: `fetchTopicPartitions` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a <<spark-sql-TableScan.md#, TableScan>>) through <<spark-sql-KafkaRelation.md#getPartitionOffsets, getPartitionOffsets>>.
+`fetchTopicPartitions` is used when `KafkaRelation` is requested to [build a distributed data scan with column pruning](#buildScan) (as a [TableScan](../../spark-sql-TableScan.md)) through [getPartitionOffsets](KafkaRelation.md#getPartitionOffsets).
 
 === [[nextGroupId]] `nextGroupId` Internal Method
 

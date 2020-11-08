@@ -1,8 +1,6 @@
-title: JdbcUtils
+# JdbcUtils Utility
 
-# JdbcUtils Helper Object
-
-`JdbcUtils` is a Scala object with <<methods, methods>> to support spark-sql-JDBCRDD.md[JDBCRDD], spark-sql-JDBCRelation.md[JDBCRelation] and spark-sql-JdbcRelationProvider.md[JdbcRelationProvider].
+`JdbcUtils` is a Scala object with <<methods, methods>> to support [JDBCRDD](spark-sql-JDBCRDD.md), [JDBCRelation](spark-sql-JDBCRelation.md) and [JdbcRelationProvider](spark-sql-JdbcRelationProvider.md).
 
 [[methods]]
 .JdbcUtils API
@@ -16,7 +14,7 @@ a| Used when:
 
 * `JDBCRDD` is requested to spark-sql-JDBCRDD.md#scanTable[scanTable] and spark-sql-JDBCRDD.md#resolveTable[resolveTable]
 
-* `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>
+* `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
 
 | <<createTable, createTable>>
 |
@@ -39,13 +37,13 @@ Used exclusively when `JDBCRelation` is spark-sql-JDBCRelation.md#schema[created
 | Used when `JDBCRDD` is requested to spark-sql-JDBCRDD.md#resolveTable[resolveTable]
 
 | <<getSchemaOption, getSchemaOption>>
-| Used when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>
+| Used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
 
 | <<resultSetToRows, resultSetToRows>>
 | Used when...FIXME
 
 | <<resultSetToSparkInternalRows, resultSetToSparkInternalRows>>
-| Used when `JDBCRDD` is requested to spark-sql-JDBCRDD.md#compute[compute a partition]
+| Used when `JDBCRDD` is requested to [compute a partition](spark-sql-JDBCRDD.md#compute)
 
 | <<schemaString, schemaString>>
 |
@@ -54,7 +52,7 @@ Used exclusively when `JDBCRelation` is spark-sql-JDBCRelation.md#schema[created
 |
 
 | <<tableExists, tableExists>>
-| Used when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>
+| Used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
 
 | <<truncateTable, truncateTable>>
 | Used when...FIXME
@@ -69,16 +67,13 @@ createConnectionFactory(options: JDBCOptions): () => Connection
 
 `createConnectionFactory`...FIXME
 
-[NOTE]
-====
 `createConnectionFactory` is used when:
 
-* `JDBCRDD` is requested to spark-sql-JDBCRDD.md#scanTable[scanTable] (and in turn creates a spark-sql-JDBCRDD.md#creating-instance[JDBCRDD]) and spark-sql-JDBCRDD.md#resolveTable[resolveTable]
+* `JDBCRDD` is requested to [scanTable](spark-sql-JDBCRDD.md#scanTable) (and in turn creates a [JDBCRDD](spark-sql-JDBCRDD.md)) and [resolveTable](spark-sql-JDBCRDD.md#resolveTable)
 
-* `JdbcRelationProvider` is requested to spark-sql-JdbcRelationProvider.md#createRelation[create a BaseRelation]
+* `JdbcRelationProvider` is requested to [create a BaseRelation](spark-sql-JdbcRelationProvider.md#createRelation)
 
 * `JdbcUtils` is requested to <<saveTable, saveTable>>
-====
 
 === [[getCommonJDBCType]] `getCommonJDBCType` Method
 
@@ -202,7 +197,7 @@ saveTable(
 
 In the end, `saveTable` requests the possibly-repartitioned `DataFrame` for its <<Dataset.md#rdd, RDD>> (it may have changed after the <<spark-sql-dataset-operators.md#coalesce, coalesce>> operator) and executes <<savePartition, savePartition>> for every partition (using `RDD.foreachPartition`).
 
-NOTE: `saveTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
+`saveTable` is used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider).
 
 === [[getCustomSchema]] Replacing Data Types In Table Schema -- `getCustomSchema` Method
 
@@ -255,7 +250,7 @@ createTable(
 
 In the end, `createTable` concatenates all the above texts into a `CREATE TABLE [table] ([strSchema]) [createTableOptions]` SQL DDL statement followed by executing it (using the input JDBC `Connection`).
 
-NOTE: `createTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
+`createTable` is used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider).
 
 === [[getInsertStatement]] `getInsertStatement` Method
 
@@ -293,7 +288,7 @@ tableExists(conn: Connection, options: JDBCOptions): Boolean
 
 `tableExists`...FIXME
 
-NOTE: `tableExists` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
+`tableExists` is used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider).
 
 === [[truncateTable]] `truncateTable` Method
 
@@ -304,7 +299,7 @@ truncateTable(conn: Connection, options: JDBCOptions): Unit
 
 `truncateTable`...FIXME
 
-NOTE: `truncateTable` is used exclusively when `JdbcRelationProvider` is requested to <<spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider, write the rows of a structured query (a DataFrame) to a table>>.
+`truncateTable` is used when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider).
 
 === [[savePartition]] Saving Rows (Per Partition) to Table -- `savePartition` Method
 

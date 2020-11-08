@@ -37,7 +37,7 @@ a| [[internalConsumer]] Used when:
 | release
 a| [[release]] Used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>>
+* `KafkaSourceRDD` is requested to [compute a partition](KafkaSourceRDD.md#compute)
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `close`
 |===
@@ -69,16 +69,13 @@ get(
   failOnDataLoss: Boolean): ConsumerRecord[Array[Byte], Array[Byte]]
 ----
 
-`get` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.md#get, get a single Kafka ConsumerRecord>>.
+`get` simply requests the <<internalConsumer, InternalKafkaConsumer>> to [get a single Kafka ConsumerRecord](InternalKafkaConsumer.md#get).
 
-[NOTE]
-====
 `get` is used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>>
+* `KafkaSourceRDD` is requested to [compute a partition](KafkaSourceRDD.md#compute)
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `next`
-====
 
 === [[getAvailableOffsetRange]] Getting Single AvailableOffsetRange -- `getAvailableOffsetRange` Method
 
@@ -87,13 +84,10 @@ get(
 getAvailableOffsetRange(): AvailableOffsetRange
 ----
 
-`getAvailableOffsetRange` simply requests the <<internalConsumer, InternalKafkaConsumer>> to <<spark-sql-InternalKafkaConsumer.md#getAvailableOffsetRange, get a single AvailableOffsetRange>>.
+`getAvailableOffsetRange` simply requests the [InternalKafkaConsumer](#internalConsumer) to [get a single AvailableOffsetRange](InternalKafkaConsumer.md#getAvailableOffsetRange).
 
-[NOTE]
-====
 `getAvailableOffsetRange` is used when:
 
-* `KafkaSourceRDD` is requested to <<spark-sql-KafkaSourceRDD.md#compute, compute a partition>> (through <<spark-sql-KafkaSourceRDD.md#resolveRange, resolveRange>>)
+* `KafkaSourceRDD` is requested to [compute a partition](KafkaSourceRDD.md#compute) (through [resolveRange](KafkaSourceRDD.md#resolveRange))
 
 * (Spark Structured Streaming) `KafkaContinuousDataReader` is requested to `next`
-====

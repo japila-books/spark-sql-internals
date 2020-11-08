@@ -3,7 +3,7 @@
 `AvroFileFormat` is a [FileFormat](FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 
 [[shortName]]
-`AvroFileFormat` is a <<spark-sql-DataSourceRegister.md#, DataSourceRegister>> and <<spark-sql-DataSourceRegister.md#shortName, registers itself>> as *avro* data source.
+`AvroFileFormat` is a [DataSourceRegister](DataSourceRegister.md) and [registers itself](DataSourceRegister.md#shortName) as *avro* data source.
 
 ```text
 // ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0

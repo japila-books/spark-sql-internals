@@ -11,13 +11,13 @@ Together with the <<providers, provider interfaces>>, `DataSource` allows Spark 
 | Interface
 | Description
 
-| spark-sql-CreatableRelationProvider.md[CreatableRelationProvider]
+| [CreatableRelationProvider](CreatableRelationProvider.md)
 | [[CreatableRelationProvider]] Saves the result of a structured query per save mode and returns the schema
 
 | [FileFormat](FileFormat.md)
 a| [[FileFormat]]
 
-| spark-sql-RelationProvider.md[RelationProvider]
+| RelationProvider.md[RelationProvider]
 | [[RelationProvider]] Supports schema inference and can be referenced in SQL's `USING` clause
 
 | spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
@@ -121,11 +121,11 @@ NOTE: The `provider` argument can be either an alias (a simple name, e.g. `parqu
 `lookupDataSource` uses `DefaultSource` as the class name (in the <<lookupDataSource-provider1, provider1>> package) as another provider name variant, i.e. `[provider1].DefaultSource`.
 
 [[lookupDataSource-serviceLoader]]
-`lookupDataSource` uses Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html) service-provider loading facility to find all data source providers of type [DataSourceRegister](spark-sql-DataSourceRegister.md) on the Spark CLASSPATH.
+`lookupDataSource` uses Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html) service-provider loading facility to find all data source providers of type [DataSourceRegister](DataSourceRegister.md) on the Spark CLASSPATH.
 
-NOTE: [DataSourceRegister](spark-sql-DataSourceRegister.md) is used to register a data source provider by a short name (_alias_).
+NOTE: [DataSourceRegister](DataSourceRegister.md) is used to register a data source provider by a short name (_alias_).
 
-`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their spark-sql-DataSourceRegister.md#shortName[alias]) that match the <<lookupDataSource-provider1, provider1>> name (case-insensitive, e.g. `parquet` or `kafka`).
+`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their [alias](DataSourceRegister.md#shortName)) that match the <<lookupDataSource-provider1, provider1>> name (case-insensitive, e.g. `parquet` or `kafka`).
 
 If a single `DataSourceRegister` provider class is found, `lookupDataSource` simply returns the instance of the data source provider.
 
@@ -264,8 +264,8 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 | spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
 | Executes spark-sql-SchemaRelationProvider.md#createRelation[SchemaRelationProvider.createRelation] with the provided schema
 
-| spark-sql-RelationProvider.md[RelationProvider]
-| Executes spark-sql-RelationProvider.md#createRelation[RelationProvider.createRelation]
+| RelationProvider.md[RelationProvider]
+| Executes RelationProvider.md#createRelation[RelationProvider.createRelation]
 
 | [FileFormat](FileFormat.md)
 | Creates a spark-sql-BaseRelation.md#HadoopFsRelation[HadoopFsRelation]
@@ -313,7 +313,7 @@ planForWriting(
 
 `planForWriting` creates an instance of the [providingClass](#providingClass) and branches off per type as follows:
 
-* For a <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>>, `planForWriting` creates a <<SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
+* For a [CreatableRelationProvider](CreatableRelationProvider.md), `planForWriting` creates a <<SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
 
 * For a [FileFormat](FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 

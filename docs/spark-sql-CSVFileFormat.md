@@ -1,7 +1,7 @@
 # CSVFileFormat
 
 [[shortName]]
-`CSVFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *csv* format (i.e. spark-sql-DataSourceRegister.md#shortName[registers itself to handle files in csv format] and converts them to Spark SQL rows).
+`CSVFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *csv* format (i.e. [registers itself to handle files in csv format](DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
 
 ```text
 spark.read.format("csv").load("csv-datasets")

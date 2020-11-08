@@ -15,7 +15,7 @@ As a <<spark-sql-PrunedFilteredScan.md#,PrunedFilteredScan>>, `JDBCRelation` sup
 
 * `DataFrameReader` is requested to [load data from an external table using JDBC data source](DataFrameReader.md#jdbc)
 
-* `JdbcRelationProvider` is requested to spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider[create a BaseRelation for reading data from a JDBC table]
+* `JdbcRelationProvider` is requested to [create a BaseRelation for reading data from a JDBC table](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider)
 
 [[toString]]
 When requested for a human-friendly text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).

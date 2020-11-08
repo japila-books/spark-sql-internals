@@ -1,6 +1,4 @@
-title: ConsumerStrategy
-
-# ConsumerStrategy -- Kafka Consumer Providers
+# ConsumerStrategy &mdash; Kafka Consumer Providers
 
 `ConsumerStrategy` is the <<contract, contract>> for <<implementations, Kafka Consumer providers>> that can <<createConsumer, create a Kafka Consumer>> given Kafka parameters.
 
@@ -23,7 +21,7 @@ sealed trait ConsumerStrategy {
 | createConsumer
 | [[createConsumer]] Creates a Kafka https://kafka.apache.org/20/javadoc/org/apache/kafka/clients/consumer/Consumer.html[Consumer] (of keys and values of type `Array[Byte]`)
 
-Used exclusively when `KafkaOffsetReader` is requested to <<spark-sql-KafkaOffsetReader.md#createConsumer, creating a Kafka Consumer>>
+Used exclusively when `KafkaOffsetReader` is requested to [creating a Kafka Consumer](KafkaOffsetReader.md#createConsumer)
 |===
 
 [[implementations]]

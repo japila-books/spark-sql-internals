@@ -340,7 +340,7 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 
 * `CacheTableCommand`, <<CreateTempViewUsing.md#run, CreateTempViewUsing>>, <<InsertIntoDataSourceCommand.md#run, InsertIntoDataSourceCommand>> and `SaveIntoDataSourceCommand` logical commands are executed (run)
 
-* `DataSource` is requested to [writeAndRead](DataSource.md#writeAndRead) (for a [CreatableRelationProvider](spark-sql-CreatableRelationProvider.md))
+* `DataSource` is requested to [writeAndRead](DataSource.md#writeAndRead) (for a [CreatableRelationProvider](CreatableRelationProvider.md))
 
 * `FrequentItems` is requested to `singlePassFreqItems`
 

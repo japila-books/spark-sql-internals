@@ -1,7 +1,7 @@
 # JdbcRelationProvider
 
 [[shortName]]
-`JdbcRelationProvider` is a [DataSourceRegister](spark-sql-DataSourceRegister.md) and registers itself to handle *jdbc* data source format.
+`JdbcRelationProvider` is a [DataSourceRegister](DataSourceRegister.md) and registers itself to handle *jdbc* data source format.
 
 !!! note
     `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the [source code](https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark.
@@ -27,7 +27,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-NOTE: `createRelation` is part of <<spark-sql-RelationProvider.md#createRelation, RelationProvider Contract>> to create a <<spark-sql-BaseRelation.md#, BaseRelation>> for reading.
+`createRelation` is part of the [RelationProvider](RelationProvider.md#createRelation) abstraction.
 
 `createRelation` creates a `JDBCPartitioningInfo` (using spark-sql-JDBCOptions.md[JDBCOptions] and the input `parameters` that correspond to the spark-sql-JDBCOptions.md#options[Options for JDBC Data Source]).
 
@@ -46,11 +46,11 @@ createRelation(
   df: DataFrame): BaseRelation
 ----
 
-NOTE: `createRelation` is part of the <<spark-sql-CreatableRelationProvider.md#createRelation, CreatableRelationProvider Contract>> to write the rows of a structured query (a DataFrame) to an external data source.
+`createRelation` is part of the [CreatableRelationProvider](CreatableRelationProvider.md#createRelation) abstraction.
 
-Internally, `createRelation` creates a spark-sql-JDBCOptions.md#creating-instance[JDBCOptions] (from the input `parameters`).
+Internally, `createRelation` creates a [JDBCOptions](spark-sql-JDBCOptions.md) (from the input `parameters`).
 
-`createRelation` reads spark-sql-CatalystConf.md#caseSensitiveAnalysis[caseSensitiveAnalysis] (using the input `sqlContext`).
+`createRelation` reads [caseSensitiveAnalysis](spark-sql-CatalystConf.md#caseSensitiveAnalysis) (using the input `sqlContext`).
 
 `createRelation` checks whether the table (given `dbtable` and `url` spark-sql-JDBCOptions.md#options[options] in the input `parameters`) exists.
 

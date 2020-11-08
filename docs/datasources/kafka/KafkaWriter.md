@@ -1,19 +1,18 @@
 # KafkaWriter Utility
 
-`KafkaWriter` is a Scala object that is used to <<write, write>> the rows of a batch (or a streaming) structured query to Apache Kafka.
+`KafkaWriter` is a Scala object that is used to [write](#write) the rows of a batch (or a streaming) structured query to Apache Kafka.
 
-![KafkaWriter (write) in web UI](images/spark-sql-KafkaWriter-write-webui.png)
+![KafkaWriter (write) in web UI](../../images/spark-sql-KafkaWriter-write-webui.png)
 
-`KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<catalyst/QueryPlan.md#output, output schema attributes>>):
+`KafkaWriter` [validates the schema of a structured query](#validateQuery) that it contains the following columns ([output schema attributes](../../catalyst/QueryPlan.md#output)):
 
-* Either *topic* of type `StringType` or the [topic](datasources/kafka/options.md#topic) option are defined
+* Either **topic** of type `StringType` or the [topic](options.md#topic) option are defined
 
-* Optional *key* of type `StringType` or `BinaryType`
+* Optional **key** of type `StringType` or `BinaryType`
 
-* Required *value* of type `StringType` or `BinaryType`
+* Required **value** of type `StringType` or `BinaryType`
 
-[source, scala]
-----
+```text
 // KafkaWriter is a private `kafka010` package object
 // and so the code to use it should also be in the same package
 // BEGIN: Use `:paste -raw` in spark-shell
@@ -45,50 +44,48 @@ org.apache.spark.sql.AnalysisException: topic option required when no 'topic' at
   at org.apache.spark.sql.kafka010.KafkaWriter$.validateQuery(KafkaWriter.scala:51)
   at org.apache.spark.sql.kafka010.PublicKafkaWriter$.validateQuery(<pastie>:10)
   ... 50 elided
-----
+```
 
-=== [[write]] Writing Rows of Structured Query to Kafka Topic -- `write` Method
+## <span id="write"> Writing Rows of Structured Query
 
-[source, scala]
-----
+```scala
 write(
   sparkSession: SparkSession,
   queryExecution: QueryExecution,
   kafkaParameters: ju.Map[String, Object],
   topic: Option[String] = None): Unit
-----
+```
 
-`write` gets the [output schema](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the input [QueryExecution](QueryExecution.md).
+`write` gets the [output schema](../../catalyst/QueryPlan.md#output) of the [analyzed logical plan](../../QueryExecution.md#analyzed) of the input [QueryExecution](../../QueryExecution.md).
 
-`write` then <<validateQuery, validates the schema of a structured query>>.
+`write` then [validates the schema of a structured query](#validateQuery).
 
-In the end, `write` requests the `QueryExecution` for [RDD[InternalRow]](QueryExecution.md#toRdd) (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
+In the end, `write` requests the `QueryExecution` for [RDD[InternalRow]](../../QueryExecution.md#toRdd) (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
 
-. Creates a <<spark-sql-KafkaWriteTask.md#creating-instance, KafkaWriteTask>> (for the input `kafkaParameters`, the schema and the input `topic`)
+1. Creates a [KafkaWriteTask](KafkaWriteTask.md) (for the input `kafkaParameters`, the schema and the input `topic`)
 
-. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.md#execute, write the rows (of the partition) to Kafka topic>>
+1. Requests the `KafkaWriteTask` to [write the rows (of the partition) to Kafka topic](KafkaWriteTask.md#execute)
 
-. Requests the `KafkaWriteTask` to <<spark-sql-KafkaWriteTask.md#close, close>>
+1. Requests the `KafkaWriteTask` to [close](KafkaWriteTask.md#close)
 
 `write` is used when:
 
-* `KafkaSourceProvider` is requested to <<spark-sql-KafkaSourceProvider.md#createRelation-CreatableRelationProvider, write a DataFrame to a Kafka topic>>
+* `KafkaSourceProvider` is requested to [write a DataFrame to a Kafka topic](KafkaSourceProvider.md#createRelation-CreatableRelationProvider)
 
 * (Spark Structured Streaming) `KafkaSink` is requested to `addBatch`
 
-=== [[validateQuery]] Validating Schema (Attributes) of Structured Query and Topic Option Availability -- `validateQuery` Method
+## <span id="validateQuery"> Validating Schema (Attributes) of Structured Query and Topic Option Availability
 
-[source, scala]
-----
+```scala
 validateQuery(
   schema: Seq[Attribute],
   kafkaParameters: ju.Map[String, Object],
   topic: Option[String] = None): Unit
-----
+```
 
 `validateQuery` makes sure that the following attributes are in the input schema (or their alternatives) and of the right data types:
 
-* Either `topic` attribute of type `StringType` or the [topic](datasources/kafka/options.md#topic) option are defined
+* Either `topic` attribute of type `StringType` or the [topic](options.md#topic) option are defined
 
 * If `key` attribute is defined it is of type `StringType` or `BinaryType`
 
@@ -96,13 +93,8 @@ validateQuery(
 
 If any of the requirements are not met, `validateQuery` throws an `AnalysisException`.
 
-[NOTE]
-====
 `validateQuery` is used when:
 
-* `KafkaWriter` object is requested to <<write, write the rows of a structured query to a Kafka topic>>
-
+* `KafkaWriter` object is requested to [write the rows of a structured query to a Kafka topic](#write)
 * (Spark Structured Streaming) `KafkaStreamWriter` is created
-
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createStreamWriter`
-====

@@ -1,0 +1,3 @@
+# SupportsTruncate
+
+`SupportsTruncate` is...FIXME

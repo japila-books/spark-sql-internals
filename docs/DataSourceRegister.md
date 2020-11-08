@@ -13,8 +13,9 @@ trait DataSourceRegister {
 }
 ----
 
-=== Data Source Format Discovery -- Registering Data Source By Short Name (Alias)
+## Data Source Format Discovery -- Registering Data Source By Short Name (Alias)
 
-CAUTION: FIXME Describe how Java's ++https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-++[ServiceLoader] works to find all spark-sql-DataSourceRegister.md[DataSourceRegister] provider classes on the CLASSPATH.
+!!! important
+    FIXME Describe how Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-) works to find all [DataSourceRegister](DataSourceRegister.md) provider classes on the CLASSPATH.
 
 Any `DataSourceRegister` has to register itself in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file to...FIXME

@@ -1,6 +1,4 @@
-title: RelationProvider
-
-# RelationProvider -- Relation Providers with Pre-Defined Schema
+# RelationProvider &mdash; Relation Providers with Pre-Defined Schema
 
 `RelationProvider` is an <<contract, abstraction>> of <<implementations, providers>> of <<createRelation, relational data sources with schema inference>> (aka *schema discovery*). In other words, the schema is pre-defined, and a user-specified schema is not allowed.
 
@@ -36,7 +34,7 @@ When [resolving a data source](DataSource.md#resolveRelation), `DataSource` make
 !!! tip
     [SchemaRelationProvider](spark-sql-SchemaRelationProvider.md) is used for data source providers that require a user-defined schema.
 
-NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with <<spark-sql-CreatableRelationProvider.md#, CreatableRelationProvider>> when requested for a <<spark-sql-CreatableRelationProvider.md#createRelation, relation>> (after writing out a structured query).
+NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with [CreatableRelationProvider](CreatableRelationProvider.md) when requested for a [relation](CreatableRelationProvider.md#createRelation) (after writing out a structured query).
 
 [[implementations]]
 .RelationProviders
@@ -45,10 +43,10 @@ NOTE: It is a common pattern while developing a custom data source to use <<crea
 | RelationProvider
 | Description
 
-| <<spark-sql-JdbcRelationProvider.md#, JdbcRelationProvider>>
+| [JdbcRelationProvider](spark-sql-JdbcRelationProvider.md)
 | [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
-| <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
+| [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
 | [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)
 
 |===

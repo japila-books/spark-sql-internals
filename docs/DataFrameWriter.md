@@ -589,7 +589,7 @@ In the end, `saveToV1Source` [runs the logical command for writing](#runCommand)
 !!! note
     The [logical command for writing](DataSource.md#planForWriting) can be one of the following:
 
-  * A [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) for [CreatableRelationProviders](spark-sql-CreatableRelationProvider.md)
+  * A [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) for [CreatableRelationProviders](CreatableRelationProvider.md)
 
     * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](FileFormat.md)
 

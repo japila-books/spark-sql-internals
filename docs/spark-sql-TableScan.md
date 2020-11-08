@@ -29,4 +29,4 @@ Used exclusively when `DataSourceStrategy` execution planning strategy is reques
 |===
 
 [[implementations]]
-NOTE: <<spark-sql-KafkaRelation.md#, KafkaRelation>> is the one and only known implementation of the <<contract, TableScan Contract>> in Spark SQL.
+NOTE: [KafkaRelation](datasources/kafka/KafkaRelation.md) is the one and only known implementation of the <<contract, TableScan Contract>> in Spark SQL.

@@ -28,7 +28,7 @@ Matches spark-sql-JDBCRelation.md[JDBCRelation] exclusively
 | LogicalRelation.md[LogicalRelation] with a spark-sql-TableScan.md[TableScan] relation
 a| [[TableScan]] Creates a RowDataSourceScanExec.md#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to spark-sql-TableScan.md#buildScan[buildScan] followed by <<toCatalystRDD, RDD conversion to RDD[InternalRow]>>)
 
-Matches <<spark-sql-KafkaRelation.md#, KafkaRelation>> exclusively
+Matches [KafkaRelation](../datasources/kafka/KafkaRelation.md) exclusively
 |===
 
 [source, scala]

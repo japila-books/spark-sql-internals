@@ -1,7 +1,7 @@
 # ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is the [FileFormat](../../FileFormat.md) for **parquet** data source (i.e. [registers itself to handle files in parquet format](../../spark-sql-DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
+`ParquetFileFormat` is the [FileFormat](../../FileFormat.md) for **parquet** data source (i.e. [registers itself to handle files in parquet format](../../DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
 
 NOTE: `parquet` is the [default data source format](../../DataFrameReader.md#source) in Spark SQL.
 

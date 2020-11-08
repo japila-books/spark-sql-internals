@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="newScanBuilder"> newScanBuilder
+### <span id="newScanBuilder"> Creating ScanBuilder
 
 ```java
 ScanBuilder newScanBuilder(
@@ -24,6 +24,6 @@ Used when:
 
 * [FileTable](FileTable.md)
 * [KafkaTable](../datasources/kafka/KafkaTable.md)
-* MemoryStreamTable
-* RateStreamTable
-* TextSocketTable
+* MemoryStreamTable (Spark Structured Streaming)
+* RateStreamTable (Spark Structured Streaming)
+* TextSocketTable (Spark Structured Streaming)

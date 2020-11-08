@@ -34,13 +34,13 @@ Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSou
 | CreatableRelationProvider
 | Description
 
-| <<spark-sql-ConsoleSinkProvider.md#, ConsoleSinkProvider>>
+| [ConsoleSinkProvider](spark-sql-ConsoleSinkProvider.md)
 | [[ConsoleSinkProvider]] Data source provider for <<spark-sql-console.md#, Console data source>>
 
-| <<spark-sql-JdbcRelationProvider.md#, JdbcRelationProvider>>
+| [JdbcRelationProvider](spark-sql-JdbcRelationProvider.md)
 | [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
-| <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
+| [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
 | [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)
 
 |===

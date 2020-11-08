@@ -36,6 +36,8 @@ Used exclusively when `DataSource` is requested for a [BaseRelation](DataSource.
 [[implementations]]
 NOTE: There are no known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
 
-TIP: Use spark-sql-RelationProvider.md[RelationProvider] for data source providers with schema inference.
+!!! tip
+    [RelationProvider](RelationProvider.md) is used for data source providers with schema inference.
 
-TIP: Use both `SchemaRelationProvider` and spark-sql-RelationProvider.md[RelationProvider] if a data source should support both schema inference and user-defined schemas.
+!!! tip
+    Use both `SchemaRelationProvider` and [RelationProvider](RelationProvider.md) if a data source should support both schema inference and user-defined schemas.

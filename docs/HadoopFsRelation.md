@@ -57,7 +57,7 @@ toString: String
 
 `toString` is the following text based on the [FileFormat](#fileFormat):
 
-* [shortName](spark-sql-DataSourceRegister.md#shortName) for [DataSourceRegister](spark-sql-DataSourceRegister.md) data sources
+* [shortName](DataSourceRegister.md#shortName) for [DataSourceRegister](DataSourceRegister.md) data sources
 
 * **HadoopFiles** otherwise
 

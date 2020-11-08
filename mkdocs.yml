@@ -95,6 +95,8 @@ nav:
       - Table: connector/Table.md
       - TableCapability: connector/TableCapability.md
       - TableProvider: connector/TableProvider.md
+      - WriteBuilder: connector/WriteBuilder.md
+      - SupportsTruncate: connector/SupportsTruncate.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
@@ -306,21 +308,21 @@ nav:
         - datasources/kafka/index.md
         - KafkaTable: datasources/kafka/KafkaTable.md
         - Options: datasources/kafka/options.md
-        - spark-sql-KafkaSourceProvider.md
-        - spark-sql-KafkaRelation.md
+        - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
+        - KafkaScan: datasources/kafka/KafkaScan.md
+        - KafkaBatchWrite: datasources/kafka/KafkaBatchWrite.md
+        - KafkaRelation: datasources/kafka/KafkaRelation.md
         - KafkaSourceRDD:
-          - spark-sql-KafkaSourceRDD.md
-          - spark-sql-KafkaSourceRDDOffsetRange.md
-          - spark-sql-KafkaSourceRDDPartition.md
-        - spark-sql-ConsumerStrategy.md
-        - spark-sql-KafkaOffsetReader.md
-        - spark-sql-KafkaOffsetRangeLimit.md
-        - KafkaDataConsumer:
-          - spark-sql-KafkaDataConsumer.md
-          - spark-sql-InternalKafkaConsumer.md
-        - spark-sql-KafkaWriter.md
-        - spark-sql-KafkaWriteTask.md
-        - spark-sql-JsonUtils.md
+          - KafkaSourceRDD: datasources/kafka/KafkaSourceRDD.md
+          - KafkaSourceRDDPartition: datasources/kafka/KafkaSourceRDDPartition.md
+        - ConsumerStrategy: datasources/kafka/ConsumerStrategy.md
+        - KafkaOffsetReader: datasources/kafka/KafkaOffsetReader.md
+        - KafkaOffsetRangeLimit: datasources/kafka/KafkaOffsetRangeLimit.md
+        - KafkaDataConsumer: datasources/kafka/KafkaDataConsumer.md
+        - InternalKafkaConsumer: datasources/kafka/InternalKafkaConsumer.md
+        - KafkaWriter: datasources/kafka/KafkaWriter.md
+        - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
+        - JsonUtils: datasources/kafka/JsonUtils.md
       - Avro:
         - spark-sql-avro.md
         - spark-sql-AvroOptions.md
@@ -404,9 +406,9 @@ nav:
         - DataSource: DataSource.md
         - spark-sql-datasource-custom-formats.md
         - Relation Providers:
-          - spark-sql-CreatableRelationProvider.md
-          - spark-sql-DataSourceRegister.md
-          - spark-sql-RelationProvider.md
+          - CreatableRelationProvider: CreatableRelationProvider.md
+          - DataSourceRegister: DataSourceRegister.md
+          - RelationProvider: RelationProvider.md
           - spark-sql-SchemaRelationProvider.md
         - Extension Contracts:
           - spark-sql-BaseRelation.md

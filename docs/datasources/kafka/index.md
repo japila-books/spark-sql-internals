@@ -13,7 +13,7 @@ Kafka Data Source supports [options](options.md) to get better performance of st
 
 [DataFrameReader.format](../../DataFrameReader.md#format) method is used to specify Apache Kafka as the external data source to load data from.
 
-You use [kafka](../../spark-sql-KafkaSourceProvider.md#shortName) (or `org.apache.spark.sql.kafka010.KafkaSourceProvider`) as the input data source format.
+You use [kafka](KafkaSourceProvider.md#shortName) (or `org.apache.spark.sql.kafka010.KafkaSourceProvider`) as the input data source format.
 
 ```text
 val kafka = spark.read.format("kafka").load
