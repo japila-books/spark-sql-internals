@@ -23,7 +23,7 @@ Used when `V2CommandExec` physical command is requested for a [result](#result).
 * <span id="CreateTableExec"> `CreateTableExec`
 * <span id="DeleteFromTableExec"> `DeleteFromTableExec`
 * <span id="DescribeNamespaceExec"> `DescribeNamespaceExec`
-* <span id="DescribeTableExec"> `DescribeTableExec`
+* <span id="DescribeTableExec"> [DescribeTableExec](DescribeTableExec.md)
 * <span id="DropNamespaceExec"> `DropNamespaceExec`
 * <span id="DropTableExec"> `DropTableExec`
 * <span id="RefreshTableExec"> `RefreshTableExec`

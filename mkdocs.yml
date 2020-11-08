@@ -201,6 +201,7 @@ nav:
         - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
         - DeleteFromTable: logical-operators/DeleteFromTable.md
         - logical-operators/DescribeColumnCommand.md
+        - DescribeRelation: logical-operators/DescribeRelation.md
         - logical-operators/DescribeTableCommand.md
         - logical-operators/DeserializeToObject.md
         - logical-operators/DropTableCommand.md
@@ -582,6 +583,7 @@ nav:
         - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
         - physical-operators/DataWritingCommandExec.md
         - physical-operators/DebugExec.md
+        - DescribeTableExec: physical-operators/DescribeTableExec.md
         - physical-operators/DeserializeToObjectExec.md
         - DropNamespaceExec: physical-operators/DropNamespaceExec.md
         - DropTableExec: physical-operators/DropTableExec.md

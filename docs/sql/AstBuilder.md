@@ -31,6 +31,17 @@ Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md)
 
 ANTLR labeled alternative: `#deleteFromTable`
 
+### <span id="visitDescribeRelation"> visitDescribeRelation
+
+Creates a `DescribeColumnStatement` or [DescribeRelation](../logical-operators/DescribeRelation.md)
+
+```text
+(DESC | DESCRIBE) TABLE? option=(EXTENDED | FORMATTED)?
+  multipartIdentifier partitionSpec? describeColName?
+```
+
+ANTLR labeled alternative: `#describeRelation`
+
 ### visitExists
 
 Creates an [Exists](../expressions/Exists.md) expression
