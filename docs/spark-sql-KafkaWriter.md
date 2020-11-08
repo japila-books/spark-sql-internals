@@ -6,7 +6,7 @@
 
 `KafkaWriter` <<validateQuery, validates the schema of a structured query>> that it contains the following columns (<<catalyst/QueryPlan.md#output, output schema attributes>>):
 
-* Either *topic* of type `StringType` or the [topic](datasource/kafka/options.md#topic) option are defined
+* Either *topic* of type `StringType` or the [topic](datasources/kafka/options.md#topic) option are defined
 
 * Optional *key* of type `StringType` or `BinaryType`
 
@@ -88,7 +88,7 @@ validateQuery(
 
 `validateQuery` makes sure that the following attributes are in the input schema (or their alternatives) and of the right data types:
 
-* Either `topic` attribute of type `StringType` or the [topic](datasource/kafka/options.md#topic) option are defined
+* Either `topic` attribute of type `StringType` or the [topic](datasources/kafka/options.md#topic) option are defined
 
 * If `key` attribute is defined it is of type `StringType` or `BinaryType`
 

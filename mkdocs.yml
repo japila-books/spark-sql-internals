@@ -306,9 +306,9 @@ nav:
         - PartitionedFile: PartitionedFile.md
         - RecordReaderIterator: RecordReaderIterator.md
       - Kafka:
-        - datasource/kafka/index.md
-        - KafkaTable: datasource/kafka/KafkaTable.md
-        - Options: datasource/kafka/options.md
+        - datasources/kafka/index.md
+        - KafkaTable: datasources/kafka/KafkaTable.md
+        - Options: datasources/kafka/options.md
         - spark-sql-KafkaSourceProvider.md
         - spark-sql-KafkaRelation.md
         - KafkaSourceRDD:

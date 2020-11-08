@@ -49,6 +49,6 @@ NOTE: It is a common pattern while developing a custom data source to use <<crea
 | [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
 
 | <<spark-sql-KafkaSourceProvider.md#, KafkaSourceProvider>>
-| [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasource/kafka/index.md)
+| [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)
 
 |===

@@ -78,7 +78,7 @@ Used when:
 ## Implementations
 
 * [FileTable](FileTable.md)
-* [KafkaTable](../datasource/kafka/KafkaTable.md)
+* [KafkaTable](../datasources/kafka/KafkaTable.md)
 * [NoopTable](NoopTable.md)
 * [StagedTable](StagedTable.md)
 * [SupportsRead](SupportsRead.md)
