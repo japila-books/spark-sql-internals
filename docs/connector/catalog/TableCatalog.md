@@ -71,7 +71,7 @@ Used when the following commands are executed:
 * [DropNamespaceExec](../../physical-operators/DropNamespaceExec.md)
 * [ShowTablesExec](../../physical-operators/ShowTablesExec.md)
 
-### <span id="loadTable"> loadTable
+### <span id="loadTable"> Loading Table
 
 ```java
 Table loadTable(
@@ -80,15 +80,12 @@ Table loadTable(
 
 Used when:
 
+* `CatalogV2Util` is requested to [load a table](CatalogV2Util.md#loadTable)
 * `DataFrameReader` is requested to [load](../../DataFrameReader.md#load) (for [SupportsCatalogOptions](SupportsCatalogOptions.md) providers)
-
 * `DataFrameWriter` is requested to [save](../../DataFrameWriter.md#save), [insertInto](../../DataFrameWriter.md#insertInto) and [saveAsTable](../../DataFrameWriter.md#saveAsTable)
-
-* `V2SessionCatalog` is requested to [createTable](../../V2SessionCatalog.md#createTable), [alterTable](../../V2SessionCatalog.md#alterTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
-
+* `DelegatingCatalogExtension` is requested to [loadTable](DelegatingCatalogExtension.md#loadTable)
 * `TableCatalog` is requested to [tableExists](#tableExists)
-
-* `CatalogV2Util` is requested to [loadTable](CatalogV2Util.md#loadTable)
+* `V2SessionCatalog` is requested to [createTable](../../V2SessionCatalog.md#createTable), [alterTable](../../V2SessionCatalog.md#alterTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
 
 ### <span id="renameTable"> renameTable
 

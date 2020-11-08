@@ -1,4 +1,4 @@
-# V2SessionCatalog &mdash; Default Session Catalog
+# V2SessionCatalog
 
 `V2SessionCatalog` is the [default session catalog](connector/catalog/CatalogManager.md#defaultSessionCatalog) of [CatalogManager](connector/catalog/CatalogManager.md).
 
@@ -32,3 +32,14 @@ name: String
 The name of `V2SessionCatalog` is [spark_catalog](connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME).
 
 `name` is part of the [CatalogPlugin](connector/catalog/CatalogPlugin.md#name) abstraction.
+
+## <span id="loadTable"> Loading Table
+
+```scala
+loadTable(
+  ident: Identifier): Table
+```
+
+`loadTable` is part of the [TableCatalog](connector/catalog/TableCatalog.md#loadTable) abstraction.
+
+`loadTable` creates a [V1Table](connector/V1Table.md) for a [table metadata](SessionCatalog.md#getTableMetadata) (from the [SessionCatalog](#catalog)).
