@@ -16,6 +16,14 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/WriteBuilder/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsTruncate/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Scan/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
@@ -772,55 +780,59 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaSourceProvider/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaSourceProvider/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaRelation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaScan/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaSourceRDD/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaBatchWrite/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaSourceRDDOffsetRange/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaRelation/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaSourceRDDPartition/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaSourceRDD/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ConsumerStrategy/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaSourceRDDPartition/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaOffsetReader/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/ConsumerStrategy/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaOffsetRangeLimit/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaOffsetReader/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaDataConsumer/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaOffsetRangeLimit/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-InternalKafkaConsumer/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaDataConsumer/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaWriter/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/InternalKafkaConsumer/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-KafkaWriteTask/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaWriter/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JsonUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/KafkaWriteTask/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/kafka/JsonUtils/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1100,15 +1112,15 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CreatableRelationProvider/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CreatableRelationProvider/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceRegister/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRegister/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-RelationProvider/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RelationProvider/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
