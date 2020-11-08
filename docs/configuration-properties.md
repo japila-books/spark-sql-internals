@@ -1127,7 +1127,7 @@ Use [SQLConf.isParquetBinaryAsString](SQLConf.md#isParquetBinaryAsString) method
 
 ## <span id="spark.sql.parquet.columnarReaderBatchSize"> spark.sql.parquet.columnarReaderBatchSize
 
-The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](spark-sql-VectorizedParquetRecordReader.md)).
+The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md)).
 
 Default: `4096` (4k)
 
@@ -1145,7 +1145,7 @@ Use [SQLConf.isParquetINT96AsTimestamp](SQLConf.md#isParquetINT96AsTimestamp) me
 
 ## <span id="spark.sql.parquet.enableVectorizedReader"> spark.sql.parquet.enableVectorizedReader
 
-Enables [vectorized parquet decoding](spark-sql-vectorized-parquet-reader.md).
+Enables [vectorized parquet decoding](vectorized-parquet-reader.md).
 
 Default: `true`
 
@@ -1153,7 +1153,7 @@ Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderE
 
 ## <span id="spark.sql.parquet.filterPushdown"> spark.sql.parquet.filterPushdown
 
-Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](ParquetFileFormat.md) file format
+Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](datasources/parquet/ParquetFileFormat.md) file format
 
 Default: `true`
 

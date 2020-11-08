@@ -80,7 +80,7 @@ supportBatch(
   dataSchema: StructType): Boolean
 ```
 
-Controls whether the format supports [vectorized decoding](spark-sql-vectorized-parquet-reader.md) (aka _columnar batch_) or not
+Controls whether the format supports [vectorized decoding](vectorized-parquet-reader.md) (aka _columnar batch_) or not
 
 Default: `false`
 
@@ -88,7 +88,7 @@ Used when:
 
 * `FileSourceScanExec` physical operator is requested for the [supportsBatch](physical-operators/FileSourceScanExec.md#supportsBatch) flag
 * `OrcFileFormat` is requested to [buildReaderWithPartitionValues](OrcFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ### <span id="supportDataType"> supportDataType
 
@@ -125,7 +125,7 @@ Used when `FileSourceScanExec` physical operator is requested for the [vectorTyp
 * [HiveFileFormat](hive/HiveFileFormat.md)
 * ImageFileFormat
 * [OrcFileFormat](OrcFileFormat.md)
-* [ParquetFileFormat](ParquetFileFormat.md)
+* [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md)
 * [TextBasedFileFormat](TextBasedFileFormat.md)
 
 ## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values

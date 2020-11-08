@@ -361,7 +361,7 @@ supportsBatch: Boolean
 `supportsBatch` is enabled (`true`) only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports vectorized decoding](../FileFormat.md#supportBatch). Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
 !!! note
-    [FileFormat](../FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) have support for it under certain conditions.
+    [FileFormat](../FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) have support for it under certain conditions.
 
 `supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
 
@@ -382,7 +382,7 @@ needsUnsafeRowConversion: Boolean
 
 `needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
 
-1. [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../ParquetFileFormat.md)
+1. [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md)
 
 1. [spark.sql.parquet.enableVectorizedReader](../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
@@ -415,7 +415,7 @@ doExecute(): RDD[InternalRow]
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
 !!! note
-    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) built-in file formats (under certain conditions).
+    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) built-in file formats (under certain conditions).
 
 With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<WholeStageCodegenExec.md#child, child physical operator>> and WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
 

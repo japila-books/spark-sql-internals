@@ -32,21 +32,6 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-=== [[supportsBatch]] `supportsBatch` Property
-
-[source, scala]
-----
-supportsBatch: Boolean
-----
-
-NOTE: `supportsBatch` is part of spark-sql-ColumnarBatchScan.md#supportsBatch[ColumnarBatchScan Contract] to control whether the physical operator supports spark-sql-vectorized-parquet-reader.md[vectorized decoding] or not.
-
-`supportsBatch` is enabled (`true`) only when the <<reader, DataSourceReader>> is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled.
-
-NOTE: spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag is enabled by default.
-
-`supportsBatch` is disabled (i.e. `false`) otherwise.
-
 === [[inputRDD]] Creating Input RDD of Internal Rows -- `inputRDD` Internal Property
 
 [source, scala]

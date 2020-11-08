@@ -1,12 +1,8 @@
-title: SpecificParquetRecordReaderBase
-
-# SpecificParquetRecordReaderBase -- Hadoop RecordReader
+# SpecificParquetRecordReaderBase &mdash; Hadoop RecordReader
 
 `SpecificParquetRecordReaderBase` is the base Hadoop `RecordReader` for *parquet* format readers that directly materialize to `T`.
 
 NOTE: https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/RecordReader.html[RecordReader] reads `<key, value>` pairs from an Hadoop `InputSplit`.
-
-NOTE: spark-sql-VectorizedParquetRecordReader.md[VectorizedParquetRecordReader] is the one and only `SpecificParquetRecordReaderBase` that directly materialize to Java `Objects`.
 
 [[internal-registries]]
 .SpecificParquetRecordReaderBase's Internal Properties (e.g. Registries, Counters and Flags)
@@ -16,7 +12,7 @@ NOTE: spark-sql-VectorizedParquetRecordReader.md[VectorizedParquetRecordReader] 
 | Description
 
 | [[sparkSchema]] `sparkSchema`
-| Spark [schema](StructType.md)
+| Spark [schema](../../StructType.md)
 
 Initialized when `SpecificParquetRecordReaderBase` is requested to <<initialize, initialize>> (from the value of [org.apache.spark.sql.parquet.row.requested_schema](ParquetFileFormat.md#org.apache.spark.sql.parquet.row.requested_schema) configuration as set when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues))
 |===

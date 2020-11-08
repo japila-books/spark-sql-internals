@@ -43,7 +43,7 @@ generate(
 
 * `OrcFileFormat` is requested to [build a data reader with partition column values appended](../OrcFileFormat.md#buildReaderWithPartitionValues)
 
-* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 * `GroupedIterator` is requested for `keyProjection`
 

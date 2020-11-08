@@ -1,3 +1,0 @@
-# RateStreamTable
-
-`RateStreamTable` is...FIXME

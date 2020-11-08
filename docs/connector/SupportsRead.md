@@ -24,6 +24,6 @@ Used when:
 
 * [FileTable](FileTable.md)
 * [KafkaTable](../datasources/kafka/KafkaTable.md)
-* [MemoryStreamTable](MemoryStreamTable.md)
-* [RateStreamTable](RateStreamTable.md)
-* [TextSocketTable](TextSocketTable.md)
+* MemoryStreamTable
+* RateStreamTable
+* TextSocketTable

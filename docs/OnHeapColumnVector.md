@@ -25,7 +25,7 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 
 * `InMemoryTableScanExec` is requested to InMemoryTableScanExec.md#createAndDecompressColumn[createAndDecompressColumn]
 
-* `VectorizedParquetRecordReader` is requested to spark-sql-VectorizedParquetRecordReader.md#initBatch[initBatch] (with `ON_HEAP` memory mode)
+* `VectorizedParquetRecordReader` is requested to [initBatch](datasources/parquet/VectorizedParquetRecordReader.md#initBatch) (with `ON_HEAP` memory mode)
 
 * `OrcColumnarBatchReader` is requested to `initBatch` (with `ON_HEAP` memory mode)
 

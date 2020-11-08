@@ -77,10 +77,17 @@ Used when:
 
 ## Implementations
 
+* ConsoleTable (Spark Structured Streaming)
 * [FileTable](FileTable.md)
+* ForeachWriterTable (Spark Structured Streaming)
 * [KafkaTable](../datasources/kafka/KafkaTable.md)
+* MemorySink (Spark Structured Streaming)
+* MemoryStreamTable (Spark Structured Streaming)
 * [NoopTable](NoopTable.md)
+* RateStreamTable (Spark Structured Streaming)
+* Sink (Spark Structured Streaming)
 * [StagedTable](StagedTable.md)
 * [SupportsRead](SupportsRead.md)
 * [SupportsWrite](SupportsWrite.md)
+* TextSocketTable (Spark Structured Streaming)
 * [V1Table](V1Table.md)

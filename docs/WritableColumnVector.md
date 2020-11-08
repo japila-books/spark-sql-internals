@@ -446,7 +446,7 @@ void reset()
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
 
-* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextBatch, read next rows into a columnar batch>>
+* `VectorizedParquetRecordReader` is requested to [read next rows into a columnar batch](datasources/parquet/VectorizedParquetRecordReader.md#nextBatch)
 
 * [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
 

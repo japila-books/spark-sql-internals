@@ -1,6 +1,4 @@
-title: RecordReaderIterator
-
-# RecordReaderIterator -- Scala Iterator over Hadoop RecordReader's Values
+# RecordReaderIterator
 
 [[creating-instance]]
 [[rowReader]]
@@ -8,7 +6,7 @@ title: RecordReaderIterator
 
 `RecordReaderIterator` is <<creating-instance, created>> when:
 
-* New [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues) and [ParquetFileFormat](ParquetFileFormat.md#buildReaderWithPartitionValues) are requested to build a data reader
+* New [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues) and [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) are requested to build a data reader
 
 * [HadoopFileLinesReader](spark-sql-spark-HadoopFileLinesReader.md#iterator) and `HadoopFileWholeTextReader` are requested for an value iterator
 

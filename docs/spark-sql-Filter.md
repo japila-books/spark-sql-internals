@@ -10,7 +10,7 @@
 
 * `FileFormat` is requested to [buildReader](FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReader), [CSVFileFormat](spark-sql-CSVFileFormat.md#buildReader), [JsonFileFormat](spark-sql-JsonFileFormat.md#buildReader), [TextFileFormat](TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to [build a Data Reader with partition column values appended](FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](ParquetFileFormat.md#buildReaderWithPartitionValues))
+* `FileFormat` is requested to [build a Data Reader with partition column values appended](FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
 
 * `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 

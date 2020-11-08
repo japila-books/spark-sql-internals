@@ -6,9 +6,9 @@ Quoting [SPARK-12854 Vectorize Parquet reader](https://issues.apache.org/jira/br
 
 > The parquet encodings are largely designed to decode faster in batches, column by column. This can speed up the decoding considerably.
 
-Vectorized Parquet Decoding is used exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) when [spark.sql.parquet.enableVectorizedReader](#spark.sql.parquet.enableVectorizedReader) property is enabled (`true`) and the read schema uses [AtomicTypes](DataType.md#AtomicType) data types only.
+Vectorized Parquet Decoding is used exclusively when `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) when [spark.sql.parquet.enableVectorizedReader](#spark.sql.parquet.enableVectorizedReader) property is enabled (`true`) and the read schema uses [AtomicTypes](DataType.md#AtomicType) data types only.
 
-Vectorized Parquet Decoding uses [VectorizedParquetRecordReader](spark-sql-VectorizedParquetRecordReader.md) for vectorized decoding.
+Vectorized Parquet Decoding uses [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for vectorized decoding.
 
 ## <span id="spark.sql.parquet.enableVectorizedReader"> spark.sql.parquet.enableVectorizedReader Configuration Property
 

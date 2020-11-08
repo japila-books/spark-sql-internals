@@ -112,9 +112,6 @@ nav:
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
       - Transform: connector/Transform.md
-      - MemoryStreamTable: connector/MemoryStreamTable.md
-      - RateStreamTable: connector/RateStreamTable.md
-      - TextSocketTable: connector/TextSocketTable.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
@@ -347,8 +344,12 @@ nav:
         - JsonDataSource: spark-sql-JsonDataSource.md
       - ORC: OrcFileFormat.md
       - Parquet:
-        - ParquetFileFormat: ParquetFileFormat.md
-        - ParquetReadSupport: ParquetReadSupport.md
+        - ParquetTable: datasources/parquet/ParquetTable.md
+        - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
+        - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
+        - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
+        - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
+        - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
     - Hive Integration:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
@@ -759,10 +760,7 @@ nav:
     - DataSource V2: new-and-noteworthy/datasource-v2.md
     - spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
-      - spark-sql-vectorized-parquet-reader.md
-      - spark-sql-VectorizedParquetRecordReader.md
-      - spark-sql-VectorizedColumnReader.md
-      - spark-sql-SpecificParquetRecordReaderBase.md
+      - Vectorized Parquet Decoding: vectorized-parquet-reader.md
       - ColumnVectors:
         - ColumnVector: ColumnVector.md
         - WritableColumnVector: WritableColumnVector.md

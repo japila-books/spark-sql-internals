@@ -4,32 +4,36 @@
 
 ## Contract
 
-### fallbackFileFormat
+### <span id="fallbackFileFormat"> fallbackFileFormat
 
 ```scala
 fallbackFileFormat: Class[_ <: FileFormat]
 ```
 
-Used when...FIXME
+Fallback V1 [FileFormat](../FileFormat.md)
 
-### formatName
+Used when `FallBackFileSourceV2` extended resolution rule is executed (to resolve an `InsertIntoStatement` with a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) with a `FileTable`)
+
+### <span id="formatName"> formatName
 
 ```scala
 formatName: String
 ```
 
-Used when...FIXME
+Name of the file table (_format_)
 
-### inferSchema
+### <span id="inferSchema"> inferSchema
 
 ```scala
 inferSchema(
     files: Seq[FileStatus]): Option[StructType]
 ```
 
-Used when...FIXME
+Infers schema of the given `files` (as Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es)
 
-### supportsDataType
+Used when `FileTable` is requested for a [data schema](#dataSchema)
+
+### <span id="supportsDataType"> supportsDataType
 
 ```scala
 supportsDataType(
@@ -37,9 +41,11 @@ supportsDataType(
 ```
 
 `supportsDataType` indicates whether a given [DataType](../DataType.md) is supported in read/write path or not.
-All data types are supported by default.
 
-Used when...FIXME
+Default: All [DataType](../DataType.md)s are supported by default
+
+* `FileTable` is requested for a [schema](#schema)
+* _others_ (in [FileTables](#implementations))
 
 ## Implementations
 
@@ -47,7 +53,7 @@ Used when...FIXME
 * `CSVTable`
 * `JsonTable`
 * `OrcTable`
-* `ParquetTable`
+* [ParquetTable](../datasources/parquet/ParquetTable.md)
 * `TextTable`
 
 ## Creating Instance
@@ -55,31 +61,41 @@ Used when...FIXME
 `FileTable` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
-* <span id="options"> Case-Insensitive Map
+* <span id="options"> Options
 * <span id="paths"> Paths
 * <span id="userSpecifiedSchema"> Optional user-defined [schema](../StructType.md) (`Option[StructType]`)
 
 `FileTable` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileTables](#implementations).
 
-## capabilities
+## <span id="capabilities"> Table Capabilities
 
 ```scala
 capabilities: java.util.Set[TableCapability]
 ```
 
-`capabilities` is `BATCH_READ`, `BATCH_WRITE` and `TRUNCATE`.
+`capabilities` are the following [TableCapabilities](TableCapability.md):
+
+* [BATCH_READ](TableCapability.md#BATCH_READ)
+* [BATCH_WRITE](TableCapability.md#BATCH_WRITE)
+* [TRUNCATE](TableCapability.md#TRUNCATE)
 
 `capabilities` is part of the [Table](Table.md#capabilities) abstraction.
 
-## dataSchema
+## <span id="dataSchema"> dataSchema
 
 ```scala
 dataSchema: StructType
 ```
 
-`dataSchema`...FIXME
+`dataSchema` is a [schema](../StructType.md) of the data of the file-backed table
 
-`dataSchema` is used when...FIXME
+??? note "Lazy Value"
+    `dataSchema` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.
+
+`dataSchema` is used when:
+
+* `FileTable` is requested for a [schema](#schema)
+* _others_ (in [FileTables](#implementations))
 
 ## fileIndex
 
@@ -111,7 +127,7 @@ properties: util.Map[String, String]
 
 `properties` is part of the [Table](Table.md#properties) abstraction.
 
-## schema
+## <span id="schema"> schema
 
 ```scala
 schema: StructType

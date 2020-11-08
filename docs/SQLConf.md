@@ -363,7 +363,7 @@ Used when `InMemoryTableScanExec` physical operator is requested for [filtered c
 
 [spark.sql.parquet.int96TimestampConversion](configuration-properties.md#spark.sql.parquet.int96TimestampConversion)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="joinReorderEnabled"> joinReorderEnabled
 
@@ -461,7 +461,7 @@ Used when:
 
 * `InMemoryTableScanExec` is requested for the [vectorTypes](physical-operators/InMemoryTableScanExec.md#vectorTypes) and the [input RDD](physical-operators/InMemoryTableScanExec.md#inputRDD)
 * `OrcFileFormat` is requested to [build a data reader with partition column values appended](OrcFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetFileFormat` is requested for [vectorTypes](ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested for [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="optimizerExcludedRules"><span id="OPTIMIZER_EXCLUDED_RULES"> optimizerExcludedRules
 
@@ -492,25 +492,25 @@ Used when `CommandUtils` helper object is requested to [calculate the total size
 
 [spark.sql.parquet.filterPushdown](configuration-properties.md#spark.sql.parquet.filterPushdown)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="parquetFilterPushDownDate"> parquetFilterPushDownDate
 
 [spark.sql.parquet.filterPushdown.date](configuration-properties.md#spark.sql.parquet.filterPushdown.date)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="parquetRecordFilterEnabled"> parquetRecordFilterEnabled
 
 [spark.sql.parquet.recordLevelFilter.enabled](configuration-properties.md#spark.sql.parquet.recordLevelFilter.enabled)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="parquetVectorizedReaderBatchSize"> parquetVectorizedReaderBatchSize
 
 [spark.sql.parquet.columnarReaderBatchSize](configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize)
 
-Used when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](spark-sql-VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](spark-sql-vectorized-parquet-reader.md))
+Used when `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-parquet-reader.md))
 
 ## <span id="parquetVectorizedReaderEnabled"> parquetVectorizedReaderEnabled
 
@@ -519,7 +519,7 @@ Used when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat
 Used when:
 
 * `FileSourceScanExec` is requested for [needsUnsafeRowConversion](physical-operators/FileSourceScanExec.md#needsUnsafeRowConversion) flag
-* `ParquetFileFormat` is requested for [supportBatch](ParquetFileFormat.md#supportBatch) flag and [build a data reader with partition column values appended](ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested for [supportBatch](datasources/parquet/ParquetFileFormat.md#supportBatch) flag and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="partitionOverwriteMode"><span id="PARTITION_OVERWRITE_MODE"> partitionOverwriteMode
 
@@ -623,7 +623,7 @@ Used when [Aggregation](execution-planning-strategies/Aggregation.md) execution 
 Used in:
 
 * [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
-* [ParquetFileFormat](ParquetFileFormat.md) to control row batch reading
+* [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md) to control row batch reading
 
 ## <span id="wholeStageFallback"> wholeStageFallback
 
@@ -638,7 +638,7 @@ Used when [WholeStageCodegenExec](physical-operators/WholeStageCodegenExec.md) p
 Used in:
 
 * [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
-* [ParquetFileFormat](ParquetFileFormat.md) to control row batch reading
+* [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md) to control row batch reading
 
 ## <span id="wholeStageSplitConsumeFuncByOperator"> wholeStageSplitConsumeFuncByOperator
 

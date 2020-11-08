@@ -1,3 +1,0 @@
-# MemoryStreamTable
-
-`MemoryStreamTable` is...FIXME

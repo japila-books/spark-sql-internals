@@ -148,7 +148,7 @@ NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested
 supportsBatch: Boolean = true
 ----
 
-`supportsBatch` flag controls whether a [FileFormat](../FileFormat.md) supports [vectorized decoding](../spark-sql-vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
+`supportsBatch` flag controls whether a [FileFormat](../FileFormat.md) supports [vectorized decoding](../vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
 
 `supportsBatch` is used when:
 

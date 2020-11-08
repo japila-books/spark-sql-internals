@@ -85,7 +85,7 @@ Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numR
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
 
-* `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextBatch, nextBatch>> (when `VectorizedParquetRecordReader` is requested to <<spark-sql-VectorizedParquetRecordReader.md#nextKeyValue, nextKeyValue>>)
+* `VectorizedParquetRecordReader` is requested to [nextBatch](datasources/parquet/VectorizedParquetRecordReader.md#nextBatch) (when `VectorizedParquetRecordReader` is requested to [nextKeyValue](datasources/parquet/VectorizedParquetRecordReader.md#nextKeyValue))
 
 * `ColumnVectorUtils` is requested to `toBatch` (for testing only)
 
