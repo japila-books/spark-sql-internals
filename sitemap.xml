@@ -84,18 +84,6 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/MemoryStreamTable/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/RateStreamTable/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TextSocketTable/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogManager/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
@@ -908,11 +896,27 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ParquetFileFormat/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetTable/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ParquetReadSupport/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetFileFormat/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetReadSupport/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/VectorizedParquetRecordReader/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/VectorizedColumnReader/</loc>
+     <lastmod>2020-11-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/SpecificParquetRecordReaderBase/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2436,19 +2440,7 @@
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-vectorized-parquet-reader/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-VectorizedParquetRecordReader/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-VectorizedColumnReader/</loc>
-     <lastmod>2020-11-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SpecificParquetRecordReaderBase/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/vectorized-parquet-reader/</loc>
      <lastmod>2020-11-08</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
