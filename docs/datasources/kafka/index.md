@@ -1,29 +1,41 @@
 # Kafka Data Source
 
-Spark SQL supports <<reading, reading>> data from or <<writing, writing>> data to one or more topics in Apache Kafka.
+**Kafka Data Source** allows Spark SQL (and Spark Structured Streaming) to [load](#reading) data from and [write](#writing) data to topics in Apache Kafka.
+
+Kafka Data Source is available as [kafka](KafkaSourceProvider.md#shortName) format.
+
+The entry point is [KafkaSourceProvider](KafkaSourceProvider.md).
 
 !!! note
     **Apache Kafka** is a storage of records in a format-independent and fault-tolerant durable way.
 
     Learn more about Apache Kafka in the [official documentation](http://kafka.apache.org/documentation/) or in [Mastering Apache Kafka]({{ book.kafka }}).
 
-Kafka Data Source supports [options](options.md) to get better performance of structured queries that use it.
+Kafka Data Source supports [options](options.md) to fine-tune structured queries.
 
-## Reading Data from Kafka Topic(s)
+## Reading Data from Kafka Topics
 
-[DataFrameReader.format](../../DataFrameReader.md#format) method is used to specify Apache Kafka as the external data source to load data from.
+In order to load Kafka records use **kafka** as the input data source format.
 
-You use [kafka](KafkaSourceProvider.md#shortName) (or `org.apache.spark.sql.kafka010.KafkaSourceProvider`) as the input data source format.
-
-```text
-val kafka = spark.read.format("kafka").load
-
-// Alternatively
-val kafka = spark.read.format("org.apache.spark.sql.kafka010.KafkaSourceProvider").load
+```scala
+val records = spark.read.format("kafka").load
 ```
 
-These one-liners create a [DataFrame](../../spark-sql-DataFrame.md) that represents the distributed process of loading data from one or many Kafka topics (with additional properties).
+Alternatively, use `org.apache.spark.sql.kafka010.KafkaSourceProvider`.
 
-## Writing Data to Kafka Topic(s)
+```scala
+val records = spark
+  .read
+  .format("org.apache.spark.sql.kafka010.KafkaSourceProvider")
+  .load
+```
 
-As a Spark developer,...FIXME
+## Writing Data to Kafka Topics
+
+In order to save a `DataFrame` to Kafka topics use **kafka** as the output data source format.
+
+```text
+import org.apache.spark.sql.DataFrame
+val records: DataFrame = ...
+records.format("kafka").save
+```

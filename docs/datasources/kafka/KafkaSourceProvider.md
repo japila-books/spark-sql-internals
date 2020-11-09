@@ -9,7 +9,13 @@
 
     Learn more on [StreamSourceProvider]({{ book.structured_streaming }}/StreamSourceProvider) and [StreamSinkProvider]({{ book.structured_streaming }}/StreamSinkProvider) in [The Internals of Spark Structured Streaming]({{ book.structured_streaming }}) online book.
 
-## <span id="getTable"> getTable
+## <span id="DataSourceRegister"><span id="shortName"> DataSourceRegister
+
+`KafkaSourceProvider` is a [DataSourceRegister](../../DataSourceRegister.md) and registers itself as **kafka** format.
+
+`KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code]({{ spark.github }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
+
+## <span id="getTable"> KafkaTable
 
 ```scala
 getTable(
@@ -20,13 +26,7 @@ getTable(
 
 `getTable` creates a [KafkaTable](KafkaTable.md) with the `includeHeaders` flag based on [includeHeaders](options.md#includeHeaders) option.
 
-## <span id="DataSourceRegister"><span id="shortName"> DataSourceRegister
-
-`KafkaSourceProvider` is a [DataSourceRegister](../../DataSourceRegister.md) and registers itself as **kafka** format.
-
-`KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code]({{ spark.github }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
-
-## <span id="createRelation-RelationProvider"><span id="createRelation"> Creating BaseRelation (as RelationProvider)
+## <span id="createRelation-RelationProvider"><span id="createRelation"> Creating Relation for Reading (RelationProvider)
 
 ```scala
 createRelation(
@@ -50,34 +50,7 @@ createRelation(
 
 In the end, `createRelation` creates a [KafkaRelation](KafkaRelation.md) with the <<strategy, subscription strategy>> (in the given `parameters`), <<failOnDataLoss, failOnDataLoss>> option, and the starting and ending offsets.
 
-=== [[validateBatchOptions]] Validating Kafka Options (for Batch Queries) -- `validateBatchOptions` Internal Method
-
-[source, scala]
-----
-validateBatchOptions(caseInsensitiveParams: Map[String, String]): Unit
-----
-
-`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the [startingoffsets](options.md#startingoffsets) option in the input `caseInsensitiveParams` and with [EarliestOffsetRangeLimit](KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit) as the default `KafkaOffsetRangeLimit`.
-
-`validateBatchOptions` then matches the returned [KafkaOffsetRangeLimit](KafkaOffsetRangeLimit.md) as follows:
-
-* [EarliestOffsetRangeLimit](KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit) is acceptable and `validateBatchOptions` simply does nothing
-
-* [LatestOffsetRangeLimit](KafkaOffsetRangeLimit.md#LatestOffsetRangeLimit) is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
-
-    ```text
-    starting offset can't be latest for batch queries on Kafka
-    ```
-
-* [SpecificOffsetRangeLimit](KafkaOffsetRangeLimit.md#SpecificOffsetRangeLimit) is acceptable unless one of the offsets is [-1L](KafkaOffsetRangeLimit.md#LATEST) for which `validateBatchOptions` throws an `IllegalArgumentException`:
-
-    ```text
-    startingOffsets for [tp] can't be latest for batch queries on Kafka
-    ```
-
-`validateBatchOptions` is used when `KafkaSourceProvider` is requested to [create a BaseRelation](#createRelation-RelationProvider) (as a [RelationProvider](../../RelationProvider.md#createRelation)).
-
-## <span id="createRelation-CreatableRelationProvider"> Writing DataFrame to Kafka Topic (as CreatableRelationProvider)
+## <span id="createRelation-CreatableRelationProvider"> Creating Relation for Writing (CreatableRelationProvider)
 
 ```scala
 createRelation(
@@ -103,65 +76,158 @@ In the end, `createRelation` creates a fake [BaseRelation](../../spark-sql-BaseR
 Save mode [mode] not allowed for Kafka. Allowed save modes are [Append] and [ErrorIfExists] (default).
 ```
 
-## Fixed Schema
+## <span id="kafkaParamsForDriver"> Kafka Configuration Properties for Driver
 
-`KafkaSourceProvider` <<sourceSchema, uses a fixed schema>> (and makes sure that a user did not set a custom one).
-
-```text
-import org.apache.spark.sql.types.StructType
-val schema = new StructType().add($"id".int)
-scala> spark
-  .read
-  .format("kafka")
-  .option("subscribe", "topic1")
-  .option("kafka.bootstrap.servers", "localhost:9092")
-  .schema(schema) // <-- defining a custom schema is not supported
-  .load
-org.apache.spark.sql.AnalysisException: kafka does not allow user-specified schemas.;
-  at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:307)
-  at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:178)
-  at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:146)
-  ... 48 elided
+```scala
+kafkaParamsForDriver(
+  specifiedKafkaParams: Map[String, String]): ju.Map[String, Object]
 ```
 
-=== [[sourceSchema]] `sourceSchema` Method
+`kafkaParamsForDriver` is a utility to define required Kafka configuration parameters for the driver.
 
-[source, scala]
-----
-sourceSchema(
-  sqlContext: SQLContext,
-  schema: Option[StructType],
-  providerName: String,
-  parameters: Map[String, String]): (String, StructType)
-----
+`kafkaParamsForDriver` is used when:
 
-`sourceSchema`...FIXME
+* `KafkaBatch` is requested to [planInputPartitions](KafkaBatch.md#planInputPartitions)
+* `KafkaRelation` is requested to [buildScan](KafkaRelation.md#buildScan)
+* `KafkaSourceProvider` to `createSource` (for Spark Structured Streaming)
+* `KafkaScan` is requested to `toMicroBatchStream` and `toContinuousStream` (for Spark Structured Streaming)
 
-[source, scala]
-----
-val fromKafka = spark.read.format("kafka")...
-scala> fromKafka.printSchema
-root
- |-- key: binary (nullable = true)
- |-- value: binary (nullable = true)
- |-- topic: string (nullable = true)
- |-- partition: integer (nullable = true)
- |-- offset: long (nullable = true)
- |-- timestamp: timestamp (nullable = true)
- |-- timestampType: integer (nullable = true)
-----
+### <span id="auto.offset.reset"> auto.offset.reset
 
-NOTE: `sourceSchema` is part of Structured Streaming's `StreamSourceProvider` Contract.
+What to do when there is no initial offset in Kafka or if the current offset does not exist any more on the server (e.g. because that data has been deleted):
 
-=== [[getKafkaOffsetRangeLimit]] Getting Desired KafkaOffsetRangeLimit (for Offset Option) -- `getKafkaOffsetRangeLimit` Object Method
+* `earliest` - automatically reset the offset to the earliest offset
 
-[source, scala]
-----
+* `latest` - automatically reset the offset to the latest offset
+
+* `none` - throw an exception to the Kafka consumer if no previous offset is found for the consumer's group
+
+* _anything else_ - throw an exception to the Kafka consumer
+
+Value: `earliest`
+
+ConsumerConfig.AUTO_OFFSET_RESET_CONFIG
+
+### <span id="enable.auto.commit"> enable.auto.commit
+
+If `true` the Kafka consumer's offset will be periodically committed in the background
+
+Value: `false`
+
+ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG
+
+### <span id="key.deserializer"> key.deserializer
+
+Deserializer class for keys that implements the Kafka `Deserializer` interface.
+
+Value: [org.apache.kafka.common.deserialization.ByteArrayDeserializer]({{ kafka.api }})
+
+ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG
+
+### <span id="max.poll.records"> max.poll.records
+
+The maximum number of records returned in a single call to `Consumer.poll()`
+
+Value: `1`
+
+ConsumerConfig.MAX_POLL_RECORDS_CONFIG
+
+### <span id="receive.buffer.bytes"> receive.buffer.bytes
+
+Only set if not set already
+
+Value: `65536`
+
+ConsumerConfig.MAX_POLL_RECORDS_CONFIG
+
+### <span id="value.deserializer"> value.deserializer
+
+Deserializer class for values that implements the Kafka `Deserializer` interface.
+
+Value: [org.apache.kafka.common.serialization.ByteArrayDeserializer]({{ kafka.api }})
+
+ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG
+
+!!! tip
+    Enable `ALL` logging level for `org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater` logger to see updates of Kafka configuration parameters.
+
+    Add the following line to `conf/log4j.properties`:
+
+    ```
+    log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=ALL
+    ```
+
+    Refer to [Logging](../../spark-logging.md).
+
+## <span id="kafkaParamsForExecutors"> kafkaParamsForExecutors
+
+```scala
+kafkaParamsForExecutors(
+  specifiedKafkaParams: Map[String, String],
+  uniqueGroupId: String): ju.Map[String, Object]
+```
+
+`kafkaParamsForExecutors`...FIXME
+
+`kafkaParamsForExecutors` is used when:
+
+* `KafkaBatch` is requested to [planInputPartitions](KafkaBatch.md#planInputPartitions)
+* `KafkaRelation` is requested to [buildScan](KafkaRelation.md#buildScan)
+* `KafkaSourceProvider` to `createSource` (for Spark Structured Streaming)
+* `KafkaScan` is requested to `toMicroBatchStream` and `toContinuousStream` (for Spark Structured Streaming)
+
+## <span id="kafkaParamsForProducer"> kafkaParamsForProducer
+
+```scala
+kafkaParamsForProducer(
+  params: CaseInsensitiveMap[String]): ju.Map[String, Object]
+```
+
+`kafkaParamsForProducer`...FIXME
+
+`kafkaParamsForProducer` is used when:
+
+* KafkaSourceProvider is requested to [create a relation for writing](#createRelation-CreatableRelationProvider) (and `createSink` for Spark Structured Streaming)
+* `KafkaTable` is requested for a [WriteBuilder](KafkaTable.md#newWriteBuilder)
+
+## <span id="validateBatchOptions"> Validating Kafka Options for Batch Queries
+
+```scala
+validateBatchOptions(
+  params: CaseInsensitiveMap[String]): Unit
+```
+
+`validateBatchOptions` <<getKafkaOffsetRangeLimit, gets the desired KafkaOffsetRangeLimit>> for the [startingoffsets](options.md#startingoffsets) option in the input `caseInsensitiveParams` and with [EarliestOffsetRangeLimit](KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit) as the default `KafkaOffsetRangeLimit`.
+
+`validateBatchOptions` then matches the returned [KafkaOffsetRangeLimit](KafkaOffsetRangeLimit.md) as follows:
+
+* [EarliestOffsetRangeLimit](KafkaOffsetRangeLimit.md#EarliestOffsetRangeLimit) is acceptable and `validateBatchOptions` simply does nothing
+
+* [LatestOffsetRangeLimit](KafkaOffsetRangeLimit.md#LatestOffsetRangeLimit) is not acceptable and `validateBatchOptions` throws an `IllegalArgumentException`:
+
+    ```text
+    starting offset can't be latest for batch queries on Kafka
+    ```
+
+* [SpecificOffsetRangeLimit](KafkaOffsetRangeLimit.md#SpecificOffsetRangeLimit) is acceptable unless one of the offsets is [-1L](KafkaOffsetRangeLimit.md#LATEST) for which `validateBatchOptions` throws an `IllegalArgumentException`:
+
+    ```text
+    startingOffsets for [tp] can't be latest for batch queries on Kafka
+    ```
+
+`validateBatchOptions` is used when:
+
+* `KafkaSourceProvider` is requested for a [relation for reading](#createRelation-RelationProvider)
+* `KafkaScan` is requested for a [Batch](KafkaScan.md#toBatch)
+
+## <span id="getKafkaOffsetRangeLimit"> Getting Desired KafkaOffsetRangeLimit (for Offset Option)
+
+```scala
 getKafkaOffsetRangeLimit(
   params: Map[String, String],
   offsetOptionKey: String,
   defaultOffsets: KafkaOffsetRangeLimit): KafkaOffsetRangeLimit
-----
+```
 
 `getKafkaOffsetRangeLimit` tries to find the given `offsetOptionKey` in the input `params` and converts the value found to a [KafkaOffsetRangeLimit](KafkaOffsetRangeLimit.md) as follows:
 
@@ -175,16 +241,15 @@ When the input `offsetOptionKey` was not found, `getKafkaOffsetRangeLimit` retur
 
 `getKafkaOffsetRangeLimit` is used when:
 
-* `KafkaSourceProvider` is requested to [validate Kafka options (for batch queries)](#validateBatchOptions) and [create a BaseRelation](#createRelation-RelationProvider) (as a [RelationProvider](../../RelationProvider.md#createRelation))
+* `KafkaSourceProvider` is requested for a [relation for reading](#createRelation-RelationProvider) and `createSource` (Spark Structured Streaming)
+* `KafkaScan` is requested for a [Batch](KafkaScan.md#toBatch), `toMicroBatchStream` (Spark Structured Streaming) and `toContinuousStream` (Spark Structured Streaming)
 
-* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
+## <span id="strategy"> ConsumerStrategy
 
-=== [[strategy]] Getting ConsumerStrategy per Subscription Strategy Option -- `strategy` Internal Method
-
-[source, scala]
-----
-strategy(caseInsensitiveParams: Map[String, String]): ConsumerStrategy
-----
+```scala
+strategy(
+  params: CaseInsensitiveMap[String]): ConsumerStrategy
+```
 
 `strategy` finds one of the strategy options: [subscribe](options.md#subscribe), [subscribepattern](options.md#subscribepattern) and [assign](options.md#assign).
 
@@ -196,118 +261,17 @@ For [subscribepattern](options.md#subscribepattern), `strategy` returns a new [S
 
 `strategy` is used when:
 
-* `KafkaSourceProvider` is requested to [create a BaseRelation](#createRelation-RelationProvider) (as a [RelationProvider](../../RelationProvider.md#createRelation))
+* `KafkaSourceProvider` is requested for a [relation for reading](#createRelation-RelationProvider) and `createSource` (Spark Structured Streaming)
+* `KafkaScan` is requested for a [Batch](KafkaScan.md#toBatch), `toMicroBatchStream` (Spark Structured Streaming) and `toContinuousStream` (Spark Structured Streaming)
 
-* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
+## <span id="failOnDataLoss"><span id="FAIL_ON_DATA_LOSS_OPTION_KEY"> failOnDataLoss Option
 
-=== [[failOnDataLoss]] `failOnDataLoss` Internal Method
-
-[source, scala]
-----
-failOnDataLoss(caseInsensitiveParams: Map[String, String]): Boolean
-----
-
-`failOnDataLoss`...FIXME
-
-NOTE: `failOnDataLoss` is used when `KafkaSourceProvider` is requested to <<createRelation-RelationProvider, create a BaseRelation>> (and also in `createSource` and `createContinuousReader` for Spark Structured Streaming).
-
-=== [[kafkaParamsForDriver]] Setting Kafka Configuration Parameters for Driver -- `kafkaParamsForDriver` Object Method
-
-[source, scala]
-----
-kafkaParamsForDriver(specifiedKafkaParams: Map[String, String]): java.util.Map[String, Object]
-----
-
-`kafkaParamsForDriver` simply sets the <<kafkaParamsForDriver-Kafka-parameters, additional Kafka configuration parameters>> for the driver.
-
-[[kafkaParamsForDriver-Kafka-parameters]]
-.Driver's Kafka Configuration Parameters
-[cols="1m,1m,1m,2",options="header",width="100%"]
-|===
-| Name
-| Value
-| ConsumerConfig
-| Description
-
-| key.deserializer
-| org.apache.kafka.common.serialization.ByteArrayDeserializer
-| KEY_DESERIALIZER_CLASS_CONFIG
-| [[key.deserializer]] Deserializer class for keys that implements the Kafka `Deserializer` interface.
-
-| value.deserializer
-| org.apache.kafka.common.serialization.ByteArrayDeserializer
-| VALUE_DESERIALIZER_CLASS_CONFIG
-| [[value.deserializer]] Deserializer class for values that implements the Kafka `Deserializer` interface.
-
-| auto.offset.reset
-| earliest
-| AUTO_OFFSET_RESET_CONFIG
-a| [[auto.offset.reset]] What to do when there is no initial offset in Kafka or if the current offset does not exist any more on the server (e.g. because that data has been deleted):
-
-* `earliest` -- automatically reset the offset to the earliest offset
-
-* `latest` -- automatically reset the offset to the latest offset
-
-* `none` -- throw an exception to the Kafka consumer if no previous offset is found for the consumer's group
-
-* _anything else_ -- throw an exception to the Kafka consumer
-
-| enable.auto.commit
-| false
-| ENABLE_AUTO_COMMIT_CONFIG
-| [[enable.auto.commit]] If `true` the Kafka consumer's offset will be periodically committed in the background
-
-| max.poll.records
-| 1
-| MAX_POLL_RECORDS_CONFIG
-| [[max.poll.records]] The maximum number of records returned in a single call to `Consumer.poll()`
-
-| receive.buffer.bytes
-| 65536
-| MAX_POLL_RECORDS_CONFIG
-| [[receive.buffer.bytes]] Only set if not set already
-|===
-
-[[ConfigUpdater-logging]]
-[TIP]
-====
-Enable `DEBUG` logging level for `org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater` logger to see updates of Kafka configuration parameters.
-
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=DEBUG
+```scala
+failOnDataLoss(
+  params: CaseInsensitiveMap[String]): Boolean
 ```
 
-Refer to spark-logging.md[Logging].
-====
+`failOnDataLoss` is the value of `failOnDataLoss` key in the given case-insensitive parameters (_options_) if available or `true`.
 
-`kafkaParamsForDriver` is used when:
-
-* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../../spark-sql-TableScan.md))
-
-* (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
-
-=== [[kafkaParamsForExecutors]] `kafkaParamsForExecutors` Object Method
-
-[source, scala]
-----
-kafkaParamsForExecutors(
-  specifiedKafkaParams: Map[String, String],
-  uniqueGroupId: String): java.util.Map[String, Object]
-----
-
-`kafkaParamsForExecutors`...FIXME
-
-NOTE: `kafkaParamsForExecutors` is used when...FIXME
-
-=== [[kafkaParamsForProducer]] `kafkaParamsForProducer` Object Method
-
-[source, scala]
-----
-kafkaParamsForProducer(parameters: Map[String, String]): Map[String, String]
-----
-
-`kafkaParamsForProducer`...FIXME
-
-NOTE: `kafkaParamsForProducer` is used when...FIXME
+* `KafkaSourceProvider` is requested for a [relation for reading](#createRelation-RelationProvider) (and `createSource` for Spark Structured Streaming)
+* `KafkaScan` is requested for a [Batch](KafkaScan.md#toBatch) (and `toMicroBatchStream` and `toContinuousStream` for Spark Structured Streaming)

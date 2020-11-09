@@ -80,6 +80,9 @@ extra:
   scala:
     version: 2.12.2
     doc: https://www.scala-lang.org/api/2.12.2
+  kafka:
+    version: 2.4.1
+    doc: https://kafka.apache.org/docs/2.4.1/api
   book:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
@@ -305,11 +308,13 @@ nav:
         - PartitionedFile: PartitionedFile.md
         - RecordReaderIterator: RecordReaderIterator.md
       - Kafka:
-        - datasources/kafka/index.md
+        - Kafka Data Source: datasources/kafka/index.md
+        - Configuration Properties: datasources/kafka/configuration-properties.md
+        - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
         - KafkaTable: datasources/kafka/KafkaTable.md
         - Options: datasources/kafka/options.md
-        - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
         - KafkaScan: datasources/kafka/KafkaScan.md
+        - KafkaBatch: datasources/kafka/KafkaBatch.md
         - KafkaBatchWrite: datasources/kafka/KafkaBatchWrite.md
         - KafkaRelation: datasources/kafka/KafkaRelation.md
         - KafkaSourceRDD:
@@ -323,6 +328,7 @@ nav:
         - KafkaWriter: datasources/kafka/KafkaWriter.md
         - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
         - JsonUtils: datasources/kafka/JsonUtils.md
+        - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
       - Avro:
         - spark-sql-avro.md
         - spark-sql-AvroOptions.md
