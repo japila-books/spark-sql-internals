@@ -2,7 +2,7 @@
 
 The demo shows partition pruning optimization in Spark SQL for Hive partitioned tables in parquet format.
 
-NOTE: The demo is a follow-up to [Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)](demo-connecting-spark-sql-to-hive-metastore.md). Please finish it first before this demo.
+NOTE: The demo is a follow-up to [Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)](connecting-spark-sql-to-hive-metastore.md). Please finish it first before this demo.
 
 The demo features the following:
 

@@ -2,7 +2,7 @@
 
 `KafkaSourceProvider` is the entry point to the [kafka data source](index.md).
 
-`KafkaSourceProvider` is a [SimpleTableProvider](../../connector/SimpleTableProvider.md).
+`KafkaSourceProvider` is a [SimpleTableProvider](../../connector/SimpleTableProvider.md) (and does not support custom table schema and partitioning).
 
 !!! note
     `KafkaSourceProvider` is also a `StreamSourceProvider` and a `StreamSinkProvider` to be used in Spark Structured Streaming.

@@ -824,8 +824,8 @@ nav:
       - ArrowPythonRunner: pyspark/ArrowPythonRunner.md
       - PythonUDFRunner: pyspark/PythonUDFRunner.md
   - Demos:
-    - demo/demo-connecting-spark-sql-to-hive-metastore.md
-    - demo/demo-hive-partitioned-parquet-table-partition-pruning.md
+    - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
+    - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
   - Extras:
     - Spark SQL: spark-sql.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md

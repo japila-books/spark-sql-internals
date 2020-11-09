@@ -1,5 +1,3 @@
-title: Connecting Spark SQL to Hive Metastore
-
 # Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)
 
 :spark-version: 2.4.5
