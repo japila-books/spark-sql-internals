@@ -480,6 +480,10 @@
      <lastmod>2020-11-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/InsertIntoStatement/</loc>
+     <lastmod>2020-11-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/InsertIntoTable/</loc>
      <lastmod>2020-11-11</lastmod>
      <changefreq>daily</changefreq>
@@ -2085,6 +2089,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveInlineTables/</loc>
+     <lastmod>2020-11-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveInsertInto/</loc>
      <lastmod>2020-11-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
