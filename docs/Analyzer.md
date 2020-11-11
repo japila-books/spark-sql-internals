@@ -70,7 +70,7 @@ Rules:
 * ResolveTableValuedFunctions
 * ResolveNamespace
 * [ResolveCatalogs](logical-analysis-rules/ResolveCatalogs.md)
-* ResolveInsertInto
+* [ResolveInsertInto](logical-analysis-rules/ResolveInsertInto.md)
 * ResolveRelations
 * [ResolveTables](logical-analysis-rules/ResolveTables.md)
 * ResolveReferences

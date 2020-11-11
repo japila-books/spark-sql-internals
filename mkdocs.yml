@@ -223,6 +223,7 @@ nav:
         - logical-operators/InsertIntoDataSourceDirCommand.md
         - logical-operators/InsertIntoDir.md
         - logical-operators/InsertIntoHadoopFsRelationCommand.md
+        - InsertIntoStatement: logical-operators/InsertIntoStatement.md
         - InsertIntoTable: logical-operators/InsertIntoTable.md
         - logical-operators/Intersect.md
         - logical-operators/Join.md
@@ -668,6 +669,7 @@ nav:
       - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
       - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
       - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md
+      - ResolveInsertInto: logical-analysis-rules/ResolveInsertInto.md
       - ResolveJoinStrategyHints: logical-analysis-rules/ResolveJoinStrategyHints.md
       - ResolveMissingReferences: logical-analysis-rules/ResolveMissingReferences.md
       - ResolveOrdinalInOrderByAndGroupBy: logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md

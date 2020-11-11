@@ -1,4 +1,4 @@
-# Rule -- Named Transformation of TreeNodes
+# Rule &mdash; Named Transformation of TreeNodes
 
 `Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_ or _transform_) a [TreeNode](TreeNode.md) to produce a new `TreeNode`.
 

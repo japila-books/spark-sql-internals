@@ -39,7 +39,7 @@ Default: (empty)
 
 Used when:
 
-* `ResolveInsertInto` logical analysis rule is executed
+* [ResolveInsertInto](../logical-analysis-rules/ResolveInsertInto.md) logical analysis rule is executed
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [save](../DataFrameWriter.md#save)
 * [DescribeTableExec](../physical-operators/DescribeTableExec.md) physical operator is executed
 

@@ -362,13 +362,14 @@ Adds a [Hint](../logical-operators/Hint.md) for `/*+ hint */` in `SELECT` querie
 /*+ BROADCAST (table) */
 ```
 
-### withInsertInto
+### <span id="withInsertInto"> withInsertInto
 
-Adds one of the following logical operators:
+Creates one of the following logical operators:
 
-* [InsertIntoTable](../logical-operators/InsertIntoTable.md) for [visitSingleInsertQuery](#visitSingleInsertQuery) or [visitMultiInsertQuery](#visitMultiInsertQuery)
+* [InsertIntoStatement](../logical-operators/InsertIntoStatement.md)
+* [InsertIntoDir](../logical-operators/InsertIntoDir.md)
 
-* [InsertIntoDir](../logical-operators/InsertIntoDir.md) for...FIXME
+`withInsertInto` is used for [visitMultiInsertQuery](#visitMultiInsertQuery) and [visitSingleInsertQuery](#visitSingleInsertQuery)
 
 ### withJoinRelations
 

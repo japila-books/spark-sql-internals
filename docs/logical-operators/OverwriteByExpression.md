@@ -53,4 +53,7 @@ byPosition(
 
 `byPosition` creates a [OverwriteByExpression](#creating-instance) with [isByName](#isByName) disabled (`false`).
 
-`byPosition` is used...FIXME
+`byPosition` is used:
+
+* [ResolveInsertInto](../logical-analysis-rules/ResolveInsertInto.md) logical resolution rule is executed
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto)
