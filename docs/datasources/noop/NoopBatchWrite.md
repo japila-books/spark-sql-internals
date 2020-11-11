@@ -1,0 +1,3 @@
+# NoopBatchWrite
+
+`NoopBatchWrite` is...FIXME

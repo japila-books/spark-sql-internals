@@ -1,0 +1,3 @@
+# NoopStreamingWrite
+
+`NoopStreamingWrite` is...FIXME

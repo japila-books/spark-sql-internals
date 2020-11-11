@@ -9,7 +9,7 @@
 
 ## Contract
 
-### capabilities
+### <span id="capabilities"> Table Capabilities
 
 ```java
 Set<TableCapability> capabilities()
@@ -83,7 +83,7 @@ Used when:
 * [KafkaTable](../datasources/kafka/KafkaTable.md)
 * MemorySink (Spark Structured Streaming)
 * MemoryStreamTable (Spark Structured Streaming)
-* [NoopTable](NoopTable.md)
+* [NoopTable](../datasources/noop/NoopTable.md)
 * RateStreamTable (Spark Structured Streaming)
 * Sink (Spark Structured Streaming)
 * [StagedTable](StagedTable.md)

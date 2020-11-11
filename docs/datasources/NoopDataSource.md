@@ -1,3 +1,0 @@
-# NoopDataSource
-
-`NoopDataSource` is...FIXME

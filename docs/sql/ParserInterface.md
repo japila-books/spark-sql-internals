@@ -90,7 +90,7 @@ Used when:
 
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable)
 
-* [DataFrameWriterV2](../new-in-300/DataFrameWriterV2.md) is created (and requested for [tableName](../new-in-300/DataFrameWriterV2.md#tableName))
+* [DataFrameWriterV2](../DataFrameWriterV2.md) is created (and requested for [tableName](../DataFrameWriterV2.md#tableName))
 
 * `SparkSession` is requested to [table](../SparkSession.md#table)
 

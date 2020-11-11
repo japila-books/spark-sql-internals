@@ -100,6 +100,7 @@ nav:
       - TableProvider: connector/TableProvider.md
       - WriteBuilder: connector/WriteBuilder.md
       - SupportsTruncate: connector/SupportsTruncate.md
+      - SupportsOverwrite: connector/SupportsOverwrite.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
@@ -107,7 +108,6 @@ nav:
       - PartitionReader: connector/PartitionReader.md
       - InputPartition: connector/InputPartition.md
       - FileTable: connector/FileTable.md
-      - NoopTable: connector/NoopTable.md
       - StagedTable: connector/StagedTable.md
       - SupportsRead: connector/SupportsRead.md
       - ScanBuilder: connector/ScanBuilder.md
@@ -160,12 +160,14 @@ nav:
       - Command: logical-operators/Command.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
       - LeafNode: logical-operators/LeafNode.md
+      - NamedRelation: logical-operators/NamedRelation.md
       - OrderPreservingUnaryNode: logical-operators/OrderPreservingUnaryNode.md
       - ParsedStatement: logical-operators/ParsedStatement.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
+      - V2WriteCommand: logical-operators/V2WriteCommand.md
       - Statistics and Hints:
         - Statistics: logical-operators/Statistics.md
         - HintInfo: logical-operators/HintInfo.md
@@ -292,6 +294,12 @@ nav:
         - spark-sql-CatalystConf.md
       - UDFRegistration.md
     - Data Sources:
+      - Noop:
+        - NoopDataSource: datasources/noop/NoopDataSource.md
+        - NoopTable: datasources/noop/NoopTable.md
+        - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
+        - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
+        - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
       - Files:
         - FileFormat: FileFormat.md
         - TextFileFormat: TextFileFormat.md
@@ -541,6 +549,7 @@ nav:
       - QueryStageExec: physical-operators/QueryStageExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
+      - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - Projection:
         - physical-operators/Projection.md
         - physical-operators/UnsafeProjection.md
@@ -568,6 +577,7 @@ nav:
         - LongHashedRelation: physical-operators/LongHashedRelation.md
         - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - HashJoin: physical-operators/HashJoin.md
+      - BatchWriteHelper: physical-operators/BatchWriteHelper.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AlterTableExec: physical-operators/AlterTableExec.md
@@ -610,6 +620,7 @@ nav:
         - physical-operators/MapElementsExec.md
         - physical-operators/ObjectHashAggregateExec.md
         - physical-operators/ObjectProducerExec.md
+        - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
         - physical-operators/ProjectExec.md
         - physical-operators/RangeExec.md
         - physical-operators/RDDScanExec.md
@@ -803,9 +814,6 @@ nav:
     - FileDataSourceV2: FileDataSourceV2.md
     - Block: Block.md
     - FileScan: FileScan.md
-    - DataFrameWriterV2: new-in-300/DataFrameWriterV2.md
-    - CreateTableWriter: new-in-300/CreateTableWriter.md
-    - WriteConfigMethods: new-in-300/WriteConfigMethods.md
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
   - PySpark:
@@ -847,6 +855,9 @@ nav:
         - DataSource API: spark-sql-datasource-api.md
         - DataFrameReader: DataFrameReader.md
         - DataFrameWriter: DataFrameWriter.md
+        - DataFrameWriterV2: DataFrameWriterV2.md
+        - CreateTableWriter: CreateTableWriter.md
+        - WriteConfigMethods: WriteConfigMethods.md
       - Dataset API:
         - spark-sql-dataset-operators.md
         - spark-sql-Dataset-typed-transformations.md
