@@ -1760,6 +1760,10 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AppendDataExec/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AlterTableExec/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
@@ -1921,6 +1925,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExec/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwritePartitionsDynamicExec/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
