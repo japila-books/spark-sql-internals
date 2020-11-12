@@ -924,31 +924,31 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-jdbc/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JDBCOptions/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCOptions/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JdbcRelationProvider/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JdbcRelationProvider/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JDBCRelation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCRelation/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JDBCRDD/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCRDD/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JdbcDialect/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JdbcDialect/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JdbcUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JdbcUtils/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1208,7 +1208,7 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-InsertableRelation/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InsertableRelation/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1788,6 +1788,10 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AppendDataExecV1/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AlterTableExec/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
@@ -1949,6 +1953,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExec/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExecV1/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
