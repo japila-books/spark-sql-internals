@@ -98,20 +98,20 @@ nav:
       - Table: connector/Table.md
       - TableCapability: connector/TableCapability.md
       - TableProvider: connector/TableProvider.md
-      - WriteBuilder: connector/WriteBuilder.md
-      - SupportsTruncate: connector/SupportsTruncate.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
+      - SupportsRead: connector/SupportsRead.md
+      - SupportsReportStatistics: connector/SupportsReportStatistics.md
+      - SupportsTruncate: connector/SupportsTruncate.md
+      - SupportsWrite: connector/SupportsWrite.md
+      - ScanBuilder: connector/ScanBuilder.md
+      - WriteBuilder: connector/WriteBuilder.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
-      - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionReader: connector/PartitionReader.md
       - InputPartition: connector/InputPartition.md
       - FileTable: connector/FileTable.md
       - StagedTable: connector/StagedTable.md
-      - SupportsRead: connector/SupportsRead.md
-      - ScanBuilder: connector/ScanBuilder.md
-      - SupportsWrite: connector/SupportsWrite.md
       - V1Table: connector/V1Table.md
       - TableHelper: connector/TableHelper.md
       - SessionConfigSupport: connector/SessionConfigSupport.md
@@ -296,6 +296,7 @@ nav:
       - UDFRegistration.md
     - Data Sources:
       - Noop:
+        - Noop Data Source: datasources/noop/index.md
         - NoopDataSource: datasources/noop/NoopDataSource.md
         - NoopTable: datasources/noop/NoopTable.md
         - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
@@ -551,6 +552,7 @@ nav:
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
+      - V1FallbackWriters: physical-operators/V1FallbackWriters.md
       - Projection:
         - physical-operators/Projection.md
         - physical-operators/UnsafeProjection.md
@@ -578,6 +580,7 @@ nav:
         - LongHashedRelation: physical-operators/LongHashedRelation.md
         - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - HashJoin: physical-operators/HashJoin.md
+      - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md

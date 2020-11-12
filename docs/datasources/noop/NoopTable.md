@@ -1,6 +1,6 @@
 # NoopTable
 
-`NoopTable` is a [Table](../../connector/Table.md) to [write data to](../../connector/SupportsWrite.md).
+`NoopTable` is a [Table](../../connector/Table.md) that supports [write](../../connector/SupportsWrite.md) in [noop](index.md) data source.
 
 ## <span id="name"> Name
 

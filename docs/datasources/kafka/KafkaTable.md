@@ -1,6 +1,6 @@
 # KafkaTable
 
-`KafkaTable` is a [Table](../../connector/Table.md) that supports [read](../../connector/SupportsRead.md) and [write](../../connector/SupportsWrite.md).
+`KafkaTable` is a [Table](../../connector/Table.md) that supports [read](../../connector/SupportsRead.md) and [write](../../connector/SupportsWrite.md) in [kafka](index.md) data source.
 
 ## Name
 
