@@ -18,7 +18,7 @@
 | <<CreateDataSourceTableAsSelectCommand.md#, CreateDataSourceTableAsSelectCommand>>
 | [[CreateTable-query]]
 
-| <<InsertIntoTable.md#, InsertIntoTable>> with <<spark-sql-InsertableRelation.md#, InsertableRelation>>
+| <<InsertIntoTable.md#, InsertIntoTable>> with [InsertableRelation](../InsertableRelation.md)
 | <<InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
 | [[InsertIntoTable-InsertableRelation]]
 

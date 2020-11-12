@@ -55,7 +55,7 @@ NOTE: It is recommended that custom data sources (outside Spark SQL) should leav
 | [HadoopFsRelation](HadoopFsRelation.md)
 | [[HadoopFsRelation]]
 
-| [JDBCRelation](spark-sql-JDBCRelation.md)
+| [JDBCRelation](datasources/jdbc/JDBCRelation.md)
 | [[JDBCRelation]]
 
 | [KafkaRelation](datasources/kafka/KafkaRelation.md)

@@ -510,13 +510,13 @@ jdbc(
   connectionProperties: Properties): DataFrame
 ----
 
-`jdbc` loads data from an external table using the <<spark-sql-jdbc.md#, JDBC data source>>.
+`jdbc` loads data from an external table using the [JDBC](datasources/jdbc/index.md) data source.
 
 Internally, `jdbc` creates a spark-sql-JDBCOptions.md#creating-instance[JDBCOptions] from the input `url`, `table` and `extraOptions` with `connectionProperties`.
 
 `jdbc` then creates one `JDBCPartition` per `predicates`.
 
-In the end, `jdbc` requests the <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame] for a spark-sql-JDBCRelation.md[JDBCRelation] (with `JDBCPartitions` and `JDBCOptions` created earlier).
+In the end, `jdbc` requests the <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame] for a [JDBCRelation](datasources/jdbc/JDBCRelation.md) (with `JDBCPartitions` and `JDBCOptions` created earlier).
 
 [NOTE]
 ====

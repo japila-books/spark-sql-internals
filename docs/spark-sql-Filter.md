@@ -4,9 +4,9 @@
 
 `Filter` is used when:
 
-* (Data Source API V1) `BaseRelation` is requested for spark-sql-BaseRelation.md#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. spark-sql-JDBCRelation.md#unhandledFilters[JDBCRelation])
+* (Data Source API V1) `BaseRelation` is requested for spark-sql-BaseRelation.md#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#unhandledFilters))
 
-* (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. spark-sql-JDBCRelation.md#buildScan[JDBCRelation])
+* (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
 
 * `FileFormat` is requested to [buildReader](FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReader), [CSVFileFormat](spark-sql-CSVFileFormat.md#buildReader), [JsonFileFormat](spark-sql-JsonFileFormat.md#buildReader), [TextFileFormat](TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
 
@@ -18,7 +18,7 @@
 
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 
-* `JDBCRDD` is spark-sql-JDBCRDD.md#filters[created] and requested to spark-sql-JDBCRDD.md#scanTable[scanTable]
+* `JDBCRDD` is [created](datasources/jdbc/JDBCRDD.md#filters) and requested to [scanTable](datasources/jdbc/JDBCRDD.md#scanTable)
 
 * (DataSource V2) `SupportsPushDownFilters` is requested to spark-sql-SupportsPushDownFilters.md#pushFilters[pushFilters] and for spark-sql-SupportsPushDownFilters.md#pushedFilters[pushedFilters]
 

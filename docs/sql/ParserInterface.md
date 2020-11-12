@@ -154,7 +154,7 @@ Used when:
 
 * `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../StructType.md#fromDDL)
 
-* `JdbcUtils` utility is requested to [parseUserSpecifiedCreateTableColumnTypes](../spark-sql-JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes) and [getCustomSchema](../spark-sql-JdbcUtils.md#getCustomSchema)
+* `JdbcUtils` utility is requested to [parseUserSpecifiedCreateTableColumnTypes](../datasources/jdbc/JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes) and [getCustomSchema](../datasources/jdbc/JdbcUtils.md#getCustomSchema)
 
 ## Extensions
 

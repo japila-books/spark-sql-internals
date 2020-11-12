@@ -1,13 +1,10 @@
-title: InsertIntoDataSourceCommand
-
 # InsertIntoDataSourceCommand Logical Command
 
-`InsertIntoDataSourceCommand` is a <<RunnableCommand.md#, RunnableCommand>> that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
+`InsertIntoDataSourceCommand` is a [RunnableCommand](RunnableCommand.md) that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).
 
-`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution is executed (and [resolves](../logical-analysis-rules/DataSourceAnalysis.md#InsertIntoTable-InsertableRelation) an <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator with a <<LogicalRelation.md#, LogicalRelation>> on an <<spark-sql-InsertableRelation.md#, InsertableRelation>>).
+`InsertIntoDataSourceCommand` is <<creating-instance, created>> exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution is executed (and [resolves](../logical-analysis-rules/DataSourceAnalysis.md#InsertIntoTable-InsertableRelation) an <<InsertIntoTable.md#, InsertIntoTable>> unary logical operator with a <<LogicalRelation.md#, LogicalRelation>> on an [InsertableRelation](../InsertableRelation.md)).
 
-[source, plaintext]
-----
+```text
 sql("DROP TABLE IF EXISTS t2")
 sql("CREATE TABLE t2(id long)")
 
@@ -26,13 +23,12 @@ scala> println(analyzedPlan.numberedTreeString)
 00 InsertIntoHiveTable `default`.`t2`, org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe, false, false, [id#6L]
 01 +- Project [id#6L]
 02    +- Range (0, 1, step=1, splits=None)
-----
+```
 
 [[innerChildren]]
 `InsertIntoDataSourceCommand` returns the <<query, logical query plan>> when requested for the [inner nodes](../catalyst/TreeNode.md#innerChildren) (that should be shown as an inner nested tree of this node).
 
-[source, plaintext]
-----
+```text
 val query = "SELECT * FROM RANGE(1)"
 val sqlText = "INSERT INTO TABLE t2 " + query
 val plan = spark.sessionState.sqlParser.parsePlan(sqlText)
@@ -40,9 +36,9 @@ scala> println(plan.numberedTreeString)
 00 'InsertIntoTable 'UnresolvedRelation `t2`, false, false
 01 +- 'Project [*]
 02    +- 'UnresolvedTableValuedFunction RANGE, [1]
-----
+```
 
-=== [[creating-instance]] Creating InsertIntoDataSourceCommand Instance
+## Creating Instance
 
 `InsertIntoDataSourceCommand` takes the following to be created:
 
@@ -58,9 +54,9 @@ run(
   session: SparkSession): Seq[Row]
 ----
 
-NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+`run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
-`run` takes the <<spark-sql-InsertableRelation.md#, InsertableRelation>> (that is the <<LogicalRelation.md#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
+`run` takes the [InsertableRelation](../InsertableRelation.md) (that is the <<LogicalRelation.md#relation, relation>> of the <<logicalRelation, LogicalRelation>>).
 
 `run` then <<Dataset.md#ofRows, creates a DataFrame>> for the <<query, logical query plan>> and the input `SparkSession`.
 
@@ -68,7 +64,7 @@ NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to e
 
 With the RDD and the output schema, `run` creates <<SparkSession.md#internalCreateDataFrame, another DataFrame>> that is the `RDD[InternalRow]` with the schema applied.
 
-`run` requests the `InsertableRelation` to <<spark-sql-InsertableRelation.md#insert, insert or overwrite data>>.
+`run` requests the `InsertableRelation` to [insert or overwrite data](../InsertableRelation.md#insert).
 
 In the end, since the data in the `InsertableRelation` has changed, `run` requests the `CacheManager` to [recacheByPlan](../CacheManager.md#recacheByPlan) with the <<logicalRelation, LogicalRelation>>.
 

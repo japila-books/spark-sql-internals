@@ -43,8 +43,8 @@ NOTE: It is a common pattern while developing a custom data source to use <<crea
 | RelationProvider
 | Description
 
-| [JdbcRelationProvider](spark-sql-JdbcRelationProvider.md)
-| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
+| [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
+| [[JdbcRelationProvider]] Data source provider for [JDBC](datasources/jdbc/index.md) data source
 
 | [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
 | [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)

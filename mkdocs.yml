@@ -351,13 +351,13 @@ nav:
         - spark-sql-Expression-CatalystDataToAvro.md
         - spark-sql-Expression-AvroDataToCatalyst.md
       - JDBC:
-        - spark-sql-jdbc.md
-        - spark-sql-JDBCOptions.md
-        - spark-sql-JdbcRelationProvider.md
-        - spark-sql-JDBCRelation.md
-        - spark-sql-JDBCRDD.md
-        - spark-sql-JdbcDialect.md
-        - spark-sql-JdbcUtils.md
+        - JDBC Data Source: datasources/jdbc/index.md
+        - JDBCOptions: datasources/jdbc/JDBCOptions.md
+        - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
+        - JDBCRelation: datasources/jdbc/JDBCRelation.md
+        - JDBCRDD: datasources/jdbc/JDBCRDD.md
+        - JdbcDialect: datasources/jdbc/JdbcDialect.md
+        - JdbcUtils: datasources/jdbc/JdbcUtils.md
       - Console:
         - spark-sql-console.md
         - spark-sql-ConsoleSinkProvider.md
@@ -435,7 +435,7 @@ nav:
           - spark-sql-BaseRelation.md
           - spark-sql-FileRelation.md
           - spark-sql-CatalystScan.md
-          - spark-sql-InsertableRelation.md
+          - InsertableRelation: InsertableRelation.md
           - spark-sql-PrunedFilteredScan.md
           - spark-sql-PrunedScan.md
           - spark-sql-TableScan.md
@@ -591,6 +591,7 @@ nav:
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AppendDataExec: physical-operators/AppendDataExec.md
+        - AppendDataExecV1: physical-operators/AppendDataExecV1.md
         - AlterTableExec: physical-operators/AlterTableExec.md
         - AtomicCreateTableAsSelectExec: physical-operators/AtomicCreateTableAsSelectExec.md
         - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
@@ -632,6 +633,7 @@ nav:
         - physical-operators/ObjectHashAggregateExec.md
         - physical-operators/ObjectProducerExec.md
         - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+        - OverwriteByExpressionExecV1: physical-operators/OverwriteByExpressionExecV1.md
         - OverwritePartitionsDynamicExec: physical-operators/OverwritePartitionsDynamicExec.md
         - physical-operators/ProjectExec.md
         - physical-operators/RangeExec.md

@@ -18,7 +18,7 @@
 | LogicalRelation.md[LogicalRelation] with spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] relation
 | [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
-Matches spark-sql-JDBCRelation.md[JDBCRelation] exclusively
+Matches [JDBCRelation](../datasources/jdbc/JDBCRelation.md) exclusively
 
 | LogicalRelation.md[LogicalRelation] with a spark-sql-PrunedScan.md[PrunedScan] relation
 | [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).

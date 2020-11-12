@@ -37,8 +37,8 @@ Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSou
 | [ConsoleSinkProvider](spark-sql-ConsoleSinkProvider.md)
 | [[ConsoleSinkProvider]] Data source provider for <<spark-sql-console.md#, Console data source>>
 
-| [JdbcRelationProvider](spark-sql-JdbcRelationProvider.md)
-| [[JdbcRelationProvider]] Data source provider for <<spark-sql-jdbc.md#, JDBC data source>>
+| [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
+| [[JdbcRelationProvider]] Data source provider for [JDBC data source](datasources/jdbc/index.md)
 
 | [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
 | [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)

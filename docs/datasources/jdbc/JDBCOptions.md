@@ -1,6 +1,6 @@
 # JDBCOptions
 
-`JDBCOptions` is the options of the [JDBC data source](spark-sql-jdbc.md).
+`JDBCOptions` is the options of the [JDBC](index.md) data source.
 
 ## Options
 
@@ -18,25 +18,25 @@
 
 The minimum value is `1`
 
-Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#saveTable, saveTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#saveTable, saveTable>>.
 
 ! createTableColumnTypes
 !
 ! [[createTableColumnTypes]]
 
-Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#createTable, createTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#createTable, createTable>>.
 
 ! `createTableOptions`
 ! Empty string
 ! [[createTableOptions]]
 
-Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#createTable, createTable>>.
+Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](JdbcRelationProvider.md#createRelation-CreatableRelationProvider) through `JdbcUtils` helper object and its <<spark-sql-JdbcUtils.md#createTable, createTable>>.
 
 ! `customSchema`
 ! (undefined)
-a! [[customSchema]] Specifies the custom data types of the read schema (that is used at [load time](DataFrameReader.md#jdbc))
+a! [[customSchema]] Specifies the custom data types of the read schema (that is used at [load time](../../DataFrameReader.md#jdbc))
 
-`customSchema` is a comma-separated list of field definitions with column names and their [DataType](DataType.md)s in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
+`customSchema` is a comma-separated list of field definitions with column names and their [DataType](../../DataType.md)s in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
 
 `customSchema` defines the data types of the columns that will override the data types inferred from the table schema and follows the following pattern:
 
@@ -57,7 +57,7 @@ dataType
     ;
 ```
 
-Used exclusively when `JDBCRelation` is requested for the <<spark-sql-JDBCRelation.md#schema, schema>>.
+Used exclusively when `JDBCRelation` is requested for the <<datasources/jdbc/JDBCRelation.md#schema, schema>>.
 
 ! `dbtable`
 !
@@ -65,17 +65,17 @@ a! [[dbtable]] (*required*)
 
 Used when:
 
-* `JDBCRDD` is requested to <<spark-sql-JDBCRDD.md#resolveTable, resolveTable>> (when `JDBCRelation` is requested for the <<spark-sql-JDBCRelation.md#schema, schema>>) and <<spark-sql-JDBCRelation.md#compute, compute a partition>>
+* `JDBCRDD` is requested to [resolveTable](JDBCRDD.md#resolveTable) (when `JDBCRelation` is requested for the <<datasources/jdbc/JDBCRelation.md#schema, schema>>) and <<datasources/jdbc/JDBCRelation.md#compute, compute a partition>>
 
-* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.md#insert, insert or overwrite data>> and for the <<spark-sql-JDBCRelation.md#toString, human-friendly text representation>>
+* `JDBCRelation` is requested to <<datasources/jdbc/JDBCRelation.md#insert, insert or overwrite data>> and for the <<datasources/jdbc/JDBCRelation.md#toString, human-friendly text representation>>
 
-* `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
+* `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
 
 * `JdbcUtils` is requested to <<spark-sql-JdbcUtils.md#tableExists, tableExists>>, <<spark-sql-JdbcUtils.md#truncateTable, truncateTable>>, <<spark-sql-JdbcUtils.md#getSchemaOption, getSchemaOption>>, <<spark-sql-JdbcUtils.md#saveTable, saveTable>> and <<spark-sql-JdbcUtils.md#createTable, createTable>>
 
 * `JDBCOptions` is <<creating-instance, created>> (with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
 
-* `DataFrameReader` is requested to [load data from external table using JDBC data source](DataFrameReader.md#jdbc) (using `DataFrameReader.jdbc` method with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
+* `DataFrameReader` is requested to [load data from external table using JDBC data source](../../DataFrameReader.md#jdbc) (using `DataFrameReader.jdbc` method with the input parameters for the <<url, url>> and <<dbtable, dbtable>> options)
 
 ! `driver`
 !
@@ -93,7 +93,7 @@ After the JDBC driver class was registered, the driver class is used exclusively
 
 The minimum value is `0` (which tells the JDBC driver to do the estimates)
 
-Used exclusively when `JDBCRDD` is requested to <<spark-sql-JDBCRDD.md#compute, compute a partition>>.
+Used exclusively when `JDBCRDD` is requested to [compute a partition](JDBCRDD.md#compute).
 
 ! `isolationLevel`
 ! `READ_UNCOMMITTED`
@@ -111,7 +111,7 @@ Used exclusively when `JdbcUtils` is requested to <<spark-sql-JdbcUtils.md#saveT
 !
 ! [[lowerBound]] Lower bound of partition column
 
-Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider) for reading
+Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](JdbcRelationProvider.md#createRelation-RelationProvider) for reading
 
 ! `numPartitions`
 !
@@ -119,7 +119,7 @@ a! [[numPartitions]] Number of partitions to use for loading or saving data
 
 Used when:
 
-* `JdbcRelationProvider` is requested to [loading data from a table using JDBC](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider)
+* `JdbcRelationProvider` is requested to [loading data from a table using JDBC](JdbcRelationProvider.md#createRelation-RelationProvider)
 
 * `JdbcUtils` is requested to <<spark-sql-JdbcUtils.md#saveTable, saveTable>>
 
@@ -127,7 +127,7 @@ Used when:
 !
 ! [[partitionColumn]] Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
 
-Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider) for reading (with proper `JDBCPartitions` with `WHERE` clause)
+Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](JdbcRelationProvider.md#createRelation-RelationProvider) for reading (with proper `JDBCPartitions` with `WHERE` clause)
 
 When defined, the <<lowerBound, lowerBound>>, <<upperBound, upperBound>> and <<numPartitions, numPartitions>> options are also required.
 
@@ -137,19 +137,19 @@ When undefined, <<lowerBound, lowerBound>> and <<upperBound, upperBound>> have t
 ! `false`
 ! [[truncate]][[isTruncate]] (used only for writing) Enables table truncation
 
-Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
+Used exclusively when `JdbcRelationProvider` is requested to [write the rows of a structured query (a DataFrame) to a table](JdbcRelationProvider.md#createRelation-CreatableRelationProvider)
 
 ! `sessionInitStatement`
 !
 ! [[sessionInitStatement]] A generic SQL statement (or PL/SQL block) executed before reading a table/query
 
-Used exclusively when `JDBCRDD` is requested to [compute a partition](spark-sql-JDBCRDD.md#compute).
+Used exclusively when `JDBCRDD` is requested to [compute a partition](JDBCRDD.md#compute).
 
 ! `upperBound`
 !
 ! [[upperBound]] Upper bound of the partition column
 
-Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider) for reading
+Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](JdbcRelationProvider.md#createRelation-RelationProvider) for reading
 
 ! `url`
 !
@@ -160,9 +160,9 @@ NOTE: The <<options, options>> are case-insensitive.
 
 `JDBCOptions` is <<creating-instance, created>> when:
 
-* `DataFrameReader` is requested to [load data from an external table using JDBC](DataFrameReader.md#jdbc) (and create a `DataFrame` to represent the process of loading the data)
+* `DataFrameReader` is requested to [load data from an external table using JDBC](../../DataFrameReader.md#jdbc) (and create a `DataFrame` to represent the process of loading the data)
 
-* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a [RelationProvider](spark-sql-JdbcRelationProvider.md#createRelation-RelationProvider) for loading and a [CreatableRelationProvider](spark-sql-JdbcRelationProvider.md#createRelation-CreatableRelationProvider) for writing)
+* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a [RelationProvider](JdbcRelationProvider.md#createRelation-RelationProvider) for loading and a [CreatableRelationProvider](JdbcRelationProvider.md#createRelation-CreatableRelationProvider) for writing)
 
 ## Creating Instance
 
@@ -183,14 +183,11 @@ asProperties: Properties
 
 `asProperties`...FIXME
 
-[NOTE]
-====
 `asProperties` is used when:
 
-* `JDBCRDD` is requested to spark-sql-JDBCRDD.md#compute[compute a partition] (that requests a `JdbcDialect` to spark-sql-JdbcDialect.md#beforeFetch[beforeFetch])
+* `JDBCRDD` is requested to [compute a partition](JDBCRDD.md#compute) (that requests a `JdbcDialect` to [beforeFetch](JdbcDialect.md#beforeFetch))
 
-* `JDBCRelation` is requested to spark-sql-JDBCRelation.md#insert[insert a data (from a DataFrame) to a table]
-====
+* `JDBCRelation` is requested to [insert a data (from a DataFrame) to a table](JDBCRelation.md#insert)
 
 === [[asConnectionProperties]] `asConnectionProperties` Property
 

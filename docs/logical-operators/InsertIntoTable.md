@@ -32,7 +32,7 @@
 | [[InsertIntoHiveTable]] When hive/HiveAnalysis.md#apply[HiveAnalysis] resolution rule transforms `InsertIntoTable` with a hive/HiveTableRelation.md[HiveTableRelation]
 
 | <<InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
-| [[InsertIntoDataSourceCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution resolves an `InsertIntoTable` with a <<LogicalRelation.md#, LogicalRelation>> over an <<spark-sql-InsertableRelation.md#, InsertableRelation>> (with no partitions defined)
+| [[InsertIntoDataSourceCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution resolves an `InsertIntoTable` with a <<LogicalRelation.md#, LogicalRelation>> over an [InsertableRelation](../InsertableRelation.md) (with no partitions defined)
 
 | [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 | [[InsertIntoHadoopFsRelationCommand]] When [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution transforms `InsertIntoTable` with a <<LogicalRelation.md#, LogicalRelation>> over a [HadoopFsRelation](../HadoopFsRelation.md)

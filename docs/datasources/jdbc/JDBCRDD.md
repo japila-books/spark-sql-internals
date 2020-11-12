@@ -1,11 +1,11 @@
 # JDBCRDD
 
-`JDBCRDD` is a `RDD` of [InternalRow](InternalRow.md)s that represents a structured query over a table in a database accessed via JDBC.
+`JDBCRDD` is a `RDD` of [InternalRow](../../InternalRow.md)s that represents a structured query over a table in a database accessed via JDBC.
 
 !!! note
     `JDBCRDD` represents a `SELECT requiredColumns FROM table` query.
 
-`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to spark-sql-JDBCRelation.md#buildScan[build a scan]).
+`JDBCRDD` is <<creating-instance, created>> exclusively when `JDBCRDD` is requested to <<scanTable, scanTable>> (when `JDBCRelation` is requested to [build a scan](JDBCRelation.md#buildScan)).
 
 [[internal-registries]]
 .JDBCRDD's Internal Properties (e.g. Registries, Counters and Flags)
@@ -68,22 +68,20 @@ scanTable(
 
 In the end, `scanTable` creates a new <<creating-instance, JDBCRDD>>.
 
-NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<spark-sql-JDBCRelation.md#buildScan, build a distributed data scan with column pruning and filter pushdown>>.
+NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<datasources/jdbc/JDBCRelation.md#buildScan, build a distributed data scan with column pruning and filter pushdown>>.
 
-=== [[creating-instance]] Creating JDBCRDD Instance
+## Creating Instance
 
-`JDBCRDD` takes the following when created:
+`JDBCRDD` takes the following to be created:
 
 * [[sc]] `SparkContext`
 * [[getConnection]] Function to create a `Connection` (`() => Connection`)
-* [[schema]] [Schema](StructType.md)
+* [[schema]] [Schema](../../StructType.md)
 * [[columns]] Array of column names
-* [[filters]] Array of spark-sql-Filter.md[Filter predicates]
+* [[filters]] Array of [Filter predicates](../../spark-sql-Filter.md)
 * [[partitions]] Array of Spark Core's `Partitions`
 * [[url]] Connection URL
-* [[options]] spark-sql-JDBCOptions.md[JDBCOptions]
-
-`JDBCRDD` initializes the <<internal-registries, internal registries and counters>>.
+* [[options]] [JDBCOptions](JDBCOptions.md)
 
 === [[getPartitions]] `getPartitions` Method
 
@@ -120,7 +118,7 @@ compileFilter(f: Filter, dialect: JdbcDialect): Option[String]
 ====
 `compileFilter` is used when:
 
-* `JDBCRelation` is requested to <<spark-sql-JDBCRelation.md#unhandledFilters, find unhandled Filter predicates>>
+* `JDBCRelation` is requested to <<datasources/jdbc/JDBCRelation.md#unhandledFilters, find unhandled Filter predicates>>
 
 * `JDBCRDD` is <<filterWhereClause, created>>
 ====
