@@ -584,6 +584,7 @@ nav:
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
+        - AppendDataExec: physical-operators/AppendDataExec.md
         - AlterTableExec: physical-operators/AlterTableExec.md
         - AtomicCreateTableAsSelectExec: physical-operators/AtomicCreateTableAsSelectExec.md
         - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
@@ -625,6 +626,7 @@ nav:
         - physical-operators/ObjectHashAggregateExec.md
         - physical-operators/ObjectProducerExec.md
         - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+        - OverwritePartitionsDynamicExec: physical-operators/OverwritePartitionsDynamicExec.md
         - physical-operators/ProjectExec.md
         - physical-operators/RangeExec.md
         - physical-operators/RDDScanExec.md
