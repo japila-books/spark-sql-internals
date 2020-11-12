@@ -16,6 +16,10 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsDynamicOverwrite/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsOverwrite/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
@@ -77,6 +81,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/V1Table/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/V1WriteBuilder/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -793,6 +801,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileFormatWriter/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileWriteBuilder/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileBatchWrite/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
