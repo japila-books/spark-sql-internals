@@ -105,6 +105,7 @@ nav:
       - SupportsWrite: connector/SupportsWrite.md
       - ScanBuilder: connector/ScanBuilder.md
       - WriteBuilder: connector/WriteBuilder.md
+      - BatchWrite: connector/BatchWrite.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md

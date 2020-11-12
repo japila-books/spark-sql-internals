@@ -1,3 +1,3 @@
-# AppendDataExec Physical Operator
+# AppendDataExec Physical Command
 
 `AppendDataExec` is...FIXME

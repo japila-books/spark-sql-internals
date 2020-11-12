@@ -1,4 +1,4 @@
-# OverwriteByExpressionExec Physical Operator
+# OverwriteByExpressionExec Physical Command
 
 `OverwriteByExpressionExec` is a [V2TableWriteExec](V2TableWriteExec.md) with [BatchWriteHelper](BatchWriteHelper.md).
 
