@@ -98,6 +98,7 @@ nav:
       - Table: connector/Table.md
       - TableCapability: connector/TableCapability.md
       - TableProvider: connector/TableProvider.md
+      - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
       - SupportsRead: connector/SupportsRead.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
@@ -114,6 +115,7 @@ nav:
       - FileTable: connector/FileTable.md
       - StagedTable: connector/StagedTable.md
       - V1Table: connector/V1Table.md
+      - V1WriteBuilder: connector/V1WriteBuilder.md
       - TableHelper: connector/TableHelper.md
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
@@ -315,6 +317,8 @@ nav:
           - PartitioningAwareFileIndex.md
           - PrunedInMemoryFileIndex.md
         - FileFormatWriter: FileFormatWriter.md
+        - FileWriteBuilder: FileWriteBuilder.md
+        - FileBatchWrite: FileBatchWrite.md
         - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
         - PartitionedFile: PartitionedFile.md
         - RecordReaderIterator: RecordReaderIterator.md

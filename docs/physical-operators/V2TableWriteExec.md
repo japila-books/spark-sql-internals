@@ -1,6 +1,6 @@
-# V2TableWriteExec Physical Commands
+# V2TableWriteExec Unary Physical Commands
 
-`V2TableWriteExec` is an [extension](#contract) of the [V2CommandExec](V2CommandExec.md) abstraction for [unary physical operators](#implementations) that [writeWithV2](#writeWithV2).
+`V2TableWriteExec` is an [extension](#contract) of the [V2CommandExec](V2CommandExec.md) abstraction for [unary physical commands](#implementations) that [writeWithV2](#writeWithV2).
 
 ## Contract
 
@@ -30,3 +30,5 @@ writeWithV2(
 ```
 
 `writeWithV2`...FIXME
+
+`writeWithV2` is used when the [unary physical commands](#implementations) are executed.
