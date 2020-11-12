@@ -582,6 +582,7 @@ nav:
       - HashJoin: physical-operators/HashJoin.md
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
+      - SupportsV1Write: physical-operators/SupportsV1Write.md
       - Concrete Operators:
         - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
         - AppendDataExec: physical-operators/AppendDataExec.md
