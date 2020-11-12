@@ -1756,6 +1756,10 @@
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SupportsV1Write/</loc>
+     <lastmod>2020-11-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AdaptiveSparkPlanExec/</loc>
      <lastmod>2020-11-12</lastmod>
      <changefreq>daily</changefreq>
