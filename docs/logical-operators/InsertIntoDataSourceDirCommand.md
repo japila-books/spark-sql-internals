@@ -1,5 +1,3 @@
-title: InsertIntoDataSourceDirCommand
-
 # InsertIntoDataSourceDirCommand Logical Command
 
 `InsertIntoDataSourceDirCommand` is a <<RunnableCommand.md#, logical command>> that <<run, FIXME>>.
