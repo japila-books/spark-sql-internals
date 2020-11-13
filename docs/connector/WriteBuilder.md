@@ -38,6 +38,6 @@ Used when:
 * [NoopWriteBuilder](../datasources/noop/NoopWriteBuilder.md)
 * [SupportsDynamicOverwrite](SupportsDynamicOverwrite.md)
 * [SupportsOverwrite](SupportsOverwrite.md)
-* SupportsStreamingUpdate (Spark Structured Streaming)
+* [SupportsStreamingUpdate](SupportsStreamingUpdate.md)
 * [SupportsTruncate](SupportsTruncate.md)
 * [V1WriteBuilder](V1WriteBuilder.md)

@@ -102,6 +102,7 @@ nav:
       - SupportsOverwrite: connector/SupportsOverwrite.md
       - SupportsRead: connector/SupportsRead.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
+      - SupportsStreamingUpdate: connector/SupportsStreamingUpdate.md
       - SupportsTruncate: connector/SupportsTruncate.md
       - SupportsWrite: connector/SupportsWrite.md
       - ScanBuilder: connector/ScanBuilder.md

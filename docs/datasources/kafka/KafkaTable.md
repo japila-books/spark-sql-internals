@@ -43,10 +43,7 @@ newWriteBuilder(
 
 `newWriteBuilder` is part of the [SupportsWrite](../../connector/SupportsWrite.md#newWriteBuilder) abstraction.
 
-`newWriteBuilder` creates a custom [WriteBuilder](../../connector/WriteBuilder.md) with [SupportsTruncate](../../connector/SupportsTruncate.md) and `SupportsStreamingUpdate`.
-
-!!! tip
-    Learn more about [SupportsStreamingUpdate]({{ book.structured_streaming }}/SupportsStreamingUpdate) in [The Internals of Spark Structured Streaming]({{ book.structured_streaming }}) online book.
+`newWriteBuilder` creates a custom [WriteBuilder](../../connector/WriteBuilder.md) with support for [truncate](../../connector/SupportsTruncate.md) and [update](../../connector/SupportsStreamingUpdate.md).
 
 ### <span id="buildForBatch"><span id="newWriteBuilder-buildForBatch"> buildForBatch
 

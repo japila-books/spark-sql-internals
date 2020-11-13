@@ -1,8 +1,8 @@
 # NoopWriteBuilder
 
-`NoopWriteBuilder` is a [WriteBuilder](../../connector/WriteBuilder.md) with [SupportsTruncate](../../connector/SupportsTruncate.md) and `SupportsStreamingUpdate`.
+`NoopWriteBuilder` is a [WriteBuilder](../../connector/WriteBuilder.md) with support for [truncate](../../connector/SupportsTruncate.md) and [update](../../connector/SupportsStreamingUpdate.md).
 
-## <span id="truncate"> truncate
+## <span id="truncate"> Truncating
 
 ```scala
 truncate(): WriteBuilder
@@ -12,7 +12,7 @@ truncate(): WriteBuilder
 
 `truncate` is part of the [SupportsTruncate](../../connector/SupportsTruncate.md#truncate) abstraction.
 
-## <span id="update"> update
+## <span id="update"> Streaming Update
 
 ```scala
 update(): WriteBuilder
@@ -20,7 +20,7 @@ update(): WriteBuilder
 
 `update` simply returns this `NoopWriteBuilder`.
 
-`update` is part of the `SupportsStreamingUpdate` abstraction.
+`update` is part of the [SupportsStreamingUpdate](../../connector/SupportsStreamingUpdate.md#update) abstraction.
 
 ## <span id="buildForBatch"> buildForBatch
 
