@@ -9,7 +9,7 @@ As a [BaseRelation](../../BaseRelation.md), `JDBCRelation` defines the <<schema,
 As a [InsertableRelation](../../InsertableRelation.md), `JDBCRelation` supports <<insert, inserting or overwriting data>>.
 
 [[PrunedFilteredScan]]
-As a [PrunedFilteredScan](../../spark-sql-PrunedFilteredScan.md), `JDBCRelation` supports <<buildScan, building distributed data scan with column pruning and filter pushdown>>.
+As a [PrunedFilteredScan](../../PrunedFilteredScan.md), `JDBCRelation` supports <<buildScan, building distributed data scan with column pruning and filter pushdown>>.
 
 `JDBCRelation` is <<creating-instance, created>> when:
 
@@ -55,7 +55,7 @@ unhandledFilters(filters: Array[Filter]): Array[Filter]
 
 `unhandledFilters` is part of [BaseRelation](../../BaseRelation.md#unhandledFilters) abstraction.
 
-`unhandledFilters` returns the <<spark-sql-Filter.md#, Filter predicates>> in the input `filters` that could not be [converted to a SQL expression](JDBCRDD.md#compileFilter) (and are therefore unhandled by the JDBC data source natively).
+`unhandledFilters` returns the [Filter predicates](../../Filter.md) in the input `filters` that could not be [converted to a SQL expression](JDBCRDD.md#compileFilter) (and are therefore unhandled by the JDBC data source natively).
 
 === [[schema]] Schema of Tuples (Data) -- `schema` Property
 
@@ -93,6 +93,6 @@ insert(data: DataFrame, overwrite: Boolean): Unit
 buildScan(requiredColumns: Array[String], filters: Array[Filter]): RDD[Row]
 ----
 
-NOTE: `buildScan` is part of <<spark-sql-PrunedFilteredScan.md#buildScan, PrunedFilteredScan Contract>> to build a distributed data scan (as a `RDD[Row]`) with support for column pruning and filter pushdown.
+`buildScan` is part of the [PrunedFilteredScan](../../PrunedFilteredScan.md#buildScan) abstraction.
 
 `buildScan` uses the `JDBCRDD` object to [create a RDD[Row] for a distributed data scan](JDBCRDD.md#scanTable).

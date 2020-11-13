@@ -576,7 +576,7 @@ loadV1Source(paths: String*): DataFrame
 
 In the end, `loadV1Source` requests <<sparkSession, SparkSession>> to SparkSession.md#baseRelationToDataFrame[create a DataFrame from the BaseRelation].
 
-NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>> (and the data source is neither of `DataSourceV2` type nor a spark-sql-DataSourceReader.md[DataSourceReader] could not be created).
+NOTE: `loadV1Source` is used when `DataFrameReader` is requested to <<load, load>>.
 
 ## <span id="load"> Loading Data
 

@@ -18,7 +18,7 @@ inferFilters(
 `inferFilters` supports <<inferFilters-Filter, Filter>> and <<inferFilters-Join, Join>> logical operators.
 
 [[inferFilters-Filter]]
-For Filter.md[Filter] logical operators, `inferFilters`...FIXME
+For [Filter](../logical-operators/Filter.md) logical operators, `inferFilters`...FIXME
 
 [[inferFilters-Join]]
 For Join.md[Join] logical operators, `inferFilters` branches off per the join type:

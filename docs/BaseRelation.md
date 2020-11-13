@@ -61,7 +61,7 @@ unhandledFilters(
   filters: Array[Filter]): Array[Filter]
 ```
 
-[Filter](spark-sql-Filter.md) predicates that the relation does not support (handle) natively
+[Filter](Filter.md) predicates that the relation does not support (handle) natively
 
 Default: the input filters (as it is considered safe to double evaluate filters regardless whether they could be supported or not)
 

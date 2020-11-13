@@ -32,7 +32,7 @@ When [resolving a data source](DataSource.md#resolveRelation), `DataSource` make
 ```
 
 !!! tip
-    [SchemaRelationProvider](spark-sql-SchemaRelationProvider.md) is used for data source providers that require a user-defined schema.
+    [SchemaRelationProvider](SchemaRelationProvider.md) is used for data source providers that require a user-defined schema.
 
 NOTE: It is a common pattern while developing a custom data source to use <<createRelation, RelationProvider.createRelation>> with [CreatableRelationProvider](CreatableRelationProvider.md) when requested for a [relation](CreatableRelationProvider.md#createRelation) (after writing out a structured query).
 

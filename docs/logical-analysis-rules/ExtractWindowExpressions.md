@@ -34,7 +34,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` [transforms the logical operators downwards](../catalyst/TreeNode.md#transformDown) in the input <<spark-sql-LogicalPlan.md#, logical plan>> as follows:
 
-* For <<Filter.md#, Filter>> unary operators with <<Aggregate.md#, Aggregate>> operator (as the <<Filter.md#child, child>>) that <<hasWindowFunction, has a window function>> in the <<Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
+* For [Filter](../logical-operators/Filter.md) unary operators with <<Aggregate.md#, Aggregate>> operator (as the [child](../logical-operators/Filter.md#child)) that <<hasWindowFunction, has a window function>> in the <<Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 
 * For <<Aggregate.md#, Aggregate>> logical operators that <<hasWindowFunction, have a window function>> in the <<Aggregate.md#aggregateExpressions, aggregateExpressions>>, `apply`...FIXME
 

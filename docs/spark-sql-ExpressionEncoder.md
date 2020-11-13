@@ -353,11 +353,7 @@ val ctx = new CodegenContext
 val code = deserializer.genCode(ctx).code
 ----
 
-[NOTE]
-====
 `resolveAndBind` is used when:
-
-* `InternalRowDataWriterFactory` is requested to spark-sql-InternalRowDataWriterFactory.md#createDataWriter[create a DataWriter]
 
 * `Dataset` is requested for the Dataset.md#deserializer[deserializer expression] (to convert internal rows to objects of type `T`)
 
@@ -368,4 +364,3 @@ val code = deserializer.genCode(ctx).code
 * Spark Structured Streaming's `FlatMapGroupsWithStateExec` physical operator is requested for the state deserializer (i.e. `stateDeserializer`)
 
 * Spark Structured Streaming's `ForeachSink` is requested to add a streaming batch (i.e. `addBatch`)
-====

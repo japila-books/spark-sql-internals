@@ -1,6 +1,6 @@
 # HadoopFsRelation
 
-`HadoopFsRelation` is a [BaseRelation](BaseRelation.md) and [FileRelation](spark-sql-FileRelation.md).
+`HadoopFsRelation` is a [BaseRelation](BaseRelation.md) and [FileRelation](FileRelation.md).
 
 ## Creating Instance
 
@@ -37,7 +37,7 @@ inputFiles: Array[String]
 
 `inputFiles` requests the [FileIndex](#location) for the [inputFiles](FileIndex.md#inputFiles).
 
-`inputFiles` is part of the [FileRelation](spark-sql-FileRelation.md#inputFiles) abstraction.
+`inputFiles` is part of the [FileRelation](FileRelation.md#inputFiles) abstraction.
 
 ## <span id="sizeInBytes"> Estimated Size
 

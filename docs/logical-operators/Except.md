@@ -22,8 +22,8 @@ title: Except
 
 Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
 
-| Filter.md[Filter]
-| `Except` (DISTINCT) in ReplaceExceptWithFilter.md[ReplaceExceptWithFilter] logical optimization rule
+| [Filter](Filter.md)
+| `Except` (DISTINCT) in [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md) logical optimization rule
 
 Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
 

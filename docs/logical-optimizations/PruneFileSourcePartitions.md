@@ -2,7 +2,7 @@
 
 `PruneFileSourcePartitions` is the only logical optimization rule in the [Prune File Source Table Partitions](../SparkOptimizer.md#prune-file-source-table-partitions) batch of the [SparkOptimizer](../SparkOptimizer.md).
 
-`PruneFileSourcePartitions` <<apply, transforms a logical query plan>> into a Project.md[Project] operator with a Filter.md[Filter] logical operator over a "pruned" `LogicalRelation` with the [HadoopFsRelation](../HadoopFsRelation.md) of a Hive partitioned table (with a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex]).
+`PruneFileSourcePartitions` <<apply, transforms a logical query plan>> into a Project.md[Project] operator with a [Filter](../logical-operators/Filter.md) logical operator over a "pruned" `LogicalRelation` with the [HadoopFsRelation](../HadoopFsRelation.md) of a Hive partitioned table (with a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex]).
 
 === [[apply]] Executing Rule -- `apply` Method
 
@@ -24,6 +24,6 @@ With predicates left for partition pruning, `apply` requests the CatalogFileInde
 
 `apply` replaces the [FileIndex](../HadoopFsRelation.md#location) in the [HadoopFsRelation](../HadoopFsRelation.md) with the `PrunedInMemoryFileIndex` and the spark-sql-CatalogStatistics.md#sizeInBytes[total size] statistic to the PartitioningAwareFileIndex.md#sizeInBytes[PrunedInMemoryFileIndex's].
 
-In the end, `apply` creates a Filter.md[Filter] logical operator (with the "pruned" `LogicalRelation` as a child operator and all the filter predicate expressions combined together with `And` expression) and makes it a child operator of a Project.md[Project] operator.
+In the end, `apply` creates a [Filter](../logical-operators/Filter.md) logical operator (with the "pruned" `LogicalRelation` as a child operator and all the filter predicate expressions combined together with `And` expression) and makes it a child operator of a Project.md[Project] operator.
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

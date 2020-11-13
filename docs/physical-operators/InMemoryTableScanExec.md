@@ -11,7 +11,7 @@
 * [[predicates]] Predicate [expressions](../expressions/Expression.md)
 * [[relation]] [InMemoryRelation](../logical-operators/InMemoryRelation.md) logical operator
 
-`InMemoryTableScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) that <<supportsBatch, supports batch decoding>> (when <<creating-instance, created>> for a <<reader, DataSourceReader>> that supports it, i.e. the `DataSourceReader` is a spark-sql-SupportsScanColumnarBatch.md[SupportsScanColumnarBatch] with the spark-sql-SupportsScanColumnarBatch.md#enableBatchRead[enableBatchRead] flag enabled).
+`InMemoryTableScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) that <<supportsBatch, supports batch decoding>>.
 
 `InMemoryTableScanExec` supports <<filteredCachedBatches, partition batch pruning>> (only when [spark.sql.inMemoryColumnarStorage.partitionPruning](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning) internal configuration property is enabled).
 

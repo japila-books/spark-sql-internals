@@ -2,7 +2,7 @@
 
 `DataSourceRDD` is a `RDD[InternalRow]` that acts as a thin adapter between Spark SQL's [DataSource V2](new-and-noteworthy/datasource-v2.md) and Spark Core's RDD API.
 
-`DataSourceRDD` uses [DataSourceRDDPartition](spark-sql-DataSourceRDDPartition.md) for the [partitions](#getPartitions) (that is a mere wrapper of the [InputPartitions](#inputPartitions)).
+`DataSourceRDD` uses [DataSourceRDDPartition](DataSourceRDDPartition.md) for the [partitions](#getPartitions) (that is a mere wrapper of the [InputPartitions](#inputPartitions)).
 
 ## Creating Instance
 
@@ -26,7 +26,7 @@ getPreferredLocations(
     split: Partition): Seq[String]
 ```
 
-`getPreferredLocations` simply requests the given `split` <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for the <<spark-sql-DataSourceRDDPartition.md#inputPartition, InputPartition>> that in turn is requested for the [preferred locations](connector/InputPartition.md#preferredLocations).
+`getPreferredLocations` simply requests the given `split` [DataSourceRDDPartition](DataSourceRDDPartition.md) for the [InputPartition](DataSourceRDDPartition.md#inputPartition) that in turn is requested for the [preferred locations](connector/InputPartition.md#preferredLocations).
 
 `getPreferredLocations` is part of Spark Core's `RDD` abstraction.
 
@@ -36,7 +36,7 @@ getPreferredLocations(
 getPartitions: Array[Partition]
 ```
 
-`getPartitions` simply creates a <<spark-sql-DataSourceRDDPartition.md#, DataSourceRDDPartition>> for every <<inputPartitions, InputPartition>>.
+`getPartitions` simply creates a [DataSourceRDDPartition](DataSourceRDDPartition.md) for every <<inputPartitions, InputPartition>>.
 
 `getPartitions` is part of Spark Core's `RDD` abstraction.
 

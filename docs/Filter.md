@@ -1,4 +1,4 @@
-# Data Source Filter Predicate (For Filter Pushdown)
+# Data Source Filter Predicate
 
 `Filter` is the <<contract, contract>> for <<implementations, filter predicates>> that can be pushed down to a relation (aka _data source_).
 
@@ -6,7 +6,7 @@
 
 * (Data Source API V1) `BaseRelation` is requested for [unhandled filter predicates](BaseRelation.md#unhandledFilters) (and hence `BaseRelation` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#unhandledFilters))
 
-* (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
+* (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
 
 * `FileFormat` is requested to [buildReader](FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReader), [CSVFileFormat](spark-sql-CSVFileFormat.md#buildReader), [JsonFileFormat](spark-sql-JsonFileFormat.md#buildReader), [TextFileFormat](TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
 
@@ -14,13 +14,11 @@
 
 * `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 
-* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for LogicalRelation.md[LogicalRelation] logical operators with a spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] or a spark-sql-PrunedScan.md[PrunedScan])
+* `DataSourceStrategy` execution planning strategy is requested to [pruneFilterProject](execution-planning-strategies/DataSourceStrategy.md#pruneFilterProject) (when [executed](execution-planning-strategies/DataSourceStrategy.md#apply) for LogicalRelation.md[LogicalRelation] logical operators with a [PrunedFilteredScan](PrunedFilteredScan.md) or a [PrunedScan](PrunedScan.md))
 
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 
 * `JDBCRDD` is [created](datasources/jdbc/JDBCRDD.md#filters) and requested to [scanTable](datasources/jdbc/JDBCRDD.md#scanTable)
-
-* (DataSource V2) `SupportsPushDownFilters` is requested to spark-sql-SupportsPushDownFilters.md#pushFilters[pushFilters] and for spark-sql-SupportsPushDownFilters.md#pushedFilters[pushedFilters]
 
 [[contract]]
 [source, scala]

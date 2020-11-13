@@ -2,19 +2,7 @@
 
 **DataSource V2** (_DataSource API V2_ or _Data Source V2_) is a new API for data sources in Spark SQL with the following abstractions:
 
-* [DataSourceV2](../spark-sql-DataSourceV2.md) marker interface
-
-* [ReadSupport](../spark-sql-ReadSupport.md)
-
-* [DataSourceReader](../spark-sql-DataSourceReader.md)
-
-* [WriteSupport](../spark-sql-WriteSupport.md)
-
-* [DataSourceWriter](../spark-sql-DataSourceWriter.md)
-
 * [SessionConfigSupport](../connector/SessionConfigSupport.md)
-
-* [DataSourceV2StringFormat](../spark-sql-DataSourceV2StringFormat.md)
 
 * [InputPartition](../connector/InputPartition.md)
 
@@ -46,7 +34,7 @@ When executed, `WriteToDataSourceV2Exec` physical operator...FIXME
 
 ## <span id="filter-pushdown"> Filter Pushdown Performance Optimization
 
-DataSource V2 supports **filter pushdown** performance optimization for [DataSourceReaders](../spark-sql-DataSourceReader.md) with [SupportsPushDownFilters](../spark-sql-SupportsPushDownFilters.md) (that is applied when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to plan a [DataSourceV2Relation](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) logical operator).
+DataSource V2 supports **filter pushdown** performance optimization for...FIXME
 
 From [Parquet Filter Pushdown](https://drill.apache.org/docs/parquet-filter-pushdown/) in Apache Drill's documentation:
 

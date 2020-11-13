@@ -239,17 +239,17 @@ inputFiles: Array[String]
 
 `inputFiles` requests <<queryExecution, QueryExecution>> for [optimized logical plan](QueryExecution.md#optimizedPlan) and collects the following logical operators:
 
-* LogicalRelation.md[LogicalRelation] with spark-sql-FileRelation.md[FileRelation] (as the LogicalRelation.md#relation[BaseRelation])
+* [LogicalRelation](logical-operators/LogicalRelation.md) with [FileRelation](FileRelation.md) (as the [BaseRelation](logical-operators/LogicalRelation.md#relation))
 
-* spark-sql-FileRelation.md[FileRelation]
+* [FileRelation](FileRelation.md)
 
-* hive/HiveTableRelation.md[HiveTableRelation]
+* [HiveTableRelation](hive/HiveTableRelation.md)
 
 `inputFiles` then requests the logical operators for their underlying files:
 
-* spark-sql-FileRelation.md#inputFiles[inputFiles] of the `FileRelations`
+* [inputFiles](FileRelation.md#inputFiles) of the `FileRelations`
 
-* spark-sql-CatalogStorageFormat.md#locationUri[locationUri] of the `HiveTableRelation`
+* [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the `HiveTableRelation`
 
 === [[resolve]] `resolve` Internal Method
 

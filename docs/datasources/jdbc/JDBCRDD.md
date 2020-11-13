@@ -78,7 +78,7 @@ NOTE: `scanTable` is used exclusively when `JDBCRelation` is requested to <<data
 * [[getConnection]] Function to create a `Connection` (`() => Connection`)
 * [[schema]] [Schema](../../StructType.md)
 * [[columns]] Array of column names
-* [[filters]] Array of [Filter predicates](../../spark-sql-Filter.md)
+* [[filters]] Array of [Filter predicates](../../Filter.md)
 * [[partitions]] Array of Spark Core's `Partitions`
 * [[url]] Connection URL
 * [[options]] [JDBCOptions](JDBCOptions.md)

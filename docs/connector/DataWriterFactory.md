@@ -26,11 +26,9 @@ In other words, using the contract is as treading on thin ice.
 | Description
 
 | [[createDataWriter]] `createDataWriter`
-a| Gives the spark-sql-DataWriter.md[DataWriter] for a partition ID and attempt number
+a| Gives the [DataWriter](DataWriter.md) for a partition ID and attempt number
 
 Used when:
 
-* `InternalRowDataWriterFactory` is requested to spark-sql-InternalRowDataWriterFactory.md#createDataWriter[createDataWriter]
-
-* `DataWritingSparkTask` is requested to spark-sql-DataWritingSparkTask.md#run[run] and spark-sql-DataWritingSparkTask.md#runContinuous[runContinuous]
+* `DataWritingSparkTask` is requested to [run](../DataWritingSparkTask.md#run) and [runContinuous](../DataWritingSparkTask.md#runContinuous)
 |===

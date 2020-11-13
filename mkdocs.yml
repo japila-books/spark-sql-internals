@@ -102,14 +102,19 @@ nav:
       - TableProvider: connector/TableProvider.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
+      - SupportsPushDownFilters: connector/SupportsPushDownFilters.md
+      - SupportsPushDownRequiredColumns: connector/SupportsPushDownRequiredColumns.md
       - SupportsRead: connector/SupportsRead.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
+      - SupportsReportPartitioning: connector/SupportsReportPartitioning.md
       - SupportsStreamingUpdate: connector/SupportsStreamingUpdate.md
       - SupportsTruncate: connector/SupportsTruncate.md
       - SupportsWrite: connector/SupportsWrite.md
       - ScanBuilder: connector/ScanBuilder.md
       - WriteBuilder: connector/WriteBuilder.md
       - BatchWrite: connector/BatchWrite.md
+      - DataWriterFactory: connector/DataWriterFactory.md
+      - DataWriter: connector/DataWriter.md
       - Scan: connector/Scan.md
       - Batch: connector/Batch.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
@@ -127,15 +132,15 @@ nav:
       - DataSourceRegister: DataSourceRegister.md
       - CreatableRelationProvider: CreatableRelationProvider.md
       - RelationProvider: RelationProvider.md
-      - spark-sql-SchemaRelationProvider.md
+      - SchemaRelationProvider: SchemaRelationProvider.md
       - BaseRelation: BaseRelation.md
-      - spark-sql-FileRelation.md
-      - spark-sql-CatalystScan.md
+      - FileRelation: FileRelation.md
+      - CatalystScan: CatalystScan.md
       - InsertableRelation: InsertableRelation.md
-      - spark-sql-PrunedFilteredScan.md
-      - spark-sql-PrunedScan.md
-      - spark-sql-TableScan.md
-      - spark-sql-Filter.md
+      - PrunedFilteredScan: PrunedFilteredScan.md
+      - PrunedScan: PrunedScan.md
+      - TableScan: TableScan.md
+      - Filter: Filter.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
@@ -232,7 +237,7 @@ nav:
         - logical-operators/Expand.md
         - ExplainCommand: logical-operators/ExplainCommand.md
         - logical-operators/ExternalRDD.md
-        - logical-operators/Filter.md
+        - Filter: logical-operators/Filter.md
         - logical-operators/Generate.md
         - GlobalLimit: logical-operators/GlobalLimit.md
         - logical-operators/GroupingSets.md
@@ -270,7 +275,7 @@ nav:
         - logical-operators/Sort.md
         - logical-operators/SubqueryAlias.md
         - logical-operators/TruncateTableCommand.md
-        - logical-operators/TypedFilter.md
+        - TypedFilter: logical-operators/TypedFilter.md
         - logical-operators/Union.md
         - logical-operators/UnresolvedCatalogRelation.md
         - logical-operators/UnresolvedHint.md
@@ -417,28 +422,6 @@ nav:
       - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
       - DetermineTableStats: hive/DetermineTableStats.md
       - HiveAnalysis: hive/HiveAnalysis.md
-    - Extending Spark SQL:
-      - DataSource V2:
-        - spark-sql-DataSourceV2.md
-        - spark-sql-ReadSupport.md
-        - spark-sql-WriteSupport.md
-        - DataSourceReader:
-          - spark-sql-DataSourceReader.md
-          - spark-sql-SupportsPushDownFilters.md
-          - spark-sql-SupportsPushDownRequiredColumns.md
-          - spark-sql-SupportsReportPartitioning.md
-          - spark-sql-SupportsReportStatistics.md
-          - spark-sql-SupportsScanColumnarBatch.md
-        - spark-sql-DataSourceWriter.md
-        - spark-sql-DataWriter.md
-        - DataWriterFactory:
-          - spark-sql-DataWriterFactory.md
-          - spark-sql-InternalRowDataWriterFactory.md
-        - spark-sql-DataSourceV2StringFormat.md
-        - DataSourceRDD:
-          - DataSourceRDD: DataSourceRDD.md
-          - spark-sql-DataSourceRDDPartition.md
-        - spark-sql-DataWritingSparkTask.md
     - Catalyst:
       - Tree Manipulation Framework: catalyst/index.md
       - TreeNode: catalyst/TreeNode.md
@@ -781,6 +764,9 @@ nav:
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - spark-sql-UnsafeFixedWidthAggregationMap.md
+    - DataSourceRDD: DataSourceRDD.md
+    - DataSourceRDDPartition: DataSourceRDDPartition.md
+    - DataWritingSparkTask: DataWritingSparkTask.md
   - New &amp; Noteworthy:
     - Adaptive Query Execution: new-and-noteworthy/adaptive-query-execution.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md

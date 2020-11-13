@@ -10,23 +10,23 @@
 | Logical Operator
 | Description
 
-| LogicalRelation.md[LogicalRelation] with a spark-sql-CatalystScan.md[CatalystScan] relation
+| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [CatalystScan](../CatalystScan.md) relation
 | [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 `CatalystScan` does not seem to be used in Spark SQL.
 
-| LogicalRelation.md[LogicalRelation] with spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] relation
+| [LogicalRelation](../logical-operators/LogicalRelation.md) with [PrunedFilteredScan](../PrunedFilteredScan.md) relation
 | [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 Matches [JDBCRelation](../datasources/jdbc/JDBCRelation.md) exclusively
 
-| LogicalRelation.md[LogicalRelation] with a spark-sql-PrunedScan.md[PrunedScan] relation
+| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [PrunedScan](../PrunedScan.md) relation
 | [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 `PrunedScan` does not seem to be used in Spark SQL.
 
-| LogicalRelation.md[LogicalRelation] with a spark-sql-TableScan.md[TableScan] relation
-a| [[TableScan]] Creates a RowDataSourceScanExec.md#creating-instance[RowDataSourceScanExec] directly (requesting the `TableScan` to spark-sql-TableScan.md#buildScan[buildScan] followed by <<toCatalystRDD, RDD conversion to RDD[InternalRow]>>)
+| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [TableScan](../TableScan.md) relation
+a| [[TableScan]] Creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) directly (requesting the `TableScan` to [buildScan](../TableScan.md#buildScan) followed by [RDD conversion to RDD[InternalRow]](#toCatalystRDD))
 
 Matches [KafkaRelation](../datasources/kafka/KafkaRelation.md) exclusively
 |===
@@ -55,7 +55,7 @@ pruneFilterProject(
 
 `pruneFilterProject` simply calls <<pruneFilterProjectRaw, pruneFilterProjectRaw>> with `scanBuilder` ignoring the `Seq[Expression]` input parameter.
 
-NOTE: `pruneFilterProject` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for LogicalRelation.md[LogicalRelation] logical operators with a spark-sql-PrunedFilteredScan.md[PrunedFilteredScan] or a spark-sql-PrunedScan.md[PrunedScan]).
+`pruneFilterProject` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators with a [PrunedFilteredScan](../PrunedFilteredScan.md) or a [PrunedScan](../PrunedScan.md)).
 
 ## <span id="selectFilters"> Selecting Catalyst Expressions Convertible to Data Source Filter Predicates
 
@@ -65,7 +65,7 @@ selectFilters(
   predicates: Seq[Expression]): (Seq[Expression], Seq[Filter], Set[Filter])
 ```
 
-`selectFilters` builds a map of [Catalyst predicate expressions](../expressions/Expression.md) (from the input `predicates`) that can be [translated](#translateFilter) to a [data source filter predicate](../spark-sql-Filter.md).
+`selectFilters` builds a map of [Catalyst predicate expressions](../expressions/Expression.md) (from the input `predicates`) that can be [translated](#translateFilter) to a [data source filter predicate](../Filter.md).
 
 `selectFilters` then requests the input [BaseRelation](../BaseRelation.md) for [unhandled filters](../BaseRelation.md#unhandledFilters) (out of the convertible ones that `selectFilters` built the map with).
 
@@ -86,7 +86,7 @@ In the end, `selectFilters` returns a 3-element tuple with the following:
 translateFilter(predicate: Expression): Option[Filter]
 ----
 
-`translateFilter` translates a expressions/Expression.md[Catalyst expression] into a corresponding spark-sql-Filter.md[Filter predicate] if possible. If not, `translateFilter` returns `None`.
+`translateFilter` translates a expressions/Expression.md[Catalyst expression] into a corresponding [Filter predicate](../Filter.md) if possible. If not, `translateFilter` returns `None`.
 
 [[translateFilter-conversions]]
 .translateFilter's Conversions
@@ -150,7 +150,7 @@ NOTE: The Catalyst expressions and their corresponding data source filter predic
 
 * [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) is created (and initializes [pushedDownFilters](../physical-operators/FileSourceScanExec.md#pushedDownFilters))
 * `DataSourceStrategy` is requested to [selectFilters](#selectFilters)
-* [PushDownOperatorsToDataSource](../logical-optimizations/PushDownOperatorsToDataSource.md) logical optimization is executed (for [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) leaf operators with a [SupportsPushDownFilters](../spark-sql-SupportsPushDownFilters.md) data source reader)
+* [PushDownOperatorsToDataSource](../logical-optimizations/PushDownOperatorsToDataSource.md) logical optimization is executed (for [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) leaf operators with a [SupportsPushDownFilters](../connector/SupportsPushDownFilters.md) data source reader)
 
 ## <span id="toCatalystRDD"> RDD Conversion (Converting RDD of Rows to Catalyst RDD of InternalRows)
 

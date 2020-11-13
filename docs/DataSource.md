@@ -20,7 +20,7 @@ a| [[FileFormat]]
 | RelationProvider.md[RelationProvider]
 | [[RelationProvider]] Supports schema inference and can be referenced in SQL's `USING` clause
 
-| spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
+| [SchemaRelationProvider](SchemaRelationProvider.md)
 | [[SchemaRelationProvider]] Requires a user-defined schema
 
 | StreamSinkProvider
@@ -260,8 +260,8 @@ Internally, `resolveRelation` creates an instance of the [providingClass](#provi
 | Provider
 | Behaviour
 
-| spark-sql-SchemaRelationProvider.md[SchemaRelationProvider]
-| Executes spark-sql-SchemaRelationProvider.md#createRelation[SchemaRelationProvider.createRelation] with the provided schema
+| [SchemaRelationProvider](SchemaRelationProvider.md)
+| Executes [SchemaRelationProvider.createRelation](SchemaRelationProvider.md#createRelation) with the provided schema
 
 | RelationProvider.md[RelationProvider]
 | Executes RelationProvider.md#createRelation[RelationProvider.createRelation]

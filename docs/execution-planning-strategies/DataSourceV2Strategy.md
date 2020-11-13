@@ -55,7 +55,7 @@ apply(
 
 ==== [[apply-DataSourceV2Relation]] DataSourceV2Relation Logical Operator
 
-For a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply` requests the `DataSourceV2Relation` for the <<DataSourceV2Relation.md#newReader, DataSourceReader>>.
+For a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply`...FIXME
 
 `apply` then <<pushFilters, pushFilters>> followed by <<pruneColumns, pruneColumns>>.
 
@@ -103,11 +103,7 @@ pushFilters(
   filters: Seq[Expression]): (Seq[Expression], Seq[Expression])
 ----
 
-NOTE: `pushFilters` handles <<spark-sql-DataSourceReader.md#, DataSourceReaders>> with <<spark-sql-SupportsPushDownFilters.md#, SupportsPushDownFilters>> support only.
-
-For the given `DataSourceReaders` with `SupportsPushDownFilters` support, `pushFilters` uses the `DataSourceStrategy` object to [translate every filter](DataSourceStrategy.md#translateFilter) in the given `filters`.
-
-`pushFilters` requests the `SupportsPushDownFilters` reader to <<spark-sql-SupportsPushDownFilters.md#pushFilters, pushFilters>> first and then for the <<spark-sql-SupportsPushDownFilters.md#pushedFilters, pushedFilters>>.
+`pushFilters`...FIXME
 
 In the end, `pushFilters` returns a pair of filters pushed and not.
 

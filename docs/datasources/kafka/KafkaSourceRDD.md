@@ -18,7 +18,7 @@
 
 `KafkaSourceRDD` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../../spark-sql-TableScan.md))
+* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../../TableScan.md))
 
 * (Spark Structured Streaming) `KafkaSource` is requested to `getBatch`
 

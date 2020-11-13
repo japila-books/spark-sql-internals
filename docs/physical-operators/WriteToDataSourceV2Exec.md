@@ -9,7 +9,7 @@ NOTE: Although <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator
 [[creating-instance]]
 `WriteToDataSourceV2Exec` takes the following to be created:
 
-* [[writer]] <<spark-sql-DataSourceWriter.md#, DataSourceWriter>>
+* [[writer]] FIXME
 * [[query]] Child <<SparkPlan.md#, physical plan>>
 
 [[children]]
@@ -41,9 +41,7 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#createWriterFactory, create a DataWriterFactory>> for the writing task.
-
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#useCommitCoordinator, use a CommitCoordinator or not>>.
+`doExecute`...FIXME
 
 `doExecute` requests the <<query, child physical plan>> to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and in the end generates an `RDD` of [InternalRow](../InternalRow.md)s).
 
@@ -58,17 +56,17 @@ Start processing data source writer: [writer]. The input RDD has [length] partit
 
 * The `RDD[InternalRow]` of the <<query, child physical plan>>
 
-* A partition processing function that requests the `DataWritingSparkTask` object to <<spark-sql-DataWritingSparkTask.md#run, run>> the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
+* A partition processing function that requests the `DataWritingSparkTask` object to [run](../DataWritingSparkTask.md#run) the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
 
-* A result handler function that records the result `WriterCommitMessage` from a successful data writer and requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#onDataWriterCommit, handle the commit message>> (which does nothing by default)
+* A result handler function that records the result `WriterCommitMessage` from a successful data writer and requests FIXME
 
 `doExecute` prints out the following INFO message to the logs:
 
-```
+```text
 Data source writer [writer] is committing.
 ```
 
-`doExecute` requests the <<writer, DataSourceWriter>> to <<spark-sql-DataSourceWriter.md#commit, commit>> (passing on with the commit messages).
+`doExecute`...FIXME
 
 In the end, `doExecute` prints out the following INFO message to the logs:
 

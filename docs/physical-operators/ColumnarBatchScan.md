@@ -31,9 +31,6 @@
 | ColumnarBatchScan
 | Description
 
-| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
-a| [[DataSourceV2ScanExec]] <<DataSourceV2ScanExec.md#supportsBatch, Supports vectorized decoding>> for <<spark-sql-DataSourceV2ScanExec.md#reader, SupportsScanColumnarBatch data readers>> that <<spark-sql-SupportsScanColumnarBatch.md#enableBatchRead, can read data in batch>> (default: `true`)
-
 | <<FileSourceScanExec.md#, FileSourceScanExec>>
 | [[FileSourceScanExec]] <<FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../FileFormat.md) that [support returning columnar batches](../FileFormat.md#supportBatch) (default: `false`)
 

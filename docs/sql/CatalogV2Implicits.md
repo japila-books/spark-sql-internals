@@ -17,4 +17,4 @@ parseColumnPath(
 
 parseColumnPath requests the [CatalystSqlParser](#catalystSqlParser) to [parseMultipartIdentifier](CatalystSqlParser.md#parseMultipartIdentifier).
 
-parseColumnPath is used when Filter is requested to [v2references](../spark-sql-Filter.md#v2references).
+parseColumnPath is used when Filter is requested to [v2references](../Filter.md#v2references).

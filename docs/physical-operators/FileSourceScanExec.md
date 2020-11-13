@@ -166,7 +166,7 @@ Metadata
 NOTE: `metadata` is part of DataSourceScanExec.md#metadata[DataSourceScanExec] contract.
 
 | pushedDownFilters
-a| [[pushedDownFilters]] spark-sql-Filter.md[Data source filters] that are <<dataFilters, dataFilters>> expressions [converted to their respective filters](../execution-planning-strategies/DataSourceStrategy.md#translateFilter)
+a| [[pushedDownFilters]] [Data source filters](../Filter.md) that are <<dataFilters, dataFilters>> expressions [converted to their respective filters](../execution-planning-strategies/DataSourceStrategy.md#translateFilter)
 
 [TIP]
 ====

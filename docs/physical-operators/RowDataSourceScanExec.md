@@ -32,8 +32,8 @@ doProduce(ctx: CodegenContext): String
 
 * [[fullOutput]] Output schema [attributes](../expressions/Attribute.md)
 * [[requiredColumnsIndex]] Indices of required columns
-* [[filters]] [Filter predicates](../spark-sql-Filter.md)
-* [[handledFilters]] Handled [filter predicates](../spark-sql-Filter.md)
+* [[filters]] [Filter predicates](../Filter.md)
+* [[handledFilters]] Handled [filter predicates](../Filter.md)
 * [[rdd]] RDD of [InternalRow](../InternalRow.md)s
 * [[relation]] [BaseRelation](../BaseRelation.md)
 * [[tableIdentifier]] `TableIdentifier`

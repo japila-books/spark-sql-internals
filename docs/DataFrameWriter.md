@@ -316,9 +316,7 @@ df.sparkSession.sessionState.conf
 ----
 ====
 
-If the class is a <<spark-sql-DataSourceV2.md#, DataSourceV2>>...FIXME
-
-Otherwise, if not a <<spark-sql-DataSourceV2.md#, DataSourceV2>>, `save` simply <<saveToV1Source, saveToV1Source>>.
+`save`...FIXME
 
 `save` does not support saving to Hive (i.e. the <<source, source>> is `hive`) and throws an `AnalysisException` when requested so.
 
