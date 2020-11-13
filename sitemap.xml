@@ -4,6 +4,14 @@
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSource/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Table/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
@@ -24,11 +32,23 @@
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsPushDownFilters/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsPushDownRequiredColumns/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsRead/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsReportStatistics/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsReportPartitioning/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -53,6 +73,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/BatchWrite/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriterFactory/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriter/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -105,6 +133,54 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Transform/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRegister/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CreatableRelationProvider/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RelationProvider/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SchemaRelationProvider/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/BaseRelation/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileRelation/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystScan/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InsertableRelation/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/PrunedFilteredScan/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/PrunedScan/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/TableScan/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Filter/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1105,130 +1181,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/hive/HiveAnalysis/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceV2/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ReadSupport/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-WriteSupport/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceReader/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SupportsPushDownFilters/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SupportsPushDownRequiredColumns/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SupportsReportPartitioning/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SupportsReportStatistics/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SupportsScanColumnarBatch/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceWriter/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataWriter/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataWriterFactory/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-InternalRowDataWriterFactory/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceV2StringFormat/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRDD/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataSourceRDDPartition/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataWritingSparkTask/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSource/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-datasource-custom-formats/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CreatableRelationProvider/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRegister/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RelationProvider/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SchemaRelationProvider/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BaseRelation/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-FileRelation/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalystScan/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/InsertableRelation/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-PrunedFilteredScan/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-PrunedScan/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-TableScan/</loc>
-     <lastmod>2020-11-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Filter/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2525,6 +2477,18 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-UnsafeFixedWidthAggregationMap/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRDD/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRDDPartition/</loc>
+     <lastmod>2020-11-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataWritingSparkTask/</loc>
      <lastmod>2020-11-13</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
