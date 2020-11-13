@@ -3,7 +3,7 @@
 `JDBCRelation` is a <<BaseRelation, BaseRelation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
 
 [[BaseRelation]]
-As a [BaseRelation](../../spark-sql-BaseRelation.md), `JDBCRelation` defines the <<schema, schema of tuples (data)>> and the <<sqlContext, SQLContext>>.
+As a [BaseRelation](../../BaseRelation.md), `JDBCRelation` defines the <<schema, schema of tuples (data)>> and the <<sqlContext, SQLContext>>.
 
 [[InsertableRelation]]
 As a [InsertableRelation](../../InsertableRelation.md), `JDBCRelation` supports <<insert, inserting or overwriting data>>.
@@ -36,7 +36,7 @@ scala> df.explain
 `JDBCRelation` uses the <<sparkSession, SparkSession>> to return a SparkSession.md#sqlContext[SQLContext].
 
 [[needConversion]]
-`JDBCRelation` turns the [needConversion](../../spark-sql-BaseRelation.md#needConversion) flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the [RDD conversion](../../execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan)).
+`JDBCRelation` turns the [needConversion](../../BaseRelation.md#needConversion) flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the [RDD conversion](../../execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan)).
 
 ## Creating Instance
 
@@ -53,7 +53,7 @@ scala> df.explain
 unhandledFilters(filters: Array[Filter]): Array[Filter]
 ----
 
-`unhandledFilters` is part of [BaseRelation](../../spark-sql-BaseRelation.md#unhandledFilters) abstraction.
+`unhandledFilters` is part of [BaseRelation](../../BaseRelation.md#unhandledFilters) abstraction.
 
 `unhandledFilters` returns the <<spark-sql-Filter.md#, Filter predicates>> in the input `filters` that could not be [converted to a SQL expression](JDBCRDD.md#compileFilter) (and are therefore unhandled by the JDBC data source natively).
 
@@ -68,7 +68,7 @@ schema: StructType
 
 If [customSchema](JDBCOptions.md#customSchema) JDBC option was defined, `schema` uses `JdbcUtils` to [replace the data types in the default table schema](JdbcUtils.md#getCustomSchema).
 
-`schema` is part of [BaseRelation](../../spark-sql-BaseRelation.md#schema) abstraction.
+`schema` is part of [BaseRelation](../../BaseRelation.md#schema) abstraction.
 
 === [[insert]] Inserting or Overwriting Data to JDBC Table -- `insert` Method
 

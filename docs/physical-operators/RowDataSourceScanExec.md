@@ -26,16 +26,16 @@ doProduce(ctx: CodegenContext): String
 
 `doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
-=== [[creating-instance]] Creating RowDataSourceScanExec Instance
+## Creating Instance
 
-`RowDataSourceScanExec` takes the following when created:
+`RowDataSourceScanExec` takes the following to be created:
 
-* [[fullOutput]] Output schema spark-sql-Expression-Attribute.md[attributes]
+* [[fullOutput]] Output schema [attributes](../expressions/Attribute.md)
 * [[requiredColumnsIndex]] Indices of required columns
-* [[filters]] spark-sql-Filter.md[Filter predicates]
-* [[handledFilters]] Handled spark-sql-Filter.md[filter predicates]
+* [[filters]] [Filter predicates](../spark-sql-Filter.md)
+* [[handledFilters]] Handled [filter predicates](../spark-sql-Filter.md)
 * [[rdd]] RDD of [InternalRow](../InternalRow.md)s
-* [[relation]] spark-sql-BaseRelation.md[BaseRelation]
+* [[relation]] [BaseRelation](../BaseRelation.md)
 * [[tableIdentifier]] `TableIdentifier`
 
 NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].

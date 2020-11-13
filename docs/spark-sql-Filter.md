@@ -4,7 +4,7 @@
 
 `Filter` is used when:
 
-* (Data Source API V1) `BaseRelation` is requested for spark-sql-BaseRelation.md#unhandledFilters[unhandled filter predicates] (and hence `BaseRelation` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#unhandledFilters))
+* (Data Source API V1) `BaseRelation` is requested for [unhandled filter predicates](BaseRelation.md#unhandledFilters) (and hence `BaseRelation` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#unhandledFilters))
 
 * (Data Source API V1) `PrunedFilteredScan` is requested for spark-sql-PrunedFilteredScan.md#buildScan[build a scan] (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
 

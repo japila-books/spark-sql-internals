@@ -269,7 +269,8 @@ Supported data formats:
 * <<jdbc, jdbc>>
 * `libsvm` -- only when used in `format("libsvm")`
 
-NOTE: Spark SQL allows for spark-sql-datasource-custom-formats.md[developing custom data source formats].
+!!! note
+    Spark SQL allows for custom data source formats.
 
 === [[schema]] Specifying Schema -- `schema` method
 

@@ -19,13 +19,13 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ----
 
-Creates a <<spark-sql-BaseRelation.md#, BaseRelation>> for loading data from an external data source
+Creates a [BaseRelation](BaseRelation.md) for loading data from an external data source
 
 Used exclusively when `DataSource` is requested to [resolve a data source](DataSource.md#resolveRelation) for a given data source format
 
 |===
 
-When [resolving a data source](DataSource.md#resolveRelation), `DataSource` makes sure that a schema is not defined or matches the [schema](spark-sql-BaseRelation.md#schema) of the data source. `DataSource` throws an `AnalysisException` for a user-specified schema that does not match the data source's schema:
+When [resolving a data source](DataSource.md#resolveRelation), `DataSource` makes sure that a schema is not defined or matches the [schema](BaseRelation.md#schema) of the data source. `DataSource` throws an `AnalysisException` for a user-specified schema that does not match the data source's schema:
 
 ```text
 [className] does not allow user-specified schemas.

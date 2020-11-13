@@ -1,5 +1,3 @@
-title: CreateDataSourceTableAsSelectCommand
-
 # CreateDataSourceTableAsSelectCommand Logical Command
 
 `CreateDataSourceTableAsSelectCommand` is a <<DataWritingCommand.md#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).
@@ -64,10 +62,9 @@ NOTE: `run` is part of DataWritingCommand.md#run[DataWritingCommand] contract.
 
 `run` throws an `AssertionError` when the [tableType](../CatalogTable.md#tableType) of the [CatalogTable](#table) is `VIEW` or the [provider](../CatalogTable.md#provider) is undefined.
 
-=== [[saveDataIntoTable]] `saveDataIntoTable` Internal Method
+## <span id="saveDataIntoTable"> saveDataIntoTable
 
-[source, scala]
-----
+```scala
 saveDataIntoTable(
   session: SparkSession,
   table: CatalogTable,
@@ -75,10 +72,8 @@ saveDataIntoTable(
   physicalPlan: SparkPlan,
   mode: SaveMode,
   tableExists: Boolean): BaseRelation
-----
+```
 
-`saveDataIntoTable` creates a spark-sql-BaseRelation.md[BaseRelation] for...FIXME
+`saveDataIntoTable` creates a [BaseRelation](../BaseRelation.md) for...FIXME
 
 `saveDataIntoTable`...FIXME
-
-NOTE: `saveDataIntoTable` is used when `CreateDataSourceTableAsSelectCommand` is <<run, executed>>.

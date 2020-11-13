@@ -32,7 +32,7 @@ run(sparkSession: SparkSession): Seq[Row]
 
 NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
-`run` [creates a DataSource](../DataSource.md#apply) and requests it to [resolve itself](../DataSource.md#resolveRelation) (and create a [BaseRelation](../spark-sql-BaseRelation.md)).
+`run` [creates a DataSource](../DataSource.md#apply) and requests it to [resolve itself](../DataSource.md#resolveRelation) (and create a [BaseRelation](../BaseRelation.md)).
 
 `run` then requests the input `SparkSession` to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from the BaseRelation>> that is used to <<Dataset.md#logicalPlan, get the analyzed logical plan>> (that is the view definition of the temporary table).
 

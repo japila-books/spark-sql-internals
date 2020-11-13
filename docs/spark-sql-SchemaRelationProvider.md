@@ -28,7 +28,7 @@ trait SchemaRelationProvider {
 | Description
 
 | `createRelation`
-| [[createRelation]] Creates a spark-sql-BaseRelation.md[BaseRelation] for the user-defined schema
+| [[createRelation]] Creates a [BaseRelation](BaseRelation.md) for the user-defined schema
 
 Used exclusively when `DataSource` is requested for a [BaseRelation](DataSource.md#resolveRelation) for a given data source format
 |===

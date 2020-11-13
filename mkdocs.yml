@@ -94,7 +94,9 @@ google_analytics:
 nav:
   - Home:
     - Welcome: index.md
+    - DataSource: DataSource.md
     - Connector API:
+      - Connector API: connector/index.md
       - Table: connector/Table.md
       - TableCapability: connector/TableCapability.md
       - TableProvider: connector/TableProvider.md
@@ -121,6 +123,19 @@ nav:
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
       - Transform: connector/Transform.md
+    - Data Source API:
+      - DataSourceRegister: DataSourceRegister.md
+      - CreatableRelationProvider: CreatableRelationProvider.md
+      - RelationProvider: RelationProvider.md
+      - spark-sql-SchemaRelationProvider.md
+      - BaseRelation: BaseRelation.md
+      - spark-sql-FileRelation.md
+      - spark-sql-CatalystScan.md
+      - InsertableRelation: InsertableRelation.md
+      - spark-sql-PrunedFilteredScan.md
+      - spark-sql-PrunedScan.md
+      - spark-sql-TableScan.md
+      - spark-sql-Filter.md
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
@@ -424,23 +439,6 @@ nav:
           - DataSourceRDD: DataSourceRDD.md
           - spark-sql-DataSourceRDDPartition.md
         - spark-sql-DataWritingSparkTask.md
-      - Data Source API V1:
-        - DataSource: DataSource.md
-        - spark-sql-datasource-custom-formats.md
-        - Relation Providers:
-          - CreatableRelationProvider: CreatableRelationProvider.md
-          - DataSourceRegister: DataSourceRegister.md
-          - RelationProvider: RelationProvider.md
-          - spark-sql-SchemaRelationProvider.md
-        - Extension Contracts:
-          - spark-sql-BaseRelation.md
-          - spark-sql-FileRelation.md
-          - spark-sql-CatalystScan.md
-          - InsertableRelation: InsertableRelation.md
-          - spark-sql-PrunedFilteredScan.md
-          - spark-sql-PrunedScan.md
-          - spark-sql-TableScan.md
-        - spark-sql-Filter.md
     - Catalyst:
       - Tree Manipulation Framework: catalyst/index.md
       - TreeNode: catalyst/TreeNode.md

@@ -29,13 +29,6 @@ As of Spark 2.0, `DataFrameReader` can read text files using [textFile](DataFram
 spark.read.textFile("README.md")
 ----
 
-You can also spark-sql-datasource-custom-formats.md[define your own custom file formats].
-
-[source, scala]
-----
-val countries = reader.format("customFormat").load("countries.cf")
-----
-
 There are two operation modes in Spark SQL, i.e. batch and spark-structured-streaming.md[streaming] (part of Spark Structured Streaming).
 
 You can access spark-sql-streaming-DataStreamReader.md[DataStreamReader] for reading streaming datasets through SparkSession.md#readStream[SparkSession.readStream] method.

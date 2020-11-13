@@ -1,6 +1,6 @@
 # HadoopFsRelation
 
-`HadoopFsRelation` is a [BaseRelation](spark-sql-BaseRelation.md) and [FileRelation](spark-sql-FileRelation.md).
+`HadoopFsRelation` is a [BaseRelation](BaseRelation.md) and [FileRelation](spark-sql-FileRelation.md).
 
 ## Creating Instance
 
@@ -47,7 +47,7 @@ sizeInBytes: Long
 
 `sizeInBytes` requests the [FileIndex](#location) for the [size](FileIndex.md#sizeInBytes) and multiplies it by the value of [spark.sql.sources.fileCompressionFactor](configuration-properties.md#spark.sql.sources.fileCompressionFactor) configuration property.
 
-`sizeInBytes` is part of the [BaseRelation](spark-sql-BaseRelation.md#sizeInBytes) abstraction.
+`sizeInBytes` is part of the [BaseRelation](BaseRelation.md#sizeInBytes) abstraction.
 
 ## <span id="toString"> Human-Friendly Textual Representation
 

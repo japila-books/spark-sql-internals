@@ -1,6 +1,6 @@
 # Table
 
-`Table` is an [abstraction](#contract) of [logical structured data set](#implementations) of data sources:
+`Table` is an [abstraction](#contract) of [logical structured data set](#implementations):
 
 * a directory or files on a file system
 * a topic of Apache Kafka

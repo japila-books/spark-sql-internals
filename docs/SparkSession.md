@@ -354,7 +354,7 @@ baseRelationToDataFrame(
   baseRelation: BaseRelation): DataFrame
 ```
 
-Internally, `baseRelationToDataFrame` creates a [DataFrame](spark-sql-DataFrame.md) from the input [BaseRelation](spark-sql-BaseRelation.md) wrapped inside [LogicalRelation](logical-operators/LogicalRelation.md).
+Internally, `baseRelationToDataFrame` creates a [DataFrame](spark-sql-DataFrame.md) from the input [BaseRelation](BaseRelation.md) wrapped inside [LogicalRelation](logical-operators/LogicalRelation.md).
 
 `baseRelationToDataFrame` is used when:
 

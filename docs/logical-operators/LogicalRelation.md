@@ -41,7 +41,7 @@ Relation[value#2] text
 
 `LogicalRelation` takes the following when created:
 
-* [[relation]] [BaseRelation](../spark-sql-BaseRelation.md)
+* [[relation]] [BaseRelation](../BaseRelation.md)
 * [[output]] Output schema `AttributeReferences`
 * [[catalogTable]] Optional [CatalogTable](../CatalogTable.md)
 
@@ -57,17 +57,17 @@ apply(
   table: CatalogTable): LogicalRelation
 ----
 
-`apply` <<creating-instance, creates>> a `LogicalRelation` for the input spark-sql-BaseRelation.md[BaseRelation] (and [CatalogTable](../CatalogTable.md) or optional `isStreaming` flag).
+`apply` <<creating-instance, creates>> a `LogicalRelation` for the input [BaseRelation](../BaseRelation.md) (and [CatalogTable](../CatalogTable.md) or optional `isStreaming` flag).
 
 `apply` is used when:
 
-* `SparkSession` is requested for a SparkSession.md#baseRelationToDataFrame[DataFrame for a BaseRelation]
+* `SparkSession` is requested for a [DataFrame for a BaseRelation](../SparkSession.md#baseRelationToDataFrame)
 
-* CreateTempViewUsing.md[CreateTempViewUsing] command is executed
+* [CreateTempViewUsing](CreateTempViewUsing.md) command is executed
 
 * [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
 
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 
 === [[refresh]] `refresh` Method
 

@@ -241,7 +241,7 @@ Used when:
 * [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
 *  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
 * `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](CatalogFileIndex.md) when no table statistics are available)
-* `BaseRelation` is requested for [an estimated size of this relation](spark-sql-BaseRelation.md#sizeInBytes) (in bytes)
+* `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
 ## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
 

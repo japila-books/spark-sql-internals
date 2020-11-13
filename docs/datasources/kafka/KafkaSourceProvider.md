@@ -68,7 +68,7 @@ createRelation(
 
 `createRelation` then uses the `KafkaWriter` helper object to [write the rows of the DataFrame to the Kafka topic](KafkaWriter.md#write).
 
-In the end, `createRelation` creates a fake [BaseRelation](../../spark-sql-BaseRelation.md) that simply throws an `UnsupportedOperationException` for all its methods.
+In the end, `createRelation` creates a fake [BaseRelation](../../BaseRelation.md) that simply throws an `UnsupportedOperationException` for all its methods.
 
 `createRelation` supports [Append](../../CreatableRelationProvider.md#Append) and [ErrorIfExists](../../CreatableRelationProvider.md#ErrorIfExists) only. `createRelation` throws an `AnalysisException` for the other save modes:
 

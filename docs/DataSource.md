@@ -1,6 +1,6 @@
 # DataSource &mdash; Pluggable Data Provider Framework
 
-`DataSource` paves the way for **Pluggable Data Provider Framework** (_Data Source API_) in Spark SQL.
+`DataSource` paves the way for **Pluggable Data Provider Framework** in Spark SQL.
 
 Together with the <<providers, provider interfaces>>, `DataSource` allows Spark SQL integrators to use external data systems as data sources and sinks in structured queries in Spark SQL (incl. Spark Structured Streaming).
 
@@ -33,7 +33,7 @@ a| [[FileFormat]]
 
 NOTE: Data source is also called a *table provider*.
 
-`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the spark-sql-BaseRelation.md[BaseRelation]) to represent the data source in logical plans (using LogicalRelation.md[LogicalRelation] leaf logical operator).
+`DataSource` requires an <<className, alias or a fully-qualified class name>> of the data source provider (among <<creating-instance, other optional parameters>>). `DataSource` uses the name  to <<lookupDataSource, load the Java class>> (available as <<providingClass, providingClass>> internally). Eventually, `DataSource` uses the Java class to <<resolveRelation, resolve a relation>> (the [BaseRelation](BaseRelation.md)) to represent the data source in logical plans (using LogicalRelation.md[LogicalRelation] leaf logical operator).
 
 `DataSource` also requires a <<sparkSession, SparkSession>> for the configuration properties to <<lookupDataSource, resolve the data source provider>>.
 
@@ -243,17 +243,16 @@ Data source [className] does not support streamed reading
 
 NOTE: `sourceSchema` is used exclusively when `DataSource` is requested for the <<sourceInfo, sourceInfo>>.
 
-=== [[resolveRelation]] Resolving Relation (Creating BaseRelation) -- `resolveRelation` Method
+## <span id="resolveRelation"> Resolving Relation
 
-[source, scala]
-----
+```scala
 resolveRelation(
   checkFilesExist: Boolean = true): BaseRelation
-----
+```
 
-`resolveRelation` resolves (i.e. creates) a spark-sql-BaseRelation.md[BaseRelation].
+`resolveRelation` resolves (creates) a [BaseRelation](BaseRelation.md).
 
-Internally, `resolveRelation` tries to create an instance of the <<providingClass, providingClass>> and branches off per its type and whether the optional <<userSpecifiedSchema, user-specified schema>> was specified or not.
+Internally, `resolveRelation` creates an instance of the [providingClass](#providingClass) and branches based on type and whether the [user-defined schema](#userSpecifiedSchema) was specified or not.
 
 .Resolving BaseRelation per Provider and User-Specified Schema
 [cols="1,3",options="header",width="100%"]
@@ -268,7 +267,7 @@ Internally, `resolveRelation` tries to create an instance of the <<providingClas
 | Executes RelationProvider.md#createRelation[RelationProvider.createRelation]
 
 | [FileFormat](FileFormat.md)
-| Creates a spark-sql-BaseRelation.md#HadoopFsRelation[HadoopFsRelation]
+| Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
 |===
 
 `resolveRelation` is used when:

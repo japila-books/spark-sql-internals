@@ -1,11 +1,11 @@
 # KafkaRelation
 
-`KafkaRelation` is a [BaseRelation](../../spark-sql-BaseRelation.md) with a [TableScan](../../spark-sql-TableScan.md).
+`KafkaRelation` is a [BaseRelation](../../BaseRelation.md) with a [TableScan](../../spark-sql-TableScan.md).
 
 `KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to [create a BaseRelation](KafkaSourceProvider.md#createRelation-RelationProvider) (as a [RelationProvider](../../RelationProvider.md#createRelation)).
 
 [[schema]]
-`KafkaRelation` uses the fixed [schema](../../spark-sql-BaseRelation.md#schema).
+`KafkaRelation` uses the fixed [schema](../../BaseRelation.md#schema).
 
 [[schema]]
 .KafkaRelation's Schema (in the positional order)
