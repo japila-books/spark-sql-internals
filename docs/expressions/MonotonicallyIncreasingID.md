@@ -73,17 +73,17 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addMutableState, add a mutable state>> as `count` name and `long` Java type.
+`doGenCode` requests the `CodegenContext` to [add a mutable state](../CodegenContext.md#addMutableState) as `count` name and `long` Java type.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addImmutableStateIfNotExists, add an immutable state (unless exists already)>> as `partitionMask` name and `long` Java type.
+`doGenCode` requests the `CodegenContext` to [add an immutable state (unless exists already)](../CodegenContext.md#addImmutableStateIfNotExists) as `partitionMask` name and `long` Java type.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[countTerm] = 0L;` statement.
+`doGenCode` requests the `CodegenContext` to [addPartitionInitializationStatement](../CodegenContext.md#addPartitionInitializationStatement) with `[countTerm] = 0L;` statement.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> with `[partitionMaskTerm] = ((long) partitionIndex) << 33;` statement.
+`doGenCode` requests the `CodegenContext` to [addPartitionInitializationStatement](../CodegenContext.md#addPartitionInitializationStatement) with `[partitionMaskTerm] = ((long) partitionIndex) << 33;` statement.
 
 In the end, `doGenCode` returns the input `ExprCode` with the `code` as follows and `isNull` property disabled (`false`):
 
-```
+```text
 final [dataType] [value] = [partitionMaskTerm] + [countTerm];
       [countTerm]++;
 ```

@@ -1,9 +1,9 @@
-# AvroFileFormat -- FileFormat For Avro-Encoded Files
+# AvroFileFormat
 
-`AvroFileFormat` is a [FileFormat](FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
+`AvroFileFormat` is a [FileFormat](../../FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 
 [[shortName]]
-`AvroFileFormat` is a [DataSourceRegister](DataSourceRegister.md) and [registers itself](DataSourceRegister.md#shortName) as *avro* data source.
+`AvroFileFormat` is a [DataSourceRegister](../../DataSourceRegister.md) and [registers itself](../../DataSourceRegister.md#shortName) as *avro* data source.
 
 ```text
 // ./bin/spark-shell --packages org.apache.spark:spark-avro_2.12:2.4.0
@@ -29,7 +29,7 @@ scala> q.show
 ```
 
 [[isSplitable]]
-`AvroFileFormat` is [splitable](FileFormat.md#isSplitable), i.e. FIXME
+`AvroFileFormat` is [splitable](../../FileFormat.md#isSplitable), i.e. FIXME
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -47,7 +47,7 @@ buildReader(
 
 `buildReader`...FIXME
 
-`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.
+`buildReader` is part of the [FileFormat](../../FileFormat.md#buildReader) abstraction.
 
 === [[inferSchema]] Inferring Schema -- `inferSchema` Method
 
@@ -61,7 +61,7 @@ inferSchema(
 
 `inferSchema`...FIXME
 
-`inferSchema` is part of the [FileFormat](FileFormat.md#inferSchema) abstraction.
+`inferSchema` is part of the [FileFormat](../../FileFormat.md#inferSchema) abstraction.
 
 === [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
@@ -76,4 +76,4 @@ prepareWrite(
 
 `prepareWrite`...FIXME
 
-`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of the [FileFormat](../../FileFormat.md#prepareWrite) abstraction.

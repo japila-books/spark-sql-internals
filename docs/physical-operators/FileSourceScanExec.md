@@ -44,7 +44,7 @@ SelectedBucketsCount -> 4 out of 4
 ```
 
 [[inputRDDs]]
-`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the [input RDDs](CodegenSupport.md#inputRDDs) (in <<spark-sql-whole-stage-codegen.md#, Whole-Stage Java Code Generation>>).
+`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the [input RDDs](CodegenSupport.md#inputRDDs) (in [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)).
 
 When <<doExecute, executed>>, `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
 

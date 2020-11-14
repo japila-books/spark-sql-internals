@@ -1,6 +1,6 @@
 # FileScanRDD &mdash; Input RDD of FileSourceScanExec Physical Operator
 
-`FileScanRDD` is the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) of [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) leaf physical operator (for [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md)).
+`FileScanRDD` is the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) of [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) leaf physical operator (for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)).
 
 !!! note "The Internals of Apache Spark"
     Find out more on `RDD` abstraction in [The Internals of Apache Spark](https://books.japila.pl/apache-spark-internals/apache-spark-internals/rdd/RDD.html).

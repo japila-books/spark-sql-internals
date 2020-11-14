@@ -1,6 +1,6 @@
 # WholeStageCodegenExec Unary Physical Operator
 
-`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) for a **Codegened Execution Pipeline** of a structured query.
+`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) for a **Codegened Execution Pipeline** of a structured query.
 
 !!! note
     [InputAdapter](InputAdapter.md) is the other physical operator for Codegened Execution Pipeline of a structured query.
@@ -84,15 +84,13 @@ Generated code:
 
 `WholeStageCodegenExec` is <<creating-instance, created>> when:
 
-* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (with spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] configuration property enabled)
+* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (with [spark.sql.codegen.wholeStage](../whole-stage-code-generation/index.md#spark.sql.codegen.wholeStage) configuration property enabled)
 
 * `FileSourceScanExec` leaf physical operator is <<FileSourceScanExec.md#doExecute, executed>> (with the <<FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
 * `InMemoryTableScanExec` leaf physical operator is <<InMemoryTableScanExec.md#doExecute, executed>> (with the <<InMemoryTableScanExec.md#supportsBatch, supportsBatch>> flag enabled)
 
 * `DataSourceV2ScanExec` leaf physical operator is <<DataSourceV2ScanExec.md#doExecute, executed>> (with the <<DataSourceV2ScanExec.md#supportsBatch, supportsBatch>> flag enabled)
-
-NOTE: spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage[spark.sql.codegen.wholeStage] property is enabled by default.
 
 [[creating-instance]]
 [[child]]
@@ -174,7 +172,7 @@ When <<doExecute, executed>>, `WholeStageCodegenExec` gives <<pipelineTime, pipe
 
 | [[pipelineTime]] `pipelineTime`
 | (empty)
-| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying spark-sql-BufferedRowIterator.md[BufferedRowIterator] had been created and the internal rows were all consumed).
+| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
 |===
 
 .WholeStageCodegenExec in web UI (Details for Query)
@@ -250,9 +248,9 @@ Whole-stage codegen disabled for plan (id=[codegenStageId]):
 doCodeGen(): (CodegenContext, CodeAndComment)
 ----
 
-`doCodeGen` creates a new <<spark-sql-CodegenContext.md#creating-instance, CodegenContext>> and requests the single <<child, child>> physical operator to [generate a Java source code for produce code path](CodegenSupport.md#produce) (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
+`doCodeGen` creates a new [CodegenContext](../CodegenContext.md) and requests the single <<child, child>> physical operator to [generate a Java source code for produce code path](CodegenSupport.md#produce) (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
 
-`doCodeGen` <<spark-sql-CodegenContext.md#addNewFunction, adds the new function>> under the name of `processNext`.
+`doCodeGen` [adds the new function](../CodegenContext.md#addNewFunction) under the name of `processNext`.
 
 `doCodeGen` <<generatedClassName, generates the class name>>.
 
@@ -302,7 +300,7 @@ DEBUG WholeStageCodegenExec:
 [cleanedSource]
 ```
 
-In the end, `doCodeGen` returns the <<spark-sql-CodegenContext.md#, CodegenContext>> and the Java source code (as a `CodeAndComment`).
+In the end, `doCodeGen` returns the [CodegenContext](../CodegenContext.md) and the Java source code (as a `CodeAndComment`).
 
 `doCodeGen` is used when:
 

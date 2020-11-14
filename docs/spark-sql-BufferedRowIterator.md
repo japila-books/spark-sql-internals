@@ -1,3 +1,0 @@
-# BufferedRowIterator
-
-`BufferedRowIterator` is...FIXME

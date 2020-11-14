@@ -86,7 +86,7 @@ lookupDataSource(
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
-* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](AvroFileFormat.md) module
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](datasources/avro/AvroFileFormat.md) module
 
 `lookupDataSource` uses `DefaultSource` as the class name as another provider name variant (i.e. `[provider1].DefaultSource`).
 

@@ -12,7 +12,7 @@ NOTE: `Generator` corresponds to SQL's spark-sql-AstBuilder.md#withGenerate[LATE
 `Generator` is not Expression.md#foldable[foldable] and not Expression.md#nullable[nullable] by default.
 
 [[supportCodegen]]
-`Generator` supports [Java code generation](../spark-sql-whole-stage-codegen.md) conditionally, i.e. only when a physical operator is not marked as [CodegenFallback](Expression.md#CodegenFallback).
+`Generator` supports [Java code generation](../whole-stage-code-generation/index.md) conditionally, i.e. only when a physical operator is not marked as [CodegenFallback](Expression.md#CodegenFallback).
 
 [[terminate]]
 `Generator` uses `terminate` to inform that there are no more rows to process, clean up code, and additional rows can be made here.

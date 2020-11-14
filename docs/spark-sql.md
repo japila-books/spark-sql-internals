@@ -34,7 +34,7 @@ When an action is executed on a `Dataset` (directly, e.g. spark-sql-dataset-oper
 1. [Caching Replacement](QueryExecution.md#withCachedData)
 1. [Logical Query Optimization](QueryExecution.md#optimizedPlan) (using [rule-based](SparkOptimizer.md) and spark-sql-cost-based-optimization.md[cost-based] optimizations)
 1. [Physical Planning](QueryExecution.md#sparkPlan)
-1. [Physical Optimization](QueryExecution.md#executedPlan) (e.g. spark-sql-whole-stage-codegen.md[Whole-Stage Java Code Generation] or [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md))
+1. [Physical Optimization](QueryExecution.md#executedPlan) (e.g. [Whole-Stage Java Code Generation](whole-stage-code-generation/index.md) or [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md))
 1. [Constructing the RDD of Internal Binary Rows](QueryExecution.md#toRdd) (that represents the structured query in terms of Spark Core's RDD API)
 
 Spark SQL is _de facto_ the primary and feature-rich interface to Spark's underlying in-memory distributed platform (hiding Spark Core's RDDs behind higher-level abstractions that allow for [logical](SparkOptimizer.md#batches) and [physical](SparkPlanner.md#strategies) query optimization strategies even without your consent).
@@ -109,7 +109,7 @@ scala> sql("desc EXTENDED v1").show(false)
 +----------+---------+-------+
 ```
 
-Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](catalyst/Optimizer.md) (aka *Catalyst Optimizer*), spark-sql-whole-stage-codegen.md[whole-stage Java code generation] (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own [InternalRow](InternalRow.md).
+Like SQL and NoSQL databases, Spark SQL offers performance query optimizations using [rule-based logical query optimizer](catalyst/Optimizer.md) (aka *Catalyst Optimizer*), [whole-stage Java code generation](whole-stage-code-generation/index.md) (aka *Whole-Stage Codegen* that could often be better than your own custom hand-written code!) and spark-sql-tungsten.md[Tungsten execution engine] with its own [InternalRow](InternalRow.md).
 
 As of Spark SQL 2.2, structured queries can be further optimized using [Hint Framework](new-and-noteworthy/hint-framework.md).
 

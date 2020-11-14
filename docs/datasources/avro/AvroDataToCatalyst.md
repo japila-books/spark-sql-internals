@@ -1,8 +1,6 @@
-title: AvroDataToCatalyst
-
 # AvroDataToCatalyst Unary Expression
 
-`AvroDataToCatalyst` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents <<spark-sql-avro.md#from_avro, from_avro>> function in a structured query.
+`AvroDataToCatalyst` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents [from_avro](index.md#from_avro) function in a structured query.
 
 [[creating-instance]]
 `AvroDataToCatalyst` takes the following when created:
@@ -21,7 +19,7 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (`ExprCode`) for code-generated expression evaluation.
 
-`doGenCode` requests the `CodegenContext` to <<spark-sql-CodegenContext.md#addReferenceObj, generate code to reference this AvroDataToCatalyst instance>>.
+`doGenCode` requests the `CodegenContext` to [generate code to reference this AvroDataToCatalyst instance](../../CodegenContext.md#addReferenceObj).
 
 In the end, `doGenCode` <<spark-sql-Expression-UnaryExpression.md#defineCodeGen, defineCodeGen>> with the function `f` that uses <<nullSafeEval, nullSafeEval>>.
 

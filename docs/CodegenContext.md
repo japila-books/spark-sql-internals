@@ -1,7 +1,5 @@
 # CodegenContext
 
-`CodegenContext` is...FIXME
-
 [[creating-instance]]
 `CodegenContext` takes no input parameters.
 

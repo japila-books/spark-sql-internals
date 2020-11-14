@@ -31,8 +31,6 @@ Tungsten does code generation at compile time and generates JVM bytecode to acce
 
 NOTE: The code generation was tracked under [SPARK-8159 Improve expression function coverage (Spark 1.5)](https://issues.apache.org/jira/browse/SPARK-8159).
 
-TIP: Read [Whole-Stage Code Generation](spark-sql-whole-stage-codegen.md).
-
 ## [[i-want-more]] Further Reading and Watching
 
 . [Project Tungsten: Bringing Spark Closer to Bare Metal](https://databricks.com/blog/2015/04/28/project-tungsten-bringing-spark-closer-to-bare-metal.html)

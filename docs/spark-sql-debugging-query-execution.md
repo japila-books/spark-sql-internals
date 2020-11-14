@@ -18,7 +18,7 @@ debug(): Unit
 ----
 
 | <<debugCodegen, debugCodegen>>
-a| Displays the Java source code generated for a structured query in <<spark-sql-whole-stage-codegen.md#, whole-stage code generation>> (i.e. the output of each <<WholeStageCodegenExec.md#, WholeStageCodegen subtree>> in a query plan).
+a| Displays the Java source code generated for a structured query in [whole-stage code generation](whole-stage-code-generation/index.md) (i.e. the output of each <<WholeStageCodegenExec.md#, WholeStageCodegen subtree>> in a query plan).
 
 [source, scala]
 ----

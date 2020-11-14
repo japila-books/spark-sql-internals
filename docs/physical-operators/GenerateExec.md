@@ -36,7 +36,7 @@ NOTE: <<child, child>> physical operator has to support [CodegenSupport](Codegen
 `GenerateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
 [[supportCodegen]]
-`GenerateExec` does not support spark-sql-whole-stage-codegen.md[Java code generation] (aka _whole-stage codegen_), i.e. [supportCodegen](CodegenSupport.md#supportCodegen) flag is turned off.
+`GenerateExec` does not support [Java code generation](../whole-stage-code-generation/index.md) (aka _whole-stage codegen_), i.e. [supportCodegen](CodegenSupport.md#supportCodegen) flag is turned off.
 
 ```text
 scala> :type ge

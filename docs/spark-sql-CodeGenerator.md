@@ -92,7 +92,7 @@ CAUTION: FIXME
 newCodeGenContext(): CodegenContext
 ----
 
-`newCodeGenContext` simply creates a new spark-sql-CodegenContext.md#creating-instance[CodegenContext].
+`newCodeGenContext` simply creates a new [CodegenContext](CodegenContext.md).
 
 [NOTE]
 ====

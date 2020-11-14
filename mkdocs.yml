@@ -366,11 +366,11 @@ nav:
         - JsonUtils: datasources/kafka/JsonUtils.md
         - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
       - Avro:
-        - spark-sql-avro.md
-        - spark-sql-AvroOptions.md
-        - AvroFileFormat: AvroFileFormat.md
-        - spark-sql-Expression-CatalystDataToAvro.md
-        - spark-sql-Expression-AvroDataToCatalyst.md
+        - Avro Data Source: datasources/avro/index.md
+        - AvroOptions: datasources/avro/AvroOptions.md
+        - AvroFileFormat: datasources/avro/AvroFileFormat.md
+        - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
+        - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
       - JDBC:
         - JDBC Data Source: datasources/jdbc/index.md
         - JDBCOptions: datasources/jdbc/JDBCOptions.md
@@ -788,8 +788,9 @@ nav:
     - spark-sql-dynamic-partition-inserts.md
     - spark-sql-bucketing.md
     - Whole-Stage CodeGen:
-      - spark-sql-whole-stage-codegen.md
-      - spark-sql-CodegenContext.md
+      - Whole-Stage CodeGen: whole-stage-code-generation/index.md
+      - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
+      - CodegenContext: CodegenContext.md
       - spark-sql-CodeGenerator.md
       - spark-sql-GenerateColumnAccessor.md
       - spark-sql-GenerateOrdering.md
@@ -956,7 +957,6 @@ nav:
     - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
     - CatalogUtils: spark-sql-CatalogUtils.md
     - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
-    - BufferedRowIterator: spark-sql-BufferedRowIterator.md
     - CompressionCodecs: spark-sql-CompressionCodecs.md
     - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
     - JoinStrategyHint: JoinStrategyHint.md

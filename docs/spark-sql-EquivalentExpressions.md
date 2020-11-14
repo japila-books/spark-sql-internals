@@ -24,7 +24,7 @@ addExprTree(expr: Expression): Unit
 
 `addExprTree`...FIXME
 
-NOTE: `addExprTree` is used when `CodegenContext` is requested to spark-sql-CodegenContext.md#subexpressionElimination[subexpressionElimination] or spark-sql-CodegenContext.md#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
+NOTE: `addExprTree` is used when `CodegenContext` is requested to [subexpressionElimination](CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](CodegenContext.md#subexpressionEliminationForWholeStageCodegen).
 
 === [[addExpr]] `addExpr` Method
 
@@ -53,4 +53,4 @@ getAllEquivalentExprs: Seq[Seq[Expression]]
 
 `getAllEquivalentExprs` takes the values of all the <<equivalenceMap, equivalent sets of expressions>>.
 
-NOTE: `getAllEquivalentExprs` is used when `CodegenContext` is requested to spark-sql-CodegenContext.md#subexpressionElimination[subexpressionElimination] or spark-sql-CodegenContext.md#subexpressionEliminationForWholeStageCodegen[subexpressionEliminationForWholeStageCodegen].
+`getAllEquivalentExprs` is used when `CodegenContext` is requested to [subexpressionElimination](CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](CodegenContext.md#subexpressionEliminationForWholeStageCodegen).

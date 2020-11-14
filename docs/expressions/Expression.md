@@ -265,23 +265,23 @@ reduceCodeSize(ctx: CodegenContext, eval: ExprCode): Unit
 
 `reduceCodeSize` does its work only when all of the following are met:
 
-. Length of the generate code is above 1024
+1. Length of the generate code is above 1024
 
-. spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW] of the input `CodegenContext` is defined
+1. [INPUT_ROW](../CodegenContext.md#INPUT_ROW) of the input `CodegenContext` is defined
 
-. spark-sql-CodegenContext.md#currentVars[currentVars] of the input `CodegenContext` is not defined
+1. [currentVars](../CodegenContext.md#currentVars) of the input `CodegenContext` is not defined
 
 CAUTION: FIXME When would the above not be met? What's so special about such an expression?
 
-`reduceCodeSize` sets the `value` of the input `ExprCode` to the spark-sql-CodegenContext.md#freshName[fresh term name] for the `value` name.
+`reduceCodeSize` sets the `value` of the input `ExprCode` to the [fresh term name](../CodegenContext.md#freshName) for the `value` name.
 
 In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the following:
 
-```
+```text
 [javaType] [newValue] = [funcFullName]([INPUT_ROW]);
 ```
 
-The `funcFullName` is the spark-sql-CodegenContext.md#freshName[fresh term name] for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
+The `funcFullName` is the [fresh term name](../CodegenContext.md#freshName) for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
 
 TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
 

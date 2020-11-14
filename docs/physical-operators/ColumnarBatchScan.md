@@ -1,4 +1,4 @@
-# ColumnarBatchScan -- Physical Operators With Vectorized Reader
+# ColumnarBatchScan &mdash; Physical Operators With Vectorized Reader
 
 `ColumnarBatchScan` is an <<contract, extension>> of [CodegenSupport](CodegenSupport.md) abstraction for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
@@ -164,7 +164,7 @@ supportsBatch: Boolean = true
 doProduce(ctx: CodegenContext): String
 ----
 
-`doProduce` firstly requests the input `CodegenContext` to spark-sql-CodegenContext.md#addMutableState[add a mutable state] for the first input RDD of a <<implementations, physical operator>>.
+`doProduce` firstly requests the input `CodegenContext` to [add a mutable state](../CodegenContext.md#addMutableState) for the first input RDD of a <<implementations, physical operator>>.
 
 `doProduce` <<produceBatches, produceBatches>> when <<supportsBatch, supportsBatch>> is enabled or <<produceRows, produceRows>>.
 
@@ -258,9 +258,9 @@ produceRows(ctx: CodegenContext, input: String): String
 
 `produceRows` creates a new [metric term](CodegenSupport.md#metricTerm) for the <<numOutputRows, numOutputRows>> metric.
 
-`produceRows` creates a spark-sql-CodegenContext.md#freshName[fresh term name] for a `row` variable and assigns it as the name of the spark-sql-CodegenContext.md#INPUT_ROW[INPUT_ROW].
+`produceRows` creates a [fresh term name](../CodegenContext.md#freshName) for a `row` variable and assigns it as the name of the [INPUT_ROW](../CodegenContext.md#INPUT_ROW).
 
-`produceRows` resets (`nulls`) spark-sql-CodegenContext.md#currentVars[currentVars].
+`produceRows` resets (`nulls`) [currentVars](../CodegenContext.md#currentVars).
 
 For every catalyst/QueryPlan.md#output[output schema attribute], `produceRows` creates a spark-sql-Expression-BoundReference.md#creating-instance[BoundReference] and requests it to expressions/Expression.md#genCode[generate code for expression evaluation].
 

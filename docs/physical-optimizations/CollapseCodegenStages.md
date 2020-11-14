@@ -2,7 +2,7 @@
 
 `CollapseCodegenStages` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that <<apply, collapses physical operators and generates a Java source code for their execution>>.
 
-When <<apply, executed>> (with <<spark-sql-whole-stage-codegen.md#spark.sql.codegen.wholeStage, whole-stage code generation enabled>>), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a [physical operator](../physical-operators/SparkPlan.md) supports the <<spark-sql-whole-stage-codegen.md#, whole-stage Java code generation>> or not (and what physical operator to insert):
+When <<apply, executed>> (with [whole-stage code generation enabled](../whole-stage-code-generation/index.md#spark.sql.codegen.wholeStage)), `CollapseCodegenStages` <<insertWholeStageCodegen, inserts WholeStageCodegenExec or InputAdapter physical operators>> to a physical plan. `CollapseCodegenStages` uses so-called *control gates* before deciding whether a [physical operator](../physical-operators/SparkPlan.md) supports the [whole-stage Java code generation](../whole-stage-code-generation/index.md) or not (and what physical operator to insert):
 
 . Factors in physical operators with [CodegenSupport](../physical-operators/CodegenSupport.md) only
 

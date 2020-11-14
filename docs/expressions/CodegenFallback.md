@@ -1,6 +1,4 @@
-title: CodegenFallback
-
-# CodegenFallback -- Catalyst Expressions with Fallback Code Generation Mode
+# CodegenFallback &mdash; Catalyst Expressions with Fallback Code Generation Mode
 
 `CodegenFallback` is the <<contract, contract>> of <<implementations, Catalyst expressions>> that do not support a Java code generation and want to <<doGenCode, fall back to interpreted mode>> (aka _fallback mode_).
 
@@ -73,13 +71,13 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
-`doGenCode` requests the input `CodegenContext` to add itself to the <<spark-sql-CodegenContext.md#references, references>>.
+`doGenCode` requests the input `CodegenContext` to add itself to the [references](../CodegenContext.md#references).
 
 `doGenCode` [walks down the expression tree](../catalyst/TreeNode.md#foreach) to find <<spark-sql-Expression-Nondeterministic.md#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
 
-. Requests the input `CodegenContext` to add it to the <<spark-sql-CodegenContext.md#references, references>>
+. Requests the input `CodegenContext` to add it to the [references](../CodegenContext.md#references)
 
-. Requests the input `CodegenContext` to <<spark-sql-CodegenContext.md#addPartitionInitializationStatement, addPartitionInitializationStatement>> that is a Java code block as follows:
+. Requests the input `CodegenContext` to [addPartitionInitializationStatement](../CodegenContext.md#addPartitionInitializationStatement) that is a Java code block as follows:
 +
 [source, scala]
 ----

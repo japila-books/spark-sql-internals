@@ -2,7 +2,7 @@
 
 `StaticInvoke` is an [expression](Expression.md) with [no SQL representation](Expression.md#NonSQLExpression) that represents a static method call in Scala or Java.
 
-`StaticInvoke` supports [Java code generation](../spark-sql-whole-stage-codegen.md) to evaluate itself.
+`StaticInvoke` supports [Java code generation](../whole-stage-code-generation/index.md) to evaluate itself.
 
 `StaticInvoke` is <<creating-instance, created>> when:
 

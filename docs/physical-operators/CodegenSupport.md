@@ -1,6 +1,6 @@
 # CodegenSupport Physical Operators
 
-`CodegenSupport` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [physical operators](#implementations) that support [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
+`CodegenSupport` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [physical operators](#implementations) that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 
 ## Contract
 
@@ -13,7 +13,7 @@ doConsume(
   row: ExprCode): String
 ```
 
-Generates a Java source code (as a text) for the physical operator for the ["consume" path](../spark-sql-whole-stage-codegen.md#consume-path) in [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md)
+Generates a Java source code (as a text) for the physical operator for the ["consume" path](../whole-stage-code-generation/index.md#consume-path) in [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)
 
 !!! note "UnsupportedOperationException"
     `doConsume` throws an `UnsupportedOperationException` by default.
@@ -27,7 +27,7 @@ doProduce(
   ctx: CodegenContext): String
 ```
 
-Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the [whole-stage-codegen "produce" path](../spark-sql-whole-stage-codegen.md#produce-path).
+Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the [whole-stage-codegen "produce" path](../whole-stage-code-generation/index.md#produce-path).
 
 Used when the physical operator is requested to [generate the Java source code for "produce" code path](#produce)
 
@@ -40,7 +40,7 @@ inputRDDs(): Seq[RDD[InternalRow]]
 Input RDDs of the physical operator
 
 !!! important
-    [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md) supports up to two input RDDs.
+    [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) supports up to two input RDDs.
 
 Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical operator is executed
 
@@ -66,7 +66,7 @@ Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical opera
 
 ## Final Methods
 
-Final methods are used to generate the Java source code in different phases of [Whole-Stage Java Code Generation](../spark-sql-whole-stage-codegen.md).
+Final methods are used to generate the Java source code in different phases of [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 
 ### <span id="consume"> Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator
 
@@ -83,17 +83,17 @@ consume(
 
 * If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the [output attributes](../catalyst/QueryPlan.md#output) and copies them. In other words, `inputVars` is exactly `outputVars`.
 
-* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets [currentVars](../spark-sql-CodegenContext.md#currentVars) of the `CodegenContext` to `null` while [INPUT_ROW](../spark-sql-CodegenContext.md#INPUT_ROW) to the `row`. For every [output attribute](../catalyst/QueryPlan.md#output), `consume` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
+* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets [currentVars](../CodegenContext.md#currentVars) of the `CodegenContext` to `null` while [INPUT_ROW](../CodegenContext.md#INPUT_ROW) to the `row`. For every [output attribute](../catalyst/QueryPlan.md#output), `consume` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
 
 `consume` [creates a row variable](#prepareRowVar).
 
 `consume` sets the following in the `CodegenContext`:
 
-* [currentVars](../spark-sql-CodegenContext.md#currentVars) as the `inputVars`
+* [currentVars](../CodegenContext.md#currentVars) as the `inputVars`
 
-* [INPUT_ROW](../spark-sql-CodegenContext.md#INPUT_ROW) as `null`
+* [INPUT_ROW](../CodegenContext.md#INPUT_ROW) as `null`
 
-* [freshNamePrefix](../spark-sql-CodegenContext.md#freshNamePrefix) as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
+* [freshNamePrefix](../CodegenContext.md#freshNamePrefix) as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
 
 `consume` <<evaluateRequiredVariables, evaluateRequiredVariables>> (with the `output`, `inputVars` and <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>>) and creates so-called `evaluated`.
 
@@ -159,9 +159,9 @@ Found 2 WholeStageCodegen subtrees.
 
 `consume` is used when:
 
-* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<FilterExec.md#doConsume, FilterExec>>, GenerateExec.md#doConsume[GenerateExec], ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for spark-sql-whole-stage-codegen.md#consume-path["consume" path] in whole-stage code generation
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<FilterExec.md#doConsume, FilterExec>>, GenerateExec.md#doConsume[GenerateExec], ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for ["consume" path](../whole-stage-code-generation/index.md#consume-path) in whole-stage code generation
 
-* spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], HashAggregateExec.md#doProduce[HashAggregateExec], InputAdapter.md#doProduce[InputAdapter], RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], RangeExec.md#doProduce[RangeExec], SortExec.md#doProduce[SortExec], SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the spark-sql-whole-stage-codegen.md#produce-path["produce" path] in whole-stage code generation
+* spark-sql-ColumnarBatchScan.md#doProduce[ColumnarBatchScan], HashAggregateExec.md#doProduce[HashAggregateExec], InputAdapter.md#doProduce[InputAdapter], RowDataSourceScanExec.md#doProduce[RowDataSourceScanExec], RangeExec.md#doProduce[RangeExec], SortExec.md#doProduce[SortExec], SortMergeJoinExec.md#doProduce[SortMergeJoinExec] physical operators are requested to generate the Java source code for the ["produce" path](../whole-stage-code-generation/index.md#produce-path) in whole-stage code generation
 
 ### <span id="limitNotReachedCond"> Data-Producing Loop Condition
 
@@ -183,7 +183,7 @@ produce(
   parent: CodegenSupport): String
 ```
 
-`produce` generates Java source code for [whole-stage-codegen "produce" code path](../spark-sql-whole-stage-codegen.md#produce-path).
+`produce` generates Java source code for [whole-stage-codegen "produce" code path](../whole-stage-code-generation/index.md#produce-path).
 
 `produce` [prepares a physical operator for query execution](SparkPlan.md#executeQuery) and then generates a Java source code with the result of [doProduce](#doProduce).
 

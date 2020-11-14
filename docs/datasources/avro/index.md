@@ -68,7 +68,7 @@ import org.apache.spark.sql.avro._
 to_avro(data: Column): Column
 ----
 
-`to_avro` creates a <<spark-sql-Column.md#, Column>> with the <<spark-sql-Expression-CatalystDataToAvro.md#, CatalystDataToAvro>> unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column).
+`to_avro` creates a <<spark-sql-Column.md#, Column>> with the [CatalystDataToAvro](CatalystDataToAvro.md) unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column).
 
 [source, scala]
 ----
@@ -102,7 +102,7 @@ to_avro(`id`, bigint)
 from_avro(data: Column, jsonFormatSchema: String): Column
 ----
 
-`from_avro` creates a <<spark-sql-Column.md#, Column>> with the <<spark-sql-Expression-AvroDataToCatalyst.md#, AvroDataToCatalyst>> unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column and the `jsonFormatSchema` JSON-encoded schema).
+`from_avro` creates a <<spark-sql-Column.md#, Column>> with the [AvroDataToCatalyst](AvroDataToCatalyst.md) unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column and the `jsonFormatSchema` JSON-encoded schema).
 
 [source, scala]
 ----

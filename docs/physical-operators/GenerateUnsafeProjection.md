@@ -1,6 +1,6 @@
 # GenerateUnsafeProjection
 
-`GenerateUnsafeProjection` is a spark-sql-CodeGenerator.md[CodeGenerator] that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
+`GenerateUnsafeProjection` is a [CodeGenerator](../spark-sql-CodeGenerator.md) that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 
 [source, scala]
 ----
@@ -91,7 +91,7 @@ class SpecificUnsafeProjection extends UnsafeProjection {
 }
 ----
 
-`create` creates a `CodeAndComment` with the code body and spark-sql-CodegenContext.md#placeHolderToComments[comment placeholders].
+`create` creates a `CodeAndComment` with the code body and [comment placeholders](../CodegenContext.md#placeHolderToComments).
 
 You should see the following DEBUG message in the logs:
 
@@ -113,7 +113,7 @@ See spark-sql-CodeGenerator.md#logging[CodeGenerator].
 
 `create` requests `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile the Java source code to JVM bytecode (using Janino)].
 
-`create` requests `CodegenContext` for spark-sql-CodegenContext.md#references[references] and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final spark-sql-UnsafeProjection.md[UnsafeProjection].
+`create` requests `CodegenContext` for [references](../CodegenContext.md#references) and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final spark-sql-UnsafeProjection.md[UnsafeProjection].
 
 NOTE: (Single-argument) `create` is part of spark-sql-CodeGenerator.md#create[CodeGenerator Contract].
 
@@ -127,7 +127,7 @@ createCode(
   useSubexprElimination: Boolean = false): ExprCode
 ----
 
-`createCode` requests the input `CodegenContext` to spark-sql-CodegenContext.md#generateExpressions[generate a Java source code for code-generated evaluation] of every expression in the input `expressions`.
+`createCode` requests the input `CodegenContext` to [generate a Java source code for code-generated evaluation](../CodegenContext.md#generateExpressions) of every expression in the input `expressions`.
 
 `createCode`...FIXME
 

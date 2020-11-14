@@ -1,8 +1,6 @@
-title: Options
+# AvroOptions
 
-# AvroOptions -- Avro Data Source Options
-
-`AvroOptions` represents the <<options, options>> of the <<spark-sql-avro.md#, Avro data source>>.
+`AvroOptions` represents the <<options, options>> of the [Avro](index.md) data source.
 
 [[options]]
 .Options for Avro Data Source
@@ -21,7 +19,7 @@ title: Options
 a| [[compression]] Specifies the compression codec to use when writing Avro data to disk
 
 !!! note
-    If the option is not defined explicitly, Avro data source uses [spark.sql.avro.compression.codec](configuration-properties.md#spark.sql.avro.compression.codec) configuration property.
+    If the option is not defined explicitly, Avro data source uses [spark.sql.avro.compression.codec](../../configuration-properties.md#spark.sql.avro.compression.codec) configuration property.
 
 | ignoreExtension
 | `false`

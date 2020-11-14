@@ -120,7 +120,7 @@ Used when `FileSourceScanExec` physical operator is requested for the [vectorTyp
 
 ## Implementations
 
-* [AvroFileFormat](AvroFileFormat.md)
+* [AvroFileFormat](datasources/avro/AvroFileFormat.md)
 * BinaryFileFormat
 * [HiveFileFormat](hive/HiveFileFormat.md)
 * ImageFileFormat

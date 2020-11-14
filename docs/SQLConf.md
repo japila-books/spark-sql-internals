@@ -110,7 +110,7 @@ Used when:
 
 The value of [spark.sql.avro.compression.codec](configuration-properties.md#spark.sql.avro.compression.codec) configuration property
 
-Used when `AvroOptions` is requested for the [compression](spark-sql-AvroOptions.md#compression) configuration property (and it was not set explicitly)
+Used when `AvroOptions` is requested for the [compression](datasources/avro/AvroOptions.md#compression) configuration property (and it was not set explicitly)
 
 ## <span id="broadcastTimeout"> broadcastTimeout
 
