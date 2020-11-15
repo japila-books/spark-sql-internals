@@ -1596,6 +1596,14 @@
      <lastmod>2020-11-15</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AliasAwareOutputPartitioning/</loc>
+     <lastmod>2020-11-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BaseAggregateExec/</loc>
+     <lastmod>2020-11-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BaseLimitExec/</loc>
      <lastmod>2020-11-15</lastmod>
      <changefreq>daily</changefreq>
@@ -2480,7 +2488,7 @@
      <lastmod>2020-11-15</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-UnsafeFixedWidthAggregationMap/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/UnsafeFixedWidthAggregationMap/</loc>
      <lastmod>2020-11-15</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
