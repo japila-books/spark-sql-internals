@@ -36,7 +36,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `InConversion` type coercion rule is requested to [coerceTypes](logical-analysis-rules/InConversion.md#coerceTypes)
 
-* `ExpressionEncoder` is requested to <<spark-sql-ExpressionEncoder.md#tuple, create an ExpressionEncoder for a tuple>>
+* `ExpressionEncoder` is requested to [create an ExpressionEncoder for a tuple](ExpressionEncoder.md#tuple)
 
 * `Stack` generator expression is requested to <<spark-sql-Expression-Stack.md#doGenCode, generate a Java source code>>
 

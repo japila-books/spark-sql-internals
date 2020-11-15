@@ -250,9 +250,9 @@ Internally, `doExecute` first takes spark-sql-Expression-WindowExpression.md[Win
 ==== [[iterator]] Mapping Over UnsafeRows per Partition -- `Iterator[InternalRow]`
 
 [[result]]
-When created, `Iterator[InternalRow]` first creates two spark-sql-UnsafeProjection.md[UnsafeProjection] conversion functions (to convert `InternalRows` to `UnsafeRows`) as <<createResultProjection, result>> and `grouping`.
+When created, `Iterator[InternalRow]` first creates two [UnsafeProjection](../expressions/UnsafeProjection.md) conversion functions (to convert `InternalRows` to `UnsafeRows`) as <<createResultProjection, result>> and `grouping`.
 
-NOTE: <<grouping, grouping>> conversion function is spark-sql-GenerateUnsafeProjection.md#create[created] for <<partitionSpec, window partition specifications expressions>> and used exclusively to create <<nextGroup, nextGroup>> when `Iterator[InternalRow]` is requested <<fetchNextRow, next row>>.
+NOTE: <<grouping, grouping>> conversion function is [created](../whole-stage-code-generation/GenerateUnsafeProjection.md#create) for <<partitionSpec, window partition specifications expressions>> and used exclusively to create <<nextGroup, nextGroup>> when `Iterator[InternalRow]` is requested <<fetchNextRow, next row>>.
 
 [TIP]
 ====
@@ -351,9 +351,9 @@ If there is a row available, `fetchNextRow` sets `nextRow` internal variable to 
 [[grouping]]
 [NOTE]
 ====
-`grouping` is a spark-sql-UnsafeProjection.md[UnsafeProjection] function that is spark-sql-UnsafeProjection.md#create[created] for <<partitionSpec, window partition specifications expressions>> to be bound to the single <<child, child>>'s output schema.
+`grouping` is a [UnsafeProjection](../expressions/UnsafeProjection.md) function that is [created](../expressions/UnsafeProjection.md#create) for <<partitionSpec, window partition specifications expressions>> to be bound to the single <<child, child>>'s output schema.
 
-`grouping` uses spark-sql-GenerateUnsafeProjection.md[GenerateUnsafeProjection] to spark-sql-GenerateUnsafeProjection.md#canonicalize[canonicalize] the bound expressions and spark-sql-GenerateUnsafeProjection.md#create[create] the `UnsafeProjection` function.
+`grouping` uses [GenerateUnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md) to [canonicalize](../whole-stage-code-generation/GenerateUnsafeProjection.md#canonicalize) the bound expressions and [create](../whole-stage-code-generation/GenerateUnsafeProjection.md#create) the `UnsafeProjection` function.
 ====
 
 If no row is available, `fetchNextRow` nullifies `nextRow` and `nextGroup` internal variables.
@@ -367,13 +367,13 @@ NOTE: `fetchNextRow` is used internally when <<doExecute, doExecute>>'s `Iterato
 createResultProjection(expressions: Seq[Expression]): UnsafeProjection
 ----
 
-`createResultProjection` creates a [UnsafeProjection](UnsafeProjection.md) function for `expressions` window function [Catalyst expression](../expressions/Expression.md)s so that the window expressions are on the right side of child's output.
+`createResultProjection` creates a [UnsafeProjection](../expressions/UnsafeProjection.md) function for `expressions` window function [Catalyst expression](../expressions/Expression.md)s so that the window expressions are on the right side of child's output.
 
 Internally, `createResultProjection` first creates a translation table with a [BoundReference](../expressions/BoundReference.md) per expression (in the input `expressions`).
 
 `createResultProjection` then creates a window function bound references for <<windowExpression, window expressions>> so unbound expressions are transformed to the `BoundReferences`.
 
-In the end, `createResultProjection` spark-sql-UnsafeProjection.md#create[creates a UnsafeProjection] with:
+In the end, `createResultProjection` UnsafeProjection.md#create[creates a UnsafeProjection] with:
 
 * `exprs` expressions from <<child, child>>'s output and the collection of window function bound references
 * `inputSchema` input schema per <<child, child>>'s output

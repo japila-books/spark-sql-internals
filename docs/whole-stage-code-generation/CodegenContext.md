@@ -13,7 +13,7 @@ val ctx = new CodegenContext
 
 * `WholeStageCodegenExec` physical operator is requested to WholeStageCodegenExec.md#doCodeGen[generate a Java source code for the child operator] (when `WholeStageCodegenExec` is WholeStageCodegenExec.md#doExecute[executed])
 
-* `CodeGenerator` is requested for a spark-sql-CodeGenerator.md#newCodeGenContext[new CodegenContext]
+* `CodeGenerator` is requested for a [new CodegenContext](CodeGenerator.md#newCodeGenContext)
 
 * `GenerateUnsafeRowJoiner` is requested for a `UnsafeRowJoiner`
 
@@ -60,9 +60,9 @@ New entries are added when `CodegenContext` is requested to <<addClass, addClass
 Used when `CodegenContext` is requested to <<declareAddedFunctions, declareAddedFunctions>>
 
 | `equivalentExpressions`
-a| [[equivalentExpressions]] spark-sql-EquivalentExpressions.md[EquivalentExpressions]
+a| [[equivalentExpressions]] [EquivalentExpressions](../EquivalentExpressions.md)
 
-Expressions are spark-sql-EquivalentExpressions.md#addExprTree[added] and then spark-sql-EquivalentExpressions.md#getAllEquivalentExprs[fetched as equivalent sets] when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
+Expressions are [added](../EquivalentExpressions.md#addExprTree) and then [fetched as equivalent sets](../EquivalentExpressions.md#getAllEquivalentExprs) when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
 | `currentVars`
 | [[currentVars]] The list of generated columns as input of current operator
@@ -80,17 +80,17 @@ Used when...FIXME
 | `references`
 a| [[references]] References that are used to generate classes in the following code generators:
 
-* spark-sql-GenerateMutableProjection.md#create[GenerateMutableProjection]
+* [GenerateMutableProjection](GenerateMutableProjection.md#create)
 
-* spark-sql-GenerateOrdering.md#create[GenerateOrdering]
+* [GenerateOrdering](GenerateOrdering.md#create)
 
-* spark-sql-GeneratePredicate.md#create[GeneratePredicate]
+* [GeneratePredicate](GeneratePredicate.md#create)
 
-* spark-sql-GenerateSafeProjection.md#create[GenerateSafeProjection]
+* [GenerateSafeProjection](GenerateSafeProjection.md#create)
 
-* spark-sql-GenerateUnsafeProjection.md#create[GenerateUnsafeProjection]
+* [GenerateUnsafeProjection](GenerateUnsafeProjection.md#create)
 
-* spark-sql-WholeStageCodegenExec.md#doExecute[WholeStageCodegenExec]
+* [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#doExecute)
 
 * Elements are added when:
 ** `CodegenContext` is requested to <<addReferenceObj, addReferenceObj>>
@@ -124,7 +124,7 @@ In the end, `generateExpressions` requests every expressions to expressions/Expr
 
 * `GenerateMutableProjection` is requested to spark-sql-GenerateMutableProjection.md#create[create a MutableProjection]
 
-* `GenerateUnsafeProjection` is requested to spark-sql-GenerateUnsafeProjection.md#createCode[create an ExprCode for Catalyst expressions]
+* `GenerateUnsafeProjection` is requested to [create an ExprCode for Catalyst expressions](GenerateUnsafeProjection.md#createCode)
 
 * `HashAggregateExec` is requested to HashAggregateExec.md#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
 ====
@@ -172,9 +172,9 @@ NOTE: `addNewFunction` is used when...FIXME
 subexpressionElimination(expressions: Seq[Expression]): Unit
 ----
 
-`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to spark-sql-EquivalentExpressions.md#addExprTree[addExprTree] for every expression (in the input `expressions`).
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> to [addExprTree](../EquivalentExpressions.md#addExprTree) for every expression (in the input `expressions`).
 
-`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> for the spark-sql-EquivalentExpressions.md#getAllEquivalentExprs[equivalent sets of expressions] with at least two equivalent expressions (aka _common expressions_).
+`subexpressionElimination` requests <<equivalentExpressions, EquivalentExpressions>> for the [equivalent sets of expressions](../EquivalentExpressions.md#getAllEquivalentExprs) with at least two equivalent expressions (aka _common expressions_).
 
 For every equivalent expression set, `subexpressionElimination` does the following:
 

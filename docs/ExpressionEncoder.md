@@ -1,6 +1,6 @@
 # ExpressionEncoder
 
-`ExpressionEncoder[T]` is a generic spark-sql-Encoder.md[Encoder] of JVM objects of the type `T` to and from [internal binary rows](InternalRow.md).
+`ExpressionEncoder[T]` is a generic [Encoder](Encoder.md) of JVM objects of the type `T` to and from [internal binary rows](InternalRow.md).
 
 `ExpressionEncoder[T]` uses expressions/Expression.md[expressions] for a <<serializer, serializer>> and a <<deserializer, deserializer>>.
 
@@ -26,7 +26,7 @@ NOTE: It is assumed that all serializer expressions contain at least one and the
 
 `ExpressionEncoder` is <<flat, flat>> when <<serializer, serializer>> uses a single expression (which also means that the objects of a type `T` are not created using constructor parameters only like `Product` or `DefinedByConstructorParams` types).
 
-Internally, a `ExpressionEncoder` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] (for the input serializer), a [InternalRow](InternalRow.md) (of size `1`), and a safe `Projection` (for the input deserializer). They are all internal lazy attributes of the encoder.
+Internally, a `ExpressionEncoder` creates a [UnsafeProjection](expressions/UnsafeProjection.md) (for the input serializer), a [InternalRow](InternalRow.md) (of size `1`), and a safe `Projection` (for the input deserializer). They are all internal lazy attributes of the encoder.
 
 [[properties]]
 .ExpressionEncoder's (Lazily-Initialized) Internal Properties
@@ -41,7 +41,7 @@ a| `Projection` generated for the <<deserializer, deserializer>> expression
 Used exclusively when `ExpressionEncoder` is requested for a <<fromRow, JVM object from a Spark SQL row>> (i.e. `InternalRow`).
 
 | [[extractProjection]] `extractProjection`
-a| `UnsafeProjection` spark-sql-GenerateUnsafeProjection.md#generated[generated] for the <<serializer, serializer>> expressions
+a| `UnsafeProjection` [generated](whole-stage-code-generation/GenerateUnsafeProjection.md#generated) for the <<serializer, serializer>> expressions
 
 Used exclusively when `ExpressionEncoder` is requested for an <<toRow, encoded version of a JVM object as a Spark SQL row>> (i.e. `InternalRow`).
 

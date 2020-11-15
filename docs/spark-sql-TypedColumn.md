@@ -53,6 +53,6 @@ withInputType(
 `TypedColumn` takes the following when created:
 
 * [[expr]] Catalyst expressions/Expression.md[expression]
-* [[encoder]] spark-sql-ExpressionEncoder.md[ExpressionEncoder] of the column results
+* [[encoder]] [ExpressionEncoder](ExpressionEncoder.md) of the column results
 
 `TypedColumn` initializes the <<internal-registries, internal registries and counters>>.

@@ -31,7 +31,7 @@ Used when...FIXME
 |===
 
 [[extensions]]
-NOTE: <<spark-sql-UnsafeProjection.md#, UnsafeProjection>> is the one and only known implementation of the <<contract, CodeGeneratorWithInterpretedFallback Contract>> in Apache Spark.
+NOTE: [UnsafeProjection](../expressions/UnsafeProjection.md) is the one and only known implementation of the <<contract, CodeGeneratorWithInterpretedFallback Contract>> in Apache Spark.
 
 [[IN]][[OUT]]
 [NOTE]
@@ -53,4 +53,4 @@ createObject(in: IN): OUT
 
 `createObject`...FIXME
 
-NOTE: `createObject` is used exclusively when `UnsafeProjection` is requested to <<spark-sql-UnsafeProjection.md#create, create an UnsafeProjection for Catalyst expressions>>.
+NOTE: `createObject` is used exclusively when `UnsafeProjection` is requested to <<UnsafeProjection.md#create, create an UnsafeProjection for Catalyst expressions>>.

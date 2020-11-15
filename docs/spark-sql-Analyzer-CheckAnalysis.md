@@ -1,6 +1,4 @@
-title: CheckAnalysis
-
-# CheckAnalysis -- Analysis Validation
+# CheckAnalysis &mdash; Analysis Validation
 
 `CheckAnalysis` defines <<checkAnalysis, checkAnalysis>> method that [Logical Analyzer](Analyzer.md) uses to check if a spark-sql-LogicalPlan.md[logical plan] is correct (after all the transformations) by applying <<checkAnalysis-validations, validation rules>> and in the end marking it as analyzed.
 
@@ -136,7 +134,7 @@ In the end, `checkAnalysis` spark-sql-LogicalPlan.md#setAnalyzed[marks the entir
 
 * `QueryExecution` is requested to [create an analyzed logical plan and checks its correctness](QueryExecution.md#assertAnalyzed) (which happens mostly when a `Dataset` is Dataset.md#creating-instance[created])
 
-* `ExpressionEncoder` does spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
+* `ExpressionEncoder` does [resolveAndBind](ExpressionEncoder.md#resolveAndBind)
 
 * `ResolveAggregateFunctions` is executed (for `Sort` logical plan)
 

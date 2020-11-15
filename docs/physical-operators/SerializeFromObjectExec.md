@@ -55,9 +55,9 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndexInternal` that creates another RDD):
 
-. Creates an <<spark-sql-UnsafeProjection.md#create, UnsafeProjection>> for the <<serializer, serializer>>
+. Creates an [UnsafeProjection](../expressions/UnsafeProjection.md#create) for the <<serializer, serializer>>
 
-. Requests the `UnsafeProjection` to <<spark-sql-Projection.md#initialize, initialize>> (for the partition index)
+. Requests the `UnsafeProjection` to [initialize](../expressions/Projection.md#initialize) (for the partition index)
 
 . Executes the `UnsafeProjection` on all internal binary rows in the partition
 

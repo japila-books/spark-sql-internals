@@ -1,6 +1,6 @@
 # RowEncoder &mdash; Encoder for DataFrames
 
-`RowEncoder` is part of the [Encoder framework](spark-sql-Encoder.md) and acts as the encoder for [DataFrame](spark-sql-DataFrame.md)s ([Dataset](Dataset.md)s of [Row](spark-sql-Row.md)s).
+`RowEncoder` is part of the [Encoder framework](Encoder.md) and acts as the encoder for [DataFrame](spark-sql-DataFrame.md)s ([Dataset](Dataset.md)s of [Row](spark-sql-Row.md)s).
 
 NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `Encoder[Row]` available in scope which is indeed `RowEncoder` itself.
 
@@ -30,7 +30,7 @@ res0: Boolean = false
 apply(schema: StructType): ExpressionEncoder[Row]
 ----
 
-`apply` builds spark-sql-ExpressionEncoder.md[ExpressionEncoder] of spark-sql-Row.md[Row], i.e. `ExpressionEncoder[Row]`, from the input spark-sql-schema.md[StructType] (as `schema`).
+`apply` builds [ExpressionEncoder](ExpressionEncoder.md) of [Row](spark-sql-Row.md), i.e. `ExpressionEncoder[Row]`, from the input [StructType](spark-sql-schema.md) (as `schema`).
 
 Internally, `apply` creates a spark-sql-Expression-BoundReference.md[BoundReference] for the spark-sql-Row.md[Row] type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
 

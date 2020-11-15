@@ -83,17 +83,17 @@ consume(
 
 * If `outputVars` is defined, `consume` makes sure that their number is exactly the length of the [output attributes](../catalyst/QueryPlan.md#output) and copies them. In other words, `inputVars` is exactly `outputVars`.
 
-* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets [currentVars](../CodegenContext.md#currentVars) of the `CodegenContext` to `null` while [INPUT_ROW](../CodegenContext.md#INPUT_ROW) to the `row`. For every [output attribute](../catalyst/QueryPlan.md#output), `consume` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
+* If `outputVars` is not defined, `consume` makes sure that `row` is defined. `consume` sets [currentVars](../whole-stage-code-generation/CodegenContext.md#currentVars) of the `CodegenContext` to `null` while [INPUT_ROW](../whole-stage-code-generation/CodegenContext.md#INPUT_ROW) to the `row`. For every [output attribute](../catalyst/QueryPlan.md#output), `consume` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
 
 `consume` [creates a row variable](#prepareRowVar).
 
 `consume` sets the following in the `CodegenContext`:
 
-* [currentVars](../CodegenContext.md#currentVars) as the `inputVars`
+* [currentVars](../whole-stage-code-generation/CodegenContext.md#currentVars) as the `inputVars`
 
-* [INPUT_ROW](../CodegenContext.md#INPUT_ROW) as `null`
+* [INPUT_ROW](../whole-stage-code-generation/CodegenContext.md#INPUT_ROW) as `null`
 
-* [freshNamePrefix](../CodegenContext.md#freshNamePrefix) as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
+* [freshNamePrefix](../whole-stage-code-generation/CodegenContext.md#freshNamePrefix) as the <<variablePrefix, variablePrefix>> of the <<parent, parent CodegenSupport operator>>.
 
 `consume` <<evaluateRequiredVariables, evaluateRequiredVariables>> (with the `output`, `inputVars` and <<usedInputs, usedInputs>> of the <<parent, parent CodegenSupport operator>>) and creates so-called `evaluated`.
 

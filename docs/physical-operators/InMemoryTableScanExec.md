@@ -241,7 +241,7 @@ In the end, `inputRDD` creates a new `MapPartitionsRDD` (using `RDD.map`) with a
 
 . For every `CachedBatch` in the partition iterator adds the total number of rows in the batch to <<numOutputRows, numOutputRows>> SQL metric
 
-. Requests `GenerateColumnAccessor` to spark-sql-CodeGenerator.md#generate[generate] the Java code for a `ColumnarIterator` to perform expression evaluation for the given <<attributes, column types>>.
+. Requests `GenerateColumnAccessor` to [generate](../whole-stage-code-generation/CodeGenerator.md#generate) the Java code for a `ColumnarIterator` to perform expression evaluation for the given <<attributes, column types>>.
 
 . Requests `ColumnarIterator` to initialize
 

@@ -13,7 +13,7 @@ It is therefore fair to say that `Dataset` consists of the following three eleme
 
 * [QueryExecution](QueryExecution.md) (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
 
-* [Encoder](spark-sql-Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
+* [Encoder](Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
 
 * [SparkSession](SparkSession.md)
 
@@ -21,7 +21,7 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 `Dataset` is <<creating-instance, created>> when:
 
-* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the <<spark-sql-Encoder.md#, Encoder>> in a Scala implicit scope)
+* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the [Encoder](Encoder.md) in a Scala implicit scope)
 
 * <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
 
@@ -123,7 +123,7 @@ If however a spark-sql-LogicalPlan.md[LogicalPlan] is used to <<creating-instanc
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
-NOTE: SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the spark-sql-Encoder.md[Encoder].
+NOTE: SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the [Encoder](Encoder.md).
 
 You can request the ["untyped" view](spark-sql-dataset-operators.md#toDF) of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
@@ -144,14 +144,14 @@ NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](Qu
 ! Description
 
 ! [[boundEnc]] `boundEnc`
-! spark-sql-ExpressionEncoder.md[ExpressionEncoder]
+! [ExpressionEncoder](ExpressionEncoder.md)
 
 Used when...FIXME
 
 ! [[deserializer]] `deserializer`
 a! Deserializer expressions/Expression.md[expression] to convert internal rows to objects of type `T`
 
-Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to spark-sql-ExpressionEncoder.md#resolveAndBind[resolveAndBind]
+Created lazily by requesting the <<exprEnc, ExpressionEncoder>> to [resolveAndBind](ExpressionEncoder.md#resolveAndBind)
 
 Used when:
 
@@ -162,7 +162,7 @@ Used when:
 * `Dataset` is requested to <<collectFromPlan, collect all rows from a spark plan>>
 
 ! [[exprEnc]] `exprEnc`
-! Implicit spark-sql-ExpressionEncoder.md[ExpressionEncoder]
+! Implicit [ExpressionEncoder](ExpressionEncoder.md)
 
 Used when...FIXME
 
@@ -220,7 +220,7 @@ res2: String =
 
 NOTE: `rdd` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[access `SessionState`].
 
-`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the expressions/Expression.md#dataType[data type] of the rows (using spark-sql-ExpressionEncoder.md#deserializer[deserializer] expression) and spark-rdd-transformations.md#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
+`rdd` then requests the Dataset's <<exprEnc, ExpressionEncoder>> for the expressions/Expression.md#dataType[data type] of the rows (using [deserializer](ExpressionEncoder.md#deserializer) expression) and spark-rdd-transformations.md#mapPartitions[maps over them (per partition)] to create records of the expected type `T`.
 
 NOTE: `rdd` is at the "boundary" between the internal binary row format and the JVM type of the dataset. Avoid the extra deserialization step to lower JVM memory requirements of your Spark application.
 
@@ -266,7 +266,7 @@ CAUTION: FIXME
 
 * [[sparkSession]] [SparkSession](SparkSession.md)
 * [[queryExecution]] [QueryExecution](QueryExecution.md)
-* [[encoder]] [Encoder](spark-sql-Encoder.md) for the type `T` of the records
+* [[encoder]] [Encoder](Encoder.md) for the type `T` of the records
 
 NOTE: You can also create a `Dataset` using spark-sql-LogicalPlan.md[LogicalPlan] that is immediately SessionState.md#executePlan[executed using `SessionState`].
 

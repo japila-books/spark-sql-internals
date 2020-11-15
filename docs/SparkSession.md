@@ -172,7 +172,7 @@ scala> one.show
     one: org.apache.spark.sql.Dataset[Int] = [value: int]
     ```
 
-Internally, `createDataset` first looks up the implicit [ExpressionEncoder](spark-sql-ExpressionEncoder.md) in scope to access the ``AttributeReference``s (of the [schema](spark-sql-schema.md)).
+Internally, `createDataset` first looks up the implicit [ExpressionEncoder](ExpressionEncoder.md) in scope to access the ``AttributeReference``s (of the [schema](spark-sql-schema.md)).
 
 The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of [InternalRow](InternalRow.md)s. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a LocalRelation.md[`LocalRelation` logical query plan].
 

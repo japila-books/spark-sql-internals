@@ -56,7 +56,7 @@ a| Generates an evaluator for expression(s) that may (optionally) have expressio
 
 Used in:
 
-* `ExpressionEncoder` for spark-sql-ExpressionEncoder.md#extractProjection[UnsafeProjection] (for serialization)
+* `ExpressionEncoder` for [UnsafeProjection](../ExpressionEncoder.md#extractProjection) (for serialization)
 
 |===
 
@@ -85,28 +85,24 @@ CAUTION: FIXME
 * `GenerateOrdering` creates a code gen ordering for `SortOrder` expressions
 ====
 
-=== [[newCodeGenContext]] Creating CodegenContext -- `newCodeGenContext` Method
+## <span id="newCodeGenContext"> Creating CodegenContext
 
-[source, scala]
-----
+```scala
 newCodeGenContext(): CodegenContext
-----
+```
 
 `newCodeGenContext` simply creates a new [CodegenContext](CodegenContext.md).
 
-[NOTE]
-====
 `newCodeGenContext` is used when:
 
-* `GenerateMutableProjection` is requested to spark-sql-GenerateMutableProjection.md#create[create a MutableProjection]
+* `GenerateMutableProjection` is requested to [create a MutableProjection](GenerateMutableProjection.md#create)
 
-* `GenerateOrdering` is requested to spark-sql-GenerateOrdering.md#create[create a BaseOrdering]
+* `GenerateOrdering` is requested to [create a BaseOrdering](GenerateOrdering.md#create)
 
-* `GeneratePredicate` is requested to spark-sql-GeneratePredicate.md#create[create a Predicate]
+* `GeneratePredicate` is requested to [create a Predicate](GeneratePredicate.md#create)
 
-* `GenerateSafeProjection` is requested to spark-sql-GenerateSafeProjection.md#create[create a Projection]
+* `GenerateSafeProjection` is requested to [create a Projection](GenerateSafeProjection.md#create)
 
-* `GenerateUnsafeProjection` is requested to spark-sql-GenerateUnsafeProjection.md#create[create a UnsafeProjection]
+* `GenerateUnsafeProjection` is requested to [create a UnsafeProjection](GenerateUnsafeProjection.md#create)
 
-* `GenerateColumnAccessor` is requested to spark-sql-GenerateColumnAccessor.md#create[create a ColumnarIterator]
-====
+* `GenerateColumnAccessor` is requested to [create a ColumnarIterator](GenerateColumnAccessor.md#create)

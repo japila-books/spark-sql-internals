@@ -101,7 +101,7 @@ initialize(partitionIndex: Int): Unit
 
 Internally, `initialize` <<initializeInternal, initializes>> itself (with the input partition index) and turns the internal <<initialized, initialized>> flag on.
 
-NOTE: `initialize` is used exclusively when spark-sql-InterpretedProjection.md#initialize[InterpretedProjection] and `InterpretedMutableProjection` are requested to `initialize` themselves.
+`initialize` is used when [InterpretedProjection](InterpretedProjection.md#initialize) and `InterpretedMutableProjection` are requested to `initialize` themselves.
 
 === [[eval]] Evaluating Expression -- `eval` Method
 

@@ -157,7 +157,7 @@ clearCache(): Unit
 
 === [[implicits]] Implicits -- SQLContext.implicits
 
-The `implicits` object is a helper class with methods to convert  objects into Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many spark-sql-Encoder.md[Encoders] for "primitive" types as well as the collections thereof.
+The `implicits` object is a helper class with methods to convert  objects into Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many [Encoder](Encoder.md)s for "primitive" types as well as the collections thereof.
 
 [NOTE]
 ====
@@ -170,9 +170,9 @@ import spark.implicits._
 ----
 ====
 
-It holds spark-sql-Encoder.md[Encoders] for Scala "primitive" types like `Int`, `Double`, `String`, and their collections.
+It holds [Encoder](Encoder.md)s for Scala "primitive" types like `Int`, `Double`, `String`, and their collections.
 
-It offers support for creating `Dataset` from `RDD` of any types (for which an spark-sql-Encoder.md[encoder] exists in scope), or case classes or tuples, and `Seq`.
+It offers support for creating `Dataset` from `RDD` of any types (for which an [encoder](Encoder.md) exists in scope), or case classes or tuples, and `Seq`.
 
 It also offers conversions from Scala's `Symbol` or `$` to `Column`.
 
@@ -190,9 +190,9 @@ createDataset[T: Encoder](data: RDD[T]): Dataset[T]
 
 `createDataset` family of methods creates a Dataset.md[Dataset] from a collection of elements of type `T`, be it a regular Scala `Seq` or Spark's `RDD`.
 
-It requires that there is an spark-sql-Encoder.md[encoder] in scope.
+It requires that there is an [encoder](Encoder.md) in scope.
 
-NOTE: <<implicits, Importing SQLContext.implicits>> brings many spark-sql-Encoder.md[encoders] available in scope.
+NOTE: <<implicits, Importing SQLContext.implicits>> brings many [encoders](Encoder.md) available in scope.
 
 === [[read]] Accessing DataFrameReader (read method)
 

@@ -72,7 +72,7 @@ scala> println(schema1.prettyJson)
 }
 ```
 
-As of Spark 2.0, you can describe the schema of your strongly-typed datasets using spark-sql-Encoder.md[encoders].
+As of Spark 2.0, you can describe the schema of your strongly-typed datasets using [encoders](Encoder.md).
 
 [source, scala]
 ----

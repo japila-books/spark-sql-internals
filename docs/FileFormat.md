@@ -148,7 +148,7 @@ buildReaderWithPartitionValues(
 
 `buildReaderWithPartitionValues` [builds a data reader](#buildReader) with the input parameters and gives a **data reader function** (of a [PartitionedFile](PartitionedFile.md) to an `Iterator[InternalRow]`) that does the following:
 
-1. Creates a converter by requesting `GenerateUnsafeProjection` to [generate an UnsafeProjection](physical-operators/GenerateUnsafeProjection.md#generate) for the attributes of the input `requiredSchema` and `partitionSchema`
+1. Creates a converter by requesting `GenerateUnsafeProjection` to [generate an UnsafeProjection](whole-stage-code-generation/GenerateUnsafeProjection.md#generate) for the attributes of the input `requiredSchema` and `partitionSchema`
 
 1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](PartitionedFile.md#partitionValues) appended.
 

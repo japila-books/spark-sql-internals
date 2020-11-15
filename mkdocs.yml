@@ -327,9 +327,12 @@ nav:
         - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
         - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
       - Files:
+        - FileScan: FileScan.md
         - FileFormat: FileFormat.md
         - TextFileFormat: TextFileFormat.md
         - TextBasedFileFormat: TextBasedFileFormat.md
+        - FileScanBuilder: FileScanBuilder.md
+        - FileDataSourceV2: FileDataSourceV2.md
         - HadoopFsRelation: HadoopFsRelation.md
         - FileIndex:
           - FileIndex.md
@@ -436,6 +439,10 @@ nav:
       - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
       - PlanExpression: expressions/PlanExpression.md
       - Unevaluable: expressions/Unevaluable.md
+      - Projection: expressions/Projection.md
+      - UnsafeProjection: expressions/UnsafeProjection.md
+      - InterpretedProjection: expressions/InterpretedProjection.md
+      - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
       - Concrete Expressions:
         - AggregateExpression: expressions/AggregateExpression.md
         - AggregateFunction: expressions/AggregateFunction.md
@@ -540,13 +547,6 @@ nav:
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - V1FallbackWriters: physical-operators/V1FallbackWriters.md
-      - Projection:
-        - physical-operators/Projection.md
-        - physical-operators/UnsafeProjection.md
-        - physical-operators/GenerateUnsafeProjection.md
-        - physical-operators/GenerateMutableProjection.md
-        - physical-operators/InterpretedProjection.md
-        - physical-operators/CodeGeneratorWithInterpretedFallback.md
       - SQLMetric: physical-operators/SQLMetric.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
@@ -790,16 +790,19 @@ nav:
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md
       - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
-      - CodegenContext: CodegenContext.md
-      - spark-sql-CodeGenerator.md
-      - spark-sql-GenerateColumnAccessor.md
-      - spark-sql-GenerateOrdering.md
-      - spark-sql-GeneratePredicate.md
-      - spark-sql-GenerateSafeProjection.md
+      - CodegenContext: whole-stage-code-generation/CodegenContext.md
+      - CodeGenerator: whole-stage-code-generation/CodeGenerator.md
+      - Block: whole-stage-code-generation/Block.md
+      - GenerateUnsafeProjection: whole-stage-code-generation/GenerateUnsafeProjection.md
+      - GenerateMutableProjection: whole-stage-code-generation/GenerateMutableProjection.md
+      - GenerateColumnAccessor: whole-stage-code-generation/GenerateColumnAccessor.md
+      - GenerateOrdering: whole-stage-code-generation/GenerateOrdering.md
+      - GeneratePredicate: whole-stage-code-generation/GeneratePredicate.md
+      - GenerateSafeProjection: whole-stage-code-generation/GenerateSafeProjection.md
       - spark-sql-BytesToBytesMap.md
       - Subexpression Elimination:
         - spark-sql-subexpression-elimination.md
-        - spark-sql-EquivalentExpressions.md
+        - EquivalentExpressions: EquivalentExpressions.md
     - Vectorized Query Execution:
       - spark-sql-vectorized-query-execution.md
       - ColumnarBatch: ColumnarBatch.md
@@ -810,11 +813,6 @@ nav:
       - spark-sql-ColumnStat.md
       - CommandUtils: CommandUtils.md
     - spark-sql-catalyst-dsl.md
-  - New in Spark 3.0.0:
-    - FileScanBuilder: FileScanBuilder.md
-    - FileDataSourceV2: FileDataSourceV2.md
-    - Block: Block.md
-    - FileScan: FileScan.md
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
   - PySpark:
@@ -845,9 +843,9 @@ nav:
       - Dataset:
         - Dataset: Dataset.md
         - Encoder:
-          - spark-sql-Encoder.md
+          - Encoder: Encoder.md
           - spark-sql-Encoders.md
-          - spark-sql-ExpressionEncoder.md
+          - ExpressionEncoder: ExpressionEncoder.md
           - RowEncoder: RowEncoder.md
           - spark-sql-ExpressionEncoder-LocalDateTime.md
         - spark-sql-DataFrame.md

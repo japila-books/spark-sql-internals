@@ -13,7 +13,7 @@
 | [[evaluateExpression]] <<Expression.md#, Expression>>
 
 | resultObjToRow
-| [[resultObjToRow]] <<spark-sql-UnsafeProjection.md#, UnsafeProjection>>
+| [[resultObjToRow]] [UnsafeProjection](UnsafeProjection.md)
 |===
 
 ## Creating Instance

@@ -409,9 +409,9 @@ scala> val rdd = tokens.rdd
 rdd: org.apache.spark.rdd.RDD[Token] = MapPartitionsRDD[11] at rdd at <console>:30
 ----
 
-Internally, it looks spark-sql-ExpressionEncoder.md[ExpressionEncoder] (for the `Dataset`) up and accesses the `deserializer` expression. That gives the [DataType](DataType.md) of the result of evaluating the expression.
+Internally, it looks [ExpressionEncoder](ExpressionEncoder.md) (for the `Dataset`) up and accesses the `deserializer` expression. That gives the [DataType](DataType.md) of the result of evaluating the expression.
 
-NOTE: A deserializer expression is used to decode an [InternalRow](InternalRow.md) to an object of type `T`. See spark-sql-ExpressionEncoder.md[ExpressionEncoder].
+NOTE: A deserializer expression is used to decode an [InternalRow](InternalRow.md) to an object of type `T`. See [ExpressionEncoder](ExpressionEncoder.md).
 
 It then executes a DeserializeToObject.md[`DeserializeToObject` logical operator] that will produce a `RDD[InternalRow]` that is converted into the proper `RDD[T]` using the `DataType` and `T`.
 

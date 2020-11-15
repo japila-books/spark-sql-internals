@@ -19,7 +19,7 @@ The type `T` stands for the type of records a `Encoder[T]` can deal with. An enc
 
 NOTE: `Encoder` is also called _"a container of serde expressions in Dataset"_.
 
-NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is spark-sql-ExpressionEncoder.md[ExpressionEncoder].
+NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is [ExpressionEncoder](ExpressionEncoder.md).
 
 Encoders are integral (and internal) part of any Dataset.md[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
 

@@ -555,7 +555,7 @@ val lines: Dataset[String] = spark
 
 NOTE: `textFile` are similar to <<text, text>> family of methods in that they both read text files but `text` methods return untyped `DataFrame` while `textFile` return typed `Dataset[String]`.
 
-Internally, `textFile` passes calls on to <<text, text>> method and Dataset.md#select[selects] the only `value` column before it applies `Encoders.STRING` spark-sql-Encoder.md[encoder].
+Internally, `textFile` passes calls on to <<text, text>> method and Dataset.md#select[selects] the only `value` column before it applies `Encoders.STRING` [encoder](Encoder.md).
 
 === [[creating-instance]] Creating DataFrameReader Instance
 

@@ -69,7 +69,7 @@ Used when:
 Used when...FIXME
 
 | [[groupingProjection]] `groupingProjection`
-| spark-sql-UnsafeProjection.md[UnsafeProjection]
+| [UnsafeProjection](expressions/UnsafeProjection.md)
 
 Used when...FIXME
 

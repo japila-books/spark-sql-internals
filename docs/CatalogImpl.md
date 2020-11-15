@@ -195,7 +195,7 @@ makeDataset[T <: DefinedByConstructorParams](
   sparkSession: SparkSession): Dataset[T]
 ----
 
-`makeDataset` creates an spark-sql-ExpressionEncoder.md#apply[ExpressionEncoder] (from spark-sql-ExpressionEncoder.md#DefinedByConstructorParams[DefinedByConstructorParams]) and spark-sql-ExpressionEncoder.md#toRow[encodes] elements of the input `data` to [internal binary rows](InternalRow.md).
+`makeDataset` creates an [ExpressionEncoder](ExpressionEncoder.md#apply) (from [DefinedByConstructorParams](ExpressionEncoder.md#DefinedByConstructorParams)) and [encodes](ExpressionEncoder.md#toRow) elements of the input `data` to [internal binary rows](InternalRow.md).
 
 `makeDataset` then creates a LocalRelation.md#creating-instance[LocalRelation] logical operator. `makeDataset` requests `SessionState` to SessionState.md#executePlan[execute the plan] and Dataset.md#creating-instance[creates] the result `Dataset`.
 

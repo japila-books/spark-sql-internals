@@ -9,6 +9,6 @@
 create(expressions: Seq[Expression]): Projection
 ----
 
-NOTE: `create` is part of spark-sql-CodeGenerator.md#create[CodeGenerator Contract] to...FIXME.
+`create` is part of the [CodeGenerator](CodeGenerator.md#create) abstraction.
 
 `create`...FIXME

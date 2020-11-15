@@ -423,11 +423,11 @@ With <<supportsBatch, supportsBatch>> flag disabled, `doExecute` creates an `uns
 
 If <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag is on, `doExecute` takes the <<inputRDD, inputRDD>> and creates a new RDD by applying a function to each partition (using `RDD.mapPartitionsWithIndexInternal`):
 
-. Creates a spark-sql-UnsafeProjection.md#create[UnsafeProjection] for the catalyst/QueryPlan.md#schema[schema]
+1. Creates a [UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [schema](../catalyst/QueryPlan.md#schema)
 
-. Initializes the spark-sql-Projection.md#initialize[UnsafeProjection]
+1. Initializes the [UnsafeProjection](../expressions/Projection.md#initialize)
 
-. Maps over the rows in a partition iterator using the `UnsafeProjection` projection
+1. Maps over the rows in a partition iterator using the `UnsafeProjection` projection
 
 Otherwise, `doExecute` simply takes the <<inputRDD, inputRDD>> as the `unsafeRows` RDD (with no changes).
 

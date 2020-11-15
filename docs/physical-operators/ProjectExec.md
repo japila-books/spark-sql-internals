@@ -46,7 +46,7 @@ mapPartitionsWithIndexInternal[U](
 
 ==== [[doExecute-mapPartitionsWithIndexInternal]] Inside `doExecute` (`RDD.mapPartitionsWithIndexInternal`)
 
-Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` creates an spark-sql-UnsafeProjection.md#create[UnsafeProjection] with the following:
+Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` creates an [UnsafeProjection](../expressions/UnsafeProjection.md#create) with the following:
 
 . <<projectList, Named expressions>>
 
@@ -54,7 +54,7 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 
 . SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
 
-`doExecute` requests the `UnsafeProjection` to spark-sql-Projection.md#initialize[initialize] and maps over the internal rows (of a partition) using the projection.
+`doExecute` requests the `UnsafeProjection` to Projection.md#initialize[initialize] and maps over the internal rows (of a partition) using the projection.
 
 === [[creating-instance]] Creating ProjectExec Instance
 

@@ -71,13 +71,13 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
 
-`doGenCode` requests the input `CodegenContext` to add itself to the [references](../CodegenContext.md#references).
+`doGenCode` requests the input `CodegenContext` to add itself to the [references](../whole-stage-code-generation/CodegenContext.md#references).
 
 `doGenCode` [walks down the expression tree](../catalyst/TreeNode.md#foreach) to find <<spark-sql-Expression-Nondeterministic.md#, Nondeterministic>> expressions and for every `Nondeterministic` expression does the following:
 
-. Requests the input `CodegenContext` to add it to the [references](../CodegenContext.md#references)
+. Requests the input `CodegenContext` to add it to the [references](../whole-stage-code-generation/CodegenContext.md#references)
 
-. Requests the input `CodegenContext` to [addPartitionInitializationStatement](../CodegenContext.md#addPartitionInitializationStatement) that is a Java code block as follows:
+. Requests the input `CodegenContext` to [addPartitionInitializationStatement](../whole-stage-code-generation/CodegenContext.md#addPartitionInitializationStatement) that is a Java code block as follows:
 +
 [source, scala]
 ----

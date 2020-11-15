@@ -232,7 +232,7 @@ take(n: Int): Array[T]
 
 WARNING: `take` loads all the data into the memory of the Spark application's driver process and for a large `n` could result in `OutOfMemoryError`.
 
-Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the SparkPlan.md[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded spark-sql-Encoder.md[encoder].
+Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the SparkPlan.md[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded [encoder](Encoder.md).
 
 === [[toLocalIterator]] `toLocalIterator` Action
 

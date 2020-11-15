@@ -1,6 +1,6 @@
 # GenerateUnsafeProjection
 
-`GenerateUnsafeProjection` is a [CodeGenerator](../spark-sql-CodeGenerator.md) that <<create, generates the bytecode for a UnsafeProjection for given expressions>> (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
+`GenerateUnsafeProjection` is a [CodeGenerator](CodeGenerator.md) that [generates the bytecode for a UnsafeProjection for given expressions](#create) (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 
 [source, scala]
 ----
@@ -31,13 +31,11 @@ generate(
 
 `generate` <<canonicalize, canonicalize>> the input `expressions` followed by <<create, generating a JVM bytecode for a UnsafeProjection>> for the expressions.
 
-[NOTE]
-====
 `generate` is used when:
 
-* `UnsafeProjection` factory object is requested for a spark-sql-UnsafeProjection.md#create[UnsafeProjection]
+* `UnsafeProjection` factory object is requested for a [UnsafeProjection](../expressions/UnsafeProjection.md#create)
 
-* `ExpressionEncoder` is requested to spark-sql-ExpressionEncoder.md#extractProjection[initialize the internal UnsafeProjection]
+* `ExpressionEncoder` is requested to [initialize the internal UnsafeProjection](../ExpressionEncoder.md#extractProjection)
 
 * `FileFormat` is requested to [build a data reader with partition column values appended](../FileFormat.md#buildReaderWithPartitionValues)
 
@@ -52,7 +50,6 @@ generate(
 * (Spark MLlib) `LibSVMFileFormat` is requested to `buildReader`
 
 * (Spark Structured Streaming) `StateStoreRestoreExec`, `StateStoreSaveExec` and `StreamingDeduplicateExec` are requested to execute
-====
 
 === [[canonicalize]] `canonicalize` Method
 
@@ -76,7 +73,7 @@ create(references: Seq[Expression]): UnsafeProjection // <1>
 ----
 <1> Calls the former `create` with `subexpressionEliminationEnabled` flag off
 
-`create` first creates a spark-sql-CodeGenerator.md#newCodeGenContext[CodegenContext] and an <<createCode, Java source code>> for the input `expressions`.
+`create` first creates a [CodegenContext](CodeGenerator.md#newCodeGenContext) and an <<createCode, Java source code>> for the input `expressions`.
 
 `create` creates a code body with `public java.lang.Object generate(Object[] references)` method that creates a `SpecificUnsafeProjection`.
 
@@ -91,7 +88,7 @@ class SpecificUnsafeProjection extends UnsafeProjection {
 }
 ----
 
-`create` creates a `CodeAndComment` with the code body and [comment placeholders](../CodegenContext.md#placeHolderToComments).
+`create` creates a `CodeAndComment` with the code body and [comment placeholders](CodegenContext.md#placeHolderToComments).
 
 You should see the following DEBUG message in the logs:
 
@@ -108,14 +105,14 @@ Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.expressions.code
 log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator=DEBUG
 ```
 
-See spark-sql-CodeGenerator.md#logging[CodeGenerator].
+See [CodeGenerator](CodeGenerator.md#logging).
 ====
 
-`create` requests `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile the Java source code to JVM bytecode (using Janino)].
+`create` requests `CodeGenerator` to [compile the Java source code to JVM bytecode (using Janino)](CodeGenerator.md#compile).
 
-`create` requests `CodegenContext` for [references](../CodegenContext.md#references) and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final spark-sql-UnsafeProjection.md[UnsafeProjection].
+`create` requests `CodegenContext` for [references](CodegenContext.md#references) and requests the compiled class to create a `SpecificUnsafeProjection` for the input references that in the end is the final [UnsafeProjection](../expressions/UnsafeProjection.md).
 
-NOTE: (Single-argument) `create` is part of spark-sql-CodeGenerator.md#create[CodeGenerator Contract].
+(Single-argument) `create` is part of the [CodeGenerator](CodeGenerator.md#create) abstraction.
 
 === [[createCode]] Creating ExprCode for Expressions (With Optional Subexpression Elimination) -- `createCode` Method
 
@@ -127,7 +124,7 @@ createCode(
   useSubexprElimination: Boolean = false): ExprCode
 ----
 
-`createCode` requests the input `CodegenContext` to [generate a Java source code for code-generated evaluation](../CodegenContext.md#generateExpressions) of every expression in the input `expressions`.
+`createCode` requests the input `CodegenContext` to [generate a Java source code for code-generated evaluation](CodegenContext.md#generateExpressions) of every expression in the input `expressions`.
 
 `createCode`...FIXME
 
@@ -158,17 +155,14 @@ scala> println(eval.value)
 mutableStateArray[0]
 ----
 
-[NOTE]
-====
 `createCode` is used when:
 
-* `CreateNamedStructUnsafe` is requested to spark-sql-Expression-CreateNamedStructUnsafe.md#doGenCode[generate a Java source code]
+* `CreateNamedStructUnsafe` is requested to [generate a Java source code](../expressions/CreateNamedStructUnsafe.md#doGenCode)
 
-* `GenerateUnsafeProjection` is requested to <<create, create a UnsafeProjection>>
+* `GenerateUnsafeProjection` is requested to [create a UnsafeProjection](#create)
 
-* `CodegenSupport` is requested to [prepareRowVar](CodegenSupport.md#prepareRowVar) (to [generate a Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume))
+* `CodegenSupport` is requested to [prepareRowVar](../physical-operators/CodegenSupport.md#prepareRowVar) (to [generate a Java source code to consume generated columns or row from a physical operator](../physical-operators/CodegenSupport.md#consume))
 
-* `HashAggregateExec` is requested to HashAggregateExec.md#doProduceWithKeys[doProduceWithKeys] and HashAggregateExec.md#doConsumeWithKeys[doConsumeWithKeys]
+* `HashAggregateExec` is requested to [doProduceWithKeys](../physical-operators/HashAggregateExec.md#doProduceWithKeys) and [doConsumeWithKeys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys)
 
-* `BroadcastHashJoinExec` is requested to BroadcastHashJoinExec.md#genStreamSideJoinKey[genStreamSideJoinKey] (when generating the Java source code for joins)
-====
+* `BroadcastHashJoinExec` is requested to [genStreamSideJoinKey](../physical-operators/BroadcastHashJoinExec.md#genStreamSideJoinKey) (when generating the Java source code for joins)

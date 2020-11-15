@@ -15,7 +15,7 @@ The primary difference between the computation models of Spark SQL and Spark Cor
 !!! note
     Semi- and structured data are collections of records that can be described using [schema](spark-sql-schema.md) with column names, their types and whether a column can be null or not (_nullability_).
 
-Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a [Dataset](Dataset.md) (with a mandatory [Encoder](spark-sql-Encoder.md)).
+Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a [Dataset](Dataset.md) (with a mandatory [Encoder](Encoder.md)).
 
 !!! quote "[Shark, Spark SQL, Hive on Spark, and the future of SQL on Apache Spark](https://databricks.com/blog/2014/07/01/shark-spark-sql-hive-on-spark-and-the-future-of-sql-on-spark.html)"
     For **SQL users**, Spark SQL provides state-of-the-art SQL performance and maintains compatibility with Shark/Hive. In particular, like Shark, Spark SQL supports all existing Hive data formats, user-defined functions (UDF), and the Hive metastore.

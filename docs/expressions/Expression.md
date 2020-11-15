@@ -267,13 +267,13 @@ reduceCodeSize(ctx: CodegenContext, eval: ExprCode): Unit
 
 1. Length of the generate code is above 1024
 
-1. [INPUT_ROW](../CodegenContext.md#INPUT_ROW) of the input `CodegenContext` is defined
+1. [INPUT_ROW](../whole-stage-code-generation/CodegenContext.md#INPUT_ROW) of the input `CodegenContext` is defined
 
-1. [currentVars](../CodegenContext.md#currentVars) of the input `CodegenContext` is not defined
+1. [currentVars](../whole-stage-code-generation/CodegenContext.md#currentVars) of the input `CodegenContext` is not defined
 
 CAUTION: FIXME When would the above not be met? What's so special about such an expression?
 
-`reduceCodeSize` sets the `value` of the input `ExprCode` to the [fresh term name](../CodegenContext.md#freshName) for the `value` name.
+`reduceCodeSize` sets the `value` of the input `ExprCode` to the [fresh term name](../whole-stage-code-generation/CodegenContext.md#freshName) for the `value` name.
 
 In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the following:
 
@@ -281,7 +281,7 @@ In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the follow
 [javaType] [newValue] = [funcFullName]([INPUT_ROW]);
 ```
 
-The `funcFullName` is the [fresh term name](../CodegenContext.md#freshName) for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
+The `funcFullName` is the [fresh term name](../whole-stage-code-generation/CodegenContext.md#freshName) for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
 
 TIP: Use the expression node name to search for the function that corresponds to the expression in a generated code.
 

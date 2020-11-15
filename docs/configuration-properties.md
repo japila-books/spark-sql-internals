@@ -653,7 +653,7 @@ Acceptable values:
 * <span id="spark.sql.codegen.factoryMode-FALLBACK"> `FALLBACK` - try codegen first and, if any compile error happens, fallback to interpreted mode
 * <span id="spark.sql.codegen.factoryMode-NO_CODEGEN"> `NO_CODEGEN` - skips codegen and always uses interpreted path
 
-Used when `CodeGeneratorWithInterpretedFallback` is requested to [createObject](physical-operators/CodeGeneratorWithInterpretedFallback.md#createObject) (when `UnsafeProjection` is requested to [create an UnsafeProjection for Catalyst expressions](physical-operators/UnsafeProjection.md#create))
+Used when `CodeGeneratorWithInterpretedFallback` is requested to [createObject](expressions/CodeGeneratorWithInterpretedFallback.md#createObject) (when `UnsafeProjection` is requested to [create an UnsafeProjection for Catalyst expressions](expressions/UnsafeProjection.md#create))
 
 ## <span id="spark.sql.codegen.fallback"> spark.sql.codegen.fallback
 

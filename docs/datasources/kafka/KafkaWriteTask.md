@@ -20,7 +20,7 @@
 | [[failedWrite]]
 
 | projection
-| [[projection]] <<spark-sql-UnsafeProjection.md#, UnsafeProjection>>
+| [[projection]] [UnsafeProjection](../../expressions/UnsafeProjection.md)
 
 <<createProjection, Created>> once when `KafkaWriteTask` is created.
 |===
@@ -56,7 +56,7 @@ From https://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/p
 createProjection: UnsafeProjection
 ----
 
-`createProjection` creates a spark-sql-UnsafeProjection.md[UnsafeProjection] with `topic`, `key` and `value` expressions/Expression.md[expressions] and the `inputSchema`.
+`createProjection` creates a [UnsafeProjection](../../expressions/UnsafeProjection.md) with `topic`, `key` and `value` expressions/Expression.md[expressions] and the `inputSchema`.
 
 `createProjection` makes sure that the following holds (and reports an `IllegalStateException` otherwise):
 
@@ -64,7 +64,7 @@ createProjection: UnsafeProjection
 * Optional `key` is of type `StringType` or `BinaryType` if defined
 * `value` was defined (in `inputSchema`) and is of type `StringType` or `BinaryType`
 
-`createProjection` casts `key` and `value` expressions to `BinaryType` in spark-sql-UnsafeProjection.md[UnsafeProjection].
+`createProjection` casts `key` and `value` expressions to `BinaryType` in [UnsafeProjection](../../expressions/UnsafeProjection.md).
 
 NOTE: `createProjection` is used exclusively when `KafkaWriteTask` is created (as <<projection, projection>>).
 

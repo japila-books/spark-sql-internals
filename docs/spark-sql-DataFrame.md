@@ -73,7 +73,7 @@ You can execute queries over DataFrames using two approaches:
 
 DataFrames use the [Catalyst logical query optimizer](catalyst/Optimizer.md) to produce efficient queries (and so they are supposed to be faster than corresponding RDD-based queries).
 
-NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through spark-sql-Encoder.md[specialized encoders] that can significantly cut serialization and deserialization times.
+NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through [specialized encoders](Encoder.md) that can significantly cut serialization and deserialization times.
 
 You can enforce types on spark-sql-Row.md[generic rows] and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
 

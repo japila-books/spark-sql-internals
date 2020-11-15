@@ -215,7 +215,7 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to spark-sql-CodeGenerator.md#compile[compile it] right afterwards.
+`doExecute` <<doCodeGen, generates the Java source code for the child physical plan subtree>> first and uses `CodeGenerator` to [compile](../whole-stage-code-generation/CodeGenerator.md#compile) it right afterwards.
 
 If compilation goes well, `doExecute` branches off per the number of [input RDDs](CodegenSupport.md#inputRDDs).
 
@@ -248,9 +248,9 @@ Whole-stage codegen disabled for plan (id=[codegenStageId]):
 doCodeGen(): (CodegenContext, CodeAndComment)
 ----
 
-`doCodeGen` creates a new [CodegenContext](../CodegenContext.md) and requests the single <<child, child>> physical operator to [generate a Java source code for produce code path](CodegenSupport.md#produce) (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
+`doCodeGen` creates a new [CodegenContext](../whole-stage-code-generation/CodegenContext.md) and requests the single <<child, child>> physical operator to [generate a Java source code for produce code path](CodegenSupport.md#produce) (with the new `CodegenContext` and the `WholeStageCodegenExec` physical operator itself).
 
-`doCodeGen` [adds the new function](../CodegenContext.md#addNewFunction) under the name of `processNext`.
+`doCodeGen` [adds the new function](../whole-stage-code-generation/CodegenContext.md#addNewFunction) under the name of `processNext`.
 
 `doCodeGen` <<generatedClassName, generates the class name>>.
 
@@ -300,7 +300,7 @@ DEBUG WholeStageCodegenExec:
 [cleanedSource]
 ```
 
-In the end, `doCodeGen` returns the [CodegenContext](../CodegenContext.md) and the Java source code (as a `CodeAndComment`).
+In the end, `doCodeGen` returns the [CodegenContext](../whole-stage-code-generation/CodegenContext.md) and the Java source code (as a `CodeAndComment`).
 
 `doCodeGen` is used when:
 

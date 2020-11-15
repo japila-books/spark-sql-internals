@@ -23,10 +23,10 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggregationBufferFromUnsafeRow, getAggregationBufferFromUnsafeRow>>.
 
 | emptyAggregationBuffer
-| [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> (<<spark-sql-UnsafeProjection.md#create, encoded in UnsafeRow format>>)
+| [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> ([encoded in UnsafeRow format](expressions/UnsafeProjection.md#create))
 
 | groupingKeyProjection
-| [[groupingKeyProjection]] <<spark-sql-UnsafeProjection.md#, UnsafeProjection>> for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
+| [[groupingKeyProjection]] [UnsafeProjection](expressions/UnsafeProjection.md) for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
 
 | map
 a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled

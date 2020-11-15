@@ -24,7 +24,7 @@ addExprTree(expr: Expression): Unit
 
 `addExprTree`...FIXME
 
-NOTE: `addExprTree` is used when `CodegenContext` is requested to [subexpressionElimination](CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](CodegenContext.md#subexpressionEliminationForWholeStageCodegen).
+NOTE: `addExprTree` is used when `CodegenContext` is requested to [subexpressionElimination](whole-stage-code-generation/CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen).
 
 === [[addExpr]] `addExpr` Method
 
@@ -53,4 +53,4 @@ getAllEquivalentExprs: Seq[Seq[Expression]]
 
 `getAllEquivalentExprs` takes the values of all the <<equivalenceMap, equivalent sets of expressions>>.
 
-`getAllEquivalentExprs` is used when `CodegenContext` is requested to [subexpressionElimination](CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](CodegenContext.md#subexpressionEliminationForWholeStageCodegen).
+`getAllEquivalentExprs` is used when `CodegenContext` is requested to [subexpressionElimination](whole-stage-code-generation/CodegenContext.md#subexpressionElimination) or [subexpressionEliminationForWholeStageCodegen](whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen).

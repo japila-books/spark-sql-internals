@@ -79,7 +79,7 @@ doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
 
 NOTE: `doGenCode` is part of <<expressions/Expression.md#doGenCode, Expression Contract>> to generate a Java source code (`ExprCode`) for code-generated expression evaluation.
 
-`doGenCode` requests the `CodegenContext` to [generate code to reference this CatalystDataToAvro instance](../../CodegenContext.md#addReferenceObj).
+`doGenCode` requests the `CodegenContext` to [generate code to reference this CatalystDataToAvro instance](../../whole-stage-code-generation/CodegenContext.md#addReferenceObj).
 
 In the end, `doGenCode` <<spark-sql-Expression-UnaryExpression.md#defineCodeGen, defineCodeGen>> with the function `f` that uses <<nullSafeEval, nullSafeEval>>.
 

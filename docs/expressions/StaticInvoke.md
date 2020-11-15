@@ -6,7 +6,7 @@
 
 `StaticInvoke` is <<creating-instance, created>> when:
 
-* `ScalaReflection` is requested for the spark-sql-ExpressionEncoder.md#deserializerFor[deserializer] or spark-sql-ExpressionEncoder.md#serializerFor[serializer] for a Scala type
+* `ScalaReflection` is requested for the [deserializer](../ExpressionEncoder.md#deserializerFor) or [serializer](../ExpressionEncoder.md#serializerFor) for a Scala type
 
 * [RowEncoder](../RowEncoder.md) is requested for `deserializerFor` or [serializer](../RowEncoder.md#serializerFor) for a Scala type
 
