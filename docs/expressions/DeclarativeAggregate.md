@@ -23,11 +23,11 @@ The <<Expression.md#, expression>> that returns the final value for the aggregat
 
 Used when:
 
-* `AggregationIterator` is requested for the <<spark-sql-AggregationIterator.md#generateResultProjection, generateResultProjection>>
+* `AggregationIterator` is requested for the [generateResultProjection](../spark-sql-AggregationIterator.md#generateResultProjection)
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#doProduceWithoutKeys, doProduceWithoutKeys>> and <<HashAggregateExec.md#generateResultFunction, generateResultFunction>>
+* `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 
-* `AggregateProcessor` is <<spark-sql-AggregateProcessor.md#apply, created>> (when `WindowExec` physical operator is <<WindowExec.md#, executed>>)
+* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply) (when `WindowExec` physical operator is <<WindowExec.md#, executed>>)
 
 | initialValues
 a| [[initialValues]]

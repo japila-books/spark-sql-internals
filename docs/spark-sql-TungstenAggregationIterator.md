@@ -38,16 +38,15 @@ import org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
 // FIXME How to show that TungstenAggregationIterator is used?
 ```
 
-When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metrics from the <<HashAggregateExec.md#metrics, HashAggregateExec>> aggregate physical operator being executed, i.e. <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics.
+When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metrics from the [HashAggregateExec](physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed, i.e. <<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> metrics.
 
 * <<numOutputRows, numOutputRows>> is used when `TungstenAggregationIterator` is requested for the <<next, next UnsafeRow>> (and it <<hasNext, has one>>)
 
 * <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> are used at the <<TaskCompletionListener, end of every task>> (one per partition)
 
-The metrics are then displayed as part of <<HashAggregateExec.md#, HashAggregateExec>> aggregate physical operator (e.g. in web UI in <<spark-sql-webui.md#ExecutionPage, Details for Query>>).
+The metrics are then displayed as part of [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in <<spark-sql-webui.md#ExecutionPage, Details for Query>>).
 
-.HashAggregateExec in web UI (Details for Query)
-image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="center"]
+![HashAggregateExec in web UI (Details for Query)](images/spark-sql-HashAggregateExec-webui-details-for-query.png)
 
 [[internal-registries]]
 .TungstenAggregationIterator's Internal Properties (e.g. Registries, Counters and Flags)
@@ -62,7 +61,7 @@ image::images/spark-sql-HashAggregateExec-webui-details-for-query.png[align="cen
 Used when...FIXME
 
 | hashMap
-a| [[hashMap]] <<spark-sql-UnsafeFixedWidthAggregationMap.md#, UnsafeFixedWidthAggregationMap>> with the following:
+a| [[hashMap]] [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) with the following:
 
 * <<initialAggregationBuffer, initialAggregationBuffer>>
 
@@ -149,15 +148,16 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 * [[initialInputBufferOffset]] Initial input buffer offset
 * [[resultExpressions]] Output <<spark-sql-Expression-NamedExpression.md#, named expressions>>
 * [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes (i.e. `(Seq[Expression], Seq[Attribute]) => MutableProjection`)
-* [[originalInputAttributes]] Output attributes (of the <<HashAggregateExec.md#child, child>> of the <<HashAggregateExec.md#, HashAggregateExec>> physical operator)
-* [[inputIter]] Iterator of [InternalRow](InternalRow.md)s (from a single partition of the <<HashAggregateExec.md#child, child>> of the <<HashAggregateExec.md#, HashAggregateExec>> physical operator)
-* [[testFallbackStartsAt]] (used for testing) Optional ``HashAggregateExec``'s HashAggregateExec.md#testFallbackStartsAt[testFallbackStartsAt]
+* [[originalInputAttributes]] Output attributes (of the [child](physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator)
+* [[inputIter]] Iterator of [InternalRow](InternalRow.md)s (from a single partition of the [child](physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator)
+* [[testFallbackStartsAt]] (used for testing) Optional ``HashAggregateExec``'s [testFallbackStartsAt](physical-operators/HashAggregateExec.md#testFallbackStartsAt)
 * [[numOutputRows]] `numOutputRows` <<spark-sql-SQLMetric.md#, SQLMetric>>
 * [[peakMemory]] `peakMemory` <<spark-sql-SQLMetric.md#, SQLMetric>>
 * [[spillSize]] `spillSize` <<spark-sql-SQLMetric.md#, SQLMetric>>
 * [[avgHashProbe]] `avgHashProbe` <<spark-sql-SQLMetric.md#, SQLMetric>>
 
-NOTE: The SQL metrics (<<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>>) belong to the <<HashAggregateExec.md#metrics, HashAggregateExec>> physical operator that created the `TungstenAggregationIterator`.
+!!! note
+    The SQL metrics (<<numOutputRows, numOutputRows>>, <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>>) belong to the [HashAggregateExec](physical-operators/HashAggregateExec.md#metrics) physical operator that created the `TungstenAggregationIterator`.
 
 `TungstenAggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
 

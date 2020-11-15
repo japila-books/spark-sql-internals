@@ -1,3 +1,3 @@
-# BlockingOperatorWithCodegen Physical Operator
+# BlockingOperatorWithCodegen Physical Operators
 
 `BlockingOperatorWithCodegen` is...FIXME

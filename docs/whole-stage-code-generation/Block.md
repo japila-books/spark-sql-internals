@@ -1,6 +1,6 @@
 # Block
 
-`Block` is an extension of the [TreeNode](../catalyst/TreeNode.md) abstraction for [tree nodes](#implementations) that represent a block of Java code.
+`Block` is an extension of the [TreeNode](../catalyst/TreeNode.md) abstraction for [nodes](#implementations) that represent a block of Java code.
 
 ## Implementations
 

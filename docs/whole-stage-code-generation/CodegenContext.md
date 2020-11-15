@@ -118,16 +118,13 @@ generateExpressions(
 
 In the end, `generateExpressions` requests every expressions to expressions/Expression.md#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
 
-[NOTE]
-====
 `generateExpressions` is used when:
 
-* `GenerateMutableProjection` is requested to spark-sql-GenerateMutableProjection.md#create[create a MutableProjection]
+* `GenerateMutableProjection` is requested to [create a MutableProjection](GenerateMutableProjection.md#create)
 
 * `GenerateUnsafeProjection` is requested to [create an ExprCode for Catalyst expressions](GenerateUnsafeProjection.md#createCode)
 
-* `HashAggregateExec` is requested to HashAggregateExec.md#doConsumeWithKeys[generate the Java source code for whole-stage consume path with grouping keys]
-====
+* `HashAggregateExec` is requested to [generate the Java source code for whole-stage consume path with grouping keys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys)
 
 === [[addReferenceObj]] `addReferenceObj` Method
 
@@ -149,7 +146,7 @@ subexpressionEliminationForWholeStageCodegen(expressions: Seq[Expression]): SubE
 
 `subexpressionEliminationForWholeStageCodegen`...FIXME
 
-NOTE: `subexpressionEliminationForWholeStageCodegen` is used exclusively when `HashAggregateExec` is requested to HashAggregateExec.md#doConsume[generate a Java source code for whole-stage consume path] (HashAggregateExec.md#doConsumeWithKeys[with grouping keys] or HashAggregateExec.md#doConsumeWithoutKeys[not]).
+`subexpressionEliminationForWholeStageCodegen` is used when `HashAggregateExec` is requested to [generate a Java source code for whole-stage consume path](../physical-operators/HashAggregateExec.md#doConsume) ([with grouping keys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys) or [not](../physical-operators/HashAggregateExec.md#doConsumeWithoutKeys)).
 
 === [[addNewFunction]] Adding Function to Generated Class -- `addNewFunction` Method
 

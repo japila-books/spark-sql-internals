@@ -69,14 +69,11 @@ static boolean isMutable(DataType dt)
 
 Otherwise, `isMutable` is disabled (`false`).
 
-[NOTE]
-====
 `isMutable` is used when:
 
-* `UnsafeFixedWidthAggregationMap` is requested to <<spark-sql-UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema, supportsAggregationBufferSchema>>
+* `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
 
-* `SortBasedAggregationIterator` is requested for <<spark-sql-SortBasedAggregationIterator.md#newBuffer, newBuffer>>
-====
+* `SortBasedAggregationIterator` is requested for [newBuffer](spark-sql-SortBasedAggregationIterator.md#newBuffer)
 
 === [[KryoSerializable]] Kryo's KryoSerializable SerDe Protocol
 

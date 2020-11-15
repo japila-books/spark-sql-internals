@@ -105,9 +105,9 @@ supportsAggregate(aggregateExpressions: Seq[AggregateExpression]): Boolean
 
 `supportsAggregate` is used when `AggUtils` is requested to [create an aggregate physical operator given aggregate expressions](../AggUtils.md#createAggregate).
 
-=== [[creating-instance]] Creating ObjectHashAggregateExec Instance
+## Creating Instance
 
-`ObjectHashAggregateExec` takes the following when created:
+`ObjectHashAggregateExec` takes the following to be created:
 
 * [[requiredChildDistributionExpressions]] Required child distribution expressions/Expression.md[expressions]
 * [[groupingExpressions]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]

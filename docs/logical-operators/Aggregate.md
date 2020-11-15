@@ -1,14 +1,12 @@
-title: Aggregate
-
 # Aggregate Unary Logical Operator
 
-`Aggregate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that holds the following:
+`Aggregate` is a [unary logical operator](LogicalPlan.md#UnaryNode) that holds the following:
 
-* [[groupingExpressions]] Grouping expressions/Expression.md[expressions]
-* [[aggregateExpressions]] Aggregate spark-sql-Expression-NamedExpression.md[named expressions]
-* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
+* [[groupingExpressions]] Grouping [expressions](../expressions/Expression.md)
+* [[aggregateExpressions]] Aggregate [named expressions](../expressions/NamedExpression.md)
+* [[child]] Child [logical operator](LogicalPlan.md)
 
-`Aggregate` is created to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):
+`Aggregate` is created to represent the following (after a logical plan is [analyzed](LogicalPlan.md#analyzed)):
 
 * SQL's spark-sql-AstBuilder.md#withAggregation[GROUP BY] clause (possibly with `WITH CUBE` or `WITH ROLLUP`)
 
@@ -18,7 +16,7 @@ title: Aggregate
 
 * AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command
 
-NOTE: `Aggregate` logical operator is translated to one of HashAggregateExec.md[HashAggregateExec], ObjectHashAggregateExec.md[ObjectHashAggregateExec] or SortAggregateExec.md[SortAggregateExec] physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
+NOTE: `Aggregate` logical operator is translated to one of [HashAggregateExec](../physical-operators/HashAggregateExec.md), [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 [[properties]]
 .Aggregate's Properties

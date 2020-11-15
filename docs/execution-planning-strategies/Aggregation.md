@@ -30,11 +30,11 @@ scala> println(physicalPlan.head.numberedTreeString)
 [[aggregate-physical-operator-preference]]
 `Aggregation` [can select](../AggUtils.md#aggregate-physical-operator-selection-criteria) the following aggregate physical operators (in the order of preference):
 
-. <<HashAggregateExec.md#, HashAggregateExec>>
+1. [HashAggregateExec](../physical-operators/HashAggregateExec.md)
 
-. <<ObjectHashAggregateExec.md#, ObjectHashAggregateExec>>
+1. [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
 
-. <<SortAggregateExec.md#, SortAggregateExec>>
+1. [SortAggregateExec](../physical-operators/SortAggregateExec.md)
 
 === [[apply]] Applying Aggregation Strategy to Logical Plan (Executing Aggregation) -- `apply` Method
 

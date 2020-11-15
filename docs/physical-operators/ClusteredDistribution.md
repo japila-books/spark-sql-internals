@@ -6,7 +6,7 @@
 
 `ClusteredDistribution` is <<creating-instance, created>> when the following physical operators are requested for a required child distribution:
 
-* `MapGroupsExec`, HashAggregateExec.md#requiredChildDistribution[HashAggregateExec], ObjectHashAggregateExec.md#requiredChildDistribution[ObjectHashAggregateExec], SortAggregateExec.md#requiredChildDistribution[SortAggregateExec], WindowExec.md#requiredChildDistribution[WindowExec]
+* `MapGroupsExec`, [HashAggregateExec](HashAggregateExec.md#requiredChildDistribution), [ObjectHashAggregateExec](ObjectHashAggregateExec.md#requiredChildDistribution), [SortAggregateExec](SortAggregateExec.md#requiredChildDistribution), [WindowExec](WindowExec.md#requiredChildDistribution)
 
 * Spark Structured Streaming's `FlatMapGroupsWithStateExec`, `StateStoreRestoreExec`, `StateStoreSaveExec`, `StreamingDeduplicateExec`, `StreamingSymmetricHashJoinExec`, `StreamingSymmetricHashJoinExec`
 

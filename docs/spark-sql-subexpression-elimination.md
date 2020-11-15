@@ -6,15 +6,15 @@ Subexpression Elimination is enabled by default. Use the internal <<spark.sql.su
 
 Subexpression Elimination is used (by means of SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag of `SparkPlan`) when the following physical operators are requested to execute (i.e. moving away from queries to an RDD of internal rows to describe a distributed computation):
 
-* ProjectExec.md#doExecute[ProjectExec]
+* [ProjectExec](physical-operators/ProjectExec.md#doExecute)
 
-* HashAggregateExec.md#doExecute[HashAggregateExec] (and for HashAggregateExec.md#finishAggregate[finishAggregate])
+* [HashAggregateExec](physical-operators/HashAggregateExec.md#doExecute)
 
-* ObjectHashAggregateExec.md#doExecute[ObjectHashAggregateExec]
+* [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md#doExecute)
 
-* SortAggregateExec.md#doExecute[SortAggregateExec]
+* [SortAggregateExec](physical-operators/SortAggregateExec.md#doExecute)
 
-* WindowExec.md#doExecute[WindowExec] (and creates a WindowExec.md#windowFrameExpressionFactoryPairs[lookup table for WindowExpressions and factory functions for WindowFunctionFrame])
+* [WindowExec](physical-operators/WindowExec.md#doExecute) (and creates a [lookup table for WindowExpressions and factory functions for WindowFunctionFrame](physical-operators/WindowExec.md#windowFrameExpressionFactoryPairs))
 
 Internally, subexpression elimination happens when `CodegenContext` is requested for [subexpressionElimination](whole-stage-code-generation/CodegenContext.md#subexpressionElimination) (when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> with <<spark.sql.subexpressionElimination.enabled, subexpression elimination>> enabled).
 

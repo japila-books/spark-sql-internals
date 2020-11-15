@@ -530,6 +530,8 @@ nav:
         - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - SparkPlan: physical-operators/SparkPlan.md
+      - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
+      - BaseAggregateExec: physical-operators/BaseAggregateExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
       - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
       - BinaryExecNode: physical-operators/BinaryExecNode.md
@@ -606,13 +608,13 @@ nav:
         - FileSourceScanExec: physical-operators/FileSourceScanExec.md
         - physical-operators/FilterExec.md
         - physical-operators/GenerateExec.md
-        - physical-operators/HashAggregateExec.md
+        - HashAggregateExec: physical-operators/HashAggregateExec.md
         - physical-operators/InMemoryTableScanExec.md
         - InputAdapter: physical-operators/InputAdapter.md
         - InputRDDCodegen: physical-operators/InputRDDCodegen.md
         - physical-operators/LocalTableScanExec.md
         - physical-operators/MapElementsExec.md
-        - physical-operators/ObjectHashAggregateExec.md
+        - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
         - physical-operators/ObjectProducerExec.md
         - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
         - OverwriteByExpressionExecV1: physical-operators/OverwriteByExpressionExecV1.md
@@ -763,7 +765,7 @@ nav:
         - spark-sql-TungstenAggregationIterator.md
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
-      - spark-sql-UnsafeFixedWidthAggregationMap.md
+      - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md

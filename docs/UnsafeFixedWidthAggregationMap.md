@@ -6,9 +6,9 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 
 `UnsafeFixedWidthAggregationMap` is <<creating-instance, created>> when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#createHashMap, create a new UnsafeFixedWidthAggregationMap>> (when `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#doProduceWithKeys, generate the Java source code for "produce" path in Whole-Stage Code Generation>>)
+* `HashAggregateExec` physical operator is requested to [create a new UnsafeFixedWidthAggregationMap](physical-operators/HashAggregateExec.md#createHashMap) (when `HashAggregateExec` physical operator is requested to [generate the Java source code for "produce" path in Whole-Stage Code Generation](physical-operators/HashAggregateExec.md#doProduceWithKeys))
 
-* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#hashMap, created>> (when `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#doExecute, execute>> in traditional / non-Whole-Stage-Code-Generation execution path)
+* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#hashMap, created>> (when `HashAggregateExec` physical operator is requested to [execute](physical-operators/HashAggregateExec.md#doExecute) in traditional / non-Whole-Stage-Code-Generation execution path)
 
 [[internal-registries]]
 .UnsafeFixedWidthAggregationMap's Internal Properties (e.g. Registries, Counters and Flags)
@@ -61,7 +61,7 @@ val schemaWithMutableFields = StructType(
 assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWithMutableFields))
 ----
 
-NOTE: `supportsAggregationBufferSchema` is used exclusively when `HashAggregateExec` is requested to <<HashAggregateExec.md#supportsAggregate, supportsAggregate>>.
+`supportsAggregationBufferSchema` is used when `HashAggregateExec` is requested to [supportsAggregate](physical-operators/HashAggregateExec.md#supportsAggregate).
 
 ## Creating Instance
 
@@ -118,14 +118,11 @@ KVIterator<UnsafeRow, UnsafeRow> iterator()
 
 `iterator`...FIXME
 
-[NOTE]
-====
 `iterator` is used when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#finishAggregate, finishAggregate>>
+* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
 
-* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#creating-instance, created>> (and pre-loads the first key-value pair from the map)
-====
+* [TungstenAggregationIterator](spark-sql-TungstenAggregationIterator.md) is created (and pre-loads the first key-value pair from the map)
 
 === [[getPeakMemoryUsedBytes]] `getPeakMemoryUsedBytes` Method
 
@@ -136,14 +133,11 @@ long getPeakMemoryUsedBytes()
 
 `getPeakMemoryUsedBytes`...FIXME
 
-[NOTE]
-====
 `getPeakMemoryUsedBytes` is used when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#finishAggregate, finishAggregate>>
+* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
 
-* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#TaskCompletionListener, used in TaskCompletionListener>>
-====
+* `TungstenAggregationIterator` is [used in TaskCompletionListener](spark-sql-TungstenAggregationIterator.md#TaskCompletionListener)
 
 === [[getAverageProbesPerLookup]] `getAverageProbesPerLookup` Method
 
@@ -154,14 +148,11 @@ double getAverageProbesPerLookup()
 
 `getAverageProbesPerLookup`...FIXME
 
-[NOTE]
-====
 `getAverageProbesPerLookup` is used when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#finishAggregate, finishAggregate>>
+* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
 
-* `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#TaskCompletionListener, used in TaskCompletionListener>>
-====
+* `TungstenAggregationIterator` is [used in TaskCompletionListener](spark-sql-TungstenAggregationIterator.md#TaskCompletionListener)
 
 === [[free]] `free` Method
 
@@ -172,14 +163,11 @@ void free()
 
 `free`...FIXME
 
-[NOTE]
-====
 `free` is used when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#finishAggregate, finishAggregate>>
+* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
 
-* `TungstenAggregationIterator` is requested to <<spark-sql-TungstenAggregationIterator.md#processInputs, processInputs>> (when `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#creating-instance, created>>), <<spark-sql-TungstenAggregationIterator.md#next, get the next UnsafeRow>>, <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>> and is <<spark-sql-TungstenAggregationIterator.md#creating-instance, created>>
-====
+* `TungstenAggregationIterator` is requested to [processInputs](spark-sql-TungstenAggregationIterator.md#processInputs) (when [TungstenAggregationIterator](spark-sql-TungstenAggregationIterator.md) is created), [get the next UnsafeRow](spark-sql-TungstenAggregationIterator.md#next), [outputForEmptyGroupingKeyWithoutInput](spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) and is [created](spark-sql-TungstenAggregationIterator.md)
 
 === [[destructAndCreateExternalSorter]] `destructAndCreateExternalSorter` Method
 
@@ -190,11 +178,8 @@ UnsafeKVExternalSorter destructAndCreateExternalSorter() throws IOException
 
 `destructAndCreateExternalSorter`...FIXME
 
-[NOTE]
-====
 `destructAndCreateExternalSorter` is used when:
 
-* `HashAggregateExec` physical operator is requested to <<HashAggregateExec.md#finishAggregate, finishAggregate>>
+* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
 
-* `TungstenAggregationIterator` is requested to <<spark-sql-TungstenAggregationIterator.md#processInputs, processInputs>> (when `TungstenAggregationIterator` is <<spark-sql-TungstenAggregationIterator.md#creating-instance, created>>)
-====
+* [TungstenAggregationIterator](spark-sql-TungstenAggregationIterator.md) is created (and requested to [processInputs](spark-sql-TungstenAggregationIterator.md#processInputs))
