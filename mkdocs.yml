@@ -277,6 +277,7 @@ nav:
       - TypedFilter: logical-operators/TypedFilter.md
       - logical-operators/Union.md
       - logical-operators/UnresolvedCatalogRelation.md
+      - UnresolvedHaving: logical-operators/UnresolvedHaving.md
       - logical-operators/UnresolvedHint.md
       - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
       - logical-operators/UnresolvedRelation.md

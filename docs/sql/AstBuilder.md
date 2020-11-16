@@ -337,7 +337,14 @@ ANTLR rule: `windowDef`
 
 ## Parsing Handlers
 
-### withAggregation
+### <span id="withAggregationClause"> withAggregationClause
+
+```scala
+withAggregationClause(
+  ctx: AggregationClauseContext,
+  selectExpressions: Seq[NamedExpression],
+  query: LogicalPlan): LogicalPlan
+```
 
 Adds one of the following logical operators:
 
@@ -345,9 +352,19 @@ Adds one of the following logical operators:
 
 * [Aggregate](../logical-operators/Aggregate.md) for `GROUP BY &hellip; (WITH CUBE | WITH ROLLUP)?`
 
-### withGenerate
+### <span id="withGenerate"> withGenerate
 
 Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator](../expressions/UnresolvedGenerator.md) and [join](../logical-operators/Generate.md#join) flag enabled for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+
+### <span id="withHavingClause"> withHavingClause
+
+```scala
+withHavingClause(
+  ctx: HavingClauseContext,
+  plan: LogicalPlan): LogicalPlan
+```
+
+Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md)
 
 ### withHints
 
@@ -441,6 +458,11 @@ DISTRIBUTE BY is not supported
 `withRepartitionByExpression` is used when `AstBuilder` is requested to [withQueryResultClauses](#withQueryResultClauses) (for `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses).
 
 ### <span id="withSample"> withSample
+
+!!! important FIXME
+    This section needs your help
+
+### <span id="withSelectQuerySpecification"> withSelectQuerySpecification
 
 !!! important FIXME
     This section needs your help

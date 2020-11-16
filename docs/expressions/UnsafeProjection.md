@@ -28,12 +28,12 @@ create(
   subexpressionEliminationEnabled: Boolean): UnsafeProjection
 ----
 <1> `create` takes the [DataTypes](../DataType.md) from `schema` and calls the 2nd `create`
-<2> `create` creates a spark-sql-Expression-BoundReference.md[BoundReference] per field in `fields` and calls the 5th `create`
+<2> `create` creates a [BoundReference](BoundReference.md) per field in `fields` and calls the 5th `create`
 <3> `create` calls the 5th `create`
 <4> `create` calls the 5th `create`
 <5> The main `create` that does the heavy work
 
-`create` transforms all <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions to `CreateNamedStructUnsafe` in every spark-sql-Expression-BoundReference.md[BoundReference] in the input `exprs`.
+`create` transforms all <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions to `CreateNamedStructUnsafe` in every [BoundReference](BoundReference.md) in the input `exprs`.
 
 In the end, `create` requests `GenerateUnsafeProjection` to [generate a UnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md#generate).
 

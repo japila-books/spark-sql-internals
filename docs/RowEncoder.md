@@ -32,7 +32,7 @@ apply(schema: StructType): ExpressionEncoder[Row]
 
 `apply` builds [ExpressionEncoder](ExpressionEncoder.md) of [Row](spark-sql-Row.md), i.e. `ExpressionEncoder[Row]`, from the input [StructType](spark-sql-schema.md) (as `schema`).
 
-Internally, `apply` creates a spark-sql-Expression-BoundReference.md[BoundReference] for the spark-sql-Row.md[Row] type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
+Internally, `apply` creates a [BoundReference](expressions/BoundReference.md) for the [Row](spark-sql-Row.md) type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
 
 === [[serializerFor]] `serializerFor` Internal Method
 

@@ -20,7 +20,7 @@ unsafeRow: org.apache.spark.sql.catalyst.expressions.UnsafeRow = [0,100000000b,6
 
 `ExpressionEncoder` uses <<serializer, serializer expressions>> to encode (aka _serialize_) a JVM object of type `T` to an [InternalRow](InternalRow.md).
 
-NOTE: It is assumed that all serializer expressions contain at least one and the same spark-sql-Expression-BoundReference.md[BoundReference].
+NOTE: It is assumed that all serializer expressions contain at least one and the same [BoundReference](expressions/BoundReference.md).
 
 `ExpressionEncoder` uses a <<deserializer, deserializer expression>> to decode (aka _deserialize_) a JVM object of type `T` from [InternalRow](InternalRow.md).
 

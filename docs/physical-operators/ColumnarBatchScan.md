@@ -262,7 +262,7 @@ produceRows(ctx: CodegenContext, input: String): String
 
 `produceRows` resets (`nulls`) [currentVars](../whole-stage-code-generation/CodegenContext.md#currentVars).
 
-For every catalyst/QueryPlan.md#output[output schema attribute], `produceRows` creates a spark-sql-Expression-BoundReference.md#creating-instance[BoundReference] and requests it to expressions/Expression.md#genCode[generate code for expression evaluation].
+For every [output schema attribute](../catalyst/QueryPlan.md#output), `produceRows` creates a [BoundReference](../expressions/BoundReference.md) and requests it to [generate code for expression evaluation](../expressions/Expression.md#genCode).
 
 `produceRows` selects the name of the row term per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
 
