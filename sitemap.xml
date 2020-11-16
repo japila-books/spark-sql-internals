@@ -852,18 +852,6 @@
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileFormat/</loc>
-     <lastmod>2020-11-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/TextFileFormat/</loc>
-     <lastmod>2020-11-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/TextBasedFileFormat/</loc>
-     <lastmod>2020-11-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileScanBuilder/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
@@ -917,6 +905,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RecordReaderIterator/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/FileFormat/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/TextBasedFileFormat/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1056,23 +1052,35 @@
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CSVFileFormat/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/csv/CSVFileFormat/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JsonFileFormat/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/csv/CSVScanBuilder/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-JsonDataSource/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/json/JsonFileFormat/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/OrcFileFormat/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/json/JsonDataSource/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/orc/OrcScanBuilder/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/orc/OrcFileFormat/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetTable/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetScanBuilder/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1093,6 +1101,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/SpecificParquetRecordReaderBase/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/text/TextFileFormat/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -3136,7 +3148,7 @@
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CompressionCodecs/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CompressionCodecs/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -3145,6 +3157,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/JoinStrategyHint/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/PushDownUtils/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
