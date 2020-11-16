@@ -304,14 +304,10 @@ generateAlias(e: Expression): String
 
 `generateAlias`...FIXME
 
-[NOTE]
-====
 `generateAlias` is used when:
 
 * `Column` is requested to <<named, named>>
-
-* `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#alias[alias]
-====
+* `RelationalGroupedDataset` is requested to [alias](RelationalGroupedDataset.md#alias)
 
 === [[named]] `named` Method
 
@@ -322,11 +318,7 @@ named: NamedExpression
 
 `named`...FIXME
 
-[NOTE]
-====
 `named` is used when the following operators are used:
 
-* spark-sql-dataset-operators.md#select[Dataset.select]
-
-* spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg]
-====
+* [Dataset.select](spark-sql-dataset-operators.md#select)
+* [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)

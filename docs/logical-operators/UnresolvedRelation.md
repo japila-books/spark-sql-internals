@@ -26,7 +26,7 @@ Table or view not found: [tableIdentifier]
 
 [TIP]
 ====
-Use `table` operator from spark-sql-catalyst-dsl.md#plans[Catalyst DSL] to create a `UnresolvedRelation` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `table` operator from [Catalyst DSL](../catalyst-dsl/index.md#plans) to create a `UnresolvedRelation` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

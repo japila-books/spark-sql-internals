@@ -14,7 +14,7 @@
 
 `InsertIntoTable` has no <<partition, partition keys>> when <<creating-instance, created>> as follows:
 
-* <<insertInto, insertInto>> operator from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>>
+* <<insertInto, insertInto>> operator from the [Catalyst DSL](../catalyst-dsl/index.md)
 
 * [DataFrameWriter.insertInto](../DataFrameWriter.md#insertInto) operator
 
@@ -65,7 +65,7 @@ insertInto(
   overwrite: Boolean = false): LogicalPlan
 ----
 
-spark-sql-catalyst-dsl.md#insertInto[insertInto] operator in spark-sql-catalyst-dsl.md[Catalyst DSL] creates an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
+[insertInto](../catalyst-dsl/index.md#insertInto) operator in [Catalyst DSL](../catalyst-dsl/index.md) creates an `InsertIntoTable` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source,plaintext]
 ----

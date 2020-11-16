@@ -3,7 +3,7 @@
 `RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a spark-sql-DataFrame.md[DataFrame].
 
 !!! note
-    [KeyValueGroupedDataset](spark-sql-KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Rows](spark-sql-Row.md)).
+    [KeyValueGroupedDataset](KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Rows](spark-sql-Row.md)).
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 

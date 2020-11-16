@@ -55,7 +55,7 @@ ab: org.apache.spark.sql.catalyst.analysis.UnresolvedStar = List(a, b).*
 
 [TIP]
 ====
-Use `star` operator from Catalyst DSL's spark-sql-catalyst-dsl.md#expressions[expressions] to create an `UnresolvedStar`.
+Use `star` operator from Catalyst DSL's [expressions](../catalyst-dsl/index.md#expressions) to create an `UnresolvedStar`.
 
 [source, scala]
 ----

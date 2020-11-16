@@ -94,7 +94,7 @@ The catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME
 
 [TIP]
 ====
-Use `select` operator from spark-sql-catalyst-dsl.md[Catalyst DSL] to create a `Project` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `select` operator from [Catalyst DSL](../catalyst-dsl/index.md) to create a `Project` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

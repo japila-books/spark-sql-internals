@@ -1195,7 +1195,7 @@ Use [SQLConf.supportQuotedRegexColumnName](SQLConf.md#supportQuotedRegexColumnNa
 
 ## <span id="spark.sql.pivotMaxValues"> spark.sql.pivotMaxValues
 
-Maximum number of (distinct) values that will be collected without error (when doing a [pivot](spark-sql-RelationalGroupedDataset.md#pivot) without specifying the values for the pivot column)
+Maximum number of (distinct) values that will be collected without error (when doing a [pivot](RelationalGroupedDataset.md#pivot) without specifying the values for the pivot column)
 
 Default: `10000`
 
@@ -1227,7 +1227,7 @@ Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method t
 
 ## <span id="spark.sql.retainGroupColumns"> spark.sql.retainGroupColumns
 
-Controls whether to retain columns used for aggregation or not (in [RelationalGroupedDataset](spark-sql-RelationalGroupedDataset.md) operators).
+Controls whether to retain columns used for aggregation or not (in [RelationalGroupedDataset](RelationalGroupedDataset.md) operators).
 
 Default: `true`
 

@@ -12,7 +12,7 @@
 
 * `DataFrameWriter` is requested to [execute a logical command for writing to a data source V1](../DataFrameWriter.md#saveToV1Source) (when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](../DataFrameWriter.md#save))
 
-* `KeyValueGroupedDataset` is requested for the [logical query plan](../spark-sql-KeyValueGroupedDataset.md#logicalPlan)
+* `KeyValueGroupedDataset` is requested for the [logical query plan](../KeyValueGroupedDataset.md#logicalPlan)
 
 [[child]]
 [[creating-instance]]

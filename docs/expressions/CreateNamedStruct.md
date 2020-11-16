@@ -86,7 +86,7 @@ values_0 = null;
 
 [TIP]
 ====
-Use `namedStruct` operator from Catalyst DSL's spark-sql-catalyst-dsl.md#expressions[expressions] to create a `CreateNamedStruct` expression.
+Use `namedStruct` operator from Catalyst DSL's [expressions](../catalyst-dsl/index.md#expressions) to create a `CreateNamedStruct` expression.
 
 [source, scala]
 ----

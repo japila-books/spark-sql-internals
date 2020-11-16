@@ -56,10 +56,10 @@ output: Seq[Attribute]
 
 ### <span id="Repartition-catalyst-dsl"> Catalyst DSL
 
-[Catalyst DSL](../spark-sql-catalyst-dsl.md) defines the following operators to create `Repartition` logical operators:
+[Catalyst DSL](../catalyst-dsl/index.md) defines the following operators to create `Repartition` logical operators:
 
-* [coalesce](../spark-sql-catalyst-dsl.md#coalesce) (with [shuffle](#shuffle) disabled)
-* [repartition](../spark-sql-catalyst-dsl.md#repartition) (with [shuffle](#shuffle) enabled)
+* [coalesce](../catalyst-dsl/index.md#coalesce) (with [shuffle](#shuffle) disabled)
+* [repartition](../catalyst-dsl/index.md#repartition) (with [shuffle](#shuffle) enabled)
 
 ## <span id="RepartitionByExpression"> RepartitionByExpression Logical Operator
 
@@ -81,7 +81,7 @@ output: Seq[Attribute]
 
 ### <span id="RepartitionByExpression-catalyst-dsl"> Catalyst DSL
 
-[Catalyst DSL](../spark-sql-catalyst-dsl.md) defines [distribute](../spark-sql-catalyst-dsl.md#distribute) operator to create `RepartitionByExpression` logical operators.
+[Catalyst DSL](../catalyst-dsl/index.md) defines [distribute](../catalyst-dsl/index.md#distribute) operator to create `RepartitionByExpression` logical operators.
 
 ### <span id="RepartitionByExpression-partitioning"> Partitioning
 

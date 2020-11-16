@@ -24,7 +24,7 @@ The catalyst/QueryPlan.md#output[output schema] of a `Generate` is...FIXME
 
 [TIP]
 ====
-Use `generate` operator from spark-sql-catalyst-dsl.md[Catalyst DSL] to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `generate` operator from [Catalyst DSL](../catalyst-dsl/index.md) to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

@@ -18,7 +18,7 @@ abstract class Aggregator[-IN, BUF, OUT] extends Serializable {
 }
 ----
 
-After you create a custom `Aggregator`, you should use <<toColumn, toColumn>> method to convert it to a `TypedColumn` that can be used with spark-sql-dataset-operators.md#select[Dataset.select] and spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg] typed operators.
+After you create a custom `Aggregator`, you should use <<toColumn, toColumn>> method to convert it to a `TypedColumn` that can be used with spark-sql-dataset-operators.md#select[Dataset.select] and [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) typed operators.
 
 [source, scala]
 ----

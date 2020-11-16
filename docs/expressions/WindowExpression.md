@@ -81,7 +81,7 @@ windowExpr(
   windowSpec: WindowSpecDefinition): WindowExpression
 ----
 
-<<spark-sql-catalyst-dsl.md#windowExpr, windowExpr>> operator in Catalyst DSL creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.
+[windowExpr](../catalyst-dsl/index.md#windowExpr) operator in [Catalyst DSL](../catalyst-dsl/index.md) creates a <<creating-instance, WindowExpression>> expression, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

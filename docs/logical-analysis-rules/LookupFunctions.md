@@ -14,7 +14,7 @@
 
 ## Demo
 
-Let's use [Catalyst DSL](../spark-sql-catalyst-dsl.md) to create a logical plan with an unregistered function.
+Let's use [Catalyst DSL](../catalyst-dsl/index.md) to create a logical plan with an unregistered function.
 
 ```scala
 import org.apache.spark.sql.catalyst.dsl.plans._

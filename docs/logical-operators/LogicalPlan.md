@@ -8,19 +8,19 @@ A logical query plan is a tree of [nodes](../catalyst/TreeNode.md) of logical op
 
 ## Implementations
 
-### BinaryNode
+### <span id="BinaryNode"> BinaryNode
 
 Logical operators with two [child](../catalyst/TreeNode.md#children) logical operators
 
-### Command
+### <span id="Command"> Command
 
 [Command](Command.md)
 
-### LeafNode
+### <span id="LeafNode"> LeafNode
 
 [LeafNode](LeafNode.md) is a logical operator with no [child](../catalyst/TreeNode.md#children) operators
 
-### UnaryNode
+### <span id="UnaryNode"> UnaryNode
 
 Logical operators with a single [child](../catalyst/TreeNode.md#children) logical operator
 
@@ -28,7 +28,7 @@ Logical operators with a single [child](../catalyst/TreeNode.md#children) logica
 
 * [CreateTable](CreateTable.md)
 * IgnoreCachedData
-* NamedRelation
+* [NamedRelation](NamedRelation.md)
 * ObjectProducer
 * [ParsedStatement](ParsedStatement.md)
 * [SupportsSubquery](SupportsSubquery.md)

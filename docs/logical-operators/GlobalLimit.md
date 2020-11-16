@@ -35,7 +35,7 @@ apply(
 * `Dataset.limit` operator is used
 * `RewriteNonCorrelatedExists` logical optimization is executed
 * `CombineLimits` physical optimization is executed
-* [Catalyst DSL](../spark-sql-catalyst-dsl.md)'s `limit` operator is used
+* [Catalyst DSL](../catalyst-dsl/index.md)'s `limit` operator is used
 
 ## Example
 

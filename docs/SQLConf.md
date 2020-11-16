@@ -183,13 +183,13 @@ Used when [RelationConversions](hive/RelationConversions.md) logical post-hoc ev
 
 The value of [spark.sql.pivotMaxValues](configuration-properties.md#spark.sql.pivotMaxValues) configuration property
 
-Used in [pivot](spark-sql-RelationalGroupedDataset.md#pivot) operator.
+Used in [pivot](RelationalGroupedDataset.md#pivot) operator.
 
 ## <span id="dataFrameRetainGroupColumns"> dataFrameRetainGroupColumns
 
 The value of [spark.sql.retainGroupColumns](configuration-properties.md#spark.sql.retainGroupColumns) configuration property
 
-Used in [RelationalGroupedDataset](spark-sql-RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
+Used in [RelationalGroupedDataset](RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
 
 ## <span id="DEFAULT_CATALOG"> DEFAULT_CATALOG
 

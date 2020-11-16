@@ -101,11 +101,11 @@ It is _assumed_ that using one of the operators is usually more efficient (than 
 | Description
 
 | <<cube, cube>>
-| spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset]
+| [RelationalGroupedDataset](RelationalGroupedDataset.md)
 | Calculates subtotals and a grand total for every permutation of the columns specified.
 
 | <<rollup, rollup>>
-| spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset]
+| [RelationalGroupedDataset](RelationalGroupedDataset.md)
 | Calculates subtotals and a grand total over (ordered) combination of groups.
 |===
 
@@ -383,11 +383,12 @@ scala> inventory.rollup(expr("(item, color)") as "(item, color)").sum().show
 +-------------+-------------+
 ----
 
-Internally, `rollup` spark-sql-dataset-operators.md#toDF[converts the `Dataset` into a `DataFrame`] (i.e. uses [RowEncoder](RowEncoder.md) as the encoder) and then creates a spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] (with `RollupType` group type).
+Internally, `rollup` spark-sql-dataset-operators.md#toDF[converts the `Dataset` into a `DataFrame`] (i.e. uses [RowEncoder](RowEncoder.md) as the encoder) and then creates a [RelationalGroupedDataset](RelationalGroupedDataset.md) (with `RollupType` group type).
 
 NOTE: <<Rollup, Rollup>> expression represents `GROUP BY \... WITH ROLLUP` in SQL in Spark's Catalyst Expression tree (after `AstBuilder` spark-sql-AstBuilder.md#withAggregation[parses a structured query with aggregation]).
 
-TIP: Read up on `rollup` in https://www.compose.com/articles/deeper-into-postgres-9-5-new-group-by-options-for-aggregation/[Deeper into Postgres 9.5 - New Group By Options for Aggregation].
+!!! tip
+    Read up on `rollup` in [Deeper into Postgres 9.5 - New Group By Options for Aggregation](https://www.compose.com/articles/deeper-into-postgres-9-5-new-group-by-options-for-aggregation/).
 
 === [[cube]] `cube` Operator
 
@@ -399,9 +400,10 @@ cube(col1: String, cols: String*): RelationalGroupedDataset
 
 `cube` multi-dimensional aggregate operator is an extension of spark-sql-basic-aggregation.md#groupBy[groupBy] operator that allows calculating subtotals and a grand total across all combinations of specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
 
-`cube` returns spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] that you can use to execute aggregate function or operator.
+`cube` returns [RelationalGroupedDataset](RelationalGroupedDataset.md) that you can use to execute aggregate function or operator.
 
-NOTE: `cube` is more than <<rollup, rollup>> operator, i.e. `cube` does `rollup` with aggregation over all the missing combinations given the columns.
+!!! note
+    `cube` is more than <<rollup, rollup>> operator, i.e. `cube` does `rollup` with aggregation over all the missing combinations given the columns.
 
 [source, scala]
 ----

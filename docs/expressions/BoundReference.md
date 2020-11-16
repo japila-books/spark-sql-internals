@@ -16,7 +16,7 @@ val row = InternalRow(1L, "hello")
 val value = boundRef.eval(row).asInstanceOf[Long]
 ```
 
-You can also create a `BoundReference` using Catalyst DSL's [at](../spark-sql-catalyst-dsl.md#at) method.
+You can also create a `BoundReference` using Catalyst DSL's [at](../catalyst-dsl/index.md#at) method.
 
 ```text
 import org.apache.spark.sql.catalyst.dsl.expressions._

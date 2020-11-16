@@ -86,7 +86,7 @@ scala> println(resolvedPlan.numberedTreeString)
 
 [TIP]
 ====
-Use `hint` operator from spark-sql-catalyst-dsl.md#hint[Catalyst DSL] to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
+Use `hint` operator from [Catalyst DSL](../catalyst-dsl/index.md#hint) to create a `UnresolvedHint` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

@@ -140,7 +140,7 @@ scala> println(resolvedPlan.numberedTreeString)
 
 ## <span id="hint-catalyst-dsl"> Hint Operator in Catalyst DSL
 
-[hint](../spark-sql-catalyst-dsl.md#hint) operator in [Catalyst DSL](../spark-sql-catalyst-dsl.md) allows to create a [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operator.
+[hint](../catalyst-dsl/index.md#hint) operator in [Catalyst DSL](../catalyst-dsl/index.md) allows to create a [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operator.
 
 ```text
 // Create a logical plan to add hint to

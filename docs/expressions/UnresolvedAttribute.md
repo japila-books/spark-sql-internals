@@ -96,7 +96,7 @@ Catalyst DSL defines two Scala implicits to create an `UnresolvedAttribute`:
 
 * `symbolToUnresolvedAttribute` is a Scala implicit method that converts `'colName` into an `UnresolvedAttribute`
 
-Both implicits are part of spark-sql-catalyst-dsl.md#ExpressionConversions[ExpressionConversions] Scala trait of Catalyst DSL.
+Both implicits are part of [ExpressionConversions](../catalyst-dsl/index.md#ExpressionConversions) Scala trait of Catalyst DSL.
 
 Import `expressions` object to get access to the expression conversions.
 

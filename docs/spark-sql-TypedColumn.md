@@ -37,18 +37,15 @@ withInputType(
 
 `withInputType`...FIXME
 
-[NOTE]
-====
 `withInputType` is used when the following typed operators are used:
 
-* spark-sql-dataset-operators.md#select[Dataset.select]
+* [Dataset.select](spark-sql-dataset-operators.md#select)
 
-* spark-sql-KeyValueGroupedDataset.md#agg[KeyValueGroupedDataset.agg]
+* [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)
 
-* spark-sql-RelationalGroupedDataset.md#agg[RelationalGroupedDataset.agg]
-====
+* [RelationalGroupedDataset.agg](RelationalGroupedDataset.md#agg)
 
-=== [[creating-instance]] Creating TypedColumn Instance
+## Creating Instance
 
 `TypedColumn` takes the following when created:
 

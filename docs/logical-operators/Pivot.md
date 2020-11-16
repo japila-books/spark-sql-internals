@@ -1,11 +1,8 @@
-title: Pivot
-
 # Pivot Unary Logical Operator
 
-`Pivot` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents spark-sql-RelationalGroupedDataset.md#pivot[pivot] operator.
+`Pivot` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents [pivot](../RelationalGroupedDataset.md#pivot) operator.
 
-[source, scala]
-----
+```text
 val visits = Seq(
   (0, "Warsaw", 2015),
   (1, "Warsaw", 2016),
@@ -20,9 +17,9 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 00 Pivot [city#8], year#9: int, [2015, 2016, 2017], [count(1) AS count#157L]
 01 +- Project [_1#3 AS id#7, _2#4 AS city#8, _3#5 AS year#9]
 02    +- LocalRelation [_1#3, _2#4, _3#5]
-----
+```
 
-`Pivot` is <<creating-instance, created>> when `RelationalGroupedDataset` spark-sql-RelationalGroupedDataset.md#toDF[creates a DataFrame for an aggregate operator].
+`Pivot` is <<creating-instance, created>> when `RelationalGroupedDataset` [creates a DataFrame for an aggregate operator](../RelationalGroupedDataset.md#toDF).
 
 === [[analyzer]] Analysis Phase
 
@@ -61,9 +58,9 @@ scala> println(planAfterResolvePivot.numberedTreeString)
 04          +- LocalRelation [_1#3, _2#4, _3#5]
 ----
 
-=== [[creating-instance]] Creating Pivot Instance
+## Creating Instance
 
-`Pivot` takes the following when created:
+`Pivot` takes the following to be created:
 
 * [[groupByExprs]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
 * [[pivotColumn]] Pivot column expressions/Expression.md[expression]

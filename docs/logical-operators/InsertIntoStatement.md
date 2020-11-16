@@ -14,6 +14,6 @@
 
 `InsertIntoStatement` is created when:
 
-* Catalyst DSL (`DslLogicalPlan`) is used to [insertInto](../spark-sql-catalyst-dsl.md#insertInto)
+* Catalyst DSL (`DslLogicalPlan`) is used to [insertInto](../catalyst-dsl/index.md#insertInto)
 * `AstBuilder` is requested to [withInsertInto](../sql/AstBuilder.md#withInsertInto)
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto)

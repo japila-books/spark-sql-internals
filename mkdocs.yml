@@ -205,88 +205,87 @@ nav:
           - FilterEstimation: logical-operators/FilterEstimation.md
           - JoinEstimation: logical-operators/JoinEstimation.md
           - ProjectEstimation: logical-operators/ProjectEstimation.md
-      - Concrete Operators:
-        - logical-operators/Aggregate.md
-        - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
-        - AlterTableRecoverPartitionsStatement: logical-operators/AlterTableRecoverPartitionsStatement.md
-        - logical-operators/AlterViewAsCommand.md
-        - logical-operators/AnalysisBarrier.md
-        - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
-        - AnalyzeColumnStatement: logical-operators/AnalyzeColumnStatement.md
-        - logical-operators/AnalyzePartitionCommand.md
-        - logical-operators/AnalyzeTableCommand.md
-        - AppendData: logical-operators/AppendData.md
-        - logical-operators/ClearCacheCommand.md
-        - CollectMetrics: logical-operators/CollectMetrics.md
-        - logical-operators/CreateDataSourceTableAsSelectCommand.md
-        - logical-operators/CreateDataSourceTableCommand.md
-        - logical-operators/CreateTable.md
-        - logical-operators/CreateTableCommand.md
-        - logical-operators/CreateTempViewUsing.md
-        - CreateV2Table: logical-operators/CreateV2Table.md
-        - logical-operators/CreateViewCommand.md
-        - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
-        - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
-        - DeleteFromTable: logical-operators/DeleteFromTable.md
-        - logical-operators/DescribeColumnCommand.md
-        - DescribeRelation: logical-operators/DescribeRelation.md
-        - logical-operators/DescribeTableCommand.md
-        - logical-operators/DeserializeToObject.md
-        - logical-operators/DropTableCommand.md
-        - logical-operators/Except.md
-        - logical-operators/Expand.md
-        - ExplainCommand: logical-operators/ExplainCommand.md
-        - logical-operators/ExternalRDD.md
-        - Filter: logical-operators/Filter.md
-        - logical-operators/Generate.md
-        - GlobalLimit: logical-operators/GlobalLimit.md
-        - logical-operators/GroupingSets.md
-        - logical-operators/Hint.md
-        - InMemoryRelation: logical-operators/InMemoryRelation.md
-        - logical-operators/InsertIntoDataSourceCommand.md
-        - logical-operators/InsertIntoDataSourceDirCommand.md
-        - logical-operators/InsertIntoDir.md
-        - logical-operators/InsertIntoHadoopFsRelationCommand.md
-        - InsertIntoStatement: logical-operators/InsertIntoStatement.md
-        - InsertIntoTable: logical-operators/InsertIntoTable.md
-        - logical-operators/Intersect.md
-        - logical-operators/Join.md
-        - logical-operators/LocalRelation.md
-        - LogicalQueryStage: logical-operators/LogicalQueryStage.md
-        - logical-operators/LogicalRDD.md
-        - logical-operators/LogicalRelation.md
-        - MergeIntoTable: logical-operators/MergeIntoTable.md
-        - logical-operators/OneRowRelation.md
-        - OverwriteByExpression: logical-operators/OverwriteByExpression.md
-        - logical-operators/Pivot.md
-        - logical-operators/Project.md
-        - logical-operators/Range.md
-        - RepairTableStatement: logical-operators/RepairTableStatement.md
-        - Repartition: logical-operators/RepartitionOperation/#Repartition
-        - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
-        - logical-operators/ResolvedHint.md
-        - logical-operators/SaveIntoDataSourceCommand.md
-        - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
-        - logical-operators/ShowCreateTableCommand.md
-        - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
-        - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
-        - ShowTables: logical-operators/ShowTables.md
-        - logical-operators/ShowTablesCommand.md
-        - logical-operators/Sort.md
-        - logical-operators/SubqueryAlias.md
-        - logical-operators/TruncateTableCommand.md
-        - TypedFilter: logical-operators/TypedFilter.md
-        - logical-operators/Union.md
-        - logical-operators/UnresolvedCatalogRelation.md
-        - logical-operators/UnresolvedHint.md
-        - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
-        - logical-operators/UnresolvedRelation.md
-        - logical-operators/UnresolvedTableValuedFunction.md
-        - UseStatement: logical-operators/UseStatement.md
-        - logical-operators/Window.md
-        - logical-operators/WithWindowDefinition.md
-        - logical-operators/WriteToDataSourceV2.md
-        - logical-operators/View.md
+      - Aggregate: logical-operators/Aggregate.md
+      - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
+      - AlterTableRecoverPartitionsStatement: logical-operators/AlterTableRecoverPartitionsStatement.md
+      - logical-operators/AlterViewAsCommand.md
+      - logical-operators/AnalysisBarrier.md
+      - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
+      - AnalyzeColumnStatement: logical-operators/AnalyzeColumnStatement.md
+      - logical-operators/AnalyzePartitionCommand.md
+      - logical-operators/AnalyzeTableCommand.md
+      - AppendData: logical-operators/AppendData.md
+      - logical-operators/ClearCacheCommand.md
+      - CollectMetrics: logical-operators/CollectMetrics.md
+      - logical-operators/CreateDataSourceTableAsSelectCommand.md
+      - logical-operators/CreateDataSourceTableCommand.md
+      - logical-operators/CreateTable.md
+      - logical-operators/CreateTableCommand.md
+      - logical-operators/CreateTempViewUsing.md
+      - CreateV2Table: logical-operators/CreateV2Table.md
+      - logical-operators/CreateViewCommand.md
+      - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
+      - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
+      - DeleteFromTable: logical-operators/DeleteFromTable.md
+      - logical-operators/DescribeColumnCommand.md
+      - DescribeRelation: logical-operators/DescribeRelation.md
+      - logical-operators/DescribeTableCommand.md
+      - logical-operators/DeserializeToObject.md
+      - logical-operators/DropTableCommand.md
+      - logical-operators/Except.md
+      - logical-operators/Expand.md
+      - ExplainCommand: logical-operators/ExplainCommand.md
+      - logical-operators/ExternalRDD.md
+      - Filter: logical-operators/Filter.md
+      - logical-operators/Generate.md
+      - GlobalLimit: logical-operators/GlobalLimit.md
+      - logical-operators/GroupingSets.md
+      - logical-operators/Hint.md
+      - InMemoryRelation: logical-operators/InMemoryRelation.md
+      - logical-operators/InsertIntoDataSourceCommand.md
+      - logical-operators/InsertIntoDataSourceDirCommand.md
+      - logical-operators/InsertIntoDir.md
+      - logical-operators/InsertIntoHadoopFsRelationCommand.md
+      - InsertIntoStatement: logical-operators/InsertIntoStatement.md
+      - InsertIntoTable: logical-operators/InsertIntoTable.md
+      - logical-operators/Intersect.md
+      - logical-operators/Join.md
+      - logical-operators/LocalRelation.md
+      - LogicalQueryStage: logical-operators/LogicalQueryStage.md
+      - logical-operators/LogicalRDD.md
+      - logical-operators/LogicalRelation.md
+      - MergeIntoTable: logical-operators/MergeIntoTable.md
+      - logical-operators/OneRowRelation.md
+      - OverwriteByExpression: logical-operators/OverwriteByExpression.md
+      - logical-operators/Pivot.md
+      - logical-operators/Project.md
+      - logical-operators/Range.md
+      - RepairTableStatement: logical-operators/RepairTableStatement.md
+      - Repartition: logical-operators/RepartitionOperation/#Repartition
+      - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
+      - logical-operators/ResolvedHint.md
+      - logical-operators/SaveIntoDataSourceCommand.md
+      - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
+      - logical-operators/ShowCreateTableCommand.md
+      - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
+      - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
+      - ShowTables: logical-operators/ShowTables.md
+      - logical-operators/ShowTablesCommand.md
+      - logical-operators/Sort.md
+      - logical-operators/SubqueryAlias.md
+      - logical-operators/TruncateTableCommand.md
+      - TypedFilter: logical-operators/TypedFilter.md
+      - logical-operators/Union.md
+      - logical-operators/UnresolvedCatalogRelation.md
+      - logical-operators/UnresolvedHint.md
+      - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
+      - logical-operators/UnresolvedRelation.md
+      - logical-operators/UnresolvedTableValuedFunction.md
+      - UseStatement: logical-operators/UseStatement.md
+      - logical-operators/Window.md
+      - logical-operators/WithWindowDefinition.md
+      - logical-operators/WriteToDataSourceV2.md
+      - logical-operators/View.md
     - SparkSession Registries:
       - Catalog:
         - Catalog: Catalog.md
@@ -814,7 +813,9 @@ nav:
       - spark-sql-CatalogStatistics.md
       - spark-sql-ColumnStat.md
       - CommandUtils: CommandUtils.md
-    - spark-sql-catalyst-dsl.md
+    - Catalyst DSL:
+      - Catalyst DSL: catalyst-dsl/index.md
+      - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - RDDs:
     - FileScanRDD: rdds/FileScanRDD.md
   - PySpark:
@@ -873,8 +874,8 @@ nav:
         - spark-sql-TypedColumn.md
       - Basic Aggregation:
         - spark-sql-basic-aggregation.md
-        - spark-sql-RelationalGroupedDataset.md
-        - spark-sql-KeyValueGroupedDataset.md
+        - RelationalGroupedDataset: RelationalGroupedDataset.md
+        - KeyValueGroupedDataset: KeyValueGroupedDataset.md
       - Joins:
         - spark-sql-joins.md
         - spark-sql-joins-broadcast.md

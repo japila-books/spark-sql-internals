@@ -1,60 +1,32 @@
-# Aggregate Unary Logical Operator
+# Aggregate Logical Operator
 
-`Aggregate` is a [unary logical operator](LogicalPlan.md#UnaryNode) that holds the following:
+`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode).
 
-* [[groupingExpressions]] Grouping [expressions](../expressions/Expression.md)
-* [[aggregateExpressions]] Aggregate [named expressions](../expressions/NamedExpression.md)
-* [[child]] Child [logical operator](LogicalPlan.md)
+## Creating Instance
 
-`Aggregate` is created to represent the following (after a logical plan is [analyzed](LogicalPlan.md#analyzed)):
+`Aggregate` takes the following to be created:
 
-* SQL's spark-sql-AstBuilder.md#withAggregation[GROUP BY] clause (possibly with `WITH CUBE` or `WITH ROLLUP`)
+* <span id="groupingExpressions"> Grouping [expressions](../expressions/Expression.md)
+* <span id="aggregateExpressions"> Aggregate [named expressions](../expressions/NamedExpression.md)
+* <span id="child"> Child [logical plan](LogicalPlan.md)
 
-* spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] aggregations (e.g. spark-sql-RelationalGroupedDataset.md#pivot[pivot])
+`Aggregate` is created when:
 
-* spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] aggregations
+* `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
+* `AstBuilder` is requested to [withSelectQuerySpecification](../sql/AstBuilder.md#withSelectQuerySpecification) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped)
+* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+* [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
 
-* AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command
+## Query Planning
 
-NOTE: `Aggregate` logical operator is translated to one of [HashAggregateExec](../physical-operators/HashAggregateExec.md), [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
+`Aggregate` logical operator is planned to one of [HashAggregateExec](../physical-operators/HashAggregateExec.md), [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
-[[properties]]
-.Aggregate's Properties
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
+## Logical Optimization
 
-| `maxRows`
-a| <<child, Child logical plan>>'s `maxRows`
+[PushDownPredicate](../logical-optimizations/PushDownPredicate.md) logical plan optimization applies so-called **filter pushdown** to a [Pivot](Pivot.md) operator when under `Filter` operator and with all expressions deterministic.
 
-NOTE: Part of spark-sql-LogicalPlan.md#maxRows[LogicalPlan contract].
-
-| `output`
-a| Attributes of <<aggregateExpressions, aggregate named expressions>>
-
-NOTE: Part of catalyst/QueryPlan.md#output[QueryPlan contract].
-
-| `resolved`
-a| Enabled when:
-
-* <<expressions, expressions>> and <<child, child logical plan>> are resolved
-* No spark-sql-Expression-WindowExpression.md[WindowExpressions] exist in <<aggregateExpressions, aggregate named expressions>>
-
-NOTE: Part of spark-sql-LogicalPlan.md#resolved[LogicalPlan contract].
-
-| `validConstraints`
-a| The (expression) constraints of <<child, child logical plan>> and non-aggregate <<aggregateExpressions, aggregate named expressions>>.
-
-NOTE: Part of catalyst/QueryPlan.md#validConstraints[QueryPlan contract].
-|===
-
-=== [[optimizer]] Rule-Based Logical Query Optimization Phase
-
-PushDownPredicate.md[PushDownPredicate] logical plan optimization applies so-called *filter pushdown* to a Pivot.md[Pivot] operator when under `Filter` operator and with all expressions deterministic.
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.optimizer.PushDownPredicate
 
 val q = visits
@@ -80,4 +52,4 @@ scala> println(afterPushDown.numberedTreeString)
 03       +- Project [_1#3 AS id#7, _2#4 AS city#8, _3#5 AS year#9]
 04          +- Filter (_2#4 = Boston)
 05             +- LocalRelation [_1#3, _2#4, _3#5]
-----
+```

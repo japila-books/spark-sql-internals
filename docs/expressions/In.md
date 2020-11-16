@@ -10,7 +10,7 @@
 
 [TIP]
 ====
-Use Catalyst DSL's spark-sql-catalyst-dsl.md#in[in] operator to create an `In` expression.
+Use Catalyst DSL's [in](../catalyst-dsl/index.md#in) operator to create an `In` expression.
 
 [source, scala]
 ----

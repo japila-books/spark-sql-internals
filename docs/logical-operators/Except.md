@@ -53,7 +53,7 @@ except(
   isAll: Boolean): LogicalPlan
 ----
 
-spark-sql-catalyst-dsl.md[Catalyst DSL] defines spark-sql-catalyst-dsl.md#except[except] extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
+[Catalyst DSL](../catalyst-dsl/index.md) defines [except](../catalyst-dsl/index.md#except) extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, plaintext]
 ----

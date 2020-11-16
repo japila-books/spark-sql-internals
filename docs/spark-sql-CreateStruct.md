@@ -44,7 +44,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `ColumnStat` is requested to <<spark-sql-ColumnStat.md#statExprs, statExprs>>
 
-* `KeyValueGroupedDataset` is requested to <<spark-sql-KeyValueGroupedDataset.md#aggUntyped, aggUntyped>> (when <<spark-sql-KeyValueGroupedDataset.md#agg, KeyValueGroupedDataset.agg>> typed operator is used)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) typed operator is used)
 
 * <<spark-sql-dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
 

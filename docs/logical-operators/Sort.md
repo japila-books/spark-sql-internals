@@ -56,7 +56,7 @@ The <<catalyst/QueryPlan.md#output, output schema>> of a `Sort` operator is the 
 The <<spark-sql-LogicalPlan.md#maxRows, maxRows>> of a `Sort` operator is the `maxRows` of the <<child, child>> logical operator.
 
 [[catalyst-dsl]]
-TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
+TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
 
 NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis, checkAnalysis>>).
 

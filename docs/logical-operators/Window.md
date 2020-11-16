@@ -28,7 +28,7 @@ window(
   orderSpec: Seq[SortOrder]): LogicalPlan
 ----
 
-<<spark-sql-catalyst-dsl.md#window, window>> operator in spark-sql-catalyst-dsl.md[Catalyst DSL] creates a <<creating-instance, Window>> logical operator, e.g. for testing or Spark SQL internals exploration.
+[window](../catalyst-dsl/index.md#window) operator in [Catalyst DSL](../catalyst-dsl/index.md) creates a <<creating-instance, Window>> logical operator, e.g. for testing or Spark SQL internals exploration.
 
 [source, scala]
 ----

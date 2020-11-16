@@ -16,7 +16,7 @@ title: SortOrder
 `SortOrder` is never <<Expression.md#foldable, foldable>> (as an unevaluable expression with no evaluation).
 
 [[catalyst-dsl]]
-TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the <<spark-sql-catalyst-dsl.md#, Catalyst DSL>> to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
+TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
 
 NOTE: <<spark-sql-dataset-operators.md#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<spark-sql-WindowSpec.md#orderBy, WindowSpec.orderBy>> default to <<Ascending, Ascending>> sort direction.
 

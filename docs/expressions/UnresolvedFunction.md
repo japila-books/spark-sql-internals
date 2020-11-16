@@ -1,12 +1,12 @@
 # UnresolvedFunction Unevaluable Expression
 
-`UnresolvedFunction` is an Expression.md[Catalyst expression] that represents a function (application) in a logical query plan.
+`UnresolvedFunction` is an [Catalyst expression](Expression.md) that represents a function (application) in a logical query plan.
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
-* spark-sql-functions.md#callUDF[callUDF] standard function
+* [callUDF](../spark-sql-functions.md#callUDF) standard function
 
-* spark-sql-RelationalGroupedDataset.md#agg[RelationalGroupedDataset.agg] operator with aggregation functions specified by name (that spark-sql-RelationalGroupedDataset.md#strToExpr[converts function names to UnresolvedFunction expressions])
+* [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
 
 * `AstBuilder` is requested to spark-sql-AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
@@ -22,7 +22,7 @@ Given `UnresolvedFunction` can never be resolved it should not come as a surpris
 Cannot evaluate expression: [this]
 ```
 
-TIP: Use Catalyst DSL's spark-sql-catalyst-dsl.md#function[function] or spark-sql-catalyst-dsl.md#distinctFunction[distinctFunction] to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
+TIP: Use Catalyst DSL's [function](../catalyst-dsl/index.md#function) or [distinctFunction](../catalyst-dsl/index.md#distinctFunction) to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
 
 [source, scala]
 ----
@@ -51,18 +51,15 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 
 `apply` creates a `FunctionIdentifier` with the `name` and no database first and then creates a <<UnresolvedFunction, UnresolvedFunction>> with the `FunctionIdentifier`, `children` and `isDistinct` flag.
 
-[NOTE]
-====
 `apply` is used when:
 
-* spark-sql-functions.md#callUDF[callUDF] standard function is used
+* [callUDF](../spark-sql-functions.md#callUDF) standard function is used
 
-* `RelationalGroupedDataset` is requested to spark-sql-RelationalGroupedDataset.md#agg[agg] with aggregation functions specified by name (and spark-sql-RelationalGroupedDataset.md#strToExpr[converts function names to UnresolvedFunction expressions])
-====
+* `RelationalGroupedDataset` is requested to [agg](../RelationalGroupedDataset.md#agg) with aggregation functions specified by name (and [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
 
-=== [[creating-instance]] Creating UnresolvedFunction Instance
+## Creating Instance
 
-`UnresolvedFunction` takes the following when created:
+`UnresolvedFunction` takes the following to be created:
 
 * [[name]] `FunctionIdentifier`
 * [[children]] Child Expression.md[expressions]

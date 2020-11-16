@@ -1,8 +1,6 @@
-title: Basic Aggregation
+# Basic Aggregation &mdash; Typed and Untyped Grouping Operators
 
-# Basic Aggregation -- Typed and Untyped Grouping Operators
-
-You can calculate aggregates over a group of rows in a Dataset.md[Dataset] using <<aggregate-operators, aggregate operators>> (possibly with spark-sql-functions.md#aggregate-functions[aggregate functions]).
+You can calculate aggregates over a group of rows in a Dataset.md[Dataset] using <<aggregate-operators, aggregate operators>> (possibly with [aggregate functions](spark-sql-functions.md#aggregate-functions)).
 
 [[aggregate-operators]]
 .Aggregate Operators
@@ -13,15 +11,15 @@ You can calculate aggregates over a group of rows in a Dataset.md[Dataset] using
 | Description
 
 | <<agg, agg>>
-| spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset]
+| [RelationalGroupedDataset](RelationalGroupedDataset.md)
 | Aggregates with or without grouping (i.e. over an entire Dataset)
 
 | <<groupBy, groupBy>>
-| spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset]
+| [RelationalGroupedDataset](RelationalGroupedDataset.md)
 | Used for *untyped aggregates* using DataFrames. Grouping is described using spark-sql-Column.md[column expressions] or column names.
 
 | <<groupByKey, groupByKey>>
-| spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset]
+| [KeyValueGroupedDataset](KeyValueGroupedDataset.md)
 | Used for *typed aggregates* using Datasets with records grouped by a key-defining discriminator function.
 |===
 
@@ -75,7 +73,7 @@ groupBy(col1: String, cols: String*): RelationalGroupedDataset
 
 `groupBy` operator groups the rows in a `Dataset` by columns (as spark-sql-Column.md[Column expressions] or names).
 
-`groupBy` gives a spark-sql-RelationalGroupedDataset.md[RelationalGroupedDataset] to execute aggregate functions or operators.
+`groupBy` gives a [RelationalGroupedDataset](RelationalGroupedDataset.md) to execute aggregate functions or operators.
 
 [source, scala]
 ----
@@ -98,7 +96,7 @@ scala> q.show
 +---+------+
 ----
 
-Internally, `groupBy` Dataset.md#resolve[resolves column names] (possibly quoted) and spark-sql-RelationalGroupedDataset.md#creating-instance[creates] a `RelationalGroupedDataset` (with spark-sql-RelationalGroupedDataset.md#groupType[groupType] being `GroupByType`).
+Internally, `groupBy` Dataset.md#resolve[resolves column names] (possibly quoted) and [creates](RelationalGroupedDataset.md#creating-instance) a `RelationalGroupedDataset` (with [groupType](RelationalGroupedDataset.md#groupType) being `GroupByType`).
 
 NOTE: The following uses the data setup as described in <<test-setup, Test Setup>> section below.
 
@@ -173,7 +171,7 @@ scala> tokens.groupBy('productId).sum("score").show
 groupByKey[K: Encoder](func: T => K): KeyValueGroupedDataset[K, T]
 ----
 
-`groupByKey` groups records (of type `T`) by the input `func` and in the end returns a spark-sql-KeyValueGroupedDataset.md[KeyValueGroupedDataset] to apply aggregation to.
+`groupByKey` groups records (of type `T`) by the input `func` and in the end returns a [KeyValueGroupedDataset](KeyValueGroupedDataset.md) to apply aggregation to.
 
 NOTE: `groupByKey` is ``Dataset``'s experimental API.
 

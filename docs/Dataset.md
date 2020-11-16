@@ -29,7 +29,7 @@ When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with
 
 * <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.md#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.md#mapPartitions, Dataset.mapPartitions>> typed transformations are used
 
-* <<spark-sql-KeyValueGroupedDataset.md#agg, KeyValueGroupedDataset.agg>> operator is used (that requests `KeyValueGroupedDataset` to <<spark-sql-KeyValueGroupedDataset.md#aggUntyped, aggUntyped>>)
+* [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) operator is used (that requests `KeyValueGroupedDataset` to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped))
 
 * <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>> and <<SparkSession.md#range, SparkSession.range>> operators are used
 
@@ -334,7 +334,7 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 
 * `Dataset` is requested to execute <<checkpoint, checkpoint>>, `mapPartitionsInR`, <<withPlan, untyped transformations>> and <<withSetOperator, set-based typed transformations>>
 
-* `RelationalGroupedDataset` is requested to <<spark-sql-RelationalGroupedDataset.md#toDF, create a DataFrame from aggregate expressions>>, `flatMapGroupsInR` and `flatMapGroupsInPandas`
+* `RelationalGroupedDataset` is requested to [create a DataFrame from aggregate expressions](RelationalGroupedDataset.md#toDF), `flatMapGroupsInR` and `flatMapGroupsInPandas`
 
 * `SparkSession` is requested to <<SparkSession.md#baseRelationToDataFrame, create a DataFrame from a BaseRelation>>, <<SparkSession.md#createDataFrame, createDataFrame>>, <<SparkSession.md#internalCreateDataFrame, internalCreateDataFrame>>, <<SparkSession.md#sql, sql>> and <<SparkSession.md#table, table>>
 
