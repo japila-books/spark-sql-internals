@@ -11,7 +11,7 @@
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
 * <span id="bucketSpec"> [BucketSpec](../spark-sql-BucketSpec.md) if defined
-* <span id="fileFormat"> [FileFormat](../FileFormat.md)
+* <span id="fileFormat"> [FileFormat](../datasources/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
 * <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)

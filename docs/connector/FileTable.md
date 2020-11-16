@@ -10,7 +10,7 @@
 fallbackFileFormat: Class[_ <: FileFormat]
 ```
 
-Fallback V1 [FileFormat](../FileFormat.md)
+Fallback V1 [FileFormat](../datasources/FileFormat.md)
 
 Used when `FallBackFileSourceV2` extended resolution rule is executed (to resolve an `InsertIntoStatement` with a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) with a `FileTable`)
 

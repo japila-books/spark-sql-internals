@@ -32,7 +32,7 @@
 | Description
 
 | <<FileSourceScanExec.md#, FileSourceScanExec>>
-| [[FileSourceScanExec]] <<FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../FileFormat.md) that [support returning columnar batches](../FileFormat.md#supportBatch) (default: `false`)
+| [[FileSourceScanExec]] <<FileSourceScanExec.md#supportsBatch, Supports vectorized decoding>> for [FileFormats](../datasources/FileFormat.md) that [support returning columnar batches](../datasources/FileFormat.md#supportBatch) (default: `false`)
 
 | <<InMemoryTableScanExec.md#, InMemoryTableScanExec>>
 a| [[InMemoryTableScanExec]] <<InMemoryTableScanExec.md#supportsBatch, Supports vectorized decoding>> when all of the following hold:
@@ -145,7 +145,7 @@ NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested
 supportsBatch: Boolean = true
 ----
 
-`supportsBatch` flag controls whether a [FileFormat](../FileFormat.md) supports [vectorized decoding](../vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
+`supportsBatch` flag controls whether a [FileFormat](../datasources/FileFormat.md) supports [vectorized decoding](../vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
 
 `supportsBatch` is used when:
 

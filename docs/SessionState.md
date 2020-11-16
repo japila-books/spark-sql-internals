@@ -174,7 +174,7 @@ newHadoopConfWithOptions(
 
 `newHadoopConfWithOptions` is used when:
 
-* `TextBasedFileFormat` is requested to [say whether it is splitable or not](TextBasedFileFormat.md#isSplitable)
+* `TextBasedFileFormat` is requested to [say whether it is splitable or not](datasources/TextBasedFileFormat.md#isSplitable)
 * `FileSourceScanExec` physical operator is requested for the [input RDD](physical-operators/FileSourceScanExec.md#inputRDD)
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 * `PartitioningAwareFileIndex` is requested for the [Hadoop Configuration](PartitioningAwareFileIndex.md#hadoopConf)

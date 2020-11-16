@@ -7,7 +7,7 @@ Together with the [provider interfaces](#provider-interfaces), `DataSource` allo
 ## Provider Interfaces
 
 * [CreatableRelationProvider](CreatableRelationProvider.md)
-* [FileFormat](FileFormat.md)
+* [FileFormat](datasources/FileFormat.md)
 * [RelationProvider](RelationProvider.md)
 * [SchemaRelationProvider](SchemaRelationProvider.md)
 * StreamSinkProvider
@@ -82,7 +82,7 @@ lookupDataSource(
 
 `lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](OrcFileFormat.md) (based on Apache ORC)
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](datasources/orc/OrcFileFormat.md) (based on Apache ORC)
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
@@ -139,13 +139,13 @@ Internally, `resolveRelation` creates an instance of the [providingClass](#provi
 | RelationProvider.md[RelationProvider]
 | Executes RelationProvider.md#createRelation[RelationProvider.createRelation]
 
-| [FileFormat](FileFormat.md)
+| [FileFormat](datasources/FileFormat.md)
 | Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
 |===
 
 `resolveRelation` is used when:
 
-* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a [FileFormat](FileFormat.md))
+* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a [FileFormat](datasources/FileFormat.md))
 
 * `DataFrameReader` is requested to [load data from a data source that supports multiple paths](DataFrameReader.md#load)
 
@@ -157,7 +157,7 @@ Internally, `resolveRelation` creates an instance of the [providingClass](#provi
 
 * `FindDataSourceTable` is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable)
 
-* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a [FileFormat](FileFormat.md))
+* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a [FileFormat](datasources/FileFormat.md))
 
 * `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
 
@@ -175,7 +175,7 @@ planForWriting(
 
 * For a [CreatableRelationProvider](CreatableRelationProvider.md), `planForWriting` creates a <<SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
 
-* For a [FileFormat](FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
+* For a [FileFormat](datasources/FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 
 * For other types, `planForWriting` simply throws a `RuntimeException`:
 
@@ -245,8 +245,8 @@ providingClass: Class[_]
 
 `providingClass` is used when:
 
-* [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed (to ensure working with a [FileFormat](FileFormat.md)-based data source)
-* [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed (to ensure working with a [FileFormat](FileFormat.md)-based data source)
+* [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
+* [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
 * `DataSource` is requested for [providingInstance](#providingInstance)
 
 ## <span id="providingInstance"> Data Source Instance

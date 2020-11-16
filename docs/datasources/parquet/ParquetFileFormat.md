@@ -1,7 +1,7 @@
 # ParquetFileFormat
 
 [[shortName]]
-`ParquetFileFormat` is the [FileFormat](../../FileFormat.md) for **parquet** data source (i.e. [registers itself to handle files in parquet format](../../DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
+`ParquetFileFormat` is the [FileFormat](../FileFormat.md) for **parquet** data source (i.e. [registers itself to handle files in parquet format](../../DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
 
 NOTE: `parquet` is the [default data source format](../../DataFrameReader.md#source) in Spark SQL.
 
@@ -25,10 +25,10 @@ spark.read.schema(schema).load("parquet-datasets")
 ```
 
 [[isSplitable]]
-`ParquetFileFormat` is [splitable](../../FileFormat.md#isSplitable), i.e. FIXME
+`ParquetFileFormat` is [splitable](../FileFormat.md#isSplitable), i.e. FIXME
 
 [[supportBatch]]
-`ParquetFileFormat` [supports vectorized parquet decoding in whole-stage code generation](../../FileFormat.md#supportBatch) when all of the following hold:
+`ParquetFileFormat` [supports vectorized parquet decoding in whole-stage code generation](../FileFormat.md#supportBatch) when all of the following hold:
 
 * [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
@@ -114,7 +114,7 @@ prepareWrite(
 
 `prepareWrite`...FIXME
 
-`prepareWrite` is part of the [FileFormat](../../FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -128,7 +128,7 @@ inferSchema(
 
 `inferSchema`...FIXME
 
-`inferSchema` is part of the [FileFormat](../../FileFormat.md#inferSchema) abstraction.
+`inferSchema` is part of the [FileFormat](../FileFormat.md#inferSchema) abstraction.
 
 === [[vectorTypes]] `vectorTypes` Method
 
@@ -144,7 +144,7 @@ vectorTypes(
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
-`vectorTypes` is part of the [FileFormat](../../FileFormat.md#vectorTypes) abstraction.
+`vectorTypes` is part of the [FileFormat](../FileFormat.md#vectorTypes) abstraction.
 
 === [[buildReaderWithPartitionValues]] Building Data Reader With Partition Column Values Appended -- `buildReaderWithPartitionValues` Method
 
@@ -160,7 +160,7 @@ buildReaderWithPartitionValues(
   hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
 ----
 
-`buildReaderWithPartitionValues` is part of the [FileFormat](../../FileFormat.md#buildReaderWithPartitionValues) abstraction.
+`buildReaderWithPartitionValues` is part of the [FileFormat](../FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 `buildReaderWithPartitionValues` sets the <<options, configuration options>> in the input `hadoopConf`.
 

@@ -1,43 +1,36 @@
-# SupportsPushDownFilters -- Data Source Readers with Filter Pushdown Optimization Support
+# SupportsPushDownFilters
 
-`SupportsPushDownFilters` is...FIXME...that support <<pushedFilters, filter pushdown>> performance optimization (and hence reduce the size of the data to be read).
+`SupportsPushDownFilters` is an [extension](#contract) of the [ScanBuilder](ScanBuilder.md) abstraction for [scan builders](#implementations) that can [pushFilters](#pushFilters) and [pushedFilters](#pushedFilters) (for filter pushdown performance optimization and thus reduce the size of the data to be read).
 
-[[contract]]
-.SupportsPushDownFilters Contract
-[cols="1m,3",options="header",width="100%"]
-|===
-| Method
-| Description
+## Contract
 
-| pushedFilters
-a| [[pushedFilters]]
+### <span id="pushedFilters"> pushedFilters
 
-[source, java]
-----
+```java
 Filter[] pushedFilters()
-----
+```
 
-[Data source filters](../Filter.md) that were pushed down to the data source (in <<pushFilters, pushFilters>>)
+[Data source filters](../Filter.md) that were pushed down to the data source (in [pushFilters](#pushFilters))
 
-Used when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
+Used when [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to [pushFilters](../PushDownUtils.md#pushFilters))
 
-| pushFilters
-a| [[pushFilters]]
+### <span id="pushFilters"> pushFilters
 
-[source, java]
-----
-Filter[] pushFilters(Filter[] filters)
-----
+```java
+Filter[] pushFilters(
+  Filter[] filters)
+```
 
 [Data source filters](../Filter.md) that need to be evaluated again after scanning (so Spark can plan an extra filter operator)
 
-Used exclusively when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (on a [DataSourceV2Relation logical operator](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation) with a `SupportsPushDownFilters` reader)
+Used when:
 
-|===
+* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to [pushFilters](../PushDownUtils.md#pushFilters))
+* `CSVScanBuilder` is requested for a [Scan](../datasources/csv/CSVScanBuilder.md#build)
+* `OrcScanBuilder` is requested for a [Scan](../datasources/orc/OrcScanBuilder.md#build)
 
-[NOTE]
-====
-`SupportsPushDownFilters` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+## Implementations
 
-In other words, using the contract is as treading on thin ice.
-====
+* [CSVScanBuilder](../datasources/csv/CSVScanBuilder.md)
+* [OrcScanBuilder](../datasources/orc/OrcScanBuilder.md)
+* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md)

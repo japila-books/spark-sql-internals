@@ -1,7 +1,7 @@
 # TextFileFormat
 
 [[shortName]]
-`TextFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for **text** format.
+`TextFileFormat` is a [TextBasedFileFormat](../TextBasedFileFormat.md) for **text** format.
 
 ```text
 spark.read.format("text").load("text-datasets")
@@ -23,7 +23,7 @@ spark.read.text("text-datasets")
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the [known aliases](../../CompressionCodecs.md#shortCompressionCodecNames) or a fully-qualified class name.
 
 | [[wholetext]] `wholetext`
 | `false`
@@ -43,7 +43,7 @@ prepareWrite(
 
 `prepareWrite`...FIXME
 
-`prepareWrite` is part of [FileFormat](FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of [FileFormat](../FileFormat.md#prepareWrite) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -61,7 +61,7 @@ buildReader(
 
 `buildReader`...FIXME
 
-`buildReader` is part of [FileFormat](FileFormat.md#buildReader) abstraction.
+`buildReader` is part of [FileFormat](../FileFormat.md#buildReader) abstraction.
 
 === [[readToUnsafeMem]] `readToUnsafeMem` Internal Method
 

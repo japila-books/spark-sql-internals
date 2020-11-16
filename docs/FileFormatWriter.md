@@ -31,7 +31,7 @@ write(
 `write` sets the output directory (for the map-reduce job) to be the `outputPath` of the given `OutputSpec`.
 
 <span id="write-outputWriterFactory">
-`write` requests the given `FileFormat` to [prepareWrite](FileFormat.md#prepareWrite).
+`write` requests the given `FileFormat` to [prepareWrite](datasources/FileFormat.md#prepareWrite).
 
 <span id="write-description">
 `write` creates a `WriteJobDescription` with the following:

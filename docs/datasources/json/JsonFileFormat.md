@@ -1,7 +1,7 @@
 # JsonFileFormat -- Built-In Support for Files in JSON Format
 
 [[shortName]]
-`JsonFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *json* format (i.e. [registers itself to handle files in json format](DataSourceRegister.md#shortName) and convert them to Spark SQL rows).
+`JsonFileFormat` is a [TextBasedFileFormat](../TextBasedFileFormat.md) for *json* format (i.e. [registers itself to handle files in json format](../../DataSourceRegister.md#shortName) and convert them to Spark SQL rows).
 
 ```text
 spark.read.format("json").load("json-datasets")
@@ -71,7 +71,7 @@ NOTE: Internally, `allowUnquotedFieldNames` becomes `JsonParser.Feature.ALLOW_UN
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the [known aliases](../../CompressionCodecs.md#shortCompressionCodecNames) or a fully-qualified class name.
 
 | [[dateFormat]] `dateFormat`
 | `yyyy-MM-dd`
@@ -126,7 +126,7 @@ isSplitable(
 
 `isSplitable`...FIXME
 
-`isSplitable` is part of [FileFormat](FileFormat.md#isSplitable) abstraction.
+`isSplitable` is part of [FileFormat](../FileFormat.md#isSplitable) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -140,7 +140,7 @@ inferSchema(
 
 `inferSchema`...FIXME
 
-`inferSchema` is part of [FileFormat](FileFormat.md#inferSchema) abstraction.
+`inferSchema` is part of [FileFormat](../FileFormat.md#inferSchema) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -158,7 +158,7 @@ buildReader(
 
 `buildReader`...FIXME
 
-`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.
+`buildReader` is part of the [FileFormat](../FileFormat.md#buildReader) abstraction.
 
 === [[prepareWrite]] Preparing Write Job -- `prepareWrite` Method
 
@@ -173,4 +173,4 @@ prepareWrite(
 
 `prepareWrite`...FIXME
 
-`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.

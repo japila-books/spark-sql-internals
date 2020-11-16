@@ -1,7 +1,7 @@
 # CSVFileFormat
 
 [[shortName]]
-`CSVFileFormat` is a [TextBasedFileFormat](TextBasedFileFormat.md) for *csv* format (i.e. [registers itself to handle files in csv format](DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
+`CSVFileFormat` is a [TextBasedFileFormat](../TextBasedFileFormat.md) for *csv* format (i.e. [registers itself to handle files in csv format](../../DataSourceRegister.md#shortName) and converts them to Spark SQL rows).
 
 ```text
 spark.read.format("csv").load("csv-datasets")
@@ -33,7 +33,7 @@ Alias of <<encoding, encoding>>
 
 | [[codec]] `codec`
 |
-a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the [known aliases](../../CompressionCodecs.md#shortCompressionCodecNames) or a fully-qualified class name.
 
 Alias of <<compression, compression>>
 
@@ -47,7 +47,7 @@ Alias of <<compression, compression>>
 
 | [[compression]] `compression`
 |
-a| Compression codec that can be either one of the spark-sql-CompressionCodecs.md#shortCompressionCodecNames[known aliases] or a fully-qualified class name.
+a| Compression codec that can be either one of the [known aliases](../../CompressionCodecs.md#shortCompressionCodecNames) or a fully-qualified class name.
 
 Alias of <<codec, codec>>
 
@@ -144,7 +144,7 @@ Alias of <<delimiter, delimiter>>
 | Uses <<timeZone, timeZone>> and `en_US` locale
 
 | [[timeZone]] `timeZone`
-| [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
+| [spark.sql.session.timeZone](../../configuration-properties.md#spark.sql.session.timeZone)
 |
 
 | [[quote]] `quote`
@@ -169,7 +169,7 @@ prepareWrite(
 
 `prepareWrite`...FIXME
 
-`prepareWrite` is part of the [FileFormat](FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -187,4 +187,4 @@ buildReader(
 
 `buildReader`...FIXME
 
-`buildReader` is part of the [FileFormat](FileFormat.md#buildReader) abstraction.
+`buildReader` is part of the [FileFormat](../FileFormat.md#buildReader) abstraction.

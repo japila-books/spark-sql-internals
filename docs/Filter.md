@@ -8,9 +8,9 @@
 
 * (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
 
-* `FileFormat` is requested to [buildReader](FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReader), [CSVFileFormat](spark-sql-CSVFileFormat.md#buildReader), [JsonFileFormat](spark-sql-JsonFileFormat.md#buildReader), [TextFileFormat](TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to [buildReader](datasources/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](datasources/orc/OrcFileFormat.md#buildReader), [CSVFileFormat](datasources/csv/CSVFileFormat.md#buildReader), [JsonFileFormat](datasources/json/JsonFileFormat.md#buildReader), [TextFileFormat](datasources/text/TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to [build a Data Reader with partition column values appended](FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
+* `FileFormat` is requested to [build a Data Reader with partition column values appended](datasources/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. [OrcFileFormat](datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues), [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
 
 * `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 

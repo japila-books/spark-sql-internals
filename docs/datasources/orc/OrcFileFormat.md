@@ -1,6 +1,6 @@
 # OrcFileFormat
 
-`OrcFileFormat` is a [FileFormat](FileFormat.md).
+`OrcFileFormat` is a [FileFormat](../FileFormat.md).
 
 === [[buildReaderWithPartitionValues]] `buildReaderWithPartitionValues` Method
 
@@ -18,7 +18,7 @@ buildReaderWithPartitionValues(
 
 `buildReaderWithPartitionValues`...FIXME
 
-`buildReaderWithPartitionValues` is part of [FileFormat](FileFormat.md#buildReaderWithPartitionValues) abstraction.
+`buildReaderWithPartitionValues` is part of [FileFormat](../FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 === [[inferSchema]] `inferSchema` Method
 
@@ -32,7 +32,7 @@ inferSchema(
 
 `inferSchema`...FIXME
 
-`inferSchema` is part of [FileFormat](FileFormat.md#inferSchema) abstraction.
+`inferSchema` is part of [FileFormat](../FileFormat.md#inferSchema) abstraction.
 
 === [[buildReader]] Building Partitioned Data Reader -- `buildReader` Method
 
@@ -50,4 +50,4 @@ buildReader(
 
 `buildReader`...FIXME
 
-`buildReader` is part of [FileFormat](FileFormat.md#buildReader) abstraction.
+`buildReader` is part of [FileFormat](../FileFormat.md#buildReader) abstraction.

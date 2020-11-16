@@ -37,7 +37,7 @@ scala> println(jsonExpr.numberedTreeString)
 | Enabled (i.e. `true`)
 
 | [[parser]] `parser`
-a| `JacksonParser` with <<rowSchema, rowSchema>> and [JSON options](../spark-sql-JsonFileFormat.md#JSONOptions)
+a| `JacksonParser` with <<rowSchema, rowSchema>> and [JSON options](../datasources/json/JsonFileFormat.md#JSONOptions)
 
 | [[rowSchema]] `rowSchema`
 a| [StructType](../StructType.md) that...FIXME

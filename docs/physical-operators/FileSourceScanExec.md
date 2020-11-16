@@ -90,7 +90,7 @@ Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 
 `FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the <<outputPartitioning, output partitioning scheme>>.
 
-`FileSourceScanExec` is a <<ColumnarBatchScan, ColumnarBatchScan>> and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../FileFormat.md#supportBatch).
+`FileSourceScanExec` is a <<ColumnarBatchScan, ColumnarBatchScan>> and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../datasources/FileFormat.md#supportBatch).
 
 `FileSourceScanExec` supports <<pushedDownFilters, data source filters>> that are printed out to the console (at <<logging, INFO>> logging level) and available as <<metadata, metadata>> (e.g. in web UI or spark-sql-dataset-operators.md#explain[explain]).
 
@@ -232,7 +232,7 @@ The maximum size of partitions is then the minimum of [spark.sql.files.maxPartit
 Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
 ```
 
-For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create [PartitionedFiles](../PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create [PartitionedFiles](../PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
 
 `createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
 
@@ -251,7 +251,7 @@ inputRDD: RDD[InternalRow]
 
 `inputRDD` is an input `RDD` that is used when `FileSourceScanExec` physical operator is requested for [inputRDDs](#inputRDDs) and to [execute](#doExecute).
 
-When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
+When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../datasources/FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
 
 In case the `HadoopFsRelation` has [bucketing specification](../HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../spark-sql-bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
 
@@ -358,16 +358,16 @@ NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` phys
 supportsBatch: Boolean
 ----
 
-`supportsBatch` is enabled (`true`) only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports vectorized decoding](../FileFormat.md#supportBatch). Otherwise, `supportsBatch` is disabled (i.e. `false`).
+`supportsBatch` is enabled (`true`) only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports vectorized decoding](../datasources/FileFormat.md#supportBatch). Otherwise, `supportsBatch` is disabled (i.e. `false`).
 
 !!! note
-    [FileFormat](../FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) have support for it under certain conditions.
+    [FileFormat](../datasources/FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../datasources/FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) have support for it under certain conditions.
 
 `supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
 
 === [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
 
-`FileSourceScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../FileFormat.md#supportBatch).
+`FileSourceScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../datasources/FileFormat.md#supportBatch).
 
 `FileSourceScanExec` has <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag enabled for `ParquetFileFormat` data sources exclusively.
 
@@ -399,7 +399,7 @@ NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecut
 vectorTypes: Option[Seq[String]]
 ----
 
-`vectorTypes` simply requests the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../FileFormat.md#vectorTypes).
+`vectorTypes` simply requests the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../datasources/FileFormat.md#vectorTypes).
 
 `vectorTypes` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#vectorTypes) abstraction.
 
@@ -415,7 +415,7 @@ doExecute(): RDD[InternalRow]
 `doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
 
 !!! note
-    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../OrcFileFormat.md) built-in file formats (under certain conditions).
+    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) built-in file formats (under certain conditions).
 
 With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<WholeStageCodegenExec.md#child, child physical operator>> and WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
 

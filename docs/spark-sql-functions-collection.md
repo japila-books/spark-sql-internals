@@ -365,7 +365,7 @@ scala> people.show
 ```
 
 !!! note
-    `options` controls how a JSON is parsed and contains the same options as the [json](spark-sql-JsonDataSource.md) format.
+    `options` controls how a JSON is parsed and contains the same options as the [json](datasources/json/JsonDataSource.md) format.
 
 Internally, `from_json` creates a spark-sql-Column.md[Column] with spark-sql-Expression-JsonToStructs.md[JsonToStructs] unary expression.
 

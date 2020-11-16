@@ -126,7 +126,7 @@ NOTE: The <<stats, CatalogStatistics>> are optional when `CatalogTable` is <<cre
 
 CAUTION: FIXME When are stats specified? What if there are not?
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](datasources/FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
 
 Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
 

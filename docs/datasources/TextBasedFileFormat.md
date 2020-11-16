@@ -9,16 +9,16 @@
 | TextBasedFileFormat
 | Description
 
-| [CSVFileFormat](spark-sql-CSVFileFormat.md)
+| [CSVFileFormat](csv/CSVFileFormat.md)
 | [[CSVFileFormat]]
 
-| [JsonFileFormat](spark-sql-JsonFileFormat.md)
+| [JsonFileFormat](json/JsonFileFormat.md)
 | [[JsonFileFormat]]
 
 | `LibSVMFileFormat`
 | [[LibSVMFileFormat]] Used in Spark MLlib
 
-| [TextFileFormat](TextFileFormat.md)
+| [TextFileFormat](text/TextFileFormat.md)
 | [[TextFileFormat]]
 |===
 
@@ -35,7 +35,7 @@ isSplitable(
   path: Path): Boolean
 ----
 
-`isSplitable` is part of [FileFormat](FileFormat.md#isSplitable) abstraction.
+`isSplitable` is part of the [FileFormat](FileFormat.md#isSplitable) abstraction.
 
 `isSplitable` requests the <<codecFactory, CompressionCodecFactory>> to find the ++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/io/compress/CompressionCodecFactory.html#getCodec-org.apache.hadoop.fs.Path-++[compression codec for the given file] (as the input `path`) based on its filename suffix.
 

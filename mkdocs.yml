@@ -328,9 +328,6 @@ nav:
         - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
       - Files:
         - FileScan: FileScan.md
-        - FileFormat: FileFormat.md
-        - TextFileFormat: TextFileFormat.md
-        - TextBasedFileFormat: TextBasedFileFormat.md
         - FileScanBuilder: FileScanBuilder.md
         - FileDataSourceV2: FileDataSourceV2.md
         - HadoopFsRelation: HadoopFsRelation.md
@@ -346,6 +343,8 @@ nav:
         - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
         - PartitionedFile: PartitionedFile.md
         - RecordReaderIterator: RecordReaderIterator.md
+        - FileFormat: datasources/FileFormat.md
+        - TextBasedFileFormat: datasources/TextBasedFileFormat.md
       - Kafka:
         - Kafka Data Source: datasources/kafka/index.md
         - Configuration Properties: datasources/kafka/configuration-properties.md
@@ -385,18 +384,25 @@ nav:
       - Console:
         - spark-sql-console.md
         - spark-sql-ConsoleSinkProvider.md
-      - CSV: spark-sql-CSVFileFormat.md
+      - CSV:
+        - CSVFileFormat: datasources/csv/CSVFileFormat.md
+        - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
       - JSON:
-        - JsonFileFormat: spark-sql-JsonFileFormat.md
-        - JsonDataSource: spark-sql-JsonDataSource.md
-      - ORC: OrcFileFormat.md
+        - JsonFileFormat: datasources/json/JsonFileFormat.md
+        - JsonDataSource: datasources/json/JsonDataSource.md
+      - ORC:
+        - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
+        - OrcFileFormat: datasources/orc/OrcFileFormat.md
       - Parquet:
         - ParquetTable: datasources/parquet/ParquetTable.md
+        - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
         - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
         - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
         - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
         - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
         - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
+      - Text:
+        - TextFileFormat: datasources/text/TextFileFormat.md
     - Hive Integration:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
@@ -959,7 +965,8 @@ nav:
     - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
     - CatalogUtils: spark-sql-CatalogUtils.md
     - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
-    - CompressionCodecs: spark-sql-CompressionCodecs.md
+    - CompressionCodecs: CompressionCodecs.md
     - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
     - JoinStrategyHint: JoinStrategyHint.md
+    - PushDownUtils: PushDownUtils.md
     - SQLContext: spark-sql-SQLContext.md

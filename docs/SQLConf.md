@@ -329,7 +329,7 @@ The value of [spark.sql.files.ignoreCorruptFiles](configuration-properties.md#sp
 Used when:
 
 * `AvroUtils` utility is requested to `inferSchema`
-* `OrcFileFormat` is requested to [inferSchema](OrcFileFormat.md#inferSchema) and [buildReader](OrcFileFormat.md#buildReader)
+* `OrcFileFormat` is requested to [inferSchema](datasources/orc/OrcFileFormat.md#inferSchema) and [buildReader](datasources/orc/OrcFileFormat.md#buildReader)
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreCorruptFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
 * `SchemaMergeUtils` utility is requested to `mergeSchemasInParallel`
 * `OrcUtils` utility is requested to `readSchema`
@@ -460,7 +460,7 @@ Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) phy
 Used when:
 
 * `InMemoryTableScanExec` is requested for the [vectorTypes](physical-operators/InMemoryTableScanExec.md#vectorTypes) and the [input RDD](physical-operators/InMemoryTableScanExec.md#inputRDD)
-* `OrcFileFormat` is requested to [build a data reader with partition column values appended](OrcFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to [build a data reader with partition column values appended](datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetFileFormat` is requested for [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="optimizerExcludedRules"><span id="OPTIMIZER_EXCLUDED_RULES"> optimizerExcludedRules
@@ -479,7 +479,7 @@ Used when [OptimizeIn](logical-optimizations/OptimizeIn.md) logical query optimi
 
 Supported values:
 
-* `native` for [OrcFileFormat](OrcFileFormat.md)
+* `native` for [OrcFileFormat](datasources/orc/OrcFileFormat.md)
 * `hive` for `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
 ## <span id="parallelFileListingInStatsComputation"> parallelFileListingInStatsComputation
