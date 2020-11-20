@@ -1,234 +1,99 @@
-# RunnableCommand -- Generic Logical Command with Side Effects
+# RunnableCommand Logical Operators
 
-`RunnableCommand` is the generic Command.md[logical command] that is <<run, executed>> eagerly for its side effects.
+`RunnableCommand` is an [extension](#contract) of the [Command](Command.md) abstraction for [logical commands](#implementations) that can be [executed](#run) for side effects.
 
-[[contract]]
-[[run]]
-`RunnableCommand` defines one abstract method `run` that computes a collection of spark-sql-Row.md[Row] records with the side effect, i.e. the result of executing a command.
+## Contract
 
-[source, scala]
-----
-run(sparkSession: SparkSession): Seq[Row]
-----
+### <span id="run"> Executing Command
 
-!!! note
-    `RunnableCommand` logical operator is resolved to ExecutedCommandExec.md[ExecutedCommandExec] physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
+```scala
+run(
+  sparkSession: SparkSession): Seq[Row]
+```
 
-`run` is executed when:
+Executes the command for side effects (possibly giving [Row](spark-sql-Row.md) back with the result)
 
-* `ExecutedCommandExec` ExecutedCommandExec.md#sideEffectResult[executes logical RunnableCommand and caches the result as InternalRows]
+Used when:
 
+* [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf physical operator is executed (and [caches the result](../physical-operators/ExecutedCommandExec.md#sideEffectResult))
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) is executed
 
-* `QueryExecution` is requested to [transform the result of executing DescribeTableCommand to a Hive-compatible output format](../QueryExecution.md#hiveResultString)
-
-[[available-commands]]
-.Available RunnableCommands
-[width="100%",cols="1,2",options="header"]
-|===
-| RunnableCommand
-| Description
-
-| AddFileCommand
-|
-
-| AddJarCommand
-|
-
-| AlterDatabasePropertiesCommand
-|
-
-| AlterTableAddPartitionCommand
-| [[AlterTableAddPartitionCommand]]
-
-| AlterTableChangeColumnCommand
-|
-
-| AlterTableDropPartitionCommand
-|
-
-| [AlterTableRecoverPartitionsCommand](AlterTableRecoverPartitionsCommand.md)
-|
-
-| AlterTableRenameCommand
-|
-
-| AlterTableRenamePartitionCommand
-|
-
-| AlterTableSerDePropertiesCommand
-|
-
-| AlterTableSetLocationCommand
-|
-
-| AlterTableSetPropertiesCommand
-|
-
-| AlterTableUnsetPropertiesCommand
-|
-
-| AlterViewAsCommand
-|
-
-| AnalyzeColumnCommand.md[AnalyzeColumnCommand]
-| [[AnalyzeColumnCommand]]
-
-| AnalyzePartitionCommand.md[AnalyzePartitionCommand]
-| [[AnalyzePartitionCommand]]
-
-| AnalyzeTableCommand.md[AnalyzeTableCommand]
-| [[AnalyzeTableCommand]]
-
-| CacheTableCommand
-a| [[CacheTableCommand]] When <<run, executed>>, `CacheTableCommand` Dataset.md#ofRows[creates a DataFrame] followed by spark-sql-dataset-operators.md#createTempView[registering a temporary view] for the optional `query`.
-
-[source, scala]
-----
-CACHE LAZY? TABLE [table] (AS? [query])?
-----
-
-`CacheTableCommand` requests the session-specific `Catalog` to [cache the table](../Catalog.md#cacheTable).
-
-NOTE: `CacheTableCommand` uses `SparkSession` SparkSession.md#catalog[to access the `Catalog`].
-
-If the caching is not `LAZY` (which is not by default), `CacheTableCommand` SparkSession.md#table[creates a DataFrame for the table] and spark-sql-dataset-operators.md#count[counts the rows] (that will trigger the caching).
-
-NOTE: `CacheTableCommand` uses a Spark SQL pattern to trigger DataFrame caching by executing `count` operation.
-
-[source, scala]
-----
-val q = "CACHE TABLE ids AS SELECT * from range(5)"
-scala> println(sql(q).queryExecution.logical.numberedTreeString)
-00 CacheTableCommand `ids`, false
-01    +- 'Project [*]
-02       +- 'UnresolvedTableValuedFunction range, [5]
-
-// ids table is already cached but let's use it anyway (and see what happens)
-val q2 = "CACHE LAZY TABLE ids"
-scala> println(sql(q2).queryExecution.logical.numberedTreeString)
-17/05/17 06:16:39 WARN CacheManager: Asked to cache already cached data.
-00 CacheTableCommand `ids`, true
-----
-
-| ClearCacheCommand
-|
-
-| CreateDatabaseCommand
-|
-
-| CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
-| [[CreateDataSourceTableAsSelectCommand]] When <<run, executed>>, ...FIXME
-
-Used exclusively when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a CreateTable.md[CreateTable] logical operator with queries using non-Hive table providers (which is when `DataFrameWriter` is requested to [save a DataFrame to a non-Hive table](../DataFrameWriter.md#saveAsTable) or for spark-sql-SparkSqlAstBuilder.md#visitCreateTable[Create Table As Select] SQL statements)
-
-| CreateDataSourceTableCommand.md[CreateDataSourceTableCommand]
-| [[CreateDataSourceTableCommand]]
-
-| CreateFunctionCommand
-|
-
-| <<CreateTableCommand.md#, CreateTableCommand>>
-| [[CreateTableCommand]]
-
-| CreateTableLikeCommand
-|
-
-| <<CreateTempViewUsing.md#, CreateTempViewUsing>>
-| [[CreateTempViewUsing]]
-
-| <<CreateViewCommand.md#, CreateViewCommand>>
-| [[CreateViewCommand]]
-
-| DescribeColumnCommand.md[DescribeColumnCommand]
-| [[DescribeColumnCommand]]
-
-| DescribeDatabaseCommand
-|
-
-| DescribeFunctionCommand
-|
-
-| DescribeTableCommand.md[DescribeTableCommand]
-| [[DescribeTableCommand]]
-
-| DropDatabaseCommand
-|
-
-| DropFunctionCommand
-|
-
-| DropTableCommand
-|
-
-| ExplainCommand
-|
-
-| <<InsertIntoDataSourceCommand.md#, InsertIntoDataSourceCommand>>
-| [[InsertIntoDataSourceCommand]]
-
-| [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
-| [[InsertIntoHadoopFsRelationCommand]]
-
-| hive/InsertIntoHiveTable.md[InsertIntoHiveTable]
-| [[InsertIntoHiveTable]]
-
-| ListFilesCommand
-|
-
-| ListJarsCommand
-|
-
-| LoadDataCommand
-|
-
-| RefreshResource
-|
-
-| RefreshTable
-|
-
-| ResetCommand
-|
-
-| SaveIntoDataSourceCommand
-| [[SaveIntoDataSourceCommand]] When <<run, executed>>, requests `DataSource` to [write a DataFrame to a data source per save mode](../DataSource.md#write).
-
-Used when `DataFrameWriter` is requested to [save a DataFrame to a data source](../DataFrameWriter.md#save).
-
-| SetCommand
-| [[SetCommand]]
-
-| SetDatabaseCommand
-|
-
-| ShowColumnsCommand
-|
-
-| <<ShowCreateTableCommand.md#, ShowCreateTableCommand>>
-| [[ShowCreateTableCommand]]
-
-| ShowDatabasesCommand
-|
-
-| ShowFunctionsCommand
-|
-
-| ShowPartitionsCommand
-|
-
-| ShowTablePropertiesCommand
-|
-
-| <<ShowTablesCommand.md#, ShowTablesCommand>>
-| [[ShowTablesCommand]]
-
-| StreamingExplainCommand
-|
-
-| TruncateTableCommand.md[TruncateTableCommand]
-| [[TruncateTableCommand]]
-
-| UncacheTableCommand
-|
-|===
+## Implementations
+
+* [AddFileCommand](AddFileCommand.md)
+* [AddJarCommand](AddJarCommand.md)
+* [AlterDatabasePropertiesCommand](AlterDatabasePropertiesCommand.md)
+* [AlterDatabaseSetLocationCommand](AlterDatabaseSetLocationCommand.md)
+* [AlterTableAddColumnsCommand](AlterTableAddColumnsCommand.md)
+* [AlterTableAddPartitionCommand](AlterTableAddPartitionCommand.md)
+* [AlterTableChangeColumnCommand](AlterTableChangeColumnCommand.md)
+* [AlterTableDropPartitionCommand](AlterTableDropPartitionCommand.md)
+* [AlterTableRecoverPartitionsCommand](AlterTableRecoverPartitionsCommand.md)
+* [AlterTableRenameCommand](AlterTableRenameCommand.md)
+* [AlterTableRenamePartitionCommand](AlterTableRenamePartitionCommand.md)
+* [AlterTableSerDePropertiesCommand](AlterTableSerDePropertiesCommand.md)
+* [AlterTableSetLocationCommand](AlterTableSetLocationCommand.md)
+* [AlterTableSetPropertiesCommand](AlterTableSetPropertiesCommand.md)
+* [AlterTableUnsetPropertiesCommand](AlterTableUnsetPropertiesCommand.md)
+* [AlterViewAsCommand](AlterViewAsCommand.md)
+* [AnalyzeColumnCommand](AnalyzeColumnCommand.md)
+* [AnalyzePartitionCommand](AnalyzePartitionCommand.md)
+* [AnalyzeTableCommand](AnalyzeTableCommand.md)
+* [CacheTableCommand](CacheTableCommand.md)
+* [ClearCacheCommand](ClearCacheCommand.md)
+* [CreateDatabaseCommand](CreateDatabaseCommand.md)
+* [CreateDataSourceTableCommand](CreateDataSourceTableCommand.md)
+* [CreateFunctionCommand](CreateFunctionCommand.md)
+* [CreateTableCommand](CreateTableCommand.md)
+* [CreateTableLikeCommand](CreateTableLikeCommand.md)
+* [CreateTempViewUsing](CreateTempViewUsing.md)
+* [CreateViewCommand](CreateViewCommand.md)
+* [DescribeColumnCommand](DescribeColumnCommand.md)
+* [DescribeCommandBase](DescribeCommandBase.md)
+* [DescribeDatabaseCommand](DescribeDatabaseCommand.md)
+* [DescribeFunctionCommand](DescribeFunctionCommand.md)
+* [DropDatabaseCommand](DropDatabaseCommand.md)
+* [DropFunctionCommand](DropFunctionCommand.md)
+* [DropTableCommand](DropTableCommand.md)
+* [ExplainCommand](ExplainCommand.md)
+* [ExternalCommandExecutor](ExternalCommandExecutor.md)
+* [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
+* [InsertIntoDataSourceDirCommand](InsertIntoDataSourceDirCommand.md)
+* [ListFilesCommand](ListFilesCommand.md)
+* [ListJarsCommand](ListJarsCommand.md)
+* [LoadDataCommand](LoadDataCommand.md)
+* [RefreshResource](RefreshResource.md)
+* [RefreshTable](RefreshTable.md)
+* [ResetCommand](ResetCommand.md)
+* [SaveIntoDataSourceCommand](SaveIntoDataSourceCommand.md)
+* [SetCommand](SetCommand.md)
+* [ShowColumnsCommand](ShowColumnsCommand.md)
+* [ShowCreateTableAsSerdeCommand](ShowCreateTableAsSerdeCommand.md)
+* [ShowCreateTableCommand](ShowCreateTableCommand.md)
+* [ShowFunctionsCommand](ShowFunctionsCommand.md)
+* [ShowPartitionsCommand](ShowPartitionsCommand.md)
+* [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
+* [ShowTablesCommand](ShowTablesCommand.md)
+* [ShowViewsCommand](ShowViewsCommand.md)
+* [StreamingExplainCommand](StreamingExplainCommand.md)
+* [TruncateTableCommand](TruncateTableCommand.md)
+* [UncacheTableCommand](UncacheTableCommand.md)
+
+## Query Planning
+
+`RunnableCommand` logical operators are resolved to [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) physical operators in [BasicOperators](../execution-planning-strategies/BasicOperators.md#RunnableCommand) execution planning strategy.
+
+## <span id="metrics"> Performance Metrics
+
+```scala
+metrics: Map[String, SQLMetric]
+```
+
+`RunnableCommand` can define optional [performance metrics](../SQLMetric.md).
+
+`metrics` is empty by default.
+
+??? note "Lazy Value"
+    `metrics` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.
+
+`metrics` is used when [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf physical operator is executed (and requested for [performance metrics](../physical-operators/ExecutedCommandExec.md#metrics)).

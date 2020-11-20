@@ -181,6 +181,7 @@ nav:
       - FieldReference: sql/FieldReference.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
+      - CacheTableCommand: logical-operators/CacheTableCommand.md
       - Command: logical-operators/Command.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
       - LeafNode: logical-operators/LeafNode.md
