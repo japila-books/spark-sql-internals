@@ -11,7 +11,7 @@ run(
   sparkSession: SparkSession): Seq[Row]
 ```
 
-Executes the command for side effects (possibly giving [Row](spark-sql-Row.md) back with the result)
+Executes the command for side effects (possibly giving [Row](../spark-sql-Row.md) back with the result)
 
 Used when:
 
@@ -20,64 +20,64 @@ Used when:
 
 ## Implementations
 
-* [AddFileCommand](AddFileCommand.md)
-* [AddJarCommand](AddJarCommand.md)
-* [AlterDatabasePropertiesCommand](AlterDatabasePropertiesCommand.md)
-* [AlterDatabaseSetLocationCommand](AlterDatabaseSetLocationCommand.md)
-* [AlterTableAddColumnsCommand](AlterTableAddColumnsCommand.md)
-* [AlterTableAddPartitionCommand](AlterTableAddPartitionCommand.md)
-* [AlterTableChangeColumnCommand](AlterTableChangeColumnCommand.md)
-* [AlterTableDropPartitionCommand](AlterTableDropPartitionCommand.md)
-* [AlterTableRecoverPartitionsCommand](AlterTableRecoverPartitionsCommand.md)
-* [AlterTableRenameCommand](AlterTableRenameCommand.md)
-* [AlterTableRenamePartitionCommand](AlterTableRenamePartitionCommand.md)
-* [AlterTableSerDePropertiesCommand](AlterTableSerDePropertiesCommand.md)
-* [AlterTableSetLocationCommand](AlterTableSetLocationCommand.md)
-* [AlterTableSetPropertiesCommand](AlterTableSetPropertiesCommand.md)
-* [AlterTableUnsetPropertiesCommand](AlterTableUnsetPropertiesCommand.md)
-* [AlterViewAsCommand](AlterViewAsCommand.md)
+* AddFileCommand
+* AddJarCommand
+* AlterDatabasePropertiesCommand
+* AlterDatabaseSetLocationCommand
+* AlterTableAddColumnsCommand
+* AlterTableAddPartitionCommand
+* AlterTableChangeColumnCommand
+* AlterTableDropPartitionCommand
+* AlterTableRecoverPartitionsCommand
+* AlterTableRenameCommand
+* AlterTableRenamePartitionCommand
+* AlterTableSerDePropertiesCommand
+* AlterTableSetLocationCommand
+* AlterTableSetPropertiesCommand
+* AlterTableUnsetPropertiesCommand
+* AlterViewAsCommand
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md)
 * [AnalyzePartitionCommand](AnalyzePartitionCommand.md)
 * [AnalyzeTableCommand](AnalyzeTableCommand.md)
 * [CacheTableCommand](CacheTableCommand.md)
 * [ClearCacheCommand](ClearCacheCommand.md)
-* [CreateDatabaseCommand](CreateDatabaseCommand.md)
+* CreateDatabaseCommand
 * [CreateDataSourceTableCommand](CreateDataSourceTableCommand.md)
-* [CreateFunctionCommand](CreateFunctionCommand.md)
+* CreateFunctionCommand
 * [CreateTableCommand](CreateTableCommand.md)
-* [CreateTableLikeCommand](CreateTableLikeCommand.md)
+* CreateTableLikeCommand
 * [CreateTempViewUsing](CreateTempViewUsing.md)
 * [CreateViewCommand](CreateViewCommand.md)
 * [DescribeColumnCommand](DescribeColumnCommand.md)
-* [DescribeCommandBase](DescribeCommandBase.md)
-* [DescribeDatabaseCommand](DescribeDatabaseCommand.md)
-* [DescribeFunctionCommand](DescribeFunctionCommand.md)
-* [DropDatabaseCommand](DropDatabaseCommand.md)
-* [DropFunctionCommand](DropFunctionCommand.md)
+* DescribeCommandBase
+* DescribeDatabaseCommand
+* DescribeFunctionCommand
+* DropDatabaseCommand
+* DropFunctionCommand
 * [DropTableCommand](DropTableCommand.md)
 * [ExplainCommand](ExplainCommand.md)
-* [ExternalCommandExecutor](ExternalCommandExecutor.md)
+* ExternalCommandExecutor
 * [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
 * [InsertIntoDataSourceDirCommand](InsertIntoDataSourceDirCommand.md)
-* [ListFilesCommand](ListFilesCommand.md)
-* [ListJarsCommand](ListJarsCommand.md)
-* [LoadDataCommand](LoadDataCommand.md)
-* [RefreshResource](RefreshResource.md)
-* [RefreshTable](RefreshTable.md)
-* [ResetCommand](ResetCommand.md)
+* ListFilesCommand
+* ListJarsCommand
+* LoadDataCommand
+* RefreshResource
+* RefreshTable
+* ResetCommand
 * [SaveIntoDataSourceCommand](SaveIntoDataSourceCommand.md)
-* [SetCommand](SetCommand.md)
-* [ShowColumnsCommand](ShowColumnsCommand.md)
-* [ShowCreateTableAsSerdeCommand](ShowCreateTableAsSerdeCommand.md)
+* SetCommand
+* ShowColumnsCommand
+* ShowCreateTableAsSerdeCommand
 * [ShowCreateTableCommand](ShowCreateTableCommand.md)
-* [ShowFunctionsCommand](ShowFunctionsCommand.md)
-* [ShowPartitionsCommand](ShowPartitionsCommand.md)
-* [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
+* ShowFunctionsCommand
+* ShowPartitionsCommand
+* ShowTablePropertiesCommand
 * [ShowTablesCommand](ShowTablesCommand.md)
-* [ShowViewsCommand](ShowViewsCommand.md)
-* [StreamingExplainCommand](StreamingExplainCommand.md)
+* ShowViewsCommand
+* StreamingExplainCommand
 * [TruncateTableCommand](TruncateTableCommand.md)
-* [UncacheTableCommand](UncacheTableCommand.md)
+* UncacheTableCommand
 
 ## Query Planning
 
@@ -89,7 +89,7 @@ Used when:
 metrics: Map[String, SQLMetric]
 ```
 
-`RunnableCommand` can define optional [performance metrics](../SQLMetric.md).
+`RunnableCommand` can define optional [performance metrics](../physical-operators/SQLMetric.md).
 
 `metrics` is empty by default.
 

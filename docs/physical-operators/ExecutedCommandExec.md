@@ -1,36 +1,50 @@
-# ExecutedCommandExec Leaf Physical Operator
+# ExecutedCommandExec Physical Operator
 
-`ExecutedCommandExec` is a [leaf physical operator](LeafExecNode.md) for executing [logical commands with side effects](../logical-operators/RunnableCommand.md).
+`ExecutedCommandExec` is a [leaf physical operator](LeafExecNode.md) for executing [runnable logical commands](../logical-operators/RunnableCommand.md).
 
-`ExecutedCommandExec` runs a command and caches the result in <<sideEffectResult, sideEffectResult>> internal attribute.
+## Creating Instance
 
-[[methods]]
-.ExecutedCommandExec's Methods
-[width="100%",cols="1,2",options="header"]
-|===
-| Method
-| Description
+`ExecutedCommandExec` takes the following to be created:
 
-| [[doExecute]] `doExecute`
-| Executes `ExecutedCommandExec` physical operator (and produces a result as an RDD of [InternalRow](../InternalRow.md)s
+* <span id="cmd"> [RunnableCommand](../logical-operators/RunnableCommand.md)
 
-| [[executeCollect]] `executeCollect`
-|
+`ExecutedCommandExec` is created when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (for [RunnableCommand](../logical-operators/RunnableCommand.md) logical operators).
 
-| [[executeTake]] `executeTake`
-|
+## <span id="nodeName"> Node Name
 
-| [[executeToIterator]] `executeToIterator`
-|
-|===
+```scala
+nodeName: String
+```
 
-=== [[sideEffectResult]] Executing Logical RunnableCommand and Caching Result As InternalRows -- `sideEffectResult` Internal Lazy Attribute
+`nodeName` is the following (using the [node name](../catalyst/TreeNode.md#nodeName) of the [RunnableCommand](#cmd)):
 
-[source, scala]
-----
+```text
+Execute [nodeName]
+```
+
+`nodeName` is part of the [TreeNode](../catalyst/TreeNode.md#nodeName) abstraction.
+
+## <span id="executeCollect"><span id="executeToIterator"><span id="executeTake"><span id="executeTail"><span id="doExecute"> Executing Command
+
+As a [physical operator](SparkPlan.md), `ExecutedCommandExec` use the [sideEffectResult](#sideEffectResult) for execution:
+
+* [executeCollect](SparkPlan.md#executeCollect)
+* [executeToIterator](SparkPlan.md#executeToIterator)
+* [executeTake](SparkPlan.md#executeTake)
+* [executeTail](SparkPlan.md#executeTail)
+* [doExecute](SparkPlan.md#doExecute)
+
+## <span id="sideEffectResult"> Side Effect of Executing Command
+
+```scala
 sideEffectResult: Seq[InternalRow]
-----
+```
 
-`sideEffectResult` requests `RunnableCommand` to RunnableCommand.md#run[run] (that produces a `Seq[Row]`) and [converts the result to Catalyst types](../CatalystTypeConverters.md#createToCatalystConverter) using a Catalyst converter function for the [schema](../catalyst/QueryPlan.md#schema).
+`sideEffectResult` [creates a Catalyst converter](../CatalystTypeConverters.md#createToCatalystConverter) for the [schema](../catalyst/QueryPlan.md#schema).
 
-`sideEffectResult` is used when `ExecutedCommandExec` is requested to [executeCollect](#executeCollect), [executeToIterator](#executeToIterator), [executeTake](#executeTake), [doExecute](#doExecute).
+`sideEffectResult` requests the [RunnableCommand](#cmd) to [execute](../logical-operators/RunnableCommand.md#run) and maps over the result using the Catalyst converter.
+
+??? note "Lazy Value"
+    `sideEffectResult` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.
+
+`sideEffectResult` is used for [executeCollect](#executeCollect), [executeToIterator](#executeToIterator), [executeTake](#executeTake), [executeTail](#executeTail), and [doExecute](#doExecute).

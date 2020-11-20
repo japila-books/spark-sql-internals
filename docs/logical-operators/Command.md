@@ -6,33 +6,33 @@
 
 ## Implementations
 
-* [AlterNamespaceSetLocation](AlterNamespaceSetLocation.md)
-* [AlterNamespaceSetProperties](AlterNamespaceSetProperties.md)
-* [AlterTable](AlterTable.md)
-* [CommentOnNamespace](CommentOnNamespace.md)
-* [CommentOnTable](CommentOnTable.md)
-* [CreateNamespace](CreateNamespace.md)
-* [CreateTableAsSelect](CreateTableAsSelect.md)
+* AlterNamespaceSetLocation
+* AlterNamespaceSetProperties
+* AlterTable
+* CommentOnNamespace
+* CommentOnTable
+* CreateNamespace
+* CreateTableAsSelect
 * [CreateV2Table](CreateV2Table.md)
 * [DataWritingCommand](DataWritingCommand.md)
 * [DeleteFromTable](DeleteFromTable.md)
-* [DescribeNamespace](DescribeNamespace.md)
+* DescribeNamespace
 * [DescribeRelation](DescribeRelation.md)
-* [DropNamespace](DropNamespace.md)
-* [DropTable](DropTable.md)
+* DropNamespace
+* DropTable
 * [MergeIntoTable](MergeIntoTable.md)
-* [RefreshTable](RefreshTable.md)
-* [RenameTable](RenameTable.md)
-* [ReplaceTable](ReplaceTable.md)
-* [ReplaceTableAsSelect](ReplaceTableAsSelect.md)
+* RefreshTable
+* RenameTable
+* ReplaceTable
+* ReplaceTableAsSelect
 * [RunnableCommand](RunnableCommand.md)
 * [SetCatalogAndNamespace](SetCatalogAndNamespace.md)
 * [ShowCurrentNamespace](ShowCurrentNamespace.md)
-* [ShowNamespaces](ShowNamespaces.md)
-* [ShowTableProperties](ShowTableProperties.md)
+* ShowNamespaces
+* ShowTableProperties
 * [ShowTables](ShowTables.md)
-* [ShowViews](ShowViews.md)
-* [UpdateTable](UpdateTable.md)
+* ShowViews
+* UpdateTable
 * [V2WriteCommand](V2WriteCommand.md)
 
 ## <span id="output"> Output Attributes
