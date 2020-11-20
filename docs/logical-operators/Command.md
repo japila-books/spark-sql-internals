@@ -1,26 +1,66 @@
-# Command &mdash; Eagerly-Executed Logical Operator
+# Command &mdash; Eagerly-Executed Logical Operators
 
-`Command` is the *marker interface* for spark-sql-LogicalPlan.md[logical operators] that represent non-query commands that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical plans in general).
+`Command` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical operators in general).
 
-NOTE: `Command` is executed when a `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
+`Command` is a marker interface for logical operators that are executed when a `Dataset` is requested for the [logical plan](../Dataset.md#logicalPlan) (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
 
-[[output]]
-`Command` has no catalyst/QueryPlan.md#output[output schema] by default.
+## Implementations
 
-[[children]]
-`Command` has no child logical operators (which makes it similar to LeafNode.md[leaf logical operators]).
+* [AlterNamespaceSetLocation](AlterNamespaceSetLocation.md)
+* [AlterNamespaceSetProperties](AlterNamespaceSetProperties.md)
+* [AlterTable](AlterTable.md)
+* [CommentOnNamespace](CommentOnNamespace.md)
+* [CommentOnTable](CommentOnTable.md)
+* [CreateNamespace](CreateNamespace.md)
+* [CreateTableAsSelect](CreateTableAsSelect.md)
+* [CreateV2Table](CreateV2Table.md)
+* [DataWritingCommand](DataWritingCommand.md)
+* [DeleteFromTable](DeleteFromTable.md)
+* [DescribeNamespace](DescribeNamespace.md)
+* [DescribeRelation](DescribeRelation.md)
+* [DropNamespace](DropNamespace.md)
+* [DropTable](DropTable.md)
+* [MergeIntoTable](MergeIntoTable.md)
+* [RefreshTable](RefreshTable.md)
+* [RenameTable](RenameTable.md)
+* [ReplaceTable](ReplaceTable.md)
+* [ReplaceTableAsSelect](ReplaceTableAsSelect.md)
+* [RunnableCommand](RunnableCommand.md)
+* [SetCatalogAndNamespace](SetCatalogAndNamespace.md)
+* [ShowCurrentNamespace](ShowCurrentNamespace.md)
+* [ShowNamespaces](ShowNamespaces.md)
+* [ShowTableProperties](ShowTableProperties.md)
+* [ShowTables](ShowTables.md)
+* [ShowViews](ShowViews.md)
+* [UpdateTable](UpdateTable.md)
+* [V2WriteCommand](V2WriteCommand.md)
 
-[[implementations]]
-.Commands (Direct Implementations)
-[cols="30m,70",options="header",width="100%"]
-|===
-| Command
-| Description
+## <span id="output"> Output Attributes
 
-| DataWritingCommand.md[DataWritingCommand]
-| [[DataWritingCommand]]
+```scala
+output: Seq[Attribute]
+```
 
-| RunnableCommand.md[RunnableCommand]
-| [[RunnableCommand]]
+`Command` has no output [attributes](../expressions/Attribute.md) by default.
 
-|===
+`output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
+
+## <span id="children"> Child Logical Operators
+
+```scala
+children: Seq[LogicalPlan]
+```
+
+`Command` has no child [logical operators](LogicalPlan.md) by default.
+
+`children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
+
+## <span id="stats"> Statistics
+
+```scala
+stats: Statistics
+```
+
+`Command` has no [Statistics](Statistics.md) by default.
+
+`stats` is part of the [LogicalPlanStats](LogicalPlanStats.md#stats) abstraction.
