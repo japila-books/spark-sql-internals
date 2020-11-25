@@ -123,7 +123,7 @@ Default: `false`
 
 | [[spark.sql.queryExecutionListeners]][[QUERY_EXECUTION_LISTENERS]] *spark.sql.queryExecutionListeners*
 
-List of class names that implement <<spark-sql-QueryExecutionListener.md#, QueryExecutionListener>> that will be automatically <<ExecutionListenerManager.md#register, registered>> to new `SparkSessions`.
+List of class names that implement [QueryExecutionListener](QueryExecutionListener.md) that will be automatically [registered](ExecutionListenerManager.md#register) to new `SparkSessions`.
 
 Default: (empty)
 

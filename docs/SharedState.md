@@ -9,7 +9,7 @@
 * <span id="jarClassLoader"> `NonClosableMutableURLClassLoader`
 * [SparkConf](#conf)
 * [SparkContext](#sparkContext)
-* <span id="statusStore"> [SQLAppStatusStore](spark-sql-SQLAppStatusStore.md)
+* <span id="statusStore"> [SQLAppStatusStore](SQLAppStatusStore.md)
 * `StreamingQueryStatusListener`
 
 `SharedState` is shared when `SparkSession` is created using [SparkSession.newSession](SparkSession.md#newSession):

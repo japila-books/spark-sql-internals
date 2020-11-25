@@ -2,7 +2,7 @@
 
 [[EXECUTION_ID_KEY]]
 [[spark.sql.execution.id]]
-`SQLExecution` defines *spark.sql.execution.id* Spark property that is used to track multiple Spark jobs that should all together constitute a single structured query execution (that could be easily reported as a single execution unit).
+`SQLExecution` defines `spark.sql.execution.id` Spark property that is used to track multiple Spark jobs that should all together constitute a single structured query execution (that could be easily reported as a single execution unit).
 
 [source, scala]
 ----
@@ -15,7 +15,7 @@ Actions of a structured query are executed using <<withNewExecutionId, SQLExecut
 
 [TIP]
 ====
-Use spark-SparkListener.md#onOtherEvent[SparkListener] to listen to spark-sql-SQLListener.md#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] events and know the execution ids of structured queries that have been executed in a Spark SQL application.
+Use `SparkListener` (Spark Core) to listen to [SparkListenerSQLExecutionStart](SQLListener.md#SparkListenerSQLExecutionStart) events and know the execution ids of structured queries that have been executed in a Spark SQL application.
 
 [source, scala]
 ----
@@ -77,7 +77,7 @@ withNewExecutionId[T](
 
 NOTE: If there is another execution id already set, it is replaced for the course of the current action.
 
-In addition, the `QueryExecution` variant posts spark-sql-SQLListener.md#SparkListenerSQLExecutionStart[SparkListenerSQLExecutionStart] and spark-sql-SQLListener.md#SparkListenerSQLExecutionEnd[SparkListenerSQLExecutionEnd] events (to spark-LiveListenerBus.md[LiveListenerBus] event bus) before and after executing the `body` action, respectively. It is used to inform spark-sql-SQLListener.md#onOtherEvent[`SQLListener` when a SQL query execution starts and ends].
+In addition, the `QueryExecution` variant posts [SparkListenerSQLExecutionStart](SQLListener.md#SparkListenerSQLExecutionStart) and [SparkListenerSQLExecutionEnd](SQLListener.md#SparkListenerSQLExecutionEnd) events (to spark-LiveListenerBus.md[LiveListenerBus] event bus) before and after executing the `body` action, respectively. It is used to inform [`SQLListener` when a SQL query execution starts and ends](SQLListener.md#onOtherEvent).
 
 NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 

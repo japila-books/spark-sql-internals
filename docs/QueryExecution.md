@@ -206,7 +206,7 @@ prepareForExecution(
 assertSupported(): Unit
 ```
 
-`assertSupported` requests `UnsupportedOperationChecker` to [checkForBatch](spark-sql-UnsupportedOperationChecker.md#checkForBatch) when...FIXME
+`assertSupported` requests `UnsupportedOperationChecker` to [checkForBatch](UnsupportedOperationChecker.md#checkForBatch) when...FIXME
 
 `assertSupported` is used when `QueryExecution` is requested for [withCachedData](#withCachedData) logical plan.
 

@@ -86,6 +86,7 @@ extra:
   book:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
+    spark: https://books.japila.pl/apache-spark-internals
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
@@ -163,7 +164,7 @@ nav:
       - SparkSession: SparkSession.md
       - SparkSession.Builder: SparkSession-Builder.md
       - SparkSessionExtensions: SparkSessionExtensions.md
-      - spark-sql-SparkSession-implicits.md
+      - Implicits: implicits.md
       - SharedState: SharedState.md
       - ColumnarRule: ColumnarRule.md
     - Configuration Properties: configuration-properties.md
@@ -747,6 +748,7 @@ nav:
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
     - Physical Optimizations:
+      - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
@@ -917,11 +919,11 @@ nav:
     - Monitoring:
       - Web UI and SQL Tab:
         - SQLTab: spark-sql-webui.md
-        - SQLListener: spark-sql-SQLListener.md
-      - QueryExecutionListener: spark-sql-QueryExecutionListener.md
-      - SQLAppStatusListener: spark-sql-SQLAppStatusListener.md
-      - SQLAppStatusPlugin: spark-sql-SQLAppStatusPlugin.md
-      - SQLAppStatusStore: spark-sql-SQLAppStatusStore.md
+        - SQLListener: SQLListener.md
+      - QueryExecutionListener: QueryExecutionListener.md
+      - SQLAppStatusListener: SQLAppStatusListener.md
+      - SQLAppStatusPlugin: SQLAppStatusPlugin.md
+      - SQLAppStatusStore: SQLAppStatusStore.md
       - WriteTaskStats:
         - WriteTaskStats: spark-sql-WriteTaskStats.md
         - BasicWriteTaskStats: spark-sql-BasicWriteTaskStats.md
@@ -940,10 +942,10 @@ nav:
     - Spark Thrift Server:
       - thrift-server/spark-sql-thrift-server.md
       - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
-    - SQLExecution: spark-sql-SQLExecution.md
+    - SQLExecution: SQLExecution.md
     - RDDConversions: spark-sql-RDDConversions.md
     - ShuffledRowRDD: ShuffledRowRDD.md
-    - spark-sql-UnsupportedOperationChecker.md
+    - UnsupportedOperationChecker: UnsupportedOperationChecker.md
     - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
     - CatalystTypeConverters: CatalystTypeConverters.md
     - StatFunctions: spark-sql-StatFunctions.md
@@ -967,7 +969,6 @@ nav:
     - CatalogUtils: spark-sql-CatalogUtils.md
     - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
     - CompressionCodecs: CompressionCodecs.md
-    - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
     - JoinStrategyHint: JoinStrategyHint.md
     - PushDownUtils: PushDownUtils.md
-    - SQLContext: spark-sql-SQLContext.md
+    - SQLContext: SQLContext.md

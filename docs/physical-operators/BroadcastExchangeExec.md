@@ -69,7 +69,7 @@ NOTE: `doExecuteBroadcast` is part of SparkPlan.md#doExecuteBroadcast[SparkPlan 
 relationFuture: Future[broadcast.Broadcast[Any]]
 ----
 
-When "materialized" (aka _executed_), `relationFuture` finds the current spark-sql-SQLExecution.md#spark.sql.execution.id[execution id] and sets it to the `Future` thread.
+When "materialized" (aka _executed_), `relationFuture` finds the current [execution id](../SQLExecution.md#spark.sql.execution.id) and sets it to the `Future` thread.
 
 `relationFuture` requests <<child, child physical operator>> to SparkPlan.md#executeCollectIterator[executeCollectIterator].
 

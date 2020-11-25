@@ -1,20 +1,12 @@
 # SQLListener Spark Listener
 
-`SQLListener` is a `SparkListener` that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on spark-sql-SQLExecution.md#spark.sql.execution.id[spark.sql.execution.id] key to distinguish between queries.
+`SQLListener` is a `SparkListener` (Spark Core) that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on [spark.sql.execution.id](SQLExecution.md#spark.sql.execution.id) key to distinguish between queries.
 
 Internally, it uses <<SQLExecutionUIData, SQLExecutionUIData>> data structure exclusively to record all the necessary data for a single SQL query execution. `SQLExecutionUIData` is tracked in the internal registries, i.e. `activeExecutions`, `failedExecutions`, and `completedExecutions` as well as lookup tables, i.e. `_executionIdToData`, `_jobIdToExecutionId`, and `_stageIdToStageMetrics`.
 
 `SQLListener` starts recording a query execution by intercepting a <<SparkListenerSQLExecutionStart, SparkListenerSQLExecutionStart>> event (using <<onOtherEvent, onOtherEvent>> callback).
 
 `SQLListener` stops recording information about a SQL query execution when <<SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionEnd>> event arrives.
-
-It defines the other callbacks (from spark-SparkListener.md[SparkListener] interface):
-
-* <<onJobStart, onJobStart>>
-* <<onJobEnd, onJobEnd>>
-* onExecutorMetricsUpdate
-* onStageSubmitted
-* onTaskEnd
 
 === [[onJobStart]] Registering Job and Stages under Active Execution -- `onJobStart` Callback
 
@@ -23,7 +15,7 @@ It defines the other callbacks (from spark-SparkListener.md[SparkListener] inter
 onJobStart(jobStart: SparkListenerJobStart): Unit
 ----
 
-`onJobStart` reads the spark-sql-SQLExecution.md#spark.sql.execution.id[`spark.sql.execution.id` key], the identifiers of the job and the stages and then updates the <<SQLExecutionUIData, SQLExecutionUIData>> for the execution id in `activeExecutions` internal registry.
+`onJobStart` reads the [`spark.sql.execution.id` key](SQLExecution.md#spark.sql.execution.id), the identifiers of the job and the stages and then updates the <<SQLExecutionUIData, SQLExecutionUIData>> for the execution id in `activeExecutions` internal registry.
 
 NOTE: When `onJobStart` is executed, it is assumed that <<SQLExecutionUIData, SQLExecutionUIData>> has already been created and available in the internal `activeExecutions` registry.
 
@@ -31,7 +23,7 @@ The job in <<SQLExecutionUIData, SQLExecutionUIData>> is marked as running with 
 
 === [[onOtherEvent]] `onOtherEvent` Callback
 
-In `onOtherEvent`, `SQLListener` listens to the following spark-SparkListener.md#SparkListenerEvent[SparkListenerEvent] events:
+In `onOtherEvent`, `SQLListener` listens to the following `SparkListenerEvent` events:
 
 * <<SparkListenerSQLExecutionStart, SparkListenerSQLExecutionStart>>
 * <<SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionEnd>>

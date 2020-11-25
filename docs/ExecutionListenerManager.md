@@ -1,6 +1,4 @@
-title: ExecutionListenerManager
-
-# ExecutionListenerManager -- Management Interface of QueryExecutionListeners
+# ExecutionListenerManager
 
 `ExecutionListenerManager` is the <<methods, management interface>> for `QueryExecutionListeners` that listen for execution metrics:
 
@@ -65,7 +63,7 @@ clear(): Unit
 `ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for BaseSessionStateBuilder.md#listenerManager[ExecutionListenerManager] (while `SessionState` is BaseSessionStateBuilder.md#build[built]).
 
 [[listeners]]
-`ExecutionListenerManager` uses `listeners` internal registry for registered <<spark-sql-QueryExecutionListener.md#, QueryExecutionListeners>>.
+`ExecutionListenerManager` uses `listeners` internal registry for registered [QueryExecutionListener](QueryExecutionListener.md)s.
 
 ## <span id="onSuccess"> onSuccess Internal Method
 
@@ -119,4 +117,4 @@ NOTE: `withErrorHandling` is used when `ExecutionListenerManager` is requested t
 register(listener: QueryExecutionListener): Unit
 ----
 
-Internally, `register` simply registers (adds) the input <<spark-sql-QueryExecutionListener.md#, QueryExecutionListener>> to the <<listeners, listeners>> internal registry.
+Internally, `register` simply registers (adds) the input [QueryExecutionListener](QueryExecutionListener.md) to the [listeners](#listeners) internal registry.

@@ -1039,7 +1039,7 @@ Since: `3.0.0`
 
 Default: `true`
 
-This is for cases not tracked by [SQL execution](spark-sql-SQLExecution.md), when a `Dataset` is converted to an RDD either using Dataset.md#rdd[rdd] operation or [QueryExecution](QueryExecution.md#toRdd), and then the returned RDD is used to invoke actions on it.
+This is for cases not tracked by [SQL execution](SQLExecution.md), when a `Dataset` is converted to an RDD either using Dataset.md#rdd[rdd] operation or [QueryExecution](QueryExecution.md#toRdd), and then the returned RDD is used to invoke actions on it.
 
 This config is deprecated and will be removed in 3.0.0.
 
@@ -1379,7 +1379,7 @@ Use [SQLConf.truncateTableIgnorePermissionAcl](SQLConf.md#truncateTableIgnorePer
 
 ## <span id="spark.sql.ui.retainedExecutions"> spark.sql.ui.retainedExecutions
 
-The number of [SQLExecutionUIData](spark-sql-SQLListener.md#SQLExecutionUIData) entries to keep in `failedExecutions` and `completedExecutions` internal registries.
+The number of [SQLExecutionUIData](SQLListener.md#SQLExecutionUIData) entries to keep in `failedExecutions` and `completedExecutions` internal registries.
 
 Default: `1000`
 

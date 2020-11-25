@@ -64,7 +64,7 @@ NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepa
 relationFuture: Future[Array[InternalRow]]
 ----
 
-When "materialized" (aka _executed_), `relationFuture` spawns a new thread of execution that requests `SQLExecution` to execute an action (with the current spark-sql-SQLExecution.md#EXECUTION_ID_KEY[execution id]) on *subquery* <<executionContext, daemon cached thread pool>>.
+When "materialized" (aka _executed_), `relationFuture` spawns a new thread of execution that requests `SQLExecution` to execute an action (with the current [execution id](../SQLExecution.md#EXECUTION_ID_KEY)) on *subquery* <<executionContext, daemon cached thread pool>>.
 
 NOTE: `relationFuture` uses Scala's https://docs.scala-lang.org/overviews/core/futures.html[scala.concurrent.Future] that spawns a new thread of execution once instantiated.
 

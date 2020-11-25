@@ -73,12 +73,11 @@ postDriverMetricUpdates(
   metrics: Seq[SQLMetric]): Unit
 ----
 
-`postDriverMetricUpdates` posts a spark-sql-SQLListener.md#SparkListenerDriverAccumUpdates[SparkListenerDriverAccumUpdates] event to spark-LiveListenerBus.md[LiveListenerBus] when `executionId` is specified.
+`postDriverMetricUpdates` posts a [SparkListenerDriverAccumUpdates](../SQLListener.md#SparkListenerDriverAccumUpdates) event to `LiveListenerBus` when `executionId` is specified.
 
-NOTE: `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
+!!! note
+    `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
 
-[NOTE]
-====
 `postDriverMetricUpdates` is used when:
 
 * `BroadcastExchangeExec` is requested to BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
@@ -86,4 +85,3 @@ NOTE: `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
 * `FileSourceScanExec` physical operator is requested for FileSourceScanExec.md#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
 
 * `SubqueryExec` physical operator is requested to SubqueryExec.md#doPrepare[prepare for execution] (and initializes SubqueryExec.md#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
-====

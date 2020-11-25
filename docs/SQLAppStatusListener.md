@@ -1,26 +1,6 @@
 # SQLAppStatusListener Spark Listener
 
-`SQLAppStatusListener` is a spark-SparkListener.md[SparkListener] that...FIXME
-
-[[internal-registries]]
-.SQLAppStatusListener's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[liveUpdatePeriodNs]] `liveUpdatePeriodNs`
-|
-
-| [[liveExecutions]] `liveExecutions`
-|
-
-| [[stageMetrics]] `stageMetrics`
-|
-
-| [[uiInitialized]] `uiInitialized`
-|
-|===
+`SQLAppStatusListener` is a `SparkListener` ([Spark Core]({{ book.spark }}/SparkListener/)).
 
 === [[onExecutionStart]] `onExecutionStart` Internal Method
 
@@ -40,7 +20,7 @@ NOTE: `onExecutionStart` is used exclusively when `SQLAppStatusListener` <<onOth
 onJobStart(event: SparkListenerJobStart): Unit
 ----
 
-NOTE: `onJobStart` is part of spark-SparkListener.md#onJobStart[SparkListener Contract] to...FIXME
+`onJobStart` is part of the `SparkListener` abstraction.
 
 `onJobStart`...FIXME
 
@@ -51,7 +31,7 @@ NOTE: `onJobStart` is part of spark-SparkListener.md#onJobStart[SparkListener Co
 onStageSubmitted(event: SparkListenerStageSubmitted): Unit
 ----
 
-NOTE: `onStageSubmitted` is part of spark-SparkListener.md#onStageSubmitted[SparkListener Contract] to...FIXME
+`onStageSubmitted` is part of the `SparkListener` abstraction.
 
 `onStageSubmitted`...FIXME
 
@@ -62,7 +42,7 @@ NOTE: `onStageSubmitted` is part of spark-SparkListener.md#onStageSubmitted[Spar
 onJobEnd(event: SparkListenerJobEnd): Unit
 ----
 
-NOTE: `onJobEnd` is part of spark-SparkListener.md#onJobEnd[SparkListener Contract] to...FIXME
+`onJobEnd` is part of the `SparkListener` abstraction.
 
 `onJobEnd`...FIXME
 
@@ -73,7 +53,7 @@ NOTE: `onJobEnd` is part of spark-SparkListener.md#onJobEnd[SparkListener Contra
 onExecutorMetricsUpdate(event: SparkListenerExecutorMetricsUpdate): Unit
 ----
 
-NOTE: `onExecutorMetricsUpdate` is part of spark-SparkListener.md#onExecutorMetricsUpdate[SparkListener Contract] to...FIXME
+`onExecutorMetricsUpdate` is part of the `SparkListener` abstraction.
 
 `onExecutorMetricsUpdate`...FIXME
 
@@ -84,7 +64,7 @@ NOTE: `onExecutorMetricsUpdate` is part of spark-SparkListener.md#onExecutorMetr
 onTaskEnd(event: SparkListenerTaskEnd): Unit
 ----
 
-NOTE: `onTaskEnd` is part of spark-SparkListener.md#onTaskEnd[SparkListener Contract] to...FIXME
+`onTaskEnd` is part of the `SparkListener` abstraction.
 
 `onTaskEnd`...FIXME
 
@@ -95,6 +75,6 @@ NOTE: `onTaskEnd` is part of spark-SparkListener.md#onTaskEnd[SparkListener Cont
 onOtherEvent(event: SparkListenerEvent): Unit
 ----
 
-NOTE: `onOtherEvent` is part of spark-SparkListener.md#onOtherEvent[SparkListener Contract] to...FIXME
+`onOtherEvent` is part of the `SparkListener` abstraction.
 
 `onOtherEvent`...FIXME

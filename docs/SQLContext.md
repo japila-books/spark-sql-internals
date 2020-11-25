@@ -7,7 +7,7 @@ As of Spark *2.0.0* `SQLContext` is only for backward compatibility and is a _me
 
 In the pre-Spark 2.0's ear, *SQLContext* was the entry point for Spark SQL. Whatever you did in Spark SQL it had to start from <<creating-instance, creating an instance of SQLContext>>.
 
-A `SQLContext` object requires a `SparkContext`, a `CacheManager`, and a spark-sql-SQLListener.md[SQLListener]. They are all `transient` and do not participate in serializing a SQLContext.
+A `SQLContext` object requires a `SparkContext`, a `CacheManager`, and a [SQLListener](SQLListener.md). They are all `transient` and do not participate in serializing a SQLContext.
 
 You should use `SQLContext` for the following:
 
@@ -432,6 +432,6 @@ newSession(): SQLContext
 
 You can use `newSession` method to create a new session without a cost of instantiating a new SqlContext from scratch.
 
-`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, spark-sql-SQLListener.md[SQLListener], and [ExternalCatalog](ExternalCatalog.md).
+`newSession` returns a new `SqlContext` that shares `SparkContext`, `CacheManager`, [SQLListener](SQLListener.md), and [ExternalCatalog](ExternalCatalog.md).
 
 CAUTION: FIXME Why would I need that?

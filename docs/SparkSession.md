@@ -162,7 +162,7 @@ scala> one.show
 
 
 !!! tip "implicits object"
-    You may want to consider [implicits](spark-sql-SparkSession-implicits.md) object and `toDS` method instead.
+    You may want to consider [implicits](implicits.md) object and `toDS` method instead.
 
     ```text
     val spark: SparkSession = ...

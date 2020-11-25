@@ -225,7 +225,7 @@ NOTE: `rdd` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[
 NOTE: `rdd` is at the "boundary" between the internal binary row format and the JVM type of the dataset. Avoid the extra deserialization step to lower JVM memory requirements of your Spark application.
 
 ! [[sqlContext]] `sqlContext`
-! Lazily-created spark-sql-SQLContext.md[SQLContext]
+! Lazily-created [SQLContext](SQLContext.md)
 
 Used when...FIXME
 !===
@@ -307,7 +307,7 @@ CAUTION: FIXME
 withNewRDDExecutionId[U](body: => U): U
 ----
 
-`withNewRDDExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.md#withNewExecutionId, new execution id>>.
+`withNewRDDExecutionId` executes the input `body` action under [new execution id](SQLExecution.md#withNewExecutionId).
 
 CAUTION: FIXME What's the difference between `withNewRDDExecutionId` and <<withNewExecutionId, withNewExecutionId>>?
 
@@ -361,7 +361,7 @@ Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan
 withNewExecutionId[U](body: => U): U
 ----
 
-`withNewExecutionId` executes the input `body` action under <<spark-sql-SQLExecution.md#withNewExecutionId, new execution id>>.
+`withNewExecutionId` executes the input `body` action under [new execution id](SQLExecution.md#withNewExecutionId).
 
 NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs belong to the `Dataset` action execution.
 
@@ -381,7 +381,7 @@ withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
 
 `withAction` requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
 
-`withAction` requests `SQLExecution` to <<spark-sql-SQLExecution.md#withNewExecutionId, execute>> the input `action` with the executable physical plan (tracked under a new execution id).
+`withAction` requests `SQLExecution` to [execute](SQLExecution.md#withNewExecutionId) the input `action` with the executable physical plan (tracked under a new execution id).
 
 In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished ExecutionListenerManager.md#onSuccess[successfully] or ExecutionListenerManager.md#onFailure[with an exception].
 

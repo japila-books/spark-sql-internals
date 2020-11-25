@@ -17,7 +17,7 @@
 sqlContext: SQLContext
 ```
 
-[SQLContext](spark-sql-SQLContext.md)
+[SQLContext](SQLContext.md)
 
 ### <span id="schema"> Schema
 

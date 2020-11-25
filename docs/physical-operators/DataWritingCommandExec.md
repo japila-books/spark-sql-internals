@@ -69,4 +69,4 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`doExecute` simply requests the <<SparkPlan.md#sqlContext, SQLContext>> for the <<spark-sql-SQLContext.md#sparkContext, SparkContext>> that is then requested to distribute (`parallelize`) the <<sideEffectResult, sideEffectResult>> (over 1 partition).
+`doExecute` simply requests the <<SparkPlan.md#sqlContext, SQLContext>> for the [SparkContext](../SQLContext.md#sparkContext) that is then requested to distribute (`parallelize`) the <<sideEffectResult, sideEffectResult>> (over 1 partition).
