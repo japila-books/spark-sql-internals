@@ -44,7 +44,7 @@ When <<creating-instance, created>>, `TungstenAggregationIterator` gets SQL metr
 
 * <<peakMemory, peakMemory>>, <<spillSize, spillSize>> and <<avgHashProbe, avgHashProbe>> are used at the <<TaskCompletionListener, end of every task>> (one per partition)
 
-The metrics are then displayed as part of [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in <<spark-sql-webui.md#ExecutionPage, Details for Query>>).
+The metrics are then displayed as part of [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](SQLTab.md#ExecutionPage)).
 
 ![HashAggregateExec in web UI (Details for Query)](images/spark-sql-HashAggregateExec-webui-details-for-query.png)
 

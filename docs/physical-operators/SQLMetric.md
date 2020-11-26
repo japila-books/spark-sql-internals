@@ -1,16 +1,17 @@
 # SQLMetric &mdash; SQL Execution Metric of Physical Operator
 
-`SQLMetric` is a SQL metric for monitoring execution of a SparkPlan.md[physical operator].
+`SQLMetric` is a SQL metric for monitoring execution of a [physical operator](SparkPlan.md).
 
-`SQLMetric` is an spark-accumulators.md[accumulator] (and that is the mechanism to propagate SQL metric updates on the executors to the driver, e.g. web UI).
+`SQLMetric` is an accumulator ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)).
 
-NOTE: Use *Details for Query* page in spark-sql-webui.md#ExecutionPage[SQL tab] in web UI to see the SQL execution metrics of a structured query.
+!!! note
+    Use **Details for Query** page in [SQL tab](../SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
 
 [NOTE]
 ====
 SQL metrics are collected using `SparkListener`. If there are no tasks, Spark SQL cannot collect any metrics. Updates to metrics on the driver-side require explicit call of <<postDriverMetricUpdates, SQLMetrics.postDriverMetricUpdates>>.
 
-This is why executing some physical operators (e.g. LocalTableScanExec) may not have SQL metrics in web UI's spark-sql-webui.md#ExecutionPage[Details for Query] in SQL tab.
+This is why executing some physical operators (e.g. LocalTableScanExec) may not have SQL metrics in web UI's [Details for Query](../SQLTab.md#ExecutionPage) in SQL tab.
 
 Compare the following SQL queries and their execution pages.
 

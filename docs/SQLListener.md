@@ -1,6 +1,6 @@
 # SQLListener Spark Listener
 
-`SQLListener` is a `SparkListener` (Spark Core) that collects information about SQL query executions for web UI (to display in spark-sql-webui.md[SQL tab]). It relies on [spark.sql.execution.id](SQLExecution.md#spark.sql.execution.id) key to distinguish between queries.
+`SQLListener` is a `SparkListener` (Spark Core) that collects information about SQL query executions for web UI (to display in [SQL tab](SQLTab.md)). It relies on [spark.sql.execution.id](SQLExecution.md#spark.sql.execution.id) key to distinguish between queries.
 
 Internally, it uses <<SQLExecutionUIData, SQLExecutionUIData>> data structure exclusively to record all the necessary data for a single SQL query execution. `SQLExecutionUIData` is tracked in the internal registries, i.e. `activeExecutions`, `failedExecutions`, and `completedExecutions` as well as lookup tables, i.e. `_executionIdToData`, `_jobIdToExecutionId`, and `_stageIdToStageMetrics`.
 
@@ -106,7 +106,7 @@ getExecutionMetrics(executionId: Long): Map[Long, String]
 
 `getExecutionMetrics` gets the metrics (aka _accumulator updates_) for `executionId` (by which it collects all the tasks that were used for an execution).
 
-It is exclusively used to render the spark-sql-webui.md#ExecutionPage[ExecutionPage] page in web UI.
+It is exclusively used to render the [ExecutionPage](SQLTab.md#ExecutionPage) page in web UI.
 
 === [[mergeAccumulatorUpdates]] `mergeAccumulatorUpdates` Method
 

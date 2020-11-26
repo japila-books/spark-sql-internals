@@ -86,7 +86,7 @@ extra:
   book:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
-    spark: https://books.japila.pl/apache-spark-internals
+    spark_core: https://books.japila.pl/apache-spark-internals
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
@@ -918,7 +918,7 @@ nav:
       - Aggregator: Aggregator.md
     - Monitoring:
       - Web UI and SQL Tab:
-        - SQLTab: spark-sql-webui.md
+        - SQLTab: SQLTab.md
         - SQLListener: SQLListener.md
       - QueryExecutionListener: QueryExecutionListener.md
       - SQLAppStatusListener: SQLAppStatusListener.md

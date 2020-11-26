@@ -1,80 +1,16 @@
 # SQLAppStatusListener Spark Listener
 
-`SQLAppStatusListener` is a `SparkListener` ([Spark Core]({{ book.spark }}/SparkListener/)).
+`SQLAppStatusListener` is a `SparkListener` ([Spark Core]({{ book.spark_core }}/SparkListener/)).
 
-=== [[onExecutionStart]] `onExecutionStart` Internal Method
+## Creating Instance
 
-[source, scala]
-----
-onExecutionStart(event: SparkListenerSQLExecutionStart): Unit
-----
+`SQLAppStatusListener` takes the following to be created:
 
-`onExecutionStart`...FIXME
+* <span id="conf"> `SparkConf` (Spark Core)
+* <span id="kvstore"> `ElementTrackingStore`
+* <span id="live"> `live` flag
 
-NOTE: `onExecutionStart` is used exclusively when `SQLAppStatusListener` <<onOtherEvent, handles a SparkListenerSQLExecutionStart event>>.
+`SQLAppStatusListener` is created when:
 
-=== [[onJobStart]] `onJobStart` Callback
-
-[source, scala]
-----
-onJobStart(event: SparkListenerJobStart): Unit
-----
-
-`onJobStart` is part of the `SparkListener` abstraction.
-
-`onJobStart`...FIXME
-
-=== [[onStageSubmitted]] `onStageSubmitted` Callback
-
-[source, scala]
-----
-onStageSubmitted(event: SparkListenerStageSubmitted): Unit
-----
-
-`onStageSubmitted` is part of the `SparkListener` abstraction.
-
-`onStageSubmitted`...FIXME
-
-=== [[onJobEnd]] `onJobEnd` Callback
-
-[source, scala]
-----
-onJobEnd(event: SparkListenerJobEnd): Unit
-----
-
-`onJobEnd` is part of the `SparkListener` abstraction.
-
-`onJobEnd`...FIXME
-
-=== [[onExecutorMetricsUpdate]] `onExecutorMetricsUpdate` Callback
-
-[source, scala]
-----
-onExecutorMetricsUpdate(event: SparkListenerExecutorMetricsUpdate): Unit
-----
-
-`onExecutorMetricsUpdate` is part of the `SparkListener` abstraction.
-
-`onExecutorMetricsUpdate`...FIXME
-
-=== [[onTaskEnd]] `onTaskEnd` Callback
-
-[source, scala]
-----
-onTaskEnd(event: SparkListenerTaskEnd): Unit
-----
-
-`onTaskEnd` is part of the `SparkListener` abstraction.
-
-`onTaskEnd`...FIXME
-
-=== [[onOtherEvent]] Handling SparkListenerEvent -- `onOtherEvent` Callback
-
-[source, scala]
-----
-onOtherEvent(event: SparkListenerEvent): Unit
-----
-
-`onOtherEvent` is part of the `SparkListener` abstraction.
-
-`onOtherEvent`...FIXME
+* `SharedState` is created (and initializes a [SQLAppStatusStore](SharedState.md#statusStore))
+* `SQLHistoryServerPlugin` is requested to create `SparkListener`s

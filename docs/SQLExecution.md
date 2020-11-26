@@ -11,7 +11,7 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ----
 
-Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's spark-sql-webui.md[SQL tab]).
+Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's [SQL tab](SQLTab.md)).
 
 [TIP]
 ====
@@ -73,7 +73,7 @@ withNewExecutionId[T](
 
 `withNewExecutionId` executes `body` query action with a new <<spark.sql.execution.id, execution id>> (given as the input `executionId` or auto-generated) so that all Spark jobs that have been scheduled by the query action could be marked as parts of the same `Dataset` action execution.
 
-`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to spark-sql-webui.md[reporting them as one single structured query in web UI].
+`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to [reporting them as one single structured query in web UI](SQLTab.md).
 
 NOTE: If there is another execution id already set, it is replaced for the course of the current action.
 
