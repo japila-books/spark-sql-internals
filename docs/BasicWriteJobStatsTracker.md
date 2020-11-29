@@ -1,13 +1,13 @@
 # BasicWriteJobStatsTracker
 
-`BasicWriteJobStatsTracker` is a concrete <<spark-sql-WriteJobStatsTracker.md#, WriteJobStatsTracker>>.
+`BasicWriteJobStatsTracker` is a [WriteJobStatsTracker](WriteJobStatsTracker.md).
 
 `BasicWriteJobStatsTracker` is <<creating-instance, created>> when <<DataWritingCommand.md#basicWriteJobStatsTracker, DataWritingCommand>> and Spark Structured Streaming's `FileStreamSink` are requested for one.
 
 [[newTaskInstance]]
-When requested for a new <<spark-sql-WriteJobStatsTracker.md#newTaskInstance, WriteTaskStatsTracker>>, `BasicWriteJobStatsTracker` creates a new <<spark-sql-BasicWriteTaskStatsTracker.md#, BasicWriteTaskStatsTracker>>.
+When requested for a new [WriteTaskStatsTracker](WriteJobStatsTracker.md#newTaskInstance), `BasicWriteJobStatsTracker` creates a new <<spark-sql-BasicWriteTaskStatsTracker.md#, BasicWriteTaskStatsTracker>>.
 
-=== [[creating-instance]] Creating BasicWriteJobStatsTracker Instance
+## Creating Instance
 
 `BasicWriteJobStatsTracker` takes the following when created:
 

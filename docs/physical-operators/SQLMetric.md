@@ -1,88 +1,100 @@
-# SQLMetric &mdash; SQL Execution Metric of Physical Operator
+# SQLMetric
 
-`SQLMetric` is a SQL metric for monitoring execution of a [physical operator](SparkPlan.md).
-
-`SQLMetric` is an accumulator ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)).
+`SQLMetric` is an `AccumulatorV2` ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)) for [performance metrics of physical operators](SparkPlan.md#metrics).
 
 !!! note
     Use **Details for Query** page in [SQL tab](../SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
 
-[NOTE]
-====
-SQL metrics are collected using `SparkListener`. If there are no tasks, Spark SQL cannot collect any metrics. Updates to metrics on the driver-side require explicit call of <<postDriverMetricUpdates, SQLMetrics.postDriverMetricUpdates>>.
+## Creating Instance
 
-This is why executing some physical operators (e.g. LocalTableScanExec) may not have SQL metrics in web UI's [Details for Query](../SQLTab.md#ExecutionPage) in SQL tab.
+`SQLMetric` takes the following to be created:
 
-Compare the following SQL queries and their execution pages.
+* [Metric Type](#metricType)
+* <span id="initValue"> Initial Value
 
-[source, scala]
-----
-// The query does not have SQL metrics in web UI
-Seq("Jacek").toDF("name").show
+`SQLMetric` is created using the specialized utilities:
 
-// The query gives numOutputRows metric in web UI's Details for Query (SQL tab)
-Seq("Jacek").toDF("name").count
-----
-====
+* [createMetric](#createMetric)
+* [createSizeMetric](#createSizeMetric)
+* [createTimingMetric](#createTimingMetric)
+* [createNanoTimingMetric](#createNanoTimingMetric)
+* [createAverageMetric](#createAverageMetric)
 
-[[metricType]][[initValue]]
-`SQLMetric` takes a metric type and an initial value when created.
+### <span id="createAverageMetric"> createAverageMetric
 
-[[metrics-types]]
-.Metric Types and Corresponding Create Methods
-[cols="1,1,1,2",options="header",width="100%"]
-|===
-| Metric Type
-| Create Method
-| Failed Values Counted?
-| Description
+```scala
+createAverageMetric(
+  sc: SparkContext,
+  name: String): SQLMetric
+```
 
-| [[size]] `size`
-| [[createSizeMetric]] `createSizeMetric`
-| no
-| Used when...
+`createAverageMetric` creates a `SQLMetric` with [average](#AVERAGE_METRIC) type and registers it with the given `name`.
 
-| [[sum]] `sum`
-| [[createMetric]] `createMetric`
-| no
-| Used when...
+### <span id="createMetric"> createMetric
 
-| [[timing]] `timing`
-| [[createTimingMetric]] `createTimingMetric`
-| no
-| Used when...
-|===
+```scala
+createMetric(
+  sc: SparkContext,
+  name: String): SQLMetric
+```
 
-=== [[reset]] `reset` Method
+`createMetric` creates a `SQLMetric` with [sum](#SUM_METRIC) type and registers it with the given `name`.
 
-[source, scala]
-----
-reset(): Unit
-----
+### <span id="createNanoTimingMetric"> createNanoTimingMetric
 
-`reset`...FIXME
+```scala
+createNanoTimingMetric(
+  sc: SparkContext,
+  name: String): SQLMetric
+```
 
-NOTE: `reset` is used when...FIXME
+`createNanoTimingMetric` creates a `SQLMetric` with [nsTiming](#NS_TIMING_METRIC) type and registers it with the given `name`.
 
-=== [[postDriverMetricUpdates]] Posting Driver-Side Metric Updates -- `SQLMetrics.postDriverMetricUpdates` Method
+### <span id="createSizeMetric"> createSizeMetric
 
-[source, scala]
-----
+```scala
+createSizeMetric(
+  sc: SparkContext,
+  name: String): SQLMetric
+```
+
+`createSizeMetric` creates a `SQLMetric` with [size](#SIZE_METRIC) type and registers it with the given `name`.
+
+### <span id="createTimingMetric"> createTimingMetric
+
+```scala
+createTimingMetric(
+  sc: SparkContext,
+  name: String): SQLMetric
+```
+
+`createTimingMetric` creates a `SQLMetric` with [timing](#TIMING_METRIC) type and registers it with the given `name`.
+
+## <span id="metricType"> Metric Types
+
+`SQLMetric` is given a metric type to be [created](#creating-instance):
+
+* <span id="AVERAGE_METRIC"> `average`
+* <span id="NS_TIMING_METRIC"> `nsTiming`
+* <span id="SIZE_METRIC"> `size`
+* <span id="SUM_METRIC"> `sum`
+* <span id="TIMING_METRIC"> `timing`
+
+## <span id="postDriverMetricUpdates"> Posting Driver-Side Metric Updates
+
+```scala
 postDriverMetricUpdates(
   sc: SparkContext,
   executionId: String,
   metrics: Seq[SQLMetric]): Unit
-----
+```
 
 `postDriverMetricUpdates` posts a [SparkListenerDriverAccumUpdates](../SQLListener.md#SparkListenerDriverAccumUpdates) event to `LiveListenerBus` when `executionId` is specified.
 
-!!! note
-    `postDriverMetricUpdates` method belongs to `SQLMetrics` object.
-
 `postDriverMetricUpdates` is used when:
 
-* `BroadcastExchangeExec` is requested to BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
-
-* `FileSourceScanExec` physical operator is requested for FileSourceScanExec.md#selectedPartitions[selectedPartitions] (and posts updates to `numFiles` and `metadataTime` metrics)
-
-* `SubqueryExec` physical operator is requested to SubqueryExec.md#doPrepare[prepare for execution] (and initializes SubqueryExec.md#relationFuture[relationFuture] for the first time that in turn posts updates to `collectTime` and `dataSize` metrics)
+* `BasicWriteJobStatsTracker` is requested for [processStats](../BasicWriteJobStatsTracker.md#processStats)
+* `BroadcastExchangeExec` is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
+* `FileSourceScanExec` physical operator is requested for [sendDriverMetrics](FileSourceScanExec.md#sendDriverMetrics)
+* `SubqueryBroadcastExec` physical operator is requested for [relationFuture](SubqueryBroadcastExec.md#relationFuture)
+* `SubqueryExec` physical operator is requested for [relationFuture](SubqueryExec.md#relationFuture)

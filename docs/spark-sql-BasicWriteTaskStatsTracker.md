@@ -2,7 +2,7 @@
 
 `BasicWriteTaskStatsTracker` is a concrete <<spark-sql-WriteTaskStatsTracker.md#, WriteTaskStatsTracker>>.
 
-`BasicWriteTaskStatsTracker` is <<creating-instance, created>> exclusively when `BasicWriteJobStatsTracker` is requested for <<spark-sql-BasicWriteJobStatsTracker.md#newTaskInstance, one>>.
+`BasicWriteTaskStatsTracker` is <<creating-instance, created>> exclusively when `BasicWriteJobStatsTracker` is requested for [one](BasicWriteJobStatsTracker.md#newTaskInstance).
 
 [[creating-instance]]
 [[hadoopConf]]

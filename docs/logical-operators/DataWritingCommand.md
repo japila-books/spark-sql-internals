@@ -117,7 +117,7 @@ The <<metrics, performance metrics>> are used when:
 basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 ----
 
-`basicWriteJobStatsTracker` simply creates and returns a new <<spark-sql-BasicWriteJobStatsTracker.md#, BasicWriteJobStatsTracker>> (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
+`basicWriteJobStatsTracker` simply creates and returns a new [BasicWriteJobStatsTracker](../BasicWriteJobStatsTracker.md) (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
 
 [NOTE]
 ====

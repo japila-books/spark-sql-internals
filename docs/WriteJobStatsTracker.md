@@ -33,4 +33,4 @@ Used when...FIXME
 |===
 
 [[implementations]]
-NOTE: <<spark-sql-BasicWriteJobStatsTracker.md#, BasicWriteJobStatsTracker>> is the one and only known implementation of the <<contract, WriteJobStatsTracker Contract>> in Apache Spark.
+NOTE: [BasicWriteJobStatsTracker](BasicWriteJobStatsTracker.md) is the one and only known implementation of the <<contract, WriteJobStatsTracker Contract>> in Apache Spark.

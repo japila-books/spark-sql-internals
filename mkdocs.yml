@@ -558,6 +558,7 @@ nav:
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - V1FallbackWriters: physical-operators/V1FallbackWriters.md
       - SQLMetric: physical-operators/SQLMetric.md
+      - SQLShuffleWriteMetricsReporter: physical-operators/SQLShuffleWriteMetricsReporter.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
         - Partitioning: physical-operators/Partitioning.md
@@ -931,8 +932,8 @@ nav:
         - WriteTaskStatsTracker: spark-sql-WriteTaskStatsTracker.md
         - BasicWriteTaskStatsTracker: spark-sql-BasicWriteTaskStatsTracker.md
       - WriteJobStatsTracker:
-        - WriteJobStatsTracker: spark-sql-WriteJobStatsTracker.md
-        - BasicWriteJobStatsTracker: spark-sql-BasicWriteJobStatsTracker.md
+        - WriteJobStatsTracker: WriteJobStatsTracker.md
+        - BasicWriteJobStatsTracker: BasicWriteJobStatsTracker.md
       - Logging: spark-logging.md
     - Performance Tuning and Debugging:
       - Performance Tuning: spark-sql-performance-tuning.md
