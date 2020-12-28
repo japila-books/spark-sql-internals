@@ -11,32 +11,52 @@ The following figure shows the relationship between different entities of Spark 
 
 It is therefore fair to say that `Dataset` consists of the following three elements:
 
-* [QueryExecution](QueryExecution.md) (with the parsed unanalyzed <<spark-sql-LogicalPlan.md#, LogicalPlan>> of a structured query)
+* [QueryExecution](QueryExecution.md) (with the parsed unanalyzed [LogicalPlan](logical-operators/LogicalPlan.md) of a structured query)
 
 * [Encoder](Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
 
 * [SparkSession](SparkSession.md)
 
-When <<creating-instance, created>>, `Dataset` takes such a 3-element tuple with a `SparkSession`, a `QueryExecution` and an `Encoder`.
+## Creating Instance
 
-`Dataset` is <<creating-instance, created>> when:
+`Dataset` takes the following when created:
 
-* <<apply, Dataset.apply>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>> with the [Encoder](Encoder.md) in a Scala implicit scope)
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="queryExecution"> [QueryExecution](QueryExecution.md)
+* <span id="encoder"> [Encoder](Encoder.md) of `T`
 
-* <<ofRows, Dataset.ofRows>> (for a <<spark-sql-LogicalPlan.md#, LogicalPlan>> and a <<SparkSession.md#, SparkSession>>)
+!!! note
+    `Dataset` can be created using [LogicalPlan](logical-operators/LogicalPlan.md) when [executed using SessionState](SessionState.md#executePlan).
+
+When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert analyzed phase is successful](QueryExecution.md#assertAnalyzed).
+
+`Dataset` is created when:
+
+* [Dataset.apply](#apply) (for a [LogicalPlan](logical-operators/LogicalPlan.md) and a [SparkSession](SparkSession.md) with the [Encoder](Encoder.md) in a Scala implicit scope)
+
+* [Dataset.ofRows](#ofRows) (for a [LogicalPlan](logical-operators/LogicalPlan.md) and a [SparkSession](SparkSession.md))
 
 * [Dataset.toDF](Dataset-untyped-transformations.md#toDF) untyped transformation is used
 
-* <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>>, <<spark-sql-Dataset-typed-transformations.md#randomSplit, Dataset.randomSplit>> and <<spark-sql-Dataset-typed-transformations.md#mapPartitions, Dataset.mapPartitions>> typed transformations are used
+* [Dataset.select](spark-sql-Dataset-typed-transformations.md#select), [Dataset.randomSplit](spark-sql-Dataset-typed-transformations.md#randomSplit) and [Dataset.mapPartitions](spark-sql-Dataset-typed-transformations.md#mapPartitions) typed transformations are used
 
 * [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) operator is used (that requests `KeyValueGroupedDataset` to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped))
 
-* <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>> and <<SparkSession.md#range, SparkSession.range>> operators are used
+* [SparkSession.emptyDataset](SparkSession.md#emptyDataset) and [SparkSession.range](SparkSession.md#range) operators are used
 
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
-* Spark Structured Streaming's `MicroBatchExecution` is requested to `runBatch`
+## <span id="writeTo"> writeTo
+
+```scala
+writeTo(
+  table: String): DataFrameWriterV2[T]
+```
+
+`writeTo` creates a [DataFrameWriterV2](DataFrameWriterV2.md) for the input table and this `Dataset`.
+
+## Others to be Reviewed
 
 Datasets are _lazy_ and structured query operators and expressions are only triggered when an action is invoked.
 
@@ -59,20 +79,6 @@ dataset.filter("value % 2 = 0").count
 ----
 
 The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to spark-sql-DataFrame.md[DataFrames] that were a set of index- or column name-based spark-sql-Row.md[Rows]).
-
-[NOTE]
-====
-`Dataset` was first introduced in Apache Spark *1.6.0* as an experimental feature, and has since turned itself into a fully supported API.
-
-As of Spark *2.0.0*, spark-sql-DataFrame.md[DataFrame] - the flagship data abstraction of previous versions of Spark SQL - is currently a _mere_ type alias for `Dataset[Row]`:
-
-[source, scala]
-----
-type DataFrame = Dataset[Row]
-----
-
-See https://github.com/apache/spark/blob/master/sql/core/src/main/scala/org/apache/spark/sql/package.scala#L45[package object sql].
-====
 
 `Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to spark-sql-DataFrame.md[DataFrame] makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
@@ -119,7 +125,7 @@ It is only with Datasets to have syntax and analysis checks at compile time (tha
 
 Using `Dataset` objects turns `DataFrames` of spark-sql-Row.md[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
-If however a spark-sql-LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the [QueryExecution](QueryExecution.md) plan.
+If however a logical-operators/LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the [QueryExecution](QueryExecution.md) plan.
 
 A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to a persistent storage.
 
@@ -167,7 +173,7 @@ Used when:
 Used when...FIXME
 
 ! `logicalPlan`
-a! [[logicalPlan]] Analyzed <<spark-sql-LogicalPlan.md#, logical plan>> with all <<Command.md#, logical commands>> executed and turned into a <<LocalRelation.md#creating-instance, LocalRelation>>.
+a! [[logicalPlan]] Analyzed <<logical-operators/LogicalPlan.md#, logical plan>> with all <<Command.md#, logical commands>> executed and turned into a <<LocalRelation.md#creating-instance, LocalRelation>>.
 
 [source, scala]
 ----
@@ -260,20 +266,6 @@ resolve(colName: String): NamedExpression
 
 CAUTION: FIXME
 
-=== [[creating-instance]] Creating Dataset Instance
-
-`Dataset` takes the following when created:
-
-* [[sparkSession]] [SparkSession](SparkSession.md)
-* [[queryExecution]] [QueryExecution](QueryExecution.md)
-* [[encoder]] [Encoder](Encoder.md) for the type `T` of the records
-
-NOTE: You can also create a `Dataset` using spark-sql-LogicalPlan.md[LogicalPlan] that is immediately SessionState.md#executePlan[executed using `SessionState`].
-
-Internally, `Dataset` requests <<queryExecution, QueryExecution>> to [analyze itself](QueryExecution.md#assertAnalyzed).
-
-`Dataset` initializes the <<internal-registries, internal registries and counters>>.
-
 === [[isLocal]] Is Dataset Local? -- `isLocal` Method
 
 [source, scala]
@@ -292,9 +284,9 @@ Internally, `isLocal` checks whether the logical query plan of a `Dataset` is Lo
 isStreaming: Boolean
 ----
 
-`isStreaming` is enabled (i.e. `true`) when the logical plan spark-sql-LogicalPlan.md#isStreaming[is streaming].
+`isStreaming` is enabled (i.e. `true`) when the logical plan logical-operators/LogicalPlan.md#isStreaming[is streaming].
 
-Internally, `isStreaming` takes the Dataset's spark-sql-LogicalPlan.md[logical plan] and gives spark-sql-LogicalPlan.md#isStreaming[whether the plan is streaming or not].
+Internally, `isStreaming` takes the Dataset's logical-operators/LogicalPlan.md[logical plan] and gives logical-operators/LogicalPlan.md#isStreaming[whether the plan is streaming or not].
 
 === [[Queryable]] Queryable
 
@@ -501,7 +493,7 @@ NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.md#sort, sort
 withPlan(logicalPlan: LogicalPlan): DataFrame
 ----
 
-`withPlan` simply uses <<ofRows, ofRows>> internal factory method to create a `DataFrame` for the input <<spark-sql-LogicalPlan.md#, LogicalPlan>> and the current <<sparkSession, SparkSession>>.
+`withPlan` simply uses <<ofRows, ofRows>> internal factory method to create a `DataFrame` for the input <<logical-operators/LogicalPlan.md#, LogicalPlan>> and the current <<sparkSession, SparkSession>>.
 
 NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 

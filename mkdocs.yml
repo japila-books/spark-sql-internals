@@ -918,9 +918,8 @@ nav:
       - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
       - Aggregator: Aggregator.md
     - Monitoring:
-      - Web UI and SQL Tab:
-        - SQLTab: SQLTab.md
-        - SQLListener: SQLListener.md
+      - SQLTab: SQLTab.md
+      - SQLListener: SQLListener.md
       - QueryExecutionListener: QueryExecutionListener.md
       - SQLAppStatusListener: SQLAppStatusListener.md
       - SQLAppStatusPlugin: SQLAppStatusPlugin.md

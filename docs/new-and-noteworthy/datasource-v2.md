@@ -2,8 +2,8 @@
 
 **DataSource V2** (_DataSource API V2_ or _Data Source V2_) is a new API for data sources in Spark SQL with the following abstractions:
 
+* [DataFrameWriterV2](../DataFrameWriterV2.md)
 * [SessionConfigSupport](../connector/SessionConfigSupport.md)
-
 * [InputPartition](../connector/InputPartition.md)
 
 DataSource V2 was tracked under [SPARK-15689 DataSource V2](https://issues.apache.org/jira/browse/SPARK-15689) and was marked as fixed in Apache Spark 2.3.0.
