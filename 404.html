@@ -10,11 +10,11 @@
       
       
       
-      
         <meta name="author" content="Jacek Laskowski">
       
+      
       <link rel="shortcut icon" href="/mastering-spark-sql-book/assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
@@ -22,10 +22,10 @@
       
     
     
-      <link rel="stylesheet" href="/mastering-spark-sql-book/assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="/mastering-spark-sql-book/assets/stylesheets/main.3b61ea93.min.css">
       
         
-        <link rel="stylesheet" href="/mastering-spark-sql-book/assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="/mastering-spark-sql-book/assets/stylesheets/palette.39b8e14a.min.css">
         
       
     
@@ -33,7 +33,7 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
       
@@ -59,6 +59,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -83,18 +84,20 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             The Internals of Spark SQL
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
             
               
             
           </span>
         </div>
-      
+      </div>
     </div>
     
       <label class="md-header-nav__button md-icon" for="__search">
@@ -136,7 +139,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    mastering-spark-sql-book
+    spark-sql-internals
   </div>
 </a>
       </div>
@@ -149,7 +152,6 @@
       
         
           
-
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
@@ -157,9 +159,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/." class="md-tabs__link">
         Home
       </a>
@@ -170,9 +175,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/new-and-noteworthy/adaptive-query-execution/" class="md-tabs__link">
         New &amp; Noteworthy
       </a>
@@ -183,9 +191,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/rdds/FileScanRDD/" class="md-tabs__link">
         RDDs
       </a>
@@ -196,9 +207,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/pyspark/Setup/" class="md-tabs__link">
         PySpark
       </a>
@@ -209,9 +223,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/demo/connecting-spark-sql-to-hive-metastore/" class="md-tabs__link">
         Demos
       </a>
@@ -222,9 +239,12 @@
         
   
   
+
+
+  
+  
+  
     <li class="md-tabs__item">
-      
-      
       <a href="/mastering-spark-sql-book/spark-sql/" class="md-tabs__link">
         Extras
       </a>
@@ -241,12 +261,18 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="https://jaceklaskowski.github.io/mastering-spark-sql-book/" title="The Internals of Spark SQL" class="md-nav__button md-logo" aria-label="The Internals of Spark SQL">
       
@@ -265,7 +291,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
-    mastering-spark-sql-book
+    spark-sql-internals
   </div>
 </a>
     </div>
@@ -277,9 +303,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    
     <label class="md-nav__link" for="nav-1">
       Home
       <span class="md-nav__icon md-icon"></span>
@@ -297,6 +327,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/." class="md-nav__link">
       Welcome
@@ -307,6 +338,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -321,9 +353,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-3" type="checkbox" id="nav-1-3" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-3" type="checkbox" id="nav-1-3" >
+    
     <label class="md-nav__link" for="nav-1-3">
       Connector API
       <span class="md-nav__icon md-icon"></span>
@@ -341,6 +377,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/" class="md-nav__link">
       Connector API
@@ -351,6 +388,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -365,6 +403,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/TableCapability/" class="md-nav__link">
       TableCapability
@@ -375,6 +414,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -389,6 +429,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SupportsDynamicOverwrite/" class="md-nav__link">
       SupportsDynamicOverwrite
@@ -399,6 +440,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -413,6 +455,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SupportsPushDownFilters/" class="md-nav__link">
       SupportsPushDownFilters
@@ -423,6 +466,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -437,6 +481,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SupportsRead/" class="md-nav__link">
       SupportsRead
@@ -447,6 +492,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -461,6 +507,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SupportsReportPartitioning/" class="md-nav__link">
       SupportsReportPartitioning
@@ -471,6 +518,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -485,6 +533,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SupportsTruncate/" class="md-nav__link">
       SupportsTruncate
@@ -495,6 +544,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -509,6 +559,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/ScanBuilder/" class="md-nav__link">
       ScanBuilder
@@ -519,6 +570,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -533,6 +585,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/BatchWrite/" class="md-nav__link">
       BatchWrite
@@ -543,6 +596,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -557,6 +611,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/DataWriter/" class="md-nav__link">
       DataWriter
@@ -567,6 +622,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -581,6 +637,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/Batch/" class="md-nav__link">
       Batch
@@ -591,6 +648,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -605,6 +663,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/PartitionReader/" class="md-nav__link">
       PartitionReader
@@ -615,6 +674,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -629,6 +689,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/FileTable/" class="md-nav__link">
       FileTable
@@ -639,6 +700,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -653,6 +715,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/V1Table/" class="md-nav__link">
       V1Table
@@ -663,6 +726,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -677,6 +741,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/TableHelper/" class="md-nav__link">
       TableHelper
@@ -687,6 +752,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -701,6 +767,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/SimpleTableProvider/" class="md-nav__link">
       SimpleTableProvider
@@ -711,6 +778,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -730,9 +798,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-4" type="checkbox" id="nav-1-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-4" type="checkbox" id="nav-1-4" >
+    
     <label class="md-nav__link" for="nav-1-4">
       Data Source API
       <span class="md-nav__icon md-icon"></span>
@@ -750,6 +822,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/DataSourceRegister/" class="md-nav__link">
       DataSourceRegister
@@ -760,6 +833,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -774,6 +848,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/RelationProvider/" class="md-nav__link">
       RelationProvider
@@ -784,6 +859,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -798,6 +874,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/BaseRelation/" class="md-nav__link">
       BaseRelation
@@ -808,6 +885,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -822,6 +900,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/CatalystScan/" class="md-nav__link">
       CatalystScan
@@ -832,6 +911,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -846,6 +926,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/PrunedFilteredScan/" class="md-nav__link">
       PrunedFilteredScan
@@ -856,6 +937,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -870,6 +952,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/TableScan/" class="md-nav__link">
       TableScan
@@ -880,6 +963,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -899,9 +983,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-5" type="checkbox" id="nav-1-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-5" type="checkbox" id="nav-1-5" >
+    
     <label class="md-nav__link" for="nav-1-5">
       Catalog Plugin API
       <span class="md-nav__icon md-icon"></span>
@@ -919,6 +1007,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/catalog/CatalogManager/" class="md-nav__link">
       CatalogManager
@@ -929,6 +1018,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -943,6 +1033,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/catalog/CatalogExtension/" class="md-nav__link">
       CatalogExtension
@@ -953,6 +1044,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -967,6 +1059,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/catalog/StagingTableCatalog/" class="md-nav__link">
       StagingTableCatalog
@@ -977,6 +1070,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -991,6 +1085,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/catalog/SupportsCatalogOptions/" class="md-nav__link">
       SupportsCatalogOptions
@@ -1001,6 +1096,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1015,9 +1111,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-5-9" type="checkbox" id="nav-1-5-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-5-9" type="checkbox" id="nav-1-5-9" >
+    
     <label class="md-nav__link" for="nav-1-5-9">
       Utilities
       <span class="md-nav__icon md-icon"></span>
@@ -1035,6 +1135,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/connector/catalog/Catalogs/" class="md-nav__link">
       Catalogs
@@ -1045,6 +1146,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1069,9 +1171,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-6" type="checkbox" id="nav-1-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-6" type="checkbox" id="nav-1-6" >
+    
     <label class="md-nav__link" for="nav-1-6">
       Structured Query Execution
       <span class="md-nav__icon md-icon"></span>
@@ -1089,6 +1195,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/QueryExecution/" class="md-nav__link">
       QueryExecution
@@ -1099,6 +1206,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1113,6 +1221,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SparkPlanner/" class="md-nav__link">
       SparkPlanner
@@ -1125,6 +1234,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SparkOptimizer/" class="md-nav__link">
       SparkOptimizer
@@ -1135,6 +1245,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1154,9 +1265,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-7" type="checkbox" id="nav-1-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-7" type="checkbox" id="nav-1-7" >
+    
     <label class="md-nav__link" for="nav-1-7">
       SparkSession
       <span class="md-nav__icon md-icon"></span>
@@ -1174,6 +1289,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SparkSession/" class="md-nav__link">
       SparkSession
@@ -1184,6 +1300,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1198,6 +1315,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SparkSessionExtensions/" class="md-nav__link">
       SparkSessionExtensions
@@ -1208,6 +1326,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1222,6 +1341,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SharedState/" class="md-nav__link">
       SharedState
@@ -1232,6 +1352,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1251,6 +1372,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/configuration-properties/" class="md-nav__link">
       Configuration Properties
@@ -1263,9 +1385,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-9" type="checkbox" id="nav-1-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-9" type="checkbox" id="nav-1-9" >
+    
     <label class="md-nav__link" for="nav-1-9">
       SQL Support
       <span class="md-nav__icon md-icon"></span>
@@ -1283,6 +1409,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/" class="md-nav__link">
       SQL Parsing Framework
@@ -1293,6 +1420,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1307,6 +1435,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/AbstractSqlParser/" class="md-nav__link">
       AbstractSqlParser
@@ -1317,6 +1446,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1331,6 +1461,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/CatalystSqlParser/" class="md-nav__link">
       CatalystSqlParser
@@ -1341,6 +1472,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1355,6 +1487,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/SparkSqlAstBuilder/" class="md-nav__link">
       SparkSqlAstBuilder
@@ -1365,6 +1498,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1379,6 +1513,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/LogicalExpressions/" class="md-nav__link">
       LogicalExpressions
@@ -1391,6 +1526,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/sql/Expressions/" class="md-nav__link">
       Expressions
@@ -1401,6 +1537,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1420,9 +1557,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10" type="checkbox" id="nav-1-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10" type="checkbox" id="nav-1-10" >
+    
     <label class="md-nav__link" for="nav-1-10">
       Logical Operators
       <span class="md-nav__icon md-icon"></span>
@@ -1440,6 +1581,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/LogicalPlan/" class="md-nav__link">
       LogicalPlan
@@ -1450,6 +1592,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1464,6 +1607,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Command/" class="md-nav__link">
       Command
@@ -1474,6 +1618,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1488,6 +1633,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/LeafNode/" class="md-nav__link">
       LeafNode
@@ -1498,6 +1644,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1512,6 +1659,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/OrderPreservingUnaryNode/" class="md-nav__link">
       OrderPreservingUnaryNode
@@ -1522,6 +1670,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1536,6 +1685,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/RepartitionOperation/" class="md-nav__link">
       RepartitionOperation
@@ -1546,6 +1696,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1560,6 +1711,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/SupportsSubquery/" class="md-nav__link">
       SupportsSubquery
@@ -1570,6 +1722,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1584,6 +1737,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/V2WriteCommand/" class="md-nav__link">
       V2WriteCommand
@@ -1596,9 +1750,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10-14" type="checkbox" id="nav-1-10-14" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10-14" type="checkbox" id="nav-1-10-14" >
+    
     <label class="md-nav__link" for="nav-1-10-14">
       Statistics and Hints
       <span class="md-nav__icon md-icon"></span>
@@ -1616,6 +1774,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Statistics/" class="md-nav__link">
       Statistics
@@ -1626,6 +1785,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1640,6 +1800,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/LogicalPlanStats/" class="md-nav__link">
       LogicalPlanStats
@@ -1650,6 +1811,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1664,6 +1826,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/SizeInBytesOnlyStatsPlanVisitor/" class="md-nav__link">
       SizeInBytesOnlyStatsPlanVisitor
@@ -1674,6 +1837,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1688,9 +1852,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10-14-7" type="checkbox" id="nav-1-10-14-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10-14-7" type="checkbox" id="nav-1-10-14-7" >
+    
     <label class="md-nav__link" for="nav-1-10-14-7">
       Estimation Utilities
       <span class="md-nav__icon md-icon"></span>
@@ -1708,6 +1876,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/AggregateEstimation/" class="md-nav__link">
       AggregateEstimation
@@ -1718,6 +1887,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1732,6 +1902,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/FilterEstimation/" class="md-nav__link">
       FilterEstimation
@@ -1744,6 +1915,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/JoinEstimation/" class="md-nav__link">
       JoinEstimation
@@ -1754,6 +1926,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1778,6 +1951,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Aggregate/" class="md-nav__link">
       Aggregate
@@ -1788,6 +1962,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1802,6 +1977,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/AlterTableRecoverPartitionsStatement/" class="md-nav__link">
       AlterTableRecoverPartitionsStatement
@@ -1812,6 +1988,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1826,6 +2003,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/AnalysisBarrier/" class="md-nav__link">
       AnalysisBarrier Leaf Logical Operator
@@ -1836,6 +2014,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1850,6 +2029,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/AnalyzeColumnStatement/" class="md-nav__link">
       AnalyzeColumnStatement
@@ -1860,6 +2040,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1874,6 +2055,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/AnalyzeTableCommand/" class="md-nav__link">
       AnalyzeTableCommand
@@ -1884,6 +2066,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1898,6 +2081,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/ClearCacheCommand/" class="md-nav__link">
       ClearCacheCommand
@@ -1908,6 +2092,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1922,6 +2107,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/CreateDataSourceTableAsSelectCommand/" class="md-nav__link">
       CreateDataSourceTableAsSelectCommand Logical Command
@@ -1932,6 +2118,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1946,6 +2133,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/CreateTable/" class="md-nav__link">
       CreateTable Logical Operator
@@ -1956,6 +2144,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1970,6 +2159,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/CreateTempViewUsing/" class="md-nav__link">
       CreateTempViewUsing Logical Command
@@ -1980,6 +2170,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -1994,6 +2185,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/CreateViewCommand/" class="md-nav__link">
       CreateViewCommand
@@ -2004,6 +2196,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2018,6 +2211,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/DataSourceV2ScanRelation/" class="md-nav__link">
       DataSourceV2ScanRelation
@@ -2028,6 +2222,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2042,6 +2237,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/DescribeColumnCommand/" class="md-nav__link">
       DescribeColumnCommand
@@ -2052,6 +2248,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2066,6 +2263,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/DescribeTableCommand/" class="md-nav__link">
       DescribeTableCommand
@@ -2076,6 +2274,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2090,6 +2289,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/DropTableCommand/" class="md-nav__link">
       DropTableCommand
@@ -2100,6 +2300,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2114,6 +2315,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Expand/" class="md-nav__link">
       Expand
@@ -2124,6 +2326,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2138,6 +2341,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/ExternalRDD/" class="md-nav__link">
       ExternalRDD Leaf Logical Operator
@@ -2148,6 +2352,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2162,6 +2367,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Generate/" class="md-nav__link">
       Generate
@@ -2172,6 +2378,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2186,6 +2393,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/GroupingSets/" class="md-nav__link">
       GroupingSets
@@ -2196,6 +2404,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2210,6 +2419,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/InMemoryRelation/" class="md-nav__link">
       InMemoryRelation
@@ -2220,6 +2430,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2234,6 +2445,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/InsertIntoDataSourceDirCommand/" class="md-nav__link">
       InsertIntoDataSourceDirCommand Logical Command
@@ -2244,6 +2456,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2258,6 +2471,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/InsertIntoHadoopFsRelationCommand/" class="md-nav__link">
       InsertIntoHadoopFsRelationCommand Logical Command
@@ -2268,6 +2482,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2282,6 +2497,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/InsertIntoTable/" class="md-nav__link">
       InsertIntoTable
@@ -2292,6 +2508,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2306,6 +2523,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Join/" class="md-nav__link">
       Join
@@ -2316,6 +2534,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2330,6 +2549,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/LogicalQueryStage/" class="md-nav__link">
       LogicalQueryStage
@@ -2340,6 +2560,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2354,6 +2575,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/LogicalRelation/" class="md-nav__link">
       LogicalRelation
@@ -2364,6 +2586,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2378,6 +2601,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/OneRowRelation/" class="md-nav__link">
       OneRowRelation
@@ -2388,6 +2612,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2402,6 +2627,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Pivot/" class="md-nav__link">
       Pivot Unary Logical Operator
@@ -2412,6 +2638,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2426,6 +2653,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Range/" class="md-nav__link">
       Range
@@ -2436,6 +2664,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2450,6 +2679,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/RepartitionOperation/#Repartition" class="md-nav__link">
       Repartition
@@ -2460,6 +2690,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2474,6 +2705,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/ResolvedHint/" class="md-nav__link">
       ResolvedHint
@@ -2484,6 +2716,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2498,6 +2731,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/SetCatalogAndNamespace/" class="md-nav__link">
       SetCatalogAndNamespace
@@ -2508,6 +2742,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2522,6 +2757,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/ShowCurrentNamespace/" class="md-nav__link">
       ShowCurrentNamespace
@@ -2532,6 +2768,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2546,6 +2783,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/ShowTables/" class="md-nav__link">
       ShowTables
@@ -2556,6 +2794,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2570,6 +2809,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Sort/" class="md-nav__link">
       Sort
@@ -2580,6 +2820,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2594,6 +2835,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/TruncateTableCommand/" class="md-nav__link">
       TruncateTableCommand
@@ -2604,6 +2846,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2618,6 +2861,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Union/" class="md-nav__link">
       Union
@@ -2628,6 +2872,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2642,6 +2887,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/UnresolvedHaving/" class="md-nav__link">
       UnresolvedHaving
@@ -2652,6 +2898,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2666,6 +2913,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/UnresolvedInlineTable/" class="md-nav__link">
       UnresolvedInlineTable
@@ -2676,6 +2924,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2690,6 +2939,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/UnresolvedTableValuedFunction/" class="md-nav__link">
       UnresolvedTableValuedFunction
@@ -2700,6 +2950,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2714,6 +2965,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/Window/" class="md-nav__link">
       Window
@@ -2724,6 +2976,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2738,6 +2991,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-operators/WriteToDataSourceV2/" class="md-nav__link">
       WriteToDataSourceV2 Logical Operator
@@ -2748,6 +3002,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2767,9 +3022,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11" type="checkbox" id="nav-1-11" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11" type="checkbox" id="nav-1-11" >
+    
     <label class="md-nav__link" for="nav-1-11">
       SparkSession Registries
       <span class="md-nav__icon md-icon"></span>
@@ -2787,9 +3046,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-1" type="checkbox" id="nav-1-11-1" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-1" type="checkbox" id="nav-1-11-1" >
+    
     <label class="md-nav__link" for="nav-1-11-1">
       Catalog
       <span class="md-nav__icon md-icon"></span>
@@ -2807,6 +3070,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/Catalog/" class="md-nav__link">
       Catalog
@@ -2817,6 +3081,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2836,6 +3101,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/ExecutionListenerManager/" class="md-nav__link">
       ExecutionListenerManager
@@ -2846,6 +3112,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2860,9 +3127,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-4" type="checkbox" id="nav-1-11-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-4" type="checkbox" id="nav-1-11-4" >
+    
     <label class="md-nav__link" for="nav-1-11-4">
       ExternalCatalog
       <span class="md-nav__icon md-icon"></span>
@@ -2880,6 +3151,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/ExternalCatalog/" class="md-nav__link">
       ExternalCatalog
@@ -2890,6 +3162,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2909,6 +3182,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FunctionRegistry/" class="md-nav__link">
       FunctionRegistry
@@ -2919,6 +3193,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2933,9 +3208,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-7" type="checkbox" id="nav-1-11-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-7" type="checkbox" id="nav-1-11-7" >
+    
     <label class="md-nav__link" for="nav-1-11-7">
       SessionCatalog
       <span class="md-nav__icon md-icon"></span>
@@ -2953,6 +3232,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SessionCatalog/" class="md-nav__link">
       SessionCatalog
@@ -2963,6 +3243,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -2977,6 +3258,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-CatalogStorageFormat/" class="md-nav__link">
       CatalogStorageFormat
@@ -2989,6 +3271,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-CatalogTablePartition/" class="md-nav__link">
       CatalogTablePartition
@@ -2999,6 +3282,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3018,6 +3302,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/V2SessionCatalog/" class="md-nav__link">
       V2SessionCatalog
@@ -3030,9 +3315,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-9" type="checkbox" id="nav-1-11-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-9" type="checkbox" id="nav-1-11-9" >
+    
     <label class="md-nav__link" for="nav-1-11-9">
       SessionState
       <span class="md-nav__icon md-icon"></span>
@@ -3050,6 +3339,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SessionState/" class="md-nav__link">
       SessionState
@@ -3062,6 +3352,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/BaseSessionStateBuilder/" class="md-nav__link">
       BaseSessionStateBuilder
@@ -3072,6 +3363,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3091,9 +3383,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-10" type="checkbox" id="nav-1-11-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-10" type="checkbox" id="nav-1-11-10" >
+    
     <label class="md-nav__link" for="nav-1-11-10">
       CacheManager
       <span class="md-nav__icon md-icon"></span>
@@ -3111,6 +3407,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/CacheManager/" class="md-nav__link">
       CacheManager
@@ -3121,6 +3418,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3140,6 +3438,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-RuntimeConfig/" class="md-nav__link">
       RuntimeConfig
@@ -3152,9 +3451,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-12" type="checkbox" id="nav-1-11-12" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11-12" type="checkbox" id="nav-1-11-12" >
+    
     <label class="md-nav__link" for="nav-1-11-12">
       SQLConf
       <span class="md-nav__icon md-icon"></span>
@@ -3172,6 +3475,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SQLConf/" class="md-nav__link">
       SQLConf
@@ -3184,6 +3488,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/StaticSQLConf/" class="md-nav__link">
       StaticSQLConf
@@ -3194,6 +3499,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3213,6 +3519,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/UDFRegistration/" class="md-nav__link">
       UDFRegistration
@@ -3230,9 +3537,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12" type="checkbox" id="nav-1-12" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12" type="checkbox" id="nav-1-12" >
+    
     <label class="md-nav__link" for="nav-1-12">
       Data Sources
       <span class="md-nav__icon md-icon"></span>
@@ -3250,9 +3561,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-1" type="checkbox" id="nav-1-12-1" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-1" type="checkbox" id="nav-1-12-1" >
+    
     <label class="md-nav__link" for="nav-1-12-1">
       Noop
       <span class="md-nav__icon md-icon"></span>
@@ -3270,6 +3585,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/noop/" class="md-nav__link">
       Noop Data Source
@@ -3280,6 +3596,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3294,6 +3611,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/noop/NoopTable/" class="md-nav__link">
       NoopTable
@@ -3304,6 +3622,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3318,6 +3637,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/noop/NoopBatchWrite/" class="md-nav__link">
       NoopBatchWrite
@@ -3328,6 +3648,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3347,9 +3668,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-2" type="checkbox" id="nav-1-12-2" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-2" type="checkbox" id="nav-1-12-2" >
+    
     <label class="md-nav__link" for="nav-1-12-2">
       Files
       <span class="md-nav__icon md-icon"></span>
@@ -3367,6 +3692,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FileScan/" class="md-nav__link">
       FileScan
@@ -3377,6 +3703,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3391,6 +3718,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FileDataSourceV2/" class="md-nav__link">
       FileDataSourceV2
@@ -3401,6 +3729,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3415,9 +3744,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-2-5" type="checkbox" id="nav-1-12-2-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-2-5" type="checkbox" id="nav-1-12-2-5" >
+    
     <label class="md-nav__link" for="nav-1-12-2-5">
       FileIndex
       <span class="md-nav__icon md-icon"></span>
@@ -3435,6 +3768,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FileIndex/" class="md-nav__link">
       FileIndex
@@ -3445,6 +3779,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3459,6 +3794,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/InMemoryFileIndex/" class="md-nav__link">
       InMemoryFileIndex
@@ -3471,6 +3807,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/PartitioningAwareFileIndex/" class="md-nav__link">
       PartitioningAwareFileIndex
@@ -3481,6 +3818,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3500,6 +3838,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FileFormatWriter/" class="md-nav__link">
       FileFormatWriter
@@ -3510,6 +3849,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3524,6 +3864,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/FileBatchWrite/" class="md-nav__link">
       FileBatchWrite
@@ -3534,6 +3875,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3548,6 +3890,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/PartitionedFile/" class="md-nav__link">
       PartitionedFile
@@ -3558,6 +3901,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3572,6 +3916,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/FileFormat/" class="md-nav__link">
       FileFormat
@@ -3582,6 +3927,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3601,9 +3947,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-3" type="checkbox" id="nav-1-12-3" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-3" type="checkbox" id="nav-1-12-3" >
+    
     <label class="md-nav__link" for="nav-1-12-3">
       Kafka
       <span class="md-nav__icon md-icon"></span>
@@ -3621,6 +3971,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/" class="md-nav__link">
       Kafka Data Source
@@ -3631,6 +3982,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3645,6 +3997,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaSourceProvider/" class="md-nav__link">
       KafkaSourceProvider
@@ -3655,6 +4008,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3669,6 +4023,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/options/" class="md-nav__link">
       Options
@@ -3679,6 +4034,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3693,6 +4049,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaBatch/" class="md-nav__link">
       KafkaBatch
@@ -3703,6 +4060,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3717,6 +4075,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaRelation/" class="md-nav__link">
       KafkaRelation
@@ -3729,9 +4088,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-3-10" type="checkbox" id="nav-1-12-3-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-3-10" type="checkbox" id="nav-1-12-3-10" >
+    
     <label class="md-nav__link" for="nav-1-12-3-10">
       KafkaSourceRDD
       <span class="md-nav__icon md-icon"></span>
@@ -3749,6 +4112,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaSourceRDD/" class="md-nav__link">
       KafkaSourceRDD
@@ -3759,6 +4123,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3778,6 +4143,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/ConsumerStrategy/" class="md-nav__link">
       ConsumerStrategy
@@ -3788,6 +4154,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3802,6 +4169,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaOffsetRangeLimit/" class="md-nav__link">
       KafkaOffsetRangeLimit
@@ -3812,6 +4180,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3826,6 +4195,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/InternalKafkaConsumer/" class="md-nav__link">
       InternalKafkaConsumer
@@ -3836,6 +4206,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3850,6 +4221,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/KafkaWriteTask/" class="md-nav__link">
       KafkaWriteTask
@@ -3862,6 +4234,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/kafka/JsonUtils/" class="md-nav__link">
       JsonUtils
@@ -3872,6 +4245,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3891,9 +4265,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-4" type="checkbox" id="nav-1-12-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-4" type="checkbox" id="nav-1-12-4" >
+    
     <label class="md-nav__link" for="nav-1-12-4">
       Avro
       <span class="md-nav__icon md-icon"></span>
@@ -3911,6 +4289,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/avro/" class="md-nav__link">
       Avro Data Source
@@ -3921,6 +4300,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3935,6 +4315,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/avro/AvroFileFormat/" class="md-nav__link">
       AvroFileFormat
@@ -3947,6 +4328,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/avro/CatalystDataToAvro/" class="md-nav__link">
       CatalystDataToAvro
@@ -3957,6 +4339,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -3976,9 +4359,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-5" type="checkbox" id="nav-1-12-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-5" type="checkbox" id="nav-1-12-5" >
+    
     <label class="md-nav__link" for="nav-1-12-5">
       JDBC
       <span class="md-nav__icon md-icon"></span>
@@ -3996,6 +4383,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/jdbc/" class="md-nav__link">
       JDBC Data Source
@@ -4006,6 +4394,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4020,6 +4409,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/jdbc/JdbcRelationProvider/" class="md-nav__link">
       JdbcRelationProvider
@@ -4030,6 +4420,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4044,6 +4435,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/jdbc/JDBCRDD/" class="md-nav__link">
       JDBCRDD
@@ -4056,6 +4448,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/jdbc/JdbcDialect/" class="md-nav__link">
       JdbcDialect
@@ -4066,6 +4459,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4085,9 +4479,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-6" type="checkbox" id="nav-1-12-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-6" type="checkbox" id="nav-1-12-6" >
+    
     <label class="md-nav__link" for="nav-1-12-6">
       Console
       <span class="md-nav__icon md-icon"></span>
@@ -4105,6 +4503,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-console/" class="md-nav__link">
       Console Data Source
@@ -4115,6 +4514,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4134,9 +4534,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-7" type="checkbox" id="nav-1-12-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-7" type="checkbox" id="nav-1-12-7" >
+    
     <label class="md-nav__link" for="nav-1-12-7">
       CSV
       <span class="md-nav__icon md-icon"></span>
@@ -4154,6 +4558,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/csv/CSVFileFormat/" class="md-nav__link">
       CSVFileFormat
@@ -4164,6 +4569,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4183,9 +4589,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-8" type="checkbox" id="nav-1-12-8" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-8" type="checkbox" id="nav-1-12-8" >
+    
     <label class="md-nav__link" for="nav-1-12-8">
       JSON
       <span class="md-nav__icon md-icon"></span>
@@ -4203,6 +4613,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/json/JsonFileFormat/" class="md-nav__link">
       JsonFileFormat
@@ -4213,6 +4624,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4232,9 +4644,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-9" type="checkbox" id="nav-1-12-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-9" type="checkbox" id="nav-1-12-9" >
+    
     <label class="md-nav__link" for="nav-1-12-9">
       ORC
       <span class="md-nav__icon md-icon"></span>
@@ -4252,6 +4668,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/orc/OrcScanBuilder/" class="md-nav__link">
       OrcScanBuilder
@@ -4262,6 +4679,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4281,9 +4699,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-10" type="checkbox" id="nav-1-12-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-10" type="checkbox" id="nav-1-12-10" >
+    
     <label class="md-nav__link" for="nav-1-12-10">
       Parquet
       <span class="md-nav__icon md-icon"></span>
@@ -4301,6 +4723,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/parquet/ParquetTable/" class="md-nav__link">
       ParquetTable
@@ -4311,6 +4734,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4325,6 +4749,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/parquet/ParquetFileFormat/" class="md-nav__link">
       ParquetFileFormat
@@ -4335,6 +4760,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4349,6 +4775,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/parquet/VectorizedParquetRecordReader/" class="md-nav__link">
       VectorizedParquetRecordReader
@@ -4361,6 +4788,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/datasources/parquet/VectorizedColumnReader/" class="md-nav__link">
       VectorizedColumnReader
@@ -4371,6 +4799,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4390,9 +4819,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-11" type="checkbox" id="nav-1-12-11" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-12-11" type="checkbox" id="nav-1-12-11" >
+    
     <label class="md-nav__link" for="nav-1-12-11">
       Text
       <span class="md-nav__icon md-icon"></span>
@@ -4408,6 +4841,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4432,9 +4866,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-13" type="checkbox" id="nav-1-13" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-13" type="checkbox" id="nav-1-13" >
+    
     <label class="md-nav__link" for="nav-1-13">
       Hive Integration
       <span class="md-nav__icon md-icon"></span>
@@ -4452,6 +4890,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/" class="md-nav__link">
       Hive Data Source
@@ -4462,6 +4901,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4476,6 +4916,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/spark-sql-hive-metastore/" class="md-nav__link">
       Hive Metastore
@@ -4486,6 +4927,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4500,6 +4942,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveFileFormat/" class="md-nav__link">
       HiveFileFormat
@@ -4512,9 +4955,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-13-6" type="checkbox" id="nav-1-13-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-13-6" type="checkbox" id="nav-1-13-6" >
+    
     <label class="md-nav__link" for="nav-1-13-6">
       HiveClient
       <span class="md-nav__icon md-icon"></span>
@@ -4532,6 +4979,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveClient/" class="md-nav__link">
       HiveClient
@@ -4542,6 +4990,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4561,6 +5010,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveUtils/" class="md-nav__link">
       HiveUtils
@@ -4571,6 +5021,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4585,6 +5036,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveTableRelation/" class="md-nav__link">
       HiveTableRelation
@@ -4595,6 +5047,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4609,6 +5062,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/SaveAsHiveFile/" class="md-nav__link">
       SaveAsHiveFile
@@ -4619,6 +5073,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4633,6 +5088,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/InsertIntoHiveTable/" class="md-nav__link">
       InsertIntoHiveTable
@@ -4643,6 +5099,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4657,6 +5114,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveTableScanExec/" class="md-nav__link">
       HiveTableScanExec
@@ -4667,6 +5125,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4681,6 +5140,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HadoopTableReader/" class="md-nav__link">
       HadoopTableReader
@@ -4691,6 +5151,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4705,6 +5166,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveExternalCatalog/" class="md-nav__link">
       HiveExternalCatalog
@@ -4715,6 +5177,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4729,6 +5192,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/HiveMetastoreCatalog/" class="md-nav__link">
       HiveMetastoreCatalog
@@ -4739,6 +5203,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4753,6 +5218,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/ResolveHiveSerdeTable/" class="md-nav__link">
       ResolveHiveSerdeTable
@@ -4765,6 +5231,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/hive/DetermineTableStats/" class="md-nav__link">
       DetermineTableStats
@@ -4775,6 +5242,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4794,9 +5262,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-14" type="checkbox" id="nav-1-14" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-14" type="checkbox" id="nav-1-14" >
+    
     <label class="md-nav__link" for="nav-1-14">
       Catalyst
       <span class="md-nav__icon md-icon"></span>
@@ -4814,6 +5286,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/catalyst/" class="md-nav__link">
       Tree Manipulation Framework
@@ -4824,6 +5297,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4838,6 +5312,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/catalyst/QueryPlan/" class="md-nav__link">
       QueryPlan
@@ -4848,6 +5323,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4862,6 +5338,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/catalyst/Rule/" class="md-nav__link">
       Rule
@@ -4872,6 +5349,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4886,6 +5364,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/catalyst/Optimizer/" class="md-nav__link">
       Optimizer
@@ -4896,6 +5375,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4915,9 +5395,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15" type="checkbox" id="nav-1-15" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15" type="checkbox" id="nav-1-15" >
+    
     <label class="md-nav__link" for="nav-1-15">
       Catalyst Expressions
       <span class="md-nav__icon md-icon"></span>
@@ -4935,6 +5419,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Expression/" class="md-nav__link">
       Expression
@@ -4945,6 +5430,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4959,6 +5445,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/PlanExpression/" class="md-nav__link">
       PlanExpression
@@ -4969,6 +5456,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -4983,6 +5471,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Projection/" class="md-nav__link">
       Projection
@@ -4993,6 +5482,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5007,6 +5497,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/InterpretedProjection/" class="md-nav__link">
       InterpretedProjection
@@ -5017,6 +5508,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5031,9 +5523,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15-9" type="checkbox" id="nav-1-15-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15-9" type="checkbox" id="nav-1-15-9" >
+    
     <label class="md-nav__link" for="nav-1-15-9">
       Concrete Expressions
       <span class="md-nav__icon md-icon"></span>
@@ -5051,6 +5547,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/AggregateExpression/" class="md-nav__link">
       AggregateExpression
@@ -5061,6 +5558,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5075,6 +5573,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/AggregateWindowFunction/" class="md-nav__link">
       AggregateWindowFunction
@@ -5085,6 +5584,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5099,6 +5599,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Alias/" class="md-nav__link">
       Alias
@@ -5109,6 +5610,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5123,6 +5625,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/BoundReference/" class="md-nav__link">
       BoundReference
@@ -5133,6 +5636,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5147,6 +5651,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Coalesce/" class="md-nav__link">
       Coalesce
@@ -5157,6 +5662,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5171,6 +5677,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/CollectionGenerator/" class="md-nav__link">
       CollectionGenerator
@@ -5181,6 +5688,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5195,6 +5703,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/CreateArray/" class="md-nav__link">
       CreateArray
@@ -5205,6 +5714,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5219,6 +5729,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/CreateNamedStructLike/" class="md-nav__link">
       CreateNamedStructLike
@@ -5229,6 +5740,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5243,6 +5755,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/CumeDist/" class="md-nav__link">
       CumeDist
@@ -5253,6 +5766,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5267,6 +5781,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/DynamicPruningExpression/" class="md-nav__link">
       DynamicPruningExpression
@@ -5277,6 +5792,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5291,6 +5807,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Exists/" class="md-nav__link">
       Exists
@@ -5301,6 +5818,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5315,6 +5833,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ExplodeBase/" class="md-nav__link">
       ExplodeBase
@@ -5325,6 +5844,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5339,6 +5859,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Generator/" class="md-nav__link">
       Generator
@@ -5349,6 +5870,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5363,6 +5885,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/GetArrayItem/" class="md-nav__link">
       GetArrayItem
@@ -5373,6 +5896,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5387,6 +5911,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/GetStructField/" class="md-nav__link">
       GetStructField
@@ -5397,6 +5922,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5411,9 +5937,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15-9-31" type="checkbox" id="nav-1-15-9-31" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-15-9-31" type="checkbox" id="nav-1-15-9-31" >
+    
     <label class="md-nav__link" for="nav-1-15-9-31">
       Higher-Order Functions
       <span class="md-nav__icon md-icon"></span>
@@ -5431,6 +5961,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/HigherOrderFunction/" class="md-nav__link">
       HigherOrderFunction
@@ -5441,6 +5972,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5455,6 +5987,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/MapBasedSimpleHigherOrderFunction/" class="md-nav__link">
       MapBasedSimpleHigherOrderFunction
@@ -5465,6 +5998,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5484,6 +6018,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ImperativeAggregate/" class="md-nav__link">
       ImperativeAggregate
@@ -5494,6 +6029,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5508,6 +6044,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Inline/" class="md-nav__link">
       Inline
@@ -5518,6 +6055,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5532,6 +6070,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/InSubquery/" class="md-nav__link">
       InSubquery
@@ -5542,6 +6081,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5556,6 +6096,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/JsonToStructs/" class="md-nav__link">
       JsonToStructs
@@ -5566,6 +6107,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5580,6 +6122,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ListQuery/" class="md-nav__link">
       ListQuery
@@ -5590,6 +6133,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5604,6 +6148,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/MonotonicallyIncreasingID/" class="md-nav__link">
       MonotonicallyIncreasingID
@@ -5614,6 +6159,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5628,6 +6174,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/NamedExpression/" class="md-nav__link">
       NamedExpression
@@ -5638,6 +6185,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5652,6 +6200,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/OffsetWindowFunction/" class="md-nav__link">
       OffsetWindowFunction
@@ -5662,6 +6211,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5676,6 +6226,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ParseToTimestamp/" class="md-nav__link">
       ParseToTimestamp
@@ -5686,6 +6237,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5700,6 +6252,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/RangePartitioning/" class="md-nav__link">
       RangePartitioning
@@ -5710,6 +6263,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5724,6 +6278,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ResolvedStar/" class="md-nav__link">
       ResolvedStar
@@ -5734,6 +6289,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5748,6 +6304,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/RuntimeReplaceable/" class="md-nav__link">
       RuntimeReplaceable
@@ -5758,6 +6315,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5772,6 +6330,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery/" class="md-nav__link">
       ScalarSubquery (ExecSubqueryExpression) Expression
@@ -5782,6 +6341,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5796,6 +6356,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/ScalaUDAF/" class="md-nav__link">
       ScalaUDAF
@@ -5806,6 +6367,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5820,6 +6382,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/SizeBasedWindowFunction/" class="md-nav__link">
       SizeBasedWindowFunction
@@ -5830,6 +6393,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5844,6 +6408,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/Stack/" class="md-nav__link">
       Stack
@@ -5854,6 +6419,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5868,6 +6434,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/StaticInvoke/" class="md-nav__link">
       StaticInvoke
@@ -5878,6 +6445,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5892,6 +6460,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/TimeWindow/" class="md-nav__link">
       TimeWindow
@@ -5902,6 +6471,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5916,6 +6486,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/TypedImperativeAggregate/" class="md-nav__link">
       TypedImperativeAggregate
@@ -5926,6 +6497,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5940,6 +6512,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/UnixTimestamp/" class="md-nav__link">
       UnixTimestamp
@@ -5950,6 +6523,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5964,6 +6538,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/UnresolvedFunction/" class="md-nav__link">
       UnresolvedFunction
@@ -5974,6 +6549,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -5988,6 +6564,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/UnresolvedOrdinal/" class="md-nav__link">
       UnresolvedOrdinal
@@ -5998,6 +6575,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6012,6 +6590,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/UnresolvedStar/" class="md-nav__link">
       UnresolvedStar
@@ -6022,6 +6601,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6036,6 +6616,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/WindowExpression/" class="md-nav__link">
       WindowExpression
@@ -6048,6 +6629,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/expressions/WindowFunction/" class="md-nav__link">
       WindowFunction
@@ -6058,6 +6640,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6082,9 +6665,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16" type="checkbox" id="nav-1-16" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16" type="checkbox" id="nav-1-16" >
+    
     <label class="md-nav__link" for="nav-1-16">
       Physical Operators
       <span class="md-nav__icon md-icon"></span>
@@ -6102,6 +6689,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SparkPlan/" class="md-nav__link">
       SparkPlan
@@ -6112,6 +6700,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6126,6 +6715,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BaseAggregateExec/" class="md-nav__link">
       BaseAggregateExec
@@ -6136,6 +6726,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6150,6 +6741,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BaseSubqueryExec/" class="md-nav__link">
       BaseSubqueryExec
@@ -6160,6 +6752,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6174,6 +6767,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/CodegenSupport/" class="md-nav__link">
       CodegenSupport
@@ -6184,6 +6778,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6198,6 +6793,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/DataSourceScanExec/" class="md-nav__link">
       DataSourceScanExec
@@ -6208,6 +6804,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6222,6 +6819,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/EvalPythonExec/" class="md-nav__link">
       EvalPythonExec
@@ -6232,6 +6830,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6246,6 +6845,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/LeafExecNode/" class="md-nav__link">
       LeafExecNode
@@ -6256,6 +6856,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6270,6 +6871,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ObjectConsumerExec/" class="md-nav__link">
       ObjectConsumerExec
@@ -6280,6 +6882,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6294,6 +6897,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/UnaryExecNode/" class="md-nav__link">
       UnaryExecNode
@@ -6304,6 +6908,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6318,6 +6923,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/V2TableWriteExec/" class="md-nav__link">
       V2TableWriteExec
@@ -6328,6 +6934,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6342,6 +6949,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SQLMetric/" class="md-nav__link">
       SQLMetric
@@ -6352,6 +6960,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6366,9 +6975,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23" type="checkbox" id="nav-1-16-23" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23" type="checkbox" id="nav-1-16-23" >
+    
     <label class="md-nav__link" for="nav-1-16-23">
       Distribution and Partitioning
       <span class="md-nav__icon md-icon"></span>
@@ -6386,6 +6999,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/Distribution/" class="md-nav__link">
       Distribution
@@ -6396,6 +7010,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6410,9 +7025,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23-3" type="checkbox" id="nav-1-16-23-3" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23-3" type="checkbox" id="nav-1-16-23-3" >
+    
     <label class="md-nav__link" for="nav-1-16-23-3">
       Distribution Specifications
       <span class="md-nav__icon md-icon"></span>
@@ -6430,6 +7049,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AllTuples/" class="md-nav__link">
       AllTuples
@@ -6440,6 +7060,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6454,6 +7075,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ClusteredDistribution/" class="md-nav__link">
       ClusteredDistribution
@@ -6464,6 +7086,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6478,6 +7101,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/OrderedDistribution/" class="md-nav__link">
       OrderedDistribution
@@ -6488,6 +7112,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6507,9 +7132,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23-4" type="checkbox" id="nav-1-16-23-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-23-4" type="checkbox" id="nav-1-16-23-4" >
+    
     <label class="md-nav__link" for="nav-1-16-23-4">
       Broadcast Modes
       <span class="md-nav__icon md-icon"></span>
@@ -6527,6 +7156,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BroadcastMode/" class="md-nav__link">
       BroadcastMode
@@ -6539,6 +7169,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/HashedRelationBroadcastMode/" class="md-nav__link">
       HashedRelationBroadcastMode
@@ -6549,6 +7180,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6573,9 +7205,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-24" type="checkbox" id="nav-1-16-24" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-24" type="checkbox" id="nav-1-16-24" >
+    
     <label class="md-nav__link" for="nav-1-16-24">
       HashedRelation
       <span class="md-nav__icon md-icon"></span>
@@ -6593,6 +7229,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/HashedRelation/" class="md-nav__link">
       HashedRelation
@@ -6605,6 +7242,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/LongHashedRelation/" class="md-nav__link">
       LongHashedRelation
@@ -6615,6 +7253,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6634,6 +7273,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/HashJoin/" class="md-nav__link">
       HashJoin
@@ -6644,6 +7284,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6658,6 +7299,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BatchWriteHelper/" class="md-nav__link">
       BatchWriteHelper
@@ -6668,6 +7310,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6682,9 +7325,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-29" type="checkbox" id="nav-1-16-29" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-29" type="checkbox" id="nav-1-16-29" >
+    
     <label class="md-nav__link" for="nav-1-16-29">
       Concrete Operators
       <span class="md-nav__icon md-icon"></span>
@@ -6702,6 +7349,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AdaptiveSparkPlanExec/" class="md-nav__link">
       AdaptiveSparkPlanExec
@@ -6712,6 +7360,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6726,6 +7375,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AppendDataExecV1/" class="md-nav__link">
       AppendDataExecV1
@@ -6736,6 +7386,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6750,6 +7401,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AtomicCreateTableAsSelectExec/" class="md-nav__link">
       AtomicCreateTableAsSelectExec
@@ -6760,6 +7412,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6774,6 +7427,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AtomicReplaceTableExec/" class="md-nav__link">
       AtomicReplaceTableExec
@@ -6784,6 +7438,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6798,6 +7453,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BlockingOperatorWithCodegen/" class="md-nav__link">
       BlockingOperatorWithCodegen
@@ -6808,6 +7464,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6822,6 +7479,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BroadcastHashJoinExec/" class="md-nav__link">
       BroadcastHashJoinExec Binary Physical Operator
@@ -6832,6 +7490,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6846,6 +7505,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/BroadcastQueryStageExec/" class="md-nav__link">
       BroadcastQueryStageExec
@@ -6856,6 +7516,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6870,6 +7531,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/CoalesceExec/" class="md-nav__link">
       CoalesceExec
@@ -6880,6 +7542,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6894,6 +7557,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/CollectLimitExec/" class="md-nav__link">
       CollectLimitExec
@@ -6904,6 +7568,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6918,6 +7583,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ColumnarToRowExec/" class="md-nav__link">
       ColumnarToRowExec
@@ -6928,6 +7594,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6942,6 +7609,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/CreateTableExec/" class="md-nav__link">
       CreateTableExec
@@ -6952,6 +7620,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6966,6 +7635,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/DataSourceV2ScanExec/" class="md-nav__link">
       DataSourceV2ScanExec
@@ -6976,6 +7646,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -6990,6 +7661,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/DebugExec/" class="md-nav__link">
       DebugExec
@@ -7000,6 +7672,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7014,6 +7687,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/DeserializeToObjectExec/" class="md-nav__link">
       DeserializeToObjectExec
@@ -7024,6 +7698,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7038,6 +7713,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/DropTableExec/" class="md-nav__link">
       DropTableExec
@@ -7048,6 +7724,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7062,6 +7739,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ExpandExec/" class="md-nav__link">
       ExpandExec
@@ -7072,6 +7750,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7086,6 +7765,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/FileSourceScanExec/" class="md-nav__link">
       FileSourceScanExec
@@ -7096,6 +7776,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7110,6 +7791,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/GenerateExec/" class="md-nav__link">
       GenerateExec Unary Physical Operator
@@ -7120,6 +7802,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7134,6 +7817,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/InMemoryTableScanExec/" class="md-nav__link">
       InMemoryTableScanExec Leaf Physical Operator
@@ -7144,6 +7828,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7158,6 +7843,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/InputRDDCodegen/" class="md-nav__link">
       InputRDDCodegen
@@ -7168,6 +7854,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7182,6 +7869,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/MapElementsExec/" class="md-nav__link">
       MapElementsExec
@@ -7192,6 +7880,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7206,6 +7895,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ObjectProducerExec/" class="md-nav__link">
       ObjectProducerExec
@@ -7216,6 +7906,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7230,6 +7921,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExecV1/" class="md-nav__link">
       OverwriteByExpressionExecV1
@@ -7240,6 +7932,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7254,6 +7947,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ProjectExec/" class="md-nav__link">
       ProjectExec Unary Physical Operator
@@ -7264,6 +7958,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7278,6 +7973,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/RDDScanExec/" class="md-nav__link">
       RDDScanExec
@@ -7288,6 +7984,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7302,6 +7999,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/RenameTableExec/" class="md-nav__link">
       RenameTableExec
@@ -7312,6 +8010,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7326,6 +8025,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ReplaceTableExec/" class="md-nav__link">
       ReplaceTableExec
@@ -7336,6 +8036,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7350,6 +8051,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/RowDataSourceScanExec/" class="md-nav__link">
       RowDataSourceScanExec Leaf Physical Operator
@@ -7360,6 +8062,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7374,6 +8077,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SampleExec/" class="md-nav__link">
       SampleExec
@@ -7384,6 +8088,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7398,6 +8103,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SetCatalogAndNamespaceExec/" class="md-nav__link">
       SetCatalogAndNamespaceExec
@@ -7408,6 +8114,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7422,6 +8129,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ShowTablesExec/" class="md-nav__link">
       ShowTablesExec
@@ -7432,6 +8140,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7446,6 +8155,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/ShuffledHashJoinExec/" class="md-nav__link">
       ShuffledHashJoinExec Binary Physical Operator for Shuffled Hash Join
@@ -7456,6 +8166,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7470,6 +8181,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SortAggregateExec/" class="md-nav__link">
       SortAggregateExec Aggregate Physical Operator
@@ -7480,6 +8192,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7494,6 +8207,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SortExec/" class="md-nav__link">
       SortExec Unary Physical Operator
@@ -7504,6 +8218,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7518,6 +8233,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/SubqueryBroadcastExec/" class="md-nav__link">
       SubqueryBroadcastExec
@@ -7528,6 +8244,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7542,9 +8259,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-29-71" type="checkbox" id="nav-1-16-29-71" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-16-29-71" type="checkbox" id="nav-1-16-29-71" >
+    
     <label class="md-nav__link" for="nav-1-16-29-71">
       WindowExec
       <span class="md-nav__icon md-icon"></span>
@@ -7562,6 +8283,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/WindowExec/" class="md-nav__link">
       WindowExec Unary Physical Operator
@@ -7574,6 +8296,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/AggregateProcessor/" class="md-nav__link">
       AggregateProcessor
@@ -7584,6 +8307,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7603,6 +8327,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-operators/WholeStageCodegenExec/" class="md-nav__link">
       WholeStageCodegenExec Unary Physical Operator
@@ -7613,6 +8338,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7637,9 +8363,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-17" type="checkbox" id="nav-1-17" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-17" type="checkbox" id="nav-1-17" >
+    
     <label class="md-nav__link" for="nav-1-17">
       Logical Analysis Rules
       <span class="md-nav__icon md-icon"></span>
@@ -7657,6 +8387,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/AliasViewChild/" class="md-nav__link">
       AliasViewChild
@@ -7667,6 +8398,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7681,6 +8413,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/DataSourceAnalysis/" class="md-nav__link">
       DataSourceAnalysis
@@ -7691,6 +8424,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7705,6 +8439,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/FindDataSourceTable/" class="md-nav__link">
       FindDataSourceTable
@@ -7715,6 +8450,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7729,6 +8465,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/InConversion/" class="md-nav__link">
       InConversion
@@ -7739,6 +8476,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7753,6 +8491,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/PreprocessTableCreation/" class="md-nav__link">
       PreprocessTableCreation
@@ -7763,6 +8502,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7777,6 +8517,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveAliases/" class="md-nav__link">
       ResolveAliases
@@ -7787,6 +8528,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7801,6 +8543,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveCoalesceHints/" class="md-nav__link">
       ResolveCoalesceHints
@@ -7811,6 +8554,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7825,6 +8569,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveFunctions/" class="md-nav__link">
       ResolveFunctions
@@ -7835,6 +8580,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7849,6 +8595,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveInsertInto/" class="md-nav__link">
       ResolveInsertInto
@@ -7859,6 +8606,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7873,6 +8621,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveMissingReferences/" class="md-nav__link">
       ResolveMissingReferences
@@ -7883,6 +8632,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7897,6 +8647,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveOutputRelation/" class="md-nav__link">
       ResolveOutputRelation
@@ -7907,6 +8658,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7921,6 +8673,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveRelations/" class="md-nav__link">
       ResolveRelations
@@ -7931,6 +8684,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7945,6 +8699,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveSQLOnFile/" class="md-nav__link">
       ResolveSQLOnFile
@@ -7955,6 +8710,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7969,6 +8725,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveTables/" class="md-nav__link">
       ResolveTables
@@ -7979,6 +8736,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -7993,6 +8751,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/ResolveWindowFrame/" class="md-nav__link">
       ResolveWindowFrame
@@ -8003,6 +8762,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8017,6 +8777,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/TableCapabilityCheck/" class="md-nav__link">
       TableCapabilityCheck
@@ -8027,6 +8788,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8041,6 +8803,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/UpdateOuterReferences/" class="md-nav__link">
       UpdateOuterReferences
@@ -8051,6 +8814,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8065,6 +8829,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-analysis-rules/WidenSetOperationTypes/" class="md-nav__link">
       WidenSetOperationTypes
@@ -8075,6 +8840,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8094,9 +8860,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-18" type="checkbox" id="nav-1-18" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-18" type="checkbox" id="nav-1-18" >
+    
     <label class="md-nav__link" for="nav-1-18">
       Logical Optimizations
       <span class="md-nav__icon md-icon"></span>
@@ -8114,6 +8884,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/CleanupDynamicPruningFilters/" class="md-nav__link">
       CleanupDynamicPruningFilters
@@ -8124,6 +8895,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8138,6 +8910,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/ColumnPruning/" class="md-nav__link">
       ColumnPruning
@@ -8148,6 +8921,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8162,6 +8936,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/CombineUnions/" class="md-nav__link">
       CombineUnions
@@ -8172,6 +8947,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8186,6 +8962,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/ConstantFolding/" class="md-nav__link">
       ConstantFolding
@@ -8196,6 +8973,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8210,6 +8988,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/DecimalAggregates/" class="md-nav__link">
       DecimalAggregates
@@ -8220,6 +8999,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8234,6 +9014,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/EliminateSerialization/" class="md-nav__link">
       EliminateSerialization
@@ -8244,6 +9025,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8258,6 +9040,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/EliminateView/" class="md-nav__link">
       EliminateView
@@ -8268,6 +9051,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8282,6 +9066,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/GetCurrentDatabase/" class="md-nav__link">
       GetCurrentDatabase
@@ -8292,6 +9077,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8306,6 +9092,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/LimitPushDown/" class="md-nav__link">
       LimitPushDown
@@ -8316,6 +9103,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8330,6 +9118,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/OptimizeIn/" class="md-nav__link">
       OptimizeIn
@@ -8340,6 +9129,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8354,6 +9144,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/OptimizeSubqueries/" class="md-nav__link">
       OptimizeSubqueries
@@ -8364,6 +9155,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8378,6 +9170,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/PropagateEmptyRelation/" class="md-nav__link">
       PropagateEmptyRelation
@@ -8388,6 +9181,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8402,6 +9196,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/PruneFilters/" class="md-nav__link">
       PruneFilters
@@ -8412,6 +9207,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8426,6 +9222,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/PushDownOperatorsToDataSource/" class="md-nav__link">
       PushDownOperatorsToDataSource
@@ -8436,6 +9233,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8450,6 +9248,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/PushDownPredicates/" class="md-nav__link">
       PushDownPredicates
@@ -8460,6 +9259,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8474,6 +9274,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/ReorderJoin/" class="md-nav__link">
       ReorderJoin
@@ -8484,6 +9285,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8498,6 +9300,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/ReplaceExceptWithAntiJoin/" class="md-nav__link">
       ReplaceExceptWithAntiJoin
@@ -8508,6 +9311,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8522,6 +9326,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/RewriteCorrelatedScalarSubquery/" class="md-nav__link">
       RewriteCorrelatedScalarSubquery
@@ -8532,6 +9337,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8546,6 +9352,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/RewritePredicateSubquery/" class="md-nav__link">
       RewritePredicateSubquery
@@ -8556,6 +9363,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8570,6 +9378,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/logical-optimizations/SimplifyCasts/" class="md-nav__link">
       SimplifyCasts
@@ -8580,6 +9389,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8599,9 +9409,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-19" type="checkbox" id="nav-1-19" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-19" type="checkbox" id="nav-1-19" >
+    
     <label class="md-nav__link" for="nav-1-19">
       Execution Planning Strategies
       <span class="md-nav__icon md-icon"></span>
@@ -8619,6 +9433,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/SparkStrategy/" class="md-nav__link">
       SparkStrategy
@@ -8629,6 +9444,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8643,6 +9459,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/BasicOperators/" class="md-nav__link">
       BasicOperators
@@ -8653,6 +9470,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8667,6 +9485,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/DataSourceV2Strategy/" class="md-nav__link">
       DataSourceV2Strategy
@@ -8677,6 +9496,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8691,6 +9511,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/InMemoryScans/" class="md-nav__link">
       InMemoryScans
@@ -8701,6 +9522,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8715,6 +9537,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/LogicalQueryStageStrategy/" class="md-nav__link">
       LogicalQueryStageStrategy
@@ -8727,6 +9550,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/execution-planning-strategies/SpecialLimits/" class="md-nav__link">
       SpecialLimits
@@ -8737,6 +9561,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8756,9 +9581,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-20" type="checkbox" id="nav-1-20" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-20" type="checkbox" id="nav-1-20" >
+    
     <label class="md-nav__link" for="nav-1-20">
       Physical Optimizations
       <span class="md-nav__icon md-icon"></span>
@@ -8776,6 +9605,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/AdaptiveExecutionContext/" class="md-nav__link">
       AdaptiveExecutionContext
@@ -8786,6 +9616,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8800,6 +9631,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/CoalesceShufflePartitions/" class="md-nav__link">
       CoalesceShufflePartitions
@@ -8810,6 +9642,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8824,6 +9657,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/EnsureRequirements/" class="md-nav__link">
       EnsureRequirements
@@ -8834,6 +9668,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8848,6 +9683,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/InsertAdaptiveSparkPlan/" class="md-nav__link">
       InsertAdaptiveSparkPlan
@@ -8858,6 +9694,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8872,6 +9709,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/OptimizeSkewedJoin/" class="md-nav__link">
       OptimizeSkewedJoin
@@ -8882,6 +9720,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8896,6 +9735,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/PlanDynamicPruningFilters/" class="md-nav__link">
       PlanDynamicPruningFilters
@@ -8906,6 +9746,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8920,6 +9761,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/ReuseAdaptiveSubquery/" class="md-nav__link">
       ReuseAdaptiveSubquery
@@ -8932,6 +9774,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/physical-optimizations/ReuseExchange/" class="md-nav__link">
       ReuseExchange
@@ -8942,6 +9785,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -8961,9 +9805,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-21" type="checkbox" id="nav-1-21" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-21" type="checkbox" id="nav-1-21" >
+    
     <label class="md-nav__link" for="nav-1-21">
       Project Tungsten
       <span class="md-nav__icon md-icon"></span>
@@ -8981,6 +9829,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-tungsten/" class="md-nav__link">
       Tungsten Execution Backend
@@ -8991,6 +9840,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9005,6 +9855,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/UnsafeRow/" class="md-nav__link">
       UnsafeRow
@@ -9017,9 +9868,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-21-4" type="checkbox" id="nav-1-21-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-21-4" type="checkbox" id="nav-1-21-4" >
+    
     <label class="md-nav__link" for="nav-1-21-4">
       AggregationIterator
       <span class="md-nav__icon md-icon"></span>
@@ -9037,6 +9892,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-AggregationIterator/" class="md-nav__link">
       AggregationIterator
@@ -9047,6 +9903,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9061,6 +9918,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-SortBasedAggregationIterator/" class="md-nav__link">
       SortBasedAggregationIterator
@@ -9071,6 +9929,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9090,6 +9949,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-CatalystSerde/" class="md-nav__link">
       CatalystSerde
@@ -9102,6 +9962,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-ExternalAppendOnlyUnsafeRowArray/" class="md-nav__link">
       ExternalAppendOnlyUnsafeRowArray
@@ -9112,6 +9973,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9131,6 +9993,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/DataSourceRDD/" class="md-nav__link">
       DataSourceRDD
@@ -9143,6 +10006,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/DataSourceRDDPartition/" class="md-nav__link">
       DataSourceRDDPartition
@@ -9153,6 +10017,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9172,9 +10037,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    
     <label class="md-nav__link" for="nav-2">
       New &amp; Noteworthy
       <span class="md-nav__icon md-icon"></span>
@@ -9192,6 +10061,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/new-and-noteworthy/adaptive-query-execution/" class="md-nav__link">
       Adaptive Query Execution
@@ -9202,6 +10072,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9216,6 +10087,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/new-and-noteworthy/dynamic-partition-pruning/" class="md-nav__link">
       Dynamic Partition Pruning
@@ -9226,6 +10098,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9240,6 +10113,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/new-and-noteworthy/hint-framework/" class="md-nav__link">
       Hint Framework
@@ -9250,6 +10124,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9264,6 +10139,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/new-and-noteworthy/observable-metrics/" class="md-nav__link">
       Observable Metrics
@@ -9274,6 +10150,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9288,6 +10165,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/new-and-noteworthy/datasource-v2/" class="md-nav__link">
       DataSource V2
@@ -9298,6 +10176,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9312,9 +10191,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-11" type="checkbox" id="nav-2-11" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-11" type="checkbox" id="nav-2-11" >
+    
     <label class="md-nav__link" for="nav-2-11">
       Vectorized Parquet Decoding
       <span class="md-nav__icon md-icon"></span>
@@ -9332,6 +10215,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/vectorized-parquet-reader/" class="md-nav__link">
       Vectorized Parquet Decoding
@@ -9344,9 +10228,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-11-2" type="checkbox" id="nav-2-11-2" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-11-2" type="checkbox" id="nav-2-11-2" >
+    
     <label class="md-nav__link" for="nav-2-11-2">
       ColumnVectors
       <span class="md-nav__icon md-icon"></span>
@@ -9364,6 +10252,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/ColumnVector/" class="md-nav__link">
       ColumnVector
@@ -9374,6 +10263,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9388,6 +10278,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/OnHeapColumnVector/" class="md-nav__link">
       OnHeapColumnVector
@@ -9398,6 +10289,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9422,6 +10314,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-dynamic-partition-inserts/" class="md-nav__link">
       Dynamic Partition Inserts
@@ -9432,6 +10325,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9446,9 +10340,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-14" type="checkbox" id="nav-2-14" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-14" type="checkbox" id="nav-2-14" >
+    
     <label class="md-nav__link" for="nav-2-14">
       Whole-Stage CodeGen
       <span class="md-nav__icon md-icon"></span>
@@ -9466,6 +10364,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/" class="md-nav__link">
       Whole-Stage CodeGen
@@ -9476,6 +10375,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9490,6 +10390,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/CodegenContext/" class="md-nav__link">
       CodegenContext
@@ -9500,6 +10401,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9514,6 +10416,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/Block/" class="md-nav__link">
       Block
@@ -9524,6 +10427,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9538,6 +10442,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/GenerateMutableProjection/" class="md-nav__link">
       GenerateMutableProjection
@@ -9548,6 +10453,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9562,6 +10468,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/GenerateOrdering/" class="md-nav__link">
       GenerateOrdering
@@ -9572,6 +10479,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9586,6 +10494,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/whole-stage-code-generation/GenerateSafeProjection/" class="md-nav__link">
       GenerateSafeProjection
@@ -9596,6 +10505,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9610,9 +10520,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-14-13" type="checkbox" id="nav-2-14-13" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-14-13" type="checkbox" id="nav-2-14-13" >
+    
     <label class="md-nav__link" for="nav-2-14-13">
       Subexpression Elimination
       <span class="md-nav__icon md-icon"></span>
@@ -9630,6 +10544,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-subexpression-elimination/" class="md-nav__link">
       Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
@@ -9640,6 +10555,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9664,9 +10580,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-15" type="checkbox" id="nav-2-15" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-15" type="checkbox" id="nav-2-15" >
+    
     <label class="md-nav__link" for="nav-2-15">
       Vectorized Query Execution
       <span class="md-nav__icon md-icon"></span>
@@ -9684,6 +10604,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-vectorized-query-execution/" class="md-nav__link">
       Vectorized Query Execution
@@ -9694,6 +10615,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9713,6 +10635,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-subqueries/" class="md-nav__link">
       Subqueries
@@ -9725,9 +10648,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-17" type="checkbox" id="nav-2-17" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-17" type="checkbox" id="nav-2-17" >
+    
     <label class="md-nav__link" for="nav-2-17">
       Cost-Based Optimization
       <span class="md-nav__icon md-icon"></span>
@@ -9745,6 +10672,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-cost-based-optimization/" class="md-nav__link">
       Cost-Based Optimization (CBO) of Logical Query Plan
@@ -9755,6 +10683,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9769,6 +10698,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-ColumnStat/" class="md-nav__link">
       ColumnStat
@@ -9779,6 +10709,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9798,9 +10729,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-18" type="checkbox" id="nav-2-18" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-18" type="checkbox" id="nav-2-18" >
+    
     <label class="md-nav__link" for="nav-2-18">
       Catalyst DSL
       <span class="md-nav__icon md-icon"></span>
@@ -9818,6 +10753,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/catalyst-dsl/" class="md-nav__link">
       Catalyst DSL
@@ -9828,6 +10764,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9852,9 +10789,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    
     <label class="md-nav__link" for="nav-3">
       RDDs
       <span class="md-nav__icon md-icon"></span>
@@ -9870,6 +10811,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9889,9 +10831,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    
     <label class="md-nav__link" for="nav-4">
       PySpark
       <span class="md-nav__icon md-icon"></span>
@@ -9909,6 +10855,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/Setup/" class="md-nav__link">
       Setup
@@ -9919,6 +10866,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9933,6 +10881,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/PythonWorkerFactory/" class="md-nav__link">
       PythonWorkerFactory
@@ -9943,6 +10892,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9957,6 +10907,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/PythonUDF/" class="md-nav__link">
       PythonUDF
@@ -9967,6 +10918,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -9981,6 +10933,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/AggregateInPandasExec/" class="md-nav__link">
       AggregateInPandasExec
@@ -9991,6 +10944,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10005,6 +10959,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/PythonForeachWriter/" class="md-nav__link">
       PythonForeachWriter
@@ -10017,9 +10972,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" >
+    
     <label class="md-nav__link" for="nav-4-10">
       Python Runners
       <span class="md-nav__icon md-icon"></span>
@@ -10037,6 +10996,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/BasePythonRunner/" class="md-nav__link">
       BasePythonRunner
@@ -10047,6 +11007,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10061,6 +11022,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/pyspark/ArrowPythonRunner/" class="md-nav__link">
       ArrowPythonRunner
@@ -10071,6 +11033,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10095,9 +11058,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    
     <label class="md-nav__link" for="nav-5">
       Demos
       <span class="md-nav__icon md-icon"></span>
@@ -10115,6 +11082,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/demo/connecting-spark-sql-to-hive-metastore/" class="md-nav__link">
       Connecting Spark SQL to Hive Metastore
@@ -10125,6 +11093,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10144,9 +11113,13 @@
       
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+    
     <label class="md-nav__link" for="nav-6">
       Extras
       <span class="md-nav__icon md-icon"></span>
@@ -10164,6 +11137,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql/" class="md-nav__link">
       Spark SQL
@@ -10174,6 +11148,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10188,6 +11163,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-dataset-vs-sql/" class="md-nav__link">
       Dataset and SQL
@@ -10198,6 +11174,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10212,9 +11189,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5" type="checkbox" id="nav-6-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5" type="checkbox" id="nav-6-5" >
+    
     <label class="md-nav__link" for="nav-6-5">
       Developing Applications
       <span class="md-nav__icon md-icon"></span>
@@ -10232,6 +11213,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-fundamentals-spark-application-development/" class="md-nav__link">
       Fundamentals of Spark SQL Application Development
@@ -10244,9 +11226,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-2" type="checkbox" id="nav-6-5-2" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-2" type="checkbox" id="nav-6-5-2" >
+    
     <label class="md-nav__link" for="nav-6-5-2">
       Dataset
       <span class="md-nav__icon md-icon"></span>
@@ -10264,6 +11250,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/Dataset/" class="md-nav__link">
       Dataset
@@ -10276,9 +11263,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-2-2" type="checkbox" id="nav-6-5-2-2" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-2-2" type="checkbox" id="nav-6-5-2-2" >
+    
     <label class="md-nav__link" for="nav-6-5-2-2">
       Encoder
       <span class="md-nav__icon md-icon"></span>
@@ -10296,6 +11287,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/Encoder/" class="md-nav__link">
       Encoder
@@ -10306,6 +11298,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10320,6 +11313,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/ExpressionEncoder/" class="md-nav__link">
       ExpressionEncoder
@@ -10332,6 +11326,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/RowEncoder/" class="md-nav__link">
       RowEncoder
@@ -10342,6 +11337,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10361,6 +11357,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-DataFrame/" class="md-nav__link">
       DataFrame &mdash; Dataset of Rows with RowEncoder
@@ -10371,6 +11368,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10390,9 +11388,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-3" type="checkbox" id="nav-6-5-3" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-3" type="checkbox" id="nav-6-5-3" >
+    
     <label class="md-nav__link" for="nav-6-5-3">
       Data Source API
       <span class="md-nav__icon md-icon"></span>
@@ -10410,6 +11412,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-datasource-api/" class="md-nav__link">
       DataSource API
@@ -10420,6 +11423,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10434,6 +11438,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/DataFrameWriter/" class="md-nav__link">
       DataFrameWriter
@@ -10444,6 +11449,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10458,6 +11464,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/CreateTableWriter/" class="md-nav__link">
       CreateTableWriter
@@ -10468,6 +11475,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10487,9 +11495,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-4" type="checkbox" id="nav-6-5-4" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-4" type="checkbox" id="nav-6-5-4" >
+    
     <label class="md-nav__link" for="nav-6-5-4">
       Dataset API
       <span class="md-nav__icon md-icon"></span>
@@ -10507,6 +11519,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-dataset-operators/" class="md-nav__link">
       Dataset API &mdash; Dataset Operators
@@ -10517,6 +11530,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10531,6 +11545,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/Dataset-untyped-transformations/" class="md-nav__link">
       Untyped Transformations
@@ -10541,6 +11556,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10555,6 +11571,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-Dataset-actions/" class="md-nav__link">
       Actions
@@ -10567,6 +11584,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-DataFrameNaFunctions/" class="md-nav__link">
       DataFrameNaFunctions &mdash; Working With Missing Data
@@ -10577,6 +11595,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10596,9 +11615,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-5" type="checkbox" id="nav-6-5-5" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-5" type="checkbox" id="nav-6-5-5" >
+    
     <label class="md-nav__link" for="nav-6-5-5">
       Column
       <span class="md-nav__icon md-icon"></span>
@@ -10616,6 +11639,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-Column/" class="md-nav__link">
       Column
@@ -10628,6 +11652,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-column-operators/" class="md-nav__link">
       Column Operators
@@ -10638,6 +11663,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10657,9 +11683,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-6" type="checkbox" id="nav-6-5-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-6" type="checkbox" id="nav-6-5-6" >
+    
     <label class="md-nav__link" for="nav-6-5-6">
       Basic Aggregation
       <span class="md-nav__icon md-icon"></span>
@@ -10677,6 +11707,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-basic-aggregation/" class="md-nav__link">
       Basic Aggregation &mdash; Typed and Untyped Grouping Operators
@@ -10689,6 +11720,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/RelationalGroupedDataset/" class="md-nav__link">
       RelationalGroupedDataset
@@ -10699,6 +11731,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10718,9 +11751,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-7" type="checkbox" id="nav-6-5-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-7" type="checkbox" id="nav-6-5-7" >
+    
     <label class="md-nav__link" for="nav-6-5-7">
       Joins
       <span class="md-nav__icon md-icon"></span>
@@ -10738,6 +11775,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-joins/" class="md-nav__link">
       Joins
@@ -10748,6 +11786,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10767,9 +11806,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-8" type="checkbox" id="nav-6-5-8" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-8" type="checkbox" id="nav-6-5-8" >
+    
     <label class="md-nav__link" for="nav-6-5-8">
       Window Aggregation
       <span class="md-nav__icon md-icon"></span>
@@ -10787,6 +11830,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-window-aggregation/" class="md-nav__link">
       Window Aggregation
@@ -10799,6 +11843,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-WindowSpec/" class="md-nav__link">
       WindowSpec
@@ -10809,6 +11854,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10828,9 +11874,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-9" type="checkbox" id="nav-6-5-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-9" type="checkbox" id="nav-6-5-9" >
+    
     <label class="md-nav__link" for="nav-6-5-9">
       Standard Functions
       <span class="md-nav__icon md-icon"></span>
@@ -10848,6 +11898,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-functions/" class="md-nav__link">
       Standard Functions
@@ -10858,6 +11909,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10872,6 +11924,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-functions-collection/" class="md-nav__link">
       Standard Functions for Collections (Collection Functions)
@@ -10882,6 +11935,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10896,6 +11950,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-functions-regular-functions/" class="md-nav__link">
       Regular Functions
@@ -10906,6 +11961,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10925,9 +11981,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-10" type="checkbox" id="nav-6-5-10" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-10" type="checkbox" id="nav-6-5-10" >
+    
     <label class="md-nav__link" for="nav-6-5-10">
       User-Defined Functions
       <span class="md-nav__icon md-icon"></span>
@@ -10945,6 +12005,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-udfs/" class="md-nav__link">
       User-Defined Functions
@@ -10957,6 +12018,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-udfs-blackbox/" class="md-nav__link">
       UDFs are Blackbox
@@ -10967,6 +12029,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -10986,9 +12049,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-11" type="checkbox" id="nav-6-5-11" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-11" type="checkbox" id="nav-6-5-11" >
+    
     <label class="md-nav__link" for="nav-6-5-11">
       Schema
       <span class="md-nav__icon md-icon"></span>
@@ -11006,6 +12073,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-schema/" class="md-nav__link">
       Schema &mdash; Structure of Data
@@ -11016,6 +12084,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11030,6 +12099,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-StructField/" class="md-nav__link">
       StructField &mdash; Single Field in StructType
@@ -11040,6 +12110,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11059,6 +12130,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-multi-dimensional-aggregation/" class="md-nav__link">
       Multi-Dimensional Aggregation
@@ -11071,9 +12143,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-13" type="checkbox" id="nav-6-5-13" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5-13" type="checkbox" id="nav-6-5-13" >
+    
     <label class="md-nav__link" for="nav-6-5-13">
       Caching and Persistence
       <span class="md-nav__icon md-icon"></span>
@@ -11091,6 +12167,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-caching-and-persistence/" class="md-nav__link">
       Caching and Persistence
@@ -11101,6 +12178,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11120,6 +12198,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-checkpointing/" class="md-nav__link">
       Checkpointing
@@ -11132,6 +12211,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/UserDefinedAggregateFunction/" class="md-nav__link">
       UserDefinedAggregateFunction
@@ -11142,6 +12222,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11161,9 +12242,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6" type="checkbox" id="nav-6-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6" type="checkbox" id="nav-6-6" >
+    
     <label class="md-nav__link" for="nav-6-6">
       Monitoring
       <span class="md-nav__icon md-icon"></span>
@@ -11181,9 +12266,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-1" type="checkbox" id="nav-6-6-1" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-1" type="checkbox" id="nav-6-6-1" >
+    
     <label class="md-nav__link" for="nav-6-6-1">
       Web UI and SQL Tab
       <span class="md-nav__icon md-icon"></span>
@@ -11201,6 +12290,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SQLTab/" class="md-nav__link">
       SQLTab
@@ -11211,6 +12301,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11230,6 +12321,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/QueryExecutionListener/" class="md-nav__link">
       QueryExecutionListener
@@ -11240,6 +12332,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11254,6 +12347,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SQLAppStatusPlugin/" class="md-nav__link">
       SQLAppStatusPlugin
@@ -11264,6 +12358,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11278,9 +12373,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-6" type="checkbox" id="nav-6-6-6" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-6" type="checkbox" id="nav-6-6-6" >
+    
     <label class="md-nav__link" for="nav-6-6-6">
       WriteTaskStats
       <span class="md-nav__icon md-icon"></span>
@@ -11298,6 +12397,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-WriteTaskStats/" class="md-nav__link">
       WriteTaskStats
@@ -11308,6 +12408,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11327,9 +12428,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-7" type="checkbox" id="nav-6-6-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-7" type="checkbox" id="nav-6-6-7" >
+    
     <label class="md-nav__link" for="nav-6-6-7">
       WriteTaskStatsTracker
       <span class="md-nav__icon md-icon"></span>
@@ -11347,6 +12452,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-WriteTaskStatsTracker/" class="md-nav__link">
       WriteTaskStatsTracker
@@ -11357,6 +12463,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11376,9 +12483,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-8" type="checkbox" id="nav-6-6-8" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6-8" type="checkbox" id="nav-6-6-8" >
+    
     <label class="md-nav__link" for="nav-6-6-8">
       WriteJobStatsTracker
       <span class="md-nav__icon md-icon"></span>
@@ -11396,6 +12507,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/WriteJobStatsTracker/" class="md-nav__link">
       WriteJobStatsTracker
@@ -11406,6 +12518,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11425,6 +12538,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-logging/" class="md-nav__link">
       Logging
@@ -11442,9 +12556,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-7" type="checkbox" id="nav-6-7" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-7" type="checkbox" id="nav-6-7" >
+    
     <label class="md-nav__link" for="nav-6-7">
       Performance Tuning and Debugging
       <span class="md-nav__icon md-icon"></span>
@@ -11462,6 +12580,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-performance-tuning/" class="md-nav__link">
       Performance Tuning
@@ -11474,6 +12593,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-performance-tuning-groupBy-aggregation/" class="md-nav__link">
       Case Study
@@ -11484,6 +12604,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11503,6 +12624,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/tools/spark-sql-spark-sql/" class="md-nav__link">
       Tools
@@ -11515,9 +12637,13 @@
           
 
 
+
+  
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-9" type="checkbox" id="nav-6-9" >
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-9" type="checkbox" id="nav-6-9" >
+    
     <label class="md-nav__link" for="nav-6-9">
       Spark Thrift Server
       <span class="md-nav__icon md-icon"></span>
@@ -11535,6 +12661,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/thrift-server/spark-sql-thrift-server/" class="md-nav__link">
       HiveThriftServer2
@@ -11545,6 +12672,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11564,6 +12692,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/SQLExecution/" class="md-nav__link">
       SQLExecution
@@ -11574,6 +12703,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11588,6 +12718,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/ShuffledRowRDD/" class="md-nav__link">
       ShuffledRowRDD
@@ -11598,6 +12729,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11612,6 +12744,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-Analyzer-CheckAnalysis/" class="md-nav__link">
       CheckAnalysis
@@ -11622,6 +12755,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11636,6 +12770,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-StatFunctions/" class="md-nav__link">
       StatFunctions
@@ -11646,6 +12781,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11660,6 +12796,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-PredicateHelper/" class="md-nav__link">
       PredicateHelper
@@ -11670,6 +12807,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11684,6 +12822,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-SchemaUtils/" class="md-nav__link">
       SchemaUtils
@@ -11694,6 +12833,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11708,6 +12848,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-ScalaReflection/" class="md-nav__link">
       ScalaReflection
@@ -11718,6 +12859,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11732,6 +12874,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-MultiInstanceRelation/" class="md-nav__link">
       MultiInstanceRelation
@@ -11742,6 +12885,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11756,6 +12900,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/TypeCoercionRule/" class="md-nav__link">
       TypeCoercionRule
@@ -11766,6 +12911,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11780,6 +12926,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-PhysicalAggregation/" class="md-nav__link">
       PhysicalAggregation
@@ -11790,6 +12937,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11804,6 +12952,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/KnownSizeEstimation/" class="md-nav__link">
       KnownSizeEstimation
@@ -11814,6 +12963,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11828,6 +12978,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-PartitioningUtils/" class="md-nav__link">
       PartitioningUtils
@@ -11838,6 +12989,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11852,6 +13004,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/spark-sql-CatalogUtils/" class="md-nav__link">
       CatalogUtils
@@ -11862,6 +13015,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11876,6 +13030,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/CompressionCodecs/" class="md-nav__link">
       CompressionCodecs
@@ -11886,6 +13041,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -11900,6 +13056,7 @@
           
 
 
+
   <li class="md-nav__item">
     <a href="/mastering-spark-sql-book/PushDownUtils/" class="md-nav__link">
       PushDownUtils
@@ -11910,6 +13067,7 @@
           
           
           
+
 
 
   <li class="md-nav__item">
@@ -12002,15 +13160,15 @@
       
     </div>
     
-      <script src="/mastering-spark-sql-book/assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="/mastering-spark-sql-book/assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="/mastering-spark-sql-book/assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="/mastering-spark-sql-book/assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "/mastering-spark-sql-book/",
           features: ['navigation.tabs', 'navigation.instant'],
           search: Object.assign({
-            worker: "/mastering-spark-sql-book/assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "/mastering-spark-sql-book/assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
