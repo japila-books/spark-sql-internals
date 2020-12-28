@@ -79,7 +79,8 @@ extra:
     api: https://docs.oracle.com/en/java/javase/11/docs/api
   scala:
     version: 2.12.2
-    doc: https://www.scala-lang.org/api/2.12.2
+    api: https://www.scala-lang.org/api/2.12.2
+    docs: https://docs.scala-lang.org/
   kafka:
     version: 2.4.1
     doc: https://kafka.apache.org/docs/2.4.1/api
@@ -145,6 +146,7 @@ nav:
     - Catalog Plugin API:
       - CatalogManager: connector/catalog/CatalogManager.md
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
+      - CatalogHelper: connector/catalog/CatalogHelper.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
       - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
@@ -845,6 +847,7 @@ nav:
       - ArrowPythonRunner: pyspark/ArrowPythonRunner.md
       - PythonUDFRunner: pyspark/PythonUDFRunner.md
   - Demos:
+    - Developing CatalogPlugin: demo/developing-catalogplugin.md
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
   - Extras:

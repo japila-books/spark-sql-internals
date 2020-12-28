@@ -1,3 +1,3 @@
-# DropNamespaceExec
+# DropNamespaceExec Physical Command
 
-`DropNamespaceExec` is...FIXME
+`DropNamespaceExec` is a [V2CommandExec](V2CommandExec.md).

@@ -8,11 +8,13 @@ load(
   conf: SQLConf): CatalogPlugin
 ```
 
-`load` finds the class name of the [CatalogPlugin](CatalogPlugin.md) in the given [SQLConf](../../SQLConf.md) using `spark.sql.catalog.[name]` key.
+`load` finds the class name of the [CatalogPlugin](CatalogPlugin.md) in the given [SQLConf](../../SQLConf.md) by `spark.sql.catalog.[name]` key.
 
 `load` loads the class and makes sure that it is a [CatalogPlugin](CatalogPlugin.md).
 
 In the end, `load` creates a new instance (using a public no-arg constructor) and requests the `CatalogPlugin` to [initialize](CatalogPlugin.md#initialize) (with the given name and all options that use `spark.sql.catalog.[name]` prefix).
+
+### Exceptions
 
  `load` throws a `CatalogNotFoundException` when the `spark.sql.catalog.[name]` key could not be found:
 
@@ -26,4 +28,8 @@ Catalog '[name]' plugin class not found: spark.sql.catalog.[name] is not defined
 Plugin class for catalog '[name]' does not implement CatalogPlugin: [pluginClassName]
 ```
 
-`load` is used when `CatalogManager` is requested to [look up a catalog by name](CatalogManager.md#catalog) or [loadV2SessionCatalog](CatalogManager.md#loadV2SessionCatalog).
+### Usage
+
+`load` is used when:
+
+* `CatalogManager` is requested to [look up a catalog by name](CatalogManager.md#catalog) and [loadV2SessionCatalog](CatalogManager.md#loadV2SessionCatalog)

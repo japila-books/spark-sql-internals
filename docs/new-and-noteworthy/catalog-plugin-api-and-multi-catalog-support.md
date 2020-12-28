@@ -9,6 +9,10 @@ Main abstractions:
 * [USE NAMESPACE](../sql/AstBuilder.md#visitUse) SQL statement
 * [SHOW CURRENT NAMESPACE](../sql/AstBuilder.md#visitShowCurrentNamespace) SQL statement
 
+## Demo
+
+* [Developing CatalogPlugin](../demo/developing-catalogplugin.md)
+
 ## Example
 
 ```sql

@@ -1,22 +1,30 @@
 # CatalogPlugin
 
-`CatalogPlugin` is an [abstraction](#contract) of [catalogs](#implementations).
+`CatalogPlugin` is an [abstraction](#contract) of [external table catalogs](#implementations).
+
+!!! note "Demo: Developing CatalogPlugin"
+    Learn more in [Demo: Developing CatalogPlugin](../../demo/developing-catalogplugin.md).
+
+!!! note "CatalogHelper"
+    [CatalogHelper](CatalogHelper.md) is a Scala implicit class of `CatalogPlugin` with extensions methods.
 
 ## Contract
 
-### <span id="defaultNamespace"> Multi-Part Namespace
+### <span id="defaultNamespace"> Default Namespace
 
 ```java
 String[] defaultNamespace()
 ```
 
-A multi-part namespace
+Default namespace
 
 Default: (empty)
 
-Used when `CatalogManager` is requested for the [current namespace](CatalogManager.md#currentNamespace)
+Used when:
 
-### initialize
+* `CatalogManager` is requested for the [current namespace](CatalogManager.md#currentNamespace)
+
+### <span id="initialize"> Initializing CatalogPlugin
 
 ```java
 void initialize(
@@ -24,9 +32,11 @@ void initialize(
   CaseInsensitiveStringMap options)
 ```
 
-Used when `Catalogs` utility is requested to [load a catalog by name](Catalogs.md#load)
+Used when:
 
-### Name
+* `Catalogs` utility is used to [load a catalog by name](Catalogs.md#load)
+
+### <span id="name"> Name
 
 ```java
 String name()

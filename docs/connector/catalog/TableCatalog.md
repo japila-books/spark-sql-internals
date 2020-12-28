@@ -59,7 +59,7 @@ Used when the following commands are executed:
 * [RefreshTableExec](../../physical-operators/RefreshTableExec.md)
 * [RenameTableExec](../../physical-operators/RenameTableExec.md)
 
-### <span id="listTables"> listTables
+### <span id="listTables"> Listing Tables
 
 ```java
 Identifier[] listTables(

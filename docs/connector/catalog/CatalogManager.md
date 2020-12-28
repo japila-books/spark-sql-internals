@@ -8,7 +8,9 @@
 * [Default Session Catalog](#defaultSessionCatalog)
 * <span id="v1SessionCatalog"> [SessionCatalog](../../SessionCatalog.md)
 
-`CatalogManager` is created when `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager).
+`CatalogManager` is created when:
+
+* `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager)
 
 ## <span id="defaultSessionCatalog"> Default Session Catalog
 
@@ -100,7 +102,7 @@ Only if the names are different, `setCurrentCatalog` makes it [_currentCatalogNa
 
 `setCurrentCatalog` is used when [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed.
 
-## <span id="catalog"> Looking Up CatalogPlugin by Name
+## <span id="catalog"> Finding CatalogPlugin by Name
 
 ```scala
 catalog(
@@ -130,7 +132,7 @@ isCatalogRegistered(
 
 `isCatalogRegistered` is used when `Analyzer` is requested to [expandRelationName](../../Analyzer.md#expandRelationName).
 
-## <span id="v2SessionCatalog"> v2SessionCatalog Method
+## <span id="v2SessionCatalog"> v2SessionCatalog
 
 ```scala
 v2SessionCatalog: CatalogPlugin
@@ -146,7 +148,7 @@ v2SessionCatalog: CatalogPlugin
 
 * `CatalogAndIdentifier` utility is requested to extract a CatalogPlugin and an identifier from a multi-part name (`unapply`)
 
-## <span id="loadV2SessionCatalog"> loadV2SessionCatalog Internal Method
+## <span id="loadV2SessionCatalog"> loadV2SessionCatalog
 
 ```scala
 loadV2SessionCatalog(): CatalogPlugin
@@ -156,4 +158,6 @@ loadV2SessionCatalog(): CatalogPlugin
 
 If it is of type [CatalogExtension](CatalogExtension.md), `loadV2SessionCatalog` requests it to [setDelegateCatalog](CatalogExtension.md#setDelegateCatalog) with the [defaultSessionCatalog](#defaultSessionCatalog).
 
-`loadV2SessionCatalog` is used when `CatalogManager` is requested for a [CatalogPlugin](#v2SessionCatalog).
+`loadV2SessionCatalog` is used when:
+
+* `CatalogManager` is requested for a [CatalogPlugin](#v2SessionCatalog)

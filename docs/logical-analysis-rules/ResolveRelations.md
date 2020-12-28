@@ -1,4 +1,4 @@
-# ResolveRelations Logical Resolution Rule -- Resolving UnresolvedRelations With Tables in Catalog
+# ResolveRelations Logical Resolution Rule
 
 `ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
 
