@@ -8,7 +8,7 @@ site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
 # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
-repo_name: mastering-spark-sql-book
+repo_name: spark-sql-internals
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
 
 copyright: |
