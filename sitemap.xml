@@ -192,6 +192,10 @@
      <lastmod>2020-12-28</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogHelper/</loc>
+     <lastmod>2020-12-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/catalog/CatalogExtension/</loc>
      <lastmod>2020-12-28</lastmod>
      <changefreq>daily</changefreq>
@@ -2745,6 +2749,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonUDFRunner/</loc>
+     <lastmod>2020-12-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/demo/developing-catalogplugin/</loc>
      <lastmod>2020-12-28</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
