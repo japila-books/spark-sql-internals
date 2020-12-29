@@ -1,21 +1,20 @@
-# Dataset &mdash; Structured Query with Data Encoder
+# Dataset
 
-`Dataset[T]` is a strongly-typed data structure that represents a structured query.
+`Dataset[T]` is a strongly-typed data structure that represents a structured query over rows of `T` type.
 
-!!! note
-    A structured query can be written using SQL or [Dataset API](spark-sql-dataset-operators.md).
+`Dataset` is created using [SQL](sql/index.md) or [Dataset](spark-sql-dataset-operators.md) high-level declarative "languages".
 
-The following figure shows the relationship between different entities of Spark SQL that all together give the `Dataset` data structure.
+The following figure shows the relationship of low-level entities of Spark SQL that all together build up the `Dataset` data structure.
 
 ![Dataset's Internals](images/spark-sql-Dataset.png)
 
-It is therefore fair to say that `Dataset` consists of the following three elements:
+It is fair to say that `Dataset` is a Spark SQL developer-friendly layer over the following three low-level entities:
 
-* [QueryExecution](QueryExecution.md) (with the parsed unanalyzed [LogicalPlan](logical-operators/LogicalPlan.md) of a structured query)
+1. [QueryExecution](QueryExecution.md) (with the parsed yet unanalyzed [LogicalPlan](logical-operators/LogicalPlan.md) of a structured query)
 
-* [Encoder](Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
+1. [Encoder](Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
 
-* [SparkSession](SparkSession.md)
+1. [SparkSession](SparkSession.md)
 
 ## Creating Instance
 
@@ -55,6 +54,14 @@ writeTo(
 ```
 
 `writeTo` creates a [DataFrameWriterV2](DataFrameWriterV2.md) for the input table and this `Dataset`.
+
+## <span id="write"> write
+
+```scala
+write: DataFrameWriter[T]
+```
+
+`write` creates a [DataFrameWriter](DataFrameWriter.md) for this `Dataset`.
 
 ## Others to be Reviewed
 

@@ -1,6 +1,96 @@
 # DataFrameWriter
 
-`DataFrameWriter` is the <<methods, interface>> to describe how data (as the result of executing a structured query) should be <<save, saved to an external data source>>.
+`DataFrameWriter[T]` is a high-level API for Spark SQL developers to describe "write path" of a structured query over rows of `T` type (i.e. how to [save a Dataset](#save) to a data source).
+
+`DataFrameWriter` is available using [Dataset.write](Dataset.md#write) operator.
+
+## Creating Instance
+
+`DataFrameWriter` takes the following to be created:
+
+* <span id="ds"> [Dataset](Dataset.md)
+
+`DataFrameWriter` is created when:
+
+* [Dataset.write](Dataset.md#write) operator is used
+
+## <span id="insertInto"> insertInto
+
+```scala
+insertInto(
+  tableName: String): Unit
+```
+
+`insertInto` requests the [DataFrame](#df) for the [SparkSession](Dataset.md#sparkSession).
+
+`insertInto` tries to [look up the TableProvider](#lookupV2Provider) for the [data source](#source).
+
+`insertInto` requests the [ParserInterface](sql/ParserInterface.md) to [parse](sql/ParserInterface.md#parseMultipartIdentifier) the `tableName` identifier (possibly multi-part).
+
+In the end, `insertInto` uses the [modern](#insertInto-CatalogPlugin) or the [legacy](#insertInto-TableIdentifier) insert paths based on...FIXME
+
+`insertInto` [asserts that not write is not bucketed](#assertNotBucketed) with **insertInto** operation name.
+
+`insertInto` throws an `AnalysisException` when the [partitioningColumns](#partitioningColumns) are defined:
+
+```text
+insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
+```
+
+### <span id="insertInto-CatalogPlugin"> Modern Insert Path (CatalogPlugin)
+
+```scala
+insertInto(
+  catalog: CatalogPlugin,
+  ident: Identifier): Unit
+```
+
+`insertInto`...FIXME
+
+### <span id="insertInto-TableIdentifier"> Legacy Insert Path (TableIdentifier)
+
+```scala
+insertInto(
+  tableIdent: TableIdentifier): Unit
+```
+
+`insertInto`...FIXME
+
+## <span id="save"> save
+
+```scala
+save(): Unit
+save(
+  path: String): Unit
+```
+
+Saves a `DataFrame` (the result of executing a structured query) to a data source.
+
+Internally, `save` uses `DataSource` to [look up the class of the requested data source](DataSource.md#lookupDataSource) (for the [source](#source) option and the [SQLConf](SessionState.md#conf)).
+
+!!! note
+    `save` uses [SparkSession](Dataset.md#sparkSession) to access the [SessionState](SparkSession.md#sessionState) and in turn the [SQLConf](SessionState.md#conf).
+
+    ```text
+    val df: DataFrame = ???
+    df.sparkSession.sessionState.conf
+    ```
+
+`save`...FIXME
+
+`save` throws an `AnalysisException` when requested to save to Hive data source (the [source](#source) is `hive`):
+
+```text
+Hive data source can only be used with tables, you can not write files of Hive data source directly.
+```
+
+`save` throws an `AnalysisException` when [bucketing is used](#assertNotBucketed) (the [numBuckets](#numBuckets) or [sortColumnNames](#sortColumnNames) options are defined):
+
+```text
+'[operation]' does not support bucketing right now
+```
+
+## Review Me
 
 [[methods]]
 .DataFrameWriter API / Writing Operators
@@ -292,43 +382,6 @@ In the end, `saveAsTable` branches off per whether the table exists or not and t
 | _anything_
 | <<createTable, createTable>>
 |===
-
-## <span id="save"> Saving Rows of Structured Query (DataFrame) to Data Source
-
-```scala
-save(): Unit
-save(
-  path: String): Unit
-```
-
-Saves a `DataFrame` (the result of executing a structured query) to a data source.
-
-Internally, `save` uses `DataSource` to [look up the class of the requested data source](DataSource.md#lookupDataSource) (for the [source](#source) option and the [SQLConf](SessionState.md#conf)).
-
-[NOTE]
-====
-`save` uses <<Dataset.md#sparkSession, SparkSession>> to access the <<SparkSession.md#sessionState, SessionState>> that is in turn used to access the <<SessionState.md#conf, SQLConf>>.
-
-[source, scala]
-----
-val df: DataFrame = ???
-df.sparkSession.sessionState.conf
-----
-====
-
-`save`...FIXME
-
-`save` does not support saving to Hive (i.e. the <<source, source>> is `hive`) and throws an `AnalysisException` when requested so.
-
-```
-Hive data source can only be used with tables, you can not write files of Hive data source directly.
-```
-
-`save` <<assertNotBucketed, does not support bucketing>> (i.e. when the <<numBuckets, numBuckets>> or <<sortColumnNames, sortColumnNames>> options are defined) and throws an `AnalysisException` when requested so.
-
-```
-'[operation]' does not support bucketing right now
-```
 
 === [[jdbc-internals]] Saving Data to Table Using JDBC Data Source -- `jdbc` Method
 
