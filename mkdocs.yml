@@ -831,6 +831,7 @@ nav:
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - High-Level APIs:
     - Dataset: Dataset.md
+    - DataFrameReader: DataFrameReader.md
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
   - PySpark:
@@ -868,7 +869,6 @@ nav:
     - Row: spark-sql-Row.md
     - Data Source API:
       - DataSource API: spark-sql-datasource-api.md
-      - DataFrameReader: DataFrameReader.md
       - CreateTableWriter: CreateTableWriter.md
       - WriteConfigMethods: WriteConfigMethods.md
     - Dataset API:

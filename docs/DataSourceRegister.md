@@ -1,4 +1,4 @@
-# DataSourceRegister &mdash; Registering Data Source Format
+# DataSourceRegister
 
 [[shortName]]
 `DataSourceRegister` is a <<contract, contract>> to register a [DataSource](DataSource.md) provider under `shortName` alias (so it can be [looked up](DataSource.md#lookupDataSource) by the alias not its fully-qualified class name).

@@ -347,13 +347,17 @@ Default: `true`
 
 Since: `3.0.0`
 
-## <span id="spark.sql.sources.useV1SourceList"> spark.sql.sources.useV1SourceList
+## <span id="spark.sql.sources.useV1SourceList"><span id="USE_V1_SOURCE_LIST"> spark.sql.sources.useV1SourceList
 
-**(internal)** A comma-separated list of data source short names or fully qualified data source implementation class names for which DataSource V2 code path is disabled. These data sources will fallback to Data Source V1 code path.
+**(internal)** A comma-separated list of data source short names ([DataSourceRegister](DataSourceRegister.md)s) or fully-qualified canonical class names of the data sources ([TableProvider](connector/TableProvider.md)s) for which DataSource V2 code path is disabled (and Data Source V1 code path used).
 
 Default: `avro,csv,json,kafka,orc,parquet,text`
 
 Since: `3.0.0`
+
+Used when:
+
+* `DataSource` utility is used to [lookupDataSourceV2](DataSource.md#lookupDataSourceV2)
 
 ## <span id="spark.sql.storeAssignmentPolicy"> spark.sql.storeAssignmentPolicy
 
@@ -1265,9 +1269,9 @@ Default: `true`
 
 Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method to access the current value.
 
-## <span id="spark.sql.sources.default"> spark.sql.sources.default
+## <span id="spark.sql.sources.default"><span id="DEFAULT_DATA_SOURCE_NAME"> spark.sql.sources.default
 
-Default data source to use in input/output.
+Default data source to use for loading or saving data
 
 Default: `parquet`
 

@@ -14,6 +14,27 @@
 
 * [Dataset.write](Dataset.md#write) operator is used
 
+## <span id="df"> DataFrame
+
+When [created](#creating-instance), `DataFrameWriter` converts the [Dataset](#ds) to a [DataFrame](Dataset.md#toDF).
+
+## <span id="source"><span id="format"> Name of Data Source
+
+```scala
+source: String
+```
+
+`source` is a short name (alias) or a fully-qualified class name to identify the data source to write data to.
+
+`source` can be specified using `format` method:
+
+```scala
+format(
+  source: String): DataFrameWriter[T]
+```
+
+Default: [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property
+
 ## <span id="insertInto"> insertInto
 
 ```scala
@@ -29,13 +50,12 @@ insertInto(
 
 In the end, `insertInto` uses the [modern](#insertInto-CatalogPlugin) or the [legacy](#insertInto-TableIdentifier) insert paths based on...FIXME
 
-`insertInto` [asserts that not write is not bucketed](#assertNotBucketed) with **insertInto** operation name.
+![DataFrameWrite.insertInto Executes SQL Command (as a Spark job)](images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png)
 
-`insertInto` throws an `AnalysisException` when the [partitioningColumns](#partitioningColumns) are defined:
+`insertInto` [asserts that write is not bucketed](#assertNotBucketed) (with **insertInto** operation name).
 
-```text
-insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
-```
+!!! note
+    [saveAsTable](#saveAsTable) and [insertInto](#insertInto) are structurally alike.
 
 ### <span id="insertInto-CatalogPlugin"> Modern Insert Path (CatalogPlugin)
 
@@ -55,6 +75,76 @@ insertInto(
 ```
 
 `insertInto`...FIXME
+
+### <span id="insertInto-AnalysisException"> AnalysisException
+
+`insertInto` throws an `AnalysisException` when the [partitioningColumns](#partitioningColumns) are defined:
+
+```text
+insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
+```
+
+## <span id="saveAsTable"> saveAsTable
+
+```scala
+saveAsTable(
+  tableName: String): Unit
+```
+
+`saveAsTable` requests the [DataFrame](#df) for the [SparkSession](Dataset.md#sparkSession).
+
+`saveAsTable` tries to [look up the TableProvider](#lookupV2Provider) for the [data source](#source).
+
+`saveAsTable` requests the [ParserInterface](sql/ParserInterface.md) to [parse](sql/ParserInterface.md#parseMultipartIdentifier) the `tableName` identifier (possibly multi-part).
+
+In the end, `saveAsTable` uses the [modern](#saveAsTable-TableCatalog) or the [legacy](#saveAsTable-TableIdentifier) save paths based on...FIXME
+
+!!! note
+    [saveAsTable](#saveAsTable) and [insertInto](#insertInto) are structurally alike.
+
+### <span id="saveAsTable-TableCatalog"> Modern saveAsTable Path (TableCatalog)
+
+```scala
+saveAsTable(
+  catalog: TableCatalog,
+  ident: Identifier,
+  nameParts: Seq[String]): Unit
+```
+
+### <span id="saveAsTable-TableIdentifier"> Legacy saveAsTable Path (TableIdentifier)
+
+```scala
+saveAsTable(
+  tableIdent: TableIdentifier): Unit
+```
+
+`saveAsTable` saves the content of a `DataFrame` to the `tableName` table.
+
+### <span id="saveAsTable-AnalysisException"> AnalysisException
+
+`saveAsTable` throws an `AnalysisException` when no catalog could handle the table identifier:
+
+```text
+Couldn't find a catalog to handle the identifier [tableName].
+```
+
+### Demo
+
+```text
+val ids = spark.range(5)
+ids.write.
+  option("path", "/tmp/five_ids").
+  saveAsTable("five_ids")
+
+// Check out if saveAsTable as five_ids was successful
+val q = spark.catalog.listTables.filter($"name" === "five_ids")
+scala> q.show
++--------+--------+-----------+---------+-----------+
+|    name|database|description|tableType|isTemporary|
++--------+--------+-----------+---------+-----------+
+|five_ids| default|       null| EXTERNAL|      false|
++--------+--------+-----------+---------+-----------+
+```
 
 ## <span id="save"> save
 
@@ -90,6 +180,20 @@ Hive data source can only be used with tables, you can not write files of Hive d
 '[operation]' does not support bucketing right now
 ```
 
+## <span id="lookupV2Provider"> Looking up TableProvider
+
+```scala
+lookupV2Provider(): Option[TableProvider]
+```
+
+`lookupV2Provider` tries to [look up a TableProvider](DataSource.md#lookupDataSourceV2) for the [source](#source).
+
+`lookupV2Provider` explicitly excludes [FileDataSourceV2](FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
+
+`lookupV2Provider` is used when:
+
+* `DataFrameWriter` is requested to [save](#save), [insertInto](#insertInto) and [saveAsTable](#saveAsTable)
+
 ## Review Me
 
 [[methods]]
@@ -122,16 +226,6 @@ a| [[format]]
 ----
 format(source: String): DataFrameWriter[T]
 ----
-
-| <<insertInto-internals, insertInto>>
-a| [[insertInto]]
-
-[source, scala]
-----
-insertInto(tableName: String): Unit
-----
-
-Inserts (the results of) a structured query (`DataFrame`) into a table
 
 | <<jdbc-internals, jdbc>>
 a| [[jdbc]]
@@ -199,14 +293,6 @@ a| [[partitionBy]]
 [source, scala]
 ----
 partitionBy(colNames: String*): DataFrameWriter[T]
-----
-
-| <<saveAsTable-internals, saveAsTable>>
-a| [[saveAsTable]]
-
-[source, scala]
-----
-saveAsTable(tableName: String): Unit
 ----
 
 | <<sortBy-internals, sortBy>>
@@ -320,68 +406,6 @@ In the end, `runCommand` uses the input `SparkSession` to access the <<SparkSess
 In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` to <<ExecutionListenerManager.md#onFailure, onFailure>> (with the exception) and (re)throws it.
 
 NOTE: `runCommand` is used when `DataFrameWriter` is requested to <<save, save the rows of a structured query (a DataFrame) to a data source>> (and indirectly <<saveToV1Source, executing a logical command for writing to a data source V1>>), <<insertInto, insert the rows of a structured streaming (a DataFrame) into a table>> and <<createTable, create a table>> (that is used exclusively for <<saveAsTable, saveAsTable>>).
-
-=== [[saveAsTable-internals]] Saving Rows of Structured Streaming (DataFrame) to Table -- `saveAsTable` Method
-
-[source, scala]
-----
-saveAsTable(tableName: String): Unit
-// PRIVATE API
-saveAsTable(tableIdent: TableIdentifier): Unit
-----
-
-`saveAsTable` saves the content of a `DataFrame` to the `tableName` table.
-
-[source, scala]
-----
-val ids = spark.range(5)
-ids.write.
-  option("path", "/tmp/five_ids").
-  saveAsTable("five_ids")
-
-// Check out if saveAsTable as five_ids was successful
-val q = spark.catalog.listTables.filter($"name" === "five_ids")
-scala> q.show
-+--------+--------+-----------+---------+-----------+
-|    name|database|description|tableType|isTemporary|
-+--------+--------+-----------+---------+-----------+
-|five_ids| default|       null| EXTERNAL|      false|
-+--------+--------+-----------+---------+-----------+
-----
-
-Internally, `saveAsTable` requests the current `ParserInterface` to <<spark-sql-ParserInterface.md#parseTableIdentifier, parse the input table name>>.
-
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#sqlParser, ParserInterface>>.
-
-`saveAsTable` then requests the `SessionCatalog` to [check whether the table exists or not](SessionCatalog.md#tableExists).
-
-NOTE: `saveAsTable` uses the <<df, internal DataFrame>> to access the <<Dataset.md#sparkSession, SparkSession>> that is used to access the <<SparkSession.md#sessionState, SessionState>> and in the end the <<SessionState.md#catalog, SessionCatalog>>.
-
-In the end, `saveAsTable` branches off per whether the table exists or not and the <<mode, save mode>>.
-
-.saveAsTable's Behaviour per Save Mode
-[cols="1,1,2",options="header",width="100%"]
-|===
-| Does table exist?
-| Save Mode
-| Behaviour
-
-| yes
-| `Ignore`
-| Does nothing
-
-| yes
-| `ErrorIfExists`
-| Reports an `AnalysisException` with `Table [tableIdent] already exists.` error message
-
-| yes
-| `Overwrite`
-| FIXME
-
-| _anything_
-| _anything_
-| <<createTable, createTable>>
-|===
 
 === [[jdbc-internals]] Saving Data to Table Using JDBC Data Source -- `jdbc` Method
 
@@ -518,62 +542,6 @@ format(source: String): DataFrameWriter[T]
 CAUTION: FIXME
 
 NOTE: Parquet is the default data source format.
-
-=== [[insertInto-internals]] Inserting Rows of Structured Streaming (DataFrame) into Table -- `insertInto` Method
-
-[source, scala]
-----
-insertInto(tableName: String): Unit // <1>
-insertInto(tableIdent: TableIdentifier): Unit
-----
-<1> Parses `tableName` and calls the other `insertInto` with a `TableIdentifier`
-
-`insertInto` inserts the content of the `DataFrame` to the specified `tableName` table.
-
-NOTE: `insertInto` ignores column names and just uses a position-based resolution, i.e. the order (not the names!) of the columns in (the output of) the Dataset matters.
-
-Internally, `insertInto` creates an InsertIntoTable.md#creating-instance[InsertIntoTable] logical operator (with UnresolvedRelation.md#creating-instance[UnresolvedRelation] operator as the only child) and <<runCommand, executes>> it right away (that submits a Spark job).
-
-.DataFrameWrite.insertInto Executes SQL Command (as a Spark job)
-image::images/spark-sql-DataFrameWrite-insertInto-webui-query-details.png[align="center"]
-
-`insertInto` reports a `AnalysisException` for bucketed DataFrames, i.e. <<numBuckets, buckets>> or <<sortColumnNames, sortColumnNames>> are defined.
-
-```
-'insertInto' does not support bucketing right now
-```
-
-[source, scala]
-----
-val writeSpec = spark.range(4).
-  write.
-  bucketBy(numBuckets = 3, colName = "id")
-scala> writeSpec.insertInto("t1")
-org.apache.spark.sql.AnalysisException: 'insertInto' does not support bucketing right now;
-  at org.apache.spark.sql.DataFrameWriter.assertNotBucketed(DataFrameWriter.scala:334)
-  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:302)
-  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:298)
-  ... 49 elided
-----
-
-`insertInto` reports a `AnalysisException` for partitioned DataFrames, i.e. <<partitioningColumns, partitioningColumns>> is defined.
-
-[options="wrap"]
-----
-insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
-----
-
-[source, scala, options="wrap"]
-----
-val writeSpec = spark.range(4).
-  write.
-  partitionBy("id")
-scala> writeSpec.insertInto("t1")
-org.apache.spark.sql.AnalysisException: insertInto() can't be used together with partitionBy(). Partition columns have already be defined for the table. It is not necessary to use partitionBy().;
-  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:305)
-  at org.apache.spark.sql.DataFrameWriter.insertInto(DataFrameWriter.scala:298)
-  ... 49 elided
-----
 
 === [[getBucketSpec]] `getBucketSpec` Internal Method
 

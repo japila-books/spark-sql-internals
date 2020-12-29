@@ -6,7 +6,7 @@
 
 `ParserInterface` is available as [SessionState.sqlParser](../SessionState.md#sqlParser).
 
-```
+```text
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -16,7 +16,7 @@ org.apache.spark.sql.catalyst.parser.ParserInterface
 
 ## Contract
 
-### parseDataType
+### <span id="parseDataType"> parseDataType
 
 ```scala
 parseDataType(
@@ -43,7 +43,7 @@ Used when:
 
 * `OrcUtils` is requested to `readSchema`
 
-### parseExpression
+### <span id="parseExpression"> parseExpression
 
 ```scala
 parseExpression(
@@ -58,7 +58,7 @@ Used in the following:
 
 * <<spark-sql-functions.md#expr, expr>> standard function
 
-### parseFunctionIdentifier
+### <span id="parseFunctionIdentifier"> parseFunctionIdentifier
 
 ```scala
 parseFunctionIdentifier(
@@ -73,7 +73,7 @@ Used when:
 
 * `CatalogImpl` is requested to [getFunction](../CatalogImpl.md#getFunction) and [functionExists](../CatalogImpl.md#functionExists)
 
-### parseMultipartIdentifier
+### <span id="parseMultipartIdentifier"> parseMultipartIdentifier
 
 ```scala
 parseMultipartIdentifier(
@@ -94,7 +94,7 @@ Used when:
 
 * `SparkSession` is requested to [table](../SparkSession.md#table)
 
-### parsePlan
+### <span id="parsePlan"> parsePlan
 
 ```scala
 parsePlan(
@@ -109,7 +109,7 @@ Used when:
 
 * `SparkSession` is requested to <<SparkSession.md#sql, execute a SQL query (aka SQL Mode)>>
 
-### parseRawDataType
+### <span id="parseRawDataType"> parseRawDataType
 
 ```scala
 parseRawDataType(
@@ -118,7 +118,7 @@ parseRawDataType(
 
 Used when...FIXME
 
-### parseTableIdentifier
+### <span id="parseTableIdentifier"> parseTableIdentifier
 
 ```scala
 parseTableIdentifier(
@@ -139,7 +139,7 @@ Used when:
 
 * `SessionState` is requested to <<SessionState.md#refreshTable, refreshTable>>
 
-### parseTableSchema
+### <span id="parseTableSchema"> parseTableSchema
 
 ```scala
 parseTableSchema(

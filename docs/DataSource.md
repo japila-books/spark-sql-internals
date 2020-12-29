@@ -67,55 +67,6 @@ val messages = spark
 
 `DataSource` is given an [alias or a fully-qualified class name](#className) of the data source provider. `DataSource` uses the name to [load the Java class](#lookupDataSource). In the end, `DataSource` uses the Java class to [resolve a relation](#resolveRelation) to represent the data source in logical plans.
 
-## <span id="lookupDataSource"> Loading Java Class Of Data Source Provider
-
-```scala
-lookupDataSource(
-  provider: String,
-  conf: SQLConf): Class[_]
-```
-
-`lookupDataSource` first finds the given `provider` in the [backwardCompatibilityMap](#backwardCompatibilityMap) internal registry, and falls back to the `provider` name itself when not found.
-
-!!! note
-    The `provider` argument can be either an alias (a simple name, e.g. `parquet`) or a fully-qualified class name (e.g. `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat`).
-
-`lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
-
-* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](datasources/orc/OrcFileFormat.md) (based on Apache ORC)
-
-* For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
-
-* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](datasources/avro/AvroFileFormat.md) module
-
-`lookupDataSource` uses `DefaultSource` as the class name as another provider name variant (i.e. `[provider1].DefaultSource`).
-
-`lookupDataSource` uses Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html) service-provider loading facility to find all data source providers of type [DataSourceRegister](DataSourceRegister.md) on the Spark CLASSPATH.
-
-`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their [alias](DataSourceRegister.md#shortName)) that match the provider name (case-insensitive, e.g. `parquet` or `kafka`).
-
-If a single `DataSourceRegister` provider class is found, `lookupDataSource` simply returns the instance of the data source provider.
-
-If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the provider name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the other provider name (aka _DefaultSource_) instead.
-
-!!! note
-    [DataFrameWriter.format](DataFrameWriter.md#format) and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
-
-```text
-import org.apache.spark.sql.execution.datasources.DataSource
-val source = "parquet"
-val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
-```
-
-`lookupDataSource` is used when:
-
-* `SparkSession` is requested to [executeCommand](SparkSession.md#executeCommand)
-* `CreateTableLikeCommand` and `AlterTableAddColumnsCommand` runnable commands are executed
-* `DataSource` is requested for [providingClass](#providingClass) and to [lookupDataSourceV2](#lookupDataSourceV2)
-* [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) posthoc logical resolution rule is executed
-* `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to `load`
-* `DataStreamWriter` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamWriter)) is requested to `start` a streaming query
-
 ## <span id="resolveRelation"> Resolving Relation
 
 ```scala
@@ -260,3 +211,78 @@ providingInstance(): Any
 `providingInstance` is used when:
 
 * `DataSource` is requested to `sourceSchema`, `createSource`, `createSink`, [resolve a relation](#resolveRelation), [write and read](#writeAndRead) and [plan for writing](#planForWriting)
+
+## Utilities
+
+### <span id="lookupDataSourceV2"> Looking up TableProvider
+
+```scala
+lookupDataSourceV2(
+  provider: String,
+  conf: SQLConf): Option[TableProvider]
+```
+
+`lookupDataSourceV2` uses the [spark.sql.sources.useV1SourceList](configuration-properties.md#spark.sql.sources.useV1SourceList) configuration property for the data sources for which to use V1 version.
+
+`lookupDataSourceV2` [loads up the class](#lookupDataSource) of the input `provider`.
+
+`lookupDataSourceV2` branches off based on the type of the data source and returns (in that order):
+
+1. `None` for a [DataSourceRegister](DataSourceRegister.md) with the [short name](DataSourceRegister.md#shortName) among the "useV1SourceList" data source names
+1. A [TableProvider](connector/TableProvider.md) when the canonical name of the class is not among the "useV1SourceList" data source names
+1. `None` for other cases
+
+`lookupDataSourceV2` is used when:
+
+* `DataFrameReader` is requested to [load a DataFrame](DataFrameReader.md#load)
+* `DataFrameWriter` is requested to [look up a TableProvider](DataFrameWriter.md#lookupV2Provider)
+* [ResolveSessionCatalog](logical-analysis-rules/ResolveSessionCatalog.md) logical extended resolution rule is executed
+
+### <span id="lookupDataSource"> Loading Java Class Of Data Source Provider
+
+```scala
+lookupDataSource(
+  provider: String,
+  conf: SQLConf): Class[_]
+```
+
+`lookupDataSource` first finds the given `provider` in the [backwardCompatibilityMap](#backwardCompatibilityMap) internal registry, and falls back to the `provider` name itself when not found.
+
+!!! note
+    The `provider` argument can be either an alias (a simple name, e.g. `parquet`) or a fully-qualified class name (e.g. `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat`).
+
+`lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
+
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](datasources/orc/OrcFileFormat.md) (based on Apache ORC)
+
+* For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
+
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](datasources/avro/AvroFileFormat.md) module
+
+`lookupDataSource` uses `DefaultSource` as the class name as another provider name variant (i.e. `[provider1].DefaultSource`).
+
+`lookupDataSource` uses Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html) service-provider loading facility to find all data source providers of type [DataSourceRegister](DataSourceRegister.md) on the Spark CLASSPATH.
+
+`lookupDataSource` tries to find the `DataSourceRegister` provider classes (by their [alias](DataSourceRegister.md#shortName)) that match the provider name (case-insensitive, e.g. `parquet` or `kafka`).
+
+If a single `DataSourceRegister` provider class is found, `lookupDataSource` simply returns the instance of the data source provider.
+
+If no `DataSourceRegister` provider class could be found by the short name (alias), `lookupDataSource` tries to load the provider name to be a fully-qualified class name. If not successful, `lookupDataSource` tries to load the other provider name (aka _DefaultSource_) instead.
+
+!!! note
+    [DataFrameWriter.format](DataFrameWriter.md#format) and [DataFrameReader.format](DataFrameReader.md#format) methods accept the name of the data source provider to use as an alias or a fully-qualified class name.
+
+```text
+import org.apache.spark.sql.execution.datasources.DataSource
+val source = "parquet"
+val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
+```
+
+`lookupDataSource` is used when:
+
+* `SparkSession` is requested to [executeCommand](SparkSession.md#executeCommand)
+* `CreateTableLikeCommand` and `AlterTableAddColumnsCommand` runnable commands are executed
+* `DataSource` is requested for [providingClass](#providingClass) and to [lookupDataSourceV2](#lookupDataSourceV2)
+* [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) posthoc logical resolution rule is executed
+* `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to `load`
+* `DataStreamWriter` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamWriter)) is requested to `start` a streaming query

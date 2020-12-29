@@ -199,7 +199,11 @@ Used when `CatalogManager` is requested for the [current CatalogPlugin](connecto
 
 ## <span id="defaultDataSourceName"><span id="DEFAULT_DATA_SOURCE_NAME"> defaultDataSourceName
 
-[spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default)
+The value of [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property
+
+Used when:
+
+* FIXME
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
 
