@@ -2700,6 +2700,10 @@
      <lastmod>2020-12-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrameReader/</loc>
+     <lastmod>2020-12-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrameWriter/</loc>
      <lastmod>2020-12-29</lastmod>
      <changefreq>daily</changefreq>
@@ -2821,10 +2825,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-datasource-api/</loc>
-     <lastmod>2020-12-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrameReader/</loc>
      <lastmod>2020-12-29</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
