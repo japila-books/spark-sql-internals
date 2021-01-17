@@ -10,9 +10,10 @@ site_description: Demystifying inner-workings of Spark SQL
 # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
 repo_name: spark-sql-internals
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
+edit_uri: edit/main/docs/
 
 copyright: |
-  Copyright &copy; 2020 <a href="https://twitter.com/jaceklaskowski" target="_blank" rel="noopener">Jacek Laskowski</a>
+  Copyright &copy; 2021 Jacek Laskowski
 
 theme:
   name: material
@@ -23,6 +24,20 @@ theme:
   features:
     - navigation.tabs
     - navigation.instant
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
 
 markdown_extensions:
   - admonition
@@ -36,11 +51,9 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
-  - pymdownx.emoji
-  # this doesn't seem to work on ReadTheDocs
-  # https://github.com/readthedocs/readthedocs.org/issues/6889
-  #     emoji_index: !!python/name:materialx.emoji.twemoji
-  #     emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.mark
@@ -71,9 +84,14 @@ extra:
   spark:
     version: 3.0.1
     github: https://github.com/apache/spark/blob/v3.0.1
+    doc: http://spark.apache.org/docs/3.0.1
   hadoop:
     version: 2.7.4
+    doc: https://hadoop.apache.org/docs/r2.7.4
     api: https://hadoop.apache.org/docs/r2.7.4/api
+  hive:
+    version: 2.3.6
+    api: https://hive.apache.org/javadocs/r2.3.6/api
   java:
     version: 11
     api: https://docs.oracle.com/en/java/javase/11/docs/api
@@ -96,6 +114,7 @@ google_analytics:
 nav:
   - Home:
     - Welcome: index.md
+  - Internals:
     - DataSource: DataSource.md
     - Connector API:
       - Connector API: connector/index.md
@@ -850,6 +869,7 @@ nav:
       - ArrowPythonRunner: pyspark/ArrowPythonRunner.md
       - PythonUDFRunner: pyspark/PythonUDFRunner.md
   - Demos:
+    - Welcome: demo/index.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md

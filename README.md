@@ -1,8 +1,8 @@
-# The Internals of Spark SQL
+# The Internals of Spark SQL Online Book
 
-[![CI](https://github.com/jaceklaskowski/mastering-spark-sql-book/workflows/CI/badge.svg?branch=master)](https://github.com/jaceklaskowski/mastering-spark-sql-book/actions)
+[![CI](https://github.com/jaceklaskowski/mastering-spark-sql-book/workflows/CI/badge.svg)](https://github.com/jaceklaskowski/mastering-spark-sql-book/actions)
 
-The project contains the sources of [The Internals of Spark SQL](https://the-internals-of-spark-sql.readthedocs.io/) online book.
+The project contains the sources of [The Internals of Spark SQL](https://jaceklaskowski.github.io/mastering-spark-sql-book/) online book.
 
 ## Tools
 
@@ -12,58 +12,58 @@ The project is based on or uses the following tools:
 
 * [MkDocs](https://www.mkdocs.org/) which strives for being _a fast, simple and downright gorgeous static site generator that's geared towards building project documentation_
 
-* [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme
+* [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme (with [Insiders](https://squidfunk.github.io/mkdocs-material/insiders/) features)
 
 * [Markdown](https://commonmark.org/help/)
 
 * [Visual Studio Code](https://code.visualstudio.com/) as a Markdown editor
 
-* [Docker](https://www.docker.com/) to [run the Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker-recommended) (with plugins and extensions)
-
-* [Read the Docs](https://readthedocs.org/) for online deployment
+* [Docker](https://www.docker.com/) to [run the Material for MkDocs](https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker-recommended) (with extra plugins and extensions)
 
 ## Previewing Book
 
-Simply use the [official Docker image](https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker-recommended) to get up and running with the above tools.
+### Custom Docker Image
 
-Start `mkdocs serve` in the project root (the folder with [mkdocs.yml](mkdocs.yml)) as follows:
+This project uses a custom Docker image (based on the [Insiders](https://squidfunk.github.io/mkdocs-material/insiders/) image) since the [official Docker image](https://squidfunk.github.io/mkdocs-material/getting-started/#with-docker-recommended) includes just a few plugins only.
 
-```shell
-$ docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+Build the custom Docker image using the following command:
+
+```text
+docker build \
+  -t jaceklaskowski/mkdocs-material-insiders \
+  -t jaceklaskowski/mkdocs-material-insiders:6.2.3-insiders-1.15.0 \
+  .
 ```
 
-Consult the [MkDocs documentation](https://www.mkdocs.org/#getting-started) to get started and learn how to [build the project](https://www.mkdocs.org/#building-the-site).
+### Building Book
 
-```shell
-$ docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material --help
-Usage: mkdocs [OPTIONS] COMMAND [ARGS]...
+Run the following command to build the book.
 
-  MkDocs - Project documentation with Markdown.
-
-Options:
-  -V, --version  Show the version and exit.
-  -q, --quiet    Silence warnings
-  -v, --verbose  Enable verbose output
-  -h, --help     Show this message and exit.
-
-Commands:
-  build      Build the MkDocs documentation
-  gh-deploy  Deploy your documentation to GitHub Pages
-  new        Create a new MkDocs project
-  serve      Run the builtin development server
+```text
+docker run \
+  -it \
+  -p 8000:8000 \
+  -v ${PWD}:/docs \
+  jaceklaskowski/mkdocs-material-insiders \
+  build --clean
 ```
 
-Use `mkdocs build --clean` to remove any stale files.
+**TIP:** Consult the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/creating-your-site/) documentation to get started.
 
-Consider `--dirtyreload` for a faster reloads.
+### Live Editing
+
+Start `mkdocs serve` (with `--dirtyreload` for faster reloads) as follows:
 
 ```shell
-$ docker run --rm -it \
-    -p 8000:8000 \
-    -v ${PWD}:/docs \
-    squidfunk/mkdocs-material \
-    serve --dirtyreload --verbose --dev-addr 0.0.0.0:8000
+docker run \
+  -it \
+  -p 8000:8000 \
+  -v ${PWD}:/docs \
+  jaceklaskowski/mkdocs-material-insiders \
+  serve --dirtyreload --verbose --dev-addr 0.0.0.0:8000
 ```
+
+You should start the above command in the project root (the folder with [mkdocs.yml](mkdocs.yml)).
 
 ## No Sphinx?! Why?
 

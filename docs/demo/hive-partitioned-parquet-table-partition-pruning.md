@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Demo: Hive Partitioned Parquet Table and Partition Pruning
 
 The demo shows partition pruning optimization in Spark SQL for Hive partitioned tables in parquet format.

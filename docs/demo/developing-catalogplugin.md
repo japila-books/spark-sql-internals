@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Demo: Developing CatalogPlugin
 
 The demo shows the internals of [CatalogPlugin](../connector/catalog/CatalogPlugin.md) with support for [TableCatalog](../connector/catalog/TableCatalog.md) and [SupportsNamespaces](../connector/catalog/SupportsNamespaces.md).

@@ -1,33 +1,30 @@
+---
+hide:
+  - navigation
+---
+
 # Demo: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)
 
-:spark-version: 2.4.5
-:hive-version: 2.3.6
-:hadoop-version: 2.10.0
-:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
-:url-hadoop-docs: https://hadoop.apache.org/docs/r{hadoop-version}
-:url-hadoop-javadoc: {url-hadoop-docs}/api
-
-The demo shows how to run Apache Spark {spark-version} with Apache Hive {hive-version} (on Apache Hadoop {hadoop-version}).
-
-IMPORTANT: Support for Hadoop 3.x is expected in the upcoming https://issues.apache.org/jira/browse/SPARK-23710[Spark 3.0.0].
+The demo shows how to run Apache Spark {{ spark.version }} with Apache Hive {{ hive.version }} (on Apache Hadoop 2.10.0).
 
 You'll be using a separate Remote Metastore Server to access table metadata via the Thrift protocol. It is in the discretion of the Remote Metastore Server to connect to the underlying JDBC-accessible relational database (e.g. PostgreSQL).
 
-TIP: Read up https://docs.databricks.com/data/metastores/external-hive-metastore.html[External Apache Hive metastore] in the official documentation of Databricks platform that describes the topic in more details from the perspective of Apache Spark developers.
+!!! tip
+    Read up [External Apache Hive metastore](https://docs.databricks.com/data/metastores/external-hive-metastore.html) in the official documentation of Databricks platform that describes the topic in more details from the perspective of Apache Spark developers.
 
 ## Install Java 8
 
-As per Hadoop's https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions[Hadoop Java Versions]:
+As per Hadoop's [Hadoop Java Versions](https://cwiki.apache.org/confluence/display/HADOOP/Hadoop+Java+Versions):
 
 > Apache Hadoop from 2.7.x to 2.x support Java 7 and 8
 
-As per Spark's https://spark.apache.org/docs/latest/#downloading[Downloading]:
+As per Spark's [Downloading](https://spark.apache.org/docs/latest/#downloading):
 
 > Spark runs on Java 8
 
 Make sure you have Java 8 installed.
 
-```
+```text
 $ java -version
 openjdk version "1.8.0_242"
 OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_242-b08)
@@ -36,9 +33,9 @@ OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.242-b08, mixed mode)
 
 ## Build Apache Spark for Apache Hadoop
 
-Build Apache Spark with support for Apache Hadoop {hadoop-version}.
+Build Apache Spark with support for Apache Hadoop 2.10.0.
 
-```
+```text
 $ cd $SPARK_HOME
 $ ./build/mvn \
     -Dhadoop.version=2.10.0 \
@@ -49,7 +46,7 @@ $ ./build/mvn \
     clean install
 ```
 
-```
+```text
 $ ./bin/spark-shell --version
 Welcome to
       ____              __
@@ -68,7 +65,7 @@ Type --help for more information.
 
 Assert the versions work in `spark-shell` before proceeding.
 
-```
+```text
 $ ./bin/spark-shell
 scala> assert(spark.version == "2.4.5")
 
@@ -81,15 +78,15 @@ scala> assert(org.apache.hadoop.hive.shims.ShimLoader.getMajorVersion == "0.23")
 
 _Hive uses Hadoop._
 
-Download and install https://hadoop.apache.org/release/{hadoop-version}.html[Hadoop {hadoop-version}] (or more recent stable release of Apache Hadoop 2 line if available).
+Download and install [Hadoop 2.10.0](https://hadoop.apache.org/release/2.10.0.html) (or more recent stable release of Apache Hadoop 2 line if available).
 
-```
+```text
 export HADOOP_HOME=/Users/jacek/dev/apps/hadoop
 ```
 
-Follow the official documentation in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html[Hadoop: Setting up a Single Node Cluster] to set up a single-node Hadoop installation.
+Follow the official documentation in [Hadoop: Setting up a Single Node Cluster]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html) to set up a single-node Hadoop installation.
 
-```
+```text
 $ $HADOOP_HOME/bin/hadoop version
 Hadoop 2.10.0
 Subversion ssh://git.corp.linkedin.com:29418/hadoop/hadoop.git -r e2f1f118e465e787d8567dfa6e2f3b72a0eb9194
@@ -99,35 +96,31 @@ From source with checksum 7b2d8877c5ce8c9a2cca5c7e81aa4026
 This command was run using /Users/jacek/dev/apps/hadoop-2.10.0/share/hadoop/common/hadoop-common-2.10.0.jar
 ```
 
-This demo assumes running {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation[a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process].
+This demo assumes running [a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation).
 
-[TIP]
-====
-Use `hadoop.tmp.dir` configuration property as the base for temporary directories.
+!!! tip
+    Use `hadoop.tmp.dir` configuration property as the base for temporary directories.
 
-[source, xml]
-----
-<property>
-  <name>hadoop.tmp.dir</name>
-  <value>/tmp/my-hadoop-tmp-dir/hdfs/tmp</value>
-  <description>The base for temporary directories.</description>
-</property>
-----
+    ```xml
+    <property>
+      <name>hadoop.tmp.dir</name>
+      <value>/tmp/my-hadoop-tmp-dir/hdfs/tmp</value>
+      <description>The base for temporary directories.</description>
+    </property>
+    ```
 
-Use `./bin/hdfs getconf -confKey hadoop.tmp.dir` to check out the value
+    Use `./bin/hdfs getconf -confKey hadoop.tmp.dir` to check out the value
 
-```
-$ ./bin/hdfs getconf -confKey hadoop.tmp.dir
-/tmp/my-hadoop-tmp-dir/hdfs/tmp
-```
-====
+    ```text
+    $ ./bin/hdfs getconf -confKey hadoop.tmp.dir
+    /tmp/my-hadoop-tmp-dir/hdfs/tmp
+    ```
 
 ## fs.defaultFS Configuration Property (core-site.xml)
 
 Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.` properties.
 
-[source, xml]
-----
+```xml
 <configuration>
     <property>
         <name>fs.defaultFS</name>
@@ -142,29 +135,29 @@ Edit `etc/hadoop/core-site.xml` and define `fs.defaultFS` and `hadoop.proxyuser.
       <value>*</value>
     </property>
 </configuration>
-----
+```
 
-IMPORTANT: Replace `[username]` above with the local user (e.g. `jacek`) that will be used in `beeline`. Consult https://stackoverflow.com/q/43180305/1305344[this question] on StackOverflow.
+!!! note
+    Replace `[username]` above with the local user (e.g. `jacek`) that will be used in `beeline`. Consult [this question](https://stackoverflow.com/q/43180305/1305344) on StackOverflow.
 
 ## dfs.replication Configuration Property (hdfs-site.xml)
 
 Edit `etc/hadoop/hdfs-site.xml` and define `dfs.replication` property as follows:
 
-[source, xml]
-----
+```xml
 <configuration>
     <property>
         <name>dfs.replication</name>
         <value>1</value>
     </property>
 </configuration>
-----
+```
 
 ## Passphrase-less SSH (macOS)
 
-Turn *Remote Login* on in Mac OS X's Sharing preferences that allow remote users to connect to a Mac using the OpenSSH protocols.
+Turn **Remote Login** on in Mac OS X's Sharing preferences that allow remote users to connect to a Mac using the OpenSSH protocols.
 
-```
+```text
 $ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa_hadoop
 $ cat ~/.ssh/id_rsa_hadoop.pub >> ~/.ssh/authorized_keys
 $ chmod 0600 ~/.ssh/authorized_keys
@@ -174,71 +167,67 @@ $ chmod 0600 ~/.ssh/authorized_keys
 
 You may want to set up `JAVA_HOME` in `etc/hadoop/hadoop-env.sh` as told in the file:
 
-[quote]
-----
-# The only required environment variable is JAVA_HOME.  All others are
-# optional.  When running a distributed configuration it is best to
-# set JAVA_HOME in this file, so that it is correctly defined on
-# remote nodes.
-----
+!!! quote
+    # The only required environment variable is JAVA_HOME.  All others are
+    # optional.  When running a distributed configuration it is best to
+    # set JAVA_HOME in this file, so that it is correctly defined on
+    # remote nodes.
 
-```
+```text
 $ $HADOOP_HOME/bin/hdfs namenode -format
 ...
 INFO common.Storage: Storage directory /tmp/hadoop-jacek/dfs/name has been successfully formatted.
 ...
 ```
 
-[NOTE]
-====
-Use `./bin/hdfs namenode` to start a NameNode that will tell you that the local filesystem is not ready.
+!!! note
+    Use `./bin/hdfs namenode` to start a NameNode that will tell you that the local filesystem is not ready.
 
-```
-$ ./bin/hdfs namenode
-18/01/09 15:43:11 INFO namenode.NameNode: STARTUP_MSG:
-/************************************************************
-STARTUP_MSG: Starting NameNode
-STARTUP_MSG:   host = japila.local/192.168.1.2
-STARTUP_MSG:   args = []
-STARTUP_MSG:   version = 2.7.5
-...
-18/01/09 15:43:11 INFO namenode.NameNode: fs.defaultFS is hdfs://localhost:9000
-18/01/09 15:43:11 INFO namenode.NameNode: Clients are to use localhost:9000 to access this namenode/service.
-...
-18/01/09 15:43:12 INFO hdfs.DFSUtil: Starting Web-server for hdfs at: http://0.0.0.0:50070
-...
-18/01/09 15:43:13 WARN common.Storage: Storage directory /private/tmp/hadoop-jacek/dfs/name does not exist
-18/01/09 15:43:13 WARN namenode.FSNamesystem: Encountered exception loading fsimage
-org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
-	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
-	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
-	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
-	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
-...
-18/01/09 15:43:13 ERROR namenode.NameNode: Failed to start namenode.
-org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
-	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
-	at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
-	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
-	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
-	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
-```
-====
+    ```
+    $ ./bin/hdfs namenode
+    18/01/09 15:43:11 INFO namenode.NameNode: STARTUP_MSG:
+    /************************************************************
+    STARTUP_MSG: Starting NameNode
+    STARTUP_MSG:   host = japila.local/192.168.1.2
+    STARTUP_MSG:   args = []
+    STARTUP_MSG:   version = 2.7.5
+    ...
+    18/01/09 15:43:11 INFO namenode.NameNode: fs.defaultFS is hdfs://localhost:9000
+    18/01/09 15:43:11 INFO namenode.NameNode: Clients are to use localhost:9000 to access this namenode/service.
+    ...
+    18/01/09 15:43:12 INFO hdfs.DFSUtil: Starting Web-server for hdfs at: http://0.0.0.0:50070
+    ...
+    18/01/09 15:43:13 WARN common.Storage: Storage directory /private/tmp/hadoop-jacek/dfs/name does not exist
+    18/01/09 15:43:13 WARN namenode.FSNamesystem: Encountered exception loading fsimage
+    org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+      at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+      at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+      at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+      at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+    ...
+    18/01/09 15:43:13 ERROR namenode.NameNode: Failed to start namenode.
+    org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /private/tmp/hadoop-jacek/dfs/name is in an inconsistent state: storage directory does not exist or is not accessible.
+      at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverStorageDirs(FSImage.java:382)
+      at org.apache.hadoop.hdfs.server.namenode.FSImage.recoverTransitionRead(FSImage.java:233)
+      at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFSImage(FSNamesystem.java:984)
+      at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.loadFromDisk(FSNamesystem.java:686)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.loadNamesystem(NameNode.java:586)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:646)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:820)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:804)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:1516)
+      at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:1582)
+    ```
 
 Start Hadoop DFS using `start-dfs.sh` (and `tail -f logs/hadoop-\*-datanode-*.log`)
 
-```
+```text
 $ $HADOOP_HOME/sbin/start-dfs.sh
 Starting namenodes on [localhost]
 localhost: starting namenode, logging to /Users/jacek/dev/apps/hadoop-2.10.0/logs/hadoop-jacek-namenode-japila-new.local.out
@@ -249,32 +238,34 @@ Starting secondary namenodes [0.0.0.0]
 
 List Hadoop's JVM processes using `jps -lm`.
 
-```
+```text
 $ jps -lm
 50773 org.apache.hadoop.hdfs.server.datanode.DataNode
 50870 org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode
 50695 org.apache.hadoop.hdfs.server.namenode.NameNode
 ```
 
-NOTE: FIXME Are the steps in {url-hadoop-docs}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node[YARN on a Single Node] required for Hive?
+!!! note
+    FIXME Are the steps in [YARN on a Single Node]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node) required for Hive?
 
 ## Running Hive
 
-NOTE: Following the steps in https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive[Running Hive].
+!!! note
+    Following the steps in [Running Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHive).
 
-```
+```text
 $HADOOP_HOME/bin/hadoop fs -mkdir /tmp
 $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp
 ```
 
-```
+```text
 $HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
 $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
 ```
 
-Download and install http://hive.apache.org/downloads.html[Hive {hive-version}] (or more recent stable release of Apache Hive 2 line if available).
+Download and install [Hive {{ hive.version }}](http://hive.apache.org/downloads.html) (or more recent stable release of Apache Hive 2 line if available).
 
-```
+```text
 export HIVE_HOME=/Users/jacek/dev/apps/hive
 ```
 
