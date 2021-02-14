@@ -224,7 +224,6 @@ applyPhysicalRules(
 `applyPhysicalRules` is used when:
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes [currentPhysicalPlan](#currentPhysicalPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
-
 * [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## <span id="executionContext"> QueryStageCreator Thread Pool

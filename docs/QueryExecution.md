@@ -193,12 +193,15 @@ prepareExecutedPlan(
 
 ```scala
 prepareForExecution(
+  preparations: Seq[Rule[SparkPlan]],
   plan: SparkPlan): SparkPlan
 ```
 
-`prepareForExecution` takes <<preparations, physical preparation rules>> and applies them one by one to the input physical `plan`.
+`prepareForExecution` takes [physical preparation rules](#preparations) and executes them one by one with the given [SparkPlan](physical-operators/SparkPlan.md).
 
-`prepareForExecution` is used when `QueryExecution` is requested to <<executedPlan, prepare the physical plan for execution>>.
+`prepareForExecution` is used when:
+
+* `QueryExecution` is requested to [prepare the physical plan for execution](#executedPlan) and [prepareExecutedPlan](#prepareExecutedPlan)
 
 ## <span id="assertSupported"> assertSupported Method
 

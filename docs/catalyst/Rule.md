@@ -1,32 +1,44 @@
-# Rule &mdash; Named Transformation of TreeNodes
+# Rule
 
-`Rule` is a <<ruleName, named>> transformation that can be <<apply, applied>> to (i.e. _executed on_ or _transform_) a [TreeNode](TreeNode.md) to produce a new `TreeNode`.
+`Rule` is an [abstraction](#contract) of [named transformations](#ruleName) of [TreeNode](TreeNode.md)s.
 
-[[apply]]
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.rules
+`Rule` can be [executed](#apply) on a `TreeNode` to produce a new `TreeNode`.
 
-abstract class Rule[TreeType <: TreeNode[_]] {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def apply(plan: TreeType): TreeType
-}
-----
+`Rule` is primarily used to create a [batch of rules](RuleExecutor.md#Batch) for a [RuleExecutor](RuleExecutor.md#batches).
 
-[[TreeType]]
-NOTE: `TreeType` is the type of the [TreeNode](TreeNode.md#implementations) implementation that a `Rule` can be <<apply, applied>> to, i.e. <<spark-sql-LogicalPlan.md#, LogicalPlan>>, [SparkPlan](../physical-operators/SparkPlan.md) or <<expressions/Expression.md#, Expression>> or a combination thereof.
+## TreeType
 
-[[ruleName]]
-`Rule` has a *rule name* (that is the class name of a rule).
+`Rule` is a Scala abstract class constructor (_generic class_) with `TreeType` type that is a subtype of [TreeNode](TreeNode.md) (e.g. [LogicalPlan](../logical-operators/LogicalPlan.md), [SparkPlan](../physical-operators/SparkPlan.md), [Expression](../expressions/Expression.md)).
 
-[source, scala]
-----
+```scala
+abstract class Rule[TreeType <: TreeNode[_]]
+```
+
+## Contract
+
+### <span id="apply"> Executing Rule
+
+```scala
+apply(
+  plan: TreeType): TreeType
+```
+
+Applies the rule to a [TreeType](#treetype)
+
+Used when:
+
+* `QueryExecution` utility is used to [prepareForExecution](../QueryExecution.md#prepareForExecution)
+* `AdaptiveSparkPlanExec` utility is used to [applyPhysicalRules](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules)
+
+## <span id="ruleName"> Name
+
+```scala
 ruleName: String
-----
+```
 
-`Rule` is mainly used to create a <<catalyst/RuleExecutor.md#Batch, batch of rules>> for a <<catalyst/RuleExecutor.md#batches, RuleExecutor>>.
+`ruleName` is the name of a rule that is a class name with no ending `$` (that Scala generates for objects).
+
+## Notable Use Cases
 
 The other notable use cases of `Rule` are as follows:
 
@@ -34,7 +46,7 @@ The other notable use cases of `Rule` are as follows:
 
 * When `ExperimentalMethods` is requested for [extraOptimizations](../ExperimentalMethods.md#extraOptimizations)
 
-* When `BaseSessionStateBuilder` is requested for <<BaseSessionStateBuilder.md#customResolutionRules, customResolutionRules>>, <<BaseSessionStateBuilder.md#customPostHocResolutionRules, customPostHocResolutionRules>>, <<BaseSessionStateBuilder.md#customOperatorOptimizationRules, customOperatorOptimizationRules>>, and the <<BaseSessionStateBuilder.md#optimizer, Optimizer>>
+* When `BaseSessionStateBuilder` is requested for [customResolutionRules](../BaseSessionStateBuilder.md#customResolutionRules), [customPostHocResolutionRules](../BaseSessionStateBuilder.md#customPostHocResolutionRules), [customOperatorOptimizationRules](../BaseSessionStateBuilder.md#customOperatorOptimizationRules), and the [Optimizer](../BaseSessionStateBuilder.md#optimizer)
 
 * When `Analyzer` is requested for [extendedResolutionRules](../Analyzer.md#extendedResolutionRules) and [postHocResolutionRules](../Analyzer.md#postHocResolutionRules) (see [BaseSessionStateBuilder](../BaseSessionStateBuilder.md#analyzer) and [HiveSessionStateBuilder](../hive/HiveSessionStateBuilder.md#analyzer))
 
