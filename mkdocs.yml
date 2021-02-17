@@ -466,6 +466,8 @@ nav:
       - GenericStrategy: catalyst/GenericStrategy.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
+      - NonSQLExpression: expressions/NonSQLExpression.md
+      - UserDefinedExpression: expressions/UserDefinedExpression.md
       - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
       - PlanExpression: expressions/PlanExpression.md
       - Unevaluable: expressions/Unevaluable.md
@@ -860,6 +862,7 @@ nav:
     - PythonWorkerFactory: pyspark/PythonWorkerFactory.md
     - MonitorThread: pyspark/MonitorThread.md
     - PythonUDF: pyspark/PythonUDF.md
+    - UserDefinedPythonFunction: pyspark/UserDefinedPythonFunction.md
     - PythonFunction: pyspark/PythonFunction.md
     - AggregateInPandasExec: pyspark/AggregateInPandasExec.md
     - PythonRDD: pyspark/PythonRDD.md
