@@ -1,21 +1,19 @@
 # DataSourceRegister
 
-[[shortName]]
-`DataSourceRegister` is a <<contract, contract>> to register a [DataSource](DataSource.md) provider under `shortName` alias (so it can be [looked up](DataSource.md#lookupDataSource) by the alias not its fully-qualified class name).
+`DataSourceRegister` is an [abstraction](#contract) of data sources to be available under [shortName](#shortName) alias (so it can be [looked up](DataSource.md#lookupDataSource) by the alias not a fully-qualified class name)
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.sources
+## Contract
 
-trait DataSourceRegister {
-  def shortName(): String
-}
-----
+### <span id="shortName"> shortName
 
-## Data Source Format Discovery -- Registering Data Source By Short Name (Alias)
+```scala
+shortName(): String
+```
 
-!!! important
-    FIXME Describe how Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html#load-java.lang.Class-java.lang.ClassLoader-) works to find all [DataSourceRegister](DataSourceRegister.md) provider classes on the CLASSPATH.
+Used when:
 
-Any `DataSourceRegister` has to register itself in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file to...FIXME
+* `DataSource` utility is used to [lookup a data source](DataSource.md#lookupDataSource)
+
+## Data Source Discovery
+
+`DataSourceRegister` should register itself in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for Java's [ServiceLoader]({{ java.api }}/java.base/java/util/ServiceLoader.html#load(java.lang.Class,java.lang.ClassLoader)) to discover the service.
