@@ -1256,6 +1256,14 @@
      <lastmod>2021-02-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/NonSQLExpression/</loc>
+     <lastmod>2021-02-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UserDefinedExpression/</loc>
+     <lastmod>2021-02-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ExecSubqueryExpression/</loc>
      <lastmod>2021-02-17</lastmod>
      <changefreq>daily</changefreq>
@@ -2729,6 +2737,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/PythonUDF/</loc>
+     <lastmod>2021-02-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/pyspark/UserDefinedPythonFunction/</loc>
      <lastmod>2021-02-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
