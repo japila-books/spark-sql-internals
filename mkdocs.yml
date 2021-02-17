@@ -857,6 +857,7 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
   - PySpark:
+    - pyspark/index.md
     - Setup: pyspark/Setup.md
     - Configuration Properties: pyspark/configuration-properties.md
     - PythonWorkerFactory: pyspark/PythonWorkerFactory.md
