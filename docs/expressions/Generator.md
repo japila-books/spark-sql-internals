@@ -2,7 +2,7 @@
 
 `Generator` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that can <<eval, produce>> zero or more rows given a single input row.
 
-NOTE: `Generator` corresponds to SQL's spark-sql-AstBuilder.md#withGenerate[LATERAL VIEW].
+NOTE: `Generator` corresponds to SQL's sql/AstBuilder.md#withGenerate[LATERAL VIEW].
 
 [[dataType]]
 `dataType` in `Generator` is simply an [ArrayType](../DataType.md#ArrayType) of <<elementSchema, elementSchema>>.
@@ -59,7 +59,7 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | [[UnresolvedGenerator]] spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerator]
 a| Represents an unresolved <<Generator, generator>>.
 
-Created when `AstBuilder` spark-sql-AstBuilder.md#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
+Created when `AstBuilder` sql/AstBuilder.md#withGenerate[creates] `Generate` unary logical operator for `LATERAL VIEW` that corresponds to the following:
 
 ```text
 LATERAL VIEW (OUTER)?

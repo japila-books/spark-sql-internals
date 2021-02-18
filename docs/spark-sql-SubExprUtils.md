@@ -73,4 +73,4 @@ val negative = SubExprUtils.hasNullAwarePredicateWithinNot(condition)
 assert(!negative)
 ----
 
-NOTE: `hasNullAwarePredicateWithinNot` is used exclusively when `CheckAnalysis` analysis validation is requested to spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[validate analysis of a logical plan] (with `Filter` logical operators).
+NOTE: `hasNullAwarePredicateWithinNot` is used exclusively when `CheckAnalysis` analysis validation is requested to CheckAnalysis.md#checkAnalysis[validate analysis of a logical plan] (with `Filter` logical operators).

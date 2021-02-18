@@ -67,24 +67,23 @@ Used when `UserDefinedFunction` is requested to <<apply, execute>>
 
 === [[apply]] Executing UserDefinedFunction (Creating Column with ScalaUDF Expression) -- `apply` Method
 
-[source, scala]
-----
-apply(exprs: Column*): Column
-----
+```scala
+apply(
+  exprs: Column*): Column
+```
 
-`apply` creates a spark-sql-Column.md#creating-instance[Column] with spark-sql-Expression-ScalaUDF.md#creating-instance[ScalaUDF] expression.
+`apply` creates a [Column](Column.md) with [ScalaUDF](expressions/ScalaUDF.md) expression.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions.udf
 scala> val lengthUDF = udf { s: String => s.length }
 lengthUDF: org.apache.spark.sql.expressions.UserDefinedFunction = UserDefinedFunction(<function1>,IntegerType,Some(List(StringType)))
 
 scala> lengthUDF($"name")
 res1: org.apache.spark.sql.Column = UDF(name)
-----
+```
 
-NOTE: `apply` is used when...FIXME
+`apply` is used when...FIXME
 
 === [[asNonNullable]] Marking UserDefinedFunction as NonNullable -- `asNonNullable` Method
 
@@ -95,7 +94,7 @@ asNonNullable(): UserDefinedFunction
 
 `asNonNullable`...FIXME
 
-NOTE: `asNonNullable` is used when...FIXME
+`asNonNullable` is used when...FIXME
 
 === [[withName]] Naming UserDefinedFunction -- `withName` Method
 

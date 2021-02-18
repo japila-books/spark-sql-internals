@@ -8,7 +8,7 @@ title: UnresolvedHint
 
 * spark-sql-dataset-operators.md#hint[Dataset.hint] operator is used
 
-* `AstBuilder` spark-sql-AstBuilder.md#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
+* `AstBuilder` sql/AstBuilder.md#withHints[converts] `/*+ hint */` in `SELECT` SQL queries
 
 [source, scala]
 ----

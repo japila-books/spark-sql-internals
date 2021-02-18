@@ -27,7 +27,7 @@ res1: String =
  |  ParallelCollectionRDD[0] at execute at <console>:26 []
 ```
 
-When <<doExecute, executed>>, `GenerateExec` spark-sql-Expression-Generator.md#eval[executes] (aka _evaluates_) the <<boundGenerator, Generator>> expression on every row in a RDD partition.
+When <<doExecute, executed>>, `GenerateExec` expressions/Generator.md#eval[executes] (aka _evaluates_) the <<boundGenerator, Generator>> expression on every row in a RDD partition.
 
 ![GenerateExec's Execution -- `doExecute` Method](../images/spark-sql-GenerateExec-doExecute.png)
 
@@ -306,7 +306,7 @@ NOTE: `codeGenAccessor` is used...FIXME
 
 `GenerateExec` takes the following when created:
 
-* [[generator]] spark-sql-Expression-Generator.md[Generator]
+* [[generator]] expressions/Generator.md[Generator]
 * [[join]] `join` flag
 * [[outer]] `outer` flag
 * [[generatorOutput]] Generator's output schema

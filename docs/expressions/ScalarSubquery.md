@@ -6,7 +6,7 @@
 
 IMPORTANT: Spark SQL uses the name of `ScalarSubquery` twice to represent a `SubqueryExpression` (this page) and  an spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ExecSubqueryExpression]. You've been warned.
 
-`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to spark-sql-AstBuilder.md#visitSubqueryExpression[parse a subquery expression].
+`ScalarSubquery` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to sql/AstBuilder.md#visitSubqueryExpression[parse a subquery expression].
 
 [source, scala]
 ----
@@ -36,4 +36,4 @@ val sql = "select g from t group by g having a > (select b from s)"
 
 * [[plan]] Subquery spark-sql-LogicalPlan.md[logical plan]
 * [[children]] Child Expression.md[expressions] (default: no children)
-* [[exprId]] Expression ID (as `ExprId` and defaults to a spark-sql-Expression-NamedExpression.md#newExprId[new ExprId])
+* [[exprId]] Expression ID (as `ExprId` and defaults to a expressions/NamedExpression.md#newExprId[new ExprId])

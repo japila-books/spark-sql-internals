@@ -1,17 +1,14 @@
-title: UnresolvedStar
-
 # UnresolvedStar Expression
 
-`UnresolvedStar` is a spark-sql-Expression-Star.md[Star] expression that represents a star (i.e. all) expression in a logical query plan.
+`UnresolvedStar` is a [Star](Star.md) expression that represents a star (i.e. all) expression in a logical query plan.
 
-`UnresolvedStar` is <<creating-instance, created>> when:
+`UnresolvedStar` is [created](#creating-instance) when:
 
-* `Column` is spark-sql-Column.md#star[created] with `*`
+* `Column` is [created](../Column.md#star) with `*`
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitStar[visitStar]
+* `AstBuilder` is requested to [visitStar](../sql/AstBuilder.md#visitStar)
 
-[source, scala]
-----
+```text
 val q = spark.range(5).select("*")
 val plan = q.queryExecution.logical
 scala> println(plan.numberedTreeString)
@@ -25,12 +22,12 @@ val starExpr = plan.expressions.head.asInstanceOf[UnresolvedStar]
 val namedExprs = starExpr.expand(input = q.queryExecution.analyzed, spark.sessionState.analyzer.resolver)
 scala> println(namedExprs.head.numberedTreeString)
 00 id#0: bigint
-----
+```
 
 [[resolved]]
 `UnresolvedStar` can never be Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical resolution rule is executed).
 
-NOTE: `UnresolvedStar` can only be used in spark-sql-Expression-Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
+NOTE: `UnresolvedStar` can only be used in Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
 
 [[Unevaluable]][[eval]][[doGenCode]]
 Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it [cannot be evaluated](Unevaluable.md) either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
@@ -77,7 +74,7 @@ You could also use `$"*"` or `'*` to create an `UnresolvedStar`, but that requir
 
 [NOTE]
 ====
-`AstBuilder` spark-sql-AstBuilder.md#visitFunctionCall[replaces] `count(*)` (with no `DISTINCT` keyword) to `count(1)`.
+`AstBuilder` sql/AstBuilder.md#visitFunctionCall[replaces] `count(*)` (with no `DISTINCT` keyword) to `count(1)`.
 
 ```
 val q = sql("SELECT COUNT(*) FROM RANGE(1,2,3)")
@@ -99,13 +96,13 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 expand(input: LogicalPlan, resolver: Resolver): Seq[NamedExpression]
 ----
 
-NOTE: `expand` is part of spark-sql-Expression-Star.md#expand[Star Contract] to...FIXME.
+NOTE: `expand` is part of Star.md#expand[Star Contract] to...FIXME.
 
 `expand` first expands to named expressions per <<target, target>>:
 
 * For unspecified <<target, target>>, `expand` gives the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
 
-* For <<target, target>> with one element, `expand` gives the table (attribute) in the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (using spark-sql-Expression-NamedExpression.md#qualifier[qualifiers]) if available
+* For <<target, target>> with one element, `expand` gives the table (attribute) in the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (using NamedExpression.md#qualifier[qualifiers]) if available
 
 With no result earlier, `expand` then requests the `input` logical query plan to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>> name parts to a named expression.
 

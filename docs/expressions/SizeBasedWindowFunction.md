@@ -1,6 +1,6 @@
 # SizeBasedWindowFunction &mdash; Declarative Window Aggregate Functions with Window Size
 
-`SizeBasedWindowFunction` is the <<contract, extension>> of the <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
+`SizeBasedWindowFunction` is the <<contract, extension>> of the <<expressions/AggregateWindowFunction.md#, AggregateWindowFunction Contract>> for <<implementations, window functions>> that require the <<n, size of the current window>> for calculation.
 
 [[contract]]
 [source, scala]

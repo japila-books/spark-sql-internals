@@ -793,10 +793,10 @@ nav:
       - InternalRow: InternalRow.md
       - UnsafeRow: UnsafeRow.md
       - AggregationIterator:
-        - spark-sql-AggregationIterator.md
+        - AggregationIterator.md
         - spark-sql-ObjectAggregationIterator.md
         - spark-sql-SortBasedAggregationIterator.md
-        - spark-sql-TungstenAggregationIterator.md
+        - TungstenAggregationIterator.md
       - spark-sql-CatalystSerde.md
       - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
@@ -905,9 +905,9 @@ nav:
       - spark-sql-DataFrameNaFunctions.md
       - spark-sql-DataFrameStatFunctions.md
     - Column:
-      - spark-sql-Column.md
-      - spark-sql-column-operators.md
-      - spark-sql-TypedColumn.md
+      - Column: Column.md
+      - Column Operators: spark-sql-column-operators.md
+      - TypedColumn: TypedColumn.md
     - Basic Aggregation:
       - spark-sql-basic-aggregation.md
       - RelationalGroupedDataset: RelationalGroupedDataset.md
@@ -917,7 +917,7 @@ nav:
       - spark-sql-joins-broadcast.md
     - Window Aggregation:
       - spark-sql-window-aggregation.md
-      - spark-sql-WindowSpec.md
+      - WindowSpec.md
       - spark-sql-WindowSpec-Window.md
     - Standard Functions:
       - spark-sql-functions.md
@@ -929,7 +929,7 @@ nav:
     - User-Defined Functions:
       - spark-sql-udfs.md
       - spark-sql-udfs-blackbox.md
-      - spark-sql-UserDefinedFunction.md
+      - UserDefinedFunction.md
     - Schema:
       - spark-sql-schema.md
       - StructType: StructType.md
@@ -972,7 +972,7 @@ nav:
     - RDDConversions: spark-sql-RDDConversions.md
     - ShuffledRowRDD: ShuffledRowRDD.md
     - UnsupportedOperationChecker: UnsupportedOperationChecker.md
-    - CheckAnalysis: spark-sql-Analyzer-CheckAnalysis.md
+    - CheckAnalysis: CheckAnalysis.md
     - CatalystTypeConverters: CatalystTypeConverters.md
     - StatFunctions: spark-sql-StatFunctions.md
     - SubExprUtils: spark-sql-SubExprUtils.md
@@ -981,13 +981,13 @@ nav:
     - SchemaUtils: spark-sql-SchemaUtils.md
     - AggUtils: AggUtils.md
     - ScalaReflection: spark-sql-ScalaReflection.md
-    - CreateStruct: spark-sql-CreateStruct.md
+    - CreateStruct: CreateStruct.md
     - MultiInstanceRelation: spark-sql-MultiInstanceRelation.md
     - TypeCoercion: spark-sql-TypeCoercion.md
     - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md
-    - PhysicalAggregation: spark-sql-PhysicalAggregation.md
-    - PhysicalOperation: spark-sql-PhysicalOperation.md
+    - PhysicalAggregation: PhysicalAggregation.md
+    - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
     - SizeEstimator: spark-sql-SizeEstimator.md
     - PartitioningUtils: spark-sql-PartitioningUtils.md

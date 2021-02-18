@@ -54,7 +54,7 @@ NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic`
 | `InputFileName`
 | [[InputFileName]]
 
-| spark-sql-Expression-MonotonicallyIncreasingID.md[MonotonicallyIncreasingID]
+| expressions/MonotonicallyIncreasingID.md[MonotonicallyIncreasingID]
 | [[MonotonicallyIncreasingID]]
 
 | `NondeterministicExpression`

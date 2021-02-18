@@ -45,7 +45,7 @@ NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-i
 
 `InsertIntoTable` (with UnresolvedRelation.md[UnresolvedRelation] leaf logical operator) is <<creating-instance, created>> when:
 
-* [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO` or `INSERT OVERWRITE TABLE` SQL statements are executed (as a spark-sql-AstBuilder.md#visitSingleInsertQuery[single insert] or a spark-sql-AstBuilder.md#visitMultiInsertQuery[multi-insert] query)
+* [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO` or `INSERT OVERWRITE TABLE` SQL statements are executed (as a sql/AstBuilder.md#visitSingleInsertQuery[single insert] or a sql/AstBuilder.md#visitMultiInsertQuery[multi-insert] query)
 
 * `DataFrameWriter` is requested to [insert a DataFrame into a table](../DataFrameWriter.md#insertInto)
 

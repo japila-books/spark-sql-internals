@@ -5,7 +5,7 @@ title: Project
 [[creating-instance]]
 `Project` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that takes the following when created:
 
-* [[projectList]] Project <<spark-sql-Expression-NamedExpression.md#, named expressions>>
+* [[projectList]] Project <<expressions/NamedExpression.md#, named expressions>>
 * [[child]] Child <<spark-sql-LogicalPlan.md#, logical operator>>
 
 `Project` is <<creating-instance, created>> to represent the following:
@@ -13,7 +13,7 @@ title: Project
 * Dataset operators, i.e. spark-sql-joins.md#joinWith[joinWith], spark-sql-dataset-operators.md#select[select] (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
 * `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#aliasPlan, aliasPlan>>)
-* SQL's spark-sql-AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
+* SQL's sql/AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
 
 `Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../catalyst/Optimizer.md) phases.
 
@@ -78,7 +78,7 @@ scala> println(qn.queryExecution.logical.numberedTreeString)
 // Examples with Project that was added during optimization
 ```
 
-NOTE: spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by spark-sql-Analyzer-CheckAnalysis.md#deterministic[CheckAnalysis].
+NOTE: spark-sql-Expression-Nondeterministic.md[Nondeterministic] expressions are allowed in `Project` logical operator and enforced by CheckAnalysis.md#deterministic[CheckAnalysis].
 
 [[output]]
 The catalyst/QueryPlan.md#output[output schema] of a `Project` is...FIXME

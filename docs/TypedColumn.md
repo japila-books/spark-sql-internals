@@ -1,30 +1,27 @@
 # TypedColumn
 
-`TypedColumn` is a spark-sql-Column.md[Column] with the <<encoder, ExpressionEncoder>> for the types of the input and the output.
+`TypedColumn` is a [Column](Column.md) with the [ExpressionEncoder](#encoder) for the types of the input and the output.
 
-`TypedColumn` is <<creating-instance, created>> using spark-sql-Column.md#as[as] operator on a `Column`.
+`TypedColumn` is [created](#creating-instance) using [as](Column.md#as) operator on a `Column`.
 
-[source, scala]
-----
+```text
 scala> val id = $"id".as[Int]
 id: org.apache.spark.sql.TypedColumn[Any,Int] = id
 
 scala> id.expr
 res1: org.apache.spark.sql.catalyst.expressions.Expression = 'id
-----
+```
 
 === [[name]] `name` Operator
 
-[source, scala]
-----
-name(alias: String): TypedColumn[T, U]
-----
+```scala
+name(
+  alias: String): TypedColumn[T, U]
+```
 
-NOTE: `name` is part of spark-sql-Column.md#name[Column Contract] to...FIXME.
+`name` is part of the [Column](Column.md#name) abstraction.
 
 `name`...FIXME
-
-NOTE: `name` is used when...FIXME
 
 === [[withInputType]] Creating TypedColumn -- `withInputType` Internal Method
 

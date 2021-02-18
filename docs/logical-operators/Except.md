@@ -4,7 +4,7 @@ title: Except
 
 `Except` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:
 
-* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. spark-sql-AstBuilder.md#visitSetOperation[AstBuilder])
+* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. sql/AstBuilder.md#visitSetOperation[AstBuilder])
 
 * spark-sql-dataset-operators.md#except[Dataset.except] and spark-sql-dataset-operators.md#exceptAll[Dataset.exceptAll]
 
@@ -71,7 +71,7 @@ assert(op.isInstanceOf[Except])
 
 === [[CheckAnalysis]] Except Only on Relations with Same Number of Columns
 
-`Except` logical operator can only be performed on spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[tables with the same number of columns].
+`Except` logical operator can only be performed on CheckAnalysis.md#checkAnalysis[tables with the same number of columns].
 
 ```
 scala> left.except(right)

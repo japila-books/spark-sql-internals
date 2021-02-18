@@ -384,7 +384,7 @@ NOTE: `createResultProjection` is used exclusively when `WindowExec` is <<doExec
 
 `WindowExec` takes the following when created:
 
-* [[windowExpression]] Window spark-sql-Expression-NamedExpression.md[named expressions]
+* [[windowExpression]] Window expressions/NamedExpression.md[named expressions]
 * [[partitionSpec]] Window partition specification expressions/Expression.md[expressions]
 * [[orderSpec]] Window order specification (as a collection of `SortOrder` expressions)
 * [[child]] Child <<SparkPlan.md#, physical operator>>

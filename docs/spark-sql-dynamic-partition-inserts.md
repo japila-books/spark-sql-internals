@@ -18,10 +18,10 @@ spark.range(10)
 **Dynamic Partition Inserts** is a feature of Spark SQL that allows for executing `INSERT OVERWRITE TABLE` SQL statements over partitioned [HadoopFsRelations](HadoopFsRelation.md) that limits what partitions are deleted to overwrite the partitioned table (and its partitions) with new data.
 
 [[dynamic-partitions]]
-*Dynamic partitions* are the partition columns that have no values defined explicitly in the PARTITION clause of <<spark-sql-AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
+*Dynamic partitions* are the partition columns that have no values defined explicitly in the PARTITION clause of <<sql/AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
 
 [[static-partitions]]
-*Static partitions* are the partition columns that have values defined explicitly in the PARTITION clause of <<spark-sql-AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
+*Static partitions* are the partition columns that have values defined explicitly in the PARTITION clause of <<sql/AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements (in the `partitionSpec` part).
 
 ```
 // Borrowed from https://medium.com/@anuvrat/writing-into-dynamic-partitions-using-spark-2e2b818a007a
@@ -35,7 +35,7 @@ GROUP BY ad;
 
 NOTE: `INSERT OVERWRITE TABLE` SQL statement is translated into <<InsertIntoTable.md#, InsertIntoTable>> logical operator.
 
-Dynamic Partition Inserts is only supported in SQL mode (for <<spark-sql-AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements).
+Dynamic Partition Inserts is only supported in SQL mode (for <<sql/AstBuilder.md#visitInsertOverwriteTable, INSERT OVERWRITE TABLE>> SQL statements).
 
 Dynamic Partition Inserts [is not supported](logical-analysis-rules/PreWriteCheck.md#apply-InsertableRelation) for non-file-based data sources ([InsertableRelations](InsertableRelation.md)s).
 

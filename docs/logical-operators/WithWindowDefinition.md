@@ -6,7 +6,7 @@ title: WithWindowDefinition
 `WithWindowDefinition` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical plan] with a single `child` logical plan and a `windowDefinitions` lookup table of spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition] per name.
 
 [[creating-instance]]
-`WithWindowDefinition` is created exclusively when `AstBuilder` spark-sql-AstBuilder.md#withWindows[parses window definitions].
+`WithWindowDefinition` is created exclusively when `AstBuilder` sql/AstBuilder.md#withWindows[parses window definitions].
 
 [[output]]
 The catalyst/QueryPlan.md#output[output schema] of `WithWindowDefinition` is exactly the output attributes of the <<child, child>> logical operator.

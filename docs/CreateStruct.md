@@ -24,9 +24,9 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 `apply` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> expression with the input `children` <<expressions/Expression.md#, expressions>> as follows:
 
-* For <<spark-sql-Expression-NamedExpression.md#, NamedExpression>> expressions that are <<expressions/Expression.md#resolved, resolved>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.md#apply, Literal>> expression (with the <<spark-sql-Expression-NamedExpression.md#name, name>> of the `NamedExpression`) and the `NamedExpression` itself
+* For <<expressions/NamedExpression.md#, NamedExpression>> expressions that are <<expressions/Expression.md#resolved, resolved>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.md#apply, Literal>> expression (with the <<expressions/NamedExpression.md#name, name>> of the `NamedExpression`) and the `NamedExpression` itself
 
-* For <<spark-sql-Expression-NamedExpression.md#, NamedExpression>> expressions that are not <<expressions/Expression.md#resolved, resolved>> yet, `apply` creates a pair of a `NamePlaceholder` expression and the `NamedExpression` itself
+* For <<expressions/NamedExpression.md#, NamedExpression>> expressions that are not <<expressions/Expression.md#resolved, resolved>> yet, `apply` creates a pair of a `NamePlaceholder` expression and the `NamedExpression` itself
 
 * For all other <<expressions/Expression.md#, expressions>>, `apply` creates a pair of a <<spark-sql-Expression-Literal.md#apply, Literal>> expression (with the value as `col[index]`) and the `Expression` itself
 
@@ -40,7 +40,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `Stack` generator expression is requested to <<spark-sql-Expression-Stack.md#doGenCode, generate a Java source code>>
 
-* `AstBuilder` is requested to parse a <<spark-sql-AstBuilder.md#visitStruct, struct>> and <<spark-sql-AstBuilder.md#visitRowConstructor, row constructor>>
+* `AstBuilder` is requested to parse a <<sql/AstBuilder.md#visitStruct, struct>> and <<sql/AstBuilder.md#visitRowConstructor, row constructor>>
 
 * `ColumnStat` is requested to <<spark-sql-ColumnStat.md#statExprs, statExprs>>
 

@@ -17,7 +17,7 @@
 | `PivotFirst`
 |
 
-| spark-sql-Expression-ScalaUDAF.md[ScalaUDAF]
+| expressions/ScalaUDAF.md[ScalaUDAF]
 |
 
 | spark-sql-Expression-TypedImperativeAggregate.md[TypedImperativeAggregate]
@@ -54,7 +54,7 @@ Used when:
 
 * `AggregateProcessor` is spark-sql-AggregateProcessor.md[initialized] (for window aggregate functions)
 
-* spark-sql-AggregationIterator.md[AggregationIterator], <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>, spark-sql-TungstenAggregationIterator.md[TungstenAggregationIterator] (for aggregate functions)
+* AggregationIterator.md[AggregationIterator], <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>, TungstenAggregationIterator.md[TungstenAggregationIterator] (for aggregate functions)
 
 | [[inputAggBufferOffset]] `inputAggBufferOffset`
 |
@@ -64,7 +64,7 @@ a|
 
 Used when:
 
-* `AggregationIterator` does spark-sql-AggregationIterator.md#generateProcessRow[generateProcessRow] (for aggregate functions)
+* `AggregationIterator` does AggregationIterator.md#generateProcessRow[generateProcessRow] (for aggregate functions)
 
 | [[mutableAggBufferOffset]] `mutableAggBufferOffset`
 |
@@ -75,7 +75,7 @@ a|
 Used when:
 
 * `AggregateProcessor` is spark-sql-AggregateProcessor.md#update[updated] (for window aggregate functions)
-* spark-sql-AggregationIterator.md[AggregationIterator] (for aggregate functions)
+* AggregationIterator.md[AggregationIterator] (for aggregate functions)
 
 | [[withNewInputAggBufferOffset]] `withNewInputAggBufferOffset`
 |

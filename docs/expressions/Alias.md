@@ -2,7 +2,7 @@ title: Alias
 
 # Alias Unary Expression
 
-`Alias` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and a spark-sql-Expression-NamedExpression.md[named expression].
+`Alias` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and a expressions/NamedExpression.md[named expression].
 
 `Alias` is <<creating-instance, created>> when...FIXME
 

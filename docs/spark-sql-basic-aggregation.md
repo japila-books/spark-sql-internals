@@ -16,7 +16,7 @@ You can calculate aggregates over a group of rows in a Dataset.md[Dataset] using
 
 | <<groupBy, groupBy>>
 | [RelationalGroupedDataset](RelationalGroupedDataset.md)
-| Used for *untyped aggregates* using DataFrames. Grouping is described using spark-sql-Column.md[column expressions] or column names.
+| Used for *untyped aggregates* using DataFrames. Grouping is described using [column expressions](Column.md) or column names.
 
 | <<groupByKey, groupByKey>>
 | [KeyValueGroupedDataset](KeyValueGroupedDataset.md)
@@ -65,13 +65,15 @@ scala> spark.range(10).agg(sum('id) as "sum").show
 
 === [[groupBy]] Untyped Grouping -- `groupBy` Operator
 
-[source, scala]
-----
-groupBy(cols: Column*): RelationalGroupedDataset
-groupBy(col1: String, cols: String*): RelationalGroupedDataset
-----
+```scala
+groupBy(
+  cols: Column*): RelationalGroupedDataset
+groupBy(
+  col1: String,
+  cols: String*): RelationalGroupedDataset
+```
 
-`groupBy` operator groups the rows in a `Dataset` by columns (as spark-sql-Column.md[Column expressions] or names).
+`groupBy` operator groups the rows in a `Dataset` by columns (as [Column expressions](Column.md) or names).
 
 `groupBy` gives a [RelationalGroupedDataset](RelationalGroupedDataset.md) to execute aggregate functions or operators.
 

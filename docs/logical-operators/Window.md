@@ -11,7 +11,7 @@ title: Window
 * [CleanupAliases](../logical-analysis-rules/CleanupAliases.md) logical analysis rule is executed
 
 [[output]]
-When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
+When requested for <<catalyst/QueryPlan.md#output, output schema attributes>>, `Window` requests the <<child, child>> logical operator for them and adds the <<expressions/NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
 
 NOTE: `Window` logical operator is a subject of pruning unnecessary window expressions in <<ColumnPruning.md#, ColumnPruning>> logical optimization and collapsing window operators in <<CollapseWindow.md#, CollapseWindow>> logical optimization.
 
@@ -39,7 +39,7 @@ window(
 
 `Window` takes the following when created:
 
-* [[windowExpression]] Window spark-sql-Expression-NamedExpression.md[named expressions]
+* [[windowExpression]] Window expressions/NamedExpression.md[named expressions]
 * [[partitionSpec]] Window partition specification expressions/Expression.md[expressions]
 * [[orderSpec]] Window order specification (as a collection of `SortOrder` expressions)
 * [[child]] Child <<spark-sql-LogicalPlan.md#, logical operator>>
@@ -51,7 +51,7 @@ window(
 windowOutputSet: AttributeSet
 ----
 
-`windowOutputSet` simply creates a `AttributeSet` with the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
+`windowOutputSet` simply creates a `AttributeSet` with the <<expressions/NamedExpression.md#toAttribute, attributes>> of the <<windowExpressions, window named expressions>>.
 
 [NOTE]
 ====

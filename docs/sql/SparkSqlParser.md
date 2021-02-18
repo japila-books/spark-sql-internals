@@ -50,7 +50,7 @@ assert(spark.sessionState.sqlParser.isInstanceOf[SparkSqlParser])
 
 ## Translating SQL Statements to Column API
 
-`SparkSqlParser` is used to translate an expression to the corresponding [Column](../spark-sql-Column.md) in the following:
+`SparkSqlParser` is used to translate an expression to the corresponding [Column](../Column.md) in the following:
 
 * [expr](../spark-sql-functions.md#expr) standard function
 * Dataset operators: [selectExpr](../Dataset.md#selectExpr), [filter](../Dataset.md#filter), [where](../Dataset.md#where)

@@ -95,7 +95,7 @@ If some other non-generator function is found for the name, `apply` fails the an
 
 * For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunctions], `apply` requests the [SessionCatalog](../Analyzer.md#catalog) to [find a function by name](../SessionCatalog.md#lookupFunction).
 
-* spark-sql-Expression-AggregateWindowFunction.md[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
+* expressions/AggregateWindowFunction.md[AggregateWindowFunctions] are returned directly or `apply` fails the analysis phase by reporting an `AnalysisException` when the `UnresolvedFunction` has spark-sql-Expression-UnresolvedFunction.md#isDistinct[isDistinct] flag enabled.
 +
 ```
 [name] does not support the modifier DISTINCT

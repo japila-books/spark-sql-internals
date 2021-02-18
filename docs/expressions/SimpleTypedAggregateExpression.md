@@ -24,7 +24,7 @@
 * [[inputDeserializer]] Optional input deserializer [expression](Expression.md)
 * [[inputClass]] Optional Java class for the input
 * [[inputSchema]] Optional [schema](../StructType.md) for the input
-* [[bufferSerializer]] Buffer serializer (as a collection of spark-sql-Expression-NamedExpression.md[named expressions])
+* [[bufferSerializer]] Buffer serializer (as a collection of expressions/NamedExpression.md[named expressions])
 * [[bufferDeserializer]] Buffer deserializer Expression.md[expression]
 * [[outputSerializer]] Output serializer (as a collection of Expression.md[expressions])
 * [[dataType]] [DataType](../DataType.md)

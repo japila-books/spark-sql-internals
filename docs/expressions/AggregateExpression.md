@@ -6,7 +6,7 @@
 
 * [[aggregateFunction]] [AggregateFunction](AggregateFunction.md)
 * [[mode]] `AggregateMode`
-* [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the <<aggregateFunction, aggregate function>>)
+* [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the [aggregate function](#aggregateFunction))
 * [[resultId]] `ExprId`
 
 `AggregateExpression` is created when:
@@ -17,7 +17,7 @@
 
 * `AggUtils` is requested to [planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct) (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
-* `Aggregator` is requested for a spark-sql-TypedColumn.md[TypedColumn] (using `Aggregator.toColumn`)
+* `Aggregator` is requested for a [TypedColumn](../TypedColumn.md) (using `Aggregator.toColumn`)
 
 * `AggregateFunction` is spark-sql-Expression-AggregateFunction.md#toAggregateExpression[wrapped in a AggregateExpression]
 

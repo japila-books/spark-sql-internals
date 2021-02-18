@@ -2,9 +2,9 @@ title: UnresolvedGenerator
 
 # UnresolvedGenerator Expression
 
-`UnresolvedGenerator` is a spark-sql-Expression-Generator.md[Generator] that represents an unresolved generator in a logical query plan.
+`UnresolvedGenerator` is a expressions/Generator.md[Generator] that represents an unresolved generator in a logical query plan.
 
-`UnresolvedGenerator` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to spark-sql-AstBuilder.md#withGenerate[withGenerate] (as part of Generate.md#generator[Generate] logical operator) for SQL's `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+`UnresolvedGenerator` is <<creating-instance, created>> exclusively when `AstBuilder` is requested to sql/AstBuilder.md#withGenerate[withGenerate] (as part of Generate.md#generator[Generate] logical operator) for SQL's `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
 
 [source, scala]
 ----
@@ -50,7 +50,7 @@ Cannot evaluate expression: [this]
 [[analysis-phase]]
 [NOTE]
 ====
-`UnresolvedGenerator` is resolved to a concrete spark-sql-Expression-Generator.md[Generator] expression when [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical resolution rule is executed.
+`UnresolvedGenerator` is resolved to a concrete expressions/Generator.md[Generator] expression when [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical resolution rule is executed.
 ====
 
 NOTE: `UnresolvedGenerator` is similar to spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] and differs mostly by the type (to make Spark development with Scala easier?)

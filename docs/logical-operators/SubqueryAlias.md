@@ -6,7 +6,7 @@ title: SubqueryAlias
 
 `SubqueryAlias` is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to parse a <<spark-sql-AstBuilder.md#visitNamedQuery, named>> or <<spark-sql-AstBuilder.md#visitAliasedQuery, aliased>> query, <<spark-sql-AstBuilder.md#aliasPlan, aliased query plan>> and <<spark-sql-AstBuilder.md#mayApplyAliasPlan, mayApplyAliasPlan>> in a SQL statement
+* `AstBuilder` is requested to parse a <<sql/AstBuilder.md#visitNamedQuery, named>> or <<sql/AstBuilder.md#visitAliasedQuery, aliased>> query, <<sql/AstBuilder.md#aliasPlan, aliased query plan>> and <<sql/AstBuilder.md#mayApplyAliasPlan, mayApplyAliasPlan>> in a SQL statement
 
 * <<spark-sql-dataset-operators.md#as, Dataset.as>> operator is used
 

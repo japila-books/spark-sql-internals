@@ -63,15 +63,14 @@ import org.apache.spark.sql.avro._
 
 === [[to_avro-internals]] Converting Column to Avro-Encoded Binary Column -- `to_avro` Method
 
-[source, scala]
-----
-to_avro(data: Column): Column
-----
+```scala
+to_avro(
+  data: Column): Column
+```
 
-`to_avro` creates a <<spark-sql-Column.md#, Column>> with the [CatalystDataToAvro](CatalystDataToAvro.md) unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column).
+`to_avro` creates a [Column](../../Column.md) with the [CatalystDataToAvro](CatalystDataToAvro.md) unary expression (with the [Catalyst expression](../../Column.md#expr) of the given `data` column).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.avro._
 val q = spark.range(1).withColumn("to_avro_id", to_avro('id))
 scala> q.show
@@ -93,19 +92,19 @@ val analyzedPlan = q.queryExecution.analyzed
 val toAvroExpr = analyzedPlan.expressions.drop(1).head.children.head.asInstanceOf[CatalystDataToAvro]
 scala> println(toAvroExpr.sql)
 to_avro(`id`, bigint)
-----
+```
 
-=== [[from_avro-internals]] Converting Avro-Encoded Column to Catalyst Value -- `from_avro` Method
+## <span id="from_avro-internals"> Converting Avro-Encoded Column to Catalyst Value
 
-[source, scala]
-----
-from_avro(data: Column, jsonFormatSchema: String): Column
-----
+```scala
+from_avro(
+  data: Column,
+  jsonFormatSchema: String): Column
+```
 
-`from_avro` creates a <<spark-sql-Column.md#, Column>> with the [AvroDataToCatalyst](AvroDataToCatalyst.md) unary expression (with the <<spark-sql-Column.md#expr, Catalyst expression>> of the given `data` column and the `jsonFormatSchema` JSON-encoded schema).
+`from_avro` creates a [Column](../../Column.md) with the [AvroDataToCatalyst](AvroDataToCatalyst.md) unary expression (with the [Catalyst expression](../../Column.md#expr) of the given `data` column and the `jsonFormatSchema` JSON-encoded schema).
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.avro._
 val data = spark.range(1).withColumn("to_avro_id", to_avro('id))
 
@@ -142,4 +141,4 @@ val analyzedPlan = q.queryExecution.analyzed
 val fromAvroExpr = analyzedPlan.expressions.head.children.head.asInstanceOf[AvroDataToCatalyst]
 scala> println(fromAvroExpr.sql)
 from_avro(`to_avro_id`, bigint)
-----
+```

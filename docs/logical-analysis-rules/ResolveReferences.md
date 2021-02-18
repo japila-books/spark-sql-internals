@@ -115,11 +115,11 @@ buildExpandedProjectList(
   child: LogicalPlan): Seq[NamedExpression]
 ----
 
-`buildExpandedProjectList` expands (_converts_) spark-sql-Expression-Star.md[Star] expressions in the input spark-sql-Expression-NamedExpression.md[named expressions] recursively (down the expression tree) per expression:
+`buildExpandedProjectList` expands (_converts_) expressions/Star.md[Star] expressions in the input expressions/NamedExpression.md[named expressions] recursively (down the expression tree) per expression:
 
-* For a `Star` expression, `buildExpandedProjectList` requests it to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan
+* For a `Star` expression, `buildExpandedProjectList` requests it to expressions/Star.md#expand[expand] given the input `child` logical plan
 
-* For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
+* For a `UnresolvedAlias` expression with a `Star` child expression, `buildExpandedProjectList` requests it to expressions/Star.md#expand[expand] given the input `child` logical plan (similarly to a `Star` expression alone in the above case)
 
 * For `exprs` with `Star` expressions down the expression tree, `buildExpandedProjectList` <<expandStarExpression, expandStarExpression>> passing the input `exprs` and `child`
 
@@ -134,7 +134,7 @@ expandStarExpression(expr: Expression, child: LogicalPlan): Expression
 
 `expandStarExpression` expands (_transforms_) the following expressions in the input `expr` expressions/Expression.md[expression]:
 
-1. For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression` requests the `Star` expressions to spark-sql-Expression-Star.md#expand[expand] given the input `child` logical plan and the [resolver](../Analyzer.md#resolver).
+1. For spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] expressions with expressions/Star.md[Star] child expressions, `expandStarExpression` requests the `Star` expressions to expressions/Star.md#expand[expand] given the input `child` logical plan and the [resolver](../Analyzer.md#resolver).
 +
 ```
 // Using Catalyst DSL to create a logical plan with a function with Star child expression
@@ -152,13 +152,13 @@ scala> println(plan.numberedTreeString)
 // CAUTION: FIXME How to demo that the plan gets resolved using ResolveReferences.expandStarExpression?
 ```
 
-* For <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with spark-sql-Expression-Star.md[Star] child expressions among the values, `expandStarExpression`...FIXME
+* For <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with expressions/Star.md[Star] child expressions among the values, `expandStarExpression`...FIXME
 
-* For spark-sql-Expression-CreateArray.md[CreateArray] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression`...FIXME
+* For spark-sql-Expression-CreateArray.md[CreateArray] expressions with expressions/Star.md[Star] child expressions, `expandStarExpression`...FIXME
 
-* For spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] expressions with spark-sql-Expression-Star.md[Star] child expressions, `expandStarExpression`...FIXME
+* For spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] expressions with expressions/Star.md[Star] child expressions, `expandStarExpression`...FIXME
 
-For any other uses of spark-sql-Expression-Star.md[Star] expressions, `expandStarExpression` fails analysis with a `AnalysisException`:
+For any other uses of expressions/Star.md[Star] expressions, `expandStarExpression` fails analysis with a `AnalysisException`:
 
 ```
 Invalid usage of '*' in expression '[exprName]'

@@ -38,7 +38,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>>) that are <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions which are not <<expressions/Expression.md#resolved, resolved>> yet and replaces `NamePlaceholders` with <<spark-sql-Expression-Literal.md#, Literal>> expressions.
 
-In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.md#children, children>> and replaces them with the <<spark-sql-Expression-NamedExpression.md#name, name>> of corresponding <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>, but only if the `NamedExpression` is resolved.
+In other words, `apply` finds unresolved <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with `NamePlaceholder` expressions in the <<spark-sql-Expression-CreateNamedStruct.md#children, children>> and replaces them with the <<expressions/NamedExpression.md#name, name>> of corresponding <<expressions/NamedExpression.md#, NamedExpression>>, but only if the `NamedExpression` is resolved.
 
 In the end, `apply` creates a <<spark-sql-Expression-CreateNamedStruct.md#creating-instance, CreateNamedStruct>> with new children.
 

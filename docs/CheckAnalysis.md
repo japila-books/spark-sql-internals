@@ -95,7 +95,7 @@ Project [COUNT(1) OVER (PARTITION BY value UnspecifiedFrame)#97L]
   at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
 ```
 
-| [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.md#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.md#frameSpecification, window frame specification>>
+| [[WindowExpression-OffsetWindowFunction]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<expressions/OffsetWindowFunction.md#, OffsetWindowFunction>> window function with an empty <<spark-sql-Expression-WindowSpecDefinition.md#orderSpec, order specification>> or a non-offset <<spark-sql-Expression-WindowSpecDefinition.md#frameSpecification, window frame specification>>
 a| Fails analysis with the error message:
 
 [options="wrap"]
@@ -103,7 +103,7 @@ a| Fails analysis with the error message:
 An offset window function can only be evaluated in an ordered row-based window frame with a single offset: [windowExpr]
 ----
 
-| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.md#windowFunction, window function>> that is not one of the following expressions: [AggregateExpression](expressions/AggregateExpression.md), <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>> or <<spark-sql-Expression-OffsetWindowFunction.md#, OffsetWindowFunction>>
+| [[WindowExpression]] <<spark-sql-Expression-WindowExpression.md#, WindowExpressions>> with a <<spark-sql-Expression-WindowExpression.md#windowFunction, window function>> that is not one of the following expressions: [AggregateExpression](expressions/AggregateExpression.md), <<expressions/AggregateWindowFunction.md#, AggregateWindowFunction>> or <<expressions/OffsetWindowFunction.md#, OffsetWindowFunction>>
 a| Fails analysis with the error message:
 
 ```

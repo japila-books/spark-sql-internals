@@ -31,15 +31,13 @@
 
 === [[current_date]] Current Date As Date Column -- `current_date` Function
 
-[source, scala]
-----
+```text
 current_date(): Column
-----
+```
 
 `current_date` function gives the current date as a [date](DataType.md#DateType) column.
 
-[source, scala]
-----
+```text
 val df = spark.range(1).select(current_date)
 scala> df.show
 +--------------+
@@ -51,12 +49,11 @@ scala> df.show
 scala> df.printSchema
 root
  |-- current_date(): date (nullable = false)
-----
+```
 
-Internally, `current_date` creates a spark-sql-Column.md[Column] with `CurrentDate` Catalyst leaf expression.
+Internally, `current_date` creates a [Column](Column.md) with `CurrentDate` Catalyst leaf expression.
 
-[source, scala]
-----
+```text
 val c = current_date()
 import org.apache.spark.sql.catalyst.expressions.CurrentDate
 val cd = c.expr.asInstanceOf[CurrentDate]
@@ -65,19 +62,17 @@ current_date
 
 scala> println(cd.numberedTreeString)
 00 current_date(None)
-----
+```
 
-=== [[date_format]] `date_format` Function
+## <span id="date_format"> date_format
 
-[source, scala]
-----
+```scala
 date_format(dateExpr: Column, format: String): Column
-----
+```
 
-Internally, `date_format` creates a spark-sql-Column.md[Column] with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
+Internally, `date_format` creates a [Column](Column.md) with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
 
-[source, scala]
-----
+```text
 val c = date_format($"date", "dd/MM/yyyy")
 
 import org.apache.spark.sql.catalyst.expressions.DateFormatClass
@@ -89,7 +84,7 @@ scala> println(dfc.numberedTreeString)
 00 date_format('date, dd/MM/yyyy, None)
 01 :- 'date
 02 +- dd/MM/yyyy
-----
+```
 
 === [[current_timestamp]] `current_timestamp` Function
 
@@ -102,14 +97,15 @@ CAUTION: FIXME
 
 NOTE: `current_timestamp` is also `now` function in SQL.
 
-=== [[unix_timestamp]] Converting Current or Specified Time to Unix Timestamp -- `unix_timestamp` Function
+## <span id="unix_timestamp"> unix_timestamp
 
-[source, scala]
-----
+```scala
 unix_timestamp(): Column  // <1>
-unix_timestamp(time: Column): Column // <2>
-unix_timestamp(time: Column, format: String): Column
-----
+unix_timestamp(
+  time: Column): Column // <2>
+unix_timestamp(
+  time: Column, format: String): Column
+```
 <1> Gives current timestamp (in seconds)
 <2> Converts `time` string in format `yyyy-MM-dd HH:mm:ss` to Unix timestamp (in seconds)
 
@@ -117,7 +113,7 @@ unix_timestamp(time: Column, format: String): Column
 
 `unix_timestamp` supports a column of type `Date`, `Timestamp` or `String`.
 
-```
+```text
 // no time and format => current time
 scala> spark.range(1).select(unix_timestamp as "current_timestamp").show
 +-----------------+
@@ -142,9 +138,9 @@ scala> Seq("2017/01/01 00:00:00").toDF("time").withColumn("unix_timestamp", unix
 +-------------------+--------------+
 ```
 
-`unix_timestamp` returns `null` if conversion fails.
+`unix_timestamp` returns `null` when conversion fails.
 
-```
+```text
 // note slashes as date separators
 scala> Seq("2017/01/01 00:00:00").toDF("time").withColumn("unix_timestamp", unix_timestamp($"time")).show
 +-------------------+--------------+
@@ -154,11 +150,9 @@ scala> Seq("2017/01/01 00:00:00").toDF("time").withColumn("unix_timestamp", unix
 +-------------------+--------------+
 ```
 
-[NOTE]
-====
-`unix_timestamp` is also supported in SparkSession.md#sql[SQL mode].
+`unix_timestamp` is also supported in [SQL mode](SparkSession.md#sql).
 
-```
+```text
 scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show
 +--------------+
 |unix_timestamp|
@@ -166,9 +160,8 @@ scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show
 |    1493369225|
 +--------------+
 ```
-====
 
-Internally, `unix_timestamp` creates a spark-sql-Column.md[Column] with spark-sql-Expression-UnixTimestamp.md[UnixTimestamp] binary expression (possibly with `CurrentTimestamp`).
+Internally, `unix_timestamp` creates a [Column](Column.md) with [UnixTimestamp](expressions/UnixTimestamp.md) binary expression (possibly with `CurrentTimestamp`).
 
 === [[window]] Generating Time Windows -- `window` Function
 
@@ -283,11 +276,10 @@ scala> sums.show
 
 `windowDuration` and `slideDuration` are strings specifying the width of the window for duration and sliding identifiers, respectively.
 
-TIP: Use `CalendarInterval` for valid window identifiers.
+!!! TIP
+    Use `CalendarInterval` for valid window identifiers.
 
-NOTE: `window` is available as of Spark *2.0.0*.
-
-Internally, `window` creates a spark-sql-Column.md[Column] (with spark-sql-Expression-TimeWindow.md[TimeWindow] expression) available as `window` alias.
+Internally, `window` creates a [Column](Column.md) (with [TimeWindow](expressions/TimeWindow.md) expression) available as `window` alias.
 
 ```text
 // q is the query defined earlier
@@ -314,38 +306,42 @@ NOTE: The example is borrowed from https://flink.apache.org/news/2015/12/04/Intr
 
 The example shows how to use `window` function to model a traffic sensor that counts every 15 seconds the number of vehicles passing a certain location.
 
-=== [[to_date]] Converting Column To DateType -- `to_date` Function
+## <span id="to_date"> to_date
 
-[source, scala]
-----
-to_date(e: Column): Column
-to_date(e: Column, fmt: String): Column
-----
+```scala
+to_date(
+  e: Column): Column
+to_date(
+  e: Column,
+  fmt: String): Column
+```
 
 `to_date` converts the column into [DateType](DataType.md#DateType) (by casting to `DateType`).
 
 !!! note
     `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
 
-Internally, `to_date` creates a [Column](spark-sql-Column.md#creating-instance) with [ParseToDate](expressions/ParseToDate.md) expression (and `Literal` expression for `fmt`).
+Internally, `to_date` creates a [Column](Column.md) with [ParseToDate](expressions/ParseToDate.md) expression (and `Literal` expression for `fmt`).
 
 !!! tip
     Use [ParseToDate](expressions/ParseToDate.md) expression to use a column for the values of `fmt`.
 
-=== [[to_timestamp]] Converting Column To TimestampType -- `to_timestamp` Function
+## <span id="to_timestamp"> to_timestamp
 
-[source, scala]
-----
-to_timestamp(s: Column): Column
-to_timestamp(s: Column, fmt: String): Column
-----
+```scala
+to_timestamp(
+  s: Column): Column
+to_timestamp(
+  s: Column,
+  fmt: String): Column
+```
 
 `to_timestamp` converts the column into [TimestampType](DataType.md#TimestampType) (by casting to `TimestampType`).
 
 !!! note
     `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
 
-Internally, `to_timestamp` creates a spark-sql-Column.md#creating-instance[Column] with spark-sql-Expression-ParseToTimestamp.md[ParseToTimestamp] expression (and `Literal` expression for `fmt`).
+Internally, `to_timestamp` creates a [Column](Column.md) with [ParseToTimestamp](expressions/ParseToTimestamp.md) expression (and `Literal` expression for `fmt`).
 
 !!! tip
     Use [ParseToTimestamp](expressions/ParseToTimestamp.md) expression to use a column for the values of `fmt`.

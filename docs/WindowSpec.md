@@ -2,7 +2,7 @@ title: WindowSpec
 
 # WindowSpec -- Window Specification
 
-`WindowSpec` is a *window specification* that defines which rows are included in a *window* (_frame_), i.e. the set of rows that are associated with the current row by some _relation_.
+`WindowSpec` is a **window specification** that defines which rows are included in a **window** (_frame_), i.e. the set of rows that are associated with the current row by some _relation_.
 
 [[creating-instance]]
 `WindowSpec` takes the following when created:
@@ -13,14 +13,13 @@ title: WindowSpec
 
 * [[frame]] *Frame Specification* (`WindowFrame`) which defines the rows to be included in the frame for the current row, based on their relative position to the current row. For example, _"the three rows preceding the current row to the current row"_ describes a frame including the current input row and three rows appearing before the current row.
 
-You use <<spark-sql-WindowSpec-Window.md#, Window object>> to create a `WindowSpec`.
+You use [Window object](spark-sql-WindowSpec-Window.md) to create a `WindowSpec`.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.expressions.Window
 scala> val byHTokens = Window.partitionBy('token startsWith "h")
 byHTokens: org.apache.spark.sql.expressions.WindowSpec = org.apache.spark.sql.expressions.WindowSpec@574985d8
-----
+```
 
 Once the initial version of a `WindowSpec` is created, you use the <<methods, methods>> to further configure the window specification.
 
@@ -67,24 +66,25 @@ rowsBetween(start: Long, end: Long): WindowSpec
 ----
 |===
 
-With a window specification fully defined, you use <<spark-sql-Column.md#over, Column.over>> operator that associates the `WindowSpec` with an <<spark-sql-functions.md#aggregate-functions, aggregate>> or <<spark-sql-functions.md#window-functions, window>> function.
+With a window specification fully defined, you use [Column.over](Column.md#over) operator that associates the `WindowSpec` with an [aggregate](spark-sql-functions.md#aggregate-functions) or [window](spark-sql-functions.md#window-functions) function.
 
-[source, scala]
-----
+```text
 scala> :type windowSpec
 org.apache.spark.sql.expressions.WindowSpec
 
 import org.apache.spark.sql.functions.rank
 val c = rank over windowSpec
-----
+```
 
-=== [[withAggregate]] `withAggregate` Internal Method
+## <span id="withAggregate"> withAggregate
 
-[source, scala]
-----
-withAggregate(aggregate: Column): Column
-----
+```scala
+withAggregate(
+  aggregate: Column): Column
+```
 
 `withAggregate`...FIXME
 
-NOTE: `withAggregate` is used exclusively when <<spark-sql-Column.md#over, Column.over>> operator is used.
+`withAggregate` is used when:
+
+* [Column.over](Column.md#over) operator is used

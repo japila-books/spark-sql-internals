@@ -385,7 +385,7 @@ scala> inventory.rollup(expr("(item, color)") as "(item, color)").sum().show
 
 Internally, `rollup` spark-sql-dataset-operators.md#toDF[converts the `Dataset` into a `DataFrame`] (i.e. uses [RowEncoder](RowEncoder.md) as the encoder) and then creates a [RelationalGroupedDataset](RelationalGroupedDataset.md) (with `RollupType` group type).
 
-NOTE: <<Rollup, Rollup>> expression represents `GROUP BY \... WITH ROLLUP` in SQL in Spark's Catalyst Expression tree (after `AstBuilder` spark-sql-AstBuilder.md#withAggregation[parses a structured query with aggregation]).
+NOTE: <<Rollup, Rollup>> expression represents `GROUP BY \... WITH ROLLUP` in SQL in Spark's Catalyst Expression tree (after `AstBuilder` sql/AstBuilder.md#withAggregation[parses a structured query with aggregation]).
 
 !!! tip
     Read up on `rollup` in [Deeper into Postgres 9.5 - New Group By Options for Aggregation](https://www.compose.com/articles/deeper-into-postgres-9-5-new-group-by-options-for-aggregation/).
@@ -506,7 +506,7 @@ scala> q.show
 +-------+----+------+
 ```
 
-Internally, `GROUPING SETS` clause is parsed in spark-sql-AstBuilder.md#withAggregation[withAggregation] parsing handler (in `AstBuilder`) and becomes a GroupingSets.md[GroupingSets] logical operator internally.
+Internally, `GROUPING SETS` clause is parsed in sql/AstBuilder.md#withAggregation[withAggregation] parsing handler (in `AstBuilder`) and becomes a GroupingSets.md[GroupingSets] logical operator internally.
 
 === [[Rollup]] `Rollup` GroupingSet with CodegenFallback Expression (for `rollup` Operator)
 
@@ -516,6 +516,6 @@ Rollup(groupByExprs: Seq[Expression])
 extends GroupingSet
 ----
 
-`Rollup` expression represents <<rollup, rollup>> operator in Spark's Catalyst Expression tree (after `AstBuilder` spark-sql-AstBuilder.md#withAggregation[parses a structured query with aggregation]).
+`Rollup` expression represents <<rollup, rollup>> operator in Spark's Catalyst Expression tree (after `AstBuilder` sql/AstBuilder.md#withAggregation[parses a structured query with aggregation]).
 
 NOTE: `GroupingSet` is an expressions/Expression.md[Expression] with expressions/Expression.md#CodegenFallback[CodegenFallback] support.

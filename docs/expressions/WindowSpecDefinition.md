@@ -2,11 +2,11 @@
 
 `WindowSpecDefinition` is an [unevaluable expression](Unevaluable.md).
 
-`WindowSpecDefinition` is <<creating-instance, created>> when:
+`WindowSpecDefinition` is [created](#creating-instance) when:
 
 * `AstBuilder` is requested to [parse a window specification](../sql/AstBuilder.md#visitWindowDef) in a SQL query
 
-* [Column.over](../spark-sql-Column.md#over) operator is used
+* [Column.over](../Column.md#over) operator is used
 
 ```text
 import org.apache.spark.sql.expressions.Window

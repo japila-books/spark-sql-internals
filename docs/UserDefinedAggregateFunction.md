@@ -65,7 +65,7 @@ scala> q.show
 +-----+-----+
 ```
 
-The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] expression container.
+The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using expressions/ScalaUDAF.md[ScalaUDAF] expression container.
 
 ![UserDefinedAggregateFunction and ScalaUDAF Expression Container](images/spark-sql-UserDefinedAggregateFunction.png)
 
@@ -135,14 +135,15 @@ abstract class UserDefinedAggregateFunction {
 
 === [[apply]] Creating Column for UDAF -- `apply` Method
 
-[source, scala]
-----
-apply(exprs: Column*): Column
-----
+```scala
+apply(
+  exprs: Column*): Column
+```
 
-`apply` creates a spark-sql-Column.md[Column] with spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`apply` creates a [Column](Column.md) with [ScalaUDAF](expressions/ScalaUDAF.md) (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
-NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is disabled.
+!!! NOTE
+    `AggregateExpression` uses `Complete` mode and `isDistinct` flag is disabled.
 
 ```text
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction
@@ -168,19 +169,20 @@ MyCountUDAF('id,'name)
 
 === [[distinct]] Creating Column for UDAF with Distinct Values -- `distinct` Method
 
-[source, scala]
-----
-distinct(exprs: Column*): Column
-----
+```scala
+distinct(
+  exprs: Column*): Column
+```
 
-`distinct` creates a spark-sql-Column.md[Column] with spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`distinct` creates a [Column](Column.md) with [ScalaUDAF](expressions/ScalaUDAF.md) (inside [AggregateExpression](expressions/AggregateExpression.md)).
 
-NOTE: `AggregateExpression` uses `Complete` mode and `isDistinct` flag is enabled.
+!!! NOTE
+    `AggregateExpression` uses `Complete` mode and `isDistinct` flag is enabled.
 
-NOTE: `distinct` is like <<apply, apply>> but has `isDistinct` flag enabled.
+!!! NOTE
+    `distinct` is like [apply](#apply) but has `isDistinct` flag enabled.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction
 val myUDAF: UserDefinedAggregateFunction = ...
 scala> val myUdafCol = myUDAF.distinct($"id", $"name")
@@ -199,4 +201,4 @@ scala> println(aggExpr.numberedTreeString)
 
 scala> aggExpr.asInstanceOf[AggregateExpression].isDistinct
 res0: Boolean = true
-----
+```

@@ -31,7 +31,7 @@ Used when:
 
 * `StructType` is requested to [add a field](../StructType.md#add)
 
-* [Column.cast](../spark-sql-Column.md#cast)
+* [Column.cast](../Column.md#cast)
 
 * `HiveClientImpl` utility is requested to [getSparkSQLDataType](../hive/HiveClientImpl.md#getSparkSQLDataType)
 

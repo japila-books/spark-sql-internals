@@ -1,21 +1,19 @@
 # User-Defined Functions
 
-*User-Defined Functions* (aka *UDF*) is a feature of Spark SQL to define new spark-sql-Column.md[Column]-based functions that extend the vocabulary of Spark SQL's DSL for transforming Dataset.md[Datasets].
+**User-Defined Functions** (aka **UDF**) is a feature of Spark SQL to define new [Column](Column.md)-based functions that extend the vocabulary of Spark SQL's DSL for transforming Dataset.md[Datasets].
 
-[IMPORTANT]
-====
-Use the spark-sql-functions.md[higher-level standard Column-based functions] (with Dataset.md[Dataset operators]) whenever possible before reverting to developing user-defined functions since spark-sql-udfs-blackbox.md[UDFs are a blackbox] for Spark SQL and it cannot (and does not even try to) optimize them.
+!!! IMPORTANT
+    Use the [higher-level standard Column-based functions](spark-sql-functions.md) (with [Dataset operators](Dataset.md)) whenever possible before reverting to developing user-defined functions since [UDFs are a blackbox](spark-sql-udfs-blackbox.md) for Spark SQL and it cannot (and does not even try to) optimize them.
 
-As Reynold Xin from the Apache Spark project has once said on Spark's dev mailing list:
+    As Reynold Xin from the Apache Spark project has once said on Spark's dev mailing list:
 
-> There are simple cases in which we can analyze the UDFs byte code and infer what it is doing, but it is pretty difficult to do in general.
+    > There are simple cases in which we can analyze the UDFs byte code and infer what it is doing, but it is pretty difficult to do in general.
 
-Check out spark-sql-udfs-blackbox.md[UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice] if you want to know the internals.
-====
+    Check out [UDFs are Blackbox -- Don't Use Them Unless You've Got No Choice](spark-sql-udfs-blackbox.md) if you want to know the internals.
 
-You define a new UDF by defining a Scala function as an input parameter of <<udf-function, `udf` function>>. It accepts Scala functions of up to 10 input parameters.
+You define a new UDF by defining a Scala function as an input parameter of [udf function](#udf-function). It accepts Scala functions of up to 10 input parameters.
 
-```
+```text
 val dataset = Seq((0, "hello"), (1, "world")).toDF("id", "text")
 
 // Define a regular Scala function
@@ -39,11 +37,10 @@ scala> dataset.withColumn("upper", upperUDF('text)).show
 
 You can register UDFs to use in SparkSession.md#sql[SQL-based query expressions] via UDFRegistration.md[UDFRegistration] (that is available through SparkSession.md#udf[`SparkSession.udf` attribute]).
 
-[source, scala]
-----
+```text
 val spark: SparkSession = ...
 scala> spark.udf.register("myUpper", (input: String) => input.toUpperCase)
-----
+```
 
 You can query for available spark-sql-functions.md[standard] and user-defined functions using the [Catalog](Catalog.md) interface (that is available through SparkSession.md#catalog[`SparkSession.catalog` attribute]).
 

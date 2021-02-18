@@ -4,7 +4,7 @@ title: Sort
 
 `Sort` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents the following in a logical plan:
 
-* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<spark-sql-AstBuilder.md#withQueryResultClauses, parse a query>>)
+* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<sql/AstBuilder.md#withQueryResultClauses, parse a query>>)
 
 * <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<spark-sql-dataset-operators.md#randomSplit, Dataset.randomSplit>> operators
 
@@ -58,7 +58,7 @@ The <<spark-sql-LogicalPlan.md#maxRows, maxRows>> of a `Sort` operator is the `m
 [[catalyst-dsl]]
 TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
 
-NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis, checkAnalysis>>).
+NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<CheckAnalysis.md#checkAnalysis, checkAnalysis>>).
 
 NOTE: `Sort` logical operator is resolved to <<SortExec.md#, SortExec>> unary physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed.
 

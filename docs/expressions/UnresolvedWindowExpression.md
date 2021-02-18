@@ -9,7 +9,7 @@ title: UnresolvedWindowExpression
 * FIXME
 
 [[child]]
-`UnresolvedWindowExpression` is created to represent a `child` Expression.md[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` spark-sql-AstBuilder.md#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
+`UnresolvedWindowExpression` is created to represent a `child` Expression.md[expression] and `WindowSpecReference` (with an identifier for the window reference) when `AstBuilder` sql/AstBuilder.md#visitFunctionCall-UnresolvedWindowExpression[parses a function evaluated in a windowed context with a `WindowSpecReference`].
 
 `UnresolvedWindowExpression` is resolved to a <<WindowExpression, WindowExpression>> when `Analyzer` is requested to [resolve UnresolvedWindowExpressions](../Analyzer.md#WindowsSubstitution).
 

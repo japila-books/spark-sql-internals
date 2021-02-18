@@ -4,7 +4,7 @@ title: UnresolvedInlineTable
 
 `UnresolvedInlineTable` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents an inline table (aka _virtual table_ in Apache Hive).
 
-`UnresolvedInlineTable` is <<creating-instance, created>> when `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitInlineTable, parse an inline table>> in a SQL statement.
+`UnresolvedInlineTable` is <<creating-instance, created>> when `AstBuilder` is requested to <<sql/AstBuilder.md#visitInlineTable, parse an inline table>> in a SQL statement.
 
 [source, scala]
 ----

@@ -111,7 +111,7 @@ NOTE: You can register a new user-defined function using UDFRegistration.md[UDFR
 | `Left`
 | [[left]] left
 
-| <<spark-sql-Expression-MonotonicallyIncreasingID.md#, MonotonicallyIncreasingID>>
+| <<expressions/MonotonicallyIncreasingID.md#, MonotonicallyIncreasingID>>
 | [[monotonically_increasing_id]] monotonically_increasing_id
 
 | `NullIf`
@@ -126,13 +126,13 @@ NOTE: You can register a new user-defined function using UDFRegistration.md[UDFR
 | <<spark-sql-Expression-ParseToDate.md#, ParseToDate>>
 | [[to_date]] to_date
 
-| <<spark-sql-Expression-ParseToTimestamp.md#, ParseToTimestamp>>
+| <<expressions/ParseToTimestamp.md#, ParseToTimestamp>>
 | [[to_timestamp]] to_timestamp
 
 | `Right`
 | [[right]] right
 
-| <<spark-sql-CreateStruct.md#registryEntry, CreateNamedStruct>>
+| <<CreateStruct.md#registryEntry, CreateNamedStruct>>
 | [[struct]] struct
 |===
 

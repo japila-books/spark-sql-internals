@@ -146,7 +146,7 @@ NOTE: Spark 2.0 has introduced a new query model called spark-structured-streami
 
 A `Dataset` is spark-sql-dataset-operators.md#isLocal[local] if it was created from local collections using SparkSession.md#emptyDataset[SparkSession.emptyDataset] or SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
 
-NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](QueryExecution.md#analyzed) and spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis[checked].
+NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](QueryExecution.md#analyzed) and CheckAnalysis.md#checkAnalysis[checked].
 
 [[properties]]
 [[attributes]]

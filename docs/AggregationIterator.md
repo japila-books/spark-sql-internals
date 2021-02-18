@@ -19,7 +19,7 @@ title: AggregationIterator
 | <<spark-sql-SortBasedAggregationIterator.md#, SortBasedAggregationIterator>>
 | Used exclusively when `SortAggregateExec` physical operator is SortAggregateExec.md#doExecute[executed].
 
-| spark-sql-TungstenAggregationIterator.md[TungstenAggregationIterator]
+| TungstenAggregationIterator.md[TungstenAggregationIterator]
 a| Used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is executed
 
 |===
@@ -60,7 +60,7 @@ Used when:
 
 * `SortBasedAggregationIterator` is requested for the <<spark-sql-SortBasedAggregationIterator.md#next, next unsafe row>> and <<spark-sql-SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
-* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.md#next, next unsafe row>> and <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `TungstenAggregationIterator` is requested for the <<TungstenAggregationIterator.md#next, next unsafe row>> and <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
 
 | [[groupingAttributes]] `groupingAttributes`
 | Grouping spark-sql-Expression-Attribute.md[attributes]
@@ -82,12 +82,12 @@ Used when...FIXME
 
 `AggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
+* [[groupingExpressions]] Grouping expressions/NamedExpression.md[named expressions]
 * [[inputAttributes]] Input spark-sql-Expression-Attribute.md[attributes]
 * [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Result spark-sql-Expression-NamedExpression.md[named expressions]
+* [[resultExpressions]] Result expressions/NamedExpression.md[named expressions]
 * [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
 
 `AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
@@ -136,5 +136,5 @@ generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 
 * `AggregationIterator` is <<generateOutput, created>>
 
-* `TungstenAggregationIterator` is requested for the <<spark-sql-TungstenAggregationIterator.md#generateResultProjection, generateResultProjection>>
+* `TungstenAggregationIterator` is requested for the <<TungstenAggregationIterator.md#generateResultProjection, generateResultProjection>>
 ====

@@ -2,7 +2,7 @@ title: Star
 
 # Star Expression Contract
 
-`Star` is a <<contract, contract>> of Expression.md#LeafExpression[leaf] and spark-sql-Expression-NamedExpression.md[named expressions] that...FIXME
+`Star` is a <<contract, contract>> of Expression.md#LeafExpression[leaf] and expressions/NamedExpression.md[named expressions] that...FIXME
 
 [[contract]]
 [source, scala]
@@ -37,10 +37,10 @@ a| [[expand]] Used exclusively when `ResolveReferences` logical resolution rule 
 | Star
 | Description
 
-| [[ResolvedStar]] spark-sql-Expression-ResolvedStar.md[ResolvedStar]
+| [[ResolvedStar]] expressions/ResolvedStar.md[ResolvedStar]
 |
 
-| [[UnresolvedRegex]] spark-sql-Expression-UnresolvedRegex.md[UnresolvedRegex]
+| [[UnresolvedRegex]] expressions/UnresolvedRegex.md[UnresolvedRegex]
 |
 
 | [[UnresolvedStar]] spark-sql-Expression-UnresolvedStar.md[UnresolvedStar]

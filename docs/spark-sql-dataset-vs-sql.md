@@ -14,4 +14,4 @@ This section describes the differences between Spark SQL features to develop Spa
 
 . spark-sql-Expression-RuntimeReplaceable.md#implementations[RuntimeReplaceable Expressions] are only available using SQL mode by means of SQL functions like `nvl`, `nvl2`, `ifnull`, `nullif`, etc.
 
-. <<spark-sql-column-operators.md#isin, Column.isin>> and spark-sql-AstBuilder.md#withPredicate[SQL IN predicate with a subquery] (and spark-sql-Expression-In.md[In Predicate Expression])
+. <<spark-sql-column-operators.md#isin, Column.isin>> and sql/AstBuilder.md#withPredicate[SQL IN predicate with a subquery] (and spark-sql-Expression-In.md[In Predicate Expression])

@@ -21,9 +21,9 @@ trait TypedAggregateExpression extends AggregateFunction {
 
 `TypedAggregateExpression` is used when:
 
-* `TypedColumn` is requested to [withInputType](../spark-sql-TypedColumn.md#withInputType) (for [Dataset.select](../spark-sql-dataset-operators.md#select), [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) and [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operators)
+* `TypedColumn` is requested to [withInputType](../TypedColumn.md#withInputType) (for [Dataset.select](../spark-sql-dataset-operators.md#select), [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) and [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operators)
 
-* `Column` is requested to [generateAlias](../spark-sql-Column.md#generateAlias) and [named](../spark-sql-Column.md#named) (for [Dataset.select](../spark-sql-dataset-operators.md#select) and [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) operators)
+* `Column` is requested to [generateAlias](../Column.md#generateAlias) and [named](../Column.md#named) (for [Dataset.select](../spark-sql-dataset-operators.md#select) and [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) operators)
 
 * `RelationalGroupedDataset` is requested to [alias](../RelationalGroupedDataset.md#alias) (when `RelationalGroupedDataset` is requested to [create a DataFrame from aggregate expressions](../RelationalGroupedDataset.md#toDF))
 

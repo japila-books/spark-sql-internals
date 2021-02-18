@@ -23,7 +23,7 @@ The <<Expression.md#, expression>> that returns the final value for the aggregat
 
 Used when:
 
-* `AggregationIterator` is requested for the [generateResultProjection](../spark-sql-AggregationIterator.md#generateResultProjection)
+* `AggregationIterator` is requested for the [generateResultProjection](../AggregationIterator.md#generateResultProjection)
 
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 
@@ -62,7 +62,7 @@ updateExpressions: Seq[Expression]
 | DeclarativeAggregate
 | Description
 
-| <<spark-sql-Expression-AggregateWindowFunction.md#, AggregateWindowFunction>>
+| <<expressions/AggregateWindowFunction.md#, AggregateWindowFunction>>
 | [[AggregateWindowFunction]] Contract for declarative window aggregate function expressions
 
 | Average

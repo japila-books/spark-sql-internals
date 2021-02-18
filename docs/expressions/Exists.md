@@ -8,7 +8,7 @@
 
 * `PullupCorrelatedPredicates` is requested to spark-sql-PullupCorrelatedPredicates.md#rewriteSubQueries[rewriteSubQueries]
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitExists[visitExists] (in SQL statements)
+* `AstBuilder` is requested to sql/AstBuilder.md#visitExists[visitExists] (in SQL statements)
 
 [[Unevaluable]]
 `Exists` is [unevaluable expression](Unevaluable.md).

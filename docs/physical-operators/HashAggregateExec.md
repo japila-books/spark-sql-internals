@@ -13,10 +13,10 @@
 
 `HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
-`HashAggregateExec` uses [TungstenAggregationIterator](../spark-sql-TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
+`HashAggregateExec` uses [TungstenAggregationIterator](../TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
 
 !!! note
-    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../spark-sql-TungstenAggregationIterator.md#switchToSortBasedAggregation).
+    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../TungstenAggregationIterator.md#switchToSortBasedAggregation).
 
     See [testFallbackStartsAt](#testFallbackStartsAt) internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
 
@@ -197,9 +197,9 @@ doExecute(): RDD[InternalRow]
 
     * If there is no input (an empty partition), but there are <<groupingExpressions, grouping keys>> used, `doExecute` simply returns an empty iterator
 
-    * Otherwise, `doExecute` creates a <<spark-sql-TungstenAggregationIterator.md#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
+    * Otherwise, `doExecute` creates a <<TungstenAggregationIterator.md#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
 
-For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
+For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
 
 For non-empty partitions or there are <<groupingExpressions, grouping keys>> used, `doExecute` returns the `TungstenAggregationIterator`.
 
@@ -207,12 +207,12 @@ In the end, `doExecute` calculates the <<aggTime, aggTime>> metric and returns a
 
 * Empty
 
-* A single-element `Iterator[UnsafeRow]` with the <<spark-sql-TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
+* A single-element `Iterator[UnsafeRow]` with the <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
 
-* The [TungstenAggregationIterator](../spark-sql-TungstenAggregationIterator.md)
+* The [TungstenAggregationIterator](../TungstenAggregationIterator.md)
 
 !!! note
-    The [numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) metrics are used exclusively to create the [TungstenAggregationIterator](../spark-sql-TungstenAggregationIterator.md).
+    The [numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) metrics are used exclusively to create the [TungstenAggregationIterator](../TungstenAggregationIterator.md).
 
 !!! note
     `doExecute` (by `RDD.mapPartitionsWithIndex` transformation) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
@@ -367,4 +367,4 @@ supportsAggregate(
 | [[groupingKeySchema]] [StructType](../StructType.md#fromAttributes) built from the <<groupingAttributes, groupingAttributes>>
 
 | groupingAttributes
-| [[groupingAttributes]] <<spark-sql-Expression-NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
+| [[groupingAttributes]] <<expressions/NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>

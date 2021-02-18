@@ -30,7 +30,7 @@ trait CodegenFallback extends Expression {
 | `Cube`
 | [[Cube]]
 
-| <<spark-sql-Expression-JsonToStructs.md#, JsonToStructs>>
+| <<expressions/JsonToStructs.md#, JsonToStructs>>
 | [[JsonToStructs]]
 
 | `Rollup`

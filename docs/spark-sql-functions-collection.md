@@ -171,17 +171,17 @@ NOTE: `explode` function is an equivalent of spark-sql-dataset-operators.md#flat
 
 === [[explode_outer]] `explode_outer` Collection Function
 
-[source, scala]
-----
-explode_outer(e: Column): Column
-----
+```scala
+explode_outer(
+  e: Column): Column
+```
 
 `explode_outer` generates a new row for each element in `e` array or map column.
 
-NOTE: Unlike <<explode, explode>>, `explode_outer` generates `null` when the array or map is `null` or empty.
+!!! NOTE
+    Unlike [explode](#explode), `explode_outer` generates `null` when the array or map is `null` or empty.
 
-[source, scala]
-----
+```text
 val arrays = Seq((1,Seq.empty[String])).toDF("id", "array")
 scala> arrays.printSchema
 root
@@ -194,18 +194,17 @@ scala> arrays.select(explode_outer($"array")).show
 +----+
 |null|
 +----+
-----
+```
 
-Internally, `explode_outer` creates a spark-sql-Column.md[Column] with spark-sql-Expression-Generator.md#GeneratorOuter[GeneratorOuter] and spark-sql-Expression-Generator.md#Explode[Explode] Catalyst expressions.
+Internally, `explode_outer` creates a [Column](Column.md) with [GeneratorOuter](expressions/Generator.md#GeneratorOuter) and [Explode](expressions/Generator.md#Explode) Catalyst expressions.
 
-[source, scala]
-----
+```text
 val explodeOuter = explode_outer($"array").expr
 scala> println(explodeOuter.numberedTreeString)
 00 generatorouter(explode('array))
 01 +- explode('array)
 02    +- 'array
-----
+```
 
 === [[from_json]] Extracting Data from Arbitrary JSON-Encoded Values -- `from_json` Collection Function
 
@@ -367,12 +366,12 @@ scala> people.show
 !!! note
     `options` controls how a JSON is parsed and contains the same options as the [json](datasources/json/JsonDataSource.md) format.
 
-Internally, `from_json` creates a spark-sql-Column.md[Column] with spark-sql-Expression-JsonToStructs.md[JsonToStructs] unary expression.
+Internally, `from_json` creates a [Column](Column.md) with [JsonToStructs](expressions/JsonToStructs.md) unary expression.
 
-NOTE: `from_json` (creates a spark-sql-Expression-JsonToStructs.md[JsonToStructs] that) uses a JSON parser in spark-sql-Expression-JsonToStructs.md#FAILFAST[FAILFAST] parsing mode that simply fails early when a corrupted/malformed record is found (and hence does not support `columnNameOfCorruptRecord` JSON option).
+!!! NOTE
+    `from_json` (creates a [JsonToStructs](expressions/JsonToStructs.md) that) uses a JSON parser in [FAILFAST](expressions/JsonToStructs.md#FAILFAST) parsing mode that simply fails early when a corrupted/malformed record is found (and hence does not support `columnNameOfCorruptRecord` JSON option).
 
-[source, scala]
-----
+```text
 val jsons = Seq("""{ id: 0 }""").toDF("json")
 
 import org.apache.spark.sql.types._
@@ -386,20 +385,21 @@ scala> jsons.select(from_json($"json", schema, opts) as "ids").show
 +----+
 |null|
 +----+
-----
+```
 
-NOTE: `from_json` corresponds to SQL's `from_json`.
+`from_json` corresponds to SQL's `from_json`.
 
 === [[array_contains]] `array_contains` Collection Function
 
-[source, scala]
-----
-array_contains(column: Column, value: Any): Column
-----
+```scala
+array_contains(
+  column: Column,
+  value: Any): Column
+```
 
 `array_contains` creates a `Column` for a `column` argument as an [array](DataType.md#ArrayType) and the `value` of same type as the type of the elements of the array.
 
-Internally, `array_contains` creates a spark-sql-Column.md#apply[Column] with a `ArrayContains` expression.
+Internally, `array_contains` creates a [Column](Column.md#apply) with a `ArrayContains` expression.
 
 ```text
 // Arguments must be an array followed by a value of same type as the array elements
@@ -417,7 +417,6 @@ scala> q.show
 +---------+
 ```
 
-[[prettyName]]
 `array_contains` corresponds to SQL's `array_contains`.
 
 ```text
@@ -428,7 +427,8 @@ scala> println(e.sql)
 array_contains(`ids`, [1,2])
 ```
 
-TIP: Use SQL's `array_contains` to use values from columns for the `column` and `value` arguments.
+!!! TIP
+    Use SQL's `array_contains` to use values from columns for the `column` and `value` arguments.
 
 ```text
 val codes = Seq(

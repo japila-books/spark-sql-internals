@@ -69,7 +69,7 @@ abstract class AggregateFunction extends Expression {
 | [[aggBufferSchema]] `aggBufferSchema`
 | [Schema](../StructType.md) of an aggregation buffer to hold partial aggregate results.
 
-Used mostly in spark-sql-Expression-ScalaUDAF.md[ScalaUDAF] and spark-sql-AggregationIterator.md#initializeAggregateFunctions[AggregationIterator]
+Used mostly in expressions/ScalaUDAF.md[ScalaUDAF] and AggregationIterator.md#initializeAggregateFunctions[AggregationIterator]
 
 | [[aggBufferAttributes]] `aggBufferAttributes`
 a| <<spark-sql-Expression-AttributeReference.md#, AttributeReferences>> of an aggregation buffer to hold partial aggregate results.
@@ -100,5 +100,5 @@ toAggregateExpression(isDistinct: Boolean): AggregateExpression
 
 `toAggregateExpression` is used in:
 
-* `functions` object's `withAggregateFunction` block to create a spark-sql-Column.md[Column] with [AggregateExpression](AggregateExpression.md) for a `AggregateFunction`
+* `functions` object's `withAggregateFunction` block to create a Column.md[Column] with [AggregateExpression](AggregateExpression.md) for a `AggregateFunction`
 * FIXME

@@ -8,7 +8,7 @@
 
 * [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
+* `AstBuilder` is requested to sql/AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
 [[resolved]]
 `UnresolvedFunction` can never be Expression.md#resolved[resolved] (and is replaced at analysis phase).

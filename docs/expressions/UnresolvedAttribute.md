@@ -7,7 +7,7 @@ title: UnresolvedAttribute
 
 `UnresolvedAttribute` is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to spark-sql-AstBuilder.md#visitDereference[visitDereference]
+* `AstBuilder` is requested to sql/AstBuilder.md#visitDereference[visitDereference]
 
 * `LogicalPlan` is requested to spark-sql-LogicalPlan.md#resolve[resolve an attribute by name parts]
 

@@ -2,7 +2,7 @@ title: Expand
 
 # Expand Unary Logical Operator
 
-`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, GroupingSets.md[GroupingSets] and spark-sql-Expression-TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
+`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, GroupingSets.md[GroupingSets] and expressions/TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
 
 ```
 FIXME Examples for
@@ -40,7 +40,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 * [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics) (for `Cube`, `Rollup`, [GroupingSets](GroupingSets.md) logical operators)
 
-* [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) (for spark-sql-Expression-TimeWindow.md[TimeWindow] logical operator)
+* [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) (for expressions/TimeWindow.md[TimeWindow] logical operator)
 
 NOTE: Aggregate -> (Cube|Rollup|GroupingSets) -> constructAggregate -> constructExpand
 

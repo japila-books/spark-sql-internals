@@ -58,7 +58,7 @@ NOTE: To make sure the `explain` plan and expression SQL works correctly, a `Run
 | spark-sql-functions-datetime.md#to_date[to_date]
 | FunctionRegistry.md#to_date[to_date]
 
-| [[ParseToTimestamp]] spark-sql-Expression-ParseToTimestamp.md[ParseToTimestamp]
+| [[ParseToTimestamp]] expressions/ParseToTimestamp.md[ParseToTimestamp]
 | spark-sql-functions-datetime.md#to_timestamp[to_timestamp]
 | FunctionRegistry.md#to_timestamp[to_timestamp]
 

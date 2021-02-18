@@ -110,9 +110,9 @@ supportsAggregate(aggregateExpressions: Seq[AggregateExpression]): Boolean
 `ObjectHashAggregateExec` takes the following to be created:
 
 * [[requiredChildDistributionExpressions]] Required child distribution expressions/Expression.md[expressions]
-* [[groupingExpressions]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
+* [[groupingExpressions]] Grouping expressions/NamedExpression.md[named expressions]
 * [[aggregateExpressions]] [Aggregate expressions](../expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output spark-sql-Expression-NamedExpression.md[named expressions]
+* [[resultExpressions]] Output expressions/NamedExpression.md[named expressions]
 * [[child]] Child SparkPlan.md[physical plan]

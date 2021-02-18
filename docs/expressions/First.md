@@ -4,7 +4,7 @@ title: First
 
 `First` is a <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> function expression that is <<creating-instance, created>> when:
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitFirst, parse a FIRST statement>>
+* `AstBuilder` is requested to <<sql/AstBuilder.md#visitFirst, parse a FIRST statement>>
 
 * <<spark-sql-functions.md#first, first>> standard function is used
 

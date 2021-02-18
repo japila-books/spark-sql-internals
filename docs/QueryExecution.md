@@ -223,7 +223,7 @@ assertAnalyzed(): Unit
 
 `assertAnalyzed` executes [analyzed](#analyzed) by accessing it and throwing the result away. Since `analyzed` is a lazy value in Scala, it will then get initialized for the first time and stays so forever.
 
-`assertAnalyzed` then requests `Analyzer` to [validate analysis of the logical plan](spark-sql-Analyzer-CheckAnalysis.md#checkAnalysis) (i.e. `analyzed`).
+`assertAnalyzed` then requests `Analyzer` to [validate analysis of the logical plan](CheckAnalysis.md#checkAnalysis) (i.e. `analyzed`).
 
 !!! note
     `assertAnalyzed` uses [SparkSession](#sparkSession) to access the current [SessionState](SparkSession.md#sessionState) that it then uses to access the [Analyzer](SessionState.md#analyzer).

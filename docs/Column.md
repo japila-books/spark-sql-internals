@@ -94,16 +94,16 @@ res0: org.apache.spark.sql.catalyst.expressions.Expression = timewindow('time, 5
 ----
 ====
 
-TIP: Read about typed column references in spark-sql-TypedColumn.md[TypedColumn Expressions].
+!!! TIP
+    Read about typed column references in [TypedColumn](TypedColumn.md).
 
 === [[as]] Specifying Type Hint -- `as` Operator
 
-[source, scala]
-----
+```scala
 as[U : Encoder]: TypedColumn[Any, U]
-----
+```
 
-`as` creates a spark-sql-TypedColumn.md[TypedColumn] (that gives a type hint about the expected return value of the column).
+`as` creates a [TypedColumn](TypedColumn.md) (that gives a type hint about the expected return value of the column).
 
 [source, scala]
 ----
@@ -236,7 +236,7 @@ over(): Column
 over(window: WindowSpec): Column
 ----
 
-`over` creates a *windowing column* (_aka_ *analytic clause*) that allows to execute a spark-sql-functions.md[aggregate function] over a <<spark-sql-WindowSpec.md#, window>> (i.e. a group of records that are in _some_ relation to the current record).
+`over` creates a *windowing column* (_aka_ *analytic clause*) that allows to execute a spark-sql-functions.md[aggregate function] over a <<WindowSpec.md#, window>> (i.e. a group of records that are in _some_ relation to the current record).
 
 TIP: Read up on windowed aggregation in Spark SQL in spark-sql-functions-windows.md[Window Aggregate Functions].
 

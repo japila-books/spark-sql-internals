@@ -67,12 +67,12 @@ agg(exprs: Map[String, String]): DataFrame
 agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
 ----
 
-`agg` creates a spark-sql-DataFrame.md[DataFrame] with the rows being the result of executing grouping expressions (specified using spark-sql-Column.md[columns] or names) over row groups.
+`agg` creates a spark-sql-DataFrame.md[DataFrame] with the rows being the result of executing grouping expressions (specified using [Column](Column.md)s or names) over row groups.
 
-NOTE: You can use spark-sql-Column.md[untyped] or spark-sql-TypedColumn.md[typed] column expressions.
+!!! NOTE
+    There are [untyped](Column.md) and [typed](TypedColumn.md) column expressions.
 
-[source, scala]
-----
+```text
 val countsAndSums = spark.
   range(10).  // <-- 10-element Dataset
   withColumn("group", 'id % 2).  // <-- define grouping column
@@ -85,12 +85,11 @@ scala> countsAndSums.show
 |    0|    5| 20|
 |    1|    5| 25|
 +-----+-----+---+
-----
+```
 
-Internally, `agg` <<toDF, creates a DataFrame>> with `Aggregate` or `Pivot` logical operators.
+Internally, `agg` [creates a DataFrame](#toDF) with `Aggregate` or `Pivot` logical operators.
 
-[source, scala]
-----
+```text
 // groupBy above
 scala> println(countsAndSums.queryExecution.logical.numberedTreeString)
 00 'Aggregate [group#179L], [group#179L, count('id) AS count#188, sum('id) AS sum#190]
@@ -120,7 +119,7 @@ scala> println(pivotQ.queryExecution.logical.numberedTreeString)
 00 'Pivot [group#296L], group#296: bigint, [0, 1], [count('id)]
 01 +- Project [id#293L, (id#293L % cast(2 as bigint)) AS group#296L]
 02    +- Range (0, 10, step=1, splits=Some(8))
-----
+```
 
 === [[toDF]] Creating DataFrame from Aggregate Expressions -- `toDF` Internal Method
 

@@ -51,7 +51,7 @@ hasWindowFunction(expr: NamedExpression): Boolean
 ----
 <1> Executes the other `hasWindowFunction` on every `NamedExpression` in the `projectList`
 
-`hasWindowFunction` is positive (`true`) when the input `expr` <<spark-sql-Expression-NamedExpression.md#, named expression>> is a <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expression. Otherwise, `hasWindowFunction` is negative (`false`).
+`hasWindowFunction` is positive (`true`) when the input `expr` <<expressions/NamedExpression.md#, named expression>> is a <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> expression. Otherwise, `hasWindowFunction` is negative (`false`).
 
 NOTE: `hasWindowFunction` is used when `ExtractWindowExpressions` logical resolution rule is requested to <<extract, extract>> and <<apply, execute>>.
 
@@ -75,7 +75,7 @@ addWindow(
   child: LogicalPlan): LogicalPlan
 ----
 
-`addWindow` adds a <<Project.md#, Project>> logical operator with one or more <<Window.md#, Window>> logical operators (for every <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> in the input <<spark-sql-Expression-NamedExpression.md#, named expressions>>) to the input <<spark-sql-LogicalPlan.md#, logical plan>>.
+`addWindow` adds a <<Project.md#, Project>> logical operator with one or more <<Window.md#, Window>> logical operators (for every <<spark-sql-Expression-WindowExpression.md#, WindowExpression>> in the input <<expressions/NamedExpression.md#, named expressions>>) to the input <<spark-sql-LogicalPlan.md#, logical plan>>.
 
 Internally, `addWindow`...FIXME
 

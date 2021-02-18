@@ -4,7 +4,7 @@ title: SortOrder
 
 `SortOrder` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents the following operators in a logical plan:
 
-* `AstBuilder` is requested to <<spark-sql-AstBuilder.md#visitSortItem, parse ORDER BY or SORT BY sort specifications>>
+* `AstBuilder` is requested to <<sql/AstBuilder.md#visitSortItem, parse ORDER BY or SORT BY sort specifications>>
 
 * <<spark-sql-column-operators.md#asc, Column.asc>>, <<spark-sql-column-operators.md#asc_nulls_first, Column.asc_nulls_first>>, <<spark-sql-column-operators.md#asc_nulls_last, Column.asc_nulls_last>>, <<spark-sql-column-operators.md#desc, Column.desc>>, <<spark-sql-column-operators.md#desc_nulls_first, Column.desc_nulls_first>>, and <<spark-sql-column-operators.md#desc_nulls_last, Column.desc_nulls_last>> operators are used
 
@@ -18,7 +18,7 @@ title: SortOrder
 [[catalyst-dsl]]
 TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
 
-NOTE: <<spark-sql-dataset-operators.md#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<spark-sql-WindowSpec.md#orderBy, WindowSpec.orderBy>> default to <<Ascending, Ascending>> sort direction.
+NOTE: <<spark-sql-dataset-operators.md#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<WindowSpec.md#orderBy, WindowSpec.orderBy>> default to <<Ascending, Ascending>> sort direction.
 
 === [[apply]] Creating SortOrder Instance -- `apply` Factory Method
 

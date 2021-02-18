@@ -19,7 +19,7 @@ title: Regular Functions
 | Gives the first non-``null`` value among the given columns or `null`.
 
 | <<col, col>> and <<column, column>>
-| Creating spark-sql-Column.md[Columns]
+| Creating [Columns](Column.md)
 
 | <<expr, expr>>
 |
@@ -103,23 +103,22 @@ Project [token#127, id#126, prob#140]
 
 NOTE: `broadcast` standard function is a special case of spark-sql-dataset-operators.md[Dataset.hint] operator that allows for attaching any hint to a logical plan.
 
-=== [[coalesce]] `coalesce` Function
+## <span id="coalesce"> coalesce
 
-[source, scala]
-----
-coalesce(e: Column*): Column
-----
+```scala
+coalesce(
+  e: Column*): Column
+```
 
 `coalesce` gives the first non-``null`` value among the given columns or `null`.
 
 `coalesce` requires at least one column and all columns have to be of the same or compatible types.
 
-Internally, `coalesce` creates a spark-sql-Column.md#apply[Column] with a spark-sql-Expression-Coalesce.md#creating-instance[Coalesce] expression (with the children being the spark-sql-Column.md#expr[expressions] of the input `Column`).
+Internally, `coalesce` creates a [Column](Column.md#apply) with a [Coalesce](expressions/Coalesce.md) expression (with the children being the [expressions](Column.md#expr) of the input `Column`).
 
-==== [[coalesce-example]] Example: `coalesce` Function
+### <span id="coalesce-example"> Demo: coalesce
 
-[source, scala]
-----
+```text
 val q = spark.range(2)
   .select(
     coalesce(
@@ -134,20 +133,18 @@ scala> q.show
 |                   4|
 |                   4|
 +--------------------+
-----
+```
 
 === [[col]][[column]] Creating Columns -- `col` and `column` Functions
 
-[source, scala]
-----
+```scala
 col(colName: String): Column
 column(colName: String): Column
-----
+```
 
-`col` and `column` methods create a spark-sql-Column.md[Column] that you can later use to reference a column in a dataset.
+`col` and `column` methods create a [Column](Column.md) that you can later use to reference a column in a dataset.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions._
 
 scala> val nameCol = col("name")
@@ -155,7 +152,7 @@ nameCol: org.apache.spark.sql.Column = name
 
 scala> val cityCol = column("city")
 cityCol: org.apache.spark.sql.Column = city
-----
+```
 
 === [[expr]] `expr` Function
 
@@ -190,7 +187,7 @@ scala> ds.filter(filterExpr).show
 +---+-----+
 ----
 
-Internally, `expr` uses the active session's SessionState.md[sqlParser] or creates a new  spark-sql-SparkSqlParser.md[SparkSqlParser] to call spark-sql-ParserInterface.md#parseExpression[parseExpression] method.
+Internally, `expr` uses the active session's SessionState.md[sqlParser] or creates a new  sql/SparkSqlParser.md[SparkSqlParser] to call spark-sql-ParserInterface.md#parseExpression[parseExpression] method.
 
 === [[lit]] `lit` Function
 
@@ -282,10 +279,9 @@ scala> q.show
 +-----------------------------+
 ----
 
-The <<spark-sql-Expression-MonotonicallyIncreasingID.md#, current implementation>> uses the partition ID in the upper 31 bits, and the lower 33 bits represent the record number within each partition. That assumes that the data set has less than 1 billion partitions, and each partition has less than 8 billion records.
+The [current implementation](expressions/MonotonicallyIncreasingID.md) uses the partition ID in the upper 31 bits, and the lower 33 bits represent the record number within each partition. That assumes that the data set has less than 1 billion partitions, and each partition has less than 8 billion records.
 
-[source, scala]
-----
+```text
 // Demo to show the internals of monotonically_increasing_id function
 // i.e. how MonotonicallyIncreasingID expression works
 
@@ -326,6 +322,6 @@ scala> demo.orderBy("id").show
 |  6|  25769803776|    0|                  25769803776|
 |  7|  25769803776|    1|                  25769803777|
 +---+-------------+-----+-----------------------------+
-----
+```
 
-Internally, `monotonically_increasing_id` creates a <<spark-sql-Column.md#apply, Column>> with a <<spark-sql-Expression-MonotonicallyIncreasingID.md#creating-instance, MonotonicallyIncreasingID>> non-deterministic leaf expression.
+Internally, `monotonically_increasing_id` creates a [Column](Column.md#apply) with a [MonotonicallyIncreasingID](expressions/MonotonicallyIncreasingID.md) non-deterministic leaf expression.

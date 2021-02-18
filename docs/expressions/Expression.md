@@ -37,7 +37,7 @@ assert(s == "hello")
 |
 a|
 
-* spark-sql-Expression-UnixTimestamp.md[UnixTimestamp]
+* expressions/UnixTimestamp.md[UnixTimestamp]
 
 | [[CodegenFallback]] spark-sql-Expression-CodegenFallback.md[CodegenFallback]
 | trait
@@ -72,7 +72,7 @@ a|
 * spark-sql-Expression-Attribute.md[Attribute]
 * spark-sql-Expression-Literal.md[Literal]
 
-| [[NamedExpression]] spark-sql-Expression-NamedExpression.md[NamedExpression]
+| [[NamedExpression]] expressions/NamedExpression.md[NamedExpression]
 |
 | Can later be referenced in a dataflow graph.
 |
@@ -91,9 +91,9 @@ Gives the only custom <<sql, sql>> method that is non-overridable (i.e. `final`)
 When requested <<sql, SQL representation>>, `NonSQLExpression` transforms spark-sql-Expression-Attribute.md[Attributes] to be ``PrettyAttribute``s to build text representation.
 a|
 
-* spark-sql-Expression-ScalaUDAF.md[ScalaUDAF]
+* expressions/ScalaUDAF.md[ScalaUDAF]
 * spark-sql-Expression-StaticInvoke.md[StaticInvoke]
-* spark-sql-Expression-TimeWindow.md[TimeWindow]
+* expressions/TimeWindow.md[TimeWindow]
 
 | [[Predicate]] `Predicate`
 | trait
@@ -115,17 +115,17 @@ a|
 | Timezone-aware expressions
 a|
 
-* spark-sql-Expression-UnixTimestamp.md[UnixTimestamp]
-* spark-sql-Expression-JsonToStructs.md[JsonToStructs]
+* expressions/UnixTimestamp.md[UnixTimestamp]
+* expressions/JsonToStructs.md[JsonToStructs]
 
 | [[UnaryExpression]] <<spark-sql-Expression-UnaryExpression.md#, UnaryExpression>>
 | abstract class
 |
 a|
 
-* spark-sql-Expression-Generator.md#ExplodeBase[ExplodeBase]
+* expressions/Generator.md#ExplodeBase[ExplodeBase]
 * spark-sql-Expression-Inline.md[Inline]
-* spark-sql-Expression-JsonToStructs.md[JsonToStructs]
+* expressions/JsonToStructs.md[JsonToStructs]
 
 | [Unevaluable](Unevaluable.md)
 | trait

@@ -41,7 +41,7 @@ addExpr(expr: Expression): Boolean
 
 * `EquivalentExpressions` is requested to <<addExprTree, addExprTree>>
 
-* `PhysicalAggregation` is requested to spark-sql-PhysicalAggregation.md#unapply[destructure an Aggregate logical operator]
+* `PhysicalAggregation` is requested to PhysicalAggregation.md#unapply[destructure an Aggregate logical operator]
 ====
 
 === [[getAllEquivalentExprs]] Getting Equivalent Sets Of Expressions -- `getAllEquivalentExprs` Method

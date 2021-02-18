@@ -43,9 +43,9 @@ scala> println(physicalPlan.head.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-`apply` requests `PhysicalAggregation` extractor for spark-sql-PhysicalAggregation.md#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every Aggregate.md[Aggregate] logical operator found.
+`apply` requests `PhysicalAggregation` extractor for PhysicalAggregation.md#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every Aggregate.md[Aggregate] logical operator found.
 
-Internally, `apply` requests `PhysicalAggregation` to spark-sql-PhysicalAggregation.md#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
+Internally, `apply` requests `PhysicalAggregation` to PhysicalAggregation.md#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
 
 `apply` then creates a physical operator using the following helper methods:
 

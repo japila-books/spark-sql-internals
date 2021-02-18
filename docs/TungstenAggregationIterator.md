@@ -1,6 +1,6 @@
 # TungstenAggregationIterator
 
-`TungstenAggregationIterator` is a [AggregationIterator](spark-sql-AggregationIterator.md) that is used when the [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator is executed (to process [UnsafeRow](UnsafeRow.md)s per partition and calculate aggregations).
+`TungstenAggregationIterator` is a [AggregationIterator](AggregationIterator.md) that is used when the [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator is executed (to process [UnsafeRow](UnsafeRow.md)s per partition and calculate aggregations).
 
 `TungstenAggregationIterator` prefers hash-based aggregation (before <<switchToSortBasedAggregation, switching to sort-based aggregation>>).
 
@@ -65,9 +65,9 @@ a| [[hashMap]] [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.m
 
 * <<initialAggregationBuffer, initialAggregationBuffer>>
 
-* <<StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, aggBufferAttributes>> of) the <<spark-sql-AggregationIterator.md#aggregateFunctions, aggregate function expressions>>
+* <<StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, aggBufferAttributes>> of) the <<AggregationIterator.md#aggregateFunctions, aggregate function expressions>>
 
-* <<StructType.md#fromAttributes, StructType>> built from (the <<spark-sql-Expression-NamedExpression.md#toAttribute, attributes>> of) the <<groupingExpressions, groupingExpressions>>
+* <<StructType.md#fromAttributes, StructType>> built from (the <<expressions/NamedExpression.md#toAttribute, attributes>> of) the <<groupingExpressions, groupingExpressions>>
 
 * `1024 * 16` initial capacity
 
@@ -142,11 +142,11 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 `TungstenAggregationIterator` takes the following when created:
 
 * [[partIndex]] Partition index
-* [[groupingExpressions]] Grouping <<spark-sql-Expression-NamedExpression.md#, named expressions>>
+* [[groupingExpressions]] Grouping <<expressions/NamedExpression.md#, named expressions>>
 * [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
 * [[aggregateAttributes]] Aggregate <<spark-sql-Expression-Attribute.md#, attributes>>
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Output <<spark-sql-Expression-NamedExpression.md#, named expressions>>
+* [[resultExpressions]] Output <<expressions/NamedExpression.md#, named expressions>>
 * [[newMutableProjection]] Function to create a new `MutableProjection` given Catalyst expressions and attributes (i.e. `(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 * [[originalInputAttributes]] Output attributes (of the [child](physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator)
 * [[inputIter]] Iterator of [InternalRow](InternalRow.md)s (from a single partition of the [child](physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator)
@@ -170,7 +170,7 @@ NOTE: `hasNext` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.
 generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 ----
 
-NOTE: `generateResultProjection` is part of the <<spark-sql-AggregationIterator.md#generateResultProjection, AggregationIterator Contract>> to...FIXME.
+NOTE: `generateResultProjection` is part of the <<AggregationIterator.md#generateResultProjection, AggregationIterator Contract>> to...FIXME.
 
 `generateResultProjection`...FIXME
 

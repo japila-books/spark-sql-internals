@@ -62,7 +62,7 @@ scala> println(planAfterResolvePivot.numberedTreeString)
 
 `Pivot` takes the following to be created:
 
-* [[groupByExprs]] Grouping spark-sql-Expression-NamedExpression.md[named expressions]
+* [[groupByExprs]] Grouping expressions/NamedExpression.md[named expressions]
 * [[pivotColumn]] Pivot column expressions/Expression.md[expression]
 * [[pivotValues]] Pivot values spark-sql-Expression-Literal.md[literals]
 * [[aggregates]] Aggregation expressions/Expression.md[expressions]

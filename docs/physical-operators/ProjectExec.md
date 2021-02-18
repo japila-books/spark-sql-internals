@@ -60,7 +60,7 @@ Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doE
 
 `ProjectExec` takes the following when created:
 
-* [[projectList]] spark-sql-Expression-NamedExpression.md[NamedExpressions] for the projection
+* [[projectList]] expressions/NamedExpression.md[NamedExpressions] for the projection
 * [[child]] Child SparkPlan.md[physical operator]
 
 === [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method

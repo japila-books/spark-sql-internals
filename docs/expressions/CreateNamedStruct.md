@@ -44,7 +44,7 @@ assert(e.isInstanceOf[CreateNamedStruct])
 
 * [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) and [ResolveCreateNamedStruct](../logical-analysis-rules/ResolveCreateNamedStruct.md) logical resolution rules are executed
 
-* `CreateStruct` is requested to <<spark-sql-CreateStruct.md#apply, create a CreateNamedStruct expression>>
+* `CreateStruct` is requested to <<CreateStruct.md#apply, create a CreateNamedStruct expression>>
 
 [[children]]
 [[creating-instance]]

@@ -31,7 +31,7 @@ apply(
   exprs: Column*): Column
 ```
 
-`apply` [creates a PythonUDF](#builder) with the input [Column](../spark-sql-Column.md) expressions and creates a new `Column`.
+`apply` [creates a PythonUDF](#builder) with the input [Column](../Column.md) expressions and creates a new `Column`.
 
 `apply` is used when:
 

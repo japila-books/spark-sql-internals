@@ -46,7 +46,7 @@ abstract class Attribute extends ... {
 When requested for <<Expression.md#references, references>>, `Attribute` gives the reference to itself only.
 
 [[toAttribute]]
-As a <<spark-sql-Expression-NamedExpression.md#, NamedExpression>>, `Attribute` gives the reference to itself only when requested for <<spark-sql-Expression-NamedExpression.md#toAttribute, toAttribute>>.
+As a <<expressions/NamedExpression.md#, NamedExpression>>, `Attribute` gives the reference to itself only when requested for <<expressions/NamedExpression.md#toAttribute, toAttribute>>.
 
 [[extensions]]
 .Attributes (Direct Implementations)

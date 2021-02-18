@@ -1,5 +1,3 @@
-title: implicits Object
-
 # implicits Object -- Implicits Conversions
 
 `implicits` object gives <<methods, implicit conversions>> for converting Scala objects (incl. RDDs) into a `Dataset`, `DataFrame`, `Columns` or supporting such conversions (through <<Encoders, Encoders>>).
@@ -14,16 +12,15 @@ title: implicits Object
 | `localSeqToDatasetHolder`
 a| [[localSeqToDatasetHolder]] Creates a <<DatasetHolder, DatasetHolder>> with the input `Seq[T]` converted to a `Dataset[T]` (using <<SparkSession.md#createDataset, SparkSession.createDataset>>).
 
-[source, scala]
-----
+```scala
 implicit def localSeqToDatasetHolder[T : Encoder](s: Seq[T]): DatasetHolder[T]
-----
+```
 
 | Encoders
 | [[Encoders]] <<spark-sql-Encoders.md#, Encoders>> for primitive and object types in Scala and Java (aka _boxed types_)
 
 | `StringToColumn`
-a| [[StringToColumn]] Converts `$"name"` into a <<spark-sql-Column.md#, Column>>
+a| [[StringToColumn]] Converts `$"name"` into a [Column](Column.md)
 
 [source, scala]
 ----

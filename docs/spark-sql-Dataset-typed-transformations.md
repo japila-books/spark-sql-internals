@@ -816,7 +816,7 @@ scala> println(events.queryExecution.logical.numberedTreeString)
 
 [NOTE]
 ====
-`delayThreshold` is parsed using `CalendarInterval.fromString` with *interval* formatted as described in spark-sql-Expression-TimeWindow.md[TimeWindow] unary expression.
+`delayThreshold` is parsed using `CalendarInterval.fromString` with *interval* formatted as described in expressions/TimeWindow.md[TimeWindow] unary expression.
 
 ```
 0 years 0 months 1 week 0 days 0 hours 1 minute 20 seconds 0 milliseconds 0 microseconds

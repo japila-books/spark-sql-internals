@@ -270,14 +270,13 @@ grouping(columnName: String): Column  // <1>
 * returns `1` if the column is in a subtotal and is `NULL`
 * returns `0` if the underlying value is `NULL` or any other value
 
-NOTE: `grouping` can only be used with spark-sql-multi-dimensional-aggregation.md#cube[cube], spark-sql-multi-dimensional-aggregation.md#rollup[rollup] or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when spark-sql-Analyzer-CheckAnalysis.md#Grouping[`Analyzer` does check analysis]).
+NOTE: `grouping` can only be used with spark-sql-multi-dimensional-aggregation.md#cube[cube], spark-sql-multi-dimensional-aggregation.md#rollup[rollup] or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#Grouping[`Analyzer` does check analysis]).
 
-From https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2C&#43;Cube%2C&#43;Grouping&#43;and&#43;Rollup#EnhancedAggregation,Cube,GroupingandRollup-Grouping\_\_IDfunction[Hive's documentation about Grouping__ID function] (that can somehow help to understand `grouping`):
+From [Hive's documentation about Grouping__ID function](https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2C&#43;Cube%2C&#43;Grouping&#43;and&#43;Rollup#EnhancedAggregation,Cube,GroupingandRollup-Grouping\_\_IDfunction) (that can somehow help to understand `grouping`):
 
 > When aggregates are displayed for a column its value is `null`. This may conflict in case the column itself has some `null` values. There needs to be some way to identify `NULL` in column, which means aggregate and `NULL` in column, which means value. `GROUPING__ID` function is the solution to that.
 
-[source, scala]
-----
+```text
 val tmpWorkshops = Seq(
   ("Warsaw", 2016, 2),
   ("Toronto", 2016, 4),
@@ -320,11 +319,11 @@ scala> q.show
 |   null|null|             0|             1|  <-- null is city
 |   null|null|             1|             1|
 +-------+----+--------------+--------------+
-----
-
-Internally, `grouping` creates a spark-sql-Column.md[Column] with `Grouping` expression.
-
 ```
+
+Internally, `grouping` creates a [Column](Column.md) with `Grouping` expression.
+
+```text
 val q = workshops.cube("city", "year").agg(grouping("city"))
 scala> println(q.queryExecution.logical)
 'Aggregate [cube(city#182, year#183)], [city#182, year#183, grouping('city) AS grouping(city)#705]
@@ -434,15 +433,15 @@ scala> query.withColumn("bitmask", bin($"grouping_id()")).show
 
 The list of columns of `grouping_id` should match grouping columns (in `cube` or `rollup`) exactly, or empty which means all the grouping columns (which is exactly what the function expects).
 
-NOTE: `grouping_id` can only be used with spark-sql-multi-dimensional-aggregation.md#cube[cube], spark-sql-multi-dimensional-aggregation.md#rollup[rollup] or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when spark-sql-Analyzer-CheckAnalysis.md#GroupingID[`Analyzer` does check analysis]).
+NOTE: `grouping_id` can only be used with spark-sql-multi-dimensional-aggregation.md#cube[cube], spark-sql-multi-dimensional-aggregation.md#rollup[rollup] or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#GroupingID[`Analyzer` does check analysis]).
 
 NOTE: Spark SQL's `grouping_id` function is known as `grouping__id` in Hive.
 
-From https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2C&#43;Cube%2C&#43;Grouping&#43;and&#43;Rollup#EnhancedAggregation,Cube,GroupingandRollup-Grouping\_\_IDfunction[Hive's documentation about Grouping__ID function]:
+From [Hive's documentation about Grouping__ID function](https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2C&#43;Cube%2C&#43;Grouping&#43;and&#43;Rollup#EnhancedAggregation,Cube,GroupingandRollup-Grouping\_\_IDfunction):
 
 > When aggregates are displayed for a column its value is `null`. This may conflict in case the column itself has some `null` values. There needs to be some way to identify `NULL` in column, which means aggregate and `NULL` in column, which means value. `GROUPING__ID` function is the solution to that.
 
-Internally, `grouping_id()` creates a spark-sql-Column.md[Column] with `GroupingID` unevaluable expression.
+Internally, `grouping_id()` creates a [Column](Column.md) with `GroupingID` unevaluable expression.
 
 ```text
 // workshops dataset was defined earlier

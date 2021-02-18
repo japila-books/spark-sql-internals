@@ -30,7 +30,7 @@ scala> println(physicalPlan.numberedTreeString)
 apply(plan: LogicalPlan): Seq[SparkPlan]
 ----
 
-`apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] to a [InMemoryRelation](../logical-operators/InMemoryRelation.md) logical operator.
+`apply` PhysicalOperation.md#unapply[destructures the input logical plan] to a [InMemoryRelation](../logical-operators/InMemoryRelation.md) logical operator.
 
 In the end, `apply` [pruneFilterProject](../SparkPlanner.md#pruneFilterProject) with a new InMemoryTableScanExec.md#creating-instance[InMemoryTableScanExec] physical operator.
 

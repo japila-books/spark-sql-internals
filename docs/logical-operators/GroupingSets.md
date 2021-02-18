@@ -2,7 +2,7 @@ title: GroupingSets
 
 # GroupingSets Unary Logical Operator
 
-`GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's spark-sql-AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
+`GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's sql/AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
 
 ```
 val q = sql("""
@@ -72,4 +72,4 @@ scala> println(plan.numberedTreeString)
 * [[selectedGroupByExprs]] expressions/Expression.md[Expressions] from `GROUPING SETS` clause
 * [[groupByExprs]] Grouping expressions/Expression.md[expressions] from `GROUP BY` clause
 * [[child]] Child spark-sql-LogicalPlan.md[logical plan]
-* [[aggregations]] Aggregate spark-sql-Expression-NamedExpression.md[named expressions]
+* [[aggregations]] Aggregate expressions/NamedExpression.md[named expressions]

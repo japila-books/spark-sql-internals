@@ -1,15 +1,12 @@
-title: Standard Functions
-
 # Standard Functions -- functions Object
 
-`org.apache.spark.sql.functions` object defines built-in <<standard-functions, standard functions>> to work with (values produced by) <<spark-sql-Column.md#, columns>>.
+`org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](Column.md).
 
 You can access the standard functions using the following `import` statement in your Scala application:
 
-[source, scala]
-----
+```scala
 import org.apache.spark.sql.functions._
-----
+```
 
 [[standard-functions]]
 .(Subset of) Standard Functions in Spark SQL
@@ -674,7 +671,7 @@ window(
 ----
 
 1+^.^| *Math functions*
-| <<bin, bin>>
+| [bin](#bin)
 | Converts the value of a long column to binary format
 
 .11+^.^| *Regular functions* (Non-aggregate functions)
@@ -689,7 +686,7 @@ window(
 | Gives the first non-``null`` value among the given columns or `null`
 
 | [[col]][[column]] spark-sql-functions-regular-functions.md#col[col] and spark-sql-functions-regular-functions.md#column[column]
-| Creating spark-sql-Column.md[Columns]
+| Creating [Column](Column.md)s
 
 | spark-sql-functions-regular-functions.md#expr[expr]
 | [[expr]]
@@ -700,7 +697,7 @@ window(
 | [[map]] spark-sql-functions-regular-functions.md#map[map]
 |
 
-| <<spark-sql-functions-regular-functions.md#monotonically_increasing_id, monotonically_increasing_id>>
+| [monotonically_increasing_id](spark-sql-functions-regular-functions.md#monotonically_increasing_id)
 | [[monotonically_increasing_id]] Returns monotonically increasing 64-bit integers that are guaranteed to be monotonically increasing and unique, but not consecutive.
 
 | [[struct]] spark-sql-functions-regular-functions.md#struct[struct]
@@ -986,32 +983,29 @@ root
  |-- binary: string (nullable = false)
 ----
 
-Internally, `bin` creates a spark-sql-Column.md[Column] with `Bin` unary expression.
+Internally, `bin` creates a [Column](Column.md) with `Bin` unary expression.
 
-[source, scala]
-----
+```text
 scala> withBin.queryExecution.logical
 res2: org.apache.spark.sql.catalyst.plans.logical.LogicalPlan =
 'Project [*, bin('id) AS binary#14]
 +- Range (0, 5, step=1, splits=Some(8))
-----
-
-NOTE: `Bin` unary expression uses ++https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html#toBinaryString-long-++[java.lang.Long.toBinaryString] for the conversion.
-
-[NOTE]
-====
-`Bin` expression supports expressions/Expression.md#doGenCode[code generation] (aka _CodeGen_).
-
 ```
-val withBin = spark.range(5).withColumn("binary", bin('id))
-scala> withBin.queryExecution.debug.codegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Project [id#19L, bin(id#19L) AS binary#22]
-+- *Range (0, 5, step=1, splits=Some(8))
-...
-/* 103 */           UTF8String project_value1 = null;
-/* 104 */           project_value1 = UTF8String.fromString(java.lang.Long.toBinaryString(range_value));
 
-```
-====
+`Bin` unary expression uses `java.lang.Long.toBinaryString` for the conversion.
+
+!!! NOTE
+    `Bin` expression supports [code generation](expressions/Expression.md#doGenCode) (aka _CodeGen_).
+
+    ```text
+    val withBin = spark.range(5).withColumn("binary", bin('id))
+    scala> withBin.queryExecution.debug.codegen
+    Found 1 WholeStageCodegen subtrees.
+    == Subtree 1 / 1 ==
+    *Project [id#19L, bin(id#19L) AS binary#22]
+    +- *Range (0, 5, step=1, splits=Some(8))
+    ...
+    /* 103 */           UTF8String project_value1 = null;
+    /* 104 */           project_value1 = UTF8String.fromString(java.lang.Long.toBinaryString(range_value));
+
+    ```

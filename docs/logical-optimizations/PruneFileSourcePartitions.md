@@ -12,7 +12,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ----
 
-`apply` spark-sql-PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
+`apply` PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
 `apply` transforms LogicalRelation.md[LogicalRelations] with a [HadoopFsRelation](../HadoopFsRelation.md) and a [CatalogFileIndex](../CatalogFileIndex.md) (i.e. for Hive tables) when there are filter expressions defined and the Hive table is partitioned.
 
