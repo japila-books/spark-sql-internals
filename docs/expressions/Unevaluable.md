@@ -30,7 +30,7 @@ Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, in
 * PartitioningCollection
 * PartitionTransformExpression
 * [PrettyAttribute](PrettyAttribute.md)
-* [PythonUDF](../pyspark/PythonUDF.md)
+* PythonUDF
 * RangePartitioning
 * [ResolvedStar](ResolvedStar.md)
 * [RuntimeReplaceable](RuntimeReplaceable.md)

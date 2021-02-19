@@ -63,6 +63,18 @@ write: DataFrameWriter[T]
 
 `write` creates a [DataFrameWriter](DataFrameWriter.md) for this `Dataset`.
 
+## <span id="collectToPython"> collectToPython
+
+```scala
+collectToPython(): Array[Any]
+```
+
+`collectToPython`...FIXME
+
+`collectToPython` is used when:
+
+* `DataFrame` (PySpark) is requested to `collect`
+
 ## Others to be Reviewed
 
 Datasets are _lazy_ and structured query operators and expressions are only triggered when an action is invoked.
@@ -363,13 +375,6 @@ withNewExecutionId[U](body: => U): U
 `withNewExecutionId` executes the input `body` action under [new execution id](SQLExecution.md#withNewExecutionId).
 
 NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs belong to the `Dataset` action execution.
-
-[NOTE]
-====
-`withNewExecutionId` is used exclusively when `Dataset` is executing Python-based actions (i.e. `collectToPython`, `collectAsArrowToPython` and `toPythonIterator`) that are not of much interest in this gitbook.
-
-Feel free to contact me at jacek@japila.pl if you think I should re-consider my decision.
-====
 
 === [[withAction]] Executing Action Under New Execution ID -- `withAction` Internal Method
 

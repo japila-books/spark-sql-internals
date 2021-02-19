@@ -1,3 +1,0 @@
-# PythonUDFRunner
-
-`PythonUDFRunner` is...FIXME

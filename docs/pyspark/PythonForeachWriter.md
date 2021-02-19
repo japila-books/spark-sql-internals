@@ -1,3 +1,0 @@
-# PythonForeachWriter
-
-`PythonForeachWriter` is...FIXME
