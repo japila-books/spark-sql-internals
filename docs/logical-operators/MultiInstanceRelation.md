@@ -13,7 +13,7 @@ trait MultiInstanceRelation {
 }
 ----
 
-When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical evaluation is executed, every `MultiInstanceRelation` in a logical query plan is requested to <<newInstance, produce a new version of itself with globally unique expression ids>>.
+When [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical evaluation is executed, every `MultiInstanceRelation` in a logical query plan is requested to <<newInstance, produce a new version of itself with globally unique expression ids>>.
 
 [[implementations]]
 .MultiInstanceRelations
@@ -34,7 +34,7 @@ When [ResolveReferences](logical-analysis-rules/ResolveReferences.md) logical ev
 | hive/HiveTableRelation.md[HiveTableRelation]
 | [[HiveTableRelation]]
 
-| [InMemoryRelation](logical-operators/InMemoryRelation.md)
+| [InMemoryRelation](../logical-operators/InMemoryRelation.md)
 | [[InMemoryRelation]]
 
 | LocalRelation.md[LocalRelation]

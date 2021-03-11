@@ -208,6 +208,7 @@ nav:
       - Command: logical-operators/Command.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
       - LeafNode: logical-operators/LeafNode.md
+      - MultiInstanceRelation: logical-operators/MultiInstanceRelation.md
       - NamedRelation: logical-operators/NamedRelation.md
       - OrderPreservingUnaryNode: logical-operators/OrderPreservingUnaryNode.md
       - ParsedStatement: logical-operators/ParsedStatement.md
@@ -965,7 +966,6 @@ nav:
     - AggUtils: AggUtils.md
     - ScalaReflection: spark-sql-ScalaReflection.md
     - CreateStruct: CreateStruct.md
-    - MultiInstanceRelation: spark-sql-MultiInstanceRelation.md
     - TypeCoercion: spark-sql-TypeCoercion.md
     - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md

@@ -42,7 +42,7 @@ scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
 
 ## MultiInstanceRelation
 
-`InMemoryRelation` is a [MultiInstanceRelation](../spark-sql-MultiInstanceRelation.md) so a [new instance will be created](#newInstance) to appear multiple times in a physical query plan.
+`InMemoryRelation` is a [MultiInstanceRelation](MultiInstanceRelation.md) so a [new instance will be created](#newInstance) to appear multiple times in a physical query plan.
 
 ```text
 val q = spark.range(10).cache

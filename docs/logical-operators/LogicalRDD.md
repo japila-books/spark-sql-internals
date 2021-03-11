@@ -18,7 +18,7 @@
 newInstance(): LogicalRDD.this.type
 ----
 
-NOTE: `newInstance` is part of spark-sql-MultiInstanceRelation.md#newInstance[MultiInstanceRelation Contract] to...FIXME.
+`newInstance` is part of [MultiInstanceRelation](MultiInstanceRelation.md#newInstance) abstraction.
 
 `newInstance`...FIXME
 

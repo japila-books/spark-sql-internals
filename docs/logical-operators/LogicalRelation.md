@@ -1,84 +1,116 @@
-title: LogicalRelation
+# LogicalRelation Leaf Logical Operator
 
-# LogicalRelation Leaf Logical Operator -- Representing BaseRelations in Logical Plan
+`LogicalRelation` is a [leaf logical operator](LeafNode.md) that represents a [BaseRelation](#relation) in a [logical query plan](LogicalPlan.md).
 
-`LogicalRelation` is a LeafNode.md[leaf logical operator] that represents a <<relation, BaseRelation>> in a spark-sql-LogicalPlan.md[logical query plan].
-
-[source, scala]
-----
-val q1 = spark.read.option("header", true).csv("../datasets/people.csv")
-scala> println(q1.queryExecution.logical.numberedTreeString)
-00 Relation[id#72,name#73,age#74] csv
-
-val q2 = sql("select * from `csv`.`../datasets/people.csv`")
-scala> println(q2.queryExecution.optimizedPlan.numberedTreeString)
-00 Relation[_c0#175,_c1#176,_c2#177] csv
-----
-
-`LogicalRelation` is <<creating-instance, created>> when:
-
-* `DataFrameReader` [loads data from a data source that supports multiple paths](../DataFrameReader.md#load) (through SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
-* `DataFrameReader` is requested to load data from an external table using [JDBC](../DataFrameReader.md#jdbc) (through SparkSession.md#baseRelationToDataFrame[SparkSession.baseRelationToDataFrame])
-* `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
-* `ResolveSQLOnFile` converts a logical plan
-* [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule is executed
-* hive/RelationConversions.md[RelationConversions] logical evaluation rule is executed
-* `CreateTempViewUsing` logical command is requested to <<CreateTempViewUsing.md#run, run>>
-* Structured Streaming's `FileStreamSource` creates batches of records
-
-[[simpleString]]
-The catalyst/QueryPlan.md#simpleString[simple text representation] of a `LogicalRelation` (aka `simpleString`) is *Relation[output] [relation]* (that uses the <<output, output>> and <<relation, BaseRelation>>).
-
-[source, scala]
-----
-val q = spark.read.text("README.md")
-val logicalPlan = q.queryExecution.logical
-scala> println(logicalPlan.simpleString)
-Relation[value#2] text
-----
+`LogicalRelation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
 ## Creating Instance
 
-`LogicalRelation` takes the following when created:
+`LogicalRelation` takes the following to be created:
 
-* [[relation]] [BaseRelation](../BaseRelation.md)
-* [[output]] Output schema `AttributeReferences`
-* [[catalogTable]] Optional [CatalogTable](../CatalogTable.md)
+* <span id="relation"> [BaseRelation](../BaseRelation.md)
+* <span id="output"> Output Schema ([AttributeReference](../expressions/AttributeReference.md)s)
+* <span id="catalogTable"> Optional [CatalogTable](../CatalogTable.md)
+* <span id="isStreaming"> `isStreaming` flag
 
-=== [[apply]] `apply` Factory Utility
+`LogicalRelation` is created using [apply](#apply) factory.
 
-[source, scala]
-----
+## <span id="apply"> apply Utility
+
+```scala
 apply(
   relation: BaseRelation,
   isStreaming: Boolean = false): LogicalRelation
 apply(
   relation: BaseRelation,
   table: CatalogTable): LogicalRelation
-----
+```
 
-`apply` <<creating-instance, creates>> a `LogicalRelation` for the input [BaseRelation](../BaseRelation.md) (and [CatalogTable](../CatalogTable.md) or optional `isStreaming` flag).
+`apply` wraps the given [BaseRelation](../BaseRelation.md) into a `LogicalRelation` (so it could be used in a [logical query plan](LogicalPlan.md)).
+
+`apply` creates a [LogicalRelation](#creating-instance) for the given [BaseRelation](../BaseRelation.md) (with a [CatalogTable](../CatalogTable.md) and `isStreaming` flag).
+
+```text
+import org.apache.spark.sql.sources.BaseRelation
+val baseRelation: BaseRelation = ???
+
+val data = spark.baseRelationToDataFrame(baseRelation)
+```
 
 `apply` is used when:
 
 * `SparkSession` is requested for a [DataFrame for a BaseRelation](../SparkSession.md#baseRelationToDataFrame)
-
 * [CreateTempViewUsing](CreateTempViewUsing.md) command is executed
-
+* `FallBackFileSourceV2` logical resolution rule is executed
 * [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* `FileStreamSource` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSource/)) is requested to `getBatch`
 
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+## <span id="refresh"> refresh
 
-=== [[refresh]] `refresh` Method
-
-[source, scala]
-----
+```scala
 refresh(): Unit
-----
+```
 
-NOTE: `refresh` is part of spark-sql-LogicalPlan.md#refresh[LogicalPlan Contract] to refresh itself.
+`refresh` is part of [LogicalPlan](LogicalPlan.md#refresh) abstraction.
 
-`refresh` requests the [FileIndex](../HadoopFsRelation.md#location) of a `HadoopFsRelation` <<relation, relation>> to refresh.
+`refresh` requests the [FileIndex](../HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
 
 !!! note
     `refresh` does the work for [HadoopFsRelation](../HadoopFsRelation.md) relations only.
+
+## <span id="simpleString"> Simple Text Representation
+
+```scala
+simpleString(
+  maxFields: Int): String
+```
+
+`simpleString` is part of the [QueryPlan](../catalyst/QueryPlan.md#simpleString) abstraction.
+
+`simpleString` is made up of the [output schema](#output) (truncated to `maxFields`) and the [relation](#relation):
+
+```text
+Relation[[output]] [relation]
+```
+
+### <span id="simpleString-demo"> Demo
+
+```text
+val q = spark.read.text("README.md")
+val logicalPlan = q.queryExecution.logical
+
+scala> println(logicalPlan.simpleString)
+Relation[value#2] text
+```
+
+## Demo
+
+The following are two logically-equivalent batch queries described using different Spark APIs: Scala and SQL.
+
+```scala
+val format = "csv"
+val path = "../datasets/people.csv"
+```
+
+```scala
+val q = spark
+  .read
+  .option("header", true)
+  .format(format)
+  .load(path)
+```
+
+```text
+scala> println(q.queryExecution.logical.numberedTreeString)
+00 Relation[id#16,name#17] csv
+```
+
+```scala
+val q = sql(s"select * from `$format`.`$path`")
+```
+
+```text
+scala> println(q.queryExecution.optimizedPlan.numberedTreeString)
+00 Relation[_c0#74,_c1#75] csv
+```

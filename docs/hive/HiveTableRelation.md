@@ -9,7 +9,7 @@ NOTE: `HiveTableRelation` can be RelationConversions.md#convert[converted to a H
 `HiveTableRelation` is <<isPartitioned, partitioned>> when it has at least one <<partitionCols, partition column>>.
 
 [[MultiInstanceRelation]]
-`HiveTableRelation` is a ../spark-sql-MultiInstanceRelation.md[MultiInstanceRelation].
+`HiveTableRelation` is a [MultiInstanceRelation](../logical-operators/MultiInstanceRelation.md).
 
 `HiveTableRelation` is converted (_resolved_) to as follows:
 

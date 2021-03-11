@@ -45,7 +45,7 @@ scala> q.show(numRows = allRowsIncluded)
 ----
 
 [[newInstance]]
-`View` is a <<spark-sql-MultiInstanceRelation.md#, MultiInstanceRelation>> so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan. When requested for a new instance, `View` <<spark-sql-Expression-Attribute.md#newInstance, creates new instances>> of the <<output, output attributes>>.
+`View` is a [MultiInstanceRelation](MultiInstanceRelation.md) so a <<newInstance, new instance will be created>> to appear multiple times in a physical query plan. When requested for a new instance, `View` <<spark-sql-Expression-Attribute.md#newInstance, creates new instances>> of the <<output, output attributes>>.
 
 [[resolved]]
 `View` is considered <<spark-sql-LogicalPlan.md#resolved, resolved>> only when the <<child, child>> is.
