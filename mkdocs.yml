@@ -1,19 +1,13 @@
-# Based on the following mkdocs.yml's:
-# - https://github.com/squidfunk/mkdocs-material/blob/master/mkdocs.yml
-# - https://github.com/facelessuser/pymdown-extensions/blob/master/docs/src/mkdocs.yml
-
 site_name: The Internals of Spark SQL
 site_url: https://jaceklaskowski.github.io/mastering-spark-sql-book/
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
-# https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/
 repo_name: spark-sql-internals
 repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
 edit_uri: edit/main/docs/
 
-copyright: |
-  Copyright &copy; 2021 Jacek Laskowski
+copyright: Copyright &copy; 2021 Jacek Laskowski
 
 theme:
   name: material
@@ -22,23 +16,28 @@ theme:
     logo: material/book-open-page-variant
     repo: fontawesome/brands/github
   features:
-    - navigation.tabs
-    - navigation.instant
-    - search.suggest
     - navigation.indexes
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
   palette:
     - scheme: default
       primary: indigo
       accent: indigo
       toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
     - scheme: slate
       primary: blue
       accent: blue
       toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
+        icon: material/toggle-switch
+        name: Switch to light mode
 
 markdown_extensions:
   - admonition
@@ -83,9 +82,9 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
   spark:
-    version: 3.1.1-rc2
-    github: https://github.com/apache/spark/tree/v3.1.1-rc2
-    doc: http://spark.apache.org/docs/3.0.1
+    version: 3.1.1
+    github: https://github.com/apache/spark/tree/v3.1.1
+    doc: http://spark.apache.org/docs/3.1.1
   hadoop:
     version: 3.2.0
     doc: https://hadoop.apache.org/docs/r3.2.0
@@ -104,6 +103,7 @@ extra:
     version: 2.6.0
     api: https://kafka.apache.org/26/javadoc
   book:
+    title: Spark SQL
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
     spark_core: https://books.japila.pl/apache-spark-internals
@@ -113,9 +113,9 @@ google_analytics:
   - auto
 
 nav:
-  - Home:
-    - Welcome: index.md
+  - Home: index.md
   - Internals:
+    - Overview: overview.md
     - DataSource: DataSource.md
     - Connector API:
       - Connector API: connector/index.md
@@ -863,7 +863,6 @@ nav:
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
   - Extras:
-    - Spark SQL: spark-sql.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
     - DataSourceV2Utils: DataSourceV2Utils.md
