@@ -4,6 +4,10 @@
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/overview/</loc>
+     <lastmod>2021-03-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSource/</loc>
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
@@ -2737,10 +2741,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/demo/hive-partitioned-parquet-table-partition-pruning/</loc>
-     <lastmod>2021-03-11</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql/</loc>
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
